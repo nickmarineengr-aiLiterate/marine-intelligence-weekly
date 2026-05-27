@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Marine Intelligence Weekly Articles — Feature articles, productivity guides, and deep-dives on maritime AI, regulation, and technology. Written by Nixon Antony, Second Engineer, Maersk.">
+<meta property="og:title" content="Articles — Marine Intelligence Weekly">
+<meta property="og:description" content="Feature articles and guides on maritime AI, regulation, and productivity. Written from the engine room.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://marineintelligenceweekly.com/articles/">
+<meta name="author" content="Nixon Antony">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://marineintelligenceweekly.com/articles/">
+<title>Articles — Marine Intelligence Weekly</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Source+Serif+4:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- GA4 Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+
+<style>
+:root {
+  --navy:      #0D1B2A;
+  --deep-blue: #1A3A5C;
+  --teal:      #00B4D8;
+  --gold:      #C9A84C;
+  --steel:     #5B8DB8;
+  --bg:        #F7F4EE;
+  --bg-card:   #EDE9DF;
+  --ink:       #111111;
+  --ink-mid:   #1A1A1A;
+  --muted:     #5A6478;
+  --rule:      #D4CAB8;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: var(--navy);
+  border-bottom: 3px solid var(--teal);
+  padding: 0 clamp(20px,5vw,64px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+
+.header-logo img {
+  height: 44px;
+  width: auto;
+}
+
+.header-tagline {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.header-tagline span {
+  color: var(--teal);
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  margin-bottom: 2px;
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.header-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.header-btn.home {
+  background: transparent;
+  color: rgba(255,255,255,0.5);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.header-btn.home:hover {
+  color: #fff;
+  border-color: rgba(255,255,255,0.4);
+}
+
+.header-btn.subscribe {
+  background: transparent;
+  color: var(--teal);
+  border: 1px solid var(--teal);
+}
+
+.header-btn.subscribe:hover {
+  background: var(--teal);
+  color: var(--navy);
+}
+
+/* ── PAGE HERO ── */
+.page-hero {
+  background: var(--navy);
+  padding: clamp(40px,6vw,72px) clamp(20px,5vw,64px);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(0,180,216,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.page-hero-inner {
+  max-width: 760px;
+  position: relative;
+}
+
+.page-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-eyebrow::before {
+  content: '';
+  width: 24px; height: 1px;
+  background: var(--teal);
+  display: block;
+}
+
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(28px,4.5vw,48px);
+  font-weight: 900;
+  line-height: 1.1;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.page-title em {
+  font-style: italic;
+  color: var(--teal);
+}
+
+.page-desc {
+  font-size: clamp(14px,1.8vw,16px);
+  font-weight: 300;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.7;
+  max-width: 540px;
+}
+
+/* ── SERIES STATS STRIP ── */
+.stats-strip {
+  background: var(--deep-blue);
+  padding: 18px clamp(20px,5vw,64px);
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.stat-item {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.stat-item strong {
+  color: var(--teal);
+  font-size: 13px;
+  display: block;
+  margin-top: 2px;
+  letter-spacing: 0.04em;
+}
+
+/* ── MAIN CONTENT ── */
+.articles-main {
+  padding: clamp(40px,6vw,72px) clamp(20px,5vw,64px);
+}
+
+/* ── SECTION HEADERS ── */
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal);
+  white-space: nowrap;
+}
+
+.section-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.section-desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 28px;
+  max-width: 640px;
+  margin-top: -8px;
+}
+
+/* ── ARTICLE CARDS ── */
+.articles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 64px;
+}
+
+.article-card {
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--teal);
+  padding: 28px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.article-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.09);
+  transform: translateY(-2px);
+}
+
+.article-card.steel { border-top-color: var(--steel); }
+.article-card.gold  { border-top-color: var(--gold); }
+
+.article-card.coming-soon {
+  opacity: 0.55;
+  cursor: default;
+  pointer-events: none;
+}
+
+.card-series {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.card-series.steel { color: var(--steel); }
+.card-series.gold  { color: var(--gold); }
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+  margin-top: 4px;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.card-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 7px;
+  border: 1px solid var(--rule);
+  color: var(--muted);
+  border-radius: 1px;
+}
+
+.card-arrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: var(--teal);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.card-arrow.steel { color: var(--steel); }
+
+.coming-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  background: var(--bg-card);
+  color: var(--muted);
+  border: 1px solid var(--rule);
+  border-radius: 1px;
+}
+
+/* ── FEATURED ARTICLE (full-width) ── */
+.article-card-featured {
+  background: var(--navy);
+  border: 1px solid rgba(0,180,216,0.2);
+  border-top: 3px solid var(--teal);
+  padding: clamp(24px,4vw,40px);
+  text-decoration: none;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  align-items: end;
+  margin-bottom: 20px;
+  transition: all 0.2s;
+}
+
+.article-card-featured:hover {
+  border-color: rgba(0,180,216,0.45);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
+
+@media(max-width: 580px) {
+  .article-card-featured { grid-template-columns: 1fr; }
+}
+
+.featured-series {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.featured-series::before {
+  content: '';
+  width: 16px; height: 1px;
+  background: var(--teal);
+  display: block;
+}
+
+.new-badge {
+  background: var(--teal);
+  color: var(--navy);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 1px;
+  font-weight: 500;
+}
+
+.featured-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px,2.8vw,26px);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.featured-title em {
+  font-style: italic;
+  color: var(--teal);
+}
+
+.featured-desc {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.65;
+  max-width: 560px;
+}
+
+.featured-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  background: var(--teal);
+  color: var(--navy);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  border-radius: 2px;
+  white-space: nowrap;
+  transition: all 0.2s;
+  align-self: flex-end;
+}
+
+.featured-cta:hover { background: #fff; }
+
+.featured-cta svg {
+  width: 11px; height: 11px;
+  stroke: currentColor; fill: none;
+  stroke-width: 2;
+}
+
+/* ── BACK TO HOME ── */
+.back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  margin-bottom: 48px;
+  display: block;
+}
+
+.back-home:hover { color: var(--teal); }
+
+/* ── FOOTER ── */
+.site-footer {
+  background: var(--navy);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: clamp(28px,4vw,48px) clamp(20px,5vw,64px);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.footer-brand p {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.1em;
+  line-height: 1.7;
+  max-width: 260px;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-links-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 4px;
+}
+
+.footer-links a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--teal); }
+
+.footer-bottom {
+  background: var(--navy);
+  border-top: 1px solid rgba(255,255,255,0.04);
+  padding: 14px clamp(20px,5vw,64px);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer-copy {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.08em;
+}
+
+@media(max-width:480px) {
+  .articles-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <a href="https://marineintelligenceweekly.com" class="header-logo">
+    <img src="https://marineintelligenceweekly.com/new logo MIW.webp"
+         onerror="this.style.display='none'"
+         alt="Marine Intelligence Weekly">
+    <div class="header-tagline">
+      <span>Marine Intelligence Weekly</span>
+      AI · Maritime · Systems · Insight
+    </div>
+  </a>
+  <div class="header-actions">
+    <a href="https://marineintelligenceweekly.com" class="header-btn home">← Home</a>
+    <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7453089352231882752"
+       target="_blank" rel="noopener" class="header-btn subscribe">Subscribe on LinkedIn</a>
+  </div>
+</header>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-eyebrow">Articles &amp; Guides</div>
+    <h1 class="page-title">Everything MIW<br><em>Has Published</em></h1>
+    <p class="page-desc">Feature articles, deep-dives, and productivity guides — all written from the engine room perspective. Verified sources. No advertising. No marketing language.</p>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stat-item">Feature Articles<strong>3 Published</strong></div>
+  <div class="stat-item">Productivity Series<strong>1 of 3 Live</strong></div>
+  <div class="stat-item">Sources<strong>IMO · LR · DNV · ABS · BV</strong></div>
+  <div class="stat-item">Perspective<strong>Engine Room · Second Engineer · Maersk</strong></div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main class="articles-main">
+
+  <!-- FEATURE ARTICLES -->
+  <div class="section-header">
+    <span class="section-label">Feature Articles</span>
+    <div class="section-rule"></div>
+  </div>
+  <p class="section-desc">In-depth analysis of maritime AI deployments, regulatory developments, and technology signals. Tied to MIW newsletter issues.</p>
+
+  <!-- Featured: MASS Code -->
+  <a href="https://marineintelligenceweekly.com/articles/feature-mass-code-msc111.html" class="article-card-featured">
+    <div>
+      <div class="featured-series">
+        Feature · Issue 21 · Autonomous Shipping
+        <span class="new-badge">In Force 1 Jul 2026</span>
+      </div>
+      <h2 class="featured-title">MSC 111 After the Vote:<br><em>What the MASS Code Actually Changes</em></h2>
+      <p class="featured-desc">The MASS Code was adopted at IMO MSC 111 and enters into effect 1 July 2026. Not a revolution — but a real regulatory shift for watchkeeping, Remote Operation Centres, and flag state certification. What it actually means for engine rooms, bridge teams, and shore management.</p>
+    </div>
+    <span class="featured-cta">
+      Read Article
+      <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </span>
+  </a>
+
+  <div class="articles-grid">
+
+    <a href="https://marineintelligenceweekly.com/articles/docker-vision-port-gate-ai.html" class="article-card">
+      <div class="card-series">Feature · Issue 21 · Port AI</div>
+      <h3 class="card-title">The Port Gate, Rebuilt: What AI Visual Intelligence Looks Like When It Actually Works</h3>
+      <p class="card-desc">Docker Vision has deployed AI gate inspection across 240+ locations in India and the UAE. Seven checks. Under three seconds. No operator input.</p>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="card-tag">Docker Vision</span>
+          <span class="card-tag">Port AI</span>
+          <span class="card-tag">India</span>
+        </div>
+        <span class="card-arrow">Read →</span>
+      </div>
+    </a>
+
+    <a href="https://marineintelligenceweekly.com/articles/dtyle-ai-visual-fire-detection.html" class="article-card gold">
+      <div class="card-series gold">Feature · Issue 20 · Onboard AI Safety</div>
+      <h3 class="card-title">Before Smoke Reaches the Detector: Can Visual AI Give Ships Earlier Fire Warnings?</h3>
+      <p class="card-desc">Dtyle.AI is positioning its onboard edge-AI platform to close the gap between fire ignition and detector activation — but in shipping, the technology is only the beginning of the argument.</p>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="card-tag">Dtyle.AI</span>
+          <span class="card-tag">Fire Detection</span>
+          <span class="card-tag">Edge AI</span>
+        </div>
+        <span class="card-arrow" style="color:var(--gold);">Read →</span>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- PRODUCTIVITY SERIES -->
+  <div id="productivity-series" class="section-header" style="margin-top: 16px;">
+    <span class="section-label">Productivity Series</span>
+    <div class="section-rule"></div>
+  </div>
+  <p class="section-desc">Practical tools and guides for maritime professionals working with Microsoft 365, AI assistants, and prompt engineering. Built for the engine room desk and the superintendent's office.</p>
+
+  <div class="articles-grid">
+
+    <a href="https://marineintelligenceweekly.com/articles/miw-office365shortcuts.html" class="article-card steel">
+      <div class="card-series steel">Productivity Series · Part 1</div>
+      <h3 class="card-title">50+ Microsoft 365 Shortcuts Every Maritime Professional Should Know</h3>
+      <p class="card-desc">The keyboard shortcuts that save hours every week — covering Word, Excel, PowerPoint, Outlook, Teams, Windows, and browser. Includes a downloadable PDF carousel.</p>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="card-tag">Word</span>
+          <span class="card-tag">Excel</span>
+          <span class="card-tag">Outlook</span>
+          <span class="card-tag">Teams</span>
+        </div>
+        <span class="card-arrow steel">Read + PDF →</span>
+      </div>
+    </a>
+
+    <div class="article-card steel coming-soon">
+      <span class="coming-badge">Coming Soon</span>
+      <div class="card-series steel">Productivity Series · Part 2</div>
+      <h3 class="card-title">Claude in Microsoft Excel</h3>
+      <p class="card-desc">How to use Claude for formula writing, data cleaning, and automation inside Excel — practical workflows for maritime professionals managing PMS data, port logs, and voyage reports.</p>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="card-tag">Claude AI</span>
+          <span class="card-tag">Excel</span>
+          <span class="card-tag">Automation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-card steel coming-soon">
+      <span class="coming-badge">Coming Soon</span>
+      <div class="card-series steel">Productivity Series · Part 3</div>
+      <h3 class="card-title">Prompt Engineering for Maritime Professionals</h3>
+      <p class="card-desc">How to write prompts that get results — from drafting deficiency responses to analysing class circulars. Built for engineers and officers who want AI to work harder for them.</p>
+      <div class="card-meta">
+        <div class="card-tags">
+          <span class="card-tag">Prompts</span>
+          <span class="card-tag">AI Literacy</span>
+          <span class="card-tag">Operations</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-brand">
+    <p>Independent maritime AI intelligence for professionals at sea and ashore. Published weekly from the engine room perspective.</p>
+  </div>
+  <div class="footer-links">
+    <div class="footer-links-label">Latest Issues</div>
+    <a href="https://marineintelligenceweekly.com/index22.html">Issue 22 — May 2026</a>
+    <a href="https://marineintelligenceweekly.com/index21.html">Issue 21 — May 2026</a>
+    <a href="https://marineintelligenceweekly.com/index20.html">Issue 20 — May 2026</a>
+    <a href="https://marineintelligenceweekly.com">All Issues →</a>
+  </div>
+  <div class="footer-links">
+    <div class="footer-links-label">Productivity Series</div>
+    <a href="https://marineintelligenceweekly.com/articles/miw-office365shortcuts.html">Part 1 — Microsoft 365 Shortcuts</a>
+    <a href="https://marineintelligenceweekly.com/articles/miw-office365shortcuts.html">Download PDF Carousel</a>
+  </div>
+  <div class="footer-links">
+    <div class="footer-links-label">Connect</div>
+    <a href="https://www.linkedin.com/in/nixon-antony-marineengineer/" target="_blank" rel="noopener">LinkedIn — Nixon Antony</a>
+    <a href="https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7453089352231882752" target="_blank" rel="noopener">Subscribe to Newsletter</a>
+    <a href="https://marineintelligenceweekly.com">marineintelligenceweekly.com</a>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span class="footer-copy">© 2026 Nixon Antony · Marine Intelligence Weekly · Independent Editorial</span>
+  <span class="footer-copy">AI · Maritime · Systems · Insight</span>
+</div>
+
+</body>
+</html>
