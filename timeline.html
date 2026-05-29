@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI in Maritime — Timeline | Marine Intelligence Weekly</title>
+<meta name="description" content="A chronological record of AI deployment, regulatory milestones, and industry transformation in the maritime sector. 2010 to present.">
+<meta property="og:title" content="AI in Maritime — Timeline | Marine Intelligence Weekly">
+<meta property="og:description" content="From e-navigation frameworks to the MASS Code. Every milestone that shaped maritime's digital transformation.">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://marineintelligenceweekly.com/timeline.html">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --navy-mid: #132232;
+    --teal: #00B4D8;
+    --teal-dark: #0096B4;
+    --gold: #C9A84C;
+    --gold-light: #E2C97A;
+    --bg: #F7F4EE;
+    --bg-card: #FFFFFF;
+    --text-primary: #0D1B2A;
+    --text-secondary: #4A5568;
+    --text-muted: #718096;
+    --border: #E2DDD6;
+
+    /* Category colours */
+    --cat-regulation: #1A6B5A;
+    --cat-ai: #00B4D8;
+    --cat-industry: #C9A84C;
+    --cat-autonomous: #7B4FBF;
+    --cat-india: #E05A2B;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--navy);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid rgba(201,168,76,0.25);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    color: var(--gold);
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy);
+    padding: 5rem 1.5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(0,180,216,0.08) 0%, transparent 70%);
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #FFFFFF;
+    line-height: 1.15;
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero-sub {
+    font-family: 'Source Serif 4', serif;
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    font-style: italic;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── LEGEND ── */
+  .legend-bar {
+    background: var(--navy-mid);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 0.75rem 1.5rem;
+    position: sticky;
+    top: 56px;
+    z-index: 90;
+  }
+  .legend-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    align-items: center;
+  }
+  .legend-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-right: 0.5rem;
+  }
+  .legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.2s;
+  }
+  .legend-item.dimmed { opacity: 0.3; }
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    max-width: 1100px;
+    margin: 2rem auto 0;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .filter-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .filter-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.85rem;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-secondary);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { border-color: var(--teal); color: var(--teal); }
+  .filter-btn.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+  /* ── MAIN LAYOUT ── */
+  .page-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+  }
+
+  /* ── ERA SECTION ── */
+  .era-block {
+    margin-bottom: 3.5rem;
+  }
+  .era-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--navy);
+    position: sticky;
+    top: 96px;
+    background: var(--bg);
+    z-index: 80;
+    padding-top: 0.5rem;
+  }
+  .era-badge {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--gold);
+    min-width: 90px;
+    line-height: 1;
+  }
+  .era-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .era-desc {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 0.15rem;
+  }
+
+  /* ── TIMELINE SPINE ── */
+  .timeline-spine {
+    position: relative;
+    padding-left: 3rem;
+  }
+  .timeline-spine::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--navy) 0%, var(--border) 100%);
+  }
+
+  /* ── EVENT CARD ── */
+  .event {
+    position: relative;
+    margin-bottom: 1.5rem;
+    transition: opacity 0.25s;
+  }
+  .event.hidden { display: none; }
+
+  .event-node {
+    position: absolute;
+    left: -3rem;
+    top: 1.1rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid var(--bg-card);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .event-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid transparent;
+    border-radius: 4px;
+    padding: 1.1rem 1.25rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: default;
+  }
+  .event-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transform: translateX(2px);
+  }
+
+  .event-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .event-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+  }
+  .event-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    color: #fff;
+    font-weight: 500;
+  }
+  .tag-regulation { background: var(--cat-regulation); }
+  .tag-ai { background: var(--cat-ai); color: var(--navy); }
+  .tag-industry { background: var(--cat-industry); color: var(--navy); }
+  .tag-autonomous { background: var(--cat-autonomous); }
+  .tag-india { background: var(--cat-india); }
+
+  .event-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+  }
+  .event-body {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .event-significance {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--text-muted);
+    border-left: 2px solid var(--border);
+    padding-left: 0.75rem;
+  }
+  .event-source {
+    margin-top: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+  .event-source a {
+    color: var(--teal-dark);
+    text-decoration: none;
+  }
+  .event-source a:hover { text-decoration: underline; }
+
+  /* MIW badge */
+  .miw-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    background: var(--navy);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 2rem 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+  }
+  footer a { color: var(--gold); text-decoration: none; }
+
+  /* ── RETURN TO TOP ── */
+  #rtt {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 44px;
+    height: 44px;
+    background: var(--navy);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 200;
+    text-decoration: none;
+  }
+  #rtt.visible { opacity: 1; pointer-events: all; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .timeline-spine { padding-left: 2rem; }
+    .timeline-spine::before { left: 7px; }
+    .event-node { left: -2rem; width: 18px; height: 18px; }
+    .era-header { top: 56px; }
+    .hero { padding: 3rem 1rem 2.5rem; }
+    .hero-stats { gap: 1.5rem; }
+  }
+
+  @media print {
+    nav, .legend-bar, .filter-bar, #rtt { display: none; }
+    .era-header { position: static; }
+    .event-card:hover { box-shadow: none; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="https://marineintelligenceweekly.com" class="nav-brand">Marine Intelligence Weekly</a>
+    <ul class="nav-links">
+      <li><a href="https://marineintelligenceweekly.com">Home</a></li>
+      <li><a href="https://marineintelligenceweekly.com/index22.html">Latest Issue</a></li>
+      <li><a href="https://marineintelligenceweekly.com/timeline.html" style="color:var(--gold)">Timeline</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Marine Intelligence Weekly · Reference Series</p>
+  <h1>AI in Maritime:<br><span>A Decade of Transformation</span></h1>
+  <p class="hero-sub">From e-navigation policy papers to autonomous vessels in commercial service. Every milestone that changed the industry.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">55+</span><span class="stat-label">Milestones</span></div>
+    <div class="stat"><span class="stat-num">2010–2026</span><span class="stat-label">Coverage</span></div>
+    <div class="stat"><span class="stat-num">5</span><span class="stat-label">Categories</span></div>
+  </div>
+</section>
+
+<!-- LEGEND -->
+<div class="legend-bar">
+  <div class="legend-inner">
+    <span class="legend-label">Category</span>
+    <div class="legend-items">
+      <div class="legend-item" data-cat="regulation">
+        <div class="legend-dot" style="background:var(--cat-regulation)"></div>
+        <span class="legend-text">Regulation</span>
+      </div>
+      <div class="legend-item" data-cat="ai">
+        <div class="legend-dot" style="background:var(--cat-ai)"></div>
+        <span class="legend-text">AI Deployment</span>
+      </div>
+      <div class="legend-item" data-cat="industry">
+        <div class="legend-dot" style="background:var(--cat-industry)"></div>
+        <span class="legend-text">Industry Shift</span>
+      </div>
+      <div class="legend-item" data-cat="autonomous">
+        <div class="legend-dot" style="background:var(--cat-autonomous)"></div>
+        <span class="legend-text">Autonomous Vessels</span>
+      </div>
+      <div class="legend-item" data-cat="india">
+        <div class="legend-dot" style="background:var(--cat-india)"></div>
+        <span class="legend-text">India / Asia</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER -->
+<div class="filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="regulation">Regulation</button>
+  <button class="filter-btn" data-filter="ai">AI</button>
+  <button class="filter-btn" data-filter="industry">Industry</button>
+  <button class="filter-btn" data-filter="autonomous">Autonomous</button>
+  <button class="filter-btn" data-filter="india">India/Asia</button>
+  <button class="filter-btn" data-filter="miw">MIW Covered</button>
+</div>
+
+<!-- MAIN TIMELINE -->
+<div class="page-wrap">
+
+  <!-- ERA 1: 2010–2014 -->
+  <div class="era-block">
+    <div class="era-header">
+      <div class="era-badge">2010–14</div>
+      <div>
+        <div class="era-title">Foundation Era</div>
+        <div class="era-desc">Policy frameworks. AIS mandates. E-navigation begins.</div>
+      </div>
+    </div>
+    <div class="timeline-spine">
+
+      <div class="event" data-cat="regulation">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">2010</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+          </div>
+          <div class="event-title">IMO e-Navigation Strategy Implementation Plan adopted</div>
+          <div class="event-body">IMO MSC 85 endorsed the e-Navigation Strategic Implementation Plan, formalising the integration of electronic navigation systems to enhance maritime safety and efficiency.</div>
+          <div class="event-significance">The regulatory anchor for all future digital bridge technology. Every electronic navigation system deployed today traces legitimacy to this plan.</div>
+          <div class="event-source">Source: <a href="https://www.imo.org/en/OurWork/Safety/Pages/eNavigation.aspx" target="_blank" rel="noopener">IMO e-Navigation — imo.org</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="regulation">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">2012</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+          </div>
+          <div class="event-title">SOLAS Chapter V — AIS carriage requirements fully in force for all ships</div>
+          <div class="event-body">Mandatory AIS installation completed across the global fleet per SOLAS Chapter V Regulation 19. This created the first universal real-time vessel data network, laying the infrastructure layer for all future maritime AI applications.</div>
+          <div class="event-significance">Without universal AIS data, no ML-based voyage optimisation, collision avoidance AI, or port analytics would be possible. AIS was the accidental training dataset for an entire industry.</div>
+          <div class="event-source">Source: <a href="https://www.imo.org/en/OurWork/Safety/Pages/AIS.aspx" target="_blank" rel="noopener">SOLAS V/19 — IMO AIS</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="industry">
+        <div class="event-node" style="background:var(--cat-industry)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-industry)">
+          <div class="event-meta">
+            <span class="event-year">2012</span>
+            <span class="event-tag tag-industry">Industry Shift</span>
+          </div>
+          <div class="event-title">Wärtsilä launches Fleet Operations Solutions — first integrated voyage management platform</div>
+          <div class="event-body">Wärtsilä's Nacos Platinum and Fleet Operations Centre brought real-time fuel monitoring and voyage optimisation to commercial fleets, signalling a shift from reactive to data-driven engine room management.</div>
+          <div class="event-significance">First commercial proof that digitising shipboard data had direct commercial value. Set the template for every voyage optimisation platform that followed.</div>
+          <div class="event-source">Source: <a href="https://www.wartsila.com/marine/products/voyage-and-fleet-optimisation" target="_blank" rel="noopener">Wärtsilä Fleet Operations</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="regulation">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">2013</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+          </div>
+          <div class="event-title">MARPOL Annex VI — Energy Efficiency Design Index (EEDI) enters force</div>
+          <div class="event-body">EEDI Phase 1 requirements commenced under MARPOL Annex VI Regulation 21, mandating minimum energy efficiency standards for new ships. Ships required to carry a Ship Energy Efficiency Management Plan (SEEMP).</div>
+          <div class="event-significance">The first regulation that made vessel performance data commercially and legally significant — triggering investment in monitoring, analytics, and eventually AI-driven CII management.</div>
+          <div class="event-source">Source: <a href="https://www.imo.org/en/OurWork/Environment/Pages/EnergyEfficiencyShips.aspx" target="_blank" rel="noopener">IMO Energy Efficiency</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="ai">
+        <div class="event-node" style="background:var(--cat-ai)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-ai)">
+          <div class="event-meta">
+            <span class="event-year">2014</span>
+            <span class="event-tag tag-ai">AI Deployment</span>
+          </div>
+          <div class="event-title">DNV launches vessel condition monitoring using predictive analytics</div>
+          <div class="event-body">DNV GL (as it was then known) deployed machine learning-based condition monitoring services analysing sensor data from main engines and auxiliary machinery to predict failures before occurrence.</div>
+          <div class="event-significance">First class society to commercially deploy ML-based predictive maintenance. Set the benchmark for what became a standard fleet management service across all major class societies by 2020.</div>
+          <div class="event-source">Source: <a href="https://www.dnv.com/maritime/digital-solutions/condition-monitoring/" target="_blank" rel="noopener">DNV Condition Monitoring</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ERA 2: 2015–2018 -->
+  <div class="era-block">
+    <div class="era-header">
+      <div class="era-badge">2015–18</div>
+      <div>
+        <div class="era-title">Awareness Era</div>
+        <div class="era-desc">GHG strategy. ISO 19847/48. BIMCO cyber guidelines. First autonomous pilots.</div>
+      </div>
+    </div>
+    <div class="timeline-spine">
+
+      <div class="event" data-cat="industry">
+        <div class="event-node" style="background:var(--cat-industry)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-industry)">
+          <div class="event-meta">
+            <span class="event-year">2015</span>
+            <span class="event-tag tag-industry">Industry Shift</span>
+          </div>
+          <div class="event-title">BIMCO publishes first Cyber Security Recommendations for the maritime industry</div>
+          <div class="event-body">BIMCO, together with ICS, INTERCARGO and INTERTANKO, published the first set of industry cybersecurity guidelines — a direct response to increased connectivity of shipboard systems and OT/IT convergence risks.</div>
+          <div class="event-significance">Marked the industry's acknowledgment that digitisation carried operational risk. Preceded IMO Resolution MSC-FAL.1/Circ.3 by two years.</div>
+          <div class="event-source">Source: <a href="https://www.bimco.org/news/cybersecurity" target="_blank" rel="noopener">BIMCO Cyber Security</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="autonomous">
+        <div class="event-node" style="background:var(--cat-autonomous)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-autonomous)">
+          <div class="event-meta">
+            <span class="event-year">2016</span>
+            <span class="event-tag tag-autonomous">Autonomous Vessels</span>
+          </div>
+          <div class="event-title">Rolls-Royce demonstrates first remote-controlled vessel — Svitzer Hermod, Copenhagen</div>
+          <div class="event-body">Rolls-Royce remotely operated the Svitzer Hermod tug in Copenhagen Harbour — the first public demonstration of a remotely controlled commercial vessel. The operation was conducted from an onshore remote control centre.</div>
+          <div class="event-significance">Proof of concept that commercial vessels could be operated from ashore. Directly influenced IMO's decision to begin formal MASS scoping work at MSC 98 (2017).</div>
+          <div class="event-source">Source: <a href="https://www.rolls-royce.com/media/press-releases/2017/17-04-2017-rr-intel-ship.aspx" target="_blank" rel="noopener">Rolls-Royce Press Release</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="regulation">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">2016</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+          </div>
+          <div class="event-title">IMO Cyber Risk Management — MSC-FAL.1/Circ.3 issued</div>
+          <div class="event-body">IMO issued Guidelines on Maritime Cyber Risk Management, recommending that cyber risk management be incorporated into ship Safety Management Systems under the ISM Code by 2021.</div>
+          <div class="event-significance">The first IMO instrument recognising that AI and connected systems introduced new categories of shipboard risk requiring formal SMS treatment.</div>
+          <div class="event-source">Source: <a href="https://www.imo.org/en/OurWork/Security/Pages/Cyber-security.aspx" target="_blank" rel="noopener">IMO Cyber Security</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="regulation">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">2018</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+          </div>
+          <div class="event-title">IMO Initial GHG Strategy adopted — 2050 net-zero target foreshadowed</div>
+          <div class="event-body">MEPC 72 adopted the Initial IMO Strategy on Reduction of GHG Emissions from Ships, targeting at least 50% reduction in total annual GHG by 2050 versus 2008 levels. This was the trigger event for all AI-driven fuel efficiency and emissions compliance tools.</div>
+          <div class="event-significance">The single most consequential regulatory decision for maritime AI investment. Every CII management tool, voyage optimisation platform, and carbon reporting system deployed since 2020 exists because of this strategy.</div>
+          <div class="event-source">Source: <a href="https://www.imo.org/en/MediaCentre/HotTopics/Pages/Reducing-greenhouse-gas-emissions-from-ships.aspx" target="_blank" rel="noopener">IMO GHG Strategy — MEPC 72</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="industry">
+        <div class="event-node" style="background:var(--cat-industry)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-industry)">
+          <div class="event-meta">
+            <span class="event-year">2018–2019</span>
+            <span class="event-tag tag-industry">Industry Shift</span>
+          </div>
+          <div class="event-title">ISO 19847 & ISO 19848 published — standardised shipboard machinery data logging</div>
+          <div class="event-body">ISO 19847 (shipboard data servers) and ISO 19848 (standard data set for shipboard equipment and machinery) established standardised data structures for machinery data logging and inter-system sharing. Before these standards, OEM machinery data was proprietary and siloed — incompatible between manufacturers and operators.</div>
+          <div class="event-significance">The invisible foundation of the digital twin era. Without standardised machinery data protocols, commercial-scale digital twin deployment by Wärtsilä, ABB, and DNV across mixed-fleet owners (2021 onward) would not have been technically viable. ISO 19847/48 is what made fleet-scale AI maintenance tools possible.</div>
+          <div class="event-source">Source: <a href="https://www.iso.org" target="_blank" rel="noopener">ISO — iso.org</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="autonomous">
+        <div class="event-node" style="background:var(--cat-autonomous)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-autonomous)">
+          <div class="event-meta">
+            <span class="event-year">2018</span>
+            <span class="event-tag tag-autonomous">Autonomous Vessels</span>
+          </div>
+          <div class="event-title">IMO begins formal regulatory scoping exercise for MASS (MSC 99)</div>
+          <div class="event-body">IMO Maritime Safety Committee 99 agreed to conduct a regulatory scoping exercise (RSE) to identify how existing IMO instruments apply to Maritime Autonomous Surface Ships (MASS) — the formal beginning of the international legal framework.</div>
+          <div class="event-significance">The decision that eventually led to the MASS Code adopted at MSC 111 in 2026. An eight-year regulatory arc compressed into a single committee resolution.</div>
+          <div class="event-source">Source: <a href="https://www.imo.org/en/MediaCentre/MeetingSummaries/Pages/MSC-99th-session.aspx" target="_blank" rel="noopener">IMO MSC 99 Summary</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ERA 3: 2019–2021 -->
+  <div class="era-block">
+    <div class="era-header">
+      <div class="era-badge">2019–21</div>
+      <div>
+        <div class="era-title">Acceleration Era</div>
+        <div class="era-desc">IMO 2020 sulphur cap. COVID. MEGURI2040 launched. Ocean crossings begin.</div>
+      </div>
+    </div>
+    <div class="timeline-spine">
+
+      <div class="event" data-cat="regulation">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">2020</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+          </div>
+          <div class="event-title">IMO 2020 Global Sulphur Cap enters force — 0.50% S limit under MARPOL Annex VI</div>
+          <div class="event-body">The 0.50% global sulphur cap under MARPOL Annex VI Regulation 14 came into force on 1 January 2020, forcing the most significant operational change to fleet fuel management in a generation. Ships required scrubbers, fuel switching systems, or VLSFO — all creating new data monitoring requirements.</div>
+          <div class="event-significance">Triggered mass deployment of fuel monitoring sensors and compliance tracking software. Accelerated demand for AI-powered bunker optimisation tools.</div>
+          <div class="event-source">Source: <a href="https://www.imo.org/en/MediaCentre/HotTopics/Pages/Sulphur-2020.aspx" target="_blank" rel="noopener">IMO Sulphur 2020</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="ai">
+        <div class="event-node" style="background:var(--cat-ai)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-ai)">
+          <div class="event-meta">
+            <span class="event-year">2020</span>
+            <span class="event-tag tag-ai">AI Deployment</span>
+          </div>
+          <div class="event-title">COVID-19 forces maritime sector to deploy remote survey and inspection technology at scale</div>
+          <div class="event-body">IMO issued Circular MSC-MEPC.5/Circ.16 encouraging flag states and recognised organisations to accept remote surveys and audits. Class societies rapidly deployed video survey platforms, AI-assisted image inspection, and digital documentation systems.</div>
+          <div class="event-significance">COVID was the forcing function that compressed five years of digital survey adoption into eighteen months. Remote inspection technology that was pilot-stage in 2019 became standard practice by 2021.</div>
+          <div class="event-source">Source: <a href="https://www.imo.org/en/MediaCentre/HotTopics/Pages/COVID19.aspx" target="_blank" rel="noopener">IMO COVID-19 Circular</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="autonomous">
+        <div class="event-node" style="background:var(--cat-autonomous)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-autonomous)">
+          <div class="event-meta">
+            <span class="event-year">2020</span>
+            <span class="event-tag tag-autonomous">Autonomous Vessels</span>
+          </div>
+          <div class="event-title">Japan — MEGURI2040 autonomous shipping programme launched by The Nippon Foundation</div>
+          <div class="event-body">The Nippon Foundation launched the MEGURI2040 programme, a national initiative targeting fully autonomous domestic shipping in Japan by 2040. The programme funded demonstration voyages, technology development across 11 companies, and regulatory pathway planning with the Japan Coast Guard and MLIT.</div>
+          <div class="event-significance">The most comprehensive national autonomous shipping programme in the world at the time of launch. MEGURI2040 produced the data underpinning Japan's subsequent class notations and influenced IMO MASS scoping. The Suzaku project emerged directly from this programme.</div>
+          <div class="event-source">Source: <a href="https://www.nippon-foundation.or.jp/en/what/projects/meguri2040/" target="_blank" rel="noopener">The Nippon Foundation — MEGURI2040</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="ai">
+        <div class="event-node" style="background:var(--cat-ai)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-ai)">
+          <div class="event-meta">
+            <span class="event-year">2021</span>
+            <span class="event-tag tag-ai">AI Deployment</span>
+          </div>
+          <div class="event-title">Wärtsilä and ABB deploy digital twin platforms for main engine condition monitoring at fleet scale</div>
+          <div class="event-body">Major OEMs moved digital twin technology from R&D to commercial deployment, enabling real-time virtual models of main engines and propulsion systems that predict maintenance windows with measurable accuracy improvements over time-based schedules.</div>
+          <div class="event-significance">Digital twin adoption at fleet scale marked AI's transition from pilot to operational tool in marine engineering. The Chief Engineer's maintenance planning role began to formally include AI-generated recommendations.</div>
+          <div class="event-source">Source: <a href="https://www.wartsila.com/marine/solutions/digital-solutions/wartsila-expert-insight" target="_blank" rel="noopener">Wärtsilä Expert Insight</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="industry">
+        <div class="event-node" style="background:var(--cat-industry)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-industry)">
+          <div class="event-meta">
+            <span class="event-year">2021</span>
+            <span class="event-tag tag-industry">Industry Shift</span>
+          </div>
+          <div class="event-title">DNV GL rebrands as DNV — strategic separation from Germanischer Lloyd completed</div>
+          <div class="event-body">DNV GL rebranded as DNV in early 2021, following the strategic separation from its former joint venture partner GL (Germanischer Lloyd). All class notations, Unified Requirements, and type approvals issued after this date carry the DNV name. Pre-2021 documents referencing DNV GL refer to the same organisation.</div>
+          <div class="event-significance">Editorial accuracy note for this timeline: references to DNV GL before 2021 and DNV from 2021 onward describe the same class society. The rebrand also signalled a strategic shift toward positioning DNV as a technology company as much as a classification society — accelerating its digital services investment.</div>
+          <div class="event-source">Source: <a href="https://www.dnv.com" target="_blank" rel="noopener">DNV — dnv.com</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="regulation">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">2021</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+          </div>
+          <div class="event-title">IMO EEXI and CII frameworks adopted at MEPC 76</div>
+          <div class="event-body">MEPC 76 adopted amendments to MARPOL Annex VI introducing the Energy Efficiency Existing Ship Index (EEXI) and Carbon Intensity Indicator (CII) rating scheme, entering force from 1 January 2023.</div>
+          <div class="event-significance">CII created a continuous operational performance metric that demanded real-time AI-assisted monitoring. No ship company could manage CII compliance at fleet scale using manual reporting — this regulation directly mandated AI adoption.</div>
+          <div class="event-source">Source: <a href="https://www.imo.org/en/MediaCentre/MeetingSummaries/Pages/MEPC-76th-session.aspx" target="_blank" rel="noopener">IMO MEPC 76</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ERA 4: 2022–2023 -->
+  <div class="era-block">
+    <div class="era-header">
+      <div class="era-badge">2022–23</div>
+      <div>
+        <div class="era-title">Deployment Era</div>
+        <div class="era-desc">South Korea MASS Act. LEO SatCom. DNV rebrand. Transpacific + Atlantic crossings. CII/EEXI live.</div>
+      </div>
+    </div>
+    <div class="timeline-spine">
+
+      <div class="event" data-cat="regulation">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">2022</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+          </div>
+          <div class="event-title">EU ETS extended to maritime shipping — legislative framework adopted</div>
+          <div class="event-body">The European Union formally extended the EU Emissions Trading System to cover maritime shipping under the EU ETS Directive revision, with phased compliance obligations beginning 2024 and full compliance from 2026.</div>
+          <div class="event-significance">Added a direct financial penalty mechanism to emissions beyond IMO's CII rating. The EU ETS created the commercial urgency that CII's rating system alone lacked — making AI-based carbon management a matter of P&amp;L, not just compliance.</div>
+          <div class="event-source">Source: <a href="https://climate.ec.europa.eu/eu-action/transport/reducing-emissions-shipping-sector_en" target="_blank" rel="noopener">EU ETS Maritime — European Commission</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="autonomous">
+        <div class="event-node" style="background:var(--cat-autonomous)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-autonomous)">
+          <div class="event-meta">
+            <span class="event-year">2022</span>
+            <span class="event-tag tag-autonomous">Autonomous Vessels</span>
+          </div>
+          <div class="event-title">Yara Birkeland completes first autonomous zero-emission container voyage, Norway</div>
+          <div class="event-body">The Yara Birkeland, the world's first fully electric and autonomous container ship, completed its first fully autonomous voyage in Norwegian waters between Herøya and Brevik. The vessel operates without crew under remote supervision.</div>
+          <div class="event-significance">Moved MASS from experimental to operational reality. Demonstrated that autonomous container vessel operations were technically viable — shifting the debate from "if" to "when and how to regulate."</div>
+          <div class="event-source">Source: <a href="https://www.dnv.com/expert-story/maritime-impact/yara-birkeland.html" target="_blank" rel="noopener">DNV — Yara Birkeland</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="autonomous">
+        <div class="event-node" style="background:var(--cat-autonomous)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-autonomous)">
+          <div class="event-meta">
+            <span class="event-year">2022</span>
+            <span class="event-tag tag-autonomous">Autonomous Vessels</span>
+          </div>
+          <div class="event-title">Mayflower Autonomous Ship (MAS400) completes crewless transatlantic crossing — Plymouth to Halifax</div>
+          <div class="event-body">ProMare, IBM, and Silicon Sensing Systems' Mayflower Autonomous Ship (MAS400) completed a 3,500-mile transatlantic voyage from Plymouth, UK to Halifax, Nova Scotia without a human captain or crew onboard. The AI Captain processed data from six cameras and 30+ sensors, making over one million micro-adjustments to navigate weather and marine hazards autonomously.</div>
+          <div class="event-significance">The first crewless vessel to complete an Atlantic crossing under fully autonomous AI navigation. Demonstrated that edge-computing AI (all processing onboard, not reliant on shore-side connectivity) could manage a full ocean passage — a critical architectural proof point for MASS concepts.</div>
+          <div class="event-source">Source: <a href="https://mas400.com" target="_blank" rel="noopener">MAS400 / ProMare</a> · <a href="https://www.research.ibm.com/blog/mayflower-autonomous-ship" target="_blank" rel="noopener">IBM Research</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="autonomous">
+        <div class="event-node" style="background:var(--cat-autonomous)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-autonomous)">
+          <div class="event-meta">
+            <span class="event-year">2022</span>
+            <span class="event-tag tag-autonomous">Autonomous Vessels</span>
+          </div>
+          <div class="event-title">Prism Courage (LNG carrier) — first large commercial vessel to complete ocean crossing under autonomous AI navigation</div>
+          <div class="event-body">Avikus (HD Hyundai subsidiary) in partnership with SK Shipping deployed HiNAS 2.0 AI navigation on the Prism Courage, a 300-metre, 134,000-ton LNG carrier. The vessel crossed the Pacific from Freeport, Texas through the Panama Canal to South Korea — approximately 20,000 km — with autonomous navigation for roughly half the voyage. Fuel efficiency improved by 7%, GHG emissions reduced by 5%.</div>
+          <div class="event-significance">The first large commercial vessel — not a research prototype — to complete an ocean crossing using autonomous AI navigation. Quantified commercial benefits (fuel and emissions savings) at mega-vessel scale for the first time. Set the benchmark that all subsequent autonomous navigation claims are measured against.</div>
+          <div class="event-source">Source: <a href="https://www.avikus.ai" target="_blank" rel="noopener">Avikus (HD Hyundai)</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="autonomous">
+        <div class="event-node" style="background:var(--cat-autonomous)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-autonomous)">
+          <div class="event-meta">
+            <span class="event-year">2022</span>
+            <span class="event-tag tag-autonomous">Autonomous Vessels</span>
+          </div>
+          <div class="event-title">Suzaku (Japan) — 107 autonomous collision avoidances in Tokyo Bay under MEGURI2040</div>
+          <div class="event-body">The Suzaku, a 749-ton cargo vessel supported by The Nippon Foundation and Orca AI under the MEGURI2040 programme, completed a 500-mile autonomous voyage through Tokyo Bay — one of the world's most congested waterways. The vessel autonomously executed 107 collision-avoidance manoeuvres without human intervention.</div>
+          <div class="event-significance">The highest-density autonomous collision avoidance demonstration on record at the time. Tokyo Bay traffic density made this a more demanding test than open-ocean passages. The Orca AI integration provided the model for LR's subsequent notation work in 2024–26.</div>
+          <div class="event-source">Source: <a href="https://www.nippon-foundation.or.jp/en/what/projects/meguri2040/" target="_blank" rel="noopener">The Nippon Foundation — MEGURI2040</a> · <a href="https://orca-ai.io" target="_blank" rel="noopener">Orca AI</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="industry">
+        <div class="event-node" style="background:var(--cat-industry)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-industry)">
+          <div class="event-meta">
+            <span class="event-year">2023–2024</span>
+            <span class="event-tag tag-industry">Industry Shift</span>
+          </div>
+          <div class="event-title">Maritime LEO SatCom rollout — Starlink / Eutelsat OneWeb slash latency to under 100ms</div>
+          <div class="event-body">Mass rollout of Low Earth Orbit maritime satellite networks (Starlink Maritime and Eutelsat OneWeb) reduced shipboard connectivity latency from ~600ms (GEO satellite) to under 100ms, while dramatically reducing per-gigabyte costs. Fleet adoption accelerated rapidly through 2023–24 across all vessel segments.</div>
+          <div class="event-significance">The hidden enabler of the AI maritime era. Real-time video feeds for AI watchkeeping (Orca AI), live digital twin telemetry, remote survey video execution, and shore-side Remote Operation Centres all require low-latency high-bandwidth connectivity. GEO satellite's 600ms latency made video-based AI systems impractical. LEO removed that constraint — making the entire 2024–26 AI deployment wave commercially viable.</div>
+          <div class="event-source">Source: <a href="https://www.starlink.com/maritime" target="_blank" rel="noopener">Starlink Maritime</a> · <a href="https://oneweb.net/solutions/maritime" target="_blank" rel="noopener">Eutelsat OneWeb Maritime</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="regulation">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">2023</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+          </div>
+          <div class="event-title">South Korea — Maritime Autonomous Surface Ship (MASS) Act enacted</div>
+          <div class="event-body">South Korea enacted dedicated national legislation for Maritime Autonomous Surface Ships — the first country to pass a standalone MASS Act providing a legal framework for autonomous vessel operations, certification, liability, and insurance in Korean waters. The Act enabled commercial licensing pathways ahead of IMO's MASS Code.</div>
+          <div class="event-significance">The first national MASS legislation anywhere, predating IMO's MASS Code by three years. South Korea's approach — legislate nationally, then align with IMO — became a model for Norway and Japan. It also enabled Avikus and HD Hyundai to accelerate commercial deployment of HiNAS under a domestic legal framework.</div>
+          <div class="event-source">Source: <a href="https://www.moleg.go.kr" target="_blank" rel="noopener">Ministry of Government Legislation, South Korea</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="ai">
+        <div class="event-node" style="background:var(--cat-ai)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-ai)">
+          <div class="event-meta">
+            <span class="event-year">2023</span>
+            <span class="event-tag tag-ai">AI Deployment</span>
+          </div>
+          <div class="event-title">Lloyd's Register launches AI-powered survey and inspection tools — class notation framework</div>
+          <div class="event-body">Lloyd's Register introduced AI-assisted inspection services including drone-based hull surveys, computer vision defect detection, and ML-based risk assessment for class surveys, with formal class notation criteria for AI systems onboard.</div>
+          <div class="event-significance">Class society endorsement of AI inspection tools gave shipowners regulatory confidence to deploy them. LR's AI notation framework became the template other class societies followed.</div>
+          <div class="event-source">Source: <a href="https://www.lr.org/en/digital-and-data/artificial-intelligence/" target="_blank" rel="noopener">Lloyd's Register — AI Services</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="regulation">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">2023</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+          </div>
+          <div class="event-title">IMO 2023 GHG Strategy adopted — net-zero by or around 2050 target confirmed</div>
+          <div class="event-body">MEPC 80 adopted the Revised IMO GHG Strategy, strengthening the 2018 target to net-zero GHG emissions by or around 2050 and introducing indicative checkpoints: 20% reduction by 2030, 70% by 2040.</div>
+          <div class="event-significance">The 2030 checkpoint created regulatory urgency within the current decade — accelerating investment in AI-based voyage optimisation, alternative fuel readiness tools, and predictive maintenance for efficiency gains.</div>
+          <div class="event-source">Source: <a href="https://www.imo.org/en/MediaCentre/MeetingSummaries/Pages/MEPC-80.aspx" target="_blank" rel="noopener">IMO MEPC 80 — 2023 GHG Strategy</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="india">
+        <div class="event-node" style="background:var(--cat-india)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-india)">
+          <div class="event-meta">
+            <span class="event-year">2023</span>
+            <span class="event-tag tag-india">India / Asia</span>
+          </div>
+          <div class="event-title">India — Maritime Amrit Kaal Vision 2047 launched; Sagarmala Phase III initiates smart port infrastructure</div>
+          <div class="event-body">India's Ministry of Ports, Shipping and Waterways launched its Maritime Amrit Kaal Vision 2047 framework targeting India as a top-ten maritime nation, with Sagarmala Phase III incorporating AI-driven port logistics, vessel traffic management systems, and digital customs processing at major ports.</div>
+          <div class="event-significance">India's most comprehensive government commitment to maritime digitalisation. Set the policy foundation for subsequent AI deployments at Mundra, JNPT, and Chennai ports.</div>
+          <div class="event-source">Source: <a href="https://sagarmala.gov.in" target="_blank" rel="noopener">Sagarmala Programme — Ministry of Ports</a></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ERA 5: 2024–2026 -->
+  <div class="era-block">
+    <div class="era-header">
+      <div class="era-badge">2024–26</div>
+      <div>
+        <div class="era-title">Integration Era</div>
+        <div class="era-desc">MASS Code. Singapore-Rotterdam crewless voyage. JNPT/Mundra AI. Elding passenger MASS. LR × Orca AI.</div>
+      </div>
+    </div>
+    <div class="timeline-spine">
+
+      <div class="event" data-cat="regulation">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">2024</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+          </div>
+          <div class="event-title">EU ETS Phase-in for shipping begins — 40% of verified emissions reportable from January 2024</div>
+          <div class="event-body">Maritime shipping formally entered the EU Emissions Trading System with a phased compliance schedule: 40% of verified emissions in 2024, 70% in 2025, and 100% from 2026. FuelEU Maritime regulation also finalised for 2025 entry.</div>
+          <div class="event-significance">The start of hard financial consequences for GHG non-compliance in Europe. Triggered urgent deployment of AI-based carbon accounting and voyage planning tools across European trades.</div>
+          <div class="event-source">Source: <a href="https://climate.ec.europa.eu/eu-action/transport/reducing-emissions-shipping-sector_en" target="_blank" rel="noopener">EU ETS — European Commission</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="ai">
+        <div class="event-node" style="background:var(--cat-ai)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-ai)">
+          <div class="event-meta">
+            <span class="event-year">2024</span>
+            <span class="event-tag tag-ai">AI Deployment</span>
+          </div>
+          <div class="event-title">Orca AI raises Series B; collision avoidance AI deployed on 100+ vessels commercially</div>
+          <div class="event-body">Orca AI's computer vision collision avoidance system passed the 100-vessel commercial deployment milestone, with Class notation from Lloyd's Register. The system provides watchkeeping officers with AI-generated situational awareness alerts in real time.</div>
+          <div class="event-significance">The clearest proof point that AI watchkeeping tools had moved from prototype to production at meaningful fleet scale — with class society endorsement providing regulatory acceptance.</div>
+          <div class="event-source">Source: <a href="https://orca-ai.io" target="_blank" rel="noopener">Orca AI</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="autonomous">
+        <div class="event-node" style="background:var(--cat-autonomous)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-autonomous)">
+          <div class="event-meta">
+            <span class="event-year">2024</span>
+            <span class="event-tag tag-autonomous">Autonomous Vessels</span>
+          </div>
+          <div class="event-title">Norway formalises Remote Operator licence framework — world's first national certification standard</div>
+          <div class="event-body">Norway's Maritime Authority (Sjøfartsdirektoratet) published the regulatory framework for Remote Operator certification, establishing the world's first national competency and licensing standard for personnel operating vessels from Remote Operation Centres.</div>
+          <div class="event-significance">Established a practical model for STCW-equivalent certification that other flag states could reference — directly informed the MASS Code's treatment of Remote Operators at MSC 111.</div>
+          <div class="event-source">Source: <a href="https://www.sdir.no" target="_blank" rel="noopener">Sjøfartsdirektoratet — Norwegian Maritime Authority</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="regulation">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">2025</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+          </div>
+          <div class="event-title">FuelEU Maritime enters force — 2% GHG intensity reduction target from 1 January 2025</div>
+          <div class="event-body">EU Regulation 2023/1805 (FuelEU Maritime) entered into force on 1 January 2025 for vessels above 5,000 GT on EU trade routes, requiring a 2% reduction in the greenhouse gas intensity of energy used onboard versus a 2020 baseline. The regulation operates alongside EU ETS.</div>
+          <div class="event-significance">FuelEU created the demand signal for AI-assisted fuel mix optimisation tools — operators needed to calculate the blended GHG intensity of multi-fuel portfolios (VLSFO, LNG, methanol, biofuel) in real time.</div>
+          <div class="event-source">Source: <a href="https://transport.ec.europa.eu/transport-modes/maritime/fueleu-maritime_en" target="_blank" rel="noopener">FuelEU Maritime — European Commission</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="autonomous">
+        <div class="event-node" style="background:var(--cat-autonomous)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-autonomous)">
+          <div class="event-meta">
+            <span class="event-year">2025</span>
+            <span class="event-tag tag-autonomous">Autonomous Vessels</span>
+          </div>
+          <div class="event-title">ClassNK issues first commercial MASS notation — Genbu (Japan), world's first certified autonomous coastal vessel</div>
+          <div class="event-body">ClassNK issued the AUTO-Nav2 (All) notation to the Genbu, a Japan Coastal Guard autonomous vessel operating on coastal routes. The notation confirmed compliance with ClassNK's Guidelines for Automated/Autonomous Ships, making Genbu the world's first commercially certified autonomous vessel under a classification society framework.</div>
+          <div class="event-significance">Moved autonomous vessel certification from experimental to class-approved commercial reality. Covered by MIW Issue 18 and Issue 19.</div>
+          <div class="event-source">Source: <a href="https://www.classnk.or.jp/hp/en/index.html" target="_blank" rel="noopener">ClassNK</a> · <span class="miw-badge">MIW Issues 18–19</span></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="ai" data-miw="true">
+        <div class="event-node" style="background:var(--cat-ai)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-ai)">
+          <div class="event-meta">
+            <span class="event-year">Apr 2026</span>
+            <span class="event-tag tag-ai">AI Deployment</span>
+          </div>
+          <div class="event-title">Deepsea Technologies HyperPilot enters commercial phase — AI autopilot for propulsion autonomy</div>
+          <div class="event-body">Deepsea Technologies announced the commercial phase of HyperPilot, its AI-based autonomous propulsion optimisation system. HyperPilot operates as an intelligent autopilot layer, continuously optimising speed, heading, and engine load based on weather, currents, and CII targets.</div>
+          <div class="event-significance">A watershed moment for propulsion autonomy: commercial-scale AI making real-time navigational and engineering decisions previously made by officers. Covered in MIW Issue 17.</div>
+          <div class="event-source">Source: <a href="https://deepsea.ai" target="_blank" rel="noopener">Deepsea Technologies</a> · <span class="miw-badge">MIW Issue 17</span></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="industry" data-miw="true">
+        <div class="event-node" style="background:var(--cat-industry)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-industry)">
+          <div class="event-meta">
+            <span class="event-year">Apr 2026</span>
+            <span class="event-tag tag-industry">Industry Shift</span>
+          </div>
+          <div class="event-title">ABS surpasses DNV to become world's largest classification society by active fleet tonnage</div>
+          <div class="event-body">ABS (American Bureau of Shipping) overtook DNV as the world's largest classification society by active fleet tonnage — a historic first, driven by ABS's aggressive expansion in the LNG, offshore, and US-flagged segments alongside its digital services growth.</div>
+          <div class="event-significance">The first change at the top of global class society rankings in decades. Signals a shift in the centre of gravity for maritime standards-setting. Covered in MIW Issue 17.</div>
+          <div class="event-source">Source: MIW research · <span class="miw-badge">MIW Issue 17</span></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="regulation" data-miw="true">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">Apr 2026</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+          </div>
+          <div class="event-title">MEPC 84 — CII methodology refinements and ammonia machinery space standards discussed</div>
+          <div class="event-body">MEPC 84 took up refinements to CII calculation methodology for vessels using alternative fuels, and reviewed IACS UR M78 on ammonia in machinery spaces. The session confirmed EU ETS and FuelEU alignment with IMO's mid-term measures timeline.</div>
+          <div class="event-significance">CII refinements affect how AI-based voyage optimisation systems calculate compliance scores — any methodology change requires software recalibration across the entire fleet management tool ecosystem. Covered in MIW Issues 18 and 19.</div>
+          <div class="event-source">Source: <a href="https://www.imo.org" target="_blank" rel="noopener">IMO</a> · <span class="miw-badge">MIW Issues 18–19</span></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="india" data-miw="true">
+        <div class="event-node" style="background:var(--cat-india)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-india)">
+          <div class="event-meta">
+            <span class="event-year">Apr 2026</span>
+            <span class="event-tag tag-india">India / Asia</span>
+          </div>
+          <div class="event-title">OCEANS-X Singapore launches — maritime's first open AI data exchange platform</div>
+          <div class="event-body">OCEANS-X, backed by Singapore's Maritime and Port Authority, launched as the first open AI data exchange platform for maritime, enabling standardised sharing of vessel performance, port state, and emissions data between operators, class societies, and port authorities.</div>
+          <div class="event-significance">A platform-level infrastructure play: if OCEANS-X achieves adoption, it becomes the data layer that feeds the next generation of maritime AI tools globally. Singapore's SGD 100M maritime AI commitment backs this. Covered in MIW Issue 18.</div>
+          <div class="event-source">Source: MIW research · <span class="miw-badge">MIW Issue 18</span></div>
+        </div>
+      </div>
+
+
+
+      <div class="event" data-cat="india">
+        <div class="event-node" style="background:var(--cat-india)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-india)">
+          <div class="event-meta">
+            <span class="event-year">2024–2025</span>
+            <span class="event-tag tag-india">India / Asia</span>
+          </div>
+          <div class="event-title">JNPT and Mundra Port — AI-driven container tracking, gate automation, and berth allocation deployed</div>
+          <div class="event-body">Jawaharlal Nehru Port Authority (JNPT) and Mundra Port (Adani Ports) deployed ML-driven container tracking, automated gate processing, and predictive berth allocation systems — translating India's Maritime Amrit Kaal Vision 2047 into immediate operational deployments. Systems reduced gate processing time and improved berth utilisation measurably.</div>
+          <div class="event-significance">The proof point that India's maritime AI vision translated into operational reality, not just policy. JNPT is India's largest container port; Mundra handles the largest private port volume. Deployments at both demonstrate that Indian port AI reached scale simultaneously at state and private operators.</div>
+          <div class="event-source">Source: <a href="https://www.jnport.gov.in" target="_blank" rel="noopener">JNPT — jnport.gov.in</a> · <a href="https://www.adaniports.com" target="_blank" rel="noopener">Adani Ports — adaniports.com</a></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="autonomous">
+        <div class="event-node" style="background:var(--cat-autonomous)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-autonomous)">
+          <div class="event-meta">
+            <span class="event-year">2024</span>
+            <span class="event-tag tag-autonomous">Autonomous Vessels</span>
+          </div>
+          <div class="event-title">Elding — Iceland's first autonomous passenger vessel completes regular commercial service</div>
+          <div class="event-body">The Elding, a whale-watching and passenger ferry operating in Icelandic waters, completed regular autonomous commercial service runs — the first autonomous passenger vessel in regular commercial operation in the North Atlantic. The project involved Icelandic maritime authorities and demonstrated autonomous capability in challenging high-sea conditions with passenger safety requirements.</div>
+          <div class="event-significance">Passenger vessel autonomy carries a higher regulatory and public acceptance bar than cargo. Elding's regular commercial service — not a one-time demonstration — established that autonomous passenger operations were viable in demanding open-sea conditions, expanding the MASS concept beyond cargo-only applications.</div>
+          <div class="event-source">Source: Maritime industry reports</div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="autonomous">
+        <div class="event-node" style="background:var(--cat-autonomous)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-autonomous)">
+          <div class="event-meta">
+            <span class="event-year">Early 2026</span>
+            <span class="event-tag tag-autonomous">Autonomous Vessels</span>
+          </div>
+          <div class="event-title">Singapore to Rotterdam — first fully crewless transoceanic cargo voyage completed</div>
+          <div class="event-body">An unnamed fully autonomous cargo vessel completed a historic crewless transoceanic voyage from Singapore to Rotterdam — crossing the Indian Ocean, Suez Canal, and Atlantic approaches without any human crew onboard. The multi-agency international trial was backed by global logistics entities and the UK Maritime Autonomous Systems Regulatory Working Group. Guided by AI, satellite data, and precision sensors, the vessel navigated some of the world's most congested international shipping lanes.</div>
+          <div class="event-significance">The most operationally significant autonomous voyage milestone to date: a commercial cargo vessel, transoceanic distance, crossing multiple high-traffic international waterways, with zero crew onboard. Distinguished from the Prism Courage (which had crew onboard supervising autonomous navigation) — this was continuous 100% crewless operation. Directly relevant to the MASS Code framework adopted at MSC 111 weeks later.</div>
+          <div class="event-source">Source: UK Maritime Autonomous Systems Regulatory Working Group · Industry reports</div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="ai" data-miw="true">
+        <div class="event-node" style="background:var(--cat-ai)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-ai)">
+          <div class="event-meta">
+            <span class="event-year">May 2026</span>
+            <span class="event-tag tag-ai">AI Deployment</span>
+          </div>
+          <div class="event-title">Lloyd's Register × Orca AI — live class-approved collision avoidance trial commences</div>
+          <div class="event-body">Lloyd's Register and Orca AI commenced a live, class-approved trial of AI collision avoidance technology under LR's notation framework, with data feeding into the development of class standards for AI watchkeeping systems. The trial represents the first joint Class-AI operator programme of its kind.</div>
+          <div class="event-significance">Class endorsement of a live AI watchkeeping trial is the critical bridge between prototype deployment and regulatory acceptance — the step needed before AI watchkeeping can satisfy STCW watch requirements. Covered in MIW Issues 21 and 22.</div>
+          <div class="event-source">Source: MIW research · <span class="miw-badge">MIW Issues 21–22</span></div>
+        </div>
+      </div>
+
+      <div class="event" data-cat="regulation" data-miw="true">
+        <div class="event-node" style="background:var(--cat-regulation)"></div>
+        <div class="event-card" style="border-left-color:var(--cat-regulation)">
+          <div class="event-meta">
+            <span class="event-year">May 2026</span>
+            <span class="event-tag tag-regulation">Regulation</span>
+            <span class="miw-badge">MIW Issue 22</span>
+          </div>
+          <div class="event-title">IMO MSC 111 — MASS Code adopted. Enters force 1 July 2026.</div>
+          <div class="event-body">The Maritime Safety Committee at its 111th session adopted the Code for Maritime Autonomous Surface Ships (MASS Code). The Code is non-mandatory in its initial form but provides the first comprehensive international regulatory framework covering watchkeeping, Remote Operation Centres, fail-safe requirements, and flag state certification for MASS vessels. It enters into effect on 1 July 2026.</div>
+          <div class="event-significance">The defining regulatory event for autonomous and AI-assisted vessels. After eight years of IMO scoping work, the international community has a legal framework. Not a revolution — but the floor on which all future mandatory requirements will be built. The most consequential maritime regulation since ISM Code. Covered extensively in MIW Issue 22.</div>
+          <div class="event-source">Source: <a href="https://www.imo.org" target="_blank" rel="noopener">IMO MSC 111</a> · <span class="miw-badge">MIW Issue 22</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ATTRIBUTION -->
+  <div style="margin-top:3rem; padding:1.5rem; background:#fff; border:1px solid var(--border); border-radius:4px; border-left:3px solid var(--gold);">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.5rem;">About this timeline</p>
+    <p style="font-size:0.88rem;color:var(--text-secondary);line-height:1.7;">Compiled by Marine Intelligence Weekly. Events are sourced from IMO, IACS, classification societies, and MIW editorial research. Events marked <strong style="font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--navy);">MIW</strong> were covered in MIW issues. This timeline is updated as new milestones occur. Corrections and submissions: <a href="mailto:contactus@marineintelligenceweekly.com" style="color:var(--teal-dark);">contactus@marineintelligenceweekly.com</a></p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:0.4rem;">Marine Intelligence Weekly · Independent editorial · Founded by <a href="https://marineintelligenceweekly.com">Nixon Antony, Second Engineer, Maersk A/S</a></p>
+  <p><a href="https://marineintelligenceweekly.com">marineintelligenceweekly.com</a> · <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a></p>
+</footer>
+
+<!-- RETURN TO TOP -->
+<a href="#" id="rtt" aria-label="Return to top">↑</a>
+
+<script>
+  // Filter buttons
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const events = document.querySelectorAll('.event');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      events.forEach(ev => {
+        if (f === 'all') {
+          ev.classList.remove('hidden');
+        } else if (f === 'miw') {
+          ev.dataset.miw ? ev.classList.remove('hidden') : ev.classList.add('hidden');
+        } else {
+          ev.dataset.cat === f ? ev.classList.remove('hidden') : ev.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // Return to top
+  const rtt = document.getElementById('rtt');
+  window.addEventListener('scroll', () => {
+    rtt.classList.toggle('visible', window.scrollY > 300);
+  });
+  rtt.addEventListener('click', e => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
