@@ -1,1 +1,906 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IMO Decarbonisation & GHG Timeline 1992–2050 | Marine Intelligence Weekly</title>
+<meta name="description" content="The complete IMO decarbonisation timeline — UNFCCC 1992 through MARPOL Annex VI, CII, EEXI, the 2023 GHG Strategy, the Net-Zero Framework, and future checkpoints to 2050. Three-layer detail including Marine Engineer Notes.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/GHGDecarb/timeline.html">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0D1B2A;--navy-mid:#132232;--navy-deep:#0A1520;
+  --teal:#00B4D8;--teal-dark:#0096B4;
+  --gold:#C9A84C;--gold-lt:#E2C97A;
+  --bg:#F7F4EE;--white:#FFFFFF;
+  --text:#1A2535;--secondary:#4A5568;--muted:#718096;--border:#DDD8CF;
+  --un:#009EDB;--imo:#00B4A0;--marpol:#E07820;--ghg:#C44030;
+  --nzf:#7B4FBF;--future:#C9A84C;--eu:#1A5FAD;
+  --eng-bg:#FAF7FF;--eng-border:#D5C8F0;--eng-text:#3D2B6B;--eng-accent:#7B4FBF;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Source Serif 4',Georgia,serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px;-webkit-font-smoothing:antialiased;}
+
+/* NAV */
+nav{background:var(--navy);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(201,168,76,0.2);}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:54px;}
+.nav-brand{font-family:'Playfair Display',serif;color:var(--gold);font-size:0.95rem;font-weight:700;text-decoration:none;letter-spacing:0.02em;}
+.nav-links{display:flex;gap:1.5rem;list-style:none;}
+.nav-links a{color:rgba(255,255,255,0.65);font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+@media(max-width:640px){.nav-links{display:none;}}
+
+/* HERO */
+.hero{background:var(--navy);padding:4rem 1.5rem 3.5rem;text-align:center;position:relative;overflow:hidden;}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:1rem;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4.5vw,3rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:1rem;}
+.hero h1 span{color:var(--gold);}
+.hero-sub{font-family:'Source Serif 4',serif;font-style:italic;font-size:1rem;color:rgba(255,255,255,0.6);max-width:620px;margin:0 auto 2.5rem;}
+.hero-stats{display:flex;justify-content:center;gap:3rem;flex-wrap:wrap;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);display:block;}
+.stat-label{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.4);}
+
+/* LEGEND */
+.legend-bar{background:var(--navy-mid);border-bottom:1px solid rgba(255,255,255,0.06);padding:0.65rem 1.5rem;position:sticky;top:54px;z-index:90;}
+.legend-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:0.6rem 1.5rem;align-items:center;}
+.legend-lbl{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.35);}
+.legend-item{display:flex;align-items:center;gap:0.4rem;cursor:pointer;transition:opacity 0.2s;}
+.legend-item.dimmed{opacity:0.3;}
+.legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.legend-text{font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.7);}
+
+/* CONTROLS */
+.controls{background:var(--navy-mid);border-bottom:1px solid rgba(255,255,255,0.04);padding:0.6rem 1.5rem 0.9rem;position:sticky;top:calc(54px + 38px);z-index:89;}
+.controls-inner{max-width:1100px;margin:0 auto;display:flex;flex-wrap:wrap;gap:0.6rem;align-items:center;}
+.era-btn{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 0.9rem;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.5);border-radius:2px;cursor:pointer;transition:all 0.2s;}
+.era-btn:hover{border-color:var(--teal);color:var(--teal);}
+.era-btn.active{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.mode-toggle{margin-left:auto;display:flex;align-items:center;gap:6px;}
+.mode-lbl{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);}
+.mode-btn{font-family:'JetBrains Mono',monospace;font-size:0.65rem;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 0.9rem;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(255,255,255,0.5);border-radius:2px;cursor:pointer;transition:all 0.2s;}
+.mode-btn.active{background:var(--eng-accent);border-color:var(--eng-accent);color:#fff;}
+.search-wrap{display:flex;align-items:center;gap:0.6rem;margin-top:0.5rem;width:100%;}
+.search-input{font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:0.3rem 0.9rem;border:1px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.05);color:#fff;border-radius:2px;outline:none;width:240px;transition:border 0.2s;}
+.search-input::placeholder{color:rgba(255,255,255,0.3);}
+.search-input:focus{border-color:var(--teal);}
+@media(max-width:640px){.mode-toggle{margin-left:0;}.search-input{width:100%;}}
+
+/* GLOSSARY */
+.glossary-wrap{max-width:960px;margin:2rem auto 0;padding:0 1.5rem;}
+.glossary-toggle{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1rem;border:1px solid var(--border);background:var(--white);color:var(--secondary);border-radius:2px;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:all 0.2s;}
+.glossary-toggle:hover{border-color:var(--teal-dark);color:var(--teal-dark);}
+.glossary-panel{display:none;margin-top:0.75rem;background:var(--white);border:1px solid var(--border);border-radius:4px;padding:1rem 1.25rem;}
+.glossary-panel.open{display:block;}
+.glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:0.6rem 1.5rem;}
+.glossary-item{display:flex;gap:0.75rem;align-items:baseline;font-size:0.83rem;}
+.glossary-term{font-family:'JetBrains Mono',monospace;font-size:0.72rem;font-weight:700;color:var(--teal-dark);min-width:48px;}
+.glossary-def{color:var(--secondary);line-height:1.5;}
+
+/* COMPARISON TABLE */
+.compare-wrap{max-width:960px;margin:1.5rem auto 0;padding:0 1.5rem;}
+.compare-toggle{font-family:'JetBrains Mono',monospace;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.5rem 1rem;border:1px solid var(--border);background:var(--white);color:var(--secondary);border-radius:2px;cursor:pointer;display:flex;align-items:center;gap:0.5rem;transition:all 0.2s;}
+.compare-toggle:hover{border-color:var(--eu);color:var(--eu);}
+.compare-panel{display:none;margin-top:0.75rem;background:var(--white);border:1px solid var(--border);border-radius:4px;padding:1rem 1.25rem;}
+.compare-panel.open{display:block;}
+.compare-panel h3{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.75rem;}
+.compare-table{width:100%;border-collapse:collapse;font-size:0.83rem;}
+.compare-table th{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;text-align:left;padding:0.4rem 0.6rem;border-bottom:2px solid var(--border);color:var(--muted);}
+.compare-table th:nth-child(2){color:var(--eu);}
+.compare-table th:nth-child(3){color:var(--nzf);}
+.compare-table td{padding:0.45rem 0.6rem;border-bottom:1px solid var(--border);color:var(--secondary);vertical-align:top;}
+.compare-table td:first-child{font-family:'JetBrains Mono',monospace;font-size:0.72rem;color:var(--text);font-weight:600;}
+.compare-table tr:last-child td{border-bottom:none;}
+
+/* TIMELINE */
+.tl-wrap{max-width:960px;margin:2rem auto 6rem;padding:0 1.5rem;position:relative;}
+.tl-spine{position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);background:linear-gradient(180deg,var(--un) 0%,var(--imo) 20%,var(--marpol) 45%,var(--ghg) 60%,var(--nzf) 80%,var(--future) 100%);border-radius:2px;z-index:0;}
+@media(max-width:680px){.tl-spine{left:14px;}}
+
+/* ERA LABELS */
+.era-label{text-align:center;position:relative;z-index:2;margin:2.5rem 0 0.5rem;}
+.era-label span{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);background:var(--bg);padding:0.3rem 1.2rem;border:1px solid var(--border);border-radius:2px;}
+
+/* EVENT */
+.event{display:flex;align-items:flex-start;position:relative;z-index:1;margin-bottom:2rem;transition:opacity 0.25s;}
+.event.hidden{display:none;}
+.event:nth-child(odd){flex-direction:row;}
+.event:nth-child(even){flex-direction:row-reverse;}
+.event-side{flex:0 0 calc(50% - 18px);max-width:calc(50% - 18px);}
+.event-gap{flex:0 0 36px;}
+.event-dot{position:absolute;left:50%;top:16px;width:16px;height:16px;border-radius:50%;border:2px solid var(--bg);transform:translateX(-50%);z-index:3;flex-shrink:0;}
+
+/* EVENT CARD */
+.event-card{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:1rem 1.1rem;cursor:pointer;transition:box-shadow 0.2s,transform 0.15s;border-top:3px solid transparent;}
+.event-card:hover{box-shadow:0 4px 18px rgba(0,0,0,0.09);transform:translateY(-1px);}
+.card-badges{display:flex;gap:5px;margin-bottom:0.4rem;flex-wrap:wrap;}
+.badge{font-family:'JetBrains Mono',monospace;font-size:0.58rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:2px 7px;border-radius:2px;}
+.badge-verify{background:#FFF3CD;color:#7A5200;border:1px solid #F0C040;}
+.badge-forecast{background:#E8F4FD;color:#0C447C;border:1px solid #85B7EB;}
+.event-year{font-family:'JetBrains Mono',monospace;font-size:0.68rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.3rem;}
+.event-title{font-family:'Playfair Display',serif;font-size:0.95rem;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:0.3rem;}
+.event-summary{font-size:0.82rem;color:var(--secondary);line-height:1.55;}
+.expand-hint{font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);margin-top:0.5rem;display:block;}
+
+/* LAYER 2 */
+.layer-2{display:none;margin-top:0.75rem;padding-top:0.75rem;border-top:1px solid var(--border);font-size:0.83rem;color:var(--secondary);line-height:1.6;}
+.layer-2 b{color:var(--navy);font-weight:600;}
+.event-card.open .layer-2{display:block;}
+.event-card.open .expand-hint{display:none;}
+.event-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:0.6rem;}
+.event-tag{font-family:'JetBrains Mono',monospace;font-size:0.6rem;padding:0.2rem 0.6rem;border-radius:2px;background:var(--bg);color:var(--muted);font-weight:500;letter-spacing:0.06em;border:1px solid var(--border);}
+.ref-label{font-family:'JetBrains Mono',monospace;font-size:0.62rem;color:var(--teal-dark);margin-top:0.6rem;display:block;letter-spacing:0.04em;}
+
+/* LAYER 3 BUTTON */
+.l3-btn{display:inline-flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;margin-top:0.75rem;border:1px solid var(--eng-accent);color:var(--eng-accent);background:transparent;border-radius:2px;cursor:pointer;transition:all 0.2s;}
+.l3-btn:hover{background:var(--eng-accent);color:#fff;}
+.l3-btn .arr{font-size:10px;}
+
+/* LAYER 3 PANEL */
+.layer-3{display:none;background:var(--eng-bg);border:1px solid var(--eng-border);border-radius:4px;padding:0.85rem 1rem;margin-top:0.75rem;}
+.layer-3.show{display:block;}
+.l3-eyebrow{font-family:'JetBrains Mono',monospace;font-size:0.62rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--eng-accent);margin-bottom:0.5rem;}
+.layer-3-body{font-size:0.83rem;color:var(--eng-text);line-height:1.65;}
+.layer-3-body b{color:#26215C;font-weight:600;}
+
+/* Engineer mode — show all L3 */
+body.eng-mode .layer-3{display:block;}
+body.eng-mode .l3-btn .arr::after{content:'↑';}
+body:not(.eng-mode) .l3-btn .arr::after{content:'↓';}
+
+/* Category colours */
+.cat-un .event-card{border-top-color:var(--un);}
+.cat-un .event-dot{background:var(--un);}
+.cat-un .event-year{color:var(--un);}
+.cat-imo .event-card{border-top-color:var(--imo);}
+.cat-imo .event-dot{background:var(--imo);}
+.cat-imo .event-year{color:var(--imo);}
+.cat-marpol .event-card{border-top-color:var(--marpol);}
+.cat-marpol .event-dot{background:var(--marpol);}
+.cat-marpol .event-year{color:var(--marpol);}
+.cat-ghg .event-card{border-top-color:var(--ghg);}
+.cat-ghg .event-dot{background:var(--ghg);}
+.cat-ghg .event-year{color:var(--ghg);}
+.cat-nzf .event-card{border-top-color:var(--nzf);}
+.cat-nzf .event-dot{background:var(--nzf);}
+.cat-nzf .event-year{color:var(--nzf);}
+.cat-future .event-card{border-top-color:var(--future);}
+.cat-future .event-dot{background:var(--future);}
+.cat-future .event-year{color:var(--future);}
+.cat-eu .event-card{border-top-color:var(--eu);}
+.cat-eu .event-dot{background:var(--eu);}
+.cat-eu .event-year{color:var(--eu);}
+
+.no-results{text-align:center;color:var(--muted);padding:3rem 0;display:none;font-family:'JetBrains Mono',monospace;font-size:0.8rem;}
+
+/* ATTR */
+.attr-box{max-width:960px;margin:0 auto 4rem;padding:0 1.5rem;}
+.attr-inner{background:var(--white);border:1px solid var(--border);border-left:3px solid var(--gold);border-radius:0 4px 4px 0;padding:1rem 1.25rem;font-size:0.85rem;color:var(--secondary);line-height:1.65;}
+.attr-inner a{color:var(--teal-dark);text-decoration:none;}
+
+/* CROSSLINK */
+.crosslink{background:var(--navy-mid);padding:1rem 1.5rem;text-align:center;border-top:1px solid rgba(255,255,255,0.06);}
+.crosslink-inner{max-width:960px;margin:0 auto;display:flex;flex-wrap:wrap;justify-content:center;gap:1rem 2rem;align-items:center;}
+.crosslink a{font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s;}
+.crosslink a:hover{color:var(--gold);}
+.crosslink-div{color:rgba(255,255,255,0.15);}
+
+#rtt{position:fixed;bottom:2rem;right:2rem;width:42px;height:42px;background:var(--navy);border:1px solid var(--gold);color:var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;text-decoration:none;opacity:0;pointer-events:none;transition:opacity 0.3s;z-index:200;}
+#rtt.visible{opacity:1;pointer-events:all;}
+
+footer{background:var(--navy);color:rgba(255,255,255,0.4);text-align:center;padding:2rem 1.5rem;font-family:'JetBrains Mono',monospace;font-size:0.68rem;letter-spacing:0.06em;}
+footer a{color:var(--gold);text-decoration:none;}
+
+@media(max-width:680px){
+  .tl-spine{left:14px;}
+  .event{flex-direction:column !important;padding-left:30px;}
+  .event-side{flex:1;max-width:100%;}
+  .event-gap{display:none;}
+  .event-dot{left:14px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://marineintelligenceweekly.com" class="nav-brand">Marine Intelligence Weekly</a>
+    <ul class="nav-links">
+      <li><a href="https://marineintelligenceweekly.com">Home</a></li>
+      <li><a href="https://marineintelligenceweekly.com/timeline.html">AI Timeline</a></li>
+      <li><a href="https://marineintelligenceweekly.com/index22.html">Latest Issue</a></li>
+      <li><a href="https://marineintelligenceweekly.com/GHGDecarb/timeline.html" class="active">GHG Timeline</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <p class="hero-eyebrow">Marine Intelligence Weekly · Reference Series</p>
+  <h1>IMO Decarbonisation &<br><span>GHG Timeline</span></h1>
+  <p class="hero-sub">From UNFCCC 1992 through MARPOL Annex VI, CII, EEXI, the 2023 GHG Strategy, and the Net-Zero Framework. Three layers of detail — including Marine Engineer Notes.</p>
+  <div class="hero-stats">
+    <div class="stat"><span class="stat-num">30+</span><span class="stat-label">Milestones</span></div>
+    <div class="stat"><span class="stat-num">1992–2050</span><span class="stat-label">Coverage</span></div>
+    <div class="stat"><span class="stat-num">3</span><span class="stat-label">Detail Layers</span></div>
+  </div>
+</section>
+
+<div class="legend-bar">
+  <div class="legend-inner">
+    <span class="legend-lbl">Category</span>
+    <div class="legend-item" data-cat="un"><div class="legend-dot" style="background:var(--un)"></div><span class="legend-text">UN / UNFCCC</span></div>
+    <div class="legend-item" data-cat="imo"><div class="legend-dot" style="background:var(--imo)"></div><span class="legend-text">IMO / MEPC</span></div>
+    <div class="legend-item" data-cat="marpol"><div class="legend-dot" style="background:var(--marpol)"></div><span class="legend-text">MARPOL Annex VI</span></div>
+    <div class="legend-item" data-cat="ghg"><div class="legend-dot" style="background:var(--ghg)"></div><span class="legend-text">GHG Studies</span></div>
+    <div class="legend-item" data-cat="nzf"><div class="legend-dot" style="background:var(--nzf)"></div><span class="legend-text">Net-Zero Framework</span></div>
+    <div class="legend-item" data-cat="eu"><div class="legend-dot" style="background:var(--eu)"></div><span class="legend-text">EU Instruments</span></div>
+    <div class="legend-item" data-cat="future"><div class="legend-dot" style="background:var(--future)"></div><span class="legend-text">Future Checkpoints</span></div>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="controls-inner">
+    <span class="legend-lbl">Era</span>
+    <button class="era-btn active" data-filter="all">All</button>
+    <button class="era-btn" data-filter="pre2010">Pre-2010</button>
+    <button class="era-btn" data-filter="2010s">2010–2019</button>
+    <button class="era-btn" data-filter="2020s">2020–2026</button>
+    <button class="era-btn" data-filter="future">2027–2050</button>
+    <div class="mode-toggle">
+      <span class="mode-lbl">Mode</span>
+      <button class="mode-btn" id="modeBtn" onclick="toggleEngMode()">Engineer Study</button>
+    </div>
+  </div>
+  <div class="controls-inner" style="margin-top:0.5rem;">
+    <input class="search-input" id="searchInput" type="text" placeholder="Search: CII, EEDI, GFI, NZF, sulphur…">
+  </div>
+</div>
+
+<!-- GLOSSARY -->
+<div class="glossary-wrap">
+  <button class="glossary-toggle" onclick="this.nextElementSibling.classList.toggle('open')">
+    Key Terms Glossary &nbsp;▾
+  </button>
+  <div class="glossary-panel">
+    <div class="glossary-grid">
+      <div class="glossary-item"><span class="glossary-term">EEDI</span><span class="glossary-def">Energy Efficiency Design Index — technical standard for new ships</span></div>
+      <div class="glossary-item"><span class="glossary-term">EEXI</span><span class="glossary-def">Energy Efficiency Existing Ship Index — one-off compliance for existing ships</span></div>
+      <div class="glossary-item"><span class="glossary-term">CII</span><span class="glossary-def">Carbon Intensity Indicator — annual A–E operational rating</span></div>
+      <div class="glossary-item"><span class="glossary-term">DCS</span><span class="glossary-def">IMO Data Collection System — mandatory fuel data reporting (Reg 22A)</span></div>
+      <div class="glossary-item"><span class="glossary-term">SEEMP</span><span class="glossary-def">Ship Energy Efficiency Management Plan — operational improvement framework</span></div>
+      <div class="glossary-item"><span class="glossary-term">GFI</span><span class="glossary-def">GHG Fuel Intensity — well-to-wake emissions per MJ of energy used</span></div>
+      <div class="glossary-item"><span class="glossary-term">ZNZ</span><span class="glossary-def">Zero or Near-Zero GHG Fuel — fuels meeting the NZF reward threshold</span></div>
+      <div class="glossary-item"><span class="glossary-term">NZF</span><span class="glossary-def">Net-Zero Framework — IMO's mid-term GFI standard + carbon pricing instrument</span></div>
+      <div class="glossary-item"><span class="glossary-term">WTW</span><span class="glossary-def">Well-to-Wake — full lifecycle GHG accounting from fuel production to combustion</span></div>
+      <div class="glossary-item"><span class="glossary-term">TTW</span><span class="glossary-def">Tank-to-Wake — combustion emissions only, excludes upstream production</span></div>
+      <div class="glossary-item"><span class="glossary-term">OCCS</span><span class="glossary-def">On-board Carbon Capture and Storage — methodology under IMO development</span></div>
+      <div class="glossary-item"><span class="glossary-term">EPL</span><span class="glossary-def">Engine Power Limitation — primary EEXI compliance method via governor seal</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- FuelEU vs IMO COMPARISON -->
+<div class="compare-wrap">
+  <button class="compare-toggle" onclick="this.nextElementSibling.classList.toggle('open')">
+    FuelEU Maritime vs IMO GFI — Comparison Table &nbsp;▾
+  </button>
+  <div class="compare-panel">
+    <h3>Parallel instruments — same objective, different jurisdiction</h3>
+    <table class="compare-table">
+      <thead><tr><th>Item</th><th>FuelEU Maritime</th><th>IMO GFI (NZF)</th></tr></thead>
+      <tbody>
+        <tr><td>Regulator</td><td>European Union</td><td>IMO (MARPOL Annex VI)</td></tr>
+        <tr><td>Scope</td><td>EU port calls &amp; voyages</td><td>Global — all ships ≥5,000 GT</td></tr>
+        <tr><td>In force</td><td>1 January 2025</td><td>Target: 1 January 2028</td></tr>
+        <tr><td>Baseline year</td><td>2020</td><td>2008</td></tr>
+        <tr><td>Reference value</td><td>~91.16 gCO₂eq/MJ (2020)</td><td>93.3 gCO₂eq/MJ (2008)</td></tr>
+        <tr><td>Accounting method</td><td>Well-to-Wake (WTW)</td><td>Well-to-Wake (WTW)</td></tr>
+        <tr><td>Enforcement mechanism</td><td>Financial penalty to verifier</td><td>Remedial Units — pay into IMO fund</td></tr>
+        <tr><td>ZNZ / reward tier</td><td>No reward mechanism</td><td>ZNZ ≤19.0 gCO₂eq/MJ receives credits</td></tr>
+        <tr><td>2030 reduction target</td><td>−6% vs 2020 baseline</td><td>−20% total GHG vs 2008 (indicative)</td></tr>
+        <tr><td>2050 target</td><td>−80% vs 2020</td><td>Net-zero by/around 2050</td></tr>
+        <tr><td>OPS (onshore power)</td><td>Mandatory in EU ports by 2030</td><td>Not covered</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- TIMELINE -->
+<div class="tl-wrap">
+  <div class="tl-spine"></div>
+  <div id="no-results" class="no-results">No matching events found.</div>
+
+<!-- ERA 1 -->
+<div class="era-label"><span>Foundations &amp; Early Studies · 1992–2009</span></div>
+
+<div class="event cat-un" data-era="pre2010" data-cat="un">
+  <div class="event-side"></div><div class="event-gap"></div><div class="event-dot"></div>
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">1992</div>
+    <div class="event-title">UNFCCC Adopted — Rio Earth Summit</div>
+    <div class="event-summary">Foundational legal instrument for all international climate action. Shipping GHG responsibility placed under IMO via Kyoto Protocol Article 2.2.</div>
+    <div class="layer-2">The United Nations Framework Convention on Climate Change (UNFCCC) was adopted at the Rio Earth Summit. Under Article 2, it set the objective to stabilise GHG concentrations. International shipping GHG was excluded from the Kyoto Protocol (Article 2.2), placing responsibility on IMO.<br><br>This is the root legal instrument from which all maritime decarbonisation obligations flow.
+      <div class="event-tags"><span class="event-tag">UNFCCC</span><span class="event-tag">Rio Summit</span><span class="event-tag">Foundation</span></div>
+      <span class="ref-label">Ref: UNFCCC, 1992 | Kyoto Protocol Art. 2.2</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>Oral exam angle:</b> When asked about the legal basis for IMO GHG rules, trace it to UNFCCC 1992 → Kyoto Protocol Art. 2.2 → MARPOL Annex VI Chapter 4. This lineage shows the examiner you understand why IMO has jurisdiction, not just what the rules are.</div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+</div>
+
+<div class="event cat-un" data-era="pre2010" data-cat="un">
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">1997</div>
+    <div class="event-title">Kyoto Protocol &amp; MARPOL Annex VI Adopted</div>
+    <div class="event-summary">Kyoto assigns shipping GHG to IMO. MARPOL Annex VI adopted — first international air pollution rules creating the regulatory vehicle for all future GHG measures.</div>
+    <div class="layer-2">The Kyoto Protocol (Article 2.2) assigned responsibility for controlling shipping GHG emissions to IMO. In the same year, MARPOL Annex VI (Prevention of Air Pollution from Ships) was adopted, focusing initially on SOx, NOx, and ODS — creating the legal vehicle within which GHG rules (Chapter 4, 2011) would later be embedded.
+      <div class="event-tags"><span class="event-tag">Kyoto Protocol</span><span class="event-tag">MARPOL Annex VI</span></div>
+      <span class="ref-label">Ref: Kyoto Protocol Art. 2.2 | MARPOL Annex VI 1997</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>Oral exam angle:</b> MARPOL Annex VI 1997 addressed SOx and NOx only — CO₂ was not regulated. Examiners test whether candidates understand that GHG rules came 14 years later via Chapter 4 (2011). The Annex was the framework; Chapter 4 was the GHG content.</div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+  <div class="event-gap"></div><div class="event-dot"></div><div class="event-side"></div>
+</div>
+
+<div class="event cat-ghg" data-era="pre2010" data-cat="ghg">
+  <div class="event-side"></div><div class="event-gap"></div><div class="event-dot"></div>
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">2000</div>
+    <div class="event-title">1st IMO GHG Study Published</div>
+    <div class="event-summary">Shipping confirmed at ~1.8% of global CO₂ (~430 Mt/yr, 1996 data). First scientific baseline for all subsequent IMO regulatory work.</div>
+    <div class="layer-2">IMO published its first comprehensive study on GHG emissions from ships — estimating international shipping contributed ~1.8% of global anthropogenic CO₂ emissions (~430 million tonnes CO₂/yr in 1996). This was the first scientific foundation for IMO's regulatory trajectory.
+      <div class="event-tags"><span class="event-tag">GHG Study</span><span class="event-tag">CO₂ Baseline</span><span class="event-tag">1st Study</span></div>
+      <span class="ref-label">Ref: First IMO GHG Study, 2000</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>Context to retain:</b> Five GHG studies have now been commissioned — 2000, 2009, 2014, 2020, and 2026 (5th study, ToR finalised at MEPC 84). Each study recalculates shipping's share and informs tighter measures. Knowing the sequence shows an examiner you understand the evidence-based regulatory cycle.</div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+</div>
+
+<div class="event cat-imo" data-era="pre2010" data-cat="imo">
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">19 May 2005</div>
+    <div class="event-title">MARPOL Annex VI Enters into Force</div>
+    <div class="event-summary">First mandatory international air pollution rules for ships — the regulatory vehicle within which Chapter 4 (GHG) would be embedded six years later.</div>
+    <div class="layer-2">MARPOL Annex VI entered into force on 19 May 2005, establishing mandatory regulations for SOx, NOx, and ODS from ships. It did not yet address CO₂. Entry into force created the legal mechanism within which Chapter 4 (EEDI/SEEMP, 2011) would subsequently be inserted.
+      <div class="event-tags"><span class="event-tag">MARPOL Annex VI</span><span class="event-tag">EIF 2005</span></div>
+      <span class="ref-label">Ref: MARPOL Annex VI, 19 May 2005</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>IAPP Certificate:</b> MARPOL Annex VI entry into force required ships to hold an International Air Pollution Prevention (IAPP) Certificate. This is the same certificate under which EEXI compliance is now recorded. Know your ship's IAPP Certificate — examiners ask about survey intervals and what endorsements it carries.</div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+  <div class="event-gap"></div><div class="event-dot"></div><div class="event-side"></div>
+</div>
+
+<div class="event cat-ghg" data-era="pre2010" data-cat="ghg">
+  <div class="event-side"></div><div class="event-gap"></div><div class="event-dot"></div>
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">2009</div>
+    <div class="event-title">2nd IMO GHG Study &amp; COP15 Copenhagen</div>
+    <div class="event-summary">Shipping at ~2.7% of global CO₂ (~870 Mt). Projections: 150–250% growth by 2050 without action. COP15 fails — pressure shifts fully to IMO.</div>
+    <div class="layer-2">The Second IMO GHG Study (2009) estimated international shipping emitted ~870 Mt CO₂ in 2007 (~2.7% of global). Projections showed 150–250% growth by 2050 without action. COP15 in Copenhagen failed to produce a binding global agreement, redirecting pressure entirely onto IMO to act independently.
+      <div class="event-tags"><span class="event-tag">2nd GHG Study</span><span class="event-tag">COP15</span><span class="event-tag">870 Mt CO₂</span></div>
+      <span class="ref-label">Ref: 2nd IMO GHG Study, 2009 | COP15 Copenhagen</span>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+</div>
+
+<!-- ERA 2 -->
+<div class="era-label"><span>First Mandatory Measures · 2011–2018</span></div>
+
+<div class="event cat-marpol" data-era="2010s" data-cat="marpol">
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">July 2011</div>
+    <div class="event-title">MEPC 62 — EEDI &amp; SEEMP Adopted</div>
+    <div class="event-summary">Chapter 4 added to MARPOL Annex VI — the first mandatory global GHG measures for international shipping. EEDI for new ships, SEEMP for all ships.</div>
+    <div class="layer-2"><b>EEDI (Energy Efficiency Design Index):</b> Technical measure for new ships. Progressive Phase 0→3 reductions in CO₂/tonne-mile. Applied to 7 ship types initially; required values tighten by 30% by 2030 vs Phase 0.<br><br>
+      <b>SEEMP (Ship Energy Efficiency Management Plan):</b> Operational measure — all ships ≥400 GT must develop and implement a SEEMP as part of their SMS. Not prescriptive on targets; focuses on systematic monitoring and improvement planning.
+      <div class="event-tags"><span class="event-tag">MEPC 62</span><span class="event-tag">EEDI</span><span class="event-tag">SEEMP</span><span class="event-tag">Chapter 4</span></div>
+      <span class="ref-label">Ref: MEPC 62, July 2011 | MARPOL Annex VI Reg. 20–22</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>Onboard — SEEMP:</b> The SEEMP must be kept onboard and available to PSC. It should include voyage planning practices, trim optimisation procedures, slow steaming policy, and waste heat recovery if fitted. SEEMP Part II (fuel oil data collection) and Part III (CII management plan) were added later.<br><br>
+          <b>MEO oral angle:</b> "What is Chapter 4 of MARPOL Annex VI?" — EEDI (Reg. 20–21), EEXI (Reg. 23), CII (Reg. 26–28), SEEMP (Reg. 22). Know all four regulations by number and what they cover.
+        </div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+  <div class="event-gap"></div><div class="event-dot"></div><div class="event-side"></div>
+</div>
+
+<div class="event cat-ghg" data-era="2010s" data-cat="ghg">
+  <div class="event-side"></div><div class="event-gap"></div><div class="event-dot"></div>
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">2014</div>
+    <div class="event-title">3rd IMO GHG Study</div>
+    <div class="event-summary">Shipping at ~2.2% of global CO₂ (~938 Mt, 2012 data). Confirmed DCS need for verified fuel data. Directly influenced MEPC 70's decision to mandate the IMO DCS in 2016.</div>
+    <div class="layer-2">The Third IMO GHG Study (2014) updated the emissions inventory: international shipping emitted ~938 Mt CO₂ in 2012 (~2.2% of global). Projections showed 50–250% growth by 2050 depending on economic and energy scenarios.<br><br>
+      Crucially, the study highlighted the absence of a verified fuel data collection system — an evidence gap that directly led to IMO mandating the DCS (Data Collection System) at MEPC 70 in 2016. Without the 3rd study, CII would have had no data foundation.
+      <div class="event-tags"><span class="event-tag">3rd GHG Study</span><span class="event-tag">938 Mt CO₂</span><span class="event-tag">DCS Catalyst</span></div>
+      <span class="ref-label">Ref: Third IMO GHG Study, 2014 | MEPC 67</span>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+</div>
+
+<div class="event cat-un" data-era="2010s" data-cat="un">
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">December 2015</div>
+    <div class="event-title">Paris Agreement — COP21</div>
+    <div class="event-summary">Global 1.5°C / 2°C climate target agreed by 196 parties. Created the political forcing environment that made MEPC 72's ambitious 2018 GHG Strategy politically possible.</div>
+    <div class="layer-2">The Paris Agreement (COP21, December 2015) committed parties to limiting global temperature rise to well below 2°C, pursuing 1.5°C. Shipping was not directly regulated under Paris — but the Agreement created the political environment in which IMO could no longer defer a meaningful GHG strategy. MEPC 72's 2018 Initial GHG Strategy was a direct political consequence.
+      <div class="event-tags"><span class="event-tag">COP21</span><span class="event-tag">Paris Agreement</span><span class="event-tag">1.5°C</span></div>
+      <span class="ref-label">Ref: Paris Agreement, UNFCCC, December 2015</span>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+  <div class="event-gap"></div><div class="event-dot"></div><div class="event-side"></div>
+</div>
+
+<div class="event cat-imo" data-era="2010s" data-cat="imo">
+  <div class="event-side"></div><div class="event-gap"></div><div class="event-dot"></div>
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">October 2016</div>
+    <div class="event-title">IMO DCS Mandated — MEPC 70</div>
+    <div class="event-summary">Mandatory fuel oil consumption reporting for all ships ≥5,000 GT from 2018. The verified data pipeline that made CII operationally possible — without DCS, there is no CII.</div>
+    <div class="layer-2">MEPC 70 (October 2016) adopted amendments to MARPOL Annex VI adding <b>Regulation 22A</b> — the IMO Data Collection System (DCS). Ships ≥5,000 GT must collect and report annual fuel oil consumption data from 1 March 2018.<br><br>
+      This is the invisible foundation of CII. Without standardised verified fuel data at fleet scale, the Carbon Intensity Indicator (adopted MEPC 76, 2021) cannot function. DCS is the data pipeline; CII is the output.
+      <div class="event-tags"><span class="event-tag">MEPC 70</span><span class="event-tag">IMO DCS</span><span class="event-tag">Reg 22A</span><span class="event-tag">Fuel Data</span></div>
+      <span class="ref-label">Ref: MEPC 70, October 2016 | MARPOL Annex VI Reg. 22A</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>Onboard — DCS:</b> The Chief Engineer is responsible for collecting and reporting fuel oil consumption data to the company's DCS system. Data is collected per voyage leg (fuel type, quantity, distance, hours underway). The SEEMP Part II documents the methodology. Data is verified by your flag state-approved verifier annually before submission to the IMO Ship Fuel Oil Consumption Database.<br><br>
+          <b>MEO oral angle:</b> Examiners ask "How does CII work?" — start with DCS. Annual fuel consumption data (verified via SEEMP Part II) feeds the CII calculation. The rating is then reported on the SEEMP Part III and sent to the Administration.
+        </div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+</div>
+
+<div class="event cat-ghg" data-era="2010s" data-cat="ghg">
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">April 2018</div>
+    <div class="event-title">MEPC 72 — Initial IMO GHG Strategy Adopted</div>
+    <div class="event-summary">Watershed session. IMO commits to ≥50% total GHG reduction by 2050 vs 2008, and phase-out ASAP. 2008 established as the universal baseline year for all subsequent instruments.</div>
+    <div class="layer-2">MEPC 72 (April 2018) adopted the Initial IMO Strategy — the first time IMO committed to absolute GHG reduction targets:<br><br>
+      <b>Carbon intensity:</b> ≥40% reduction by 2030 vs 2008; strive for 70% by 2050<br>
+      <b>Total GHG:</b> ≥50% reduction by 2050 vs 2008; pursue phase-out as soon as possible<br>
+      <b>2008 baseline:</b> Confirmed as the universal reference year for all subsequent instruments (EEXI, CII, NZF)<br><br>
+      The strategy mandated short-, mid-, and long-term measures and created the political architecture for everything that followed.
+      <div class="event-tags"><span class="event-tag">MEPC 72</span><span class="event-tag">Initial GHG Strategy</span><span class="event-tag">50% by 2050</span><span class="event-tag">2008 Baseline</span></div>
+      <span class="ref-label">Ref: MEPC 72, April 2018 | Initial IMO GHG Strategy</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>Why 2008 matters:</b> 2008 is the peak year in the shipping industry's emissions history — it was chosen precisely because it sets the most demanding baseline. When examiners ask why 2008 was selected, the answer is: it represents the highest pre-crisis emissions year and ensures targets are genuinely ambitious rather than starting from a depressed baseline.<br><br>
+          <b>MEO oral angle:</b> The Initial Strategy is the parent document for EEXI, CII, and the NZF. All three short-term and mid-term measures are responses to mandates established at MEPC 72.
+        </div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+  <div class="event-gap"></div><div class="event-dot"></div><div class="event-side"></div>
+</div>
+
+<!-- ERA 3 -->
+<div class="era-label"><span>Regulatory Build-Up · 2019–2022</span></div>
+
+<div class="event cat-marpol" data-era="2020s" data-cat="marpol">
+  <div class="event-side"></div><div class="event-gap"></div><div class="event-dot"></div>
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">1 January 2020</div>
+    <div class="event-title">Global Sulphur Cap — 0.50% ECA Limit</div>
+    <div class="event-summary">The most operationally significant MARPOL Annex VI change since entry into force. Global 0.50% S limit (from 3.5%) — required fleet-wide fuel management system changes overnight.</div>
+    <div class="layer-2">MARPOL Annex VI Regulation 14 reduced the global sulphur limit for fuel oil from 3.50% to <b>0.50% m/m</b> from 1 January 2020. ECA limit remained at 0.10% m/m.<br><br>
+      Compliance options: (1) switch to VLSFO/MGO, (2) fit an approved exhaust gas cleaning system (scrubber), (3) use LNG. This regulation directly accelerated investment in environmental compliance technologies — scrubbers, LNG propulsion, and VLSFO blending infrastructure — that the later decarbonisation framework builds upon.
+      <div class="event-tags"><span class="event-tag">Sulphur Cap</span><span class="event-tag">0.50% Global</span><span class="event-tag">MARPOL Reg. 14</span><span class="event-tag">VLSFO</span></div>
+      <span class="ref-label">Ref: MARPOL Annex VI Regulation 14 | MEPC 70</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>Onboard operational change:</b> Vessels without scrubbers must carry VLSFO (≤0.50% S). Fuel changeover procedures must be documented in the Oil Record Book and the ship's Fuel Oil Changeover Procedure Manual. The Fuel Oil Non-Availability Report (FONAR) procedure applies if compliant fuel is unavailable at a port.<br><br>
+          <b>Scrubber operation:</b> Open-loop scrubbers are prohibited in certain waters (Baltic, North Sea, some port state waters). The Chief Engineer must know the ship's scrubber compliance map and ECA entry/exit procedures.<br><br>
+          <b>MEO oral angle:</b> Know Regulation 14 (sulphur), Regulation 13 (NOx), and Chapter 4 (GHG) as distinct regulatory structures within MARPOL Annex VI. Examiners frequently test whether candidates can differentiate between them.
+        </div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+</div>
+
+<div class="event cat-ghg" data-era="2020s" data-cat="ghg">
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">2020</div>
+    <div class="event-title">4th IMO GHG Study (MEPC 75)</div>
+    <div class="event-summary">Shipping at ~2.89% of global CO₂ (~1,076 Mt, 2018 data). 2008 baseline confirmed at 93.3 gCO₂eq/MJ — this is the GFI reference value against which all NZF compliance is measured.</div>
+    <div class="layer-2">The Fourth IMO GHG Study (MEPC 75, 2020): international shipping emitted ~1,076 Mt CO₂ in 2018 (~2.89% of global). Without action, projections showed 90–130% growth by 2050 above 2008 levels.<br><br>
+      Critically, the study confirmed the 2008 reference value for GFI calculations as <b>93.3 gCO₂eq/MJ</b> (well-to-wake basis) — the figure against which all Net-Zero Framework compliance is measured.
+      <div class="event-tags"><span class="event-tag">MEPC 75</span><span class="event-tag">4th GHG Study</span><span class="event-tag">93.3 gCO₂eq/MJ</span></div>
+      <span class="ref-label">Ref: 4th IMO GHG Study, MEPC 75, 2020</span>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+  <div class="event-gap"></div><div class="event-dot"></div><div class="event-side"></div>
+</div>
+
+<div class="event cat-marpol" data-era="2020s" data-cat="marpol">
+  <div class="event-side"></div><div class="event-gap"></div><div class="event-dot"></div>
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">June 2021</div>
+    <div class="event-title">MEPC 76 — EEXI, CII &amp; SEEMP III Adopted</div>
+    <div class="event-summary">The short-term measures package. EEXI (one-off technical threshold for existing ships), CII (annual A–E operational rating), SEEMP Part III (verified CII plan). Mandatory from 1 January 2023.</div>
+    <div class="layer-2"><b>EEXI (Energy Efficiency Existing Ship Index — Reg. 23):</b> One-off compliance for existing ships ≥400 GT. Engine Power Limitation (EPL) is the primary remedy. Unlike CII, EEXI is fixed at point of compliance — it does not change annually.<br><br>
+      <b>CII (Carbon Intensity Indicator — Reg. 26–28):</b> Annual operational rating (A–E) for ships ≥5,000 GT. Ships rated D/E for 3+ consecutive years must submit a corrective action plan to their Administration.<br><br>
+      <b>SEEMP Part III (Reg. 26):</b> Verified CII management plan required for ships ≥5,000 GT. All entered into force: 1 November 2022. Mandatory compliance: 1 January 2023.
+      <div class="event-tags"><span class="event-tag">MEPC 76</span><span class="event-tag">EEXI</span><span class="event-tag">CII</span><span class="event-tag">SEEMP III</span></div>
+      <span class="ref-label">Ref: MEPC 76, June 2021 | MARPOL Annex VI Reg. 23–28</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>Onboard — EEXI:</b> If your vessel was EPL-fitted, the shaft power limiter is a physical seal on the fuel rack or governor — cannot be removed without flag state approval. Know where it is, what its documented limit is, and which certificate records it (IAPP Certificate, Supplement).<br><br>
+          <b>Onboard — CII:</b> Every tonne of fuel oil consumed is a data point in your annual rating. Slow steaming, trim optimisation, auxiliary load management, and waste heat recovery directly affect the A–E score. The Chief Engineer should understand the ship's CII trajectory and what operational levers move it.<br><br>
+          <b>SEEMP Part III:</b> Kept onboard — PSC can request it. It must include the ship's annual CII required value, actual CII, rating, and corrective action plan if rated D or E.<br><br>
+          <b>MEO oral angle:</b> "Difference between EEXI and CII?" — EEXI is a one-time design/technical threshold (like EEDI for existing ships); CII is a continuous operational performance metric reviewed annually. Both under MARPOL Annex VI Chapter 4.
+        </div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+</div>
+
+<div class="event cat-marpol" data-era="2020s" data-cat="marpol">
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">1 January 2023</div>
+    <div class="event-title">First CII Rating Year Begins</div>
+    <div class="event-summary">First year of mandatory CII operational data collection for ships ≥5,000 GT. The fleet's first encounter with annual carbon intensity scoring as a compliance obligation.</div>
+    <div class="layer-2">EEXI, CII, and SEEMP Part III entered mandatory compliance on 1 January 2023. This was the first year shipping companies collected annual CII operational data with the knowledge that ratings would be formally reported and recorded.<br><br>
+      First EEXI certification was required at the first IAPP Certificate annual or renewal survey on or after 1 January 2023. CII ratings from 2023 data were reported in 2024 — the first year D/E ratings could trigger corrective action requirements.
+      <div class="event-tags"><span class="event-tag">CII Year 1</span><span class="event-tag">EEXI Compliance</span><span class="event-tag">SEEMP III</span></div>
+      <span class="ref-label">Ref: MARPOL Annex VI Chapter 4 | MEPC.1/Circ.896</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>Practical consequence:</b> From 2023, CII rating is a commercial factor — charterers, financiers, and P&I clubs increasingly reference CII rating in contracts and cover terms. A persistent D/E rating creates commercial liability beyond regulatory non-compliance.<br><br>
+          <b>What the Chief Engineer controls:</b> Fuel type selection (GHG factor per fuel), speed (cubic relationship to fuel consumption), trim (direct drag coefficient), waste heat recovery utilisation, and auxiliary load management. All feed directly into the annual CII calculation.<br><br>
+          <b>MEO oral angle:</b> CII reduction factors tighten each year through to 2030. The required CII value becomes more demanding annually — a ship rated B today may be rated C or D in two years without operational improvement.
+        </div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+  <div class="event-gap"></div><div class="event-dot"></div><div class="event-side"></div>
+</div>
+
+<div class="event cat-eu" data-era="2020s" data-cat="eu">
+  <div class="event-side"></div><div class="event-gap"></div><div class="event-dot"></div>
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">2022–2023</div>
+    <div class="event-title">EU ETS Extended to Maritime &amp; FuelEU Maritime Adopted</div>
+    <div class="event-summary">EU creates the first hard financial penalty mechanism for shipping GHG on European trades. Phase-in: 40% (2024) → 70% (2025) → 100% coverage 2026, surrendered by April/September 2027.</div>
+    <div class="layer-2"><b>EU ETS (Emissions Trading System):</b> Extended to maritime. Coverage phase-in: 40% (2024) → 70% (2025) → 100% (2026). <b>Key distinction:</b> 2026 is the first year of 100% emissions coverage — the physical surrender deadline for 2026 allowances falls in <b>April/September 2027</b>. Ships on EU trades must purchase and surrender EU Allowances (EUAs).<br><br>
+      <b>FuelEU Maritime (EU Reg 2023/1805):</b> In force 1 January 2025. Requires vessels ≥5,000 GT on EU routes to reduce GHG intensity vs <b>2020 baseline</b> on a Well-to-Wake basis. Reduction pathway: −2% (2025) → −6% (2030) → −14.5% (2035) → −80% (2050). Prevents gaming via nominally zero-carbon fuels with carbon-intensive upstream production.
+      <div class="event-tags"><span class="event-tag">EU ETS</span><span class="event-tag">FuelEU Maritime</span><span class="event-tag">WTW</span><span class="event-tag">2020 Baseline</span></div>
+      <span class="ref-label">Ref: EU ETS Directive (amended) | EU Reg 2023/1805 (FuelEU Maritime)</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>Onboard — EU ETS:</b> The shipping company (typically the shipowner or bareboat charterer) is responsible for monitoring, reporting, and surrendering EUAs. The Chief Engineer's role is accurate fuel consumption recording — the same data feeds both IMO DCS/CII and EU MRV (Monitoring, Reporting, Verification). Errors in fuel logs have dual regulatory consequences.<br><br>
+          <b>Onboard — FuelEU:</b> FuelEU evaluates the full Well-to-Wake GHG intensity of every fuel used. This means the fuel's production pathway matters — LNG from conventional sources has a different WTW value than bio-LNG. Bunker delivery notes and fuel certificates must capture fuel type with upstream GHG data.<br><br>
+          <b>MEO oral angle:</b> Examiners increasingly ask about the EU instruments as well as IMO instruments. Key distinction: EU ETS is an economic (financial) mechanism; FuelEU is a technical (intensity) standard. Both apply simultaneously to EU-trading vessels.
+        </div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+</div>
+
+<!-- ERA 4 -->
+<div class="era-label"><span>2023 GHG Strategy &amp; Net-Zero Path · 2023–2024</span></div>
+
+<div class="event cat-ghg" data-era="2020s" data-cat="ghg">
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">July 2023</div>
+    <div class="event-title">MEPC 80 — Revised 2023 IMO GHG Strategy</div>
+    <div class="event-summary">Net-zero by or around 2050 confirmed. Checkpoints: ≥20% total GHG reduction by 2030 (striving 30%), ≥70% by 2040 (striving 80%). ZNZ fuels ≥5% of energy by 2030.</div>
+    <div class="layer-2">MEPC 80 (July 2023) adopted the Revised IMO 2023 Strategy:<br><br>
+      <b>2030:</b> ≥20% total GHG vs 2008, striving 30%<br>
+      <b>2040:</b> ≥70% reduction, striving 80%<br>
+      <b>2050:</b> Net-zero by or around (close to) 2050<br>
+      <b>ZNZ uptake:</b> ≥5% of energy (striving 10%) from zero/near-zero GHG fuels by 2030<br><br>
+      Mid-term measures mandated: GFI standard (technical) + economic (carbon pricing) mechanism.
+      <div class="event-tags"><span class="event-tag">MEPC 80</span><span class="event-tag">2023 GHG Strategy</span><span class="event-tag">Net-Zero 2050</span><span class="event-tag">GFI</span></div>
+      <span class="ref-label">Ref: IMO 2023 GHG Strategy | MEPC 80/17/Add.1</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>MEO oral angle:</b> The 2023 Strategy replaced the 2018 Initial Strategy. Key upgrade: the 2018 strategy said ≥50% reduction by 2050; the 2023 strategy says net-zero by or around 2050 — a materially more ambitious target. Examiners may ask you to compare them. The 2023 strategy also introduced the ZNZ uptake target — something entirely absent from the 2018 version.</div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+  <div class="event-gap"></div><div class="event-dot"></div><div class="event-side"></div>
+</div>
+
+<div class="event cat-imo" data-era="2020s" data-cat="imo">
+  <div class="event-side"></div><div class="event-gap"></div><div class="event-dot"></div>
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">2024</div>
+    <div class="event-title">MEPC 81 &amp; 82 — Mid-Term Measure Legal Text Development</div>
+    <div class="event-summary">Two instruments confirmed: GFI standard + carbon pricing. GFI reference locked at 93.3 gCO₂eq/MJ. Legal text drafted for MARPOL Annex VI amendment.</div>
+    <div class="layer-2">MEPC 81 (March 2024) and MEPC 82 (October 2024) confirmed: (1) GFI standard (technical), (2) carbon pricing mechanism (economic). Scope: all ships ≥5,000 GT (~85% of shipping CO₂). GFI reference: 93.3 gCO₂eq/MJ (2008 baseline, WTW). ISWG-GHG groups drafted MARPOL Annex VI Chapter 5 legal text.
+      <div class="event-tags"><span class="event-tag">MEPC 81</span><span class="event-tag">MEPC 82</span><span class="event-tag">Legal Text</span><span class="event-tag">Carbon Pricing</span></div>
+      <span class="ref-label">Ref: MEPC 81 (March 2024) | MEPC 82 (October 2024)</span>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+</div>
+
+<!-- ERA 5 -->
+<div class="era-label"><span>IMO Net-Zero Framework · 2025–2026</span></div>
+
+<div class="event cat-nzf" data-era="2020s" data-cat="nzf">
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">April 2025</div>
+    <div class="event-title">MEPC 83 — Net-Zero Framework Approved (63–16 Vote)</div>
+    <div class="event-summary">World's first instrument combining mandatory emissions limits AND GHG pricing across an entire industry sector. Approved 63-16. GFI reference 93.3 gCO₂eq/MJ. ZNZ ≤19.0 gCO₂eq/MJ for 2028–2034.</div>
+    <div class="layer-2">A landmark session. MEPC 83 (April 2025) approved the draft legal text for the IMO Net-Zero Framework (NZF) — new <b>Chapter 5 of MARPOL Annex VI</b> — by a <b>63-16 majority vote</b>:<br><br>
+      <b>GFI Standard:</b> Phase 1 (2028–2034): Base ~89.6 gCO₂eq/MJ (−4% from 93.3) | ZNZ reward threshold: ≤19.0 gCO₂eq/MJ<br>
+      <b>From 2035:</b> Base tightens; ZNZ threshold drops to 14.0 gCO₂eq/MJ<br>
+      <b>2040:</b> Base target = 65% reduction (~32.7 gCO₂eq/MJ)<br><br>
+      <b>Economic Mechanism:</b> Ships below base threshold acquire Remedial Units (pay into IMO fund); ZNZ ships receive financial rewards.
+      <div class="event-tags"><span class="event-tag">MEPC 83</span><span class="event-tag">NZF</span><span class="event-tag">Chapter 5</span><span class="event-tag">GFI Standard</span><span class="event-tag">63-16 Vote</span></div>
+      <span class="ref-label">Ref: MEPC 83, April 2025 | MARPOL Annex VI Draft Chapter 5</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>What 93.3 gCO₂eq/MJ means in practice:</b> This is the WTW GHG intensity of the average 2008 marine fuel mix. HFO today sits at approximately 89–91 gCO₂eq/MJ (TTW basis) — above the base threshold even before WTW uplift from upstream production. No conventional fossil fuel will meet the ZNZ threshold of 19.0 gCO₂eq/MJ. Green ammonia and green hydrogen can, subject to certified upstream pathways.<br><br>
+          <b>MEO oral angle:</b> The NZF is the mid-term measure called for by both the 2018 and 2023 strategies. It sits in MARPOL Annex VI Chapter 5 (separate from Chapter 4 which houses EEDI/EEXI/CII). Know the chapter structure.
+        </div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+  <div class="event-gap"></div><div class="event-dot"></div><div class="event-side"></div>
+</div>
+
+<div class="event cat-nzf" data-era="2020s" data-cat="nzf">
+  <div class="event-side"></div><div class="event-gap"></div><div class="event-dot"></div>
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="card-badges"><span class="badge badge-verify">Pending IMO confirmation</span></div>
+    <div class="event-year">October 2025</div>
+    <div class="event-title">MEPC/ES.2 — Extraordinary Session: Adoption Not Concluded</div>
+    <div class="event-summary">Extraordinary session convened to formally adopt NZF amendments to MARPOL Annex VI. Concluded without adoption — text returned to working groups for refinement, not a simple procedural adjournment.</div>
+    <div class="layer-2">The Extraordinary Session of MEPC (MEPC/ES.2) was convened specifically to formally adopt the Net-Zero Framework as new Chapter 5 of MARPOL Annex VI. The session concluded <b>without formal adoption</b> — the text was <b>returned to working groups for refinement</b> due to unresolved disagreements, primarily around the design of the economic mechanism and Remedial Unit revenue redistribution.<br><br>
+      <b>Practical impact:</b> Earliest possible entry into force shifts from March 2027 to potentially March 2028. The 1 January 2028 GFI monitoring start date remains the commercial deadline — but industry planning faces continued uncertainty.<br><br>
+      <b>Source note:</b> This event is reported by DNV, LR, and ClassNK MEPC summary documents. Pending publication of an official IMO circular. Marked for verification.
+      <div class="event-tags"><span class="event-tag">MEPC/ES.2</span><span class="event-tag">NZF Delayed</span><span class="event-tag">Text to WG</span></div>
+      <span class="ref-label">Ref: DNV/LR/ClassNK MEPC/ES.2 Reports — IMO circular pending</span>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+</div>
+
+<div class="event cat-nzf" data-era="2020s" data-cat="nzf">
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">April 2026</div>
+    <div class="event-title">MEPC 84 — NZF Guidelines, 5th GHG Study &amp; NE Atlantic ECA</div>
+    <div class="event-summary">NZF implementation guidelines reviewed. 5th GHG Study ToR finalised — significant: will recalculate shipping's share, assess EEXI/CII effectiveness, and inform 2033–2035 NZF reviews. NE Atlantic ECA adopted.</div>
+    <div class="layer-2">MEPC 84 (April 2026) approved several items:<br><br>
+      <b>NZF Guidelines:</b> Mid-term measure guidelines reviewed; revised work plan approved.<br>
+      <b>OCCS:</b> Revised work plan; Correspondence Group re-established to develop on-board carbon capture methodology.<br>
+      <b>5th IMO GHG Study:</b> Terms of Reference finalised. Study commences 2026, to be completed by 2028. This study will: (1) recalculate shipping's current share of global emissions, (2) assess whether EEXI and CII have reduced carbon intensity as intended, (3) provide the emissions data needed to inform GFI tightening in the 2033/2035 NZF 5-year review, and (4) support the 2040 checkpoint assessment.<br>
+      <b>NE Atlantic ECA:</b> New Emission Control Area covering Greenland waters — extends SOx/NOx controls to Arctic trade routes.<br>
+      <b>ISWG-GHG 22 &amp; 23:</b> Two intersessional sessions scheduled before MEPC 85 to progress NZF legal text.
+      <div class="event-tags"><span class="event-tag">MEPC 84</span><span class="event-tag">5th GHG Study</span><span class="event-tag">OCCS</span><span class="event-tag">NE Atlantic ECA</span></div>
+      <span class="ref-label">Ref: MEPC 84, April 2026 | ClassNK/LR/DNV MEPC 84 Reports</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>Why the 5th GHG Study matters to you onboard:</b> Its findings will directly determine how aggressively GFI thresholds tighten from 2035 onward. If the study shows EEXI/CII have delivered meaningful carbon intensity reductions, the 5-year NZF review may set more achievable 2035 targets. If they haven't, expect tighter thresholds.<br><br>
+          <b>OCCS relevance:</b> On-board carbon capture systems — if the IMO methodology is approved — would allow a vessel to claim credit for CO₂ captured and stored. This could change CII calculations and GFI reporting. Watch for MEPC circulars on OCCS methodology post-MEPC 84.
+        </div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+  <div class="event-gap"></div><div class="event-dot"></div><div class="event-side"></div>
+</div>
+
+<!-- ERA 6 -->
+<div class="era-label"><span>Future Checkpoints &amp; Targets · 2027–2050</span></div>
+
+<div class="event cat-future" data-era="future" data-cat="future">
+  <div class="event-side"></div><div class="event-gap"></div><div class="event-dot"></div>
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="card-badges"><span class="badge badge-forecast">Forecast / Expected</span></div>
+    <div class="event-year">2026 (Expected)</div>
+    <div class="event-title">MEPC/ES.3 — Second Attempt at NZF Adoption</div>
+    <div class="event-summary">A second extraordinary MEPC session is expected to attempt formal NZF adoption. Not yet officially scheduled — conditional on ISWG-GHG 22 &amp; 23 resolving outstanding text issues.</div>
+    <div class="layer-2">Following the October 2025 adjournment, a second extraordinary MEPC session (MEPC/ES.3) is expected in 2026. ISWG-GHG 22 and 23 (both scheduled before MEPC 85) will attempt to resolve the outstanding disagreements on the economic mechanism before any adoption session is convened.<br><br>
+      <b>This is a scenario-based outlook, not a confirmed IMO scheduled event.</b> If adopted in 2026, entry into force via the tacit acceptance procedure would be 2027–2028. If not resolved, the 1 January 2028 GFI monitoring start date may be at risk.
+      <div class="event-tags"><span class="event-tag">MEPC/ES.3</span><span class="event-tag">NZF Adoption</span><span class="event-tag">Conditional</span></div>
+      <span class="ref-label">Ref: MEPC 84 Work Plan | ISWG-GHG 22–23 schedule</span>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+</div>
+
+<div class="event cat-future" data-era="future" data-cat="future">
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">1 January 2028</div>
+    <div class="event-title">GFI Phase 1 Compliance Begins (2028–2034)</div>
+    <div class="event-summary">Reference: 93.3 gCO₂eq/MJ. Base threshold ~89.6. ZNZ threshold ≤19.0. Ships below base threshold acquire Remedial Units. ZNZ ships receive financial rewards.</div>
+    <div class="layer-2">Ships ≥5,000 GT begin collecting annual GFI data for compliance reporting.<br><br>
+      Base threshold: ~89.6 gCO₂eq/MJ (−4% from 93.3 ref.) | ZNZ threshold: ≤19.0 gCO₂eq/MJ<br>
+      No conventional fossil fuel qualifies for the ZNZ reward tier — including low-methane-slip LNG. Green hydrogen, green ammonia, advanced biofuels, and e-methanol can qualify subject to certified WTW pathways.
+      <div class="event-tags"><span class="event-tag">GFI Phase 1</span><span class="event-tag">2028 Compliance</span><span class="event-tag">ZNZ 19.0</span><span class="event-tag">Remedial Units</span></div>
+      <span class="ref-label">Ref: IMO NZF, MEPC 83 | Bureau Veritas NZF Analysis</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>Commercial consequence for fleet operators:</b> The Remedial Unit cost is effectively a carbon tax on conventional fuel use above the base threshold. Fleet operators will model this cost against the capital cost of alternative fuel conversions. The Chief Engineer's fuel consumption data directly informs that commercial decision.<br><br>
+          <b>MEO oral angle:</b> When asked about alternative fuels for GFI compliance, structure your answer: (1) WTW accounting basis — upstream production matters; (2) ZNZ threshold is 19.0 gCO₂eq/MJ 2028–2034, drops to 14.0 from 2035; (3) no fossil fuel qualifies; (4) green NH₃ and green H₂ are the primary candidates.
+        </div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+  <div class="event-gap"></div><div class="event-dot"></div><div class="event-side"></div>
+</div>
+
+<div class="event cat-future" data-era="future" data-cat="future">
+  <div class="event-side"></div><div class="event-gap"></div><div class="event-dot"></div>
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">2030</div>
+    <div class="event-title">2030 Indicative Checkpoint</div>
+    <div class="event-summary">Total GHG: −20% vs 2008 (striving −30%). Carbon intensity: −40%. ZNZ fuels ≥5% of energy (striving 10%). Not a hard legal limit — an indicative milestone under the 2023 GHG Strategy.</div>
+    <div class="layer-2">2023 IMO GHG Strategy checkpoint: ≥20% total GHG vs 2008 (striving 30%) | Carbon intensity ≥40% improvement | ZNZ fuels ≥5% of energy (striving 10%).<br><br>
+      This is not a hard legal limit with individual ship sanctions. It is a fleet-level strategic checkpoint. CII annual reduction factors continue tightening under MARPOL Annex VI through this period.
+      <div class="event-tags"><span class="event-tag">2030 Checkpoint</span><span class="event-tag">-20% GHG</span><span class="event-tag">ZNZ 5%</span></div>
+      <span class="ref-label">Ref: 2023 IMO GHG Strategy | MEPC 80</span>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+</div>
+
+<div class="event cat-future" data-era="future" data-cat="future">
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">2035</div>
+    <div class="event-title">GFI Phase 2 — ZNZ Threshold Tightens</div>
+    <div class="event-summary">ZNZ threshold drops from 19.0 → 14.0 gCO₂eq/MJ. Base tier tightens further. 5-year NZF review (~2033) may adjust based on fuel availability and technology maturity.</div>
+    <div class="layer-2">From 2035, GFI thresholds tighten significantly: ZNZ drops from 19.0 → 14.0 gCO₂eq/MJ. Practical compliance will require green hydrogen, green ammonia, e-methanol, or advanced biofuels. The first 5-year NZF review (~2033) may revise these thresholds.
+      <div class="event-tags"><span class="event-tag">GFI Phase 2</span><span class="event-tag">ZNZ 14.0</span><span class="event-tag">H₂ / NH₃</span></div>
+      <span class="ref-label">Ref: IMO NZF, MEPC 83</span>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+  <div class="event-gap"></div><div class="event-dot"></div><div class="event-side"></div>
+</div>
+
+<div class="event cat-future" data-era="future" data-cat="future">
+  <div class="event-side"></div><div class="event-gap"></div><div class="event-dot"></div>
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">2040</div>
+    <div class="event-title">2040 Indicative Checkpoint</div>
+    <div class="event-summary">Total GHG: −70% vs 2008 (striving −80%). GFI base target: −65% from reference (~32.7 gCO₂eq/MJ). Near-complete elimination of conventional marine fuels required at fleet scale.</div>
+    <div class="layer-2">2023 IMO GHG Strategy: ≥70% total GHG reduction vs 2008, striving 80%. GFI base target for 2040: 65% reduction from 93.3 gCO₂eq/MJ reference (~32.7 gCO₂eq/MJ). Near-complete elimination of HFO and conventional marine fuels from the global fleet required.
+      <div class="event-tags"><span class="event-tag">2040 Checkpoint</span><span class="event-tag">-70% GHG</span><span class="event-tag">GFI 65%</span></div>
+      <span class="ref-label">Ref: 2023 IMO GHG Strategy | IMO NZF | MEPC 80/83</span>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+</div>
+
+<div class="event cat-future" data-era="future" data-cat="future">
+  <div class="event-side"><div class="event-card" onclick="toggleCard(this)">
+    <div class="event-year">By/Around 2050</div>
+    <div class="event-title">IMO Net-Zero GHG Goal</div>
+    <div class="event-summary">Net-zero GHG from international shipping — well-to-wake basis. "Close to 2050" allows for fuel transition realities. OCCS may close the final gap. NZF reviewed every 5 years.</div>
+    <div class="layer-2">Net-zero GHG emissions from international shipping by or around (close to) 2050 — well-to-wake accounting. All fleet segments covered. On-board Carbon Capture and Storage (OCCS) may close the final gap — methodology under development. NZF reviewed every 5 years to adjust targets based on fuel availability and market conditions.
+      <div class="event-tags"><span class="event-tag">Net-Zero 2050</span><span class="event-tag">W2W</span><span class="event-tag">5-yr Review</span><span class="event-tag">OCCS</span></div>
+      <span class="ref-label">Ref: 2023 IMO GHG Strategy | MEPC 80 | IMO NZF 5-year review</span>
+      <button class="l3-btn" onclick="toggleL3(this,event)"><span>Marine Engineer Notes</span><span class="arr"></span></button>
+      <div class="layer-3"><div class="l3-eyebrow">Marine Engineer Notes</div>
+        <div class="layer-3-body"><b>MEO oral perspective:</b> "Net-zero by or around 2050" is deliberately qualified — the phrase "close to" was inserted to acknowledge that full net-zero may not be technically achievable for all ship types by exactly 2050. Carbon capture (OCCS) is being developed precisely for this residual gap.<br><br>
+          <b>Career context:</b> Engineers sitting MEO Class 1 orals today will be Senior Superintendents and Fleet Technical Managers when the 2040 checkpoint is assessed. The regulatory sequence — EEDI → DCS → CII → EEXI → NZF → Net-Zero — is the entire arc of your professional career in the industry.
+        </div>
+      </div>
+    </div>
+    <span class="expand-hint">Click to expand</span>
+  </div></div>
+  <div class="event-gap"></div><div class="event-dot"></div><div class="event-side"></div>
+</div>
+
+</div>
+
+<div class="attr-box">
+  <div class="attr-inner">
+    <b>About this timeline:</b> Compiled by Marine Intelligence Weekly from IMO meeting summaries, MARPOL Annex VI texts, and class society MEPC reports. EU Instruments (EU ETS, FuelEU) are parallel regional measures — not IMO instruments. Future Checkpoints are indicative targets from the 2023 IMO GHG Strategy and NZF, not yet legally binding milestones unless adopted as MARPOL amendments. Events marked "Pending IMO confirmation" are sourced from secondary class society summaries; primary IMO circulars are pending. Events marked "Forecast / Expected" are scenario-based outlooks, not officially scheduled sessions. Corrections: <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
+  </div>
+</div>
+
+<div class="crosslink">
+  <div class="crosslink-inner">
+    <a href="https://marineintelligenceweekly.com">Marine Intelligence Weekly</a>
+    <span class="crosslink-div">|</span>
+    <a href="https://marineintelligenceweekly.com/timeline.html">AI in Maritime Timeline</a>
+    <span class="crosslink-div">|</span>
+    <a href="https://marineintelligenceweekly.com/index22.html">Latest Issue — MIW #22</a>
+    <span class="crosslink-div">|</span>
+    <a href="https://marineintelligenceweekly.com/assets/MIW_Vol1_ReferenceDoc.pdf">Vol. 1 Reference PDF</a>
+  </div>
+</div>
+
+<footer>
+  <p style="margin-bottom:0.4rem;">Marine Intelligence Weekly · Independent editorial · <a href="https://marineintelligenceweekly.com">marineintelligenceweekly.com</a></p>
+  <p>Nixon Antony, Second Engineer, Maersk A/S · <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a></p>
+</footer>
+
+<a href="#" id="rtt" aria-label="Return to top">↑</a>
+
+<script>
+function toggleCard(card){
+  card.classList.toggle('open');
+}
+
+function toggleL3(btn, e){
+  e.stopPropagation();
+  var panel = btn.nextElementSibling;
+  if(document.body.classList.contains('eng-mode')) return;
+  panel.classList.toggle('show');
+  btn.querySelector('.arr').style.transform = panel.classList.contains('show') ? 'rotate(180deg)' : '';
+}
+
+function toggleEngMode(){
+  document.body.classList.toggle('eng-mode');
+  var btn = document.getElementById('modeBtn');
+  btn.classList.toggle('active');
+  if(document.body.classList.contains('eng-mode')){
+    document.querySelectorAll('.event-card').forEach(c => c.classList.add('open'));
+  }
+}
+
+document.querySelectorAll('.legend-item').forEach(item => {
+  item.addEventListener('click', () => { item.classList.toggle('dimmed'); applyFilters(); });
+});
+
+document.querySelectorAll('.era-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.era-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active'); applyFilters();
+  });
+});
+
+document.getElementById('searchInput').addEventListener('input', applyFilters);
+
+function applyFilters(){
+  var era = document.querySelector('.era-btn.active').dataset.filter;
+  var dimmed = Array.from(document.querySelectorAll('.legend-item.dimmed')).map(i => i.dataset.cat);
+  var q = document.getElementById('searchInput').value.toLowerCase().trim();
+  var visible = 0;
+  document.querySelectorAll('.event').forEach(ev => {
+    var ok = (era==='all' || ev.dataset.era===era) && !dimmed.includes(ev.dataset.cat) && (!q || ev.textContent.toLowerCase().includes(q));
+    ev.classList.toggle('hidden', !ok);
+    if(ok) visible++;
+  });
+  document.getElementById('no-results').style.display = visible===0 ? 'block' : 'none';
+}
+
+var rtt = document.getElementById('rtt');
+window.addEventListener('scroll', () => rtt.classList.toggle('visible', window.scrollY > 400));
+rtt.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); });
+</script>
+</body>
+</html>
