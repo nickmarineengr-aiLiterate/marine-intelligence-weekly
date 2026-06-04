@@ -451,9 +451,105 @@ body {
 }
 
 /* ──────────────────────────────────────
+   SPECIAL PILL VARIANTS (editorial corrections)
+────────────────────────────────────── */
+.pill-regulatory {
+  border-color: rgba(139,92,246,0.35);
+  background: rgba(139,92,246,0.07);
+  color: #5b21b6;
+}
+.pill-regulatory:hover {
+  border-color: #7c3aed;
+  color: #4c1d95;
+  background: rgba(139,92,246,0.14);
+}
+.reg-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.46rem;
+  background: #7c3aed;
+  color: white;
+  border-radius: 3px;
+  padding: 0.05rem 0.3rem;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.pill-acquired {
+  border-color: rgba(100,116,139,0.35);
+  background: rgba(100,116,139,0.07);
+  color: var(--slate);
+  text-decoration: line-through;
+  text-decoration-color: rgba(100,116,139,0.5);
+}
+.pill-acquired:hover {
+  border-color: var(--slate);
+  color: var(--navy);
+  text-decoration: none;
+  background: rgba(100,116,139,0.12);
+}
+.acq-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.44rem;
+  background: var(--slate);
+  color: white;
+  border-radius: 3px;
+  padding: 0.05rem 0.3rem;
+  letter-spacing: 0.03em;
+  font-weight: 600;
+  text-decoration: none;
+}
+.pill-assoc {
+  border-color: rgba(16,185,129,0.35);
+  background: rgba(16,185,129,0.07);
+  color: #065f46;
+}
+.pill-assoc:hover {
+  border-color: #059669;
+  color: #064e3b;
+  background: rgba(16,185,129,0.14);
+}
+.assoc-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.46rem;
+  background: #059669;
+  color: white;
+  border-radius: 3px;
+  padding: 0.05rem 0.3rem;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+/* ──────────────────────────────────────
+   INDIA FILTER MODE
+────────────────────────────────────── */
+body.filter-india-mode .pill:not(.india-pill) {
+  opacity: 0.12;
+  pointer-events: none;
+  filter: grayscale(100%);
+}
+body.filter-india-mode .pill.pill-regulatory:not(.india-pill),
+body.filter-india-mode .pill.pill-acquired:not(.india-pill),
+body.filter-india-mode .pill.pill-assoc:not(.india-pill) {
+  opacity: 0.12;
+  pointer-events: none;
+  filter: grayscale(100%);
+}
+body.filter-india-mode .india-spotlight {
+  box-shadow: 0 0 0 2px var(--gold), 0 8px 32px rgba(201,168,76,0.18);
+}
+
+/* ──────────────────────────────────────
+   LANE HEADER HOVER
+────────────────────────────────────── */
+.lane-header:hover {
+  filter: brightness(1.04);
+}
+.lane-header-commercial:hover { border-bottom-color: var(--lane-commercial); box-shadow: inset 0 -2px 0 var(--lane-commercial); }
+.lane-header-vessel:hover      { border-bottom-color: var(--lane-vessel);     box-shadow: inset 0 -2px 0 var(--lane-vessel); }
+.lane-header-intel:hover       { border-bottom-color: var(--lane-intel);      box-shadow: inset 0 -2px 0 var(--lane-intel); }
+
+/* ──────────────────────────────────────
    FOOTER
 ────────────────────────────────────── */
-.page-footer {
   background: var(--navy);
   border-top: 2px solid var(--teal);
   padding: 1.8rem 2rem;
@@ -510,7 +606,7 @@ body {
       <span class="hero-stat-l">Swim Lanes</span>
     </div>
     <div class="hero-stat">
-      <span class="hero-stat-n">18</span>
+      <span class="hero-stat-n">19</span>
       <span class="hero-stat-l">Segments</span>
     </div>
     <div class="hero-stat">
@@ -617,12 +713,12 @@ body {
 ═══════════════════════════════════════ -->
 <div class="swim-lane" data-lane="commercial">
   <div class="lane-header lane-header-commercial" onclick="toggleLane(this)">
-    <div class="lane-icon lane-icon-commercial">🏢</div>
+    <div class="lane-icon lane-icon-commercial"><span aria-hidden="true">🏢</span></div>
     <div>
       <div class="lane-label">Commercial Operations</div>
       <div class="lane-desc">Pre-fixture, chartering, voyage management, demurrage &amp; post-fixture</div>
     </div>
-    <div class="lane-meta">Lane 1 of 3<br><span>6 segments</span></div>
+    <div class="lane-meta">Lane 1 of 3<br><span>7 segments</span></div>
     <span class="lane-toggle">▲</span>
   </div>
   <div class="lane-body">
@@ -635,8 +731,8 @@ body {
       <div class="seg-companies">
         <a href="https://www.clarksons.com" class="pill" target="_blank" rel="noopener">Clarksons</a>
         <a href="https://www.balticexchange.com" class="pill" target="_blank" rel="noopener">Baltic Exchange</a>
-        <a href="https://www.q88.com" class="pill" target="_blank" rel="noopener">Q88</a>
-        <a href="https://www.daanaos.com" class="pill" target="_blank" rel="noopener">Danaos</a>
+        <a href="https://www.veson.com" class="pill pill-acquired" target="_blank" rel="noopener" title="Q88 — acquired by Veson Nautical, May 2022">Q88 <span class="acq-badge">→ Veson 2022</span></a>
+        <a href="https://www.danaos.gr" class="pill" target="_blank" rel="noopener" title="Danaos Management Consultants — maritime software &amp; IT (not Danaos Corporation, the shipowner)">Danaos (MCo)</a>
         <a href="https://www.veson.com" class="pill" target="_blank" rel="noopener">Veson IMOS</a>
       </div>
     </div>
@@ -671,12 +767,11 @@ body {
     <div class="seg-row">
       <div class="seg-label-col">
         <div class="seg-label-text">Bunkers &amp; Fuel Procurement</div>
-        <div class="seg-label-count">4 companies</div>
+        <div class="seg-label-count">3 companies</div>
       </div>
       <div class="seg-companies">
         <a href="https://www.engine.online" class="pill" target="_blank" rel="noopener">ENGINE</a>
         <a href="https://www.zeronorth.io" class="pill" target="_blank" rel="noopener">ZeroNorth</a>
-        <a href="https://www.bimco.org" class="pill" target="_blank" rel="noopener">BIMCO</a>
         <a href="https://www.netpas.com" class="pill" target="_blank" rel="noopener">Netpas</a>
       </div>
     </div>
@@ -707,6 +802,18 @@ body {
       </div>
     </div>
 
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Standards, Contracts &amp; Industry Bodies</div>
+        <div class="seg-label-count">3 associations</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.bimco.org" class="pill pill-assoc" target="_blank" rel="noopener" title="Industry association — standard contracts, clauses &amp; advisory (not a bunker tech company)">BIMCO <span class="assoc-badge">ASSOC</span></a>
+        <a href="https://www.ics-shipping.org" class="pill pill-assoc" target="_blank" rel="noopener">ICS <span class="assoc-badge">ASSOC</span></a>
+        <a href="https://www.intercargo.org" class="pill pill-assoc" target="_blank" rel="noopener">Intercargo <span class="assoc-badge">ASSOC</span></a>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -715,12 +822,12 @@ body {
 ═══════════════════════════════════════ -->
 <div class="swim-lane" data-lane="vessel">
   <div class="lane-header lane-header-vessel" onclick="toggleLane(this)">
-    <div class="lane-icon lane-icon-vessel">⚓</div>
+    <div class="lane-icon lane-icon-vessel"><span aria-hidden="true">⚓</span></div>
     <div>
       <div class="lane-label">Vessel Management</div>
       <div class="lane-desc">Voyage optimisation, performance monitoring, condition monitoring, crew &amp; technical management</div>
     </div>
-    <div class="lane-meta">Lane 2 of 3<br><span>7 segments</span></div>
+    <div class="lane-meta">Lane 2 of 3<br><span>8 segments</span></div>
     <span class="lane-toggle">▲</span>
   </div>
   <div class="lane-body">
@@ -811,7 +918,7 @@ body {
 
     <div class="seg-row">
       <div class="seg-label-col">
-        <div class="seg-label-text">Decarbonisation Technologies</div>
+        <div class="seg-label-text">OEMs &amp; Decarbonisation Propulsion</div>
         <div class="seg-label-count">7 companies</div>
       </div>
       <div class="seg-companies">
@@ -825,6 +932,20 @@ body {
       </div>
     </div>
 
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Classification &amp; Statutory Bodies</div>
+        <div class="seg-label-count">5 bodies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.dnv.com" class="pill pill-assoc" target="_blank" rel="noopener">DNV <span class="assoc-badge">CLASS</span></a>
+        <a href="https://www.lr.org" class="pill pill-assoc" target="_blank" rel="noopener">Lloyd's Register <span class="assoc-badge">CLASS</span></a>
+        <a href="https://ww2.eagle.org" class="pill pill-assoc" target="_blank" rel="noopener">ABS <span class="assoc-badge">CLASS</span></a>
+        <a href="https://www.bureauveritas.com/marine-offshore" class="pill pill-assoc" target="_blank" rel="noopener">Bureau Veritas <span class="assoc-badge">CLASS</span></a>
+        <a href="https://www.irclass.org" class="pill pill-assoc india-pill" target="_blank" rel="noopener">IRClass <span class="in-badge">IN</span> <span class="assoc-badge">CLASS</span></a>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -833,7 +954,7 @@ body {
 ═══════════════════════════════════════ -->
 <div class="swim-lane" data-lane="intel">
   <div class="lane-header lane-header-intel" onclick="toggleLane(this)">
-    <div class="lane-icon lane-icon-intel">📊</div>
+    <div class="lane-icon lane-icon-intel"><span aria-hidden="true">📊</span></div>
     <div>
       <div class="lane-label">Intelligence &amp; Analytics</div>
       <div class="lane-desc">Cargo &amp; vessel tracking, AIS data, market intelligence, vessel valuations &amp; forecasts</div>
@@ -849,7 +970,7 @@ body {
         <div class="seg-label-count">5 companies</div>
       </div>
       <div class="seg-companies">
-        <a href="https://www.marinetraffic.com" class="pill" target="_blank" rel="noopener">MarineTraffic</a>
+        <a href="https://www.kpler.com" class="pill pill-acquired" target="_blank" rel="noopener" title="MarineTraffic — acquired by Kpler, 2023. Portal remains active.">MarineTraffic <span class="acq-badge">→ Kpler 2023</span></a>
         <a href="https://www.kpler.com" class="pill" target="_blank" rel="noopener">Kpler</a>
         <a href="https://www.windward.ai" class="pill" target="_blank" rel="noopener">Windward</a>
         <a href="https://www.shipfix.com" class="pill" target="_blank" rel="noopener">Shipfix</a>
@@ -865,8 +986,8 @@ body {
       <div class="seg-companies">
         <a href="https://www.orbcomm.com" class="pill" target="_blank" rel="noopener">ORBCOMM</a>
         <a href="https://spire.com/maritime" class="pill" target="_blank" rel="noopener">Spire Maritime</a>
-        <a href="https://www.lrit.eu" class="pill" target="_blank" rel="noopener">LRIT</a>
-        <a href="https://www.exactearth.com" class="pill" target="_blank" rel="noopener">exactEarth</a>
+        <a href="https://www.imo.org/en/OurWork/Safety/Pages/LRIT.aspx" class="pill pill-regulatory" target="_blank" rel="noopener" title="SOLAS V/19-1 regulatory system — not a company">LRIT <span class="reg-badge">REG</span></a>
+        <a href="https://spire.com/maritime" class="pill pill-acquired" target="_blank" rel="noopener" title="exactEarth — legacy AIS brand, acquired by Spire Global 2021">exactEarth <span class="acq-badge">→ Spire 2021</span></a>
         <a href="https://www.pole-star.com" class="pill" target="_blank" rel="noopener">Pole Star</a>
       </div>
     </div>
@@ -956,30 +1077,28 @@ const activeClassMap = {
 
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
-    filterBtns.forEach(b => {
-      Object.values(activeClassMap).forEach(c => b.classList.remove(c));
-    });
+    // clear all active states
+    filterBtns.forEach(b => Object.values(activeClassMap).forEach(c => b.classList.remove(c)));
     const f = btn.dataset.f;
     btn.classList.add(activeClassMap[f]);
 
-    if (f === 'all') {
-      lanes.forEach(l => { l.classList.remove('hidden', 'dimmed'); });
-      indiaSpotlight.classList.remove('hidden');
-      return;
-    }
+    // reset
+    document.body.classList.remove('filter-india-mode');
+    indiaSpotlight.classList.remove('hidden');
+    lanes.forEach(l => l.classList.remove('hidden', 'dimmed'));
+
+    if (f === 'all') return;
+
     if (f === 'india') {
-      lanes.forEach(l => l.classList.add('hidden'));
-      indiaSpotlight.classList.remove('hidden');
+      // Keep all swim lanes visible but dim non-Indian pills via CSS body class
+      document.body.classList.add('filter-india-mode');
       return;
     }
+
+    // Lane-specific: hide other lanes, hide spotlight
     indiaSpotlight.classList.add('hidden');
     lanes.forEach(l => {
-      if (l.dataset.lane === f) {
-        l.classList.remove('hidden', 'dimmed');
-      } else {
-        l.classList.add('hidden');
-        l.classList.remove('dimmed');
-      }
+      if (l.dataset.lane !== f) l.classList.add('hidden');
     });
   });
 });
