@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Maritime Technology Ecosystem — Marine Intelligence Weekly</title>
+<meta name="description" content="A living, filterable map of the global maritime technology landscape. Updated by Marine Intelligence Weekly."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --teal:        #0d9488;
+  --teal-light:  #14b8a6;
+  --teal-dim:    rgba(13,148,136,0.10);
+  --teal-glow:   rgba(13,148,136,0.25);
+  --navy:        #0f172a;
+  --navy-mid:    #1e293b;
+  --navy-card:   #162032;
+  --orange:      #f97316;
+  --orange-dim:  rgba(249,115,22,0.12);
+  --gold:        #c9a84c;
+  --gold-dim:    rgba(201,168,76,0.12);
+  --gold-border: rgba(201,168,76,0.30);
+  --bg:          #f0f4f8;
+  --bg-card:     #ffffff;
+  --slate:       #64748b;
+  --slate-light: #94a3b8;
+  --border:      #dde3ec;
+  --text:        #1e293b;
+
+  /* swim lane accent colours */
+  --lane-commercial: #3b82f6;
+  --lane-commercial-dim: rgba(59,130,246,0.10);
+  --lane-vessel:     #0d9488;
+  --lane-vessel-dim: rgba(13,148,136,0.10);
+  --lane-intel:      #f97316;
+  --lane-intel-dim:  rgba(249,115,22,0.10);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ──────────────────────────────────────
+   HEADER
+────────────────────────────────────── */
+.top-bar {
+  background: var(--navy);
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  border-bottom: 2px solid var(--teal);
+}
+.top-bar-brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--teal-light);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.top-bar-right {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.60rem;
+  color: var(--slate);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ──────────────────────────────────────
+   HERO
+────────────────────────────────────── */
+.hero {
+  background: var(--navy);
+  padding: 3.5rem 2rem 2.5rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--teal), transparent);
+}
+.hero-grid-bg {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(13,148,136,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(13,148,136,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--teal-light);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+.hero h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 900;
+  color: #f8fafc;
+  line-height: 1.08;
+  margin-bottom: 0.9rem;
+}
+.hero h1 em { color: var(--teal-light); font-style: normal; }
+.hero-sub {
+  font-size: 0.95rem;
+  color: var(--slate-light);
+  max-width: 540px;
+  margin: 0 auto 1.8rem;
+  font-style: italic;
+}
+.hero-stats {
+  display: inline-flex;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.hero-stat {
+  padding: 0.7rem 1.4rem;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  text-align: center;
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat-n {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--teal-light);
+  line-height: 1;
+}
+.hero-stat-n.gold { color: var(--gold); }
+.hero-stat-n.orange { color: var(--orange); }
+.hero-stat-l {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  color: var(--slate);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+}
+
+/* ──────────────────────────────────────
+   FILTER BAR
+────────────────────────────────────── */
+.filter-bar {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  padding: 0.8rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  position: sticky;
+  top: 52px;
+  z-index: 190;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.filter-group-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--slate);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-right: 0.25rem;
+}
+.sep { width: 1px; height: 20px; background: var(--border); margin: 0 0.4rem; }
+.fbtn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--slate);
+  cursor: pointer;
+  transition: all 0.18s;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.fbtn:hover { border-color: var(--teal); color: var(--teal); }
+.fbtn.active-all  { background: var(--navy); border-color: var(--navy); color: white; }
+.fbtn.active-comm { background: var(--lane-commercial); border-color: var(--lane-commercial); color: white; }
+.fbtn.active-ves  { background: var(--lane-vessel); border-color: var(--lane-vessel); color: white; }
+.fbtn.active-int  { background: var(--lane-intel); border-color: var(--lane-intel); color: white; }
+.fbtn.active-india{ background: var(--gold); border-color: var(--gold); color: var(--navy); }
+.india-fbtn { border-color: var(--gold-border); color: var(--gold); }
+.india-fbtn:hover { border-color: var(--gold); }
+
+/* ──────────────────────────────────────
+   MAIN LAYOUT
+────────────────────────────────────── */
+.page-body {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 5rem;
+}
+
+/* ──────────────────────────────────────
+   INDIA SPOTLIGHT
+────────────────────────────────────── */
+.india-spotlight {
+  background: var(--navy);
+  border: 1px solid var(--gold-border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.india-spotlight::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--gold), transparent);
+}
+.india-spotlight-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 0.4rem;
+}
+.india-spotlight-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gold);
+}
+.india-flag { font-size: 1.1rem; }
+.india-spotlight-sub {
+  font-size: 0.82rem;
+  color: var(--slate-light);
+  font-style: italic;
+  margin-bottom: 1.4rem;
+}
+.india-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.india-chip {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--gold-border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  text-decoration: none;
+  transition: background 0.18s, border-color 0.18s, transform 0.18s;
+  min-width: 150px;
+  flex: 1 1 150px;
+  max-width: 220px;
+}
+.india-chip:hover {
+  background: rgba(201,168,76,0.08);
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+.india-chip-seg {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+.india-chip-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #f8fafc;
+  margin-bottom: 0.2rem;
+}
+.india-chip-desc {
+  font-size: 0.72rem;
+  color: var(--slate-light);
+  line-height: 1.35;
+}
+
+/* ──────────────────────────────────────
+   SWIM LANE
+────────────────────────────────────── */
+.swim-lane {
+  margin-bottom: 2rem;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: opacity 0.25s;
+}
+.swim-lane.hidden { display: none; }
+.swim-lane.dimmed { opacity: 0.2; pointer-events: none; }
+
+.lane-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+.lane-header-commercial { background: var(--lane-commercial-dim); border-bottom: 2px solid var(--lane-commercial); }
+.lane-header-vessel      { background: var(--lane-vessel-dim);     border-bottom: 2px solid var(--lane-vessel); }
+.lane-header-intel       { background: var(--lane-intel-dim);      border-bottom: 2px solid var(--lane-intel); }
+
+.lane-icon {
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.lane-icon-commercial { background: rgba(59,130,246,0.15); }
+.lane-icon-vessel      { background: rgba(13,148,136,0.15); }
+.lane-icon-intel       { background: rgba(249,115,22,0.15); }
+
+.lane-label {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.lane-desc {
+  font-size: 0.78rem;
+  color: var(--slate);
+  font-style: italic;
+}
+.lane-meta {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--slate);
+  letter-spacing: 0.06em;
+  text-align: right;
+}
+.lane-toggle {
+  font-size: 0.75rem;
+  color: var(--slate);
+  margin-left: 0.5rem;
+  transition: transform 0.2s;
+}
+.lane-body { background: var(--bg-card); }
+.lane-body.collapsed { display: none; }
+
+/* ──────────────────────────────────────
+   SEGMENT ROW inside lane
+────────────────────────────────────── */
+.seg-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  border-bottom: 1px solid var(--border);
+  min-height: 72px;
+}
+.seg-row:last-child { border-bottom: none; }
+
+.seg-label-col {
+  padding: 1rem 1.2rem;
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #fafbfc;
+}
+.seg-label-text {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--slate);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.seg-label-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.55rem;
+  color: var(--slate-light);
+  margin-top: 0.2rem;
+}
+
+.seg-companies {
+  padding: 0.85rem 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ──────────────────────────────────────
+   COMPANY PILL
+────────────────────────────────────── */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: white;
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--text);
+  font-weight: 400;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.pill:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: var(--teal-dim);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px var(--teal-glow);
+}
+.pill.india-pill {
+  border-color: var(--gold-border);
+  background: var(--gold-dim);
+  color: #7a5c0e;
+}
+.pill.india-pill:hover {
+  border-color: var(--gold);
+  background: rgba(201,168,76,0.18);
+  color: #5a4008;
+  box-shadow: 0 2px 8px rgba(201,168,76,0.25);
+}
+.in-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.48rem;
+  background: var(--gold);
+  color: var(--navy);
+  border-radius: 3px;
+  padding: 0.05rem 0.3rem;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+
+/* ──────────────────────────────────────
+   FOOTER
+────────────────────────────────────── */
+.page-footer {
+  background: var(--navy);
+  border-top: 2px solid var(--teal);
+  padding: 1.8rem 2rem;
+  text-align: center;
+}
+.page-footer p {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--slate);
+  letter-spacing: 0.05em;
+  line-height: 1.9;
+}
+.page-footer a { color: var(--teal-light); text-decoration: none; }
+.page-footer a:hover { text-decoration: underline; }
+
+.last-updated {
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.60rem;
+  color: var(--slate);
+  letter-spacing: 0.07em;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+}
+
+@media (max-width: 640px) {
+  .seg-row { grid-template-columns: 1fr; }
+  .seg-label-col { border-right: none; border-bottom: 1px solid var(--border); padding: 0.6rem 1rem; }
+  .hero-stats { flex-wrap: wrap; }
+  .filter-bar { padding: 0.6rem 1rem; }
+  .india-chip { max-width: 100%; }
+  .page-body { padding: 1.25rem 0.75rem 4rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="top-bar">
+  <a href="https://marineintelligenceweekly.com" class="top-bar-brand">Marine Intelligence Weekly</a>
+  <span class="top-bar-right">Living Reference · Ecosystem Map</span>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid-bg"></div>
+  <p class="hero-eyebrow">Global Maritime Technology · 2026 Edition</p>
+  <h1>The Maritime Tech<br><em>Ecosystem Map</em></h1>
+  <p class="hero-sub">Every company mapped to where it sits in the global maritime technology stack — live, filterable, and India-aware.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-n">3</span>
+      <span class="hero-stat-l">Swim Lanes</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-n">18</span>
+      <span class="hero-stat-l">Segments</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-n gold">10</span>
+      <span class="hero-stat-l">India Co.</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-n orange">60+</span>
+      <span class="hero-stat-l">Companies</span>
+    </div>
+  </div>
+</section>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <span class="filter-group-label">View:</span>
+  <button class="fbtn active-all" data-f="all">All Lanes</button>
+  <button class="fbtn" data-f="commercial">Commercial Ops</button>
+  <button class="fbtn" data-f="vessel">Vessel Management</button>
+  <button class="fbtn" data-f="intel">Intelligence &amp; Analytics</button>
+  <div class="sep"></div>
+  <button class="fbtn india-fbtn" data-f="india">🇮🇳 India Only</button>
+</div>
+
+<!-- PAGE BODY -->
+<main class="page-body">
+
+<!-- ═══════════════════════════════════════
+     INDIA SPOTLIGHT
+═══════════════════════════════════════ -->
+<div class="india-spotlight" data-lane="india">
+  <div class="india-spotlight-head">
+    <span class="india-flag">🇮🇳</span>
+    <span class="india-spotlight-title">India's Maritime Tech Builders</span>
+  </div>
+  <p class="india-spotlight-sub">Indian companies building across AI navigation, underwater robotics, vessel performance, fleet software, and inspection — a fast-growing segment of the global stack.</p>
+  <div class="india-chips">
+
+    <a href="https://dtyle.ai" class="india-chip" target="_blank" rel="noopener">
+      <span class="india-chip-seg">Navigation AI</span>
+      <span class="india-chip-name">Dtyle.AI</span>
+      <span class="india-chip-desc">AI collision avoidance, COLREGS-compliant decision support</span>
+    </a>
+
+    <a href="https://dockervision.com" class="india-chip" target="_blank" rel="noopener">
+      <span class="india-chip-seg">Computer Vision</span>
+      <span class="india-chip-name">Docker Vision</span>
+      <span class="india-chip-desc">Port operations CV — berth monitoring, vessel detection</span>
+    </a>
+
+    <a href="https://planystech.com" class="india-chip" target="_blank" rel="noopener">
+      <span class="india-chip-seg">Underwater Robotics</span>
+      <span class="india-chip-name">Planys Technologies</span>
+      <span class="india-chip-desc">Miniature ROVs for hull and subsea infrastructure inspection</span>
+    </a>
+
+    <a href="https://eyerov.com" class="india-chip" target="_blank" rel="noopener">
+      <span class="india-chip-seg">Underwater Robotics</span>
+      <span class="india-chip-name">EyeROV</span>
+      <span class="india-chip-desc">Compact inspection ROVs for confined underwater environments</span>
+    </a>
+
+    <a href="https://mariapps.com" class="india-chip" target="_blank" rel="noopener">
+      <span class="india-chip-seg">Fleet ERP</span>
+      <span class="india-chip-name">MariApps</span>
+      <span class="india-chip-desc">PanamaxS — maintenance, procurement, crew &amp; compliance</span>
+    </a>
+
+    <a href="https://intangles.com" class="india-chip" target="_blank" rel="noopener">
+      <span class="india-chip-seg">Vessel Performance AI</span>
+      <span class="india-chip-name">Intangles</span>
+      <span class="india-chip-desc">IoT + AI for fuel optimisation and engine diagnostics</span>
+    </a>
+
+    <a href="https://detect.technology" class="india-chip" target="_blank" rel="noopener">
+      <span class="india-chip-seg">Predictive Maintenance</span>
+      <span class="india-chip-name">Detect Technologies</span>
+      <span class="india-chip-desc">Industrial IoT + AI inspection for maritime and offshore assets</span>
+    </a>
+
+    <a href="https://drishti.com" class="india-chip" target="_blank" rel="noopener">
+      <span class="india-chip-seg">Port Automation</span>
+      <span class="india-chip-name">Drishti Marine</span>
+      <span class="india-chip-desc">AI-driven port surveillance and vessel traffic monitoring</span>
+    </a>
+
+    <a href="https://www.irclass.org" class="india-chip" target="_blank" rel="noopener">
+      <span class="india-chip-seg">Classification</span>
+      <span class="india-chip-name">Indian Register of Shipping</span>
+      <span class="india-chip-desc">Statutory certification, surveys, and rule development</span>
+    </a>
+
+    <a href="https://www.sequentia.ai" class="india-chip" target="_blank" rel="noopener">
+      <span class="india-chip-seg">Maritime Analytics</span>
+      <span class="india-chip-name">Sequentia</span>
+      <span class="india-chip-desc">AI-powered maritime data analytics and market intelligence</span>
+    </a>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SWIM LANE 1 — COMMERCIAL OPERATIONS
+═══════════════════════════════════════ -->
+<div class="swim-lane" data-lane="commercial">
+  <div class="lane-header lane-header-commercial" onclick="toggleLane(this)">
+    <div class="lane-icon lane-icon-commercial">🏢</div>
+    <div>
+      <div class="lane-label">Commercial Operations</div>
+      <div class="lane-desc">Pre-fixture, chartering, voyage management, demurrage &amp; post-fixture</div>
+    </div>
+    <div class="lane-meta">Lane 1 of 3<br><span>6 segments</span></div>
+    <span class="lane-toggle">▲</span>
+  </div>
+  <div class="lane-body">
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Pre-Fixture &amp; Chartering</div>
+        <div class="seg-label-count">5 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.clarksons.com" class="pill" target="_blank" rel="noopener">Clarksons</a>
+        <a href="https://www.balticexchange.com" class="pill" target="_blank" rel="noopener">Baltic Exchange</a>
+        <a href="https://www.q88.com" class="pill" target="_blank" rel="noopener">Q88</a>
+        <a href="https://www.daanaos.com" class="pill" target="_blank" rel="noopener">Danaos</a>
+        <a href="https://www.veson.com" class="pill" target="_blank" rel="noopener">Veson IMOS</a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Voyage Management</div>
+        <div class="seg-label-count">5 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.stormgeo.com" class="pill" target="_blank" rel="noopener">StormGeo</a>
+        <a href="https://www.napa.fi" class="pill" target="_blank" rel="noopener">NAPA</a>
+        <a href="https://www.oceanlook.com" class="pill" target="_blank" rel="noopener">OceanLook</a>
+        <a href="https://www.maritimeoptima.com" class="pill" target="_blank" rel="noopener">Maritime Optima</a>
+        <a href="https://www.shipfix.com" class="pill" target="_blank" rel="noopener">Shipfix</a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Demurrage &amp; Claims</div>
+        <div class="seg-label-count">4 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.claimshub.com" class="pill" target="_blank" rel="noopener">ClaimsHub</a>
+        <a href="https://www.harborlab.com" class="pill" target="_blank" rel="noopener">HarborLab</a>
+        <a href="https://www.enquire.io" class="pill" target="_blank" rel="noopener">Enquire</a>
+        <a href="https://www.dataloy.com" class="pill" target="_blank" rel="noopener">Dataloy</a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Bunkers &amp; Fuel Procurement</div>
+        <div class="seg-label-count">4 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.engine.online" class="pill" target="_blank" rel="noopener">ENGINE</a>
+        <a href="https://www.zeronorth.io" class="pill" target="_blank" rel="noopener">ZeroNorth</a>
+        <a href="https://www.bimco.org" class="pill" target="_blank" rel="noopener">BIMCO</a>
+        <a href="https://www.netpas.com" class="pill" target="_blank" rel="noopener">Netpas</a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Port Agency &amp; Operations</div>
+        <div class="seg-label-count">4 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.portico.systems" class="pill" target="_blank" rel="noopener">Portico</a>
+        <a href="https://www.portchain.com" class="pill" target="_blank" rel="noopener">Portchain</a>
+        <a href="https://www.windward.ai" class="pill" target="_blank" rel="noopener">Windward</a>
+        <a href="https://drishti.com" class="pill india-pill" target="_blank" rel="noopener">Drishti Marine <span class="in-badge">IN</span></a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">E-Bills of Lading &amp; Documentation</div>
+        <div class="seg-label-count">4 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.bolero.net" class="pill" target="_blank" rel="noopener">Bolero</a>
+        <a href="https://www.edoxonline.com" class="pill" target="_blank" rel="noopener">edox</a>
+        <a href="https://www.cargox.io" class="pill" target="_blank" rel="noopener">CargoX</a>
+        <a href="https://www.wavebbl.com" class="pill" target="_blank" rel="noopener">WaveBL</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SWIM LANE 2 — VESSEL MANAGEMENT
+═══════════════════════════════════════ -->
+<div class="swim-lane" data-lane="vessel">
+  <div class="lane-header lane-header-vessel" onclick="toggleLane(this)">
+    <div class="lane-icon lane-icon-vessel">⚓</div>
+    <div>
+      <div class="lane-label">Vessel Management</div>
+      <div class="lane-desc">Voyage optimisation, performance monitoring, condition monitoring, crew &amp; technical management</div>
+    </div>
+    <div class="lane-meta">Lane 2 of 3<br><span>7 segments</span></div>
+    <span class="lane-toggle">▲</span>
+  </div>
+  <div class="lane-body">
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Voyage Optimisation</div>
+        <div class="seg-label-count">5 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.deepsea.ai" class="pill" target="_blank" rel="noopener">DeepSea Technologies</a>
+        <a href="https://www.stormgeo.com" class="pill" target="_blank" rel="noopener">StormGeo</a>
+        <a href="https://www.cetoai.com" class="pill" target="_blank" rel="noopener">CetoAI</a>
+        <a href="https://www.napa.fi" class="pill" target="_blank" rel="noopener">NAPA</a>
+        <a href="https://intangles.com" class="pill india-pill" target="_blank" rel="noopener">Intangles <span class="in-badge">IN</span></a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Vessel Performance Monitoring</div>
+        <div class="seg-label-count">5 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.kongsbergmaritime.com" class="pill" target="_blank" rel="noopener">Kongsberg Maritime</a>
+        <a href="https://new.abb.com/marine" class="pill" target="_blank" rel="noopener">ABB Marine</a>
+        <a href="https://marine-digital.com" class="pill" target="_blank" rel="noopener">Marine Digital</a>
+        <a href="https://www.me-production.com" class="pill" target="_blank" rel="noopener">ME Production</a>
+        <a href="https://www.futurismtechnologies.com" class="pill" target="_blank" rel="noopener">Futurism Technologies</a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Condition Monitoring &amp; Predictive Maintenance</div>
+        <div class="seg-label-count">6 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.acoem.com" class="pill" target="_blank" rel="noopener">Acoem</a>
+        <a href="https://www.skf.com" class="pill" target="_blank" rel="noopener">SKF Marine</a>
+        <a href="https://www.emerson.com" class="pill" target="_blank" rel="noopener">Emerson AMS</a>
+        <a href="https://www.gevernova.com/software/apm" class="pill" target="_blank" rel="noopener">GE Vernova APM</a>
+        <a href="https://detect.technology" class="pill india-pill" target="_blank" rel="noopener">Detect Technologies <span class="in-badge">IN</span></a>
+        <a href="https://intangles.com" class="pill india-pill" target="_blank" rel="noopener">Intangles <span class="in-badge">IN</span></a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Underwater Inspection</div>
+        <div class="seg-label-count">4 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.ocean-infinity.com" class="pill" target="_blank" rel="noopener">Ocean Infinity</a>
+        <a href="https://www.saipem.com" class="pill" target="_blank" rel="noopener">Saipem ROV</a>
+        <a href="https://planystech.com" class="pill india-pill" target="_blank" rel="noopener">Planys Technologies <span class="in-badge">IN</span></a>
+        <a href="https://eyerov.com" class="pill india-pill" target="_blank" rel="noopener">EyeROV <span class="in-badge">IN</span></a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Navigation AI &amp; MASS</div>
+        <div class="seg-label-count">5 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.orca-ai.io" class="pill" target="_blank" rel="noopener">Orca AI</a>
+        <a href="https://www.sea.ai" class="pill" target="_blank" rel="noopener">SEA.AI</a>
+        <a href="https://www.nauticai.com" class="pill" target="_blank" rel="noopener">NauticAi</a>
+        <a href="https://www.kongsberg.com" class="pill" target="_blank" rel="noopener">Kongsberg Autonomous</a>
+        <a href="https://dtyle.ai" class="pill india-pill" target="_blank" rel="noopener">Dtyle.AI <span class="in-badge">IN</span></a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Crew &amp; Technical Management</div>
+        <div class="seg-label-count">5 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.dnv.com" class="pill" target="_blank" rel="noopener">DNV AMOS</a>
+        <a href="https://www.jibe.dk" class="pill" target="_blank" rel="noopener">JIBE</a>
+        <a href="https://www.shipnet.no" class="pill" target="_blank" rel="noopener">ShipNet</a>
+        <a href="https://www.hanseaticsoft.com" class="pill" target="_blank" rel="noopener">Hanseaticsoft</a>
+        <a href="https://mariapps.com" class="pill india-pill" target="_blank" rel="noopener">MariApps <span class="in-badge">IN</span></a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Decarbonisation Technologies</div>
+        <div class="seg-label-count">7 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.man-es.com" class="pill" target="_blank" rel="noopener">MAN Energy Solutions</a>
+        <a href="https://www.wartsila.com" class="pill" target="_blank" rel="noopener">Wärtsilä</a>
+        <a href="https://www.wingd.com" class="pill" target="_blank" rel="noopener">WinGD</a>
+        <a href="https://www.norsepower.com" class="pill" target="_blank" rel="noopener">Norsepower</a>
+        <a href="https://corvusenergy.com" class="pill" target="_blank" rel="noopener">Corvus Energy</a>
+        <a href="https://valuemaritime.com" class="pill" target="_blank" rel="noopener">Value Maritime</a>
+        <a href="https://www.bartechnologies.uk" class="pill" target="_blank" rel="noopener">BAR Technologies</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SWIM LANE 3 — INTELLIGENCE & ANALYTICS
+═══════════════════════════════════════ -->
+<div class="swim-lane" data-lane="intel">
+  <div class="lane-header lane-header-intel" onclick="toggleLane(this)">
+    <div class="lane-icon lane-icon-intel">📊</div>
+    <div>
+      <div class="lane-label">Intelligence &amp; Analytics</div>
+      <div class="lane-desc">Cargo &amp; vessel tracking, AIS data, market intelligence, vessel valuations &amp; forecasts</div>
+    </div>
+    <div class="lane-meta">Lane 3 of 3<br><span>5 segments</span></div>
+    <span class="lane-toggle">▲</span>
+  </div>
+  <div class="lane-body">
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Cargo &amp; Vessel Tracking</div>
+        <div class="seg-label-count">5 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.marinetraffic.com" class="pill" target="_blank" rel="noopener">MarineTraffic</a>
+        <a href="https://www.kpler.com" class="pill" target="_blank" rel="noopener">Kpler</a>
+        <a href="https://www.windward.ai" class="pill" target="_blank" rel="noopener">Windward</a>
+        <a href="https://www.shipfix.com" class="pill" target="_blank" rel="noopener">Shipfix</a>
+        <a href="https://www.shipin.ai" class="pill" target="_blank" rel="noopener">ShipIn Systems</a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Satellite AIS &amp; Earth Observation</div>
+        <div class="seg-label-count">5 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.orbcomm.com" class="pill" target="_blank" rel="noopener">ORBCOMM</a>
+        <a href="https://spire.com/maritime" class="pill" target="_blank" rel="noopener">Spire Maritime</a>
+        <a href="https://www.lrit.eu" class="pill" target="_blank" rel="noopener">LRIT</a>
+        <a href="https://www.exactearth.com" class="pill" target="_blank" rel="noopener">exactEarth</a>
+        <a href="https://www.pole-star.com" class="pill" target="_blank" rel="noopener">Pole Star</a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Market Data &amp; Forecasts</div>
+        <div class="seg-label-count">6 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.clarksons.com" class="pill" target="_blank" rel="noopener">Clarksons Research</a>
+        <a href="https://www.drewry.co.uk" class="pill" target="_blank" rel="noopener">Drewry</a>
+        <a href="https://www.spglobal.com/commodityinsights/en/ci/products/maritime.html" class="pill" target="_blank" rel="noopener">S&amp;P Global Maritime</a>
+        <a href="https://www.kpler.com" class="pill" target="_blank" rel="noopener">Kpler</a>
+        <a href="https://www.tradeviews.com" class="pill" target="_blank" rel="noopener">Tradeviews</a>
+        <a href="https://www.woodmac.com" class="pill" target="_blank" rel="noopener">Wood Mackenzie</a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Vessel Valuations</div>
+        <div class="seg-label-count">4 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.vesselsvalue.com" class="pill" target="_blank" rel="noopener">VesselsValue</a>
+        <a href="https://www.marsoft.com" class="pill" target="_blank" rel="noopener">Marsoft</a>
+        <a href="https://www.msival.com" class="pill" target="_blank" rel="noopener">MSI</a>
+        <a href="https://www.vesselindex.com" class="pill" target="_blank" rel="noopener">VesselIndex</a>
+      </div>
+    </div>
+
+    <div class="seg-row">
+      <div class="seg-label-col">
+        <div class="seg-label-text">Operational AI &amp; Computer Vision</div>
+        <div class="seg-label-count">4 companies</div>
+      </div>
+      <div class="seg-companies">
+        <a href="https://www.shipin.ai" class="pill" target="_blank" rel="noopener">ShipIn Systems</a>
+        <a href="https://www.orca-ai.io" class="pill" target="_blank" rel="noopener">Orca AI</a>
+        <a href="https://dockervision.com" class="pill india-pill" target="_blank" rel="noopener">Docker Vision <span class="in-badge">IN</span></a>
+        <a href="https://drishti.com" class="pill india-pill" target="_blank" rel="noopener">Drishti Marine <span class="in-badge">IN</span></a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="last-updated">
+  Last updated: June 2026 &nbsp;·&nbsp; Maintained by Marine Intelligence Weekly &nbsp;·&nbsp;
+  <a href="mailto:contactus@marineintelligenceweekly.com">Submit a correction or addition</a>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <p>
+    <a href="https://marineintelligenceweekly.com">Marine Intelligence Weekly</a> &nbsp;·&nbsp;
+    The intelligence and learning platform for marine engineers<br>
+    Editor: Nixon Antony, Second Engineer, Maersk A/S &nbsp;·&nbsp;
+    <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
+  </p>
+</footer>
+
+<script>
+// ── LANE TOGGLE (collapse/expand) ──
+function toggleLane(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.lane-toggle');
+  const collapsed = body.classList.toggle('collapsed');
+  arrow.style.transform = collapsed ? 'rotate(180deg)' : '';
+}
+
+// ── FILTER LOGIC ──
+const filterBtns = document.querySelectorAll('.fbtn');
+const lanes = document.querySelectorAll('.swim-lane');
+const indiaSpotlight = document.querySelector('.india-spotlight');
+
+const activeClassMap = {
+  all: 'active-all',
+  commercial: 'active-comm',
+  vessel: 'active-ves',
+  intel: 'active-int',
+  india: 'active-india',
+};
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => {
+      Object.values(activeClassMap).forEach(c => b.classList.remove(c));
+    });
+    const f = btn.dataset.f;
+    btn.classList.add(activeClassMap[f]);
+
+    if (f === 'all') {
+      lanes.forEach(l => { l.classList.remove('hidden', 'dimmed'); });
+      indiaSpotlight.classList.remove('hidden');
+      return;
+    }
+    if (f === 'india') {
+      lanes.forEach(l => l.classList.add('hidden'));
+      indiaSpotlight.classList.remove('hidden');
+      return;
+    }
+    indiaSpotlight.classList.add('hidden');
+    lanes.forEach(l => {
+      if (l.dataset.lane === f) {
+        l.classList.remove('hidden', 'dimmed');
+      } else {
+        l.classList.add('hidden');
+        l.classList.remove('dimmed');
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
