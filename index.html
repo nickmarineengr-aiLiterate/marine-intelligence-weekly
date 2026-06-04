@@ -10,7 +10,7 @@
 <title>Marine Intelligence Weekly — Maritime AI, SOLAS & IMO Regulatory Intelligence</title>
 <meta name="description" content="Independent maritime AI and regulatory intelligence for Chief Engineers, Marine Officers & MEO Class 1 candidates. Covering IMO, SOLAS, MARPOL, MASS Code, FuelEU Maritime and classification society updates — weekly, from the engine room.">
 <meta name="author" content="Nixon Antony">
-<meta name="keywords" content="maritime AI, marine intelligence weekly, IMO regulations 2026, SOLAS 2026, MARPOL Annex VI, MASS Code IMO, FuelEU Maritime, MEO Class 1 exam, Chief Engineer exam, DNV-RP-0703, hydrogen ship safety, IACS UR E26, CII compliance, EEXI, decarbonisation shipping, autonomous ships, maritime newsletter, marine engineer exam preparation, Nixon Antony, maritime regulatory update">
+<meta name="keywords" content="maritime AI, marine intelligence weekly, IMO regulations 2026, SOLAS 2026, MARPOL Annex VI, MASS Code IMO, FuelEU Maritime, MEO Class 1 exam, Chief Engineer exam, DNV-RP-0703, hydrogen ship safety, IACS UR E26, CII compliance, EEXI, decarbonisation shipping, autonomous ships, maritime newsletter, marine engineer exam preparation, Nixon Antony, maritime regulatory update, maritime technology ecosystem, maritime tech companies, India maritime AI, Dtyle.AI, Docker Vision, Planys Technologies, EyeROV, MariApps, Intangles, maritime condition monitoring, voyage optimisation AI, maritime decarbonisation companies, MASS Code companies, maritime computer vision, underwater inspection ROV, maritime predictive maintenance, Orca AI, DeepSea Technologies, Kongsberg Maritime, ABB Marine, maritime startup India, Indian maritime technology">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="author" content="Nixon Antony">
 <link rel="canonical" href="https://marineintelligenceweekly.com/">
@@ -205,6 +205,22 @@
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "SOLAS regulation II-1/3-13, in force from 1 January 2026, requires new ships to fit anchor handling winches with automatic load-limiting devices, manual override capability, and documented brake holding capacity. Ships contracted on or after 1 July 2024 must comply at delivery. Existing ships are not retroactively required to comply."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What Indian companies are building maritime technology?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "India has a growing maritime technology sector. Key companies include Dtyle.AI (AI navigation and collision avoidance), Docker Vision (computer vision for port operations, deployed at 240+ locations), Planys Technologies and EyeROV (underwater inspection ROVs), MariApps (fleet management ERP), Intangles (vessel performance and fuel optimisation AI), Detect Technologies (predictive maintenance for maritime and offshore assets), and the Indian Register of Shipping (national classification society). Marine Intelligence Weekly maintains a living ecosystem map tracking global and Indian maritime technology companies."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the maritime technology ecosystem map on Marine Intelligence Weekly?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Marine Intelligence Weekly publishes a living, filterable Maritime Technology Ecosystem Map that places global and Indian maritime technology companies into three swim lanes: Commercial Operations (pre-fixture, voyage management, demurrage, bunkers, e-BL), Vessel Management (voyage optimisation, performance monitoring, condition monitoring, navigation AI, MASS, decarbonisation), and Intelligence and Analytics (satellite AIS, cargo tracking, market data, vessel valuations). The map is updated regularly and includes a dedicated India section covering the Indian maritime AI and technology ecosystem."
       }
     }
   ]
@@ -910,7 +926,163 @@ body {
   </div>
 </header>
 
-<!-- HERO -->
+<!-- ═══════════════════════════════════════════════════════
+     STICKY SECTION NAV BAR
+     ═══════════════════════════════════════════════════════ -->
+<nav id="section-nav" aria-label="Page sections">
+  <div class="snav-inner">
+    <a href="#latest"            class="snav-item" data-section="latest">Latest</a>
+    <a href="#issues"            class="snav-item" data-section="issues">Issues</a>
+    <a href="#features"          class="snav-item" data-section="features">Features</a>
+    <a href="#reference-series"  class="snav-item" data-section="reference-series">Reference</a>
+    <a href="#ecosystem-map"     class="snav-item" data-section="ecosystem-map">Ecosystem</a>
+    <a href="#productivity-series" class="snav-item" data-section="productivity-series">Productivity</a>
+    <a href="#about"             class="snav-item" data-section="about">About</a>
+  </div>
+</nav>
+
+<style>
+/* ── SECTION NAV ── */
+#section-nav {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  background: var(--navy);
+  border-bottom: 1px solid rgba(0,180,216,0.25);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#section-nav.snav-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.snav-inner {
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(16px,4vw,56px);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  gap: 0;
+  /* allow horizontal scroll on mobile without overflow artifacts */
+  white-space: nowrap;
+}
+
+.snav-inner::-webkit-scrollbar { display: none; }
+
+.snav-item {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  padding: 14px 18px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.snav-item:hover {
+  color: var(--teal);
+  background: rgba(0,180,216,0.06);
+}
+
+.snav-item.snav-active {
+  color: var(--teal);
+  border-bottom-color: var(--teal);
+}
+
+/* ── Mobile: slightly tighter padding ── */
+@media (max-width: 600px) {
+  .snav-item {
+    font-size: 9px;
+    padding: 13px 13px;
+    letter-spacing: 0.08em;
+  }
+}
+</style>
+
+<script>
+(function () {
+  'use strict';
+
+  var nav    = document.getElementById('section-nav');
+  var hero   = document.querySelector('.hero');
+  var items  = document.querySelectorAll('.snav-item');
+
+  /* ── Show/hide nav after user scrolls past the hero ── */
+  var heroBottom = 0;
+  function updateHeroBottom() {
+    heroBottom = hero ? hero.getBoundingClientRect().bottom + window.pageYOffset : 300;
+  }
+  updateHeroBottom();
+  window.addEventListener('resize', updateHeroBottom, { passive: true });
+
+  window.addEventListener('scroll', function () {
+    if (window.pageYOffset > heroBottom - 80) {
+      nav.classList.add('snav-visible');
+    } else {
+      nav.classList.remove('snav-visible');
+    }
+  }, { passive: true });
+
+  /* ── Active-section highlighting via IntersectionObserver ── */
+  var sectionIds = ['latest','issues','features','reference-series','ecosystem-map','productivity-series','about'];
+  var activeId   = null;
+
+  // Map section IDs to both element IDs (section-header divs) and parent section elements
+  function getSectionEls() {
+    return sectionIds.map(function (id) {
+      return document.getElementById(id);
+    }).filter(Boolean);
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        var id = entry.target.id;
+        if (id && activeId !== id) {
+          activeId = id;
+          items.forEach(function (item) {
+            if (item.dataset.section === id) {
+              item.classList.add('snav-active');
+            } else {
+              item.classList.remove('snav-active');
+            }
+          });
+          // Scroll the active nav item into view (for mobile)
+          var activeItem = document.querySelector('.snav-item[data-section="' + id + '"]');
+          if (activeItem) {
+            activeItem.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
+          }
+        }
+      }
+    });
+  }, {
+    rootMargin: '-10% 0px -70% 0px',
+    threshold: 0
+  });
+
+  window.addEventListener('DOMContentLoaded', function () {
+    updateHeroBottom();
+    getSectionEls().forEach(function (el) { observer.observe(el); });
+  });
+
+  // Fallback if DOMContentLoaded already fired
+  if (document.readyState !== 'loading') {
+    updateHeroBottom();
+    getSectionEls().forEach(function (el) { observer.observe(el); });
+  }
+})();
+</script>
+
+
 <section class="hero">
   <div class="hero-inner">
     <div class="hero-eyebrow">Independent Maritime AI Intelligence</div>
@@ -936,7 +1108,7 @@ body {
 </div>
 
 <!-- LATEST ISSUE -->
-<section class="issues-section">
+<section id="latest" class="issues-section">
   <div class="section-header">
     <span class="section-label">Latest Issue</span>
     <div class="section-rule"></div>
@@ -972,7 +1144,7 @@ body {
   </div>
 
   <!-- BACK ISSUES -->
-  <div class="section-header" style="margin-top:48px;">
+  <div id="issues" class="section-header" style="margin-top:48px;">
     <span class="section-label">Previous Issues</span>
     <div class="section-rule"></div>
   </div>
@@ -1015,7 +1187,7 @@ body {
   </div>
 
   <!-- ARTICLES SECTION -->
-  <div class="section-header" style="margin-top:56px;">
+  <div id="features" class="section-header" style="margin-top:56px;">
     <span class="section-label">Feature Articles</span>
     <div class="section-rule"></div>
   </div>
@@ -1079,6 +1251,75 @@ body {
     </a>
   </div>
 
+  <!-- ═══════════════════════════════════════════════════════
+       ECOSYSTEM MAP SECTION
+  ═══════════════════════════════════════════════════════ -->
+  <div id="ecosystem-map" class="section-header" style="margin-top:56px;">
+    <span class="section-label">Maritime Technology Ecosystem</span>
+    <div class="section-rule"></div>
+  </div>
+
+  <!-- ECOSYSTEM INTRO CARD -->
+  <div style="background:var(--navy); border:1px solid rgba(0,180,216,0.25); border-radius:4px; padding:clamp(24px,4vw,40px); margin-bottom:28px; position:relative; overflow:hidden;">
+    <div style="position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#00B4D8,transparent);"></div>
+    <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.2em; text-transform:uppercase; color:#00B4D8; margin-bottom:12px; display:flex; align-items:center; gap:10px;">
+      <span style="display:block; width:20px; height:1px; background:#00B4D8;"></span>
+      Living Reference · Updated June 2026
+    </div>
+    <div style="font-family:'Playfair Display',serif; font-size:clamp(20px,3vw,26px); font-weight:700; color:#fff; line-height:1.2; margin-bottom:12px;">
+      The Maritime Tech Ecosystem Map
+    </div>
+    <p style="font-size:14px; font-weight:300; color:rgba(255,255,255,0.62); line-height:1.65; margin-bottom:20px; max-width:600px;">
+      Where every company sits in the global maritime technology stack — from commercial operations and vessel management to intelligence and analytics. Three swim lanes. 60+ companies. A dedicated India section. Filterable, live, and updated as the industry moves.
+    </p>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:24px;">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 8px; border:1px solid rgba(59,130,246,0.4); color:rgba(255,255,255,0.5); border-radius:1px;">Commercial Operations</span>
+      <span style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 8px; border:1px solid rgba(0,180,216,0.4); color:rgba(255,255,255,0.5); border-radius:1px;">Vessel Management</span>
+      <span style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 8px; border:1px solid rgba(249,115,22,0.4); color:rgba(255,255,255,0.5); border-radius:1px;">Intelligence &amp; Analytics</span>
+      <span style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.1em; text-transform:uppercase; padding:4px 8px; border:1px solid rgba(201,168,76,0.4); color:rgba(255,255,255,0.5); border-radius:1px;">🇮🇳 India Section</span>
+    </div>
+    <a href="https://marineintelligenceweekly.com/ecosystem.html"
+       style="display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; padding:12px 24px; background:transparent; color:#00B4D8; border:1px solid #00B4D8; text-decoration:none; transition:all 0.2s;"
+       onmouseover="this.style.background='#00B4D8';this.style.color='#0D1B2A';"
+       onmouseout="this.style.background='transparent';this.style.color='#00B4D8';">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+      Open Ecosystem Map
+    </a>
+  </div>
+
+  <!-- ECOSYSTEM PREVIEW GRID — 3 lane previews + India -->
+  <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:16px; margin-bottom:0;">
+
+    <!-- Lane 1: Commercial -->
+    <div style="background:var(--bg-card); border:1px solid var(--rule); border-top:3px solid #3b82f6; border-radius:2px; padding:20px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:#3b82f6; margin-bottom:10px;">Lane 1 · Commercial Operations</div>
+      <div style="font-size:13px; font-weight:600; color:var(--ink); margin-bottom:8px; line-height:1.3;">Pre-fixture · Voyage Mgmt · Demurrage · Bunkers · e-BL</div>
+      <div style="font-size:12px; color:var(--muted); line-height:1.6;">Veson IMOS · Clarksons · ZeroNorth · ClaimsHub · CargoX · WaveBL · ENGINE · Shipfix</div>
+    </div>
+
+    <!-- Lane 2: Vessel -->
+    <div style="background:var(--bg-card); border:1px solid var(--rule); border-top:3px solid #00B4D8; border-radius:2px; padding:20px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:#00B4D8; margin-bottom:10px;">Lane 2 · Vessel Management</div>
+      <div style="font-size:13px; font-weight:600; color:var(--ink); margin-bottom:8px; line-height:1.3;">Voyage Opt · Performance · Condition Mon · Navigation AI · Decarbonisation</div>
+      <div style="font-size:12px; color:var(--muted); line-height:1.6;">DeepSea · Orca AI · Kongsberg · SKF Marine · MAN ES · Wärtsilä · Acoem · ABB Marine</div>
+    </div>
+
+    <!-- Lane 3: Intelligence -->
+    <div style="background:var(--bg-card); border:1px solid var(--rule); border-top:3px solid #f97316; border-radius:2px; padding:20px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:#f97316; margin-bottom:10px;">Lane 3 · Intelligence &amp; Analytics</div>
+      <div style="font-size:13px; font-weight:600; color:var(--ink); margin-bottom:8px; line-height:1.3;">Satellite AIS · Cargo Tracking · Market Data · Valuations</div>
+      <div style="font-size:12px; color:var(--muted); line-height:1.6;">Kpler · MarineTraffic · Spire Maritime · Clarksons Research · S&amp;P Global · VesselsValue</div>
+    </div>
+
+    <!-- India Spotlight -->
+    <div style="background:var(--navy); border:1px solid rgba(201,168,76,0.3); border-top:3px solid #C9A84C; border-radius:2px; padding:20px;">
+      <div style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:#C9A84C; margin-bottom:10px;">🇮🇳 India Maritime Tech</div>
+      <div style="font-size:13px; font-weight:600; color:#f8fafc; margin-bottom:8px; line-height:1.3;">Navigation AI · Underwater ROV · Fleet ERP · Port Vision · Predictive Maintenance</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.5); line-height:1.6;">Dtyle.AI · Docker Vision · Planys · EyeROV · MariApps · Intangles · Detect Technologies</div>
+    </div>
+
+  </div>
+
   <!-- PRODUCTIVITY SERIES -->
   <div id="productivity-series" class="section-header" style="margin-top:56px;">
     <span class="section-label">Productivity Series</span>
@@ -1111,7 +1352,7 @@ body {
 </section>
 
 <!-- ABOUT -->
-<section class="about-section">
+<section id="about" class="about-section">
   <div class="about-inner">
     <h2>Why Marine Intelligence Weekly Exists</h2>
     <p>Maritime AI is developing faster than most professionals can track it. Classification societies are issuing new evidence standards. The IMO is building regulatory frameworks for autonomous ships. Indian companies are deploying AI at port scale. Global companies are raising billions and setting benchmarks that every fleet will operate within.</p>
@@ -1205,6 +1446,7 @@ body {
   </div>
   <div class="footer-links">
     <div class="footer-links-label">Reference Series</div>
+    <a href="https://marineintelligenceweekly.com/ecosystem.html">Maritime Technology Ecosystem Map</a>
     <a href="https://marineintelligenceweekly.com/timeline.html">AI in Maritime Timeline (Interactive)</a>
     <a href="https://marineintelligenceweekly.com/timeline-article.html">A Decade of Transformation — Article</a>
     <a href="https://marineintelligenceweekly.com/MIW_Vol1_ReferenceDoc.pdf">Vol. 1 Reference Document (PDF)</a>
