@@ -1,1 +1,1193 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB1 — Engine Construction, Stability &amp; Surveys | MEO Class 1 | MIW</title>
+<meta name="robots" content="noindex, nofollow">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.6;font-size:15px;}
+.topbar{background:var(--navy);color:#fff;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--teal);}
+.logo-mark{background:var(--teal);color:#fff;font-weight:800;font-size:13px;padding:3px 8px;border-radius:4px;}
+.topbar-brand{display:flex;align-items:center;gap:10px;}
+.site-name{color:#fff;font-size:13px;opacity:.85;}
+.topbar-right{display:flex;gap:16px;}
+.topbar-right a{color:rgba(255,255,255,.7);text-decoration:none;font-size:12px;}
+.topbar-right a:hover{color:var(--teal);}
+.page-header{background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 100%);color:#fff;padding:40px 24px 32px;border-bottom:3px solid var(--teal);}
+.header-inner{max-width:1100px;margin:0 auto;}
+.qb-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:14px;}
+.page-title{font-size:clamp(22px,4vw,34px);font-weight:800;line-height:1.2;margin-bottom:10px;}
+.page-sub{color:rgba(255,255,255,.7);font-size:14px;max-width:680px;margin-bottom:20px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:16px;font-size:12px;color:rgba(255,255,255,.6);border-top:1px solid rgba(255,255,255,.15);padding-top:16px;}
+.header-meta strong{color:var(--teal);}
+.controls-bar{background:#fff;border-bottom:1px solid var(--grey-border);padding:12px 24px;position:sticky;top:44px;z-index:90;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.controls-bar input{flex:1;min-width:200px;padding:8px 14px;border:1px solid var(--grey-border);border-radius:6px;font-size:14px;outline:none;}
+.controls-bar input:focus{border-color:var(--teal);}
+.filter-btn{padding:6px 14px;border:1px solid var(--grey-border);background:#fff;border-radius:20px;font-size:12px;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.filter-btn.active,.filter-btn:hover{background:var(--teal);color:#fff;border-color:var(--teal);}
+.q-count{margin-left:auto;font-size:12px;color:var(--grey-text);white-space:nowrap;}
+.main-layout{max-width:1100px;margin:0 auto;padding:28px 16px 60px;display:grid;grid-template-columns:220px 1fr;gap:24px;}
+@media(max-width:760px){.main-layout{grid-template-columns:1fr;}.sidebar{display:none;}}
+.sidebar{position:sticky;top:100px;align-self:start;background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:16px;max-height:80vh;overflow-y:auto;}
+.sidebar-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--grey-text);margin-bottom:12px;}
+.toc-link{display:block;padding:5px 10px;border-radius:6px;font-size:12px;color:var(--ink);text-decoration:none;margin-bottom:2px;}
+.toc-link:hover,.toc-link.active{background:var(--teal-light);color:var(--teal-dark);font-weight:600;}
+.toc-link .qn{font-size:10px;font-weight:700;color:var(--grey-text);min-width:22px;display:inline-block;}
+.sidebar-divider{border:none;border-top:1px solid var(--grey-border);margin:10px 0;}
+.sidebar-note{font-size:11px;color:var(--grey-text);line-height:1.5;}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:12px;margin-bottom:20px;overflow:hidden;}
+.q-card:hover{box-shadow:0 4px 20px rgba(13,148,136,.1);}
+.q-header{padding:16px 20px;cursor:pointer;display:flex;align-items:flex-start;gap:14px;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{flex-shrink:0;width:32px;height:32px;background:var(--teal);color:#fff;border-radius:8px;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.q-card.open .q-num-badge{background:var(--teal-dark);}
+.q-text-wrap{flex:1;}
+.q-text{font-size:15px;font-weight:600;color:var(--navy);line-height:1.4;margin-bottom:6px;}
+.q-tags{display:flex;flex-wrap:wrap;gap:6px;}
+.q-tag{font-size:10px;font-weight:700;text-transform:uppercase;padding:2px 8px;border-radius:4px;}
+.tag-solas{background:#dbeafe;color:#1e40af;}
+.tag-marpol{background:#dcfce7;color:#166534;}
+.tag-ism{background:#f3e8ff;color:#6b21a8;}
+.tag-iacs{background:#ffedd5;color:#9a3412;}
+.tag-load-line{background:#e0f2fe;color:#075985;}
+.tag-stability{background:#ecfdf5;color:#065f46;}
+.tag-survey{background:#fef3c7;color:#92400e;}
+.tag-machinery{background:#f1f5f9;color:#334155;}
+.q-chevron{flex-shrink:0;width:20px;height:20px;color:var(--grey-text);transition:transform .25s;}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;border-top:1px solid var(--grey-border);padding:20px 20px 20px 66px;}
+.q-card.open .q-answer{display:block;}
+.answer-body{font-family:'Georgia',serif;font-size:14.5px;line-height:1.75;color:#1e293b;}
+.answer-body h4{font-family:'Segoe UI',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--teal-dark);margin:16px 0 7px;}
+.answer-body p{margin-bottom:10px;}
+.answer-body ul,.answer-body ol{padding-left:20px;margin-bottom:12px;}
+.answer-body li{margin-bottom:5px;}
+.answer-body strong{color:var(--navy);}
+.formula{font-family:monospace;background:var(--grey-bg);padding:8px 12px;border-radius:6px;font-size:14px;margin:8px 0 12px;display:block;}
+.reg-box{margin-top:18px;background:var(--navy);color:#fff;border-radius:8px;padding:14px 16px;}
+.reg-box-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);margin-bottom:8px;}
+.reg-item{font-size:12px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.1);display:flex;gap:10px;}
+.reg-item:last-child{border-bottom:none;}
+.reg-code{flex-shrink:0;font-weight:700;color:var(--orange);min-width:165px;font-family:monospace;}
+.reg-desc{color:rgba(255,255,255,.8);}
+.ce-tip{margin-top:14px;background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 6px 6px 0;padding:10px 14px;font-size:13px;color:#7c2d12;}
+.ce-tip strong{color:#9a3412;}
+.q-footer{border-top:1px solid var(--grey-border);padding:8px 20px 8px 66px;background:var(--grey-bg);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+.correction-link{font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);text-decoration:none;font-weight:600;}
+.q-version{font-size:10px;color:var(--grey-text);font-style:italic;}
+.section-head{padding:8px 0 6px;margin:16px 0 14px;border-bottom:2px solid var(--teal);display:flex;align-items:center;gap:10px;}
+.section-head h2{font-size:14px;font-weight:800;text-transform:uppercase;color:var(--navy);}
+.sec-count{font-size:11px;background:var(--teal-light);color:var(--teal-dark);padding:2px 8px;border-radius:10px;font-weight:700;}
+#no-results{display:none;padding:40px;text-align:center;color:var(--grey-text);}
+.page-footer{background:var(--navy);color:rgba(255,255,255,.7);padding:28px 24px;text-align:center;font-size:12px;line-height:1.9;}
+.page-footer a{color:var(--teal);text-decoration:none;}
+.page-footer strong{color:#fff;}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div class="topbar-brand"><span class="logo-mark">MIW</span><span class="site-name">Marine Intelligence Weekly</span></div>
+  <div class="topbar-right">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1">MEO Class 1</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="header-inner">
+    <div class="qb-badge">Question Bank QB1 — v1.0 · June 2026</div>
+    <h1 class="page-title">MEO Class 1 — QB1<br>Engine Construction, Stability &amp; Surveys</h1>
+    <p class="page-sub">Regulation-referenced answers for Kochi MMD oral examination. Every answer cites the primary IMO instrument, SOLAS chapter, MARPOL annex, or Class rule. Always cross-check with official IMO publications before use.</p>
+    <div class="header-meta">
+      <span>📋 <strong>20 Questions</strong></span>
+      <span>📚 Surveys · Stability · Construction · Structural</span>
+      <span>🏛 SOLAS · MARPOL · IS Code 2008 · IACS UR · ISM Code · IRS</span>
+      <span>✍ Compiled by <strong>Nixon Antony, 2/E, Maersk A/S</strong></span>
+    </div>
+  </div>
+</header>
+
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search questions, regulations, keywords…" oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
+  <button class="filter-btn" onclick="filterTag('survey',this)">Surveys</button>
+  <button class="filter-btn" onclick="filterTag('stability',this)">Stability</button>
+  <button class="filter-btn" onclick="filterTag('marpol',this)">MARPOL</button>
+  <button class="filter-btn" onclick="filterTag('machinery',this)">Machinery</button>
+  <span class="q-count" id="q-count-label">Showing 20 of 20</span>
+</div>
+
+<div class="main-layout">
+  <aside class="sidebar">
+    <div class="sidebar-title">Jump to Question</div>
+    <a class="toc-link" href="#q1"><span class="qn">Q1</span>ISM Survey — ER duties</a>
+    <a class="toc-link" href="#q2"><span class="qn">Q2</span>Intact Stability Criteria</a>
+    <a class="toc-link" href="#q3"><span class="qn">Q3</span>Damage Stability — A≥R</a>
+    <a class="toc-link" href="#q4"><span class="qn">Q4</span>CMS Survey Scope</a>
+    <a class="toc-link" href="#q5"><span class="qn">Q5</span>Load Line Survey (2E)</a>
+    <a class="toc-link" href="#q6"><span class="qn">Q6</span>IOPP Survey Prep</a>
+    <a class="toc-link" href="#q7"><span class="qn">Q7</span>NOx Technical File</a>
+    <a class="toc-link" href="#q8"><span class="qn">Q8</span>SAFCON Survey ER</a>
+    <a class="toc-link" href="#q9"><span class="qn">Q9</span>Factor of Subdivision</a>
+    <a class="toc-link" href="#q10"><span class="qn">Q10</span>GZ / Statical Stability</a>
+    <a class="toc-link" href="#q11"><span class="qn">Q11</span>Cross Curves — KN</a>
+    <a class="toc-link" href="#q12"><span class="qn">Q12</span>Free Surface Effect</a>
+    <a class="toc-link" href="#q13"><span class="qn">Q13</span>Angle of Loll</a>
+    <a class="toc-link" href="#q14"><span class="qn">Q14</span>Dynamic Stability</a>
+    <a class="toc-link" href="#q15"><span class="qn">Q15</span>Inclining Experiment</a>
+    <a class="toc-link" href="#q16"><span class="qn">Q16</span>Damage Control Plan</a>
+    <a class="toc-link" href="#q17"><span class="qn">Q17</span>Shell Expansion Plan</a>
+    <a class="toc-link" href="#q18"><span class="qn">Q18</span>Collision Bulkhead</a>
+    <a class="toc-link" href="#q19"><span class="qn">Q19</span>Propeller Pitch Ratio</a>
+    <a class="toc-link" href="#q20"><span class="qn">Q20</span>Tail Shaft Survey</a>
+    <hr class="sidebar-divider">
+    <p class="sidebar-note">QB1: Construction, Stability &amp; Surveys<br>QB2 (next): Fire Safety &amp; LSA Codes<br>QB3: MARPOL Annexes &amp; Records<br>QB4: ISM, ISPS, MLC, STCW</p>
+  </aside>
+
+  <main id="q-feed">
+
+<!-- ── SECTION: SURVEYS ── -->
+<div class="section-head"><h2>🔍 Surveys</h2><span class="sec-count">6 questions</span></div>
+
+<!-- Q1 ISM Survey -->
+<div class="q-card" id="q1" data-tags="survey ism solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">As Chief Engineer, what are your ISM Survey duties in the Engine Room — beyond documentation and machinery checks?</div>
+      <div class="q-tags"><span class="q-tag tag-ism">ISM Code</span><span class="q-tag tag-solas">SOLAS IX</span><span class="q-tag tag-survey">Survey</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>ISM Survey — What It Actually Tests</h4>
+      <p>An ISM Survey (initial, renewal, or intermediate) verifies that the SMS is <em>effectively implemented in practice</em> — not merely that certificates exist. The surveyor assesses whether the system is alive on the ship.</p>
+      <h4>1. SMS Implementation — Practical Evidence</h4>
+      <ul>
+        <li>Demonstrate familiarity with company SMS procedures for ER: machinery operations, critical equipment failure procedures, PTW systems — verbally, not by reading from the manual.</li>
+        <li>Walk the surveyor through the Emergency Response Plan for machinery spaces from memory.</li>
+        <li>CE and Master responsibilities as defined in SMS must be clearly understood by the engine department — not just stated in a document.</li>
+      </ul>
+      <h4>2. Non-Conformities, Near Misses &amp; Hazardous Occurrences</h4>
+      <ul>
+        <li>All NCs raised in the engine department must have documented corrective actions with root cause analysis and verified closure — surveyor checks if the loop was closed, not just reported.</li>
+        <li>Company safety circulars on lessons learned must be discussed at safety meetings — entries in safety meeting log are the evidence.</li>
+      </ul>
+      <h4>3. Drills &amp; Training Records</h4>
+      <ul>
+        <li>Fire drills — monthly per SOLAS, engine department participation, debrief notes recorded.</li>
+        <li>Enclosed space entry drills — every 2 months per SOLAS II-1/Reg. 20.</li>
+        <li>Abandon ship drills — monthly. ERT competency for engine team verified.</li>
+        <li>Training Matrix for engine department — competencies, familiarization, on-job training entries current.</li>
+      </ul>
+      <h4>4. Permit to Work (PTW) System</h4>
+      <ul>
+        <li>Hot work, enclosed space entry, and high-voltage PTW records — recent, correctly filled, authorization chain visible.</li>
+        <li>Surveyor may cross-check PTW records against actual recent maintenance jobs in PMS — verifying PTW is a practiced system, not a paperwork exercise.</li>
+      </ul>
+      <h4>5. PMS and Defect Reporting</h4>
+      <ul>
+        <li>PMS records showing overdue items, risk assessments for deferrals, CE's approval authority for each deferral documented.</li>
+        <li>Critical defects reported to office via Defect Reporting System (DRS) — audit trail visible.</li>
+      </ul>
+      <h4>6. Environmental Records (ORB &amp; SEEMP)</h4>
+      <ul>
+        <li>ORB Part I — current, correctly completed, no blank lines, Master's signature on each completed page.</li>
+        <li>SEEMP Part II — CII trajectory tracked; corrective actions documented if off target.</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">ISM Code Ch. 7</span><span class="reg-desc">Development of plans for shipboard operations</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code Ch. 9</span><span class="reg-desc">Reports and analysis of non-conformities, accidents and hazardous occurrences</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code Ch. 10</span><span class="reg-desc">Maintenance of the ship and equipment</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS Ch. IX / Reg. 4</span><span class="reg-desc">Certification — DOC and SMC requirements</span></div>
+      <div class="reg-item"><span class="reg-code">MSC-MEPC.7/Circ.8</span><span class="reg-desc">Guidelines for administration on ISM Code implementation</span></div>
+      <div class="reg-item"><span class="reg-code">DGS Circular MS-12</span><span class="reg-desc">Implementation of ISM Code — Indian flag ships (dgshipping.gov.in)</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Kochi MMD surveyors often ask: "Show me the last three NCs in your engine department and what corrective actions were taken." Be ready with specific examples. Generic answers — "we investigate and close out" — fail this question. The surveyor is testing whether the system lives on the ship or only in the file cabinet.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q1, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q1, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q1 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q4 CMS Survey -->
+<div class="q-card" id="q4" data-tags="survey machinery iacs">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">4</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Explain the CMS (Continuous Machinery Survey) scope. What can the CE survey? What must class surveyors survey? What is NOT covered by CMS?</div>
+      <div class="q-tags"><span class="q-tag tag-iacs">IACS UR Z7</span><span class="q-tag tag-survey">CMS</span><span class="q-tag tag-machinery">Machinery</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>CMS — Principle</h4>
+      <p>Instead of a concentrated 5-year Periodical Machinery Survey (PMS), CMS spreads individual machinery items on a rolling 5-year cycle. The ship must be enrolled in an approved CMS program with its Classification Society. This avoids taking the vessel out of service for a concentrated survey period and allows condition-based maintenance to be credited.</p>
+      <h4>Items CE May Survey (Class-Delegated Self-Survey)</h4>
+      <p>Under approved CMS programs, less-critical items may be surveyed by a CE holding valid MEO Class 1 / CE CoC, subject to class-approved delegation list. Typically includes:</p>
+      <ul>
+        <li>Auxiliary engines (non-propulsion generators)</li>
+        <li>Pumps — general service, ballast, bilge, FW/SW</li>
+        <li>Purifiers / fuel and lube oil separators</li>
+        <li>Air compressors, refrigeration compressors</li>
+        <li>Heat exchangers — SW/FW/LO coolers</li>
+        <li>Deck machinery — windlass, mooring winches (subject to class-specific rules)</li>
+      </ul>
+      <h4>Items REQUIRING Class Surveyor</h4>
+      <ul>
+        <li><strong>Main propulsion engine</strong> — crankshaft, main bearings, cylinder liners, running gear</li>
+        <li><strong>Propeller shafting and stern tube</strong> — tail shaft and intermediate shaft</li>
+        <li><strong>Main boilers</strong> — pressure vessel survey, safety valves; set-pressure verification</li>
+        <li><strong>Emergency generator</strong> — load test from dead ship condition; auto-start test</li>
+        <li><strong>Rudder and steering gear</strong> — structural inspection including pintles and gudgeons</li>
+      </ul>
+      <h4>NOT Included in CMS</h4>
+      <ul>
+        <li>Hull surveys — separate Annual / Intermediate / Special Survey scheme</li>
+        <li>Fire fighting systems — separate SOLAS periodic inspection schedule</li>
+        <li>LSA — annual and 5-year inspection per LSA Code / SOLAS regulations</li>
+        <li>MARPOL equipment surveys — separate IOPP and IAPP certificate surveys</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IACS UR Z7</span><span class="reg-desc">Survey of machinery installations — CMS requirements (primary reference)</span></div>
+      <div class="reg-item"><span class="reg-code">IACS UR Z7.1</span><span class="reg-desc">Continuous Machinery Survey — specific scope and CE delegation criteria</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS Ch. I / Reg. 10</span><span class="reg-desc">Maintenance of the ship after survey — class obligations</span></div>
+      <div class="reg-item"><span class="reg-code">IRS Rules Part 3</span><span class="reg-desc">Machinery installations — IRS CMS scheme (www.irclass.org)</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Know your own ship's CMS program — which items are on the rolling cycle and which are currently overdue. Surveyors ask: "What is overdue on your CMS right now and what is your risk assessment for deferral?" A blank answer here is a serious red flag.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q4, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q4, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q4 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q5 Load Line -->
+<div class="q-card" id="q5" data-tags="survey load-line solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">5</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Load Line Survey preparations as Second Engineer. What are your engine room responsibilities?</div>
+      <div class="q-tags"><span class="q-tag tag-load-line">Load Lines</span><span class="q-tag tag-solas">SOLAS II-1</span><span class="q-tag tag-survey">Survey</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Load Line Survey — ER Scope</h4>
+      <p>The Load Line Survey issues the <strong>International Load Line Certificate</strong> under the 1966 LL Convention / 1988 Protocol. It verifies hull integrity and freeboard assignment. The surveyor inspects ER-side closing appliances and watertight arrangements:</p>
+      <h4>1. Watertight Integrity — ER Closing Appliances</h4>
+      <ul>
+        <li><strong>Engine room skylights and ventilators:</strong> All closing appliances (dogs, hinges, closures) operational; rubber seals intact; storm covers available and labelled.</li>
+        <li><strong>ER access hatches (casing top):</strong> Dog bolts fully operational; gaskets not brittle or compressed flat.</li>
+        <li><strong>Vent heads / air pipes:</strong> Float-type or flip-flap closures for all ER/tank vents — free-moving, not corroded; float mechanisms not stuck.</li>
+        <li><strong>Storm valves on ER vents:</strong> Function-tested — very commonly found painted shut; verify each individually.</li>
+      </ul>
+      <h4>2. Sea Valves and Storm Valves</h4>
+      <ul>
+        <li>All sea suction and discharge valves operable from accessible positions; spindles not seized.</li>
+        <li>Overboard discharge non-return valves — verified non-return function.</li>
+      </ul>
+      <h4>3. Bilge System</h4>
+      <ul>
+        <li>Bilge alarm in ER operational; high bilge level alarm tested.</li>
+        <li>All bilge suction valves operable; bilge lines clear.</li>
+      </ul>
+      <h4>4. DB Tank Manholes &amp; Vent Pipes</h4>
+      <ul>
+        <li>All DB tank and void space manholes — dogs in place, bolts not seized, gaskets intact.</li>
+        <li>Ballast tank vent pipe closures operational; sounding pipes capped.</li>
+      </ul>
+      <h4>5. Documents Ready</h4>
+      <ul>
+        <li>Previous Load Line Certificate and survey history.</li>
+        <li>Stability booklet (intact and damage) — class-approved copy.</li>
+        <li>Deadweight scale / hydrostatic tables.</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">LL Convention 1966</span><span class="reg-desc">International Convention on Load Lines — primary instrument</span></div>
+      <div class="reg-item"><span class="reg-code">LL Protocol 1988</span><span class="reg-desc">1988 Protocol — HSSC survey harmonisation with SOLAS/MARPOL</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 11</span><span class="reg-desc">Watertight integrity — closing appliances in machinery spaces</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 35-1</span><span class="reg-desc">Protection of openings in watertight bulkheads and decks</span></div>
+      <div class="reg-item"><span class="reg-code">IRS Rules Part 2</span><span class="reg-desc">Hull — watertight integrity requirements under IRS classification</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Load line surveyors specifically target storm valves on ER vent heads — among the most common findings in Indian MMD surveys. Vent head float mechanisms are frequently corroded solid. Know the location of every ER vent head on your ship and test every one before the survey.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q5, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q5, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q5 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q6 IOPP Survey -->
+<div class="q-card" id="q6" data-tags="survey marpol">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">6</div>
+    <div class="q-text-wrap">
+      <div class="q-text">IOPP Survey preparation as 2nd Engineer — complete checklist.</div>
+      <div class="q-tags"><span class="q-tag tag-marpol">MARPOL Annex I</span><span class="q-tag tag-survey">Survey</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>IOPP Survey — Scope</h4>
+      <p>The IOPP Certificate is issued under <strong>MARPOL Annex I</strong> for ships 400 GT and above. The survey verifies physical equipment and record compliance. As 2E:</p>
+      <h4>1. OWS (Oily Water Separator)</h4>
+      <ul>
+        <li>Full function test — run OWS, confirm overboard stop activates at or below 15 ppm.</li>
+        <li>15 ppm bilge alarm: electrode cell clean; automatic three-way valve diverts to holding tank correctly.</li>
+        <li>Flow meter reading correct; no evidence of tampering.</li>
+        <li>OWS Type Approval Certificate onboard — must meet MEPC.107(49) or later standard.</li>
+      </ul>
+      <h4>2. Oil Record Book Part I</h4>
+      <ul>
+        <li>ORB current — all code letters A through I correctly entered; no blank lines.</li>
+        <li>Overboard discharge entries: date, lat/long, quantity, rate, method of disposal.</li>
+        <li>Bilge water retained: quantity, receiving tank identified.</li>
+        <li>Master's signature on each completed page.</li>
+        <li>ORB retained onboard for <strong>3 years</strong> after last entry (MARPOL Annex I Reg. 17).</li>
+      </ul>
+      <h4>3. Sludge System</h4>
+      <ul>
+        <li>Sludge tank capacity calculated per MARPOL formula: <strong>V = K × C × D</strong> (K = factor, C = cylinder oil daily consumption, D = days between port calls).</li>
+        <li>Sludge pump operational; standard shore connection flange fitted (MARPOL Annex I Reg. 13).</li>
+      </ul>
+      <h4>4. Bilge System Integrity</h4>
+      <ul>
+        <li>No direct overboard discharge from ER bilges bypassing OWS.</li>
+        <li>Surveyor physically traces OWS pipework — know every valve position in your bilge/OWS circuit.</li>
+      </ul>
+      <h4>5. Certificates</h4>
+      <ul>
+        <li>IOPP Certificate — valid and endorsed.</li>
+        <li>Supplement to IOPP Certificate (Form A for non-tankers) — accurate and updated for current ship configuration.</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex I / Reg. 14</span><span class="reg-desc">Control of discharge of oil — 15 ppm rule for machinery space bilges</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex I / Reg. 17</span><span class="reg-desc">Oil Record Book Part I — machinery space operations; 3-year retention</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex I / Reg. 26</span><span class="reg-desc">Surveys and certification — IOPP Certificate requirements and intervals</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC.107(49)</span><span class="reg-desc">Revised guidelines and specification for OWS / bilge alarm equipment</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex I / Reg. 13</span><span class="reg-desc">Standard discharge connection — sludge shore connection requirements</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Know all ORB code letters by memory: A = Ballasting of fuel oil tanks; B = Cleaning of fuel oil tanks; C = Discharge of oily residues (sludge); D = Non-automatic discharge overboard (OWS); E = Automatic discharge overboard (bilge pump); F = Condition of OWS and alarm; G = Accidental/exceptional discharge; H = Bunkering; I = Additional operational procedures/remarks. Examiner will call out a letter and expect the meaning instantly.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q6, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q6, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q6 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q7 NOx Technical File -->
+<div class="q-card" id="q7" data-tags="survey marpol machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">7</div>
+    <div class="q-text-wrap">
+      <div class="q-text">NOx Technical File — what is it, what does it contain, and what does the surveyor check?</div>
+      <div class="q-tags"><span class="q-tag tag-marpol">MARPOL Annex VI</span><span class="q-tag tag-survey">Survey</span><span class="q-tag tag-machinery">Machinery</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>NOx Technical File (NTF) — Purpose</h4>
+      <p>The NTF is mandatory under <strong>MARPOL Annex VI, Regulation 13</strong> for each diesel engine with output power <strong>more than 130 kW</strong>. It is engine-specific and demonstrates compliance with applicable NOx Tier limits. Every diesel engine above threshold has its own NTF, approved by the Flag Administration.</p>
+      <h4>Contents</h4>
+      <ul>
+        <li><strong>Engine identification:</strong> Maker, model, serial number, rated power (kW), rated speed (RPM).</li>
+        <li><strong>Applicable NOx Tier:</strong> Tier I (pre-2011 keel lay), Tier II (2011 onward), Tier III (ECA-applicable, post-2016).</li>
+        <li><strong>Engine cycle data — the critical part:</strong> Fuel injection timing, injection pressure, valve timing, charge air pressure and temperature — the exact settings that define the emission control configuration.</li>
+        <li><strong>Approved components list:</strong> Fuel injection pumps, injectors, turbocharger model — and acceptable variation ranges.</li>
+        <li><strong>Test report reference:</strong> Reference to NOx emission test accepted by Flag Administration.</li>
+        <li><strong>Approved modifications:</strong> Any post-delivery modification affecting NOx emissions — recorded and separately approved.</li>
+      </ul>
+      <h4>What the Surveyor Checks</h4>
+      <ul>
+        <li>NTF onboard and valid — signed by Flag Administration or Recognised Organisation (RO).</li>
+        <li>Engine settings match NTF values — injection timing may be physically verified.</li>
+        <li>Approved components in use — unapproved replacements require Administration notification.</li>
+        <li><strong>EIAPP Certificate</strong> (Engine International Air Pollution Prevention Certificate) — cross-checked with NTF.</li>
+        <li>On-Board NOx Verification Procedure (ONVP) if applicable — procedure document and recent records checked.</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI / Reg. 13</span><span class="reg-desc">NOx — Tier I/II/III limits and Technical File requirement</span></div>
+      <div class="reg-item"><span class="reg-code">NOx Technical Code 2008</span><span class="reg-desc">Technical Code on Control of NOx from Marine Diesel Engines — MEPC.177(58)</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI / Reg. 5</span><span class="reg-desc">Surveys and certification — EIAPP Certificate</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC.1/Circ.795</span><span class="reg-desc">Guidance on NOx Technical File record keeping</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Know your main engine's NOx Tier. Most Maersk container vessels post-2011 are Tier II. For ECA operations (North Sea, Baltic, US ECA), know whether your engine is Tier III compliant (EGR or SCR fitted). Examiner will ask: "What Tier is your main engine and how do you verify compliance at an ECA boundary?"</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q7, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q7, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q7 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q8 SAFCON -->
+<div class="q-card" id="q8" data-tags="survey solas machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">8</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is a SAFCON (Safety Construction) Survey? What does the surveyor check in the engine room?</div>
+      <div class="q-tags"><span class="q-tag tag-solas">SOLAS II</span><span class="q-tag tag-survey">Survey</span><span class="q-tag tag-machinery">Machinery</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>SAFCON Survey — Purpose</h4>
+      <p>The Safety Construction Survey issues the <strong>Cargo Ship Safety Construction Certificate (CSSCC)</strong> for vessels 500 GT and above, verifying SOLAS safety construction compliance — hull, machinery, electrical, and fire safety. Valid 5 years (intermediate survey at 2.5 years).</p>
+      <h4>A. Emergency Stops &amp; Remote Controls</h4>
+      <ul>
+        <li>Remote emergency shutdown — fuel oil service pumps, forced draught fans, purifiers — tested from <em>outside</em> machinery spaces.</li>
+        <li>Emergency generator — auto-start tested; load test from dead ship condition.</li>
+        <li>Quick-closing fuel oil valves — remote operation from outside ER tested.</li>
+      </ul>
+      <h4>B. Fire Safety in Machinery Spaces (SOLAS II-2)</h4>
+      <ul>
+        <li>Fixed CO2 / equivalent fire extinguishing system — cylinder weights within limits; last discharge certificate present.</li>
+        <li>ER boundary ventilation dampers — quick-closing tested from outside ER.</li>
+        <li>Fire detection system — smoke/heat detectors tested; panel functional; alarm audible on bridge.</li>
+        <li>Main and emergency fire pumps — pressure and flow tested.</li>
+      </ul>
+      <h4>C. Steering Gear (SOLAS II-1 / Reg. 29)</h4>
+      <ul>
+        <li>Main and auxiliary steering gear — functional test to full angle rate.</li>
+        <li>Emergency steering from steering gear room — tested; bridge communication confirmed.</li>
+      </ul>
+      <h4>D. Electrical Safety</h4>
+      <ul>
+        <li>Main switchboard insulation resistance measured.</li>
+        <li>Emergency switchboard automatic transfer tested.</li>
+        <li>Shore connection available and correctly marked.</li>
+      </ul>
+      <h4>E. ER Structural Integrity</h4>
+      <ul>
+        <li>ER watertight boundary — closing appliances, hatch covers operational.</li>
+        <li>Shaft tunnel access door — watertight, dogs operational, passage unobstructed.</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS Ch. I / Reg. 10</span><span class="reg-desc">Surveys — Cargo Ship Safety Construction Certificate (CSSCC)</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS Ch. II-1</span><span class="reg-desc">Structure, subdivision, stability, machinery and electrical installations</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-2 / Reg. 10</span><span class="reg-desc">Fire fighting systems — machinery spaces</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 29</span><span class="reg-desc">Steering gear — requirements and performance tests</span></div>
+      <div class="reg-item"><span class="reg-code">MMD Survey Checklist</span><span class="reg-desc">DGS India — MMD inspection checklist (dgshipping.gov.in)</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Remote emergency stops for FO pumps and FD fans are among the most common SAFCON findings in Indian MMD surveys — switches painted over, labels missing, spindles seized. Test every one yourself before the surveyor arrives and label clearly.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q8, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q8, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q8 · v1.0</span>
+  </div>
+</div>
+
+<!-- ── SECTION: STABILITY ── -->
+<div class="section-head"><h2>⚖ Stability</h2><span class="sec-count">9 questions</span></div>
+
+<!-- Q2 Intact Stability -->
+<div class="q-card" id="q2" data-tags="stability solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">State the Intact Stability Criteria — IS Code 2008 (MSC.267(85)). Give all numerical values.</div>
+      <div class="q-tags"><span class="q-tag tag-stability">Stability</span><span class="q-tag tag-solas">IS Code 2008</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Intact Stability Criteria — IS Code 2008, Chapter 2.2</h4>
+      <p>All six criteria must be satisfied simultaneously at every loading condition. These are minimums — none may be reduced:</p>
+      <ol>
+        <li><strong>Area 0° to 30° ≥ 0.055 m·rad</strong></li>
+        <li><strong>Area 0° to 40° ≥ 0.090 m·rad</strong> (or to angle of flooding θf if θf &lt; 40°)</li>
+        <li><strong>Area 30° to 40° ≥ 0.030 m·rad</strong> (or between 30° and θf)</li>
+        <li><strong>GZ at 30° ≥ 0.200 m</strong></li>
+        <li><strong>Maximum GZ at angle ≥ 25°</strong> (preferably ≥ 30°)</li>
+        <li><strong>Initial GM₀ ≥ 0.150 m</strong></li>
+      </ol>
+      <p><em>θf = angle of flooding — the heel angle at which water ingress can occur through any unprotected opening. If θf &lt; 40°, criteria 2 and 3 are measured to θf instead of 40°.</em></p>
+      <h4>Weather Criterion (IS Code 2008, Section 2.3)</h4>
+      <p>The ship must survive the combined effect of steady wind and rolling. Key values:</p>
+      <ul>
+        <li>Steady wind heeling arm (lw1): calculated using wind pressure <strong>504 Pa</strong> (standard).</li>
+        <li>Gust wind pressure (lw2) = <strong>1.5 × lw1</strong>.</li>
+        <li>Rolling amplitude θ1 — from empirical formula involving B/d, CB, OG, rolling period.</li>
+        <li>Pass condition: <strong>Area b (leeward reserve) ≥ Area a (windward rolling energy)</strong>.</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IS Code 2008 / 2.2</span><span class="reg-desc">Design criteria — intact stability; adopted by Resolution MSC.267(85)</span></div>
+      <div class="reg-item"><span class="reg-code">IS Code 2008 / 2.3</span><span class="reg-desc">Severe wind and rolling criterion (weather criterion)</span></div>
+      <div class="reg-item"><span class="reg-code">IMO Res. A.749(18)</span><span class="reg-desc">Code on Intact Stability — predecessor; still referenced for older ships</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 5</span><span class="reg-desc">Required stability information to be supplied to the Master</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Memorise these six numbers in order: 0.055 (0–30°) · 0.09 (0–40°) · 0.03 (30–40°) · GZ ≥ 0.20m at 30° · max GZ angle ≥ 25° · GM ≥ 0.15m. Stating them without hesitation and in sequence will satisfy the examiner completely on this question.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q2, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q2, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q2 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q3 Damage Stability -->
+<div class="q-card" id="q3" data-tags="stability solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">State the Damage Stability Criteria for cargo ships under SOLAS 2009 amendments. What is A ≥ R?</div>
+      <div class="q-tags"><span class="q-tag tag-stability">Stability</span><span class="q-tag tag-solas">SOLAS II-1</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Damage Stability — Regulatory Framework</h4>
+      <p>SOLAS Chapter II-1, Part B-2 governs damage stability. The <strong>2009 amendments (MSC.216(82))</strong> introduced a probabilistic framework for cargo ships ≥80m built on or after 1 January 2009.</p>
+      <h4>The Probabilistic Method — A ≥ R</h4>
+      <ul>
+        <li><strong>Attained index (A):</strong> Calculated from the ship's actual geometry — summing probability-weighted contributions from all possible compartment flooding scenarios. Higher A = better inherent damage resistance built into the hull form.</li>
+        <li><strong>Required index (R):</strong> Set by SOLAS based on ship length (L). Generally 0.5 to 0.8 for cargo ships, increasing with length.</li>
+        <li><strong>Compliance: A ≥ R.</strong> If A falls below R, the subdivision is inadequate and the ship cannot be certified.</li>
+      </ul>
+      <h4>Residual Stability After Flooding (Final Stage)</h4>
+      <ul>
+        <li>Positive range of stability <strong>≥ 20°</strong> beyond equilibrium heel angle.</li>
+        <li>Maximum GZ <strong>≥ 0.1 m</strong> within that 20° range.</li>
+        <li>Equilibrium heel angle <strong>≤ 25°</strong> (≤ 15° if large open areas on deck).</li>
+        <li>Damage waterline must not reach any opening through which progressive flooding can occur.</li>
+      </ul>
+      <h4>Older Ships — Deterministic Method</h4>
+      <p>Pre-2009 ships used the deterministic method — fixed prescribed flooding extents (one, two, or three compartment flooding) based on ship length. The probabilistic method replaced this because it assesses actual risk across all possible flooding combinations, producing a more realistic safety measure.</p>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 7</span><span class="reg-desc">Required and attained subdivision index — A ≥ R probabilistic method</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 25</span><span class="reg-desc">Damage stability requirements for cargo ships</span></div>
+      <div class="reg-item"><span class="reg-code">MSC.216(82)</span><span class="reg-desc">Adoption of revised SOLAS Chapter II-1 (2009 amendments)</span></div>
+      <div class="reg-item"><span class="reg-code">IS Code 2008 / Ch. 3</span><span class="reg-desc">Design criteria — damage stability guidance (Part B)</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> When examiner asks "what is A and R?", state: A = Attained index (calculated from actual hull geometry and all flooding scenarios). R = Required index (set by SOLAS based on ship length). Pass condition: A ≥ R. Maersk container vessels are probabilistic method ships, built post-2009.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q3, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q3, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q3 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q9 Factor of Subdivision -->
+<div class="q-card" id="q9" data-tags="stability solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">9</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is the Factor of Subdivision? How is it determined and what does a lower value indicate?</div>
+      <div class="q-tags"><span class="q-tag tag-stability">Stability</span><span class="q-tag tag-solas">SOLAS II-1</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Factor of Subdivision (F) — Definition</h4>
+      <p>F is the <strong>maximum permissible length of a compartment</strong> expressed as a fraction of the <strong>floodable length</strong>. It governs how finely a ship must be subdivided to meet statutory damage stability requirements.</p>
+      <p class="formula"><strong>Permissible compartment length = F × Floodable length</strong></p>
+      <h4>How F is Determined</h4>
+      <p>F is calculated from the <strong>criterion numeral (C)</strong>, which depends on:</p>
+      <ul>
+        <li><strong>Ship length (L)</strong> — longer ships get stricter subdivision.</li>
+        <li><strong>Number of persons carried</strong> — Cs (service numeral) combines a length factor with a passenger factor.</li>
+        <li>Two values Cs and Cp are calculated; F is interpolated between them using the SOLAS II-1 Reg. 6 formula.</li>
+      </ul>
+      <h4>Interpretation</h4>
+      <ul>
+        <li><strong>F = 1.0</strong> — minimal subdivision; compartment may equal full floodable length. Simple cargo ships below certain criteria.</li>
+        <li><strong>F = 0.5</strong> — compartment may be only 50% of floodable length; stricter.</li>
+        <li><strong>F = 0.33 or lower</strong> — very high subdivision; large passenger ships.</li>
+      </ul>
+      <p><strong>Lower F = more bulkheads required = more stringent subdivision = safer ship against flooding.</strong></p>
+      <p><em>For modern cargo ships using the probabilistic method (post-2009 SOLAS), F has been superseded by the A ≥ R index. The concept remains relevant for older vessels and for the oral examination.</em></p>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 2</span><span class="reg-desc">Definitions — floodable length, factor of subdivision, criterion numeral</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 6</span><span class="reg-desc">Factor of subdivision — formulae and application</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 7</span><span class="reg-desc">Attained subdivision index — modern replacement for F in post-2009 cargo ships</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> If asked to compare F for a passenger ship vs. cargo ship: passenger ships have a lower F (more stringent subdivision) because of far higher risk to life. "The lower the F, the more bulkheads required, the safer the ship from flooding." This one-sentence principle will satisfy most examiners.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q9, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q9, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q9 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q10 GZ Curve -->
+<div class="q-card" id="q10" data-tags="stability solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">10</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Draw and explain the GZ / Statical Stability Curve. Label all key points.</div>
+      <div class="q-tags"><span class="q-tag tag-stability">Stability</span><span class="q-tag tag-solas">IS Code 2008</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>GZ Curve — What It Represents</h4>
+      <p>The GZ curve plots the <strong>righting lever (GZ in metres)</strong> against <strong>angle of heel (degrees)</strong> at a specific displacement and KG. GZ is the horizontal distance between vertical lines through G and through the centre of buoyancy B — it is the arm of the restoring couple. Larger GZ at a given angle = more righting moment = more stable.</p>
+      <h4>Key Points — Label These When Drawing</h4>
+      <ul>
+        <li><strong>Origin (0°, GZ=0):</strong> Ship upright. Zero righting or heeling lever.</li>
+        <li><strong>Initial slope:</strong> Slope at origin = GM₀ × sinθ ≈ GM₀ × θ (radians) for small angles. Steeper = larger GM = stiffer ship.</li>
+        <li><strong>Maximum GZ point:</strong> Peak of the curve. IS Code requires this at ≥ 25° (preferably ≥ 30°); GZ at 30° must be ≥ 0.20m.</li>
+        <li><strong>Angle of flooding (θf):</strong> Angle at which an unprotected opening submerges. If θf &lt; 40°, it cuts off the effective range.</li>
+        <li><strong>Angle of vanishing stability (θv):</strong> GZ returns to zero — beyond this, ship capsizes. Range of positive stability = 0° to θv.</li>
+      </ul>
+      <h4>Area Criteria (Mark as Hatched Zones on Drawing)</h4>
+      <ul>
+        <li>Zone 1: 0° to 30° = 0.055 m·rad minimum.</li>
+        <li>Zone 2: 0° to 40° = 0.09 m·rad minimum (whole zone).</li>
+        <li>Zone 3: 30° to 40° = 0.03 m·rad minimum.</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IS Code 2008 / 2.2</span><span class="reg-desc">Design criteria — GZ curve requirements; MSC.267(85)</span></div>
+      <div class="reg-item"><span class="reg-code">IS Code 2008 / Part A / 1</span><span class="reg-desc">General requirements — mandatory provisions for all ship types</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 5</span><span class="reg-desc">Required stability information to be supplied to Master</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> You will almost certainly be asked to draw the GZ curve at Kochi MMD. Draw a clean arc starting at origin, initial slope proportional to GM, peak near 40°, descend to cross zero at ~70–80°. Mark θf if asked. Hatch the three area criteria zones. Label maximum GZ point with "≥ 0.20m at 30°". A well-drawn, labelled curve with all six criteria noted scores full marks.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q10, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q10, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q10 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q11 Cross Curves -->
+<div class="q-card" id="q11" data-tags="stability solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">11</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What are Cross Curves of Stability (KN Curves)? How are they constructed and used?</div>
+      <div class="q-tags"><span class="q-tag tag-stability">Stability</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Cross Curves — Purpose</h4>
+      <p>Cross Curves of Stability are a <strong>set of curves derived from ship hull geometry alone</strong>, independent of any specific loading condition. They allow the GZ curve to be rapidly constructed for any loading condition without repeating full hull calculations from scratch.</p>
+      <h4>Construction</h4>
+      <ul>
+        <li>At each <strong>fixed angle of heel</strong> (typically 10°, 20°, 30°, 40°, 50°, 60°, 75°, 90°), the righting lever <strong>KN</strong> is calculated — from keel (K) to the point of action of buoyancy (N) — across a range of displacement values.</li>
+        <li>Each fixed heel angle produces one curve of KN vs. displacement.</li>
+        <li>Result: a <strong>family of curves</strong> (one per heel angle) plotted on one graph against displacement. Calculated once at design stage; reused throughout the ship's life.</li>
+      </ul>
+      <h4>Using the Cross Curves to Find GZ</h4>
+      <p>For a given loading condition (known displacement Δ and KG):</p>
+      <ol>
+        <li>Enter the cross curves at the actual displacement — read off KN at each angle.</li>
+        <li>Apply correction: <strong>GZ = KN − KG × sin θ</strong></li>
+        <li>Plot GZ vs. angle — this gives the actual GZ curve for that loading condition.</li>
+      </ol>
+      <p>This formula separates <em>geometry</em> (KN — property of hull shape, fixed) from <em>loading</em> (KG — changes with cargo distribution). This is the practical utility of cross curves.</p>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 5</span><span class="reg-desc">Required stability information — cross curves to be available to Master</span></div>
+      <div class="reg-item"><span class="reg-code">IS Code 2008 / Part B / Annex</span><span class="reg-desc">Guidance on stability documentation including cross curve construction</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> The key formula is <strong>GZ = KN − KG·sinθ</strong>. This is the core answer. Explain why: KN is geometry (fixed by hull form for all time), KG is loading condition (changes with every voyage). Separating them allows one set of hull-form calculations to serve all loading conditions throughout the ship's operational life.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q11, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q11, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q11 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q12 Free Surface Effect -->
+<div class="q-card" id="q12" data-tags="stability solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">12</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Explain Free Surface Effect — formula, effect on GM, and how to reduce it.</div>
+      <div class="q-tags"><span class="q-tag tag-stability">Stability</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Free Surface Effect — Principle</h4>
+      <p>When a tank is <strong>partially filled</strong>, the free surface of the liquid shifts transversely as the ship heels, moving the centre of gravity of that liquid in the direction of heel. This effectively raises the ship's virtual centre of gravity and <strong>reduces the righting lever GZ</strong>. FSE does not physically move G — it creates a <em>virtual rise of G</em> equivalent to the loss of stability from the shifting liquid surface.</p>
+      <h4>Formula</h4>
+      <p class="formula"><strong>GG₁ = (i × ρ_liquid) / (V × ρ_water)</strong></p>
+      <p>Where: <strong>i</strong> = second moment of area of the free surface about its longitudinal centroidal axis (m⁴) | <strong>ρ_liquid</strong> = density of liquid in tank | <strong>V</strong> = ship's displacement volume (m³) | <strong>ρ_water</strong> = density of water ship floats in. For same-density liquids: GG₁ = i / V.</p>
+      <h4>Effect on GM</h4>
+      <p class="formula"><strong>GM (effective) = GM (solid) − GG₁</strong></p>
+      <p>FSE always reduces effective GM. If total GG₁ &gt; GM (solid) → effective GM becomes negative → potential instability.</p>
+      <h4>Three Key Points</h4>
+      <ul>
+        <li>FSE is proportional to <strong>breadth³ of the tank</strong> (i = lb³/12) — wide tanks are far more dangerous than narrow ones.</li>
+        <li>Splitting a tank longitudinally into two equal halves reduces FSE to <strong>1/4 of original</strong>.</li>
+        <li>FSE depends on <em>tank dimensions</em>, not on quantity of liquid — a tank 10% full has nearly the same FSE correction as one 90% full.</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IS Code 2008 / 2.2.3</span><span class="reg-desc">Correction to GM for free surfaces of liquids — mandatory in all stability calculations</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 5</span><span class="reg-desc">Stability information — FSC corrections to be included in loading manual</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> When asked "how do you reduce free surface effect?", give three practical answers: (1) press up tanks or empty them completely, (2) use longitudinal divisions in wide tanks, (3) load ballast in DB tanks first (lowest, widest tanks have least effect on KG). These three show operational understanding, not just formula recitation.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q12, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q12, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q12 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q13 Angle of Loll -->
+<div class="q-card" id="q13" data-tags="stability solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">13</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is Angle of Loll? Cause, recognition, and correct corrective actions — in full.</div>
+      <div class="q-tags"><span class="q-tag tag-stability">Stability</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Angle of Loll — Definition</h4>
+      <p>Angle of loll is the angle at which a ship with <strong>negative initial GM</strong> (G above M) finds a position of <em>unstable equilibrium</em>. The ship lolls to one side and remains there. If disturbed, it may snap to the other side or capsize. <strong>Key distinction from a list:</strong> with loll, G is still on the centreline — the cause is GM &lt; 0, not an off-centre G.</p>
+      <h4>Cause</h4>
+      <p><strong>GM₀ &lt; 0</strong> — typically from:</p>
+      <ul>
+        <li>Excessive topweight — heavy cargo or equipment loaded high.</li>
+        <li>Large free surface effects reducing effective GM below zero.</li>
+        <li>Consuming DB tank ballast, raising centre of gravity above metacentre.</li>
+      </ul>
+      <h4>Recognition — GZ Curve at Loll</h4>
+      <p>The GZ curve has a <em>negative slope at 0°</em> (GZ is negative just past upright), crosses zero at the angle of loll (θl), shows positive GZ beyond θl, then falls back to zero at vanishing stability. The ship is unstable at upright but finds temporary equilibrium at θl.</p>
+      <h4>Corrective Actions — CRITICAL SEQUENCE</h4>
+      <ul>
+        <li><strong>Step 1 — Identify correctly:</strong> Confirm it is loll (G on centreline, negative GM) not list (G off centreline, positive GM). Treatment is different.</li>
+        <li><strong>Step 2 — Do NOT fill high tanks first.</strong> Adding liquid to a high tank temporarily increases FSE, further raising virtual G — can capsize the vessel before the tank fills.</li>
+        <li><strong>Step 3 — Fill Double Bottom (DB) tanks.</strong> This lowers G (adds weight low) and increases KM (less displacement draws more KM), restoring positive GM.</li>
+        <li><strong>Step 4 — Fill the DB tank on the low (loll) side first.</strong> If you fill the high side first, the initial effect is to add weight to the high side, potentially snapping the ship to the other side before the FSE is eliminated.</li>
+        <li><strong>Step 5 — Shift heavy cargo downward</strong> if operationally possible.</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IS Code 2008 / 2.2</span><span class="reg-desc">GM ≥ 0.15m minimum criterion — to prevent loll situations in normal operation</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 5</span><span class="reg-desc">Stability information — remedial action guidance to be included in stability booklet</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip — The Classic Killer Question:</strong> Examiner: "10° loll to starboard. What do you do?" Answer: (1) Confirm it is loll not list. (2) Fill DB tanks — starboard (low) side first. (3) State WHY NOT high tanks — "filling a high tank temporarily increases FSE, raising virtual G further and risking capsize before the tank is full." This three-point answer with the reason will satisfy the examiner completely.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q13, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q13, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q13 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q14 Dynamic Stability -->
+<div class="q-card" id="q14" data-tags="stability solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">14</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is Dynamic Stability? How does it differ from static stability and why does it matter?</div>
+      <div class="q-tags"><span class="q-tag tag-stability">Stability</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Dynamic Stability — Definition</h4>
+      <p>Dynamic stability is the <strong>work done in heeling the ship to a given angle</strong> — the ship's capacity to absorb energy from waves, wind gusts, or cargo shifts without capsizing.</p>
+      <p class="formula"><strong>Dynamic Stability (m·rad) = Area under the GZ curve × Displacement × g</strong></p>
+      <p>In practice, the area under the GZ curve (in m·rad) directly expresses the dynamic stability per unit displacement. This is why the IS Code area criteria (0.055, 0.09, 0.03 m·rad) are dynamic stability requirements.</p>
+      <h4>Static vs. Dynamic</h4>
+      <ul>
+        <li><strong>Static stability:</strong> GZ at one fixed angle — the righting moment if the ship is slowly and statically held at that angle. A single-point measure. Does not account for energy required to reach that angle.</li>
+        <li><strong>Dynamic stability:</strong> Area under the GZ curve to that angle — the energy the ship can absorb while rolling through those angles in real sea conditions. Ships roll dynamically, not statically — this is the more realistic measure.</li>
+      </ul>
+      <h4>Practical Significance</h4>
+      <p>A ship could have adequate GZ at 30° (adequate static stability) but a small area under the curve (low dynamic stability) — meaning it cannot survive a wave imparting sufficient rolling energy to reach that angle. The IS Code area criteria and the weather criterion (area b ≥ area a) are both essentially dynamic stability requirements expressed numerically.</p>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IS Code 2008 / 2.2</span><span class="reg-desc">Area criteria — the IS Code's expression of dynamic stability requirements</span></div>
+      <div class="reg-item"><span class="reg-code">IS Code 2008 / 2.3</span><span class="reg-desc">Weather criterion — combines static wind moment and dynamic rolling energy</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> If asked "what is the area under the GZ curve?", state: it represents the dynamic stability — the energy absorbed during heeling. This connects the abstract criteria numbers to a real physical meaning and shows the examiner you understand the purpose of the criteria, not just the values.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q14, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q14, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q14 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q15 Inclining Experiment -->
+<div class="q-card" id="q15" data-tags="stability solas survey">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">15</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is an Inclining Experiment? Purpose, principle, pre-inclining checks, and when must it be repeated?</div>
+      <div class="q-tags"><span class="q-tag tag-stability">Stability</span><span class="q-tag tag-solas">SOLAS II-1</span><span class="q-tag tag-survey">Survey</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Inclining Experiment — Purpose</h4>
+      <p>The Inclining Experiment (IE) is the only direct method of determining a ship's actual <strong>lightship displacement and KG</strong>. These results establish the baseline for the stability booklet — all loading condition GZ curves are derived from these lightship values. Mandatory for all new ships before the stability booklet is approved (SOLAS II-1 Reg. 5-1).</p>
+      <h4>Principle</h4>
+      <p>Known masses are moved known transverse distances on deck. The resulting heel angle is measured:</p>
+      <p class="formula"><strong>GM = (w × d) / (W × tan θ)</strong></p>
+      <p>Where: w = mass moved (t) | d = transverse distance (m) | W = ship's displacement (t) | θ = angle of heel produced.</p>
+      <p>Then: <strong>KG = KM − GM</strong> (KM from hydrostatic tables at surveyed draught).</p>
+      <h4>Pre-Inclining Checks</h4>
+      <ul>
+        <li>Ship as close to lightship as possible — all cargo, consumables removed or precisely recorded.</li>
+        <li>All tanks pressed up or empty — free surfaces minimised.</li>
+        <li>No personnel moving on deck during readings; gangway singled up; mooring lines slack.</li>
+        <li>Weather: wind &lt; Beaufort 3; ship floating freely, not touching bottom.</li>
+        <li>Pendulums or digital inclinometers calibrated and positioned per approved procedure.</li>
+      </ul>
+      <h4>When Must the IE Be Repeated?</h4>
+      <ul>
+        <li>After major structural modification (new deck, superstructure addition, major conversion).</li>
+        <li>When actual lightship displacement or LCG differs from booklet values beyond class tolerances — typically <strong>2% in displacement</strong> or <strong>0.5% of ship length in LCG</strong>.</li>
+        <li>If Administration or class society requests it due to suspect stability performance.</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 5-1</span><span class="reg-desc">Information on stability — inclining test required for all ships</span></div>
+      <div class="reg-item"><span class="reg-code">MSC.1/Circ.1229</span><span class="reg-desc">Guidelines for preparation and conduct of the inclining experiment</span></div>
+      <div class="reg-item"><span class="reg-code">IS Code 2008 / Part B</span><span class="reg-desc">Explanatory notes — inclining experiment guidance</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> When asked "when do you repeat the inclining experiment?", be specific: after major structural modifications, or when deviation from booklet values exceeds 2% in displacement or 0.5% of ship length in LCG. Generic answers like "after any modification" will not satisfy the examiner.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q15, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q15, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q15 · v1.0</span>
+  </div>
+</div>
+
+<!-- ── SECTION: ENGINE CONSTRUCTION & STRUCTURAL ── -->
+<div class="section-head"><h2>🔧 Engine Construction &amp; Structural</h2><span class="sec-count">5 questions</span></div>
+
+<!-- Q16 Damage Control Plan -->
+<div class="q-card" id="q16" data-tags="stability solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">16</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Contents of the Damage Control Plan. What must it contain per SOLAS, and where must it be kept?</div>
+      <div class="q-tags"><span class="q-tag tag-stability">Damage Control</span><span class="q-tag tag-solas">SOLAS II-1</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Damage Control Plan — SOLAS Requirement</h4>
+      <p>SOLAS Chapter II-1 Regulation 19 requires that approved <strong>Damage Control Plans and Booklets</strong> be available to officers. They show the watertight subdivisions, closing devices, and list correction arrangements.</p>
+      <h4>Required Contents</h4>
+      <ul>
+        <li><strong>General arrangement plan:</strong> All watertight bulkheads, decks, tank tops; flooding boundaries clearly marked.</li>
+        <li><strong>Compartment identification:</strong> Each watertight compartment numbered/labelled with its free flooding volume and permeability factor.</li>
+        <li><strong>Flooding scenarios:</strong> For each scenario — resulting waterline, heel, trim, reserve buoyancy.</li>
+        <li><strong>All watertight door locations:</strong> Type (hinged or sliding), remote/local operation, bridge position indicator.</li>
+        <li><strong>Cross-flooding arrangements:</strong> Cross-flooding duct locations (if fitted), to equalise flooding and reduce heel.</li>
+        <li><strong>Bilge pumping arrangements:</strong> Pump capacities, suction positions, cross connections.</li>
+        <li><strong>Residual stability:</strong> GZ and waterline for each flooding scenario — compliance with damage stability criteria shown.</li>
+        <li><strong>List correction procedures:</strong> Ballasting sequence to correct heel after damage.</li>
+      </ul>
+      <h4>Location</h4>
+      <p>The plan must be <strong>permanently displayed</strong> or readily available — typically at the bridge and/or entrance to accommodation. The booklet version is available to officers. Surveyors check its presence during SAFCON and CSSCC surveys.</p>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 19</span><span class="reg-desc">Damage control information — plans and booklets required to be kept on board</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 7</span><span class="reg-desc">Damage stability — scenarios the plan must address</span></div>
+      <div class="reg-item"><span class="reg-code">MSC.1/Circ.1245</span><span class="reg-desc">Guidelines for preparation of damage control documentation</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Surveyors ask: "Where is your damage control plan and who has access to it?" The answer must be a physical location — not "it's in the SMS." Know the exact location on your ship.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q16, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q16, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q16 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q17 Shell Expansion Plan -->
+<div class="q-card" id="q17" data-tags="survey machinery iacs">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">17</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is the Shell Expansion Plan? How is it used, and what is Frame Number 0?</div>
+      <div class="q-tags"><span class="q-tag tag-iacs">IACS / Class</span><span class="q-tag tag-survey">Survey</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Shell Expansion Plan — Definition</h4>
+      <p>The Shell Expansion Plan (SEP) is a <strong>plan view of the ship's outer shell plating</strong> — the hull "unrolled" and flattened. It shows every shell plate with:</p>
+      <ul>
+        <li>Strake designation (A-strake at keel, ascending alphabetically upward)</li>
+        <li>Plate number within each strake</li>
+        <li>Plate material grade (A, B, D, E, or higher-strength AH, DH, EH)</li>
+        <li>Plate thickness as-built; updated with UT measurement records from surveys</li>
+        <li>Frame positions along the length; weld locations (butt and seam welds)</li>
+        <li>Insert plates, doublers, or recorded repairs</li>
+      </ul>
+      <p>Used by class surveyors during <strong>Special Survey / Close-Up Survey</strong> to record UT measurements, document wastage against original thickness, identify areas needing steel renewal, and track structural condition over the ship's life.</p>
+      <h4>Frame Number 0</h4>
+      <p>Frame <strong>No. 0</strong> is the <strong>Aft Perpendicular (AP)</strong> — the vertical reference line at the centreline of the rudder stock at the design waterline. Frames are numbered sequentially forward:</p>
+      <ul>
+        <li>Frame 0 = Aft Perpendicular (AP)</li>
+        <li>Frame N = N × frame spacing forward of AP</li>
+        <li>Forward Perpendicular (FP) = highest frame number</li>
+      </ul>
+      <p>This system allows any structural location to be precisely identified: "Strake D, Plate 3, Frames 24–28, Port Side" is an unambiguous location for steel renewal records.</p>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IACS UR S31</span><span class="reg-desc">Thickness measurement of hull structure — use of shell expansion plan</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 3-2</span><span class="reg-desc">Construction documents — plans to be maintained on board for entire service life</span></div>
+      <div class="reg-item"><span class="reg-code">IRS Rules Part 2 / Ch. 1</span><span class="reg-desc">Ship drawings and plans required on board — IRS classification</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> "What is frame 0?" — Aft Perpendicular. "What is the AP?" — the vertical line through the centreline of the rudder stock at the design draught. This is the origin for measuring ship length (L) and for the frame numbering system.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q17, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q17, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q17 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q18 Collision Bulkhead -->
+<div class="q-card" id="q18" data-tags="stability solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">18</div>
+    <div class="q-text-wrap">
+      <div class="q-text">SOLAS requirements for the Collision Bulkhead: position from FP, height, and permitted openings.</div>
+      <div class="q-tags"><span class="q-tag tag-solas">SOLAS II-1 Reg. 12</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Collision Bulkhead — Purpose</h4>
+      <p>The collision bulkhead is the foremost watertight transverse bulkhead. Its purpose: contain flooding to the forepeak compartment in the event of bow collision or grounding, protecting the rest of the ship.</p>
+      <h4>Position (SOLAS II-1 / Reg. 12)</h4>
+      <ul>
+        <li>Not less than <strong>0.05L</strong> from the Forward Perpendicular (FP)</li>
+        <li>Not more than <strong>0.08L</strong> from the FP</li>
+        <li>Where L = ship's rule length between perpendiculars</li>
+        <li>Exception: large bow thruster fitted → up to <strong>0.10L</strong> from FP, with Administration approval.</li>
+      </ul>
+      <h4>Height</h4>
+      <ul>
+        <li>Must extend watertight <strong>to the freeboard deck</strong> (the main weathertight deck).</li>
+      </ul>
+      <h4>Permitted Openings</h4>
+      <ul>
+        <li><strong>No doors, manholes, or access openings below the freeboard deck</strong> are permitted.</li>
+        <li>Only <strong>pipe penetrations serving the forepeak tank</strong> are allowed — fitted with <strong>remotely controlled screw-down valves</strong> operable from above the freeboard deck.</li>
+        <li><strong>Anchor chain pipes (hawse pipes)</strong> — must have effective closures (chain locker plugs, close-fitting stoppers) to prevent flooding progression.</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 12</span><span class="reg-desc">Collision bulkhead — position and construction requirements</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg. 13</span><span class="reg-desc">Forepeak and afterpeak tanks — additional requirements</span></div>
+      <div class="reg-item"><span class="reg-code">IACS UR S19</span><span class="reg-desc">Evaluation of scantlings of the collision bulkhead</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Memorise three numbers: <strong>0.05L</strong> (minimum), <strong>0.08L</strong> (maximum), <strong>freeboard deck</strong> (height). These come up verbatim in Kochi MMD orals. For openings: no doors/manholes; only tank pipes with remote screw-down valves; hawse pipes with effective closures.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q18, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q18, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q18 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q19 Propeller Pitch Ratio -->
+<div class="q-card" id="q19" data-tags="machinery iacs">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">19</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is Propeller Blade Pitch Ratio (P/D)? Effect on efficiency and what is positive slip?</div>
+      <div class="q-tags"><span class="q-tag tag-machinery">Machinery</span><span class="q-tag tag-iacs">Class</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Pitch Ratio — Definition</h4>
+      <p><strong>Pitch (P):</strong> Theoretical distance a propeller would advance in one revolution through a solid medium (no slip) — a geometric property of the blade angle.</p>
+      <p class="formula"><strong>Pitch Ratio = P / D</strong></p>
+      <p>Dimensionless ratio of pitch to propeller diameter. Typical range: <strong>0.6 to 1.4</strong>. Optimal range for commercial vessel efficiency: <strong>0.8 to 1.0</strong>.</p>
+      <h4>Effect on Efficiency</h4>
+      <ul>
+        <li><strong>Low P/D (&lt; 0.6):</strong> Near-flat blades, low thrust per revolution. Suited for tugs (high bollard pull, low speed).</li>
+        <li><strong>Optimal P/D (0.8–1.0):</strong> Best balance of thrust and efficiency for normal merchant service speeds — peak propulsive efficiency η_p.</li>
+        <li><strong>High P/D (&gt; 1.2):</strong> High advance per revolution; suited for high-speed vessels, but cavitation risk increases at high power loading.</li>
+      </ul>
+      <h4>Propeller Slip</h4>
+      <p class="formula"><strong>Apparent Slip = (P × N − V_a) / (P × N)</strong></p>
+      <p>P = pitch | N = RPM | V_a = ship speed through water.</p>
+      <ul>
+        <li><strong>Positive slip (normal):</strong> Propeller turns faster than ship advances — normal in all ahead conditions due to wake and propeller losses.</li>
+        <li><strong>Negative slip:</strong> Ship advances faster than P × N predicts — occurs in following seas when waves push the ship forward.</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IACS UR M68</span><span class="reg-desc">Propellers — manufacturing and testing requirements</span></div>
+      <div class="reg-item"><span class="reg-code">ISO 484-1:2015</span><span class="reg-desc">Ship screw propellers — manufacturing tolerances (Class I and Class II)</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> For container vessels, know your propeller's P/D ratio and diameter. Maersk vessels use large fixed-pitch propellers optimised for design speed (~22 kts). At current slow-steaming (12–16 kts), the propeller operates off its design point — this is one reason large-diameter, low-RPM propellers were chosen for the slow-steaming era. Shows examiner you understand operational context.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q19, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q19, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q19 · v1.0</span>
+  </div>
+</div>
+
+<!-- Q20 Tail Shaft Survey -->
+<div class="q-card" id="q20" data-tags="survey machinery iacs">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">20</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Tail Shaft Survey — what is it, when is it due, and what is the complete procedure?</div>
+      <div class="q-tags"><span class="q-tag tag-machinery">Machinery</span><span class="q-tag tag-iacs">IACS UR M10</span><span class="q-tag tag-survey">Survey</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>Tail Shaft Survey — Purpose</h4>
+      <p>The Tail Shaft Survey is a <strong>mandatory class survey</strong> to inspect the propeller shaft (tail shaft) and stern tube assembly for wear, corrosion, cracking, and bearing condition. It verifies the shaft is fit for continued service. Governed by <strong>IACS UR M10</strong> — the primary reference accepted by all major classification societies.</p>
+      <h4>Survey Intervals</h4>
+      <ul>
+        <li><strong>Traditional stern tube (oil-lubricated, bronze liner, white metal bearing): every 5 years</strong> — shaft must be withdrawn for inspection.</li>
+        <li><strong>Approved systems</strong> (e.g., Wartsila Enviroseal, Thordon COMPAC, composite designs with approved condition monitoring): interval may be <strong>extended to 7.5 or 10 years</strong> based on oil analysis, vibration monitoring, and seal condition records — per IACS UR M10 Rev.6.</li>
+      </ul>
+      <h4>Procedure — Traditional Shaft Withdrawal</h4>
+      <ol>
+        <li><strong>Dry docking</strong> (or shaft pulling facility).</li>
+        <li><strong>Propeller removed</strong> — nut and locking arrangements removed.</li>
+        <li><strong>Shaft withdrawn aft</strong> — stern tube and seals exposed.</li>
+        <li><strong>Visual inspection:</strong> Shaft surface for corrosion, pitting, cracks, scoring at bearing areas.</li>
+        <li><strong>Dimensional checks:</strong> Shaft diameter at bearing locations; wear-down measured (bearing clearance).</li>
+        <li><strong>NDT — dye penetrant or MPI</strong> at keyway, propeller cone taper, and any suspect areas.</li>
+        <li>Stern tube bearings (white metal or polymer) — clearance measured; replaced if beyond limits.</li>
+        <li>Stern tube seals (forward and aft) — replaced at each survey.</li>
+        <li><strong>Reassembly</strong> — clearances recorded; oil system filled and leak-tested.</li>
+      </ol>
+      <h4>Documents Required</h4>
+      <ul>
+        <li>Shaft withdrawal report with dimensional records.</li>
+        <li>Class survey report and updated CMS / survey status from classification society.</li>
+      </ul>
+    </div>
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IACS UR M10</span><span class="reg-desc">Survey of tailshafts — intervals and scope (accepted by all major classification societies)</span></div>
+      <div class="reg-item"><span class="reg-code">IACS UR M10 Rev.6</span><span class="reg-desc">Extended survey intervals for approved shaft systems with condition monitoring</span></div>
+      <div class="reg-item"><span class="reg-code">IRS Rules Part 3 / Ch. 3</span><span class="reg-desc">Shafting — IRS requirements for tail shaft inspection (www.irclass.org)</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS I / Reg. 11</span><span class="reg-desc">Maintenance of ship condition — class survey compliance obligation</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Know your ship's stern tube type. For Maersk container vessels with Wartsila CombiSeal or equivalent, you likely qualify for extended intervals — but you must maintain oil analysis records, seal leakage logs, and vibration data to present to the surveyor. Mentioning this shows practical, ship-specific knowledge that separates a second engineer from a chief engineer candidate.</div>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q20, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1, Q20, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1 · Q20 · v1.0</span>
+  </div>
+</div>
+
+    <div id="no-results">No matching questions found. Try different keywords or clear the filter.</div>
+  </main>
+</div>
+
+<footer class="page-footer">
+  <p><strong>Marine Intelligence Weekly — MEO Class 1 Question Bank</strong></p>
+  <p>QB1: Engine Construction, Stability &amp; Surveys · v1.0 · June 2026</p>
+  <p>Compiled by <strong>Nixon Antony</strong>, 2/E, Maersk A/S &nbsp;|&nbsp; <a href="https://www.linkedin.com/in/nixonantony">linkedin.com/in/nixonantony</a></p>
+  <p style="margin-top:10px;">
+    <strong>Corrections / Additions:</strong> <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a><br>
+    Subject: <em>QB(number), Q(number), Correction Required — [your correction] — Rank, Company, LinkedIn URL</em>
+  </p>
+  <p style="margin-top:10px;font-size:11px;opacity:.55;">Always cross-check with official IMO instruments, class rules, and DGS circulars. These answers are oral exam preparation guides, not operational or legal documents.</p>
+</footer>
+
+<script>
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
