@@ -1,1 +1,631 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Issues 01–16 Thematic Map | Marine Intelligence Weekly Archive</title>
+<meta name="description" content="A thematic reference map of IMO, classification society, regulatory framework and AI/autonomy developments covered across Marine Intelligence Weekly Issues 01–16, January 2025 to April 2026.">
+<meta property="og:title" content="Issues 01–16 Thematic Map | MIW Archive">
+<meta property="og:description" content="Thematic reference map spanning IMO, Class, Regulatory and AI developments — Issues 01 to 16, Jan 2025 to Apr 2026.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://marineintelligenceweekly.com/archive/thematic-map-issues-01-16.html">
+<link rel="canonical" href="https://marineintelligenceweekly.com/archive/thematic-map-issues-01-16.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+
+<style>
+:root{
+  --navy:#0f172a;
+  --navy2:#1e293b;
+  --teal:#0d9488;
+  --teal-light:#14b8a6;
+  --orange:#f97316;
+  --gold:#f59e0b;
+  --purple:#8b5cf6;
+  --offwhite:#f8fafc;
+  --slate:#64748b;
+  --slate-light:#94a3b8;
+  --border:#e2e8f0;
+  --border-dark:#334155;
+
+  --c-imo:#0d9488;
+  --c-imo-bg:#0d948815;
+  --c-imo-border:#0d948840;
+  --c-class:#f97316;
+  --c-class-bg:#f9731615;
+  --c-class-border:#f9731640;
+  --c-reg:#f59e0b;
+  --c-reg-bg:#f59e0b15;
+  --c-reg-border:#f59e0b40;
+  --c-ai:#8b5cf6;
+  --c-ai-bg:#8b5cf615;
+  --c-ai-border:#8b5cf640;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'Source Serif 4',Georgia,serif;
+  background:var(--offwhite);
+  color:var(--navy);
+  font-size:16px;
+  line-height:1.7;
+}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:var(--navy);
+  border-bottom:2px solid var(--teal);
+  padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  height:56px;
+}
+.nav-brand{
+  font-family:'Playfair Display',serif;
+  color:#fff;font-size:1.05rem;letter-spacing:.5px;
+  text-decoration:none;
+}
+.nav-brand span{color:var(--teal)}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{
+  color:var(--slate-light);font-size:.8rem;text-decoration:none;
+  font-family:'Source Serif 4',sans-serif;
+  transition:color .2s;
+}
+.nav-links a:hover{color:#fff}
+
+/* HERO */
+.hero{
+  background:var(--navy);
+  padding:3rem 2rem 2.5rem;
+  border-bottom:1px solid var(--border-dark);
+}
+.hero-inner{max-width:1100px;margin:0 auto}
+.hero-eyebrow{
+  font-size:.75rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--teal);font-family:'JetBrains Mono',monospace;
+  margin-bottom:.75rem;
+}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:2rem;color:#fff;line-height:1.2;
+  margin-bottom:.75rem;
+}
+.hero h1 span{color:var(--teal)}
+.hero-meta{
+  font-size:.8rem;color:var(--slate-light);
+  font-family:'JetBrains Mono',monospace;
+  display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.25rem;
+}
+.hero-desc{
+  color:#94a3b8;font-size:.9rem;max-width:680px;line-height:1.65;
+}
+
+/* PHASE KEY */
+.phase-key{
+  display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap;
+}
+.phase-badge{
+  font-size:.72rem;padding:3px 10px;border-radius:20px;
+  font-family:'JetBrains Mono',monospace;letter-spacing:.5px;
+}
+.phase-nb{background:#0d948818;color:var(--teal);border:1px solid #0d948840}
+.phase-tr{background:#f9731618;color:var(--orange);border:1px solid #f9731640}
+.phase-nl{background:#8b5cf618;color:var(--purple);border:1px solid #8b5cf640}
+.phase-mg{background:#f59e0b18;color:var(--gold);border:1px solid #f59e0b40}
+
+/* MAIN */
+main{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 4rem}
+
+/* LEGEND */
+.legend{
+  display:flex;gap:1.25rem;flex-wrap:wrap;
+  margin-bottom:1.5rem;padding:1rem 1.25rem;
+  background:#fff;border:1px solid var(--border);
+  border-radius:10px;
+}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--slate)}
+.leg-dot{width:11px;height:11px;border-radius:50%}
+
+/* MAP CONTAINER */
+.map-scroll{overflow-x:auto;border-radius:10px;border:1px solid var(--border);background:#fff}
+
+table{
+  border-collapse:collapse;
+  min-width:1000px;width:100%;
+  font-size:.75rem;
+}
+
+/* PHASE ROW */
+.phase-row td{
+  padding:3px 4px;text-align:center;
+  font-size:.65rem;font-family:'JetBrains Mono',monospace;
+  letter-spacing:.5px;
+}
+.ph-nb{background:#0d948810;color:var(--teal)}
+.ph-tr{background:#f9731610;color:var(--orange)}
+.ph-nl{background:#8b5cf610;color:var(--purple)}
+.ph-mg{background:#f59e0b10;color:var(--gold)}
+.ph-empty{background:transparent}
+
+/* AXIS ROW */
+.axis-row th{
+  padding:7px 4px;text-align:center;
+  font-size:.68rem;font-family:'JetBrains Mono',monospace;
+  color:var(--slate);background:#f8fafc;
+  border-bottom:2px solid var(--border);
+  border-right:1px solid var(--border);
+  font-weight:400;line-height:1.3;
+}
+.axis-row th:first-child{
+  text-align:left;padding-left:10px;
+  min-width:90px;border-right:2px solid var(--border);
+}
+
+/* SWIM ROWS */
+tr.swim td{
+  vertical-align:top;
+  padding:5px 3px;
+  border-bottom:1px solid var(--border);
+  border-right:1px solid var(--border);
+}
+tr.swim td:first-child{
+  padding:8px 10px;
+  border-right:2px solid var(--border);
+  background:#fafafa;
+  font-size:.72rem;font-weight:600;
+  color:var(--navy2);
+  line-height:1.4;
+  min-width:90px;
+}
+tr.swim:last-child td{border-bottom:none}
+
+/* PILLS */
+.pill{
+  display:block;width:100%;
+  padding:3px 5px;border-radius:6px;
+  font-size:.67rem;line-height:1.35;
+  margin-bottom:2px;cursor:pointer;
+  border:1px solid transparent;
+  text-align:left;background:none;
+  transition:filter .15s,transform .12s,box-shadow .15s;
+  font-family:'Source Serif 4',sans-serif;
+}
+.pill:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.pill:focus{outline:2px solid var(--teal);outline-offset:2px}
+.pill.active{box-shadow:0 0 0 2px var(--teal)}
+
+.p-imo{background:var(--c-imo-bg);color:#0a7a70;border-color:var(--c-imo-border)}
+.p-class{background:var(--c-class-bg);color:#c05a10;border-color:var(--c-class-border)}
+.p-reg{background:var(--c-reg-bg);color:#a07008;border-color:var(--c-reg-border)}
+.p-ai{background:var(--c-ai-bg);color:#6d28d9;border-color:var(--c-ai-border)}
+
+.p-imo:hover{background:#0d948825}
+.p-class:hover{background:#f9731625}
+.p-reg:hover{background:#f59e0b25}
+.p-ai:hover{background:#8b5cf625}
+
+/* DETAIL PANEL */
+.detail-wrap{
+  margin-top:1.5rem;
+}
+#detail-panel{
+  display:none;
+  background:#fff;
+  border:1px solid var(--border);
+  border-left:4px solid var(--teal);
+  border-radius:0 10px 10px 0;
+  padding:1.25rem 1.5rem;
+  animation:slideIn .2s ease;
+}
+#detail-panel.visible{display:block}
+@keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+
+.dp-issue{
+  font-size:.72rem;font-family:'JetBrains Mono',monospace;
+  color:var(--slate);margin-bottom:.4rem;
+}
+.dp-tag{
+  display:inline-block;font-size:.65rem;padding:2px 8px;
+  border-radius:20px;margin-right:6px;margin-bottom:.6rem;
+  font-family:'JetBrains Mono',monospace;
+}
+.dp-title{
+  font-family:'Playfair Display',serif;
+  font-size:1.1rem;color:var(--navy);
+  margin-bottom:.6rem;line-height:1.3;
+}
+.dp-body{font-size:.875rem;color:#334155;line-height:1.7}
+.dp-body ul{padding-left:1.2rem;margin-top:.4rem}
+.dp-body li{margin-bottom:.3rem}
+.dp-ref{
+  margin-top:.8rem;padding-top:.7rem;
+  border-top:1px solid var(--border);
+  font-size:.72rem;color:var(--slate);
+  font-family:'JetBrains Mono',monospace;
+}
+.dp-ref::before{content:"⌦ REF: "}
+.dp-close{
+  float:right;background:none;border:none;
+  font-size:1.1rem;cursor:pointer;color:var(--slate);
+  line-height:1;padding:0 2px;
+}
+.dp-close:hover{color:var(--navy)}
+
+/* BACK LINK */
+.back-bar{
+  display:flex;align-items:center;gap:.5rem;
+  font-size:.8rem;color:var(--slate);
+  margin-bottom:1.5rem;font-family:'JetBrains Mono',monospace;
+}
+.back-bar a{color:var(--teal);text-decoration:none}
+.back-bar a:hover{text-decoration:underline}
+
+/* FOOTER */
+footer{
+  background:var(--navy);
+  border-top:2px solid var(--teal);
+  padding:2rem;text-align:center;
+}
+.footer-brand{
+  font-family:'Playfair Display',serif;
+  color:#fff;font-size:.95rem;margin-bottom:.4rem;
+}
+.footer-brand span{color:var(--teal)}
+.footer-sub{font-size:.75rem;color:var(--slate-light)}
+.footer-sub a{color:var(--teal-light);text-decoration:none}
+
+/* RETURN TO TOP */
+#rtt{
+  position:fixed;bottom:1.5rem;right:1.5rem;
+  background:var(--teal);color:#fff;
+  border:none;border-radius:50%;
+  width:40px;height:40px;font-size:1.1rem;
+  cursor:pointer;display:none;
+  box-shadow:0 2px 10px rgba(13,148,136,.4);
+  transition:background .2s;
+  z-index:200;
+}
+#rtt:hover{background:var(--teal-light)}
+
+/* PRINT */
+@media print{
+  nav,#rtt,.back-bar{display:none}
+  .hero{background:var(--navy);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .map-scroll{overflow:visible}
+  table{min-width:0}
+  .pill{font-size:.58rem;padding:2px 3px}
+  #detail-panel{display:none!important}
+}
+
+/* MOBILE */
+@media(max-width:640px){
+  .hero h1{font-size:1.4rem}
+  .nav-links{display:none}
+  main{padding:1.5rem 1rem 3rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="https://marineintelligenceweekly.com">Marine Intelligence <span>Weekly</span></a>
+  <ul class="nav-links">
+    <li><a href="https://marineintelligenceweekly.com">Home</a></li>
+    <li><a href="https://marineintelligenceweekly.com/archive/">Archive</a></li>
+    <li><a href="https://marineintelligenceweekly.com/articles/">Articles</a></li>
+    <li><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Q&amp;Bank</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">MIW Archive · Thematic Reference</div>
+    <h1>Issues 01–16 <span>Thematic Map</span></h1>
+    <div class="hero-meta">
+      <span>Jan 2025 → Apr 2026</span>
+      <span>16 Issues</span>
+      <span>4 Themes</span>
+      <span>64 Reference Entries</span>
+    </div>
+    <p class="hero-desc">A structured reference map of the IMO, classification society, regulatory framework and AI/autonomy developments tracked across the first sixteen issues of Marine Intelligence Weekly. Click any entry to expand the full reference with source citations.</p>
+    <div class="phase-key">
+      <span class="phase-badge phase-nb">Issues 01–04 · Personal Notebook</span>
+      <span class="phase-badge phase-tr">Issues 05–08 · Transition Phase</span>
+      <span class="phase-badge phase-nl">Issues 09–10 · Early Newsletter</span>
+      <span class="phase-badge phase-mg">Issues 11–16 · Magazine / Weekly</span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="back-bar">
+    <a href="https://marineintelligenceweekly.com/archive/">← Archive</a>
+    <span>/</span>
+    <span>Issues 01–16 Thematic Map</span>
+  </div>
+
+  <div class="legend">
+    <div class="leg-item"><span class="leg-dot" style="background:#0d9488"></span>IMO / MEPC / MSC</div>
+    <div class="leg-item"><span class="leg-dot" style="background:#f97316"></span>Classification societies / IACS</div>
+    <div class="leg-item"><span class="leg-dot" style="background:#f59e0b"></span>Regulatory framework</div>
+    <div class="leg-item"><span class="leg-dot" style="background:#8b5cf6"></span>AI / Autonomy</div>
+    <div class="leg-item" style="margin-left:auto;color:#94a3b8;font-size:.72rem">Click any entry to expand ↓</div>
+  </div>
+
+  <div class="map-scroll">
+  <table>
+    <thead>
+      <!-- Phase band -->
+      <tr class="phase-row">
+        <td class="ph-empty"></td>
+        <td class="ph-nb" colspan="4">Notebook</td>
+        <td class="ph-tr" colspan="4">Transition</td>
+        <td class="ph-nl" colspan="2">Newsletter</td>
+        <td class="ph-mg" colspan="2">Review</td>
+        <td class="ph-mg" colspan="4">Magazine / Weekly</td>
+      </tr>
+      <!-- Axis -->
+      <tr class="axis-row">
+        <th>Theme / Issue</th>
+        <th>01<br>Jan 25</th><th>02<br>Feb</th><th>03<br>Mar</th><th>04<br>Apr</th>
+        <th>05<br>May</th><th>06<br>Jun</th><th>07<br>Jul</th><th>08<br>Aug</th>
+        <th>09<br>Sep</th><th>10<br>Oct</th>
+        <th>11<br>Nov</th><th>12<br>Dec</th>
+        <th>13<br>Jan 26</th><th>14<br>Feb</th><th>15<br>Mar</th><th>16<br>Apr</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    <!-- IMO ROW -->
+    <tr class="swim">
+      <td>IMO /<br>MEPC /<br>MSC</td>
+      <td><button class="pill p-imo" onclick="show('i1a')">MEPC 82<br>GHG 2050</button></td>
+      <td><button class="pill p-imo" onclick="show('i2a')">DCS<br>Reg 22A</button></td>
+      <td><button class="pill p-imo" onclick="show('i3a')">GHG Strategy<br>3 pillars</button><button class="pill p-imo" onclick="show('i3b')" style="margin-top:2px">MEPC 83<br>mid-term</button></td>
+      <td><button class="pill p-imo" onclick="show('i4a')">STCW<br>hierarchy</button></td>
+      <td><button class="pill p-imo" onclick="show('i5a')">ISM Ch.10<br>C/E duty</button></td>
+      <td><button class="pill p-imo" onclick="show('i6a')">EEXI/CII<br>ShaPoLi/EPL</button><button class="pill p-imo" onclick="show('i6b')" style="margin-top:2px">e-Logbook<br>A.1185(33)</button></td>
+      <td><button class="pill p-imo" onclick="show('i7a')">Evidence<br>+ traceability</button></td>
+      <td><button class="pill p-imo" onclick="show('i8a')">MEPC 83<br>outcome GFI</button><button class="pill p-imo" onclick="show('i8b')" style="margin-top:2px">IGF Code<br>LNG/MeOH</button></td>
+      <td><button class="pill p-imo" onclick="show('i9a')">MEPC 84<br>prep</button><button class="pill p-imo" onclick="show('i9b')" style="margin-top:2px">MSC 108<br>MASS DoA</button></td>
+      <td><button class="pill p-imo" onclick="show('i10a')">MEPC 84<br>GFI confirmed</button><button class="pill p-imo" onclick="show('i10b')" style="margin-top:2px">ORB codes<br>A through J</button></td>
+      <td><button class="pill p-imo" onclick="show('i11a')">GFI 89.0<br>gCO₂eq/MJ</button><button class="pill p-imo" onclick="show('i11b')" style="margin-top:2px">MSC 108<br>MASS intm.</button></td>
+      <td><button class="pill p-imo" onclick="show('i12a')">2025–28<br>sequencing</button></td>
+      <td><button class="pill p-imo" onclick="show('i13a')">STCW<br>Manila+15</button><button class="pill p-imo" onclick="show('i13b')" style="margin-top:2px">EU ETS<br>shipping</button></td>
+      <td><button class="pill p-imo" onclick="show('i14a')">MSC 108<br>adopted</button><button class="pill p-imo" onclick="show('i14b')" style="margin-top:2px">STCW WG<br>digital</button></td>
+      <td><button class="pill p-imo" onclick="show('i15a')">GFI BDN<br>pilots</button><button class="pill p-imo" onclick="show('i15b')" style="margin-top:2px">MASS flag<br>state impl.</button></td>
+      <td><button class="pill p-imo" onclick="show('i16a')">DoA<br>timeline</button><button class="pill p-imo" onclick="show('i16b')" style="margin-top:2px">STCW<br>remote ops</button></td>
+    </tr>
+
+    <!-- CLASS ROW -->
+    <tr class="swim">
+      <td>Classification<br>societies /<br>IACS</td>
+      <td><button class="pill p-class" onclick="show('c1a')">IACS E26<br>E27 cyber</button></td>
+      <td><button class="pill p-class" onclick="show('c2a')">DNV remote<br>survey</button></td>
+      <td><button class="pill p-class" onclick="show('c3a')">IACS GHG<br>alignment</button></td>
+      <td><button class="pill p-class" onclick="show('c4a')">Digital twin<br>Type A/B</button></td>
+      <td><button class="pill p-class" onclick="show('c5a')">Survey<br>comparison</button></td>
+      <td><button class="pill p-class" onclick="show('c6a')">Software<br>lifecycle</button></td>
+      <td><button class="pill p-class" onclick="show('c7a')">3 pillars<br>future survey</button></td>
+      <td><button class="pill p-class" onclick="show('c8a')">ABS risk-<br>based survey</button></td>
+      <td><button class="pill p-class" onclick="show('c9a')">Society<br>position matrix</button></td>
+      <td><button class="pill p-class" onclick="show('c10a')">DNV AI<br>notation signal</button></td>
+      <td><button class="pill p-class" onclick="show('c11a')">IACS MASS<br>WG formed</button></td>
+      <td><button class="pill p-class" onclick="show('c12a')">Defect<br>taxonomy</button></td>
+      <td><button class="pill p-class" onclick="show('c13a')">Notation<br>adoption curve</button></td>
+      <td><button class="pill p-class" onclick="show('c14a')">LR Type<br>Approval AI</button></td>
+      <td><button class="pill p-class" onclick="show('c15a')">ABS AI<br>Quality Fwk</button></td>
+      <td><button class="pill p-class" onclick="show('c16a')">Class as<br>infrastructure</button></td>
+    </tr>
+
+    <!-- REGULATORY ROW -->
+    <tr class="swim">
+      <td>Regulatory<br>framework</td>
+      <td><button class="pill p-reg" onclick="show('r1a')">MARPOL VI<br>0.50% cap</button></td>
+      <td><button class="pill p-reg" onclick="show('r2a')">EU MRV<br>FuelEU</button></td>
+      <td><button class="pill p-reg" onclick="show('r3a')">NOx Tier III<br>ECA rules</button></td>
+      <td><button class="pill p-reg" onclick="show('r4a')">IMO instr.<br>hierarchy</button></td>
+      <td><button class="pill p-reg" onclick="show('r5a')">ISM Code<br>Ch.10</button></td>
+      <td><button class="pill p-reg" onclick="show('r6a')">ORB Part I<br>codes A–J</button></td>
+      <td><button class="pill p-reg" onclick="show('r7a')">IHM EU<br>recycling</button></td>
+      <td><button class="pill p-reg" onclick="show('r8a')">CBM survey<br>credit rules</button></td>
+      <td><button class="pill p-reg" onclick="show('r9a')">PSC CIC<br>garbage</button></td>
+      <td><button class="pill p-reg" onclick="show('r10a')">MARPOL II<br>X/Y/Z cargo</button></td>
+      <td><button class="pill p-reg" onclick="show('r11a')">GFI threshold<br>operational</button></td>
+      <td><button class="pill p-reg" onclick="show('r12a')">AI maturity<br>tracker 2025</button></td>
+      <td><button class="pill p-reg" onclick="show('r13a')">Alt-fuel STCW<br>IGF Code</button></td>
+      <td><button class="pill p-reg" onclick="show('r14a')">Systems<br>thinking</button></td>
+      <td><button class="pill p-reg" onclick="show('r15a')">Cyber incident<br>reporting</button></td>
+      <td><button class="pill p-reg" onclick="show('r16a')">Autonomy<br>scaling limits</button></td>
+    </tr>
+
+    <!-- AI ROW -->
+    <tr class="swim">
+      <td>AI /<br>Autonomy</td>
+      <td><button class="pill p-ai" onclick="show('a1a')">Pred. maint.<br>early stage</button></td>
+      <td><button class="pill p-ai" onclick="show('a2a')">PMS AI<br>overlay idea</button></td>
+      <td><button class="pill p-ai" onclick="show('a3a')">Decision<br>support AI</button></td>
+      <td><button class="pill p-ai" onclick="show('a4a')">Dashboard<br>theatre risk</button></td>
+      <td><button class="pill p-ai" onclick="show('a5a')">Hype vs<br>utility split</button></td>
+      <td><button class="pill p-ai" onclick="show('a6a')">AI copilots<br>near-term</button></td>
+      <td><button class="pill p-ai" onclick="show('a7a')">Nav vs<br>machinery AI</button></td>
+      <td><button class="pill p-ai" onclick="show('a8a')">Wärtsilä Genius<br>fleet deploy</button></td>
+      <td><button class="pill p-ai" onclick="show('a9a')">Adoption<br>tracker live</button></td>
+      <td><button class="pill p-ai" onclick="show('a10a')">4 categories<br>ranked</button></td>
+      <td><button class="pill p-ai" onclick="show('a11a')">Maersk 130<br>vessels</button></td>
+      <td><button class="pill p-ai" onclick="show('a12a')">Maturity<br>curve table</button></td>
+      <td><button class="pill p-ai" onclick="show('a13a')">Hapag-Lloyd<br>ABB Ability</button></td>
+      <td><button class="pill p-ai" onclick="show('a14a')">MAN remote<br>diagnostics</button></td>
+      <td><button class="pill p-ai" onclick="show('a15a')">Kongsberg<br>Autosail DoA2</button></td>
+      <td><button class="pill p-ai" onclick="show('a16a')">Fleet reality<br>check Q1 2026</button></td>
+    </tr>
+
+    </tbody>
+  </table>
+  </div><!-- /map-scroll -->
+
+  <div class="detail-wrap">
+    <div id="detail-panel">
+      <button class="dp-close" onclick="closePanel()" title="Close">✕</button>
+      <div class="dp-issue" id="dp-issue"></div>
+      <span class="dp-tag" id="dp-tag"></span>
+      <div class="dp-title" id="dp-title"></div>
+      <div class="dp-body" id="dp-body"></div>
+      <div class="dp-ref" id="dp-ref"></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-brand">Marine Intelligence <span>Weekly</span></div>
+  <div class="footer-sub">
+    The intelligence and learning platform for marine engineers ·
+    <a href="https://marineintelligenceweekly.com">marineintelligenceweekly.com</a>
+  </div>
+  <div class="footer-sub" style="margin-top:.4rem">
+    Editor: Nixon Antony, Second Engineer, Maersk A/S ·
+    <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
+  </div>
+</footer>
+
+<button id="rtt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Return to top">↑</button>
+
+<script>
+/* ── DATA STORE ── */
+const D = {
+i1a:{iss:'Issue 01 — January 2025',tag:'IMO / MEPC',col:'#0d9488',title:'MEPC 82 outcomes — GHG net-zero strategy formalised',body:`<ul><li>2050 net-zero target formally adopted at MEPC 82 (October 2024)</li><li>Indicative checkpoints: 2030 (20–30% reduction vs 2008) and 2040 (70% reduction)</li><li>Sets the foundation for all subsequent GHG measures tracked in this archive</li><li>Exam note: distinguish indicative checkpoint from binding target language</li></ul>`,ref:'MEPC 82 / MARPOL Annex VI Reg 28 / IMO 2023 Revised GHG Strategy'},
+i2a:{iss:'Issue 02 — February 2025',tag:'IMO / DCS',col:'#0d9488',title:'IMO Data Collection System — MARPOL Annex VI Reg 22A',body:`<ul><li>Ships >5000 GT report fuel oil consumption annually to flag state</li><li>Flag state aggregates and submits to IMO GISIS database</li><li>Data quality is a legal question — auditable, traceable records required</li><li>Electronic BDN pilots beginning in key ports — paper receipts transitioning</li></ul>`,ref:'MARPOL Annex VI Regulation 22A / IMO GISIS / MEPC.1/Circ.795/Rev.6'},
+i3a:{iss:'Issue 03 — March 2025',tag:'IMO / GHG Strategy',col:'#0d9488',title:'GHG Strategy 2023 — three operational pillars',body:`<ul><li>Pillar 1: Net-zero by or around 2050</li><li>Pillar 2: At least 5% zero/near-zero fuels by 2030 (striving for 10%)</li><li>Pillar 3: 20–30% total emissions reduction by 2030 vs 2008 baseline</li><li>EEXI vs CII distinction: EEXI is a one-time technical baseline; CII is the annual operational rating</li></ul>`,ref:'IMO 2023 Revised GHG Strategy (MEPC 80) / MARPOL Annex VI Regs 26–28'},
+i3b:{iss:'Issue 03 — March 2025',tag:'IMO / MEPC 83',col:'#0d9488',title:'MEPC 83 mid-term measures — GFI standard and economic levy',body:`<ul><li>Two instruments under development: GHG Fuel Intensity (GFI) standard and a maritime economic levy</li><li>GFI: phased tightening of allowable fuel carbon intensity — well-to-wake accounting</li><li>Levy range discussed: $18–150 per tonne CO₂ equivalent — significant political division</li><li>LNG and methanol economics improve as GFI tightens — C/E must understand fuel pathways</li></ul>`,ref:'MEPC 83 agenda / IMO Net-Zero Framework (IMSF) / MARPOL Annex VI amendments'},
+i4a:{iss:'Issue 04 — April 2025',tag:'IMO / STCW',col:'#0d9488',title:'STCW competence evolution and IMO instrument hierarchy',body:`<ul><li>Manila Amendments (2010) still the operative baseline — STCW 2025 review cycle commencing</li><li>New competencies expected: digital literacy, cyber incident response, energy management, alternative fuels handling</li><li>IMO instrument hierarchy for oral exam: SOLAS (mandatory) → Codes (status varies) → Circulars (guidance, not binding) → Guidelines (voluntary unless specifically adopted)</li></ul>`,ref:'STCW Convention and Manila Amendments (2010) / IMO Instruments Guide'},
+i5a:{iss:'Issue 05 — May 2025',tag:'IMO / ISM',col:'#0d9488',title:'ISM Code Chapter 10 — C/E maintenance responsibility',body:`<ul><li>C/E responsible for ensuring machinery maintained in accordance with applicable rules, regulations and company SMS</li><li>Every regulation must translate to a practical action: what changes in logs, routines, tests?</li><li>Oral exam approach: "What does this regulation require of a C/E or 2/E on the next voyage?"</li></ul>`,ref:'ISM Code Chapter 10 (Maintenance of the Ship and Equipment) / SOLAS Chapter IX'},
+i6a:{iss:'Issue 06 — June 2025',tag:'IMO / EEXI / CII',col:'#0d9488',title:'EEXI power limitation — ShaPoLi vs Engine Power Limiter',body:`<ul><li>Shaft Power Limiter (ShaPoLi): involves engine room instrument adjustment — class verified</li><li>Engine Power Limiter (EPL): software-based alternative — also class verified</li><li>Key distinction: CII is a whole-ship operational metric, not just machinery efficiency</li><li>A vessel may achieve EEXI compliance but receive a CII rating of E due to operational profile</li></ul>`,ref:'MARPOL Annex VI Reg 26 (EEXI) / Reg 28 (CII) / MEPC.1/Circ.896 (CII correction factors)'},
+i6b:{iss:'Issue 06 — June 2025',tag:'IMO / e-Logbook',col:'#0d9488',title:'Electronic recordkeeping — IMO Resolution A.1185(33)',body:`<ul><li>Digital records now accepted by most flag states if the system meets the IMO standard</li><li>Three requirements: tamper-evident, time-stamped, auditable</li><li>Scope: GMDSS logbooks, Oil Record Books, Bell Books — all transitioning to digital</li><li>Class 1 answer precision: "tamper-evident, time-stamped, auditable" — not just "we use an e-logbook"</li></ul>`,ref:'IMO Resolution A.1185(33) — Guidelines on electronic recordkeeping for ships'},
+i7a:{iss:'Issue 07 — July 2025',tag:'IMO / Compliance',col:'#0d9488',title:'Compliance as evidence and accountability — not checklists',body:`<ul><li>The C/E role is increasingly about producing defensible records alongside maintaining machinery</li><li>Every record test: "If this goes to a PSC inspector or a court, can I explain and evidence every entry?"</li><li>Traceable decisions and defensible records are now core to the C/E professional identity</li></ul>`,ref:'ISM Code / MARPOL / Port State Control Procedures (Paris MOU / Tokyo MOU)'},
+i8a:{iss:'Issue 08 — August 2025',tag:'IMO / MEPC 83',col:'#0d9488',title:'MEPC 83 outcome — IMO Net-Zero Framework (IMSF) agreed',body:`<ul><li>GFI standard confirmed with 2028 entry into force</li><li>Well-to-wake (WtW) accounting adopted — the fuel pathway (how the fuel was produced) affects the compliance calculation</li><li>Bunker Delivery Notes will require GHG intensity data from suppliers from 2028</li><li>SEEMP Part III must incorporate fuel GFI compliance calculation — C/E sign-off</li></ul>`,ref:'MEPC 83 / IMO Net-Zero Framework / MARPOL Annex VI (as amended at MEPC 83)'},
+i8b:{iss:'Issue 08 — August 2025',tag:'IMO / IGF Code',col:'#0d9488',title:'IGF Code — gas and low-flashpoint fuels framework',body:`<ul><li>Applies to ships using LNG, LPG, and methanol as fuel</li><li>Requirements: risk assessment, safety management procedures, specific equipment and ventilation standards</li><li>STCW A-V/3: LNG basic familiarisation certificate already in force</li><li>Methanol and ammonia: new STCW Table V/4 proposed under Manila+15 review</li></ul>`,ref:'IGF Code (MSC.391(95)) / STCW A-V/3 / Manila+15 STCW review submissions'},
+i9a:{iss:'Issue 09 — September 2025',tag:'IMO / MEPC 84',col:'#0d9488',title:'MEPC 84 — GFI standard technical detail development',body:`<ul><li>GFI standard technical guidelines finalisation expected at MEPC 84 (October 2025)</li><li>Compliance mechanism under debate: remedial units (purchase if over limit) vs surplus banking</li><li>2028 entry into force target — planning now required for SEEMP Part III updates</li><li>Editorial discipline introduced: "monitor now" vs "park for strategic watchlist"</li></ul>`,ref:'MEPC 84 agenda / IMO GFI Standard development documents'},
+i9b:{iss:'Issue 09 — September 2025',tag:'IMO / MSC / MASS',col:'#0d9488',title:'MSC 108 — MASS Degree of Autonomy framework',body:`<ul><li>DoA 1: crew on board, automated processes · DoA 2: crew on board, remote command from shore available</li><li>DoA 3: no crew on board, remotely controlled from shore · DoA 4: fully autonomous — no human intervention</li><li>Commercial activity concentrating at DoA 1–2; regulatory framework for DoA 3–4 still developing</li></ul>`,ref:'MSC 108 / MASS Interim Guidelines (draft) / MSC resolution on MASS scoping'},
+i10a:{iss:'Issue 10 — October 2025',tag:'IMO / MEPC 84',col:'#0d9488',title:'MEPC 84 live — GFI threshold and EIF confirmed',body:`<ul><li>GFI threshold Year 0 (2028): 89.0 gCO₂eq/MJ (approximately equivalent to VLSFO baseline)</li><li>Tightens approximately 2% per year until 2035, then accelerates toward 2050 net-zero</li><li>Last monthly issue of the archive — publication moves to bi-weekly from Issue 11</li></ul>`,ref:'MEPC 84 outcome documents / MARPOL Annex VI (GFI Standard amendment)'},
+i10b:{iss:'Issue 10 — October 2025',tag:'IMO / MARPOL',col:'#0d9488',title:'Oil Record Book Part I — code letter mastery (A through J)',body:`<ul><li>A = Ballasting FOTs · B = Cleaning FOTs · C = Discharge of dirty ballast/tank washings</li><li>D = Non-automatic bilge discharge · E = Automatic OWS discharge · F = OWS/filter equipment condition</li><li>G = Accidental/exceptional discharge · H = ODME condition (Annex I tankers) · I = Cargo oil loading · J = Cargo tank ballasting</li><li>Oral examiners test this directly — memorise all code letters with their descriptions</li></ul>`,ref:'MARPOL Annex I Reg 17 / Oil Record Book Part I (Machinery Space Operations)'},
+i11a:{iss:'Issue 11 — November 2025',tag:'IMO / GFI',col:'#0d9488',title:'GFI 89.0 gCO₂eq/MJ — operational engineering implications',body:`<ul><li>VLSFO approximately meets the Year 0 threshold but tightens 2%/year — LNG increasingly attractive from 2030</li><li>Well-to-wake accounting: the pathway by which fuel was produced affects compliance; certified BDN data required</li><li>SEEMP Part III must incorporate a GFI compliance calculation — C/E must understand the arithmetic</li></ul>`,ref:'IMO GFI Standard (adopted MEPC 84) / MARPOL Annex VI (as amended)'},
+i11b:{iss:'Issue 11 — November 2025',tag:'IMO / MASS',col:'#0d9488',title:'MASS Interim Guidelines adopted at MSC 108',body:`<ul><li>DoA 1 and DoA 2 operational guidelines under development by flag states following adoption</li><li>STCW does not yet cover DoA 3–4 crew configurations — human element WG tasked</li><li>Human element provisions: remote operator watchkeeping standards under development</li></ul>`,ref:'MSC 108 / MASS Interim Guidelines (MSC.1/Circ. forthcoming)'},
+i12a:{iss:'Issue 12 — December 2025',tag:'IMO / Timeline',col:'#0d9488',title:'2025–2028 regulatory implementation sequencing',body:`<ul><li>2025 now: MEPC 83 Net-Zero Framework agreed · IACS E26/E27 operational for new builds · EU ETS 70% phase-in · Paris MOU CIC garbage</li><li>2026: GFI technical guidelines finalised · MASS interim guidelines flag state implementation · IHM verification tightening</li><li>2028: GFI standard enters into force · Some flag states (Norway, Marshall Islands) may advance earlier</li></ul>`,ref:'IMO GHG Strategy / IACS URs E26–E27 / EU ETS Directive / Paris MOU CIC programme'},
+i13a:{iss:'Issue 13 — January 2026',tag:'IMO / STCW',col:'#0d9488',title:'STCW Manila+15 review — digital competences proposed',body:`<ul><li>New Section B-VII/3 proposed covering: AI tool operation and limitation awareness, cyber incident first response, data-based decision making, remote expert collaboration</li><li>Alternative fuels: methanol and ammonia — new STCW Table V/4 proposed</li><li>C/E re-validation requirements will expand before 2030 — training record management becomes complex</li></ul>`,ref:'STCW Manila+15 Review (submissions 2025–2026) / IMO HTW Sub-Committee'},
+i13b:{iss:'Issue 13 — January 2026',tag:'IMO / EU ETS',col:'#0d9488',title:'EU ETS shipping — 40/70/100% phase-in schedule',body:`<ul><li>2024: 40% of verified CO₂ · 2025: 70% · 2026: 100% of verified CO₂ covered by ETS obligations</li><li>Scope: EU–EU voyages in full; 50% of emissions on voyages to/from non-EU ports</li><li>EU MRV data (verified CO₂ report) feeds directly into ETS compliance calculation — C/E data management is the critical input</li></ul>`,ref:'EU ETS Directive (as amended for shipping) / EU MRV Regulation (EU) 2015/757 / FuelEU Maritime'},
+i14a:{iss:'Issue 14 — February 2026',tag:'IMO / MASS',col:'#0d9488',title:'MSC 108 outcomes published — MASS regulatory pathway established',body:`<ul><li>Interim Guidelines adopted — flag states may issue national approvals for DoA 2 operations</li><li>Human element: remote operator watchkeeping standards under active development by WG</li><li>Survey implications: class required to develop equivalent MASS class notation aligned with the guidelines</li></ul>`,ref:'MSC 108 / MASS Interim Guidelines / MSC.1/Circ. (forthcoming) / IACS MASS WG'},
+i14b:{iss:'Issue 14 — February 2026',tag:'IMO / STCW WG',col:'#0d9488',title:'STCW WG January 2026 — digital competence framework agreed in principle',body:`<ul><li>New Section B-VII/3 covering AI tool operation, cyber awareness, data-based decision making, remote expert collaboration agreed in principle</li><li>Training course standards to follow from HTW Sub-Committee work programme</li><li>The shore-based officer/engineer role is being formally created in international maritime law</li></ul>`,ref:'STCW WG (January 2026) / IMO HTW Sub-Committee work programme'},
+i15a:{iss:'Issue 15 — March 2026',tag:'IMO / GFI',col:'#0d9488',title:'GFI BDN pilots — Shell Marine, TotalEnergies, BP Marine',body:`<ul><li>First movers trialling GHG intensity Bunker Delivery Notes ahead of 2028 mandatory requirement</li><li>Ship-side requirement: fuel management system able to record and report GFI per voyage</li><li>SEEMP Part III integration with digital fuel management is a compliance requirement from 2028 — not an option</li></ul>`,ref:'MARPOL Annex VI GFI Standard / SEEMP Part III format requirements / Bunker industry pilots'},
+i15b:{iss:'Issue 15 — March 2026',tag:'IMO / MASS',col:'#0d9488',title:'MASS flag state implementation — Norway leads, India expected Q2 2026',body:`<ul><li>Norway: first flag state to issue national approval framework aligned with MSC MASS Interim Guidelines</li><li>Bahamas, Marshall Islands: implementation guidance under development</li><li>DG Shipping India: circular expected Q2 2026 — directly relevant for Kochi MMD oral exam preparation on MASS DoA framework</li></ul>`,ref:'MSC MASS Interim Guidelines / Norwegian Maritime Authority MASS framework / DG Shipping India'},
+i16a:{iss:'Issue 16 — April 2026',tag:'IMO / Autonomy',col:'#0d9488',title:'Realistic autonomy timeline — DoA progression to 2035+',body:`<ul><li>DoA 1–2: commercial operation available NOW with national approvals</li><li>DoA 3: realistic commercial operation window 2028–2030 — binding IMO instruments required first</li><li>DoA 4: post-2035 speculative — P&amp;I liability frameworks, STCW remote operator standards, and class assurance all need alignment</li></ul>`,ref:'MSC 108 / MASS binding instrument development timeline / IACS / P&amp;I club guidance'},
+i16b:{iss:'Issue 16 — April 2026',tag:'IMO / STCW',col:'#0d9488',title:'STCW remote operator competence — first draft standard published',body:`<ul><li>Bridge watchkeeping competence adapted for remote operations centre configurations</li><li>Engineering remote monitoring competence added as new Table</li><li>The shore-based officer/engineer role is being formally defined in international instruments for the first time</li></ul>`,ref:'STCW WG / IMO HTW Sub-Committee / MASS human element working group'},
+
+c1a:{iss:'Issue 01 — January 2025',tag:'IACS / Cyber',col:'#f97316',title:'IACS URs E26 and E27 — cyber resilience requirements in force',body:`<ul><li>E26 = organisational cyber security requirements for ship systems</li><li>E27 = technical OT (operational technology) system requirements — network architecture, access control, patch management</li><li>Mandatory for new builds contracted from 1 January 2024</li><li>Existing ships: flag state guidance and commercial vetting pressure growing — not yet mandatory but practically unavoidable</li></ul>`,ref:'IACS UR E26 (effective 1 Jan 2024) / IACS UR E27 (effective 1 Jan 2024)'},
+c2a:{iss:'Issue 02 — February 2025',tag:'Classification / DNV',col:'#f97316',title:'DNV remote survey and digital class — platform developments',body:`<ul><li>DNV remote survey: drone/ROV attendance with video link — class-approved procedures required for each survey type</li><li>ABS SafeNet: cloud platform for fleet condition monitoring, alerts, and remote analyst access</li><li>LR remote attendance approved for selected survey items; less integrated than DNV Veracity model</li><li>Concept forming: class as "digital evidence validator" — checking whether data systems are trustworthy, not just steel</li></ul>`,ref:'DNV Digital Class initiative / ABS SafeNet platform / LR Remote Survey Procedures'},
+c3a:{iss:'Issue 03 — March 2025',tag:'IACS / GHG',col:'#f97316',title:'IACS alignment on GHG measurement — consistent application across members',body:`<ul><li>IACS Council agreed consistent application of fuel measurement and reporting requirements across all member societies</li><li>Cyber resilience: class surveyors beginning to ask for evidence of cyber risk assessments on new builds (E26/E27 in force)</li><li>IMO MSC-FAL.1/Circ.3 (2017) remains the baseline guidance for existing ships</li></ul>`,ref:'IACS Council GHG position / IMO MSC-FAL.1/Circ.3 (2017)'},
+c4a:{iss:'Issue 04 — April 2025',tag:'Classification / Digital Twin',col:'#f97316',title:'Digital twin taxonomy — Type A (as-designed) vs Type B (as-operated)',body:`<ul><li>Type A: static, represents design intent — most commercial offerings are Type A with a live data overlay</li><li>Type B: live, reflects current operating state — required for genuine condition-based monitoring credit from class</li><li>Real-time credibility depends on sensor quality, calibration discipline, data cleaning, and model updating after maintenance</li><li>"Dashboard theatre" warning: systems displaying trend lines without engineering credibility behind them</li></ul>`,ref:'DNV / LR / ABS condition monitoring notation guidelines / industry analysis'},
+c5a:{iss:'Issue 05 — May 2025',tag:'Classification / Comparison',col:'#f97316',title:'Class society digital survey comparison — five societies mapped',body:`<ul><li>DNV Veracity: most advanced — continuous data exchange, surveyor can access condition data without vessel attendance</li><li>ABS SafeNet + remote attendance tools · LR ShipRight survey planning + condition credit scheme</li><li>ClassNK: digital survey emerging, improving · RINA: regional focus (Mediterranean), limited digital survey</li><li>Future survey evidence = photographs + data streams + log extracts + targeted physical inspection</li></ul>`,ref:'DNV Veracity / ABS SafeNet / LR ShipRight / ClassNK digital survey guidelines / RINA'},
+c6a:{iss:'Issue 06 — June 2025',tag:'Classification / Software',col:'#f97316',title:'Software lifecycle governance — now an auditable item for cyber notation',body:`<ul><li>ABS Notice 2 update (2024): software change management explicitly auditable for ABS cyber class notation</li><li>Version control for ICMS, ECDIS, AMS — all now in scope of class survey for cyber-notated vessels</li><li>LR updated Machinery Rules: remote monitoring credit requires verified sensor calibration records</li><li>Principle: "Garbage in = garbage assurance" — a notation relying on uncalibrated sensors is false assurance</li></ul>`,ref:'ABS Notice 2 (2024 update) / LR Machinery Rules (2025 update) / IACS URs E26–E27'},
+c7a:{iss:'Issue 07 — July 2025',tag:'Classification / Pillars',col:'#f97316',title:'Three pillars of the future class survey environment',body:`<ul><li>Pillar 1: Remote and continuous monitoring — data-driven survey intervals replacing fixed calendar</li><li>Pillar 2: Software and cyber assurance — OT system lifecycle oversight as a survey item</li><li>Pillar 3: Condition-based evidence — data supplements or replaces physical inspection for creditable items</li><li>DNV Veracity operational: live condition assessments generated algorithmically and flagged to surveyor</li></ul>`,ref:'DNV Veracity platform / IACS policy direction / Class society rule updates (2024–2025)'},
+c8a:{iss:'Issue 08 — August 2025',tag:'Classification / CBM',col:'#f97316',title:'ABS risk-based survey — Condition Factor score adjusts intervals',body:`<ul><li>Condition Factor (CF) score: good maintenance history + strong condition data = longer survey intervals</li><li>Poor data quality + recent defects = compressed interval — direct financial incentive for clean records</li><li>LR ShipRight FDA (Fatigue Design Assessment): load sensors + analytics can trigger targeted inspection</li><li>CBM credit requirements: calibrated instruments traceable to national standards, competent assessor, continuous data retention</li></ul>`,ref:'ABS Guide for Surveys Using Risk-Based Methods / LR ShipRight FDA notation'},
+c9a:{iss:'Issue 09 — September 2025',tag:'IACS / MASS matrix',col:'#f97316',title:'Class society position matrix — autonomy, digital survey, software oversight',body:`<ul><li>DNV: most advanced overall — full MASS notation framework + Veracity continuous data + Cyber Secure notation</li><li>LR: ShipRight MASS procedures active + Cyber Ship notation · ABS: ARC (Autonomous &amp; Remote Control) Guide in service</li><li>ClassNK: MASS guidelines published, vessel approvals in progress · RINA: position paper only, limited MASS activity</li><li>IACS harmonisation will eventually align these — watch for forthcoming UR on MASS class requirements</li></ul>`,ref:'DNV MASS notation / LR ShipRight MASS / ABS ARC Guide / ClassNK MASS guidelines / RINA MASS position'},
+c10a:{iss:'Issue 10 — October 2025',tag:'DNV / Signal',col:'#f97316',title:'DNV Offshore Standards — AI notation pathway signals future direction',body:`<ul><li>AI-based decision support introduced as an optional class notation for floating production units</li><li>Typical adoption curve: optional notation today → recommended for new builds in 3 years → IACS minimum in 5 years</li><li>PSC evidence requests expanding: OT network segmentation documentation, access control logs, security patch records</li></ul>`,ref:'DNV Offshore Standards (2025 update) / IACS E26/E27 / BIMCO Cyber Security Guide'},
+c11a:{iss:'Issue 11 — November 2025',tag:'IACS / MASS',col:'#f97316',title:'IACS joint working group on MASS class requirements formed',body:`<ul><li>IACS forming dedicated WG — position paper expected 2025/2026</li><li>Class requirements will precede binding IMO instruments for MASS operations — standard IACS lead pattern</li><li>Comparative society position table introduced as a permanent section in the archive</li></ul>`,ref:'IACS Council announcement / MASS WG formation / IACS position on autonomy'},
+c12a:{iss:'Issue 12 — December 2025',tag:'Classification / Records',col:'#f97316',title:'Defect taxonomy — practical onboard classification system',body:`<ul><li>IACS working toward harmonised defect language across registrations — cross-fleet benchmarking the goal</li><li>Practical taxonomy introduced: PM (planned), CM (corrective), CA (calibration), IC (inspection), OT (operational deviation), AL (alarm event), MD (modification)</li><li>Consistent tags create a dataset; dataset enables analysis; analysis enables evidence-based maintenance planning</li></ul>`,ref:'IACS harmonisation work programme / MIW onboard PMS best practice recommendations'},
+c13a:{iss:'Issue 13 — January 2026',tag:'Classification / Adoption',col:'#f97316',title:'Class notation adoption curve — the four-step pathway',body:`<ul><li>Step 1: Guidance document (voluntary, no survey) → Step 2: Optional class notation (with survey and certificate)</li><li>Step 3: Notation recommended for new builds in revised rules → Step 4: IACS UR — mandatory minimum for all members</li><li>Current position (Jan 2026): Step 2–3 for digital survey credit, AI system oversight, MASS notation; Step 4 already reached for IACS E26/E27</li></ul>`,ref:'IACS UR development process / DNV / LR / ABS rule update pattern analysis'},
+c14a:{iss:'Issue 14 — February 2026',tag:'LR / AI Type Approval',col:'#f97316',title:'LR issues first Type Approval for AI maintenance advisory system',body:`<ul><li>Normalises AI software as an approvable, certifiable product in the maritime domain — a structural shift</li><li>Wärtsilä Genius validation methodology on the Maersk fleet approved by LR — class provides the trust architecture</li><li>Commercial benefit (extended survey intervals) flows from regulatory trust in the AI system</li></ul>`,ref:'LR Type Approval procedures / Wärtsilä Genius Maersk deployment / LR Condition Monitoring notation'},
+c15a:{iss:'Issue 15 — March 2026',tag:'ABS / AI Framework',col:'#f97316',title:'ABS AI Quality Framework for maritime — six dimensions',body:`<ul><li>Six dimensions: Reliability · Transparency · Explainability · Accuracy · Security · Governance</li><li>ABS vessels with AI-related class notations to be assessed against this framework from 2027</li><li>Three emerging class trust mechanisms: Type Approval, Operational notation (performance-tracked), Data assurance audits</li></ul>`,ref:'ABS AI Quality Framework for Maritime Applications (published Q1 2026)'},
+c16a:{iss:'Issue 16 — April 2026',tag:'Classification / Infrastructure',col:'#f97316',title:'Class as infrastructure for advanced operational models — the full picture',body:`<ul><li>Connected machinery → continuous condition data → notation maintenance (not just certification)</li><li>Software lifecycle → version control records → survey evidence accepted by class</li><li>Remote evidence → drone survey + sensor data → reduced physical attendance requirement</li><li>Smart ship vessels being designed now for 2028–2030 classing — the preparation window is open</li></ul>`,ref:'DNV / LR / ABS rule suites (2026) / IACS UR developments / class society strategic roadmaps'},
+
+r1a:{iss:'Issue 01 — January 2025',tag:'MARPOL VI / SOx/NOx',col:'#f59e0b',title:'MARPOL Annex VI — global sulphur cap and ECA requirements',body:`<ul><li>Global sulphur cap: 0.50% m/m in fuel oil (Regulation 14) — in force January 2020</li><li>ECA cap: 0.10% m/m (Baltic Sea, North Sea, North American ECA, US Caribbean ECA)</li><li>NOx Tier III: SCR or EGR required for engines installed on ships operating in NOx ECAs (Baltic + North Sea for new builds contracted after 1 January 2021)</li></ul>`,ref:'MARPOL Annex VI Reg 14 (SOx) / Reg 13 (NOx) / NOx Technical Code 2008 (as amended)'},
+r2a:{iss:'Issue 02 — February 2025',tag:'EU MRV / FuelEU',col:'#f59e0b',title:'EU MRV and FuelEU Maritime — dual EU reporting framework',body:`<ul><li>EU MRV (in force from 2018): annual CO₂ reporting for vessels >5000 GT calling EU ports</li><li>FuelEU Maritime (from 2025): tighter GHG fuel intensity controls — tightening yearly to 2050</li><li>Non-EU flagged vessels calling EU ports included in both frameworks — directly affects Maersk container operations</li></ul>`,ref:'EU MRV Regulation (EU) 2015/757 / FuelEU Maritime Regulation (EU) 2023/1805'},
+r3a:{iss:'Issue 03 — March 2025',tag:'MARPOL VI / NOx',col:'#f59e0b',title:'NOx Tier III — ECA compliance and SCR/EGR technical requirements',body:`<ul><li>Tier III applies to marine diesel engines installed on ships that operate in designated NOx ECAs</li><li>Baltic Sea and North Sea: Tier III applies to ships constructed on or after 1 January 2021</li><li>Technical solutions: SCR (Selective Catalytic Reduction) using urea/AdBlue; EGR (Exhaust Gas Recirculation) — know the operating principles</li></ul>`,ref:'MARPOL Annex VI Regulation 13 / NOx Technical Code 2008 (MEPC.177(58) as amended)'},
+r4a:{iss:'Issue 04 — April 2025',tag:'IMO / Instruments',col:'#f59e0b',title:'IMO instrument hierarchy — the framework for oral exam precision',body:`<ul><li>SOLAS Regulations: mandatory — adopted as part of the Convention, legally binding on all contracting states</li><li>Codes: status varies — mandatory when adopted by IMO resolution under SOLAS or MARPOL; voluntary otherwise</li><li>Circulars (MSC, MEPC, MSC-MEPC, MSC-FAL): guidance and recommendations — not legally binding unless specifically adopted</li><li>Guidelines: voluntary unless incorporated into a mandatory instrument by reference</li></ul>`,ref:'IMO instruments guide / Vienna Convention on the Law of Treaties / SOLAS / MARPOL'},
+r5a:{iss:'Issue 05 — May 2025',tag:'ISM / C/E Duties',col:'#f59e0b',title:'ISM Code Chapter 10 — translating maintenance obligations to practice',body:`<ul><li>C/E responsible under ISM for machinery maintained in accordance with applicable rules and company SMS</li><li>Practical translation: what changes in logs, routines, and tests when a new regulation enters force?</li><li>Oral exam standard: connect the regulation to the specific action that must change on board</li></ul>`,ref:'ISM Code Chapter 10 (Maintenance of the Ship and Equipment) / SOLAS Chapter IX / MLC 2006 Reg 3.2'},
+r6a:{iss:'Issue 06 — June 2025',tag:'MARPOL I / ORB',col:'#f59e0b',title:'Oil Record Book Part I — full code letter reference A through J',body:`<ul><li>A = Ballasting/cleaning of fuel oil tanks · B = Cleaning fuel oil tanks · C = Discharge of dirty ballast or tank washings to sea</li><li>D = Non-automatic discharge overboard of bilge water · E = Automatic discharge overboard of bilge water using OWS · F = Condition of oil filtering equipment</li><li>G = Accidental or other exceptional discharges of oil · H = Condition of oil discharge monitoring/control system (Annex I tankers)</li><li>I = Loading of cargo oil (tankers, Part II) · J = Internal transfer of cargo oil (tankers, Part II)</li></ul>`,ref:'MARPOL Annex I Regulation 17 / Oil Record Book Part I (Machinery Space Operations) / MEPC.1/Circ.736'},
+r7a:{iss:'Issue 07 — July 2025',tag:'EU / IHM',col:'#f59e0b',title:'Inventory of Hazardous Materials — EU Ship Recycling Regulation',body:`<ul><li>IHM Part I: design and construction materials — required for ships calling EU ports (Statement of Compliance)</li><li>IHM Part III: required at end of ship's life before recycling — links to Hong Kong Convention requirements</li><li>C/E must know which onboard systems fall under IHM scope: equipment, coatings, insulation, piping materials</li></ul>`,ref:'EU Ship Recycling Regulation (EU) 1257/2013 / Hong Kong Convention (2009) / IHM guidelines'},
+r8a:{iss:'Issue 08 — August 2025',tag:'Classification / CBM',col:'#f59e0b',title:'Condition-based maintenance survey credit — class requirements',body:`<ul><li>Three CBM credit conditions (all required): calibrated instruments traceable to national standards; competent assessor (often third-party certified); continuous data retention and retrieval capability</li><li>LR ShipRight FDA: load sensors + data analytics → targeted inspection replaces or supplements scheduled full survey</li><li>Oral exam Q: "How would you apply CBM to reduce survey cost?" — answer must address all three CBM credit conditions</li></ul>`,ref:'DNV / LR / ABS CBM notation requirements / ABS Guide for Risk-Based Surveys (2024)'},
+r9a:{iss:'Issue 09 — September 2025',tag:'PSC / MOU',col:'#f59e0b',title:'Paris MOU CIC on garbage management — scope and action',body:`<ul><li>CIC (Concentrated Inspection Campaign) scope: Garbage Management Plan, Garbage Record Book entries, placards in required languages</li><li>Tokyo MOU: expanded ISM Code audit depth — SMS implementation quality being tested, not just documentation</li><li>Action items: ensure GRB entries are complete with quantities and disposal method; placards current and displayed</li></ul>`,ref:'Paris MOU 2025 CIC (Garbage Management) / Tokyo MOU 2025 focus areas / MARPOL Annex V'},
+r10a:{iss:'Issue 10 — October 2025',tag:'MARPOL II',col:'#f59e0b',title:'MARPOL Annex II — Category X/Y/Z cargo classification and ORB',body:`<ul><li>Category X (greatest hazard): prewash mandatory before loading ballast or proceeding to sea; strict residue discharge restrictions</li><li>Category Y (medium concern): specific discharge restrictions outside special areas · Category Z (minor hazard): least restrictive</li><li>Cargo Record Book: entry required for every transfer operation, cleaning, prewash, and discharge operation</li></ul>`,ref:'MARPOL Annex II / Regulation 13 / IBC Code / MEPC.1/Circ.512 (Cargo record book guidance)'},
+r11a:{iss:'Issue 11 — November 2025',tag:'GFI / 2028',col:'#f59e0b',title:'GFI threshold — what 89.0 gCO₂eq/MJ means for fuel management',body:`<ul><li>VLSFO approximately meets the Year 0 (2028) threshold — but tightens ~2%/year making the baseline progressively restrictive</li><li>Well-to-wake: fuel produced via green hydrogen routes has lower WtW intensity — pathway certification required from supplier</li><li>C/E must understand the fuel GFI calculation for SEEMP Part III — the compliance arithmetic is a C/E responsibility</li></ul>`,ref:'IMO GFI Standard (MEPC 84 adopted) / MARPOL Annex VI (as amended) / SEEMP Part III format'},
+r12a:{iss:'Issue 12 — December 2025',tag:'AI Maturity / Year-end',col:'#f59e0b',title:'Year-end AI maturity assessment — five-category tracker snapshot',body:`<ul><li>Maintenance AI: deployable and expanding — multiple commercial fleet deployments with published performance data</li><li>Voyage optimisation: deployed and mature — widely used across major container and bulker fleets</li><li>Knowledge retrieval: emerging and accelerating — strong at shore, limited at-sea deployment (bandwidth constraint)</li><li>Autonomy support: pilot stage — regulatory-dependent, DoA 2 commercial routes beginning to appear</li><li>Full autonomy: research phase — distant, dependent on regulatory, liability and STCW framework completion</li></ul>`,ref:'MIW AI Adoption Tracker (Dec 2025 edition) / Industry analyst reports'},
+r13a:{iss:'Issue 13 — January 2026',tag:'STCW / Alt Fuels',col:'#f59e0b',title:'Alternative fuels competence — STCW IGF Code training requirements',body:`<ul><li>STCW Table A-V/3: LNG basic familiarisation (in force — required for crew serving on LNG-fuelled vessels)</li><li>Methanol and ammonia: new STCW Table V/4 proposed under Manila+15 — training standards being developed</li><li>C/E planning implication: plan re-validation requirements before 2030; training record management becomes multi-fuel complex</li></ul>`,ref:'STCW Convention Table A-V/3 (LNG familiarisation) / IGF Code (MSC.391(95)) / STCW Manila+15 review'},
+r14a:{iss:'Issue 14 — February 2026',tag:'Systems Thinking',col:'#f59e0b',title:'Systems thinking — mandatory competency for the modern C/E',body:`<ul><li>The connected system: Operations (what the ship does) → Assurance (what class requires) → Rules (what IMO mandates) → Tools (what AI/digital enables) → Data (what records are produced)</li><li>Interaction effects: decarbonisation → machinery changes · data requirements → assurance frameworks · autonomy → safety case requirements</li><li>The C/E who understands the whole system is more valuable than a specialist in any single domain</li></ul>`,ref:'ISM Code / MARPOL / STCW / IMO GHG Strategy — integrated regulatory view'},
+r15a:{iss:'Issue 15 — March 2026',tag:'Cyber / Reporting',col:'#f59e0b',title:'Cyber incident mandatory reporting — IMO MSC-FAL.1/Circ.3 revision under development',body:`<ul><li>Mandatory reporting of significant cyber incidents to flag state under active discussion at IMO</li><li>PSC may request evidence of cyber incident log and documented response records during inspections</li><li>Current baseline for existing ships: BIMCO Cyber Security Guide and IMO MSC-FAL.1/Circ.3 (2017)</li></ul>`,ref:'IMO MSC-FAL.1/Circ.3 (2017) / BIMCO Cyber Security Guide (2nd edition) / IACS UR E26'},
+r16a:{iss:'Issue 16 — April 2026',tag:'Autonomy / Limits',col:'#f59e0b',title:'Autonomy cannot scale without aligned rules, assurance and liability frameworks',body:`<ul><li>Four stakeholders must align: commercial operators (want DoA 3) · regulators (need binding instruments) · class (needs survey frameworks) · P&amp;I clubs (need liability allocation)</li><li>Data without engineering discipline = false confidence — sensor validation and physical verification remain non-negotiable</li><li>The final editorial position: marine engineers are stewards of transition, not passengers in it</li></ul>`,ref:'MSC 108 / MASS binding instrument development / IACS / P&amp;I club guidance on autonomous vessels'},
+
+a1a:{iss:'Issue 01 — January 2025',tag:'AI / Predictive Maintenance',col:'#8b5cf6',title:'AI in maritime — early experimental phase, first observations',body:`<ul><li>Predictive maintenance: Wärtsilä Genius, ABB Ability, MAN PrimeServ Assist — shore-based monitoring using engine sensor data, algorithms flag anomalies, human expert validates</li><li>Voyage optimisation: NAPA, StormGeo — route and speed planning with weather and fuel model integration</li><li>Key principle established: "Explainability matters at sea — black-box outputs will not be trusted by crew"</li></ul>`,ref:'Wärtsilä Genius platform / ABB Ability EDCS / MAN PrimeServ Assist (2024 state of deployment)'},
+a2a:{iss:'Issue 02 — February 2025',tag:'AI / PMS',col:'#8b5cf6',title:'PMS AI overlay concept and fault library development',body:`<ul><li>Fault libraries and troubleshooting databases: DNV Veracity aggregates failure data across the fleet</li><li>PMS AI overlay concept: reviewing work order closures for missed intervals or poorly described fault descriptions</li><li>Constraints identified: offshore bandwidth, PMS integration complexity (Amos, Maximo, Trident), unclear accountability boundaries</li></ul>`,ref:'DNV Veracity platform / Amos / Maximo / Trident PMS platforms (2025 state)'},
+a3a:{iss:'Issue 03 — March 2025',tag:'AI / Decision Support',col:'#8b5cf6',title:'Automation vs supervised decision support — the critical distinction',body:`<ul><li>Automation: machine replaces the human decision entirely</li><li>Decision-support AI: machine informs human decision — human retains authority and accountability under STCW</li><li>Most near-term maritime AI falls into decision-support category — this matters for liability and exam regulation questions</li></ul>`,ref:'ClassNK AI guidelines for ships / IMO MSC-FAL.1/Circ.3 / STCW officer responsibility framework'},
+a4a:{iss:'Issue 04 — April 2025',tag:'AI / Digital Twin',col:'#8b5cf6',title:'"Dashboard theatre" — the digital twin credibility problem defined',body:`<ul><li>Common failure mode: twin shows "acceptable" output while physical inspection reveals actual deterioration</li><li>Root causes: uncalibrated sensors, model not updated after maintenance or modification, data gaps interpolated</li><li>Near-term AI with genuine credibility: intelligent alarm management, anomaly detection, automated work orders, knowledge retrieval</li></ul>`,ref:'Industry analysis / DNV / ABS digital twin and condition monitoring guidance documents'},
+a5a:{iss:'Issue 05 — May 2025',tag:'AI / Hype vs Utility',col:'#8b5cf6',title:'Hype vs utility — an explicit framework for evaluation',body:`<ul><li>Hype category (near-term): fully autonomous ocean trade vessels; AI replacing C/E for decision-making; predictive maintenance without manual validation</li><li>Utility category (happening now): manual summarisation, defect clustering, PMS schedule support, voyage optimisation with quantified results</li><li>Evaluation standard: "Does this reduce workload, risk or waste measurably? Show me vessel data." — not press releases</li></ul>`,ref:'MIW editorial evaluation standard / Klaveness Digital published case studies / ZeroNorth data'},
+a6a:{iss:'Issue 06 — June 2025',tag:'AI / Troubleshooting',col:'#8b5cf6',title:'AI copilots for troubleshooting — the near-term believable use case',body:`<ul><li>Not "AI diagnoses the fault" but: retrieves the 5 most likely causes from vessel maintenance history and manufacturer fault tree, sorted by probability from current sensor readings</li><li>Wärtsilä Genius alert categories: Normal / Advisory / Caution / Danger — calibration period of 6–12 months needed before trusting</li><li>Physical verification mandatory before any intervention — AI advises, qualified engineer decides and acts</li></ul>`,ref:'Wärtsilä Genius platform (Genius Intelligence) / ABB Ability EDCS / Kongsberg advisory systems'},
+a7a:{iss:'Issue 07 — July 2025',tag:'AI / Nav vs Machinery',col:'#8b5cf6',title:'Navigation AI vs machinery AI — the important operational separation',body:`<ul><li>Navigation autonomy advancing faster: more controlled environment, richer sensor set (radar, AIS, lidar, GNSS), more tractable failure modes</li><li>Machinery autonomy is harder: more variables, higher consequence of failure, interdependent systems with long time constants, no equivalent of "stop engines"</li><li>Near-term machinery AI believed in: intelligent alarm management, parameter trending with baseline comparison, fault classification, auto work order generation</li></ul>`,ref:'Kongsberg Autosail programme / industry analysis (DNV, Wärtsilä) / IMAREST autonomy papers'},
+a8a:{iss:'Issue 08 — August 2025',tag:'AI / Wärtsilä',col:'#8b5cf6',title:'Wärtsilä Genius fleet deployment and MAN remote diagnostics model',body:`<ul><li>Wärtsilä Genius: condition monitoring with shore-based expert support, alert categories and recommended actions — deployed on commercial fleets</li><li>MAN PrimeServ Connect: shore-based MAN engineer views live parameters and guides the C/E through a diagnostic procedure in real time</li><li>Principle reaffirmed: "Always verify with physical checks before trusting a digital signal" — sensor failure and miscalibration generate convincing but incorrect alerts</li></ul>`,ref:'Wärtsilä Genius (fleet deployment programme) / MAN PrimeServ Connect (2025 commercial launch)'},
+a9a:{iss:'Issue 09 — September 2025',tag:'AI / Adoption Tracker',col:'#8b5cf6',title:'AI Adoption Tracker — permanent editorial section introduced',body:`<ul><li>Categories: Maintenance intelligence (DEPLOYABLE) · Voyage optimisation (DEPLOYED) · Knowledge retrieval (EMERGING) · Autonomy support (PILOTS)</li><li>Internal dashboards in Excel with consistent inputs are more useful right now than commercial AI with poor integration</li><li>The editorial standard: published vessel-level evidence, not vendor press releases or pilot announcements</li></ul>`,ref:'MIW AI Adoption Tracker (introduced Issue 09) / Klaveness Digital / ZeroNorth / NAPA case studies'},
+a10a:{iss:'Issue 10 — October 2025',tag:'AI / Four Categories',col:'#8b5cf6',title:'AI use case categorisation — four defined tracks with maturity ratings',body:`<ul><li>Track 1 — Maintenance intelligence (Wärtsilä Genius, ABB Ability, MAN PrimeServ): HIGH maturity, multiple fleet deployments</li><li>Track 2 — Operations optimisation (NAPA Voyage, ZeroNorth, Cargill Ocean Technologies): HIGH maturity, widely deployed</li><li>Track 3 — Knowledge retrieval (LLM-based manual/rules query): MEDIUM, emerging on shore, limited at-sea deployment</li><li>Track 4 — Autonomy support (Kongsberg Autosail, Wärtsilä Navi-Harbour): LOW-MEDIUM, commercial pilots only</li></ul>`,ref:'MIW AI Adoption Tracker (October 2025 edition) / product deployment data'},
+a11a:{iss:'Issue 11 — November 2025',tag:'AI / Maersk Fleet',col:'#8b5cf6',title:'Maersk — Wärtsilä Genius deployed on approx. 130 vessels at Nor-Shipping',body:`<ul><li>First fleet-scale AI condition monitoring deployment in container shipping (reported Nor-Shipping January 2026)</li><li>Validation protocol: Maersk engineers validate AI alerts before action — "AI advises, engineer confirms" model applied at scale</li><li>Key insight: value lies in fleet-wide aggregation — 130 vessels of trend data is predictive; one vessel in isolation is limited</li></ul>`,ref:'Nor-Shipping January 2026 reporting / Maersk fleet intelligence programme / Wärtsilä press release'},
+a12a:{iss:'Issue 12 — December 2025',tag:'AI / Maturity Curve',col:'#8b5cf6',title:'Year-end AI maturity honest assessment — real deployments vs marketing',body:`<ul><li>Real fleet workflows (third-party validated evidence): ZeroNorth, NAPA Voyage, Cargill partnerships · Wärtsilä Genius, MAN PrimeServ Connect</li><li>Entering fleet workflows (anecdotal/pilot evidence): LLM manual querying (shore-side teams) · AI-generated work order suggestions from PMS data</li><li>Mostly marketing (no independent validation): "fully autonomous container vessel" products · "AI C/E" decision-making systems · Any product claiming >20% fuel saving without third-party data</li></ul>`,ref:'MIW AI Adoption Tracker (December 2025 year-end edition)'},
+a13a:{iss:'Issue 13 — January 2026',tag:'AI / Hapag-Lloyd',col:'#8b5cf6',title:'Hapag-Lloyd — ABB Ability Vessel Insight on 250+ vessels',body:`<ul><li>Fleet KPI benchmarking and cross-vessel performance comparisons — operational intelligence at scale</li><li>Categorised as fleet analytics rather than condition monitoring AI — different value proposition</li><li>Demonstrates the fleet-level aggregation principle: meaningful patterns only emerge across hundreds of vessels</li></ul>`,ref:'ABB Ability Vessel Insight platform / Hapag-Lloyd fleet programme announcement'},
+a14a:{iss:'Issue 14 — February 2026',tag:'AI / MAN Remote Diag',col:'#8b5cf6',title:'MAN PrimeServ Connect — remote diagnostic sessions in commercial fleet use',body:`<ul><li>Shore-based MAN engineer accesses live engine parameters and guides the C/E through a diagnostic procedure remotely</li><li>Reported result: 3 potential unplanned stoppages averted in Q4 2025 on a tanker fleet (MAN press release)</li><li>Wärtsilä Genius feature update: natural language alert summaries ("TC vibration on unit 2 increased 15% over 14 days, consistent with impeller fouling") replace raw numerical threshold alerts</li></ul>`,ref:'MAN PrimeServ Connect (2026 commercial deployment) / Wärtsilä Genius feature update Q1 2026'},
+a15a:{iss:'Issue 15 — March 2026',tag:'AI / Autonomy Pilot',col:'#8b5cf6',title:'Kongsberg Autosail — first DoA 2 commercial trial approved (Norway)',body:`<ul><li>First commercial route under MASS Interim Guidelines: Bastø Fosen ferry service, approved by Norwegian Maritime Authority</li><li>Configuration: crew on board, shore-based officer holds remote command authority — DoA 2 definition met</li><li>Data from this pilot is actively referenced in MASS binding instrument development — the most watched commercial pilot in the sector</li></ul>`,ref:'Kongsberg Autosail programme / Norwegian Maritime Authority MASS national framework approval'},
+a16a:{iss:'Issue 16 — April 2026',tag:'AI / Fleet Reality',col:'#8b5cf6',title:'Fleet reality check Q1 2026 — where AI actually is, mapped honestly',body:`<ul><li>Voyage optimisation: deployed on >500 vessels in major container/bulk fleets — MATURE technology</li><li>Condition monitoring AI: ~200–300 vessels estimated — EARLY MAINSTREAM, accelerating</li><li>PMS AI overlay: ~50–100 vessels (early commercial/pilots) — PRE-MAINSTREAM</li><li>LLM knowledge tools: shore teams primarily, almost no on-board deployment at scale — BANDWIDTH CONSTRAINED</li><li>Autonomous commercial operations: single-digit approved routes (DoA 2) — REGULATORY-GATED</li></ul>`,ref:'MIW AI Adoption Tracker Q1 2026 / industry analyst estimates / commercial deployment data'},
+};
+
+/* ── STATE ── */
+let active = null;
+
+/* ── SHOW/HIDE ── */
+function show(id) {
+  const btn = document.querySelector(`[onclick="show('${id}')"]`);
+  if (active === id) { closePanel(); return; }
+  if (active) {
+    const prev = document.querySelector(`[onclick="show('${active}')"]`);
+    if (prev) prev.classList.remove('active');
+  }
+  active = id;
+  if (btn) btn.classList.add('active');
+  const d = D[id];
+  document.getElementById('dp-issue').textContent = d.iss;
+  const tag = document.getElementById('dp-tag');
+  tag.textContent = d.tag;
+  tag.style.background = d.col + '20';
+  tag.style.color = d.col;
+  tag.style.border = '1px solid ' + d.col + '50';
+  document.getElementById('dp-title').textContent = d.title;
+  document.getElementById('dp-body').innerHTML = d.body;
+  document.getElementById('dp-ref').textContent = d.ref;
+  const panel = document.getElementById('detail-panel');
+  panel.style.borderLeftColor = d.col;
+  panel.classList.add('visible');
+  panel.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function closePanel() {
+  document.getElementById('detail-panel').classList.remove('visible');
+  if (active) {
+    const prev = document.querySelector(`[onclick="show('${active}')"]`);
+    if (prev) prev.classList.remove('active');
+  }
+  active = null;
+}
+
+/* ── RETURN TO TOP ── */
+window.addEventListener('scroll', () => {
+  document.getElementById('rtt').style.display = window.scrollY > 600 ? 'flex' : 'none';
+});
+document.getElementById('rtt').style.alignItems = 'center';
+document.getElementById('rtt').style.justifyContent = 'center';
+</script>
+</body>
+</html>
