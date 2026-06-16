@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Data to Decision: How AI Is Actually Changing Ship Operations | Marine Intelligence Weekly</title>
+
+<!-- ═══ PRIMARY SEO ═══ -->
+<meta name="description" content="A working Second Engineer's analysis of where maritime AI is genuinely deployed, where the data problem breaks it, and what engineers should do now. By Nixon Antony, Marine Intelligence Weekly.">
+<meta name="keywords" content="maritime AI, ship operations, predictive maintenance, marine engineering, GENBU autonomous ship, Docker Vision, SeaGPT, UK ETS, FORB, fuel oil record book, CII, MEPC 84, IACS UR E26, engineering context protocol, marine intelligence weekly, Nixon Antony">
+<meta name="author" content="Nixon Antony">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<link rel="canonical" href="https://marineintelligenceweekly.com/articles/ai-ship-operations.html">
+
+<!-- ═══ OPEN GRAPH ═══ -->
+<meta property="og:site_name" content="Marine Intelligence Weekly">
+<meta property="og:locale" content="en_GB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="From Data to Decision: How AI Is Actually Changing Ship Operations">
+<meta property="og:description" content="Predictive maintenance, autonomous vessels, regulatory forcing functions — and what AI still cannot do. From the engine room, not the press release.">
+<meta property="og:url" content="https://marineintelligenceweekly.com/articles/ai-ship-operations.html">
+<meta property="og:image" content="https://marineintelligenceweekly.com/articles/assets/cover-ai-ship-operations.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Marine engineer at predictive maintenance console with DEVIATION DETECTED on main engine bearing">
+<meta property="article:published_time" content="2026-06-16T00:00:00+00:00">
+<meta property="article:modified_time" content="2026-06-16T00:00:00+00:00">
+<meta property="article:author" content="https://www.linkedin.com/in/nixon-antony-marineengineer">
+<meta property="article:publisher" content="https://marineintelligenceweekly.com">
+<meta property="article:section" content="Maritime AI">
+<meta property="article:tag" content="Maritime AI">
+<meta property="article:tag" content="Ship Operations">
+<meta property="article:tag" content="Predictive Maintenance">
+<meta property="article:tag" content="Marine Engineering">
+<meta property="article:tag" content="UK ETS">
+<meta property="article:tag" content="CII">
+
+<!-- ═══ TWITTER / X CARD ═══ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@AIMarineEngineer">
+<meta name="twitter:creator" content="@AIMarineEngineer">
+<meta name="twitter:title" content="From Data to Decision: How AI Is Actually Changing Ship Operations">
+<meta name="twitter:description" content="Predictive maintenance, autonomous vessels, regulatory forcing functions — and what AI still cannot do. From the engine room, not the press release.">
+<meta name="twitter:image" content="https://marineintelligenceweekly.com/articles/assets/cover-ai-ship-operations.webp">
+<meta name="twitter:image:alt" content="Marine engineer at predictive maintenance console — AI flags DEVIATION DETECTED">
+
+<!-- ═══ GA4 — CONFIRMED ACTIVE ═══ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5',{page_title:'From Data to Decision: AI in Ship Operations',page_location:'https://marineintelligenceweekly.com/articles/ai-ship-operations.html'});</script>
+
+<!-- ═══ SCHEMA.ORG JSON-LD STRUCTURED DATA ═══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "From Data to Decision: How AI Is Actually Changing Ship Operations — And What It Still Can't Do",
+  "description": "A working Second Engineer's analysis of where maritime AI is genuinely deployed, where the data problem breaks it, and what engineers should do now.",
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://marineintelligenceweekly.com/articles/assets/cover-ai-ship-operations.webp",
+    "width": 1200,
+    "height": 630
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Nixon Antony",
+    "jobTitle": "Second Engineer, Maersk A/S",
+    "description": "Founder of Marine Intelligence Weekly. Second Engineer on container vessels.",
+    "url": "https://marineintelligenceweekly.com",
+    "sameAs": [
+      "https://www.linkedin.com/in/nixon-antony-marineengineer",
+      "https://www.youtube.com/@AIMarineEngineer"
+    ]
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Marine Intelligence Weekly",
+    "url": "https://marineintelligenceweekly.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://marineintelligenceweekly.com/articles/assets/logo.webp"
+    }
+  },
+  "datePublished": "2026-06-16",
+  "dateModified": "2026-06-16",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://marineintelligenceweekly.com/articles/ai-ship-operations.html"
+  },
+  "articleSection": "Maritime AI",
+  "keywords": "maritime AI, predictive maintenance, ship operations, marine engineering, UK ETS, CII, FORB, MEPC 84",
+  "wordCount": 1200,
+  "inLanguage": "en-GB",
+  "isAccessibleForFree": true,
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://marineintelligenceweekly.com"},
+      {"@type":"ListItem","position":2,"name":"Articles","item":"https://marineintelligenceweekly.com/articles/"},
+      {"@type":"ListItem","position":3,"name":"From Data to Decision: How AI Is Actually Changing Ship Operations","item":"https://marineintelligenceweekly.com/articles/ai-ship-operations.html"}
+    ]
+  }
+}
+</script>
+<style>
+:root{--navy:#0f172a;--teal:#0d9488;--orange:#f97316;--surface:#f8fafc;--mid:#64748b;--line:#e2e8f0;--white:#ffffff;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Georgia',serif;background:var(--surface);color:#1e293b;line-height:1.8;}
+nav{background:var(--navy);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,.4);}
+.nav-left{display:flex;align-items:center;gap:10px;}
+.nav-logo-img{height:34px;width:34px;border-radius:50%;object-fit:cover;}
+.nav-logo{color:#fff;font-family:Arial,sans-serif;font-weight:800;font-size:15px;letter-spacing:.05em;text-decoration:none;}
+.nav-logo span{color:var(--teal);}
+.nav-back{color:rgba(255,255,255,.7);font-size:13px;font-family:Arial,sans-serif;text-decoration:none;border:1px solid rgba(255,255,255,.25);padding:6px 14px;border-radius:6px;transition:all .2s;}
+.nav-back:hover{background:var(--teal);border-color:var(--teal);color:#fff;}
+.hero{background:var(--navy);padding:64px 24px 0;text-align:center;}
+.hero-kicker{font-family:Arial,sans-serif;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:20px;}
+.hero h1{font-family:Arial,sans-serif;font-size:clamp(24px,4.5vw,46px);font-weight:900;color:#fff;line-height:1.15;max-width:820px;margin:0 auto 24px;}
+.hero h1 em{color:var(--teal);font-style:normal;}
+.hero-deck{font-size:clamp(15px,2vw,19px);color:rgba(255,255,255,.75);max-width:640px;margin:0 auto 28px;line-height:1.7;font-family:Georgia,serif;}
+.byline{display:inline-flex;align-items:center;gap:14px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:40px;padding:10px 22px;margin-bottom:20px;}
+.byline-text{font-family:Arial,sans-serif;font-size:13px;color:rgba(255,255,255,.8);}
+.byline-text strong{color:#fff;}
+.meta-bar{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;padding-bottom:40px;}
+.meta-pill{font-family:Arial,sans-serif;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+.cover-img-wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+.cover-img-wrap img{width:100%;display:block;border-radius:0 0 16px 16px;box-shadow:0 20px 60px rgba(0,0,0,.35);}
+.cover-caption{text-align:center;font-family:Arial,sans-serif;font-size:11px;color:var(--mid);margin-top:10px;padding:0 24px;}
+.share-bar{max-width:720px;margin:28px auto 0;padding:0 24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.share-label{font-family:Arial,sans-serif;font-size:12px;font-weight:700;color:var(--mid);letter-spacing:.1em;text-transform:uppercase;margin-right:4px;}
+.share-btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:20px;font-family:Arial,sans-serif;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s;border:none;cursor:pointer;}
+.share-wa{background:#25D366;color:#fff;}
+.share-wa:hover{background:#1ebe5d;}
+.share-li{background:#0A66C2;color:#fff;}
+.share-li:hover{background:#0856a3;}
+.share-tw{background:#000;color:#fff;}
+.share-tw:hover{background:#333;}
+.share-copy{background:var(--surface);color:var(--navy);border:2px solid var(--line);}
+.share-copy:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+.article-wrap{max-width:720px;margin:0 auto;padding:48px 24px 80px;}
+.article-wrap p{font-size:18px;line-height:1.85;color:#1e293b;margin-bottom:24px;}
+.article-wrap h2{font-family:Arial,sans-serif;font-size:22px;font-weight:800;color:var(--navy);margin:52px 0 16px;padding-bottom:10px;border-bottom:3px solid var(--teal);}
+.article-wrap h3{font-family:Arial,sans-serif;font-size:17px;font-weight:700;color:var(--teal);margin:32px 0 12px;}
+.article-wrap ul{margin:0 0 24px 0;padding-left:0;list-style:none;}
+.article-wrap ul li{position:relative;padding-left:22px;margin-bottom:14px;font-size:17px;line-height:1.75;color:#1e293b;}
+.article-wrap ul li::before{content:"→";position:absolute;left:0;color:var(--teal);font-weight:700;}
+.pull-quote{border-left:5px solid var(--orange);padding:20px 28px;background:#fff7ed;border-radius:0 12px 12px 0;margin:40px 0;}
+.pull-quote p{font-family:Georgia,serif;font-size:20px;line-height:1.6;color:var(--navy);margin:0;font-style:italic;font-weight:600;}
+.callout{background:var(--navy);border-radius:12px;padding:28px 32px;margin:40px 0;}
+.callout-label{font-family:Arial,sans-serif;font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:12px;}
+.callout p{color:rgba(255,255,255,.88);font-size:16px;line-height:1.75;margin:0;}
+.callout strong{color:var(--teal);}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:40px 0;}
+.stat-card{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:22px 20px;text-align:center;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.stat-num{font-family:Arial,sans-serif;font-size:38px;font-weight:900;color:var(--teal);line-height:1;}
+.stat-label{font-family:Arial,sans-serif;font-size:12px;color:var(--mid);margin-top:8px;line-height:1.45;}
+.infographic-wrap{margin:44px 0;}
+.infographic-wrap img{width:100%;display:block;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,.12);}
+.infographic-caption{font-family:Arial,sans-serif;font-size:11px;color:var(--mid);text-align:center;margin-top:10px;}
+.action-box{background:#f0fdf4;border:2px solid #86efac;border-radius:12px;padding:28px 32px;margin:40px 0;}
+.action-box h3{color:#166534;font-family:Arial,sans-serif;font-size:16px;font-weight:800;margin:0 0 16px;border:none;padding:0;}
+.action-box ul li::before{color:#16a34a;}
+.action-box ul li{color:#14532d;}
+.action-box ul li strong{color:#166534;}
+.share-bottom{max-width:720px;margin:0 auto;padding:32px 24px 48px;border-top:2px solid var(--line);}
+.share-bottom-label{font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:16px;}
+.share-bottom-btns{display:flex;gap:10px;flex-wrap:wrap;}
+.author-footer{background:var(--navy);padding:56px 24px;}
+.author-inner{max-width:720px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:start;}
+.author-photo{width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--teal);}
+.author-logo{height:44px;width:44px;border-radius:50%;object-fit:cover;margin-top:12px;}
+.author-kicker{font-family:Arial,sans-serif;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:8px;}
+.author-name{font-family:Arial,sans-serif;font-size:18px;font-weight:800;color:#fff;margin-bottom:4px;}
+.author-title{font-family:Arial,sans-serif;font-size:13px;color:rgba(255,255,255,.6);margin-bottom:14px;}
+.author-bio{font-size:15px;color:rgba(255,255,255,.78);line-height:1.7;margin-bottom:16px;}
+.author-links{display:flex;gap:12px;flex-wrap:wrap;}
+.author-links a{font-family:Arial,sans-serif;font-size:13px;color:var(--teal);text-decoration:none;font-weight:600;border:1px solid rgba(13,148,136,.4);padding:6px 14px;border-radius:20px;transition:all .2s;}
+.author-links a:hover{background:var(--teal);color:#fff;}
+.site-footer{background:#060e1a;padding:20px;text-align:center;font-family:Arial,sans-serif;font-size:12px;color:rgba(255,255,255,.3);}
+#back-to-top{position:fixed;bottom:28px;right:24px;width:46px;height:46px;background:var(--teal);color:#fff;border:none;border-radius:50%;cursor:pointer;font-size:20px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:300;}
+#back-to-top.visible{opacity:1;pointer-events:auto;}
+#back-to-top:hover{transform:translateY(-3px);}
+#copy-toast{position:fixed;bottom:84px;right:24px;background:var(--navy);color:#fff;font-family:Arial,sans-serif;font-size:13px;padding:10px 18px;border-radius:8px;opacity:0;pointer-events:none;transition:opacity .3s;z-index:400;}
+#copy-toast.show{opacity:1;}
+@media(max-width:640px){.article-wrap{padding:32px 18px 60px;}.article-wrap p{font-size:16px;}.hero{padding:48px 18px 0;}.author-inner{grid-template-columns:1fr;}.share-btn{font-size:12px;padding:7px 12px;}}
+@media print{nav,#back-to-top,.share-bar,.share-bottom,.site-footer{display:none;}body{background:#fff;}}
+</style>
+</head>
+<body>
+
+<button id="back-to-top" aria-label="Return to top">↑</button>
+<div id="copy-toast">Link copied!</div>
+
+<nav>
+  <div class="nav-left">
+    <img class="nav-logo-img" src="/articles/assets/logo.webp" alt="MIW Logo">
+    <a class="nav-logo" href="https://marineintelligenceweekly.com"><span>MIW</span> Marine Intelligence Weekly</a>
+  </div>
+  <a class="nav-back" href="https://marineintelligenceweekly.com/articles/">← All Articles</a>
+</nav>
+
+<header class="hero">
+  <div class="hero-kicker">Feature Article · Maritime AI · June 2026</div>
+  <h1>From Data to Decision: How AI Is Actually Changing Ship Operations — <em>And What It Still Can't Do</em></h1>
+  <p class="hero-deck">A working Second Engineer's analysis of where maritime AI is genuinely deployed, where the data problem breaks it, and what every maritime professional needs to understand right now.</p>
+  <div class="byline">
+    <div class="byline-text"><strong>Nixon Antony</strong> · Second Engineer, Maersk A/S · Founder, Marine Intelligence Weekly</div>
+  </div>
+  <div class="meta-bar">
+    <span class="meta-pill">📅 June 2026</span>
+    <span class="meta-pill">⏱ 8 min read</span>
+    <span class="meta-pill">🚢 MarineTanks × MIW</span>
+  </div>
+</header>
+
+<div class="cover-img-wrap">
+  <img src="/articles/assets/cover-ai-ship-operations.webp" alt="Marine engineer studying AI predictive maintenance console — DEVIATION DETECTED on main engine bearing" loading="eager">
+  <p class="cover-caption">Engine Control Room, Modern Container Vessel · Predictive maintenance deviation alert — AI flags the pattern; the engineer makes the call. © Marine Intelligence Weekly</p>
+</div>
+
+<div class="share-bar">
+  <span class="share-label">Share</span>
+  <a class="share-btn share-wa" href="https://wa.me/?text=From%20Data%20to%20Decision%3A%20How%20AI%20Is%20Actually%20Changing%20Ship%20Operations%20%E2%80%94%20Marine%20Intelligence%20Weekly%0Ahttps%3A%2F%2Fmarineintelligenceweekly.com%2Farticles%2Fai-ship-operations.html" target="_blank" rel="noopener" aria-label="Share on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp
+  </a>
+  <a class="share-btn share-li" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fmarineintelligenceweekly.com%2Farticles%2Fai-ship-operations.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    LinkedIn
+  </a>
+  <a class="share-btn share-tw" href="https://twitter.com/intent/tweet?text=From%20Data%20to%20Decision%3A%20How%20AI%20Is%20Actually%20Changing%20Ship%20Operations%20%E2%80%94%20and%20what%20it%20still%20can%27t%20do.%20From%20the%20engine%20room%2C%20not%20the%20press%20release.&url=https%3A%2F%2Fmarineintelligenceweekly.com%2Farticles%2Fai-ship-operations.html" target="_blank" rel="noopener" aria-label="Share on X">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    X / Twitter
+  </a>
+  <button class="share-btn share-copy" onclick="copyLink()" aria-label="Copy link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+    Copy Link
+  </button>
+</div>
+
+<main class="article-wrap">
+
+  <p>At Posidonia 2026, AI featured on almost every exhibitor stand. Predictive maintenance dashboards. Autonomous navigation trials. AI-assisted cargo planning. The message from the industry was clear: AI has arrived in shipping. The message from the engine room is more complicated.</p>
+
+  <p>As a Second Engineer on a Maersk container vessel and the founder of Marine Intelligence Weekly — a publication tracking AI adoption across the maritime sector — I spend time on both sides of that gap. I read the press releases. I also keep the logs. The two rarely describe the same reality.</p>
+
+  <h2>What Is Actually Deployed</h2>
+
+  <p>The most commercially mature maritime AI application is predictive maintenance. Platforms such as MariApps' OceanAI FaultSenseAI ingest high-frequency sensor data from main engines and auxiliary systems to detect deviation from baseline before failure.</p>
+
+  <div class="stat-row">
+    <div class="stat-card"><div class="stat-num">30%</div><div class="stat-label">Reduction in unplanned maintenance costs — figures reported by developers</div></div>
+    <div class="stat-card"><div class="stat-num">20%</div><div class="stat-label">Improvement in vessel availability over interval-based approaches</div></div>
+    <div class="stat-card"><div class="stat-num">240+</div><div class="stat-label">Port locations globally using Docker Vision AI computer vision systems</div></div>
+  </div>
+
+  <p>In January 2026, Japan's GENBU container ship began regular commercial operations under Level 4-equivalent autonomous navigation — the world's first vessel carrying general cargo in commercial autonomous service. DNV's AI-embedded Steel Load Planner V2.0, launched at Posidonia 2026, automates structural load calculations within a class-approved framework. SeaGPT by Greywing automates crew change administration across 18,300 ports using GPT-4.</p>
+
+  <p>These are not pilots. They are commercial deployments.</p>
+
+  <div class="pull-quote"><p>"AI in maritime has moved from pilot to product. The question is no longer whether to adopt it, but whether your data is clean enough to trust it."</p></div>
+
+  <h2>The Regulatory Forcing Function</h2>
+
+  <p>AI adoption in shipping is not happening in a vacuum. The EU ETS, FuelEU Maritime, UK ETS (live from 1 July 2026), and CII collectively require data accuracy and reporting consistency that human-only systems cannot sustain at fleet scale.</p>
+
+  <p>MEPC 84 has shifted BWM enforcement from installation verification to performance verification — PSC will now examine UV lamp hours, flow meter calibration records, and treatment efficacy data. IACS UR E26/E27 mandates cyber resilience certificates for all essential connected systems on vessels contracted after July 2024.</p>
+
+  <div class="callout">
+    <div class="callout-label">⚠ Regulatory Reality Check</div>
+    <p>The <strong>Chief Engineer's Fuel Oil Record Book</strong> entry is no longer just a MARPOL record. Under UK ETS from 1 July 2026, it feeds directly into a financial surrender calculation. Inaccurate fuel records create penalty exposure, class non-conformances, and flag state liability.</p>
+  </div>
+
+  <h2>The Data Problem — Why AI Delivers Noise on Most Vessels</h2>
+
+  <p>AI systems require clean, consistent, contextualised data. Most vessels have data living in silos — inconsistently logged, ungoverned, and not trusted by the engineers who generate it. The five gaps that most commonly break maritime AI in practice:</p>
+
+  <div class="infographic-wrap">
+    <img src="/articles/assets/infographic-data-gap.webp" alt="Why AI Fails on Most Vessels — The 5 Data Gaps" loading="lazy">
+    <p class="infographic-caption">Infographic: The 5 Data Gaps that break maritime AI in practice · Marine Intelligence Weekly © 2026</p>
+  </div>
+
+  <ul>
+    <li>Inconsistent equipment naming across PMS, alarm systems, noon reports, and lube oil analysis — the same unit described four different ways on the same vessel</li>
+    <li>Alarm acknowledgement without recorded context — previous false positives erode trust, alerts are cleared without investigation, developing faults advance undetected</li>
+    <li>Lube oil analysis reports filed and forgotten — never cross-referenced against PMS completion records or alarm histories</li>
+    <li>PMS completion rate confused with completion quality — systematically deferred items on the same system are invisible in a 95% completion dashboard</li>
+    <li>Handover knowledge loss — the operational knowledge a Chief Engineer carries off the vessel at end of contract was never documented and cannot be learned from by any AI system</li>
+  </ul>
+
+  <div class="pull-quote"><p>"AI fed bad data does not give insight. It gives confident-sounding noise. The data audit is the prerequisite for any AI deployment that will actually work."</p></div>
+
+  <h2>What AI Still Cannot Do</h2>
+
+  <p>The honest limit of current maritime AI is not processing power or data volume. It is reasoning. When a Chief Engineer diagnoses cascading machinery alarms during a blackout-risk scenario in heavy weather, they are combining operational context — cargo status, voyage priorities, machinery history, crew capability, regulatory exposure — into a decision under pressure, with incomplete information. No AI system currently deployed does this.</p>
+
+  <p>Consider a realistic scenario: a high crankcase pressure alarm activates in Force 7 conditions. Bearing inspection is two weeks overdue. Lube oil analysis shows elevated iron. Spare shells on board are non-OEM.</p>
+
+  <div class="infographic-wrap">
+    <img src="/articles/assets/infographic-AI-can-cannot.webp" alt="Current AI vs Engineering Context — what AI does and what is still missing" loading="lazy">
+    <p class="infographic-caption">Current AI capability vs. the Engineering Context gap · Marine Intelligence Weekly © 2026</p>
+  </div>
+
+  <p>A current AI identifies the alarm and retrieves the equipment manual. A reasoning-capable system would evaluate all contextual factors simultaneously and offer a prioritised fault hypothesis with a structured investigation pathway. That capability does not yet exist commercially. Closing this gap — building what might be called an Engineering Context Protocol — is the largest untapped opportunity in maritime AI today.</p>
+
+  <h2>What Engineers Should Do Now</h2>
+
+  <p>The AI transition in maritime is not optional. Regulatory requirements alone are pushing every vessel toward better data management and integrated digital systems. Three immediate actions for the working engineer:</p>
+
+  <div class="action-box">
+    <h3>Three Actions for the Working Engineer</h3>
+    <ul>
+      <li><strong>Audit your data quality before AI arrives.</strong> Identify which sensor readings are trusted, where maintenance records live, and whether they cross-reference. This is the prerequisite for any AI deployment that will actually work.</li>
+      <li><strong>Treat the FORB as a financial document.</strong> Under UK ETS from 1 July 2026, fuel records feed surrender calculations with direct financial penalty exposure. Accuracy is no longer just a MARPOL obligation.</li>
+      <li><strong>Document what you know.</strong> Every quirk, sensor drift pattern, and informal workaround that lives in your head leaves the vessel when you do. Record it in PMS notes, maintenance reports, and observation logs — that is what makes a vessel's data useful to the next engineer, and eventually to an AI system.</li>
+    </ul>
+  </div>
+
+  <p>The engineers who understand both worlds — who can manage a machinery space and read an anomaly detection output — are more valuable than either skill alone. That is the professional case for engaging with maritime AI seriously: not as a sceptic, not as a convert, but as a practitioner who knows what the technology needs to earn trust.</p>
+
+  <div class="pull-quote"><p>"AI will not replace the Chief Engineer who can diagnose a crankcase alarm in Force 7. But it will replace the one who cannot explain what data their vessel is generating, or why the pattern changed last Tuesday."</p></div>
+
+</main>
+
+<div class="share-bottom">
+  <p class="share-bottom-label">Found this useful? Share it with your network:</p>
+  <div class="share-bottom-btns">
+    <a class="share-btn share-wa" href="https://wa.me/?text=From%20Data%20to%20Decision%3A%20How%20AI%20Is%20Actually%20Changing%20Ship%20Operations%20%E2%80%94%20Marine%20Intelligence%20Weekly%0Ahttps%3A%2F%2Fmarineintelligenceweekly.com%2Farticles%2Fai-ship-operations.html" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a class="share-btn share-li" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fmarineintelligenceweekly.com%2Farticles%2Fai-ship-operations.html" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <a class="share-btn share-tw" href="https://twitter.com/intent/tweet?text=From%20Data%20to%20Decision%3A%20How%20AI%20Is%20Actually%20Changing%20Ship%20Operations%20%E2%80%94%20and%20what%20it%20still%20can%27t%20do.&url=https%3A%2F%2Fmarineintelligenceweekly.com%2Farticles%2Fai-ship-operations.html" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      X / Twitter
+    </a>
+    <button class="share-btn share-copy" onclick="copyLink()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+      Copy Link
+    </button>
+  </div>
+</div>
+
+<footer class="author-footer">
+  <div class="author-inner">
+    <div>
+      <img class="author-photo" src="/articles/assets/latest_pic_.webp" alt="Nixon Antony">
+      <img class="author-logo" src="/articles/assets/logo.webp" alt="MIW Logo">
+    </div>
+    <div>
+      <div class="author-kicker">About the Author</div>
+      <div class="author-name">Nixon Antony</div>
+      <div class="author-title">Second Engineer, Maersk A/S · Founder, Marine Intelligence Weekly</div>
+      <p class="author-bio">Nixon Antony is a Second Engineer with Maersk A/S and the founder of Marine Intelligence Weekly — a free publication tracking AI adoption, regulatory developments, and digital transformation in maritime. The platform maintains a Maritime AI Timeline, a Maritime Technology Ecosystem Map, and a MEO Class 1 Question Bank.</p>
+      <div class="author-links">
+        <a href="https://marineintelligenceweekly.com" target="_blank">marineintelligenceweekly.com</a>
+        <a href="https://linkedin.com/in/nixon-antony-marineengineer" target="_blank">LinkedIn</a>
+        <a href="https://marineintelligenceweekly.com/articles/">All Articles</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<div class="site-footer">© 2026 Marine Intelligence Weekly / Nixon V Antony. All rights reserved. · marineintelligenceweekly.com</div>
+
+<script>
+const btn=document.getElementById('back-to-top');
+window.addEventListener('scroll',()=>{btn.classList.toggle('visible',window.scrollY>600);});
+btn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+function copyLink(){navigator.clipboard.writeText(window.location.href).then(()=>{const t=document.getElementById('copy-toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);});}
+</script>
+</body>
+</html>
