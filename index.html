@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_GB">
 <meta property="og:title" content="Marine Intelligence Weekly — Maritime AI & IMO Regulatory Intelligence">
 <meta property="og:description" content="Independent maritime AI and regulatory intelligence for Chief Engineers, Marine Officers & MEO Class 1 candidates. IMO, SOLAS, MARPOL, MASS Code, FuelEU — weekly from the engine room.">
-<meta property="og:image" content="https://marineintelligenceweekly.com/cover25.webp">
+<meta property="og:image" content="https://marineintelligenceweekly.com/assets/cover_26.webp">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Marine Intelligence Weekly — maritime regulatory and AI intelligence newsletter">
@@ -39,7 +39,7 @@
 <meta name="twitter:creator" content="@NixonAntony">
 <meta name="twitter:title" content="Marine Intelligence Weekly — Maritime AI & IMO Regulatory Intelligence">
 <meta name="twitter:description" content="Independent maritime AI and regulatory intelligence for Chief Engineers & MEO Class 1 candidates. IMO, SOLAS, MARPOL, MASS Code, FuelEU — weekly from the engine room.">
-<meta name="twitter:image" content="https://marineintelligenceweekly.com/cover25.webp">
+<meta name="twitter:image" content="https://marineintelligenceweekly.com/assets/cover_26.webp">
 <meta name="twitter:image:alt" content="Marine Intelligence Weekly cover — maritime AI and regulatory newsletter">
 
 <!-- ═══════════════════════════════════════════════════════
@@ -125,8 +125,15 @@
   "name": "Marine Intelligence Weekly — All Issues",
   "description": "Complete list of Marine Intelligence Weekly issues covering maritime AI, IMO regulations, SOLAS, MARPOL, and classification society updates.",
   "url": "https://marineintelligenceweekly.com/",
-  "numberOfItems": 25,
+  "numberOfItems": 26,
   "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Issue 26 — DATA IS NOW FUEL: Hydrogen Goes Mainstream. GFI Will Change Everything.",
+      "url": "https://marineintelligenceweekly.com/index26.html",
+      "description": "LR type-approves world first 100% hydrogen marine engine. MEPC 85 countdown begins. UK ETS live 1 July. DGS Gulf security mandate. GFI levy framework. June 2026."
+    },
     {
       "@type": "ListItem",
       "position": 1,
@@ -252,6 +259,13 @@
     {
       "@type": "ListItem",
       "position": 1,
+      "name": "Issue 26 — DATA IS NOW FUEL: Hydrogen Goes Mainstream. GFI Will Change Everything.",
+      "url": "https://marineintelligenceweekly.com/index26.html",
+      "description": "LR type-approves world first 100% hydrogen marine engine. MEPC 85 countdown begins. UK ETS live 1 July. DGS Gulf security mandate. GFI levy framework. June 2026."
+    },
+    {
+      "@type": "ListItem",
+      "position": 1,
       "name": "Marine Intelligence Weekly",
       "item": "https://marineintelligenceweekly.com/"
     }
@@ -347,7 +361,10 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-0YEE2CBNP5');
+  gtag('config', 'G-0YEE2CBNP5', {
+    page_title: 'Marine Intelligence Weekly — Homepage',
+    page_location: 'https://marineintelligenceweekly.com/'
+  });
 </script>
 
 <style>
@@ -1178,91 +1195,7 @@ body {
   .series-parts-inline { grid-template-columns: 1fr !important; }
 }
 
-/* ── WHAT'S ON MIW NAVIGATION STRIP ── */
-.miw-nav-strip {
-  background: var(--deep-blue);
-  border-bottom: 2px solid rgba(0,180,216,0.25);
-  padding: 28px clamp(20px,5vw,64px);
-}
 
-.miw-nav-strip-eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--teal);
-  margin-bottom: 18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.miw-nav-strip-eyebrow::before {
-  content: ''; width: 20px; height: 1px; background: var(--teal); display: block;
-}
-
-.miw-nav-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
-  gap: 12px;
-}
-
-.miw-nav-tile {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 16px 18px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-left: 3px solid var(--teal);
-  text-decoration: none;
-  transition: all 0.2s;
-  border-radius: 2px;
-}
-
-.miw-nav-tile:hover {
-  background: rgba(0,180,216,0.1);
-  border-color: var(--teal);
-  transform: translateY(-1px);
-}
-
-.miw-nav-tile.gold { border-left-color: var(--gold); }
-.miw-nav-tile.gold:hover { background: rgba(201,168,76,0.1); }
-.miw-nav-tile.orange { border-left-color: #e07b39; }
-.miw-nav-tile.orange:hover { background: rgba(224,123,57,0.1); }
-
-.miw-nav-tile-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 8px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-}
-
-.miw-nav-tile-title {
-  font-family: 'Source Serif 4', Georgia, serif;
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.88);
-  line-height: 1.35;
-}
-
-.miw-nav-tile-arrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  color: var(--teal);
-  margin-top: 4px;
-}
-
-.miw-nav-tile.gold .miw-nav-tile-arrow { color: var(--gold); }
-.miw-nav-tile.orange .miw-nav-tile-arrow { color: #e07b39; }
-
-@media(max-width:600px) {
-  .miw-nav-grid { grid-template-columns: 1fr 1fr; }
-}
-@media(max-width:360px) {
-  .miw-nav-grid { grid-template-columns: 1fr; }
-}
 </style>
 </head>
 <body>
@@ -1559,46 +1492,43 @@ body {
 
 <!-- STATS STRIP -->
 <div class="about-strip">
-  <div class="about-stat">Issues Published<strong>25</strong></div>
+  <div class="about-stat">Issues Published<strong>26</strong></div>
   <div class="about-stat">Domain<strong>marineintelligenceweekly.com</strong></div>
   <div class="about-stat">Focus<strong>Maritime AI · Regulatory · Technology</strong></div>
   <div class="about-stat">Perspective<strong>From the Engine Room</strong></div>
 </div>
 
-<!-- WHAT'S ON MIW — Navigation Strip -->
-<div class="miw-nav-strip">
-  <div class="miw-nav-strip-eyebrow">What's on MIW</div>
-  <div class="miw-nav-grid">
-    <a href="https://marineintelligenceweekly.com/index25.html" class="miw-nav-tile">
-      <div class="miw-nav-tile-label">Latest Issue</div>
-      <div class="miw-nav-tile-title">Issue 25 — The Regulation Pipeline Is Full</div>
-      <div class="miw-nav-tile-arrow">Read Now →</div>
-    </a>
-    <a href="https://marineintelligenceweekly.com/meoclass1/" class="miw-nav-tile gold">
-      <div class="miw-nav-tile-label">Study Resource</div>
-      <div class="miw-nav-tile-title">MEO Class 1 Question Bank</div>
-      <div class="miw-nav-tile-arrow">Open QB →</div>
-    </a>
-    <a href="https://marineintelligenceweekly.com/timeline.html" class="miw-nav-tile">
-      <div class="miw-nav-tile-label">Reference Tool</div>
-      <div class="miw-nav-tile-title">AI in Maritime Timeline</div>
-      <div class="miw-nav-tile-arrow">Explore →</div>
-    </a>
-    <a href="https://marineintelligenceweekly.com/GHGDecarb/timeline.html" class="miw-nav-tile orange">
-      <div class="miw-nav-tile-label">Reference Tool</div>
-      <div class="miw-nav-tile-title">GHG Decarbonisation Timeline</div>
-      <div class="miw-nav-tile-arrow">Explore →</div>
-    </a>
-    <a href="https://marineintelligenceweekly.com/ecosystem.html" class="miw-nav-tile">
-      <div class="miw-nav-tile-label">Living Map</div>
-      <div class="miw-nav-tile-title">Maritime Technology Ecosystem Map</div>
-      <div class="miw-nav-tile-arrow">View Map →</div>
-    </a>
-    <a href="https://marineintelligenceweekly.com/articles/" class="miw-nav-tile">
-      <div class="miw-nav-tile-label">Deep Reads</div>
-      <div class="miw-nav-tile-title">Feature Articles &amp; Archive</div>
-      <div class="miw-nav-tile-arrow">Browse →</div>
-    </a>
+
+<!-- START HERE ENGAGEMENT STRIP — Analytics: users land and leave. This holds them. -->
+<div style="background:linear-gradient(135deg,#0D1B2A,#1A3A5C);border-bottom:2px solid rgba(0,180,216,0.3);padding:20px clamp(20px,5vw,64px);">
+  <div style="max-width:900px;margin:0 auto;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);margin-bottom:12px;">New here? Start with one of these</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;">
+      <a href="https://marineintelligenceweekly.com/index26.html"
+         style="display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);border-left:3px solid var(--teal);text-decoration:none;transition:all 0.2s;"
+         onmouseover="this.style.background='rgba(0,180,216,0.15)'" onmouseout="this.style.background='rgba(0,180,216,0.08)'">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);">📰 Latest Issue</div>
+        <div style="font-size:13px;font-weight:600;color:#fff;line-height:1.3;">Issue 26: DATA IS NOW FUEL</div>
+      </a>
+      <a href="https://marineintelligenceweekly.com/meoclass1/"
+         style="display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.2);border-left:3px solid var(--gold);text-decoration:none;transition:all 0.2s;"
+         onmouseover="this.style.background='rgba(201,168,76,0.15)'" onmouseout="this.style.background='rgba(201,168,76,0.08)'">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);">🎓 MEO Prep</div>
+        <div style="font-size:13px;font-weight:600;color:#fff;line-height:1.3;">MEO Class 1 Question Bank</div>
+      </a>
+      <a href="https://marineintelligenceweekly.com/timeline.html"
+         style="display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);border-left:3px solid var(--teal);text-decoration:none;transition:all 0.2s;"
+         onmouseover="this.style.background='rgba(0,180,216,0.15)'" onmouseout="this.style.background='rgba(0,180,216,0.08)'">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);">📅 Reference Tool</div>
+        <div style="font-size:13px;font-weight:600;color:#fff;line-height:1.3;">AI in Maritime Timeline</div>
+      </a>
+      <a href="https://marineintelligenceweekly.com/ecosystem.html"
+         style="display:flex;flex-direction:column;gap:4px;padding:14px 16px;background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.2);border-left:3px solid var(--teal);text-decoration:none;transition:all 0.2s;"
+         onmouseover="this.style.background='rgba(0,180,216,0.15)'" onmouseout="this.style.background='rgba(0,180,216,0.08)'">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:7.5px;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);">🗺 Living Map</div>
+        <div style="font-size:13px;font-weight:600;color:#fff;line-height:1.3;">Maritime Tech Ecosystem</div>
+      </a>
+    </div>
   </div>
 </div>
 
@@ -1616,19 +1546,19 @@ body {
     <div class="issue-card-featured-content">
       <div>
         <div class="issue-number-badge">
-          Issue 25 &nbsp;·&nbsp; 16 June 2026
+          Issue 26 &nbsp;·&nbsp; 24 June 2026
           <span class="latest-badge">Latest</span>
         </div>
-        <h2 class="issue-title">The Regulation Pipeline Is Full:<br><em>MSC 111, MEPC 84,</em><br>and What Comes Next</h2>
-        <p class="issue-desc">MSC 111 and MEPC 84 are no longer adoption stories — they are enforcement stories. FuelEU DoC deadline 30 June. UK ETS live 1 July. MASS Code in force 1 July. MEPC 85 Net-Zero Framework in December. The pipeline is full and the clock is running.</p>
+        <h2 class="issue-title">DATA IS<br><em>NOW FUEL.</em></h2>
+        <p class="issue-desc">Hydrogen goes mainstream — LR type-approves the world's first 100% hydrogen marine engine. UK ETS live 1 July. MEPC 85 and the GFI levy are five months away. DGS Gulf security mandate in force. Your engine room data is now evidence.</p>
         <div class="issue-topics">
-          <span class="topic-tag">FuelEU Maritime</span>
+          <span class="topic-tag">Hydrogen Engine</span>
           <span class="topic-tag">UK ETS</span>
-          <span class="topic-tag">MASS Code</span>
-          <span class="topic-tag">MEPC 84</span>
-          <span class="topic-tag">MSC 111</span>
-          <span class="topic-tag">NE Atlantic ECA</span>
-          <span class="topic-tag">MEO Class 1</span>
+          <span class="topic-tag">MEPC 85 / GFI</span>
+          <span class="topic-tag">LR BeHydro</span>
+          <span class="topic-tag">DGS Gulf Alert</span>
+          <span class="topic-tag">DNV Seafarers 2030</span>
+          <span class="topic-tag">Data Quality</span>
         </div>
       </div>
       <a href="https://marineintelligenceweekly.com/index25.html" class="issue-read-btn">
@@ -1638,6 +1568,39 @@ body {
     </div>
   </div>
 
+
+
+  <!-- YOUTUBE WALKTHROUGH — Issue 26 -->
+  <div style="background:var(--navy);border:1px solid rgba(255,68,68,0.25);border-top:3px solid #FF4444;padding:clamp(20px,3vw,32px);margin-bottom:28px;display:flex;flex-direction:column;gap:16px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:0.2em;text-transform:uppercase;color:#FF4444;margin-bottom:6px;display:flex;align-items:center;gap:8px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#FF4444"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.5A3 3 0 00.5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+          Issue 26 Video Walkthrough · @MarineIntelligenceWeekly
+        </div>
+        <div style="font-family:'Playfair Display',serif;font-size:clamp(14px,2vw,18px);font-weight:700;color:#fff;line-height:1.3;">Watch the Issue 26 Walkthrough</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);margin-top:4px;">DATA IS NOW FUEL — key stories explained in under 10 minutes.</div>
+      </div>
+      <a href="https://www.youtube.com/@MarineIntelligenceWeekly" target="_blank" rel="noopener"
+         style="white-space:nowrap;background:transparent;border:1px solid #FF4444;color:#FF4444;padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;transition:all 0.2s;"
+         onmouseover="this.style.background='#FF4444';this.style.color='#fff'"
+         onmouseout="this.style.background='transparent';this.style.color='#FF4444'">Subscribe →</a>
+    </div>
+    <!-- YouTube embed — replace VIDEO_ID when walkthrough is published -->
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:4px;background:rgba(255,255,255,0.05);">
+      <iframe
+        src="https://www.youtube.com/embed/?listType=user_uploads&list=MarineIntelligenceWeekly&index=0"
+        title="Marine Intelligence Weekly Issue 26 Walkthrough"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="lazy"
+        style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:4px;">
+      </iframe>
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.25);letter-spacing:0.08em;">Replace iframe src with specific video ID once walkthrough is published · youtube.com/@MarineIntelligenceWeekly</div>
+  </div>
+
   <!-- BACK ISSUES -->
   <div id="issues" class="section-header" style="margin-top:48px;">
     <span class="section-label">Previous Issues</span>
@@ -1645,6 +1608,13 @@ body {
   </div>
 
   <div class="back-issues-grid">
+    <a href="https://marineintelligenceweekly.com/index25.html" class="back-issue-card">
+      <div class="back-issue-num">Issue 25 · 17 June 2026</div>
+      <div class="back-issue-title">The Regulation Pipeline Is Full: MSC 111, MEPC 84, and What Comes Next</div>
+      <div class="back-issue-desc">MSC 111 and MEPC 84 are enforcement stories now. FuelEU DoC deadline 30 June. UK ETS live 1 July. MASS Code in force. MEPC 85 Net-Zero Framework in December. The pipeline is full and the clock is running.</div>
+      <div class="back-issue-date">June 2026</div>
+    </a>
+
     <a href="https://marineintelligenceweekly.com/index24.html" class="back-issue-card">
       <div class="back-issue-num">Issue 24 · June 2026</div>
       <div class="back-issue-title">Athens Has Spoken: AI Is Operational — But Most Ships Aren't Ready</div>
@@ -1655,35 +1625,17 @@ body {
     <a href="https://marineintelligenceweekly.com/index23.html" class="back-issue-card">
       <div class="back-issue-num">Issue 23 · June 2026</div>
       <div class="back-issue-title">Hydrogen, Winches, MASS, and the Week That Kept Giving</div>
-      <div class="back-issue-desc">DNV-RP-0703 hydrogen competence frameworks, SOLAS II-1/3-13 anchor handling winch requirements now in force, LR MASS systems engineering lifecycle, FuelEU Maritime reality check, and the Indian maritime AI ecosystem update.</div>
+      <div class="back-issue-desc">DNV-RP-0703 hydrogen competence frameworks, SOLAS II-1/3-13 anchor handling winch requirements in force, LR MASS systems engineering lifecycle, FuelEU Maritime reality check.</div>
       <div class="back-issue-date">June 2026</div>
     </a>
 
-
-    <a href="https://marineintelligenceweekly.com/index22.html" class="back-issue-card">
-      <div class="back-issue-num">Issue 22 · May 2026</div>
-      <div class="back-issue-title">The MASS Code Is Here. What Does It Actually Mean for the Maritime Officer on Watch?</div>
-      <div class="back-issue-desc">Maritime AI enters its accountability phase — from pilot to protocol. MEPC 84 actions, three class updates for your next survey, and five things everybody missed from MSC 111.</div>
-      <div class="back-issue-date">May 2026</div>
+    <!-- ARCHIVE CARD — replaces Issue 21 + 22 individual cards -->
+    <a href="https://marineintelligenceweekly.com/archive/" class="back-issue-card" style="border-top-color:var(--teal); background:var(--navy); border-color:rgba(0,180,216,0.2);">
+      <div class="back-issue-num" style="color:var(--teal);">Archive · Issues 01–22 · Jan 2025 → May 2026</div>
+      <div class="back-issue-title" style="color:#fff;">Read Issues 1–22 from the Archive</div>
+      <div class="back-issue-desc" style="color:rgba(255,255,255,0.55);">All 22 published issues — covering IMO committee sessions, classification society rule changes, maritime AI deployments, decarbonisation milestones, and MASS Code development from January 2025 to May 2026. Plus the Issues 01–16 Thematic Reference Map.</div>
+      <div class="back-issue-date" style="color:var(--teal);">IMO · Class · AI · Decarbonisation · MASS · MEO Class 1 → Browse Archive ↗</div>
     </a>
-
-    <a href="https://marineintelligenceweekly.com/index21.html" class="back-issue-card">
-      <div class="back-issue-num">Issue 21 · May 2026</div>
-      <div class="back-issue-title">Maritime AI Is Entering Its Evidence Phase</div>
-      <div class="back-issue-desc">MSC 111 MASS Code framework. LR × Orca AI live class trial. Docker Vision at Indian ports. The IMO Compendium 140+ field expansion. May 2026: standards stopped being promises and started being numbers.</div>
-      <div class="back-issue-date">May 2026</div>
-    </a>
-
-    <a href="https://marineintelligenceweekly.com/index20.html" class="back-issue-card">
-      <div class="back-issue-num">Issue 20 · May 2026</div>
-      <div class="back-issue-title">Global Maritime AI Is Accelerating — India Is Entering the Conversation</div>
-      <div class="back-issue-desc">Japan certifies autonomous vessels. Norway formalises remote operator licences. Singapore commits SGD 100M. India builds its layer through Dtyle.AI and smart port infrastructure.</div>
-      <div class="back-issue-date">May 2026</div>
-    </a>
-  </div>
-
-  <div style="text-align:right; margin-top:12px; margin-bottom:0;">
-    <a href="https://marineintelligenceweekly.com/archive/" style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--muted)'">Issues 18 &amp; 19 → Archive ↗</a>
   </div>
 
   <!-- FEATURE ARTICLES SECTION -->
@@ -1692,47 +1644,68 @@ body {
     <div class="section-rule"></div>
   </div>
 
-  <!-- THE INTELLIGENCE GAP — Active Series -->
-  <div style="background:var(--navy); border:1px solid rgba(201,168,76,0.2); border-top:3px solid var(--gold); padding:clamp(24px,4vw,40px); margin-bottom:20px;">
-    <div style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; display:flex; align-items:center; gap:10px;">
-      <span style="width:16px; height:1px; background:var(--gold); display:block;"></span>
-      Feature Series · June 2026 · Maritime AI
-      <span style="background:var(--gold); color:var(--navy); font-family:'JetBrains Mono',monospace; font-size:7px; letter-spacing:0.12em; text-transform:uppercase; padding:2px 7px; border-radius:1px; font-weight:500;">2 Parts Live</span>
-    </div>
-    <h2 style="font-family:'Playfair Display',serif; font-size:clamp(18px,2.5vw,24px); font-weight:700; color:#fff; line-height:1.25; margin-bottom:8px;">The Intelligence Gap: <em style="font-style:italic; color:var(--gold);">Project Harrison &amp; the Architecture Maritime AI Doesn't Have</em></h2>
-    <p style="font-size:14px; font-weight:300; color:rgba(255,255,255,0.55); line-height:1.65; max-width:580px; margin-bottom:24px;">A two-part investigative series on Project Harrison — the open-source maritime AI non-profit building tooling that actually works at sea. Based on a direct interview with Jordan Taylor, USCG unlimited licence holder and Founder of Project Harrison. Includes an exclusive angle no one else has covered: the engine room reasoning gap.</p>
-    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
-      <a href="https://marineintelligenceweekly.com/timeline-article.html" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-top:2px solid var(--gold); padding:20px; text-decoration:none; display:flex; flex-direction:column; gap:8px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.07)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
-        <div style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold);">Feature · AI in Maritime · 2010–2026</div>
-        <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:#fff; line-height:1.3; flex:1;">AI in Maritime: A Decade of Transformation</div>
-        <div style="font-size:12px; color:rgba(255,255,255,0.45); line-height:1.55;">55+ sourced milestones, five eras — every event that changed the industry, placed in sequence and assessed for what it actually changed.</div>
-        <div style="font-family:'JetBrains Mono',monospace; font-size:8px; color:var(--gold); letter-spacing:0.1em; text-transform:uppercase; margin-top:4px;">Read the Article →</div>
+  <!-- TIMELINE ARTICLE + INTERACTIVE TIMELINE — side by side with covers -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
+
+    <!-- CARD: Timeline Article -->
+    <article itemscope itemtype="https://schema.org/Article" style="background:var(--bg-card); border:1px solid var(--rule); border-top:3px solid var(--teal); border-radius:2px; overflow:hidden; display:flex; flex-direction:column;">
+      <a href="https://marineintelligenceweekly.com/timeline-article.html" style="display:block; text-decoration:none;" aria-label="Read: AI in Maritime — A Decade of Transformation">
+        <img src="https://marineintelligenceweekly.com/assets/aitimeline-cover.webp"
+             alt="AI in Maritime: A Decade of Transformation — MIW feature article cover"
+             width="800" height="420"
+             loading="lazy"
+             decoding="async"
+             style="width:100%; height:190px; object-fit:cover; display:block;">
       </a>
-      <a href="https://marineintelligenceweekly.com/articles/intelligence-gap-part-a.html" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-top:2px solid var(--teal); padding:20px; text-decoration:none; display:flex; flex-direction:column; gap:8px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.07)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
-        <div style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:var(--teal);">Part A · Navigation &amp; VCP</div>
-        <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:#fff; line-height:1.3; flex:1;">Why Maritime AI Needs a New Architecture</div>
-        <div style="font-size:12px; color:rgba(255,255,255,0.45); line-height:1.55;">VCP, MIRA benchmark 50/50, SSOF roadmap, and why maritime ranks near the bottom of AI value-creation domains.</div>
-        <div style="font-family:'JetBrains Mono',monospace; font-size:8px; color:var(--teal); letter-spacing:0.1em; text-transform:uppercase; margin-top:4px;">Read Part A →</div>
+      <div style="padding:22px 24px; display:flex; flex-direction:column; flex:1;" itemprop="articleBody">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:var(--teal); margin-bottom:8px;">Feature Article · AI in Maritime · 2010–2026</div>
+        <h3 itemprop="headline" style="font-family:'Playfair Display',serif; font-size:19px; font-weight:700; color:var(--navy); line-height:1.25; margin-bottom:10px;">AI in Maritime: A Decade of Transformation</h3>
+        <p itemprop="description" style="font-size:14px; color:var(--muted); line-height:1.7; margin-bottom:16px; flex:1;">55+ sourced milestones, five eras — every event that changed the maritime AI industry, placed in sequence and assessed for what it actually changed. From remote diagnostics to autonomous class notations.</p>
+        <a href="https://marineintelligenceweekly.com/timeline-article.html"
+           style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:opacity 0.2s;"
+           onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'"
+           aria-label="Read AI in Maritime article">
+          Read the Article
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <meta itemprop="datePublished" content="2026-05-01">
+      <meta itemprop="author" content="Nixon Antony">
+    </article>
+
+    <!-- CARD: Interactive Timeline -->
+    <article style="background:var(--navy); border:1px solid rgba(0,180,216,0.25); border-top:3px solid var(--teal); border-radius:2px; overflow:hidden; display:flex; flex-direction:column;">
+      <a href="https://marineintelligenceweekly.com/timeline.html" style="display:block; text-decoration:none;" aria-label="Explore: Interactive AI in Maritime Timeline">
+        <img src="https://marineintelligenceweekly.com/assets/aitimeline-cover.webp"
+             alt="Interactive AI in Maritime Timeline — Marine Intelligence Weekly filterable reference tool"
+             width="800" height="420"
+             loading="lazy"
+             decoding="async"
+             style="width:100%; height:190px; object-fit:cover; display:block; opacity:0.75;">
       </a>
-      <a href="https://marineintelligenceweekly.com/articles/intelligence-gap-part-b.html" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-top:2px solid var(--teal); padding:20px; text-decoration:none; display:flex; flex-direction:column; gap:8px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.07)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
-        <div style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:var(--teal);">Part B · Engine Room &amp; ECP</div>
-        <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:#fff; line-height:1.3; flex:1;">The Engine Room Has No VCP Yet</div>
-        <div style="font-size:12px; color:rgba(255,255,255,0.45); line-height:1.55;">The Engineering Context Protocol — coined in this interview. "We should build it. We just can't." A direct challenge to every credentialed engineer who can articulate a fault diagnosis.</div>
-        <div style="font-family:'JetBrains Mono',monospace; font-size:8px; color:var(--teal); letter-spacing:0.1em; text-transform:uppercase; margin-top:4px;">Read Part B →</div>
-      </a>
-    </div>
-    <div style="margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.06);">
-      <span style="font-family:'JetBrains Mono',monospace; font-size:9px; color:rgba(255,255,255,0.3); letter-spacing:0.08em;">Interview subject: Jordan Taylor, Founder &amp; Director, Project Harrison · <a href="https://projectharrison.org" target="_blank" rel="noopener" style="color:var(--teal); text-decoration:none;">projectharrison.org</a> · USCG unlimited licence · Fulbright Specialist in Maritime Data Science</span>
-    </div>
+      <div style="padding:22px 24px; display:flex; flex-direction:column; flex:1;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:var(--teal); margin-bottom:8px;">Interactive Tool · Filterable · Updated · Open &amp; Explore</div>
+        <h3 style="font-family:'Playfair Display',serif; font-size:19px; font-weight:700; color:#fff; line-height:1.25; margin-bottom:10px;">The MIW AI in Maritime Timeline</h3>
+        <p style="font-size:14px; color:rgba(255,255,255,0.55); line-height:1.7; margin-bottom:16px; flex:1;">The full interactive timeline — filterable by Regulation, AI Deployment, Industry Shift, Autonomous Vessels, and India / Asia. Every milestone sourced to its primary document. Updated as events occur.</p>
+        <a href="https://marineintelligenceweekly.com/timeline.html"
+           style="font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.1em; text-transform:uppercase; color:var(--teal); text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:opacity 0.2s;"
+           onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'"
+           aria-label="Open interactive AI in Maritime timeline">
+          Explore Timeline
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </article>
+
   </div>
 
-  <!-- STANDALONE FEATURE ARTICLES GRID -->
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px; margin-bottom:4px;">
+  <!-- AI IN SHIP OPERATIONS + TECHNOSTRESS — side by side with covers -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:16px;">
 
     <!-- CARD: AI in Ship Operations -->
     <article itemscope itemtype="https://schema.org/Article" style="background:var(--bg-card); border:1px solid var(--rule); border-top:3px solid var(--teal); border-radius:2px; overflow:hidden; display:flex; flex-direction:column;">
       <a href="https://marineintelligenceweekly.com/articles/ai-ship-operations.html" style="display:block; text-decoration:none;" aria-label="Read: AI in Ship Operations — From Condition Monitoring to Predictive Maintenance">
-        <img src="https://marineintelligenceweekly.com/articles/assets/cover-ai-ship-operations.webp"
+        <img src="https://marineintelligenceweekly.com/articles/cover-ai-ship-operations.webp"
              alt="Marine engineer at engine control room monitoring AI-driven predictive maintenance dashboard showing main engine bearing deviation warning"
              width="800" height="420"
              loading="lazy"
@@ -1758,7 +1731,7 @@ body {
     <!-- CARD: Technostress at Sea -->
     <article itemscope itemtype="https://schema.org/Article" style="background:var(--bg-card); border:1px solid var(--rule); border-top:3px solid var(--gold); border-radius:2px; overflow:hidden; display:flex; flex-direction:column;">
       <a href="https://marineintelligenceweekly.com/articles/technostress-at-sea.html" style="display:block; text-decoration:none;" aria-label="Read: Technostress at Sea — When Digitalisation Outpaces the Seafarer">
-        <img src="https://marineintelligenceweekly.com/articles/assets/cover-technostress-at-sea.webp"
+        <img src="https://marineintelligenceweekly.com/articles/cover-technostress-at-sea.webp"
              alt="Ship's officer at bridge navigation console surrounded by multiple digital displays late at night, showing signs of cognitive overload from alarm-heavy maritime systems"
              width="800" height="420"
              loading="lazy"
@@ -1781,6 +1754,34 @@ body {
       <meta itemprop="author" content="Nixon Antony">
     </article>
 
+  </div>
+
+  <!-- THE INTELLIGENCE GAP — Active Series (Part A + Part B only) -->
+  <div style="background:var(--navy); border:1px solid rgba(201,168,76,0.2); border-top:3px solid var(--gold); padding:clamp(24px,4vw,40px); margin-bottom:20px;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); margin-bottom:10px; display:flex; align-items:center; gap:10px;">
+      <span style="width:16px; height:1px; background:var(--gold); display:block;"></span>
+      Feature Series · June 2026 · Maritime AI
+      <span style="background:var(--gold); color:var(--navy); font-family:'JetBrains Mono',monospace; font-size:7px; letter-spacing:0.12em; text-transform:uppercase; padding:2px 7px; border-radius:1px; font-weight:500;">2 Parts Live</span>
+    </div>
+    <h2 style="font-family:'Playfair Display',serif; font-size:clamp(18px,2.5vw,24px); font-weight:700; color:#fff; line-height:1.25; margin-bottom:8px;">The Intelligence Gap: <em style="font-style:italic; color:var(--gold);">Project Harrison &amp; the Architecture Maritime AI Doesn't Have</em></h2>
+    <p style="font-size:14px; font-weight:300; color:rgba(255,255,255,0.55); line-height:1.65; max-width:580px; margin-bottom:24px;">A two-part investigative series on Project Harrison — the open-source maritime AI non-profit building tooling that actually works at sea. Based on a direct interview with Jordan Taylor, USCG unlimited licence holder and Founder of Project Harrison. Includes an exclusive angle no one else has covered: the engine room reasoning gap.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+      <a href="https://marineintelligenceweekly.com/articles/intelligence-gap-part-a.html" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-top:2px solid var(--teal); padding:20px; text-decoration:none; display:flex; flex-direction:column; gap:8px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.07)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:var(--teal);">Part A · Navigation &amp; VCP</div>
+        <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:#fff; line-height:1.3; flex:1;">Why Maritime AI Needs a New Architecture</div>
+        <div style="font-size:12px; color:rgba(255,255,255,0.45); line-height:1.55;">VCP, MIRA benchmark 50/50, SSOF roadmap, and why maritime ranks near the bottom of AI value-creation domains.</div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:8px; color:var(--teal); letter-spacing:0.1em; text-transform:uppercase; margin-top:4px;">Read Part A →</div>
+      </a>
+      <a href="https://marineintelligenceweekly.com/articles/intelligence-gap-part-b.html" style="background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.08); border-top:2px solid var(--teal); padding:20px; text-decoration:none; display:flex; flex-direction:column; gap:8px; transition:all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.07)'" onmouseout="this.style.background='rgba(255,255,255,0.04)'">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.18em; text-transform:uppercase; color:var(--teal);">Part B · Engine Room &amp; ECP</div>
+        <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:700; color:#fff; line-height:1.3; flex:1;">The Engine Room Has No VCP Yet</div>
+        <div style="font-size:12px; color:rgba(255,255,255,0.45); line-height:1.55;">The Engineering Context Protocol — coined in this interview. "We should build it. We just can't." A direct challenge to every credentialed engineer who can articulate a fault diagnosis.</div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:8px; color:var(--teal); letter-spacing:0.1em; text-transform:uppercase; margin-top:4px;">Read Part B →</div>
+      </a>
+    </div>
+    <div style="margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.06);">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:9px; color:rgba(255,255,255,0.3); letter-spacing:0.08em;">Interview subject: Jordan Taylor, Founder &amp; Director, Project Harrison · <a href="https://projectharrison.org" target="_blank" rel="noopener" style="color:var(--teal); text-decoration:none;">projectharrison.org</a> · USCG unlimited licence · Fulbright Specialist in Maritime Data Science</span>
+    </div>
   </div>
 
   <!-- All articles pointer -->
@@ -2033,12 +2034,12 @@ body {
   </div>
   <div class="footer-links">
     <div class="footer-links-label">Issues</div>
+    <a href="https://marineintelligenceweekly.com/index26.html">Issue 26 — June 2026 ← Latest</a>
     <a href="https://marineintelligenceweekly.com/index25.html">Issue 25 — June 2026</a>
     <a href="https://marineintelligenceweekly.com/index24.html">Issue 24 — June 2026</a>
     <a href="https://marineintelligenceweekly.com/index23.html">Issue 23 — June 2026</a>
     <a href="https://marineintelligenceweekly.com/index22.html">Issue 22 — May 2026</a>
-    <a href="https://marineintelligenceweekly.com/index21.html">Issue 21 — May 2026</a>
-    <a href="https://marineintelligenceweekly.com/archive/">Archive (Issues 18–20) →</a>
+    <a href="https://marineintelligenceweekly.com/archive/">Archive (Issues 17–21) →</a>
   </div>
   <div class="footer-links">
     <div class="footer-links-label">Feature Series</div>
