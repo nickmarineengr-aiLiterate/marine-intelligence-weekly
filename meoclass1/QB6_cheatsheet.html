@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>QB6 Cheat Sheet — GHG, CII, EEXI, Fuels & Automation | MEO Class 1</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#0f172a;color:#e2e8f0;font-size:13px;padding:16px;}
+.page-title{text-align:center;margin-bottom:20px;}
+.page-title h1{font-size:20px;color:#fff;font-weight:800;}
+.page-title p{color:#64748b;font-size:12px;margin-top:4px;}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.card{background:#1e293b;border-radius:10px;border:1px solid #334155;padding:14px;position:relative;overflow:hidden;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.card.teal::before{background:#0d9488;}
+.card.orange::before{background:#f97316;}
+.card.blue::before{background:#3b82f6;}
+.card.purple::before{background:#8b5cf6;}
+.card.green::before{background:#10b981;}
+.card.red::before{background:#ef4444;}
+.card h2{font-size:12px;text-transform:uppercase;letter-spacing:1px;font-weight:700;margin-bottom:10px;}
+.card.teal h2{color:#2dd4bf;}
+.card.orange h2{color:#fb923c;}
+.card.blue h2{color:#60a5fa;}
+.card.purple h2{color:#a78bfa;}
+.card.green h2{color:#34d399;}
+.card.red h2{color:#f87171;}
+
+.formula-box{background:#0f172a;border-radius:6px;padding:8px 10px;margin:6px 0;font-family:monospace;font-size:12px;color:#fef08a;line-height:1.6;}
+.kv{display:flex;justify-content:space-between;align-items:flex-start;margin:4px 0;gap:8px;}
+.kv .k{color:#94a3b8;font-size:11px;flex-shrink:0;}
+.kv .v{color:#e2e8f0;font-size:12px;font-weight:600;text-align:right;}
+.kv .v.highlight{color:#fcd34d;}
+.kv .v.green{color:#34d399;}
+.kv .v.red{color:#f87171;}
+.kv .v.orange{color:#fb923c;}
+.divider{border:none;border-top:1px solid #334155;margin:8px 0;}
+.badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;margin:2px 2px 2px 0;}
+.badge.teal{background:#0d9488;color:#fff;}
+.badge.orange{background:#f97316;color:#fff;}
+.badge.red{background:#ef4444;color:#fff;}
+.badge.green{background:#10b981;color:#fff;}
+.badge.blue{background:#3b82f6;color:#fff;}
+.badge.purple{background:#8b5cf6;color:#fff;}
+.tip{background:#1c1917;border-left:3px solid #f97316;padding:6px 10px;border-radius:0 6px 6px 0;font-size:11px;color:#d97706;margin-top:8px;line-height:1.5;}
+.tip strong{color:#fb923c;}
+.section-label{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#475569;margin-bottom:6px;display:block;}
+.connection-box{background:#1e293b;border:1px dashed #334155;border-radius:8px;padding:10px;margin-top:12px;}
+.connection-box h3{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#64748b;margin-bottom:8px;}
+.conn-row{display:flex;align-items:center;gap:8px;margin:5px 0;font-size:12px;}
+.conn-row .from{color:#60a5fa;font-weight:600;min-width:60px;}
+.conn-row .arrow{color:#475569;}
+.conn-row .to{color:#34d399;}
+.span2{grid-column:span 2;}
+.span3{grid-column:span 3;}
+.wide-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px;}
+.mini-card{background:#0f172a;border-radius:6px;padding:8px;border:1px solid #334155;}
+.mini-card .label{font-size:10px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.mini-card .value{font-size:13px;font-weight:700;color:#fcd34d;}
+.mini-card .sub{font-size:10px;color:#94a3b8;margin-top:2px;}
+table{width:100%;border-collapse:collapse;margin-top:8px;font-size:11px;}
+td,th{padding:5px 7px;border-bottom:1px solid #1e293b;text-align:left;}
+th{color:#64748b;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.5px;}
+td:first-child{color:#94a3b8;}
+td:last-child{color:#e2e8f0;font-weight:600;}
+.correct{color:#34d399 !important;}
+.wrong{color:#f87171 !important;text-decoration:line-through;}
+.pid-row{display:grid;grid-template-columns:24px 1fr 1fr 1fr;gap:6px;margin:4px 0;align-items:start;}
+.pid-letter{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0;}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr);}
+  .span2,.span3{grid-column:span 2;}
+}
+@media print{
+  body{background:#fff;color:#000;font-size:11px;padding:10px;}
+  .card{background:#f8fafc;border-color:#e2e8f0;page-break-inside:avoid;}
+  .formula-box{background:#f1f5f9;color:#1e293b;}
+  .mini-card{background:#fff;border-color:#e2e8f0;}
+  .tip{background:#fff7ed;}
+  .card::before{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  <h1>📋 QB6 — MEO Class 1 Cheat Sheet</h1>
+  <p>GHG · CII · EEXI · Alternative Fuels · PID · VIT · FRAMO · EU MRV vs DCS | Kochi MMD | Nixon Antony, 2/E, Maersk A/S</p>
+</div>
+
+<div class="grid">
+
+  <!-- CII FORMULA CARD -->
+  <div class="card teal">
+    <span class="section-label">Q1 — Nair / Senthil</span>
+    <h2>🌍 CII — Carbon Intensity Indicator</h2>
+    <div class="formula-box">
+      Attained CII (gCO₂/DWT·nm) =<br>
+      Σ(M_fuel × Cf) ÷ (DWT × Distance_nm)
+    </div>
+    <div class="kv"><span class="k">Unit</span><span class="v highlight">gCO₂ / DWT·nm</span></div>
+    <div class="kv"><span class="k">HFO Cf</span><span class="v">3.114</span></div>
+    <div class="kv"><span class="k">MDO/MGO Cf</span><span class="v">3.206</span></div>
+    <div class="kv"><span class="k">LNG Cf</span><span class="v">2.750</span></div>
+    <div class="kv"><span class="k">Methanol Cf</span><span class="v">1.375</span></div>
+    <div class="kv"><span class="k">Source</span><span class="v">MEPC.364(79)</span></div>
+    <hr class="divider">
+    <div class="kv"><span class="k">A</span><span class="v green">&gt;15% better</span></div>
+    <div class="kv"><span class="k">B</span><span class="v green">7–15% better</span></div>
+    <div class="kv"><span class="k">C</span><span class="v">±7% (compliant)</span></div>
+    <div class="kv"><span class="k">D</span><span class="v red">7–15% worse</span></div>
+    <div class="kv"><span class="k">E</span><span class="v red">&gt;15% worse</span></div>
+    <hr class="divider">
+    <div class="kv"><span class="k">D × 3 years</span><span class="v orange">→ Action Plan</span></div>
+    <div class="kv"><span class="k">E any year</span><span class="v orange">→ Action Plan (immediate)</span></div>
+    <div class="kv"><span class="k">In force</span><span class="v">1 Nov 2022</span></div>
+    <div class="kv"><span class="k">Regulation</span><span class="v">MARPOL AVI Reg 28</span></div>
+    <div class="tip"><strong>Nair:</strong> Unit first. Always say gCO₂/DWT·nm. No pause.</div>
+  </div>
+
+  <!-- GFI CARD -->
+  <div class="card blue">
+    <span class="section-label">Q2 — Simon</span>
+    <h2>⚡ GFI — Greenhouse Gas Fuel Intensity</h2>
+    <div class="formula-box">
+      GFI (gCO₂eq/MJ) =<br>
+      Total GHG Emissions (Well-to-Wake)<br>
+      ÷ Total Energy Content (MJ)
+    </div>
+    <div class="kv"><span class="k">Unit</span><span class="v highlight">gCO₂eq / MJ</span></div>
+    <div class="kv"><span class="k">Scope</span><span class="v">Well-to-Wake (lifecycle)</span></div>
+    <div class="kv"><span class="k">HFO baseline</span><span class="v">≈ 91.7 gCO₂eq/MJ</span></div>
+    <div class="kv"><span class="k">Fossil Methanol</span><span class="v">≈ 89.0</span></div>
+    <div class="kv"><span class="k">Green e-Methanol</span><span class="v green">≈ 8–12</span></div>
+    <div class="kv"><span class="k">Status</span><span class="v orange">Proposed mid-term measure</span></div>
+    <div class="kv"><span class="k">Not yet in force</span><span class="v">Expected 2027+</span></div>
+    <div class="kv"><span class="k">Framework</span><span class="v">MEPC.377(80)</span></div>
+    <hr class="divider">
+    <table>
+      <tr><th></th><th>CII</th><th>GFI</th></tr>
+      <tr><td>What</td><td>Efficiency</td><td>Fuel quality</td></tr>
+      <tr><td>Unit</td><td>gCO₂/DWT·nm</td><td>gCO₂eq/MJ</td></tr>
+      <tr><td>Scope</td><td>Tank→Wake</td><td>Well→Wake</td></tr>
+      <tr><td>Status</td><td style="color:#34d399">In force</td><td style="color:#fb923c">Proposed</td></tr>
+    </table>
+    <div class="tip"><strong>Simon:</strong> "CII = how efficiently you run it. GFI = how clean the fuel is at source."</div>
+  </div>
+
+  <!-- EEXI CARD -->
+  <div class="card purple">
+    <span class="section-label">Q3 — Senthil</span>
+    <h2>🔧 EEXI vs EEDI</h2>
+    <table>
+      <tr><th></th><th>EEDI</th><th>EEXI</th></tr>
+      <tr><td>Applies to</td><td>Newbuilds</td><td>Existing ships</td></tr>
+      <tr><td>Built before</td><td>—</td><td>2013</td></tr>
+      <tr><td>When</td><td>At design/delivery</td><td>First IOPP renewal ≥1 Jan 2023</td></tr>
+      <tr><td>Type</td><td>Design index</td><td>Technical index</td></tr>
+    </table>
+    <hr class="divider">
+    <span class="section-label">Container Reference Line</span>
+    <div class="formula-box">
+      Ref Line = a × DWT<sup>−c</sup><br>
+      a = <strong>174.22</strong>  |  c = <strong>0.201</strong><br>
+      (MARPOL AVI Reg 21, Table 1)
+    </div>
+    <div class="kv"><span class="k">Reg</span><span class="v">MARPOL AVI Reg 21</span></div>
+    <div class="kv"><span class="k">EEXI intro</span><span class="v">MEPC.328(76)</span></div>
+    <hr class="divider">
+    <div class="kv"><span class="k">ShaPoLi</span><span class="v">Shaft power limited externally</span></div>
+    <div class="kv"><span class="k">EPL</span><span class="v">Engine fuel index limited internally</span></div>
+    <div class="kv"><span class="k">Authorised by</span><span class="v orange">Flag / Class ONLY</span></div>
+    <div class="tip"><strong>Senthil:</strong> Give a×DWT<sup>−c</sup> immediately with values. Then ShaPoLi vs EPL distinction.</div>
+  </div>
+
+  <!-- SEEMP + IEEC CARD -->
+  <div class="card teal">
+    <span class="section-label">Q4</span>
+    <h2>📄 SEEMP Parts & IEEC</h2>
+    <table>
+      <tr><th>Part</th><th>Content</th><th>Applies to</th></tr>
+      <tr><td>Part I</td><td>Operational plan</td><td>&gt;400 GT</td></tr>
+      <tr><td>Part II</td><td>DCS methodology</td><td>≥5,000 GT</td></tr>
+      <tr><td>Part III</td><td>CII compliance plan</td><td>≥5,000 GT</td></tr>
+    </table>
+    <div class="kv" style="margin-top:8px;"><span class="k">Part III from</span><span class="v highlight">1 January 2023</span></div>
+    <div class="kv"><span class="k">Part III content</span><span class="v">3-year rolling CII roadmap</span></div>
+    <hr class="divider">
+    <div class="kv"><span class="k">IEEC expiry</span><span class="v green">NO fixed expiry</span></div>
+    <div class="kv"><span class="k">IEEC re-issue</span><span class="v">Major structural conversion only</span></div>
+    <div class="kv"><span class="k">Annual renewal</span><span class="v orange">Statement of Compliance (SOC)</span></div>
+    <div class="tip"><strong>TRAP:</strong> "IEEC expires annually" → <span class="wrong">WRONG</span>. SOC renews annually. IEEC does not expire.</div>
+  </div>
+
+  <!-- GHGs CARD -->
+  <div class="card green">
+    <span class="section-label">Q5 — Simon</span>
+    <h2>🌡️ Greenhouse Gases</h2>
+    <span class="section-label">MARPOL AVI Chapter 4 Focus</span>
+    <div class="kv"><span class="k">CO₂</span><span class="v">GWP100 = <strong>1</strong></span></div>
+    <div class="kv"><span class="k">CH₄ (methane)</span><span class="v orange">GWP100 = <strong>27.9</strong> (IPCC AR6)</span></div>
+    <div class="kv"><span class="k">N₂O</span><span class="v red">GWP100 = <strong>273</strong> (IPCC AR6)</span></div>
+    <hr class="divider">
+    <div class="kv"><span class="k">Kyoto Protocol gases</span><span class="v highlight">7 gases</span></div>
+    <div class="kv"><span class="k">The 7 gases</span><span class="v">CO₂, CH₄, N₂O, HFCs, PFCs, SF₆, <strong>NF₃</strong></span></div>
+    <div class="kv"><span class="k">NF₃ added</span><span class="v">Doha Amendment 2012</span></div>
+    <div class="kv"><span class="k"><span class="wrong">6 gases</span></span><span class="v red">✗ WRONG — must say 7</span></div>
+    <hr class="divider">
+    <div class="kv"><span class="k">Water vapour</span><span class="v green">IS a GHG (most abundant)</span></div>
+    <div class="kv"><span class="k">Water vapour regulated?</span><span class="v red">NO — feedback loop, not primary driver</span></div>
+    <div class="kv"><span class="k">Reported under MARPOL?</span><span class="v red">NO</span></div>
+    <div class="tip"><strong>Simon:</strong> "Water vapour: GHG yes, but excluded from MARPOL — it's a temperature-driven feedback, not anthropogenic."</div>
+  </div>
+
+  <!-- CARBON FACTORS + WORKED CALC -->
+  <div class="card orange">
+    <span class="section-label">Q6 — Simon</span>
+    <h2>⚗️ Carbon Conversion Factors</h2>
+    <table>
+      <tr><th>Fuel</th><th>Cf (t-CO₂/t-fuel)</th></tr>
+      <tr><td>HFO</td><td class="highlight">3.114</td></tr>
+      <tr><td>MDO / MGO</td><td class="highlight">3.206</td></tr>
+      <tr><td>LNG</td><td class="highlight">2.750</td></tr>
+      <tr><td>Methanol</td><td class="highlight">1.375</td></tr>
+    </table>
+    <div class="kv" style="margin-top:6px;"><span class="k">Source</span><span class="v">MEPC.364(79)</span></div>
+    <hr class="divider">
+    <span class="section-label">Worked Example</span>
+    <div class="formula-box">
+      80 t/day HFO × 3.114<br>
+      = <strong>249.12 t-CO₂/day</strong> ✓
+    </div>
+    <div class="tip"><strong>Methanol caveat:</strong> Cf 1.375 looks half of HFO — but calorific value also half (19.9 vs 40.2 MJ/kg) → double mass consumption for same power. Green advantage only with lifecycle tracking.</div>
+  </div>
+
+  <!-- UNFCCC + MIDTERM MEASURES -->
+  <div class="card blue">
+    <span class="section-label">Q7 — Nair</span>
+    <h2>🌐 UNFCCC & IMO GHG Strategy</h2>
+    <div class="kv"><span class="k">UNFCCC controls</span><span class="v">Paris Agreement / 1.5°C</span></div>
+    <div class="kv"><span class="k">Shipping in NDCs?</span><span class="v red">NO — transboundary; IMO jurisdiction</span></div>
+    <div class="kv"><span class="k">IMO strategy</span><span class="v">MEPC.377(80) — 2023</span></div>
+    <hr class="divider">
+    <span class="section-label">2023 IMO GHG Targets</span>
+    <div class="kv"><span class="k">2030</span><span class="v">20–30% reduction (vs 2008)</span></div>
+    <div class="kv"><span class="k">2040</span><span class="v">70–80% reduction</span></div>
+    <div class="kv"><span class="k">2050</span><span class="v green">Net Zero by/around 2050</span></div>
+    <hr class="divider">
+    <span class="section-label">Midterm Measures (Proposed)</span>
+    <div class="kv"><span class="k">Technical</span><span class="v orange">GFI Standard (fuel intensity)</span></div>
+    <div class="kv"><span class="k">Economic</span><span class="v orange">Carbon levy / compliance fund</span></div>
+    <div class="kv"><span class="k">Expected in force</span><span class="v">2027–2030</span></div>
+    <div class="tip"><strong>Nair:</strong> "India's NDC does not cover shipping — IMO holds independent global authority over international maritime emissions."</div>
+  </div>
+
+  <!-- ShaPoLi CARD -->
+  <div class="card red">
+    <span class="section-label">Q8 — CORRECTED</span>
+    <h2>⚙️ Shaft Power Limitation (ShaPoLi)</h2>
+    <div class="kv"><span class="k">Purpose</span><span class="v">Limit max shaft power to meet Required EEXI</span></div>
+    <div class="kv"><span class="k">Authorised by</span><span class="v highlight">Flag Administration / Class (RO)</span></div>
+    <div class="kv"><span class="k">NOT authorised by</span><span class="v red">Company / CE — NEVER say this</span></div>
+    <hr class="divider">
+    <div class="kv"><span class="k">ShaPoLi</span><span class="v">Shaft torque sensors + governor lock</span></div>
+    <div class="kv"><span class="k">EPL</span><span class="v">Engine fuel index limited internally</span></div>
+    <hr class="divider">
+    <div class="kv"><span class="k">Emergency override</span><span class="v orange">Log Book + Flag notification required</span></div>
+    <hr class="divider">
+    <div class="kv"><span class="k">CORRECT Reg</span><span class="v correct">MEPC.328(76) + MEPC.1/Circ.896</span></div>
+    <div class="kv"><span class="k"><span class="wrong">Wrong ref</span></span><span class="v red">MEPC.335(76) = SEEMP only, not ShaPoLi</span></div>
+    <div class="kv"><span class="k">IACS</span><span class="v">UR W33 — verification requirements</span></div>
+  </div>
+
+  <!-- ALT FUELS CARD -->
+  <div class="card green">
+    <span class="section-label">Q9 / Q11 — Nair / Simon</span>
+    <h2>⛽ Alternative vs Sustainable Fuels</h2>
+    <table>
+      <tr><th></th><th>Alternative</th><th>Sustainable</th></tr>
+      <tr><td>What</td><td>Non-conventional bunker</td><td>Low-lifecycle GHG</td></div></tr>
+      <tr><td>Scope</td><td>At the manifold</td><td>Well-to-Wake</td></tr>
+      <tr><td>Examples</td><td>Fossil LNG, LPG</td><td>e-Methanol, green NH₃</td></tr>
+      <tr><td>Cert issued by</td><td>—</td><td>ISCC Plus / RSB</td></tr>
+    </table>
+    <div class="kv" style="margin-top:6px;"><span class="k">IMO issues certs?</span><span class="v red">NO — sets LCA guidelines only</span></div>
+    <div class="kv"><span class="k">LCA guidelines</span><span class="v">MEPC.391(81)</span></div>
+    <div class="kv"><span class="k">Crew training</span><span class="v">STCW Reg V/3 — IGF Code vessels</span></div>
+    <hr class="divider">
+    <span class="section-label">Methanol Key Facts (Q11)</span>
+    <div class="kv"><span class="k">Flash point</span><span class="v highlight">11°C closed cup</span></div>
+    <div class="kv"><span class="k">→ triggers</span><span class="v">IGF Code (low-flashpoint fuel)</span></div>
+    <div class="kv"><span class="k">Flame</span><span class="v red">INVISIBLE → IR detection required</span></div>
+    <div class="kv"><span class="k">TLV-TWA</span><span class="v">200 ppm</span></div>
+    <div class="kv"><span class="k">IDLH</span><span class="v">6,000 ppm</span></div>
+    <div class="kv"><span class="k">Cargo code (post-1986)</span><span class="v">IBC Code Ch.17</span></div>
+    <div class="kv"><span class="k">Cargo code (pre-1986)</span><span class="v">BCH Code</span></div>
+  </div>
+
+  <!-- DUAL FUEL + COLD IRONING -->
+  <div class="card purple">
+    <span class="section-label">Q10 / Q12 — Nair</span>
+    <h2>🔥 Dual Fuel & Cold Ironing</h2>
+    <span class="section-label">Dual Fuel Engine Alarms (IGF Code Ch.13)</span>
+    <div class="kv"><span class="k">Warning alarm</span><span class="v orange"><strong>20% LEL</strong></span></div>
+    <div class="kv"><span class="k">Auto trip + changeover</span><span class="v red"><strong>40% LEL</strong></span></div>
+    <div class="kv"><span class="k">Changeover</span><span class="v green">Seamless fallback to diesel — no propulsion loss</span></div>
+    <div class="kv"><span class="k">Pipe type</span><span class="v">Double-walled; interspace inerted with N₂</span></div>
+    <div class="kv"><span class="k">LPG bunkering inerting</span><span class="v">&lt;5% O₂ by volume (N₂)</span></div>
+    <div class="kv"><span class="k">Vapour return</span><span class="v">Mandatory — closed loop</span></div>
+    <div class="kv"><span class="k">Code</span><span class="v">IGF Code Ch.6 (bunkering), Ch.13 (gas det.)</span></div>
+    <hr class="divider">
+    <span class="section-label">Cold Ironing / OPS (Q12)</span>
+    <div class="kv"><span class="k">HVSC voltage</span><span class="v highlight">6.6 kV or 11 kV AC</span></div>
+    <div class="kv"><span class="k">Isolation transformer</span><span class="v">Mandatory — galvanic isolation</span></div>
+    <div class="kv"><span class="k">Equipotential bonding</span><span class="v">Continuous monitoring loop</span></div>
+    <div class="kv"><span class="k">Interlocks</span><span class="v">Fiber-optic within cable assembly</span></div>
+    <div class="kv"><span class="k">Standard</span><span class="v">ISO/IEC/IEEE 80005-1</span></div>
+    <div class="tip"><strong>Nair:</strong> Beyond voltage/frequency: isolation transformer → bonding → fiber-optic interlocks → PMS sync.</div>
+  </div>
+
+  <!-- PID + Z-N CARD -->
+  <div class="card teal span2">
+    <span class="section-label">Q15 / Q16 / Q17 — Rajappan</span>
+    <h2>🎛️ PID Controller & Ziegler-Nichols Tuning</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div>
+        <span class="section-label">PID — Three Terms</span>
+        <div class="pid-row">
+          <div class="pid-letter" style="background:#0d9488;color:#fff;">P</div>
+          <div><strong>Present error</strong></div>
+          <div style="color:#94a3b8;font-size:11px;">Fast response, leaves offset</div>
+          <div style="color:#fcd34d;font-size:11px;">Hunting? ↓ P</div>
+        </div>
+        <div class="pid-row">
+          <div class="pid-letter" style="background:#f97316;color:#fff;">I</div>
+          <div><strong>Past error (accumulated)</strong></div>
+          <div style="color:#94a3b8;font-size:11px;">Eliminates offset; risk = windup</div>
+          <div style="color:#fcd34d;font-size:11px;">Drift? speed up I</div>
+        </div>
+        <div class="pid-row">
+          <div class="pid-letter" style="background:#8b5cf6;color:#fff;">D</div>
+          <div><strong>Future error (rate of change)</strong></div>
+          <div style="color:#94a3b8;font-size:11px;">Brakes overshoot; omit in slow thermal</div>
+          <div style="color:#fcd34d;font-size:11px;">Overshoot? ↑ D</div>
+        </div>
+        <hr class="divider" style="margin-top:8px;">
+        <span class="section-label">Onboard Applications</span>
+        <div class="kv"><span class="k">Boiler drum level</span><span class="v">3-element PID loop</span></div>
+        <div class="kv"><span class="k">Cargo temp control</span><span class="v">Thermal (no D term)</span></div>
+        <div class="kv"><span class="k">Steering autopilot</span><span class="v">All 3 terms active</span></div>
+        <div class="kv"><span class="k">Fuel viscosity</span><span class="v">PI only</span></div>
+        <div class="kv"><span class="k">IG pressure</span><span class="v">P or PI</span></div>
+      </div>
+      <div>
+        <span class="section-label">Ziegler-Nichols Method (Steps)</span>
+        <ol style="padding-left:16px;font-size:12px;line-height:1.8;">
+          <li>Stable baseline in <strong>manual</strong></li>
+          <li>Switch to auto; set <strong>I = 0, D = 0</strong></li>
+          <li>Increase P gain → test small setpoint changes</li>
+          <li>Find <strong>Ku</strong> (Ultimate Gain — sustained oscillation)</li>
+          <li>Measure <strong>Tu</strong> (period of oscillation, seconds)</li>
+          <li>Apply formulae:</li>
+        </ol>
+        <div class="formula-box" style="margin-top:8px;">
+          Kp = <strong>0.6 × Ku</strong><br>
+          Ti = <strong>Tu ÷ 2</strong><br>
+          Td = <strong>Tu ÷ 8</strong><br>
+          Target: quarter-amplitude decay
+        </div>
+        <span class="section-label" style="margin-top:8px;display:block;">3-Element Controller (Q15)</span>
+        <div class="kv"><span class="k">Element 1</span><span class="v">Steam drum water level (trim)</span></div>
+        <div class="kv"><span class="k">Element 2</span><span class="v">Steam outflow rate (feed-forward)</span></div>
+        <div class="kv"><span class="k">Element 3</span><span class="v">Feedwater inflow rate (feed-forward)</span></div>
+        <div class="kv"><span class="k">Problem solved</span><span class="v orange">Swell &amp; shrink (false level signals)</span></div>
+        <div class="kv"><span class="k">Used on</span><span class="v">Steam LNG carriers, WHRS boilers</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIT CARD -->
+  <div class="card orange">
+    <span class="section-label">Q18 — Rajappan</span>
+    <h2>🔩 VIT — Variable Injection Timing</h2>
+    <div class="kv"><span class="k">Purpose</span><span class="v">Advance injection at part-load to maintain Pmax</span></div>
+    <div class="kv"><span class="k">Benefit</span><span class="v">Optimises thermal efficiency → lowers SFOC</span></div>
+    <div class="kv"><span class="k">Active range</span><span class="v">~40–85% MCR</span></div>
+    <div class="kv"><span class="k">Implementation</span><span class="v">Mechanical rack or electronic solenoid timing</span></div>
+    <hr class="divider">
+    <span class="section-label">Why OFF below ~40% MCR</span>
+    <div style="font-size:12px;line-height:1.8;color:#e2e8f0;">
+      ↓ TC boost (insufficient scavenge air)<br>
+      → ↓ Compression temperature<br>
+      → ↑ Ignition delay (fuel accumulates)<br>
+      → Sudden ignition = <span style="color:#ef4444;font-weight:700;">KNOCK / DETONATION</span><br>
+      → Pmax exceedance → structural damage
+    </div>
+    <div class="kv" style="margin-top:8px;"><span class="k">Root cause</span><span class="v red">Lack of TC boost air pressure</span></div>
+    <div class="tip"><strong>Rajappan:</strong> Lead with "insufficient turbocharger boost" — then the consequence chain. Don't just say "the manual says 40%."</div>
+  </div>
+
+  <!-- FRAMO CARD -->
+  <div class="card purple">
+    <span class="section-label">Q19 — Srivastava</span>
+    <h2>🛢 FRAMO Deepwell Pump System</h2>
+    <div class="kv"><span class="k">Made by</span><span class="v">Frank Mohn AS (Norway)</span></div>
+    <div class="kv"><span class="k">Pump type</span><span class="v">Submerged centrifugal deepwell</span></div>
+    <div class="kv"><span class="k">Drive</span><span class="v">Hydraulic (HPU on deck)</span></div>
+    <div class="kv"><span class="k">HPU pressure</span><span class="v">250–300 bar</span></div>
+    <div class="kv"><span class="k">Key advantage</span><span class="v green">NO cargo pump room → no explosion risk</span></div>
+    <div class="kv"><span class="k">Cargo isolation</span><span class="v">Double-walled cofferdam (hydr. oil vs cargo)</span></div>
+    <div class="kv"><span class="k">Cofferdam check</span><span class="v">Purge + sample → detect seal failure</span></div>
+    <div class="kv"><span class="k">Variable speed</span><span class="v">Via hydraulic flow control</span></div>
+    <div class="kv"><span class="k">Stripping</span><span class="v">&lt;75 L residual → MARPOL AII Reg 16 ✓</span></div>
+    <div class="kv"><span class="k">Used on</span><span class="v">Chemical tankers, product tankers</span></div>
+    <div class="kv"><span class="k">Code</span><span class="v">IBC Code Ch.5 + MARPOL AII Reg 16</span></div>
+    <div class="tip"><strong>Srivastava:</strong> Lead with pump room elimination. Then cofferdam purging — shows operational knowledge. Then MARPOL stripping compliance.</div>
+  </div>
+
+  <!-- EU MRV vs DCS CARD -->
+  <div class="card teal">
+    <span class="section-label">Q14 — Nair</span>
+    <h2>📊 EU MRV vs IMO DCS</h2>
+    <table>
+      <tr><th></th><th>EU MRV</th><th>IMO DCS</th></tr>
+      <tr><td>Regulation</td><td>EU 2015/757</td><td>MARPOL AVI Reg 22A</td></tr>
+      <tr><td>Scope</td><td>Regional (EU/EEA)</td><td>Global</td></tr>
+      <tr><td>Data level</td><td>Per voyage</td><td>Annual aggregate</td></tr>
+      <tr><td>Public?</td><td>Yes</td><td>Anonymous</td></tr>
+      <tr><td>Verified by</td><td>EU-accredited 3rd party</td><td>Flag Admin / RO</td></tr>
+      <tr><td>Document</td><td>Doc of Compliance</td><td>Statement of Compliance</td></tr>
+      <tr><td>Links to</td><td>EU ETS (from 2024)</td><td>CII calculation</td></tr>
+    </table>
+    <hr class="divider">
+    <span class="section-label">EU ETS Coverage Ramp</span>
+    <div class="kv"><span class="k">2024</span><span class="v">40% of emissions</span></div>
+    <div class="kv"><span class="k">2025</span><span class="v">70%</span></div>
+    <div class="kv"><span class="k">2026</span><span class="v highlight">100%</span></div>
+    <div class="tip"><strong>Nair trap:</strong> "They are the same" → WRONG. EU MRV (2015) predates DCS (2016); voyage-level vs annual; feeds ETS. They are NOT merged.</div>
+  </div>
+
+  <!-- REGULATION QUICK-REF CARD -->
+  <div class="card green span2">
+    <span class="section-label">Regulation Quick Reference — All QB6 Topics</span>
+    <h2>⚖️ Key Regulations at a Glance</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+      <div>
+        <table>
+          <tr><th>Instrument</th><th>What it covers</th></tr>
+          <tr><td>MARPOL AVI Reg 28</td><td>CII operational carbon intensity</td></tr>
+          <tr><td>MEPC.333(76)</td><td>CII rating bands (A–E)</td></tr>
+          <tr><td>MEPC.364(79)</td><td>Carbon conversion factors (Cf)</td></tr>
+          <tr><td>MEPC.1/Circ.893</td><td>CII guidelines</td></tr>
+          <tr><td>MARPOL AVI Reg 21</td><td>EEXI requirement + reference lines</td></tr>
+          <tr><td>MEPC.328(76)</td><td>EEXI regulations + ShaPoLi authorisation</td></tr>
+          <tr><td>MEPC.1/Circ.896</td><td>EEXI implementation; ShaPoLi/EPL procedures</td></tr>
+          <tr><td>IACS UR W33</td><td>Shaft power limitation verification</td></tr>
+          <tr><td>MARPOL AVI Reg 26</td><td>SEEMP — all three Parts</td></tr>
+          <tr><td>MEPC.335(76)</td><td>SEEMP amendments (Part III CII plan)</td></tr>
+        </table>
+      </div>
+      <div>
+        <table>
+          <tr><th>Instrument</th><th>What it covers</th></tr>
+          <tr><td>MEPC.377(80)</td><td>2023 IMO GHG Strategy; GFI framework</td></tr>
+          <tr><td>MEPC.391(81)</td><td>Lifecycle GHG guidelines (GFI values)</td></tr>
+          <tr><td>IGF Code Ch.13</td><td>Gas detection: 20% / 40% LEL thresholds</td></tr>
+          <tr><td>IGF Code Ch.6</td><td>LPG bunkering; inerting; vapour return</td></tr>
+          <tr><td>IBC Code Ch.17</td><td>Methanol as cargo (post-1986 vessels)</td></tr>
+          <tr><td>BCH Code</td><td>Methanol as cargo (pre-1986 vessels)</td></tr>
+          <tr><td>STCW Reg V/3</td><td>IGF Code crew training and certification</td></tr>
+          <tr><td>ISO/IEC/IEEE 80005-1</td><td>High Voltage Shore Connection (cold ironing)</td></tr>
+          <tr><td>EU Reg 2015/757</td><td>EU MRV — voyage-level CO₂ monitoring</td></tr>
+          <tr><td>MARPOL AII Reg 16</td><td>NLS discharge; FRAMO stripping &lt;75 L</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONNECTIONS / TOPIC MAP CARD -->
+  <div class="card blue span3">
+    <span class="section-label">Topic Connection Map — How QB6 Subjects Link</span>
+    <h2>🔗 How It All Connects</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:8px;">
+      <div class="mini-card">
+        <div class="label">EEXI (one-time)</div>
+        <div class="value">ShaPoLi / EPL</div>
+        <div class="sub">→ limits ME power → improves CII over voyage</div>
+      </div>
+      <div class="mini-card">
+        <div class="label">CII (annual)</div>
+        <div class="value">SEEMP Part III</div>
+        <div class="sub">D/E rating → corrective plan → voyage optimisation</div>
+      </div>
+      <div class="mini-card">
+        <div class="label">GFI (proposed)</div>
+        <div class="value">Fuel choice</div>
+        <div class="sub">Green methanol (8–12) vs HFO (91.7) gCO₂eq/MJ</div>
+      </div>
+      <div class="mini-card">
+        <div class="label">VIT → SFOC</div>
+        <div class="value">Fuel savings</div>
+        <div class="sub">Better SFOC → lower Cf × M_fuel → better CII</div>
+      </div>
+      <div class="mini-card">
+        <div class="label">FRAMO stripping</div>
+        <div class="value">MARPOL AII</div>
+        <div class="sub">&lt;75 L residual compliance → no port reception needed</div>
+      </div>
+      <div class="mini-card">
+        <div class="label">Methanol 11°C FP</div>
+        <div class="value">IGF Code</div>
+        <div class="sub">→ STCW V/3 training → dual-fuel monitoring → LEL alarms</div>
+      </div>
+      <div class="mini-card">
+        <div class="label">EU MRV data</div>
+        <div class="value">→ EU ETS</div>
+        <div class="sub">Voyage CO₂ → carbon permit cost → financial pressure on CII</div>
+      </div>
+      <div class="mini-card">
+        <div class="label">Cold ironing</div>
+        <div class="value">CII benefit</div>
+        <div class="sub">Shore power at berth → zero fuel burn → DWT·nm excludes berth time</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div style="text-align:center;margin-top:20px;color:#475569;font-size:11px;">
+  QB6 Cheat Sheet v1.0 · June 2026 · Nixon Antony, 2/E, Maersk A/S · marineintelligenceweekly.com
+  <br>Corrections: contactus@marineintelligenceweekly.com · Verified against IMO instruments current to June 2026
+</div>
+
+</body>
+</html>

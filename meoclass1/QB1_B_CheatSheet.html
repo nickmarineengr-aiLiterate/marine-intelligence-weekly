@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB1_B Cheat Sheet — Conventions & Liability | MEO Class 1 | MIW</title>
+<meta name="robots" content="noindex, nofollow">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;
+  --grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:13px;line-height:1.5;}
+.topbar{background:var(--navy);color:#fff;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--teal);}
+.logo-mark{background:var(--teal);color:#fff;font-weight:800;font-size:12px;padding:2px 7px;border-radius:4px;}
+.topbar-right a{color:rgba(255,255,255,.7);text-decoration:none;font-size:11px;margin-left:14px;}
+
+.page-header{background:linear-gradient(135deg,var(--navy),#1e3a5f);color:#fff;padding:24px 20px;border-bottom:3px solid var(--teal);}
+.page-header h1{font-size:22px;font-weight:800;margin-bottom:6px;}
+.page-header h1 span{color:var(--teal);}
+.header-sub{color:rgba(255,255,255,.65);font-size:12px;}
+.badge{display:inline-block;background:rgba(13,148,136,.2);border:1px solid rgba(13,148,136,.3);color:var(--teal);font-size:10px;font-weight:700;letter-spacing:1px;padding:3px 10px;border-radius:12px;margin-bottom:10px;}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;padding:16px 20px 60px;}
+
+.card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;overflow:hidden;break-inside:avoid;}
+.card-head{background:var(--navy);color:#fff;padding:8px 12px;display:flex;align-items:center;gap:8px;}
+.card-num{background:var(--teal);color:#fff;font-weight:800;font-size:11px;padding:2px 7px;border-radius:5px;white-space:nowrap;}
+.card-title{font-size:11px;font-weight:600;line-height:1.35;}
+.card-body{padding:10px 12px;}
+.card-body p{font-size:11.5px;line-height:1.55;color:var(--ink);margin-bottom:6px;}
+
+.kn{background:var(--grey-bg);border-left:3px solid var(--teal);border-radius:0 5px 5px 0;padding:6px 10px;margin:6px 0;}
+.kn-title{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--teal-dark);margin-bottom:3px;}
+.kn ul{padding-left:14px;}
+.kn li{font-size:11px;margin-bottom:2px;}
+.kn strong{font-weight:700;}
+
+.tip{background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 5px 5px 0;padding:6px 10px;margin:6px 0;font-size:11px;color:#7c2d12;line-height:1.5;}
+.tip-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#9a3412;display:block;margin-bottom:2px;}
+
+.trap{background:#fef2f2;border:1px solid #fca5a5;border-radius:6px;padding:5px 9px;margin:5px 0;font-size:11px;line-height:1.5;}
+.trap-label{font-size:9px;font-weight:800;text-transform:uppercase;color:#b91c1c;display:block;margin-bottom:1px;}
+
+.reg-mini{background:#141412;color:rgba(255,255,255,.8);border-radius:6px;padding:6px 10px;margin:6px 0;font-size:10px;}
+.reg-mini-title{color:rgba(255,255,255,.4);font-size:9px;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;}
+.reg-row{display:flex;gap:8px;margin-bottom:3px;}
+.reg-code{font-family:monospace;color:var(--orange);font-size:10px;white-space:nowrap;flex-shrink:0;}
+.reg-text{color:rgba(255,255,255,.6);font-size:10px;line-height:1.35;}
+
+.section-divider{grid-column:1/-1;background:var(--navy);color:var(--teal);padding:8px 14px;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:.5px;margin-top:4px;}
+
+.footer{background:#141412;color:rgba(255,255,255,.5);padding:16px 20px;text-align:center;font-size:11px;line-height:1.8;}
+.footer a{color:var(--teal);}
+
+@media print{
+  .topbar,.page-header{print-color-adjust:exact;-webkit-print-color-adjust:exact;}
+  .grid{gap:8px;padding:8px;}
+  .card{page-break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div style="display:flex;align-items:center;gap:8px;"><span class="logo-mark">MIW</span><span style="font-size:12px;opacity:.8;">Marine Intelligence Weekly</span></div>
+  <div><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a><a href="QB1_B.html">Full QB1_B</a></div>
+</nav>
+
+<header class="page-header">
+  <div class="badge">QB1_B CHEAT SHEET · v1.0 · June 2026</div>
+  <h1>Conventions &amp; <span>Liability — B Series</span></h1>
+  <p class="header-sub">21-card visual reference · HNS · PSSA · RO Code · CLC/IOPC · Salvage/SCOPIC · GA · P&I · Subrogation · MLC/RPSL · MACN · PSC · Gender Equality · Compiled by Nixon Antony, 2/E, Maersk A/S</p>
+</header>
+
+<div class="grid">
+
+  <div class="section-divider">⚖ CONVENTIONS &amp; LIABILITY CORE</div>
+
+  <!-- Q1: HNS -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q1</span><div class="card-title">HNS Convention &amp; LLMC Fallback</div></div>
+    <div class="card-body">
+      <p><strong>HNS Convention:</strong> Applies to damage from hazardous/noxious substances carried by sea. Two tiers: Tier 1 (Shipowner P&I), Tier 2 (Cargo receiver fund). <strong>Not yet in force globally.</strong></p>
+      <p><strong>Fallback:</strong> Where HNS not in force → <strong>LLMC 1996</strong> (tonnage-based SDR cap). No second-tier fund. No dedicated chemical spill compensation pool.</p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>Entry: <strong>12 States, 40M GT, 40M tonnes</strong> contributing cargo</li>
+        <li>LLMC 1996 limits increased <strong>51%</strong> from 8 June 2015</li>
+        <li>HNS applies to IMDG packaged goods on container ships</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>HNS Fund cannot pay for Indian waters spill today — 2010 Protocol not in force. Candidates confuse with Bunker Convention 2001 (IS in force).</div>
+      <div class="reg-mini"><div class="reg-mini-title">Regulatory</div>
+        <div class="reg-row"><span class="reg-code">HNS 2010/Art.7</span><span class="reg-text">Strict liability framework</span></div>
+        <div class="reg-row"><span class="reg-code">LLMC 1996/Art.6</span><span class="reg-text">Tonnage-based SDR fallback cap</span></div>
+      </div>
+      <div class="tip"><span class="tip-label">CE Oral Tip</span>"Yes, sir — container ship faces HNS via IMDG. But since HNS isn't in force, fallback is LLMC 1996 or Indian Merchant Shipping Act."</div>
+    </div>
+  </div>
+
+  <!-- Q2: P&A Manual -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q2</span><div class="card-title">P&amp;A Manual (MARPOL Annex II)</div></div>
+    <div class="card-body">
+      <p><strong>Purpose:</strong> Mandatory ship-specific document for NLS bulk carriers detailing pump/stripping system layout and procedures ensuring statutory discharge compliance.</p>
+      <p><strong>Issuing Authority:</strong> Flag State / Recognised Organisation (RO).</p>
+      <div class="kn"><div class="kn-title">Key Numbers — CORRECTED</div><ul>
+        <li><strong>MARPOL Annex II, Reg 14</strong> — mandatory requirement</li>
+        <li>Pre-2007 ships stripping limit: <strong>75 litres</strong></li>
+        <li>Post-2007 ships stripping limit: <strong>30 litres</strong> ← corrected</li>
+        <li>Discharge distance: <strong>12 NM from land</strong></li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>Do NOT say 75 litres for post-2007 ships. Also: P&A Manual ≠ SOPEP (Annex I) or SMPEP (Annex II emergency plan).</div>
+      <div class="tip"><span class="tip-label">CE Oral Tip — Maersk</span>P&A Manual N/A on container vessel. We carry SOPEP (Annex I) and Garbage Management Plan (Annex V).</div>
+    </div>
+  </div>
+
+  <!-- Q3: Admiralty Law -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q3</span><div class="card-title">Admiralty Law — Lien, Tort, Statute</div></div>
+    <div class="card-body">
+      <p><strong>Maritime Lien:</strong> Proprietary claim attaching to vessel hull <em>in rem</em>. Survives change of ownership. No registration required. Outranks mortgages. Key triggers: salvage, crew wages, collision damage.</p>
+      <p><strong>Maritime Tort:</strong> Civil wrong (negligence) on navigable waters — collisions, dock damage, personal injury. Must prove duty + breach + causation + damage.</p>
+      <p><strong>Statutory Liability:</strong> Strict obligations from IMO conventions (MARPOL, CLC, Bunker Convention) — no negligence proof needed.</p>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>Crew injury in ER = BOTH a tort (negligence) AND statutory claim under MLC Reg 4.3.</div>
+      <div class="reg-mini"><div class="reg-mini-title">Regulatory</div>
+        <div class="reg-row"><span class="reg-code">MLM CONV 1993</span><span class="reg-text">Maritime lien priority order</span></div>
+        <div class="reg-row"><span class="reg-code">CLC 1992/Art.III</span><span class="reg-text">Strict statutory liability — no negligence needed</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q10: CLC -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q10</span><div class="card-title">CLC — Scope &amp; Bunker Incident</div></div>
+    <div class="card-body">
+      <p><strong>CLC 1992:</strong> Applies ONLY to persistent oil tankers. Strict liability on registered owner. Backed by mandatory P&I insurance.</p>
+      <p><strong>Bunker spill from Maersk container ship → NOT CLC.</strong> Governed by <strong>Bunker Convention 2001</strong> — mandatory insurance for all ships &gt;1,000 GT.</p>
+      <div class="kn"><div class="kn-title">Key Distinction</div><ul>
+        <li>CLC = persistent oil tanker spills (cargo oil)</li>
+        <li>Bunker Conv 2001 = bunker fuel spills from any ship &gt;1,000 GT</li>
+        <li>Neither = Annex I MARPOL (that's operational discharge limits, not civil liability)</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Examiner Trap</span>"Your Maersk ship spills 500T HFO. Which convention?" → <strong>Bunker Convention 2001</strong>, NOT CLC. Saying CLC = instant failure.</div>
+    </div>
+  </div>
+
+  <!-- Q11: Salvage/SCOPIC -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q11</span><div class="card-title">Salvage &amp; SCOPIC Clause</div></div>
+    <div class="card-body">
+      <p><strong>Salvage Convention 1989:</strong> Art.13 = "No Cure, No Pay" (reward from salved value). Art.14 = Special Compensation for environmental protection even without success.</p>
+      <p><strong>SCOPIC:</strong> Optional LOF clause replacing Art.14. Invoked by salvor at any time. Guarantees tariff-based payment + <strong>25% flat bonus</strong> — even if vessel sinks — funded by <strong>P&I Club</strong> (not H&M).</p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li><strong>25%</strong> — non-negotiable SCOPIC profit uplift</li>
+        <li>Art.13 awards → H&M underwriters pay</li>
+        <li>SCOPIC awards → P&I Club pays</li>
+        <li>LOF = Lloyd's Open Form (SCOPIC is an addendum)</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>SCOPIC is NOT an IMO convention — it is a voluntary commercial contract clause created by P&I Clubs, shipowners, and salvors.</div>
+      <div class="tip"><span class="tip-label">CE Oral Tip</span>"Sir, SCOPIC is funded entirely by P&I Club — it covers environmental protection expenditure (third-party liability). Traditional salvage is paid by H&M underwriters."</div>
+    </div>
+  </div>
+
+  <!-- Q12: CLC + Fund -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q12</span><div class="card-title">CLC &amp; IOPC Fund — Two-Tier System</div></div>
+    <div class="card-body">
+      <p><strong>Tier 1 — CLC 1992:</strong> Strict liability on shipowner via P&I; tonnage-based SDR cap.</p>
+      <p><strong>Tier 2 — Fund Convention 1992:</strong> IOPC Fund steps in when: spill exceeds CLC cap, owner insolvent, or owner exempt. Funded by oil cargo receivers &gt;150,000T/yr.</p>
+      <p><strong>Tier 3 — Supplementary Protocol 2003:</strong> Optional; raises total ceiling to <strong>750M SDR</strong>.</p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>Tier 1+2 combined max: <strong>203 million SDR</strong></li>
+        <li>Tier 3 total cap: <strong>750 million SDR</strong></li>
+        <li>Levy trigger: &gt;<strong>150,000 tonnes</strong> contributing oil/yr</li>
+        <li>IOPC Fund payer: <strong>oil cargo receivers</strong> (NOT IMO, NOT flag states)</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>Candidates say IMO or Flag States fund the IOPC Pool. WRONG. Oil cargo receivers (refineries, importers) fund it via mandatory contributions.</div>
+    </div>
+  </div>
+
+  <!-- Q13: P&I vs H&M -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q13</span><div class="card-title">P&amp;I Club vs H&amp;M Insurance</div></div>
+    <div class="card-body">
+      <p><strong>H&M:</strong> For-profit corporate insurer. Fixed premium. First-party loss — covers own hull &amp; machinery damage. Capped at hull valuation.</p>
+      <p><strong>P&I Club:</strong> Non-profit mutual cooperative owned by shipowners. Advance calls + supplementary calls. Third-party liability — pollution, crew injury, cargo claims, FFO, wreck removal. Up to ~$1B for oil pollution.</p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>International Group: <strong>12 clubs</strong>, ~90% of global fleet</li>
+        <li>Oil pollution pool limit: <strong>$1 Billion/incident</strong></li>
+        <li>Running Down Clause: H&M covers <strong>3/4</strong> collision liability; P&I covers <strong>1/4</strong></li>
+      </ul></div>
+      <div class="tip"><span class="tip-label">CE Memory Rule</span>Main engine bearing wipes → H&M claim. OWS fails, sheen overboard → P&I claim. Clear distinction every time.</div>
+    </div>
+  </div>
+
+  <!-- Q14: GA -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q14</span><div class="card-title">General Average — York-Antwerp Rules</div></div>
+    <div class="card-body">
+      <p><strong>GA Act (Rule A):</strong> 4 elements — Common Danger + Voluntary Act + Reasonable Action + Successful Preservation. ALL parties share the extraordinary sacrifice proportionally.</p>
+      <p><strong>CE Formula:</strong> Contribution = Total GA Sacrifice × (Your Saved Value ÷ Total Saved Value)</p>
+      <p><strong>Onboard Procedure:</strong> Freeze logs → Preserve physical evidence → Tank soundings → Hold cargo under maritime lien until GA Bond + GA Guarantee signed.</p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>Governing: <strong>York-Antwerp Rules 2016</strong></li>
+        <li>Fire pump extra fuel → GA expenditure, shared by all cargo interests</li>
+        <li>YAR Rule VII: Machinery damage in refloating = GA sacrifice</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>If cargo was poorly lashed, cargo owners can refuse GA contributions citing shipowner's unseaworthiness (actionable fault).</div>
+      <div class="tip"><span class="tip-label">Casualty</span>Maersk Honam (2018) — ULCV fire, GA declared, cargo receivers had to post bonds before container release.</div>
+    </div>
+  </div>
+
+  <!-- Q19: Clear Ground -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q19</span><div class="card-title">Clear Ground (Insurance Context)</div></div>
+    <div class="card-body">
+      <p><strong>Definition:</strong> Definitive, legally sustainable evidentiary basis required to: pierce LLMC/CLC limitation funds, deny insurance indemnity, or override carrier immunities. Requires proof of personal intent or reckless misconduct.</p>
+      <p><strong>Applications:</strong><br>
+        1. Pierce LLMC cap → prove personal act with intent or reckless knowledge (Art.4)<br>
+        2. Deny H&M/P&I claim → breach of utmost good faith, owner's privity<br>
+        3. Cargo claims → failure of due diligence under Hague-Visby Art.III(1)</p>
+      <div class="trap"><span class="trap-label">⚠ Examiner Trap</span>"PSC clear grounds" (deficiency → expanded inspection) vs "insurance clear ground" (judicial evidence standard to break limitation or deny claims) — entirely different contexts. Candidates confuse them constantly.</div>
+      <div class="reg-mini"><div class="reg-mini-title">Regulatory</div>
+        <div class="reg-row"><span class="reg-code">MIA 1906/S.55</span><span class="reg-text">Insurer exempt for willful misconduct</span></div>
+        <div class="reg-row"><span class="reg-code">LLMC 1996/Art.4</span><span class="reg-text">High threshold to break limitation</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q20: Subrogation -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q20</span><div class="card-title">Subrogation</div></div>
+    <div class="card-body">
+      <p><strong>Definition (MIA 1906, S.79):</strong> After full claim settlement, insurer steps into the legal shoes of the insured and acquires all rights to sue the third-party wrongdoer. Prevents double recovery.</p>
+      <p><strong>Three rules:</strong> (1) Triggers only after full payout. (2) Insurer gets no greater rights than insured — time bars apply. (3) If recovery exceeds payout, excess goes to insured (not insurer).</p>
+      <div class="kn"><div class="kn-title">Real-World CE Example</div><ul>
+        <li>Off-spec bunkers score fuel pumps → H&M pays for repair</li>
+        <li>H&M then subrogate to sue bunker supplier</li>
+        <li>CE's unbroken MARPOL manifold sample chain = key evidence</li>
+        <li>Tag parts + anti-tamper seal + photo + log immediately after incident</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>Subrogation ≠ assignment ≠ arbitration. It means "insurer stepping into insured's legal shoes" — precise language matters in oral exam.</div>
+    </div>
+  </div>
+
+  <div class="section-divider">🏛 RO, PSC &amp; FLAG STATE</div>
+
+  <!-- Q4: STSDSS -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q4</span><div class="card-title">STSDSS — Security Training</div></div>
+    <div class="card-body">
+      <p><strong>STSDSS = Security Training for Seafarers with Designated Security Duties</strong> (STCW Reg VI/6, Manila 2010 Amendments).</p>
+      <p><strong>Three levels:</strong><br>
+        SAT (Security Awareness) → ALL seafarers, basic reporting only<br>
+        <strong>STSDSS</strong> → designated security roles in SSP (tactical detection, access control, anti-piracy watches)<br>
+        SSO → management-level, responsible for full vessel security posture</p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>STCW Reg: <strong>VI/6, paragraphs 4–6</strong></li>
+        <li>No 5-year refresher required — life-long validity</li>
+        <li>Maersk Alabama (2009) → piracy — engineering space lockouts critical</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>Wiper with SAT only CANNOT stand anti-piracy watch — needs full STSDSS (designated security duty under SSP).</div>
+    </div>
+  </div>
+
+  <!-- Q5: CSR -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q5</span><div class="card-title">Continuous Synopsis Record (CSR)</div></div>
+    <div class="card-body">
+      <p><strong>SOLAS XI-2/Reg.5:</strong> Permanent administrative identity record for all ships ≥500 GT. Tracks flag, owner, ISM company, Class/RO, ISSC issuer — unbroken sequential chain from birth to scrapping.</p>
+      <p><strong>Three forms:</strong><br>
+        <strong>Form 1</strong> — Official record (Flag State only can write here)<br>
+        <strong>Form 2</strong> — Amendment log (Master fills when change occurs, pending Form 1)<br>
+        <strong>Form 3</strong> — Index of amendments (full history)</p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>Mandatory from: <strong>1 July 2004</strong></li>
+        <li>500 GT lower limit</li>
+        <li>Never delete or remove old forms — chain must be continuous</li>
+        <li>CSR ≠ Official Log Book (OLB) — completely different documents</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>Flag changes mid-ocean → old CSR sheets remain, Master fills Form 2, new flag issues next Form 1. Old sheets NEVER removed.</div>
+    </div>
+  </div>
+
+  <!-- Q6: PSSA -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q6</span><div class="card-title">PSSA vs MARPOL Special Area</div></div>
+    <div class="card-body">
+      <p><strong>PSSA (IMO Res.A.982(24)):</strong> Area with unique ecological/scientific value protected via <strong>Associated Protective Measures (APMs)</strong> — mandatory routing, ATBAs, reporting systems, discharge restrictions.</p>
+      <p><strong>MARPOL Special Area:</strong> Stricter <em>operational discharge limits</em> only. Does NOT automatically control navigation or routing.</p>
+      <p><strong>Can overlap:</strong> Baltic Sea is BOTH a PSSA AND a MARPOL Special Area (Annex I/V).</p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li><strong>17 PSSAs</strong> globally designated</li>
+        <li>Governing resolution: <strong>A.982(24)</strong></li>
+        <li>Mediterranean = MARPOL Special Area, NOT a whole-sea PSSA</li>
+        <li>Examples: Great Barrier Reef, Wadden Sea, Baltic Sea, Galapagos</li>
+      </ul></div>
+      <div class="tip"><span class="tip-label">CE Oral Tip</span>"Sir, a PSSA is designated by the IMO MEPC under Resolution A.982(24), protected by APMs like mandatory routing or ATBAs." Distinguish clearly from MARPOL discharge limits.</div>
+    </div>
+  </div>
+
+  <!-- Q7: RO Criteria -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q7</span><div class="card-title">Recognised Organisation (RO) Criteria</div></div>
+    <div class="card-body">
+      <p><strong>IMO RO Code (mandatory 1 Jan 2015):</strong> Organisation must demonstrate — Technical competence (own class rules), Qualified exclusive surveyors (global coverage), ISO 9001 QMS (regularly audited), Complete financial independence from shipbuilders/owners.</p>
+      <p><strong>Classification Society vs RO:</strong> Class Society = private rules for hull/machinery integrity. Same society + Flag State delegation to issue SOLAS/MARPOL certs = <strong>Recognised Organisation</strong>. Dual roles, one entity.</p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>RO Code mandatory: <strong>1 January 2015</strong></li>
+        <li>Flag State must audit ROs at least <strong>annually</strong></li>
+        <li>Ultimate responsibility always rests with <strong>Flag State</strong> — never RO</li>
+      </ul></div>
+      <div class="tip"><span class="tip-label">Casualty</span>Erika (1999) / Prestige (2002) breakups → accelerated mandatory RO Code to close class inspection gaps.</div>
+    </div>
+  </div>
+
+  <!-- Q15: Casualty Code -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q15</span><div class="card-title">IMO Casualty Investigation Code</div></div>
+    <div class="card-body">
+      <p><strong>SOLAS XI-1/Reg.6 (mandatory 1 Jan 2010):</strong> Flag State must conduct structured safety investigation into <strong>Very Serious Marine Casualties</strong> (total loss, fatality, severe environmental damage).</p>
+      <p><strong>Non-punitive purpose:</strong> Identify root causes to prevent recurrence. Update IMO conventions. Separate completely from criminal or civil liability investigations.</p>
+      <p><strong>Seafarer rights:</strong> Interview in own language, right to legal counsel, medical fitness assessed before interrogation.</p>
+      <div class="kn"><div class="kn-title">CE Action Post-Casualty</div><ul>
+        <li>Preserve VDR data, engine trend files immediately</li>
+        <li>Provide access to: PMS printouts, ORB, fuel sample receipts, safety logs</li>
+        <li>Understand non-punitive context → communicate transparently</li>
+        <li>Stay aware of rights in any parallel criminal inquiry</li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- Q16: PSC -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q16</span><div class="card-title">Port State Control — Duties &amp; Powers</div></div>
+    <div class="card-body">
+      <p><strong>PSC:</strong> Secondary line of defence — enforces SOLAS, MARPOL, STCW, MLC, Load Lines on foreign vessels in national ports. Authority derives from contracting state status.</p>
+      <p><strong>Progressive Powers:</strong><br>
+        Initial Inspection → certificates check<br>
+        <strong>Clear Grounds</strong> (missing certs, oily bilges, confused crew) → Expanded Inspection<br>
+        Deficiency notices: Code 16 (14 days), Code 17 (before departure)<br>
+        <strong>Detention: Code 30</strong></p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>Code 30 = detention</li>
+        <li>MoUs: Tokyo, Paris, Indian Ocean (India member)</li>
+        <li>IMO Res.<strong>A.1155(32)</strong> — PSCO procedures</li>
+        <li>PSC CANNOT inspect charter party/freight invoices</li>
+      </ul></div>
+      <div class="tip"><span class="tip-label">CE Priority Items for PSC</span>Clean bilges, functional OWS + recirculation tested, ORB Part I up to date, emergency generator start confirmed, crew drills executed.</div>
+    </div>
+  </div>
+
+  <div class="section-divider">👥 SEAFARER WELFARE &amp; COMMERCIAL</div>
+
+  <!-- Q8: MLC/RPSL -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q8</span><div class="card-title">MLC 2006 &amp; RPSL</div></div>
+    <div class="card-body">
+      <p><strong>MLC Reg.1.4:</strong> Global standard for seafarer recruitment. No recruitment fees. No blacklists. Financial security against abandonment. SEA signed before joining.</p>
+      <p><strong>RPSL:</strong> National enforcement vehicle issued by DG Shipping, India — proves manning agency compliance with MLC 2006. Shipowners must only use RPSL-licensed agencies (from ratifying countries).</p>
+      <div class="kn"><div class="kn-title">Key Rules</div><ul>
+        <li>Recruitment fees: <strong>strictly prohibited</strong> (exception: medical cert, seaman book, travel gear)</li>
+        <li>Repatriation cost: borne by <strong>company always</strong> — never deducted from wages</li>
+        <li>Financial security: 2014 MLC amendments — mandatory abandonment insurance</li>
+        <li>RPSL = Recruitment &amp; Placement Service Licence (DGS India)</li>
+      </ul></div>
+      <div class="tip"><span class="tip-label">CE Alert</span>If PSC officer interviews engine rating who reveals they paid a bribe to get the contract → immediate MLC non-compliance risk. Regularly brief engine team on MLC rights.</div>
+    </div>
+  </div>
+
+  <!-- Q9: MACN -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q9</span><div class="card-title">MACN — Anti-Corruption Network</div></div>
+    <div class="card-body">
+      <p><strong>MACN (2011):</strong> Maritime Anti-Corruption Network. Global voluntary business network eliminating bribery, extortion, and facilitation payments in ports. NOT an IMO convention — corporate compliance framework.</p>
+      <p><strong>Applies to my vessel:</strong> Yes — A.P. Møller-Maersk is a <strong>founding member</strong> of MACN.</p>
+      <div class="kn"><div class="kn-title">Zero-Tolerance Actions</div><ul>
+        <li>Refuse demand. Document it. Notify port agent + company legal.</li>
+        <li>File MACN anonymous non-compliance report.</li>
+        <li>All port technical interactions logged (prevents false ORB claims).</li>
+        <li>Legal anchors: UK Bribery Act 2010 (S.7), US FCPA</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>MACN ≠ IMO statutory instrument. It is an independent industry-led NGO with IMO consultative status only.</div>
+    </div>
+  </div>
+
+  <!-- Q17: Charter Party -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q17</span><div class="card-title">Charter Party Types &amp; Vessel Representation</div></div>
+    <div class="card-body">
+      <p><strong>Bareboat:</strong> Charterer has full operational/crew control.<br>
+      <strong>Voyage Charter:</strong> Owner carries specific cargo A→B, fixed freight.<br>
+      <strong>Time Charter (Maersk):</strong> Owner provides crew + technical mgmt; charterer controls ports &amp; pays bunkers.</p>
+      <p><strong>Vessel Representation:</strong> Q88 document guarantees speed/consumption, TEU capacity, reefer plug count, EEXI/CII ratings. Misrepresentation → under-performance claim.</p>
+      <div class="kn"><div class="kn-title">Key CE Points</div><ul>
+        <li>Machinery breakdown → vessel <strong>Off-Hire</strong> → owner pays all costs, hire stops</li>
+        <li>Under-performance claim → deduction from charter hire</li>
+        <li>Charterer-supplied off-spec fuel → log BDN dispute immediately</li>
+        <li>Charterer directs ports but <strong>Master has overriding safety authority</strong></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- Q18: Tacit Acceptance -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q18</span><div class="card-title">Tacit Acceptance Procedure</div></div>
+    <div class="card-body">
+      <p><strong>Definition:</strong> IMO amendment automatically enters into force on a pre-determined date UNLESS formally blocked by &gt;1/3 of contracting states OR states representing &gt;50% of world gross tonnage.</p>
+      <p><strong>Process:</strong> MSC/MEPC adopts → 10–18 month review window → if blocking threshold not met → automatic global enforcement.</p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>Block threshold (states): <strong>&gt;1/3</strong> of contracting governments</li>
+        <li>Block threshold (tonnage): <strong>&gt;50%</strong> of world gross tonnage</li>
+        <li>Applies to: <strong>technical Annexes &amp; Codes</strong> only — NOT core Articles</li>
+        <li>Core Articles = explicit acceptance (manual ratification) still required</li>
+        <li>Real example: MARPOL Annex VI 0.50% sulphur cap (IMO 2020)</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>Core Articles (SOLAS Art.VIII itself) require Explicit Acceptance. Tacit = Annexes and technical Codes only.</div>
+    </div>
+  </div>
+
+  <!-- Q21: Gender Equality -->
+  <div class="card">
+    <div class="card-head"><span class="card-num">Q21</span><div class="card-title">IMO Gender Equality Initiatives</div></div>
+    <div class="card-body">
+      <p><strong>Strategic alignment:</strong> UN SDG 5 — achieve gender equality and empower all women and girls.</p>
+      <p><strong>4 Key IMO Actions:</strong><br>
+        1. Women in Maritime Programme — WMU (Sweden) + IMLI (Malta) fellowships<br>
+        2. 8 regional WIMAs (Africa, Asia, LatAm, Caribbean, ME, Pacific)<br>
+        3. STCW Code amendments — eliminating shipboard harassment during watchkeeping<br>
+        4. International Day for Women in Maritime — <strong>18 May</strong> annually</p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>Women = <strong>1.2%</strong> of global seafarer workforce</li>
+        <li>8 regional WIMAs worldwide</li>
+        <li>Annual recognition: <strong>18 May</strong></li>
+        <li>No mandatory hiring quotas under SOLAS/MARPOL — corporate/national law</li>
+      </ul></div>
+      <div class="tip"><span class="tip-label">CE Answer</span>"As CE I enforce zero-tolerance against harassment, equal PPE in all sizes, merit-based task assignment, and clear reporting channels per Maersk DEI policy."</div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <strong>Marine Intelligence Weekly — QB1_B Cheat Sheet</strong> · v1.0 · June 2026<br>
+  Compiled by Nixon Antony, 2/E, Maersk A/S · MEO Class 1 Kochi MMD Oral Exam Preparation<br>
+  Corrections: <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a> · Full QB: <a href="QB1_B.html">QB1_B.html</a><br>
+  <em>Q2 stripping limit corrected (post-2007 ships = 30 litres, not 75 litres). Q10 Bunker Convention 2001 distinction validated. All other answers verified.</em>
+</footer>
+
+</body>
+</html>

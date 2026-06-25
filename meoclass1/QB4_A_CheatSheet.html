@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>QB4 Cheat Sheet — ISM, ISPS, MLC &amp; STCW | MIW MEO Class 1</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;
+  --orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;
+  --grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI', system-ui, sans-serif;background:var(--off-white);color:var(--ink);line-height:1.45;}
+a{color:var(--teal-dark);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.topbar{position:sticky;top:0;z-index:100;background:var(--navy);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 20px;font-size:14px;}
+.topbar .logo-mark{width:30px;height:30px;border-radius:6px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;}
+.topbar .site-name{font-weight:600;letter-spacing:0.3px;flex-shrink:0;}
+.topbar nav{margin-left:auto;display:flex;gap:18px;}
+.topbar nav a{color:#cbd5e1;font-size:13px;}
+.topbar nav a:hover{color:#fff;}
+.page-header{background:var(--navy);color:#fff;padding:24px 20px 18px;}
+.page-header .qb-badge{display:inline-block;background:var(--orange);color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:8px;}
+.page-header h1{font-size:22px;font-weight:700;margin-bottom:4px;}
+.page-header .sub-desc{color:#cbd5e1;font-size:13.5px;max-width:760px;}
+.print-note{background:var(--teal-light);color:var(--teal-dark);font-size:12px;text-align:center;padding:6px;font-weight:600;}
+.wrap{max-width:1100px;margin:0 auto;padding:20px;}
+.cs-section{margin-bottom:28px;}
+.cs-section h2{font-size:16px;font-weight:700;color:var(--ink);margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--grey-border);display:flex;align-items:center;gap:8px;}
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(260px,1fr));gap:12px;}
+.cs-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;padding:14px 16px;}
+.cs-card h3{font-size:11px;text-transform:uppercase;letter-spacing:0.6px;color:var(--teal-dark);font-weight:700;margin-bottom:8px;}
+.cs-card p,.cs-card li{font-size:13px;color:var(--ink);}
+.cs-card ul{margin:0 0 0 16px;}
+.cs-card li{margin-bottom:4px;}
+table{width:100%;border-collapse:collapse;font-size:12.5px;background:#fff;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+th{background:var(--navy);color:#fff;text-align:left;padding:8px 10px;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;}
+td{padding:7px 10px;border-top:1px solid var(--grey-border);}
+tr:nth-child(even) td{background:var(--grey-bg);}
+.num-hero{display:flex;flex-wrap:wrap;gap:10px;}
+.num-pill{background:var(--navy);color:#fff;border-radius:8px;padding:10px 14px;flex:1 1 150px;min-width:140px;}
+.num-pill .n{font-family:monospace;font-size:18px;font-weight:700;color:var(--orange);}
+.num-pill .lbl{font-size:11px;color:#cbd5e1;margin-top:2px;}
+.alert-box{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:14px 16px;margin-bottom:12px;}
+.alert-box strong{color:var(--orange);}
+.alert-box p{font-size:13px;margin-top:4px;}
+.danger-box{background:#fef2f2;border-left:4px solid #dc2626;border-radius:0 8px 8px 0;padding:14px 16px;margin-bottom:12px;}
+.danger-box strong{color:#dc2626;}
+.danger-box p{font-size:13px;margin-top:4px;}
+.chain-flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:12.5px;margin-bottom:10px;}
+.chain-node{background:var(--teal-light);color:var(--teal-dark);padding:5px 10px;border-radius:14px;font-weight:600;white-space:nowrap;}
+.chain-arrow{color:var(--grey-text);font-weight:700;}
+.trap-rapid{background:#fff;border:1px solid var(--grey-border);border-radius:8px;padding:0;overflow:hidden;}
+.trap-row{display:grid;grid-template-columns:36px 1fr 1fr;gap:10px;padding:8px 12px;border-bottom:1px solid var(--grey-border);font-size:12.5px;align-items:center;}
+.trap-row:last-child{border-bottom:none;}
+.trap-row:nth-child(even){background:var(--grey-bg);}
+.trap-row .qnum{font-weight:700;color:var(--teal-dark);text-align:center;}
+.trap-row .tq{font-weight:600;color:var(--ink);}
+.trap-row .ta{color:var(--grey-text);}
+.trap-header{display:grid;grid-template-columns:36px 1fr 1fr;gap:10px;padding:8px 12px;background:var(--navy);color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;font-weight:700;}
+.toc-jump{position:sticky;top:48px;z-index:90;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 20px;display:flex;gap:8px;flex-wrap:wrap;font-size:12px;}
+.toc-jump a{background:var(--grey-bg);color:var(--ink);padding:5px 10px;border-radius:14px;font-weight:600;}
+.toc-jump a:hover{background:var(--teal-light);color:var(--teal-dark);text-decoration:none;}
+.page-footer{background:var(--navy);color:#cbd5e1;padding:24px 20px;font-size:12px;text-align:center;}
+.page-footer a{color:var(--teal-light);}
+.page-footer .disclaimer{max-width:700px;margin:10px auto 0;color:#94a3b8;font-size:11px;}
+@media print{
+  .topbar,.toc-jump,.print-note{display:none;}
+  body{background:#fff;}
+  .cs-card,table,.alert-box,.danger-box{break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo-mark">MIW</div>
+  <div class="site-name">Marine Intelligence Weekly</div>
+  <nav>
+    <a href="https://marineintelligenceweekly.com/">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/QB4.html">QB4 Full</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <span class="qb-badge">QB4 Cheat Sheet</span>
+  <h1>ISM, ISPS, MLC 2006 &amp; STCW — Cram Companion</h1>
+  <p class="sub-desc">Dense visual reference for last-mile revision — numbers, resolution disambiguation, examiner chains, and rapid-fire traps. Use alongside the full QB4 for deep answers; use this the night before the oral.</p>
+</div>
+<div class="print-note">🖨 Printable — use your browser's Print (Ctrl/Cmd+P) for a paper cram sheet.</div>
+
+<div class="toc-jump">
+  <a href="#numbers">🔢 Numbers</a>
+  <a href="#resolutions">📜 Resolutions</a>
+  <a href="#docs">📋 Docs Map</a>
+  <a href="#chains">🔗 Examiner Chains</a>
+  <a href="#traps">⚡ Rapid Traps</a>
+  <a href="#authority">⚖ Authority Map</a>
+</div>
+
+<div class="wrap">
+
+  <div class="cs-section" id="numbers">
+    <h2>🔢 Core Numbers — Memorise Cold</h2>
+    <div class="num-hero">
+      <div class="num-pill"><div class="n">5 yr</div><div class="lbl">DOC / SMC / ISSC / MLC Cert validity</div></div>
+      <div class="num-pill"><div class="n">2nd–3rd yr</div><div class="lbl">Intermediate verification window (all 5-yr certs)</div></div>
+      <div class="num-pill"><div class="n">6 mo</div><div class="lbl">Interim ISSC max, non-renewable</div></div>
+      <div class="num-pill"><div class="n">14 / 72</div><div class="lbl">Max work: hrs/24h — hrs/7d</div></div>
+      <div class="num-pill"><div class="n">10 / 77</div><div class="lbl">Min rest: hrs/24h — hrs/7d</div></div>
+      <div class="num-pill"><div class="n">2 / ≥6 / ≤14</div><div class="lbl">Rest split: max periods / min one period / max interval (hrs)</div></div>
+      <div class="num-pill"><div class="n">3 yr</div><div class="lbl">Work/rest record retention minimum</div></div>
+      <div class="num-pill"><div class="n">≥500 GT</div><div class="lbl">ISM / ISPS / MLC applicability threshold</div></div>
+      <div class="num-pill"><div class="n">≥3,000 kW</div><div class="lbl">STCW III/2 — Chief/2nd Engineer threshold</div></div>
+      <div class="num-pill"><div class="n">3 mo</div><div class="lbl">ISM corrective action plan timescale (minor &amp; major NC)</div></div>
+      <div class="num-pill"><div class="n">12 mo</div><div class="lbl">ISM internal audit max interval</div></div>
+      <div class="num-pill"><div class="n">14 + 2</div><div class="lbl">MLC Title 5 areas (8 working + 6 living) + 2 financial security (2014 amdt) = 16 inspectable items</div></div>
+      <div class="num-pill"><div class="n">0.05% / 0.25mg/L</div><div class="lbl">STCW alcohol limit (BAC / breath) — Maersk = 0.00%</div></div>
+      <div class="num-pill"><div class="n">~USD 3M</div><div class="lbl">GCAF benchmark — cost per fatality averted</div></div>
+      <div class="num-pill"><div class="n">Action 17</div><div class="lbl">PSC deficiency code = detention</div></div>
+      <div class="num-pill"><div class="n">150m / 1999</div><div class="lbl">SOLAS Ch XII Reg 5 — one-hold flooding threshold / in-force date</div></div>
+    </div>
+  </div>
+
+  <div class="cs-section" id="resolutions">
+    <h2>📜 Resolution Number Disambiguation — The #1 Examiner Trap Zone</h2>
+    <div class="danger-box">
+      <strong>⚠ DO NOT CONFLATE THESE</strong>
+      <p>Q19/Q20 — examiners specifically test whether candidates attribute amendments to the correct resolution. Two different 2022 resolutions are easily mixed up:</p>
+    </div>
+    <table>
+      <tr><th>Resolution</th><th>Adopted</th><th>Scope</th><th>In Force</th></tr>
+      <tr><td><strong>MSC.496(105)</strong></td><td>MSC 105, April 2022</td><td>SOLAS Ch II-1, III, IV, V + appendix (Certificates) — includes <strong>II-1 Reg 25-1</strong> water level detectors for multi-hold cargo ships</td><td><strong>1 January 2024</strong></td></tr>
+      <tr><td><strong>MSC.520(106)</strong></td><td>MSC 106, November 2022</td><td>SOLAS Ch II-2 only — <strong>Energy Storage System / battery fire protection</strong></td><td><strong>1 January 2026</strong></td></tr>
+      <tr><td>IMO Res. A.1185(33)</td><td>IMO Assembly, 6 Dec 2023</td><td>Procedures for Port State Control, 2023 — supersedes A.1155(32) → A.1138(31)</td><td>Current (cite this, not A.1138)</td></tr>
+      <tr><td>MSC.349(92) / MEPC.237(65)</td><td>MSC 92 / MEPC 65</td><td>IMO RO Code — mandatory standards for Recognised Organisations</td><td>1 Jan 2015</td></tr>
+      <tr><td>MSC.1/Circ.1647</td><td>—</td><td>Interim safety guidelines, ESS / low-flashpoint fuel systems</td><td>Interim guidance (pre-MSC.520(106) full force)</td></tr>
+      <tr><td>MSC.1/Circ.1405/Rev.3</td><td>—</td><td>IP Code — PCASP / AEOS interim guidance</td><td>Current</td></tr>
+    </table>
+    <div class="alert-box">
+      <strong>One-line recall:</strong>
+      <p>"<strong>'05 for Reg 25-1, '06 for batteries, both 2022, different in-force years</strong>" — MSC.496(105) = 2024, MSC.520(106) = 2026.</p>
+    </div>
+  </div>
+
+  <div class="cs-section" id="docs">
+    <h2>📋 Document Issuance &amp; Inspectability Map</h2>
+    <div class="cs-grid">
+      <div class="cs-card">
+        <h3>ISM — DOC / SMC</h3>
+        <ul>
+          <li><strong>DOC</strong> → Company (certified copy onboard, original ashore)</li>
+          <li><strong>SMC</strong> → Ship directly</li>
+          <li>Loss of DOC → SMCs invalid → ship cannot trade</li>
+        </ul>
+      </div>
+      <div class="cs-card">
+        <h3>ISPS — ISSC / SSP</h3>
+        <ul>
+          <li><strong>ISSC</strong> 5yr, intermediate 2nd–3rd yr</li>
+          <li><strong>Interim ISSC</strong> max 6mo, non-renewable, no 2 consecutive for same reason</li>
+          <li><strong>SSP</strong> = CONFIDENTIAL — PSCO sees ISSC + DoS, not SSP text</li>
+          <li>Security level set ONLY by Contracting Government</li>
+        </ul>
+      </div>
+      <div class="cs-card">
+        <h3>MLC — DMLC I &amp; II</h3>
+        <ul>
+          <li><strong>Part I</strong> → Flag State (the laws)</li>
+          <li><strong>Part II</strong> → Company, Flag-approved (the measures)</li>
+          <li>Both PSC-inspectable (unlike SSP)</li>
+          <li>16 items now: 14 core + 2 financial security (2014 amdt)</li>
+        </ul>
+      </div>
+      <div class="cs-card">
+        <h3>PSC vs FSI vs Internal Audit</h3>
+        <ul>
+          <li><strong>FSI</strong> issues/suspends certs (UNCLOS Art 94)</li>
+          <li><strong>PSC</strong> detains, cannot cancel certs (UNCLOS Art 218/219)</li>
+          <li><strong>ISM Internal Audit</strong> raises "non-conformities" — separate from PSC "deficiencies"</li>
+        </ul>
+      </div>
+      <div class="cs-card">
+        <h3>Flag State vs RO</h3>
+        <ul>
+          <li>Flag State delegates <strong>functions</strong>, never <strong>responsibility</strong> (UNCLOS Art 94)</li>
+          <li>RO = e.g. IRS for Indian-flagged vessels, authorised under SOLAS Ch I/Reg 6</li>
+        </ul>
+      </div>
+      <div class="cs-card">
+        <h3>Class Notations</h3>
+        <ul>
+          <li><strong>Recommendation</strong> = non-binding</li>
+          <li><strong>CoC</strong> = binding, due date, suspension if missed</li>
+          <li><strong>Immediate CoC</strong> = before sailing</li>
+          <li>Suspension → ALL RO-issued statutory certs invalid simultaneously + P&amp;I cover typically void</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="cs-section" id="chains">
+    <h2>🔗 Examiner Question Chains — How One Question Leads to the Next</h2>
+    <div class="chain-flow">
+      <span class="chain-node">Q1 ISM Objective</span><span class="chain-arrow">→</span>
+      <span class="chain-node">DOC vs SMC</span><span class="chain-arrow">→</span>
+      <span class="chain-node">DPA role</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q2 CE's SMS role</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q3 NC timescales</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q4 Internal audit</span>
+    </div>
+    <div class="chain-flow">
+      <span class="chain-node">Q5 PSC inspection</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q6 PSC detention</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q7 FSI vs PSC</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q8 Flag State vs RO</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q9 Condition of Class</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q10 Statutory certs</span>
+    </div>
+    <div class="chain-flow">
+      <span class="chain-node">Q11 ISPS certs/levels</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q12 SSP contents</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q13 STCW security training</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q14 DMLC I/II</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q15 Hours work/rest</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q16 MLC Certificate</span>
+    </div>
+    <div class="chain-flow">
+      <span class="chain-node">Q17 STCW Ch VIII</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q18 Manila Amendments</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q19 FSA / Li-ion</span><span class="chain-arrow">→</span>
+      <span class="chain-node">Q20 SOLAS Ch XII / MSC.520(106)</span><span class="chain-arrow">→</span>
+      <span class="chain-node">🔁 loops to Q19 ESS fire protection</span>
+    </div>
+  </div>
+
+  <div class="cs-section" id="traps">
+    <h2>⚡ Rapid-Fire Trap Q&amp;A — 60-Second Pre-Oral Pass</h2>
+    <div class="trap-rapid">
+      <div class="trap-header"><span>Q#</span><span>Trap Question</span><span>Correct Answer (one line)</span></div>
+      <div class="trap-row"><span class="qnum">Q1</span><span class="tq">Who issues DOC / SMC?</span><span class="ta">DOC→Company; SMC→Ship; both via Flag/RO</span></div>
+      <div class="trap-row"><span class="qnum">Q3</span><span class="tq">Is "deficiency" = "non-conformity"?</span><span class="ta">No — PSC term vs ISM audit term</span></div>
+      <div class="trap-row"><span class="qnum">Q4</span><span class="tq">Can Master audit engine dept?</span><span class="ta">Yes — independent of daily ops</span></div>
+      <div class="trap-row"><span class="qnum">Q5</span><span class="tq">Which MOU governs Indian ports?</span><span class="ta">Indian Ocean MOU (via DGS India)</span></div>
+      <div class="trap-row"><span class="qnum">Q6</span><span class="tq">Does appeal lift detention?</span><span class="ta">No — ship stays detained pending outcome</span></div>
+      <div class="trap-row"><span class="qnum">Q7</span><span class="tq">Can PSCO cancel a certificate?</span><span class="ta">No — only Flag State can</span></div>
+      <div class="trap-row"><span class="qnum">Q8</span><span class="tq">Can Flag State transfer responsibility to RO?</span><span class="ta">No — functions only, not responsibility</span></div>
+      <div class="trap-row"><span class="qnum">Q9</span><span class="tq">What happens to certs when class suspended?</span><span class="ta">ALL RO-issued statutory certs invalid simultaneously</span></div>
+      <div class="trap-row"><span class="qnum">Q10</span><span class="tq">Is original DOC carried onboard?</span><span class="ta">No — certified copy only; original ashore</span></div>
+      <div class="trap-row"><span class="qnum">Q11</span><span class="tq">Who sets the security level?</span><span class="ta">Only the Contracting Government — never the ship</span></div>
+      <div class="trap-row"><span class="qnum">Q12</span><span class="tq">Can PSCO read the SSP?</span><span class="ta">No — confidential; sees ISSC + DoS only</span></div>
+      <div class="trap-row"><span class="qnum">Q13</span><span class="tq">How many crew need AEOS?</span><span class="ta">No fixed IMO number — SSP-defined roles only</span></div>
+      <div class="trap-row"><span class="qnum">Q14</span><span class="tq">Who issues DMLC Part II?</span><span class="ta">Company prepares; Flag State/RO approves</span></div>
+      <div class="trap-row"><span class="qnum">Q15</span><span class="tq">Can rest split into 3 periods?</span><span class="ta">No — max 2 periods, one ≥6 hrs</span></div>
+      <div class="trap-row"><span class="qnum">Q16</span><span class="tq">Is DMLC same as MLC Certificate?</span><span class="ta">No — two distinct documents, cert invalid without DMLC</span></div>
+      <div class="trap-row"><span class="qnum">Q18</span><span class="tq">Your CoC basis?</span><span class="ta">STCW III/2, ≥3,000 kW</span></div>
+      <div class="trap-row"><span class="qnum">Q19</span><span class="tq">Can CO2 stop Li-ion fire?</span><span class="ta">No — internal oxygen generation; water flooding instead</span></div>
+      <div class="trap-row"><span class="qnum">Q20</span><span class="tq">Does Ch XII apply to container ships?</span><span class="ta">No — bulk carriers only; cite II-1 Reg 25-1 instead</span></div>
+      <div class="trap-row"><span class="qnum">Q20</span><span class="tq">MSC.520(106) in-force date?</span><span class="ta">1 January 2026 (not 2024 — that's MSC.496(105))</span></div>
+    </div>
+  </div>
+
+  <div class="cs-section" id="authority">
+    <h2>⚖ Authority Boundary Map — Who Can Do What</h2>
+    <table>
+      <tr><th>Body</th><th>Can Issue Certs?</th><th>Can Suspend/Cancel Certs?</th><th>Can Detain Ship?</th><th>Legal Basis</th></tr>
+      <tr><td>Flag State</td><td>YES</td><td>YES</td><td>N/A (own ship)</td><td>UNCLOS Art 94</td></tr>
+      <tr><td>RO (acting for Flag State)</td><td>YES (delegated)</td><td>Triggers suspension via class action</td><td>No</td><td>SOLAS Ch I/Reg 6</td></tr>
+      <tr><td>Port State (PSCO)</td><td>NO</td><td>NO</td><td>YES — Action Code 17</td><td>UNCLOS Art 218/219, SOLAS Ch I/Reg 19</td></tr>
+      <tr><td>Classification Society</td><td>Class certs only (not statutory)</td><td>YES — class notations/suspension</td><td>No (indirect via cert invalidity)</td><td>IACS PR No.1/3</td></tr>
+      <tr><td>Company (ISM)</td><td>No (Flag/RO issues DOC)</td><td>No</td><td>No</td><td>ISM Code §3</td></tr>
+      <tr><td>Master</td><td>No</td><td>No</td><td>No</td><td>ISM §5.2 — overriding safety authority only</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<div class="page-footer">
+  <p>Marine Intelligence Weekly · QB4 Cheat Sheet · ISM, ISPS, MLC 2006 &amp; STCW · v1.0 · June 2026</p>
+  <p style="margin-top:6px;">Companion to QB4 full question bank — for deep answers, regulatory reasoning, and CE Oral Tips, refer to the <a href="https://marineintelligenceweekly.com/meoclass1/QB4.html">full QB4</a>. Compiled by <strong style="color:#e2e8f0;">Nixon Antony, 2/E, Maersk A/S</strong>.</p>
+  <p class="disclaimer">This cheat sheet is a memorisation aid only — verify all resolution numbers and in-force dates against current IMO instrument text before your examination, particularly MSC.520(106) and MSC.496(105), which are easily confused.</p>
+</div>
+
+</body>
+</html>

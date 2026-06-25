@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>QB2_C — Fire Safety, LSA &amp; FSS Code | MIW MEO Class 1</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.6;-webkit-user-select:none;-ms-user-select:none;user-select:none;}
+a{color:var(--teal-dark);text-decoration:none;}a:hover{text-decoration:underline;}
+.topbar{position:sticky;top:0;z-index:100;background:var(--navy);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 20px;font-size:14px;}
+.topbar .logo-mark{width:30px;height:30px;border-radius:6px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;}
+.topbar .site-name{font-weight:600;letter-spacing:0.3px;flex-shrink:0;}
+.topbar nav{margin-left:auto;display:flex;gap:18px;}
+.topbar nav a{color:#cbd5e1;font-size:13px;}
+.topbar nav a:hover{color:#fff;}
+.page-header{background:var(--navy);color:#fff;padding:28px 20px 22px;}
+.page-header .qb-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:10px;}
+.page-header h1{font-size:24px;font-weight:700;margin-bottom:6px;}
+.page-header .sub-desc{color:#cbd5e1;font-size:14px;max-width:760px;}
+.header-meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:#94a3b8;}
+.header-meta strong{color:#e2e8f0;}
+.controls-bar{position:sticky;top:48px;z-index:90;background:#fff;border-bottom:1px solid var(--grey-border);padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+#search-input{flex:1 1 220px;max-width:340px;padding:8px 12px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px;}
+#search-input:focus{outline:none;border-color:var(--teal);}
+.filter-btn{background:var(--grey-bg);border:1px solid var(--grey-border);color:var(--grey-text);font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;cursor:pointer;transition:all .15s;}
+.filter-btn:hover{background:var(--teal-light);color:var(--teal-dark);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{margin-left:auto;font-size:12px;color:var(--grey-text);font-weight:600;}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:24px;max-width:1100px;margin:0 auto;padding:24px 20px 60px;}
+@media(max-width:800px){.main-layout{grid-template-columns:1fr;}.sidebar{display:none;}}
+.sidebar{position:sticky;top:110px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;font-size:13px;}
+.sidebar h3{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;border-radius:5px;color:var(--ink);font-size:13px;border-left:2px solid transparent;transition:all .15s;}
+.toc-link:hover{background:var(--teal-light);text-decoration:none;}
+.toc-link.active{background:var(--teal-light);border-left:2px solid var(--teal);color:var(--teal-dark);font-weight:600;}
+.sidebar .divider{border-top:1px solid var(--grey-border);margin:14px 0;}
+.sidebar .upcoming-note{background:var(--grey-bg);border-radius:6px;padding:10px;font-size:12px;color:var(--grey-text);}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 12px;}
+.section-head h2{font-size:16px;font-weight:700;color:var(--ink);}
+.sec-count{font-size:11px;font-weight:700;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:10px;}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;margin-bottom:10px;overflow:hidden;}
+.q-header{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;transition:background .15s;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{flex-shrink:0;width:28px;height:28px;border-radius:6px;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.q-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.q-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:2px 8px;border-radius:10px;background:var(--grey-bg);color:var(--grey-text);}
+.q-tag.tag-solas{background:#e0f2fe;color:#0369a1;}
+.q-tag.tag-marpol{background:#fef3c7;color:#92400e;}
+.q-tag.tag-iacs{background:#ede9fe;color:#5b21b6;}
+.q-tag.tag-survey{background:var(--teal-light);color:var(--teal-dark);}
+.q-tag.tag-stability{background:#fce7f3;color:#9d174d;}
+.q-tag.tag-machinery{background:#dbeafe;color:#1e40af;}
+.q-tag.tag-ghg{background:#dcfce7;color:#166534;}
+.q-tag.tag-stcw{background:#ffe4e6;color:#9f1239;}
+.q-tag.tag-ism{background:#fef3c7;color:#92400e;}
+.q-tag.tag-isps{background:#ede9fe;color:#5b21b6;}
+.q-tag.tag-mlc{background:#fce7f3;color:#9d174d;}
+.q-tag.tag-fire{background:#fee2e2;color:#991b1b;}
+.q-tag.tag-management{background:#d1fae5;color:#065f46;}
+.q-chevron{flex-shrink:0;width:20px;height:20px;stroke:var(--grey-text);transition:transform .2s;}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 16px 16px;border-top:1px solid var(--grey-border);}
+.q-card.open .q-answer{display:block;padding-top:14px;}
+.answer-body{font-family:'Georgia',serif;font-size:14px;color:var(--ink);line-height:1.7;}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:0.8px;color:var(--teal-dark);font-family:'Segoe UI',system-ui,sans-serif;font-weight:700;margin:16px 0 6px;}
+.answer-body h4:first-child{margin-top:0;}
+.answer-body p{margin-bottom:10px;}
+.answer-body ul,.answer-body ol{margin:0 0 10px 22px;}
+.answer-body li{margin-bottom:5px;}
+.answer-body strong{color:var(--ink);font-weight:700;}
+.answer-body em{color:var(--grey-text);font-style:italic;}
+.answer-body code{background:var(--grey-bg);padding:1px 4px;border-radius:3px;font-size:12px;}
+.answer-body table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;}
+.answer-body th{background:var(--navy);color:#fff;padding:6px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;}
+.answer-body td{padding:6px 10px;border-bottom:1px solid var(--grey-border);vertical-align:top;}
+.answer-body tr:last-child td{border-bottom:none;}
+.answer-body pre{background:var(--grey-bg);padding:10px 12px;border-radius:6px;margin:10px 0;font-size:12px;overflow-x:auto;white-space:pre-wrap;font-family:monospace;}
+.formula{font-family:monospace;background:var(--grey-bg);padding:8px 12px;border-radius:6px;margin:8px 0;font-size:13px;display:block;}
+.practice-block{background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 6px 6px 0;padding:10px 14px;margin-bottom:10px;font-family:'Georgia',serif;font-size:13.5px;color:var(--ink);}
+.practice-block .pb-label{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin-bottom:4px;display:block;}
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;font-family:'Segoe UI',system-ui,sans-serif;}
+.reg-box-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.8px;}
+.reg-item{display:flex;gap:12px;flex-wrap:wrap;padding:5px 0;border-bottom:1px solid #1e293b;font-size:12.5px;}
+.reg-item:last-child{border-bottom:none;}
+.reg-code{color:var(--orange);font-family:monospace;font-weight:700;flex:0 0 auto;min-width:0;word-break:break-all;}
+.reg-desc{color:#cbd5e1;flex:1;min-width:0;}
+.ce-tip{background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 6px 6px 0;padding:12px 14px;margin:14px 0;font-size:13.5px;color:#7c2d12;}
+.ce-tip strong{color:var(--orange);}
+.deep-dive{margin-top:14px;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive summary{cursor:pointer;padding:10px 14px;font-family:'Segoe UI',system-ui,sans-serif;font-size:12.5px;font-weight:700;color:var(--teal-dark);background:var(--grey-bg);list-style:none;display:flex;align-items:center;gap:8px;}
+.deep-dive summary::-webkit-details-marker{display:none;}
+.deep-dive summary::before{content:"▸";font-size:11px;}
+.deep-dive[open] summary::before{content:"▾";}
+.deep-dive-body{padding:12px 14px;font-size:13.5px;line-height:1.6;}
+.deep-dive-body h5{font-size:11px;text-transform:uppercase;letter-spacing:0.6px;color:var(--grey-text);margin:10px 0 4px;font-family:'Segoe UI',system-ui,sans-serif;}
+.deep-dive-body h5:first-child{margin-top:0;}
+.deep-dive-body p{margin-bottom:8px;}
+.deep-dive-body ul{margin:0 0 8px 18px;}
+.deep-dive-body li{margin-bottom:4px;}
+.deep-dive-body .trap-q{font-weight:700;color:var(--ink);}
+.deep-dive-body .trap-a{color:var(--grey-text);margin-bottom:8px;}
+.q-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 16px;background:var(--grey-bg);font-size:11.5px;color:var(--grey-text);border-top:1px solid var(--grey-border);}
+.q-version{flex-shrink:0;font-weight:600;}
+#no-results{display:none;text-align:center;padding:60px 20px;color:var(--grey-text);}
+.page-footer{background:var(--navy);color:#cbd5e1;padding:30px 20px;font-size:12.5px;text-align:center;}
+.page-footer a{color:var(--teal-light);}
+.page-footer .disclaimer{max-width:700px;margin:12px auto 0;color:#94a3b8;font-size:11.5px;}
+</style>
+</head>
+<body>
+<div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.04;"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="wm" x="0" y="0" width="300" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><text x="10" y="60" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">marineintelligenceweekly.com</text><text x="10" y="120" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">MEO CLASS 1 — CONFIDENTIAL</text></pattern></defs><rect width="100%" height="100%" fill="url(#wm)"/></svg></div>
+<div class="topbar"><div class="logo-mark">MIW</div><div class="site-name">Marine Intelligence Weekly</div><nav><a href="https://marineintelligenceweekly.com/">Home</a><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a><a href="https://marineintelligenceweekly.com/contact.html">Contact</a></nav></div>
+<div class="page-header">
+  <span class="qb-badge">QB2_C · MEO Class 1 Question Bank</span>
+  <h1>Fire Safety, LSA &amp; FSS Code</h1>
+  <p class="sub-desc">4 oral-exam questions from June 2026 covering latest SOLAS Chapter II-2 amendments (MSC.520(106)), undeclared dangerous goods fire response, container fire with unknown cargo, and water mist lance / portable water monitor specifications.</p>
+  <div class="header-meta">
+    <span><strong>Compiled by:</strong> Nixon Antony, 2/E, Maersk A/S</span>
+    <span><strong>Examiners:</strong> Nair (DG fire/container), Simon (amendments)</span>
+    <span><strong>Version:</strong> v1.0 · June 2026</span>
+  </div>
+</div>
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
+<button class="filter-btn" onclick="filterTag('fire',this)">FIRE</button>
+<button class="filter-btn" onclick="filterTag('solas',this)">SOLAS</button>
+<button class="filter-btn" onclick="filterTag('survey',this)">SURVEY</button>
+<button class="filter-btn" onclick="filterTag('ism',this)">ISM</button>
+  <span id="q-count-label">Showing 4 of 4</span>
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <h3>Contents</h3>
+    <a class="toc-link" href="#q1">Q1. SOLAS Ch II-2 Latest Amendments (MSC.520(106))</a>
+<a class="toc-link" href="#q2">Q2. Undeclared DG Fire — CE Approach</a>
+<a class="toc-link" href="#q3">Q3. Container Fire — Unknown Cargo</a>
+<a class="toc-link" href="#q4">Q4. Water Mist Lance &amp; Portable Water Monitor</a>
+    <div class="divider"></div>
+    <div class="upcoming-note">Next: <strong>QB3_C — MARPOL &amp; Environmental</strong></div>
+  </div>
+  <div id="q-feed"><div class="section-head"><h2>🔥 Fire Safety, LSA &amp; FSS Code</h2><span class="sec-count">4 questions</span></div>
+    <div class="q-card" id="q1" data-tags="fire solas survey">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">EDITORIAL CORRECTION:** MSC.520(106) covers SOLAS Ch II-2 fire safety for container ships (water mist lance, portable wa</div>
+          <div class="q-tags"><span class="q-tag tag-fire">FIRE</span><span class="q-tag tag-solas">SOLAS</span><span class="q-tag tag-survey">SURVEY</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>The latest <strong>SOLAS Chapter II-2 amendments</strong> (primarily <strong>MSC.520(106)</strong> and <strong>⚠CORRECTED: MSC.532(107)</strong>, entering into force on <strong>1 January 2026</strong>) enforce strict fuel oil flashpoint compliance—requiring a supplier declaration and BDN flashpoint notation prior to bunkering—and establish a global ban on firefighting foams containing <strong>PFOS</strong>.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>The recent amendments to SOLAS Chapter II-2 represent a major regulatory shift in operational fuel safety and environmental compliance. Under <strong>Resolution MSC.520(106)</strong>, effective <strong>1 January 2026</strong>, strict controls are placed on fuel oil supply to prevent flashpoints below 60°C. Suppliers must now provide a signed declaration of flashpoint conformity prior to bunkering, and the Bunker Delivery Note (BDN) must explicitly state the flashpoint or confirm it is at or above 70°C. Concurrently, <strong>Resolution ⚠CORRECTED: MSC.532(107)</strong> enforces a complete ban on the use and carriage of firefighting foams containing <strong>Perfluorooctane Sulfonic Acid (PFOS)</strong>, mandating their complete removal and safe shore disposal by the first safety equipment survey on or after 1 January 2026.</div>
+        <div class="answer-body">
+          <h5>Core Technical Changes &amp; Regulatory Framework</h5>
+<p>The recent updates to SOLAS Chapter II-2 introduce mandatory safety layers targeting fuel supply integrity and toxic firefighting agents:</p>
+<h5>1. Oil Fuel Safety Standards (Resolution MSC.520(106))</h5>
+<p>To combat the persistent safety risks of low-flashpoint fuel oils being supplied to commercial vessels, the amendments introduce binding pre-bunkering and documentation loops:</p>
+<ul>
+<li><strong>Pre-Bunkering Declaration:</strong> Prior to starting any bunkering operation, the fuel supplier&#x27;s representative must deliver a signed and certified declaration to the ship confirming that the fuel oil complies with the mandatory minimum flashpoint requirement (not less than 60°C) and specifying the test method utilized.</li>
+<li><strong>Bunker Delivery Note (BDN) Notation:</strong> The BDN must include either the actual measured flashpoint value or a formal statement certifying that the flashpoint has been measured at or above 70°C.</li>
+<li><strong>Administrative Reporting Track:</strong> Governments are required to report all &quot;confirmed cases&quot; where suppliers deliver fuel with a flashpoint below 60°C to the IMO GISIS database, triggering formal enforcement actions against the bunker supplier.</li>
+</ul>
+<h5>2. Prohibition of PFOS-Based Firefighting Media (Resolution ⚠CORRECTED: MSC.532(107))</h5>
+<p>Recognizing the persistent environmental and toxic health risks of fluorinated compounds, the amendment completely outlaws foam concentrates containing Perfluorooctane Sulfonic Acid (PFOS):</p>
+<ul>
+<li><strong>New Ships:</strong> Ships delivered on or after 1 January 2026 are prohibited from using or storing any firefighting media containing PFOS concentrations above 10 mg/kg (0.001% by weight).</li>
+<li><strong>Existing Ships:</strong> Vessels constructed before 1 January 2026 must completely remove and flush out any PFOS-containing foam media no later than the first scheduled <strong>Safety Equipment (SEQ) Survey</strong> following 1 January 2026.</li>
+<li><strong>Disposal Track:</strong> All contaminated foam media removed from the vessel cannot be discharged at sea and must be delivered exclusively to approved shore-based reception facilities, with the operation logged in the Official Log Book (OLB).</li>
+</ul>
+<p>---</p>
+<h5>Extra Sub-Block: Key Verification Documents</h5>
+<ul>
+<li><strong>Flashpoint Conformity:</strong> A signed supplier declaration document + formal BDN entry.</li>
+<li><strong>PFOS Absence:</strong> A formal Maker&#x27;s Declaration or independent laboratory test report confirming a PFOS concentration under 10 mg/kg.</li>
+</ul>
+<h5>Deep-Dive Analysis</h5>
+<ul>
+<li><strong>Trap Questions:</strong> <em>Examiner Nair asks: &quot;If the BDN says &#x27;Flashpoint: Compliant&#x27;, is that acceptable under the 2026 amendments?&quot;</em> <strong>Answer:</strong> No, it is not. The amended text explicitly dictates that the BDN must state the specific measured flashpoint value or explicitly state that the flashpoint has been measured at or above 70°C. Generic terms like &quot;compliant&quot; or &quot;safe&quot; are non-conformities.</li>
+<li><strong>Common CE Failures:</strong> Candidates often state that the PFOS ban applies only to new buildings, completely missing the retroactive mandate requiring existing ships to replace their foam charges by the first scheduled safety equipment survey after 1 January 2026.</li>
+<li><strong>Numbers / Regs:</strong></li>
+<li><strong>SOLAS Reg II-2/4.2.1:</strong> Core flashpoint limit (<em> \ge 60^\circ\text{C} </em>).</li>
+<li><strong>PFOS Concentration Cap:</strong> Maximum 10 mg/kg (0.001% by weight) in new foam charges.</li>
+</ul>
+<ul>
+<li><strong>Casualty Link:</strong> Multiple machinery space explosions have historically been traced back to the accidental bunkering of fuel contaminated with volatile chemical distillates, driving down the flashpoint below 40°C. These incidents caused explosive vapors to leak from fuel tank air vents into the engine room, emphasizing why the IMO introduced Resolution MSC.520(106).</li>
+<li><strong>Examiner Chain:</strong> <em>Nair <em>\rightarrow</em> Simon <em>\rightarrow</em> Rajappan.</em> Nair tests the specific amendment dates and numbers (MSC.520(106)). Simon pivots to verify how low-flashpoint fuel compromises the safety of the engine room settling tanks. Rajappan focuses on the logistics of logging PFOS disposal to shore reception facilities within the Official Log Book.</li>
+<li><strong>On My Vessel (Maersk A/S Container Fleet):</strong> On our Maersk vessels, bunkering protocols have been updated to include a strict check of the pre-delivery declaration form. Our high-capacity fixed local application fire systems and main deck foam monitors have been certified PFOS-free, with the maker’s analytical testing logs safely compiled within our technical inventory for Port State Control inspection.</li>
+</ul>
+          <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">Resolution MSC.520(106)</span><span class="reg-desc">Introduces pre-bunkering declarations and strict BDN flashpoint notations.</span></div><div class="reg-item"><span class="reg-code">Resolution ⚠CORRECTED: MSC.532(107)</span><span class="reg-desc">Mandates the global ban and carriage prohibition of PFOS-based foams.</span></div><div class="reg-item"><span class="reg-code">SOLAS Regulation II-2/4</span><span class="reg-desc">Regulates total probability of ignition by restricting fuel storage and distribution parameters.</span></div><div class="reg-item"><span class="reg-code">IMO MSC.1/Circ.1290</span><span class="reg-desc">Defines unified interpretations for executing the &quot;first survey&quot; compliance checks.</span></div></div>
+          <div class="ce-tip"><strong>CE Oral Tip (Kochi MMD):</strong> Nair heavily targets the exact date and resolution number. Memorize <strong>Resolution MSC.520(106) in force 1 January 2026</strong>. Open your response by stating: <em>&quot;Sir, the latest amendments under MSC.520(106) mandate a pre-bunkering flashpoint declaration from the supplier, shifting the technical verification loop before the fuel crosses the manifold.&quot;</em> This will guarantee a pass mark.</div>
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>Trap Questions</h5><p><em>Examiner Nair asks: &quot;If the BDN says &#x27;Flashpoint: Compliant&#x27;, is that acceptable under the 2026 amendments?&quot;</em> <strong>Answer:</strong> No, it is not. The amended text explicitly dictates that the BDN must state the specific measured flashpoint value or explicitly state that the flashpoint has been measured at or above 70°C. Generic terms like &quot;compliant&quot; or &quot;safe&quot; are non-conformities.</p><h5>Common CE Failures</h5><p>Candidates often state that the PFOS ban applies only to new buildings, completely missing the retroactive mandate requiring existing ships to replace their foam charges by the first scheduled safety equipment survey after 1 January 2026.</p><h5>Numbers &amp; Regs</h5><ul>
+<li><strong>SOLAS Reg II-2/4.2.1:</strong> Core flashpoint limit (<em> \ge 60^\circ\text{C} </em>).</li>
+</ul><h5>Casualty Link</h5><p>Multiple machinery space explosions have historically been traced back to the accidental bunkering of fuel contaminated with volatile chemical distillates, driving down the flashpoint below 40°C. These incidents caused explosive vapors to leak from fuel tank air vents into the engine room, emphasizing why the IMO introduced Resolution MSC.520(106).</p><h5>Examiner Chain</h5><p><em>Nair <em>\rightarrow</em> Simon <em>\rightarrow</em> Rajappan.</em> Nair tests the specific amendment dates and numbers (MSC.520(106)). Simon pivots to verify how low-flashpoint fuel compromises the safety of the engine room settling tanks. Rajappan focuses on the logistics of logging PFOS disposal to shore reception facilities within the Official Log Book.</p></div></details>
+      </div>
+      <div class="q-footer">
+        <span>Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB2_C, Q1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB2_C · Q1 · v1.0</span>
+      </div>
+    </div>
+
+    <div class="q-card" id="q2" data-tags="fire solas ism">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">15-Second Answer (Elevator Pitch)**</div>
+          <div class="q-tags"><span class="q-tag tag-fire">FIRE</span><span class="q-tag tag-solas">SOLAS</span><span class="q-tag tag-ism">ISM</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>Fighting an undeclared Dangerous Goods (DG) container fire requires assuming a worst-case scenario. Treat it as an explosive or toxic substance, utilize maximum boundary cooling from a safe distance, deploy protective gear, and reference the IMDG Emergency Schedule (EmS) guidelines to guide response tactics.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>When an undeclared dangerous goods cargo fire breaks out, the absence of a verified UN number means we cannot immediately consult the standard IMDG documentation. My approach as Chief Engineer is to assume a worst-case scenario—treating the space as containing Class 1 explosives or toxic chemicals. I will direct the fire party to establish defensive boundaries using full structural firefighting sets with breathing apparatus, avoid directing water directly inside the unknown container to prevent a violent chemical reaction, and initiate massive boundary cooling on adjacent bays. Simultaneously, I will have the cargo manifest audited for adjacent container details and coordinate with the Master to contact chemical emergency centers like CHEMTREC.</div>
+        <div class="answer-body">
+          <h5>Operational and Tactical Chief Engineer Response</h5>
+<p>Undeclared dangerous goods represent a severe shipboard hazard because the chemical properties, reactivity, and toxic products of the burning cargo are completely unknown. The response protocol must be systematic and defensive:</p>
+<h5>1. Immediate Safety and Isolation Phase</h5>
+<ul>
+<li><strong>General Alarm Activation:</strong> Sound the general alarm, muster the crew to emergency stations, and ensure the vessel is maneuvered to position the smoke clear of crew muster points.</li>
+<li><strong>Ventilation Isolation:</strong> Immediately trip all cargo hold mechanical ventilation fans and secure fire dampers to starve the space of oxygen and prevent toxic gas migration.</li>
+<li><strong>Personnel Protection:</strong> Mandate that all firefighting team members wear full protective clothing and positive-pressure Self-Contained Breathing Apparatus (SCBA) to guard against unknown toxic vapors.</li>
+</ul>
+<h5>2. Firefighting Tactics (Defensive vs. Aggressive)</h5>
+<ul>
+<li><strong>Worst-Case Assumption:</strong> Treat the container as containing Class 1 explosives or highly reactive water-activated chemicals.</li>
+<li><strong>Massive Boundary Cooling:</strong> Deploy fixed or portable water monitors to cool the surrounding container tiers and deck structures. Do not direct a direct water stream into the unknown container door until its compatibility is evaluated.</li>
+<li><strong>No Door Penetration:</strong> Do not open the container doors or punch a borehole for a water mist lance blindly, as introducing oxygen can trigger a backdraft or explosion.</li>
+</ul>
+<h5>3. Information Gathering and Logistics</h5>
+<ul>
+<li><strong>Stowage Position Analysis:</strong> Cross-check the bay, row, and tier position on the cargo stowage plan. Review the documentation of adjacent containers; if nearby containers hold compatible or reactive goods, it can provide clues about the cargo.</li>
+<li><strong>External Assistance:</strong> Direct the bridge to contact 24-hour chemical emergency networks such as <strong>CHEMTREC (+1-703-527-3887)</strong> or regional maritime rescue coordination centers (MRCC) to leverage ashore expert chemical advice.</li>
+</ul>
+<pre>
+           [Undeclared DG Fire]
+                    |
+                    v
+      [Assume Worst Case: Class 1 / Toxic]
+                    |
+         +----------+----------+
+         v                     v
+[Continuous Boundary Cooling]   [Isolate Mechanical Vent &amp; Dampers]
+         |                     |
+         +----------+----------+
+                    |
+                    v
+    [Contact External Experts (CHEMTREC)]
+
+</pre>
+<p>---</p>
+<h5>Extra Sub-Block: IMDG EmS Reference</h5>
+<ul>
+<li><strong>EmS Fire Schedule F-A:</strong> General Fire Schedule for standard shipboard responses.</li>
+<li><strong>EmS Spillage Schedule S-A:</strong> Toxic substances handling guidelines.</li>
+</ul>
+<h5>Deep-Dive Analysis</h5>
+<ul>
+<li><strong>Trap Questions:</strong> <em>Examiner Nair asks: &quot;The fire team wants to flood the hold immediately with CO2. Do you authorize this for an unknown cargo fire?&quot;</em> <strong>Answer:</strong> No, not blindly. If the undeclared cargo contains self-sustaining oxidizing agents (such as certain Class 5.1 chemicals) or reactive metals (Class 4.3), CO2 can be completely ineffective or can break down chemically, worsening the reaction. Defensive boundary cooling and identifying the cargo must take priority.</li>
+<li><strong>Common CE Failures:</strong> Candidates frequently give a textbook answer for a <em>declared</em> cargo fire, stating they would look up the UN number in the IMDG index. They fail to address the core problem: the cargo is <em>undeclared</em>, meaning there is no UN number available.</li>
+<li><strong>Numbers / Regs:</strong></li>
+<li><strong>IMDG Code Part 3:</strong> Governs dangerous goods lists, special provisions, and exceptions.</li>
+<li><strong>SOLAS Regulation II-2/10:</strong> Prescribes fixed and portable firefighting arrangements for cargo spaces.</li>
+</ul>
+<ul>
+<li><strong>Casualty Link:</strong> The catastrophic explosion aboard the <em>MV Flaminia</em> was intensified by undeclared or improperly documented chemical containers. The initial firefighting attempts lacked specific chemical data, leading to a massive explosion that breached the cargo holds and resulted in fatalities.</li>
+<li><strong>Examiner Chain:</strong> <em>Nair <em>\rightarrow</em> Rajappan <em>\rightarrow</em> Simon.</em> Nair challenges the candidate on handling unknown container hazards. Rajappan evaluates compliance with the Document of Compliance for Ships Carrying Dangerous Goods. Simon focuses on the dynamic stability changes if a cargo hold accumulates tons of free-surface water from continuous boundary cooling.</li>
+<li><strong>On My Vessel (Maersk A/S Container Fleet):</strong> On our Maersk container vessels, handling undeclared cargo relies on strict adherence to the <strong>IMO MSC.1/Circ.1618</strong> guidelines. We deploy portable water monitors configured to operate unmanned on deck, allowing the crew to maintain continuous boundary cooling from a safe distance upwind, protecting them from unexpected flashovers or toxic gas releases.</li>
+</ul>
+          <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">IMDG Code Chapter 7.3</span><span class="reg-desc">Defines operational emergency schedules (EmS) for fire and spillage handling.</span></div><div class="reg-item"><span class="reg-code">SOLAS Regulation II-2/19</span><span class="reg-desc">Outlines structural and equipment carriage requirements for ships carrying dangerous goods.</span></div><div class="reg-item"><span class="reg-code">IMO MSC.1/Circ.1618</span><span class="reg-desc">Establishes updated safety guidelines for minimizing risks from container ship fires.</span></div><div class="reg-item"><span class="reg-code">ISM Code Section 8</span><span class="reg-desc">Mandates that the Safety Management System contains explicit, tested plans for cargo emergencies.</span></div></div>
+          <div class="ce-tip"><strong>CE Oral Tip (Kochi MMD):</strong> When Nair asks this question, emphasize the <strong>&quot;Defensive Approach&quot;</strong>. State clearly: <em>&quot;Sir, because the cargo is undeclared, I will establish a worst-case defensive posture. I will avoid opening the container or using internal water streams to prevent a dynamic chemical reaction, focusing instead on continuous boundary cooling and calling shore-side chemical experts.&quot;</em> Showing a cautious, analytical mindset is what examiners want for a pass.</div>
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>Trap Questions</h5><p><em>Examiner Nair asks: &quot;The fire team wants to flood the hold immediately with CO2. Do you authorize this for an unknown cargo fire?&quot;</em> <strong>Answer:</strong> No, not blindly. If the undeclared cargo contains self-sustaining oxidizing agents (such as certain Class 5.1 chemicals) or reactive metals (Class 4.3), CO2 can be completely ineffective or can break down chemically, worsening the reaction. Defensive boundary cooling and identifying the cargo must take priority.</p><h5>Common CE Failures</h5><p>Candidates frequently give a textbook answer for a <em>declared</em> cargo fire, stating they would look up the UN number in the IMDG index. They fail to address the core problem: the cargo is <em>undeclared</em>, meaning there is no UN number available.</p><h5>Numbers &amp; Regs</h5><ul>
+<li><strong>IMDG Code Part 3:</strong> Governs dangerous goods lists, special provisions, and exceptions.</li>
+</ul><h5>Casualty Link</h5><p>The catastrophic explosion aboard the <em>MV Flaminia</em> was intensified by undeclared or improperly documented chemical containers. The initial firefighting attempts lacked specific chemical data, leading to a massive explosion that breached the cargo holds and resulted in fatalities.</p><h5>Examiner Chain</h5><p><em>Nair <em>\rightarrow</em> Rajappan <em>\rightarrow</em> Simon.</em> Nair challenges the candidate on handling unknown container hazards. Rajappan evaluates compliance with the Document of Compliance for Ships Carrying Dangerous Goods. Simon focuses on the dynamic stability changes if a cargo hold accumulates tons of free-surface water from continuous boundary cooling.</p></div></details>
+      </div>
+      <div class="q-footer">
+        <span>Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB2_C, Q2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB2_C · Q2 · v1.0</span>
+      </div>
+    </div>
+
+    <div class="q-card" id="q3" data-tags="fire solas ism">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">3</div>
+        <div class="q-text-wrap">
+          <div class="q-text">15-Second Answer (Elevator Pitch)**</div>
+          <div class="q-tags"><span class="q-tag tag-fire">FIRE</span><span class="q-tag tag-solas">SOLAS</span><span class="q-tag tag-ism">ISM</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>For a container fire with unknown cargo, sound the general alarm, muster the crew, and isolate cargo hold ventilation. Deploy unmanned portable water monitors from an upwind position for heavy boundary cooling, and do not open the container doors or inject water blindly to avoid triggering a backdraft or violent chemical reaction.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>Managing a container fire with unknown cargo demands a systematic, risk-aware response. First, I will sound the general alarm, muster the crew to fire stations, and immediately isolate the mechanical ventilation and secure the fire dampers of the affected zone. The fire team must don full structural firefighting outfits with positive-pressure breathing apparatus. For an on-deck fire, we will deploy portable water monitors from an upwind position to carry out boundary cooling on adjacent tiers. Crucially, we must not open the container doors or inject water blindly, as this poses an explosion or backdraft risk. We will then utilize the vessel&#x27;s cargo manifest and stowage plan to cross-reference adjacent containers and contact MRCC for external chemical advice.</div>
+        <div class="answer-body">
+          <h5>Systematic Firefighting Approach</h5>
+<p>When the cargo within a burning container is completely unidentified (due to missing, unreadable, or lost documentation), the Chief Engineer must coordinate with the Master to execute a highly disciplined, defensive tactical plan:</p>
+<h5>1. Command, Control, and Isolation</h5>
+<ul>
+<li><strong>Alert System:</strong> Sound the general emergency alarm and muster all crew members to their designated fire stations.</li>
+</ul>
+<ul>
+<li><strong>Vessel Maneuvering:</strong> Direct the bridge to alter course if necessary to keep the engine room casing, accommodation spaces, and the responding fire party upwind of the toxic smoke plume.</li>
+</ul>
+<ul>
+<li><strong>Ventilation Control:</strong> Instantly trip all mechanical ventilation fans servicing the cargo holds and completely secure the mechanical fire dampers to prevent oxygen replenishment and contain toxic fumes.</li>
+</ul>
+<h5>2. On-Deck Tactical Execution</h5>
+<ul>
+<li><strong>Visual Assessment:</strong> Evaluate the container&#x27;s position (bay, row, tier) and note visible indicators such as smoke color, acrid or chemical odors, or structural warping of the container walls.</li>
+</ul>
+<ul>
+<li><strong>Unmanned Boundary Cooling:</strong> Rig and deploy high-capacity portable water monitors on deck to provide continuous cooling to adjacent container bays and tiers. The fire party must retreat to a safe distance once monitors are secured in place to minimize exposure to unexpected structural failure or explosion.</li>
+</ul>
+<ul>
+<li><strong>Door Containment:</strong> Do <strong>NOT</strong> attempt to crack open the container doors. Introducing atmospheric oxygen into a starved, smoldering container can trigger a catastrophic backdraft or thermal explosion.</li>
+</ul>
+<ul>
+<li><strong>Hold Flooding Limitations:</strong> If the container is located inside a cargo hold, realize that fixed <em>CO_2</em> or inert gas flooding is generally ineffective for fires sealed deep within individual containers; focus instead on cooling the surrounding steel structure.</li>
+</ul>
+<h5>3. Data Triangulation and External Liaison</h5>
+<ul>
+<li><strong>Stowage Analysis:</strong> Map the container&#x27;s location against the ship&#x27;s cargo manifest. Even if the target container&#x27;s details are missing, analyzing the cargo profiles of adjacent containers can help identify nearby hazards (such as aerosols, oxidizers, or flammables).</li>
+</ul>
+<ul>
+<li><strong>Shore-Side Assistance:</strong> Coordinate with the Master to contact the Maritime Rescue Coordination Centre (MRCC) and corporate technical channels to request immediate hazardous chemical advice based on the manifest location.</li>
+</ul>
+<ul>
+<li><strong>Abandonment Preparedness:</strong> If the container exhibits signs of rapid, uncontrolled exothermic reactions or explosive cracking, shift the crew entirely to a defensive boundary cooling posture and prepare the lifeboats.</li>
+</ul>
+<p>---</p>
+<h5>Extra Sub-Block: Trap Warning</h5>
+<p><strong>CRITICAL EXAMINER TRAP:</strong> Nair will ask: <em>&quot;If you see smoke coming out of an unknown container, shouldn&#x27;t you immediately use an axe to smash a hole in the side panel and stick a standard fire hose nozzle inside?&quot;</em> <strong>Answer:</strong> Absolutely not. Smashing a hole introduces a sudden rush of oxygen, which can cause a violent backdraft. Furthermore, if the unknown cargo consists of water-reactive chemicals (such as Class 4.3 dangerous goods), injecting high-velocity water can cause an explosion. A specialized water mist lance must only be used through a drilled borehole once a reasonable assessment is complete.</p>
+<p><strong>CE Relevance</strong></p>
+<p>For engineering officers, a container fire means managing the ship&#x27;s fire main pressure. The Second Engineer must immediately start the main and emergency fire pumps in parallel to ensure maximum hydrostatic pressure is maintained at the deck manifolds while portable water monitors and boundary hoses are running simultaneously.</p>
+<h5>Deep-Dive Analysis</h5>
+<ul>
+<li><strong>Trap Questions:</strong> <em>Examiner Nair asks: &quot;You are running three fire hoses and two portable monitors on deck. The fire pump pressure drops. What are your actions?&quot;</em> <strong>Answer:</strong> I will immediately start the emergency fire pump to boost fire main pressure, check for open overboard scour valves or internal engine room leaks, and isolate non-essential sections of the fire main deck line to prioritize the lines feeding the boundary cooling operations.</li>
+</ul>
+<ul>
+<li><strong>Common CE Failures:</strong> Candidates often state they would simply &quot;open the container and extinguish the fire with water,&quot; demonstrating a lack of understanding of container backdrafts and chemical water-reactivity hazards.</li>
+</ul>
+<ul>
+<li><strong>Numbers / Regs:</strong></li>
+<li><strong>IMO MSC.1/Circ.1618:</strong> Outlines enhanced fire safety measures for container ships, highlighting the use of portable monitors and defensive deck postures.</li>
+</ul>
+<ul>
+<li><strong>Casualty Link:</strong> The fire on the <em>NNER SYDNEY</em> (or similar modern ultra-large container vessels) demonstrated how a single container fire involving misdeclared or unknown cargo can quickly scale out of control if boundary cooling is not established early, resulting in severe structural damage to the deck girders.</li>
+<li><strong>Examiner Chain:</strong> <em>Nair <em>\rightarrow</em> Simon <em>\rightarrow</em> Senthil.</em> Nair tests the container firefighting approach and safety precautions. Simon pivots to verify how free surface water generated by fighting the deck fire affects the vessel&#x27;s transverse stability and GZ curve. Senthil focuses on checking the official logs and safety management documentation.</li>
+</ul>
+<ul>
+<li><strong>On My Vessel (Maersk A/S Container Fleet):</strong> On our Maersk vessels, the fire team utilizes full protective clothing and breathing apparatus during any cargo incident. We prioritize the positioning of unmanned portable water monitors to protect the surrounding cargo blocks while tracking the incident profile within our onboard safety management system.</li>
+</ul>
+          <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">SOLAS Regulation II-2/10.7</span><span class="reg-desc">Mandates fire extinguishing arrangements and equipment for cargo spaces.</span></div><div class="reg-item"><span class="reg-code">IMO MSC.1/Circ.1618</span><span class="reg-desc">Provides structural and operational guidance for container ship fire safety.</span></div><div class="reg-item"><span class="reg-code">FSS Code Chapter 5</span><span class="reg-desc">Establishes engineering specifications for fixed gas fire-extinguishing systems.</span></div><div class="reg-item"><span class="reg-code">ISM Code Section 8</span><span class="reg-desc">Dictates mandatory shipboard emergency preparedness and regular firefighting drill cycles.</span></div></div>
+          <div class="ce-tip"><strong>CE Oral Tip (Kochi MMD):</strong> When Nair asks this question, explicitly state: <em>&quot;I will treat the situation defensively, utilize unmanned monitors from upwind for boundary cooling, and ensure that the container doors are kept closed to prevent an oxygen-fed backdraft or explosion.&quot;</em> This response highlights a focus on risk management and crew safety.</div>
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>Trap Questions</h5><p><em>Examiner Nair asks: &quot;You are running three fire hoses and two portable monitors on deck. The fire pump pressure drops. What are your actions?&quot;</em> <strong>Answer:</strong> I will immediately start the emergency fire pump to boost fire main pressure, check for open overboard scour valves or internal engine room leaks, and isolate non-essential sections of the fire main deck line to prioritize the lines feeding the boundary cooling operations.</p><h5>Common CE Failures</h5><p>Candidates often state they would simply &quot;open the container and extinguish the fire with water,&quot; demonstrating a lack of understanding of container backdrafts and chemical water-reactivity hazards.</p><h5>Numbers &amp; Regs</h5><ul>
+<li><strong>IMO MSC.1/Circ.1618:</strong> Outlines enhanced fire safety measures for container ships, highlighting the use of portable monitors and defensive deck postures.</li>
+</ul><h5>Casualty Link</h5><p>The fire on the <em>NNER SYDNEY</em> (or similar modern ultra-large container vessels) demonstrated how a single container fire involving misdeclared or unknown cargo can quickly scale out of control if boundary cooling is not established early, resulting in severe structural damage to the deck girders.</p><h5>Examiner Chain</h5><p><em>Nair <em>\rightarrow</em> Simon <em>\rightarrow</em> Senthil.</em> Nair tests the container firefighting approach and safety precautions. Simon pivots to verify how free surface water generated by fighting the deck fire affects the vessel&#x27;s transverse stability and GZ curve. Senthil focuses on checking the official logs and safety management documentation.</p></div></details>
+      </div>
+      <div class="q-footer">
+        <span>Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB2_C, Q3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB2_C · Q3 · v1.0</span>
+      </div>
+    </div>
+
+    <div class="q-card" id="q4" data-tags="fire solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">4</div>
+        <div class="q-text-wrap">
+          <div class="q-text">15-Second Answer (Elevator Pitch)**</div>
+          <div class="q-tags"><span class="q-tag tag-fire">FIRE</span><span class="q-tag tag-solas">SOLAS</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>A <strong>water mist lance</strong> is a specialized tool that penetrates a container&#x27;s wall to discharge a cooling mist inside. <strong>Portable water monitors</strong> are deck-mounted devices that provide high-capacity boundary cooling. Both are mandated by <strong>SOLAS Regulation II-2/10.7.3.1</strong> for container ships to manage deck cargo fires.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>Formally mandated under <strong>SOLAS Chapter II-2, Regulation 10.7.3.1</strong>, container ships must carry at least one water mist lance and a minimum of two portable water monitors. The water mist lance consists of a protective nozzle tube inserted through a small borehole drilled by the crew into the container casing, allowing internal fire suppression without introducing excessive oxygen. The portable water monitors are high-capacity units designed for mounting on deck. They must feature a minimum flow rate of <strong>400 L/min per monitor</strong> (totaling 800 L/min combined) and be capable of reaching any section of the cargo deck to provide boundary cooling.</div>
+        <div class="answer-body">
+          <h5>Engineering Construction and Functional Requirements</h5>
+<h5>1. Water Mist Lance</h5>
+<ul>
+<li><strong>Design and Operation:</strong> Consists of a long, heavy-duty stainless steel piercing tube or lance fitted with a specialized misting nozzle. The fire team uses a portable drill to create a small borehole through the container door or side panel, inserts the lance, and connects it to the fire main.</li>
+</ul>
+<ul>
+<li><strong>Extinguishing Principle:</strong> Discharges a high-pressure fine water mist directly inside the sealed container. This design suppresses Class A fires (wood, paper, textiles) by cooling and displacing oxygen with water vapor, while preventing a backdraft since the container doors remain closed.</li>
+</ul>
+<ul>
+<li><strong>Limitations:</strong> Not suitable for containers carrying water-reactive chemicals, calcium hypochlorite, or explosive compounds where adding water can worsen the reaction.</li>
+</ul>
+<pre>
+  [Fire Main Connection] ---&gt; [Piercing Lance Body] ---&gt; [Nozzle Tip inside Container]
+                                                          (Discharges Fine Cooling Mist)
+
+</pre>
+<h5>2. Portable Water Monitor</h5>
+<ul>
+<li><strong>Design and Operation:</strong> High-capacity, stable, deck-mounted water monitors equipped with quick-coupling attachments for the fire main. They are designed to operate unmanned once positioned and secured on deck.</li>
+</ul>
+<ul>
+<li><strong>Flow Rate and Performance Requirements:</strong> Under SOLAS II-2/10.7.3.1, each monitor must discharge at least <strong>400 L/min (24 m³/h)</strong> at the design pressure. The ship must carry at least two monitors, providing a combined flow of <strong>800 L/min</strong>.</li>
+</ul>
+<ul>
+<li><strong>Tactical Reach:</strong> Must be capable of being carried by the crew, rigged quickly on any part of the open cargo deck, and have a jet reach capable of cooling the highest tiers of containers carried onboard.</li>
+</ul>
+<p>---</p>
+<h5>Extra Sub-Block: Key Numbers &amp; Certifications</h5>
+<ul>
+<li><strong>Minimum Individual Flow Rate:</strong> 400 Liters per minute (400 L/min).</li>
+</ul>
+<ul>
+<li><strong>Minimum Carriage Requirement:</strong> 2 Portable Water Monitors + 1 Water Mist Lance.</li>
+</ul>
+<ul>
+<li><strong>Regulatory Reference:</strong> SOLAS Chapter II-2, Regulation 10.7.3.1.</li>
+</ul>
+<h5>Deep-Dive Analysis</h5>
+<ul>
+<li><strong>Trap Questions:</strong> <em>Examiner Nair asks: &quot;Where exactly in the FSS Code do you find the detailed layout for the water mist lance?&quot;</em> <strong>Answer:</strong> The technical specifications for the water mist lance and portable monitors are outlined within <strong>SOLAS Chapter II-2, Regulation 10.7.3</strong> and associated MSC amendments (such as <strong>MSC.520(106)</strong>), rather than as a standalone chapter in the old FSS Code.</li>
+</ul>
+<ul>
+<li><strong>Common CE Failures:</strong> Candidates frequently state that any standard fire hose nozzle can serve as a water monitor, failing to recognize that SOLAS mandates dedicated, self-supporting portable monitor units with specific flow controls and structural stability brackets.</li>
+</ul>
+<ul>
+<li><strong>Numbers / Regs:</strong></li>
+<li><strong>SOLAS Reg II-2/10.7.3.1:</strong> Establishes carriage rules for ships designed to carry containers on or above the weather deck.</li>
+</ul>
+<ul>
+<li><strong>Resolution MSC.496(105) &amp; MSC.520(106):</strong> Updates fire protection requirements for modern container vessels.</li>
+</ul>
+<ul>
+<li><strong>Casualty Link:</strong> Incidents of large-scale container fires on deck showed that standard hand-held fire hoses were insufficient to reach upper container tiers. This prompted the IMO to introduce mandatory requirements for high-capacity portable monitors to allow continuous boundary cooling without keeping crew members in high-risk zones.</li>
+</ul>
+<ul>
+<li><strong>Examiner Chain:</strong> <em>Nair <em>\rightarrow</em> Simon <em>\rightarrow</em> Senthil.</em> Nair tests the specific flow rates, drilling protocols, and construction requirements. Simon asks about the impact on the vessel&#x27;s bilge system if water from the lance drains into the cargo holds. Senthil checks the maintenance records for the portable drills and safety equipment logs.</li>
+</ul>
+<ul>
+<li><strong>On My Vessel (Maersk A/S Container Fleet):</strong> On our Maersk container vessels, our water mist lances and portable water monitors are stowed in dedicated, marked safety lockers near the cargo decks. The portable air-driven or battery drills used for creating the container boreholes are checked monthly as part of our scheduled maintenance program to ensure they are fully charged and ready for emergency deployment.</li>
+</ul>
+          <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">SOLAS Reg II-2/10.7.3.1</span><span class="reg-desc">Mandates portable water monitors and water mist lances for container ships.</span></div><div class="reg-item"><span class="reg-code">Resolution MSC.520(106)</span><span class="reg-desc">Reflects updated fire safety standards for open-deck cargo arrangements.</span></div><div class="reg-item"><span class="reg-code">SOLAS Reg II-2/10.2</span><span class="reg-desc">Regulates the sizing, design pressure, and piping parameters of the ship&#x27;s fire main.</span></div><div class="reg-item"><span class="reg-code">ISM Code Section 10</span><span class="reg-desc">Requires systematic testing and maintenance of all critical emergency safety tools.</span></div></div>
+          <div class="ce-tip"><strong>CE Oral Tip (Kochi MMD):</strong> When Nair asks about numbers, state clearly: <em>&quot;Under SOLAS II-2/10.7.3.1, a container ship must carry at least two portable water monitors, each capable of discharging 400 L/min, and one water mist lance to provide internal container cooling through a drilled borehole.&quot;</em> Presenting the exact regulation number and flow rates demonstrates clear technical knowledge.</div>
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>Trap Questions</h5><p><em>Examiner Nair asks: &quot;Where exactly in the FSS Code do you find the detailed layout for the water mist lance?&quot;</em> <strong>Answer:</strong> The technical specifications for the water mist lance and portable monitors are outlined within <strong>SOLAS Chapter II-2, Regulation 10.7.3</strong> and associated MSC amendments (such as <strong>MSC.520(106)</strong>), rather than as a standalone chapter in the old FSS Code.</p><h5>Common CE Failures</h5><p>Candidates frequently state that any standard fire hose nozzle can serve as a water monitor, failing to recognize that SOLAS mandates dedicated, self-supporting portable monitor units with specific flow controls and structural stability brackets.</p><h5>Numbers &amp; Regs</h5><ul>
+<li><strong>SOLAS Reg II-2/10.7.3.1:</strong> Establishes carriage rules for ships designed to carry containers on or above the weather deck.</li>
+</ul><h5>Casualty Link</h5><p>Incidents of large-scale container fires on deck showed that standard hand-held fire hoses were insufficient to reach upper container tiers. This prompted the IMO to introduce mandatory requirements for high-capacity portable monitors to allow continuous boundary cooling without keeping crew members in high-risk zones.</p><h5>Examiner Chain</h5><p><em>Nair <em>\rightarrow</em> Simon <em>\rightarrow</em> Senthil.</em> Nair tests the specific flow rates, drilling protocols, and construction requirements. Simon asks about the impact on the vessel&#x27;s bilge system if water from the lance drains into the cargo holds. Senthil checks the maintenance records for the portable drills and safety equipment logs.</p></div></details>
+      </div>
+      <div class="q-footer">
+        <span>Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB2_C, Q4, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB2_C · Q4 · v1.0</span>
+      </div>
+    </div>
+  </div><!-- /#q-feed -->
+</div><!-- /.main-layout -->
+<div id="no-results"><p>No questions match your search/filter.</p></div>
+<div class="page-footer">
+  <p>Marine Intelligence Weekly · MEO Class 1 Question Bank · QB2_C — Fire Safety, LSA &amp; FSS Code</p>
+  <p>Compiled by Nixon Antony, Second Engineer, Maersk A/S · <a href="https://marineintelligenceweekly.com/meoclass1/">Back to MEO Class 1 Hub</a></p>
+  <p class="disclaimer">Private study aid for MEO Class 1 oral examination preparation at Kochi MMD. Verify all regulatory references against current sources. Corrections: contactus@marineintelligenceweekly.com</p>
+</div>
+<script>
+function toggleCard(h){h.closest('.q-card').classList.toggle('open');}
+let activeTag='all';
+function filterTag(t,b){activeTag=t;document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');applyFilters();}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();const cards=document.querySelectorAll('.q-card');let v=0;cards.forEach(c=>{const t=(c.dataset.tags||'').toLowerCase();const s=c.innerText.toLowerCase();const show=(activeTag==='all'||t.includes(activeTag))&&(!q||s.includes(q));c.style.display=show?'':'none';if(show)v++;});document.getElementById('q-count-label').textContent='Showing '+v+' of '+cards.length;document.getElementById('no-results').style.display=v===0?'block':'none';}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const id=x.target.id;document.querySelectorAll('.toc-link').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});}})},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+</script>
+<script>document.addEventListener('contextmenu',e=>e.preventDefault());document.addEventListener('copy',e=>e.preventDefault());document.addEventListener('selectstart',e=>e.preventDefault());</script>
+</body>
+</html>

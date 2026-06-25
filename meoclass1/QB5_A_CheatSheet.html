@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>QB5_A Cheat Sheet — Management, Leadership & Human Element | MIW MEO Class 1</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:14px;line-height:1.5;-webkit-user-select:none;user-select:none}
+a{color:var(--teal)}
+/* TOPBAR */
+.topbar{background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:10px 20px}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.topbar-mark{width:30px;height:30px;background:var(--teal);border-radius:5px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:13px}
+.topbar-name{color:#fff;font-weight:600;font-size:14px}
+.topbar-links a{color:#94a3b8;font-size:12px;margin-left:16px}
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy),#1e3a5f);color:#fff;padding:28px 24px 22px;border-bottom:3px solid var(--teal)}
+.cs-badge{display:inline-block;background:var(--orange);color:#fff;font-size:10px;font-weight:700;letter-spacing:.08em;padding:2px 9px;border-radius:3px;margin-bottom:8px;text-transform:uppercase}
+.hero h1{font-size:20px;font-weight:700;margin-bottom:4px}
+.hero p{color:#94a3b8;font-size:12px}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.hero-pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:3px 10px;font-size:11px;color:#cbd5e1}
+/* TOC STRIP */
+.toc-strip{background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 20px;display:flex;flex-wrap:wrap;gap:8px}
+.toc-strip a{font-size:11px;font-weight:600;color:var(--teal-dark);padding:3px 10px;border:1px solid var(--teal-light);border-radius:12px;text-decoration:none;background:var(--teal-light)}
+.toc-strip a:hover{background:var(--teal);color:#fff}
+/* MAIN */
+.container{max-width:1100px;margin:0 auto;padding:24px 16px}
+/* SECTION LABEL */
+.sec-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--orange);margin:32px 0 10px;padding-bottom:4px;border-bottom:2px solid var(--orange-light)}
+/* PAGE */
+.page{background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:20px;margin-bottom:18px}
+.page-title{font-size:13px;font-weight:700;color:var(--teal-dark);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.page-title .ref{font-size:10px;background:var(--teal-light);color:var(--teal-dark);padding:2px 8px;border-radius:10px;font-weight:600}
+/* TABLES */
+.cs-table{width:100%;border-collapse:collapse;font-size:12px;margin:8px 0}
+.cs-table th{background:var(--navy);color:#fff;padding:6px 10px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.cs-table td{padding:6px 10px;border-bottom:1px solid var(--grey-border);vertical-align:top;line-height:1.45}
+.cs-table tr:nth-child(even){background:var(--grey-bg)}
+.cs-table .hi{font-weight:700;color:var(--teal-dark)}
+/* SVG WRAPPER */
+.svg-wrap{overflow-x:auto;margin:8px 0}
+/* FORMULA BOX */
+.fbox{background:var(--grey-bg);border:1px solid var(--grey-border);border-radius:6px;padding:10px 14px;font-family:'Courier New',monospace;font-size:13px;font-weight:700;color:var(--teal-dark);margin:8px 0;text-align:center}
+/* QUICK-FIRE */
+.qf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px;margin:8px 0}
+.qf-card{background:var(--grey-bg);border-left:3px solid var(--teal);border-radius:0 6px 6px 0;padding:10px 12px}
+.qf-card .qn{font-size:10px;font-weight:700;color:var(--teal-dark);text-transform:uppercase;margin-bottom:3px}
+.qf-card .qa{font-size:12px;color:var(--ink);line-height:1.4}
+/* EXAMINER CARD */
+.exam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:8px 0}
+.exam-card{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden}
+.exam-card .ec-head{background:var(--navy);color:#fff;padding:7px 12px;font-size:11px;font-weight:700}
+.exam-card .ec-body{padding:10px 12px;font-size:11px;line-height:1.5}
+.exam-card .ec-body li{margin-bottom:3px}
+/* KEY NUMBERS */
+.kn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:8px;margin:8px 0}
+.kn-card{background:var(--navy);color:#fff;border-radius:8px;padding:10px 12px}
+.kn-card .kn-val{font-size:18px;font-weight:700;color:var(--orange);font-family:'Courier New',monospace}
+.kn-card .kn-desc{font-size:11px;color:#94a3b8;margin-top:3px}
+/* TWO-COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.two-col{grid-template-columns:1fr}}
+/* FOOTER */
+.page-footer{background:var(--navy);color:#94a3b8;text-align:center;padding:20px;font-size:11px;margin-top:40px}
+.page-footer a{color:var(--teal)}
+/* WATERMARK */
+body::before{content:'MIW PRIVATE — Nixon Antony — Do Not Redistribute';position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:42px;color:rgba(15,118,110,.04);font-weight:900;white-space:nowrap;pointer-events:none;z-index:9999}
+</style>
+</head>
+<body>
+<script>document.addEventListener('contextmenu',e=>e.preventDefault());document.addEventListener('copy',e=>e.preventDefault());</script>
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-mark">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div><a class="topbar-links" href="QB5_A.html">← QB5_A Full Q&amp;A</a><a class="topbar-links" href="https://marineintelligenceweekly.com/meoclass1/" style="margin-left:14px;color:#94a3b8;font-size:12px">MEO Class 1 Index</a></div>
+</nav>
+<div class="hero">
+  <div class="cs-badge">Cheat Sheet — QB5_A</div>
+  <h1>Management, Leadership &amp; Human Element — Visual Reference</h1>
+  <p>Q1–Q20 | Pre-oral cram companion to QB5_A | Kochi MMD | Rajappan · Srivastava · Senthil</p>
+  <div class="hero-pills">
+    <span class="hero-pill">Johari Window</span><span class="hero-pill">Maslow Pyramid</span><span class="hero-pill">Vroom Formula</span><span class="hero-pill">Risk Matrix 5×5</span>
+    <span class="hero-pill">PDCA Cycle</span><span class="hero-pill">Tuckman Stages</span><span class="hero-pill">Bloom's Taxonomy</span><span class="hero-pill">DGS Framework</span>
+    <span class="hero-pill">Examiner Route Maps</span><span class="hero-pill">Key Numbers Table</span><span class="hero-pill">15-Sec Quick-Fire Index</span>
+  </div>
+</div>
+<div class="toc-strip">
+  <a href="#s1">Johari Window</a><a href="#s2">Maslow Pyramid</a><a href="#s3">Motivation Theories</a><a href="#s4">Conflict Grid</a>
+  <a href="#s5">PDCA / TQM</a><a href="#s6">Tuckman Stages</a><a href="#s7">Risk Matrix</a><a href="#s8">Fishbone</a>
+  <a href="#s9">Bloom's Taxonomy</a><a href="#s10">DGS Framework</a><a href="#s11">Key Numbers</a><a href="#s12">Examiner Routes</a><a href="#s13">Quick-Fire Index</a>
+</div>
+<div class="container">
+<!-- ===== S1: JOHARI WINDOW ===== -->
+<div class="sec-label" id="s1">Q3 — Johari Window (Luft & Ingham, 1955)</div>
+<div class="page">
+  <div class="page-title">Johari Window — Self-Awareness & Communication Model <span class="ref">Q3</span></div>
+  <div class="svg-wrap">
+  <svg viewBox="0 0 620 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px;font-family:Segoe UI,sans-serif">
+    <!-- axes labels -->
+    <text x="200" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#0f766e">KNOWN TO SELF</text>
+    <text x="430" y="22" text-anchor="middle" font-size="11" font-weight="700" fill="#64748b">NOT KNOWN TO SELF</text>
+    <text x="18" y="120" text-anchor="middle" font-size="10" font-weight="700" fill="#0f766e" transform="rotate(-90,18,120)">KNOWN TO OTHERS</text>
+    <text x="18" y="230" text-anchor="middle" font-size="10" font-weight="700" fill="#64748b" transform="rotate(-90,18,230)">NOT KNOWN TO OTHERS</text>
+    <!-- quadrant 1: ARENA -->
+    <rect x="40" y="34" width="300" height="118" fill="#ccfbf1" stroke="#0d9488" stroke-width="1.5" rx="4"/>
+    <text x="190" y="75" text-anchor="middle" font-size="15" font-weight="700" fill="#0f766e">1. ARENA / OPEN</text>
+    <text x="190" y="95" text-anchor="middle" font-size="11" fill="#0f172a">Known to self + others</text>
+    <text x="190" y="112" text-anchor="middle" font-size="10" fill="#0f766e">→ Expand through open communication</text>
+    <text x="190" y="128" text-anchor="middle" font-size="10" fill="#0f766e">   toolbox talks, briefings, near-miss reports</text>
+    <!-- quadrant 2: BLIND SPOT -->
+    <rect x="346" y="34" width="260" height="118" fill="#fef3c7" stroke="#f97316" stroke-width="1.5" rx="4"/>
+    <text x="476" y="75" text-anchor="middle" font-size="15" font-weight="700" fill="#92400e">2. BLIND SPOT</text>
+    <text x="476" y="95" text-anchor="middle" font-size="11" fill="#0f172a">Known to others, not self</text>
+    <text x="476" y="112" text-anchor="middle" font-size="10" fill="#92400e">→ Reduce via appraisal &amp; feedback</text>
+    <text x="476" y="128" text-anchor="middle" font-size="10" fill="#92400e">   360° reviews, invite team input</text>
+    <!-- quadrant 3: FAÇADE -->
+    <rect x="40" y="158" width="300" height="118" fill="#f0fdf4" stroke="#0d9488" stroke-width="1.5" rx="4"/>
+    <text x="190" y="198" text-anchor="middle" font-size="15" font-weight="700" fill="#166534">3. FAÇADE / HIDDEN</text>
+    <text x="190" y="218" text-anchor="middle" font-size="11" fill="#0f172a">Known to self, not others</text>
+    <text x="190" y="235" text-anchor="middle" font-size="10" fill="#166534">→ Reduce via transparency &amp; trust</text>
+    <text x="190" y="251" text-anchor="middle" font-size="10" fill="#166534">   no-blame culture, open-door policy</text>
+    <!-- quadrant 4: UNKNOWN -->
+    <rect x="346" y="158" width="260" height="118" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" rx="4"/>
+    <text x="476" y="198" text-anchor="middle" font-size="15" font-weight="700" fill="#475569">4. UNKNOWN</text>
+    <text x="476" y="218" text-anchor="middle" font-size="11" fill="#0f172a">Unknown to all</text>
+    <text x="476" y="235" text-anchor="middle" font-size="10" fill="#475569">→ Surfaces in emergencies &amp; drills</text>
+    <text x="476" y="251" text-anchor="middle" font-size="10" fill="#475569">   latent capability revealed under stress</text>
+    <!-- dividers -->
+    <line x1="40" y1="152" x2="606" y2="152" stroke="#0f172a" stroke-width="1.5"/>
+    <line x1="340" y1="34" x2="340" y2="276" stroke="#0f172a" stroke-width="1.5"/>
+    <!-- CE goal label -->
+    <text x="190" y="292" text-anchor="middle" font-size="10" font-weight="700" fill="#0d9488">CE GOAL: Expand Arena → Better team communication → Stronger ISM reporting culture</text>
+  </svg>
+  </div>
+</div>
+
+<!-- ===== S2: MASLOW PYRAMID ===== -->
+<div class="sec-label" id="s2">Q4 — Maslow's Hierarchy of Needs (1943)</div>
+<div class="page">
+  <div class="page-title">Maslow's Hierarchy — Maritime Application <span class="ref">Q4</span></div>
+  <div class="svg-wrap">
+  <svg viewBox="0 0 620 310" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px;font-family:Segoe UI,sans-serif">
+    <!-- Level 5: Self-Actualisation (apex) -->
+    <polygon points="310,18 200,78 420,78" fill="#0d9488" stroke="#fff" stroke-width="1.5"/>
+    <text x="310" y="52" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">5. SELF-ACTUALISATION</text>
+    <text x="310" y="66" text-anchor="middle" font-size="9" fill="#ccfbf1">Growth, purpose, mastery</text>
+    <!-- Level 4 -->
+    <polygon points="200,82 130,132 490,132 420,82" fill="#0f766e" stroke="#fff" stroke-width="1.5"/>
+    <text x="310" y="107" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">4. ESTEEM</text>
+    <text x="310" y="122" text-anchor="middle" font-size="9" fill="#ccfbf1">Recognition, appraisal, responsibility, promotion</text>
+    <!-- Level 3 -->
+    <polygon points="130,136 68,186 552,186 490,136" fill="#0e7490" stroke="#fff" stroke-width="1.5"/>
+    <text x="310" y="161" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">3. SOCIAL / BELONGING</text>
+    <text x="310" y="176" text-anchor="middle" font-size="9" fill="#e0f2fe">Team cohesion, fair treatment, family contact → MLC Reg. 4.4</text>
+    <!-- Level 2 -->
+    <polygon points="68,190 14,240 606,240 552,190" fill="#1e40af" stroke="#fff" stroke-width="1.5"/>
+    <text x="310" y="215" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">2. SAFETY</text>
+    <text x="310" y="230" text-anchor="middle" font-size="9" fill="#bfdbfe">Job security, safe working conditions → ISM Code §7, SOLAS</text>
+    <!-- Level 1: Physiological (base) -->
+    <rect x="14" y="244" width="592" height="52" fill="#1e3a5f" stroke="#fff" stroke-width="1.5" rx="0 0 6 6"/>
+    <text x="310" y="268" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">1. PHYSIOLOGICAL (BASE)</text>
+    <text x="310" y="284" text-anchor="middle" font-size="9" fill="#94a3b8">Food, rest, sleep, medical care → MLC Reg. 2.3 (rest) · Reg. 3.2 (food) · Reg. 4.1 (medical)</text>
+    <!-- CE label -->
+    <text x="310" y="306" text-anchor="middle" font-size="9" font-weight="700" fill="#64748b">CE RULE: Always diagnose from Level 1 upward — never assume Level 4/5 intervention when Level 1/2 need is unmet</text>
+  </svg>
+  </div>
+</div>
+
+<!-- ===== S3: MOTIVATION THEORIES ===== -->
+<div class="sec-label" id="s3">Q5 — Motivation Theories Quick-Reference</div>
+<div class="page">
+  <div class="page-title">Four Motivation Theories — CE Oral Cheat Sheet <span class="ref">Q5</span></div>
+  <div class="fbox">Vroom: &nbsp; Motivation = Expectancy (E) × Instrumentality (I) × Valence (V)</div>
+  <table class="cs-table" style="margin-top:10px">
+    <tr><th>Theory</th><th>Author / Year</th><th>Core Idea</th><th>CE Application</th><th>Exam Hook</th></tr>
+    <tr><td class="hi">Maslow's Hierarchy</td><td>Maslow, 1943</td><td>5-level pyramid; lower needs first</td><td>Diagnose from Level 1 — are rest hours / food / safety met first?</td><td>Q4 — draw pyramid</td></tr>
+    <tr><td class="hi">Two-Factor Theory</td><td>Herzberg, 1959</td><td>Hygiene factors prevent dissatisfaction; Motivators create satisfaction</td><td>Hygiene = salary, conditions, supervision. Motivators = recognition, growth, responsibility</td><td>"Removing dissatisfiers ≠ motivating"</td></tr>
+    <tr><td class="hi">Theory X / Theory Y</td><td>McGregor, 1960</td><td>X = people avoid work (control them). Y = people self-motivate if conditions right</td><td>Apply Theory Y — give ownership, delegate, involve in planning</td><td>El Faro = Theory X culture</td></tr>
+    <tr><td class="hi">Expectancy Theory</td><td>Vroom, 1964</td><td>Motivation = E × I × V</td><td>Make effort→result→reward chain visible. Appraisals = high-Instrumentality intervention</td><td>State formula verbatim</td></tr>
+  </table>
+</div>
+
+<!-- ===== S4: CONFLICT GRID ===== -->
+<div class="sec-label" id="s4">Q6 — Thomas-Kilmann Conflict Styles</div>
+<div class="page">
+  <div class="page-title">Thomas-Kilmann Conflict Mode Grid <span class="ref">Q6</span></div>
+  <div class="svg-wrap">
+  <svg viewBox="0 0 580 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:580px;font-family:Segoe UI,sans-serif">
+    <!-- Axes -->
+    <text x="290" y="18" text-anchor="middle" font-size="11" font-weight="700" fill="#0f172a">ASSERTIVENESS (concern for self)</text>
+    <text x="290" y="30" text-anchor="middle" font-size="10" fill="#64748b">← Low ——————————————————— High →</text>
+    <text x="16" y="175" text-anchor="middle" font-size="10" font-weight="700" fill="#0f172a" transform="rotate(-90,16,175)">COOPERATIVENESS (concern for others)</text>
+    <!-- COMPETING (high assert, low coop) -->
+    <rect x="430" y="40" width="138" height="90" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="499" y="72" text-anchor="middle" font-size="12" font-weight="700" fill="#991b1b">COMPETING</text>
+    <text x="499" y="88" text-anchor="middle" font-size="10" fill="#7f1d1d">Assert, not cooperative</text>
+    <text x="499" y="103" text-anchor="middle" font-size="10" fill="#991b1b">Use: Safety emergency</text>
+    <text x="499" y="117" text-anchor="middle" font-size="9" fill="#64748b">"CE must override"</text>
+    <!-- COLLABORATING (high assert, high coop) -->
+    <rect x="430" y="190" width="138" height="100" rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="2"/>
+    <text x="499" y="222" text-anchor="middle" font-size="12" font-weight="700" fill="#0f766e">COLLABORATING</text>
+    <text x="499" y="238" text-anchor="middle" font-size="10" fill="#0f766e">Assert + cooperative</text>
+    <text x="499" y="254" text-anchor="middle" font-size="10" fill="#0f766e">⭐ CE Default Style</text>
+    <text x="499" y="270" text-anchor="middle" font-size="9" fill="#0f766e">Maintenance decisions,</text>
+    <text x="499" y="283" text-anchor="middle" font-size="9" fill="#0f766e">team planning</text>
+    <!-- COMPROMISING (mid/mid) -->
+    <rect x="250" y="130" width="138" height="80" rx="6" fill="#fef3c7" stroke="#f97316" stroke-width="1.5"/>
+    <text x="319" y="162" text-anchor="middle" font-size="12" font-weight="700" fill="#92400e">COMPROMISING</text>
+    <text x="319" y="178" text-anchor="middle" font-size="10" fill="#92400e">Partial wins for both</text>
+    <text x="319" y="194" text-anchor="middle" font-size="9" fill="#92400e">Use: Port scheduling conflicts</text>
+    <!-- AVOIDING (low/low) -->
+    <rect x="40" y="40" width="138" height="80" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="109" y="72" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">AVOIDING</text>
+    <text x="109" y="88" text-anchor="middle" font-size="10" fill="#475569">Low assert, low coop</text>
+    <text x="109" y="104" text-anchor="middle" font-size="9" fill="#e11d48">⚠ Never for safety issues</text>
+    <!-- ACCOMMODATING (low assert, high coop) -->
+    <rect x="40" y="190" width="138" height="80" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="109" y="222" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">ACCOMMODATING</text>
+    <text x="109" y="238" text-anchor="middle" font-size="10" fill="#166534">Yield to preserve relation</text>
+    <text x="109" y="254" text-anchor="middle" font-size="9" fill="#166534">Use: When other party is right</text>
+    <!-- Axis lines -->
+    <line x1="40" y1="155" x2="568" y2="155" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4"/>
+    <line x1="295" y1="40" x2="295" y2="295" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4"/>
+    <text x="290" y="312" text-anchor="middle" font-size="9" fill="#0d9488" font-weight="700">MLC Reg. 5.1.5: CE must never suppress complaints — even when Competing style is used</text>
+  </svg>
+  </div>
+</div>
+
+<!-- ===== S5: PDCA / TQM ===== -->
+<div class="sec-label" id="s5">Q7 — Total Quality Management / PDCA Cycle</div>
+<div class="page">
+  <div class="page-title">PDCA Cycle (Deming Wheel) + QA vs QC <span class="ref">Q7</span></div>
+  <div class="two-col">
+    <div>
+      <div class="svg-wrap">
+      <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;font-family:Segoe UI,sans-serif">
+        <!-- PDCA circle -->
+        <!-- PLAN -->
+        <path d="M140,140 L140,40 A100,100 0 0,1 240,140 Z" fill="#0d9488" stroke="#fff" stroke-width="2"/>
+        <text x="185" y="95" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">PLAN</text>
+        <text x="185" y="112" text-anchor="middle" font-size="9" fill="#ccfbf1">Identify problem</text>
+        <text x="185" y="124" text-anchor="middle" font-size="9" fill="#ccfbf1">Design solution</text>
+        <!-- DO -->
+        <path d="M140,140 L240,140 A100,100 0 0,1 140,240 Z" fill="#0f766e" stroke="#fff" stroke-width="2"/>
+        <text x="185" y="185" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">DO</text>
+        <text x="185" y="202" text-anchor="middle" font-size="9" fill="#ccfbf1">Implement</text>
+        <text x="185" y="214" text-anchor="middle" font-size="9" fill="#ccfbf1">the solution</text>
+        <!-- CHECK -->
+        <path d="M140,140 L140,240 A100,100 0 0,1 40,140 Z" fill="#1e3a5f" stroke="#fff" stroke-width="2"/>
+        <text x="95" y="185" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">CHECK</text>
+        <text x="95" y="202" text-anchor="middle" font-size="9" fill="#94a3b8">Measure &amp;</text>
+        <text x="95" y="214" text-anchor="middle" font-size="9" fill="#94a3b8">verify result</text>
+        <!-- ACT -->
+        <path d="M140,140 L40,140 A100,100 0 0,1 140,40 Z" fill="#f97316" stroke="#fff" stroke-width="2"/>
+        <text x="95" y="95" text-anchor="middle" font-size="14" font-weight="700" fill="#fff">ACT</text>
+        <text x="95" y="112" text-anchor="middle" font-size="9" fill="#fff7ed">Standardise</text>
+        <text x="95" y="124" text-anchor="middle" font-size="9" fill="#fff7ed">close NCR</text>
+        <!-- Centre -->
+        <circle cx="140" cy="140" r="30" fill="#fff" stroke="#e2e8f0" stroke-width="1.5"/>
+        <text x="140" y="136" text-anchor="middle" font-size="9" font-weight="700" fill="#0d9488">PDCA</text>
+        <text x="140" y="149" text-anchor="middle" font-size="8" fill="#64748b">Deming</text>
+        <text x="140" y="162" text-anchor="middle" font-size="8" fill="#64748b">Wheel</text>
+      </svg>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:12px;font-weight:700;color:var(--teal-dark);margin-bottom:8px">QA vs QC — Critical Distinction (Senthil sir)</p>
+      <table class="cs-table">
+        <tr><th></th><th>QA (Quality Assurance)</th><th>QC (Quality Control)</th></tr>
+        <tr><td class="hi">Type</td><td>Proactive</td><td>Reactive</td></tr>
+        <tr><td class="hi">Focus</td><td>Process-driven</td><td>Product-driven</td></tr>
+        <tr><td class="hi">Goal</td><td>Prevent defects</td><td>Detect defects</td></tr>
+        <tr><td class="hi">Timing</td><td>Before the work</td><td>After the work</td></tr>
+        <tr><td class="hi">Example</td><td>SMS audits, PTW system, training</td><td>Post-maintenance pump test, fuel spec check</td></tr>
+        <tr><td class="hi">Reg link</td><td>ISM Code §7, §12</td><td>ISM Code §10, §9</td></tr>
+      </table>
+      <p style="font-size:11px;margin-top:8px"><strong>TQM Theorists:</strong> Deming (PDCA, 14 Points) · Juran (Quality Trilogy, Pareto 80/20) · Crosby ("Quality is Free", Zero Defects) · Ishikawa (Fishbone, Quality Circles)</p>
+    </div>
+  </div>
+</div>
+<!-- ===== S6: TUCKMAN ===== -->
+<div class="sec-label" id="s6">Q9 — Tuckman's Group Development (1965)</div>
+<div class="page">
+  <div class="page-title">Tuckman's Stages — Crew Change Warning <span class="ref">Q9</span></div>
+  <div class="svg-wrap">
+  <svg viewBox="0 0 640 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:640px;font-family:Segoe UI,sans-serif">
+    <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#0f172a"/></marker></defs>
+    <!-- Stages -->
+    <!-- Forming -->
+    <rect x="10" y="40" width="108" height="110" rx="6" fill="#e0f2fe" stroke="#0369a1" stroke-width="1.5"/>
+    <text x="64" y="65" text-anchor="middle" font-size="11" font-weight="700" fill="#0369a1">FORMING</text>
+    <text x="64" y="82" text-anchor="middle" font-size="9" fill="#0f172a">Polite, uncertain</text>
+    <text x="64" y="96" text-anchor="middle" font-size="9" fill="#0f172a">Role-testing</text>
+    <text x="64" y="116" text-anchor="middle" font-size="9" fill="#0369a1" font-weight="700">CE Action:</text>
+    <text x="64" y="130" text-anchor="middle" font-size="9" fill="#0369a1">Clear structure,</text>
+    <text x="64" y="143" text-anchor="middle" font-size="9" fill="#0369a1">SMS briefing</text>
+    <!-- Arrow -->
+    <line x1="120" y1="95" x2="138" y2="95" stroke="#0f172a" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- Storming -->
+    <rect x="140" y="40" width="108" height="110" rx="6" fill="#fee2e2" stroke="#ef4444" stroke-width="2"/>
+    <text x="194" y="62" text-anchor="middle" font-size="11" font-weight="700" fill="#991b1b">STORMING</text>
+    <text x="194" y="77" text-anchor="middle" font-size="9" fill="#0f172a">Conflict, resistance</text>
+    <text x="194" y="91" text-anchor="middle" font-size="9" fill="#e11d48" font-weight="700">⚠ DANGER ZONE</text>
+    <text x="194" y="106" text-anchor="middle" font-size="9" fill="#991b1b">Under high workload,</text>
+    <text x="194" y="120" text-anchor="middle" font-size="9" fill="#991b1b">crew change can</text>
+    <text x="194" y="134" text-anchor="middle" font-size="9" fill="#991b1b">skip Forming and</text>
+    <text x="194" y="148" text-anchor="middle" font-size="9" fill="#991b1b">jump here directly</text>
+    <!-- Arrow -->
+    <line x1="250" y1="95" x2="268" y2="95" stroke="#0f172a" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- Norming -->
+    <rect x="270" y="40" width="108" height="110" rx="6" fill="#fef3c7" stroke="#f97316" stroke-width="1.5"/>
+    <text x="324" y="65" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e">NORMING</text>
+    <text x="324" y="82" text-anchor="middle" font-size="9" fill="#0f172a">Consensus emerges</text>
+    <text x="324" y="96" text-anchor="middle" font-size="9" fill="#0f172a">Roles accepted</text>
+    <text x="324" y="116" text-anchor="middle" font-size="9" fill="#92400e" font-weight="700">CE Action:</text>
+    <text x="324" y="130" text-anchor="middle" font-size="9" fill="#92400e">Reinforce norms,</text>
+    <text x="324" y="143" text-anchor="middle" font-size="9" fill="#92400e">give recognition</text>
+    <!-- Arrow -->
+    <line x1="380" y1="95" x2="398" y2="95" stroke="#0f172a" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- Performing -->
+    <rect x="400" y="40" width="108" height="110" rx="6" fill="#ccfbf1" stroke="#0d9488" stroke-width="2"/>
+    <text x="454" y="65" text-anchor="middle" font-size="11" font-weight="700" fill="#0f766e">PERFORMING</text>
+    <text x="454" y="82" text-anchor="middle" font-size="9" fill="#0f172a">Self-directed team</text>
+    <text x="454" y="96" text-anchor="middle" font-size="9" fill="#0f172a">High performance</text>
+    <text x="454" y="116" text-anchor="middle" font-size="9" fill="#0f766e" font-weight="700">CE Action:</text>
+    <text x="454" y="130" text-anchor="middle" font-size="9" fill="#0f766e">Delegate, step back</text>
+    <text x="454" y="143" text-anchor="middle" font-size="9" fill="#0f766e">remove obstacles</text>
+    <!-- Arrow -->
+    <line x1="510" y1="95" x2="528" y2="95" stroke="#0f172a" stroke-width="1.5" marker-end="url(#arr)"/>
+    <!-- Adjourning -->
+    <rect x="530" y="40" width="100" height="110" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="580" y="65" text-anchor="middle" font-size="11" font-weight="700" fill="#475569">ADJOURNING</text>
+    <text x="580" y="82" text-anchor="middle" font-size="9" fill="#0f172a">Team disbands</text>
+    <text x="580" y="96" text-anchor="middle" font-size="9" fill="#0f172a">Sign-off period</text>
+    <text x="580" y="116" text-anchor="middle" font-size="9" fill="#475569" font-weight="700">CE Action:</text>
+    <text x="580" y="130" text-anchor="middle" font-size="9" fill="#475569">Structured handover</text>
+    <text x="580" y="143" text-anchor="middle" font-size="9" fill="#475569">KT, acknowledge</text>
+    <!-- Warning arrow from Forming direct to Storming -->
+    <path d="M64,155 Q130,185 140,155" stroke="#ef4444" stroke-width="1.5" fill="none" stroke-dasharray="4" marker-end="url(#arr)"/>
+    <text x="105" y="196" text-anchor="middle" font-size="9" fill="#ef4444">⚠ Massive crew change under port pressure can skip directly to Storming — CE must mediate early</text>
+  </svg>
+  </div>
+</div>
+
+<!-- ===== S7: RISK MATRIX ===== -->
+<div class="sec-label" id="s7">Q10 / Q11 — Risk Matrix 5×5</div>
+<div class="page">
+  <div class="page-title">Risk Assessment Matrix + Enclosed Space Limits <span class="ref">Q10 Q11</span></div>
+  <div class="two-col">
+    <div>
+      <div class="fbox" style="font-size:12px">Risk = Likelihood × Consequence</div>
+      <div class="svg-wrap" style="margin-top:8px">
+      <svg viewBox="0 0 280 240" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:280px;font-family:Segoe UI,sans-serif">
+        <text x="140" y="14" text-anchor="middle" font-size="9" font-weight="700" fill="#0f172a">CONSEQUENCE →</text>
+        <text x="12" y="130" text-anchor="middle" font-size="9" font-weight="700" fill="#0f172a" transform="rotate(-90,12,130)">LIKELIHOOD ↑</text>
+        <!-- Grid cells 5x5 -->
+        <g font-size="9" text-anchor="middle">
+          <!-- Row headers -->
+          <text x="34" y="58" fill="#64748b">5</text><text x="34" y="98" fill="#64748b">4</text>
+          <text x="34" y="138" fill="#64748b">3</text><text x="34" y="178" fill="#64748b">2</text><text x="34" y="218" fill="#64748b">1</text>
+          <!-- Col headers -->
+          <text x="68" y="30" fill="#64748b">1</text><text x="108" y="30" fill="#64748b">2</text>
+          <text x="148" y="30" fill="#64748b">3</text><text x="188" y="30" fill="#64748b">4</text><text x="228" y="30" fill="#64748b">5</text>
+          <!-- Row 5 (high likelihood) -->
+          <rect x="46" y="38" width="40" height="34" fill="#fef3c7"/><text x="66" y="60" fill="#92400e" font-weight="700">5</text>
+          <rect x="88" y="38" width="40" height="34" fill="#fed7aa"/><text x="108" y="60" fill="#c2410c" font-weight="700">10</text>
+          <rect x="128" y="38" width="40" height="34" fill="#fca5a5"/><text x="148" y="60" fill="#991b1b" font-weight="700">15</text>
+          <rect x="168" y="38" width="40" height="34" fill="#f87171"/><text x="188" y="60" fill="#7f1d1d" font-weight="700">20</text>
+          <rect x="208" y="38" width="40" height="34" fill="#ef4444"/><text x="228" y="60" fill="#fff" font-weight="700">25</text>
+          <!-- Row 4 -->
+          <rect x="46" y="78" width="40" height="34" fill="#fef9c3"/><text x="66" y="100" fill="#92400e" font-weight="700">4</text>
+          <rect x="88" y="78" width="40" height="34" fill="#fef3c7"/><text x="108" y="100" fill="#92400e" font-weight="700">8</text>
+          <rect x="128" y="78" width="40" height="34" fill="#fed7aa"/><text x="148" y="100" fill="#c2410c" font-weight="700">12</text>
+          <rect x="168" y="78" width="40" height="34" fill="#fca5a5"/><text x="188" y="100" fill="#991b1b" font-weight="700">16</text>
+          <rect x="208" y="78" width="40" height="34" fill="#f87171"/><text x="228" y="100" fill="#7f1d1d" font-weight="700">20</text>
+          <!-- Row 3 -->
+          <rect x="46" y="118" width="40" height="34" fill="#dcfce7"/><text x="66" y="140" fill="#166534" font-weight="700">3</text>
+          <rect x="88" y="118" width="40" height="34" fill="#fef9c3"/><text x="108" y="140" fill="#92400e" font-weight="700">6</text>
+          <rect x="128" y="118" width="40" height="34" fill="#fef3c7"/><text x="148" y="140" fill="#92400e" font-weight="700">9</text>
+          <rect x="168" y="118" width="40" height="34" fill="#fed7aa"/><text x="188" y="140" fill="#c2410c" font-weight="700">12</text>
+          <rect x="208" y="118" width="40" height="34" fill="#fca5a5"/><text x="228" y="140" fill="#991b1b" font-weight="700">15</text>
+          <!-- Row 2 -->
+          <rect x="46" y="158" width="40" height="34" fill="#dcfce7"/><text x="66" y="180" fill="#166534" font-weight="700">2</text>
+          <rect x="88" y="158" width="40" height="34" fill="#dcfce7"/><text x="108" y="180" fill="#166534" font-weight="700">4</text>
+          <rect x="128" y="158" width="40" height="34" fill="#fef9c3"/><text x="148" y="180" fill="#92400e" font-weight="700">6</text>
+          <rect x="168" y="158" width="40" height="34" fill="#fef3c7"/><text x="188" y="180" fill="#92400e" font-weight="700">8</text>
+          <rect x="208" y="158" width="40" height="34" fill="#fed7aa"/><text x="228" y="180" fill="#c2410c" font-weight="700">10</text>
+          <!-- Row 1 -->
+          <rect x="46" y="198" width="40" height="34" fill="#dcfce7"/><text x="66" y="220" fill="#166534" font-weight="700">1</text>
+          <rect x="88" y="198" width="40" height="34" fill="#dcfce7"/><text x="108" y="220" fill="#166534" font-weight="700">2</text>
+          <rect x="128" y="198" width="40" height="34" fill="#dcfce7"/><text x="148" y="220" fill="#166534" font-weight="700">3</text>
+          <rect x="168" y="198" width="40" height="34" fill="#fef9c3"/><text x="188" y="220" fill="#92400e" font-weight="700">4</text>
+          <rect x="208" y="198" width="40" height="34" fill="#fef9c3"/><text x="228" y="220" fill="#92400e" font-weight="700">5</text>
+          <!-- Grid border -->
+          <rect x="46" y="38" width="202" height="194" fill="none" stroke="#0f172a" stroke-width="1"/>
+        </g>
+      </svg>
+      </div>
+      <div style="font-size:11px;margin-top:6px">
+        <span style="background:#dcfce7;padding:2px 8px;border-radius:3px;margin-right:6px;font-weight:700;color:#166534">1–6: Acceptable</span>
+        <span style="background:#fef3c7;padding:2px 8px;border-radius:3px;margin-right:6px;font-weight:700;color:#92400e">7–12: ALARP</span>
+        <span style="background:#fca5a5;padding:2px 8px;border-radius:3px;font-weight:700;color:#991b1b">13–25: Unacceptable</span>
+      </div>
+    </div>
+    <div>
+      <p style="font-size:12px;font-weight:700;color:var(--teal-dark);margin-bottom:8px">Enclosed Space Entry Limits (Q11)</p>
+      <table class="cs-table">
+        <tr><th>Gas</th><th>Safe Limit</th><th>Action if Outside</th></tr>
+        <tr><td class="hi">O₂</td><td><strong>19.5% – 23.5%</strong></td><td>&lt;19.5% = oxygen-deficient; &gt;23.5% = fire risk — ventilate</td></tr>
+        <tr><td class="hi">Flammable Gas</td><td><strong>&lt;1% LEL</strong></td><td>Ventilate before entry; &lt;10% LEL pumping only (SMS-specific)</td></tr>
+        <tr><td class="hi">H₂S</td><td><strong>&lt;1 ppm TLV-TWA</strong></td><td>ACGIH; STEL 5 ppm. Old 10 ppm limit is obsolete — do not quote</td></tr>
+        <tr><td class="hi">CO</td><td><strong>&lt;25 ppm</strong></td><td>Ventilate; continuous monitoring required</td></tr>
+      </table>
+      <p style="font-size:11px;margin-top:10px;font-weight:700;color:var(--teal-dark)">Hierarchy of Controls</p>
+      <table class="cs-table">
+        <tr><th>Level</th><th>Type</th><th>Example</th></tr>
+        <tr><td>1 (Best)</td><td class="hi">Elimination</td><td>Remove the hazardous substance entirely</td></tr>
+        <tr><td>2</td><td class="hi">Substitution</td><td>Replace HFO with VLSFO (also reduces Annex VI risk)</td></tr>
+        <tr><td>3</td><td class="hi">Engineering</td><td>Guards, ventilation, LOTO, interlocks</td></tr>
+        <tr><td>4</td><td class="hi">Administrative</td><td>PTW, procedures, training, toolbox talk</td></tr>
+        <tr><td>5 (Last resort)</td><td class="hi">PPE</td><td>SCBA, gloves, face shield, ear defenders</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== S8: FISHBONE ===== -->
+<div class="sec-label" id="s8">Q12 — Root Cause Analysis Methods</div>
+<div class="page">
+  <div class="page-title">RCA Methods — Fishbone Diagram &amp; 5-Whys <span class="ref">Q12</span></div>
+  <div class="svg-wrap">
+  <svg viewBox="0 0 620 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px;font-family:Segoe UI,sans-serif">
+    <defs><marker id="arr2" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#0f172a"/></marker></defs>
+    <!-- Spine -->
+    <line x1="50" y1="100" x2="540" y2="100" stroke="#0f172a" stroke-width="2" marker-end="url(#arr2)"/>
+    <!-- Effect box -->
+    <rect x="548" y="76" width="66" height="48" rx="4" fill="#ef4444" stroke="#991b1b" stroke-width="1.5"/>
+    <text x="581" y="97" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">EFFECT</text>
+    <text x="581" y="110" text-anchor="middle" font-size="8" fill="#fca5a5">(Incident /</text>
+    <text x="581" y="121" text-anchor="middle" font-size="8" fill="#fca5a5">Near-miss)</text>
+    <!-- 6 bones -->
+    <!-- Man (top-left) -->
+    <line x1="120" y1="100" x2="80" y2="50" stroke="#0d9488" stroke-width="1.5"/>
+    <text x="72" y="44" text-anchor="middle" font-size="10" font-weight="700" fill="#0f766e">MAN</text>
+    <text x="72" y="56" text-anchor="middle" font-size="8" fill="#0f172a">fatigue, training,</text>
+    <text x="72" y="67" text-anchor="middle" font-size="8" fill="#0f172a">complacency</text>
+    <!-- Machine (top-mid) -->
+    <line x1="240" y1="100" x2="200" y2="50" stroke="#0d9488" stroke-width="1.5"/>
+    <text x="192" y="44" text-anchor="middle" font-size="10" font-weight="700" fill="#0f766e">MACHINE</text>
+    <text x="192" y="56" text-anchor="middle" font-size="8" fill="#0f172a">equipment failure,</text>
+    <text x="192" y="67" text-anchor="middle" font-size="8" fill="#0f172a">poor maintenance</text>
+    <!-- Method (top-right area) -->
+    <line x1="360" y1="100" x2="320" y2="50" stroke="#0d9488" stroke-width="1.5"/>
+    <text x="312" y="44" text-anchor="middle" font-size="10" font-weight="700" fill="#0f766e">METHOD</text>
+    <text x="312" y="56" text-anchor="middle" font-size="8" fill="#0f172a">procedure gap,</text>
+    <text x="312" y="67" text-anchor="middle" font-size="8" fill="#0f172a">poor PTW</text>
+    <!-- Material (bottom-left) -->
+    <line x1="120" y1="100" x2="80" y2="150" stroke="#f97316" stroke-width="1.5"/>
+    <text x="72" y="164" text-anchor="middle" font-size="10" font-weight="700" fill="#c2410c">MATERIAL</text>
+    <text x="72" y="175" text-anchor="middle" font-size="8" fill="#0f172a">defective parts,</text>
+    <text x="72" y="186" text-anchor="middle" font-size="8" fill="#0f172a">wrong spec</text>
+    <!-- Measurement (bottom-mid) -->
+    <line x1="240" y1="100" x2="200" y2="150" stroke="#f97316" stroke-width="1.5"/>
+    <text x="192" y="164" text-anchor="middle" font-size="10" font-weight="700" fill="#c2410c">MEASUREMENT</text>
+    <text x="192" y="175" text-anchor="middle" font-size="8" fill="#0f172a">calibration error,</text>
+    <text x="192" y="186" text-anchor="middle" font-size="8" fill="#0f172a">wrong instrument</text>
+    <!-- Milieu (bottom-right) -->
+    <line x1="360" y1="100" x2="320" y2="150" stroke="#f97316" stroke-width="1.5"/>
+    <text x="312" y="164" text-anchor="middle" font-size="10" font-weight="700" fill="#c2410c">MILIEU/ENV</text>
+    <text x="312" y="175" text-anchor="middle" font-size="8" fill="#0f172a">noise, heat, motion,</text>
+    <text x="312" y="186" text-anchor="middle" font-size="8" fill="#0f172a">poor lighting</text>
+    <!-- Vertical tick marks on spine -->
+    <line x1="120" y1="95" x2="120" y2="105" stroke="#0f172a" stroke-width="1"/>
+    <line x1="240" y1="95" x2="240" y2="105" stroke="#0f172a" stroke-width="1"/>
+    <line x1="360" y1="95" x2="360" y2="105" stroke="#0f172a" stroke-width="1"/>
+    <line x1="460" y1="95" x2="460" y2="105" stroke="#0f172a" stroke-width="1"/>
+    <text x="310" y="13" text-anchor="middle" font-size="9" fill="#64748b" font-weight="700">Ishikawa (Fishbone) Diagram — 6Ms: Man · Machine · Method · Material · Measurement · Milieu</text>
+  </svg>
+  </div>
+  <table class="cs-table" style="margin-top:10px">
+    <tr><th>Method</th><th>Best for</th><th>Key feature</th></tr>
+    <tr><td class="hi">5-Whys</td><td>Simple, single-cause incidents</td><td>Ask "Why?" ≥5 times until you hit a system failure root cause</td></tr>
+    <tr><td class="hi">Fishbone (Ishikawa)</td><td>Complex multi-factor incidents</td><td>6Ms visual map — see all cause categories at once</td></tr>
+    <tr><td class="hi">Fault Tree Analysis</td><td>Complex systems, multiple simultaneous failures</td><td>Top-down deductive, AND/OR logic gates</td></tr>
+    <tr><td class="hi">Bowtie Analysis</td><td>Barrier management, risk controls</td><td>FTA (causes) + Event Tree (consequences) combined; "bow" = critical event</td></tr>
+  </table>
+  <p style="font-size:11px;margin-top:8px"><strong>SMART corrective actions:</strong> Specific · Measurable · Achievable · Relevant · Time-bound</p>
+</div>
+
+<!-- ===== S9: BLOOM'S ===== -->
+<div class="sec-label" id="s9">Q14 — Bloom's Taxonomy (1956, revised 2001)</div>
+<div class="page">
+  <div class="page-title">Bloom's Taxonomy — Original vs Revised 2001 <span class="ref">Q14</span></div>
+  <div class="svg-wrap">
+  <svg viewBox="0 0 620 190" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px;font-family:Segoe UI,sans-serif">
+    <!-- Original 1956 (left pyramid) -->
+    <text x="150" y="14" text-anchor="middle" font-size="10" font-weight="700" fill="#64748b">ORIGINAL (1956)</text>
+    <polygon points="150,22 110,52 190,52" fill="#ef4444"/><text x="150" y="42" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">EVALUATION</text>
+    <polygon points="110,56 80,82 220,82 190,56" fill="#f97316"/><text x="150" y="73" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">SYNTHESIS</text>
+    <polygon points="80,86 54,112 246,112 220,86" fill="#f59e0b"/><text x="150" y="103" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">ANALYSIS</text>
+    <polygon points="54,116 32,142 268,142 246,116" fill="#10b981"/><text x="150" y="133" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">APPLICATION</text>
+    <polygon points="32,146 14,168 286,168 268,146" fill="#3b82f6"/><text x="150" y="161" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">COMPREHENSION</text>
+    <rect x="14" y="172" width="272" height="16" fill="#1e3a5f" rx="0 0 4 4"/><text x="150" y="184" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">KNOWLEDGE</text>
+    <!-- Revised 2001 (right pyramid) -->
+    <text x="460" y="14" text-anchor="middle" font-size="10" font-weight="700" fill="#0f766e">REVISED 2001 (Anderson &amp; Krathwohl)</text>
+    <polygon points="460,22 420,52 500,52" fill="#0d9488"/><text x="460" y="42" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">CREATE ← APEX</text>
+    <polygon points="420,56 390,82 530,82 500,56" fill="#0f766e"/><text x="460" y="73" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">EVALUATE</text>
+    <polygon points="390,86 364,112 556,112 530,86" fill="#1e40af"/><text x="460" y="103" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">ANALYSE</text>
+    <polygon points="364,116 342,142 578,142 556,116" fill="#0369a1"/><text x="460" y="133" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">APPLY</text>
+    <polygon points="342,146 324,168 596,168 578,146" fill="#0891b2"/><text x="460" y="161" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">UNDERSTAND</text>
+    <rect x="324" y="172" width="272" height="16" fill="#1e3a5f" rx="0 0 4 4"/><text x="460" y="184" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">REMEMBER (base)</text>
+    <!-- Divider -->
+    <line x1="310" y1="14" x2="310" y2="190" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4"/>
+    <text x="310" y="105" text-anchor="middle" font-size="20" fill="#e2e8f0">⇌</text>
+    <!-- Note -->
+    <text x="310" y="9" text-anchor="middle" font-size="8" fill="#ef4444">⚠ In 2001 revision: Synthesis → CREATE (apex); Evaluation → EVALUATE (5th)</text>
+  </svg>
+  </div>
+  <table class="cs-table" style="margin-top:8px">
+    <tr><th>Level (2001)</th><th>Engine Room Application</th><th>MEO Oral Level</th></tr>
+    <tr><td><strong>Remember</strong></td><td>Name the three types of fire; recite MARPOL Annex I 15 ppm limit</td><td>15-second answers</td></tr>
+    <tr><td><strong>Understand</strong></td><td>Explain how a diesel engine works in own words</td><td>60-second answers</td></tr>
+    <tr><td><strong>Apply</strong></td><td>Start auxiliary engine following SMS checklist</td><td>Procedure questions</td></tr>
+    <tr><td><strong>Analyse</strong></td><td>Exhaust temp on No.3 cylinder 50°C above average — diagnose and investigate</td><td>Scenario cross-Qs</td></tr>
+    <tr><td><strong>Evaluate</strong></td><td>Review a maintenance procedure — identify if it meets SMS requirements</td><td>Examiner scenarios</td></tr>
+    <tr><td><strong>Create (apex)</strong></td><td>Develop revised PMS schedule to reduce unplanned downtime based on defect log</td><td>CE command Qs</td></tr>
+  </table>
+</div>
+<!-- ===== S10: DGS FRAMEWORK ===== -->
+<div class="sec-label" id="s10">Q16–Q19 — DGS India Training Framework</div>
+<div class="page">
+  <div class="page-title">TEAP / META / VICT / AECS — Hierarchy &amp; Key Dates <span class="ref">Q16 Q17 Q18 Q19</span></div>
+  <div class="svg-wrap">
+  <svg viewBox="0 0 620 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px;font-family:Segoe UI,sans-serif">
+    <defs><marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L8,3 z" fill="#0f172a"/></marker></defs>
+    <!-- Level 1: STCW -->
+    <rect x="200" y="10" width="220" height="36" rx="5" fill="#1e3a5f" stroke="#0d9488" stroke-width="1.5"/>
+    <text x="310" y="28" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">STCW 1978 (as amended 2010 Manila)</text>
+    <text x="310" y="41" text-anchor="middle" font-size="8" fill="#94a3b8">International obligation — Article IV, Reg. I/2</text>
+    <line x1="310" y1="46" x2="310" y2="62" stroke="#0f172a" stroke-width="1.5" marker-end="url(#arr3)"/>
+    <!-- Level 2: MS Act -->
+    <rect x="160" y="64" width="300" height="36" rx="5" fill="#0f766e" stroke="#0d9488" stroke-width="1.5"/>
+    <text x="310" y="81" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">MS Act 1958 + M.S. (STCW) Rules 2014</text>
+    <text x="310" y="95" text-anchor="middle" font-size="8" fill="#ccfbf1">Indian statutory implementation — regulatory authority for DGS</text>
+    <line x1="310" y1="100" x2="310" y2="116" stroke="#0f172a" stroke-width="1.5" marker-end="url(#arr3)"/>
+    <!-- TEAP box -->
+    <rect x="60" y="118" width="200" height="60" rx="5" fill="#0d9488" stroke="#fff" stroke-width="1.5"/>
+    <text x="160" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">TEAP</text>
+    <text x="160" y="153" text-anchor="middle" font-size="9" fill="#ccfbf1">Training, Examination &amp;</text>
+    <text x="160" y="166" text-anchor="middle" font-size="9" fill="#ccfbf1">Assessment Programme</text>
+    <!-- TEAP sub -->
+    <rect x="18" y="194" width="88" height="44" rx="4" fill="#ccfbf1" stroke="#0d9488" stroke-width="1"/>
+    <text x="62" y="210" text-anchor="middle" font-size="9" font-weight="700" fill="#0f766e">TEAP Part A</text>
+    <text x="62" y="222" text-anchor="middle" font-size="8" fill="#0f172a">Framework &amp;</text>
+    <text x="62" y="233" text-anchor="middle" font-size="8" fill="#0f172a">Certification (2015)</text>
+    <rect x="114" y="194" width="88" height="44" rx="4" fill="#ccfbf1" stroke="#0d9488" stroke-width="1"/>
+    <text x="158" y="210" text-anchor="middle" font-size="9" font-weight="700" fill="#0f766e">TEAP Part B</text>
+    <text x="158" y="222" text-anchor="middle" font-size="8" fill="#0f172a">Syllabi &amp; Course</text>
+    <text x="158" y="233" text-anchor="middle" font-size="8" fill="#0f172a">Curricula (2019)</text>
+    <line x1="62" y1="178" x2="62" y2="193" stroke="#0d9488" stroke-width="1" marker-end="url(#arr3)"/>
+    <line x1="158" y1="178" x2="158" y2="193" stroke="#0d9488" stroke-width="1" marker-end="url(#arr3)"/>
+    <!-- META box -->
+    <rect x="280" y="118" width="200" height="60" rx="5" fill="#f97316" stroke="#fff" stroke-width="1.5"/>
+    <text x="380" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">META Manual</text>
+    <text x="380" y="153" text-anchor="middle" font-size="9" fill="#fff7ed">Maritime Education &amp;</text>
+    <text x="380" y="166" text-anchor="middle" font-size="9" fill="#fff7ed">Training in India</text>
+    <!-- META sub -->
+    <rect x="238" y="194" width="88" height="44" rx="4" fill="#fff7ed" stroke="#f97316" stroke-width="1"/>
+    <text x="282" y="210" text-anchor="middle" font-size="9" font-weight="700" fill="#c2410c">META Vol. I</text>
+    <text x="282" y="222" text-anchor="middle" font-size="8" fill="#0f172a">Policy framework,</text>
+    <text x="282" y="233" text-anchor="middle" font-size="8" fill="#0f172a">MTI governance</text>
+    <rect x="334" y="194" width="88" height="44" rx="4" fill="#fff7ed" stroke="#f97316" stroke-width="1"/>
+    <text x="378" y="210" text-anchor="middle" font-size="9" font-weight="700" fill="#c2410c">META Vol. II</text>
+    <text x="378" y="222" text-anchor="middle" font-size="8" fill="#0f172a">Delivery standards,</text>
+    <text x="378" y="233" text-anchor="middle" font-size="8" fill="#0f172a">instructor quality</text>
+    <line x1="282" y1="178" x2="282" y2="193" stroke="#f97316" stroke-width="1" marker-end="url(#arr3)"/>
+    <line x1="378" y1="178" x2="378" y2="193" stroke="#f97316" stroke-width="1" marker-end="url(#arr3)"/>
+    <!-- VICT/AECS box -->
+    <rect x="490" y="118" width="118" height="60" rx="5" fill="#1e40af" stroke="#fff" stroke-width="1.5"/>
+    <text x="549" y="137" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">VICT + AECS</text>
+    <text x="549" y="151" text-anchor="middle" font-size="8" fill="#bfdbfe">Instructor &amp;</text>
+    <text x="549" y="164" text-anchor="middle" font-size="8" fill="#bfdbfe">Assessor Courses</text>
+    <rect x="430" y="194" width="60" height="55" rx="4" fill="#dbeafe" stroke="#1e40af" stroke-width="1"/>
+    <text x="460" y="210" text-anchor="middle" font-size="9" font-weight="700" fill="#1e40af">VICT</text>
+    <text x="460" y="222" text-anchor="middle" font-size="8" fill="#0f172a">IMO MC 6.09</text>
+    <text x="460" y="234" text-anchor="middle" font-size="8" fill="#0f172a">Instructors</text>
+    <text x="460" y="246" text-anchor="middle" font-size="8" fill="#1e40af">TR/CR/26</text>
+    <rect x="500" y="194" width="60" height="55" rx="4" fill="#dbeafe" stroke="#1e40af" stroke-width="1"/>
+    <text x="530" y="210" text-anchor="middle" font-size="9" font-weight="700" fill="#1e40af">AECS</text>
+    <text x="530" y="222" text-anchor="middle" font-size="8" fill="#0f172a">IMO MC 3.12</text>
+    <text x="530" y="234" text-anchor="middle" font-size="8" fill="#0f172a">Assessors</text>
+    <text x="530" y="246" text-anchor="middle" font-size="8" fill="#1e40af">TR/CR/25</text>
+    <line x1="460" y1="178" x2="460" y2="193" stroke="#1e40af" stroke-width="1" marker-end="url(#arr3)"/>
+    <line x1="530" y1="178" x2="530" y2="193" stroke="#1e40af" stroke-width="1" marker-end="url(#arr3)"/>
+    <!-- Connect level 2 to 3 boxes -->
+    <line x1="235" y1="116" x2="160" y2="118" stroke="#0f172a" stroke-width="1" marker-end="url(#arr3)"/>
+    <line x1="310" y1="116" x2="380" y2="118" stroke="#0f172a" stroke-width="1" marker-end="url(#arr3)"/>
+    <line x1="380" y1="116" x2="549" y2="118" stroke="#0f172a" stroke-width="1" marker-end="url(#arr3)"/>
+    <!-- TOTA/TOTI abolished note -->
+    <rect x="430" y="256" width="130" height="30" rx="4" fill="#fee2e2" stroke="#ef4444" stroke-width="1"/>
+    <text x="495" y="268" text-anchor="middle" font-size="8" fill="#991b1b" font-weight="700">TOTA + TOTI abolished</text>
+    <text x="495" y="280" text-anchor="middle" font-size="8" fill="#991b1b">DGS Order 5 of 2013 → revoked</text>
+    <text x="495" y="254" text-anchor="middle" font-size="7" fill="#ef4444">↑ replaced by VICT + AECS (31 Dec 2018)</text>
+  </svg>
+  </div>
+  <table class="cs-table" style="margin-top:8px">
+    <tr><th>Key</th><th>TEAP</th><th>META</th></tr>
+    <tr><td class="hi">Answers "What?"</td><td>What to teach; who gets certified; when</td><td>How to teach; what quality MTIs must maintain</td></tr>
+    <tr><td class="hi">Audience</td><td>DGS, MMDs, seafarers</td><td>MTI management, instructors, assessors</td></tr>
+    <tr><td class="hi">Key dates</td><td>Part A: 2015 | Part B: 2019</td><td>Vol. I &amp; II published by DGS</td></tr>
+  </table>
+</div>
+
+<!-- ===== S11: KEY NUMBERS ===== -->
+<div class="sec-label" id="s11">Key Numbers to Memorise — QB5_A</div>
+<div class="page">
+  <div class="page-title">Numbers &amp; Dates Master Table</div>
+  <div class="kn-grid">
+    <div class="kn-card"><div class="kn-val">75–96%</div><div class="kn-desc">Human element contribution to maritime casualties (IMO MSC/Circ.813)</div></div>
+    <div class="kn-card"><div class="kn-val">1 Jul 1998</div><div class="kn-desc">ISM Code mandatory — Phase 1 (pax ships, tankers, bulk carriers, gas carriers >500 GT)</div></div>
+    <div class="kn-card"><div class="kn-val">1 Jul 2002</div><div class="kn-desc">ISM Code mandatory — Phase 2 (other cargo ships, MODUs >500 GT)</div></div>
+    <div class="kn-card"><div class="kn-val">2013</div><div class="kn-desc">HTW Sub-committee established (replaced STW)</div></div>
+    <div class="kn-card"><div class="kn-val">2010</div><div class="kn-desc">STCW Manila Amendments — leadership/teamwork added as mandatory competencies</div></div>
+    <div class="kn-card"><div class="kn-val">A.947(23)</div><div class="kn-desc">IMO Resolution — Human Element Vision, Principles and Goals</div></div>
+    <div class="kn-card"><div class="kn-val">1 ppm</div><div class="kn-desc">H₂S TLV-TWA for enclosed space entry (ACGIH); STEL = 5 ppm</div></div>
+    <div class="kn-card"><div class="kn-val">25 ppm</div><div class="kn-desc">CO maximum for enclosed space entry</div></div>
+    <div class="kn-card"><div class="kn-val">19.5–23.5%</div><div class="kn-desc">Safe O₂ range for enclosed space entry</div></div>
+    <div class="kn-card"><div class="kn-val">Maslow 1943</div><div class="kn-desc">Herzberg 1959 · McGregor 1960 · Vroom 1964 — chronological order</div></div>
+    <div class="kn-card"><div class="kn-val">TR/CR/25</div><div class="kn-desc">DGS Order 2018 → approved AECS (IMO MC 3.12 — Assessors)</div></div>
+    <div class="kn-card"><div class="kn-val">TR/CR/26</div><div class="kn-desc">DGS Order 2018 → mandated VICT (IMO MC 6.09 — Instructors); TOTA/TOTI abolished</div></div>
+    <div class="kn-card"><div class="kn-val">DGS 5/2013</div><div class="kn-desc">Original order introducing TOTA + TOTI — now revoked</div></div>
+    <div class="kn-card"><div class="kn-val">TEAP A 2015</div><div class="kn-desc">Framework document; TEAP Part B 2019 — course curricula</div></div>
+    <div class="kn-card"><div class="kn-val">MS Act §77</div><div class="kn-desc">Certificate of Competency (not "license") — Indian statutory basis</div></div>
+    <div class="kn-card"><div class="kn-val">MS Act §225</div><div class="kn-desc">Criminal liability for wilful/negligent oil pollution — CE personal exposure</div></div>
+    <div class="kn-card"><div class="kn-val">MLC 2.3</div><div class="kn-desc">Rest hours: min 10 hrs/24 hrs; min 77 hrs/7 days</div></div>
+    <div class="kn-card"><div class="kn-val">SOLAS V/14</div><div class="kn-desc">Safe Manning — Reg. 14 (not Reg. 13 — common mistake)</div></div>
+  </div>
+</div>
+
+<!-- ===== S12: EXAMINER ROUTE MAPS ===== -->
+<div class="sec-label" id="s12">Examiner Route Maps — Kochi MMD</div>
+<div class="page">
+  <div class="page-title">How Examiners Chain Questions — QB5_A Topics</div>
+  <div class="exam-grid">
+    <div class="exam-card">
+      <div class="ec-head">🎯 Rajappan sir — Behavioural Chain</div>
+      <div class="ec-body"><ol>
+        <li>Q1 — "What is human element?" (open)</li>
+        <li>Q4 — "Explain Maslow" (pivot)</li>
+        <li>Q5 — "Other motivation theories?" (extend)</li>
+        <li>Q3 — "Johari Window?" (apply)</li>
+        <li>Q13 — "How do you appraise a JE?" (practical)</li>
+        <li>"Give a real vessel example" (close)</li>
+      </ol></div>
+    </div>
+    <div class="exam-card">
+      <div class="ec-head">🎯 Senthil sir — Safety/Risk Chain</div>
+      <div class="ec-body"><ol>
+        <li>Q10 — "Difference between risk and hazard?"</li>
+        <li>Q11 — "How do you carry out RA?"</li>
+        <li>"At what O₂ level do you stop work?" (trap)</li>
+        <li>"What is H₂S limit?" (trap — answer: 1 ppm, not 10)</li>
+        <li>Q12 — "Incident on vessel — walk me through RCA"</li>
+        <li>Q7 — "What is TQM? QA vs QC?"</li>
+      </ol></div>
+    </div>
+    <div class="exam-card">
+      <div class="ec-head">🎯 Srivastava sir — Process/Systems Chain</div>
+      <div class="ec-body"><ol>
+        <li>Q2 — "What is ERRM?" (open)</li>
+        <li>Q8 — "Decision-making tools onboard?"</li>
+        <li>Q9 — "Organisational behaviour?"</li>
+        <li>"Crew change — which Tuckman stage?" (trap)</li>
+        <li>Q14 — "Bloom's Taxonomy?" (training link)</li>
+        <li>Q19 — "TOTA/TOTI why replaced?" (DGS knowledge)</li>
+      </ol></div>
+    </div>
+    <div class="exam-card">
+      <div class="ec-head">⚠️ Common Trap Questions — QB5_A</div>
+      <div class="ec-body"><ul>
+        <li>"H₂S entry limit?" → 1 ppm (NOT 10 ppm)</li>
+        <li>"ISM Code from when?" → 1 Jul 1998 Phase 1 (NOT 1997)</li>
+        <li>"SOLAS safe manning reg?" → V/Reg.14 (NOT Reg.13)</li>
+        <li>"Which DGS Order replaced TOTA/TOTI?" → TR/CR/25 (AECS) + TR/CR/26 (VICT)</li>
+        <li>"Bloom's apex?" → CREATE (not Evaluation — 2001 revision)</li>
+        <li>"QA vs QC difference?" → proactive/process vs reactive/product</li>
+      </ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== S13: QUICK-FIRE INDEX ===== -->
+<div class="sec-label" id="s13">15-Second Quick-Fire Index — All 20 Questions</div>
+<div class="page">
+  <div class="page-title">Q1–Q20 — One-Line Oral Anchors <span class="ref">Memorise before oral</span></div>
+  <div class="qf-grid">
+    <div class="qf-card"><div class="qn">Q1 — Human Element &amp; HTW</div><div class="qa">75–96% of casualties involve human factors. HTW Sub-committee (est. 2013) develops STCW standards, model courses, and embeds human factors in all IMO instruments. Mandated by A.947(23), ISM §6, STCW Manila 2010.</div></div>
+    <div class="qf-card"><div class="qn">Q2 — ERRM</div><div class="qa">Engine Room Resource Management — effective use of all resources (human, equipment, information, external) for safe operations. STCW 2010 A-III/1 and A-III/2. IMO Model Course 2.07.</div></div>
+    <div class="qf-card"><div class="qn">Q3 — Johari Window</div><div class="qa">4-quadrant self-awareness model: Arena (known to both), Blind Spot (others know, self doesn't), Façade (self knows, others don't), Unknown (nobody knows). CE goal: expand Arena.</div></div>
+    <div class="qf-card"><div class="qn">Q4 — Maslow's Hierarchy</div><div class="qa">5 levels: Physiological → Safety → Social → Esteem → Self-Actualisation. Lower needs must be met first. MLC (rest/food/medical) covers Levels 1–2. Start diagnosis from Level 1 always.</div></div>
+    <div class="qf-card"><div class="qn">Q5 — Motivation Theories</div><div class="qa">Maslow 1943 / Herzberg 1959 (hygiene + motivators) / McGregor 1960 (X=control, Y=trust) / Vroom 1964. Vroom formula: Motivation = Expectancy × Instrumentality × Valence.</div></div>
+    <div class="qf-card"><div class="qn">Q6 — Conflict Management</div><div class="qa">Thomas-Kilmann 5 styles: Competing / Collaborating (CE default) / Compromising / Avoiding / Accommodating. Safety = Competing. Team decisions = Collaborating. Never Avoiding for safety issues.</div></div>
+    <div class="qf-card"><div class="qn">Q7 — TQM</div><div class="qa">Total Quality Management — continuous improvement at every level. PDCA cycle (Plan-Do-Check-Act = Deming Wheel). QA = proactive/process (prevent). QC = reactive/product (detect). ISM Code is maritime TQM.</div></div>
+    <div class="qf-card"><div class="qn">Q8 — Decision-Making Tools</div><div class="qa">FORDEC (Facts-Options-Risks-Decision-Execution-Check) for complex decisions. OODA Loop for emergencies. Risk Matrix (Risk = L×C) for quantification. Biases: anchoring, confirmation bias, authority gradient.</div></div>
+    <div class="qf-card"><div class="qn">Q9 — Organisational Behaviour</div><div class="qa">Tuckman's Stages: Forming→Storming→Norming→Performing→Adjourning. Large crew change under port pressure can jump from Forming to aggressive Storming — CE must mediate early and decisively.</div></div>
+    <div class="qf-card"><div class="qn">Q10 — Risk vs Hazard</div><div class="qa">Hazard = source of potential harm (static). Risk = likelihood × consequence (dynamic). Risk changes with controls applied. Risk = L × C is the basis for every PTW and RA onboard.</div></div>
+    <div class="qf-card"><div class="qn">Q11 — Risk Assessment</div><div class="qa">9-step process: identify hazards → evaluate L×C → risk category (1–6 OK, 7–12 ALARP, 13+ unacceptable) → hierarchy of controls → PTW → toolbox talk → execute → close. H₂S limit: 1 ppm TLV-TWA.</div></div>
+    <div class="qf-card"><div class="qn">Q12 — Root Cause Analysis</div><div class="qa">5-Whys (simple), Fishbone/Ishikawa-6Ms (complex), Fault Tree Analysis (systems), Bowtie (barriers). Always reach a system failure root cause — never stop at "crew negligence". SMART corrective actions.</div></div>
+    <div class="qf-card"><div class="qn">Q13 — Appraisal of JE</div><div class="qa">6 steps: pre-appraisal prep → private meeting → SMART targets → document and sign → submit to company → monitor. JE has right to add comments (MLC 5.1.5). Connects to Johari, Vroom, Maslow.</div></div>
+    <div class="qf-card"><div class="qn">Q14 — Bloom's Taxonomy</div><div class="qa">2001 revision (Anderson &amp; Krathwohl): Remember→Understand→Apply→Analyse→Evaluate→Create. Note: Create is apex (Synthesis/Evaluation swapped). MEO oral tests at Analyse/Evaluate level.</div></div>
+    <div class="qf-card"><div class="qn">Q15 — Mentoring</div><div class="qa">Long-term developmental relationship (career, identity, tacit knowledge). vs Coaching (performance, shorter-term) vs Training (skill, structured). Reverse mentoring: junior teaches senior on digital tools, new regs.</div></div>
+    <div class="qf-card"><div class="qn">Q16 — TEAP</div><div class="qa">Training, Examination and Assessment Programme — DGS India's national instrument fulfilling STCW obligation. Part A (2015) = framework/certification; Part B (2019) = course curricula. MS (STCW) Rules 2014 is the statutory basis.</div></div>
+    <div class="qf-card"><div class="qn">Q17 — META Manual</div><div class="qa">Maritime Education and Training in India. Vol. I = policy/MTI governance. Vol. II = delivery standards/instructor quality. TEAP says WHAT to teach; META says HOW to teach it.</div></div>
+    <div class="qf-card"><div class="qn">Q18 — VICT</div><div class="qa">Vertical Integration Course for Trainers. Vertical = full Bloom spectrum coverage. Integration = instructional design + assessment fused in one qualification. DGS Order TR/CR/26 of 2018. Replaces TOTI. IMO MC 6.09.</div></div>
+    <div class="qf-card"><div class="qn">Q19 — TOTA &amp; TOTI</div><div class="qa">TOTI (instruction) + TOTA (assessment) — introduced DGS Order 5 of 2013. Replaced by VICT+AECS under TR/CR/25 (AECS) + TR/CR/26 (VICT) of 2018. Problems: overlap, misalignment with IMO MCs, instruction-assessment split.</div></div>
+    <div class="qf-card"><div class="qn">Q20 — CE Duties</div><div class="qa">STCW A-III/2 (competency) · SOLAS Ch.V Reg.14 safe manning · MARPOL Annex I ORB signing (criminal liability) · MLC 2.3 rest hours · ISM §6 resources · MS Act §77 CoC · §225 pollution liability.</div></div>
+  </div>
+</div>
+</div><!-- /container -->
+<footer class="page-footer">
+  <p><strong>Marine Intelligence Weekly — QB5_A Cheat Sheet</strong></p>
+  <p>Management, Leadership &amp; Human Element | Q1–Q20 | Companion to QB5_A.html | v1.0 · June 2026</p>
+  <p>Compiled by Nixon Antony, 2/E, Maersk A/S | <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a></p>
+  <p style="margin-top:6px;font-size:10px">Personal MEO Class 1 preparation only. Do not redistribute. © Marine Intelligence Weekly 2026.</p>
+</footer>
+</body></html>

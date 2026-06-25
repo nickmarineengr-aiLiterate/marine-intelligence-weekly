@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>QB7 — GHG, CII, EEXI, SEEMP & Decarbonisation | MEO Class 1 | Marine Intelligence Weekly</title>
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);-webkit-user-select:none;-ms-user-select:none;user-select:none;}
+a{color:var(--teal-dark);}
+
+/* TOPBAR */
+.topbar{background:var(--navy);padding:10px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;}
+.topbar-brand{display:flex;align-items:center;gap:10px;}
+.topbar-mark{width:28px;height:28px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;color:#fff;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;}
+.topbar-nav{display:flex;gap:16px;}
+.topbar-nav a{color:#94a3b8;font-size:13px;text-decoration:none;}
+.topbar-nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{background:var(--navy);padding:32px 24px 24px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.qb-badge{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#fff;border-radius:20px;padding:4px 14px;font-size:12px;font-weight:700;letter-spacing:.5px;margin-bottom:12px;}
+.page-header h1{color:#fff;font-size:26px;font-weight:800;margin-bottom:6px;}
+.page-header .sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;gap:24px;flex-wrap:wrap;}
+.header-meta span{color:#64748b;font-size:12px;}
+.header-meta strong{color:#cbd5e1;}
+
+/* CONTROLS BAR */
+.controls-bar{background:#fff;border-bottom:1px solid var(--grey-border);padding:12px 24px;position:sticky;top:48px;z-index:90;display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+#search-input{flex:1;min-width:180px;padding:7px 12px;border:1px solid var(--grey-border);border-radius:8px;font-size:13px;outline:none;}
+#search-input:focus{border-color:var(--teal);}
+.filter-btn{padding:5px 12px;border:1px solid var(--grey-border);border-radius:20px;font-size:12px;cursor:pointer;background:#fff;color:var(--grey-text);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{font-size:12px;color:var(--grey-text);margin-left:auto;}
+
+/* LAYOUT */
+.main-layout{max-width:1100px;margin:0 auto;padding:24px;display:grid;grid-template-columns:220px 1fr;gap:24px;}
+@media(max-width:768px){.main-layout{grid-template-columns:1fr;}.sidebar{display:none;}}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:110px;align-self:start;height:calc(100vh - 130px);overflow-y:auto;}
+.toc-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;font-size:12.5px;color:var(--grey-text);text-decoration:none;padding:5px 8px;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{color:var(--teal-dark);border-left-color:var(--teal);background:var(--teal-light);font-weight:700;}
+.toc-divider{border:none;border-top:1px solid var(--grey-border);margin:12px 0;}
+.sidebar-note{font-size:11px;color:var(--grey-text);padding:8px;background:var(--grey-bg);border-radius:6px;line-height:1.5;}
+
+/* SECTION HEAD */
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:0 0 16px;padding-bottom:8px;border-bottom:2px solid var(--teal-light);}
+.section-head h2{font-size:16px;font-weight:800;color:var(--teal-dark);}
+.sec-count{background:var(--teal-light);color:var(--teal-dark);border-radius:12px;padding:2px 10px;font-size:11px;font-weight:700;}
+
+/* Q CARD */
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:12px;margin-bottom:16px;overflow:hidden;}
+.q-header{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer;transition:background .15s;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{width:32px;height:32px;background:var(--teal);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex-shrink:0;}
+.q-card.open .q-num-badge{background:var(--teal-dark);}
+.q-text-wrap{flex:1;}
+.q-text{font-weight:700;font-size:14px;line-height:1.4;}
+.q-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px;}
+.q-tag{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;}
+.tag-ghg{background:#dcfce7;color:#15803d;}
+.tag-marpol{background:#fef9c3;color:#854d0e;}
+.tag-survey{background:#dbeafe;color:#1d4ed8;}
+.tag-machinery{background:#f3e8ff;color:#7e22ce;}
+.q-chevron{width:18px;height:18px;color:var(--grey-text);transition:transform .2s;flex-shrink:0;}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 16px 16px;}
+.q-card.open .q-answer{display:block;}
+
+/* PRACTICE BLOCKS */
+.practice-block{border-radius:8px;padding:12px 16px;margin:10px 0;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;line-height:1.65;}
+.practice-label{font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px;display:block;}
+.practice-15{background:#0f766e;color:#fff;border:none;}
+.practice-15 .practice-label{color:#ccfbf1;}
+.practice-60{background:#0d9488;color:#fff;border:none;}
+.practice-60 .practice-label{color:#ccfbf1;}
+
+/* ANSWER BODY */
+.answer-body{font-family:'Georgia',serif;font-size:14px;line-height:1.7;margin:12px 0;}
+.answer-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.answer-body ul{padding-left:18px;margin:6px 0;}
+.answer-body li{margin-bottom:4px;}
+.answer-body p{margin-bottom:8px;}
+.formula{font-family:monospace;background:var(--grey-bg);border-radius:6px;padding:8px 12px;margin:8px 0;font-size:13px;display:block;overflow-x:auto;}
+.answer-body table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;}
+.answer-body th{background:var(--navy);color:#fff;padding:6px 10px;text-align:left;font-size:11px;}
+.answer-body td{border:1px solid var(--grey-border);padding:6px 10px;vertical-align:top;}
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:12px 16px;margin:8px 0;font-size:12px;line-height:1.5;overflow-x:auto;white-space:pre;}
+
+/* NUMBERS BOX */
+.numbers-box{background:var(--grey-bg);border-left:3px solid var(--teal);border-radius:6px;padding:10px 14px;margin:8px 0;font-size:13px;line-height:1.6;}
+.numbers-box h4{margin:0 0 4px;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);}
+.numbers-box ul{padding-left:16px;margin:4px 0;}
+
+/* TRAP BOX */
+.trap-box{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13px;line-height:1.6;}
+.trap-box strong.trap-label{color:#b91c1c;font-size:10px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px;}
+
+/* CASUALTY BOX */
+.casualty-box{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px 14px;margin:8px 0;font-size:13px;line-height:1.6;}
+.casualty-box strong.cas-label{color:#92400e;font-size:10px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px;}
+
+/* REG BOX */
+.reg-box{background:var(--navy);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.reg-box-title{color:#5eead4;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;}
+.reg-item:last-child{margin-bottom:0;}
+.reg-code{color:var(--orange);font-size:11px;font-weight:800;font-family:monospace;min-width:170px;flex-shrink:0;word-break:break-all;}
+.reg-desc{color:#94a3b8;font-size:12px;line-height:1.5;}
+
+/* CE TIP */
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:13px;line-height:1.6;}
+.ce-tip strong{color:#c2410c;}
+
+/* DEEP DIVE */
+.deep-dive{margin:10px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:0;}
+.dd-block{padding:10px 16px;border-top:1px solid var(--grey-border);font-size:13px;line-height:1.6;font-family:'Georgia',serif;}
+.dd-label{font-family:'Segoe UI',system-ui,sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+.dd-relevance .dd-label{color:#0f766e;}
+.dd-trap .dd-label{color:#b91c1c;}
+.dd-fail .dd-label{color:#92400e;}
+.dd-numbers .dd-label{color:#1d4ed8;}
+.dd-casualty .dd-label{color:#92400e;}
+.dd-chain .dd-label{color:#6d28d9;}
+.dd-vessel .dd-label{color:#0f766e;}
+.dd-block ul{padding-left:16px;margin:4px 0;}
+.dd-block p{margin-bottom:6px;}
+
+/* RELATED Q */
+.related-q{font-size:12px;color:var(--grey-text);margin:8px 0;padding:8px 14px;border-top:1px dashed var(--grey-border);}
+.related-q a{color:var(--teal-dark);text-decoration:none;font-weight:600;}
+.related-q a:hover{text-decoration:underline;}
+
+/* Q FOOTER */
+.q-footer{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;background:var(--grey-bg);border-top:1px solid var(--grey-border);font-size:11px;flex-wrap:wrap;gap:4px;}
+.correction-link{color:var(--grey-text);}
+.correction-link a{color:var(--teal-dark);word-break:break-all;}
+.q-version{color:var(--grey-text);font-weight:600;}
+
+/* NO RESULTS */
+#no-results{display:none;text-align:center;padding:40px;color:var(--grey-text);}
+
+/* FOOTER */
+.page-footer{background:var(--navy);color:#64748b;font-size:12px;padding:24px;margin-top:40px;text-align:center;line-height:1.8;}
+.page-footer a{color:var(--teal);}
+</style>
+</head>
+<body>
+
+<!-- WATERMARK -->
+<div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.04;">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs><pattern id="wm" x="0" y="0" width="300" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+      <text x="10" y="60" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">marineintelligenceweekly.com</text>
+      <text x="10" y="120" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">MEO CLASS 1 — CONFIDENTIAL</text>
+    </pattern></defs>
+    <rect width="100%" height="100%" fill="url(#wm)"/>
+  </svg>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-mark">M</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </div>
+  <nav class="topbar-nav">
+    <a href="/index.html">Home</a>
+    <a href="/meoclass1/">MEO Class 1</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </nav>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="qb-badge">🌍 QB7 · GHG & Decarbonisation · v1.0</div>
+    <h1>GHG, CII, EEXI, SEEMP & Decarbonisation</h1>
+    <p class="sub">MEO Class 1 Oral Examination — Kochi MMD · Primary Examiners: Nair (Regulatory) · Rajappan (Technical/Operational)</p>
+    <div class="header-meta">
+      <span><strong>3 Questions</strong> · QB7_A</span>
+      <span><strong>Compiled:</strong> June 2026</span>
+      <span><strong>Source:</strong> Kochi MMD WhatsApp Oral Group</span>
+      <span><strong>Authority:</strong> Nixon Antony, 2/E, Maersk A/S</span>
+    </div>
+  </div>
+</div>
+
+<!-- CONTROLS BAR -->
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search questions, regulations, numbers…" oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
+  <button class="filter-btn" onclick="filterTag('ghg',this)">GHG / CII</button>
+  <button class="filter-btn" onclick="filterTag('marpol',this)">MARPOL</button>
+  <button class="filter-btn" onclick="filterTag('machinery',this)">Machinery</button>
+  <button class="filter-btn" onclick="filterTag('survey',this)">Survey</button>
+  <span id="q-count-label">Showing 3 of 3</span>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- SIDEBAR TOC -->
+  <aside class="sidebar">
+    <div class="toc-title">Contents — QB7_A</div>
+    <a href="#q1" class="toc-link">Q1 · SEEMP Part III</a>
+    <a href="#q2" class="toc-link">Q2 · Onboard Carbon Capture</a>
+    <a href="#q3" class="toc-link">Q3 · EU MRV / FuelEU / ETS</a>
+    <hr class="toc-divider">
+    <div class="sidebar-note">QB7 covers GHG frameworks, MARPOL Annex VI efficiency regulations, EU carbon market instruments, and emerging decarbonisation technologies.<br><br>QB7_B: E-marine fuels · Hydrogen types (planned)</div>
+  </aside>
+
+  <!-- Q FEED -->
+  <main id="q-feed">
+    <div class="section-head">
+      <h2>🌍 GHG, CII & SEEMP Frameworks</h2>
+      <span class="sec-count">3 questions</span>
+    </div>
+<!-- =========================================================
+     Q1 | SEEMP Part III
+     ========================================================= -->
+<div class="q-card" id="q1" data-tags="ghg marpol survey">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">SEEMP Part III — why was it added and what are its specific contents?</div>
+      <div class="q-tags">
+        <span class="q-tag tag-ghg">GHG / CII</span>
+        <span class="q-tag tag-marpol">MARPOL</span>
+        <span class="q-tag tag-survey">Survey</span>
+      </div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+
+    <div class="practice-block practice-15">
+      <span class="practice-label">⏱ 15-Second Answer</span>
+      SEEMP Part III was added under <strong>MARPOL Annex VI, Regulation 26</strong> by <strong>MEPC.328(76)</strong> to enforce operational compliance with the <strong>Carbon Intensity Indicator (CII)</strong> framework. Unlike EEXI which is a one-time technical design check, SEEMP Part III is a mandatory operational management plan for ships <strong>≥5,000 GT</strong>, detailing how the vessel calculates, monitors, and improves its annual carbon efficiency rating.
+    </div>
+
+    <div class="practice-block practice-60">
+      <span class="practice-label">🎯 60-Second Answer</span>
+      SEEMP Part III bridges the gap between fixed structural design metrics and real-time operational fuel efficiency. The EEXI is a one-off technical certificate; the CII requires continuous operational tracking — hence Part III was mandated as the dynamic management tool. For all vessels <strong>5,000 GT and above</strong>, Part III specifies the methodology to calculate the attained CII, states the required annual target values from 2023–2030, and lists operational reduction measures such as weather routing and engine power optimisation. Critically, it must incorporate an approved <strong>Corrective Action Plan</strong> if the vessel receives a <strong>D rating for three consecutive years</strong> or an <strong>E rating in any single year</strong>.
+    </div>
+
+    <div class="answer-body">
+      <h4>1. Why SEEMP Part III Was Needed</h4>
+      <p>SEEMP Part III was adopted via amendments to <strong>MARPOL Annex VI, Regulation 26</strong>, entering into force <strong>1 January 2023</strong>.</p>
+      <ul>
+        <li><strong>The technical–operational gap:</strong> EEXI evaluates a vessel's structural energy efficiency (shaft power limits, hull form) as a one-time certification. It does not track how the ship is operated in service.</li>
+        <li><strong>CII dynamic mandate:</strong> CII measures actual operational GHG emissions per unit of cargo capacity and distance sailed each calendar year. Because performance varies with trade route, speed, and fuel choice, IMO mandated SEEMP Part III as the live management tool to track and improve CII compliance year on year.</li>
+      </ul>
+
+      <h4>2. Application Scope</h4>
+      <ul>
+        <li><strong>Applies to:</strong> All ships <strong>≥5,000 GT</strong> engaged in international voyages — same scope as MARPOL Annex VI CII reporting.</li>
+        <li><strong>Certification cycle:</strong> Unlike Parts I and II, Part III must be verified and certified by the Flag State or authorised RO before each <strong>three-year implementation cycle</strong>.</li>
+      </ul>
+
+      <h4>3. Mandatory Contents of SEEMP Part III</h4>
+      <p>A certified Part III document must contain five structural elements:</p>
+      <ul>
+        <li><strong>Methodology for attained CII calculation:</strong> Specifies the data streams (IMO DCS fuel monitoring) and mathematical approach used to compute the annual attained CII.</li>
+        <li><strong>Required annual CII target values:</strong> Lists the vessel's mandatory reduction boundary values from 2023 to 2030, showing the step reductions required each year.</li>
+        <li><strong>Operational carbon reduction measures:</strong> Detailed action plan — speed optimisation profiles, weather routing integration, hull cleaning schedules, propeller polishing, auxiliary load management in port.</li>
+        <li><strong>Self-evaluation and review mechanism:</strong> Framework for how shipboard management and the company track energy efficiency trends and identify performance gaps during the reporting year.</li>
+        <li><strong>Corrective Action Plan (when triggered):</strong> Appended when CII rating triggers the enforcement mechanism (see below).</li>
+      </ul>
+
+      <h4>4. Corrective Action Plan — Trigger and Obligations</h4>
+      <ul>
+        <li><strong>Trigger — E rating:</strong> Any single-year <strong>E</strong> rating immediately requires a Corrective Action Plan.</li>
+        <li><strong>Trigger — D rating:</strong> Three <strong>consecutive years</strong> at D rating requires a Corrective Action Plan.</li>
+        <li><strong>Plan content:</strong> Root-cause analysis of poor efficiency, specific technical or operational modifications (ESDs, fuel switch), and a clear timeline to restore rating to C or above.</li>
+        <li><strong>Consequence of non-compliance:</strong> Flag State withholds the <strong>Statement of Compliance (SoC)</strong>. Without a valid SoC, the vessel is subject to port state detention and barred from international commercial trading.</li>
+      </ul>
+
+      <pre class="mental-map">MARPOL ANNEX VI — EFFICIENCY COMPLIANCE MATRIX
+  EEXI ──► One-Time Technical Design Certification
+            (shaft power limits, hull form, ESDs)
+  CII  ──► Annual Operational Rating (Grades A–E)
+            (actual fuel burn / cargo × distance)
+  SEEMP PART III ──► Mandatory operational plan
+            (calculates CII, sets targets, triggers
+             Corrective Action Plan when D×3 or E)</pre>
+    </div>
+
+    <div class="numbers-box">
+      <h4>Key Numbers &amp; Thresholds</h4>
+      <ul>
+        <li><strong>5,000 GT:</strong> Minimum tonnage triggering SEEMP Part III and CII compliance</li>
+        <li><strong>1 January 2023:</strong> Entry into force of CII and SEEMP Part III amendments</li>
+        <li><strong>3 consecutive years at D:</strong> Triggers mandatory Corrective Action Plan</li>
+        <li><strong>E in any single year:</strong> Triggers mandatory Corrective Action Plan immediately</li>
+        <li><strong>MEPC.328(76):</strong> Resolution adopting the CII and SEEMP Part III amendments</li>
+        <li><strong>MEPC.346(78) / MEPC.347(78):</strong> Guidelines for SEEMP development and Flag State verification</li>
+      </ul>
+    </div>
+
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI / Reg 26</span><span class="reg-desc">Statutory requirement for the Ship Energy Efficiency Management Plan (SEEMP) — all three Parts</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC.328(76)</span><span class="reg-desc">IMO resolution adopting the mandatory operational CII rating system and SEEMP Part III amendments, effective 1 Jan 2023</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC.346(78)</span><span class="reg-desc">Guidelines for the development of the Ship Energy Efficiency Management Plan (SEEMP)</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC.347(78)</span><span class="reg-desc">Guidelines for Flag State verification and auditing of SEEMP Part III and Statement of Compliance</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI / Reg 28</span><span class="reg-desc">Carbon Intensity Indicator (CII) rating — annual attained vs. required CII calculation and grading framework</span></div>
+    </div>
+
+    <div class="ce-tip">
+      <strong>CE Oral Tip (Nair — 24/06/2026):</strong> Nair tests the enforcement mechanism precisely. State the two triggers verbatim: <em>"E in any single year, or D for three consecutive years."</em> A very common failure is stating "D in any single year" — that is wrong. Also be ready to name <strong>MEPC.328(76)</strong> as the resolution. Nair may follow with: <em>"What happens if you do not have a valid Statement of Compliance?"</em> — answer: port state detention and barred from international trading.
+    </div>
+
+    <div class="deep-dive" id="dd-q1">
+      <button class="deep-dive-toggle" onclick="toggleDD('dd-q1')">▶ Deep Dive</button>
+      <div class="deep-dive-body" style="display:none">
+
+        <div class="dd-block dd-relevance">
+          <strong class="dd-label">🔧 CE Relevance</strong>
+          <p>As 2/E on a Maersk container vessel, SEEMP Part III directly governs daily engineering operations. Main engine fuel oil consumption logs, generator loading records, and auxiliary boiler run hours all feed the annual attained CII calculation. Engineering input — torque meter calibration accuracy, fuel oil flow meter performance verification, and speed-power curve monitoring — must be meticulously maintained. Any data entry error or sensor drift can misrepresent the vessel's CII rating, potentially triggering a corrective action plan obligation or a false-positive compliance status.</p>
+        </div>
+
+        <div class="dd-block dd-trap">
+          <strong class="dd-label">⚠ Trap Questions</strong>
+          <p><strong>"If your ship gets a D rating this year, do you need to update SEEMP Part III immediately?"</strong> — No. A single D rating does not trigger a mandatory Corrective Action Plan update. The trigger is D for <strong>three consecutive years</strong> or E in <strong>any single year</strong>. Candidates who answer "yes" to a single D fail this question.</p>
+          <p><strong>"Is SEEMP Part III the same as EEXI?"</strong> — No. EEXI is a one-time technical design metric (structural certification). SEEMP Part III is a dynamic operational management plan updated annually and formally verified before each three-year cycle.</p>
+        </div>
+
+        <div class="dd-block dd-fail">
+          <strong class="dd-label">✗ Common CE Failures</strong>
+          <ul>
+            <li>Stating "D rating in any single year" triggers a Corrective Action Plan — incorrect, it requires three consecutive years</li>
+            <li>Treating SEEMP Part III as a static document rather than an annually updated operational management tool</li>
+            <li>Confusing SEEMP Part III with the EEXI certificate — these are separate instruments with separate purposes</li>
+            <li>Not knowing the resolution number MEPC.328(76) — Nair specifically asks for it</li>
+            <li>Failing to name the Statement of Compliance (SoC) as the document withheld when Part III is non-compliant</li>
+          </ul>
+        </div>
+
+        <div class="dd-block dd-numbers">
+          <strong class="dd-label">🔢 Numbers &amp; Regulations to Memorise</strong>
+          <ul>
+            <li><strong>5,000 GT:</strong> Mandatory compliance threshold for CII and SEEMP Part III</li>
+            <li><strong>1 January 2023:</strong> Entry into force date</li>
+            <li><strong>3 years at D / 1 year at E:</strong> Corrective Action Plan triggers</li>
+            <li><strong>MEPC.328(76):</strong> Adoption resolution — Nair asks verbatim</li>
+            <li><strong>MEPC.346(78):</strong> SEEMP development guidelines</li>
+            <li><strong>MEPC.347(78):</strong> Flag State verification guidelines</li>
+            <li><strong>Reg 26, MARPOL Annex VI:</strong> Statutory basis for SEEMP</li>
+            <li><strong>Reg 28, MARPOL Annex VI:</strong> CII rating framework</li>
+          </ul>
+        </div>
+
+        <div class="dd-block dd-casualty">
+          <strong class="dd-label">⚓ Casualty Link</strong>
+          <p><strong>General industry — CII D/E rating detentions (2024 onwards):</strong> Post-2023, multiple vessels operating in Asian trades received D and E CII ratings due to high auxiliary load profiles and non-optimised speed-power curves. Flag State administrations began issuing formal corrective action plan requirements; vessels operating without an updated SEEMP Part III faced port state control targeting under Paris MOU and Tokyo MOU inspection campaigns.</p>
+        </div>
+
+        <div class="dd-block dd-chain">
+          <strong class="dd-label">🔗 Examiner Chain (Kochi MMD)</strong>
+          <p><strong>Nair (24/06/2026 documented session):</strong> "What are the MARPOL Annex VI Reg 26 amendments?" → "What specifically is SEEMP Part III and why was it added?" → "What are the exact contents?" → "What happens if a vessel gets an E rating?" → "What is the Statement of Compliance — who issues it, what happens if it's not obtained?"</p>
+          <p><strong>Rajappan:</strong> More likely to link SEEMP Part III to actual onboard data management — "How do you ensure your fuel consumption data is accurate for CII calculation?"</p>
+        </div>
+
+        <div class="dd-block dd-vessel">
+          <strong class="dd-label">🚢 On My Vessel (Maersk Container)</strong>
+          <p>On Maersk A/S container vessels, SEEMP Part III parameters are integrated into our performance monitoring platform (Maersk uses proprietary fleet monitoring software). The engineering department provides daily fuel consumption data by consumer — main engine, auxiliary engines, boiler — which feeds the vessel's annual CII calculation. Speed optimisation decisions are coordinated between the bridge and fleet operations centre. The Chief Engineer holds accountability for engineering-side data accuracy, while the Master holds overall SEEMP Part III plan compliance.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="related-q">🔗 Related: <a href="#q3">Q3 EU MRV / FuelEU / ETS</a> · <a href="#q2">Q2 Carbon Capture</a></div>
+
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7, Q1, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7 · Q1 · Correction Required</span>
+    <span class="q-version">QB7 · Q1 · v1.0</span>
+  </div>
+</div>
+<!-- =========================================================
+     Q2 | Onboard Carbon Capture & Sequestration
+     ========================================================= -->
+<div class="q-card" id="q2" data-tags="ghg machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Onboard carbon capture — how does it work? What is carbon sequestration?</div>
+      <div class="q-tags">
+        <span class="q-tag tag-ghg">GHG</span>
+        <span class="q-tag tag-machinery">Machinery</span>
+      </div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+
+    <div class="practice-block practice-15">
+      <span class="practice-label">⏱ 15-Second Answer</span>
+      Onboard Carbon Capture and Storage (OCCS) captures CO₂ from engine exhaust before atmospheric release. The primary method is <strong>post-combustion chemical absorption (amine scrubbing)</strong> — exhaust passes through an absorber column containing monoethanolamine (MEA) solvent, which binds CO₂. The captured gas is liquefied under pressure and stored in cryogenic tanks for discharge ashore. <strong>Carbon sequestration</strong> is the permanent underground storage of that liquid CO₂ — in depleted oil fields, deep saline aquifers, or via mineral carbonation in basalt rock.
+    </div>
+
+    <div class="practice-block practice-60">
+      <span class="practice-label">🎯 60-Second Answer</span>
+      OCCS removes CO₂ directly from main engine exhaust. In amine scrubbing: exhaust gas is cooled to approximately <strong>40–50°C</strong>, then enters an absorber column where MEA solvent chemically binds the CO₂. The CO₂-rich solvent passes to a stripper column where <strong>auxiliary boiler steam at 120–140°C</strong> breaks the bonds, releasing pure CO₂ and regenerating the lean amine for reuse. The released CO₂ is compressed to <strong>15–20 bar</strong>, chilled to approximately <strong>−30 to −50°C</strong>, and stored as liquid CO₂ in cryogenic tanks onboard. Note: every tonne of marine fuel burned produces approximately <strong>3.1 tonnes of CO₂</strong> — so storage demands are significant. Carbon sequestration is the final step where offloaded liquid CO₂ is injected permanently into geological formations: depleted reservoirs, deep saline aquifers, or mineralised in basalt structures.
+    </div>
+
+    <div class="answer-body">
+      <h4>1. Post-Combustion Amine Scrubbing — Step by Step</h4>
+      <ul>
+        <li><strong>Pre-cooling:</strong> High-temperature exhaust from main engine / auxiliary diesels passes through a particulate filter and cooling tower, reducing temperature to <strong>40–50°C</strong> to protect solvent stability downstream.</li>
+        <li><strong>Absorption column:</strong> Cooled exhaust enters the bottom of a vertical absorber tower, flowing upward against a counter-current spray of <strong>Monoethanolamine (MEA)</strong> or piperazine formulations. The amine chemically bonds with CO₂ molecules. The remaining clean exhaust (N₂, H₂O vapour) vents safely from the top.</li>
+        <li><strong>Stripping and regeneration:</strong> CO₂-rich solvent is pumped through a heat exchanger into a stripper column. Auxiliary boiler steam at <strong>120–140°C</strong> breaks the chemical bonds, releasing pure CO₂ gas from the top while regenerating lean amine, which is cooled and recycled to the absorber column continuously.</li>
+      </ul>
+
+      <h4>2. Liquefaction and Onboard Storage</h4>
+      <ul>
+        <li><strong>Compression:</strong> Pure CO₂ gas exits the stripper and is routed through multi-stage compressors to approximately <strong>15–20 bar</strong>.</li>
+        <li><strong>Cryogenic refrigeration:</strong> Pressurised gas is chilled to approximately <strong>−30 to −50°C</strong>, converting it to liquid CO₂ (LCO₂).</li>
+        <li><strong>Storage:</strong> LCO₂ is transferred to vacuum-insulated Type-C cryogenic containment tanks on deck or in a dedicated compartment, maintained throughout the voyage.</li>
+        <li><strong>Mass penalty:</strong> Every tonne of marine fuel burned produces approximately <strong>3.1 tonnes of CO₂</strong>. Storage tanks must accommodate this expansion — and the added weight reduces commercial deadweight capacity and impacts vessel stability.</li>
+      </ul>
+
+      <pre class="mental-map">OCCS PROCESS FLOW
+  [EXHAUST] → [COOLER 40-50°C] → [ABSORBER TOWER]
+                                    │ (MEA binds CO₂)
+                                    ▼
+                            [STRIPPER TOWER] ← [AUXILIARY BOILER STEAM 120-140°C]
+                                    │ (releases pure CO₂ gas / lean amine recycled)
+                                    ▼
+                            [COMPRESSOR + CHILLER]
+                                    │ (LCO₂: -30 to -50°C, 15-20 bar)
+                                    ▼
+                            [CRYOGENIC STORAGE TANKS]
+                                    │ (offloaded at shore terminal)
+                                    ▼
+                            [GEOLOGICAL SEQUESTRATION]
+                             (permanent deep injection)</pre>
+
+      <h4>3. Carbon Sequestration — Three Permanent Storage Pathways</h4>
+      <ul>
+        <li><strong>Depleted offshore oil/gas reservoirs:</strong> LCO₂ is injected under pressure into depleted fields where impermeable cap rock traps the gas indefinitely.</li>
+        <li><strong>Deep saline aquifers:</strong> Injected thousands of metres into permeable saltwater sand formations; CO₂ dissolves into brine and sinks due to density differences.</li>
+        <li><strong>Mineral carbonation in basalt:</strong> CO₂ reacts with basaltic rock, chemically mineralising into solid carbonate (limestone-like) structures within years — effectively permanent.</li>
+      </ul>
+
+      <h4>4. Energy Penalty and Engineering Constraints</h4>
+      <ul>
+        <li><strong>Auxiliary energy demand:</strong> Amine regeneration requires continuous auxiliary boiler steam; compressor operation draws significant electrical load. Overall fuel consumption penalty estimated at <strong>10–15%</strong> — a significant negative when assessing lifecycle GHG benefit.</li>
+        <li><strong>Capture efficiency target:</strong> Advanced marine amine installations target <strong>&gt;80% CO₂ capture efficiency</strong> from exhaust streams.</li>
+        <li><strong>Space and weight:</strong> LCO₂ at 3.1:1 mass ratio relative to fuel burned requires large dedicated tank space and heavy structural supports — engineering and stability implications are considerable.</li>
+      </ul>
+    </div>
+
+    <div class="trap-box">
+      <strong class="trap-label">⚠ Examiner Trap</strong>
+      <em>"When you capture 10 tonnes of CO₂ from the exhaust, does it store as 10 tonnes in your tanks?"</em> — <strong>Yes, mass is conserved — 10 tonnes stays 10 tonnes by weight.</strong> The trap is volume: for every 1 tonne of marine fuel burned, combustion produces approximately <strong>3.1 tonnes of CO₂</strong>. So on a per-fuel-burn basis the storage demand is threefold higher than the fuel consumed, not the CO₂ captured. Distinguish clearly between mass conservation and the fuel-to-CO₂ mass multiplier.
+    </div>
+
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MEPC.377(80)</span><span class="reg-desc">2023 IMO GHG Strategy — identifies onboard carbon capture (OCCS) as an eligible operational decarbonisation measure</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI / Reg 26</span><span class="reg-desc">Energy efficiency and CII framework under which OCCS may contribute to improving a vessel's attained CII rating</span></div>
+      <div class="reg-item"><span class="reg-code">IMO MEPC Circular (OCCS Guidelines)</span><span class="reg-desc">Developing IMO guidelines for onboard carbon capture — interim guidance under MEPC working group (2023–2025)</span></div>
+      <div class="reg-item"><span class="reg-code">DNV / LR Class Guidelines</span><span class="reg-desc">Mandatory structural and equipment safety design rules for onboard carbon capture system installations</span></div>
+      <div class="reg-item"><span class="reg-code">ISO 14687</span><span class="reg-desc">Standards governing purity, safety thresholds, and fluid storage metrics for carbon dioxide transport and storage</span></div>
+    </div>
+
+    <div class="ce-tip">
+      <strong>CE Oral Tip (Rajappan — 23/06/2026):</strong> Rajappan targets the chemical handling details and energy penalty. Mention explicitly: <em>"auxiliary boiler steam is used to regenerate the lean amine solvent in the stripper column."</em> Then state the <strong>3.1:1 CO₂-to-fuel mass ratio</strong> — this demonstrates advanced system knowledge and differentiates a pass answer. If asked about sequestration, name all three pathways: depleted reservoirs, saline aquifers, mineral carbonation. Do not confuse OCCS with SOₓ scrubbers — they are entirely different systems.
+    </div>
+
+    <div class="deep-dive" id="dd-q2">
+      <button class="deep-dive-toggle" onclick="toggleDD('dd-q2')">▶ Deep Dive</button>
+      <div class="deep-dive-body" style="display:none">
+
+        <div class="dd-block dd-relevance">
+          <strong class="dd-label">🔧 CE Relevance</strong>
+          <p>As 2/E managing an OCCS installation, you are responsible for: maintaining chemical dosing pumps and monitoring solvent purity levels (MEA degradation from SO₂ and O₂ contaminants); monitoring multi-stage CO₂ compressors; managing cryogenic refrigeration loops and tank pressure/temperature; and monitoring differential pressure across absorber column packing. Any absorber foaming event (from contaminants or surfactant ingress) can cause solvent carry-over up the exhaust stack, fouling downstream equipment. Cryogenic LCO₂ leaks onto standard carbon steel deck structures risk localised freezing and brittle fracture of structural members.</p>
+        </div>
+
+        <div class="dd-block dd-trap">
+          <strong class="dd-label">⚠ Trap Questions</strong>
+          <p><strong>"Is an onboard carbon capture system the same as a scrubber?"</strong> — No. A scrubber (EGC system) removes SO₂ from exhaust using seawater or caustic solution for MARPOL Annex VI sulphur compliance. OCCS removes CO₂ using amine chemistry for GHG reduction. Completely different chemical reactions, different exhaust streams targeted, different regulatory frameworks.</p>
+          <p><strong>"Does OCCS make a ship carbon neutral?"</strong> — No. OCCS only captures exhaust CO₂; it does not address methane slip, nitrous oxide emissions, or the fuel lifecycle upstream emissions. IMO classification requires lifecycle (Well-to-Wake) assessment for GHG credit.</p>
+        </div>
+
+        <div class="dd-block dd-fail">
+          <strong class="dd-label">✗ Common CE Failures</strong>
+          <ul>
+            <li>Failing to name the auxiliary boiler steam as the regeneration energy source in the stripper column</li>
+            <li>Confusing SOₓ exhaust gas scrubbers with CO₂ carbon capture systems — entirely different chemical processes</li>
+            <li>Not knowing the 3.1:1 CO₂-to-fuel mass ratio — Rajappan specifically probes this</li>
+            <li>Stating capture efficiency of 100% — advanced systems target &gt;80%; claiming 100% is incorrect</li>
+            <li>Missing the energy penalty — failing to mention the 10–15% fuel consumption increase from auxiliary boiler and compressor demand</li>
+          </ul>
+        </div>
+
+        <div class="dd-block dd-numbers">
+          <strong class="dd-label">🔢 Numbers &amp; Regulations to Memorise</strong>
+          <ul>
+            <li><strong>40–50°C:</strong> Pre-cooling temperature of exhaust before absorber column</li>
+            <li><strong>120–140°C:</strong> Stripper column temperature for amine regeneration (auxiliary boiler steam)</li>
+            <li><strong>15–20 bar / −30 to −50°C:</strong> LCO₂ storage conditions</li>
+            <li><strong>3.1 tonnes CO₂ per tonne of fuel:</strong> Standard marine HFO combustion ratio</li>
+            <li><strong>&gt;80%:</strong> Targeted CO₂ capture efficiency for marine amine scrubbing</li>
+            <li><strong>10–15%:</strong> Estimated auxiliary fuel consumption penalty from running OCCS</li>
+            <li><strong>MEPC.377(80):</strong> 2023 IMO GHG Strategy — recognises OCCS as eligible measure</li>
+          </ul>
+        </div>
+
+        <div class="dd-block dd-casualty">
+          <strong class="dd-label">⚓ Casualty Link</strong>
+          <p><strong>Prototype OCCS solvent carry-over incidents (2022–2024):</strong> Early pilot installations on bulk carriers and tankers experienced absorber column foaming events caused by lubricating oil carryover from main engine exhaust. MEA solvent was carried into the exhaust stack, fouling the exhaust gas economiser and causing carbon build-up in the waste heat recovery system. These incidents highlighted the criticality of robust exhaust pre-treatment and mist elimination before the absorber column.</p>
+        </div>
+
+        <div class="dd-block dd-chain">
+          <strong class="dd-label">🔗 Examiner Chain (Kochi MMD)</strong>
+          <p><strong>Rajappan (23/06/2026 documented session):</strong> "Explain the engineering architecture of onboard carbon capture." → "What chemical reactions occur in the absorber and stripper columns?" → "How much CO₂ does one tonne of fuel generate?" → "Where does the energy come from to regenerate the amine?" → "What is carbon sequestration and what are the three storage methods?"</p>
+        </div>
+
+        <div class="dd-block dd-vessel">
+          <strong class="dd-label">🚢 On My Vessel (Maersk Container)</strong>
+          <p>Maersk A/S is actively piloting OCCS technology as part of its decarbonisation roadmap. On current cellular container vessels, GHG reduction is achieved primarily through eco-speed profiles, AMP (Alternative Maritime Power) at berth, and fuel switching to bio-LNG or e-methanol blends on select routes. If OCCS is installed as a retrofit, the engineering department would manage the auxiliary steam balance, compressor performance, and cryogenic tank instrumentation — adding significant complexity to the daily watchkeeping routine.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="related-q">🔗 Related: <a href="#q1">Q1 SEEMP Part III / CII</a> · <a href="#q3">Q3 EU MRV / FuelEU / ETS</a></div>
+
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7, Q2, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7 · Q2 · Correction Required</span>
+    <span class="q-version">QB7 · Q2 · v1.0</span>
+  </div>
+</div>
+<!-- =========================================================
+     Q3 | EU MRV / FuelEU Maritime / EU ETS
+     ========================================================= -->
+<div class="q-card" id="q3" data-tags="ghg marpol survey">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">EU MRV, FuelEU Maritime, and EU ETS — explain each and their cross-linkage with IMO's CII framework.</div>
+      <div class="q-tags">
+        <span class="q-tag tag-ghg">GHG / CII</span>
+        <span class="q-tag tag-marpol">MARPOL</span>
+        <span class="q-tag tag-survey">Survey</span>
+      </div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+
+    <div class="practice-block practice-15">
+      <span class="practice-label">⏱ 15-Second Answer</span>
+      The <strong>EU MRV</strong> monitors and verifies fuel consumption and emissions on EU port calls — it provides the data foundation. The <strong>EU ETS</strong> uses that data to impose carbon allowance purchase obligations — phased to <strong>100% by 2026</strong>. <strong>FuelEU Maritime</strong> mandates a progressive reduction in fuel greenhouse gas intensity — starting at <strong>2% below 2020 baseline from 2025</strong>, reaching <strong>80% by 2050</strong>. The global <strong>IMO CII</strong> framework runs in parallel — same data streams, different scope, no direct financial penalty.
+    </div>
+
+    <div class="practice-block practice-60">
+      <span class="practice-label">🎯 60-Second Answer</span>
+      The EU operates a three-layer carbon management system for ships above <strong>5,000 GT</strong> calling at EEA ports. The <strong>EU MRV (Regulation 2015/757)</strong> mandates monitoring and third-party verification of fuel consumption and CO₂ emissions on voyages to, from, or between EU ports — producing a mandatory Document of Compliance onboard. This data feeds the <strong>EU ETS (Directive 2003/87/EC)</strong>, effective from <strong>1 January 2024</strong>, requiring shipping companies to surrender European Union Allowances (EUAs) for verified emissions — 40% in 2024, 70% in 2025, 100% from 2026. Running in parallel, <strong>FuelEU Maritime (Regulation 2023/1805)</strong>, effective <strong>1 January 2025</strong>, mandates reduction in the Greenhouse Gas Intensity (GFI) of shipboard energy — 2% reduction 2025–2029, rising to 80% by 2050. These EU instruments interface with the <strong>IMO CII</strong> via shared fuel data but differ fundamentally: CII grades operational efficiency without financial penalties, while the EU applies direct financial obligations on top.
+    </div>
+
+    <div class="answer-body">
+      <h4>1. EU MRV — The Data Foundation</h4>
+      <ul>
+        <li><strong>Instrument:</strong> EU Regulation 2015/757 (Monitoring, Reporting and Verification of CO₂ Emissions from Maritime Transport)</li>
+        <li><strong>Applies to:</strong> Ships <strong>&gt;5,000 GT</strong> calling at EEA ports, for voyages to, from, or between EU ports</li>
+        <li><strong>What is monitored:</strong> Fuel consumption per fuel type, CO₂ and other GHG emissions, distance sailed, time at sea, cargo carried (for efficiency metrics)</li>
+        <li><strong>Verification:</strong> Data must be independently verified by an accredited third-party verifier annually</li>
+        <li><strong>Output document:</strong> A <strong>Document of Compliance (DoC)</strong> for EU MRV must be carried onboard the vessel</li>
+        <li><strong>Data use:</strong> EU MRV data feeds directly into EU ETS allowance surrender calculations</li>
+      </ul>
+
+      <h4>2. EU ETS — The Carbon Tax Mechanism</h4>
+      <ul>
+        <li><strong>Instrument:</strong> EU Directive 2003/87/EC (Emissions Trading System) — extended to maritime shipping from <strong>1 January 2024</strong></li>
+        <li><strong>Mechanism:</strong> Cap-and-trade system — shipping companies must purchase and surrender <strong>European Union Allowances (EUAs)</strong> for verified GHG emissions. 1 EUA = 1 tonne of CO₂ equivalent</li>
+        <li><strong>Phased compliance timeline:</strong>
+          <ul>
+            <li><strong>2024:</strong> 40% of verified emissions must be covered by EUAs</li>
+            <li><strong>2025:</strong> 70% of verified emissions</li>
+            <li><strong>2026 and beyond:</strong> 100% of verified emissions</li>
+          </ul>
+        </li>
+        <li><strong>Voyage coverage:</strong> 100% of emissions on voyages between EU ports; 50% of emissions on voyages arriving from or departing to non-EU ports</li>
+        <li><strong>Non-compliance:</strong> Excess emissions penalty + port entry ban after two consecutive years of non-compliance</li>
+      </ul>
+
+      <h4>3. FuelEU Maritime — Fuel Carbon Intensity Limits</h4>
+      <ul>
+        <li><strong>Instrument:</strong> EU Regulation 2023/1805, effective <strong>1 January 2025</strong></li>
+        <li><strong>What it regulates:</strong> The Greenhouse Gas Intensity (GFI) of the energy used onboard — measured in grams of CO₂ equivalent per megajoule (gCO₂eq/MJ) on a <strong>Well-to-Wake (WtW)</strong> lifecycle basis</li>
+        <li><strong>Baseline:</strong> 2020 reference GFI value for fossil marine fuels</li>
+        <li><strong>Reduction pathway:</strong>
+          <ul>
+            <li><strong>2025–2029:</strong> Mandatory <strong>2%</strong> GFI reduction below 2020 baseline</li>
+            <li><strong>2030–2034:</strong> <strong>6%</strong> reduction</li>
+            <li><strong>2035–2039:</strong> <strong>14.5%</strong> reduction</li>
+            <li><strong>2040–2044:</strong> <strong>31%</strong> reduction</li>
+            <li><strong>2045–2049:</strong> <strong>62%</strong> reduction</li>
+            <li><strong>2050 onwards:</strong> <strong>80%</strong> reduction</li>
+          </ul>
+        </li>
+        <li><strong>Penalty for non-compliance:</strong> Financial penalty calculated based on the energy deficit multiplied by a reference cost of alternative low-carbon fuels</li>
+      </ul>
+
+      <pre class="mental-map">EU MARITIME CARBON REGULATORY TRIAD
+  ┌─────────────────────────────────────────────────────┐
+  │  EU MRV ──────────► Monitors &amp; Verifies Fuel Burn   │
+  │  (Reg 2015/757)      on all EU-touching voyages      │
+  │       │                                              │
+  │       ├──► EU ETS ──► Carbon Tax / Allowances        │
+  │       │   (Dir 2003/87/EC) 40%→70%→100% (2024–2026) │
+  │       │                                              │
+  │       └──► FuelEU ──► GFI Fuel Intensity Limits      │
+  │           (Reg 2023/1805) 2%→6%→80% (2025–2050)     │
+  │                                                      │
+  │  IMO CII ─────────► Global Operational A–E Rating   │
+  │  (MARPOL Annex VI)   Shared data — no financial tax  │
+  └─────────────────────────────────────────────────────┘</pre>
+
+      <h4>4. Cross-Linkage: EU Triad vs IMO CII</h4>
+      <table>
+        <tr><th>Parameter</th><th>IMO CII (Global)</th><th>EU ETS / FuelEU (Regional)</th></tr>
+        <tr><td><strong>Data source</strong></td><td>IMO DCS — global fuel consumption monitoring</td><td>EU MRV — same underlying data streams</td></tr>
+        <tr><td><strong>Geographic scope</strong></td><td>All international voyages worldwide</td><td>Voyages to/from/between EEA ports only</td></tr>
+        <tr><td><strong>Output</strong></td><td>Annual A–E operational efficiency rating</td><td>Financial obligations (EUA purchase) + GFI compliance</td></tr>
+        <tr><td><strong>Financial penalty</strong></td><td>None directly — SEEMP corrective action plan required</td><td>Yes — direct EUA purchase costs + non-compliance fines</td></tr>
+        <tr><td><strong>Metric</strong></td><td>Annual CII (gCO₂/DWT·nm or gCO₂/GT·nm)</td><td>FuelEU: WtW GFI (gCO₂eq/MJ); ETS: total CO₂ tonnes</td></tr>
+      </table>
+      <p><em>Key distinction:</em> A vessel with an excellent IMO CII rating of A is <strong>not</strong> exempt from EU ETS allowance obligations. The frameworks are parallel — an A-rated vessel must still purchase EUAs for every tonne of CO₂ emitted on EU-touching voyages.</p>
+    </div>
+
+    <div class="numbers-box">
+      <h4>Key Numbers &amp; Thresholds</h4>
+      <ul>
+        <li><strong>5,000 GT:</strong> Threshold for EU MRV, EU ETS, and FuelEU Maritime applicability</li>
+        <li><strong>1 January 2024:</strong> EU ETS entry into force for shipping</li>
+        <li><strong>40% / 70% / 100%:</strong> EU ETS phased allowance coverage — 2024 / 2025 / 2026</li>
+        <li><strong>1 January 2025:</strong> FuelEU Maritime entry into force</li>
+        <li><strong>2% (2025) → 80% (2050):</strong> FuelEU GFI reduction pathway vs 2020 baseline</li>
+        <li><strong>1 EUA = 1 tonne CO₂eq:</strong> EU ETS allowance unit definition</li>
+        <li><strong>50% EUA:</strong> Required coverage for voyages arriving from / departing to non-EU ports</li>
+        <li><strong>Regulation 2015/757:</strong> EU MRV legal basis</li>
+        <li><strong>Directive 2003/87/EC:</strong> EU ETS legal basis</li>
+        <li><strong>Regulation 2023/1805:</strong> FuelEU Maritime legal basis</li>
+      </ul>
+    </div>
+
+    <div class="reg-box">
+      <div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">EU Reg 2015/757</span><span class="reg-desc">EU MRV — monitoring, reporting, and verification of CO₂ emissions from maritime transport (amended 2023 to include other GHGs)</span></div>
+      <div class="reg-item"><span class="reg-code">EU Directive 2003/87/EC</span><span class="reg-desc">EU ETS — cap-and-trade emissions trading system extended to maritime shipping from 1 January 2024</span></div>
+      <div class="reg-item"><span class="reg-code">EU Reg 2023/1805</span><span class="reg-desc">FuelEU Maritime — greenhouse gas intensity reduction obligations for shipboard energy, effective 1 January 2025</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI / Reg 28</span><span class="reg-desc">IMO CII framework — global operational carbon intensity rating (A–E) using DCS fuel data</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC.328(76)</span><span class="reg-desc">IMO resolution establishing the CII framework — parallel global instrument alongside EU regional regulations</span></div>
+    </div>
+
+    <div class="ce-tip">
+      <strong>CE Oral Tip (Rajappan — 2026):</strong> Rajappan expects you to clearly separate the three EU instruments: <em>"EU MRV collects the data. EU ETS applies the carbon tax. FuelEU Maritime mandates the fuel intensity limit."</em> State this sequence verbatim — it is the core structure. Then add the key CII contrast: <em>"IMO CII gives you an A–E grade; EU ETS gives you a financial bill."</em> A very common failure: candidates say an A CII rating exempts you from ETS — it does not. Rajappan tests this trap directly.
+    </div>
+
+    <div class="deep-dive" id="dd-q3">
+      <button class="deep-dive-toggle" onclick="toggleDD('dd-q3')">▶ Deep Dive</button>
+      <div class="deep-dive-body" style="display:none">
+
+        <div class="dd-block dd-relevance">
+          <strong class="dd-label">🔧 CE Relevance</strong>
+          <p>As 2/E on a Maersk container vessel operating regular Europe calls, EU ETS compliance is directly relevant to your documentation duties. You must ensure fuel oil mass flow meter readings are accurately recorded by consumer (main engine, auxiliaries, boiler), and that fuel changeover records for bio-blends or LNG are precise. Any data discrepancy between the ship's noon log and the verified MRV submission can alter EUA surrender calculations — creating significant financial liabilities. On vessels trading EU routes, the Chief Engineer must understand that switching fuels mid-voyage affects both MRV reporting categories and the FuelEU GFI calculation for the year.</p>
+        </div>
+
+        <div class="dd-block dd-trap">
+          <strong class="dd-label">⚠ Trap Questions</strong>
+          <p><strong>"If your ship achieves an IMO CII A-rating, is it exempt from buying EU ETS allowances?"</strong> — No. CII rating and EU ETS obligations are entirely separate frameworks. An A CII rating means the vessel operates efficiently — it does not reduce the financial obligation to purchase EUAs for actual CO₂ emitted on EU-touching voyages.</p>
+          <p><strong>"Does FuelEU Maritime apply only to ships trading within EU ports?"</strong> — It applies to voyages to, from, or between EEA ports. It is not limited to intra-EU routes. A ship arriving from Singapore to Rotterdam is subject to EU MRV and ETS obligations (50% EUA coverage for the international leg).</p>
+        </div>
+
+        <div class="dd-block dd-fail">
+          <strong class="dd-label">✗ Common CE Failures</strong>
+          <ul>
+            <li>Confusing EU MRV with IMO DCS — they use similar data but are separate regulatory instruments with different geographic scopes</li>
+            <li>Stating EU ETS started from 2023 — it entered into force for shipping from <strong>1 January 2024</strong></li>
+            <li>Not knowing the phased EUA surrender percentages (40% → 70% → 100%)</li>
+            <li>Stating a CII A-rating exempts from EU ETS — it does not</li>
+            <li>Confusing FuelEU Maritime's Well-to-Wake GFI metric with the CII's Tank-to-Wake (operational only) metric</li>
+          </ul>
+        </div>
+
+        <div class="dd-block dd-numbers">
+          <strong class="dd-label">🔢 Numbers &amp; Regulations to Memorise</strong>
+          <ul>
+            <li><strong>Regulation 2015/757:</strong> EU MRV legal basis</li>
+            <li><strong>Directive 2003/87/EC:</strong> EU ETS legal basis</li>
+            <li><strong>Regulation 2023/1805:</strong> FuelEU Maritime legal basis</li>
+            <li><strong>1 Jan 2024:</strong> EU ETS entry into force for shipping</li>
+            <li><strong>1 Jan 2025:</strong> FuelEU Maritime entry into force</li>
+            <li><strong>40% / 70% / 100%:</strong> EUA surrender phases (2024 / 2025 / 2026)</li>
+            <li><strong>50% EUA:</strong> Non-EU leg coverage (one end in EU)</li>
+            <li><strong>2% → 80%:</strong> FuelEU GFI reduction pathway to 2050</li>
+            <li><strong>5,000 GT:</strong> Applicability threshold for all three EU instruments</li>
+          </ul>
+        </div>
+
+        <div class="dd-block dd-casualty">
+          <strong class="dd-label">⚓ Casualty Link</strong>
+          <p><strong>Industry — EU ETS non-compliance detentions (2024):</strong> Several ship operators in intra-EU trades were identified by European Maritime Safety Agency (EMSA) monitoring as failing to surrender sufficient EUAs for 2024 emissions. The European Commission initiated proceedings for port entry bans under Article 16 of Directive 2003/87/EC — highlighting that EU ETS is an enforceable financial and operational compliance obligation, not merely a reporting exercise.</p>
+        </div>
+
+        <div class="dd-block dd-chain">
+          <strong class="dd-label">🔗 Examiner Chain (Kochi MMD)</strong>
+          <p><strong>Rajappan (2026 documented session):</strong> "What is the EU MRV?" → "How does it link to EU ETS?" → "What are the phased EUA percentages?" → "Does a good CII rating exempt you from ETS?" → "What is FuelEU Maritime and how is it different from CII?" → "What does Well-to-Wake mean?"</p>
+          <p><strong>Nair:</strong> More likely to push on regulation numbers — "Give me the EU instrument numbers for each regulation."</p>
+        </div>
+
+        <div class="dd-block dd-vessel">
+          <strong class="dd-label">🚢 On My Vessel (Maersk Container)</strong>
+          <p>Maersk A/S operates extensive EU trade routes (Asia–Europe, intra-Europe feedering). EU ETS compliance is managed at the corporate level — Maersk's sustainability and compliance department handles EUA purchasing through the European financial markets. Onboard, the engineering department provides accurate daily fuel consumption data by consumer to enable the company to calculate verified emissions for each voyage. Any flow meter calibration drift or bunkering discrepancy is a direct financial liability given that each EUA trades at approximately €50–70 per tonne of CO₂.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="related-q">🔗 Related: <a href="#q1">Q1 SEEMP Part III / CII</a> · <a href="#q2">Q2 Onboard Carbon Capture</a></div>
+
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7, Q3, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7 · Q3 · Correction Required</span>
+    <span class="q-version">QB7 · Q3 · v1.0</span>
+  </div>
+</div>
+
+    <!-- NO RESULTS -->
+    <div id="no-results">
+      <p>No questions match your search or filter.</p>
+      <p style="margin-top:8px;font-size:12px;">Try different keywords or click <strong>All</strong> to reset.</p>
+    </div>
+
+  </main><!-- /#q-feed -->
+</div><!-- /.main-layout -->
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+  <p><strong style="color:#cbd5e1;">Marine Intelligence Weekly — MEO Class 1 Question Bank</strong></p>
+  <p>QB7: GHG, CII, EEXI, SEEMP &amp; Decarbonisation · QB7_A · v1.0 · June 2026</p>
+  <p style="margin-top:8px;">Compiled by Nixon Antony, 2/E, Maersk A/S · <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a></p>
+  <p style="margin-top:8px;font-size:11px;">Corrections: email subject format — QB7 · Q[N] · Correction Required — [text] — Rank · Company · LinkedIn</p>
+  <p style="margin-top:8px;font-size:11px;color:#475569;">This document is prepared for Kochi MMD oral examination preparation only. Regulatory references are accurate as at June 2026. Verify time-sensitive data (CII annual reduction factors, EUA prices, FuelEU GFI values) against current IMO and EU official sources before the oral examination.</p>
+  <p style="margin-top:12px;font-size:11px;"><a href="/meoclass1/">← Back to MEO Class 1 Index</a></p>
+</div>
+
+<script>
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+function toggleDD(id){
+  const body=document.getElementById(id).querySelector('.deep-dive-body');
+  const btn=document.getElementById(id).querySelector('.deep-dive-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  btn.textContent=(open?'▶':'▼')+' Deep Dive';
+}
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent='Showing '+vis+' of '+cards.length;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+</script>
+<script>
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+</script>
+</body>
+</html>

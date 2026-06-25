@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>QB3B — Hull Surveys, Ship Construction, Inert Gas &amp; MARPOL | MIW MEO Class 1 Question Bank</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.5;}
+a{color:var(--teal-dark);text-decoration:none;}
+a:hover{text-decoration:underline;}
+.topbar{position:sticky;top:0;z-index:100;background:var(--navy);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 20px;font-size:14px;}
+.topbar .logo-mark{width:30px;height:30px;border-radius:6px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;}
+.topbar .site-name{font-weight:600;letter-spacing:0.3px;flex-shrink:0;}
+.topbar nav{margin-left:auto;display:flex;gap:18px;}
+.topbar nav a{color:#cbd5e1;font-size:13px;}
+.topbar nav a:hover{color:#fff;}
+.page-header{background:var(--navy);color:#fff;padding:28px 20px 22px;}
+.page-header .qb-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:10px;}
+.page-header h1{font-size:24px;font-weight:700;margin-bottom:6px;}
+.page-header .sub-desc{color:#cbd5e1;font-size:14px;max-width:760px;}
+.header-meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:#94a3b8;}
+.header-meta strong{color:#e2e8f0;}
+.controls-bar{position:sticky;top:48px;z-index:90;background:#fff;border-bottom:1px solid var(--grey-border);padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+#search-input{flex:1 1 220px;max-width:340px;padding:8px 12px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px;}
+#search-input:focus{outline:none;border-color:var(--teal);}
+.filter-btn{background:var(--grey-bg);border:1px solid var(--grey-border);color:var(--grey-text);font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;cursor:pointer;transition:all .15s;}
+.filter-btn:hover{background:var(--teal-light);color:var(--teal-dark);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{margin-left:auto;font-size:12px;color:var(--grey-text);font-weight:600;}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:24px;max-width:1100px;margin:0 auto;padding:24px 20px 60px;}
+@media(max-width:800px){.main-layout{grid-template-columns:1fr;}.sidebar{display:none;}}
+.sidebar{position:sticky;top:110px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;font-size:13px;}
+.sidebar h3{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;border-radius:5px;color:var(--ink);font-size:13px;border-left:2px solid transparent;transition:all .15s;}
+.toc-link:hover{background:var(--teal-light);text-decoration:none;}
+.toc-link.active{background:var(--teal-light);border-left:2px solid var(--teal);color:var(--teal-dark);font-weight:600;}
+.sidebar .divider{border-top:1px solid var(--grey-border);margin:14px 0;}
+.sidebar .upcoming-note{background:var(--grey-bg);border-radius:6px;padding:10px;font-size:12px;color:var(--grey-text);}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;margin:28px 0 12px;}
+.section-head:first-child{margin-top:0;}
+.section-head h2{font-size:16px;font-weight:700;color:var(--ink);}
+.sec-count{font-size:11px;font-weight:700;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:10px;}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;margin-bottom:10px;overflow:hidden;}
+.q-header{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;transition:background .15s;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{flex-shrink:0;width:28px;height:28px;border-radius:6px;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.q-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.q-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:2px 8px;border-radius:10px;background:var(--grey-bg);color:var(--grey-text);}
+.q-tag.tag-solas{background:#e0f2fe;color:#0369a1;}
+.q-tag.tag-marpol{background:#fef3c7;color:#92400e;}
+.q-tag.tag-iacs{background:#ede9fe;color:#5b21b6;}
+.q-tag.tag-survey{background:var(--teal-light);color:var(--teal-dark);}
+.q-tag.tag-machinery{background:#dbeafe;color:#1e40af;}
+.q-tag.tag-ghg{background:#dcfce7;color:#166534;}
+.q-chevron{flex-shrink:0;width:20px;height:20px;stroke:var(--grey-text);transition:transform .2s;}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 16px 16px;border-top:1px solid var(--grey-border);}
+.q-card.open .q-answer{display:block;padding-top:14px;}
+.answer-body{font-family:'Georgia',serif;font-size:14px;color:var(--ink);}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:0.8px;color:var(--teal-dark);font-family:'Segoe UI',system-ui,sans-serif;font-weight:700;margin:16px 0 6px;}
+.answer-body h4:first-child{margin-top:0;}
+.answer-body p{margin-bottom:10px;}
+.answer-body ul,.answer-body ol{margin:0 0 10px 22px;}
+.answer-body li{margin-bottom:5px;}
+.answer-body strong{color:var(--ink);font-weight:700;}
+.answer-body em{color:var(--grey-text);}
+.formula{font-family:monospace;background:var(--grey-bg);padding:10px 12px;border-radius:6px;margin:10px 0;font-size:13.5px;}
+.practice-block{background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 6px 6px 0;padding:10px 14px;margin-bottom:10px;font-family:'Georgia',serif;font-size:13.5px;color:var(--ink);}
+.practice-block .pb-label{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin-bottom:4px;display:block;}
+.reg-box{background:#141412;border-radius:8px;padding:14px 16px;margin:14px 0;font-family:'Segoe UI',system-ui,sans-serif;}
+.reg-box-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.8px;}
+.reg-item{display:flex;gap:12px;flex-wrap:wrap;padding:5px 0;border-bottom:1px solid #1e293b;font-size:12.5px;}
+.reg-item:last-child{border-bottom:none;}
+.reg-code{color:var(--orange);font-family:monospace;font-weight:700;flex:0 0 auto;min-width:0;word-break:break-all;}
+.reg-desc{color:#cbd5e1;flex:1;min-width:0;word-break:break-word;}
+.ce-tip{background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 6px 6px 0;padding:12px 14px;margin:14px 0;font-size:13.5px;color:#7c2d12;}
+.ce-tip strong{color:var(--orange);}
+.sub-block{background:#f0fdf4;border-left:3px solid var(--teal-dark);border-radius:0 6px 6px 0;padding:10px 14px;margin:12px 0;font-size:13px;color:var(--ink);}
+.sub-block strong{color:var(--teal-dark);}
+.deep-dive{margin-top:14px;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive summary{cursor:pointer;padding:10px 14px;font-family:'Segoe UI',system-ui,sans-serif;font-size:12.5px;font-weight:700;color:var(--teal-dark);background:var(--grey-bg);list-style:none;display:flex;align-items:center;gap:8px;}
+.deep-dive summary::-webkit-details-marker{display:none;}
+.deep-dive summary::before{content:"▸";font-size:11px;}
+.deep-dive[open] summary::before{content:"▾";}
+.deep-dive-body{padding:12px 14px;font-size:13.5px;}
+.deep-dive-body h5{font-size:11px;text-transform:uppercase;letter-spacing:0.6px;color:var(--grey-text);margin:10px 0 4px;font-family:'Segoe UI',system-ui,sans-serif;}
+.deep-dive-body h5:first-child{margin-top:0;}
+.deep-dive-body p{margin-bottom:8px;}
+.deep-dive-body .trap-q{font-weight:700;color:var(--ink);}
+.deep-dive-body .trap-a{color:var(--grey-text);margin-bottom:8px;}
+.q-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 16px;background:var(--grey-bg);font-size:11.5px;color:var(--grey-text);border-top:1px solid var(--grey-border);}
+.correction-link{min-width:0;word-break:break-all;}
+.correction-link a{word-break:break-all;}
+.q-version{flex-shrink:0;font-weight:600;}
+#no-results{display:none;text-align:center;padding:60px 20px;color:var(--grey-text);}
+.page-footer{background:#141412;color:#cbd5e1;padding:30px 20px;font-size:12.5px;text-align:center;}
+.page-footer a{color:var(--teal-light);}
+.page-footer .disclaimer{max-width:700px;margin:12px auto 0;color:#94a3b8;font-size:11.5px;}
+/* Watermark */
+body::before{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-35deg);font-size:18px;color:rgba(0,0,0,0.04);white-space:nowrap;pointer-events:none;z-index:9999;font-family:'Segoe UI',sans-serif;font-weight:700;letter-spacing:2px;}
+</style>
+</head>
+<body oncontextmenu="return false" onselectstart="return false" oncopy="return false">
+
+<div class="topbar">
+  <div class="logo-mark">MIW</div>
+  <div class="site-name">Marine Intelligence Weekly</div>
+  <nav>
+    <a href="https://marineintelligenceweekly.com/">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/contact.html">Contact</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <span class="qb-badge">QB3B · MEO Class 1 Question Bank</span>
+  <h1>Hull Surveys, Ship Construction, Inert Gas System &amp; MARPOL</h1>
+  <p class="sub-desc">19 new oral-exam questions covering hull surveys, steel renewal, ballast tank inspection, substantial corrosion, ESP Code, GBS, Ship Construction File, drydocking, classification surveys, bulk carrier construction rules, Inert Gas system alarms &amp; calibration, marine pollutants, and GESAMP — with Kochi MMD-specific examiner insight.</p>
+  <div class="header-meta">
+    <span><strong>Compiled by:</strong> Nixon Antony, 2/E, Maersk A/S</span>
+    <span><strong>Examiners referenced:</strong> Nair, Srivastava, Senthil, Simon, Rajappan</span>
+    <span><strong>Version:</strong> v1.0 · June 2026</span>
+  </div>
+</div>
+
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
+  <button class="filter-btn" onclick="filterTag('survey',this)">Surveys</button>
+  <button class="filter-btn" onclick="filterTag('solas',this)">SOLAS</button>
+  <button class="filter-btn" onclick="filterTag('marpol',this)">MARPOL</button>
+  <button class="filter-btn" onclick="filterTag('iacs',this)">IACS / Class</button>
+  <button class="filter-btn" onclick="filterTag('machinery',this)">Machinery / IG</button>
+  <span id="q-count-label">Showing 19 of 19</span>
+</div>
+
+<div class="main-layout">
+  <div class="sidebar">
+    <h3>Contents</h3>
+    <a class="toc-link" href="#q1">Q1. Hull Survey — Scope &amp; Requirements</a>
+    <a class="toc-link" href="#q2">Q2. Steel Plate Renewal Criteria</a>
+    <a class="toc-link" href="#q3">Q3. Ballast Water Tank Inspection</a>
+    <a class="toc-link" href="#q4">Q4. Substantial Corrosion — Definition</a>
+    <a class="toc-link" href="#q5">Q5. Enhanced Survey Programme (ESP)</a>
+    <a class="toc-link" href="#q6">Q6. Goal-Based Standards (GBS)</a>
+    <a class="toc-link" href="#q7">Q7. Ship Construction File (SCF)</a>
+    <a class="toc-link" href="#q8">Q8. Drydocking — Full Process</a>
+    <a class="toc-link" href="#q9">Q9. Classification Survey System</a>
+    <a class="toc-link" href="#q10">Q10. Bulk Carrier Construction Rules</a>
+    <a class="toc-link" href="#q11">Q11. Annual &amp; Intermediate Post-Renewal</a>
+    <a class="toc-link" href="#q12">Q12. IG System — Alarms &amp; Trips</a>
+    <a class="toc-link" href="#q13">Q13. O₂ Analyser — Limits</a>
+    <a class="toc-link" href="#q14">Q14. O₂ Analyser — Verification</a>
+    <a class="toc-link" href="#q15">Q15. Span Gas vs Test Gas</a>
+    <a class="toc-link" href="#q16">Q16. IG Main Line Pressure Alarms</a>
+    <a class="toc-link" href="#q17">Q17. IG Alarm Testing Procedure</a>
+    <a class="toc-link" href="#q18">Q18. Marine Pollutants &amp; MARPOL</a>
+    <a class="toc-link" href="#q19">Q19. GESAMP — Role &amp; Function</a>
+    <div class="divider"></div>
+    <div class="upcoming-note">Part of the QB3 series. For corrections: contactus@marineintelligenceweekly.com</div>
+  </div>
+
+  <div id="q-feed">
+    <!-- ======= SECTION 1: HULL SURVEYS & CLASS ======= -->
+    <div class="section-head">
+      <h2>🔍 Hull Surveys &amp; Class</h2>
+      <span class="sec-count">9 questions</span>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-card" id="q1" data-tags="survey hull class iacs">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What is a hull survey — what does it cover and what are the requirements?</div>
+          <div class="q-tags"><span class="q-tag tag-survey">Survey</span><span class="q-tag tag-iacs">IACS / Class</span><span class="q-tag tag-solas">SOLAS I</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>A hull survey is a mandatory, systematic examination conducted by Class to verify the structural integrity, watertightness, and strength of a ship's hull. It covers the internal and external structure including plating, framing, bulkheads, and sea valves, and is required under <strong>SOLAS Chapter I</strong> on an annual, intermediate, and 5-yearly renewal basis.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. A hull survey is a comprehensive inspection framework mandated by the Classification Society and Flag State administration to ensure the vessel remains fit for its intended service. It evaluates the structural condition against original design baselines. The scope spans an external underwater hull inspection, and internal examinations of ballast tanks, cargo holds, void spaces, peak tanks, and deep tanks. The primary objective is to detect active corrosion, structural deformation, buckling, fractures, and coating degradation. Structurally, it satisfies the requirements of <strong>SOLAS Chapter I, Part B</strong> (Surveys and Certificates), and follows the <strong>IACS Harmonized System of Survey and Certification (HSSC)</strong> cycle: Annual Surveys, an Intermediate Survey between years 2 and 3, and a 5-yearly Class Renewal Survey.</div>
+
+          <h4>Structural Scope</h4>
+          <ul>
+            <li><strong>External Hull &amp; Appendages:</strong> Keel, bottom plating, side shell, sea chests, bilge keels, rudder, stern frame, propeller shaft coatings.</li>
+            <li><strong>Internal Spaces:</strong> Double bottom tanks, wing tanks, peak tanks, cofferdams, pipe tunnels, void spaces, pump rooms.</li>
+            <li><strong>Strength Decks &amp; Superstructure:</strong> Main deck plating, hatch coamings, bulwarks, deck machinery foundations.</li>
+            <li><strong>Watertight Integrity Devices:</strong> Hatch covers, side shell doors, bow/stern doors, air pipes, ventilators, watertight bulkheads with penetrations.</li>
+          </ul>
+
+          <h4>Classification Survey Windows (IACS HSSC)</h4>
+          <ul>
+            <li><strong>Annual Hull Survey:</strong> Within <strong>±3 months</strong> of each anniversary date. Visual inspection of weather decks, hatch covers, and accessible spaces.</li>
+            <li><strong>Intermediate Hull Survey:</strong> Between 2nd and 3rd anniversary. Extended internal examinations of representative ballast tanks and cargo spaces.</li>
+            <li><strong>Class Renewal / Special Survey:</strong> At <strong>5-year</strong> intervals. Extensive close-up inspections, NDT, mandatory thickness gaugings, and pressure testing of all tanks.</li>
+            <li><strong>Bottom Inspections:</strong> Two out-of-water inspections within any 5-year period; maximum gap between inspections <strong>36 months</strong>.</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch I / Reg 10</span><span class="reg-desc">Surveys of hull, machinery, and equipment of cargo ships</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-1 / Reg 3-1</span><span class="reg-desc">Structural, mechanical, and electrical requirements for ships</span></div>
+            <div class="reg-item"><span class="reg-code">IACS HSSC</span><span class="reg-desc">Harmonized System of Survey and Certification — defining survey windows and periodicity</span></div>
+            <div class="reg-item"><span class="reg-code">IACS UR Z7</span><span class="reg-desc">Hull gauging, thickness diminution criteria, and close-up survey requirements</span></div>
+            <div class="reg-item"><span class="reg-code">Load Line 1966 / Reg 14</span><span class="reg-desc">Cargo ports and similar openings — watertight integrity</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> If asked by Simon, lead with <em>watertight integrity and load line compliance</em>. If Senthil asks, he will immediately pivot to <em>how you prepare a ballast tank for a surveyor</em> — state the four elements of Safe Entry: isolation, ventilation, continuous gas monitoring (O₂ &gt;20.9%, LEL &lt;1%, toxics 0 ppm), and a standby watchkeeper.</div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>The hull's structural integrity safeguards the machinery space. Internal structural fatigue can cause engine bedplate misalignment, crankshaft deflection variations, or tailshaft bearing loading anomalies. The CE coordinates tank cleaning, gas-freeing, ventilation, and safe enclosure entry permits for survey access.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: Can an intermediate hull survey replace a class renewal survey?</p>
+              <p class="trap-a">A: No, sir. The intermediate survey has a smaller scope of thickness gauging. The Class Renewal Survey is a complete zero-baseline re-verification that cannot be bypassed or substituted.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates forget that rudder clearance and steering gear carrier bearing checks are part of the hull/docking survey scope, not solely the deck department's responsibility.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>5 years</strong> — Class Hull Certificate validity. <strong>±3 months</strong> — annual survey window. <strong>36 months</strong> — maximum between bottom inspections.</p>
+              <h5>Casualty Link</h5>
+              <p>The structural failure of <em>MOL Comfort</em> (2013) — a large container ship that broke in two — highlighted how cross-deck hull girder stresses can cause catastrophic failure if structural anomalies slip past hull survey monitoring.</p>
+              <h5>Examiner Chain</h5>
+              <p>Hull Survey Scope → Ballast Tank Corrosion → Coating Condition Classifications → Enhanced Survey Programme (ESP) differences.</p>
+              <h5>On My Vessel</h5>
+              <p>Hull inspection records and ultrasonic gauging reports are maintained within <strong>StarIFS / AMOS PMS Hull Integrity module</strong>. Ballast tank anode replacement schedules and ICCP logsheets are updated monthly by the 2/E and verified by the CE.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q1, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q1, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q1 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card" id="q2" data-tags="survey steel-renewal class iacs">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What are the criteria for steel plate renewal during a hull survey?</div>
+          <div class="q-tags"><span class="q-tag tag-survey">Survey</span><span class="q-tag tag-iacs">IACS / Class</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>Steel plate renewal is required when ultrasonic thickness gauging reveals structural diminution exceeding the maximum allowable limit set by Class. This limit is class-specific, but <strong>commonly 20% wastage of the original as-built plate thickness</strong> for general shell plating, determined under IACS UR Z7 and individual Class society rules.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. The criteria for steel plate renewal are primarily governed by percentage diminution, localized pitting, and structural deformation. Class societies establish these thresholds via <strong>IACS UR Z7</strong> (hull gauging and diminution criteria). As a general rule, if a structural member shows thickness reduction commonly exceeding <strong>20% of its original as-built rule thickness</strong> (exact limit is class-specific and set out in Class Rule tables), renewal is mandatory. For critical areas like the strength deck, keel, and bottom plating of large container ships or bulkers, the allowable diminution may be stricter. Additionally, if wastage is widespread, shows localized deep pitting, or if there is severe buckling impairing structural stability, the plate must be cropped and renewed with approved marine grade steel.</div>
+
+          <h4>Thickness Diminution Criteria</h4>
+          <ul>
+            <li><strong>General Shell Plating:</strong> Renewal universally required when wastage reaches the Class allowable diminution limit — <em>commonly 20%</em> of original rule thickness. Exact limit determined from Class-specific rule tables.</li>
+            <li><strong>Critical Structural Members:</strong> For keel plates, sheer strake, longitudinal strength girders, and strength deck plating, allowable diminution limits are tighter — set in Class rules.</li>
+            <li><strong>Substantial Corrosion Zone:</strong> Areas with diminution between <strong>75% and 100%</strong> of the allowable wastage limit — mandatory annual reassessment; not yet at renewal threshold (see Q4).</li>
+          </ul>
+
+          <h4>Localized Pitting and Grooving</h4>
+          <ul>
+            <li><strong>Pitting Intensity:</strong> If localized pitting covers more than <strong>20% of the evaluated surface area</strong>, or if pit depth leaves less than <strong>60%</strong> of original plate thickness intact, cropping or insert plating required.</li>
+            <li><strong>Weld Grooving:</strong> Accelerated corrosion along weld lines reducing structural attachment efficiency — gouge and re-weld, or insert plate if adjacent steel is compromised.</li>
+          </ul>
+
+          <h4>Deformations and Buckling</h4>
+          <p>Plates showing permanent plastic deformation due to heavy weather or cargo operations must be renewed if fairness deviation exceeds Class limits — typically when deflection depth exceeds a defined function of frame spacing, or if secondary cracking is present.</p>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">IACS UR Z7</span><span class="reg-desc">Hull gauging, thickness diminution criteria, and close-up survey requirements — primary authority for steel renewal thresholds</span></div>
+            <div class="reg-item"><span class="reg-code">IACS UR Z7.1 / Z7.2</span><span class="reg-desc">Specific hull survey guidelines including gauging criteria for general cargo ships and tankers</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-1 / Reg 3-2</span><span class="reg-desc">Protective coatings of dedicated seawater ballast tanks</span></div>
+            <div class="reg-item"><span class="reg-code">Class Rules — Hull Part</span><span class="reg-desc">Class-specific structural scantling tables defining absolute allowable mm diminution limits by ship type and location</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Rajappan will often ask: <em>"If you find 25% diminution on a deck plate out at sea, can you weld a doubler plate over it?"</em> Answer firmly: <strong>"No, sir. Doubler plates are strictly temporary emergency measures and are not permitted by Class for permanent structural restoration of strength members. The plate must be cropped and a proper insert piece welded."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>During drydocking or structural repairs, the CE verifies that replacement steel holds a valid Class Mill Certificate (Grade A, DH36, etc.), welding procedures are Class-approved (WPS), and certified welders carry out the work. The CE coordinates mandatory NDT like radiography or ultrasonic testing post-welding.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: What is the difference between an insert plate and a doubler plate?</p>
+              <p class="trap-a">A: An insert plate replaces the wasted steel completely, restoring original flush structural alignment with full-penetration butt welds. A doubler plate is welded on top using fillet lap welds — it creates a stress raiser, hides ongoing corrosion, and is only a temporary get-home measure.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates fail to mention that new steel must match the original steel grade (e.g., High-Tensile AH32/DH36 vs Mild Steel Grade A). Using mild steel where high-tensile steel is specified violates Class rules.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>20%</strong> — commonly cited general diminution threshold. <strong>75%–100%</strong> of allowable limit = substantial corrosion zone. <strong>300 × 300 mm</strong> — minimum standard size for an insert plate. <strong>50 mm radius</strong> — minimum radius on insert plate corners to avoid stress concentration.</p>
+              <h5>Casualty Link</h5>
+              <p><em>MV Stellar Daisy</em> (2017) — capsized and sank due to rapid structural failure and hull splitting, demonstrating the danger of ignoring localized structural fatigue and progressive steel diminution.</p>
+              <h5>Examiner Chain</h5>
+              <p>Diminution Limits → NDT Methods → Weld Defect Types → Insert Plate Geometry and Radiused Corners.</p>
+              <h5>On My Vessel</h5>
+              <p>Thickness gauging is executed by certified third-party NDT contractors during the 5-yearly drydock. The UTG Report File is kept in the ship's office. Areas with substantial corrosion (&gt;15% wastage approaching the allowable limit) are tracked in the PMS under critical inspection protocols.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q2, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q2, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q2 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card" id="q3" data-tags="survey ballast-tank class iacs solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">3</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What do you specifically check during a ballast water tank inspection?</div>
+          <div class="q-tags"><span class="q-tag tag-survey">Survey</span><span class="q-tag tag-iacs">IACS / Class</span><span class="q-tag tag-solas">SOLAS</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>During a ballast water tank inspection, I specifically check the condition of the protective coating (for breakdown or blistering), structural members for cracks or buckling, the depletion rate of sacrificial anodes, signs of localized pitting, and the condition of internal piping, striking plates, and air vents.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. A ballast water tank inspection requires a structured approach. First, I verify the <strong>protective coating condition</strong>, classifying it as Good, Fair, or Poor as per PSPC criteria — checking for scale detachment, blistering, and calcareous deposits. Second, I look for <strong>structural defects</strong>: stress fractures in longitudinal frames, tripping brackets, and transverse bulkheads, alongside plate buckling. Third, I evaluate <strong>sacrificial zinc anodes</strong> for uniform depletion and secure attachment. Finally, I inspect <strong>tank internals</strong>: suction strums, remote gauging sensors, air pipes, sound pipes with striking plates, and check for accumulated mud or silt at the tank bottom.</div>
+
+          <h4>Coating Condition Evaluation (PSPC MSC.215(82))</h4>
+          <ul>
+            <li><strong>Good:</strong> Only minor spot rusting.</li>
+            <li><strong>Fair:</strong> Localized breakdown at edges of stiffeners and weld connections, or light rust scaling covering up to <strong>20%</strong> of the area under consideration.</li>
+            <li><strong>Poor:</strong> Extensive breakdown with severe rust scale or pitting covering more than <strong>20%</strong> of the area. A "Poor" designation mandates <strong>annual internal examinations</strong> thereafter until rectified.</li>
+          </ul>
+
+          <h4>Structural Damage and Deformation Checks</h4>
+          <ul>
+            <li><strong>Stress Concentrations:</strong> Connection points where longitudinal frames pass through transverse bulkheads — critical area for fatigue cracks.</li>
+            <li><strong>Buckling:</strong> Along webs of floor plates and longitudinal stiffeners — distortion caused by slamming stresses or over-pressurization.</li>
+            <li><strong>Pitting Analysis:</strong> Horizontal surfaces where water traps — localized pitting clusters that could breach adjacent oil fuel tanks or outer hull shell.</li>
+          </ul>
+
+          <h4>Tank Appendages and Fittings</h4>
+          <ul>
+            <li><strong>Anodes:</strong> Securely bolted, clean of paint or mud, with more than <strong>50% volume remaining</strong>.</li>
+            <li><strong>Striking Plates:</strong> Inspect area beneath sounding pipe — ensure not holed or severely thinned by continuous sounding tape impacts.</li>
+            <li><strong>Suction Strums &amp; Bellmouths:</strong> Secure, clear of debris, set at correct distance from tank bottom. Verify integrity of air and sounding pipes inside the tank.</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-1 / Reg 3-2</span><span class="reg-desc">Performance Standard for Protective Coatings (PSPC) — dedicated seawater ballast tanks</span></div>
+            <div class="reg-item"><span class="reg-code">IMO Res MSC.215(82)</span><span class="reg-desc">Technical requirements for protective coatings in ballast spaces — coating grade definitions</span></div>
+            <div class="reg-item"><span class="reg-code">IACS UR Z7.1</span><span class="reg-desc">Guidelines for the inspection of ballast tanks — structural and coating criteria</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch III / Reg 19</span><span class="reg-desc">Enclosed space entry and rescue drills — applicable to ballast tank entry procedures</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Nair loves to ask: <em>"What will you do if the striking plate under the sounding pipe is completely corroded through or missing?"</em> Answer: <strong>"Sir, it must be renewed immediately by welding a new 10–12 mm thick steel pad. If left unattended, the sounding rod will eventually wear a hole through the bottom shell plating, leading to water ingress or oil pollution if an adjacent bunker tank is below."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>Effective ballast tank management minimizes steel degradation over the vessel's life. Undetected cracks can lead to cross-contamination between ballast water and heavy fuel oil tanks. The CE enforces the ballast tank inspection program within the PMS.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: If the coating is found in "Poor" condition, what does Class mandate?</p>
+              <p class="trap-a">A: Sir, if the coating is graded "Poor," the tank must be subjected to mandatory annual internal examinations and thickness measurements by Class until rectified. The standard intermediate survey cycle no longer applies to that space.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates forget to inspect the internal coating of air vent pipes and sounding pipe structures inside the tank, focusing only on large plates and stiffeners.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>20% area</strong> — threshold between Fair and Poor coating. <strong>50% anode mass</strong> — replacement rule of thumb. <strong>20.9% O₂</strong> — minimum for entry. <strong>&lt;5 ppm H₂S</strong> — maximum permissible before entry.</p>
+              <h5>Casualty Link</h5>
+              <p><em>MV Erika</em> (1999) — severe internal corrosion of ballast tanks masked by inadequate inspections caused the hull to split in heavy weather.</p>
+              <h5>Examiner Chain</h5>
+              <p>Ballast Tank Entry Protocol → Coating Condition Grading → Anode Chemistry → Corrosion Mechanisms (Galvanic vs Microbially Induced).</p>
+              <h5>On My Vessel</h5>
+              <p>All ballast tanks inspected on a rotating six-monthly schedule per AMOS PMS. Digital photographic records of coating condition, anode state, and structural welds uploaded into the company's asset tracking portal.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q3, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q3, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q3 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card" id="q4" data-tags="survey corrosion class iacs">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">4</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What is the definition of 'substantial corrosion' in the context of hull surveys, and what criteria determine when it applies?</div>
+          <div class="q-tags"><span class="q-tag tag-survey">Survey</span><span class="q-tag tag-iacs">IACS / Class</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>Substantial corrosion is defined by IACS as an extent of corrosion where the structural diminution has reached or exceeded <strong>75% of the maximum allowable wastage limit</strong>, but remains within acceptable structural margins. It triggers mandatory annual close-up examinations and thickness measurements of the affected areas.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. According to <strong>IACS UR Z7</strong>, "Substantial Corrosion" is a technical classification given to structural members where measured wastage has progressed to between <strong>75% and 100% of the maximum allowable diminution limit</strong>. It represents a critical buffer zone where the steel has not yet failed or reached renewal threshold, but is heavily compromised. When a localized area or structural member falls into this percentage window, the surveyor formally records it as substantial corrosion — legally changing its status and mandating annual internal inspections instead of the standard five-year cycle.</div>
+
+          <h4>Technical Definition (IACS UR Z7)</h4>
+          <p>Substantial corrosion is an extent of corrosion such that the assessment of the corrosion pattern indicates a wastage in excess of <strong>75% of the allowable diminution</strong>, but within acceptable limits.</p>
+          <p class="formula"><strong>0.75 × t_allow ≤ t_wastage &lt; 1.0 × t_allow</strong><br><em>Where t_allow = maximum allowable diminution for that structural member</em></p>
+
+          <h4>Where It Commonly Occurs</h4>
+          <ul>
+            <li>Upper regions of dedicated seawater ballast tanks (cyclic wet/dry + sun heating)</li>
+            <li>Transverse bulkheads and lower hopper plating in bulk carriers</li>
+            <li>Areas adjacent to heated fuel oil tanks</li>
+            <li>Almost universally associated with areas where coating has been graded <strong>"Poor"</strong></li>
+          </ul>
+
+          <h4>Survey Consequences</h4>
+          <ul>
+            <li><strong>Annual Re-inspection Mandate:</strong> Once identified, the specific location must be internally examined and thickness-gauged at every subsequent Annual Survey.</li>
+            <li><strong>Does NOT mean renewal:</strong> Steel is still within legally acceptable structural margins — it is a cautionary classification to enforce monitoring.</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">IACS UR Z7 / Sec 1.2</span><span class="reg-desc">Core structural definition of substantial corrosion across hull surveys</span></div>
+            <div class="reg-item"><span class="reg-code">IACS UR Z10.2</span><span class="reg-desc">Enhanced Survey Programme requirements and corrosion criteria for bulk carriers</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch I / Reg 6</span><span class="reg-desc">Inspection and survey of statutory structure and certificates</span></div>
+            <div class="reg-item"><span class="reg-code">Class Rules — Structural Scantlings</span><span class="reg-desc">Class-specific tables defining absolute allowable mm diminution limits by location</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Senthil frequently tests this: <em>"If the surveyor marks an area as substantial corrosion, can you wait until the next drydock in 3 years?"</em> Answer: <strong>"No, sir. Once Class identifies substantial corrosion, that specific location is written into the survey report as a condition of class/memorandum and must be internally examined and thickness-gauged at every subsequent Annual Survey."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>Managing areas of substantial corrosion controls structural maintenance budgets and drydock specifications. When identified, it places the vessel under heightened Class scrutiny. The CE ensures these areas are mapped in ship tracking systems and monitored for secondary cracking.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: Does substantial corrosion mean the ship is unseaworthy or has failed its survey?</p>
+              <p class="trap-a">A: No, sir. The steel is still within legally acceptable structural margins. It is a cautionary classification to enforce monitoring so repairs can be planned before the ship becomes unseaworthy.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates confuse "substantial corrosion" with general "poor coating condition." A coating can be poor without the underlying steel reaching the 75% diminution threshold required for the technical designation.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>75%</strong> — lower trigger boundary. <strong>1 year</strong> — mandated re-inspection interval. <strong>100%</strong> — once exceeded, renewal is mandatory.</p>
+              <h5>Casualty Link</h5>
+              <p>Hull breakups on aging bulk carriers where undocumented accelerated wastage along internal stiffeners quickly turned from substantial corrosion into structural failure under cyclic heavy loading.</p>
+              <h5>Examiner Chain</h5>
+              <p>Substantial Corrosion Definition → Annual Survey Escalation → UTG Grid Mapping → Temporary vs Permanent Repair Options.</p>
+              <h5>On My Vessel</h5>
+              <p>Areas flagged with substantial corrosion are documented in the Class Executive Summary and mirrored in AMOS/StarIFS PMS as high-priority inspection tasks. The CE keeps a dedicated file with exact frame numbers and past UTG readings.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q4, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q4, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q4 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="q-card" id="q5" data-tags="survey esp class iacs solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">5</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Give a full overview of the Enhanced Survey Programme (ESP) Code — scope, ship types covered, survey cycles, and key CE responsibilities.</div>
+          <div class="q-tags"><span class="q-tag tag-survey">Survey</span><span class="q-tag tag-iacs">IACS / Class</span><span class="q-tag tag-solas">SOLAS XI-1</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>The Enhanced Survey Programme (ESP) Code is a mandatory structural inspection regime under <strong>SOLAS Chapter XI-1, Regulation 2</strong> for all bulk carriers and oil tankers aged 5 years and older. It mandates intensive close-up surveys, comprehensive thickness gaugings, and structural integrity reports to prevent catastrophic structural failures. It does <strong>NOT apply to container ships</strong>.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. The Enhanced Survey Programme was introduced by the IMO and is governed by the International Code on the Enhanced Programme of Inspections during Surveys of Bulk Carriers and Oil Tankers (ESP Code), made mandatory via <strong>SOLAS Chapter XI-1, Regulation 2</strong>. It applies explicitly to <strong>oil tankers (single and double hull), bulk carriers, chemical tankers, and ore carriers</strong> — starting from their first 5-year renewal survey. The ESP demands detailed <strong>close-up visual inspections</strong> (surveyor within arm's reach of structure) and extensive pre-mapped <strong>ultrasonic thickness gaugings</strong>. The survey scope scales up with each subsequent cycle based on ship's age — at 10 years, intermediate surveys match the intensity of full renewal surveys. The CE's responsibilities include maintaining the mandatory <strong>ESP Survey File</strong> onboard and ensuring technical readiness: staging, safe tank entry atmosphere, structural cleaning.</div>
+
+          <h4>Ship Types and Scope</h4>
+          <ul>
+            <li><strong>Applicable:</strong> Bulk Carriers, Combination Carriers, Oil Tankers (Single &amp; Double Hull), Chemical Tankers.</li>
+            <li><strong>NOT applicable:</strong> Container ships, general cargo vessels.</li>
+            <li><strong>Close-Up Survey:</strong> Surveyor must be within <strong>arm's length</strong> of critical structural areas — deck transverse rings, bulkhead stringers, hopper web frames.</li>
+            <li><strong>Age Threshold:</strong> Vessels enter ESP regime from their <strong>first 5-year renewal survey</strong>. At <strong>10 years</strong>, intermediate survey scope matches full renewal intensity.</li>
+          </ul>
+
+          <h4>The ESP Survey File (Mandatory Onboard Document)</h4>
+          <ul>
+            <li><strong>Survey Programme:</strong> Pre-planned strategy agreed between Owner and Class prior to survey.</li>
+            <li><strong>Executive Hull Summary:</strong> Structural conclusions of past surveys.</li>
+            <li><strong>Thickness Gauging Reports:</strong> Official certified UTG data sets.</li>
+            <li><strong>Condition Evaluation Report:</strong> Logs of structural renewals, repairs, and locations of substantial corrosion.</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch XI-1 / Reg 2</span><span class="reg-desc">Legal mandate making the ESP Code mandatory for bulk carriers and tankers</span></div>
+            <div class="reg-item"><span class="reg-code">IMO Res A.1104(29)</span><span class="reg-desc">Current survey guidelines under the ESP Code framework (adopted 2019, replaces A.744(18))</span></div>
+            <div class="reg-item"><span class="reg-code">IACS UR Z10 Series</span><span class="reg-desc">Z10.1–Z10.5: IACS unified requirements for ESP execution by ship type</span></div>
+            <div class="reg-item"><span class="reg-code">ESP Code — 2011 Edition</span><span class="reg-desc">International Code on the Enhanced Programme of Inspections</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon will try to trap you: <em>"On your last Maersk container ship, how did you prepare the ESP file for the surveyor?"</em> Do not fall into this trap. Response: <strong>"Sir, my last vessel was a container ship, and the Enhanced Survey Programme applies strictly to bulk carriers and tankers — it does not apply to container ships."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>For engineers transitioning between ship types, failing to recognize the massive legal scope of an ESP survey on a tanker or bulker can lead to severe survey delays, structural failure to clear port, or PSC detentions.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: What is the specific planning document required before an ESP survey can begin?</p>
+              <p class="trap-a">A: Sir, it is the Survey Programme — drafted by the shipowner and formally submitted and agreed with Class several months prior to the survey, outlining exactly how access, cleaning, and gaugings will be achieved.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates fail to state that the ESP requires a special file to be permanently kept onboard, or assume it is simply another name for a regular class renewal survey.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>5 years</strong> — age at which a bulk carrier or tanker enters the ESP regime. <strong>10 years</strong> — intermediate surveys match renewal scope. <strong>Arm's length</strong> — physical definition of a Close-Up Survey.</p>
+              <h5>Casualty Link</h5>
+              <p>The sinking of <em>MV Derbyshire</em> (1980) due to forward hatch cover failure and progressive flooding catalyzed industry developments that ultimately led to the strict structural checks in the ESP Code.</p>
+              <h5>Examiner Chain</h5>
+              <p>Vessel Type Applicability → Close-Up vs Overall Survey → ESP File Contents → CE Preparation Responsibilities.</p>
+              <h5>On My Vessel</h5>
+              <p>On my Maersk container vessel, standard Class Hull Surveys apply under AMOS PMS. On an ESP-applicable vessel, the ESP Survey File is kept as a distinct legal binder in the ship's office alongside statutory records.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q5, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q5, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q5 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= SECTION 2: SHIP CONSTRUCTION & DESIGN RULES ======= -->
+    <div class="section-head">
+      <h2>🔧 Ship Construction &amp; Design Rules</h2>
+      <span class="sec-count">3 questions</span>
+    </div>
+
+    <!-- Q6 -->
+    <div class="q-card" id="q6" data-tags="survey gbs construction solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">6</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Explain Goal-Based Standards (GBS) under SOLAS Chapter II-1 — what they are, how they work, and their significance for ship construction.</div>
+          <div class="q-tags"><span class="q-tag tag-solas">SOLAS II-1</span><span class="q-tag tag-iacs">IACS / Class</span><span class="q-tag tag-survey">Survey</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>Goal-Based Standards (GBS) are an IMO structural design framework under <strong>SOLAS Regulation II-1/3-10</strong> that establish clear safety targets a ship must achieve throughout its operational life, rather than prescribing rigid dimensional formulas. It shifts ship construction from prescriptive rules to an <strong>objective-focused engineering design system</strong> with a mandatory 25-year design life.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. Goal-Based Standards represent a fundamental shift in how ships are designed. Mandated under <strong>SOLAS Chapter II-1, Regulation 3-10</strong>, GBS establishes an overarching regulatory framework through a <strong>5-tier structure</strong>. Tier I defines safety goals; Tier II outlines functional requirements — structural redundancy, corrosion margins, and a minimum design life of <strong>25 years</strong> against North Atlantic wave statistics; Tier III is the IMO verification process auditing Class Society rules against these standards; Tier IV is the actual detailed Class rules; Tier V is shipyard fabrication practices. It applies to <strong>bulk carriers and oil tankers ≥150 m</strong> built on or after <strong>1 July 2016</strong>.</div>
+
+          <h4>The 5-Tier GBS Structure</h4>
+          <ul>
+            <li><strong>Tier I — Goals:</strong> High-level safety objectives — ship must remain structurally safe and watertight for its specified design life.</li>
+            <li><strong>Tier II — Functional Requirements:</strong> Design life minimum <strong>25 years</strong>; withstand North Atlantic wave statistics; explicit corrosion margins and structural redundancy.</li>
+            <li><strong>Tier III — Verification of Compliance:</strong> IMO audits Classification Society rules to confirm they satisfy Tiers I &amp; II.</li>
+            <li><strong>Tier IV — Rules and Regulations:</strong> Detailed structural rules developed by verified Class Societies (e.g., IACS CSR).</li>
+            <li><strong>Tier V — Industry Practices:</strong> Shipyard construction guidelines, welding codes, and quality control during fabrication.</li>
+          </ul>
+
+          <h4>Significance for Modern Ship Construction</h4>
+          <ul>
+            <li><strong>Uniform Safety Baseline:</strong> Prevents competitive erosion of structural standards between Class societies.</li>
+            <li><strong>Facilitates Innovation:</strong> Designers free to use new materials and alternative hull layouts, provided the safety goals are met.</li>
+            <li><strong>Link to SCF:</strong> GBS mandates the existence of the Ship Construction File onboard (see Q7).</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-1 / Reg 3-10</span><span class="reg-desc">Goal-based ship construction standards for bulk carriers and tankers</span></div>
+            <div class="reg-item"><span class="reg-code">IMO Res MSC.287(87)</span><span class="reg-desc">Formal adoption of the International Goal-Based Ship Construction Standards (2010)</span></div>
+            <div class="reg-item"><span class="reg-code">IMO MSC.1/Circ.1394</span><span class="reg-desc">Generic guidelines for application of Goal-Based Standards methodology</span></div>
+            <div class="reg-item"><span class="reg-code">IACS CSR</span><span class="reg-desc">Common Structural Rules — IACS unified rules built to comply with GBS Tier II criteria</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon will ask: <em>"What is the core philosophical difference between old ship construction rules and GBS?"</em> Key phrase: <strong>"Sir, traditional rules were prescriptive — telling the builder exactly 'how' to build using fixed formulas. GBS is objective-based — telling the designer 'what' safety performance must be achieved, shifting accountability to proven engineering outcomes and a mandatory 25-year design life."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>GBS ensures the vessel was constructed with an explicit, audited margin of structural safety designed to last 25 years. It directly influences long-term asset reliability and shapes the thickness of steel over the engine room casing.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: Does the IMO directly write the specific building blueprints under GBS?</p>
+              <p class="trap-a">A: No, sir. The IMO sets Tier I goals and Tier II functional requirements. The detailed technical engineering rules (Tier IV) are still written by Classification Societies, but those rules must pass a strict Tier III verification audit by the IMO.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates mix up GBS tiers or state it applies to all ships, forgetting the 150 m length constraint and specific application to tankers and bulk carriers built after July 2016.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>25 years</strong> — mandatory minimum design life. <strong>150 m</strong> — length threshold. <strong>1 July 2016</strong> — implementation date. <strong>North Atlantic</strong> — the specific wave climate standard for structural fatigue models.</p>
+              <h5>Casualty Link</h5>
+              <p>Catastrophic structural failures of older bulk carriers in the 1990s, frequently suffering side-shell frame failures, demonstrated that prescriptive Class rules lacked adequate baseline harmonization — directly resulting in GBS development.</p>
+              <h5>Examiner Chain</h5>
+              <p>GBS Definition → 5-Tier Hierarchy → Functional Requirements (25-year life) → Verification Process → Ship Construction File (SCF) Link.</p>
+              <h5>On My Vessel</h5>
+              <p>On modern vessels built under GBS, the physical impact is the Ship Construction File (SCF) — maintained in the ship's office as the definitive technical reference for structural modifications.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q6, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q6, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q6 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="q-card" id="q7" data-tags="survey construction solas iacs">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">7</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What is the Ship Construction File, what must it contain, and what is its purpose?</div>
+          <div class="q-tags"><span class="q-tag tag-solas">SOLAS II-1</span><span class="q-tag tag-iacs">IACS / Class</span><span class="q-tag tag-survey">Survey</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>The Ship Construction File (SCF) is a mandatory, vessel-specific document compilation required under <strong>SOLAS Regulation II-1/3-10</strong> for GBS-compliant ships. It contains the complete set of structural drawings, material specifications, and design criteria necessary to safely operate, inspect, and repair the vessel's hull throughout its operational life.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. The Ship Construction File, or SCF, is a statutory requirement introduced alongside Goal-Based Standards under <strong>SOLAS Chapter II-1, Regulation 3-10</strong>, supported by <strong>IMO MSC.1/Circ.1343</strong> guidelines. Its purpose is to provide ship's staff, company superintendents, Port State Control, and Class surveyors with a comprehensive, transparent record of the ship's structural design baselines. It must contain structural drawings, corrosion margins, geometric line diagrams, permissible tank sloshing limits, and specific guidelines for executing structural repairs. It is a living technical file that accompanies the ship from delivery to the recycling yard.</div>
+
+          <h4>Statutory Mandate and Purpose</h4>
+          <p>The SCF acts as the definitive technical user manual for the ship's steel structure. It bridges the gap between shipyard designers and operational crew to:</p>
+          <ul>
+            <li>Facilitate safe operation by defining hull operational limits (maximum deck loads, asymmetric tank capacities).</li>
+            <li>Guide structural inspections by explicitly mapping highly stressed areas and known fatigue-prone details.</li>
+            <li>Provide standard engineering data for executing Class-approved repairs when diminution thresholds are crossed.</li>
+          </ul>
+
+          <h4>Mandatory Contents (Onboard File)</h4>
+          <ul>
+            <li><strong>As-Built Structural Drawings:</strong> Midship section, framing arrangements, transverse bulkheads, and shell expansion.</li>
+            <li><strong>Material Specifications:</strong> Steel grades used (e.g., AH32/DH36 vs Mild Steel Grade A) and locations of special castings.</li>
+            <li><strong>Design Criteria Baselines:</strong> Design life (minimum 25 years), design wave environmental criteria, permissible cargo densities.</li>
+            <li><strong>Corrosion Protection Systems:</strong> Protective epoxy coating specifications, standard thickness charts, sacrificial anode or ICCP layout.</li>
+            <li><strong>In-Service Inspection Framework:</strong> Guidelines for close-up surveys, critical structural hot-spots, and predefined weld repair procedures.</li>
+          </ul>
+
+          <h4>Two-Part Structure</h4>
+          <ul>
+            <li><strong>Onboard File:</strong> Operational data and general structural layout for safety and maintenance — immediately accessible.</li>
+            <li><strong>Shore-Based Archive:</strong> Proprietary design calculations and detailed FEM data — stored securely ashore by Class or Owner.</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-1 / Reg 3-10</span><span class="reg-desc">Statutory mandate establishing the GBS framework and maintenance of the SCF</span></div>
+            <div class="reg-item"><span class="reg-code">IMO MSC.1/Circ.1343</span><span class="reg-desc">Guidelines for the information to be maintained in a Ship Construction File</span></div>
+            <div class="reg-item"><span class="reg-code">IACS Recommendation 112</span><span class="reg-desc">Industry standard for practical composition and security management of the SCF</span></div>
+            <div class="reg-item"><span class="reg-code">Class Rules — Survey/Docs</span><span class="reg-desc">Requirements for updating the SCF following significant structural alterations</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Senthil will ask: <em>"If you carry out a major steel renewal in drydock, do you need to do anything with the Ship Construction File?"</em> Answer: <strong>"Yes, sir. Any structural modification, major steel cropping, or renewal must be officially updated in the Ship Construction File, stamped by Class, to ensure the 'As-Built' record remains dynamically accurate."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>The SCF is invaluable when planning structural maintenance or dealing with emergency hull situations. If the vessel suffers heavy weather structural deformation or cracking, the CE refers to the SCF to verify the original steel grade, exact plate thickness, and approved welding profiles before any repair is permitted.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: Is the Ship Construction File completely open-source?</p>
+              <p class="trap-a">A: No, sir. Due to commercial shipyard intellectual property restrictions, proprietary design calculations and detailed FEM data are stored securely in a shore-based archive. The onboard file contains only the operational data required for safety and maintenance.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates state the SCF is only maintained by the Chief Mate. The hull structure is an all-department concern — the CE is directly audited on its contents during intermediate and renewal surveys.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>SOLAS II-1/3-10.4</strong> — exact paragraph governing SCF maintenance. <strong>2 parts</strong> — onboard + shore archive. <strong>150 m</strong> — minimum ship length for mandatory SCF carriage.</p>
+              <h5>Casualty Link</h5>
+              <p>The breakup of <em>Prestige</em> (2002) highlighted that without clear records of historical structural modifications, deep-seated structural flaws can go unmonitored and unrepaired.</p>
+              <h5>Examiner Chain</h5>
+              <p>GBS Framework → SCF Legal Requirement → Onboard vs Shore Contents → Document Control during Major Repairs.</p>
+              <h5>On My Vessel</h5>
+              <p>The SCF is kept as a distinctly marked technical library in the Ship's Office or Bridge. Internal document tracking within the company SMS ensures Class hull survey notes are recorded inside it.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q7, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q7, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q7 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="q-card" id="q8" data-tags="survey drydock class iacs solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">8</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Describe the full drydocking process and requirements for a ship — including intervals, what inspections are carried out, and CE responsibilities.</div>
+          <div class="q-tags"><span class="q-tag tag-survey">Survey</span><span class="q-tag tag-iacs">IACS / Class</span><span class="q-tag tag-solas">SOLAS I</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>Drydocking involves taking a vessel completely out of the water to inspect, maintain, and repair its underwater hull and machinery fittings. Under SOLAS and Class rules, a cargo ship must undergo <strong>two out-of-water bottom inspections within any 5-year period</strong>, with the maximum interval between inspections not exceeding <strong>36 months</strong>.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. Drydocking satisfies statutory requirements for bottom inspections under <strong>SOLAS Chapter I, Reg 10</strong>. The standard cycle requires <strong>two bottom inspections within a 5-year class block</strong>, with a maximum gap of <strong>36 months</strong> between inspections, one coinciding with the 5-yearly Class Renewal Survey. The CE manages: vessel trim and stability prior to entry, isolating shipboard systems, shore power changeover, inspecting all major underwater machinery and hull penetrations — including tailshaft poker gauge readings, rudder clearances, sea chest inspections, and propeller polishing. The absolute last action before flooding: personal walk-around verifying all bottom plugs re-fitted and wire-locked, sea valves closed, and signing the Docking Master's pre-flooding clearance certificate.</div>
+
+          <h4>Statutory Intervals</h4>
+          <ul>
+            <li><strong>Two bottom inspections</strong> within any 5-year period.</li>
+            <li><strong>Maximum 36 months</strong> between consecutive out-of-water inspections.</li>
+            <li><strong>In-Water Survey (IWS) alternative:</strong> For modern ships under 15 years with approved high-performance coatings — underwater camera inspection by certified divers may replace one intermediate dry-dock, subject to Flag State approval.</li>
+          </ul>
+
+          <h4>Sequential Drydocking Process</h4>
+          <ol>
+            <li><strong>Preparation:</strong> CE compiles drydock specification. Yard studies Docking Plan to align keel blocks (avoiding bilge keels, echo sounder transducers, sea chests).</li>
+            <li><strong>Entry:</strong> Vessel enters with zero or slight stern trim as specified by Docking Master, maintaining high GM.</li>
+            <li><strong>Critical Instant:</strong> When keel touches blocks along full length — load shifts off water buoyancy, risk period for listing. Reduced effective GM.</li>
+            <li><strong>Pumping and Settling:</strong> Water discharged. Crew monitors even settlement on blocks.</li>
+            <li><strong>Execution:</strong> Structural washing, blasting, painting, and mechanical overhauls.</li>
+            <li><strong>Pre-Flooding Inspection (CE critical role):</strong> Verify all sea valves closed, echo sounder blanks removed, all drain plugs re-fitted and wire-locked, ICCP anodes un-taped, rudder locking pins removed.</li>
+          </ol>
+
+          <h4>Underwater Inspection Scope</h4>
+          <ul>
+            <li>Hull plating, bilge keels — visual inspection for deformation and corrosion.</li>
+            <li>Sea chests and strainers — cleaning, blasting, internal anode and coating inspection.</li>
+            <li>Rudder assembly — pintle clearances, rudder drop, internal void for water ingress.</li>
+            <li>Propulsion — <strong>tailshaft poker gauge readings</strong>, simplex seal inspection, propeller polishing.</li>
+            <li>Echo sounder and speed log — cleaning and transducer unblanking.</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch I / Reg 10(a)(v)</span><span class="reg-desc">Mandatory provisions requiring structural bottom inspections of cargo ships</span></div>
+            <div class="reg-item"><span class="reg-code">IACS UR Z3</span><span class="reg-desc">Periodical surveys — requirements for mandatory out-of-water bottom examinations</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-1 / Reg 48</span><span class="reg-desc">Requirements for steering gear testing and structural component alignment</span></div>
+            <div class="reg-item"><span class="reg-code">Class Rules — Part B / Drydock</span><span class="reg-desc">Technical rules governing block loading, structural deformation limits, and refloating protocols</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Rajappan will ask: <em>"What is the absolute last thing you do as CE before they flood the drydock?"</em> Response: <strong>"Sir, I conduct a personal walk-around at the dock bottom to ensure all tank bottom plugs are re-fitted and wire-locked, all sea valves are closed and blanking plates removed, all sacrificial anodes are un-taped, and rudder locking pins are removed. I then personally sign off on the Docking Master's pre-flooding clearance certificate."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>Drydocking represents a major financial expenditure. Poor planning by the CE can lead to structural damage (if blocks are misaligned) or mechanical failure (if tailshaft clearances are incorrectly measured).</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: What is the "Critical Period" during drydocking, and why is it dangerous?</p>
+              <p class="trap-a">A: Sir, the critical period is the time span between the stern keel touching the blocks and the bow finally settling. During this interval, part of the ship's weight is borne by the blocks, drastically reducing effective GM. If the ship lacks sufficient initial stability, it can list heavily or slide off the blocks.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates forget to mention connecting the ship-to-shore grounding cable, which can result in severe stray current electrolytic pitting on the new hull paint due to active yard welding.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>36 months</strong> — maximum between bottom inspections. <strong>2 plugs rule</strong> — every bottom tank plug removed must be logged and CE must verify reinstatement. <strong>2 mm</strong> — typical maximum allowable clearance for small rudder pintles before bush replacement.</p>
+              <h5>Casualty Link</h5>
+              <p>Vessels suffering structural tilting inside a drydock emphasize how failure to monitor weight distribution and ballast shifts during the critical period can lead to structural loss.</p>
+              <h5>Examiner Chain</h5>
+              <p>Drydock Planning → Critical Period and Stability Changes → Tailshaft / Poker Gauge Execution → Pre-flooding Checklists.</p>
+              <h5>On My Vessel</h5>
+              <p>Drydocking operations managed through AMOS PMS Drydock Specifications Modules. A physical Bottom Plug Logbook is maintained by the 2/E in the control room; every plug removed is tagged with its precise location, requiring joint signature from 2/E and CE upon re-insertion.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q8, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q8, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q8 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="q-card" id="q9" data-tags="survey class iacs solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">9</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Give an overview of the classification society survey system — types of surveys, periodicity, and the role of class in statutory survey delegation.</div>
+          <div class="q-tags"><span class="q-tag tag-survey">Survey</span><span class="q-tag tag-iacs">IACS / Class</span><span class="q-tag tag-solas">SOLAS I</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>The classification society survey system is a structured audit framework verifying that a ship is built and maintained in compliance with Class rules and international maritime law. It operates on a <strong>5-year HSSC cycle</strong>: Annual, Intermediate, and Class Renewal surveys — with Class frequently acting as a <strong>Recognized Organization (RO)</strong> delegated by Flag States to issue statutory certificates.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. The Classification Society survey system operates on a <strong>5-year Harmonized System of Survey and Certification (HSSC)</strong> framework. Every year within <strong>±3 months</strong> of the anniversary date, an <strong>Annual Survey</strong> verifies general condition. Between years 2 and 3, an <strong>Intermediate Survey</strong> expands scope to include internal structural checks. At 5 years, a <strong>Class Renewal Survey</strong> carries out exhaustive NDT, thickness gaugings, and machinery overhauls. Beyond Class rules, Class Societies act as <strong>Recognized Organizations (ROs)</strong> under the <strong>IMO RO Code</strong> — authorized by Flag State administrations to survey and issue statutory certificates under SOLAS, MARPOL, and Load Lines.</div>
+
+          <h4>Survey Types and Periodicity (HSSC)</h4>
+          <ul>
+            <li><strong>Annual Survey:</strong> Every year within <strong>±3 months</strong> of anniversary date. Visual walk-through, functional safety system testing.</li>
+            <li><strong>Intermediate Survey:</strong> Between 2nd and 3rd anniversaries. Expanded scope: internal structural checks of representative tanks, targeted UTG if substantial corrosion previously identified.</li>
+            <li><strong>Class Renewal Survey (Special Survey):</strong> At <strong>5-year</strong> maturity. Comprehensive: close-up visual inspections, mandatory UTG, pressure testing of tanks, deep overhauls of main propulsion and auxiliary plant.</li>
+            <li><strong>Continuous Survey System (CSM/CSH alternative):</strong> ~20% of ship's items inspected per year over the 5-year block, avoiding massive operational downtime at the 5-year mark.</li>
+          </ul>
+
+          <h4>The RO Mechanism</h4>
+          <ul>
+            <li><strong>Flag State Obligation:</strong> Statutory certificates (CSSCC, IOPP, Load Line) are legal responsibility of the national Flag State Administration.</li>
+            <li><strong>RO Delegation:</strong> Flag States authorize Class Societies as ROs under the <strong>IMO RO Code (MSC.349(92))</strong> to survey and issue statutory certificates on their behalf.</li>
+            <li><strong>Key distinction for exam:</strong> Class Survey = verifies Class rules for structural/machinery integrity. Statutory Survey = verifies international convention compliance (SOLAS, MARPOL, Load Lines).</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch I / Reg 6</span><span class="reg-desc">Provisions allowing Flag States to delegate survey functions to nominated surveyors or ROs</span></div>
+            <div class="reg-item"><span class="reg-code">IMO RO Code / Res MSC.349(92)</span><span class="reg-desc">International Code for Recognized Organizations — performance and audit criteria</span></div>
+            <div class="reg-item"><span class="reg-code">IACS HSSC Guidelines</span><span class="reg-desc">Unified procedures mapping periodic intervals and survey definitions</span></div>
+            <div class="reg-item"><span class="reg-code">Load Line 1966 / Art 13</span><span class="reg-desc">Provisions for delegation of authority to survey and issue load line certificates</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon / Nair will ask: <em>"What is the difference between a Class Survey and a Statutory Survey?"</em> Core answer: <strong>"Sir, a Class Survey verifies compliance with Classification Society rules for structural and machinery integrity. A Statutory Survey verifies compliance with international maritime law — SOLAS, MARPOL, and Load Lines — enacted by IMO and enforced by the Flag State."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>Understanding the RO system prevents confusion during PSC or Class inspections. A Class surveyor acting as RO carries full legal weight of the Flag administration when verifying statutory gear.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: Can a Class surveyor issue a permanent statutory certificate if they find a serious safety defect?</p>
+              <p class="trap-a">A: No, sir. If a serious defect is found, the surveyor will refuse to endorse the certificate, or may issue a short-term certificate with a Condition of Class or Statutory Deficiency, notifying the Flag State immediately.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates mistakenly believe Classification Societies are government bodies, failing to understand they are independent technical organizations acting as agents for government flag administrations.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>±3 months</strong> — annual survey window. <strong>5 years</strong> — certificate validity and renewal cycle. <strong>IMO RO Code</strong> — mandatory instrument governing delegation of statutory survey authority.</p>
+              <h5>Casualty Link</h5>
+              <p>Fragmented survey oversight in the 1990s prompted the maritime community to tighten HSSC and RO auditing processes, closing technical inspection loopholes that allowed structural defects to go undetected.</p>
+              <h5>Examiner Chain</h5>
+              <p>HSSC Cycle Structure → Annual vs Intermediate Scope → Definition of RO → Authority to Issue Statutory Certificates.</p>
+              <h5>On My Vessel</h5>
+              <p>Class Survey Status Report is tracked via an online database integrated with Class systems. The CE reviews this monthly alongside statutory folders to ensure no survey windows are inadvertently missed.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q9, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q9, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q9 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="q-card" id="q10" data-tags="survey bulk-carrier construction solas iacs">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">10</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Under which rules is a bulk carrier built, and where is this referenced in SOLAS?</div>
+          <div class="q-tags"><span class="q-tag tag-solas">SOLAS XII</span><span class="q-tag tag-iacs">IACS / Class</span><span class="q-tag tag-survey">Survey</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>A bulk carrier is constructed in compliance with the <strong>IACS Common Structural Rules (CSR) for Bulk Carriers</strong>. Statutorily, structural requirements are mandated under <strong>SOLAS Chapter XII</strong> (Additional Safety Measures for Bulk Carriers) and, for vessels ≥150 m built after July 2016, under <strong>SOLAS Chapter II-1 Regulation 3-10</strong> (Goal-Based Standards).</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. Modern bulk carriers are designed and constructed in compliance with the <strong>IACS Common Structural Rules (CSR)</strong>, which harmonize structural scantlings, fatigue life models, and corrosion margins across all major classification societies for bulk carriers ≥90 m. Statutorily, two primary SOLAS chapters anchor these construction frameworks: <strong>SOLAS Chapter XII Regulations 5 and 6</strong> dictate structural strength requirements, damage stability criteria, and structural integrity of transverse bulkheads and double bottoms. For vessels ≥150 m built on or after 1 July 2016, <strong>SOLAS Chapter II-1 Regulation 3-10</strong> establishes the legal bridge mandating that Class construction rules must fully satisfy IMO's GBS criteria.</div>
+
+          <h4>Applicable Structural Rules — IACS CSR</h4>
+          <ul>
+            <li><strong>IACS CSR for Bulk Carriers:</strong> Applies to self-propelled bulk carriers ≥<strong>90 m</strong> in length. Mandates comprehensive finite element analysis (FEA) of hull girder under complex cyclic stresses.</li>
+            <li><strong>Net Thickness Approach:</strong> Structural strength calculations performed using "net thickness" of steel, with a dedicated corrosion addition layer to absorb operational wastage over the design life.</li>
+          </ul>
+
+          <h4>SOLAS Statutory References</h4>
+          <ul>
+            <li><strong>SOLAS Chapter XII Regulation 5 (Structural Strength):</strong> Bulk carriers must withstand flooding of any one cargo hold, accounting for dynamic loading and cargo density. Key density threshold: <strong>1.78 g/cm³</strong> — above this, cargo is "high density" (e.g., iron ore), triggering stricter structural requirements.</li>
+            <li><strong>SOLAS Chapter XII Regulation 6 (Structural Requirements):</strong> Mandatory structural parameters for transverse watertight bulkheads, corrugated bulkheads, and double bottom structures.</li>
+            <li><strong>SOLAS Chapter II-1 Regulation 3-10 (GBS):</strong> For ≥150 m bulk carriers built after 1 July 2016 — mandates 25-year design life with IMO-audited structural redundancy.</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch XII / Reg 5</span><span class="reg-desc">Structural strength and damage stability criteria for bulk carriers under flooded conditions</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch XII / Reg 6</span><span class="reg-desc">Structural requirements for bulkheads, double bottoms, and longitudinal strength members</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-1 / Reg 3-10</span><span class="reg-desc">Goal-based ship construction standards mandating compliance with audited Class rules</span></div>
+            <div class="reg-item"><span class="reg-code">IACS CSR — Bulk Carriers</span><span class="reg-desc">Unified structural design specifications, corrosion additions, and fatigue benchmarks for bulk carriers ≥90 m</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Senthil may ask: <em>"Why does SOLAS Chapter XII have specific rules for bulk carriers carrying cargo with a density of 1.78 g/cm³ and above?"</em> Answer: <strong>"Sir, heavy cargoes like iron ore concentrate weight at the bottom of holds, leaving large upper void spaces. If a hold breaches, rapid water ingress combined with the heavy localized weight can cause transverse bulkheads to buckle or the hull girder to fail through extreme bending moments. SOLAS Chapter XII enforces structural reinforcement to prevent this domino-effect collapse."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>The high-capacity ballast pumping operations managed by the engine department directly alter a bulk carrier's shear stresses and bending moments. Structural attachments inside machinery spaces and pipe tunnels passing through double bottoms must be maintained to prevent cracking from hull vibrations.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: Does SOLAS Chapter XII apply to container ships that occasionally carry bulk parcels?</p>
+              <p class="trap-a">A: No, sir. SOLAS Chapter XII applies strictly to vessels matching the legal definition of a bulk carrier — constructed with single decks, top-side tanks, and hopper side tanks in cargo spaces.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates fail to mention the exact structural impact of cargo density, or state bulk carriers are built under standard container ship structural lines — ignoring the specific existence of IACS CSR.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>90 m</strong> — IACS CSR minimum length. <strong>1.78 g/cm³</strong> — high-density cargo threshold in SOLAS XII. <strong>25 years</strong> — GBS baseline fatigue life for ≥150 m vessels. <strong>Hold No. 1</strong> — most structurally vulnerable space under Chapter XII.</p>
+              <h5>Casualty Link</h5>
+              <p>Sudden structural failures of <em>MV Derbyshire</em> (1980) and <em>MV Stellar Daisy</em> (2017) highlighted how extreme wave impact and heavy cargo dynamics can destroy forward structures if bulk carrier scantlings are not reinforced.</p>
+              <h5>Examiner Chain</h5>
+              <p>SOLAS Chapter XII Overview → High-Density Cargo Constraints → Bulkhead Flooding Deflection → IACS CSR Integration.</p>
+              <h5>On My Vessel</h5>
+              <p>These rules are not directly active on my Maersk container vessel. For a bulk carrier engineer, these constraints are monitored via the Class-approved Loading Computer and documented within the Ship Construction File (SCF).</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q10, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q10, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q10 · v1.0</span>
+        </div>
+      </div>
+    </div>
+    <!-- Q11 -->
+    <div class="q-card" id="q11" data-tags="survey renewal annual intermediate iacs solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">11</div>
+        <div class="q-text-wrap">
+          <div class="q-text">If a ship has already undergone a Renewal survey, what are the requirements for subsequent Annual and Intermediate surveys — do they still need to be carried out, and what do they cover?</div>
+          <div class="q-tags"><span class="q-tag tag-survey">Survey</span><span class="q-tag tag-iacs">IACS / Class</span><span class="q-tag tag-solas">SOLAS I</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>Yes — completing a Class Renewal Survey does not cancel future checks; it <strong>resets the 5-year HSSC clock</strong>. Subsequent Annual and Intermediate surveys must still be carried out strictly within their designated anniversary windows to monitor progressive wear, corrosion, and structural integrity.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. This is a common point of confusion — completing a Class Renewal Survey does not suspend periodic survey requirements; it resets the 5-year HSSC cycle. Subsequent Annual and Intermediate surveys remain <strong>strictly mandatory</strong>. Annual surveys must be executed within <strong>±3 months</strong> of each annual anniversary date, starting one year after the renewal. They cover general visual examination of hull plating, weather decks, hatch closing arrangements, and functional tests of emergency systems. The Intermediate Survey between the 2nd and 3rd anniversaries adds expanded internal visual inspections and thickness measurements of representative ballast tanks, plus mandatory UTG of any areas previously identified with substantial corrosion.</div>
+
+          <h4>Post-Renewal HSSC Matrix</h4>
+          <ul>
+            <li><strong>Year 1:</strong> First Annual Survey — verifies no severe structural degradation or mechanical breakdown since the major overhaul.</li>
+            <li><strong>Year 2:</strong> Second Annual Survey (or start of Intermediate window).</li>
+            <li><strong>Year 3:</strong> Intermediate Survey must be completed by the 3rd anniversary.</li>
+            <li><strong>Year 4:</strong> Fourth Annual Survey.</li>
+            <li><strong>Year 5:</strong> Next Class Renewal Survey.</li>
+          </ul>
+
+          <h4>Subsequent Annual Survey Scope</h4>
+          <ul>
+            <li>Visual walk-through: side shell above waterline, strength decks, structures, bulwarks.</li>
+            <li>Watertight integrity: hatch covers, gaskets, clamping devices, air pipes, flame screens, ventilators.</li>
+            <li>Safety and machinery: emergency fire pumps, quick-closing valves, steering gear, emergency generators.</li>
+          </ul>
+
+          <h4>Subsequent Intermediate Survey Scope</h4>
+          <ul>
+            <li>All standard Annual Survey requirements.</li>
+            <li><strong>Internal tank inspections:</strong> Mandatory visual examination of selected representative seawater ballast tanks.</li>
+            <li><strong>Targeted gauging:</strong> Any areas with previously identified substantial corrosion must have mandatory UTG at both annual and intermediate stages.</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch I / Reg 14</span><span class="reg-desc">Duration and validity of cargo ship safety certificates</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch I / Reg 10</span><span class="reg-desc">Mandate for executing annual and intermediate surveys on cargo hulls</span></div>
+            <div class="reg-item"><span class="reg-code">IACS HSSC / Section 2</span><span class="reg-desc">Standardized rules detailing the sequential order of periodic surveys after renewal</span></div>
+            <div class="reg-item"><span class="reg-code">Class Rules — General Regulations</span><span class="reg-desc">Rules governing certificate suspension if intermediate or annual surveys are missed</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Senthil uses this as a technical trap: <em>"Since we completely renewed 50 tons of steel during the renewal survey six months ago, can I skip opening the forward ballast tank during the next intermediate survey?"</em> Answer: <strong>"No, sir. Class regulations are rigid. The completion of major renewals resets the cycle but does not allow deviations from the statutory HSSC intermediate matrix. If that tank is mandated for inspection by age or rule criteria, it must be opened, prepared, and surveyed."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>Failing to complete an annual or intermediate survey within the rigid ±3-month window automatically invalidates the ship's Class and Statutory certificates, making the vessel legally unseaworthy and halting commercial trading.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: What happens to the Safety Construction Certificate validity if the annual survey is completed 4 months after the anniversary date?</p>
+              <p class="trap-a">A: Sir, the certificate automatically ceases to be valid. Once the window is breached, it requires a complete re-survey of the missed items, and Class must issue a new certificate framework after receiving authorization from the Flag State administration.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates believe completing a renewal survey "exempts" them from close scrutiny for a few years, neglecting that structural damage can occur rapidly due to heavy weather or corrosive trading.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>±3 months</strong> — strict statutory survey window. <strong>0 days</strong> — extension permitted for an annual survey window. <strong>2nd to 3rd year</strong> — strict boundary limits for intermediate survey execution. <strong>5 years</strong> — overall validity of the Cargo Ship Safety Construction Certificate.</p>
+              <h5>Casualty Link</h5>
+              <p>Vessels suffering localized engine room or cargo space flooding shortly after leaving drydock highlight that subsequent annual checks are critical to catch human errors such as missing seals or poorly secured structural plates.</p>
+              <h5>Examiner Chain</h5>
+              <p>Renewal Survey Completion → Resetting HSSC Timeline → Annual Window Constraints → Consequences of Missing a Survey Window.</p>
+              <h5>On My Vessel</h5>
+              <p>All upcoming survey windows and anniversary benchmarks are tracked inside AMOS PMS Survey Module and monitored on the ship's dashboard. The CE coordinates with the Master and company superintendents three months in advance of the anniversary date to schedule surveyor attendance at an optimal port.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q11, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q11, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q11 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= SECTION 3: INERT GAS SYSTEM ======= -->
+    <div class="section-head">
+      <h2>⚡ Inert Gas System</h2>
+      <span class="sec-count">6 questions</span>
+    </div>
+
+    <!-- Q12 -->
+    <div class="q-card" id="q12" data-tags="machinery ig-system alarms solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">12</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What are the alarms and trips fitted to an Inert Gas (IG) system on a tanker / container ship?</div>
+          <div class="q-tags"><span class="q-tag tag-machinery">Machinery / IG</span><span class="q-tag tag-solas">SOLAS II-2</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>An IG system is fitted with a cascade of safety alarms and automatic shutdown trips. Key automatic trips include: low scrubber water pressure/flow, high gas discharge temperature exceeding <strong>65°C</strong>, high water level in scrubber, and blower power failure. Mandatory continuous alarms include: O₂ content exceeding <strong>5% by volume</strong>, low deck main pressure, and low deck water seal level.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. To comply with <strong>SOLAS Chapter II-2</strong> and the <strong>FSS Code Chapter 15</strong>, an Inert Gas system must be equipped with precise safety controls in two layers. <strong>Automatic trips</strong> — shutting down the IG blowers and closing the gas regulating valve — activate on: low water pressure or flow to the scrubber, high gas temperature at blower discharge exceeding <strong>65°C</strong>, high water level in scrubber, or electrical power failure. <strong>Continuous alarms</strong> in both ECR and CCR are mandated for: O₂ content exceeding <strong>5% by volume</strong>, low pressure in the deck main line (typically around <strong>100 mmWg</strong>), high gas pressure, and low water level in the deck water seal. Critical distinction: high O₂ content triggers an alarm and valve interlock — it does not trip the blower motor itself.</div>
+
+          <h4>Mandatory Automatic Trips (Interlocks)</h4>
+          <ul>
+            <li><strong>Low Scrubber Water Supply:</strong> Drop in water pressure or flow rate — compromises cooling and soot removal → immediate blower trip.</li>
+            <li><strong>High Scrubber Water Level:</strong> Risk of water carry-over into IG blowers.</li>
+            <li><strong>High Gas Discharge Temperature (&gt;65°C):</strong> Prevents thermal damage to internal tank coatings and piping.</li>
+            <li><strong>Blower Power / Mechanical Failure:</strong> Total electrical failure or drive shaft malfunction.</li>
+          </ul>
+
+          <h4>Mandatory Continuous Alarms</h4>
+          <ul>
+            <li><strong>High O₂ Content (&gt;5% by volume):</strong> Visual and audible alarm in CCR and ECR. Gas regulating valve closes; does NOT trip blower motor.</li>
+            <li><strong>Low Deck Main Pressure (≈100 mmWg):</strong> Indicates risk of air ingress into cargo spaces.</li>
+            <li><strong>High Deck Pressure:</strong> Risk of structural over-pressurization of cargo tanks.</li>
+            <li><strong>Low Deck Water Seal Level:</strong> Insufficient water barrier — hydrocarbon vapour could back-flow into machinery spaces.</li>
+          </ul>
+
+          <div class="sub-block"><strong>IG Cluster — Q12 Context:</strong> This card provides the foundational overview of all IG safety parameters. It links directly to <strong>Q13</strong> for O₂ analyser setpoints and limits, and to <strong>Q16</strong> and <strong>Q17</strong> for pressure alarm values and their testing procedure.</div>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-2 / Reg 4.5.5</span><span class="reg-desc">Mandatory requirements for inert gas systems on tankers and specified cargo spaces</span></div>
+            <div class="reg-item"><span class="reg-code">FSS Code Ch 15 / Sec 2.4.2</span><span class="reg-desc">Specific requirements for system monitoring, alarms, and automatic shutdowns</span></div>
+            <div class="reg-item"><span class="reg-code">IMO MSC.1/Circ.1585</span><span class="reg-desc">Revised guidelines for the design, testing, and maintenance of IG systems (2019)</span></div>
+            <div class="reg-item"><span class="reg-code">Class Rules — Machinery/Safety</span><span class="reg-desc">Class testing parameters for automated engine room and IG control interfaces</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Rajappan will ask: <em>"What happens if the scrubber water pump fails while operating the IG system?"</em> Answer: <strong>"Sir, the low water flow sensor immediately activates the safety interlock loop, automatically tripping the IG blowers and closing the main gas regulating valve, stopping gas delivery instantly to prevent hot, unscrubbed soot and gas from entering the system."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>Maintenance, testing, and operational reliability of the IG scrubber, blowers, instrumentation, and control loops fall directly under the CE's authority. Operating with bypassed or sluggish trips constitutes a major safety violation and can lead to catastrophic explosions or severe engine room contamination.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: Does high O₂ content (&gt;5%) cause an automatic trip of the IG blower motor?</p>
+              <p class="trap-a">A: No, sir. According to FSS Code, high O₂ (&gt;5%) triggers a continuous audible and visual alarm and causes the gas regulating valve to close or vent to atmosphere — but it does not technically trip the main blower motor itself, allowing the system to run and purge until O₂ levels normalize.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates frequently fail to distinguish between an "alarm" and an "automatic trip (shutdown)," grouping all parameters into one list without showing understanding of the automation hierarchy.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>65°C</strong> — universal maximum temperature trip for gas leaving the blower. <strong>5% O₂ by volume</strong> — alarm and valve interlock point. <strong>100 mmWg</strong> — low pressure alarm threshold. <strong>FSS Code Ch 15</strong> — technical code governing IG parameters.</p>
+              <h5>Casualty Link</h5>
+              <p>The explosion of tanker <em>Mega Borg</em> (1990) highlighted how volatile hydrocarbon vapours can migrate back into machinery spaces if IG safeguards fail or non-return barriers are defective.</p>
+              <h5>Examiner Chain</h5>
+              <p>IG System Concept → Alarms vs Trips → Temperature Setpoints → Deck Water Seal Design and Backflow Prevention.</p>
+              <h5>On My Vessel</h5>
+              <p>On vessels with this system, the safety matrix is monitored via the IG Control Panel / Automation PLC System. Pre-operational checks and alarm tests are logged in the Engine Room Logbook and tracked under critical equipment in AMOS PMS.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q12, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q12, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q12 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="q-card" id="q13" data-tags="machinery ig-system o2-analyser solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">13</div>
+        <div class="q-text-wrap">
+          <div class="q-text">How do you check low and high oxygen levels on an O₂ analyser, and what are the limits?</div>
+          <div class="q-tags"><span class="q-tag tag-machinery">Machinery / IG</span><span class="q-tag tag-solas">SOLAS II-2</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>Oxygen levels are continuously monitored by electrochemical or paramagnetic analysers in the CCR and IG plant. The statutory limit for inert gas delivered to the main line is <strong>≤5% O₂ by volume</strong> (alarm point if exceeded). Cargo or hold spaces are only considered inerted when the tank atmosphere is maintained at <strong>≤8% O₂ by volume</strong>. Operational target is <strong>1%–3% O₂</strong>.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. Under <strong>SOLAS Chapter II-2</strong> and <strong>FSS Code Chapter 15</strong>, oxygen content of the generated inert gas must be continuously checked using dual independent oxygen analysers. The primary <strong>high O₂ alarm is set at 5% by volume</strong> for gas flowing through the deck main. If oxygen reaches 5%, a visual and audible alarm activates. If it continues to rise or fails to drop, the gas regulating valve closes and vents off-spec gas to atmosphere. The in-tank limit is <strong>≤8% O₂</strong> — spaces are only fully inerted below this level. Optimal operational running target is <strong>between 1% and 3% O₂</strong> — going below 1% is avoided to prevent excessive soot and CO formation.</div>
+
+          <h4>Statutory Oxygen Limits and Alarm Thresholds</h4>
+          <ul>
+            <li><strong>Main Line Delivery Limit (≤5%):</strong> Inert gas entering the deck main must not contain more than 5% O₂ by volume.</li>
+            <li><strong>High O₂ Alarm (&gt;5%):</strong> Continuous audible and visual alarm in ECR and CCR.</li>
+            <li><strong>Off-Spec Venting Interlock:</strong> If high O₂ persists, main gas regulating valve closes; off-spec vent valve opens — discharges poor-quality gas to atmosphere rather than cargo spaces.</li>
+            <li><strong>In-Tank Safety Limit (≤8%):</strong> Legal maximum O₂ concentration inside an inerted cargo tank or hold.</li>
+            <li><strong>Operational Baseline (1%–3%):</strong> Optimal running target for a properly tuned boiler or independent IG generator.</li>
+          </ul>
+
+          <h4>How O₂ Levels are Checked and Monitored</h4>
+          <ul>
+            <li><strong>Sampling Line Maintenance:</strong> Verify continuous sampling pump draws gas correctly from blower discharge line.</li>
+            <li><strong>Moisture and Filtration Check:</strong> Sample gas passes through cooling coil, water trap, and particulate filter. Check filters regularly — moisture or soot reaching the sensing cell causes erratic readings.</li>
+            <li><strong>Analyser Built-In Test:</strong> Modern analysers feature electronic self-checks monitoring cell voltage and sensor degradation.</li>
+          </ul>
+
+          <div class="sub-block"><strong>IG Cluster — Q13 Context:</strong> This card focuses on the strict volumetric O₂ limits and continuous monitoring. It relies on <strong>Q14</strong> for verifying mechanical and chemical health of the analyser, and provides the baseline values actively calibrated using the processes in <strong>Q15</strong>.</div>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">FSS Code Ch 15 / Sec 2.4.2.1</span><span class="reg-desc">Mandatory requirement for continuous indication and permanent recording of O₂ levels</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-2 / Reg 4.5.5.1</span><span class="reg-desc">General requirements for tank atmosphere control and inerting limitations</span></div>
+            <div class="reg-item"><span class="reg-code">ISGOTT Ch 11 / Sec 11.1</span><span class="reg-desc">Industry operational safety limits and guidelines for inert gas quality management</span></div>
+            <div class="reg-item"><span class="reg-code">Class Rules — Control Systems</span><span class="reg-desc">Automation matrices governing closure of gas regulating valve on high O₂</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon will ask: <em>"Does the IG blower trip if the oxygen level goes to 7%?"</em> Precise response: <strong>"No, sir. The blower itself does not trip on high oxygen. Instead, the high O₂ alarm sounds and the automated system closes the deck main regulating valve and opens the atmosphere vent valve — isolating cargo spaces while keeping the blower running so the system can be tuned back to proper spec."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>The CE must ensure engine department maintains sampling system integrity. Soot accumulation in sample lines is a frequent problem that slows analyser response time. The CE verifies the automated interlock is regularly tested and never bypassed.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: Why do we not aim for 0% oxygen in the inert gas system?</p>
+              <p class="trap-a">A: Sir, achieving 0% O₂ requires running the burner with an extremely rich fuel mixture, causing incomplete combustion — generating heavy soot, black smoke, and high CO levels. This soot rapidly plugs the scrubber tower and fouls the deck water seal, reducing overall system efficiency.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates mix up the 5% main line delivery limit with the 8% maximum tank atmosphere limit, blending them into a single confusing answer.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>5.0%</strong> — exact point where audible alarm must activate. <strong>8.0%</strong> — maximum tank atmosphere for "inerted" condition. <strong>1%–3%</strong> — optimal operational window. <strong>21.0%</strong> — baseline reading to verify analyser upper limit against ambient air.</p>
+              <h5>Casualty Link</h5>
+              <p>Explosions on tankers involving improper monitoring of tank atmospheres demonstrated that failing to recognize poor-quality, high-oxygen inert gas during cargo operations can lead to disaster.</p>
+              <h5>Examiner Chain</h5>
+              <p>Oxygen Limits → Off-Spec Valve Interlock Actions → Sampling System Filtration → Analyser Calibration (Q14, Q15).</p>
+              <h5>On My Vessel</h5>
+              <p>On vessels with this system, O₂ levels are continuously tracked on the IG Control Panel console. Graphic trends are digitally archived within the ship's automation log and verified against monthly check parameters in AMOS PMS.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q13, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q13, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q13 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="q-card" id="q14" data-tags="machinery ig-system o2-analyser solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">14</div>
+        <div class="q-text-wrap">
+          <div class="q-text">How do you ensure an O₂ analyser is working satisfactorily onboard?</div>
+          <div class="q-tags"><span class="q-tag tag-machinery">Machinery / IG</span><span class="q-tag tag-solas">SOLAS II-2</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>To ensure an O₂ analyser is working satisfactorily, I verify that its daily operational parameters match specifications, keep its sampling filters clean, and perform regular two-point calibrations — checking the sensor's accuracy at the upper end using fresh ambient air (<strong>21% O₂</strong>) and at the lower end using certified span gas (<strong>0% or 1% O₂</strong>), with a response within <strong>±0.1%</strong> of the certified value.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. Verifying that an O₂ analyser is working satisfactorily requires daily operational checks and systematic calibrations. First, I check the physical sampling system: ensure sampling pump provides steady suction, water traps are dry, and particulate filters are free of soot. Second, I look for error messages or sensor cell life warnings on the display. Third, I perform a <strong>functional two-point verification</strong>: expose the sensor to fresh ambient air to confirm it reads exactly <strong>21% O₂</strong>; then introduce certified span gas — typically 1% O₂ or pure Nitrogen for 0% — to verify accuracy at lower operational limits. If the analyser responds quickly, settles without drifting, and matches certified gas values within <strong>±0.1%</strong>, it is considered fully operational. These tests are recorded in the system logbook for Class inspections.</div>
+
+          <h4>Daily and Operational Readiness Checks</h4>
+          <ul>
+            <li><strong>Flow Rate Monitoring:</strong> Check sample gas flow meter (rotameter) for steady specified flow without fluctuations.</li>
+            <li><strong>Filter and Condensate Management:</strong> Inspect hydrophobic filters and coalescing traps — moisture or soot fouling the sensor cell causes sluggish or inaccurate readings.</li>
+            <li><strong>Visual Error Diagnosis:</strong> Look for "Low Cell Voltage" or "Sensor Exhausted" warnings — indicating electrochemical cell nearing end of chemical life.</li>
+          </ul>
+
+          <h4>Two-Point Calibration Verification Procedure</h4>
+          <ul>
+            <li><strong>Upper Reference Point (Span Check):</strong> Introduce fresh outdoor ambient air. Verify display reads exactly <strong>20.9% or 21.0% O₂</strong>. Adjust upper span setting if deviation found.</li>
+            <li><strong>Lower Reference Point (Zero Check):</strong> Introduce certified test/span gas — pure Nitrogen (0.0% O₂) or precise 1.0% O₂ mixture. Reading must match certified bottle value within <strong>±0.1%</strong>.</li>
+            <li><strong>Response Time Test:</strong> Note how quickly sensor reacts during gas changeover. Lag of more than a few seconds indicates fouled sensor membrane or partially restricted sampling line.</li>
+          </ul>
+
+          <div class="sub-block"><strong>IG Cluster — Q14 Context:</strong> This card details operational steps to verify analyser performance. It builds on the limits from <strong>Q13</strong> and connects to <strong>Q15</strong>, which clarifies the technical definitions and differences of the gases used in this procedure.</div>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">FSS Code Ch 15 / Sec 2.4.2.2</span><span class="reg-desc">Requirements for suitable systems to validate and calibrate internal monitoring systems</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-2 / Reg 4.5.7.1</span><span class="reg-desc">Mandate for provision and maintenance of gas measurement and detection equipment</span></div>
+            <div class="reg-item"><span class="reg-code">IMO MSC.1/Circ.1585</span><span class="reg-desc">Guidelines for periodic calibration and servicing of shipboard oxygen analysers (2019)</span></div>
+            <div class="reg-item"><span class="reg-code">Class Rules — Instrumentation</span><span class="reg-desc">Testing requirements for instrumentation accuracy in hazardous environments</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Senthil often asks: <em>"What will you do if your O₂ analyser reads 21% in air, but when you apply 1% span gas it shows 2.5% and won't adjust?"</em> Response: <strong>"Sir, this indicates the sensor cell is failing, has lost linear sensitivity, or is fouled with soot. I will immediately take the primary analyser offline, switch to the standby unit, and replace the faulty sensor cell with a certified spare from our inventory."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>The CE must verify replacement electrochemical cells are kept in stock onboard, stored at the correct temperature, and replaced before their expiration dates. Calibration logs must be reviewed regularly.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: Can you calibrate an O₂ analyser using engine room ambient air?</p>
+              <p class="trap-a">A: No, sir. Engine room air can contain slightly depleted oxygen or trace combustion gases from running machinery. To get an accurate 21.0% calibration, fresh outdoor air from the weather deck should be used.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates state they only check the analyser using ambient air, completely omitting the low-end zero gas check, which fails to prove the sensor is accurate at critical operational levels.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>21.0%</strong> — standard baseline for upper span check. <strong>±0.1%</strong> — maximum allowable error margin. <strong>Monthly</strong> — standard PMS interval for complete gas calibration. <strong>2 sensors</strong> — SOLAS requires two independent sensors fitted to the IG gas line. <strong>0.0% O₂</strong> — zero calibration standard from pure Nitrogen.</p>
+              <h5>Casualty Link</h5>
+              <p>Investigations into the <em>M-T Bow Mariner</em> (2004) explosion highlighted that faulty or poorly calibrated gas detection equipment can lead to catastrophic operational errors during tank management.</p>
+              <h5>Examiner Chain</h5>
+              <p>Verification Routine → Two-Point Calibration Steps → Handling Non-Linear Sensor Errors → Spare Parts Management.</p>
+              <h5>On My Vessel</h5>
+              <p>O₂ analyser calibration routine managed as a critical safety task within AMOS PMS. Results including cylinder batch numbers are recorded on standard forms and stored in the Safety Equipment File for inspection by auditors.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q14, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q14, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q14 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="q-card" id="q15" data-tags="machinery ig-system span-gas solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">15</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What is span gas and what is test gas? How are they used in the calibration of an O₂ analyser?</div>
+          <div class="q-tags"><span class="q-tag tag-machinery">Machinery / IG</span><span class="q-tag tag-solas">SOLAS II-2</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span><strong>Span gas</strong> is a certified gas mixture with a specific known concentration used to set the upper or intermediate calibration point of an analyser — for example, 1.0% O₂ balanced with nitrogen. <strong>Test gas (zero gas)</strong> is typically pure nitrogen (99.99%) used to establish the zero baseline reading (0.0% O₂). Together, they calibrate the analyser across its full operating range, in sequence: zero first, then span.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. In O₂ analyser maintenance, span gas and test gas serve distinct roles. <strong>Span gas</strong> is an officially certified reference mixture with a precise, known concentration — for example, 1.0% O₂ ±0.02%, balanced with pure Nitrogen. It adjusts the analyser's "span" at a point close to our actual operating targets. <strong>Test gas (zero gas)</strong> contains 0% of the target gas — pure 99.99% Nitrogen — used to set the analyser's bottom baseline to exactly 0.0%. During calibration: first introduce zero gas to set the zero baseline; then introduce span gas to adjust the upper range. As a final verification, fresh ambient air is passed through to confirm the analyser returns to 20.9%–21.0%.</div>
+
+          <h4>Technical Definitions</h4>
+          <ul>
+            <li><strong>Span Gas:</strong> Certified reference mixture prepared by specialist gas laboratories. Certificate states exact composition within strict tolerances (e.g., 1.0% O₂ ±0.02%, balanced with N₂). Used to calibrate intermediate or upper limits of sensor's measurement scale.</li>
+            <li><strong>Test Gas / Zero Gas:</strong> Gas used to verify baseline response when target gas is completely absent. For O₂ analysers: pure Nitrogen (99.99% purity) producing a reading of exactly <strong>0.0% O₂</strong>.</li>
+          </ul>
+
+          <h4>Calibration Protocol Sequence</h4>
+          <ol>
+            <li><strong>System Isolation and Purge:</strong> Close sampling line from IG main. Purge sensor cell with clean air or nitrogen to clear residual gas.</li>
+            <li><strong>Zero Calibration (Test/Zero Gas):</strong> Supply Nitrogen through pressure regulator at manufacturer's specified flow rate. Once stabilized, adjust "Zero" trim until display shows exactly <strong>0.0%</strong>.</li>
+            <li><strong>Span Calibration (Span Gas):</strong> Isolate zero gas; introduce certified span gas (e.g., 1.0% O₂). Once settled, adjust "Span" control until display matches certificate value.</li>
+            <li><strong>Air Verification:</strong> Final check — pass fresh ambient air through unit to confirm accurate reading of <strong>20.9%–21.0%</strong>.</li>
+          </ol>
+
+          <div class="sub-block"><strong>IG Cluster — Q15 Context:</strong> This card explains the gas types used in the calibration procedure detailed in <strong>Q14</strong>. The limits being calibrated to are those defined in <strong>Q13</strong> (5% alarm limit; 8% tank limit).</div>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">FSS Code Ch 15 / Sec 2.4.2.2</span><span class="reg-desc">Requirements for providing appropriate span and calibration gases onboard</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-2 / Reg 4.5.7.2</span><span class="reg-desc">Mandate for checking accuracy of gas measurement devices against reference standards</span></div>
+            <div class="reg-item"><span class="reg-code">ISO 6142</span><span class="reg-desc">International standard governing preparation and certification of calibration gases</span></div>
+            <div class="reg-item"><span class="reg-code">Class Rules — Safety Systems</span><span class="reg-desc">Verification rules for testing equipment used in hazardous areas</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon may ask: <em>"Can I use pure CO₂ as my zero test gas for an O₂ analyser?"</em> Response: <strong>"No, sir. Pure Nitrogen is the internationally accepted standard for zero-calibrating oxygen analysers. CO₂ can interfere with certain sensor types such as electrochemical cells, causing cross-sensitivity errors and inaccurate calibrations."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>The CE manages the inventory of calibration gases onboard. Every span gas cylinder has a specific shelf life because gas concentrations can change over time. Cylinders must have valid calibration certificates and be within expiry dates.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: What is the risk of using a span gas cylinder that has exceeded its expiry date?</p>
+              <p class="trap-a">A: Sir, over time, gas molecules can react with or adhere to the cylinder walls, altering the internal concentration. If you use an expired cylinder, the actual concentration may no longer match the label, leading to incorrect adjustments and an inaccurate analyser.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates use the terms "span gas" and "test gas" interchangeably without explaining that one defines the zero baseline and the other sets the measurement scale. Also, the sequence (zero before span) is often omitted.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>0.0% O₂</strong> — target value when applying pure Nitrogen. <strong>1.0%–2.0%</strong> — typical O₂ concentration for span gas cylinders. <strong>±0.02%</strong> — laboratory manufacturing tolerance for certified span gases. <strong>99.99%</strong> — purity standard for Nitrogen zero reference. <strong>24–36 months</strong> — average shelf life for certified calibration gas cylinders.</p>
+              <h5>Casualty Link</h5>
+              <p>Toxic gas exposure incidents in enclosed spaces highlight that poorly calibrated or unverified sensors can give crew a false sense of security, leading to unsafe operational decisions.</p>
+              <h5>Examiner Chain</h5>
+              <p>Gas Definitions → Sequencing (Zero before Span) → Certificate Verification → Cylinder Logbook Tracking.</p>
+              <h5>On My Vessel</h5>
+              <p>Calibration cylinder inventory is managed through the Safety Equipment Inventory Module. Certificates for each span gas cylinder are filed in the Chief Engineer's office, and cylinder pressure levels are checked monthly.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q15, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q15, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q15 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="q-card" id="q16" data-tags="machinery ig-system pressure solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">16</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What are the alarm limits for IG main line pressure — specifically the low, low-low, and high pressure values?</div>
+          <div class="q-tags"><span class="q-tag tag-machinery">Machinery / IG</span><span class="q-tag tag-solas">SOLAS II-2</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>Standard IG main line pressure alarm limits: <strong>High pressure alarm at approximately 1,400–1,800 mmWg</strong>; <strong>Low pressure alarm at approximately 200 mmWg</strong>; and <strong>Low-low pressure trip at 100 mmWg</strong>. These settings prevent over-pressurization of cargo spaces and eliminate the risk of hydrocarbon gas backflow or air ingress into inerted spaces.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. IG main line pressure parameters are governed by <strong>SOLAS Chapter II-2</strong> and <strong>FSS Code Chapter 15</strong>. The <strong>High Pressure Alarm</strong> at approximately <strong>1,400–1,800 mmWg</strong> alerts crew to throttle back blower output or adjust the atmospheric vent. The <strong>Low Pressure Alarm</strong> at <strong>200 mmWg</strong> indicates cargo tanks are losing their positive pressure blanket. If pressure drops further to the <strong>Low-Low Pressure Trip at 100 mmWg</strong>, an automatic safety interlock immediately trips the <strong>cargo discharge pumps</strong> and closes the main gas regulating valve — preventing vacuum-induced air entry or vapour migration. Critical unit distinction: these pressures are in <strong>millimetres Water Gauge (mmWg)</strong> — 1 mmWg ≈ 0.1 mbar.</div>
+
+          <h4>Pressure Limit Matrix and System Actions</h4>
+          <ul>
+            <li><strong>High Pressure Alarm (≈1,400–1,800 mmWg / 140–180 mbar):</strong> Triggered if deck distribution line pressure rises abnormally due to closed tank valves or over-supply. Warns of potential stress on tank bulkheads.</li>
+            <li><strong>Low Pressure Alarm (≈200 mmWg / 20 mbar):</strong> Audible and visual alarm in CCR and ECR. Indicates supply rate cannot keep up with volumetric displacement during maximum cargo discharge.</li>
+            <li><strong>Low-Low Pressure Trip (100 mmWg / 10 mbar):</strong> Absolute statutory safety floor. Triggers immediate <strong>automatic trip of cargo pumps</strong> and closes main deck isolating valves to preserve residual inert cushion and prevent air ingress.</li>
+          </ul>
+
+          <p class="formula"><strong>1 mmWg ≈ 0.1 mbar ≈ 0.0001 bar</strong><br><em>IG pressures are extremely low — never state in "bar"; always state in mmWg or mbar</em></p>
+
+          <h4>Safety Purpose</h4>
+          <ul>
+            <li><strong>Structural Safety:</strong> Prevents structural buckling or deck plating failure due to excessive positive pressure.</li>
+            <li><strong>Backflow Prevention:</strong> Maintains pressure in deck main higher than engine room atmospheric baseline, preventing explosive hydrocarbon vapours from flowing backwards through the deck water seal.</li>
+          </ul>
+
+          <div class="sub-block"><strong>IG Cluster — Q16 Context:</strong> This card defines the specific pressure limitations governing the IG distribution system. It builds on the safety alarm framework in <strong>Q12</strong> and provides the target limits that are functionally tested using procedures in <strong>Q17</strong>.</div>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">FSS Code Ch 15 / Sec 2.4.2.1</span><span class="reg-desc">Mandates continuous monitoring and permanent recording of pressure in the inert gas mains</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-2 / Reg 4.5.5.3</span><span class="reg-desc">Operational requirements for maintaining positive pressure loops in cargo containment zones</span></div>
+            <div class="reg-item"><span class="reg-code">ISGOTT Ch 11 / Sec 11.1.3</span><span class="reg-desc">Industry operational parameters for minimum and maximum tank pressure profiles</span></div>
+            <div class="reg-item"><span class="reg-code">Class Rules — Machinery/Automation</span><span class="reg-desc">Design guidelines mapping interlocks between IG low-low pressure and cargo pump breakers</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Senthil will test your units. If you say "100 bar" you fail instantly. Explicitly state: <strong>"Sir, the low-low trip is 100 millimetres of water gauge — a very low positive pressure equivalent to just 10 millibars. We use mmWg because IG system pressures are exceptionally low compared to standard engine room compressed air systems."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>The CE ensures the electrical team performs regular dry-block loop calibrations on pressure sensors. Sensor drift can lead to premature cargo pump trips or dangerous failure to activate safety interlocks during actual low-pressure emergencies.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: What unit of measurement is typically used for IG pressure gauges on the deck, and why?</p>
+              <p class="trap-a">A: Sir, we use mmWg (millimetres Water Gauge) or mbar because the pressures handled by IG systems are exceptionally low compared to standard engine room compressed air systems. Using standard "bar" scales would make it impossible to read minor, critical pressure changes accurately.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates state that low-low pressure trips the IG blower motor — this is incorrect. Low-low deck pressure means MORE gas is needed, so it trips the <strong>cargo pumps</strong> to stop liquid displacement while keeping the blowers running to restore pressure.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>100 mmWg</strong> — universally accepted industry safety trip standard. <strong>200 mmWg</strong> — low pressure pre-alarm baseline. <strong>1,400–1,800 mmWg</strong> — typical high pressure boundary before venting. <strong>0.1 mbar per mmWg</strong> — unit conversion.</p>
+              <h5>Casualty Link</h5>
+              <p>Cargo tanks that buckled or collapsed inward due to vacuum forces when IG supply failed and pressure sensors were poorly calibrated or had defective cargo pump trip loops.</p>
+              <h5>Examiner Chain</h5>
+              <p>Pressure Parameters → Pressure Units Distinction → Interlock Actions (Cargo Pump Trip) → Sensor Calibration Methods (Q17).</p>
+              <h5>On My Vessel</h5>
+              <p>Pressure values continuously displayed on the IG control panel. Calibration offsets and testing parameters logged inside safety electronics folders and monitored under electronic instrumentation in AMOS PMS.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q16, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q16, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q16 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q17 -->
+    <div class="q-card" id="q17" data-tags="machinery ig-system alarm-testing solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">17</div>
+        <div class="q-text-wrap">
+          <div class="q-text">How do you test the high pressure and low-low pressure alarms on an IG system?</div>
+          <div class="q-tags"><span class="q-tag tag-machinery">Machinery / IG</span><span class="q-tag tag-solas">SOLAS I</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>High and low-low pressure alarms are tested by <strong>isolating the pressure sensor from the main line</strong> using root block valves, then connecting a portable calibration pump with a precision digital manometer. By manually pumping or venting pressure, the engineer verifies that corresponding alarms and cargo pump trips activate at the exact design setpoints.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. Testing IG pressure safety loops requires physical simulation to verify both alarms and automation interlocks. The specific pressure transmitter or switch is <strong>isolated using its root block valves</strong>. A portable hand pump with a precision digital manometer or water-column U-tube is connected to the instrument's test port. To test the <strong>High Pressure Alarm</strong>, we slowly pump air into the sensor until the readout hits the setpoint, verifying visual and audible alarms activate in CCR. For the <strong>Low-Low Pressure Test</strong>, we bleed pressure down towards <strong>100 mmWg</strong>, verifying not only that the alarm sounds, but also that the interlock signals trip the main cargo pump breakers and close the gas regulating valve. Results are logged in the safety record book and witnessed by Class Surveyor annually.</div>
+
+          <h4>Step-by-Step Testing Methodology</h4>
+          <ol>
+            <li><strong>Safety Clearance and Notification:</strong> Inform deck department, cargo officer, and duty engineers before testing — the low-low pressure test simulates a condition that trips cargo machinery loops.</li>
+            <li><strong>Physical Instrument Isolation:</strong> Close root isolation valve connecting pressure transmitter/switch to the actual IG deck main line.</li>
+            <li><strong>Connecting Test Equipment:</strong> Remove calibration test plug from sensor body; connect portable pneumatic hand tester with certified digital manometer.</li>
+            <li><strong>High Pressure Test:</strong> Slowly apply pressure via hand pump. Note exact pressure when audible and visual High Pressure Alarm triggers in CCR. Verify automated venting valves stroke to open position.</li>
+            <li><strong>Low-Low Pressure Test:</strong> Bleed test pressure down slowly. Note activation of intermediate Low Pressure Alarm. Continue reducing until reaching low-low setpoint (<strong>100 mmWg</strong>). Physically confirm interlock opens to <strong>trip main cargo discharge pumps</strong> and drive main deck regulating valve closed.</li>
+          </ol>
+
+          <h4>Documentation and Witnessing</h4>
+          <ul>
+            <li><strong>Survey Verification:</strong> Tests performed by ship's crew as periodic maintenance; formally witnessed and signed by Class Surveyor during annual statutory Safety Construction or Safety Equipment surveys.</li>
+            <li><strong>Calibration Logs:</strong> Exact activation numbers written into instrument calibration logbook, noting any drift adjustments.</li>
+            <li><strong>Tolerance:</strong> <strong>±5% of setpoint</strong> is the standard alignment tolerance before recalibration or sensor replacement is required.</li>
+          </ul>
+
+          <div class="sub-block"><strong>IG Cluster — Q17 Context:</strong> This is the final card of the 6-card IG cluster. It explains the physical testing procedures that validate the pressure setpoints defined in <strong>Q16</strong>, completing the safety interlock framework introduced in <strong>Q12</strong>.</div>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">FSS Code Ch 15 / Sec 2.4.4</span><span class="reg-desc">Requirements for regular testing and inspection of inert gas system components and controls</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch I / Reg 7</span><span class="reg-desc">Survey provisions requiring functional verification of all safety-critical cargo ship systems</span></div>
+            <div class="reg-item"><span class="reg-code">IMO MSC.1/Circ.1585</span><span class="reg-desc">Updated guidelines for checking and maintaining critical automated safety loops on tankers</span></div>
+            <div class="reg-item"><span class="reg-code">Class Rules — Automation Tests</span><span class="reg-desc">Protocols defining mandatory physical simulation methods for safety sensor verification</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Rajappan may ask: <em>"Can you test the low-low pressure alarm by simply opening a valve and venting the whole deck main to zero while discharging cargo?"</em> Answer: <strong>"No, sir. Venting the entire deck main during cargo operations is dangerous — it lowers positive pressure protection in all cargo tanks, risking air ingress, and immediately trips all working cargo pumps. We must always test by isolating the individual sensor and using a portable calibration pump."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>The CE must ensure crew never performs "soft-testing" (forcing a digital bit on an automation screen) as a substitute for physical pressure simulation. Manually applying physical pressure to the sensor is the only way to ensure internal diaphragms, sampling ports, and physical relay contacts are working correctly.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: What happens if the test port plug is left open or leaks after you finish calibration?</p>
+              <p class="trap-a">A: Sir, if the plug leaks, it will vent pressure from the sensor diaphragm, causing the transmitter to read a false low-pressure value. This will trigger a false low-pressure alarm and can cause a false low-low trip that shuts down cargo pumps unexpectedly.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates describe the process as if they are pumping air directly into the main shipboard piping line rather than the isolated instrument cell — failing to mention the critical isolation step first.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>100 mmWg</strong> — target setpoint verified during low-low bleed-down test. <strong>±5%</strong> — standard alignment tolerance before recalibration. <strong>Annual</strong> — mandatory frequency for structural verification of safety interlocks in front of a Class Surveyor. <strong>3 alerts</strong> — low alarm, low-low alarm/trip, and high alarm must all be systematically tested.</p>
+              <h5>Casualty Link</h5>
+              <p>Incidents where cargo pumps failed to trip during unexpected line failures show that relying purely on software checks without physical pressure testing allows hidden electronic component failures to go unnoticed.</p>
+              <h5>Examiner Chain</h5>
+              <p>Testing Sequence → Isolation Protocols → Equipment Setup → Interlock Trip Verification.</p>
+              <h5>On My Vessel</h5>
+              <p>Functional alarm tests executed as critical safety tasks within AMOS PMS. Testing events, manometer readings, and calibration adjustments carefully entered into the Safety Systems Log and signed off by the Chief Engineer.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q17, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q17, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q17 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======= SECTION 4: MARPOL & ENVIRONMENTAL ======= -->
+    <div class="section-head">
+      <h2>🛢 MARPOL &amp; Environmental</h2>
+      <span class="sec-count">2 questions</span>
+    </div>
+
+    <!-- Q18 -->
+    <div class="q-card" id="q18" data-tags="marpol marine-pollutants solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">18</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What are marine pollutants and what is their ecosystem impact? How does MARPOL address this?</div>
+          <div class="q-tags"><span class="q-tag tag-marpol">MARPOL Annex III</span><span class="q-tag tag-survey">IMO</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>Marine pollutants are substances that, if discharged into the sea, create hazards to human health, harm living resources and marine life, or damage amenities. <strong>MARPOL Annex III</strong> regulates the prevention of pollution by harmful substances carried by sea in packaged form — through strict packaging, labeling, stowage, and documentation standards. Operational discharge to sea: <strong>zero tolerance</strong>.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. Marine pollutants are chemical compounds or noxious substances posing acute or chronic threats to the aquatic environment. When introduced to the marine ecosystem, these substances cause bioaccumulation up the food chain, oxygen depletion, reef toxicity, and cellular damage to marine life. MARPOL addresses this through <strong>MARPOL Annex III</strong>, which establishes mandatory regulations for preventing pollution by harmful substances carried in packaged form — freight containers, portable tanks, or road and rail tank wagons. Annex III relies on criteria from the <strong>IMDG Code</strong> and classifications from <strong>GESAMP</strong> to identify these pollutants. It mandates durable labeling (to survive <strong>3 months immersion</strong>), secure stowage, and explicit manifest documentation.</div>
+
+          <h4>Ecosystem Impact of Marine Pollutants</h4>
+          <ul>
+            <li><strong>Acute and Chronic Toxicity:</strong> Immediate lethal effects on marine organisms (acute) or long-term systemic damage affecting reproduction and life expectancy (chronic).</li>
+            <li><strong>Bioaccumulation and Biomagnification:</strong> Heavy metals and organic halides accumulate in fatty tissues of lower-tier marine organisms and multiply in concentration up the trophic food chain.</li>
+            <li><strong>Habitat Degradation:</strong> Chemical spills strip oxygen from the water column, destroy coral reef matrices, and cause massive localized die-offs of marine flora and fauna.</li>
+          </ul>
+
+          <h4>MARPOL Annex III Regulatory Framework</h4>
+          <ul>
+            <li><strong>Identification &amp; Classification:</strong> Substances identified as Marine Pollutants in the IMDG Code (Chapter 2.10) based on aquatic toxicity index.</li>
+            <li><strong>Marking and Labeling:</strong> Packages must bear the <strong>Marine Pollutant symbol</strong> (fish with a cross). Label and adhesive must withstand <strong>3 months continuous sea immersion</strong> without detaching or fading.</li>
+            <li><strong>Stowage:</strong> Properly stowed and secured to minimize environmental hazard — typically isolated from high-vulnerability impact zones in "on-deck" or "under-deck" configurations.</li>
+            <li><strong>Documentation:</strong> Ship must carry a dedicated <strong>Dangerous Goods Manifest</strong> or stowage plan listing every marine pollutant and its exact layout location.</li>
+            <li><strong>Discharge Prohibition:</strong> No operational discharge of a marine pollutant is permitted — <strong>zero tolerance</strong> under any circumstances. Exception: only if necessary to secure the safety of the ship or save life at sea.</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">MARPOL Annex III / Reg 1 / App</span><span class="reg-desc">Application and structural criteria for identifying harmful substances in packaged form</span></div>
+            <div class="reg-item"><span class="reg-code">MARPOL Annex III / Reg 4</span><span class="reg-desc">Mandatory requirements for durable and compliant marking and labeling</span></div>
+            <div class="reg-item"><span class="reg-code">MARPOL Annex III / Reg 5</span><span class="reg-desc">Requirements for manifest and documentation layout and storage</span></div>
+            <div class="reg-item"><span class="reg-code">IMDG Code / Chapter 2.10</span><span class="reg-desc">Technical definition criteria and operational lists for Marine Pollutants</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon likes to test the operational interface: <em>"During a storm, a container labeled as a Marine Pollutant is damaged on deck and leaking. Can you wash it down into the sea to save the crew from toxic fumes?"</em> Balanced answer: <strong>"Sir, safety of human life is paramount under SOLAS. However, under MARPOL Annex III, deliberate washing of marine pollutants overboard is prohibited unless necessary to save life at sea. I will coordinate with the Master, use breathing apparatus, contain the leak using spill kits, and isolate deck wash lines so chemical residue drains safely into a holding tank rather than being washed into the sea."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>Container ship operations carry hundreds of multi-ton toxic chemical parcels. If a container containing a packaged marine pollutant leaks or catches fire on deck, the fire-fighting runoff water cannot simply be pumped overboard via scuppers or bilges. The CE must ensure the crew isolates deck lines and directs hazardous chemical runoff into designated holding tanks.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: Does MARPOL Annex III apply to oil carried in bulk inside cargo tanks?</p>
+              <p class="trap-a">A: No, sir. Oil carried in bulk is governed strictly under MARPOL Annex I. Annex III applies exclusively to harmful substances carried in packaged form — freight containers, portable tanks, or intermediate bulk containers (IBCs).</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates confuse Annex II (Noxious Liquid Substances in Bulk) with Annex III (Packaged Harmful Substances), applying bulk pumping constraints to a container ship environment.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>3 months</strong> — label immersion durability standard. <strong>0 tolerance</strong> — no operational discharge of marine pollutants permitted. <strong>Annex III</strong> — not Annex I or II — governs packaged form substances.</p>
+              <h5>Casualty Link</h5>
+              <p>The fire and subsequent chemical spill from container ship <em>X-Press Pearl</em> (2021) off Sri Lanka showed immense ecological destruction when packaged chemicals and marine pollutants leaked into coastal waters, killing marine life and devastating local ecosystems.</p>
+              <h5>Examiner Chain</h5>
+              <p>Marine Pollutant Definition → MARPOL Annex III Context → Labeling Durability → Emergency Chemical Containment Protocols Onboard.</p>
+              <h5>On My Vessel</h5>
+              <p>All marine pollutants are mapped inside the Dangerous Goods Manifest compiled by the Chief Mate. The CE maintains a copy in the ECR alongside the SMPEP (Shipboard Marine Pollution Emergency Plan), outlining specific engineering steps to contain or store chemical runoff from container leaks.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q18, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q18, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q18 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q19 -->
+    <div class="q-card" id="q19" data-tags="marpol gesamp environmental">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">19</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What does GESAMP stand for, and what is its role in the maritime context?</div>
+          <div class="q-tags"><span class="q-tag tag-marpol">MARPOL</span><span class="q-tag tag-survey">IMO</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="practice-block"><span class="pb-label">⏱ 15-Second Answer</span>GESAMP stands for the <strong>Joint Group of Experts on the Scientific Aspects of Marine Environmental Protection</strong>. Its role in the maritime context is to act as an independent scientific advisory body that develops technical hazard profiles for chemicals, directly shaping <strong>MARPOL Annex II</strong> (noxious liquid substance categories) and <strong>MARPOL Annex III</strong> (marine pollutant classification) regulations.</div>
+          <div class="practice-block"><span class="pb-label">⏱ 60-Second Answer</span>Good morning, sir. GESAMP stands for the <strong>Joint Group of Experts on the Scientific Aspects of Marine Environmental Protection</strong>. It is an independent multi-disciplinary scientific advisory body established by the United Nations in <strong>1969</strong> and sponsored by international organizations including the IMO. Its primary role is to conduct rigorous scientific risk evaluations of chemicals carried by ships, producing the detailed <strong>GESAMP Hazard Profiles</strong> evaluated across five core vectors — bioaccumulation, aquatic toxicity, human health hazards, and damage to marine amenities. The direct output of their research is used by the IMO to classify cargoes under <strong>MARPOL Annex II</strong> (Categories X, Y, Z for chemical tankers) and to identify <strong>Marine Pollutants</strong> under the IMDG Code for <strong>MARPOL Annex III</strong>. GESAMP has zero legislative power — it provides the data; the IMO writes the laws.</div>
+
+          <h4>Full Form and Organizational Framework</h4>
+          <ul>
+            <li><strong>Acronym:</strong> Joint Group of Experts on the Scientific Aspects of Marine Environmental Protection.</li>
+            <li><strong>Established:</strong> <strong>1969</strong> — advises UN agencies including IMO, FAO, UNESCO, WMO, IAEA, UN, and UNEP.</li>
+            <li><strong>Nature:</strong> Independent scientific advisory body. No enforcement powers, no vessel inspections, no relation to Port State Control.</li>
+          </ul>
+
+          <h4>The GESAMP Hazard Profile Matrix (5 Columns A–E)</h4>
+          <ul>
+            <li><strong>Column A:</strong> Bioaccumulation and biodegradation potential.</li>
+            <li><strong>Column B:</strong> Aquatic toxicity (lethal concentration levels to fish and crustaceans).</li>
+            <li><strong>Column C:</strong> Acute systemic toxicity to humans (oral, dermal, inhalation).</li>
+            <li><strong>Column D:</strong> Long-term / chronic health hazards (carcinogenicity, mutagenicity).</li>
+            <li><strong>Column E:</strong> Interference with coastal and marine amenities (beach fouling, closures).</li>
+          </ul>
+
+          <h4>Feed into MARPOL Regulations</h4>
+          <ul>
+            <li><strong>MARPOL Annex II:</strong> GESAMP profiles are used by IMO to divide liquid chemical cargoes into <strong>Categories X, Y, Z, or Other Substances (OS)</strong>, dictating tank containment arrangements and operational discharge limits.</li>
+            <li><strong>IMDG Code (MARPOL Annex III):</strong> GESAMP indices identify which packaged substances meet criteria to be legally classified as "Marine Pollutants," triggering mandatory marking and stowage rules under Annex III.</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">MARPOL Annex II / Appendix I</span><span class="reg-desc">Guidelines for categorization of noxious liquid substances based on GESAMP profiles</span></div>
+            <div class="reg-item"><span class="reg-code">IBC Code / Chapter 17 &amp; 18</span><span class="reg-desc">Summary of bulk chemical attributes mapped directly from GESAMP safety indices</span></div>
+            <div class="reg-item"><span class="reg-code">IMDG Code / Chapter 2.10</span><span class="reg-desc">Marine Pollutant criteria — GESAMP-based classification for packaged substances</span></div>
+            <div class="reg-item"><span class="reg-code">UNCLOS / Art 200</span><span class="reg-desc">Mandates states to promote scientific studies and exchange data regarding marine pollution</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon will ask: <em>"Who decides if a chemical is a Category X or Category Y cargo under MARPOL Annex II?"</em> Do not say 'the surveyor' or 'the shipyard.' Precise answer: <strong>"Sir, the IMO's Marine Environment Protection Committee (MEPC) categorizes the substance — but they do so based entirely on the scientific hazard profiles generated by GESAMP."</strong></div>
+
+          <details class="deep-dive">
+            <summary>Deep Dive — CE Relevance, Trap Questions &amp; Examiner Chain</summary>
+            <div class="deep-dive-body">
+              <h5>CE Relevance</h5>
+              <p>GESAMP hazard assessments dictate the ship's physical safety infrastructure. The safety data sheets (SDS) and structural materials required for pipelines, gasket compositions, tank coatings, and PPE in the pump room are selected based on GESAMP risk indices for specific substances.</p>
+              <h5>Trap Questions</h5>
+              <p class="trap-q">Q: Is GESAMP a division of the Port State Control network?</p>
+              <p class="trap-a">A: No, sir. GESAMP is an independent, scientific advisory body made up of international experts. It has no enforcement powers, does not conduct vessel inspections, and has no relation to Port State Control. Its role is strictly to provide scientific data to the UN and IMO.</p>
+              <h5>Common CE Failures</h5>
+              <p>Candidates memorize the acronym but cannot explain how the group's research physically impacts the ship — missing the direct connection to MARPOL Annex II categories and IMDG Code marking rules.</p>
+              <h5>Numbers to Memorise</h5>
+              <p><strong>1969</strong> — year GESAMP was established. <strong>5 columns (A–E)</strong> — core classification matrix. <strong>X, Y, Z, OS</strong> — MARPOL Annex II categories driven by GESAMP. <strong>0 enforcements</strong> — GESAMP has zero legislative power.</p>
+              <h5>Casualty Link</h5>
+              <p>Historical dumping of un-profiled industrial chemical mixtures at sea during the mid-20th century highlighted the critical need for a scientific body like GESAMP to accurately index compounds before they could be legally cleared for maritime transport.</p>
+              <h5>Examiner Chain</h5>
+              <p>GESAMP Acronym → Core Scientific Role → Hazard Profile Matrix → Influence on MARPOL Annex II and III.</p>
+              <h5>On My Vessel</h5>
+              <p>The practical impact of GESAMP's classification is found in the IMDG Dangerous Goods Code Books in the ship's office and the Material Safety Data Sheets (MSDS) kept in the medical locker and ECR. These provide engine and deck crews with clear instructions on toxicity, chemical traits, and safety protocols.</p>
+            </div>
+          </details>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3B, Q19, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3B, Q19, Correction Required — [correction] — Rank, Company, LinkedIn URL</span>
+          <span class="q-version">QB3B · Q19 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="no-results"><p>No questions match your search or filter.</p></div>
+  </div><!-- end q-feed -->
+</div><!-- end main-layout -->
+
+<div class="page-footer">
+  <p><strong>Marine Intelligence Weekly — MEO Class 1 Question Bank QB3B</strong></p>
+  <p>Compiled by Nixon Antony, 2/E, Maersk A/S &nbsp;|&nbsp; <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a></p>
+  <p class="disclaimer">This file is for private study purposes only. All technical content must be verified against primary IMO, IACS, and Class Society sources before examination. Corrections welcome via email with subject format: QB3B, QN, Correction Required. MIW PRIVATE — Do Not Redistribute.</p>
+</div>
+
+<script>
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent='Showing '+vis+' of '+cards.length;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

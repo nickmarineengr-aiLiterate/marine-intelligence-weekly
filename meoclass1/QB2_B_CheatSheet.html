@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB2_B Cheat Sheet — Cargo, Ship Types &amp; Fire Safety | MEO Class 1 | MIW</title>
+<meta name="robots" content="noindex, nofollow">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;
+  --grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:13px;line-height:1.5;}
+.topbar{background:var(--navy);color:#fff;padding:8px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--teal);}
+.logo-mark{background:var(--teal);color:#fff;font-weight:800;font-size:12px;padding:2px 7px;border-radius:4px;}
+.topbar-right a{color:rgba(255,255,255,.7);text-decoration:none;font-size:11px;margin-left:14px;}
+.page-header{background:linear-gradient(135deg,var(--navy),#1e3a5f);color:#fff;padding:24px 20px;border-bottom:3px solid var(--teal);}
+.page-header h1{font-size:22px;font-weight:800;margin-bottom:6px;}
+.page-header h1 span{color:var(--teal);}
+.header-sub{color:rgba(255,255,255,.65);font-size:12px;margin-bottom:6px;}
+.badge{display:inline-block;background:rgba(13,148,136,.2);border:1px solid rgba(13,148,136,.3);color:var(--teal);font-size:10px;font-weight:700;letter-spacing:1px;padding:3px 10px;border-radius:12px;margin-bottom:10px;}
+.correction-alert{background:#fef2f2;border:1px solid #fca5a5;border-radius:6px;padding:6px 12px;font-size:11px;color:#991b1b;margin-top:8px;display:inline-block;}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:12px;padding:16px 20px 60px;}
+
+.card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;overflow:hidden;break-inside:avoid;}
+.card-head{padding:8px 12px;display:flex;align-items:center;gap:8px;}
+.card-head.imdg{background:#7c2d12;color:#fff;}
+.card-head.cargo{background:#854d0e;color:#fff;}
+.card-head.codes{background:#065f46;color:#fff;}
+.card-head.fire{background:#991b1b;color:#fff;}
+.card-head.ops{background:#1e40af;color:#fff;}
+.card-head.build{background:#075985;color:#fff;}
+.card-num{color:rgba(255,255,255,.5);font-weight:800;font-size:11px;padding:2px 7px;border-radius:5px;white-space:nowrap;background:rgba(255,255,255,.15);}
+.card-title{font-size:11px;font-weight:600;line-height:1.35;color:#fff;}
+.card-body{padding:10px 12px;}
+.card-body p{font-size:11.5px;line-height:1.55;color:var(--ink);margin-bottom:6px;}
+
+.kn{background:var(--grey-bg);border-left:3px solid var(--teal);border-radius:0 5px 5px 0;padding:6px 10px;margin:6px 0;}
+.kn-title{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--teal-dark);margin-bottom:3px;}
+.kn ul{padding-left:14px;}
+.kn li{font-size:11px;margin-bottom:2px;}
+.kn strong{font-weight:700;color:var(--ink);}
+
+.tip{background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 5px 5px 0;padding:6px 10px;margin:6px 0;font-size:11px;color:#7c2d12;line-height:1.5;}
+.tip-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:#9a3412;display:block;margin-bottom:2px;}
+
+.trap{background:#fef2f2;border:1px solid #fca5a5;border-radius:6px;padding:5px 9px;margin:5px 0;font-size:11px;line-height:1.5;}
+.trap-label{font-size:9px;font-weight:800;text-transform:uppercase;color:#b91c1c;display:block;margin-bottom:1px;}
+
+.reg-mini{background:#141412;color:rgba(255,255,255,.8);border-radius:6px;padding:6px 10px;margin:6px 0;}
+.reg-mini-title{color:rgba(255,255,255,.4);font-size:9px;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px;}
+.reg-row{display:flex;gap:8px;margin-bottom:3px;}
+.reg-code{font-family:monospace;color:var(--orange);font-size:10px;white-space:nowrap;flex-shrink:0;}
+.reg-text{color:rgba(255,255,255,.6);font-size:10px;line-height:1.35;}
+
+.formula{font-family:monospace;background:var(--grey-bg);border-radius:4px;padding:5px 9px;font-size:11px;margin:4px 0;display:block;overflow-x:auto;}
+
+.corr-badge{background:#fef2f2;border:1px solid #fca5a5;border-radius:4px;padding:2px 7px;font-size:9px;font-weight:800;color:#b91c1c;margin-left:4px;text-transform:uppercase;letter-spacing:.5px;}
+
+.section-divider{grid-column:1/-1;padding:8px 14px;border-radius:8px;font-size:11px;font-weight:700;letter-spacing:.5px;margin-top:4px;}
+.section-divider.imdg{background:#7c2d12;color:#fff;}
+.section-divider.cargo{background:#854d0e;color:#fff;}
+.section-divider.codes{background:#065f46;color:#fff;}
+.section-divider.fire{background:#991b1b;color:#fff;}
+.section-divider.ops{background:#1e40af;color:#fff;}
+.section-divider.build{background:#075985;color:#fff;}
+
+.footer{background:#141412;color:rgba(255,255,255,.5);padding:16px 20px;text-align:center;font-size:11px;line-height:1.8;}
+.footer a{color:var(--teal);}
+
+@media print{
+  .topbar,.page-header{print-color-adjust:exact;-webkit-print-color-adjust:exact;}
+  .card-head,.section-divider{print-color-adjust:exact;-webkit-print-color-adjust:exact;}
+  .grid{gap:8px;padding:8px;}
+  .card{page-break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <div style="display:flex;align-items:center;gap:8px;"><span class="logo-mark">MIW</span><span style="font-size:12px;opacity:.8;">Marine Intelligence Weekly</span></div>
+  <div><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a><a href="QB2_B.html">Full QB2_B</a></div>
+</nav>
+
+<header class="page-header">
+  <div class="badge">QB2_B CHEAT SHEET · v1.0 · June 2026</div>
+  <h1>Cargo, Ship Types &amp; <span>Container Fire Safety</span></h1>
+  <p class="header-sub">19-card visual reference · IMDG · Cargo Securing · CSC/PES/ACEP · VGM · GT/NT · IBC/BCH · IMSBC · Water Monitors · DCP · Deck Firefighting · FSA Li-Ion · Compiled by Nixon Antony, 2/E, Maersk A/S</p>
+  <div class="correction-alert">⚠ Q10 CORRECTED: Portable water monitor min flow = <strong>400 L/min (24 m³/hr)</strong> per unit · 48 m³/hr combined — source figure of 80 m³/hr was an error per SOLAS II-2/10.7.3.1</div>
+</header>
+
+<div class="grid">
+
+  <!-- ═══ SECTION 1: IMDG & DANGEROUS GOODS ═══ -->
+  <div class="section-divider imdg">⚠ IMDG &amp; Dangerous Goods — Q1, Q3, Q4, Q5, Q8</div>
+
+  <!-- Q1 -->
+  <div class="card">
+    <div class="card-head imdg"><span class="card-num">Q1</span><div class="card-title">IMDG Docs, Certificates &amp; EmS/MFAG Location</div></div>
+    <div class="card-body">
+      <p><strong>Key Documents:</strong> Document of Compliance (DoC) — SOLAS II-2/19; Dangerous Goods Manifest (Stowage Plan); Dangerous Goods Declaration (DGD) — from shipper; MSDS — SOLAS VI/5-1.</p>
+      <p><strong>Firefighting info location:</strong> <em>IMDG Code Supplement → EmS Guide</em></p>
+      <div class="kn"><div class="kn-title">EmS Guide Structure</div><ul>
+        <li><strong>Fire Schedules F-A to F-J</strong> — medium, strategy, approach</li>
+        <li><strong>Spill Schedules S-A to S-Z</strong> — containment &amp; toxic hazard mgmt</li>
+        <li><strong>MFAG</strong> — Medical First Aid Guide (same supplement)</li>
+        <li>DoC specifies which holds can carry which classes</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>"What book do you open first if Hold 3 emits yellow smoke?" → Get <strong>UN Number from DG Manifest</strong>, then open <strong>EmS Guide in IMDG Supplement</strong> for the specific Fire Schedule. Not "the IMDG Code" generically.</div>
+      <div class="reg-mini"><div class="reg-mini-title">Regulatory</div>
+        <div class="reg-row"><span class="reg-code">SOLAS II-2/Reg.19</span><span class="reg-text">Structural certification to carry specific DG classes</span></div>
+        <div class="reg-row"><span class="reg-code">SOLAS VII/Reg.4</span><span class="reg-text">Mandatory Dangerous Goods Manifest</span></div>
+      </div>
+      <div class="tip"><span class="tip-label">CE Oral Tip</span>Numbers: <strong>SOLAS II-2 Reg 19</strong>; <strong>9 IMDG hazard classes</strong>; IMDG mandatory since <strong>1 Jan 2004</strong>.</div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="card">
+    <div class="card-head imdg"><span class="card-num">Q3</span><div class="card-title">IMDG Marking, Labelling &amp; Numbering</div></div>
+    <div class="card-body">
+      <p><strong>Marks on package:</strong> Proper Shipping Name (PSN) — no trade names; UN Number with "UN" prefix (e.g. UN 1993); <strong>3-month sea immersion durability</strong>.</p>
+      <p><strong>Labels on package:</strong> Diamond-shaped hazard placard — min <strong>100 mm × 100 mm</strong>; colour-coded by class; secondary risk labels if dual hazard (no class number on secondary).</p>
+      <p><strong>Labels on container exterior:</strong> Minimum <strong>250 mm × 250 mm</strong> placards on all 4 sides.</p>
+      <p><strong>Special marks:</strong> Marine Pollutant (fish+tree); Elevated Temperature (thermometer in triangle).</p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li><strong>100 mm × 100 mm</strong> — label on individual package</li>
+        <li><strong>250 mm × 250 mm</strong> — placard on container exterior</li>
+        <li><strong>3 months</strong> — sea immersion durability threshold</li>
+        <li>Chapter 5.2 = package marking/labelling; Chapter 5.3 = container placarding</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>"Difference between a label and a placard?" → Labels (100 mm) on individual packages; Placards (250 mm) on the outside of the shipping container. Different sizes, different purposes.</div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="card">
+    <div class="card-head imdg"><span class="card-num">Q4</span><div class="card-title">IMDG Code — Structure, Classes &amp; Key Features</div></div>
+    <div class="card-body">
+      <p><strong>Structure:</strong> 2 Volumes + Supplement. Vol.1 = General provisions, classification, packing; Vol.2 = Dangerous Goods List (DGL); Supplement = EmS, MFAG, reporting forms.</p>
+      <p><strong>9 Hazard Classes:</strong></p>
+      <div class="kn"><div class="kn-title">Classes</div><ul>
+        <li>Class 1 Explosives · Class 2 Gases · Class 3 Flammable Liquids</li>
+        <li>Class 4 Flammable Solids/Reactive · Class 5 Oxidizers/Peroxides</li>
+        <li>Class 6 Toxic/Infectious · Class 7 Radioactive · Class 8 Corrosives</li>
+        <li>Class 9 Miscellaneous (inc. Li-Ion batteries, dry ice)</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Key Features</div><ul>
+        <li>Mandatory under SOLAS since <strong>1 January 2004</strong></li>
+        <li>UN Number = 4-digit hazard identifier (look up in DGL)</li>
+        <li>Packing Groups I/II/III = degree of danger</li>
+        <li>Segregation codes = minimum separation between incompatibles</li>
+        <li>Amended every <strong>2 years</strong> (biennial cycle)</li>
+      </ul></div>
+      <div class="tip"><span class="tip-label">CE Oral Tip</span>Nair will ask class numbers. Know: <strong>4.3 = water-reactive</strong> (no water!); <strong>5.1 = oxidizers</strong> (accelerates fire); <strong>6.1 = toxic</strong>. These three drive firefighting approach changes.</div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="card">
+    <div class="card-head imdg"><span class="card-num">Q5</span><div class="card-title">Mislabelled Container Fire — Wan Hai 266</div></div>
+    <div class="card-body">
+      <p><strong>Wan Hai 266 (June 2021, off Cochin):</strong> Container fire involving undeclared/mislabelled chemical cargo — forced Cochin coast guard intervention, vessel drifted close to Indian coast.</p>
+      <p><strong>Action if mislabelled container fires:</strong></p>
+      <div class="kn"><div class="kn-title">CE Response Sequence</div><ul>
+        <li><strong>Cannot trust declared UN number</strong> → treat as unknown/most hazardous</li>
+        <li>Heavy <strong>boundary cooling</strong> to adjacent containers — prevent thermal spread</li>
+        <li>Deploy portable water monitors from upwind/safe distance</li>
+        <li>Isolate reefer power rails in affected bay</li>
+        <li>Notify Master + company DPA immediately; prepare GMDSS distress readiness</li>
+        <li>Do NOT open container doors — risk of backdraft or toxic release</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>Never attack mislabelled chemical fire at close range with water — Class 4.3 water-reactive materials create explosive hydrogen gas. Boundary cool only until UN number confirmed via manifest.</div>
+      <div class="reg-mini"><div class="reg-mini-title">Regulatory</div>
+        <div class="reg-row"><span class="reg-code">SOLAS II-2/Reg.19</span><span class="reg-text">DoC specifies allowed classes per hold</span></div>
+        <div class="reg-row"><span class="reg-code">EmS F-G / F-H</span><span class="reg-text">Fire schedules for toxic/reactive cargo</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="card">
+    <div class="card-head imdg"><span class="card-num">Q8</span><div class="card-title">UN Number → Hazard Identification &amp; Firefighting</div></div>
+    <div class="card-body">
+      <p><strong>Process:</strong> Get UN Number from DG Manifest → look up in IMDG DGL (Vol.2) → column 15 gives EmS Fire Schedule code → open IMDG Supplement EmS Guide.</p>
+      <div class="kn"><div class="kn-title">EmS Code → Firefighting Medium</div><ul>
+        <li><strong>F-A:</strong> Water (general use) — most cargo fires</li>
+        <li><strong>F-G:</strong> Water spray OK but avoid direct jet</li>
+        <li><strong>F-H / 4.3 hazard:</strong> <em>NO WATER</em> → DCP, CO₂, inert gas, isolation only</li>
+        <li><strong>F-J (Class 1 Explosives):</strong> Do not fight — abandon and evacuate</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li><strong>4-digit</strong> UN number (e.g. UN 1993 = flammable liquid NOS)</li>
+        <li><strong>Column 15</strong> in DGL = EmS code assignment</li>
+        <li>Class <strong>4.3</strong> (water-reactive) → hydrogen explosion risk from water</li>
+      </ul></div>
+      <div class="tip"><span class="tip-label">CE Oral Tip</span>Examiner will name a class and ask firefighting medium. Key rule: <strong>Class 4.3 = never water</strong>. Class 3 flammable liquid = foam/CO₂ for pool fires, water for boundary cooling. Always EmS first, then decide.</div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 2: CARGO TYPES & CODES ═══ -->
+  <div class="section-divider codes">🛢 Cargo Types &amp; Codes — Q6, Q14, Q15</div>
+
+  <!-- Q6 -->
+  <div class="card">
+    <div class="card-head codes"><span class="card-num">Q6</span><div class="card-title">LPG Hazards on a Gas Carrier (MAIB Learnings)</div></div>
+    <div class="card-body">
+      <p><strong>LPG key properties:</strong> Heavier than air (pools in low spaces); flammable range 1.8–9.5% (propane); liquefied under pressure at ambient temp or refrigerated at atmospheric pressure; <strong>boil-off gas (BOG)</strong> constant management required.</p>
+      <p><strong>Critical hazards:</strong></p>
+      <div class="kn"><div class="kn-title">Hazard Categories</div><ul>
+        <li><strong>Fire/Explosion:</strong> Vapour cloud ignition; BLEVE (Boiling Liquid Expanding Vapour Explosion) if pressurised tank exposed to fire</li>
+        <li><strong>Cryogenic burns:</strong> Liquid LPG contact causes severe frostbite</li>
+        <li><strong>Asphyxiation:</strong> BOG displaces oxygen in enclosed spaces</li>
+        <li><strong>Expansion ratio:</strong> 1 litre liquid → approx. <strong>250 litres vapour</strong></li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>Expansion factor: <strong>1:250</strong></li>
+        <li>Governing Code: <strong>IGC Code Chapter 13 and 18</strong></li>
+        <li><em>Moritz Schulte</em> (MAIB 2021): secondary fuel system oversight → catastrophic fire risk</li>
+      </ul></div>
+      <div class="tip"><span class="tip-label">CE Oral Tip</span>MAIB investigation citation shows examiner you read beyond the code. Key lesson: gas carrier incidents often involve auxiliary/secondary machinery interfaces, not primary cargo systems.</div>
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="card">
+    <div class="card-head codes"><span class="card-num">Q14</span><div class="card-title">IBC Code vs BCH Code — Chemical Tankers</div></div>
+    <div class="card-body">
+      <p><strong>The split:</strong> Determined purely by <strong>construction date — 1 July 1986</strong>.</p>
+      <div class="kn"><div class="kn-title">BCH Code (pre-1986)</div><ul>
+        <li>Older chemical tankers built <strong>before 1 July 1986</strong></li>
+        <li>Pragmatic safety rules — cannot be retrofitted to modern IBC standards</li>
+        <li>Phasing out as fleet ages</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">IBC Code (post-1986)</div><ul>
+        <li>Chemical tankers built <strong>on or after 1 July 1986</strong></li>
+        <li>Three ship types: <strong>Type 1</strong> (highest hazard, max survivability), <strong>Type 2</strong>, <strong>Type 3</strong> (least hazardous)</li>
+        <li>Advanced damage stability, double-hull spacing, tank location rules</li>
+        <li>Mandatory under SOLAS VII/Reg.8 + MARPOL Annex II/Reg.11</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>"Ship laid down 1980, major conversion 1990 — which code?" → Major structural modification can cause class to classify it as a <em>new build</em> → <strong>full IBC Code applies</strong>. Cannot load substances beyond Certificate of Fitness regardless of code.</div>
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="card">
+    <div class="card-head codes"><span class="card-num">Q15</span><div class="card-title">IMSBC Code — Groups A, B, C</div></div>
+    <div class="card-body">
+      <p><strong>Mandatory under SOLAS VII/Reg.7-1.</strong> Covers solid bulk cargoes only (excludes grain — SOLAS VI).</p>
+      <div class="kn"><div class="kn-title">Three Groups</div><ul>
+        <li><strong>Group A — Liquefiable:</strong> Fine particles + moisture → liquefaction under vibration → sudden stability loss. <em>Examples: iron ore fines, nickel ore, bauxite.</em></li>
+        <li><strong>Group B — Chemical Hazards (MHB):</strong> Self-heating, oxygen depletion, toxic gas emission, corrosive. <em>Examples: coal, direct reduced iron (DRI), fertilisers.</em></li>
+        <li><strong>Group C — Neither:</strong> Physically stable but may shift if untrimmed or overload tank top. <em>Examples: clinker, salt, stone aggregates.</em></li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>TML = <strong>90% of FMP</strong> (Flow Moisture Point)</li>
+        <li>Angle of repose marker: <strong>35°</strong></li>
+        <li>Cannot load Group A if moisture content &gt; TML</li>
+        <li>Casualties: <em>MV Bulk Jupiter (2015)</em> — bauxite liquefaction sinking</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>"Chief Officer wants to wash down Group A hold during rainy port stay." → <strong>Refuse.</strong> Introducing water can push moisture above TML → liquefaction risk at sea → capsizing.</div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 3: CONTAINER SHIP OPERATIONS ═══ -->
+  <div class="section-divider ops">📦 Container Ship Operations — Q2, Q7, Q9, Q11, Q12, Q16</div>
+
+  <!-- Q2 -->
+  <div class="card">
+    <div class="card-head ops"><span class="card-num">Q2</span><div class="card-title">Cargo Securing Arrangement &amp; Safe Access Plan (CSAP)</div></div>
+    <div class="card-body">
+      <p><strong>CSM (Cargo Securing Manual):</strong> Mandatory, vessel-specific, approved by Class/Administration under SOLAS VI/Reg.5. Dictates stack weights, lashing patterns, gear certification.</p>
+      <p><strong>CSAP (Cargo Safe Access Plan):</strong> Embedded within CSM. Provides dedicated walkways, permanent lashing platforms with handrails, safe ladder transitions, designated fall-protection anchor points.</p>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li><strong>SOLAS VI/Reg.5.6</strong> — cargo stowed per CSM</li>
+        <li><strong>CSS Code Annex 14</strong> — safe working conditions for lashing</li>
+        <li><strong>5-year proof-load</strong> testing for loose lashing gear</li>
+        <li>Lashing Gear Register = official inventory of loose gear certificates</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ CE Trap</span>"Sheared lashing bridge gusset — C/O wants to load now." → <strong>Refuse.</strong> Structural damage invalidates CSM for that bay. Class-approved repair required before loading. Lashing is deck dept but structural repairs = CE jurisdiction under PMS.</div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="card">
+    <div class="card-head ops"><span class="card-num">Q7</span><div class="card-title">Liner / VOCC / NVOCC Model</div></div>
+    <div class="card-body">
+      <p><strong>Liner Service:</strong> Fixed published schedule, designated port rotations, standardised tariffs. The backbone of container shipping.</p>
+      <div class="kn"><div class="kn-title">VOCC vs NVOCC</div><ul>
+        <li><strong>VOCC</strong> (e.g. Maersk): Owns/operates vessels. Issues Master Bill of Lading. Direct control over speed, routing, terminal priority. High capital cost.</li>
+        <li><strong>NVOCC:</strong> Buys space in bulk from VOCC. Issues House Bill of Lading to shippers. Asset-light, flexible, can consolidate LCL. Zero control over vessel delays.</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">CE Commercial Link</div><ul>
+        <li>Liner schedules are calculated <strong>to the hour</strong> — ER delays cost berth slots</li>
+        <li>Missed terminal window → demurrage + NVOCC contract penalties on VOCC</li>
+        <li>MBL (Master B/L) = VOCC liability; HBL (House B/L) = NVOCC liability</li>
+      </ul></div>
+      <div class="tip"><span class="tip-label">CE Oral Tip</span>Nair: "Why maintain precise charter speed even when fuel is expensive?" → Schedule integrity is paramount — missed port windows break NVOCC commitments and generate claims.</div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="card">
+    <div class="card-head ops"><span class="card-num">Q9</span><div class="card-title">CSC — PES &amp; ACEP Inspection Schemes</div></div>
+    <div class="card-body">
+      <p><strong>CSC (International Convention for Safe Containers):</strong> Every container must carry a durable <strong>CSC Safety Approval Plate</strong> on left door. Two inspection pathways:</p>
+      <div class="kn"><div class="kn-title">PES — Periodic Examination Scheme</div><ul>
+        <li>First inspection: within <strong>5 years</strong> of manufacture date</li>
+        <li>Subsequent: every <strong>30 months</strong></li>
+        <li>NED (Next Examination Date) stamped on CSC plate</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">ACEP — Approved Continuous Examination Programme</div><ul>
+        <li>Inspection integrated into <strong>depot maintenance cycles</strong> — no fixed calendar</li>
+        <li>ACEP registration stamp on plate instead of NED (e.g. ACEP-DK-2026)</li>
+        <li>More frequent than 30-month PES in practice</li>
+        <li>Preferred by large operators like Maersk</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Tests Carried Out (ISO 1496)</div><ul>
+        <li>Floor strength, corner casting integrity, stacking load, racking, door seals/latches</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>ACEP containers have <em>no</em> NED stamped on the plate. If a PSCO sees no NED, they check for ACEP stamp — not automatically deficient.</div>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="card">
+    <div class="card-head ops"><span class="card-num">Q11</span><div class="card-title">VGM — Verified Gross Mass</div></div>
+    <div class="card-body">
+      <p><strong>SOLAS VI/Reg.2 — mandatory from 1 July 2016.</strong> Shipper must declare total certified weight of packed container before loading.</p>
+      <code class="formula">VGM = Cargo mass + Dunnage/securing gear + Container tare weight</code>
+      <div class="kn"><div class="kn-title">Two Approved Methods</div><ul>
+        <li><strong>Method 1:</strong> Weigh fully loaded sealed container on certified weighbridge</li>
+        <li><strong>Method 2:</strong> Weigh each item + dunnage individually, add printed tare weight. Requires certified equipment + authority audit.</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Key Rules</div><ul>
+        <li><strong>No VGM = no load</strong> — strict prohibition under SOLAS</li>
+        <li>Signed declaration submitted to Master + terminal before loading</li>
+        <li>Calibration of weighbridge = shipper's/state authority responsibility — NOT crew</li>
+        <li><em>MSC Napoli (2007)</em> — misdeclared weights drove VGM mandate</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>"Crane operator says container feels heavier than VGM." → Master has overriding authority to refuse loading until weight is re-verified.</div>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="card">
+    <div class="card-head ops"><span class="card-num">Q12</span><div class="card-title">GT &amp; NT — ITC 1969 Formulas</div></div>
+    <div class="card-body">
+      <p><strong>ITC 1969 (International Convention on Tonnage Measurement of Ships).</strong> GT and NT are <em>dimensionless numbers</em> — no units.</p>
+      <code class="formula">GT = K₁ × V   where K₁ = 0.2 + 0.02 log₁₀(V)</code>
+      <code class="formula">NT = K₂ × Vc × (4d/3D)² + K₃(N₁ + N₂/10)
+where K₂ = 0.2 + 0.02 log₁₀(Vc)</code>
+      <div class="kn"><div class="kn-title">Variables</div><ul>
+        <li><strong>V</strong> = total enclosed moulded volume (m³); <strong>Vc</strong> = cargo space volume</li>
+        <li><strong>d</strong> = moulded draught at summer load line; <strong>D</strong> = moulded depth</li>
+        <li><strong>N₁</strong> = berths for passengers in cabins ≤8; <strong>N₂</strong> = other passengers</li>
+        <li>Constraint: (4d/3D)² ≤ 1; NT ≥ 0.30 × GT</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Key Facts</div><ul>
+        <li>Deck containers (above hatch covers) <strong>excluded</strong> from standard Vc — but Suez (SCNT) and Panama (PC/UMS) use own tonnage systems including deck stacks</li>
+        <li>"d" in NT formula is the <strong>fixed summer load line draught</strong> — NT does NOT change with actual operating draught</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>"Does NT change when ship is in light ballast?" → <strong>No</strong>. The "d" used is fixed at design summer load line draught stamped on the Tonnage Certificate.</div>
+    </div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="card">
+    <div class="card-head ops"><span class="card-num">Q16</span><div class="card-title">Container Test Procedures (Full Range)</div></div>
+    <div class="card-body">
+      <p><strong>Governed by ISO 1496-1</strong> and CSC Convention Annex I. Tests go well beyond the one-door-off test.</p>
+      <div class="kn"><div class="kn-title">Structural Tests</div><ul>
+        <li><strong>Stacking test:</strong> 8 × tare + maximum payload on corner posts</li>
+        <li><strong>Floor strength test:</strong> Forklift with <strong>5,460 kg</strong> on each fork</li>
+        <li><strong>Roof strength test:</strong> 300 kg evenly distributed</li>
+        <li><strong>Racking test:</strong> 15,240 kg lateral shear force applied diagonally</li>
+        <li><strong>End-wall strength:</strong> 0.4 × rated payload; side-wall = 0.6 × rated payload</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Leakage / Weathertight Tests</div><ul>
+        <li><strong>Hose test:</strong> Water at 100 kPa (1 bar) nozzle pressure; 100 mm nozzle; ≤3 m distance — checks door seals &amp; gaskets</li>
+        <li><strong>Ultrasonic test (non-destructive):</strong> For clean cargo — transmitter inside, receiver scans exterior seams</li>
+        <li><strong>Chalk test:</strong> Rubber compression check only — NOT a structural test</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>Floor test: <strong>5,460 kg</strong>; ISO standard: <strong>ISO 1496-1</strong></li>
+      </ul></div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 4: FIRE SAFETY & FSA ═══ -->
+  <div class="section-divider fire">🔥 Fire Safety &amp; FSA — Q10, Q17, Q18, Q19</div>
+
+  <!-- Q10 -->
+  <div class="card">
+    <div class="card-head fire"><span class="card-num">Q10</span><div class="card-title">Portable Water Monitors — SOLAS Amendment <span class="corr-badge">corrected</span></div></div>
+    <div class="card-body">
+      <p><strong>MSC.365(93) → SOLAS II-2/Reg.10.7.3 — applies to ships built on/after 1 Jan 2016.</strong></p>
+      <div class="kn"><div class="kn-title">The 5-Tier Rule</div><ul>
+        <li>≥ <strong>5 tiers</strong> of containers on/above weather deck → minimum <strong>2 portable water monitors</strong> mandatory</li>
+        <li>&lt; 5 tiers → no portable monitors mandated (standard hydrants baseline)</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Key Numbers — CORRECTED</div><ul>
+        <li>Each monitor min flow: <strong>400 L/min (24 m³/hr)</strong> — per SOLAS II-2/10.7.3.1</li>
+        <li>Two monitors combined: <strong>800 L/min (48 m³/hr)</strong></li>
+        <li>Well within single main fire pump capability (~80–120 m³/hr on large container ships)</li>
+        <li>Min hydrant pressure maintained: <strong>0.27 N/mm²</strong></li>
+        <li>Do <strong>NOT</strong> quote 80 m³/hr — that was an error in the draft source</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>"Can the emergency fire pump run two portable monitors?" → Not recommended — emergency pump is sized for ~25–30 m³/hr (two standard jets). For monitors + safety lines, run <strong>main fire pumps</strong>.</div>
+      <div class="tip"><span class="tip-label">CE Oral Tip</span>Nair: "Does a portable monitor replace standard fire hoses?" → <strong>No</strong>. Monitors are <em>in addition to</em> standard hydrants/hoses. Supplementary high-volume tool for high stack access.</div>
+    </div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="card">
+    <div class="card-head fire"><span class="card-num">Q17</span><div class="card-title">Fixed Deck DCP System</div></div>
+    <div class="card-body">
+      <p><strong>Governed by SOLAS II-2 + FSS Code Chapter 11.</strong> Protects weather deck zones where flammable gas (Class 2) or low-flashpoint liquid (Class 3) containers are carried under the DoC.</p>
+      <div class="kn"><div class="kn-title">System Components</div><ul>
+        <li>Pressurised dry chemical powder storage vessels</li>
+        <li>High-pressure <strong>nitrogen (N₂) propellant</strong> cylinder manifold</li>
+        <li>Pilot activation lines + distribution manifold</li>
+        <li>Fixed deck monitors + hand hose reels</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>Minimum discharge duration: <strong>45 seconds</strong> from all monitors simultaneously</li>
+        <li>Powder must remain free-flowing — monthly N₂ pressure checks; annual powder fluffing</li>
+        <li>Do NOT discharge powder during testing — use <strong>dry compressed air/N₂ blow-through</strong> of deck lines</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>"How do you test DCP lines during monthly inspection?" → <strong>Do not discharge powder</strong>. Verify N₂ pressure gauges, check free-flow, blow deck piping with dry compressed air/nitrogen with drainage valves open.</div>
+    </div>
+  </div>
+
+  <!-- Q18 -->
+  <div class="card">
+    <div class="card-head fire"><span class="card-num">Q18</span><div class="card-title">Deck Firefighting Procedure — Confirmed/Suspected Fire</div></div>
+    <div class="card-body">
+      <p><strong>Container fire = long duration, heat-intensive, toxic smoke. Strategy = boundary cooling first, not direct attack.</strong></p>
+      <div class="kn"><div class="kn-title">CE Action Sequence</div><ul>
+        <li><strong>1. Sound alarm</strong> + muster fire party; notify bridge/Master</li>
+        <li><strong>2. Start main fire pump(s)</strong> — do not rely on emergency pump alone</li>
+        <li><strong>3. Identify cargo</strong> — check DG Manifest for UN number, EmS code</li>
+        <li><strong>4. Deploy portable water monitors</strong> upwind for boundary cooling of adjacent containers</li>
+        <li><strong>5. Do NOT open container doors</strong> — backdraft/toxic release risk</li>
+        <li><strong>6. Isolate reefer power rails</strong> in affected bay</li>
+        <li><strong>7. Monitor stability</strong> — firefighting water accumulation affects GM</li>
+        <li><strong>8. Call MRCC/Coast Guard</strong> if beyond crew capability</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li>Maintain <strong>0.27 N/mm²</strong> at all hydrants during firefighting</li>
+        <li>If Class 4.3 confirmed → no water on source; boundary cool steel only</li>
+        <li>Monitor GM continuously — water on deck = free surface effect</li>
+      </ul></div>
+      <div class="tip"><span class="tip-label">Casualty</span>Historical CTL fires: delayed boundary cooling allowed thermal energy to spread — total loss from a small initial fire. Boundary cool early and aggressively.</div>
+    </div>
+  </div>
+
+  <!-- Q19 -->
+  <div class="card">
+    <div class="card-head fire"><span class="card-num">Q19</span><div class="card-title">FSA for Li-Ion Battery Cargo (MSC.1/Circ.1647)</div></div>
+    <div class="card-body">
+      <p><strong>FSA = Formal Safety Assessment.</strong> IMO-approved 5-step proactive risk methodology. Applied here per <strong>MSC.1/Circ.1647</strong> interim guidelines for Li-ion containers.</p>
+      <div class="kn"><div class="kn-title">5 Steps</div><ul>
+        <li><strong>Step 1 — HAZID:</strong> Identify thermal runaway triggers, HF gas off-gassing, explosive venting</li>
+        <li><strong>Step 2 — Risk Assessment:</strong> Probability × consequence matrix; likelihood of cascading thermal runaway</li>
+        <li><strong>Step 3 — Risk Control Options (RCOs):</strong> Segregation from heat boundaries; hold gas detection; portable water monitors; temperature monitoring</li>
+        <li><strong>Step 4 — Cost-Benefit Analysis:</strong> Evaluate cost of RCOs vs. financial/environmental damage of an incident</li>
+        <li><strong>Step 5 — Recommendations:</strong> Formal regulatory proposals to IMO/flag state for new amendments</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Key Numbers</div><ul>
+        <li><strong>5 FSA steps</strong> — must know in sequence</li>
+        <li><strong>MSC.1/Circ.1647</strong> — interim Li-ion cargo guidelines</li>
+        <li>HF (hydrogen fluoride) gas = primary toxic off-gas during thermal runaway</li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Trap</span>"Why FSA instead of just using the IMDG Code?" → IMDG is <em>reactive</em> (updated after accidents); FSA is <em>proactive</em> — analyses risk and builds defences before an incident occurs.</div>
+    </div>
+  </div>
+
+  <!-- ═══ SECTION 5: CONSTRUCTION ═══ -->
+  <div class="section-divider build">🔧 Construction &amp; Integrity — Q13</div>
+
+  <!-- Q13 -->
+  <div class="card">
+    <div class="card-head build"><span class="card-num">Q13</span><div class="card-title">Watertight vs Weathertight — Definitions &amp; Test Methods</div></div>
+    <div class="card-body">
+      <div class="kn"><div class="kn-title">Watertight</div><ul>
+        <li>Resists continuous <strong>head of water pressure from both sides</strong></li>
+        <li>Location: Below/at bulkhead deck — collision bulkheads, tank boundaries, WT doors, double bottom</li>
+        <li>SOLAS II-1 structural requirement</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Weathertight</div><ul>
+        <li>Prevents water penetration from <strong>transient external exposure</strong> only (spray, green water)</li>
+        <li>Cannot withstand sustained submersion</li>
+        <li>Location: Above waterline — hatch covers, superstructure doors, spurling pipes</li>
+        <li>ICLL Regulation 16</li>
+      </ul></div>
+      <div class="kn"><div class="kn-title">Test Methods</div><ul>
+        <li><strong>Watertight — Hydrostatic hose test:</strong> High-pressure jet; standard nozzle 12.5 mm; min 0.2 MPa (2 bar) nozzle pressure; ≤1.5 m from surface</li>
+        <li><strong>Watertight — Ultrasonic (UTT):</strong> Non-destructive; transmitter inside, receiver outside seams; preferred for cargo spaces</li>
+        <li><strong>Weathertight — Low-pressure hose test:</strong> Standard hose, 2 bar; checks gasket compression</li>
+        <li><strong>Weathertight — Chalk test:</strong> Rubber gasket compression check only — <em>NOT valid for structural WT survey</em></li>
+      </ul></div>
+      <div class="trap"><span class="trap-label">⚠ Class Survey Trap</span>"Can a chalk test pass a Class survey for a repaired WT collision bulkhead?" → <strong>No.</strong> Chalk test = weathertight gasket check only. Repaired WT boundary needs high-pressure hydrostatic hose or Class-approved UTT.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="footer">
+  <strong>Marine Intelligence Weekly — QB2_B Cheat Sheet</strong> · v1.0 · June 2026<br>
+  Compiled by Nixon Antony, 2/E, Maersk A/S · MEO Class 1 Kochi MMD Oral Exam Preparation<br>
+  ⚠ Q10 corrected: portable water monitor min flow = <strong>400 L/min (24 m³/hr)</strong> per unit (source figure 80 m³/hr was an error per SOLAS II-2/10.7.3.1)<br>
+  Corrections: <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a> · Full QB: <a href="QB2_B.html">QB2_B.html</a>
+</footer>
+
+</body>
+</html>

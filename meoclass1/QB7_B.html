@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>QB7_B — GHG, Alternative Fuels &amp; Hydrogen | MIW MEO Class 1</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.6;-webkit-user-select:none;-ms-user-select:none;user-select:none;}
+a{color:var(--teal-dark);text-decoration:none;}a:hover{text-decoration:underline;}
+.topbar{position:sticky;top:0;z-index:100;background:var(--navy);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 20px;font-size:14px;}
+.topbar .logo-mark{width:30px;height:30px;border-radius:6px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;flex-shrink:0;}
+.topbar .site-name{font-weight:600;letter-spacing:0.3px;flex-shrink:0;}
+.topbar nav{margin-left:auto;display:flex;gap:18px;}
+.topbar nav a{color:#cbd5e1;font-size:13px;}
+.topbar nav a:hover{color:#fff;}
+.page-header{background:var(--navy);color:#fff;padding:28px 20px 22px;}
+.page-header .qb-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:10px;}
+.page-header h1{font-size:24px;font-weight:700;margin-bottom:6px;}
+.page-header .sub-desc{color:#cbd5e1;font-size:14px;max-width:760px;}
+.header-meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:14px;font-size:12px;color:#94a3b8;}
+.header-meta strong{color:#e2e8f0;}
+.controls-bar{position:sticky;top:48px;z-index:90;background:#fff;border-bottom:1px solid var(--grey-border);padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+#search-input{flex:1 1 220px;max-width:340px;padding:8px 12px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px;}
+#search-input:focus{outline:none;border-color:var(--teal);}
+.filter-btn{background:var(--grey-bg);border:1px solid var(--grey-border);color:var(--grey-text);font-size:12px;font-weight:600;padding:6px 12px;border-radius:20px;cursor:pointer;transition:all .15s;}
+.filter-btn:hover{background:var(--teal-light);color:var(--teal-dark);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{margin-left:auto;font-size:12px;color:var(--grey-text);font-weight:600;}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:24px;max-width:1100px;margin:0 auto;padding:24px 20px 60px;}
+@media(max-width:800px){.main-layout{grid-template-columns:1fr;}.sidebar{display:none;}}
+.sidebar{position:sticky;top:110px;align-self:start;max-height:calc(100vh - 130px);overflow-y:auto;font-size:13px;}
+.sidebar h3{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;border-radius:5px;color:var(--ink);font-size:13px;border-left:2px solid transparent;transition:all .15s;}
+.toc-link:hover{background:var(--teal-light);text-decoration:none;}
+.toc-link.active{background:var(--teal-light);border-left:2px solid var(--teal);color:var(--teal-dark);font-weight:600;}
+.sidebar .divider{border-top:1px solid var(--grey-border);margin:14px 0;}
+.sidebar .upcoming-note{background:var(--grey-bg);border-radius:6px;padding:10px;font-size:12px;color:var(--grey-text);}
+.section-head{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 12px;}
+.section-head h2{font-size:16px;font-weight:700;color:var(--ink);}
+.sec-count{font-size:11px;font-weight:700;color:var(--teal-dark);background:var(--teal-light);padding:2px 8px;border-radius:10px;}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;margin-bottom:10px;overflow:hidden;}
+.q-header{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;transition:background .15s;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{flex-shrink:0;width:28px;height:28px;border-radius:6px;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.q-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.q-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:2px 8px;border-radius:10px;background:var(--grey-bg);color:var(--grey-text);}
+.q-tag.tag-solas{background:#e0f2fe;color:#0369a1;}
+.q-tag.tag-marpol{background:#fef3c7;color:#92400e;}
+.q-tag.tag-iacs{background:#ede9fe;color:#5b21b6;}
+.q-tag.tag-survey{background:var(--teal-light);color:var(--teal-dark);}
+.q-tag.tag-stability{background:#fce7f3;color:#9d174d;}
+.q-tag.tag-machinery{background:#dbeafe;color:#1e40af;}
+.q-tag.tag-ghg{background:#dcfce7;color:#166534;}
+.q-tag.tag-stcw{background:#ffe4e6;color:#9f1239;}
+.q-tag.tag-ism{background:#fef3c7;color:#92400e;}
+.q-tag.tag-isps{background:#ede9fe;color:#5b21b6;}
+.q-tag.tag-mlc{background:#fce7f3;color:#9d174d;}
+.q-tag.tag-fire{background:#fee2e2;color:#991b1b;}
+.q-tag.tag-management{background:#d1fae5;color:#065f46;}
+.q-chevron{flex-shrink:0;width:20px;height:20px;stroke:var(--grey-text);transition:transform .2s;}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 16px 16px;border-top:1px solid var(--grey-border);}
+.q-card.open .q-answer{display:block;padding-top:14px;}
+.answer-body{font-family:'Georgia',serif;font-size:14px;color:var(--ink);line-height:1.7;}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:0.8px;color:var(--teal-dark);font-family:'Segoe UI',system-ui,sans-serif;font-weight:700;margin:16px 0 6px;}
+.answer-body h4:first-child{margin-top:0;}
+.answer-body p{margin-bottom:10px;}
+.answer-body ul,.answer-body ol{margin:0 0 10px 22px;}
+.answer-body li{margin-bottom:5px;}
+.answer-body strong{color:var(--ink);font-weight:700;}
+.answer-body em{color:var(--grey-text);font-style:italic;}
+.answer-body code{background:var(--grey-bg);padding:1px 4px;border-radius:3px;font-size:12px;}
+.answer-body table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;}
+.answer-body th{background:var(--navy);color:#fff;padding:6px 10px;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;}
+.answer-body td{padding:6px 10px;border-bottom:1px solid var(--grey-border);vertical-align:top;}
+.answer-body tr:last-child td{border-bottom:none;}
+.answer-body pre{background:var(--grey-bg);padding:10px 12px;border-radius:6px;margin:10px 0;font-size:12px;overflow-x:auto;white-space:pre-wrap;font-family:monospace;}
+.formula{font-family:monospace;background:var(--grey-bg);padding:8px 12px;border-radius:6px;margin:8px 0;font-size:13px;display:block;}
+.practice-block{background:var(--teal-light);border-left:3px solid var(--teal);border-radius:0 6px 6px 0;padding:10px 14px;margin-bottom:10px;font-family:'Georgia',serif;font-size:13.5px;color:var(--ink);}
+.practice-block .pb-label{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin-bottom:4px;display:block;}
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;font-family:'Segoe UI',system-ui,sans-serif;}
+.reg-box-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.8px;}
+.reg-item{display:flex;gap:12px;flex-wrap:wrap;padding:5px 0;border-bottom:1px solid #1e293b;font-size:12.5px;}
+.reg-item:last-child{border-bottom:none;}
+.reg-code{color:var(--orange);font-family:monospace;font-weight:700;flex:0 0 auto;min-width:0;word-break:break-all;}
+.reg-desc{color:#cbd5e1;flex:1;min-width:0;}
+.ce-tip{background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 6px 6px 0;padding:12px 14px;margin:14px 0;font-size:13.5px;color:#7c2d12;}
+.ce-tip strong{color:var(--orange);}
+.deep-dive{margin-top:14px;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive summary{cursor:pointer;padding:10px 14px;font-family:'Segoe UI',system-ui,sans-serif;font-size:12.5px;font-weight:700;color:var(--teal-dark);background:var(--grey-bg);list-style:none;display:flex;align-items:center;gap:8px;}
+.deep-dive summary::-webkit-details-marker{display:none;}
+.deep-dive summary::before{content:"▸";font-size:11px;}
+.deep-dive[open] summary::before{content:"▾";}
+.deep-dive-body{padding:12px 14px;font-size:13.5px;line-height:1.6;}
+.deep-dive-body h5{font-size:11px;text-transform:uppercase;letter-spacing:0.6px;color:var(--grey-text);margin:10px 0 4px;font-family:'Segoe UI',system-ui,sans-serif;}
+.deep-dive-body h5:first-child{margin-top:0;}
+.deep-dive-body p{margin-bottom:8px;}
+.deep-dive-body ul{margin:0 0 8px 18px;}
+.deep-dive-body li{margin-bottom:4px;}
+.deep-dive-body .trap-q{font-weight:700;color:var(--ink);}
+.deep-dive-body .trap-a{color:var(--grey-text);margin-bottom:8px;}
+.q-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 16px;background:var(--grey-bg);font-size:11.5px;color:var(--grey-text);border-top:1px solid var(--grey-border);}
+.q-version{flex-shrink:0;font-weight:600;}
+#no-results{display:none;text-align:center;padding:60px 20px;color:var(--grey-text);}
+.page-footer{background:var(--navy);color:#cbd5e1;padding:30px 20px;font-size:12.5px;text-align:center;}
+.page-footer a{color:var(--teal-light);}
+.page-footer .disclaimer{max-width:700px;margin:12px auto 0;color:#94a3b8;font-size:11.5px;}
+</style>
+</head>
+<body>
+<div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.04;"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="wm" x="0" y="0" width="300" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><text x="10" y="60" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">marineintelligenceweekly.com</text><text x="10" y="120" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">MEO CLASS 1 — CONFIDENTIAL</text></pattern></defs><rect width="100%" height="100%" fill="url(#wm)"/></svg></div>
+<div class="topbar"><div class="logo-mark">MIW</div><div class="site-name">Marine Intelligence Weekly</div><nav><a href="https://marineintelligenceweekly.com/">Home</a><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a><a href="https://marineintelligenceweekly.com/contact.html">Contact</a></nav></div>
+<div class="page-header">
+  <span class="qb-badge">QB7_B · MEO Class 1 Question Bank</span>
+  <h1>GHG, Alternative Fuels &amp; Hydrogen</h1>
+  <p class="sub-desc">2 oral-exam questions from 2026 covering e-marine fuels (Power-to-X production pathways, WtW GHG intensity, FuelEU Maritime, commercial status including Maersk e-methanol fleet) and hydrogen colour taxonomy (grey/blue/green/pink — IEA classification, GHG intensity, RFNBO qualification).</p>
+  <div class="header-meta">
+    <span><strong>Compiled by:</strong> Nixon Antony, 2/E, Maersk A/S</span>
+    <span><strong>Examiners:</strong> Rajappan</span>
+    <span><strong>Version:</strong> v1.0 · June 2026</span>
+  </div>
+</div>
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
+<button class="filter-btn" onclick="filterTag('ghg',this)">GHG</button>
+<button class="filter-btn" onclick="filterTag('marpol',this)">MARPOL</button>
+<button class="filter-btn" onclick="filterTag('machinery',this)">MACHINERY</button>
+  <span id="q-count-label">Showing 2 of 2</span>
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <h3>Contents</h3>
+    <a class="toc-link" href="#q1">Q1. E-Marine Fuels — Types, Production &amp; Status</a>
+<a class="toc-link" href="#q2">Q2. Hydrogen Colour Taxonomy — Grey/Blue/Green/Pink</a>
+    <div class="divider"></div>
+    <div class="upcoming-note">Next: <strong>QB7_A — SEEMP Part 3, Carbon Capture, EU MRV/FuelEU/ETS</strong></div>
+  </div>
+  <div id="q-feed"><div class="section-head"><h2>🌿 E-Fuels &amp; Hydrogen</h2><span class="sec-count">2 questions</span></div>
+    <div class="q-card" id="q1" data-tags="ghg marpol machinery">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">| E-marine fuels — what are they and their status in maritime decarbonisation?</div>
+          <div class="q-tags"><span class="q-tag tag-ghg">GHG</span><span class="q-tag tag-marpol">MARPOL</span><span class="q-tag tag-machinery">MACHINERY</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>E-fuels, or electrofuels, are synthetic fuels produced from hydrogen generated by water electrolysis using renewable electricity, which is then combined with captured carbon dioxide or nitrogen. The primary maritime variants include e-methanol, e-ammonia, e-methane, and e-hydrogen, offering near-zero Well-to-Wake greenhouse gas emissions. While recognized as key compliance pathways under the 2023 IMO GHG Strategy and the EU’s FuelEU Maritime regulation, their current status remains commercially nascent due to limited global manufacturing and bunkering infrastructure.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>E-fuels are synthetic fuels whose production relies on green hydrogen derived from renewable-power-driven water electrolysis. For e-methanol and e-methane, this green hydrogen is synthesized with captured carbon dioxide (<em>CO_2</em>), while for e-ammonia, it is combined with nitrogen (<em>N_2</em>). This creates a lifecycle that yields near-zero Well-to-Wake (WtW) GHG emissions, distinguishing them from bio-fuels, which rely on biogenic carbon from biomass. Under the 2023 IMO GHG Strategy, they serve as critical pathways for meeting the 2030 alternative fuel uptake targets, while FuelEU Maritime mandates a 2% e-fuel sub-target starting in 2034 if early adoption remains low. Major carriers, including Maersk A/S, have fully commercialized this concept through the operational deployment of dual-fuel e-methanol container vessels like <em>Laura Maersk</em>.</div>
+        <div class="answer-body">
+          <h5>Definition and Production Pathway</h5>
+<p>E-fuels (electrofuels or Power-to-X) are drop-in synthetic marine fuels generated through chemical synthesis using renewable electrical energy as the primary input. The explicit production pathways are:</p>
+<ol>
+<li><strong>Green Hydrogen Production:</strong> Fresh water undergoes electrolysis (<em>2H_2O \rightarrow 2H_2 + O_2</em>) via Proton Exchange Membrane (PEM) or Alkaline electrolysers powered solely by solar, wind, or hydro energy.</li>
+<li><strong>Carbon-Based E-Fuels (E-Methanol / E-Methane):</strong> The green hydrogen (<em>H_2</em>) is synthesized with captured carbon dioxide (<em>CO_2</em>) obtained via Direct Air Capture (DAC) or point-source industrial carbon capture.</li>
+</ol>
+<div class="formula">\text{CO}_2 + 3\text{H}_2 \rightarrow \text{CH}_3\text{OH (e-methanol)} + \text{H}_2\text{O}</div>
+<ol>
+<li><strong>Nitrogen-Based E-Fuels (E-Ammonia):</strong> Green hydrogen is synthesized with atmospheric nitrogen (<em>N_2</em>) extracted via air separation units using the Haber-Bosch process.</li>
+</ol>
+<div class="formula">\text{N}_2 + 3\text{H}_2 \rightarrow 2\text{NH}_3\text{ (e-ammonia)}</div>
+<p><em>Distinction:</em> Unlike bio-fuels, which draw carbon from organic waste or biomass, e-fuels rely entirely on synthetic processing using renewable electrolytic hydrogen feedstock.</p>
+<h5>Key E-Fuel Types for Maritime</h5>
+<ul>
+<li><strong>E-methanol (<em>\text{CH}_3\text{OH}</em>):</strong> Liquid at ambient temperatures, making it highly adaptable to existing bunker infrastructure with minimal modifications. It possesses an energy density of ~4,400 kcal/kg (compared to ~10,000 kcal/kg for conventional HFO).</li>
+<li><em>Status:</em> Leading operational alternative. Maersk A/S deployed the world&#x27;s first e-methanol feeder vessel, <em>Laura Maersk</em>, in 2023 and continues to expand its 9,000+ TEU dual-fuel fleet in 2026.</li>
+</ul>
+<ul>
+<li><strong>E-ammonia (<em>\text{NH}_3</em>):</strong> A zero-carbon molecule eliminating carbon emissions entirely, with an energy density of ~3,000 kcal/kg. However, it exhibits extreme toxicity, is corrosive, and produces toxic nitrogen oxides (<em>\text{NO}_x</em>) during combustion, demanding specialized engine designs and selective catalytic reduction (SCR) systems.</li>
+<li><em>Status:</em> Engine manufacturers (e.g., MAN Energy Solutions) have introduced design concepts; pilot vessel infrastructure is undergoing class type approval.</li>
+</ul>
+<ul>
+<li><strong>E-LNG / E-methane (<em>\text{CH}_4</em>):</strong> Chemically identical to conventional LNG, allowing immediate utilization of existing liquefied natural gas infrastructure and dual-fuel machinery. It carries a persistent operational risk of methane slip from the engine exhaust.</li>
+<li><strong>E-hydrogen (<em>\text{H}_2</em>):</strong> Extremely low volumetric energy density requiring compressed gaseous or deep cryogenic liquid storage at <em>-253^\circ\text{C}</em>. It is primarily reserved for fuel-cell technology rather than direct commercial combustion.</li>
+</ul>
+<h5>Regulatory Recognition</h5>
+<ul>
+<li><strong>2023 IMO GHG Strategy (MEPC.377(80)):</strong> Mandates an uptake of zero or near-zero GHG emission technologies and fuels to represent at least 5%, striving for 10%, of the energy used by international shipping by 2030.</li>
+<li><strong>MARPOL Annex VI Regulations 26 &amp; 28:</strong> The Carbon Intensity Indicator (CII) framework currently measures emissions Tank-to-Wake (TtW), but amendments are progressing to institutionalize a Well-to-Wake framework to reward low-lifecycle e-fuels.</li>
+<li><strong>FuelEU Maritime (EU Reg 2023/1805):</strong> Applies a strict Well-to-Wake calculation to energy used on board ships calling at EU ports. It provides a <em>2\times</em> compliance incentive multiplier for Renewable Fuels of Non-Biological Origin (RFNBOs/e-fuels) until 2033, and establishes a hard 2% RFNBO sub-target from 2034 if early market uptake falls below 1%.</li>
+<li><strong>IMO Life Cycle GHG Guidelines (MEPC.1/Circ.905):</strong> Standardizes the assessment framework for determining full-lifecycle alternative fuel carbon factors.</li>
+</ul>
+<h5>Commercial Status and Challenges</h5>
+<ul>
+<li><strong>Economic Disadvantage:</strong> E-methanol costs range between USD 800–1,200 per tonne, representing a 2–3x price premium over conventional heavy fuel oil.</li>
+<li><strong>Supply Scarcity:</strong> Global commercial production remains highly localized. Strategic bunkering remains limited to specialized hubs in Northern Europe and select modern Chinese export complexes.</li>
+<li><strong>Scale Limitation:</strong> Massive quantities of renewable green grid electricity are required to power the electrolysis needed for multi-megawatt maritime propulsion.</li>
+</ul>
+<p>---</p>
+<h5>EXTRA SUB-BLOCK: Key Energy Densities &amp; Target Metrics</h5>
+<ul>
+<li><strong>HFO Energy Density:</strong> ~10,000 kcal/kg (Baseline)</li>
+<li><strong>E-Methanol Energy Density:</strong> ~4,400 kcal/kg (Requires ~2.3x storage volume)</li>
+<li><strong>E-Ammonia Energy Density:</strong> ~3,000 kcal/kg (Requires ~3.3x storage volume)</li>
+<li><strong>FuelEU RFNBO Sub-Target:</strong> 2% mandate starting 1 January 2034</li>
+<li><strong>IMO 2030 Alternate Fuel Target:</strong> Minimum 5%, striving for 10% total energy share</li>
+</ul>
+<p>---</p>
+<h5>REG-BOX</h5>
+<ol>
+<li><strong>MARPOL Annex VI Reg 28</strong> — Operational Carbon Intensity Indicator (CII) framework.</li>
+<li><strong>IMO Res MEPC.377(80)</strong> — 2023 Strategy on Reduction of GHG Emissions from Ships.</li>
+<li><strong>IMO MEPC.1/Circ.905</strong> — Revised Guidelines on Lifecycle GHG Intensity of Marine Fuels.</li>
+<li><strong>EU Regulation 2023/1805</strong> — FuelEU Maritime infrastructure and RFNBO compliance mandates.</li>
+<li><strong>SOLAS Chapter II-2 &amp; IGF Code</strong> — Safety requirements for ships using low-flashpoint fuels.</li>
+</ol>
+<p>---</p>
+          
+          <div class="ce-tip"><strong>CE Oral Tip (Kochi MMD):</strong> <em>Rajappan focuses on real-world adoption, often asking: &quot;What is Maersk doing on your ships regarding green propulsion?&quot;</em> Directly specify the production pathway: state that e-methanol is produced via green hydrogen electrolysis synthesized with captured carbon dioxide, not just &quot;green electricity.&quot; Clearly distinguish e-fuels from bio-fuels based on their carbon source origin (electrolytic vs biogenic). Never classify fossil LNG as an e-fuel, or you will fail immediately.</div>
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5><p>Operating as a Second Engineer on an e-methanol-adapted dual-fuel vessel introduces critical system variations vs standard HFO lines. Methanol has a low flashpoint (~11°C), requiring double-walled fuel injection piping with inert gas (nitrogen) purging, strict workspace ventilation monitoring, specialized methanol-compatible seals (EPDM or specialized fluoroelastomers instead of nitrile rubber), and rigorous training on fuel toxicity and invisible flame hazards under the IGF Code.</p><h5>Trap Questions</h5><p><em>&quot;Is bio-methanol an e-fuel?&quot;</em> No, Examiner. Physically, the molecule (<em>\text{CH}_3\text{OH}</em>) is identical, but their production pathways differ radically. Bio-methanol is processed via biomass gasification or waste fermentation (biogenic origin). An e-fuel must possess an electrolytic origin requiring green hydrogen and captured <em>CO_2</em>.</p><h5>Common CE Failures</h5><p>Candidates often display a lack of understanding regarding the production pathway, vaguely asserting that alternative fuels are simply &quot;refined cleanly.&quot; Many struggle to distinguish between Tank-to-Wake (combustion only) and Well-to-Wake (lifecycle) metrics, and frequently mislabel fossil LNG as a synthetic e-fuel.</p><h5>Casualty Link</h5><p>Early conversion milestones, such as the <em>Stena Germanica</em> methanol conversion project, highlighted strict lessons regarding fuel-system gasket integrity. Minor micro-leakages occurred where standard NBR seals failed to withstand methanol exposure, driving the modern classification mandates for specialized synthetic polymers in alternative fuel lines.</p><h5>Examiner Chain</h5><p>Rajappan typically leads candidates down a systematic path: Definition of alternative fuels <em>\rightarrow</em> Chemical pathways for synthetic generation <em>\rightarrow</em> Structural safety under the IGF Code <em>\rightarrow</em> Verification of corporate shipping implementation (e.g., Maersk&#x27;s operational dual-fuel container vessels).</p><h5>On My Vessel</h5><p>Maersk A/S operates an expanding fleet of alternative-fuel vessels, anchored by the pioneering 2,100 TEU <em>Laura Maersk</em> and supplemented by modern 9,000 TEU dual-fuel container ships constructed by Yangzijiang Shipbuilding. These vessels deploy MAN B&amp;W ME-LGIM dual-fuel two-stroke main engines, using green e-methanol bunkered across high-compliance European and Asian corridors.</p>
+<p>---</p>
+<p>Correction footer format: QB7_B · Q1 · v1.0</p>
+<p>---</p></div></details>
+      </div>
+      <div class="q-footer">
+        <span>Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_B, Q1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB7_B · Q1 · v1.0</span>
+      </div>
+    </div>
+
+    <div class="q-card" id="q2" data-tags="ghg machinery">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Examiner context:** Rajappan (2026) — hydrogen colour taxonomy, production methods, GHG intensity per pathway, maritime </div>
+          <div class="q-tags"><span class="q-tag tag-ghg">GHG</span><span class="q-tag tag-machinery">MACHINERY</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>Hydrogen is classified by a standard industry colour taxonomy reflecting its production pathway and lifecycle carbon intensity. Grey hydrogen utilizes fossil natural gas without carbon capture, Blue hydrogen combines natural gas reforming with carbon capture and storage (CCS), while Green hydrogen uses renewable electricity to electrolyse water, achieving near-zero emissions. Red or Pink hydrogen utilizes nuclear power for electrolysis; only Green hydrogen meets the strict regulatory requirements for maritime e-fuel synthesis.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>The hydrogen color taxonomy denotes the environmental footprint of production methods, as codified by the IEA rather than specific IMO text. Grey hydrogen is produced via Steam Methane Reforming of fossil gas, releasing high volumes of <em>CO_2</em>, while Blue hydrogen captures a portion of those emissions using Carbon Capture and Storage, serving as a low-carbon transitional option. Green hydrogen represents the zero-carbon target for maritime transport, utilizing wind or solar electricity to split water via electrolysis. Pink/Red hydrogen utilizes nuclear energy to run electrolysers. For maritime decarbonisation, Green hydrogen is the foundational feedstock required to synthesize compliant e-methanol and e-ammonia under the 2023 IMO GHG Strategy and FuelEU Maritime framework.</div>
+        <div class="answer-body">
+          <h5>The Colour Taxonomy</h5>
+<p>The classification of hydrogen into specific &quot;colours&quot; is an industrial convention established by the International Energy Agency (IEA) and IRENA to denote lifecycle greenhouse gas footprints. It is not directly defined in the text of MARPOL, which evaluates fuels strictly by numerical lifecycle carbon intensity (<em>gCO_2eq/MJ</em>).</p>
+<table><thead>
+<tr><th>Hydrogen Colour</th><th>Production Methodology</th><th>Approximate Carbon Intensity</th><th>Regulatory Compliance Status</th></tr>
+</thead><tbody>
+<tr><td><strong>Grey</strong></td><td>Steam Methane Reforming (SMR) of natural gas or coal gasification without emissions mitigation.</td><td><em>9\text{ to }12\text{ kg CO}_2 / \text{kg H}_2</em></td><td><strong>Non-Compliant.</strong> Deemed a high-carbon fossil fuel.</td></tr>
+<tr><td><strong>Blue</strong></td><td>Steam Methane Reforming (SMR) integrated with Carbon Capture and Storage (CCS) systems.</td><td><em>2\text{ to }4\text{ kg CO}_2 / \text{kg H}_2</em></td><td><strong>Transitional.</strong> Permitted under select low-carbon pathways but fails zero-carbon criteria.</td></tr>
+<tr><td><strong>Green</strong></td><td>Water electrolysis (<em>2H_2O \rightarrow 2H_2 + O_2</em>) completely energized by certified renewable power (solar/wind).</td><td><em>&lt;1\text{ kg CO}_2 / \text{kg H}_2</em> (WtW)</td><td><strong>Fully Compliant.</strong> Meets IMO zero-carbon definitions and EU RFNBO criteria.</td></tr>
+<tr><td><strong>Red / Pink</strong></td><td>Water electrolysis driven by electricity and thermal energy sourced from nuclear power stations.</td><td><em>\sim 0\text{ Operational Baseline}</em></td><td><strong>Compliant Alternative.</strong> Recognized as a low-carbon non-biological fuel.</td></tr>
+<tr><td><strong>Turquoise</strong></td><td>Thermal splitting of methane via methane pyrolysis, yielding gaseous hydrogen and solid carbon black.</td><td>Dependent on thermal power source</td><td><strong>Emerging.</strong> Currently under commercial scale-up review.</td></tr>
+</tbody></table>
+<h5>Relevance to Maritime Decarbonisation</h5>
+<ul>
+<li><strong>E-Fuel Feedstock:</strong> Pure hydrogen gas is difficult to store onboard at scale due to its volumetric limits. Green hydrogen&#x27;s primary maritime value is as a foundational feedstock. It is synthesized with captured <em>CO_2</em> to form e-methanol, or with <em>N_2</em> to form e-ammonia, enabling practical deep-sea fuel handling.</li>
+<li><strong>FuelEU Maritime Alignment:</strong> EU Regulation 2023/1805 sets a declining greenhouse gas intensity pathway for energy used on board ships. Grey hydrogen derivative fuels are restricted due to their high emissions profile. Blue hydrogen derivatives are penalized for residual upstream fugitive methane emissions and incomplete carbon capture rates (~85–95%). Only Green hydrogen derivatives fully leverage the compliance benefits of the regulation.</li>
+</ul>
+<h5>Engineering and Onboard Considerations</h5>
+<ul>
+<li><strong>Direct Cryogenic Hydrogen Challenges:</strong> To store hydrogen as a liquid onboard, it must be cooled to <em>-253^\circ\text{C}</em> at atmospheric pressure. Liquid hydrogen exhibits a volumetric energy density of ~2,400 kcal/kg, requiring roughly 4.2x the physical tank space of conventional HFO.</li>
+<li><strong>Boil-Off Gas (BOG) Management:</strong> Cryogenic liquid storage results in continuous heat leakage and boil-off. Onboard containment systems must feature specialized BOG reliquefaction plants or deploy dual-fuel auxiliary boilers/fuel cells to consume the expanding gas safely.</li>
+<li><strong>Flammability Hazards:</strong> Hydrogen possesses an extremely wide flammability range in air (4% to 75% by volume, compared to methane&#x27;s 5% to 15%). It features a low ignition energy requirement, mandating explosion-proof Ex-d or Ex-i electrical configurations across all processing or ventilation zones under the IGF and IGC codes.</li>
+</ul>
+<p>---</p>
+<h5>EXTRA SUB-BLOCK: Comparative Physical Profiles</h5>
+<ul>
+<li><strong>Liquid Hydrogen Storage Temperature:</strong> <em>-253^\circ\text{C}</em> (Cryogenic containment)</li>
+<li><strong>Hydrogen Flammability Limits:</strong> 4% – 75% volume in air (High risk)</li>
+<li><strong>Grey Hydrogen Footprint:</strong> <em>\sim 10\text{ kg CO}_2\text{ per kg H}_2</em> generated</li>
+<li><strong>Green Hydrogen Footprint:</strong> <em>&lt;1\text{ kg CO}_2\text{ per kg H}_2</em> generated (Lifecycle)</li>
+</ul>
+<p>---</p>
+<h5>REG-BOX</h5>
+<ol>
+<li><strong>IMO Res MEPC.377(80)</strong> — 2023 Strategy on Reduction of GHG Emissions from Ships.</li>
+<li><strong>EU Reg 2023/1805 (FuelEU Maritime)</strong> — Well-to-Wake Greenhouse Gas Intensity standards.</li>
+<li><strong>IMO MEPC.1/Circ.905</strong> — Lifecycle GHG Guidelines for alternative marine fuels.</li>
+<li><strong>IGC Code (MSC.370(93))</strong> — Regulations governing bulk liquefied gas carriers and hydrogen transport.</li>
+<li><strong>ISO/TC 197</strong> — International standards for hydrogen fuel quality and processing infrastructure.</li>
+</ol>
+<p>---</p>
+          
+          <div class="ce-tip"><strong>CE Oral Tip (Kochi MMD):</strong> <em>Rajappan will try to catch you off guard by asking: &quot;Which specific color of hydrogen does MARPOL explicitly define in Annex VI?&quot;</em> Your immediate answer must be: &quot;None, Sir.&quot; Explain that the color taxonomy is an industry convention from the IEA/IRENA. MARPOL Annex VI and the 2023 GHG Strategy evaluate alternative fuels using explicit, numerical lifecycle Well-to-Wake GHG intensity values (<em>gCO_2eq/MJ</em>), not color names.</div>
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5><p>As a Second Engineer, understanding the hydrogen source explains why e-fuels command high market prices. Green hydrogen requires significant capital expenditure for electrolyser infrastructure and consumes large amounts of renewable grid power. If your vessel transitions to alternative e-fuels, your fuel verification records and bunker delivery notes (BDN) must confirm compliance using statutory carbon factor values rather than simple product descriptions.</p><h5>Trap Questions</h5><p><em>&quot;Does blue hydrogen comply with the FuelEU Maritime RFNBO sub-target?&quot;</em> No, Examiner. Blue hydrogen is produced from fossil natural gas combined with carbon capture. The FuelEU sub-target specifically mandates Renewable Fuels of Non-Biological Origin (RFNBO), which requires a renewable power generation source (Green Hydrogen). Blue hydrogen can help reduce baseline intensity, but it does not count toward the RFNBO quota.</p><h5>Common CE Failures</h5><p>Candidates frequently misclassify blue hydrogen as a zero-carbon fuel, ignoring the emissions from upstream fossil extraction and incomplete carbon capture. Many also struggle to identify the correct regulatory framework, assuming the color codes are explicitly written into MARPOL annexes.</p><h5>Casualty Link</h5><p>While commercial liquid hydrogen propulsion remains limited, structural failures in high-pressure hydrogen storage cylinders on land have highlighted issues with hydrogen embrittlement. Atomic hydrogen can diffuse into the crystalline matrix of high-tensile steels, causing sudden cracking in non-optimized piping.</p><h5>Examiner Chain</h5><p>Rajappan typically builds up this topic sequentially: Differentiate hydrogen production types <em>\rightarrow</em> Detail the physical storage parameters of liquid hydrogen <em>\rightarrow</em> Explain the lifecycle verification process under the 2023 IMO GHG Strategy.</p><h5>On My Vessel</h5><p>Maersk A/S focuses its alternative fuel strategy on green e-methanol rather than direct hydrogen storage. The company secures long-term supply contracts for e-methanol, verifying that the fuel is synthesized from certified green hydrogen sources to ensure compliance with international decarbonisation targets.</p>
+<p>---</p>
+<p>Correction footer format: QB7_B · Q2 · v1.0</p></div></details>
+      </div>
+      <div class="q-footer">
+        <span>Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_B, Q2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB7_B · Q2 · v1.0</span>
+      </div>
+    </div>
+  </div><!-- /#q-feed -->
+</div><!-- /.main-layout -->
+<div id="no-results"><p>No questions match your search/filter.</p></div>
+<div class="page-footer">
+  <p>Marine Intelligence Weekly · MEO Class 1 Question Bank · QB7_B — GHG, Alternative Fuels &amp; Hydrogen</p>
+  <p>Compiled by Nixon Antony, Second Engineer, Maersk A/S · <a href="https://marineintelligenceweekly.com/meoclass1/">Back to MEO Class 1 Hub</a></p>
+  <p class="disclaimer">Private study aid for MEO Class 1 oral examination preparation at Kochi MMD. Verify all regulatory references against current sources. Corrections: contactus@marineintelligenceweekly.com</p>
+</div>
+<script>
+function toggleCard(h){h.closest('.q-card').classList.toggle('open');}
+let activeTag='all';
+function filterTag(t,b){activeTag=t;document.querySelectorAll('.filter-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');applyFilters();}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();const cards=document.querySelectorAll('.q-card');let v=0;cards.forEach(c=>{const t=(c.dataset.tags||'').toLowerCase();const s=c.innerText.toLowerCase();const show=(activeTag==='all'||t.includes(activeTag))&&(!q||s.includes(q));c.style.display=show?'':'none';if(show)v++;});document.getElementById('q-count-label').textContent='Showing '+v+' of '+cards.length;document.getElementById('no-results').style.display=v===0?'block':'none';}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){const id=x.target.id;document.querySelectorAll('.toc-link').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});}})},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+</script>
+<script>document.addEventListener('contextmenu',e=>e.preventDefault());document.addEventListener('copy',e=>e.preventDefault());document.addEventListener('selectstart',e=>e.preventDefault());</script>
+</body>
+</html>
