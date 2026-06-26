@@ -180,8 +180,8 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-body">
-        <div class="step-title">Fill the form below with your payment screenshot</div>
-        <div class="step-desc">Use the Typeform below — paste your UPI transaction ID and attach a screenshot. Takes under a minute.</div>
+        <div class="step-title">Fill the form below with your payment details</div>
+        <div class="step-desc">Submit your name, email, UPI transaction ID, and vessel/rank details. Takes under a minute.</div>
       </div>
     </div>
     <div class="step">
@@ -235,12 +235,56 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
   <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--grey-text);margin-bottom:14px;display:flex;align-items:center;gap:10px;">Step 2 — confirm your payment <span style="flex:1;height:1px;background:var(--grey-border);display:inline-block;"></span></div>
   <div class="tf-panel">
     <div class="tf-header">
-      <h3>Send payment confirmation</h3>
-      <p>After paying, fill this form — include your UPI transaction ID and the email to send your access link to.</p>
+      <h3>Step 2 — Confirm your payment</h3>
+      <p>Fill in your details so Nixon can verify and send your access link within 24 hours.</p>
     </div>
     <div class="tf-body">
-      <div data-tf-live="01KW20V7H1P9PNGXBN1FXFWEFZ"></div>
-      <script src="//embed.typeform.com/next/embed.js"></script>
+      <form action="https://formspree.io/f/xrewqkrw" method="POST" style="display:flex;flex-direction:column;gap:14px;">
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <label style="font-size:12px;font-weight:700;color:var(--navy);">Full Name *</label>
+          <input type="text" name="name" required placeholder="e.g. Nixon Antony"
+            style="padding:10px 14px;border:1px solid var(--grey-border);border-radius:7px;font-size:14px;color:var(--ink);outline:none;font-family:inherit;">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <label style="font-size:12px;font-weight:700;color:var(--navy);">Email Address * <span style="font-weight:400;color:var(--grey-text)">(access link will be sent here)</span></label>
+          <input type="email" name="email" required placeholder="you@example.com"
+            style="padding:10px 14px;border:1px solid var(--grey-border);border-radius:7px;font-size:14px;color:var(--ink);outline:none;font-family:inherit;">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <label style="font-size:12px;font-weight:700;color:var(--navy);">Rank / Designation *</label>
+            <input type="text" name="rank" required placeholder="e.g. 2/E, 3/E, CE"
+              style="padding:10px 14px;border:1px solid var(--grey-border);border-radius:7px;font-size:14px;color:var(--ink);outline:none;font-family:inherit;">
+          </div>
+          <div style="display:flex;flex-direction:column;gap:5px;">
+            <label style="font-size:12px;font-weight:700;color:var(--navy);">Vessel / Company</label>
+            <input type="text" name="vessel" placeholder="e.g. Maersk / Container"
+              style="padding:10px 14px;border:1px solid var(--grey-border);border-radius:7px;font-size:14px;color:var(--ink);outline:none;font-family:inherit;">
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <label style="font-size:12px;font-weight:700;color:var(--navy);">UPI Transaction ID * <span style="font-weight:400;color:var(--grey-text)">(from your UPI app payment confirmation)</span></label>
+          <input type="text" name="upi_transaction_id" required placeholder="e.g. 416523789012"
+            style="padding:10px 14px;border:1px solid var(--grey-border);border-radius:7px;font-size:14px;color:var(--ink);outline:none;font-family:inherit;font-family:monospace;">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <label style="font-size:12px;font-weight:700;color:var(--navy);">Amount Paid *</label>
+          <input type="text" name="amount" required value="₹499"
+            style="padding:10px 14px;border:1px solid var(--grey-border);border-radius:7px;font-size:14px;color:var(--ink);outline:none;font-family:inherit;">
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px;">
+          <label style="font-size:12px;font-weight:700;color:var(--navy);">Any message for Nixon</label>
+          <textarea name="message" rows="2" placeholder="Optional — exam date, specific QBs you need first, etc."
+            style="padding:10px 14px;border:1px solid var(--grey-border);border-radius:7px;font-size:14px;color:var(--ink);outline:none;font-family:inherit;resize:vertical;"></textarea>
+        </div>
+        <input type="hidden" name="_subject" value="MEO QB Payment — ₹499 Access Request">
+        <input type="hidden" name="_next" value="https://marineintelligenceweekly.com/SQ/thanks.html">
+        <button type="submit"
+          style="background:var(--teal);color:#fff;border:none;padding:13px 24px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:background .2s;font-family:inherit;">
+          Submit Payment Confirmation →
+        </button>
+        <p style="font-size:11px;color:var(--grey-text);text-align:center;margin-top:4px;">Nixon will verify your UPI transaction and email your access link within 24 hours.</p>
+      </form>
     </div>
   </div>
 
