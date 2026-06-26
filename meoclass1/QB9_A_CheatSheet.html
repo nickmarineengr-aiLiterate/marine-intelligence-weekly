@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>QB9_A Visual CheatSheet | MIW MEO Class 1</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--td:#0f766e;--tl:#ccfbf1;--navy:#0f172a;--orange:#f97316;--ol:#fff7ed;--grey:#f1f5f9;--ink:#0f172a;--border:#e2e8f0;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0fdf9;color:var(--ink);-webkit-user-select:none;user-select:none;font-size:13px;}
+.topbar{background:var(--navy);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 20px;position:sticky;top:0;z-index:100;}
+.logo{width:26px;height:26px;border-radius:4px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:10px;color:#fff;}
+.site{font-weight:600;flex:1;font-size:13px;}
+.topbar nav a{color:#cbd5e1;font-size:11px;margin-left:14px;text-decoration:none;}
+.cs-hdr{background:var(--td);color:#fff;padding:18px 20px;}
+.cs-badge{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:rgba(255,255,255,.15);padding:2px 9px;border-radius:8px;display:inline-block;margin-bottom:7px;}
+.cs-hdr h1{font-size:18px;font-weight:800;margin-bottom:3px;}
+.cs-hdr p{font-size:11.5px;opacity:.8;}
+.cs-hdr .legend{font-size:10px;opacity:.6;margin-top:8px;}
+.controls{background:#fff;border-bottom:1px solid var(--border);padding:9px 20px;display:flex;align-items:center;gap:8px;position:sticky;top:46px;z-index:90;}
+#cs-search{flex:1;max-width:260px;padding:6px 11px;border:1px solid var(--border);border-radius:6px;font-size:12px;outline:none;}
+#cs-search:focus{border-color:var(--teal);}
+.cs-cnt{font-size:11px;color:#64748b;font-weight:600;}
+.print-btn{background:var(--navy);color:#fff;border:none;padding:6px 13px;border-radius:6px;font-size:11px;cursor:pointer;margin-left:auto;}
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;padding:14px 18px;max-width:1200px;margin:0 auto;}
+@media(max-width:640px){.cs-grid{grid-template-columns:1fr;padding:10px;}}
+.cs-card{background:#fff;border:1px solid var(--border);border-radius:9px;overflow:hidden;break-inside:avoid;}
+.cs-header{background:var(--navy);padding:9px 12px;display:flex;align-items:flex-start;gap:8px;}
+.cs-qnum{background:var(--teal);color:#fff;width:24px;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.cs-htitle{flex:1;min-width:0;}
+.cs-qtitle{color:#fff;font-size:12.5px;font-weight:600;line-height:1.35;margin-bottom:4px;}
+.cs-tags{display:flex;flex-wrap:wrap;gap:3px;}
+.cs-tag{font-size:8px;font-weight:700;text-transform:uppercase;padding:1px 5px;border-radius:6px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.cs-tag-solas{background:#1e3a8a;color:#bfdbfe;}
+.cs-tag-marpol{background:#78350f;color:#fde68a;}
+.cs-tag-iacs,.cs-tag-isps{background:#4c1d95;color:#ddd6fe;}
+.cs-tag-stability{background:#831843;color:#fbcfe8;}
+.cs-tag-ism{background:#713f12;color:#fde68a;}
+.cs-tag-fire{background:#7f1d1d;color:#fecaca;}
+.cs-tag-ghg{background:#14532d;color:#bbf7d0;}
+.cs-tag-management{background:#064e3b;color:#a7f3d0;}
+.cs-tag-machinery,.cs-tag-mlc,.cs-tag-stcw,.cs-tag-survey{background:#0c4a6e;color:#bae6fd;}
+.cs-body{padding:9px 12px;display:flex;flex-direction:column;gap:7px;}
+.cs-row{display:flex;flex-direction:column;gap:3px;}
+.cs-label{font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#94a3b8;}
+/* Keyword cloud */
+.kw-cloud{display:flex;flex-wrap:wrap;gap:4px;}
+.kw{background:#eff6ff;color:#1d4ed8;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;border:1px solid #bfdbfe;}
+/* Step chain */
+.step-chain{display:flex;flex-wrap:wrap;align-items:center;gap:0;}
+.step-node{background:var(--tl);border:1px solid var(--teal);color:var(--td);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;}
+.step-node:not(:last-child)::after{content:" →";color:#94a3b8;font-weight:400;margin-right:2px;}
+/* Memory link */
+.mem-link{font-size:12px;color:#1e293b;background:#fafafa;border-left:3px solid #8b5cf6;padding:5px 9px;border-radius:0 4px 4px 0;line-height:1.4;font-style:italic;}
+/* Gotcha */
+.gotcha{font-size:11.5px;color:#7f1d1d;background:#fff1f2;border-left:3px solid #f43f5e;padding:4px 9px;border-radius:0 4px 4px 0;}
+/* Numbers */
+.nums-row{display:flex;flex-wrap:wrap;gap:4px;}
+.num-pill{background:#0f172a;color:#94a3b8;font-size:10px;padding:2px 7px;border-radius:4px;}
+.num-pill::before{color:#f97316;}
+#no-res{display:none;text-align:center;padding:40px;color:#64748b;}
+.pf{background:var(--navy);color:#94a3b8;padding:16px;text-align:center;font-size:11px;}
+.pf a{color:var(--teal);}
+@media print{
+  body{background:#fff;}
+  .topbar,.controls{display:none;}
+  .cs-grid{columns:2;display:block;gap:10px;padding:0;}
+  .cs-card{margin-bottom:10px;page-break-inside:avoid;}
+  .cs-header{background:#1e293b!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .kw{background:#eff6ff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+<div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:.025;">
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="wm" x="0" y="0" width="280" height="160" patternUnits="userSpaceOnUse" patternTransform="rotate(-30)"><text x="0" y="40" font-size="12" fill="#0f172a" font-family="monospace">marineintelligenceweekly.com · CONFIDENTIAL</text></pattern></defs><rect width="100%" height="100%" fill="url(#wm)"/></svg></div>
+<div class="topbar"><div class="logo">MIW</div><div class="site">Marine Intelligence Weekly</div><nav><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1 Hub</a></nav></div>
+<div class="cs-hdr">
+  <div class="cs-badge">QB9_A · Visual CheatSheet</div>
+  <h1>Commercial Law &amp; Maritime Liability — Part A</h1>
+  <p>9 cards · P&I · CLC/LLMC limits · GA procedure · salvage LOF</p>
+  <div class="legend">🔑 Keywords — pick 3 and say the chain aloud &nbsp;·&nbsp; 🔗 Sequence — trace the arrow before answering &nbsp;·&nbsp; 🧠 Memory Link — vivid image or story &nbsp;·&nbsp; ⚠ Gotcha — the line that fails candidates &nbsp;·&nbsp; 🔢 Numbers &amp; Codes — bare minimum to cite</div>
+</div>
+<div class="controls">
+  <input type="text" id="cs-search" placeholder="Search…" oninput="csFilter()">
+  <span class="cs-cnt" id="cs-cnt">Showing 9 of 9</span>
+  <button class="print-btn" onclick="window.print()">🖨 Print</button>
+</div>
+<div class="cs-grid">
+      <div class="cs-card" id="cs-q1">
+        <div class="cs-header">
+          <div class="cs-qnum">1</div>
+          <div class="cs-htitle">
+            <div class="cs-qtitle">What is P&amp;amp;I insurance? How does it differ from Hull and Machinery insurance and other marine insurance? What does it cover in a war risk area?</div>
+            <div class="cs-tags"><span class="cs-tag cs-tag-mlc">MLC</span><span class="cs-tag cs-tag-ism">ISM</span></div>
+          </div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-row"><div class="cs-label">🔑 Keywords</div><div class="kw-cloud"><span class="kw">What</span><span class="kw">P&amp;amp</span><span class="kw">Hull</span><span class="kw">Club</span><span class="kw">Liabilities</span><span class="kw">Covered</span></div></div>
+          <div class="cs-row"><div class="cs-label">🔗 Sequence</div><div class="step-chain"><span class="step-node">What is the structural difference betwee</span><span class="step-node">If you enter the Strait of Hormuz or Red</span><span class="step-node">If the crew refuses to enter the area du</span><span class="step-node">Pre-entry checklist execution for JWC li</span><span class="step-node">Ensuring the main propulsion and auxilia</span></div></div>
+          <div class="cs-row"><div class="cs-label">🧠 Memory Link</div><div class="mem-link">Nair \rightarrow Simon \rightarrow Senthil sequence:  
+ 
+ What is the structural difference between H&amp;amp;M and P&amp;amp;I insurance? 
+ If you enter the </div></div>
+          
+          <div class="cs-row"><div class="cs-label">🔢 Numbers &amp; Codes</div><div class="nums-row"><code class="num-pill">7 days</code></div></div>
+        </div>
+      </div>
+      <div class="cs-card" id="cs-q2">
+        <div class="cs-header">
+          <div class="cs-qnum">2</div>
+          <div class="cs-htitle">
+            <div class="cs-qtitle">CLC Convention — explain fully including limits. Bunker Convention — why is it needed despite CLC?</div>
+            <div class="cs-tags"><span class="cs-tag cs-tag-marpol">MARPOL</span><span class="cs-tag cs-tag-solas">SOLAS</span></div>
+          </div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-row"><div class="cs-label">🔑 Keywords</div><div class="kw-cloud"><span class="kw">Convention</span><span class="kw">Bunker</span><span class="kw">Civil</span><span class="kw">Liability</span><span class="kw">Limitation</span></div></div>
+          <div class="cs-row"><div class="cs-label">🔗 Sequence</div><div class="step-chain"><span class="step-node">For a ship not exceeding 5,000 GT: Liabi</span><span class="step-node">For a ship exceeding 5,000 GT:</span><span class="step-node">Maximum Cap: The absolute upper limit of</span><span class="step-node">The P&amp;amp;I Club issues a</span><span class="step-node">Using this Blue Card, the Flag State adm</span></div></div>
+          <div class="cs-row"><div class="cs-label">🧠 Memory Link</div><div class="mem-link">Simon \rightarrow Rajappan sequence:  
+ 
+ Explain strict liability under CLC. What are the exemptions? 
+ Why do we need a Bunker Convention certificat</div></div>
+          
+          <div class="cs-row"><div class="cs-label">🔢 Numbers &amp; Codes</div><div class="nums-row"><code class="num-pill">000 GT</code><code class="num-pill">000 GT</code><code class="num-pill">000 GT</code><code class="num-pill">000 GT</code><code class="num-pill">000 GT</code></div></div>
+        </div>
+      </div>
+      <div class="cs-card" id="cs-q3">
+        <div class="cs-header">
+          <div class="cs-qnum">3</div>
+          <div class="cs-htitle">
+            <div class="cs-qtitle">Fund Convention — explanation and why introduced. HNS Convention — for whom, in force or not, HNS Protocol. LLMC — limits, who pays within and after l</div>
+            <div class="cs-tags"><span class="cs-tag cs-tag-marpol">MARPOL</span><span class="cs-tag cs-tag-solas">SOLAS</span></div>
+          </div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-row"><div class="cs-label">🔑 Keywords</div><div class="kw-cloud"><span class="kw">Fund</span><span class="kw">Convention</span><span class="kw">Protocol</span></div></div>
+          <div class="cs-row"><div class="cs-label">🔗 Sequence</div><div class="step-chain"><span class="step-node">The pollution damage exceeds the shipown</span><span class="step-node">The shipowner is financially insolvent o</span><span class="step-node">What is the second tier of oil pollution</span><span class="step-node">Is the HNS Convention currently active? </span><span class="step-node">Under what precise legal condition does </span></div></div>
+          <div class="cs-row"><div class="cs-label">🧠 Memory Link</div><div class="mem-link">Simon \rightarrow Nair sequence:  
+ 
+ What is the second tier of oil pollution compensation, and who pays into it? 
+ Is the HNS Convention currently a</div></div>
+          
+          <div class="cs-row"><div class="cs-label">🔢 Numbers &amp; Codes</div><div class="nums-row"><code class="num-pill">000 GT</code></div></div>
+        </div>
+      </div>
+      <div class="cs-card" id="cs-q4">
+        <div class="cs-header">
+          <div class="cs-qnum">4</div>
+          <div class="cs-htitle">
+            <div class="cs-qtitle">General Average — explanation and procedure. What is the Sue and Labour clause? What is subrogation? What are the ITC (Institute Time Clauses) and key</div>
+            <div class="cs-tags"><span class="cs-tag cs-tag-survey">SURVEY</span></div>
+          </div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-row"><div class="cs-label">🔑 Keywords</div><div class="kw-cloud"><span class="kw">General</span><span class="kw">Average</span><span class="kw">What</span><span class="kw">Labour</span><span class="kw">Clause</span></div></div>
+          <div class="cs-row"><div class="cs-label">🔗 Sequence</div><div class="step-chain"><span class="step-node">The Master encounters a crisis (e.g., se</span><span class="step-node">The shipowner formally declares General </span><span class="step-node">A</span><span class="step-node">The Adjuster calculates the total value </span><span class="step-node">Define the exact criteria for a General </span></div></div>
+          <div class="cs-row"><div class="cs-label">🧠 Memory Link</div><div class="mem-link">Nair \rightarrow Rajappan \rightarrow Simon sequence:  
+ 
+ Define the exact criteria for a General Average act under the York-Antwerp Rules. 
+ What is</div></div>
+          
+          
+        </div>
+      </div>
+      <div class="cs-card" id="cs-q5">
+        <div class="cs-header">
+          <div class="cs-qnum">5</div>
+          <div class="cs-htitle">
+            <div class="cs-qtitle">Admiralty law — what is it? What is a maritime lien? How is the CE related to the Admiralty Act?</div>
+            <div class="cs-tags"><span class="cs-tag cs-tag-survey">SURVEY</span><span class="cs-tag cs-tag-ism">ISM</span></div>
+          </div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-row"><div class="cs-label">🔑 Keywords</div><div class="kw-cloud"><span class="kw">Admiralty</span><span class="kw">What</span><span class="kw">India</span><span class="kw">Maritime</span><span class="kw">Liens</span></div></div>
+          <div class="cs-row"><div class="cs-label">🔗 Sequence</div><div class="step-chain"><span class="step-node">Claims for wages and other sums due to t</span><span class="step-node">Claims in respect of loss of life or per</span><span class="step-node">Claims for reward for the</span><span class="step-node">Claims for port, canal, and other waterw</span><span class="step-node">Claims based on tort arising out of phys</span></div></div>
+          <div class="cs-row"><div class="cs-label">🧠 Memory Link</div><div class="mem-link">Nair \rightarrow Simon sequence:  
+ 
+ Which courts in India can issue an arrest warrant against a merchant vessel? 
+ What makes a maritime lien unique</div></div>
+          
+          
+        </div>
+      </div>
+      <div class="cs-card" id="cs-q6">
+        <div class="cs-header">
+          <div class="cs-qnum">6</div>
+          <div class="cs-htitle">
+            <div class="cs-qtitle">Salvage — types, procedure, LOF, SCOPIC. What is the Wreck Removal Convention?</div>
+            <div class="cs-tags"><span class="cs-tag cs-tag-survey">SURVEY</span></div>
+          </div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-row"><div class="cs-label">🔑 Keywords</div><div class="kw-cloud"><span class="kw">Salvage</span><span class="kw">SCOPIC</span><span class="kw">What</span><span class="kw">Types</span><span class="kw">Lloyd</span><span class="kw">Open</span></div></div>
+          <div class="cs-row"><div class="cs-label">🔗 Sequence</div><div class="step-chain"><span class="step-node">What does the phrase &amp;quot;No Cure, No P</span><span class="step-node">Why was the SCOPIC clause introduced, an</span><span class="step-node">What is the minimum tonnage requirement </span><span class="step-node">Verifying that emergency towing arrangem</span><span class="step-node">Maintaining clear, current fuel oil and </span></div></div>
+          <div class="cs-row"><div class="cs-label">🧠 Memory Link</div><div class="mem-link">Simon \rightarrow Rajappan sequence:  
+ 
+ What does the phrase &amp;quot;No Cure, No Pay&amp;quot; mean in a standard LOF contract? 
+ Why was the SCOPIC claus</div></div>
+          
+          <div class="cs-row"><div class="cs-label">🔢 Numbers &amp; Codes</div><div class="nums-row"><code class="num-pill">300 GT</code></div></div>
+        </div>
+      </div>
+      <div class="cs-card" id="cs-q7">
+        <div class="cs-header">
+          <div class="cs-qnum">7</div>
+          <div class="cs-htitle">
+            <div class="cs-qtitle">SUA Convention — details and new amendments. FAL Convention — explanation and effect on maritime security. London Convention — what does it cover? OPR</div>
+            <div class="cs-tags"><span class="cs-tag cs-tag-solas">SOLAS</span><span class="cs-tag cs-tag-isps">ISPS</span></div>
+          </div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-row"><div class="cs-label">🔑 Keywords</div><div class="kw-cloud"><span class="kw">Convention</span><span class="kw">London</span><span class="kw">Suppression</span><span class="kw">Facilitation</span></div></div>
+          <div class="cs-row"><div class="cs-label">🔗 Sequence</div><div class="step-chain"><span class="step-node">Criminalizes the maritime transport of W</span><span class="step-node">Introduced boarding procedures allowing </span><span class="step-node">FAL Form 1: General Declaration</span><span class="step-node">FAL Form 2: Cargo Declaration</span><span class="step-node">FAL Form 3: Ship’s Stores Declaration</span></div></div>
+          <div class="cs-row"><div class="cs-label">🧠 Memory Link</div><div class="mem-link">Nair \rightarrow Simon sequence:  
+ 
+ Name the 7 standard forms specified under the FAL convention. 
+ What structural changes did the 2005 SUA Protoco</div></div>
+          
+          <div class="cs-row"><div class="cs-label">🔢 Numbers &amp; Codes</div><div class="nums-row"><code class="num-pill">400 GT</code><code class="num-pill">400 GT</code><code class="num-pill">150 GT</code><code class="num-pill">400 GT</code></div></div>
+        </div>
+      </div>
+      <div class="cs-card" id="cs-q8">
+        <div class="cs-header">
+          <div class="cs-qnum">8</div>
+          <div class="cs-htitle">
+            <div class="cs-qtitle">UNCLOS — explain in detail. Rights denied in war risk area. Sovereign vs jurisdiction — difference. EEZ, Continental Shelf. What is hot pursuit — cond</div>
+            <div class="cs-tags"><span class="cs-tag cs-tag-solas">SOLAS</span></div>
+          </div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-row"><div class="cs-label">🔑 Keywords</div><div class="kw-cloud"><span class="kw">UNCLOS</span><span class="kw">Rights</span><span class="kw">Sovereign</span><span class="kw">Maritime</span><span class="kw">Sovereignty</span><span class="kw">Jurisdiction</span></div></div>
+          <div class="cs-row"><div class="cs-label">🔗 Sequence</div><div class="step-chain"><span class="step-node">Under Article 25, a coastal state can te</span><span class="step-node">When an area is declared a war zone, cus</span><span class="step-node">The pursuit must commence while the fore</span><span class="step-node">The pursuit must be initiated by a clear</span><span class="step-node">The pursuit must begin immediately after</span></div></div>
+          <div class="cs-row"><div class="cs-label">🧠 Memory Link</div><div class="mem-link">Nair \rightarrow Rajappan sequence:  
+ 
+ Differentiate clearly between Sovereignty and Sovereign Rights under UNCLOS. 
+ What are the precise operation</div></div>
+          
+          
+        </div>
+      </div>
+      <div class="cs-card" id="cs-q9">
+        <div class="cs-header">
+          <div class="cs-qnum">9</div>
+          <div class="cs-htitle">
+            <div class="cs-qtitle">Actions and precautions when your ship goes to a war risk area. What is vessel hardening? BMP5 measures. How do you motivate crew during a missile att</div>
+            <div class="cs-tags"><span class="cs-tag cs-tag-ism">ISM</span><span class="cs-tag cs-tag-isps">ISPS</span></div>
+          </div>
+        </div>
+        <div class="cs-body">
+          <div class="cs-row"><div class="cs-label">🔑 Keywords</div><div class="kw-cloud"><span class="kw">Actions</span><span class="kw">What</span><span class="kw">Transit</span><span class="kw">Vessel</span><span class="kw">Hardening</span></div></div>
+          <div class="cs-row"><div class="cs-label">🔗 Sequence</div><div class="step-chain"><span class="step-node">What are the key differences between ISP</span><span class="step-node">How do you physically harden a container</span><span class="step-node">Beyond standard auditing, how does the D</span><span class="step-node">The Chief Engineer coordinates with the </span><span class="step-node">Running dedicated emergency blackout and</span></div></div>
+          <div class="cs-row"><div class="cs-label">🧠 Memory Link</div><div class="mem-link">Nair \rightarrow Simon sequence:  
+ 
+ What are the key differences between ISPS Security Level 2 and Level 3? 
+ How do you physically harden a contain</div></div>
+          
+          <div class="cs-row"><div class="cs-label">🔢 Numbers &amp; Codes</div><div class="nums-row"><code class="num-pill">MSC.1/Circ.1606</code><code class="num-pill">MSC.1/Circ.1606</code></div></div>
+        </div>
+      </div></div>
+<div id="no-res">No cards match.</div>
+<div class="pf">QB9_A Visual CheatSheet · Marine Intelligence Weekly · MEO Class 1 · <a href="https://marineintelligenceweekly.com/meoclass1/">Hub</a></div>
+<script>
+function csFilter(){
+  const q=document.getElementById('cs-search').value.toLowerCase();
+  const cards=document.querySelectorAll('.cs-card');
+  let v=0;
+  cards.forEach(c=>{const s=!q||c.innerText.toLowerCase().includes(q);c.style.display=s?'':'none';if(s)v++;});
+  document.getElementById('cs-cnt').textContent='Showing '+v+' of '+cards.length;
+  document.getElementById('no-res').style.display=v===0&&q?'block':'none';
+}
+</script>
+<script>document.addEventListener('contextmenu',e=>e.preventDefault());document.addEventListener('copy',e=>e.preventDefault());document.addEventListener('selectstart',e=>e.preventDefault());</script>
+</body>
+</html>

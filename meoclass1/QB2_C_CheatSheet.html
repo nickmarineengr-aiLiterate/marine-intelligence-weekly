@@ -4,161 +4,166 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-<title>QB2_C CheatSheet — Fire Safety, LSA &amp; FSS Code — C | MIW MEO Class 1</title>
+<title>QB2_C Visual CheatSheet | MIW MEO Class 1</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
 <style>
-:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;}
+:root{--teal:#0d9488;--td:#0f766e;--tl:#ccfbf1;--navy:#0f172a;--orange:#f97316;--ol:#fff7ed;--grey:#f1f5f9;--ink:#0f172a;--border:#e2e8f0;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0fdf9;color:var(--ink);line-height:1.5;-webkit-user-select:none;user-select:none;}
-.topbar{background:var(--navy);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 20px;font-size:14px;position:sticky;top:0;z-index:100;}
-.topbar .logo{width:28px;height:28px;border-radius:5px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff;}
-.topbar .site{font-weight:600;flex:1;}
-.topbar nav a{color:#cbd5e1;font-size:12px;margin-left:16px;text-decoration:none;}
-.topbar nav a:hover{color:#fff;}
-.cs-header{background:var(--teal-dark);color:#fff;padding:22px 20px 18px;}
-.cs-badge{display:inline-block;background:rgba(255,255,255,.15);font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:10px;margin-bottom:8px;}
-.cs-header h1{font-size:20px;font-weight:800;margin-bottom:4px;}
-.cs-header p{font-size:12px;opacity:.8;}
-.cs-meta{font-size:11px;opacity:.6;margin-top:10px;}
-.controls{background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 20px;display:flex;align-items:center;gap:8px;position:sticky;top:48px;z-index:90;}
-#cs-search{flex:1;max-width:300px;padding:7px 12px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px;}
-#cs-search:focus{outline:none;border-color:var(--teal);}
-.cs-count{margin-left:auto;font-size:12px;color:var(--grey-text);font-weight:600;}
-.print-btn{background:var(--navy);color:#fff;border:none;padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;}
-.print-btn:hover{background:var(--teal-dark);}
-.cs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;padding:20px;max-width:1200px;margin:0 auto;}
-@media(max-width:700px){.cs-grid{grid-template-columns:1fr;}}
-.cs-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;overflow:hidden;}
-.cs-card-header{background:var(--navy);padding:12px 14px;display:flex;align-items:flex-start;gap:10px;}
-.cs-qnum{background:var(--teal);color:#fff;width:26px;height:26px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
-.cs-qtitle{color:#fff;font-size:13px;font-weight:600;flex:1;line-height:1.4;}
-.cs-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px;}
-.cs-tag{font-size:9px;font-weight:700;text-transform:uppercase;padding:1px 6px;border-radius:8px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);}
-.cs-tag-solas{background:#1e40af;color:#fff;}
-.cs-tag-marpol{background:#92400e;color:#fff;}
-.cs-tag-iacs{background:#5b21b6;color:#fff;}
-.cs-tag-stability{background:#9d174d;color:#fff;}
-.cs-tag-ism{background:#78350f;color:#fff;}
-.cs-tag-fire{background:#991b1b;color:#fff;}
-.cs-tag-ghg{background:#166534;color:#fff;}
-.cs-tag-management{background:#065f46;color:#fff;}
-.cs-tag-machinery{background:#1e40af;color:#fff;}
-.cs-tag-mlc{background:#9d174d;color:#fff;}
-.cs-tag-stcw{background:#9f1239;color:#fff;}
-.cs-body{padding:12px 14px;}
-.cs-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin-bottom:4px;margin-top:10px;}
-.cs-label:first-child{margin-top:0;}
-.cs-15s{font-size:13px;color:var(--ink);line-height:1.5;background:var(--teal-light);border-left:3px solid var(--teal);padding:8px 10px;border-radius:0 5px 5px 0;}
-.cs-regs{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;}
-.reg-pill{font-size:10px;background:var(--navy);color:#cbd5e1;padding:2px 8px;border-radius:4px;line-height:1.5;}
-.reg-pill strong{color:var(--orange);}
-.cs-tip{font-size:12px;color:#7c2d12;background:var(--orange-light);border-left:3px solid var(--orange);padding:8px 10px;border-radius:0 5px 5px 0;line-height:1.5;}
-.page-footer{background:var(--navy);color:#94a3b8;padding:20px;text-align:center;font-size:11px;}
-.page-footer a{color:var(--teal-light);}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0fdf9;color:var(--ink);-webkit-user-select:none;user-select:none;font-size:13px;}
+.topbar{background:var(--navy);color:#fff;display:flex;align-items:center;gap:12px;padding:10px 20px;position:sticky;top:0;z-index:100;}
+.logo{width:26px;height:26px;border-radius:4px;background:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:10px;color:#fff;}
+.site{font-weight:600;flex:1;font-size:13px;}
+.topbar nav a{color:#cbd5e1;font-size:11px;margin-left:14px;text-decoration:none;}
+.cs-hdr{background:var(--td);color:#fff;padding:18px 20px;}
+.cs-badge{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;background:rgba(255,255,255,.15);padding:2px 9px;border-radius:8px;display:inline-block;margin-bottom:7px;}
+.cs-hdr h1{font-size:18px;font-weight:800;margin-bottom:3px;}
+.cs-hdr p{font-size:11.5px;opacity:.8;}
+.cs-hdr .legend{font-size:10px;opacity:.6;margin-top:8px;}
+.controls{background:#fff;border-bottom:1px solid var(--border);padding:9px 20px;display:flex;align-items:center;gap:8px;position:sticky;top:46px;z-index:90;}
+#cs-search{flex:1;max-width:260px;padding:6px 11px;border:1px solid var(--border);border-radius:6px;font-size:12px;outline:none;}
+#cs-search:focus{border-color:var(--teal);}
+.cs-cnt{font-size:11px;color:#64748b;font-weight:600;}
+.print-btn{background:var(--navy);color:#fff;border:none;padding:6px 13px;border-radius:6px;font-size:11px;cursor:pointer;margin-left:auto;}
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;padding:14px 18px;max-width:1200px;margin:0 auto;}
+@media(max-width:640px){.cs-grid{grid-template-columns:1fr;padding:10px;}}
+.cs-card{background:#fff;border:1px solid var(--border);border-radius:9px;overflow:hidden;break-inside:avoid;}
+.cs-header{background:var(--navy);padding:9px 12px;display:flex;align-items:flex-start;gap:8px;}
+.cs-qnum{background:var(--teal);color:#fff;width:24px;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px;}
+.cs-htitle{flex:1;min-width:0;}
+.cs-qtitle{color:#fff;font-size:12.5px;font-weight:600;line-height:1.35;margin-bottom:4px;}
+.cs-tags{display:flex;flex-wrap:wrap;gap:3px;}
+.cs-tag{font-size:8px;font-weight:700;text-transform:uppercase;padding:1px 5px;border-radius:6px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.cs-tag-solas{background:#1e3a8a;color:#bfdbfe;}
+.cs-tag-marpol{background:#78350f;color:#fde68a;}
+.cs-tag-iacs,.cs-tag-isps{background:#4c1d95;color:#ddd6fe;}
+.cs-tag-stability{background:#831843;color:#fbcfe8;}
+.cs-tag-ism{background:#713f12;color:#fde68a;}
+.cs-tag-fire{background:#7f1d1d;color:#fecaca;}
+.cs-tag-ghg{background:#14532d;color:#bbf7d0;}
+.cs-tag-management{background:#064e3b;color:#a7f3d0;}
+.cs-tag-machinery,.cs-tag-mlc,.cs-tag-stcw,.cs-tag-survey{background:#0c4a6e;color:#bae6fd;}
+.cs-body{padding:9px 12px;display:flex;flex-direction:column;gap:7px;}
+.cs-row{display:flex;flex-direction:column;gap:3px;}
+.cs-label{font-size:8.5px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#94a3b8;}
+/* Keyword cloud */
+.kw-cloud{display:flex;flex-wrap:wrap;gap:4px;}
+.kw{background:#eff6ff;color:#1d4ed8;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;border:1px solid #bfdbfe;}
+/* Step chain */
+.step-chain{display:flex;flex-wrap:wrap;align-items:center;gap:0;}
+.step-node{background:var(--tl);border:1px solid var(--teal);color:var(--td);font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;}
+.step-node:not(:last-child)::after{content:" →";color:#94a3b8;font-weight:400;margin-right:2px;}
+/* Memory link */
+.mem-link{font-size:12px;color:#1e293b;background:#fafafa;border-left:3px solid #8b5cf6;padding:5px 9px;border-radius:0 4px 4px 0;line-height:1.4;font-style:italic;}
+/* Gotcha */
+.gotcha{font-size:11.5px;color:#7f1d1d;background:#fff1f2;border-left:3px solid #f43f5e;padding:4px 9px;border-radius:0 4px 4px 0;}
+/* Numbers */
+.nums-row{display:flex;flex-wrap:wrap;gap:4px;}
+.num-pill{background:#0f172a;color:#94a3b8;font-size:10px;padding:2px 7px;border-radius:4px;}
+.num-pill::before{color:#f97316;}
+#no-res{display:none;text-align:center;padding:40px;color:#64748b;}
+.pf{background:var(--navy);color:#94a3b8;padding:16px;text-align:center;font-size:11px;}
+.pf a{color:var(--teal);}
 @media print{
   body{background:#fff;}
-  .topbar,.controls,.page-footer{display:none;}
-  .cs-grid{display:block;}
-  .cs-card{page-break-inside:avoid;margin-bottom:12px;border:1px solid #ccc;}
-  .cs-card-header{background:#1e293b!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .topbar,.controls{display:none;}
+  .cs-grid{columns:2;display:block;gap:10px;padding:0;}
+  .cs-card{margin-bottom:10px;page-break-inside:avoid;}
+  .cs-header{background:#1e293b!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .kw{background:#eff6ff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
 }
 </style>
 </head>
 <body>
-<div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.03;"><svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="wm" x="0" y="0" width="300" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><text x="10" y="60" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">marineintelligenceweekly.com</text></pattern></defs><rect width="100%" height="100%" fill="url(#wm)"/></svg></div>
-<div class="topbar">
-  <div class="logo">MIW</div>
-  <div class="site">Marine Intelligence Weekly</div>
-  <nav>
-    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
-    <a href="https://marineintelligenceweekly.com/">Home</a>
-  </nav>
-</div>
-<div class="cs-header">
-  <div class="cs-badge">QB2_C · CheatSheet</div>
+<div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:.025;">
+<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="wm" x="0" y="0" width="280" height="160" patternUnits="userSpaceOnUse" patternTransform="rotate(-30)"><text x="0" y="40" font-size="12" fill="#0f172a" font-family="monospace">marineintelligenceweekly.com · CONFIDENTIAL</text></pattern></defs><rect width="100%" height="100%" fill="url(#wm)"/></svg></div>
+<div class="topbar"><div class="logo">MIW</div><div class="site">Marine Intelligence Weekly</div><nav><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1 Hub</a></nav></div>
+<div class="cs-hdr">
+  <div class="cs-badge">QB2_C · Visual CheatSheet</div>
   <h1>Fire Safety, LSA &amp; FSS Code — C</h1>
-  <p>4 cards: SOLAS Ch II-2 amendments MSC.520(106), undeclared DG fire, container fire unknown cargo, water mist lance/monitor</p>
-  <div class="cs-meta">Nixon Antony, 2/E, Maersk A/S · June 2026 · 4 cards</div>
+  <p>4 cards · MSC.520(106) · DG fire sequence · mist lance specs</p>
+  <div class="legend">🔑 Keywords — pick 3 and say the chain aloud &nbsp;·&nbsp; 🔗 Sequence — trace the arrow before answering &nbsp;·&nbsp; 🧠 Memory Link — vivid image or story &nbsp;·&nbsp; ⚠ Gotcha — the line that fails candidates &nbsp;·&nbsp; 🔢 Numbers &amp; Codes — bare minimum to cite</div>
 </div>
 <div class="controls">
-  <input type="text" id="cs-search" placeholder="Search cards..." oninput="csFilter()">
-  <span class="cs-count" id="cs-count">Showing 4 of 4</span>
-  <button class="print-btn" onclick="window.print()">🖨 Print / PDF</button>
+  <input type="text" id="cs-search" placeholder="Search…" oninput="csFilter()">
+  <span class="cs-cnt" id="cs-cnt">Showing 4 of 4</span>
+  <button class="print-btn" onclick="window.print()">🖨 Print</button>
 </div>
-<div class="cs-grid" id="cs-grid">
-
-      <div class="cs-card">
-        <div class="cs-card-header">
-          <span class="cs-qnum">1</span>
-          <div class="cs-qtitle">EDITORIAL CORRECTION:** MSC.520(106) covers SOLAS Ch II-2 fire safety for container ships (water mist lance, portable wa</div>
-          <div class="cs-tags"><span class="cs-tag cs-tag-fire">FIRE</span><span class="cs-tag cs-tag-solas">SOLAS</span><span class="cs-tag cs-tag-survey">SURVEY</span></div>
+<div class="cs-grid">
+      <div class="cs-card" id="cs-q1">
+        <div class="cs-header">
+          <div class="cs-qnum">1</div>
+          <div class="cs-htitle">
+            <div class="cs-qtitle">SOLAS Ch II-2 amendments — MSC.520(106) January 2026?</div>
+            <div class="cs-tags"><span class="cs-tag cs-tag-fire">FIRE</span><span class="cs-tag cs-tag-solas">SOLAS</span><span class="cs-tag cs-tag-survey">SURVEY</span></div>
+          </div>
         </div>
         <div class="cs-body">
-          <div class="cs-label">15-Second Answer</div>
-          <div class="cs-15s">The latest SOLAS Chapter II-2 amendments (primarily MSC.520(106) and ⚠CORRECTED: MSC.532(107) , entering into force on 1 January 2026 ) enforce strict fuel oil flashpoint compliance—requiring a supplier declaration and BDN flashpoint notation prior to bunkering—and establish a global ban on firefighting foams containing PFOS .</div>
-          <div class="cs-regs"><span class="reg-pill"><strong>Resolution MSC.520(106)</strong> Introduces pre-bunkering declarations and strict BDN flashpo…</span><span class="reg-pill"><strong>Resolution ⚠CORRECTED: MSC.532(107)</strong> Mandates the global ban and carriage prohibition of PFOS-bas…</span><span class="reg-pill"><strong>SOLAS Regulation II-2/4</strong> Regulates total probability of ignition by restricting fuel …</span><span class="reg-pill"><strong>IMO MSC.1/Circ.1290</strong> Defines unified interpretations for executing the &amp;quot;firs…</span></div>
-          <div class="cs-label">CE Oral Tip</div>
-          <div class="cs-tip">💡 Nair heavily targets the exact date and resolution number. Memorize Resolution MSC.520(106) in force 1 January 2026 . Open your response by stating: &amp;quot;Sir, the latest amendments under MSC.520(106) mandate a pre-bunkering flashpoint declaration from the supplier, shifting the technical verificati…</div>
+          <div class="cs-row"><div class="cs-label">🔑 Keywords</div><div class="kw-cloud"><span class="kw">SOLAS</span><span class="kw">January</span><span class="kw">Core</span><span class="kw">Technical</span><span class="kw">Fuel</span><span class="kw">Safety</span></div></div>
+          
+          <div class="cs-row"><div class="cs-label">🧠 Memory Link</div><div class="mem-link">Nair \rightarrow Simon \rightarrow Rajappan.  Nair tests the specific amendment dates and numbers (MSC.520(106)). Simon pivots to verify how low-flash</div></div>
+          
+          <div class="cs-row"><div class="cs-label">🔢 Numbers &amp; Codes</div><div class="nums-row"><code class="num-pill">60°</code><code class="num-pill">70°</code><code class="num-pill">60°</code><code class="num-pill">70°</code><code class="num-pill">60°</code><code class="num-pill">70°</code><code class="num-pill">MSC.520(106)</code><code class="num-pill">MSC.520(106)</code></div></div>
         </div>
       </div>
-      <div class="cs-card">
-        <div class="cs-card-header">
-          <span class="cs-qnum">2</span>
-          <div class="cs-qtitle">15-Second Answer (Elevator Pitch)**</div>
-          <div class="cs-tags"><span class="cs-tag cs-tag-fire">FIRE</span><span class="cs-tag cs-tag-solas">SOLAS</span><span class="cs-tag cs-tag-ism">ISM</span></div>
+      <div class="cs-card" id="cs-q2">
+        <div class="cs-header">
+          <div class="cs-qnum">2</div>
+          <div class="cs-htitle">
+            <div class="cs-qtitle">Undeclared DG fire — CE approach?</div>
+            <div class="cs-tags"><span class="cs-tag cs-tag-fire">FIRE</span><span class="cs-tag cs-tag-solas">SOLAS</span><span class="cs-tag cs-tag-ism">ISM</span></div>
+          </div>
         </div>
         <div class="cs-body">
-          <div class="cs-label">15-Second Answer</div>
-          <div class="cs-15s">Fighting an undeclared Dangerous Goods (DG) container fire requires assuming a worst-case scenario. Treat it as an explosive or toxic substance, utilize maximum boundary cooling from a safe distance, deploy protective gear, and reference the IMDG Emergency Schedule (EmS) guidelines to guide response tactics.</div>
-          <div class="cs-regs"><span class="reg-pill"><strong>IMDG Code Chapter 7.3</strong> Defines operational emergency schedules (EmS) for fire and s…</span><span class="reg-pill"><strong>SOLAS Regulation II-2/19</strong> Outlines structural and equipment carriage requirements for …</span><span class="reg-pill"><strong>IMO MSC.1/Circ.1618</strong> Establishes updated safety guidelines for minimizing risks f…</span><span class="reg-pill"><strong>ISM Code Section 8</strong> Mandates that the Safety Management System contains explicit…</span></div>
-          <div class="cs-label">CE Oral Tip</div>
-          <div class="cs-tip">💡 When Nair asks this question, emphasize the &amp;quot;Defensive Approach&amp;quot; . State clearly: &amp;quot;Sir, because the cargo is undeclared, I will establish a worst-case defensive posture. I will avoid opening the container or using internal water streams to prevent a dynamic chemical reaction, focusing…</div>
+          <div class="cs-row"><div class="cs-label">🔑 Keywords</div><div class="kw-cloud"><span class="kw">Undeclared</span><span class="kw">Operational</span><span class="kw">Tactical</span><span class="kw">Immediate</span><span class="kw">Safety</span></div></div>
+          
+          <div class="cs-row"><div class="cs-label">🧠 Memory Link</div><div class="mem-link">Nair \rightarrow Rajappan \rightarrow Simon.  Nair challenges the candidate on handling unknown container hazards. Rajappan evaluates compliance with </div></div>
+          
+          <div class="cs-row"><div class="cs-label">🔢 Numbers &amp; Codes</div><div class="nums-row"><code class="num-pill">MSC.1/Circ.1618</code></div></div>
         </div>
       </div>
-      <div class="cs-card">
-        <div class="cs-card-header">
-          <span class="cs-qnum">3</span>
-          <div class="cs-qtitle">15-Second Answer (Elevator Pitch)**</div>
-          <div class="cs-tags"><span class="cs-tag cs-tag-fire">FIRE</span><span class="cs-tag cs-tag-solas">SOLAS</span><span class="cs-tag cs-tag-ism">ISM</span></div>
+      <div class="cs-card" id="cs-q3">
+        <div class="cs-header">
+          <div class="cs-qnum">3</div>
+          <div class="cs-htitle">
+            <div class="cs-qtitle">Container fire, unknown cargo — how to fight it?</div>
+            <div class="cs-tags"><span class="cs-tag cs-tag-fire">FIRE</span><span class="cs-tag cs-tag-solas">SOLAS</span><span class="cs-tag cs-tag-ism">ISM</span></div>
+          </div>
         </div>
         <div class="cs-body">
-          <div class="cs-label">15-Second Answer</div>
-          <div class="cs-15s">For a container fire with unknown cargo, sound the general alarm, muster the crew, and isolate cargo hold ventilation. Deploy unmanned portable water monitors from an upwind position for heavy boundary cooling, and do not open the container doors or inject water blindly to avoid triggering a backdraft or violent chemical reaction.</div>
-          <div class="cs-regs"><span class="reg-pill"><strong>SOLAS Regulation II-2/10.7</strong> Mandates fire extinguishing arrangements and equipment for c…</span><span class="reg-pill"><strong>IMO MSC.1/Circ.1618</strong> Provides structural and operational guidance for container s…</span><span class="reg-pill"><strong>FSS Code Chapter 5</strong> Establishes engineering specifications for fixed gas fire-ex…</span><span class="reg-pill"><strong>ISM Code Section 8</strong> Dictates mandatory shipboard emergency preparedness and regu…</span></div>
-          <div class="cs-label">CE Oral Tip</div>
-          <div class="cs-tip">💡 When Nair asks this question, explicitly state: &amp;quot;I will treat the situation defensively, utilize unmanned monitors from upwind for boundary cooling, and ensure that the container doors are kept closed to prevent an oxygen-fed backdraft or explosion.&amp;quot; This response highlights a focus on ris…</div>
+          <div class="cs-row"><div class="cs-label">🔑 Keywords</div><div class="kw-cloud"><span class="kw">Container</span><span class="kw">Systematic</span><span class="kw">Firefighting</span><span class="kw">Command</span><span class="kw">Control</span></div></div>
+          
+          <div class="cs-row"><div class="cs-label">🧠 Memory Link</div><div class="mem-link">Nair \rightarrow Simon \rightarrow Senthil.  Nair tests the container firefighting approach and safety precautions. Simon pivots to verify how free su</div></div>
+          
+          <div class="cs-row"><div class="cs-label">🔢 Numbers &amp; Codes</div><div class="nums-row"><code class="num-pill">MSC.1/Circ.1618</code></div></div>
         </div>
       </div>
-      <div class="cs-card">
-        <div class="cs-card-header">
-          <span class="cs-qnum">4</span>
-          <div class="cs-qtitle">15-Second Answer (Elevator Pitch)**</div>
-          <div class="cs-tags"><span class="cs-tag cs-tag-fire">FIRE</span><span class="cs-tag cs-tag-solas">SOLAS</span></div>
+      <div class="cs-card" id="cs-q4">
+        <div class="cs-header">
+          <div class="cs-qnum">4</div>
+          <div class="cs-htitle">
+            <div class="cs-qtitle">Water mist lance and portable water monitor?</div>
+            <div class="cs-tags"><span class="cs-tag cs-tag-fire">FIRE</span><span class="cs-tag cs-tag-solas">SOLAS</span></div>
+          </div>
         </div>
         <div class="cs-body">
-          <div class="cs-label">15-Second Answer</div>
-          <div class="cs-15s">A water mist lance is a specialized tool that penetrates a container&amp;#x27;s wall to discharge a cooling mist inside. Portable water monitors are deck-mounted devices that provide high-capacity boundary cooling. Both are mandated by SOLAS Regulation II-2/10.7.3.1 for container ships to manage deck cargo fires.</div>
-          <div class="cs-regs"><span class="reg-pill"><strong>SOLAS Reg II-2/10.7.3.1</strong> Mandates portable water monitors and water mist lances for c…</span><span class="reg-pill"><strong>Resolution MSC.520(106)</strong> Reflects updated fire safety standards for open-deck cargo a…</span><span class="reg-pill"><strong>SOLAS Reg II-2/10.2</strong> Regulates the sizing, design pressure, and piping parameters…</span><span class="reg-pill"><strong>ISM Code Section 10</strong> Requires systematic testing and maintenance of all critical …</span></div>
-          <div class="cs-label">CE Oral Tip</div>
-          <div class="cs-tip">💡 When Nair asks about numbers, state clearly: &amp;quot;Under SOLAS II-2/10.7.3.1, a container ship must carry at least two portable water monitors, each capable of discharging 400 L/min, and one water mist lance to provide internal container cooling through a drilled borehole.&amp;quot; Presenting the exact…</div>
+          <div class="cs-row"><div class="cs-label">🔑 Keywords</div><div class="kw-cloud"><span class="kw">Water</span><span class="kw">Engineering</span><span class="kw">Construction</span><span class="kw">Mist</span></div></div>
+          
+          <div class="cs-row"><div class="cs-label">🧠 Memory Link</div><div class="mem-link">Nair \rightarrow Simon \rightarrow Senthil.  Nair tests the specific flow rates, drilling protocols, and construction requirements. Simon asks about t</div></div>
+          
+          <div class="cs-row"><div class="cs-label">🔢 Numbers &amp; Codes</div><div class="nums-row"><code class="num-pill">400 L/min</code><code class="num-pill">800 L/min</code><code class="num-pill">400 L/min</code><code class="num-pill">800 L/min</code><code class="num-pill">400 L/min</code><code class="num-pill">MSC.520(106)</code><code class="num-pill">MSC.520(106)</code></div></div>
         </div>
-      </div>
-</div>
-<div class="page-footer">
-  QB2_C CheatSheet · Marine Intelligence Weekly · MEO Class 1 · <a href="https://marineintelligenceweekly.com/meoclass1/">Back to QB Hub</a>
-</div>
+      </div></div>
+<div id="no-res">No cards match.</div>
+<div class="pf">QB2_C Visual CheatSheet · Marine Intelligence Weekly · MEO Class 1 · <a href="https://marineintelligenceweekly.com/meoclass1/">Hub</a></div>
 <script>
 function csFilter(){
   const q=document.getElementById('cs-search').value.toLowerCase();
   const cards=document.querySelectorAll('.cs-card');
   let v=0;
-  cards.forEach(c=>{
-    const show=!q||c.innerText.toLowerCase().includes(q);
-    c.style.display=show?'':'none';
-    if(show)v++;
-  });
-  document.getElementById('cs-count').textContent='Showing '+v+' of '+cards.length;
+  cards.forEach(c=>{const s=!q||c.innerText.toLowerCase().includes(q);c.style.display=s?'':'none';if(s)v++;});
+  document.getElementById('cs-cnt').textContent='Showing '+v+' of '+cards.length;
+  document.getElementById('no-res').style.display=v===0&&q?'block':'none';
 }
 </script>
 <script>document.addEventListener('contextmenu',e=>e.preventDefault());document.addEventListener('copy',e=>e.preventDefault());document.addEventListener('selectstart',e=>e.preventDefault());</script>
