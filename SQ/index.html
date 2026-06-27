@@ -3,665 +3,432 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEO Class 1 QB — Free Sample | Marine Intelligence Weekly</title>
-<meta name="description" content="Free sample of the MEO Class 1 Question Bank by Nixon Antony, 2/E, Maersk A/S. 20 fully worked questions — regulation-referenced, examiner-specific, updated from live Kochi MMD orals.">
-<meta property="og:title" content="MEO Class 1 QB — Free Sample | Marine Intelligence Weekly">
-<meta property="og:description" content="The only MEO Class 1 QB built from real Kochi MMD orals. Examiner-specific answers with SOLAS/MARPOL regulation numbers. Free sample — 20 questions, full deep-dive.">
-<meta property="og:type" content="website">
+<title>MEO Class 1 Question Bank — Marine Intelligence Weekly</title>
+<meta name="description" content="Engine-room level MEO Class 1 oral exam Q&A. Built by a serving 2/E. Covers Motor, KAS, Naval Arch, MEP and more.">
+<meta property="og:title" content="MEO Class 1 QB — Marine Intelligence Weekly">
+<meta property="og:description" content="Oral exam Q&A bank built by a 2/E for the MMD orals.">
+<meta property="og:url" content="https://marineintelligenceweekly.com/SQ/index.html">
 <!-- GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<!-- Razorpay SDK -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <style>
-:root{
-  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
-  --navy:#0f172a;--navy-mid:#1e293b;
-  --orange:#f97316;--orange-light:#fff7ed;
-  --gold:#c9a84c;
-  --off-white:#f8fafc;--grey-text:#64748b;
-  --grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.6;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f8fafc;color:#1e293b;min-height:100vh}
 
-/* ── NAV ── */
-.topbar{background:var(--navy);color:#fff;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--teal);}
-.topbar-brand{display:flex;align-items:center;gap:10px;}
-.logo-mark{background:var(--teal);color:#fff;font-weight:800;font-size:13px;padding:3px 8px;border-radius:4px;letter-spacing:.5px;}
-.site-name{color:#fff;font-size:13px;font-weight:500;opacity:.85;}
-.topbar-right{display:flex;align-items:center;gap:16px;}
-.topbar-right a{color:rgba(255,255,255,.7);text-decoration:none;font-size:12px;transition:color .2s;}
-.topbar-right a:hover{color:var(--teal);}
+/* ---- NAV ---- */
+nav{background:#0f172a;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between}
+nav a.brand{color:#0d9488;font-weight:700;font-size:1.05rem;text-decoration:none}
+nav a.home-link{color:#64748b;font-size:13px;text-decoration:none}
+nav a.home-link:hover{color:#cbd5e1}
 
-/* ── HERO ── */
-.hero{background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 60%,#0f3460 100%);color:#fff;padding:60px 24px 52px;border-bottom:3px solid var(--teal);position:relative;overflow:hidden;}
-.hero::before{content:'';position:absolute;left:-80px;bottom:-80px;width:360px;height:360px;border-radius:50%;background:rgba(13,148,136,.06);pointer-events:none;}
-.hero::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:rgba(13,148,136,.05);pointer-events:none;}
-.hero-inner{max-width:860px;margin:0 auto;position:relative;}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.15);border:1px solid rgba(13,148,136,.3);color:var(--teal);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:22px;}
-.free-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.4);color:var(--gold);font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:22px;margin-left:10px;}
-.hero h1{font-size:clamp(24px,5vw,40px);font-weight:800;line-height:1.15;margin-bottom:16px;}
-.hero h1 span{color:var(--teal);}
-.hero-sub{color:rgba(255,255,255,.72);font-size:15px;max-width:640px;line-height:1.75;margin-bottom:32px;}
-.hero-sub strong{color:#fff;}
-.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:40px;}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#fff;font-weight:700;font-size:14px;padding:13px 26px;border-radius:8px;text-decoration:none;transition:background .2s,transform .15s;border:none;cursor:pointer;}
-.btn-primary:hover{background:var(--teal-dark);transform:translateY(-1px);}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#fff;font-weight:600;font-size:14px;padding:12px 24px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,.25);transition:border-color .2s,background .2s;}
-.btn-secondary:hover{border-color:var(--teal);background:rgba(13,148,136,.1);}
-.hero-stats{display:flex;flex-wrap:wrap;gap:28px;padding-top:28px;border-top:1px solid rgba(255,255,255,.1);}
-.stat{display:flex;flex-direction:column;}
-.stat-val{font-size:24px;font-weight:800;color:#fff;}
-.stat-label{font-size:11px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.8px;margin-top:2px;}
+/* ---- HERO ---- */
+.hero{background:#0f172a;color:#f8fafc;text-align:center;padding:3rem 1.5rem 2.5rem}
+.hero h1{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:700;margin-bottom:.75rem;line-height:1.2}
+.hero h1 span{color:#0d9488}
+.hero p{font-size:1rem;color:#94a3b8;max-width:520px;margin:0 auto 1.5rem;line-height:1.6}
+.sample-btn{display:inline-block;padding:.6rem 1.4rem;border:1.5px solid #0d9488;border-radius:6px;color:#0d9488;font-size:14px;text-decoration:none;font-weight:500}
+.sample-btn:hover{background:#0d9488;color:#fff}
 
-/* ── LIVE ORAL BANNER ── */
-.oral-banner{background:linear-gradient(90deg,#7c3aed,#4f46e5);color:#fff;padding:12px 24px;text-align:center;font-size:13px;font-weight:600;}
-.oral-banner span{opacity:.8;font-weight:400;} 
+/* ---- STATS BAR ---- */
+.stats{display:flex;justify-content:center;gap:2.5rem;padding:1.25rem;background:#1e293b;flex-wrap:wrap}
+.stat{text-align:center}
+.stat-num{font-size:1.4rem;font-weight:700;color:#0d9488}
+.stat-label{font-size:12px;color:#64748b;margin-top:2px}
 
-/* ── MAIN ── */
-.main{max-width:860px;margin:0 auto;padding:48px 16px 100px;}
+/* ---- EMAIL CAPTURE FORM ---- */
+.email-capture{max-width:780px;margin:2rem auto;padding:0 1.25rem}
+.capture-box{background:#f0fdfa;border:1px solid #0d9488;border-radius:12px;padding:1.5rem}
+.capture-box p{font-size:14px;color:#0f172a;font-weight:600;margin-bottom:1rem}
+.capture-inputs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-bottom:.5rem}
+.capture-inputs input{padding:.6rem;border:1px solid #cbd5e1;border-radius:6px;font-size:14px;font-family:inherit}
+.capture-inputs input:focus{outline:none;border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.1)}
+.capture-help{font-size:12px;color:#64748b}
 
-/* ── SECTION LABEL ── */
-.section-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--grey-text);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
-.section-label::after{content:'';flex:1;height:1px;background:var(--grey-border);}
+/* ---- PRICING ---- */
+.pricing{max-width:780px;margin:2.5rem auto;padding:0 1.25rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
 
-/* ── VALUE PROPS ── */
-.vp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:52px;}
-.vp-card{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:20px;}
-.vp-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:14px;}
-.vp-icon.teal{background:var(--teal-light);}
-.vp-icon.orange{background:#fff7ed;}
-.vp-icon.purple{background:#f3e8ff;}
-.vp-icon.gold{background:#fefce8;}
-.vp-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:5px;}
-.vp-desc{font-size:12.5px;color:var(--grey-text);line-height:1.6;}
+.tier-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.5rem;position:relative}
+.tier-card.featured{border:2px solid #0d9488}
+.tier-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#0d9488;color:#fff;font-size:12px;font-weight:600;padding:3px 14px;border-radius:20px;white-space:nowrap}
+.tier-label{font-size:13px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem}
+.tier-name{font-size:1.2rem;font-weight:700;color:#0f172a;margin-bottom:.25rem}
+.tier-price{font-size:2rem;font-weight:700;color:#0f172a;margin:.5rem 0 .2rem}
+.tier-price span{font-size:14px;font-weight:400;color:#64748b}
+.tier-slots{font-size:13px;margin-bottom:1rem;padding:6px 10px;border-radius:5px}
+.slots-warn{background:#fef3c7;color:#92400e}
+.slots-ok{background:#f0fdfa;color:#134e4a}
 
-/* ── WHAT'S INSIDE PANEL ── */
-.inside-panel{background:#fff;border:1px solid var(--grey-border);border-radius:14px;overflow:hidden;margin-bottom:52px;}
-.inside-header{background:var(--navy);color:#fff;padding:18px 24px;display:flex;align-items:center;justify-content:space-between;}
-.inside-header h3{font-size:15px;font-weight:700;}
-.inside-header .badge{background:var(--teal);color:#fff;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 10px;border-radius:10px;}
-.inside-body{padding:20px 24px;}
-.card-anatomy{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-@media(max-width:560px){.card-anatomy{grid-template-columns:1fr;}}
-.anatomy-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:var(--off-white);border-radius:8px;border:1px solid var(--grey-border);}
-.anatomy-num{flex-shrink:0;width:22px;height:22px;background:var(--teal);color:#fff;border-radius:5px;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;}
-.anatomy-text{font-size:12.5px;color:var(--ink);line-height:1.4;}
-.anatomy-text strong{display:block;font-weight:700;color:var(--navy);font-size:12px;}
+.feat-list{list-style:none;margin:1rem 0;padding:0}
+.feat-list li{font-size:14px;color:#334155;padding:5px 0;border-top:1px solid #f1f5f9;display:flex;gap:8px;align-items:flex-start}
+.feat-list li:first-child{border-top:none}
+.feat-list .ck{color:#0d9488;font-weight:700;flex-shrink:0}
+.feat-list .cx{color:#94a3b8;flex-shrink:0}
 
-/* ── TOPIC MAP ── */
-.topic-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin-bottom:52px;}
-.topic-card{background:#fff;border:1px solid var(--grey-border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;}
-.topic-card.sample{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,148,136,.08);}
-.topic-top{padding:16px 18px 12px;flex:1;}
-.topic-num-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
-.topic-num{width:36px;height:36px;background:var(--teal);color:#fff;border-radius:8px;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;}
-.topic-status{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:10px;}
-.st-free{background:#dcfce7;color:#166534;}
-.st-full{background:#dbeafe;color:#1e40af;}
-.st-build{background:#fef9c3;color:#854d0e;}
-.st-plan{background:var(--grey-bg);color:var(--grey-text);}
-.topic-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px;}
-.topic-desc{font-size:12px;color:var(--grey-text);line-height:1.5;margin-bottom:10px;}
-.topic-examiners{display:flex;flex-wrap:wrap;gap:5px;}
-.ex-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:var(--off-white);border:1px solid var(--grey-border);color:var(--grey-text);}
-.topic-bottom{padding:10px 18px;background:var(--grey-bg);border-top:1px solid var(--grey-border);display:flex;align-items:center;justify-content:space-between;font-size:12px;}
-.topic-qs{color:var(--grey-text);}
-.topic-qs strong{color:var(--ink);}
-.topic-link{font-size:12px;font-weight:600;color:var(--teal);text-decoration:none;display:flex;align-items:center;gap:4px;}
-.topic-link:hover{color:var(--teal-dark);}
-.topic-lock{font-size:12px;color:var(--grey-text);display:flex;align-items:center;gap:4px;}
+/* ---- PAY BUTTON ---- */
+.pay-btn{width:100%;padding:.85rem;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;border:none;margin-top:1rem;transition:all .15s}
+.pay-btn-founders{background:#0f172a;color:#0d9488;border:1.5px solid #0d9488}
+.pay-btn-standard{background:#0d9488;color:#fff}
+.pay-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.pay-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 
-/* ── HOW IT WORKS ── */
-.how-row{display:flex;flex-direction:column;gap:0;margin-bottom:52px;border:1px solid var(--grey-border);border-radius:12px;overflow:hidden;}
-.how-step{display:flex;align-items:flex-start;gap:16px;padding:18px 20px;background:#fff;border-bottom:1px solid var(--grey-border);}
-.how-step:last-child{border-bottom:none;}
-.how-step-num{flex-shrink:0;width:32px;height:32px;background:var(--teal);color:#fff;border-radius:8px;font-size:14px;font-weight:800;display:flex;align-items:center;justify-content:center;}
-.how-step-body{}
-.how-step-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:3px;}
-.how-step-desc{font-size:13px;color:var(--grey-text);line-height:1.55;}
+/* ---- WHAT'S INSIDE ---- */
+.inside{max-width:780px;margin:0 auto 2.5rem;padding:0 1.25rem}
+.inside h2{font-size:1.1rem;font-weight:700;color:#0f172a;margin-bottom:1rem}
+.topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.6rem}
+.topic{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:.6rem 1rem;font-size:14px;color:#334155;display:flex;align-items:center;gap:8px}
+.topic::before{content:"⚙";font-size:14px}
 
-/* ── EXAMINER PROFILES ── */
-.examiner-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px;margin-bottom:52px;}
-.examiner-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:16px;}
-.ex-name{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px;}
-.ex-focus{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;background:var(--teal-light);color:var(--teal-dark);padding:2px 8px;border-radius:4px;margin-bottom:8px;}
-.ex-style{font-size:12px;color:var(--grey-text);line-height:1.55;}
+/* ---- TRUST ---- */
+.trust{background:#0f172a;color:#f8fafc;text-align:center;padding:2rem 1.5rem}
+.trust p{font-size:14px;color:#94a3b8;max-width:480px;margin:.5rem auto 0;line-height:1.6}
+.trust strong{color:#0d9488}
 
-/* ── PRICING PANEL ── */
-.pricing-wrap{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:52px;}
-@media(max-width:600px){.pricing-wrap{grid-template-columns:1fr;}}
-.pricing-card{background:#fff;border:1px solid var(--grey-border);border-radius:14px;overflow:hidden;}
-.pricing-card.featured{border-color:var(--teal);box-shadow:0 0 0 3px rgba(13,148,136,.1);}
-.pricing-top{padding:24px 22px 18px;}
-.pricing-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--grey-text);margin-bottom:12px;}
-.pricing-label.highlight{color:var(--teal);}
-.pricing-amount{font-size:34px;font-weight:800;color:var(--navy);margin-bottom:4px;}
-.pricing-amount span{font-size:15px;font-weight:500;color:var(--grey-text);}
-.pricing-desc{font-size:13px;color:var(--grey-text);line-height:1.55;margin-bottom:16px;}
-.pricing-features{list-style:none;display:flex;flex-direction:column;gap:8px;}
-.pricing-features li{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--ink);}
-.pricing-features li::before{content:'✓';color:var(--teal);font-weight:700;flex-shrink:0;margin-top:1px;}
-.pricing-features li.no::before{content:'—';color:var(--grey-text);}
-.pricing-features li.no{color:var(--grey-text);}
-.pricing-bottom{padding:16px 22px;background:var(--grey-bg);border-top:1px solid var(--grey-border);}
-.btn-full{display:block;text-align:center;padding:12px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;transition:background .2s;}
-.btn-teal{background:var(--teal);color:#fff;}
-.btn-teal:hover{background:var(--teal-dark);}
-.btn-outline{background:#fff;color:var(--ink);border:1px solid var(--grey-border);}
-.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
-.founder-note{background:var(--orange-light);border:1px solid #fed7aa;border-radius:10px;padding:14px 18px;margin-bottom:52px;font-size:13px;color:#92400e;line-height:1.6;}
-.founder-note strong{color:#9a3412;display:block;font-size:14px;margin-bottom:4px;}
+/* ---- SUCCESS MODAL ---- */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:1000;align-items:center;justify-content:center}
+.modal-overlay.show{display:flex}
+.modal{background:#fff;border-radius:12px;padding:2rem;max-width:420px;width:90%;text-align:center}
+.modal h2{font-size:1.2rem;font-weight:700;color:#0f172a;margin-bottom:.75rem}
+.modal p{font-size:14px;color:#334155;line-height:1.6;margin-bottom:1.25rem}
+.modal .close-btn{background:#0d9488;color:#fff;border:none;padding:.7rem 1.5rem;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer}
 
-/* ── TYPEFORM SECTION ── */
-.typeform-wrap{background:#fff;border:1px solid var(--grey-border);border-radius:14px;overflow:hidden;margin-bottom:52px;}
-.typeform-header{background:var(--navy);color:#fff;padding:18px 24px;}
-.typeform-header h3{font-size:15px;font-weight:700;margin-bottom:3px;}
-.typeform-header p{font-size:12px;color:rgba(255,255,255,.6);}
-.typeform-body{padding:24px;}
+/* ---- ERROR ALERT ---- */
+.error-alert{background:#fee2e2;border:1px solid #fca5a5;border-radius:8px;padding:1rem;margin-bottom:1rem;color:#991b1b;font-size:13px;display:none}
+.error-alert.show{display:block}
 
-/* ── UPDATE LOG ── */
-.update-log{background:#fff;border:1px solid var(--grey-border);border-radius:12px;overflow:hidden;margin-bottom:52px;}
-.update-log-header{padding:14px 20px;border-bottom:1px solid var(--grey-border);display:flex;align-items:center;justify-content:space-between;}
-.update-log-header h3{font-size:14px;font-weight:700;color:var(--navy);}
-.update-log-header span{font-size:11px;color:var(--grey-text);}
-.update-entry{display:flex;gap:14px;padding:12px 20px;border-bottom:1px solid var(--grey-border);}
-.update-entry:last-child{border-bottom:none;}
-.update-date{flex-shrink:0;font-size:11px;font-weight:700;color:var(--grey-text);width:72px;padding-top:2px;}
-.update-text{font-size:13px;color:var(--ink);line-height:1.5;}
-.update-text .tag{display:inline-block;font-size:10px;font-weight:700;padding:1px 7px;border-radius:4px;margin-right:6px;text-transform:uppercase;}
-.tag-new{background:#dcfce7;color:#166534;}
-.tag-fix{background:#fef9c3;color:#854d0e;}
-.tag-oral{background:#dbeafe;color:#1e40af;}
-
-/* ── FOOTER ── */
-.page-footer{background:var(--navy);color:rgba(255,255,255,.55);text-align:center;padding:32px 16px;font-size:12px;line-height:1.8;}
-.page-footer a{color:var(--teal);text-decoration:none;}
-.page-footer strong{color:rgba(255,255,255,.85);}
-
-@media(max-width:640px){
-  .hero-stats{gap:18px;}
-  .vp-grid,.topic-grid,.examiner-grid{grid-template-columns:1fr;}
-  .card-anatomy{grid-template-columns:1fr;}
-}
+footer{text-align:center;padding:1.5rem;font-size:12px;color:#94a3b8;border-top:1px solid #e2e8f0}
+footer a{color:#64748b;text-decoration:none}
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
-<nav class="topbar">
-  <div class="topbar-brand">
-    <span class="logo-mark">MIW</span>
-    <span class="site-name">Marine Intelligence Weekly</span>
-  </div>
-  <div class="topbar-right">
-    <a href="https://marineintelligenceweekly.com">Home</a>
-    <a href="https://marineintelligenceweekly.com/meoclass1/">Full QB Series</a>
-    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
-  </div>
+<nav>
+  <a class="brand" href="https://marineintelligenceweekly.com">Marine Intelligence Weekly</a>
+  <a class="home-link" href="https://marineintelligenceweekly.com">← Back to MIW</a>
 </nav>
 
-<!-- ── LIVE ORAL BANNER ── -->
-<div class="oral-banner">
-  🔴 Live update — June 2026 Kochi MMD orals in progress. <span>New questions added as candidates report back.</span>
+<!-- HERO -->
+<div class="hero">
+  <h1>MEO Class 1 <span>Question Bank</span></h1>
+  <p>Engine-room level oral exam Q&A. Built by a serving 2/E. Referenced to SOLAS, MARPOL, Class rules and DGS circulars.</p>
+  <a href="https://marineintelligenceweekly.com/SQ/QB1_A.html" class="sample-btn" target="_blank">View free sample →</a>
 </div>
 
-<!-- ── HERO ── -->
-<header class="hero">
-  <div class="hero-inner">
-    <div>
-      <span class="hero-eyebrow">MEO Class 1 · Kochi MMD</span>
-      <span class="free-pill">✦ Free Sample</span>
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-num">300+</div><div class="stat-label">Questions</div></div>
+  <div class="stat"><div class="stat-num">9</div><div class="stat-label">Topics covered</div></div>
+  <div class="stat"><div class="stat-num">16+</div><div class="stat-label">Subscribers</div></div>
+  <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Free updates</div></div>
+</div>
+
+<!-- EMAIL CAPTURE FORM -->
+<div class="email-capture">
+  <div class="capture-box">
+    <p>📧 Enter your details to get instant access after payment</p>
+    <div class="error-alert" id="error-alert"></div>
+    <div class="capture-inputs">
+      <input 
+        type="text" 
+        id="buyer-name" 
+        placeholder="Your full name" 
+      />
+      <input 
+        type="email" 
+        id="buyer-email" 
+        placeholder="your.email@example.com" 
+        required
+      />
     </div>
-    <h1>The Question Bank built from<br><span>real Kochi MMD orals.</span></h1>
-    <p class="hero-sub">
-      Not copied from textbooks. Not generic. Every question sourced from a live Kochi MMD oral exam — compiled, validated against <strong>primary IMO instruments</strong>, and answered at Chief Engineer level by Nixon Antony, 2/E, Maersk A/S.
-    </p>
-    <div class="hero-ctas">
-      <a href="https://marineintelligenceweekly.com/SQ/QB1_A.html" class="btn-primary">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Open Free Sample — QB1
-      </a>
-      <a href="https://marineintelligenceweekly.com/SQ/pay.html" class="btn-secondary">
-        View Full QB Series →
-      </a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><span class="stat-val">417+</span><span class="stat-label">Total Questions</span></div>
-      <div class="stat"><span class="stat-val">9</span><span class="stat-label">Topic Banks</span></div>
-      <div class="stat"><span class="stat-val">5</span><span class="stat-label">Examiner Profiles</span></div>
-      <div class="stat"><span class="stat-val">Live</span><span class="stat-label">Updated from Orals</span></div>
-    </div>
+    <p class="capture-help">Your email will receive the QB access link immediately after payment. See our <a href="/privacy.html" style="color:#0d9488">Privacy Policy</a> for details.</p>
   </div>
-</header>
+</div>
 
-<!-- ── MAIN ── -->
-<main class="main">
+<!-- PRICING CARDS -->
+<div class="pricing">
 
-  <!-- VALUE PROPS -->
-  <div class="section-label">Why this QB is different</div>
-  <div class="vp-grid">
-    <div class="vp-card">
-      <div class="vp-icon teal">🎯</div>
-      <div class="vp-title">Examiner-specific answers</div>
-      <div class="vp-desc">Each answer is framed for the examiner who asks it. Nair wants regulation numbers verbatim. Simon wants a diagram. Rajappan wants IS Code criteria. The QB tells you exactly how to frame your answer for each.</div>
-    </div>
-    <div class="vp-card">
-      <div class="vp-icon orange">📜</div>
-      <div class="vp-title">Every answer is regulation-anchored</div>
-      <div class="vp-desc">No vague "as per MARPOL" answers. Every card has a mandatory REG-BOX — SOLAS chapter, MARPOL annex, IMO resolution, IS Code section — the exact citation the examiner expects you to quote.</div>
-    </div>
-    <div class="vp-card">
-      <div class="vp-icon purple">🧠</div>
-      <div class="vp-title">Trap questions + failure patterns</div>
-      <div class="vp-desc">Every card includes the exact follow-up traps examiners use, common CE failures that cause repeats, and a Casualty Link — so you understand the "why", not just the "what".</div>
-    </div>
-    <div class="vp-card">
-      <div class="vp-icon gold">🔄</div>
-      <div class="vp-title">Updated from live orals</div>
-      <div class="vp-desc">Questions are sourced directly from a Class 1 preparation WhatsApp group. When candidates report back, new questions are validated and added. You're always reading the latest.</div>
+  <!-- FOUNDERS CARD -->
+  <div class="tier-card" id="founders-card">
+    <div class="tier-badge">Founders — Limited seats</div>
+    <div style="margin-top:.5rem">
+      <div class="tier-label">Founders Access</div>
+      <div class="tier-name">Early supporter pricing</div>
+      <div class="tier-price">₹499 <span>one-time</span></div>
+      <div class="tier-slots slots-warn" id="founders-slots-msg">⚠ Only a few slots remaining — closes at 20</div>
+      <ul class="feat-list">
+        <li><span class="ck">✓</span>Full QB — all topics, all questions</li>
+        <li><span class="ck">✓</span>Lifetime access + all future updates</li>
+        <li><span class="ck">✓</span>WhatsApp group access</li>
+        <li><span class="ck">✓</span>Slot held until you pass your orals</li>
+        <li><span class="cx">✗</span>Closes permanently at 20 subscribers</li>
+      </ul>
+      <button class="pay-btn pay-btn-founders" id="btn-founders" onclick="startCheckout('founders')">
+        Get Founders Access — ₹499
+      </button>
     </div>
   </div>
 
-  <!-- WHAT'S INSIDE ONE CARD -->
-  <div class="section-label">What's inside every question card</div>
-  <div class="inside-panel">
-    <div class="inside-header">
-      <h3>Full anatomy of a QB question card</h3>
-      <span class="badge">7 Deep-Dive Blocks</span>
-    </div>
-    <div class="inside-body">
-      <div class="card-anatomy">
-        <div class="anatomy-item">
-          <div class="anatomy-num">1</div>
-          <div class="anatomy-text"><strong>⏱ 15-Second Answer</strong>The oral exam opener — one or two sentences, regulation cited.</div>
-        </div>
-        <div class="anatomy-item">
-          <div class="anatomy-num">2</div>
-          <div class="anatomy-text"><strong>🎯 60-Second Answer</strong>Full exam-room delivery — definition, reg basis, key numbers, practical consequence.</div>
-        </div>
-        <div class="anatomy-item">
-          <div class="anatomy-num">3</div>
-          <div class="anatomy-text"><strong>📖 Full Answer Body</strong>Sub-sections with h4 headings, lists, formulas — everything needed to command the topic.</div>
-        </div>
-        <div class="anatomy-item">
-          <div class="anatomy-num">4</div>
-          <div class="anatomy-text"><strong>🟢 CE Relevance</strong>Why a Chief Engineer must know this — operational and liability context.</div>
-        </div>
-        <div class="anatomy-item">
-          <div class="anatomy-num">5</div>
-          <div class="anatomy-text"><strong>🟠 Trap Questions</strong>Exact follow-up questions examiners use — with TRAP / PASS badges.</div>
-        </div>
-        <div class="anatomy-item">
-          <div class="anatomy-num">6</div>
-          <div class="anatomy-text"><strong>🔴 Common CE Failures</strong>Why candidates repeat — the exact mistakes to avoid.</div>
-        </div>
-        <div class="anatomy-item">
-          <div class="anatomy-num">7</div>
-          <div class="anatomy-text"><strong>🟡 Numbers & Regs</strong>Every number, threshold, and regulation citation for the topic in one place.</div>
-        </div>
-        <div class="anatomy-item">
-          <div class="anatomy-num">8</div>
-          <div class="anatomy-text"><strong>🟣 Casualty Link</strong>Real-world incident or near-miss that makes the regulation make sense.</div>
-        </div>
-        <div class="anatomy-item">
-          <div class="anatomy-num">9</div>
-          <div class="anatomy-text"><strong>🔵 Examiner Chain</strong>How the examiner escalates the question — the next three follow-ups.</div>
-        </div>
-        <div class="anatomy-item">
-          <div class="anatomy-num">10</div>
-          <div class="anatomy-text"><strong>🩵 On My Vessel</strong>Container ship / 2-stroke specific application — Maersk fleet context.</div>
-        </div>
-        <div class="anatomy-item" style="grid-column:1/-1;">
-          <div class="anatomy-num" style="background:var(--navy);">+</div>
-          <div class="anatomy-text"><strong>⚖ REG-BOX + CE Oral Tip (Kochi MMD)</strong>4–6 mandatory regulatory citations and a Kochi MMD-specific oral exam tip on every card.</div>
-        </div>
-      </div>
+  <!-- STANDARD CARD -->
+  <div class="tier-card featured">
+    <div class="tier-badge">Standard — Always open</div>
+    <div style="margin-top:.5rem">
+      <div class="tier-label">Standard Access</div>
+      <div class="tier-name">Full QB access</div>
+      <div class="tier-price">₹899 <span>one-time</span></div>
+      <div class="tier-slots slots-ok">✓ Open access — join anytime</div>
+      <ul class="feat-list">
+        <li><span class="ck">✓</span>Full QB — all topics, all questions</li>
+        <li><span class="ck">✓</span>Lifetime access + all future updates</li>
+        <li><span class="ck">✓</span>WhatsApp group access</li>
+        <li><span class="ck">✓</span>Same content as Founders tier</li>
+        <li><span class="cx">✗</span>Founders pricing no longer available</li>
+      </ul>
+      <button class="pay-btn pay-btn-standard" id="btn-standard" onclick="startCheckout('standard')">
+        Get Standard Access — ₹899
+      </button>
     </div>
   </div>
 
-  <!-- TOPIC MAP -->
-  <div class="section-label">Complete topic map — 9 question banks</div>
-  <div class="topic-grid">
+</div>
 
-    <div class="topic-card sample">
-      <div class="topic-top">
-        <div class="topic-num-row">
-          <div class="topic-num">1</div>
-          <span class="topic-status st-free">Free Sample</span>
-        </div>
-        <div class="topic-title">Engine Construction, Stability & Surveys</div>
-        <div class="topic-desc">Structural surveys, hull gauging, stability criteria, GZ curve, Load Line Convention, IACS UR Z7.1.</div>
-        <div class="topic-examiners">
-          <span class="ex-tag">👤 Rajappan — Stability</span>
-          <span class="ex-tag">👤 Nair — Surveys</span>
-        </div>
-      </div>
-      <div class="topic-bottom">
-        <span class="topic-qs"><strong>20</strong> questions</span>
-        <a class="topic-link" href="https://marineintelligenceweekly.com/SQ/QB1_A.html">Open Free ↗</a>
-      </div>
-    </div>
-
-    <div class="topic-card">
-      <div class="topic-top">
-        <div class="topic-num-row">
-          <div class="topic-num">2</div>
-          <span class="topic-status st-full">Full Series</span>
-        </div>
-        <div class="topic-title">Fire Safety, LSA & FSS Code</div>
-        <div class="topic-desc">Fixed firefighting systems, LSA inspection schedules, SOLAS II-2 regulations, MOB procedures, GMDSS.</div>
-        <div class="topic-examiners">
-          <span class="ex-tag">👤 Senthil — Safety/LSA</span>
-          <span class="ex-tag">👤 Simon — Machinery</span>
-        </div>
-      </div>
-      <div class="topic-bottom">
-        <span class="topic-qs"><strong>19</strong> questions</span>
-        <span class="topic-lock">🔒 Full access</span>
-      </div>
-    </div>
-
-    <div class="topic-card">
-      <div class="topic-top">
-        <div class="topic-num-row">
-          <div class="topic-num">3</div>
-          <span class="topic-status st-full">Full Series</span>
-        </div>
-        <div class="topic-title">MARPOL Annexes & Environmental</div>
-        <div class="topic-desc">All six Annexes, ORB requirements, IOPP, ECA regulations, Annex VI amendments, garbage management.</div>
-        <div class="topic-examiners">
-          <span class="ex-tag">👤 Nair — MARPOL/PSC</span>
-          <span class="ex-tag">👤 Srivastava</span>
-        </div>
-      </div>
-      <div class="topic-bottom">
-        <span class="topic-qs"><strong>19</strong> questions</span>
-        <span class="topic-lock">🔒 Full access</span>
-      </div>
-    </div>
-
-    <div class="topic-card">
-      <div class="topic-top">
-        <div class="topic-num-row">
-          <div class="topic-num">4</div>
-          <span class="topic-status st-full">Full Series</span>
-        </div>
-        <div class="topic-title">ISM / ISPS / MLC / STCW</div>
-        <div class="topic-desc">ISM Code sections, SMS, non-conformities, ISPS audits, MLC 2006 work hours, STCW Manila amendments.</div>
-        <div class="topic-examiners">
-          <span class="ex-tag">👤 Nair — Conventions</span>
-          <span class="ex-tag">👤 Srivastava</span>
-        </div>
-      </div>
-      <div class="topic-bottom">
-        <span class="topic-qs"><strong>19</strong> questions</span>
-        <span class="topic-lock">🔒 Full access</span>
-      </div>
-    </div>
-
-    <div class="topic-card">
-      <div class="topic-top">
-        <div class="topic-num-row">
-          <div class="topic-num">5</div>
-          <span class="topic-status st-full">Full Series</span>
-        </div>
-        <div class="topic-title">Management, Leadership & Human Element</div>
-        <div class="topic-desc">CE command scenarios, fatigue management, BRM, incident investigation, PDCA cycle, process control.</div>
-        <div class="topic-examiners">
-          <span class="ex-tag">👤 Nair</span>
-          <span class="ex-tag">👤 Senthil</span>
-        </div>
-      </div>
-      <div class="topic-bottom">
-        <span class="topic-qs"><strong>36</strong> questions</span>
-        <span class="topic-lock">🔒 Full access</span>
-      </div>
-    </div>
-
-    <div class="topic-card">
-      <div class="topic-top">
-        <div class="topic-num-row">
-          <div class="topic-num">6</div>
-          <span class="topic-status st-full">Full Series</span>
-        </div>
-        <div class="topic-title">Electrical, Automation & Machinery</div>
-        <div class="topic-desc">CII/EEXI/SEEMP, alternative fuels, earth fault detection, UMS logic, automation philosophy, protection relay.</div>
-        <div class="topic-examiners">
-          <span class="ex-tag">👤 Srivastava — Electro</span>
-          <span class="ex-tag">👤 Simon — Machinery</span>
-        </div>
-      </div>
-      <div class="topic-bottom">
-        <span class="topic-qs"><strong>19</strong> questions</span>
-        <span class="topic-lock">🔒 Full access</span>
-      </div>
-    </div>
-
-    <div class="topic-card">
-      <div class="topic-top">
-        <div class="topic-num-row">
-          <div class="topic-num">7</div>
-          <span class="topic-status st-full">Full Series</span>
-        </div>
-        <div class="topic-title">GHG / CII / EEXI / Decarbonisation</div>
-        <div class="topic-desc">SEEMP Part III, EU ETS, FuelEU Maritime, onboard carbon capture, green hydrogen taxonomy, alternative fuels roadmap.</div>
-        <div class="topic-examiners">
-          <span class="ex-tag">👤 Nair — Regulatory</span>
-          <span class="ex-tag">👤 Srivastava</span>
-        </div>
-      </div>
-      <div class="topic-bottom">
-        <span class="topic-qs"><strong>5</strong> questions</span>
-        <span class="topic-lock">🔒 Full access</span>
-      </div>
-    </div>
-
-    <div class="topic-card">
-      <div class="topic-top">
-        <div class="topic-num-row">
-          <div class="topic-num">8</div>
-          <span class="topic-status st-build">Building</span>
-        </div>
-        <div class="topic-title">Cargo Operations</div>
-        <div class="topic-desc">Container lashing, CSC Convention, VGM, IMDG code, dangerous goods documentation, P&A Manual, reefer monitoring.</div>
-        <div class="topic-examiners">
-          <span class="ex-tag">👤 Rajappan — Cargo</span>
-          <span class="ex-tag">👤 Nair</span>
-        </div>
-      </div>
-      <div class="topic-bottom">
-        <span class="topic-qs">In progress</span>
-        <span class="topic-lock">⏳ Soon</span>
-      </div>
-    </div>
-
-    <div class="topic-card">
-      <div class="topic-top">
-        <div class="topic-num-row">
-          <div class="topic-num">9</div>
-          <span class="topic-status st-full">Full Series</span>
-        </div>
-        <div class="topic-title">Commercial Law & Maritime Liability</div>
-        <div class="topic-desc">LLMC limits, P&I, HNS Convention, Bunker Convention, CLC, Fund Convention, fair treatment of seafarers.</div>
-        <div class="topic-examiners">
-          <span class="ex-tag">👤 Nair</span>
-          <span class="ex-tag">👤 Simon</span>
-        </div>
-      </div>
-      <div class="topic-bottom">
-        <span class="topic-qs"><strong>16</strong> questions</span>
-        <span class="topic-lock">🔒 Full access</span>
-      </div>
-    </div>
-
+<!-- WHAT'S INSIDE -->
+<div class="inside">
+  <h2>Topics covered</h2>
+  <div class="topics">
+    <div class="topic">Motor Engineering</div>
+    <div class="topic">KAS (Ship Stability)</div>
+    <div class="topic">Naval Architecture</div>
+    <div class="topic">Marine Electrical & Electronics</div>
+    <div class="topic">SOLAS & Fire Safety</div>
+    <div class="topic">MARPOL & Environment</div>
+    <div class="topic">Ship Construction</div>
+    <div class="topic">Automation & Control</div>
+    <div class="topic">Auxiliary Machinery</div>
   </div>
+</div>
 
-  <!-- HOW IT WORKS -->
-  <div class="section-label">How the QB works</div>
-  <div class="how-row">
-    <div class="how-step">
-      <div class="how-step-num">1</div>
-      <div class="how-step-body">
-        <div class="how-step-title">Real oral questions, sourced from the preparation group</div>
-        <div class="how-step-desc">Every question is reported by a candidate who sat in front of an actual Kochi MMD examiner. No invented scenarios — if it's in the QB, someone was asked it in an oral exam.</div>
-      </div>
-    </div>
-    <div class="how-step">
-      <div class="how-step-num">2</div>
-      <div class="how-step-body">
-        <div class="how-step-title">Validated against primary IMO instruments before publishing</div>
-        <div class="how-step-desc">Every answer is cross-checked against SOLAS, MARPOL, ISM Code, IS Code, IBC Code, IACS URs, and DGS circulars before it goes live. Where a common answer is wrong, a correction note is embedded — not silently replaced.</div>
-      </div>
-    </div>
-    <div class="how-step">
-      <div class="how-step-num">3</div>
-      <div class="how-step-body">
-        <div class="how-step-title">Study the card anatomy, not just the answer</div>
-        <div class="how-step-desc">Open the 15-second answer first — that's your oral exam opener. Then the 60-second version. Then explore the deep-dive blocks at your own pace. The Trap Questions block is where most repeats are prevented.</div>
-      </div>
-    </div>
-    <div class="how-step">
-      <div class="how-step-num">4</div>
-      <div class="how-step-body">
-        <div class="how-step-title">Spot an error? Report it and get credited</div>
-        <div class="how-step-desc">Every card has a direct correction link. Submit with your rank and vessel type. All corrections are reviewed against the primary instrument. If accepted, your name goes into the version history.</div>
-      </div>
-    </div>
+<!-- TRUST STRIP -->
+<div class="trust">
+  <strong>Built by a practitioner, for practitioners</strong>
+  <p>Nixon Antony is a Second Engineer at Maersk A/S with 12+ years on large container vessels, currently preparing for MEO Class 1. Every answer is written from the engine room — not a textbook.</p>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="success-modal">
+  <div class="modal">
+    <div style="font-size:2.5rem;margin-bottom:.75rem">⚓</div>
+    <h2>You're in!</h2>
+    <p>Payment verified. Your QB access link has been sent to your email. Check your inbox (and spam folder if needed).<br><br>All the best for your orals.</p>
+    <button class="close-btn" onclick="document.getElementById('success-modal').classList.remove('show')">Got it</button>
   </div>
+</div>
 
-  <!-- EXAMINER PROFILES -->
-  <div class="section-label">Kochi MMD examiner profiles</div>
-  <div class="examiner-grid">
-    <div class="examiner-card">
-      <div class="ex-name">CE Nair</div>
-      <div class="ex-focus">Conventions · MARPOL · PSC</div>
-      <div class="ex-style">Asks for regulation numbers verbatim — "MARPOL Annex I, Regulation 14", not just "MARPOL". Strict on PSC deficiency categories. Will ask what specific document is deficient, not just what rule applies.</div>
-    </div>
-    <div class="examiner-card">
-      <div class="ex-name">CE Simon</div>
-      <div class="ex-focus">Machinery · 2-Stroke</div>
-      <div class="ex-style">Asks for diagram + operating principle. Hands you a marker and says "draw the scavenging process". Focuses on failure analysis and root cause — not just what broke, but why.</div>
-    </div>
-    <div class="examiner-card">
-      <div class="ex-name">CE Rajappan</div>
-      <div class="ex-focus">Stability · Cargo</div>
-      <div class="ex-style">Draws the GZ curve on the board and asks you to label all key points. Expects exact IS Code criteria — 0.055, 0.09, 0.03. Links stability directly to container stack weight and port conditions.</div>
-    </div>
-    <div class="examiner-card">
-      <div class="ex-name">CE Srivastava</div>
-      <div class="ex-focus">Electrotechnology</div>
-      <div class="ex-style">Circuit diagram questions — earth fault detection, protection relay coordination, UMS alarm logic. Asks for the philosophy behind the design, not just the name of the component.</div>
-    </div>
-    <div class="examiner-card">
-      <div class="ex-name">CE Senthil</div>
-      <div class="ex-focus">Safety · LSA · MOB</div>
-      <div class="ex-style">Procedure sequence questions — "walk me through MOB from first sighting." Expects the SOLAS regulation number for every LSA requirement. Will stop you mid-answer to ask the reg citation.</div>
-    </div>
-  </div>
-
-  <!-- PRICING -->
-  <div class="section-label">Access the full series</div>
-  <div class="founder-note">
-    <strong>⏳ Founder pricing — limited window</strong>
-    The full QB series is at ₹499 one-time during the founding batch. No subscription. No per-QB charge. Pay once, access all 9 banks + all future updates including C-wave (June 2026 live orals). Price will increase once the founding cohort closes.
-  </div>
-  <div class="pricing-wrap">
-    <div class="pricing-card">
-      <div class="pricing-top">
-        <div class="pricing-label">Sample</div>
-        <div class="pricing-amount">Free</div>
-        <div class="pricing-desc">QB1 in full — Engine Construction, Stability & Surveys. No sign-up required.</div>
-        <ul class="pricing-features">
-          <li>20 fully worked questions</li>
-          <li>All 7 deep-dive blocks</li>
-          <li>Examiner-specific tips</li>
-          <li>REG-BOX on every card</li>
-          <li class="no">QB2–QB9</li>
-          <li class="no">CheatSheet companions</li>
-          <li class="no">Live oral updates (C-wave)</li>
-        </ul>
-      </div>
-      <div class="pricing-bottom">
-        <a href="https://marineintelligenceweekly.com/SQ/QB1_A.html" class="btn-full btn-outline">Open QB1 Free →</a>
-      </div>
-    </div>
-    <div class="pricing-card featured">
-      <div class="pricing-top">
-        <div class="pricing-label highlight">Full Access — Founder Pricing</div>
-        <div class="pricing-amount">₹499 <span>one-time</span></div>
-        <div class="pricing-desc">All 9 topic banks + CheatSheet companions + all future updates. Founding batch only.</div>
-        <ul class="pricing-features">
-          <li>417+ questions across 9 banks</li>
-          <li>All 7 deep-dive blocks on every card</li>
-          <li>CheatSheet visual cram companion</li>
-          <li>Examiner-specific framing for all 5 examiners</li>
-          <li>Live oral updates — C-wave (June 2026)</li>
-          <li>Correction credit if you spot an error</li>
-          <li>One-time payment — no subscription</li>
-        </ul>
-      </div>
-      <div class="pricing-bottom">
-        <a href="https://marineintelligenceweekly.com/SQ/pay.html" class="btn-full btn-teal">Get Full Access →</a>
-      </div>
-    </div>
-  </div>
-
-  <!-- UPDATE LOG -->
-  <div class="section-label">QB update log</div>
-  <div class="update-log">
-    <div class="update-log-header">
-      <h3>What's been added / corrected</h3>
-      <span>Updated from live Kochi MMD orals</span>
-    </div>
-    <div class="update-entry">
-      <div class="update-date">Jun 2026</div>
-      <div class="update-text"><span class="tag tag-oral">Live Oral</span>June 2026 oral session — C-wave questions being added across QB1–QB4. Nair focus: HNS Convention, fair treatment of seafarers, dual-fuel bunkering.</div>
-    </div>
-    <div class="update-entry">
-      <div class="update-date">Jun 2026</div>
-      <div class="update-text"><span class="tag tag-new">New</span>QB9 (Commercial Law) published — 16 questions covering LLMC, CLC, Fund Convention, P&I, Bunker Convention.</div>
-    </div>
-    <div class="update-entry">
-      <div class="update-date">Jun 2026</div>
-      <div class="update-text"><span class="tag tag-new">New</span>QB7 published — GHG/CII/EEXI/Decarbonisation. Includes SEEMP Part III, EU ETS, FuelEU Maritime, onboard carbon capture.</div>
-    </div>
-    <div class="update-entry">
-      <div class="update-date">Jun 2026</div>
-      <div class="update-text"><span class="tag tag-new">New</span>QB5 (Management/Leadership) published — 36 questions across CE command scenarios, fatigue management, BRM, process control.</div>
-    </div>
-    <div class="update-entry">
-      <div class="update-date">Jun 2026</div>
-      <div class="update-text"><span class="tag tag-fix">Correction</span>QB1 Q14 — IACS UR corrected from S21 to Z7.1 for hull thickness gauging requirements. Water monitor flow rate corrected to SOLAS II-2/10.7.3.1 minimum 400 L/min.</div>
-    </div>
-    <div class="update-entry">
-      <div class="update-date">Jun 2026</div>
-      <div class="update-text"><span class="tag tag-new">New</span>QB1–QB4 B-wave companion files published — 111 new questions from WhatsApp orals batch, own Q1 numbering.</div>
-    </div>
-  </div>
-
-  <!-- TYPEFORM -->
-  <div class="section-label">Questions or corrections</div>
-  <div class="typeform-wrap">
-    <div class="typeform-header">
-      <h3>Contact Nixon Antony</h3>
-      <p>Spotted an error · Want to contribute a question · Want group access details</p>
-    </div>
-    <div class="typeform-body">
-      <div data-tf-live="01KW20V7H1P9PNGXBN1FXFWEFZ"></div>
-      <script src="//embed.typeform.com/next/embed.js"></script>
-    </div>
-  </div>
-
-</main>
-
-<!-- ── FOOTER ── -->
-<footer class="page-footer">
-  <p><strong>Marine Intelligence Weekly — MEO Class 1 Question Bank Series</strong></p>
-  <p>Compiled by <strong>Nixon Antony</strong>, 2/E, Maersk A/S &nbsp;|&nbsp; <a href="https://www.linkedin.com/in/nixonantony">linkedin.com/in/nixonantony</a></p>
-  <p>Questions &amp; corrections: <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a></p>
-  <p style="margin-top:10px;font-size:11px;opacity:.5;">Private study resource. Always verify against official IMO instruments, DGS circulars, and your classification society rules. Not a substitute for official publications.</p>
+<footer>
+  &copy; 2026 Marine Intelligence Weekly &nbsp;|&nbsp;
+  <a href="/terms.html">Terms</a> &nbsp;|&nbsp;
+  <a href="/privacy.html">Privacy</a> &nbsp;|&nbsp;
+  <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
 </footer>
+
+<script>
+// =============================================================
+// RAZORPAY CHECKOUT CONFIGURATION
+// =============================================================
+
+// REPLACE THESE WITH YOUR ACTUAL VALUES
+const RAZORPAY_KEY_ID = "rzp_test_T6jqY9tYtgmXGl";
+const VERCEL_API_URL = "https://marine-intelligence-weekly.vercel.app"; // ← UPDATE THIS
+
+const PRICES = {
+  founders: 499,    // INR
+  standard: 899,    // INR
+};
+
+const TIER_LABELS = {
+  founders: "Founders Access",
+  standard: "Standard Access",
+};
+
+// =============================================================
+// UTILITY FUNCTIONS
+// =============================================================
+
+function showError(message) {
+  const alert = document.getElementById("error-alert");
+  alert.textContent = message;
+  alert.classList.add("show");
+  setTimeout(() => alert.classList.remove("show"), 5000);
+}
+
+function validateEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+function disableButton(btn, text) {
+  btn.disabled = true;
+  btn.textContent = text;
+}
+
+function enableButton(btn, tier) {
+  btn.disabled = false;
+  btn.textContent = tier === "founders"
+    ? "Get Founders Access — ₹499"
+    : "Get Standard Access — ₹899";
+}
+
+// =============================================================
+// STEP 1: CREATE ORDER ON RAZORPAY
+// =============================================================
+
+async function createOrder(tier, buyerEmail) {
+  try {
+    const response = await fetch(`${VERCEL_API_URL}/api/create-order`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        amount: PRICES[tier],
+        tier: tier,
+        buyer_email: buyerEmail,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.error || "Failed to create order");
+    }
+
+    return data.order_id;
+  } catch (error) {
+    showError(`Error: ${error.message}`);
+    throw error;
+  }
+}
+
+// =============================================================
+// STEP 2: OPEN RAZORPAY CHECKOUT
+// =============================================================
+
+async function startCheckout(tier) {
+  // Get inputs
+  const buyerName = document.getElementById("buyer-name").value.trim();
+  const buyerEmail = document.getElementById("buyer-email").value.trim();
+  const btn = document.getElementById(tier === "founders" ? "btn-founders" : "btn-standard");
+
+  // Validate
+  if (!buyerEmail) {
+    showError("Please enter your email address");
+    document.getElementById("buyer-email").focus();
+    return;
+  }
+
+  if (!validateEmail(buyerEmail)) {
+    showError("Please enter a valid email address");
+    document.getElementById("buyer-email").focus();
+    return;
+  }
+
+  disableButton(btn, "Creating order...");
+
+  try {
+    // Step 1: Create order on Razorpay
+    const orderId = await createOrder(tier, buyerEmail);
+
+    // Step 2: Open Razorpay checkout with order_id
+    const options = {
+      key: RAZORPAY_KEY_ID,
+      order_id: orderId,
+      amount: PRICES[tier] * 100, // Convert to paise
+      currency: "INR",
+      name: "Marine Intelligence Weekly",
+      description: `MEO Class 1 QB — ${TIER_LABELS[tier]}`,
+      image: "https://marineintelligenceweekly.com/logo.webp",
+      theme: { color: "#0d9488" },
+
+      prefill: {
+        email: buyerEmail,
+        name: buyerName,
+      },
+
+      handler: function (response) {
+        // Payment successful — verify on backend
+        verifyPayment(response, tier, buyerEmail, buyerName, btn);
+      },
+
+      modal: {
+        ondismiss: function () {
+          // User closed modal
+          enableButton(btn, tier);
+        },
+      },
+    };
+
+    const rzp = new Razorpay(options);
+
+    rzp.on("payment.failed", function (response) {
+      enableButton(btn, tier);
+      showError(`Payment failed: ${response.error.description}`);
+    });
+
+    rzp.open();
+
+  } catch (error) {
+    enableButton(btn, tier);
+  }
+}
+
+// =============================================================
+// STEP 3: VERIFY PAYMENT SIGNATURE
+// =============================================================
+
+async function verifyPayment(razorpayResponse, tier, buyerEmail, buyerName, btn) {
+  disableButton(btn, "Verifying payment...");
+
+  try {
+    const payload = {
+      razorpay_order_id: razorpayResponse.razorpay_order_id,
+      razorpay_payment_id: razorpayResponse.razorpay_payment_id,
+      razorpay_signature: razorpayResponse.razorpay_signature,
+      buyer_email: buyerEmail,
+      buyer_name: buyerName || "Marine Engineer",
+      tier: tier,
+    };
+
+    const response = await fetch(`${VERCEL_API_URL}/api/verify-payment`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok || !data.success) {
+      throw new Error(data.error || "Verification failed");
+    }
+
+    // Success!
+    document.getElementById("success-modal").classList.add("show");
+
+    // Track purchase in GA4
+    gtag("event", "purchase", {
+      currency: "INR",
+      value: PRICES[tier],
+      items: [{ item_name: `MEO QB ${tier}` }],
+    });
+
+    // Clear inputs
+    document.getElementById("buyer-name").value = "";
+    document.getElementById("buyer-email").value = "";
+
+  } catch (error) {
+    showError(`Verification error: ${error.message}. Please contact contactus@marineintelligenceweekly.com`);
+  } finally {
+    enableButton(btn, tier);
+  }
+}
+</script>
 
 </body>
 </html>
