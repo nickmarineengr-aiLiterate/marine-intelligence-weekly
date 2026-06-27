@@ -33,7 +33,7 @@ function buildWelcomeEmail(tier, buyerName, buyerEmail) {
     : "";
 
   return {
-    from: `"Marine Intelligence Weekly" <${process.env.BREVO_SMTP_LOGIN}>`,
+    from: `"Marine Intelligence Weekly" <contactus@marineintelligenceweekly.com>`,
     to: buyerEmail,
     subject: `🚢 Your MEO Class 1 QB is ready — ${tierLabel}`,
     html: `
