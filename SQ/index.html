@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEO Class 1 Question Bank — Marine Intelligence Weekly</title>
-<meta name="description" content="Engine-room level MEO Class 1 oral exam Q&A. Built by a serving 2/E. Covers Motor, KAS, Naval Arch, MEP and more.">
+<title>MEO Class 1 Question Bank & Study Notes — Marine Intelligence Weekly</title>
+<meta name="description" content="MEO Class 1 oral exam Q&A bank + Simon Sir oral notes. Built by a serving 2/E at Maersk. Covers Motor, KAS, Naval Arch, MEP, GHG, STCW and more. Kochi MMD focused.">
 <meta property="og:title" content="MEO Class 1 QB — Marine Intelligence Weekly">
 <meta property="og:description" content="Oral exam Q&A bank built by a 2/E for the MMD orals.">
 <meta property="og:url" content="https://marineintelligenceweekly.com/SQ/index.html">
@@ -99,9 +99,73 @@ nav a.home-link:hover{color:#cbd5e1}
 
 footer{text-align:center;padding:1.5rem;font-size:12px;color:#94a3b8;border-top:1px solid #e2e8f0}
 footer a{color:#64748b;text-decoration:none}
+
+/* ---- SECTION DIVIDER ---- */
+.section-divider{max-width:780px;margin:2.5rem auto 0;padding:0 1.25rem}
+.section-divider-line{display:flex;align-items:center;gap:14px;margin-bottom:1.5rem}
+.section-divider-line::before,.section-divider-line::after{content:'';flex:1;height:1px;background:#e2e8f0}
+.section-divider-title{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;white-space:nowrap}
+
+/* ---- NOTES SERIES CARDS ---- */
+.notes-grid{max-width:780px;margin:0 auto 2.5rem;padding:0 1.25rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.25rem}
+.notes-intro{max-width:780px;margin:0 auto .75rem;padding:0 1.25rem;font-size:13px;color:#64748b;line-height:1.6}
+.notes-intro strong{color:#0f172a}
+
+.notes-card{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:1.5rem;position:relative;display:flex;flex-direction:column}
+.notes-card.free-card{border-top:3px solid #16a34a}
+.notes-card.locked-card{border-top:3px solid #0d9488}
+.notes-top-badge{position:absolute;top:-13px;left:20px;font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;white-space:nowrap}
+.badge-free{background:#16a34a;color:#fff}
+.badge-locked{background:#0d9488;color:#fff}
+.notes-card-label{font-size:11px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:.06em;margin:.4rem 0 .3rem}
+.notes-card-title{font-size:1.05rem;font-weight:700;color:#0f172a;margin-bottom:.25rem;line-height:1.3}
+.notes-card-sub{font-size:13px;color:#64748b;margin-bottom:1rem;line-height:1.5}
+.notes-feat{list-style:none;padding:0;margin:.75rem 0 1rem}
+.notes-feat li{font-size:13px;color:#334155;padding:4px 0;border-top:1px solid #f1f5f9;display:flex;gap:8px;align-items:flex-start}
+.notes-feat li:first-child{border-top:none}
+.notes-feat .ck{color:#16a34a;font-weight:700;flex-shrink:0}
+.notes-feat .lk{color:#0d9488;font-weight:700;flex-shrink:0}
+.notes-parts{display:flex;flex-direction:column;gap:6px;margin-bottom:1rem}
+.notes-part-link{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:7px;text-decoration:none;font-size:13px;font-weight:600;transition:all .15s}
+.notes-part-link.free-link{background:#f0fdf4;color:#15803d;border:1px solid #bbf7d0}
+.notes-part-link.free-link:hover{background:#dcfce7}
+.notes-part-link.lock-link{background:#f0fdfa;color:#0f766e;border:1px solid #99f6e4}
+.notes-part-link.lock-link:hover{background:#ccfbf1}
+.notes-part-link span{font-size:11px;font-weight:400;color:#94a3b8}
+.notes-cta-btn{width:100%;padding:.75rem;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;border:none;margin-top:auto;transition:all .15s;text-align:center;text-decoration:none;display:block}
+.notes-cta-free{background:#f0fdf4;color:#15803d;border:1.5px solid #16a34a}
+.notes-cta-free:hover{background:#dcfce7}
+.notes-cta-locked{background:#0d9488;color:#fff}
+.notes-cta-locked:hover{background:#0f766e;transform:translateY(-1px)}
+.locked-parts-preview{margin-bottom:.75rem}
+.locked-parts-preview p{font-size:12px;color:#94a3b8;margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.locked-tag{display:inline-block;font-size:11px;background:#f1f5f9;color:#64748b;border-radius:4px;padding:2px 8px;margin:2px 3px 2px 0}
+/* ---- FULL ACCESS NAV TAB ---- */
+.access-tab{position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:300;background:#f97316;color:#fff;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:14px 6px;border-radius:6px 0 0 6px;writing-mode:vertical-rl;text-orientation:mixed;text-decoration:none;box-shadow:-3px 0 12px rgba(249,115,22,.35);transition:background .2s;}
+.access-tab:hover{background:#ea6c00;}
+@media(max-width:480px){.access-tab{font-size:10px;padding:10px 5px;}}
+
+/* ---- FREE SAMPLE CARD ---- */
+.sample-section{max-width:780px;margin:0 auto 2rem;padding:0 1.25rem}
+.sample-card{background:#fff;border:2px solid #0d9488;border-radius:14px;padding:1.5rem;display:flex;align-items:center;gap:1.5rem;position:relative;overflow:hidden;}
+.sample-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#0d9488,#06b6d4);}
+.sample-card-left{flex-shrink:0;text-align:center;}
+.sample-q-count{font-size:2.8rem;font-weight:800;color:#0d9488;line-height:1;}
+.sample-q-label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#64748b;margin-top:2px;}
+.sample-card-divider{width:1px;height:80px;background:#e2e8f0;flex-shrink:0;}
+.sample-card-body{flex:1;}
+.sample-card-badge{display:inline-block;background:#f0fdfa;color:#0f766e;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px;border:1px solid #99f6e4;}
+.sample-card-title{font-size:1rem;font-weight:700;color:#0f172a;margin-bottom:6px;line-height:1.3;}
+.sample-card-desc{font-size:13px;color:#64748b;line-height:1.5;margin-bottom:12px;}
+.sample-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
+.sample-tag{font-size:11px;background:#f1f5f9;color:#475569;padding:2px 8px;border-radius:4px;}
+.sample-card-btn{display:inline-flex;align-items:center;gap:6px;background:#0d9488;color:#fff;text-decoration:none;padding:9px 18px;border-radius:7px;font-size:13px;font-weight:700;transition:all .15s;}
+.sample-card-btn:hover{background:#0f766e;transform:translateY(-1px);}
+@media(max-width:520px){.sample-card{flex-direction:column;text-align:center;gap:1rem;}.sample-card-divider{display:none;}.sample-card-left{display:flex;align-items:center;gap:10px;}.sample-tags{justify-content:center;}.sample-q-count{font-size:2rem;}}
 </style>
-</head>
-<body>
+
+<!-- FIXED FULL ACCESS TAB -->
+<a class="access-tab" id="access-tab-btn" href="#pricing-section">Full&nbsp;Access ₹899</a>
 
 <nav>
   <a class="brand" href="https://marineintelligenceweekly.com">Marine Intelligence Weekly</a>
@@ -110,20 +174,47 @@ footer a{color:#64748b;text-decoration:none}
 
 <!-- HERO -->
 <div class="hero">
-  <h1>MEO Class 1 <span>Question Bank</span></h1>
-  <p>Engine-room level oral exam Q&A. Built by a serving 2/E. Referenced to SOLAS, MARPOL, Class rules and DGS circulars.</p>
-  <a href="https://marineintelligenceweekly.com/SQ/QB1_A.html" class="sample-btn" target="_blank">View free sample →</a>
+  <h1>MEO Class 1 <span>Question Bank</span><br>&amp; Study Notes</h1>
+  <p>Oral exam Q&amp;A bank + examiner-focused study notes. Built by a serving 2/E at Maersk. Kochi MMD intelligence baked in.</p>
 </div>
 
 <!-- STATS -->
 <div class="stats">
-  <div class="stat"><div class="stat-num">400+</div><div class="stat-label">Questions</div></div>
-  <div class="stat"><div class="stat-num">9</div><div class="stat-label">Topics covered</div></div>
-  <div class="stat"><div class="stat-num">30+</div><div class="stat-label">Subscribers</div></div>
+  <div class="stat"><div class="stat-num">417+</div><div class="stat-label">QB Questions</div></div>
+  <div class="stat"><div class="stat-num">200</div><div class="stat-label">Pages of Notes</div></div>
+  <div class="stat"><div class="stat-num">9</div><div class="stat-label">Topic files</div></div>
+  <div class="stat"><div class="stat-num">5</div><div class="stat-label">Examiners covered</div></div>
   <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Free updates</div></div>
 </div>
 
+<!-- FREE SAMPLE CARD -->
+<div class="sample-section">
+  <div class="sample-card">
+    <div class="sample-card-left">
+      <div class="sample-q-count">30</div>
+      <div class="sample-q-label">Q&amp;A solved</div>
+    </div>
+    <div class="sample-card-divider"></div>
+    <div class="sample-card-body">
+      <div class="sample-card-badge">🔓 Free — No login required</div>
+      <div class="sample-card-title">QB1_A — Engine Construction, Stability &amp; Surveys</div>
+      <div class="sample-card-desc">30 fully solved oral exam questions. Each card has a 15-sec answer, 60-sec answer, deep-dive sections, regulatory references, and Kochi MMD examiner tips. See exactly what subscribers get.</div>
+      <div class="sample-tags">
+        <span class="sample-tag">Stability</span>
+        <span class="sample-tag">Surveys</span>
+        <span class="sample-tag">Ship Construction</span>
+        <span class="sample-tag">Rajappan / Nair style</span>
+        <span class="sample-tag">IS Code refs</span>
+      </div>
+      <a class="sample-card-btn" href="https://marineintelligenceweekly.com/SQ/QB1_A.html" target="_blank">
+        Open Free Sample →
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- EMAIL CAPTURE FORM -->
+<div id="pricing-section"></div>
 <div class="email-capture">
   <div class="capture-box">
     <p>📧 Enter your details to get instant access after payment</p>
@@ -178,7 +269,8 @@ footer a{color:#64748b;text-decoration:none}
       <div class="tier-price">₹899 <span>one-time</span></div>
       <div class="tier-slots slots-ok">✓ Open access — join anytime</div>
       <ul class="feat-list">
-        <li><span class="ck">✓</span>Full QB — all topics, all questions</li>
+        <li><span class="ck">✓</span>Full QB — all 417+ questions, all topics</li>
+        <li><span class="ck">✓</span>Simon Sir oral notes — full 200 pages (8 parts)</li>
         <li><span class="ck">✓</span>Lifetime access + all future updates</li>
         <li><span class="ck">✓</span>WhatsApp group access</li>
         <li><span class="ck">✓</span>Same content as Founders tier</li>
@@ -192,26 +284,98 @@ footer a{color:#64748b;text-decoration:none}
 
 </div>
 
+<!-- NOTES SERIES SECTION -->
+<div class="section-divider">
+  <div class="section-divider-line">
+    <span class="section-divider-title">📄 Study Notes Series — Simon Sir Oral Focus</span>
+  </div>
+</div>
+
+<p class="notes-intro">
+  <strong>New:</strong> Vignesh Siva's handwritten notes — transcribed, expanded &amp; updated to 2026 regulations by Nixon Antony. Pages 1–50 are <strong>free to share</strong>. Full 200 pages (8 parts) included with ₹899 QB access.
+</p>
+
+<div class="notes-grid">
+
+  <!-- FREE CARD -->
+  <div class="notes-card free-card">
+    <div class="notes-top-badge badge-free">🔓 Free — Share Freely</div>
+    <div style="margin-top:.6rem">
+      <div class="notes-card-label">Simon Sir Notes · Pages 1–50</div>
+      <div class="notes-card-title">Free Study Notes — Part 1 &amp; 2</div>
+      <div class="notes-card-sub">STCW, Manning, GHG, MARPOL, Navigation, Stability, Commercial Law — all with Simon Sir examiner tips.</div>
+      <div class="notes-parts">
+        <a class="notes-part-link free-link" href="simon-notes-p1.html">
+          Part 1 — Pages 1–25 <span>25 topics →</span>
+        </a>
+        <a class="notes-part-link free-link" href="simon-notes-p2.html">
+          Part 2 — Pages 26–50 <span>30 topics →</span>
+        </a>
+      </div>
+      <ul class="notes-feat">
+        <li><span class="ck">✓</span>55 topics with Simon Sir oral tips</li>
+        <li><span class="ck">✓</span>Regulatory references on every topic</li>
+        <li><span class="ck">✓</span>Search + quick topic navigation</span></li>
+        <li><span class="ck">✓</span>Updated to 2026 regulations</li>
+      </ul>
+      <a class="notes-cta-btn notes-cta-free" href="simon-notes-p1.html">Read Part 1 — Free →</a>
+    </div>
+  </div>
+
+  <!-- LOCKED CARD -->
+  <div class="notes-card locked-card">
+    <div class="notes-top-badge badge-locked">🔒 Included with ₹899 access</div>
+    <div style="margin-top:.6rem">
+      <div class="notes-card-label">Simon Sir Notes · Full 200 Pages</div>
+      <div class="notes-card-title">Complete Notes — 8 Parts</div>
+      <div class="notes-card-sub">The complete 200-page set including cargo ops, stability deep-dive, ISM/SMS, emergency procedures, advanced commercial law and full machinery notes.</div>
+      <div class="locked-parts-preview">
+        <p>Locked parts include</p>
+        <span class="locked-tag">Pages 51–75</span>
+        <span class="locked-tag">Pages 76–100</span>
+        <span class="locked-tag">Pages 101–125</span>
+        <span class="locked-tag">Pages 126–150</span>
+        <span class="locked-tag">Pages 151–175</span>
+        <span class="locked-tag">Pages 176–200</span>
+      </div>
+      <ul class="notes-feat">
+        <li><span class="lk">✓</span>Full 200 pages in 8 chunked parts</li>
+        <li><span class="lk">✓</span>Cargo ops, surveys, emergency plans</li>
+        <li><span class="lk">✓</span>Advanced ISM/SMS deep-dive</li>
+        <li><span class="lk">✓</span>Complete QB series also included</li>
+      </ul>
+      <a class="notes-cta-btn notes-cta-locked" href="#" onclick="document.getElementById('buyer-email').focus();window.scrollTo({top:document.getElementById('buyer-email').getBoundingClientRect().top+window.scrollY-100,behavior:'smooth'});return false;">
+        Get Full Access — ₹899 ↑
+      </a>
+    </div>
+  </div>
+
+</div>
+
 <!-- WHAT'S INSIDE -->
 <div class="inside">
-  <h2>Topics covered</h2>
+  <h2>QB Topics covered</h2>
   <div class="topics">
-    <div class="topic">Motor Engineering</div>
-    <div class="topic">KAS (Ship Stability)</div>
+    <div class="topic">Motor Engineering (2-Stroke)</div>
+    <div class="topic">KAS — Ship Stability</div>
     <div class="topic">Naval Architecture</div>
-    <div class="topic">Marine Electrical & Electronics</div>
-    <div class="topic">SOLAS & Fire Safety</div>
-    <div class="topic">MARPOL & Environment</div>
-    <div class="topic">Ship Construction</div>
-    <div class="topic">Automation & Control</div>
+    <div class="topic">Marine Electrical &amp; Electronics</div>
+    <div class="topic">SOLAS &amp; Fire Safety</div>
+    <div class="topic">MARPOL &amp; Environment</div>
+    <div class="topic">Ship Construction &amp; Surveys</div>
+    <div class="topic">Automation &amp; Control</div>
     <div class="topic">Auxiliary Machinery</div>
+    <div class="topic">GHG / CII / Decarbonisation</div>
+    <div class="topic">ISM / ISPS / MLC / STCW</div>
+    <div class="topic">Cargo Ops — Containers</div>
+    <div class="topic">Commercial &amp; Maritime Law</div>
   </div>
 </div>
 
 <!-- TRUST STRIP -->
 <div class="trust">
   <strong>Built by a practitioner, for practitioners</strong>
-  <p>Nixon Antony is a Second Engineer at Maersk A/S with 12+ years on large container vessels, currently preparing for MEO Class 1. Every answer is written from the engine room — not a textbook.</p>
+  <p>Nixon Antony is a Second Engineer at Maersk A/S on large container vessels, currently preparing for MEO Class 1 at Kochi MMD. Every QB answer and notes expansion is written from the engine room — not a textbook. Kochi MMD examiner intelligence (Nair, Simon, Rajappan, Srivastava, Senthil) is embedded throughout.</p>
 </div>
 
 <!-- SUCCESS MODAL -->
@@ -219,7 +383,7 @@ footer a{color:#64748b;text-decoration:none}
   <div class="modal">
     <div style="font-size:2.5rem;margin-bottom:.75rem">⚓</div>
     <h2>You're in!</h2>
-    <p>Payment verified. Your QB access link has been sent to your email. Check your inbox (and spam folder if needed).<br><br>All the best for your orals.</p>
+    <p>Payment verified. Your access password has been sent to your email — it unlocks the full QB series and all 200 pages of Simon Sir notes.<br><br>Check your inbox (and spam if needed). All the best for your orals.</p>
     <button class="close-btn" onclick="document.getElementById('success-modal').classList.remove('show')">Got it</button>
   </div>
 </div>
@@ -428,7 +592,9 @@ async function verifyPayment(razorpayResponse, tier, buyerEmail, buyerName, btn)
     enableButton(btn, tier);
   }
 }
+document.getElementById('access-tab-btn').addEventListener('click',function(e){
+  e.preventDefault();
+  document.getElementById('pricing-section').scrollIntoView({behavior:'smooth'});
+});
 </script>
-
-</body>
 </html>

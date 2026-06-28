@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEO Class 1 — Simon Sir Oral Notes | Pages 1–25 | Marine Intelligence Weekly</title>
+<meta name="description" content="MEO Class 1 oral exam preparation notes focused on Simon Sir's examination style. Originally by Vignesh Siva, transcribed and expanded by Nixon Antony, 2/E, Maersk A/S. Pages 1–25 free to share.">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5">
+// SEARCH
+function notesSearch(q){
+  const cards=document.querySelectorAll('.note-card');
+  const sections=document.querySelectorAll('.section-head');
+  const term=q.toLowerCase().trim();
+  let vis=0;
+  cards.forEach(card=>{
+    const match=!term||card.innerText.toLowerCase().includes(term);
+    card.style.display=match?'':'none';
+    if(match)vis++;
+  });
+  // hide section heads with no visible cards
+  sections.forEach(sec=>{
+    let next=sec.nextElementSibling;
+    let hasVis=false;
+    while(next&&!next.classList.contains('section-head')){
+      if(next.classList.contains('note-card')&&next.style.display!=='none')hasVis=true;
+      next=next.nextElementSibling;
+    }
+    sec.style.display=hasVis||!term?'':'none';
+  });
+  const count=document.getElementById('searchCount');
+  const noRes=document.getElementById('noResults');
+  if(count)count.textContent=term?`${vis} result${vis!==1?'s':''}`:' ';
+  if(noRes)noRes.style.display=vis===0&&term?'block':'none';
+}
+
+// FORMSPREE SUBMIT
+async function submitCorrection(e){
+  e.preventDefault();
+  const form=document.getElementById('correctionForm');
+  const btn=form.querySelector('.cf-submit');
+  btn.textContent='Sending…';btn.disabled=true;
+  try{
+    const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
+    if(res.ok){
+      document.getElementById('cfSuccess').style.display='block';
+      form.reset();
+    } else {btn.textContent='Error — try email';btn.disabled=false;}
+  } catch{btn.textContent='Error — try email';btn.disabled=false;}
+}
+
+</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<!-- Content protection -->
+<meta name="robots" content="index, follow">
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.65;}
+
+/* TOPBAR */
+.topbar{background:var(--navy);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;gap:12px;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-mark{width:32px;height:32px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:14px;letter-spacing:-1px;flex-shrink:0;}
+.brand-name{color:#fff;font-size:14px;font-weight:600;line-height:1.2;}
+.brand-sub{color:#94a3b8;font-size:11px;}
+.topbar-nav{display:flex;gap:6px;flex-wrap:wrap;}
+.topbar-nav a{color:#cbd5e1;text-decoration:none;font-size:12px;padding:5px 10px;border-radius:5px;transition:background .2s;}
+.topbar-nav a:hover{background:rgba(255,255,255,.1);color:#fff;}
+.topbar-nav a.highlight{background:var(--teal);color:#fff;font-weight:600;}
+
+/* PAGE HEADER */
+.page-header{background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 100%);padding:36px 24px 28px;text-align:center;}
+.header-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:14px;}
+.page-header h1{color:#fff;font-size:clamp(20px,4vw,30px);font-weight:800;line-height:1.25;margin-bottom:10px;}
+.page-header p{color:#94a3b8;font-size:14px;max-width:640px;margin:0 auto 16px;}
+.header-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:8px;}
+.meta-pill{background:rgba(255,255,255,.08);color:#cbd5e1;font-size:11px;padding:4px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);}
+
+/* FREE SHARE BANNER */
+.share-banner{background:#dcfce7;border-bottom:2px solid #16a34a;padding:10px 20px;text-align:center;font-size:13px;color:#15803d;font-weight:600;}
+.share-banner span{font-weight:400;color:#166534;margin-left:6px;}
+
+/* CTA STICKY */
+.cta-bar{background:var(--orange-light);border-bottom:2px solid var(--orange);padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+.cta-bar p{font-size:13px;color:#9a3412;font-weight:600;}
+.cta-btn{background:var(--orange);color:#fff;text-decoration:none;padding:7px 16px;border-radius:6px;font-size:12px;font-weight:700;white-space:nowrap;}
+.cta-btn:hover{background:#ea6c00;}
+
+/* LAYOUT */
+.main-layout{max-width:960px;margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:0;padding:0 0 60px;}
+@media(max-width:700px){.main-layout{grid-template-columns:1fr;}.sidebar{display:none;}}
+
+/* SIDEBAR */
+.sidebar{padding:24px 16px;position:sticky;top:96px;height:calc(100vh - 96px);overflow-y:auto;border-right:1px solid var(--grey-border);}
+.sidebar h3{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--grey-text);margin-bottom:12px;}
+.toc-link{display:block;font-size:12px;color:var(--grey-text);text-decoration:none;padding:5px 8px;border-radius:5px;margin-bottom:2px;line-height:1.4;border-left:2px solid transparent;transition:all .2s;}
+.toc-link:hover,.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);}
+.toc-section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a0aec0;margin:12px 0 4px 8px;}
+.sidebar-divider{border:none;border-top:1px solid var(--grey-border);margin:14px 0;}
+.sidebar-note{background:var(--teal-light);border-radius:6px;padding:10px;font-size:11px;color:var(--teal-dark);line-height:1.5;}
+.sidebar-note strong{display:block;margin-bottom:4px;}
+
+/* MAIN FEED */
+.main-feed{padding:24px 28px;}
+.page-intro{background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:18px;margin-bottom:24px;font-size:13px;color:#475569;line-height:1.6;}
+.page-intro strong{color:var(--ink);}
+.attribution{font-size:12px;color:var(--grey-text);margin-top:10px;padding-top:10px;border-top:1px solid var(--grey-border);}
+
+/* SECTION HEAD */
+.section-head{display:flex;align-items:center;justify-content:space-between;padding:10px 0;margin:28px 0 12px;border-bottom:2px solid var(--grey-border);}
+.section-head h2{font-size:15px;font-weight:700;color:var(--navy);}
+.sec-count{background:var(--teal-light);color:var(--teal-dark);font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;}
+
+/* NOTE CARDS */
+.note-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:14px;overflow:hidden;transition:box-shadow .2s;}
+.note-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.07);}
+.note-header{padding:14px 18px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;background:#fff;}
+.note-header:hover{background:var(--grey-bg);}
+.page-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.note-title{font-size:14px;font-weight:700;color:var(--ink);flex:1;line-height:1.35;}
+.note-subtitle{font-size:12px;color:var(--grey-text);margin-top:3px;font-weight:400;}
+.note-chevron{flex-shrink:0;color:var(--grey-text);transition:transform .25s;margin-top:2px;}
+.note-card.open .note-chevron{transform:rotate(180deg);}
+.note-card.open .note-header{background:var(--teal-light);}
+.note-card.open .note-title{color:var(--teal-dark);}
+
+/* ANSWER BODY */
+.note-body{display:none;padding:0 18px 18px;font-family:'Georgia',serif;font-size:14px;line-height:1.75;}
+.note-card.open .note-body{display:block;}
+.note-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-dark);margin:16px 0 6px;}
+.note-body p{margin-bottom:10px;color:#1e293b;}
+.note-body ul,.note-body ol{padding-left:20px;margin-bottom:10px;}
+.note-body li{margin-bottom:5px;color:#1e293b;}
+.note-body strong{color:var(--ink);}
+
+/* FORMULA / INFO BOX */
+.formula-box{background:var(--grey-bg);border-left:3px solid var(--teal);border-radius:6px;padding:12px 14px;margin:12px 0;font-family:monospace;font-size:13px;line-height:1.7;}
+.formula-box .fb-title{font-family:'Segoe UI',system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:6px;}
+
+/* FLOWCHART */
+.flow-box{background:#fff;border:1px solid var(--grey-border);border-radius:8px;padding:14px;margin:12px 0;overflow-x:auto;}
+.flow-steps{display:flex;flex-direction:column;gap:0;}
+.flow-step{display:flex;align-items:flex-start;gap:10px;}
+.flow-step-content{background:var(--grey-bg);border:1px solid var(--grey-border);border-radius:6px;padding:8px 12px;font-size:13px;font-family:'Segoe UI',system-ui,sans-serif;flex:1;}
+.flow-arrow{color:var(--teal);font-size:18px;text-align:center;line-height:1;padding:2px 0 2px 20px;}
+
+/* SIMON TIP */
+.simon-tip{background:#fffbeb;border:1px solid #fde68a;border-left:4px solid #f59e0b;border-radius:6px;padding:12px 14px;margin:14px 0;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;line-height:1.6;}
+.simon-tip .tip-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#92400e;margin-bottom:5px;}
+.simon-tip p{color:#78350f;margin:0;}
+
+/* REG BOX */
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin-top:16px;}
+.reg-box-title{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;margin-bottom:10px;}
+.reg-item{display:flex;gap:10px;margin-bottom:7px;font-size:12px;align-items:flex-start;}
+.reg-item:last-child{margin-bottom:0;}
+.reg-code{color:var(--orange);font-family:monospace;font-weight:700;white-space:nowrap;flex-shrink:0;}
+.reg-desc{color:#cbd5e1;line-height:1.4;}
+
+/* NAV BUTTONS */
+.nav-strip{display:flex;justify-content:space-between;align-items:center;padding:20px 28px;border-top:2px solid var(--grey-border);margin-top:10px;background:#fff;}
+.nav-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s;}
+.nav-btn.home{background:var(--grey-bg);color:var(--ink);border:1px solid var(--grey-border);}
+.nav-btn.home:hover{background:var(--grey-border);}
+.nav-btn.next{background:var(--teal);color:#fff;}
+.nav-btn.next:hover{background:var(--teal-dark);}
+.nav-info{font-size:12px;color:var(--grey-text);text-align:center;}
+
+/* PAGE FOOTER */
+.page-footer{background:var(--navy);color:#94a3b8;text-align:center;padding:20px;font-size:12px;line-height:1.8;}
+.page-footer a{color:var(--teal);text-decoration:none;}
+.page-footer strong{color:#cbd5e1;}
+
+/* WATERMARK */
+body::after{content:"MIW — Nixon Antony — Free to Share P1-50";position:fixed;bottom:20px;right:20px;font-size:10px;color:rgba(0,0,0,.08);pointer-events:none;transform:rotate(-15deg);letter-spacing:.04em;z-index:0;}
+
+/* TOPIC LIST PANEL */
+.topic-panel{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:200;display:flex;align-items:flex-start;gap:0;}
+.topic-toggle{background:var(--teal);color:#fff;border:none;cursor:pointer;padding:10px 6px;border-radius:6px 0 0 6px;font-size:11px;font-weight:700;writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:.06em;text-transform:uppercase;min-height:80px;}
+.topic-drawer{background:#fff;border:1px solid var(--grey-border);border-right:none;border-radius:8px 0 0 8px;box-shadow:-4px 0 20px rgba(0,0,0,.12);width:220px;max-height:70vh;overflow-y:auto;display:none;padding:12px 0;}
+.topic-panel.open .topic-drawer{display:block;}
+.topic-drawer-head{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--grey-text);padding:4px 14px 8px;border-bottom:1px solid var(--grey-border);margin-bottom:6px;}
+.topic-drawer a{display:block;font-size:12px;color:var(--ink);text-decoration:none;padding:5px 14px;line-height:1.4;transition:background .15s;}
+.topic-drawer a:hover{background:var(--teal-light);color:var(--teal-dark);}
+.topic-drawer .tdr-section{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a0aec0;padding:8px 14px 3px;}
+@media(max-width:700px){.topic-panel{display:none;}}
+
+/* SEARCH BAR */
+.notes-search-wrap{display:flex;align-items:center;gap:10px;margin-bottom:18px;background:#fff;border:1.5px solid var(--grey-border);border-radius:8px;padding:8px 14px;transition:border-color .2s;}
+.notes-search-wrap:focus-within{border-color:var(--teal);}
+.notes-search-wrap svg{flex-shrink:0;color:var(--grey-text);}
+.notes-search-input{border:none;outline:none;font-size:14px;width:100%;color:var(--ink);background:transparent;}
+.notes-search-input::placeholder{color:#a0aec0;}
+.search-count{font-size:12px;color:var(--grey-text);white-space:nowrap;}
+.no-search-results{display:none;text-align:center;padding:40px 20px;color:var(--grey-text);font-size:14px;}
+
+/* FORMSPREE PANEL */
+.correction-panel{background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:24px;margin:28px 0 0;}
+.correction-panel h3{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.correction-panel p{font-size:13px;color:var(--grey-text);margin-bottom:16px;line-height:1.6;}
+.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:560px){.cf-grid{grid-template-columns:1fr;}}
+.cf-field{display:flex;flex-direction:column;gap:5px;}
+.cf-field.full{grid-column:1/-1;}
+.cf-field label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--grey-text);}
+.cf-field input,.cf-field select,.cf-field textarea{border:1.5px solid var(--grey-border);border-radius:6px;padding:8px 10px;font-size:13px;font-family:'Segoe UI',system-ui,sans-serif;color:var(--ink);outline:none;transition:border-color .2s;background:#fff;}
+.cf-field input:focus,.cf-field select:focus,.cf-field textarea:focus{border-color:var(--teal);}
+.cf-field textarea{resize:vertical;min-height:80px;}
+.cf-submit{margin-top:12px;background:var(--teal);color:#fff;border:none;border-radius:6px;padding:10px 22px;font-size:13px;font-weight:700;cursor:pointer;transition:background .2s;}
+.cf-submit:hover{background:var(--teal-dark);}
+.cf-success{display:none;background:#dcfce7;border:1px solid #16a34a;border-radius:6px;padding:12px 14px;font-size:13px;color:#15803d;margin-top:10px;}
+
+</style>
+</head>
+<body>
+
+<!-- TOPIC QUICK-NAV PANEL -->
+<div class="topic-panel" id="topicPanel">
+  <button class="topic-toggle" onclick="document.getElementById('topicPanel').classList.toggle('open')">Topics</button>
+  <div class="topic-drawer">
+    <div class="topic-drawer-head">Quick Navigation — Pages 1–25</div>
+    <span class="tdr-section">🔒 Security</span>
+    <a href="#n1">UKMTO &amp; MSCHOA</a>
+    <a href="#n2">Seaworthiness — UNCLOS</a>
+    <a href="#n3">Unseaworthy Ship</a>
+    <span class="tdr-section">⚖ Stability</span>
+    <a href="#n4">Loadigator Systems</a>
+    <a href="#n5">Freeboard &amp; Deck Line</a>
+    <span class="tdr-section">🌍 Environmental</span>
+    <a href="#n6">PDMS &amp; PSSA</a>
+    <a href="#n7">Carbon Factors (CF)</a>
+    <a href="#n8">MARPOL VI — IEEC &amp; IAPP</a>
+    <a href="#n9">IMO DCS &amp; GHGs</a>
+    <a href="#n10">IMO Mid-Term GHG Strategy</a>
+    <span class="tdr-section">🧭 STCW &amp; Manning</span>
+    <a href="#n11">Minimum Safe Manning</a>
+    <a href="#n12">Hazard &amp; Risk</a>
+    <a href="#n13">COC vs COP</a>
+    <a href="#n14">STCW Manila 2010</a>
+    <a href="#n15">VICT &amp; AECS</a>
+    <a href="#n16">TEAP Manual</a>
+    <a href="#n17">Rest Hours &amp; Alcohol</a>
+    <a href="#n18">Watchkeeping Principles</a>
+    <span class="tdr-section">📚 Training</span>
+    <a href="#n19">Bloom's Taxonomy</a>
+    <a href="#n20">Curriculum vs Syllabus</a>
+    <span class="tdr-section">🔥 LSA</span>
+    <a href="#n21">Lifeboat Testing</a>
+    <a href="#n22">Free-Fall Lifeboat</a>
+    <a href="#n23">Liferaft Painter &amp; HRU</a>
+    <span class="tdr-section">⚙️ Systems</span>
+    <a href="#n24">Flash Point Testing</a>
+    <a href="#n25">Cyber Security</a>
+    <a href="#n26">GISIS</a>
+    <a href="#n27">IORA</a>
+  </div>
+</div>
+
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="logo-mark">MIW</div>
+    <div><div class="brand-name">Marine Intelligence Weekly</div><div class="brand-sub">MEO Class 1 Preparation</div></div>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/SQ/">Notes Index</a>
+    <a href="https://marineintelligenceweekly.com/SQ/pay.html" class="highlight">Full Access ₹899</a>
+  </div>
+</nav>
+
+<!-- SHARE BANNER -->
+<div class="share-banner">
+  ✅ Pages 1–50 are FREE to share. <span>Drop this link in your MEO Class 1 WhatsApp group 👇</span>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="header-badge">Simon Sir Oral Notes · Part 1 of 2 (Free)</div>
+  <h1>MEO Class 1 Oral Exam Notes<br>Simon Sir — Pages 1 to 25</h1>
+  <p>Focused on examiner Simon Sir's oral style. Originally compiled by Vignesh Siva. Transcribed, expanded &amp; updated with latest regulations by Nixon Antony, 2/E, Maersk A/S.</p>
+  <div class="header-meta">
+    <span class="meta-pill">📄 25 Pages</span>
+    <span class="meta-pill">🔓 Free to Share</span>
+    <span class="meta-pill">🕒 Updated June 2026</span>
+    <span class="meta-pill">📍 Kochi MMD Focus</span>
+  </div>
+</div>
+
+<!-- CTA BAR -->
+<div class="cta-bar">
+  <p>📚 Full 200-page notes + complete QB access →</p>
+  <a class="cta-btn" href="https://marineintelligenceweekly.com/SQ/">Get Full Access at ₹899</a>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- SIDEBAR TOC -->
+  <aside class="sidebar">
+    <h3>Contents — Pages 1–25</h3>
+    <span class="toc-section-label">Safety & Security</span>
+    <a class="toc-link" href="#n1">UKMTO &amp; MSCHOA</a>
+    <a class="toc-link" href="#n2">Seaworthiness — UNCLOS</a>
+    <a class="toc-link" href="#n3">Unseaworthy Ship Criteria</a>
+    <span class="toc-section-label">Stability & Cargo</span>
+    <a class="toc-link" href="#n4">Loadigator Systems</a>
+    <a class="toc-link" href="#n5">Freeboard &amp; Load Lines</a>
+    <span class="toc-section-label">Environmental</span>
+    <a class="toc-link" href="#n6">PDMS &amp; PSSA</a>
+    <a class="toc-link" href="#n7">Carbon Factors (CF)</a>
+    <a class="toc-link" href="#n8">MARPOL Annex VI — IEEC &amp; IAPP</a>
+    <a class="toc-link" href="#n9">IMO DCS &amp; GHGs</a>
+    <a class="toc-link" href="#n10">IMO Mid-Term GHG Strategy</a>
+    <span class="toc-section-label">STCW & Manning</span>
+    <a class="toc-link" href="#n11">Minimum Safe Manning</a>
+    <a class="toc-link" href="#n12">Hazard &amp; Risk</a>
+    <a class="toc-link" href="#n13">COC vs COP</a>
+    <a class="toc-link" href="#n14">STCW Manila 2010</a>
+    <a class="toc-link" href="#n15">VICT &amp; AECS</a>
+    <a class="toc-link" href="#n16">TEAP Manual</a>
+    <a class="toc-link" href="#n17">Fitness for Duty &amp; Rest Hours</a>
+    <a class="toc-link" href="#n18">Watchkeeping Principles</a>
+    <span class="toc-section-label">Training</span>
+    <a class="toc-link" href="#n19">Bloom's Taxonomy</a>
+    <a class="toc-link" href="#n20">Curriculum vs Syllabus</a>
+    <span class="toc-section-label">LSA & Surveys</span>
+    <a class="toc-link" href="#n21">Lifeboat Safety Testing</a>
+    <a class="toc-link" href="#n22">Free-Fall Lifeboat</a>
+    <a class="toc-link" href="#n23">Liferaft Painter Systems</a>
+    <span class="toc-section-label">Systems</span>
+    <a class="toc-link" href="#n24">Fuel Characteristics</a>
+    <a class="toc-link" href="#n25">Cyber Security</a>
+    <a class="toc-link" href="#n26">GISIS</a>
+    <a class="toc-link" href="#n27">IORA</a>
+    <hr class="sidebar-divider">
+    <div class="sidebar-note">
+      <strong>📖 Pages 26–50</strong>
+      Continues with MARPOL Annex VI deep-dive, GHG/CII, stability, surveys &amp; commercial law.<br><br>
+      <a href="simon-notes-p2.html" style="color:var(--teal-dark);font-weight:700;">→ Go to Part 2</a>
+    </div>
+  </aside>
+
+  <!-- MAIN FEED -->
+  <div class="main-feed">
+
+    <div class="page-intro">
+      These notes are compiled from <strong>Simon Sir's oral examination style</strong> at Kochi MMD. Simon Sir typically focuses on <strong>machinery principles, management, STCW, GHG regulations, and ISM</strong>. Expect "why" questions, not just "what." He asks for consequences, regulatory authority, and practical application onboard.
+      <div class="attribution">Originally prepared by <strong>Vignesh Siva</strong>. Transcribed, expanded &amp; updated to 2026 regulations by <strong>Nixon Antony, 2/E, Maersk A/S</strong>. Free to share — Pages 1–50 only. Full 200-page notes + QB access at <a href="https://marineintelligenceweekly.com/SQ/" style="color:var(--teal);">marineintelligenceweekly.com/SQ/</a></div>
+    </div>
+
+
+    <!-- SEARCH BAR -->
+    <div class="notes-search-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input class="notes-search-input" id="notesSearch" type="text" placeholder="Search topics, regulations, keywords…" oninput="notesSearch(this.value)">
+      <span class="search-count" id="searchCount"></span>
+    </div>
+    <div class="no-search-results" id="noResults">No topics match your search. Try a different keyword.</div>
+
+    <!-- SECTION: SAFETY & SECURITY -->
+    <div class="section-head" id="n1">
+      <h2>🔒 Maritime Security</h2>
+      <span class="sec-count">3 topics</span>
+    </div>
+
+    <!-- UKMTO & MSCHOA -->
+    <div class="note-card" id="n1">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.1</span>
+        <div class="note-title">UKMTO &amp; MSCHOA
+          <div class="note-subtitle">Maritime security organisations — Indian Ocean / Gulf of Aden</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>UKMTO — United Kingdom Maritime Trade Operations</h4>
+        <ul>
+          <li><strong>HQ:</strong> Dubai — primary liaison for Indian Ocean, Red Sea, Gulf of Aden, Arabian Sea.</li>
+          <li><strong>Role:</strong> Direct operational link between merchant vessels and military naval forces in the region.</li>
+          <li><strong>VRS (Voluntary Reporting Scheme):</strong> Vessels in High Risk Areas (HRA) are strongly encouraged to report position and suspicious activity. Not mandatory — but highly recommended by BMP5.</li>
+        </ul>
+        <h4>MSCHOA — Maritime Security Centre Horn of Africa</h4>
+        <ul>
+          <li><strong>Established by:</strong> EUNAVFOR (EU Naval Force) — combats piracy in Gulf of Aden and Indian Ocean.</li>
+          <li><strong>Monitoring:</strong> 24/7 surveillance — Western Indian Ocean, Gulf of Aden, Somali Basin.</li>
+          <li><strong>Functions:</strong> Intelligence collection &amp; analysis; coordination with international naval forces; voluntary ship registration via MSCHOA website.</li>
+          <li><strong>Collaboration:</strong> Operates jointly with UKMTO, EUNAVFOR, and regional naval coalitions.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is the difference between UKMTO and MSCHOA?" — Know that UKMTO is operational liaison (Dubai-based, military coordination), while MSCHOA is intelligence and monitoring (EUNAVFOR, vessel registration). Both are referenced in <strong>BMP5 (Best Management Practices 5)</strong> which Simon Sir may ask about in context of piracy.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">BMP5</span><span class="reg-desc">Best Management Practices for Protection Against Somalia Based Piracy — industry guidance document (BIMCO/ICS)</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS XI-2 / Reg 6</span><span class="reg-desc">Ship security alert system requirements — links to ISPS Code compliance at sea</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.1/Circ.1405/Rev.3</span><span class="reg-desc">Revised interim guidance to shipowners, ship operators and shipmasters on use of privately contracted armed security personnel (PCASP)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEAWORTHINESS UNCLOS -->
+    <div class="note-card" id="n2">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.1</span>
+        <div class="note-title">Seaworthiness under UNCLOS
+          <div class="note-subtitle">Flag State duties — Articles 91 &amp; 219</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>UNCLOS — Key Articles on Seaworthiness</h4>
+        <ul>
+          <li><strong>Article 91:</strong> Flag State duties — a ship must sail under only one flag; the flag state exercises jurisdiction and control over the ship in administrative, technical, and social matters.</li>
+          <li><strong>Article 94:</strong> Duties of the Flag State — must ensure ships flying its flag comply with international regulations on safety of life at sea, prevention of collision, manning, and prevention of pollution.</li>
+          <li><strong>Article 219:</strong> Enforcement measures — Port States may direct a vessel to the nearest appropriate repair yard if unseaworthy and likely to cause marine pollution.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What does UNCLOS say about seaworthiness?" — He expects you to connect <strong>Flag State responsibility (Art. 94)</strong> with <strong>Port State enforcement (Art. 219)</strong>. Note that Art. 91 is about nationality/flag, not seaworthiness per se.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">UNCLOS Art. 91</span><span class="reg-desc">Nationality of ships and flag state obligations</span></div>
+          <div class="reg-item"><span class="reg-code">UNCLOS Art. 94</span><span class="reg-desc">Flag State duties — safety, manning, and pollution prevention</span></div>
+          <div class="reg-item"><span class="reg-code">UNCLOS Art. 219</span><span class="reg-desc">Port State measures against unseaworthy vessels to avoid marine pollution</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UNSEAWORTHY -->
+    <div class="note-card" id="n3">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.4</span>
+        <div class="note-title">Unseaworthy Ship — Legal Criteria
+          <div class="note-subtitle">Merchant Shipping Act 1958, Section 344</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>A vessel is legally unseaworthy if any of the following apply</h4>
+        <ol>
+          <li><strong>Structural Faults:</strong> Material construction or design fails to comply with statutory regulations.</li>
+          <li><strong>Substandard Crewing:</strong> Master or crew unqualified, or numbers below Minimum Safe Manning Certificate.</li>
+          <li><strong>Missing Certificates:</strong> Any legally mandated statutory certificate is absent or expired.</li>
+          <li><strong>Deficient Equipment:</strong> Required machinery, safety equipment, or materials are missing.</li>
+          <li><strong>Mechanical Failure:</strong> Main machinery or auxiliaries unfit for the intended voyage.</li>
+          <li><strong>Improper Stowage:</strong> Cargo or ballast stowage that jeopardises safe conduct of the voyage.</li>
+        </ol>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"If you found the ship was unseaworthy — what would you do as CE?" — Frame your answer around <strong>ISM Code Clause 5</strong> (Master's overriding authority), <strong>SOLAS I/14</strong> (maintenance of conditions after survey), and reporting through the DPA. Do not say "sail and fix later."</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MS Act 1958 / S.344</span><span class="reg-desc">Indian domestic law definition of unseaworthy vessel</span></div>
+          <div class="reg-item"><span class="reg-code">UNCLOS Art. 94</span><span class="reg-desc">Flag State duty to ensure seaworthiness</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS I/Reg 14</span><span class="reg-desc">Maintenance of conditions after survey — obligation not to allow deterioration</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code / Cl. 5</span><span class="reg-desc">Master's overriding authority to take action for safety</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: STABILITY & CARGO -->
+    <div class="section-head" id="n4">
+      <h2>⚖ Stability &amp; Cargo</h2>
+      <span class="sec-count">2 topics</span>
+    </div>
+
+    <!-- LOADIGATOR -->
+    <div class="note-card" id="n4">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.5</span>
+        <div class="note-title">Loadigator Systems
+          <div class="note-subtitle">Loading computer — type approval, limitations</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Definition &amp; Functions</h4>
+        <p>A type-approved software system used to determine structural impacts of loading and ballasting on ship stability. Key outputs: shear force, bending moment, GM, and stress limits — calculated before departure.</p>
+        <h4>Key Rules</h4>
+        <ul>
+          <li>All ship-specific stability data must be pre-loaded.</li>
+          <li>Must be <strong>type-approved by the Flag State Administration or recognised Classification Society</strong>.</li>
+          <li><strong>Critical proviso:</strong> Serves as a calculation aid only — <em>never a substitute for the approved Stability Booklet</em>.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is a Loadicator and what are its limitations?" — Always state that it is <strong>not a replacement for the stability booklet</strong>. The approved booklet holds legal authority; the loadicator is a tool. Also mention type approval requirement.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg 5-1</span><span class="reg-desc">Stability information and approved stability booklet requirement</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.1/Circ.1229</span><span class="reg-desc">Revised guidelines on approval of stability instruments</span></div>
+          <div class="reg-item"><span class="reg-code">IS Code 2008 / Part B</span><span class="reg-desc">Intact stability code — calculation standards underpinning loadicator outputs</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FREEBOARD -->
+    <div class="note-card" id="n5">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.24</span>
+        <div class="note-title">Freeboard — Definition &amp; Deck Line
+          <div class="note-subtitle">Load Lines Convention 1966</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Freeboard — Definition</h4>
+        <p>The vertical distance measured amidships from the upper edge of the deck line to the upper edge of the applicable load line mark.</p>
+        <div class="formula-box">
+          <div class="fb-title">Deck Line Dimensions</div>
+          Length: <strong>300 mm</strong> | Width: <strong>25 mm</strong><br>
+          Permanently marked amidships on each side of the ship.
+        </div>
+        <h4>Significance</h4>
+        <ul>
+          <li>Freeboard is the primary safety reserve — it limits how deep a ship can be loaded.</li>
+          <li>Minimum freeboard is assigned by the Classification Society / Flag State per Load Lines Convention 1966 (LL 66) and Protocol 1988.</li>
+          <li><strong>Tabular freeboard</strong> is assigned per ship type and length, then adjusted for block coefficient, depth correction, sheer, and superstructure deductions.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is freeboard and why is it important?" — Link it to <strong>reserve buoyancy</strong>. He may then ask about the different load line zones (tropical, summer, winter, winter North Atlantic) or how freeboard varies for timber vessels.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">LL Convention 1966</span><span class="reg-desc">International Convention on Load Lines — basis for freeboard assignment</span></div>
+          <div class="reg-item"><span class="reg-code">LL Protocol 1988</span><span class="reg-desc">Amended Load Lines Protocol — harmonised survey regime with SOLAS/MARPOL</span></div>
+          <div class="reg-item"><span class="reg-code">ILLC Annex I / Reg 2(1)</span><span class="reg-desc">Deck line definition — 300 mm × 25 mm, permanently marked amidships on each side</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: ENVIRONMENTAL -->
+    <div class="section-head" id="n6">
+      <h2>🌍 Environmental &amp; GHG</h2>
+      <span class="sec-count">5 topics</span>
+    </div>
+
+    <!-- PDMS & PSSA -->
+    <div class="note-card" id="n6">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.6</span>
+        <div class="note-title">PDMS &amp; PSSA
+          <div class="note-subtitle">Anti-fouling coating &amp; Particularly Sensitive Sea Areas</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>PDMS — Polydimethylsiloxane</h4>
+        <ul>
+          <li><strong>Application:</strong> Silicone oil integrated into a matrix and applied as a foul-release coating on the underwater hull.</li>
+          <li><strong>Working Principle:</strong> Hydrophobic + lubricating properties lower the hull's coefficient of friction — marine organisms cannot adhere to the surface.</li>
+          <li><strong>Environmental Advantage:</strong> Non-toxic, entirely mechanical action — an eco-friendly alternative to biocidal anti-fouling paints (which are regulated under the AFS Convention 2001).</li>
+        </ul>
+        <h4>PSSA — Particularly Sensitive Sea Area</h4>
+        <ul>
+          <li><strong>Definition:</strong> An area designated by IMO requiring special protection from shipping activity due to ecological, socio-economic, or scientific significance.</li>
+          <li><strong>Designation Criteria:</strong> (1) Ecological significance — rare/unique ecosystems; (2) Socio-economic value — tourism, fisheries, trade; (3) Scientific/historical importance.</li>
+          <li><strong>Examples:</strong> Great Barrier Reef, Baltic Sea, NW Mediterranean, Torres Strait.</li>
+          <li><strong>Associated Protective Measures (APMs):</strong> May include routing measures, speed restrictions, discharge prohibitions, or mandatory pilotage.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is a PSSA and what measures apply?" — Know the three designation criteria and that the protective measures are <strong>separate IMO instruments</strong> approved alongside the PSSA designation. Do not confuse PSSA with ECA (Emission Control Area).</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IMO Res. A.982(24)</span><span class="reg-desc">Revised guidelines for the identification and designation of PSSAs</span></div>
+          <div class="reg-item"><span class="reg-code">AFS Convention 2001</span><span class="reg-desc">International Convention on the Control of Harmful Anti-fouling Systems on Ships</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex V</span><span class="reg-desc">Prevention of pollution by garbage — applies strictly in PSSAs</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARBON FACTORS -->
+    <div class="note-card" id="n7">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.19</span>
+        <div class="note-title">Carbon Factors (C<sub>F</sub>) &amp; CO₂ Calculations
+          <div class="note-subtitle">MARPOL Annex VI — GHG emission calculations</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Carbon Factor (C<sub>F</sub>) — Definition</h4>
+        <p>The mass of CO₂ emitted per unit mass of fuel burned. Derived from atomic masses of carbon and oxygen in the CO₂ molecule.</p>
+        <div class="formula-box">
+          <div class="fb-title">CO₂ Molecular Mass Derivation</div>
+          C = 12 | O = 16 | CO₂ = 12 + (16×2) = <strong>44</strong><br>
+          Mass Ratio = 44 ÷ 12 = <strong>3.67</strong><br>
+          For fuel with 85% carbon (MDO): 3.67 × 0.85 ≈ <strong>3.12</strong>
+        </div>
+        <h4>Standard C<sub>F</sub> Values (MARPOL Annex VI, Reg 27)</h4>
+        <ul>
+          <li><strong>HFO:</strong> 3.114 t CO₂ / t fuel</li>
+          <li><strong>MDO / MGO:</strong> 3.206 t CO₂ / t fuel</li>
+          <li><strong>LNG (Methane):</strong> 2.750 t CO₂ / t fuel</li>
+          <li><strong>LPG:</strong> 3.030 t CO₂ / t fuel</li>
+          <li><strong>Methanol:</strong> 1.375 t CO₂ / t fuel</li>
+          <li><strong>Ammonia:</strong> 0 t CO₂ / t fuel (zero-carbon fuel)</li>
+        </ul>
+        <div class="formula-box">
+          <div class="fb-title">Example: CO₂ Emission Calculation</div>
+          ME: 60 t/day HFO | AE: 3 t/day HFO<br>
+          Total: 63 t/day × 3.114 = <strong>196.18 t CO₂/day</strong>
+        </div>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is CF and how do you calculate CO₂ emissions?" — Know the formula, know the values for HFO and MGO from memory, and be able to do the multiplication. He may also ask how CF feeds into CII calculation (CO₂ ÷ transport work).</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 27</span><span class="reg-desc">IMO DCS — CF values defined in Appendix IX of Annex VI</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 28</span><span class="reg-desc">CII — Carbon Intensity Indicator, uses CF to compute annual CO₂</span></div>
+          <div class="reg-item"><span class="reg-code">MEPC.338(76)</span><span class="reg-desc">2021 Guidelines on CII rating — CF values and A–E rating boundaries defined; Appendix IX of MARPOL VI contains CF table</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MARPOL ANNEX VI -->
+    <div class="note-card" id="n8">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.20</span>
+        <div class="note-title">MARPOL Annex VI — IEEC &amp; IAPP Certificates
+          <div class="note-subtitle">Regulations 22–28 (energy efficiency) &amp; 12–16 (air pollution)</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>International Energy Efficiency Certificate (IEEC) — Chapter 4 Regulations</h4>
+        <ul>
+          <li><strong>Reg 22 (EEDI Technical File):</strong> Attained EEDI — applicable to new ships from 2013 based on build phase.</li>
+          <li><strong>Reg 23 (EEXI Technical File):</strong> Attained EEXI + EEXI OMM Manual — applicable from January 2023 to existing ships ≥400 GT.</li>
+          <li><strong>Reg 24 &amp; 25:</strong> Required EEDI / EEXI structural limits by ship type and size.</li>
+          <li><strong>Reg 26 (SEEMP):</strong> Ship Energy Efficiency Management Plan — Part I (2013), Part II for DCS (2019), Part III for CII (2023). SoC required for Parts II &amp; III.</li>
+          <li><strong>Reg 27 (IMO DCS):</strong> Data Collection System — fuel oil consumption reporting from 2019.</li>
+          <li><strong>Reg 28 (CII):</strong> Carbon Intensity Indicator rating — from January 2023.</li>
+        </ul>
+        <h4>International Air Pollution Prevention Certificate (IAPP) — Regulations</h4>
+        <ul>
+          <li><strong>Reg 12 (ODS):</strong> Ozone Depleting Substances — ODS Record Book.</li>
+          <li><strong>Reg 13 (NOₓ):</strong> NOₓ Technical File, EIAPP Certificate, Parameters Checklist.</li>
+          <li><strong>Reg 14 (SOₓ):</strong> BDN, fuel oil sampling, fuel changeover log. Global cap: <strong>0.50% S</strong> (from 2020); ECA: <strong>0.10% S</strong>.</li>
+          <li><strong>Reg 15 (VOC):</strong> VOC management plan for tankers.</li>
+          <li><strong>Reg 16 (Incineration):</strong> Incinerator type approval and operations.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What regulations are covered under MARPOL Annex VI and which certificates do they generate?" — The IEEC and IAPP are the two key certificates. Know which regulation number maps to which requirement. <strong>Reg 26 (SEEMP), Reg 27 (DCS), Reg 28 (CII)</strong> are the GHG trio Simon Sir focuses on.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 14</span><span class="reg-desc">SOₓ — 0.50% global sulphur cap (2020), 0.10% in ECAs</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 26</span><span class="reg-desc">SEEMP — 3-part structure; Part III requires SoC from 2023</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 28</span><span class="reg-desc">CII — annual rating A to E, corrective action plan for D/E ships</span></div>
+          <div class="reg-item"><span class="reg-code">MEPC.328(76)</span><span class="reg-desc">Amendments introducing EEXI and CII into MARPOL Annex VI (effective Jan 2023)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMO DCS -->
+    <div class="note-card" id="n9">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.21</span>
+        <div class="note-title">IMO DCS &amp; Primary GHGs in Shipping
+          <div class="note-subtitle">Data Collection System — fuel reporting &amp; greenhouse gases</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>IMO DCS — Data Collection System (Reg 27)</h4>
+        <ul>
+          <li><strong>Applicability:</strong> Ships of <strong>5,000 GT and above</strong> on international voyages.</li>
+          <li><strong>Incorporated in:</strong> SEEMP Part II (Data Collection Plan).</li>
+          <li><strong>Approved methodologies:</strong> (1) Flow meter; (2) Tank sounding/monitoring; (3) BDN method.</li>
+        </ul>
+        <div class="flow-box">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal-dark);margin-bottom:10px;">DCS Reporting Timeline</div>
+          <div class="flow-steps">
+            <div class="flow-step"><div class="flow-step-content">End of Calendar Year — data collection complete</div></div>
+            <div class="flow-arrow">▼ By 31 March</div>
+            <div class="flow-step"><div class="flow-step-content">Ship reports fuel data to Flag Admin / Class Society</div></div>
+            <div class="flow-arrow">▼ By 31 May</div>
+            <div class="flow-step"><div class="flow-step-content">Admin verifies data &amp; issues Statement of Compliance (SoC)</div></div>
+            <div class="flow-arrow">▼ By 30 June</div>
+            <div class="flow-step"><div class="flow-step-content">Admin submits verified data to IMO GISIS (anonymised)</div></div>
+          </div>
+        </div>
+        <h4>Primary GHGs in Shipping (per IMO GHG Strategy)</h4>
+        <ul>
+          <li>CO₂, CH₄ (methane), N₂O (nitrous oxide), HFCs, PFCs, SF₆, NF₃</li>
+          <li><strong>Note:</strong> NOₓ is an air pollutant (Reg 13) but also has climate effects — do not confuse with the GHG list above.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is IMO DCS and how does the reporting work?" — Know the three fuel measurement methods and the <strong>31 March → 31 May → 30 June</strong> timeline. Data privacy: vessel data is anonymised when submitted to GISIS.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 27</span><span class="reg-desc">IMO DCS — fuel consumption data collection and reporting framework</span></div>
+          <div class="reg-item"><span class="reg-code">MEPC.293(71)</span><span class="reg-desc">2016 Guidelines for DCS data collection</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 26</span><span class="reg-desc">SEEMP Part II — must contain the Data Collection Plan</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMO MID-TERM GHG -->
+    <div class="note-card" id="n10">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.12</span>
+        <div class="note-title">IMO Mid-Term GHG Strategy 2023
+          <div class="note-subtitle">Net-Zero 2050 — technical &amp; economic measures</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>IMO 2023 GHG Strategy — Key Targets</h4>
+        <ul>
+          <li>Net-Zero GHG emissions from international shipping: <strong>by or around 2050</strong>.</li>
+          <li>Indicative checkpoints: <strong>20–30% reduction by 2030</strong> and <strong>70–80% reduction by 2040</strong> (vs 2008 baseline).</li>
+          <li>Mid-term measures: adoption expected <strong>2025</strong>, effective <strong>mid-2027</strong>.</li>
+        </ul>
+        <h4>Two Pillars of Mid-Term Measures</h4>
+        <ul>
+          <li><strong>Technical Element:</strong> Goal-based marine fuel standard — phased reduction of GHG intensity of marine fuels (FuelEU approach).</li>
+          <li><strong>Economic Element:</strong> GHG pricing/carbon levy mechanism — mandatory financial contribution per tonne of fuel consumed.</li>
+        </ul>
+        <h4>Proposed Economic Schemes</h4>
+        <ul>
+          <li><strong>ZESIS</strong> (Japan) — Zero Emission Initiative, feebate model.</li>
+          <li><strong>IMSF&amp;R</strong> (Argentina) — International Maritime Sustainability Funding &amp; Reward.</li>
+          <li><strong>GHGL</strong> (Marshall &amp; Solomon Islands) — GHG Levy.</li>
+          <li><strong>IMO Net-Zero Framework</strong> — GHG levy of ~$150/tonne CO₂eq under discussion (MEPC 83, 2025).</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What are the IMO GHG targets for 2050?" — Quote <strong>net-zero by or around 2050</strong>, checkpoints 2030 and 2040, and the two pillars: technical (fuel standard) and economic (pricing). He may push on "what is the difference between EEXI, CII and the 2050 strategy?"</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IMO 2023 GHG Strategy</span><span class="reg-desc">MEPC 80 (July 2023) — revised strategy replacing 2018 initial strategy</span></div>
+          <div class="reg-item"><span class="reg-code">MEPC.328(76)</span><span class="reg-desc">EEXI &amp; CII amendments — the short-term measures already in force</span></div>
+          <div class="reg-item"><span class="reg-code">FuelEU Maritime</span><span class="reg-desc">EU Regulation 2023/1805 — fuel GHG intensity limits for EU voyages, phased from 2025</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: STCW & MANNING -->
+    <div class="section-head" id="n11">
+      <h2>🧭 STCW &amp; Manning</h2>
+      <span class="sec-count">8 topics</span>
+    </div>
+
+    <!-- MINIMUM SAFE MANNING -->
+    <div class="note-card" id="n11">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.3</span>
+        <div class="note-title">Minimum Safe Manning
+          <div class="note-subtitle">SOLAS V/14 &amp; IMO Res. A.1047(27)</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Core Document</h4>
+        <p>The <strong>Minimum Safe Manning Document (MSMD)</strong> — issued by the Flag State Administration under SOLAS V/14 and IMO Resolution A.1047(27).</p>
+        <h4>Determining Factors (8 Criteria)</h4>
+        <ol>
+          <li>Ship particulars — size and type.</li>
+          <li>Number, size, and type of main propulsion machinery and auxiliaries.</li>
+          <li>Level of vessel automation (UMS operations).</li>
+          <li>Nature of cargo carried.</li>
+          <li>Number and frequency of port calls.</li>
+          <li>Requirements of the Ship Security Plan (SSP).</li>
+          <li>Designated trading areas.</li>
+          <li>Prescribed grades and numbers of officers and ratings.</li>
+        </ol>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What factors determine minimum safe manning?" — List all 8 criteria. He may ask: "Can the CE override the minimum manning document?" — No, but the <strong>Master has overriding authority</strong> under ISM Code Cl. 5 to not sail if he believes it is unsafe.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS V / Reg 14</span><span class="reg-desc">Manning of ships — requirement for minimum safe manning document</span></div>
+          <div class="reg-item"><span class="reg-code">IMO Res. A.1047(27)</span><span class="reg-desc">Principles of minimum safe manning — 8 determining factors</span></div>
+          <div class="reg-item"><span class="reg-code">STCW Reg I/14</span><span class="reg-desc">Responsibilities of companies — ensure ships are manned in compliance with STCW</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HAZARD & RISK -->
+    <div class="note-card" id="n12">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.3</span>
+        <div class="note-title">Hazard &amp; Risk — Definitions &amp; Components
+          <div class="note-subtitle">ISM Code / SMS risk assessment framework</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Core Definitions</h4>
+        <ul>
+          <li><strong>Hazard:</strong> A physical condition or situation with potential to cause injury, property damage, or environmental harm.</li>
+          <li><strong>Risk:</strong> The likelihood/frequency of a hazardous event occurring within a defined timeframe or circumstance.</li>
+        </ul>
+        <div class="formula-box">
+          <div class="fb-title">Risk = Hazard × Consequence × Frequency</div>
+          Three components: (1) The hazard itself<br>
+          (2) Consequence and severity of the event<br>
+          (3) Frequency / probability of harm occurring
+        </div>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is the difference between hazard and risk?" — Classic Simon Sir opener. Then he links it to <strong>risk assessment in ISM Code</strong> (Cl. 7 — shipboard operations) and may ask for examples onboard a container vessel. Connect to PTW, toolbox talks, and HIRA.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">ISM Code / Cl. 7</span><span class="reg-desc">Shipboard operations — risk assessment and safe working procedures</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code / Cl. 8</span><span class="reg-desc">Emergency preparedness — requires identified hazards and response plans</span></div>
+          <div class="reg-item"><span class="reg-code">MLC 2006 / Reg 4.3</span><span class="reg-desc">Health and safety protection — risk assessment as a duty of flag state and employer</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COC vs COP -->
+    <div class="note-card" id="n13">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.9</span>
+        <div class="note-title">COC vs COP — STCW Certificates
+          <div class="note-subtitle">Certificate of Competency vs Certificate of Proficiency</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>COC — Certificate of Competency</h4>
+        <ul>
+          <li>Issued to: Masters, Officers (Deck &amp; Engine), GMDSS Radio Operators — STCW Chapters II, III, IV.</li>
+          <li><strong>Issuing authority:</strong> National Maritime Administration only (in India: DG Shipping).</li>
+          <li>Granted after verification of training evidence, sea service, and examination.</li>
+        </ul>
+        <h4>COP — Certificate of Proficiency</h4>
+        <ul>
+          <li>A credential other than COC — verifies meeting specific STCW training or competency standards.</li>
+          <li><strong>Examples:</strong> BST (EFA, FPFF, PSSR), PSCRB, STSDSD, Advanced Fire Fighting, Medical First Aid, ECDIS, tanker training COPs.</li>
+          <li>Issued by approved Maritime Training Institutes (MTIs) or the Administration.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is the difference between COC and COP?" — Key distinction: COC is issued <strong>only by the Administration</strong>, while COP can be issued by approved training institutes. He may then ask "which certificate do you hold?" — always know your own COC rank and endorsements.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">STCW Ch. II / III / IV</span><span class="reg-desc">COC requirements for deck officers, engineer officers, and GMDSS operators</span></div>
+          <div class="reg-item"><span class="reg-code">STCW Reg I/2</span><span class="reg-desc">Certificates and endorsements — definitions and issuance rules</span></div>
+          <div class="reg-item"><span class="reg-code">MS (STCW) Rules 2014</span><span class="reg-desc">Indian domestic implementation — DG Shipping as issuing authority</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STCW MANILA 2010 -->
+    <div class="note-card" id="n14">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.10</span>
+        <div class="note-title">STCW 2010 Manila Amendments
+          <div class="note-subtitle">Entry into force Jan 2012 — 7 major changes</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Entry into Force: 1 January 2012</h4>
+        <h4>7 Major Changes</h4>
+        <ol>
+          <li><strong>Fraud Prevention:</strong> Online verification systems (Master Checker) to combat fraudulent certificates.</li>
+          <li><strong>ETO (Electro-Technical Officer):</strong> Introduced as a mandatory COC rank for the first time.</li>
+          <li><strong>Able Seafarer Credentials:</strong> Separate COP for Able Seafarer Deck and Able Seafarer Engine.</li>
+          <li><strong>Security Training (STSDSD):</strong> Mandatory for all crew with designated security duties.</li>
+          <li><strong>Modernised Learning:</strong> Distance learning and web-based training formally accepted.</li>
+          <li><strong>Rest &amp; Fitness:</strong> Revised hours of rest; strict drug and alcohol abuse prevention guidelines.</li>
+          <li><strong>Specialised Training:</strong> Polar operations and Dynamic Positioning (DP) mandatory training criteria introduced.</li>
+        </ol>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What were the key changes in the 2010 Manila Amendments?" — He expects at least 5 points. The <strong>ETO introduction</strong> and <strong>fraud prevention</strong> are the two most distinctive changes. Mention the transition period: certificates had to be revalidated to Manila standard by <strong>1 January 2017</strong>.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">STCW 2010 Manila</span><span class="reg-desc">Comprehensive amendments to the 1978 STCW Convention — EIF January 2012</span></div>
+          <div class="reg-item"><span class="reg-code">STCW Table A-III/6</span><span class="reg-desc">Minimum standard of competency for ETO — introduced by Manila</span></div>
+          <div class="reg-item"><span class="reg-code">STCW Reg VI/6</span><span class="reg-desc">Mandatory minimum training requirements — security awareness (STSDSD)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VICT & AECS -->
+    <div class="note-card" id="n15">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.10–13</span>
+        <div class="note-title">VICT &amp; AECS — Instructor Certifications
+          <div class="note-subtitle">IMO Model Courses 6.09 &amp; 3.12</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>VICT — Vertical Integration Course for Trainers</h4>
+        <ul>
+          <li><strong>Formerly known as:</strong> TOTA (Training for Trainers and Assessors).</li>
+          <li><strong>Based on:</strong> IMO Model Course 6.09 | Compliant with STCW Reg I/6.</li>
+          <li><strong>Duration:</strong> 10 days (60 instructional hours).</li>
+          <li><strong>Purpose:</strong> Mandatory for mariners seeking to qualify as certified instructors for DG Shipping-approved courses at Maritime Training Institutes (MTIs).</li>
+          <li><strong>Vertical Integration:</strong> Ability to teach complex maritime content to multiple learner levels simultaneously in the same classroom.</li>
+        </ul>
+        <h4>AECS — Assessment, Examination and Certification of Seafarers</h4>
+        <ul>
+          <li><strong>Based on:</strong> IMO Model Course 3.12.</li>
+          <li><strong>Target:</strong> Examiners, class surveyors, internal auditors, course in-charges, faculty at MTIs.</li>
+          <li><strong>Eligibility:</strong> Must hold Master FG, MEO Class 1, GMDSS GOC, ETO COC, or VICT.</li>
+          <li><strong>Duration:</strong> 10 days.</li>
+          <li><strong>Scope:</strong> Legal, administrative, supervisory frameworks for assessing and certifying seafarers.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is VICT?" — Simon Sir asks this because he is an examiner himself. Know that the old name was TOTA, it is based on IMO MC 6.09, and it is mandatory for maritime instructors. He may ask "would you need VICT to teach in an MTI?" — Yes.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">STCW Reg I/6</span><span class="reg-desc">Training and assessment — requires instructors to be qualified under approved programmes</span></div>
+          <div class="reg-item"><span class="reg-code">IMO MC 6.09</span><span class="reg-desc">Model Course for Training Course Instructors — basis for VICT</span></div>
+          <div class="reg-item"><span class="reg-code">IMO MC 3.12</span><span class="reg-desc">Assessment, Examination and Certification of Seafarers — basis for AECS</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEAP -->
+    <div class="note-card" id="n16">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.14–15</span>
+        <div class="note-title">TEAP Manual — Training, Examination &amp; Assessment Programme
+          <div class="note-subtitle">Replaces META Manual — DG Shipping, MS (STCW) Rules 2014</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Status &amp; Publisher</h4>
+        <ul>
+          <li>Replaces the old <strong>META Manual</strong> (Maritime Education, Training and Assessment).</li>
+          <li>Published as e-publication by <strong>DG Shipping</strong> under the Merchant Shipping (STCW) Rules 2014.</li>
+          <li>Describes eligibility criteria, sea service, training courses, syllabi, and examination/assessment procedures for all ranks.</li>
+        </ul>
+        <h4>Structure</h4>
+        <ul>
+          <li><strong>Part A (Ch. I–IX):</strong> Mirrors STCW Convention Chapters I–VII + miscellaneous (Ch. VIII–IX: misconduct, exemptions, certificate replacement).</li>
+          <li><strong>Part B — Chapter I:</strong> General provisions — trainer/assessor courses, RUT courses, refreshers.</li>
+          <li><strong>Part B — Chapter II:</strong> Deck Department — pre-sea qualifications, Training Record Books (TRB), competency courses.</li>
+          <li><strong>Part B — Chapter III:</strong> Engine Department — pre-sea courses, MEO Class I syllabus, simulator requirements.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is the TEAP manual?" — He may ask this to assess whether you know the regulatory framework governing your own oral examination. Key point: it replaced META, it is published by DG Shipping, and it is aligned with STCW and IMO Model Courses.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MS (STCW) Rules 2014</span><span class="reg-desc">Indian domestic STCW implementation — TEAP is issued under these rules</span></div>
+          <div class="reg-item"><span class="reg-code">STCW Convention</span><span class="reg-desc">International framework — TEAP Part A mirrors STCW chapter structure</span></div>
+          <div class="reg-item"><span class="reg-code">DG Shipping Circular</span><span class="reg-desc">Latest TEAP version published on dgshipping.gov.in — check for updates before oral exam</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REST HOURS & FITNESS -->
+    <div class="note-card" id="n17">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.15–16</span>
+        <div class="note-title">Fitness for Duty — Rest Hours &amp; Alcohol Limits
+          <div class="note-subtitle">STCW Chapter VIII / MLC 2006 Reg 2.3</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Standard Rest Hour Limits (STCW Ch. VIII)</h4>
+        <div class="formula-box">
+          <div class="fb-title">Rest Hour Minimum Requirements</div>
+          Minimum rest in any 24-hour period: <strong>10 hours</strong><br>
+          Minimum rest in any 7-day period: <strong>77 hours</strong><br>
+          Max split: <strong>2 periods</strong>, longest ≥ <strong>6 continuous hours</strong><br>
+          Max interval between rest periods: <strong>14 hours</strong>
+        </div>
+        <h4>Emergency Exceptions (Master's Authority)</h4>
+        <p>Master may suspend rest requirements for: (1) immediate safety of the ship; (2) protection of cargo; (3) assisting ships/persons in distress. Compensatory rest must be provided afterwards.</p>
+        <h4>Relaxation Exceptions</h4>
+        <ul>
+          <li>Allowed for max <strong>2 consecutive weeks</strong>; rest not less than <strong>70 hours/7 days</strong>.</li>
+          <li>Max <strong>3 relaxations in a month</strong>.</li>
+          <li>Under relaxation: rest may be split into <strong>3 periods</strong> (1 ≥ 6 hrs; others ≥ 2 hrs; intervals ≤ 14 hrs).</li>
+        </ul>
+        <h4>Alcohol Limits</h4>
+        <ul>
+          <li><strong>STCW maximum:</strong> 0.05% BAC or <strong>0.25 mg/l breath</strong>.</li>
+          <li><strong>Company/SMS policy:</strong> Typically 0.00% BAC — avoid alcohol at least <strong>4 hours before watch</strong>.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What are the rest hour requirements?" — Know <strong>10 hrs / 24 hrs and 77 hrs / 7 days</strong> cold. He will follow with: "Can the Master override rest hours?" — Yes, but only in the 3 emergencies listed, and compensatory rest must be given. Relaxation is different from emergency override.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">STCW Reg VIII/1</span><span class="reg-desc">Fitness for duty — rest hour minimum requirements</span></div>
+          <div class="reg-item"><span class="reg-code">MLC 2006 / Reg 2.3</span><span class="reg-desc">Hours of work and rest — aligns with STCW; max work 14 hrs/24 hrs, 72 hrs/7 days</span></div>
+          <div class="reg-item"><span class="reg-code">STCW Table B-VIII/1</span><span class="reg-desc">Guidance on watchkeeping arrangements and fatigue prevention</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WATCHKEEPING -->
+    <div class="note-card" id="n18">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.17–18</span>
+        <div class="note-title">Watchkeeping Principles &amp; Engine Watch Composition
+          <div class="note-subtitle">STCW Reg VIII/2 — 7 principles, 7 factors</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>7 Principles of Watchkeeping (STCW Reg VIII/2)</h4>
+        <ol>
+          <li>Proper arrangement — assign watchkeepers per situation.</li>
+          <li>Qualification &amp; fitness — physically and mentally fit.</li>
+          <li>Defined roles — clear individual/team responsibilities.</li>
+          <li>Efficient resource management — personnel, equipment, information.</li>
+          <li>Clear communication — all watchkeepers informed of operational status.</li>
+          <li>Familiarisation — with equipment, systems, and handling.</li>
+          <li>Reporting doubts — notify CE or OOW immediately if in doubt.</li>
+        </ol>
+        <h4>Factors for Engine Watch Composition (7 Factors)</h4>
+        <ol>
+          <li>Type of ship, type and condition of machinery.</li>
+          <li>Adequacy of supervision at all times.</li>
+          <li>Prevailing weather and operational conditions.</li>
+          <li>Qualifications and experience of the watch team.</li>
+          <li>Safety of life, ship, cargo, and environment.</li>
+          <li>Observance of international, national, and local regulations.</li>
+          <li>Requirements for maintaining safe operation.</li>
+        </ol>
+        <h4>STCW Levels of Responsibility</h4>
+        <ul>
+          <li><strong>Support Level:</strong> Ratings forming part of an engineering watch.</li>
+          <li><strong>Operational Level:</strong> Junior Officers / Watchkeeping Engineers — STCW Table A-III/1.</li>
+          <li><strong>Management Level:</strong> Chief Engineer / Second Engineer — STCW Table A-III/2.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What are the principles of watchkeeping?" — He expects all 7 STCW principles. Then: "At what STCW level are you operating?" — As 2/E: management level (Table A-III/2). As a CE candidate, you must know both operational and management competency tables.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">STCW Reg VIII/2</span><span class="reg-desc">Watchkeeping arrangements and principles to be observed</span></div>
+          <div class="reg-item"><span class="reg-code">STCW Table A-III/1</span><span class="reg-desc">Minimum standard of competency for officers in charge of an engineering watch</span></div>
+          <div class="reg-item"><span class="reg-code">STCW Table A-III/2</span><span class="reg-desc">Minimum standard of competency for chief engineer officer — management level</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: TRAINING -->
+    <div class="section-head" id="n19">
+      <h2>📚 Training &amp; Education Concepts</h2>
+      <span class="sec-count">2 topics</span>
+    </div>
+
+    <!-- BLOOM'S TAXONOMY -->
+    <div class="note-card" id="n19">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.2</span>
+        <div class="note-title">Bloom's Taxonomy
+          <div class="note-subtitle">3 learning domains — 6 cognitive levels (LUAEC+)</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>3 Learning Domains</h4>
+        <ul>
+          <li><strong>Cognitive Domain:</strong> Knowledge-based learning — most widely applied in maritime training.</li>
+          <li><strong>Affective Domain:</strong> Attitude and values-based learning.</li>
+          <li><strong>Psychomotor Domain:</strong> Physical skill and motor coordination-based learning.</li>
+        </ul>
+        <h4>6 Cognitive Levels — Lower → Higher Order</h4>
+        <div class="formula-box">
+          <div class="fb-title">Mnemonic: Remember RUCAEC</div>
+          1. Remembering → 2. Understanding → 3. Applying<br>
+          → 4. Analyzing → 5. Evaluating → 6. Creating
+        </div>
+        <p><em>Updated in 2001</em> to focus on thinking processes and knowledge application. Original taxonomy (1956) used nouns; 2001 revision used verbs (action-focused).</p>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is Bloom's Taxonomy?" — Simon Sir is an educator — he asks this to check if you understand learning frameworks. Know the 3 domains and 6 cognitive levels. He may ask: "At which level of Bloom's Taxonomy is an oral examination?" — Typically <strong>Analysis and Evaluation</strong> levels.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">STCW Reg I/6</span><span class="reg-desc">Training and assessment — competency-based approach aligned with Bloom's cognitive levels</span></div>
+          <div class="reg-item"><span class="reg-code">IMO MC 3.12 (AECS)</span><span class="reg-desc">Assessment course — Bloom's Taxonomy used as the pedagogical framework</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CURRICULUM vs SYLLABUS -->
+    <div class="note-card" id="n20">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.18</span>
+        <div class="note-title">Curriculum vs Syllabus
+          <div class="note-subtitle">Education framework definitions</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <ul>
+          <li><strong>Curriculum:</strong> The overarching educational plan — the "big picture" covering all subjects, activities, and educational milestones of a course programme.</li>
+          <li><strong>Syllabus:</strong> A descriptive list of specific topics to be taught within a single subject. A subset of the curriculum.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is the difference between a curriculum and a syllabus?" — Simple but important for candidates preparing for shore-based instructor roles. One-liner answer: curriculum is the whole plan; syllabus is the topic list for one subject.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">STCW Reg I/6</span><span class="reg-desc">Training and assessment — course curricula approved under STCW</span></div>
+          <div class="reg-item"><span class="reg-code">IMO Model Courses</span><span class="reg-desc">Each IMO MC defines both curriculum (scope) and syllabus (content list) separately</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: LSA & SURVEYS -->
+    <div class="section-head" id="n21">
+      <h2>🔥 LSA &amp; Survival Equipment</h2>
+      <span class="sec-count">3 topics</span>
+    </div>
+
+    <!-- LIFEBOAT TESTING -->
+    <div class="note-card" id="n21">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.7</span>
+        <div class="note-title">Lifeboat Safety Testing — Dynamic &amp; Static Tests
+          <div class="note-subtitle">SOLAS III / LSA Code — 5-year dynamic, annual on-load release</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Dynamic Test — Every 5 Years</h4>
+        <p>Tests for structural deformation or failure of launching appliances and on-load release gear.</p>
+        <div class="formula-box">
+          <div class="fb-title">Dynamic Test Parameters</div>
+          Person weight standard: <strong>82.5 kg/person</strong><br>
+          Test load: <strong>1.1 × (boat weight + full complement)</strong><br>
+          Factor of Safety — Falls: <strong>6</strong> | Structural components: <strong>4.5</strong>
+        </div>
+        <div class="flow-box">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--teal-dark);margin-bottom:10px;">Dynamic Test Flow</div>
+          <div class="flow-steps">
+            <div class="flow-step"><div class="flow-step-content">Load with 1.1× MWL using water bags</div></div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step"><div class="flow-step-content">Lower at maximum speed — minimum 3 m before water</div></div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step"><div class="flow-step-content">Apply handbrake sharply — max allowable drop after brake: <strong>1 m</strong></div></div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step"><div class="flow-step-content">Inspect: winch brake, foundation, falls, hooks, shackles, davit blocks</div></div>
+          </div>
+        </div>
+        <h4>Static Test — Davit &amp; Winch Brake Capacity</h4>
+        <ul>
+          <li>Lifeboat hull removed; framework tested independently.</li>
+          <li>Wind to maximum cable turns on drum.</li>
+          <li>Apply static load = <strong>1.5 × Maximum Working Load</strong> — held by mechanical brake only.</li>
+          <li>Lower smoothly for at least <strong>1 full revolution</strong> of brake drum.</li>
+          <li>Inspect for permanent deformation; confirm brake holding capacity.</li>
+        </ul>
+        <h4>Annual Mandate</h4>
+        <p>On-load release test must be performed <strong>annually</strong>.</p>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is the dynamic test for lifeboats?" — Know the 1.1× load, 82.5 kg/person, FoS of 6 for falls, and the 1 m max drop after brake. He may follow with: "How often is the on-load release test done?" — <strong>Annually</strong>. And the dynamic test — <strong>every 5 years</strong>.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS III / Reg 20</span><span class="reg-desc">Operational readiness, maintenance and inspections of LSA</span></div>
+          <div class="reg-item"><span class="reg-code">LSA Code / Ch. 4</span><span class="reg-desc">Survival craft — performance standards including launching appliance tests</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.1/Circ.1206 Rev.1</span><span class="reg-desc">Measures to prevent accidents with lifeboats — guidance on testing procedures</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FREE-FALL LIFEBOAT -->
+    <div class="note-card" id="n22">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.25</span>
+        <div class="note-title">Free-Fall Lifeboat — Requirements
+          <div class="note-subtitle">Certification height, harness, trim/list limits</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <div class="formula-box">
+          <div class="fb-title">Stowage Height Rule</div>
+          Free-Fall Stowage Height ≤ Free-Fall Tube Certification Height<br><br>
+          Certification height: measured from still water to lowest point of boat in lightest seagoing condition.
+        </div>
+        <h4>Key Requirements</h4>
+        <ul>
+          <li><strong>Safety harnesses:</strong> Must secure persons up to <strong>100 kg</strong>.</li>
+          <li><strong>Positive headway:</strong> Must make positive headway after launch under up to <strong>10° trim</strong> and <strong>20° list</strong>.</li>
+          <li><strong>Activation systems:</strong> <strong>Two independent</strong> activation systems — crew must be able to test without launching.</li>
+          <li><strong>Survey check:</strong> Certification height and stowage height verified during initial SEQ survey.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What are the requirements for a free-fall lifeboat?" — Know the stowage height rule (≤ certification height), 100 kg harness, and the trim/list limits. Vessels with free-fall lifeboats include some bulk carriers and tankers — not typical on container vessels, but examinable.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS III / Reg 31</span><span class="reg-desc">Free-fall lifeboats — stowage, launch, and recovery requirements</span></div>
+          <div class="reg-item"><span class="reg-code">LSA Code / 4.8</span><span class="reg-desc">Free-fall lifeboats — performance and construction standards</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIFERAFT PAINTER -->
+    <div class="note-card" id="n23">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.25</span>
+        <div class="note-title">Liferaft Painter &amp; Hydrostatic Release
+          <div class="note-subtitle">SOLAS III / LSA Code — ≤4 m activation depth</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Painter Line System</h4>
+        <ul>
+          <li><strong>Attachment:</strong> Permanently attached to ship's structure via a certified <strong>weak link</strong>.</li>
+          <li><strong>Manual release:</strong> Must be capable of manual release.</li>
+          <li><strong>Hydrostatic release:</strong> Must also have automatic hydrostatic release activating at <strong>not more than 4 metres depth</strong>.</li>
+        </ul>
+        <p><em>The weak link is designed to break under the inflated liferaft's buoyancy, allowing it to float free if the ship sinks rapidly.</em></p>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"At what depth does the HRU activate?" — <strong>Not more than 4 metres.</strong> He may ask: "What is the breaking strength of the weak link?" — Must break at a load not exceeding the HRU's lashing strength (typically 2.2 kN). Know the purpose: if ship sinks rapidly, HRU + weak link allows liferaft to float free and inflate automatically.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS III / Reg 13</span><span class="reg-desc">Stowage of survival craft — painter and hydrostatic release requirements</span></div>
+          <div class="reg-item"><span class="reg-code">LSA Code / 4.1.6</span><span class="reg-desc">Inflatable liferaft — painter system and HRU activation depth ≤4 m</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.81(70)</span><span class="reg-desc">Revised recommendation on testing of life-saving appliances — HRU test criteria</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: SYSTEMS -->
+    <div class="section-head" id="n24">
+      <h2>⚙️ Systems &amp; Technology</h2>
+      <span class="sec-count">4 topics</span>
+    </div>
+
+    <!-- FUEL CHARACTERISTICS -->
+    <div class="note-card" id="n24">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.8</span>
+        <div class="note-title">Fuel Characteristics — Flash Point Testing
+          <div class="note-subtitle">Pensky-Martens closed-cup method</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Flash Point — Definition</h4>
+        <p>The <strong>minimum temperature</strong> at which a liquid fuel emits sufficient vapour to form an ignitable mixture with air when exposed to an external ignition source.</p>
+        <h4>Testing Methods</h4>
+        <ul>
+          <li><strong>Open Cup Method:</strong> For high flash-point fuels (typically &gt;79°C).</li>
+          <li><strong>Closed Cup Method:</strong> Standard for volatile fuels across 40°C to 360°C range.</li>
+          <li><strong>Equipment:</strong> Pensky-Martens Closed-Cup Tester — industry standard.</li>
+        </ul>
+        <div class="formula-box">
+          <div class="fb-title">MARPOL Annex II / SOLAS Flash Point Minimum</div>
+          Marine fuel oil flash point: minimum <strong>60°C</strong> (closed cup) — SOLAS II-2/Reg 4<br>
+          Exception: ships using fuel with FP below 60°C must comply with special requirements.
+        </div>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is flash point and how is it tested?" — Know both methods, the Pensky-Martens tester, and critically the <strong>SOLAS minimum of 60°C</strong> for marine fuel. He may ask: "What is the flash point of HFO?" — Typically 60–100°C. MGO: typically &gt;60°C.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-2 / Reg 4</span><span class="reg-desc">Probability of ignition — minimum flash point 60°C for marine fuel</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 14.1</span><span class="reg-desc">Fuel oil standard — sulphur content and quality standards including FP</span></div>
+          <div class="reg-item"><span class="reg-code">ISO 8217:2024</span><span class="reg-desc">Marine fuel specifications — flash point and quality parameters by fuel grade</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CYBER SECURITY -->
+    <div class="note-card" id="n25">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.21</span>
+        <div class="note-title">Maritime Cyber Security
+          <div class="note-subtitle">IMO Res. MSC-FAL.1/Circ.3 — 5 functional requirements</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>5 Functional Requirements (NIST Framework adapted for shipping)</h4>
+        <div class="flow-box">
+          <div class="flow-steps">
+            <div class="flow-step"><div class="flow-step-content"><strong>IDENTIFY</strong> — Systems, assets, and data critical to safe operations; define roles and responsibilities.</div></div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step"><div class="flow-step-content"><strong>PROTECT</strong> — Risk control processes, technical measures, and contingency plans.</div></div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step"><div class="flow-step-content"><strong>DETECT</strong> — Timely identification of a cyber event or breach.</div></div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step"><div class="flow-step-content"><strong>RESPOND</strong> — Action plan; all personnel trained on emergency protocols.</div></div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step"><div class="flow-step-content"><strong>RECOVER</strong> — System backups, redundancy; restore impacted systems.</div></div>
+          </div>
+        </div>
+        <h4>Key Definitions</h4>
+        <ul>
+          <li><strong>Cyber Security:</strong> Tools, policies, technologies, and best practices to protect the maritime cyber environment.</li>
+          <li><strong>Cyber Risk Management:</strong> Continuous process of identifying, analysing, assessing, and mitigating cyber-related risk to an acceptable level.</li>
+        </ul>
+        <h4>Mandatory Implementation (from 2021)</h4>
+        <p>IMO Resolution MSC-FAL.1/Circ.3 required cyber risk management to be incorporated into the <strong>Safety Management System (ISM Code)</strong> by the first annual ISM verification after <strong>1 January 2021</strong>.</p>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What are the functional elements of cyber risk management?" — Know the 5: Identify, Protect, Detect, Respond, Recover. He may ask: "Where is cyber security documented onboard?" — In the <strong>SMS under ISM Code</strong>, per MSC-FAL.1/Circ.3.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MSC-FAL.1/Circ.3</span><span class="reg-desc">Guidelines on Maritime Cyber Risk Management — 5 functional elements</span></div>
+          <div class="reg-item"><span class="reg-code">IMO Res. MSC.428(98)</span><span class="reg-desc">Maritime Cyber Risk Management in Safety Management Systems — mandatory from Jan 2021</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code / Cl. 1.2.2</span><span class="reg-desc">SMS objectives include protection against all identified risks — encompasses cyber</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GISIS -->
+    <div class="note-card" id="n26">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.24</span>
+        <div class="note-title">GISIS — Global Integrated Shipping Information System
+          <div class="note-subtitle">IMO digital platform — 24 modules</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Overview</h4>
+        <p>Comprehensive digital platform developed and maintained by IMO to collect, store, and manage data on global ships, shipowners, and maritime security. Consists of <strong>24 modules</strong>.</p>
+        <h4>Key GISIS Modules (15 of 24)</h4>
+        <ul>
+          <li>Ship and company particulars; Recognised Organisations (ROs).</li>
+          <li>Survey and certification status.</li>
+          <li>Member State audits (IMSAS).</li>
+          <li>Status of treaties — ratification status of all IMO instruments.</li>
+          <li>Marine casualties and accidents.</li>
+          <li>Maritime security data; piracy and armed robbery reports.</li>
+          <li>Ship fuel oil consumption (IMO DCS — linked to MARPOL VI Reg 27).</li>
+          <li>Port reception facilities.</li>
+          <li>Crew changes and repatriation of seafarers.</li>
+          <li>STCW-related information — certificate verification.</li>
+          <li>Test laboratories &amp; halon facilities; cargo tracking.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is GISIS?" — Know it as the IMO's centralised maritime database with 24 modules. Key link: DCS fuel data is submitted to GISIS anonymously (Reg 27). He may also ask about IMODOCS or IMO's STCW Master Checker — both part of the GISIS ecosystem.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IMO GISIS</span><span class="reg-desc">gisis.imo.org — publicly accessible modules include treaty status and PRF locations</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 27</span><span class="reg-desc">DCS verified data submitted to IMO GISIS by June 30 each year</span></div>
+          <div class="reg-item"><span class="reg-code">STCW Reg I/2</span><span class="reg-desc">Certificate verification — GISIS used for STCW certificate authenticity checks (Master Checker)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IORA -->
+    <div class="note-card" id="n27">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.8</span>
+        <div class="note-title">IORA — Indian Ocean Rim Association
+          <div class="note-subtitle">23 member states — 6 priority action areas</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Overview</h4>
+        <p>Intergovernmental organisation headquartered in <strong>Mauritius</strong>. Comprises <strong>23 member states</strong> bordering the Indian Ocean. Dedicated to regional cooperation and sustainable development.</p>
+        <h4>6 Priority Action Areas</h4>
+        <ol>
+          <li>Maritime safety and security.</li>
+          <li>Trade facilitation and investment.</li>
+          <li>Sustainable fisheries management.</li>
+          <li>Disaster risk reduction strategies.</li>
+          <li>Academic, scientific, and technology cooperation.</li>
+          <li>Regional tourism promotion.</li>
+        </ol>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is IORA?" — A geography/regional organisation question. Know HQ is Mauritius, 23 members, and list the 6 priority areas. India is a founding member — relevant when Simon Sir asks about Indian Ocean regional organisations alongside IMO.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IORA Charter 1997</span><span class="reg-desc">Founding charter — Indian Ocean Rim Association for Regional Cooperation</span></div>
+          <div class="reg-item"><span class="reg-code">IMO / IORA MoU</span><span class="reg-desc">Cooperation between IMO and IORA on maritime safety and environmental protection</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAV STRIP -->
+    <div class="nav-strip">
+      <a class="nav-btn home" href="https://marineintelligenceweekly.com/SQ/">🏠 Notes Index</a>
+      <div class="nav-info">Part 1 of 2 — Pages 1–25<br><span style="font-size:11px;color:#a0aec0;">Pages 26–50 in Part 2</span></div>
+      <a class="nav-btn next" href="simon-notes-p2.html">Pages 26–50 →</a>
+    </div>
+
+  
+    <!-- CORRECTION / ADDITION FORM -->
+    <div class="correction-panel">
+      <h3>✏️ Corrections &amp; Additions</h3>
+      <p>Found an error, outdated regulation, or want to suggest a topic addition? Submit below — Nixon Antony reviews all submissions before any update is made.</p>
+      <form id="correctionForm" action="https://formspree.io/f/maqgoeww" method="POST" onsubmit="submitCorrection(event)">
+        <input type="hidden" name="_subject" value="Notes Correction/Addition — Simon Sir Notes — Pages 26–50">
+        <input type="hidden" name="source_page" value="Simon Sir Notes — Pages 26–50">
+        <div class="cf-grid">
+          <div class="cf-field">
+            <label for="cf_name">Your Name</label>
+            <input type="text" id="cf_name" name="name" placeholder="Rank + Name" required>
+          </div>
+          <div class="cf-field">
+            <label for="cf_email">Your Email</label>
+            <input type="email" id="cf_email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="cf-field">
+            <label for="cf_type">Type</label>
+            <select id="cf_type" name="submission_type" required>
+              <option value="">Select…</option>
+              <option value="Correction — factual error">Correction — factual error</option>
+              <option value="Correction — outdated regulation">Correction — outdated regulation</option>
+              <option value="Addition — new topic suggestion">Addition — new topic suggestion</option>
+              <option value="Addition — exam question not covered">Addition — exam question not covered</option>
+              <option value="Other feedback">Other feedback</option>
+            </select>
+          </div>
+          <div class="cf-field">
+            <label for="cf_topic">Topic / Page Reference</label>
+            <input type="text" id="cf_topic" name="topic_reference" placeholder="e.g. Page 12, IMO DCS">
+          </div>
+          <div class="cf-field full">
+            <label for="cf_detail">Details</label>
+            <textarea id="cf_detail" name="details" placeholder="Describe the correction or addition clearly. Include regulation numbers or source if possible." required></textarea>
+          </div>
+        </div>
+        <button type="submit" class="cf-submit">Submit →</button>
+        <div class="cf-success" id="cfSuccess">✅ Submitted — thank you! Nixon will review and update if validated.</div>
+      </form>
+    </div>
+
+</div><!-- end main-feed -->
+</div><!-- end main-layout -->
+
+<!-- SUBSCRIBE LOCK TEASER -->
+<div style="background:linear-gradient(135deg,var(--navy),#1e3a5f);padding:36px 24px;text-align:center;">
+  <div style="max-width:560px;margin:0 auto;">
+    <div style="font-size:32px;margin-bottom:12px;">🔒</div>
+    <h2 style="color:#fff;font-size:20px;font-weight:800;margin-bottom:8px;">Full 200-Page Notes + Complete QB Access</h2>
+    <p style="color:#94a3b8;font-size:14px;margin-bottom:6px;">Pages 51–200 in 6 more parts, plus the full MEO Class 1 Question Bank with Kochi MMD oral intelligence.</p>
+    <p style="color:#64748b;font-size:12px;margin-bottom:20px;">Topics locked: Stability deep-dive · Surveys · Commercial Law · ISM SMS · Emergency Procedures · Full Machinery Notes</p>
+    <a href="https://marineintelligenceweekly.com/SQ/pay.html" style="display:inline-block;background:var(--orange);color:#fff;text-decoration:none;padding:13px 28px;border-radius:8px;font-size:15px;font-weight:700;">Get Full Access — ₹899 →</a>
+    <p style="color:#475569;font-size:11px;margin-top:12px;">One-time payment · Instant access · QB + all 200 pages</p>
+  </div>
+</div>
+
+<!-- PAGE FOOTER -->
+<footer class="page-footer">
+  <strong>Marine Intelligence Weekly</strong> — MEO Class 1 Oral Preparation<br>
+  Originally prepared by Vignesh Siva · Transcribed, expanded &amp; updated by Nixon Antony, 2/E, Maersk A/S<br>
+  Pages 1–50 free to share · Full notes at <a href="https://marineintelligenceweekly.com/SQ/">marineintelligenceweekly.com/SQ/</a><br>
+  Corrections: <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
+</footer>
+
+<script>
+function toggleNote(header){
+  const card=header.closest('.note-card');
+  card.classList.toggle('open');
+}
+
+// TOC active highlight
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.2});
+document.querySelectorAll('.note-card[id]').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
