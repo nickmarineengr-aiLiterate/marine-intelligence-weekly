@@ -38,14 +38,14 @@ input:focus{border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.15)}
   <div class="subtitle">MEO Class 1 Question Bank</div>
 
   <div class="tab-bar">
-    <button class="tab active" onclick="switchTab('login')">Already purchased</button>
-    <button class="tab" onclick="switchTab('buy')">Get access</button>
+    <button class="tab active" id="tab-login" onclick="switchTab('login')">Already purchased</button>
+    <button class="tab" id="tab-buy" onclick="switchTab('buy')">Get access</button>
   </div>
 
   <!-- LOGIN PANEL -->
   <div class="panel active" id="panel-login">
     <h2>Sign in to your QB</h2>
-    <p class="desc">Enter your email and the password from your purchase email.</p>
+    <p class="desc">Enter the email you used to purchase and the password from your purchase email.</p>
     <div class="field">
       <label>Email address</label>
       <input type="email" id="login-email" placeholder="your@email.com" autocomplete="email">
@@ -55,19 +55,19 @@ input:focus{border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.15)}
       <input type="password" id="login-pwd" placeholder="MIW-xxxxxxxx" autocomplete="current-password">
     </div>
     <div class="error" id="login-err"></div>
-    <div class="success" id="login-ok">✓ Access granted — redirecting...</div>
+    <div class="success" id="login-ok">✓ Access granted — redirecting to QB...</div>
     <button class="btn" id="login-btn" onclick="doLogin()">Access Question Bank →</button>
     <hr class="divider">
     <div class="help">
       Lost your password? <a href="mailto:contactus@marineintelligenceweekly.com">Email us</a><br>
-      Don't have access yet? <a href="#" onclick="switchTab('buy');return false">Get the QB →</a>
+      Don't have access? <a href="#" onclick="switchTab('buy');return false">Get the QB →</a>
     </div>
   </div>
 
   <!-- BUY PANEL -->
   <div class="panel" id="panel-buy">
     <h2>Get QB Access</h2>
-    <p class="desc">One-time payment. Instant access. All future updates free.</p>
+    <p class="desc">One-time payment. Instant email delivery of login credentials. All future updates free.</p>
     <a href="/SQ/" class="btn" style="display:block;text-align:center;text-decoration:none;padding:13px">
       View pricing & purchase →
     </a>
@@ -79,44 +79,14 @@ input:focus{border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.15)}
 </div>
 
 <script>
-// Email → password map (all current subscribers)
-const USER_DB = {
-  "nickmarineengr@gmail.com": "MIW-NMjFt02S",
-  "muhammedmusthafa.va@gmail.com": "MIW-OPlWwGCB",
-  "sijose104@gmail.com": "MIW-04WJPSM5",
-  "renjithgnair5@gmail.com": "MIW-ikDgZeUk",
-  "jonbernadpaul@gmail.com": "MIW-uAMtzDyG",
-  "jijozach@gmail.com": "MIW-tbPyDW5i",
-  "anand.newton@gmail.com": "MIW-SldSMgtp",
-  "rnair.vishnu@gmail.com": "MIW-cOwuCCK2",
-  "hariprasanna.cool@gmail.com": "MIW-dkK0a1Z4",
-  "sujesh_tv@yahoo.com": "MIW-vXCRO86U",
-  "arunaps.mariner@gmail.com": "MIW-KdBE1RlL",
-  "pradeepmech.mech@gmail.com": "MIW-fRkFM1Kp",
-  "anthinthomas@gmail.com": "MIW-mXDdRsza",
-  "chetan.mlore@gmail.com": "MIW-6BfQEEtA",
-  "bibinbaby2201@gmail.com": "MIW-bL08Ni6b",
-  "rohitmanikandan1989@gmail.com": "MIW-I4JJocwD",
-  "vaisaksree17@gmail.com": "MIW-iVppV2Lp",
-  "mail.thomasbibin@gmail.com": "MIW-w8Dzy4hJ",
-  "tg.rathesh@gmail.com": "MIW-MGjZGJib",
-  "riya3august@gmail.com": "MIW-C6erKkzf",
-  "sailorsailor477@gmail.com":"MIW-Ux5SquBd",
-  "svoore25@gmail.com":"MIW-IwTtJNPp",
-  "aseef9@gmail.com":"MIW-wPgT9uBM",
-  "vijeesh87@gmail.com":"MIW-bh8zJ93O",
-  "goopi19@gmail.com":"MIW-ORsVqvqI",
-  "vsteverichard@gmail.com":"MIW-0CjmZeAC"
-};
-
 function switchTab(tab) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-' + tab).classList.add('active');
-  event.target.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
 }
 
-function doLogin() {
+async function doLogin() {
   const email = document.getElementById('login-email').value.trim().toLowerCase();
   const pwd = document.getElementById('login-pwd').value.trim();
   const btn = document.getElementById('login-btn');
@@ -135,36 +105,47 @@ function doLogin() {
   btn.disabled = true;
   btn.textContent = 'Checking...';
 
-  setTimeout(() => {
-    const correctPwd = USER_DB[email];
-    if (correctPwd && correctPwd === pwd) {
-      // Store session (30 days)
+  try {
+    const response = await fetch('/api/check-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password: pwd })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      // Store session 30 days
       const expiry = Date.now() + (30 * 24 * 60 * 60 * 1000);
       localStorage.setItem('miw_auth', JSON.stringify({ email, pwd, expiry }));
       ok.style.display = 'block';
       setTimeout(() => { window.location.href = '/meoclass1/'; }, 1000);
-    } else if (!correctPwd) {
-      err.textContent = 'Email not found. Check your email or purchase access below.';
-      err.style.display = 'block';
-      btn.disabled = false;
-      btn.textContent = 'Access Question Bank →';
     } else {
-      err.textContent = 'Incorrect password. Check your purchase email from Marine Intelligence Weekly.';
+      err.textContent = 'Incorrect email or password. Check your purchase email from Marine Intelligence Weekly.';
       err.style.display = 'block';
       btn.disabled = false;
       btn.textContent = 'Access Question Bank →';
     }
-  }, 500);
+  } catch(e) {
+    err.textContent = 'Connection error. Please try again.';
+    err.style.display = 'block';
+    btn.disabled = false;
+    btn.textContent = 'Access Question Bank →';
+  }
 }
 
 // Check existing session
 try {
   const auth = JSON.parse(localStorage.getItem('miw_auth') || 'null');
   if (auth && auth.expiry > Date.now()) {
-    const correctPwd = USER_DB[auth.email];
-    if (correctPwd && correctPwd === auth.pwd) {
-      window.location.href = '/meoclass1/';
-    }
+    // Quick re-verify with server
+    fetch('/api/check-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: auth.email, password: auth.pwd })
+    }).then(r => r.json()).then(data => {
+      if (data.success) window.location.href = '/meoclass1/';
+    }).catch(() => {});
   }
 } catch(e) { localStorage.removeItem('miw_auth'); }
 
