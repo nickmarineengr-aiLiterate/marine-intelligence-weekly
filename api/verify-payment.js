@@ -1,6 +1,6 @@
 // =============================================================
-// Marine Intelligence Weekly — Razorpay Verify Payment v3
-// Updated: WhatsApp group onboarding instructions in email
+// Marine Intelligence Weekly — Razorpay Verify Payment v4
+// Writes email→password to Upstash Redis on payment
 // =============================================================
 
 import crypto from "crypto";
@@ -18,15 +18,47 @@ const transporter = nodemailer.createTransport({
 
 const QB_LOGIN_URL = "https://marineintelligenceweekly.com/SQ/pay.html";
 
-function assignPassword(buyerEmail) {
-  const email = buyerEmail.toLowerCase();
+async function redisGet(key) {
+  const UPSTASH_URL = process.env.KV_REST_API_URL;
+  const UPSTASH_TOKEN = process.env.KV_REST_API_TOKEN;
+  const response = await fetch(`${UPSTASH_URL}/get/${encodeURIComponent(key)}`, {
+    headers: { Authorization: `Bearer ${UPSTASH_TOKEN}` }
+  });
+  const data = await response.json();
+  return data.result;
+}
+
+async function redisSet(key, value) {
+  const UPSTASH_URL = process.env.KV_REST_API_URL;
+  const UPSTASH_TOKEN = process.env.KV_REST_API_TOKEN;
+  const response = await fetch(`${UPSTASH_URL}/set/${encodeURIComponent(key)}/${encodeURIComponent(value)}`, {
+    headers: { Authorization: `Bearer ${UPSTASH_TOKEN}` }
+  });
+  return response.json();
+}
+
+async function assignPassword(buyerEmail) {
+  const email = buyerEmail.toLowerCase().trim();
+
+  // Check if already has password
+  const existing = await redisGet(`miw:user:${email}`);
+  if (existing) return existing;
+
+  // Get pool and find next available
   const pool = JSON.parse(process.env.QB_PASSWORD_POOL || "[]");
-  const used = JSON.parse(process.env.QB_USED_PASSWORDS || "{}");
-  if (used[email]) return used[email];
-  const usedValues = new Set(Object.values(used));
-  const available = pool.find(p => !usedValues.has(p));
-  if (!available) throw new Error("Password pool exhausted");
-  return available;
+
+  // Find used passwords by checking pool sequentially
+  for (const pwd of pool) {
+    const check = await redisGet(`miw:pwd:${pwd}`);
+    if (!check) {
+      // Mark password as used
+      await redisSet(`miw:pwd:${pwd}`, email);
+      // Store user→password mapping
+      await redisSet(`miw:user:${email}`, pwd);
+      return pwd;
+    }
+  }
+  throw new Error("Password pool exhausted");
 }
 
 function buildEmail(tier, buyerName, buyerEmail, password) {
@@ -61,7 +93,6 @@ function buildEmail(tier, buyerName, buyerEmail, password) {
 
     ${founderNote}
 
-    <!-- Credentials Box -->
     <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:1.25rem;margin:1.5rem 0">
       <p style="font-size:12px;color:#64748b;margin:0 0 12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em">Your Login Credentials</p>
       <table style="width:100%;font-size:14px;border-collapse:collapse">
@@ -80,28 +111,24 @@ function buildEmail(tier, buyerName, buyerEmail, password) {
       </table>
     </div>
 
-    <!-- CTA -->
     <div style="text-align:center;margin:1.5rem 0">
       <a href="${QB_LOGIN_URL}" style="background:#0d9488;color:#fff;text-decoration:none;padding:13px 32px;border-radius:8px;font-weight:600;font-size:15px;display:inline-block">
         Access Question Bank →
       </a>
     </div>
 
-    <!-- WhatsApp Group Box -->
     <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:1.25rem;margin:1.5rem 0">
       <p style="font-size:14px;font-weight:600;color:#14532d;margin:0 0 8px">📱 Join the MEO Class 1 WhatsApp Group</p>
       <p style="font-size:13px;color:#166534;margin:0 0 12px;line-height:1.6">
-        Get real oral exam questions from the Kochi MMD WhatsApp network, weekly updates, and peer support from fellow candidates.
+        Get real oral exam questions, weekly updates, and peer support from fellow candidates.
       </p>
       <p style="font-size:13px;color:#166534;margin:0;line-height:1.8">
-        To join, do either of the following:<br>
         <strong>① Reply to this email</strong> with your name and WhatsApp number<br>
-        <strong>② WhatsApp Nixon directly:</strong> 
+        <strong>② WhatsApp Nixon directly:</strong>
         <a href="https://wa.me/919526595999" style="color:#0d9488;font-weight:600">+91 95265 95999</a>
       </p>
     </div>
 
-    <!-- Instructions -->
     <div style="border-top:1px solid #e2e8f0;padding-top:1rem;margin-top:1rem">
       <p style="font-size:13px;color:#334155;margin:0 0 8px;font-weight:600">✓ Important</p>
       <ul style="font-size:13px;color:#334155;padding-left:18px;margin:0;line-height:1.9">
@@ -156,7 +183,8 @@ export default async function handler(req, res) {
     if (expected !== razorpay_signature)
       return res.status(400).json({ error: "Payment verification failed" });
 
-    const password = assignPassword(buyer_email);
+    // Assign password — now persisted in Redis
+    const password = await assignPassword(buyer_email);
     const validTier = ["founders","standard"].includes(tier) ? tier : "standard";
 
     await transporter.sendMail(buildEmail(validTier, buyer_name, buyer_email, password));
