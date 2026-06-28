@@ -1,6 +1,6 @@
 // =============================================================
-// Marine Intelligence Weekly — Razorpay Verify Payment v2
-// Assigns unique password per email, sends login credentials
+// Marine Intelligence Weekly — Razorpay Verify Payment v3
+// Updated: WhatsApp group onboarding instructions in email
 // =============================================================
 
 import crypto from "crypto";
@@ -22,15 +22,10 @@ function assignPassword(buyerEmail) {
   const email = buyerEmail.toLowerCase();
   const pool = JSON.parse(process.env.QB_PASSWORD_POOL || "[]");
   const used = JSON.parse(process.env.QB_USED_PASSWORDS || "{}");
-
-  // Already has a password
   if (used[email]) return used[email];
-
-  // Assign next available
   const usedValues = new Set(Object.values(used));
   const available = pool.find(p => !usedValues.has(p));
   if (!available) throw new Error("Password pool exhausted");
-
   return available;
 }
 
@@ -69,17 +64,17 @@ function buildEmail(tier, buyerName, buyerEmail, password) {
     <!-- Credentials Box -->
     <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:1.25rem;margin:1.5rem 0">
       <p style="font-size:12px;color:#64748b;margin:0 0 12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em">Your Login Credentials</p>
-      <table style="width:100%;font-size:14px">
+      <table style="width:100%;font-size:14px;border-collapse:collapse">
         <tr>
-          <td style="color:#64748b;padding:4px 0;width:80px">Login page</td>
+          <td style="color:#64748b;padding:5px 0;width:90px;vertical-align:top">Login page</td>
           <td><a href="${QB_LOGIN_URL}" style="color:#0d9488">${QB_LOGIN_URL}</a></td>
         </tr>
         <tr>
-          <td style="color:#64748b;padding:4px 0">Email</td>
+          <td style="color:#64748b;padding:5px 0">Email</td>
           <td style="color:#0f172a;font-weight:500">${buyerEmail}</td>
         </tr>
         <tr>
-          <td style="color:#64748b;padding:4px 0">Password</td>
+          <td style="color:#64748b;padding:5px 0">Password</td>
           <td style="color:#0f172a;font-weight:700;font-family:monospace;font-size:16px;letter-spacing:1px">${password}</td>
         </tr>
       </table>
@@ -92,6 +87,21 @@ function buildEmail(tier, buyerName, buyerEmail, password) {
       </a>
     </div>
 
+    <!-- WhatsApp Group Box -->
+    <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:1.25rem;margin:1.5rem 0">
+      <p style="font-size:14px;font-weight:600;color:#14532d;margin:0 0 8px">📱 Join the MEO Class 1 WhatsApp Group</p>
+      <p style="font-size:13px;color:#166534;margin:0 0 12px;line-height:1.6">
+        Get real oral exam questions from the Kochi MMD WhatsApp network, weekly updates, and peer support from fellow candidates.
+      </p>
+      <p style="font-size:13px;color:#166534;margin:0;line-height:1.8">
+        To join, do either of the following:<br>
+        <strong>① Reply to this email</strong> with your name and WhatsApp number<br>
+        <strong>② WhatsApp Nixon directly:</strong> 
+        <a href="https://wa.me/919526595999" style="color:#0d9488;font-weight:600">+91 95265 95999</a>
+      </p>
+    </div>
+
+    <!-- Instructions -->
     <div style="border-top:1px solid #e2e8f0;padding-top:1rem;margin-top:1rem">
       <p style="font-size:13px;color:#334155;margin:0 0 8px;font-weight:600">✓ Important</p>
       <ul style="font-size:13px;color:#334155;padding-left:18px;margin:0;line-height:1.9">
@@ -139,7 +149,6 @@ export default async function handler(req, res) {
     if (!buyer_email || !tier)
       return res.status(400).json({ error: "Missing buyer details" });
 
-    // Verify Razorpay signature
     const expected = crypto.createHmac("sha256", KEY_SECRET)
       .update(`${razorpay_order_id}|${razorpay_payment_id}`)
       .digest("hex");
@@ -147,11 +156,9 @@ export default async function handler(req, res) {
     if (expected !== razorpay_signature)
       return res.status(400).json({ error: "Payment verification failed" });
 
-    // Assign password
     const password = assignPassword(buyer_email);
     const validTier = ["founders","standard"].includes(tier) ? tier : "standard";
 
-    // Send email
     await transporter.sendMail(buildEmail(validTier, buyer_name, buyer_email, password));
 
     console.log(`✓ QB access sent: ${buyer_email} | pwd: ${password} | tier: ${validTier} | order: ${razorpay_order_id}`);
