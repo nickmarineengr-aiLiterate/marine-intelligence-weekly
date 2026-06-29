@@ -68,12 +68,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
 <body>
 <script>
 (function(){
-  var v = document.cookie.split(';').some(function(c){
-    return c.trim().startsWith('miw_auth=1');
-  });
-  if(!v) window.location.replace('/SQ/pay.html');
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
 })();
 </script>
+  
 <nav class="topbar">
   <div style="display:flex;align-items:center;gap:8px;"><span class="logo-mark">MIW</span><span style="font-size:12px;opacity:.8;">Marine Intelligence Weekly</span></div>
   <div><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a><a href="QB1_B.html">Full QB1_B</a></div>
