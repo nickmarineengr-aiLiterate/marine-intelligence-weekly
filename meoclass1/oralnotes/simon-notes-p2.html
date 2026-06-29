@@ -1,0 +1,1497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEO Class 1 — Simon Sir Oral Notes | Pages 26–50 | Marine Intelligence Weekly</title>
+<meta name="description" content="MEO Class 1 oral exam preparation notes focused on Simon Sir's examination style. Originally by Vignesh Siva, expanded by Nixon Antony, 2/E, Maersk A/S. Pages 26–50 free to share.">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5">
+// SEARCH
+function notesSearch(q){
+  const cards=document.querySelectorAll('.note-card');
+  const sections=document.querySelectorAll('.section-head');
+  const term=q.toLowerCase().trim();
+  let vis=0;
+  cards.forEach(card=>{
+    const match=!term||card.innerText.toLowerCase().includes(term);
+    card.style.display=match?'':'none';
+    if(match)vis++;
+  });
+  // hide section heads with no visible cards
+  sections.forEach(sec=>{
+    let next=sec.nextElementSibling;
+    let hasVis=false;
+    while(next&&!next.classList.contains('section-head')){
+      if(next.classList.contains('note-card')&&next.style.display!=='none')hasVis=true;
+      next=next.nextElementSibling;
+    }
+    sec.style.display=hasVis||!term?'':'none';
+  });
+  const count=document.getElementById('searchCount');
+  const noRes=document.getElementById('noResults');
+  if(count)count.textContent=term?`${vis} result${vis!==1?'s':''}`:' ';
+  if(noRes)noRes.style.display=vis===0&&term?'block':'none';
+}
+
+// FORMSPREE SUBMIT
+async function submitCorrection(e){
+  e.preventDefault();
+  const form=document.getElementById('correctionForm');
+  const btn=form.querySelector('});
+    if(res.ok){
+      document.getElementById('cfSuccess').style.display='block';
+      form.reset();
+    } else {btn.textContent='Error — try email';btn.disabled=false;}
+  } catch{btn.textContent='Error — try email';btn.disabled=false;}
+}
+
+</script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{user-select:none;-webkit-user-select:none;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.65;}
+
+.topbar{background:var(--navy);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;gap:12px;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-mark{width:32px;height:32px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:14px;letter-spacing:-1px;flex-shrink:0;}
+.brand-name{color:#fff;font-size:14px;font-weight:600;line-height:1.2;}
+.brand-sub{color:#94a3b8;font-size:11px;}
+.topbar-nav{display:flex;gap:6px;flex-wrap:wrap;}
+.topbar-nav a{color:#cbd5e1;text-decoration:none;font-size:12px;padding:5px 10px;border-radius:5px;transition:background .2s;}
+.topbar-nav a:hover{background:rgba(255,255,255,.1);color:#fff;}
+.topbar-nav a.highlight{background:var(--teal);color:#fff;font-weight:600;}
+
+.page-header{background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 100%);padding:36px 24px 28px;text-align:center;}
+.header-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:14px;}
+.page-header h1{color:#fff;font-size:clamp(20px,4vw,30px);font-weight:800;line-height:1.25;margin-bottom:10px;}
+.page-header p{color:#94a3b8;font-size:14px;max-width:640px;margin:0 auto 16px;}
+.header-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:8px;}
+.meta-pill{background:rgba(255,255,255,.08);color:#cbd5e1;font-size:11px;padding:4px 10px;border-radius:12px;border:1px solid rgba(255,255,255,.12);}
+
+.main-layout{max-width:960px;margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:0;padding:0 0 60px;}
+@media(max-width:700px){.main-layout{grid-template-columns:1fr;}.sidebar{display:none;}}
+
+.sidebar{padding:24px 16px;position:sticky;top:96px;height:calc(100vh - 96px);overflow-y:auto;border-right:1px solid var(--grey-border);}
+.sidebar h3{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--grey-text);margin-bottom:12px;}
+.toc-link{display:block;font-size:12px;color:var(--grey-text);text-decoration:none;padding:5px 8px;border-radius:5px;margin-bottom:2px;line-height:1.4;border-left:2px solid transparent;transition:all .2s;}
+.toc-link:hover,.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);}
+.toc-section-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a0aec0;margin:12px 0 4px 8px;}
+.sidebar-divider{border:none;border-top:1px solid var(--grey-border);margin:14px 0;}
+.sidebar-note{background:var(--teal-light);border-radius:6px;padding:10px;font-size:11px;color:var(--teal-dark);line-height:1.5;}
+.sidebar-note strong{display:block;margin-bottom:4px;}
+.sidebar-locked{background:#fef3c7;border-radius:6px;padding:10px;font-size:11px;color:#92400e;line-height:1.5;margin-top:8px;}
+.sidebar-locked strong{display:block;margin-bottom:4px;}
+
+.main-feed{padding:24px 28px;}
+.page-intro{background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:18px;margin-bottom:24px;font-size:13px;color:#475569;line-height:1.6;}
+.page-intro strong{color:var(--ink);}
+.attribution{font-size:12px;color:var(--grey-text);margin-top:10px;padding-top:10px;border-top:1px solid var(--grey-border);}
+
+.section-head{display:flex;align-items:center;justify-content:space-between;padding:10px 0;margin:28px 0 12px;border-bottom:2px solid var(--grey-border);}
+.section-head h2{font-size:15px;font-weight:700;color:var(--navy);}
+.sec-count{background:var(--teal-light);color:var(--teal-dark);font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;}
+
+.note-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:14px;overflow:hidden;transition:box-shadow .2s;}
+.note-card:hover{box-shadow:0 2px 12px rgba(0,0,0,.07);}
+.note-header{padding:14px 18px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;background:#fff;}
+.note-header:hover{background:var(--grey-bg);}
+.page-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:4px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.note-title{font-size:14px;font-weight:700;color:var(--ink);flex:1;line-height:1.35;}
+.note-subtitle{font-size:12px;color:var(--grey-text);margin-top:3px;font-weight:400;}
+.note-chevron{flex-shrink:0;color:var(--grey-text);transition:transform .25s;margin-top:2px;}
+.note-card.open .note-chevron{transform:rotate(180deg);}
+.note-card.open .note-header{background:var(--teal-light);}
+.note-card.open .note-title{color:var(--teal-dark);}
+
+.note-body{display:none;padding:0 18px 18px;font-family:'Georgia',serif;font-size:14px;line-height:1.75;}
+.note-card.open .note-body{display:block;}
+.note-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-dark);margin:16px 0 6px;}
+.note-body p{margin-bottom:10px;color:#1e293b;}
+.note-body ul,.note-body ol{padding-left:20px;margin-bottom:10px;}
+.note-body li{margin-bottom:5px;color:#1e293b;}
+.note-body strong{color:var(--ink);}
+.note-body table{width:100%;border-collapse:collapse;font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;margin:10px 0;}
+.note-body th{background:var(--navy);color:#fff;padding:8px 10px;text-align:left;font-weight:600;}
+.note-body td{padding:7px 10px;border-bottom:1px solid var(--grey-border);color:#1e293b;vertical-align:top;}
+.note-body tr:nth-child(even) td{background:var(--grey-bg);}
+
+.formula-box{background:var(--grey-bg);border-left:3px solid var(--teal);border-radius:6px;padding:12px 14px;margin:12px 0;font-family:monospace;font-size:13px;line-height:1.7;}
+.formula-box .fb-title{font-family:'Segoe UI',system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-dark);margin-bottom:6px;}
+
+.flow-box{background:#fff;border:1px solid var(--grey-border);border-radius:8px;padding:14px;margin:12px 0;}
+.flow-steps{display:flex;flex-direction:column;gap:0;}
+.flow-step{display:flex;align-items:flex-start;gap:10px;}
+.flow-step-content{background:var(--grey-bg);border:1px solid var(--grey-border);border-radius:6px;padding:8px 12px;font-size:13px;font-family:'Segoe UI',system-ui,sans-serif;flex:1;}
+.flow-arrow{color:var(--teal);font-size:18px;text-align:center;line-height:1;padding:2px 0 2px 20px;}
+
+.simon-tip{background:#fffbeb;border:1px solid #fde68a;border-left:4px solid #f59e0b;border-radius:6px;padding:12px 14px;margin:14px 0;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;line-height:1.6;}
+.simon-tip .tip-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#92400e;margin-bottom:5px;}
+.simon-tip p{color:#78350f;margin:0;}
+
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin-top:16px;}
+.reg-box-title{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8;margin-bottom:10px;}
+.reg-item{display:flex;gap:10px;margin-bottom:7px;font-size:12px;align-items:flex-start;}
+.reg-item:last-child{margin-bottom:0;}
+.reg-code{color:var(--orange);font-family:monospace;font-weight:700;white-space:nowrap;flex-shrink:0;}
+.reg-desc{color:#cbd5e1;line-height:1.4;}
+
+.nav-strip{display:flex;justify-content:space-between;align-items:center;padding:20px 28px;border-top:2px solid var(--grey-border);margin-top:10px;background:#fff;}
+.nav-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 20px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s;}
+.nav-btn.prev{background:var(--grey-bg);color:var(--ink);border:1px solid var(--grey-border);}
+.nav-btn.prev:hover{background:var(--grey-border);}
+.nav-btn.home{background:var(--grey-bg);color:var(--ink);border:1px solid var(--grey-border);}
+.nav-btn.home:hover{background:var(--grey-border);}
+.nav-btn.next{background:var(--orange);color:#fff;}
+.nav-btn.next:hover{background:#ea6c00;}
+.nav-info{font-size:12px;color:var(--grey-text);text-align:center;}
+
+.page-footer{background:var(--navy);color:#94a3b8;text-align:center;padding:20px;font-size:12px;line-height:1.8;}
+.page-footer a{color:var(--teal);text-decoration:none;}
+.page-footer strong{color:#cbd5e1;}
+
+body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";position:fixed;bottom:20px;right:20px;font-size:10px;color:rgba(0,0,0,.08);pointer-events:none;transform:rotate(-15deg);letter-spacing:.04em;z-index:0;}
+
+/* TOPIC LIST PANEL */
+.topic-panel{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:200;display:flex;align-items:flex-start;gap:0;}
+.topic-toggle{background:var(--teal);color:#fff;border:none;cursor:pointer;padding:10px 6px;border-radius:6px 0 0 6px;font-size:11px;font-weight:700;writing-mode:vertical-rl;text-orientation:mixed;letter-spacing:.06em;text-transform:uppercase;min-height:80px;}
+.topic-drawer{background:#fff;border:1px solid var(--grey-border);border-right:none;border-radius:8px 0 0 8px;box-shadow:-4px 0 20px rgba(0,0,0,.12);width:220px;max-height:70vh;overflow-y:auto;display:none;padding:12px 0;}
+.topic-panel.open .topic-drawer{display:block;}
+.topic-drawer-head{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--grey-text);padding:4px 14px 8px;border-bottom:1px solid var(--grey-border);margin-bottom:6px;}
+.topic-drawer a{display:block;font-size:12px;color:var(--ink);text-decoration:none;padding:5px 14px;line-height:1.4;transition:background .15s;}
+.topic-drawer a:hover{background:var(--teal-light);color:var(--teal-dark);}
+.topic-drawer .tdr-section{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#a0aec0;padding:8px 14px 3px;}
+@media(max-width:700px){.topic-panel{display:none;}}
+
+/* SEARCH BAR */
+.notes-search-wrap{display:flex;align-items:center;gap:10px;margin-bottom:18px;background:#fff;border:1.5px solid var(--grey-border);border-radius:8px;padding:8px 14px;transition:border-color .2s;}
+.notes-search-wrap:focus-within{border-color:var(--teal);}
+.notes-search-wrap svg{flex-shrink:0;color:var(--grey-text);}
+.notes-search-input{border:none;outline:none;font-size:14px;width:100%;color:var(--ink);background:transparent;}
+.notes-search-input::placeholder{color:#a0aec0;}
+.search-count{font-size:12px;color:var(--grey-text);white-space:nowrap;}
+.no-search-results{display:none;text-align:center;padding:40px 20px;color:var(--grey-text);font-size:14px;}
+
+/* FORMSPREE PANEL */
+.correction-panel h3{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+.correction-panel p{font-size:13px;color:var(--grey-text);margin-bottom:16px;line-height:1.6;}
+@media(max-width:560px){}
+</style>
+</head>
+<body>
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+
+<!-- TOPIC QUICK-NAV PANEL -->
+<div class="topic-panel" id="topicPanel">
+  <button class="topic-toggle" onclick="document.getElementById('topicPanel').classList.toggle('open')">Topics</button>
+  <div class="topic-drawer">
+    <div class="topic-drawer-head">Quick Navigation — Pages 26–50</div>
+    <span class="tdr-section">🧭 Navigation</span>
+    <a href="#n1">Gyro &amp; Magnetic Compass</a>
+    <a href="#n2">LRIT</a>
+    <a href="#n3">AIS vs LRIT</a>
+    <a href="#n4">MMSI &amp; Identifiers</a>
+    <span class="tdr-section">⚖ Stability</span>
+    <a href="#n5">Stability Booklet Contents</a>
+    <a href="#n6">GT &amp; NT Formulas</a>
+    <a href="#n7">Deadweight (DWT)</a>
+    <a href="#n8">Guardrail Dimensions</a>
+    <a href="#n9">Tug Girding</a>
+    <span class="tdr-section">🔧 Machinery</span>
+    <a href="#n10">Caustic Embrittlement</a>
+    <a href="#n11">NOₓ Technical File</a>
+    <span class="tdr-section">🌍 GHG</span>
+    <a href="#n12">CII — AER Formula</a>
+    <a href="#n13">Persistent vs Non-Persistent Oil</a>
+    <a href="#n15">Ballast Water Management</a>
+    <a href="#n16">Arctic HFO Ban 2024</a>
+    <a href="#n17">Carbon Credits &amp; EU ETS</a>
+    <a href="#n18">GWP Table</a>
+    <span class="tdr-section">⚓ Commercial</span>
+    <a href="#n19">CLC 1969 vs 1992</a>
+    <a href="#n20">In Rem vs In Personam</a>
+    <a href="#n21">CBA &amp; MLC</a>
+    <a href="#n22">Cabotage — India</a>
+    <a href="#n23">ROFR &amp; Shipping Master</a>
+    <a href="#n24">Force Majeure &amp; Torts</a>
+    <span class="tdr-section">📋 Management</span>
+    <a href="#n25">Classification Actions</a>
+    <a href="#n26">ISMS</a>
+    <a href="#n27">MIS &amp; ICT</a>
+    <a href="#n28">MRCC &amp; SAR</a>
+    <a href="#n29">Blue Economy</a>
+    <a href="#n30">ICCT &amp; PMSA</a>
+  </div>
+</div>
+
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="logo-mark">MIW</div>
+    <div><div class="brand-name">Marine Intelligence Weekly</div><div class="brand-sub">MEO Class 1 Preparation</div></div>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">Notes Index</a>
+    <a href="Part 3 →" class="highlight">Part 3 →</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="header-badge">Simon Sir Notes · Part 2 · Pages 26–50 · Subscriber</div>
+  <h1>MEO Class 1 Oral Exam Notes<br>Simon Sir — Pages 26 to 50</h1>
+  <p>Continues from Part 1. Navigation, tonnage, GHG, commercial law, MARPOL — expanded with Kochi MMD examiner intelligence. Originally compiled by Vignesh Siva.</p>
+  <div class="header-meta">
+    <span class="meta-pill">📄 Pages 26–50</span>
+    <span class="meta-pill">🔓 Free to Share</span>
+    <span class="meta-pill">🕒 Updated June 2026</span>
+    <span class="meta-pill">📍 Kochi MMD Focus</span>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- SIDEBAR TOC -->
+  <aside class="sidebar">
+    <h3>Contents — Pages 26–50</h3>
+    <span class="toc-section-label">Navigation Systems</span>
+    <a class="toc-link" href="#n1">Gyro &amp; Magnetic Compass</a>
+    <a class="toc-link" href="#n2">LRIT — Long-Range Tracking</a>
+    <a class="toc-link" href="#n3">AIS vs LRIT Comparison</a>
+    <a class="toc-link" href="#n4">MMSI &amp; Ship Identifiers</a>
+    <span class="toc-section-label">Stability &amp; Structure</span>
+    <a class="toc-link" href="#n5">Stability Booklet Contents</a>
+    <a class="toc-link" href="#n6">GT &amp; NT — Tonnage Formulas</a>
+    <a class="toc-link" href="#n7">Deadweight Tonnage (DWT)</a>
+    <a class="toc-link" href="#n8">Guardrail &amp; Bulwark Regs</a>
+    <a class="toc-link" href="#n9">Tug Girding</a>
+    <span class="toc-section-label">Machinery &amp; Materials</span>
+    <a class="toc-link" href="#n10">Caustic Embrittlement</a>
+    <a class="toc-link" href="#n11">Fuel Flash Point</a>
+    <span class="toc-section-label">GHG &amp; Environmental</span>
+    <a class="toc-link" href="#n12">CII — Carbon Intensity Indicator</a>
+    <a class="toc-link" href="#n13">Persistent vs Non-Persistent Oil</a>
+    <a class="toc-link" href="#n14">NOₓ Technical File</a>
+    <a class="toc-link" href="#n15">Ballast Water Management</a>
+    <a class="toc-link" href="#n16">Arctic HFO Ban</a>
+    <a class="toc-link" href="#n17">Carbon Credits &amp; GWP</a>
+    <a class="toc-link" href="#n18">Carbon Footprint &amp; GWP Table</a>
+    <span class="toc-section-label">Commercial &amp; Legal</span>
+    <a class="toc-link" href="#n19">CLC 1969 vs 1992</a>
+    <a class="toc-link" href="#n20">In Rem vs In Personam</a>
+    <a class="toc-link" href="#n21">CBA &amp; MLC</a>
+    <a class="toc-link" href="#n22">Cabotage Laws — India</a>
+    <a class="toc-link" href="#n23">ROFR &amp; Shipping Master</a>
+    <a class="toc-link" href="#n24">Force Majeure &amp; Maritime Torts</a>
+    <span class="toc-section-label">Management Systems</span>
+    <a class="toc-link" href="#n25">Classification Society Actions</a>
+    <a class="toc-link" href="#n26">ISMS — Integrated SMS</a>
+    <a class="toc-link" href="#n27">MIS &amp; ICT Onboard</a>
+    <a class="toc-link" href="#n28">MRCC &amp; SAR</a>
+    <a class="toc-link" href="#n29">Blue Economy</a>
+    <a class="toc-link" href="#n30">ICCT &amp; PMSA</a>
+    <hr class="sidebar-divider">
+    <div class="sidebar-note">
+      <strong>← Part 1 (Pages 1–25)</strong>
+      <a href="simon-notes-p1.html" style="color:var(--teal-dark);font-weight:700;">← Go back to Part 1</a>
+    </div>
+    <div class="sidebar-note">
+      <strong>→ Pages 51–75</strong><a href="simon-notes-p3.html" style="color:var(--teal-dark);font-weight:700;display:block;margin-top:4px;">Part 3 →</a></div>
+  </aside>
+
+  <!-- MAIN FEED -->
+  <div class="main-feed">
+
+    <div class="page-intro">
+      Part 2 continues with <strong>navigation systems, tonnage, GHG/CII, commercial law, and classification</strong> — all high-frequency Simon Sir topics. He often chains questions: compass → LRIT → AIS → MMSI in one sitting. The commercial law topics (CLC, torts, CBA) are also common in management-level orals.
+      <div class="attribution">Originally prepared by <strong>Vignesh Siva</strong>. Transcribed, expanded &amp; updated to 2026 regulations by <strong>Nixon Antony, 2/E, Maersk A/S</strong>. Part of the MIW Simon Sir oral notes series — subscriber access.</div>
+    </div>
+
+
+    <!-- SEARCH BAR -->
+    <div class="notes-search-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input class="notes-search-input" id="notesSearch" type="text" placeholder="Search topics, regulations, keywords…" oninput="notesSearch(this.value)">
+      <span class="search-count" id="searchCount"></span>
+    </div>
+    <div class="no-search-results" id="noResults">No topics match your search. Try a different keyword.</div>
+
+    <!-- NAVIGATION SYSTEMS -->
+    <div class="section-head" id="n1">
+      <h2>🧭 Navigation Systems</h2>
+      <span class="sec-count">4 topics</span>
+    </div>
+
+    <!-- GYRO & MAGNETIC COMPASS -->
+    <div class="note-card" id="n1">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.26</span>
+        <div class="note-title">Gyro &amp; Magnetic Compass
+          <div class="note-subtitle">True North vs Magnetic North — working principle</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Dual Compass Setup</h4>
+        <ul>
+          <li><strong>Gyro Compass:</strong> Points to <strong>True North</strong> — primary navigational compass.</li>
+          <li><strong>Magnetic Compass:</strong> Points to <strong>Magnetic North</strong> — backup system. Affected by ship's steel structure, wiring, and magnetic induction.</li>
+        </ul>
+        <h4>Gyro Compass — Working Principle (3-Stage Pendulous Loop)</h4>
+        <div class="flow-box">
+          <div class="flow-steps">
+            <div class="flow-step"><div class="flow-step-content"><strong>Gyroscopic Inertia</strong> — Spinning rotor resists external forces and maintains orientation in space.</div></div>
+            <div class="flow-arrow">▼ Earth's rotation causes misalignment</div>
+            <div class="flow-step"><div class="flow-step-content"><strong>Rotation-Induced Precession</strong> — Creates a torque on the gyro axis, causing slow corrective rotation.</div></div>
+            <div class="flow-arrow">▼ Gravitational correction</div>
+            <div class="flow-step"><div class="flow-step-content"><strong>Pendulous Feedback Mechanism</strong> — Weighted system senses tilt and applies corrective torque, locking gyro axis onto True North.</div></div>
+          </div>
+        </div>
+        <h4>Gyro Error Causes</h4>
+        <ul>
+          <li><strong>Speed Error:</strong> Vessel's own speed causes the gyro to sense a false rotation.</li>
+          <li><strong>Latitude Error:</strong> Gyro settles slightly east/west of true meridian at high latitudes.</li>
+          <li><strong>Ballistic Deflection:</strong> Sudden course or speed changes disturb the pendulous system temporarily.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"Explain the working principle of a gyro compass." — Focus on the <strong>three-stage loop</strong>: inertia → precession → pendulous correction. He may follow with: "What are the errors of a gyro compass?" — Know speed error, latitude error, and ballistic deflection. As CE you are responsible for maintaining gyro accuracy records in the Movement Book.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS V / Reg 19</span><span class="reg-desc">Carriage requirements for navigational systems including gyro compass</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.116(73)</span><span class="reg-desc">Revised performance standards for gyrocompasses — adopted 2000, current standard</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS V / Reg 22</span><span class="reg-desc">Voyage data recorder — records compass heading continuously</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LRIT -->
+    <div class="note-card" id="n2">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.27</span>
+        <div class="note-title">LRIT — Long-Range Identification &amp; Tracking
+          <div class="note-subtitle">SOLAS V/19-1 — 300 GT and above, every 6 hours</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Purpose &amp; Applicability</h4>
+        <ul>
+          <li><strong>Purpose:</strong> Globally identifies and tracks ships for safety, security, SAR, and coastal state awareness.</li>
+          <li><strong>Applicability:</strong> All ships <strong>300 GT and above</strong> — SOLAS Chapter V, Regulation 19-1.</li>
+          <li><strong>Transmission:</strong> Every <strong>6 hours</strong> automatically via existing satellite communication equipment.</li>
+          <li><strong>Master's authority:</strong> Can switch off transmission under exceptional circumstances (e.g., drydock).</li>
+        </ul>
+        <h4>Data Package Transmitted (3 elements)</h4>
+        <ol>
+          <li><strong>Ship Identity:</strong> IMO number, name, MMSI, call sign.</li>
+          <li><strong>Position:</strong> Latitude and longitude.</li>
+          <li><strong>UTC date and time</strong> of position fix.</li>
+        </ol>
+        <h4>LRIT Network Architecture</h4>
+        <div class="flow-box">
+          <div class="flow-steps">
+            <div class="flow-step"><div class="flow-step-content">Shipboard LRIT equipment transmits every 6 hours</div></div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step"><div class="flow-step-content">Communication Service Provider (CSP) — satellite link</div></div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step"><div class="flow-step-content">Application Service Provider (ASP) → LRIT Data Collection Centre (DC)</div></div>
+            <div class="flow-arrow">▼</div>
+            <div class="flow-step"><div class="flow-step-content">International LRIT Data Exchange → Port State / Coastal State / SAR authorities</div></div>
+          </div>
+        </div>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is LRIT and what data does it transmit?" — Know all 3 data elements, the 6-hour interval, and the 300 GT threshold. He may chain this with: "What is the difference between AIS and LRIT?" — See the next card. Key distinction: LRIT is <strong>closed-loop / secure</strong>; AIS is open broadcast.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS V / Reg 19-1</span><span class="reg-desc">Long-range identification and tracking of ships — mandatory from 2009</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.202(81)</span><span class="reg-desc">Amendments to SOLAS introducing LRIT system requirements</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.1/Circ.1257</span><span class="reg-desc">LRIT information access and technical standards guidance</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AIS vs LRIT -->
+    <div class="note-card" id="n3">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.28</span>
+        <div class="note-title">AIS vs LRIT — Key Differences
+          <div class="note-subtitle">Open vs closed loop · VHF vs satellite · local vs global</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <table>
+          <tr><th>Parameter</th><th>AIS</th><th>LRIT</th></tr>
+          <tr><td><strong>Primary purpose</strong></td><td>Collision avoidance / local navigation</td><td>International safety, security &amp; SAR</td></tr>
+          <tr><td><strong>Network type</strong></td><td>Open loop — public broadcast</td><td>Closed loop — secure, official DCs only</td></tr>
+          <tr><td><strong>Medium</strong></td><td>VHF radio (terrestrial)</td><td>Satellite communication</td></tr>
+          <tr><td><strong>Range</strong></td><td>20–30 NM (line of sight)</td><td>Worldwide coverage</td></tr>
+          <tr><td><strong>Frequencies</strong></td><td>161.975 MHz (AIS 1) / 162.025 MHz (AIS 2)</td><td>No fixed channels — encrypted satellite</td></tr>
+          <tr><td><strong>Access</strong></td><td>Anyone with receiver can read</td><td>Flag / coastal / port states only</td></tr>
+        </table>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is the difference between AIS and LRIT?" — The <strong>open vs closed loop</strong> distinction is the key answer. AIS is for local collision avoidance and is publicly visible; LRIT is for long-range state-level tracking with restricted access. Both are mandatory under SOLAS V but serve entirely different purposes.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS V / Reg 19</span><span class="reg-desc">AIS — mandatory on ships 300 GT+ (international voyages) and 500 GT+ (all ships)</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS V / Reg 19-1</span><span class="reg-desc">LRIT — mandatory on ships 300 GT+ on international voyages</span></div>
+          <div class="reg-item"><span class="reg-code">ITU-R M.1371</span><span class="reg-desc">Technical standards for AIS including VHF channel frequencies</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MMSI & IDENTIFIERS -->
+    <div class="note-card" id="n4">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.37–38</span>
+        <div class="note-title">MMSI, Call Sign &amp; Ship Identifiers
+          <div class="note-subtitle">9-digit MMSI · IMO number · Call Sign — differences</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>MMSI — Maritime Mobile Service Identity</h4>
+        <ul>
+          <li><strong>Format:</strong> Unique <strong>9-digit number</strong> issued by Flag State.</li>
+          <li><strong>Structure:</strong> First 3 digits = MID (Maritime Identification Digits, allocated by ITU) + 6 unique digits for the vessel.</li>
+          <li><strong>Flag change rule:</strong> MMSI <strong>must change</strong> if the vessel changes Flag State — it is country-specific.</li>
+          <li><strong>Integration:</strong> Hard-programmed into DSC radio equipment, HF/VHF consoles, and AIS transponder.</li>
+        </ul>
+        <h4>Three Ship Identifiers Compared</h4>
+        <table>
+          <tr><th>Identifier</th><th>Purpose</th><th>Changes?</th></tr>
+          <tr><td><strong>Call Sign</strong></td><td>Voice communication over VHF/HF — overcomes language barriers</td><td>Changes with flag state</td></tr>
+          <tr><td><strong>IMO Number</strong></td><td>Fixed 7-digit permanent identifier — never changes regardless of flag or name</td><td>Never changes</td></tr>
+          <tr><td><strong>Official Number</strong></td><td>Administrative/legal tracking in Official Log Book</td><td>Country-specific</td></tr>
+        </table>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is MMSI and when must it change?" — Must change on <strong>flag change</strong> because the MID (first 3 digits) identifies the nation. Follow-up: "What never changes?" — The <strong>IMO number</strong> — it is permanently assigned at build and survives all flag, name, and ownership changes.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">ITU Radio Regs / Art. 19</span><span class="reg-desc">MMSI assignment — ITU allocates MID digits to flag states</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS XI-1 / Reg 3</span><span class="reg-desc">IMO ship identification number scheme — permanent 7-digit number</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS IV / GMDSS</span><span class="reg-desc">MMSI used in DSC distress alerting — must be correctly programmed</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STABILITY & STRUCTURE -->
+    <div class="section-head" id="n5">
+      <h2>⚖ Stability &amp; Structure</h2>
+      <span class="sec-count">5 topics</span>
+    </div>
+
+    <!-- STABILITY BOOKLET -->
+    <div class="note-card" id="n5">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.29</span>
+        <div class="note-title">Stability Booklet — Mandatory Contents
+          <div class="note-subtitle">SOLAS II-1 / IS Code 2008 — 9 required sections</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>9 Mandatory Sections</h4>
+        <ol>
+          <li>General description of the ship.</li>
+          <li>Instructions on how to use the booklet.</li>
+          <li>General Arrangement plan — watertight compartments, vents, air pipes.</li>
+          <li>Capacity plan — tank volumes, centres of gravity, free surface effect data.</li>
+          <li>Tank sounding and ullage tables.</li>
+          <li>Hydrostatic curves and cross curves of stability (GZ curves).</li>
+          <li>Descriptions of standard stability calculations and worked examples.</li>
+          <li>Inclining experiment list and formal report data.</li>
+          <li>Loading restrictions — maximum allowable KG limits, permissible draughts.</li>
+        </ol>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What are the contents of the stability booklet?" — List all 9. He may follow with: "When is the stability booklet updated?" — After structural alterations, cargo modifications, or at the periodical inclining experiment (typically every 5 years or after major conversion). The booklet must be <strong>approved by the Administration or recognised organisation</strong>.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg 5-1</span><span class="reg-desc">Stability information — approved stability booklet mandatory on all ships</span></div>
+          <div class="reg-item"><span class="reg-code">IS Code 2008 / Part B</span><span class="reg-desc">Intact Stability Code — defines minimum GZ criteria and booklet content requirements</span></div>
+          <div class="reg-item"><span class="reg-code">MSC-MEPC.6/Circ.6</span><span class="reg-desc">Guidance on the preparation and contents of the stability booklet</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GT & NT -->
+    <div class="note-card" id="n6">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.40–41</span>
+        <div class="note-title">Gross Tonnage (GT) &amp; Net Tonnage (NT)
+          <div class="note-subtitle">Tonnage Convention 1969 — dimensionless indices, formulas</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Key Principles</h4>
+        <ul>
+          <li>Both GT and NT are <strong>dimensionless indices</strong> — not physical volumes in cubic metres, despite being derived from volume.</li>
+          <li>GT = total enclosed volume of all spaces on the ship (including non-cargo).</li>
+          <li>NT = volume of cargo-carrying spaces only — represents earning capacity.</li>
+          <li>Measured and verified by a <strong>Classification Society surveyor</strong>; issued as the <strong>International Tonnage Certificate</strong>.</li>
+        </ul>
+        <div class="formula-box">
+          <div class="fb-title">GT &amp; NT Formulas (Tonnage Convention 1969)</div>
+          <strong>GT = K₁ × V</strong><br>
+          K₁ = 0.2 + 0.02 × log₁₀(V) | V = total enclosed volume (m³)<br><br>
+          <strong>NT = K₂ × Vc × (4d/3D)² + K₃ × [(N₁ + N₂)/10]</strong><br>
+          Vc = cargo space volume | K₂ = 0.2 + 0.02 × log₁₀(Vc)<br>
+          d = moulded draught | D = moulded depth | N₁/N₂ = passenger numbers
+        </div>
+        <h4>Applied Uses</h4>
+        <ul>
+          <li><strong>GT determines:</strong> Manning levels, SOLAS/MARPOL applicability thresholds, convention requirements, safety regulations.</li>
+          <li><strong>NT determines:</strong> Port dues, canal fees (Suez, Panama), pilotage charges, tonnage taxes.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is the difference between GT and NT?" — GT covers all enclosed spaces; NT covers only cargo spaces. He may ask: "Why does the Suez Canal use NT?" — Because NT reflects actual <em>earning</em> capacity and cargo-carrying use of the canal. SOLAS thresholds use GT because they reflect the overall size and complexity of the vessel.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">Tonnage Convention 1969</span><span class="reg-desc">International Convention on Tonnage Measurement of Ships — GT/NT formulas</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS I / Reg 2</span><span class="reg-desc">Definitions — SOLAS applicability thresholds reference GT</span></div>
+          <div class="reg-item"><span class="reg-code">ITC 69 Annex I</span><span class="reg-desc">Regulations for determination of GT and NT — K₁/K₂/K₃ coefficients</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DWT -->
+    <div class="note-card" id="n7">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.42</span>
+        <div class="note-title">Deadweight Tonnage (DWT)
+          <div class="note-subtitle">Maximum safe carrying weight — CII reference parameter</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Definition</h4>
+        <p>The maximum weight a ship can safely carry when loaded to its <strong>maximum permissible summer load line</strong>. Does not include the lightship (empty vessel) weight.</p>
+        <div class="formula-box">
+          <div class="fb-title">DWT Composition</div>
+          DWT = Cargo + Fuel (Bunkers) + Fresh Water + Ballast + Provisions + Crew/Passengers
+        </div>
+        <h4>Regulatory Significance</h4>
+        <ul>
+          <li><strong>CII calculation:</strong> DWT is the denominator in the AER formula — CO₂ ÷ (DWT × distance). Low DWT → higher CII (worse rating).</li>
+          <li><strong>EEDI/EEXI:</strong> DWT used as the capacity parameter for cargo ships in EEDI formula.</li>
+          <li><strong>MARPOL Annex I:</strong> ORB retention limits referenced against ship's DWT for some vessels.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is DWT?" — Define it as the maximum carrying capacity at summer load line. He may chain this to: "How does DWT affect CII?" — DWT is the denominator in AER; a larger DWT with the same fuel consumption gives a <em>better</em> (lower) CII. This is why running in ballast degrades CII — less transport work for same fuel burn.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">LL Convention 1966</span><span class="reg-desc">Load lines — maximum draught at which DWT is measured</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 28</span><span class="reg-desc">CII AER formula — DWT used as capacity parameter for cargo ships</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 22</span><span class="reg-desc">EEDI technical file — DWT as capacity in EEDI calculation</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUARDRAIL -->
+    <div class="note-card" id="n8">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.42</span>
+        <div class="note-title">Guardrail &amp; Bulwark Dimensions
+          <div class="note-subtitle">Load Lines Convention — 1,000 mm height, 230/380 mm gaps</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <div class="formula-box">
+          <div class="fb-title">Guardrail Minimum Dimensions (ILLC Annex II)</div>
+          Minimum total height above deck: <strong>1,000 mm (1.0 metre)</strong><br>
+          Maximum lowest opening gap (from deck): <strong>230 mm</strong><br>
+          Maximum intermediate rail spacing: <strong>380 mm</strong>
+        </div>
+        <h4>Design Justification</h4>
+        <ul>
+          <li>230 mm lowest gap — prevents an adult's torso from passing through, stops MOB incidents.</li>
+          <li>380 mm intermediate spacing — prevents leg entrapment and falling through gaps.</li>
+          <li>Where fitted as open rails (no bulwark), all three dimensions must be met.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What are the dimensions of guardrails?" — Quote all three: <strong>1,000 mm height, 230 mm lowest gap, 380 mm intermediate spacing</strong>. He may follow with: "Under which convention?" — Load Lines Convention (ILLC), Annex II. On container vessels these are critical on hatch covers and weather decks during lashing operations.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">ILLC 1966 / Annex II</span><span class="reg-desc">Conditions of assignment — guardrail and bulwark dimensions on exposed decks</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg 3-3</span><span class="reg-desc">Means of embarkation and disembarkation — guardrail requirements at access points</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TUG GIRDING -->
+    <div class="note-card" id="n9">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.31</span>
+        <div class="note-title">Tug Girding — Capsizing Risk
+          <div class="note-subtitle">Towline perpendicular force — 4 influencing factors</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Definition</h4>
+        <p>Girding occurs when a vessel pulls a connected tugboat <strong>beam-on (perpendicular)</strong> to its heading via the towline, creating a capsizing force on the tug. The tug is unable to manoeuvre out of the perpendicular position and is overwhelmed by the lateral pull.</p>
+        <h4>4 Key Influencing Factors</h4>
+        <ol>
+          <li><strong>Suitability of the tug:</strong> Size, power, and hull manoeuvrability.</li>
+          <li><strong>Towline length:</strong> Longer scope alters the stability dynamics — shorter lines increase risk.</li>
+          <li><strong>Towing point location:</strong> Low towing point reduces girding risk; high point increases it.</li>
+          <li><strong>Environmental conditions:</strong> Wind, tidal streams, and currents amplify the perpendicular force.</li>
+        </ol>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is tug girding?" — Define the perpendicular pull mechanism and state all 4 factors. Relevant on container vessels when berthing/unberthing with tugs in ports like Singapore, Rotterdam, or during offshore operations. As CE, awareness of tug operations is expected at management level.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS V / Reg 34</span><span class="reg-desc">Safe navigation and avoidance of dangerous situations — Master's responsibility during tug operations</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code / Cl. 7</span><span class="reg-desc">Shipboard operations — risk assessment for towage and port manoeuvres</span></div>
+          <div class="reg-item"><span class="reg-code">ICS Tug Guidelines</span><span class="reg-desc">International Chamber of Shipping guidelines on tug use — girding prevention measures</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MACHINERY & MATERIALS -->
+    <div class="section-head" id="n10">
+      <h2>🔧 Machinery &amp; Materials</h2>
+      <span class="sec-count">2 topics</span>
+    </div>
+
+    <!-- CAUSTIC EMBRITTLEMENT -->
+    <div class="note-card" id="n10">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.32</span>
+        <div class="note-title">Caustic Embrittlement in Boilers
+          <div class="note-subtitle">NaOH stress corrosion cracking — pH 8.5–10.5 control</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Definition</h4>
+        <p><strong>Embrittlement:</strong> Loss of ductility in a material, making it brittle and prone to sudden fracture.<br>
+        <strong>Caustic Embrittlement:</strong> A specific type of stress corrosion cracking caused by exposure of steel to concentrated <strong>Sodium Hydroxide (NaOH)</strong> under high temperature and stress — targets boiler bends, joints, and welds.</p>
+        <h4>Chemical Accumulation Cycle in Boilers</h4>
+        <div class="flow-box">
+          <div class="flow-steps">
+            <div class="flow-step"><div class="flow-step-content">Na₂CO₃ (sodium carbonate) added to soften boiler water</div></div>
+            <div class="flow-arrow">▼ Water evaporates; concentration rises</div>
+            <div class="flow-step"><div class="flow-step-content">Hydrolysis produces NaOH (sodium hydroxide)</div></div>
+            <div class="flow-arrow">▼ Alkaline water enters micro-cracks in boiler wall</div>
+            <div class="flow-step"><div class="flow-step-content">Water evaporates inside crack — NaOH concentration spikes to extreme level</div></div>
+            <div class="flow-arrow">▼ Electrochemical concentration cell forms</div>
+            <div class="flow-step"><div class="flow-step-content">Concentrated area = Anode (−) / Diluted = Cathode (+) → massive metal loss at stressed point</div></div>
+          </div>
+        </div>
+        <div class="formula-box">
+          <div class="fb-title">Boiler Water Parameters</div>
+          Ideal pH: <strong>8.5 to 10.5</strong> (slightly alkaline — prevents acidic corrosion)<br>
+          Prevention: Strict pH control + phosphate treatment to neutralise localised caustic pockets
+        </div>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is caustic embrittlement?" — He expects the chemical mechanism: Na₂CO₃ → hydrolysis → NaOH → concentration at cracks → electrochemical cell → metal loss. Quote the boiler pH range: <strong>8.5 to 10.5</strong>. He may also ask about the difference between caustic embrittlement and <em>hydrogen embrittlement</em> — different mechanism, same result (brittleness).</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg 26</span><span class="reg-desc">Machinery installations — boiler maintenance and testing requirements</span></div>
+          <div class="reg-item"><span class="reg-code">Class Rules (LR/BV/DNV)</span><span class="reg-desc">Boiler water testing frequency and chemical treatment standards — class-specific</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code / Cl. 10</span><span class="reg-desc">Maintenance of ship and equipment — PMS to include boiler water quality monitoring</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOx TECHNICAL FILE -->
+    <div class="note-card" id="n11">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.50</span>
+        <div class="note-title">NOₓ Technical File — Contents
+          <div class="note-subtitle">MARPOL VI Reg 13 — mandatory for EIAPP certificate</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>What it is</h4>
+        <p>A mandatory statutory document approved by the Administration and prepared by the engine manufacturer. Required to maintain the engine's <strong>EIAPP (Engine International Air Pollution Prevention) Certificate</strong> under MARPOL Annex VI Regulation 13.</p>
+        <h4>Contents (8 elements)</h4>
+        <ol>
+          <li>Identification of all components, settings, and parameters that alter NOₓ emission profile.</li>
+          <li>Full specifications for replacement parts affecting emissions.</li>
+          <li>Allowable adjustment ranges for engine settings and timing sequences.</li>
+          <li>Documentation for any emission-reduction equipment or exhaust after-treatment systems.</li>
+          <li>Initial test performance data — rated power, engine speed parameters.</li>
+          <li>Certified copy of the original parent engine test record data sheet.</li>
+          <li>Documented operating restrictions or limitations on the parent engine.</li>
+          <li>Approved onboard verification methodologies for Port State and Flag State surveys.</li>
+        </ol>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is the NOₓ Technical File and what does it contain?" — This is a Simon Sir favourite — he focuses on air pollution prevention. Know it is <strong>engine-specific, manufacturer-prepared, Administration-approved</strong>. During a PSC inspection, surveyor checks that onboard engine settings match the Technical File parameters. Any deviation = non-conformance.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 13</span><span class="reg-desc">NOₓ emission control — Tier I/II/III limits, EIAPP certificate requirement</span></div>
+          <div class="reg-item"><span class="reg-code">NOₓ Technical Code 2008</span><span class="reg-desc">Revised IMO NOₓ Technical Code — defines Technical File contents and survey methods</span></div>
+          <div class="reg-item"><span class="reg-code">MEPC.177(58)</span><span class="reg-desc">Amendments to NOₓ Technical Code — Tier II/III survey guidance</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GHG & ENVIRONMENTAL -->
+    <div class="section-head" id="n12">
+      <h2>🌍 GHG &amp; Environmental</h2>
+      <span class="sec-count">6 topics</span>
+    </div>
+
+    <!-- CII -->
+    <div class="note-card" id="n12">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.49</span>
+        <div class="note-title">CII — Carbon Intensity Indicator
+          <div class="note-subtitle">MARPOL VI Reg 28 — A to E rating, AER formula, corrective action</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Applicability &amp; Function</h4>
+        <ul>
+          <li><strong>Applies to:</strong> Ships <strong>5,000 GT and above</strong> on international voyages — from January 2023.</li>
+          <li><strong>Function:</strong> Measures annual operational efficiency — CO₂ emitted per unit of transport work.</li>
+          <li><strong>Rating scale:</strong> A (superior) → B (minor superior) → C (moderate) → D (minor inferior) → E (major inferior).</li>
+        </ul>
+        <div class="formula-box">
+          <div class="fb-title">Attained CII (AER) Formula</div>
+          AER = Σ(Annual Fuel Consumption × C_F) ÷ (DWT × Annual Distance Sailed)<br><br>
+          Required CII = (1 − Z/100) × CII Reference Baseline<br>
+          Z = annual reduction factor (tightens each year toward 2030 targets)
+        </div>
+        <h4>Enforcement — Corrective Action Plan</h4>
+        <div class="formula-box">
+          <div class="fb-title">When CAP is triggered</div>
+          Rated D for <strong>3 consecutive years</strong> → Corrective Action Plan (CAP) required in SEEMP<br>
+          Rated E for <strong>any single year</strong> → CAP required immediately<br>
+          CAP must show pathway to C or better; must be approved by Administration
+        </div>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is CII and how is it calculated?" — Know the AER formula, the A–E rating system, and when a CAP is triggered (D×3 or E×1). He will likely follow: "What can you do operationally to improve CII on your vessel?" — Slow steaming, fuel optimisation, trim optimisation, cargo planning, route planning, shore power in port.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 28</span><span class="reg-desc">CII — mandatory operational carbon intensity measure from January 2023</span></div>
+          <div class="reg-item"><span class="reg-code">MEPC.337(76)</span><span class="reg-desc">2021 Guidelines on operational carbon intensity indicators</span></div>
+          <div class="reg-item"><span class="reg-code">MEPC.338(76)</span><span class="reg-desc">2021 Guidelines on CII rating system — A to E boundaries</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 26</span><span class="reg-desc">SEEMP Part III — must contain CII improvement plan; SoC required</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERSISTENT OIL -->
+    <div class="note-card" id="n13">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.49</span>
+        <div class="note-title">Persistent vs Non-Persistent Oils
+          <div class="note-subtitle">MARPOL Annex I / OPRC — distillation criteria</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Persistent Oil</h4>
+        <p>High-viscosity oils that <strong>do not evaporate or naturally degrade</strong> in water — remain in the environment for extended periods requiring active physical response. Examples: HFO, crude oil, heavy diesel.</p>
+        <h4>Non-Persistent Oil — Classification Criteria</h4>
+        <div class="formula-box">
+          <div class="fb-title">Distillation Test Thresholds</div>
+          1. At least <strong>50% of volume</strong> must distil at <strong>340°C</strong><br>
+          2. At least <strong>95% of volume</strong> must distil at <strong>370°C</strong><br>
+          Examples: Petrol, kerosene, light diesel
+        </div>
+        <h4>Significance for Spill Response</h4>
+        <ul>
+          <li><strong>Persistent spill:</strong> Requires booms, skimmers, dispersants — long-term response operation.</li>
+          <li><strong>Non-persistent spill:</strong> Evaporates relatively quickly — reduced long-term environmental impact but immediate fire/explosion risk.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is the difference between persistent and non-persistent oil?" — Quote the distillation criteria: <strong>50% at 340°C and 95% at 370°C</strong>. He may link to SOPEP and MARPOL Annex I obligations. HFO carried on your container vessel is persistent — important for your Shipboard Oil Pollution Emergency Plan.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex I / Reg 1</span><span class="reg-desc">Definitions — oil categories including persistent/non-persistent classification</span></div>
+          <div class="reg-item"><span class="reg-code">OPRC Convention 1990</span><span class="reg-desc">Oil Pollution Preparedness Response and Cooperation — SOPEP requirement</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex I / Reg 37</span><span class="reg-desc">Shipboard Oil Pollution Emergency Plan (SOPEP) — mandatory for ≥400 GT</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BALLAST WATER -->
+    <div class="note-card" id="n15">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.48</span>
+        <div class="note-title">Ballast Water Management — Mandatory Documents
+          <div class="note-subtitle">BWM Convention 2004 — IBWMC, BWMP, BWRB, Type Approval</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>4 Mandatory Compliance Documents</h4>
+        <ol>
+          <li><strong>IBWMC — International Ballast Water Management Certificate</strong> — issued by Flag State / RO.</li>
+          <li><strong>BWMP — Ballast Water Management Plan</strong> — approved, ship-specific, describes the management method.</li>
+          <li><strong>BWRB — Ballast Water Record Book</strong> — records every ballast uptake, exchange, and discharge operation.</li>
+          <li><strong>Type Approval Certificate</strong> — confirms the onboard BWTS (Ballast Water Treatment System) meets IMO G8 or USCG standards.</li>
+        </ol>
+        <h4>Standards — D-1 vs D-2</h4>
+        <ul>
+          <li><strong>D-1 (Exchange Standard):</strong> Exchange ballast water at &gt;200 NM from land, &gt;200 m depth. 95% volumetric exchange. Transitional measure — being phased out.</li>
+          <li><strong>D-2 (Performance Standard):</strong> Treatment standard — specific limits on viable organisms per m³. Required for all new ships and retrofits.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What documents are required for ballast water management?" — List all 4. He may ask about D-1 vs D-2 standards. Note: USCG has <strong>stricter requirements</strong> than IMO D-2 for ships entering US waters — relevant on container vessels calling US East Coast.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">BWM Convention 2004</span><span class="reg-desc">International Convention for the Control and Management of Ships' Ballast Water — in force 2017</span></div>
+          <div class="reg-item"><span class="reg-code">BWM Convention / Reg B-2</span><span class="reg-desc">Ballast Water Management Plan — ship-specific, Administration-approved</span></div>
+          <div class="reg-item"><span class="reg-code">MEPC.300(72)</span><span class="reg-desc">Revised BWTS approval (G8 Guidelines) — type approval standard</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARCTIC HFO BAN -->
+    <div class="note-card" id="n16">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.35</span>
+        <div class="note-title">Arctic HFO Ban — July 2024
+          <div class="note-subtitle">MARPOL Annex I Reg 43A — black carbon, spill persistence</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Regulation</h4>
+        <ul>
+          <li><strong>Effective:</strong> July 1, 2024 — ban on both <strong>carriage and use</strong> of HFO in Arctic waters.</li>
+          <li><strong>Exemption:</strong> Vessels flying flags of Arctic coastal states — extension to <strong>January 1, 2029</strong>.</li>
+          <li><strong>Regulation:</strong> MARPOL Annex I, Regulation 43A.</li>
+        </ul>
+        <h4>4 Environmental &amp; Socio-Economic Drivers</h4>
+        <ol>
+          <li><strong>Black Carbon / Albedo Effect:</strong> HFO combustion produces black carbon soot. Deposited on Arctic ice → darkens surface → reduces sunlight reflection → accelerates ice melt and sea-level rise.</li>
+          <li><strong>Extreme Spill Persistence:</strong> HFO's high viscosity means spills form heavy tar clumps — virtually irrecoverable in freezing Arctic waters.</li>
+          <li><strong>Challenging Response:</strong> Geographic remoteness, absence of infrastructure, and harsh conditions make spill response almost impossible.</li>
+          <li><strong>Indigenous Livelihoods:</strong> Arctic communities depend entirely on clean waters for fishing and food security.</li>
+        </ol>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"Why was the Arctic HFO ban introduced?" — Quote all 4 reasons. Know the date: <strong>July 1, 2024</strong>. He may link this to the Polar Code (SOLAS/MARPOL mandatory from 2017) and ask whether your vessel trades Arctic — on container vessels, less common, but the regulatory awareness is tested.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MARPOL I / Reg 43A</span><span class="reg-desc">Prohibition on the use and carriage of HFO as fuel in Arctic waters — effective July 2024</span></div>
+          <div class="reg-item"><span class="reg-code">Polar Code 2017</span><span class="reg-desc">SOLAS/MARPOL mandatory Code for ships operating in polar waters</span></div>
+          <div class="reg-item"><span class="reg-code">MEPC.329(76)</span><span class="reg-desc">Amendments to MARPOL Annex I introducing Regulation 43A</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARBON CREDITS & GWP -->
+    <div class="note-card" id="n17">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.44</span>
+        <div class="note-title">Carbon Credits &amp; EU ETS
+          <div class="note-subtitle">Kyoto Protocol 1997 — 1 credit = 1 tCO₂e — cap and trade</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Carbon Credits</h4>
+        <ul>
+          <li><strong>Origin:</strong> Introduced under the <strong>Kyoto Protocol, 1997</strong>.</li>
+          <li><strong>Definition:</strong> A legal permit allowing emission of 1 metric tonne of CO₂ equivalent (tCO₂e).</li>
+          <li>1 carbon credit = <strong>1 tCO₂e</strong> reduced, removed, or avoided.</li>
+        </ul>
+        <h4>Cap and Trade System (EU ETS)</h4>
+        <ul>
+          <li>Regulator sets a <strong>cap</strong> on total emissions across an industry.</li>
+          <li>Entities reducing below their cap → sell surplus credits on the open market.</li>
+          <li>Entities exceeding their cap → buy credits to cover the deficit or face penalties.</li>
+          <li><strong>Maritime EU ETS:</strong> From January 2024 — ships ≥5,000 GT calling EU ports must surrender allowances for 40% of emissions (2024), rising to 70% (2025) and 100% (2026).</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is a carbon credit?" — 1 credit = 1 tCO₂e. He may then ask about EU ETS and its applicability to shipping from 2024. On Maersk container vessels calling EU ports, you are <strong>directly affected</strong> — EU ETS compliance is live. Know the phase-in: 40% (2024) → 70% (2025) → 100% (2026).</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">Kyoto Protocol 1997</span><span class="reg-desc">First international carbon trading framework — origin of carbon credits</span></div>
+          <div class="reg-item"><span class="reg-code">EU ETS / Reg 2023/1805</span><span class="reg-desc">EU Emissions Trading System extended to maritime — effective January 2024</span></div>
+          <div class="reg-item"><span class="reg-code">EU MRV / Reg 2015/757</span><span class="reg-desc">EU Monitoring, Reporting and Verification of CO₂ — basis for ETS compliance data</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GWP TABLE -->
+    <div class="note-card" id="n18">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.45</span>
+        <div class="note-title">Carbon Footprint &amp; Global Warming Potential (GWP)
+          <div class="note-subtitle">GWP indices — CO₂=1 baseline — ammonia 0 GWP but N₂O risk</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Carbon Footprint</h4>
+        <p>Total GHG generated by an individual, vessel, or corporation — measured in <strong>CO₂ equivalent (CO₂e)</strong>.</p>
+        <h4>GWP — Global Warming Potential</h4>
+        <p>Comparative index measuring how much heat a GHG traps over 100 years relative to CO₂ (baseline = 1).</p>
+        <table>
+          <tr><th>Greenhouse Gas</th><th>GWP (100-year)</th></tr>
+          <tr><td>CO₂</td><td><strong>1</strong></td></tr>
+          <tr><td>CH₄ (Methane)</td><td><strong>27–30</strong></td></tr>
+          <tr><td>N₂O (Nitrous Oxide)</td><td><strong>273</strong></td></tr>
+          <tr><td>HFCs</td><td><strong>100–10,000</strong></td></tr>
+          <tr><td>SF₆ (Sulfur Hexafluoride)</td><td><strong>25,200</strong></td></tr>
+        </table>
+        <h4>Ammonia (NH₃) as Marine Fuel — The Trade-off</h4>
+        <ul>
+          <li>GWP = <strong>0</strong> | ODP = <strong>0</strong> — excellent decarbonisation credentials.</li>
+          <li><strong>Risk:</strong> Combustion can produce N₂O (GWP = 273) — if not managed, partially offsets the environmental benefit.</li>
+          <li>Also: highly toxic and corrosive — major safety risk in enclosed spaces.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is GWP?" — Define it and quote at least: CH₄ = 27–30, N₂O = 273, SF₆ = 25,200. He may ask: "Why is LNG not truly green?" — Methane slip (unburned CH₄, GWP 27–30) escaping to atmosphere can negate CO₂ benefits. This is the <strong>methane slip problem</strong> — a key GHG oral topic.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IPCC AR6 (2021)</span><span class="reg-desc">6th Assessment Report — updated GWP values (CH₄ = 27–30 on 100-yr scale)</span></div>
+          <div class="reg-item"><span class="reg-code">IMO 2023 GHG Strategy</span><span class="reg-desc">References GWP of marine fuels — LNG methane slip acknowledged as concern</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 2</span><span class="reg-desc">Definitions include GHG emissions — CO₂, CH₄, N₂O covered under EEDI/CII</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMMERCIAL & LEGAL -->
+    <div class="section-head" id="n19">
+      <h2>⚓ Commercial &amp; Legal</h2>
+      <span class="sec-count">6 topics</span>
+    </div>
+
+    <!-- CLC -->
+    <div class="note-card" id="n19">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.40</span>
+        <div class="note-title">CLC 1969 vs CLC 1992 Protocol
+          <div class="note-subtitle">Civil Liability Convention — oil pollution compensation</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <table>
+          <tr><th>Parameter</th><th>CLC 1969</th><th>CLC 1992 Protocol</th></tr>
+          <tr><td><strong>Geographical scope</strong></td><td>Territorial Sea only</td><td>Extended to EEZ</td></tr>
+          <tr><td><strong>Vessel coverage</strong></td><td>Laden tankers only</td><td>Ballast tankers + combination carriers with oil residues</td></tr>
+          <tr><td><strong>Preventive measures</strong></td><td>Claims after spill only</td><td>Covers preventive actions before spill occurs</td></tr>
+          <tr><td><strong>Liability limit</strong></td><td>Lower scale</td><td>Max <strong>89.77 million SDR</strong></td></tr>
+        </table>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is the difference between CLC 1969 and 1992?" — The 4 key improvements in 1992: EEZ coverage, ballast tanker coverage, preventive measures, and higher liability cap (89.77 million SDR). Link to: "What is the P&amp;I Club's role?" — P&amp;I insurance covers CLC liabilities. Blue Card = Certificate of Financial Responsibility.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">CLC 1992</span><span class="reg-desc">Civil Liability Convention — mandatory P&amp;I insurance for oil tankers ≥2,000 GT; Blue Card proof</span></div>
+          <div class="reg-item"><span class="reg-code">FUND Convention 1992</span><span class="reg-desc">Supplementary compensation beyond CLC limits — IOPC Fund (International Oil Pollution Compensation)</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex I</span><span class="reg-desc">Oil record book and SOPEP obligations — operational complement to CLC civil liability</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IN REM / IN PERSONAM -->
+    <div class="note-card" id="n20">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.43</span>
+        <div class="note-title">In Rem vs In Personam Legal Actions
+          <div class="note-subtitle">Action against the ship vs action against the person</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <table>
+          <tr><th>Parameter</th><th>In Rem</th><th>In Personam</th></tr>
+          <tr><td><strong>Target</strong></td><td>Against the physical property — the ship (the <em>res</em>)</td><td>Against a specific person or legal entity</td></tr>
+          <tr><td><strong>Relationship needed?</strong></td><td>No personal relationship required</td><td>Personal or contractual link required</td></tr>
+          <tr><td><strong>Right scope</strong></td><td>General right — enforceable against the whole world</td><td>Contractual right — enforceable only against named party</td></tr>
+          <tr><td><strong>Transferability</strong></td><td>Right follows the property through ownership changes</td><td>Cannot be transferred to another party</td></tr>
+          <tr><td><strong>Example</strong></td><td>Ship arrest for unpaid salvage / maritime lien</td><td>Breach of contract, personal debt</td></tr>
+        </table>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is an action in rem?" — Action against the ship itself, regardless of who owns it. The classic maritime example is a <strong>ship arrest</strong> for unpaid salvage or crew wages. Key principle: the lien attaches to the ship and travels with it through ownership changes — that's why it is "against the world."</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MLM Convention 1993</span><span class="reg-desc">International Convention on Maritime Liens and Mortgages — in rem priority claims</span></div>
+          <div class="reg-item"><span class="reg-code">Arrest Convention 1999</span><span class="reg-desc">International Convention on Arrest of Ships — in rem enforcement mechanism</span></div>
+          <div class="reg-item"><span class="reg-code">MS Act 1958 (India)</span><span class="reg-desc">Indian domestic law — admiralty jurisdiction and ship arrest procedures</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CBA & MLC -->
+    <div class="note-card" id="n21">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.43–44</span>
+        <div class="note-title">CBA — Collective Bargaining Agreement
+          <div class="note-subtitle">MLC 2006 framework — seafarer employment protection</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Definition</h4>
+        <p>A legally binding labour agreement negotiated between <strong>seafarer trade unions and shipowners' associations</strong>, establishing standard employment terms, conditions, and protections.</p>
+        <h4>CBA Contents (7 elements)</h4>
+        <ul>
+          <li>Contract periods and working hours structure.</li>
+          <li>Minimum wage matrices, overtime tracking, leave and travel pay.</li>
+          <li>Mandatory rest hour criteria (aligned with STCW/MLC).</li>
+          <li>Death, injury, and disability compensation scales.</li>
+          <li>Welfare benefits, travel and burial expense coverage.</li>
+          <li>Repatriation rights and contract renewal conditions.</li>
+          <li>Termination conditions and grievance procedures.</li>
+        </ul>
+        <h4>MLC 2006 Relationship</h4>
+        <p>CBA terms must meet or exceed MLC 2006 minimum standards. The CBA forms part of the Seafarers' Employment Agreement (SEA) — MLC 2006 Regulation 2.1 mandates written SEA for all seafarers.</p>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is a CBA and what does it contain?" — List the 7 elements. He may ask: "Can a CBA override MLC minimums?" — Only in the seafarer's favour — a CBA can provide <em>better</em> terms than MLC but never worse. The ITF (International Transport Workers' Federation) is the key union body monitoring CBAs.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MLC 2006 / Reg 2.1</span><span class="reg-desc">Seafarers' Employment Agreement — written SEA mandatory; CBA terms incorporated</span></div>
+          <div class="reg-item"><span class="reg-code">MLC 2006 / Reg 2.2</span><span class="reg-desc">Wages — minimum wage set by Joint Maritime Commission; CBA must meet or exceed</span></div>
+          <div class="reg-item"><span class="reg-code">MLC 2006 / Std A4.2</span><span class="reg-desc">Shipowners' liability — death, injury, disability compensation minimum standards</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CABOTAGE -->
+    <div class="note-card" id="n22">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.46</span>
+        <div class="note-title">Cabotage Laws — India &amp; 2018 Relaxation
+          <div class="note-subtitle">GTL / CTL / SPL — DGS trading licences</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Cabotage — Definition</h4>
+        <p>Legal framework restricting domestic maritime cargo/passenger transport between ports of the same nation to vessels flying that nation's flag.</p>
+        <h4>Indian Cabotage Framework</h4>
+        <ul>
+          <li><strong>Pre-2018:</strong> Only Indian-flagged or Indian-chartered vessels could engage in coastal trade.</li>
+          <li><strong>2018 Relaxation:</strong> Foreign ships permitted to move transshipment containers between Indian hubs (EXIM) and transport specific domestic commodities (agricultural cargo, fish, horticulture, fertilisers).</li>
+        </ul>
+        <h4>DGS Trading Licences (3 types)</h4>
+        <ul>
+          <li><strong>GTL — General Trading Licence:</strong> Indian-flagged vessels — unlimited coastal + international trade. Validity: <strong>10 years</strong>.</li>
+          <li><strong>CTL — Coastal Trading Licence:</strong> Domestic vessels restricted to coastal trade routes only.</li>
+          <li><strong>SPL — Specific Period Licence:</strong> Temporary licence granted to <strong>foreign-flagged vessels</strong> for defined coastal operations.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is cabotage?" — Define it, then explain the Indian context including the 2018 relaxation for transshipment containers. Know the 3 DGS licence types. As a seafarer on a Maersk vessel, your ship may call Indian ports — knowledge of coastal trade restrictions is relevant at CE level.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">Merchant Shipping Act 1958</span><span class="reg-desc">Indian domestic law — cabotage provisions and licensing framework</span></div>
+          <div class="reg-item"><span class="reg-code">DGS Order 2018</span><span class="reg-desc">2018 relaxation allowing foreign vessels to handle transshipment containers in Indian ports</span></div>
+          <div class="reg-item"><span class="reg-code">MS Act / Sec 406–407</span><span class="reg-desc">GTL / CTL / SPL licence categories and validity provisions</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROFR & SHIPPING MASTER -->
+    <div class="note-card" id="n23">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.47</span>
+        <div class="note-title">ROFR &amp; Duties of a Shipping Master
+          <div class="note-subtitle">Right of First Refusal — CDC, sign-on/off, crew welfare</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>ROFR — Right of First Refusal</h4>
+        <p>A <strong>protectionist procurement mechanism</strong>: when Indian government agencies or PSUs issue open tenders for shipping services, a qualified Indian-flagged bidder is given the first opportunity to match the lowest foreign bid. If matched, the contract goes to the Indian operator; only if declined does it go to the foreign vessel.</p>
+        <h4>Duties of a Shipping Master (6 statutory duties)</h4>
+        <ol>
+          <li>Verification and issuance of the <strong>Continuous Discharge Certificate (CDC)</strong>.</li>
+          <li>Supervision of sign-on and sign-off of officers, engineers, and ratings.</li>
+          <li>Review port clearance applications — issue inward and outward clearances.</li>
+          <li>Legal custodian of personal effects, documents, and wages of deceased/hospitalised seafarers (Section 132).</li>
+          <li>Hear and arbitrate disputes between Master, Owner, Port Agent, and crew.</li>
+          <li>Facilitate and regulate formal contracts for sea service apprenticeships.</li>
+        </ol>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What are the duties of a Shipping Master?" — List all 6. He may ask: "Who issues the CDC?" — The Shipping Master (DG Shipping delegated authority). Know that the Shipping Master is a statutory officer under the Merchant Shipping Act 1958 — different from the Ship's Master.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MS Act 1958 / S.132</span><span class="reg-desc">Duties of Shipping Master — custody of effects of deceased and hospitalised seafarers</span></div>
+          <div class="reg-item"><span class="reg-code">MS Act 1958 / S.94–100</span><span class="reg-desc">Engagement and discharge of crew — Shipping Master oversight requirements</span></div>
+          <div class="reg-item"><span class="reg-code">DG Shipping Circular</span><span class="reg-desc">CDC issuance and renewal procedures — current circular from dgshipping.gov.in</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORCE MAJEURE & TORTS -->
+    <div class="note-card" id="n24">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.37–48</span>
+        <div class="note-title">Force Majeure &amp; Maritime Torts
+          <div class="note-subtitle">Contractual exemption — intentional / negligence / strict liability</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Force Majeure</h4>
+        <ul>
+          <li><strong>Definition:</strong> Unforeseeable events completely beyond the control of contracting parties, making performance physically or legally impossible.</li>
+          <li><strong>Standard triggers:</strong> Acts of God (natural disasters), war, strikes, pandemics, terrorism.</li>
+          <li><strong>Legal effect:</strong> Affected party is shielded from liability for contractual failure.</li>
+        </ul>
+        <h4>Maritime Torts — 3 Categories</h4>
+        <ul>
+          <li><strong>Intentional Torts:</strong> Wilful acts designed to cause harm — e.g., defamation, trespass.</li>
+          <li><strong>Negligence Torts:</strong> Failure to exercise reasonable care causing accidental harm — e.g., navigator's failure causing collision.</li>
+          <li><strong>Strict Liability:</strong> Automatic liability regardless of fault — e.g., oil spill under CLC (shipowner liable even without negligence), defective equipment causing injury.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is Force Majeure?" — Define it and list standard triggers. He may follow: "What is the difference between a tort and a breach of contract?" — Tort is a civil wrong independent of contract; breach is failure of a contractual obligation. In maritime law, oil spill liability under CLC is a <strong>strict liability tort</strong> — the shipowner is liable even without negligence.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">CLC 1992</span><span class="reg-desc">Strict liability regime — shipowner liable for oil pollution regardless of fault</span></div>
+          <div class="reg-item"><span class="reg-code">LLMC 1976 / 1996 Protocol</span><span class="reg-desc">Limitation of Liability for Maritime Claims — caps strict liability amounts</span></div>
+          <div class="reg-item"><span class="reg-code">Admiralty Act 2017 (India)</span><span class="reg-desc">Indian domestic admiralty jurisdiction — maritime tort claims and ship arrest</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MANAGEMENT SYSTEMS -->
+    <div class="section-head" id="n25">
+      <h2>📋 Management Systems &amp; Organisations</h2>
+      <span class="sec-count">6 topics</span>
+    </div>
+
+    <!-- CLASSIFICATION ACTIONS -->
+    <div class="note-card" id="n25">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.39</span>
+        <div class="note-title">Classification Society Actions
+          <div class="note-subtitle">Condition of Class vs Memorandum of Class — Anniversary Date</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Condition of Class (CoC)</h4>
+        <ul>
+          <li>Issued for structural defects, mechanical damage, or issues with class-item machinery.</li>
+          <li>Not immediately severe enough to suspend class — but carries a <strong>strict remedial deadline</strong>.</li>
+          <li><strong>Consequence of non-compliance:</strong> Certificate of Class is invalidated → ship becomes unseaworthy.</li>
+        </ul>
+        <h4>Memorandum of Class (MoC)</h4>
+        <ul>
+          <li>Non-critical observations — do not affect class status or require immediate action.</li>
+          <li>Serves to maintain owner/operator awareness of minor deviations, exemptions, or limitations.</li>
+          <li>Common contexts: minor design deviations, survey exemptions, operating limitations.</li>
+        </ul>
+        <h4>Anniversary Date</h4>
+        <p>The specific calendar day and month of each year corresponding to the expiry date of a major statutory certificate. Annual surveys must be completed within 3 months before or after the anniversary date.</p>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is a Condition of Class?" — It is a formal directive from the Classification Society with a time-bound remedial requirement. He may ask: "What happens if you don't clear a CoC?" — Class is suspended → vessel is unseaworthy → trading prohibited. As CE you own the technical resolution of all CoC items.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IACS PR 1 / Class Rules</span><span class="reg-desc">Classification procedure — conditions of class, survey requirements, and class suspension rules</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS I / Reg 14</span><span class="reg-desc">Maintenance after survey — must not allow deterioration leading to CoC</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS I / Reg 11</span><span class="reg-desc">Duration and validity of certificates — anniversary date survey window</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ISMS -->
+    <div class="note-card" id="n26">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.40</span>
+        <div class="note-title">ISMS — Integrated Safety Management System
+          <div class="note-subtitle">ISM + ISO 9001 + ISO 14001 + ISO 45001 + ISO 50001</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Definition</h4>
+        <p>An Integrated SMS synthesises ISM Code compliance with ISO management frameworks into a single unified management structure.</p>
+        <h4>5 Pillars of an Integrated SMS</h4>
+        <ol>
+          <li><strong>ISM Code:</strong> Core safety and pollution prevention baseline — SOLAS IX mandatory.</li>
+          <li><strong>ISO 9001:2015</strong> — Quality Management Systems.</li>
+          <li><strong>ISO 14001:2015</strong> — Environmental Management Systems.</li>
+          <li><strong>ISO 45001:2018</strong> — Occupational Health &amp; Safety Management.</li>
+          <li><strong>ISO 50001:2018</strong> — Energy Management (efficiency).</li>
+        </ol>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is an Integrated SMS?" — List the 5 pillars with ISO numbers. He may ask: "What is the benefit of integrating ISO standards into the ISM?" — Reduces duplication, single audit framework, aligns safety/quality/environment/energy under one system. Maersk as a large company operates an integrated SMS.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">ISM Code 2018</span><span class="reg-desc">International Safety Management Code — mandatory under SOLAS IX</span></div>
+          <div class="reg-item"><span class="reg-code">ISO 9001:2015</span><span class="reg-desc">Quality Management Systems — process-based approach, Plan-Do-Check-Act cycle</span></div>
+          <div class="reg-item"><span class="reg-code">ISO 14001:2015</span><span class="reg-desc">Environmental Management Systems — lifecycle thinking, legal compliance</span></div>
+          <div class="reg-item"><span class="reg-code">ISO 45001:2018</span><span class="reg-desc">OH&amp;S Management — replaced OHSAS 18001</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MIS & ICT -->
+    <div class="note-card" id="n27">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.30–34</span>
+        <div class="note-title">MIS &amp; ICT — Shipboard Information Systems
+          <div class="note-subtitle">Management Information System — ICT tools onboard</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>MIS — Management Information System</h4>
+        <p>A system integrating people, technology, and processes to collect, store, process, and distribute information for strategic decision-making.</p>
+        <h4>4 MIS Components</h4>
+        <ul>
+          <li><strong>Hardware:</strong> Servers, computers, storage, network devices.</li>
+          <li><strong>Software:</strong> Applications that manage data and generate operational reports.</li>
+          <li><strong>Data:</strong> The raw material — processed into actionable information.</li>
+          <li><strong>People:</strong> Users and managers who interact with the system.</li>
+        </ul>
+        <h4>ICT Shipboard Examples</h4>
+        <ul>
+          <li><strong>AIS</strong> — vessel tracking and collision avoidance.</li>
+          <li><strong>VDR</strong> — continuous voyage data recording for incident investigation.</li>
+          <li><strong>SATCOM</strong> — global voice, data, and internet via satellite.</li>
+          <li><strong>EPIRB</strong> — automatic satellite distress alerting.</li>
+          <li><strong>GPS</strong> — real-time positioning.</li>
+          <li><strong>PMS (Planned Maintenance System)</strong> — digital maintenance management.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is ICT and give examples onboard?" — List at least 5 examples. He may extend: "What is the role of VDR in accident investigation?" — VDR records bridge audio, radar, AIS, alarms, and navigational data for the last 12 hours — equivalent of an aircraft black box (SOLAS V/20).</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS V / Reg 20</span><span class="reg-desc">Voyage data recorders — mandatory on passenger ships and cargo ships ≥3,000 GT</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS IV / GMDSS</span><span class="reg-desc">Global Maritime Distress and Safety System — SATCOM, EPIRB, DSC requirements</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code / Cl. 10</span><span class="reg-desc">Maintenance of ship and equipment — PMS as key ICT tool for CE</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MRCC & SAR -->
+    <div class="note-card" id="n28">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.34</span>
+        <div class="note-title">MRCC — Maritime Rescue Coordination Centre
+          <div class="note-subtitle">Indian Coast Guard — Mumbai, Chennai, Port Blair</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Role</h4>
+        <p>Primary authority for organising, directing, and coordinating Search and Rescue (SAR) operations within designated maritime zones.</p>
+        <h4>India — MRCC Structure</h4>
+        <ul>
+          <li><strong>Apex authority:</strong> Indian Coast Guard (ICG).</li>
+          <li><strong>Primary MRCC hubs:</strong> Mumbai, Chennai, Port Blair.</li>
+          <li><strong>Contact:</strong> Emergency line or <strong>VHF Channel 16</strong>.</li>
+          <li><strong>Reference publications:</strong> ALRS Volume 5 (GMDSS) and Volume 1 (Maritime Radio Stations).</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is MRCC and who operates it in India?" — <strong>Indian Coast Guard</strong>, hubs in Mumbai, Chennai, Port Blair. VHF Ch.16 is the initial contact. He may ask: "What is the SAR convention?" — SOLAS Chapter V and the SAR Convention 1979 (MERSAR/IAMSAR Manual). IAMSAR Volume III is the onboard SAR reference.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SAR Convention 1979</span><span class="reg-desc">International Convention on Maritime Search and Rescue — MRCC establishment requirement</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS V / Reg 33</span><span class="reg-desc">Distress situations — obligations of Masters to render assistance</span></div>
+          <div class="reg-item"><span class="reg-code">IAMSAR Manual Vol. III</span><span class="reg-desc">Mobile Facilities — onboard SAR reference carried on all SOLAS ships</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BLUE ECONOMY -->
+    <div class="note-card" id="n29">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.33</span>
+        <div class="note-title">Blue Economy
+          <div class="note-subtitle">Sustainable ocean use — 5 core pillars</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Definition</h4>
+        <p>The sustainable use of ocean resources for economic growth, employment, and improved livelihoods while preserving the long-term health of marine ecosystems.</p>
+        <h4>5 Core Pillars</h4>
+        <ol>
+          <li><strong>Renewable Energy:</strong> Ocean currents, tidal, wave, and offshore wind energy.</li>
+          <li><strong>Fisheries &amp; Aquaculture:</strong> Sustainable seafood harvesting and management.</li>
+          <li><strong>Marine Biotechnology:</strong> Pharmaceuticals, bio-compounds from marine organisms.</li>
+          <li><strong>Shipping &amp; Transportation:</strong> Optimising global logistics and port infrastructure.</li>
+          <li><strong>Coastal Tourism:</strong> Sustainable tourism — reef conservation, marine protected areas.</li>
+        </ol>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is the Blue Economy?" — Define it and list all 5 pillars. He links this to IMO's environmental agenda and IORA (covered in Part 1). The Blue Economy is also mentioned in the IMO 2023 GHG Strategy context — sustainable shipping is one of its pillars. India's Sagarmala project is a Blue Economy initiative.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">UNCLOS 1982</span><span class="reg-desc">Legal framework for ocean governance — basis for all Blue Economy activities beyond territorial sea</span></div>
+          <div class="reg-item"><span class="reg-code">IMO 2023 GHG Strategy</span><span class="reg-desc">Sustainable shipping as a Blue Economy pillar — net-zero by 2050</span></div>
+          <div class="reg-item"><span class="reg-code">UN SDG 14</span><span class="reg-desc">Life Below Water — the UN sustainable development goal underpinning Blue Economy</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ICCT & PMSA -->
+    <div class="note-card" id="n30">
+      <div class="note-header" onclick="toggleNote(this)">
+        <span class="page-badge">P.29–36</span>
+        <div class="note-title">ICCT &amp; PMSA — Maritime Research &amp; Trade Organisations
+          <div class="note-subtitle">Dieselgate, HFO ban, IMO 2050 — US West Coast shipping</div>
+        </div>
+        <svg class="note-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>ICCT — International Council on Clean Transportation</h4>
+        <ul>
+          <li>Independent non-profit research body for improving environmental performance of the transport sector.</li>
+          <li><strong>Notable:</strong> Exposed the <strong>Volkswagen Dieselgate scandal (2015)</strong>.</li>
+          <li><strong>Maritime contributions:</strong> Data supporting IMO 2020 sulphur cap (0.50%), Arctic HFO ban risk profiles, IMO 2023 GHG Strategy net-zero modelling, and LNG methane slip research.</li>
+        </ul>
+        <h4>PMSA — Pacific Merchant Shipping Association</h4>
+        <ul>
+          <li>Not-for-profit US maritime trade association — ocean carriers, terminal operators, stakeholders.</li>
+          <li>Operates on US West Coast: Oakland, Long Beach, Seattle.</li>
+          <li>Advocates for efficient, safe, and environmentally sustainable maritime trade policies.</li>
+          <li>Active in California and Washington state legislative processes.</li>
+        </ul>
+        <div class="simon-tip">
+          <div class="tip-label">⚡ Simon Sir typically asks</div>
+          <p>"What is ICCT?" — Independent research body, Dieselgate link, and maritime GHG policy role. He may ask: "What is methane slip?" — Unburned methane (CH₄) escaping LNG engines — ICCT's key finding showing LNG's lifecycle emissions may be higher than expected due to CH₄'s GWP of 27–30.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MARPOL VI / Reg 14</span><span class="reg-desc">SOₓ — 0.50% global cap underpinned by ICCT research data</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL I / Reg 43A</span><span class="reg-desc">Arctic HFO ban — ICCT risk profiles were key supporting evidence</span></div>
+          <div class="reg-item"><span class="reg-code">IMO 2023 GHG Strategy</span><span class="reg-desc">Net-zero 2050 — ICCT modelling informed IMO technical discussions</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAV STRIP -->
+    <div class="nav-strip">
+      <a class="nav-btn prev" href="simon-notes-p1.html">← Pages 1–25</a>
+      <div class="nav-info">Part 2 of 2 — Pages 26–50<br><span style="font-size:11px;color:#a0aec0;">End of free content</span></div>
+      <a class="nav-btn next" href="simon-notes-p3.html">Pages 51–75 →</a>
+    </div>
+
+    <!-- CORRECTION / ADDITION FORM -->
+    <div class="correction-panel">
+      <h3>✏️ Corrections &amp; Additions</h3>
+      <p>Found an error, outdated regulation, or want to suggest a topic addition? Submit below — reviewed before any update is made.</p>
+      <form id="correctionForm" action="https://formspree.io/f/maqgoeww" method="POST" onsubmit="submitCorrection(event)">
+        <input type="hidden" name="_subject" value="Notes Correction — Simon Sir Notes — Pages 26–50">
+        <input type="hidden" name="source_page" value="Simon Sir Notes — Pages 26–50">
+        <div class="cf-grid">
+          <div class="cf-field"><label>Your Name</label><input type="text" name="name" placeholder="Rank + Name" required></div>
+          <div class="cf-field"><label>Your Email</label><input type="email" name="email" placeholder="your@email.com" required></div>
+          <div class="cf-field">
+            <label>Type</label>
+            <select name="submission_type" required>
+              <option value="">Select…</option>
+              <option value="Correction — factual error">Correction — factual error</option>
+              <option value="Correction — outdated regulation">Correction — outdated regulation</option>
+              <option value="Addition — new topic suggestion">Addition — new topic suggestion</option>
+              <option value="Addition — exam question not covered">Addition — exam question not covered</option>
+              <option value="Other feedback">Other feedback</option>
+            </select>
+          </div>
+          <div class="cf-field"><label>Topic / Page Reference</label><input type="text" name="topic_reference" placeholder="e.g. Page 12, IMO DCS"></div>
+          <div class="cf-field full"><label>Details</label><textarea name="details" placeholder="Describe the correction or addition. Include regulation numbers or source if possible." required></textarea></div>
+        </div>
+        <button type="submit" class="cf-submit">Submit →</button>
+        <div class="cf-success" id="cfSuccess">✅ Submitted — thank you! Will be reviewed and updated if validated.</div>
+      </form>
+    </div>
+
+  </div><!-- end main-feed -->
+</div><!-- end main-layout -->
+
+<!-- PAGE FOOTER -->
+<footer class="page-footer">
+  <strong>Marine Intelligence Weekly</strong> — MEO Class 1 Oral Preparation<br>
+  Originally prepared by Vignesh Siva · Transcribed, expanded &amp; updated by Nixon Antony, 2/E, Maersk A/S<br>
+  Subscriber access · All parts at <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">meoclass1/oralnotes/</a><br>
+  Corrections: <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
+</footer>
+
+<script>
+function toggleNote(header){
+  const card=header.closest('.note-card');
+  card.classList.toggle('open');
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.2});
+document.querySelectorAll('.note-card[id]').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

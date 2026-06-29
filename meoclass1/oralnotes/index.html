@@ -1,1 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MEO Class 1 Oral Notes Series — Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.65;user-select:none;-webkit-user-select:none;}
+body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";position:fixed;bottom:20px;right:20px;font-size:10px;color:rgba(0,0,0,.07);pointer-events:none;transform:rotate(-15deg);z-index:0;}
 
+/* TOPBAR */
+.topbar{background:var(--navy);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;gap:12px;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.logo-mark{width:32px;height:32px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:14px;flex-shrink:0;}
+.brand-name{color:#fff;font-size:14px;font-weight:600;line-height:1.2;}
+.brand-sub{color:#94a3b8;font-size:11px;}
+.topbar-nav{display:flex;gap:6px;flex-wrap:wrap;}
+.topbar-nav a{color:#cbd5e1;text-decoration:none;font-size:12px;padding:5px 10px;border-radius:5px;transition:background .2s;}
+.topbar-nav a:hover{background:rgba(255,255,255,.1);color:#fff;}
+.topbar-nav a.hl{background:var(--teal);color:#fff;font-weight:600;}
+
+/* PAGE HEADER */
+.page-header{background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 100%);padding:40px 24px 32px;text-align:center;}
+.header-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 14px;border-radius:20px;margin-bottom:14px;}
+.page-header h1{color:#fff;font-size:clamp(22px,4vw,32px);font-weight:800;line-height:1.2;margin-bottom:10px;}
+.page-header p{color:#94a3b8;font-size:14px;max-width:640px;margin:0 auto;}
+.header-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px;}
+.meta-pill{background:rgba(255,255,255,.08);color:#cbd5e1;font-size:11px;padding:4px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);}
+
+/* MAIN */
+.main{max-width:860px;margin:0 auto;padding:36px 24px 60px;}
+
+/* SERIES SECTION */
+.series-block{margin-bottom:40px;}
+.series-title{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--grey-border);}
+.series-title h2{font-size:16px;font-weight:700;color:var(--navy);}
+.series-badge{font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;}
+.sb-live{background:#dcfce7;color:#15803d;}
+.sb-soon{background:#fef3c7;color:#92400e;}
+.sb-planned{background:var(--grey-bg);color:var(--grey-text);}
+
+/* NOTE CARDS GRID */
+.notes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;}
+
+/* INDIVIDUAL NOTE CARD */
+.note-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:16px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:8px;transition:all .2s;position:relative;}
+.note-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08);transform:translateY(-1px);}
+.note-card.available{border-top:3px solid var(--teal);}
+.note-card.coming-soon{border-top:3px solid #f59e0b;opacity:.85;cursor:default;}
+.note-card.coming-soon:hover{transform:none;box-shadow:none;}
+.note-card.planned{border-top:3px solid #cbd5e1;opacity:.7;cursor:default;}
+.note-card.planned:hover{transform:none;box-shadow:none;}
+
+.nc-header{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+.nc-part{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--grey-text);}
+.nc-status{font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;}
+.ncs-live{background:#dcfce7;color:#15803d;}
+.ncs-soon{background:#fef3c7;color:#92400e;}
+.ncs-plan{background:var(--grey-bg);color:var(--grey-text);}
+
+.nc-title{font-size:14px;font-weight:700;color:var(--ink);line-height:1.3;}
+.nc-sub{font-size:12px;color:var(--grey-text);line-height:1.5;}
+.nc-pages{font-size:11px;color:var(--teal-dark);font-weight:600;}
+
+.nc-topics{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px;}
+.nc-topic{font-size:10px;background:var(--grey-bg);color:#475569;padding:2px 7px;border-radius:4px;}
+
+.nc-btn{display:inline-flex;align-items:center;gap:5px;margin-top:auto;padding-top:10px;font-size:12px;font-weight:700;color:var(--teal-dark);}
+.note-card.available .nc-btn::after{content:'→';}
+.note-card.coming-soon .nc-btn{color:#92400e;}
+.note-card.planned .nc-btn{color:var(--grey-text);}
+
+/* ATTRIBUTION BOX */
+.attrib-box{background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:16px;margin-bottom:28px;display:flex;gap:12px;align-items:flex-start;}
+.attrib-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
+.attrib-text{font-size:13px;color:#475569;line-height:1.6;}
+.attrib-text strong{color:var(--ink);}
+
+/* QB LINK BANNER */
+.qb-banner{background:linear-gradient(135deg,#0f172a,#1e3a5f);border-radius:10px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:32px;}
+.qb-banner-text h3{color:#fff;font-size:14px;font-weight:700;margin-bottom:4px;}
+.qb-banner-text p{color:#94a3b8;font-size:12px;}
+.qb-banner-btn{background:var(--teal);color:#fff;text-decoration:none;padding:9px 18px;border-radius:7px;font-size:13px;font-weight:700;white-space:nowrap;flex-shrink:0;}
+.qb-banner-btn:hover{background:var(--teal-dark);}
+
+/* FOOTER */
+.page-footer{background:var(--navy);color:#94a3b8;text-align:center;padding:20px;font-size:12px;line-height:1.8;margin-top:0;}
+.page-footer a{color:var(--teal);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="logo-mark">MIW</div>
+    <div><div class="brand-name">Marine Intelligence Weekly</div><div class="brand-sub">MEO Class 1 — Oral Notes</div></div>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com/meoclass1/">QB Series</a>
+    <a href="https://marineintelligenceweekly.com" class="hl">← Home</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="header-badge">Subscriber Access — Oral Notes Library</div>
+  <h1>MEO Class 1<br>Oral Notes Series</h1>
+  <p>Examiner-focused study notes — handwritten notes transcribed, expanded &amp; updated to June 2026. Structured for Kochi MMD oral preparation.</p>
+  <div class="header-meta">
+    <span class="meta-pill">🔒 Subscriber Only</span>
+    <span class="meta-pill">📄 200+ Pages</span>
+    <span class="meta-pill">🕒 Updated June 2026</span>
+    <span class="meta-pill">📍 Kochi MMD Focus</span>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- ATTRIBUTION -->
+  <div class="attrib-box">
+    <div class="attrib-icon">📝</div>
+    <div class="attrib-text">
+      <strong>Simon Sir Notes (Parts 1–8):</strong> Originally prepared by <strong>Vignesh Siva</strong>. Transcribed, expanded &amp; updated to 2026 regulations by <strong>Nixon Antony, 2/E, Maersk A/S</strong>.<br>
+      <strong>Uday Notes (Parts 1–4, Planned):</strong> Source notes from <strong>Uday</strong>. To be transcribed, expanded &amp; updated by Nixon Antony, 2/E.<br>
+      Notes are compiled from examiner intelligence at Kochi MMD. All regulatory references verified against primary IMO sources.
+    </div>
+  </div>
+
+  <!-- SIMON SIR NOTES -->
+  <div class="series-block">
+    <div class="series-title">
+      <h2>🎯 Simon Sir — Oral Notes Series</h2>
+      <span class="series-badge sb-live">Parts 1–4 Live</span>
+    </div>
+    <div class="notes-grid">
+
+      <a class="note-card available" href="simon-notes-p1.html">
+        <div class="nc-header">
+          <span class="nc-part">Simon Sir · Part 1</span>
+          <span class="nc-status ncs-live">✅ Live</span>
+        </div>
+        <div class="nc-title">Pages 1–25</div>
+        <div class="nc-sub">Maritime security, stability criteria, MARPOL VI, IMO DCS, GHG strategy, STCW/manning, watchkeeping, LSA, cyber security, GISIS.</div>
+        <div class="nc-pages">📄 25 pages · 27 topics</div>
+        <div class="nc-topics">
+          <span class="nc-topic">UKMTO/MSCHOA</span>
+          <span class="nc-topic">IS Code</span>
+          <span class="nc-topic">CII/CF</span>
+          <span class="nc-topic">STCW Manila</span>
+          <span class="nc-topic">Rest Hours</span>
+          <span class="nc-topic">Lifeboat Testing</span>
+          <span class="nc-topic">Cyber Security</span>
+        </div>
+        <div class="nc-btn">Open Part 1</div>
+      </a>
+
+      <a class="note-card available" href="simon-notes-p2.html">
+        <div class="nc-header">
+          <span class="nc-part">Simon Sir · Part 2</span>
+          <span class="nc-status ncs-live">✅ Live</span>
+        </div>
+        <div class="nc-title">Pages 26–50</div>
+        <div class="nc-sub">Gyro/compass, LRIT, AIS vs LRIT, MMSI, stability booklet, GT/NT formulas, DWT, guardrails, CII, ballast water, CLC, commercial law, ISMS, EU ETS.</div>
+        <div class="nc-pages">📄 25 pages · 30 topics</div>
+        <div class="nc-topics">
+          <span class="nc-topic">LRIT/AIS</span>
+          <span class="nc-topic">GT/NT</span>
+          <span class="nc-topic">CII AER</span>
+          <span class="nc-topic">Arctic HFO Ban</span>
+          <span class="nc-topic">CLC 1992</span>
+          <span class="nc-topic">Cabotage</span>
+          <span class="nc-topic">ISMS/ISO</span>
+        </div>
+        <div class="nc-btn">Open Part 2</div>
+      </a>
+
+      <a class="note-card available" href="simon-notes-p3.html">
+        <div class="nc-header">
+          <span class="nc-part">Simon Sir · Part 3</span>
+          <span class="nc-status ncs-live">✅ Live</span>
+        </div>
+        <div class="nc-title">Pages 51–75</div>
+        <div class="nc-sub">COP 28/29, CBDR, IS Code criteria, NOS-DCP, broaching, lifeboat engine specs, Li-ion fire, FSI/PSC qualifications, FMEA/RPN, ISM apex manual, STCW 2027, ISO 8217:2024.</div>
+        <div class="nc-pages">📄 25 pages · 30 topics</div>
+        <div class="nc-topics">
+          <span class="nc-topic">COP 28</span>
+          <span class="nc-topic">IS Code GZ</span>
+          <span class="nc-topic">Li-ion Fire</span>
+          <span class="nc-topic">FSI/PSC Quals</span>
+          <span class="nc-topic">FMEA/RPN</span>
+          <span class="nc-topic">ISM Apex</span>
+          <span class="nc-topic">STCW 2027</span>
+        </div>
+        <div class="nc-btn">Open Part 3</div>
+      </a>
+
+      <a class="note-card available" href="simon-notes-p4.html">
+        <div class="nc-header">
+          <span class="nc-part">Simon Sir · Part 4</span>
+          <span class="nc-status ncs-live">✅ Live</span>
+        </div>
+        <div class="nc-title">Pages 76–101</div>
+        <div class="nc-sub">SAR 1979, GNSS jamming/spoofing, PSC full chain (action codes, types, suspension, appeal), SOLAS Pack A/B, lifejacket specs, lifeboat P.92, hull steel, CE ISM + MLC duties, blockchain, IoT, IWIS, maintenance strategies.</div>
+        <div class="nc-pages">📄 26 pages · 35 topics</div>
+        <div class="nc-topics">
+          <span class="nc-topic">SAR India</span>
+          <span class="nc-topic">PSC Codes</span>
+          <span class="nc-topic">CE ISM/MLC</span>
+          <span class="nc-topic">Propeller Law</span>
+          <span class="nc-topic">Blockchain</span>
+          <span class="nc-topic">IoT</span>
+          <span class="nc-topic">IWIS</span>
+        </div>
+        <div class="nc-btn">Open Part 4</div>
+      </a>
+
+      <div class="note-card coming-soon">
+        <div class="nc-header">
+          <span class="nc-part">Simon Sir · Part 5</span>
+          <span class="nc-status ncs-soon">🔄 Coming Soon</span>
+        </div>
+        <div class="nc-title">Pages 102–125</div>
+        <div class="nc-sub">Machinery deep-dive — 2-stroke main engine, turbocharger, fuel systems, scavenging, combustion, cylinder conditions.</div>
+        <div class="nc-pages">📄 24 pages · ~28 topics</div>
+        <div class="nc-topics">
+          <span class="nc-topic">2-Stroke ME</span>
+          <span class="nc-topic">Turbocharger</span>
+          <span class="nc-topic">Scavenging</span>
+          <span class="nc-topic">Combustion</span>
+        </div>
+        <div class="nc-btn">In preparation</div>
+      </div>
+
+      <div class="note-card coming-soon">
+        <div class="nc-header">
+          <span class="nc-part">Simon Sir · Part 6</span>
+          <span class="nc-status ncs-soon">🔄 Coming Soon</span>
+        </div>
+        <div class="nc-title">Pages 126–150</div>
+        <div class="nc-sub">Auxiliary machinery — purifiers, compressors, heat exchangers, boilers, pumps, steering gear.</div>
+        <div class="nc-pages">📄 25 pages · ~28 topics</div>
+        <div class="nc-topics">
+          <span class="nc-topic">Purifiers</span>
+          <span class="nc-topic">Compressors</span>
+          <span class="nc-topic">Boilers</span>
+          <span class="nc-topic">Steering Gear</span>
+        </div>
+        <div class="nc-btn">In preparation</div>
+      </div>
+
+      <div class="note-card coming-soon">
+        <div class="nc-header">
+          <span class="nc-part">Simon Sir · Part 7</span>
+          <span class="nc-status ncs-soon">🔄 Coming Soon</span>
+        </div>
+        <div class="nc-title">Pages 151–175</div>
+        <div class="nc-sub">Electrical systems, UMS, automation, safety systems, control circuits, SOLAS fire detection, refrigeration, alarm monitoring.</div>
+        <div class="nc-pages">📄 25 pages · ~28 topics</div>
+        <div class="nc-topics">
+          <span class="nc-topic">UMS</span>
+          <span class="nc-topic">Automation</span>
+          <span class="nc-topic">Electrical</span>
+          <span class="nc-topic">Refrigeration</span>
+        </div>
+        <div class="nc-btn">In preparation</div>
+      </div>
+
+      <div class="note-card coming-soon">
+        <div class="nc-header">
+          <span class="nc-part">Simon Sir · Part 8</span>
+          <span class="nc-status ncs-soon">🔄 Coming Soon</span>
+        </div>
+        <div class="nc-title">Pages 176–200</div>
+        <div class="nc-sub">Dry dock procedures, surveys, cargo operations, container securing, advanced ISM scenarios, CE incident management and casualty investigation.</div>
+        <div class="nc-pages">📄 25 pages · ~28 topics</div>
+        <div class="nc-topics">
+          <span class="nc-topic">Drydock</span>
+          <span class="nc-topic">Cargo Ops</span>
+          <span class="nc-topic">ISM Scenarios</span>
+          <span class="nc-topic">Casualty Invest.</span>
+        </div>
+        <div class="nc-btn">In preparation</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- UDAY NOTES -->
+  <div class="series-block">
+    <div class="series-title">
+      <h2>📘 Uday Notes — Updated to June 2026</h2>
+      <span class="series-badge sb-planned">Planned</span>
+    </div>
+    <div class="notes-grid">
+
+      <div class="note-card planned">
+        <div class="nc-header">
+          <span class="nc-part">Uday Notes · Part 1</span>
+          <span class="nc-status ncs-plan">📋 Planned</span>
+        </div>
+        <div class="nc-title">Pages 1–50</div>
+        <div class="nc-sub">Source notes from Uday — to be transcribed, expanded &amp; updated to June 2026 regulations by Nixon Antony, 2/E.</div>
+        <div class="nc-pages">📄 50 pages planned</div>
+        <div class="nc-topics">
+          <span class="nc-topic">TBC</span>
+        </div>
+        <div class="nc-btn">Coming later</div>
+      </div>
+
+      <div class="note-card planned">
+        <div class="nc-header">
+          <span class="nc-part">Uday Notes · Part 2</span>
+          <span class="nc-status ncs-plan">📋 Planned</span>
+        </div>
+        <div class="nc-title">Pages 51–100</div>
+        <div class="nc-sub">Source notes from Uday — to be transcribed, expanded &amp; updated to June 2026 regulations by Nixon Antony, 2/E.</div>
+        <div class="nc-pages">📄 50 pages planned</div>
+        <div class="nc-topics">
+          <span class="nc-topic">TBC</span>
+        </div>
+        <div class="nc-btn">Coming later</div>
+      </div>
+
+      <div class="note-card planned">
+        <div class="nc-header">
+          <span class="nc-part">Uday Notes · Part 3</span>
+          <span class="nc-status ncs-plan">📋 Planned</span>
+        </div>
+        <div class="nc-title">Pages 101–150</div>
+        <div class="nc-sub">Source notes from Uday — to be transcribed, expanded &amp; updated to June 2026 regulations by Nixon Antony, 2/E.</div>
+        <div class="nc-pages">📄 50 pages planned</div>
+        <div class="nc-topics">
+          <span class="nc-topic">TBC</span>
+        </div>
+        <div class="nc-btn">Coming later</div>
+      </div>
+
+      <div class="note-card planned">
+        <div class="nc-header">
+          <span class="nc-part">Uday Notes · Part 4</span>
+          <span class="nc-status ncs-plan">📋 Planned</span>
+        </div>
+        <div class="nc-title">Pages 151–200</div>
+        <div class="nc-sub">Source notes from Uday — to be transcribed, expanded &amp; updated to June 2026 regulations by Nixon Antony, 2/E.</div>
+        <div class="nc-pages">📄 50 pages planned</div>
+        <div class="nc-topics">
+          <span class="nc-topic">TBC</span>
+        </div>
+        <div class="nc-btn">Coming later</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QB SERIES BANNER -->
+  <div class="qb-banner">
+    <div class="qb-banner-text">
+      <h3>📚 Full QB Series also included in your access</h3>
+      <p>9 topic files · 417+ questions · Examiner-specific cheat sheets · Kochi MMD oral intelligence</p>
+    </div>
+    <a class="qb-banner-btn" href="https://marineintelligenceweekly.com/meoclass1/">→ Go to QB Series</a>
+  </div>
+
+</div><!-- end main -->
+
+<footer class="page-footer">
+  <strong>Marine Intelligence Weekly</strong> — MEO Class 1 Subscriber Content<br>
+  Simon Sir notes: originally by Vignesh Siva · Transcribed &amp; expanded by Nixon Antony, 2/E, Maersk A/S<br>
+  Corrections: <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
+</footer>
+
+<script>
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+</script>
+</body>
+</html>
