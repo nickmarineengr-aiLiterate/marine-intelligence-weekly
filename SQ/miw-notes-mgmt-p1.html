@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<title>MIW Engineering Management Notes — Part 1 | MEO Class 1 | IMO Structure & Conventions</title>
+<meta name="description" content="MEO Class 1 Engineering Management Notes Part 1 — IMO Structure, Committees, Sub-Committees, IMO Instruments, Convention Lifecycle. Originally compiled by Uday Sankar S., Anglo-Eastern.">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:15px;line-height:1.6;}
+
+/* TOPBAR */
+.topbar{background:var(--navy);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logo{width:30px;height:30px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;letter-spacing:-0.5px;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;letter-spacing:0.3px;}
+.topbar-nav{display:flex;gap:20px;}
+.topbar-nav a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.15s;}
+.topbar-nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{background:var(--navy);padding:32px 24px 28px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.notes-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid var(--teal);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.notes-badge-icon{background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;letter-spacing:1px;}
+.notes-badge-text{color:var(--teal-light);font-size:12px;font-weight:600;}
+.page-title{color:#fff;font-size:26px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+.page-sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.header-meta-item{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:12px;color:#cbd5e1;}
+.header-meta-item strong{color:#fff;}
+.attribution-strip{margin-top:14px;padding:10px 14px;background:rgba(201,168,76,0.12);border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;font-size:12px;color:#cbd5e1;}
+.attribution-strip strong{color:#e2c97e;}
+
+/* LAYOUT */
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:24px 16px;}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:68px;height:calc(100vh - 80px);overflow-y:auto;padding-right:6px;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--grey-border);border-radius:2px;}
+.toc-head{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;font-size:12px;color:var(--grey-text);text-decoration:none;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;transition:all 0.15s;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:700;}
+.toc-divider{height:1px;background:var(--grey-border);margin:14px 0;}
+.qb-sidebar-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:12px;}
+.qb-sidebar-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin-bottom:8px;}
+.qb-sidebar-link{display:block;font-size:12px;color:var(--teal-dark);text-decoration:none;font-weight:600;padding:3px 0;}
+.qb-sidebar-link:hover{text-decoration:underline;}
+
+/* MAIN FEED */
+#notes-feed{min-width:0;}
+
+/* TOPIC BLOCK */
+.topic-block{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:24px;margin-bottom:32px;scroll-margin-top:72px;}
+.topic-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--teal-light);}
+.topic-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+.topic-title{margin:0 0 8px;font-size:20px;font-weight:800;color:var(--navy);}
+.topic-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;}
+.topic-tag{background:var(--teal-light);color:var(--teal-dark);padding:3px 8px;border-radius:20px;font-weight:600;}
+.topic-pages{color:var(--grey-text);padding:3px 0;}
+.topic-examiner{background:var(--orange-light);color:#92400e;padding:3px 8px;border-radius:20px;font-weight:600;}
+.freq-high{background:#fef9c3;color:#713f12;padding:3px 8px;border-radius:20px;font-weight:700;}
+.freq-medium{background:#f0fdf4;color:#14532d;padding:3px 8px;border-radius:20px;font-weight:600;}
+
+/* SECTION HEAD */
+.section-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--grey-border);}
+
+/* NOTES BODY */
+.notes-body{font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:8px;}
+.notes-list{font-family:'Georgia',serif;font-size:14px;line-height:1.8;padding-left:22px;margin-bottom:8px;}
+.notes-list li{margin-bottom:4px;}
+
+/* TIMELINE */
+.timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
+.timeline-block .t-year{color:#fff;font-weight:700;}
+
+/* REG BOX */
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
+.reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
+.reg-code{color:var(--orange);font-weight:700;white-space:nowrap;flex-shrink:0;font-family:monospace;font-size:12px;}
+.reg-desc{color:#cbd5e1;line-height:1.5;}
+
+/* CE TIP */
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:13.5px;font-family:'Georgia',serif;line-height:1.7;}
+.ce-tip strong{color:#92400e;}
+
+/* ORAL Q&A */
+.qa-block{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.qa-item{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.qa-q{background:var(--grey-bg);padding:10px 14px;font-weight:700;font-size:13px;color:var(--navy);}
+.qa-a{padding:10px 14px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;color:var(--ink);}
+
+/* WRITTEN EXAM */
+.exam-focus-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:16px 0;}
+.exam-focus-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin:0 0 12px;}
+.exam-q{margin:8px 0;font-family:'Georgia',serif;font-size:13.5px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+.marks-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+
+/* MEMORY BOX */
+.memory-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:16px 0;}
+.memory-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#713f12;margin:0 0 10px;}
+.memory-list{font-family:'Georgia',serif;font-size:13.5px;line-height:1.8;padding-left:18px;}
+.memory-list li{margin-bottom:4px;}
+
+/* TABLES */
+.amend-table,.compare-table,.revision-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.amend-table th,.compare-table th,.revision-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+.amend-table td,.compare-table td,.revision-table td{padding:8px 12px;border-bottom:1px solid var(--grey-border);font-family:'Georgia',serif;line-height:1.6;vertical-align:top;}
+.amend-table tr:nth-child(even) td,.revision-table tr:nth-child(even) td{background:var(--grey-bg);}
+
+/* PSC FOCUS */
+.psc-focus{background:#fef2f2;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);}
+
+/* MENTAL MAP / FLOWCHART */
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;}
+.mental-map .root{color:#fff;font-weight:700;}
+
+/* QB LINK BOX */
+.qb-link-box{background:var(--teal-light);border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;}
+.qb-link-box strong{color:var(--teal-dark);}
+.qb-link-box a{color:var(--teal-dark);font-weight:600;text-decoration:none;margin-right:12px;}
+.qb-link-box a:hover{text-decoration:underline;}
+
+/* DEEP DIVE */
+.deep-dive{margin:14px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:16px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;}
+.deep-dive-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.deep-dive-body p,.deep-dive-body li{margin-bottom:6px;}
+.deep-dive-body ul{padding-left:20px;}
+
+/* REFERENCES */
+.ref-list{font-size:13px;line-height:1.9;padding-left:18px;}
+.ref-list a{color:var(--teal-dark);}
+
+/* TOPIC FOOTER */
+.topic-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:12px;border-top:1px dashed var(--grey-border);font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.topic-version{font-weight:700;}
+
+/* PAGE FOOTER */
+.page-footer{background:var(--grey-bg);border-top:1px solid var(--grey-border);padding:28px 24px;margin-top:40px;font-size:12px;color:var(--grey-text);text-align:center;}
+.page-footer a{color:var(--teal-dark);}
+
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-logo">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/notes/">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="notes-badge">
+      <span class="notes-badge-icon">NOTES</span>
+      <span class="notes-badge-text">Engineering Management · Part 1 of 31</span>
+    </div>
+    <h1 class="page-title">Engineering Management Notes — Part 1</h1>
+    <p class="page-sub">IMO Structure · Committees · Sub-Committees · IMO Instruments · Convention Lifecycle · Tacit Acceptance</p>
+    <div class="header-meta">
+      <span class="header-meta-item"><strong>Pages:</strong> 1–25 of 768</span>
+      <span class="header-meta-item"><strong>Topics:</strong> 6</span>
+      <span class="header-meta-item"><strong>Access:</strong> Public</span>
+      <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>
+      <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>
+    </div>
+    <div class="attribution-strip">
+      Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and updated by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="toc-head">Topics — Part 1</div>
+  <a class="toc-link" href="#topic-1">T1 · IMO Structure</a>
+  <a class="toc-link" href="#topic-2">T2 · IMO Committees</a>
+  <a class="toc-link" href="#topic-3">T3 · Sub-Committees</a>
+  <a class="toc-link" href="#topic-4">T4 · IMO Instruments</a>
+  <a class="toc-link" href="#topic-5">T5 · Convention Lifecycle</a>
+  <a class="toc-link" href="#topic-6">T6 · Tacit Acceptance</a>
+  <div class="toc-divider"></div>
+  <div class="toc-head">Navigate</div>
+  <a class="toc-link" href="https://marineintelligenceweekly.com/meoclass1/notes/">← Notes Index</a>
+  <a class="toc-link" href="miw-notes-mgmt-p2.html">Part 2 →</a>
+  <div class="toc-divider"></div>
+  <div class="qb-sidebar-box">
+    <div class="qb-sidebar-title">🔗 Related QB Files</div>
+    <a class="qb-sidebar-link" href="../QB4.html">QB4 — ISM / ISPS / MLC / STCW</a>
+    <a class="qb-sidebar-link" href="../QB3.html">QB3 — MARPOL & PSC</a>
+  </div>
+</aside>
+
+<!-- NOTES FEED -->
+<main id="notes-feed">
+<!-- ============================================================ -->
+<!-- TOPIC 1 — IMO STRUCTURE -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-1">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 1</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">International Maritime Organization (IMO)</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">IMO Governance</span>
+        <span class="topic-pages">Uday pp. 2–4</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">The International Maritime Organization (IMO) is a specialized agency of the United Nations responsible for adopting measures to improve the safety, security, and environmental performance of international shipping. It acts as the global standard-setting authority, ensuring a uniform regulatory framework applicable to all member states and their flagged vessels engaged in international trade.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>Every statutory certificate on board — IOPP, Safety Equipment, Loadline — is issued under an IMO convention. Without IMO there is no legal basis for these certificates.</li>
+    <li>Port State Control detention is triggered by failure to comply with IMO instruments. A CE who misunderstands IMO hierarchy cannot respond correctly to a PSC deficiency.</li>
+    <li>IMO sets limits for NOx, SOx, GHG, and OWS discharge — direct engine room operational constraints.</li>
+    <li>ISM Code (adopted under IMO) governs the CE's safety management system obligations, authority, and liability.</li>
+    <li>Over 80% of world trade moves by sea — IMO ensures the CE operates under one consistent global framework rather than a patchwork of national rules.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">17 Mar 1948</span> → IMO Convention adopted at UN conference in Geneva
+<span class="t-year">1958</span>       → Convention entered into force; organization began as IMCO (Inter-Governmental Maritime Consultative Organization)
+<span class="t-year">1982</span>       → Name changed to International Maritime Organization (IMO)
+<span class="t-year">2024</span>       → 176 Member States; Mr. Arsenio Dominguez appointed Secretary General (01 Jan 2024, term 2024–2027)</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">IMO Convention 1948</span><span class="reg-desc">Founding instrument establishing the IMO as a UN specialized agency</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS 1974 (as amended)</span><span class="reg-desc">Primary safety convention administered through IMO/MSC</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL 73/78</span><span class="reg-desc">Primary pollution prevention convention administered through IMO/MEPC</span></div>
+    <div class="reg-item"><span class="reg-code">MS Act 1958 (India)</span><span class="reg-desc">Indian domestic legislation implementing IMO conventions — administered by DGS</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 IMO Structure</h3>
+  <div class="mental-map"><span class="root">IMO — 176 Member States</span>
+│
+├── ASSEMBLY (All 176 Member States)
+│     Meets every 2 years (ordinary session)
+│     Extra-ordinary sessions if required
+│     Functions: Approve work programme, vote budget,
+│                determine financial arrangements,
+│                elect Council, make recommendations
+│                to governments on maritime safety &
+│                pollution prevention (Article 15(j))
+│
+├── COUNCIL (40 Member States elected by Assembly)
+│     Executive organ of IMO, elected for 2-year term
+│     Category (a) — 10 States: largest interest in
+│                    providing international shipping services
+│                    e.g. USA, UK, Korea, Panama, Norway,
+│                         Italy, Japan, Liberia, China, Greece
+│     Category (b) — 10 States: largest interest in
+│                    international seaborne trade
+│                    e.g. India, UAE, Australia, Brazil, Canada,
+│                         Germany, Netherlands, Spain, Sweden, France
+│     Category (c) — 20 States: special interest in maritime
+│                    transport or navigation; ensures representation
+│                    of all major geographic areas of the world
+│
+├── SECRETARIAT
+│     Secretary General + ~300 international personnel
+│     Based at IMO HQ, London (Albert Embankment)
+│     Present SG: Mr. Arsenio Dominguez (2024–2027)
+│
+└── 5 MAIN COMMITTEES (see Topic 2)</div>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair Sir:</strong> Nair routinely asks "What is IMO?" expecting candidates to state the UN specialized agency definition, member state count (176), founding year (convention adopted 17 March 1948), and the name of the current Secretary General. Candidates who say "international organization for shipping" without citing UN specialized agency status are marked down. Always mention Article 15(j) if asked about Assembly powers — it shows depth.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&A — 10 Questions</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: What is IMO? Define it precisely.</div><div class="qa-a">IMO is a specialized agency of the United Nations, established by convention adopted on 17 March 1948 in Geneva, entering into force in 1958. It is the global authority for adopting measures to improve the safety, security, and environmental performance of international shipping. It currently has 176 member states and is headquartered in London.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: What is the difference between the Assembly and the Council?</div><div class="qa-a">The Assembly is the highest governing body, consisting of all 176 member states meeting every two years. It approves the work programme, votes the budget, and elects the Council. The Council is the executive organ, consisting of 40 elected member states, which acts between Assembly sessions and oversees the work of the technical committees.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: How is the Council composed — explain the three categories.</div><div class="qa-a">The Council has 40 members in three categories: Category (a) — 10 states with the largest interest in providing international shipping services (e.g. USA, UK, Greece, Panama, Japan); Category (b) — 10 states with the largest interest in international seaborne trade (e.g. India, Germany, Australia, Brazil); Category (c) — 20 states not in (a) or (b) but with special interests in maritime transport, ensuring equitable geographic representation globally.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: What does the Secretariat do?</div><div class="qa-a">The Secretariat consists of the Secretary General and approximately 300 international personnel based at IMO headquarters in London. It manages administrative duties, coordinates committee sessions, maintains treaty records, and supports technical cooperation activities. The current Secretary General is Mr. Arsenio Dominguez, appointed 01 January 2024.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: When was IMO originally called IMCO and why was it renamed?</div><div class="qa-a">The organization was originally established as IMCO — the Inter-Governmental Maritime Consultative Organization — when the convention entered into force in 1958. In 1982, the name was changed to the International Maritime Organization (IMO) to reflect its broader role beyond consultation and the expanded scope of its mandatory instruments.</div></div>
+    <div class="qa-item"><div class="qa-q">Q6: How many member states does IMO have?</div><div class="qa-a">As of 2024, IMO has 176 member states. This figure may change as additional states accede to the IMO Convention.</div></div>
+    <div class="qa-item"><div class="qa-q">Q7: What powers does the Assembly have that no other body has?</div><div class="qa-a">Only the Assembly can approve the work programme, vote the budget, determine financial arrangements, and elect the Council. It is also the only body empowered under Article 15(j) to make recommendations to governments on maritime safety and pollution prevention. Technical decisions are delegated to committees, but governance authority rests with the Assembly.</div></div>
+    <div class="qa-item"><div class="qa-q">Q8: Where is IMO headquartered?</div><div class="qa-a">IMO headquarters is in London, United Kingdom, at 4 Albert Embankment, London SE1 7SR. It has been based in London since the organization's inception.</div></div>
+    <div class="qa-item"><div class="qa-q">Q9: Who is the current IMO Secretary General?</div><div class="qa-a">Mr. Arsenio Dominguez, appointed 01 January 2024. He is from Panama and his term runs 2024–2027.</div></div>
+    <div class="qa-item"><div class="qa-q">Q10: How does IMO connect to a Chief Engineer's day-to-day work?</div><div class="qa-a">Every mandatory requirement in the engine room — from ORB entries to OWS 15ppm limits, from NOx Technical Code compliance to ISM Code safety management — derives from an IMO convention adopted through the MSC or MEPC. The Chief Engineer's statutory certificates, surveys, and PSC obligations all have IMO instruments as their legal foundation.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> Describe the structure of the IMO, naming its main bodies and their functions.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Explain the composition and functions of the IMO Council. How does it differ from the IMO Assembly? Discuss the significance of the three category system.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> With the aid of a structural diagram, explain the organization of the IMO from the Assembly down to its technical sub-committees. Discuss how a Chief Engineer on a container vessel is directly affected by the outputs of this structure, citing at least three IMO instruments.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>Geneva 1948 → London 1958</strong> — Convention adopted in Geneva (1948), entered into force in London (1958)</li>
+      <li><strong>IMCO → IMO in 1982</strong> — Consultative became full Organization</li>
+      <li><strong>176 member states, 40-member Council</strong> — remember 176 / 40</li>
+      <li><strong>Council ABC</strong> — (a) Shipping services providers, (b) Seaborne trade states, (c) All other special interest states — 10 + 10 + 20 = 40</li>
+      <li><strong>SG = Arsenio Dominguez, Panama, 2024</strong></li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>Convention adopted</td><td>17 March 1948, Geneva</td></tr>
+    <tr><td>Entry into force</td><td>1958</td></tr>
+    <tr><td>Original name</td><td>IMCO (changed to IMO in 1982)</td></tr>
+    <tr><td>Member states</td><td>176 (as of 2024)</td></tr>
+    <tr><td>Assembly</td><td>All 176 states; meets every 2 years</td></tr>
+    <tr><td>Council</td><td>40 states; executive organ; 3 categories (10+10+20)</td></tr>
+    <tr><td>Secretariat</td><td>SG + ~300 staff; London HQ</td></tr>
+    <tr><td>Current SG</td><td>Arsenio Dominguez; appointed 01 Jan 2024</td></tr>
+    <tr><td>Main committees</td><td>MSC, MEPC, LEG, TCC, FAL</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-1">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-1')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>India's IMO Status</h4>
+      <p>India is a founding member of IMO and is categorized as a Category (b) state on the Council (largest interest in international seaborne trade). The DGS (Directorate General of Shipping) under the Ministry of Ports, Shipping and Waterways is India's flag state authority responsible for implementing IMO conventions through the Merchant Shipping Act 1958 and its amendments.</p>
+      <h4>Article 15(j) — Assembly Recommendation Power</h4>
+      <p>Article 15(j) of the IMO Convention specifically empowers the Assembly to make recommendations to member governments on maritime safety and the prevention and control of marine pollution. This is the constitutional basis for IMO Assembly resolutions — though they are technically recommendations (not binding), they carry significant political weight and are often referenced in PSC inspections.</p>
+      <h4>Maersk A/S IMO Interface</h4>
+      <p>As a Danish-flagged fleet operator, Maersk A/S interacts with IMO instruments primarily through the Danish Maritime Authority (DMA) as flag state. All class surveys on Maersk container vessels are conducted by recognized organizations (principally DNV or LR acting as ROs for DMA). The CE's ISM obligations flow from IMO → SOLAS Chapter IX → ISM Code → Maersk SMS.</p>
+      <h4>Observer Status</h4>
+      <p>In addition to 176 member states, IMO has 3 associate members and grants observer status to intergovernmental organizations (e.g. ILO, UN agencies) and non-governmental organizations (e.g. IACS, BIMCO, INTERTANKO, INTERCARGO). NGO observers can participate in technical discussions but cannot vote.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/About/Pages/Default.aspx" target="_blank">IMO — About IMO (official)</a></li>
+    <li><a href="https://www.imo.org/en/About/Conventions/Pages/Convention-on-the-International-Maritime-Organization.aspx" target="_blank">IMO Convention 1948 text</a></li>
+    <li><a href="https://dgshipping.gov.in" target="_blank">Directorate General of Shipping, India</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB4.html">QB4 — ISM Code / IMO Governance</a>
+    <a href="../QB3.html">QB3 — PSC / MARPOL</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p1 · Topic 1 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p1 · T1 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 2 — IMO COMMITTEES -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-2">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 2</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">IMO Committees — MSC, MEPC, LEG, TCC, FAL</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">IMO Governance</span>
+        <span class="topic-pages">Uday pp. 5–9</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="section-head">📖 Overview</h3>
+  <p class="notes-body">IMO has five main committees that develop, adopt, and oversee implementation of international maritime instruments. All committees consist of all member states. The two most technically active — MSC and MEPC — are directly relevant to the Chief Engineer's daily statutory obligations.</p>
+
+  <h3 class="section-head">🔧 Committee Detail</h3>
+
+  <p class="notes-body"><strong style="color:var(--teal-dark);">① Maritime Safety Committee (MSC)</strong></p>
+  <ul class="notes-list">
+    <li>The highest technical body within IMO concerned with maritime safety.</li>
+    <li>Consists of <em>all member states</em>.</li>
+    <li>Functions: consider matters within IMO scope concerned with aids to navigation, construction and equipment of vessels, manning from a safety standpoint, rules for prevention of collisions, handling of dangerous cargoes, maritime safety procedures and requirements, hydrographic information, logbooks and navigational records, marine casualty investigation, salvage and rescue, and any other matter directly affecting maritime safety.</li>
+    <li>MSC must carry out duties assigned by the IMO Convention or any other international instrument accepted by the IMO.</li>
+    <li>MSC <em>can adopt amendments</em> to conventions such as SOLAS.</li>
+  </ul>
+
+  <p class="notes-body" style="margin-top:14px;"><strong style="color:var(--teal-dark);">② Marine Environment Protection Committee (MEPC)</strong></p>
+  <ul class="notes-list">
+    <li>Consists of all member states.</li>
+    <li>Empowered to consider any matter within IMO scope concerned with the prevention and control of pollution from ships.</li>
+    <li>Particularly concerned with the adoption and amendment of conventions and regulations, and measures to ensure their enforcement.</li>
+    <li>Originally formed as a subsidiary body to the Assembly; raised to full constitutional status in <strong>1985</strong>.</li>
+  </ul>
+
+  <p class="notes-body" style="margin-top:14px;"><strong style="color:var(--teal-dark);">③ Legal Committee (LEG)</strong></p>
+  <ul class="notes-list">
+    <li>Consists of all member states.</li>
+    <li>Established in <strong>1967</strong> as a subsidiary body to deal with legal questions arising from the <em>Torrey Canyon</em> disaster.</li>
+    <li>Empowered to deal with any legal matters within the scope of the organization.</li>
+    <li>Also empowered to do duties assigned by any international instrument accepted and recognized by the IMO.</li>
+  </ul>
+
+  <p class="notes-body" style="margin-top:14px;"><strong style="color:var(--teal-dark);">④ Technical Co-operation Committee (TCC)</strong></p>
+  <ul class="notes-list">
+    <li>Required to consider any matter within IMO scope concerned with implementation of technical co-operation projects for which the Organization acts as executing or co-operating agency, and any other matters related to the Organization's activities in the technical co-operation field.</li>
+  </ul>
+
+  <p class="notes-body" style="margin-top:14px;"><strong style="color:var(--teal-dark);">⑤ Facilitation Committee (FAL)</strong></p>
+  <ul class="notes-list">
+    <li>Consists of all member states.</li>
+    <li>Established as subsidiary body for the Council in <strong>1972</strong>; became fully institutionalized in <strong>December 2008</strong> as a result of an amendment to the IMO Convention.</li>
+    <li>Deals with IMO's work in eliminating unnecessary formalities and red tape in international shipping.</li>
+    <li>Achieved by implementing the Convention on Facilitation of International Maritime Traffic 1965, and any matter within IMO scope concerned with the facilitation of international maritime traffic.</li>
+    <li>By the efforts of this committee, a balance is achieved between maritime security and facilitation of international maritime trade.</li>
+  </ul>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">IMO Convention — Article 28</span><span class="reg-desc">Establishes the MSC as the highest technical safety committee</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS 1974</span><span class="reg-desc">Primary instrument adopted and amended by MSC</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL 73/78</span><span class="reg-desc">Primary instrument adopted and amended by MEPC</span></div>
+    <div class="reg-item"><span class="reg-code">FAL Convention 1965</span><span class="reg-desc">Convention on Facilitation of International Maritime Traffic — administered by FAL Committee</span></div>
+    <div class="reg-item"><span class="reg-code">IMO Convention 2008 Amendment</span><span class="reg-desc">Gave FAL Committee full constitutional status within IMO structure</span></div>
+  </div>
+
+  <h3 class="section-head">📊 Comparison Table — MSC vs MEPC</h3>
+  <table class="compare-table">
+    <tr><th>Parameter</th><th>MSC</th><th>MEPC</th></tr>
+    <tr><td>Focus</td><td>Maritime safety</td><td>Marine environment protection</td></tr>
+    <tr><td>Primary convention</td><td>SOLAS 1974</td><td>MARPOL 73/78</td></tr>
+    <tr><td>Composition</td><td>All member states</td><td>All member states</td></tr>
+    <tr><td>Sub-committees</td><td>Shared — HTW, III, NCSR, SDC, SSE, CCC, PPR</td><td>Shared — PPR is most MEPC-linked</td></tr>
+    <tr><td>CE interface</td><td>Machinery safety, fire, LSA, dangerous goods</td><td>MARPOL compliance, GHG, CII, EEXI</td></tr>
+    <tr><td>Amendment power</td><td>Can adopt SOLAS amendments</td><td>Can adopt MARPOL amendments</td></tr>
+    <tr><td>MEPC status history</td><td>Full committee from establishment</td><td>Subsidiary until 1985; full status 1985</td></tr>
+  </table>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair Sir:</strong> Commonly asks "What is the difference between MSC and MEPC?" — candidates must state: MSC = safety; MEPC = environment. Both consist of all member states. MEPC was originally a subsidiary body raised to full constitutional status in 1985. Nair also asks about the Torrey Canyon — connect it to the Legal Committee's establishment in 1967. The FAL Committee date (institutionalized December 2008) occasionally comes up for written exams.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&A — 10 Questions</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: Name the five main committees of IMO.</div><div class="qa-a">MSC (Maritime Safety Committee), MEPC (Marine Environment Protection Committee), LEG (Legal Committee), TCC (Technical Co-operation Committee), and FAL (Facilitation Committee).</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: What are the functions of the MSC?</div><div class="qa-a">MSC considers matters within IMO scope concerned with aids to navigation, vessel construction and equipment, manning from a safety standpoint, collision prevention rules, handling of dangerous cargoes, maritime safety procedures, hydrographic information, logbooks and navigational records, marine casualty investigation, salvage and rescue, and any other matter directly affecting maritime safety. MSC can adopt amendments to safety conventions including SOLAS.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: How was MEPC established and when did it gain full constitutional status?</div><div class="qa-a">MEPC was originally formed as a subsidiary body to the IMO Assembly. It was raised to full constitutional status in 1985 through an amendment to the IMO Convention. Today it consists of all member states and is empowered to adopt and amend environmental conventions and regulations, particularly MARPOL.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: Why was the Legal Committee established and in what year?</div><div class="qa-a">The Legal Committee was established in 1967 as a subsidiary body to deal with legal questions that arose following the Torrey Canyon disaster — a major tanker grounding off the UK that raised complex questions about liability, compensation, and intervention rights. It subsequently became a permanent committee empowered to handle any legal matter within IMO's scope.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: What is the FAL Committee's role?</div><div class="qa-a">The Facilitation Committee aims to eliminate unnecessary formalities and red tape in international shipping. It implements the FAL Convention 1965 (Convention on Facilitation of International Maritime Traffic) and seeks to achieve a balance between maritime security and the smooth facilitation of international maritime trade. It was fully institutionalized within IMO in December 2008.</div></div>
+    <div class="qa-item"><div class="qa-q">Q6: Which committee deals with pollution prevention?</div><div class="qa-a">The Marine Environment Protection Committee (MEPC) is responsible for all matters related to prevention and control of pollution from ships. It oversees MARPOL, ballast water conventions, GHG strategy, CII, EEXI, and SEEMP regulations.</div></div>
+    <div class="qa-item"><div class="qa-q">Q7: Can the MSC adopt amendments to SOLAS?</div><div class="qa-a">Yes. The MSC has the authority to adopt amendments to SOLAS and other safety conventions. These amendments are typically passed using the tacit acceptance procedure under SOLAS Article VIII, allowing them to enter into force on a fixed date unless sufficient objections are received.</div></div>
+    <div class="qa-item"><div class="qa-q">Q8: Which MSC or MEPC decision most directly affects a CE on a container vessel?</div><div class="qa-a">From MSC: SOLAS Chapter II-2 (fire protection, detection, extinction) and SOLAS Chapter III (life-saving appliances) directly govern engine room fire systems and LSA maintenance obligations. From MEPC: MARPOL Annex VI requirements (NOx, SOx, GHG/CII) have major operational impact on main engine management, fuel selection, and SEEMP compliance on container vessels.</div></div>
+    <div class="qa-item"><div class="qa-q">Q9: What is the Torrey Canyon and why is it significant for IMO?</div><div class="qa-a">The Torrey Canyon was a Liberian-flagged supertanker that ran aground on the Seven Stones reef off Cornwall, UK in March 1967, spilling approximately 119,000 tonnes of crude oil — the first major tanker disaster. It exposed major gaps in international maritime law regarding liability, compensation, and coastal state intervention rights, directly leading to the establishment of the IMO Legal Committee in 1967 and later the CLC and Fund Conventions.</div></div>
+    <div class="qa-item"><div class="qa-q">Q10: Do all IMO committees consist of all member states?</div><div class="qa-a">Yes. All five main committees — MSC, MEPC, LEG, TCC, and FAL — consist of all 176 IMO member states. This is distinct from the Council (40 elected states). All member states have equal participation rights in committee sessions, though only contracting parties to specific conventions vote on amendments to those conventions.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> Differentiate between the MSC and MEPC, stating their composition, functions, and primary conventions.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Explain the establishment and functions of the five main committees of IMO. Which committee is most relevant to a Chief Engineer on a container vessel and why?</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> The Torrey Canyon disaster of 1967 had a profound impact on the IMO's institutional structure. Explain what happened, how it led to the creation of the Legal Committee, and what subsequent conventions emerged to address the legal gaps exposed by the disaster.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>5 Committees: MSC · MEPC · LEG · TCC · FAL</strong> — mnemonic: "My Maritime Life Takes Flight"</li>
+      <li><strong>MEPC full status: 1985</strong> — previously a subsidiary body to Assembly</li>
+      <li><strong>LEG established: 1967</strong> — triggered by Torrey Canyon</li>
+      <li><strong>FAL institutionalized: December 2008</strong> — amendment to IMO Convention</li>
+      <li><strong>MSC = Safety (SOLAS) | MEPC = Environment (MARPOL)</strong></li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Committee</th><th>Full Name</th><th>Key Instrument</th><th>Note</th></tr>
+    <tr><td>MSC</td><td>Maritime Safety Committee</td><td>SOLAS</td><td>Highest technical safety body; all member states</td></tr>
+    <tr><td>MEPC</td><td>Marine Environment Protection Committee</td><td>MARPOL</td><td>Full status 1985; was subsidiary to Assembly</td></tr>
+    <tr><td>LEG</td><td>Legal Committee</td><td>CLC, Fund Conv.</td><td>Est. 1967 after Torrey Canyon</td></tr>
+    <tr><td>TCC</td><td>Technical Co-operation Committee</td><td>—</td><td>Technical assistance to developing states</td></tr>
+    <tr><td>FAL</td><td>Facilitation Committee</td><td>FAL Convention 1965</td><td>Full status December 2008</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-2">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-2')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>MSC Sessions</h4>
+      <p>The MSC holds regular sessions (typically 2 per year) and extraordinary sessions when required. Each session has an agenda of items submitted by member states, recognized organizations, and committees. Resolutions and circulars adopted at each session carry the session number — e.g., MSC.520(106) was adopted at MSC 106.</p>
+      <h4>MEPC Sessions</h4>
+      <p>MEPC similarly holds regular sessions. Recent high-impact MEPC sessions include MEPC 80 (2023) which adopted the 2023 IMO GHG Strategy with a net-zero target by 2050 and interim checkpoints of 20% reduction by 2030 and 70% by 2040 compared to 2008 levels.</p>
+      <h4>Torrey Canyon — Full Account</h4>
+      <p>The Torrey Canyon grounded 18 March 1967. The UK government ultimately bombed the wreck to burn off remaining cargo — a legally unprecedented action. The disaster demonstrated that no adequate international legal framework existed for: (1) flag state liability for pollution damage; (2) coastal state intervention rights on the high seas; (3) compensation for pollution victims. This directly produced: the Intervention Convention 1969, the CLC 1969, and the Fund Convention 1971.</p>
+      <h4>FAL Convention 1965 — Key Requirements</h4>
+      <p>The FAL Convention 1965 standardized ship arrival/departure documentation, including the General Declaration, Cargo Declaration, Ship's Stores Declaration, and Crew and Passenger lists. It was significantly updated by the 2002 and later amendments to accommodate e-documentation and Maritime Single Window (MSW) requirements.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/About/Pages/MSC.aspx" target="_blank">IMO — Maritime Safety Committee</a></li>
+    <li><a href="https://www.imo.org/en/About/Pages/MEPC.aspx" target="_blank">IMO — Marine Environment Protection Committee</a></li>
+    <li><a href="https://www.imo.org/en/About/Pages/LEG.aspx" target="_blank">IMO — Legal Committee</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3.html">QB3 — MARPOL (MEPC instruments)</a>
+    <a href="../QB4.html">QB4 — ISM / SOLAS (MSC instruments)</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p1 · Topic 2 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p1 · T2 · v1.0</span>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- TOPIC 3 — SUB-COMMITTEES -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-3">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 3</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">IMO Sub-Committees (HTW, III, NCSR, PPR, SDC, SSE, CCC)</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">IMO Governance</span>
+        <span class="topic-pages">Uday pp. 3</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-medium">Medium Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="section-head">📖 Overview</h3>
+  <p class="notes-body">The main committees (principally MSC and MEPC) delegate specific technical drafting work to seven sub-committees. These bodies develop the actual technical text, guidelines, and circulars that eventually become mandatory instruments through the MSC or MEPC adoption process.</p>
+
+  <h3 class="section-head">🔧 Sub-Committee Detail</h3>
+  <div class="mental-map"><span class="root">IMO Sub-Committees (under MSC/MEPC)</span>
+│
+├── HTW  — Human Element, Training and Watchkeeping
+│          STCW standards, fatigue management, model courses,
+│          engine room resource management (ERRM)
+│
+├── III  — Implementation of IMO Instruments
+│          IMSAS audits, marine casualty investigation,
+│          PSC inspection guidelines, flag state compliance
+│
+├── NCSR — Navigation, Communications and Search & Rescue
+│          COLREGs, GMDSS, ECDIS, VDR, SAR coordination
+│
+├── PPR  — Pollution Prevention and Response
+│          MARPOL technical standards, OWS, scrubbers,
+│          biofouling, BWM, NOx/SOx limits, IBC Code
+│
+├── SDC  — Ship Design and Construction
+│          SOLAS Ch.II-1, Intact Stability Code, ESP,
+│          damage stability, structural rules
+│
+├── SSE  — Ship Systems and Equipment
+│          Fire protection, LSA, FSS Code, FTP Code,
+│          SOLAS Ch.II-2 and III equipment standards
+│
+└── CCC  — Carriage of Cargoes and Containers
+           IMDG Code, solid bulk cargo (IMSBC Code),
+           IGC/IBC codes, container stowage and securing</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">IMO Convention — Articles 28–38</span><span class="reg-desc">Articles governing the MSC and its powers, including authority to establish sub-committees</span></div>
+    <div class="reg-item"><span class="reg-code">STCW Convention 1978 (as amended)</span><span class="reg-desc">Governed by HTW sub-committee — standards for seafarer training, certification and watchkeeping</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL 73/78 — Annexes I–VI</span><span class="reg-desc">Technical standards developed and updated by PPR sub-committee</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS Chapter II-2, III</span><span class="reg-desc">Fire protection and LSA equipment standards — developed by SSE sub-committee</span></div>
+    <div class="reg-item"><span class="reg-code">IMDG Code (MSC.122(75))</span><span class="reg-desc">Dangerous goods carriage — maintained by CCC sub-committee; mandatory under SOLAS Ch.VII Reg.3</span></div>
+  </div>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair Sir:</strong> Examiners rarely ask for all seven sub-committees by name but will ask "which sub-committee deals with pollution?" (PPR) or "which sub-committee handles STCW?" (HTW). Know PPR, HTW, and SSE at minimum — these three have the most direct CE engine room impact. For a container vessel CE, also know CCC (IMDG, container securing) and SDC (structural rules, loadline).
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>7 Sub-Committees: HTW · III · NCSR · PPR · SDC · SSE · CCC</strong></li>
+      <li>Mnemonic: <strong>"Highly Intelligent Naval People Should See Clearly"</strong> (H-I-N-P-S-S-C)</li>
+      <li><strong>PPR = Pollution</strong> (MARPOL, scrubbers, OWS, NOx) — most MEPC-linked</li>
+      <li><strong>SSE = Safety Equipment</strong> (fire, LSA, FSS Code) — most CE-relevant for safety</li>
+      <li><strong>HTW = Training / STCW</strong> — affects CE certification and watchkeeping rules</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Acronym</th><th>Full Name</th><th>CE Relevance</th></tr>
+    <tr><td>HTW</td><td>Human Element, Training and Watchkeeping</td><td>STCW, ERRM, fatigue, model courses</td></tr>
+    <tr><td>III</td><td>Implementation of IMO Instruments</td><td>IMSAS, PSC guidelines, casualty investigations</td></tr>
+    <tr><td>NCSR</td><td>Navigation, Communications and Search & Rescue</td><td>GMDSS power backup, emergency systems</td></tr>
+    <tr><td>PPR</td><td>Pollution Prevention and Response</td><td>OWS, scrubbers, MARPOL Annex VI, BWM</td></tr>
+    <tr><td>SDC</td><td>Ship Design and Construction</td><td>Stability, structural integrity, ESP</td></tr>
+    <tr><td>SSE</td><td>Ship Systems and Equipment</td><td>Fire detection/suppression, LSA, FTP/FSS Codes</td></tr>
+    <tr><td>CCC</td><td>Carriage of Cargoes and Containers</td><td>IMDG, IMSBC, container securing, IGC/IBC</td></tr>
+  </table>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p1 · Topic 3 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p1 · T3 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 4 — IMO INSTRUMENTS -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-4">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 4</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">IMO Instruments — Conventions, Protocols, Amendments, Codes, Resolutions</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">IMO Governance</span>
+        <span class="topic-pages">Uday pp. 11</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="section-head">📖 Types of IMO Instruments</h3>
+  <p class="notes-body">IMO develops five principal categories of instrument. Understanding the hierarchy and legal status of each is essential for the CE to correctly interpret compliance obligations.</p>
+
+  <div class="mental-map"><span class="root">IMO Instruments — Hierarchy</span>
+│
+├── 1. CONVENTIONS
+│      Formal treaty agreements between member states
+│      Negotiated under IMO auspices
+│      Have sub-parts (chapters, annexes, regulations)
+│      Examples: SOLAS, MARPOL, STCW, MLC, BWM Convention
+│      LEGALLY BINDING on ratifying states
+│
+├── 2. PROTOCOLS
+│      Instrument used to introduce significant changes
+│      to conventions already adopted
+│      Used when: new chapter added to original convention,
+│               or any significant change to original text
+│      Enters into force like a convention (requires ratification)
+│      NOTE: A state may ratify original convention but
+│            NOT ratify subsequent protocol
+│      Binding only on states that ratified the Protocol
+│      Examples: MARPOL Protocol 1978, SOLAS Protocol 1988
+│
+├── 3. AMENDMENTS
+│      Major changes brought into action via:
+│      (i)  By Protocol
+│      (ii) By Resolution
+│           (a) Amendment by consideration within IMO
+│           (b) Amendment by Conference of Contracting States
+│      MOST COMMON route: Resolution via Tacit Acceptance
+│
+├── 4. RECOMMENDATIONS / CODES / GUIDELINES
+│      Non-mandatory (unless adopted as mandatory by reference
+│      in a convention)
+│      Examples: ISM Code (mandatory via SOLAS Ch.IX),
+│                FSS Code (mandatory via SOLAS Ch.II-2),
+│                IMDG Code (mandatory via SOLAS Ch.VII)
+│
+└── 5. RESOLUTIONS
+       Formal decisions adopted by IMO bodies
+       Used to adopt amendments, guidelines, codes
+       Identified as: MSC.NNN(XX) or MEPC.NNN(XX)
+       where NNN = sequential number, XX = session number</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Key Instruments — Status Reference</div>
+    <div class="reg-item"><span class="reg-code">SOLAS 1974</span><span class="reg-desc">Convention — mandatory for contracting states; safety of life at sea</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL 73/78</span><span class="reg-desc">Convention + Protocol — MARPOL 73 merged with Protocol 78 into one instrument</span></div>
+    <div class="reg-item"><span class="reg-code">ISM Code (MSC.104(73))</span><span class="reg-desc">Code — made mandatory by incorporation into SOLAS Chapter IX</span></div>
+    <div class="reg-item"><span class="reg-code">FSS Code (MSC.98(73))</span><span class="reg-desc">Code — mandatory under SOLAS Chapter II-2</span></div>
+    <div class="reg-item"><span class="reg-code">IMDG Code</span><span class="reg-desc">Code — mandatory under SOLAS Chapter VII, Regulation 3</span></div>
+    <div class="reg-item"><span class="reg-code">MSC.520(106)</span><span class="reg-desc">Resolution — SOLAS Ch.II-2 amendments, in force 01 January 2026</span></div>
+  </div>
+
+  <h3 class="section-head">📊 Comparison — Mandatory vs Non-Mandatory Codes</h3>
+  <table class="compare-table">
+    <tr><th>Parameter</th><th>Mandatory Code</th><th>Recommendatory Code/Guideline</th></tr>
+    <tr><td>Legal status</td><td>Binding — referenced in convention regulation</td><td>Advisory — encourages best practice</td></tr>
+    <tr><td>PSC authority to detain</td><td>Yes — breach = deficiency</td><td>No — unless elevated by port state law</td></tr>
+    <tr><td>Examples</td><td>ISM Code, FSS Code, IGC Code, IBC Code, IMDG Code, LSA Code</td><td>ISGOTT, BMP5, OCIMF guidelines</td></tr>
+    <tr><td>How made mandatory</td><td>Convention regulation states "shall comply with [Code]"</td><td>Convention regulation states "should" or "recommended"</td></tr>
+  </table>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair Sir:</strong> The classic Nair question: "Is the ISM Code mandatory?" Answer: Yes — it is mandatory because SOLAS Chapter IX, Regulation 3 requires ships to comply with the ISM Code. The Code itself is a Resolution (MSC.104(73)) that became mandatory by incorporation into SOLAS. Always explain the mechanism — not just "yes it is mandatory." Also know that ISGOTT and BMP5 are non-mandatory industry guidance documents.
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>5 instrument types: Convention → Protocol → Amendment → Code/Guideline → Resolution</strong></li>
+      <li><strong>Code = mandatory only if referenced in a Convention regulation</strong></li>
+      <li><strong>Resolution number format: MSC.520(106)</strong> = item 520 adopted at session 106</li>
+      <li><strong>Protocol = separate legal instrument; needs separate ratification</strong></li>
+      <li><strong>MARPOL 73/78</strong> = the 1978 Protocol so significantly amended MARPOL 1973 that they were merged</li>
+    </ul>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p1 · Topic 4 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p1 · T4 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 5 — CONVENTION LIFECYCLE -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-5">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 5</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">IMO Convention Lifecycle — Draft → Adopt → Ratify → Entry into Force</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">IMO Governance</span>
+        <span class="topic-pages">Uday pp. 12–16</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="section-head">📖 Overview</h3>
+  <p class="notes-body">An IMO convention passes through five sequential stages from initial proposal to legally binding implementation. Understanding this process is essential for the CE to know when a new regulation becomes applicable to the vessel.</p>
+
+  <h3 class="section-head">🔄 Process Flowchart</h3>
+  <div class="mental-map"><span class="root">IMO Convention — 5-Stage Lifecycle</span>
+
+STAGE 1: DRAFT CONVENTION
+├── Committee sessions held every 6 months
+├── Any member state may propose a new convention
+│   based on information and research
+├── If committee is satisfied with merits of proposal,
+│   it forwards to Council or Assembly as required
+├── If Council/Assembly accepts, committee is authorised
+│   to proceed with detailed drafting
+└── Committee draws up Draft Convention → sent to Council
+    and Assembly; committee recommends Conference for Adoption
+
+STAGE 2: ADOPTION OF THE CONVENTION
+├── Council/Assembly sets date for Adoption Conference
+├── Draft convention circulated to all member states
+│   for comments
+├── Comments examined; changes made before the Conference
+├── At the Conference, draft presented to all member states
+├── Majority of states present at conference agree with
+│   final draft → convention formally "ADOPTED"
+└── Adopted convention sent to Secretary General of IMO
+    who sends copies to all member states
+
+STAGE 3: RATIFICATION
+├── Each member state gives formal consent to be bound
+├── Three methods of ratification:
+│   (i)   SIGNATURE — most formal; simple signature
+│          by authorised government representative
+│   (ii)  SIGNATURE SUBJECT TO RATIFICATION, ACCEPTANCE
+│          OR APPROVAL — state has signed and shown interest
+│          but needs approval from own parliament; IMO does
+│          NOT consider this official ratification; state must
+│          subsequently submit Instrument of Ratification to
+│          the Depositary of the Convention
+│          Depositary = Secretary General of IMO
+│   (iii) ACCESSION — used when signing window has closed;
+│          see Topic 6
+└── Depository of convention = Secretary General of IMO
+
+STAGE 4: ENTRY INTO FORCE
+└── Convention enters into force when a MINIMUM number
+    of member states accepts it (threshold varies by convention)
+    e.g. SOLAS: 25 states representing ≥50% of world gross tonnage
+
+STAGE 5: IMPLEMENTATION
+├── Member state that ratified must include convention
+│   in their national laws
+│   (In India = amend Merchant Shipping Act 1958)
+└── When convention enters into force after sufficient countries
+    have ratified, provisions of the convention shall be included
+    in the country's local laws → convention becomes legally
+    binding on the member states that ratified it</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Key Legal Concepts</div>
+    <div class="reg-item"><span class="reg-code">Depository</span><span class="reg-desc">The department which keeps a record of member states that have ratified a convention. For IMO conventions = Secretary General of IMO</span></div>
+    <div class="reg-item"><span class="reg-code">Instrument of Ratification</span><span class="reg-desc">Formal document submitted by a state to the Depositary confirming acceptance of the convention obligations</span></div>
+    <div class="reg-item"><span class="reg-code">Instrument of Accession</span><span class="reg-desc">Document submitted when a state joins a convention after the signature window has closed</span></div>
+    <div class="reg-item"><span class="reg-code">MS Act 1958 (India)</span><span class="reg-desc">India's national legislation through which IMO conventions are implemented in Indian law</span></div>
+  </div>
+
+  <h3 class="section-head">📊 Three Methods of Ratification</h3>
+  <table class="compare-table">
+    <tr><th>Method</th><th>What it means</th><th>IMO Recognition</th></tr>
+    <tr><td><strong>Signature</strong></td><td>Most formal; state signs and is immediately bound</td><td>Official ratification</td></tr>
+    <tr><td><strong>Signature subject to ratification / acceptance / approval</strong></td><td>State signed and shown interest; needs own parliament approval; must submit Instrument of Ratification to Depositary</td><td>NOT official until Instrument deposited</td></tr>
+    <tr><td><strong>Accession</strong></td><td>State joins after signing window closed; deposits Instrument of Accession to Depositary</td><td>Official from deposit date</td></tr>
+  </table>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair Sir:</strong> The five-stage lifecycle is a written exam favourite at 10–15 marks. In orals, Nair asks: "What is ratification?" and "What is accession?" — candidates must distinguish: ratification = state consenting during the open signature window; accession = state joining after the window closed. Both require deposit of an Instrument with the Depositary (Secretary General). Also asked: "What is the Depositary?" — always answer: the Secretary General of IMO.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&A — 8 Questions</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: Explain the process by which a new IMO convention enters into force.</div><div class="qa-a">A convention passes through five stages: (1) Drafting — any member state proposes; committee drafts; (2) Adoption — Diplomatic Conference adopts when majority of states present agree; (3) Ratification — each state gives formal consent via signature, signature subject to ratification, or accession, depositing an Instrument with the Secretary General (Depositary); (4) Entry into force — when a minimum number of states (varying by convention) have ratified; (5) Implementation — each ratifying state incorporates the convention into national law.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: What is the Depositary of an IMO convention?</div><div class="qa-a">The Depositary is the body that keeps an official record of which member states have ratified a convention. For all IMO conventions, the Depositary is the Secretary General of IMO, based in London.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: What is the difference between ratification and accession?</div><div class="qa-a">Ratification is the formal consent given by a state that signed the convention during the open signature window. Accession is the method used by a state to join a convention after the signature window has closed — the state deposits an Instrument of Accession with the Depositary (Secretary General) without having been a signatory.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: What happens if India signs a convention "subject to ratification"?</div><div class="qa-a">India has signed the convention and shown interest, but this is NOT considered official ratification by IMO. India must subsequently obtain parliamentary approval and submit a formal Instrument of Ratification to the Secretary General of IMO. Only after this deposit is India officially a contracting party to the convention.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: How is a convention implemented in India?</div><div class="qa-a">Once India ratifies an IMO convention, the provisions must be incorporated into Indian national law. The primary domestic legislation is the Merchant Shipping Act 1958, which is amended or supplemented by DGS notifications and orders to give effect to convention requirements. This makes the convention legally binding on Indian-flagged vessels and persons subject to Indian jurisdiction.</div></div>
+    <div class="qa-item"><div class="qa-q">Q6: What is an "Adoption Conference"?</div><div class="qa-a">An Adoption Conference is a diplomatic conference convened by the IMO Council or Assembly to formally adopt a draft convention. The draft is circulated to all member states beforehand for comments. At the conference, once the majority of states present agree to the final draft, the convention is formally considered "Adopted" and sent to the Secretary General for distribution.</div></div>
+    <div class="qa-item"><div class="qa-q">Q7: Can a convention bind a state that has not ratified it?</div><div class="qa-a">No. An IMO convention binds only those states that have ratified it (contracting parties). However, practical enforcement through Port State Control means that even vessels from non-party states may face deficiency notices when calling at ports of contracting states, since PSC officers apply convention standards to all vessels in their ports.</div></div>
+    <div class="qa-item"><div class="qa-q">Q8: What is the minimum ratification threshold for SOLAS to enter into force?</div><div class="qa-a">SOLAS 1974 required acceptance by at least 25 states representing not less than 50% of the world's gross merchant tonnage. Different conventions have different thresholds — this is specified within each convention text. For the current SOLAS, the entry into force conditions were met before 1980.</div></div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>5 Stages: Draft → Adopt → Ratify → Entry into Force → Implement</strong></li>
+      <li><strong>Depositary = Secretary General of IMO</strong> (always)</li>
+      <li><strong>Ratification = during signature window | Accession = after window closed</strong></li>
+      <li><strong>India implementation = amend MS Act 1958</strong></li>
+      <li><strong>Majority at conference = Adopted; minimum states ratify = Enters into Force</strong></li>
+    </ul>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p1 · Topic 5 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p1 · T5 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 6 — TACIT ACCEPTANCE / AMENDMENTS BY RESOLUTION -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-6">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 6</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Tacit Acceptance & Amendment by Resolution</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">IMO Governance</span>
+        <span class="topic-pages">Uday pp. 17–25</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="section-head">📖 Amendment Mechanisms — Overview</h3>
+  <p class="notes-body">IMO conventions are amended via two routes: (i) By Protocol, and (ii) By Resolution. Amendments by Resolution are the dominant modern mechanism. Within Resolution-based amendments, the most important concept is <strong>Tacit Acceptance</strong> — the procedure that makes IMO amendments fast and predictable.</p>
+
+  <h3 class="section-head">🔧 Amendments by Resolution — Three Sub-Methods</h3>
+  <div class="mental-map"><span class="root">Amendments of IMO Conventions</span>
+│
+├── (i) BY PROTOCOL
+│       Major changes done by Protocol
+│       A state that ratified original convention
+│       may NOT accept the Protocol to that convention
+│       Protocol also enters into force like a convention
+│       When Protocol enters into force, it only binds
+│       member states that ratified the Protocol —
+│       NOT all members who ratified original convention
+│
+└── (ii) BY RESOLUTION
+        (a) Amendment by Consideration WITHIN the IMO
+        (b) Amendment by Conference of the Contracting States
+
+    (a) Amendment by Consideration within IMO — 3 steps:
+
+        Step 1: PROPOSAL
+        → Any contracting state can propose amendment
+        → Proposal made to Secretary General of IMO
+        → Sec. Gen. passes to MSC/MEPC for review
+        → MSC/MEPC drafts the resolution and submits
+          for adoption
+        → For successful adoption at MSC/MEPC:
+          • At least 1/3 of contracting govts shall be
+            present for voting
+          • At least 2/3 of contracting govts present
+            shall vote in favour of the resolution
+
+        Step 2: ADOPTION OF RESOLUTION
+        → Once MSC or MEPC has draft resolution,
+          forwarded for adoption by voting (above quorum)
+
+        Step 3: ACCEPTANCE OF RESOLUTION
+        → For acceptance, majority of states must agree
+        → MOST COMMON WAY = TACIT ACCEPTANCE</div>
+
+  <h3 class="section-head">📖 Tacit Acceptance — Definition</h3>
+  <p class="notes-body"><strong>Tacit Acceptance:</strong> Here it is implied (assumed) that a contracting state has accepted the resolution if it does not oppose it within the particular time frame given for adoption.</p>
+  <p class="notes-body">In other words: <em>Silence equals consent.</em> If a state does not formally object within the specified period, it is deemed to have accepted the amendment. This allows IMO to update technical regulations quickly without waiting for every member state to pass national legislation for each amendment.</p>
+
+  <h3 class="section-head">🔧 How Tacit Acceptance Works in Practice</h3>
+  <div class="mental-map">Amendment proposed at MSC/MEPC
+         │
+         ▼
+Resolution adopted (1/3 present, 2/3 vote in favour)
+         │
+         ▼
+Amendment circulated to all Contracting States
+(Typically 18–24 months before entry into force date)
+         │
+         ▼
+Contracting States may formally OBJECT within set period
+         │
+   ┌─────┴──────────────────────────────┐
+   │                                    │
+No objection                    Formal objection
+(majority case)                (minority case)
+   │                                    │
+   ▼                                    ▼
+Amendment deemed                 Amendment does not
+ACCEPTED (Tacit)                 bind objecting state
+   │
+   ▼
+Amendment ENTERS INTO FORCE on fixed date</div>
+
+  <h3 class="section-head">📊 Comparison — Tacit Acceptance vs Explicit Acceptance</h3>
+  <table class="compare-table">
+    <tr><th>Parameter</th><th>Tacit Acceptance</th><th>Explicit Acceptance (Traditional)</th></tr>
+    <tr><td>Action required</td><td>None — silence = consent</td><td>State must actively ratify / deposit instrument</td></tr>
+    <tr><td>Speed</td><td>Fast — fixed entry into force date (typically 18–24 months)</td><td>Slow — depends on national legislative timelines; can take years or decades</td></tr>
+    <tr><td>Predictability</td><td>High — CE/owner knows exact date</td><td>Low — uncertain timeline</td></tr>
+    <tr><td>Use in SOLAS</td><td>SOLAS Article VIII — standard mechanism for SOLAS amendments</td><td>Used for original SOLAS 1974 and major protocols</td></tr>
+    <tr><td>Risk</td><td>States may not be fully aware of amendment without active monitoring</td><td>Higher political buy-in but much slower</td></tr>
+  </table>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">SOLAS Article VIII</span><span class="reg-desc">The amendment procedure for SOLAS — codifies tacit acceptance; specifies 1/3 present, 2/3 vote, and time period for objection</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Article 16</span><span class="reg-desc">Amendment procedure for MARPOL — similar tacit acceptance mechanism</span></div>
+    <div class="reg-item"><span class="reg-code">MSC.520(106)</span><span class="reg-desc">Example of a recent amendment adopted by Resolution — SOLAS Chapter II-2 amendments, in force 01 January 2026</span></div>
+    <div class="reg-item"><span class="reg-code">MSC.496(105)</span><span class="reg-desc">SOLAS Chapters II-1/III/IV/V amendments — in force 01 January 2024</span></div>
+  </div>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair Sir:</strong> "What is tacit acceptance?" is one of Nair's signature questions — Uday's notes specifically mark this as a VVIP topic. The exact answer: <em>"Tacit acceptance is a procedure whereby it is implied that a contracting state has accepted an IMO amendment if it does not formally oppose it within the prescribed time frame after adoption."</em> Also be ready to give the voting threshold: 1/3 of contracting governments present for voting, 2/3 of those present vote in favour. And know a live example — e.g., MSC.520(106) in force 01 January 2026.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&A — 10 Questions</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: What is tacit acceptance?</div><div class="qa-a">Tacit acceptance is a procedure whereby a contracting state is deemed to have accepted an IMO amendment if it does not formally oppose it within the prescribed time frame following adoption. Silence constitutes consent. This mechanism, codified in SOLAS Article VIII, allows IMO to update technical regulations quickly without requiring active legislative action by every member state.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: Why was tacit acceptance introduced?</div><div class="qa-a">Traditional explicit acceptance required every contracting state to positively ratify each amendment through national legislation — an extremely slow process that could delay critical safety updates by years or decades. Tacit acceptance was introduced to ensure that technical safety and environmental amendments enter into force on a fixed, predictable date unless a sufficient number of states actively object.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: What are the voting thresholds for adopting an IMO amendment by Resolution?</div><div class="qa-a">For successful adoption of an amendment by Resolution at MSC or MEPC: at least one-third of contracting governments must be present for voting, and at least two-thirds of those contracting governments present must vote in favour of the resolution.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: Where is tacit acceptance codified for SOLAS amendments?</div><div class="qa-a">Tacit acceptance for SOLAS amendments is codified in SOLAS Article VIII — the amendment procedure article. Article VIII specifies the adoption voting thresholds, the circulation period, the time window for objections, and the entry into force date mechanics.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: What is the difference between amendment by Protocol and amendment by Resolution?</div><div class="qa-a">Amendment by Protocol is used for major structural changes or adding new chapters to a convention already in force. A Protocol is a separate legal instrument requiring independent ratification and binds only states that ratify it. Amendment by Resolution is used for technical updates within existing convention chapters and typically uses tacit acceptance — it is faster and binds all contracting parties that do not formally object.</div></div>
+    <div class="qa-item"><div class="qa-q">Q6: Give an example of a recent SOLAS amendment adopted by tacit acceptance.</div><div class="qa-a">MSC.520(106) — adopted at MSC 106 — amended SOLAS Chapter II-2 (fire protection) and entered into force on 01 January 2026. MSC.496(105) amended SOLAS Chapters II-1, III, IV, and V, entering into force on 01 January 2024. Both were adopted via Resolution using the tacit acceptance procedure under SOLAS Article VIII.</div></div>
+    <div class="qa-item"><div class="qa-q">Q7: Can a state object to a tacit acceptance amendment?</div><div class="qa-a">Yes. A contracting state may formally object to a proposed amendment within the prescribed time frame (typically before the entry into force date). If sufficient states object, the amendment may not enter into force universally. However, in practice, most SOLAS and MARPOL amendments proceed under tacit acceptance with very few formal objections, particularly for technical updates.</div></div>
+    <div class="qa-item"><div class="qa-q">Q8: How long is the typical period between adoption and entry into force for a tacit acceptance amendment?</div><div class="qa-a">Typically 18 to 24 months from adoption to entry into force. This period allows member states to notify their fleets, adjust equipment, obtain class approval for modifications, and update their SMS procedures before the amendment becomes mandatory.</div></div>
+    <div class="qa-item"><div class="qa-q">Q9: As a Chief Engineer, what does tacit acceptance mean practically for you?</div><div class="qa-a">As CE, I must actively monitor MSC and MEPC sessions to identify adopted amendments that will affect my vessel. I cannot wait for the flag state to notify me — tacit acceptance means the amendment is coming regardless. I should update the SMS, procure required equipment or type approvals, arrange class surveys, and brief the crew at least 6 months before the entry into force date. Ignorance is not a defence in a PSC inspection.</div></div>
+    <div class="qa-item"><div class="qa-q">Q10: What is an amendment by Conference of Contracting States?</div><div class="qa-a">This is an alternative amendment route where IMO convenes a separate diplomatic conference of all contracting states to a specific convention. This method is less common and typically used for amendments too significant or politically sensitive for the standard MSC/MEPC resolution route. It resembles the original convention adoption process with a dedicated conference, circulation of the draft, and voting by contracting parties.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> Define "tacit acceptance" as used in the amendment procedure for SOLAS. State the voting thresholds required for adoption.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Explain the two routes by which IMO conventions can be amended. Compare tacit acceptance with explicit acceptance, highlighting the advantages of tacit acceptance for the modern shipping industry.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> With reference to SOLAS Article VIII, explain the full process by which an amendment to SOLAS is proposed, adopted, accepted, and brought into force. As Chief Engineer on a container vessel, describe the steps you would take upon learning that an MSC Resolution amending SOLAS Chapter II-2 had been adopted at MSC 107, with an entry into force date of 01 January 2027.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>Tacit Acceptance = Silence is Consent</strong> — implied acceptance if no formal objection within time frame</li>
+      <li><strong>Voting: 1/3 present + 2/3 vote in favour</strong> for adoption of Resolution</li>
+      <li><strong>Tacit acceptance codified in SOLAS Article VIII</strong></li>
+      <li><strong>18–24 months</strong> — typical gap between adoption and entry into force</li>
+      <li><strong>Live examples: MSC.520(106) → 01 Jan 2026 | MSC.496(105) → 01 Jan 2024</strong></li>
+    </ul>
+  </div>
+
+  <div class="deep-dive" id="dd-topic-6">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-6')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Why "Tacit" Not "Silent"</h4>
+      <p>The term tacit (from Latin tacitus = silent) in international treaty law means implied or understood without being stated. Tacit acceptance therefore means that the acceptance of an amendment is implied from the failure to formally object — it is a legal fiction that converts inaction into consent for the purposes of treaty modification. This is distinct from "silence" in general contract law.</p>
+      <h4>The 1960 SOLAS Problem</h4>
+      <p>SOLAS 1960 used explicit acceptance for amendments. The result: several critical safety amendments took 10–20 years to achieve sufficient ratifications to enter into force, by which point the technical landscape had changed again. After the Titanic centenary debates and following major casualties, the shipping community recognized that the tacit acceptance mechanism (introduced in SOLAS 1974) was essential for the regulatory framework to keep pace with engineering and risk evolution.</p>
+      <h4>CE Monitoring Sources</h4>
+      <p>Chief Engineers should monitor: (1) IMO website (imo.org) for MSC/MEPC session summaries; (2) Flag state circulars (DMA for Maersk-flagged vessels) translating adopted resolutions into flag requirements; (3) Class society technical circulars (DNV, LR) interpreting how amendments affect ship-specific survey obligations; (4) Maersk SMS amendment bulletins. The Maersk Technical Management function typically issues an amendment notice within 30 days of MSC/MEPC adoption.</p>
+      <h4>MARPOL Article 16 — Parallel Mechanism</h4>
+      <p>MARPOL Article 16 provides the equivalent tacit acceptance mechanism for MARPOL amendments. Notable recent MEPC resolutions using this route include MEPC.377(80) — 2023 IMO GHG Strategy revision; MEPC.354(78) — EEXI and CII regulations (in force 01 November 2022); MEPC.333(76) — 2021 amendments to MARPOL Annex VI introducing EEXI and CII.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/About/Conventions/Pages/Amendment-Procedure.aspx" target="_blank">IMO — Amendment Procedure (official)</a></li>
+    <li>SOLAS 1974 (as amended) — Article VIII: Amendment Procedure</li>
+    <li>MARPOL 73/78 — Article 16: Amendment Procedure</li>
+    <li><a href="https://www.imo.org/en/OurWork/Safety/Pages/MSC.aspx" target="_blank">IMO — MSC Sessions and Resolutions</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB4.html">QB4 — ISM Code (adopted via MSC Resolution)</a>
+    <a href="../QB7.html">QB7 — GHG/CII (MEPC Resolutions, MARPOL Annex VI amendments)</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p1 · Topic 6 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p1 · T6 · v1.0</span>
+  </div>
+</div>
+</main><!-- /#notes-feed -->
+</div><!-- /.main-layout -->
+
+<!-- PAGE FOOTER -->
+<footer class="page-footer">
+  <p><strong>MIW Engineering Management Notes — Part 1</strong> · Pages 1–25 of 768</p>
+  <p style="margin-top:6px;">Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and updated by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.</p>
+  <p style="margin-top:6px;">This is a free public resource. Subscriber access unlocks Parts 3–31. <a href="https://marineintelligenceweekly.com/SQ/">Subscribe — ₹899</a></p>
+  <p style="margin-top:8px;color:#94a3b8;font-size:11px;">Content is provided for examination preparation purposes only. Always verify regulatory citations against primary IMO instruments at <a href="https://www.imo.org" target="_blank" style="color:#0d9488;">www.imo.org</a>. Marine Intelligence Weekly accepts no liability for exam outcomes.</p>
+  <p style="margin-top:8px;">
+    <a href="https://marineintelligenceweekly.com/meoclass1/notes/">← Notes Index</a> &nbsp;|&nbsp;
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1 Hub</a> &nbsp;|&nbsp;
+    <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
+  </p>
+</footer>
+
+<script>
+// Deep-dive toggle
+function toggleDD(id){
+  const body=document.getElementById(id).querySelector('.deep-dive-body');
+  const btn=document.getElementById(id).querySelector('.deep-dive-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  btn.textContent=(open?'▶':'▼')+' Deep Dive — Full Reference Detail';
+}
+
+// TOC active highlight on scroll
+const tocLinks=document.querySelectorAll('.toc-link[href^="#"]');
+const topics=document.querySelectorAll('.topic-block[id]');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      tocLinks.forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.2});
+topics.forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
