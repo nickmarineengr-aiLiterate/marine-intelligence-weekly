@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Simon Sir Notes — Part 5: Pages 101–125 | Simon Sir Notes | MIW MEO Class 1</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.6;}
+
+/* WATERMARK */
+.watermark-overlay{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;}
+.watermark-overlay svg{width:100%;height:100%;opacity:0.06;}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;background:var(--navy);color:#fff;z-index:100;display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem;border-bottom:3px solid var(--teal);}
+.topbar-logo{font-size:1.3rem;font-weight:800;color:var(--teal);letter-spacing:-0.5px;text-decoration:none;}
+.topbar-sep{color:#475569;font-size:.9rem;}
+.topbar nav{display:flex;gap:1rem;margin-left:auto;}
+.topbar nav a{color:#94a3b8;font-size:.85rem;text-decoration:none;}
+.topbar nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#fff;padding:2.5rem 1.5rem 2rem;border-bottom:4px solid var(--teal);}
+.header-inner{max-width:900px;margin:0 auto;}
+.header-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(13,148,136,.2);border:1px solid var(--teal);border-radius:6px;padding:.3rem .7rem;margin-bottom:1rem;}
+.badge-text{font-size:.75rem;font-weight:700;color:var(--teal);letter-spacing:.05em;text-transform:uppercase;}
+.page-title{font-size:1.9rem;font-weight:800;letter-spacing:-0.5px;margin-bottom:.4rem;}
+.page-sub{color:#94a3b8;font-size:1rem;max-width:600px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.2rem;}
+.hm-item{font-size:.78rem;color:#64748b;display:flex;align-items:center;gap:.4rem;}
+.hm-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);display:inline-block;}
+
+/* CONTROLS */
+.controls-bar{position:sticky;top:52px;background:#fff;border-bottom:1px solid var(--grey-border);padding:.7rem 1rem;z-index:90;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+#search-input{flex:1;min-width:180px;padding:.45rem .8rem;border:1px solid var(--grey-border);border-radius:6px;font-size:.9rem;outline:none;}
+#search-input:focus{border-color:var(--teal);}
+.filter-btn{padding:.35rem .75rem;border:1px solid var(--grey-border);border-radius:20px;background:#fff;font-size:.78rem;cursor:pointer;transition:all .15s;}
+.filter-btn:hover{border-color:var(--teal);color:var(--teal);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{font-size:.8rem;color:var(--grey-text);margin-left:auto;}
+
+/* LAYOUT */
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:2rem;padding:1.5rem 1rem 4rem;}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:110px;height:calc(100vh - 120px);overflow-y:auto;}
+.toc-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--grey-text);margin-bottom:.5rem;}
+.toc-link{display:block;font-size:.8rem;padding:.3rem .5rem;border-left:2px solid transparent;color:var(--grey-text);text-decoration:none;margin-bottom:.15rem;border-radius:0 4px 4px 0;}
+.toc-link:hover{color:var(--teal);background:var(--teal-light);}
+.toc-link.active{color:var(--teal-dark);border-left-color:var(--teal);background:var(--teal-light);font-weight:600;}
+.toc-divider{height:1px;background:var(--grey-border);margin:1rem 0;}
+
+/* NOTES CARDS */
+.section-head{display:flex;justify-content:space-between;align-items:center;padding:1rem 0 .5rem;border-bottom:2px solid var(--grey-border);margin-bottom:1rem;}
+.section-head h2{font-size:1rem;font-weight:700;color:var(--navy);}
+.sec-count{font-size:.75rem;color:#fff;background:var(--teal);padding:.2rem .55rem;border-radius:12px;font-weight:600;}
+
+.note-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:1.2rem;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden;}
+.note-header{display:flex;align-items:flex-start;gap:.8rem;padding:.85rem 1rem;cursor:pointer;user-select:none;}
+.note-header:hover{background:var(--grey-bg);}
+.note-num-badge{min-width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.note-title-wrap{flex:1;min-width:0;}
+.note-title{font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.2rem;}
+.note-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.25rem;}
+.note-tag{font-size:.7rem;padding:.15rem .45rem;border-radius:12px;background:var(--grey-bg);color:var(--grey-text);border:1px solid var(--grey-border);}
+.note-chevron{width:18px;height:18px;stroke:var(--grey-text);transition:transform .2s;flex-shrink:0;margin-top:4px;}
+.note-card.open .note-chevron{transform:rotate(180deg);}
+.note-card.open .note-num-badge{background:var(--teal-dark);}
+
+/* ANSWER BODY */
+.note-body{display:none;padding:1rem 1rem 0;}
+.note-card.open .note-body{display:block;}
+.note-body h4{font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--teal-dark);margin:1rem 0 .3rem;}
+.note-body p{font-family:Georgia,serif;font-size:.9rem;margin-bottom:.7rem;color:var(--ink);}
+.note-body ul,.note-body ol{font-family:Georgia,serif;font-size:.9rem;padding-left:1.4rem;margin-bottom:.8rem;}
+.note-body li{margin-bottom:.35rem;}
+.note-body li strong{color:var(--ink);}
+.note-body .formula{background:var(--grey-bg);border-left:3px solid var(--teal);padding:.5rem .8rem;border-radius:4px;font-family:monospace;font-size:.85rem;margin:.5rem 0 .8rem;}
+.note-body table{width:100%;border-collapse:collapse;margin:.6rem 0 1rem;font-size:.85rem;}
+.note-body th{background:var(--navy);color:#fff;padding:.4rem .6rem;text-align:left;font-size:.78rem;}
+.note-body td{padding:.35rem .6rem;border-bottom:1px solid var(--grey-border);}
+.note-body tr:nth-child(even) td{background:var(--grey-bg);}
+.flowchart{background:#f8fafc;border:1px solid var(--grey-border);border-radius:6px;padding:.8rem;margin:.6rem 0;font-family:monospace;font-size:.8rem;white-space:pre;overflow-x:auto;}
+
+/* REG BOX */
+.reg-box{background:var(--navy);border-radius:8px;padding:.8rem 1rem;margin:1rem 0 .8rem;}
+.reg-box-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:.5rem;}
+.reg-item{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.3rem;}
+.reg-code{font-size:.75rem;font-family:monospace;color:var(--orange);font-weight:700;min-width:130px;flex-shrink:0;}
+.reg-desc{font-size:.78rem;color:#cbd5e1;}
+
+/* SIMON TIP */
+.simon-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:.7rem .9rem;margin:.8rem 0;font-size:.88rem;font-family:Georgia,serif;}
+
+/* FOOTER */
+.note-footer{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1rem;background:var(--grey-bg);border-top:1px solid var(--grey-border);font-size:.75rem;margin-top:.8rem;}
+.correction-link{color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.note-version{color:var(--grey-text);}
+
+/* NO RESULTS */
+#no-results{display:none;text-align:center;padding:3rem 1rem;color:var(--grey-text);}
+
+/* PAGE NAV */
+.page-nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.5rem;background:#fff;border-top:1px solid var(--grey-border);margin-top:2rem;}
+.page-nav a{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border:1px solid var(--grey-border);border-radius:6px;font-size:.85rem;color:var(--teal);text-decoration:none;font-weight:600;}
+.page-nav a:hover{background:var(--teal-light);}
+
+/* PAGE FOOTER */
+.page-footer{background:var(--navy);color:#94a3b8;text-align:center;padding:2rem 1rem;font-size:.82rem;margin-top:3rem;}
+.page-footer .attr{color:#64748b;font-size:.75rem;margin-top:.5rem;}
+
+/* CONTENT PROTECTION */
+body{-webkit-user-select:none;user-select:none;}
+
+@media(max-width:700px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:1.4rem;}
+}
+</style>
+</head>
+<body>
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+
+<!-- Watermark -->
+<div class="watermark-overlay">
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+<text transform="rotate(-35,400,300)" x="50" y="300" font-size="28" fill="#0f172a" font-family="Arial" font-weight="bold" opacity="1">MIW PRIVATE — Nixon Antony — Do Not Redistribute</text>
+<text transform="rotate(-35,400,300)" x="50" y="450" font-size="28" fill="#0f172a" font-family="Arial" font-weight="bold" opacity="1">MIW PRIVATE — Nixon Antony — Do Not Redistribute</text>
+<text transform="rotate(-35,400,300)" x="50" y="150" font-size="28" fill="#0f172a" font-family="Arial" font-weight="bold" opacity="1">MIW PRIVATE — Nixon Antony — Do Not Redistribute</text>
+</svg>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <a class="topbar-logo" href="/meoclass1/">MIW</a>
+  <span class="topbar-sep">|</span>
+  <span style="font-size:.85rem;color:#94a3b8;">Simon Sir Notes</span>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/meoclass1/">MEO Class 1</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </nav>
+</div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="header-inner">
+    <div class="header-badge">
+      <span class="hm-dot"></span>
+      <span class="badge-text">Part 5 of 8 · Subscriber Only</span>
+    </div>
+    <h1 class="page-title">Simon Sir Notes — Part 5: Pages 101–125</h1>
+    <p class="page-sub">Bonjean Curves · GZ Curve · VDR · ME vs MC · Polar Code · LSA Code · FSS Code · FTP Code · Port of Refuge</p>
+    <div class="header-meta">
+      <span class="hm-item"><span class="hm-dot"></span>Pages 101–125 · Vignesh Siva Notes</span>
+      <span class="hm-item"><span class="hm-dot"></span>11 topics covered</span>
+      <span class="hm-item"><span class="hm-dot"></span>Examiner: Simon Sir (Kochi MMD)</span>
+    </div>
+  </div>
+</div>
+
+<!-- Controls -->
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search topics..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
+  <button class="filter-btn" onclick="filterTag('stability',this)">Stability</button>
+  <button class="filter-btn" onclick="filterTag('fire',this)">Fire / CO₂</button>
+  <button class="filter-btn" onclick="filterTag('marpol',this)">MARPOL</button>
+  <button class="filter-btn" onclick="filterTag('solas',this)">SOLAS</button>
+  <button class="filter-btn" onclick="filterTag('machinery',this)">Machinery</button>
+  <button class="filter-btn" onclick="filterTag('survey',this)">Surveys</button>
+  <span id="q-count-label">Showing all</span>
+</div>
+
+<!-- Main Layout -->
+<div class="main-layout">
+  <aside class="sidebar">
+    <div class="toc-title">Contents</div>
+    <a class="toc-link" href="#sec-stability">⚖ Stability & Ship Design</a>
+<a class="toc-link" href="#n1">1. Bonjean Curves</a>
+<a class="toc-link" href="#n2">2. GZ Curve & Dynamic Stability</a>
+<div class="toc-divider"></div>
+<a class="toc-link" href="#sec-machinery">🔧 Machinery & Equipment</a>
+<a class="toc-link" href="#n3">3. Smart Sensors & IOPP</a>
+<a class="toc-link" href="#n4">4. VDR & Safety Equip Cert</a>
+<a class="toc-link" href="#n5">5. ARPA & Flag State Duties</a>
+<a class="toc-link" href="#n6">6. Coastal State & DG DOC</a>
+<a class="toc-link" href="#n7">7. ME vs MC Engine</a>
+<div class="toc-divider"></div>
+<a class="toc-link" href="#sec-codes">🧭 Refuge, Polar & Safety Codes</a>
+<a class="toc-link" href="#n8">8. Port of Refuge</a>
+<a class="toc-link" href="#n9">9. Polar Code</a>
+<a class="toc-link" href="#n10">10. LSA Code & Amendments</a>
+<a class="toc-link" href="#n11">11. FSS Code & FTP Code</a>
+
+  </aside>
+  <main id="note-feed">
+    <!-- SECTION: Stability & Ship Design -->
+    <div class="section-head" id="sec-stability">
+      <h2>⚖ Stability & Ship Design</h2>
+      <span class="sec-count">4 topics</span>
+    </div>
+
+    <div class="note-card" id="n1" data-tags="stability machinery">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">1</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Bonjean Curves — Definition, Uses & Applications</div>
+          <div class="note-tags"><span class="note-tag">Stability</span><span class="note-tag">Naval Arch</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Definition</h4>
+        <p>A <strong>Bonjean curve</strong> is a graph that plots the relationship between the area of a ship's transverse cross-section and its draft. A separate curve is drawn for each transverse station along the ship's length.</p>
+        <h4>Primary Uses</h4>
+        <ul>
+          <li><strong>Displacement volume:</strong> Calculate the ship's total displacement volume at any waterline.</li>
+          <li><strong>LCB:</strong> Determine the longitudinal centre of buoyancy.</li>
+          <li><strong>Block coefficient:</strong> Compute the displacement block coefficient.</li>
+          <li><strong>Centre of flotation:</strong> Find the longitudinal centre of the waterplane area.</li>
+        </ul>
+        <h4>Structural & Launching Calculations</h4>
+        <ul>
+          <li>Calculate the <strong>distribution of the buoyancy force</strong> during ship launching — critical as the stern lifts before the bow clears the slipway.</li>
+          <li>Determine <strong>longitudinal bending moments and shear forces</strong> for structural strength calculations in non-uniform loading conditions.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IS Code 2008</span><span class="reg-desc">IMO Intact Stability Code — stability criteria that Bonjean-derived hydrostatics must satisfy</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1 / Pt B</span><span class="reg-desc">Subdivision and stability — hydrostatic data requirements for passenger and cargo ships</span></div>
+          <div class="reg-item"><span class="reg-code">IACS UR S1</span><span class="reg-desc">Longitudinal strength standard — uses buoyancy distribution data derived from Bonjean curves</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is a Bonjean curve and where do you use it?" Key answer: <em>graph of section area vs. draft at each station; used for displacement, LCB, and launching calculations.</em> Simon Sir may then ask how launching calculations differ — emphasise the dynamic buoyancy shift as the stern lifts.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p5, N1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p5 · N1 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n2" data-tags="stability">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">2</div>
+        <div class="note-title-wrap">
+          <div class="note-title">GZ Curve — Statical & Dynamic Stability (Page 102)</div>
+          <div class="note-tags"><span class="note-tag">Stability</span><span class="note-tag">IS Code</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>The GZ Curve (Curve of Statical Stability)</h4>
+        <p>Plots the <strong>righting lever (GZ)</strong> against angle of heel (θ) for a specific displacement (Δ) and KG. Three key features:</p>
+        <ul>
+          <li><strong>Range of Stability:</strong> Angular range over which GZ is positive.</li>
+          <li><strong>Angle of Vanishing Stability:</strong> Angle at which GZ returns to zero — beyond this, vessel capsizes.</li>
+          <li><strong>Point of Inflection (Contraflexure):</strong> Where the curve changes from concave to convex — occurs at deck edge immersion because the waterplane area begins to decrease.</li>
+        </ul>
+        <h4>Key Stability Formulas</h4>
+        <p class="formula">Small angles (θ ≤ 10–12°):  GZ = GM × sin θ</p>
+        <p class="formula">Wall-Sided Formula (large angles):  GZ = (GM + ½ BM tan²θ) × sin θ</p>
+        <p class="formula">Approximate GM from curve slope:  GM = GZ_θ / θ  (at θ = 1 radian = 57.3°)</p>
+        <h4>Dynamic Stability</h4>
+        <ul>
+          <li><strong>Definition:</strong> Total work done in inclining the vessel to a specific angle of heel.</li>
+          <li><strong>Calculation:</strong> Area under the GZ curve up to that angle — expressed in <strong>tonne-metre-radians</strong>.</li>
+          <li>Maximum energy absorption occurs at the angle of vanishing stability; beyond this, the vessel cannot right itself.</li>
+        </ul>
+        <h4>IS Code 2008 Minimum Criteria (reference)</h4>
+        <ul>
+          <li>Area under GZ curve: <strong>≥ 0.055 m·rad</strong> (to 30°); <strong>≥ 0.090 m·rad</strong> (to 40° or flooding angle); <strong>≥ 0.030 m·rad</strong> between 30° and 40°.</li>
+          <li>GZ at 30°: <strong>≥ 0.20 m</strong>; Initial GM: <strong>≥ 0.15 m</strong>.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IS Code 2008</span><span class="reg-desc">IMO Resolution MSC.267(85) — mandatory intact stability criteria for all ship types</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg 5</span><span class="reg-desc">Requires stability information booklet and inclining experiment approval</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg 22</span><span class="reg-desc">Damage stability — residual GZ requirements after flooding</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "Draw the GZ curve and explain the features." Draw axes clearly, mark the range of stability, point of inflection, max GZ, and angle of vanishing stability. He may ask: "What is the difference between statical and dynamic stability?" — Statical = GZ at a fixed angle; Dynamic = area under the curve (energy absorbed).</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p5, N2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p5 · N2 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: Machinery & Navigation Equipment -->
+    <div class="section-head" id="sec-machinery">
+      <h2>🔧 Machinery, Equipment & Certificates</h2>
+      <span class="sec-count">5 topics</span>
+    </div>
+
+    <div class="note-card" id="n3" data-tags="machinery solas marpol">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">3</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Smart Sensors & IOPP Certificate Supplements (Page 103)</div>
+          <div class="note-tags"><span class="note-tag">Machinery</span><span class="note-tag">MARPOL</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Smart Sensors in the Engine Room</h4>
+        <p><strong>Definition:</strong> Advanced instruments with integrated microprocessors that <em>process and communicate</em> data rather than merely transmit raw signals. They act as "sensors with a brain."</p>
+        <ul>
+          <li><strong>IoT integration:</strong> Used in predictive maintenance frameworks — sensors detect early bearing wear, temperature deviations, and vibration anomalies.</li>
+          <li><strong>Applications:</strong> Fuel efficiency optimisation, emission control (NOx/SOx monitoring), automated alarm management, UMS (Unattended Machinery Space) operation.</li>
+        </ul>
+        <h4>IOPP Certificate Supplements (MARPOL Annex I)</h4>
+        <ul>
+          <li><strong>Form A:</strong> Supplement for ships <em>other than oil tankers</em> — records bilge water systems, OWS, 15 ppm alarm, ORB Part I.</li>
+          <li><strong>Form B:</strong> Supplement for <em>oil tankers</em> — records additional crude oil washing, inert gas system, SBT/CBT arrangements, COW.</li>
+          <li>Must be <strong>permanently attached to the IOPP Certificate</strong> — guides PSC surveyors during inspections.</li>
+        </ul>
+        <h4>Key Contents of IOPP Supplement</h4>
+        <ul>
+          <li>Ship particulars: Name, Port of Registry, IMO number, GT.</li>
+          <li>OWS configuration and 15 ppm alarm details.</li>
+          <li>Sludge tank, bilge tank, and waste oil tank volumes and locations.</li>
+          <li>Standard Discharge Connection (SDC) specifications.</li>
+          <li>SOPEP (Shipboard Oil Pollution Emergency Plan) status.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex I / Reg 14</span><span class="reg-desc">Surveys — requirements for IOPP certificate survey and endorsement</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex I / Reg 38</span><span class="reg-desc">Form of IOPP Certificate and Supplement (Appendix II) — Form A and Form B</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex I / Reg 15</span><span class="reg-desc">Control of discharge of oil — 15 ppm bilge water discharge standard</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is the difference between Form A and Form B of the IOPP supplement?" Form A = non-tankers; Form B = oil tankers. He may also ask about smart sensors — emphasise IoT + predictive maintenance + UMS context for container vessels.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p5, N3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p5 · N3 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n4" data-tags="solas lsa survey">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">4</div>
+        <div class="note-title-wrap">
+          <div class="note-title">VDR, Safety Equipment Certificate & Equipment Number (Pages 103–105)</div>
+          <div class="note-tags"><span class="note-tag">SOLAS</span><span class="note-tag">LSA</span><span class="note-tag">Survey</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Safety Equipment Certificate — Supplement Form E</h4>
+        <p>Official addendum to the Cargo Ship Safety Equipment Certificate. Key contents:</p>
+        <ul>
+          <li>LSA details: lifeboat/liferaft types and capacities, rescue boat specs, lifebuoy/lifejacket/immersion suit inventory, SARTs and EPIRBs.</li>
+          <li>Navigation equipment: magnetic compass, gyrocompass, ECDIS (with backup), radar units, LRIT, VDR/S-VDR, echo sounder.</li>
+        </ul>
+        <h4>Equipment Number (EN)</h4>
+        <p>A <strong>dimensionless technical parameter</strong> used to determine the mandatory size, weight, and quantity of anchors, chain cables, mooring lines, and towing lines for new ship installations.</p>
+        <ul>
+          <li>Found on the classification society's portal or in the <em>Equipment Number Calculation</em> document within the approved Towing and Mooring Arrangement Plan.</li>
+        </ul>
+        <h4>Voyage Data Recorder (VDR) — SOLAS Chapter V Reg 20</h4>
+        <p>Maritime equivalent of an aircraft "black box." Mandatory on cargo ships ≥ 3,000 GT built on or after 1 July 2002.</p>
+        <ul>
+          <li><strong>Data recorded:</strong> Date/time, GPS position, speed, heading, bridge audio, radar/AIS captures, echo sounder, engine orders, rudder commands, wind, watertight door status.</li>
+          <li><strong>Primary recording:</strong> Continuous loop covering <strong>at least 48 hours</strong> — older data overwritten.</li>
+          <li><strong>Protected capsule:</strong> Retains at least <strong>12 hours</strong> of data; withstands fire, impact, and deep-sea pressure.</li>
+          <li><strong>Long-Term Recording Medium:</strong> Accessible bridge location; retains at least <strong>30 days (720 hours)</strong>.</li>
+        </ul>
+        <h4>VDR Capsule Types</h4>
+        <ul>
+          <li><strong>Fixed Capsule:</strong> Hardened steel; 48-hour loop; 2-year data retention; fitted with ULB (Underwater Locating Beacon).</li>
+          <li><strong>Float-Free Capsule:</strong> HRU + EPIRB integrated; 48-hour loop; 6-month retention.</li>
+          <li><strong>Long-Term Recording Medium:</strong> Bridge accessible; 30-day data history.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS V / Reg 20</span><span class="reg-desc">VDR requirements — mandatory for cargo ships ≥ 3,000 GT; S-VDR for existing ships</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.333(90)</span><span class="reg-desc">Performance standards for VDR — data parameters, capsule specifications, ULB</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS III / Reg 4</span><span class="reg-desc">Surveys of life-saving appliances — Safety Equipment Certificate survey requirements</span></div>
+          <div class="reg-item"><span class="reg-code">IACS UR A1</span><span class="reg-desc">Equipment number — anchor and mooring equipment determination criteria</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "How long does a VDR retain data?" — Give all three: 48 hours (primary loop), 12 hours (protected capsule), 30 days (long-term medium). He may also ask about the ULB — it transmits a 37.5 kHz signal to aid capsule location after sinking.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p5, N4, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p5 · N4 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n5" data-tags="solas survey machinery">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">5</div>
+        <div class="note-title-wrap">
+          <div class="note-title">ARPA, Suez Canal Tonnage & Flag State Duties (Pages 106–107)</div>
+          <div class="note-tags"><span class="note-tag">SOLAS</span><span class="note-tag">Navigation</span><span class="note-tag">UNCLOS</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>ARPA (Automatic Radar Plotting Aid)</h4>
+        <p>An automated tracking system integrated into the vessel's radar that automatically processes targets and calculates their true course, speed, CPA (Closest Point of Approach), and TCPA (Time to CPA). Replaces manual plotting to mitigate collision risks.</p>
+        <h4>Suez Canal Net Tonnage (SCNT)</h4>
+        <p>Derived from the historical Moorsom System's Net Registered Tonnage (NRT) with modifications specific to Suez Canal transit authorities. All canal tariffs, pilotage fees, and dues are based on the <strong>Suez Canal Special Tonnage Certificate</strong>, issued by recognized classification societies.</p>
+        <h4>Flag State Duties (UNCLOS Article 94)</h4>
+        <ul>
+          <li>Effectively exercise jurisdiction and administrative, technical, and social control over ships flying its flag.</li>
+          <li>Maintain a <strong>national ship register</strong>.</li>
+          <li>Ensure safety at sea regarding structural construction, equipment standards, and seaworthiness.</li>
+          <li>Safe manning, labour conditions, and crew training in accordance with STCW.</li>
+          <li>Regular structural surveys by qualified surveyors; ensure navigational charts and equipment meet safety criteria.</li>
+          <li>Verify Master, officers, and crew hold appropriate qualifications and are present in required numbers.</li>
+          <li>Ensure crew is conversant with SOLAS, COLREGs, and MARPOL requirements.</li>
+          <li>Conduct official <strong>marine casualty investigations</strong> involving their flag vessels on the high seas when loss of life, serious injury, or major environmental damage occurs.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">UNCLOS Art. 94</span><span class="reg-desc">Duties of the Flag State — exclusive jurisdiction and control over ships on the high seas</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS V / Reg 19</span><span class="reg-desc">Carriage requirements for navigational systems including ARPA</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.116(73)</span><span class="reg-desc">Revised performance standards for gyrocompasses (including radar bearing repeater integration)</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What are the Flag State's duties under UNCLOS?" — State UNCLOS Article 94 clearly. Key points: maintain register, survey ships, verify STCW compliance, investigate casualties. He may link this to Port State Control — PSC inspects what Flag State is responsible to ensure.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p5, N5, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p5 · N5 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n6" data-tags="solas marpol machinery">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">6</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Coastal State Rights, DG DOC & P&I Club Correspondent (Pages 108–109)</div>
+          <div class="note-tags"><span class="note-tag">UNCLOS</span><span class="note-tag">SOLAS</span><span class="note-tag">Commercial</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Rights and Duties of a Coastal State</h4>
+        <ul>
+          <li>Regulate marine traffic and enforce navigational safety zones.</li>
+          <li>Maintain visual/electronic navigational aids and offshore installations.</li>
+          <li>Enforce protection over subsea cables and pipelines.</li>
+          <li>Conserve living marine resources within EEZ.</li>
+          <li>Preserve coastal environment — prevent, reduce, and control marine pollution.</li>
+          <li>Issue hydrographic surveys and meteorological warnings.</li>
+          <li>Enforce customs, fiscal, immigration, and sanitary laws <strong>without blocking innocent passage</strong> of foreign vessels.</li>
+        </ul>
+        <h4>Dangerous Goods Document of Compliance (DG DOC)</h4>
+        <p>Governed under <strong>SOLAS Chapter II-2 Reg 19</strong> and Chapter VII. Confirms vessel's construction and machinery comply with requirements for carrying dangerous goods.</p>
+        <ul>
+          <li><strong>Schedule 1:</strong> Matrix of DG classes approved for carriage and permitted stowage locations.</li>
+          <li><strong>Schedule 2:</strong> Physical/structural requirements the vessel must maintain.</li>
+          <li><strong>Validity:</strong> Maximum <strong>5 years</strong>; must not extend beyond the Safety Construction Certificate.</li>
+        </ul>
+        <h4>Role of a P&I Correspondent</h4>
+        <p>Local on-scene representative for P&I Clubs — the "eyes and ears" at each port.</p>
+        <ul>
+          <li>24/7 assistance during maritime incidents, collisions, structural failures, emergencies.</li>
+          <li>Handle local claims: crew injuries, repatriation, cargo damage, oil pollution.</li>
+          <li>Coordinate investigations and gather legal evidence.</li>
+          <li>Provide local maritime law and customs expertise.</li>
+          <li>Primary communication link between P&I Club HQ and shipowner/Master.</li>
+          <li>Appoint local legal representation for court proceedings.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-2 / Reg 19</span><span class="reg-desc">Special requirements for ships carrying dangerous goods — DG DOC requirements</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS VII / Ch A</span><span class="reg-desc">Carriage of dangerous goods in packaged form — IMDG Code compliance</span></div>
+          <div class="reg-item"><span class="reg-code">UNCLOS Art. 17–26</span><span class="reg-desc">Right of innocent passage and coastal state enforcement rights in territorial sea</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is a DG Doc?" — Emphasise it's issued for <em>5 years</em> and covers two schedules: what you can carry and where you can carry it. P&I Correspondent is less likely from Simon, but Rajappan or Nair may ask it in a cargo/commercial context.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p5, N6, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p5 · N6 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n7" data-tags="machinery">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">7</div>
+        <div class="note-title-wrap">
+          <div class="note-title">ME vs MC Engine — Comparison & Components Omitted (Pages 109–110)</div>
+          <div class="note-tags"><span class="note-tag">Machinery</span><span class="note-tag">2-Stroke ME</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Technical Design Comparison</h4>
+        <table>
+          <tr><th>System Component</th><th>MC Engine (Mechanical)</th><th>ME Engine (Electronic)</th></tr>
+          <tr><td>Timing Control</td><td>Mechanical chain drive & camshaft</td><td>Hydraulic Power Supply (HPS) + ECU</td></tr>
+          <tr><td>Fuel Injection</td><td>Mechanical fuel pumps & roller guides</td><td>Electronically regulated fuel pressure boosters</td></tr>
+          <tr><td>Exhaust Valves</td><td>Mechanical cam actuating profiles</td><td>Electronic actuation — FIVA / ELFI valves</td></tr>
+          <tr><td>Starting Air</td><td>Mechanical starting air distributor</td><td>Electronically controlled solenoid starting valves</td></tr>
+          <tr><td>Speed Governor</td><td>Mechanical / hydraulic governor</td><td>Integrated digital governor in ECU software</td></tr>
+          <tr><td>Control Stand</td><td>Local mechanical maneuvering stand</td><td>Electronic Local Operating Panel (ELOP)</td></tr>
+        </table>
+        <h4>Operational Advantages of ME over MC</h4>
+        <ul>
+          <li><strong>Efficiency:</strong> Precise fuel injection timing and variable exhaust valve operation → lower SFOC across all load profiles.</li>
+          <li><strong>Flexibility:</strong> Injection parameters adjustable dynamically for varying fuel qualities (VLSFO, biofuels, methanol) — not possible with fixed mechanical cams.</li>
+          <li><strong>Emissions:</strong> Precise combustion control reduces smoke and NOx compared to MC engines.</li>
+        </ul>
+        <h4>Components Eliminated in ME Engine (vs MC)</h4>
+        <ul>
+          <li>Chain drive, chain wheel frame, camshaft.</li>
+          <li>Fuel pump cam and roller guide.</li>
+          <li>Exhaust valve cam, fuel pump actuator.</li>
+          <li>Starting air distributor, mechanical governor, mechanical control stand.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">NOx Technical Code 2008</span><span class="reg-desc">Tier II/III NOx compliance — ME electronic control enables optimised combustion to meet limits</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex VI / Reg 13</span><span class="reg-desc">NOx emission limits — Tier I/II/III thresholds by rpm and build date</span></div>
+          <div class="reg-item"><span class="reg-code">IRS / MAN B&W Rules</span><span class="reg-desc">Maker's classification rules for ME engine type approval and maintenance intervals</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir's favourite question:</strong> "Explain the difference between an ME and MC engine — what is eliminated?" List the 9 components eliminated. Then explain the FIVA (Fuel Injection & Valve Actuation) valve — this is the key component that replaces the camshaft in ME engines. He may ask: "What happens if the hydraulic oil pressure to the HPS fails?" — Safety system activates; engine goes to slow/stop; backup manual ELOP available.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p5, N7, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p5 · N7 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: Polar Code & Safety Codes -->
+    <div class="section-head" id="sec-codes">
+      <h2>🧭 Port of Refuge, Polar Code & Safety Codes</h2>
+      <span class="sec-count">4 topics</span>
+    </div>
+
+    <div class="note-card" id="n8" data-tags="solas ism">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">8</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Port / Place of Refuge — Protocol & Request Procedure (Pages 110–111)</div>
+          <div class="note-tags"><span class="note-tag">SOLAS</span><span class="note-tag">ISM</span><span class="note-tag">Emergency</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Definition</h4>
+        <p>A <strong>Port/Place of Refuge (PoR)</strong> is a port or sheltered coastal anchorage chosen by a vessel in distress to stabilise her structural condition, ensure crew safety, or prevent environmental pollution hazards.</p>
+        <h4>Triggers for Seeking PoR</h4>
+        <ul>
+          <li>Critical machinery breakdown, fire/explosion, severe structural damage.</li>
+          <li>Cargo shifting, extreme weather, hull damage, progressive flooding.</li>
+        </ul>
+        <h4>Formal Request Procedure — Form A submitted to:</h4>
+        <ul>
+          <li>Coastal State Competent Authority.</li>
+          <li>Flag State administration.</li>
+          <li>Vessel's insurance company (P&I Club).</li>
+          <li>Classification Society.</li>
+        </ul>
+        <p>The request includes: ship particulars, nature of distress (fire/machinery breakdown/pollution), crew and passenger count, safety measures taken, and pollution/environmental risks.</p>
+        <h4>Competent Authority Assessment — Factors Considered</h4>
+        <ul>
+          <li>Threat to life onboard and risk to public safety.</li>
+          <li>Possibility of oil spill or hazardous cargo pollution.</li>
+          <li>Fire or explosion risk; impact on nearby communities.</li>
+          <li>Validity of the vessel's insurance (P&I Club cover).</li>
+        </ul>
+        <div class="flowchart">Master requests PoR
+    │
+    ▼
+Form A submitted to Coastal State / Flag / P&I / Class
+    │
+    ▼
+Competent Authority Assessment
+    │
+ ┌──┴──┐
+ ▼     ▼
+Approved  Rejected
+ │
+ ▼
+Coastal State permits entry</div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IMO Res. A.949(23)</span><span class="reg-desc">Guidelines on places of refuge for ships in need of assistance</span></div>
+          <div class="reg-item"><span class="reg-code">IMO MSC-MEPC.3/Circ.3</span><span class="reg-desc">Revised guidance on the role of the Competent Authority in evaluating places of refuge</span></div>
+          <div class="reg-item"><span class="reg-code">UNCLOS Art. 18</span><span class="reg-desc">Innocent passage — requires coastal states to allow passage of ships in distress</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code Sec. 8</span><span class="reg-desc">Emergency preparedness — DPA and company must be notified in emergency situations</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is a port of refuge and what is the procedure?" Give the 4-party notification list: Coastal Authority, Flag State, P&I Club, Classification Society. He may ask: "Who decides if refuge is granted?" — the Coastal State Competent Authority, not the Master or the company.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p5, N8, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p5 · N8 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n9" data-tags="solas survey ism">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">9</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Polar Code — Requirements, Certificate & CE Preparations (Pages 111–113)</div>
+          <div class="note-tags"><span class="note-tag">SOLAS</span><span class="note-tag">Survey</span><span class="note-tag">Polar</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Definition & Scope</h4>
+        <p>The <strong>International Code for Ships Operating in Polar Waters (Polar Code)</strong> — mandatory under SOLAS XIV and MARPOL Annexes I, II, IV, V, VI. Covers Arctic and Antarctic waters.</p>
+        <ul>
+          <li>Covers: ship design, construction, equipment, operational procedures, training, SAR, and protection of the polar ecosystem.</li>
+        </ul>
+        <h4>Hazards in Polar Waters</h4>
+        <ul>
+          <li>Severe weather; poor/unreliable charts; difficult rescue and clean-up operations.</li>
+          <li>Machinery affected by extreme low temperatures; increased hull and propeller loading from ice.</li>
+        </ul>
+        <h4>Ship Categories (Polar Ship Certificate)</h4>
+        <ul>
+          <li><strong>Category A:</strong> Designed for heavy multi-year ice; can operate year-round in polar conditions.</li>
+          <li><strong>Category B:</strong> Less robust — not capable in severe ice; summer operation only.</li>
+          <li><strong>Category C:</strong> Designed to operate in open water or low ice concentration.</li>
+        </ul>
+        <h4>Requirements for Issue of Polar Ship Certificate</h4>
+        <ul>
+          <li><strong>Risk Assessment:</strong> Assessment of anticipated operating conditions and polar hazards.</li>
+          <li><strong>PWOM (Polar Water Operational Manual):</strong> Covers ship capabilities, limitations, decision-making, and emergency procedures for owner/operator/Master/crew.</li>
+          <li><strong>Survey:</strong> Class survey to verify structural and equipment compliance.</li>
+        </ul>
+        <h4>CE Preparations Before Entering Polar Waters (key items)</h4>
+        <ul>
+          <li>Drain fire line and freshwater deck lines to prevent freezing.</li>
+          <li>Check anchor wash valves; start hydraulic pumps well before operation; run winches slowly to warm hydraulic oil.</li>
+          <li>Check accommodation heating coils; verify lifeboat coolant contains antifreeze.</li>
+          <li>Ensure fuel tanks contain <strong>winter-grade fuel</strong>; check pour point of lubricating oils.</li>
+          <li>Verify <strong>stern tube oil specification</strong> for low-temperature operation.</li>
+          <li>Plan alternate sea suction arrangements (change to low suction when ice risk increases).</li>
+          <li>Spread rock salt at gangways, ER entrances, emergency exits, skylight areas, mooring stations.</li>
+          <li>Check bridge window heaters; verify freshwater cooling systems contain antifreeze.</li>
+          <li>Provide adequate winter PPE: gloves, parka, insulated boots, ski goggles.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS XIV</span><span class="reg-desc">Safety measures for ships operating in polar waters — Polar Code mandatory under this chapter</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annexes I/II/IV/V/VI</span><span class="reg-desc">Environmental protection requirements for polar waters (HFO ban, garbage, discharge standards)</span></div>
+          <div class="reg-item"><span class="reg-code">STCW Reg V/4</span><span class="reg-desc">Training and certification for officers on ships operating in polar waters</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex I / Reg 43A</span><span class="reg-desc">Heavy Fuel Oil ban in Arctic waters — general prohibition from 1 July 2024</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What are the CE's preparations before entering polar waters?" — List at minimum 10 from the list above. Critical ones: drain lines, antifreeze in lifeboat/cooling systems, winter-grade fuel, alternate sea suction, stern tube oil check. He may also ask: "What are the three categories of polar ships?"</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p5, N9, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p5 · N9 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n10" data-tags="lsa solas fire">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">10</div>
+        <div class="note-title-wrap">
+          <div class="note-title">LSA Code — Chapters, 2024 Amendments & Lowering Speeds (Pages 113–114)</div>
+          <div class="note-tags"><span class="note-tag">LSA</span><span class="note-tag">SOLAS</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>LSA Code — 7 Chapters</h4>
+        <table>
+          <tr><th>Chapter</th><th>Subject</th></tr>
+          <tr><td>1</td><td>General</td></tr>
+          <tr><td>2</td><td>Personal Life-Saving Appliances</td></tr>
+          <tr><td>3</td><td>Visual Signals</td></tr>
+          <tr><td>4</td><td>Survival Craft</td></tr>
+          <tr><td>5</td><td>Rescue Boats</td></tr>
+          <tr><td>6</td><td>Launching and Embarkation Appliances</td></tr>
+          <tr><td>7</td><td>Other Life-Saving Appliances</td></tr>
+        </table>
+        <h4>LSA Code Amendments — Effective 1 January 2024</h4>
+        <ul>
+          <li><strong>Rescue Boat Launching:</strong> Stored mechanical power may be waived if one person can recover the rescue boat using manual crank handles, provided crank force ≤ <strong>160 N</strong>.</li>
+          <li><strong>Lifeboats with two independent propulsion systems or free-fall lifeboats:</strong> Adequate buoyancy arrangements must be provided.</li>
+        </ul>
+        <h4>LSA Code Amendments — Effective 1 January 2026</h4>
+        <ul>
+          <li><strong>Single Fall Hook System:</strong> Shall be designed so it cannot support any load unless completely reset; prevents accidental release during recovery.</li>
+        </ul>
+        <h4>Lifeboat Lowering Speeds</h4>
+        <p class="formula">Maximum lowering speed: 1.3 m/s (upper safety limit)</p>
+        <p class="formula">Minimum lowering speed: V = 0.4 + 0.02H
+Where V = speed (m/s); H = height from davit head to waterline (m)</p>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">LSA Code (MSC.48(66))</span><span class="reg-desc">International Life-Saving Appliance Code — mandatory under SOLAS III</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS III / Reg 6</span><span class="reg-desc">Maintenance, thorough examination, operational testing, overhaul and repair of LSA</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.471(101)</span><span class="reg-desc">2019 LSA Code amendments — single fall hook systems and lifeboat engine requirements</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.520(106)</span><span class="reg-desc">Amendments to SOLAS Chapter II-2 (fire protection) — in force 1 January 2026</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "How many chapters in the LSA Code?" — Answer: <strong>7 chapters</strong>. He may ask the lowering speed formula — give both maximum (1.3 m/s) and the minimum formula. The 2024 and 2026 amendments are current exam hot topics — know the 160 N crank force limit and the single-fall hook requirement.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p5, N10, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p5 · N10 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n11" data-tags="fire solas">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">11</div>
+        <div class="note-title-wrap">
+          <div class="note-title">FSS Code & FTP Code — Structure & Test Procedures (Page 115–116)</div>
+          <div class="note-tags"><span class="note-tag">Fire</span><span class="note-tag">SOLAS</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>FSS Code — International Code for Fire Safety Systems (2000)</h4>
+        <p>Mandatory under <strong>SOLAS Chapter II-2</strong>. Provides international standards for fire safety systems and fire-fighting equipment. Contains <strong>15 Chapters</strong>:</p>
+        <table>
+          <tr><th>Ch.</th><th>Subject</th></tr>
+          <tr><td>1</td><td>General</td></tr>
+          <tr><td>2</td><td>International Shore Connection</td></tr>
+          <tr><td>3</td><td>Personal Protection</td></tr>
+          <tr><td>4</td><td>Fire Extinguishers</td></tr>
+          <tr><td>5</td><td>Fixed Gas Fire Extinguishing Systems (CO₂)</td></tr>
+          <tr><td>6</td><td>Fixed Foam Systems</td></tr>
+          <tr><td>7</td><td>Fixed Pressure Water-Spray & Water Mist Systems</td></tr>
+          <tr><td>8</td><td>Automatic Sprinkler, Detection & Alarm Systems</td></tr>
+          <tr><td>9</td><td>Fixed Fire Detection & Alarm Systems</td></tr>
+          <tr><td>10</td><td>Sample Extraction Smoke Detection</td></tr>
+          <tr><td>11</td><td>Low Location Lighting</td></tr>
+          <tr><td>12</td><td>Fixed Emergency Fire Pumps</td></tr>
+          <tr><td>13</td><td>Means of Escape</td></tr>
+          <tr><td>14</td><td>Fixed Deck Foam Systems</td></tr>
+          <tr><td>15</td><td>Inert Gas Systems</td></tr>
+        </table>
+        <h4>FTP Code — International Code for Fire Test Procedures (2010)</h4>
+        <p>Applicable under <strong>SOLAS Chapter II-2</strong>. Provides laboratory testing, type approval, and fire test procedures for materials and products installed onboard ships.</p>
+        <ul>
+          <li><strong>Non-Combustibility Test:</strong> Material behaviour under high temperatures.</li>
+          <li><strong>Smoke and Toxicity Test:</strong> Smoke density and toxic gas generation.</li>
+          <li><strong>Class Divisions Test:</strong> Fire testing for "A", "B", and "F" class structural divisions.</li>
+          <li><strong>Control Systems Test:</strong> Fire testing for fire door control systems.</li>
+          <li><strong>Surface Flammability Test:</strong> Surface flammability properties.</li>
+          <li><strong>Primary Deck Coverings:</strong> Testing deck covering materials.</li>
+          <li><strong>Textiles and Films:</strong> Upholstered furniture, bedding, vertically suspended textiles.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">FSS Code (MSC.98(73))</span><span class="reg-desc">International Fire Safety Systems Code — mandatory under SOLAS II-2</span></div>
+          <div class="reg-item"><span class="reg-code">FTP Code (MSC.307(88))</span><span class="reg-desc">International Code for Application of Fire Test Procedures — mandatory under SOLAS II-2</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-2 / Reg 17</span><span class="reg-desc">Alternative design and arrangements for fire protection — must meet FSS/FTP Code equivalency</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "How many chapters in the FSS Code?" — Answer: <strong>15 chapters</strong>. He may then ask which chapter covers CO₂ fixed systems — <strong>Chapter 5</strong>. For FTP Code, key question: "What is the FTP Code used for?" — Type approval testing of materials installed onboard. Know the "A", "B", "F" class division fire test.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p5, N11, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p5 · N11 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="no-results"><p>No topics found matching your search.</p></div>
+  </main>
+</div>
+
+<!-- Page Nav -->
+<div class="page-nav">
+  <a href="/meoclass1/simon-notes-p4.html">← Part 4 (pp. 76–101)</a>
+  <a href="/meoclass1/simon-notes-p6.html">Part 6 (pp. 126–150) →</a>
+</div>
+
+<!-- Footer -->
+<div class="page-footer">
+  <div>Originally prepared by Vignesh Siva. Transcribed, expanded and updated by Nixon Antony, 2/E, Maersk A/S.</div>
+  <div class="attr">© Marine Intelligence Weekly · Subscriber content — Do not share · <a href="mailto:contactus@marineintelligenceweekly.com" style="color:var(--teal);">contactus@marineintelligenceweekly.com</a></div>
+</div>
+
+<script>
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+
+function toggleCard(h){h.closest('.note-card').classList.toggle('open');}
+
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.note-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.note-card[id]').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

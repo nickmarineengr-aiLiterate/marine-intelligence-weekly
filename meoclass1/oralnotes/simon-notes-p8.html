@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Simon Sir Notes — Part 8 | Simon Sir Notes | MIW MEO Class 1</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.6;}
+
+/* WATERMARK */
+.watermark-overlay{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;}
+.watermark-overlay svg{width:100%;height:100%;opacity:0.06;}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;background:var(--navy);color:#fff;z-index:100;display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem;border-bottom:3px solid var(--teal);}
+.topbar-logo{font-size:1.3rem;font-weight:800;color:var(--teal);letter-spacing:-0.5px;text-decoration:none;}
+.topbar-sep{color:#475569;font-size:.9rem;}
+.topbar nav{display:flex;gap:1rem;margin-left:auto;}
+.topbar nav a{color:#94a3b8;font-size:.85rem;text-decoration:none;}
+.topbar nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#fff;padding:2.5rem 1.5rem 2rem;border-bottom:4px solid var(--teal);}
+.header-inner{max-width:900px;margin:0 auto;}
+.header-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(13,148,136,.2);border:1px solid var(--teal);border-radius:6px;padding:.3rem .7rem;margin-bottom:1rem;}
+.badge-text{font-size:.75rem;font-weight:700;color:var(--teal);letter-spacing:.05em;text-transform:uppercase;}
+.page-title{font-size:1.9rem;font-weight:800;letter-spacing:-0.5px;margin-bottom:.4rem;}
+.page-sub{color:#94a3b8;font-size:1rem;max-width:600px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.2rem;}
+.hm-item{font-size:.78rem;color:#64748b;display:flex;align-items:center;gap:.4rem;}
+.hm-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);display:inline-block;}
+
+/* CONTROLS */
+.controls-bar{position:sticky;top:52px;background:#fff;border-bottom:1px solid var(--grey-border);padding:.7rem 1rem;z-index:90;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+#search-input{flex:1;min-width:180px;padding:.45rem .8rem;border:1px solid var(--grey-border);border-radius:6px;font-size:.9rem;outline:none;}
+#search-input:focus{border-color:var(--teal);}
+.filter-btn{padding:.35rem .75rem;border:1px solid var(--grey-border);border-radius:20px;background:#fff;font-size:.78rem;cursor:pointer;transition:all .15s;}
+.filter-btn:hover{border-color:var(--teal);color:var(--teal);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{font-size:.8rem;color:var(--grey-text);margin-left:auto;}
+
+/* LAYOUT */
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:2rem;padding:1.5rem 1rem 4rem;}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:110px;height:calc(100vh - 120px);overflow-y:auto;}
+.toc-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--grey-text);margin-bottom:.5rem;}
+.toc-link{display:block;font-size:.8rem;padding:.3rem .5rem;border-left:2px solid transparent;color:var(--grey-text);text-decoration:none;margin-bottom:.15rem;border-radius:0 4px 4px 0;}
+.toc-link:hover{color:var(--teal);background:var(--teal-light);}
+.toc-link.active{color:var(--teal-dark);border-left-color:var(--teal);background:var(--teal-light);font-weight:600;}
+.toc-divider{height:1px;background:var(--grey-border);margin:1rem 0;}
+
+/* NOTES CARDS */
+.section-head{display:flex;justify-content:space-between;align-items:center;padding:1rem 0 .5rem;border-bottom:2px solid var(--grey-border);margin-bottom:1rem;}
+.section-head h2{font-size:1rem;font-weight:700;color:var(--navy);}
+.sec-count{font-size:.75rem;color:#fff;background:var(--teal);padding:.2rem .55rem;border-radius:12px;font-weight:600;}
+
+.note-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:1.2rem;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden;}
+.note-header{display:flex;align-items:flex-start;gap:.8rem;padding:.85rem 1rem;cursor:pointer;user-select:none;}
+.note-header:hover{background:var(--grey-bg);}
+.note-num-badge{min-width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.note-title-wrap{flex:1;min-width:0;}
+.note-title{font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.2rem;}
+.note-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.25rem;}
+.note-tag{font-size:.7rem;padding:.15rem .45rem;border-radius:12px;background:var(--grey-bg);color:var(--grey-text);border:1px solid var(--grey-border);}
+.note-chevron{width:18px;height:18px;stroke:var(--grey-text);transition:transform .2s;flex-shrink:0;margin-top:4px;}
+.note-card.open .note-chevron{transform:rotate(180deg);}
+.note-card.open .note-num-badge{background:var(--teal-dark);}
+
+/* ANSWER BODY */
+.note-body{display:none;padding:1rem 1rem 0;}
+.note-card.open .note-body{display:block;}
+.note-body h4{font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--teal-dark);margin:1rem 0 .3rem;}
+.note-body p{font-family:Georgia,serif;font-size:.9rem;margin-bottom:.7rem;color:var(--ink);}
+.note-body ul,.note-body ol{font-family:Georgia,serif;font-size:.9rem;padding-left:1.4rem;margin-bottom:.8rem;}
+.note-body li{margin-bottom:.35rem;}
+.note-body li strong{color:var(--ink);}
+.note-body .formula{background:var(--grey-bg);border-left:3px solid var(--teal);padding:.5rem .8rem;border-radius:4px;font-family:monospace;font-size:.85rem;margin:.5rem 0 .8rem;}
+.note-body table{width:100%;border-collapse:collapse;margin:.6rem 0 1rem;font-size:.85rem;}
+.note-body th{background:var(--navy);color:#fff;padding:.4rem .6rem;text-align:left;font-size:.78rem;}
+.note-body td{padding:.35rem .6rem;border-bottom:1px solid var(--grey-border);}
+.note-body tr:nth-child(even) td{background:var(--grey-bg);}
+.flowchart{background:#f8fafc;border:1px solid var(--grey-border);border-radius:6px;padding:.8rem;margin:.6rem 0;font-family:monospace;font-size:.8rem;white-space:pre;overflow-x:auto;}
+
+/* REG BOX */
+.reg-box{background:var(--navy);border-radius:8px;padding:.8rem 1rem;margin:1rem 0 .8rem;}
+.reg-box-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:.5rem;}
+.reg-item{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.3rem;}
+.reg-code{font-size:.75rem;font-family:monospace;color:var(--orange);font-weight:700;min-width:130px;flex-shrink:0;}
+.reg-desc{font-size:.78rem;color:#cbd5e1;}
+
+/* SIMON TIP */
+.simon-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:.7rem .9rem;margin:.8rem 0;font-size:.88rem;font-family:Georgia,serif;}
+
+/* FOOTER */
+.note-footer{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1rem;background:var(--grey-bg);border-top:1px solid var(--grey-border);font-size:.75rem;margin-top:.8rem;}
+.correction-link{color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.note-version{color:var(--grey-text);}
+
+/* NO RESULTS */
+#no-results{display:none;text-align:center;padding:3rem 1rem;color:var(--grey-text);}
+
+/* PAGE NAV */
+.page-nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.5rem;background:#fff;border-top:1px solid var(--grey-border);margin-top:2rem;}
+.page-nav a{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border:1px solid var(--grey-border);border-radius:6px;font-size:.85rem;color:var(--teal);text-decoration:none;font-weight:600;}
+.page-nav a:hover{background:var(--teal-light);}
+
+/* PAGE FOOTER */
+.page-footer{background:var(--navy);color:#94a3b8;text-align:center;padding:2rem 1rem;font-size:.82rem;margin-top:3rem;}
+.page-footer .attr{color:#64748b;font-size:.75rem;margin-top:.5rem;}
+
+/* CONTENT PROTECTION */
+body{-webkit-user-select:none;user-select:none;}
+
+@media(max-width:700px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:1.4rem;}
+}
+</style>
+</head>
+<body>
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+
+<!-- Watermark -->
+<div class="watermark-overlay">
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+<text transform="rotate(-35,400,300)" x="50" y="300" font-size="28" fill="#0f172a" font-family="Arial" font-weight="bold" opacity="1">MIW PRIVATE — Nixon Antony — Do Not Redistribute</text>
+<text transform="rotate(-35,400,300)" x="50" y="450" font-size="28" fill="#0f172a" font-family="Arial" font-weight="bold" opacity="1">MIW PRIVATE — Nixon Antony — Do Not Redistribute</text>
+<text transform="rotate(-35,400,300)" x="50" y="150" font-size="28" fill="#0f172a" font-family="Arial" font-weight="bold" opacity="1">MIW PRIVATE — Nixon Antony — Do Not Redistribute</text>
+</svg>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <a class="topbar-logo" href="/meoclass1/">MIW</a>
+  <span class="topbar-sep">|</span>
+  <span style="font-size:.85rem;color:#94a3b8;">Simon Sir Notes</span>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/meoclass1/">MEO Class 1</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </nav>
+</div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="header-inner">
+    <div class="header-badge">
+      <span class="hm-dot"></span>
+      <span class="badge-text">Notes Series · Part 8 of 8 · Subscriber Only</span>
+    </div>
+    <h1 class="page-title">Simon Sir Notes — Part 8</h1>
+    <p class="page-sub">SUA Convention · Environmental Conventions · BWM Convention (Pages 176–200)</p>
+    <div class="header-meta">
+      <span class="hm-item"><span class="hm-dot"></span>Pages 176–200 · Vignesh Siva Notes</span>
+      <span class="hm-item"><span class="hm-dot"></span>8 topics covered</span>
+      <span class="hm-item"><span class="hm-dot"></span>Examiner: Simon Sir (Kochi MMD)</span>
+    </div>
+  </div>
+</div>
+
+<!-- Controls -->
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search topics..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
+  <button class="filter-btn" onclick="filterTag('stability',this)">Stability</button>
+  <button class="filter-btn" onclick="filterTag('fire',this)">Fire / CO₂</button>
+  <button class="filter-btn" onclick="filterTag('marpol',this)">MARPOL</button>
+  <button class="filter-btn" onclick="filterTag('solas',this)">SOLAS</button>
+  <button class="filter-btn" onclick="filterTag('machinery',this)">Machinery</button>
+  <button class="filter-btn" onclick="filterTag('survey',this)">Surveys</button>
+  <span id="q-count-label">Showing all</span>
+</div>
+
+<!-- Main Layout -->
+<div class="main-layout">
+  <aside class="sidebar">
+    <div class="toc-title">Contents</div>
+    <a class="toc-link" href="#sec-sua">🛡 SUA Convention & Security</a>
+<a class="toc-link" href="#n1">1. SUA Convention — Background & Scope</a>
+<a class="toc-link" href="#n2">2. SUA Boarding Protocol & 2005 Protocol</a>
+<div class="toc-divider"></div>
+<a class="toc-link" href="#sec-env">🌍 Environmental Conventions</a>
+<a class="toc-link" href="#n3">3. London Dumping Convention & 1996 Protocol</a>
+<a class="toc-link" href="#n4">4. Basel Convention — Toxic Trade</a>
+<a class="toc-link" href="#n5">5. HNS Convention 1996 / 2010 Protocol</a>
+<div class="toc-divider"></div>
+<a class="toc-link" href="#sec-bwm">🌊 BWM Convention</a>
+<a class="toc-link" href="#n6">6. BWM Convention — D-1 / D-2 Standards</a>
+<a class="toc-link" href="#n7">7. BWTS Type Approval — G8 / BWMS Code</a>
+<a class="toc-link" href="#n8">8. IMO vs USCG — Key Differences</a>
+<div class="toc-divider"></div>
+<a class="toc-link" href="#sec-close">✅ Series Complete</a>
+
+  </aside>
+  <main id="note-feed">
+    <!-- SECTION: SUA Convention -->
+    <div class="section-head" id="sec-sua">
+      <h2>🛡 SUA Convention & Maritime Security</h2>
+      <span class="sec-count">3 topics</span>
+    </div>
+
+    <div class="note-card" id="n1" data-tags="isps solas">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">1</div>
+        <div class="note-title-wrap">
+          <div class="note-title">SUA Convention — History, Scope & Jurisdiction (Pages 175–176)</div>
+          <div class="note-tags"><span class="note-tag">ISPS</span><span class="note-tag">SOLAS</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Full Name & Background</h4>
+        <p><strong>Convention for the Suppression of Unlawful Acts Against the Safety of Maritime Navigation (SUA).</strong> Triggered by the hijacking of the Italian cruise ship <em>Achille Lauro</em> on <strong>7 October 1985</strong> near Alexandria, Egypt — resulting in the murder of a passenger.</p>
+        <ul>
+          <li>IMO was mandated by member states to develop a framework protecting ships from terrorist acts.</li>
+          <li>Resolutions and MSC circulars were deemed insufficient → full convention adopted in <strong>Rome, March 1988</strong>.</li>
+        </ul>
+        <h4>Operational Timeline</h4>
+        <table>
+          <tr><th>Instrument</th><th>Adopted</th><th>EIF</th></tr>
+          <tr><td>Original SUA Convention</td><td>March 1988</td><td>March 1992</td></tr>
+          <tr><td>Fixed Platforms Protocol</td><td>March 1988</td><td>March 1992</td></tr>
+          <tr><td>2005 SUA Protocol</td><td>2005</td><td>July 2, 2010</td></tr>
+        </table>
+        <h4>Scope — Unlawful Acts Under SUA</h4>
+        <ul>
+          <li>Forcible seizure or hijacking of a vessel.</li>
+          <li>Acts of violence against any person onboard.</li>
+          <li>Planting devices likely to damage or destroy the vessel, cargo, or equipment.</li>
+          <li>Destroying or tampering with maritime navigational facilities.</li>
+          <li>Communicating intentionally false information endangering the vessel.</li>
+          <li><strong>Extradite or Prosecute:</strong> Contracting governments must either extradite offenders or prosecute them domestically.</li>
+        </ul>
+        <h4>Jurisdictional Limits</h4>
+        <ul>
+          <li><strong>Territorial waters (≤ 12 NM):</strong> National domestic laws apply — coastal state has full sovereign authority.</li>
+          <li><strong>International waters (> 12 NM):</strong> SUA jurisdiction governs. No state may board a foreign vessel without flag state permission.</li>
+          <li><strong>Vessel exemptions:</strong> Warships, state-owned vessels (naval/customs/police), vessels fully withdrawn from commercial navigation.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SUA Convention 1988</span><span class="reg-desc">Convention for Suppression of Unlawful Acts — base maritime security framework</span></div>
+          <div class="reg-item"><span class="reg-code">SUA Protocol 2005</span><span class="reg-desc">Expanded SUA — WMD transport, use of ships as weapons, knowingly transporting terrorists</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS XI-2</span><span class="reg-desc">Special measures to enhance maritime security — ISPS Code, continuous synopsis record</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is the SUA Convention and what triggered it?" — Achille Lauro 1985 → Rome 1988 adoption. Key point: applies in international waters only; flag state permission required for boarding. The 2005 Protocol added WMD transport and using ships as weapons — new criminal offences under Article 3 bis.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p8, N1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p8 · N1 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n2" data-tags="isps solas">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">2</div>
+        <div class="note-title-wrap">
+          <div class="note-title">SUA — Boarding Protocol, Offender Handling & 2005 Protocol (Pages 177–180)</div>
+          <div class="note-tags"><span class="note-tag">ISPS</span><span class="note-tag">SOLAS</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Protocols for Onboard Offenders</h4>
+        <ul>
+          <li>Master may deliver the suspect to competent authorities of any contracting state at the vessel's next port (the Receiving State).</li>
+          <li>Master must notify the receiving state <strong>before entering territorial sea</strong>.</li>
+          <li>Master must preserve all physical evidence and hand it to the receiving state.</li>
+          <li>In India: <strong>Indian Coast Guard</strong> is authorised to take custody on behalf of the government.</li>
+        </ul>
+        <h4>High-Seas Boarding Protocol</h4>
+        <div class="flowchart">Requesting State has reasonable suspicion
+    │
+    ▼
+Request sent to Flag State to confirm nationality
+    │
+    ▼
+Nationality confirmed → Request authorisation to board
+    │
+ ┌──┴──┐
+ ▼     ▼
+Authorised       Denied
+ │               │
+ ▼               ▼
+Board, search,   Abort / Diplomatic
+question, inspect  dispute channels</div>
+        <h4>Flag State's Four Response Options</h4>
+        <ul>
+          <li><strong>Option I:</strong> Authorise boarding and search.</li>
+          <li><strong>Option II:</strong> Formally decline.</li>
+          <li><strong>Option III:</strong> Permit boarding conditional on own law enforcement officers being present.</li>
+          <li><strong>Option IV:</strong> Conduct a joint boarding operation.</li>
+        </ul>
+        <h4>2005 SUA Protocol — New Offences (Article 3 bis)</h4>
+        <ul>
+          <li>Using ships as weapons/platforms to cause death, injury, or intimidate governments.</li>
+          <li>Transporting <strong>Weapons of Mass Destruction (WMD)</strong> — nuclear, biological, chemical, explosive.</li>
+          <li>Knowingly transporting a person who has committed a SUA offence.</li>
+        </ul>
+        <h4>4-Hour Urgent Boarding Rule (2005 Protocol)</h4>
+        <p>A state party may notify the IMO Secretary-General that if an urgent boarding request receives no response within <strong>4 hours</strong>, the requesting state may proceed with stopping, boarding, and searching the vessel.</p>
+        <h4>Extradition Principles</h4>
+        <ul>
+          <li><strong>Dual criminality:</strong> Act must be criminal under both states' law for extradition to apply.</li>
+          <li>Extradition may be denied if politically motivated or based on persecution of race/religion/nationality.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SUA Convention 1988 / Art. 7–10</span><span class="reg-desc">Master's duties, custody transfer, extradition, and prosecution obligations</span></div>
+          <div class="reg-item"><span class="reg-code">SUA Protocol 2005 / Art. 3bis</span><span class="reg-desc">New offences — WMD transport, ships as weapons, transporting terrorists</span></div>
+          <div class="reg-item"><span class="reg-code">UNCLOS Art. 110</span><span class="reg-desc">Right of visit — warships may board foreign ships on the high seas under specified circumstances</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What are the Flag State's options when a boarding request is received under SUA?" — Give all four options clearly. The 4-hour rule under the 2005 Protocol is a hot exam question. Know Article 3 bis for WMD transport — this expanded SUA beyond basic hijacking to counter modern terrorism.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p8, N2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p8 · N2 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: Environmental Conventions -->
+    <div class="section-head" id="sec-env">
+      <h2>🌍 Environmental Conventions — London, Basel & HNS</h2>
+      <span class="sec-count">4 topics</span>
+    </div>
+
+    <div class="note-card" id="n3" data-tags="marpol">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">3</div>
+        <div class="note-title-wrap">
+          <div class="note-title">London Dumping Convention (LC-72) & 1996 Protocol — Comparison (Pages 181–186)</div>
+          <div class="note-tags"><span class="note-tag">MARPOL</span><span class="note-tag">Environmental</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Overview</h4>
+        <ul>
+          <li><strong>Convention Name:</strong> Convention on Prevention of Marine Pollution by Dumping of Wastes and Other Matter.</li>
+          <li><strong>LC-72:</strong> Adopted 1972; EIF August 1975.</li>
+          <li><strong>1996 Protocol:</strong> Adopted 1996; EIF March 2006 — <em>replaces</em> the original convention.</li>
+        </ul>
+        <h4>Definition of Dumping</h4>
+        <ul>
+          <li><strong>IS Dumping:</strong> Deliberate disposal at sea of waste from vessels, aircraft, platforms, or deliberate disposal of vessels/platforms themselves.</li>
+          <li><strong>NOT Dumping:</strong> Operational discharges from vessels; pipeline discharges; waste to rivers; placement of matter for a purpose other than disposal. Activities incidental to normal operation of vessels are not considered dumping.</li>
+          <li><strong>Exemptions:</strong> Safety of life or property; force majeure; emergency situations.</li>
+        </ul>
+        <h4>Convention vs 1996 Protocol — Key Comparison</h4>
+        <table>
+          <tr><th>Element</th><th>LC-72 (Original)</th><th>1996 Protocol</th></tr>
+          <tr><td>Approach</td><td>Black-list & Grey-list — permitted everything except listed items</td><td>Reverse List — prohibits ALL dumping except explicitly listed waste</td></tr>
+          <tr><td>Annex 1</td><td>Black-list: complete prohibition of hazardous materials</td><td>Reverse List: permitted materials subject to stringent permits</td></tr>
+          <tr><td>Annex 2</td><td>Grey-list: special permit required</td><td>Waste Assessment Framework</td></tr>
+          <tr><td>Annex 3</td><td>Technical criteria for permits</td><td>Evaluation criteria</td></tr>
+          <tr><td>Annex 4</td><td>Not present</td><td>Marine geo-engineering regulation</td></tr>
+        </table>
+        <h4>1996 Protocol — Permitted Reverse List (Annex 1)</h4>
+        <ul>
+          <li>Dredged material; sewage sludge; fish waste; inert inorganic geological material; mining waste; organic material; CO₂ streams from carbon capture processes.</li>
+        </ul>
+        <h4>1996 Protocol Amendments</h4>
+        <ul>
+          <li><strong>2006 Carbon Sequestration:</strong> Allows long-term storage of CO₂ beneath the seabed; 2019 update allows transboundary export of CO₂ for sequestration.</li>
+          <li><strong>2013 Marine Geo-engineering (Annex 4):</strong> Regulates and prohibits most ocean fertilisation activities unless for legitimate scientific research.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">London Convention 1972</span><span class="reg-desc">Convention on Prevention of Marine Pollution by Dumping — original black-list/grey-list framework</span></div>
+          <div class="reg-item"><span class="reg-code">London Protocol 1996</span><span class="reg-desc">Replaces LC-72 — reverse list approach; precautionary principle; waste assessment mandatory</span></div>
+          <div class="reg-item"><span class="reg-code">LP.4(8) 2006</span><span class="reg-desc">Amendment to London Protocol — CO₂ sequestration under seabed permissible</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir / Nair typically asks:</strong> "What is the difference between the London Dumping Convention and the 1996 Protocol?" — Original: everything permitted except black-listed items. Protocol: everything prohibited except Reverse List items. Key principle of 1996 Protocol: <em>Precautionary Approach</em> — take action even without conclusive scientific proof of harm.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p8, N3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p8 · N3 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n4" data-tags="marpol">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">4</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Basel Convention — Hazardous Waste Trade Control & PIC Procedure (Pages 187–189)</div>
+          <div class="note-tags"><span class="note-tag">MARPOL</span><span class="note-tag">Environmental</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Overview</h4>
+        <ul>
+          <li><strong>Full name:</strong> Basel Convention on the Control of Transboundary Movements of Hazardous Wastes and Their Disposal.</li>
+          <li><strong>Adopted:</strong> 1989; <strong>EIF:</strong> 1992.</li>
+          <li><strong>Context:</strong> Created to combat "toxic trade" — developed countries disposing hazardous waste in developing nations (e.g., Africa).</li>
+          <li><strong>Objective:</strong> Protect human health and the environment from adverse effects of hazardous and other wastes.</li>
+        </ul>
+        <h4>Core Aims</h4>
+        <ul>
+          <li>Reduce hazardous waste generation; promote Environmentally Sound Management (ESM).</li>
+          <li>Restrict transboundary movements except under ESM frameworks.</li>
+          <li>Treat and dispose of waste <strong>as close as possible to the place of generation</strong>.</li>
+        </ul>
+        <h4>Prior Informed Consent (PIC) Procedure</h4>
+        <div class="flowchart">Step 1: Exporter notifies home Competent Authority
+    │
+    ▼
+Step 2: Authority forwards dossier to importing & transit states
+    │
+    ▼
+Step 3 & 4: Importing state reviews (≈ 60-day window)
+             Options: Consent / Refuse / Request more details
+    │
+    ▼
+Step 5: If consented → export authorised
+        Shipment must carry Movement Document
+    │
+    ▼
+Step 6: Disposal facility issues Certificate of Disposal/Recovery</div>
+        <p><em>Note for India: Designated national authority for PIC = MOEFCC (Ministry of Environment, Forest and Climate Change).</em></p>
+        <h4>Key Basel Amendments</h4>
+        <ul>
+          <li><strong>Ban Amendment</strong> (adopted 1994, EIF Dec 2019): Prohibits export of hazardous wastes from OECD (developed) to developing countries.</li>
+          <li><strong>Plastic Waste Amendment</strong> (EIF Jan 2021): Most plastic waste exports require PIC procedure.</li>
+          <li><strong>E-Waste Amendment</strong> (effective Jan 2025): All electronic/electrical waste trade subject to PIC procedures.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">Basel Convention 1989</span><span class="reg-desc">Transboundary hazardous waste control — PIC procedure, ESM principles, national competent authorities</span></div>
+          <div class="reg-item"><span class="reg-code">Basel Ban Amendment (COP.2)</span><span class="reg-desc">Prohibition on export of hazardous wastes from Annex VII (OECD) to non-Annex VII countries</span></div>
+          <div class="reg-item"><span class="reg-code">Hong Kong Convention 2009</span><span class="reg-desc">Ship Recycling Convention — end-of-life vessels subject to hazardous material control similar to Basel principles</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is the Basel Convention?" — 1989, hazardous waste transboundary control, PIC procedure. India's competent authority: MOEFCC. Current affairs: E-Waste Amendment effective January 2025 — examiners are asking this in 2025–2026 orals. Governing body: Conference of the Parties (COP).</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p8, N4, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p8 · N4 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n5" data-tags="marpol solas">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">5</div>
+        <div class="note-title-wrap">
+          <div class="note-title">HNS Convention — Liability, Fund & Compensation Tiers (Pages 190–195)</div>
+          <div class="note-tags"><span class="note-tag">MARPOL</span><span class="note-tag">Commercial</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Overview</h4>
+        <ul>
+          <li><strong>Full name:</strong> International Convention on Liability and Compensation for Damage in Connection with the Carriage of Hazardous and Noxious Substances by Sea.</li>
+          <li><strong>1996 version:</strong> Never entered into force. <strong>2010 Protocol:</strong> Awaiting ratification — not yet in force.</li>
+          <li><strong>Purpose:</strong> Final major IMO liability convention filling gaps left by CLC and Bunker Convention — specifically covers personal injury, death, property damage from chemical fires/explosions.</li>
+        </ul>
+        <h4>HNS Categories</h4>
+        <ul>
+          <li>Oils carried in bulk (MARPOL Annex I).</li>
+          <li>Noxious liquid substances in bulk (MARPOL Annex II).</li>
+          <li>Dangerous liquids in bulk (IBC Code).</li>
+          <li>Liquefied gases; liquid substances with flash point ≤ 60°C; hazardous solid bulk materials.</li>
+          <li>Packaged dangerous goods (IMDG Code).</li>
+        </ul>
+        <h4>Two-Tier Compensation System</h4>
+        <ul>
+          <li><strong>Tier I:</strong> Paid by the shipowner's insurance.
+            <ul>
+              <li>Bulk HNS: Max <strong>100 million SDR</strong>; Packaged HNS: Max <strong>115 million SDR</strong>.</li>
+            </ul>
+          </li>
+          <li><strong>Tier II:</strong> Paid by the HNS Fund (funded by receivers of contributing cargo — bulk HNS only). Total compensation cap: <strong>250 million SDR</strong> (inclusive of Tier I).</li>
+        </ul>
+        <h4>HNS Fund Accounts (4 accounts when operational)</h4>
+        <ul>
+          <li>Oil Account; LNG Account; LPG Account; General Account (Bulk Solids + Other HNS).</li>
+          <li><strong>No cross-subsidisation</strong> — compensation from same account as the substance causing damage.</li>
+        </ul>
+        <h4>Shipowner Liability Limits (Bulk HNS)</h4>
+        <ul>
+          <li>Ships ≤ 2,000 GT: <strong>10 million SDR</strong>.</li>
+          <li>2,001–50,000 GT: 10 million SDR + 1,500 SDR/ton.</li>
+          <li>> 50,000 GT: 10M + 1,500/ton (to 50k) + 360 SDR/ton thereafter.</li>
+        </ul>
+        <h4>EIF Requirements for 2010 HNS Protocol</h4>
+        <ul>
+          <li>At least <strong>12 states</strong> ratified; total registered tonnage ≥ <strong>2 million GT</strong>; contributing bulk HNS cargo ≥ <strong>40 million tonnes</strong> per year.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">HNS Convention 1996</span><span class="reg-desc">Original convention — never entered into force; replaced by 2010 Protocol structure</span></div>
+          <div class="reg-item"><span class="reg-code">HNS Protocol 2010</span><span class="reg-desc">Revised convention — two-tier system, fund accounts, strict liability, awaiting ratification</span></div>
+          <div class="reg-item"><span class="reg-code">CLC 1992 / IOPC Fund 1992</span><span class="reg-desc">Related oil pollution conventions — HNS explicitly excludes CLC-covered pollution to avoid overlap</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir / Nair typically asks:</strong> "What is the HNS Convention?" — Full name, 2-tier system, why it fills gaps (covers fire/explosion/injury that CLC doesn't). Total cap: 250 million SDR. Fund contributor: the RECEIVER of contributing cargo (bulk HNS). Not yet in force — 2010 Protocol still awaiting ratification as of 2026.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p8, N5, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p8 · N5 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: BWM Convention -->
+    <div class="section-head" id="sec-bwm">
+      <h2>🌊 Ballast Water Management Convention</h2>
+      <span class="sec-count">3 topics</span>
+    </div>
+
+    <div class="note-card" id="n6" data-tags="marpol survey">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">6</div>
+        <div class="note-title-wrap">
+          <div class="note-title">BWM Convention — Overview, D-1/D-2 Standards & BWMS Code (Pages 196–197)</div>
+          <div class="note-tags"><span class="note-tag">MARPOL</span><span class="note-tag">Survey</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Overview</h4>
+        <ul>
+          <li><strong>Full name:</strong> International Convention for the Control and Management of Ships' Ballast Water and Sediments, 2004.</li>
+          <li><strong>EIF:</strong> September 2017.</li>
+          <li><strong>Purpose:</strong> Prevent transfer of harmful aquatic organisms and pathogens via ballast water discharge — protect biodiversity and prevent invasive species.</li>
+        </ul>
+        <h4>Compliance Standards</h4>
+        <ul>
+          <li><strong>D-1 (Ballast Water Exchange):</strong> Exchange ballast water at ≥ 200 NM from nearest land and in ≥ 200 m water depth. Efficiency ≥ 95% volumetric exchange (flow-through: pump ≥ 3 × volume).</li>
+          <li><strong>D-2 (Ballast Water Performance Standard):</strong> Treated ballast water must contain:
+            <ul>
+              <li>< 10 viable organisms/m³ (≥ 50 μm).</li>
+              <li>< 10 viable organisms/mL (10–50 μm).</li>
+              <li>E. coli < 250 CFU/100 mL; Intestinal enterococci < 100 CFU/100 mL.</li>
+            </ul>
+          </li>
+        </ul>
+        <h4>Applicability</h4>
+        <ul>
+          <li>Applies to all ships designed to carry ballast water.</li>
+          <li>Ships ≥ 400 GT: Must hold approved BWMP, maintain BWRB, meet D-1/D-2 standards with approved BWTS.</li>
+          <li>Exceptions: Vessels operating exclusively within a state's jurisdiction; warships; permanent sealed ballast tanks.</li>
+        </ul>
+        <h4>BWMS Code — Transition from G8 Guideline</h4>
+        <ul>
+          <li><strong>G8 Guideline</strong> (2016): Recommendatory — allowed non-uniform type approval across states.</li>
+          <li><strong>BWMS Code</strong> (MEPC 72, mandatory): Systems installed on or after <strong>28 October 2020</strong> must comply with this Code for type approval — ensures uniformity across flag states and ROs.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">BWM Convention 2004</span><span class="reg-desc">Base convention — D-1 exchange standard, D-2 performance standard, Regulation D-3 type approval</span></div>
+          <div class="reg-item"><span class="reg-code">MEPC.300(72)</span><span class="reg-desc">BWMS Code — mandatory code for type approval of ballast water management systems from Oct 2020</span></div>
+          <div class="reg-item"><span class="reg-code">BWM Convention Reg D-3</span><span class="reg-desc">Type approval — systems using active substances require GESAMP BWWG evaluation and MEPC approval</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is the D-2 standard?" — < 10 organisms/m³ (≥ 50 μm). He may ask: "Why was the BWMS Code introduced instead of keeping G8 Guideline?" — Guidelines are recommendatory; Code makes type approval mandatory and uniform across all flag states. Know mandatory date: October 28, 2020.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p8, N6, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p8 · N6 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n7" data-tags="marpol survey">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">7</div>
+        <div class="note-title-wrap">
+          <div class="note-title">BWTS Type Approval — G8/G9, Land & Shipboard Testing (Pages 198–199)</div>
+          <div class="note-tags"><span class="note-tag">MARPOL</span><span class="note-tag">Survey</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Type Approval Phases for Non-Active Substance Systems (G8/BWMS Code)</h4>
+        <div class="flowchart">Phase 1: Pre-Test Evaluation
+  Technical specs, piping diagrams, manuals, SDL submitted
+    │
+    ▼
+Phase 2: Type Approval Testing
+  ├── Land-Based Performance Testing (independent labs)
+  ├── Environmental Testing (vibration, temp, moisture)
+  └── Shipboard Operational Testing (≥ 6 months aboard)
+    │
+    ▼
+Phase 3: Issuance of Type Approval Certificate
+    │
+    ▼
+Phase 4: Final On-Board Installation & Inspection</div>
+        <h4>Salinity Testing (Land-Based) — 3 Salinities Required</h4>
+        <ul>
+          <li><strong>Marine Water:</strong> 28 to 35 PSU.</li>
+          <li><strong>Brackish Water:</strong> 10 to 20 PSU.</li>
+          <li><strong>Freshwater:</strong> < 1 PSU.</li>
+        </ul>
+        <p><em>Previously, single-salinity testing gave restricted approval. Now all 3 required for unrestricted Type Approval Certificate. SDL (System Design Limitations) stamped on certificate.</em></p>
+        <h4>Shipboard Testing</h4>
+        <ul>
+          <li>Full-scale test onboard an active vessel in normal sea conditions.</li>
+          <li>System must operate in continuous compliant condition for <strong>at least 6 months</strong>.</li>
+          <li><strong>Failed Test Cycle:</strong> Non-compliant D-2 discharge results, or engineering failure interrupting the run.</li>
+          <li><strong>Invalid Test Cycle:</strong> Environmental conditions (salinity/temperature) outside SDL limits — does not count as failure; can be re-run.</li>
+        </ul>
+        <h4>G9 — Active Substance Systems</h4>
+        <ul>
+          <li>Applies to: electrolytic disinfection, chemical dosing, electrochemical reactions, ozone treatment.</li>
+          <li><strong>GESAMP BWWG:</strong> Must evaluate toxicological impact, persistence, bioaccumulation, corrosion effects. System requires formal MEPC/IMO approval.</li>
+          <li><strong>Basic Approval → Land/Ship Testing → Final Approval (resubmitted to IMO).</strong></li>
+          <li>UV + TiO₂ (Advanced Oxidation) systems require G9 approval because hydroxyl radicals function as an active chemical biocide.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">BWM Convention Reg D-3</span><span class="reg-desc">Active substance approval — GESAMP BWWG evaluation required; MEPC final approval</span></div>
+          <div class="reg-item"><span class="reg-code">MEPC.300(72) — BWMS Code</span><span class="reg-desc">Land-based and shipboard testing protocols; 3-salinity requirement; SDL stamping on certificate</span></div>
+          <div class="reg-item"><span class="reg-code">MEPC.126(53)</span><span class="reg-desc">Revised G8 guidelines (superseded by BWMS Code for systems installed from Oct 2020)</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "How is a BWTS type-approved?" — Give the 4 phases. Key: land-based testing in 3 salinities; shipboard testing for minimum 6 months. He may ask: "What is an Invalid Test Cycle?" — Environmental conditions outside SDL limits; can be re-run without penalty. G9 = active substance systems → GESAMP evaluation required.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p8, N7, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p8 · N7 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n8" data-tags="marpol survey">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">8</div>
+        <div class="note-title-wrap">
+          <div class="note-title">IMO vs USCG BWTS Requirements — Key Differences (Page 200)</div>
+          <div class="note-tags"><span class="note-tag">MARPOL</span><span class="note-tag">Survey</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>IMO vs USCG Type Approval — Comparison</h4>
+        <table>
+          <tr><th>Parameter</th><th>IMO (BWMS Code / G8)</th><th>USCG (46 CFR Part 162)</th></tr>
+          <tr><td>Organism metric</td><td>Viable organisms (capable of reproduction)</td><td>Living organisms (direct mortality counts)</td></tr>
+          <tr><td>Testing method</td><td>Most Probable Number (MPN)</td><td>Vital Stain (FDA/CMFDA)</td></tr>
+          <tr><td>Discharge limit</td><td>< 10 viable/m³ (≥ 50 μm)</td><td>< 10 living/m³ (≥ 50 μm)</td></tr>
+          <tr><td>Test cycle quantity</td><td>3 onboard + 5 land-based cycles</td><td>5 ashore land-based cycles</td></tr>
+          <tr><td>Minimum holding time</td><td>5 days in tanks</td><td>24 hours only</td></tr>
+          <tr><td>Oxidant monitoring</td><td>IMO TRO standards</td><td>US-TRO (Total Residual Oxidant)</td></tr>
+          <tr><td>Validation framework</td><td>G8/G9 guidelines + BWMS Code</td><td>US-ETV (Environmental Technology Verification)</td></tr>
+        </table>
+        <h4>Practical Implication for Maersk Container Vessels</h4>
+        <p>Vessels calling US ports must have a USCG type-approved BWTS (or use an AMS — Alternate Management System for up to 5 years during evaluation). IMO-approved systems alone are insufficient for US port entry compliance. Dual-approved systems or AMS status must be verified before calling US ports.</p>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">USCG 33 CFR Part 151</span><span class="reg-desc">USCG ballast water management regulations — D-2 equivalent standards for US ports</span></div>
+          <div class="reg-item"><span class="reg-code">USCG 46 CFR Part 162</span><span class="reg-desc">USCG BWTS type approval — living organism metric, vital stain method, 24-hour holding</span></div>
+          <div class="reg-item"><span class="reg-code">BWM Convention Reg D-2</span><span class="reg-desc">IMO performance standard — viable organism metric, MPN method, 5-day holding</span></div>
+          <div class="reg-item"><span class="reg-code">USCG AMS Policy</span><span class="reg-desc">Alternate Management System — 5-year temporary authorization for IMO-approved systems in US waters</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is the difference between IMO and USCG BWTS requirements?" — Key differences: IMO measures VIABLE organisms (MPN method); USCG measures LIVING organisms (vital stain). IMO: 5-day minimum holding; USCG: 24 hours. As a Maersk 2/E on container vessels calling US ports, you must understand AMS status and dual approval requirements.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p8, N8, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p8 · N8 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Series Close -->
+    <div class="section-head" id="sec-close">
+      <h2>✅ Notes Series — Complete</h2>
+      <span class="sec-count">End of 200 pages</span>
+    </div>
+    <div style="background:#fff;border:2px solid var(--teal);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem;text-align:center;">
+      <p style="font-family:Georgia,serif;color:var(--teal-dark);font-size:1.05rem;font-weight:600;margin-bottom:.5rem;">Simon Sir Notes Series — 200 Pages Complete</p>
+      <p style="font-family:Georgia,serif;color:var(--grey-text);font-size:.9rem;">Parts 1–8 cover all 200 pages of Vignesh Siva's oral exam notes for Examiner Simon Sir, Kochi MMD.<br>Return to the MEO Class 1 section for the full Question Bank series.</p>
+      <a href="/meoclass1/" style="display:inline-block;margin-top:1rem;padding:.5rem 1.2rem;background:var(--teal);color:#fff;border-radius:6px;text-decoration:none;font-weight:700;font-size:.9rem;">← Back to MEO Class 1</a>
+    </div>
+
+    <div id="no-results"><p>No topics found matching your search.</p></div>
+  </main>
+</div>
+
+<!-- Page Nav -->
+<div class="page-nav">
+  <a href="/meoclass1/simon-notes-p7.html">← Part 7</a>
+  <a href="/meoclass1/">MEO Class 1 Home →</a>
+</div>
+
+<!-- Footer -->
+<div class="page-footer">
+  <div>Originally prepared by Vignesh Siva. Transcribed, expanded and updated by Nixon Antony, 2/E, Maersk A/S.</div>
+  <div class="attr">© Marine Intelligence Weekly · Subscriber content — Do not share · <a href="mailto:contactus@marineintelligenceweekly.com" style="color:var(--teal);">contactus@marineintelligenceweekly.com</a></div>
+</div>
+
+<script>
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+
+function toggleCard(h){h.closest('.note-card').classList.toggle('open');}
+
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.note-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.note-card[id]').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Simon Sir Notes — Part 6: Pages 126–150 | Simon Sir Notes | MIW MEO Class 1</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.6;}
+
+/* WATERMARK */
+.watermark-overlay{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;}
+.watermark-overlay svg{width:100%;height:100%;opacity:0.06;}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;background:var(--navy);color:#fff;z-index:100;display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem;border-bottom:3px solid var(--teal);}
+.topbar-logo{font-size:1.3rem;font-weight:800;color:var(--teal);letter-spacing:-0.5px;text-decoration:none;}
+.topbar-sep{color:#475569;font-size:.9rem;}
+.topbar nav{display:flex;gap:1rem;margin-left:auto;}
+.topbar nav a{color:#94a3b8;font-size:.85rem;text-decoration:none;}
+.topbar nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#fff;padding:2.5rem 1.5rem 2rem;border-bottom:4px solid var(--teal);}
+.header-inner{max-width:900px;margin:0 auto;}
+.header-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(13,148,136,.2);border:1px solid var(--teal);border-radius:6px;padding:.3rem .7rem;margin-bottom:1rem;}
+.badge-text{font-size:.75rem;font-weight:700;color:var(--teal);letter-spacing:.05em;text-transform:uppercase;}
+.page-title{font-size:1.9rem;font-weight:800;letter-spacing:-0.5px;margin-bottom:.4rem;}
+.page-sub{color:#94a3b8;font-size:1rem;max-width:600px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.2rem;}
+.hm-item{font-size:.78rem;color:#64748b;display:flex;align-items:center;gap:.4rem;}
+.hm-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);display:inline-block;}
+
+/* CONTROLS */
+.controls-bar{position:sticky;top:52px;background:#fff;border-bottom:1px solid var(--grey-border);padding:.7rem 1rem;z-index:90;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+#search-input{flex:1;min-width:180px;padding:.45rem .8rem;border:1px solid var(--grey-border);border-radius:6px;font-size:.9rem;outline:none;}
+#search-input:focus{border-color:var(--teal);}
+.filter-btn{padding:.35rem .75rem;border:1px solid var(--grey-border);border-radius:20px;background:#fff;font-size:.78rem;cursor:pointer;transition:all .15s;}
+.filter-btn:hover{border-color:var(--teal);color:var(--teal);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{font-size:.8rem;color:var(--grey-text);margin-left:auto;}
+
+/* LAYOUT */
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:2rem;padding:1.5rem 1rem 4rem;}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:110px;height:calc(100vh - 120px);overflow-y:auto;}
+.toc-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--grey-text);margin-bottom:.5rem;}
+.toc-link{display:block;font-size:.8rem;padding:.3rem .5rem;border-left:2px solid transparent;color:var(--grey-text);text-decoration:none;margin-bottom:.15rem;border-radius:0 4px 4px 0;}
+.toc-link:hover{color:var(--teal);background:var(--teal-light);}
+.toc-link.active{color:var(--teal-dark);border-left-color:var(--teal);background:var(--teal-light);font-weight:600;}
+.toc-divider{height:1px;background:var(--grey-border);margin:1rem 0;}
+
+/* NOTES CARDS */
+.section-head{display:flex;justify-content:space-between;align-items:center;padding:1rem 0 .5rem;border-bottom:2px solid var(--grey-border);margin-bottom:1rem;}
+.section-head h2{font-size:1rem;font-weight:700;color:var(--navy);}
+.sec-count{font-size:.75rem;color:#fff;background:var(--teal);padding:.2rem .55rem;border-radius:12px;font-weight:600;}
+
+.note-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:1.2rem;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden;}
+.note-header{display:flex;align-items:flex-start;gap:.8rem;padding:.85rem 1rem;cursor:pointer;user-select:none;}
+.note-header:hover{background:var(--grey-bg);}
+.note-num-badge{min-width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.note-title-wrap{flex:1;min-width:0;}
+.note-title{font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.2rem;}
+.note-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.25rem;}
+.note-tag{font-size:.7rem;padding:.15rem .45rem;border-radius:12px;background:var(--grey-bg);color:var(--grey-text);border:1px solid var(--grey-border);}
+.note-chevron{width:18px;height:18px;stroke:var(--grey-text);transition:transform .2s;flex-shrink:0;margin-top:4px;}
+.note-card.open .note-chevron{transform:rotate(180deg);}
+.note-card.open .note-num-badge{background:var(--teal-dark);}
+
+/* ANSWER BODY */
+.note-body{display:none;padding:1rem 1rem 0;}
+.note-card.open .note-body{display:block;}
+.note-body h4{font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--teal-dark);margin:1rem 0 .3rem;}
+.note-body p{font-family:Georgia,serif;font-size:.9rem;margin-bottom:.7rem;color:var(--ink);}
+.note-body ul,.note-body ol{font-family:Georgia,serif;font-size:.9rem;padding-left:1.4rem;margin-bottom:.8rem;}
+.note-body li{margin-bottom:.35rem;}
+.note-body li strong{color:var(--ink);}
+.note-body .formula{background:var(--grey-bg);border-left:3px solid var(--teal);padding:.5rem .8rem;border-radius:4px;font-family:monospace;font-size:.85rem;margin:.5rem 0 .8rem;}
+.note-body table{width:100%;border-collapse:collapse;margin:.6rem 0 1rem;font-size:.85rem;}
+.note-body th{background:var(--navy);color:#fff;padding:.4rem .6rem;text-align:left;font-size:.78rem;}
+.note-body td{padding:.35rem .6rem;border-bottom:1px solid var(--grey-border);}
+.note-body tr:nth-child(even) td{background:var(--grey-bg);}
+.flowchart{background:#f8fafc;border:1px solid var(--grey-border);border-radius:6px;padding:.8rem;margin:.6rem 0;font-family:monospace;font-size:.8rem;white-space:pre;overflow-x:auto;}
+
+/* REG BOX */
+.reg-box{background:var(--navy);border-radius:8px;padding:.8rem 1rem;margin:1rem 0 .8rem;}
+.reg-box-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:.5rem;}
+.reg-item{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.3rem;}
+.reg-code{font-size:.75rem;font-family:monospace;color:var(--orange);font-weight:700;min-width:130px;flex-shrink:0;}
+.reg-desc{font-size:.78rem;color:#cbd5e1;}
+
+/* SIMON TIP */
+.simon-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:.7rem .9rem;margin:.8rem 0;font-size:.88rem;font-family:Georgia,serif;}
+
+/* FOOTER */
+.note-footer{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1rem;background:var(--grey-bg);border-top:1px solid var(--grey-border);font-size:.75rem;margin-top:.8rem;}
+.correction-link{color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.note-version{color:var(--grey-text);}
+
+/* NO RESULTS */
+#no-results{display:none;text-align:center;padding:3rem 1rem;color:var(--grey-text);}
+
+/* PAGE NAV */
+.page-nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.5rem;background:#fff;border-top:1px solid var(--grey-border);margin-top:2rem;}
+.page-nav a{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border:1px solid var(--grey-border);border-radius:6px;font-size:.85rem;color:var(--teal);text-decoration:none;font-weight:600;}
+.page-nav a:hover{background:var(--teal-light);}
+
+/* PAGE FOOTER */
+.page-footer{background:var(--navy);color:#94a3b8;text-align:center;padding:2rem 1rem;font-size:.82rem;margin-top:3rem;}
+.page-footer .attr{color:#64748b;font-size:.75rem;margin-top:.5rem;}
+
+/* CONTENT PROTECTION */
+body{-webkit-user-select:none;user-select:none;}
+
+@media(max-width:700px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:1.4rem;}
+}
+</style>
+</head>
+<body>
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+
+<!-- Watermark -->
+<div class="watermark-overlay">
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+<text transform="rotate(-35,400,300)" x="50" y="300" font-size="28" fill="#0f172a" font-family="Arial" font-weight="bold" opacity="1">MIW PRIVATE — Nixon Antony — Do Not Redistribute</text>
+<text transform="rotate(-35,400,300)" x="50" y="450" font-size="28" fill="#0f172a" font-family="Arial" font-weight="bold" opacity="1">MIW PRIVATE — Nixon Antony — Do Not Redistribute</text>
+<text transform="rotate(-35,400,300)" x="50" y="150" font-size="28" fill="#0f172a" font-family="Arial" font-weight="bold" opacity="1">MIW PRIVATE — Nixon Antony — Do Not Redistribute</text>
+</svg>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <a class="topbar-logo" href="/meoclass1/">MIW</a>
+  <span class="topbar-sep">|</span>
+  <span style="font-size:.85rem;color:#94a3b8;">Simon Sir Notes</span>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/meoclass1/">MEO Class 1</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </nav>
+</div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="header-inner">
+    <div class="header-badge">
+      <span class="hm-dot"></span>
+      <span class="badge-text">Part 6 of 8 · Subscriber Only</span>
+    </div>
+    <h1 class="page-title">Simon Sir Notes — Part 6: Pages 126–150</h1>
+    <p class="page-sub">FSA · Competency vs Proficiency · MARPOL Amendments · BDN · Load Line · SAFCON · Parametric Rolling · Inclining Experiment · Angle of Loll · CO₂ System Details</p>
+    <div class="header-meta">
+      <span class="hm-item"><span class="hm-dot"></span>Pages 126–150 · Vignesh Siva Notes</span>
+      <span class="hm-item"><span class="hm-dot"></span>11 topics covered</span>
+      <span class="hm-item"><span class="hm-dot"></span>Examiner: Simon Sir (Kochi MMD)</span>
+    </div>
+  </div>
+</div>
+
+<!-- Controls -->
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search topics..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
+  <button class="filter-btn" onclick="filterTag('stability',this)">Stability</button>
+  <button class="filter-btn" onclick="filterTag('fire',this)">Fire / CO₂</button>
+  <button class="filter-btn" onclick="filterTag('marpol',this)">MARPOL</button>
+  <button class="filter-btn" onclick="filterTag('solas',this)">SOLAS</button>
+  <button class="filter-btn" onclick="filterTag('machinery',this)">Machinery</button>
+  <button class="filter-btn" onclick="filterTag('survey',this)">Surveys</button>
+  <span id="q-count-label">Showing all</span>
+</div>
+
+<!-- Main Layout -->
+<div class="main-layout">
+  <aside class="sidebar">
+    <div class="toc-title">Contents</div>
+    <a class="toc-link" href="#sec-management">📋 FSA, Management & Certs</a>
+<a class="toc-link" href="#n1">1. Formal Safety Assessment</a>
+<a class="toc-link" href="#n2">2. Competency vs Proficiency</a>
+<a class="toc-link" href="#n3">3. Class vs Statutory Certs</a>
+<a class="toc-link" href="#n4">4. COP-29 & MARPOL Amendments</a>
+<a class="toc-link" href="#n5">5. Casualty Investigator & GESAMP</a>
+<div class="toc-divider"></div>
+<a class="toc-link" href="#sec-commercial">⚖ Commercial & Legal</a>
+<a class="toc-link" href="#n6">6. BDN & Bunker Calculations</a>
+<a class="toc-link" href="#n7">7. Ship Documents & RO Delegation</a>
+<a class="toc-link" href="#n8">8. Load Line & SAFCON Survey</a>
+<div class="toc-divider"></div>
+<a class="toc-link" href="#sec-stability-adv">⚖ Advanced Stability</a>
+<a class="toc-link" href="#n9">9. Parametric & Synchronous Rolling</a>
+<a class="toc-link" href="#n10">10. Inclining Experiment</a>
+<a class="toc-link" href="#n11">11. FSE, Angle of Loll & Tender/Stiff</a>
+
+  </aside>
+  <main id="note-feed">
+    <!-- SECTION: FSA, Management & Certificates -->
+    <div class="section-head" id="sec-management">
+      <h2>📋 FSA, Management & Certificates</h2>
+      <span class="sec-count">5 topics</span>
+    </div>
+
+    <div class="note-card" id="n1" data-tags="ism survey">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">1</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Formal Safety Assessment (FSA) — 5 Steps & Risk Matrix (Page 117)</div>
+          <div class="note-tags"><span class="note-tag">ISM</span><span class="note-tag">IMO Methodology</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Definition</h4>
+        <p>FSA is a <strong>structured risk assessment and cost-benefit methodology</strong> used by IMO member states, committees, and organisations with consultative status when proposing new or revised maritime regulations. It is a tool — not a regulation itself.</p>
+        <h4>Five Steps of FSA</h4>
+        <div class="flowchart">1. Hazard Identification (HAZID)
+   │  Identify and prioritise hazards
+   ▼
+2. Risk Analysis
+   │  Likelihood × Consequence assessment
+   ▼
+3. Risk Control Options
+   │  Formulate risk control measures
+   ▼
+4. Cost–Benefit Assessment
+   │  Does risk reduction outweigh cost?
+   ▼
+5. Recommendations for Decision Making
+   │  Final implementation proposal to IMO</div>
+        <h4>Risk Score Formula</h4>
+        <p class="formula">Risk Score = Likelihood × Consequence</p>
+        <p>Likelihood scale: 1 (Low) → 2 (Medium) → 3 (High). Consequence scale: 1 (Minor) → 2 (Major) → 3 (Catastrophic). Higher scores receive priority for risk control measures.</p>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IMO MSC-MEPC.2/Circ.12</span><span class="reg-desc">Revised guidelines for FSA for use in the IMO rule-making process</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code Sec. 1.2.3</span><span class="reg-desc">Safety management objectives — risk assessment as a foundation of ISM culture</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS XI-1 / Reg 3</span><span class="reg-desc">Requirements for enhanced surveys and structural assessment linked to FSA findings</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What are the 5 steps of FSA?" — State them in order with the acronym: Hazard Identification → Risk Analysis → Risk Control Options → Cost-Benefit → Recommendations. He may ask: "What tool is used in Step 1?" — HAZID (Hazard Identification study).</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p6, N1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p6 · N1 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n2" data-tags="stcw ism survey">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">2</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Competency vs Proficiency & Audit vs Survey (Pages 117–118)</div>
+          <div class="note-tags"><span class="note-tag">STCW</span><span class="note-tag">ISM</span><span class="note-tag">Survey</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Competency vs Proficiency</h4>
+        <table>
+          <tr><th>Feature</th><th>Competency</th><th>Proficiency</th></tr>
+          <tr><td>Scope</td><td>Holistic ability to perform all duties of a specific rank</td><td>Mastery of a specific skill or task</td></tr>
+          <tr><td>Certificate</td><td>Certificate of Competency (CoC)</td><td>Certificate of Proficiency (CoP)</td></tr>
+          <tr><td>Elements</td><td>Sea time + education + examination</td><td>Targeted training + assessment</td></tr>
+          <tr><td>Examples</td><td>Chief Engineer, Master Mariner</td><td>Firefighting, Medical First Aid, STS, SDSD, tanker familiarisation</td></tr>
+        </table>
+        <h4>Audit vs Survey</h4>
+        <table>
+          <tr><th>Criteria</th><th>Audit</th><th>Survey</th></tr>
+          <tr><td>Timeline Focus</td><td>Past activities — detect systemic faults</td><td>Future — ensure vessel stays seaworthy until next survey</td></tr>
+          <tr><td>Target</td><td>Documentation, procedures, SMS, forms</td><td>Physical product — machinery, equipment, structure</td></tr>
+          <tr><td>Method</td><td>Sampling basis — cannot audit entire system at once</td><td>Entire system evaluated (full scope)</td></tr>
+          <tr><td>Outcome</td><td>Non-conformities (NCs) and recommendations</td><td>Issue, endorse, or renew statutory/class certificates</td></tr>
+        </table>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">STCW Reg I/2</span><span class="reg-desc">Certificates of Competency — minimum standards, format, and endorsement</span></div>
+          <div class="reg-item"><span class="reg-code">STCW Reg VI/1–VI/3</span><span class="reg-desc">Basic safety training — Certificates of Proficiency for firefighting, medical, survival</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code Sec. 12</span><span class="reg-desc">Company verification, review and evaluation — audit requirements under ISM</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS I / Reg 6</span><span class="reg-desc">Inspection and survey of ships — initial, annual, intermediate, renewal surveys</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is the difference between a competency and a proficiency?" — Key: Competency = CoC = rank eligibility; Proficiency = CoP = specific task (firefighting, SDSD). He may also ask: "What is the difference between an audit and a survey?" — Audit = past/documentation/sampling; Survey = future/physical/full scope.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p6, N2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p6 · N2 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n3" data-tags="ism survey iacs">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">3</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Certificate of Class vs Statutory Certificates & AR/VR in Shipping (Pages 118–119)</div>
+          <div class="note-tags"><span class="note-tag">ISM</span><span class="note-tag">Survey</span><span class="note-tag">IACS</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Certificate of Class</h4>
+        <ul>
+          <li><strong>Mandatory but NOT statutory</strong> — required commercially, not by a convention directly.</li>
+          <li>Issued by a <strong>Classification Society</strong> confirming compliance with Class Rules for design, construction, and maintenance.</li>
+          <li>Required for: P&I Club coverage, Hull & Machinery insurance, charter party commitments.</li>
+        </ul>
+        <h4>Statutory Certificates</h4>
+        <ul>
+          <li>Issued by the <strong>Flag Administration or Recognised Organisation (RO)</strong> acting on its behalf.</li>
+          <li>Confirms compliance with international conventions (SOLAS, MARPOL, STCW, MLC).</li>
+          <li><strong>Legal requirement</strong> for global trade — cannot operate commercially without them.</li>
+        </ul>
+        <h4>AR vs VR in Shipping</h4>
+        <ul>
+          <li><strong>AR (Augmented Reality):</strong> Overlays digital information onto the real world — uses smartphones, tablets, or smart glasses. <em>Example:</em> Wärtsilä AR system where seafarers receive live shore-based repair instructions on a see-through display during stern tube maintenance.</li>
+          <li><strong>VR (Virtual Reality):</strong> Creates a completely artificial simulated environment — requires VR headsets. Used for engine room emergency drills, stability training, enclosed space rescue simulation.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS I / Reg 6</span><span class="reg-desc">Survey and certification — flag state or RO statutory certification obligations</span></div>
+          <div class="reg-item"><span class="reg-code">IMO RO Code (Res. A.739(18))</span><span class="reg-desc">Recognition of organisations acting on behalf of the Administration — RO authorisation</span></div>
+          <div class="reg-item"><span class="reg-code">IACS PR 1</span><span class="reg-desc">IACS procedure for condition of class — classification survey standards</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is the difference between a Class certificate and a statutory certificate?" — Class = society-issued, mandatory for insurance/charter; Statutory = administration/RO-issued, legally required by convention. AR question likely from Srivastava; Simon may ask as a technology update question.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p6, N3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p6 · N3 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n4" data-tags="marpol ghg">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">4</div>
+        <div class="note-title-wrap">
+          <div class="note-title">COP-29 Key Outcomes & Latest MARPOL Amendments (Pages 119–120)</div>
+          <div class="note-tags"><span class="note-tag">GHG</span><span class="note-tag">MARPOL</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>COP-29 — Key Takeaways (Baku, Azerbaijan, Nov 2024)</h4>
+        <ul>
+          <li><strong>NCQG (New Collective Quantified Goal):</strong> Replaced the historic $100 billion annual climate finance target. Designed to reflect actual financial needs of developing nations.</li>
+          <li><strong>Global Carbon Market:</strong> Agreement reached on UN-backed global carbon trading rules under Article 6 of the Paris Agreement.</li>
+          <li><strong>Finance Target:</strong> Discussions around tripling climate finance to $300 billion — notable disagreements between developing nations on implementation remained.</li>
+        </ul>
+        <h4>MARPOL Annex VI — Latest Amendments</h4>
+        <ul>
+          <li><strong>Mediterranean Sea ECA (SOx):</strong> Designated as an Emission Control Area for SOx and PM — effective <strong>1 May 2025</strong>. Max sulphur content 0.10% in ECA.</li>
+          <li><strong>BDN Flash Point:</strong> Bunker Delivery Note must now include the measured flash point <em>or</em> a declaration confirming flash point ≥ <strong>70°C</strong> (SOLAS requirement).</li>
+          <li><strong>EEXI and CII:</strong> Energy Efficiency Existing Ship Index and Carbon Intensity Indicator regulations now in force under Annex VI.</li>
+        </ul>
+        <h4>MARPOL Annex I — Latest Amendments</h4>
+        <ul>
+          <li><strong>HFO Arctic Ban:</strong> Carriage and use of Heavy Fuel Oil in Arctic waters prohibited from <strong>1 July 2024</strong> (with certain flag state exemptions for coastal state vessels).</li>
+          <li><strong>IOPP Certificate simplification:</strong> Administrative changes for ships flying non-party flags.</li>
+          <li><strong>Form B Simplification:</strong> Simplified completion for Supplement Form B — entries relating to SBT, protective location, double hull, and dedicated clean ballast tanks.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex VI / Reg 14</span><span class="reg-desc">Sulphur oxide (SOx) control — 0.5% global cap; 0.1% in ECAs; Mediterranean ECA from May 2025</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex VI / Reg 28</span><span class="reg-desc">Carbon Intensity Indicator (CII) — operational rating system A–E, annual reporting</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex I / Reg 43A</span><span class="reg-desc">Prohibition on carriage and use of HFO as fuel in Arctic waters from 1 July 2024</span></div>
+          <div class="reg-item"><span class="reg-code">MEPC.338(76)</span><span class="reg-desc">Guidelines on operational carbon intensity rating of ships — CII rating guidelines</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is the latest ECA added under MARPOL Annex VI?" — Mediterranean Sea, effective 1 May 2025. He may ask about the HFO ban in Arctic waters — effective 1 July 2024. BDN flash point amendment is an examiner favourite for Chief Engineer orals on Maersk container vessels bunkering VLSFO.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p6, N4, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p6 · N4 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n5" data-tags="ism survey marpol">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">5</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Casualty Investigator, GESAMP & AMS — Ballast Water (Page 121)</div>
+          <div class="note-tags"><span class="note-tag">ISM</span><span class="note-tag">MARPOL</span><span class="note-tag">Survey</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Marine Casualty Investigator Qualifications (MS Act S.359)</h4>
+        <ul>
+          <li><strong>Academic:</strong> M.Sc. in Maritime Affairs from World Maritime University (WMU), Malmö, Sweden.</li>
+          <li><strong>Field training:</strong> Casualty investigation training at WMU.</li>
+          <li><strong>Practical experience:</strong> Under <strong>Section 359 of the MS Act 1958</strong> — complete at least one Preliminary Inquiry under an approved experienced investigator.</li>
+          <li><strong>CPD:</strong> Periodic refresher training in advanced casualty investigation techniques.</li>
+        </ul>
+        <h4>GESAMP — Joint Group of Experts</h4>
+        <ul>
+          <li>Stands for: <em>Joint Group of Experts on the Scientific Aspects of Marine Environmental Protection</em>.</li>
+          <li>Established: <strong>1969</strong>. Jointly sponsored by 10 UN organisations including IMO.</li>
+          <li>Function: Conducts studies and reviews on marine environmental protection — advises the UN system.</li>
+          <li><strong>EHS Working Group:</strong> Evaluates environmental hazards of harmful substances carried by ships — provides technical advice directly to IMO.</li>
+        </ul>
+        <h4>Alternate Management Systems (AMS) — USCG</h4>
+        <ul>
+          <li><strong>Definition:</strong> A Ballast Water Treatment System (BWTS) type-approved by a foreign Administration but <em>not yet USCG-approved</em>.</li>
+          <li>USCG allows temporary use in US waters while the system undergoes formal USCG type-approval testing.</li>
+          <li><strong>Validity window:</strong> Maximum <strong>5 years</strong>.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MS Act 1958 / Sec. 359</span><span class="reg-desc">Preliminary inquiry — qualification and appointment of marine casualty investigators in India</span></div>
+          <div class="reg-item"><span class="reg-code">Casualty Investigation Code (Res. A.849(20))</span><span class="reg-desc">Code for the investigation of marine casualties and incidents — international framework</span></div>
+          <div class="reg-item"><span class="reg-code">BWM Convention Reg D-3</span><span class="reg-desc">Type approval of BWTS using active substances — GESAMP BWWG evaluation required</span></div>
+          <div class="reg-item"><span class="reg-code">USCG 33 CFR Part 151</span><span class="reg-desc">AMS provisions — allows IMO-approved systems in US waters during USCG evaluation period</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is GESAMP?" — Give the full form, 1969 establishment, 10 UN bodies, and EHS Working Group. AMS and USCG 5-year window is more likely from Nair or Srivastava given its regulatory complexity. Casualty investigator qualifications are a Kochi MMD examiner favourite — S.359 is the key section number.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p6, N5, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p6 · N6 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: Commercial & Legal -->
+    <div class="section-head" id="sec-commercial">
+      <h2>⚖ Commercial, Legal & Operational</h2>
+      <span class="sec-count">4 topics</span>
+    </div>
+
+    <div class="note-card" id="n6" data-tags="marpol survey">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">6</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Maritime Zones Act 1976, BDN & Bunker Calculations (Pages 126–127)</div>
+          <div class="note-tags"><span class="note-tag">MARPOL</span><span class="note-tag">Commercial</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Maritime Zones Act 1976 (India)</h4>
+        <p>Official title: <em>The Territorial Waters, Continental Shelf, Exclusive Economic Zone, and Other Maritime Zones Act 1976.</em></p>
+        <ul>
+          <li>Defines India's maritime boundaries and sovereign rights — aligned with UNCLOS.</li>
+          <li>Protects marine resources and regulates fishing, oil exploration, and shipping in Indian maritime zones.</li>
+        </ul>
+        <h4>Bunker Delivery Note (BDN) — MARPOL Annex VI Reg 18</h4>
+        <p>Official legal record of a fuel transfer between bunker supplier and receiving vessel.</p>
+        <ul>
+          <li><strong>Mandatory contents:</strong> Vessel name, IMO number, port, delivery date, supplier details, quantity/volume, fuel type (VLSFO/ULSFO/MGO), density, kinematic viscosity, sulphur content %, and seal numbers of collected fuel samples.</li>
+          <li><strong>Signatures:</strong> Must be signed and stamped by <strong>both Chief Engineer and bunker barge representative</strong>.</li>
+          <li><strong>Retention:</strong> BDN retained onboard for minimum <strong>3 years</strong>; fuel sample retained for minimum <strong>12 months</strong>.</li>
+          <li><strong>NEW:</strong> BDN must now include measured flash point or declaration that flash point ≥ 70°C.</li>
+        </ul>
+        <h4>CE Decision-Making Hierarchy</h4>
+        <div class="flowchart">Safety of Life & Ship  (First priority)
+    │
+    ▼
+Regulatory Compliance (SOLAS · MARPOL · Flag State)
+    │
+    ▼
+Company SMS
+    │
+    ▼
+Risk Assessment → Best Course of Action</div>
+        <h4>Volumetric-to-Mass Bunker Calculations</h4>
+        <p>Fuel ordered in MT but delivered in m³ — must correct for temperature and density.</p>
+        <p class="formula">V₁₅ = Vt × [1 − α(T − 15)]
+Where: Vt = observed volume; α = expansion coefficient; T = fuel temp (°C)
+HFO: α = 0.00065/°C | MGO: α = 0.00085/°C</p>
+        <p class="formula">Mass (MT) = V₁₅ × ρ₁₅ (density at 15°C in t/m³)</p>
+        <p><em>Always apply: temperature correction, trim correction, and list correction before accepting BDN quantity.</em></p>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex VI / Reg 18</span><span class="reg-desc">Fuel oil availability and quality — BDN mandatory; sample retention 12 months; BDN retention 3 years</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex VI / Reg 14</span><span class="reg-desc">SOx control — BDN sulphur content must demonstrate compliance with applicable limits</span></div>
+          <div class="reg-item"><span class="reg-code">ISO 8217:2024</span><span class="reg-desc">Marine fuel oil specification — density, viscosity, flash point, and sulphur content standards</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is a BDN and what does it contain?" — Give the 3-year retention for BDN and 12-month for sample — these are the most tested figures. The volumetric correction formula is a CE-level exam staple. Know HFO coefficient (0.00065) vs MGO (0.00085).</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p6, N6, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p6 · N6 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n7" data-tags="survey iacs ism">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">7</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Ship Documents, Classification & Flag State–RO Delegation (Pages 127–128)</div>
+          <div class="note-tags"><span class="note-tag">Survey</span><span class="note-tag">IACS</span><span class="note-tag">ISM</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Instrument of Sale vs Builder's Certificate</h4>
+        <table>
+          <tr><th>Feature</th><th>Instrument of Sale (Bill of Sale)</th><th>Builder's Certificate</th></tr>
+          <tr><td>Applicability</td><td>New-build AND second-hand vessel transfers</td><td>Issued exclusively for new-build vessels only</td></tr>
+          <tr><td>Issued by</td><td>Current legal shipowner</td><td>Shipyard (construction yard)</td></tr>
+          <tr><td>Primary use</td><td>Ship registration under new owner after sale</td><td>First-time vessel registration and initial hull insurance</td></tr>
+          <tr><td>Contents</td><td>Transaction details, title transfer, ownership covenants</td><td>Builder ID, construction date, technical specifications</td></tr>
+        </table>
+        <h4>Why Classification is Important</h4>
+        <p>A vessel requires Class throughout its service life to demonstrate structural and machinery compliance with Class Rules. Required for:</p>
+        <ul>
+          <li>Design approval and construction supervision.</li>
+          <li>P&I Club and H&M insurance coverage.</li>
+          <li>Charter party terms.</li>
+          <li>Technical support and statutory compliance.</li>
+          <li>Periodic surveys to confirm continued seaworthiness.</li>
+        </ul>
+        <h4>Flag State Delegation to RO — Process</h4>
+        <ul>
+          <li><strong>Step 1 — Application:</strong> Organisation applies to become an RO under the IMO RO Code.</li>
+          <li><strong>Step 2 — Credential Verification:</strong> Flag State audits technical credentials and capabilities.</li>
+          <li><strong>Step 3 — MoU:</strong> Memorandum of Understanding signed defining scope, limitations, and oversight programme.</li>
+          <li><strong>Step 4 — Validity:</strong> Instructions on duration and periodic renewal of delegated authority.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IMO Res. A.739(18)</span><span class="reg-desc">Guidelines for authorisation of organisations acting on behalf of the Administration (RO Code)</span></div>
+          <div class="reg-item"><span class="reg-code">IMO RO Code (Res. MSC.349(92))</span><span class="reg-desc">Mandatory RO Code — requirements for recognised organisations' technical competence</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS I / Reg 6</span><span class="reg-desc">Surveys — Administration may entrust surveys to inspectors or ROs</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is a Builder's Certificate?" — New-build only, from the shipyard, used for first registration. The RO delegation process (MoU, IMO RO Code) is a Nair/Srivastava question. Know the 4-step process clearly — it appears in commercial law orals.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p6, N7, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p6 · N7 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n8" data-tags="survey load-line solas">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">8</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Load Line Survey, SAFCON Survey & MS Act 1958 Structure (Pages 128–130)</div>
+          <div class="note-tags"><span class="note-tag">Survey</span><span class="note-tag">Load Line</span><span class="note-tag">SOLAS</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Load Line Survey Protocol</h4>
+        <ul>
+          <li><strong>Certificate validity:</strong> International Load Line Certificate valid for maximum <strong>5 years</strong>.</li>
+          <li><strong>Mandatory documents:</strong> Trim and Stability Booklet, Loading Manual, Record of Conditions of Assignment, Cargo Loading Indicator Type-Approval Certificate, Bow Height Certificate.</li>
+        </ul>
+        <p><strong>Inspection checklist:</strong> Freeboard marks, draft marks, vent heads/flame screens, scuppers and freeing ports, weathertight doors, guard rails, gangway condition, machinery space openings, overboard valves, bilge pumps, emergency bilge suction, sounding pipes.</p>
+        <h4>SAFCON Survey — Practical Examination Steps</h4>
+        <div class="flowchart">Anchoring equipment → Collision bulkhead → Watertight doors (local & remote)
+→ Bilge system → Main engine remote stops → Steam piping insulation
+→ Standby machinery auto-start → Engineers' alarm → Electrical insulation (megger)
+→ Emergency power (generator/batteries) → Review previous survey memoranda</div>
+        <h4>Merchant Shipping (MS) Act 1958 — Structure</h4>
+        <p><strong>18 Parts, 460 Sections.</strong> Key sections for CEOs:</p>
+        <ul>
+          <li><strong>Section 334:</strong> Unseaworthy ships — detention provisions.</li>
+          <li><strong>Section 336:</strong> Owner's obligation — duty to ensure vessel safety.</li>
+          <li><strong>Section 359:</strong> Preliminary inquiry — appointment of marine casualty investigators.</li>
+          <li><strong>Section 360:</strong> Formal investigation — judicial courts.</li>
+          <li><strong>Part VII (Sec. 95):</strong> Relief and Repatriation of Seamen (RPS).</li>
+          <li><strong>Part IX:</strong> Safety — covers LSA Code and FSS Code.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">LL Convention 1966 / Art. 14</span><span class="reg-desc">Surveys — initial, annual, and renewal survey requirements for Load Line Certificate</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS I / Reg 10</span><span class="reg-desc">Maintenance of conditions after survey — SAFCON continuous obligations</span></div>
+          <div class="reg-item"><span class="reg-code">MS Act 1958 / Sec. 359–360</span><span class="reg-desc">Preliminary inquiry and formal investigation of marine casualties under Indian law</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What do you check during a SAFCON survey?" — Give the 10-step sequence. Key MS Act sections: 334 (unseaworthy), 336 (owner's duty), 359 (preliminary inquiry), 360 (formal investigation). Load Line Certificate: 5-year validity with annual endorsements.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p6, N8, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p6 · N8 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: Stability Advanced -->
+    <div class="section-head" id="sec-stability-adv">
+      <h2>⚖ Advanced Stability — Rolling, Inclining & FSE</h2>
+      <span class="sec-count">3 topics</span>
+    </div>
+
+    <div class="note-card" id="n9" data-tags="stability solas">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">9</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Parametric Rolling & Synchronous Rolling — Container Ship Risk (Pages 136–137)</div>
+          <div class="note-tags"><span class="note-tag">Stability</span><span class="note-tag">Container</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Parametric Rolling</h4>
+        <p>Occurs on modern vessels with <strong>fine bow lines and wide transom sterns</strong> when wave length matches ship length and waves encounter the vessel from ahead or astern.</p>
+        <ul>
+          <li><strong>Core condition:</strong> Pitching period = rolling period, OR pitching period = <strong>½ rolling period</strong>.</li>
+          <li><strong>Mechanism:</strong> As vessel pitches, submerged hull area forward and aft changes dynamically → shifting centre of buoyancy → oscillating rolling moment.</li>
+          <li><strong>Vessel behaviour:</strong> Alternates between:<br>
+            — Wave <em>crest</em> under midship → waterplane narrows → lower GM → tender condition.<br>
+            — Wave <em>trough</em> under midship → wider waterplane → higher GM → stiff condition.</li>
+          <li><strong>Hazards:</strong> Severe structural stress, stack failures, loss of containers overboard, risk of capsizing.</li>
+          <li><strong>Corrective action:</strong> Immediate <strong>alteration of course and speed</strong>.</li>
+        </ul>
+        <h4>Synchronous Rolling</h4>
+        <ul>
+          <li><strong>Definition:</strong> Resonance phenomenon when the vessel's <strong>natural rolling period matches the wave encounter period</strong>.</li>
+          <li><strong>Hazards:</strong> Heavy water on deck, cargo shifting, loss of stability, capsizing.</li>
+          <li><strong>Corrective action:</strong> Change course, change speed, or ballast to alter the rolling period.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IS Code 2008 / Part B</span><span class="reg-desc">Guidance for dynamic stability — parametric rolling and pure loss of stability scenarios</span></div>
+          <div class="reg-item"><span class="reg-code">IMO MSC.1/Circ.1228</span><span class="reg-desc">Revised guidance on avoiding dangerous situations in adverse weather and sea conditions</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS VI / Reg 5-2</span><span class="reg-desc">Container securing — lashing requirements to resist parametric roll-induced forces</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is parametric rolling and how do you correct it?" — Explain the pitching = ½ rolling period condition; the tender-stiff alternation; and that <em>course and speed change</em> is the immediate corrective action. As a Maersk container ship 2/E, this is directly relevant — know it thoroughly.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p6, N9, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p6 · N9 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n10" data-tags="stability survey">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">10</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Inclining Experiment — Conditions, Method & Formulas (Pages 137–138)</div>
+          <div class="note-tags"><span class="note-tag">Stability</span><span class="note-tag">Survey</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Objective</h4>
+        <p>Determines the precise <strong>vertical centre of gravity (KG)</strong> and baseline <strong>metacentric height (GM)</strong> of a newly built vessel or one that has undergone major structural modification.</p>
+        <h4>Mandatory Conditions</h4>
+        <ul>
+          <li>Vessel must be structurally complete, upright, and floating in <strong>sheltered water</strong> — free from wind, waves, tides, or current.</li>
+          <li>All tanks <strong>completely empty or completely full</strong> — minimise free surface effect.</li>
+          <li>Mooring ropes kept slack; gangway lifted; ship floating freely.</li>
+          <li>Record drafts at <strong>6 points</strong> (FP, AP, midships both sides) and measure dock water density.</li>
+          <li>All loose gear secured, bilges pumped dry, cranes/derricks in sea-going position.</li>
+          <li>Non-essential personnel must leave the vessel.</li>
+        </ul>
+        <h4>Procedure</h4>
+        <ul>
+          <li>Equal test weights (w) placed away from centreline on both sides of midships deck.</li>
+          <li>Weights must induce a list of <strong>1° to 4°</strong> — enough to be measurable, not too large to invalidate.</li>
+          <li>Minimum <strong>two pendulums</strong> (stabilograph) suspended at maximum vertical distance — bobs submerged in oil or water to dampen oscillation.</li>
+          <li>Weights shifted transversely over distance (d) across <strong>8 separate movements</strong> — recording deflections each time.</li>
+        </ul>
+        <h4>Key Formulas</h4>
+        <p class="formula">tan θ = Deflection / Pendulum Length</p>
+        <p class="formula">GM = (w × d) / (Δ × tan θ)
+Where: w = weight shifted; d = distance moved; Δ = displacement</p>
+        <p class="formula">KG = KM − GM
+KM taken from hydrostatic tables at measured draft</p>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg 5</span><span class="reg-desc">Stability information — inclining experiment required for new ships; results form basis of stability booklet</span></div>
+          <div class="reg-item"><span class="reg-code">IS Code 2008 / Sec. 7</span><span class="reg-desc">Procedures for conducting inclining experiments and lightweight checks</span></div>
+          <div class="reg-item"><span class="reg-code">IMO MSC.1/Circ.1591</span><span class="reg-desc">Revised guidelines on inclining experiment and lightweight check for ships</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What are the conditions required for an inclining experiment?" — Give 6 conditions. Then give the formula: GM = (w × d)/(Δ × tanθ). He may ask: "Why must the list be between 1° and 4°?" — Less than 1° is too small to measure accurately; more than 4° invalidates the wall-sided formula assumption.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p6, N10, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p6 · N10 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n11" data-tags="stability">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">11</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Free Surface Effect, Angle of Loll & Tender vs Stiff Ships (Pages 139–141)</div>
+          <div class="note-tags"><span class="note-tag">Stability</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Free Surface Effect (FSE)</h4>
+        <ul>
+          <li><strong>Mechanism:</strong> Liquid in a <em>partially filled</em> tank shifts to the low side when the vessel heels → centre of gravity shifts (G → G₁) → reduces righting lever (GZ) → increases effective KG.</li>
+          <li>FSE represents a <strong>virtual rise in KG</strong> (reduction in effective GM).</li>
+          <li><strong>Mitigation:</strong> Subdivide tanks with liquid-tight longitudinal bulkheads, swash plates, or baffles.</li>
+          <li>Formula: <em>Free Surface Moment = ρ × i / Δ</em>, where i = second moment of area of the free surface about its own longitudinal axis.</li>
+        </ul>
+        <h4>Angle of Loll (AOL)</h4>
+        <p>The angle to which an <strong>unstable vessel (negative initial GM)</strong> will heel under environmental forces. At this angle, GZ = 0 and B₁ is directly below G — temporary neutral equilibrium.</p>
+        <ul>
+          <li><strong>Behaviour:</strong> Vessel lists to AOL — if heeled further in same direction, a transient positive GM pushes back to AOL. If heeled to the other side, vessel lolls aggressively.</li>
+          <li><strong>Causes:</strong> Improper ballasting, top-heavy cargo, emptying low DB tanks, structural errors, excessive FSE.</li>
+          <li><strong>CORRECT remedy:</strong> Ballast low DB tanks first (to lower G) — do NOT use transverse weight shifting (extremely dangerous).</li>
+        </ul>
+        <h4>Tender vs Stiff Ships</h4>
+        <table>
+          <tr><th>Feature</th><th>Tender Ship (small GM)</th><th>Stiff Ship (large GM)</th></tr>
+          <tr><td>Cause</td><td>Heavy topside weights → G raised</td><td>Heavy low weights → G lowered</td></tr>
+          <tr><td>Rolling period</td><td>≈ 30–35 seconds (slow, comfortable)</td><td>≈ 15–18 seconds (fast, violent)</td></tr>
+          <tr><td>Risk</td><td>Easy to incline, slow to recover</td><td>Violent snapping motion — structural stress</td></tr>
+          <tr><td>Remedy</td><td>Lower heavy weights to DB tanks</td><td>Raise weights to increase rolling period</td></tr>
+        </table>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IS Code 2008 / Part A Reg 2.3</span><span class="reg-desc">Stability criteria — FSE correction mandatory in all GM calculations</span></div>
+          <div class="reg-item"><span class="reg-code">IS Code 2008 / Sec. 2.2.3</span><span class="reg-desc">Angle of loll — vessel with negative GM, stability at angles of inclination</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg 22</span><span class="reg-desc">Damage stability — residual stability requirements with FSE included</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is free surface effect?" — Virtual rise in G due to liquid shift in partially filled tanks. "What is angle of loll and how do you correct it?" — Loll = neutral equilibrium when GM is zero due to initial negative GM; correct by ballasting DB tanks (never use cranes). Tender (30–35 s) vs stiff (15–18 s) rolling periods are oral exam standards.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p6, N11, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p6 · N11 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="no-results"><p>No topics found matching your search.</p></div>
+  </main>
+</div>
+
+<!-- Page Nav -->
+<div class="page-nav">
+  <a href="/meoclass1/simon-notes-p5.html">← Part 5 (pp. 101–125)</a>
+  <a href="/meoclass1/simon-notes-p7.html">Part 7 (pp. 151–175) →</a>
+</div>
+
+<!-- Footer -->
+<div class="page-footer">
+  <div>Originally prepared by Vignesh Siva. Transcribed, expanded and updated by Nixon Antony, 2/E, Maersk A/S.</div>
+  <div class="attr">© Marine Intelligence Weekly · Subscriber content — Do not share · <a href="mailto:contactus@marineintelligenceweekly.com" style="color:var(--teal);">contactus@marineintelligenceweekly.com</a></div>
+</div>
+
+<script>
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+
+function toggleCard(h){h.closest('.note-card').classList.toggle('open');}
+
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.note-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.note-card[id]').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

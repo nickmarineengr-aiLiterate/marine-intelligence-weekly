@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Simon Sir Notes — Part 7: Pages 151–175 | Simon Sir Notes | MIW MEO Class 1</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.6;}
+
+/* WATERMARK */
+.watermark-overlay{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden;}
+.watermark-overlay svg{width:100%;height:100%;opacity:0.06;}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;background:var(--navy);color:#fff;z-index:100;display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem;border-bottom:3px solid var(--teal);}
+.topbar-logo{font-size:1.3rem;font-weight:800;color:var(--teal);letter-spacing:-0.5px;text-decoration:none;}
+.topbar-sep{color:#475569;font-size:.9rem;}
+.topbar nav{display:flex;gap:1rem;margin-left:auto;}
+.topbar nav a{color:#94a3b8;font-size:.85rem;text-decoration:none;}
+.topbar nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);color:#fff;padding:2.5rem 1.5rem 2rem;border-bottom:4px solid var(--teal);}
+.header-inner{max-width:900px;margin:0 auto;}
+.header-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(13,148,136,.2);border:1px solid var(--teal);border-radius:6px;padding:.3rem .7rem;margin-bottom:1rem;}
+.badge-text{font-size:.75rem;font-weight:700;color:var(--teal);letter-spacing:.05em;text-transform:uppercase;}
+.page-title{font-size:1.9rem;font-weight:800;letter-spacing:-0.5px;margin-bottom:.4rem;}
+.page-sub{color:#94a3b8;font-size:1rem;max-width:600px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.2rem;}
+.hm-item{font-size:.78rem;color:#64748b;display:flex;align-items:center;gap:.4rem;}
+.hm-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);display:inline-block;}
+
+/* CONTROLS */
+.controls-bar{position:sticky;top:52px;background:#fff;border-bottom:1px solid var(--grey-border);padding:.7rem 1rem;z-index:90;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+#search-input{flex:1;min-width:180px;padding:.45rem .8rem;border:1px solid var(--grey-border);border-radius:6px;font-size:.9rem;outline:none;}
+#search-input:focus{border-color:var(--teal);}
+.filter-btn{padding:.35rem .75rem;border:1px solid var(--grey-border);border-radius:20px;background:#fff;font-size:.78rem;cursor:pointer;transition:all .15s;}
+.filter-btn:hover{border-color:var(--teal);color:var(--teal);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{font-size:.8rem;color:var(--grey-text);margin-left:auto;}
+
+/* LAYOUT */
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:220px 1fr;gap:2rem;padding:1.5rem 1rem 4rem;}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:110px;height:calc(100vh - 120px);overflow-y:auto;}
+.toc-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--grey-text);margin-bottom:.5rem;}
+.toc-link{display:block;font-size:.8rem;padding:.3rem .5rem;border-left:2px solid transparent;color:var(--grey-text);text-decoration:none;margin-bottom:.15rem;border-radius:0 4px 4px 0;}
+.toc-link:hover{color:var(--teal);background:var(--teal-light);}
+.toc-link.active{color:var(--teal-dark);border-left-color:var(--teal);background:var(--teal-light);font-weight:600;}
+.toc-divider{height:1px;background:var(--grey-border);margin:1rem 0;}
+
+/* NOTES CARDS */
+.section-head{display:flex;justify-content:space-between;align-items:center;padding:1rem 0 .5rem;border-bottom:2px solid var(--grey-border);margin-bottom:1rem;}
+.section-head h2{font-size:1rem;font-weight:700;color:var(--navy);}
+.sec-count{font-size:.75rem;color:#fff;background:var(--teal);padding:.2rem .55rem;border-radius:12px;font-weight:600;}
+
+.note-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:1.2rem;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden;}
+.note-header{display:flex;align-items:flex-start;gap:.8rem;padding:.85rem 1rem;cursor:pointer;user-select:none;}
+.note-header:hover{background:var(--grey-bg);}
+.note-num-badge{min-width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.note-title-wrap{flex:1;min-width:0;}
+.note-title{font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:.2rem;}
+.note-tags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.25rem;}
+.note-tag{font-size:.7rem;padding:.15rem .45rem;border-radius:12px;background:var(--grey-bg);color:var(--grey-text);border:1px solid var(--grey-border);}
+.note-chevron{width:18px;height:18px;stroke:var(--grey-text);transition:transform .2s;flex-shrink:0;margin-top:4px;}
+.note-card.open .note-chevron{transform:rotate(180deg);}
+.note-card.open .note-num-badge{background:var(--teal-dark);}
+
+/* ANSWER BODY */
+.note-body{display:none;padding:1rem 1rem 0;}
+.note-card.open .note-body{display:block;}
+.note-body h4{font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--teal-dark);margin:1rem 0 .3rem;}
+.note-body p{font-family:Georgia,serif;font-size:.9rem;margin-bottom:.7rem;color:var(--ink);}
+.note-body ul,.note-body ol{font-family:Georgia,serif;font-size:.9rem;padding-left:1.4rem;margin-bottom:.8rem;}
+.note-body li{margin-bottom:.35rem;}
+.note-body li strong{color:var(--ink);}
+.note-body .formula{background:var(--grey-bg);border-left:3px solid var(--teal);padding:.5rem .8rem;border-radius:4px;font-family:monospace;font-size:.85rem;margin:.5rem 0 .8rem;}
+.note-body table{width:100%;border-collapse:collapse;margin:.6rem 0 1rem;font-size:.85rem;}
+.note-body th{background:var(--navy);color:#fff;padding:.4rem .6rem;text-align:left;font-size:.78rem;}
+.note-body td{padding:.35rem .6rem;border-bottom:1px solid var(--grey-border);}
+.note-body tr:nth-child(even) td{background:var(--grey-bg);}
+.flowchart{background:#f8fafc;border:1px solid var(--grey-border);border-radius:6px;padding:.8rem;margin:.6rem 0;font-family:monospace;font-size:.8rem;white-space:pre;overflow-x:auto;}
+
+/* REG BOX */
+.reg-box{background:var(--navy);border-radius:8px;padding:.8rem 1rem;margin:1rem 0 .8rem;}
+.reg-box-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:.5rem;}
+.reg-item{display:flex;gap:.8rem;align-items:flex-start;margin-bottom:.3rem;}
+.reg-code{font-size:.75rem;font-family:monospace;color:var(--orange);font-weight:700;min-width:130px;flex-shrink:0;}
+.reg-desc{font-size:.78rem;color:#cbd5e1;}
+
+/* SIMON TIP */
+.simon-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:.7rem .9rem;margin:.8rem 0;font-size:.88rem;font-family:Georgia,serif;}
+
+/* FOOTER */
+.note-footer{display:flex;justify-content:space-between;align-items:center;padding:.6rem 1rem;background:var(--grey-bg);border-top:1px solid var(--grey-border);font-size:.75rem;margin-top:.8rem;}
+.correction-link{color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.note-version{color:var(--grey-text);}
+
+/* NO RESULTS */
+#no-results{display:none;text-align:center;padding:3rem 1rem;color:var(--grey-text);}
+
+/* PAGE NAV */
+.page-nav{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.5rem;background:#fff;border-top:1px solid var(--grey-border);margin-top:2rem;}
+.page-nav a{display:inline-flex;align-items:center;gap:.4rem;padding:.5rem 1rem;border:1px solid var(--grey-border);border-radius:6px;font-size:.85rem;color:var(--teal);text-decoration:none;font-weight:600;}
+.page-nav a:hover{background:var(--teal-light);}
+
+/* PAGE FOOTER */
+.page-footer{background:var(--navy);color:#94a3b8;text-align:center;padding:2rem 1rem;font-size:.82rem;margin-top:3rem;}
+.page-footer .attr{color:#64748b;font-size:.75rem;margin-top:.5rem;}
+
+/* CONTENT PROTECTION */
+body{-webkit-user-select:none;user-select:none;}
+
+@media(max-width:700px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:1.4rem;}
+}
+</style>
+</head>
+<body>
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+
+<!-- Watermark -->
+<div class="watermark-overlay">
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+<text transform="rotate(-35,400,300)" x="50" y="300" font-size="28" fill="#0f172a" font-family="Arial" font-weight="bold" opacity="1">MIW PRIVATE — Nixon Antony — Do Not Redistribute</text>
+<text transform="rotate(-35,400,300)" x="50" y="450" font-size="28" fill="#0f172a" font-family="Arial" font-weight="bold" opacity="1">MIW PRIVATE — Nixon Antony — Do Not Redistribute</text>
+<text transform="rotate(-35,400,300)" x="50" y="150" font-size="28" fill="#0f172a" font-family="Arial" font-weight="bold" opacity="1">MIW PRIVATE — Nixon Antony — Do Not Redistribute</text>
+</svg>
+</div>
+
+<!-- Topbar -->
+<div class="topbar">
+  <a class="topbar-logo" href="/meoclass1/">MIW</a>
+  <span class="topbar-sep">|</span>
+  <span style="font-size:.85rem;color:#94a3b8;">Simon Sir Notes</span>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/meoclass1/">MEO Class 1</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </nav>
+</div>
+
+<!-- Page Header -->
+<div class="page-header">
+  <div class="header-inner">
+    <div class="header-badge">
+      <span class="hm-dot"></span>
+      <span class="badge-text">Part 7 of 8 · Subscriber Only</span>
+    </div>
+    <h1 class="page-title">Simon Sir Notes — Part 7: Pages 151–175</h1>
+    <p class="page-sub">CO₂ System Details · TQM · FAL Convention · Maritime Single Window · Maritime Liens · UNCLOS Zones · CSC · Container Marking · VGM · Reefer PTI</p>
+    <div class="header-meta">
+      <span class="hm-item"><span class="hm-dot"></span>Pages 151–175 · Vignesh Siva Notes</span>
+      <span class="hm-item"><span class="hm-dot"></span>11 topics covered</span>
+      <span class="hm-item"><span class="hm-dot"></span>Examiner: Simon Sir (Kochi MMD)</span>
+    </div>
+  </div>
+</div>
+
+<!-- Controls -->
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search topics..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
+  <button class="filter-btn" onclick="filterTag('stability',this)">Stability</button>
+  <button class="filter-btn" onclick="filterTag('fire',this)">Fire / CO₂</button>
+  <button class="filter-btn" onclick="filterTag('marpol',this)">MARPOL</button>
+  <button class="filter-btn" onclick="filterTag('solas',this)">SOLAS</button>
+  <button class="filter-btn" onclick="filterTag('machinery',this)">Machinery</button>
+  <button class="filter-btn" onclick="filterTag('survey',this)">Surveys</button>
+  <span id="q-count-label">Showing all</span>
+</div>
+
+<!-- Main Layout -->
+<div class="main-layout">
+  <aside class="sidebar">
+    <div class="toc-title">Contents</div>
+    <a class="toc-link" href="#sec-co2">🔥 CO₂ System Details</a>
+<a class="toc-link" href="#n1">1. CO₂ Pressure Testing & Capacity</a>
+<a class="toc-link" href="#n2">2. CO₂ Room & Maintenance</a>
+<a class="toc-link" href="#n3">3. TQM — 8 Principles</a>
+<div class="toc-divider"></div>
+<a class="toc-link" href="#sec-fal">📋 FAL & Digital Certs</a>
+<a class="toc-link" href="#n4">4. GISIS & FAL Convention</a>
+<a class="toc-link" href="#n5">5. Maritime Single Window</a>
+<div class="toc-divider"></div>
+<a class="toc-link" href="#sec-liens">⚖ Maritime Liens & UNCLOS</a>
+<a class="toc-link" href="#n6">6. Five Categories of Liens</a>
+<a class="toc-link" href="#n7">7. Priority & Admiralty Act 2017</a>
+<a class="toc-link" href="#n8">8. UNCLOS Maritime Zones</a>
+<div class="toc-divider"></div>
+<a class="toc-link" href="#sec-container">📦 Container Safety</a>
+<a class="toc-link" href="#n9">9. CSC Convention & Safety Plate</a>
+<a class="toc-link" href="#n10">10. Container Marking ISO 6346</a>
+<a class="toc-link" href="#n11">11. VGM, Reefer PTI & 2026 Regs</a>
+
+  </aside>
+  <main id="note-feed">
+    <!-- SECTION: CO2 System Details -->
+    <div class="section-head" id="sec-co2">
+      <h2>🔥 CO₂ Fixed System — Technical Detail</h2>
+      <span class="sec-count">3 topics</span>
+    </div>
+
+    <div class="note-card" id="n1" data-tags="fire solas">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">1</div>
+        <div class="note-title-wrap">
+          <div class="note-title">CO₂ System — Properties, Pressure Testing & Measurement Methods (Pages 151–152)</div>
+          <div class="note-tags"><span class="note-tag">Fire</span><span class="note-tag">SOLAS</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Physical Properties of CO₂</h4>
+        <ul>
+          <li><strong>Critical Temperature:</strong> 31.1°C — above this, CO₂ cannot be liquefied regardless of pressure.</li>
+          <li><strong>Critical Pressure:</strong> 75 bar — pressure needed to liquefy at critical temperature.</li>
+          <li><strong>Bottle pressure:</strong> 56 bar at 20°C; 64 bar at 25°C; 71 bar at 30°C — room temperature must be kept below 55°C.</li>
+          <li><strong>Specific free gas volume:</strong> 0.56 m³/kg at 21.1°C and 1 bar.</li>
+        </ul>
+        <h4>Pressure Testing of CO₂ Flooding System Lines</h4>
+        <table>
+          <tr><th>Line Section</th><th>Test Medium</th><th>Test Pressure</th></tr>
+          <tr><td>Cylinder to Master Valve</td><td>Liquid (hydraulic)</td><td><strong>190 bar</strong></td></tr>
+          <tr><td>Master Valve to ER/Cargo Hold Valve</td><td>Liquid (hydraulic)</td><td><strong>80 bar</strong></td></tr>
+          <tr><td>ER/Cargo Hold Valve to Nozzles</td><td>Air blowing test</td><td><strong>6–7 bar</strong></td></tr>
+          <tr><td>Pilot Control Line (copper tube)</td><td>Burst test</td><td><strong>56 bar</strong></td></tr>
+        </table>
+        <h4>CO₂ Bottle Stamping Requirements</h4>
+        <ul>
+          <li>Manufacturer name, official stamp, serial number, tare weight (empty bottle weight), test pressure, and hydrostatic test date.</li>
+        </ul>
+        <h4>CO₂ Quantity Measurement Methods</h4>
+        <ul>
+          <li>Beam scale (physical weighing).</li>
+          <li>Thermal strip indicators.</li>
+          <li>Infrared (IR) camera.</li>
+          <li>Ultrasonic liquid level indicator.</li>
+          <li>Radioactive isotope liquid level gauge.</li>
+          <li>Hydrostatic pressure testing history.</li>
+        </ul>
+        <h4>Capacity Requirements</h4>
+        <ul>
+          <li><strong>Machinery space (excl. casing):</strong> CO₂ = <strong>40%</strong> of gross volume.</li>
+          <li><strong>Machinery space (incl. casing):</strong> CO₂ = <strong>35%</strong> of gross volume.</li>
+          <li><strong>Cargo hold:</strong> CO₂ = <strong>30%</strong> of gross volume of largest cargo hold.</li>
+          <li>Discharge requirement: <strong>50% within 1 minute; 85% within 2 minutes</strong>.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">FSS Code Ch. 5</span><span class="reg-desc">Fixed CO₂ fire extinguishing systems — capacity, discharge rate, room regulations</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-2 / Reg 10</span><span class="reg-desc">Fire-fighting systems — fixed CO₂ installation requirements for machinery spaces</span></div>
+          <div class="reg-item"><span class="reg-code">IRS / DNV Rules</span><span class="reg-desc">Class rules for CO₂ system installation, bottle pressure testing intervals</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What pressure is the CO₂ line tested to?" — Give all three sections: 190 bar (cylinder to master valve), 80 bar (master valve to ER valve), 6–7 bar air blow (nozzle section). He will ask about capacity — know 40%/35%/30% by heart. Pilot line is copper — he may ask why (corrosion resistance, flexibility, ease of installation).</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p7, N1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p7 · N1 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n2" data-tags="fire solas">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">2</div>
+        <div class="note-title-wrap">
+          <div class="note-title">CO₂ Room Regulations, Maintenance Schedule & Certificates (Pages 146–150)</div>
+          <div class="note-tags"><span class="note-tag">Fire</span><span class="note-tag">SOLAS</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>CO₂ Room Regulations (FSS Code Ch. 5)</h4>
+        <ul>
+          <li>Must not be used for any other purpose; located <strong>aft of the collision bulkhead</strong>.</li>
+          <li>Access doors must open <strong>outward</strong>; room must be gas-tight.</li>
+          <li>Access directly possible from the <strong>open deck</strong>.</li>
+          <li>Room temperature must be maintained <strong>below 55°C</strong>.</li>
+          <li>Exhaust duct of mechanical ventilation routed to the <strong>bottom</strong> of the space (CO₂ is 1.5× heavier than air).</li>
+          <li>Minimum <strong>6 air changes per hour</strong>; minimum clear height: 2,000 mm.</li>
+          <li>Must not be located lower than one deck below the open deck if below deck.</li>
+        </ul>
+        <h4>CO₂ System Maintenance Schedule</h4>
+        <table>
+          <tr><th>Interval</th><th>Key Tasks</th></tr>
+          <tr><td><strong>Monthly</strong></td><td>Open control cabinet — test audible/visual alarms, ventilation cut-off. Check room ventilation fan. Verify cylinders properly clamped. Check operating levers and flexible hoses.</td></tr>
+          <tr><td><strong>Yearly</strong></td><td>All monthly checks + blow through distribution pipes with service air + check general physical condition of installation.</td></tr>
+          <tr><td><strong>2-Yearly (Biennial)</strong></td><td>All yearly checks + <strong>weigh CO₂ bottles</strong> (max 10% content reduction per cylinder allowed) + blow pipes at 6–7 bar service air.</td></tr>
+          <tr><td><strong>5-Yearly</strong></td><td>All previous + uncouple all main bottles. Open one pilot bottle and test time delay unit, master valve auto-open, and high-pressure leak alarm. Check manifold relief valve lifts at 180 bar. Pressure test isolated piping sections at <strong>25 bar air</strong>.</td></tr>
+          <tr><td><strong>10-Yearly</strong></td><td>Renew all flexible hoses. Internal inspection of bottles (check dip tubes). Hydrostatic test at <strong>250 bar</strong> — test 10% of bottles; if any fail → test 50%; if more fail → test 100%. After 20 years of age: hydrostatic test every <strong>5 years</strong>.</td></tr>
+        </table>
+        <h4>Required Certificates</h4>
+        <ul>
+          <li>Installation Certificate.</li>
+          <li>Shore maintenance/weighing certificate (<strong>every 2 years</strong>).</li>
+          <li>Bottle pressure test certificate (<strong>every 10 years</strong>; every 5 years after 20 years of age).</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">FSS Code Ch. 5 / Sec. 2.2.5</span><span class="reg-desc">CO₂ room location, construction, and ventilation requirements</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.1/Circ.1318</span><span class="reg-desc">Revised guidelines for maintenance and inspection of fixed CO₂ fire-extinguishing systems</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-2 / Reg 14</span><span class="reg-desc">Operational readiness, maintenance and inspections of fire protection systems</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir's most-tested CO₂ question:</strong> "What is the 10-yearly maintenance of the CO₂ system?" — Renew flexible hoses, internal bottle inspection, hydrostatic test at 250 bar, test 10%/50%/100% batch rule. He will also ask: "Why is the ventilation exhaust at the bottom of the CO₂ room?" — CO₂ is 1.5× heavier than air → sinks → must be extracted from the bottom to prevent accumulation.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p7, N2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p7 · N2 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n3" data-tags="fire solas ism">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">3</div>
+        <div class="note-title-wrap">
+          <div class="note-title">TQM — Total Quality Management in Shipping (Pages 152–153)</div>
+          <div class="note-tags"><span class="note-tag">ISM</span><span class="note-tag">Management</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Definition</h4>
+        <p>TQM is a comprehensive management philosophy seeking to <strong>continually improve products, services, and processes</strong> through quality focus and the active involvement of all employees. Quality is not a single department's responsibility — it is a collective effort.</p>
+        <h4>8 Principles of TQM</h4>
+        <ul>
+          <li><strong>1. Customer Focus:</strong> Align strategy to meet and exceed customer expectations.</li>
+          <li><strong>2. Continuous Improvement (Kaizen):</strong> Ongoing structured efforts to improve processes.</li>
+          <li><strong>3. Employee Involvement:</strong> Every employee participates in quality improvement.</li>
+          <li><strong>4. Process-Centred Approach:</strong> Identify hidden inefficiencies through systematic workflows.</li>
+          <li><strong>5. Integrated System:</strong> All departments work seamlessly toward quality objectives.</li>
+          <li><strong>6. Fact-Based Decision Making:</strong> Decisions based on empirical data, not intuition.</li>
+          <li><strong>7. Strategic & Systematic Approach:</strong> TQM aligned with organisation's long-term goals.</li>
+          <li><strong>8. Communication:</strong> Open channels ensuring everyone understands their role in quality.</li>
+        </ul>
+        <h4>TQM Aims in Shipping Operations</h4>
+        <ul>
+          <li>Zero Cargo Claims; Zero Lost Time Incidents (LTI).</li>
+          <li>Zero Detentions or PSC deficiencies.</li>
+          <li>Minimum operating costs; no MARPOL fines.</li>
+          <li>No major Non-Conformities (NC) under the ISM Code.</li>
+          <li>Safe, high-efficiency cargo turnaround.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">ISO 9001:2015</span><span class="reg-desc">Quality Management Systems — High Level Structure (HLS) enabling integration with ISM, OHSAS, ISO 14001</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code Sec. 11</span><span class="reg-desc">Documentation requirements — SMS documentation as part of integrated quality management</span></div>
+          <div class="reg-item"><span class="reg-code">ISO 14001:2015</span><span class="reg-desc">Environmental Management Systems — integrated with TQM for shipping environmental compliance</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is TQM and what are its principles?" — Give all 8 principles with "Kaizen" for principle 2. He may link it to ISO 9001:2015 — know that the HLS (High Level Structure) of 2015 allows integration of Quality + Safety + Environmental + Energy management systems into one IMS.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p7, N3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p7 · N3 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: FAL Convention & Digital -->
+    <div class="section-head" id="sec-fal">
+      <h2>📋 FAL Convention, Digital Certs & Maritime Single Window</h2>
+      <span class="sec-count">3 topics</span>
+    </div>
+
+    <div class="note-card" id="n4" data-tags="survey ism solas">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">4</div>
+        <div class="note-title-wrap">
+          <div class="note-title">GISIS, FAL Convention & Standardised FAL Forms (Pages 154–155)</div>
+          <div class="note-tags"><span class="note-tag">Survey</span><span class="note-tag">Commercial</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>GISIS — Global Integrated Shipping Information System</h4>
+        <p>IMO's centralised online platform collecting, processing, storing, and sharing regulatory and operational data on global shipping and maritime safety. Used for ship surveys, port state inspections, flag state data.</p>
+        <h4>FAL Convention (1965 / EIF March 1967)</h4>
+        <p>Facilitates international maritime traffic by streamlining administrative formalities, port procedures, and documentary requirements for ships arriving at, staying in, and departing from international ports.</p>
+        <ul>
+          <li><strong>Prevent unnecessary delays:</strong> Reduce bureaucratic paperwork and time in international maritime traffic.</li>
+          <li><strong>Standardised documentation:</strong> Promote global standardisation of clearance documents.</li>
+          <li><strong>Maritime Single Window (MSW):</strong> Mandatory from <strong>1 January 2024</strong> — electronic exchange between ships and ports mandatory.</li>
+        </ul>
+        <h4>Standardised FAL Forms</h4>
+        <table>
+          <tr><th>Form</th><th>Document Name</th></tr>
+          <tr><td>FAL Form 1</td><td>General Declaration (vessel particulars, voyage info, dimensions)</td></tr>
+          <tr><td>FAL Form 2</td><td>Cargo Declaration</td></tr>
+          <tr><td>FAL Form 3</td><td>Ship's Stores Declaration</td></tr>
+          <tr><td>FAL Form 4</td><td>Crew's Effects Declaration</td></tr>
+          <tr><td>FAL Form 5</td><td>Crew List</td></tr>
+          <tr><td>FAL Form 6</td><td>Passenger List (if applicable)</td></tr>
+          <tr><td>FAL Form 7</td><td>Dangerous Goods Manifest</td></tr>
+        </table>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">FAL Convention 1965</span><span class="reg-desc">Convention on Facilitation of International Maritime Traffic — standardised port entry/exit documentation</span></div>
+          <div class="reg-item"><span class="reg-code">FAL.6(18) / FAL.8(34)</span><span class="reg-desc">Amendments to FAL Convention — revised standardised forms; MSW mandatory from Jan 2024</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS XI-2 / Reg 9.2.2</span><span class="reg-desc">ISPS pre-arrival security information — required in addition to FAL forms</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is the FAL Convention?" — 1965, facilitates international maritime traffic, standardises documents. Know the 7 FAL forms by name and number. MSW mandatory from 1 January 2024 is a current hot topic. He may ask: "What is GISIS?" — IMO's centralised maritime information platform.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p7, N4, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p7 · N4 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n5" data-tags="survey iacs ism">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">5</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Maritime Single Window & IRS Electronic Certificates (Pages 156–157)</div>
+          <div class="note-tags"><span class="note-tag">Survey</span><span class="note-tag">IACS</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Maritime Single Window (MSW)</h4>
+        <p>A unified digital platform for rapid exchange of electronic information between ships, port authorities, customs, immigration, and shipping companies — mandatory from <strong>1 January 2024</strong> under FAL Convention amendments.</p>
+        <ul>
+          <li><strong>Single point of entry:</strong> All regulatory data submitted through one portal — eliminates repetitive paperwork to multiple government authorities.</li>
+          <li><strong>India — SWIFT:</strong> Single Window Interface for Facilitating Trade + NLP-Marine (National Logistics Portal Marine).</li>
+          <li><strong>Singapore — NSW:</strong> National Single Window.</li>
+        </ul>
+        <h4>IRS Electronic Certificates</h4>
+        <ul>
+          <li>IRS implemented e-certificates from <strong>July 2018</strong> for all vessels classed under IRS.</li>
+          <li>All statutory and class certificates issued as <strong>E-Certificates</strong> — digitally signed with a <strong>Unique Tracking Number (UTN)</strong> for online verification.</li>
+          <li>Initially not extended to passenger ships; requires MoU between Flag State and RO.</li>
+        </ul>
+        <h4>Advantages of Electronic Certificates</h4>
+        <ul>
+          <li>Rapid delivery onboard — no physical mailing.</li>
+          <li>Easy document management — no bulky paper folders.</li>
+          <li>No risk of physical document loss, theft, or deterioration.</li>
+          <li>Cyber security must be integrated into ship's SMS (audited during DOC/SMC renewal).</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">FAL.6(18)</span><span class="reg-desc">Amendments to FAL Convention — electronic exchange of information mandatory from April 2019</span></div>
+          <div class="reg-item"><span class="reg-code">MSC-FAL.1/Circ.3</span><span class="reg-desc">Guidelines on Maritime Cyber Risk Management</span></div>
+          <div class="reg-item"><span class="reg-code">MSC-FAL.1/Circ.8</span><span class="reg-desc">Guidelines for setting up and operating a Maritime Single Window</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What is the Maritime Single Window?" — Unified digital port clearance platform; mandatory from 1 January 2024. IRS e-certificate from July 2018 with UTN is a current affairs question. He may ask: "What is a UTN?" — Unique Tracking Number on e-certificates for instant online authenticity verification.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p7, N5, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p7 · N5 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: Maritime Liens -->
+    <div class="section-head" id="sec-liens">
+      <h2>⚖ Maritime Liens, UNCLOS & Admiralty Law</h2>
+      <span class="sec-count">4 topics</span>
+    </div>
+
+    <div class="note-card" id="n6" data-tags="survey">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">6</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Five Categories of Maritime Liens & True Maritime Lien (Pages 158–159)</div>
+          <div class="note-tags"><span class="note-tag">Commercial</span><span class="note-tag">Admiralty</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Five Categories of Maritime Liens</h4>
+        <ul>
+          <li><strong>1. Maritime Lien (True):</strong> Attaches to crew wages, salvage, or physical damage caused by ship's action.</li>
+          <li><strong>2. Statutory Lien:</strong> Government/statutory bodies for port charges, customs dues. Valid for <strong>6 months</strong> (60 days after sale of vessel, whichever is earlier).</li>
+          <li><strong>3. Possessory Lien:</strong> Arises while holding physical possession — ship repair yard, ship chandler claims. Lost if possession is surrendered.</li>
+          <li><strong>4. Contractual Lien:</strong> Established via express contract terms — shipowner's lien on cargo for unpaid freight.</li>
+          <li><strong>5. Judicial Lien:</strong> Generated by court order — attachment lien, execution lien.</li>
+        </ul>
+        <p><em>Maritime lien can attach only to: The Ship, The Cargo, or The Freight.</em></p>
+        <h4>True Maritime Lien — Key Characteristics</h4>
+        <ul>
+          <li><strong>Privileged claim:</strong> Priority over ship mortgages, possessory liens, and statutory rights in rem.</li>
+          <li><strong>Secret and indelible:</strong> Travels with the property even if the vessel is sold — invisible, not registered in any public registry.</li>
+          <li><strong>Accrues automatically</strong> at the moment of the event giving rise to the cause of action.</li>
+          <li><strong>Enforcement:</strong> By <strong>Action in Rem</strong> — the ship (res) is physically arrested by the Admiralty Court and may be sold to satisfy creditors.</li>
+        </ul>
+        <h4>Legal Glossary</h4>
+        <ul>
+          <li><strong>Res:</strong> Latin for "thing" — the maritime property (ship, cargo, freight).</li>
+          <li><strong>Action in Rem:</strong> Legal action directed against the property itself.</li>
+          <li><strong>Action in Personam:</strong> Legal action against a person, company, or entity.</li>
+          <li><strong>Pari Passu:</strong> Claims of the same class rank equally — proceeds shared proportionately.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">Admiralty Act 2017 (India)</span><span class="reg-desc">Admiralty (Jurisdiction and Settlement of Maritime Claims) Act — replaces archaic British admiralty statutes</span></div>
+          <div class="reg-item"><span class="reg-code">Admiralty Act 2017 / Sec. 9</span><span class="reg-desc">Maritime liens — priority, nature, enforcement, and expiry provisions</span></div>
+          <div class="reg-item"><span class="reg-code">UNCLOS Art. 113–114</span><span class="reg-desc">Damage by submarine cables/pipelines — liability provisions relevant to maritime claims</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir (or Rajappan/Nair) typically asks:</strong> "What are the types of maritime liens?" — Give all 5 types. Key distinction: True maritime lien = secret + indelible + travels with ship even after sale. Statutory lien expires in 6 months. Possessory lien is lost if possession is surrendered. "Pari Passu" = equal ranking within the same class — must know the Latin term.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p7, N6, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p7 · N6 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n7" data-tags="survey">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">7</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Priority of Maritime Liens & Admiralty Act 2017 (Pages 160–162)</div>
+          <div class="note-tags"><span class="note-tag">Commercial</span><span class="note-tag">Admiralty</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Common True Maritime Lien Claims (in rank order)</h4>
+        <ul>
+          <li>Salvage claims.</li>
+          <li>Crew wages and Master's disbursements.</li>
+          <li>Damage done by a ship (collision claims).</li>
+          <li>Bottomry and Respondentia bonds.</li>
+        </ul>
+        <p><strong>Bottomry Bond:</strong> Ship pledged as collateral by the Master to secure emergency funds.<br>
+        <strong>Respondentia Bond:</strong> Cargo pledged as collateral.</p>
+        <h4>Priority Rule — "Last in Time, First in Right"</h4>
+        <p class="formula">Last in Time, First in Right
+(Most recent lien preserving the vessel takes precedence)</p>
+        <ul>
+          <li>Salvage claims: ranked in <strong>inverse chronological order</strong> — latest salvage operation has highest priority.</li>
+          <li>Liens of the same class: rank <strong>Pari Passu</strong> (equal, proportional payment).</li>
+        </ul>
+        <h4>Admiralty Act 2017 (India) — Key Provisions</h4>
+        <ul>
+          <li>Maritime lien continues even if vessel changes ownership, registration, or flag.</li>
+          <li><strong>General maritime lien expiry: 1 year</strong> unless the vessel is seized and sold by the High Court.</li>
+          <li><strong>Wage-related claims: 2 years</strong> from date claim becomes due (wages, repatriation, contractual sums).</li>
+          <li><strong>Statutory lien: 6 months</strong>; 60 days after sale, whichever expires first.</li>
+        </ul>
+        <h4>Admiralty Assessor Rules 2018 — Qualifications</h4>
+        <ul>
+          <li>MEO Class 1 Engineer.</li>
+          <li>Sea experience including <strong>5+ years</strong> in survey and inspection of merchant ships; at least <strong>1 year as CE or 2E</strong>.</li>
+          <li>Appeal: Plaintiff may approach the Supreme Court of India.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">Admiralty Act 2017 / Sec. 9–10</span><span class="reg-desc">Maritime liens — rank, priority, and duration of various categories of maritime claims</span></div>
+          <div class="reg-item"><span class="reg-code">Admiralty Act 2017 / Sec. 22</span><span class="reg-desc">Inter se priority — ranking of maritime liens of the same and different classes</span></div>
+          <div class="reg-item"><span class="reg-code">Admiralty Assessors Rules 2018</span><span class="reg-desc">Qualifications and appointment of Admiralty Assessors in Indian High Courts</span></div>
+        </div>
+        <div class="simon-tip"><strong>Key exam points:</strong> "Last in Time, First in Right" principle for maritime liens of different classes. "Pari Passu" for same class. Duration: 1 year (general), 2 years (wages), 6 months (statutory). Admiralty Assessor: MEO Class 1 + 5 years survey experience — this is directly relevant to your career path.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p7, N7, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p7 · N7 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n8" data-tags="marpol solas">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">8</div>
+        <div class="note-title-wrap">
+          <div class="note-title">UNCLOS Maritime Zones, EEZ & International Seabed Authority (Pages 163–166)</div>
+          <div class="note-tags"><span class="note-tag">UNCLOS</span><span class="note-tag">Commercial</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>UNCLOS III (1982) — Maritime Zones</h4>
+        <div class="flowchart">Baseline
+  ├─ Territorial Sea (TS):      up to 12 NM
+  ├─ Contiguous Zone:           up to 24 NM
+  ├─ Exclusive Economic Zone (EEZ): up to 200 NM (excl. TS)
+  └─ Continental Shelf:         to outer continental margin
+       Max: 350 NM from baseline
+       OR 100 NM seaward of the 2,500m isobath
+       (whichever is further)
+
+Area Beyond National Jurisdiction (ABNJ): beyond all the above</div>
+        <h4>Key UNCLOS Articles</h4>
+        <ul>
+          <li><strong>Art. 33:</strong> Contiguous Zone — coastal state may enforce customs, fiscal, immigration, sanitary laws.</li>
+          <li><strong>Art. 56:</strong> EEZ rights — sovereign rights to exploit natural resources; jurisdiction over artificial islands, marine research, environment protection.</li>
+          <li><strong>Art. 77:</strong> Continental shelf — sovereign rights for exploring and exploiting natural resources.</li>
+          <li><strong>Art. 192:</strong> General obligation to protect and preserve the marine environment.</li>
+          <li><strong>Art. 195:</strong> No transfer of hazards — states must not transfer pollution from one area to another.</li>
+          <li><strong>Art. 218/220:</strong> Port State and Coastal State enforcement of environmental regulations.</li>
+        </ul>
+        <h4>International Seabed Authority (ISA)</h4>
+        <ul>
+          <li>Established under UNCLOS — headquartered in <strong>Kingston, Jamaica</strong>.</li>
+          <li>Regulates all mineral-related activities in the international seabed area (The Area — ABNJ).</li>
+          <li>All UNCLOS state parties are ISA members.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">UNCLOS 1982 / Art. 55–75</span><span class="reg-desc">EEZ — rights, jurisdiction, duties of coastal states; due regard for other states</span></div>
+          <div class="reg-item"><span class="reg-code">UNCLOS 1982 / Art. 192–196</span><span class="reg-desc">Environmental protection obligations — prevent, reduce, control marine pollution</span></div>
+          <div class="reg-item"><span class="reg-code">Maritime Zones Act 1976 (India)</span><span class="reg-desc">Indian legislation defining maritime boundaries aligned with UNCLOS provisions</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir / Nair typically asks:</strong> "What are the maritime zones under UNCLOS?" — Give all zones with distances from baseline. Key articles: 94 (Flag State duties), 192 (protect marine environment), 218/220 (PSC/coastal state enforcement). ISA headquarters: Kingston, Jamaica.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p7, N8, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p7 · N8 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: Container -->
+    <div class="section-head" id="sec-container">
+      <h2>📦 Container Safety — CSC & Container Operations</h2>
+      <span class="sec-count">3 topics</span>
+    </div>
+
+    <div class="note-card" id="n9" data-tags="solas survey">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">9</div>
+        <div class="note-title-wrap">
+          <div class="note-title">CSC Convention, Safety Approval Plate & Inspection Schemes (Pages 167–168)</div>
+          <div class="note-tags"><span class="note-tag">SOLAS</span><span class="note-tag">Container</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>CSC Convention</h4>
+        <ul>
+          <li><strong>Adopted:</strong> December 1972; <strong>EIF:</strong> September 1977.</li>
+          <li>Convened jointly by UN and IMO.</li>
+          <li><strong>BIC (Bureau International des Containers):</strong> Non-profit organisation assigning owner prefixes and managing the BIC Code Register. Follows <strong>ISO 6346</strong> for container coding, identification, and marking.</li>
+        </ul>
+        <h4>CSC Safety Approval Plate</h4>
+        <p>Attached to the <strong>outside left door</strong> of the container. Contains:</p>
+        <ul>
+          <li>"CSC SAFETY APPROVAL" stamping (bold characters ≥ 8mm height).</li>
+          <li>Classification company approval code, manufacturing date, manufacturer's container ID number.</li>
+          <li><strong>Maximum Gross Weight:</strong> Container + cargo weight safely transportable.</li>
+          <li><strong>Stacking Load Value:</strong> Weight stackable on top at 1.8G force.</li>
+          <li><strong>Racking Test Load Value:</strong> Transverse force before frame twists.</li>
+          <li>First maintenance examination date.</li>
+        </ul>
+        <h4>Container Weight Formulas</h4>
+        <p class="formula">Gross Weight = Tare Weight + Cargo Weight</p>
+        <p class="formula">Payload = Maximum cargo weight the container can hold</p>
+        <h4>Container Inspection Schemes</h4>
+        <ul>
+          <li><strong>PES (Periodic Examination Scheme):</strong> First exam ≤ 5 years after manufacture; thereafter at intervals ≤ 30 months. Next inspection date marked on CSC plate.</li>
+          <li><strong>ACEP (Approved Continuous Examination Programme):</strong> Container examined every time repair is carried out; must align with PES intervals minimum; ACEP number displayed on plate.</li>
+        </ul>
+        <p><em><strong>CSC plate validity note:</strong> A CSC plate is valid only if the container is in good order. Any authorised agent can take a container out of service immediately if damaged to a dangerous level — regardless of inspection scheme.</em></p>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">CSC Convention 1972</span><span class="reg-desc">International Convention for Safe Containers — safety approval, inspection, and marking requirements</span></div>
+          <div class="reg-item"><span class="reg-code">ISO 6346</span><span class="reg-desc">Freight containers — coding, identification, and marking including owner prefix and equipment identifier</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS VI / Reg 2</span><span class="reg-desc">Safe loading and securing — container CSC compliance required before loading on ships</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir / Rajappan typically asks:</strong> "What information is on the CSC Safety Approval Plate?" — List all items; emphasise it is on the <em>outside left door</em>. He may ask the difference between PES and ACEP — PES = periodic time-based; ACEP = repair-triggered + continuous. CSC plate validity depends on condition, not just inspection date.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p7, N9, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p7 · N9 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n10" data-tags="solas survey">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">10</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Container Marking (ISO 6346), Identification & Large Ship Problems (Pages 169–170)</div>
+          <div class="note-tags"><span class="note-tag">SOLAS</span><span class="note-tag">Container</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Container Marking Structure (ISO 6346)</h4>
+        <ul>
+          <li><strong>Owner's Prefix:</strong> 3 capital letters (owner/operator).</li>
+          <li><strong>Equipment Category Identifier:</strong> 1 capital letter:
+            <ul>
+              <li><strong>U</strong> = All freight containers.</li>
+              <li><strong>J</strong> = Detachable freight container-related equipment.</li>
+              <li><strong>Z</strong> = Trailers and chassis carrying storage containers.</li>
+            </ul>
+          </li>
+          <li><strong>Serial Number:</strong> 6-digit unique number within owner's fleet.</li>
+          <li><strong>Check Digit:</strong> Single digit validating accuracy of prefix and serial number.</li>
+        </ul>
+        <h4>Problems Associated with Large Container Ships</h4>
+        <ul>
+          <li><strong>Stacking of light containers & Windage:</strong> Large above-deck container stacks catch wind — reduces manoeuvrability (e.g., Ever Given grounding, Suez Canal 2021).</li>
+          <li><strong>Torsional forces & Parametric Rolling:</strong> G-forces during pitch and roll cause container stack failures and loss overboard.</li>
+          <li><strong>Infrastructure demands:</strong> Massive capital investment required (e.g., Panama Canal expansion 2016 = $5 billion).</li>
+        </ul>
+        <h4>Prototype Tests on Containers (carried out regardless of single or series build)</h4>
+        <ul>
+          <li>Dimension check; Lifting test (top corner, bottom corner, forklift).</li>
+          <li>Stacking test; Concentrated load on roof and floor.</li>
+          <li>Transverse racking test; Longitudinal restraint test.</li>
+          <li>Endwall and sidewall test; Door operation test.</li>
+          <li>Cargo securing device test; Weather tightness test.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">ISO 6346</span><span class="reg-desc">Container coding, identification, and marking — owner prefix, equipment identifier, serial, check digit</span></div>
+          <div class="reg-item"><span class="reg-code">CSC Convention 1972</span><span class="reg-desc">Prototype testing requirements for new container designs and series production</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS VI / Reg 5-1</span><span class="reg-desc">Container weight verification — VGM mandatory before loading since 2016</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir typically asks:</strong> "What are the prototype tests for containers?" — List all 9+ tests; emphasise they apply <em>irrespective of whether a single container or a series is built</em>. He may ask about windage on large container ships — direct link to the Ever Given. Know container ID structure: 3+1+6+1 (XXXU-123456-7).</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p7, N10, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p7 · N10 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card" id="n11" data-tags="solas survey">
+      <div class="note-header" onclick="toggleCard(this)">
+        <div class="note-num-badge">11</div>
+        <div class="note-title-wrap">
+          <div class="note-title">Container Logistics, VGM, Reefer PTI & New Regulations (Pages 171–174)</div>
+          <div class="note-tags"><span class="note-tag">SOLAS</span><span class="note-tag">Container</span></div>
+        </div>
+        <svg class="note-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="note-body">
+        <h4>Key Logistics Definitions</h4>
+        <ul>
+          <li><strong>Liner Trade:</strong> Fixed routes, strict schedules, published timetables — predictable for exporters/importers.</li>
+          <li><strong>SOC:</strong> Shipper Owned Container; <strong>COC:</strong> Carrier Owned Container (negotiated under NVOCC).</li>
+          <li><strong>ICD (Inland Container Depot):</strong> Inland site where shipping and customs clearance for containerised cargo can be processed.</li>
+          <li><strong>CFS (Container Freight Station):</strong> Physical extension of the port for temporary storage.</li>
+        </ul>
+        <h4>VGM — Verified Gross Mass (SOLAS Ch. VI, from 2016)</h4>
+        <p>Shippers must declare the actual weight before loading. Without VGM, container is <strong>denied loading</strong>.</p>
+        <ul>
+          <li><strong>Method 1:</strong> Direct weighing on a certified weighbridge — VGM = total weight of packed, sealed container.</li>
+          <li><strong>Method 2:</strong> Calculated — VGM = Σ(individual package weights + dunnage/securing materials) + container tare weight.</li>
+          <li>Weighing equipment must meet <strong>National Certification and Calibration</strong> requirements (India: Legal Metrology Dept).</li>
+        </ul>
+        <h4>Reefer Container PTI (Pre-Trip Inspection)</h4>
+        <ul>
+          <li>Functional check on <strong>empty</strong> refrigerated container before release to shipper.</li>
+          <li>Valid PTI certificate: <strong>30 to 180 days</strong> (varies by carrier).</li>
+          <li>Checklist: cooling unit, temperature recording device, structural integrity, cleaning, connection to main control module.</li>
+        </ul>
+        <h4>New Container Ship Regulations (2026)</h4>
+        <ul>
+          <li><strong>Electronic Inclinometers:</strong> Mandatory from <strong>January 2026</strong> for container ships and bulk carriers > 7,000 GT.</li>
+          <li><strong>Mandatory Reporting of Lost Containers:</strong> Strictly mandatory from <strong>January 2026</strong>.</li>
+        </ul>
+        <h4>Fire Fighting for Containers (Post-2016 ships)</h4>
+        <ul>
+          <li>At least one water mist lance for container fires in open spaces.</li>
+          <li>Two water monitors if ship beam ≤ 30 m; four monitors if beam > 30 m.</li>
+          <li>Thermal imaging camera mandatory.</li>
+        </ul>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS VI / Reg 2</span><span class="reg-desc">VGM — Verified Gross Mass; shippers must verify and provide weight before loading; mandatory from 2016</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-2 / Reg 10.10</span><span class="reg-desc">Portable monitors and water mist lances for fighting fires in cargo areas</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.380(94)</span><span class="reg-desc">Amendments to SOLAS VI Regulation 2 — VGM provision, responsibilities of shippers and masters</span></div>
+        </div>
+        <div class="simon-tip"><strong>Simon Sir / Rajappan typically ask:</strong> "What is VGM and what are the two methods?" — Method 1 = certified weighbridge; Method 2 = calculated sum + tare weight. Both methods require certified/calibrated equipment. 2026 regulations (inclinometers + lost container reporting) are current affairs hot topics for container vessel orals at Kochi MMD.</div>
+        <div class="note-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=simon-notes-p7, N11, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="note-version">simon-notes-p7 · N11 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="no-results"><p>No topics found matching your search.</p></div>
+  </main>
+</div>
+
+<!-- Page Nav -->
+<div class="page-nav">
+  <a href="/meoclass1/simon-notes-p6.html">← Part 6 (pp. 126–150)</a>
+  <a href="/meoclass1/simon-notes-p8.html">Part 8 (pp. 176–200) →</a>
+</div>
+
+<!-- Footer -->
+<div class="page-footer">
+  <div>Originally prepared by Vignesh Siva. Transcribed, expanded and updated by Nixon Antony, 2/E, Maersk A/S.</div>
+  <div class="attr">© Marine Intelligence Weekly · Subscriber content — Do not share · <a href="mailto:contactus@marineintelligenceweekly.com" style="color:var(--teal);">contactus@marineintelligenceweekly.com</a></div>
+</div>
+
+<script>
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+
+function toggleCard(h){h.closest('.note-card').classList.toggle('open');}
+
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.note-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.note-card[id]').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
