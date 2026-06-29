@@ -118,12 +118,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
 <body>
 <script>
 (function(){
-  var v = document.cookie.split(';').some(function(c){
-    return c.trim().startsWith('miw_auth=1');
-  });
-  if(!v) window.location.replace('/SQ/pay.html');
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
 })();
 </script>
+  
 <div class="topbar">
   <div class="topbar-brand">
     <span class="logo-mark">MIW</span>
