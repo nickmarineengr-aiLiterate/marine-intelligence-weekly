@@ -36,7 +36,18 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
 .stat-val{font-size:22px;font-weight:800;color:#fff;}
 .stat-label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.8px;}
 
-/* SEARCH BAR */
+/* ORAL NOTES BANNER */
+.oral-notes-banner{background:linear-gradient(135deg,#0f766e 0%,#0d9488 100%);border-bottom:2px solid rgba(255,255,255,.15);}
+.oral-notes-inner{max-width:960px;margin:0 auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+.oral-notes-left{display:flex;align-items:center;gap:14px;}
+.oral-notes-icon{width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.oral-notes-text{color:#fff;}
+.oral-notes-text strong{font-size:14px;font-weight:700;display:block;line-height:1.3;}
+.oral-notes-text span{font-size:12px;color:rgba(255,255,255,.75);}
+.oral-notes-btn{background:#fff;color:var(--teal-dark);text-decoration:none;padding:8px 18px;border-radius:7px;font-size:13px;font-weight:700;white-space:nowrap;flex-shrink:0;transition:all .2s;}
+.oral-notes-btn:hover{background:var(--teal-light);transform:translateY(-1px);}
+@media(max-width:540px){.oral-notes-inner{flex-direction:column;align-items:flex-start;gap:10px;}}
+
 .search-bar{background:var(--navy-mid);border-bottom:1px solid rgba(255,255,255,.1);padding:14px 24px;}
 .search-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;gap:12px;}
 .search-icon{color:#94a3b8;flex-shrink:0;}
@@ -157,6 +168,7 @@ mark{background:#fef3c7;color:inherit;border-radius:2px;padding:0 1px;}
   </div>
   <div class="topbar-right">
     <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="oralnotes/" style="color:var(--teal);font-weight:700;">📄 Oral Notes</a>
     <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
   </div>
 </nav>
@@ -178,6 +190,20 @@ mark{background:#fef3c7;color:inherit;border-radius:2px;padding:0 1px;}
     </div>
   </div>
 </header>
+
+<!-- ORAL NOTES BANNER -->
+<div class="oral-notes-banner">
+  <div class="oral-notes-inner">
+    <div class="oral-notes-left">
+      <div class="oral-notes-icon">📄</div>
+      <div class="oral-notes-text">
+        <strong>Oral Notes Series — Simon Sir &amp; more</strong>
+        <span>200+ pages of examiner-focused notes · Vignesh Siva · Transcribed &amp; updated June 2026</span>
+      </div>
+    </div>
+    <a class="oral-notes-btn" href="oralnotes/">Open Notes Library →</a>
+  </div>
+</div>
 
 <!-- SEARCH -->
 <div class="search-bar">
@@ -766,7 +792,7 @@ mark{background:#fef3c7;color:inherit;border-radius:2px;padding:0 1px;}
     <div id="comment-form-wrap">
       <h3>Leave a Comment</h3>
       <p id="comment-context-label">Your comment goes directly to the editor. Not public.</p>
-      <form id="comment-form" action="https://formspree.io/f/REPLACE_WITH_YOUR_FORMSPREE_ID" method="POST" onsubmit="submitComment(event)">
+      <form id="comment-form" action="https://formspree.io/f/maqgoeww" method="POST" onsubmit="submitComment(event)">
         <input type="hidden" name="qb_reference" id="form-qb-ref" value="">
         <label>Type</label>
         <select name="comment_type">
