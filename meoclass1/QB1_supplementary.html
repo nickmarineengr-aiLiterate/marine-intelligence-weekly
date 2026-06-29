@@ -97,7 +97,15 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
 </style>
 </head>
 <body>
-
+<script>
+(function(){
+  var v = document.cookie.split(';').some(function(c){
+    return c.trim().startsWith('miw_auth=1');
+  });
+  if(!v) window.location.replace('/SQ/pay.html');
+})();
+</script>
+  
 <nav class="topbar">
   <div class="topbar-brand"><span class="logo-mark">MIW</span><span class="site-name">Marine Intelligence Weekly</span></div>
   <div class="topbar-right">
