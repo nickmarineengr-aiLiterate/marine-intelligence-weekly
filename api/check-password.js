@@ -33,6 +33,10 @@ export default async function handler(req, res) {
 
     if (storedPassword && storedPassword === password.trim()) {
       console.log(`✓ Login: ${email}`);
+      // Set auth cookie: 30 days, Secure, SameSite=Lax
+      res.setHeader("Set-Cookie",
+        "miw_auth=1; Path=/; Max-Age=2592000; SameSite=Lax; Secure; HttpOnly"
+      );
       return res.status(200).json({ success: true });
     } else {
       return res.status(200).json({ success: false });
