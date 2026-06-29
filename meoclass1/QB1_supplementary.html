@@ -99,10 +99,8 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
 <body>
 <script>
 (function(){
-  var v = document.cookie.split(';').some(function(c){
-    return c.trim().startsWith('miw_auth=1');
-  });
-  if(!v) window.location.replace('/SQ/pay.html');
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
 })();
 </script>
   
