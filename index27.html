@@ -100,10 +100,17 @@ footer{text-align:center;font-size:12px;color:var(--grey);padding:30px 20px 60px
 .floatnav a.active{background:var(--teal);opacity:1}
 @media(max-width:768px){.topnav{display:none}.floatnav{right:8px;gap:8px}.floatnav a{width:9px;height:9px}}
 
+/* SECTION PANEL (labeled, sticky below topbar) */
+.sectionpanel{position:sticky;top:51px;z-index:59;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.sectionpanel::-webkit-scrollbar{display:none}
+.sectionpanel-inner{display:inline-flex;gap:8px;padding:9px 20px;max-width:880px;margin:0 auto}
+.sectionpanel a{font-size:12px;font-weight:700;text-decoration:none;padding:6px 13px;border-radius:999px;background:var(--bg);border:1px solid var(--line);color:var(--grey);white-space:nowrap;flex-shrink:0}
+.sectionpanel a.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+
 /* RETURN TO TOP */
 #totop{position:fixed;bottom:20px;right:18px;z-index:55;width:42px;height:42px;border-radius:50%;background:var(--navy);color:#fff;border:none;font-size:18px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.2)}
 
-@media print{.topbar,.floatnav,#totop,.sharebar,.footernav{display:none!important}}
+@media print{.topbar,.floatnav,.sectionpanel,#totop,.sharebar,.footernav{display:none!important}}
 </style>
 </head>
 <body>
@@ -117,6 +124,18 @@ footer{text-align:center;font-size:12px;color:var(--grey);padding:30px 20px 60px
     </nav>
   </div>
 </div>
+
+<nav class="sectionpanel" aria-label="Section navigation (labeled)">
+  <div class="sectionpanel-inner">
+    <a href="#quickread">Quick Read</a>
+    <a href="#feature">Feature</a>
+    <a href="#regulatory">Regulatory Pulse</a>
+    <a href="#ai">AI</a>
+    <a href="#class">Classification</a>
+    <a href="#voice">Nixon's Voice</a>
+    <a href="#takeaway">Takeaway</a>
+  </div>
+</nav>
 
 <div class="hero">
   <img src="assets/cover27.webp" alt="Container ship bridge at dusk, Hormuz-style strait passage" width="1672" height="941">
@@ -293,7 +312,13 @@ footer{text-align:center;font-size:12px;color:var(--grey);padding:30px 20px 60px
 <script>
 const sections=document.querySelectorAll('section[id]');
 const navLinks=document.querySelectorAll('.floatnav a');
-const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){navLinks.forEach(a=>a.classList.remove('active'));const l=document.querySelector('.floatnav a[href="#'+e.target.id+'"]');if(l)l.classList.add('active')}})},{rootMargin:'-40% 0px -50% 0px'});
+const panelLinks=document.querySelectorAll('.sectionpanel a');
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){
+  navLinks.forEach(a=>a.classList.remove('active'));
+  panelLinks.forEach(a=>a.classList.remove('active'));
+  const dot=document.querySelector('.floatnav a[href="#'+e.target.id+'"]');if(dot)dot.classList.add('active');
+  const pill=document.querySelector('.sectionpanel a[href="#'+e.target.id+'"]');if(pill){pill.classList.add('active');pill.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'})}
+}})},{rootMargin:'-40% 0px -50% 0px'});
 sections.forEach(s=>obs.observe(s));
 window.addEventListener('scroll',()=>{document.getElementById('totop').style.display=window.scrollY>600?'flex':'none'});
 </script>
