@@ -166,6 +166,14 @@ a{color:var(--teal-dark);}
 </head>
 <body>
 
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+  
+
 <!-- WATERMARK -->
 <div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.04;">
   <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
