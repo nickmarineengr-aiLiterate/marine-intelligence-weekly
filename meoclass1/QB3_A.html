@@ -351,6 +351,13 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
 </head>
 <body>
 
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+
 <div class="topbar">
   <div class="logo-mark">MIW</div>
   <div class="site-name">Marine Intelligence Weekly</div>
