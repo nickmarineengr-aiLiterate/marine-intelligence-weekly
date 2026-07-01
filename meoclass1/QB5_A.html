@@ -118,6 +118,14 @@ body,*{-webkit-user-select:none;-ms-user-select:none;user-select:none}
 </style>
 </head>
 <body>
+
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+  
 <!-- CONTENT PROTECTION -->
 <script>
 document.addEventListener('contextmenu',e=>e.preventDefault());
