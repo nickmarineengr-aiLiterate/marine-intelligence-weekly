@@ -131,6 +131,14 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
 </style>
 </head>
 <body>
+
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+  
 <nav class="topbar">
   <div class="topbar-logo">M<span>IW</span></div>
   <div class="topbar-links">
