@@ -81,7 +81,14 @@ tr:nth-child(even) td{background:var(--grey-bg);}
 </style>
 </head>
 <body>
-
+  
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+  
 <div class="topbar">
   <div class="logo-mark">MIW</div>
   <div class="site-name">Marine Intelligence Weekly</div>
