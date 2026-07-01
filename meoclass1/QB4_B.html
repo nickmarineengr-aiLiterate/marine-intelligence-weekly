@@ -232,6 +232,13 @@ a:hover{text-decoration:underline;}
 </head>
 <body oncontextmenu="return false">
 
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+
 <!-- WATERMARK -->
 <div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;">
 <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="wm" x="0" y="0" width="340" height="180" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)"><text x="0" y="60" font-family="Segoe UI,sans-serif" font-size="11" fill="rgba(15,118,110,0.07)" font-weight="600">MIW PRIVATE — Nixon Antony — Do Not Redistribute</text></pattern></defs><rect width="100%" height="100%" fill="url(#wm)"/></svg>
