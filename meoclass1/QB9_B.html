@@ -115,6 +115,14 @@ a{color:var(--teal-dark);text-decoration:none;}a:hover{text-decoration:underline
 </style>
 </head>
 <body>
+
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+  
 <script>
 (function(){
   var v = document.cookie.split(';').some(function(c){
