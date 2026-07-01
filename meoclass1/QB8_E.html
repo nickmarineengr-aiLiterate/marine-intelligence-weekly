@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>QB8_E — Coal Cargo &amp; Bulk Cargo Codes | MIW MEO Class 1 Question Bank</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+<style>
+:root{
+  --teal:#0d9488;
+  --teal-dark:#0f766e;
+  --teal-light:#ccfbf1;
+  --navy:#0f172a;
+  --orange:#f97316;
+  --orange-light:#fff7ed;
+  --off-white:#f8fafc;
+  --grey-text:#64748b;
+  --grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;
+  --ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI', system-ui, sans-serif;
+  background:var(--off-white);
+  color:var(--ink);
+  line-height:1.5;
+}
+a{color:var(--teal-dark);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* TOPBAR */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:var(--navy);
+  color:#fff;
+  display:flex;align-items:center;gap:12px;
+  padding:10px 20px;
+  font-size:14px;
+}
+.topbar .logo-mark{
+  width:30px;height:30px;border-radius:6px;
+  background:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:#fff;
+  flex-shrink:0;
+}
+.topbar .site-name{font-weight:600;letter-spacing:0.3px;flex-shrink:0;}
+.topbar nav{margin-left:auto;display:flex;gap:18px;}
+.topbar nav a{color:#cbd5e1;font-size:13px;}
+.topbar nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{
+  background:var(--navy);
+  color:#fff;
+  padding:28px 20px 22px;
+}
+.page-header .qb-badge{
+  display:inline-block;
+  background:var(--teal);
+  color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;
+  padding:4px 10px;border-radius:4px;
+  margin-bottom:10px;
+}
+.page-header h1{
+  font-size:24px;font-weight:700;margin-bottom:6px;
+}
+.page-header .sub-desc{
+  color:#cbd5e1;font-size:14px;max-width:760px;
+}
+.header-meta{
+  display:flex;gap:18px;flex-wrap:wrap;
+  margin-top:14px;font-size:12px;color:#94a3b8;
+}
+.header-meta strong{color:#e2e8f0;}
+
+/* CONTROLS BAR */
+.controls-bar{
+  position:sticky;top:48px;z-index:90;
+  background:#fff;
+  border-bottom:1px solid var(--grey-border);
+  padding:12px 20px;
+  display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;
+}
+#search-input{
+  flex:1 1 220px;max-width:340px;
+  padding:8px 12px;
+  border:1px solid var(--grey-border);
+  border-radius:6px;font-size:13px;
+}
+#search-input:focus{outline:none;border-color:var(--teal);}
+.filter-btn{
+  background:var(--grey-bg);
+  border:1px solid var(--grey-border);
+  color:var(--grey-text);
+  font-size:12px;font-weight:600;
+  padding:6px 12px;border-radius:20px;
+  cursor:pointer;transition:all .15s;
+}
+.filter-btn:hover{background:var(--teal-light);color:var(--teal-dark);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{
+  margin-left:auto;font-size:12px;color:var(--grey-text);font-weight:600;
+}
+
+/* MAIN LAYOUT */
+.main-layout{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:24px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:24px 20px 60px;
+}
+@media (max-width:800px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+}
+
+/* SIDEBAR */
+.sidebar{
+  position:sticky;top:110px;
+  align-self:start;
+  max-height:calc(100vh - 130px);
+  overflow-y:auto;
+  font-size:13px;
+}
+.sidebar h3{
+  font-size:11px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--grey-text);margin-bottom:10px;
+}
+.toc-link{
+  display:block;padding:6px 10px;border-radius:5px;
+  color:var(--ink);font-size:13px;
+  border-left:2px solid transparent;
+  transition:all .15s;
+}
+.toc-link:hover{background:var(--teal-light);text-decoration:none;}
+.toc-link.active{
+  background:var(--teal-light);
+  border-left:2px solid var(--teal);
+  color:var(--teal-dark);font-weight:600;
+}
+.sidebar .divider{
+  border-top:1px solid var(--grey-border);
+  margin:14px 0;
+}
+.sidebar .upcoming-note{
+  background:var(--grey-bg);
+  border-radius:6px;padding:10px;
+  font-size:12px;color:var(--grey-text);
+}
+
+/* SECTION HEAD */
+.section-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin:28px 0 12px;
+}
+.section-head:first-child{margin-top:0;}
+.section-head h2{font-size:16px;font-weight:700;color:var(--ink);}
+.sec-count{
+  font-size:11px;font-weight:700;color:var(--teal-dark);
+  background:var(--teal-light);padding:2px 8px;border-radius:10px;
+}
+
+/* Q CARD */
+.q-card{
+  background:#fff;
+  border:1px solid var(--grey-border);
+  border-radius:8px;
+  margin-bottom:10px;
+  overflow:hidden;
+}
+.q-header{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{
+  flex-shrink:0;
+  width:28px;height:28px;border-radius:6px;
+  background:var(--teal);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.q-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.q-tag{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;
+  padding:2px 8px;border-radius:10px;
+  background:var(--grey-bg);color:var(--grey-text);
+}
+.q-tag.tag-solas{background:#e0f2fe;color:#0369a1;}
+.q-tag.tag-marpol{background:#fef3c7;color:#92400e;}
+.q-tag.tag-iacs{background:#ede9fe;color:#5b21b6;}
+.q-tag.tag-survey{background:var(--teal-light);color:var(--teal-dark);}
+.q-tag.tag-stability{background:#fce7f3;color:#9d174d;}
+.q-tag.tag-machinery{background:#dbeafe;color:#1e40af;}
+.q-tag.tag-ghg{background:#dcfce7;color:#166534;}
+.q-tag.tag-stcw{background:#ffe4e6;color:#9f1239;}
+.q-chevron{
+  flex-shrink:0;width:20px;height:20px;
+  stroke:var(--grey-text);transition:transform .2s;
+}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+
+/* ANSWER PANEL */
+.q-answer{
+  display:none;
+  padding:0 16px 16px;
+  border-top:1px solid var(--grey-border);
+}
+.q-card.open .q-answer{display:block;padding-top:14px;}
+.answer-body{font-family:'Georgia',serif;font-size:14px;color:var(--ink);}
+.answer-body h4{
+  font-size:12px;text-transform:uppercase;letter-spacing:0.8px;
+  color:var(--teal-dark);font-family:'Segoe UI',system-ui,sans-serif;
+  font-weight:700;margin:16px 0 6px;
+}
+.answer-body h4:first-child{margin-top:0;}
+.answer-body p{margin-bottom:10px;}
+.answer-body ul, .answer-body ol{margin:0 0 10px 22px;}
+.answer-body li{margin-bottom:5px;}
+.answer-body strong{color:var(--ink);font-weight:700;}
+.answer-body em{color:var(--grey-text);}
+.formula{
+  font-family:monospace;background:var(--grey-bg);
+  padding:10px 12px;border-radius:6px;margin:10px 0;font-size:13.5px;
+}
+
+/* PRACTICE BLOCKS (15s/60s) */
+.practice-block{
+  background:var(--teal-light);
+  border-left:3px solid var(--teal);
+  border-radius:0 6px 6px 0;
+  padding:10px 14px;margin-bottom:10px;
+  font-family:'Georgia',serif;font-size:13.5px;color:var(--ink);
+}
+.practice-block .pb-label{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--teal-dark);margin-bottom:4px;display:block;
+}
+
+/* REG BOX */
+.reg-box{
+  background:var(--navy);
+  border-radius:8px;padding:14px 16px;margin:14px 0;
+  font-family:'Segoe UI',system-ui,sans-serif;
+}
+.reg-box-title{
+  color:#fff;font-size:12px;font-weight:700;margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:0.8px;
+}
+.reg-item{
+  display:flex;gap:12px;flex-wrap:wrap;
+  padding:5px 0;border-bottom:1px solid #1e293b;
+  font-size:12.5px;
+}
+.reg-item:last-child{border-bottom:none;}
+.reg-code{
+  color:var(--orange);font-family:monospace;font-weight:700;
+  flex:0 0 auto;min-width:0;word-break:break-all;
+}
+.reg-desc{color:#cbd5e1;flex:1;min-width:0;word-break:break-word;}
+
+/* CE TIP */
+.ce-tip{
+  background:var(--orange-light);
+  border-left:3px solid var(--orange);
+  border-radius:0 6px 6px 0;
+  padding:12px 14px;margin:14px 0;
+  font-size:13.5px;color:#7c2d12;
+}
+.ce-tip strong{color:var(--orange);}
+
+/* EXTRA BLOCKS (collapsible deep-dive sections) */
+.deep-dive{
+  margin-top:14px;border:1px solid var(--grey-border);border-radius:8px;
+  overflow:hidden;
+}
+.deep-dive summary{
+  cursor:pointer;padding:10px 14px;
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:12.5px;font-weight:700;color:var(--teal-dark);
+  background:var(--grey-bg);
+  list-style:none;display:flex;align-items:center;gap:8px;
+}
+.deep-dive summary::-webkit-details-marker{display:none;}
+.deep-dive summary::before{content:"▸";font-size:11px;}
+.deep-dive[open] summary::before{content:"▾";}
+.deep-dive-body{padding:12px 14px;font-size:13.5px;}
+.deep-dive-body h5{
+  font-size:11px;text-transform:uppercase;letter-spacing:0.6px;
+  color:var(--grey-text);margin:10px 0 4px;font-family:'Segoe UI',system-ui,sans-serif;
+}
+.deep-dive-body h5:first-child{margin-top:0;}
+.deep-dive-body p{margin-bottom:8px;}
+.deep-dive-body .trap-q{font-weight:700;color:var(--ink);}
+.deep-dive-body .trap-a{color:var(--grey-text);margin-bottom:8px;}
+
+/* FOOTER (per card) */
+.q-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+  padding:10px 16px;
+  background:var(--grey-bg);
+  font-size:11.5px;color:var(--grey-text);
+  border-top:1px solid var(--grey-border);
+}
+.correction-link{min-width:0;word-break:break-all;}
+.correction-link a{word-break:break-all;}
+.q-version{flex-shrink:0;font-weight:600;}
+
+/* NO RESULTS */
+#no-results{
+  display:none;text-align:center;padding:60px 20px;color:var(--grey-text);
+}
+
+/* PAGE FOOTER */
+.page-footer{
+  background:var(--navy);color:#cbd5e1;
+  padding:30px 20px;font-size:12.5px;
+  text-align:center;
+}
+.page-footer a{color:var(--teal-light);}
+.page-footer .disclaimer{
+  max-width:700px;margin:12px auto 0;color:#94a3b8;font-size:11.5px;
+}
+
+/* CHEAT SHEET */
+.cheat-sheet{background:var(--navy);border-radius:10px;padding:20px 22px;margin:26px 0 10px;}
+.cheat-sheet h2{color:#fff;font-size:16px;margin-bottom:4px;}
+.cheat-sheet .cs-sub{color:#94a3b8;font-size:12.5px;margin-bottom:14px;}
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.cs-block{background:#1e293b;border-radius:8px;padding:12px 14px;}
+.cs-block h4{color:var(--orange);font-size:11px;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
+.cs-block p, .cs-block li{color:#cbd5e1;font-size:12.5px;line-height:1.5;}
+.cs-block ul{margin-left:16px;}
+.cs-block strong{color:#fff;}
+
+body{user-select:none;-webkit-user-select:none;-moz-user-select:none;}
+.miw-watermark{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:9999;overflow:hidden;
+}
+.miw-watermark span{
+  position:absolute;white-space:nowrap;color:rgba(15,23,42,0.045);
+  font-size:13px;font-weight:700;transform:rotate(-30deg);
+  font-family:'Segoe UI',sans-serif;
+}
+</style>
+</head>
+<body>
+<div class="miw-watermark"><span style="top:0%;left:0%;">QB8_E · marineintelligenceweekly.com</span><span style="top:0%;left:28%;">QB8_E · marineintelligenceweekly.com</span><span style="top:0%;left:56%;">QB8_E · marineintelligenceweekly.com</span><span style="top:0%;left:84%;">QB8_E · marineintelligenceweekly.com</span><span style="top:11%;left:-11%;">QB8_E · marineintelligenceweekly.com</span><span style="top:11%;left:17%;">QB8_E · marineintelligenceweekly.com</span><span style="top:11%;left:45%;">QB8_E · marineintelligenceweekly.com</span><span style="top:11%;left:73%;">QB8_E · marineintelligenceweekly.com</span><span style="top:22%;left:0%;">QB8_E · marineintelligenceweekly.com</span><span style="top:22%;left:28%;">QB8_E · marineintelligenceweekly.com</span><span style="top:22%;left:56%;">QB8_E · marineintelligenceweekly.com</span><span style="top:22%;left:84%;">QB8_E · marineintelligenceweekly.com</span><span style="top:33%;left:-11%;">QB8_E · marineintelligenceweekly.com</span><span style="top:33%;left:17%;">QB8_E · marineintelligenceweekly.com</span><span style="top:33%;left:45%;">QB8_E · marineintelligenceweekly.com</span><span style="top:33%;left:73%;">QB8_E · marineintelligenceweekly.com</span><span style="top:44%;left:0%;">QB8_E · marineintelligenceweekly.com</span><span style="top:44%;left:28%;">QB8_E · marineintelligenceweekly.com</span><span style="top:44%;left:56%;">QB8_E · marineintelligenceweekly.com</span><span style="top:44%;left:84%;">QB8_E · marineintelligenceweekly.com</span><span style="top:55%;left:-11%;">QB8_E · marineintelligenceweekly.com</span><span style="top:55%;left:17%;">QB8_E · marineintelligenceweekly.com</span><span style="top:55%;left:45%;">QB8_E · marineintelligenceweekly.com</span><span style="top:55%;left:73%;">QB8_E · marineintelligenceweekly.com</span><span style="top:66%;left:0%;">QB8_E · marineintelligenceweekly.com</span><span style="top:66%;left:28%;">QB8_E · marineintelligenceweekly.com</span><span style="top:66%;left:56%;">QB8_E · marineintelligenceweekly.com</span><span style="top:66%;left:84%;">QB8_E · marineintelligenceweekly.com</span><span style="top:77%;left:-11%;">QB8_E · marineintelligenceweekly.com</span><span style="top:77%;left:17%;">QB8_E · marineintelligenceweekly.com</span><span style="top:77%;left:45%;">QB8_E · marineintelligenceweekly.com</span><span style="top:77%;left:73%;">QB8_E · marineintelligenceweekly.com</span><span style="top:88%;left:0%;">QB8_E · marineintelligenceweekly.com</span><span style="top:88%;left:28%;">QB8_E · marineintelligenceweekly.com</span><span style="top:88%;left:56%;">QB8_E · marineintelligenceweekly.com</span><span style="top:88%;left:84%;">QB8_E · marineintelligenceweekly.com</span><span style="top:99%;left:-11%;">QB8_E · marineintelligenceweekly.com</span><span style="top:99%;left:17%;">QB8_E · marineintelligenceweekly.com</span><span style="top:99%;left:45%;">QB8_E · marineintelligenceweekly.com</span><span style="top:99%;left:73%;">QB8_E · marineintelligenceweekly.com</span></div>
+<script>
+(function(){
+  function getCookie(name){
+    const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return v ? v.pop() : '';
+  }
+  if(getCookie('miw_auth') !== '1'){
+    window.location.href = 'https://marineintelligenceweekly.com/SQ/pay.html';
+  }
+})();
+</script>
+
+
+<div class="topbar">
+  <div class="logo-mark">MIW</div>
+  <div class="site-name">Marine Intelligence Weekly</div>
+  <nav>
+    <a href="https://marineintelligenceweekly.com/">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/contact.html">Contact</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <span class="qb-badge">QB8_E · MEO Class 1 Question Bank · Companion File</span>
+  <h1>Coal Cargo &amp; Bulk Cargo Codes</h1>
+  <p class="sub-desc">2 oral-exam questions from the 30 June 2026 WhatsApp batch (Q499–Q529) — coal cargo fire precautions, and an overview of the IMSBC, BLU and Grain Codes. Companion file, own Q1–Q2 numbering, own TOC.</p>
+  <div class="header-meta">
+    <span><strong>Compiled by:</strong> Nixon Antony, 2/E, Maersk A/S</span>
+    <span><strong>Examiners referenced:</strong> Nair, Simon (External)</span>
+    <span><strong>Version:</strong> v1.0 · 30 June 2026</span>
+  </div>
+</div>
+
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all', this)">All</button>
+  <button class="filter-btn" onclick="filterTag('solas', this)">SOLAS</button>
+  <span id="q-count-label">Showing 2 of 2</span>
+</div>
+
+<div class="main-layout">
+  <div class="sidebar">
+    <h3>Contents</h3>
+    <a class="toc-link" href="#q1">Q1. Coal Cargo — Fire Precautions</a>
+    <a class="toc-link" href="#q2">Q2. IMSBC / BLU / Grain Code Overview</a>
+    <div class="divider"></div>
+    <div class="upcoming-note">
+      Companion file: <strong>QB8_E</strong>. Part of the QB8 Cargo Operations series.
+    </div>
+  </div>
+
+  <div id="q-feed">
+
+    <div class="section-head">
+      <h2>🔥 Bulk Cargo Hazards &amp; Codes</h2>
+      <span class="sec-count">2 questions</span>
+    </div>
+
+    <div class="q-card" id="q1" data-tags="solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Coal cargo — special precautions for carriage. Reasons for coal cargo fires. What fire-fighting provisions apply?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-solas">SOLAS</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>Coal presents two distinct hazards under the IMSBC Code — self-heating (leading to spontaneous combustion, tracked via CO) and methane emission (explosion risk, tracked via LEL/CH4) — requiring opposite ventilation responses; general precautions include gas monitoring, temperature limits, and treating the shipper's declaration with caution.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>Coal is classified under the IMSBC Code as combustible (CB), self-heating (SH), and/or evolving flammable gas when wet (WF), and the cargo declaration must state whether it is liable to self-heat or emit methane — treat the declaration cautiously, since it may be inaccurate. Self-heating is monitored via carbon monoxide (CO): a CO reading above 50 ppm, or a steady rise over three consecutive days, indicates a developing self-heating condition; response is to seal the hold and exclude oxygen — NOT ventilate, since ventilation feeds the reaction. Methane emission is monitored via LEL (%): if CH4 reaches 20% LEL after continuous ventilation for 24 hours, ventilation continues; if it keeps rising, expert advice is sought urgently. These two responses are opposite, which is the core hazard-management challenge with coal — if a cargo does both, ventilation for explosion risk normally takes priority given its acute nature. Surface ventilation is required for the first 24 hours after departure; beyond that, coal should not be routinely ventilated unless gas readings require it. Fire-fighting: CO2 flooding is standard for coal hold fires (foam/water are generally avoided on a self-heating solid mass); smoking and naked flames prohibited in cargo areas.</div>
+        <div class="answer-body">
+          <h4>The Two Distinct Hazards</h4>
+          <ul>
+            <li><strong>Self-heating (spontaneous combustion):</strong> internal oxidation reaction within the coal mass, generating heat and carbon monoxide. Controlled by <strong>excluding oxygen</strong> — keeping the hold sealed. Ventilating a self-heating cargo introduces oxygen and worsens the reaction.</li>
+            <li><strong>Methane emission (explosion risk):</strong> some coals emit CH4, which can form a flammable/explosive mixture with air in the hold headspace. Controlled by <strong>ventilation</strong> — diluting CH4 concentration below the flammable range.</li>
+            <li>These two correct responses are <strong>opposite</strong> — the core practical difficulty with coal cargo management. If a coal both self-heats and emits methane, the IMSBC Code gives no explicit combined procedure; industry guidance treats ventilation (explosion risk) as the priority given its acute, immediate nature, while seeking expert advice.</li>
+          </ul>
+
+          <h4>Monitoring Parameters &amp; Response Thresholds</h4>
+          <ul>
+            <li><strong>Carbon monoxide (CO):</strong> the primary indicator of self-heating. A reading above <strong>50 ppm</strong>, or a <strong>steady rise over 3 consecutive days</strong>, indicates a developing self-heating condition requiring the action sequence in the IMSBC Code (seal hold, monitor, seek advice).</li>
+            <li><strong>Methane / LEL (%):</strong> the indicator of explosion risk. Cargo temperature should not exceed <strong>40°C</strong>; methane should be kept below approximately <strong>10% LEL</strong> under normal monitoring; if it reaches <strong>20% LEL</strong> after 24 hours of continuous ventilation, ventilation must be maintained continuously (except briefly to take readings).</li>
+            <li>Gas readings should be taken from sampling points with ventilation stopped for at least <strong>4 hours</strong> prior, to get a representative headspace sample.</li>
+            <li>Also monitor <strong>oxygen (O2)</strong> and <strong>hydrogen sulphide (H2S)</strong> — oxygen depletion below 12% risks unconsciousness, below 6% can be fatal, and can develop rapidly and without warning in an unventilated hold.</li>
+          </ul>
+
+          <h4>Ventilation Schedule</h4>
+          <p>Unless otherwise instructed, <strong>surface ventilation is required for the first 24 hours</strong> after departure from the loading port, with monitoring during that period. Beyond 24 hours, coal cargo should <strong>not</strong> be routinely ventilated — unnecessary ventilation introduces oxygen that can accelerate self-heating; further ventilation is only triggered by rising gas readings.</p>
+
+          <h4>Cargo Declaration Caution</h4>
+          <p>The shipper's declaration must state whether the coal is liable to self-heat or emit methane, but the declaration may be inaccurate or incomplete. Good practice — and P&amp;I club guidance — is to treat all coal as potentially self-heating and methane-emitting until frequent gas measurements demonstrate otherwise, regardless of what the shipper's paperwork says.</p>
+
+          <h4>Fire-Fighting Provisions</h4>
+          <ul>
+            <li>Smoking and naked flames prohibited in cargo areas and adjacent spaces, with posted notices.</li>
+            <li>Hot work near cargo/adjacent spaces only after proper ventilation and satisfactory methane readings, following a documented risk assessment.</li>
+            <li>Standard SOLAS fixed CO2 fire-extinguishing system serving cargo holds is the primary fire-fighting response for an established coal hold fire — flooding the hold to exclude oxygen; foam/water are generally avoided as a primary agent on a bulk solid self-heating mass since they don't penetrate the cargo depth effectively.</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">IMSBC Code, Individual Schedule — Coal</span><span class="reg-desc">Classification (CB/SH/WF), special precautions, gas monitoring thresholds</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch VI</span><span class="reg-desc">Carriage of cargoes and oil fuels — general bulk cargo carriage requirements</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-2</span><span class="reg-desc">Fixed fire-extinguishing systems (CO2) for cargo holds</span></div>
+            <div class="reg-item"><span class="reg-code">IMSBC Code, Section 4 &amp; 5</span><span class="reg-desc">Cargo declaration requirements and trimming procedures for coal</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Nair expects the two-hazard structure named explicitly, with opposite responses: self-heating → seal and exclude oxygen (monitor CO); methane → ventilate (monitor LEL). State the CO threshold (50 ppm or steady 3-day rise) and the LEL threshold (20% after 24h continuous ventilation) by number. The common failure point is treating coal as a single hazard requiring one blanket response — examiners specifically probe whether the candidate knows the two hazards require opposite ventilation actions.</div>
+        </div>
+
+        <details class="deep-dive">
+          <summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary>
+          <div class="deep-dive-body">
+            <h5>CE Relevance</h5>
+            <p>The CE typically owns the ship's gas-detection equipment (calibration, function testing) and the fixed CO2 fire-extinguishing system readiness — both directly relevant to coal cargo monitoring and emergency response, even though cargo watchkeeping itself sits primarily with deck officers.</p>
+
+            <h5>Trap Questions</h5>
+            <p class="trap-q">Q: "The coal cargo is both self-heating and emitting methane — what do you do?"</p>
+            <p class="trap-a">A: This is the difficult combined case the IMSBC Code doesn't explicitly resolve; industry guidance is to prioritise ventilation given the acute, immediate nature of explosion risk, while seeking expert/shore advice urgently, since ventilating also actively worsens the self-heating reaction.</p>
+
+            <h5>Common CE Failures</h5>
+            <p class="trap-a">1. Not recognising that self-heating and methane emission require opposite responses.</p>
+            <p class="trap-a">2. Confusing CO monitoring (self-heating indicator) with methane/LEL monitoring (explosion indicator).</p>
+            <p class="trap-a">3. Not knowing the specific gas-reading thresholds (50 ppm CO, 20% LEL).</p>
+
+            <h5>Numbers to Memorise</h5>
+            <p>CO threshold: &gt;50 ppm or steady rise over 3 consecutive days · Methane: keep &lt;10% LEL normally, continuous ventilation if reaching 20% LEL after 24h · Cargo temperature limit: 40°C · O2 danger: unconsciousness &lt;12%, fatal &lt;6% · Surface ventilation mandatory for first 24 hours post-departure · gas sampling: stop ventilation ≥4 hours before reading.</p>
+
+            <h5>Casualty Link</h5>
+            <p>Coal cargo self-heating fires and hold explosions from undetected methane accumulation are recurring P&amp;I club loss categories, which is why gas-monitoring discipline (not just declaration compliance) is emphasised as the practical safeguard.</p>
+
+            <h5>Examiner Chain</h5>
+            <p>Nair → coal cargo precautions → self-heating vs methane → gas monitoring thresholds → what if both occur → fire-fighting response → hot work restrictions.</p>
+
+            <h5>On My Vessel</h5>
+            <p>Container vessels do not typically carry bulk coal, so this answer should be framed as required regulatory knowledge for the Class 1 qualification; the transferable operational point is the CE's role in maintaining gas-detection equipment calibration and CO2 fixed fire system readiness, applicable across cargo types.</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB8_E, Q1, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB8_E, Q1, Correction Required</span>
+        <span class="q-version">QB8_E · Q1 · v1.0</span>
+      </div>
+    </div>
+
+    <div class="q-card" id="q2" data-tags="solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">IMSBC Code, BLU Code, Grain Code — brief overview and cross-questions.</div>
+          <div class="q-tags">
+            <span class="q-tag tag-solas">SOLAS</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>Three complementary codes govern bulk cargo: the IMSBC Code (mandatory under SOLAS VI/VII, cargo-specific hazard schedules for all solid bulk cargoes), the BLU Code (safe loading/unloading procedures and ship/terminal information exchange for bulk carriers), and the International Grain Code (mandatory stability/heeling-moment requirements specific to grain cargo).</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>The IMSBC Code (International Maritime Solid Bulk Cargoes Code) is mandatory under SOLAS Chapters VI and VII, and provides individual cargo schedules covering chemical/physical hazards (Group A — liquefaction risk, Group B — chemical hazards like coal/fertiliser, Group C — no special hazard), shipper declaration requirements, and stowage/segregation rules for solid bulk cargoes generally. The BLU Code (Code of Practice for the Safe Loading and Unloading of Bulk Carriers) is a separate, complementary code focused on procedural safety at the ship-shore interface — information exchange between master and terminal, loading/unloading sequence and rate agreements, and structural loading limits — addressing structural failure risk during cargo operations rather than the cargo's own chemical hazard. The International Grain Code (International Code for the Safe Carriage of Grain in Bulk) is mandatory under SOLAS Chapter VI and sets grain-specific intact stability criteria — the heeling moment from grain shift must not exceed prescribed limits, requiring a Document of Authorization for grain carriage. All three are complementary, not overlapping: IMSBC = cargo chemical/physical hazard, BLU = ship-shore loading procedure/structural safety, Grain Code = stability-specific requirement for one cargo type.</div>
+        <div class="answer-body">
+          <h4>IMSBC Code — International Maritime Solid Bulk Cargoes Code</h4>
+          <ul>
+            <li><strong>Status:</strong> mandatory under <strong>SOLAS Chapters VI and VII</strong>; provides the framework for the safe stowage and carriage of solid bulk cargoes.</li>
+            <li><strong>Cargo groups:</strong> <strong>Group A</strong> — cargoes that may liquefy if moisture content exceeds the Transportable Moisture Limit (TML); <strong>Group B</strong> — cargoes possessing a chemical hazard (e.g. coal, fertilisers, some ores); <strong>Group C</strong> — cargoes not falling into A or B (no special hazard).</li>
+            <li><strong>Individual schedules:</strong> each named cargo has its own schedule specifying hazards, precautions, stowage and segregation, and required shipper documentation.</li>
+            <li><strong>Shipper declaration:</strong> mandatory disclosure of cargo characteristics — moisture content, chemical hazard classification, self-heating/gas-emission tendency.</li>
+          </ul>
+
+          <h4>BLU Code — Code of Practice for the Safe Loading and Unloading of Bulk Carriers</h4>
+          <ul>
+            <li><strong>Focus:</strong> the procedural and structural safety of cargo operations — distinct from IMSBC's cargo-hazard focus.</li>
+            <li>Requires <strong>information exchange</strong> between the ship's master and the terminal before and during loading/unloading — loading/deballasting sequence, rate, and any restrictions.</li>
+            <li>Addresses <strong>structural loading limits</strong> — avoiding excessive local loading or unloading sequences that could overstress the hull structure, a major driver behind historic bulk carrier structural failures.</li>
+            <li>Sets responsibilities and communication protocols between ship and shore personnel throughout cargo operations.</li>
+          </ul>
+
+          <h4>International Grain Code</h4>
+          <ul>
+            <li><strong>Status:</strong> mandatory under <strong>SOLAS Chapter VI, Part C</strong> for ships carrying bulk grain.</li>
+            <li><strong>Core requirement:</strong> intact stability criteria specific to grain — the <strong>heeling moment</strong> generated by potential grain shift must not exceed prescribed limits (angle of heel due to shift of grain not to exceed 12°, or the angle of flooding, whichever is less; residual dynamic stability area requirements).</li>
+            <li>Ships require a <strong>Document of Authorization for the Carriage of Grain</strong>, verifying the vessel's approved grain-loading stability calculations.</li>
+            <li>Addresses grain-specific stowage requirements — trimming, securing (saucers, strapping, feeders) to limit cargo shift in partially filled or slack holds.</li>
+          </ul>
+
+          <h4>How the Three Codes Relate</h4>
+          <p>These codes are <strong>complementary, not overlapping</strong>: IMSBC governs the cargo's own chemical/physical hazard and stowage requirements across all solid bulk cargoes generally; BLU governs the procedural and structural safety of the ship-shore loading/unloading interface, regardless of which cargo is involved; the Grain Code adds a stability-specific overlay applicable only when the cargo is grain, because grain's tendency to shift creates a unique stability risk not addressed by IMSBC's general framework.</p>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">IMSBC Code</span><span class="reg-desc">Mandatory under SOLAS Ch VI &amp; VII — solid bulk cargo hazard classification and stowage</span></div>
+            <div class="reg-item"><span class="reg-code">BLU Code (IMO Res. A.862(20), as amended)</span><span class="reg-desc">Safe loading/unloading procedures and ship-shore information exchange for bulk carriers</span></div>
+            <div class="reg-item"><span class="reg-code">International Grain Code</span><span class="reg-desc">Mandatory under SOLAS Ch VI, Part C — grain-specific stability/heeling-moment requirements</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch VI, Part C, Reg 9</span><span class="reg-desc">Requires ships to comply with the International Grain Code when carrying bulk grain</span></div>
+            <div class="reg-item"><span class="reg-code">Document of Authorization (Grain)</span><span class="reg-desc">Ship-specific certificate confirming compliance with Grain Code stability requirements</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon wants the three codes clearly separated by function, not lumped together as "bulk cargo rules." State it as: "IMSBC — what the cargo itself is and how it behaves; BLU — how the ship and terminal safely load/unload it structurally; Grain Code — the stability-specific overlay when the cargo is grain, because of shift risk." Naming the Grain Code's 12° heeling-angle criterion specifically is a strong marker of preparation.</div>
+        </div>
+
+        <details class="deep-dive">
+          <summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary>
+          <div class="deep-dive-body">
+            <h5>CE Relevance</h5>
+            <p>The CE's direct involvement is limited (cargo stability/stowage sits primarily with the deck department), but understanding the BLU Code's structural loading-sequence discipline is relevant where ballast operations must be coordinated with cargo loading/discharge rate to avoid excessive local stress.</p>
+
+            <h5>Trap Questions</h5>
+            <p class="trap-q">Q: "Does the Grain Code replace the IMSBC Code requirements for a grain cargo?"</p>
+            <p class="trap-a">A: No — it adds to IMSBC. IMSBC still applies for grain's general bulk-cargo stowage aspects; the Grain Code adds the mandatory stability/heeling-moment overlay specific to grain's shift risk.</p>
+
+            <h5>Common CE Failures</h5>
+            <p class="trap-a">1. Conflating the three codes into one undifferentiated "bulk cargo code."</p>
+            <p class="trap-a">2. Not knowing the Grain Code's specific 12° heeling-angle criterion.</p>
+            <p class="trap-a">3. Not recognising BLU Code as a structural/procedural code rather than a cargo-hazard code.</p>
+
+            <h5>Numbers to Memorise</h5>
+            <p>IMSBC Groups: A (liquefaction), B (chemical hazard), C (no special hazard) · Grain Code: heeling angle due to shift ≤12° (or angle of flooding, whichever less) · SOLAS Ch VI Part C Reg 9 — Grain Code mandatory reference.</p>
+
+            <h5>Casualty Link</h5>
+            <p>Historic bulk carrier structural failures linked to improper loading/unloading sequences drove development of the BLU Code; grain-shift-related capsizes historically drove the Grain Code's mandatory stability criteria.</p>
+
+            <h5>Examiner Chain</h5>
+            <p>Simon → three codes overview → IMSBC cargo groups → BLU Code ship-shore interface → Grain Code heeling moment → Document of Authorization requirement.</p>
+
+            <h5>On My Vessel</h5>
+            <p>A Maersk container vessel does not carry bulk cargo under these codes, so this is required regulatory knowledge for the qualification; the BLU Code's ship-shore communication discipline principle (agreed loading sequence, structural limits) is conceptually transferable to container stowage planning and ballast coordination during cargo operations.</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB8_E, Q2, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB8_E, Q2, Correction Required</span>
+        <span class="q-version">QB8_E · Q2 · v1.0</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="cheat-sheet">
+  <h2>⚡ QB8_E Quick-Revision Cheat Sheet</h2>
+  <p class="cs-sub">Last-minute recall block — Coal Cargo &amp; Bulk Cargo Codes.</p>
+  <div class="cs-grid">
+    <div class="cs-block">
+      <h4>Coal — Two Hazards</h4>
+      <ul>
+        <li><strong>Self-heating</strong> → seal, exclude O2, monitor CO</li>
+        <li><strong>Methane</strong> → ventilate, monitor LEL</li>
+        <li>Combined case: ventilation (explosion) usually takes priority</li>
+      </ul>
+    </div>
+    <div class="cs-block">
+      <h4>Coal — Key Numbers</h4>
+      <ul>
+        <li>CO: &gt;50 ppm or 3-day steady rise</li>
+        <li>CH4: continuous vent if &gt;20% LEL after 24h</li>
+        <li>Cargo temp limit: 40°C</li>
+        <li>Surface vent: mandatory first 24h post-departure</li>
+      </ul>
+    </div>
+    <div class="cs-block">
+      <h4>Three Codes — One Line Each</h4>
+      <ul>
+        <li><strong>IMSBC</strong> — what the cargo is/does (hazard groups A/B/C)</li>
+        <li><strong>BLU</strong> — how ship/terminal load it safely (structural)</li>
+        <li><strong>Grain Code</strong> — stability overlay for grain shift risk</li>
+      </ul>
+    </div>
+    <div class="cs-block">
+      <h4>Grain Code Key Number</h4>
+      <p>Heeling angle due to shift ≤ <strong>12°</strong> (or angle of flooding, whichever less)</p>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+  <p>Marine Intelligence Weekly · MEO Class 1 Question Bank · QB8_E — Coal Cargo &amp; Bulk Cargo Codes</p>
+  <p>Compiled by Nixon Antony, Second Engineer, Maersk A/S · <a href="https://marineintelligenceweekly.com/meoclass1/">Back to MEO Class 1 Hub</a> · <a href="https://marineintelligenceweekly.com/">marineintelligenceweekly.com</a></p>
+  <p class="disclaimer">Disclaimer: This question bank is a private study aid compiled for MEO Class 1 oral examination preparation at the Kochi MMD. Regulatory references are provided in good faith and cross-checked against IMO, IACS, and classification society sources where possible, but candidates must independently verify current regulation numbers, thresholds, and amendment dates against the latest consolidated SOLAS/MARPOL editions, IACS Unified Requirements, and their flag/class circulars before relying on them in examination or operational contexts. To report a correction, email contactus@marineintelligenceweekly.com with the QB number, question number, and details.</p>
+</div>
+
+<script>
+// Toggle card open/close
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+
+// Filter by tag button
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+// Apply search + tag filters simultaneously
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+
+// TOC active highlight on scroll
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+
+</body>
+</html>

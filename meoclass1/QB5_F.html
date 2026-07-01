@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>QB5_F — CE Rule Implementation &amp; Crew Communication | MIW MEO Class 1 Question Bank</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+<style>
+:root{
+  --teal:#0d9488;
+  --teal-dark:#0f766e;
+  --teal-light:#ccfbf1;
+  --navy:#0f172a;
+  --orange:#f97316;
+  --orange-light:#fff7ed;
+  --off-white:#f8fafc;
+  --grey-text:#64748b;
+  --grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;
+  --ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI', system-ui, sans-serif;
+  background:var(--off-white);
+  color:var(--ink);
+  line-height:1.5;
+}
+a{color:var(--teal-dark);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* TOPBAR */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:var(--navy);
+  color:#fff;
+  display:flex;align-items:center;gap:12px;
+  padding:10px 20px;
+  font-size:14px;
+}
+.topbar .logo-mark{
+  width:30px;height:30px;border-radius:6px;
+  background:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:#fff;
+  flex-shrink:0;
+}
+.topbar .site-name{font-weight:600;letter-spacing:0.3px;flex-shrink:0;}
+.topbar nav{margin-left:auto;display:flex;gap:18px;}
+.topbar nav a{color:#cbd5e1;font-size:13px;}
+.topbar nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{
+  background:var(--navy);
+  color:#fff;
+  padding:28px 20px 22px;
+}
+.page-header .qb-badge{
+  display:inline-block;
+  background:var(--teal);
+  color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;
+  padding:4px 10px;border-radius:4px;
+  margin-bottom:10px;
+}
+.page-header h1{
+  font-size:24px;font-weight:700;margin-bottom:6px;
+}
+.page-header .sub-desc{
+  color:#cbd5e1;font-size:14px;max-width:760px;
+}
+.header-meta{
+  display:flex;gap:18px;flex-wrap:wrap;
+  margin-top:14px;font-size:12px;color:#94a3b8;
+}
+.header-meta strong{color:#e2e8f0;}
+
+/* CONTROLS BAR */
+.controls-bar{
+  position:sticky;top:48px;z-index:90;
+  background:#fff;
+  border-bottom:1px solid var(--grey-border);
+  padding:12px 20px;
+  display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;
+}
+#search-input{
+  flex:1 1 220px;max-width:340px;
+  padding:8px 12px;
+  border:1px solid var(--grey-border);
+  border-radius:6px;font-size:13px;
+}
+#search-input:focus{outline:none;border-color:var(--teal);}
+.filter-btn{
+  background:var(--grey-bg);
+  border:1px solid var(--grey-border);
+  color:var(--grey-text);
+  font-size:12px;font-weight:600;
+  padding:6px 12px;border-radius:20px;
+  cursor:pointer;transition:all .15s;
+}
+.filter-btn:hover{background:var(--teal-light);color:var(--teal-dark);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{
+  margin-left:auto;font-size:12px;color:var(--grey-text);font-weight:600;
+}
+
+/* MAIN LAYOUT */
+.main-layout{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:24px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:24px 20px 60px;
+}
+@media (max-width:800px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+}
+
+/* SIDEBAR */
+.sidebar{
+  position:sticky;top:110px;
+  align-self:start;
+  max-height:calc(100vh - 130px);
+  overflow-y:auto;
+  font-size:13px;
+}
+.sidebar h3{
+  font-size:11px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--grey-text);margin-bottom:10px;
+}
+.toc-link{
+  display:block;padding:6px 10px;border-radius:5px;
+  color:var(--ink);font-size:13px;
+  border-left:2px solid transparent;
+  transition:all .15s;
+}
+.toc-link:hover{background:var(--teal-light);text-decoration:none;}
+.toc-link.active{
+  background:var(--teal-light);
+  border-left:2px solid var(--teal);
+  color:var(--teal-dark);font-weight:600;
+}
+.sidebar .divider{
+  border-top:1px solid var(--grey-border);
+  margin:14px 0;
+}
+.sidebar .upcoming-note{
+  background:var(--grey-bg);
+  border-radius:6px;padding:10px;
+  font-size:12px;color:var(--grey-text);
+}
+
+/* SECTION HEAD */
+.section-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin:28px 0 12px;
+}
+.section-head:first-child{margin-top:0;}
+.section-head h2{font-size:16px;font-weight:700;color:var(--ink);}
+.sec-count{
+  font-size:11px;font-weight:700;color:var(--teal-dark);
+  background:var(--teal-light);padding:2px 8px;border-radius:10px;
+}
+
+/* Q CARD */
+.q-card{
+  background:#fff;
+  border:1px solid var(--grey-border);
+  border-radius:8px;
+  margin-bottom:10px;
+  overflow:hidden;
+}
+.q-header{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{
+  flex-shrink:0;
+  width:28px;height:28px;border-radius:6px;
+  background:var(--teal);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.q-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.q-tag{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;
+  padding:2px 8px;border-radius:10px;
+  background:var(--grey-bg);color:var(--grey-text);
+}
+.q-tag.tag-solas{background:#e0f2fe;color:#0369a1;}
+.q-tag.tag-marpol{background:#fef3c7;color:#92400e;}
+.q-tag.tag-iacs{background:#ede9fe;color:#5b21b6;}
+.q-tag.tag-survey{background:var(--teal-light);color:var(--teal-dark);}
+.q-tag.tag-stability{background:#fce7f3;color:#9d174d;}
+.q-tag.tag-machinery{background:#dbeafe;color:#1e40af;}
+.q-tag.tag-ghg{background:#dcfce7;color:#166534;}
+.q-tag.tag-stcw{background:#ffe4e6;color:#9f1239;}
+.q-chevron{
+  flex-shrink:0;width:20px;height:20px;
+  stroke:var(--grey-text);transition:transform .2s;
+}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+
+/* ANSWER PANEL */
+.q-answer{
+  display:none;
+  padding:0 16px 16px;
+  border-top:1px solid var(--grey-border);
+}
+.q-card.open .q-answer{display:block;padding-top:14px;}
+.answer-body{font-family:'Georgia',serif;font-size:14px;color:var(--ink);}
+.answer-body h4{
+  font-size:12px;text-transform:uppercase;letter-spacing:0.8px;
+  color:var(--teal-dark);font-family:'Segoe UI',system-ui,sans-serif;
+  font-weight:700;margin:16px 0 6px;
+}
+.answer-body h4:first-child{margin-top:0;}
+.answer-body p{margin-bottom:10px;}
+.answer-body ul, .answer-body ol{margin:0 0 10px 22px;}
+.answer-body li{margin-bottom:5px;}
+.answer-body strong{color:var(--ink);font-weight:700;}
+.answer-body em{color:var(--grey-text);}
+.formula{
+  font-family:monospace;background:var(--grey-bg);
+  padding:10px 12px;border-radius:6px;margin:10px 0;font-size:13.5px;
+}
+
+/* PRACTICE BLOCKS (15s/60s) */
+.practice-block{
+  background:var(--teal-light);
+  border-left:3px solid var(--teal);
+  border-radius:0 6px 6px 0;
+  padding:10px 14px;margin-bottom:10px;
+  font-family:'Georgia',serif;font-size:13.5px;color:var(--ink);
+}
+.practice-block .pb-label{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--teal-dark);margin-bottom:4px;display:block;
+}
+
+/* REG BOX */
+.reg-box{
+  background:var(--navy);
+  border-radius:8px;padding:14px 16px;margin:14px 0;
+  font-family:'Segoe UI',system-ui,sans-serif;
+}
+.reg-box-title{
+  color:#fff;font-size:12px;font-weight:700;margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:0.8px;
+}
+.reg-item{
+  display:flex;gap:12px;flex-wrap:wrap;
+  padding:5px 0;border-bottom:1px solid #1e293b;
+  font-size:12.5px;
+}
+.reg-item:last-child{border-bottom:none;}
+.reg-code{
+  color:var(--orange);font-family:monospace;font-weight:700;
+  flex:0 0 auto;min-width:0;word-break:break-all;
+}
+.reg-desc{color:#cbd5e1;flex:1;min-width:0;word-break:break-word;}
+
+/* CE TIP */
+.ce-tip{
+  background:var(--orange-light);
+  border-left:3px solid var(--orange);
+  border-radius:0 6px 6px 0;
+  padding:12px 14px;margin:14px 0;
+  font-size:13.5px;color:#7c2d12;
+}
+.ce-tip strong{color:var(--orange);}
+
+/* EXTRA BLOCKS (collapsible deep-dive sections) */
+.deep-dive{
+  margin-top:14px;border:1px solid var(--grey-border);border-radius:8px;
+  overflow:hidden;
+}
+.deep-dive summary{
+  cursor:pointer;padding:10px 14px;
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:12.5px;font-weight:700;color:var(--teal-dark);
+  background:var(--grey-bg);
+  list-style:none;display:flex;align-items:center;gap:8px;
+}
+.deep-dive summary::-webkit-details-marker{display:none;}
+.deep-dive summary::before{content:"▸";font-size:11px;}
+.deep-dive[open] summary::before{content:"▾";}
+.deep-dive-body{padding:12px 14px;font-size:13.5px;}
+.deep-dive-body h5{
+  font-size:11px;text-transform:uppercase;letter-spacing:0.6px;
+  color:var(--grey-text);margin:10px 0 4px;font-family:'Segoe UI',system-ui,sans-serif;
+}
+.deep-dive-body h5:first-child{margin-top:0;}
+.deep-dive-body p{margin-bottom:8px;}
+.deep-dive-body .trap-q{font-weight:700;color:var(--ink);}
+.deep-dive-body .trap-a{color:var(--grey-text);margin-bottom:8px;}
+
+/* FOOTER (per card) */
+.q-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+  padding:10px 16px;
+  background:var(--grey-bg);
+  font-size:11.5px;color:var(--grey-text);
+  border-top:1px solid var(--grey-border);
+}
+.correction-link{min-width:0;word-break:break-all;}
+.correction-link a{word-break:break-all;}
+.q-version{flex-shrink:0;font-weight:600;}
+
+/* NO RESULTS */
+#no-results{
+  display:none;text-align:center;padding:60px 20px;color:var(--grey-text);
+}
+
+/* PAGE FOOTER */
+.page-footer{
+  background:var(--navy);color:#cbd5e1;
+  padding:30px 20px;font-size:12.5px;
+  text-align:center;
+}
+.page-footer a{color:var(--teal-light);}
+.page-footer .disclaimer{
+  max-width:700px;margin:12px auto 0;color:#94a3b8;font-size:11.5px;
+}
+
+/* CHEAT SHEET */
+.cheat-sheet{background:var(--navy);border-radius:10px;padding:20px 22px;margin:26px 0 10px;}
+.cheat-sheet h2{color:#fff;font-size:16px;margin-bottom:4px;}
+.cheat-sheet .cs-sub{color:#94a3b8;font-size:12.5px;margin-bottom:14px;}
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.cs-block{background:#1e293b;border-radius:8px;padding:12px 14px;}
+.cs-block h4{color:var(--orange);font-size:11px;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
+.cs-block p, .cs-block li{color:#cbd5e1;font-size:12.5px;line-height:1.5;}
+.cs-block ul{margin-left:16px;}
+.cs-block strong{color:#fff;}
+
+body{user-select:none;-webkit-user-select:none;-moz-user-select:none;}
+.miw-watermark{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:9999;overflow:hidden;
+}
+.miw-watermark span{
+  position:absolute;white-space:nowrap;color:rgba(15,23,42,0.045);
+  font-size:13px;font-weight:700;transform:rotate(-30deg);
+  font-family:'Segoe UI',sans-serif;
+}
+</style>
+</head>
+<body>
+<div class="miw-watermark"><span style="top:0%;left:0%;">QB5_F · marineintelligenceweekly.com</span><span style="top:0%;left:28%;">QB5_F · marineintelligenceweekly.com</span><span style="top:0%;left:56%;">QB5_F · marineintelligenceweekly.com</span><span style="top:0%;left:84%;">QB5_F · marineintelligenceweekly.com</span><span style="top:11%;left:-11%;">QB5_F · marineintelligenceweekly.com</span><span style="top:11%;left:17%;">QB5_F · marineintelligenceweekly.com</span><span style="top:11%;left:45%;">QB5_F · marineintelligenceweekly.com</span><span style="top:11%;left:73%;">QB5_F · marineintelligenceweekly.com</span><span style="top:22%;left:0%;">QB5_F · marineintelligenceweekly.com</span><span style="top:22%;left:28%;">QB5_F · marineintelligenceweekly.com</span><span style="top:22%;left:56%;">QB5_F · marineintelligenceweekly.com</span><span style="top:22%;left:84%;">QB5_F · marineintelligenceweekly.com</span><span style="top:33%;left:-11%;">QB5_F · marineintelligenceweekly.com</span><span style="top:33%;left:17%;">QB5_F · marineintelligenceweekly.com</span><span style="top:33%;left:45%;">QB5_F · marineintelligenceweekly.com</span><span style="top:33%;left:73%;">QB5_F · marineintelligenceweekly.com</span><span style="top:44%;left:0%;">QB5_F · marineintelligenceweekly.com</span><span style="top:44%;left:28%;">QB5_F · marineintelligenceweekly.com</span><span style="top:44%;left:56%;">QB5_F · marineintelligenceweekly.com</span><span style="top:44%;left:84%;">QB5_F · marineintelligenceweekly.com</span><span style="top:55%;left:-11%;">QB5_F · marineintelligenceweekly.com</span><span style="top:55%;left:17%;">QB5_F · marineintelligenceweekly.com</span><span style="top:55%;left:45%;">QB5_F · marineintelligenceweekly.com</span><span style="top:55%;left:73%;">QB5_F · marineintelligenceweekly.com</span><span style="top:66%;left:0%;">QB5_F · marineintelligenceweekly.com</span><span style="top:66%;left:28%;">QB5_F · marineintelligenceweekly.com</span><span style="top:66%;left:56%;">QB5_F · marineintelligenceweekly.com</span><span style="top:66%;left:84%;">QB5_F · marineintelligenceweekly.com</span><span style="top:77%;left:-11%;">QB5_F · marineintelligenceweekly.com</span><span style="top:77%;left:17%;">QB5_F · marineintelligenceweekly.com</span><span style="top:77%;left:45%;">QB5_F · marineintelligenceweekly.com</span><span style="top:77%;left:73%;">QB5_F · marineintelligenceweekly.com</span><span style="top:88%;left:0%;">QB5_F · marineintelligenceweekly.com</span><span style="top:88%;left:28%;">QB5_F · marineintelligenceweekly.com</span><span style="top:88%;left:56%;">QB5_F · marineintelligenceweekly.com</span><span style="top:88%;left:84%;">QB5_F · marineintelligenceweekly.com</span><span style="top:99%;left:-11%;">QB5_F · marineintelligenceweekly.com</span><span style="top:99%;left:17%;">QB5_F · marineintelligenceweekly.com</span><span style="top:99%;left:45%;">QB5_F · marineintelligenceweekly.com</span><span style="top:99%;left:73%;">QB5_F · marineintelligenceweekly.com</span></div>
+<script>
+(function(){
+  function getCookie(name){
+    const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return v ? v.pop() : '';
+  }
+  if(getCookie('miw_auth') !== '1'){
+    window.location.href = 'https://marineintelligenceweekly.com/SQ/pay.html';
+  }
+})();
+</script>
+
+
+<div class="topbar">
+  <div class="logo-mark">MIW</div>
+  <div class="site-name">Marine Intelligence Weekly</div>
+  <nav>
+    <a href="https://marineintelligenceweekly.com/">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/contact.html">Contact</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <span class="qb-badge">QB5_F · MEO Class 1 Question Bank · Companion File</span>
+  <h1>CE Rule Implementation &amp; Crew Communication</h1>
+  <p class="sub-desc">2 oral-exam questions from the 30 June 2026 WhatsApp batch (Q499–Q529) — the rules a Chief Engineer personally implements, and handling language barriers in crew management. Companion file, own Q1–Q2 numbering, own TOC.</p>
+  <div class="header-meta">
+    <span><strong>Compiled by:</strong> Nixon Antony, 2/E, Maersk A/S</span>
+    <span><strong>Examiners referenced:</strong> Simon, Nair (External)</span>
+    <span><strong>Version:</strong> v1.0 · 30 June 2026</span>
+  </div>
+</div>
+
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all', this)">All</button>
+  <button class="filter-btn" onclick="filterTag('ism', this)">ISM</button>
+  <button class="filter-btn" onclick="filterTag('mlc', this)">MLC</button>
+  <span id="q-count-label">Showing 2 of 2</span>
+</div>
+
+<div class="main-layout">
+  <div class="sidebar">
+    <h3>Contents</h3>
+    <a class="toc-link" href="#q1">Q1. Rules the CE Implements</a>
+    <a class="toc-link" href="#q2">Q2. Communication &amp; Language Barriers</a>
+    <div class="divider"></div>
+    <div class="upcoming-note">
+      Companion file: <strong>QB5_F</strong>. Cross-ref: distinct from QB5_E · Q7 (3 requirements on taking over as CE) and QB4_F · Q4 (ISM takeover documents) — this file covers which class/statutory/company rules the CE personally implements, not the takeover checklist.
+    </div>
+  </div>
+
+  <div id="q-feed">
+
+    <div class="section-head">
+      <h2>📋 CE Authority &amp; Communication</h2>
+      <span class="sec-count">2 questions</span>
+    </div>
+
+    <div class="q-card" id="q1" data-tags="ism">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What rules do you implement as Chief Engineer?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-ism">ISM</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>As CE I implement rules from four layers — statutory (SOLAS, MARPOL, STCW), class (survey/rule requirements), flag State, and company SMS (PMS, Permit to Work, MARPOL compliance procedures) — through the ship's Safety Management System, which is the practical mechanism that converts all of them into daily engine-room practice.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>The CE implements rules from four distinct sources, all channelled through the ship's SMS under the ISM Code: statutory conventions (SOLAS machinery/fire safety chapters, MARPOL Annexes I and VI, STCW watchkeeping standards); classification society rules (survey cycles, machinery certification, structural/machinery rule requirements); flag State regulations and circulars; and company-specific procedures — Planned Maintenance System (PMS) schedules, Permit to Work (PTW) for enclosed space entry and hot work, MARPOL operational procedures (ORB entries, bilge/sludge management), and STCW-derived watchkeeping and rest-hour rules. The CE's job is not to memorise every regulation number but to ensure the SMS correctly translates each layer into a working procedure the engine room actually follows, and to close any gap between what the rule requires and what practice on board actually does.</div>
+        <div class="answer-body">
+          <h4>Governing Principle</h4>
+          <p>A Chief Engineer does not implement rules in isolation — every regulatory layer is converted into practice through the ship's <strong>Safety Management System (SMS)</strong> under the <strong>ISM Code</strong>. The CE's real function is to be the person who ensures the SMS procedures genuinely reflect statutory, class, flag, and company requirements, and that engine-room practice matches the SMS on paper.</p>
+
+          <h4>The Four Layers of Rules the CE Implements</h4>
+          <ul>
+            <li><strong>Statutory (IMO Convention level):</strong> SOLAS machinery and fire-safety chapters (Ch II-1, II-2), MARPOL Annex I (oil pollution — ORB, oily water separator operation) and Annex VI (SOx/NOx, EEXI/CII, SEEMP), STCW watchkeeping standards (Ch VIII).</li>
+            <li><strong>Classification Society rules:</strong> survey cycles and requirements (annual, intermediate, special/renewal), machinery certification, class-specific structural and machinery rules that go beyond bare statutory minima.</li>
+            <li><strong>Flag State regulations:</strong> flag-specific circulars, manning requirements, and any flag additions to statutory minima.</li>
+            <li><strong>Company/SMS procedures:</strong> Planned Maintenance System (PMS) schedules and job cards, Permit to Work (PTW) systems for enclosed space entry, hot work, and working aloft, MARPOL operational procedures (ORB Part I entries, sludge/bilge water management, bunkering procedures), and internal reporting/near-miss systems.</li>
+          </ul>
+
+          <h4>Practical Implementation Mechanism</h4>
+          <p>The CE's real leverage is the SMS — statutory and class requirements are meaningless in the engine room unless they are built into PMS job frequencies, PTW checklists, and watchkeeping standing orders. Part of the CE's role is auditing that translation: confirming PMS job intervals actually match the manufacturer/class requirement, that PTW forms are being completed genuinely (not just signed as paperwork), and that MARPOL entries in the ORB are accurate and contemporaneous.</p>
+
+          <h4>Practical Application</h4>
+          <p>On taking over machinery responsibility, the CE cross-checks class survey status against the actual maintenance record, verifies PMS overdue jobs are closed or justified, and confirms PTW and enclosed-space entry procedures are being followed in practice — not just filed.</p>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">ISM Code, Section 7</span><span class="reg-desc">Shipboard operations — procedures for key shipboard operations, including machinery</span></div>
+            <div class="reg-item"><span class="reg-code">ISM Code, Section 10</span><span class="reg-desc">Maintenance of the ship and equipment — PMS basis</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch II-1 &amp; II-2</span><span class="reg-desc">Machinery installations and fire safety statutory requirements</span></div>
+            <div class="reg-item"><span class="reg-code">MARPOL Annex I &amp; VI</span><span class="reg-desc">Oil Record Book, bilge/sludge management, SOx/NOx and CII compliance</span></div>
+            <div class="reg-item"><span class="reg-code">STCW Chapter VIII</span><span class="reg-desc">Watchkeeping standards implemented at engine-room level</span></div>
+            <div class="reg-item"><span class="reg-code">Classification Society Rules</span><span class="reg-desc">Survey cycles and machinery certification requirements beyond statutory minima</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon expects the four-layer structure named explicitly — statutory, class, flag, company/SMS — not a vague list of individual regulations. State clearly that the SMS is the mechanism that converts all four into daily practice, and give one concrete example each of PMS, PTW, and a MARPOL operational procedure. The common failure is naming only statutory conventions and forgetting class and company-level rules entirely.</div>
+        </div>
+
+        <details class="deep-dive">
+          <summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary>
+          <div class="deep-dive-body">
+            <h5>CE Relevance</h5>
+            <p>This question tests whether the candidate understands the CE's role as a translator between regulation and daily practice, not just a rule-follower. Auditing PMS overdue status, PTW completion quality, and ORB accuracy are the concrete, checkable outputs of "rule implementation."</p>
+
+            <h5>Trap Questions</h5>
+            <p class="trap-q">Q: "Give me one example where class rules go beyond statutory MARPOL requirements."</p>
+            <p class="trap-a">A: Class often requires more frequent or more detailed machinery condition monitoring/oil analysis than the bare statutory minimum, and specific structural/machinery survey items tied to notation (e.g. enhanced survey items) that MARPOL itself does not prescribe.</p>
+
+            <h5>Common CE Failures</h5>
+            <p class="trap-a">1. Naming only statutory conventions (SOLAS/MARPOL) and omitting class and company/SMS layers entirely.</p>
+            <p class="trap-a">2. Treating PMS and PTW as generic "paperwork" rather than the actual implementation mechanism the examiner wants named specifically.</p>
+
+            <h5>Numbers to Memorise</h5>
+            <p>Four layers: statutory / class / flag / company-SMS · ISM Code Sections 7 (shipboard operations) and 10 (maintenance) as the core SMS anchor points for rule implementation.</p>
+
+            <h5>Casualty Link</h5>
+            <p>Numerous engine-room casualty investigations trace root cause to a rule that existed on paper (PMS job, PTW requirement) but was not actually followed in practice — reinforcing why examiners test understanding of implementation, not just knowledge of the rule's existence.</p>
+
+            <h5>Examiner Chain</h5>
+            <p>Simon → rules CE implements → PMS specifics → PTW for enclosed space entry → what if a PMS job is overdue → how do you verify class survey status.</p>
+
+            <h5>On My Vessel</h5>
+            <p>On a Maersk container vessel, PMS runs through the company's fleet maintenance system with job cards tied to manufacturer and class intervals; PTW for enclosed space entry and hot work follows the company SMS format; MARPOL compliance is tracked through ORB Part I entries cross-checked at each internal/external audit.</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB5_F, Q1, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB5_F, Q1, Correction Required</span>
+        <span class="q-version">QB5_F · Q1 · v1.0</span>
+      </div>
+    </div>
+
+    <div class="q-card" id="q2" data-tags="mlc">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Communication skills for the CE — how do you handle language barriers and crew management communication?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-mlc">MLC</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>SOLAS/STCW require a common working language onboard for safety-critical communication, and MLC governs the crew's working/living conditions regardless of nationality mix; the CE's practical response to language barriers is simplified, standardised terminology, visual/written backup (checklists, placards), and never assuming comprehension without confirmation ("read-back").</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>SOLAS Regulation V/14 and STCW Section A-VIII/1 require a working language to be established and understood by all personnel for safety-critical communication — normally English on internationally-crewed tonnage, formalised in the SMS. On a genuinely multinational crew, the CE's practical response layers several tools: standardised, simplified terminology (avoiding idiom and slang), written backup for critical procedures (checklists, permit forms, placards in the working language), deliberate confirmation/read-back rather than assuming a nod means understanding, and pairing less-fluent crew with a bilingual buddy during critical evolutions. MLC 2006 governs crew welfare and working conditions without regard to nationality or language, so communication failures that affect safety or welfare are an SMS matter, documentable as a near-miss if a language gap contributed to an unsafe act.</div>
+        <div class="answer-body">
+          <h4>Regulatory Basis for a Common Working Language</h4>
+          <ul>
+            <li><strong>SOLAS Regulation V/14.3–14.4:</strong> requires a working language to be determined and recorded in the ship's log, understood by all officers and applicable crew, for safety-related communication, particularly between ship and shore, ship-to-ship, and onboard between officers and ratings.</li>
+            <li><strong>STCW Section A-VIII/1 / A-II/1:</strong> requires watchkeeping personnel to be able to communicate effectively for safety purposes in the ship's working language.</li>
+            <li><strong>MLC 2006:</strong> does not mandate a specific language but requires that seafarers' rights, complaint procedures, and safety information be genuinely accessible to them — implicitly requiring effective communication regardless of first language.</li>
+          </ul>
+
+          <h4>Practical CE Techniques for Language Barriers</h4>
+          <ul>
+            <li><strong>Simplified, standardised terminology:</strong> avoid idiom, slang, and regional phrasing; use consistent technical vocabulary understood fleet-wide.</li>
+            <li><strong>Written and visual backup:</strong> checklists, PTW forms, and safety placards available in the working language and, where practical, supplemented with diagrams/symbols that transcend language.</li>
+            <li><strong>Confirmation, not assumption:</strong> require read-back or demonstration of understanding for safety-critical instructions rather than accepting a nod as confirmation.</li>
+            <li><strong>Buddy system:</strong> pairing less-fluent crew with a bilingual colleague during critical evolutions (bunkering, enclosed space entry, emergency drills).</li>
+            <li><strong>Deliberate pacing during briefings/toolbox talks:</strong> slower, clearer delivery, checked understanding, before starting hazardous work.</li>
+          </ul>
+
+          <h4>When Language Becomes a Safety/Welfare Issue</h4>
+          <p>If a language gap contributes to an unsafe act, a near-miss, or a crew welfare concern going unreported, it becomes an SMS matter — documented, root-caused, and addressed through improved onboard communication procedures or crewing/training decisions, not treated as an unavoidable background condition.</p>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">SOLAS Regulation V/14</span><span class="reg-desc">Ships' manning — working language for safety-related communication</span></div>
+            <div class="reg-item"><span class="reg-code">STCW Section A-VIII/1</span><span class="reg-desc">Watchkeeping personnel effective communication requirement</span></div>
+            <div class="reg-item"><span class="reg-code">STCW Section A-II/1 / A-III/1</span><span class="reg-desc">Communication competency for deck/engine watchkeeping officers</span></div>
+            <div class="reg-item"><span class="reg-code">MLC 2006, Title 5</span><span class="reg-desc">Onboard complaint procedures — must be genuinely accessible regardless of language</span></div>
+            <div class="reg-item"><span class="reg-code">ISM Code Section 6</span><span class="reg-desc">Resources and personnel — company duty to ensure effective crew communication</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Nair expects the working-language requirement named specifically (SOLAS V/14, STCW A-VIII/1), not just "I speak clearly and slowly." Give the concrete technique stack: standardised terminology, written/visual backup, confirmation/read-back, buddy system. If pushed, state clearly that assuming comprehension without confirmation is the most common real-world failure mode — a nod is not confirmation.</div>
+        </div>
+
+        <details class="deep-dive">
+          <summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary>
+          <div class="deep-dive-body">
+            <h5>CE Relevance</h5>
+            <p>Enclosed space entry, permit-to-work sign-off, and emergency drill comprehension are the highest-stakes points where a language gap becomes a safety failure, not an inconvenience — the CE's job is to design procedures that don't rely on assumed fluency.</p>
+
+            <h5>Trap Questions</h5>
+            <p class="trap-q">Q: "A junior engineer nods when you give an instruction during an emergency drill — is that sufficient confirmation of understanding?"</p>
+            <p class="trap-a">A: No. A nod is not read-back or demonstrated understanding; for safety-critical instructions, require the person to repeat the instruction back or physically demonstrate the correct action before proceeding.</p>
+
+            <h5>Common CE Failures</h5>
+            <p class="trap-a">1. Giving a purely soft-skills answer without citing the SOLAS/STCW working-language requirement.</p>
+            <p class="trap-a">2. Not offering a concrete technique (read-back, buddy system) when asked how a language barrier is actually managed in practice.</p>
+
+            <h5>Numbers to Memorise</h5>
+            <p>SOLAS Reg V/14 — working language, recorded in the log · STCW A-VIII/1 — watchkeeping communication competency · MLC Title 5 — accessible complaint procedures regardless of language.</p>
+
+            <h5>Casualty Link</h5>
+            <p>Communication and language gaps have been cited as contributing factors in numerous IMO casualty investigation reports, particularly in engine-room emergency response and enclosed-space-entry fatalities, where instructions were misunderstood under time pressure.</p>
+
+            <h5>Examiner Chain</h5>
+            <p>Nair → communication skills → language barriers → SOLAS/STCW basis → practical technique → what if a crew complaint isn't understood/reported.</p>
+
+            <h5>On My Vessel</h5>
+            <p>Maersk container tonnage typically carries a genuinely multinational crew; the working language recorded in the ship's SMS is English, with PTW forms and safety placards standardised fleet-wide, and toolbox talks deliberately paced with confirmation checks before hazardous work begins.</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB5_F, Q2, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB5_F, Q2, Correction Required</span>
+        <span class="q-version">QB5_F · Q2 · v1.0</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="cheat-sheet">
+  <h2>⚡ QB5_F Quick-Revision Cheat Sheet</h2>
+  <p class="cs-sub">Last-minute recall block — CE Rule Implementation &amp; Communication.</p>
+  <div class="cs-grid">
+    <div class="cs-block">
+      <h4>Four Rule Layers</h4>
+      <ol>
+        <li>Statutory (SOLAS/MARPOL/STCW)</li>
+        <li>Class Society</li>
+        <li>Flag State</li>
+        <li>Company / SMS (PMS, PTW)</li>
+      </ol>
+    </div>
+    <div class="cs-block">
+      <h4>Implementation Mechanism</h4>
+      <p>SMS under ISM Code Sections 7 &amp; 10 converts all layers into PMS job cards, PTW checklists, ORB entries.</p>
+    </div>
+    <div class="cs-block">
+      <h4>Working Language — Regs</h4>
+      <ul>
+        <li>SOLAS V/14 — logged working language</li>
+        <li>STCW A-VIII/1 — watchkeeping communication</li>
+      </ul>
+    </div>
+    <div class="cs-block">
+      <h4>Language Barrier Technique Stack</h4>
+      <ul>
+        <li>Standardised terminology</li>
+        <li>Written/visual backup</li>
+        <li>Read-back confirmation</li>
+        <li>Bilingual buddy system</li>
+      </ul>
+    </div>
+    <div class="cs-block">
+      <h4>One-Line Answer</h4>
+      <p>"A nod is not confirmation — require read-back for safety-critical instructions."</p>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+  <p>Marine Intelligence Weekly · MEO Class 1 Question Bank · QB5_F — CE Rule Implementation &amp; Crew Communication</p>
+  <p>Compiled by Nixon Antony, Second Engineer, Maersk A/S · <a href="https://marineintelligenceweekly.com/meoclass1/">Back to MEO Class 1 Hub</a> · <a href="https://marineintelligenceweekly.com/">marineintelligenceweekly.com</a></p>
+  <p class="disclaimer">Disclaimer: This question bank is a private study aid compiled for MEO Class 1 oral examination preparation at the Kochi MMD. Regulatory references are provided in good faith and cross-checked against IMO, IACS, and classification society sources where possible, but candidates must independently verify current regulation numbers, thresholds, and amendment dates against the latest consolidated SOLAS/MARPOL editions, IACS Unified Requirements, and their flag/class circulars before relying on them in examination or operational contexts. To report a correction, email contactus@marineintelligenceweekly.com with the QB number, question number, and details.</p>
+</div>
+
+<script>
+// Toggle card open/close
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+
+// Filter by tag button
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+// Apply search + tag filters simultaneously
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+
+// TOC active highlight on scroll
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+
+</body>
+</html>

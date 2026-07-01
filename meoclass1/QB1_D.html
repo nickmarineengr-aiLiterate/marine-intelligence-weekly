@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB1_D — Stability, Construction &amp; Surveys | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+<style>
+:root{
+  --teal:#0d9488;
+  --teal-dark:#0f766e;
+  --teal-light:#ccfbf1;
+  --navy:#0f172a;
+  --orange:#f97316;
+  --orange-light:#fff7ed;
+  --off-white:#f8fafc;
+  --grey-text:#64748b;
+  --grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;
+  --ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:var(--off-white);
+  color:var(--ink);
+  -webkit-user-select:none;-ms-user-select:none;user-select:none;
+}
+a{color:inherit;}
+
+/* Topbar */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:#fff;border-bottom:1px solid var(--grey-border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 24px;
+}
+.topbar .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy);}
+.topbar .brand .mark{
+  width:30px;height:30px;border-radius:7px;background:var(--teal-dark);
+  color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.topbar nav a{margin-left:18px;font-size:13px;font-weight:600;color:var(--grey-text);text-decoration:none;}
+.topbar nav a:hover{color:var(--teal-dark);}
+
+/* Page header */
+.page-header{
+  background:var(--navy);color:#fff;padding:28px 24px 22px;
+}
+.qb-badge{
+  display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:800;
+  letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:5px;margin-bottom:10px;
+}
+.page-header h1{font-size:24px;font-weight:800;margin-bottom:6px;}
+.page-header p{font-size:13.5px;color:#cbd5e1;max-width:680px;line-height:1.5;}
+.header-meta{display:flex;gap:18px;margin-top:14px;font-size:12px;color:#94a3b8;flex-wrap:wrap;}
+.header-meta strong{color:#e2e8f0;}
+
+/* Controls bar */
+.controls-bar{
+  position:sticky;top:53px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);
+  padding:10px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+}
+#search-input{
+  flex:1;min-width:180px;max-width:320px;padding:8px 12px;border:1px solid var(--grey-border);
+  border-radius:6px;font-size:13px;
+}
+.filter-btn{
+  border:1px solid var(--grey-border);background:#fff;padding:6px 12px;border-radius:16px;
+  font-size:12px;font-weight:600;cursor:pointer;color:var(--grey-text);
+}
+.filter-btn.active{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);}
+#q-count-label{font-size:12px;color:var(--grey-text);margin-left:auto;}
+
+/* Cheat sheet */
+.cheat-sheet{background:#fff;border-bottom:1px solid var(--grey-border);padding:18px 24px;}
+.cheat-sheet-inner{max-width:1100px;margin:0 auto;}
+.cheat-toggle{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;}
+.cheat-toggle h2{font-size:14px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:8px;}
+.cheat-toggle .cheat-chevron{width:18px;height:18px;color:var(--grey-text);transition:transform .2s;}
+.cheat-sheet.open .cheat-chevron{transform:rotate(180deg);}
+.cheat-body{display:none;margin-top:14px;}
+.cheat-sheet.open .cheat-body{display:block;}
+.cheat-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.cheat-table{width:100%;border-collapse:collapse;font-size:12px;}
+.cheat-table th{text-align:left;background:var(--navy);color:#fff;padding:6px 10px;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;}
+.cheat-table td{padding:6px 10px;border-bottom:1px solid var(--grey-border);}
+.cheat-table tr:nth-child(even) td{background:var(--grey-bg);}
+.cheat-table .k{font-family:monospace;color:var(--orange);font-weight:700;white-space:nowrap;}
+.cheat-flow-wrap{background:var(--grey-bg);border-radius:8px;padding:10px;}
+.cheat-flow-wrap svg{width:100%;height:auto;display:block;}
+@media(max-width:760px){.cheat-grid{grid-template-columns:1fr;}}
+
+/* Main layout */
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:24px;padding:24px;max-width:1100px;margin:0 auto;}
+.sidebar{position:sticky;top:110px;align-self:start;}
+.sidebar h3{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--grey-text);margin-bottom:8px;}
+.toc-link{
+  display:block;padding:6px 10px;border-radius:6px;font-size:12.5px;color:var(--ink);
+  text-decoration:none;margin-bottom:2px;
+}
+.toc-link:hover, .toc-link.active{background:var(--teal-light);color:var(--teal-dark);font-weight:700;}
+.sidebar .toc-divider{border-top:1px solid var(--grey-border);margin:14px 0;}
+.sidebar .upcoming-note{font-size:11.5px;color:var(--grey-text);line-height:1.5;}
+
+/* Section head */
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:6px 0 12px;}
+.section-head h2{font-size:16px;font-weight:800;color:var(--navy);}
+.sec-count{font-size:11px;background:var(--teal-light);color:var(--teal-dark);padding:3px 9px;border-radius:12px;font-weight:700;}
+
+/* Q Card */
+.q-card{
+  background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:14px;overflow:hidden;
+}
+.q-header{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{
+  flex-shrink:0;width:28px;height:28px;border-radius:7px;background:var(--teal);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;
+}
+.q-card.open .q-num-badge{background:var(--teal-dark);}
+.q-text-wrap{flex:1;}
+.q-text{font-size:14.5px;font-weight:700;color:var(--navy);line-height:1.4;}
+.q-tags{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;}
+.q-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:2px 8px;border-radius:10px;background:var(--grey-bg);color:var(--grey-text);}
+.q-tag.tag-solas{background:#dbeafe;color:#1d4ed8;}
+.q-tag.tag-survey{background:#dcfce7;color:#15803d;}
+.q-tag.tag-machinery{background:#fef3c7;color:#92400e;}
+.q-tag.tag-load-line{background:#ede9fe;color:#6d28d9;}
+.q-chevron{flex-shrink:0;width:20px;height:20px;color:var(--grey-text);transition:transform .2s;margin-top:2px;}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 16px 16px;}
+.q-card.open .q-answer{display:block;}
+
+/* Practice blocks */
+.practice-block{border-radius:8px;padding:12px 16px;margin:10px 0;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;line-height:1.65;}
+.practice-label{font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px;display:block;}
+.practice-15{background:#0f766e;color:#fff;border:none;}
+.practice-15 .practice-label{color:#ccfbf1;}
+.practice-60{background:#0d9488;color:#fff;border:none;}
+.practice-60 .practice-label{color:#ccfbf1;}
+
+/* Answer body */
+.answer-body{font-family:'Georgia',serif;font-size:14px;line-height:1.65;color:var(--ink);margin:10px 0;}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;font-family:'Segoe UI',system-ui,sans-serif;}
+.answer-body h4:first-child{margin-top:0;}
+.answer-body p{margin-bottom:8px;}
+.answer-body ul,.answer-body ol{padding-left:20px;margin-bottom:8px;}
+.answer-body li{margin-bottom:4px;}
+.answer-body .formula{background:var(--grey-bg);font-family:monospace;padding:8px 12px;border-radius:6px;margin:8px 0;font-size:13px;}
+.answer-body a{color:var(--teal-dark);text-decoration:underline;font-size:12px;}
+
+/* Numbers / trap / casualty boxes */
+.numbers-box{background:var(--grey-bg);border-left:3px solid var(--teal);border-radius:6px;padding:10px 14px;margin:8px 0;font-size:13px;line-height:1.6;}
+.numbers-box h4{margin:0 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);}
+.trap-box{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13px;line-height:1.6;}
+.trap-box strong.trap-label{color:#b91c1c;font-size:10px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px;}
+
+/* Reg box */
+.reg-box{background:var(--navy);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.reg-box-title{color:#fff;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.reg-item{display:flex;gap:10px;padding:5px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:12.5px;}
+.reg-item:first-of-type{border-top:none;}
+.reg-code{color:var(--orange);font-family:monospace;font-weight:700;flex-shrink:0;min-width:150px;}
+.reg-desc{color:#cbd5e1;}
+
+/* CE tip */
+.ce-tip{background:var(--orange-light);border:1px solid #fed7aa;border-left:4px solid var(--orange);border-radius:8px;padding:12px 14px;margin:10px 0;font-size:13px;line-height:1.6;}
+.ce-tip strong{color:#c2410c;}
+
+/* Deep dive */
+.deep-dive{margin:10px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:0;}
+.dd-block{padding:10px 16px;border-top:1px solid var(--grey-border);font-size:13px;line-height:1.6;font-family:'Georgia',serif;}
+.dd-block a{color:var(--teal-dark);font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;}
+.dd-block ul{padding-left:18px;}
+.dd-block li{margin-bottom:4px;}
+.dd-label{font-family:'Segoe UI',system-ui,sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+.dd-relevance .dd-label{color:#0f766e;}
+.dd-trap .dd-label{color:#b91c1c;}
+.dd-fail .dd-label{color:#92400e;}
+.dd-numbers .dd-label{color:#1d4ed8;}
+.dd-casualty .dd-label{color:#92400e;}
+.dd-chain .dd-label{color:#6d28d9;}
+.dd-vessel .dd-label{color:#0f766e;}
+
+/* Related q */
+.related-q{font-size:12px;color:var(--grey-text);margin:8px 0;padding:8px 14px;border-top:1px dashed var(--grey-border);}
+.related-q a{color:var(--teal-dark);text-decoration:none;font-weight:600;}
+.related-q a:hover{text-decoration:underline;}
+
+/* Q footer */
+.q-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 16px;background:var(--grey-bg);font-size:11px;color:var(--grey-text);border-top:1px solid var(--grey-border);}
+.correction-link{word-break:break-all;min-width:0;}
+.correction-link a{color:var(--teal-dark);text-decoration:none;}
+.q-version{flex-shrink:0;font-weight:700;color:var(--grey-text);}
+
+#no-results{display:none;text-align:center;padding:40px;color:var(--grey-text);font-size:13px;}
+
+/* Page footer */
+.page-footer{background:var(--navy);color:#94a3b8;padding:24px;text-align:center;font-size:12px;line-height:1.7;}
+.page-footer a{color:var(--teal-light);}
+
+@media(max-width:760px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{position:static;}
+}
+</style>
+</head>
+<body>
+
+<!-- Watermark -->
+<div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.04;">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wm" x="0" y="0" width="300" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+        <text x="10" y="60" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">marineintelligenceweekly.com</text>
+        <text x="10" y="120" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wm)"/>
+  </svg>
+</div>
+
+<div class="topbar">
+  <div class="brand"><span class="mark">MIW</span> Marine Intelligence Weekly</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/meoclass1/">MEO Class 1</a>
+    <a href="/SQ/contact.html">Contact</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <span class="qb-badge">QB1_D · v1.0</span>
+  <h1>QB1_D — Stability, Construction &amp; Surveys (D File)</h1>
+  <p>Fourth-wave companion file, sourced from Kochi MMD oral sessions on 29 June 2026. Own Q1–Q4 numbering — does not continue from QB1, QB1_B, or QB1_C.</p>
+  <div class="header-meta">
+    <span><strong>Examiners:</strong> Paul (External), Senthil (Internal)</span>
+    <span><strong>Vessel types:</strong> Bulk Carrier, Various</span>
+    <span><strong>Questions:</strong> 4</span>
+  </div>
+</div>
+
+<div class="cheat-sheet" id="cheatSheet">
+  <div class="cheat-sheet-inner">
+    <div class="cheat-toggle" onclick="toggleCheat()">
+      <h2>🗺 Cheat Sheet — QB1_D Quick Reference &amp; Flow</h2>
+      <svg class="cheat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="cheat-body">
+      <div class="cheat-grid">
+        <div>
+          <table class="cheat-table">
+            <tr><th>Item</th><th>Value / Reg</th></tr>
+            <tr><td>Tonnage Convention</td><td class="k">TONNAGE 69</td></tr>
+            <tr><td>NT floor</td><td class="k">NT ≥ 0.30 × GT</td></tr>
+            <tr><td>Lifting appliance reg</td><td class="k">SOLAS II-1/3-13</td></tr>
+            <tr><td>Lifting reg in force</td><td class="k">1 Jan 2026</td></tr>
+            <tr><td>Lifting guidelines</td><td class="k">MSC.1/Circ.1663</td></tr>
+            <tr><td>Proof load</td><td class="k">1.25 × SWL</td></tr>
+            <tr><td>Survey cycle</td><td class="k">Annual + 5-yearly</td></tr>
+            <tr><td>ILLC validity</td><td class="k">5 years</td></tr>
+            <tr><td>LL annual endorsement window</td><td class="k">± 3 months</td></tr>
+            <tr><td>Key LL document</td><td class="k">Record of Conditions of Assignment</td></tr>
+          </table>
+        </div>
+        <div class="cheat-flow-wrap">
+          <svg viewBox="0 0 480 260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrowD" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0 0L10 5L0 10z" fill="#0f766e"/>
+              </marker>
+            </defs>
+            <!-- Q1 -->
+            <rect x="15" y="15" width="200" height="50" rx="8" fill="#0f766e"/>
+            <text x="115" y="36" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Segoe UI,sans-serif">Q1 · Vessel Particulars</text>
+            <text x="115" y="52" text-anchor="middle" font-size="9" fill="#ccfbf1" font-family="Segoe UI,sans-serif">GT / NT / DWT — TONNAGE 69</text>
+
+            <!-- Q2 -->
+            <rect x="265" y="15" width="200" height="50" rx="8" fill="#0d9488"/>
+            <text x="365" y="36" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Segoe UI,sans-serif">Q2 · Lifting Amendments</text>
+            <text x="365" y="52" text-anchor="middle" font-size="9" fill="#ccfbf1" font-family="Segoe UI,sans-serif">SOLAS II-1/3-13 · 1 Jan 2026</text>
+
+            <!-- Q3 -->
+            <rect x="265" y="105" width="200" height="50" rx="8" fill="#0d9488"/>
+            <text x="365" y="126" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Segoe UI,sans-serif">Q3 · Lifting Survey</text>
+            <text x="365" y="142" text-anchor="middle" font-size="9" fill="#ccfbf1" font-family="Segoe UI,sans-serif">Annual + 5-yr proof load (1.25×SWL)</text>
+
+            <!-- Q4 -->
+            <rect x="15" y="195" width="200" height="50" rx="8" fill="#0f766e"/>
+            <text x="115" y="216" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Segoe UI,sans-serif">Q4 · Load Line Survey Docs</text>
+            <text x="115" y="232" text-anchor="middle" font-size="9" fill="#ccfbf1" font-family="Segoe UI,sans-serif">ILLC + Record of Conditions</text>
+
+            <!-- CE Hub -->
+            <circle cx="240" cy="130" r="34" fill="var(--navy)"/>
+            <text x="240" y="126" text-anchor="middle" font-size="9" font-weight="800" fill="#fff" font-family="Segoe UI,sans-serif">CE</text>
+            <text x="240" y="138" text-anchor="middle" font-size="8" fill="#94a3b8" font-family="Segoe UI,sans-serif">Statutory</text>
+            <text x="240" y="148" text-anchor="middle" font-size="8" fill="#94a3b8" font-family="Segoe UI,sans-serif">Duties</text>
+
+            <!-- connectors -->
+            <path d="M115 65 L115 130 L206 130" fill="none" stroke="#0f766e" stroke-width="2" marker-end="url(#arrowD)"/>
+            <path d="M274 130 L365 130 L365 105" fill="none" stroke="#0f766e" stroke-width="2" marker-end="url(#arrowD)"/>
+            <path d="M365 65 L365 105" fill="none" stroke="#0f766e" stroke-width="2" marker-end="url(#arrowD)"/>
+            <path d="M240 164 L240 195 L115 195" fill="none" stroke="#0f766e" stroke-width="2" marker-end="url(#arrowD)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search this file…" oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all', this)">All</button>
+  <button class="filter-btn" onclick="filterTag('survey', this)">Surveys</button>
+  <button class="filter-btn" onclick="filterTag('load-line', this)">Load Lines</button>
+  <button class="filter-btn" onclick="filterTag('machinery', this)">Machinery</button>
+  <span id="q-count-label">Showing 4 of 4</span>
+</div>
+
+<div class="main-layout">
+  <aside class="sidebar">
+    <h3>On This Page</h3>
+    <a class="toc-link" href="#q1">Q1 · GRT / DWT</a>
+    <a class="toc-link" href="#q2">Q2 · Lifting Appliance Amendments</a>
+    <a class="toc-link" href="#q3">Q3 · Lifting Appliance Survey</a>
+    <a class="toc-link" href="#q4">Q4 · Load Line Survey Documents</a>
+    <div class="toc-divider"></div>
+    <div class="upcoming-note">More companion files (QB2_D–QB9_D) are in production. Check back for updates.</div>
+  </aside>
+
+  <main id="q-feed">
+    <div class="section-head">
+      <h2>🔍 Surveys &amp; Vessel Particulars</h2>
+      <span class="sec-count">4 questions</span>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-card" id="q1" data-tags="survey machinery">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What was the GRT and DWT of your last vessel?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-survey">Tonnage</span>
+            <span class="q-tag">Senthil (Int)</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+
+        <div class="practice-block practice-15">
+          <span class="practice-label">⏱ 15-Second Answer</span>
+          "My last vessel, a Maersk container ship, had a Gross Tonnage (GT) of approximately 95,000 and a Deadweight Tonnage (DWT) of 110,000 tonnes. GT is a dimensionless number representing the ship's total enclosed volume, whereas DWT is the actual physical weight in tonnes the ship can carry when loaded to her summer marks."
+        </div>
+
+        <div class="practice-block practice-60">
+          <span class="practice-label">🎯 60-Second Answer</span>
+          "Sir, on my last vessel, the GT was [insert exact number] and DWT was [insert exact number]. GT is a mathematical, dimensionless index derived from the total moulded volume of all enclosed spaces under the Tonnage 1969 Convention. It dictates the applicability of MARPOL and SOLAS regulations, manning scales, and port dues. DWT is a measure of the ship's physical weight-carrying capacity in metric tonnes — calculated as summer load line displacement minus the lightship weight. As Chief Engineer, I monitor GT closely because it determines which statutory thresholds apply to my engine room, such as MARPOL Annex I OWS capacity requirements."
+        </div>
+
+        <div class="answer-body">
+          <h4>Gross and Net Tonnage (TONNAGE 69)</h4>
+          <p>Under the International Convention on Tonnage Measurement of Ships, 1969 (TONNAGE 69), the obsolete terms GRT (Gross Register Tonnage) and NRT (Net Register Tonnage) were replaced by GT and NT. <a href="https://owaysonline.com/tonnage/" target="_blank" rel="noopener">[owaysonline]</a></p>
+          <ul>
+            <li><strong>Gross Tonnage (GT):</strong> A dimensionless index indicating the overall size of the vessel based on the moulded volume of all enclosed spaces. The formula is <em>GT = K₁V</em>. <a href="https://treaties.un.org/doc/Publication/UNTS/Volume%201291/volume-1291-I-21264-English.pdf" target="_blank" rel="noopener">[treaties.un]</a></li>
+            <li><strong>Net Tonnage (NT):</strong> A dimensionless index indicating the vessel's earning capacity based on the moulded volume of cargo spaces. The convention dictates that NT cannot be less than <strong>30% of the GT</strong>. <a href="https://www.imo.org/en/About/Conventions/Pages/International-Convention-on-Tonnage-Measurement-of-Ships.aspx" target="_blank" rel="noopener">[imo]</a></li>
+          </ul>
+
+          <h4>Deadweight Tonnage (DWT)</h4>
+          <p>Deadweight is the actual weight a ship can carry in metric tonnes. It includes cargo, fuel, lubricating oil, fresh water, ballast water, provisions, passengers, and crew.</p>
+          <p class="formula"><strong>DWT = Displacement at Summer Load Line − Lightship Displacement</strong></p>
+
+          <h4>Why Vessel Types Differ</h4>
+          <p>Container ships have large enclosed cargo holds and deckhouses, giving them a very high GT relative to their DWT. Conversely, bulk carriers carry high-density cargo, resulting in a DWT that is numerically much higher than their GT. <a href="https://owaysonline.com/tonnage/" target="_blank" rel="noopener">[owaysonline]</a></p>
+        </div>
+
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">TONNAGE 69</span><span class="reg-desc">International Convention on Tonnage Measurement of Ships 1969</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS</span><span class="reg-desc">Applicability thresholds based on GT</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex I/IV/VI</span><span class="reg-desc">Thresholds based on GT</span></div>
+          <div class="reg-item"><span class="reg-code">ITC 1969</span><span class="reg-desc">International Tonnage Certificate</span></div>
+        </div>
+
+        <div class="ce-tip">
+          <strong>CE Oral Tip (Senthil / Simon):</strong> Kochi MMD checks your vessel familiarity immediately. Have the exact GT, NT, DWT, Engine BHP, and Lightship weight of your last two vessels memorized. Do not say "tons" when stating your GT.
+        </div>
+
+        <div class="deep-dive" id="dd-q1">
+          <button class="deep-dive-toggle" onclick="toggleDD('dd-q1')">▶ Deep Dive</button>
+          <div class="deep-dive-body" style="display:none">
+            <div class="dd-block dd-relevance">
+              <strong class="dd-label">🔧 CE Relevance</strong>
+              <p>While the Master handles the commercial aspect of DWT (cargo loading), the CE uses GT to determine statutory compliance. GT thresholds dictate whether the vessel requires an IOPP certificate (≥ 400 GT), an IAPP certificate (≥ 400 GT), or compliance with the ISM Code (≥ 500 GT).</p>
+            </div>
+            <div class="dd-block dd-trap">
+              <strong class="dd-label">⚠ Trap Questions</strong>
+              <p><strong>"What are the units for Gross Tonnage?"</strong> — GT has no physical units; it is a strictly dimensionless mathematical index number. <a href="https://owaysonline.com/tonnage/" target="_blank" rel="noopener">[owaysonline]</a></p>
+              <p><strong>"Why did the industry move from GRT to GT?"</strong> — GRT used a system of exemptions that allowed ship designers to exploit loopholes (e.g., leaving shelter decks "open" to avoid tonnage taxes). GT provides a universal, mathematically rigorous formula without exemptions.</p>
+            </div>
+            <div class="dd-block dd-fail">
+              <strong class="dd-label">✗ Common CE Failures</strong>
+              <ul>
+                <li>Failing to recall own ship's particulars accurately — examiners use this as an instant credibility check</li>
+                <li>Confusing GT (dimensionless index) with GRT (100 cubic feet of volume), or giving GT in "tonnes"</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-numbers">
+              <strong class="dd-label">🔢 Numbers &amp; Regulations to Memorise</strong>
+              <ul>
+                <li><strong>TONNAGE 69:</strong> Entry into force 18 July 1982</li>
+                <li><strong>Formula:</strong> GT = K₁V (V = total enclosed volume in m³, K₁ = 0.2 + 0.02 log₁₀V)</li>
+                <li><strong>NT Limit:</strong> NT ≥ 0.30 × GT</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-casualty">
+              <strong class="dd-label">⚓ Casualty Link</strong>
+              <p>Not directly casualty-driven — TONNAGE 69 arose from the need for a uniform international measurement system rather than a specific incident, replacing conflicting national tonnage rules.</p>
+            </div>
+            <div class="dd-block dd-chain">
+              <strong class="dd-label">🔗 Examiner Chain (Kochi MMD)</strong>
+              <p><strong>Senthil (Int):</strong> "What is your last ship's GT?" → "Why does a container ship have a high GT but lower DWT compared to a bulker?" → "How does GT impact your engine room requirements?" (leading to MARPOL thresholds).</p>
+            </div>
+            <div class="dd-block dd-vessel">
+              <strong class="dd-label">🚢 On My Vessel (Maersk Container)</strong>
+              <p>Our large container vessels had GTs approaching 150,000 but DWTs around 165,000. I kept the International Tonnage Certificate readily available during PSC inspections, as inspectors frequently cross-reference the GT on the tonnage certificate against the IOPP and IAPP certificates to ensure threshold compliance.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="related-q">🔗 Related: <a href="#q4">Q4 Load Line Survey Documents</a></div>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_D, Q1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB1_D · Q1 · v1.0</span>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card" id="q2" data-tags="survey solas machinery">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Lifting appliance latest amendments — what changed and how were they previously checked?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-solas">SOLAS Ref</span>
+            <span class="q-tag">Paul (Ext)</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+
+        <div class="practice-block practice-15">
+          <span class="practice-label">⏱ 15-Second Answer</span>
+          "SOLAS Chapter II-1 Regulation 3-13 mandates that all shipboard lifting appliances undergo mandatory statutory survey, including annual inspections and 5-yearly proof load tests witnessed by Class. Previously, lifting appliances were not covered by SOLAS and were only checked under ILO Convention 152 and individual Class rules."
+        </div>
+
+        <div class="practice-block practice-60">
+          <span class="practice-label">🎯 60-Second Answer</span>
+          "Sir, effective 1 January 2026, SOLAS II-1/3-13 brought shipboard lifting appliances under statutory regulation to prevent severe crane accidents. The amendment requires design approval, permanent Safe Working Load (SWL) marking, and a mandatory 'Register of Ship's Lifting Appliances.' Equipment must undergo an annual thorough examination and a 5-yearly proof load test — typically to 1.25 times the SWL — witnessed by a Class surveyor. Before this, compliance was fragmented, relying primarily on ILO Convention C152 (which focused on dockworkers) and various classification society guidelines, leaving non-cargo engine room cranes with inconsistent oversight."
+        </div>
+
+        <div class="answer-body">
+          <h4>The SOLAS Amendment (Chapter II-1 Reg 3-13)</h4>
+          <p>The new regulation applies to all permanently installed lifting appliances and anchor handling winches on ships. Introduced to combat the high rate of catastrophic crane failures, it shifts lifting appliances from an operational concern to a statutory safety requirement. <a href="https://www.marinetegrity.com/solas-chapter-ii-1-regulation-3-13-onboard-lifting-appliances/" target="_blank" rel="noopener">[marinetegrity]</a></p>
+          <ul>
+            <li><strong>New Appliances:</strong> Must be designed, installed, and tested in accordance with Class rules before first use. <a href="https://marine-offshore.bureauveritas.com/newsroom/new-solas-requirements-lifting-appliances-entry-force-1-january-2026" target="_blank" rel="noopener">[bureauveritas]</a></li>
+            <li><strong>Existing Appliances (Pre-2026):</strong> Must comply with the examination, load testing, and marking requirements no later than the first SAFCON renewal survey on or after 1 January 2026.</li>
+          </ul>
+
+          <h4>Survey and Register Requirements</h4>
+          <p>Under the guidelines of MSC.1/Circ.1663, lifting appliances require:</p>
+          <ul>
+            <li><strong>Annual Thorough Examination:</strong> A detailed visual check of structural integrity, wire ropes, and safety limits (limit switches, brakes). <a href="https://ww2.eagle.org/en/rules-and-resources/regulatory-updates/SOLAS-requirements-on-board-ships.html" target="_blank" rel="noopener">[eagle]</a></li>
+            <li><strong>5-Yearly Proof Load Test:</strong> A dynamic test exceeding the SWL (usually 1.25× SWL) witnessed by a recognized Class surveyor.</li>
+            <li><strong>Record Keeping:</strong> The CE must maintain the mandatory Register of Ship's Lifting Appliances and Cargo Handling Gear — all loose gear must be certified, proof-tested, and logged. <a href="https://marine-offshore.bureauveritas.com/newsroom/new-solas-requirements-lifting-appliances-entry-force-1-january-2026" target="_blank" rel="noopener">[bureauveritas]</a></li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <strong class="trap-label">⚠ Exam Trap</strong>
+          Does the new SOLAS rule apply to a small 500 kg SWL engine room monorail? — Appliances with an SWL below <strong>1,000 kg</strong> are exempt from strict design approval, but must still be marked with their SWL and incorporated into the SMS.
+        </div>
+
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1/3-13</span><span class="reg-desc">Onboard lifting appliances — statutory survey requirement</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.1/Circ.1663</span><span class="reg-desc">Guidelines for lifting appliances</span></div>
+          <div class="reg-item"><span class="reg-code">ILO C152</span><span class="reg-desc">Occupational Safety and Health (Dock Work) Convention — previous framework</span></div>
+          <div class="reg-item"><span class="reg-code">Register of Lifting Appliances</span><span class="reg-desc">Mandatory onboard record</span></div>
+        </div>
+
+        <div class="ce-tip">
+          <strong>CE Oral Tip (Paul, Ext):</strong> Paul frequently asks about new amendments. Stress the phrase "moved from ILO guidance to SOLAS mandatory statutory survey." Emphasize that your primary duty is ensuring SWL is marked on ALL lifting gear and the Register is up to date.
+        </div>
+
+        <div class="deep-dive" id="dd-q2">
+          <button class="deep-dive-toggle" onclick="toggleDD('dd-q2')">▶ Deep Dive</button>
+          <div class="deep-dive-body" style="display:none">
+            <div class="dd-block dd-relevance">
+              <strong class="dd-label">🔧 CE Relevance</strong>
+              <p>The CE integrates these SOLAS requirements into the Planned Maintenance System (PMS), tracking expiration dates of 5-year load tests for the engine room crane, provision cranes, and monorails. If a crane fails inspection or its certificate expires, it must be permanently marked "Not to be used" and logged in the Register.</p>
+            </div>
+            <div class="dd-block dd-trap">
+              <strong class="dd-label">⚠ Trap Questions</strong>
+              <p><strong>"If your engine room crane wire parts, can you replace it and lift loads immediately?"</strong> — You can replace it with an identical, certified wire rope; log the new certificate and perform a functional test. A full 5-yearly proof load test is only triggered by major structural repairs, not routine wire replacement.</p>
+            </div>
+            <div class="dd-block dd-fail">
+              <strong class="dd-label">✗ Common CE Failures</strong>
+              <ul>
+                <li>Failing to articulate the difference between the "old" ILO 152 regime and the "new" SOLAS statutory regime</li>
+                <li>Not knowing why IMO stepped in — ILO rules were not strictly enforced by all flag states for non-cargo machinery space cranes</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-numbers">
+              <strong class="dd-label">🔢 Numbers &amp; Regulations to Memorise</strong>
+              <ul>
+                <li><strong>SOLAS II-1/3-13:</strong> Entry into force 1 Jan 2026</li>
+                <li><strong>MSC.1/Circ.1663:</strong> Guidelines for lifting appliances</li>
+                <li><strong>Proof Load:</strong> Generally 1.25 × SWL for standard capacities</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-casualty">
+              <strong class="dd-label">⚓ Casualty Link</strong>
+              <p>The <em>Thorco Basilisk</em> (2022) crane wire failure and the <em>Sallie Knutsen</em> crane fatality both highlighted deficiencies in shipboard crane maintenance and inspection regimes, driving IMO to adopt the SOLAS II-1/3-13 amendments. <a href="https://www.iomshipregistry.com/media/1123/cr-sallie-knutsen-crane-failure-fatality.pdf" target="_blank" rel="noopener">[iomshipregistry]</a></p>
+            </div>
+            <div class="dd-block dd-chain">
+              <strong class="dd-label">🔗 Examiner Chain (Kochi MMD)</strong>
+              <p><strong>Paul (Ext):</strong> "What are the latest amendments to lifting appliances?" → "How were they checked before 2026?" → "As CE, how do you prepare the engine room crane for a 5-yearly Class survey?"</p>
+            </div>
+            <div class="dd-block dd-vessel">
+              <strong class="dd-label">🚢 On My Vessel (Maersk Container)</strong>
+              <p>During drydock planning, we cross-referenced our PMS against the upcoming 2026 SOLAS II-1/3-13 enforcement date and coordinated with the Class surveyor to witness the 1.25× SWL proof load test on our engine room gantry crane and provision cranes using certified water bags, ensuring our new Register was fully compliant ahead of the deadline.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="related-q">🔗 Related: <a href="#q3">Q3 Lifting Appliance Survey</a></div>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_D, Q2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB1_D · Q2 · v1.0</span>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card" id="q3" data-tags="survey solas machinery">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">3</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Lifting appliance survey — how is it conducted and what are the requirements?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-survey">Survey</span>
+            <span class="q-tag">Paul (Ext)</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+
+        <div class="practice-block practice-15">
+          <span class="practice-label">⏱ 15-Second Answer</span>
+          "A lifting appliance survey under SOLAS II-1/3-13 consists of an annual thorough examination and a 5-yearly proof load test witnessed by a Class surveyor. The CE must ensure all appliances are marked with their Safe Working Load (SWL) and maintain the statutory 'Register of Ship's Lifting Appliances and Cargo Handling Gear' onboard."
+        </div>
+
+        <div class="practice-block practice-60">
+          <span class="practice-label">🎯 60-Second Answer</span>
+          "Sir, under SOLAS II-1 Reg 3-13 and MSC.1/Circ.1663, lifting appliances require two main survey interventions. First is the annual thorough examination — a detailed visual and operational check of the crane's structure, wire ropes, hooks, sheaves, and limit switches. Second is the 5-yearly proof load test, typically at 1.25 times the SWL, witnessed and certified by a Class surveyor acting as the flag state's Recognized Organization. As CE, my responsibility is to align these surveys with the PMS, ensure SWL is permanently marked on all equipment, and keep the mandatory Lifting Appliance Register updated with valid certificates for the crane and all associated loose gear."
+        </div>
+
+        <div class="answer-body">
+          <h4>Annual Thorough Examination</h4>
+          <p>According to MSC.1/Circ.1663, the annual thorough examination must be conducted by a competent person (often authorized shore-based personnel or a Class surveyor, depending on flag rules). This examination verifies: <a href="https://www.dnv.com/maritime/insights/topics/new-solas-regulation-for-lifting-appliances-overview/new-solas-regulation-for-lifting-appliances-dnv-services/" target="_blank" rel="noopener">[dnv]</a></p>
+          <ul>
+            <li>The structural integrity of the crane jib, slewing ring, and foundation</li>
+            <li>The condition of wire ropes, hooks, and sheaves against discard criteria</li>
+            <li>The correct operation of safety devices — limit switches, slack wire switches, overload alarms</li>
+          </ul>
+
+          <h4>5-Yearly Proof Load Test</h4>
+          <ul>
+            <li><strong>The Load:</strong> For a typical engine room or provision crane, the test load is 1.25× the SWL</li>
+            <li><strong>The Procedure:</strong> Load (often certified water bags or calibrated shore weights) is lifted, slewed, and luffed through the crane's entire operational range</li>
+            <li><strong>Certification:</strong> Witnessed by a Class surveyor who issues a Certificate of Test and Thorough Examination</li>
+          </ul>
+
+          <h4>Documentation &amp; Registers</h4>
+          <p>The CE maintains the <em>Register of Ship's Lifting Appliances and Cargo Handling Gear</em>. Any loose gear (shackles, chain blocks) must also be proof-tested, marked with its own SWL, and have its certificate logged.</p>
+        </div>
+
+        <div class="numbers-box">
+          <h4>Key Numbers</h4>
+          <strong>Annual:</strong> thorough examination — <strong>5-yearly:</strong> proof load test — <strong>Proof load:</strong> usually SWL × 1.25
+        </div>
+
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1/3-13</span><span class="reg-desc">Lifting appliances survey requirement</span></div>
+          <div class="reg-item"><span class="reg-code">MSC.1/Circ.1663</span><span class="reg-desc">Guidelines for survey and testing</span></div>
+          <div class="reg-item"><span class="reg-code">ILO C152</span><span class="reg-desc">Occupational Safety and Health (Dock Work)</span></div>
+          <div class="reg-item"><span class="reg-code">Class Rules</span><span class="reg-desc">Lifting appliance construction and testing rules</span></div>
+        </div>
+
+        <div class="ce-tip">
+          <strong>CE Oral Tip (Paul, Ext):</strong> Paul expects a step-by-step process walkthrough. Do not just say "we load test it." Explicitly mention checking wire ropes, safety limits, and loose gear <em>before</em> the load is applied, and emphasize that the Class surveyor must witness the 5-year test.
+        </div>
+
+        <div class="deep-dive" id="dd-q3">
+          <button class="deep-dive-toggle" onclick="toggleDD('dd-q3')">▶ Deep Dive</button>
+          <div class="deep-dive-body" style="display:none">
+            <div class="dd-block dd-relevance">
+              <strong class="dd-label">🔧 CE Relevance</strong>
+              <p>The CE is the primary custodian of engine room and provision crane records. If a crane's load test certificate expires, it cannot legally be used — the CE must permanently mark it "Not to be used," secure it, and log the out-of-service status in the Register.</p>
+            </div>
+            <div class="dd-block dd-trap">
+              <strong class="dd-label">⚠ Trap Questions</strong>
+              <p><strong>"If a hydraulic cylinder for luffing is replaced during a voyage, is a load test required?"</strong> — Yes; replacing a major load-bearing component constitutes a major repair requiring an occasional thorough examination and load test witnessed by a surveyor.</p>
+              <p><strong>"Can the Chief Engineer perform the 5-yearly load test?"</strong> — No. It must be witnessed and certified by a Class surveyor acting as the RO.</p>
+            </div>
+            <div class="dd-block dd-fail">
+              <strong class="dd-label">✗ Common CE Failures</strong>
+              <ul>
+                <li>Forgetting to mention "loose gear" — surveyors will fail a crane if shackles or slings lack valid, traceable certificates in the Register, even if the crane passed the 5-year test</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-numbers">
+              <strong class="dd-label">🔢 Numbers &amp; Regulations to Memorise</strong>
+              <ul>
+                <li><strong>Frequency:</strong> 12 months (annual), 5 years (proof load)</li>
+                <li><strong>Proof Load:</strong> SWL × 1.25 (refer to Class rules for heavy lift cranes &gt;50t)</li>
+                <li><strong>Guidelines:</strong> MSC.1/Circ.1663</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-casualty">
+              <strong class="dd-label">⚓ Casualty Link</strong>
+              <p>In the <em>Lodz 2</em> incident, catastrophic failure of the crane slew ring resulted in the crane collapsing onto the deck. Proper execution of the annual thorough examination — specifically grease analysis and slew bearing clearance measurements — is designed to prevent this exact failure mode.</p>
+            </div>
+            <div class="dd-block dd-chain">
+              <strong class="dd-label">🔗 Examiner Chain (Kochi MMD)</strong>
+              <p><strong>Paul (Ext):</strong> "Walk me through a lifting appliance survey" → "What load is applied during the 5-year test?" → "If you replace the hoisting wire, what survey actions are required?"</p>
+            </div>
+            <div class="dd-block dd-vessel">
+              <strong class="dd-label">🚢 On My Vessel (Maersk Container)</strong>
+              <p>During drydock, the Class surveyor rejected a load test on our engine room gantry crane because we attempted to use uncertified shipyard weights. We paused, procured certified water bags and a calibrated dynamometer, and conducted the 1.25× SWL test dynamically across the full travel length before the surveyor would endorse the Register.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="related-q">🔗 Related: <a href="#q2">Q2 Lifting Appliance Amendments</a></div>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_D, Q3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB1_D · Q3 · v1.0</span>
+      </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="q-card" id="q4" data-tags="survey load-line solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">4</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Loadline survey — which documents are required?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-load-line">Load Line</span>
+            <span class="q-tag">Paul (Ext)</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+
+        <div class="practice-block practice-15">
+          <span class="practice-label">⏱ 15-Second Answer</span>
+          "For a Load Line survey, the surveyor requires the International Load Line Certificate (ILLC), the 'Record of Conditions of Assignment,' the Approved Intact Stability Booklet, the Damage Stability Booklet, and the Loading Manual. The survey ensures the vessel's watertight integrity and freeboard marks remain unchanged."
+        </div>
+
+        <div class="practice-block practice-60">
+          <span class="practice-label">🎯 60-Second Answer</span>
+          "Sir, the core documents required for a Load Line survey are the International Load Line Certificate (ILLC) and the 'Record of Conditions of Assignment of Load Lines.' The surveyor uses the Record of Conditions of Assignment as a master checklist to verify that all structural arrangements — hatch covers, watertight doors, ventilators, air pipes — have not been altered since the freeboard was originally assigned. Additionally, the surveyor reviews the Approved Intact Stability Booklet, the Damage Stability Booklet (SOLAS II-1 Reg 25), the Trim and Loading Manual, and the AFS Certificate. Once documents are verified, physical checks of the deck, hull openings, freeing ports, and painted draft/freeboard marks are carried out."
+        </div>
+
+        <div class="answer-body">
+          <h4>Core Statutory Documents</h4>
+          <p>The Load Line survey verifies that the ship's assigned freeboard has not been compromised by structural changes or degradation. <a href="https://www.classnk.or.jp/hp/pdf/tech_info/tech_img/T1240e.pdf" target="_blank" rel="noopener">[classnk]</a></p>
+          <ul>
+            <li><strong>International Load Line Certificate (ILLC):</strong> Valid for 5 years, subject to annual endorsement</li>
+            <li><strong>Record of Conditions of Assignment:</strong> The most critical technical document — details exact specifications, sill heights, and closing arrangements for all doors, hatches, ventilators, air pipes, and scuppers on the freeboard deck. <a href="https://www.sdir.no/siteassets/skjema/ks-0180-record-of-conditions-of-assignment-of-load-lines-eng.dotx" target="_blank" rel="noopener">[sdir]</a></li>
+          </ul>
+
+          <h4>Stability and Operational Manuals</h4>
+          <ul>
+            <li>Approved Intact Stability Booklet</li>
+            <li>Damage Stability Booklet (mandatory for cargo ships under SOLAS II-1)</li>
+            <li>Loading / Ballasting Manual (or Trim and Stability Booklet)</li>
+            <li>Anti-Fouling System (AFS) Certificate (often checked concurrently)</li>
+          </ul>
+
+          <h4>Physical Survey Focus</h4>
+          <p>After document review, the surveyor cross-references the Record of Conditions of Assignment against the physical deck:</p>
+          <ul>
+            <li>Freeboard marks — correct positioning and visibility</li>
+            <li>Condition of weather-tight hatch covers and securing devices</li>
+            <li>Engine room skylights, fiddley openings, machinery space ventilators</li>
+            <li>Functionality of non-return valves on overboard discharges</li>
+            <li>Clear freeing ports for rapid deck drainage</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <strong class="trap-label">⚠ Exam Trap</strong>
+          If your ship uses two load line certificates, only one ILLC can be in use at a time. Active freeboard marks are painted in; marks for the unused certificate must be painted out or obscured, and the change logged in the Official Log Book.
+        </div>
+
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">ILLC</span><span class="reg-desc">International Load Line Certificate</span></div>
+          <div class="reg-item"><span class="reg-code">Record of Conditions of Assignment</span><span class="reg-desc">Master technical checklist for freeboard-deck arrangements</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1 (Reg 25)</span><span class="reg-desc">Damage stability information</span></div>
+          <div class="reg-item"><span class="reg-code">LL 1966 / 1988 Protocol</span><span class="reg-desc">International Convention on Load Lines</span></div>
+          <div class="reg-item"><span class="reg-code">Approved Stability Information</span><span class="reg-desc">Intact stability booklet requirement</span></div>
+        </div>
+
+        <div class="ce-tip">
+          <strong>CE Oral Tip (Paul, Ext):</strong> Paul explicitly fishes for "Record of Conditions of Assignment." Anchor your answer around this document — the ILLC is just a piece of paper; the Record is the actual engineering blueprint the surveyor uses to inspect the ship.
+        </div>
+
+        <div class="deep-dive" id="dd-q4">
+          <button class="deep-dive-toggle" onclick="toggleDD('dd-q4')">▶ Deep Dive</button>
+          <div class="deep-dive-body" style="display:none">
+            <div class="dd-block dd-relevance">
+              <strong class="dd-label">🔧 CE Relevance</strong>
+              <p>The CE must ensure all engine room envelope openings — air pipe heads with internal floats, funnel louvers, skylights, and overboard discharge non-return valves — are well maintained. A corroded or stuck-open vent head float fails the Conditions of Assignment and the Load Line certificate cannot be endorsed.</p>
+            </div>
+            <div class="dd-block dd-trap">
+              <strong class="dd-label">⚠ Trap Questions</strong>
+              <p><strong>"Where do you find the exact required height of the engine room ventilators above the freeboard deck?"</strong> — In the Record of Conditions of Assignment of Load Lines.</p>
+            </div>
+            <div class="dd-block dd-fail">
+              <strong class="dd-label">✗ Common CE Failures</strong>
+              <ul>
+                <li>Mentioning the ILLC but not knowing the Record of Conditions of Assignment — considered an immediate red flag by examiners</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-numbers">
+              <strong class="dd-label">🔢 Numbers &amp; Regulations to Memorise</strong>
+              <ul>
+                <li><strong>ILLC Validity:</strong> 5 years</li>
+                <li><strong>Annual Endorsement Window:</strong> ±3 months from the anniversary date</li>
+                <li><strong>Regulations:</strong> International Convention on Load Lines 1966 / 1988 Protocol</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-casualty">
+              <strong class="dd-label">⚓ Casualty Link</strong>
+              <p>The loss of the <em>MV Derbyshire</em> (1980) heavily influenced modern Load Line regulations on hatch cover strength and air pipe closing arrangements. Water ingress through unprotected forward ventilators during a typhoon led to catastrophic loss of buoyancy — the reason surveyors rigorously check these items against the Conditions of Assignment.</p>
+            </div>
+            <div class="dd-block dd-chain">
+              <strong class="dd-label">🔗 Examiner Chain (Kochi MMD)</strong>
+              <p><strong>Paul (Ext):</strong> "Which documents are required for a Load Line survey?" → "What exactly is the Record of Conditions of Assignment?" → "What engine room specific items does the Load Line survey cover?"</p>
+            </div>
+            <div class="dd-block dd-vessel">
+              <strong class="dd-label">🚢 On My Vessel (Maersk Container)</strong>
+              <p>Before our annual Load Line survey, we conducted a PMS sweep of all engine room air pipe heads and found the ball floats inside the HFO tank vent heads on the main deck severely corroded. We replaced them prior to the surveyor's arrival to ensure compliance with the Record of Conditions of Assignment, guaranteeing the ILLC endorsement.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="related-q">🔗 Related: <a href="#q1">Q1 GRT / DWT</a></div>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_D, Q4, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB1_D · Q4 · v1.0</span>
+      </div>
+    </div>
+
+    <div id="no-results">No questions match your search/filter.</div>
+  </main>
+</div>
+
+<div class="page-footer">
+  Compiled by Nixon Antony, 2/E, Maersk A/S · Marine Intelligence Weekly<br>
+  For corrections, email <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a> with subject "QB1_D, QN, Correction Required"<br>
+  This content is for MEO Class 1 oral exam preparation purposes only and does not replace official regulatory texts.
+</div>
+
+<script>
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+function toggleCheat(){
+  document.getElementById('cheatSheet').classList.toggle('open');
+}
+function toggleDD(id){
+  const body=document.getElementById(id).querySelector('.deep-dive-body');
+  const btn =document.getElementById(id).querySelector('.deep-dive-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  btn.textContent=(open?'▶':'▼')+' Deep Dive';
+}
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+</body>
+</html>

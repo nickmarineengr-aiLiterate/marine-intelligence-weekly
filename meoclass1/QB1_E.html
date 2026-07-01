@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB1_E — Engine Construction, Stability &amp; Surveys | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+<style>
+:root{
+  --teal:#0d9488;
+  --teal-dark:#0f766e;
+  --teal-light:#ccfbf1;
+  --navy:#0f172a;
+  --orange:#f97316;
+  --orange-light:#fff7ed;
+  --off-white:#f8fafc;
+  --grey-text:#64748b;
+  --grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;
+  --ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  background:var(--off-white);
+  color:var(--ink);
+  -webkit-user-select:none;-ms-user-select:none;user-select:none;
+}
+a{color:inherit;}
+
+/* Topbar */
+.topbar{
+  position:sticky;top:0;z-index:50;
+  background:#fff;border-bottom:1px solid var(--grey-border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 24px;
+}
+.topbar .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--navy);}
+.topbar .brand .mark{
+  width:30px;height:30px;border-radius:7px;background:var(--teal-dark);
+  color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.topbar nav a{margin-left:18px;font-size:13px;font-weight:600;color:var(--grey-text);text-decoration:none;}
+.topbar nav a:hover{color:var(--teal-dark);}
+
+/* Page header */
+.page-header{
+  background:var(--navy);color:#fff;padding:28px 24px 22px;
+}
+.qb-badge{
+  display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:800;
+  letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:5px;margin-bottom:10px;
+}
+.page-header h1{font-size:24px;font-weight:800;margin-bottom:6px;}
+.page-header p{font-size:13.5px;color:#cbd5e1;max-width:680px;line-height:1.5;}
+.header-meta{display:flex;gap:18px;margin-top:14px;font-size:12px;color:#94a3b8;flex-wrap:wrap;}
+.header-meta strong{color:#e2e8f0;}
+
+/* Controls bar */
+.controls-bar{
+  position:sticky;top:53px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);
+  padding:10px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+}
+#search-input{
+  flex:1;min-width:180px;max-width:320px;padding:8px 12px;border:1px solid var(--grey-border);
+  border-radius:6px;font-size:13px;
+}
+.filter-btn{
+  border:1px solid var(--grey-border);background:#fff;padding:6px 12px;border-radius:16px;
+  font-size:12px;font-weight:600;cursor:pointer;color:var(--grey-text);
+}
+.filter-btn.active{background:var(--teal-dark);color:#fff;border-color:var(--teal-dark);}
+#q-count-label{font-size:12px;color:var(--grey-text);margin-left:auto;}
+
+/* Cheat sheet */
+.cheat-sheet{background:#fff;border-bottom:1px solid var(--grey-border);padding:18px 24px;}
+.cheat-sheet-inner{max-width:1100px;margin:0 auto;}
+.cheat-toggle{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;}
+.cheat-toggle h2{font-size:14px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:8px;}
+.cheat-toggle .cheat-chevron{width:18px;height:18px;color:var(--grey-text);transition:transform .2s;}
+.cheat-sheet.open .cheat-chevron{transform:rotate(180deg);}
+.cheat-body{display:none;margin-top:14px;}
+.cheat-sheet.open .cheat-body{display:block;}
+.cheat-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.cheat-table{width:100%;border-collapse:collapse;font-size:12px;}
+.cheat-table th{text-align:left;background:var(--navy);color:#fff;padding:6px 10px;font-size:10px;text-transform:uppercase;letter-spacing:0.5px;}
+.cheat-table td{padding:6px 10px;border-bottom:1px solid var(--grey-border);}
+.cheat-table tr:nth-child(even) td{background:var(--grey-bg);}
+.cheat-table .k{font-family:monospace;color:var(--orange);font-weight:700;white-space:nowrap;}
+.cheat-flow-wrap{background:var(--grey-bg);border-radius:8px;padding:10px;}
+.cheat-flow-wrap svg{width:100%;height:auto;display:block;}
+@media(max-width:760px){.cheat-grid{grid-template-columns:1fr;}}
+
+/* Main layout */
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:24px;padding:24px;max-width:1100px;margin:0 auto;}
+.sidebar{position:sticky;top:110px;align-self:start;}
+.sidebar h3{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--grey-text);margin-bottom:8px;}
+.toc-link{
+  display:block;padding:6px 10px;border-radius:6px;font-size:12.5px;color:var(--ink);
+  text-decoration:none;margin-bottom:2px;
+}
+.toc-link:hover, .toc-link.active{background:var(--teal-light);color:var(--teal-dark);font-weight:700;}
+.sidebar .toc-divider{border-top:1px solid var(--grey-border);margin:14px 0;}
+.sidebar .upcoming-note{font-size:11.5px;color:var(--grey-text);line-height:1.5;}
+
+/* Section head */
+.section-head{display:flex;align-items:center;justify-content:space-between;margin:6px 0 12px;}
+.section-head h2{font-size:16px;font-weight:800;color:var(--navy);}
+.sec-count{font-size:11px;background:var(--teal-light);color:var(--teal-dark);padding:3px 9px;border-radius:12px;font-weight:700;}
+
+/* Q Card */
+.q-card{
+  background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:14px;overflow:hidden;
+}
+.q-header{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{
+  flex-shrink:0;width:28px;height:28px;border-radius:7px;background:var(--teal);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;
+}
+.q-card.open .q-num-badge{background:var(--teal-dark);}
+.q-text-wrap{flex:1;}
+.q-text{font-size:14.5px;font-weight:700;color:var(--navy);line-height:1.4;}
+.q-tags{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;}
+.q-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;padding:2px 8px;border-radius:10px;background:var(--grey-bg);color:var(--grey-text);}
+.q-tag.tag-solas{background:#dbeafe;color:#1d4ed8;}
+.q-tag.tag-survey{background:#dcfce7;color:#15803d;}
+.q-tag.tag-machinery{background:#fef3c7;color:#92400e;}
+.q-tag.tag-load-line{background:#ede9fe;color:#6d28d9;}
+.q-chevron{flex-shrink:0;width:20px;height:20px;color:var(--grey-text);transition:transform .2s;margin-top:2px;}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 16px 16px;}
+.q-card.open .q-answer{display:block;}
+
+/* Practice blocks */
+.practice-block{border-radius:8px;padding:12px 16px;margin:10px 0;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;line-height:1.65;}
+.practice-label{font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px;display:block;}
+.practice-15{background:#0f766e;color:#fff;border:none;}
+.practice-15 .practice-label{color:#ccfbf1;}
+.practice-60{background:#0d9488;color:#fff;border:none;}
+.practice-60 .practice-label{color:#ccfbf1;}
+
+/* Answer body */
+.answer-body{font-family:'Georgia',serif;font-size:14px;line-height:1.65;color:var(--ink);margin:10px 0;}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;font-family:'Segoe UI',system-ui,sans-serif;}
+.answer-body h4:first-child{margin-top:0;}
+.answer-body p{margin-bottom:8px;}
+.answer-body ul,.answer-body ol{padding-left:20px;margin-bottom:8px;}
+.answer-body li{margin-bottom:4px;}
+.answer-body .formula{background:var(--grey-bg);font-family:monospace;padding:8px 12px;border-radius:6px;margin:8px 0;font-size:13px;}
+.answer-body a{color:var(--teal-dark);text-decoration:underline;font-size:12px;}
+
+/* Numbers / trap / casualty boxes */
+.numbers-box{background:var(--grey-bg);border-left:3px solid var(--teal);border-radius:6px;padding:10px 14px;margin:8px 0;font-size:13px;line-height:1.6;}
+.numbers-box h4{margin:0 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);}
+.trap-box{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13px;line-height:1.6;}
+.trap-box strong.trap-label{color:#b91c1c;font-size:10px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px;}
+
+/* Reg box */
+.reg-box{background:var(--navy);border-radius:8px;padding:12px 16px;margin:10px 0;}
+.reg-box-title{color:#fff;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.reg-item{display:flex;gap:10px;padding:5px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:12.5px;}
+.reg-item:first-of-type{border-top:none;}
+.reg-code{color:var(--orange);font-family:monospace;font-weight:700;flex-shrink:0;min-width:150px;}
+.reg-desc{color:#cbd5e1;}
+
+/* CE tip */
+.ce-tip{background:var(--orange-light);border:1px solid #fed7aa;border-left:4px solid var(--orange);border-radius:8px;padding:12px 14px;margin:10px 0;font-size:13px;line-height:1.6;}
+.ce-tip strong{color:#c2410c;}
+
+/* Deep dive */
+.deep-dive{margin:10px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:0;}
+.dd-block{padding:10px 16px;border-top:1px solid var(--grey-border);font-size:13px;line-height:1.6;font-family:'Georgia',serif;}
+.dd-block a{color:var(--teal-dark);font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;}
+.dd-block ul{padding-left:18px;}
+.dd-block li{margin-bottom:4px;}
+.dd-label{font-family:'Segoe UI',system-ui,sans-serif;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:6px;}
+.dd-relevance .dd-label{color:#0f766e;}
+.dd-trap .dd-label{color:#b91c1c;}
+.dd-fail .dd-label{color:#92400e;}
+.dd-numbers .dd-label{color:#1d4ed8;}
+.dd-casualty .dd-label{color:#92400e;}
+.dd-chain .dd-label{color:#6d28d9;}
+.dd-vessel .dd-label{color:#0f766e;}
+
+/* Related q */
+.related-q{font-size:12px;color:var(--grey-text);margin:8px 0;padding:8px 14px;border-top:1px dashed var(--grey-border);}
+.related-q a{color:var(--teal-dark);text-decoration:none;font-weight:600;}
+.related-q a:hover{text-decoration:underline;}
+
+/* Q footer */
+.q-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 16px;background:var(--grey-bg);font-size:11px;color:var(--grey-text);border-top:1px solid var(--grey-border);}
+.correction-link{word-break:break-all;min-width:0;}
+.correction-link a{color:var(--teal-dark);text-decoration:none;}
+.q-version{flex-shrink:0;font-weight:700;color:var(--grey-text);}
+
+#no-results{display:none;text-align:center;padding:40px;color:var(--grey-text);font-size:13px;}
+
+/* Page footer */
+.page-footer{background:var(--navy);color:#94a3b8;padding:24px;text-align:center;font-size:12px;line-height:1.7;}
+.page-footer a{color:var(--teal-light);}
+
+@media(max-width:760px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{position:static;}
+}
+</style>
+</head>
+<body>
+
+<!-- Watermark -->
+<div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.04;">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wm" x="0" y="0" width="300" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+        <text x="10" y="60" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">marineintelligenceweekly.com</text>
+        <text x="10" y="120" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wm)"/>
+  </svg>
+</div>
+
+<div class="topbar">
+  <div class="brand"><span class="mark">MIW</span> Marine Intelligence Weekly</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/meoclass1/">MEO Class 1</a>
+    <a href="/SQ/contact.html">Contact</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <span class="qb-badge">QB1_E · v1.0</span>
+  <h1>QB1_E — Engine Construction, Stability &amp; Surveys (E File)</h1>
+  <p>Fifth-wave companion file, sourced from the 30 June 2026 WhatsApp batch (Q499–Q529). Own Q1–Q2 numbering — does not continue from QB1, QB1_B, QB1_C, or QB1_D.</p>
+  <div class="header-meta">
+    <span><strong>Examiner:</strong> Simon</span>
+    <span><strong>Vessel types:</strong> Container / General</span>
+    <span><strong>Questions:</strong> 2</span>
+  </div>
+</div>
+
+<div class="cheat-sheet" id="cheatSheet">
+  <div class="cheat-sheet-inner">
+    <div class="cheat-toggle" onclick="toggleCheat()">
+      <h2>🗺 Cheat Sheet — QB1_E Quick Reference &amp; Flow</h2>
+      <svg class="cheat-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+    <div class="cheat-body">
+      <div class="cheat-grid">
+        <div>
+          <table class="cheat-table">
+            <tr><th>Item</th><th>Value / Reg</th></tr>
+            <tr><td>SEQ survey basis</td><td class="k">SOLAS I/8</td></tr>
+            <tr><td>Fire &amp; LSA basis</td><td class="k">SOLAS II-2 / III</td></tr>
+            <tr><td>Survey guideline</td><td class="k">IMO Res. A.1156(32)</td></tr>
+            <tr><td>SEQ cert validity</td><td class="k">5 years</td></tr>
+            <tr><td>Annual survey window</td><td class="k">± 3 months</td></tr>
+            <tr><td>Lifeboat engine start</td><td class="k">≤ 2 min @ 15°C</td></tr>
+            <tr><td>Corrosion — global limit</td><td class="k">10% section modulus</td></tr>
+            <tr><td>Corrosion — local limit</td><td class="k">20–25% plate/stiffener</td></tr>
+            <tr><td>Substantial corrosion</td><td class="k">75% of allowable margin</td></tr>
+            <tr><td>Corrosion reg</td><td class="k">IACS UR Z7</td></tr>
+          </table>
+        </div>
+        <div class="cheat-flow-wrap">
+          <svg viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="arrowE" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M0 0L10 5L0 10z" fill="#0f766e"/>
+              </marker>
+            </defs>
+            <!-- Q1 -->
+            <rect x="20" y="20" width="190" height="60" rx="8" fill="#0f766e"/>
+            <text x="115" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Segoe UI,sans-serif">Q1 · SEQ Survey</text>
+            <text x="115" y="60" text-anchor="middle" font-size="9" fill="#ccfbf1" font-family="Segoe UI,sans-serif">SOLAS I/8 · Form E</text>
+            <text x="115" y="72" text-anchor="middle" font-size="9" fill="#ccfbf1" font-family="Segoe UI,sans-serif">LSA / FFA readiness</text>
+
+            <!-- Q2 -->
+            <rect x="270" y="20" width="190" height="60" rx="8" fill="#0d9488"/>
+            <text x="365" y="44" text-anchor="middle" font-size="11" font-weight="700" fill="#fff" font-family="Segoe UI,sans-serif">Q2 · Hull Corrosion Limits</text>
+            <text x="365" y="60" text-anchor="middle" font-size="9" fill="#ccfbf1" font-family="Segoe UI,sans-serif">IACS UR Z7 · 10% / 25%</text>
+            <text x="365" y="72" text-anchor="middle" font-size="9" fill="#ccfbf1" font-family="Segoe UI,sans-serif">Substantial Corrosion 75%</text>
+
+            <!-- CE Hub -->
+            <circle cx="240" cy="140" r="34" fill="var(--navy)"/>
+            <text x="240" y="136" text-anchor="middle" font-size="9" font-weight="800" fill="#fff" font-family="Segoe UI,sans-serif">CE</text>
+            <text x="240" y="148" text-anchor="middle" font-size="8" fill="#94a3b8" font-family="Segoe UI,sans-serif">Statutory</text>
+            <text x="240" y="158" text-anchor="middle" font-size="8" fill="#94a3b8" font-family="Segoe UI,sans-serif">Readiness</text>
+
+            <!-- connectors: both Q1 and Q2 feed the CE hub (both are Simon's structural-safety line) -->
+            <path d="M115 80 L115 140 L206 140" fill="none" stroke="#0f766e" stroke-width="2" marker-end="url(#arrowE)"/>
+            <path d="M365 80 L365 140 L274 140" fill="none" stroke="#0f766e" stroke-width="2" marker-end="url(#arrowE)"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search this file…" oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all', this)">All</button>
+  <button class="filter-btn" onclick="filterTag('survey', this)">Surveys</button>
+  <button class="filter-btn" onclick="filterTag('iacs', this)">IACS / Class</button>
+  <span id="q-count-label">Showing 2 of 2</span>
+</div>
+
+<div class="main-layout">
+  <aside class="sidebar">
+    <h3>On This Page</h3>
+    <a class="toc-link" href="#q1">Q1 · SEQ Survey</a>
+    <a class="toc-link" href="#q2">Q2 · Hull Corrosion Limits</a>
+    <div class="toc-divider"></div>
+    <div class="upcoming-note">More companion files (QB2_E onward) are in production. Check back for updates.</div>
+  </aside>
+
+  <main id="q-feed">
+    <div class="section-head">
+      <h2>🔍 Statutory Surveys &amp; Hull Structural Integrity</h2>
+      <span class="sec-count">2 questions</span>
+    </div>
+
+    <!-- Q1 -->
+    <div class="q-card" id="q1" data-tags="survey lsa fire">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">SEQ (Safety Equipment) survey — documents required and how do you prepare for it?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-survey">Survey</span>
+            <span class="q-tag">Simon</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+
+        <div class="practice-block practice-15">
+          <span class="practice-label">⏱ 15-Second Answer</span>
+          The Safety Equipment (SEQ) Survey verifies the readiness of a ship's Life-Saving Appliances (LSA), Fire-Fighting Appliances (FFA), and navigational gear as per SOLAS Chapter I. Preparation centers on reviewing the Record of Equipment (Form E) and ensuring all physical equipment perfectly matches the approved LSA and Fire Control plans.
+        </div>
+
+        <div class="practice-block practice-60">
+          <span class="practice-label">🎯 60-Second Answer</span>
+          Governed by SOLAS Chapter I, Regulation 8, the SEQ survey requires checking the validity of statutory certificates, PMS records, and physically verifying equipment. Documents required include Form E, Fire Control Plan, LSA Plan, Muster List, and servicing certificates for liferafts, BA sets, and fixed fire-extinguishing systems. As Chief Engineer, preparation involves testing the emergency fire pump, ensuring the lifeboat engine starts promptly, verifying fixed CO2/Water Mist system readiness, testing Quick Closing Valves (QCVs), and ensuring emergency generator load tests are up to date. The goal is to prove 100% operational readiness of all safety systems.
+        </div>
+
+        <div class="answer-body">
+          <h4>Governing Instrument &amp; Principle</h4>
+          <p>The SEQ survey is a statutory survey mandated under SOLAS 1974, Chapter I, Regulation 8 (Surveys of life-saving appliances and other equipment of cargo ships). It ensures that all safety, firefighting, and navigational equipment complies with the International Life-Saving Appliance (LSA) Code and International Code for Fire Safety Systems (FSS Code).</p>
+
+          <h4>Documents Required</h4>
+          <ul>
+            <li><strong>Form E:</strong> Record of Equipment for Cargo Ship Safety Equipment Certificate</li>
+            <li><strong>Approved Plans:</strong> Fire Control Plan and LSA Plan</li>
+            <li><strong>Certificates:</strong> Servicing certificates for inflatable liferafts, hydrostatic release units (HRUs), breathing apparatus (BA) sets, and fixed fire-extinguishing systems</li>
+            <li><strong>Records:</strong> Updated Muster List, PMS maintenance records for all LSA/FFA, and records of fire/abandon ship drills</li>
+          </ul>
+
+          <h4>Chief Engineer's Preparation (Engine Room Focus)</h4>
+          <ul>
+            <li><strong>Fire-Fighting Appliances (FFA):</strong> Test the emergency fire pump for adequate pressure at the two highest/furthest hydrants. Verify fire main integrity. Ensure fixed CO2/foam/water mist systems are armed, alarms work, and ventilation automatic stops are functional</li>
+            <li><strong>Life-Saving Appliances (LSA):</strong> Ensure lifeboat engines start within 2 minutes at ambient temperature, fuel tanks are full, and steering is operational</li>
+            <li><strong>Emergency Power &amp; Shut-offs:</strong> Run the emergency generator on load. Test all Quick Closing Valves (QCVs), emergency stop buttons for pumps/fans, and fire dampers for free movement</li>
+          </ul>
+        </div>
+
+        <div class="numbers-box">
+          <h4>Examiner Angle (Simon)</h4>
+          Simon assesses whether the candidate clearly separates Deck from Engine responsibilities. He wants to see priority given to machinery under the Chief Engineer's direct jurisdiction — the emergency fire pump, lifeboat engines, and engine room fixed fire-fighting systems — rather than broadly listing deck navigation equipment.
+        </div>
+
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS I/8</span><span class="reg-desc">Surveys of LSA and other equipment</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-2</span><span class="reg-desc">Fire protection, fire detection and fire extinction</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS III</span><span class="reg-desc">Life-saving appliances and arrangements</span></div>
+          <div class="reg-item"><span class="reg-code">IMO Res. A.1156(32)</span><span class="reg-desc">Survey Guidelines under the Harmonized System of Survey and Certification (HSSC)</span></div>
+          <div class="reg-item"><span class="reg-code">LSA Code &amp; FSS Code</span><span class="reg-desc">Equipment and system performance standards</span></div>
+        </div>
+
+        <div class="ce-tip">
+          <strong>CE Oral Tip (Simon):</strong> For Simon at Kochi MMD, mention "Form E" in your very first sentence. The most common failure point is candidates rambling about bridge navigation lights or EPIRBs instead of immediately outlining the CE's responsibility for the Emergency Fire Pump, QCVs, and Lifeboat engines.
+        </div>
+
+        <div class="deep-dive" id="dd-q1">
+          <button class="deep-dive-toggle" onclick="toggleDD('dd-q1')">▶ Deep Dive</button>
+          <div class="deep-dive-body" style="display:none">
+            <div class="dd-block dd-relevance">
+              <strong class="dd-label">🔧 CE Relevance</strong>
+              <p>Routine execution of the Planned Maintenance System (PMS) for safety equipment is crucial. The CE must ensure all test protocols (blowing through CO2 lines, testing water mist nozzles) are logged accurately, as the surveyor cross-references PMS entries with physical equipment condition.</p>
+            </div>
+            <div class="dd-block dd-trap">
+              <strong class="dd-label">⚠ Trap Questions</strong>
+              <p><strong>"Does the SEQ survey cover the GMDSS and radio equipment?"</strong> — No, that falls strictly under the Cargo Ship Safety Radio Certificate (SRRC), governed by SOLAS Ch I, Reg 9.</p>
+            </div>
+            <div class="dd-block dd-fail">
+              <strong class="dd-label">✗ Common CE Failures</strong>
+              <ul>
+                <li>Failing to mention testing of Quick Closing Valves (QCVs) and emergency stops for engine room ventilation fans and fuel transfer pumps</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-numbers">
+              <strong class="dd-label">🔢 Numbers &amp; Regulations to Memorise</strong>
+              <ul>
+                <li><strong>Certificate Validity:</strong> maximum 5 years</li>
+                <li><strong>Annual Survey Window:</strong> within 3 months before or after each anniversary date</li>
+                <li><strong>Lifeboat Engine Start:</strong> must start within 2 minutes at an ambient temperature of 15°C (SOLAS LSA Code)</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-casualty">
+              <strong class="dd-label">⚓ Casualty Link</strong>
+              <p>The <em>Norman Atlantic</em> fire (2014) highlighted catastrophic failures in fixed firefighting systems, emergency generator operation, and lifeboat deployment, emphasizing the critical need for rigorous, uncompromised SEQ surveys.</p>
+            </div>
+            <div class="dd-block dd-chain">
+              <strong class="dd-label">🔗 Examiner Chain (Kochi MMD)</strong>
+              <p><strong>Simon:</strong> SEQ Survey → Emergency Fire Pump parameters → fixed CO2 system operation → Quick Closing Valves working principle.</p>
+            </div>
+            <div class="dd-block dd-vessel">
+              <strong class="dd-label">🚢 On My Vessel (Maersk Container)</strong>
+              <p>On Maersk Triple-E class vessels, SEQ preparation heavily involves verifying the Novenco water mist system for the engine room and ensuring all remote pneumatic releases for QCVs in the Fire Control Station are holding pressure and completely leak-free.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="related-q">🔗 Related: <a href="#q2">Q2 Hull Corrosion Limits</a></div>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_E, Q1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB1_E · Q1 · v1.0</span>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card" id="q2" data-tags="iacs machinery">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Corrosion limits — what are the acceptable corrosion/diminution limits for hull structure?</div>
+          <div class="q-tags">
+            <span class="q-tag">IACS / Class</span>
+            <span class="q-tag">Simon</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+
+        <div class="practice-block practice-15">
+          <span class="practice-label">⏱ 15-Second Answer</span>
+          Hull corrosion limits are defined by IACS Unified Requirements and Class rules. Generally, a maximum diminution of 20% to 25% of the original as-built thickness is permitted for local framing and plating, while the global hull girder strength (section modulus) must not be reduced by more than 10%.
+        </div>
+
+        <div class="practice-block practice-60">
+          <span class="practice-label">🎯 60-Second Answer</span>
+          Structural diminution limits dictate the maximum allowable steel wastage before renewal is mandatory. Governed by IACS UR Z7 for dry cargo ships, thickness measurements are taken via UTM. Global limits dictate that the hull girder section modulus cannot experience more than a 10% reduction. Local limits allow for up to 25% reduction in individual plates or stiffeners from their as-built thickness. When wastage exceeds 75% of the allowable margin, it is legally termed "Substantial Corrosion," which triggers mandatory annual thickness measurements for those specific areas. Any steel exceeding the absolute diminution limits must be cropped and renewed.
+        </div>
+
+        <div class="answer-body">
+          <h4>Governing Instrument &amp; Principle</h4>
+          <p>Corrosion limits are regulated under the International Association of Classification Societies (IACS) Unified Requirements (specifically UR Z7 for general cargo/container ships) and individual Classification Society Rules (e.g., ABS, DNV, Lloyd's Register).</p>
+
+          <h4>Key Diminution Limits</h4>
+          <ul>
+            <li><strong>Global Hull Girder Strength:</strong> total cross-sectional area and section modulus of the hull girder must not be reduced by more than <strong>10%</strong></li>
+            <li><strong>Local Diminution (Plating &amp; Stiffeners):</strong> localized reduction in thickness generally acceptable up to <strong>20% to 25%</strong> of original as-built thickness, depending on location and Class society calculation</li>
+            <li><strong>Substantial Corrosion:</strong> defined as a wastage in excess of <strong>75% of allowable margins</strong>, but within acceptable limits</li>
+          </ul>
+
+          <h4>Practical Application &amp; Measurement</h4>
+          <p>Diminution is measured using Ultrasonic Thickness Measurement (UTM) by Class-approved service providers, typically during Special Surveys (every 5 years) or Intermediate Surveys. If a plate exceeds the 25% local limit, temporary repairs (like doubler plates) are strictly prohibited for structural hull integrity; the affected area must be permanently repaired by cropping out the wasted steel and inserting a new marine-grade plate with approved full-penetration welding.</p>
+        </div>
+
+        <div class="numbers-box">
+          <h4>Examiner Angle (Simon)</h4>
+          Simon targets the candidate's understanding of structural safety boundaries — a clear, numerical distinction between local structural degradation and global hull collapse risks. He heavily penalizes candidates who confuse the 10% and 25% thresholds.
+        </div>
+
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IACS UR Z7</span><span class="reg-desc">Hull Classification Surveys (General / Container Ships)</span></div>
+          <div class="reg-item"><span class="reg-code">IACS UR Z10 Series</span><span class="reg-desc">Hull Classification Surveys (Tankers/Bulk Carriers)</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1/A-1/3-1</span><span class="reg-desc">Structural, mechanical and electrical requirements</span></div>
+          <div class="reg-item"><span class="reg-code">Class Rules</span><span class="reg-desc">e.g. DNV RU-SHIP Part 7 Chapter 1</span></div>
+        </div>
+
+        <div class="ce-tip">
+          <strong>CE Oral Tip (Simon):</strong> For Simon at Kochi MMD, explicitly use the term "Substantial Corrosion" and define it as "75% of allowable wastage." The most common failure point is candidates saying "25% wastage is allowed everywhere," completely ignoring the 10% limit on global hull girder strength.
+        </div>
+
+        <div class="deep-dive" id="dd-q2">
+          <button class="deep-dive-toggle" onclick="toggleDD('dd-q2')">▶ Deep Dive</button>
+          <div class="deep-dive-body" style="display:none">
+            <div class="dd-block dd-relevance">
+              <strong class="dd-label">🔧 CE Relevance</strong>
+              <p>Operationally, the CE must actively monitor the condition of the Impressed Current Cathodic Protection (ICCP) system and the condition of sacrificial anodes in sea chests and ballast tanks to prevent rapid localized diminution.</p>
+            </div>
+            <div class="dd-block dd-trap">
+              <strong class="dd-label">⚠ Trap Questions</strong>
+              <p><strong>"We found a heavily corroded patch on the engine room tank top. Can we weld a doubler plate over it to pass the survey?"</strong> — No. Doubler plates are only acceptable as temporary, emergency repairs. Permanent repairs require cropping the wasted steel and renewing it with full-penetration insert plates.</p>
+            </div>
+            <div class="dd-block dd-fail">
+              <strong class="dd-label">✗ Common CE Failures</strong>
+              <ul>
+                <li>Confusing the 25% local limit with the 10% global limit</li>
+                <li>Stating that the Chief Officer is solely responsible for all hull corrosion, neglecting engine room double bottoms and sea chests</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-numbers">
+              <strong class="dd-label">🔢 Numbers &amp; Regulations to Memorise</strong>
+              <ul>
+                <li><strong>Global limit:</strong> 10% section modulus reduction</li>
+                <li><strong>Local limit:</strong> 25% plate/stiffener diminution</li>
+                <li><strong>Substantial Corrosion:</strong> 75% of the allowable margin</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-casualty">
+              <strong class="dd-label">⚓ Casualty Link</strong>
+              <p>The sinking of the <em>Erika</em> (1999) and <em>Prestige</em> (2002) due to catastrophic structural failure were directly linked to undetected severe localized corrosion in ballast tanks, leading to the strict IACS Enhanced Survey Programme (ESP) and precise diminution limits.</p>
+            </div>
+            <div class="dd-block dd-chain">
+              <strong class="dd-label">🔗 Examiner Chain (Kochi MMD)</strong>
+              <p><strong>Simon:</strong> Corrosion limits → Definition of Substantial Corrosion → Methods of UTM → Permanent vs. Temporary steel repairs → Welding procedures for hull inserts.</p>
+            </div>
+            <div class="dd-block dd-vessel">
+              <strong class="dd-label">🚢 On My Vessel (Maersk Container)</strong>
+              <p>During dry docks on Maersk vessels, the engine room team closely monitors UTM readings of the main sea chest cooling water boundaries and bilge wells, as these areas are highly susceptible to accelerated galvanic corrosion and pitting.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="related-q">🔗 Related: <a href="#q1">Q1 SEQ Survey</a></div>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_E, Q2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB1_E · Q2 · v1.0</span>
+      </div>
+    </div>
+
+    <div id="no-results">No questions match your search/filter.</div>
+  </main>
+</div>
+
+<div class="page-footer">
+  Compiled by Nixon Antony, 2/E, Maersk A/S · Marine Intelligence Weekly<br>
+  For corrections, email <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a> with subject "QB1_E, QN, Correction Required"<br>
+  This content is for MEO Class 1 oral exam preparation purposes only and does not replace official regulatory texts.
+</div>
+
+<script>
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+function toggleCheat(){
+  document.getElementById('cheatSheet').classList.toggle('open');
+}
+function toggleDD(id){
+  const body=document.getElementById(id).querySelector('.deep-dive-body');
+  const btn =document.getElementById(id).querySelector('.deep-dive-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  btn.textContent=(open?'▶':'▼')+' Deep Dive';
+}
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+</body>
+</html>

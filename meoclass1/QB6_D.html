@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>QB6_D — Electrical, Automation &amp; Control Systems — Companion D | MIW MEO Class 1 Question Bank</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+<style>
+:root{
+  --teal:#0d9488;
+  --teal-dark:#0f766e;
+  --teal-light:#ccfbf1;
+  --navy:#0f172a;
+  --orange:#f97316;
+  --orange-light:#fff7ed;
+  --off-white:#f8fafc;
+  --grey-text:#64748b;
+  --grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;
+  --ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI', system-ui, sans-serif;
+  background:var(--off-white);
+  color:var(--ink);
+  line-height:1.5;
+}
+a{color:var(--teal-dark);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* TOPBAR */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:var(--navy);
+  color:#fff;
+  display:flex;align-items:center;gap:12px;
+  padding:10px 20px;
+  font-size:14px;
+}
+.topbar .logo-mark{
+  width:30px;height:30px;border-radius:6px;
+  background:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:#fff;
+  flex-shrink:0;
+}
+.topbar .site-name{font-weight:600;letter-spacing:0.3px;flex-shrink:0;}
+.topbar nav{margin-left:auto;display:flex;gap:18px;}
+.topbar nav a{color:#cbd5e1;font-size:13px;}
+.topbar nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{
+  background:var(--navy);
+  color:#fff;
+  padding:28px 20px 22px;
+}
+.page-header .qb-badge{
+  display:inline-block;
+  background:var(--teal);
+  color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;
+  padding:4px 10px;border-radius:4px;
+  margin-bottom:10px;
+}
+.page-header h1{
+  font-size:24px;font-weight:700;margin-bottom:6px;
+}
+.page-header .sub-desc{
+  color:#cbd5e1;font-size:14px;max-width:760px;
+}
+.header-meta{
+  display:flex;gap:18px;flex-wrap:wrap;
+  margin-top:14px;font-size:12px;color:#94a3b8;
+}
+.header-meta strong{color:#e2e8f0;}
+
+/* CONTROLS BAR */
+.controls-bar{
+  position:sticky;top:48px;z-index:90;
+  background:#fff;
+  border-bottom:1px solid var(--grey-border);
+  padding:12px 20px;
+  display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;
+}
+#search-input{
+  flex:1 1 220px;max-width:340px;
+  padding:8px 12px;
+  border:1px solid var(--grey-border);
+  border-radius:6px;font-size:13px;
+}
+#search-input:focus{outline:none;border-color:var(--teal);}
+.filter-btn{
+  background:var(--grey-bg);
+  border:1px solid var(--grey-border);
+  color:var(--grey-text);
+  font-size:12px;font-weight:600;
+  padding:6px 12px;border-radius:20px;
+  cursor:pointer;transition:all .15s;
+}
+.filter-btn:hover{background:var(--teal-light);color:var(--teal-dark);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{
+  margin-left:auto;font-size:12px;color:var(--grey-text);font-weight:600;
+}
+
+/* MAIN LAYOUT */
+.main-layout{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:24px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:24px 20px 60px;
+}
+@media (max-width:800px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+}
+
+/* SIDEBAR */
+.sidebar{
+  position:sticky;top:110px;
+  align-self:start;
+  max-height:calc(100vh - 130px);
+  overflow-y:auto;
+  font-size:13px;
+}
+.sidebar h3{
+  font-size:11px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--grey-text);margin-bottom:10px;
+}
+.toc-link{
+  display:block;padding:6px 10px;border-radius:5px;
+  color:var(--ink);font-size:13px;
+  border-left:2px solid transparent;
+  transition:all .15s;
+}
+.toc-link:hover{background:var(--teal-light);text-decoration:none;}
+.toc-link.active{
+  background:var(--teal-light);
+  border-left:2px solid var(--teal);
+  color:var(--teal-dark);font-weight:600;
+}
+.sidebar .divider{
+  border-top:1px solid var(--grey-border);
+  margin:14px 0;
+}
+.sidebar .upcoming-note{
+  background:var(--grey-bg);
+  border-radius:6px;padding:10px;
+  font-size:12px;color:var(--grey-text);
+}
+
+/* SECTION HEAD */
+.section-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin:28px 0 12px;
+}
+.section-head:first-child{margin-top:0;}
+.section-head h2{font-size:16px;font-weight:700;color:var(--ink);}
+.sec-count{
+  font-size:11px;font-weight:700;color:var(--teal-dark);
+  background:var(--teal-light);padding:2px 8px;border-radius:10px;
+}
+
+/* Q CARD */
+.q-card{
+  background:#fff;
+  border:1px solid var(--grey-border);
+  border-radius:8px;
+  margin-bottom:10px;
+  overflow:hidden;
+}
+.q-header{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{
+  flex-shrink:0;
+  width:28px;height:28px;border-radius:6px;
+  background:var(--teal);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.q-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.q-tag{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;
+  padding:2px 8px;border-radius:10px;
+  background:var(--grey-bg);color:var(--grey-text);
+}
+.q-tag.tag-solas{background:#e0f2fe;color:#0369a1;}
+.q-tag.tag-marpol{background:#fef3c7;color:#92400e;}
+.q-tag.tag-iacs{background:#ede9fe;color:#5b21b6;}
+.q-tag.tag-survey{background:var(--teal-light);color:var(--teal-dark);}
+.q-tag.tag-stability{background:#fce7f3;color:#9d174d;}
+.q-tag.tag-machinery{background:#dbeafe;color:#1e40af;}
+.q-tag.tag-ghg{background:#dcfce7;color:#166534;}
+.q-tag.tag-stcw{background:#ffe4e6;color:#9f1239;}
+.q-chevron{
+  flex-shrink:0;width:20px;height:20px;
+  stroke:var(--grey-text);transition:transform .2s;
+}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+
+/* ANSWER PANEL */
+.q-answer{
+  display:none;
+  padding:0 16px 16px;
+  border-top:1px solid var(--grey-border);
+}
+.q-card.open .q-answer{display:block;padding-top:14px;}
+.answer-body{font-family:'Georgia',serif;font-size:14px;color:var(--ink);}
+.answer-body h4{
+  font-size:12px;text-transform:uppercase;letter-spacing:0.8px;
+  color:var(--teal-dark);font-family:'Segoe UI',system-ui,sans-serif;
+  font-weight:700;margin:16px 0 6px;
+}
+.answer-body h4:first-child{margin-top:0;}
+.answer-body p{margin-bottom:10px;}
+.answer-body ul, .answer-body ol{margin:0 0 10px 22px;}
+.answer-body li{margin-bottom:5px;}
+.answer-body strong{color:var(--ink);font-weight:700;}
+.answer-body em{color:var(--grey-text);}
+.formula{
+  font-family:monospace;background:var(--grey-bg);
+  padding:10px 12px;border-radius:6px;margin:10px 0;font-size:13.5px;
+}
+
+/* PRACTICE BLOCKS (15s/60s) */
+.practice-block{
+  background:var(--teal-light);
+  border-left:3px solid var(--teal);
+  border-radius:0 6px 6px 0;
+  padding:10px 14px;margin-bottom:10px;
+  font-family:'Georgia',serif;font-size:13.5px;color:var(--ink);
+}
+.practice-block .pb-label{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--teal-dark);margin-bottom:4px;display:block;
+}
+
+/* REG BOX */
+.reg-box{
+  background:var(--navy);
+  border-radius:8px;padding:14px 16px;margin:14px 0;
+  font-family:'Segoe UI',system-ui,sans-serif;
+}
+.reg-box-title{
+  color:#fff;font-size:12px;font-weight:700;margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:0.8px;
+}
+.reg-item{
+  display:flex;gap:12px;flex-wrap:wrap;
+  padding:5px 0;border-bottom:1px solid #1e293b;
+  font-size:12.5px;
+}
+.reg-item:last-child{border-bottom:none;}
+.reg-code{
+  color:var(--orange);font-family:monospace;font-weight:700;
+  flex:0 0 auto;min-width:0;word-break:break-all;
+}
+.reg-desc{color:#cbd5e1;flex:1;min-width:0;word-break:break-word;}
+
+/* CE TIP */
+.ce-tip{
+  background:var(--orange-light);
+  border-left:3px solid var(--orange);
+  border-radius:0 6px 6px 0;
+  padding:12px 14px;margin:14px 0;
+  font-size:13.5px;color:#7c2d12;
+}
+.ce-tip strong{color:var(--orange);}
+
+/* EXTRA BLOCKS (collapsible deep-dive sections) */
+.deep-dive{
+  margin-top:14px;border:1px solid var(--grey-border);border-radius:8px;
+  overflow:hidden;
+}
+.deep-dive summary{
+  cursor:pointer;padding:10px 14px;
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:12.5px;font-weight:700;color:var(--teal-dark);
+  background:var(--grey-bg);
+  list-style:none;display:flex;align-items:center;gap:8px;
+}
+.deep-dive summary::-webkit-details-marker{display:none;}
+.deep-dive summary::before{content:"▸";font-size:11px;}
+.deep-dive[open] summary::before{content:"▾";}
+.deep-dive-body{padding:12px 14px;font-size:13.5px;}
+.deep-dive-body h5{
+  font-size:11px;text-transform:uppercase;letter-spacing:0.6px;
+  color:var(--grey-text);margin:10px 0 4px;font-family:'Segoe UI',system-ui,sans-serif;
+}
+.deep-dive-body h5:first-child{margin-top:0;}
+.deep-dive-body p{margin-bottom:8px;}
+.deep-dive-body .trap-q{font-weight:700;color:var(--ink);}
+.deep-dive-body .trap-a{color:var(--grey-text);margin-bottom:8px;}
+
+/* FOOTER (per card) */
+.q-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+  padding:10px 16px;
+  background:var(--grey-bg);
+  font-size:11.5px;color:var(--grey-text);
+  border-top:1px solid var(--grey-border);
+}
+.correction-link{min-width:0;word-break:break-all;}
+.correction-link a{word-break:break-all;}
+.q-version{flex-shrink:0;font-weight:600;}
+
+/* NO RESULTS */
+#no-results{
+  display:none;text-align:center;padding:60px 20px;color:var(--grey-text);
+}
+
+/* PAGE FOOTER */
+.page-footer{
+  background:var(--navy);color:#cbd5e1;
+  padding:30px 20px;font-size:12.5px;
+  text-align:center;
+}
+.page-footer a{color:var(--teal-light);}
+.page-footer .disclaimer{
+  max-width:700px;margin:12px auto 0;color:#94a3b8;font-size:11.5px;
+}
+
+body{-webkit-user-select:none;-moz-user-select:none;user-select:none;}
+.mi-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.05;background-repeat:repeat;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Ctext x='0' y='100' font-size='20' fill='%230f172a' transform='rotate(-30 200 100)'%3EMarine Intelligence Weekly%3C/text%3E%3C/svg%3E");}
+</style>
+</head>
+<body>
+<div class="mi-watermark"></div>
+
+<script>
+document.addEventListener('contextmenu', function(e){e.preventDefault();});
+document.addEventListener('copy', function(e){e.preventDefault();});
+document.addEventListener('selectstart', function(e){e.preventDefault();});
+</script>
+<script>
+(function(){
+  function getCookie(name){
+    var m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return m ? m.pop() : '';
+  }
+  if (getCookie('miw_auth') !== '1') {
+    window.location.href = '/SQ/pay.html';
+  }
+})();
+</script>
+
+
+<div class="topbar">
+  <div class="logo-mark">MIW</div>
+  <div class="site-name">Marine Intelligence Weekly</div>
+  <nav>
+    <a href="https://marineintelligenceweekly.com/">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/contact.html">Contact</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <span class="qb-badge">QB6_D · MEO Class 1 Question Bank</span>
+  <h1>Electrical, Automation &amp; Control Systems — Companion D</h1>
+  <p class="sub-desc">3 questions from the 30 Jun 2026 WhatsApp batch (Q499–Q529): SCR working principle, Azimuth propulsion, EGR vs SCR commercial comparison. Examiners: Simon, Nair. Companion file — standalone Q1–Q3 numbering, own TOC. Includes embedded cheat sheet.</p>
+  <div class="header-meta">
+    <span><strong>Compiled by:</strong> Nixon Antony, 2/E, Maersk A/S</span>
+    <span><strong>Examiners referenced:</strong> Simon, Nair</span>
+    <span><strong>Version:</strong> v1.0 · June 2026</span>
+  </div>
+</div>
+
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all', this)">All</button>
+  <button class="filter-btn" onclick="filterTag('machinery', this)">Machinery</button>
+  <button class="filter-btn" onclick="filterTag('ghg', this)">GHG / Emissions</button>
+  <span id="q-count-label">Showing {N} of {N}</span>
+</div>
+
+<div class="main-layout">
+  <div class="sidebar">
+    <h3>Contents</h3>
+    <a class="toc-link" href="#q1">Q1. SCR (Selective Catalytic Reduction) working p</a>
+    <a class="toc-link" href="#q2">Q2. Azimuth propeller — working principle.</a>
+    <a class="toc-link" href="#q3">Q3. NOx reduction methods — EGR vs SCR for NOx re</a>
+    <div class="divider"></div>
+    <div class="upcoming-note">Companion file — own Q1…Qn numbering. Part of the MIW MEO Class 1 QB6_D series.</div>
+  </div>
+
+  <div id="q-feed">
+<div class="section-head"><h2>📋 Quick-Reference Cheat Sheet</h2><span class="sec-count">3 questions</span></div>
+<div class="q-card open" style="cursor:default;">
+<div class="q-answer" style="display:block;padding:16px 18px;">
+<div class="answer-body">
+<h4>QB6_D Cheat Sheet — SCR / Azimuth / EGR vs SCR</h4>
+<table class="comp-table">
+<tr><th>Q</th><th>Core Fact</th><th>Key Reg</th></tr>
+<tr><td>Q1 SCR</td><td>"Selective" = NH3 reacts selectively with NOx, not O2. AUS40 urea, 300–400°C window, avoid ammonium bisulfate below 300°C.</td><td>MARPOL Annex VI Reg 13; NOx Technical Code 2008; ISO 18611</td></tr>
+<tr><td>Q2 Azimuth</td><td>360° rotating pod, steering and propulsion torque are separate circuits; slip-ring allows continuous rotation.</td><td>Class RP/thruster rules</td></tr>
+<tr><td>Q3 EGR vs SCR</td><td>EGR = internal, higher SFOC, acidic wash-water; SCR = external, lower SFOC, no liquid waste. SCR generally better commercially for long-haul.</td><td>MARPOL Annex VI Reg 13.5; MEPC.307(73)</td></tr>
+</table>
+</div></div></div>
+
+<div class="section-head"><h2>⚡ Electrical, Automation &amp; Control Systems — Companion D</h2><span class="sec-count">3 questions</span></div>
+    <div class="q-card" id="q1" data-tags="machinery">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">SCR (Selective Catalytic Reduction) working principle — what is 'selective' in SCR?</div>
+          <div class="q-tags"><span class="q-tag tag-machinery">MACHINERY</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span><strong>Practice Block (Teal):</strong> SCR is an exhaust gas after-treatment system designed to comply with MARPOL Annex VI Tier III NOx limits. It is called <strong>"selective"</strong> because the injected reducing agent (Aqueous Urea) targetedly reduces harmful Nitrogen Oxides (NO<sub>x</sub>) into harmless Nitrogen (N<sub>2</sub>) and Water (H<sub>2O</sub>) vapor, leaving other exhaust components like oxygen and sulfur oxides unreacted.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span><strong>Practice Block (Teal):</strong> Operating under MARPOL Annex VI Reg 13, Selective Catalytic Reduction (SCR) achieves up to an 80% reduction in NO<sub>x</sub> emissions. The process involves injecting a <strong>32.5% or 40% aqueous urea solution (AUS)</strong> into the hot exhaust gas stream (300°C - 400°C) upstream of a catalyst bed composed of Titanium Dioxide infused with Vanadium or Tungsten oxides. The heat causes thermal decomposition of urea into ammonia (NH<sub>3</sub>). As a Chief Engineer, maintaining this optimal temperature window is critical; operating below 300°C risks the formation of corrosive ammonium bisulfate (NH<sub>4HSO</sub><sub>4</sub>), which deposits on and permanently fouls the catalyst layer.</div>
+        <div class="answer-body">
+<h4>Governing Instrument / Regulatory Principle</h4>
+<p>The system operates strictly to meet the <strong>MARPOL Annex VI Regulation 13 (Tier III)</strong> standards, which apply to vessels operating within designated <strong>NOx Emission Control Areas (ECAs)</strong>. It works in tandem with the <strong>NOx Technical Code 2008</strong>, requiring strict parameters tracking in the Record Book of Engine Parameters.</p>
+<h4>Working Principle &amp; "Selective" Chemistry</h4>
+<p>The core mechanism relies on the reduction of NO<sub>x</sub> by ammonia over a catalytic substrate. The term "selective" is derived from the chemical affinity of the reducing agent (NH<sub>3</sub>) specifically for NO<sub>x</sub> rather than reacting generally with atmospheric oxygen (O<sub>2</sub>) present in the lean exhaust gas.</p>
+<ol><li><strong>Urea Injection &amp; Pyrolysis:</strong></li></ol>
+<p>Aqueous urea (commonly <strong>AUS 40</strong> in marine applications) is atomized and injected into the exhaust pipe.</p>
+<p class="formula">CO(NH<sub>2</sub>)<sub>2</sub> + H<sub>2O</sub> → 2NH<sub>3</sub> + CO<sub>2</sub></p>
+<ol><li><strong>Catalytic Reduction Reactions:</strong></li></ol>
+<p>Inside the SCR reactor chamber, the ammonia reacts with nitric oxide (NO) and nitrogen dioxide (NO<sub>2</sub>):</p>
+<p class="formula">4NO + 4NH<sub>3</sub> + O<sub>2</sub> → 4N<sub>2</sub> + 6H<sub>2O</sub></p>
+<p class="formula">2NO<sub>2</sub> + 4NH<sub>3</sub> + O<sub>2</sub> → 3N<sub>2</sub> + 6H<sub>2O</sub></p>
+<h4>Practical Chief Engineer Application</h4>
+<p>Operational focus centers around maintaining the exact chemical equilibrium. If too little urea is injected, NO<sub>x</sub> compliance fails. If too much is injected, <strong>"Ammonia Slip"</strong> occurs, discharging hazardous unreacted NH<sub>3</sub> into the atmosphere. Exhaust gas temperature must be strictly monitored via the automation system to prevent low-temperature fouling.</p>
+<h4>Examiner Angle — Simon</h4>
+<p>Mr. Simon focuses sharply on the chemistry definition of the word <strong>"selective"</strong>. He will frequently cut off candidates who explain the physical components of the tank and dosing unit, demanding: <em>"What exactly is selective about it? What does the ammonia choose to react with?"</em></p>
+<h4>Chief Engineer Relevance</h4>
+<p>Operationally, the Chief Engineer must supervise the storage and quality of the reactant. Marine SCR systems consume large quantities of AUS 40, which must be stored between -11°C (its freezing point) and 30°C to prevent degradation and crystallization.</p>
+<h4>Key Numbers / Regs to Remember</h4>
+<ul><li><strong>32.5% to 40%:</strong> Standard concentration range for Marine Urea Solutions (AUS 40 / ISO 18611).</li><li><strong>300°C – 400°C:</strong> Standard optimal catalyst operating temperature window.</li><li><strong>2.0 g/kWh:</strong> Maximum allowable NOx limit under Tier III for engines ≥2000 RPM (3.4 g/kWh applies instead to slow-speed engines <130 RPM — do not confuse the two).</li></ul>
+<h4>Applies To</h4>
+<p>Container vessels / Maersk A/S fleet modern Tier III newbuilds or retrofitted auxiliary engines.</p>
+<div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">MARPOL Annex VI, Regulation 13</span><span class="reg-desc">Nitrogen Oxides (NO<sub>x</sub>) limits.</span></div><div class="reg-item"><span class="reg-code">IMO NOx Technical Code 2008</span><span class="reg-desc">Certification and testing frameworks for marine diesel engines.</span></div><div class="reg-item"><span class="reg-code">MEPC.198(62)</span><span class="reg-desc">Guidelines for development of the NO<sub>x</sub> Technical Code.</span></div></div>
+<div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> <strong>Kochi MMD Tip (Orange Block):</strong> When answering Simon, do not start with the structural layout of the reactor block. Open immediately with the definition: <em>"Sir, it is called selective because the ammonia selectively reacts with NOx gases over any other components."</em> The most common failure point is failing to explain the risk of <strong>Ammonium Bisulfate formation</strong> when operating at low loads/low temperatures.</div>
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5>
+<p>Managing the soot-blowing sequences of the SCR block to clear particulate matter accumulations on the catalyst honeycombs during long voyages.</p><h5>Trap Questions</h5>
+<ul><li><em>Q: Can we run the SCR while burning High Sulfur Fuel Oil (HSFO)?</em></li><li><em>A: Yes, provided the exhaust temperature is kept high enough (>340°C) to completely prevent the formation of ammonium bisulfate, though low-sulfur fuels are structurally preferred to protect catalyst longevity.</em></li></ul><h5>Common CE Failures</h5>
+<p>Candidates confusing the terms <em>Pyrolysis</em> and <em>Hydrolysis</em> during the urea-to-ammonia conversion phase.</p><h5>Numbers to Memorise</h5>
+<p><strong>200 g/kWh</strong> approx. typical consumption rate of urea relative to NO<sub>x</sub> masses generated.</p><h5>Casualty Link</h5>
+<p>Incidents of premature degradation of catalyst blocks due to exhaust soot masking caused by poorly firing fuel injectors upstream.</p><h5>Examiner Chain</h5>
+<p>Simon starts with the definition → Moves to the specific operating temperature → Asks about the chemical dangers of running below that temperature.</p><h5>On My Vessel</h5>
+<p>Integrated auxiliary engine SCR system arrays positioned upstream of the turbocharger/exhaust gas economizer casing on modern Maersk container designs.</p>
+<p>---</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_D, Q1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB6_D · Q1 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q2" data-tags="machinery">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Azimuth propeller — working principle.</div>
+          <div class="q-tags"><span class="q-tag tag-machinery">MACHINERY</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span><strong>Practice Block (Teal):</strong> An azimuth propeller is a marine propulsion system where the propeller is housed in a pod that can be rotated through <strong>360 degrees horizontally</strong>. This eliminates the need for a conventional rudder and stern thruster, providing exceptional maneuverability by directing thrust in any desired direction.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span><strong>Practice Block (Teal):</strong> Housed underneath the hull, the system consists of a prime mover (either an electric motor or a diesel engine via a Z-drive or L-drive gear transmission) driving a fixed or controllable pitch propeller. Steering is accomplished by rotating the entire lower leg assembly via hydraulic or electric steering motors. From a Chief Engineer's perspective, the primary areas of risk lie in the integrity of the <strong>multi-barrier shaft seals</strong> keeping out seawater, and the hydraulic pressure maintenance of the steering gear ring that executes the rapid 360° vectoring.</div>
+        <div class="answer-body">
+<h4>Governing Instrument / Design Principle</h4>
+<p>Constructed to meet <strong>SOLAS Chapter II-1</strong> steering gear and propulsion redundancy requirements, the system combines thrust generation and steering forces into a single structural unit.</p>
+<h4>Structural Working Mechanism</h4>
+<p>Unlike a fixed shaft arrangement, the azimuth system transmits torque dynamically:</p>
+<ol><li><strong>Mechanical Drive Arrangements:</strong></li></ol>
+<ul><li><strong>Z-Drive:</strong> The input shaft is horizontal, translates down through a vertical shaft via a bevel gear, and translates back to a horizontal propeller shaft.</li><li><strong>L-Drive:</strong> The electric motor is mounted vertically directly above the pod, utilizing only one set of bevel gears.</li></ul>
+<ol><li><strong>Azimuth Azimuthing Bearing &amp; Gear Ring:</strong></li></ol>
+<p>A massive slewing bearing connects the pod assembly to the ship's hull. Hydraulic pumps rotate the unit via pinion drives engaging this gear ring.</p>
+<p>``` [Prime Mover] │ (Horizontal Input) ┌─────▼─────┐ (Upper Bevel Gear) │  Z-Drive  │ └─────┬─────┘ │ (Vertical Shaft passing through Hull) ┌─────▼─────┐ (Lower Bevel Gear inside Pod) ◄───┤ Propeller │ (360° Vector Thrust) └───────────┘</p>
+<p>```</p>
+<h4>Engineering &amp; Maintenance Realities</h4>
+<p>System reliability focuses primarily on <strong>Seawater Intrusion Prevention</strong> and <strong>Lubricating Oil Containment</strong>. The dynamic seal between the rotating pod leg and the stationary hull relies on pressurized lip seals, which require precise header tank pressure differentials to counteract changing hydrostatic head pressures at varying drafts.</p>
+<h4>Examiner Angle — Simon</h4>
+<p>Simon focuses heavily on the structural differences between <strong>Z-drive and L-drive mechanical arrangements</strong>, and the safety features guarding against steering failures. He will demand a sketch or description of the torque translation path from engine to propeller.</p>
+<h4>Chief Engineer Relevance</h4>
+<p>The Chief Engineer must maintain the sealing oil integrity. Water ingress into the azimuth gear housing leads to rapid emulsification of the gear oil, leading to catastrophic failure of the heavy-duty bevel gears. Regular oil analysis for iron parts per million (ppm) and water content is mandatory.</p>
+<h4>Key Numbers / Regs to Remember</h4>
+<ul><li><strong>360°:</strong> Full rotational capability of the pod assembly.</li><li><strong>2 to 3 bar:</strong> Typical positive pressure maintained on inner lip seals to prevent sea water ingress.</li><li><strong>SOLAS Reg II-1/29:</strong> Standard requirements governing steering gear performance parameters.</li></ul>
+<h4>Applies To</h4>
+<p>Tugs, offshore vessels, feeder container ships with dynamic positioning, or specialized port vessels within the wider maritime logistical framework.</p>
+<div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">SOLAS Chapter II-1, Regulation 29</span><span class="reg-desc">Steering Gear requirements applied to propulsion vectors.</span></div><div class="reg-item"><span class="reg-code">Class Rules (e.g., DNV / Lloyd's Register)</span><span class="reg-desc">Rules for Redundant Propulsion (RP) and Thruster Systems.</span></div><div class="reg-item"><span class="reg-code">Resolution A.1021(26)</span><span class="reg-desc">Code on Alerts and Indicators for machinery spaces.</span></div></div>
+<div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> <strong>Kochi MMD Tip (Orange Block):</strong> Simon will trap you by asking: <em>"If you lose hydraulic steering power, does the propeller stop spinning?"</em> Clarify immediately that propulsion torque and steering rotation are structurally separate circuits. Losing steering locks the pod angle, but the prime mover can still rotate the propeller itself.</div>
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5>
+<p>Managing the inspection regime of the slip-ring assemblies that transmit electrical power across the rotating boundary in diesel-electric pod designs.</p><h5>Trap Questions</h5>
+<ul><li><em>Q: What stops the azimuth unit from twisting its internal cables off if it turns 360 degrees indefinitely?</em></li><li><em>A: A dedicated high-voltage slip ring unit allows continuous 360-degree rotation without any physical cable twist.</em></li></ul><h5>Common CE Failures</h5>
+<p>Failing to mention the presence of the lower bevel gear system and the extreme precision required in back-lash clearance setups.</p><h5>Numbers to Memorise</h5>
+<p>Turning speed limits; usually capable of turning at <strong>2 to 3 RPM</strong> under full steering load conditions.</p><h5>Casualty Link</h5>
+<p>Incidents of seal failures due to discarded fishing lines wrapping around the propeller boss and cutting through the outer rubber lip seals.</p><h5>Examiner Chain</h5>
+<p>Description of system → Mechanical difference of Z vs L drive → Sealing arrangements against external water pressure.</p><h5>On My Vessel</h5>
+<p>Generally utilized on harbor support tugs serving Maersk terminal operations or modern DP-enabled tender vessels.</p>
+<p>---</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_D, Q2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB6_D · Q2 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q3" data-tags="machinery">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">3</div>
+        <div class="q-text-wrap">
+          <div class="q-text">NOx reduction methods — EGR vs SCR for NOx reduction; which is commercially better?</div>
+          <div class="q-tags"><span class="q-tag tag-machinery">MACHINERY</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span><strong>Practice Block (Teal):</strong> EGR reduces NO<sub>x</sub> internally by recirculating a portion of cooled exhaust gas back into the engine cylinder to lower combustion temperatures, whereas SCR treats exhaust externally using a urea catalyst. Commercially, <strong>SCR is generally superior for long-haul ocean voyages</strong> because it avoids the internal engine wear, heavy water-treatment sludges, and fuel penalties associated with high-tier EGR systems.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span><strong>Practice Block (Teal):</strong> Complying with MARPOL Annex VI Tier III requires an engineering choice between internal mitigation via Exhaust Gas Recirculation (EGR) and external treatment via Selective Catalytic Reduction (SCR). EGR replaces oxygen with CO<sub>2</sub>, reducing the peak combustion temperature below the 1600°C threshold where thermal NO<sub>x</sub> forms. However, EGR incurs significant commercial disadvantages: increased fuel consumption, high acidic water scrubbing costs, and soot contamination of the system lube oil. SCR allows the engine to be optimized for maximum fuel efficiency, offsetting the high ongoing cost of urea consumables by delivering better overall specific fuel consumption (SFOC) over long-haul oceanic routes.</div>
+        <div class="answer-body">
+<h4>Governing Instrument &amp; Chemical Premise</h4>
+<p>Both systems aim for compliance with <strong>MARPOL Annex VI Reg 13 Tier III</strong>. The underlying thermodynamic challenge is that NO<sub>x</sub> formation scales exponentially with peak flame temperatures exceeding 1600°C.</p>
+<h4>Technical &amp; Operational Comparison</h4>
+<table class="comp-table">
+<tr><th>Parameter</th><th>Exhaust Gas Recirculation (EGR)</th><th>Selective Catalytic Reduction (SCR)</th></tr>
+<tr><td><strong>Mechanism</strong></td><td>Internal: Replaces O<sub>2</sub> with CO<sub>2</sub> to lower combustion temperatures.</td><td>External: Catalytic reduction of NO<sub>x</sub> using an aqueous urea reactant.</td></tr>
+<tr><td><strong>Fuel Penalty</strong></td><td>Higher SFOC due to altered, less efficient combustion parameters.</td><td>Low SFOC; engine remains tuned for optimal thermodynamic efficiency.</td></tr>
+<tr><td><strong>Waste Stream</strong></td><td>Generates acidic wash water sludge requiring complex onboard water treatment.</td><td>No hazardous liquid waste stream; atmospheric discharge only.</td></tr>
+<tr><td><strong>Maintenance</strong></td><td>High: Corrosive exhaust soot fouls pistons, liners, and EGR coolers.</td><td>Medium: Periodic replacement or soot-blowing of the catalyst blocks.</td></tr>
+</table>
+<h4>Commercial Evaluation Metrics</h4>
+<p>For large ocean-going vessels, <strong>SCR presents a stronger commercial case</strong> despite the significant footprint and consumable costs of urea storage. The primary driver is fuel cost optimization: because the engine does not have to deliberately degrade its combustion efficiency to prevent NO<sub>x</sub> formation, the fuel savings over long distances easily eclipse the operating expenditures of purchasing AUS 40 reactant.</p>
+<h4>Examiner Angle — Nair</h4>
+<p>Mr. Nair looks at the commercial and <strong>thermodynamic trade-offs</strong>. He wants to hear the specific numbers regarding fuel penalty differences and operational maintenance costs, rather than just a textbook summary of the two systems.</p>
+<h4>Chief Engineer Relevance</h4>
+<p>The Chief Engineer must oversee the complex water treatment unit associated with EGR systems. EGR wash-water contains high amounts of particulates and sulfuric acid. Discharging this requires adherence to strict pH, turbidity, and polycyclic aromatic hydrocarbon (PAH) monitoring regulations before overboard disposal.</p>
+<h4>Key Numbers / Regs to Remember</h4>
+<ul><li><strong>1600°C:</strong> The critical combustion temperature above which thermal NO<sub>x</sub> production spikes sharply.</li><li><strong>3% to 5%:</strong> Approximate specific fuel oil consumption (SFOC) savings when utilizing an SCR compared to an active Tier III EGR profile.</li><li><strong>pH 6.5:</strong> The minimum allowable discharge water pH for EGR wash-water effluent under standard IMO guidelines.</li></ul>
+<h4>Applies To</h4>
+<p>Container vessels / Maersk A/S fleet main propulsion installations optimized for long-haul transoceanic efficiency.</p>
+<div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg 13.5</span><span class="reg-desc">Tier III NOx requirements within ECAs.</span></div><div class="reg-item"><span class="reg-code">MEPC.307(73)</span><span class="reg-desc">2018 Guidelines for the discharge of EGR bleed-off water.</span></div><div class="reg-item"><span class="reg-code">NOx Technical Code, Chapter 5</span><span class="reg-desc">Procedures for demonstrating compliance with NO<sub>x</sub> emission limits on board.</span></div><div class="reg-item"><span class="reg-code">MEPC.259(68)</span><span class="reg-desc">Exhaust gas cleaning systems wash-water discharge impact assessments.</span></div></div>
+<div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> <strong>Kochi MMD Tip (Orange Block):</strong> When Nair asks: <em>"Which one would you buy as a Chief Engineer?"</em>, do not say <em>"It depends."</em> Confidently state: <em>"For a long-haul vessel like a Maersk container ship, I recommend SCR because it allows the main engine to operate at peak thermodynamic efficiency, saving significant fuel costs over time while avoiding heavy acidic sludge management on board."</em></div>
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5>
+<p>Managing compliance logs: entering accurate running hours of the urea dosing pump system in the NO<sub>x</sub> Record Book to avoid port state detention.</p><h5>Trap Questions</h5>
+<ul><li><em>Q: Why does substituting air with exhaust gas lower the temperature in the EGR?</em></li><li><em>A: The recirculated CO<sub>2</sub> has a higher molar heat capacity than atmospheric oxygen and acts as an inert diluent, lowering the heat released per unit volume.</em></li></ul><h5>Common CE Failures</h5>
+<p>Forgetting to mention the severe cylinder liner wear caused by acidic condensation (H<sub>2SO</sub><sub>4</sub>) if the EGR gas cooling system drops below the dew point.</p><h5>Numbers to Memorise</h5>
+<p>EGR requires cooling up to <strong>30-40%</strong> of the total exhaust volume under full Tier III configurations.</p><h5>Casualty Link</h5>
+<p>Severe systemic corrosion of intermediate air coolers and intake manifolds on vessels where the EGR water mist catchers failed.</p><h5>Examiner Chain</h5>
+<p>Nair asks for the differences → Follows up with the commercial evaluation → Asks for the strict environmental parameters of the wash-water bleed-off from an EGR.</p><h5>On My Vessel</h5>
+<p>Main propulsion configurations within the modern Maersk fleet prioritize high-efficiency tuning paired with external SCR blocks or specialized low-load optimization profiles.</p>
+<p>---</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_D, Q3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB6_D · Q3 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="no-results">
+  <p>No questions match your search/filter.</p>
+</div>
+
+<div class="page-footer">
+  <p>Marine Intelligence Weekly · MEO Class 1 Question Bank · QB6_D — Electrical, Automation &amp; Control Systems — Companion D</p>
+  <p>Compiled by Nixon Antony, Second Engineer, Maersk A/S · <a href="https://marineintelligenceweekly.com/meoclass1/">Back to MEO Class 1 Hub</a> · <a href="https://marineintelligenceweekly.com/">marineintelligenceweekly.com</a></p>
+  <p class="disclaimer">Disclaimer: This question bank is a private study aid compiled for MEO Class 1 oral examination preparation at the Kochi MMD. Regulatory references are provided in good faith and cross-checked against IMO, IACS, and classification society sources where possible, but candidates must independently verify current regulation numbers, thresholds, and amendment dates against the latest consolidated SOLAS/MARPOL editions, IACS Unified Requirements, and their flag/class circulars before relying on them in examination or operational contexts. To report a correction, email contactus@marineintelligenceweekly.com with the QB number, question number, and details.</p>
+</div>
+
+<script>
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>QB8_D — IGC Code &amp; Dangerous vs Hazardous Cargo | MIW MEO Class 1 Question Bank</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+<style>
+:root{
+  --teal:#0d9488;
+  --teal-dark:#0f766e;
+  --teal-light:#ccfbf1;
+  --navy:#0f172a;
+  --orange:#f97316;
+  --orange-light:#fff7ed;
+  --off-white:#f8fafc;
+  --grey-text:#64748b;
+  --grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;
+  --ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI', system-ui, sans-serif;
+  background:var(--off-white);
+  color:var(--ink);
+  line-height:1.5;
+}
+a{color:var(--teal-dark);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* TOPBAR */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:var(--navy);
+  color:#fff;
+  display:flex;align-items:center;gap:12px;
+  padding:10px 20px;
+  font-size:14px;
+}
+.topbar .logo-mark{
+  width:30px;height:30px;border-radius:6px;
+  background:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:#fff;
+  flex-shrink:0;
+}
+.topbar .site-name{font-weight:600;letter-spacing:0.3px;flex-shrink:0;}
+.topbar nav{margin-left:auto;display:flex;gap:18px;}
+.topbar nav a{color:#cbd5e1;font-size:13px;}
+.topbar nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{
+  background:var(--navy);
+  color:#fff;
+  padding:28px 20px 22px;
+}
+.page-header .qb-badge{
+  display:inline-block;
+  background:var(--teal);
+  color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;
+  padding:4px 10px;border-radius:4px;
+  margin-bottom:10px;
+}
+.page-header h1{
+  font-size:24px;font-weight:700;margin-bottom:6px;
+}
+.page-header .sub-desc{
+  color:#cbd5e1;font-size:14px;max-width:760px;
+}
+.header-meta{
+  display:flex;gap:18px;flex-wrap:wrap;
+  margin-top:14px;font-size:12px;color:#94a3b8;
+}
+.header-meta strong{color:#e2e8f0;}
+
+/* CONTROLS BAR */
+.controls-bar{
+  position:sticky;top:48px;z-index:90;
+  background:#fff;
+  border-bottom:1px solid var(--grey-border);
+  padding:12px 20px;
+  display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;
+}
+#search-input{
+  flex:1 1 220px;max-width:340px;
+  padding:8px 12px;
+  border:1px solid var(--grey-border);
+  border-radius:6px;font-size:13px;
+}
+#search-input:focus{outline:none;border-color:var(--teal);}
+.filter-btn{
+  background:var(--grey-bg);
+  border:1px solid var(--grey-border);
+  color:var(--grey-text);
+  font-size:12px;font-weight:600;
+  padding:6px 12px;border-radius:20px;
+  cursor:pointer;transition:all .15s;
+}
+.filter-btn:hover{background:var(--teal-light);color:var(--teal-dark);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{
+  margin-left:auto;font-size:12px;color:var(--grey-text);font-weight:600;
+}
+
+/* MAIN LAYOUT */
+.main-layout{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:24px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:24px 20px 60px;
+}
+@media (max-width:800px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+}
+
+/* SIDEBAR */
+.sidebar{
+  position:sticky;top:110px;
+  align-self:start;
+  max-height:calc(100vh - 130px);
+  overflow-y:auto;
+  font-size:13px;
+}
+.sidebar h3{
+  font-size:11px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--grey-text);margin-bottom:10px;
+}
+.toc-link{
+  display:block;padding:6px 10px;border-radius:5px;
+  color:var(--ink);font-size:13px;
+  border-left:2px solid transparent;
+  transition:all .15s;
+}
+.toc-link:hover{background:var(--teal-light);text-decoration:none;}
+.toc-link.active{
+  background:var(--teal-light);
+  border-left:2px solid var(--teal);
+  color:var(--teal-dark);font-weight:600;
+}
+.sidebar .divider{
+  border-top:1px solid var(--grey-border);
+  margin:14px 0;
+}
+.sidebar .upcoming-note{
+  background:var(--grey-bg);
+  border-radius:6px;padding:10px;
+  font-size:12px;color:var(--grey-text);
+}
+
+/* SECTION HEAD */
+.section-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin:28px 0 12px;
+}
+.section-head:first-child{margin-top:0;}
+.section-head h2{font-size:16px;font-weight:700;color:var(--ink);}
+.sec-count{
+  font-size:11px;font-weight:700;color:var(--teal-dark);
+  background:var(--teal-light);padding:2px 8px;border-radius:10px;
+}
+
+/* Q CARD */
+.q-card{
+  background:#fff;
+  border:1px solid var(--grey-border);
+  border-radius:8px;
+  margin-bottom:10px;
+  overflow:hidden;
+}
+.q-header{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{
+  flex-shrink:0;
+  width:28px;height:28px;border-radius:6px;
+  background:var(--teal);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.q-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.q-tag{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;
+  padding:2px 8px;border-radius:10px;
+  background:var(--grey-bg);color:var(--grey-text);
+}
+.q-tag.tag-solas{background:#e0f2fe;color:#0369a1;}
+.q-tag.tag-marpol{background:#fef3c7;color:#92400e;}
+.q-tag.tag-iacs{background:#ede9fe;color:#5b21b6;}
+.q-tag.tag-survey{background:var(--teal-light);color:var(--teal-dark);}
+.q-tag.tag-stability{background:#fce7f3;color:#9d174d;}
+.q-tag.tag-machinery{background:#dbeafe;color:#1e40af;}
+.q-tag.tag-ghg{background:#dcfce7;color:#166534;}
+.q-tag.tag-stcw{background:#ffe4e6;color:#9f1239;}
+.q-chevron{
+  flex-shrink:0;width:20px;height:20px;
+  stroke:var(--grey-text);transition:transform .2s;
+}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+
+/* ANSWER PANEL */
+.q-answer{
+  display:none;
+  padding:0 16px 16px;
+  border-top:1px solid var(--grey-border);
+}
+.q-card.open .q-answer{display:block;padding-top:14px;}
+.answer-body{font-family:'Georgia',serif;font-size:14px;color:var(--ink);}
+.answer-body h4{
+  font-size:12px;text-transform:uppercase;letter-spacing:0.8px;
+  color:var(--teal-dark);font-family:'Segoe UI',system-ui,sans-serif;
+  font-weight:700;margin:16px 0 6px;
+}
+.answer-body h4:first-child{margin-top:0;}
+.answer-body p{margin-bottom:10px;}
+.answer-body ul, .answer-body ol{margin:0 0 10px 22px;}
+.answer-body li{margin-bottom:5px;}
+.answer-body strong{color:var(--ink);font-weight:700;}
+.answer-body em{color:var(--grey-text);}
+.formula{
+  font-family:monospace;background:var(--grey-bg);
+  padding:10px 12px;border-radius:6px;margin:10px 0;font-size:13.5px;
+}
+
+/* PRACTICE BLOCKS (15s/60s) */
+.practice-block{
+  background:var(--teal-light);
+  border-left:3px solid var(--teal);
+  border-radius:0 6px 6px 0;
+  padding:10px 14px;margin-bottom:10px;
+  font-family:'Georgia',serif;font-size:13.5px;color:var(--ink);
+}
+.practice-block .pb-label{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--teal-dark);margin-bottom:4px;display:block;
+}
+
+/* REG BOX */
+.reg-box{
+  background:var(--navy);
+  border-radius:8px;padding:14px 16px;margin:14px 0;
+  font-family:'Segoe UI',system-ui,sans-serif;
+}
+.reg-box-title{
+  color:#fff;font-size:12px;font-weight:700;margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:0.8px;
+}
+.reg-item{
+  display:flex;gap:12px;flex-wrap:wrap;
+  padding:5px 0;border-bottom:1px solid #1e293b;
+  font-size:12.5px;
+}
+.reg-item:last-child{border-bottom:none;}
+.reg-code{
+  color:var(--orange);font-family:monospace;font-weight:700;
+  flex:0 0 auto;min-width:0;word-break:break-all;
+}
+.reg-desc{color:#cbd5e1;flex:1;min-width:0;word-break:break-word;}
+
+/* CE TIP */
+.ce-tip{
+  background:var(--orange-light);
+  border-left:3px solid var(--orange);
+  border-radius:0 6px 6px 0;
+  padding:12px 14px;margin:14px 0;
+  font-size:13.5px;color:#7c2d12;
+}
+.ce-tip strong{color:var(--orange);}
+
+/* EXTRA BLOCKS (collapsible deep-dive sections) */
+.deep-dive{
+  margin-top:14px;border:1px solid var(--grey-border);border-radius:8px;
+  overflow:hidden;
+}
+.deep-dive summary{
+  cursor:pointer;padding:10px 14px;
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:12.5px;font-weight:700;color:var(--teal-dark);
+  background:var(--grey-bg);
+  list-style:none;display:flex;align-items:center;gap:8px;
+}
+.deep-dive summary::-webkit-details-marker{display:none;}
+.deep-dive summary::before{content:"▸";font-size:11px;}
+.deep-dive[open] summary::before{content:"▾";}
+.deep-dive-body{padding:12px 14px;font-size:13.5px;}
+.deep-dive-body h5{
+  font-size:11px;text-transform:uppercase;letter-spacing:0.6px;
+  color:var(--grey-text);margin:10px 0 4px;font-family:'Segoe UI',system-ui,sans-serif;
+}
+.deep-dive-body h5:first-child{margin-top:0;}
+.deep-dive-body p{margin-bottom:8px;}
+.deep-dive-body .trap-q{font-weight:700;color:var(--ink);}
+.deep-dive-body .trap-a{color:var(--grey-text);margin-bottom:8px;}
+
+/* FOOTER (per card) */
+.q-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+  padding:10px 16px;
+  background:var(--grey-bg);
+  font-size:11.5px;color:var(--grey-text);
+  border-top:1px solid var(--grey-border);
+}
+.correction-link{min-width:0;word-break:break-all;}
+.correction-link a{word-break:break-all;}
+.q-version{flex-shrink:0;font-weight:600;}
+
+/* NO RESULTS */
+#no-results{
+  display:none;text-align:center;padding:60px 20px;color:var(--grey-text);
+}
+
+/* PAGE FOOTER */
+.page-footer{
+  background:var(--navy);color:#cbd5e1;
+  padding:30px 20px;font-size:12.5px;
+  text-align:center;
+}
+.page-footer a{color:var(--teal-light);}
+.page-footer .disclaimer{
+  max-width:700px;margin:12px auto 0;color:#94a3b8;font-size:11.5px;
+}
+
+/* CHEAT SHEET */
+.cheat-sheet{background:var(--navy);border-radius:10px;padding:20px 22px;margin:26px 0 10px;}
+.cheat-sheet h2{color:#fff;font-size:16px;margin-bottom:4px;}
+.cheat-sheet .cs-sub{color:#94a3b8;font-size:12.5px;margin-bottom:14px;}
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.cs-block{background:#1e293b;border-radius:8px;padding:12px 14px;}
+.cs-block h4{color:var(--orange);font-size:11px;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
+.cs-block p, .cs-block li{color:#cbd5e1;font-size:12.5px;line-height:1.5;}
+.cs-block ul{margin-left:16px;}
+.cs-block strong{color:#fff;}
+
+body{user-select:none;-webkit-user-select:none;-moz-user-select:none;}
+.miw-watermark{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:9999;overflow:hidden;
+}
+.miw-watermark span{
+  position:absolute;white-space:nowrap;color:rgba(15,23,42,0.045);
+  font-size:13px;font-weight:700;transform:rotate(-30deg);
+  font-family:'Segoe UI',sans-serif;
+}
+</style>
+</head>
+<body>
+<div class="miw-watermark"><span style="top:0%;left:0%;">QB8_D · marineintelligenceweekly.com</span><span style="top:0%;left:28%;">QB8_D · marineintelligenceweekly.com</span><span style="top:0%;left:56%;">QB8_D · marineintelligenceweekly.com</span><span style="top:0%;left:84%;">QB8_D · marineintelligenceweekly.com</span><span style="top:11%;left:-11%;">QB8_D · marineintelligenceweekly.com</span><span style="top:11%;left:17%;">QB8_D · marineintelligenceweekly.com</span><span style="top:11%;left:45%;">QB8_D · marineintelligenceweekly.com</span><span style="top:11%;left:73%;">QB8_D · marineintelligenceweekly.com</span><span style="top:22%;left:0%;">QB8_D · marineintelligenceweekly.com</span><span style="top:22%;left:28%;">QB8_D · marineintelligenceweekly.com</span><span style="top:22%;left:56%;">QB8_D · marineintelligenceweekly.com</span><span style="top:22%;left:84%;">QB8_D · marineintelligenceweekly.com</span><span style="top:33%;left:-11%;">QB8_D · marineintelligenceweekly.com</span><span style="top:33%;left:17%;">QB8_D · marineintelligenceweekly.com</span><span style="top:33%;left:45%;">QB8_D · marineintelligenceweekly.com</span><span style="top:33%;left:73%;">QB8_D · marineintelligenceweekly.com</span><span style="top:44%;left:0%;">QB8_D · marineintelligenceweekly.com</span><span style="top:44%;left:28%;">QB8_D · marineintelligenceweekly.com</span><span style="top:44%;left:56%;">QB8_D · marineintelligenceweekly.com</span><span style="top:44%;left:84%;">QB8_D · marineintelligenceweekly.com</span><span style="top:55%;left:-11%;">QB8_D · marineintelligenceweekly.com</span><span style="top:55%;left:17%;">QB8_D · marineintelligenceweekly.com</span><span style="top:55%;left:45%;">QB8_D · marineintelligenceweekly.com</span><span style="top:55%;left:73%;">QB8_D · marineintelligenceweekly.com</span><span style="top:66%;left:0%;">QB8_D · marineintelligenceweekly.com</span><span style="top:66%;left:28%;">QB8_D · marineintelligenceweekly.com</span><span style="top:66%;left:56%;">QB8_D · marineintelligenceweekly.com</span><span style="top:66%;left:84%;">QB8_D · marineintelligenceweekly.com</span><span style="top:77%;left:-11%;">QB8_D · marineintelligenceweekly.com</span><span style="top:77%;left:17%;">QB8_D · marineintelligenceweekly.com</span><span style="top:77%;left:45%;">QB8_D · marineintelligenceweekly.com</span><span style="top:77%;left:73%;">QB8_D · marineintelligenceweekly.com</span><span style="top:88%;left:0%;">QB8_D · marineintelligenceweekly.com</span><span style="top:88%;left:28%;">QB8_D · marineintelligenceweekly.com</span><span style="top:88%;left:56%;">QB8_D · marineintelligenceweekly.com</span><span style="top:88%;left:84%;">QB8_D · marineintelligenceweekly.com</span><span style="top:99%;left:-11%;">QB8_D · marineintelligenceweekly.com</span><span style="top:99%;left:17%;">QB8_D · marineintelligenceweekly.com</span><span style="top:99%;left:45%;">QB8_D · marineintelligenceweekly.com</span><span style="top:99%;left:73%;">QB8_D · marineintelligenceweekly.com</span></div>
+<script>
+(function(){
+  function getCookie(name){
+    const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return v ? v.pop() : '';
+  }
+  if(getCookie('miw_auth') !== '1'){
+    window.location.href = 'https://marineintelligenceweekly.com/SQ/pay.html';
+  }
+})();
+</script>
+
+
+<div class="topbar">
+  <div class="logo-mark">MIW</div>
+  <div class="site-name">Marine Intelligence Weekly</div>
+  <nav>
+    <a href="https://marineintelligenceweekly.com/">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/contact.html">Contact</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <span class="qb-badge">QB8_D · MEO Class 1 Question Bank · Companion File</span>
+  <h1>IGC Code &amp; Dangerous vs Hazardous Cargo</h1>
+  <p class="sub-desc">2 oral-exam questions from the 29 June 2026 Kochi MMD session (both fail attempts) — IGC Code requirements for gas carriers, and the precise distinction between "dangerous" and "hazardous" cargo. Companion file, own Q1–Q2 numbering, own TOC.</p>
+  <div class="header-meta">
+    <span><strong>Compiled by:</strong> Nixon Antony, 2/E, Maersk A/S</span>
+    <span><strong>Examiner referenced:</strong> Simon (External)</span>
+    <span><strong>Version:</strong> v1.0 · 30 June 2026</span>
+  </div>
+</div>
+
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all', this)">All</button>
+  <button class="filter-btn" onclick="filterTag('solas', this)">SOLAS</button>
+  <button class="filter-btn" onclick="filterTag('marpol', this)">MARPOL</button>
+  <button class="filter-btn" onclick="filterTag('stcw', this)">STCW</button>
+  <span id="q-count-label">Showing 2 of 2</span>
+</div>
+
+<div class="main-layout">
+  <div class="sidebar">
+    <h3>Contents</h3>
+    <a class="toc-link" href="#q1">Q1. IGC Code</a>
+    <a class="toc-link" href="#q2">Q2. Dangerous vs Hazardous Cargo</a>
+    <div class="divider"></div>
+    <div class="upcoming-note">
+      Companion file: <strong>QB8_D</strong>. Part of the QB8 Cargo Operations series.
+    </div>
+  </div>
+
+  <div id="q-feed">
+
+    <div class="section-head">
+      <h2>🛢 Bulk &amp; Gas Cargo</h2>
+      <span class="sec-count">2 questions</span>
+    </div>
+
+    <div class="q-card" id="q1" data-tags="solas stcw">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">IGC Code — key requirements and application to gas carriers?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-solas">SOLAS</span>
+            <span class="q-tag tag-stcw">STCW</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>The IGC Code — International Code for the Construction and Equipment of Ships Carrying Liquefied Gases in Bulk — is mandatory under SOLAS Chapter VII Part C for gas carriers built on/after 1 July 1986, applying to all sizes. It sets four ship-type standards (1G, 2G, 2PG, 3G) by cargo hazard, and the ship carries a 5-year International Certificate of Fitness.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>The IGC Code, adopted by Resolution MSC.5(48) and mandatory under SOLAS Ch VII Part C since 1 July 1986, applies to gas carriers of any size carrying liquefied gases with vapour pressure exceeding 2.8 bar absolute at 37.8°C, and other listed products in Chapter 19. It assigns each ship a design standard by hazard: Type 1G (maximum hazard — e.g. ammonia, propylene oxide, survives damage anywhere in length), Type 2G (significant hazard — e.g. LPG, LNG), Type 2PG (≤150m, significant hazard, Type C tanks, high MARVS), Type 3G (moderate hazard, lowest design standard). Key requirements cover tank containment type and location, pressure-relief and vapour-control systems, gas detection, fire-fighting appropriate to the cargo (dry powder for LPG, water spray for ammonia), crew training under STCW V/1-2, and a Procedures and Arrangements (P&A) Manual. The ship carries an International Certificate of Fitness valid for 5 years, subject to annual surveys.</div>
+        <div class="answer-body">
+          <h4>Governing Instrument &amp; Applicability</h4>
+          <ul>
+            <li><strong>Instrument:</strong> International Code for the Construction and Equipment of Ships Carrying Liquefied Gases in Bulk (IGC Code), adopted by <strong>IMO Resolution MSC.5(48)</strong>, mandatory under <strong>SOLAS Chapter VII, Part C</strong> since <strong>1 July 1986</strong>.</li>
+            <li><strong>Applies to:</strong> gas carriers of <strong>any size</strong> (no GT threshold), built on/after 1 July 1986, carrying liquefied gases with vapour pressure exceeding <strong>2.8 bar absolute at 37.8°C</strong> and other substances listed in <strong>Chapter 19</strong> of the Code. Older gas carriers built before 1986 comply instead with the earlier GC Code (or EGC Code, pre-1976).</li>
+            <li>Extensively revised and consolidated in <strong>2016</strong> under Resolution MSC.370(93); further amendments (window fire-integrity, revised Certificate of Fitness model form) entered into force 1 January 2020.</li>
+          </ul>
+
+          <h4>Ship Type Classification (by hazard)</h4>
+          <ul>
+            <li><strong>Type 1G</strong> — maximum hazard products (e.g. ammonia, propylene oxide); highest survivability standard — must survive damage anywhere along its length; cargo tanks located furthest inboard.</li>
+            <li><strong>Type 2G</strong> — significant hazard products (e.g. LPG, LNG, ethylene) — most modern large gas carriers fall here.</li>
+            <li><strong>Type 2PG</strong> — ≤150m length variant of 2G, carrying product in independent Type C tanks designed for MARVS ≥0.7 MPa (7 bar) gauge and design temperature ≥−55°C; over 150m, the ship reverts to Type 2G classification.</li>
+            <li><strong>Type 3G</strong> — moderate hazard products; lowest design standard of the four.</li>
+          </ul>
+
+          <h4>Key Technical Requirements</h4>
+          <ol>
+            <li>Cargo tank design and inboard location, matched to ship type and damage-survivability standard.</li>
+            <li>Cargo containment systems — independent tanks (Types A, B, C), membrane, semi-membrane, or integral tanks depending on design.</li>
+            <li>Pressure relief valves and other safety devices sized for the cargo's properties.</li>
+            <li>Vapour control and gas-detection systems throughout cargo and adjacent spaces.</li>
+            <li>Fire-fighting systems matched to the cargo — dry chemical powder and water spray for LPG, water spray/dilution for ammonia, appropriate systems for LNG.</li>
+            <li>Crew training — STCW Chapter V, Regulations V/1-2, basic and advanced training for personnel on liquefied gas tankers.</li>
+            <li>Procedures and Arrangements (P&amp;A) Manual — ship-specific cargo handling procedures.</li>
+            <li>Certification — International Certificate of Fitness for the Carriage of Liquefied Gases in Bulk.</li>
+          </ol>
+
+          <h4>Certificate of Fitness</h4>
+          <p>The International Certificate of Fitness is <strong>valid for 5 years</strong>, subject to <strong>annual surveys</strong> to confirm continued compliance. It is the gas-carrier-specific statutory certificate, broadly equivalent in function to the Certificate of Fitness (COF) chemical tankers carry under the IBC Code.</p>
+
+          <h4>IGC Code vs IGF Code</h4>
+          <p>The <strong>IGC Code</strong> governs gas carried as <strong>cargo</strong>. The <strong>IGF Code</strong> governs gas (or other low-flashpoint fuel) used as <strong>ship's fuel</strong>. On an LNG carrier that also burns LNG as fuel (a common configuration), <strong>both codes apply simultaneously</strong> — IGC for the cargo system, IGF for the fuel gas system — and examiners test this distinction directly.</p>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch VII, Part C, Reg 13</span><span class="reg-desc">Makes the IGC Code mandatory for applicable gas carriers</span></div>
+            <div class="reg-item"><span class="reg-code">IMO Res. MSC.5(48), as amended</span><span class="reg-desc">Adoption of the IGC Code</span></div>
+            <div class="reg-item"><span class="reg-code">IMO Res. MSC.370(93)</span><span class="reg-desc">2014/2016 consolidated revision of the IGC Code</span></div>
+            <div class="reg-item"><span class="reg-code">STCW Ch V, Reg V/1-2</span><span class="reg-desc">Basic and advanced training for personnel on liquefied gas tankers</span></div>
+            <div class="reg-item"><span class="reg-code">IGF Code</span><span class="reg-desc">Parallel code for gas/low-flashpoint fuel as ship's fuel — distinct from IGC (cargo)</span></div>
+            <div class="reg-item"><span class="reg-code">GC Code / EGC Code</span><span class="reg-desc">Predecessor codes for gas carriers built before 1 July 1986 / 1976</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon's key distinction to nail immediately: IGC Code = gas as CARGO; IGF Code = gas as FUEL. State that both apply together on an LNG-fuelled gas carrier. Then give the ship-type hierarchy from memory — Type 1G highest hazard/most restrictive design, Type 3G lowest — and the 5-year Certificate of Fitness with annual surveys. Candidates commonly fail this by only knowing "IGC = gas carriers" without the type classification or the IGC/IGF distinction, which is exactly what tripped candidates in this session.</div>
+        </div>
+
+        <details class="deep-dive">
+          <summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary>
+          <div class="deep-dive-body">
+            <h5>CE Relevance</h5>
+            <p>CE responsibility on a gas carrier centres on cargo containment system integrity, vapour control, and fire-fighting readiness matched to the specific cargo carried — different products (LNG vs LPG vs ammonia) require materially different emergency response knowledge.</p>
+
+            <h5>Trap Questions</h5>
+            <p class="trap-q">Q: "Your ship carries LNG and burns LNG as fuel — which code applies?"</p>
+            <p class="trap-a">A: Both — IGC Code for the cargo containment/handling system, IGF Code for the fuel gas supply system. They are not mutually exclusive.</p>
+
+            <h5>Common CE Failures</h5>
+            <p class="trap-a">1. Confusing IGC and IGF Code purposes (cargo vs fuel).</p>
+            <p class="trap-a">2. Not knowing the four ship types (1G/2G/2PG/3G) or which hazard level each represents.</p>
+            <p class="trap-a">3. Not knowing the Certificate of Fitness validity (5 years, annual surveys).</p>
+
+            <h5>Numbers to Memorise</h5>
+            <p>SOLAS Ch VII Part C · IGC Code mandatory since 1 July 1986 · Res. MSC.5(48) · vapour pressure threshold 2.8 bar abs at 37.8°C · Certificate of Fitness — 5 years, annual surveys · Type 2PG threshold: ≤150m, MARVS ≥0.7 MPa, design temp ≥−55°C.</p>
+
+            <h5>Casualty Link</h5>
+            <p>Historic LPG/ammonia carrier cargo release incidents underline why containment-system integrity and correctly matched fire-fighting media (never plain water jet on some cargoes) are treated as core competency, not memorisation exercises.</p>
+
+            <h5>Examiner Chain</h5>
+            <p>Simon → IGC Code basics → ship types → IGC vs IGF → certificate validity → cargo containment system types (A/B/C tanks) → fire-fighting media by product.</p>
+
+            <h5>On My Vessel</h5>
+            <p>As a container vessel officer, direct IGC Code exposure is limited to reefer/hazardous container stowage under IMDG rather than bulk gas carriage — the oral answer should be framed as regulatory knowledge for the qualification, distinguished clearly from a bulk-gas-carrier's day-to-day operational context.</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB8_D, Q1, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB8_D, Q1, Correction Required</span>
+        <span class="q-version">QB8_D · Q1 · v1.0</span>
+      </div>
+    </div>
+
+    <div class="q-card" id="q2" data-tags="marpol solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Dangerous cargo vs hazardous cargo — what is the difference?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-marpol">MARPOL</span>
+            <span class="q-tag tag-solas">SOLAS</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>Dangerous cargo is cargo classified under the IMDG Code's 9 hazard classes as posing an immediate physical/health risk; hazardous cargo is the broader category — including MARPOL Annex III marine pollutants and IMSBC "Materials Hazardous only in Bulk" (MHB) — that is not always classified as an IMDG dangerous good. Dangerous cargo is a subset of hazardous cargo.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>The IMDG Code classifies "dangerous goods" into 9 UN classes (Class 1 Explosives through Class 9 Miscellaneous), based on the UN Model Regulations (the "Orange Book") — this is the immediate physical/health-hazard definition. "Hazardous cargo" is broader: it includes substances hazardous to the marine environment under MARPOL Annex III (marine pollutants, some not IMDG-classified at all), and Materials Hazardous only in Bulk (MHB) under the IMSBC Code — cargoes with bulk-specific hazards (e.g. self-heating, oxygen depletion) that aren't packaged dangerous goods. So all IMDG dangerous goods are hazardous, but not all hazardous cargo is a classified dangerous good. Practical distinction: Class 3 flammable liquid in drums is both dangerous and hazardous; used oily rags are hazardous waste but not a dangerous good; a marine pollutant under Annex III may be hazardous to the environment without being IMDG-classified as dangerous to ship or crew.</div>
+        <div class="answer-body">
+          <h4>Dangerous Goods — IMDG Definition</h4>
+          <ul>
+            <li>The <strong>IMDG Code</strong> classifies dangerous goods into <strong>9 classes</strong>: Class 1 (Explosives), Class 2 (Gases), Class 3 (Flammable Liquids), Class 4 (Flammable Solids/spontaneously combustible/dangerous when wet), Class 5 (Oxidizing Substances/Organic Peroxides), Class 6 (Toxic/Infectious Substances), Class 7 (Radioactive Material), Class 8 (Corrosives), Class 9 (Miscellaneous Dangerous Substances, including marine pollutants).</li>
+            <li>Based on the UN Model Regulations ("<strong>Orange Book</strong>") classification system, universally applied across transport modes.</li>
+            <li>"Dangerous" implies an <strong>immediate physical or health hazard</strong> — fire, explosion, toxicity, corrosivity — during transport, handling, or stowage.</li>
+          </ul>
+
+          <h4>Hazardous Cargo — The Broader Category</h4>
+          <ul>
+            <li><strong>MARPOL Annex III marine pollutants:</strong> substances hazardous to the marine environment — not all Annex III marine pollutants are separately classified as IMDG dangerous goods; some are hazardous to the environment without posing an immediate physical/health hazard to ship or crew.</li>
+            <li><strong>IMSBC Code — Materials Hazardous only in Bulk (MHB):</strong> bulk cargoes with bulk-specific hazards (self-heating, oxygen depletion, liquefaction, corrosivity) that fall outside the IMDG classification system, which governs packaged goods.</li>
+            <li><strong>Hazardous waste:</strong> items such as used lubricating-oil rags are hazardous waste requiring specific disposal handling, but are not a "dangerous good" under IMDG classification.</li>
+          </ul>
+
+          <h4>The Set Relationship</h4>
+          <p>All <strong>dangerous goods</strong> (IMDG-classified) are <strong>hazardous</strong>, but not all <strong>hazardous cargo</strong> is a classified dangerous good — dangerous is the narrower, IMDG-specific subset; hazardous is the umbrella term covering environmental, bulk-specific, and waste-related risks the IMDG classification system does not fully capture.</p>
+
+          <h4>Worked Examples</h4>
+          <ul>
+            <li><strong>Both dangerous and hazardous:</strong> Class 3 flammable liquid in drums — IMDG-classified and hazardous to ship, crew, and environment.</li>
+            <li><strong>Hazardous but NOT dangerous (IMDG):</strong> used lubricating-oil rags — hazardous waste, not IMDG-classified dangerous goods.</li>
+            <li><strong>Both, from different angles:</strong> LNG or LPG carried in portable tanks — Class 2.1 (flammable gas) under IMDG AND potentially a marine pollutant/environmentally hazardous substance under Annex III.</li>
+          </ul>
+
+          <h4>CE Relevance — Documentation &amp; Verification</h4>
+          <p>The CE has a role in verifying cargo declarations align with the IMDG Certificate carried onboard, and understanding that undeclared or misdeclared dangerous goods (a leading cause of container-ship fires) is a documentation-integrity failure distinct from the routine handling of hazardous-but-not-dangerous materials such as garbage or waste oil.</p>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">IMDG Code</span><span class="reg-desc">9 classes of dangerous goods, based on UN Model Regulations</span></div>
+            <div class="reg-item"><span class="reg-code">MARPOL Annex III</span><span class="reg-desc">Prevention of pollution by harmful substances carried by sea in packaged form — marine pollutants</span></div>
+            <div class="reg-item"><span class="reg-code">IMSBC Code</span><span class="reg-desc">Materials Hazardous only in Bulk (MHB) classification for bulk cargoes</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch VII, Parts A &amp; A-1</span><span class="reg-desc">Carriage of dangerous goods in packaged form / solid bulk cargoes</span></div>
+            <div class="reg-item"><span class="reg-code">UN Model Regulations (Orange Book)</span><span class="reg-desc">Base classification system underpinning IMDG dangerous goods classes</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon asked this on a fail attempt where candidates conflated the terms — define both cleanly first, then explicitly state the relationship: "dangerous cargo is a subset of hazardous cargo." Give one example of each bucket: (1) dangerous — Class 3 flammable drums, (2) hazardous but not IMDG-dangerous — waste oil rags, (3) both — LNG in portable tanks (Class 2.1 + marine pollutant). Naming the set relationship explicitly is what separates a pass from a fail here.</div>
+        </div>
+
+        <details class="deep-dive">
+          <summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary>
+          <div class="deep-dive-body">
+            <h5>CE Relevance</h5>
+            <p>Undeclared or misdeclared dangerous goods in containers is a recognised major fire-risk driver on container ships; the CE's practical role is understanding documentation requirements (IMDG Certificate, Dangerous Goods Manifest) well enough to flag anomalies, even though cargo declaration itself sits with the shipper/terminal.</p>
+
+            <h5>Trap Questions</h5>
+            <p class="trap-q">Q: "Is a marine pollutant under MARPOL Annex III always a dangerous good under IMDG?"</p>
+            <p class="trap-a">A: No. Some Annex III marine pollutants are separately IMDG-classified (often under Class 9), but the two classification systems serve different purposes — environmental harm vs immediate physical/health hazard — and don't map 1:1.</p>
+
+            <h5>Common CE Failures</h5>
+            <p class="trap-a">1. Treating "dangerous" and "hazardous" as synonyms rather than stating the subset relationship.</p>
+            <p class="trap-a">2. Not being able to give a clean worked example of "hazardous but not dangerous."</p>
+
+            <h5>Numbers to Memorise</h5>
+            <p>IMDG — 9 classes · MARPOL Annex III — marine pollutants · IMSBC — MHB (bulk-specific hazards) · UN Orange Book — base classification system.</p>
+
+            <h5>Casualty Link</h5>
+            <p>Multiple major container-ship fires in recent years have been traced to undeclared or misdeclared dangerous goods — reinforcing why examiners test precise understanding of dangerous-goods classification and documentation, not just cargo-handling procedure.</p>
+
+            <h5>Examiner Chain</h5>
+            <p>Simon → dangerous vs hazardous → worked example → PSC checks for DG compliance → undeclared DG risk on container ships → IMDG Certificate for the ship.</p>
+
+            <h5>On My Vessel</h5>
+            <p>On a Maersk container ship, dangerous goods documentation review (container DG manifest cross-checked against the stowage plan) is a standard pre-departure check; as CE, awareness of misdeclaration risk is directly relevant to engine-room and accommodation fire-risk planning given DG containers are stowed per the ship's DG stowage plan with separation/segregation requirements.</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB8_D, Q2, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB8_D, Q2, Correction Required</span>
+        <span class="q-version">QB8_D · Q2 · v1.0</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="cheat-sheet">
+  <h2>⚡ QB8_D Quick-Revision Cheat Sheet</h2>
+  <p class="cs-sub">Last-minute recall block — IGC Code &amp; Dangerous vs Hazardous Cargo.</p>
+  <div class="cs-grid">
+    <div class="cs-block">
+      <h4>IGC Code — Key Facts</h4>
+      <ul>
+        <li>SOLAS Ch VII Part C, mandatory since <strong>1 July 1986</strong></li>
+        <li>Res. MSC.5(48)</li>
+        <li>Applies: any GT, vapour pressure &gt;2.8 bar abs @37.8°C</li>
+        <li>CoF: <strong>5 years</strong>, annual surveys</li>
+      </ul>
+    </div>
+    <div class="cs-block">
+      <h4>Ship Types (Hazard, High→Low)</h4>
+      <ol>
+        <li>Type 1G — maximum hazard</li>
+        <li>Type 2G — significant hazard</li>
+        <li>Type 2PG — ≤150m variant of 2G</li>
+        <li>Type 3G — moderate hazard</li>
+      </ol>
+    </div>
+    <div class="cs-block">
+      <h4>IGC vs IGF</h4>
+      <p>IGC = gas as <strong>cargo</strong>. IGF = gas as <strong>fuel</strong>. Both apply on an LNG-fuelled LNG carrier.</p>
+    </div>
+    <div class="cs-block">
+      <h4>Dangerous vs Hazardous</h4>
+      <p>Dangerous (IMDG, 9 classes) ⊂ Hazardous (also MARPOL Annex III marine pollutants + IMSBC MHB)</p>
+    </div>
+    <div class="cs-block">
+      <h4>Worked Examples</h4>
+      <ul>
+        <li>Both: Class 3 flammable drums</li>
+        <li>Hazardous only: waste oil rags</li>
+        <li>Both (different angles): LNG in portable tanks</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+  <p>Marine Intelligence Weekly · MEO Class 1 Question Bank · QB8_D — IGC Code &amp; Dangerous vs Hazardous Cargo</p>
+  <p>Compiled by Nixon Antony, Second Engineer, Maersk A/S · <a href="https://marineintelligenceweekly.com/meoclass1/">Back to MEO Class 1 Hub</a> · <a href="https://marineintelligenceweekly.com/">marineintelligenceweekly.com</a></p>
+  <p class="disclaimer">Disclaimer: This question bank is a private study aid compiled for MEO Class 1 oral examination preparation at the Kochi MMD. Regulatory references are provided in good faith and cross-checked against IMO, IACS, and classification society sources where possible, but candidates must independently verify current regulation numbers, thresholds, and amendment dates against the latest consolidated SOLAS/MARPOL editions, IACS Unified Requirements, and their flag/class circulars before relying on them in examination or operational contexts. To report a correction, email contactus@marineintelligenceweekly.com with the QB number, question number, and details.</p>
+</div>
+
+<script>
+// Toggle card open/close
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+
+// Filter by tag button
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+// Apply search + tag filters simultaneously
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+
+// TOC active highlight on scroll
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+
+</body>
+</html>

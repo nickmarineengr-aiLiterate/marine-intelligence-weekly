@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB4_F — ISM Code, ISPS, MLC 2006 &amp; STCW (Companion F) | MEO Class 1 | Marine Intelligence Weekly</title>
+<meta name="description" content="MEO Class 1 oral exam preparation — Form E, UR/UI, Watchkeeping Principles, ISM Takeover, Cyber Security, LRIT/AIS. Examiners: Simon, Senthil. Kochi MMD. Companion to QB4.">
+<meta name="robots" content="noindex, nofollow">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--navy-mid:#1e293b;
+  --orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;
+  --grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.6;}
+.topbar{background:var(--navy);color:#fff;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--teal);}
+.topbar-brand{display:flex;align-items:center;gap:10px;}
+.logo-mark{background:var(--teal);color:#fff;font-weight:800;font-size:13px;padding:3px 8px;border-radius:4px;letter-spacing:.5px;}
+.site-name{color:#fff;font-size:13px;font-weight:500;opacity:.85;}
+.topbar-right{display:flex;align-items:center;gap:16px;}
+.topbar-right a{color:rgba(255,255,255,.7);text-decoration:none;font-size:12px;transition:color .2s;}
+.topbar-right a:hover{color:var(--teal);}
+.page-header{background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 60%,#0f3460 100%);color:#fff;padding:40px 24px 32px;border-bottom:3px solid var(--teal);position:relative;overflow:hidden;}
+.page-header::after{content:'';position:absolute;right:-60px;top:-60px;width:280px;height:280px;border-radius:50%;background:rgba(13,148,136,.07);pointer-events:none;}
+.page-header-inner{max-width:1100px;margin:0 auto;position:relative;}
+.qb-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.15);border:1px solid rgba(13,148,136,.3);color:var(--teal);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;}
+.page-header h1{font-size:clamp(22px,4vw,34px);font-weight:800;line-height:1.2;margin-bottom:10px;}
+.page-header h1 span{color:var(--teal);}
+.header-sub{color:rgba(255,255,255,.7);font-size:14px;max-width:680px;line-height:1.65;margin-bottom:20px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;color:rgba(255,255,255,.55);}
+.header-meta strong{color:rgba(255,255,255,.85);}
+.controls-bar{background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 24px;position:sticky;top:45px;z-index:90;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.search-wrap{flex:1;min-width:180px;max-width:320px;position:relative;}
+.search-wrap input{width:100%;padding:7px 10px 7px 32px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px;background:var(--off-white);color:var(--ink);outline:none;}
+.search-wrap input:focus{border-color:var(--teal);box-shadow:0 0 0 2px rgba(13,148,136,.12);}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--grey-text);width:14px;height:14px;}
+.filter-row{display:flex;flex-wrap:wrap;gap:6px;}
+.filter-btn{padding:5px 12px;border:1px solid var(--grey-border);border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;background:#fff;color:var(--grey-text);transition:all .18s;letter-spacing:.3px;}
+.filter-btn:hover{border-color:var(--teal);color:var(--teal);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+.q-count-label{font-size:12px;color:var(--grey-text);white-space:nowrap;margin-left:auto;}
+.main-layout{max-width:1100px;margin:0 auto;padding:28px 16px 80px;display:grid;grid-template-columns:220px 1fr;gap:28px;align-items:start;}
+@media(max-width:700px){.main-layout{grid-template-columns:1fr;}.sidebar{display:none;}}
+.sidebar{position:sticky;top:100px;max-height:calc(100vh - 120px);overflow-y:auto;}
+.toc-label{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--grey-text);padding:0 0 8px;border-bottom:1px solid var(--grey-border);margin-bottom:10px;}
+.toc-link{display:block;font-size:12px;color:var(--grey-text);text-decoration:none;padding:5px 8px;border-radius:5px;margin-bottom:2px;transition:all .15s;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);font-weight:600;}
+.toc-section{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--grey-text);padding:10px 8px 4px;margin-top:4px;}
+.sidebar-note{margin-top:16px;padding:12px;background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;font-size:11px;color:#92400e;line-height:1.5;}
+.section-head{display:flex;align-items:center;justify-content:space-between;padding:14px 0 10px;border-bottom:2px solid var(--grey-border);margin-bottom:16px;margin-top:8px;}
+.section-head h2{font-size:14px;font-weight:700;color:var(--navy);letter-spacing:.3px;}
+.sec-count{font-size:11px;font-weight:600;background:var(--teal-light);color:var(--teal-dark);padding:2px 10px;border-radius:10px;}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:12px;margin-bottom:14px;overflow:hidden;transition:box-shadow .2s;}
+.q-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.07);}
+.q-card.open{box-shadow:0 4px 24px rgba(13,148,136,.12);border-color:rgba(13,148,136,.3);}
+.q-header{display:flex;align-items:flex-start;gap:12px;padding:16px 16px 14px;cursor:pointer;user-select:none;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{width:32px;height:32px;min-width:32px;background:var(--teal);color:#fff;border-radius:8px;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.q-card.open .q-num-badge{background:var(--teal-dark);}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-size:14px;font-weight:600;color:var(--navy);line-height:1.45;margin-bottom:6px;}
+.q-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.q-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.3px;}
+.tag-isps{background:#dbeafe;color:#1e40af;}
+.tag-iacs{background:#f3e8ff;color:#6b21a8;}
+.tag-stcw{background:#dcfce7;color:#166534;}
+.tag-ism{background:#e0e7ff;color:#3730a3;}
+.tag-solas{background:#fee2e2;color:#991b1b;}
+.q-chevron{width:18px;height:18px;min-width:18px;color:var(--grey-text);transition:transform .25s;margin-top:2px;}
+.q-card.open .q-chevron{transform:rotate(180deg);color:var(--teal);}
+.q-answer{display:none;padding:0 18px 18px;}
+.q-card.open .q-answer{display:block;}
+.answer-body{font-family:'Georgia',serif;font-size:14px;line-height:1.75;color:var(--ink);padding-top:4px;}
+.answer-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:16px 0 6px;}
+.answer-body p{margin-bottom:10px;}
+.answer-body ul,.answer-body ol{padding-left:20px;margin-bottom:10px;}
+.answer-body li{margin-bottom:5px;}
+.answer-body strong{font-weight:700;}
+.answer-body em{font-style:italic;color:var(--grey-text);}
+.formula{font-family:monospace;background:var(--grey-bg);border-radius:5px;padding:8px 12px;font-size:13px;margin:8px 0;display:block;overflow-x:auto;}
+.oral-box{border-radius:8px;padding:10px 14px;margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;line-height:1.6;}
+.oral-15{background:#ecfdf5;border:1px solid #6ee7b7;}
+.oral-60{background:#eff6ff;border:1px solid #93c5fd;}
+.oral-label{font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;display:block;}
+.oral-15 .oral-label{color:#047857;}
+.oral-60 .oral-label{color:#1d4ed8;}
+.trap-box{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13px;line-height:1.6;}
+.trap-box strong.trap-label{color:#b91c1c;font-size:10px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px;}
+.numbers-box{background:var(--grey-bg);border-left:3px solid var(--teal);border-radius:6px;padding:8px 14px;margin:8px 0;font-size:13px;}
+.numbers-box h4{margin:0 0 4px;}
+.casualty-box{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px 14px;margin:8px 0;font-size:13px;}
+.casualty-box strong.cas-label{color:#92400e;font-size:10px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px;}
+.related-q{font-size:12px;color:var(--grey-text);margin:8px 0;padding:8px 14px;border-top:1px dashed var(--grey-border);}
+.related-q a{color:var(--teal-dark);text-decoration:none;font-weight:600;}
+.related-q a:hover{text-decoration:underline;}
+.comp-table{width:100%;border-collapse:collapse;font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;margin:10px 0;}
+.comp-table th{background:var(--navy);color:#fff;padding:7px 10px;text-align:left;font-weight:600;}
+.comp-table td{padding:6px 10px;border-bottom:1px solid var(--grey-border);}
+.comp-table tr:nth-child(even) td{background:var(--grey-bg);}
+.reg-box{background:#141412;color:rgba(255,255,255,.85);border-radius:8px;padding:14px 16px;margin-top:16px;}
+.reg-box-title{font-family:'Segoe UI',system-ui,sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,255,255,.45);margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:7px;align-items:flex-start;min-width:0;}
+.reg-code{font-family:monospace;font-size:11px;color:#f97316;white-space:nowrap;min-width:0;flex-shrink:0;padding-top:1px;word-break:break-all;}
+.reg-desc{font-size:12px;color:rgba(255,255,255,.65);line-height:1.45;}
+.ce-tip{background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 6px 6px 0;padding:12px 14px;margin-top:12px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;color:#7c2d12;line-height:1.55;}
+.ce-tip strong{color:#9a3412;}
+.q-footer{padding:8px 18px 10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;border-top:1px solid var(--grey-border);background:var(--grey-bg);}
+.correction-link{font-size:11px;color:var(--grey-text);min-width:0;}
+.correction-link a{color:var(--teal);text-decoration:none;word-break:break-all;}
+.correction-link a:hover{text-decoration:underline;}
+.q-version{font-size:10px;color:var(--grey-text);white-space:nowrap;font-family:monospace;}
+#no-results{display:none;text-align:center;padding:48px 20px;color:var(--grey-text);}
+#no-results p{font-size:15px;margin-bottom:8px;}
+.page-footer{background:#141412;color:rgba(255,255,255,.6);padding:28px 24px;text-align:center;font-size:12px;line-height:1.9;}
+.page-footer a{color:var(--teal);text-decoration:none;}
+.page-footer strong{color:#fff;}
+</style>
+</head>
+<body>
+
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie)) window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+
+
+<nav class="topbar">
+  <div class="topbar-brand">
+    <span class="logo-mark">MIW</span>
+    <span class="site-name">Marine Intelligence Weekly</span>
+  </div>
+  <div class="topbar-right">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="qb-badge">Question Bank QB4_F · Companion · v1.0 · June 2026</div>
+    <h1>ISM Code, ISPS, MLC 2006 &amp; <span>STCW</span></h1>
+    <p class="header-sub">Companion file to QB4 — 6 questions from the 30 Jun 2026 WhatsApp batch (Q499–Q529). Form E, IACS UR/UI, watchkeeping principles, ISM takeover documentation, cyber security basics, and LRIT/AIS. Examiners: Simon, Senthil.</p>
+    <div class="header-meta">
+      <span><strong>6</strong> Questions</span>
+      <span><strong>Examiners:</strong> Simon · Senthil</span>
+      <span><strong>Compiled by:</strong> Nixon Antony, 2/E, Maersk A/S</span>
+      <span><strong>Companion to:</strong> QB4.html — own Q1–Q6 numbering</span>
+    </div>
+  </div>
+</header>
+
+<div class="controls-bar">
+  <div class="search-wrap">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search-input" placeholder="Search questions…" oninput="applyFilters()">
+  </div>
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
+    <button class="filter-btn" onclick="filterTag('isps',this)">ISPS</button>
+    <button class="filter-btn" onclick="filterTag('iacs',this)">IACS</button>
+    <button class="filter-btn" onclick="filterTag('stcw',this)">STCW</button>
+    <button class="filter-btn" onclick="filterTag('ism',this)">ISM</button>
+    <button class="filter-btn" onclick="filterTag('solas',this)">SOLAS</button>
+  </div>
+  <span class="q-count-label" id="q-count-label">Showing 6 of 6</span>
+</div>
+
+<div class="main-layout">
+
+  <aside class="sidebar">
+    <div class="toc-label">Contents</div>
+    <div class="toc-section">Statutory &amp; Class</div>
+    <a class="toc-link" href="#q1">1. Form E</a>
+    <a class="toc-link" href="#q2">2. IACS UR / UI</a>
+    <div class="toc-section">STCW &amp; ISM</div>
+    <a class="toc-link" href="#q3">3. Watchkeeping Principles</a>
+    <a class="toc-link" href="#q4">4. ISM Takeover Documents</a>
+    <div class="toc-section">Cyber &amp; Tracking</div>
+    <a class="toc-link" href="#q5">5. Cyber Security Basics</a>
+    <a class="toc-link" href="#q6">6. LRIT vs AIS</a>
+    <div class="sidebar-note">📌 Cross-ref: Q5 (Cyber Security basics) is the foundational version — QB4_E Q15 covers full regulatory depth. Q4 (ISM takeover) cross-refs QB5_E Q7 (general CE takeover checklist) — keep Q4 focused strictly on ISM/SMS documents.</div>
+  </aside>
+
+  <main id="q-feed">
+
+    <div class="section-head"><h2>📋 Statutory &amp; Class</h2><span class="sec-count">2 questions</span></div>
+
+    <div class="q-card" id="q1" data-tags="isps solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Form E — what is it and what does the examiner expect on this?</div>
+          <div class="q-tags"><span class="q-tag tag-isps">Certification</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <h4>Governing Instrument</h4>
+          <p>Form E is issued under the provisions of the <strong>International Convention for the Safety of Life at Sea (SOLAS), 1974, as amended</strong>, under the authority of the flag State government. It is the Record of Equipment permanently attached to the <strong>Cargo Ship Safety Equipment Certificate (SEC)</strong>.</p>
+          <h4>Key Requirements and Contents</h4>
+          <ul>
+            <li><strong>Ship details:</strong> name, IMO number, port of registry</li>
+            <li><strong>Life-Saving Appliances (LSA):</strong> total persons accommodated, lifeboats (number/capacity port &amp; stbd), free-fall lifeboats, motor lifeboats, rescue boats</li>
+            <li><strong>Personal LSA:</strong> lifebuoys, lifejackets, immersion suits, thermal protective aids</li>
+            <li><strong>Navigational systems:</strong> ECDIS, VDR/S-VDR, radar transponders, AIS</li>
+          </ul>
+          <h4>Chief Engineer's Practical Application</h4>
+          <p>While the Master traditionally holds the original certificate, the CE must maintain a copy for the Planned Maintenance System. When ordering replacement immersion suits, lifejackets, or updating the rescue boat's outboard motor, the CE must cross-reference Form E. If a liferaft is temporarily removed for servicing without immediate replacement, an exemption certificate or short-term SEC with an updated Form E provision must be issued by Class/Flag.</p>
+        </div>
+        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>Form E is the Record of Equipment permanently attached to the Cargo Ship Safety Equipment Certificate. It details the exact inventory and specifications of the ship's life-saving appliances (LSA) and navigational equipment as mandated by SOLAS.</div>
+        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Form E is a mandatory statutory document supplementing the Cargo Ship Safety Equipment Certificate for cargo ships of 500 GT and upwards. It explicitly records the number and capacity of lifeboats, rescue boats, liferafts, lifejackets, immersion suits, and essential navigational systems onboard. The examiner expects you to know Form E must perfectly match the actual physical equipment onboard. As CE, any modification — changing a lifeboat capacity or replacing a rescue boat engine — requires Class approval and an immediate update to Form E; failure to do so is a guaranteed PSC detainable deficiency.</div>
+        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>Q: You replace a 15-person liferaft with a 20-person liferaft — total capacity is still more than required. Do you need to update Form E? A: Yes. Form E must reflect the exact equipment installed onboard. Any discrepancy between the certificate and physical inventory is a PSC deficiency. Common failure: confusing Form E (Safety Equipment) with Form C (Safety Construction) or Form R (Safety Radio).</div>
+        <div class="numbers-box"><h4>Numbers to Memorise</h4>Governing reg: <strong>SOLAS Ch I, Reg 12</strong> (Issue of Certificates) · Form E validity: up to <strong>5 years</strong> (matches the SEC).</div>
+        <div class="casualty-box"><strong class="cas-label">⚓ Enforcement Link</strong>Numerous PSC detentions occur globally under LSA-related deficiency codes because a vessel upgraded equipment but failed to call Class to amend Form E.</div>
+        <div class="related-q">🔗 Related: <a href="#q4">Q4 ISM Takeover Documents</a></div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS 1974, Ch I, Reg 12</span><span class="reg-desc">Issue or endorsement of certificates</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS 1974, Ch III</span><span class="reg-desc">Life-saving appliances and arrangements</span></div>
+          <div class="reg-item"><span class="reg-code">IMO Res. A.1140(31)</span><span class="reg-desc">Survey Guidelines under the Harmonized System of Survey and Certification (HSSC)</span></div>
+          <div class="reg-item"><span class="reg-code">IACS UR Z1</span><span class="reg-desc">General provisions for statutory certification</span></div>
+        </div>
+        <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> State verbatim: "Form E is permanently attached to the Cargo Ship Safety Equipment Certificate and must reflect the exact physical reality onboard." The most common failure point is forgetting that Form E covers both LSA and navigational equipment.</div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB4_F, Q1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB4_F · Q1 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q2" data-tags="iacs">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">UR and UI — what do these acronyms stand for (Unified Requirements and Unified Interpretations)?</div>
+          <div class="q-tags"><span class="q-tag tag-iacs">IACS Framework</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <h4>Governing Principle</h4>
+          <p>The <strong>International Association of Classification Societies (IACS)</strong> — currently <strong>12 member societies</strong>, classing over 90% of world tonnage — develops both URs and UIs to eliminate substandard shipping and ensure a level playing field across societies and shipyards.</p>
+          <h4>Unified Requirements (UR)</h4>
+          <p>Technical resolutions on classification matters (hull strength, machinery, electrical installations). Once adopted, IACS members must integrate a UR into their own rules within a set implementation period. This is the <strong>baseline</strong> — a society can be stricter than a UR but never less strict.</p>
+          <h4>Unified Interpretations (UI)</h4>
+          <p>Deal with <strong>statutory</strong> requirements (IMO conventions), clarifying ambiguities where the text states "to the satisfaction of the Administration." <strong>Flag State rules always supersede IACS UIs</strong> — if a flag issues its own interpretation, the vessel follows the flag, not the IACS UI.</p>
+          <h4>Chief Engineer's Practical Application</h4>
+          <p>During machinery breakdowns, major repairs, or automation upgrades, Class surveyors evaluate the work against their society's rules, which are inherently based on IACS URs (e.g. UR M for machinery installations).</p>
+        </div>
+        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>UR stands for Unified Requirements — minimum technical rules adopted by IACS that member classification societies must incorporate into their own rules. UI stands for Unified Interpretations — common understandings of vague statutory IMO regulations to ensure uniform global application.</div>
+        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>IACS Unified Requirements establish the fundamental minimum technical standards for classification — for example UR M covers machinery installations. A society can make its rules stricter than a UR but never less strict. Unified Interpretations clarify ambiguities in IMO conventions like SOLAS or MARPOL. Unless a Flag State provides its own specific written interpretation, IACS UIs are applied by all Recognized Organizations acting on the flag's behalf — but the Flag State's own interpretation always takes precedence.</div>
+        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>Q: If a class society has a Unified Interpretation, but the Flag State disagrees, which do you follow? A: The Flag State always has ultimate authority — IACS UIs apply only in the absence of specific guidance from the Flag Administration. Common failure: mixing up the definitions — claiming URs apply to SOLAS and UIs apply to Class rules (it's the reverse: UR = Class/Technical; UI = IMO/Statutory/Legal).</div>
+        <div class="numbers-box"><h4>Numbers to Memorise</h4>IACS UR M (Machinery Installations) · IACS UR Z (Survey and Certification) · <strong>12 IACS Member Societies</strong> (as of 2026 — Russia's RMRS withdrawn Mar 2022, Türk Loydu admitted Nov 2023, restoring the count to 12).</div>
+        <div class="casualty-box"><strong class="cas-label">⚓ Casualty Link</strong>The sinking of several bulk carriers in the early 1990s led to strict Unified Requirements for longitudinal strength and water-ingress alarms (UR S series).</div>
+        <div class="related-q">🔗 Related: <a href="#q1">Q1 Form E</a></div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IMO Res. A.739(18)</span><span class="reg-desc">Guidelines for the Authorization of Organizations acting on behalf of the Administration</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS Ch I, Reg 2-1</span><span class="reg-desc">Requirements for authorization of Recognized Organizations</span></div>
+          <div class="reg-item"><span class="reg-code">IACS UR M</span><span class="reg-desc">Machinery installations — minimum technical standards</span></div>
+          <div class="reg-item"><span class="reg-code">IACS UR Z</span><span class="reg-desc">Survey and certification</span></div>
+        </div>
+        <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> State verbatim: "URs establish minimum technical standards for Class rules; UIs clarify statutory IMO requirements when flag states do not provide specific guidance." The failure point is hesitating on the Flag State's power to override a UI.</div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB4_F, Q2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB4_F · Q2 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head"><h2>🧭 STCW &amp; ISM</h2><span class="sec-count">2 questions</span></div>
+
+    <div class="q-card" id="q3" data-tags="stcw">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">3</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Principles of watchkeeping — explain.</div>
+          <div class="q-tags"><span class="q-tag tag-stcw">STCW</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <h4>Governing Instrument</h4>
+          <p><strong>STCW Convention 1978, as amended (Manila Amendments 2010), Chapter VIII (Watchkeeping)</strong>, specifically <strong>Section A-VIII/2, Part 4-2</strong>.</p>
+          <h4>Key Requirements — Watchkeeping Principles</h4>
+          <ul>
+            <li><strong>Watch arrangements:</strong> CE determines watch composition based on operational conditions (UMS vs manned, heavy weather, restricted visibility)</li>
+            <li><strong>Taking over the watch:</strong> relieving officers verify machinery status, logbook entries, and confirm no critical operations (e.g. fuel changeovers) are in a precarious stage</li>
+            <li><strong>Performing the watch:</strong> continuous monitoring, proper log entries, immediate action in emergencies</li>
+            <li><strong>Fitness for duty:</strong> no watchkeeper impaired by fatigue, alcohol, or drugs; minimum rest hours strictly enforced</li>
+            <li><strong>Environmental protection:</strong> the watchkeeper must be fully aware of MARPOL and prevent pollution during their watch</li>
+          </ul>
+          <h4>Chief Engineer's Practical Application</h4>
+          <p>The CE translates STCW requirements into reality through the "Chief Engineer's Standing Orders" and "Night Orders," ensuring the duty roster complies with the STCW minimum of <strong>10 hours rest in any 24-hour period</strong> and <strong>77 hours in any 7-day period</strong>.</p>
+        </div>
+        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>Under STCW Chapter VIII, the principles of watchkeeping require the Chief Engineer, in consultation with the Master, to ensure a safe and continuous engineering watch is maintained — safe operation of all machinery affecting ship safety, pollution prevention, and watchkeepers who are physically and mentally fit for duty.</div>
+        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>STCW Code Part 4-2 establishes the mandatory principles for an engineering watch. The CE must arrange watchkeeping that prevents fatigue and ensures environmental protection under MARPOL. Key principles: fitness for duty (strict rest hours), thorough familiarisation with machinery, explicit take-over procedures, and clear communication. For UMS, it dictates immediate response to alarms. The relieving engineer must never take over the watch if they believe the relieved officer is incapable of carrying out their duties.</div>
+        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>Q: During handover, a critical bilge high-level alarm sounds — who handles it? A: The relieved officer remains responsible for the watch until the situation is stabilised and handover is explicitly completed. Q: The relieving engineer smells of alcohol — your action? A: Refuse to hand over the watch, inform the CE immediately, do not leave the engine room. Common failure: forgetting "protection of the marine environment" as a core STCW watchkeeping principle.</div>
+        <div class="numbers-box"><h4>Numbers to Memorise</h4>Rest hours: minimum <strong>10 hours in any 24-hour period</strong> (splittable into two periods, one at least 6 hours) · minimum <strong>77 hours in any 7-day period</strong> · Manila 2010 amendments also introduced a maximum <strong>0.05% BAC</strong> alcohol limit for watchkeepers.</div>
+        <div class="casualty-box"><strong class="cas-label">⚓ Casualty Link</strong>Numerous groundings and collisions traced to fatigue or improper handover protocols drove the Manila 2010 amendments to enforce stricter rest-hour monitoring and mandatory alcohol limits.</div>
+        <div class="related-q">🔗 Related: <a href="#q4">Q4 ISM Takeover Documents</a></div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">STCW 1978 as amended, Ch VIII</span><span class="reg-desc">Watchkeeping</span></div>
+          <div class="reg-item"><span class="reg-code">STCW Code A-VIII/2, Part 4-2</span><span class="reg-desc">Principles to be observed in keeping an engineering watch</span></div>
+          <div class="reg-item"><span class="reg-code">STCW Code A-VIII/1</span><span class="reg-desc">Fitness for duty — rest hour requirements</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS Chapter V, Reg 14</span><span class="reg-desc">Ships' manning</span></div>
+        </div>
+        <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> State verbatim: "The relieving engineer must verify machinery status, logbooks, and never take over the watch if the relieving officer is incapacitated." Mentioning "protection of the marine environment" early in your answer shows maturity.</div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB4_F, Q3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB4_F · Q3 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q4" data-tags="ism">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">4</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Taking over as CE: what documents do you check in relation to ISM?</div>
+          <div class="q-tags"><span class="q-tag tag-ism">ISM Takeover</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <h4>Governing Principle</h4>
+          <p>The <strong>ISM Code (SOLAS Chapter IX)</strong> requires every vessel to operate under an approved Safety Management System (SMS). The CE acts as the key management representative for the technical department, making SMS-compliance verification upon takeover a legal and operational necessity.</p>
+          <h4>ISM Documentation Verification Checklist</h4>
+          <ul>
+            <li><strong>Statutory certificates:</strong> validate the SMC (original onboard) and DOC (copy onboard); check intermediate/renewal audit dates; ensure the DOC covers the vessel's ship type</li>
+            <li><strong>SMS manuals:</strong> check document control index — all engine room SMS manuals must be the latest revision</li>
+            <li><strong>Audits and non-conformities:</strong> review latest internal/external ISM audit reports; check status of open NCs, Observations, or CAPA plans</li>
+            <li><strong>Reporting systems:</strong> review Near-Miss reports, Defect Reports, and incident investigations specific to the engine room for the last 6 months</li>
+            <li><strong>Familiarisation records:</strong> ensure ISM familiarisation checklists (including emergency duties) for all engine crew are fully signed off</li>
+            <li><strong>Critical equipment list:</strong> verify SMS-designated "critical equipment" maintenance is current in the PMS with no overdue items</li>
+          </ul>
+          <h4>Chief Engineer's Practical Application</h4>
+          <p>If open, major non-conformities or overdue critical machinery are found without a dispensation from Class/Flag, do not accept the handover blindly — record deficiencies in the official handover report, inform the Master, and notify the company's <strong>Designated Person Ashore (DPA)</strong> before signing the takeover document.</p>
+        </div>
+        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>When taking over as Chief Engineer, I verify the validity of the ship's Safety Management Certificate (SMC) and the company's Document of Compliance (DOC) copy. Under the ISM Code, I confirm the SMS manuals match the current revision index and that mandatory records — master's review and defect reports — are up-to-date and closed out.</div>
+        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Taking over under the ISM framework requires ensuring the vessel holds a valid SMC and a DOC copy valid for the specific ship type. I review the SMS manuals to ensure the latest revisions, verify the status of non-conformities, corrective action reports, and the PMS defect list. I also check familiarisation checklists of newly joined engine room crew, ensuring completion prior to sailing, and verify the Chief Engineer's Standing Orders are actively acknowledged by the current engineering watchkeepers.</div>
+        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>Q: The DOC copy onboard expired a week ago, but the SMC is valid for another two years — can you sail? A: No. SMC validity is explicitly tied to DOC validity. If the DOC expires, the SMC is automatically invalidated and the vessel cannot legally sail. Common failure: mentioning the Oil Record Book or fuel soundings — these are MARPOL/operational checks, not ISM Code document checks. Keep the answer strictly focused on SMS, audits, NCs, and certificates.</div>
+        <div class="numbers-box"><h4>Numbers to Memorise</h4>SMC validity: <strong>5 years</strong> (at least one intermediate audit between the 2nd and 3rd anniversary) · DOC validity: <strong>5 years</strong> (subject to annual audits) · Governing reg: <strong>SOLAS Chapter IX</strong>.</div>
+        <div class="casualty-box"><strong class="cas-label">⚓ Casualty Link</strong>Following major tanker disasters, accident investigations revealed incoming CEs signed handover forms without verifying SMS defect-reporting logs, effectively inheriting hidden structural and machinery failures never reported to the DPA.</div>
+        <div class="related-q">🔗 Related: <a href="#q1">Q1 Form E</a> · <a href="#q3">Q3 Watchkeeping Principles</a></div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS Ch IX, Reg 3</span><span class="reg-desc">Safety management requirements</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code, Clause 13</span><span class="reg-desc">Certification and periodical verification</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code, Clause 9</span><span class="reg-desc">Reports and analysis of non-conformities, accidents and hazardous occurrences</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code, Clause 10</span><span class="reg-desc">Maintenance of the ship and equipment</span></div>
+        </div>
+        <div class="ce-tip"><strong>CE Oral Tip (Senthil):</strong> State verbatim: "I will verify the validity of the SMC and DOC, check the status of all open non-conformities and defect reports, and ensure all engine crew have completed their ISM familiarisation." The failure point is missing the check on "Critical Equipment" maintenance history.</div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB4_F, Q4, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB4_F · Q4 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-head"><h2>🖥 Cyber Security &amp; Tracking</h2><span class="sec-count">2 questions</span></div>
+
+    <div class="q-card" id="q5" data-tags="ism">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">5</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Cyber security — basic principles, cross questions.</div>
+          <div class="q-tags"><span class="q-tag tag-ism">Maritime Cyber Security</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <h4>Governing Principle</h4>
+          <p>Cyber security is enforced through the <strong>ISM Code (Paragraph 1.2.2)</strong>, guided by <strong>IMO Resolution MSC.428(98)</strong> and <strong>MSC-FAL.1/Circ.3</strong> (Guidelines on maritime cyber risk management). It addresses vulnerabilities in both <strong>IT</strong> (computers/networks) and <strong>OT</strong> (machinery control systems).</p>
+          <h4>Basic Principles — The 5-Step Framework</h4>
+          <ul>
+            <li><strong>Identify:</strong> define roles for cyber risk management; identify vulnerable systems (ECDIS, Main Engine Governor, Alarm Monitoring System)</li>
+            <li><strong>Protect:</strong> establish "air gaps" separating shipboard OT networks from internet-connected IT networks; strict password controls; ban unverified USB drives</li>
+            <li><strong>Detect:</strong> continuously monitor networks for unauthorized access or malware signatures</li>
+            <li><strong>Respond:</strong> execute the SMS cyber-incident response plan to isolate infected systems</li>
+            <li><strong>Recover:</strong> restore systems using secure, offline data backups</li>
+          </ul>
+          <h4>Chief Engineer's Practical Application</h4>
+          <p>Enforce strict "USB hygiene." When a service engineer boards to update main engine software or service boiler automation, ensure their laptops/USB drives are scanned on a standalone, dedicated scanning PC before connecting to the ship's OT network.</p>
+          <p><em>Note: this is the foundational version of this topic — see QB4_E Q15 for full regulatory depth on maritime cyber risk management. Keep this answer shorter and principle-focused.</em></p>
+        </div>
+        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>Under IMO Resolution MSC.428(98), maritime cyber risk management is a mandatory, integral part of the ship's Safety Management System under the ISM Code. The basic principles focus on identifying cyber risks to both IT and OT systems, protecting them, and having a response plan for cyber incidents.</div>
+        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Cyber security under the ISM Code is no longer optional. Resolution MSC.428(98) required companies to incorporate cyber risk management into their SMS by the first annual DOC verification after 1 January 2021. The basic principles follow a framework: Identify, Protect, Detect, Respond, Recover. For a Chief Engineer, protecting Operational Technology — main engine governors, AMS, power management systems — is the primary focus.</div>
+        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>A class surveyor hands you a USB drive with the latest Class rules to view on the Engine Control Room computer — what do you do? A: Do not plug it directly into the ECR computer, as it may be networked to the Alarm Monitoring System (OT). It must be scanned first on a designated IT-isolated machine per SMS protocols. Common failure: treating cyber security purely as an IT/deck problem — as CE, emphasise OT protection (Power Management System, Main Engine automation).</div>
+        <div class="numbers-box"><h4>Numbers to Memorise</h4>IMO Resolution <strong>MSC.428(98)</strong> · Effective date: first annual DOC verification/audit after <strong>1 January 2021</strong>.</div>
+        <div class="casualty-box"><strong class="cas-label">⚓ Casualty Link</strong>The 2017 NotPetya ransomware attack crippled Maersk's global IT infrastructure — while it primarily affected terminals and shore operations, it highlighted the devastating potential of malware spreading through maritime networks, accelerating IMO's cyber security mandates.</div>
+        <div class="related-q">🔗 Related: <a href="#q4">Q4 ISM Takeover Documents</a> · See QB4_E Q15 for full cyber security regulatory depth</div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">IMO Res. MSC.428(98)</span><span class="reg-desc">Maritime Cyber Risk Management in SMS</span></div>
+          <div class="reg-item"><span class="reg-code">MSC-FAL.1/Circ.3</span><span class="reg-desc">Guidelines on maritime cyber risk management</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code, Part A, Clause 1.2.2</span><span class="reg-desc">Safety and environmental protection objectives</span></div>
+          <div class="reg-item"><span class="reg-code">IACS UR E26 &amp; E27</span><span class="reg-desc">Cyber resilience of ships and onboard systems and equipment</span></div>
+        </div>
+        <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> State verbatim: "Cyber risk management is a mandatory part of the SMS under MSC.428(98); as CE, my priority is protecting Operational Technology from malware by strictly controlling USB and service engineer access." Emphasising "air gaps" will impress the examiner.</div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB4_F, Q5, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB4_F · Q5 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q6" data-tags="solas">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">6</div>
+        <div class="q-text-wrap">
+          <div class="q-text">LRIT and AIS — difference, purpose, and basic cross questions.</div>
+          <div class="q-tags"><span class="q-tag tag-solas">Ship Tracking</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <h4>Governing Instruments</h4>
+          <p><strong>AIS:</strong> SOLAS Chapter V, Regulation 19 (carriage requirements for shipborne navigational systems). <strong>LRIT:</strong> SOLAS Chapter V, Regulation 19-1 (Long-range identification and tracking of ships).</p>
+          <h4>Key Differences</h4>
+          <table class="comp-table">
+            <tr><th>Feature</th><th>AIS</th><th>LRIT</th></tr>
+            <tr><td>Primary purpose</td><td>Collision avoidance &amp; coastal monitoring</td><td>Maritime security &amp; SAR</td></tr>
+            <tr><td>Transmission</td><td>VHF radio (open broadcast)</td><td>Satellite (Inmarsat-C, secure)</td></tr>
+            <tr><td>Range</td><td>Short-range (~20–30 NM)</td><td>Global (except polar gaps)</td></tr>
+            <tr><td>Data recipient</td><td>Anyone with an AIS receiver</td><td>Authorized Flag/Port/Coastal States only</td></tr>
+            <tr><td>Update frequency</td><td>Continuous (seconds–minutes)</td><td>Default every 6 hours (pollable)</td></tr>
+            <tr><td>Data sent</td><td>Name, IMO, position, course, speed, cargo</td><td>Ship identity, lat/long, date/time only</td></tr>
+          </table>
+          <h4>Chief Engineer's Practical Application</h4>
+          <p>While navigation equipment falls under the Deck department, the CE is responsible for the power supply — including emergency power — to the GMDSS/Inmarsat-C equipment that LRIT utilises. During blackout scenarios, the UPS/battery backup for these systems must function flawlessly to maintain LRIT transmission.</p>
+        </div>
+        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>AIS is an open, short-range VHF-based system for collision avoidance and coastal tracking. LRIT is a secure, satellite-based system mandated by SOLAS Chapter V, Reg 19-1, designed for global tracking and maritime security, reporting only to authorised flag and coastal states.</div>
+        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Both are mandated under SOLAS Chapter V, but serve different primary purposes. AIS operates on VHF, broadcasting ship data openly to any vessel or shore station within 20–30 nautical miles, primarily for anti-collision and situational awareness — anyone with a receiver can see it. LRIT uses Inmarsat-C satellites to transmit data globally; its primary purpose is maritime security. LRIT data is encrypted, transmitting only the ship's identity, position, and timestamp directly to designated LRIT Data Centres accessible only by Flag, Port, and Coastal States, reported by default every 6 hours.</div>
+        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>Q: Can anyone track your ship using LRIT on websites like MarineTraffic? A: No — LRIT data is encrypted and strictly confidential, routed through National/Regional Data Centres; only authorised governments can access it. Websites use AIS data. Common failure: stating LRIT is governed by SOLAS Chapter XI-2 (Security) — while its purpose is security, the mandating regulation is SOLAS Chapter V, Reg 19-1.</div>
+        <div class="numbers-box"><h4>Numbers to Memorise</h4>SOLAS V/Reg 19 (AIS) · SOLAS V/Reg 19-1 (LRIT) · LRIT default reporting interval: <strong>6 hours</strong> · LRIT applicability: cargo ships <strong>300 GT and upwards</strong>.</div>
+        <div class="casualty-box"><strong class="cas-label">⚓ Context Link</strong>LRIT implementation was accelerated post-9/11 to let governments track vessels approaching their coastlines from thousands of miles away, before the ship came within AIS/VHF range.</div>
+        <div class="related-q">🔗 Related: <a href="#q5">Q5 Cyber Security Basics</a></div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS Ch V, Reg 19</span><span class="reg-desc">AIS carriage requirement</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS Ch V, Reg 19-1</span><span class="reg-desc">Long-range identification and tracking of ships</span></div>
+          <div class="reg-item"><span class="reg-code">IMO Res. MSC.263(84)</span><span class="reg-desc">Revised performance standards and functional requirements for LRIT</span></div>
+          <div class="reg-item"><span class="reg-code">IMO Res. A.1106(29)</span><span class="reg-desc">Revised guidelines for onboard operational use of AIS</span></div>
+        </div>
+        <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> State verbatim: "AIS is a public VHF system for collision avoidance, while LRIT is a secure satellite system for maritime security reporting only to authorised governments." Emphasise LRIT defaults to 6-hour reports and cannot be tracked by the general public.</div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB4_F, Q6, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB4_F · Q6 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+</div>
+
+<div id="no-results"><p>No questions match your search.</p></div>
+
+<footer class="page-footer">
+  <p><strong>Marine Intelligence Weekly</strong> — MEO Class 1 Question Bank, Companion QB4_F</p>
+  <p>Compiled by Nixon Antony, 2/E, Maersk A/S · For Kochi MMD oral exam preparation only</p>
+  <p>Found an error? Email <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a> — Subject: QB4_F, QN, Correction Required</p>
+  <p>SOURCE CONFIDENCE: Core regulatory citations verified (SOLAS V/19 &amp; 19-1, MSC.428(98), STCW A-VIII/2). IACS membership corrected to 12 (current as of Jul 2026). Verify company-specific SMS wording and current Form E format against your vessel's documentation before oral. Cheat sheet issued separately.</p>
+</footer>
+
+<script>
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>

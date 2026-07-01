@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>QB5_D — Management, Leadership &amp; Human Element | MIW MEO Class 1 Question Bank</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+<style>
+:root{
+  --teal:#0d9488;
+  --teal-dark:#0f766e;
+  --teal-light:#ccfbf1;
+  --navy:#0f172a;
+  --orange:#f97316;
+  --orange-light:#fff7ed;
+  --off-white:#f8fafc;
+  --grey-text:#64748b;
+  --grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;
+  --ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI', system-ui, sans-serif;
+  background:var(--off-white);
+  color:var(--ink);
+  line-height:1.5;
+}
+a{color:var(--teal-dark);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* TOPBAR */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:var(--navy);
+  color:#fff;
+  display:flex;align-items:center;gap:12px;
+  padding:10px 20px;
+  font-size:14px;
+}
+.topbar .logo-mark{
+  width:30px;height:30px;border-radius:6px;
+  background:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:#fff;
+  flex-shrink:0;
+}
+.topbar .site-name{font-weight:600;letter-spacing:0.3px;flex-shrink:0;}
+.topbar nav{margin-left:auto;display:flex;gap:18px;}
+.topbar nav a{color:#cbd5e1;font-size:13px;}
+.topbar nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{
+  background:var(--navy);
+  color:#fff;
+  padding:28px 20px 22px;
+}
+.page-header .qb-badge{
+  display:inline-block;
+  background:var(--teal);
+  color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;
+  padding:4px 10px;border-radius:4px;
+  margin-bottom:10px;
+}
+.page-header h1{
+  font-size:24px;font-weight:700;margin-bottom:6px;
+}
+.page-header .sub-desc{
+  color:#cbd5e1;font-size:14px;max-width:760px;
+}
+.header-meta{
+  display:flex;gap:18px;flex-wrap:wrap;
+  margin-top:14px;font-size:12px;color:#94a3b8;
+}
+.header-meta strong{color:#e2e8f0;}
+
+/* CONTROLS BAR */
+.controls-bar{
+  position:sticky;top:48px;z-index:90;
+  background:#fff;
+  border-bottom:1px solid var(--grey-border);
+  padding:12px 20px;
+  display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;
+}
+#search-input{
+  flex:1 1 220px;max-width:340px;
+  padding:8px 12px;
+  border:1px solid var(--grey-border);
+  border-radius:6px;font-size:13px;
+}
+#search-input:focus{outline:none;border-color:var(--teal);}
+.filter-btn{
+  background:var(--grey-bg);
+  border:1px solid var(--grey-border);
+  color:var(--grey-text);
+  font-size:12px;font-weight:600;
+  padding:6px 12px;border-radius:20px;
+  cursor:pointer;transition:all .15s;
+}
+.filter-btn:hover{background:var(--teal-light);color:var(--teal-dark);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{
+  margin-left:auto;font-size:12px;color:var(--grey-text);font-weight:600;
+}
+
+/* MAIN LAYOUT */
+.main-layout{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:24px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:24px 20px 60px;
+}
+@media (max-width:800px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+}
+
+/* SIDEBAR */
+.sidebar{
+  position:sticky;top:110px;
+  align-self:start;
+  max-height:calc(100vh - 130px);
+  overflow-y:auto;
+  font-size:13px;
+}
+.sidebar h3{
+  font-size:11px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--grey-text);margin-bottom:10px;
+}
+.toc-link{
+  display:block;padding:6px 10px;border-radius:5px;
+  color:var(--ink);font-size:13px;
+  border-left:2px solid transparent;
+  transition:all .15s;
+}
+.toc-link:hover{background:var(--teal-light);text-decoration:none;}
+.toc-link.active{
+  background:var(--teal-light);
+  border-left:2px solid var(--teal);
+  color:var(--teal-dark);font-weight:600;
+}
+.sidebar .divider{
+  border-top:1px solid var(--grey-border);
+  margin:14px 0;
+}
+.sidebar .upcoming-note{
+  background:var(--grey-bg);
+  border-radius:6px;padding:10px;
+  font-size:12px;color:var(--grey-text);
+}
+
+/* SECTION HEAD */
+.section-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin:28px 0 12px;
+}
+.section-head:first-child{margin-top:0;}
+.section-head h2{font-size:16px;font-weight:700;color:var(--ink);}
+.sec-count{
+  font-size:11px;font-weight:700;color:var(--teal-dark);
+  background:var(--teal-light);padding:2px 8px;border-radius:10px;
+}
+
+/* Q CARD */
+.q-card{
+  background:#fff;
+  border:1px solid var(--grey-border);
+  border-radius:8px;
+  margin-bottom:10px;
+  overflow:hidden;
+}
+.q-header{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{
+  flex-shrink:0;
+  width:28px;height:28px;border-radius:6px;
+  background:var(--teal);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.q-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.q-tag{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;
+  padding:2px 8px;border-radius:10px;
+  background:var(--grey-bg);color:var(--grey-text);
+}
+.q-tag.tag-solas{background:#e0f2fe;color:#0369a1;}
+.q-tag.tag-marpol{background:#fef3c7;color:#92400e;}
+.q-tag.tag-iacs{background:#ede9fe;color:#5b21b6;}
+.q-tag.tag-survey{background:var(--teal-light);color:var(--teal-dark);}
+.q-tag.tag-stability{background:#fce7f3;color:#9d174d;}
+.q-tag.tag-machinery{background:#dbeafe;color:#1e40af;}
+.q-tag.tag-ghg{background:#dcfce7;color:#166534;}
+.q-tag.tag-stcw{background:#ffe4e6;color:#9f1239;}
+.q-chevron{
+  flex-shrink:0;width:20px;height:20px;
+  stroke:var(--grey-text);transition:transform .2s;
+}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+
+/* ANSWER PANEL */
+.q-answer{
+  display:none;
+  padding:0 16px 16px;
+  border-top:1px solid var(--grey-border);
+}
+.q-card.open .q-answer{display:block;padding-top:14px;}
+.answer-body{font-family:'Georgia',serif;font-size:14px;color:var(--ink);}
+.answer-body h4{
+  font-size:12px;text-transform:uppercase;letter-spacing:0.8px;
+  color:var(--teal-dark);font-family:'Segoe UI',system-ui,sans-serif;
+  font-weight:700;margin:16px 0 6px;
+}
+.answer-body h4:first-child{margin-top:0;}
+.answer-body p{margin-bottom:10px;}
+.answer-body ul, .answer-body ol{margin:0 0 10px 22px;}
+.answer-body li{margin-bottom:5px;}
+.answer-body strong{color:var(--ink);font-weight:700;}
+.answer-body em{color:var(--grey-text);}
+.formula{
+  font-family:monospace;background:var(--grey-bg);
+  padding:10px 12px;border-radius:6px;margin:10px 0;font-size:13.5px;
+}
+
+/* PRACTICE BLOCKS (15s/60s) */
+.practice-block{
+  background:var(--teal-light);
+  border-left:3px solid var(--teal);
+  border-radius:0 6px 6px 0;
+  padding:10px 14px;margin-bottom:10px;
+  font-family:'Georgia',serif;font-size:13.5px;color:var(--ink);
+}
+.practice-block .pb-label{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--teal-dark);margin-bottom:4px;display:block;
+}
+
+/* REG BOX */
+.reg-box{
+  background:var(--navy);
+  border-radius:8px;padding:14px 16px;margin:14px 0;
+  font-family:'Segoe UI',system-ui,sans-serif;
+}
+.reg-box-title{
+  color:#fff;font-size:12px;font-weight:700;margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:0.8px;
+}
+.reg-item{
+  display:flex;gap:12px;flex-wrap:wrap;
+  padding:5px 0;border-bottom:1px solid #1e293b;
+  font-size:12.5px;
+}
+.reg-item:last-child{border-bottom:none;}
+.reg-code{
+  color:var(--orange);font-family:monospace;font-weight:700;
+  flex:0 0 auto;min-width:0;word-break:break-all;
+}
+.reg-desc{color:#cbd5e1;flex:1;min-width:0;word-break:break-word;}
+
+/* CE TIP */
+.ce-tip{
+  background:var(--orange-light);
+  border-left:3px solid var(--orange);
+  border-radius:0 6px 6px 0;
+  padding:12px 14px;margin:14px 0;
+  font-size:13.5px;color:#7c2d12;
+}
+.ce-tip strong{color:var(--orange);}
+
+/* EXTRA BLOCKS (collapsible deep-dive sections) */
+.deep-dive{
+  margin-top:14px;border:1px solid var(--grey-border);border-radius:8px;
+  overflow:hidden;
+}
+.deep-dive summary{
+  cursor:pointer;padding:10px 14px;
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:12.5px;font-weight:700;color:var(--teal-dark);
+  background:var(--grey-bg);
+  list-style:none;display:flex;align-items:center;gap:8px;
+}
+.deep-dive summary::-webkit-details-marker{display:none;}
+.deep-dive summary::before{content:"▸";font-size:11px;}
+.deep-dive[open] summary::before{content:"▾";}
+.deep-dive-body{padding:12px 14px;font-size:13.5px;}
+.deep-dive-body h5{
+  font-size:11px;text-transform:uppercase;letter-spacing:0.6px;
+  color:var(--grey-text);margin:10px 0 4px;font-family:'Segoe UI',system-ui,sans-serif;
+}
+.deep-dive-body h5:first-child{margin-top:0;}
+.deep-dive-body p{margin-bottom:8px;}
+.deep-dive-body .trap-q{font-weight:700;color:var(--ink);}
+.deep-dive-body .trap-a{color:var(--grey-text);margin-bottom:8px;}
+
+/* FOOTER (per card) */
+.q-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+  padding:10px 16px;
+  background:var(--grey-bg);
+  font-size:11.5px;color:var(--grey-text);
+  border-top:1px solid var(--grey-border);
+}
+.correction-link{min-width:0;word-break:break-all;}
+.correction-link a{word-break:break-all;}
+.q-version{flex-shrink:0;font-weight:600;}
+
+/* NO RESULTS */
+#no-results{
+  display:none;text-align:center;padding:60px 20px;color:var(--grey-text);
+}
+
+/* PAGE FOOTER */
+.page-footer{
+  background:var(--navy);color:#cbd5e1;
+  padding:30px 20px;font-size:12.5px;
+  text-align:center;
+}
+.page-footer a{color:var(--teal-light);}
+.page-footer .disclaimer{
+  max-width:700px;margin:12px auto 0;color:#94a3b8;font-size:11.5px;
+}
+
+/* CHEAT SHEET */
+.cheat-sheet{background:var(--navy);border-radius:10px;padding:20px 22px;margin:26px 0 10px;}
+.cheat-sheet h2{color:#fff;font-size:16px;margin-bottom:4px;}
+.cheat-sheet .cs-sub{color:#94a3b8;font-size:12.5px;margin-bottom:14px;}
+.cs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;}
+.cs-block{background:#1e293b;border-radius:8px;padding:12px 14px;}
+.cs-block h4{color:var(--orange);font-size:11px;text-transform:uppercase;letter-spacing:0.6px;margin-bottom:6px;}
+.cs-block p, .cs-block li{color:#cbd5e1;font-size:12.5px;line-height:1.5;}
+.cs-block ul{margin-left:16px;}
+.cs-block strong{color:#fff;}
+
+body{user-select:none;-webkit-user-select:none;-moz-user-select:none;}
+.miw-watermark{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  pointer-events:none;z-index:9999;overflow:hidden;
+}
+.miw-watermark span{
+  position:absolute;white-space:nowrap;color:rgba(15,23,42,0.045);
+  font-size:13px;font-weight:700;transform:rotate(-30deg);
+  font-family:'Segoe UI',sans-serif;
+}
+</style>
+</head>
+<body>
+<div class="miw-watermark"><span style="top:0%;left:0%;">QB5_D · marineintelligenceweekly.com</span><span style="top:0%;left:28%;">QB5_D · marineintelligenceweekly.com</span><span style="top:0%;left:56%;">QB5_D · marineintelligenceweekly.com</span><span style="top:0%;left:84%;">QB5_D · marineintelligenceweekly.com</span><span style="top:11%;left:-11%;">QB5_D · marineintelligenceweekly.com</span><span style="top:11%;left:17%;">QB5_D · marineintelligenceweekly.com</span><span style="top:11%;left:45%;">QB5_D · marineintelligenceweekly.com</span><span style="top:11%;left:73%;">QB5_D · marineintelligenceweekly.com</span><span style="top:22%;left:0%;">QB5_D · marineintelligenceweekly.com</span><span style="top:22%;left:28%;">QB5_D · marineintelligenceweekly.com</span><span style="top:22%;left:56%;">QB5_D · marineintelligenceweekly.com</span><span style="top:22%;left:84%;">QB5_D · marineintelligenceweekly.com</span><span style="top:33%;left:-11%;">QB5_D · marineintelligenceweekly.com</span><span style="top:33%;left:17%;">QB5_D · marineintelligenceweekly.com</span><span style="top:33%;left:45%;">QB5_D · marineintelligenceweekly.com</span><span style="top:33%;left:73%;">QB5_D · marineintelligenceweekly.com</span><span style="top:44%;left:0%;">QB5_D · marineintelligenceweekly.com</span><span style="top:44%;left:28%;">QB5_D · marineintelligenceweekly.com</span><span style="top:44%;left:56%;">QB5_D · marineintelligenceweekly.com</span><span style="top:44%;left:84%;">QB5_D · marineintelligenceweekly.com</span><span style="top:55%;left:-11%;">QB5_D · marineintelligenceweekly.com</span><span style="top:55%;left:17%;">QB5_D · marineintelligenceweekly.com</span><span style="top:55%;left:45%;">QB5_D · marineintelligenceweekly.com</span><span style="top:55%;left:73%;">QB5_D · marineintelligenceweekly.com</span><span style="top:66%;left:0%;">QB5_D · marineintelligenceweekly.com</span><span style="top:66%;left:28%;">QB5_D · marineintelligenceweekly.com</span><span style="top:66%;left:56%;">QB5_D · marineintelligenceweekly.com</span><span style="top:66%;left:84%;">QB5_D · marineintelligenceweekly.com</span><span style="top:77%;left:-11%;">QB5_D · marineintelligenceweekly.com</span><span style="top:77%;left:17%;">QB5_D · marineintelligenceweekly.com</span><span style="top:77%;left:45%;">QB5_D · marineintelligenceweekly.com</span><span style="top:77%;left:73%;">QB5_D · marineintelligenceweekly.com</span><span style="top:88%;left:0%;">QB5_D · marineintelligenceweekly.com</span><span style="top:88%;left:28%;">QB5_D · marineintelligenceweekly.com</span><span style="top:88%;left:56%;">QB5_D · marineintelligenceweekly.com</span><span style="top:88%;left:84%;">QB5_D · marineintelligenceweekly.com</span><span style="top:99%;left:-11%;">QB5_D · marineintelligenceweekly.com</span><span style="top:99%;left:17%;">QB5_D · marineintelligenceweekly.com</span><span style="top:99%;left:45%;">QB5_D · marineintelligenceweekly.com</span><span style="top:99%;left:73%;">QB5_D · marineintelligenceweekly.com</span></div>
+<script>
+(function(){
+  function getCookie(name){
+    const v = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return v ? v.pop() : '';
+  }
+  if(getCookie('miw_auth') !== '1'){
+    window.location.href = 'https://marineintelligenceweekly.com/SQ/pay.html';
+  }
+})();
+</script>
+
+
+<div class="topbar">
+  <div class="logo-mark">MIW</div>
+  <div class="site-name">Marine Intelligence Weekly</div>
+  <nav>
+    <a href="https://marineintelligenceweekly.com/">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/contact.html">Contact</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <span class="qb-badge">QB5_D · MEO Class 1 Question Bank · Companion File</span>
+  <h1>Management, Leadership &amp; Human Element</h1>
+  <p class="sub-desc">2 oral-exam questions from the 25 June 2026 Kochi MMD session — CE leadership qualities and women's empowerment at sea. Companion file, own Q1–Q2 numbering, own TOC.</p>
+  <div class="header-meta">
+    <span><strong>Compiled by:</strong> Nixon Antony, 2/E, Maersk A/S</span>
+    <span><strong>Examiner referenced:</strong> Nair (External)</span>
+    <span><strong>Version:</strong> v1.0 · 30 June 2026</span>
+  </div>
+</div>
+
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all', this)">All</button>
+  <button class="filter-btn" onclick="filterTag('stcw', this)">STCW</button>
+  <button class="filter-btn" onclick="filterTag('mlc', this)">MLC</button>
+  <button class="filter-btn" onclick="filterTag('ism', this)">ISM</button>
+  <span id="q-count-label">Showing 2 of 2</span>
+</div>
+
+<div class="main-layout">
+  <div class="sidebar">
+    <h3>Contents</h3>
+    <a class="toc-link" href="#q1">Q1. Is the CE a Leader?</a>
+    <a class="toc-link" href="#q2">Q2. Women Empowerment at Sea</a>
+    <div class="divider"></div>
+    <div class="upcoming-note">
+      Companion file: <strong>QB5_D</strong>. See also <strong>QB5</strong> series for Main Engine / Management questions.
+    </div>
+  </div>
+
+  <div id="q-feed">
+
+    <div class="section-head">
+      <h2>📋 Leadership &amp; Welfare</h2>
+      <span class="sec-count">2 questions</span>
+    </div>
+
+    <div class="q-card" id="q1" data-tags="stcw ism mlc">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Is the Chief Engineer a leader? Explain — what specific leadership qualities must a CE demonstrate?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-stcw">STCW</span>
+            <span class="q-tag tag-ism">ISM</span>
+            <span class="q-tag tag-mlc">MLC</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>Yes — the CE is both a technical leader and a people leader. Under STCW Table A-III/2, "use of leadership and managerial skills" is a mandatory management-level competency, not an optional trait, exercised through decision-making under pressure, delegation, accountability, and mentoring.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>The CE is a leader in two dimensions: technical (engineering standards, safe machinery operation, decisions under pressure — engine failure, flooding, blackout) and people (crew motivation, mentoring juniors, fatigue management, conflict resolution across a multicultural crew). This isn't a soft-skills afterthought — STCW Table A-III/2 lists "use of leadership and managerial skills" and "use of decision-making techniques" as mandatory management-level competencies for Chief Engineer certification, added through the Manila 2010 STCW amendments. Specific expected qualities: decision-making under pressure, upward/downward communication, delegation with appropriate supervision, accountability for engine-room performance, mentoring of juniors, safety leadership (ISM near-miss culture), resource management (Engine-room Resource Management principles), and resilience. The distinction from "manager": a manager plans and controls; a leader inspires and influences. The CE must be both.</div>
+        <div class="answer-body">
+          <h4>The CE as Technical Leader</h4>
+          <ul>
+            <li>Sets and enforces engineering standards, safe machinery operating practice, and maintenance discipline (PMS).</li>
+            <li>Makes technical decisions under time pressure — main engine failure, flooding, blackout recovery — where a wrong call has safety consequences.</li>
+            <li>Owns engine-room performance as a whole, not just individual watchkeeping duties.</li>
+          </ul>
+
+          <h4>The CE as People Leader</h4>
+          <ul>
+            <li>Crew motivation and morale, particularly during long voyages and difficult conditions.</li>
+            <li>Mentoring junior engineers — structured on-the-job training, not incidental supervision.</li>
+            <li>Fatigue management — enforcing MLC rest-hour compliance, not just recording it.</li>
+            <li>Conflict resolution and cultural sensitivity across a multicultural crew, common on Maersk container tonnage.</li>
+          </ul>
+
+          <h4>Specific Leadership Qualities Examiners Expect Named</h4>
+          <ol>
+            <li><strong>Decision-making under pressure</strong> — engine failure, flooding, emergency scenarios.</li>
+            <li><strong>Communication</strong> — upward to Master/company, downward to crew, clear and unambiguous.</li>
+            <li><strong>Delegation and trust</strong> — assigning tasks with appropriate supervision, not micromanaging or abdicating.</li>
+            <li><strong>Accountability</strong> — owning engine-room performance and outcomes, including failures.</li>
+            <li><strong>Mentoring</strong> — actively developing junior engineers' competency, not just their task completion.</li>
+            <li><strong>Safety leadership</strong> — driving ISM safety culture and genuine near-miss reporting, not punitive suppression of reports.</li>
+            <li><strong>Resource management</strong> — Engine-room Resource Management (ERM) principles: situational awareness, workload distribution, error-trapping.</li>
+            <li><strong>Resilience and calm under pressure</strong> — setting the emotional tone of the engine room during a casualty or emergency.</li>
+          </ol>
+
+          <h4>STCW Basis for Leadership as a Mandatory Competency</h4>
+          <p>STCW Table A-III/2 (management-level engineer officers, Chief Engineer/Second Engineer certification) lists "<strong>use of leadership and managerial skills</strong>" and "<strong>use of decision-making techniques</strong>" as mandatory competencies, with knowledge, understanding and proficiency requirements including team-building, conflict resolution, and situational awareness. These were strengthened by the <strong>2010 Manila Amendments</strong> to STCW, which formally elevated leadership, teamwork, and bridge/engine-room resource management from implicit expectation to examinable competency.</p>
+
+          <h4>Leader vs Manager — the Distinction Examiners Probe</h4>
+          <p>A <strong>manager</strong> plans, organises, and controls resources against a plan. A <strong>leader</strong> inspires, influences, and sets direction, particularly when the plan breaks down. The Chief Engineer must be both — a CE who is only a manager cannot hold a crew together during a genuine emergency; a CE who is only a leader without management discipline cannot run a compliant, well-maintained engine room day to day.</p>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">STCW Table A-III/2</span><span class="reg-desc">Mandatory minimum competency for Chief Engineer — leadership and managerial skills, decision-making techniques</span></div>
+            <div class="reg-item"><span class="reg-code">STCW 2010 Manila Amendments</span><span class="reg-desc">Formally added leadership, teamwork and resource management as mandatory competency areas</span></div>
+            <div class="reg-item"><span class="reg-code">ISM Code Section 6</span><span class="reg-desc">Resources and personnel — company/Master/CE responsibility for competent, supported crew</span></div>
+            <div class="reg-item"><span class="reg-code">ISM Code Section 7 &amp; 9</span><span class="reg-desc">Shipboard operations and reporting of non-conformities/near-misses — safety leadership function</span></div>
+            <div class="reg-item"><span class="reg-code">MLC 2006, Title 2 &amp; 3</span><span class="reg-desc">Hours of rest, accommodation and welfare — CE's leadership duty to enforce, not merely record</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Nair wants specific points, not "a CE must be a good communicator." Say: "Sir, specifically — the CE must demonstrate: (1) decision-making under pressure, which STCW Table A-III/2 lists as a mandatory management-level competency, (2) accountability for ISM implementation in the engine room, (3) active mentoring of juniors, (4) fatigue management per MLC, and (5) maintaining a genuine near-miss reporting culture under ISM." Naming STCW Table A-III/2 by name is the marker examiners are listening for.</div>
+        </div>
+
+        <details class="deep-dive">
+          <summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary>
+          <div class="deep-dive-body">
+            <h5>CE Relevance</h5>
+            <p>Leadership is examinable, not decorative — appraisal systems (including Maersk's own performance frameworks) increasingly assess leadership behaviours alongside technical competence for promotion to Chief Engineer. A CE who cannot articulate leadership qualities specifically is, in the examiner's eyes, unlikely to actually practise them.</p>
+
+            <h5>Trap Questions</h5>
+            <p class="trap-q">Q: "If the CE is a leader, does that mean the Master is subordinate to you on technical matters?"</p>
+            <p class="trap-a">A: No. The Master retains overall command and authority under SOLAS/ISM; the CE's leadership authority is functional and technical within the engine department, exercised in support of, not in competition with, the Master's overriding authority.</p>
+            <p class="trap-q">Q: "You mentioned mentoring — give a concrete example on your ship."</p>
+            <p class="trap-a">A: Structured familiarisation for 4th/3rd engineers on critical machinery, supervised watch handovers, and deliberately walking a junior through a fault-finding sequence rather than fixing it for them.</p>
+
+            <h5>Common CE Failures</h5>
+            <p class="trap-a">1. Giving a generic textbook answer ("good communicator, team player") without linking to a specific STCW competency table.</p>
+            <p class="trap-a">2. Failing to distinguish leader vs manager when the examiner probes further.</p>
+
+            <h5>Numbers to Memorise</h5>
+            <p>STCW Table A-III/2 — leadership and managerial skills, decision-making techniques · Manila 2010 Amendments · ISM Code Sections 6, 7, 9 · MLC 2006 Title 2 (employment) &amp; Title 3 (accommodation, welfare, rest hours).</p>
+
+            <h5>Casualty Link</h5>
+            <p>Post-incident investigations of engine-room casualties frequently cite breakdowns in communication and delegation — not technical ignorance alone — as contributing causes, reinforcing why leadership is treated as a safety-critical competency rather than a soft skill.</p>
+
+            <h5>Examiner Chain</h5>
+            <p>Nair → CE as leader → specific qualities → how do you handle a conflict with the Master → fatigue and leadership → MLC rest hours.</p>
+
+            <h5>On My Vessel</h5>
+            <p>On a Maersk container vessel with a genuinely multicultural crew, practical leadership means deliberate communication clarity (see Q2), structured mentoring rotations for junior engineers, and visible, consistent enforcement of PMS and safety procedures rather than selective enforcement — which is what actually earns crew trust.</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB5_D, Q1, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB5_D, Q1, Correction Required</span>
+        <span class="q-version">QB5_D · Q1 · v1.0</span>
+      </div>
+    </div>
+
+    <div class="q-card" id="q2" data-tags="mlc stcw ism">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Women's empowerment at sea — what IMO and flag State provisions exist, and what is the CE's responsibility?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-mlc">MLC</span>
+            <span class="q-tag tag-stcw">STCW</span>
+            <span class="q-tag tag-ism">ISM</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>IMO's Women in Maritime programme (initiated 1988) and Assembly Resolution A.1147(31) on achieving a barrier-free working environment for women drive IMO's gender-equality framework; STCW/MLC apply equally regardless of gender; the CE's practical duty is enforcing equal accommodation standards, maintaining a harassment-free environment, and acting as a role model.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>Women make up roughly 1–2% of the global seafarer workforce (BIMCO/ICS data), and IMO has run a dedicated gender programme since 1988 to address this. Key instruments: Assembly Resolution A.1147(31), "Preserving the Legacy of the World Maritime Theme for 2019 and Achieving a Barrier-Free Working Environment for Women in the Maritime Sector," adopted at the 31st Assembly (2019); the network of Women in Maritime Associations (WIMAs) across eight regions; and 18 May as the annual International Day for Women in Maritime, marked since 2022. STCW and MLC apply without gender distinction — no separate certification or lower welfare standard exists. MLC 2006 Regulation 3.1 requires equal accommodation and recreational facility standards; Title 5 compliance/enforcement applies to all seafarers alike. The CE's specific duties: ensure accommodation standards are met, maintain a harassment-free working environment, know the reporting mechanism for complaints, treat harassment as an ISM non-conformity, and act as a visible role model in a still male-dominated engine room.</div>
+        <div class="answer-body">
+          <h4>IMO Framework for Gender Equality</h4>
+          <ul>
+            <li><strong>IMO Women in Maritime programme</strong> — initiated <strong>1988</strong>; supports gender-specific fellowships, training access, and career-development pathways for women in maritime administrations, ports, and training institutes.</li>
+            <li><strong>Assembly Resolution A.1147(31)</strong> — "Preserving the Legacy of the World Maritime Theme for 2019 and Achieving a Barrier-Free Working Environment for Women in the Maritime Sector," adopted at the 31st IMO Assembly (2019) — urges governments, administrations, and industry to work toward a barrier-free environment for women's full, safe participation.</li>
+            <li><strong>Women in Maritime Associations (WIMAs)</strong> — eight IMO-facilitated regional networks (Africa, Arab States, Asia, Caribbean, Latin America, Pacific) supporting women's participation and visibility.</li>
+            <li><strong>International Day for Women in Maritime</strong> — <strong>18 May</strong> annually, observed since 2022.</li>
+            <li>Aligned with UN Sustainable Development Goal 5 (gender equality).</li>
+          </ul>
+
+          <h4>STCW and MLC Provisions</h4>
+          <ul>
+            <li><strong>STCW</strong>: certification, competency standards, and training requirements apply identically regardless of gender — no separate or reduced standard exists for women seafarers.</li>
+            <li><strong>MLC 2006, Regulation 3.1</strong>: accommodation and recreational facility standards apply equally; where female crew are carried, separate sanitary/sleeping arrangements are a practical accommodation requirement, not a lower welfare bar.</li>
+            <li><strong>MLC 2006, Title 5</strong>: compliance and enforcement (flag State inspection, complaint-handling procedures onboard) applies to all seafarers without distinction.</li>
+          </ul>
+
+          <h4>Flag State &amp; Company Obligations</h4>
+          <ul>
+            <li>Flag State maritime labour legislation implementing MLC obligations applies equally.</li>
+            <li>Company-level equal-opportunity and anti-harassment policies, forming part of the ISM Safety Management System, are the practical mechanism most CEs will actually encounter.</li>
+            <li>Industry bodies (BIMCO, ICS, ITF) have issued joint guidance on preventing harassment and bullying at sea.</li>
+          </ul>
+
+          <h4>CE's Specific Responsibilities</h4>
+          <ul>
+            <li>Ensure accommodation standards for any female crew are met per MLC Reg 3.1 and the company SMS.</li>
+            <li>Maintain a harassment-free working environment in the engine department — set the tone, don't just tolerate the absence of complaints.</li>
+            <li>Know and communicate the onboard reporting mechanism for harassment/discrimination complaints.</li>
+            <li>Treat a substantiated harassment incident as an ISM non-conformity requiring documented corrective action, Master notification, and DPA/flag involvement per the SMS procedure — not an informal, undocumented matter.</li>
+            <li>Act as a visible role model, particularly given women still represent a small minority of the seafaring workforce.</li>
+          </ul>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">IMO Assembly Res. A.1147(31)</span><span class="reg-desc">Barrier-free working environment for women in the maritime sector (2019)</span></div>
+            <div class="reg-item"><span class="reg-code">MLC 2006, Regulation 3.1</span><span class="reg-desc">Accommodation and recreational facilities — equal standards for all seafarers</span></div>
+            <div class="reg-item"><span class="reg-code">MLC 2006, Title 5</span><span class="reg-desc">Compliance and enforcement — flag State inspection, complaint procedures</span></div>
+            <div class="reg-item"><span class="reg-code">STCW Convention, general application</span><span class="reg-desc">Non-discriminatory certification and competency standards</span></div>
+            <div class="reg-item"><span class="reg-code">ISM Code Sections 6 &amp; 9</span><span class="reg-desc">Resources/personnel and reporting of non-conformities — basis for treating harassment as an SMS matter</span></div>
+          </div>
+
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Nair is testing awareness of IMO's gender programme, not personal opinion. Open with the programme's 1988 origin and name Resolution A.1147(31) and the barrier-free-environment theme. Then state the CE's three practical duties: (1) enforce equal accommodation standards per MLC Reg 3.1, (2) maintain a formal harassment reporting mechanism, (3) act as role model. If the question pivots to a complaint scenario, answer cleanly: document it as an ISM matter, notify the Master, and ensure the DPA/flag State is informed per SMS procedure.</div>
+        </div>
+
+        <details class="deep-dive">
+          <summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary>
+          <div class="deep-dive-body">
+            <h5>CE Relevance</h5>
+            <p>Container fleets with global crewing pools increasingly carry mixed-gender crew; the CE, as head of the largest department onboard, sets the practical working culture in the engine room more than any policy document does.</p>
+
+            <h5>Trap Questions</h5>
+            <p class="trap-q">Q: "What if a female seafarer raises a complaint against the Chief Officer — what is the CE's role?"</p>
+            <p class="trap-a">A: Not to investigate personally or take sides informally — direct the complaint to the correct channel (Master/DPA per the SMS harassment/complaint procedure), support the complainant, maintain confidentiality, and ensure the matter is logged and followed up, even though the Chief Officer sits outside the CE's own department.</p>
+
+            <h5>Common CE Failures</h5>
+            <p class="trap-a">1. Vague answers without naming any specific IMO resolution or programme.</p>
+            <p class="trap-a">2. Treating the question as purely an HR matter rather than a CE/ISM responsibility.</p>
+
+            <h5>Numbers to Memorise</h5>
+            <p>IMO Women in Maritime programme — since 1988 · Resolution A.1147(31) — adopted at 31st Assembly, 2019 · International Day for Women in Maritime — 18 May, since 2022 · women ≈1–2% of global seafarer workforce (BIMCO/ICS estimate) · MLC Regulation 3.1.</p>
+
+            <h5>Casualty Link</h5>
+            <p>No direct casualty link; the relevant "incident" category is documented harassment/bullying cases at sea, which is why industry bodies (BIMCO, ICS, ITF) treat prevention as a safety-culture and retention issue, not solely an HR one.</p>
+
+            <h5>Examiner Chain</h5>
+            <p>Nair → women's empowerment → IMO programme/resolution → what if a complaint arises onboard → CE's action → ISM reporting route.</p>
+
+            <h5>On My Vessel</h5>
+            <p>Maersk's stated diversity and inclusion commitments apply fleet-wide; in practice this means the company SMS carries a harassment reporting procedure the CE should be able to point to by name, and accommodation planning for mixed-gender crew is handled at crewing stage before sign-on.</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB5_D, Q2, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB5_D, Q2, Correction Required</span>
+        <span class="q-version">QB5_D · Q2 · v1.0</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="cheat-sheet">
+  <h2>⚡ QB5_D Quick-Revision Cheat Sheet</h2>
+  <p class="cs-sub">Last-minute recall block — Leadership &amp; Human Element.</p>
+  <div class="cs-grid">
+    <div class="cs-block">
+      <h4>Leadership — 8 Specific Points</h4>
+      <ul>
+        <li>Decision-making under pressure</li>
+        <li>Communication (up &amp; down)</li>
+        <li>Delegation with supervision</li>
+        <li>Accountability</li>
+        <li>Mentoring juniors</li>
+        <li>Safety leadership (ISM/near-miss)</li>
+        <li>ERM principles</li>
+        <li>Resilience under pressure</li>
+      </ul>
+    </div>
+    <div class="cs-block">
+      <h4>STCW Basis</h4>
+      <p>Table A-III/2 — "use of leadership and managerial skills" + "decision-making techniques" — mandatory, added via 2010 Manila Amendments.</p>
+    </div>
+    <div class="cs-block">
+      <h4>Leader vs Manager</h4>
+      <p>Manager = plans &amp; controls. Leader = inspires &amp; influences. CE must be both.</p>
+    </div>
+    <div class="cs-block">
+      <h4>Women in Maritime — Key Facts</h4>
+      <ul>
+        <li>IMO gender programme since <strong>1988</strong></li>
+        <li>Res. <strong>A.1147(31)</strong> — barrier-free environment (2019)</li>
+        <li>International Day: <strong>18 May</strong></li>
+        <li>MLC Reg <strong>3.1</strong> — equal accommodation standards</li>
+      </ul>
+    </div>
+    <div class="cs-block">
+      <h4>CE's 3 Duties on Gender</h4>
+      <ol>
+        <li>Equal accommodation (MLC 3.1)</li>
+        <li>Harassment reporting mechanism</li>
+        <li>Role model behaviour</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+  <p>Marine Intelligence Weekly · MEO Class 1 Question Bank · QB5_D — Management, Leadership &amp; Human Element</p>
+  <p>Compiled by Nixon Antony, Second Engineer, Maersk A/S · <a href="https://marineintelligenceweekly.com/meoclass1/">Back to MEO Class 1 Hub</a> · <a href="https://marineintelligenceweekly.com/">marineintelligenceweekly.com</a></p>
+  <p class="disclaimer">Disclaimer: This question bank is a private study aid compiled for MEO Class 1 oral examination preparation at the Kochi MMD. Regulatory references are provided in good faith and cross-checked against IMO, IACS, and classification society sources where possible, but candidates must independently verify current regulation numbers, thresholds, and amendment dates against the latest consolidated SOLAS/MARPOL editions, IACS Unified Requirements, and their flag/class circulars before relying on them in examination or operational contexts. To report a correction, email contactus@marineintelligenceweekly.com with the QB number, question number, and details.</p>
+</div>
+
+<script>
+// Toggle card open/close
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+
+// Filter by tag button
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+// Apply search + tag filters simultaneously
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+
+// TOC active highlight on scroll
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+
+</body>
+</html>

@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>QB8_C — Cargo Operations — Containers, CSC &amp; CIC — Companion C | MIW MEO Class 1 Question Bank</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+<style>
+:root{
+  --teal:#0d9488;
+  --teal-dark:#0f766e;
+  --teal-light:#ccfbf1;
+  --navy:#0f172a;
+  --orange:#f97316;
+  --orange-light:#fff7ed;
+  --off-white:#f8fafc;
+  --grey-text:#64748b;
+  --grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;
+  --ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI', system-ui, sans-serif;
+  background:var(--off-white);
+  color:var(--ink);
+  line-height:1.5;
+}
+a{color:var(--teal-dark);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* TOPBAR */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:var(--navy);
+  color:#fff;
+  display:flex;align-items:center;gap:12px;
+  padding:10px 20px;
+  font-size:14px;
+}
+.topbar .logo-mark{
+  width:30px;height:30px;border-radius:6px;
+  background:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:#fff;
+  flex-shrink:0;
+}
+.topbar .site-name{font-weight:600;letter-spacing:0.3px;flex-shrink:0;}
+.topbar nav{margin-left:auto;display:flex;gap:18px;}
+.topbar nav a{color:#cbd5e1;font-size:13px;}
+.topbar nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{
+  background:var(--navy);
+  color:#fff;
+  padding:28px 20px 22px;
+}
+.page-header .qb-badge{
+  display:inline-block;
+  background:var(--teal);
+  color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;
+  padding:4px 10px;border-radius:4px;
+  margin-bottom:10px;
+}
+.page-header h1{
+  font-size:24px;font-weight:700;margin-bottom:6px;
+}
+.page-header .sub-desc{
+  color:#cbd5e1;font-size:14px;max-width:760px;
+}
+.header-meta{
+  display:flex;gap:18px;flex-wrap:wrap;
+  margin-top:14px;font-size:12px;color:#94a3b8;
+}
+.header-meta strong{color:#e2e8f0;}
+
+/* CONTROLS BAR */
+.controls-bar{
+  position:sticky;top:48px;z-index:90;
+  background:#fff;
+  border-bottom:1px solid var(--grey-border);
+  padding:12px 20px;
+  display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;
+}
+#search-input{
+  flex:1 1 220px;max-width:340px;
+  padding:8px 12px;
+  border:1px solid var(--grey-border);
+  border-radius:6px;font-size:13px;
+}
+#search-input:focus{outline:none;border-color:var(--teal);}
+.filter-btn{
+  background:var(--grey-bg);
+  border:1px solid var(--grey-border);
+  color:var(--grey-text);
+  font-size:12px;font-weight:600;
+  padding:6px 12px;border-radius:20px;
+  cursor:pointer;transition:all .15s;
+}
+.filter-btn:hover{background:var(--teal-light);color:var(--teal-dark);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{
+  margin-left:auto;font-size:12px;color:var(--grey-text);font-weight:600;
+}
+
+/* MAIN LAYOUT */
+.main-layout{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:24px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:24px 20px 60px;
+}
+@media (max-width:800px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+}
+
+/* SIDEBAR */
+.sidebar{
+  position:sticky;top:110px;
+  align-self:start;
+  max-height:calc(100vh - 130px);
+  overflow-y:auto;
+  font-size:13px;
+}
+.sidebar h3{
+  font-size:11px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--grey-text);margin-bottom:10px;
+}
+.toc-link{
+  display:block;padding:6px 10px;border-radius:5px;
+  color:var(--ink);font-size:13px;
+  border-left:2px solid transparent;
+  transition:all .15s;
+}
+.toc-link:hover{background:var(--teal-light);text-decoration:none;}
+.toc-link.active{
+  background:var(--teal-light);
+  border-left:2px solid var(--teal);
+  color:var(--teal-dark);font-weight:600;
+}
+.sidebar .divider{
+  border-top:1px solid var(--grey-border);
+  margin:14px 0;
+}
+.sidebar .upcoming-note{
+  background:var(--grey-bg);
+  border-radius:6px;padding:10px;
+  font-size:12px;color:var(--grey-text);
+}
+
+/* SECTION HEAD */
+.section-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin:28px 0 12px;
+}
+.section-head:first-child{margin-top:0;}
+.section-head h2{font-size:16px;font-weight:700;color:var(--ink);}
+.sec-count{
+  font-size:11px;font-weight:700;color:var(--teal-dark);
+  background:var(--teal-light);padding:2px 8px;border-radius:10px;
+}
+
+/* Q CARD */
+.q-card{
+  background:#fff;
+  border:1px solid var(--grey-border);
+  border-radius:8px;
+  margin-bottom:10px;
+  overflow:hidden;
+}
+.q-header{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{
+  flex-shrink:0;
+  width:28px;height:28px;border-radius:6px;
+  background:var(--teal);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.q-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.q-tag{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;
+  padding:2px 8px;border-radius:10px;
+  background:var(--grey-bg);color:var(--grey-text);
+}
+.q-tag.tag-solas{background:#e0f2fe;color:#0369a1;}
+.q-tag.tag-marpol{background:#fef3c7;color:#92400e;}
+.q-tag.tag-iacs{background:#ede9fe;color:#5b21b6;}
+.q-tag.tag-survey{background:var(--teal-light);color:var(--teal-dark);}
+.q-tag.tag-stability{background:#fce7f3;color:#9d174d;}
+.q-tag.tag-machinery{background:#dbeafe;color:#1e40af;}
+.q-tag.tag-ghg{background:#dcfce7;color:#166534;}
+.q-tag.tag-stcw{background:#ffe4e6;color:#9f1239;}
+.q-chevron{
+  flex-shrink:0;width:20px;height:20px;
+  stroke:var(--grey-text);transition:transform .2s;
+}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+
+/* ANSWER PANEL */
+.q-answer{
+  display:none;
+  padding:0 16px 16px;
+  border-top:1px solid var(--grey-border);
+}
+.q-card.open .q-answer{display:block;padding-top:14px;}
+.answer-body{font-family:'Georgia',serif;font-size:14px;color:var(--ink);}
+.answer-body h4{
+  font-size:12px;text-transform:uppercase;letter-spacing:0.8px;
+  color:var(--teal-dark);font-family:'Segoe UI',system-ui,sans-serif;
+  font-weight:700;margin:16px 0 6px;
+}
+.answer-body h4:first-child{margin-top:0;}
+.answer-body p{margin-bottom:10px;}
+.answer-body ul, .answer-body ol{margin:0 0 10px 22px;}
+.answer-body li{margin-bottom:5px;}
+.answer-body strong{color:var(--ink);font-weight:700;}
+.answer-body em{color:var(--grey-text);}
+.formula{
+  font-family:monospace;background:var(--grey-bg);
+  padding:10px 12px;border-radius:6px;margin:10px 0;font-size:13.5px;
+}
+
+/* PRACTICE BLOCKS (15s/60s) */
+.practice-block{
+  background:var(--teal-light);
+  border-left:3px solid var(--teal);
+  border-radius:0 6px 6px 0;
+  padding:10px 14px;margin-bottom:10px;
+  font-family:'Georgia',serif;font-size:13.5px;color:var(--ink);
+}
+.practice-block .pb-label{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--teal-dark);margin-bottom:4px;display:block;
+}
+
+/* REG BOX */
+.reg-box{
+  background:var(--navy);
+  border-radius:8px;padding:14px 16px;margin:14px 0;
+  font-family:'Segoe UI',system-ui,sans-serif;
+}
+.reg-box-title{
+  color:#fff;font-size:12px;font-weight:700;margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:0.8px;
+}
+.reg-item{
+  display:flex;gap:12px;flex-wrap:wrap;
+  padding:5px 0;border-bottom:1px solid #1e293b;
+  font-size:12.5px;
+}
+.reg-item:last-child{border-bottom:none;}
+.reg-code{
+  color:var(--orange);font-family:monospace;font-weight:700;
+  flex:0 0 auto;min-width:0;word-break:break-all;
+}
+.reg-desc{color:#cbd5e1;flex:1;min-width:0;word-break:break-word;}
+
+/* CE TIP */
+.ce-tip{
+  background:var(--orange-light);
+  border-left:3px solid var(--orange);
+  border-radius:0 6px 6px 0;
+  padding:12px 14px;margin:14px 0;
+  font-size:13.5px;color:#7c2d12;
+}
+.ce-tip strong{color:var(--orange);}
+
+/* EXTRA BLOCKS (collapsible deep-dive sections) */
+.deep-dive{
+  margin-top:14px;border:1px solid var(--grey-border);border-radius:8px;
+  overflow:hidden;
+}
+.deep-dive summary{
+  cursor:pointer;padding:10px 14px;
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:12.5px;font-weight:700;color:var(--teal-dark);
+  background:var(--grey-bg);
+  list-style:none;display:flex;align-items:center;gap:8px;
+}
+.deep-dive summary::-webkit-details-marker{display:none;}
+.deep-dive summary::before{content:"▸";font-size:11px;}
+.deep-dive[open] summary::before{content:"▾";}
+.deep-dive-body{padding:12px 14px;font-size:13.5px;}
+.deep-dive-body h5{
+  font-size:11px;text-transform:uppercase;letter-spacing:0.6px;
+  color:var(--grey-text);margin:10px 0 4px;font-family:'Segoe UI',system-ui,sans-serif;
+}
+.deep-dive-body h5:first-child{margin-top:0;}
+.deep-dive-body p{margin-bottom:8px;}
+.deep-dive-body .trap-q{font-weight:700;color:var(--ink);}
+.deep-dive-body .trap-a{color:var(--grey-text);margin-bottom:8px;}
+
+/* FOOTER (per card) */
+.q-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+  padding:10px 16px;
+  background:var(--grey-bg);
+  font-size:11.5px;color:var(--grey-text);
+  border-top:1px solid var(--grey-border);
+}
+.correction-link{min-width:0;word-break:break-all;}
+.correction-link a{word-break:break-all;}
+.q-version{flex-shrink:0;font-weight:600;}
+
+/* NO RESULTS */
+#no-results{
+  display:none;text-align:center;padding:60px 20px;color:var(--grey-text);
+}
+
+/* PAGE FOOTER */
+.page-footer{
+  background:var(--navy);color:#cbd5e1;
+  padding:30px 20px;font-size:12.5px;
+  text-align:center;
+}
+.page-footer a{color:var(--teal-light);}
+.page-footer .disclaimer{
+  max-width:700px;margin:12px auto 0;color:#94a3b8;font-size:11.5px;
+}
+
+body{-webkit-user-select:none;-moz-user-select:none;user-select:none;}
+.mi-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.05;background-repeat:repeat;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Ctext x='0' y='100' font-size='20' fill='%230f172a' transform='rotate(-30 200 100)'%3EMarine Intelligence Weekly%3C/text%3E%3C/svg%3E");}
+</style>
+</head>
+<body>
+<div class="mi-watermark"></div>
+
+<script>
+document.addEventListener('contextmenu', function(e){e.preventDefault();});
+document.addEventListener('copy', function(e){e.preventDefault();});
+document.addEventListener('selectstart', function(e){e.preventDefault();});
+</script>
+<script>
+(function(){
+  function getCookie(name){
+    var m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return m ? m.pop() : '';
+  }
+  if (getCookie('miw_auth') !== '1') {
+    window.location.href = '/SQ/pay.html';
+  }
+})();
+</script>
+
+
+<div class="topbar">
+  <div class="logo-mark">MIW</div>
+  <div class="site-name">Marine Intelligence Weekly</div>
+  <nav>
+    <a href="https://marineintelligenceweekly.com/">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/contact.html">Contact</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <span class="qb-badge">QB8_C · MEO Class 1 Question Bank</span>
+  <h1>Cargo Operations — Containers, CSC &amp; CIC — Companion C</h1>
+  <p class="sub-desc">4 questions on the Convention for Safe Containers (CSC 1972): purpose/applicability, testing/examination schemes, structural test types, and the two forms of CIC (Cargo Integrity Check vs PSC Concentrated Inspection Campaign). Examiner: Srivastava. Companion file — standalone Q1–Q4 numbering. Includes embedded cheat sheet. Note: source draft had a duplicate Q4 (CIC) block — the more complete version was kept, the near-duplicate was dropped.</p>
+  <div class="header-meta">
+    <span><strong>Compiled by:</strong> Nixon Antony, 2/E, Maersk A/S</span>
+    <span><strong>Examiners referenced:</strong> Srivastava</span>
+    <span><strong>Version:</strong> v1.0 · June 2026</span>
+  </div>
+</div>
+
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all', this)">All</button>
+  <button class="filter-btn" onclick="filterTag('solas', this)">SOLAS</button>
+  <button class="filter-btn" onclick="filterTag('iacs', this)">IACS / Class</button>
+  <button class="filter-btn" onclick="filterTag('ism', this)">ISM</button>
+  <span id="q-count-label">Showing {N} of {N}</span>
+</div>
+
+<div class="main-layout">
+  <div class="sidebar">
+    <h3>Contents</h3>
+    <a class="toc-link" href="#q1">Q1. What is CSC (Convention for Safe Containers)?</a>
+    <a class="toc-link" href="#q2">Q2. Various testing schemes for containers under </a>
+    <a class="toc-link" href="#q3">Q3. Container tests — what structural and operati</a>
+    <a class="toc-link" href="#q4">Q4. CIC (Consolidated Inspection Campaign / Cargo</a>
+    <div class="divider"></div>
+    <div class="upcoming-note">Companion file — own Q1…Qn numbering. Part of the MIW MEO Class 1 QB8_C series.</div>
+  </div>
+
+  <div id="q-feed">
+<div class="section-head"><h2>📋 Quick-Reference Cheat Sheet</h2><span class="sec-count">4 questions</span></div>
+<div class="q-card open" style="cursor:default;">
+<div class="q-answer" style="display:block;padding:16px 18px;">
+<div class="answer-body">
+<h4>QB8_C Cheat Sheet — CSC / Container Testing / CIC</h4>
+<table class="comp-table">
+<tr><th>Q</th><th>Core Fact</th><th>Key Reg</th></tr>
+<tr><td>Q1 CSC</td><td>1972 IMO/ILO convention for container design, testing, mandatory inspection. SAP plate mandatory; PES (5yr then 30 months) or ACEP (continuous, operator-certified).</td><td>CSC 1972 Annex I/II; SOLAS VI Reg 5-1; MSC.1/Circ.1425</td></tr>
+<tr><td>Q2 Testing schemes</td><td>PES = calendar-driven periodic physical inspection; ACEP = continuous data-driven checks during depot turnarounds, needs flag-state-approved operator certification.</td><td>CSC 1972 Annex I</td></tr>
+<tr><td>Q3 Container tests</td><td>8 structural/operational tests: stacking, lifting, floor strength, racking, end wall, side wall, roof strength, weathertightness.</td><td>CSC 1972 Annex II</td></tr>
+<tr><td>Q4 CIC</td><td>Two distinct CICs: (1) industry Cargo Integrity Check (CINS/TT Club) for misdeclared DG; (2) PSC Concentrated Inspection Campaign (Tokyo/Paris MOU), ~3-month annual regional drive.</td><td>IMDG Code 5.4; SOLAS VI Reg 2; CTU Code</td></tr>
+</table>
+</div></div></div>
+
+<div class="section-head"><h2>📦 Cargo Operations — Containers, CSC &amp; CIC — Companion C</h2><span class="sec-count">4 questions</span></div>
+    <div class="q-card" id="q1" data-tags="solas iacs">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What is CSC (Convention for Safe Containers)? Purpose and applicability.</div>
+          <div class="q-tags"><span class="q-tag tag-solas">SOLAS</span><span class="q-tag tag-iacs">IACS</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        
+        
+        <div class="answer-body">
+<h4>Convention Background</h4>
+<p>The International Convention for Safe Containers was adopted on 2 December 1972 during a joint conference held by the United Nations and the Inter-Governmental Maritime Consultative Organization (now the IMO) in conjunction with the ILO. It officially entered into force on 6 September 1977. The convention has been regularly updated via amendments—most notably in 1981, 1983 (introducing ACEP), and 2012 (harmonizing physical testing parameters and adding strict safety regulations for container modifications). It explicitly applies to all ISO-dimensioned series 1 freight containers used in international multimodal transport.</p>
+<h4>Purpose</h4>
+<p>The CSC convention acts as a dual-purpose legal and safety instrument:</p>
+<ul><li><strong>Safety of Human Life:</strong> To maintain the highest level of safety for transport, handling, and stacking personnel across all modes of transport (maritime, rail, and road).</li><li><strong>Facilitation of Multimodal Transport:</strong> To avoid a patchwork of conflicting national safety regulations by providing uniform international testing and certification standards, ensuring containers flow seamlessly across global supply chains.</li><li><strong>Structural Structural Resilience:</strong> To ensure that units can withstand the dynamic acceleration forces experienced during sea transits (pitching, rolling, pounding), high-density stacking conditions on cellular container vessels, and severe structural loads from port yard terminal handling equipment (gantry cranes, straddle carriers, and reach stackers).</li></ul>
+<h4>Applicability</h4>
+<p>The convention applies strictly to all new and existing containers used in international transport, regardless of the vessel’s flag state or the owner’s nationality.</p>
+<ul><li><strong>Included:</strong> Standard dry vans, reefers, open-tops, flat-racks, and tank containers built to standard ISO dimensions.</li><li><strong>Exemptions:</strong></li><li>Containers specifically engineered and certified exclusively for air transport.</li><li>Offshore containers utilized dynamically in the oil and gas sector (governed separately by IMO MSC/Circ. 860 or EN 12079 / DNV 2.7-1).</li><li>Containers with internal volumes of less than 1 m<sup>3</sup> (or custom dimensions failing standard ISO definitions).</li><li>Units operating strictly within domestic rail/road networks restricted entirely to a single country.</li></ul>
+<h4>The CSC Safety Approval Plate (SAP)</h4>
+<p>Every approved container must feature a permanent, non-corrosive, fireproof Safety Approval Plate (SAP) riveted securely to the exterior face of the left-rear door. This plate acts as an official certificate of structural compliance.</p>
+<ul><li><strong>Required Inclusions:</strong> The plate must prominently display the country of approval, approval reference number, exact date of manufacture, unique alphanumeric manufacturer identification number, <strong>Maximum Gross Weight (MGW)</strong> capability, allowable stacking load, and racking test force value. It also indicates the date for the unit’s first mandatory field examination if operating under a periodic inspection scheme.</li></ul>
+<h4>Examination Schemes</h4>
+<p>To preserve structural safety post-delivery, the convention outlines two legal pathways for validation:</p>
+<ul><li><strong>Periodic Examination Scheme (PES):</strong> A calendar-driven, traditional tracking method where the container is physically inspected by an authorized inspector at rigid intervals. The initial examination must happen within 5 years of manufacture, followed by subsequent inspections at intervals not exceeding 30 months.</li><li><strong>Approved Continuous Examination Programme (ACEP):</strong> A data-driven, operational safety standard where the container undergoes safety checks during routine depot turnarounds, cleaning, or structural repairs. The operator must be explicitly certified by the flag state administration to run this continuous quality loop.</li></ul>
+<h4>CSC Plate 7-Field Layout</h4>
+<p>``` +------------------------------------------------------------------------+</p>
+<table class="comp-table">
+<tr><th>CSC SAFETY APPROVAL</th></tr>
+<tr><td>1. [USA / AB-123 / 2026]  <-- Country of Approval &amp; Reference</td></tr>
+<tr><td>2. [DATE OF MANUFACTURE: 05 / 2026]</td></tr>
+<tr><td>3. [MANUFACTURER'S ID NO: MAEU 987654-3]</td></tr>
+<tr><td>4. [MAXIMUM GROSS WEIGHT: 32,500 kg / 71,650 lbs]</td></tr>
+<tr><td>5. [ALLOWABLE STACKING WEIGHT FOR 1.8G: 216,000 kg / 476,200 lbs]</td></tr>
+<tr><td>6. [RACKING TEST FORCE VALUE: 15,300 kg / 33,730 lbs]</td></tr>
+<tr><td>7. [FIRST EXAMINATION DATE: 05 / 2031]   <-- (Blank if under ACEP)</td></tr>
+</table>
+<p>+------------------------------------------------------------------------+</p>
+<p>```</p>
+<div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">CSC Convention 1972 (as amended)</span><span class="reg-desc">International regulatory framework for container design, safety approval, physical testing, and lifetime maintenance.</span></div><div class="reg-item"><span class="reg-code">SOLAS Chapter VI Reg 5-1</span><span class="reg-desc">Statutory requirement tying vessel safety directly to the loading of properly certified and approved CSC containers.</span></div><div class="reg-item"><span class="reg-code">IMO MSC.1/Circ.1425</span><span class="reg-desc">Revised, unified operational guidelines for flag states evaluating and auditing Approved Continuous Examination Programmes.</span></div><div class="reg-item"><span class="reg-code">ISO 1496-1</span><span class="reg-desc">Definitive engineering specifications and testing paradigms for Series 1 freight containers under structural evaluation.</span></div><div class="reg-item"><span class="reg-code">IICL-6 Manual</span><span class="reg-desc">Standardized commercial repair thresholds and physical dimensions for assessing structural container damage post-fixture.</span></div></div>
+
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5>
+<p>For a Second Engineer, CSC understanding translates directly to managing physical vessel risk. If structural components like corner posts, top side rails, or bottom longitudinal rails fail, it threatens the stability of an entire container stack. Undetected corrosion or micro-fissures in corner castings can cause a localized collapse that triggers a domino-effect stack failure, directly threatening engine room crew operations, venting systems, and structural integrity.</p><h5>Trap Questions</h5>
+<ul><li><em>“Who issues the CSC approval? Can the container owner self-approve?”</em></li><li><strong>Answer:</strong> Absolutely not. Approval can only be granted by the Competent Authority of a contracting Flag State Administration or by an officially authorized Classification Society acting as a Recognized Organization (RO). While an owner can administer the <em>maintenance program</em> via an approved ACEP, the foundational approval framework and systemic audits are strictly performed by the government body or its designated RO.</li></ul><h5>Common CE Failures</h5>
+<p>Candidates often mistakenly conflate CSC structural standards with commercial cargo inspection codes like the Institute of International Container Lessors (IICL) guidelines or simple ISO dimensional classifications. Furthermore, candidates frequently fail to explain the operational mechanics of the ACEP system, erroneously stating that ACEP containers require a 30-month physical date sticker stamped onto the plate.</p><h5>Numbers to Memorise</h5>
+<ul><li><strong>CSC 1972:</strong> Annex I sets structural regulations; Annex II details dynamic physical test methodologies.</li><li><strong>SOLAS Chapter VI, Regulation 5-1:</strong> Mandates that all cargo units, including containers, must be packed, marked, secured, and verified in absolute compliance with the CSC convention.</li><li><strong>IMO MSC.1/Circ.1425:</strong> Sets formal guidelines for the unified implementation of the revised ACEP verification procedures.</li></ul><h5>Casualty Link</h5>
+<p>The ONE Apus incident (Nov 2020, ~1,816 containers lost overboard in heavy weather) and the MSC Zoe incident (2019, ~345 containers lost) both highlight how stack integrity depends on sound structural condition of individual boxes as much as on lashing/securing arrangements. Once the lowermost container in a stack has a compromised corner casting or bottom crossmember, dynamic racking forces at sea can cause it to buckle, and the entire lashing assembly above loses tension — a chain failure up the stack.</p><h5>Examiner Chain</h5>
+<p>Srivastava → Core purpose of CSC → Interpretation of SAP markings → Differentiating PES vs. ACEP → Identification of micro-cracks in corner castings → Chief Engineer actions when spotting a structurally compromised container during loading.</p><h5>On My Vessel</h5>
+<p>Maersk container vessels strictly enforce the CSC mandate through digital integration. Every container loaded onto a Maersk asset must have its alphanumeric prefix and serial number validated within the terminal operating system against an active, global central registry verifying its structural status. Maersk operates primarily under an extensive, flag-state-approved <strong>ACEP scheme</strong>, meaning physical date stickers are omitted; instead, the container is flagged dynamically in the fleet management database if it misses its depot structural quality verification loop, locking it from being planned on the stowage profile.</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB8_C, Q1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB8_C · Q1 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q2" data-tags="solas iacs">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Various testing schemes for containers under CSC — what are they?</div>
+          <div class="q-tags"><span class="q-tag tag-solas">SOLAS</span><span class="q-tag tag-iacs">IACS</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        
+        
+        <div class="answer-body">
+<h4>PES — Periodic Examination Scheme</h4>
+<p>The Periodic Examination Scheme (PES) is the baseline, calendar-controlled checking structure defined by Regulation 2 of Annex I to the CSC convention.</p>
+<ul><li><strong>Initial Inspection Threshold:</strong> The first formal examination must occur no later than 5 years (60 months) from the exact date of manufacture.</li><li><strong>Recurrent Testing Intervals:</strong> Following the baseline check, the container must undergo subsequent physical examinations at intervals not exceeding 30 months.</li><li><strong>Operational Execution:</strong> The check must be performed by a qualified surveyor or an authorized competent entity to verify that the frame, corner posts, castings, and locking rails have no structural defects that compromise handling safety.</li><li><strong>Visual Documentation:</strong> Upon successful verification, a highly visible, weather-resistant date sticker must be affixed onto or directly adjacent to the Safety Approval Plate, explicitly showing the Next Examination Date (NED) in a Month/Year format.</li></ul>
+<h4>ACEP — Approved Continuous Examination Programme</h4>
+<p>The Approved Continuous Examination Programme (ACEP) is an advanced, system-driven quality alternative introduced via the 1983 amendments to the CSC convention.</p>
+<ul><li><strong>Procedural Mechanics:</strong> Rather than tracking arbitrary calendar dates, the operator integrates strict structural examinations directly into the container's operational lifecycle. The unit is inspected every time it enters an authorized depot for cleaning, storage, or repair.</li><li><strong>Approval Authority:</strong> To utilize this framework, the shipping line or container leasing corporation must present a comprehensive quality assurance manual to the flag state administration. This documentation must prove the competence of their inspection depots, tracking systems, and surveyor training.</li><li><strong>Scope of Inspection:</strong> The container must undergo a thorough check at least once every time it changes hands or undergoes major maintenance, ensuring its structural integrity is evaluated multiple times within a standard 30-month window.</li><li><strong>Visual Documentation:</strong> Units operating under this continuous tracking framework are exempted from carrying individual next-inspection date stickers. Instead, they must display a permanent, clear <strong>ACEP decal</strong> indicating the country of approval and the specific operational program registration number (e.g., `ACEP DK-2026-MAERSK`).</li></ul>
+<h4>Which Scheme Applies?</h4>
+<p>The choice of scheme rests entirely with the container owner/operator, provided they have the logistics and digital systems to support an ACEP approval:</p>
+<ul><li><strong>Default Option (PES):</strong> Applies to smaller logistics operators, private owners, or specialized asset groups without a global network of repair depots.</li><li><strong>System Option (ACEP):</strong> Utilized by major container lines and large leasing conglomerates. It avoids the logistical burden of tracking calendar deadlines for hundreds of thousands of active boxes, relying instead on automated depot triggers.</li></ul>
+<h4>Comparison Table</h4>
+<table class="comp-table">
+<tr><th>Quality Parameter</th><th>Periodic Examination Scheme (PES)</th><th>Approved Continuous Examination Programme (ACEP)</th></tr>
+<tr><td><strong>Inspection Trigger</strong></td><td>Fixed calendar timeframes.</td><td>Operational depot actions, repairs, or turnarounds.</td></tr>
+<tr><td><strong>Maximum Time Step</strong></td><td>5 years initially, then every 30 months maximum.</td><td>Continuous, with a safety threshold equivalent to 30 months.</td></tr>
+<tr><td><strong>Visual Indicator</strong></td><td>Next Examination Date (NED) sticker (MM/YYYY).</td><td>Permanent ACEP registration decal on the SAP.</td></tr>
+<tr><td><strong>Data Administration</strong></td><td>Manual entry tracked by physical plate updates.</td><td>Automated tracking via global asset databases.</td></tr>
+<tr><td><strong>Primary Advantage</strong></td><td>Simple, requiring no digital depot infrastructure.</td><td>Minimizes off-hire time and avoids calendar expirations.</td></tr>
+</table>
+<div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">CSC Annex I, Regulation 2</span><span class="reg-desc">Statutory framework establishing structural inspection criteria for both PES and ACEP pathways.</span></div><div class="reg-item"><span class="reg-code">IMO MSC.1/Circ.1425</span><span class="reg-desc">Mandatory administrative guidance for flag states auditing continuous examination networks.</span></div><div class="reg-item"><span class="reg-code">SOLAS Chapter VI, Reg 5</span><span class="reg-desc">Enforces compliance with approved inspection tracking schemes for all international container transport.</span></div><div class="reg-item"><span class="reg-code">IACS Recommendation No. 70</span><span class="reg-desc">Unified guidelines for classification society surveyors checking container structures on board.</span></div></div>
+
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5>
+<p>As a Second Engineer, understanding these schemes is critical during pre-loading checks and cargo safety assessments. If a container operating under PES is brought on board with an expired Next Examination Date sticker, its structural certification is legally void. Loading an uncertified container violates international safety standards, exposing the vessel to Port State Control (PSC) structural deficiencies and potentially compromising insurance coverage if a structural failure occurs at sea.</p><h5>Trap Questions</h5>
+<ul><li><em>“What happens if a container's PES examination is overdue—can it be legally loaded onto the vessel?”</em></li><li><strong>Answer:</strong> No, it cannot. Under CSC regulations and SOLAS Chapter VI, an overdue inspection voids the unit's Safety Approval Plate. The container must be rejected at the terminal gate or segregated and refused for shipment until it undergoes a formal structural re-examination by a certified inspector.</li></ul><h5>Common CE Failures</h5>
+<p>Candidates frequently fail by confusing the <em>examination schemes</em> (PES/ACEP) with the initial factory <em>structural type-tests</em> (such as stacking or racking tests). Another common error is stating that an ACEP container requires a physical validity expiration date stamped onto the door panel, demonstrating a misunderstanding of how continuous asset management programs function.</p><h5>Numbers to Memorise</h5>
+<ul><li><strong>5 Years:</strong> The maximum allowable window from manufacture to the initial baseline PES check.</li><li><strong>30 Months:</strong> The absolute maximum time elapsed between consecutive PES physical field checks.</li><li><strong>CSC Regulation 2 (Annex I):</strong> Formal statutory text detailing the administrative frameworks governing both PES and ACEP pathways.</li></ul><h5>Casualty Link</h5>
+<p>During a heavy winter crossing, several container stacks collapsed on a line using an un-audited inspection tracking system. The subsequent maritime investigation revealed that multiple leased boxes had bypassed their structural depot checks for over 48 months due to tracking software errors. The degraded base rails failed under standard dynamic loads, highlighting the importance of rigorous ACEP oversight.</p><h5>Examiner Chain</h5>
+<p>Srivastava → Differentiating container testing from scheme tracking → Mathematical limits of PES → Structural triggers for ACEP inspections → Remedial actions when encountering a box with a missing or defaced ACEP plate during cargo watch.</p><h5>On My Vessel</h5>
+<p>Maersk container operations are managed via an integrated asset tracking platform that interfaces directly with terminal gates worldwide. The entire active Maersk container inventory operates under a global <strong>ACEP framework</strong> certified by the Danish Maritime Authority. When a box enters a Maersk facility or contracted terminal, its unique prefix is scanned, automatically prompting a structural inspection by certified depot personnel. If a unit misses this check within its safety window, the loading software flags the box, preventing the chief mate or cargo planners from assigning it a slot on the stowage plan.</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB8_C, Q2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB8_C · Q2 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q3" data-tags="solas iacs">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">3</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Container tests — what structural and operational tests are required under CSC?</div>
+          <div class="q-tags"><span class="q-tag tag-solas">SOLAS</span><span class="q-tag tag-iacs">IACS</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        
+        
+        <div class="answer-body">
+<h4>Test 1: Stacking Test</h4>
+<p>The stacking test evaluates the structural capability of a container's corner posts to withstand the compressive loads generated by multiple tiers of fully loaded containers above it, accounting for vertical dynamic acceleration forces at sea (1.8g).</p>
+<ul><li><strong>Load Application:</strong> The unit is placed on level foundation pads, and a vertical compressive force equivalent to 1.8 \times the design maximum allowable stacking weight is applied simultaneously to all four corner castings. For a standard modern ISO container, this equates to a total superimposed load of 216,000 kg (54,000 kg per corner post), simulating an 8-high fully laden stack above the lowermost box.</li><li><strong>Pass Criteria:</strong> The unit must show no permanent material deformation or structural displacement after the load is removed.</li></ul>
+<h4>Test 2: Lifting Tests</h4>
+<p>These tests simulate standard terminal operations using spreader bars, portal cranes, grappler arms, or heavy forklifts to lift fully loaded containers.</p>
+<ul><li><strong>Top Lifting Method:</strong> The container is loaded to an internal weight equal to 2 \times MGW and lifted vertically from all four top corner castings.</li><li><strong>Bottom Lifting Method:</strong> The container is loaded to 2 \times MGW and lifted via sling arrangements angled at 30° to 45° through the four bottom corner castings.</li><li><strong>Auxiliary Mechanical Lifting:</strong> Type-testing requires lifting the container at 1.25 \times MGW via internal fork pockets and dedicated base rail grappler positions.</li></ul>
+<h4>Test 3: Floor Strength Test</h4>
+<p>This operational test ensures the container floor can withstand the concentrated axle loads of terminal handling equipment during loading and unloading.</p>
+<ul><li><strong>Execution:</strong> A specialized test vehicle or forklift bogie with a total axle load of 5,460 kg (2,730 kg concentrated per wheel footprint) is driven across the internal floor.</li><li><strong>Evaluation:</strong> The floor structure, bottom crossmembers, and longitudinal gooseneck tunnel areas are inspected to ensure no plastic deformation or structural tearing occurs.</li></ul>
+<h4>Test 4: Racking Test</h4>
+<p>The racking test measures the container's structural resistance to transverse dynamic forces caused by the vessel's rolling and swaying motion at sea.</p>
+<ul><li><strong>Methodology:</strong> The base frame is rigidly locked into anchor plates, and a lateral force of 150 kN (\approx 15.3 tonnes) is applied horizontally to the top corner connections.</li><li><strong>Purpose:</strong> This test measures the diagonal deflection of the end frames to ensure the container door alignment remains intact and prevents structural collapse under heavy lateral shear loads.</li></ul>
+<h4>Test 5: End Wall Strength</h4>
+<p>This test evaluates the container's ability to withstand shifting forces when cargo slides longitudinally during emergency braking on land or heavy pitching at sea.</p>
+<ul><li><strong>Load Application:</strong> A uniform internal pressure equivalent to 0.4 \times MGW (\approx 40\% of maximum payload capacity) is applied directly to the internal surface of the end wall panels.</li></ul>
+<h4>Test 6: Side Wall Strength</h4>
+<p>This test measures the container's structural resilience against lateral shifting forces caused by rolling waves or high-speed cornering during rail or road transit.</p>
+<ul><li><strong>Load Application:</strong> A uniform internal pressure equal to 0.6 \times MGW (\approx 60\% of maximum payload capacity) is applied to the interior surfaces of the long side wall panels.</li></ul>
+<h4>Test 7: Roof Strength</h4>
+<p>This test ensures the roof structure can safely support personnel or maintenance equipment during terminal handling or inspections.</p>
+<ul><li><strong>Load Application:</strong> A localized load of 300 kg is applied uniformly across a 600 mm \times 300 mm central area, or a total distributed weight of 300 kg/m<sup>2</sup> is applied across the entire roof sheet.</li></ul>
+<h4>Test 8: Weathertightness Test</h4>
+<p>This operational test verifies that the container will protect cargo from water damage under severe weather conditions at sea.</p>
+<ul><li><strong>Methodology:</strong> A high-pressure water stream (100 kPa nozzle pressure) is directed at all structural joints, corner interfaces, door gaskets, and rivets from a distance of 1.5 meters. The interior is then inspected to ensure it remains completely dry.</li></ul>
+<h4>Test Values Summary Table</h4>
+<table class="comp-table">
+<tr><th>Physical Test Mode</th><th>Exact Engineering Load Factor</th><th>Operational Objective</th></tr>
+<tr><td><strong>Stacking Test</strong></td><td>1.8 \times Allowable Stacking Mass</td><td>Verifies corner post structural integrity under multi-tier vertical loads.</td></tr>
+<tr><td><strong>Lifting Test</strong></td><td>2.0 \times Maximum Gross Weight (MGW)</td><td>Tests structural strength during crane spreader or hook handling.</td></tr>
+<tr><td><strong>Racking Test</strong></td><td>150 kN Transverse Force</td><td>Measures resistance against dynamic rolling and shearing forces.</td></tr>
+<tr><td><strong>End Wall Test</strong></td><td>0.4 \times Maximum Payload Mass</td><td>Simulates longitudinal cargo shifting during heavy pitching.</td></tr>
+<tr><td><strong>Side Wall Test</strong></td><td>0.6 \times Maximum Payload Mass</td><td>Simulates lateral cargo shifting during dynamic vessel rolling.</td></tr>
+<tr><td><strong>Floor Strength</strong></td><td>5,460 kg Total Axle Load</td><td>Verifies floor capability to support loaded terminal forklifts.</td></tr>
+</table>
+<div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">CSC Convention Annex II</span><span class="reg-desc">Mandatory regulations detailing structural test procedures for international container approval.</span></div><div class="reg-item"><span class="reg-code">ISO 1496-1:2013</span><span class="reg-desc">Detailed engineering standards for testing the structural strength of Series 1 freight containers.</span></div><div class="reg-item"><span class="reg-code">SOLAS Chapter VI Reg 5A</span><span class="reg-desc">Requiring all freight containers loaded onto ships to meet verified structural type-approval standards.</span></div><div class="reg-item"><span class="reg-code">IACS Unified Requirement S3</span><span class="reg-desc">Structural strength guidelines for container securing arrangements and hull interface points.</span></div></div>
+
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5>
+<p>For engineering officers, these structural test parameters are critical when assessing physical damage on board. If a container suffers a dent in a corner post deeper than the limits set by IICL or ISO 1496-1, its structural strength is compromised. Under heavy stacking loads, a deformed corner post cannot properly distribute vertical forces, increasing the risk of structural buckling and stack failure.</p><h5>Trap Questions</h5>
+<ul><li><em>“If a container has successfully passed all its initial CSC structural type-tests at the factory, can it be considered permanently safe for its operational life regardless of physical damage?”</em></li><li><strong>Answer:</strong> No, it cannot. Type-tests are initial design validations performed on a prototype before mass production. In service, factors like structural fatigue, localized impact damage, and salt-water corrosion can weaken the container, requiring regular field inspections under an active PES or ACEP framework.</li></ul><h5>Common CE Failures</h5>
+<p>A frequent error is confusing the <em>stacking load factor</em> (1.8 \times allowable stacking weight) with the <em>lifting load factor</em> (2 \times MGW). Candidates also often fail to mention the racking test force (150 kN), which is a key parameter that examiners look for during structural safety assessments.</p><h5>Numbers to Memorise</h5>
+<ul><li><strong>ISO 1496-1:</strong> The international technical standard governing structural specifications and testing requirements for Series 1 freight containers.</li><li><strong>CSC Annex II:</strong> The statutory framework detailing international test criteria, load application procedures, and structural compliance guidelines.</li><li><strong>150 kN:</strong> The standardized transverse racking force that all modern ISO container end frames must withstand.</li></ul><h5>Casualty Link</h5>
+<p>An investigation into a severe container stack collapse during a storm revealed that multiple lowermost containers had suffered structural failure along their side walls and bottom sills. These sections had been weakened by improper modifications and heavy rust, leaving them unable to withstand the dynamic racking forces that the design prototype successfully passed during its initial type-testing.</p><h5>Examiner Chain</h5>
+<p>Srivastava → Structural type-tests required for new containers → Stacking test calculations → Racking force limits (150 kN) → Identifying structural stress fractures in corner castings → Operational procedures for handling a damaged container at sea.</p><h5>On My Vessel</h5>
+<p>On Maersk vessels, officers monitor structural integrity by cross-referencing container positions with the ship's loading computer. The system calculates real-world forces based on the vessel's motion profile and compares them against the standard CSC test limits (1.8g stacking limits and 150 kN racking limits). If a container stack exceeds these thresholds due to improper weight distribution, the system generates a warning, requiring a restow before the vessel can safely depart.</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB8_C, Q3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB8_C · Q3 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q4" data-tags="solas imdg ism">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">4</div>
+        <div class="q-text-wrap">
+          <div class="q-text">CIC (Consolidated Inspection Campaign / Cargo Integrity Check) — explain in detail.</div>
+          <div class="q-tags"><span class="q-tag tag-solas">SOLAS</span><span class="q-tag tag-marpol">IMDG</span><span class="q-tag tag-ism">ISM</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        
+        
+        <div class="answer-body">
+<h4>CIC Type 1: Cargo Integrity Check (Industry Initiative)</h4>
+<p>The Cargo Integrity Check is a safety campaign launched by the Cargo Integrity Group (including the TT Club, CINS, World Shipping Council, and ICHCA) to address systemic risks associated with poorly managed containerized cargo.</p>
+<ul><li><strong>The Underlying Problem:</strong> Misdeclared, undeclared, or improperly packed dangerous goods (DG) represent a leading cause of catastrophic container ship fires, chemical explosions, and structural hull damage.</li><li><strong>Statistical Context:</strong> Data compiled by the <strong>Cargo Incident Notification System (CINS)</strong> indicates that a significant percentage of container incidents stem directly from misdeclared cargo details, bypassing standard shipboard segregation requirements.</li><li><strong>Core Objectives:</strong></li><li>Ensuring compliance with the <strong>IMDG Code</strong> for all dangerous goods bookings.</li><li>Enforcing proper container packing and securing practices per the <strong>IMO/ILO/UNECE CTU Code</strong>.</li><li>Verifying structural <strong>Verified Gross Mass (VGM)</strong> compliance under SOLAS Chapter VI.</li><li>Implementing automated screening software at terminal booking gates to detect hidden dangerous goods.</li></ul>
+<h4>CIC Type 2: PSC Concentrated Inspection Campaign (Tokyo MOU / Paris MOU)</h4>
+<p>The Port State Control Concentrated Inspection Campaign is a regulatory enforcement mechanism used by regional maritime authorities to target specific safety systems.</p>
+<ul><li><strong>Operational Execution:</strong> Running annually for a fixed 3-month window (typically from 1 September to 30 November), Port State Control Officers (PSCOs) add a specialized, pre-published questionnaire to their routine vessel inspections.</li><li><strong>Strategic Focus:</strong> The target topic changes each year based on global deficiency data (e.g., targeting ISM compliance, Lifesaving Appliances, Fire Safety Systems, or STCW requirements).</li><li><strong>Vessel Impact:</strong> All ships inspected during the campaign face detailed checks on the target system. Any significant failures noted in the checklist can lead to immediate vessel detention and entry into the central <strong>THETIS database</strong>.</li></ul>
+<h4>The 3-Month CIC Calendar (Tokyo MOU)</h4>
+<p>The inspection window requires advanced preparation by shipboard staff. The annual topic is selected by the MOU committee and announced months in advance. During this period, the vessel's engineering department must verify that all target systems are fully operational and properly documented in line with the campaign's specific focus area.</p>
+<h4>CE Actions for Cargo Integrity CIC</h4>
+<p>To support cargo safety compliance, the Second Engineer should execute the following operational steps:</p>
+<ul><li>Review the manifest to ensure all declared dangerous goods are stowed in full compliance with the segregation rules in the <strong>IMDG Code</strong> (e.g., keeping acids clear of engine room bulkheads).</li><li>Verify that container data matches the ship's loading computer configuration to ensure the stack remains within safe structural limits.</li><li>Confirm that emergency equipment, including the <strong>Emergency Schedules (EmS)</strong> and <strong>Medical First Aid Guide (MFAG)</strong> manuals, are readily accessible in the ship's control center.</li></ul>
+<h4>CE Actions for PSC CIC</h4>
+<p>When preparing for a scheduled PSC Concentrated Inspection Campaign, the engineering team must take proactive steps:</p>
+<ul><li>Conduct a thorough internal review of all systems related to the campaign's designated topic.</li><li>Perform targeted drills to ensure the crew can operate relevant safety systems quickly and efficiently under inspection conditions.</li><li>Verify that all system logs, maintenance records, and regulatory certificates are up to date and readily available for review.</li></ul>
+<h4>Key CIC Numbers</h4>
+<ul><li><strong>3 Months:</strong> The standard duration for a regional Port State Control Concentrated Inspection Campaign.</li><li><strong>60 Days:</strong> The typical advance notice window given to the industry before a PSC campaign begins.</li><li><strong>100%:</strong> The target check rate for vessels inspected during the campaign window, where the specific checklist is applied alongside standard inspection procedures.</li></ul>
+<div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">IMDG Code Part 5</span><span class="reg-desc">Mandatory documentation, marking, and labeling requirements for shipping dangerous goods.</span></div><div class="reg-item"><span class="reg-code">SOLAS Chapter VI, Reg 2</span><span class="reg-desc">Regulatory requirement for verifying a container's weight before loading operations.</span></div><div class="reg-item"><span class="reg-code">IMO/ILO/UNECE CTU Code</span><span class="reg-desc">Global safety guidelines for the proper packing and securing of cargo inside freight units.</span></div><div class="reg-item"><span class="reg-code">Tokyo MOU Standard Operating Procedures</span><span class="reg-desc">Administrative guidelines governing the execution and reporting of Port State Control inspections.</span></div><div class="reg-item"><span class="reg-code">CINS Data Protocols</span><span class="reg-desc">Industry framework for tracking and analyzing cargo-related safety incidents to improve safety standards.</span></div></div>
+
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5>
+<p>For engineering officers, both forms of CIC directly impact daily shipboard operations. A Port State Control campaign targeting the engine room requires everything from fuel oil quick-closing valves to emergency generators to be fully functional, as any defect can lead to detention. On the cargo side, proper enforcement of dangerous goods checks helps mitigate the risk of hidden chemical hazards catching the engine room team unprepared.</p><h5>Trap Questions</h5>
+<ul><li><em>“If a container's paperwork looks correct but you notice an unusual chemical odor or localized heat during watch, can the ship refuse to load it?”</em></li><li><strong>Answer:</strong> Yes, it can. Under the ISM Code and master’s overriding authority guidelines, the vessel has the right to refuse any cargo that presents an immediate safety risk. The container should be isolated, and the shore terminal must be notified to perform a formal safety inspection.</li></ul><h5>Common CE Failures</h5>
+<p>Candidates often fail by only explaining one type of CIC, usually focusing solely on Port State Control inspections while overlooking the industry's cargo integrity campaigns. Another common error is failing to cite the specific regulatory codes that govern these safety checks, such as the IMDG Code or the CTU Code.</p><h5>Numbers to Memorise</h5>
+<ul><li><strong>SOLAS Chapter II-2, Regulation 19:</strong> Sets strict fire protection requirements for spaces carrying dangerous goods.</li><li><strong>IMDG Code Chapter 5.4:</strong> Outlines the mandatory documentation and certification requirements for shipping dangerous goods.</li><li><strong>SOLAS Chapter VI, Regulation 2:</strong> Mandates the verification and reporting of a container's Verified Gross Mass prior to loading.</li></ul><h5>Casualty Link</h5>
+<p>Serious container ship fires have demonstrated the severe consequences of misdeclared dangerous goods. When reactive chemicals are falsely declared as standard dry cargo, they may be stowed in locations exposed to ambient heat or close to internal machinery spaces. Without proper segregation, a localized reaction can quickly escalate into a major fire that threatens the safety of the entire vessel.</p><h5>Examiner Chain</h5>
+<p>Srivastava → Defining the scope of a CIC → Differentiating PSC campaigns from cargo checks → IMDG documentation requirements → Fire response protocols for hazardous cargo → Engineering actions during a PSC safety system audit.</p><h5>On My Vessel</h5>
+<p>Maersk vessels strictly enforce cargo safety guidelines by integrating automated screening tools into the booking process. This software scans booking records for keywords to flag potentially misdeclared dangerous goods before they can be loaded. On board, the engineering team supports this by conducting regular checks of the deck area, monitoring cargo spaces for abnormal temperature readings, and keeping specialized fire response equipment ready for immediate use.</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB8_C, Q4, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB8_C · Q4 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="no-results">
+  <p>No questions match your search/filter.</p>
+</div>
+
+<div class="page-footer">
+  <p>Marine Intelligence Weekly · MEO Class 1 Question Bank · QB8_C — Cargo Operations — Containers, CSC &amp; CIC — Companion C</p>
+  <p>Compiled by Nixon Antony, Second Engineer, Maersk A/S · <a href="https://marineintelligenceweekly.com/meoclass1/">Back to MEO Class 1 Hub</a> · <a href="https://marineintelligenceweekly.com/">marineintelligenceweekly.com</a></p>
+  <p class="disclaimer">Disclaimer: This question bank is a private study aid compiled for MEO Class 1 oral examination preparation at the Kochi MMD. Regulatory references are provided in good faith and cross-checked against IMO, IACS, and classification society sources where possible, but candidates must independently verify current regulation numbers, thresholds, and amendment dates against the latest consolidated SOLAS/MARPOL editions, IACS Unified Requirements, and their flag/class circulars before relying on them in examination or operational contexts. To report a correction, email contactus@marineintelligenceweekly.com with the QB number, question number, and details.</p>
+</div>
+
+<script>
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB6_C — Electrical, Automation &amp; Machinery (C) | MEO Class 1 | Marine Intelligence Weekly</title>
+<meta name="description" content="MEO Class 1 oral exam preparation — Fail Safe Systems, ME Layup Checks, Manual Purifier Desludging. Examiner: Nair. Kochi MMD.">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--navy-mid:#1e293b;
+  --orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;
+  --grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);line-height:1.6;user-select:none;}
+.topbar{background:var(--navy);color:#fff;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:2px solid var(--teal);}
+.topbar-brand{display:flex;align-items:center;gap:10px;}
+.logo-mark{background:var(--teal);color:#fff;font-weight:800;font-size:13px;padding:3px 8px;border-radius:4px;letter-spacing:.5px;}
+.site-name{color:#fff;font-size:13px;font-weight:500;opacity:.85;}
+.topbar-right{display:flex;align-items:center;gap:16px;}
+.topbar-right a{color:rgba(255,255,255,.7);text-decoration:none;font-size:12px;}
+.topbar-right a:hover{color:var(--teal);}
+.page-header{background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 60%,#0f3460 100%);color:#fff;padding:40px 24px 32px;border-bottom:3px solid var(--teal);position:relative;overflow:hidden;}
+.page-header-inner{max-width:1100px;margin:0 auto;position:relative;}
+.qb-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,.15);border:1px solid rgba(13,148,136,.3);color:var(--teal);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:5px 14px;border-radius:20px;margin-bottom:16px;}
+.page-header h1{font-size:clamp(22px,4vw,34px);font-weight:800;line-height:1.2;margin-bottom:10px;}
+.page-header h1 span{color:var(--teal);}
+.header-sub{color:rgba(255,255,255,.7);font-size:14px;max-width:680px;line-height:1.65;margin-bottom:20px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);font-size:12px;color:rgba(255,255,255,.55);}
+.header-meta strong{color:rgba(255,255,255,.85);}
+.controls-bar{background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 24px;position:sticky;top:45px;z-index:90;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.search-wrap{flex:1;min-width:180px;max-width:320px;position:relative;}
+.search-wrap input{width:100%;padding:7px 10px 7px 32px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px;background:var(--off-white);color:var(--ink);outline:none;}
+.search-wrap input:focus{border-color:var(--teal);box-shadow:0 0 0 2px rgba(13,148,136,.12);}
+.search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--grey-text);width:14px;height:14px;}
+.filter-row{display:flex;flex-wrap:wrap;gap:6px;}
+.filter-btn{padding:5px 12px;border:1px solid var(--grey-border);border-radius:20px;font-size:11px;font-weight:600;cursor:pointer;background:#fff;color:var(--grey-text);}
+.filter-btn:hover{border-color:var(--teal);color:var(--teal);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+.q-count-label{font-size:12px;color:var(--grey-text);white-space:nowrap;margin-left:auto;}
+.main-layout{max-width:1100px;margin:0 auto;padding:28px 16px 80px;display:grid;grid-template-columns:220px 1fr;gap:28px;align-items:start;}
+@media(max-width:700px){.main-layout{grid-template-columns:1fr;}.sidebar{display:none;}}
+.sidebar{position:sticky;top:100px;max-height:calc(100vh - 120px);overflow-y:auto;}
+.toc-label{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--grey-text);padding:0 0 8px;border-bottom:1px solid var(--grey-border);margin-bottom:10px;}
+.toc-link{display:block;font-size:12px;color:var(--grey-text);text-decoration:none;padding:5px 8px;border-radius:5px;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);font-weight:600;}
+.toc-section{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--grey-text);padding:10px 8px 4px;margin-top:4px;}
+.sidebar-note{margin-top:16px;padding:12px;background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;font-size:11px;color:#92400e;line-height:1.5;}
+.section-head{display:flex;align-items:center;justify-content:space-between;padding:14px 0 10px;border-bottom:2px solid var(--grey-border);margin-bottom:16px;margin-top:8px;}
+.section-head h2{font-size:14px;font-weight:700;color:var(--navy);letter-spacing:.3px;}
+.sec-count{font-size:11px;font-weight:600;background:var(--teal-light);color:var(--teal-dark);padding:2px 10px;border-radius:10px;}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:12px;margin-bottom:14px;overflow:hidden;}
+.q-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.07);}
+.q-card.open{box-shadow:0 4px 24px rgba(13,148,136,.12);border-color:rgba(13,148,136,.3);}
+.q-header{display:flex;align-items:flex-start;gap:12px;padding:16px 16px 14px;cursor:pointer;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{width:32px;height:32px;min-width:32px;background:var(--teal);color:#fff;border-radius:8px;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;}
+.q-card.open .q-num-badge{background:var(--teal-dark);}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-size:14px;font-weight:600;color:var(--navy);line-height:1.45;margin-bottom:6px;}
+.q-tags{display:flex;flex-wrap:wrap;gap:5px;}
+.q-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.3px;background:#dbeafe;color:#1e40af;}
+.q-chevron{width:18px;height:18px;min-width:18px;color:var(--grey-text);transition:transform .25s;margin-top:2px;}
+.q-card.open .q-chevron{transform:rotate(180deg);color:var(--teal);}
+.q-answer{display:none;padding:0 18px 18px;}
+.q-card.open .q-answer{display:block;}
+.answer-body{font-family:'Georgia',serif;font-size:14px;line-height:1.75;color:var(--ink);padding-top:4px;}
+.answer-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:16px 0 6px;}
+.answer-body p{margin-bottom:10px;}
+.answer-body ul,.answer-body ol{padding-left:20px;margin-bottom:10px;}
+.answer-body li{margin-bottom:5px;}
+.answer-body strong{font-weight:700;}
+.answer-body em{font-style:italic;color:var(--grey-text);}
+.formula{font-family:monospace;background:var(--grey-bg);border-radius:5px;padding:8px 12px;font-size:13px;margin:8px 0;display:block;overflow-x:auto;}
+.oral-box{border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13px;line-height:1.6;}
+.oral-15{background:#ecfdf5;border:1px solid #6ee7b7;}
+.oral-60{background:#eff6ff;border:1px solid #93c5fd;}
+.oral-label{font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;display:block;}
+.oral-15 .oral-label{color:#047857;}
+.oral-60 .oral-label{color:#1d4ed8;}
+.trap-box{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13px;line-height:1.6;}
+.trap-box strong.trap-label{color:#b91c1c;font-size:10px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px;}
+.numbers-box{background:var(--grey-bg);border-left:3px solid var(--teal);border-radius:6px;padding:8px 14px;margin:8px 0;font-size:13px;}
+.numbers-box h4{margin:0 0 4px;}
+.casualty-box{background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:8px 14px;margin:8px 0;font-size:13px;}
+.casualty-box strong.cas-label{color:#92400e;font-size:10px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px;}
+.reg-box{background:#141412;color:rgba(255,255,255,.85);border-radius:8px;padding:14px 16px;margin-top:16px;}
+.reg-box-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:rgba(255,255,255,.45);margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:7px;align-items:flex-start;min-width:0;}
+.reg-code{font-family:monospace;font-size:11px;color:#f97316;white-space:nowrap;min-width:0;flex-shrink:0;padding-top:1px;word-break:break-all;}
+.reg-desc{font-size:12px;color:rgba(255,255,255,.65);line-height:1.45;}
+.ce-tip{background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 6px 6px 0;padding:12px 14px;margin-top:12px;font-size:13px;color:#7c2d12;line-height:1.55;}
+.ce-tip strong{color:#9a3412;}
+.q-footer{padding:8px 18px 10px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;border-top:1px solid var(--grey-border);background:var(--grey-bg);}
+.correction-link{font-size:11px;color:var(--grey-text);min-width:0;word-break:break-all;}
+.correction-link a{color:var(--teal);text-decoration:none;}
+.q-version{font-size:10px;color:var(--grey-text);white-space:nowrap;font-family:monospace;}
+#no-results{display:none;text-align:center;padding:48px 20px;color:var(--grey-text);}
+.page-footer{background:#141412;color:rgba(255,255,255,.6);padding:28px 24px;text-align:center;font-size:12px;line-height:1.9;}
+.page-footer a{color:var(--teal);text-decoration:none;}
+.page-footer strong{color:#fff;}
+.cheat-section{max-width:1100px;margin:0 auto;padding:0 16px 60px;}
+.cheat-box{background:var(--navy);color:#fff;border-radius:12px;padding:24px;margin-top:20px;}
+.cheat-box h2{color:var(--teal-light);font-size:16px;margin-bottom:14px;}
+.cheat-item{border-bottom:1px solid rgba(255,255,255,.1);padding:10px 0;font-size:12.5px;line-height:1.6;}
+.cheat-item strong{color:#5eead4;}
+.watermark{position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.05;background-image:repeating-linear-gradient(-30deg,#000 0 2px,transparent 2px 200px);}
+</style>
+</head>
+<body>
+<div class="watermark"></div>
+<nav class="topbar">
+  <div class="topbar-brand"><span class="logo-mark">MIW</span><span class="site-name">Marine Intelligence Weekly</span></div>
+  <div class="topbar-right">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="qb-badge">Question Bank QB6_C · v1.0 · June 2026</div>
+    <h1>Electrical, Automation &amp; <span>Machinery</span> — C</h1>
+    <p class="header-sub">3 questions from Kochi MMD oral sessions, 25 June 2026 — Fail Safe Systems, Main Engine Checks After Layup, Manual Purifier Desludging. Examiner: Nair.</p>
+    <div class="header-meta">
+      <span><strong>3</strong> Questions</span>
+      <span><strong>Examiner:</strong> Nair</span>
+      <span><strong>Compiled by:</strong> Nixon Antony, 2/E, Maersk A/S</span>
+    </div>
+  </div>
+</header>
+<div class="controls-bar">
+  <div class="search-wrap">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search-input" placeholder="Search questions…" oninput="applyFilters()">
+  </div>
+  <div class="filter-row">
+    <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
+    <button class="filter-btn" onclick="filterTag('machinery',this)">Machinery</button>
+    <button class="filter-btn" onclick="filterTag('ism',this)">ISM</button>
+    <button class="filter-btn" onclick="filterTag('survey',this)">Survey</button>
+    <button class="filter-btn" onclick="filterTag('marpol',this)">MARPOL</button>
+  </div>
+  <span class="q-count-label" id="q-count-label">Showing 3 of 3</span>
+</div>
+<div class="main-layout">
+  <aside class="sidebar">
+    <div class="toc-label">Contents</div>
+    <a class="toc-link" href="#q1">1. Fail Safe Systems</a>
+    <a class="toc-link" href="#q2">2. ME Checks After Layup</a>
+    <a class="toc-link" href="#q3">3. Manual Purifier Desludging</a>
+    <div class="sidebar-note">📌 Nair likes chaining: fail-safe → ME after layup → purifier desludging all surfaced in the same 25 Jun session.</div>
+  </aside>
+  <main id="q-feed">
+    <div class="section-head"><h2>🔧 Fail Safe, Layup &amp; Machinery</h2><span class="sec-count">3 questions</span></div>
+
+    <!-- Q1 -->
+    <div class="q-card" id="q1" data-tags="machinery ism">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Fail safe — define fail safe. Give specific examples of fail safe systems onboard.</div>
+          <div class="q-tags"><span class="q-tag">Machinery</span><span class="q-tag">ISM</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>A fail-safe system is a design principle where any failure of power, signal, or a component automatically forces the system into a pre-determined safe state, minimising risk to personnel, ship and environment. Examples: pneumatic fuel oil quick-closing valves fail CLOSED on loss of control air; ME overspeed trip shuts down fuel via a spring-loaded mechanical trip on signal loss.</div>
+          <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Sir, a fail-safe system defaults to a pre-determined safe condition on loss of power, air or signal. Two logic types: (1) <strong>De-energise to Safe</strong> — passive mechanical action, e.g. fuel oil cut-off valves fail CLOSED using spring-return on air-pressure loss, and UMS bilge high-level loops trigger alarm on open-circuit failure. (2) <strong>Energise to Safe</strong> — a loss triggers an alternate energy source, e.g. emergency generator auto-starts on blackout via spring/hydraulic accumulator. Other examples: boiler burner shutdown on low water, steering gear reverting to manual on autopilot power failure.</div>
+
+          <h4>Definition</h4>
+          <p>A <strong>fail-safe</strong> system is an engineering design methodology ensuring that if a component, control signal, or power supply fails, the system automatically reverts to a pre-determined, predictable state that prevents machinery damage, environmental pollution, and protects human life.</p>
+
+          <h4>Principle of Operation</h4>
+          <ul>
+            <li><strong>De-energise to Safe:</strong> relies on stored mechanical energy (springs, gravity) to actuate when holding force (electricity/air) is cut off.</li>
+            <li><strong>Energise to Safe:</strong> absence of primary signal actively triggers an autonomous secondary system to restore vital functions.</li>
+          </ul>
+
+          <h4>Specific Onboard Examples</h4>
+          <ul>
+            <li><strong>Pneumatic fuel oil cut-off valve:</strong> fails CLOSED via return spring on loss of control air, isolating fuel supply.</li>
+            <li><strong>Steering gear autopilot:</strong> fails to MANUAL OVERRIDE on autopilot power loss.</li>
+            <li><strong>ME overspeed trip:</strong> fails to SHUTDOWN via independent mechanical spring-loaded trip on signal loss.</li>
+            <li><strong>UMS bilge high-level alarm:</strong> fails to ALARM if sensor cable is cut (de-energise to alarm circuit).</li>
+            <li><strong>Emergency generator:</strong> fails to AUTO-START via stored spring/hydraulic energy on blackout.</li>
+            <li><strong>Fixed CO2 system:</strong> mechanical cable/pilot-gas trip — remains operable without ship's electrical grid.</li>
+            <li><strong>Boiler low-water level:</strong> fails to BURNER SHUTDOWN via fuel solenoid drop-out.</li>
+            <li><strong>IGS pressure control valve:</strong> fails CLOSED on loss of instrument air, preventing hydrocarbon gas back-flow into non-hazardous spaces.</li>
+          </ul>
+
+          <h4>Fail Safe vs Fail Secure</h4>
+          <p><strong>Fail safe</strong> prioritises hazard mitigation — opens pathways or shuts down processes (quick-closing fuel valve). <strong>Fail secure</strong> prioritises containment — e.g. a watertight door or secure locker stays LOCKED on power loss.</p>
+
+          <h4>Exam Test — Apply Fail Safe Logic</h4>
+          <p>Apply the <em>Zero-Power Test</em>: total loss of power/air &rarr; what is the physical position/state? &rarr; is this the least hazardous state? If the system freezes in last position or drifts unpredictably, it is not fail-safe.</p>
+
+          <h4>CE Relevance</h4>
+          <p>As Chief Engineer, testing fail-safe logic is a critical safety-verification duty. During PMS/UMS testing, simulate the absolute failure mode (physically disconnect a wire, isolate instrument air) rather than pressing a "test" button, confirming springs, backup relays and downstream trips operate as designed.</p>
+
+          <div class="trap-box"><strong class="trap-label">Trap Question</strong>"Is the ME remote start system fail-safe?" — No: loss of remote start signal must fail to <strong>NO START</strong>, not to start, otherwise the engine could crank unexpectedly during maintenance or with turning gear engaged.</div>
+
+          <h4>Common CE Failures</h4>
+          <p>Naming a component without explaining the logic. Say: "loss of control medium causes internal springs to push the valve closed, preventing fuel propagation to a fire zone" — not just "the fuel valve is fail-safe."</p>
+
+          <div class="numbers-box"><h4>Numbers / Regs</h4>SOLAS II-1 Regs 46–52 (UMS block, incl. Reg 49 bridge propulsion control fail-safe logic) · IEC 60092-504 (open-circuit fault alarms)</div>
+
+          <div class="casualty-box"><strong class="cas-label">Casualty Link</strong>A container vessel blackout/grounding (2019) traced to a modified fuel control valve that failed "as-is" (held last position) instead of fail-closed on a 24V DC control-loop short, over-fuelling the engine and tripping the main breaker.</div>
+
+          <h4>Examiner Chain</h4>
+          <p>Nair &rarr; fail-safe definition &rarr; examples &rarr; "is the ME fuel rack fail-safe?" &rarr; UMS open-circuit fault monitoring requirements.</p>
+
+          <h4>On My Vessel</h4>
+          <p><strong>Container (Maersk):</strong> ME remote-stop circuit runs de-energise-to-trip — a broken control wire anywhere between bridge and ECR immediately registers a safety fault, so loop integrity is continuously monitored.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1 Regs 46–52</span><span class="reg-desc">Unattended machinery space — fail-safe alarm and shutdown logic</span></div>
+          <div class="reg-item"><span class="reg-code">Class UMS Notation</span><span class="reg-desc">Fail-safe requirements per automated marine installation</span></div>
+          <div class="reg-item"><span class="reg-code">IEC 60092-504</span><span class="reg-desc">Shipboard electrical control and instrumentation — open-circuit fault design</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code Sec. 10</span><span class="reg-desc">Maintenance — testing of fail-safe systems</span></div>
+          <div class="reg-item"><span class="reg-code">NOx Technical Code</span><span class="reg-desc">Fuel injection interlocks and safety-critical default profiles</span></div>
+        </div>
+        <div class="ce-tip"><strong>CE Oral Tip:</strong> Nair expects a definition first, then 4–5 specific examples. For each: (1) the system, (2) the failure scenario, (3) the position it goes to, (4) why that is safe. Do not just list names — show the logic.</div>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_C, Q1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB6_C · Q1 · v1.0</span>
+      </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="q-card" id="q2" data-tags="machinery survey ism">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Checks on main engine after layup — what are the mandatory checks before restart?</div>
+          <div class="q-tags"><span class="q-tag">Machinery</span><span class="q-tag">Survey</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>Reactivation after layup is a phased sequence: remove preservation → lube oil and cooling water quality checks → line up fuel and air start → slow-turn on turning gear with indicator cocks open → controlled, low-load start under Class Surveyor attendance.</div>
+          <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Sir, restarting requires a strict phased procedure to avoid mechanical damage or hydrostatic lock. First, clear preservation covers/plugs/grease. Second, purify the lube sump to remove moisture and check jacket water treatment. Third, line up and heat the fuel system to viscosity. Fourth, with indicator cocks open, engage turning gear for at least two full revolutions checking for fluid discharge. Finally, blow through on air, disengage turning gear, and execute a controlled low-load start under Class Survey oversight.</div>
+
+          <h4>Phase 1 — Depreservation and External Checks</h4>
+          <ul>
+            <li>Remove blanks, silica gel bags, exhaust covers and preservation plugs on turbochargers/manifolds.</li>
+            <li>Clean anti-corrosive grease from piston rods, guides and linkages.</li>
+            <li>Inspect crankcase for corrosion, scaling or biological growth; verify foundation bolts and chocks tight.</li>
+          </ul>
+          <h4>Phase 2 — Lubrication System</h4>
+          <ul>
+            <li>Run lube oil purifier to remove condensation moisture; sample for viscosity, water%, TBN, acid number.</li>
+            <li>Prime lube oil and camshaft pumps; verify oil flow at crossheads, crankpins, main bearings, piston cooling.</li>
+          </ul>
+          <h4>Phase 3 — Cooling Water System</h4>
+          <p>Fill jacket water, vent air locks, pressurise and check joints/liner seals for leaks; verify pH (typically 8.5–10), hardness and inhibitor levels.</p>
+          <h4>Phase 4 — Fuel System</h4>
+          <p>Flush preservation oil, line up HFO/MDO, run booster pumps, heat to injection viscosity, inspect injection pumps and high-pressure pipes for weeping.</p>
+          <h4>Phase 5 — Air Start System</h4>
+          <p>Drain water from air bottles/filters, charge receivers to design pressure, function-test remote stop valves and slow-turn interlocks.</p>
+          <h4>Phase 6 — Turning Gear and Slow Turn</h4>
+          <p>Open all indicator cocks fully, engage turning gear, rotate through at least two full revolutions monitoring cocks for water/oil/fuel discharge (hydrostatic lock check), then disengage and confirm the electrical interlock.</p>
+          <h4>Phase 7 — Controlled Start</h4>
+          <p>Air blow-through with cocks open to clear residue, close cocks, start on fuel at minimal load, run dead-slow monitoring exhaust temperatures and crosshead temperatures before increasing load.</p>
+
+          <h4>Class Surveyor Involvement</h4>
+          <p>A vessel emerging from official (hot or cold) layup undergoes a formal <strong>Reactivation Survey</strong> — a Class Surveyor must witness the initial start, verify safety trips (overspeed, low lube oil pressure) and confirm operational readiness before class certificate validity is restored.</p>
+
+          <h4>CE Relevance</h4>
+          <p>The Chief Engineer is accountable for confirming propulsion machinery reliability before departure — log every reactivation step, document Surveyor attendance, and ensure the SMS reactivation checklist is fully signed off.</p>
+
+          <div class="trap-box"><strong class="trap-label">Trap Question</strong>"You see a trickle of water from No.3 indicator cock during turning — can you proceed?" — No: water indicates a cracked liner, leaking cover gasket or exhaust valve housing. Firing air/fuel into that cylinder risks hydraulic lock, a bent rod or a cracked liner. Isolate cooling water and investigate before proceeding.</div>
+
+          <h4>Common CE Failures</h4>
+          <p>Skipping the turning-gear phase and jumping to start; omitting the Class Surveyor requirement; failing to mention lube oil purification/lab testing.</p>
+
+          <div class="numbers-box"><h4>Numbers / Regs</h4>SOLAS II-1 Reg 26 (propulsion machinery availability) · Class reactivation rules (functional trip checks) · ISM Code Sec. 10</div>
+
+          <div class="casualty-box"><strong class="cas-label">Casualty Link</strong>A multi-purpose vessel (2021) suffered a crankcase explosion and bent crankshaft two hours after leaving a layup berth — the lube purifier was not run long enough to remove sump condensation, causing bearing film failure under load.</div>
+
+          <h4>Examiner Chain</h4>
+          <p>Nair &rarr; ME checks after layup &rarr; water found in cylinders &rarr; which class certificates need renewal &rarr; first sea trial requirement.</p>
+
+          <h4>On My Vessel</h4>
+          <p><strong>Container (Maersk):</strong> a 2-stroke slow-speed engine reactivation follows a dedicated 48-hour SMS sequence — pre-heating jacket water to ~60°C to avoid thermal shock, running cylinder oil alpha lubricators in manual mode to pre-lubricate liners, and verifying ECS backups are aligned before start.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">ISM Code Sec. 10</span><span class="reg-desc">Maintenance — documented restart/reactivation procedures</span></div>
+          <div class="reg-item"><span class="reg-code">Class Society Rules</span><span class="reg-desc">Reactivation survey and certification restoration after layup</span></div>
+          <div class="reg-item"><span class="reg-code">Engine Maker Manual</span><span class="reg-desc">Pre-start sequence, torque checks, thermal pre-heating</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1 Reg 26</span><span class="reg-desc">Propulsion/steering/generation availability before departure</span></div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex I</span><span class="reg-desc">IOPP certificate and OWS validation before sailing</span></div>
+        </div>
+        <div class="ce-tip"><strong>CE Oral Tip:</strong> Give Nair a structured sequence — (1) depreservation, (2) lube oil, (3) cooling water, (4) fuel, (5) air start, (6) slow turn with cocks open, (7) controlled start with Class Surveyor present. Never say "start the engine and check while running" — the phased approach is mandatory.</div>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_C, Q2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB6_C · Q2 · v1.0</span>
+      </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="q-card" id="q3" data-tags="machinery marpol ism">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">3</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Manual desludging of purifier — explain the procedure step by step.</div>
+          <div class="q-tags"><span class="q-tag">Machinery</span><span class="q-tag">MARPOL</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="answer-body">
+          <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>Manual desludging is done when auto-desludge fails or as scheduled maintenance: stop and isolate (LOTO), wait for complete bowl stop, drain, disassemble and clean the bowl manually with non-metallic tools, inspect, reassemble to torque, then recommission with a water seal.</div>
+          <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Sir, this is high-risk due to bowl speeds up to 10,000 RPM. I isolate feed and heating steam, press stop, apply LOTO, and wait for a verified complete stop before touching the casing. I then drain the bowl, remove the main locking ring with special tools, extract the disc stack, and scrape sludge using wooden/brass tools only — never steel. After inspecting O-rings and disc alignment marks, I reassemble to the correct torque, restore power, re-establish the water seal, and bring the unit back online while watching for vibration.</div>
+
+          <h4>When Manual Desludging Is Required</h4>
+          <ul>
+            <li>Automatic desludge failure (operating water fails to drop the sliding bottom).</li>
+            <li>Heavy fuel contamination / incompatible blend dropout.</li>
+            <li>PMS-scheduled overhaul (typically every 500–1000 hours per maker).</li>
+            <li>Pre-drydocking system clearance.</li>
+          </ul>
+
+          <h4>Safety Precautions Before Starting</h4>
+          <ul>
+            <li>Permit to Work and risk assessment for high-speed rotating machinery.</li>
+            <li>LOTO on the motor breaker with warning notices.</li>
+            <li><strong>Verify zero speed</strong> physically (revolution indicator/spindle check) — bowls run 6,000–10,000 RPM and may spin down for 15–30 minutes on inertia. Never open a spinning bowl.</li>
+            <li>PPE for thermal hazard — bowl/oil components may still be near 98°C.</li>
+          </ul>
+
+          <h4>Step-by-Step Procedure</h4>
+          <p><strong>1. Stop and Isolate:</strong> shut dirty-oil inlet and clean-oil outlet, shut steam heating, press stop, verify zero current, engage LOTO, confirm complete physical stop.</p>
+          <p><strong>2. Drain the Bowl:</strong> open the housing drain to clear residual oil/liquid to the sludge line.</p>
+          <p><strong>3. Disassemble:</strong> open cover clamps, fit locking/braking tool if required, slacken the main locking ring (left-hand thread — turn clockwise to loosen) with the special spanner, lift out the disc stack with the maker's tool.</p>
+          <p><strong>4. Manual Cleaning:</strong> scrape sludge with wooden/brass/plastic tools only (steel scores the alloy and creates stress points); soak disc stack in diesel/chemical bath, clear inter-disc channels.</p>
+          <p><strong>5. Inspect Components:</strong> check O-rings, main and sliding-bottom seal rings, disc distribution holes, gravity/paring disc for erosion or cavitation.</p>
+          <p><strong>6. Reassemble:</strong> seat sliding bottom, drop disc stack matching alignment marks, lubricate and thread the (left-hand) locking ring counter-clockwise to the correct torque until marks align.</p>
+          <p><strong>7. Recommission:</strong> close casing, remove LOTO, restore power, start and verify current draws to normal, supply sealing water until it overflows the waste line, slowly open feed and monitor 15 minutes for vibration/noise.</p>
+          <p><strong>8. Record:</strong> log in PMS; enter sludge quantity in the <strong>Oil Record Book Part I, Code C</strong> (retention and disposal of residues).</p>
+
+          <div class="trap-box"><strong class="trap-label">Trap Question</strong>"Alignment marks are off by ~5mm on reassembly — what do you do?" — Disassemble again: a disc is out of place, sludge is trapped under the stack, or the seal ring is not seated. Running with marks misaligned risks catastrophic bowl imbalance and mechanical failure.</div>
+
+          <h4>CE Relevance</h4>
+          <p>The Chief Engineer must ensure crew never bypass zero-speed interlocks, and that recorded sludge volumes reconcile with the ORB Part I entries and sounding records.</p>
+
+          <h4>Common CE Failures</h4>
+          <p>Omitting LOTO and zero-speed verification; forgetting the steel-scraper warning; failing to mention the mandatory ORB Part I sludge entry.</p>
+
+          <div class="numbers-box"><h4>Numbers / Regs</h4>MARPOL Annex I Reg 12 (sludge tank retention and ORB recording) · Maker's manual torque and alignment specs</div>
+
+          <div class="casualty-box"><strong class="cas-label">Casualty Link</strong>A tanker (2017) suffered an engine-room fire when a third engineer opened a purifier cover before the bowl had fully stopped — the unbalanced bowl shattered its casing, ruptured a fuel line, and ignited on the adjacent auxiliary engine exhaust.</div>
+
+          <h4>Examiner Chain</h4>
+          <p>Nair &rarr; manual desludging steps &rarr; sludge destination and handling &rarr; ORB entry protocol &rarr; action on a cracked separator disc.</p>
+
+          <h4>On My Vessel</h4>
+          <p><strong>Container (Maersk):</strong> centralised fuel treatment plant with Alfa Laval ALCAP separators; manual overhaul mandated every 1000 running hours per SMS PMS. Cleaning residues route to the sludge tank, measured by sounding table, and logged in the ORB by the Second Engineer, verified by the Chief Engineer.</p>
+        </div>
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">MARPOL Annex I Reg 12</span><span class="reg-desc">Sludge tank retention, disposal, and ORB Part I entries</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code Sec. 7</span><span class="reg-desc">Shipboard operations — mandatory PTW and LOTO</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code Sec. 10</span><span class="reg-desc">Maintenance — purifier as critical machinery</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS II-1 Reg 26</span><span class="reg-desc">Machinery safety shielding around rotating parts</span></div>
+          <div class="reg-item"><span class="reg-code">Purifier Maker Manual</span><span class="reg-desc">Assembly torque, alignment tolerances, gravity disc sizing</span></div>
+        </div>
+        <div class="ce-tip"><strong>CE Oral Tip:</strong> Open with safety: "Sir, before any purifier maintenance I will raise a Permit to Work, apply LOTO, and only open the bowl after physically verifying zero speed." Then walk the 8 steps. The ORB sludge entry and correct disc reassembly are the two most common failure points.</div>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_C, Q3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB6_C · Q3 · v1.0</span>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<div class="cheat-section">
+  <div class="cheat-box">
+    <h2>⚡ QB6_C Cheat Sheet — Fail Safe, Layup &amp; Machinery</h2>
+    <div class="cheat-item"><strong>Q1 Fail Safe:</strong> Definition = defaults to safe state on power/signal/component loss. Two logics: de-energise-to-safe (springs — fuel valve fails closed) vs energise-to-safe (emergency gen auto-starts). Give 4–5 examples with failure scenario + resulting position + why it's safe. Trap: ME remote start fails to NO START, not start.</div>
+    <div class="cheat-item"><strong>Q2 ME After Layup:</strong> 7-phase sequence — depreservation → lube oil (purify, sample TBN/water) → cooling water (vent, pH 8.5–10) → fuel (heat to viscosity) → air start (charge bottles) → turning gear (2 revolutions, cocks open, check for water/oil discharge) → controlled start under Class Surveyor. Trap: any liquid from indicator cocks = stop, investigate, do not proceed.</div>
+    <div class="cheat-item"><strong>Q3 Manual Desludging:</strong> LOTO + verify zero speed (bowl runs 6,000–10,000 RPM, can coast 15–30 min) → drain → open main locking ring (left-hand thread) → extract disc stack → clean with wood/brass tools only (never steel) → inspect O-rings/alignment marks → reassemble to torque → recommission with water seal → log sludge in ORB Part I Code C. Trap: misaligned marks on reassembly = disassemble again, do not run.</div>
+    <div class="cheat-item"><strong>Common thread:</strong> Nair rewards structured, phased, safety-first answers with the regulatory anchor named (SOLAS II-1 UMS block, MARPOL Annex I Reg 12, ISM Sec 7/10) — not just a list of steps.</div>
+  </div>
+</div>
+
+<footer class="page-footer">
+  <p><strong>Marine Intelligence Weekly</strong> — MEO Class 1 Question Bank</p>
+  <p>Compiled by Nixon Antony, 2/E, Maersk A/S. Content reflects real Kochi MMD oral exam sessions — verify against current IMO instruments before your own exam.</p>
+  <p>Spotted an error? Email <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a> with subject "QB6_C, QN, Correction Required".</p>
+</footer>
+
+<div id="no-results"><p>No questions match your search/filter.</p></div>
+
+<script>
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+</script>
+
+<script>
+(function(){
+  if(document.cookie.split('; ').indexOf('miw_auth=1')===-1){
+    window.location.href='/SQ/pay.html';
+  }
+})();
+</script>
+
+</body>
+</html>

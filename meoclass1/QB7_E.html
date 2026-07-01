@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>QB7_E — GHG, CII &amp; Decarbonisation — Companion E | MIW MEO Class 1 Question Bank</title>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+<style>
+:root{
+  --teal:#0d9488;
+  --teal-dark:#0f766e;
+  --teal-light:#ccfbf1;
+  --navy:#0f172a;
+  --orange:#f97316;
+  --orange-light:#fff7ed;
+  --off-white:#f8fafc;
+  --grey-text:#64748b;
+  --grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;
+  --ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI', system-ui, sans-serif;
+  background:var(--off-white);
+  color:var(--ink);
+  line-height:1.5;
+}
+a{color:var(--teal-dark);text-decoration:none;}
+a:hover{text-decoration:underline;}
+
+/* TOPBAR */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:var(--navy);
+  color:#fff;
+  display:flex;align-items:center;gap:12px;
+  padding:10px 20px;
+  font-size:14px;
+}
+.topbar .logo-mark{
+  width:30px;height:30px;border-radius:6px;
+  background:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:14px;color:#fff;
+  flex-shrink:0;
+}
+.topbar .site-name{font-weight:600;letter-spacing:0.3px;flex-shrink:0;}
+.topbar nav{margin-left:auto;display:flex;gap:18px;}
+.topbar nav a{color:#cbd5e1;font-size:13px;}
+.topbar nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{
+  background:var(--navy);
+  color:#fff;
+  padding:28px 20px 22px;
+}
+.page-header .qb-badge{
+  display:inline-block;
+  background:var(--teal);
+  color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;
+  padding:4px 10px;border-radius:4px;
+  margin-bottom:10px;
+}
+.page-header h1{
+  font-size:24px;font-weight:700;margin-bottom:6px;
+}
+.page-header .sub-desc{
+  color:#cbd5e1;font-size:14px;max-width:760px;
+}
+.header-meta{
+  display:flex;gap:18px;flex-wrap:wrap;
+  margin-top:14px;font-size:12px;color:#94a3b8;
+}
+.header-meta strong{color:#e2e8f0;}
+
+/* CONTROLS BAR */
+.controls-bar{
+  position:sticky;top:48px;z-index:90;
+  background:#fff;
+  border-bottom:1px solid var(--grey-border);
+  padding:12px 20px;
+  display:flex;align-items:center;gap:10px;
+  flex-wrap:wrap;
+}
+#search-input{
+  flex:1 1 220px;max-width:340px;
+  padding:8px 12px;
+  border:1px solid var(--grey-border);
+  border-radius:6px;font-size:13px;
+}
+#search-input:focus{outline:none;border-color:var(--teal);}
+.filter-btn{
+  background:var(--grey-bg);
+  border:1px solid var(--grey-border);
+  color:var(--grey-text);
+  font-size:12px;font-weight:600;
+  padding:6px 12px;border-radius:20px;
+  cursor:pointer;transition:all .15s;
+}
+.filter-btn:hover{background:var(--teal-light);color:var(--teal-dark);}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{
+  margin-left:auto;font-size:12px;color:var(--grey-text);font-weight:600;
+}
+
+/* MAIN LAYOUT */
+.main-layout{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:24px;
+  max-width:1100px;
+  margin:0 auto;
+  padding:24px 20px 60px;
+}
+@media (max-width:800px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+}
+
+/* SIDEBAR */
+.sidebar{
+  position:sticky;top:110px;
+  align-self:start;
+  max-height:calc(100vh - 130px);
+  overflow-y:auto;
+  font-size:13px;
+}
+.sidebar h3{
+  font-size:11px;text-transform:uppercase;letter-spacing:1px;
+  color:var(--grey-text);margin-bottom:10px;
+}
+.toc-link{
+  display:block;padding:6px 10px;border-radius:5px;
+  color:var(--ink);font-size:13px;
+  border-left:2px solid transparent;
+  transition:all .15s;
+}
+.toc-link:hover{background:var(--teal-light);text-decoration:none;}
+.toc-link.active{
+  background:var(--teal-light);
+  border-left:2px solid var(--teal);
+  color:var(--teal-dark);font-weight:600;
+}
+.sidebar .divider{
+  border-top:1px solid var(--grey-border);
+  margin:14px 0;
+}
+.sidebar .upcoming-note{
+  background:var(--grey-bg);
+  border-radius:6px;padding:10px;
+  font-size:12px;color:var(--grey-text);
+}
+
+/* SECTION HEAD */
+.section-head{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin:28px 0 12px;
+}
+.section-head:first-child{margin-top:0;}
+.section-head h2{font-size:16px;font-weight:700;color:var(--ink);}
+.sec-count{
+  font-size:11px;font-weight:700;color:var(--teal-dark);
+  background:var(--teal-light);padding:2px 8px;border-radius:10px;
+}
+
+/* Q CARD */
+.q-card{
+  background:#fff;
+  border:1px solid var(--grey-border);
+  border-radius:8px;
+  margin-bottom:10px;
+  overflow:hidden;
+}
+.q-header{
+  display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;
+  cursor:pointer;
+  transition:background .15s;
+}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{
+  flex-shrink:0;
+  width:28px;height:28px;border-radius:6px;
+  background:var(--teal);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;
+}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:6px;}
+.q-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.q-tag{
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;
+  padding:2px 8px;border-radius:10px;
+  background:var(--grey-bg);color:var(--grey-text);
+}
+.q-tag.tag-solas{background:#e0f2fe;color:#0369a1;}
+.q-tag.tag-marpol{background:#fef3c7;color:#92400e;}
+.q-tag.tag-iacs{background:#ede9fe;color:#5b21b6;}
+.q-tag.tag-survey{background:var(--teal-light);color:var(--teal-dark);}
+.q-tag.tag-stability{background:#fce7f3;color:#9d174d;}
+.q-tag.tag-machinery{background:#dbeafe;color:#1e40af;}
+.q-tag.tag-ghg{background:#dcfce7;color:#166534;}
+.q-tag.tag-stcw{background:#ffe4e6;color:#9f1239;}
+.q-chevron{
+  flex-shrink:0;width:20px;height:20px;
+  stroke:var(--grey-text);transition:transform .2s;
+}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+
+/* ANSWER PANEL */
+.q-answer{
+  display:none;
+  padding:0 16px 16px;
+  border-top:1px solid var(--grey-border);
+}
+.q-card.open .q-answer{display:block;padding-top:14px;}
+.answer-body{font-family:'Georgia',serif;font-size:14px;color:var(--ink);}
+.answer-body h4{
+  font-size:12px;text-transform:uppercase;letter-spacing:0.8px;
+  color:var(--teal-dark);font-family:'Segoe UI',system-ui,sans-serif;
+  font-weight:700;margin:16px 0 6px;
+}
+.answer-body h4:first-child{margin-top:0;}
+.answer-body p{margin-bottom:10px;}
+.answer-body ul, .answer-body ol{margin:0 0 10px 22px;}
+.answer-body li{margin-bottom:5px;}
+.answer-body strong{color:var(--ink);font-weight:700;}
+.answer-body em{color:var(--grey-text);}
+.formula{
+  font-family:monospace;background:var(--grey-bg);
+  padding:10px 12px;border-radius:6px;margin:10px 0;font-size:13.5px;
+}
+
+/* PRACTICE BLOCKS (15s/60s) */
+.practice-block{
+  background:var(--teal-light);
+  border-left:3px solid var(--teal);
+  border-radius:0 6px 6px 0;
+  padding:10px 14px;margin-bottom:10px;
+  font-family:'Georgia',serif;font-size:13.5px;color:var(--ink);
+}
+.practice-block .pb-label{
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  color:var(--teal-dark);margin-bottom:4px;display:block;
+}
+
+/* REG BOX */
+.reg-box{
+  background:var(--navy);
+  border-radius:8px;padding:14px 16px;margin:14px 0;
+  font-family:'Segoe UI',system-ui,sans-serif;
+}
+.reg-box-title{
+  color:#fff;font-size:12px;font-weight:700;margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:0.8px;
+}
+.reg-item{
+  display:flex;gap:12px;flex-wrap:wrap;
+  padding:5px 0;border-bottom:1px solid #1e293b;
+  font-size:12.5px;
+}
+.reg-item:last-child{border-bottom:none;}
+.reg-code{
+  color:var(--orange);font-family:monospace;font-weight:700;
+  flex:0 0 auto;min-width:0;word-break:break-all;
+}
+.reg-desc{color:#cbd5e1;flex:1;min-width:0;word-break:break-word;}
+
+/* CE TIP */
+.ce-tip{
+  background:var(--orange-light);
+  border-left:3px solid var(--orange);
+  border-radius:0 6px 6px 0;
+  padding:12px 14px;margin:14px 0;
+  font-size:13.5px;color:#7c2d12;
+}
+.ce-tip strong{color:var(--orange);}
+
+/* EXTRA BLOCKS (collapsible deep-dive sections) */
+.deep-dive{
+  margin-top:14px;border:1px solid var(--grey-border);border-radius:8px;
+  overflow:hidden;
+}
+.deep-dive summary{
+  cursor:pointer;padding:10px 14px;
+  font-family:'Segoe UI',system-ui,sans-serif;
+  font-size:12.5px;font-weight:700;color:var(--teal-dark);
+  background:var(--grey-bg);
+  list-style:none;display:flex;align-items:center;gap:8px;
+}
+.deep-dive summary::-webkit-details-marker{display:none;}
+.deep-dive summary::before{content:"▸";font-size:11px;}
+.deep-dive[open] summary::before{content:"▾";}
+.deep-dive-body{padding:12px 14px;font-size:13.5px;}
+.deep-dive-body h5{
+  font-size:11px;text-transform:uppercase;letter-spacing:0.6px;
+  color:var(--grey-text);margin:10px 0 4px;font-family:'Segoe UI',system-ui,sans-serif;
+}
+.deep-dive-body h5:first-child{margin-top:0;}
+.deep-dive-body p{margin-bottom:8px;}
+.deep-dive-body .trap-q{font-weight:700;color:var(--ink);}
+.deep-dive-body .trap-a{color:var(--grey-text);margin-bottom:8px;}
+
+/* FOOTER (per card) */
+.q-footer{
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:8px;
+  padding:10px 16px;
+  background:var(--grey-bg);
+  font-size:11.5px;color:var(--grey-text);
+  border-top:1px solid var(--grey-border);
+}
+.correction-link{min-width:0;word-break:break-all;}
+.correction-link a{word-break:break-all;}
+.q-version{flex-shrink:0;font-weight:600;}
+
+/* NO RESULTS */
+#no-results{
+  display:none;text-align:center;padding:60px 20px;color:var(--grey-text);
+}
+
+/* PAGE FOOTER */
+.page-footer{
+  background:var(--navy);color:#cbd5e1;
+  padding:30px 20px;font-size:12.5px;
+  text-align:center;
+}
+.page-footer a{color:var(--teal-light);}
+.page-footer .disclaimer{
+  max-width:700px;margin:12px auto 0;color:#94a3b8;font-size:11.5px;
+}
+
+body{-webkit-user-select:none;-moz-user-select:none;user-select:none;}
+.mi-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:.05;background-repeat:repeat;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='200'%3E%3Ctext x='0' y='100' font-size='20' fill='%230f172a' transform='rotate(-30 200 100)'%3EMarine Intelligence Weekly%3C/text%3E%3C/svg%3E");}
+</style>
+</head>
+<body>
+<div class="mi-watermark"></div>
+
+<script>
+document.addEventListener('contextmenu', function(e){e.preventDefault();});
+document.addEventListener('copy', function(e){e.preventDefault();});
+document.addEventListener('selectstart', function(e){e.preventDefault();});
+</script>
+<script>
+(function(){
+  function getCookie(name){
+    var m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return m ? m.pop() : '';
+  }
+  if (getCookie('miw_auth') !== '1') {
+    window.location.href = '/SQ/pay.html';
+  }
+})();
+</script>
+
+
+<div class="topbar">
+  <div class="logo-mark">MIW</div>
+  <div class="site-name">Marine Intelligence Weekly</div>
+  <nav>
+    <a href="https://marineintelligenceweekly.com/">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/contact.html">Contact</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <span class="qb-badge">QB7_E · MEO Class 1 Question Bank</span>
+  <h1>GHG, CII &amp; Decarbonisation — Companion E</h1>
+  <p class="sub-desc">5 questions from the 30 Jun 2026 WhatsApp batch: Fuel Lifecycle LCA (FLL), cargo-as-fuel rules, IGF Code rationale, low-flashpoint fuel scope boundaries, and UNFCCC relevance to shipping. Examiner: Simon (+Nair on UNFCCC). Companion file — standalone Q1–Q5 numbering. Includes embedded cheat sheet.</p>
+  <div class="header-meta">
+    <span><strong>Compiled by:</strong> Nixon Antony, 2/E, Maersk A/S</span>
+    <span><strong>Examiners referenced:</strong> Simon, Nair</span>
+    <span><strong>Version:</strong> v1.0 · June 2026</span>
+  </div>
+</div>
+
+<div class="controls-bar">
+  <input type="text" id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all', this)">All</button>
+  <button class="filter-btn" onclick="filterTag('ghg', this)">GHG / CII</button>
+  <button class="filter-btn" onclick="filterTag('marpol', this)">MARPOL</button>
+  <span id="q-count-label">Showing {N} of {N}</span>
+</div>
+
+<div class="main-layout">
+  <div class="sidebar">
+    <h3>Contents</h3>
+    <a class="toc-link" href="#q1">Q1. FLL — what will the CE know from FLL data?</a>
+    <a class="toc-link" href="#q2">Q2. Can cargo be used as fuel? Which code governs</a>
+    <a class="toc-link" href="#q3">Q3. Why is the IGF Code required?</a>
+    <a class="toc-link" href="#q4">Q4. Low flashpoint fuels — where are they used wi</a>
+    <a class="toc-link" href="#q5">Q5. UNFCCC — what is it and its relevance to ship</a>
+    <div class="divider"></div>
+    <div class="upcoming-note">Companion file — own Q1…Qn numbering. Part of the MIW MEO Class 1 QB7_E series.</div>
+  </div>
+
+  <div id="q-feed">
+<div class="section-head"><h2>📋 Quick-Reference Cheat Sheet</h2><span class="sec-count">5 questions</span></div>
+<div class="q-card open" style="cursor:default;">
+<div class="q-answer" style="display:block;padding:16px 18px;">
+<div class="answer-body">
+<h4>QB7_E Cheat Sheet — FLL / Alt. Fuels / IGF Code / UNFCCC</h4>
+<table class="comp-table">
+<tr><th>Q</th><th>Core Fact</th><th>Key Reg</th></tr>
+<tr><td>Q1 FLL</td><td>Fuel Lifecycle LCA — Well-to-Tank + Tank-to-Wake carbon footprint tracked via BDN/sustainability declarations.</td><td>MEPC.376(80) LCA Guidelines</td></tr>
+<tr><td>Q2 Cargo as fuel</td><td>Cargo cannot generally be used as ship's fuel unless purpose-built (e.g. LNG carrier boil-off gas) — governed by IGF Code.</td><td>SOLAS II-1 Part G; IGF Code</td></tr>
+<tr><td>Q3 IGF Code</td><td>Mandatory safety code for low-flashpoint fuels; "Single Failure Principle" is core philosophy — safety, not GHG, standard.</td><td>SOLAS II-1 Reg 56/57; MSC.391(95); STCW V/3</td></tr>
+<tr><td>Q4 Low flashpoint fuels w/o IGF</td><td>Fuels used in non-machinery-space, non-propulsion applications or covered by other codes fall outside IGF scope.</td><td>SOLAS II-1 Part G scope</td></tr>
+<tr><td>Q5 UNFCCC</td><td>Parent climate treaty (1992) under which IMO GHG strategy indirectly operates via Paris Agreement Art. 2/4; IMO retains primary regulatory authority for shipping under UNCLOS/MARPOL.</td><td>UNFCCC 1992; Paris Agreement 2015</td></tr>
+</table>
+</div></div></div>
+
+<div class="section-head"><h2>🌍 GHG, CII &amp; Decarbonisation — Companion E</h2><span class="sec-count">5 questions</span></div>
+    <div class="q-card" id="q1" data-tags="ghg">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">1</div>
+        <div class="q-text-wrap">
+          <div class="q-text">FLL — what will the CE know from FLL data?</div>
+          <div class="q-tags"><span class="q-tag tag-ghg">GHG</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span><strong>15-Second Answer (Teal Practice-Block)</strong> Fuel Lifecycle Assessment (LCA) or FLL data provides the Chief Engineer with the full well-to-wake greenhouse gas emissions profile of a fuel. It ensures compliance with MARPOL Annex VI and the IMO Strategy by accounting for emissions during production and transport (Well-to-Tank) combined with onboard combustion (Tank-to-Wake).</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span><strong>60-Second Answer (Teal Practice-Block)</strong> Under the modern IMO regulatory framework for decarbonisation, FLL data shifts our focus from simple onboard fuel consumption to the total environmental impact of the fuel lifecycle. For a Chief Engineer, this data is reflected in the Bunker Delivery Note (BDN) and the Fuel Lifecycle Label (FLL). It provides the exact carbon dioxide equivalent (CO<sub>2e</sub>) factors required for calculating the vessel’s annual Carbon Intensity Indicator (CII) and ensuring compliance with FuelEU Maritime frameworks. Understanding FLL prevents the vessel from being penalized for using alternative fuels that might have low operational emissions but a high upstream production footprint.</div>
+        <div class="answer-body">
+<h4>Governing Instrument and Regulatory Principle</h4>
+<p>The governing framework is <strong>MARPOL Annex VI (Regulations 26, 27, and 28)</strong>, heavily driven by the <strong>IMO LCA Guidelines (Resolution MEPC.376(80))</strong>. The fundamental working principle relies on calculating the total Carbon Dioxide Equivalent emissions using the formula:</p>
+<p class="formula">Total GHG Factors = Well-to-Tank (WTT) + Tank-to-Wake (TTW)</p>
+<h4>Key Requirements &amp; Working Principle</h4>
+<ul><li><strong>Well-to-Tank (WTT):</strong> Accounts for extraction, processing, refining, and logistics/distribution of the fuel before it reaches the ship's manifold.</li><li><strong>Tank-to-Wake (TTW):</strong> Accounts for onboard storage, energy conversion, and combustion in main engines, auxiliary engines, and boilers.</li><li><strong>GHG Scope:</strong> It tracks not just standard CO<sub>2</sub>, but also methane (CH<sub>4</sub>) slip and nitrous oxide (N<sub>2O</sub>) emissions, converting them into a unified metric (gCO<sub>2e</sub>/MJ).</li></ul>
+<h4>Practical Application for the Chief Engineer</h4>
+<p>The CE utilizes FLL data to verify the documentation provided during bunkering. The statutory values are integrated into the ship's <strong>SEEMP Part III (Ship Energy Efficiency Management Plan)</strong> to accurately project and log the vessel’s operational carbon intensity, directly impacting its yearly CII rating (A to E).</p>
+<h4>Examiner Angle — Simon</h4>
+<p><em>Simon focuses strictly on whether you understand that "zero-emission at the funnel" does not mean zero-emission legally.</em> He will ask you how a fuel like grey methanol or blue ammonia impacts your statutory paperwork if the upstream supply chain is dirty.</p>
+<h4>Chief Engineer Relevance</h4>
+<p>The CE must ensure that the FLL documentation/sustainability certificates match the bunker delivery parameters. Incorrect values entered into the data collection system will result in an artificially inflated or deflated CII calculation, leading to non-compliance during annual verification.</p>
+<h4>Key Numbers / Regs to Remember</h4>
+<ul><li><strong>Resolution MEPC.376(80):</strong> Guidelines on Life Cycle GHG Intensity of Marine Fuels.</li><li><strong>100-year Global Warming Potential (GWP<sub>100</sub>):</strong> Used to scale Methane (factor of 28) and Nitrous Oxide (factor of 265) relative to CO<sub>2</sub>.</li></ul>
+<h4>Applies To</h4>
+<p>Container vessels / Maersk A/S fleet globally.</p>
+<p>> <strong>CE ORAL TIP (Orange Tip Block - Kochi MMD)</strong> > <strong>Examiner:</strong> Simon. <strong>Expects to hear verbatim:</strong> "Well-to-Tank plus Tank-to-Wake tracking under MEPC LCA guidelines." <strong>Common failure point:</strong> Candidates only talk about exhaust emissions (TTW) and completely fail to mention that the upstream production footprint (WTT) is now legally verified via the BDN/sustainability credentials.</p>
+<div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">Convention</span><span class="reg-desc">MARPOL Annex VI Regulation 26, 27, 28</span></div><div class="reg-item"><span class="reg-code">Resolution</span><span class="reg-desc">MEPC.376(80) (LCA Guidelines)</span></div><div class="reg-item"><span class="reg-code">Resolution</span><span class="reg-desc">MEPC.328(76) (CII Framework)</span></div><div class="reg-item"><span class="reg-code">Company Policy</span><span class="reg-desc">Maersk Decarbonisation and Fuel Sustainability Protocols</span></div></div>
+
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5>
+<p>Ensuring data logging within the ship’s digital noon reporting system matches the specific conversion factors listed on the FLL certificate to avoid compliance audits from the flag state.</p><h5>Trap Questions</h5>
+<ul><li><strong>Q:</strong> If you bunker biofuel that emits CO<sub>2</sub> during combustion, why does FLL data give it a lower footprint?</li><li><strong>A:</strong> Because the WTT phase accounts for the carbon absorbed by the biomass feedstock during growth, resulting in a significantly lower net Well-to-Wake value compared to fossil fuels.</li></ul><h5>Common CE Failures</h5>
+<p>Confusing EEDI/EEXI (design indexes) with FLL application (operational lifecycle tracking).</p><h5>Numbers to Memorise</h5>
+<p>MEPC.376(80) framework values.</p><h5>Casualty Link</h5>
+<p>Vessels facing detentions or major commercial penalties in EU ports due to mismatched or missing sustainability certificates under FuelEU frameworks.</p><h5>Examiner Chain</h5>
+<p>FLL Data Definition → How it changes the BDN entry → Impact on Annual CII calculation.</p><h5>On My Vessel</h5>
+<p>Applied directly to fuel management systems on Maersk container vessels when transitioning between conventional VLSFO and green/biodiesel blends.</p>
+<p>---</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_E, Q1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB7_E · Q1 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q2" data-tags="ghg">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Can cargo be used as fuel? Which code governs this?</div>
+          <div class="q-tags"><span class="q-tag tag-ghg">GHG</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span><strong>15-Second Answer (Teal Practice-Block)</strong> Yes, cargo can be used as fuel, provided the arrangement complies with safety regulations. For liquefied gases and low-flashpoint fuels, this process is governed globally by the <strong>IGF Code</strong> and <strong>SOLAS Chapter II-1</strong>, or the <strong>IGC Code</strong> if the vessel is a dedicated gas carrier utilizing its boil-off gas.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span><strong>60-Second Answer (Teal Practice-Block)</strong> Under <strong>SOLAS Chapter II-2</strong>, using fuel with a flashpoint below 60°C is generally prohibited unless explicitly permitted. However, cargo can be used as fuel under strict regulatory conditions. For standard gas carriers, the <strong>IGC Code</strong> governs the use of boil-off cargo gas. For non-gas carriers—such as modern container ships using LNG, methanol, or ammonia as fuel—the arrangement is strictly governed by the <strong>IGF Code</strong> (International Code of Safety for Ships Using Gases or Other Low-flashpoint Fuels). The primary safety objective is to ensure that the risk level of these low-flashpoint fuels is equivalent to that of conventional marine fuel oils.</div>
+        <div class="answer-body">
+<h4>Governing Instrument and Regulatory Principle</h4>
+<p>The use of low-flashpoint cargo or alternative fuels is governed by <strong>SOLAS Regulation II-1/56 and II-1/57</strong>, which make the <strong>IGF Code (Resolution MSC.391(95))</strong> mandatory for non-IGC vessels.</p>
+<h4>Key Requirements &amp; Working Principle</h4>
+<ul><li><strong>Flashpoint Limitation Exceptions:</strong> Standard machinery space arrangements require a minimum fuel flashpoint of 60°C. The IGF code bypasses this by implementing specialized containment and delivery systems.</li><li><strong>Dual-Walled Piping:</strong> All fuel delivery lines outside the storage tanks through machinery spaces must be double-walled (jacketed) with continuous inert gas purging or ventilation combined with gas detection.</li><li><strong>Hazardous Area Classification:</strong> Strict zoning rules separate safe spaces from potential explosive atmospheres around fuel preparation rooms and bunkering stations.</li></ul>
+<h4>Practical Application for the Chief Engineer</h4>
+<p>On modern vessels, the CE oversees the dual-fuel system configuration. This includes verifying the integrity of the fuel preparation room, managing boil-off gas pressure, and ensuring the emergency shutdown (ESD) system is fully functional and tested regularly.</p>
+<h4>Examiner Angle — Simon</h4>
+<p><em>Simon focuses on the core exception rule.</em> He will test you on whether you know the baseline flashpoint limit (60°C) and the exact code required when a container ship utilizes alternative low-flashpoint fuels stored in its fuel/cargo tanks.</p>
+<h4>Chief Engineer Relevance</h4>
+<p>The CE must ensure daily verification of the gas detection systems, ventilation systems in double-walled pipes, and the operational readiness of the inert gas system providing the protective barrier around the fuel lines.</p>
+<h4>Key Numbers / Regs to Remember</h4>
+<ul><li><strong>60°C:</strong> The fundamental minimum flashpoint threshold for conventional machinery spaces under SOLAS.</li><li><strong>Resolution MSC.391(95):</strong> Adoption of the IGF Code.</li></ul>
+<h4>Applies To</h4>
+<p>Dual-fuel container vessels / Maersk A/S fleet conversions and newbuilds.</p>
+<p>> <strong>CE ORAL TIP (Orange Tip Block - Kochi MMD)</strong> > <strong>Examiner:</strong> Simon. <strong>Expects to hear verbatim:</strong> "SOLAS Chapter II-2 sets the baseline limit at 60°C; anything below that requires compliance with the IGF Code for non-gas carriers." <strong>Common failure point:</strong> Candidates fail to distinguish between the IGC Code (for gas carriers carrying cargo) and the IGF Code (for other ship types using low-flashpoint fuel).</p>
+<div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">Convention</span><span class="reg-desc">SOLAS Chapter II-1, Part G (Regulations 56 &amp; 57)</span></div><div class="reg-item"><span class="reg-code">Code</span><span class="reg-desc">IGF Code (Resolution MSC.391(95))</span></div><div class="reg-item"><span class="reg-code">Code</span><span class="reg-desc">IGC Code (For dedicated gas carriers using cargo as fuel)</span></div><div class="reg-item"><span class="reg-code">Convention</span><span class="reg-desc">SOLAS Chapter II-2 (Fire Protection requirements for fuel oil)</span></div></div>
+
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5>
+<p>Operational control over the low-flashpoint fuel system, managing bunkering operations via the specialized risk assessment protocols, and ensuring crew are certified under STCW V/3 (IGF Code training).</p><h5>Trap Questions</h5>
+<ul><li><strong>Q:</strong> Can you use a cargo with a flashpoint of 45°C as fuel in a standard auxiliary engine without any system modifications?</li><li><strong>A:</strong> No, because it violates the SOLAS 60°C minimum limit. It can only be used if the vessel meets all design requirements outlined in the IGF Code.</li></ul><h5>Common CE Failures</h5>
+<p>Forgetting that the IGF code applies to <em>any</em> low-flashpoint fuel, not just LNG (e.g., it covers methanol and liquid hydrogen adaptations).</p><h5>Numbers to Memorise</h5>
+<p>60°C flashpoint limit; MSC.391(95).</p><h5>Casualty Link</h5>
+<p>Methane explosions or gas leaks in engine rooms due to single-point ventilation failures on early alternative fuel retrofits.</p><h5>Examiner Chain</h5>
+<p>Can you use low-flashpoint fuel? → What is the baseline SOLAS limit? → What code overrides this? → What are the pipe design requirements?</p><h5>On My Vessel</h5>
+<p>Directly applicable to modern Maersk green methanol or LNG dual-fuel container vessels, where the bunkering and processing systems follow strict IGF design parameters.</p>
+<p>---</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_E, Q2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB7_E · Q2 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q3" data-tags="ghg">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">3</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Why is the IGF Code required?</div>
+          <div class="q-tags"><span class="q-tag tag-ghg">GHG</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span><strong>15-Second Answer (Teal Practice-Block)</strong> The IGF Code is required to provide a mandatory international standard for ships operating with gas or low-flashpoint fuels. It mitigates the inherent risks of explosion, fire, and toxicity associated with these fuels to ensure ship, crew, and environmental safety.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span><strong>60-Second Answer (Teal Practice-Block)</strong> The IGF Code is necessary because conventional maritime safety regulations under SOLAS are designed around high-flashpoint fuels (above 60°C) like standard heavy fuel oil and marine gas oil. As the industry transitions to alternative fuels to meet IMO GHG targets, ships are increasingly using low-flashpoint options like LNG, methanol, and ammonia. The IGF Code bridges this regulatory safety gap by providing mandatory criteria for the arrangement, installation, control, and monitoring of machinery, equipment, and spaces utilizing these volatile fuels, ensuring that their overall risk profile does not exceed that of a conventional vessel.</div>
+        <div class="answer-body">
+<h4>Governing Instrument and Regulatory Rationale</h4>
+<p>The code is made mandatory via <strong>SOLAS Chapter II-1, Part G</strong>. Its existence stems from the physical characteristics of modern alternative fuels which violate traditional safety assumptions of shipboard machinery spaces.</p>
+<h4>Key Risk Mitigation Principles</h4>
+<ul><li><strong>Explosion Control:</strong> Mitigates the high volatility and wide flammability limits of gaseous fuels through structural containment and continuous hazardous area ventilation.</li><li><strong>Single Failure Principle:</strong> The code dictates that a single failure in any technical component or system must not lead to an unsafe situation or an immediate explosive atmosphere (hence double-walling and automatic ESD integration).</li><li><strong>Toxicity and Cryogenic Protection:</strong> Addresses specific hazards such as cryogenic embrittlement of conventional ship hulls (from LNG at -162°C) or acute toxicity to the crew (from alternative fuels like ammonia).</li></ul>
+<h4>Practical Application for the Chief Engineer</h4>
+<p>The IGF Code establishes the operational boundaries for maintenance, testing schedules, and safety drills. The CE is legally obligated to maintain the integrity of all certified systems, ensuring that interlocks, hazardous area boundary integrity, and automatic gas-trips are never bypassed or compromised.</p>
+<h4>Examiner Angle — Simon</h4>
+<p><em>Simon frames this question from a core safety philosophy perspective.</em> He wants to see if you understand <em>why</em> the engineering designs have changed, focusing heavily on the "Single Failure Principle."</p>
+<h4>Chief Engineer Relevance</h4>
+<p>The code dictates that the CE must manage specialized safety equipment, maintain strict explosive-area tool control, and ensure that all bunkering operations follow the explicit risk-assessment framework mandated by the code.</p>
+<h4>Key Numbers / Regs to Remember</h4>
+<ul><li><strong>Part G (SOLAS Ch II-1):</strong> Ships using low-flashpoint fuels.</li><li><strong>STCW Regulation V/3:</strong> Mandatory minimum requirements for the training and qualifications of masters, officers, and ratings on ships subject to the IGF Code.</li></ul>
+<h4>Applies To</h4>
+<p>Container vessels / Maersk A/S fleet operating with low-flashpoint alternative fuels.</p>
+<p>> <strong>CE ORAL TIP (Orange Tip Block - Kochi MMD)</strong> > <strong>Examiner:</strong> Simon. <strong>Expects to hear verbatim:</strong> "To address the safety gaps of low-flashpoint fuels and enforce the single failure principle." <strong>Common failure point:</strong> Candidates focus only on the environment (GHG reduction) and forget that the IGF Code is exclusively a <em>safety standard</em> designed to keep the ship from exploding or poisoning the crew.</p>
+<div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">Convention</span><span class="reg-desc">SOLAS Chapter II-1, Regulation 56 &amp; 57</span></div><div class="reg-item"><span class="reg-code">Code</span><span class="reg-desc">IGF Code (Resolution MSC.391(95))</span></div><div class="reg-item"><span class="reg-code">Convention</span><span class="reg-desc">STCW Convention Regulation V/3 (Crew Training Mandates)</span></div><div class="reg-item"><span class="reg-code">Resolution</span><span class="reg-desc">MEPC Resolution on Decarbonisation Strategy targets</span></div></div>
+
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5>
+<p>Ensures that all safety systems—such as water spray curtains, gas detection heads, and double-block-and-bleed valves—are regularly overhauled and fully certified.</p><h5>Trap Questions</h5>
+<ul><li><strong>Q:</strong> Is the IGF Code designed to reduce the greenhouse gas emissions of a vessel?</li><li><strong>A:</strong> No, sir. The IGF Code is purely a safety code. The reduction of GHG emissions is regulated by MARPOL Annex VI; the IGF Code simply ensures that when we use low-carbon, low-flashpoint fuels to satisfy MARPOL, we do so safely.</li></ul><h5>Common CE Failures</h5>
+<p>Failing to explain the concept of the "Single Failure Principle" when describing why double-walled pipes are required.</p><h5>Numbers to Memorise</h5>
+<p>SOLAS Chapter II-1 Part G; STCW V/3.</p><h5>Casualty Link</h5>
+<p>Historical land-based and early marine gas distribution accidents where a single pipe rupture caused catastrophic vapor cloud explosions.</p><h5>Examiner Chain</h5>
+<p>Why do we need the code? → What safety principle does it rely on? → How does that protect the engine room? → What crew training is required?</p><h5>On My Vessel</h5>
+<p>Governs the operational and preventative maintenance routines of fuel supply systems on all modern Maersk dual-fuel asset classes.</p>
+<p>-------------------</p>
+<p>Here are the completed drafts for <strong>Q4</strong> and <strong>Q5</strong>, adhering precisely to the required structure and your target profile for the Kochi MMD oral examinations.</p>
+<p>---</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_E, Q3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB7_E · Q3 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q4" data-tags="ghg">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">4</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Low flashpoint fuels — where are they used without requiring the IGF Code, and why is IGF not required there?</div>
+          <div class="q-tags"><span class="q-tag tag-ghg">GHG</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span><strong>15-Second Answer (Teal Practice-Block)</strong> Low-flashpoint fuels are used without requiring the IGF Code onboard dedicated gas carriers governed by the <strong>IGC Code</strong>, or when utilizing emergency diesel generators that comply with specific <strong>SOLAS Chapter II-2</strong> exceptions. The IGF Code is not required in these cases because their construction, safety systems, and containment are already comprehensively covered by these alternative international instruments.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span><strong>60-Second Answer (Teal Practice-Block)</strong> The explicit purpose of the IGF Code is to regulate <em>non-gas carriers</em> using low-flashpoint fuels. Dedicated gas carriers carrying liquefied gases as cargo are exempted from the IGF Code when using their own cargo boil-off gas as fuel, because they are already strictly regulated under <strong>SOLAS Regulation II-2/4.2.1.1</strong> and the <strong>IGC Code</strong> (International Gas Carrier Code). Additionally, under strict SOLAS Part B exceptions, emergency generators may use fuel with a flashpoint down to 43°C. The IGF Code is omitted here because these specific vessel configurations and limited emergency applications already possess an equivalent regulatory and safety framework optimized for their exact risk profiles.</div>
+        <div class="answer-body">
+<h4>Governing Instrument and Regulatory Exemptions</h4>
+<p>The baseline application rule is defined under <strong>SOLAS Chapter II-1, Regulation 56 (Part G)</strong>. The IGF Code explicitly excludes ships covered by the <strong>IGC Code</strong> through specific regulatory phrasing that defines its scope as applying only to "ships to which part G of SOLAS chapter II-1 applies."</p>
+<h4>Key Requirements &amp; Working Principle</h4>
+<ul><li><strong>The IGC Code Alternative:</strong> Dedicated LNG/LPG carriers route boil-off gas (BOG) from their cargo tanks directly to dual-fuel main engines or boilers. Because the entire ship is structurally designed around gas containment, hazard zoning, and cargo safety systems, applying the IGF Code would cause redundant, conflicting regulations.</li><li><strong>Emergency Diesel Generator Exception:</strong> Under <strong>SOLAS Chapter II-2, Regulation 4.2.2.3</strong>, emergency generators are permitted to use fuels with a flashpoint not less than 43°C (such as specialized arctic-grade low-temperature marine gas oils).</li><li><strong>Machinery Space Isolation:</strong> The safety principle relies on the fact that emergency generator rooms are structurally isolated from the main machinery spaces, minimizing the cross-contamination risk of volatile vapors.</li></ul>
+<h4>Practical Application for the Chief Engineer</h4>
+<p>For a Chief Engineer, this distinction governs asset management and compliance pathways. On a standard container vessel, any transition to low-flashpoint fuel (like methanol) demands absolute adherence to IGF design and operational checklists. On a dedicated gas carrier, the safety infrastructure relies instead on the IGC cargo system controls.</p>
+<h4>Examiner Angle — Simon</h4>
+<p><em>Simon tests your understanding of the boundaries between international codes.</em> He wants to see if you can identify the exact line where the IGF Code stops applying and where the IGC Code or baseline SOLAS exceptions take over.</p>
+<h4>Chief Engineer Relevance</h4>
+<p>The CE must ensure that if low-flashpoint fuels (43°C to 60°C) are utilized in emergency machinery under SOLAS exemptions, specific temperature monitoring and dedicated fuel lines are maintained without confusing them with the comprehensive gas-safe double-wall requirements of the IGF Code.</p>
+<h4>Key Numbers / Regs to Remember</h4>
+<ul><li><strong>43°C:</strong> The absolute lower limit for fuel oil flashpoints in emergency generators under SOLAS exceptions.</li><li><strong>60°C:</strong> The baseline SOLAS flashpoint floor for standard machinery spaces.</li></ul>
+<h4>Applies To</h4>
+<p>Container vessels / Fleet asset classes transitioning between dual-fuel and conventional setups.</p>
+<p>> <strong>CE ORAL TIP (Orange Tip Block - Kochi MMD)</strong> > <strong>Examiner:</strong> Simon. <strong>Expects to hear verbatim:</strong> "On gas carriers under the IGC Code using boil-off gas, and emergency generators down to 43°C under SOLAS Chapter II-2." <strong>Common failure point:</strong> Candidates broadly state that "all ships using alternative fuels need the IGF Code," forgetting the massive, historical exemption of the entire LNG carrier fleet under the IGC Code.</p>
+<div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">Convention</span><span class="reg-desc">SOLAS Chapter II-1, Regulation 56 &amp; 57 (Scope of IGF)</span></div><div class="reg-item"><span class="reg-code">Code</span><span class="reg-desc">IGC Code (Resolution MSC.391(95) exclusions)</span></div><div class="reg-item"><span class="reg-code">Convention</span><span class="reg-desc">SOLAS Chapter II-2, Regulation 4.2.1.1 (Flashpoint limits)</span></div><div class="reg-item"><span class="reg-code">Convention</span><span class="reg-desc">SOLAS Chapter II-2, Regulation 4.2.2.3 (Emergency generator exemptions)</span></div></div>
+
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5>
+<p>Managing fuel procurement parameters to guarantee that standard low-flashpoint fuels are never bunkered into non-IGF, non-exempted conventional settling and service tanks.</p><h5>Trap Questions</h5>
+<ul><li><strong>Q:</strong> Can we use a fuel with a flashpoint of 45°C in the main propulsion engine of a standard container ship if we isolate the space?</li><li><strong>A:</strong> No, sir. The 43°C exemption applies strictly to emergency generators outside the machinery spaces under SOLAS Chapter II-2. Main propulsion engines using such fuel must fully comply with the IGF Code.</li></ul><h5>Common CE Failures</h5>
+<p>Mixing up the technical acronyms and stating that the IGF code governs LNG carriers' cargo systems.</p><h5>Numbers to Memorise</h5>
+<p>43°C for emergency equipment; 60°C for standard machinery spaces.</p><h5>Casualty Link</h5>
+<p>Historic fuel-switching mishaps where low-flashpoint volatile fractions entered standard atmospheric fuel vents, causing localized engine room flash fires.</p><h5>Examiner Chain</h5>
+<p>Where is IGF not required? → What governs gas carriers instead? → What is the lowest flashpoint allowed for emergency generators? → Why is it safe there?</p><h5>On My Vessel</h5>
+<p>Maintained strictly on conventional Maersk container ship classes by verifying bunker delivery notes ensure no primary fuel oil falls below the 60°C threshold, while verifying emergency generator fuel specifications.</p>
+<p>---</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_E, Q4, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB7_E · Q4 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="q-card" id="q5" data-tags="ghg">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">5</div>
+        <div class="q-text-wrap">
+          <div class="q-text">UNFCCC — what is it and its relevance to shipping?</div>
+          <div class="q-tags"><span class="q-tag tag-ghg">GHG</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span><strong>15-Second Answer (Teal Practice-Block)</strong> The UNFCCC is the United Nations Framework Convention on Climate Change, the ultimate global treaty driving greenhouse gas reductions. While it sets overarching climate targets like the Paris Agreement, it defers the direct regulation of international maritime emissions to the <strong>IMO</strong> via <strong>MARPOL Annex VI</strong>.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span><strong>60-Second Answer (Teal Practice-Block)</strong> The UNFCCC establishes the global political and legal mandate for addressing climate change, famously producing the Kyoto Protocol and the Paris Agreement to limit global warming to well agriculture-and-industry targets. However, because international shipping operates across global borders, the UNFCCC explicitly delegates the responsibility of setting and enforcing maritime greenhouse gas reduction strategies to the <strong>International Maritime Organization (IMO)</strong>. For a Chief Engineer, this means the high-level goals decided at UNFCCC COP summits directly dictate the stringency, timeline, and aggressive tightening of the <strong>IMO GHG Strategy</strong>, which manifests onboard as mandatory EEXI, CII, and FuelEU compliance metrics.</div>
+        <div class="answer-body">
+<h4>Governing Instrument and Institutional Hierarchy</h4>
+<p>The <strong>UNFCCC (established in 1992)</strong> acts as the parent global treaty framework. Under <strong>Article 2.2 of the Kyoto Protocol</strong>, and reinforced by the <strong>Paris Agreement (2015)</strong>, the mandate to control greenhouse gases from international shipping was formally passed to the IMO's <strong>Marine Environment Protection Committee (MEPC)</strong>.</p>
+<h4>Key Requirements &amp; Working Principle</h4>
+<ul><li><strong>Global Carbon Budgets:</strong> The UNFCCC sets the absolute timeline for global net-zero targets. The IMO translates these into marine-specific metrics to prevent carbon leakage across international waters.</li><li><strong>The Common But Differentiated Responsibilities (CBDR) Dilemma:</strong> A core UNFCCC principle is CBDR (developed nations move faster). However, the IMO operates on the principle of <strong>No More Favourable Treatment (NMFT)</strong>, meaning maritime regulations apply equally to all vessels regardless of flag.</li><li><strong>Regulatory Transmission:</strong> The political pressure from UNFCCC COP meetings forces the IMO to continuously accelerate its decarbonisation strategy targets (e.g., reaching net-zero GHG emissions by or around 2050).</li></ul>
+<h4>Practical Application for the Chief Engineer</h4>
+<p>While a Chief Engineer does not file reports directly to the UNFCCC, its macro-level targets directly shape shipboard operations. The resulting IMO updates require the CE to continuously optimize energy efficiency profiles, manage complex alternative fuels, and face severe commercial and legal penalties if the vessel's operational index fails to meet the descending carbon caps.</p>
+<h4>Examiner Angle — Simon</h4>
+<p><em>Simon evaluates whether you understand the geopolitical source of maritime environmental laws.</em> He will ask you why the IMO is the body making the rules rather than the UN climate summit itself, testing your understanding of institutional delegation.</p>
+<h4>Chief Engineer Relevance</h4>
+<p>The political decisions made at the UNFCCC level drive the rapid introduction of regional market-based measures (like the EU Emissions Trading System - EU ETS) that require meticulous fuel and emission data logging by the ship’s command team.</p>
+<h4>Key Numbers / Regs to Remember</h4>
+<ul><li><strong>1.5°C:</strong> The global temperature rise limit target established under the Paris Agreement that dictates current IMO decarbonisation curves.</li><li><strong>Net-Zero by or around 2050:</strong> The aligned target of the 2023 IMO GHG Strategy driven by UNFCCC pressure.</li></ul>
+<h4>Applies To</h4>
+<p>All commercial vessels engaged in international trade globally.</p>
+<p>> <strong>CE ORAL TIP (Orange Tip Block - Kochi MMD)</strong> > <strong>Examiner:</strong> Simon. <strong>Expects to hear verbatim:</strong> "The UNFCCC sets the global climate mandate but delegates international shipping emissions directly to the IMO." <strong>Common failure point:</strong> Candidates confuse the two bodies, mistakenly stating that the UNFCCC directly surveys ships or issues statutory certificates like the IEECC or SEEMP.</p>
+<div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">Treaty</span><span class="reg-desc">United Nations Framework Convention on Climate Change (UNFCCC)</span></div><div class="reg-item"><span class="reg-code">Agreement</span><span class="reg-desc">The Paris Agreement 2015 (Article 4 alignment)</span></div><div class="reg-item"><span class="reg-code">Convention</span><span class="reg-desc">MARPOL Annex VI Chapter 4 (Regulations 22-28)</span></div><div class="reg-item"><span class="reg-code">IMO Strategy</span><span class="reg-desc">2023 IMO Strategy on Reduction of GHG Emissions from Ships (Resolution MEPC.377(80))</span></div></div>
+
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5>
+<p>Operational awareness of the rapidly tightening regulatory landscape. A failure to link high-level climate mandates to local engine room performance metrics shows a lack of managerial perspective expected of a Chief Engineer.</p><h5>Trap Questions</h5>
+<ul><li><strong>Q:</strong> Does a ship have to show compliance with the Paris Agreement during a Port State Control inspection?</li><li><strong>A:</strong> No, sir. The Paris Agreement applies to nations. A ship demonstrates compliance with international climate goals by satisfying <strong>MARPOL Annex VI Regulations</strong>, which represent the IMO's enforcement of those high-level climate targets.</li></ul><h5>Common CE Failures</h5>
+<p>Failing to explain how a UN treaty (UNFCCC) transforms into operational law via the IMO’s MEPC amendments to MARPOL.</p><h5>Numbers to Memorise</h5>
+<p>2050 Net-Zero target window; MEPC.377(80).</p><h5>Casualty Link</h5>
+<p>Commercial disputes and charter-party cancelations resulting from vessels falling into low CII ratings as a consequence of the rapid implementation of IMO targets driven by global climate accords.</p><h5>Examiner Chain</h5>
+<p>What is the UNFCCC? → How does it affect international shipping? → What body creates the actual laws? → What is the current target year for net-zero emissions?</p><h5>On My Vessel</h5>
+<p>Directly shapes the corporate environmental mandates of the Maersk fleet, driving major capital investments into green fuel infrastructures to stay ahead of the regulatory curves descended from international climate frameworks.</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_E, Q5, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB7_E · Q5 · v1.0</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="no-results">
+  <p>No questions match your search/filter.</p>
+</div>
+
+<div class="page-footer">
+  <p>Marine Intelligence Weekly · MEO Class 1 Question Bank · QB7_E — GHG, CII &amp; Decarbonisation — Companion E</p>
+  <p>Compiled by Nixon Antony, Second Engineer, Maersk A/S · <a href="https://marineintelligenceweekly.com/meoclass1/">Back to MEO Class 1 Hub</a> · <a href="https://marineintelligenceweekly.com/">marineintelligenceweekly.com</a></p>
+  <p class="disclaimer">Disclaimer: This question bank is a private study aid compiled for MEO Class 1 oral examination preparation at the Kochi MMD. Regulatory references are provided in good faith and cross-checked against IMO, IACS, and classification society sources where possible, but candidates must independently verify current regulation numbers, thresholds, and amendment dates against the latest consolidated SOLAS/MARPOL editions, IACS Unified Requirements, and their flag/class circulars before relying on them in examination or operational contexts. To report a correction, email contactus@marineintelligenceweekly.com with the QB number, question number, and details.</p>
+</div>
+
+<script>
+function toggleCard(header){
+  const card=header.closest('.q-card');
+  card.classList.toggle('open');
+}
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+</script>
+
+</body>
+</html>
