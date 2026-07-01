@@ -326,17 +326,50 @@ function renderGroups(){
 }
 renderGroups();
 
-// ===== SEARCH (dual mode: card filter + question-level index, no answers shown) =====
+// ===== FUZZY SEARCH ENGINE (keyword overlap + sequence similarity — tolerant of typos, paraphrase, word order) =====
+const STOPWORDS = new Set("the a an is are was were be been being to of in on for with and or from at by as that this it its your you what which who how why when explain define list describe give whats does do will can should all each any".split(' '));
+function tokenize(s){
+  const words = (s.toLowerCase().match(/[a-z0-9&]+/g) || []);
+  return new Set(words.filter(w => w.length > 2 && !STOPWORDS.has(w)));
+}
+function seqRatio(a, b){
+  // lightweight Levenshtein-based similarity ratio, 0..1
+  a = a.toLowerCase(); b = b.toLowerCase();
+  const m = a.length, n = b.length;
+  if(!m || !n) return 0;
+  if(Math.abs(m-n) > Math.max(m,n)*0.6) return 0; // quick length-gap skip for perf
+  let prev = Array(n+1).fill(0).map((_,i)=>i);
+  for(let i=1;i<=m;i++){
+    const cur = [i];
+    for(let j=1;j<=n;j++){
+      cur[j] = a[i-1]===b[j-1] ? prev[j-1] : 1+Math.min(prev[j-1],prev[j],cur[j-1]);
+    }
+    prev = cur;
+  }
+  const dist = prev[n];
+  return 1 - dist/Math.max(m,n);
+}
+function fuzzyScore(queryTokens, queryRaw, candTokens, candRaw){
+  if(!queryTokens.size || !candTokens.size) return 0;
+  let inter = 0;
+  queryTokens.forEach(t => { if(candTokens.has(t)) inter++; });
+  const kw = inter / Math.min(queryTokens.size, candTokens.size);
+  // sequence ratio only computed on shorter strings for perf; cap comparison length
+  const sr = seqRatio(queryRaw.slice(0,80), candRaw.slice(0,80));
+  return Math.max(kw, sr);
+}
+// pre-tokenize the question index once
+const Q_INDEX_TOK = Q_INDEX.map(item => ({...item, tok: tokenize(item.q)}));
+
+// ===== SEARCH (dual mode: card filter + fuzzy question-level index, no answers shown) =====
 function handleSearch(raw){
   const q = raw.toLowerCase().trim();
   document.getElementById('clear-search').style.display = q ? 'block':'none';
   const cards = document.querySelectorAll('.qb-card');
   const groupLabels = document.querySelectorAll('.group-label');
-  let cardVisible = 0;
   cards.forEach(c => {
     const match = !q || (c.dataset.search||'').includes(q);
     c.classList.toggle('search-hide', !match);
-    if(match) cardVisible++;
   });
   groupLabels.forEach(g => {
     const grid = g.nextElementSibling.nextElementSibling;
@@ -349,15 +382,19 @@ function handleSearch(raw){
 
   const resBox = document.getElementById('qsearch-results');
   if(q.length < 4){ resBox.classList.remove('open'); resBox.innerHTML=''; return; }
-  const hits = Q_INDEX.filter(item => item.q.toLowerCase().includes(q)).slice(0,8);
-  if(hits.length){
-    resBox.innerHTML = hits.map(h => `<a class="qsr-item" href="${h.file}">
+  const qTok = tokenize(q);
+  const scored = Q_INDEX_TOK.map(item => ({...item, score: fuzzyScore(qTok, q, item.tok, item.q.toLowerCase())}))
+                            .filter(item => item.score >= 0.4)
+                            .sort((a,b) => b.score - a.score)
+                            .slice(0,8);
+  if(scored.length){
+    resBox.innerHTML = scored.map(h => `<a class="qsr-item" href="${h.file}">
         <div class="qsr-q">${esc(h.q)}</div>
-        <div class="qsr-meta">Found in ${h.file.replace('.html','')} — subscriber content</div>
+        <div class="qsr-meta">${h.score>=0.72?'Strong match':'Possible match'} · Found in ${h.file.replace('.html','')} — subscriber content</div>
       </a>`).join('') + `<div class="qsr-empty">Answer content is gated — open the QB above to view it.</div>`;
     resBox.classList.add('open');
   } else {
-    resBox.innerHTML = `<div class="qsr-empty">No matching question found in the live question banks.</div>`;
+    resBox.innerHTML = `<div class="qsr-empty">No matching question found in the live question banks — this looks like a genuine gap.</div>`;
     resBox.classList.add('open');
   }
 }
