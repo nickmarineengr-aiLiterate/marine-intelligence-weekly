@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>QB4_G Cheat Sheet</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet"><style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);-webkit-user-select:none;-ms-user-select:none;user-select:none;}
+.topbar{position:sticky;top:0;z-index:50;background:var(--navy);color:#fff;padding:10px 20px;display:flex;align-items:center;gap:14px;font-size:14px;}
+.topbar a{color:#cbd5e1;text-decoration:none;margin-left:14px;}
+.topbar .brand{font-weight:700;color:#fff;}
+.page-header{background:var(--navy);color:#fff;padding:28px 20px 20px;}
+.qb-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;font-weight:700;letter-spacing:.06em;padding:3px 10px;border-radius:20px;margin-bottom:8px;}
+.page-header h1{margin:6px 0 6px;font-size:24px;}
+.page-header p{margin:0;color:#cbd5e1;font-size:14px;max-width:760px;}
+.header-meta{display:flex;gap:18px;margin-top:14px;font-size:12px;color:#94a3b8;flex-wrap:wrap;}
+.controls-bar{position:sticky;top:41px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 20px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+#search-input{flex:1;min-width:180px;padding:8px 12px;border:1px solid var(--grey-border);border-radius:8px;font-size:13px;}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;padding:6px 12px;border-radius:16px;font-size:12px;cursor:pointer;}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{font-size:12px;color:var(--grey-text);white-space:nowrap;}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1100px;margin:0 auto;}
+.sidebar{position:sticky;top:96px;align-self:start;padding:18px 12px;font-size:13px;max-height:calc(100vh - 100px);overflow:auto;}
+.sidebar h3{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--grey-text);margin:0 0 8px;}
+.toc-link{display:block;padding:5px 8px;border-radius:6px;color:var(--ink);text-decoration:none;font-size:12.5px;margin-bottom:2px;}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);font-weight:600;}
+#q-feed{padding:18px 20px 60px;min-width:0;}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:26px 0 10px;}
+.section-head h2{font-size:15px;margin:0;color:var(--teal-dark);}
+.sec-count{font-size:11px;background:var(--teal-light);color:var(--teal-dark);padding:2px 8px;border-radius:10px;}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+.q-header{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;}
+.q-num-badge{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-size:14.5px;font-weight:600;line-height:1.4;}
+.q-tags{margin-top:6px;display:flex;gap:6px;flex-wrap:wrap;}
+.q-tag{font-size:10.5px;background:var(--grey-bg);color:var(--grey-text);padding:2px 8px;border-radius:10px;}
+.q-chevron{flex:none;width:20px;height:20px;stroke:var(--grey-text);transition:transform .2s;margin-top:2px;}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 16px 16px;font-family:Georgia,serif;font-size:14.5px;line-height:1.6;}
+.q-card.open .q-answer{display:block;}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-dark);margin:16px 0 6px;font-family:'Segoe UI',system-ui,sans-serif;}
+.answer-body p{margin:6px 0;}
+.answer-body table{border-collapse:collapse;width:100%;font-size:13px;margin:10px 0;}
+.answer-body th,.answer-body td{border:1px solid var(--grey-border);padding:6px 8px;text-align:left;}
+.answer-body th{background:var(--grey-bg);}
+.formula{background:var(--grey-bg);font-family:monospace;padding:10px;border-radius:6px;white-space:pre-wrap;font-size:12px;overflow-x:auto;}
+.snap-box{background:var(--teal-light);border-left:4px solid var(--teal);padding:10px 14px;border-radius:6px;margin:10px 0;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;}
+.snap-box b{color:var(--teal-dark);}
+.ce-relevance{background:var(--grey-bg);border-radius:6px;padding:10px 14px;margin:10px 0;}
+.reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:14px 16px;margin:14px 0;font-family:'Segoe UI',system-ui,sans-serif;}
+.reg-box-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:8px;}
+.reg-item{display:flex;gap:10px;padding:4px 0;border-top:1px solid #1e293b;font-size:12.5px;min-width:0;}
+.reg-item:first-of-type{border-top:none;}
+.reg-code{color:var(--orange);font-family:monospace;flex:none;min-width:150px;word-break:break-all;}
+.reg-desc{color:#cbd5e1;min-width:0;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);padding:12px 14px;border-radius:6px;margin:14px 0;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;}
+details.dd{margin:10px 0;border:1px solid var(--grey-border);border-radius:6px;padding:0;font-family:'Segoe UI',system-ui,sans-serif;}
+details.dd summary{cursor:pointer;padding:9px 12px;font-size:13px;font-weight:600;color:var(--teal-dark);}
+details.dd .dd-body{padding:0 14px 12px;font-size:13px;color:var(--ink);}
+.q-footer{display:flex;justify-content:space-between;gap:10px;padding:8px 16px 12px;font-size:11px;color:var(--grey-text);font-family:'Segoe UI',system-ui,sans-serif;border-top:1px solid var(--grey-border);min-width:0;}
+.correction-link{word-break:break-all;min-width:0;}
+.correction-link a{color:var(--teal-dark);}
+.page-footer{max-width:1100px;margin:0 auto;padding:24px 20px 40px;font-size:12px;color:var(--grey-text);border-top:1px solid var(--grey-border);}
+#no-results{display:none;text-align:center;padding:30px;color:var(--grey-text);}
+.cheat-sheet{background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:18px 20px;margin:20px 0 30px;}
+.cheat-sheet h2{color:var(--teal-dark);font-size:17px;margin-top:0;}
+.cheat-sheet .cs-note{font-size:12px;color:var(--grey-text);margin-bottom:14px;}
+.cs-grid{display:grid;grid-template-columns:1fr;gap:12px;}
+@media(max-width:700px){.cs-grid{grid-template-columns:1fr;}.main-layout{grid-template-columns:1fr;}.sidebar{display:none;}}
+.cs-card{background:var(--grey-bg);border-radius:8px;padding:12px 14px;font-size:12.5px;}
+.cs-card h4{margin:0 0 6px;font-size:12px;color:var(--teal-dark);text-transform:uppercase;letter-spacing:.04em;}
+.cs-card ul{margin:0;padding-left:16px;}
+.cs-card li{margin-bottom:4px;}
+</style></head>
+<body>
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie)) window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+<div class="page-header"><span class="qb-badge">QB4_G Cheat Sheet · v1.0</span><h1>ISM/ISPS/MLC/STCW — Cheat Sheet</h1></div>
+<div id="q-feed" style="max-width:1000px;margin:0 auto;padding:20px;"><div class="cheat-sheet">
+<h2>🧠 QB4_G Cheat Sheet — Active Recall (Huberman / Sung method)</h2>
+<div class="cs-note">Retrieval-first review: read the recall cue, say the answer aloud before checking, then trace the oral-delivery flow below. Spaced re-test 24h and 7d out.</div>
+<svg viewBox="0 0 700 130" width="100%" height="110" style="margin:10px 0;">
+<style>.n{font:600 11px 'Segoe UI';fill:#0f172a;}.b{fill:#ccfbf1;stroke:#0d9488;stroke-width:1.5;rx:8;}</style>
+<rect x="10" y="45" width="130" height="40" class="b"/><text x="75" y="69" text-anchor="middle" class="n">RECALL (15s)</text>
+<rect x="190" y="45" width="130" height="40" class="b"/><text x="255" y="69" text-anchor="middle" class="n">STRUCTURE (60s)</text>
+<rect x="370" y="45" width="130" height="40" class="b"/><text x="435" y="69" text-anchor="middle" class="n">REG-BOX PROOF</text>
+<rect x="550" y="45" width="130" height="40" class="b"/><text x="615" y="69" text-anchor="middle" class="n">CE ORAL TIP</text>
+<line x1="140" y1="65" x2="188" y2="65" stroke="#0d9488" stroke-width="2" marker-end="url(#a)"/>
+<line x1="320" y1="65" x2="368" y2="65" stroke="#0d9488" stroke-width="2" marker-end="url(#a)"/>
+<line x1="500" y1="65" x2="548" y2="65" stroke="#0d9488" stroke-width="2" marker-end="url(#a)"/>
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0L6,3L0,6z" fill="#0d9488"/></marker></defs>
+</svg>
+<div class="cs-grid"><div class="cs-card">
+<h4>⚙ Q1 · flag state vs ro diffrence</h4>
+<ul>
+<li><b>Recall cue (say it aloud):</b> The Flag State is the sovereign maritime administration that possesses the ultimate legal authority and responsibility to enforce international maritime conventions on its registered vessels. A Recognized Organization (RO) is a private, technical body—typically a Classification Society—delegated by the Flag State to conduct statutory surveys and issue certificates on its behalf, though the ultimate responsibility always remains with the Flag State.</li>
+<li><b>Key numbers:</b> Resolution MSC.349(92) (The RO Code entry into force date: 1 January 2015).</li>
+<li><b>Trap to dodge:</b> "If an RO surveyor signs your International Oil Pollution Prevention (IOPP) certificate and a PSC surveyor finds a faulty OWS, who is responsible—the Flag State, the RO, or you?" Answer: You, as the Chief Engineer and representative of the owner, are responsible for maintaining the vessel in a compliant state between surveys. The RO's signature simply confirms compliance at the hour the survey was completed.</li>
+<li><b>Casualty link:</b> Erika (1999) and Prestige (2002) disasters. These led directly to the structural tightening of how Flag States monitor their delegated ROs, ultimately resulting in the creation of the mandatory IMO RO Code.</li>
+</ul></div><div class="cs-card">
+<h4>📋 Q2 · Isps and ssp contents</h4>
+<ul>
+<li><b>Recall cue (say it aloud):</b> The International Ship and Port Facility Security (ISPS) Code is a comprehensive framework under SOLAS Chapter XI-2 designed to detect and deter security threats to ships and port facilities. The Ship Security Plan (SSP) is a confidential, vessel-specific document developed from a Ship Security Assessment (SSA) that outlines operational protocols, access controls, and duties for the three distinct maritime security levels.</li>
+<li><b>Key numbers:</b> ISPS Part A Section 9 (Mandatory contents of SSP). Drills must be conducted at least once every 3 months or within 1 week if more than 25% of the crew changes.</li>
+<li><b>Trap to dodge:</b> "Who activates Security Level 3?" Answer: The Coastal State / Contracting Government within whose territorial waters the ship or port facility is located sets the security level. The ship must match it. The Master can increase the level unilaterally if they believe an immediate threat exists, but they cannot lower it.</li>
+<li><b>Casualty link:</b> The hijacking of the MV Maersk Alabama (2009) underscored the critical importance of secure restricted areas. The crew successfully locked down the Engine Room, preventing the pirates from controlling the propulsion, which ultimately saved the ship.</li>
+</ul></div><div class="cs-card">
+<h4>📋 Q3 · STCW -As a chief engineer how will you decide on watchkeeping composition .(STCW CH-8)</h4>
+<ul>
+<li><b>Recall cue (say it aloud):</b> As Chief Engineer, deciding on the engineering watch composition requires balancing the mandatory Minimum Safe Manning Document (MSMD) with dynamic factors like environmental conditions, vessel operational status, and crew fatigue. I must explicitly comply with STCW Chapter VIII (Section A-VIII/2) to ensure a safe, continuous, and pollution-free watch under all operating modes.</li>
+<li><b>Key numbers:</b> 10 hours minimum rest in a 24-hour period (can be divided into max 2 periods, one of which must be at least 6 hours long). 77 hours minimum rest in any 7-day period.</li>
+<li><b>Trap to dodge:</b> "If the Master demands an extra engineer on the bridge or on deck for mooring, can you reduce your engine room watch below the Minimum Safe Manning Document?" Answer: Absolutely not. The MSMD is a hard statutory minimum. If the ship cannot safely staff both the deck and engine requirements simultaneously under the MSMD baseline, the vessel cannot sail, and additional crew must be requested from the company.</li>
+<li><b>Casualty link:</b> SS El Faro (2015) loss highlighted the critical need for robust watch composition and engineering situational awareness during extreme weather events, ensuring clear lines of communication between the bridge and engine control room.</li>
+</ul></div><div class="cs-card">
+<h4>🔧 Q4 · During dry dock, how will you calculate manpower requirement for the job list?</h4>
+<ul>
+<li><b>Recall cue (say it aloud):</b> Calculating dry dock manpower requires categorizing the repair specification into shipyard-allocated turnkey projects and ship-staff jobs, then mapping them against a standard Gantt-chart timeline. I cross-reference total man-hours needed for ship-staff tasks against the available crew headcount, adjusting for mandatory STCW rest hours, safety standby watches, and specialized contractor supervision.</li>
+<li><b>Key numbers:</b> 14 hours maximum working limit in any 24-hour period. 72 hours maximum total working hours in any 7-day period under MLC/STCW.</li>
+<li><b>Trap to dodge:</b> "Who handles the fire watch during hot work in dry dock—the ship's crew or the shipyard?" Answer: While the shipyard provides standard fire watch personnel as part of the commercial contract, ultimate safety responsibility for the vessel remains with the ship's command. The ship's staff must conduct independent, random safety audits of all active hot work sites.</li>
+<li><b>Casualty link:</b> The Grand Princess yard fire (2019) demonstrated how a failure in clear supervisory planning and inadequate oversight of contractor hot work can quickly result in catastrophic structural loss.</li>
+</ul></div><div class="cs-card">
+<h4>🔧 Q5 · Dry dock preparation as CE — steps and documents. What is the dry dock interval?</h4>
+<ul>
+<li><b>Recall cue (say it aloud):</b> Dry dock preparation as Chief Engineer requires drafting a detailed, itemized job specification, organizing critical spare parts, confirming essential technical drawings, and securing clean legal history records. Under standard Class rules and SOLAS requirements, the mandatory bottom inspection interval is twice within any five-year period, with the maximum allowable interval between successive inspections not exceeding 36 months.</li>
+<li><b>Key numbers:</b> 36 months maximum between consecutive bottom inspections. 5 years maximum validity for the Cargo Ship Safety Construction Certificate.</li>
+<li><b>Trap to dodge:</b> "If your vessel has an In-Water Survey (IWS) notation, does that completely eliminate the need for a dry dock?" Answer: No. An IWS notation allows an alternate underwater inspection to substitute for one of the two mandatory bottom surveys within a 5-year cycle, but it does not bypass the absolute requirement for a physical dry docking at the scheduled intermediate or renewal milestone.</li>
+<li><b>Casualty link:</b> The structural failure of the MOL Comfort (2013) emphasized the extreme midship hogging and sagging stresses experienced by large container ships, highlighting why strict hull inspections and precise block support settings during docking are critical.</li>
+</ul></div><div class="cs-card">
+<h4>🛢 Q6 · Casualty investigation — who investigates? Contents of a casualty investigation report.</h4>
+<ul>
+<li><b>Recall cue (say it aloud):</b> Marine casualty investigations are primarily conducted by the Substantially Interested States, led by the Flag State administration, or the Coastal State if the incident occurs within its territorial waters. The resulting Casualty Investigation Report is a standardized document focused on establishing root causes to improve safety, detailing the chronology of events, contributing human or technical factors, and safety recommendations.</li>
+<li><b>Key numbers:</b> Resolution MSC.255(84) (The core Casualty Investigation Code reference).</li>
+<li><b>Trap to dodge:</b> "Can the findings of a Flag State Safety Investigation Report be used in a court of law to convict you of negligence?" Answer: Under the IMO Code, safety investigations are strictly non-judicial and are intended solely for safety improvement. While the published report is in the public domain, the underlying working notes, interview transcripts, and confidential statements collected by safety investigators are typically privileged and protected from discovery in criminal proceedings to encourage open testimony.</li>
+<li><b>Casualty link:</b> The Stellar Daisy (2017) sinking report highlighted how a detailed structural investigation by the Flag State exposed systemic flaws in large ore carrier conversions, resulting in immediate global inspections.</li>
+</ul></div><div class="cs-card">
+<h4>🛢 Q7 · Hull damage or oil pollution incident — as CE how will you proceed? Step by step.</h4>
+<ul>
+<li><b>Recall cue (say it aloud):</b> In the event of hull damage or an oil pollution incident, my immediate actions as Chief Engineer are to sound the emergency alarm, notify the Master, and initiate immediate mitigating stability or containment actions. I will then execute our standardized SOPEP protocols, align the engine room team with the emergency checklist, and preserve all relevant data logs for regulatory reporting.</li>
+<li><b>Key numbers:</b> SOPEP is mandatory for all oil tankers of 150 gross tonnage and above, and all other ships of 400 gross tonnage and above.</li>
+<li><b>Trap to dodge:</b> "If oil is spilling over the side during bunkering, do you throw chemical dispersants directly onto the water to dissolve the slick before the port authority notices?" Answer: Absolutely not. Deploying dispersants without local authority approval is a major environmental crime in almost all jurisdictions and can worsen toxic impacts. Onboard containment and mechanical recovery are the only unilateral actions permitted.</li>
+<li><b>Casualty link:</b> MV Wakashio (2020) grounding and subsequent oil spill highlighted how delays in initial damage assessment and failing to effectively stabilize/transfer fuel assets can turn a localized grounding into an environmental disaster.</li>
+</ul></div><div class="cs-card">
+<h4>🔧 Q8 · Which statutory certificate does not need renewal/survey other than AFS certificate?</h4>
+<ul>
+<li><b>Recall cue (say it aloud):</b> The primary statutory certificate that remains valid indefinitely and does not require periodic renewal or endorsement surveys—aside from the International Anti-Fouling System (AFS) Certificate—is the International Tonnage Certificate (1969). It stays valid for the lifetime of the vessel provided there are no structural modifications that alter the ship's internal volume or gross/net tonnage parameters.</li>
+<li><b>Key numbers:</b> 3 months grace period on change of flag under Article 12 of the Tonnage Convention.</li>
+<li><b>Trap to dodge:</b> "Does the Panama or Suez Canal certificate follow the same rule as the ITC 1969?" Answer: While they are based on tonnage principles, Suez and Panama Canal Tonnage Certificates are separate documents generated under specific national authority rules. If the ship's configuration changes or canal navigation rules alter, these transit-specific certificates must be modified or updated independently.</li>
+<li><b>Casualty link:</b> Volumetric alterations performed improperly without revising the ITC and updating stability calculations have historically contributed to tracking errors regarding true vessel displacement and loading margins.</li>
+</ul></div><div class="cs-card">
+<h4>🔧 Q9 · OCIMF — what is it, tools of OCIMF and brief explanation of each.</h4>
+<ul>
+<li><b>Recall cue (say it aloud):</b> The Oil Companies International Marine Forum (OCIMF) is a voluntary association of oil companies focused on the safe and environmentally responsible operation of oil, chemical, and gas tankers and terminals. Its primary risk-mitigation tools include the Ship Inspection Report Programme (SIRE/SIRE 2.0), the Tanker Management and Self Assessment (TMSA) framework, and the Chemical Distribution Institute (CDI) partnership links.</li>
+<li><b>Key numbers:</b> 60% of MBL (Standard setting for mooring winch brake rendering tests under MEG4 guidelines).</li>
+<li><b>Trap to dodge:</b> "Can an OCIMF inspector detain your vessel if they find a major safety deficiency?" Answer: No. An OCIMF inspector has no statutory enforcement or policing authority and cannot legally detain a ship. However, a negative finding in a SIRE report can cause oil majors to immediately withdraw their vetting approval, effectively "banning" the ship commercially and preventing it from securing charters.</li>
+<li><b>Casualty link:</b> The Torrey Canyon (1967) disaster served as the historical catalyst for oil majors to unite and establish OCIMF to proactively mitigate massive environmental liabilities through industry self-regulation.</li>
+</ul></div></div>
+</div></div>
+<script>
+function toggleCard(header){const card=header.closest('.q-card');card.classList.toggle('open');}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters();}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+document.addEventListener('contextmenu', e => e.preventDefault());
+document.addEventListener('copy', e => e.preventDefault());
+document.addEventListener('selectstart', e => e.preventDefault());
+</script></body></html>
