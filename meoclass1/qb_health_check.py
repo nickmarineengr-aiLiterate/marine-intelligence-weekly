@@ -35,7 +35,8 @@ VOID_ELEMENTS = {"br", "img", "meta", "link", "hr", "input", "area", "base",
 MANDATORY_CLASSES = ["q-card", "reg-box", "ce-tip", "q-footer"]
 
 EMAIL_TO = os.environ.get("QB_HEALTH_EMAIL_TO", "contactus@marineintelligenceweekly.com")
-EMAIL_FROM = os.environ.get("BREVO_SMTP_LOGIN", "")
+SMTP_LOGIN = os.environ.get("BREVO_SMTP_LOGIN", "")  # auth credential only — NOT a valid From address
+EMAIL_FROM = os.environ.get("BREVO_SENDER_EMAIL", "contactus@marineintelligenceweekly.com")  # verified sender in Brevo
 SMTP_HOST = "smtp-relay.brevo.com"
 SMTP_PORT = 587
 
@@ -288,7 +289,7 @@ def build_report(manifest_errors, file_results, total_files, total_questions_man
 
 def send_email(subject, body):
     smtp_key = os.environ.get("BREVO_SMTP_KEY")
-    if not EMAIL_FROM or not smtp_key:
+    if not SMTP_LOGIN or not smtp_key:
         print("BREVO_SMTP_LOGIN / BREVO_SMTP_KEY not set — printing report instead of emailing.\n")
         print(body)
         return
@@ -301,8 +302,8 @@ def send_email(subject, body):
     context = ssl.create_default_context()
     with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
         server.starttls(context=context)
-        server.login(EMAIL_FROM, smtp_key)
-        server.sendmail(EMAIL_FROM, [EMAIL_TO], msg.as_string())
+        server.login(SMTP_LOGIN, smtp_key)          # auth uses the SMTP relay login
+        server.sendmail(EMAIL_FROM, [EMAIL_TO], msg.as_string())  # envelope/From uses the verified sender
     print(f"Email sent to {EMAIL_TO}")
 
 
