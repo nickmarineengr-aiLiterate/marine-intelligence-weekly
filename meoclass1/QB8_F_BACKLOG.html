@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QB8_F — Cargo Operations (Backlog) | MEO Class 1 Question Bank | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink)}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 20px;display:flex;align-items:center;gap:10px}
+.topbar b{color:var(--teal-dark)}.topbar a{color:var(--grey-text);text-decoration:none;font-size:13px;margin-left:14px}
+.page-header{background:var(--navy);color:#fff;padding:22px 20px}
+.qb-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;letter-spacing:.5px;padding:3px 9px;border-radius:4px;margin-bottom:8px}
+.page-header h1{margin:4px 0;font-size:22px}.page-header p{color:#cbd5e1;font-size:13px;margin:4px 0}
+.header-meta{display:flex;gap:16px;font-size:12px;color:#94a3b8;margin-top:8px;flex-wrap:wrap}
+.controls-bar{position:sticky;top:41px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);padding:8px 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#search-input{flex:1;min-width:160px;padding:6px 10px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;color:var(--grey-text);font-size:12px;padding:5px 10px;border-radius:14px;cursor:pointer}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+#q-count-label{font-size:12px;color:var(--grey-text)}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;padding:20px;max-width:1100px;margin:0 auto}
+.sidebar{position:sticky;top:95px;align-self:start;font-size:12px}
+.sidebar a{display:block;color:var(--grey-text);text-decoration:none;padding:4px 8px;border-radius:4px;margin-bottom:2px}
+.sidebar a.active{background:var(--teal-light);color:var(--teal-dark);font-weight:600}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:18px 0 8px}
+.section-head h2{font-size:15px;margin:0}.sec-count{font-size:11px;color:var(--grey-text);background:var(--grey-bg);padding:2px 8px;border-radius:10px}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;margin-bottom:10px;overflow:hidden}
+.q-header{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;cursor:pointer}
+.q-header:hover{background:var(--grey-bg)}
+.q-num-badge{background:var(--teal);color:#fff;font-size:12px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.q-text-wrap{flex:1;min-width:0}.q-text{font-size:14px;font-weight:600}
+.q-tags{margin-top:5px}.q-tag{display:inline-block;font-size:10px;background:var(--teal-light);color:var(--teal-dark);padding:2px 7px;border-radius:8px;margin-right:5px}
+.q-chevron{width:18px;flex-shrink:0;transition:transform .2s}
+.q-card.open .q-chevron{transform:rotate(180deg)}
+.q-answer{display:none;padding:0 14px 14px}.q-card.open .q-answer{display:block}
+.answer-body{font-family:Georgia,serif;font-size:14.5px;line-height:1.6}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--teal-dark);margin:14px 0 6px;font-family:'Segoe UI',sans-serif}
+.answer-body ul,.answer-body ol{margin:6px 0;padding-left:20px}
+.formula{background:var(--grey-bg);font-family:monospace;padding:8px 10px;border-radius:6px;font-size:13px}
+.reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:12px 14px;margin-top:14px}
+.reg-box-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:8px}
+.reg-item{display:flex;gap:10px;font-size:12.5px;padding:3px 0;border-top:1px solid #1e293b}
+.reg-item:first-of-type{border-top:none}
+.reg-code{color:var(--orange);font-family:monospace;min-width:150px;word-break:break-word}
+.reg-desc{color:#cbd5e1;min-width:0}
+.ce-tip{background:var(--orange-light);border-left:3px solid var(--orange);padding:10px 12px;border-radius:0 6px 6px 0;margin-top:12px;font-size:13px}
+details.dd{margin-top:10px;border:1px solid var(--grey-border);border-radius:6px;padding:6px 10px}
+details.dd summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--teal-dark)}
+details.dd p,details.dd div{font-size:13px;margin:6px 0}
+.q-footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;border-top:1px solid var(--grey-border);padding-top:8px;margin-top:10px}
+.correction-link{font-size:11px;color:var(--grey-text);min-width:0;word-break:break-all}
+.correction-link a{color:var(--teal-dark)}
+.q-version{font-size:11px;color:var(--grey-text);flex-shrink:0}
+.page-footer{max-width:1100px;margin:20px auto;padding:16px 20px;border-top:1px solid var(--grey-border);font-size:12px;color:var(--grey-text)}
+/* cheat sheet */
+.cheat{background:#fff;border:2px dashed var(--teal);border-radius:10px;padding:16px;margin:20px 0}
+.cheat h2{color:var(--teal-dark);font-size:16px;margin-top:0}
+.cheat .flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0}
+.cheat .node{background:var(--teal-light);color:var(--teal-dark);font-size:12px;font-weight:600;padding:6px 10px;border-radius:6px}
+.cheat .arrow{color:var(--teal);font-weight:700}
+.cheat .memcard{background:var(--grey-bg);border-left:3px solid var(--orange);border-radius:0 6px 6px 0;padding:8px 10px;font-size:12.5px;margin:6px 0}
+.cheat table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+.cheat th,.cheat td{border:1px solid var(--grey-border);padding:5px 8px;text-align:left}
+.cheat th{background:var(--navy);color:#fff}
+@media(max-width:700px){.main-layout{grid-template-columns:1fr}.sidebar{display:none}}
+
+body{-webkit-user-select:none;user-select:none}
+</style>
+</head><body oncontextmenu="return false"><script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace('/SQ/pay.html');}</script><div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.04;">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wm" x="0" y="0" width="300" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+        <text x="10" y="60" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">marineintelligenceweekly.com</text>
+        <text x="10" y="120" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wm)"/>
+  </svg>
+</div>
+<div class="topbar"><b>⚓ MIW</b> Marine Intelligence Weekly
+<a href="/">Home</a><a href="/meoclass1/">MEO Class 1</a><a href="mailto:contactus@marineintelligenceweekly.com">Contact</a></div>
+<div class="page-header">
+  <span class="qb-badge">QB8_F</span>
+  <h1>QB8_F — Cargo Operations (Backlog)</h1>
+  <p>MEO Class 1 Oral Exam Question Bank — Kochi MMD-focused, reclassified from UNCLASSIFIED backlog, 5 Jul 2026</p>
+  <div class="header-meta"><span>2 Questions</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span><span>v1.0</span></div>
+</div>
+<div class="controls-bar">
+  <input id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button><button class="filter-btn" onclick="filterTag('ghg',this)">Ghg</button><button class="filter-btn" onclick="filterTag('marpol',this)">Marpol</button><button class="filter-btn" onclick="filterTag('machinery',this)">Machinery</button><button class="filter-btn" onclick="filterTag('fire',this)">Fire</button>
+  <span id="q-count-label">Showing 2 of 2</span>
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <div style="font-weight:700;font-size:11px;text-transform:uppercase;color:#64748b;margin-bottom:6px">Contents</div>
+    <a class="toc-link" href="#q1">1. LPG as marine fuel — issues</a>
+<a class="toc-link" href="#q2">2. Frame stripping & purging</a>
+    <div style="border-top:1px solid #e2e8f0;margin:10px 0"></div>
+    <div style="font-size:11px;color:#64748b">More QB files at <a href="/meoclass1/" style="color:#0d9488">/meoclass1/</a></div>
+  </div>
+  <div id="q-feed">
+    <div class="section-head"><h2>📋 QB8_F — Cargo Operations (Backlog)</h2><span class="sec-count">2 questions</span></div>
+    
+<div class="q-card" id="q1" data-tags="ghg marpol">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">LPG (as an alternative marine fuel) is a hot topic now. Have you experienced any issues onboard?</div>
+      <div class="q-tags"><span class="q-tag">GHG</span><span class="q-tag">MARPOL</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">My vessel likely isn't LPG-fuelled, so I'd say that honestly, then explain that LPG-fuel systems fall under the IGF Code, require STCW V/3 gas-fuel training, and that LPG vapour (propane ~1.5, butane ~2.0 relative to air) is heavier than air — unlike LNG/methane (~0.55) — which drives low-level gas-detection design.</p>
+      <h4>60-Second Answer</h4>
+      <p>I'd first clarify my own vessel's actual fuel type rather than claim experience I don't have. LPG is gaining attention as an alternative marine fuel because it has lower sulphur and particulate emissions than HFO and, unlike LNG, liquefies under moderate pressure at ambient temperature, simplifying storage. Industry-wide, LPG-fuelled ships fall under the IGF Code — LNG-specific in its core text, with LPG covered via the Alternative Design Approach — with mandatory STCW V/3 training before independent watchkeeping. The critical safety-design distinction is vapour density: propane is about 1.5 times heavier than air and butane about 2.0 times heavier, so a leak sinks and pools in low-lying enclosed spaces, requiring bilge-level gas detection — the opposite of LNG, where methane at about 0.55 relative density rises and disperses, so detection sits at deckhead level. Other considerations include material compatibility with seals and gaskets, boil-off gas management, and strict bunkering safety protocols with ESD links and exclusion zones. I'd present this as regulatory/technical knowledge rather than personal onboard experience unless my ship is actually gas-fuelled.</p>
+      <h4>Context</h4><p>LPG (propane/butane) is being adopted as an alternative marine fuel on some newbuild dual-fuel tonnage, driven by its lower sulphur/particulate emissions versus HFO and comparatively simpler storage (liquefies under moderate pressure, ambient temperature) versus LNG. On a standard container vessel running HFO/MGO/VLSFO, LPG-fuel exposure is more likely through cargo/bunkering awareness than day-to-day operation — answer honestly based on your vessel's actual fuel type if this comes up.</p>
+<h4>Vapour density — the key safety-design distinction</h4><ul><li><strong>LPG:</strong> propane has a vapour density of approximately <strong>1.5</strong> relative to air, butane approximately <strong>2.0</strong> — both heavier than air. A leak sinks, pools, and accumulates in low-lying enclosed spaces, double bottoms, and bilge wells.</li><li><strong>LNG (methane):</strong> vapour density approximately <strong>0.55</strong> relative to air — lighter than air, so a leak rises and disperses unless trapped by overhead structure.</li><li><strong>Design consequence:</strong> LPG installations require bilge-level gas detection and low-level extraction/ventilation, the opposite design philosophy to LNG systems, which detect and vent at deckhead level.</li></ul>
+<h4>Known operational issues associated with LPG as fuel (industry-wide, from class/OEM guidance)</h4><ul><li><strong>Toxicity & asphyxiation risk:</strong> as above — gas detection and ventilation must be positioned low, not high, around fuel tanks/pump rooms.</li><li><strong>Material compatibility:</strong> requires compatible seals/gaskets; LPG can affect certain elastomers differently from HFO systems.</li><li><strong>Boil-off/pressure management:</strong> even though LPG is easier to handle than LNG, tank pressure and BOG (boil-off gas) management still needs monitoring during idle periods.</li><li><strong>Bunkering safety:</strong> ship-to-ship/shore LPG bunkering requires ESD (emergency shutdown) links, dedicated PPE, and exclusion zones per the IGF Code.</li><li><strong>Crew familiarisation:</strong> STCW-mandated gas-fuelled ship familiarisation training is required before independent watchkeeping on LPG dual-fuel plant.</li></ul>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">IGF Code (International Code of Safety for Ships using Gases or other Low-flashpoint Fuels)</span><span class="reg-desc">Governs LNG-fuelled ship design directly; LPG/methanol/ammonia covered via the Alternative Design Approach (Ch.2.3) or technical addenda</span></div><div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg 14</span><span class="reg-desc">SOx limits — driver for alternative fuel uptake</span></div><div class="reg-item"><span class="reg-code">STCW, Reg V/3</span><span class="reg-desc">Mandatory basic/advanced training for masters, officers & ratings on ships subject to the IGF Code</span></div><div class="reg-item"><span class="reg-code">IMO IGC Code</span><span class="reg-desc">Relevant where LPG is carried as cargo rather than fuel — do not conflate with IGF Code</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Nair often asks this to test honesty — if your vessel is HFO/VLSFO-fuelled, say so plainly, then pivot immediately to the vapour density distinction (LPG heavier than air, LNG lighter) and its direct consequence for gas detection layout — this is the technical detail that separates a strong answer from a generic one.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>CE ensures gas detection, ESD systems, and PPE are class-certified and drilled if the vessel is IGF Code-classed; for non-gas-fuelled ships, CE tracks fleet-wide dual-fuel retrofit/newbuild plans as part of the Company's SEEMP/CII strategy.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>“Is LPG the same as LNG for fuel purposes?” — no: different storage conditions (LPG liquefies at moderate pressure/ambient temp; LNG requires cryogenic -162°C storage) AND opposite vapour density behaviour, driving different gas-detection system layouts (low-level for LPG, high-level for LNG).</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Inventing a specific onboard LPG-fuel incident to sound experienced — if you haven't sailed on a gas-fuelled ship, say so and answer from regulatory/technical knowledge instead.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>Vapour density relative to air: propane ≈1.5, butane ≈2.0 (both heavier than air); methane (LNG) ≈0.55 (lighter than air). These are standard physical constants (molar mass ratios), safe to quote precisely.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>General industry safety lessons from LNG/gas-fuel bunkering near-misses (vapour cloud formation, ESD failures) inform IGF Code bunkering safety-zone requirements applicable analogously to LPG.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel (Maersk A/S, container)</summary><p>State plainly whether the current Maersk container vessel runs HFO/VLSFO/MGO or is a methanol/LNG dual-fuel unit, and answer from that factual baseline first before generalising.</p></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB8_F, Q1, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB8_F, Q1, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB8_F · Q1 · v1.0</span>
+  </div>
+</div>
+<div class="q-card" id="q2" data-tags="machinery fire">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Describe the frame stripping and purging procedure (scavenge space fire response context).</div>
+      <div class="q-tags"><span class="q-tag">MACHINERY</span><span class="q-tag">FIRE</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Stop the engine and engage turning gear, isolate scavenge air and drains, extinguish with the fixed fire-fighting system, cool the space without opening it, then strip out oil/sludge and purge before re-entry — the golden rule is never open the doors early, since that feeds oxygen to the fire.</p>
+      <h4>60-Second Answer</h4>
+      <p>On a scavenge fire, the sequence is: stop the main engine immediately and engage turning gear to keep even heat distribution, isolate by stopping scavenge blowers and closing drain valves to cut off the air feeding the fire, then apply the fixed extinguishing system (CO2, steam, or water mist) and boundary cooling to the casing from outside without opening the doors — opening early introduces oxygen and risks flashback or explosion. Only once the fire is confirmed extinguished and the casing has cooled does stripping begin: removing accumulated oil, sludge and carbon deposits from the scavenge space, piston rod glands and stuffing box, which removes the fuel source for re-ignition. The space is then purged and ventilated, with atmosphere testing per enclosed-space entry procedures before any hot work or full re-entry. Finally, the piston rod gland and scavenge drain non-return valves are inspected and the root cause of oil leakage addressed before restart — I'd reference the specific engine builder's checklist, such as MAN ES or WinGD guidance, for the exact confirmed safe-to-open condition rather than quoting a generic numeric threshold.</p>
+      <h4>Context</h4><p>"Frame" here refers to the scavenge air space/piston-rod frame area of a 2-stroke crosshead main engine. Stripping and purging is the recovery sequence after a <strong>scavenge fire</strong> or when opening the space for inspection — the goal is to safely remove residual oil/sludge (fuel for re-ignition) and inert/ventilate the space before re-entry or restart.</p>
+<h4>Sequenced procedure</h4><ol><li><strong>Stop the engine</strong> immediately on scavenge fire alarm/indication; stop fuel to the affected unit(s), engage and maintain turning gear once stopped to keep even heat distribution and avoid shaft distortion.</li><li><strong>Isolate:</strong> stop scavenge air/auxiliary blowers, close blower flaps and scavenge drain valves to prevent air feeding the fire.</li><li><strong>Extinguish:</strong> apply the fixed fire-fighting system for the scavenge space (CO2, steam, or water mist depending on the installation) rather than opening doors to fight the fire directly.</li><li><strong>Boundary cooling & wait:</strong> apply external cooling to the casing if accessible, and do not open scavenge space doors until the fire is confirmed fully extinguished and the casing has cooled — opening early introduces oxygen and risks flashback/explosion. Do not rely on a specific universal temperature figure; follow your engine builder's (MAN ES/WinGD) checklist for the confirmed safe-to-open condition.</li><li><strong>Stripping:</strong> once cooled, open drains/doors carefully, remove accumulated oil, sludge, and carbon deposits from the scavenge space, piston rod glands, and stuffing box area — this removes the fuel source for re-ignition.</li><li><strong>Purging/ventilation:</strong> ventilate the space to clear residual fumes/oil mist before hot work or re-entry, following enclosed-space entry precautions (gas-free certificate, atmosphere testing).</li><li><strong>Inspection:</strong> check piston rod gland tightness, scavenge drain non-return valves, and root-cause the oil leakage source (worn rings, gland leakage) before restart.</li></ol>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">SOLAS Ch.II-2, Reg 10</span><span class="reg-desc">Fire-fighting — general provisions applicable to machinery space fires</span></div><div class="reg-item"><span class="reg-code">Class Society Rules (Machinery)</span><span class="reg-desc">Scavenge fire alarm/monitoring system requirements — verify vessel-specific class</span></div><div class="reg-item"><span class="reg-code">Enclosed Space Entry procedures (SOLAS III/19.3.3 / IMO Res.A.1050(27))</span><span class="reg-desc">Atmosphere testing before re-entry after purging</span></div><div class="reg-item"><span class="reg-code">Engine Manufacturer's Instruction Manual</span><span class="reg-desc">OEM-specific scavenge fire response sequence and safe-to-open condition — authoritative for the fitted engine type</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon/Rajappan draws the scavenge space cross-section and expects you to point to where oil accumulates (piston rod gland, scavenge drains) and explain WHY you don't open doors immediately (oxygen feeds the fire). Mention engaging turning gear once stopped — a detail examiners specifically listen for — but don't quote a specific 'safe' temperature figure unless it's confirmed from your actual vessel's engine builder checklist.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>CE's PMS ensures scavenge drains are regularly checked/cleaned and piston rod gland packing condition is monitored to prevent the oil accumulation that causes scavenge fires in the first place.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>“Why not open the scavenge doors immediately to fight the fire directly?” — because introducing air/oxygen intensifies the fire; correct response is stop/isolate/extinguish/cool first, open only once the fire is confirmed out and the casing has cooled.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Skipping the cooling/wait period and jumping straight to 'open and clean' — this is the exact sequencing error examiners probe for, since it risks a scavenge space explosion on reignition. Also: quoting a precise universal reopening temperature (e.g. a specific °C figure) as if it's a fixed regulatory number — it isn't; it's engine-builder-specific.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>No single universal numeric threshold for safe reopening — always reference the specific engine manufacturer's (MAN ES/WinGD) manual for permissible temperature/wait-time; state this as vessel/engine-type specific rather than inventing a figure.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Scavenge fires remain a recurring engine-room casualty type in class/flag investigation reports, typically traced to piston rod gland oil leakage combined with hot spots from blow-by — root-cause analysis after every event is standard practice.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel (Maersk A/S, container)</summary><p>On a Maersk container vessel's 2-stroke main engine, this procedure would be run per the engine builder's (e.g., MAN ES/WinGD) scavenge fire checklist posted in the ECR — know where that checklist is physically located as an oral-exam-ready detail.</p></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB8_F, Q2, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB8_F, Q2, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB8_F · Q2 · v1.0</span>
+  </div>
+</div>
+  </div>
+</div>
+<div id="no-results" style="display:none;text-align:center;color:#64748b;padding:30px">No questions match your search/filter.</div>
+
+<div class="cheat"><h2>🧠 QB8_F Cheat Sheet — Visual Recall</h2>
+<div class="memcard"><strong>Q1 LPG as fuel</strong> → Answer YOUR ship's actual fuel first (honesty test). Vapour density: Propane ≈1.5, Butane ≈2.0 (HEAVIER than air, sinks/pools) vs LNG/methane ≈0.55 (LIGHTER, rises). → LPG needs bilge-level detection; LNG needs deckhead-level.</div>
+<div class="flow"><span class="node">Scavenge fire alarm</span><span class="arrow">→</span><span class="node">STOP + turning gear</span><span class="arrow">→</span><span class="node">ISOLATE (blowers/drains)</span><span class="arrow">→</span><span class="node">EXTINGUISH (CO2/steam/water mist)</span><span class="arrow">→</span><span class="node">COOL (don't open!)</span><span class="arrow">→</span><span class="node">STRIP oil/sludge</span><span class="arrow">→</span><span class="node">PURGE/ventilate</span><span class="arrow">→</span><span class="node">Root-cause & restart</span></div>
+<div class="memcard"><strong>Why not open doors early?</strong> Opening = feeding oxygen to fire. Golden rule: extinguish + cool first, open last. NO fixed universal temperature number — check MAN ES/WinGD checklist for your engine.</div>
+</div>
+
+<div class="page-footer">
+Compiled by Nixon Antony, 2/E, Maersk A/S · MEO Class 1 exam prep, Kochi MMD · Corrections: contactus@marineintelligenceweekly.com<br>
+Disclaimer: For oral-exam preparation only. Always cross-check against current IMO/class/DG Shipping circulars before your exam — regulations amend frequently.
+</div>
+<script>
+function toggleCard(h){h.closest('.q-card').classList.toggle('open')}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters()}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();const cards=document.querySelectorAll('.q-card');let vis=0;cards.forEach(c=>{const tags=(c.dataset.tags||'').toLowerCase();const text=c.innerText.toLowerCase();const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));c.style.display=show?'':'none';if(show)vis++});document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;document.getElementById('no-results').style.display=vis===0?'block':'none'}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){document.querySelectorAll('.toc-link').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+x.target.id))}})},{threshold:.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+</script>
+<script>
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('copy', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+</body></html>
