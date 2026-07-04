@@ -79,6 +79,24 @@ input:focus{border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.15)}
 </div>
 
 <script>
+// -------------------------------------------------------------
+// Device ID — a random, persistent-per-browser identifier used
+// ONLY to detect "this password is active on a different device
+// right now", not for tracking/analytics. Generated once and
+// reused; NOT tied to IP or hardware, so it's fine for ships/
+// offices sharing a network, and it resets if the user clears
+// site data (acceptable — worst case they just re-claim the slot).
+// -------------------------------------------------------------
+function getDeviceId() {
+  let id = localStorage.getItem('miw_device_id');
+  if (!id) {
+    id = (crypto.randomUUID ? crypto.randomUUID() :
+      'dev-' + Date.now() + '-' + Math.random().toString(36).slice(2));
+    localStorage.setItem('miw_device_id', id);
+  }
+  return id;
+}
+
 function switchTab(tab) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
@@ -109,7 +127,7 @@ async function doLogin() {
     const response = await fetch('/api/check-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password: pwd })
+      body: JSON.stringify({ email, password: pwd, device_id: getDeviceId() })
     });
 
     const data = await response.json();
@@ -138,11 +156,15 @@ async function doLogin() {
 try {
   const auth = JSON.parse(localStorage.getItem('miw_auth') || 'null');
   if (auth && auth.expiry > Date.now()) {
-    // Quick re-verify with server
+    // Quick re-verify with server. NOTE: this re-verify also sends
+    // device_id and will re-claim the active-device slot for THIS
+    // device if another device logged in since — that's intentional
+    // "whoever's actually using it most recently wins" behavior, not
+    // a bug. See check-password.js comments for the tradeoff.
     fetch('/api/check-password', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: auth.email, password: auth.pwd })
+      body: JSON.stringify({ email: auth.email, password: auth.pwd, device_id: getDeviceId() })
     }).then(r => r.json()).then(data => {
       if (data.success) window.location.href = '/meoclass1/';
     }).catch(() => {});
