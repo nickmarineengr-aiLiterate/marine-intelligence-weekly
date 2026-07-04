@@ -86,7 +86,8 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
 .qb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px;margin-bottom:20px;}
 
 /* QB CARD - compact */
-.qb-card{background:#fff;border:1px solid var(--grey-border);border-radius:9px;overflow:hidden;transition:box-shadow .2s,transform .2s;text-decoration:none;color:inherit;display:flex;flex-direction:column;position:relative;}
+.qb-card{background:#fff;border:1px solid var(--grey-border);border-radius:9px;overflow:hidden;transition:box-shadow .2s,transform .2s;text-decoration:none;color:inherit;display:flex;flex-direction:column;position:relative;cursor:pointer;}
+.qb-card-hit{position:absolute;inset:0;z-index:1;}
 .qb-card:hover{box-shadow:0 4px 16px rgba(13,148,136,.14);transform:translateY(-1px);}
 .qb-card-top{padding:11px 12px 9px;flex:1;}
 .qb-num-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;gap:4px;}
@@ -99,7 +100,7 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
 .qb-card-bottom{padding:6px 12px;background:var(--grey-bg);border-top:1px solid var(--grey-border);display:flex;align-items:center;justify-content:space-between;}
 .qb-q-count{font-size:10px;color:var(--grey-text);}
 .qb-q-count strong{color:var(--ink);}
-.cs-link{font-size:9.5px;font-weight:700;color:var(--teal-dark);text-decoration:none;}
+.cs-link{font-size:9.5px;font-weight:700;color:var(--teal-dark);text-decoration:none;position:relative;z-index:2;}
 .cs-link:hover{text-decoration:underline;}
 .inbuilt-note{font-size:9px;color:var(--grey-text);font-style:italic;}
 
@@ -313,7 +314,8 @@ function renderGroups(){
                          : (c.qcount<=6 ? `<span class="inbuilt-note">Cheat sheet inbuilt</span>` : `<span class="inbuilt-note" style="color:#b45309;">CS pending</span>`);
       const tagsHtml = c.tags.map(t=>`<span class="qb-tag">${esc(t)}</span>`).join('');
       const searchBlob = (c.title+' '+c.file+' '+c.tags.join(' ')).toLowerCase();
-      html += `<a class="qb-card" href="${c.file}" data-search="${esc(searchBlob)}">
+      html += `<div class="qb-card" data-search="${esc(searchBlob)}" onclick="window.location.href='${c.file}'">
+        <a class="qb-card-hit" href="${c.file}" aria-label="${esc(c.title)}" onclick="event.stopPropagation()"></a>
         <div class="qb-card-top">
           <div class="qb-num-row">
             <div class="qb-num">${c.file.replace('.html','')}</div>
@@ -326,7 +328,7 @@ function renderGroups(){
           <span class="qb-q-count"><strong>${c.qcount}</strong> Q · v${c.version}</span>
           ${csLink}
         </div>
-      </a>`;
+      </div>`;
     });
     html += `</div>`;
   });
