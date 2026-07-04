@@ -50,9 +50,18 @@ async function redisIncr(key) {
 // Shared lock key/format used identically in razorpay-webhook.js.
 // -------------------------------------------------------------
 async function redisSetNX(key, value, ttlSeconds = 86400) {
-  const url = `${process.env.KV_REST_API_URL}/set/${encodeURIComponent(key)}/${encodeURIComponent(value)}?NX=true&EX=${ttlSeconds}`;
-  const r = await fetch(url, {
-    headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` }
+  // Use the raw-command POST form (documented by Upstash) instead of
+  // query-string flags — NX is a bare Redis flag, not a key=value pair,
+  // and GET-style path/query encoding isn't guaranteed to express that
+  // correctly. Sending ["SET", key, value, "NX", "EX", ttl] as the JSON
+  // body is Upstash's unambiguous, documented way to do this.
+  const r = await fetch(process.env.KV_REST_API_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(["SET", key, value, "NX", "EX", ttlSeconds]),
   });
   const data = await r.json();
   return data.result === "OK";

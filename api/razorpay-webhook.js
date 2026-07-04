@@ -56,9 +56,16 @@ async function redisIncr(key) {
 // markProcessed() read-then-write pair, which had a race window.
 // -------------------------------------------------------------
 async function redisSetNX(key, value, ttlSeconds = 86400) {
-  const url = `${process.env.KV_REST_API_URL}/set/${encodeURIComponent(key)}/${encodeURIComponent(value)}?NX=true&EX=${ttlSeconds}`;
-  const r = await fetch(url, {
-    headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` }
+  // Same unambiguous raw-command POST form as verify-payment.js — see
+  // comment there. Must stay identical in both files so the lock they
+  // race against behaves the same way regardless of which path wins.
+  const r = await fetch(process.env.KV_REST_API_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(["SET", key, value, "NX", "EX", ttlSeconds]),
   });
   const data = await r.json();
   return data.result === "OK";
