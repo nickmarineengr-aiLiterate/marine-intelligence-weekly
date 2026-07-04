@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB4_H Cheat Sheet | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;
+--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);}
+a{color:var(--teal-dark);}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);
+display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;}
+.topbar .logo{width:28px;height:28px;background:var(--teal);border-radius:6px;color:#fff;display:flex;
+align-items:center;justify-content:center;font-weight:700;font-size:.8rem;}
+.topbar .site{font-weight:600;font-size:.95rem;}
+.topbar nav{margin-left:auto;display:flex;gap:1rem;font-size:.85rem;}
+.page-header{background:var(--navy);color:#fff;padding:1.4rem 1rem;}
+.page-header .badge{display:inline-block;background:var(--teal);padding:.15rem .6rem;border-radius:4px;
+font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.5rem;}
+.page-header h1{margin:.2rem 0;font-size:1.4rem;}
+.page-header p{margin:.2rem 0 0;color:#cbd5e1;font-size:.9rem;max-width:760px;}
+.header-meta{margin-top:.7rem;display:flex;gap:1rem;flex-wrap:wrap;font-size:.75rem;color:#94a3b8;}
+.controls-bar{position:sticky;top:48px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);
+padding:.6rem 1rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;}
+.controls-bar input{flex:1;min-width:160px;padding:.45rem .7rem;border:1px solid var(--grey-border);
+border-radius:6px;font-size:.85rem;}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;padding:.35rem .7rem;border-radius:20px;
+font-size:.75rem;cursor:pointer;color:var(--grey-text);}
+.filter-btn.active{background:var(--teal-light);border-color:var(--teal);color:var(--teal-dark);font-weight:600;}
+#q-count-label{font-size:.75rem;color:var(--grey-text);margin-left:auto;}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:1.2rem;max-width:1100px;margin:0 auto;padding:1rem;}
+.sidebar{position:sticky;top:100px;align-self:start;font-size:.82rem;max-height:80vh;overflow:auto;}
+.sidebar .toc-link{display:block;padding:.3rem .5rem;border-radius:5px;color:var(--grey-text);
+text-decoration:none;border-left:3px solid transparent;}
+.sidebar .toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:600;}
+.sidebar hr{border:none;border-top:1px solid var(--grey-border);margin:.7rem 0;}
+.sidebar .upcoming{color:var(--grey-text);font-size:.75rem;font-style:italic;}
+.section-head{display:flex;align-items:center;gap:.5rem;margin:1.4rem 0 .6rem;}
+.section-head h2{font-size:1.05rem;margin:0;}
+.sec-count{font-size:.7rem;background:var(--grey-bg);color:var(--grey-text);padding:.15rem .5rem;border-radius:10px;}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:.8rem;overflow:hidden;}
+.q-header{display:flex;gap:.7rem;align-items:flex-start;padding:.8rem 1rem;cursor:pointer;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;
+display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-weight:600;font-size:.95rem;}
+.q-tags{margin-top:.35rem;display:flex;gap:.35rem;flex-wrap:wrap;}
+.q-tag{font-size:.65rem;background:var(--teal-light);color:var(--teal-dark);padding:.1rem .5rem;border-radius:10px;}
+.q-chevron{flex:none;width:20px;height:20px;transition:transform .2s;stroke:var(--grey-text);}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 1rem 1rem;}
+.q-card.open .q-answer{display:block;}
+.practice-block{background:var(--teal-light);border-left:4px solid var(--teal);padding:.6rem .8rem;
+border-radius:6px;margin:.5rem 0;font-size:.88rem;}
+.practice-block strong{color:var(--teal-dark);}
+.answer-body{font-family:Georgia,serif;font-size:.92rem;line-height:1.55;}
+.answer-body h4{font-family:'Segoe UI',sans-serif;font-size:.72rem;text-transform:uppercase;
+letter-spacing:.05em;color:var(--teal-dark);margin:1rem 0 .3rem;}
+.answer-body ul,.answer-body ol{margin:.3rem 0;padding-left:1.2rem;}
+.answer-body p{margin:.4rem 0;}
+.formula{font-family:monospace;background:var(--grey-bg);padding:.5rem .7rem;border-radius:6px;display:inline-block;}
+.reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:.7rem .9rem;margin:.8rem 0 .5rem;font-size:.82rem;}
+.reg-box-title{font-weight:700;color:#fff;margin-bottom:.4rem;font-size:.78rem;}
+.reg-item{display:flex;gap:.6rem;padding:.2rem 0;border-top:1px solid #1e293b;flex-wrap:wrap;min-width:0;}
+.reg-item:first-of-type{border-top:none;}
+.reg-code{color:var(--orange);font-family:monospace;font-size:.78rem;flex:none;word-break:break-all;}
+.reg-desc{color:#94a3b8;min-width:0;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);padding:.6rem .8rem;
+border-radius:6px;font-size:.85rem;}
+details.deep-dive{margin-top:.6rem;border:1px dashed var(--grey-border);border-radius:8px;padding:.4rem .7rem;}
+details.deep-dive summary{cursor:pointer;font-size:.8rem;font-weight:600;color:var(--teal-dark);}
+details.deep-dive .dd-item{margin:.5rem 0;font-size:.83rem;}
+details.deep-dive .dd-item b{color:var(--ink);}
+.q-footer{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;padding:.5rem 1rem;
+border-top:1px solid var(--grey-border);background:var(--grey-bg);font-size:.7rem;color:var(--grey-text);
+min-width:0;}
+.correction-link{word-break:break-all;min-width:0;}
+.q-version{flex:none;}
+#no-results{display:none;text-align:center;padding:2rem;color:var(--grey-text);}
+.page-footer{max-width:1100px;margin:1rem auto;padding:1rem;font-size:.78rem;color:var(--grey-text);
+border-top:1px solid var(--grey-border);}
+.cheat-sheet{max-width:1100px;margin:1.5rem auto;padding:0 1rem;}
+.cheat-sheet h2{font-size:1.1rem;color:var(--teal-dark);}
+.flow{display:flex;flex-direction:column;gap:0;align-items:stretch;margin:.6rem 0;}
+.flow .fbox{background:var(--navy);color:#fff;padding:.5rem .8rem;border-radius:6px;font-size:.8rem;text-align:center;}
+.flow .farrow{text-align:center;color:var(--teal);font-size:1rem;line-height:1.2;}
+.cue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem;margin:.7rem 0;}
+.cue-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;padding:.6rem .8rem;font-size:.82rem;}
+.cue-card b{color:var(--teal-dark);display:block;font-size:.75rem;text-transform:uppercase;margin-bottom:.3rem;}
+.recall-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:.6rem 0;}
+.recall-table th,.recall-table td{border:1px solid var(--grey-border);padding:.4rem .6rem;text-align:left;}
+.recall-table th{background:var(--grey-bg);}
+@media(max-width:760px){.main-layout{grid-template-columns:1fr;}.sidebar{position:static;max-height:none;}}
+
+.watermark{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.04;
+background:repeating-linear-gradient(-45deg,#000 0,#000 1px,transparent 1px,transparent 120px);}
+body{user-select:none;}
+</style>
+</head>
+<body><script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+<div class="watermark"></div>
+<div class="topbar">
+  <div class="logo">MI</div>
+  <div class="site">Marine Intelligence Weekly</div>
+  <nav><a href="https://marineintelligenceweekly.com">Home</a><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a><a href="mailto:contactus@marineintelligenceweekly.com">Contact</a></nav>
+</div>
+<div class="page-header">
+  <span class="badge">QB4_H · Cheat Sheet</span>
+  <h1>QB4_H Cheat Sheet — ISM, ISPS, MLC 2006 &amp; STCW (Backlog H)</h1>
+  <p>Retrieval-practice companion to QB4_H.html — Huberman/Sung dual-coding: flowchart + cue cards + rapid-recall table.</p>
+</div>
+
+<div class="cheat-sheet">
+<h2>&#129504; QB4_H Cheat Sheet — Retrieval Cues (Huberman/Sung Dual-Coding)</h2>
+<div class="flow">
+  <div class="fbox">"AECS?" — STOP</div>
+  <div class="farrow">&#8595;</div>
+  <div class="fbox">Assessment, Examination &amp; Certification of SEAFARERS</div>
+  <div class="farrow">&#8595;</div>
+  <div class="fbox">Trains EXAMINERS/surveyors/auditors/MTI faculty — NOT you as candidate</div>
+  <div class="farrow">&#8595;</div>
+  <div class="fbox">Eligibility = CoC (no lower than examined rank) + TOTA cert</div>
+</div>
+<div class="cue-grid">
+  <div class="cue-card"><b>Security training ladder</b>SAT (everyone) &#8594; DSD (assigned security role) &#8594; SSO (accountable to Master).</div>
+  <div class="cue-card"><b>SSAS test — zero indication rule</b>No buzzer, no light, ever. Confirmation only via CSO message to the Master.</div>
+  <div class="cue-card"><b>Jamming vs Spoofing</b>Jamming = loud, obvious, alarms fire. Spoofing = silent, believable, no alarm — far more dangerous.</div>
+  <div class="cue-card"><b>Statutory extension math</b>5 yrs max validity &#8594; 3-month extension cap (1 month short-voyage) &#8594; Flag State only, never Class alone.</div>
+  <div class="cue-card"><b>CoC vs CoP</b>CoC = authorises a RANK. CoP = confirms a SKILL. Never call a CoP "just a course cert."</div>
+  <div class="cue-card"><b>WHO document, correct name</b>SSCEC (clean) / SSCC (deficiency found) under IHR 2005. Never say "de-ratting certificate."</div>
+</div>
+<table class="recall-table">
+<tr><th>Q</th><th>One-line trigger phrase</th><th>Instant answer</th></tr>
+<tr><td>1</td><td>"AECS — who does it?"</td><td>Examiners/surveyors/auditors/faculty, NOT candidates</td></tr>
+<tr><td>2</td><td>"Hormuz transit BMP"</td><td>UKMTO/IMSC report, harden, citadel, parallel gens</td></tr>
+<tr><td>3</td><td>"Security courses for seafarers"</td><td>SAT / DSD / SSO — Reg VI/6, VI/6, VI/5</td></tr>
+<tr><td>4</td><td>"SSAS test procedure"</td><td>Pre-notify CSO/Flag, covert, zero onboard indication</td></tr>
+<tr><td>5</td><td>"AECS vs simulator course"</td><td>AECS ≠ competency test; Reg I/8 quality standard</td></tr>
+<tr><td>6</td><td>"Switch off AIS — when?"</td><td>Master's discretion only, imminent threat, log it</td></tr>
+<tr><td>7</td><td>"CoC vs CoP"</td><td>Rank authority vs specific functional skill</td></tr>
+<tr><td>8</td><td>"Jamming vs Spoofing"</td><td>Denial (loud) vs deception (silent)</td></tr>
+<tr><td>9</td><td>"WHO ship certificates"</td><td>SSCEC/SSCC under IHR 2005, + Maritime Declaration of Health</td></tr>
+<tr><td>10</td><td>"Statutory cert extension"</td><td>Flag State only, 3-month cap, pre-expiry application</td></tr>
+<tr><td>11</td><td>"BMP5 details"</td><td>3 pillars, 3 phases, citadel + remote engine trips</td></tr>
+</table>
+</div>
+
+<div class="page-footer">
+  Compiled by Nixon Antony, 2/E, Maersk A/S. For corrections email <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>.
+</div>
+<script>
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+</script>
+</body>
+</html>

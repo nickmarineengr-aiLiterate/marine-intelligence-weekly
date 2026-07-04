@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB1_H — Engine Construction, Stability &amp; Surveys (Backlog H) | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is IACS Procedural Requirement (PR) 17 and when does it apply?", "acceptedAnswer": {"@type": "Answer", "text": "See gated members' answer on Marine Intelligence Weekly MEO Class 1 platform."}}, {"@type": "Question", "name": "What is IACS Procedural Requirement (PR) 9 and how does it standardise ISM Code certification?", "acceptedAnswer": {"@type": "Answer", "text": "See gated members' answer on Marine Intelligence Weekly MEO Class 1 platform."}}, {"@type": "Question", "name": "Differentiate between an IACS Unified Requirement (UR), Procedural Requirement (PR), and Unified Interpretation (UI).", "acceptedAnswer": {"@type": "Answer", "text": "See gated members' answer on Marine Intelligence Weekly MEO Class 1 platform."}}, {"@type": "Question", "name": "Describe the windlass/mooring winch brake rendering test \u2014 purpose, calculation basis, and procedure.", "acceptedAnswer": {"@type": "Answer", "text": "See gated members' answer on Marine Intelligence Weekly MEO Class 1 platform."}}, {"@type": "Question", "name": "Explain the IMO Goal-Based Standards (GBS) framework \u2014 the five-tier hierarchy and its scope of application.", "acceptedAnswer": {"@type": "Answer", "text": "See gated members' answer on Marine Intelligence Weekly MEO Class 1 platform."}}]}</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;
+--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);}
+a{color:var(--teal-dark);}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);
+display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;}
+.topbar .logo{width:28px;height:28px;background:var(--teal);border-radius:6px;color:#fff;display:flex;
+align-items:center;justify-content:center;font-weight:700;font-size:.8rem;}
+.topbar .site{font-weight:600;font-size:.95rem;}
+.topbar nav{margin-left:auto;display:flex;gap:1rem;font-size:.85rem;}
+.page-header{background:var(--navy);color:#fff;padding:1.4rem 1rem;}
+.page-header .badge{display:inline-block;background:var(--teal);padding:.15rem .6rem;border-radius:4px;
+font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.5rem;}
+.page-header h1{margin:.2rem 0;font-size:1.4rem;}
+.page-header p{margin:.2rem 0 0;color:#cbd5e1;font-size:.9rem;max-width:760px;}
+.header-meta{margin-top:.7rem;display:flex;gap:1rem;flex-wrap:wrap;font-size:.75rem;color:#94a3b8;}
+.controls-bar{position:sticky;top:48px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);
+padding:.6rem 1rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;}
+.controls-bar input{flex:1;min-width:160px;padding:.45rem .7rem;border:1px solid var(--grey-border);
+border-radius:6px;font-size:.85rem;}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;padding:.35rem .7rem;border-radius:20px;
+font-size:.75rem;cursor:pointer;color:var(--grey-text);}
+.filter-btn.active{background:var(--teal-light);border-color:var(--teal);color:var(--teal-dark);font-weight:600;}
+#q-count-label{font-size:.75rem;color:var(--grey-text);margin-left:auto;}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:1.2rem;max-width:1100px;margin:0 auto;padding:1rem;}
+.sidebar{position:sticky;top:100px;align-self:start;font-size:.82rem;max-height:80vh;overflow:auto;}
+.sidebar .toc-link{display:block;padding:.3rem .5rem;border-radius:5px;color:var(--grey-text);
+text-decoration:none;border-left:3px solid transparent;}
+.sidebar .toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:600;}
+.sidebar hr{border:none;border-top:1px solid var(--grey-border);margin:.7rem 0;}
+.sidebar .upcoming{color:var(--grey-text);font-size:.75rem;font-style:italic;}
+.section-head{display:flex;align-items:center;gap:.5rem;margin:1.4rem 0 .6rem;}
+.section-head h2{font-size:1.05rem;margin:0;}
+.sec-count{font-size:.7rem;background:var(--grey-bg);color:var(--grey-text);padding:.15rem .5rem;border-radius:10px;}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:.8rem;overflow:hidden;}
+.q-header{display:flex;gap:.7rem;align-items:flex-start;padding:.8rem 1rem;cursor:pointer;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;
+display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-weight:600;font-size:.95rem;}
+.q-tags{margin-top:.35rem;display:flex;gap:.35rem;flex-wrap:wrap;}
+.q-tag{font-size:.65rem;background:var(--teal-light);color:var(--teal-dark);padding:.1rem .5rem;border-radius:10px;}
+.q-chevron{flex:none;width:20px;height:20px;transition:transform .2s;stroke:var(--grey-text);}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 1rem 1rem;}
+.q-card.open .q-answer{display:block;}
+.practice-block{background:var(--teal-light);border-left:4px solid var(--teal);padding:.6rem .8rem;
+border-radius:6px;margin:.5rem 0;font-size:.88rem;}
+.practice-block strong{color:var(--teal-dark);}
+.answer-body{font-family:Georgia,serif;font-size:.92rem;line-height:1.55;}
+.answer-body h4{font-family:'Segoe UI',sans-serif;font-size:.72rem;text-transform:uppercase;
+letter-spacing:.05em;color:var(--teal-dark);margin:1rem 0 .3rem;}
+.answer-body ul,.answer-body ol{margin:.3rem 0;padding-left:1.2rem;}
+.answer-body p{margin:.4rem 0;}
+.formula{font-family:monospace;background:var(--grey-bg);padding:.5rem .7rem;border-radius:6px;display:inline-block;}
+.reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:.7rem .9rem;margin:.8rem 0 .5rem;font-size:.82rem;}
+.reg-box-title{font-weight:700;color:#fff;margin-bottom:.4rem;font-size:.78rem;}
+.reg-item{display:flex;gap:.6rem;padding:.2rem 0;border-top:1px solid #1e293b;flex-wrap:wrap;min-width:0;}
+.reg-item:first-of-type{border-top:none;}
+.reg-code{color:var(--orange);font-family:monospace;font-size:.78rem;flex:none;word-break:break-all;}
+.reg-desc{color:#94a3b8;min-width:0;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);padding:.6rem .8rem;
+border-radius:6px;font-size:.85rem;}
+details.deep-dive{margin-top:.6rem;border:1px dashed var(--grey-border);border-radius:8px;padding:.4rem .7rem;}
+details.deep-dive summary{cursor:pointer;font-size:.8rem;font-weight:600;color:var(--teal-dark);}
+details.deep-dive .dd-item{margin:.5rem 0;font-size:.83rem;}
+details.deep-dive .dd-item b{color:var(--ink);}
+.q-footer{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;padding:.5rem 1rem;
+border-top:1px solid var(--grey-border);background:var(--grey-bg);font-size:.7rem;color:var(--grey-text);
+min-width:0;}
+.correction-link{word-break:break-all;min-width:0;}
+.q-version{flex:none;}
+#no-results{display:none;text-align:center;padding:2rem;color:var(--grey-text);}
+.page-footer{max-width:1100px;margin:1rem auto;padding:1rem;font-size:.78rem;color:var(--grey-text);
+border-top:1px solid var(--grey-border);}
+.cheat-sheet{max-width:1100px;margin:1.5rem auto;padding:0 1rem;}
+.cheat-sheet h2{font-size:1.1rem;color:var(--teal-dark);}
+.flow{display:flex;flex-direction:column;gap:0;align-items:stretch;margin:.6rem 0;}
+.flow .fbox{background:var(--navy);color:#fff;padding:.5rem .8rem;border-radius:6px;font-size:.8rem;text-align:center;}
+.flow .farrow{text-align:center;color:var(--teal);font-size:1rem;line-height:1.2;}
+.cue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem;margin:.7rem 0;}
+.cue-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;padding:.6rem .8rem;font-size:.82rem;}
+.cue-card b{color:var(--teal-dark);display:block;font-size:.75rem;text-transform:uppercase;margin-bottom:.3rem;}
+.recall-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:.6rem 0;}
+.recall-table th,.recall-table td{border:1px solid var(--grey-border);padding:.4rem .6rem;text-align:left;}
+.recall-table th{background:var(--grey-bg);}
+@media(max-width:760px){.main-layout{grid-template-columns:1fr;}.sidebar{position:static;max-height:none;}}
+
+.watermark{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.04;
+background:repeating-linear-gradient(-45deg,#000 0,#000 1px,transparent 1px,transparent 120px);}
+body{user-select:none;}
+</style>
+</head>
+<body><script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+<div class="watermark"></div>
+<div class="topbar">
+  <div class="logo">MI</div>
+  <div class="site">Marine Intelligence Weekly</div>
+  <nav><a href="https://marineintelligenceweekly.com">Home</a><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a><a href="mailto:contactus@marineintelligenceweekly.com">Contact</a></nav>
+</div>
+<div class="page-header">
+  <span class="badge">QB1_H · Backlog</span>
+  <h1>QB1_H — Engine Construction, Stability &amp; Surveys (Backlog H)</h1>
+  <p>Reclassified backlog questions on IACS procedural instruments, deck machinery testing, and Goal-Based Standards — Kochi MMD oral prep.</p>
+  <div class="header-meta"><span>5 Questions</span><span>Kochi MMD Oral Prep</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span></div>
+</div>
+<div class="controls-bar">
+  <input id="search-input" placeholder="Search questions…" oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button><button class="filter-btn" onclick="filterTag('iacs',this)">IACS</button><button class="filter-btn" onclick="filterTag('ism',this)">ISM</button><button class="filter-btn" onclick="filterTag('machinery',this)">MACHINERY</button><button class="filter-btn" onclick="filterTag('solas',this)">SOLAS</button><button class="filter-btn" onclick="filterTag('survey',this)">SURVEY</button>
+  <span id="q-count-label">Showing 5 of 5</span>
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <a class="toc-link" href="#q1">Q1. What is IACS Procedural Requiremen…</a><a class="toc-link" href="#q2">Q2. What is IACS Procedural Requiremen…</a><a class="toc-link" href="#q3">Q3. Differentiate between an IACS Unif…</a><a class="toc-link" href="#q4">Q4. Describe the windlass/mooring winc…</a><a class="toc-link" href="#q5">Q5. Explain the IMO Goal-Based Standar…</a>
+    <hr>
+    <div class="upcoming">Renumbering into QB1_A–H sequence deferred until all QB1 backlog letters are complete.</div>
+  </div>
+  <div id="q-feed">
+    <div class="section-head"><h2>&#128269; Classification Society, Statutory Procedures &amp; Construction Standards</h2><span class="sec-count">5 questions</span></div>
+    
+<div class="q-card" id="q1" data-tags="iacs ism">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is IACS Procedural Requirement (PR) 17 and when does it apply?</div>
+      <div class="q-tags"><span class="q-tag">iacs</span><span class="q-tag">ism</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer:</strong> IACS PR 17 requires an RO surveyor who finds technical deficiencies during class or statutory surveys to assess whether they indicate an underlying ISM/SMS failure, and to report this to the ISM-issuing organisation so an additional audit can be triggered if needed.</div>
+    <div class="practice-block"><strong>60-Second Answer:</strong> When a surveyor identifies deficiencies during any Class or statutory survey — annual, intermediate, special, occasional, or PSC/Flag-related — PR 17 requires them to judge whether those deficiencies, individually or in combination, suggest the ship's maintenance procedures under the SMS are not being effectively implemented. If so, a standard PR 17 report is completed and sent to the RO responsible for the ship's SMC/DOC, which decides whether an additional, unscheduled ISM audit is warranted. This closes the historical gap between passing a hardware survey and having a functioning safety management system.</div>
+    <div class="answer-body"><h4>Purpose</h4><p>IACS PR 17 ("Reporting on Deficiencies possibly affecting the implementation of the ISM Code on board", current text Rev.3, Dec 2024) prevents technical non-conformities from being treated in isolation from the SMS that is supposed to prevent them.</p>
+<h4>When the Report Is Triggered</h4><ul><li>Identified during periodical (annual/intermediate/special) or occasional Class survey, statutory survey, or PSC/Flag State inspection follow-up.</li>
+<li>The Society must internally record whether PR 17 deficiencies were found on <strong>every</strong> such survey, even if none are found.</li></ul>
+<h4>What Gets Reported</h4><ul><li>Technical deficiencies that could lead to limitation/suspension/withdrawal of a Class or statutory certificate.</li>
+<li>Documentation deficiencies (e.g. missing ORB entries, overdue conditions of class).</li>
+<li>Deficiencies suggesting maintenance procedures in the SMS are not being effectively implemented.</li></ul>
+<h4>Reporting Chain</h4><p>The surveyor completes a standard-format report within a set timeframe and sends it to the RO responsible for the SMC/DOC. That RO's ISM department judges whether the deficiency is possibly affecting ISM implementation and decides on further action, which may include an additional unscheduled audit.</p>
+      <h4>Chief Engineer Relevance</h4><p>On a Maersk container vessel, PR 17 means an undocumented defect found during a routine Class survey is treated as an SMS red flag, not just a technical snag. A defect logged and risk-assessed in the PMS/defect-reporting system before the surveyor finds it proves the SMS is working; the same defect found undocumented proves it is failing.</p>
+      
+    </div>
+    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div><div class="reg-item"><span class="reg-code">IACS PR 17 (Rev.3, Dec 2024)</span><span class="reg-desc">Reporting on deficiencies possibly affecting ISM implementation on board</span></div><div class="reg-item"><span class="reg-code">ISM Code, Section 10</span><span class="reg-desc">Maintenance of the ship and equipment</span></div><div class="reg-item"><span class="reg-code">IMO RO Code (Res. MEPC.237(65) / MSC.349(92))</span><span class="reg-desc">Requirements for Recognized Organisations acting on behalf of Flag States</span></div><div class="reg-item"><span class="reg-code">SOLAS Ch. IX</span><span class="reg-desc">Management for the Safe Operation of Ships (statutory basis for ISM)</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Nair tests the Class↔ISM interface directly. If asked what happens when a surveyor finds an illegal OWS bypass, name PR 17 explicitly and state it triggers a report to the SMC-issuing RO and can lead to an additional ISM audit — don't stop at the MARPOL angle.</div>
+    <details class="deep-dive"><summary>Deep-Dive: Traps, Failures, Numbers, Casualty, On My Vessel</summary>
+      <div class="dd-item"><b>Trap Questions:</b> Calling PR 17 a Port State Control rule — it is an IACS instruction to RO surveyors, not a PSC instrument.</div><div class="dd-item"><b>Common CE Failures:</b> Assuming a passed ISM intermediate audit means a routine machinery surveyor has no bearing on ISM matters.</div><div class="dd-item"><b>Numbers to Memorise:</b> PR 17 (the number itself is commonly asked directly); current text is Rev.3, Dec 2024.</div><div class="dd-item"><b>Casualty Link:</b> Casualties where technical surveys had repeatedly passed vessels with deep underlying safety-culture failures prompted this root-cause reporting link between Class and ISM.</div><div class="dd-item"><b>On My Vessel:</b> Maersk's digital PMS and Defect Reporting protocol are designed so no surveyor ever finds a defect that isn't already tagged in the system.</div>
+    </details>
+    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: High — verified against IACS's own published PR 17 Rev.3 (Dec 2024) text; re-check the IACS website periodically as revisions occur roughly every few years.</em></p>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_H, Q1, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1_H, Q1, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1_H · Q1 · v1.0</span>
+  </div>
+</div>
+<div class="q-card" id="q2" data-tags="iacs ism">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is IACS Procedural Requirement (PR) 9 and how does it standardise ISM Code certification?</div>
+      <div class="q-tags"><span class="q-tag">iacs</span><span class="q-tag">ism</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer:</strong> IACS PR 9 standardises how Recognized Organisations plan, conduct, and report ISM audits — minimum durations, auditor qualifications, and how Non-Conformities (NCs) versus Major Non-Conformities (MNCs) must be handled — so an ISM certificate carries the same weight regardless of which Class society issued it.</div>
+    <div class="practice-block"><strong>60-Second Answer:</strong> Where the ISM Code tells a company what safety standard to meet, PR 9 tells the RO how to verify it. It sets minimum audit durations by ship type/size, requires auditors to interview personnel across ranks rather than just review paperwork, and rigidly defines the escalation path for findings: an Observation may become a Non-Conformity, which must be closed within an agreed timeframe not exceeding three months; a Major Non-Conformity requires immediate corrective action and the ship cannot sail until it is downgraded, typically triggering an additional audit.</div>
+    <div class="answer-body"><h4>Function</h4><p>IACS created PR 9 ("Procedural Requirements for ISM Code Certification") to stop "class shopping" — inconsistent audit rigour between societies — by setting a uniform minimum audit methodology.</p>
+<h4>Non-Conformity Categories</h4><ul><li><strong>Observation:</strong> objective evidence of a fact that could become an NC if uncorrected.</li>
+<li><strong>Non-Conformity (NC):</strong> non-fulfilment of a specified SMS requirement; corrective action agreed, normally closed within <strong>3 months</strong>.</li>
+<li><strong>Major Non-Conformity (MNC):</strong> a deviation posing a serious threat to personnel, ship, or environment; requires immediate action and the ship cannot sail until the MNC is downgraded, usually triggering an additional audit.</li></ul>
+<h4>Auditor Qualification</h4><p>PR 9 requires auditors to hold specific maritime/auditing experience and to sample shipboard activity by interviewing personnel of different ranks — not solely a paperwork review.</p>
+      <h4>Chief Engineer Relevance</h4><p>Knowing PR 9 lets a Maersk CE manage an audit calendar with confidence: a standard NC gives up to 3 months to close without holding the ship. A threatened MNC (e.g. an untended critical-equipment alarm) demands immediate engagement of the DPA and a mitigation plan to downgrade it before the departure window closes.</p>
+      
+    </div>
+    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div><div class="reg-item"><span class="reg-code">IACS PR 9 (current revision)</span><span class="reg-desc">Procedural Requirements for ISM Code Certification</span></div><div class="reg-item"><span class="reg-code">ISM Code, Part B</span><span class="reg-desc">Certification and periodical verification</span></div><div class="reg-item"><span class="reg-code">IMO Res. A.1118(30)</span><span class="reg-desc">Revised Guidelines on Implementation of the ISM Code</span></div><div class="reg-item"><span class="reg-code">IMO RO Code</span><span class="reg-desc">Requirements for Recognized Organisations</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon and Nair both probe the NC/MNC distinction. Use the word "downgrade" precisely for how an MNC is cleared before sailing, and state the 3-month NC closure ceiling without hesitation.</div>
+    <details class="deep-dive"><summary>Deep-Dive: Traps, Failures, Numbers, Casualty, On My Vessel</summary>
+      <div class="dd-item"><b>Trap Questions:</b> Confusing the ISM Code itself (for the ship/company) with PR 9 (for the RO auditor) — they operate at different levels.</div><div class="dd-item"><b>Common CE Failures:</b> Not expecting the auditor to interview junior engineers/ratings directly, so engine-room staff are unprepared and the SMS interview goes poorly.</div><div class="dd-item"><b>Numbers to Memorise:</b> 3 months maximum to close a standard NC; MNC = immediate action, no sailing until downgraded.</div><div class="dd-item"><b>Casualty Link:</b> Historically inconsistent auditing standards allowed sub-standard operators to retain certification, driving IACS to tighten PR 9.</div><div class="dd-item"><b>On My Vessel:</b> Maersk internal audits mirror PR 9 methodology so the vessel stays continuously "audit-ready" ahead of any external RO visit.</div>
+    </details>
+    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: High — verify the current NC/MNC definitional wording against the latest published IACS PR 9 text, as minor wording alignment with ISO auditing standards occurs periodically.</em></p>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_H, Q2, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1_H, Q2, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1_H · Q2 · v1.0</span>
+  </div>
+</div>
+<div class="q-card" id="q3" data-tags="iacs">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Differentiate between an IACS Unified Requirement (UR), Procedural Requirement (PR), and Unified Interpretation (UI).</div>
+      <div class="q-tags"><span class="q-tag">iacs</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer:</strong> URs are minimum technical/engineering standards that member Class societies must build into their own rules; PRs govern how ROs internally administer surveys, audits, and reporting; UIs are IACS-adopted clarifications of ambiguous wording in IMO statutory conventions such as SOLAS or MARPOL, submitted to IMO for endorsement.</div>
+    <div class="practice-block"><strong>60-Second Answer:</strong> Knowing which instrument a surveyor is citing tells the Chief Engineer where the authority sits. A UR (e.g. UR M for machinery) is a Class-rule minimum — societies can be stricter but never weaker, and disputes are handled with Fleet Management/Class. A PR (e.g. PR 9 for ISM audits, PR 17 for defect reporting) governs the RO's own internal conduct. A UI (e.g. UI SC for SOLAS construction) resolves vague statutory wording — if SOLAS says equipment must start "promptly," the UI defines what that means — and disputes here run through the DPA/Flag State channel since it is a statutory, not a Class, matter.</div>
+    <div class="answer-body"><h4>Unified Requirements (UR)</h4><p>Minimum technical resolutions IACS members must incorporate into their own Rules, mainly covering hull, machinery, electrical, and control-system engineering (e.g. UR M sets minimum crankshaft design criteria). Societies may exceed but never fall below a UR.</p>
+<h4>Procedural Requirements (PR)</h4><p>Mandatory resolutions on the RO's own internal operations, surveying, and administrative procedures, ensuring a certificate from one Class society carries the same weight as from another (e.g. PR 9 — ISM certification; PR 1C — transfer of class).</p>
+<h4>Unified Interpretations (UI)</h4><p>Resolutions that uniformly interpret vague wording in IMO statutory conventions (SOLAS, MARPOL, Load Line). Unlike URs, UIs apply to statutory regulation, are submitted to IMO, and once accepted become the standard by which Flag States and ROs interpret the convention (e.g. UI SC clarifies emergency generator starting requirements under SOLAS).</p>
+      <h4>Chief Engineer Relevance</h4><p>When a Maersk surveyor raises a modification, identifying whether it stems from a Class Rule (UR-based) or a statutory requirement (UI-clarified) determines who ashore the CE must involve — Fleet Management for Class matters, or the DPA/Flag State for statutory ones.</p>
+      
+    </div>
+    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div><div class="reg-item"><span class="reg-code">IACS Charter and Procedures</span><span class="reg-desc">Governs how URs, PRs, and UIs are adopted</span></div><div class="reg-item"><span class="reg-code">SOLAS Chapter I</span><span class="reg-desc">General provisions — statutory basis UIs typically clarify</span></div><div class="reg-item"><span class="reg-code">IMO RO Code</span><span class="reg-desc">Framework for Recognized Organisations acting for Flag States</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon wants three crisp, distinct definitions — never blended. Prepare exactly one example each: UR M (machinery), PR 9 (ISM audits), UI SC (SOLAS interpretations).</div>
+    <details class="deep-dive"><summary>Deep-Dive: Traps, Failures, Numbers, Casualty, On My Vessel</summary>
+      <div class="dd-item"><b>Trap Questions:</b> Claiming a UI overrides an IMO Convention — it only clarifies it; a Flag State may reject a UI and issue its own interpretation.</div><div class="dd-item"><b>Common CE Failures:</b> Forgetting URs are minimums, leading to unnecessary arguments with a surveyor enforcing a society-specific stricter rule.</div><div class="dd-item"><b>Numbers to Memorise:</b> None numerical — focus on distinguishing the three acronyms and their scope.</div><div class="dd-item"><b>Casualty Link:</b> Before UIs existed, differing RO interpretations of SOLAS fire-safety wording produced inconsistent safety levels across similar ships.</div><div class="dd-item"><b>On My Vessel:</b> Modern Maersk survey cycles are shaped by both Class URs and the statutory timelines that UIs have clarified.</div>
+    </details>
+    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: High — definitions are standard IACS terminology and consistently published on the IACS public website; no numerical verification required.</em></p>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_H, Q3, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1_H, Q3, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1_H · Q3 · v1.0</span>
+  </div>
+</div>
+<div class="q-card" id="q4" data-tags="machinery survey">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">4</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Describe the windlass/mooring winch brake rendering test — purpose, calculation basis, and procedure.</div>
+      <div class="q-tags"><span class="q-tag">machinery</span><span class="q-tag">survey</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer:</strong> A brake rendering test confirms the mechanical band brake holds the design mooring/anchoring load but slips before the windlass foundation, deck fittings, or the chain/line itself is overloaded — typically tested to a percentage of the chain's or line's Minimum Breaking Strength (MBS) using a calibrated hydraulic test kit.</div>
+    <div class="practice-block"><strong>60-Second Answer:</strong> The CE converts the required rendering torque into a hydraulic test pressure applied via a lever-arm test kit clamped to the drum or wildcat. The brake must hold under normal environmental loads but render before the windlass/winch foundation, deck structure, or the line/chain itself is damaged. Required rendering force is typically 45–50% of line MBS for mooring winches, up to around 80% of chain MBS for windlass brakes, depending on Class rules — verify against the specific vessel's approved brake data sheet rather than quoting a single fixed figure, since exact percentages are class- and OEM-specific.</div>
+    <div class="answer-body"><h4>Purpose</h4><p>The brake acts as a mechanical "safety valve": it must hold the chain/line under standard environmental forces but slip (render) before those forces exceed the structural limits of the mooring line, chain, windlass, or its deck foundation.</p>
+<h4>Calculation Basis</h4><p class="formula">Torque required (M) = F &times; R</p><p>where F is the design rendering force (a percentage of chain/line MBS per the vessel's approved Class/OEM data) and R is the effective radius of the outer rope layer or wildcat pitch circle. The test kit converts this to a required hydraulic pressure P = M / (A &times; L), where A is the test cylinder's cross-sectional area and L is the lever-arm length.</p>
+<h4>Procedure</h4><ol><li>Inspect brake linings for wear, oil/grease contamination, and scoring; lubricate linkages.</li>
+<li>Rig the manufacturer's test frame to deck foundations; attach the test arm to the drum/wildcat; connect the calibrated hydraulic hand pump and gauge.</li>
+<li>Tighten the brake handwheel to its standard operating torque using a calibrated torque wrench.</li>
+<li>Disengage the drive motor/clutch so the drum turns freely against the brake alone; slowly pressurise while monitoring the gauge.</li>
+<li>Record the exact pressure at which the brake slips and compare against the calculated target.</li>
+<li>Adjust linkages or replace linings if it slips early; if it doesn't slip at the calculated limit, the brake is over-tightened and structurally hazardous.</li></ol>
+      <h4>Chief Engineer Relevance</h4><p>On a Maersk container vessel, high windage areas and frequent berthing make annual brake test sign-off a CE responsibility. Maintain a clear witness mark or turn-count for the standard handwheel tightening position for vetting/audit scrutiny, and ensure crew never use cheater bars, which defeats the calculated rendering limit.</p>
+      
+    </div>
+    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div><div class="reg-item"><span class="reg-code">SOLAS Ch. II-1, Reg. 3-8</span><span class="reg-desc">Towing and mooring equipment</span></div><div class="reg-item"><span class="reg-code">ISO 3730:2012</span><span class="reg-desc">Shipbuilding — mooring winches</span></div><div class="reg-item"><span class="reg-code">OCIMF MEG4</span><span class="reg-desc">Mooring Equipment Guidelines</span></div><div class="reg-item"><span class="reg-code">IACS UR — Deck Machinery</span><span class="reg-desc">Class rules for windlass/winch design and testing</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Rajappan often frames this on an LNG carrier or large container vessel with extreme mooring forces. Emphasise you're checking the slip point, not just that the brake holds, and that the clutch/drive must be disengaged during the live test.</div>
+    <details class="deep-dive"><summary>Deep-Dive: Traps, Failures, Numbers, Casualty, On My Vessel</summary>
+      <div class="dd-item"><b>Trap Questions:</b> "Can you use a cheater bar to make the brake hold in a storm?" — No; over-tightening past design spec prevents rendering, risking the winch being torn off its foundation instead of the line slipping safely.</div><div class="dd-item"><b>Common CE Failures:</b> Ignoring oil/grease contamination on brake linings, which sharply reduces the friction coefficient and causes premature slip.</div><div class="dd-item"><b>Numbers to Memorise:</b> Typical order-of-magnitude: ~45–50% of line MBS (mooring winches) up to ~80% of chain MBS (windlass) — always confirm the vessel-specific approved figure, don't quote a single universal number.</div><div class="dd-item"><b>Casualty Link:</b> Snap-back fatalities have resulted from over-tightened brakes failing to render, storing elastic energy until the line parted violently.</div><div class="dd-item"><b>On My Vessel:</b> Maersk vessels carry standard hydraulic brake test kits; confirm the pressure gauge calibration certificate is in date before each test.</div>
+    </details>
+    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: Moderate-high — general engineering principle and OCIMF MEG4 guidance are standard; the specific %MBS rendering target must always be checked against the individual vessel's approved brake test procedure/Class-approved data sheet rather than treated as a universal fixed number.</em></p>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_H, Q4, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1_H, Q4, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1_H · Q4 · v1.0</span>
+  </div>
+</div>
+<div class="q-card" id="q5" data-tags="solas iacs">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">5</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Explain the IMO Goal-Based Standards (GBS) framework — the five-tier hierarchy and its scope of application.</div>
+      <div class="q-tags"><span class="q-tag">solas</span><span class="q-tag">iacs</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer:</strong> IMO Goal-Based Standards set broad, performance-based safety goals — rather than prescriptive scantlings — through a five-tier hierarchy running from high-level goals down to shipyard practice. Under SOLAS II-1/3-10 they are currently mandatory specifically for new oil tankers and bulk carriers of 150m and above; they do not apply as a mandatory SOLAS requirement to container ships.</div>
+    <div class="practice-block"><strong>60-Second Answer:</strong> GBS Tier I sets high-level goals — e.g. a 25-year design life with adequate structural strength. Tier II translates these into functional requirements (structural strength, corrosion margins, coatings, survey access). Tier III is IMO's verification that Class societies' own rules (Tier IV — e.g. the IACS Common Structural Rules) genuinely satisfy Tiers I–II. Tier V covers shipyard/onboard practice. Critically, the mandatory SOLAS regulation (II-1/3-10, given effect by resolution MSC.290(87), with the GBS Standards themselves adopted by MSC.287(87)) applies only to oil tankers and bulk carriers ≥150m contracted for construction on or after 1 July 2016 — a container ship CE should state this scope limitation clearly rather than imply GBS applies fleet-wide.</div>
+    <div class="answer-body"><h4>The Five-Tier Hierarchy</h4><ul>
+<li><strong>Tier I — Goals:</strong> high-level IMO objectives; ships safe/environmentally sound for a specified design life (not less than 25 years) under specified conditions.</li>
+<li><strong>Tier II — Functional Requirements:</strong> criteria to meet Tier I — structural strength, residual strength, corrosion margins, coatings, survey/inspection access.</li>
+<li><strong>Tier III — Verification of Compliance:</strong> IMO's audit process confirming Class societies' technical rules (Tier IV) genuinely satisfy Tiers I and II.</li>
+<li><strong>Tier IV — Rules for Construction:</strong> the detailed prescriptive rules issued by Class societies, e.g. the IACS Common Structural Rules (CSR), verified under Tier III.</li>
+<li><strong>Tier V — Industry Practices:</strong> shipyard construction practice and onboard maintenance guidance keeping the ship compliant through its life.</li></ul>
+<h4>Scope of Mandatory Application</h4><p>SOLAS Reg. II-1/3-10 (in force since 1 January 2012, given legal effect by resolution MSC.290(87)) makes the GBS Standards (adopted by resolution MSC.287(87)) mandatory <strong>only for oil tankers and bulk carriers of 150m length and above</strong> contracted on or after 1 July 2016. It is not a mandatory SOLAS requirement for container ships.</p>
+<h4>Ship Construction File (SCF)</h4><p>A mandatory GBS outcome for the ships to which it applies is the Ship Construction File, kept on board and ashore, containing as-built structural drawings, high-tensile steel/weld locations, design corrosion margins, and ballast tank coating (PSP) specifications, per MSC.1/Circ.1343.</p>
+      <h4>Chief Engineer Relevance</h4><p>On a Maersk container vessel, GBS in the strict SOLAS-mandatory sense does not directly apply — this scope point itself is an examiner test. However, the underlying philosophy (lifecycle structural management, corrosion margins, coating specification) is mirrored in the vessel's Class-approved structural drawings and PMS, and the CE should be ready to state clearly that GBS applies to tankers/bulkers, not container ships, before discussing any analogous practice on board.</p>
+      <h4>Correction Applied — Scope Limitation</h4><p><em>The Gemini-drafted answer did not state that GBS/SOLAS II-1 Reg. 3-10 is scoped exclusively to oil tankers and bulk carriers ≥150m. This has been corrected: GBS is not a mandatory SOLAS requirement for container ships, and this scope point should be stated explicitly in an oral answer.</em></p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div><div class="reg-item"><span class="reg-code">SOLAS Ch. II-1, Reg. 3-10</span><span class="reg-desc">Goal-Based Ship Construction Standards — mandatory for oil tankers/bulk carriers ≥150m only</span></div><div class="reg-item"><span class="reg-code">IMO Res. MSC.290(87)</span><span class="reg-desc">SOLAS amendment giving legal effect to Reg. II-1/3-10 (adopted May 2010, in force 1 Jan 2012)</span></div><div class="reg-item"><span class="reg-code">IMO Res. MSC.287(87)</span><span class="reg-desc">Adoption of the International GBS Standards for Bulk Carriers and Oil Tankers (the technical content)</span></div><div class="reg-item"><span class="reg-code">IMO MSC.1/Circ.1343</span><span class="reg-desc">Guidelines for information to be included in a Ship Construction File</span></div><div class="reg-item"><span class="reg-code">IACS Common Structural Rules (CSR)</span><span class="reg-desc">Tier IV class rules verified against GBS Tiers I–III</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> When Nair raises GBS, immediately state the scope limit — bulk carriers and tankers ≥150m only — before walking through the Five-Tier Hierarchy and the Ship Construction File. Volunteering the scope limit up front, unprompted, is what separates a strong answer from a vague one on a container-ship candidate.</div>
+    <details class="deep-dive"><summary>Deep-Dive: Traps, Failures, Numbers, Casualty, On My Vessel</summary>
+      <div class="dd-item"><b>Trap Questions:</b> "Does GBS apply to your container ship?" — No, not as a mandatory SOLAS requirement; GBS under Reg. II-1/3-10 is scoped to oil tankers and bulk carriers ≥150m. Also: "Does GBS replace Class Rules?" — No, Class rules sit at Tier IV; GBS is the umbrella ensuring they are robust and standardised.</div><div class="dd-item"><b>Common CE Failures:</b> Implying GBS is a universal ship-safety standard rather than correctly scoping it to tankers/bulkers; confusing the Ship Construction File with ordinary as-built drawings — the SCF specifically carries design assumptions and corrosion-margin data that ordinary drawings lack.</div><div class="dd-item"><b>Numbers to Memorise:</b> 25 years — minimum design life baseline in Tier II; 150m and above, contracted on/after 1 July 2016 — the vessel scope; MSC.287(87) — GBS Standards; MSC.290(87) — the SOLAS amendment resolution.</div><div class="dd-item"><b>Casualty Link:</b> Structural failures of ageing bulk carriers and single-hull tankers in the 1990s drove IMO away from purely prescriptive rules toward this lifecycle, goal-based approach.</div><div class="dd-item"><b>On My Vessel:</b> As GBS (SOLAS II-1/3-10) does not mandatorily apply to this container vessel, the CE's practical touchpoint instead is the vessel's own Class-approved structural drawings, corrosion-margin data, and coating specifications maintained through the PMS and used at every intermediate/special survey.</div>
+    </details>
+    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: High after correction — cross-checked against IMO's own Goal-Based Standards page: the GBS Standards were adopted by resolution MSC.287(87) and the enabling SOLAS amendment (Reg. II-1/3-10) by resolution MSC.290(87); scope is confirmed as oil tankers and bulk carriers ≥150m only, contracted on/after 1 July 2016 — the original draft omitted this scope limitation and should not be read as applying GBS to container ships.</em></p>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_H, Q5, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1_H, Q5, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB1_H · Q5 · v1.0</span>
+  </div>
+</div>
+  </div>
+</div>
+<div id="no-results">No matching questions.</div>
+
+<div class="cheat-sheet">
+<h2>&#129504; QB1_H Cheat Sheet — Retrieval Cues (Huberman/Sung Dual-Coding)</h2>
+<div class="flow">
+  <div class="fbox">Surveyor finds a defect (PR 17 territory)</div>
+  <div class="farrow">&#8595;</div>
+  <div class="fbox">Is it a symptom of an SMS failure?</div>
+  <div class="farrow">&#8595; yes</div>
+  <div class="fbox">Report to SMC-issuing RO &#8594; possible additional ISM audit</div>
+</div>
+<div class="cue-grid">
+  <div class="cue-card"><b>PR 9 vs PR 17</b>PR 9 = how the RO audits ISM (NC ≤3 months / MNC = no sailing). PR 17 = when a survey defect must be escalated as a possible SMS failure.</div>
+  <div class="cue-card"><b>UR / PR / UI — one line each</b>UR = Class rule minimum. PR = how the RO itself operates. UI = clarifies vague IMO statutory wording.</div>
+  <div class="cue-card"><b>Brake test logic</b>Hold under normal load &#8594; render before structure/line fails. Check the slip point, not just the hold.</div>
+  <div class="cue-card"><b>GBS scope — memorise this first</b>Bulk carriers &amp; oil tankers ≥150m only. NOT container ships. Say this before anything else on GBS.</div>
+</div>
+<table class="recall-table">
+<tr><th>Q</th><th>One-line trigger phrase</th><th>Instant answer</th></tr>
+<tr><td>1</td><td>"Surveyor found an ISM-relevant defect"</td><td>PR 17 report to SMC RO</td></tr>
+<tr><td>2</td><td>"How is an ISM audit conducted uniformly?"</td><td>PR 9 — NC 3 months / MNC immediate</td></tr>
+<tr><td>3</td><td>"UR vs PR vs UI?"</td><td>Class min / RO conduct / statutory clarity</td></tr>
+<tr><td>4</td><td>"Brake rendering test"</td><td>M=F×R, test to slip point, disengage clutch</td></tr>
+<tr><td>5</td><td>"GBS?"</td><td>Bulk/tanker ≥150m only, 5 tiers, 25-yr design life</td></tr>
+</table>
+</div>
+
+<div class="page-footer">
+  Compiled by Nixon Antony, 2/E, Maersk A/S. For corrections email <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>.
+  This material is for MEO Class 1 oral exam preparation only and does not substitute official IMO/DG Shipping/Class publications. Verify current regulations before relying on any reference.
+</div>
+<script>
+function toggleCard(header){const card=header.closest('.q-card');card.classList.toggle('open');}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');applyFilters();}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();
+const cards=document.querySelectorAll('.q-card');let vis=0;
+cards.forEach(card=>{const tags=(card.dataset.tags||'').toLowerCase();const text=card.innerText.toLowerCase();
+const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+card.style.display=show?'':'none';if(show)vis++;});
+document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+document.getElementById('no-results').style.display=vis===0?'block':'none';}
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;
+document.querySelectorAll('.toc-link').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});}});},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+</script>
+</body>
+</html>
