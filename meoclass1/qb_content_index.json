@@ -1,8 +1,8 @@
 {
   "manifest_version": "1.0",
-  "generated": "2026-07-06",
-  "generated_by": "Claude - corrected stale manifest: renamed QB2_G_BACKLOG/QB5_H_BACKLOG/QB7_G_BACKLOG/QB8_F_BACKLOG to live filenames (QB2_G.html, QB5_H.html, QB7_G.html, QB8_F.html) per Nixon upload; removed QB4_H_CheatSheet.html as a standalone entry (it is QB4_H's linked cheat sheet, not a separate QB file). No content or question changes.",
-  "total_questions": 531,
+  "generated": "2026-07-05",
+  "generated_by": "Claude - post health-check reconciliation: fixed QB5_A (20 unclosed answer-body divs across every card, missing watermark), QB9_C (was fully ungated/unprotected - added auth gate, noarchive/nosnippet, user-select block, copy/contextmenu block, watermark), QB8_A (removed erroneous 7th 'q-card' pointer-note entry that broke TOC/id parity - converted to a plain footnote link, true question_count is 6 not 7). Added meta descriptions to QB4_C, QB5_A, QB9_C, QB8_A, QB8_B. Also reconciled 36 xlsx Live_File/Build_Status rows against these 5 files' actual live content (duplicates, fallback mismatches, one cross-file reassignment) - xlsx-only change, does not affect this manifest's question counts.",
+  "total_questions": 530,
   "total_files": 62,
   "recently_updated": [
     {
@@ -24,6 +24,17 @@
         "QB8_F"
       ],
       "note": "Renamed from *_BACKLOG to live filenames after Nixon built and uploaded the HTML (no longer backlog). Also removed the erroneous standalone QB4_H_CheatSheet.html manifest entry - it is QB4_H's cheat sheet, referenced via the QB file's cheatsheet field, not an independent QB entry."
+    },
+    {
+      "date": "2026-07-05",
+      "files": [
+        "QB4_C",
+        "QB5_A",
+        "QB9_C",
+        "QB8_A",
+        "QB8_B"
+      ],
+      "note": "Health-check reconciliation pass. QB5_A: fixed unclosed answer-body div on all 20 cards (layout-breaking bug, now HTML-valid) and added missing watermark. QB9_C: was live with zero content protection - added auth gate, full noindex/noarchive/nosnippet, user-select block, copy/contextmenu block, and watermark. QB8_A: corrected question_count from 7 to 6 - the 7th entry was a 'see QB8_B' pointer note incorrectly marked up as a real q-card, breaking TOC/id parity; converted to a plain footnote link and removed from the question list. QB4_C and QB8_B were already structurally clean. All 5 files got topic-specific meta descriptions for internal search (still noindexed to search engines)."
     }
   ],
   "files": {
@@ -1519,7 +1530,7 @@
       "qb_group": "QB5",
       "letter": "A",
       "title": "Management, Leadership & Human Element",
-      "version": "1.0",
+      "version": "1.1",
       "tags": [
         "ism",
         "marpol",
@@ -2184,13 +2195,13 @@
       "qb_group": "QB8",
       "letter": "A",
       "title": "Cargo Operations",
-      "version": "1.0",
+      "version": "1.1",
       "tags": [
         "marpol",
         "solas",
         "survey"
       ],
-      "question_count": 7,
+      "question_count": 6,
       "questions": [
         {
           "qnum": 1,
@@ -2215,10 +2226,6 @@
         {
           "qnum": 6,
           "text": "IMDG DG cargo documents?"
-        },
-        {
-          "qnum": 7,
-          "text": "Additional QB8 topics — see QB8_B (P&amp;A Manual, CSC, e-BoL, High Density, VGM, Container Amendments)"
         }
       ]
     },
@@ -2434,7 +2441,7 @@
       "qb_group": "QB9",
       "letter": "C",
       "title": "Commercial Law & Maritime Liability (C)",
-      "version": "1.0",
+      "version": "1.1",
       "tags": [
         "commercial"
       ],
