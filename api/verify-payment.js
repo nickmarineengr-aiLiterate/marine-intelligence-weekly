@@ -1,6 +1,6 @@
 // =============================================================
-// Marine Intelligence Weekly — Razorpay Verify Payment v5
-// Fixed: atomic password assignment using Redis counter
+// Marine Intelligence Weekly — Razorpay Verify Payment v6
+// Fixed: atomic NX lock shared with webhook to kill double-send race
 // =============================================================
 
 import crypto from "crypto";
@@ -44,36 +44,40 @@ async function redisIncr(key) {
   return data.result;
 }
 
+// -------------------------------------------------------------
+// Atomic claim — SET key val NX EX <ttl>. Returns true only for
+// the ONE caller that actually wins the race (webhook vs client).
+// Shared lock key/format used identically in razorpay-webhook.js.
+// -------------------------------------------------------------
+async function redisSetNX(key, value, ttlSeconds = 86400) {
+  const url = `${process.env.KV_REST_API_URL}/set/${encodeURIComponent(key)}/${encodeURIComponent(value)}?NX=true&EX=${ttlSeconds}`;
+  const r = await fetch(url, {
+    headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` }
+  });
+  const data = await r.json();
+  return data.result === "OK";
+}
+
 async function assignPassword(buyerEmail) {
   const email = buyerEmail.toLowerCase().trim();
 
-  // Check if already assigned
   const existing = await redisGet(`miw:user:${email}`);
   if (existing) {
     console.log(`Existing password found for ${email}: ${existing}`);
     return existing;
   }
 
-  // Get pool
   const pool = JSON.parse(process.env.QB_PASSWORD_POOL || "[]");
   if (pool.length === 0) throw new Error("QB_PASSWORD_POOL is empty");
 
-  // Atomic counter — increment to get next index
-  // Counter starts at 28 (already have 28 users migrated)
   const counterKey = "miw:password_counter";
-  
-  // Get current counter, initialize to 28 if not set
   let current = await redisGet(counterKey);
   if (current === null) {
     await redisSet(counterKey, "28");
     current = 28;
-  } else {
-    current = parseInt(current);
   }
 
-  // Increment counter atomically
   const nextIndex = await redisIncr(counterKey);
-  // nextIndex is now current+1, so password index is nextIndex-1
   const pwdIndex = nextIndex - 1;
 
   if (pwdIndex >= pool.length) {
@@ -83,7 +87,6 @@ async function assignPassword(buyerEmail) {
   const password = pool[pwdIndex];
   console.log(`Assigning pool[${pwdIndex}] = ${password} to ${email}`);
 
-  // Store both directions
   await redisSet(`miw:user:${email}`, password);
   await redisSet(`miw:pwd:${password}`, email);
 
@@ -188,6 +191,20 @@ export default async function handler(req, res) {
 
     if (expected !== razorpay_signature)
       return res.status(400).json({ error: "Payment verification failed" });
+
+    // -----------------------------------------------------------
+    // Atomic claim BEFORE any password/email work. Same lock key
+    // format as razorpay-webhook.js — whichever path (this client
+    // call, or the server webhook) hits Redis first wins and the
+    // other silently no-ops. This is what actually fixes the
+    // double-send; the old code had no guard here at all.
+    // -----------------------------------------------------------
+    const lockKey = `miw:send_lock:${razorpay_payment_id}`;
+    const claimed = await redisSetNX(lockKey, "verify-payment");
+    if (!claimed) {
+      console.log(`[verify-payment] Payment ${razorpay_payment_id} already claimed elsewhere — skipping send`);
+      return res.status(200).json({ success: true, skipped: "already processed" });
+    }
 
     const password = await assignPassword(buyer_email);
     const validTier = ["founders","standard"].includes(tier) ? tier : "standard";

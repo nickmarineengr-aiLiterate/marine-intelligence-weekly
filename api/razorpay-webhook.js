@@ -1,6 +1,7 @@
 // =============================================================
-// Marine Intelligence Weekly — Razorpay Webhook Handler
-// Server-side fallback for payment.captured / payment.failed
+// Marine Intelligence Weekly — Razorpay Webhook Handler v2
+// Fixed: atomic NX lock shared with verify-payment.js to kill
+// the check-then-act race that caused double credential emails.
 // Fires independently of the buyer's browser tab surviving.
 // =============================================================
 
@@ -49,17 +50,18 @@ async function redisIncr(key) {
 }
 
 // -------------------------------------------------------------
-// Idempotency guard — has this specific payment already been processed?
-// Prevents double-send if the client-side verify-payment.js path
-// ALSO succeeds for the same payment (race between webhook + client).
+// Atomic claim — SET key val NX EX <ttl>. Only the first caller
+// (webhook OR client verify-payment.js, whichever hits Redis
+// first) gets true. This REPLACES the old alreadyProcessed()/
+// markProcessed() read-then-write pair, which had a race window.
 // -------------------------------------------------------------
-async function alreadyProcessed(paymentId) {
-  const existing = await redisGet(`miw:webhook_processed:${paymentId}`);
-  return existing !== null;
-}
-
-async function markProcessed(paymentId) {
-  await redisSet(`miw:webhook_processed:${paymentId}`, new Date().toISOString());
+async function redisSetNX(key, value, ttlSeconds = 86400) {
+  const url = `${process.env.KV_REST_API_URL}/set/${encodeURIComponent(key)}/${encodeURIComponent(value)}?NX=true&EX=${ttlSeconds}`;
+  const r = await fetch(url, {
+    headers: { Authorization: `Bearer ${process.env.KV_REST_API_TOKEN}` }
+  });
+  const data = await r.json();
+  return data.result === "OK";
 }
 
 // -------------------------------------------------------------
@@ -237,8 +239,6 @@ export default async function handler(req, res) {
   const event = payload.event;
   console.log(`[webhook] Received event: ${event}`);
 
-  // Always ack quickly so Razorpay doesn't retry unnecessarily,
-  // but only after we've done the critical work below for captured events.
   try {
     if (event === "payment.captured") {
       const paymentEntity = payload.payload.payment.entity;
@@ -256,27 +256,25 @@ export default async function handler(req, res) {
         return res.status(200).json({ received: true, warning: "no buyer_email" });
       }
 
-      // Idempotency: skip if this exact payment was already handled
-      // (either by this webhook before, or by verify-payment.js client-side path)
-      const already = await alreadyProcessed(paymentId);
-      const userAlreadyHasPassword = await redisGet(`miw:user:${buyerEmail.toLowerCase().trim()}`);
+      // -------------------------------------------------------
+      // Atomic claim — SAME lock key format as verify-payment.js
+      // (miw:send_lock:<paymentId>). Whichever path — this webhook
+      // or the buyer's browser calling verify-payment.js — hits
+      // Redis first wins the NX race; the other gets false and
+      // returns immediately without touching password/email logic.
+      // This replaces the old alreadyProcessed()/markProcessed()
+      // read-then-write pair that allowed both paths through.
+      // -------------------------------------------------------
+      const lockKey = `miw:send_lock:${paymentId}`;
+      const claimed = await redisSetNX(lockKey, "webhook");
 
-      if (already) {
-        console.log(`[webhook] Payment ${paymentId} already processed by webhook — skipping`);
-        return res.status(200).json({ received: true, skipped: "already processed" });
-      }
-
-      if (userAlreadyHasPassword) {
-        // Client-side verify-payment.js path already succeeded for this buyer.
-        // Just mark this payment as processed too, don't send a duplicate email.
-        console.log(`[webhook] ${buyerEmail} already has a password (client path likely succeeded) — marking processed, no duplicate email`);
-        await markProcessed(paymentId);
-        return res.status(200).json({ received: true, skipped: "user already provisioned" });
+      if (!claimed) {
+        console.log(`[webhook] Payment ${paymentId} already claimed elsewhere — skipping`);
+        return res.status(200).json({ received: true, skipped: "already claimed" });
       }
 
       const password = await assignPassword(buyerEmail);
       await transporter.sendMail(buildEmail(validTier, notes.buyer_name, buyerEmail, password));
-      await markProcessed(paymentId);
 
       console.log(`✓ [webhook] QB access sent: ${buyerEmail} | pwd: ${password} | tier: ${validTier} | order: ${orderId} | payment: ${paymentId}`);
     }
@@ -291,10 +289,12 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error("[webhook] Error processing event:", error.message);
-    // Return 200 anyway after logging — returning 500 makes Razorpay retry,
-    // which is fine for transient errors but will just repeat a permanent
-    // one (e.g. password pool exhausted). Check Vercel logs + fix, then
-    // Razorpay's dashboard lets you manually redeliver this event once fixed.
+    // Return 500 so Razorpay retries transient errors. Because the
+    // NX lock above is already claimed by this attempt's key by the
+    // time we might fail later in assignPassword/sendMail, a retry
+    // could still be blocked — if password pool exhaustion is the
+    // cause, fix the pool and manually clear miw:send_lock:<id> in
+    // Redis before asking Razorpay to redeliver.
     return res.status(500).json({ error: "Internal error", detail: error.message });
   }
 }
