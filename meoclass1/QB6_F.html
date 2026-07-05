@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB6_F — Electrical, Automation & Digitalisation | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);user-select:none;}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);display:flex;align-items:center;gap:12px;padding:10px 20px;}
+.topbar .logo{font-weight:700;color:var(--teal-dark);}
+.topbar a{color:var(--grey-text);text-decoration:none;font-size:13px;margin-left:16px;}
+.page-header{background:var(--navy);color:#fff;padding:26px 20px;}
+.page-header .badge{display:inline-block;background:var(--teal);color:#fff;font-size:12px;padding:3px 10px;border-radius:12px;margin-bottom:8px;}
+.page-header h1{margin:6px 0;font-size:24px;}
+.page-header p{color:#cbd5e1;margin:4px 0 0;font-size:14px;}
+.header-meta{margin-top:12px;font-size:12px;color:#94a3b8;}
+.controls-bar{position:sticky;top:49px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 20px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+#search-input{flex:1;min-width:160px;padding:8px 12px;border:1px solid var(--grey-border);border-radius:8px;}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;border-radius:14px;padding:5px 12px;font-size:12px;cursor:pointer;}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{font-size:12px;color:var(--grey-text);}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;padding:20px;max-width:1100px;margin:0 auto;}
+.sidebar{position:sticky;top:110px;align-self:start;font-size:13px;}
+.sidebar .toc-link{display:block;padding:6px 8px;border-radius:6px;color:var(--grey-text);text-decoration:none;}
+.sidebar .toc-link.active{background:var(--teal-light);color:var(--teal-dark);font-weight:600;}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 10px;}
+.section-head h2{font-size:16px;margin:0;color:var(--teal-dark);}
+.sec-count{font-size:11px;color:var(--grey-text);}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+.q-header{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;cursor:pointer;}
+.q-num-badge{background:var(--teal);color:#fff;border-radius:6px;font-size:12px;font-weight:700;padding:3px 8px;min-width:22px;text-align:center;}
+.q-text{font-weight:600;font-size:15px;}
+.q-tags{margin-top:6px;}
+.q-tag{display:inline-block;background:var(--teal-light);color:var(--teal-dark);font-size:10px;padding:2px 8px;border-radius:10px;margin-right:4px;}
+.q-chevron{width:20px;height:20px;stroke:var(--grey-text);flex-shrink:0;transition:transform .2s;}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 16px 16px;font-family:'Georgia',serif;font-size:14.5px;line-height:1.6;}
+.q-card.open .q-answer{display:block;}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-dark);margin:16px 0 6px;font-family:'Segoe UI',system-ui,sans-serif;}
+.answer-body .fifteen,.answer-body .sixty{background:var(--grey-bg);border-radius:8px;padding:10px 12px;margin-bottom:10px;}
+.answer-body p{margin:6px 0;}
+.answer-body ul{margin:6px 0;padding-left:20px;}
+.formula{font-family:monospace;background:var(--grey-bg);padding:8px 10px;border-radius:6px;}
+.reg-box{background:#141412;color:#e2e8f0;border-radius:8px;padding:12px 14px;margin-top:14px;font-family:'Segoe UI',system-ui,sans-serif;}
+.reg-box-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:8px;}
+.reg-item{display:flex;gap:10px;padding:4px 0;border-top:1px solid #27272a;min-width:0;}
+.reg-item:first-of-type{border-top:none;}
+.reg-code{color:var(--orange);font-family:monospace;font-size:12px;min-width:150px;word-break:break-all;}
+.reg-desc{color:#cbd5e1;font-size:12.5px;min-width:0;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:6px;padding:10px 12px;margin-top:12px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;}
+details.deep{margin-top:12px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;}
+details.deep summary{cursor:pointer;font-weight:600;color:var(--teal-dark);}
+details.deep .dd-item{margin:8px 0;}
+details.deep .dd-label{font-weight:700;color:var(--ink);}
+.q-footer{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;background:var(--grey-bg);font-size:11px;color:var(--grey-text);flex-wrap:wrap;gap:6px;}
+.correction-link{word-break:break-all;min-width:0;}
+.q-version{white-space:nowrap;}
+#no-results{display:none;text-align:center;padding:40px;color:var(--grey-text);}
+.page-footer{padding:20px;text-align:center;font-size:12px;color:var(--grey-text);border-top:1px solid var(--grey-border);}
+.watermark{position:fixed;bottom:8px;right:8px;opacity:.15;font-size:10px;pointer-events:none;z-index:999;}
+.cheat-sheet{background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:18px;margin:24px 0;}
+.cheat-sheet h2{color:var(--teal-dark);font-size:18px;margin-top:0;}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;margin:12px 0;}
+.flow span.node{background:var(--teal-light);color:var(--teal-dark);padding:6px 10px;border-radius:6px;font-weight:600;}
+.flow span.arrow{color:var(--grey-text);}
+.cue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0;}
+.cue-card{background:var(--grey-bg);border-radius:8px;padding:10px;font-size:12.5px;border-left:3px solid var(--teal);}
+.cue-card b{display:block;color:var(--teal-dark);font-size:11px;text-transform:uppercase;margin-bottom:4px;}
+.rapid-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px;}
+.rapid-table th,.rapid-table td{border:1px solid var(--grey-border);padding:6px 8px;text-align:left;}
+.rapid-table th{background:var(--grey-bg);}
+.extra-block{background:var(--teal-light);border-radius:8px;padding:10px 12px;margin-top:12px;font-size:13px;}
+.extra-label{font-weight:700;color:var(--teal-dark);font-size:11px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px;}
+.nav-btn{display:inline-block;background:var(--teal);color:#fff;text-decoration:none;font-size:12px;font-weight:600;padding:6px 14px;border-radius:14px;white-space:nowrap;}
+.nav-btn:hover{background:var(--teal-dark);}
+</style>
+</head>
+<body>
+<script>(function(){if(!/miw_auth=1/.test(document.cookie)){window.location.replace('/SQ/pay.html');}})();</script>
+<div class="topbar"><span class="logo">MIW</span><span>Marine Intelligence Weekly</span>
+  <a href="/">Home</a><a href="/meoclass1/">MEO Class 1</a><a href="/contact.html">Contact</a>
+</div>
+<div class="page-header">
+  <span class="badge">QB6_F</span>
+  <h1>QB6_F — Electrical, Automation & Digitalisation</h1>
+  <p>MEO Class 1 Question Bank &middot; Electrical, Automation, Machinery & GHG Basics</p>
+  <div class="header-meta">Compiled by Nixon Antony, 2/E, Maersk A/S &middot; Kochi MMD oral exam prep &middot; 5 questions</div>
+</div>
+<div class="controls-bar">
+  <input id="search-input" placeholder="Search questions...">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
+  <span id="q-count-label">Showing 5 of 5</span>
+  
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <a class="toc-link" href="#q1">Q1. IP Code (Industrial Personnel)</a>
+<a class="toc-link" href="#q2">Q2. Framo Latest Technology</a>
+<a class="toc-link" href="#q3">Q3. Blockchain Technology</a>
+<a class="toc-link" href="#q4">Q4. MMSI</a>
+<a class="toc-link" href="#q5">Q5. Call Sign</a>
+    <div style="margin-top:16px;border-top:1px solid var(--grey-border);padding-top:10px;color:var(--grey-text);font-size:11px;">More QB files coming soon.</div>
+  </div>
+  <div id="q-feed">
+    <div class="section-head"><h2>Questions</h2><span class="sec-count">5 questions</span></div>
+    <div class="q-card" id="q1" data-tags="SOLAS IP Code Industrial Personnel Offshore Safety">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Explain the IP (Industrial Personnel) Code under SOLAS Chapter XV.</div>
+      <div class="q-tags"><span class="q-tag">SOLAS</span><span class="q-tag">IP Code</span><span class="q-tag">Industrial Personnel</span><span class="q-tag">Offshore Safety</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <div class="fifteen"><h4>15-Second Answer</h4><p>The IP Code is a mandatory standard under SOLAS Chapter XV for cargo ships/HSC of 500GT+ carrying more than 12 industrial personnel (offshore wind/oil rig technicians), covering stability, personnel transfer systems and safety training.</p></div><div class="sixty"><h4>60-Second Answer</h4><p>Adopted via IMO Res. MSC.527(106) and made mandatory by SOLAS Chapter XV (Res. MSC.521(106), in force 1 July 2024), the IP Code bridges the gap between cargo ships and passenger ships for vessels supporting offshore energy sectors. It mandates enhanced stability criteria, dedicated personnel-transfer system standards, mandatory safety training/familiarisation for industrial personnel, and restricts total persons on board to 60 if toxic/low-flashpoint/acid cargoes are carried.</p></div><h4>Application</h4><ul><li>Cargo ships/HSC of <strong>500 GT and upwards</strong> on international voyages.</li><li>Trigger: aggregate of industrial personnel + special personnel (SPS Code) + passengers exceeding <strong>12</strong> (passengers capped at 12 within that mix).</li><li><strong>Industrial personnel:</strong> persons carried for offshore industrial activities (wind turbines, oil/gas platforms) performed on other vessels/facilities, not shipboard crew duties.</li></ul>
+<h4>Key Requirements</h4><ul><li>Enhanced intact/damage stability (passenger-ship-derived criteria) for 60 or 240-person thresholds.</li><li>Personnel transfer systems (motion-compensated gangways, boat landings) with FMEA.</li><li>Medical fitness, communication and documented safety training (incl. HUET-type courses).</li><li>Max 60 persons on board if carrying toxic/low-flashpoint/acid cargo.</li></ul>
+    </div>
+    <div class="extra-block"><div class="extra-label">Key Numbers</div>500 GT threshold &middot; &gt;12 aggregate persons triggers Code &middot; max 12 passengers within mix &middot; max 60 persons if toxic/acid cargo &middot; in force 1 Jul 2024.</div>
+    <div class="reg-box">
+      <div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS Chapter XV (Res. MSC.521(106))</span><span class="reg-desc">Safety measures for ships carrying industrial personnel</span></div>
+<div class="reg-item"><span class="reg-code">IMO Res. MSC.527(106)</span><span class="reg-desc">Adoption of the IP Code text itself</span></div>
+<div class="reg-item"><span class="reg-code">IMO Res. MSC.418(97)</span><span class="reg-desc">Interim recommendations / grandfathering for pre-2024 vessels</span></div>
+<div class="reg-item"><span class="reg-code">DG Shipping / Class Rules</span><span class="reg-desc">Survey and endorsement of the Industrial Personnel Safety Certificate</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Rajappan may pose a scenario: a cargo vessel carries 10 special personnel and 3 wind-farm technicians — does the IP Code apply? Answer yes: the trigger is the aggregate (10+3=13 > 12), regardless of category mix.</div>
+    <details class="deep"><summary>Deep-Dive: CE Relevance, Traps, Failures, Numbers, Casualty Link, Examiner Chain, On My Vessel</summary><div class="dd-item"><span class="dd-label">CE Relevance: </span>The CE owns technical availability of machinery behind transfer systems &mdash; hydraulic power packs, motion-compensation drives and their redundancy. The CE must also keep the vessel's Industrial Personnel Safety Certificate harmonised with the main SOLAS certificates at class survey.</div><div class="dd-item"><span class="dd-label">Trap Questions: </span>Does a passenger ship carrying 50 technicians need an IP Code certificate? No &mdash; SOLAS Ch.I passenger-ship certification already exceeds IP Code structural standards, though transfer-equipment standards still apply.</div><div class="dd-item"><span class="dd-label">Common CE Failures: </span>Treating industrial personnel as ordinary crew, or failing to verify their medical fitness/safety training records are integrated into the SMS before sailing.</div><div class="dd-item"><span class="dd-label">Numbers to Memorise: </span>500 GT threshold; &gt;12 aggregate persons triggers the Code; max 12 passengers within that mix; max 60 persons if toxic/acid cargo carried.</div><div class="dd-item"><span class="dd-label">Casualty Link: </span>The Code was driven by historical offshore personnel-transfer injuries on vessels using unstabilised pilot ladders/crane baskets in high seas, lacking dedicated motion-compensated transfer gear.</div><div class="dd-item"><span class="dd-label">Examiner Chain: </span>Rajappan typically opens with the definition/trigger numbers, then pivots to a numeric scenario (aggregate-count trap above), then asks how the CE's machinery responsibilities differ from the deck department's transfer-operation duties.</div><div class="dd-item"><span class="dd-label">On My Vessel: </span>Standard Maersk mainline container ships don't carry industrial personnel, but the Code becomes relevant on converted feeder/offshore-support tonnage or during temporary wind-farm logistics support.</div></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_F, Q1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">QB6_F &middot; Q1 &middot; v1.0</span>
+  </div>
+</div>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Question", "name": "Explain the IP (Industrial Personnel) Code under SOLAS Chapter XV.", "acceptedAnswer": {"@type": "Answer", "text": "See QB6_F Q1 full answer on Marine Intelligence Weekly."}}</script>
+<div class="q-card" id="q2" data-tags="Hydraulics Cargo Pumping Energy Efficiency">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Discuss the latest developments in Framo hydraulic cargo pumping technology.</div>
+      <div class="q-tags"><span class="q-tag">Hydraulics</span><span class="q-tag">Cargo Pumping</span><span class="q-tag">Energy Efficiency</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <div class="fifteen"><h4>15-Second Answer</h4><p>Modern Framo systems use VFD-driven electric power packs, high-efficiency submerged pumps, digital condition monitoring (Framo Insight), and automated eco-stripping to cut energy use and ROB.</p></div><div class="sixty"><h4>60-Second Answer</h4><p>Framo has shifted from manual/localised hydraulic control to VFD-controlled power packs that match output to actual discharge head and viscosity. Digital sensor arrays track oil condition, bearing vibration and seal pressure differential for condition-based maintenance, while automated stripping sequences reduce cargo remaining on board and support CII/EEXI compliance during discharge.</p></div><h4>Core Improvements</h4><ul><li><strong>Variable-speed hydraulic drive packs</strong> matching flow/pressure demand, cutting bypass losses.</li><li><strong>VFD electric power packs</strong> giving near-linear power draw reduction with fewer pumps running.</li></ul>
+<h4>Digitalisation</h4><p>Framo Insight monitors oil condition, bearing vibration and seal differential pressure for predictive maintenance and early cofferdam-leak detection.</p>
+<h4>Eco-Stripping</h4><p>Optimised impeller geometry plus automated gas-injection stripping reduces ROB with minimal vapour release.</p>
+    </div>
+    <div class="extra-block"><div class="extra-label">Key Numbers</div>ROB reducible to &lt;100 L/tank &middot; monitors: oil condition, vibration, seal differential pressure.</div>
+    <div class="reg-box">
+      <div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex I/II</span><span class="reg-desc">Pollution-control limits relevant to stripping capability</span></div>
+<div class="reg-item"><span class="reg-code">MARPOL Annex VI / CII</span><span class="reg-desc">Auxiliary power management affects CII score during discharge</span></div>
+<div class="reg-item"><span class="reg-code">Class Rules (DNV/ABS/IRS)</span><span class="reg-desc">Cargo discharge system monitoring requirements</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Frame the answer around energy management (CII) and predictive maintenance. If Rajappan asks how you'd detect a leaking lower cargo seal, describe the automated purge-volume monitoring rather than manual purging logs.</div>
+    <details class="deep"><summary>Deep-Dive: CE Relevance, Traps, Failures, Numbers, Casualty Link, Examiner Chain, On My Vessel</summary><div class="dd-item"><span class="dd-label">CE Relevance: </span>On deepwell/chemical cargo operations the CE balances discharge performance against fuel economy, using kW-per-m3 monitoring; automated cofferdam sensing also prevents cargo contaminating the hydraulic system, avoiding multi-million-dollar repairs.</div><div class="dd-item"><span class="dd-label">Trap Questions: </span>Does modern Framo tech eliminate the cofferdam? No &mdash; the dual-seal/cofferdam arrangement remains; automation only improves monitoring/purging.</div><div class="dd-item"><span class="dd-label">Common CE Failures: </span>Neglecting hydraulic oil sampling protocols or ignoring micro-particle alerts on digital dashboards, leading to proportional valves sticking.</div><div class="dd-item"><span class="dd-label">Numbers to Memorise: </span>Modern stripping can reduce ROB to under 100 litres per tank.</div><div class="dd-item"><span class="dd-label">Casualty Link: </span>Historic hydraulic-system breakdowns from manual purging negligence allowed cargo/acid ingress into the common hydraulic return line; automated sensing prevents this.</div><div class="dd-item"><span class="dd-label">Examiner Chain: </span>Rajappan opens on 'latest technology', then narrows to a troubleshooting scenario (leaking seal detection), then checks whether you understand the safety fundamentals (cofferdam) haven't been removed by the new tech.</div><div class="dd-item"><span class="dd-label">On My Vessel: </span>Optimised pumping efficiency on Maersk vessels supports CII targets by reducing auxiliary engine loading during port operations.</div></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_F, Q2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">QB6_F &middot; Q2 &middot; v1.0</span>
+  </div>
+</div>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Question", "name": "Discuss the latest developments in Framo hydraulic cargo pumping technology.", "acceptedAnswer": {"@type": "Answer", "text": "See QB6_F Q2 full answer on Marine Intelligence Weekly."}}</script>
+<div class="q-card" id="q3" data-tags="Digitalisation Blockchain Cyber Security">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Explain blockchain technology and its applications in the shipping industry.</div>
+      <div class="q-tags"><span class="q-tag">Digitalisation</span><span class="q-tag">Blockchain</span><span class="q-tag">Cyber Security</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <div class="fifteen"><h4>15-Second Answer</h4><p>Blockchain is a decentralised, cryptographically secured distributed ledger. In shipping it underpins electronic Bills of Lading, smart contracts and tamper-proof bunker/documentation records.</p></div><div class="sixty"><h4>60-Second Answer</h4><p>Blockchain links data blocks via cryptographic hashes across a peer-to-peer network so that no single party can alter historical records without network consensus. In shipping this enables electronic Bills of Lading, smart-contract-triggered demurrage/despatch, and immutable bunker delivery note/quality records — reducing fraud and paperwork delay across charterers, ports and operators.</p></div><h4>Core Properties</h4><ul><li><strong>Immutability</strong> — altering data changes the hash, exposing tampering.</li><li><strong>Decentralisation</strong> — no single point of failure.</li><li><strong>Consensus</strong> — network validation before a block is committed.</li></ul>
+<h4>Maritime Applications</h4><ul><li>Electronic Bills of Lading (eBL) — instant, secure title transfer.</li><li>Smart contracts for laytime/demurrage.</li><li>Immutable bunker delivery notes and mass-flow-meter data.</li><li>Container supply-chain traceability (cold-chain, environmental declarations).</li></ul>
+    </div>
+    <div class="extra-block"><div class="extra-label">Key Numbers</div>eBL processing: 7-10 days &rarr; &lt;2 hours &middot; governing legal instrument: UNCITRAL MLETR.</div>
+    <div class="reg-box">
+      <div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IMO Res. MSC.428(98)</span><span class="reg-desc">Maritime cyber risk management in the SMS</span></div>
+<div class="reg-item"><span class="reg-code">UNCITRAL MLETR</span><span class="reg-desc">Legal basis for electronic transferable records / eBL</span></div>
+<div class="reg-item"><span class="reg-code">ISO/IEC 27001</span><span class="reg-desc">Information security management applicable to digital ledgers</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Direct your answer to bunkering-dispute prevention and secure data transfer. If asked how blockchain helps fuel management, describe mass-flow-meter data uploaded to an immutable ledger to prevent quantity disputes or tampering.</div>
+    <details class="deep"><summary>Deep-Dive: CE Relevance, Traps, Failures, Numbers, Casualty Link, Examiner Chain, On My Vessel</summary><div class="dd-item"><span class="dd-label">CE Relevance: </span>Integrating digital mass-flow meters with blockchain-backed bunker delivery notes gives the CE a transparent, tamper-proof audit trail for PSC inspections and carbon-taxation validation (EU ETS, IMO DCS).</div><div class="dd-item"><span class="dd-label">Trap Questions: </span>Is blockchain the same as a satellite data backup? No &mdash; a backup is a centralised copy; blockchain is a distributed, consensus-verified ledger.</div><div class="dd-item"><span class="dd-label">Common CE Failures: </span>Dismissing blockchain as a 'head-office commercial tool' while leaving shipboard data-capture (voyage logs, fuel counters) inaccurate before it feeds these networks.</div><div class="dd-item"><span class="dd-label">Numbers to Memorise: </span>Blockchain-enabled eBL can cut document processing from 7-10 days to under 2 hours.</div><div class="dd-item"><span class="dd-label">Casualty Link: </span>Historic trade disputes over forged Bills of Lading or altered bunker delivery notes cost millions; blockchain closes this specific vulnerability.</div><div class="dd-item"><span class="dd-label">Examiner Chain: </span>Simon typically starts broad ('what is blockchain'), then narrows to a bunkering-fraud scenario, then asks how the CE's own logbook discipline interacts with the digital record.</div><div class="dd-item"><span class="dd-label">On My Vessel: </span>Major container lines including Maersk have invested in blockchain/digital-documentation platforms to reduce administrative overhead.</div></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_F, Q3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">QB6_F &middot; Q3 &middot; v1.0</span>
+  </div>
+</div>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Question", "name": "Explain blockchain technology and its applications in the shipping industry.", "acceptedAnswer": {"@type": "Answer", "text": "See QB6_F Q3 full answer on Marine Intelligence Weekly."}}</script>
+<div class="q-card" id="q4" data-tags="GMDSS Communications MMSI AIS">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">4</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is MMSI, how is it structured, and where is it used onboard?</div>
+      <div class="q-tags"><span class="q-tag">GMDSS</span><span class="q-tag">Communications</span><span class="q-tag">MMSI</span><span class="q-tag">AIS</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <div class="fifteen"><h4>15-Second Answer</h4><p>MMSI is a unique 9-digit number identifying a ship/station for AIS, DSC and Inmarsat communications, structured as a 3-digit flag-state MID plus 6 unique digits.</p></div><div class="sixty"><h4>60-Second Answer</h4><p>The MMSI is a 9-digit code under ITU Radio Regulations. The first 3 digits (MID) identify the flag administration (India 419, Denmark 219); the remaining 6 digits identify the vessel. It is programmed into DSC radios, AIS and EPIRBs so SAR authorities instantly know a vessel's identity and flag on receiving a distress alert.</p></div><h4>Structure</h4><ul><li><strong>MID (first 3 digits):</strong> flag state, e.g. India 419, Denmark 219, Panama 351-357.</li><li><strong>Trailing 6 digits:</strong> unique vessel identifier.</li><li>Group ships start with 0; coast stations with 00; SAR aircraft with 111.</li></ul>
+<h4>Onboard Integration</h4><ul><li>VHF/MF/HF DSC — selective calling and distress relay.</li><li>AIS — broadcasts MMSI every few seconds.</li><li>EPIRB/SSAS — routes distress alerts to the correct RCC.</li></ul>
+    </div>
+    <div class="extra-block"><div class="extra-label">Key Numbers</div>9 digits total &middot; MID = 3 digits &middot; India 419 &middot; Denmark 219.</div>
+    <div class="reg-box">
+      <div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS Ch.IV, Reg.5-1</span><span class="reg-desc">GMDSS distress and safety system identities</span></div>
+<div class="reg-item"><span class="reg-code">ITU Radio Regulations, App.43</span><span class="reg-desc">Technical allocation of MMSIs</span></div>
+<div class="reg-item"><span class="reg-code">DG Shipping (India) Circulars</span><span class="reg-desc">MMSI/EPIRB registration requirements</span></div>
+<div class="reg-item"><span class="reg-code">IRS Rules Pt.4 Ch.3</span><span class="reg-desc">Communication/navigation equipment installation requirements</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon often asks cross-departmental questions: on a reflag from Denmark to India, mention re-programming the MMSI (and MID) in DSC controllers, AIS and EPIRBs to India's 419 code — this is technician-level access, not a menu setting.</div>
+    <details class="deep"><summary>Deep-Dive: CE Relevance, Traps, Failures, Numbers, Casualty Link, Examiner Chain, On My Vessel</summary><div class="dd-item"><span class="dd-label">CE Relevance: </span>While GMDSS operation sits with the deck department, the CE is responsible for the technical availability/power supply of the console; on reflagging or major refit the CE must ensure electronics technicians update the MMSI in every unit, or the ship sails with a statutory deficiency.</div><div class="dd-item"><span class="dd-label">Trap Questions: </span>Can you change the MMSI yourself via the AIS menu? No &mdash; it needs a technician password/dongle to prevent spoofing.</div><div class="dd-item"><span class="dd-label">Common CE Failures: </span>Assuming GMDSS is purely the Second Mate's concern and ignoring dead/unmaintained emergency radio battery banks during monthly load checks.</div><div class="dd-item"><span class="dd-label">Numbers to Memorise: </span>9 digits total; 3-digit MID; India = 419; Denmark = 219.</div><div class="dd-item"><span class="dd-label">Casualty Link: </span>False EPIRB alerts on scrapped/sold vessels occur when the original MMSI registration is never deactivated, triggering costly unneeded SAR operations.</div><div class="dd-item"><span class="dd-label">Examiner Chain: </span>Simon opens with the structure/definition, then a reflagging scenario, then checks whether you know MMSI changes require technician-level access rather than a menu setting.</div><div class="dd-item"><span class="dd-label">On My Vessel: </span>MMSI links to Maersk's telemetry/noon-report systems so tracking data matches global registries.</div></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_F, Q4, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">QB6_F &middot; Q4 &middot; v1.0</span>
+  </div>
+</div>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Question", "name": "What is MMSI, how is it structured, and where is it used onboard?", "acceptedAnswer": {"@type": "Answer", "text": "See QB6_F Q4 full answer on Marine Intelligence Weekly."}}</script>
+<div class="q-card" id="q5" data-tags="Communications Call Sign ITU">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">5</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is a ship's Call Sign and how does it differ from the IMO number?</div>
+      <div class="q-tags"><span class="q-tag">Communications</span><span class="q-tag">Call Sign</span><span class="q-tag">ITU</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <div class="fifteen"><h4>15-Second Answer</h4><p>The Call Sign is an ITU-allocated alphanumeric radio identifier tied to the flag registry and changes if the flag changes, unlike the permanent 7-digit IMO number.</p></div><div class="sixty"><h4>60-Second Answer</h4><p>The Call Sign is allocated by the ITU and prefixed by letters denoting the flag administration. Unlike the IMO number, which stays with the hull for life, the Call Sign is tied to the flag registry and is reissued whenever the vessel reflags. It is used daily for VHF/HF voice communication, VTS/pilotage/port clearance, and is programmed into AIS alongside the MMSI.</p></div><h4>Allocation</h4><ul><li>Prefix identifies flag state (e.g. OU-OZ Denmark; AW-VW India).</li><li>IMO number = permanent hull identity; Call Sign = tied to current flag, revoked/reissued on reflagging.</li></ul>
+<h4>Uses</h4><ul><li>Voice ID for VTS/port control.</li><li>Static AIS data alongside MMSI.</li><li>Appears on Certificate of Registry, Safe Manning Document, Radio Licence, logs.</li></ul>
+    </div>
+    <div class="extra-block"><div class="extra-label">Key Numbers</div>Typical call sign length: 4-5 alphanumeric characters &middot; Danish-flag prefix OU/OX.</div>
+    <div class="reg-box">
+      <div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS Ch.V, Reg.19</span><span class="reg-desc">Shipborne navigational equipment / AIS configuration</span></div>
+<div class="reg-item"><span class="reg-code">ITU Radio Regulations, Art.19</span><span class="reg-desc">Allocation of international call-sign prefixes</span></div>
+<div class="reg-item"><span class="reg-code">Indian Merchant Shipping Act</span><span class="reg-desc">Registration/marking of Indian-flag vessels</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon may ask the IMO-number-vs-call-sign distinction directly: IMO number is permanent (SOLAS Ch.XI-1); Call Sign is administrative and changes with flag state.</div>
+    <details class="deep"><summary>Deep-Dive: CE Relevance, Traps, Failures, Numbers, Casualty Link, Examiner Chain, On My Vessel</summary><div class="dd-item"><span class="dd-label">CE Relevance: </span>The CE must ensure engine department records, fuel delivery notes and the Oil Record Book reflect the current call sign; on reflagging, updated placards, stencils and printed logs must all use the new call sign.</div><div class="dd-item"><span class="dd-label">Trap Questions: </span>Does the call sign change if SATCOM fails? No &mdash; it's an administrative licence identifier, not hardware-dependent.</div><div class="dd-item"><span class="dd-label">Common CE Failures: </span>Filling out bunker delivery receipts or class survey requests using an obsolete call sign right after a flag transition.</div><div class="dd-item"><span class="dd-label">Numbers to Memorise: </span>Typical call signs use 4-5 alphanumeric characters; Danish-flag Maersk vessels often start OU/OX.</div><div class="dd-item"><span class="dd-label">Casualty Link: </span>Port state detentions have occurred over conflicting vessel identities where AIS broadcast an old call sign while paperwork reflected a new flag state.</div><div class="dd-item"><span class="dd-label">Examiner Chain: </span>Simon typically pairs this with the MMSI question, testing whether you distinguish the permanent IMO number from the flag-dependent call sign and MMSI.</div><div class="dd-item"><span class="dd-label">On My Vessel: </span>The call sign is displayed on the bridge console and stencilled on the superstructure for visual verification by port authorities.</div></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_F, Q5, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">QB6_F &middot; Q5 &middot; v1.0</span>
+  </div>
+</div>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Question", "name": "What is a ship's Call Sign and how does it differ from the IMO number?", "acceptedAnswer": {"@type": "Answer", "text": "See QB6_F Q5 full answer on Marine Intelligence Weekly."}}</script>
+    <div class="cheat-sheet">
+<h2>QB6_F Cheat Sheet — Electrical, Automation & Digitalisation</h2>
+<div class="flow">
+<span class="node">Offshore Personnel (IP Code)</span><span class="arrow">&rarr;</span>
+<span class="node">Cargo Machinery (Framo)</span><span class="arrow">&rarr;</span>
+<span class="node">Digital Trust (Blockchain)</span><span class="arrow">&rarr;</span>
+<span class="node">Vessel Identity (MMSI / Call Sign)</span>
+</div>
+<div class="cue-grid">
+<div class="cue-card"><b>IP Code</b>SOLAS Ch.XV, mandatory since 1 Jul 2024. Ships 500GT+ carrying &gt;12 aggregate industrial/special personnel/passengers. Max 60 persons if toxic/acid cargo.</div>
+<div class="cue-card"><b>Framo</b>VFD power packs + Framo Insight condition monitoring + eco-stripping &rarr; lower ROB, CII gain.</div>
+<div class="cue-card"><b>Blockchain</b>Immutable + decentralised + consensus. eBL, smart contracts, tamper-proof BDNs.</div>
+<div class="cue-card"><b>MMSI</b>9 digits = 3-digit MID (flag) + 6 unique. India 419.</div>
+<div class="cue-card"><b>Call Sign</b>ITU-allocated, tied to flag (changes on reflag) &mdash; unlike the permanent IMO number.</div>
+</div>
+<table class="rapid-table"><tr><th>Topic</th><th>Key Number</th><th>Governing Instrument</th></tr>
+<tr><td>IP Code</td><td>500GT+, &gt;12 persons, max 60 w/ toxic cargo</td><td>SOLAS Ch.XV / MSC.527(106)</td></tr>
+<tr><td>MMSI</td><td>9 digits, MID=419 (India)</td><td>ITU App.43 / SOLAS IV-5-1</td></tr>
+<tr><td>Call Sign</td><td>4-5 alphanumeric</td><td>ITU Art.19</td></tr>
+<tr><td>Framo ROB</td><td>&lt;100 L/tank</td><td>MARPOL Annex I/II</td></tr>
+</table>
+</div>
+  </div>
+</div>
+<div id="no-results">No matching questions.</div>
+<div class="page-footer">
+  &copy; 2026 Marine Intelligence Weekly &middot; MEO Class 1 &mdash; Confidential<br>
+  Corrections: contactus@marineintelligenceweekly.com
+</div>
+<div class="watermark">marineintelligenceweekly.com &middot; MEO CLASS 1 &mdash; CONFIDENTIAL</div>
+<script>
+function toggleCard(header){const card=header.closest('.q-card');card.classList.toggle('open');}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters();}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+document.getElementById('search-input').addEventListener('input',applyFilters);
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+</script>
+</body>
+</html>

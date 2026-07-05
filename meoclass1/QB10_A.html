@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB10_A — Maritime Industry, Policy & Current Affairs | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);user-select:none;}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);display:flex;align-items:center;gap:12px;padding:10px 20px;}
+.topbar .logo{font-weight:700;color:var(--teal-dark);}
+.topbar a{color:var(--grey-text);text-decoration:none;font-size:13px;margin-left:16px;}
+.page-header{background:var(--navy);color:#fff;padding:26px 20px;}
+.page-header .badge{display:inline-block;background:var(--teal);color:#fff;font-size:12px;padding:3px 10px;border-radius:12px;margin-bottom:8px;}
+.page-header h1{margin:6px 0;font-size:24px;}
+.page-header p{color:#cbd5e1;margin:4px 0 0;font-size:14px;}
+.header-meta{margin-top:12px;font-size:12px;color:#94a3b8;}
+.controls-bar{position:sticky;top:49px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 20px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
+#search-input{flex:1;min-width:160px;padding:8px 12px;border:1px solid var(--grey-border);border-radius:8px;}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;border-radius:14px;padding:5px 12px;font-size:12px;cursor:pointer;}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+#q-count-label{font-size:12px;color:var(--grey-text);}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;padding:20px;max-width:1100px;margin:0 auto;}
+.sidebar{position:sticky;top:110px;align-self:start;font-size:13px;}
+.sidebar .toc-link{display:block;padding:6px 8px;border-radius:6px;color:var(--grey-text);text-decoration:none;}
+.sidebar .toc-link.active{background:var(--teal-light);color:var(--teal-dark);font-weight:600;}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:22px 0 10px;}
+.section-head h2{font-size:16px;margin:0;color:var(--teal-dark);}
+.sec-count{font-size:11px;color:var(--grey-text);}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+.q-header{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;cursor:pointer;}
+.q-num-badge{background:var(--teal);color:#fff;border-radius:6px;font-size:12px;font-weight:700;padding:3px 8px;min-width:22px;text-align:center;}
+.q-text{font-weight:600;font-size:15px;}
+.q-tags{margin-top:6px;}
+.q-tag{display:inline-block;background:var(--teal-light);color:var(--teal-dark);font-size:10px;padding:2px 8px;border-radius:10px;margin-right:4px;}
+.q-chevron{width:20px;height:20px;stroke:var(--grey-text);flex-shrink:0;transition:transform .2s;}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 16px 16px;font-family:'Georgia',serif;font-size:14.5px;line-height:1.6;}
+.q-card.open .q-answer{display:block;}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-dark);margin:16px 0 6px;font-family:'Segoe UI',system-ui,sans-serif;}
+.answer-body .fifteen,.answer-body .sixty{background:var(--grey-bg);border-radius:8px;padding:10px 12px;margin-bottom:10px;}
+.answer-body p{margin:6px 0;}
+.answer-body ul{margin:6px 0;padding-left:20px;}
+.formula{font-family:monospace;background:var(--grey-bg);padding:8px 10px;border-radius:6px;}
+.reg-box{background:#141412;color:#e2e8f0;border-radius:8px;padding:12px 14px;margin-top:14px;font-family:'Segoe UI',system-ui,sans-serif;}
+.reg-box-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:8px;}
+.reg-item{display:flex;gap:10px;padding:4px 0;border-top:1px solid #27272a;min-width:0;}
+.reg-item:first-of-type{border-top:none;}
+.reg-code{color:var(--orange);font-family:monospace;font-size:12px;min-width:150px;word-break:break-all;}
+.reg-desc{color:#cbd5e1;font-size:12.5px;min-width:0;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:6px;padding:10px 12px;margin-top:12px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;}
+details.deep{margin-top:12px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;}
+details.deep summary{cursor:pointer;font-weight:600;color:var(--teal-dark);}
+details.deep .dd-item{margin:8px 0;}
+details.deep .dd-label{font-weight:700;color:var(--ink);}
+.q-footer{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;background:var(--grey-bg);font-size:11px;color:var(--grey-text);flex-wrap:wrap;gap:6px;}
+.correction-link{word-break:break-all;min-width:0;}
+.q-version{white-space:nowrap;}
+#no-results{display:none;text-align:center;padding:40px;color:var(--grey-text);}
+.page-footer{padding:20px;text-align:center;font-size:12px;color:var(--grey-text);border-top:1px solid var(--grey-border);}
+.watermark{position:fixed;bottom:8px;right:8px;opacity:.15;font-size:10px;pointer-events:none;z-index:999;}
+.cheat-sheet{background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:18px;margin:24px 0;}
+.cheat-sheet h2{color:var(--teal-dark);font-size:18px;margin-top:0;}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:12px;margin:12px 0;}
+.flow span.node{background:var(--teal-light);color:var(--teal-dark);padding:6px 10px;border-radius:6px;font-weight:600;}
+.flow span.arrow{color:var(--grey-text);}
+.cue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0;}
+.cue-card{background:var(--grey-bg);border-radius:8px;padding:10px;font-size:12.5px;border-left:3px solid var(--teal);}
+.cue-card b{display:block;color:var(--teal-dark);font-size:11px;text-transform:uppercase;margin-bottom:4px;}
+.rapid-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:10px;}
+.rapid-table th,.rapid-table td{border:1px solid var(--grey-border);padding:6px 8px;text-align:left;}
+.rapid-table th{background:var(--grey-bg);}
+.extra-block{background:var(--teal-light);border-radius:8px;padding:10px 12px;margin-top:12px;font-size:13px;}
+.extra-label{font-weight:700;color:var(--teal-dark);font-size:11px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px;}
+.nav-btn{display:inline-block;background:var(--teal);color:#fff;text-decoration:none;font-size:12px;font-weight:600;padding:6px 14px;border-radius:14px;white-space:nowrap;}
+.nav-btn:hover{background:var(--teal-dark);}
+</style>
+</head>
+<body>
+<script>(function(){if(!/miw_auth=1/.test(document.cookie)){window.location.replace('/SQ/pay.html');}})();</script>
+<div class="topbar"><span class="logo">MIW</span><span>Marine Intelligence Weekly</span>
+  <a href="/">Home</a><a href="/meoclass1/">MEO Class 1</a><a href="/contact.html">Contact</a>
+</div>
+<div class="page-header">
+  <span class="badge">QB10_A</span>
+  <h1>QB10_A — Maritime Industry, Policy & Current Affairs</h1>
+  <p>MEO Class 1 Question Bank &middot; Industry, Government Policy & General Knowledge (NEW group)</p>
+  <div class="header-meta">Compiled by Nixon Antony, 2/E, Maersk A/S &middot; Kochi MMD oral exam prep &middot; 6 questions</div>
+</div>
+<div class="controls-bar">
+  <input id="search-input" placeholder="Search questions...">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
+  <span id="q-count-label">Showing 6 of 6</span>
+  
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <a class="toc-link" href="#q1">Q1. Type of Vessel Sailed</a>
+<a class="toc-link" href="#q2">Q2. General Cargo Vessel Type</a>
+<a class="toc-link" href="#q3">Q3. Sagarmala</a>
+<a class="toc-link" href="#q4">Q4. Latest Technology on My Ship</a>
+<a class="toc-link" href="#q5">Q5. Maritime Amrit Kaal Vision 2047</a>
+<a class="toc-link" href="#q6">Q6. Latest OPEC Development</a>
+    <div style="margin-top:16px;border-top:1px solid var(--grey-border);padding-top:10px;color:var(--grey-text);font-size:11px;">More QB files coming soon.</div>
+  </div>
+  <div id="q-feed">
+    <div class="section-head"><h2>Questions</h2><span class="sec-count">6 questions</span></div>
+    <div class="q-card" id="q1" data-tags="Ship Types Container Vessels">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Describe the type of vessel you have sailed on and its key engineering features.</div>
+      <div class="q-tags"><span class="q-tag">Ship Types</span><span class="q-tag">Container Vessels</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <div class="fifteen"><h4>15-Second Answer</h4><p>I have sailed as 2/E on large fully-cellular container vessels in the Maersk fleet, with electronic 2-stroke main engines, heavy reefer/auxiliary loads and torsion-box hull structure.</p></div><div class="sixty"><h4>60-Second Answer</h4><p>Fully cellular container ships are optimised for rapid intermodal box carriage, using electronically controlled 2-stroke main engines (MAN B&W ME-C / WinGD X-DF), large auxiliary plants to support 1,000+ reefer plugs, shaft generators/WHR for efficiency, and structural torsion boxes/cell guides to manage open-deck hull stresses under tight liner schedules.</p></div><h4>Structure</h4><ul><li>Continuous longitudinal torsion boxes counter torsional stress in oblique seas.</li><li>High-tensile hatch coamings, cell guides for lash-free stowage.</li></ul>
+<h4>Machinery</h4><ul><li>Electronic 2-stroke main engines (ME-C / X-DF/RT-flex).</li><li>3-5 MW auxiliary sets to cover reefer load; shaft generators + WHR to cut fuel use.</li></ul>
+<h4>Commercial Drivers</h4><p>JIT liner schedules demand zero-breakdown maintenance and tight bunkering discipline.</p>
+    </div>
+    <div class="extra-block"><div class="extra-label">Key Numbers</div>Aux load: 3,500-5,000 kW under full reefer &middot; torsion box class survey every 5 yrs.</div>
+    <div class="reg-box">
+      <div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS Ch.II-1</span><span class="reg-desc">Structure, stability, machinery, electrical redundancy</span></div>
+<div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg.26/28</span><span class="reg-desc">SEEMP Part III / CII compliance</span></div>
+<div class="reg-item"><span class="reg-code">ISM Code (Res. A.741(18))</span><span class="reg-desc">Structured maintenance/risk assessment</span></div>
+<div class="reg-item"><span class="reg-code">ISO 8217</span><span class="reg-desc">Marine fuel specifications</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> State engine model and TEU capacity confidently rather than just 'container ship' — Nair typically follows up on torsional stress, reefer load calculation or electronic-engine troubleshooting.</div>
+    <details class="deep"><summary>Deep-Dive: CE Relevance, Traps, Failures, Numbers, Casualty Link, Examiner Chain, On My Vessel</summary><div class="dd-item"><span class="dd-label">CE Relevance: </span>The CE must guarantee electrical grid stability under heavy reefer load (a PMS failure can cause cargo-claim losses in the millions) and coordinate with the Chief Officer on fuel placement for optimal trim and stability.</div><div class="dd-item"><span class="dd-label">Trap Questions: </span>Main engine fails mid-transit with 1,200 reefers online &mdash; anchor or save the auxiliary plant? Secure the electrical grid/steering first to avoid blackout; cargo safety is secondary to navigation safety.</div><div class="dd-item"><span class="dd-label">Common CE Failures: </span>Failing to connect structural engineering with operations &mdash; e.g. forgetting how ballast distribution affects torsional stress and fuel consumption.</div><div class="dd-item"><span class="dd-label">Numbers to Memorise: </span>Typical electrical load 3,500-5,000 kW under full reefer load; torsion box visual check every voyage, detailed class survey every 5 years.</div><div class="dd-item"><span class="dd-label">Casualty Link: </span>MOL Comfort (2013) &mdash; hull failure amidships from hogging/torsional stress and load-distribution issues.</div><div class="dd-item"><span class="dd-label">Examiner Chain: </span>Nair opens with vessel type as a launchpad, then drills into torsional stress or reefer load calculation, then checks whether you can name the engine model/TEU capacity confidently.</div><div class="dd-item"><span class="dd-label">On My Vessel: </span>Maersk Triple-E/H-class vessels run single or twin electronic low-speed engines with EGCS and dual-redundant fieldbus automation.</div></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB10_A, Q1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">QB10_A &middot; Q1 &middot; v1.0</span>
+  </div>
+</div>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Question", "name": "Describe the type of vessel you have sailed on and its key engineering features.", "acceptedAnswer": {"@type": "Answer", "text": "See QB10_A Q1 full answer on Marine Intelligence Weekly."}}</script>
+<div class="q-card" id="q2" data-tags="Ship Types General Cargo Heavy Lift">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">If asked about general cargo/multi-purpose vessels: describe their key engineering and stability features.</div>
+      <div class="q-tags"><span class="q-tag">Ship Types</span><span class="q-tag">General Cargo</span><span class="q-tag">Heavy Lift</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <div class="fifteen"><h4>15-Second Answer</h4><p>General cargo/MPVs use tween decks, heavy-lift cranes and anti-heeling ballast systems, requiring different stability and hydraulic-maintenance discipline than container ships.</p></div><div class="sixty"><h4>60-Second Answer</h4><p>MPVs carry diverse cargo (steel, grain, project cargo) via tween decks and heavy-lift deck cranes (sometimes tandem-lifting 500t). Electrical/hydraulic demand spikes in port during crane operation, anti-heeling pumps protect stability during lifts, and hatch-cover hydraulics need rigorous pressure/leak testing.</p></div><h4>Structural/Cargo Features</h4><ul><li>Tween decks split holds to protect bottom cargo and fit non-uniform parcels.</li><li>Heavy-lift cranes with reinforced foundations and anti-heeling ballast.</li></ul>
+<h4>Machinery</h4><ul><li>Fast-acting PMS for port crane load spikes.</li><li>Anti-heeling pumps (1,000+ m3/hr) interlocked with crane controls.</li><li>Hydraulic hatch-cover power packs need routine pressure/leak checks.</li></ul>
+    </div>
+    <div class="extra-block"><div class="extra-label">Key Numbers</div>Crane pressure 250-320 bar &middot; hydraulic oil alarm ~75degC, trip ~80degC.</div>
+    <div class="reg-box">
+      <div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS Ch.II-1 Part B-1</span><span class="reg-desc">Cargo-ship damage stability</span></div>
+<div class="reg-item"><span class="reg-code">SOLAS Ch.VI</span><span class="reg-desc">Carriage of cargoes — stowage/securing</span></div>
+<div class="reg-item"><span class="reg-code">ILO Convention 152</span><span class="reg-desc">Lifting-gear testing/certification</span></div>
+<div class="reg-item"><span class="reg-code">CSS Code</span><span class="reg-desc">Cargo stowage and securing</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Rajappan tests crane safety devices, hydraulic-oil water-contamination checks, and anti-heeling pump failure response during a heavy lift — answer with step-by-step interlock/isolation/ballast-transfer actions.</div>
+    <details class="deep"><summary>Deep-Dive: CE Relevance, Traps, Failures, Numbers, Casualty Link, Examiner Chain, On My Vessel</summary><div class="dd-item"><span class="dd-label">CE Relevance: </span>Because MPVs often visit smaller ports with limited shore support, the CE must maintain high self-reliance &mdash; all cargo gear, hydraulics and emergency machinery must run without relying on local technicians.</div><div class="dd-item"><span class="dd-label">Trap Questions: </span>Crane hydraulic oil hits 85degC mid-discharge under commercial pressure &mdash; continue? No; halt, check cooler fouling/cooling water, resume only when normal (alarm ~75degC, trip ~80degC).</div><div class="dd-item"><span class="dd-label">Common CE Failures: </span>Forgetting lifting gear needs a valid quadrennial test certificate and annual thorough examination under ILO 152; running machinery without checking the Chain Register.</div><div class="dd-item"><span class="dd-label">Numbers to Memorise: </span>Typical hydraulic crane pressure 250-320 bar; max hydraulic oil temp 65-70degC (alarm ~75degC, trip ~80degC).</div><div class="dd-item"><span class="dd-label">Casualty Link: </span>MV Stellamare (2003) &mdash; capsized during port cargo ops due to anti-heeling/stability mismanagement.</div><div class="dd-item"><span class="dd-label">Examiner Chain: </span>Rajappan opens on ship type, then narrows to a specific failure scenario (hydraulic overheat or anti-heeling pump loss), checking your safety-first decision-making under commercial pressure.</div><div class="dd-item"><span class="dd-label">On My Vessel: </span>Applies to Maersk feeder/regional MPV-type units servicing under-equipped terminals with independent deck cranes.</div></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB10_A, Q2, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">QB10_A &middot; Q2 &middot; v1.0</span>
+  </div>
+</div>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Question", "name": "If asked about general cargo/multi-purpose vessels: describe their key engineering and stability features.", "acceptedAnswer": {"@type": "Answer", "text": "See QB10_A Q2 full answer on Marine Intelligence Weekly."}}</script>
+<div class="q-card" id="q3" data-tags="Government Policy Sagarmala Indian Ports">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Explain the Sagarmala Programme in detail.</div>
+      <div class="q-tags"><span class="q-tag">Government Policy</span><span class="q-tag">Sagarmala</span><span class="q-tag">Indian Ports</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <div class="fifteen"><h4>15-Second Answer</h4><p>Sagarmala is India's port-led development programme covering port modernisation, connectivity, port-led industrialisation and coastal community development to cut logistics costs.</p></div><div class="sixty"><h4>60-Second Answer</h4><p>Sagarmala (Ministry of Ports, Shipping & Waterways) targets India's high logistics cost by shifting freight to coastal/inland waterways and modernising port capacity. Its four pillars are port modernisation, connectivity, port-led industrialisation and coastal community development, delivered via 800+ projects, digitisation (NLP-Marine) and green-port initiatives including shore power.</p></div><h4>Four Pillars</h4><table class="rapid-table"><tr><th>Pillar</th><th>Focus</th></tr>
+<tr><td>Port Modernisation</td><td>Deeper draft, automated cranes, cold ironing</td></tr>
+<tr><td>Connectivity</td><td>Rail/expressway/inland-waterway links</td></tr>
+<tr><td>Port-Led Industrialisation</td><td>Coastal Economic Zones near ports</td></tr>
+<tr><td>Community Development</td><td>Skilling, fisheries, local employment</td></tr></table>
+<h4>Key Tools</h4><p>National Logistics Portal-Marine for single-window digital clearance; renewable-power rollout at major ports.</p>
+    </div>
+    <div class="extra-block"><div class="extra-label">Key Numbers</div>800+ projects &middot; ~Rs 5.5 lakh crore &middot; ~7,500 km coastline.</div>
+    <div class="reg-box">
+      <div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">Merchant Shipping Act 1958</span><span class="reg-desc">Vessel registration and cabotage framework</span></div>
+<div class="reg-item"><span class="reg-code">Major Port Authorities Act 2021</span><span class="reg-desc">Port governance restructuring/PPP</span></div>
+<div class="reg-item"><span class="reg-code">National Waterways Act 2016</span><span class="reg-desc">111 inland waterways declared national routes</span></div>
+<div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg.13/14</span><span class="reg-desc">Emission standards linked to green-port goals</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Connect Sagarmala to local relevance — Vallarpadam ICTT and Vizhinjam deepwater port expansion — and to shore-power/cold-ironing to show integrated knowledge.</div>
+    <details class="deep"><summary>Deep-Dive: CE Relevance, Traps, Failures, Numbers, Casualty Link, Examiner Chain, On My Vessel</summary><div class="dd-item"><span class="dd-label">CE Relevance: </span>Port modernisation mandates high-voltage shore power (IEC/IEEE 80005-1); the CE must maintain the shore-receiving switchboard, step-down transformers and synchronisation interlocks to shut down auxiliaries seamlessly in port.</div><div class="dd-item"><span class="dd-label">Trap Questions: </span>Does Sagarmala directly regulate engine emissions? No &mdash; it funds enabling infrastructure (shore power, LNG bunkering) that lets vessels meet MARPOL Annex VI.</div><div class="dd-item"><span class="dd-label">Common CE Failures: </span>Discussing the project in vague terms without naming specific pillars or technical impacts like shore-power integration.</div><div class="dd-item"><span class="dd-label">Numbers to Memorise: </span>800+ projects, roughly Rs 5.5 lakh crore; ~7,500 km coastline.</div><div class="dd-item"><span class="dd-label">Casualty Link: </span>Not a direct casualty link &mdash; historically, lack of deep-draft ports forced transshipment via Colombo/Singapore, adding cost/legal exposure that Sagarmala aims to resolve.</div><div class="dd-item"><span class="dd-label">Examiner Chain: </span>Rajappan values policy awareness tied to local hubs &mdash; expect a follow-up connecting Sagarmala to Vallarpadam ICTT or Vizhinjam port expansion.</div><div class="dd-item"><span class="dd-label">On My Vessel: </span>Reduced pre-berthing delays at Nhava Sheva/Mundra and improved oily-water/sludge reception facilities.</div></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB10_A, Q3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">QB10_A &middot; Q3 &middot; v1.0</span>
+  </div>
+</div>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Question", "name": "Explain the Sagarmala Programme in detail.", "acceptedAnswer": {"@type": "Answer", "text": "See QB10_A Q3 full answer on Marine Intelligence Weekly."}}</script>
+<div class="q-card" id="q4" data-tags="Shipboard Technology Automation Dual-Fuel">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">4</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Describe the latest technology deployed on your vessel.</div>
+      <div class="q-tags"><span class="q-tag">Shipboard Technology</span><span class="q-tag">Automation</span><span class="q-tag">Dual-Fuel</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <div class="fifteen"><h4>15-Second Answer</h4><p>Modern Maersk vessels use dual-fuel (green methanol) engines, AI-linked performance monitoring over satellite, and high-voltage shore power to cut in-port emissions.</p></div><div class="sixty"><h4>60-Second Answer</h4><p>Latest-generation container ships combine dual-fuel main engines (e.g. MAN B&W ME-LGIM) capable of green methanol operation, waste-heat recovery, VFD-controlled auxiliaries, and edge-computed sensor data relayed via satellite to AI performance-optimisation platforms — all managed within strict SEEMP Part III/CII compliance.</p></div><h4>Propulsion/Fuel</h4><ul><li>Dual-fuel ME-LGIM/X-DF engines; double-walled piping, N2 purging, explosion-proof valve trains for methanol.</li></ul>
+<h4>Automation/Analytics</h4><ul><li>Edge sensors (cylinder Pmax, vibration, torque) &rarr; satellite link &rarr; AI hull/engine optimisation.</li></ul>
+<h4>Energy Conservation</h4><ul><li>WHR turbines recovering up to ~10% of electrical power; VFDs on sea-cooling pumps/vent fans.</li></ul>
+    </div>
+    <div class="extra-block"><div class="extra-label">Key Numbers</div>Methanol flashpoint ~12degC &middot; VFD sea-cooling savings up to 40-50%.</div>
+    <div class="reg-box">
+      <div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS Ch.II-2</span><span class="reg-desc">Fire safety for alternative-fuel configurations</span></div>
+<div class="reg-item"><span class="reg-code">IGF Code</span><span class="reg-desc">Safety for gas/low-flashpoint fuels</span></div>
+<div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg.26/28</span><span class="reg-desc">SEEMP Part III data verification</span></div>
+<div class="reg-item"><span class="reg-code">IMO Res. MSC.428(98)</span><span class="reg-desc">Maritime cyber risk management</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Nair tests whether you understand the mechanics, not just the buzzwords — be ready to explain a methanol fuel-changeover fault sequence or how electronic cylinder-lube feed rate is calculated.</div>
+    <details class="deep"><summary>Deep-Dive: CE Relevance, Traps, Failures, Numbers, Casualty Link, Examiner Chain, On My Vessel</summary><div class="dd-item"><span class="dd-label">CE Relevance: </span>A methanol fuel-valve-train leak triggers an automated shutdown and N2 purge; the CE must ensure crew training on this protocol, weekly gas-detector calibration and cyber-security discipline when connecting external diagnostics to the automation LAN.</div><div class="dd-item"><span class="dd-label">Trap Questions: </span>AI software contradicts physical cylinder-wear readings &mdash; which do you trust? Trust physical/mechanical indicators; software is advisory.</div><div class="dd-item"><span class="dd-label">Common CE Failures: </span>Being unable to explain alternative-fuel line safety features such as double-walled piping with inert-gas filling.</div><div class="dd-item"><span class="dd-label">Numbers to Memorise: </span>Methanol flashpoint ~12degC; VFD sea-cooling pump savings up to 40-50%.</div><div class="dd-item"><span class="dd-label">Casualty Link: </span>Recent BIMCO cyber-incident alerts describe automation lockouts from malware introduced via unauthorised USB drives on the IAS.</div><div class="dd-item"><span class="dd-label">Examiner Chain: </span>Nair usually asks you to name the technology first, then demands the underlying mechanical/electronic sequence &mdash; naming a buzzword without explaining the physics is the trap.</div><div class="dd-item"><span class="dd-label">On My Vessel: </span>Maersk's integrated automation (IAS) plus eco-advisory software runs dual-fuel machinery under strict SMS controls.</div></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB10_A, Q4, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">QB10_A &middot; Q4 &middot; v1.0</span>
+  </div>
+</div>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Question", "name": "Describe the latest technology deployed on your vessel.", "acceptedAnswer": {"@type": "Answer", "text": "See QB10_A Q4 full answer on Marine Intelligence Weekly."}}</script>
+<div class="q-card" id="q5" data-tags="Government Policy Amrit Kaal De-carbonisation">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">5</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Explain the Maritime Amrit Kaal Vision 2047.</div>
+      <div class="q-tags"><span class="q-tag">Government Policy</span><span class="q-tag">Amrit Kaal</span><span class="q-tag">De-carbonisation</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <div class="fifteen"><h4>15-Second Answer</h4><p>Amrit Kaal Vision 2047 is India's long-term maritime blueprint targeting green ports, alternative-fuel bunkering hubs, top-10 global shipbuilding status and a larger Indian seafarer share.</p></div><div class="sixty"><h4>60-Second Answer</h4><p>Building on Maritime India Vision 2030, Amrit Kaal 2047 targets 100% renewable power at major ports, green hydrogen/ammonia/methanol bunkering hubs, blockchain-enabled paperless ports, expanded domestic shipbuilding, and growing India's global seafarer share beyond 20% by 2047.</p></div><h4>Key Targets</h4><table class="rapid-table"><tr><th>Area</th><th>Target</th></tr>
+<tr><td>Port Decarbonisation</td><td>100% renewable power, shore power (cold ironing) mandatory</td></tr>
+<tr><td>Alt-Fuel Hubs</td><td>Green hydrogen/ammonia/methanol bunkering at major ports</td></tr>
+<tr><td>Shipbuilding</td><td>Top-10 global ranking</td></tr>
+<tr><td>Workforce</td><td>&gt;20% global seafarer share</td></tr></table>
+    </div>
+    <div class="extra-block"><div class="extra-label">Key Numbers</div>Target year 2047 &middot; seafarer share target &gt;20% &middot; shipbuilding rank top-10.</div>
+    <div class="reg-box">
+      <div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">Major Port Authorities Act 2021</span><span class="reg-desc">Legislative basis for green-energy PPPs</span></div>
+<div class="reg-item"><span class="reg-code">MARPOL Annex VI</span><span class="reg-desc">Aligned emission-reduction/alt-fuel targets</span></div>
+<div class="reg-item"><span class="reg-code">DG Shipping Circulars (Engineering Series)</span><span class="reg-desc">Training mandates for low-flashpoint fuel handling</span></div>
+<div class="reg-item"><span class="reg-code">Merchant Shipping (Shipbuilding & Repair Promotion Policy)</span><span class="reg-desc">Drydock/repair capacity growth</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Give the structured pillars and 2047 targets rather than a political summary; tie it to shore-power and alt-fuel bunkering readiness on your own vessel.</div>
+    <details class="deep"><summary>Deep-Dive: CE Relevance, Traps, Failures, Numbers, Casualty Link, Examiner Chain, On My Vessel</summary><div class="dd-item"><span class="dd-label">CE Relevance: </span>At modernised Indian ports the CE manages high-voltage shore connections (cold ironing) seamlessly and prepares bunkering safety setups for alternative fuels like green methanol/ammonia; expanding local repair yards also means more drydockings under DG Shipping survey protocols.</div><div class="dd-item"><span class="dd-label">Trap Questions: </span>Will conventional fuel oil disappear by 2047? No &mdash; it will coexist under stricter carbon pricing/local emission caps.</div><div class="dd-item"><span class="dd-label">Common CE Failures: </span>Confusing Maritime India Vision 2030 targets with the longer-term Amrit Kaal 2047 goals.</div><div class="dd-item"><span class="dd-label">Numbers to Memorise: </span>Target year 2047; &gt;20% global seafarer share; top-10 shipbuilding rank.</div><div class="dd-item"><span class="dd-label">Casualty Link: </span>Alternative-fuel trial incidents (e.g. toxic vapour exposure during ammonia transfer trials) underscore why Amrit Kaal prioritises specialised workforce training.</div><div class="dd-item"><span class="dd-label">Examiner Chain: </span>Rajappan tests current-affairs awareness &mdash; expect a request to distinguish this from Maritime India Vision 2030, then a follow-up on shipboard readiness for alt-fuel bunkering.</div><div class="dd-item"><span class="dd-label">On My Vessel: </span>Aligns with Maersk's own net-zero GHG fleet target and green-corridor port calls.</div></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB10_A, Q5, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">QB10_A &middot; Q5 &middot; v1.0</span>
+  </div>
+</div>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Question", "name": "Explain the Maritime Amrit Kaal Vision 2047.", "acceptedAnswer": {"@type": "Answer", "text": "See QB10_A Q5 full answer on Marine Intelligence Weekly."}}</script>
+<div class="q-card" id="q6" data-tags="Geopolitics OPEC Shipping Economics">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">6</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is the latest development in OPEC and how does it affect shipping?</div>
+      <div class="q-tags"><span class="q-tag">Geopolitics</span><span class="q-tag">OPEC</span><span class="q-tag">Shipping Economics</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <div class="fifteen"><h4>15-Second Answer</h4><p>OPEC+ output has been disrupted through 2026 by the closure of the Strait of Hormuz during the Iran conflict, cutting Gulf supply sharply; the UAE also formally left OPEC on 1 May 2026, and demand-growth forecasts have been repeatedly cut.</p></div><div class="sixty"><h4>60-Second Answer</h4><p>As of mid-2026, OPEC's most significant development is the Strait of Hormuz closure linked to the Iran conflict, which cut OPEC output by over 30% at its worst and forced OPEC and the IEA to repeatedly trim 2026 demand-growth forecasts (OPEC to roughly 1.17-1.2 million bpd, down from ~1.4 million). The UAE formally exited OPEC on 1 May 2026 amid quota disputes, following Angola's 2024 departure, and remaining members had earlier paused the planned unwinding of voluntary production cuts to manage oversupply risk. For shipping, this combination of supply disruption and shifting alliances has driven bunker-price volatility and rerouted crude tonne-miles away from the Gulf toward the Atlantic Basin.</p></div><h4>Key 2026 Developments (verify against latest OPEC/IEA releases before the exam)</h4><ul><li><strong>Strait of Hormuz disruption:</strong> Iran-related conflict closed/restricted this chokepoint, cutting OPEC output by over 30% at peak and delaying planned output increases.</li><li><strong>UAE exit:</strong> The UAE left OPEC on 1 May 2026 over production-quota disagreements, following Angola's 2024 exit — underscoring cohesion strain within the group.</li><li><strong>Demand forecast cuts:</strong> OPEC and IEA both repeatedly lowered 2026 demand-growth forecasts as the conflict and oversupply concerns weighed on the market.</li><li><strong>Compensation cuts:</strong> Remaining members (Iraq, Kazakhstan, Oman) pledged deeper compensation cuts earlier in 2026 to improve quota compliance.</li></ul>
+<h4>Shipping Impact</h4><table class="rapid-table"><tr><th>Vector</th><th>Impact</th></tr>
+<tr><td>Bunker prices</td><td>Upward pressure/volatility on VLSFO and MGO</td></tr>
+<tr><td>Tanker ton-miles</td><td>Longer Atlantic Basin (US/Brazil/Guyana) hauls replacing shorter Gulf routes as Hormuz flow is constrained</td></tr>
+<tr><td>Fuel quality risk</td><td>Shifting crude/refinery sourcing raises the need for rigorous fuel testing</td></tr></table>
+    </div>
+    <div class="extra-block"><div class="extra-label">Key Numbers</div>2026 demand growth revised to ~1.17-1.2M bpd &middot; global demand ~104-105M bpd &middot; UAE exit 1 May 2026.</div>
+    <div class="reg-box">
+      <div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg.14/18</span><span class="reg-desc">Fuel oil quality/emission criteria affecting blended crude use</span></div>
+<div class="reg-item"><span class="reg-code">BIMCO Bunker Quality Control Clause</span><span class="reg-desc">Shipboard responsibilities for off-spec fuel</span></div>
+<div class="reg-item"><span class="reg-code">ISO 8217 (latest edition)</span><span class="reg-desc">Marine fuel specification standard</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon uses this as a broad commercial-awareness check on tankers/general cargo. State the live geopolitical driver (Hormuz disruption, UAE's exit) rather than generic 'production cuts', then link it to bunker cost and fuel-quality risk. Because this is a fast-moving story, verify the latest OPEC/IEA monthly report figures immediately before your oral.</div>
+    <details class="deep"><summary>Deep-Dive: CE Relevance, Traps, Failures, Numbers, Casualty Link, Examiner Chain, On My Vessel</summary><div class="dd-item"><span class="dd-label">CE Relevance: </span>Volatile fuel costs push the CE to use voyage-optimisation software alongside strict purification/testing protocols, and to watch cat-fine content closely as crude sourcing shifts toward the Atlantic Basin.</div><div class="dd-item"><span class="dd-label">Trap Questions: </span>Does an OPEC supply cut always reduce engine-room workload? No &mdash; it can force slower steaming and puts more emphasis on fuel-quality vigilance and efficiency management.</div><div class="dd-item"><span class="dd-label">Common CE Failures: </span>Discussing oil-price trends in general terms without linking them to bunker-quality risk, SEEMP targets or tanker ton-mile demand.</div><div class="dd-item"><span class="dd-label">Numbers to Memorise: </span>2026 demand growth forecasts revised down to roughly 1.17-1.2 million bpd; global demand ~104-105 million bpd; UAE exited OPEC 1 May 2026.</div><div class="dd-item"><span class="dd-label">Casualty Link: </span>Refinery/crude-sourcing shifts have previously introduced volatile organic compounds into marine fuels, causing fuel-pump seizures and blackouts (e.g. Houston-area bunker contamination incidents).</div><div class="dd-item"><span class="dd-label">Examiner Chain: </span>Simon opens broad ('latest OPEC news'), then narrows to the shipping-cost impact, then checks whether you connect it to fuel-quality vigilance rather than just price.</div><div class="dd-item"><span class="dd-label">On My Vessel: </span>Maersk vessels use voyage-optimisation software and strict fuel purification/testing to manage volatile, geopolitically-driven bunker markets.</div></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB10_A, Q6, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">QB10_A &middot; Q6 &middot; v1.0</span>
+  </div>
+</div>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Question", "name": "What is the latest development in OPEC and how does it affect shipping?", "acceptedAnswer": {"@type": "Answer", "text": "See QB10_A Q6 full answer on Marine Intelligence Weekly."}}</script>
+    <div class="cheat-sheet">
+<h2>QB10_A Cheat Sheet — Industry, Policy & Current Affairs</h2>
+<div class="flow">
+<span class="node">Ship Types</span><span class="arrow">&rarr;</span>
+<span class="node">Indian Policy (Sagarmala / Amrit Kaal)</span><span class="arrow">&rarr;</span>
+<span class="node">Onboard Tech</span><span class="arrow">&rarr;</span>
+<span class="node">Geopolitics (OPEC)</span>
+</div>
+<div class="cue-grid">
+<div class="cue-card"><b>Container Ship</b>Electronic 2-stroke, torsion box, heavy reefer/aux load.</div>
+<div class="cue-card"><b>General Cargo/MPV</b>Tween decks, heavy-lift cranes, anti-heeling systems.</div>
+<div class="cue-card"><b>Sagarmala</b>4 pillars: modernisation, connectivity, industrialisation, community. 800+ projects.</div>
+<div class="cue-card"><b>Amrit Kaal 2047</b>Green ports, alt-fuel hubs, top-10 shipbuilding, &gt;20% seafarer share.</div>
+<div class="cue-card"><b>Latest Ship Tech</b>Dual-fuel methanol, AI performance monitoring, WHR, VFDs.</div>
+<div class="cue-card"><b>OPEC 2026</b>Hormuz disruption + UAE exit (1 May 2026) &rarr; volatile bunker prices, longer Atlantic tanker routes.</div>
+</div>
+<table class="rapid-table"><tr><th>Topic</th><th>Key Fact</th></tr>
+<tr><td>Sagarmala</td><td>~Rs 5.5 lakh crore, 7,500 km coastline</td></tr>
+<tr><td>Amrit Kaal</td><td>Target year 2047</td></tr>
+<tr><td>OPEC</td><td>UAE exited 1 May 2026; demand growth cut to ~1.17-1.2M bpd</td></tr>
+</table>
+<p style="font-size:11px;color:var(--grey-text);margin-top:10px;">Current-affairs entries (OPEC, policy targets) should be re-verified against the latest OPEC/IMO/DG Shipping releases close to your exam date.</p>
+</div>
+  </div>
+</div>
+<div id="no-results">No matching questions.</div>
+<div class="page-footer">
+  &copy; 2026 Marine Intelligence Weekly &middot; MEO Class 1 &mdash; Confidential<br>
+  Corrections: contactus@marineintelligenceweekly.com
+</div>
+<div class="watermark">marineintelligenceweekly.com &middot; MEO CLASS 1 &mdash; CONFIDENTIAL</div>
+<script>
+function toggleCard(header){const card=header.closest('.q-card');card.classList.toggle('open');}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters();}
+function applyFilters(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const cards=document.querySelectorAll('.q-card');
+  let vis=0;
+  cards.forEach(card=>{
+    const tags=(card.dataset.tags||'').toLowerCase();
+    const text=card.innerText.toLowerCase();
+    const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+    card.style.display=show?'':'none';
+    if(show)vis++;
+  });
+  document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+  document.getElementById('no-results').style.display=vis===0?'block':'none';
+}
+document.getElementById('search-input').addEventListener('input',applyFilters);
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      document.querySelectorAll('.toc-link').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+</script>
+</body>
+</html>

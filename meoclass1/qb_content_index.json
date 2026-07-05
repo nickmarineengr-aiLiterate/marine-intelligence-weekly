@@ -1,9 +1,9 @@
 {
   "manifest_version": "1.0",
   "generated": "2026-07-05",
-  "generated_by": "Claude - post health-check reconciliation: fixed QB5_A (20 unclosed answer-body divs across every card, missing watermark), QB9_C (was fully ungated/unprotected - added auth gate, noarchive/nosnippet, user-select block, copy/contextmenu block, watermark), QB8_A (removed erroneous 7th 'q-card' pointer-note entry that broke TOC/id parity - converted to a plain footnote link, true question_count is 6 not 7). Added meta descriptions to QB4_C, QB5_A, QB9_C, QB8_A, QB8_B. Also reconciled 36 xlsx Live_File/Build_Status rows against these 5 files' actual live content (duplicates, fallback mismatches, one cross-file reassignment) - xlsx-only change, does not affect this manifest's question counts.",
-  "total_questions": 536,
-  "total_files": 63,
+  "generated_by": "Claude - added QB6_F.html (5Q) and QB10_A.html (6Q) built from reclassified UNCLASSIFIED backlog answers; ungated pending Nixon review; OPEC Q6 answer corrected for Strait of Hormuz disruption + UAE exit (1 May 2026) vs. stale Gemini draft.",
+  "total_questions": 565,
+  "total_files": 66,
   "recently_updated": [
     {
       "date": "2026-07-05",
@@ -28,13 +28,57 @@
     {
       "date": "2026-07-05",
       "files": [
-        "QB4_C",
-        "QB5_A",
-        "QB9_C",
-        "QB8_A",
-        "QB8_B"
+        "QB6_F",
+        "QB10_A"
       ],
-      "note": "Health-check reconciliation pass. QB5_A: fixed unclosed answer-body div on all 20 cards (layout-breaking bug, now HTML-valid) and added missing watermark. QB9_C: was live with zero content protection - added auth gate, full noindex/noarchive/nosnippet, user-select block, copy/contextmenu block, and watermark. QB8_A: corrected question_count from 7 to 6 - the 7th entry was a 'see QB8_B' pointer note incorrectly marked up as a real q-card, breaking TOC/id parity; converted to a plain footnote link and removed from the question list. QB4_C and QB8_B were already structurally clean. All 5 files got topic-specific meta descriptions for internal search (still noindexed to search engines)."
+      "note": "11 new questions from reclassified UNCLASSIFIED backlog; QB10_A is a new group added to Topic Map; cheat sheets embedded inline (both <=6Q); OPEC answer (QB10_A Q6) corrected against live search for Hormuz closure/UAE exit; built UNGATED pending Nixon review before auth-gate is applied."
+    },
+    {
+      "date": "2026-07-05",
+      "files": [
+        "QB9_E",
+        "QB9_F",
+        "QB9_E_CheatSheet",
+        "QB9_F_CheatSheet"
+      ],
+      "note": "QB9_E backlog (23Q) split per Nixon request into QB9_E (Q1-12) and QB9_F (Q13-23); separate cheat sheets built (each file >6Q); built UNGATED pending Nixon review before auth-gate is applied."
+    },
+    {
+      "date": "2026-07-06",
+      "files": [
+        "QB6_F"
+      ],
+      "note": "Q1 corrected from electrical IP (Ingress Protection) Code to the correct SOLAS Ch.XV Industrial Personnel IP Code per Nixon catch; verified via IMO Res. MSC.521(106)/MSC.527(106) and class society sources."
+    },
+    {
+      "date": "2026-07-06",
+      "files": [
+        "QB9_E",
+        "QB9_F",
+        "QB9_E_CheatSheet",
+        "QB9_F_CheatSheet"
+      ],
+      "note": "Added reciprocal nav buttons: QB9_E/QB9_F main pages link to their cheat sheet (top controls-bar); cheat sheets link back to their parent QB page (top-left back button). No content changes."
+    },
+    {
+      "date": "2026-07-06",
+      "files": [
+        "QB9_E_CheatSheet",
+        "QB9_F_CheatSheet"
+      ],
+      "note": "Cheat sheets rebuilt with Huberman/Sung-style upgrades: colour-coded topic clusters, tap-to-reveal flip-cards (retrieval practice, not passive reading) with a self-tracked review checkbox, a real relationship SVG diagram per file, and a dedicated confusable-pairs drill box for classic examiner mix-ups. No change to QB9_E.html/QB9_F.html main content."
+    },
+    {
+      "date": "2026-07-06",
+      "files": [
+        "QB6_F",
+        "QB10_A",
+        "QB9_E",
+        "QB9_F",
+        "QB9_E_CheatSheet",
+        "QB9_F_CheatSheet"
+      ],
+      "note": "Nixon approved content review; auth gate (miw_auth=1 cookie check -> redirect to /SQ/pay.html) applied to all four new QB files and both QB9 cheat sheets. No content changes in this pass."
     }
   ],
   "files": {
@@ -1530,7 +1574,7 @@
       "qb_group": "QB5",
       "letter": "A",
       "title": "Management, Leadership & Human Element",
-      "version": "1.1",
+      "version": "1.0",
       "tags": [
         "ism",
         "marpol",
@@ -2195,13 +2239,13 @@
       "qb_group": "QB8",
       "letter": "A",
       "title": "Cargo Operations",
-      "version": "1.1",
+      "version": "1.0",
       "tags": [
         "marpol",
         "solas",
         "survey"
       ],
-      "question_count": 6,
+      "question_count": 7,
       "questions": [
         {
           "qnum": 1,
@@ -2226,6 +2270,10 @@
         {
           "qnum": 6,
           "text": "IMDG DG cargo documents?"
+        },
+        {
+          "qnum": 7,
+          "text": "Additional QB8 topics — see QB8_B (P&amp;A Manual, CSC, e-BoL, High Density, VGM, Container Amendments)"
         }
       ]
     },
@@ -2441,7 +2489,7 @@
       "qb_group": "QB9",
       "letter": "C",
       "title": "Commercial Law & Maritime Liability (C)",
-      "version": "1.1",
+      "version": "1.0",
       "tags": [
         "commercial"
       ],
@@ -3160,42 +3208,217 @@
         }
       ]
     },
-    "QB5_C.html": {
-      "qb_group": "QB5",
-      "letter": "C",
-      "title": "Management, Leadership & Human Element — Backlog Batch",
+    "QB6_F.html": {
+      "qb_group": "QB6",
+      "letter": "F",
+      "title": "Electrical, Automation & Digitalisation",
+      "version": "1.1",
+      "tags": [
+        "solas",
+        "ip-code-industrial-personnel",
+        "offshore",
+        "framo",
+        "blockchain",
+        "mmsi",
+        "callsign",
+        "gmdss"
+      ],
+      "question_count": 5,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "Industrial Personnel (IP) Code — SOLAS Chapter XV"
+        },
+        {
+          "qnum": 2,
+          "text": "Framo latest technology."
+        },
+        {
+          "qnum": 3,
+          "text": "block chain technology"
+        },
+        {
+          "qnum": 4,
+          "text": "mmsi"
+        },
+        {
+          "qnum": 5,
+          "text": "Call sign"
+        }
+      ],
+      "corrections_applied": [
+        "Q1 corrected 2026-07-06: IP Code is the SOLAS Ch.XV Industrial Personnel Code (MSC.527(106)/MSC.521(106)), not the IEC 60529 electrical Ingress Protection code. Verified against IMO/ABS/LR/Bahamas MMA sources."
+      ],
+      "gated": true
+    },
+    "QB10_A.html": {
+      "qb_group": "QB10",
+      "letter": "A",
+      "title": "Maritime Industry, Policy & Current Affairs (NEW)",
       "version": "1.0",
       "tags": [
-        "ghg",
-        "management"
+        "ship-types",
+        "sagarmala",
+        "amrit-kaal",
+        "technology",
+        "opec",
+        "geopolitics"
       ],
       "question_count": 6,
       "questions": [
         {
           "qnum": 1,
-          "text": "Alternate fuels .. transition .. what in your opinion is a long term alternative solution.?"
+          "text": "Type of vessel sailed on"
         },
         {
           "qnum": 2,
-          "text": "How to carry out risk assessment and permit for portable framo pump"
+          "text": "type of ship sailed - general cargo"
         },
         {
           "qnum": 3,
-          "text": "Dri cargo hazards"
+          "text": "Sagarmala in detail"
         },
         {
           "qnum": 4,
-          "text": "As CE how will you take decisions onboard? What framework do you use?"
+          "text": "latest technology in your ship"
         },
         {
           "qnum": 5,
-          "text": "What is Sagar Mala project and Maritime Amritkal Vision?"
+          "text": "Amrit kal vision details"
         },
         {
           "qnum": 6,
-          "text": "GPS Spoofing — what is it? How does it affect vessel navigation and what are countermeasures?"
+          "text": "What is the latest thing that happened in OPEC"
         }
-      ]
+      ],
+      "gated": true
+    },
+    "QB9_E.html": {
+      "qb_group": "QB9",
+      "letter": "E",
+      "title": "Commercial Law & Maritime Liability (Part 1)",
+      "version": "1.1",
+      "tags": [
+        "commercial-law",
+        "insurance",
+        "tmsa",
+        "clc",
+        "ms-act"
+      ],
+      "question_count": 12,
+      "cheatsheet": "QB9_E_CheatSheet.html",
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "TMSA"
+        },
+        {
+          "qnum": 2,
+          "text": "Latest MS Act Updates & DG Website Differences"
+        },
+        {
+          "qnum": 3,
+          "text": "War Time Marine Insurance & Extra Premiums"
+        },
+        {
+          "qnum": 4,
+          "text": "CLC and its Explanation"
+        },
+        {
+          "qnum": 5,
+          "text": "What is Insurance?"
+        },
+        {
+          "qnum": 6,
+          "text": "Blue Economy in Detail"
+        },
+        {
+          "qnum": 7,
+          "text": "P&I Club Coverage in Hormuz"
+        },
+        {
+          "qnum": 8,
+          "text": "MS Act Provisions for Competency Exams"
+        },
+        {
+          "qnum": 9,
+          "text": "Marine Spatial Planning"
+        },
+        {
+          "qnum": 10,
+          "text": "Blue Economy"
+        },
+        {
+          "qnum": 11,
+          "text": "Difference Between Tort and Crime in Maritime Context"
+        },
+        {
+          "qnum": 12,
+          "text": "Inchmaree Clause in Marine Insurance"
+        }
+      ],
+      "gated": true
+    },
+    "QB9_F.html": {
+      "qb_group": "QB9",
+      "letter": "F",
+      "title": "Commercial Law & Maritime Liability (Part 2)",
+      "version": "1.1",
+      "tags": [
+        "commercial-law",
+        "flag-state",
+        "port-state-control",
+        "registration"
+      ],
+      "question_count": 11,
+      "cheatsheet": "QB9_F_CheatSheet.html",
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "Uniform Law and Conflict of Law in Maritime Context"
+        },
+        {
+          "qnum": 2,
+          "text": "Port of Refuge"
+        },
+        {
+          "qnum": 3,
+          "text": "Machinery Breakdown Insurance Claims"
+        },
+        {
+          "qnum": 4,
+          "text": "Fraudulent Registration of Ships"
+        },
+        {
+          "qnum": 5,
+          "text": "Continuous Hot Pursuit"
+        },
+        {
+          "qnum": 6,
+          "text": "Cabotage Law"
+        },
+        {
+          "qnum": 7,
+          "text": "STSDSS Full Form and Explanation"
+        },
+        {
+          "qnum": 8,
+          "text": "Flag of Convenience (FOC) / Open Registry"
+        },
+        {
+          "qnum": 9,
+          "text": "RightShip Inspection"
+        },
+        {
+          "qnum": 10,
+          "text": "Clear Grounds"
+        },
+        {
+          "qnum": 11,
+          "text": "Official Number"
+        }
+      ],
+      "gated": true
     }
   }
 }
