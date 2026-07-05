@@ -201,6 +201,42 @@ def check_toc_anchors(html_text):
     return errors
 
 
+def check_formula_rendering(html_text):
+    """Flag raw/unrendered LaTeX left in answer text. The site has no MathJax/KaTeX
+    pipeline, so any LaTeX-style markup that leaks into visible HTML (practice-block,
+    answer-body, deep-dive-body, ce-tip) renders as literal backslashes and braces to
+    the reader instead of a formula. Formulas must instead be either:
+      - plain HTML/Unicode (e.g. 'GM<sub>0</sub>', '√', '≈', '×'), or
+      - wrapped in <p class="formula">...</p> using plain text/Unicode only.
+    This check does not touch <script>/<style> contents."""
+    errors = []
+
+    cleaned = re.sub(r"<script.*?</script>", "", html_text, flags=re.S | re.I)
+    cleaned = re.sub(r"<style.*?</style>", "", cleaned, flags=re.S | re.I)
+
+    # Patterns indicating unrendered LaTeX leaking into visible markup
+    latex_command_re = re.compile(r'\\(?:frac|sqrt|times|rightarrow|Delta|theta|approx|ge|le|text|pm|cdot|div|circ)\b')
+    dollar_math_re = re.compile(r'\$[^$\n]{1,80}\$')
+    subscript_brace_re = re.compile(r'[A-Za-z]_\{[^}]+\}')          # e.g. GM_{0}
+    subscript_plain_re = re.compile(r'\b[A-Za-z]{1,4}_[0-9A-Za-z]{1,10}\b')  # e.g. GM_0, X_max — best-effort
+
+    latex_hits = latex_command_re.findall(cleaned)
+    dollar_hits = dollar_math_re.findall(cleaned)
+    subscript_hits = subscript_brace_re.findall(cleaned)
+
+    if latex_hits:
+        sample = ", ".join(sorted(set(latex_hits))[:6])
+        errors.append(f"Unrendered LaTeX command(s) found ({len(latex_hits)} occurrence(s)): {sample}")
+    if dollar_hits:
+        sample = "; ".join(dollar_hits[:4])
+        errors.append(f"Unrendered $...$ math delimiter(s) found ({len(dollar_hits)} occurrence(s)): {sample}")
+    if subscript_hits:
+        sample = ", ".join(sorted(set(subscript_hits))[:6])
+        errors.append(f"Unrendered LaTeX subscript brace syntax found: {sample}")
+
+    return errors
+
+
 def check_file(filename, content_bytes):
     try:
         html_text = content_bytes.decode("utf-8")
@@ -222,6 +258,7 @@ def check_file(filename, content_bytes):
         errors += block_errors
         errors += check_q_id_sequence(html_text)
         errors += check_toc_anchors(html_text)
+        errors += check_formula_rendering(html_text)
 
     return {"file": filename, "errors": errors, "question_count": q_count}
 
