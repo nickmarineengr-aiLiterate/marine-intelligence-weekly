@@ -237,7 +237,61 @@ def check_formula_rendering(html_text):
     return errors
 
 
-def check_file(filename, content_bytes):
+def check_image_rendering(html_text, all_files=None):
+    """Flag broken or improperly-referenced <img> tags in visible QB HTML.
+    Catches the classes of image bug most likely to slip through manual review:
+      - missing src / missing alt text (accessibility + SEO)
+      - leftover data: URIs or blob: URLs from drafting (should be hosted assets)
+      - localhost/127.0.0.1/file:// paths (dev-only, will 404 in production)
+      - relative image paths (site convention is absolute /meoclass1/assets/...)
+      - /meoclass1/assets/... references to files that don't actually exist in the repo
+        (only checked when all_files, a {relative_path: bytes} map of the repo
+        snapshot under meoclass1/, is supplied)
+    """
+    errors = []
+    cleaned = re.sub(r"<script.*?</script>", "", html_text, flags=re.S | re.I)
+    cleaned = re.sub(r"<style.*?</style>", "", cleaned, flags=re.S | re.I)
+
+    img_tags = re.findall(r'<img\b[^>]*>', cleaned, flags=re.I)
+
+    for tag in img_tags:
+        src_m = re.search(r'src\s*=\s*["\']([^"\']*)["\']', tag, re.I)
+        alt_m = re.search(r'alt\s*=\s*["\']([^"\']*)["\']', tag, re.I)
+        id_m = re.search(r'id\s*=\s*["\']([^"\']*)["\']', tag, re.I)
+        src = src_m.group(1).strip() if src_m else ""
+
+        # Lightbox placeholder <img id="lightbox-img" src=""> is intentionally empty —
+        # populated by JS on click. Skip the missing-src check for this known pattern.
+        if id_m and "lightbox" in id_m.group(1).lower() and not src:
+            continue
+
+        if not src:
+            errors.append(f"<img> tag missing or empty src attribute: {tag[:80]}")
+            continue
+
+        if not alt_m or not alt_m.group(1).strip():
+            errors.append(f"<img> missing alt text (accessibility/SEO): src={src}")
+
+        if src.startswith("data:"):
+            errors.append(f"<img> uses a data: URI — likely a drafting leftover, should be a hosted asset: {src[:50]}...")
+        elif re.match(r'^(blob:|file://)', src, re.I):
+            errors.append(f"<img> src is a local/dev-only URL, will break in production: {src}")
+        elif re.match(r'^https?://(localhost|127\.0\.0\.1)', src, re.I):
+            errors.append(f"<img> src points to localhost, will break in production: {src}")
+        elif src.startswith("/meoclass1/assets/"):
+            if all_files is not None:
+                rel = "assets/" + src.split("/meoclass1/assets/", 1)[1]
+                if rel not in all_files:
+                    errors.append(f"<img> src references an asset not found in the repo: {src}")
+        elif src.startswith("/"):
+            pass  # other absolute site-root paths — not this script's concern
+        elif not re.match(r'^https?://', src, re.I):
+            errors.append(f"<img> src is a relative path, not the site convention (/meoclass1/assets/...): {src}")
+
+    return errors
+
+
+def check_file(filename, content_bytes, all_files=None):
     try:
         html_text = content_bytes.decode("utf-8")
     except UnicodeDecodeError:
@@ -245,7 +299,8 @@ def check_file(filename, content_bytes):
 
     base = filename.split("/")[-1]
     is_cheatsheet = "cheatsheet" in base.lower()
-    is_qb_question_file = bool(re.match(r"QB\d", base, re.I)) and not is_cheatsheet
+    is_qb_file = bool(re.match(r"QB\d", base, re.I))  # covers both Q&A cards and cheat sheets
+    is_qb_question_file = is_qb_file and not is_cheatsheet
 
     errors = []
     errors += check_tag_balance(html_text, filename)
@@ -258,7 +313,13 @@ def check_file(filename, content_bytes):
         errors += block_errors
         errors += check_q_id_sequence(html_text)
         errors += check_toc_anchors(html_text)
+
+    if is_qb_file:
+        # Formula rendering and image checks apply to both Q&A cards and cheat sheets —
+        # diagrams and formulas now live in either place depending on the diagram
+        # placement policy (Section 6b of the QB production skill).
         errors += check_formula_rendering(html_text)
+        errors += check_image_rendering(html_text, all_files)
 
     return {"file": filename, "errors": errors, "question_count": q_count}
 
@@ -360,7 +421,7 @@ def main():
 
     results = []
     for name, content in sorted(html_files.items()):
-        results.append(check_file(name, content))
+        results.append(check_file(name, content, all_files=files))
 
     total_questions_manifest = sum(
         f.get("question_count", 0) for f in manifest_files.values()
