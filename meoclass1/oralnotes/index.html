@@ -40,6 +40,14 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
 /* MAIN */
 .main{max-width:860px;margin:0 auto;padding:36px 24px 60px;}
 
+/* SEARCH */
+.notes-search-wrap{display:flex;align-items:center;gap:10px;margin-bottom:24px;background:#fff;border:1.5px solid var(--grey-border);border-radius:8px;padding:10px 16px;transition:border-color .2s;}
+.notes-search-wrap:focus-within{border-color:var(--teal);}
+.notes-search-input{border:none;outline:none;font-size:14px;width:100%;color:var(--ink);background:transparent;}
+.notes-search-input::placeholder{color:#a0aec0;}
+.search-count{font-size:12px;color:var(--grey-text);white-space:nowrap;}
+.no-search-results{display:none;text-align:center;padding:40px 20px;color:var(--grey-text);font-size:14px;}
+
 /* SERIES SECTION */
 .series-block{margin-bottom:40px;}
 .series-title{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--grey-border);}
@@ -135,6 +143,14 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
     </div>
   </div>
 
+  <!-- SEARCH -->
+  <div class="notes-search-wrap">
+    <span>🔍</span>
+    <input type="text" class="notes-search-input" id="notesIndexSearch" placeholder="Search all notes — e.g. MSA 2025, ISM Apex, Li-ion fire, PSC quals…" oninput="notesIndexSearch(this.value)">
+    <span class="search-count" id="indexSearchCount"></span>
+  </div>
+  <div class="no-search-results" id="indexNoResults">No topics match your search. Try a different term.</div>
+
   <!-- CURRENT TOPICS -->
   <div class="series-block">
     <div class="series-title">
@@ -143,7 +159,7 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
     </div>
     <div class="notes-grid">
 
-      <a class="note-card available" href="current-topics-p1.html">
+      <a class="note-card available" href="current-topics-p1.html" data-kw="MASS autonomous ships EU ETS UK ETS FuelEU Maritime GFI net zero framework hydrogen fuel cell BeHydro cyber security UR E26 E27 AI watchkeeping lifting appliances PFOS firefighting foam ballast water D-2 NCSR digital VHF R-mode EPIRB S-100 ECDIS NAVDAT Strait of Hormuz security">
         <div class="nc-header">
           <span class="nc-part">Current Topics · Part 1</span>
           <span class="nc-status ncs-live">✅ Live</span>
@@ -172,7 +188,7 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
     </div>
     <div class="notes-grid">
 
-      <a class="note-card available" href="simon-notes-p1.html">
+      <a class="note-card available" href="simon-notes-p1.html" data-kw="UKMTO MSCHOA piracy IS Code intact stability CII carbon intensity indicator CF STCW Manila amendments hours of rest lifeboat testing cyber security GISIS maritime security MARPOL Annex VI IMO DCS data collection GHG strategy manning watchkeeping LSA code">
         <div class="nc-header">
           <span class="nc-part">Simon Sir · Part 1</span>
           <span class="nc-status ncs-live">✅ Live</span>
@@ -192,7 +208,7 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
         <div class="nc-btn">Open Part 1</div>
       </a>
 
-      <a class="note-card available" href="simon-notes-p2.html">
+      <a class="note-card available" href="simon-notes-p2.html" data-kw="gyrocompass LRIT AIS MMSI stability booklet gross tonnage net tonnage deadweight guardrails CII ballast water management CLC 1992 civil liability commercial law ISMS ISO EU ETS">
         <div class="nc-header">
           <span class="nc-part">Simon Sir · Part 2</span>
           <span class="nc-status ncs-live">✅ Live</span>
@@ -212,7 +228,7 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
         <div class="nc-btn">Open Part 2</div>
       </a>
 
-      <a class="note-card available" href="simon-notes-p3.html">
+      <a class="note-card available" href="simon-notes-p3.html" data-kw="COP28 COP29 CBDR-RC IS Code righting arm NOSDCP oil spill broaching lifeboat engine lithium ion battery fire FSI PSC qualification FMEA RPN ISM apex manual tiers NSB National Shipping Board Merchant Shipping Act 2025 MSA DGMA 22 members women quota STCW 2027 ISO 8217 FAME biofuel flags of convenience FOC">
         <div class="nc-header">
           <span class="nc-part">Simon Sir · Part 3</span>
           <span class="nc-status ncs-live">✅ Live</span>
@@ -232,7 +248,7 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
         <div class="nc-btn">Open Part 3</div>
       </a>
 
-      <a class="note-card available" href="simon-notes-p4.html">
+      <a class="note-card available" href="simon-notes-p4.html" data-kw="SAR 1979 GNSS jamming spoofing port state control action codes SOLAS training manual lifejacket specification lifeboat davit P.92 hull steel grades CE duties ISM MLC blockchain IoT IWIS predictive maintenance">
         <div class="nc-header">
           <span class="nc-part">Simon Sir · Part 4</span>
           <span class="nc-status ncs-live">✅ Live</span>
@@ -252,7 +268,7 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
         <div class="nc-btn">Open Part 4</div>
       </a>
 
-      <a class="note-card available" href="simon-notes-p5.html">
+      <a class="note-card available" href="simon-notes-p5.html" data-kw="Bonjean curves GZ curve dynamic stability smart sensors IOPP VDR ARPA flag state duties UNCLOS article 94 ME engine MC engine port of refuge Polar Code LSA code FSS code">
         <div class="nc-header">
           <span class="nc-part">Simon Sir · Part 5</span>
           <span class="nc-status ncs-live">✅ Live</span>
@@ -269,7 +285,7 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
         <div class="nc-btn">Open Part 5</div>
       </a>
 
-      <a class="note-card available" href="simon-notes-p6.html">
+      <a class="note-card available" href="simon-notes-p6.html" data-kw="formal safety assessment FSA competency vs proficiency class certificates statutory certificates COP29 MARPOL amendments Maritime Zones Act 1976 bunker delivery note BDN retention load line survey SAFCON parametric rolling inclining experiment free surface effect FSE">
         <div class="nc-header">
           <span class="nc-part">Simon Sir · Part 6</span>
           <span class="nc-status ncs-live">✅ Live</span>
@@ -286,7 +302,7 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
         <div class="nc-btn">Open Part 6</div>
       </a>
 
-      <a class="note-card available" href="simon-notes-p7.html">
+      <a class="note-card available" href="simon-notes-p7.html" data-kw="CO2 fixed firefighting system pressure testing TQM total quality management FAL convention FAL forms Maritime Single Window maritime liens UNCLOS zones CSC convention container safety ISO 6346 marking VGM verified gross mass container regulations">
         <div class="nc-header">
           <span class="nc-part">Simon Sir · Part 7</span>
           <span class="nc-status ncs-live">✅ Live</span>
@@ -303,7 +319,7 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
         <div class="nc-btn">Open Part 7</div>
       </a>
 
-      <a class="note-card available" href="simon-notes-p8.html">
+      <a class="note-card available" href="simon-notes-p8.html" data-kw="SUA convention suppression unlawful acts London Dumping Convention Basel Convention hazardous waste Ban Amendment HNS convention ballast water management D-1 D-2 BWTS type approval G8 BWMS code IMO USCG differences">
         <div class="nc-header">
           <span class="nc-part">Simon Sir · Part 8</span>
           <span class="nc-status ncs-live">✅ Live</span>
@@ -408,6 +424,26 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
 </footer>
 
 <script>
+function notesIndexSearch(q){
+  const cards=document.querySelectorAll('.note-card');
+  const blocks=document.querySelectorAll('.series-block');
+  const term=q.toLowerCase().trim();
+  let vis=0;
+  cards.forEach(card=>{
+    const kw=(card.dataset.kw||'').toLowerCase();
+    const match=!term||card.innerText.toLowerCase().includes(term)||kw.includes(term);
+    card.style.display=match?'':'none';
+    if(match)vis++;
+  });
+  blocks.forEach(block=>{
+    const hasVis=[...block.querySelectorAll('.note-card')].some(c=>c.style.display!=='none');
+    block.style.display=hasVis||!term?'':'none';
+  });
+  const count=document.getElementById('indexSearchCount');
+  const noRes=document.getElementById('indexNoResults');
+  if(count) count.textContent=term?`${vis} result${vis!==1?'s':''}`:'';
+  if(noRes) noRes.style.display=(vis===0&&term)?'block':'none';
+}
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('copy',e=>e.preventDefault());
 </script>
