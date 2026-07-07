@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB2_H — Fire Safety, LSA &amp; FSS Code (Backlog H) | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;
+--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);}
+a{color:var(--teal-dark);}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);
+display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;}
+.topbar .logo{width:28px;height:28px;background:var(--teal);border-radius:6px;color:#fff;display:flex;
+align-items:center;justify-content:center;font-weight:700;font-size:.8rem;}
+.topbar .site{font-weight:600;font-size:.95rem;}
+.topbar nav{margin-left:auto;display:flex;gap:1rem;font-size:.85rem;}
+.page-header{background:var(--navy);color:#fff;padding:1.4rem 1rem;}
+.page-header .badge{display:inline-block;background:var(--teal);padding:.15rem .6rem;border-radius:4px;
+font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.5rem;}
+.page-header h1{margin:.2rem 0;font-size:1.4rem;}
+.page-header p{margin:.2rem 0 0;color:#cbd5e1;font-size:.9rem;max-width:760px;}
+.header-meta{margin-top:.7rem;display:flex;gap:1rem;flex-wrap:wrap;font-size:.75rem;color:#94a3b8;}
+.controls-bar{position:sticky;top:48px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);
+padding:.6rem 1rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;}
+.controls-bar input{flex:1;min-width:160px;padding:.45rem .7rem;border:1px solid var(--grey-border);
+border-radius:6px;font-size:.85rem;}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;padding:.35rem .7rem;border-radius:20px;
+font-size:.75rem;cursor:pointer;color:var(--grey-text);}
+.filter-btn.active{background:var(--teal-light);border-color:var(--teal);color:var(--teal-dark);font-weight:600;}
+#q-count-label{font-size:.75rem;color:var(--grey-text);margin-left:auto;}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:1.2rem;max-width:1100px;margin:0 auto;padding:1rem;}
+.sidebar{position:sticky;top:100px;align-self:start;font-size:.82rem;max-height:80vh;overflow:auto;}
+.sidebar .toc-link{display:block;padding:.3rem .5rem;border-radius:5px;color:var(--grey-text);
+text-decoration:none;border-left:3px solid transparent;}
+.sidebar .toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:600;}
+.sidebar hr{border:none;border-top:1px solid var(--grey-border);margin:.7rem 0;}
+.sidebar .upcoming{color:var(--grey-text);font-size:.75rem;font-style:italic;}
+.section-head{display:flex;align-items:center;gap:.5rem;margin:1.4rem 0 .6rem;}
+.section-head h2{font-size:1.05rem;margin:0;}
+.sec-count{font-size:.7rem;background:var(--grey-bg);color:var(--grey-text);padding:.15rem .5rem;border-radius:10px;}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:.8rem;overflow:hidden;}
+.q-header{display:flex;gap:.7rem;align-items:flex-start;padding:.8rem 1rem;cursor:pointer;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;
+display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-weight:600;font-size:.95rem;}
+.q-tags{margin-top:.35rem;display:flex;gap:.35rem;flex-wrap:wrap;}
+.q-tag{font-size:.65rem;background:var(--teal-light);color:var(--teal-dark);padding:.1rem .5rem;border-radius:10px;}
+.q-chevron{flex:none;width:20px;height:20px;transition:transform .2s;stroke:var(--grey-text);}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 1rem 1rem;}
+.q-card.open .q-answer{display:block;}
+.practice-block{background:var(--teal-light);border-left:4px solid var(--teal);padding:.6rem .8rem;
+border-radius:6px;margin:.5rem 0;font-size:.88rem;}
+.practice-block strong{color:var(--teal-dark);}
+.answer-body{font-family:Georgia,serif;font-size:.92rem;line-height:1.55;}
+.answer-body h4{font-family:'Segoe UI',sans-serif;font-size:.72rem;text-transform:uppercase;
+letter-spacing:.05em;color:var(--teal-dark);margin:1rem 0 .3rem;}
+.answer-body ul,.answer-body ol{margin:.3rem 0;padding-left:1.2rem;}
+.answer-body p{margin:.4rem 0;}
+.formula{font-family:monospace;background:var(--grey-bg);padding:.5rem .7rem;border-radius:6px;display:inline-block;}
+.reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:.7rem .9rem;margin:.8rem 0 .5rem;font-size:.82rem;}
+.reg-box-title{font-weight:700;color:#fff;margin-bottom:.4rem;font-size:.78rem;}
+.reg-item{display:flex;gap:.6rem;padding:.2rem 0;border-top:1px solid #1e293b;flex-wrap:wrap;min-width:0;}
+.reg-item:first-of-type{border-top:none;}
+.reg-code{color:var(--orange);font-family:monospace;font-size:.78rem;flex:none;word-break:break-all;}
+.reg-desc{color:#94a3b8;min-width:0;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);padding:.6rem .8rem;
+border-radius:6px;font-size:.85rem;}
+details.deep-dive{margin-top:.6rem;border:1px dashed var(--grey-border);border-radius:8px;padding:.4rem .7rem;}
+details.deep-dive summary{cursor:pointer;font-size:.8rem;font-weight:600;color:var(--teal-dark);}
+details.deep-dive .dd-item{margin:.5rem 0;font-size:.83rem;}
+details.deep-dive .dd-item b{color:var(--ink);}
+.q-footer{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;padding:.5rem 1rem;
+border-top:1px solid var(--grey-border);background:var(--grey-bg);font-size:.7rem;color:var(--grey-text);
+min-width:0;}
+.correction-link{word-break:break-all;min-width:0;}
+.q-version{flex:none;}
+#no-results{display:none;text-align:center;padding:2rem;color:var(--grey-text);}
+.page-footer{max-width:1100px;margin:1rem auto;padding:1rem;font-size:.78rem;color:var(--grey-text);
+border-top:1px solid var(--grey-border);}
+.cheat-sheet{max-width:1100px;margin:1.5rem auto;padding:0 1rem;}
+.cheat-sheet h2{font-size:1.1rem;color:var(--teal-dark);}
+.flow{display:flex;flex-direction:column;gap:0;align-items:stretch;margin:.6rem 0;}
+.flow .fbox{background:var(--navy);color:#fff;padding:.5rem .8rem;border-radius:6px;font-size:.8rem;text-align:center;}
+.flow .farrow{text-align:center;color:var(--teal);font-size:1rem;line-height:1.2;}
+.cue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem;margin:.7rem 0;}
+.cue-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;padding:.6rem .8rem;font-size:.82rem;}
+.cue-card b{color:var(--teal-dark);display:block;font-size:.75rem;text-transform:uppercase;margin-bottom:.3rem;}
+.recall-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:.6rem 0;}
+.recall-table th,.recall-table td{border:1px solid var(--grey-border);padding:.4rem .6rem;text-align:left;}
+.recall-table th{background:var(--grey-bg);}
+@media(max-width:760px){.main-layout{grid-template-columns:1fr;}.sidebar{position:static;max-height:none;}}
+
+.watermark{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.04;
+background:repeating-linear-gradient(-45deg,#000 0,#000 1px,transparent 1px,transparent 120px);}
+body{user-select:none;}
+</style>
+</head>
+<body><script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+<div class="watermark"></div>
+<div class="topbar">
+  <div class="logo">MI</div>
+  <div class="site">Marine Intelligence Weekly</div>
+  <nav><a href="https://marineintelligenceweekly.com">Home</a><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a><a href="mailto:contactus@marineintelligenceweekly.com">Contact</a></nav>
+</div>
+<div class="page-header">
+  <span class="badge">QB2_H · Backlog · v1.0</span>
+  <h1>QB2_H — Fire Safety, LSA &amp; FSS Code (Backlog H)</h1>
+  <p>Reconciled backlog questions on the FSS/FTP Code and container firefighting systems (water lance vs HydroPen) — Kochi MMD oral prep.</p>
+  <div class="header-meta"><span>2 Questions</span><span>Kochi MMD Oral Prep</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span></div>
+</div>
+<div class="controls-bar">
+  <input id="search-input" placeholder="Search questions…" oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button><button class="filter-btn" onclick="filterTag('10',this)">10</button><button class="filter-btn" onclick="filterTag('cargo',this)">CARGO</button><button class="filter-btn" onclick="filterTag('ch',this)">CH</button><button class="filter-btn" onclick="filterTag('code',this)">CODE</button><button class="filter-btn" onclick="filterTag('container',this)">CONTAINER</button><button class="filter-btn" onclick="filterTag('deck',this)">DECK</button><button class="filter-btn" onclick="filterTag('fire',this)">Fire Safety</button><button class="filter-btn" onclick="filterTag('firefighting',this)">FIREFIGHTING</button><button class="filter-btn" onclick="filterTag('fss',this)">FSS</button><button class="filter-btn" onclick="filterTag('ii-2/10',this)">II-2/10</button><button class="filter-btn" onclick="filterTag('solas',this)">SOLAS</button>
+  <span id="q-count-label">Showing 2 of 2</span>
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <a class="toc-link" href="#q1">Q1. What do the FSS Code and FTP Code cont…</a><a class="toc-link" href="#q2">Q2. Difference between water lance and 'hy…</a>
+    <hr>
+    <div class="upcoming">Renumbering into final sequence deferred until all backlog letters are complete.</div>
+  </div>
+  <div id="q-feed">
+<div class="section-head"><h2>🔥 Fire Safety, LSA &amp; FSS Code</h2><span class="sec-count">2 questions</span></div><div class="q-card" id="q1" data-tags="fire solas" data-search="what do the fss code and ftp code contain? fire solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What do the FSS Code and FTP Code contain?</div>
+      <div class="q-tags"><span class="q-tag">fire</span><span class="q-tag">solas</span><span class="q-tag examiner-tag">Examiner: Nair</span></div>
+    </div>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer</strong>The FSS Code is the mandatory 15-chapter engineering-specification companion to SOLAS Ch II-2, covering every fixed fire-fighting/detection system from portable extinguishers to inert gas systems. The FTP Code specifies the laboratory test methods and type-approval procedures used to certify the materials/systems SOLAS II-2 and the FSS Code require.</div>
+    <div class="practice-block"><strong>60-Second Answer</strong>The FSS Code (Res MSC.98(73)) was adopted in December 2000 to provide engineering standards for fire safety systems required by SOLAS Ch II-2, made mandatory and in force 1 July 2002. It applies to ships built after that date, in 15 chapters: General; International Shore Connections; Personnel Protection; Fire Extinguishers; Fixed Gas Fire-Extinguishing Systems; Fixed Foam Systems; Fixed Pressure Water-Spraying/Water Mist Systems; Automatic Sprinkler/Detection/Alarm Systems; Fixed Fire Detection and Alarm Systems; Sample Extraction Smoke Detection; Low Location Lighting; Fixed Emergency Fire Pumps; Means of Escape; Fixed Deck Foam Systems (tankers); Inert Gas Systems (tankers). The FTP Code (2010, Res MSC.307(88), in force 1 July 2012) is the companion instrument defining laboratory test methods, type-approval procedures, and pass/fail criteria — e.g. the standard fire test defining A-60/A-30/A-15/A-0 class divisions — for materials referenced in SOLAS II-2 and the FSS Code.</div>
+    <div class="answer-body">
+<h4>FSS Code — Purpose and Structure</h4>
+<p>The International Code for Fire Safety Systems, Res MSC.98(73), gives the engineering specification for fire safety systems SOLAS Ch II-2 requires in general terms. In force 1 July 2002, mandatory for ships built after that date.</p>
+<h4>FSS Code — 15 Chapters</h4>
+<ol>
+<li>General (definitions)</li><li>International Shore Connections</li><li>Personnel Protection</li>
+<li>Fire Extinguishers</li><li>Fixed Gas Fire-Extinguishing Systems</li><li>Fixed Foam Fire-Extinguishing Systems</li>
+<li>Fixed Pressure Water-Spraying / Water Mist Systems</li><li>Automatic Sprinkler, Fire Detection &amp; Alarm Systems</li>
+<li>Fixed Fire Detection &amp; Fire Alarm Systems</li><li>Sample Extraction Smoke Detection Systems</li>
+<li>Low Location Lighting Systems</li><li>Fixed Emergency Fire Pumps</li><li>Arrangement of Means of Escape</li>
+<li>Fixed Deck Foam Systems (tankers)</li><li>Inert Gas Systems (tankers)</li>
+</ol>
+<h4>FTP Code — Purpose</h4>
+<p>The International Code for Application of Fire Test Procedures (2010, Res MSC.307(88), in force 1 July 2012) specifies standardised laboratory fire-test methods and type-approval procedures for materials/equipment referenced by SOLAS II-2 and the FSS Code — e.g. the standard fire test defining A-60/A-30/A-15/A-0 divisions by time-to-temperature-rise, and approval for low-flame-spread surfaces, fire doors/dampers.</p>
+<p><strong>Standard fire test — A-60 division pass criteria:</strong> tested against the standard time-temperature curve (furnace reaching approximately 945°C at 60 minutes) for 60 minutes' duration. On the unexposed side, the <strong>average</strong> temperature rise must not exceed <strong>140°C (250°F)</strong> above ambient, and no <strong>single point</strong> (including any joint) may rise more than <strong>180°C (325°F)</strong> above ambient. The same dual-limit logic (average + single-point) applies to A-30/A-15/A-0 at their respective durations.</p>
+<h4>Relationship</h4>
+<p>SOLAS II-2 sets the goal ("this space shall have fire detection"); the FSS Code sets the engineering specification for how the system is built/installed; the FTP Code sets how the materials/components used are tested and type-approved before fitting.</p>
+</div>
+    <div class="extra-block"><h4>Key Numbers / Regs</h4><ul><li>FSS Code: MSC.98(73), in force 1 Jul 2002, 15 chapters</li><li>FTP Code: MSC.307(88) (2010 ed.), in force 1 Jul 2012</li><li>Class A-60: average ≤140°C (250°F) / single point ≤180°C (325°F) temp rise, unexposed side, 60 min</li><li>FSS Ch 15 = Inert Gas Systems (tankers only)</li></ul></div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">IMO RES MSC.98(73)</span><span class="reg-desc">FSS Code</span></div><div class="reg-item"><span class="reg-code">IMO RES MSC.99(73)</span><span class="reg-desc">SOLAS amendment making FSS Code mandatory</span></div><div class="reg-item"><span class="reg-code">IMO RES MSC.307(88)</span><span class="reg-desc">2010 FTP Code</span></div><div class="reg-item"><span class="reg-code">SOLAS CH II-2</span><span class="reg-desc">Parent regulation both Codes support</span></div><div class="reg-item"><span class="reg-code">SOLAS CH II-2/REG 10.7.3</span><span class="reg-desc">Mandatory water mist lance, ships built on/after 1 Jan 2016 carrying containers on/above weather deck</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Nair wants chapter/resolution numbers, not just 'fire safety systems in general'. Name both Codes with resolution numbers and in-force dates, list a few chapters by number, and note Ch 14 (deck foam) and Ch 15 (inert gas) are tanker-specific and don't apply to your container vessel.</div>
+    <div class="source-note"><strong>Source confidence:</strong> Confirm current Unified Interpretations of SOLAS II-2/FSS/FTP Codes (last updated May 2024 per MSC) haven't been further revised before oral.</div>
+    <div class="source-note"><strong>Applies to Maersk A/S container vessel:</strong> Fully applicable — every Maersk A/S container vessel is subject to SOLAS II-2, FSS Code Ch 1–13, and FTP-tested materials throughout accommodation/machinery spaces. Ch 14–15 (tanker-specific) do not apply.</div>
+    
+<details class="deep-dive">
+<summary>Deep-Dive — CE Relevance, Traps, Failures, Numbers, Casualty, Examiner Chain, On My Vessel</summary>
+<h5>Chief Engineer Relevance</h5><p>As CE you're the person most likely asked which FSS chapter governs a specific PMS item (Ch 8/9 fire detection panel, Ch 12 emergency fire pump) — knowing the chapter number demonstrates regulatory grounding, not just equipment familiarity.</p>
+<h5>Trap Questions</h5><p>Q: 'Which FSS chapters don't apply to your container vessel?' A: Ch 14 (deck foam) and Ch 15 (inert gas) — both tanker-specific.<br>Q: 'Does FTP test the system or the material?' A: Primarily materials/components — it's a test/type-approval standard, not a system-design spec (that's the FSS Code's role).</p>
+<h5>Common CE Failures</h5><p>Confusing FSS (system spec) with FTP (material test/approval) as the same thing; not knowing either resolution number; missing that Ch 14–15 don't apply to container ships.</p>
+<h5>Numbers to Memorise</h5><p>MSC.98(73) = FSS Code; MSC.307(88) = 2010 FTP Code; 1 Jul 2002 / 1 Jul 2012 in-force dates; 15 = FSS chapters; A-60 = average ≤140°C / single point ≤180°C, 60 min.</p>
+<h5>Casualty Link</h5><p>The 1996 SOLAS fire safety amendments (predecessor framework) followed passenger/cargo ship fires in the early 1990s, including the Scandinavian Star fire (1990) — a driver for the structured code-based approach.</p>
+<h5>Examiner Chain</h5><p>SOLAS II-2 functional requirements → FSS Code (by chapter) → FTP Code (test/approval) → Class A division fire test → applicable vs tanker-specific chapters → Ch 15 Inert Gas cross-reference.</p>
+<h5>On My Vessel (Maersk A/S container, 2-stroke ME)</h5><p>FSS Code systems directly fitted and maintained on my vessel (Ch 1–13 apply; Ch 14 deck foam and Ch 15 inert gas are tanker-specific and do not apply): fixed CO2 system (Ch 5) as the primary extinguishing system for the engine room, sized to deliver a CO2 quantity equivalent to 35% of the gross volume of the largest engine room space (40% where boilers are fitted), dischargeable within 2 minutes for the first 85% of the required quantity; a fixed CO2 flooding system also protects the cargo holds per SOLAS II-2/Reg 10.7 and FSS Code Ch 5, sharing the same central CO2 room/bottle bank as the engine room system via separate distribution manifolds; fixed fire detection and alarm system (Ch 9) covering accommodation, machinery spaces, and cargo hold smoke sampling; and a fixed emergency fire pump (Ch 12) located independently of the main engine room. For container fires specifically: SOLAS II-2/10.7.3 (ships built on/after 1 January 2016 designed to carry containers on/above the weather deck) mandates at least one water mist lance onboard, capable of penetrating a container wall to inject water mist directly into a burning stack — my vessel carries the branded 'Hydropen' system, which satisfies this statutory requirement directly, not merely as a supplementary tool. Ships built before 2016 are recommended, though not mandated, to carry the same equipment per flag administration guidance.</p>
+</details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Reconciled Batch, QQ1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">v1.1 · Finalised — pending Nixon final sign-off before gating</span>
+  </div>
+</div>
+<div class="q-card" id="q2" data-tags="fss code ch 10 deck cargo fire container firefighting solas ii-2/10" data-search="difference between water lance and &#x27;hydropen&#x27; for internal container firefighting, and use of water monitors. fss code ch 10 deck cargo fire container firefighting solas ii-2/10">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text" itemprop="name">Difference between water lance and 'hydropen' for internal container firefighting, and use of water monitors.</div>
+      <div class="q-tags"><span class="q-tag">fss code ch 10</span><span class="q-tag">deck cargo fire</span><span class="q-tag">container firefighting</span><span class="q-tag">solas ii-2/10</span><span class="q-tag examiner-tag">Examiner: Simon</span></div>
+      <meta itemprop="description" content="The conventional water lance is a manually driven, physical probe used to pierce a container wall to discharge water inside, requiring high physical effort">
+    </div>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer</strong><p>The conventional water lance is a manually driven, physical probe used to pierce a container wall to discharge water inside, requiring high physical effort and proximity to the fire. In contrast, the HydroPen system is an automated, water-pressure-driven drilling and spraying unit that hooks onto the container corner casting, ensuring safer, hands-free penetration and optimal mist distribution. On vessels with high-cube stacks, mobile water monitors are deployed on deck to provide continuous boundary cooling and suppress external thermal radiation.</p></div>
+    <div class="practice-block"><strong>60-Second Answer</strong><p>Under SOLAS Regulation II-2/10.7.3 (amended by MSC.365(93) for vessels built after January 1, 2016, designed to carry containers on deck), ships must carry specific equipment for internal container firefighting. The traditional water lance requires crew members to physically hammer or force a hardened nozzle through the container outer skin, which is structurally hazardous and highly labor-intensive under intense heat. The HydroPen system—complying with these modern mandates—utilizes the fire main’s hydraulic pressure to automatically drill a dual-action rotor nozzle through the container steel, transitioning seamlessly from drilling to a 360-degree extinguishing mist without requiring continuous manual assistance. Additionally, SOLAS requires at least two mobile water monitors for vessels with a beam over 30 meters to ensure sustained, high-volume external cooling of adjacent stacks.</p></div>
+    <div class="answer-body"><h4>Governing Instrument</h4>
+<ul>
+<li><strong>SOLAS Regulation II-2/10.7.3:</strong> Mandates specialized firefighting equipment for ships designed to carry containers on or above the weather deck (effective for constructs post-1 January 2016).</li>
+<li><strong>ISO 1496-1:</strong> Standards governing container structural integrity, which firefighting tools must penetrate.</li>
+</ul>
+<h4>Definition or Core Concept</h4>
+<ul>
+<li><strong>Water Lance:</strong> A traditional manual penetration tool featuring a hardened steel piercing tip, an impact surface, and a perforated lance body connected to a standard fire hose. It relies entirely on kinetic energy (sledgehammer blows) to breach the container skin.</li>
+<li><strong>HydroPen System:</strong> An advanced, semi-automatic container firefighting system. It is mounted onto the container's corner castings or side pockets using a telescopic pole and uses the pressure of the delivered fire main water (typically 5–7 bar) to drive an internal turbine. This turbine drills a hole through the steel plate and automatically switches to an internal mist-spray pattern once penetration is complete.</li>
+<li><strong>Mobile Water Monitors:</strong> Portable, high-capacity water monitors (minimum capacity 60 m³/h or 1,000 l/min) pinned to the deck to provide continuous, unmanned water screens or boundary cooling over elevated container tiers.</li>
+</ul>
+<h4>Key Requirements or Procedure</h4>
+<ul>
+<li><strong>Deploying a Manual Water Lance:</strong> 1. Identify the container boundary hotspot using a thermal imaging camera.<ol>
+<li>Position crew on adjacent lashing bridges with full PPE/SCBA.</li>
+<li>Physically drive the lance through the upper section of the container side panel using an engineering hammer.</li>
+<li>Charge the line to flood the interior.</li>
+</ol>
+</li>
+<li><strong>Deploying the HydroPen System:</strong><ol>
+<li>Attach the HydroPen unit to the rigging pole and align it with the targeted container's side wall or door.</li>
+<li>Lift and secure the unit using the container's structural lips/castings.</li>
+<li>Open the fire main hydrants. The water pressure activates the internal drill bit, breaching the container wall within seconds.</li>
+<li>The unit locks in place, shifting automatically from drilling mode to a highly atomized extinguishing spray.</li>
+</ol>
+</li>
+<li><strong>Deploying Mobile Water Monitors:</strong><ol>
+<li>Position the monitor on the deck plating or lashing bridge walkways facing the affected bay.</li>
+<li>Secure the foundation using integrated twistlocks or ratchet straps to withstand the nozzle reaction force.</li>
+<li>Connect dual supply lines from separate fire main hydrants to ensure adequate volumetric flow.</li>
+<li>Adjust elevation and oscillation to cover the upper tiers, allowing crew to retreat to a safe distance.</li>
+</ol>
+</li>
+</ul>
+<h4>Any Distinguishing Trap Point</h4>
+<ul>
+<li><strong>The Lashing Bridge Clearance Trap:</strong> The manual water lance requires significant swinging room and physical leverage. In narrow lashing bridges or high-wind environments, it is incredibly difficult and dangerous to use effectively. </li>
+<li><strong>Pressure Drops:</strong> Both the HydroPen and mobile water monitors are highly sensitive to fire main pressure drops. If the emergency fire pump is running alone or if too many hoses are cracked simultaneously, the HydroPen may fail to drill, and the monitors will short-fall, losing their vertical reach on high-cube stacks.</li>
+</ul></div>
+    <div class="extra-block"><p>Running a mobile water monitor simultaneously with multiple fire hoses can deplete the fire main pressure below the 4.0 bar minimum required at the highest hydrant. Always ensure the main fire pumps are running in parallel or the emergency fire pump is fully isolated to supply designated lines if structural boundaries are breached.</p></div>
+    <div class="extra-block"><h4>Key Numbers / Regs</h4><ul>
+<li>SOLAS Reg II-2/10.7.3: Mandates container firefighting equipment for ships carrying containers on deck.</li>
+<li>60 m³/h (1,000 Liters/min): Minimum required discharge capacity for each mobile water monitor under SOLAS.</li>
+<li>4.0 Bar: Minimum operational pressure required at the furthest deck hydrant on a large container vessel during multi-line operations.</li>
+</ul></div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><ol>
+<li>SOLAS Regulation II-2/10.7.3 — Fire-extinguishing arrangements in cargo spaces (On-deck container requirements).</li>
+<li>MSC.1/Circ.1472 — Revised guidelines for the design, performance, and testing of mobile water monitors.</li>
+<li>MSC.365(93) — Amendments to SOLAS Chapter II-2 regarding enhanced container firefighting measures.</li>
+<li>ISO 1496-1 — Series 1 Freight Containers — Specification and testing (Structural baseline for penetration).</li>
+</ol></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> <p>Kochi MMD (Examiner Simon): Simon focuses heavily on operational crew safety and the structural realities of high-stack container vessels. When explaining the difference, do not just give a textbook definition. Start by emphasizing the <strong>safety profile</strong>: <em>“Sir, the primary difference is crew exposure. The manual lance forces my crew directly into the smoke plum with heavy tools, while the HydroPen allows an automated, hands-free breach.”</em> Mention lashing bridge structural constraints—he respects candidates who demonstrate real deck awareness over theoretical knowledge.</p></div>
+    <div class="source-note"><strong>Source confidence:</strong> <p>High confidence. Fully aligned with updated SOLAS Chapter II-2 text (post-2016 amendments) and standard commercial specifications for the HydroPen system and portable deck monitors.</p></div>
+    <div class="source-note"><strong>Applies to Maersk A/S container vessel:</strong> <p>Directly applicable. Essential technical knowledge for a Maersk A/S large container vessel where high-cube container stacks (often 7 to 9 high on deck) restrict manual intervention and demand robust mobile monitoring alongside specialized penetration tools.</p></div>
+    <details class="deep-dive"><summary>Deep-Dive — CE Relevance, Traps, Failures, Numbers, Casualty, Examiner Chain, On My Vessel</summary></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QQ2 Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">v1.0 · Finalised — pending Nixon final sign-off before gating</span>
+  </div>
+</div>
+</div>
+
+<div class="cheat-section">
+<div class="cheat-card">
+<h3 style="font-size:15px;color:var(--navy);margin-bottom:10px;">🧠 QB2 — Fire Safety, LSA &amp; FSS Code — Retrieval Cheat Sheet</h3>
+<p style="font-size:12px;color:var(--grey-text);margin-bottom:10px;">Tap each card to reveal the answer. Test recall before checking — active retrieval beats re-reading.</p>
+<div class="flip-card" onclick="toggleFlip(this)"><div class="front">▸ FSS Code — how many chapters, and which two don't apply to container ships?</div><div class="back">15 chapters total. Ch 14 (deck foam) and Ch 15 (inert gas) are tanker-specific — don't apply.</div></div><div class="flip-card" onclick="toggleFlip(this)"><div class="front">▸ A-60 division pass criteria (both numbers)?</div><div class="back">Average ≤140°C (250°F) AND single point ≤180°C (325°F) temperature rise on the unexposed side, 60 minutes.</div></div><div class="flip-card" onclick="toggleFlip(this)"><div class="front">▸ What SOLAS regulation mandates the water mist lance / Hydropen?</div><div class="back">SOLAS II-2/10.7.3, added by MSC.365(93) — mandatory for ships built on/after 1 Jan 2016 designed to carry containers on/above the weather deck.</div></div><div class="flip-card" onclick="toggleFlip(this)"><div class="front">▸ Mobile water monitor capacity and count rule?</div><div class="back">Min 1,000 L/min (60 m³/h) each. Breadth &lt;30m → 2 monitors; breadth ≥30m → 4 monitors.</div></div>
+<h4 style="font-size:12px;color:var(--teal-dark);text-transform:uppercase;margin:14px 0 6px;">Regulatory Layers</h4><div class="flow-step"><div class="flow-num">1</div><div class="flow-text">SOLAS II-2 sets the goal ("this space needs fire detection")</div></div><div class="flow-step"><div class="flow-num">2</div><div class="flow-text">FSS Code (Ch 1-15) sets the engineering spec for how</div></div><div class="flow-step"><div class="flow-num">3</div><div class="flow-text">FTP Code sets how materials/components are lab-tested &amp; type-approved</div></div><div class="flow-step"><div class="flow-num">4</div><div class="flow-text">Container-specific layer (Reg 10.7.3): water mist lance + mobile monitors, ships built ≥2016</div></div>
+</div>
+  </div>
+</div>
+<div id="no-results">No matching questions.</div>
+
+<div class="page-footer">
+  Compiled by Nixon Antony, 2/E, Maersk A/S. For corrections email <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>.
+  This material is for MEO Class 1 oral exam preparation only and does not substitute official IMO/DG Shipping/Class publications. Verify current regulations before relying on any reference.
+</div>
+<script>
+function toggleCard(header){const card=header.closest('.q-card');card.classList.toggle('open');}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');applyFilters();}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();
+const cards=document.querySelectorAll('.q-card');let vis=0;
+cards.forEach(card=>{const tags=(card.dataset.tags||'').toLowerCase();const text=card.innerText.toLowerCase();
+const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+card.style.display=show?'':'none';if(show)vis++;});
+document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+document.getElementById('no-results').style.display=vis===0?'block':'none';}
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;
+document.querySelectorAll('.toc-link').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});}});},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+</script>
+</body>
+</html>

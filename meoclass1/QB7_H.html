@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB7_H — GHG, CII &amp; Decarbonisation (Backlog H) | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;
+--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);}
+a{color:var(--teal-dark);}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);
+display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;}
+.topbar .logo{width:28px;height:28px;background:var(--teal);border-radius:6px;color:#fff;display:flex;
+align-items:center;justify-content:center;font-weight:700;font-size:.8rem;}
+.topbar .site{font-weight:600;font-size:.95rem;}
+.topbar nav{margin-left:auto;display:flex;gap:1rem;font-size:.85rem;}
+.page-header{background:var(--navy);color:#fff;padding:1.4rem 1rem;}
+.page-header .badge{display:inline-block;background:var(--teal);padding:.15rem .6rem;border-radius:4px;
+font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.5rem;}
+.page-header h1{margin:.2rem 0;font-size:1.4rem;}
+.page-header p{margin:.2rem 0 0;color:#cbd5e1;font-size:.9rem;max-width:760px;}
+.header-meta{margin-top:.7rem;display:flex;gap:1rem;flex-wrap:wrap;font-size:.75rem;color:#94a3b8;}
+.controls-bar{position:sticky;top:48px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);
+padding:.6rem 1rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;}
+.controls-bar input{flex:1;min-width:160px;padding:.45rem .7rem;border:1px solid var(--grey-border);
+border-radius:6px;font-size:.85rem;}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;padding:.35rem .7rem;border-radius:20px;
+font-size:.75rem;cursor:pointer;color:var(--grey-text);}
+.filter-btn.active{background:var(--teal-light);border-color:var(--teal);color:var(--teal-dark);font-weight:600;}
+#q-count-label{font-size:.75rem;color:var(--grey-text);margin-left:auto;}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:1.2rem;max-width:1100px;margin:0 auto;padding:1rem;}
+.sidebar{position:sticky;top:100px;align-self:start;font-size:.82rem;max-height:80vh;overflow:auto;}
+.sidebar .toc-link{display:block;padding:.3rem .5rem;border-radius:5px;color:var(--grey-text);
+text-decoration:none;border-left:3px solid transparent;}
+.sidebar .toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:600;}
+.sidebar hr{border:none;border-top:1px solid var(--grey-border);margin:.7rem 0;}
+.sidebar .upcoming{color:var(--grey-text);font-size:.75rem;font-style:italic;}
+.section-head{display:flex;align-items:center;gap:.5rem;margin:1.4rem 0 .6rem;}
+.section-head h2{font-size:1.05rem;margin:0;}
+.sec-count{font-size:.7rem;background:var(--grey-bg);color:var(--grey-text);padding:.15rem .5rem;border-radius:10px;}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:.8rem;overflow:hidden;}
+.q-header{display:flex;gap:.7rem;align-items:flex-start;padding:.8rem 1rem;cursor:pointer;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;
+display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-weight:600;font-size:.95rem;}
+.q-tags{margin-top:.35rem;display:flex;gap:.35rem;flex-wrap:wrap;}
+.q-tag{font-size:.65rem;background:var(--teal-light);color:var(--teal-dark);padding:.1rem .5rem;border-radius:10px;}
+.q-chevron{flex:none;width:20px;height:20px;transition:transform .2s;stroke:var(--grey-text);}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 1rem 1rem;}
+.q-card.open .q-answer{display:block;}
+.practice-block{background:var(--teal-light);border-left:4px solid var(--teal);padding:.6rem .8rem;
+border-radius:6px;margin:.5rem 0;font-size:.88rem;}
+.practice-block strong{color:var(--teal-dark);}
+.answer-body{font-family:Georgia,serif;font-size:.92rem;line-height:1.55;}
+.answer-body h4{font-family:'Segoe UI',sans-serif;font-size:.72rem;text-transform:uppercase;
+letter-spacing:.05em;color:var(--teal-dark);margin:1rem 0 .3rem;}
+.answer-body ul,.answer-body ol{margin:.3rem 0;padding-left:1.2rem;}
+.answer-body p{margin:.4rem 0;}
+.formula{font-family:monospace;background:var(--grey-bg);padding:.5rem .7rem;border-radius:6px;display:inline-block;}
+.reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:.7rem .9rem;margin:.8rem 0 .5rem;font-size:.82rem;}
+.reg-box-title{font-weight:700;color:#fff;margin-bottom:.4rem;font-size:.78rem;}
+.reg-item{display:flex;gap:.6rem;padding:.2rem 0;border-top:1px solid #1e293b;flex-wrap:wrap;min-width:0;}
+.reg-item:first-of-type{border-top:none;}
+.reg-code{color:var(--orange);font-family:monospace;font-size:.78rem;flex:none;word-break:break-all;}
+.reg-desc{color:#94a3b8;min-width:0;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);padding:.6rem .8rem;
+border-radius:6px;font-size:.85rem;}
+details.deep-dive{margin-top:.6rem;border:1px dashed var(--grey-border);border-radius:8px;padding:.4rem .7rem;}
+details.deep-dive summary{cursor:pointer;font-size:.8rem;font-weight:600;color:var(--teal-dark);}
+details.deep-dive .dd-item{margin:.5rem 0;font-size:.83rem;}
+details.deep-dive .dd-item b{color:var(--ink);}
+.q-footer{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;padding:.5rem 1rem;
+border-top:1px solid var(--grey-border);background:var(--grey-bg);font-size:.7rem;color:var(--grey-text);
+min-width:0;}
+.correction-link{word-break:break-all;min-width:0;}
+.q-version{flex:none;}
+#no-results{display:none;text-align:center;padding:2rem;color:var(--grey-text);}
+.page-footer{max-width:1100px;margin:1rem auto;padding:1rem;font-size:.78rem;color:var(--grey-text);
+border-top:1px solid var(--grey-border);}
+.cheat-sheet{max-width:1100px;margin:1.5rem auto;padding:0 1rem;}
+.cheat-sheet h2{font-size:1.1rem;color:var(--teal-dark);}
+.flow{display:flex;flex-direction:column;gap:0;align-items:stretch;margin:.6rem 0;}
+.flow .fbox{background:var(--navy);color:#fff;padding:.5rem .8rem;border-radius:6px;font-size:.8rem;text-align:center;}
+.flow .farrow{text-align:center;color:var(--teal);font-size:1rem;line-height:1.2;}
+.cue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem;margin:.7rem 0;}
+.cue-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;padding:.6rem .8rem;font-size:.82rem;}
+.cue-card b{color:var(--teal-dark);display:block;font-size:.75rem;text-transform:uppercase;margin-bottom:.3rem;}
+.recall-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:.6rem 0;}
+.recall-table th,.recall-table td{border:1px solid var(--grey-border);padding:.4rem .6rem;text-align:left;}
+.recall-table th{background:var(--grey-bg);}
+@media(max-width:760px){.main-layout{grid-template-columns:1fr;}.sidebar{position:static;max-height:none;}}
+
+.watermark{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.04;
+background:repeating-linear-gradient(-45deg,#000 0,#000 1px,transparent 1px,transparent 120px);}
+body{user-select:none;}
+</style>
+</head>
+<body><script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+<div class="watermark"></div>
+<div class="topbar">
+  <div class="logo">MI</div>
+  <div class="site">Marine Intelligence Weekly</div>
+  <nav><a href="https://marineintelligenceweekly.com">Home</a><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a><a href="mailto:contactus@marineintelligenceweekly.com">Contact</a></nav>
+</div>
+<div class="page-header">
+  <span class="badge">QB7_H · Backlog · v1.0</span>
+  <h1>QB7_H — GHG, CII &amp; Decarbonisation (Backlog H)</h1>
+  <p>Reconciled backlog question on IGF Code low-flashpoint fuel safety measures — Kochi MMD oral prep.</p>
+  <div class="header-meta"><span>1 Questions</span><span>Kochi MMD Oral Prep</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span></div>
+</div>
+<div class="controls-bar">
+  <input id="search-input" placeholder="Search questions…" oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button><button class="filter-btn" onclick="filterTag('ghg',this)">GHG / CII</button><button class="filter-btn" onclick="filterTag('machinery',this)">Machinery</button>
+  <span id="q-count-label">Showing 1 of 1</span>
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <a class="toc-link" href="#q1">Q1. What safety measures are required for …</a>
+    <hr>
+    <div class="upcoming">Renumbering into final sequence deferred until all backlog letters are complete.</div>
+  </div>
+  <div id="q-feed">
+<div class="section-head"><h2>🌍 GHG, CII &amp; Decarbonisation — Reconciled Addition</h2><span class="sec-count">1 question</span></div>
+<div class="q-card" id="q1" data-tags="ghg machinery" data-search="what safety measures are required for using low flash point fuel onboard? ghg machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What safety measures are required for using low flash point fuel onboard?</div>
+      <div class="q-tags"><span class="q-tag">ghg</span><span class="q-tag">machinery</span><span class="q-tag examiner-tag">Examiner: Simon</span></div>
+    </div>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer</strong>Ships using gas or other low-flashpoint fuels (flashpoint below 60°C — LNG, methanol) must comply with the IGF Code, mandatory under SOLAS Ch II-1 Part G for ships built on/after 1 January 2017. It sets goal-based requirements for fuel containment, double-barrier piping, gas-safe machinery spaces, ventilation, gas/fire detection, and ESD systems.</div>
+    <div class="practice-block"><strong>60-Second Answer</strong>Ships using gases or other low-flashpoint fuels (flashpoint below 60°C, e.g. LNG and methanol) must comply with the IGF Code, made mandatory via SOLAS amendments — Part F provides an alternative-design methodology for machinery/electrical/fuel storage systems, and a new Part G requires ships built on/after 1 January 2017 to comply with the IGF Code, with related SOLAS II-2 fire-safety amendments. The Code aims to minimise risk to ship, crew and environment, taking a goal-based approach with functional requirements per section. Key measures: double-walled/double-barrier fuel piping in gas-safe machinery spaces; fuel tanks designed to contain a leak; mandatory gas and fire detection with automatic ESD on fuel supply; specified ventilation rates for machinery spaces and tank connection spaces; hazardous area zoning; bunkering safety procedures with PPE for cryogenic fuels; and STCW training requirements for gas-fuelled ship crew.</div>
+    <div class="answer-body">
+<h4>Governing Instrument</h4>
+<p>IGF Code, mandatory under SOLAS Ch II-1 Part G (new ships from 1 Jan 2017) and related SOLAS Ch II-2 fire safety amendments; the IGC Code applies instead for gas carriers using cargo as fuel.</p>
+<h4>Design Safety Measures</h4>
+<ul>
+<li><strong>Fuel containment:</strong> tanks designed for the specific fuel (cryogenic for LNG), protected against collision damage per IGF Code location requirements</li>
+<li><strong>Double-barrier / gas-safe machinery spaces:</strong> double-wall pipe-in-pipe or equivalent through machinery spaces, annular space leak-monitored; machinery space designed "gas-safe"</li>
+<li><strong>Ventilation:</strong> mandatory rates for fuel preparation rooms, tank connection spaces, any leak-accumulation space</li>
+<li><strong>Hazardous area classification:</strong> zoning around fuel tanks, bunker stations, vent outlets</li>
+</ul>
+<h4>Detection &amp; Emergency Systems</h4>
+<ul>
+<li>Fixed gas detection in machinery/tank connection spaces and ducts, wired to alarm and automatic ESD</li>
+<li>Fire detection integrated with SOLAS II-2, adapted for the fuel's fire characteristics (e.g. cryogenic pool fire for LNG)</li>
+<li>Emergency Shutdown (ESD) system — automatic isolation on gas leak/fire/loss of ventilation, plus manual pushbuttons</li>
+</ul>
+<h4>Operational &amp; Training Measures</h4>
+<ul>
+<li>Bunkering safety checklist (ship-shore/ship-ship), compatibility check, static electricity precautions</li>
+<li>PPE for cryogenic fuel handling</li>
+<li>STCW training/certification for gas-fuelled ship officers and crew</li>
+</ul>
+</div>
+    <div class="extra-block"><h4>Key Numbers / Regs</h4><ul><li>Flashpoint threshold defining 'low-flashpoint fuel': below 60°C</li><li>IGF Code mandatory: ships built on/after 1 January 2017</li><li>SOLAS II-1 Part F (methodology) / Part G (mandatory application)</li></ul></div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">IGF CODE</span><span class="reg-desc">Full goal-based safety requirements</span></div><div class="reg-item"><span class="reg-code">SOLAS CH II-1/PART F</span><span class="reg-desc">Alternative design/arrangements methodology</span></div><div class="reg-item"><span class="reg-code">SOLAS CH II-1/PART G</span><span class="reg-desc">Mandatory IGF Code application</span></div><div class="reg-item"><span class="reg-code">SOLAS CH II-2</span><span class="reg-desc">Fire protection/venting amendments for gas-fuelled ships</span></div><div class="reg-item"><span class="reg-code">STCW</span><span class="reg-desc">Gas-fuelled ship familiarisation/training requirements</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Simon expects the IGF Code name and SOLAS Part F/G split cited precisely — many candidates describe the safety features correctly but never name the Code or its SOLAS location. Close by linking to your fleet's methanol dual-fuel newbuilds if applicable.</div>
+    <div class="source-note"><strong>Source confidence:</strong> IGF Code amendments affecting ships built from 1 January 2024 have been issued — verify current amendment status before oral.</div>
+    <div class="source-note"><strong>Applies to Maersk A/S container vessel:</strong> Increasingly relevant — Maersk A/S operates and is expanding methanol dual-fuel container vessels; CE-level IGF Code awareness is now standard MEO Class 1 content given the fleet-wide alt-fuel transition.</div>
+    
+<details class="deep-dive">
+<summary>Deep-Dive — CE Relevance, Traps, Failures, Numbers, Casualty, Examiner Chain, On My Vessel</summary>
+<h5>Chief Engineer Relevance</h5><p>As CE on a gas/methanol dual-fuel vessel you're responsible for ESD system testing per PMS, gas detection calibration, ventilation fan checks in fuel preparation rooms, and bunkering safety procedure execution — core CE competency on newer tonnage.</p>
+<h5>Trap Questions</h5><p>Q: 'Does the IGF Code apply to gas carriers using cargo as fuel?' A: No — covered instead by IGC Code Ch 16, though the safety philosophy is similar.<br>Q: 'What flashpoint threshold defines a low-flashpoint fuel?' A: Below 60°C.</p>
+<h5>Common CE Failures</h5><p>Confusing IGF Code (general low-flashpoint fuel ships) with IGC Code (gas carriers using cargo as fuel); not knowing the 1 Jan 2017 mandatory date; describing safety features vaguely without naming double-barrier/gas-safe machinery space concepts.</p>
+<h5>Numbers to Memorise</h5><p>&lt;60°C = low-flashpoint fuel threshold; 1 Jan 2017 = IGF Code mandatory date; SOLAS II-1 Part F/Part G.</p>
+<h5>Casualty Link</h5><p>As of mid-2026 there is no widely reported major safety casualty specific to modern methanol dual-fuel container propulsion systems — the technology is early-stage (pioneered by Laura Mærsk, in service since late 2023). Operational discussion so far centres on bunkering standardisation and fuel sourcing rather than safety incidents. The more defensible oral answer is to state plainly that the safety case for these vessels currently rests on strict IGF Code compliance, classification society Alternative Design approval, and proactive near-miss reporting rather than a mature body of casualty case law — an honest, current answer that shows awareness of where the framework is still maturing.</p>
+<h5>Examiner Chain</h5><p>Low-flashpoint fuel definition → IGF Code → SOLAS Part F/G → double-barrier piping → ESD system → ventilation/hazardous area → bunkering safety → STCW training → GHG/decarbonisation drivers link.</p>
+<h5>On My Vessel (Maersk A/S container, 2-stroke ME)</h5><p>My current vessel is a conventional container ship burning standard VLSFO/HFO. Maersk has committed to ordering only dual-fuel-capable newbuilds from 2021 onward, so the applicable framework below reflects general IGF Code Part G regulation for that newer tonnage rather than confirmed detail from my own vessel: methanol has a flashpoint of approximately 11–12°C, well below the 60°C IGF Code threshold, so full IGF Code compliance applies; containment requires leak-containment/drip trays and collision-damage-protected tank location (no cryogenic insulation needed since methanol is liquid at ambient conditions, unlike LNG); double-wall fuel piping runs through gas-safe machinery spaces; automated nitrogen purging clears fuel lines and tank connection spaces during changeover/maintenance; and fixed gas detection is wired to automatic ESD on leak/fire detection.</p>
+</details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Reconciled Batch, QQ1, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">v1.1 · Finalised — pending Nixon final sign-off before gating</span>
+  </div>
+</div>
+</div>
+<div class="cheat-section">
+<div class="cheat-card">
+<h3 style="font-size:15px;color:var(--navy);margin-bottom:10px;">🧠 QB7 — GHG, CII &amp; Decarbonisation — Retrieval Cheat Sheet</h3>
+<p style="font-size:12px;color:var(--grey-text);margin-bottom:10px;">Tap each card to reveal the answer. Test recall before checking — active retrieval beats re-reading.</p>
+<div class="flip-card" onclick="toggleFlip(this)"><div class="front">▸ Flashpoint threshold defining 'low-flashpoint fuel'?</div><div class="back">Below 60°C — methanol (~11-12°C) and LNG both qualify.</div></div><div class="flip-card" onclick="toggleFlip(this)"><div class="front">▸ Which SOLAS chapter/part makes the IGF Code mandatory, and from when?</div><div class="back">SOLAS Ch II-1 Part G — mandatory for ships built on/after 1 January 2017. Part F provides the alternative-design methodology.</div></div><div class="flip-card" onclick="toggleFlip(this)"><div class="front">▸ Does the IGF Code apply to gas carriers using cargo as fuel?</div><div class="back">No — that's covered by IGC Code Chapter 16 instead, though the safety philosophy is similar.</div></div><div class="flip-card" onclick="toggleFlip(this)"><div class="front">▸ Key IGF Code safety layers (name at least 4)?</div><div class="back">Double-barrier/gas-safe machinery spaces, fixed gas + fire detection, automatic ESD, ventilation of fuel prep/tank connection spaces, hazardous area zoning, bunkering safety procedures.</div></div>
+<h4 style="font-size:12px;color:var(--teal-dark);text-transform:uppercase;margin:14px 0 6px;">IGF Code Safety Chain</h4><div class="flow-step"><div class="flow-num">1</div><div class="flow-text">Low-flashpoint fuel defined (&lt;60°C)</div></div><div class="flow-step"><div class="flow-num">2</div><div class="flow-text">IGF Code applies (SOLAS II-1 Part G, ships ≥2017)</div></div><div class="flow-step"><div class="flow-num">3</div><div class="flow-text">Double-barrier piping + gas-safe machinery spaces</div></div><div class="flow-step"><div class="flow-num">4</div><div class="flow-text">Gas/fire detection → automatic ESD on leak/fire</div></div><div class="flow-step"><div class="flow-num">5</div><div class="flow-text">Bunkering safety procedure + STCW crew training</div></div>
+</div>
+  </div>
+</div>
+<div id="no-results">No matching questions.</div>
+
+<div class="page-footer">
+  Compiled by Nixon Antony, 2/E, Maersk A/S. For corrections email <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>.
+  This material is for MEO Class 1 oral exam preparation only and does not substitute official IMO/DG Shipping/Class publications. Verify current regulations before relying on any reference.
+</div>
+<script>
+function toggleCard(header){const card=header.closest('.q-card');card.classList.toggle('open');}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');applyFilters();}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();
+const cards=document.querySelectorAll('.q-card');let vis=0;
+cards.forEach(card=>{const tags=(card.dataset.tags||'').toLowerCase();const text=card.innerText.toLowerCase();
+const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+card.style.display=show?'':'none';if(show)vis++;});
+document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+document.getElementById('no-results').style.display=vis===0?'block':'none';}
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;
+document.querySelectorAll('.toc-link').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});}});},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+</script>
+</body>
+</html>
