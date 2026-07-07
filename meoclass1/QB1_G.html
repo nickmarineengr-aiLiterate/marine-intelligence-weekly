@@ -679,40 +679,40 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-w
     <div class="practice-block practice-60"><span class="practice-label">🎯 60-Second Answer</span>Good morning, Examiner. Gross Tonnage and Net Tonnage are dimensionless metrics defined by the 1969 Tonnage Convention to determine port dues, pilotage fees, and safety regulations. <strong>Gross Tonnage (GT)</strong> represents the total enclosed volume (V) of all spaces on the ship, calculated using the formula:
 
 
-$GT = K_1 times V
+GT = K1 × V
 
 
-where K_1 is a scaling multiplier based on volume. <strong>Net Tonnage (NT)</strong> measures the useful cargo capacity of the vessel, calculated as:
+where K1 is a scaling multiplier based on volume. <strong>Net Tonnage (NT)</strong> measures the useful cargo capacity of the vessel, calculated as:
 
 
-NT = K_2 times V_c times left(frac{4d{3Dright)^2
+NT = K2 × Vc × (4d/3D)²
 
 
-where V_c is the total volume of the cargo spaces, d is the molded draft, and D is the molded depth. For container vessels, all under-deck cellular cargo holds and enclosed forecastle spaces are fully included in the internal volume (V$). However, containers stacked on the open weather deck are structurally excluded from statutory GT and NT calculations, as they are not permanently enclosed spaces, though they are tracked commercially via the ship's maximum TEU carrying capacity.</div>
+where Vc is the total volume of the cargo spaces, d is the molded draft, and D is the molded depth. For container vessels, all under-deck cellular cargo holds and enclosed forecastle spaces are fully included in the internal volume (V). However, containers stacked on the open weather deck are structurally excluded from statutory GT and NT calculations, as they are not permanently enclosed spaces, though they are tracked commercially via the ship's maximum TEU carrying capacity.</div>
     <div class="answer-body">
 <h4>1. The Mathematical Equations of the 1969 Tonnage Convention</h4>
 <p>Gross Tonnage and Net Tonnage are pure numbers without unit designations (they are not measured in tons or cubic meters):</p>
 <h4>A. Gross Tonnage (GT) Calculation</h4>
-<p>$GT = K_1 times V$</p>
+<p>GT = K1 × V</p>
 <ul>
 <li><strong>V:</strong> The total enclosed volume of all spaces inside the hull and permanently enclosed superstructures, expressed in cubic meters (m^3).</li>
-<li><strong>K_1:</strong> A constant coefficient calculated as:</li>
+<li><strong>K1:</strong> A constant coefficient calculated as:</li>
 </ul>
-<p>$K_1 = 0.2 + 0.02 times log_{10(V)$</p>
+<p>K1 = 0.2 + 0.02 × log_{10(V)</p>
 <p>This coefficient scales the final value so that larger ships do not receive an overly high numeric index.</p>
 <h4>B. Net Tonnage (NT) Calculation</h4>
-<p>$NT = K_2 times V_c times left(frac{4d{3Dright)^2 + K_3 times left(N_1 + frac{N_2{10right)$</p>
+<p>NT = K2 × Vc × (4d/3D)² + K3 × left(N1 + frac{N2{10right)</p>
 <p><em>For standard container ships with zero passenger cabins, the passenger factor is zero (N_1 = N_2 = 0), simplifying the equation to:</em></p>
-<p>$NT = K_2 times V_c times left(frac{4d{3Dright)^2$</p>
+<p>NT = K2 × Vc × (4d/3D)²</p>
 <ul>
 <li><strong>V_c:</strong> Total volume of the cargo spaces (the cellular container holds), in m^3.</li>
-<li><strong>K_2:</strong> A constant coefficient calculated as:</li>
+<li><strong>K2:</strong> A constant coefficient calculated as:</li>
 </ul>
-<p>$K_2 = 0.2 + 0.02 times log_{10(V_c)$</p>
+<p>K2 = 0.2 + 0.02 × log_{10(Vc)</p>
 <ul>
 <li><strong>d:</strong> Molded draft amidships (maximum summer draft), in meters.</li>
 <li><strong>D:</strong> Molded depth amidships, in meters.</li>
-<li><strong>The Draft/Depth Ratio Constraints:</strong> The factor left(frac{4d{3Dright)^2 cannot exceed 1.0, and the final calculated NT must never fall below 0.30 times GT.</li>
+<li><strong>The Draft/Depth Ratio Constraints:</strong> The factor (4d/3D)² cannot exceed 1.0, and the final calculated NT must never fall below 0.30 × GT.</li>
 <div class="mental-map">
  [Total Enclosed Space Volume (V)]   ──► Multiplied by K1 Constant ──► Gross Tonnage (GT)
 
@@ -731,7 +731,7 @@ where V_c is the total volume of the cargo spaces, d is the molded draft, and D 
 <p>| Tonnage Parameter | Gross Tonnage (GT) | Net Tonnage (NT) |</p>
 <p>| --- | --- | --- |</p>
 <p>| <strong>Space Evaluation</strong> | Every enclosed space from keel to funnel | Cargo holds and commercial handling areas only |</p>
-<p>| <strong>Formula Components</strong> | Total Volume (V) and constant K_1 | Cargo Volume (V_c), Draft (d), Depth (D), and constant K_2 |</p>
+<p>| <strong>Formula Components</strong> | Total Volume (V) and constant K1 | Cargo Volume (V_c), Draft (d), Depth (D), and constant K2 |</p>
 <p>| <strong>Primary Application</strong> | Regulatory limits (SOLAS/MARPOL compliance caps) | Commercial costs (Port dues, pilotage fees, canal tolls) |</p>
     </div>
     <div class="numbers-box"><h4>Chief Engineer Relevance</h4>While tonnage is calculated during the ship's design phase, the Chief Engineer must understand these metrics for administrative compliance. The vessel's statutory environmental limits—such as the mandatory requirements for an Oily Water Separator, a Bilge Alarm monitor, or an Exhaust Gas Cleaning System—are determined directly by the ship's Gross Tonnage bracket.</div>
@@ -742,21 +742,21 @@ where V_c is the total volume of the cargo spaces, d is the molded draft, and D 
 <div class="reg-item"><span class="reg-code">Suez Canal Special Tonnage Rules</span><span class="reg-desc">Special regulations governing the inclusion of deck cargo volumes for transit tolls.</span></div>
 <div class="reg-item"><span class="reg-code">DG Shipping Merchant Shipping (Tonnage Measurement) Rules</span><span class="reg-desc">The national legislative framework enforcing tonnage verification for Indian-flagged vessels.</span></div>
     </div>
-    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> <strong>Kochi MMD Focus (Examiner Simon):</strong> Examiner Simon will check if you know the exact equations. Do not just say tonnage is "weight." Emphasize that <strong>"GT and NT are dimensionless numbers representing volume, not weight."</strong> Clearly state the basic formula components (GT = K_1 times V) and explain the <strong>exclusion of deck containers from statutory tonnage</strong>, showing you understand the specific rules governing container ships.</div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> <strong>Kochi MMD Focus (Examiner Simon):</strong> Examiner Simon will check if you know the exact equations. Do not just say tonnage is "weight." Emphasize that <strong>"GT and NT are dimensionless numbers representing volume, not weight."</strong> Clearly state the basic formula components (GT = K1 × V) and explain the <strong>exclusion of deck containers from statutory tonnage</strong>, showing you understand the specific rules governing container ships.</div>
     <div class="deep-dive" id="dd-q27">
       <button class="deep-dive-toggle" onclick="toggleDD('dd-q27')">▶ Deep Dive</button>
       <div class="deep-dive-body" style="display:none">
         <div class="dd-block dd-relevance"><strong class="dd-label">🔧 CE Relevance</strong><p>While tonnage is calculated during the ship's design phase, the Chief Engineer must understand these metrics for administrative compliance. The vessel's statutory environmental limits—such as the mandatory requirements for an Oily Water Separator, a Bilge Alarm monitor, or an Exhaust Gas Cleaning System—are determined directly by the ship's Gross Tonnage bracket.</p></div>
         <div class="dd-block dd-trap"><strong class="dd-label">⚠ Trap Questions</strong><p>"If you load extra containers on the open deck, does the ship's official International Tonnage Certificate change?" <em>Trap Answer:</em> Yes, the volume increases. <em>Correct Answer:</em> No. The statutory International Tonnage Certificate remains unchanged because deck containers are not permanently enclosed spaces. However, the commercial canal transit certificates (like the Suez Canal certificate) will be adjusted dynamically to reflect the increased cargo volume on deck.
 * <strong>Common CE Failures:</strong> Confusing volumetric tonnages (GT/NT) with weight-based measurements like Deadweight Tonnage (DWT) or Displacement.
-* <strong>Numbers to Memorise:</strong> Minimum statutory limit for Net Tonnage: NT must never be less than 30% of the Gross Tonnage calculation (0.30 times GT).
+* <strong>Numbers to Memorise:</strong> Minimum statutory limit for Net Tonnage: NT must never be less than 30% of the Gross Tonnage calculation (0.30 × GT).
 * <strong>Casualty Link:</strong> Incorrectly logging cargo space volumes during conversions can lead to systemic errors in port fee reporting and regulatory compliance verification.
 *</p></div>
         <div class="dd-block dd-fail"><strong class="dd-label">✗ Common CE Failures</strong><p>Confusing volumetric tonnages (GT/NT) with weight-based measurements like Deadweight Tonnage (DWT) or Displacement.
-* <strong>Numbers to Memorise:</strong> Minimum statutory limit for Net Tonnage: NT must never be less than 30% of the Gross Tonnage calculation (0.30 times GT).
+* <strong>Numbers to Memorise:</strong> Minimum statutory limit for Net Tonnage: NT must never be less than 30% of the Gross Tonnage calculation (0.30 × GT).
 * <strong>Casualty Link:</strong> Incorrectly logging cargo space volumes during conversions can lead to systemic errors in port fee reporting and regulatory compliance verification.
 *</p></div>
-        <div class="dd-block dd-numbers"><strong class="dd-label">🔢 Numbers &amp; Regulations to Memorise</strong><p>Minimum statutory limit for Net Tonnage: NT must never be less than 30% of the Gross Tonnage calculation (0.30 times GT).
+        <div class="dd-block dd-numbers"><strong class="dd-label">🔢 Numbers &amp; Regulations to Memorise</strong><p>Minimum statutory limit for Net Tonnage: NT must never be less than 30% of the Gross Tonnage calculation (0.30 × GT).
 * <strong>Casualty Link:</strong> Incorrectly logging cargo space volumes during conversions can lead to systemic errors in port fee reporting and regulatory compliance verification.
 *</p></div>
         <div class="dd-block dd-casualty"><strong class="dd-label">⚓ Casualty Link</strong><p>Incorrectly logging cargo space volumes during conversions can lead to systemic errors in port fee reporting and regulatory compliance verification.
@@ -1751,7 +1751,7 @@ function toggleCard(header){const card=header.closest('.q-card');card.classList.
 function toggleDD(id){const body=document.getElementById(id).querySelector('.deep-dive-body');const btn=document.getElementById(id).querySelector('.deep-dive-toggle');const open=body.style.display!=='none';body.style.display=open?'none':'block';btn.textContent=(open?'▶':'▼')+' Deep Dive';}
 let activeTag='all';
 function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters();}
-function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();const cards=document.querySelectorAll('.q-card');let vis=0;cards.forEach(card=>{const tags=(card.dataset.tags||'').toLowerCase();const text=card.innerText.toLowerCase();const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));card.style.display=show?'':'none';if(show)vis++;});document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;document.getElementById('no-results').style.display=vis===0?'block':'none';}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();const cards=document.querySelectorAll('.q-card');let vis=0;cards.forEach(card=>{const tags=(card.dataset.tags||'').toLowerCase();const text=card.innerText.toLowerCase();const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));card.style.display=show?'':'none';if(show)vis++;});document.getElementById('q-count-label').textContent=`Showing {vis} of{cards.length}`;document.getElementById('no-results').style.display=vis===0?'block':'none';}
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;document.querySelectorAll('.toc-link').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});}});},{threshold:0.3});
 document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
 </script>

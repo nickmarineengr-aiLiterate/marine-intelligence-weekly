@@ -644,7 +644,7 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-w
 <li><strong>Feedstock Characteristics:</strong> Clear definition of the raw materials used. It must verify if the fuel is derived from biomass, waste products (e.g., Used Cooking Oil - UCO), or if it is a Non-Biological Renewable Fuel (RFNBO like e-methanol).</li>
 <li><strong>Greenhouse Gas Emissions Data:</strong> The precise lifecycle greenhouse gas value, typically denoted as:</li>
 </ul>
-<p>$GHG Value = XX  gCO_2eq/MJ$</p>
+<p>GHG Value = XX  gCO2eq/MJ</p>
 <p>This must outline the Well-to-Wake (WtW) emissions profile, allowing the Chief Engineer to calculate the exact carbon reduction against standard HFO (94.1 gCO_2eq/MJ).</p>
 <ul>
 <li><strong>Mass Balance Declaration:</strong> A statement confirming that the fuel was tracked using an approved chain-of-custody mass balance system, verifying that the sustainable attributes are not double-counted.</li>
@@ -1892,7 +1892,7 @@ function toggleCard(header){const card=header.closest('.q-card');card.classList.
 function toggleDD(id){const body=document.getElementById(id).querySelector('.deep-dive-body');const btn=document.getElementById(id).querySelector('.deep-dive-toggle');const open=body.style.display!=='none';body.style.display=open?'none':'block';btn.textContent=(open?'▶':'▼')+' Deep Dive';}
 let activeTag='all';
 function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters();}
-function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();const cards=document.querySelectorAll('.q-card');let vis=0;cards.forEach(card=>{const tags=(card.dataset.tags||'').toLowerCase();const text=card.innerText.toLowerCase();const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));card.style.display=show?'':'none';if(show)vis++;});document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;document.getElementById('no-results').style.display=vis===0?'block':'none';}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();const cards=document.querySelectorAll('.q-card');let vis=0;cards.forEach(card=>{const tags=(card.dataset.tags||'').toLowerCase();const text=card.innerText.toLowerCase();const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));card.style.display=show?'':'none';if(show)vis++;});document.getElementById('q-count-label').textContent=`Showing {vis} of{cards.length}`;document.getElementById('no-results').style.display=vis===0?'block':'none';}
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;document.querySelectorAll('.toc-link').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});}});},{threshold:0.3});
 document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
 </script>
