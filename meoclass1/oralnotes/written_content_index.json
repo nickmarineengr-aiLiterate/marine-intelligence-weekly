@@ -1,0 +1,74 @@
+{
+  "manifest_version": "2.0",
+  "generated": "2026-07-08",
+  "generated_by": "Claude - split from combined written_content_index.json into WA-series-only manifest. Companion file: notes_content_index.json covers Simon Sir Notes, Current Topics, and Engineering Management Notes.",
+  "scope": "Written Question Answers (WA) series ONLY - long-form written-exam model-answer chapters at /meoclass1/written/. Not the oral notes series (see notes_content_index.json).",
+  "series_naming_convention": "WA<series_number>-<topic_code><chapter_number>.html — e.g. WA1-HKC1.html, WA1-HKC2.html, WA2-GHG1.html. New chapters under an existing topic code are appended with the next available chapter number within that WA series. New topic areas get the next unused series_number.",
+  "total_files": 5,
+  "source_of_truth_policy": "This JSON is the authoritative source. index.html cards are generated FROM this manifest, not edited independently. Any content change updates this file first.",
+  "series": {
+    "WA1-HKC": {
+      "series_number": 1,
+      "topic_code": "HKC",
+      "topic_name": "Hong Kong Convention & Ship Recycling",
+      "status": "live",
+      "files": {
+        "WA1-HKC1.html": {
+          "chapter": 1,
+          "title": "The Hong Kong Convention (HKC) — Significance for India & Ship Recycling Regulation",
+          "tags": ["HKC", "India", "DASR", "ship recycling regulation"],
+          "version": "1.0",
+          "status": "gated - live",
+          "last_verified": null,
+          "regulatory_sensitivity": "low - HKC 2009 is a stable, long-adopted convention; low risk of near-term status change"
+        },
+        "WA1-HKC2.html": {
+          "chapter": 2,
+          "title": "Engineering Design for Recycling (EDfR) — Green Shipbuilding",
+          "tags": ["EDfR", "green shipbuilding", "HKC", "IHM"],
+          "version": "1.0",
+          "status": "gated - live",
+          "last_verified": null,
+          "regulatory_sensitivity": "low"
+        },
+        "WA1-HKC3.html": {
+          "chapter": 3,
+          "title": "Industrial Safety & Waste Stream Management at Authorized Ship Recycling Facilities",
+          "tags": ["SRFP", "TSDF", "facility safety", "HKC"],
+          "version": "1.0",
+          "status": "gated - live",
+          "last_verified": null,
+          "regulatory_sensitivity": "low"
+        }
+      }
+    },
+    "WA2-GHG": {
+      "series_number": 2,
+      "topic_code": "GHG",
+      "topic_name": "GHG Strategy & Decarbonisation",
+      "status": "live",
+      "files": {
+        "WA2-GHG1.html": {
+          "chapter": 1,
+          "title": "The 2023 Revised IMO GHG Strategy & Carbon Intensity Framework",
+          "tags": ["MEPC.377(80)", "EEXI", "CII", "SEEMP", "MEPC.328(76)", "MEPC.354(78)"],
+          "version": "1.0",
+          "status": "review copy - ungated, pending gate + publish",
+          "last_verified": "2026-07-08",
+          "regulatory_sensitivity": "low - covers short-term measures (EEXI/CII/SEEMP) already in force; stable regulatory ground",
+          "regulatory_status_note": "Includes correct current status note that mid-term Chapter 5 measures are approved (MEPC 83) but not yet adopted."
+        },
+        "WA2-GHG2.html": {
+          "chapter": 2,
+          "title": "MARPOL Annex VI Chapter 5 — The IMO Net-Zero Framework",
+          "tags": ["MARPOL Annex VI Ch.5", "GFI", "Well-to-Wake", "MEPC 83", "Base Target", "Direct Compliance Target"],
+          "version": "1.0",
+          "status": "review copy - ungated, pending gate + publish",
+          "last_verified": "2026-07-08",
+          "regulatory_sensitivity": "HIGH - Chapter 5 adoption status is actively moving. Re-verify before every reuse/reference after MEPC ES.2 reconvenes (scheduled Nov 2026) — status may change from 'approved, pending adoption' to 'adopted' or 'in force'.",
+          "regulatory_status_note": "Chapter 5 approved at MEPC 83 (Apr 2025), adoption session MEPC ES.2 (Oct 2025) adjourned without agreement, reconvenes Nov 2026. Framed as 'approved, pending adoption' throughout, not 'in force'. Expanded evaluative Part 4 (industry impact) added per Nixon's request."
+        }
+      }
+    }
+  }
+}
