@@ -15,12 +15,12 @@
 <meta property="og:site_name" content="Marine Intelligence Weekly">
 <meta property="og:title" content="Archive | Marine Intelligence Weekly">
 <meta property="og:description" content="All MIW issues, thematic reference maps, and research tools — archived from Issue 01, January 2025.">
-<meta property="og:image" content="https://marineintelligenceweekly.com/assets/cover_26.webp">
+<meta property="og:image" content="https://marineintelligenceweekly.com/assets/cover28.webp">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Archive | Marine Intelligence Weekly">
 <meta name="twitter:description" content="All MIW issues, thematic reference maps, and research tools — from Issue 01 onwards.">
-<meta name="twitter:image" content="https://marineintelligenceweekly.com/assets/cover_26.webp">
+<meta name="twitter:image" content="https://marineintelligenceweekly.com/assets/cover28.webp">
 
 <meta name="theme-color" content="#0f172a">
 
@@ -44,7 +44,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-
 <style>
 :root{
   --navy:#0f172a;
@@ -108,410 +107,22 @@ main{max-width:1000px;margin:0 auto;padding:2.5rem 2rem 5rem}
 .sec-label{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);font-family:'JetBrains Mono',monospace;white-space:nowrap}
 .sec-rule{flex:1;height:1px;background:var(--border)}
 
-/* FILTER TABS */
-.filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.75rem}
-.ftab{padding:5px 14px;border-radius:20px;font-size:.75rem;border:1px solid var(--border);background:none;cursor:pointer;color:var(--slate);font-family:'JetBrains Mono',monospace;transition:all .15s}
-.ftab:hover{border-color:var(--teal);color:var(--teal)}
-.ftab.on{background:var(--teal);border-color:var(--teal);color:#fff}
-
-/* GRID */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
-.grid.list-view{grid-template-columns:1fr}
-
-/* CARDS */
-.card{
-  background:var(--card-bg);
-  border:1px solid var(--border);
-  border-top:3px solid var(--teal);
-  border-radius:0 0 10px 10px;
-  padding:1.25rem 1.4rem;
-  text-decoration:none;
-  display:flex;flex-direction:column;gap:.5rem;
-  transition:transform .15s,box-shadow .15s,border-top-color .15s;
-  position:relative;
+/* SEARCH */
+.search-wrap{position:relative;margin-bottom:1rem;max-width:420px}
+.search-wrap svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:15px;height:15px;stroke:var(--slate-light);pointer-events:none}
+#archive-search{
+  width:100%;padding:9px 34px 9px 34px;border-radius:20px;border:1px solid var(--border);
+  font-family:'Source Serif 4',serif;font-size:.85rem;color:var(--navy);background:#fff;
+  outline:none;transition:border-color .15s;
 }
-.card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.08)}
-
-/* card accent variants */
-.card.c-teal{border-top-color:var(--teal)}
-.card.c-orange{border-top-color:var(--orange)}
-.card.c-gold{border-top-color:var(--gold)}
-.card.c-purple{border-top-color:var(--purple)}
-.card.c-orange2{border-top-color:#e07b39}
-
-.card-kicker{font-size:.68rem;font-family:'JetBrains Mono',monospace;color:var(--slate);margin-bottom:.1rem}
-.card-title{font-family:'Playfair Display',serif;font-size:1rem;color:var(--navy);line-height:1.3}
-.card-desc{font-size:.82rem;color:var(--slate);line-height:1.6;flex:1}
-.card-foot{font-size:.68rem;font-family:'JetBrains Mono',monospace;color:var(--slate-light);margin-top:.4rem;border-top:1px solid var(--border);padding-top:.5rem}
-.card-new{
-  position:absolute;top:-.5rem;right:1rem;
-  background:var(--teal);color:#fff;
-  font-size:.6rem;font-family:'JetBrains Mono',monospace;
-  padding:2px 7px;border-radius:10px;letter-spacing:.5px;text-transform:uppercase;
+#archive-search:focus{border-color:var(--teal)}
+#search-clear{
+  position:absolute;right:8px;top:50%;transform:translateY(-50%);
+  background:none;border:none;color:var(--slate-light);font-size:1rem;cursor:pointer;
+  display:none;line-height:1;padding:4px;
 }
-.card-ref{
-  position:absolute;top:-.5rem;right:1rem;
-  background:var(--purple);color:#fff;
-  font-size:.6rem;font-family:'JetBrains Mono',monospace;
-  padding:2px 7px;border-radius:10px;letter-spacing:.5px;
-}
-
-/* accent text colours */
-.k-teal{color:var(--teal)}
-.k-orange{color:var(--orange)}
-.k-gold{color:var(--gold)}
-.k-purple{color:var(--purple)}
-.k-orange2{color:#e07b39}
-
-/* EMPTY STATE */
-.empty{text-align:center;padding:3rem 1rem;color:var(--slate);font-size:.9rem;display:none}
-
-/* ABOUT STRIP */
-.about-strip{
-  background:var(--navy);border-radius:10px;
-  padding:1.75rem 2rem;margin-top:3rem;
-  display:flex;align-items:center;gap:1.5rem;
-  border:1px solid var(--border-dark);
-}
-.about-strip-text h3{font-family:'Playfair Display',serif;color:#fff;font-size:1rem;margin-bottom:.3rem}
-.about-strip-text p{font-size:.82rem;color:var(--slate-light);line-height:1.6}
-.about-strip-cta{
-  margin-left:auto;white-space:nowrap;
-  background:var(--teal);color:#fff;
-  padding:8px 18px;border-radius:6px;
-  text-decoration:none;font-size:.8rem;
-  font-family:'JetBrains Mono',monospace;
-  transition:background .2s;
-}
-.about-strip-cta:hover{background:var(--teal-light)}
-
-/* FOOTER */
-footer{background:var(--navy);border-top:2px solid var(--teal);padding:2rem;text-align:center}
-.footer-brand{font-family:'Playfair Display',serif;color:#fff;font-size:.95rem;margin-bottom:.4rem}
-.footer-brand span{color:var(--teal)}
-.footer-sub{font-size:.75rem;color:var(--slate-light)}
-.footer-sub a{color:var(--teal-light);text-decoration:none}
-.footer-links-row{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;margin-top:1rem}
-.footer-links-row a{font-size:.75rem;color:var(--slate-light);text-decoration:none;font-family:'JetBrains Mono',monospace}
-.footer-links-row a:hover{color:var(--teal)}
-
-/* RTT */
-#rtt{
-  position:fixed;bottom:1.5rem;right:1.5rem;
-  background:var(--teal);color:#fff;border:none;border-radius:50%;
-  width:40px;height:40px;font-size:1.1rem;cursor:pointer;display:none;
-  box-shadow:0 2px 10px rgba(13,148,136,.4);z-index:200;
-  align-items:center;justify-content:center;
-}
-#rtt:hover{background:var(--teal-light)}
-
-/* MOBILE */
-@media(max-width:640px){
-  .hero h1{font-size:1.5rem}
-  .nav-links{display:none}
-  main{padding:1.5rem 1rem 4rem}
-  .about-strip{flex-direction:column}
-  .about-strip-cta{margin-left:0}
-  .stats-inner{gap:1rem}
-}
-
-/* PRINT */
-@media print{nav,#rtt,#progress,.filter-bar{display:none}.card{break-inside:avoid}}
-</style>
-</head>
-<body>
-
-<div id="progress"></div>
-
-<nav>
-  <a class="nav-brand" href="https://marineintelligenceweekly.com">Marine Intelligence <span>Weekly</span></a>
-  <ul class="nav-links">
-    <li><a href="https://marineintelligenceweekly.com">Home</a></li>
-    <li><a href="https://marineintelligenceweekly.com/archive/" class="active">Archive</a></li>
-    <li><a href="https://marineintelligenceweekly.com/articles/">Articles</a></li>
-    <li><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Q&amp;Bank</a></li>
-    <li><a href="https://marineintelligenceweekly.com/ecosystem.html">Ecosystem</a></li>
-  </ul>
-</nav>
-
-<div class="hero">
-  <div class="hero-inner">
-    <div class="hero-eyebrow">Marine Intelligence Weekly · Archive</div>
-    <h1>The <span>Archive</span></h1>
-    <div class="hero-meta">
-      <span>Issue 01 · January 2025</span>
-      <span>→ Present</span>
-      <span>Issues · Reference Maps · Research Tools</span>
-    </div>
-    <p class="hero-desc">Every issue of Marine Intelligence Weekly — Issues 01 through 22, plus the thematic reference map for the first sixteen. For living reference tools (timelines, ecosystem map, PDF reference doc), visit the <a href="https://marineintelligenceweekly.com" style="color:var(--teal-light);text-decoration:none;">main index</a>.</p>
-  </div>
-</div>
-
-<div class="stats">
-  <div class="stats-inner">
-    <div class="stat">Issues archived: <strong id="s-issues">22</strong></div>
-    <div class="stat">Archive span: <strong>Jan 2025 → May 2026</strong></div>
-    <div class="stat">Issues 23–26: <strong><a href="https://marineintelligenceweekly.com" style="color:var(--teal);text-decoration:none;">Main Index →</a></strong></div>
-    <div class="stat">Themes covered: <strong>IMO · Class · AI · Decarbonisation · MASS</strong></div>
-  </div>
-</div>
-
-<main>
-
-  <!-- FILTER -->
-  <div class="filter-bar" role="group" aria-label="Filter archive by type">
-    <button class="ftab on" data-tag="all" onclick="filter(this)">All</button>
-    <button class="ftab" data-tag="issue" onclick="filter(this)">Issues</button>
-    <button class="ftab" data-tag="imo" onclick="filter(this)">IMO</button>
-    <button class="ftab" data-tag="ai" onclick="filter(this)">AI / Autonomy</button>
-    <button class="ftab" data-tag="decarbonisation" onclick="filter(this)">Decarbonisation</button>
-    <button class="ftab" data-tag="meo" onclick="filter(this)">MEO Class 1</button>
-  </div>
-
-  <!-- ISSUES SECTION -->
-  <div class="sec-head">
-    <span class="sec-label">Issues</span>
-    <div class="sec-rule"></div>
-  </div>
-
-  <div class="grid" id="cards">
-
-    <!-- ISSUE 22 -->
-    <a href="https://marineintelligenceweekly.com/archive/issue22.html"
-       class="card c-teal"
-       data-tags="issue imo ai mass">
-      <div class="card-kicker k-teal">Issue 22 · May 2026</div>
-      <div class="card-title">The MASS Code Is Here. What Does It Mean for the Officer on Watch?</div>
-      <div class="card-desc">Maritime AI enters its accountability phase — from pilot to protocol. MEPC 84 actions, three class updates for your next survey, and five things everybody missed from MSC 111. The accountability phase begins.</div>
-      <div class="card-foot">MASS Code · MEPC 84 · MSC 111 · AI Accountability · May 2026</div>
-    </a>
-
-    <!-- ISSUE 21 -->
-    <a href="https://marineintelligenceweekly.com/archive/issue21.html"
-       class="card c-teal"
-       data-tags="issue imo ai autonomy">
-      <div class="card-kicker k-teal">Issue 21 · May 2026</div>
-      <div class="card-title">Maritime AI Is Entering Its Evidence Phase</div>
-      <div class="card-desc">MSC 111 MASS Code framework. LR × Orca AI live class trial. Docker Vision at Indian ports. The IMO Compendium 140+ field expansion. May 2026: standards stopped being promises and started being numbers.</div>
-      <div class="card-foot">MASS Code · Orca AI · Docker Vision · IMO Compendium · May 2026</div>
-    </a>
-
-    <!-- ISSUE 20 -->
-    <a href="https://marineintelligenceweekly.com/archive/issue20.html"
-       class="card c-teal"
-       data-tags="issue ai autonomy">
-      <div class="card-kicker k-teal">Issue 20 · May 2026</div>
-      <div class="card-title">Global Maritime AI Is Accelerating — India Is Entering the Conversation</div>
-      <div class="card-desc">Japan certifies autonomous vessels. Norway formalises remote operator licences. Singapore commits SGD 100M. India builds its layer through Dtyle.AI and smart port infrastructure. The global picture, and where India fits.</div>
-      <div class="card-foot">Autonomous Vessels · India Maritime AI · Dtyle.AI · Singapore · May 2026</div>
-    </a>
-
-    <!-- ISSUE 19 -->
-    <a href="https://marineintelligenceweekly.com/archive/issue19.html"
-       class="card c-teal"
-       data-tags="issue imo ai meo">
-      <div class="card-kicker k-teal">Issue 19 · April 2026</div>
-      <div class="card-title">Maritime Intelligence: The Regulatory and Technology Signals That Matter</div>
-      <div class="card-desc">Classification society updates, emerging AI applications in ship management, and the operational intelligence maritime professionals need — IMO signals, class circulars, and the engine room view.</div>
-      <div class="card-foot">IMO · Classification · AI · Ship Management · April 2026</div>
-    </a>
-
-    <!-- ISSUE 18 -->
-    <a href="https://marineintelligenceweekly.com/archive/issue18.html"
-       class="card c-teal"
-       data-tags="issue imo ai decarbonisation">
-      <div class="card-kicker k-teal">Issue 18 · April 2026</div>
-      <div class="card-title">The Operational Intelligence Edition</div>
-      <div class="card-desc">Early foundations of Marine Intelligence Weekly — regulatory watch, technology signals, and the engineer's perspective on maritime digitalisation. IMO actions, decarbonisation policy, and AI in early fleet deployment.</div>
-      <div class="card-foot">Regulatory Watch · Technology Signals · Decarbonisation · April 2026</div>
-    </a>
-
-    <!-- ISSUE 17 -->
-    <a href="https://marineintelligenceweekly.com/archive/issue17.html"
-       class="card c-teal"
-       data-tags="issue imo ai autonomy mass">
-      <div class="card-kicker k-teal">Issue 17 · 23 April 2026</div>
-      <div class="card-title">DeepSea HyperPilot, MASS Code Watch &amp; the ABS Fleet Landmark</div>
-      <div class="card-desc">DNV type-approves the first autonomous speed controller entering commercial fleet trials. MASS Code heads for non-mandatory MSC adoption. ABS fleet tonnage surpasses DNV. IMO Net-Zero Framework delayed to October 2026. IACS UR E26/E27 enforcement reality.</div>
-      <div class="card-foot">DeepSea HyperPilot · MASS Code · IMO NZF · ABS vs DNV · IACS Cyber</div>
-    </a>
-
-    <!-- ISSUES 01–16 THEMATIC MAP -->
-    <a href="https://marineintelligenceweekly.com/archive/thematicmapissues01to16.html"
-       class="card c-purple"
-       data-tags="issue imo ai decarbonisation meo">
-      <span class="card-ref">Reference Map</span>
-      <div class="card-kicker k-purple">Archive · Issues 01–16 · Jan 2025 → Apr 2026</div>
-      <div class="card-title">Issues 01–16 Thematic Map — IMO, Class, Regulation &amp; AI</div>
-      <div class="card-desc">64 sourced entries across four swim lanes — IMO/MEPC/MSC, Classification Societies/IACS, Regulatory Framework, and AI/Autonomy. Covers MEPC 82–84, GFI standard, IACS E26/E27, MASS DoA framework, EEXI/CII, ORB codes, and the full AI adoption arc from experimental to fleet-scale.</div>
-      <div class="card-foot">IMO · IACS · GFI · MASS · EEXI/CII · AI Adoption · 64 entries</div>
-    </a>
-
-  </div><!-- /grid -->
-
-  <div class="empty" id="empty-state">No items match this filter.</div>
-
-  <!-- POINTER TO MAIN INDEX for live issues -->
-  <div style="display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.4rem;background:#fff;border:1px solid var(--border);border-radius:8px;margin-top:1.5rem;gap:1rem;flex-wrap:wrap;">
-    <div>
-      <div style="font-size:.7rem;font-family:'JetBrains Mono',monospace;color:var(--slate);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.25rem;">Current Issues — Issues 23 to 26</div>
-      <div style="font-size:.88rem;color:var(--navy);font-family:'Source Serif 4',serif;">The four most recent issues (23–26) live on the main index. Archive updates after each cycle.</div>
-    </div>
-    <a href="https://marineintelligenceweekly.com" style="white-space:nowrap;background:var(--teal);color:#fff;padding:8px 18px;border-radius:6px;text-decoration:none;font-size:.78rem;font-family:'JetBrains Mono',monospace;transition:background .2s;" onmouseover="this.style.background='var(--teal-light)'" onmouseout="this.style.background='var(--teal)'">View Issues 23–26 →</a>
-  </div>
-
-  <!-- ABOUT STRIP -->
-  <div class="about-strip">
-    <div class="about-strip-text">
-      <h3>About Marine Intelligence Weekly</h3>
-      <p>Independent maritime intelligence published by Nixon Antony, Second Engineer at Maersk A/S and MEO Class 1 candidate. Covering IMO regulations, classification society developments, maritime AI adoption, and decarbonisation — written from the engine room, for the engine room.</p>
-    </div>
-    <a href="https://marineintelligenceweekly.com" class="about-strip-cta">Visit Homepage →</a>
-  </div>
-
-</main>
-
-<footer>
-  <div class="footer-brand">Marine Intelligence <span>Weekly</span></div>
-  <div class="footer-sub">
-    The intelligence and learning platform for marine engineers ·
-    <a href="https://marineintelligenceweekly.com">marineintelligenceweekly.com</a>
-  </div>
-  <div class="footer-sub" style="margin-top:.3rem">
-    Nixon Antony · Second Engineer, Maersk A/S ·
-    <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
-  </div>
-  <div class="footer-links-row">
-    <a href="https://marineintelligenceweekly.com">Home</a>
-    <a href="https://marineintelligenceweekly.com/archive/">Archive</a>
-    <a href="https://marineintelligenceweekly.com/timeline.html">Timeline</a>
-    <a href="https://marineintelligenceweekly.com/ecosystem.html">Ecosystem</a>
-    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Q&amp;Bank</a>
-    <a href="https://marineintelligenceweekly.com/GHGDecarb/timeline.html">GHG Timeline</a>
-  </div>
-</footer>
-
-<button id="rtt" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Return to top">↑</button>
-
-<script>
-/* ── SCROLL PROGRESS ── */
-window.addEventListener('scroll',function(){
-  var el=document.getElementById('progress');
-  var h=document.documentElement;
-  var pct=(h.scrollTop||(document.body||{}).scrollTop)/(h.scrollHeight-h.clientHeight)*100;
-  el.style.width=Math.min(pct,100)+'%';
-  document.getElementById('rtt').style.display=window.scrollY>500?'flex':'none';
-});
-document.getElementById('rtt').style.display='none';
-
-/* ── FILTER ── */
-function filter(btn){
-  document.querySelectorAll('.ftab').forEach(function(b){b.classList.remove('on')});
-  btn.classList.add('on');
-  var tag=btn.dataset.tag;
-  var cards=document.querySelectorAll('#cards .card');
-  var shown=0;
-  cards.forEach(function(c){
-    var tags=(c.dataset.tags||'').split(' ');
-    var show=(tag==='all'||tags.indexOf(tag)>-1);
-    c.style.display=show?'flex':'none';
-    if(show) shown++;
-  });
-  document.getElementById('empty-state').style.display=shown===0?'block':'none';
-}
-</script>
-</body>
-</html>
-
-<meta name="twitter:title" content="Archive | Marine Intelligence Weekly">
-<meta name="twitter:description" content="All MIW issues, thematic reference maps, and research tools — from Issue 01 onwards.">
-<meta name="twitter:image" content="https://marineintelligenceweekly.com/assets/cover_26.webp">
-
-<meta name="theme-color" content="#0f172a">
-
-<!-- Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "Marine Intelligence Weekly Archive",
-  "description": "Complete archive of Marine Intelligence Weekly — issues, thematic maps, and reference tools covering IMO regulations, classification society developments, and AI in maritime.",
-  "url": "https://marineintelligenceweekly.com/archive/",
-  "isPartOf": { "@type": "WebSite", "name": "Marine Intelligence Weekly", "url": "https://marineintelligenceweekly.com/" },
-  "author": { "@type": "Person", "name": "Nixon Antony", "jobTitle": "Second Engineer, Maersk A/S" }
-}
-</script>
-
-<!-- GA4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Serif+4:wght@400;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --navy:#0f172a;
-  --navy2:#1e293b;
-  --teal:#0d9488;
-  --teal-light:#14b8a6;
-  --orange:#f97316;
-  --gold:#f59e0b;
-  --purple:#8b5cf6;
-  --offwhite:#f8fafc;
-  --slate:#64748b;
-  --slate-light:#94a3b8;
-  --border:#e2e8f0;
-  --border-dark:#334155;
-  --card-bg:#ffffff;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Source Serif 4',Georgia,serif;background:var(--offwhite);color:var(--navy);font-size:16px;line-height:1.7}
-
-/* NAV */
-nav{
-  position:sticky;top:0;z-index:100;
-  background:var(--navy);
-  border-bottom:2px solid var(--teal);
-  padding:0 2rem;
-  display:flex;align-items:center;justify-content:space-between;
-  height:56px;
-}
-.nav-brand{font-family:'Playfair Display',serif;color:#fff;font-size:1.05rem;letter-spacing:.5px;text-decoration:none}
-.nav-brand span{color:var(--teal)}
-.nav-links{display:flex;gap:1.5rem;list-style:none}
-.nav-links a{color:var(--slate-light);font-size:.8rem;text-decoration:none;transition:color .2s;font-family:'Source Serif 4',sans-serif}
-.nav-links a:hover{color:#fff}
-.nav-links a.active{color:var(--teal)}
-
-/* SCROLL PROGRESS */
-#progress{position:fixed;top:56px;left:0;height:2px;background:var(--teal);width:0%;z-index:99;transition:width .1s linear}
-
-/* HERO */
-.hero{background:var(--navy);padding:3rem 2rem 2.5rem;border-bottom:1px solid var(--border-dark)}
-.hero-inner{max-width:1000px;margin:0 auto}
-.hero-eyebrow{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);font-family:'JetBrains Mono',monospace;margin-bottom:.75rem}
-.hero h1{font-family:'Playfair Display',serif;font-size:2.1rem;color:#fff;line-height:1.2;margin-bottom:.75rem}
-.hero h1 span{color:var(--teal)}
-.hero-meta{font-size:.78rem;color:var(--slate-light);font-family:'JetBrains Mono',monospace;display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem}
-.hero-desc{color:#94a3b8;font-size:.9rem;max-width:640px;line-height:1.65}
-
-/* STATS STRIP */
-.stats{background:var(--navy2);border-bottom:1px solid var(--border-dark);padding:.75rem 2rem}
-.stats-inner{max-width:1000px;margin:0 auto;display:flex;gap:2rem;flex-wrap:wrap}
-.stat{font-size:.75rem;font-family:'JetBrains Mono',monospace;color:var(--slate-light)}
-.stat strong{color:var(--teal);font-weight:400}
-
-/* MAIN */
-main{max-width:1000px;margin:0 auto;padding:2.5rem 2rem 5rem}
-
-/* SECTION HEADERS */
-.sec-head{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;margin-top:3rem}
-.sec-head:first-of-type{margin-top:0}
-.sec-label{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);font-family:'JetBrains Mono',monospace;white-space:nowrap}
-.sec-rule{flex:1;height:1px;background:var(--border)}
+#search-clear.show{display:block}
+.search-count{font-size:.72rem;font-family:'JetBrains Mono',monospace;color:var(--slate-light);margin:-.5rem 0 1.25rem}
 
 /* FILTER TABS */
 .filter-bar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.75rem}
@@ -654,8 +265,8 @@ footer{background:var(--navy);border-top:2px solid var(--teal);padding:2rem;text
 
 <div class="stats">
   <div class="stats-inner">
-    <div class="stat">Issues published: <strong id="s-issues">17</strong></div>
-    <div class="stat">Reference tools: <strong>4</strong></div>
+    <div class="stat">Issues published: <strong id="s-issues">28</strong></div>
+    <div class="stat">Reference tools: <strong>5</strong></div>
     <div class="stat">Archive span: <strong>Jan 2025 → present</strong></div>
     <div class="stat">Themes covered: <strong>IMO · Class · AI · Decarbonisation · MASS</strong></div>
   </div>
@@ -664,6 +275,13 @@ footer{background:var(--navy);border-top:2px solid var(--teal);padding:2rem;text
 <main>
 
   <!-- FILTER -->
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+    <input type="text" id="archive-search" placeholder="Search issues, topics, regulations…" autocomplete="off" oninput="applySearch()" aria-label="Search the archive">
+    <button id="search-clear" onclick="clearSearch()" aria-label="Clear search">&times;</button>
+  </div>
+  <div class="search-count" id="search-count"></div>
+
   <div class="filter-bar" role="group" aria-label="Filter archive by type">
     <button class="ftab on" data-tag="all" onclick="filter(this)">All</button>
     <button class="ftab" data-tag="issue" onclick="filter(this)">Issues</button>
@@ -682,11 +300,81 @@ footer{background:var(--navy);border-top:2px solid var(--teal);padding:2rem;text
 
   <div class="grid" id="cards">
 
+    <!-- ISSUE 24 -->
+    <a href="https://marineintelligenceweekly.com/index24.html"
+       class="card c-teal"
+       data-tags="issue ai">
+      <span class="card-new">Latest in Archive</span>
+      <div class="card-kicker k-teal">Issue 24 · June 2026</div>
+      <div class="card-title">Athens Has Spoken: AI Is Operational — But Most Ships Aren't Ready for It</div>
+      <div class="card-desc">Posidonia 2026 revealed AI is no longer a demo — it's deployed. Maritime AI Readiness Pyramid, LR Digital Assurance Framework, ABS 2026 Tech Trends, and hard IOMOU 2025 PSC detention data.</div>
+      <div class="card-foot">Posidonia 2026 · AI Readiness Pyramid · LR Digital Assurance · ABS Tech Trends</div>
+    </a>
+
+    <!-- ISSUE 23 -->
+    <a href="https://marineintelligenceweekly.com/index23.html"
+       class="card c-teal"
+       data-tags="issue imo ai mass">
+      <div class="card-kicker k-teal">Issue 23 · June 2026</div>
+      <div class="card-title">Hydrogen Safety, SOLAS Winch Rules &amp; MASS Code 2026</div>
+      <div class="card-desc">DNV-RP-0703 hydrogen competence, SOLAS II-1/3-13 anchor handling winch requirements, MASS Code systems engineering, FuelEU Maritime reality check.</div>
+      <div class="card-foot">DNV-RP-0703 · SOLAS II-1/3-13 · MASS Code · FuelEU Maritime</div>
+    </a>
+
+    <!-- ISSUE 22 -->
+    <a href="https://marineintelligenceweekly.com/index22.html"
+       class="card c-teal"
+       data-tags="issue imo mass ai">
+      <div class="card-kicker k-teal">Issue 22 · May 2026</div>
+      <div class="card-title">The MASS Code &amp; What Everybody Missed from MSC 111</div>
+      <div class="card-desc">Maritime AI enters its accountability phase. MEPC 84 actions, class updates, and five things everybody missed from MSC 111.</div>
+      <div class="card-foot">MSC 111 · MEPC 84 · MASS Code · Class Updates</div>
+    </a>
+
+    <!-- ISSUE 21 -->
+    <a href="https://marineintelligenceweekly.com/index21.html"
+       class="card c-teal"
+       data-tags="issue imo ai mass">
+      <div class="card-kicker k-teal">Issue 21 · May 2026</div>
+      <div class="card-title">Maritime AI Is Entering Its Evidence Phase</div>
+      <div class="card-desc">MSC 111 MASS Code framework, LR × Orca AI live class trial, Docker Vision at Indian ports, IMO Compendium expansion.</div>
+      <div class="card-foot">MSC 111 · LR × Orca AI · Docker Vision · IMO Compendium</div>
+    </a>
+
+    <!-- ISSUE 20 -->
+    <a href="https://marineintelligenceweekly.com/index20.html"
+       class="card c-teal"
+       data-tags="issue ai">
+      <div class="card-kicker k-teal">Issue 20 · May 2026</div>
+      <div class="card-title">Global Maritime AI Is Accelerating</div>
+      <div class="card-desc">Japan certifies autonomous vessels, Norway formalises remote operator licences, Singapore commits SGD 100M, India builds its layer.</div>
+      <div class="card-foot">Japan · Norway · Singapore · India · Autonomous Vessels</div>
+    </a>
+
+    <!-- ISSUE 19 -->
+    <a href="https://marineintelligenceweekly.com/index19.html"
+       class="card c-teal"
+       data-tags="issue imo ai meo">
+      <div class="card-kicker k-teal">Issue 19 · April 2026</div>
+      <div class="card-title">Maritime Intelligence: The Regulatory and Technology Signals That Matter</div>
+      <div class="card-desc">Classification society updates, emerging AI applications in ship management, and the operational intelligence maritime professionals need — IMO signals, class circulars, and the engine room view.</div>
+      <div class="card-foot">IMO · Classification · AI · Ship Management · April 2026</div>
+    </a>
+
+    <!-- ISSUE 18 -->
+    <a href="https://marineintelligenceweekly.com/index18.html"
+       class="card c-teal"
+       data-tags="issue imo ai decarbonisation">
+      <div class="card-kicker k-teal">Issue 18 · April 2026</div>
+      <div class="card-title">The Operational Intelligence Edition</div>
+      <div class="card-desc">Early foundations of Marine Intelligence Weekly — regulatory watch, technology signals, and the engineer's perspective on maritime digitalisation. IMO actions, decarbonisation policy, and AI in early fleet deployment.</div>
+      <div class="card-foot">Regulatory Watch · Technology Signals · Decarbonisation · April 2026</div>
+    </a>
+
     <!-- ISSUE 17 -->
     <a href="https://marineintelligenceweekly.com/archive/issue17.html"
        class="card c-teal"
        data-tags="issue imo ai autonomy mass">
-      <span class="card-new">Latest in Archive</span>
       <div class="card-kicker k-teal">Issue 17 · 23 April 2026</div>
       <div class="card-title">DeepSea HyperPilot, MASS Code Watch & the ABS Fleet Landmark</div>
       <div class="card-desc">DNV type-approves the first autonomous speed controller entering commercial fleet trials. MASS Code heads for non-mandatory MSC adoption. ABS fleet tonnage surpasses DNV. IMO Net-Zero Framework delayed to October 2026. IACS UR E26/E27 enforcement reality.</div>
@@ -752,6 +440,16 @@ footer{background:var(--navy);border-top:2px solid var(--teal);padding:2rem;text
       <div class="card-foot">Regulation · Class · AI · Nations · MASS Code · Decarbonisation · PDF</div>
     </a>
 
+    <a href="https://marineintelligenceweekly.com/assets/MIW_Vol2_ReferenceDoc.pdf"
+       class="card c-teal"
+       data-tags="reference imo ai decarbonisation mass">
+      <span class="card-ref">Vol. 2</span>
+      <div class="card-kicker k-teal">Reference PDF · Issues 23–27 · June–July 2026</div>
+      <div class="card-title">MIW Vol. 2 — Maritime Intelligence Reference Document</div>
+      <div class="card-desc">15-page thematic reference continuing the series — MASS Code entry into force, UK ETS and FuelEU DoC carriage, MEPC 84 outputs, LR's first 100% hydrogen engine type approval, Orca AI fleet-scale rollout, Hormuz security advisories, and the full operational reference table across ten sections.</div>
+      <div class="card-foot">MASS Code · UK ETS · MEPC 84/85 · Hydrogen · Orca AI · Nations &amp; Security · PDF</div>
+    </a>
+
     <a href="https://marineintelligenceweekly.com/ecosystem.html"
        class="card c-orange"
        data-tags="reference ai">
@@ -807,19 +505,54 @@ window.addEventListener('scroll',function(){
 });
 document.getElementById('rtt').style.display='none';
 
-/* ── FILTER ── */
+/* ── FILTER + SEARCH (combined) ── */
+var currentTag='all';
+
 function filter(btn){
   document.querySelectorAll('.ftab').forEach(function(b){b.classList.remove('on')});
   btn.classList.add('on');
-  var tag=btn.dataset.tag;
-  var cards=document.querySelectorAll('#cards .card');
+  currentTag=btn.dataset.tag;
+  applyFilters();
+}
+
+function applySearch(){
+  applyFilters();
+}
+
+function clearSearch(){
+  var input=document.getElementById('archive-search');
+  input.value='';
+  input.focus();
+  applyFilters();
+}
+
+function applyFilters(){
+  var query=document.getElementById('archive-search').value.trim().toLowerCase();
+  var clearBtn=document.getElementById('search-clear');
+  clearBtn.classList.toggle('show', query.length>0);
+
+  var cards=document.querySelectorAll('.grid .card');
   var shown=0;
+
   cards.forEach(function(c){
     var tags=(c.dataset.tags||'').split(' ');
-    var show=(tag==='all'||tags.indexOf(tag)>-1);
+    var matchesTag=(currentTag==='all'||tags.indexOf(currentTag)>-1);
+
+    var text=c.innerText.toLowerCase();
+    var matchesSearch=(query.length===0||text.indexOf(query)>-1);
+
+    var show=matchesTag&&matchesSearch;
     c.style.display=show?'flex':'none';
     if(show) shown++;
   });
+
+  var countEl=document.getElementById('search-count');
+  if(query.length>0){
+    countEl.textContent=shown+' result'+(shown===1?'':'s')+' for "'+document.getElementById('archive-search').value.trim()+'"';
+  } else {
+    countEl.textContent='';
+  }
+
   document.getElementById('empty-state').style.display=shown===0?'block':'none';
 }
 </script>
