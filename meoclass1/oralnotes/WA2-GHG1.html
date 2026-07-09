@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The 2023 Revised IMO GHG Strategy &amp; Carbon Intensity Framework (EEXI/CII) | MEO Class 1 Written Notes — Marine Intelligence Weekly</title>
-<meta name="description" content="MEO Class 1 written-exam model answer: 2023 Revised IMO GHG Strategy, EEDI/EEXI design indices, CII operational rating (A–E), SEEMP Part III, MEPC.377(80). Expanded notes for Kochi MMD exam prep.">
+<meta name="description" content="MEO Class 1 written-exam model answer: 2023 Revised IMO GHG Strategy, EEDI/EEXI design indices, Required EEDI/EEXI (Reg 24/25), CII operational rating (A–E), CII G1–G5 guideline family, Z-factors 2023–2030, SEEMP Part III. Expanded notes for Kochi MMD exam prep.">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/WA2-GHG1.html">
 <meta property="og:title" content="2023 Revised IMO GHG Strategy & Carbon Intensity Framework — MEO Class 1 Written Notes">
@@ -127,6 +127,22 @@
   .verify-box .vb-title{color:var(--teal-dark); font-weight:700; margin-bottom:6px; font-size:12.5px;}
   .verify-box a{color:var(--teal-dark);}
 
+  mjx-container[display="true"]{overflow-x:auto; overflow-y:hidden; max-width:100%; font-size:90%; padding:2px 0;}
+  .fw-shape{font-family:'Courier New', monospace; font-size:12.5px; background:var(--grey-bg); border-radius:6px; padding:8px 12px; margin-bottom:10px; color:var(--navy); font-weight:700; overflow-x:auto; white-space:nowrap;}
+  .formula-words{background:#fff; border:1.5px solid var(--teal); border-left:5px solid var(--teal-dark); border-radius:8px; padding:14px 18px; margin:4px 0 18px 0; font-family:'Segoe UI',sans-serif; font-size:13px;}
+  .formula-words .fw-title{color:var(--teal-dark); font-weight:700; text-transform:uppercase; letter-spacing:0.4px; font-size:11px; margin-bottom:8px;}
+  .formula-words .fw-part{margin:8px 0;}
+  .formula-words .fw-label{color:var(--orange); font-weight:700; font-size:10.5px; text-transform:uppercase; letter-spacing:0.3px; display:block; margin-bottom:3px;}
+  .formula-words .fw-text{color:#334155; line-height:1.55;}
+  .formula-words .fw-spoken{margin-top:10px; padding-top:10px; border-top:1px dashed var(--grey-border); font-style:italic; color:#0f172a;}
+  .formula-words .fw-spoken .fw-label{color:var(--teal-dark);}
+
+  .reg-ref-box{border:1.5px solid var(--navy); border-radius:8px; padding:14px 18px; margin:16px 0; background:#f8fafc; font-family:'Segoe UI',sans-serif; font-size:12.5px;}
+  .reg-ref-box .rrb-title{color:var(--navy); font-weight:700; text-transform:uppercase; letter-spacing:0.4px; font-size:11px; margin-bottom:8px;}
+  .reg-ref-box ul{margin:0; padding-left:18px; font-family:'Segoe UI',sans-serif; font-size:12.5px;}
+  .reg-ref-box li{margin:6px 0; text-align:left;}
+  .reg-ref-box a{color:var(--teal-dark); word-break:break-all;}
+
   .q-footer{display:flex; justify-content:space-between; align-items:center; margin-top:8px; padding-top:10px; border-top:1px dashed var(--grey-border); font-size:11px; color:var(--grey-text); font-family:'Segoe UI',sans-serif; flex-wrap:wrap; gap:6px; word-break:break-all; min-width:0;}
   .q-footer a{color:var(--teal-dark);}
 
@@ -135,7 +151,7 @@
 </style>
 </head>
 <body>
-<!-- GATE SCRIPT STRIPPED FOR REVIEW COPY -->
+<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
 
 <div class="topbar">
   <span class="logo">⚓ MIW</span>
@@ -155,7 +171,7 @@
     <div class="sub">Expanded model-answer notes for MEO Class 1 written &amp; oral exam preparation — EEDI/EEXI, CII, SEEMP Part III</div>
     <div class="header-meta">
       <span>📚 Chapter 1</span>
-      <span>🏷 Tags: MEPC.377(80) · EEXI · CII · SEEMP</span>
+      <span>🏷 Tags: MEPC.377(80) · EEXI · CII · G1–G5 · SEEMP</span>
       <span>✅ Verified against IMO/class sources</span>
       <span>🕐 ~16 min read</span>
     </div>
@@ -172,8 +188,49 @@
   universal scale — this chapter presents the boundary concept generically, as an exam answer should,
   without inventing specific numeric boundaries for a given ship type. (2) SEEMP Part III/CII guideline
   resolution numbers have been aligned to <strong>MEPC.328(76)</strong> (2021 EEXI/CII/SEEMP package) and
-  <strong>MEPC.354(78)</strong> (2022 CII reference lines and rating boundaries, G3), replacing an unverifiable
+  <strong>MEPC.354(78)</strong> (2022 CII operational carbon intensity rating boundaries, G4), replacing an unverifiable
   citation in the original draft.
+  <br><br><strong>v1.1 update:</strong> added plain-language "Formula in Words" breakdowns for the EEDI/EEXI,
+  Attained CII, and speed-power cube-law equations, and converted the closing Reference Sources list into
+  direct, clickable links to primary IMO resolution PDFs so every figure can be independently verified.
+  <br><br><strong>v1.4 update (external review pass):</strong> Section 4's Chapter 5 status note now carries
+  the precise vote tallies for both MEPC 83 (63–16–24, April 2025) and MEPC/ES.2 (57–49–21–8 to adjourn,
+  October 2025) instead of "majority vote"; confirmed against multiple April–May 2026 sources (post-dating
+  the October 2025 event) that the reconvened session is <strong>MEPC 85 in November 2026</strong>, not the
+  October 2026 date some outlets initially reported in October 2025 — and noted the resulting shift in
+  earliest possible entry into force to ~March 2028. The EEDI vs EEXI table (Section 5A) gained five new
+  rows: applicability threshold (400 GT, 11 ship-type categories, and the reg. 2.13/2.18 "existing ship"
+  definition trap), the required-value reduction-factor linkage to EEDI Phase 2/3, the governing calculation
+  guidelines (MEPC.364(79) for EEDI, MEPC.350(78) for EEXI), the EEDI-to-EEXI carry-forward provision, and
+  the 2.5% auxiliary-power scope note. All additions were independently verified against primary IMO
+  resolution PDFs and cross-checked against 2026-dated classification-society sources before inclusion.
+  <br><br><strong>v1.5 update:</strong> added the Required EEDI / Required EEXI formulas from MARPOL Annex VI
+  Regulations 24 &amp; 25 (consolidated text as of 1 May 2024, incorporating Res. MEPC.328(76), MEPC.361(79),
+  MEPC.362(79)) with a full "Formula in Words" breakdown of the shared reference-line equation and the
+  X-vs-Y reduction-factor distinction, directly under Section 5A. Also added a Section 8 note on Res.
+  <strong>MEPC.403(83)</strong> (adopted 11 April 2025), which tightens EEDI sea-trial verification —
+  effective for trials conducted on or after <strong>1 May 2026</strong> — to require measured-data power
+  curves per ISO 15016:2025 / ITTC 2024, confirmed against both the IMO resolution text and Lloyd's Register's
+  own May 2026 client notice.
+  <br><br><strong>v1.6 update:</strong> expanded Section 5B (CII) with (1) a numeric worked example showing
+  the Attained CII numerator formula for a multi-fuel ship (VLSFO + MDO, using verified $C_F$ values from
+  Res. MEPC.281(70)); (2) a new "CII Guideline Family (G1–G5)" subsection — <strong>correcting</strong> the
+  previous inline citation, which pointed to the 2021-vintage G1/G2 resolutions (MEPC.336(76)/MEPC.337(76));
+  the current, in-force versions are <strong>MEPC.352(78)</strong> and <strong>MEPC.353(78)</strong> (2022),
+  which revoked the 2021 originals at MEPC 78; (3) the confirmed 2027–2030 Z-factor table from Res.
+  MEPC.400(83), adopted at MEPC 83; (4) the previously-omitted G5 correction factors and voyage adjustments
+  (Res. MEPC.355(78)); and (5) a direct answer to "is CII being merged with EEXI" — there is no literal
+  merger; MEPC 83 reviewed CII/SEEMP/EEXI jointly under Phase 1 of the short-term-measures review, and
+  Phase 2 (Spring 2026–Spring 2028, per IMO's own published timeline) will look at further CII/EEXI/Net-Zero
+  Framework synergies, not a fixed "MEPC 85, October 2026" decision as some secondary sources suggested.
+  <br><br><strong>v1.7 update (final correction pass, pre-gate):</strong> corrected a stray leftover reference
+  in this verification note and in the Section 4 reg-box that mislabelled Res. MEPC.354(78) as "G3" — it is
+  <strong>G4</strong> (Operational Carbon Intensity Rating Guidelines), a hangover from an earlier draft that
+  conflicted with the correct G1–G5 table added in v1.6. Also revised the Chapter 5 reconvened-session date:
+  the v1.4 note's "confirmed MEPC 85 in November 2026" overstated certainty — Lloyd's Register's MEPC 84
+  summary (1 May 2026) confirms this remains a <strong>tentative</strong> slot (30 Nov–3 Dec 2026 for MEPC 85,
+  plus a resumed one-day MEPC/ES.2 on 4 Dec), explicitly not yet settled. Section 4 now reflects this
+  provisional framing throughout.
 </div>
 
 <div class="exam-q">
@@ -214,7 +271,7 @@
 [2023 / MEPC 80, Res. MEPC.377(80)] 2023 Revised GHG Strategy — accelerated net-zero-by-2050 target
    |
    v
-[2025 / MEPC 83] Mid-term measures (fuel standard + pricing, draft Chapter 5) APPROVED by majority
+[2025 / MEPC 83] Mid-term measures (fuel standard + pricing, draft Chapter 5) APPROVED 63-16-24
    |               vote — not yet adopted (see Section 4 status note)</div>
 
 <h2 class="section-h">4 · IMO / International Regulatory References</h2>
@@ -226,24 +283,138 @@
   <div class="reg-item"><span class="reg-code">Reg. 26</span><span class="reg-desc">Verification of attained EEXI on existing ships.</span></div>
   <div class="reg-item"><span class="reg-code">Reg. 27 &amp; 28</span><span class="reg-desc">Data collection (IMO DCS) and operational CII rating.</span></div>
   <div class="reg-item"><span class="reg-code">Res. MEPC.328(76)</span><span class="reg-desc">2021 amendments introducing EEXI/CII/enhanced SEEMP (in force 1 Nov 2022).</span></div>
-  <div class="reg-item"><span class="reg-code">Res. MEPC.354(78)</span><span class="reg-desc">2022 Guidelines on operational CII reference lines and rating boundaries (G1–G4).</span></div>
+  <div class="reg-item"><span class="reg-code">Res. MEPC.354(78)</span><span class="reg-desc">2022 Guidelines on the Operational Carbon Intensity Rating of Ships (CII Rating Guidelines, G4) — the A–E boundary scale; see the full G1–G5 guideline table in Section 5C.</span></div>
   <div class="reg-item"><span class="reg-code">Res. MEPC.377(80)</span><span class="reg-desc">2023 IMO Strategy on Reduction of GHG Emissions from Ships.</span></div>
 </div>
 <div class="psc-box">
   <div class="pb-title">⚠ Regulatory status note — mid-term measures (Chapter 5) are NOT yet in force</div>
-  <div>MEPC 83 (April 2025) <strong>approved</strong> draft amendments introducing a new <strong>Chapter 5 — IMO Net-Zero Framework</strong> (goal-based fuel standard + GHG pricing) by majority vote. The extraordinary session called to formally <strong>adopt</strong> the text, MEPC ES.2 (October 2025), <strong>adjourned without reaching agreement</strong>. As of this writing the session is rescheduled to reconvene in <strong>November 2026</strong>. Do not state in an exam answer that Chapter 5 is "in force" or give a fixed entry-into-force date as settled fact — describe it as approved at MEPC 83 and pending adoption. This chapter covers only the short-term measures (EEXI/CII/SEEMP), which are already in force; the mid-term GFI framework is covered separately once adopted.</div>
+  <div>MEPC 83 (April 2025) <strong>approved</strong> draft amendments introducing a new <strong>Chapter 5 — IMO Net-Zero Framework</strong> (goal-based fuel standard + carbon pricing/reward mechanism) by a vote of <strong>63 in favour, 16 against, 24 abstentions</strong>. The extraordinary session convened to formally <strong>adopt</strong> the text, MEPC/ES.2 (14–17 October 2025), did not vote on adoption at all — instead, a procedural motion to adjourn consideration for one year (moved by Singapore, put to a vote by Saudi Arabia) <strong>passed 57 in favour, 49 against, 21 abstentions, 8 absent</strong>. Adoption is now deferred to a reconvened session <strong>tentatively scheduled for 30 November–3 December 2026</strong> — MEPC 85 (30 Nov–3 Dec) followed by a resumed one-day MEPC/ES.2 session on 4 December, per MEPC 84's April 2026 outcome — <strong>though this remains provisional and subject to further confirmation; do not state this date as settled fact in an exam answer.</strong> As a direct consequence of the 2025 delay, the earliest possible entry into force has shifted from March 2027 to on/around <strong>March 2028</strong>. Do not state in an exam answer that Chapter 5 is "in force" or give a fixed entry-into-force date as settled fact — describe it as approved at MEPC 83, adoption deferred at MEPC/ES.2, and pending the tentative late-2026 reconvened session. This chapter covers only the short-term measures (EEXI/CII/SEEMP), which are already in force; the mid-term GFI framework is covered separately once adopted.</div>
 </div>
 
 <h2 class="section-h">5 · Engineering Explanation &amp; Core Technical Mechanisms</h2>
 <h3>A. Energy Efficiency Design and Existing Ship Indices (EEDI / EEXI)</h3>
 <p>EEDI (newbuilds) and EEXI (existing ships) are structural, design-verification indices — calculated once per vessel (barring major conversion) — expressing theoretical CO<sub>2</sub> grams emitted per tonne-mile of transport work at a reference design condition:</p>
 $$EEDI\ /\ EEXI = \frac{\left(\prod_{j} f_j\right)\left(\sum_i P_{ME(i)} \cdot C_{F\,ME(i)} \cdot SFC_{ME(i)}\right) + \left(P_{AE} \cdot C_{FAE} \cdot SFC_{AE}\right) - \left(\sum_l f_{eff(l)} \cdot P_{eff(l)} \cdot C_{FME} \cdot SFC_{ME}\right)}{f_i \cdot f_c \cdot Capacity \cdot V_{ref}}$$
+<div class="formula-words">
+  <div class="fw-title">EEDI / EEXI Formula in Words</div>
+  <div class="fw-shape">EEDI / EEXI &nbsp;=&nbsp; Net CO₂ Emitted &nbsp;÷&nbsp; Transport Work Capacity</div>
+  <div class="fw-part">
+    <span class="fw-label">Numerator (Net CO₂ Emitted, per Voyage-Equivalent)</span>
+    <span class="fw-text">Take the main engine's rated power, multiply by that engine's carbon factor and its specific fuel consumption — this gives main-engine CO₂ output. Do the same for the auxiliary engines and add the two together. Then subtract any CO₂ credit earned from innovative energy-saving devices (e.g. shaft generators, waste-heat recovery) that reduce the effective power draw. Finally, multiply the whole result by a correction-factor product that accounts for ship-type features such as ice-class or general cargo capacity adjustments.</span>
+  </div>
+  <div class="fw-part">
+    <span class="fw-label">Denominator (Transport Work Capacity)</span>
+    <span class="fw-text">Multiply the ship's cargo-carrying capacity (deadweight or gross tonnage, depending on ship type) by its reference speed at that capacity, then apply the capacity- and speed-correction factors.</span>
+  </div>
+  <div class="fw-spoken">
+    <span class="fw-label">Spoken Version</span>
+    "Sir, EEDI and EEXI express grams of CO₂ emitted per tonne-mile of transport work at a reference design condition. The numerator is the net CO₂ output — main engine power times its carbon factor times specific fuel consumption, plus the same for the auxiliary engines, minus any credit for energy-saving devices, all scaled by ship-type correction factors. The denominator is the ship's capacity multiplied by its reference speed. A ship complies when its attained value is at or below the required value for its size and ship-type phase."
+  </div>
+  <div class="fw-part" style="margin-top:12px; padding-top:10px; border-top:1px dashed var(--grey-border);">
+    <span class="fw-label">Same Formula Shape — So What Actually Differs?</span>
+    <span class="fw-text">EEDI and EEXI use the identical structure above, but they are not the same calculation in practice, because the <em>value plugged into $P_{ME}$</em> differs:</span>
+  </div>
+  <table class="reg-tbl" style="margin:6px 0 0 0;">
+    <tr><th style="width:22%">Point of Difference</th><th style="width:39%">EEDI (newbuild)</th><th>EEXI (existing ship)</th></tr>
+    <tr><td><strong>When calculated</strong></td><td>Once, at the design stage, before the ship is built — a forward-looking design commitment.</td><td>Once, retrospectively, at the ship's first survey on or after 1 Jan 2023 — a one-time check on a ship already in service.</td></tr>
+    <tr><td><strong>Power value used ($P_{ME}$)</strong></td><td>75% of the engine's as-built Maximum Continuous Rating (MCR) — the power the engine was actually designed to deliver.</td><td>Also 75% of MCR normally, <strong>but</strong> if the owner has fitted an overridable Engine Power Limitation (EPL) or Shaft Power Limitation (ShaPoLi) system, the calculation instead uses 83% of the <em>limited</em> power ($MCR_{lim}$) — i.e. a deliberately derated figure, per the 2021 Guidelines (Res. MEPC.335(76)).</td></tr>
+    <tr><td><strong>Why this matters</strong></td><td>A newbuild is designed from scratch to meet its EEDI target — no retrofit needed.</td><td>An existing ship with an oversized engine can mechanically or electronically cap its power via EPL/ShaPoLi, which lowers $MCR$, lowers $C_F \cdot SFC \cdot P_{ME}$, and brings attained EEXI below the required value <strong>without any hardware change to the engine itself</strong> — this is why EPL is the single most common EEXI compliance route across the fleet today.</td></tr>
+    <tr><td><strong>Reference speed source</strong></td><td>Taken from the ship's own EEDI sea-trial data (mandatory for ships in the EEDI scope).</td><td>For ships that were never subject to EEDI (built before the phase-in), $V_{ref}$ may instead come from an estimated speed-power curve per the 2022 EEXI survey guidelines (Res. MEPC.351(78)), since no EEDI sea-trial record exists.</td></tr>
+    <tr><td><strong>Applicability</strong></td><td>Ships ≥400 GT across the 11 MARPOL Annex VI ship-type categories, keel-laid/delivered per the EEDI phase-in schedule since 1 Jan 2013.</td><td>Ships ≥400 GT built before 1 Jan 2023, same 11 categories. <strong>Caution:</strong> the MARPOL reg. 2.13/2.18 definition of "existing ship" (built before 1 Jan 2013) applies only to EEDI major-conversion rules — it does <em>not</em> define EEXI applicability. A common oral-exam trap.</td></tr>
+    <tr><td><strong>Required-value reduction-factor phase (the primary regulatory difference)</strong></td><td>Progressive Phase 1 → 2 → 3 reduction factors, tied to build/delivery year — later phases are stricter.</td><td>Required EEXI is generally set at the <strong>same level as EEDI Phase 2</strong> for most ship types, but four categories — container ships, cruise ships, LNG carriers, and gas carriers — must meet the tougher, accelerated <strong>Phase 3</strong> level (applicable from 1 April 2022). This reduction-factor linkage, not just the power/speed inputs, is what most classification-society guidance treats as the main EEDI/EEXI difference.</td></tr>
+    <tr><td><strong>Governing calculation guideline</strong></td><td><strong>Res. MEPC.364(79)</strong> (2022) — current in-force EEDI Calculation Guidelines, consolidating the earlier MEPC.245(66)/MEPC.308(73) lineage.</td><td><strong>Res. MEPC.350(78)</strong> (2022) — EEXI Calculation Guidelines, which explicitly cross-refer to the EEDI guidelines, instructing the reader to substitute "EEXI" wherever "EEDI" appears.</td></tr>
+    <tr><td><strong>Carry-forward option</strong></td><td>N/A</td><td>If a ship already has an attained EEDI on file (i.e. it was EEDI-scope at build) and that attained EEDI ≤ the required EEXI, the existing EEDI value may be declared directly as the attained EEXI — no fresh EEXI calculation is required (Res. MEPC.350(78)).</td></tr>
+    <tr><td><strong>Scope of power considered</strong></td><td colspan="2">Both indices account only for propulsion (main engine) power, plus a fixed <strong>2.5% allowance</strong> for auxiliary engine power — neither is a whole-ship energy audit. A common misconception worth pre-empting in an oral answer: EEDI/EEXI say nothing about hotel load, cargo-handling power, or reefer container consumption — that is what CII (Section 5B) captures instead.</td></tr>
+  </table>
+</div>
 <p>Where $P_{ME}$/$P_{AE}$ are design power outputs (kW); $C_F$ is the fuel's carbon factor (e.g. ≈3.114 g-CO₂/g-fuel for standard fuel oil, per MARPOL Annex VI Appendix VI); $SFC$ is specific fuel consumption (g/kWh) from NO<sub>x</sub> Technical Code test-bed trials; $Capacity$ is deadweight or gross tonnage at summer load draft; $V_{ref}$ is service speed at that capacity/power setting. A ship complies when its <em>attained</em> EEDI/EEXI is at or below the <em>required</em> value set by the applicable reduction-factor phase.</p>
+
+<h4>Required EEDI / Required EEXI — MARPOL Annex VI, Regulations 24 &amp; 25</h4>
+<p>The formulas above give the ship's <em>attained</em> value. Compliance is judged against a separate <em>required</em> value, defined directly in the Convention text (MARPOL Annex VI consolidated edition, as amended by Res. MEPC.328(76), MEPC.361(79), MEPC.362(79)):</p>
+$$Required\ EEDI = \left(1 - \frac{X}{100}\right) \cdot \text{Reference line value} \qquad \text{[Reg. 24]}$$
+$$Required\ EEXI = \left(1 - \frac{Y}{100}\right) \cdot \text{Reference line value} \qquad \text{[Reg. 25]}$$
+$$\text{Reference line value} = a \cdot b^{-c} \qquad \text{[common to both]}$$
+<div class="formula-words">
+  <div class="fw-title">Required EEDI / EEXI Formula in Words</div>
+  <div class="fw-shape">Required Value &nbsp;=&nbsp; (1 − Reduction Factor) &nbsp;×&nbsp; Reference Line Value</div>
+  <div class="fw-part">
+    <span class="fw-label">Reference Line Value (the common baseline)</span>
+    <span class="fw-text">A curve fitted to historical fleet performance for each ship type, expressed as a constant $a$ multiplied by the ship's own size parameter (DWT or GT, called $b$ here) raised to a negative exponent $c$ — larger ships sit lower on the curve. Both EEDI and EEXI are measured against the <em>same</em> reference line for a given ship type; only the reduction factor applied to it differs.</span>
+  </div>
+  <div class="fw-part">
+    <span class="fw-label">Reduction Factor — X (EEDI) vs Y (EEXI)</span>
+    <span class="fw-text">Subtract the reduction factor (as a percentage) from 100%, then multiply that surviving fraction by the reference line value. X (Table 1) increases through EEDI Phase 1 → 2 → 3 as build year gets later — a newbuild delivered today faces a stricter X than one delivered in 2015. Y (Table 3) is fixed at whatever percentage corresponds to the EEDI Phase 2 level for most ship types — except container ships, cruise ships, LNG carriers and gas carriers, which are held to the accelerated Phase 3 level instead (see the table above).</span>
+  </div>
+  <div class="fw-spoken">
+    <span class="fw-label">Spoken Version</span>
+    "Sir, both Required EEDI and Required EEXI are calculated the same way — one minus the reduction factor, over 100, multiplied by the EEDI reference line value for that ship type. The reference line itself is a curve, a times the ship's capacity to the power of minus c, common to both indices. What differs is only which reduction-factor table applies: X from Table 1 for EEDI, which gets stricter with each build-year phase, or Y from Table 3 for EEXI, which is generally frozen at the Phase 2 level, except for four ship types held to Phase 3."
+  </div>
+</div>
 
 <h3>B. Operational Carbon Intensity Indicator (CII)</h3>
 <p>Unlike the design indices, CII is a dynamic, retrospective operational metric calculated at the close of each calendar year from actual logged performance:</p>
 $$Attained\ CII_{annual} = \frac{\sum_j M_j \cdot C_{Fj}}{Capacity \cdot D_{att}}$$
-<p>Where $M_j$ is total mass (g) of fuel type $j$ consumed over the calendar year; $C_{Fj}$ is the carbon conversion factor for fuel $j$; $D_{att}$ is total distance travelled over ground (nautical miles), from the oil record book / GPS log. The Attained CII is compared against a ship-type- and size-specific <em>Required CII</em> reference line (Resolution MEPC.354(78), guidelines G1–G3) to assign an annual rating of <strong>A</strong> (major superior) through <strong>E</strong> (inferior).</p>
+<div class="formula-words">
+  <div class="fw-title">Attained CII Formula in Words</div>
+  <div class="fw-shape">Attained CII &nbsp;=&nbsp; Total CO₂ Emitted (year) &nbsp;÷&nbsp; (Capacity × Distance Sailed)</div>
+  <div class="fw-part">
+    <span class="fw-label">Numerator (Total CO₂ Emitted Over the Calendar Year)</span>
+    <span class="fw-text">For each fuel type consumed over the year, take the total mass burned and multiply it by that fuel's carbon conversion factor. Add these fuel-wise totals together to get the ship's total logged CO₂ output for the year.</span>
+  </div>
+  <div class="fw-part">
+    <span class="fw-label">Denominator (Transport Work Actually Performed)</span>
+    <span class="fw-text">Multiply the ship's capacity (deadweight or gross tonnage) by the total distance actually sailed over the year, taken from the oil record book or GPS log.</span>
+  </div>
+  <div class="fw-spoken">
+    <span class="fw-label">Spoken Version</span>
+    "Sir, the Attained CII numerator is the total CO₂ emitted over the calendar year — the sum, across all fuels burned, of each fuel's mass multiplied by its carbon conversion factor. The denominator is the ship's capacity multiplied by the actual distance sailed that year. Dividing the two gives grams of CO₂ per capacity-mile, which is then compared against the Required CII reference line to assign the annual A-to-E rating."
+  </div>
+  <div class="fw-part" style="margin-top:12px; padding-top:10px; border-top:1px dashed var(--grey-border);">
+    <span class="fw-label">Numerator Worked as a Formula — Multi-Fuel Ship (e.g. VLSFO + MDO)</span>
+    <span class="fw-text">A container ship rarely burns one fuel all year — main engine on VLSFO (Heavy Fuel Oil family), auxiliary/boiler on MDO (Marine Diesel Oil) during ECA transits and manoeuvring. The numerator is simply each fuel's annual mass multiplied by its own $C_F$, added together:</span>
+  </div>
+  $$\text{Numerator} = \left(M_{VLSFO} \times C_{F,\,HFO}\right) + \left(M_{MDO} \times C_{F,\,MDO}\right) + \dots$$
+  <div class="fw-part">
+    <span class="fw-text">Using the IMO's standard $C_F$ values (Res. MEPC.281(70), Appendix IX table — same factors used for IMO DCS reporting): <strong>HFO/VLSFO family = 3.114</strong>, <strong>MDO/MGO = 3.206</strong>, LFO = 3.151, LNG = 2.750, Methanol = 1.375, Ethanol = 1.913 (all in tonnes CO₂ per tonne fuel). Worked example: a ship burning 8,000 t VLSFO and 500 t MDO in a calendar year —</span>
+  </div>
+  $$\text{Numerator} = (8{,}000 \times 3.114) + (500 \times 3.206) = 24{,}912 + 1{,}603 = 26{,}515\ \text{t CO}_2$$
+  <div class="fw-part">
+    <span class="fw-text">This 26,515 t CO₂ figure is then divided by (Capacity × Distance Sailed) to give the Attained CII in grams CO₂ per capacity-mile. Every additional fuel type on board — LNG, methanol, biofuel blends — simply adds one more $(M_j \times C_{Fj})$ term to the same sum; the formula structure never changes, only the number of terms.</span>
+  </div>
+</div>
+<p>Where $M_j$ is total mass (g) of fuel type $j$ consumed over the calendar year; $C_{Fj}$ is the carbon conversion factor for fuel $j$; $D_{att}$ is total distance travelled over ground (nautical miles), from the oil record book / GPS log. The Attained CII is compared against a ship-type- and size-specific <em>Required CII</em> reference line to assign an annual rating of <strong>A</strong> (major superior) through <strong>E</strong> (inferior).</p>
+
+<h3>C. The CII Guideline Family (G1–G5) — Know All Five for the Oral</h3>
+<p>CII is not governed by a single resolution — it is a suite of five linked guideline documents, each covering one part of the calculation-to-rating chain. Examiners frequently ask "what does G-series mean for CII?" as a rapid-fire check. <strong>Note the resolution numbers below are the current, in-force 2022 versions</strong> — several sources online (including AI-generated ones) still cite the original 2021 resolutions, which were revoked and replaced at MEPC 78 in June 2022.</p>
+<table class="reg-tbl">
+<tr><th style="width:10%">Guide</th><th style="width:22%">Current Resolution</th><th>Purpose</th></tr>
+<tr><td><strong>G1</strong></td><td>Res. MEPC.352(78) (2022)<br><span style="font-size:11px; color:#64748b;">(revoked 2021 original, Res. MEPC.336(76))</span></td><td>Calculation methods and applicability of Attained CII for individual ships — the formula and worked example above.</td></tr>
+<tr><td><strong>G2</strong></td><td>Res. MEPC.353(78) (2022)<br><span style="font-size:11px; color:#64748b;">(revoked 2021 original, Res. MEPC.337(76))</span></td><td>Reference lines for use with operational carbon intensity indicators — the baseline curve each ship type is measured against.</td></tr>
+<tr><td><strong>G3</strong></td><td>Res. MEPC.338(76) (2021), <strong>as amended by Res. MEPC.400(83) (2025)</strong></td><td>Annual reduction factors ("Z" factors) relative to the reference line — see the confirmed 2023–2030 table below.</td></tr>
+<tr><td><strong>G4</strong></td><td>Res. MEPC.354(78) (2022)<br><span style="font-size:11px; color:#64748b;">(revoked 2021 original, Res. MEPC.339(76))</span></td><td>Operational carbon intensity rating boundaries — the A–E scale itself.</td></tr>
+<tr><td><strong>G5</strong></td><td>Res. MEPC.355(78) (2022)</td><td>Interim correction factors and voyage adjustments — see below; this is the guideline candidates most often forget entirely.</td></tr>
+</table>
+
+<h4>Confirmed CII Reduction ("Z") Factors, 2023–2030</h4>
+<p>The 2027–2030 figures were previously undecided in earlier editions of the G3 guidelines; MEPC 83 (April 2025) closed that gap by adopting Res. MEPC.400(83), fixing the annual increment at <strong>2.625% per year</strong> from 2027 onward, reaching 21.5% by 2030:</p>
+<table class="reg-tbl">
+<tr><th>Year</th><th>2023</th><th>2024</th><th>2025</th><th>2026</th><th>2027</th><th>2028</th><th>2029</th><th>2030</th></tr>
+<tr><td><strong>Z factor (vs 2019 baseline)</strong></td><td>5%</td><td>7%</td><td>9%</td><td>11%</td><td>13.625%</td><td>16.25%</td><td>18.875%</td><td>21.5%</td></tr>
+</table>
+
+<h4>Correction Factors &amp; Voyage Adjustments (G5) — Often Omitted, Heavily Tested</h4>
+<p>Attained CII is not simply raw annual fuel mass over distance — Res. MEPC.355(78) allows specific, legitimate deductions from the numerator <em>before</em> the final A–E rating is struck, recognising that some fuel consumption is not representative of the ship's normal carbon efficiency:</p>
+<ul>
+  <li><strong>Voyage adjustments ($FC_{voyage}$):</strong> fuel consumption may be excluded for voyages undertaken solely for securing the safety of the ship or saving life at sea (applies to all ships), and for voyages in ice conditions (ice-classed ships only).</li>
+  <li><strong>$AF_{TankerSTS}$:</strong> a correction factor for oil tankers engaged in ship-to-ship (STS) transfer voyages, recognising the additional fuel burned manoeuvring alongside another tanker rather than on passage.</li>
+  <li><strong>$AF_{TankerShuttle}$:</strong> a correction for shuttle tankers operating with dynamic positioning during offshore loading.</li>
+  <li><strong>$FC_{electrical}$:</strong> deducts fuel used to generate additional electrical load for reefer containers, gas-carrier cargo handling, or LNG/tanker cargo-system equipment — cargo-driven consumption, not propulsion inefficiency.</li>
+  <li><strong>$FC_{boiler}$ and $FC_{others}$:</strong> deduct fuel used for tanker cargo heating or inert gas system operation.</li>
+</ul>
+<p>Each correction is applied to the relevant fuel-mass term <em>before</em> it enters the $\sum_j M_j \cdot C_{Fj}$ numerator — this is the practical answer to "how is Attained CII actually calculated," and a candidate who only states the raw formula without mentioning corrections is giving an incomplete answer.</p>
+
+<h4>"Is CII Being Combined with EEXI?" — What's Actually Happening</h4>
+<p>There is <strong>no literal merger</strong> of the two indices into a single formula — this is a common misconception worth pre-empting directly in an oral answer. What is true: MEPC 83 (April 2025) completed <strong>Phase 1</strong> of the IMO's review of the short-term GHG measures, which examined <strong>CII, SEEMP, and EEXI together as one package</strong>, since all three share the same enforcement chain under MARPOL Annex VI regulation 28 (technical file → SEEMP Part III → Statement of Compliance). Out of that joint review: the CII G3 reduction factors were extended to 2030 (above), while EEXI itself was not substantively reopened. <strong>Phase 2</strong> of the review is now underway — per IMO's own published timeline it runs <strong>Spring 2026 to Spring 2028</strong>, and will look at further developing CII metrics, enhancing the SEEMP framework, and — most relevant to your question — <strong>ensuring synergies between the CII/EEXI energy-efficiency framework and the IMO Net-Zero Framework (Chapter 5)</strong> once that is adopted. So: EEXI and CII remain two separate, independently certified regimes (EEXI under the one-time IEE Certificate, CII under the annual Statement of Compliance) linked only structurally — a ship's EEXI technical-file parameters (capacity, reference speed) feed conceptually into CII's denominator logic, but there is no regulatory plan to fuse them into one index. Treat any claim of a fixed "MEPC 85, October 2026" decision date on this with caution — IMO's own Phase 2 work plan gives a two-year window (Spring 2026–Spring 2028), not a single decisive session.</p>
 
 <h2 class="section-h">6 · Chief Engineer &amp; Flag State Responsibilities</h2>
 <h3>Chief Engineer Directives</h3>
@@ -267,6 +438,17 @@ $$Attained\ CII_{annual} = \frac{\sum_j M_j \cdot C_{Fj}}{Capacity \cdot D_{att}
   <li><strong>Engine Power Limitation (EPL):</strong> electronically de-rate maximum shaft output (e.g. to ~65% MCR), enforcing an eco-speed. Fuel consumption falls with the cube of speed for a given hull/propeller combination:</li>
 </ol>
 $$P_{new} = P_{old} \cdot \left(\frac{V_{new}}{V_{old}}\right)^{3}$$
+<div class="formula-words">
+  <div class="fw-title">Speed–Power Cube Law in Words</div>
+  <div class="fw-shape">New Power &nbsp;=&nbsp; Old Power &nbsp;×&nbsp; (New Speed ÷ Old Speed)³</div>
+  <div class="fw-part">
+    <span class="fw-text">Take the ratio of the new speed to the old speed, cube that ratio (multiply it by itself three times), then multiply by the old power requirement to get the new power requirement. In plain terms: a small cut in speed produces a much larger cut in power — and therefore fuel burn — because resistance grows disproportionately with speed for a fixed hull and propeller. For example, a 10% speed reduction (ratio 0.9) cuts power demand by roughly 27% (0.9³ ≈ 0.73), not 10%.</span>
+  </div>
+  <div class="fw-spoken">
+    <span class="fw-label">Spoken Version</span>
+    "Sir, the cube law states that required power is proportional to the cube of speed for a given hull and propeller. So the new power equals the old power multiplied by the ratio of new speed to old speed, raised to the power of three. This is why modest speed reduction under EPL delivers a disproportionately large fuel and CII benefit."
+  </div>
+</div>
 <ol start="2">
   <li><strong>Auxiliary load optimisation:</strong> clean boiler smoke tubes to improve heat-transfer efficiency; concentrate non-essential high electrical loads (ballast treatment, deck-crane testing) into port stays; run a single auxiliary engine at sea where safe.</li>
   <li><strong>Trim optimisation:</strong> adjust ballast distribution to keep the bulbous bow effectively submerged and minimise wave-making resistance.</li>
@@ -277,6 +459,7 @@ $$P_{new} = P_{old} \cdot \left(\frac{V_{new}}{V_{old}}\right)^{3}$$
 <h3>Survey Requirements</h3>
 <ul>
   <li><strong>Initial survey:</strong> on delivery, or before issue of the International Energy Efficiency (IEE) Certificate — verifies the EEDI/EEXI technical file and certified SEEMP Part I.</li>
+  <li><strong>Sea-trial verification (tightened from 1 May 2026):</strong> Res. <strong>MEPC.403(83)</strong> (adopted 11 April 2025, MEPC 83) amends the EEDI Survey &amp; Certification Guidelines (Res. MEPC.365(79)) so that, for sea trials conducted on or after <strong>1 May 2026</strong>, power curves must be built from <em>measured</em> ship speed and <em>measured</em> main engine output, corrected per the updated <strong>ISO 15016:2025</strong> standard or <strong>ITTC Recommended Procedure 7.5-04-01-01.1 (2024)</strong> — the older ISO 15016:2015 basis is no longer valid after that date. Practical tightening: ship-length-dependent maximum wind-speed limits, mandatory wave-buoy calibration data submitted to the verifier, and a stricter, standardised wave-correction priority sequence. This is a genuine increase in verification rigor at the final (sea-trial) stage — not a shift to ongoing operational EEDI monitoring; EEDI remains a one-time design-stage index.</li>
   <li><strong>Periodical/annual audits:</strong> confirm any retrofit affecting installed power (ducting, propeller boss fins, EPL seals) matches the technical file.</li>
   <li><strong>SEEMP Part III verification:</strong> confirms an approved, ship-specific, multi-year improvement plan exists and is followed.</li>
 </ul>
@@ -358,18 +541,37 @@ $$P_{new} = P_{old} \cdot \left(\frac{V_{new}}{V_{old}}\right)^{3}$$
   <div><strong>Z</strong> — Zero/near-Zero Fuel Uptake: at least 5%, striving for 10%, by 2030.</div>
 </div>
 
-<div class="verify-box">
-  <div class="vb-title">📖 Reference Sources</div>
-  IMO — Resolution MEPC.377(80), 2023 IMO Strategy on Reduction of GHG Emissions from Ships (imo.org) ·
-  IMO — Resolution MEPC.328(76), 2021 amendments introducing EEXI/CII/SEEMP (imo.org) ·
-  IMO — Resolution MEPC.354(78), 2022 CII reference lines &amp; rating boundary guidelines G1–G4 (imo.org) ·
-  IMO — MEPC 80 &amp; MEPC 83 meeting summaries (imo.org/mediacentre) ·
-  Classification society regulatory updates (DNV, LR, ABS) on EEXI/CII implementation and MEPC 83 status.
+<div class="reg-ref-box">
+  <div class="rrb-title">📖 Reference Sources — Verify Directly at the Link</div>
+  <ul>
+    <li>IMO Resolution MEPC.377(80) — 2023 IMO Strategy on Reduction of GHG Emissions from Ships (adopted 7 Jul 2023): <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.377(80).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.377(80).pdf</a></li>
+    <li>IMO Resolution MEPC.328(76) — 2021 amendments to MARPOL Annex VI introducing EEXI/CII/enhanced SEEMP (adopted 17 Jun 2021, in force 1 Nov 2022): <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.328(76).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.328(76).pdf</a></li>
+    <li>IMO Resolution MEPC.354(78) — 2022 Guidelines on the Operational Carbon Intensity Rating of Ships (CII Rating Guidelines, G4) (adopted 10 Jun 2022): <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.354(78).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.354(78).pdf</a></li>
+    <li>IMO — "2023 IMO Strategy on Reduction of GHG Emissions from Ships" official summary page: <a href="https://www.imo.org/en/ourwork/environment/pages/2023-imo-strategy-on-reduction-of-ghg-emissions-from-ships.aspx" target="_blank" rel="noopener">imo.org/en/ourwork/environment</a></li>
+    <li>IMO — Draft Revised MARPOL Annex VI text considered at MEPC ES.2 (Oct 2025), showing Chapter 5 status as approved-pending-adoption: <a href="https://wwwcdn.imo.org/localresources/en/MediaCentre/Documents/MEPC-ES.2-2%20-%20Draft%20Revised%20MARPOL%20Annex%20VI%202025.pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC-ES.2-2 draft</a></li>
+    <li>IMO Resolution MEPC.335(76) — 2021 Guidelines on the Shaft/Engine Power Limitation System to Comply with the EEXI Requirements and Use of a Power Reserve (adopted 17 Jun 2021) — governs the EPL/ShaPoLi derating used in the EEXI vs EEDI comparison in Section 5A: <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.335(76).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.335(76).pdf</a></li>
+    <li>IMO Resolution MEPC.351(78) — 2022 Guidelines on Survey and Certification of the Attained EEXI (adopted 10 Jun 2022) — source for the estimated speed-power curve provision for ships outside EEDI scope: <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.351(78).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.351(78).pdf</a></li>
+    <li>IMO Resolution MEPC.364(79) — 2022 Guidelines on the Method of Calculation of the Attained EEDI for New Ships (adopted Dec 2022) — current in-force EEDI Calculation Guidelines cited in the EEDI vs EEXI table: <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.364(79).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.364(79).pdf</a></li>
+    <li>IMO Resolution MEPC.350(78) — 2022 Guidelines on the Method of Calculation of the Attained EEXI (adopted 10 Jun 2022) — source for the EEXI carry-forward provision and the "read EEDI as EEXI" cross-reference: <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.350(78).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.350(78).pdf</a></li>
+    <li>IMO Resolution MEPC.403(83) — Amendments to the 2022 Guidelines on Survey and Certification of the EEDI (adopted 11 April 2025; sea-trial provisions effective for trials on/after <strong>1 May 2026</strong>) — source for the tightened sea-trial verification note in Section 8: <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.403(83).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.403(83).pdf</a></li>
+    <li>Lloyd's Register — Class News 08/2026, "Revised speed trial requirements for new construction ships" (confirms 1 May 2026 effective date and ISO 15016:2025 / ITTC 2024 procedure requirement): <a href="https://www.lr.org/en/knowledge/class-news/08-26/" target="_blank" rel="noopener">lr.org/en/knowledge/class-news/08-26</a></li>
+    <li>MARPOL Annex VI, Regulations 24 &amp; 25 (Required EEDI / Required EEXI) — consolidated text as of 1 May 2024, incorporating amendments by Res. MEPC.328(76), MEPC.361(79), MEPC.362(79) — the source for the reference-line and reduction-factor formulas in Section 5A. IMO's consolidated MARPOL text is not freely hosted as a single public PDF; verify Regulation 24/25 wording and Tables 1–3 against your flag Administration's or class society's current consolidated MARPOL Annex VI edition, or IMO's official 2024 Consolidated Edition of MARPOL Annex VI (purchase/subscription via imo.org publications).</li>
+    <li>IMO Resolution MEPC.352(78) — 2022 Guidelines on Operational Carbon Intensity Indicators and the Calculation Methods (CII Guidelines, G1) — current in-force calculation methodology: <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.352(78).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.352(78).pdf</a></li>
+    <li>IMO Resolution MEPC.353(78) — 2022 Guidelines on the Reference Lines for Use with Operational Carbon Intensity Indicators (CII Guidelines, G2): <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.353(78).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.353(78).pdf</a></li>
+    <li>IMO Resolution MEPC.338(76) — 2021 Guidelines on the Operational Carbon Intensity Reduction Factors Relative to Reference Lines (CII Guidelines, G3), original 2023–2026 Z-factor table: <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.338(76).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.338(76).pdf</a></li>
+    <li>IMO Resolution MEPC.400(83) — Amendments to the G3 Guidelines (adopted 11 April 2025, MEPC 83), source for the confirmed 2027–2030 Z-factor table: <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.400(83).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.400(83).pdf</a></li>
+    <li>IMO Resolution MEPC.355(78) — 2022 Interim Guidelines on Correction Factors and Voyage Adjustments for CII Calculations (CII Guidelines, G5) — source for the $FC_{voyage}$/$AF_{TankerSTS}$/$FC_{electrical}$ corrections above: <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.355(78).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.355(78).pdf</a></li>
+    <li>IMO Resolution MEPC.281(70) — 2016 Guidelines/Appendix IX carbon-factor ($C_F$) table (adopted 28 Oct 2016) — source for the HFO/MDO/LNG/methanol $C_F$ values used in the numeric worked example: <a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/MEPCDocuments/MEPC.281(70).pdf" target="_blank" rel="noopener">wwwcdn.imo.org — MEPC.281(70).pdf</a></li>
+    <li>IMO — EEXI and CII FAQ (official page, confirming the Phase 2 review timeline of Spring 2026 – Spring 2028): <a href="https://www.imo.org/en/mediacentre/hottopics/pages/eexi-cii-faq.aspx" target="_blank" rel="noopener">imo.org — EEXI/CII FAQ</a></li>
+    <li>Lloyd's Register — MEPC 84 Summary Report (1 May 2026), source for the tentative 30 Nov–3 Dec 2026 MEPC 85 / 4 Dec resumed MEPC/ES.2 scheduling: <a href="https://www.lr.org/en/knowledge/regulatory-updates/imo-meetings-and-future-legislation/mepc-84-summary-report/" target="_blank" rel="noopener">lr.org — MEPC 84 Summary Report</a></li>
+    <li>Classification society regulatory bulletins (DNV, LR, ABS) on EEXI/CII implementation and MEPC 83/ES.2 status — cross-check against the primary IMO texts above; bulletins summarise but the resolution PDF is the binding text.</li>
+  </ul>
+  <div style="margin-top:8px; font-size:11.5px; color:#64748b;">If a link above returns a 404 or the document has been superseded, please report it via the correction email below — IMO occasionally reorganises its document tree.</div>
 </div>
 
 <div class="q-footer">
   <span>Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Written%20WA2-GHG1%2C%20Correction%20Required">contactus@marineintelligenceweekly.com</a> — Subject: Written WA2-GHG1, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
-  <span>Written QA Series · WA2-GHG1 · v1.0 · REVIEW COPY — UNGATED</span>
+  <span>Written QA Series · WA2-GHG1 · v1.7 · GATED — LIVE</span>
 </div>
 
 </div>
