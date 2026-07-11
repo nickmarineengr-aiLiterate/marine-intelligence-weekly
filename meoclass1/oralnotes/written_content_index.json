@@ -1,10 +1,10 @@
 {
     "manifest_version": "2.0",
-    "generated": "2026-07-08",
-    "generated_by": "Claude - split from combined written_content_index.json into WA-series-only manifest. Companion file: notes_content_index.json covers Simon Sir Notes, Current Topics, and Engineering Management Notes.",
+    "generated": "2026-07-12",
+    "generated_by": "Claude - added WA3-LIEN (Maritime Liens) series: 3 new gated chapters, cross-linked with QB1 Q8.",
     "scope": "Written Question Answers (WA) series ONLY - long-form written-exam model-answer chapters, physically located at /meoclass1/oralnotes/ alongside the oral notes files (not a separate /written/ folder). Not the oral notes series proper (see notes_content_index.json).",
     "series_naming_convention": "WA<series_number>-<topic_code><chapter_number>.html — e.g. WA1-HKC1.html, WA1-HKC2.html, WA2-GHG1.html. New chapters under an existing topic code are appended with the next available chapter number within that WA series. New topic areas get the next unused series_number.",
-    "total_files": 5,
+    "total_files": 8,
     "source_of_truth_policy": "This JSON is the authoritative source. index.html cards are generated FROM this manifest, not edited independently. Any content change updates this file first.",
     "series": {
         "WA1-HKC": {
@@ -101,6 +101,65 @@
                     "last_verified": "2026-07-09",
                     "regulatory_sensitivity": "HIGH - Chapter 5 adoption status is actively moving. Re-verify before every reuse/reference; reconvened session (MEPC 85 + resumed MEPC/ES.2) is tentatively scheduled 30 Nov-4 Dec 2026 but explicitly unconfirmed as of MEPC 84 (Apr 2026) - status may change from 'approved, pending adoption' to 'adopted' or the date may shift again.",
                     "regulatory_status_note": "Chapter 5 approved at MEPC 83 (63-16-24 vote, Apr 2025); MEPC/ES.2 (Oct 2025) never voted on adoption - a procedural motion to adjourn passed 57-49-21-8; reconvened session tentatively scheduled 30 Nov-3 Dec 2026 (MEPC 85) + 4 Dec (resumed MEPC/ES.2), per Lloyd's Register MEPC 84 summary (1 May 2026) - explicitly framed as provisional, not settled. Framed as 'approved, pending adoption' throughout, not 'in force'. v1.4 corrected prior overstatement of date certainty."
+                }
+            }
+        },
+        "WA3-LIEN": {
+            "series_number": 3,
+            "topic_code": "LIEN",
+            "topic_name": "Maritime Liens, In Rem Actions & Priority",
+            "status": "live",
+            "files": {
+                "WA3-LIEN1.html": {
+                    "chapter": 1,
+                    "title": "Legal Foundations of Maritime Liens, In Rem Actions & Property Attachment",
+                    "tags": [
+                        "Maritime Lien",
+                        "In Rem",
+                        "In Personam",
+                        "Ship Arrest",
+                        "Admiralty Act 2017"
+                    ],
+                    "version": "1.1",
+                    "status": "gated - live",
+                    "last_verified": "2026-07-12",
+                    "regulatory_sensitivity": "low - 1993 Convention and Indian Admiralty Act 2017 are stable, long-settled law",
+                    "regulatory_status_note": "v1.0 corrected source draft's Article 12 (mislabeled extinction article) to Article 9, and Article 5(2) (mislabeled inverse-salvage rule) to Article 5(4). v1.1 added Indian Admiralty Act 2017 S.9 priority ranking, full Article 5(1)-5(4) breakdown, and Article 4(2) compulsory-insurance carve-out after a cross-check against QB1 Q8 surfaced these as gaps; also added cross-links to QB1 Q8 and to WA3-LIEN2.",
+                    "cross_references": ["QB1 Q8 (Maritime Lien)", "WA3-LIEN2.html", "WA3-LIEN3.html"]
+                },
+                "WA3-LIEN2.html": {
+                    "chapter": 2,
+                    "title": "The International Framework: The 1993 Maritime Liens and Mortgages Convention",
+                    "tags": [
+                        "1993 Convention",
+                        "Article 4",
+                        "Article 5",
+                        "Article 9",
+                        "Ship Mortgages"
+                    ],
+                    "version": "1.0",
+                    "status": "gated - live",
+                    "last_verified": "2026-07-12",
+                    "regulatory_sensitivity": "low - 1993 Convention is stable, long-settled law; PSC resolution number re-verify periodically",
+                    "regulatory_status_note": "Corrected source draft's Article 12 (mislabeled extinction article) to Article 9. Corrected IMO Resolution A.1158(32) (draft mislabeled this as the 2021 PSC guidelines; it is actually the Guidelines for Vessel Traffic Services) to A.1185(33), the current Procedures for Port State Control, 2023.",
+                    "cross_references": ["QB1 Q8 (Maritime Lien)", "WA3-LIEN1.html", "WA3-LIEN3.html"]
+                },
+                "WA3-LIEN3.html": {
+                    "chapter": 3,
+                    "title": "The Admiralty Priority Engine: Claims Settlement & Shipboard Contingency Protocols",
+                    "tags": [
+                        "Priority Engine",
+                        "Judicial Sale",
+                        "Pro-Rata",
+                        "Insolvency",
+                        "Article 5(4)"
+                    ],
+                    "version": "1.0",
+                    "status": "gated - live",
+                    "last_verified": "2026-07-12",
+                    "regulatory_sensitivity": "low - 1993 Convention priority mechanics are stable, long-settled law",
+                    "regulatory_status_note": "Corrected source draft's Article 5(2) (mislabeled inverse-chronological salvage rule) to Article 5(4); Article 5(2) and 5(4) are now explicitly distinguished in this chapter to avoid conflation. Distribution formula notation is presented as an illustrative teaching model, not published Convention text.",
+                    "cross_references": ["QB1 Q8 (Maritime Lien)", "WA3-LIEN2.html"]
                 }
             }
         }
