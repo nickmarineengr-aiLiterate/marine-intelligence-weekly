@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>Notes Master Index — Simon Sir Notes × QB Cross-Reference | Marine Intelligence Weekly</title>
+<script src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5" async></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--navy:#0f2942;--teal:#0d9488;--teal-dark:#0f766e;--orange:#f97316;--ink:#1e293b;--grey-bg:#f8fafc;--grey-border:#e2e8f0;--grey-text:#64748b;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--grey-bg);color:var(--ink);line-height:1.5;}
+.topbar{position:sticky;top:0;background:var(--navy);color:#fff;z-index:100;display:flex;align-items:center;gap:1rem;padding:.6rem 1.2rem;border-bottom:3px solid var(--teal);}
+.topbar a{color:#94a3b8;font-size:.85rem;text-decoration:none;}
+.topbar a:hover{color:#fff;}
+.topbar-logo{font-size:1.2rem;font-weight:800;color:var(--teal);text-decoration:none;}
+.topbar nav{display:flex;gap:1rem;margin-left:auto;}
+.page-header{background:var(--navy);color:#fff;padding:1.6rem 1.5rem 1.2rem;}
+.page-header h1{font-size:1.5rem;margin-bottom:.4rem;}
+.page-header p{color:#cbd5e1;font-size:.85rem;max-width:720px;}
+.summary-bar{display:flex;flex-wrap:wrap;gap:.9rem;padding:.8rem 1.5rem;background:#fff;border-bottom:1px solid var(--grey-border);font-size:.78rem;color:var(--grey-text);}
+.summary-bar strong{color:var(--ink);}
+.mininav{position:sticky;top:46px;z-index:90;display:flex;flex-wrap:wrap;gap:.5rem;padding:.7rem 1.5rem;background:#fff;border-bottom:2px solid var(--grey-border);}
+.mini-pill{background:var(--grey-bg);border:1px solid var(--grey-border);border-radius:20px;padding:.35rem .9rem;font-size:.8rem;font-weight:700;text-decoration:none;color:var(--ink);}
+.mini-pill span{color:var(--grey-text);font-weight:400;}
+.mini-pill:hover{background:var(--teal);color:#fff;}
+.mini-pill:hover span{color:#e0f2f1;}
+.search-bar{padding:.8rem 1.5rem;background:#fff;border-bottom:1px solid var(--grey-border);}
+.search-bar input{width:100%;max-width:400px;padding:.5rem .8rem;border:1px solid var(--grey-border);border-radius:6px;font-size:.85rem;}
+main{max-width:900px;margin:0 auto;padding:1.5rem;}
+.gap-summary{background:#fff7ed;border:2px solid var(--orange);border-radius:10px;padding:1rem 1.3rem;margin-bottom:1.2rem;}
+.gap-summary h2{font-size:1.05rem;color:#7c2d12;margin-bottom:.4rem;}
+.gap-summary p{font-size:.8rem;color:#9a3412;margin-bottom:.6rem;}
+.gap-summary details summary{cursor:pointer;font-size:.8rem;font-weight:700;color:var(--orange);}
+.gap-summary ul{margin-top:.5rem;padding-left:1.2rem;font-size:.78rem;color:#7c2d12;max-height:300px;overflow-y:auto;}
+.gap-summary li{margin-bottom:.3rem;}
+.part-section{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:1rem;overflow:hidden;scroll-margin-top:100px;}
+.part-head{width:100%;text-align:left;background:var(--navy);color:#fff;padding:.9rem 1.2rem;border:none;cursor:pointer;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:.8rem;font-family:inherit;}
+.part-head-main h2{font-size:1.05rem;color:var(--teal);display:flex;align-items:center;gap:.5rem;}
+.part-count{font-size:.7rem;font-weight:400;color:#94a3b8;background:rgba(255,255,255,.08);padding:.15rem .5rem;border-radius:10px;}
+.part-stats{font-size:.72rem;color:#94a3b8;white-space:nowrap;}
+.chevron{color:#94a3b8;font-size:1rem;transition:transform .2s;}
+.part-section.open .chevron{transform:rotate(180deg);}
+.part-body{padding:.5rem;}
+.note-row{display:grid;grid-template-columns:50px 40px 1fr 220px;gap:.6rem;align-items:center;padding:.5rem .6rem;border-bottom:1px solid var(--grey-border);font-size:.82rem;}
+.note-row:last-child{border-bottom:none;}
+.page-tag{font-size:.7rem;color:var(--grey-text);}
+.note-id{font-size:.7rem;color:var(--grey-text);font-weight:700;}
+.note-title-txt{color:var(--ink);}
+.qb-link{color:var(--teal-dark);font-weight:700;text-decoration:none;font-size:.78rem;}
+.qb-link:hover{text-decoration:underline;}
+.gap-badge{font-size:.7rem;color:var(--orange);font-weight:700;}
+.row-matched{border-left:3px solid #16a34a;}
+.row-gap{border-left:3px solid var(--orange);}
+.page-footer{background:var(--navy);color:#94a3b8;text-align:center;padding:20px;font-size:12px;line-height:1.8;}
+.page-footer a{color:var(--teal);text-decoration:none;}
+@media(max-width:640px){.note-row{grid-template-columns:1fr;} .part-head{grid-template-columns:1fr;} .part-stats{text-align:left;}}
+</style>
+</head>
+<body>
+
+<!-- GATE SCRIPT STRIPPED FOR REVIEW COPY -->
+
+<div class="topbar">
+  <a class="topbar-logo" href="/meoclass1/">MIW</a>
+  <nav>
+    <a href="/meoclass1/">MEO Class 1</a>
+    <a href="/meoclass1/oralnotes/index.html">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </nav>
+</div>
+
+<div class="page-header">
+  <h1>Simon Sir Notes — Master Index</h1>
+  <p>Every note topic across Parts 1–8, cross-referenced to its matching QB question. Topics with no QB match yet are flagged — once the corresponding MIW Written/Engineering Management notes are built, these will link there instead of QB.</p>
+</div>
+
+<div class="summary-bar">
+  <span><strong>162</strong> note topics across 8 parts</span>
+  <span>🔗 <strong>87</strong> linked to a QB question</span>
+  <span>⚠ <strong>75</strong> gap — no QB match yet</span>
+</div>
+
+<div class="mininav">
+  <a class="mini-pill" href="#p1" onclick="openPart('p1')">Part 1 <span>27</span></a><a class="mini-pill" href="#p2" onclick="openPart('p2')">Part 2 <span>29</span></a><a class="mini-pill" href="#p3" onclick="openPart('p3')">Part 3 <span>30</span></a><a class="mini-pill" href="#p4" onclick="openPart('p4')">Part 4 <span>35</span></a><a class="mini-pill" href="#p5" onclick="openPart('p5')">Part 5 <span>11</span></a><a class="mini-pill" href="#p6" onclick="openPart('p6')">Part 6 <span>11</span></a><a class="mini-pill" href="#p7" onclick="openPart('p7')">Part 7 <span>11</span></a><a class="mini-pill" href="#p8" onclick="openPart('p8')">Part 8 <span>8</span></a>
+</div>
+
+<div class="search-bar">
+  <input type="text" id="pageSearch" placeholder="Filter notes by keyword..." oninput="filterSearch(this.value)">
+</div>
+
+<main>
+
+  <div class="gap-summary">
+    <h2>⚠ 75 Notes With No QB Coverage Yet</h2>
+    <p>These topics exist in Simon Sir Notes but have no matching QB question. As MIW Written Answers / Engineering Management Notes are built out, these entries will point there instead — for now they're flagged as open items.</p>
+    <details>
+      <summary>Show full gap list (75)</summary>
+      <ul><li><strong>p1</strong> · n1 — UKMTO &amp; MSCHOA</li><li><strong>p1</strong> · n4 — Loadigator Systems</li><li><strong>p1</strong> · n11 — Minimum Safe Manning</li><li><strong>p1</strong> · n15 — VICT &amp; AECS — Instructor Certifications</li><li><strong>p1</strong> · n20 — Curriculum vs Syllabus</li><li><strong>p1</strong> · n21 — Lifeboat Safety Testing — Dynamic &amp; Static Tests</li><li><strong>p1</strong> · n23 — Liferaft Painter &amp; Hydrostatic Release</li><li><strong>p1</strong> · n27 — IORA — Indian Ocean Rim Association</li><li><strong>p2</strong> · n2 — LRIT — Long-Range Identification &amp; Tracking</li><li><strong>p2</strong> · n3 — AIS vs LRIT — Key Differences</li><li><strong>p2</strong> · n7 — Deadweight Tonnage (DWT)</li><li><strong>p2</strong> · n8 — Guardrail &amp; Bulwark Dimensions</li><li><strong>p2</strong> · n9 — Tug Girding — Capsizing Risk</li><li><strong>p2</strong> · n12 — CII — Carbon Intensity Indicator</li><li><strong>p2</strong> · n15 — Ballast Water Management — Mandatory Documents</li><li><strong>p2</strong> · n16 — Arctic HFO Ban — July 2024</li><li><strong>p2</strong> · n17 — Carbon Credits &amp; EU ETS</li><li><strong>p2</strong> · n22 — Cabotage Laws — India &amp; 2018 Relaxation</li><li><strong>p2</strong> · n23 — ROFR &amp; Duties of a Shipping Master</li><li><strong>p2</strong> · n28 — MRCC — Maritime Rescue Coordination Centre</li><li><strong>p2</strong> · n30 — ICCT &amp; PMSA — Maritime Research &amp; Trade Organisations</li><li><strong>p3</strong> · n2 — CBDR — Common But Differentiated Responsibilities</li><li><strong>p3</strong> · n3 — UNFCCC &amp; COP Historical Milestones</li><li><strong>p3</strong> · n5 — NOS-DCP — National Oil Spill Disaster Contingency Plan</li><li><strong>p3</strong> · n6 — Broaching — Course Control Failure in Following Seas</li><li><strong>p3</strong> · n7 — Lifeboat Engine Specifications</li><li><strong>p3</strong> · n12 — Flag State Inspector (FSI) — Qualification Criteria</li><li><strong>p3</strong> · n13 — PSC Officer — Qualification Criteria</li><li><strong>p3</strong> · n15 — Vessel Class Notations — System &amp; Examples</li><li><strong>p3</strong> · n19 — PRIDE Framework — Junior Engineer Mentorship</li><li><strong>p3</strong> · n21 — FMEA — Failure Mode and Effect Analysis</li><li><strong>p3</strong> · n25 — STP Code &amp; Duties of a Principal Officer (PO)</li><li><strong>p3</strong> · n26 — SEO — Seamen&#x27;s Employment Office &amp; RPS Obligations</li><li><strong>p3</strong> · n28 — Future STCW 2027 Amendments</li><li><strong>p3</strong> · n29 — ISO 8217:2024 &amp; FAME Biofuel</li><li><strong>p4</strong> · n1 — SAR Convention 1979 — Indian SAR Architecture</li><li><strong>p4</strong> · n2 — GNSS Jamming vs Spoofing</li><li><strong>p4</strong> · n3 — Great Circle Navigation</li><li><strong>p4</strong> · n6 — PSC Suspension &amp; Post-Detention — 4 Steps</li><li><strong>p4</strong> · n8 — SOLAS Liferaft Packs — A vs B</li><li><strong>p4</strong> · n9 — Lifejacket Classifications, Specs &amp; Testing</li><li><strong>p4</strong> · n10 — Lifeboat — Construction &amp; Performance</li><li><strong>p4</strong> · n11 — Hull Steel Grades — Mild &amp; High-Tensile</li><li><strong>p4</strong> · n12 — Bilge Water Standards — MEPC 60(33) vs MEPC 107(49)</li><li><strong>p4</strong> · n13 — Marine Fuel Specification Matrix — ISO 8217:2017</li><li><strong>p4</strong> · n14 — Life Cycle Assessment — Well-to-Wake Framework</li><li><strong>p4</strong> · n15 — Propeller Law &amp; Slow Steaming</li><li><strong>p4</strong> · n20 — SMS &amp; DPA — Definitions, Contents &amp; Qualifications</li><li><strong>p4</strong> · n21 — Controlled Documents, Emergency Preparedness &amp; SWOT</li><li><strong>p4</strong> · n22 — SID — Seafarers&#x27; Identity Document</li><li><strong>p4</strong> · n23 — Vessel Age &amp; Registration Limits — India (DGS)</li><li><strong>p4</strong> · n24 — IMO Ship Number — Issuing Authority</li><li><strong>p4</strong> · n25 — OHSAS 18001 → ISO 45001:2018</li><li><strong>p4</strong> · n26 — Seafarer vs Seaman — Legal Definitions</li><li><strong>p4</strong> · n27 — Coaching, Mentoring, Reverse Mentoring &amp; Conflict Management</li><li><strong>p4</strong> · n28 — MACN &amp; IACS Regulatory Instruments — UR / UI / PR</li><li><strong>p4</strong> · n30 — Big Data in Maritime — 5 Vs</li><li><strong>p4</strong> · n31 — IoT — Internet of Things — 6 Core Pillars</li><li><strong>p4</strong> · n33 — Multiple Load Lines</li><li><strong>p4</strong> · n35 — Maintenance Strategies — Preventive vs Predictive</li><li><strong>p5</strong> · n3 — Smart Sensors &amp; IOPP Certificate Supplements (Page 103)</li><li><strong>p5</strong> · n5 — ARPA, Suez Canal Tonnage &amp; Flag State Duties (Pages 106–107)</li><li><strong>p5</strong> · n6 — Coastal State Rights, DG DOC &amp; P&amp;I Club Correspondent (Pages 108–109)</li><li><strong>p5</strong> · n7 — ME vs MC Engine — Comparison &amp; Components Omitted (Pages 109–110)</li><li><strong>p5</strong> · n10 — LSA Code — Chapters, 2024 Amendments &amp; Lowering Speeds (Pages 113–114)</li><li><strong>p5</strong> · n11 — FSS Code &amp; FTP Code — Structure &amp; Test Procedures (Page 115–116)</li><li><strong>p6</strong> · n6 — Maritime Zones Act 1976, BDN &amp; Bunker Calculations (Pages 126–127)</li><li><strong>p7</strong> · n1 — CO₂ System — Properties, Pressure Testing &amp; Measurement Methods (Pages 151–152)</li><li><strong>p7</strong> · n2 — CO₂ Room Regulations, Maintenance Schedule &amp; Certificates (Pages 146–150)</li><li><strong>p7</strong> · n4 — GISIS, FAL Convention &amp; Standardised FAL Forms (Pages 154–155)</li><li><strong>p7</strong> · n8 — UNCLOS Maritime Zones, EEZ &amp; International Seabed Authority (Pages 163–166)</li><li><strong>p7</strong> · n11 — Container Logistics, VGM, Reefer PTI &amp; New Regulations (Pages 171–174)</li><li><strong>p8</strong> · n2 — SUA — Boarding Protocol, Offender Handling &amp; 2005 Protocol (Pages 177–180)</li><li><strong>p8</strong> · n6 — BWM Convention — Overview, D-1/D-2 Standards &amp; BWMS Code (Pages 196–197)</li><li><strong>p8</strong> · n7 — BWTS Type Approval — G8/G9, Land &amp; Shipboard Testing (Pages 198–199)</li></ul>
+    </details>
+  </div>
+
+
+  <section class="part-section" id="p1">
+    <button class="part-head" onclick="togglePart('p1')">
+      <div class="part-head-main">
+        <h2>Part 1 — Pages 1–25 <span class="part-count">27 notes</span></h2>
+      </div>
+      <div class="part-stats">🔗 19 QB-linked &nbsp;·&nbsp; ⚠ 8 gap</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="part-body" id="body-p1" style="display:none">
+      <div class="note-row row-gap">
+      <span class='page-tag'>P.1</span><span class="note-id">n1</span>
+      <div class="note-title-txt">UKMTO &amp; MSCHOA</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.1</span><span class="note-id">n2</span>
+      <div class="note-title-txt">Seaworthiness under UNCLOS</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB9_D.html#q10">→ QB9_D · Q10</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.4</span><span class="note-id">n3</span>
+      <div class="note-title-txt">Unseaworthy Ship — Legal Criteria</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_D.html#q1">→ QB4_D · Q1</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.5</span><span class="note-id">n4</span>
+      <div class="note-title-txt">Loadigator Systems</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.24</span><span class="note-id">n5</span>
+      <div class="note-title-txt">Freeboard — Definition &amp; Deck Line</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB2_A.html#q26">→ QB2_A · Q26</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.6</span><span class="note-id">n6</span>
+      <div class="note-title-txt">PDMS &amp; PSSA</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_B.html#q6">→ QB1_B · Q6</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.19</span><span class="note-id">n7</span>
+      <div class="note-title-txt">Carbon Factors (C F ) &amp; CO₂ Calculations</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB3_C.html#q1">→ QB3_C · Q1</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.20</span><span class="note-id">n8</span>
+      <div class="note-title-txt">MARPOL Annex VI — IEEC &amp; IAPP Certificates</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB3_F.html#q2">→ QB3_F · Q2</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.21</span><span class="note-id">n9</span>
+      <div class="note-title-txt">IMO DCS &amp; Primary GHGs in Shipping</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB7_D.html#q7">→ QB7_D · Q7</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.12</span><span class="note-id">n10</span>
+      <div class="note-title-txt">IMO Mid-Term GHG Strategy 2023</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB6.html#q7">→ QB6 · Q7</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.3</span><span class="note-id">n11</span>
+      <div class="note-title-txt">Minimum Safe Manning</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.3</span><span class="note-id">n12</span>
+      <div class="note-title-txt">Hazard &amp; Risk — Definitions &amp; Components</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB5_A.html#q10">→ QB5_A · Q10</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.9</span><span class="note-id">n13</span>
+      <div class="note-title-txt">COC vs COP — STCW Certificates</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_H.html#q7">→ QB4_H · Q7</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.10</span><span class="note-id">n14</span>
+      <div class="note-title-txt">STCW 2010 Manila Amendments</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_A.html#q18">→ QB4_A · Q18</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.10–13</span><span class="note-id">n15</span>
+      <div class="note-title-txt">VICT &amp; AECS — Instructor Certifications</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.14–15</span><span class="note-id">n16</span>
+      <div class="note-title-txt">TEAP Manual — Training, Examination &amp; Assessment Programme</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB5_A.html#q17">→ QB5_A · Q17</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.15–16</span><span class="note-id">n17</span>
+      <div class="note-title-txt">Fitness for Duty — Rest Hours &amp; Alcohol Limits</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB5_B.html#q27">→ QB5_B · Q27</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.17–18</span><span class="note-id">n18</span>
+      <div class="note-title-txt">Watchkeeping Principles &amp; Engine Watch Composition</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_A.html#q17">→ QB4_A · Q17</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.2</span><span class="note-id">n19</span>
+      <div class="note-title-txt">Bloom&#x27;s Taxonomy</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB5_A.html#q14">→ QB5_A · Q14</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.18</span><span class="note-id">n20</span>
+      <div class="note-title-txt">Curriculum vs Syllabus</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.7</span><span class="note-id">n21</span>
+      <div class="note-title-txt">Lifeboat Safety Testing — Dynamic &amp; Static Tests</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.25</span><span class="note-id">n22</span>
+      <div class="note-title-txt">Free-Fall Lifeboat — Requirements</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB2_F.html#q6">→ QB2_F · Q6</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.25</span><span class="note-id">n23</span>
+      <div class="note-title-txt">Liferaft Painter &amp; Hydrostatic Release</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.8</span><span class="note-id">n24</span>
+      <div class="note-title-txt">Fuel Characteristics — Flash Point Testing</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB6.html#q11">→ QB6 · Q11</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.21</span><span class="note-id">n25</span>
+      <div class="note-title-txt">Maritime Cyber Security</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_A.html#q18">→ QB1_A · Q18</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.24</span><span class="note-id">n26</span>
+      <div class="note-title-txt">GISIS — Global Integrated Shipping Information System</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB5_C_A.html#q5">→ QB5_C_A · Q5</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.8</span><span class="note-id">n27</span>
+      <div class="note-title-txt">IORA — Indian Ocean Rim Association</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div>
+    </div>
+  </section>
+  <section class="part-section" id="p2">
+    <button class="part-head" onclick="togglePart('p2')">
+      <div class="part-head-main">
+        <h2>Part 2 — Pages 26–50 <span class="part-count">29 notes</span></h2>
+      </div>
+      <div class="part-stats">🔗 16 QB-linked &nbsp;·&nbsp; ⚠ 13 gap</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="part-body" id="body-p2" style="display:none">
+      <div class="note-row row-matched">
+      <span class='page-tag'>P.26</span><span class="note-id">n1</span>
+      <div class="note-title-txt">Gyro &amp; Magnetic Compass</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB6_D.html#q2">→ QB6_D · Q2</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.27</span><span class="note-id">n2</span>
+      <div class="note-title-txt">LRIT — Long-Range Identification &amp; Tracking</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.28</span><span class="note-id">n3</span>
+      <div class="note-title-txt">AIS vs LRIT — Key Differences</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.37–38</span><span class="note-id">n4</span>
+      <div class="note-title-txt">MMSI, Call Sign &amp; Ship Identifiers</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB6_F.html#q5">→ QB6_F · Q5</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.29</span><span class="note-id">n5</span>
+      <div class="note-title-txt">Stability Booklet — Mandatory Contents</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB7_E.html#q3">→ QB7_E · Q3</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.40–41</span><span class="note-id">n6</span>
+      <div class="note-title-txt">Gross Tonnage (GT) &amp; Net Tonnage (NT)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB2_B.html#q12">→ QB2_B · Q12</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.42</span><span class="note-id">n7</span>
+      <div class="note-title-txt">Deadweight Tonnage (DWT)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.42</span><span class="note-id">n8</span>
+      <div class="note-title-txt">Guardrail &amp; Bulwark Dimensions</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.31</span><span class="note-id">n9</span>
+      <div class="note-title-txt">Tug Girding — Capsizing Risk</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.32</span><span class="note-id">n10</span>
+      <div class="note-title-txt">Caustic Embrittlement in Boilers</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB5_I.html#q6">→ QB5_I · Q6</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.50</span><span class="note-id">n11</span>
+      <div class="note-title-txt">NOₓ Technical File — Contents</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_supplementary.html#q7">→ QB1_supplementary · Q7</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.49</span><span class="note-id">n12</span>
+      <div class="note-title-txt">CII — Carbon Intensity Indicator</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.49</span><span class="note-id">n13</span>
+      <div class="note-title-txt">Persistent vs Non-Persistent Oils</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB2_A.html#q25">→ QB2_A · Q25</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.48</span><span class="note-id">n15</span>
+      <div class="note-title-txt">Ballast Water Management — Mandatory Documents</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.35</span><span class="note-id">n16</span>
+      <div class="note-title-txt">Arctic HFO Ban — July 2024</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.44</span><span class="note-id">n17</span>
+      <div class="note-title-txt">Carbon Credits &amp; EU ETS</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.45</span><span class="note-id">n18</span>
+      <div class="note-title-txt">Carbon Footprint &amp; Global Warming Potential (GWP)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB7_D.html#q7">→ QB7_D · Q7</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.40</span><span class="note-id">n19</span>
+      <div class="note-title-txt">CLC 1969 vs CLC 1992 Protocol</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_B.html#q12">→ QB1_B · Q12</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.43</span><span class="note-id">n20</span>
+      <div class="note-title-txt">In Rem vs In Personam Legal Actions</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB9_G.html#q2">→ QB9_G · Q2</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.43–44</span><span class="note-id">n21</span>
+      <div class="note-title-txt">CBA — Collective Bargaining Agreement</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_B.html#q8">→ QB1_B · Q8</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.46</span><span class="note-id">n22</span>
+      <div class="note-title-txt">Cabotage Laws — India &amp; 2018 Relaxation</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.47</span><span class="note-id">n23</span>
+      <div class="note-title-txt">ROFR &amp; Duties of a Shipping Master</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.37–48</span><span class="note-id">n24</span>
+      <div class="note-title-txt">Force Majeure &amp; Maritime Torts</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB9_B.html#q6">→ QB9_B · Q6</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.39</span><span class="note-id">n25</span>
+      <div class="note-title-txt">Classification Society Actions</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_C.html#q6">→ QB1_C · Q6</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.40</span><span class="note-id">n26</span>
+      <div class="note-title-txt">ISMS — Integrated Safety Management System</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_A.html#q1">→ QB4_A · Q1</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.30–34</span><span class="note-id">n27</span>
+      <div class="note-title-txt">MIS &amp; ICT — Shipboard Information Systems</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB5_C_A.html#q5">→ QB5_C_A · Q5</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.34</span><span class="note-id">n28</span>
+      <div class="note-title-txt">MRCC — Maritime Rescue Coordination Centre</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.33</span><span class="note-id">n29</span>
+      <div class="note-title-txt">Blue Economy</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB9_E.html#q10">→ QB9_E · Q10</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.29–36</span><span class="note-id">n30</span>
+      <div class="note-title-txt">ICCT &amp; PMSA — Maritime Research &amp; Trade Organisations</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div>
+    </div>
+  </section>
+  <section class="part-section" id="p3">
+    <button class="part-head" onclick="togglePart('p3')">
+      <div class="part-head-main">
+        <h2>Part 3 — Pages 51–75 <span class="part-count">30 notes</span></h2>
+      </div>
+      <div class="part-stats">🔗 16 QB-linked &nbsp;·&nbsp; ⚠ 14 gap</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="part-body" id="body-p3" style="display:none">
+      <div class="note-row row-matched">
+      <span class='page-tag'>P.51</span><span class="note-id">n1</span>
+      <div class="note-title-txt">COP 28 (2023) &amp; COP 29 (2024) — Key Outcomes</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB7_G.html#q1">→ QB7_G · Q1</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.62</span><span class="note-id">n2</span>
+      <div class="note-title-txt">CBDR — Common But Differentiated Responsibilities</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.50–51</span><span class="note-id">n3</span>
+      <div class="note-title-txt">UNFCCC &amp; COP Historical Milestones</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.53</span><span class="note-id">n4</span>
+      <div class="note-title-txt">IS Code 2008 — Intact Stability Criteria</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_supplementary.html#q2">→ QB1_supplementary · Q2</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.54</span><span class="note-id">n5</span>
+      <div class="note-title-txt">NOS-DCP — National Oil Spill Disaster Contingency Plan</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.59</span><span class="note-id">n6</span>
+      <div class="note-title-txt">Broaching — Course Control Failure in Following Seas</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.60</span><span class="note-id">n7</span>
+      <div class="note-title-txt">Lifeboat Engine Specifications</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.50</span><span class="note-id">n8</span>
+      <div class="note-title-txt">Rescue Boat vs Fast Rescue Boat (FRB)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB2_G.html#q2">→ QB2_G · Q2</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.57</span><span class="note-id">n9</span>
+      <div class="note-title-txt">Rescue Boat — Starboard Side Placement</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB2_G.html#q2">→ QB2_G · Q2</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.61</span><span class="note-id">n10</span>
+      <div class="note-title-txt">Collision Bulkhead — Structural Regulations</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_supplementary.html#q18">→ QB1_supplementary · Q18</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.64</span><span class="note-id">n11</span>
+      <div class="note-title-txt">Lithium-Ion Battery Maritime Firefighting</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB2_A.html#q7">→ QB2_A · Q7</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.52</span><span class="note-id">n12</span>
+      <div class="note-title-txt">Flag State Inspector (FSI) — Qualification Criteria</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.63</span><span class="note-id">n13</span>
+      <div class="note-title-txt">PSC Officer — Qualification Criteria</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.55</span><span class="note-id">n14</span>
+      <div class="note-title-txt">Flag State Oversight of Recognised Organisations (RO)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_A.html#q7">→ QB4_A · Q7</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.59</span><span class="note-id">n15</span>
+      <div class="note-title-txt">Vessel Class Notations — System &amp; Examples</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.58</span><span class="note-id">n16</span>
+      <div class="note-title-txt">ESP File Contents &amp; Tacit Acceptance</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB3_A.html#q6">→ QB3_A · Q6</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.60</span><span class="note-id">n17</span>
+      <div class="note-title-txt">Quarterly Class Listing &amp; Tacit Acceptance</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB3_A.html#q17">→ QB3_A · Q17</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.82–83</span><span class="note-id">n18</span>
+      <div class="note-title-txt">International Legislation Hierarchy &amp; EIF Process</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB9_G.html#q6">→ QB9_G · Q6</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.56</span><span class="note-id">n19</span>
+      <div class="note-title-txt">PRIDE Framework — Junior Engineer Mentorship</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.57</span><span class="note-id">n20</span>
+      <div class="note-title-txt">P&amp;I Club Capital Calls</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB9_C.html#q3">→ QB9_C · Q3</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.70</span><span class="note-id">n21</span>
+      <div class="note-title-txt">FMEA — Failure Mode and Effect Analysis</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.71</span><span class="note-id">n22</span>
+      <div class="note-title-txt">ISM Apex Safety Management Manual — 3-Tier Structure</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_A.html#q1">→ QB4_A · Q1</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.71</span><span class="note-id">n23</span>
+      <div class="note-title-txt">MARPOL Mandatory Documents — Full Suite</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB3_F.html#q4">→ QB3_F · Q4</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.65</span><span class="note-id">n24</span>
+      <div class="note-title-txt">SPS Code vs IP Code</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB6_F.html#q1">→ QB6_F · Q1</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.66</span><span class="note-id">n25</span>
+      <div class="note-title-txt">STP Code &amp; Duties of a Principal Officer (PO)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.67</span><span class="note-id">n26</span>
+      <div class="note-title-txt">SEO — Seamen&#x27;s Employment Office &amp; RPS Obligations</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.68–69</span><span class="note-id">n27</span>
+      <div class="note-title-txt">NSB &amp; Merchant Shipping Act 2025</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_D.html#q1">→ QB4_D · Q1</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.58</span><span class="note-id">n28</span>
+      <div class="note-title-txt">Future STCW 2027 Amendments</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.74–75</span><span class="note-id">n29</span>
+      <div class="note-title-txt">ISO 8217:2024 &amp; FAME Biofuel</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.75</span><span class="note-id">n30</span>
+      <div class="note-title-txt">Flags of Convenience (FOC)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB9_F.html#q8">→ QB9_F · Q8</a></div>
+    </div>
+    </div>
+  </section>
+  <section class="part-section" id="p4">
+    <button class="part-head" onclick="togglePart('p4')">
+      <div class="part-head-main">
+        <h2>Part 4 — Pages 76–101 <span class="part-count">35 notes</span></h2>
+      </div>
+      <div class="part-stats">🔗 10 QB-linked &nbsp;·&nbsp; ⚠ 25 gap</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="part-body" id="body-p4" style="display:none">
+      <div class="note-row row-gap">
+      <span class='page-tag'>P.76</span><span class="note-id">n1</span>
+      <div class="note-title-txt">SAR Convention 1979 — Indian SAR Architecture</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.81</span><span class="note-id">n2</span>
+      <div class="note-title-txt">GNSS Jamming vs Spoofing</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.81</span><span class="note-id">n3</span>
+      <div class="note-title-txt">Great Circle Navigation</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.85</span><span class="note-id">n4</span>
+      <div class="note-title-txt">PSC Action Codes &amp; Form 13</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_C.html#q11">→ QB4_C · Q11</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.86</span><span class="note-id">n5</span>
+      <div class="note-title-txt">PSC Inspection Types &amp; Clear Grounds</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB9_F.html#q10">→ QB9_F · Q10</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.87</span><span class="note-id">n6</span>
+      <div class="note-title-txt">PSC Suspension &amp; Post-Detention — 4 Steps</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.83–84</span><span class="note-id">n7</span>
+      <div class="note-title-txt">PSC Detention Appeal — National &amp; MOU Panel</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_E.html#q8">→ QB4_E · Q8</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.88</span><span class="note-id">n8</span>
+      <div class="note-title-txt">SOLAS Liferaft Packs — A vs B</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.88–89</span><span class="note-id">n9</span>
+      <div class="note-title-txt">Lifejacket Classifications, Specs &amp; Testing</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.92</span><span class="note-id">n10</span>
+      <div class="note-title-txt">Lifeboat — Construction &amp; Performance</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.90</span><span class="note-id">n11</span>
+      <div class="note-title-txt">Hull Steel Grades — Mild &amp; High-Tensile</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.91</span><span class="note-id">n12</span>
+      <div class="note-title-txt">Bilge Water Standards — MEPC 60(33) vs MEPC 107(49)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.80</span><span class="note-id">n13</span>
+      <div class="note-title-txt">Marine Fuel Specification Matrix — ISO 8217:2017</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.80</span><span class="note-id">n14</span>
+      <div class="note-title-txt">Life Cycle Assessment — Well-to-Wake Framework</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.96</span><span class="note-id">n15</span>
+      <div class="note-title-txt">Propeller Law &amp; Slow Steaming</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.94</span><span class="note-id">n16</span>
+      <div class="note-title-txt">Chief Engineer — 12 Duties Under ISM Code</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_C.html#q8">→ QB4_C · Q8</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.72</span><span class="note-id">n17</span>
+      <div class="note-title-txt">Chief Engineer — 8 Welfare Duties Under MLC 2006</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_A.html#q15">→ QB4_A · Q15</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.72</span><span class="note-id">n18</span>
+      <div class="note-title-txt">IMO DCS vs EU-MRV — Data Reporting Comparison</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB6.html#q14">→ QB6 · Q14</a></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.71</span><span class="note-id">n19</span>
+      <div class="note-title-txt">ISM, STCW &amp; MLC — 3 Shared Human Element Requirements</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_A.html#q15">→ QB4_A · Q15</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.97</span><span class="note-id">n20</span>
+      <div class="note-title-txt">SMS &amp; DPA — Definitions, Contents &amp; Qualifications</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.98–99</span><span class="note-id">n21</span>
+      <div class="note-title-txt">Controlled Documents, Emergency Preparedness &amp; SWOT</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.81</span><span class="note-id">n22</span>
+      <div class="note-title-txt">SID — Seafarers&#x27; Identity Document</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.73</span><span class="note-id">n23</span>
+      <div class="note-title-txt">Vessel Age &amp; Registration Limits — India (DGS)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.73</span><span class="note-id">n24</span>
+      <div class="note-title-txt">IMO Ship Number — Issuing Authority</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.74</span><span class="note-id">n25</span>
+      <div class="note-title-txt">OHSAS 18001 → ISO 45001:2018</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.74</span><span class="note-id">n26</span>
+      <div class="note-title-txt">Seafarer vs Seaman — Legal Definitions</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.92–95</span><span class="note-id">n27</span>
+      <div class="note-title-txt">Coaching, Mentoring, Reverse Mentoring &amp; Conflict Management</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.79</span><span class="note-id">n28</span>
+      <div class="note-title-txt">MACN &amp; IACS Regulatory Instruments — UR / UI / PR</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.71</span><span class="note-id">n29</span>
+      <div class="note-title-txt">Blockchain Technology &amp; Maritime Applications</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB6_F.html#q3">→ QB6_F · Q3</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.77</span><span class="note-id">n30</span>
+      <div class="note-title-txt">Big Data in Maritime — 5 Vs</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.78</span><span class="note-id">n31</span>
+      <div class="note-title-txt">IoT — Internet of Things — 6 Core Pillars</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.93</span><span class="note-id">n32</span>
+      <div class="note-title-txt">IWIS — In-Water Survey Preparation in Drydock</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_supplementary.html#q6">→ QB1_supplementary · Q6</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.91</span><span class="note-id">n33</span>
+      <div class="note-title-txt">Multiple Load Lines</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class='page-tag'>P.100–101</span><span class="note-id">n34</span>
+      <div class="note-title-txt">Sustainable Development, Incineration &amp; Port Restrictions</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_G.html#q21">→ QB1_G · Q21</a></div>
+    </div><div class="note-row row-gap">
+      <span class='page-tag'>P.101</span><span class="note-id">n35</span>
+      <div class="note-title-txt">Maintenance Strategies — Preventive vs Predictive</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div>
+    </div>
+  </section>
+  <section class="part-section" id="p5">
+    <button class="part-head" onclick="togglePart('p5')">
+      <div class="part-head-main">
+        <h2>Part 5 — Pages 101–125 <span class="part-count">11 notes</span></h2>
+      </div>
+      <div class="part-stats">🔗 5 QB-linked &nbsp;·&nbsp; ⚠ 6 gap</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="part-body" id="body-p5" style="display:none">
+      <div class="note-row row-matched">
+      <span class="note-id">n1</span>
+      <div class="note-title-txt">Bonjean Curves — Definition, Uses &amp; Applications</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_supplementary.html#q11">→ QB1_supplementary · Q11</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n2</span>
+      <div class="note-title-txt">GZ Curve — Statical &amp; Dynamic Stability (Page 102)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_C.html#q2">→ QB1_C · Q2</a></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n3</span>
+      <div class="note-title-txt">Smart Sensors &amp; IOPP Certificate Supplements (Page 103)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n4</span>
+      <div class="note-title-txt">VDR, Safety Equipment Certificate &amp; Equipment Number (Pages 103–105)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB3_A.html#q15">→ QB3_A · Q15</a></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n5</span>
+      <div class="note-title-txt">ARPA, Suez Canal Tonnage &amp; Flag State Duties (Pages 106–107)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n6</span>
+      <div class="note-title-txt">Coastal State Rights, DG DOC &amp; P&amp;I Club Correspondent (Pages 108–109)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n7</span>
+      <div class="note-title-txt">ME vs MC Engine — Comparison &amp; Components Omitted (Pages 109–110)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n8</span>
+      <div class="note-title-txt">Port / Place of Refuge — Protocol &amp; Request Procedure (Pages 110–111)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_C.html#q9">→ QB4_C · Q9</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n9</span>
+      <div class="note-title-txt">Polar Code — Requirements, Certificate &amp; CE Preparations (Pages 111–113)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB3_B.html#q1">→ QB3_B · Q1</a></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n10</span>
+      <div class="note-title-txt">LSA Code — Chapters, 2024 Amendments &amp; Lowering Speeds (Pages 113–114)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n11</span>
+      <div class="note-title-txt">FSS Code &amp; FTP Code — Structure &amp; Test Procedures (Page 115–116)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div>
+    </div>
+  </section>
+  <section class="part-section" id="p6">
+    <button class="part-head" onclick="togglePart('p6')">
+      <div class="part-head-main">
+        <h2>Part 6 — Pages 126–150 <span class="part-count">11 notes</span></h2>
+      </div>
+      <div class="part-stats">🔗 10 QB-linked &nbsp;·&nbsp; ⚠ 1 gap</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="part-body" id="body-p6" style="display:none">
+      <div class="note-row row-matched">
+      <span class="note-id">n1</span>
+      <div class="note-title-txt">Formal Safety Assessment (FSA) — 5 Steps &amp; Risk Matrix (Page 117)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB5_C_A.html#q10">→ QB5_C_A · Q10</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n2</span>
+      <div class="note-title-txt">Competency vs Proficiency &amp; Audit vs Survey (Pages 117–118)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_C.html#q2">→ QB4_C · Q2</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n3</span>
+      <div class="note-title-txt">Certificate of Class vs Statutory Certificates &amp; AR/VR in Shipping (Pages 118–119)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB4_H.html#q10">→ QB4_H · Q10</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n4</span>
+      <div class="note-title-txt">COP-29 Key Outcomes &amp; Latest MARPOL Amendments (Pages 119–120)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB3_C.html#q1">→ QB3_C · Q1</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n5</span>
+      <div class="note-title-txt">Casualty Investigator, GESAMP &amp; AMS — Ballast Water (Page 121)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_G.html#q31">→ QB1_G · Q31</a></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n6</span>
+      <div class="note-title-txt">Maritime Zones Act 1976, BDN &amp; Bunker Calculations (Pages 126–127)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n7</span>
+      <div class="note-title-txt">Ship Documents, Classification &amp; Flag State–RO Delegation (Pages 127–128)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_F.html#q7">→ QB1_F · Q7</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n8</span>
+      <div class="note-title-txt">Load Line Survey, SAFCON Survey &amp; MS Act 1958 Structure (Pages 128–130)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_supplementary.html#q5">→ QB1_supplementary · Q5</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n9</span>
+      <div class="note-title-txt">Parametric Rolling &amp; Synchronous Rolling — Container Ship Risk (Pages 136–137)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB2_A.html#q20">→ QB2_A · Q20</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n10</span>
+      <div class="note-title-txt">Inclining Experiment — Conditions, Method &amp; Formulas (Pages 137–138)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_G.html#q31">→ QB1_G · Q31</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n11</span>
+      <div class="note-title-txt">Free Surface Effect, Angle of Loll &amp; Tender vs Stiff Ships (Pages 139–141)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_supplementary.html#q12">→ QB1_supplementary · Q12</a></div>
+    </div>
+    </div>
+  </section>
+  <section class="part-section" id="p7">
+    <button class="part-head" onclick="togglePart('p7')">
+      <div class="part-head-main">
+        <h2>Part 7 — Pages 151–175 <span class="part-count">11 notes</span></h2>
+      </div>
+      <div class="part-stats">🔗 6 QB-linked &nbsp;·&nbsp; ⚠ 5 gap</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="part-body" id="body-p7" style="display:none">
+      <div class="note-row row-gap">
+      <span class="note-id">n1</span>
+      <div class="note-title-txt">CO₂ System — Properties, Pressure Testing &amp; Measurement Methods (Pages 151–152)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n2</span>
+      <div class="note-title-txt">CO₂ Room Regulations, Maintenance Schedule &amp; Certificates (Pages 146–150)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n3</span>
+      <div class="note-title-txt">TQM — Total Quality Management in Shipping (Pages 152–153)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB5_A.html#q7">→ QB5_A · Q7</a></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n4</span>
+      <div class="note-title-txt">GISIS, FAL Convention &amp; Standardised FAL Forms (Pages 154–155)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n5</span>
+      <div class="note-title-txt">Maritime Single Window &amp; IRS Electronic Certificates (Pages 156–157)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB9_G.html#q5">→ QB9_G · Q5</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n6</span>
+      <div class="note-title-txt">Five Categories of Maritime Liens &amp; True Maritime Lien (Pages 158–159)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB9_A.html#q5">→ QB9_A · Q5</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n7</span>
+      <div class="note-title-txt">Priority of Maritime Liens &amp; Admiralty Act 2017 (Pages 160–162)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB9_A.html#q5">→ QB9_A · Q5</a></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n8</span>
+      <div class="note-title-txt">UNCLOS Maritime Zones, EEZ &amp; International Seabed Authority (Pages 163–166)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n9</span>
+      <div class="note-title-txt">CSC Convention, Safety Approval Plate &amp; Inspection Schemes (Pages 167–168)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB8_B.html#q2">→ QB8_B · Q2</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n10</span>
+      <div class="note-title-txt">Container Marking (ISO 6346), Identification &amp; Large Ship Problems (Pages 169–170)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB2_A.html#q4">→ QB2_A · Q4</a></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n11</span>
+      <div class="note-title-txt">Container Logistics, VGM, Reefer PTI &amp; New Regulations (Pages 171–174)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div>
+    </div>
+  </section>
+  <section class="part-section" id="p8">
+    <button class="part-head" onclick="togglePart('p8')">
+      <div class="part-head-main">
+        <h2>Part 8 — Pages 176–200 <span class="part-count">8 notes</span></h2>
+      </div>
+      <div class="part-stats">🔗 5 QB-linked &nbsp;·&nbsp; ⚠ 3 gap</div>
+      <span class="chevron">▾</span>
+    </button>
+    <div class="part-body" id="body-p8" style="display:none">
+      <div class="note-row row-matched">
+      <span class="note-id">n1</span>
+      <div class="note-title-txt">SUA Convention — History, Scope &amp; Jurisdiction (Pages 175–176)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_A.html#q17">→ QB1_A · Q17</a></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n2</span>
+      <div class="note-title-txt">SUA — Boarding Protocol, Offender Handling &amp; 2005 Protocol (Pages 177–180)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n3</span>
+      <div class="note-title-txt">London Dumping Convention (LC-72) &amp; 1996 Protocol — Comparison (Pages 181–186)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_A.html#q13">→ QB1_A · Q13</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n4</span>
+      <div class="note-title-txt">Basel Convention — Hazardous Waste Trade Control &amp; PIC Procedure (Pages 187–189)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_A.html#q16">→ QB1_A · Q16</a></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n5</span>
+      <div class="note-title-txt">HNS Convention — Liability, Fund &amp; Compensation Tiers (Pages 190–195)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB1_B.html#q12">→ QB1_B · Q12</a></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n6</span>
+      <div class="note-title-txt">BWM Convention — Overview, D-1/D-2 Standards &amp; BWMS Code (Pages 196–197)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-gap">
+      <span class="note-id">n7</span>
+      <div class="note-title-txt">BWTS Type Approval — G8/G9, Land &amp; Shipboard Testing (Pages 198–199)</div>
+      <div class="match-cell"><span class="gap-badge">⚠ Gap — pending MIW notes coverage</span></div>
+    </div><div class="note-row row-matched">
+      <span class="note-id">n8</span>
+      <div class="note-title-txt">IMO vs USCG BWTS Requirements — Key Differences (Page 200)</div>
+      <div class="match-cell"><a class="qb-link" href="/meoclass1/QB3_B.html#q1">→ QB3_B · Q1</a></div>
+    </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="page-footer">
+  <div>Marine Intelligence Weekly — Notes Master Index (Review Copy)</div>
+  <div>© Marine Intelligence Weekly · Internal review copy · <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a></div>
+</footer>
+
+<script>
+function togglePart(pk){
+  var body = document.getElementById('body-'+pk);
+  var sec = document.getElementById(pk);
+  var isOpen = body.style.display !== 'none';
+  body.style.display = isOpen ? 'none' : 'block';
+  sec.classList.toggle('open', !isOpen);
+}
+function openPart(pk){
+  document.getElementById('body-'+pk).style.display='block';
+  document.getElementById(pk).classList.add('open');
+}
+function filterSearch(term){
+  term = term.toLowerCase().trim();
+  document.querySelectorAll('.part-section').forEach(function(sec){
+    var anyMatch = false;
+    sec.querySelectorAll('.note-row').forEach(function(row){
+      var match = term==='' || row.textContent.toLowerCase().indexOf(term) !== -1;
+      row.style.display = match ? '' : 'none';
+      if(match) anyMatch = true;
+    });
+    if(term !== '' && anyMatch){
+      document.getElementById('body-'+sec.id).style.display='block';
+      sec.classList.add('open');
+    }
+  });
+}
+</script>
+
+</body>
+</html>
