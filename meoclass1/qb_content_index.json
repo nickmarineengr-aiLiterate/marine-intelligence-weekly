@@ -1,22 +1,49 @@
 {
   "manifest_version": "1.0",
-  "generated": "2026-07-07",
-  "generated_by": "Claude - added QB1_I, QB2_H, QB3_H, QB4_I, QB7_H (20Q total, backlog letters completing QB1-4/QB7 series); corrected QB1_A question_count (32->30, excluded 2 decorative mental-map cards from count); LaTeX/malformed-math cleanup pass across 30 files (QB1_A/B/F/G, QB2_A/B/C, QB3_C, QB4_C, QB5_C_A/B, QB7_B/D, QB8_A/B/C, QB9_A/B/E/F + cheat sheets)",
-  "total_questions": 599,
-  "total_files": 74,
+  "generated": "2026-07-11",
+  "generated_by": "Claude - session correction pass: IOPC Fund limits, SOLAS XI reg numbers, PSC action codes, lifeboat ventilation (MSC.535(107))",
+  "total_questions": 531,
+  "total_files": 62,
   "recently_updated": [
-    "QB1_I.html",
-    "QB2_H.html",
-    "QB3_H.html",
-    "QB4_I.html",
-    "QB7_H.html"
+    {
+      "date": "2026-07-05",
+      "files": [
+        "QB1_H",
+        "QB3_G",
+        "QB4_H",
+        "QB4_H_CheatSheet"
+      ],
+      "note": "20 new questions from reclassified UNCLASSIFIED backlog (5 Jul 2026 batch); verified against IMO/IACS/DG Shipping sources; AECS course definition corrected (QB4_H Q1/Q5) and GBS scope limited to bulk carriers/tankers >=150m corrected (QB1_H Q5); auth-gated after Nixon's content review"
+    },
+    {
+      "date": "2026-07-06",
+      "files": [
+        "QB2_G",
+        "QB5_H",
+        "QB7_G",
+        "QB8_F"
+      ],
+      "note": "Renamed from *_BACKLOG to live filenames after Nixon built and uploaded the HTML (no longer backlog). Also removed the erroneous standalone QB4_H_CheatSheet.html manifest entry - it is QB4_H's cheat sheet, referenced via the QB file's cheatsheet field, not an independent QB entry."
+    },
+    {
+      "date": "2026-07-11",
+      "files": [
+        "QB1_A",
+        "QB1_B",
+        "QB2_F",
+        "QB4_C",
+        "QB4_E",
+        "QB9_A"
+      ],
+      "note": "Session-wide correction pass triggered by two candidate comments: (1) IOPC 1992 Fund compensation limit was stale at 135m SDR platform-wide, missing the 300.74m SDR step-up tier entirely (Article 4(4)(b) trigger, top-3 contributing States >=600 million tonnes/yr) - fixed in QB1_A Q2/Q5, QB1_B Q12, QB9_A Q3; (2) SOLAS Ch. XI regulation numbers were wrong in QB4_C Q3 (SSAS mislabeled as Reg 3 instead of Reg 6; fabricated Ship Construction File under XI-1 removed per Nixon, correctly belongs to SOLAS II-1); (3) PSC deficiency action codes were wrong platform-wide - audited all 6 QB files mentioning PSC/deficiency/detention, found QB4_A and QB1_B already correct (QB4_A previously fixed 5 Jul 2026), rebuilt QB4_C Q11 and fixed QB4_E Q8 against verified current Paris MOU action-taken and deficiency-category code lists. Also fully rebuilt QB2_F Q6 (lifeboat ventilation) per IMO Res. MSC.535(107)."
+    }
   ],
   "files": {
     "QB1_A.html": {
       "qb_group": "QB1",
       "letter": "A",
       "title": "Conventions & Liability Law",
-      "version": "1.4",
+      "version": "1.5",
       "tags": [
         "cargo",
         "convention",
@@ -28,11 +55,11 @@
         "salvage",
         "unclos"
       ],
-      "question_count": 30,
+      "question_count": 32,
       "questions": [
         {
           "qnum": 1,
-          "text": "P&I Club — What is Protection & Indemnity? How does it differ from other marine insurance?"
+          "text": "P&amp;I Club — What is Protection &amp; Indemnity? How does it differ from other marine insurance?"
         },
         {
           "qnum": 2,
@@ -149,14 +176,26 @@
         {
           "qnum": 30,
           "text": "MEPC 84 Outcomes — Explain with cross questions."
+        },
+        {
+          "qnum": 31,
+          "text": "Convention Family Trees — Oil / Bunker / HNS Spill Compensation Routes"
+        },
+        {
+          "qnum": 32,
+          "text": "Master Question Dependency Graph — Revise in Clusters"
         }
+      ],
+      "corrections_applied": [
+        "Q2 (Fund Convention): corrected stale 135m SDR combined CLC+Fund cap to current 203m SDR (post-1 Nov 2003), added the 300.74m SDR (300,740,000 SDR) step-up tier triggered when top-3 Fund-contributing States combined receive >=600 million tonnes of contributing oil in the preceding calendar year (verified vs IOPC Funds consolidated convention text). Also fixed CE Oral Tip which had incorrectly called 203m 'a common wrong answer'.",
+        "Q5 (CLC): numbers-box also carried the stale 'Combined CLC+Fund cap = 135 million SDR' reference; updated to 203m/300.74m to match Q2."
       ]
     },
     "QB1_B.html": {
       "qb_group": "QB1",
       "letter": "B",
       "title": "Conventions & Liability — B Series",
-      "version": "1.1",
+      "version": "1.2",
       "tags": [
         "convention",
         "insurance",
@@ -251,6 +290,9 @@
           "qnum": 21,
           "text": "What initiatives is IMO undertaking with respect to gender equality in the maritime industry?"
         }
+      ],
+      "corrections_applied": [
+        "Q12 (CLC + Fund Convention): 203m SDR base figure was already correct but the 300.74m SDR step-up tier (top-3 contributing States >=600 million tonnes/yr) was missing entirely from diagram, prose, and numbers-box; added throughout."
       ]
     },
     "QB1_C.html": {
@@ -1265,7 +1307,7 @@
       "qb_group": "QB4",
       "letter": "C",
       "title": "ISM Code, ISPS, MLC 2006 & STCW",
-      "version": "1.0",
+      "version": "1.2",
       "tags": [
         "iacs",
         "ism",
@@ -1347,6 +1389,10 @@
           "qnum": 17,
           "text": "GBS — Goal Based Standards?"
         }
+      ],
+      "corrections_applied": [
+        "Q3 (SOLAS Chapter XI): corrected multiple wrong regulation numbers - SSAS is XI-2 Reg 6 (was mislabeled Reg 3, which actually covers Contracting Govt security-level obligations); removed fabricated 'AIS Security Links' (Reg 4) and 'ISSC Certification' (Reg 5) entries; ESP is XI-1 Reg 2 (was mislabeled Reg 6); removed fabricated 'Ship Construction File' from XI-1 (it is a SOLAS II-1 Reg 3-10 item, not XI-1) per Nixon's direct correction; removed stray Gemini '[cite: 1]' draft artifacts from this card.",
+        "Q11 (PSC deficiency action codes): full rebuild. Nearly all action codes were wrong - Code 30 is grounds for detention (file said Code 15/Investigation); Code 17 is rectify-before-departure/non-detainable (file said Flag/Class notified); Code 70 (RO/Class informed) was missing entirely. Verified against current Paris MOU published action-taken code list. Added distinction between 2-digit action-taken codes and 5-digit deficiency item/category codes."
       ]
     },
     "QB4_D.html": {
@@ -1379,7 +1425,7 @@
       "qb_group": "QB4",
       "letter": "E",
       "title": "ISM, MLC, SOLAS, PSC & Class",
-      "version": "1.0",
+      "version": "1.1",
       "tags": [
         "iacs",
         "ism",
@@ -1450,6 +1496,9 @@
           "qnum": 15,
           "text": "Cyber security management on ships — key requirements and latest developments?"
         }
+      ],
+      "corrections_applied": [
+        "Q8 (PSC appeal process): corrected conflation of action-taken codes with deficiency item/category codes, and wrong category numbers - fire safety is category 07 (file said '15-series'), ISM is category 15, MLC 2006 is category 18 (file said '18-series = Stability and Structure', which is fabricated). Verified against current Paris MOU deficiency code categories."
       ]
     },
     "QB4_F.html": {
@@ -2167,7 +2216,7 @@
         "solas",
         "survey"
       ],
-      "question_count": 6,
+      "question_count": 7,
       "questions": [
         {
           "qnum": 1,
@@ -2192,6 +2241,10 @@
         {
           "qnum": 6,
           "text": "IMDG DG cargo documents?"
+        },
+        {
+          "qnum": 7,
+          "text": "Additional QB8 topics — see QB8_B (P&amp;A Manual, CSC, e-BoL, High Density, VGM, Container Amendments)"
         }
       ]
     },
@@ -2311,7 +2364,7 @@
       "qb_group": "QB9",
       "letter": "A",
       "title": "Commercial Law & Maritime Liability — Part A (Q1–Q9)",
-      "version": "1.0",
+      "version": "1.1",
       "tags": [
         "ism",
         "isps",
@@ -2358,6 +2411,9 @@
           "qnum": 9,
           "text": "Actions and precautions when your ship goes to a war risk area. What is vessel hardening? BMP5 measures. How do you motivate crew during a missile att"
         }
+      ],
+      "corrections_applied": [
+        "Q3 (Fund/HNS/LLMC): 203m SDR base figure was correct but missing the 300.74m SDR step-up tier (top-3 contributing States >=600 million tonnes/yr); added to Key Numbers list."
       ]
     },
     "QB9_B.html": {
@@ -2586,6 +2642,17 @@
         }
       ]
     },
+    "QB4_G_CheatSheet.html": {
+      "qb_group": "QB4",
+      "letter": "G",
+      "title": "ISM/ISPS/MLC/STCW Cheat Sheet (companion to QB4_G)",
+      "version": "1.0",
+      "tags": [
+        "cheat-sheet"
+      ],
+      "question_count": 0,
+      "questions": []
+    },
     "QB1_F.html": {
       "qb_group": "QB1",
       "letter": "F",
@@ -2796,7 +2863,7 @@
       "qb_group": "QB2",
       "letter": "F",
       "title": "QB2_F — Fire Safety, LSA & DG Cargo (Backlog Batch)",
-      "version": "1.0",
+      "version": "1.1",
       "tags": [
         "fire",
         "lsa",
@@ -2829,6 +2896,9 @@
           "qnum": 6,
           "text": "What are the ventilation requirements for a totally enclosed lifeboat?"
         }
+      ],
+      "corrections_applied": [
+        "Q6 (Totally enclosed lifeboat ventilation): full rebuild. Previous content was pre-amendment generic LSA 4.6/4.7/4.8 text with a fabricated 10-minute air-support figure. Corrected to IMO Res. MSC.535(107) (adopted 8 June 2023) - new LSA Code paras 4.6.6/4.6.7, ventilation rate 5 m3/h per person for 24h, powered-or-passive rule, fuel-source restriction, MOL Comfort (2013) casualty link, force date 1 Jan 2026, application date 1 Jan 2029 (new-build only)."
       ]
     },
     "QB3_F.html": {
@@ -3112,482 +3182,6 @@
         {
           "qnum": 11,
           "text": "Describe the key content and operational phases of BMP5 (Best Management Practices, Version 5)."
-        }
-      ]
-    },
-    "QB1_I.html": {
-      "qb_group": "QB1",
-      "letter": "I",
-      "title": "Engine Construction, Stability & Surveys (Backlog I)",
-      "version": "1.0",
-      "tags": [
-        "survey",
-        "stability",
-        "iacs",
-        "naval architecture",
-        "tonnage"
-      ],
-      "question_count": 6,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "What is the ESP Code, in full?"
-        },
-        {
-          "qnum": 2,
-          "text": "How will you register a second-hand ship acquisition in India?"
-        },
-        {
-          "qnum": 3,
-          "text": "Relation between DWT, NT, GT and lightweight — how are they related?"
-        },
-        {
-          "qnum": 4,
-          "text": "Anniversary date of a certificate — how is it defined and used?"
-        },
-        {
-          "qnum": 5,
-          "text": "Explain any renewal survey in detail as Chief Engineer."
-        },
-        {
-          "qnum": 6,
-          "text": "IACS — what are its functions?"
-        }
-      ]
-    },
-    "QB2_H.html": {
-      "qb_group": "QB2",
-      "letter": "H",
-      "title": "Fire Safety, LSA & FSS Code (Backlog H)",
-      "version": "1.0",
-      "tags": [
-        "fire",
-        "solas",
-        "lsa"
-      ],
-      "question_count": 2,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "What do the FSS Code and FTP Code contain?"
-        },
-        {
-          "qnum": 2,
-          "text": "Difference between water lance and 'hydropen' for internal container firefighting, and use of water monitors."
-        }
-      ]
-    },
-    "QB3_H.html": {
-      "qb_group": "QB3",
-      "letter": "H",
-      "title": "MARPOL & Environmental (Backlog H)",
-      "version": "1.0",
-      "tags": [
-        "marpol",
-        "maritime law",
-        "survey"
-      ],
-      "question_count": 6,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "What are a PSA and a PSSA? Give an example of each."
-        },
-        {
-          "qnum": 2,
-          "text": "Explain the HNS Convention. Is it in force? Why not? What does the HNS Fund cover?"
-        },
-        {
-          "qnum": 3,
-          "text": "How do you test the high and low-low level alarms on the Inert Gas system?"
-        },
-        {
-          "qnum": 4,
-          "text": "Ship recycling procedure in India?"
-        },
-        {
-          "qnum": 5,
-          "text": "Ship recycling procedure. Cross questions."
-        },
-        {
-          "qnum": 6,
-          "text": "MARPOL Annex II — contents and certificates required?"
-        }
-      ]
-    },
-    "QB4_I.html": {
-      "qb_group": "QB4",
-      "letter": "I",
-      "title": "ISM, ISPS & MLC (Backlog I)",
-      "version": "1.0",
-      "tags": [
-        "ism",
-        "isps",
-        "mlc"
-      ],
-      "question_count": 5,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "What types of ISPS-related certificates exist, and what are their validity periods?"
-        },
-        {
-          "qnum": 2,
-          "text": "During an ISM audit, what is the first thing you show a surveyor as CE to demonstrate everything is in good order (PMS system)? How does the surveyor verify your PMS is genuinely in good order, and how does the surveyor know bunkering was carried out safely?"
-        },
-        {
-          "qnum": 3,
-          "text": "What is Safe Return to Port (SRtP)?"
-        },
-        {
-          "qnum": 4,
-          "text": "III Code (IMO Instruments Implementation Code) — what does it say?"
-        },
-        {
-          "qnum": 5,
-          "text": "What is the company's definition/role under maritime law (ISM Code Company definition)?"
-        }
-      ]
-    },
-    "QB7_H.html": {
-      "qb_group": "QB7",
-      "letter": "H",
-      "title": "GHG, CII & Decarbonisation (Backlog H)",
-      "version": "1.0",
-      "tags": [
-        "ghg",
-        "machinery"
-      ],
-      "question_count": 1,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "What safety measures are required for using low flash point fuel onboard?"
-        }
-      ]
-    },
-    "QB5_I.html": {
-      "qb_group": "QB5",
-      "letter": "I",
-      "title": "Management, Leadership & Human Element",
-      "version": "1.0",
-      "tags": [
-        "human-element",
-        "ism",
-        "leadership",
-        "mlc",
-        "stcw"
-      ],
-      "question_count": 6,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "What is the human-machine interface concept called in engine room design (Ergonomic Design)? How do you improve ergonomics, and what do you check when a new design/modification is brought onboard?"
-        },
-        {
-          "qnum": 2,
-          "text": "Cost-value analysis — at company level and at IMO level, what does this involve?"
-        },
-        {
-          "qnum": 3,
-          "text": "Major accident onboard — who exactly will you contact and how? What is the Emergency Response Contact at the bridge, distinct from MRCC?"
-        },
-        {
-          "qnum": 4,
-          "text": "As Chief Engineer, what are your duties as a leader — as distinct from as a manager?"
-        },
-        {
-          "qnum": 5,
-          "text": "What is 'industry-led practice' and 'industry-led management practice' in shipping?"
-        },
-        {
-          "qnum": 6,
-          "text": "How do you control/manage stress onboard as Chief Engineer?"
-        }
-      ]
-    },
-    "QB6_G.html": {
-      "qb_group": "QB6",
-      "letter": "G",
-      "title": "Electrical, Automation & Machinery (New Engine Technology)",
-      "version": "1.0",
-      "tags": [
-        "machinery"
-      ],
-      "question_count": 2,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "New type of engine — what problems are commonly faced, how do you mitigate them, and what does the maker recommend to avoid these in future designs?"
-        },
-        {
-          "qnum": 2,
-          "text": "What are the latest developments in main engine technology (not GHG/emissions-related)?"
-        }
-      ]
-    },
-    "QB8_G.html": {
-      "qb_group": "QB8",
-      "letter": "G",
-      "title": "Cargo Operations (Gas Carrier Cargo & IGC Tank Types)",
-      "version": "1.0",
-      "tags": [
-        "iacs"
-      ],
-      "question_count": 2,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "Can an LNG carrier carry chemical cargo?"
-        },
-        {
-          "qnum": 2,
-          "text": "IGC Code — explain Type A, B, and C tanks and membrane tanks: shape of each, which is self-supporting, and which has more carrying capacity."
-        }
-      ]
-    },
-    "QB6_F.html": {
-      "qb_group": "QB6",
-      "letter": "F",
-      "title": "Electrical, Automation & Digitalisation (Backlog F)",
-      "version": "1.1",
-      "tags": [
-        "solas",
-        "ip-code-industrial-personnel",
-        "offshore",
-        "framo",
-        "blockchain"
-      ],
-      "question_count": 5,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "Industrial Personnel (IP) Code — SOLAS Chapter XV"
-        },
-        {
-          "qnum": 2,
-          "text": "Framo latest technology."
-        },
-        {
-          "qnum": 3,
-          "text": "block chain technology"
-        },
-        {
-          "qnum": 4,
-          "text": "mmsi"
-        },
-        {
-          "qnum": 5,
-          "text": "Call sign"
-        }
-      ]
-    },
-    "QB9_E.html": {
-      "qb_group": "QB9",
-      "letter": "E",
-      "title": "Commercial Law & Maritime Liability — Part 1 (Q1-12, Backlog E)",
-      "version": "1.1",
-      "tags": [
-        "commercial-law",
-        "insurance",
-        "tmsa",
-        "clc",
-        "ms-act"
-      ],
-      "question_count": 12,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "TMSA"
-        },
-        {
-          "qnum": 2,
-          "text": "Latest MS Act Updates & DG Website Differences"
-        },
-        {
-          "qnum": 3,
-          "text": "War Time Marine Insurance & Extra Premiums"
-        },
-        {
-          "qnum": 4,
-          "text": "CLC and its Explanation"
-        },
-        {
-          "qnum": 5,
-          "text": "What is Insurance?"
-        },
-        {
-          "qnum": 6,
-          "text": "Blue Economy in Detail"
-        },
-        {
-          "qnum": 7,
-          "text": "P&I Club Coverage in Hormuz"
-        },
-        {
-          "qnum": 8,
-          "text": "MS Act Provisions for Competency Exams"
-        },
-        {
-          "qnum": 9,
-          "text": "Marine Spatial Planning"
-        },
-        {
-          "qnum": 10,
-          "text": "Blue Economy"
-        },
-        {
-          "qnum": 11,
-          "text": "Difference Between Tort and Crime in Maritime Context"
-        },
-        {
-          "qnum": 12,
-          "text": "Inchmaree Clause in Marine Insurance"
-        }
-      ]
-    },
-    "QB9_F.html": {
-      "qb_group": "QB9",
-      "letter": "F",
-      "title": "Commercial Law & Maritime Liability — Part 2 (Q13-23, Backlog F)",
-      "version": "1.1",
-      "tags": [
-        "commercial-law",
-        "flag-state",
-        "port-state-control",
-        "registration"
-      ],
-      "question_count": 11,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "Uniform Law and Conflict of Law in Maritime Context"
-        },
-        {
-          "qnum": 2,
-          "text": "Port of Refuge"
-        },
-        {
-          "qnum": 3,
-          "text": "Machinery Breakdown Insurance Claims"
-        },
-        {
-          "qnum": 4,
-          "text": "Fraudulent Registration of Ships"
-        },
-        {
-          "qnum": 5,
-          "text": "Continuous Hot Pursuit"
-        },
-        {
-          "qnum": 6,
-          "text": "Cabotage Law"
-        },
-        {
-          "qnum": 7,
-          "text": "STSDSS Full Form and Explanation"
-        },
-        {
-          "qnum": 8,
-          "text": "Flag of Convenience (FOC) / Open Registry"
-        },
-        {
-          "qnum": 9,
-          "text": "RightShip Inspection"
-        },
-        {
-          "qnum": 10,
-          "text": "Clear Grounds"
-        },
-        {
-          "qnum": 11,
-          "text": "Official Number"
-        }
-      ]
-    },
-    "QB10_A.html": {
-      "qb_group": "QB10",
-      "letter": "A",
-      "title": "Maritime Industry, Policy & Current Affairs",
-      "version": "1.0",
-      "tags": [
-        "ship-types",
-        "sagarmala",
-        "amrit-kaal",
-        "technology",
-        "opec",
-        "geopolitics"
-      ],
-      "question_count": 6,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "Type of vessel sailed on"
-        },
-        {
-          "qnum": 2,
-          "text": "type of ship sailed - general cargo"
-        },
-        {
-          "qnum": 3,
-          "text": "Sagarmala in detail"
-        },
-        {
-          "qnum": 4,
-          "text": "latest technology in your ship"
-        },
-        {
-          "qnum": 5,
-          "text": "Amrit kal vision details"
-        },
-        {
-          "qnum": 6,
-          "text": "What is the latest thing that happened in OPEC"
-        }
-      ]
-    },
-    "QB9_G.html": {
-      "qb_group": "QB9",
-      "letter": "G",
-      "title": "Commercial Law & Maritime Liability",
-      "version": "1.0",
-      "tags": [
-        "commercial-law",
-        "ism",
-        "isps",
-        "marpol",
-        "mlc",
-        "solas"
-      ],
-      "question_count": 7,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "Name other Acts related to shipping besides the MS Act (e.g. Recycling of Ships Act, Admiralty Act) — what does the Admiralty Act contain?"
-        },
-        {
-          "qnum": 2,
-          "text": "What is meant by 'in rem' and 'in personam' in maritime legal proceedings?"
-        },
-        {
-          "qnum": 3,
-          "text": "How is an IMO convention formally adopted? Explain the conference process, protocol, amendments, tacit vs explicit acceptance, the role of committees/sub-committees, the FAL Committee's function, and the difference between ratification, acceptance, approval, and accession."
-        },
-        {
-          "qnum": 4,
-          "text": "What is an Official Log Book?"
-        },
-        {
-          "qnum": 5,
-          "text": "Maritime Single Window — what is it, and how does it relate to the FAL Convention?"
-        },
-        {
-          "qnum": 6,
-          "text": "What is the difference between a Convention, a Protocol, and a Treaty in international maritime law?"
-        },
-        {
-          "qnum": 7,
-          "text": "What is the difference between General Average and Particular Average?"
         }
       ]
     }
