@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>MIW Engineering Management Notes — Part 4 | MEO Class 1 | HNS, Garbage, Annex VI, NOx, SOLAS/FSS</title>
+<meta name="description" content="MEO Class 1 Engineering Management Notes Part 4 — HNS/IMDG, MARPOL Annex IV & V, Annex VI Atmospheric Emissions, NOx Technical Code & Tiers, SOLAS/FSS/FTP/LSA/Inert Gas. Originally compiled by Uday Sankar S., Anglo-Eastern.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/miw-notes-mgmt-p4.html">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:15px;line-height:1.6;user-select:none;-webkit-user-select:none;}
+.miw-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.05;overflow:hidden;}
+.topbar{background:var(--navy);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logo{width:30px;height:30px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;letter-spacing:-0.5px;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;letter-spacing:0.3px;}
+.topbar-nav{display:flex;gap:20px;}
+.topbar-nav a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.15s;}
+.topbar-nav a:hover{color:#fff;}
+.page-header{background:var(--navy);padding:32px 24px 28px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.notes-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid var(--teal);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.notes-badge-icon{background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;letter-spacing:1px;}
+.notes-badge-text{color:var(--teal-light);font-size:12px;font-weight:600;}
+.page-title{color:#fff;font-size:26px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+.page-sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.header-meta-item{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:12px;color:#cbd5e1;}
+.header-meta-item strong{color:#fff;}
+.attribution-strip{margin-top:14px;padding:10px 14px;background:rgba(201,168,76,0.12);border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;font-size:12px;color:#cbd5e1;}
+.attribution-strip strong{color:#e2c97e;}
+.review-banner{background:#fef2f2;border-bottom:2px solid #dc2626;color:#991b1b;text-align:center;padding:8px;font-size:12.5px;font-weight:700;letter-spacing:0.3px;}
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:24px 16px;}
+.sidebar{position:sticky;top:68px;height:calc(100vh - 80px);overflow-y:auto;padding-right:6px;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--grey-border);border-radius:2px;}
+.toc-head{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;font-size:12px;color:var(--grey-text);text-decoration:none;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;transition:all 0.15s;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:700;}
+.toc-divider{height:1px;background:var(--grey-border);margin:14px 0;}
+.qb-sidebar-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:12px;}
+.qb-sidebar-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin-bottom:8px;}
+.qb-sidebar-link{display:block;font-size:12px;color:var(--teal-dark);text-decoration:none;font-weight:600;padding:3px 0;}
+.qb-sidebar-link:hover{text-decoration:underline;}
+#notes-feed{min-width:0;}
+.topic-block{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:24px;margin-bottom:32px;scroll-margin-top:72px;}
+.topic-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--teal-light);}
+.topic-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+.topic-title{margin:0 0 8px;font-size:20px;font-weight:800;color:var(--navy);}
+.topic-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;}
+.topic-tag{background:var(--teal-light);color:var(--teal-dark);padding:3px 8px;border-radius:20px;font-weight:600;}
+.topic-pages{color:var(--grey-text);padding:3px 0;}
+.topic-examiner{background:var(--orange-light);color:#92400e;padding:3px 8px;border-radius:20px;font-weight:600;}
+.freq-high{background:#fef9c3;color:#713f12;padding:3px 8px;border-radius:20px;font-weight:700;}
+.freq-medium{background:#f0fdf4;color:#14532d;padding:3px 8px;border-radius:20px;font-weight:600;}
+.section-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--grey-border);}
+.notes-body{font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:8px;}
+.notes-list{font-family:'Georgia',serif;font-size:14px;line-height:1.8;padding-left:22px;margin-bottom:8px;}
+.notes-list li{margin-bottom:4px;}
+.timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
+.timeline-block .t-year{color:#fff;font-weight:700;}
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
+.reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
+.reg-code{color:var(--orange);font-weight:700;white-space:nowrap;flex-shrink:0;font-family:monospace;font-size:12px;}
+.reg-desc{color:#cbd5e1;line-height:1.5;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:13.5px;font-family:'Georgia',serif;line-height:1.7;}
+.ce-tip strong{color:#92400e;}
+.qa-block{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.qa-item{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.qa-q{background:var(--grey-bg);padding:10px 14px;font-weight:700;font-size:13px;color:var(--navy);}
+.qa-a{padding:10px 14px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;color:var(--ink);}
+.exam-focus-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:16px 0;}
+.exam-focus-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin:0 0 12px;}
+.exam-q{margin:8px 0;font-family:'Georgia',serif;font-size:13.5px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+.marks-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+.memory-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:16px 0;}
+.memory-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#713f12;margin:0 0 10px;}
+.memory-list{font-family:'Georgia',serif;font-size:13.5px;line-height:1.8;padding-left:18px;}
+.memory-list li{margin-bottom:4px;}
+.amend-table,.compare-table,.revision-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.amend-table th,.compare-table th,.revision-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+.amend-table td,.compare-table td,.revision-table td{padding:8px 12px;border-bottom:1px solid var(--grey-border);font-family:'Georgia',serif;line-height:1.6;vertical-align:top;}
+.amend-table tr:nth-child(even) td,.revision-table tr:nth-child(even) td{background:var(--grey-bg);}
+.psc-focus{background:#fef2f2;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);}
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;}
+.mental-map .root{color:#fff;font-weight:700;}
+.qb-link-box{background:var(--teal-light);border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;}
+.qb-link-box strong{color:var(--teal-dark);}
+.qb-link-box a{color:var(--teal-dark);font-weight:600;text-decoration:none;margin-right:12px;}
+.qb-link-box a:hover{text-decoration:underline;}
+.deep-dive{margin:14px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:16px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;}
+.deep-dive-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.deep-dive-body p,.deep-dive-body li{margin-bottom:6px;}
+.deep-dive-body ul{padding-left:20px;}
+.verify-note{background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 8px 8px 0;padding:10px 16px;margin-bottom:16px;font-size:12.5px;font-family:'Georgia',serif;line-height:1.65;color:#1e3a8a;}
+.verify-note strong{color:#1e40af;}
+.ref-list{font-size:13px;line-height:1.9;padding-left:18px;}
+.ref-list a{color:var(--teal-dark);}
+.topic-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:12px;border-top:1px dashed var(--grey-border);font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.topic-version{font-weight:700;}
+.page-footer{background:var(--grey-bg);border-top:1px solid var(--grey-border);padding:28px 24px;margin-top:40px;font-size:12px;color:var(--grey-text);text-align:center;}
+.page-footer a{color:var(--teal-dark);}
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+
+<div class="miw-watermark" aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wmpat" width="420" height="220" patternTransform="rotate(-30)" patternUnits="userSpaceOnUse">
+        <text x="0" y="60" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">marineintelligenceweekly.com</text>
+        <text x="0" y="90" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">MEO CLASS 1 — CONFIDENTIAL — REVIEW COPY</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wmpat)"/>
+  </svg>
+</div>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-logo">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/index.html">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="notes-badge">
+      <span class="notes-badge-icon">NOTES</span>
+      <span class="notes-badge-text">Engineering Management · Part 4 of 31</span>
+    </div>
+    <h1 class="page-title">Engineering Management Notes — Part 4</h1>
+    <p class="page-sub">HNS & IMDG · MARPOL Annex IV & V (Sewage/Garbage) · Annex VI Atmospheric Emissions · NOx Technical Code & Tiers · SOLAS/FSS/FTP/LSA/Inert Gas</p>
+    <div class="header-meta">
+      <span class="header-meta-item"><strong>Source pages:</strong> 76–100 of 768</span>
+      <span class="header-meta-item"><strong>Topics:</strong> 5 (T16–T20)</span>
+      <span class="header-meta-item"><strong>Access:</strong> Subscriber Only</span>
+      <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>
+      <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>
+    </div>
+    <div class="attribution-strip">
+      Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and verified by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="toc-head">Topics — Part 4</div>
+  <a class="toc-link" href="#topic-16">T16 · HNS & IMDG</a>
+  <a class="toc-link" href="#topic-17">T17 · Sewage & Garbage (Annex IV/V)</a>
+  <a class="toc-link" href="#topic-18">T18 · Atmospheric Emissions (Annex VI)</a>
+  <a class="toc-link" href="#topic-19">T19 · NOx Technical Code, Tiers, SCR/EGR</a>
+  <a class="toc-link" href="#topic-20">T20 · SOLAS / FSS / FTP / LSA / Inert Gas</a>
+  <div class="toc-divider"></div>
+  <div class="toc-head">Navigate</div>
+  <a class="toc-link" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/index.html">← Notes Index</a>
+  <a class="toc-link" href="miw-notes-mgmt-p3.html">← Part 3</a>
+  <a class="toc-link" href="miw-notes-mgmt-p5.html">Part 5 →</a>
+  <div class="toc-divider"></div>
+  <div class="qb-sidebar-box">
+    <div class="qb-sidebar-title">🔗 Related QB Files</div>
+    <a class="qb-sidebar-link" href="../QB3_A.html">QB3 — MARPOL & PSC</a>
+    <a class="qb-sidebar-link" href="../QB5_A.html">QB5 — Engine Emissions</a>
+  </div>
+</aside>
+
+<!-- NOTES FEED -->
+<main id="notes-feed">
+
+<!-- ============================================================ -->
+<!-- TOPIC 11 — HNS & IMDG -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-16" data-kw="HNS, hazardous noxious substances, IMDG, harmful packaged cargo">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 16</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Hazardous & Noxious Substances (HNS) & Harmful Packaged Cargoes</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">MARPOL Annex III · HNS Convention</span>
+        <span class="topic-pages">Uday pp. 76–80</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> The source draft's HNS definition and "no direct government contribution" statement are directionally correct but paraphrased from the 1996 HNS Convention / 2010 HNS Protocol, not verbatim treaty text — labelled below accordingly. The 100 million SDR / 250 million SDR two-tier figures are presented here as the commonly-cited indicative maximums; the exact figures depend on ship type/tonnage under the 2010 Protocol text and should be treated as typical exam figures, not quoted as fixed statute numbers. IMDG segregation distances (3 m / 6 m) are practical shipboard rule-of-thumb figures, not exact IMDG Code regulatory text — the Code itself defines segregation qualitatively (Away From / Separated From / etc.) with distances set out in IMDG Vol. 1 General Provisions §7.2.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">Hazardous and Noxious Substances (HNS) are, in simple terms, any substance other than oil that — if it enters the sea — could harm human health, marine life, amenities, or other legitimate uses of the sea (definition adapted from the 1996 HNS Convention, Article 1 — paraphrased, not word-for-word). Harmful Packaged Cargoes are marine pollutants carried in containers, portable tanks, or tank wagons rather than in bulk — think a container of paint thinner or pesticide rather than a tanker full of chemicals. Together, MARPOL Annex III, the IMDG Code, and the 2010 HNS Protocol form the three-layer framework covering identification/packaging, safe carriage, and financial liability respectively.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>Container ships routinely carry hundreds of IMDG-classed boxes — the CE must understand ventilation, fire-fighting, and segregation implications, not just cargo planning.</li>
+    <li>PSC inspectors specifically target placarding, manifest accuracy, and bilge/ventilation isolation on HNS-carrying vessels — a weak answer here risks detention-related questions in the oral.</li>
+    <li>Class 8 corrosive or Class 3 flammable leaks in a hold directly affect engine room systems (bilge, ventilation, electrical isolation) — this is squarely CE territory, not just cargo officer territory.</li>
+    <li>The 2010 HNS Protocol liability regime is a favourite "why was the original convention revised" question for Nair.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">1996</span> → Original HNS Convention adopted — heavy reporting burden on packaged-goods receivers made ratification impractical for many states
+<span class="t-year">2010</span>     → Protocol of 2010 to the HNS Convention adopted — simplified reporting, shifted focus to major bulk receivers
+<span class="t-year">2021</span>     → 2010 HNS Protocol entered into force after reaching ratification threshold</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex III</span><span class="reg-desc">Prevention of pollution by harmful substances carried in packaged form — packaging, marking, labelling, documentation, stowage</span></div>
+    <div class="reg-item"><span class="reg-code">IMDG Code</span><span class="reg-desc">Mandatory operational extension of SOLAS Ch. VII and MARPOL Annex III — packing, labelling, placarding, segregation</span></div>
+    <div class="reg-item"><span class="reg-code">2010 HNS Protocol</span><span class="reg-desc">Two-tier liability & compensation regime; entered into force 2021</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 Two-Tier HNS Compensation Structure</h3>
+  <div class="mental-map"><span class="root">HNS DAMAGE CLAIM</span>
+│
+├── TIER 1 — Shipowner strict liability
+│     Compulsory P&I-backed insurance/financial security
+│     Indicative maximum cap ≈ 100 million SDR (typical figure — varies with ship type/tonnage)
+│
+└── TIER 2 — International HNS Fund (activated once Tier 1 exhausted or shipowner insolvent)
+      Financed by post-incident contributions from cargo receivers exceeding threshold volumes
+      No direct government budget contributions — receivers fund it, not states as states
+      Indicative combined maximum cap ≈ 250 million SDR (Tier 1 + Tier 2 combined)</div>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair Sir:</strong> Nair likes to test whether candidates know the HNS Fund is financed by <em>cargo receivers</em>, not governments — say "financed by persons in contracting states who receive contributing cargoes above threshold quantities" rather than a vague "the fund pays." If pushed on exact SDR figures, frame them as "indicative maximums under the 2010 Protocol" rather than quoting them as if reciting statute text.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: What is HNS and how does it differ from oil pollution liability?</div><div class="qa-a">HNS is any substance other than oil which, if released into the sea, could harm human health, marine life, amenities, or legitimate sea uses. Unlike the oil pollution regime (CLC/Fund Convention), HNS liability is split into a two-tier system: shipowner strict liability (Tier 1) backed by compulsory insurance, and a post-incident industry-funded HNS Fund (Tier 2) for damages exceeding the shipowner's cap.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: Why was the original 1996 HNS Convention revised in 2010?</div><div class="qa-a">Many states found the 1996 Convention's reporting requirements for fragmented, small-volume packaged cargo receivers operationally unworkable — tracking every small packaged HNS shipment was an excessive administrative burden. The 2010 Protocol simplified this by shifting the primary reporting obligation onto major bulk receivers, while keeping the underlying liability structure intact, making ratification practical.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: Who pays into the HNS Fund, and when is it triggered?</div><div class="qa-a">The Fund is financed by post-incident contributions from individual receivers of HNS cargo who import quantities above specified threshold volumes — contracting governments make no direct budget contribution. It is triggered once the shipowner's Tier 1 liability cap is exhausted or if the shipowner is financially insolvent.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: As Chief Engineer, what documentary check must you make before loading IMDG cargo?</div><div class="qa-a">I verify the vessel holds a valid Document of Compliance for the Carriage of Dangerous Goods matching the exact classes loaded, cross-check the stowage plan against the IMDG Segregation Matrix, and confirm cargo hold ventilation, bilge isolation, and gas detection systems are fully functional before cargo operations commence.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: What are the four IMDG segregation categories?</div><div class="qa-a">"Away From" (minimum practical separation, can share a compartment), "Separated From" (different compartments/holds, wider separation on deck), "Separated by a Complete Compartment or Hold From" (a full steel bulkhead between), and "Separated Longitudinally by an Intervening Complete Compartment or Hold From" (a full intermediate hold as buffer). Exact distances are set in IMDG Code Vol. 1 General Provisions §7.2, not fixed universal numbers.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> List the nine IMDG hazard classes with one example of each.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Explain the two-tier compensation structure under the 2010 HNS Protocol.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> As Chief Engineer, describe your emergency response procedure for a Class 8 corrosive cargo leak in a container hold, covering detection, containment, and post-incident reporting.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>1996 → 2010</strong> — Original Convention → Protocol simplified receiver reporting</li>
+      <li><strong>Tier 1 shipowner / Tier 2 Fund</strong> — insurance first, industry fund second</li>
+      <li><strong>Receivers fund it, not governments</strong> — key exam line</li>
+      <li><strong>9 IMDG classes</strong> — Explosives, Gases, Flammable Liquids, Flammable Solids, Oxidizers/Peroxides, Toxic/Infectious, Radioactive, Corrosive, Miscellaneous</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>Governing instruments</td><td>MARPOL Annex III, IMDG Code, 2010 HNS Protocol</td></tr>
+    <tr><td>Tier 1 cap (indicative)</td><td>≈100 million SDR — shipowner/P&I</td></tr>
+    <tr><td>Tier 2 cap (indicative)</td><td>≈250 million SDR combined — HNS Fund</td></tr>
+    <tr><td>Fund financed by</td><td>Post-incident receiver contributions, not governments</td></tr>
+    <tr><td>IMDG classes</td><td>9 classes, several with numbered sub-divisions</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-16">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-16')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>HSSC Survey Points for HNS-Certified Vessels</h4>
+      <p>Initial survey covers structural fire insulation, cargo-space electrical isolation, bilge pump arrangements, and ventilation fire dampers. Annual/intermediate surveys verify containment system integrity, gas detection calibration, and documentation currency. Renewal (5-yearly) requires hydrostatic testing of hold bilge systems and full insulation-resistance testing of cargo-zone electrical equipment.</p>
+      <h4>PSC Detention Risk Framing</h4>
+      <p>Missing or illegible IMDG placards on a container carrying marine pollutants is commonly treated by PSC as a serious deficiency that can lead to detention under MARPOL Annex III / SOLAS Chapter VII — this is a strong practical/exam warning, but detention itself remains a discretionary PSC decision under the relevant regional MOU, not an automatic legal consequence.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/OurWork/Environment/Pages/HNS-Convention.aspx" target="_blank">IMO — HNS Convention & 2010 Protocol (official)</a></li>
+    <li><a href="https://www.imo.org/en/OurWork/Safety/Pages/DangerousGoods-default.aspx" target="_blank">IMO — IMDG Code overview</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3_A.html">QB3 — MARPOL & PSC</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p4 · Topic 16 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p4 · T16 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 12 — SEWAGE & GARBAGE (ANNEX IV & V) -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-17" data-kw="sewage, garbage, MARPOL Annex IV, MARPOL Annex V, garbage record book">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 17</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Sewage & Garbage Management — MARPOL Annex IV & Annex V</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">MARPOL Annex IV/V</span>
+        <span class="topic-pages">Uday pp. 81–85</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> Discharge distance/speed criteria and macerator particle-size figures are correct as commonly cited exam figures, but MARPOL's own food-waste text is phrased as "comminuted to pass through a screen no greater than 25 mm," not as a fixed design spec — worded accordingly below. Added the "no visible floating solids/no discoloration" condition to the sewage matrix, and clarified that Annex IV applies "on international voyages" per regulation 2, with Parties free to extend it domestically.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">MARPOL Annex IV governs discharge of sewage (black/grey water) from ships, while Annex V governs garbage — all solid waste generated during ship operation except cargo residues covered elsewhere. Both annexes apply distance-from-land and vessel-speed criteria to control discharge, with Annex V additionally imposing an absolute worldwide ban on plastics.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>The sewage treatment plant is squarely an engine department responsibility — bacterial die-off, macerator faults, and pH imbalance are CE-level troubleshooting, not deck department.</li>
+    <li>Garbage Record Book and Sewage discharge logging errors are a top PSC detention trigger — CE must know exact distance/speed criteria cold.</li>
+    <li>Unauthorized bypass lines around treatment plants are treated by PSC as clear evidence of intentional pollution — a CE who doesn't audit for this exposes the ship (and personally, the Master/CE) to prosecution risk.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">1978</span> → MARPOL 73/78 Protocol — Annexes IV & V included in original convention structure
+<span class="t-year">2003</span>     → Annex IV entered into force (delayed ratification vs other Annexes)
+<span class="t-year">2013</span>     → Annex V revised — shifted to default "all discharge prohibited unless specifically permitted"</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex IV, reg. 2</span><span class="reg-desc">Applicability — ships ≥400 GT, or <400 GT certified to carry >15 persons, on international voyages</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex IV, reg. 11</span><span class="reg-desc">Discharge criteria — distance, speed, comminution/disinfection conditions</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex V, reg. 3</span><span class="reg-desc">Disposal of garbage outside special areas — including full plastics ban</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex V, reg. 4</span><span class="reg-desc">Disposal of garbage within special areas</span></div>
+  </div>
+
+  <h3 class="section-head">📊 Annex IV Sewage Discharge Matrix</h3>
+  <table class="compare-table">
+    <tr><th>Condition</th><th>Distance / Speed Criteria</th></tr>
+    <tr><td>Uncomminuted, untreated sewage</td><td>&gt;12 NM from nearest land, en route, ≥4 knots</td></tr>
+    <tr><td>Comminuted &amp; disinfected sewage</td><td>&gt;3 NM from nearest land, en route, ≥4 knots</td></tr>
+    <tr><td>Type-approved treatment plant effluent</td><td>Any distance, subject to coastal State rules — no visible floating solids, no discolouration of surrounding water</td></tr>
+  </table>
+
+  <h3 class="section-head">🔧 System Layout — Biological Sewage Plant</h3>
+  <div class="mental-map"><span class="root">RAW SEWAGE INLET</span>
+│
+▼ Commingling / Maceration
+▼ Aeration Chamber (aerobic bacteria digestion, air blowers)
+▼ Settling / Clarifier (sludge settles to bottom)
+├── Sludge air-lift return → back to aeration
+└── Clarified effluent → disinfection → overboard (subject to distance/speed criteria) or holding tank</div>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair Sir:</strong> Nair often asks the exact discharge distances — answer with the full condition, not just the number: "greater than 12 nautical miles, en route, at not less than 4 knots, for uncomminuted sewage." Dropping "en route" or the speed condition is a common half-mark loss.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: Under what conditions can uncomminuted sewage be discharged?</div><div class="qa-a">Only beyond 12 nautical miles from the nearest land, while the ship is en route, proceeding at not less than 4 knots.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: What additional discharge conditions apply to a type-approved sewage treatment plant?</div><div class="qa-a">Effluent from a certified plant may be discharged at any distance, but the discharge must not produce visible floating solids or cause discolouration of the surrounding water, and remains subject to any stricter coastal State requirements.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: What is the food waste discharge rule inside a Special Area under Annex V?</div><div class="qa-a">Whole (uncomminuted) food waste is completely banned inside Special Areas. Comminuted food waste able to pass a 25 mm screen may only be discharged beyond 12 nautical miles from the nearest land while the vessel is en route.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: What is the plastics discharge rule under Annex V?</div><div class="qa-a">A complete, worldwide ban — plastics of any kind, including synthetic ropes, fishing nets, and plastic garbage bags, may never be discharged into the sea, regardless of location.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: As CE, how do you respond to a biological sewage plant die-off approaching an ECA?</div><div class="qa-a">Immediately close and lock out the overboard discharge valve, re-route sewage to the holding tank, diagnose the cause (commonly pH imbalance from harsh cleaning chemicals or fouled air diffusers), rehabilitate the chamber, and re-seed with fresh bacterial culture, running in full recirculation until a healthy foam layer confirms colony recovery before resuming normal operation.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> State the distance/speed criteria for discharge of comminuted and disinfected sewage.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Compare MARPOL Annex IV and Annex V applicability, record-keeping, and discharge criteria.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Describe the working principle of a biological sewage treatment plant and the corrective actions for a bacterial die-off.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>12 / 3 / 4</strong> — 12 NM uncomminuted, 3 NM comminuted+disinfected, both ≥4 knots</li>
+      <li><strong>Plastics = 0% anywhere</strong> — absolute global ban</li>
+      <li><strong>25 mm screen</strong> — food waste comminution standard, &gt;12 NM in Special Areas</li>
+      <li><strong>ISPPC</strong> — International Sewage Pollution Prevention Certificate, the Annex IV primary certificate</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>Annex IV applicability</td><td>≥400 GT or <400 GT carrying >15 persons, international voyages</td></tr>
+    <tr><td>Annex IV record</td><td>Engine Room Log — no separate record book required</td></tr>
+    <tr><td>Annex V record</td><td>Garbage Record Book Parts I & II, mandatory</td></tr>
+    <tr><td>Sewage macerator</td><td>≈7 mm typical type-approval size</td></tr>
+    <tr><td>Food waste screen</td><td>25 mm per Annex V wording</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-17">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-17')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>PSC Bypass-Line Focus</h4>
+      <p>PSC inspectors routinely check for unauthorized temporary hoses or newly-installed valves bypassing the sewage/bilge treatment unit. This is commonly treated as a serious deficiency pointing to intentional violation, carrying high detention and prosecution risk — always keep piping diagrams matching the as-built system with no unlogged modifications.</p>
+      <h4>Chemical Sensitivity of Biological Plants</h4>
+      <p>Never allow high-strength bleach or caustic commercial cleaners into cabin toilets feeding a biological plant — these kill the aerobic bacterial colony. Use only approved biodegradable, enzyme-based cleaners fleet-wide.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/OurWork/Environment/Pages/Sewage-default.aspx" target="_blank">IMO — MARPOL Annex IV (official)</a></li>
+    <li><a href="https://www.imo.org/en/OurWork/Environment/Pages/Garbage-Default.aspx" target="_blank">IMO — MARPOL Annex V (official)</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3_A.html">QB3 — MARPOL & PSC</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p4 · Topic 17 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p4 · T17 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 13 — ATMOSPHERIC EMISSIONS (ANNEX VI) -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-18" data-kw="sulphur cap, MARPOL Annex VI, incineration, VECS, VOC">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 18</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Atmospheric Emissions — MARPOL Annex VI: Sulphur, Incineration, VECS</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">MARPOL Annex VI</span>
+        <span class="topic-pages">Uday pp. 86–90</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> Global/ECA sulphur limits and BDN/sample retention periods are correct and current. The "Min 350°C within 1 min" incinerator figure in the source diagram is a manufacturer design feature, not a regulatory figure — labelled as such below, distinct from the MEPC.76(40)-aligned statutory ≥850°C / ≥0.5 s dwell time requirement. PVC incineration is clarified: it is restricted (only permitted in a type-approved incinerator meeting the resolution) rather than a blanket prohibition on all PVC.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">MARPOL Annex VI regulates air pollution from ships — sulphur oxides (SOx) via fuel sulphur content limits, incinerator design/operation standards, and tanker vapour emission control systems (VECS) for volatile cargo vapours.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>Fuel changeover mismanagement (thermal shock during VLSFO→MGO transition) is a real engine-room casualty risk, not just a paperwork exercise.</li>
+    <li>BDN retention and MARPOL sample custody are checked at nearly every PSC inspection.</li>
+    <li>Incinerator prohibited-materials list is frequently tested — burning the wrong material is both an environmental and a safety (toxic fume) issue.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">2005</span> → MARPOL Annex VI entered into force
+<span class="t-year">2015</span>     → ECA sulphur limit reduced to 0.10% m/m
+<span class="t-year">2020</span>     → Global sulphur cap reduced to 0.50% m/m ("IMO 2020")</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">Annex VI, reg. 14</span><span class="reg-desc">Sulphur oxides — global 0.50% m/m; ECA 0.10% m/m (4 SOx ECAs)</span></div>
+    <div class="reg-item"><span class="reg-code">Annex VI, reg. 18</span><span class="reg-desc">Fuel oil availability/quality — BDN retention ≥3 years; representative sample retained ≥1 year on board</span></div>
+    <div class="reg-item"><span class="reg-code">Annex VI, reg. 16</span><span class="reg-desc">Incineration — prohibited materials list; PVC restricted to type-approved incinerators only</span></div>
+    <div class="reg-item"><span class="reg-code">MEPC.76(40)</span><span class="reg-desc">Type-approval standard for shipboard incinerators — ≥850°C combustion chamber gas temp, ≥0.5 s dwell time</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 Incinerator Prohibited Materials</h3>
+  <table class="compare-table">
+    <tr><th>Material</th><th>Status</th></tr>
+    <tr><td>MARPOL Annex I/II/III cargo residues</td><td>Strictly prohibited</td></tr>
+    <tr><td>PCBs</td><td>Strictly prohibited</td></tr>
+    <tr><td>Garbage containing heavy metals</td><td>Strictly prohibited</td></tr>
+    <tr><td>Refined petroleum products with halogens</td><td>Strictly prohibited</td></tr>
+    <tr><td>PVC</td><td>Restricted — only in IMO type-approved incinerator meeting MEPC.76(40)</td></tr>
+  </table>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair Sir:</strong> When asked about incinerator temperature, separate the statutory figure (≥850°C combustion gas temperature, ≥0.5 s dwell time, per MEPC.76(40)) from any manufacturer-specific design feature quoted in local documentation — Nair will probe whether you can tell the two apart.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: What are the current global and ECA sulphur limits?</div><div class="qa-a">Global limit is 0.50% m/m sulphur in fuel oil, in force since 1 January 2020. Inside a SOx Emission Control Area, the limit is 0.10% m/m, in force since 1 January 2015.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: What are the BDN and fuel sample retention requirements?</div><div class="qa-a">The Bunker Delivery Note must be retained on board for a minimum of 3 years, and a representative fuel sample sealed at the time of bunkering must be retained for a minimum of 1 year.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: Can PVC be incinerated on board?</div><div class="qa-a">Only in an IMO type-approved incinerator that meets MEPC.76(40) — combustion at or above 850°C with adequate dwell time. Uncontrolled incineration of PVC is prohibited due to the risk of forming corrosive and toxic halogenated combustion products.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: What causes fuel pump seal failure during a rapid ECA fuel changeover, and how do you prevent it?</div><div class="qa-a">Too rapid a temperature drop during changeover thermally shocks fuel pump plungers and seals, causing leaks or seizure. Preventing it means limiting the temperature ramp rate — typically around 1–2°C per minute — using a properly calibrated automatic or manual changeover sequence, completed well before entering the ECA boundary.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> State the global and ECA sulphur limits with their effective dates.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> List materials prohibited from shipboard incineration under Annex VI regulation 16.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Describe the procedure and precautions for a safe fuel changeover before entering an ECA, including a case study of thermal-shock-related fuel leak response.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>0.50% global / 0.10% ECA</strong> — sulphur limits</li>
+      <li><strong>3 years BDN / 1 year sample</strong> — retention periods</li>
+      <li><strong>850°C / 0.5 s</strong> — statutory incinerator combustion standard</li>
+      <li><strong>PVC = restricted, not banned</strong> — type-approved incinerator only</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>Global sulphur cap</td><td>0.50% m/m from 1 Jan 2020</td></tr>
+    <tr><td>ECA sulphur cap</td><td>0.10% m/m from 1 Jan 2015</td></tr>
+    <tr><td>BDN retention</td><td>≥3 years</td></tr>
+    <tr><td>Fuel sample retention</td><td>≥1 year</td></tr>
+    <tr><td>Incinerator standard</td><td>≥850°C, ≥0.5 s dwell (MEPC.76(40))</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-18">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-18')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>VECS (Vapour Emission Control System)</h4>
+      <p>Flow path: cargo tank striping → high-velocity P/V valves (overpressure relief) → continuous O2 analyzer (alarm/trip at ≥8% O2) → mechanical flame arrestor (stops external flashback) → VECS vapour main manifold → shore connection to terminal vapour recovery unit. This is a tanker-specific system relevant if Nixon later serves on tankers.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/OurWork/Environment/Pages/Air-Pollution.aspx" target="_blank">IMO — MARPOL Annex VI (official)</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB5_A.html">QB5 — Engine Emissions</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p4 · Topic 18 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p4 · T18 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 14 — NOx TECHNICAL CODE, TIERS, SCR/EGR/MILLER -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-19" data-kw="NOx Technical Code, Tier I Tier II Tier III, SCR, EGR, Miller cycle">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 19</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">NOx Technical Code — Tiers I/II/III, SCR, EGR, Miller Cycle</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Annex VI reg. 13 · NOx Technical Code</span>
+        <span class="topic-pages">Uday pp. 91–95</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> HAM (~70%), EGR (60–70%), and SCR (≥90%) reduction figures are realistic, widely-cited manufacturer/engine-builder performance figures — not hard statutory values written into MARPOL itself — labelled "typical" below. SCR's 300–400°C recommended window is design-specific guidance, not a fixed IMO number. Any engine modification outside the approved Technical File range requires re-verification (and possibly a revised Technical File/EIAPP), not an automatic permanent voiding — phrased accordingly.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">The NOx Technical Code (under MARPOL Annex VI regulation 13) sets tiered nitrogen oxide emission limits for marine diesel engines above 130 kW, based on engine rated speed. Tier I and II apply globally; Tier III applies only inside a designated NOx Emission Control Area (NECA), requiring abatement technology such as SCR or EGR, or engine-design measures like the Miller Cycle.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>Every 2-stroke main engine on a Maersk container vessel carries an EIAPP Certificate and NOx Technical File — CE must know what triggers re-verification.</li>
+    <li>SCR/EGR troubleshooting (stuck valves, ammonium bisulphate fouling) is direct engine-room casualty response material.</li>
+    <li>Fuel pump/injector part-number matching against the Technical File is a routine PSC and survey check.</li>
+  </ul>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">Annex VI, reg. 13</span><span class="reg-desc">NOx emission limits, Tiers I/II/III, applicability >130 kW engines</span></div>
+    <div class="reg-item"><span class="reg-code">NOx Technical Code 2008</span><span class="reg-desc">Approval, testing, survey, and certification methodology (EIAPP)</span></div>
+  </div>
+
+  <h3 class="section-head">📊 Abatement Technology Comparison</h3>
+  <table class="compare-table">
+    <tr><th>Parameter</th><th>HAM</th><th>EGR</th><th>SCR</th></tr>
+    <tr><td>Typical reduction</td><td>~70%</td><td>~60–70%</td><td>≥90% (highest)</td></tr>
+    <tr><td>Mechanism</td><td>Water vapour into charge air, raises heat capacity</td><td>Recirculates inert exhaust gas, lowers cylinder O2</td><td>Urea injection into catalyst bed, chemically reduces NOx</td></tr>
+    <tr><td>Consumable</td><td>High-purity desalinated water</td><td>Alkaline scrubbing water, caustic soda</td><td>Aqueous urea (32.5% or 40%)</td></tr>
+    <tr><td>Main risk</td><td>Corrosive moisture carryover</td><td>Acidic soot/sulphur corrosion</td><td>Ammonia slip, catalyst fouling below ~300°C</td></tr>
+  </table>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Simon Sir:</strong> Simon likes the Miller Cycle mechanism explained precisely — Early Inlet Valve Closing (EIVC) traps air before BDC, so it expands and cools before compression, lowering peak flame temperature and thermal NOx. Say "reduces charge air temperature at start of compression," not just "reduces temperature."
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: What is an EIAPP Certificate?</div><div class="qa-a">Engine International Air Pollution Prevention Certificate — confirms a specific marine diesel engine has been factory test-bed tested and complies with the applicable Tier NOx limit under Annex VI regulation 13.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: How do you use the NOx Technical File in daily engine room work?</div><div class="qa-a">It defines approved component specifications and allowed adjustable-setting ranges. Using the Parameter Check Method, I verify replacement parts (injector nozzles, fuel pump plungers) carry correct approved part numbers, and keep settings like injection timing within the documented range.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: Explain how the Miller Cycle reduces NOx.</div><div class="qa-a">Using Early Inlet Valve Closing, the intake valve shuts before bottom dead centre, trapping a smaller air charge that then expands and cools during the remainder of the induction stroke before compression begins. This lowers the air temperature at the start of compression, reducing peak combustion flame temperature and suppressing thermal NOx formation.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: Why must SCR urea injection be avoided below 300°C exhaust temperature?</div><div class="qa-a">Below the recommended operating window, urea does not fully decompose to ammonia and instead forms solid ammonium bisulphate deposits, which blind the catalyst surface, degrade reduction performance, and can raise exhaust backpressure to the point of risking engine surge.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: A vessel's Tier III mode shows NOx above the NECA limit — what's your diagnostic approach?</div><div class="qa-a">I compare current settings against the approved Technical File limits, check exhaust gas analyzer calibration, then physically inspect the EGR/SCR abatement system — a common root cause is a sluggish or partially-stuck EGR valve actuator reducing recirculated exhaust volume, which raises combustion temperature and NOx output. Correcting the actuator restores compliant NOx levels.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> State the applicability threshold and Tier structure under Annex VI regulation 13.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Compare HAM, EGR, and SCR — mechanism, reduction efficiency, and main operational risk.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Explain the Miller Cycle's thermodynamic principle and the mechanical modifications required to implement it on a 2-stroke engine.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>>130 kW</strong> — NOx Technical Code applicability threshold</li>
+      <li><strong>Tier III = NECA only</strong> — Tier II applies outside NECAs</li>
+      <li><strong>HAM &lt; EGR &lt; SCR</strong> — increasing reduction efficiency</li>
+      <li><strong>300–400°C SCR window</strong> — avoid ammonium bisulphate fouling</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>Threshold</td><td>Engines &gt;130 kW</td></tr>
+    <tr><td>Tier III trigger</td><td>Inside designated NECA only</td></tr>
+    <tr><td>SCR efficiency</td><td>≥90% typical</td></tr>
+    <tr><td>EGR efficiency</td><td>60–70% typical</td></tr>
+    <tr><td>HAM efficiency</td><td>~70% typical</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-19">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-19')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Technical File Modification Rule</h4>
+      <p>Any change outside the approved Technical File range requires re-verification and, where significant, a revised Technical File and EIAPP endorsement — it is not automatically void forever from a single deviation, but PSC treats unverified deviations as serious MARPOL Annex VI violations regardless of the ship's overall certificate status.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/OurWork/Environment/Pages/Nitrogen-oxides-(NOx)-%E2%80%93-Regulation-13.aspx" target="_blank">IMO — NOx Regulation 13 (official)</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB5_A.html">QB5 — Engine Emissions</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p4 · Topic 19 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p4 · T19 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 15 — SOLAS / FSS / FTP / LSA / INERT GAS -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-20" data-kw="SOLAS 1974, FSS Code, FTP Code, Class A Class B divisions, inert gas system">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 20</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">SOLAS 1974, FSS/FTP Codes, Class A/B Divisions & 2024 Inert Gas System Amendments</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">SOLAS · FSS Code · FTP Code</span>
+        <span class="topic-pages">Uday pp. 96–100</span>
+        <span class="topic-examiner">Examiner: Senthil</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> Class A-60/B-30 temperature figures and SOLAS tonnage/exclusion list are correct and match the FTP Code/SOLAS II-2. The "January 2024" Inert Gas System amendments (downstream non-return device, branch isolation, continuous O2/pressure recording) reflect the direction of recent FSS Code Chapter 15 amendments but the source wording is paraphrased — phrased below as "recent amendments" with a pointer to verify exact clause numbers/entry-into-force date against the current FSS Code text before quoting it as gospel in the oral.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">SOLAS (Safety of Life at Sea) 1974 is the primary international treaty covering ship construction, equipment, and safety of life at sea. It applies to passenger ships and cargo ships ≥500 GT on international voyages, with defined exclusions (warships, cargo ships &lt;500 GT, wooden ships of primitive build, non-mechanically-propelled ships, fishing vessels, and pleasure yachts not engaged in trade). The FSS Code and FTP Code provide the detailed technical fire-protection and fire-testing standards that SOLAS Chapter II-2 references.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>Fire division integrity (A/B class bulkheads) is inspected constantly — a CE must know material and temperature-rise limits cold for both oral and practical survey purposes.</li>
+    <li>Inert Gas System design changes directly affect tanker cargo safety — even container-vessel CEs are examined on this as general engineering knowledge.</li>
+    <li>FSS Code chapter familiarity underpins virtually every fire-fighting equipment survey a CE will face.</li>
+  </ul>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch. I, reg. 3</span><span class="reg-desc">Application and exclusions</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch. II-2</span><span class="reg-desc">Fire protection, detection, and extinction — Main Vertical Zones, A/B/C divisions</span></div>
+    <div class="reg-item"><span class="reg-code">FTP Code (2010)</span><span class="reg-desc">Fire Test Procedures — laboratory type-approval testing for divisions/materials</span></div>
+    <div class="reg-item"><span class="reg-code">FSS Code, Ch. 15</span><span class="reg-desc">Inert Gas Systems — recently amended (verify exact clause/date before quoting in exam)</span></div>
+  </div>
+
+  <h3 class="section-head">📊 Class A vs Class B Fire Divisions</h3>
+  <table class="compare-table">
+    <tr><th>Parameter</th><th>Class A-60</th><th>Class B-30</th></tr>
+    <tr><td>Construction</td><td>Steel or equivalent, stiffened</td><td>Approved non-combustible (steel not required)</td></tr>
+    <tr><td>Fire integrity duration</td><td>60 minutes</td><td>30 minutes</td></tr>
+    <tr><td>Unexposed face — average temp rise</td><td>≤140°C</td><td>≤139°C</td></tr>
+    <tr><td>Unexposed face — single-point temp rise</td><td>≤180°C</td><td>≤225°C</td></tr>
+  </table>
+
+  <h3 class="section-head">🔧 2024 Inert Gas System Amendments — Layout</h3>
+  <div class="mental-map"><span class="root">IG GENERATOR (O2 &lt; 5%)</span>
+│
+▼ Continuous O2 & pressure log (permanent recording while IG is supplied)
+▼ Main IG isolating valve (machinery space boundary)
+▼ Non-return safety device — MANDATORY DOWNSTREAM of main isolating valve
+▼ Forward deck distribution main → cargo tanks via double-block-and-bleed
+Each branch line: own dedicated downstream isolation valve</div>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Senthil Sir:</strong> Senthil expects the exact numbers — "A-60: average ≤140°C, single point ≤180°C; B-30: average ≤139°C, single point ≤225°C" — memorise these as pairs, not just "A is stricter than B." He also likes the S.H.I.E.L.D. mnemonic (Structural divisions, Hose stations, Inert gas telemetry, Emergency fire pump, Low-location lighting, Dampers) for HSSC fire-safety audit points.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: What are the engineering differences between Class A-60 and Class B-30 bulkheads?</div><div class="qa-a">A-60 must be steel or equivalent, stiffened, holding flame/smoke integrity for 60 minutes, with unexposed-face temperature rise limited to ≤140°C average / ≤180°C at any point. B-30 can use approved non-combustible materials without requiring steel, holds integrity for 30 minutes, with unexposed-face limits of ≤139°C average / ≤225°C at any point.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: What vessels are excluded from SOLAS application under Chapter I regulation 3?</div><div class="qa-a">Warships and troopships; cargo ships under 500 GT; ships of primitive build (wooden, non-mechanically propelled); fishing vessels; and pleasure yachts not engaged in trade.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: Explain the recent (2024-direction) changes to Inert Gas System design under FSS Code Chapter 15.</div><div class="qa-a">Recent amendments clarify that the non-return device must be located downstream of the main IG isolating valve to reliably prevent cargo vapour backflow; each branch line requires its own effective isolation; and oxygen content plus system pressure must be continuously indicated and permanently recorded while IG is being supplied to cargo tanks. I'd confirm the exact clause number and entry-into-force date against the current FSS Code text before quoting it verbatim in the exam.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: What is a Main Vertical Zone under SOLAS II-2?</div><div class="qa-a">A structural fire-protection subdivision of the ship's length by A-class bulkheads and decks, limiting the spread of fire and smoke to a defined zone and supporting the ship's overall damage/fire-control strategy.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> State the vessel types explicitly excluded from SOLAS application under Chapter I, regulation 3.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> List the 15 chapters of the FSS Code and explain the primary technical requirements of Chapter 15 (Inert Gas Systems).</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Analyse the structural fire protection requirements under SOLAS Chapter II-2, covering Main Vertical Zone principles, Class A/B/C division comparison, and FTP Code type-approval testing for accommodation materials.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>≥500 GT international</strong> — SOLAS baseline applicability</li>
+      <li><strong>A-60: 140/180 · B-30: 139/225</strong> — average/single-point °C rise limits</li>
+      <li><strong>NR device downstream</strong> — 2024-direction IG amendment, key phrase</li>
+      <li><strong>S.H.I.E.L.D.</strong> — Structural, Hose, Inert-gas, Emergency pump, Low-location lighting, Dampers</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>SOLAS applicability</td><td>Passenger ships + cargo ships ≥500 GT, international voyages</td></tr>
+    <tr><td>Class A-60</td><td>Steel, 60 min, ≤140°C avg / ≤180°C point</td></tr>
+    <tr><td>Class B-30</td><td>Non-combustible, 30 min, ≤139°C avg / ≤225°C point</td></tr>
+    <tr><td>FSS Code chapters</td><td>15 total</td></tr>
+    <tr><td>IG oxygen flammability limit</td><td>Keep &lt;8% inside cargo tank structure</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-20">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-20')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Goal-Based Standards (GBS)</h4>
+      <p>New oil tankers and bulk carriers over 150 m are broadly subject to Goal-Based Standards, implemented in practice through the IACS Common Structural Rules made mandatory via SOLAS II-1 Part A-1. Full CSR detail is not required for orals unless specifically asked — know the GBS/CSR linkage exists.</p>
+      <h4>GMDSS & Navigation Equipment Checks (Ch. IV & V)</h4>
+      <p>For Chapter IV: verify Safety Radio Certificate validity, radio logbook testing entries, GMDSS console battery reserves, HRU/battery expiry on portable survival craft VHF, EPIRB, and SART. For Chapter V: verify VDR annual performance test certificate, AIS data accuracy, ECDIS chart currency against Notices to Mariners, and magnetic compass deviation card validity.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/About/Conventions/Pages/International-Convention-for-the-Safety-of-Life-at-Sea-(SOLAS),-1974.aspx" target="_blank">IMO — SOLAS 1974 (official)</a></li>
+    <li><a href="https://www.imo.org/en/OurWork/Safety/Pages/Fire-Protection.aspx" target="_blank">IMO — FSS Code overview</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3_A.html">QB3 — Fire Safety & SOLAS</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p4 · Topic 20 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p4 · T20 · v1.0</span>
+  </div>
+</div>
+
+</main>
+</div>
+
+<!-- PAGE FOOTER -->
+<footer class="page-footer">
+  <p><strong>MIW Engineering Management Notes — Part 4</strong> · Source pages 76–100 of 768</p>
+  <p style="margin-top:6px;">Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and verified by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.</p>
+  <p style="margin-top:6px;">Subscriber-only content. <a href="https://marineintelligenceweekly.com/SQ/">Subscribe — ₹899</a> for full access to all Engineering Management Notes parts.</p>
+  <p style="margin-top:8px;color:#94a3b8;font-size:11px;">Content is provided for examination preparation purposes only. Always verify regulatory citations against primary IMO instruments at <a href="https://www.imo.org" target="_blank" style="color:#0d9488;">www.imo.org</a>. Marine Intelligence Weekly accepts no liability for exam outcomes.</p>
+  <p style="margin-top:8px;">
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/index.html">← Notes Index</a> &nbsp;|&nbsp;
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1 Hub</a> &nbsp;|&nbsp;
+    <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
+  </p>
+</footer>
+
+<script>
+function toggleDD(id){
+  const body=document.getElementById(id).querySelector('.deep-dive-body');
+  const btn=document.getElementById(id).querySelector('.deep-dive-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  btn.textContent=(open?'▶':'▼')+' Deep Dive — Full Reference Detail';
+}
+const tocLinks=document.querySelectorAll('.toc-link[href^="#"]');
+const topics=document.querySelectorAll('.topic-block[id]');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      tocLinks.forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.2});
+topics.forEach(el=>obs.observe(el));
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+</script>
+</body>
+</html>

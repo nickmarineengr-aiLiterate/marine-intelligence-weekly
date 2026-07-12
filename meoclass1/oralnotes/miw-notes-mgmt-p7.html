@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>MIW Engineering Management Notes — Part 7 | MEO Class 1 | PSC, Classification Societies & IACS</title>
+<meta name="description" content="MEO Class 1 Engineering Management Notes Part 7 — Port State Control Deficiency Categorization, Classification Society Survey Lifecycle, IACS Unified Requirements & Class Transfer. Originally compiled by Uday Sankar S., Anglo-Eastern.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/miw-notes-mgmt-p7.html">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:15px;line-height:1.6;user-select:none;-webkit-user-select:none;}
+.miw-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.05;overflow:hidden;}
+
+/* TOPBAR */
+.topbar{background:var(--navy);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logo{width:30px;height:30px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;letter-spacing:-0.5px;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;letter-spacing:0.3px;}
+.topbar-nav{display:flex;gap:20px;}
+.topbar-nav a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.15s;}
+.topbar-nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{background:var(--navy);padding:32px 24px 28px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.notes-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid var(--teal);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.notes-badge-icon{background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;letter-spacing:1px;}
+.notes-badge-text{color:var(--teal-light);font-size:12px;font-weight:600;}
+.page-title{color:#fff;font-size:26px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+.page-sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.header-meta-item{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:12px;color:#cbd5e1;}
+.header-meta-item strong{color:#fff;}
+.attribution-strip{margin-top:14px;padding:10px 14px;background:rgba(201,168,76,0.12);border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;font-size:12px;color:#cbd5e1;}
+.attribution-strip strong{color:#e2c97e;}
+
+/* LAYOUT */
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:24px 16px;}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:68px;height:calc(100vh - 80px);overflow-y:auto;padding-right:6px;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--grey-border);border-radius:2px;}
+.toc-head{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;font-size:12px;color:var(--grey-text);text-decoration:none;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;transition:all 0.15s;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:700;}
+.toc-divider{height:1px;background:var(--grey-border);margin:14px 0;}
+.qb-sidebar-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:12px;}
+.qb-sidebar-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin-bottom:8px;}
+.qb-sidebar-link{display:block;font-size:12px;color:var(--teal-dark);text-decoration:none;font-weight:600;padding:3px 0;}
+.qb-sidebar-link:hover{text-decoration:underline;}
+
+/* MAIN FEED */
+#notes-feed{min-width:0;}
+
+/* TOPIC BLOCK */
+.topic-block{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:24px;margin-bottom:32px;scroll-margin-top:72px;}
+.topic-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--teal-light);}
+.topic-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+.topic-title{margin:0 0 8px;font-size:20px;font-weight:800;color:var(--navy);}
+.topic-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;}
+.topic-tag{background:var(--teal-light);color:var(--teal-dark);padding:3px 8px;border-radius:20px;font-weight:600;}
+.topic-pages{color:var(--grey-text);padding:3px 0;}
+.topic-examiner{background:var(--orange-light);color:#92400e;padding:3px 8px;border-radius:20px;font-weight:600;}
+.freq-high{background:#fef9c3;color:#713f12;padding:3px 8px;border-radius:20px;font-weight:700;}
+.freq-medium{background:#f0fdf4;color:#14532d;padding:3px 8px;border-radius:20px;font-weight:600;}
+
+/* SECTION HEAD */
+.section-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--grey-border);}
+
+/* NOTES BODY */
+.notes-body{font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:8px;}
+.notes-list{font-family:'Georgia',serif;font-size:14px;line-height:1.8;padding-left:22px;margin-bottom:8px;}
+.notes-list li{margin-bottom:4px;}
+
+/* TIMELINE */
+.timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
+.timeline-block .t-year{color:#fff;font-weight:700;}
+
+/* REG BOX */
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
+.reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
+.reg-code{color:var(--orange);font-weight:700;white-space:nowrap;flex-shrink:0;font-family:monospace;font-size:12px;}
+.reg-desc{color:#cbd5e1;line-height:1.5;}
+
+/* CE TIP */
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:13.5px;font-family:'Georgia',serif;line-height:1.7;}
+.ce-tip strong{color:#92400e;}
+
+/* ORAL Q&A */
+.qa-block{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.qa-item{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.qa-q{background:var(--grey-bg);padding:10px 14px;font-weight:700;font-size:13px;color:var(--navy);}
+.qa-a{padding:10px 14px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;color:var(--ink);}
+
+/* WRITTEN EXAM */
+.exam-focus-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:16px 0;}
+.exam-focus-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin:0 0 12px;}
+.exam-q{margin:8px 0;font-family:'Georgia',serif;font-size:13.5px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+.marks-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+
+/* MEMORY BOX */
+.memory-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:16px 0;}
+.memory-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#713f12;margin:0 0 10px;}
+.memory-list{font-family:'Georgia',serif;font-size:13.5px;line-height:1.8;padding-left:18px;}
+.memory-list li{margin-bottom:4px;}
+
+/* TABLES */
+.amend-table,.compare-table,.revision-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.amend-table th,.compare-table th,.revision-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+.amend-table td,.compare-table td,.revision-table td{padding:8px 12px;border-bottom:1px solid var(--grey-border);font-family:'Georgia',serif;line-height:1.6;vertical-align:top;}
+.amend-table tr:nth-child(even) td,.revision-table tr:nth-child(even) td{background:var(--grey-bg);}
+
+/* PSC FOCUS */
+.psc-focus{background:#fef2f2;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);}
+
+/* MENTAL MAP / FLOWCHART */
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;}
+.mental-map .root{color:#fff;font-weight:700;}
+
+/* QB LINK BOX */
+.qb-link-box{background:var(--teal-light);border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;}
+.qb-link-box strong{color:var(--teal-dark);}
+.qb-link-box a{color:var(--teal-dark);font-weight:600;text-decoration:none;margin-right:12px;}
+.qb-link-box a:hover{text-decoration:underline;}
+
+/* DEEP DIVE */
+.deep-dive{margin:14px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:16px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;}
+.deep-dive-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.deep-dive-body p,.deep-dive-body li{margin-bottom:6px;}
+.deep-dive-body ul{padding-left:20px;}
+
+/* REFERENCES */
+.ref-list{font-size:13px;line-height:1.9;padding-left:18px;}
+.ref-list a{color:var(--teal-dark);}
+
+/* TOPIC FOOTER */
+.topic-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:12px;border-top:1px dashed var(--grey-border);font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.topic-version{font-weight:700;}
+
+/* VERIFY NOTE */
+.verify-note{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:18px;font-size:12.5px;line-height:1.65;color:#7f1d1d;}
+.verify-note strong{color:#991b1b;}
+
+/* PAGE FOOTER */
+.page-footer{background:var(--grey-bg);border-top:1px solid var(--grey-border);padding:28px 24px;margin-top:40px;font-size:12px;color:var(--grey-text);text-align:center;}
+.page-footer a{color:var(--teal-dark);}
+
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+
+<div class="miw-watermark" aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wmpat" width="420" height="220" patternTransform="rotate(-30)" patternUnits="userSpaceOnUse">
+        <text x="0" y="60" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">marineintelligenceweekly.com</text>
+        <text x="0" y="90" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wmpat)"/>
+  </svg>
+</div>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-logo">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="notes-badge">
+      <span class="notes-badge-icon">NOTES</span>
+      <span class="notes-badge-text">Engineering Management · Part 7 of 31</span>
+    </div>
+    <h1 class="page-title">Engineering Management Notes — Part 7</h1>
+    <p class="page-sub">Port State Control Compliance &amp; Detention Protocols · Classification Societies &amp; Survey Lifecycle · IACS Framework &amp; Class Transfer</p>
+    <div class="header-meta">
+      <span class="header-meta-item"><strong>Pages:</strong> 151–175 of 768</span>
+      <span class="header-meta-item"><strong>Topics:</strong> 3 (T30–T32)</span>
+      <span class="header-meta-item"><strong>Access:</strong> Subscriber Only</span>
+      <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>
+      <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>
+    </div>
+    <div class="attribution-strip">
+      Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and updated by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="toc-head">Topics — Part 7</div>
+  <a class="toc-link" href="#topic-30">T30 · Port State Control</a>
+  <a class="toc-link" href="#topic-31">T31 · Classification Societies</a>
+  <a class="toc-link" href="#topic-32">T32 · IACS Framework</a>
+  <div class="toc-divider"></div>
+  <div class="toc-head">Navigate</div>
+  <a class="toc-link" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Notes Index</a>
+  <a class="toc-link" href="miw-notes-mgmt-p6.html">← Part 6</a>
+  <a class="toc-link" href="miw-notes-mgmt-p8.html">Part 8 →</a>
+  <div class="toc-divider"></div>
+  <div class="qb-sidebar-box">
+    <div class="qb-sidebar-title">🔗 Related QB Files</div>
+    <a class="qb-sidebar-link" href="../QB3.html">QB3 — MARPOL, ORB &amp; Environmental</a>
+    <a class="qb-sidebar-link" href="../QB1.html">QB1 — Engine Construction, Stability &amp; Surveys</a>
+  </div>
+</aside>
+
+<!-- NOTES FEED -->
+<main id="notes-feed">
+<!-- ============================================================ -->
+<!-- TOPIC 10 — PORT STATE CONTROL -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-30" data-kw="port state control, A.1206(34), A.1185(33), deficiency, detention, action code">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 30</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Port State Control (PSC) — Compliance, Deficiency Categorization &amp; Detention Appeal Protocols</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">PSC / Statutory Compliance</span>
+        <span class="topic-pages">Uday pp. 151–159</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> The source draft correctly identifies <strong>Resolution A.1185(33)</strong>
+    (adopted 6 December 2023, effective 1 January 2024) as governing PSC procedures, and correctly states its
+    Action Code matrix (Code 30 = detainable, Code 70 = RO informed, Code 17 = rectify before departure, Code 15 =
+    rectify at next port) — these match the verified figures on file. <strong>However, this instrument has since
+    been superseded.</strong> The IMO Assembly adopted <strong>Resolution A.1206(34) — Procedures for Port State
+    Control, 2025</strong> on 3 December 2025, which explicitly <strong>revokes A.1185(33)</strong> and took effect
+    from 1 January 2026. As of this writing (July 2026), A.1206(34) is the current governing instrument. The core
+    Action Code numbering and detainable-deficiency logic described below are carried forward unchanged into
+    A.1206(34); the principal changes are a new Appendix 20 (dedicated PSCO guidelines on ISPS/security aspects,
+    working with a Duly Authorized Officer/DAO), consolidation of detainable-deficiency criteria into Appendix 2,
+    and clearer linkage of LRIT non-compliance to detention. All reg-box entries and CE Oral Tips below have been
+    updated to cite A.1206(34) as current, with A.1185(33) retained parenthetically for historical/appeal-document
+    continuity. Candidates should be prepared for either citation to be accepted orally at Kochi MMD during the
+    2026 transition period, but should lead with A.1206(34) as the current instrument.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">Port State Control (PSC) is the internationally mandated inspection regime under which a sovereign coastal/port State exercises jurisdiction over foreign-flagged vessels calling at its ports, to verify that the ship's condition, equipment, manning, and operational management comply with the international maritime conventions to which that State is a Party. PSC functions as the "second line of defence" behind Flag State control and Classification Society (RO) oversight — it exists precisely because Flag State self-regulation, especially under flag-of-convenience registries, has historically proven insufficient on its own.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>A single PSC detention converts directly into off-hire losses, charter-party penalties, and adverse targeting factor scoring under the relevant regional MoU — the CE's watchkeeping and maintenance standard is under continuous, unannounced audit every time the vessel enters a foreign port.</li>
+    <li>Sub-standard vessels distort freight markets by undercutting compliant operators; PSC is the enforcement mechanism that keeps that commercial playing field level, which is why underwriters, P&amp;I clubs and charterers all track detention history.</li>
+    <li>Since A.1185(33) (carried into A.1206(34)), missing EEXI documentation, an invalid SEEMP, or absent CII compliance confirmation are explicit detainable deficiencies — GHG/decarbonisation compliance is no longer a "soft" administrative matter for the CE, it is a detention trigger.</li>
+    <li>A Code 30 (detainable) deficiency legally compels the PSCO to issue a Notice of Detention; the CE's technical judgement in the hours before a PSC inspection materially affects whether a defect is logged as Code 16/17 (rectifiable) versus Code 30 (detainable).</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">1978</span> → Amoco Cadiz grounding off Brittany — catalyst for coordinated regional PSC
+<span class="t-year">1982</span>       → Paris MoU signed by 14 European States — first regional PSC agreement, prevents "port shopping"
+<span class="t-year">1982–2000s</span> → Eight further regional MoUs/Agreements established — 9 global PSC regimes today (Paris, Tokyo, USCG independent, Viña del Mar, Caribbean, Abuja, Black Sea, Mediterranean, Indian Ocean, Riyadh)
+<span class="t-year">6 Dec 2023</span> → Resolution A.1185(33) adopted — Procedures for Port State Control, 2023 (revoked A.1155(32))
+<span class="t-year">3 Dec 2025</span> → Resolution A.1206(34) adopted — Procedures for Port State Control, 2025 (revokes A.1185(33)), effective 1 Jan 2026 — current instrument</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch. I, Reg. 19</span><span class="reg-desc">Control procedures for foreign ships to verify certification matches actual condition</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch. XI-2, Reg. 9</span><span class="reg-desc">Control and compliance measures for maritime security (ISPS) — checked by PSCO/DAO before port entry</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Arts. 5 &amp; 6</span><span class="reg-desc">Legal authority for inspection and detection of illegal discharge/pollution-prevention violations</span></div>
+    <div class="reg-item"><span class="reg-code">STCW Art. X &amp; Reg. I/4</span><span class="reg-desc">Authorizes PSC verification of watchkeeper competency and certificate validity</span></div>
+    <div class="reg-item"><span class="reg-code">Load Line Convention 1966, Art. 21</span><span class="reg-desc">Controls validation of freeboard/immersion limits and closing-appliance integrity</span></div>
+    <div class="reg-item"><span class="reg-code">IMO Res. A.1206(34)</span><span class="reg-desc">Procedures for Port State Control, 2025 — current governing instrument, adopted 3 Dec 2025, effective 1 Jan 2026, revokes A.1185(33)</span></div>
+    <div class="reg-item"><span class="reg-code">IMO Res. A.1185(33)</span><span class="reg-desc">Procedures for Port State Control, 2023 — historical instrument, superseded 1 Jan 2026; still relevant for appeal documents raised under it</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 Deficiency Classification &amp; the Mathematics of Targeting</h3>
+  <table class="revision-table">
+    <tr><th>Class</th><th>Definition</th><th>Operational Consequence</th></tr>
+    <tr><td>Minor</td><td>Isolated issue, no immediate systemic threat</td><td>Vessel sails; rectify within stated timeline (Code 15/16)</td></tr>
+    <tr><td>Major</td><td>Significant non-conformity compromising safety systems or environmental barriers</td><td>Immediate corrective action required before proceeding (Code 17)</td></tr>
+    <tr><td>Detainable</td><td>Severe, systemic failure — objectively unseaworthy or unacceptable risk to life/safety/environment; explicitly includes missing EEXI, invalid SEEMP, or absent CII compliance confirmation</td><td>Mandatory Notice of Detention (Code 30) — vessel restrained until rectified or conditional voyage approved</td></tr>
+  </table>
+
+  <p class="notes-body">Regional MoUs calculate a vessel's <strong>Ship Risk Profile (SRP)</strong> / Targeting Factor using a weighted risk model aggregated over a rolling window (Paris MoU uses inspection windows of roughly 5–6 months for High-Risk Ships, 10–12 months for Standard-Risk, and 24–36 months for Low-Risk Ships; Tokyo MoU aligns closely but is not identical, and the USCG operates an entirely independent matrix boarding priority system). The generic weighted-factor structure is illustrative of how age, flag performance, RO performance, company performance and historical deficiency record combine — exact weighting coefficients are internal to each MoU's targeting algorithm and are not published as a fixed public formula, so treat any specific numeric weighting as conceptual rather than an examinable exact figure.</p>
+
+  <h3 class="section-head">⚖ PSC Action Code Matrix (A.1206(34), carried from A.1185(33))</h3>
+  <table class="revision-table">
+    <tr><th>Code</th><th>Meaning</th><th>Engineering Implication</th></tr>
+    <tr><td>10</td><td>Deficiency rectified</td><td>Resolved to PSCO's satisfaction before departure</td></tr>
+    <tr><td>15</td><td>Rectify at next port</td><td>Minor defect; arrange spares/technician at next call</td></tr>
+    <tr><td>16</td><td>Rectify within 14 days</td><td>Minor documentation/maintenance-log/non-critical equipment item</td></tr>
+    <tr><td>17</td><td>Rectify before departure</td><td>Major deficiency; vessel cannot unmoor/request pilotage until resolved and PSCO-verified</td></tr>
+    <tr><td>18</td><td>Rectify within 3 months</td><td>Structural alterations, long-lead components, or Flag State exemption cases</td></tr>
+    <tr><td>30</td><td>Detainable deficiency</td><td>Formal legal mechanism arresting vessel movement — unseaworthy condition</td></tr>
+    <tr><td>40</td><td>Next port informed</td><td>Outstanding deficiency log transmitted to next destination's authority</td></tr>
+    <tr><td>45</td><td>Rectify detainable deficiency at next port</td><td>Conditional dispensation to transit to a specific repair yard</td></tr>
+    <tr><td>55</td><td>Flag State consulted</td><td>Dialogue with Administration to verify statutory compliance/exemptions</td></tr>
+    <tr><td>70</td><td>RO informed</td><td>Notification sent to the issuing Classification Society on structural/statutory failures</td></tr>
+  </table>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair Sir:</strong> Nair frequently probes the Code 15/16/17/30 distinction precisely because
+    candidates blur "rectify at next port" (15) with "rectify before departure" (17) — the correct discriminator is
+    whether the defect compromises immediate operational/safety readiness (17, cannot sail) versus a minor item that
+    can wait one port call (15, can sail). He will also ask which resolution currently governs PSC — state
+    <strong>A.1206(34) (2025), superseding A.1185(33)</strong>, and be ready to explain that the underlying Action
+    Code logic did not change in the 2025 revision, only the appendix structure and the new ISPS/security-focused
+    Appendix 20.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: What is Port State Control and why does it exist alongside Flag State control?</div><div class="qa-a">PSC is the inspection authority a coastal/port State exercises over foreign-flagged vessels calling at its ports, verifying compliance with international conventions. It exists as a "second line of defence" because Flag State self-regulation — particularly under flags of convenience — has historically been inconsistent; PSC prevents sub-standard vessels from simply routing to ports with lax enforcement ("port shopping").</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: Which resolution currently governs PSC procedures, and what did it replace?</div><div class="qa-a">Resolution A.1206(34), Procedures for Port State Control 2025, adopted 3 December 2025 and effective from 1 January 2026. It explicitly revokes the previous instrument, A.1185(33) (2023). The underlying Action Code matrix and detainable-deficiency logic carried forward unchanged; the 2025 revision's main addition is a dedicated Appendix 20 on ISPS/security inspection guidance.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: What is the difference between Code 17 and Code 30?</div><div class="qa-a">Code 17 (rectify deficiency before departure) applies to a major deficiency that must be resolved and PSCO-verified before the vessel can unmoor, but does not by itself arrest the vessel's legal status. Code 30 (detainable deficiency) is a formal Notice of Detention — a severe, systemic failure rendering the vessel objectively unseaworthy, legally restraining it from departing at all until the defect is rectified or a conditional voyage is approved.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: Give three examples of detainable deficiencies under A.1206(34)/A.1185(33) relevant to a Chief Engineer.</div><div class="qa-a">Absence of a valid required EEXI technical file, absence of a valid SEEMP, and absence of the required Confirmation of Compliance for annual CII/fuel-oil-consumption reporting are all explicit detainable deficiencies. Traditional detainable items also include failure of main/auxiliary steering gear and serious safety-equipment deficiencies.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: What triggers Code 70, and why does it matter to the CE?</div><div class="qa-a">Code 70 means "Recognized Organization informed" — the PSC authority formally notifies the issuing Classification Society of a structural or statutory system failure found during inspection. It matters because it typically follows an RO's own statutory certificate being called into question, which may trigger an emergency class survey and possible suspension of the certificate the RO issued.</div></div>
+    <div class="qa-item"><div class="qa-q">Q6: What was the historical catalyst for regional PSC cooperation?</div><div class="qa-a">The Amoco Cadiz grounding off Brittany, France, in 1978, which caused catastrophic oil pollution and exposed the weakness of fragmented, individual national enforcement. This directly led to 14 European States signing the Paris MoU in 1982, the first and most influential regional PSC agreement, which prevented sub-standard vessels from "port shopping" to weaker-enforcement ports.</div></div>
+    <div class="qa-item"><div class="qa-q">Q7: How many regional PSC regimes exist globally, and is the USCG one of them?</div><div class="qa-a">There are nine PSC regimes worldwide — eight regional MoUs plus one Agreement (Viña del Mar). The USCG (United States) operates its own independent PSC/boarding-priority matrix and is not a member of any of the nine regional MoUs, though it cooperates informationally with them.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> List and briefly explain the three categories of PSC deficiency (Minor, Major, Detainable) with one example of each.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Explain the PSC Action Code matrix (Codes 10–70), giving the specific operational implication of Codes 15, 17, 30 and 70 for a Chief Engineer.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Trace the historical development of Port State Control from the Amoco Cadiz incident to the current governing instrument (A.1206(34)). Discuss how the 2025 revision changed PSC treatment of ISPS/security matters, and explain the specific role of EEXI/SEEMP/CII documentation in triggering a detainable deficiency under the current Procedures.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>Amoco Cadiz 1978 → Paris MoU 1982</strong> — disaster to regulation, 14 founding States</li>
+      <li><strong>A.1206(34) now, A.1185(33) then</strong> — 2025 resolution (eff. 1 Jan 2026) revokes the 2023 one</li>
+      <li><strong>15 = next port, 16 = 14 days, 17 = before departure, 30 = detained, 70 = RO informed</strong></li>
+      <li><strong>EEXI + SEEMP + CII = detainable trio</strong> — GHG paperwork is now a Code 30 risk, not admin housekeeping</li>
+      <li><strong>9 regimes, USCG independent</strong> — 8 MoUs + 1 Agreement; USCG is its own system</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive" id="dd-topic-30">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-30')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Appeal Protocols</h4>
+      <p>Under both A.1185(33) and A.1206(34), a master/owner has the right of appeal against a detention decision. The PSCO must inform the master in writing of this right at the time of detention. Appeal is first directed to the detaining Authority; if unresolved, it may be escalated per the relevant regional MoU's own appeal procedure. Undue detention or delay entitles the owner to compensation for resulting loss or damage — this is an explicit Procedures provision, not merely a commercial expectation.</p>
+      <h4>What Changed in A.1206(34) Specifically</h4>
+      <p>The 2025 revision consolidated detainable-deficiency criteria into a single Appendix 2 (previously scattered across several appendices covering ISM, LRIT, STCW and MARPOL Annex VI items), added a dedicated Appendix 20 on security/ISPS inspection guidance involving a Duly Authorized Officer (DAO) working alongside the PSCO, and more explicitly linked LRIT non-compliance to detention (previously often treated as an administrative-only matter).</p>
+      <h4>On My Vessel (Maersk container, 2-stroke main engine)</h4>
+      <p>For a Maersk-managed container vessel under Danish or similar flag administration, PSC exposure is highest in high-traffic Paris MoU and Tokyo MoU ports. The CE's practical defence is ensuring EEXI/SEEMP/CII documentation folders are current and immediately producible, main/auxiliary steering gear test logs are up to date, and any outstanding Condition of Class is disclosed proactively rather than discovered by the PSCO — concealment converts a Code 17 into a Code 30 and a Code 70 RO referral.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/OurWork/IIIS/Pages/Port%20State%20Control.aspx" target="_blank">IMO — Port State Control (official overview)</a></li>
+    <li><a href="https://wwwcdn.imo.org/localresources/en/KnowledgeCentre/IndexofIMOResolutions/AssemblyDocuments/A.1206(34).pdf" target="_blank">IMO Resolution A.1206(34) — Procedures for Port State Control, 2025</a></li>
+    <li><a href="https://dgshipping.gov.in" target="_blank">Directorate General of Shipping, India</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3.html">QB3 — MARPOL / PSC</a>
+    <a href="../QB1.html">QB1 — Surveys</a>
+  </div>
+
+  
+  <div class="qb-link-box"><strong>🔗 Related Topic:</strong> This topic covers PSC deficiency/detention/appeal procedures under A.1206(34). For the underlying NIR risk-profiling mechanics (HRS/SRS/LRS windows) that determine inspection frequency, see <a href="miw-notes-mgmt-p6.html#topic-29">Part 6 · Topic 29</a>.</div>
+<div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p7 · Topic 30 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p7 · T30 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 11 — CLASSIFICATION SOCIETIES -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-31" data-kw="classification societies, statutory surveys, in-service surveys">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 31</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Classification Societies — Statutory Mandates, In-Service Surveys &amp; Class Status Lifecycle</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Class / Survey Regime</span>
+        <span class="topic-pages">Uday pp. 160–167</span>
+        <span class="topic-examiner">Examiner: Paul</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> The source draft's survey-interval figures (Annual ±3 months, Special/
+    Renewal every 5 years, Bottom/Docking twice in 5 years with max 36-month out-of-water interval, Boiler twice in
+    5 years with max 36-month internal interval) are consistent with the IACS-harmonized survey framework applied
+    across major societies and IMO's HSSC (Harmonized System of Survey and Certification) guidelines, so these are
+    retained as stated. The <strong>steel thickness wastage allowance figure ("typically 15% to 25% depending on
+    plate location")</strong> in the source draft could not be verified against a single universal IACS/IMO
+    percentage — actual allowable diminution varies by structural member, plate location, and each society's own
+    UR S-series/CSR rule set, and is not a single fixed industry-wide number. It has been reframed below as an
+    illustrative range rather than a citable regulatory figure, per the platform's standard for unverifiable
+    numerics. The 6-month automatic-suspension trigger for a lapsed CoC extension request is standard IACS practice
+    (PR1) and is retained.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">A Classification Society is an independent, non-governmental technical organization that establishes and maintains standards for the structural design, construction, and operational-lifecycle fitness of ships. Class verifies the structural integrity of the hull, propulsion, steering, and electrical power-generation systems through continuous plan approval and periodic in-service surveys, giving owners, underwriters, charterers, and Flag States an objective, independently audited standard of seaworthiness.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>A valid Certificate of Class is a strict prerequisite for Hull &amp; Machinery and P&amp;I insurance — no underwriter will cover a vessel without active class, so a CE's survey preparation directly protects the ship's commercial insurability.</li>
+    <li>Class acts as a Recognized Organization (RO) delivering statutory certificates (SOLAS, MARPOL, Load Line) on behalf of the Flag State — the CE deals with the same surveyor for both class rules and statutory compliance in most inspections.</li>
+    <li>An overdue or mismanaged Condition of Class (CoC) is a direct PSC detention trigger (Code 30) — CoC tracking is a CE-level responsibility, not purely an office/DPA function.</li>
+    <li>Any unapproved structural or machinery modification made without class drawing approval and surveyor attendance can trigger automatic suspension of class — this includes emergency engineering fixes made under operational pressure at sea.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">Mid-18th c.</span> → Concept originates at Edward Lloyd's Coffee House, London — underwriters assess ship quality for insurance
+<span class="t-year">1764</span>       → First independent shipping register published by the Society for the Registry of Shipping — precursor to Lloyd's Register
+<span class="t-year">Historic</span>   → Hulls graded by vowels (A/E/I/O/U), equipment/manning by letters (G/M/B) — "A1" (first-class hull, excellent equipment) becomes the global benchmark phrase</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch. II-1, Reg. 3-1</span><span class="reg-desc">Mandates ship design/construction/maintenance compliance with a Flag-recognized classification society's structural, mechanical and electrical rules</span></div>
+    <div class="reg-item"><span class="reg-code">IMO Res. A.739(18) &amp; RO Code</span><span class="reg-desc">Governs formal delegation of statutory survey authority from Flag States to Recognized Organizations</span></div>
+    <div class="reg-item"><span class="reg-code">Load Line Convention 1966, Art. 13</span><span class="reg-desc">Authorizes ROs to execute surveys and assign freeboard on the Administration's behalf</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex I, Reg. 6</span><span class="reg-desc">Framework for ROs to survey oil-pollution-prevention structural standards</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 In-Service Survey Cycle</h3>
+  <table class="revision-table">
+    <tr><th>Survey</th><th>Frequency / Window</th><th>Scope</th></tr>
+    <tr><td>Annual</td><td>Every 12 months (±3 months of anniversary date)</td><td>General visual inspection — hull, closing appliances, fire doors, essential machinery/safety-device testing</td></tr>
+    <tr><td>Intermediate</td><td>Combined with 2nd or 3rd Annual Survey</td><td>Expanded — selected ballast tank internal inspection, electrical insulation testing, machinery performance checks</td></tr>
+    <tr><td>Class Renewal / Special</td><td>Every 5 years</td><td>Comprehensive structural evaluation — extensive UT, all-tank internal inspection, boundary pressure testing, major machinery overhaul verification</td></tr>
+    <tr><td>Bottom / Docking</td><td>Twice per 5-year period; max 36 months between out-of-water surveys</td><td>Underwater hull plating, sea chests, cathodic protection, rudder clearances, tailshaft wear-down, sea valves</td></tr>
+    <tr><td>Tailshaft</td><td>Typically 5–15 years, per shaft design and bearing/seal type</td><td>Withdrawal or NDT of propeller shaft — fatigue cracking at keyway, taper, liner</td></tr>
+    <tr><td>Boiler</td><td>Twice per 5-year period; max 36 months between internal surveys</td><td>Internal drum/water-wall/header inspection, safety valve testing, hydraulic pressure testing</td></tr>
+  </table>
+
+  <h3 class="section-head">🔧 The Class Status Lifecycle</h3>
+  <div class="mental-map"><span class="root">ASSIGNMENT OF CLASS (newbuilding or transfer)</span>
+│
+├── Are periodic surveys maintained &amp; class rules complied with?
+│
+├── YES → MAINTENANCE OF CLASS (valid statutory standing)
+│
+└── NO  → SUSPENSION OF CLASS
+          (expired survey dates / unreported damage / unapproved alteration)
+              │
+              Suspension >6 months, or owner requests exit?
+              │
+              ├── YES → WITHDRAWAL OF CLASS (permanent — vessel marked unseaworthy)
+              └── NO  → REINSTATEMENT OF CLASS (overdue items completed, cleared)</div>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Paul Sir:</strong> Paul examines the precise legal distinction between a Condition of Class
+    (issued by the Society against its own Class Rules) and a Statutory Exemption (issued by/on behalf of the Flag
+    State against convention requirements) — candidates who conflate the two are marked down immediately. He also
+    tests the 60-day-style CoC repair-window scenario: be ready to walk through emergency tank isolation → class
+    notification → surveyor assessment → CoC issuance with operational limits → close-out with NDT verification, in
+    that exact sequence.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: What is the difference between a Condition of Class and a Statutory Exemption?</div><div class="qa-a">A Condition of Class (CoC) is issued exclusively by the classification society when hull or machinery has a defect violating the society's own Class Rules but not posing immediate danger — it carries an operational limitation and a rectification deadline. A Statutory Exemption is issued by or on behalf of the Flag State Administration, providing a legal relaxation from mandatory convention requirements (SOLAS/MARPOL). Class cannot grant statutory exemptions unless specifically authorized as an RO for that vessel by the Flag State.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: Under what conditions is a vessel's class automatically suspended?</div><div class="qa-a">Automatically, if the Class Renewal/Special Survey is not completed by its due date without an approved extension, or if Annual/Intermediate Surveys are not completed within their mandatory windows (±3 months of the anniversary date). It can also be compromised if the vessel sails with a known unrectified structural/mechanical defect without notifying class.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: What is the role of Class during a major conversion (e.g., tanker to bulk carrier)?</div><div class="qa-a">Class acts as the structural control framework throughout: the owner submits engineering drawings, scantling calculations, and stability modifications for plan approval before alteration begins; surveyors maintain continuous shipyard attendance to verify materials, witness welding, monitor NDT; on completion, Class updates stability data, issues a modified Certificate of Class, and performs the corresponding statutory RO surveys.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: What is the maximum interval between out-of-water Bottom/Docking Surveys?</div><div class="qa-a">36 months — the survey must occur twice within any 5-year class cycle, with no more than 36 months elapsing between two consecutive out-of-water inspections.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: Trace the historical origin of classification societies.</div><div class="qa-a">The concept originated in the mid-18th century at Edward Lloyd's Coffee House in London, where marine underwriters assessed ship quality for insurance purposes. The first independent shipping register was published in 1764 by the Society for the Registry of Shipping, evolving into Lloyd's Register. Hulls were originally graded with vowels and equipment/manning with letters — the designation "A1" (first-class hull, excellent equipment) became the global benchmark phrase still used informally today.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> State five specific parameters that would prompt a classification society to automatically suspend a vessel's Certificate of Class.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Explain the structural and mechanical requirements mandated during an out-of-water Bottom (Docking) Survey under the HSSC framework, specifying five engineering measurements the Chief Engineer must ensure are recorded.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> A bulk carrier suffers severe deformation of the transverse watertight bulkhead between Hold 2 and Hold 3 due to improper cargo discharge. (a) Detail the CE's immediate notification responsibilities under the ISM Code and Class Rules. (b) Formulate the class surveyor's technical inspection plan. (c) Analyze the operational and documentation steps if a Condition of Class is issued allowing a single ballast voyage to a repair facility.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>A.I.S.B.T.B.</strong> — Annual / Intermediate / Special-Renewal / Bottom-Docking / Tailshaft / Boiler</li>
+      <li><strong>1764 Lloyd's Register origin, "A1" = first-class hull</strong></li>
+      <li><strong>CoC = Class Rules breach; Statutory Exemption = Flag State relaxation</strong> — never confuse the issuing authority</li>
+      <li><strong>6 months suspended without action → withdrawal</strong></li>
+      <li><strong>Overdue CoC at PSC = Code 30</strong> — an expired CoC is treated as a major ISM breakdown</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive" id="dd-topic-31">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-31')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Case Study — Localized Hull Wastage via Jetting Collision</h4>
+      <p>A Capesize bulk carrier strikes a jetty fender during berthing, causing a 1-metre crack in side shell plating above the waterline, compromising Topside Ballast Tank No. 4 Port. Response sequence: (1) CE/Chief Officer isolate the tank and map crack extent; (2) Master notifies Class and Flag State, requesting emergency survey; (3) surveyor assesses — permanent hot-work repair often cannot be done at a cargo berth for port-safety reasons; (4) surveyor issues a CoC with an operational deadline (illustrative example in the source draft: 60 days) and interim restrictions (e.g. not fully loading the affected tank, daily visual boundary checks); (5) at the repair yard, an insert-plate repair is executed, NDT witnessed by the surveyor, and the CoC deleted from the register on satisfactory close-out.</p>
+      <h4>On My Vessel (Maersk container, 2-stroke main engine)</h4>
+      <p>If the main engine governor fails at sea with no approved spare available, an unapproved mechanical bypass must never be fabricated — this invalidates propulsion safety redundancy and risks automatic class suspension if discovered without surveyor authorization. Correct procedure is to notify the company and arrange an emergency class survey attendance at the next port, keeping the vessel's operational limitation documented in the deck/engine log in the interim.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.dnv.com/maritime/" target="_blank">DNV — Maritime Classification Services</a></li>
+    <li><a href="https://www.lr.org/en/" target="_blank">Lloyd's Register — Classification Services</a></li>
+    <li><a href="https://www.imo.org/en/OurWork/MSAS/Pages/Recognized-Organizations.aspx" target="_blank">IMO — Recognized Organizations</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB1.html">QB1 — Surveys / Class</a>
+    <a href="../QB3.html">QB3 — PSC / MARPOL</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p7 · Topic 31 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p7 · T31 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 12 — IACS FRAMEWORK -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-32" data-kw="IACS, unified requirements, class transfer, multi-class">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 32</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">The IACS Framework — Unified Requirements, Class Transfer &amp; Multi-Class Operations</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">IACS / Class Transfer</span>
+        <span class="topic-pages">Uday pp. 168–175</span>
+        <span class="topic-examiner">Examiner: Paul</span>
+        <span class="freq-medium">Medium Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> IACS's founding year and member count required checking. IACS was
+    formally founded in <strong>1968</strong> by seven leading classification societies (source draft correct). The
+    tonnage-share figure has been reframed: IACS members collectively class the substantial majority of world
+    merchant tonnage — commonly cited as over 90% — but this is an industry-tracked approximation, not a fixed
+    published percentage, so it is presented here as "the substantial majority (commonly cited around 90%+)" rather
+    than a precise statutory figure. <strong>Current IACS membership stands at 12 societies</strong> (Türk Loydu
+    joined November 2023, following RMRS's earlier withdrawal) — this is tracked platform-wide and confirmed
+    current as of this Part. The UR letter-category table, PR1A/PR1B/PR8/PR36 procedure names, and the age-based
+    (15-year) entry-survey threshold in the source draft are consistent with IACS's published Procedural
+    Requirements structure and are retained.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">The International Association of Classification Societies (IACS) is a non-governmental organization uniting the world's leading classification societies to establish, review, and harmonize technical standards for ship construction and operational safety. Its member societies collectively class the substantial majority of world commercial cargo-carrying tonnage — commonly cited at over 90% — making IACS the effective global technical backbone beneath IMO's statutory framework.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>IACS Common Structural Rules (CSR) directly set the wave-load, fatigue-life, and net-scantling formulas that determine hull renewal thresholds a CE will see quoted in thickness-gauging reports.</li>
+    <li>During a Transfer of Class (TOC), the CE is the primary custodian of survey history, CoC records, and thickness-gauging logs — concealing an outstanding recommendation from the incoming society is a direct PR1A violation with immediate consequences for the interim certificate.</li>
+    <li>Under a Dual/Double Class arrangement, if one society suspends class the CE must understand that the remaining society is obliged to suspend without delay — there is no "continuing to trade under the other class" workaround.</li>
+    <li>IACS's Early Warning Scheme (PR8) is how systemic design/material failures (e.g., a specific crankshaft or turbocharger rotor casing defect) get flagged fleet-wide — a CE's incident report can trigger a global design-rule update.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">1930</span> → International Load Line Convention recommends inter-society collaboration on freeboard rules
+<span class="t-year">1939, 1955</span> → Preliminary conferences among leading societies
+<span class="t-year">1968</span>       → IACS formally founded by seven leading classification societies
+<span class="t-year">1969</span>       → IACS granted consultative status with IMO
+<span class="t-year">Nov 2023</span>   → Türk Loydu joins IACS following RMRS's withdrawal — current membership: 12 societies</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch. II-1, Reg. 3-2</span><span class="reg-desc">Goal-Based Ship Construction Standards (GBS) for bulk carriers and oil tankers, implemented via IACS Common Structural Rules</span></div>
+    <div class="reg-item"><span class="reg-code">IMO Res. A.1022(26)</span><span class="reg-desc">Guidelines for Flag State implementation of the ISM Code, recognizing IACS members' auditing capability</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex I, Regs. 20 &amp; 21</span><span class="reg-desc">Double-hull requirements for oil tankers — IACS Unified Requirements provide the structural evaluation baseline</span></div>
+    <div class="reg-item"><span class="reg-code">IACS PR1A / PR1B</span><span class="reg-desc">Procedural Requirements governing single-society Transfer of Class (PR1A) and Dual/Double Class suspension coordination (PR1B)</span></div>
+    <div class="reg-item"><span class="reg-code">IACS PR8</span><span class="reg-desc">Early Warning Scheme — systemic defect/failure reporting across member societies</span></div>
+    <div class="reg-item"><span class="reg-code">IACS PR36</span><span class="reg-desc">Coordination of statutory documentation transfer between societies on a Flag State change</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 The Four Pillars of IACS Regulatory Output</h3>
+  <table class="revision-table">
+    <tr><th>Category</th><th>Function</th></tr>
+    <tr><td>Unified Requirements (UR)</td><td>Standardized mandatory minimum technical resolutions on design/construction/survey; societies may exceed but not fall below</td></tr>
+    <tr><td>Unified Interpretations (UI)</td><td>Clarify ambiguous clauses within IMO conventions for uniform application</td></tr>
+    <tr><td>Procedural Requirements (PR)</td><td>Mandatory administrative/operational procedures — class transfer, multi-class management, EWS reporting</td></tr>
+    <tr><td>Common Structural Rules (CSR)</td><td>Comprehensive structural standards for bulk carriers/oil tankers — wave-load, fatigue-life, net-scantling formulas</td></tr>
+  </table>
+
+  <h3 class="section-head">🔧 UR Letter Categories</h3>
+  <table class="revision-table">
+    <tr><th>Letter</th><th>Scope</th></tr>
+    <tr><td>A</td><td>Anchoring, mooring, towing equipment</td></tr>
+    <tr><td>E</td><td>Electrical installations, short-circuit protection, emergency power</td></tr>
+    <tr><td>F</td><td>Fire protection, structural containment</td></tr>
+    <tr><td>G</td><td>Gas tankers, cryogenic containment, boil-off gas</td></tr>
+    <tr><td>I</td><td>Polar Class vessels, ice-strengthening</td></tr>
+    <tr><td>L</td><td>Load Line boundaries, freeboard, opening closures</td></tr>
+    <tr><td>M</td><td>Machinery, main engines, boilers, shafting</td></tr>
+    <tr><td>N</td><td>Navigation systems, bridge ergonomics</td></tr>
+    <tr><td>P</td><td>Pipes and pressure vessels</td></tr>
+    <tr><td>S</td><td>Strength of ships, bulkheads, hull girders</td></tr>
+    <tr><td>W</td><td>Welding procedures, NDT, filler metals</td></tr>
+    <tr><td>Z</td><td>Survey and certification, Enhanced Survey Programme (ESP)</td></tr>
+  </table>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Paul Sir:</strong> Paul's benchmark question is the Double Class vs Dual Class distinction
+    under PR1B — Double Class means two societies each perform full, independent surveys; Dual Class means a formal
+    reciprocal-recognition agreement shares the survey workload. In both, if either society suspends class, the
+    remaining society must be informed and must suspend without delay — there is no partial or continuing class
+    status. He also expects the 15-year age threshold under PR1A stated precisely: under 15 years, an Interim
+    Certificate needs all overdue surveys and outstanding CoCs closed; 15 years and above additionally requires a
+    class entry survey matching Annual/Renewal scope.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: What is IACS and when was it founded?</div><div class="qa-a">The International Association of Classification Societies (IACS) is a non-governmental body uniting the world's leading classification societies to harmonize technical shipbuilding and safety standards. It was formally founded in 1968 by seven leading societies, following preliminary conferences in 1939 and 1955, and was granted consultative status with IMO in 1969. It currently has 12 member societies.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: Explain the timeline and data exchange required under PR1A when a class transfer request is made.</div><div class="qa-a">Within two working days of receiving the owner's request, the Gaining Society (GS) must notify the Losing Society (LS) and request the vessel's complete current class status. The LS must transmit the full survey history, all outstanding Conditions of Class, any operational restrictions, and complete UT records. The GS cannot issue an Interim Certificate of Class until this technical data package has been received, reviewed and integrated into its registry.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: What additional requirement applies to a vessel 15 years or older undergoing a class transfer?</div><div class="qa-a">In addition to closing out all overdue surveys and outstanding Conditions of Class, the Gaining Society must complete a specialized class entry survey matching the scope of an Annual or Renewal Survey (depending on the vessel's specific status) before an Interim Certificate can be issued — this is materially more stringent than the under-15-year threshold.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: What is the engineering purpose of the IACS Early Warning Scheme (PR8)?</div><div class="qa-a">PR8 requires any IACS member identifying a serious or repetitive technical failure — e.g., a specific main engine crankshaft cracking pattern, recurring propeller blade detachment, or localized bulkhead buckling — to file an incident report shared across all member societies. This lets societies instantly update design rules, increase inspection frequency for the affected component, and issue fleet-wide safety alerts.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: Distinguish an IACS Unified Requirement (UR) from a Unified Interpretation (UI).</div><div class="qa-a">A UR is a standardized technical resolution setting a mandatory minimum design/construction/survey requirement — member societies may impose stricter rules but not weaker ones. A UI clarifies ambiguous language within an existing IMO convention so all member societies apply the same interpretation; it does not itself set a new technical minimum, it harmonizes reading of an existing one.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> Define the technical distinction between an IACS Unified Requirement (UR) and an IACS Unified Interpretation (UI), and their direct impact on member society rulebooks.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Detail the procedural steps, time constraints, and administrative notifications required under IACS PR1A when an 18-year-old LNG carrier undergoes a Transfer of Class, distinguishing the handling of outstanding Conditions of Class versus clean survey cycles.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> A fleet of container ships under a Dual Class framework experiences a major auxiliary engine room explosion on one vessel, causing immediate suspension of class by the primary society. (a) Analyze the automatic cascading consequences on the vessel's remaining class standing under PR1B. (b) Formulate the CE's step-by-step engineering/reporting protocol to restore multi-class status. (c) Evaluate the PR8 Early Warning Scheme reporting criteria if the explosion is traced to a systemic metallurgical failure in a widely deployed turbocharger rotor casing.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>T.R.A.C.E.</strong> — Timeline trigger (2 days) / Record exchange / Age assessment (≥15 yrs) / Close-outs mandatory / Entry finalization</li>
+      <li><strong>1968, seven societies, 12 today</strong> — Türk Loydu joined Nov 2023 after RMRS withdrew</li>
+      <li><strong>UR = mandatory minimum; UI = interpretation; PR = procedure; CSR = structural rules</strong></li>
+      <li><strong>Double Class = two full independent surveys; Dual Class = shared workload by agreement</strong> — either way, one suspension forces the other's suspension</li>
+      <li><strong>PR8 = Early Warning Scheme</strong> — systemic defect reporting across the whole IACS membership</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive" id="dd-topic-32">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-32')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>PR36 — Flag State Change Coordination</h4>
+      <p>When a vessel changes its Flag Administration (as opposed to a straightforward class transfer), IACS PR36 requires the gaining and losing societies to coordinate transfer of all historical statutory documentation, so the new Flag State receives full visibility of the vessel's technical history — this runs in parallel with, and is distinct from, the PR1A class-transfer data package.</p>
+      <h4>PSC Scrutiny of Recent Transfers</h4>
+      <p>Port State Control Officers pay close attention to vessels that have recently undergone a Transfer of Class. If Form A/Form B review reveals the transfer occurred while detainable deficiencies were active, the vessel is flagged for expanded inspection — all historical close-out documentation from the losing society should be verifiably stamped, logged, and signed off by the incoming surveyor before sailing.</p>
+      <h4>On My Vessel (Maersk container, 2-stroke main engine)</h4>
+      <p>On a Maersk-operated container vessel classed by a major IACS member, any tailshaft or hull thickness gauging record discrepancy discovered during a class transfer review would fall directly on the CE's record-keeping. Proactive, complete documentation — rather than waiting for the incoming surveyor to find gaps — is the practical defence against transfer delays and PSC expanded-inspection flags.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://iacs.org.uk/" target="_blank">IACS — International Association of Classification Societies (official)</a></li>
+    <li><a href="https://iacs.org.uk/about/who-we-are/" target="_blank">IACS — Membership &amp; History</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB1.html">QB1 — Surveys / Class</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p7 · Topic 32 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p7 · T32 · v1.0</span>
+  </div>
+</div>
+</main><!-- /#notes-feed -->
+</div><!-- /.main-layout -->
+
+<!-- PAGE FOOTER -->
+<footer class="page-footer">
+  <p><strong>MIW Engineering Management Notes — Part 7</strong> · Pages 151–175 of 768</p>
+  <p style="margin-top:6px;">Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and updated by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.</p>
+  <p style="margin-top:6px;">Subscriber-only content. <a href="https://marineintelligenceweekly.com/SQ/">Subscribe — ₹899</a> for full access to all Engineering Management Notes parts.</p>
+  <p style="margin-top:8px;color:#94a3b8;font-size:11px;">Content is provided for examination preparation purposes only. Always verify regulatory citations against primary IMO instruments at <a href="https://www.imo.org" target="_blank" style="color:#0d9488;">www.imo.org</a>. Marine Intelligence Weekly accepts no liability for exam outcomes.</p>
+  <p style="margin-top:8px;">
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Notes Index</a> &nbsp;|&nbsp;
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1 Hub</a> &nbsp;|&nbsp;
+    <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
+  </p>
+</footer>
+
+<script>
+// Deep-dive toggle
+function toggleDD(id){
+  const body=document.getElementById(id).querySelector('.deep-dive-body');
+  const btn=document.getElementById(id).querySelector('.deep-dive-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  btn.textContent=(open?'▶':'▼')+' Deep Dive — Full Reference Detail';
+}
+
+// TOC active highlight on scroll
+const tocLinks=document.querySelectorAll('.toc-link[href^="#"]');
+const topics=document.querySelectorAll('.topic-block[id]');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      tocLinks.forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.2});
+topics.forEach(el=>obs.observe(el));
+
+// Content protection
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+</script>
+</body>
+</html>

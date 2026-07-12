@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>MIW Engineering Management Notes — Part 8 | MEO Class 1 | H-CSR, RO Code, Noise Code, CLC/FUND</title>
+<meta name="description" content="MEO Class 1 Engineering Management Notes Part 8 — Harmonized Common Structural Rules & GBS, Class Notations & RO Code, IMO Noise Code, CLC 1992 & FUND Convention. Originally compiled by Uday Sankar S., Anglo-Eastern.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/miw-notes-mgmt-p8.html">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:15px;line-height:1.6;user-select:none;-webkit-user-select:none;}
+.miw-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.05;overflow:hidden;}
+
+/* TOPBAR */
+.topbar{background:var(--navy);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logo{width:30px;height:30px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;letter-spacing:-0.5px;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;letter-spacing:0.3px;}
+.topbar-nav{display:flex;gap:20px;}
+.topbar-nav a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.15s;}
+.topbar-nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{background:var(--navy);padding:32px 24px 28px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.notes-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid var(--teal);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.notes-badge-icon{background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;letter-spacing:1px;}
+.notes-badge-text{color:var(--teal-light);font-size:12px;font-weight:600;}
+.page-title{color:#fff;font-size:26px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+.page-sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.header-meta-item{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:12px;color:#cbd5e1;}
+.header-meta-item strong{color:#fff;}
+.attribution-strip{margin-top:14px;padding:10px 14px;background:rgba(201,168,76,0.12);border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;font-size:12px;color:#cbd5e1;}
+.attribution-strip strong{color:#e2c97e;}
+
+/* LAYOUT */
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:24px 16px;}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:68px;height:calc(100vh - 80px);overflow-y:auto;padding-right:6px;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--grey-border);border-radius:2px;}
+.toc-head{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;font-size:12px;color:var(--grey-text);text-decoration:none;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;transition:all 0.15s;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:700;}
+.toc-divider{height:1px;background:var(--grey-border);margin:14px 0;}
+.qb-sidebar-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:12px;}
+.qb-sidebar-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin-bottom:8px;}
+.qb-sidebar-link{display:block;font-size:12px;color:var(--teal-dark);text-decoration:none;font-weight:600;padding:3px 0;}
+.qb-sidebar-link:hover{text-decoration:underline;}
+
+/* MAIN FEED */
+#notes-feed{min-width:0;}
+
+/* TOPIC BLOCK */
+.topic-block{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:24px;margin-bottom:32px;scroll-margin-top:72px;}
+.topic-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--teal-light);}
+.topic-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+.topic-title{margin:0 0 8px;font-size:20px;font-weight:800;color:var(--navy);}
+.topic-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;}
+.topic-tag{background:var(--teal-light);color:var(--teal-dark);padding:3px 8px;border-radius:20px;font-weight:600;}
+.topic-pages{color:var(--grey-text);padding:3px 0;}
+.topic-examiner{background:var(--orange-light);color:#92400e;padding:3px 8px;border-radius:20px;font-weight:600;}
+.freq-high{background:#fef9c3;color:#713f12;padding:3px 8px;border-radius:20px;font-weight:700;}
+.freq-medium{background:#f0fdf4;color:#14532d;padding:3px 8px;border-radius:20px;font-weight:600;}
+
+/* VERIFY NOTE */
+.verify-note{background:#fef2f2;border-left:4px solid #dc2626;border-radius:0 8px 8px 0;padding:12px 16px;margin:0 0 18px;font-size:13px;line-height:1.6;color:#7f1d1d;}
+.verify-note strong{color:#991b1b;}
+
+/* SECTION HEAD */
+.section-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--grey-border);}
+
+/* NOTES BODY */
+.notes-body{font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:8px;}
+.notes-list{font-family:'Georgia',serif;font-size:14px;line-height:1.8;padding-left:22px;margin-bottom:8px;}
+.notes-list li{margin-bottom:4px;}
+
+/* TIMELINE */
+.timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
+.timeline-block .t-year{color:#fff;font-weight:700;}
+
+/* REG BOX */
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
+.reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
+.reg-code{color:var(--orange);font-weight:700;white-space:nowrap;flex-shrink:0;font-family:monospace;font-size:12px;}
+.reg-desc{color:#cbd5e1;line-height:1.5;}
+
+/* CE TIP */
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:13.5px;font-family:'Georgia',serif;line-height:1.7;}
+.ce-tip strong{color:#92400e;}
+
+/* ORAL Q&A */
+.qa-block{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.qa-item{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.qa-q{background:var(--grey-bg);padding:10px 14px;font-weight:700;font-size:13px;color:var(--navy);}
+.qa-a{padding:10px 14px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;color:var(--ink);}
+
+/* WRITTEN EXAM */
+.exam-focus-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:16px 0;}
+.exam-focus-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin:0 0 12px;}
+.exam-q{margin:8px 0;font-family:'Georgia',serif;font-size:13.5px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+.marks-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+
+/* MEMORY BOX */
+.memory-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:16px 0;}
+.memory-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#713f12;margin:0 0 10px;}
+.memory-list{font-family:'Georgia',serif;font-size:13.5px;line-height:1.8;padding-left:18px;}
+.memory-list li{margin-bottom:4px;}
+
+/* TABLES */
+.amend-table,.compare-table,.revision-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.amend-table th,.compare-table th,.revision-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+.amend-table td,.compare-table td,.revision-table td{padding:8px 12px;border-bottom:1px solid var(--grey-border);font-family:'Georgia',serif;line-height:1.6;vertical-align:top;}
+.amend-table tr:nth-child(even) td,.revision-table tr:nth-child(even) td{background:var(--grey-bg);}
+
+/* PSC FOCUS */
+.psc-focus{background:#fef2f2;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);}
+
+/* MENTAL MAP / FLOWCHART */
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;}
+.mental-map .root{color:#fff;font-weight:700;}
+
+/* QB LINK BOX */
+.qb-link-box{background:var(--teal-light);border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;}
+.qb-link-box strong{color:var(--teal-dark);}
+.qb-link-box a{color:var(--teal-dark);font-weight:600;text-decoration:none;margin-right:12px;}
+.qb-link-box a:hover{text-decoration:underline;}
+
+/* DEEP DIVE */
+.deep-dive{margin:14px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:16px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;}
+.deep-dive-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.deep-dive-body p,.deep-dive-body li{margin-bottom:6px;}
+.deep-dive-body ul{padding-left:20px;}
+
+/* REFERENCES */
+.ref-list{font-size:13px;line-height:1.9;padding-left:18px;}
+.ref-list a{color:var(--teal-dark);}
+
+/* TOPIC FOOTER */
+.topic-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:12px;border-top:1px dashed var(--grey-border);font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.topic-version{font-weight:700;}
+
+/* PAGE FOOTER */
+.page-footer{background:var(--grey-bg);border-top:1px solid var(--grey-border);padding:28px 24px;margin-top:40px;font-size:12px;color:var(--grey-text);text-align:center;}
+.page-footer a{color:var(--teal-dark);}
+
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+
+<div class="miw-watermark" aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wmpat" width="420" height="220" patternTransform="rotate(-30)" patternUnits="userSpaceOnUse">
+        <text x="0" y="60" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">marineintelligenceweekly.com</text>
+        <text x="0" y="90" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wmpat)"/>
+  </svg>
+</div>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-logo">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/notes-master-index.html">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="notes-badge">
+      <span class="notes-badge-icon">NOTES</span>
+      <span class="notes-badge-text">Engineering Management · Part 8 of 31 (topic numbering local to this Part — pending sequential renumber, see Section 9 note)</span>
+    </div>
+    <h1 class="page-title">Engineering Management Notes — Part 8</h1>
+    <p class="page-sub">Harmonized CSR & Goal-Based Standards · Class Notations & the RO Code · IMO Noise Code · CLC 1992 &amp; FUND Convention</p>
+    <div class="header-meta">
+      <span class="header-meta-item"><strong>Pages:</strong> 176–200 of 768</span>
+      <span class="header-meta-item"><strong>Topics:</strong> 4 (T33–T36)</span>
+      <span class="header-meta-item"><strong>Access:</strong> Subscriber Only</span>
+      <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>
+      <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>
+    </div>
+    <div class="attribution-strip">
+      Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and updated by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="toc-head">Topics — Part 8</div>
+  <a class="toc-link" href="#topic-33">T33 · H-CSR &amp; GBS</a>
+  <a class="toc-link" href="#topic-34">T34 · Class Notations &amp; RO Code</a>
+  <a class="toc-link" href="#topic-35">T35 · IMO Noise Code</a>
+  <a class="toc-link" href="#topic-36">T36 · CLC 1992 &amp; FUND Convention</a>
+  <div class="toc-divider"></div>
+  <div class="toc-head">Navigate</div>
+  <a class="toc-link" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/notes-master-index.html">← Notes Index</a>
+  <a class="toc-link" href="miw-notes-mgmt-p7.html">← Part 7</a>
+  <a class="toc-link" href="miw-notes-mgmt-p9.html">Part 9 →</a>
+  <div class="toc-divider"></div>
+  <div class="qb-sidebar-box">
+    <div class="qb-sidebar-title">🔗 Related QB Files</div>
+    <a class="qb-sidebar-link" href="../QB3.html">QB3 — MARPOL &amp; PSC</a>
+    <a class="qb-sidebar-link" href="../QB1_A.html">QB1_A — Conventions &amp; Liability Law</a>
+    <a class="qb-sidebar-link" href="../QB9_A.html">QB9_A — Commercial Law &amp; Maritime Liability</a>
+  </div>
+</aside>
+
+<!-- NOTES FEED -->
+<main id="notes-feed">
+
+<!-- ============================================================ -->
+<!-- TOPIC 1 — H-CSR & GBS -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-33" data-kw="H-CSR, harmonized common structural rules, goal based standards">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 33</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Harmonized Common Structural Rules (H-CSR) &amp; Goal-Based Standards (GBS)</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Structural / Class</span>
+        <span class="topic-pages">Uday pp. 176–180</span>
+        <span class="topic-examiner">Examiner: Rajappan</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> All figures in the source draft checked against IACS and IMO primary text. The SOLAS II-1/3-10 GBS timeline (contract ≥ 1 Jul 2016, keel ≥ 1 Jul 2017, delivery ≥ 1 Jul 2020) and the uniform 150 m threshold for both oil tankers and bulk carriers are confirmed correct against IMO/IACS/class-society sources — no correction required. Note for candidates: the H-CSR class-rule threshold for bulk carriers (L ≥ 90 m, per IACS UR) is a separate class-specific figure from the SOLAS statutory GBS threshold (L ≥ 150 m for both ship types) — examiners frequently test this distinction, so keep the two numbers and their sources separate in your answer.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">The <strong>Harmonized Common Structural Rules (H-CSR)</strong> are IACS's unified minimum technical requirements for hull scantling design, calculation, and verification of oil tankers and bulk carriers, replacing the earlier separate CSR-OT and CSR-BC rule sets. <strong>Goal-Based Standards (GBS)</strong> are the IMO's higher-level statutory philosophy under SOLAS Chapter II-1, Regulation 3-10: instead of prescribing exact formulas, GBS sets the safety objectives a ship's structure must meet — including a minimum 25-year design life — and leaves classification societies to develop rules (like H-CSR) that satisfy those objectives.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>H-CSR removes the old commercial incentive for class societies to compete on lighter (cheaper but weaker) steel scantlings — every H-CSR-built hull meets the same structural floor regardless of which society classed it.</li>
+    <li>As CE, your loading computer's SWBM/SWSF limits are derived directly from these rules — exceeding 80–100% of permissible limits during cargo operations is a direct GBS/H-CSR compliance failure, not just an operational judgement call.</li>
+    <li>The 25-year design-life assumption underlies every fatigue and corrosion-margin calculation in your ship's structural drawings — it is why net scantlings, not gross, define your true remaining strength as the vessel ages.</li>
+    <li>PSC officers now inspect structural degradation against GBS/H-CSR parameters specifically, not just generic "corrosion" — understanding the rule basis helps you pre-empt detainable findings during your own internal rounds.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">Late 1990s–2000s</span> → Commercial competition between class societies erodes structural steel margins; contributes to bulk carrier/tanker structural casualties
+<span class="t-year">1 Apr 2006</span>    → Original IACS Common Structural Rules (CSR) enter into force, split into CSR-BC (bulk carriers) and CSR-OT (double-hull oil tankers)
+<span class="t-year">12–21 May 2010</span> → MSC 87 adopts SOLAS II-1/3-10 (Res. MSC.290(87)) and the GBS Standards text (Res. MSC.287(87))
+<span class="t-year">1 Jan 2012</span>    → SOLAS II-1/3-10 GBS regulation enters into force
+<span class="t-year">1 Jul 2016 / 2017 / 2020</span> → GBS statutory application windows: contract / keel-laid / delivery (see Reg Box)
+<span class="t-year">Post-2010s</span>    → IACS harmonises CSR-BC + CSR-OT into a single H-CSR rule set aligned with GBS functional requirements
+<span class="t-year">2016 onward</span>   → IMO GBS Verification Audit Scheme confirms 12 IACS ROs' rules conform to the GBS functional requirements</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">SOLAS II-1, Reg 3-10</span><span class="reg-desc">Goal-Based Ship Construction Standards for Bulk Carriers and Oil Tankers — statutory basis for GBS</span></div>
+    <div class="reg-item"><span class="reg-code">Res. MSC.287(87)</span><span class="reg-desc">Adopts the International Goal-Based Ship Construction Standards (the GBS Standards text)</span></div>
+    <div class="reg-item"><span class="reg-code">Res. MSC.290(87)</span><span class="reg-desc">Adopts new SOLAS regulation II-1/3-10 embedding GBS as a statutory requirement</span></div>
+    <div class="reg-item"><span class="reg-code">IACS H-CSR</span><span class="reg-desc">Class-specific harmonized rules: L ≥ 150 m for oil tankers; L (Lsc) ≥ 90 m for bulk carriers</span></div>
+    <div class="reg-item"><span class="reg-code">GBS Timeline</span><span class="reg-desc">Contract ≥ 1 Jul 2016 · Keel laid ≥ 1 Jul 2017 · Delivery ≥ 1 Jul 2020 — uniformly for both ship types, L ≥ 150 m</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 H-CSR Rule Architecture &amp; Design Load Scenarios</h3>
+  <div class="mental-map"><span class="root">IACS H-CSR RULE STRUCTURE</span>
+│
+├── PART 1 — GENERAL HULL REQUIREMENTS (common to both ship types)
+│     • Hull girder strength (sagging/hogging bending, shear)
+│     • Wave load formulations (North Atlantic environment)
+│     • Buckling & fatigue limits
+│
+├── PART 2 — SHIP-SPECIFIC REQUIREMENTS
+│     • Ch 1: Bilge/cargo holds — bulk carriers (grab loads, alternate hold, flooding)
+│     • Ch 2: Cargo tanks — oil tankers (sloshing, internal pressure)
+│
+└── DESIGN LOAD SCENARIOS (DLS)
+      1. Static (calm water, extreme cargo density)
+      2. Static + Dynamic (wave-induced pressure superimposed)
+      3. Impact (bow/bottom slamming, sloshing)
+      4. Fatigue (25-year cyclic stress spectrum)</div>
+
+  <p class="notes-body"><strong>Key working stress check:</strong> σ<sub>d</sub> ≤ R<sub>y</sub> / (γ<sub>m</sub> · γ<sub>s</sub>) — design equivalent stress from FEA must stay within yield stress reduced by material and structural safety factors. <strong>Net scantling principle:</strong> all strength checks use t<sub>gross</sub> − t<sub>corrosion margin</sub>, i.e. the steel that will still be there after 25 years of wastage — not the as-built thickness.</p>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Rajappan Sir:</strong> Rajappan will often open with "What is the difference between H-CSR and GBS?" — candidates who answer "same thing" fail immediately. State clearly: GBS (SOLAS II-1/3-10) is the IMO's statutory goal ("what" — safety objectives, 25-year life, L ≥ 150 m for both types); H-CSR is IACS's class rule ("how" — the actual scantling formulas, L ≥ 150 m tankers / L ≥ 90 m bulkers). Also expect a direct question on the alternate-hold loading case — know that Hold 2/3 and 3/4 bulkhead shear peaks are the critical check points, not just total bending moment.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: State the exact GBS length threshold and implementation timeline under SOLAS II-1/3-10.</div><div class="qa-a">GBS applies uniformly to both oil tankers and bulk carriers of 150 m in length and above — there is no separate 90 m threshold under GBS itself (that 90 m figure belongs to the class-specific H-CSR rules for bulk carriers only). The statutory timeline: building contract placed on or after 1 July 2016; in the absence of a contract, keel laid on or after 1 July 2017; or, regardless of contract/keel dates, delivery on or after 1 July 2020.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: Differentiate Net Scantling from Gross Scantling philosophy.</div><div class="qa-a">Gross Scantling used the nominal as-built thickness directly for strength calculations, bundling structural capacity and corrosion allowance together. H-CSR's Net Scantling Approach subtracts the corrosion margin from the gross thickness first, then performs all hull girder, buckling and fatigue checks using only the remaining net thickness — guaranteeing the ship still has adequate strength at the end of its 25-year design life, at maximum permitted wastage.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: What load combinations must the loading computer evaluate under H-CSR's Design Load Scenarios?</div><div class="qa-a">The loading computer must combine static calm-water loads (cargo pressure, sloshing/grab impact) with dynamic wave-induced hydrodynamic loads (sagging/hogging bending, shear, external hydrostatic head), checked against both yield and buckling limits, across standard, alternate, and accidental-flooding hold conditions.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: Why is alternate hold loading structurally risky on a Capesize bulker, and how does H-CSR manage it?</div><div class="qa-a">Loading Holds 1/3/5 and leaving 2/4 empty raises the centre of gravity (reducing snap-rolling risk) but creates sharp local shear-force steps at the transverse bulkheads between the loaded/empty holds — a fatigue-crack risk at the lower hopper knuckles. H-CSR's Part 2 Ch 1 rules mandate explicit alternate-hold-loading DLS checks (not present in legacy prescriptive rules), forcing designers to verify bulkhead shear capacity for this exact scenario rather than only the whole-ship bending moment.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: What is the Chief Engineer's practical role in GBS/H-CSR compliance during cargo operations?</div><div class="qa-a">The CE must ensure the class-certified loading computer is calibrated against class certificates, keep SWBM/SWSF within permissible limits (ideally ≤80% during multi-stage pours), synchronise ballast stripping with the loading sequence to avoid double-bottom overload, monitor deflection against strain-gauge telemetry where fitted, and conduct visual knuckle inspections after loading — all of which protect the GBS design-life assumption in practice, not just on paper.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> Differentiate the structural length thresholds for oil tankers and bulk carriers under IACS H-CSR versus the statutory requirement under SOLAS II-1/3-10 (GBS).</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Explain the structural risks of alternate hold loading in Capesize bulk carriers and how H-CSR design criteria manage these risks compared to legacy rules.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Derive the structural analysis steps to evaluate hull girder ultimate strength under SOLAS II-1/3-10 (GBS), incorporating FEA application, the statutory contract/keel/delivery timeline, design load scenarios, and how net scantling integrates into ultimate strength calculations.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>S-W-B-F</strong> — Static&amp;Dynamic superimposition, Wave-induced loads, Buckling, Fatigue (25-yr) — the four Part 1 evaluations</li>
+      <li><strong>GBS = 150 m both types</strong>; H-CSR bulk carrier class threshold = 90 m (Lsc) — do not mix these two numbers</li>
+      <li><strong>Contract 2016 → Keel 2017 → Delivery 2020</strong> — the GBS "1 July" ladder</li>
+      <li><strong>Net = Gross − Corrosion margin</strong> — all H-CSR strength checks use net, not gross, scantlings</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive" id="dd-topic-33">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-33')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Why the 2006 CSR Split Existed</h4>
+      <p>The original 2006 CSR was developed independently for bulk carriers (led by concerns after several capesize losses) and oil tankers (led by post-Erika/Prestige double-hull requirements), by different working groups within IACS, on different timelines. This produced two rule sets with inconsistent load assumptions and safety margins for broadly similar hull-girder problems — the harmonisation into H-CSR (post-2010s) unified the underlying wave-load and FEA methodology while retaining ship-type-specific Part 2 chapters.</p>
+      <h4>Residual Strength After Damage</h4>
+      <p>H-CSR requires the residual ultimate vertical bending moment M<sub>u</sub> after grounding/collision damage to satisfy M<sub>u</sub> ≥ γ<sub>R</sub> · M<sub>sw</sub>, where M<sub>sw</sub> is the permissible still-water bending moment in the damaged condition. This is distinct from the intact-condition ultimate strength check and reflects lessons from casualties where a vessel survived initial damage but failed structurally days later under residual sea loads.</p>
+      <h4>Shear Flow in Closed Sections</h4>
+      <p>For a hull cross-section under vertical shear V<sub>v</sub>, the shear flow q(s) around the thin-walled girder is q(s) = q₀ − ∫(V<sub>v</sub>·y(s)·t(s)/I<sub>y</sub>)ds. The q₀ term (statically indeterminate for closed loops like a double hull) is solved using compatibility of twist — this is standard thin-walled beam theory (Bredt-Batho) applied to ship structures, examined at written-paper depth rather than oral depth.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/OurWork/Safety/Pages/Goal-BasedStandards.aspx" target="_blank">IMO — Goal-Based Standards (official)</a></li>
+    <li>SOLAS Chapter II-1, Regulation 3-10 (as amended)</li>
+    <li>IACS Harmonized Common Structural Rules (H-CSR), current consolidated edition</li>
+    <li><a href="https://www.imo.org/en/MediaCentre/PressBriefings/pages/13-GBS-.aspx" target="_blank">IMO — GBS Verification Audit confirmation press release</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3.html">QB3 — MARPOL &amp; PSC (structural PSC focus points)</a>
+  </div>
+
+  
+  <div class="qb-link-box"><strong>🔗 Related Topic:</strong> This topic covers H-CSR technical structural rules. For the IMO-level GBS regulatory framework and Ship Construction File these rules satisfy, see <a href="miw-notes-mgmt-p6.html#topic-28">Part 6 · Topic 28</a>.</div>
+<div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p8 · Topic 33 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p8 · T33 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 2 — CLASS NOTATIONS & RO CODE -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-34" data-kw="classification notations, RO Code, recognized organization">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 34</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Classification Society Notations &amp; the Code for Recognized Organizations (RO Code)</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Class / Statutory</span>
+        <span class="topic-pages">Uday pp. 181–186</span>
+        <span class="topic-examiner">Examiner: Paul</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> RO Code adoption/entry-into-force dates verified against the primary IMO resolutions: MSC.349(92) adopted 21 June 2013 and MEPC.237(65) adopted 17 May 2013; both confirm the Code "takes effect" (in practical terms, entered into force) on 1 January 2015 upon entry into force of the related SOLAS/Load Line/MARPOL amendments. Source draft's "adopted 2013, in force 1 Jan 2015" is correct — no correction required.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body"><strong>Class Notations</strong> are the alphanumeric codes appended to a vessel's classification entry indicating that its design, construction, and machinery meet a Classification Society's technical rules. The <strong>Code for Recognized Organizations (RO Code)</strong> — adopted under Resolutions MSC.349(92) and MEPC.237(65) — is the mandatory international framework governing how Flag States assess, authorize, and oversee Classification Societies acting as Recognized Organizations (ROs) performing statutory certification on the Flag's behalf.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>Your ship's Certificate of Class is not decorative — withdrawal or suspension of a mandatory notation automatically invalidates the linked statutory certificates (Safety Construction, Safety Equipment, IOPP), making the vessel legally unfit to sail.</li>
+    <li>Understanding the RO Code's Part 2 independence/impartiality requirements explains why RO surveyors cannot be pressured or "negotiated with" on findings — this protects you as CE when defending a legitimate defect report against commercial push-back.</li>
+    <li>Knowing that an RO cannot detain a vessel or independently interpret regulations tells you exactly when to escalate a dispute to the Flag Administration rather than expecting the attending surveyor to resolve it on the spot.</li>
+    <li>UMS/AUT-UMS notation compromise (e.g. alarm relay failure) has an immediate, defined CE response — revert to manned watch — this is one of the most commonly oral-examined "what would you do" scenarios.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">Late 20th century</span> → Flag States increasingly delegate statutory surveys to Class Societies as national resources cannot scale with fleet growth
+<span class="t-year">Pre-2013</span>     → Delegation governed by non-mandatory IMO guidelines; wide variation in survey standards across Class Societies
+<span class="t-year">17 May 2013</span>  → MEPC 65 adopts Res. MEPC.237(65) — RO Code text, mandatory under MARPOL Annexes I/II
+<span class="t-year">21 Jun 2013</span>  → MSC 92 adopts Res. MSC.349(92) — RO Code text, mandatory under SOLAS/Load Line
+<span class="t-year">1 Jan 2015</span>   → RO Code takes effect upon entry into force of the related SOLAS/Load Line/MARPOL amendments</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">SOLAS XI-1, Reg 1</span><span class="reg-desc">Mandates that organizations surveying on the Administration's behalf comply with the RO Code</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex I Reg 6 / Annex II Reg 8 / Annex IV Reg 4 / Annex VI Reg 5</span><span class="reg-desc">Delegation of environmental statutory certification to ROs</span></div>
+    <div class="reg-item"><span class="reg-code">Res. MSC.349(92)</span><span class="reg-desc">SOLAS/Load Line adoption instrument for the RO Code (adopted 21 Jun 2013)</span></div>
+    <div class="reg-item"><span class="reg-code">Res. MEPC.237(65)</span><span class="reg-desc">MARPOL adoption instrument for the RO Code (adopted 17 May 2013)</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 Notation Architecture &amp; the Three Parts of the RO Code</h3>
+  <div class="mental-map"><span class="root">CLASS NOTATION ARCHITECTURE</span>
+│
+├── MANDATORY (no notation = no Certificate of Class)
+│     • Maltese Cross — built under direct Society survey
+│     • Maltese Cross + Asterisk — built under a partner Society, later admitted
+│     • 1A — unrestricted ocean-going hull/machinery standard
+│
+└── OPTIONAL / ADDITIONAL
+      • ESP — Enhanced Survey Programme (mandatory for bulkers/tankers)
+      • CSR — built to IACS H-CSR
+      • BWM(T) — approved ballast water treatment fitted
+      • UMS / AUT-UMS — unattended machinery space certified
+
+<span class="root">RO CODE — THREE PARTS</span>
+│
+├── PART 1 — General: delegation mechanism, formal written Flag–RO agreement
+├── PART 2 — Requirements for the RO: own rules, independence, impartiality,
+│              competence, transparency (mandatory — see Memory Box "I-R-I-S")
+└── PART 3 — Guidelines for Flag oversight: supplementary surveys, QMS audit access</div>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Paul Sir:</strong> Paul frequently probes the legal boundary question: "Can the class surveyor detain my ship?" The correct answer is an unambiguous <em>no</em> — ROs can suspend/withdraw notations and issue Conditions of Class, but only Flag State or Port State Control hold sovereign detention power. Also expect him to test the UMS defect scenario directly — know the sequence: suspend UMS mode → manned watch → logbook entry → notify RO and Flag → arrange Condition of Class for a supervised passage to repair port.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: Can an RO issue an international detention order if it finds a serious structural deficiency?</div><div class="qa-a">No. Detention authority is a sovereign power reserved for Port State Control or the Flag Administration. An RO that finds a deficiency invalidating statutory certificates can recommend corrective action, issue a Condition of Class, or suspend certificates — then it must notify the Flag Administration for further enforcement.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: What happens to statutory certificates if a mandatory class notation is suspended?</div><div class="qa-a">Statutory certificates (e.g. Safety Construction Certificate) are issued on the prerequisite that the vessel remains in class. If a mandatory notation is suspended or withdrawn due to unrectified defects, the foundation for the statutory certificate is broken — the certificate becomes invalid and the ship is not legally fit to sail internationally.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: Why does RO Code Part 2 emphasise surveyor independence and impartiality?</div><div class="qa-a">To prevent commercial conflicts of interest compromising safety decisions. Surveyors must have no commercial interest in the design, manufacture, construction or maintenance of vessels they audit, ensuring structural assessments rest strictly on technical compliance rather than owner/yard pressure.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: A UMS alarm relay to your cabin fails at sea — what do you do, step by step?</div><div class="qa-a">Immediately suspend UMS mode and revert to a continuous three-watch manned engine room. Log the failure time, affected components, and watch officers assigned. Draft and send a formal defect notification to the RO and Flag Administration. At the next port, coordinate with the RO surveyor — since the RO cannot unilaterally waive the notation requirement, expect a Condition of Class or Memorandum permitting a supervised passage to a repair facility under manned-watch conditions.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: Differentiate mandatory and optional class notations with an example of each.</div><div class="qa-a">Mandatory notations (e.g. the Maltese Cross, 1A) define baseline hull/machinery standards — without them the Certificate of Class cannot be issued. Optional/additional notations (e.g. ESP, CSR, BWM(T), UMS) certify specialised capability or enhanced regimes beyond the baseline and are added where the vessel is equipped/operated for that purpose — ESP is effectively mandatory in practice for bulk carriers and oil tankers specifically, since SOLAS requires the enhanced survey regime for those ship types.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> State the primary purpose of the RO Code and list its three constituent parts.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Differentiate mandatory and optional class notations; describe the operational/technical requirements to maintain an AUT-UMS notation.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Analyze the division of legal/operational responsibility between a Flag State Administration and an RO under the RO Code, addressing oversight mechanisms and the RO's limitations on regulatory interpretation and detention.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>I-R-I-S</strong> — Independence, Rules &amp; regulations maintained, Impartiality/ethics, Structured competence — RO Code Part 2 core criteria</li>
+      <li><strong>RO Code = MSC.349(92) + MEPC.237(65)</strong>, adopted 2013, effect from 1 Jan 2015</li>
+      <li><strong>RO cannot detain</strong> — only Flag State / PSC hold sovereign detention power</li>
+      <li><strong>Suspension of class notation ⇒ statutory certificate invalid</strong> — the two are legally linked</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive" id="dd-topic-34">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-34')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Why "Recognized" Organization, Not Just "Classification Society"</h4>
+      <p>Not every function a Class Society performs is statutory. A society acts as an RO only for the specific statutory certification functions a Flag State has formally delegated to it in a written agreement under RO Code Part 1. The same organisation's purely commercial classification services (issuing class certificates unrelated to a flag delegation) are not RO Code-governed in the same sense — this distinction matters when discussing liability and appeal routes.</p>
+      <h4>Supplementary Surveys as an Oversight Tool</h4>
+      <p>RO Code Part 3 empowers Flag Administrations to conduct independent "supplementary surveys" — spot-check inspections carried out directly by flag surveyors on ships classed with an authorized RO, specifically to verify the RO's own performance rather than the ship's condition per se. This is the primary mechanism flags use to catch systemic RO underperformance before a casualty exposes it.</p>
+      <h4>Practical Note on Blue Card vs Class Notation</h4>
+      <p>Do not confuse RO Code class-notation suspension with financial-security instruments like the CLC Blue Card (covered in Topic 4 of this Part) — they are governed by entirely different conventions (RO Code vs CLC 1992) even though both can result in a PSC detention if invalid.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/OurWork/MSAS/Pages/FlagState.aspx" target="_blank">IMO — Flag State implementation / RO delegation (official)</a></li>
+    <li>Resolution MSC.349(92) — Code for Recognized Organizations (RO Code), Parts I–III</li>
+    <li>Resolution MEPC.237(65) — Code for Recognized Organizations (RO Code), MARPOL adoption</li>
+    <li>SOLAS Chapter XI-1, Regulation 1</li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3.html">QB3 — MARPOL &amp; PSC (RO/Class survey focus points)</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p8 · Topic 34 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p8 · T34 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 3 — IMO NOISE CODE -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-35" data-kw="IMO Noise Code, noise levels onboard ships">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 35</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">The Code on Noise Levels Onboard Ships (IMO Noise Code)</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Safety / Machinery</span>
+        <span class="topic-pages">Uday pp. 187–191</span>
+        <span class="topic-examiner">Examiner: Senthil</span>
+        <span class="freq-medium">Medium Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> The source draft's applicability statement — "applies to all commercial vessels of 1,600 GT and above" — is corrected here. Per Resolution MSC.337(91) and SOLAS Regulation II-1/3-12, the Code is mandatory for <strong>new ships</strong> of 1,600 GT and above (contract ≥ 1 Jul 2014, keel ≥ 1 Jan 2015, or delivery ≥ 1 Jul 2018). For <strong>existing</strong> ships, only the hazard/mitigation/PPE provisions apply, and only "as far as reasonable and practicable" at the Administration's satisfaction — it is not a blanket mandatory retrofit requirement. The dB(A) limit table and the 75/85/110 rule are confirmed correct against the primary Code text.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">The <strong>Noise Code</strong>, adopted under Resolution MSC.337(91) and made mandatory via SOLAS Regulation II-1/3-12, sets maximum permissible noise levels across shipboard spaces to (1) prevent noise-induced hearing loss, (2) preserve audibility of alarms and communication, and (3) protect crew rest and welfare. It replaced the earlier non-mandatory Resolution A.468(XII) of 1981.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>Chronic high-decibel exposure in the ECR/EIR is a documented driver of human error in complex engineering tasks — noise management is a safety-critical, not just comfort, issue for your watchkeepers.</li>
+    <li>A degraded acoustic boundary (failed door seal, damaged insulation) can mask a genuine machinery or fire alarm — several PSC detentions arise from ECR noise exceeding 75 dB(A) specifically because it threatens alarm audibility, not just comfort.</li>
+    <li>The Noise Survey Report is a statutory document you should know how to read — it tells you the baseline design values against which any later degradation (e.g. after a silencer failure) is measured.</li>
+    <li>Hearing-protection selection (HML method) is a real occupational-health decision the CE is expected to make correctly, matching protector attenuation to the actual frequency profile of the noise source.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">1981</span>         → Resolution A.468(XII) — first (non-mandatory) IMO noise-level guideline
+<span class="t-year">Late 20th c.</span> → Higher-powered engines and lighter hull construction increase noise/vibration transmission; voluntary guidelines proven insufficient
+<span class="t-year">30 Nov 2012</span> → MSC 91 adopts Res. MSC.337(91) — the mandatory Noise Code, and Res. MSC.338(91) inserting SOLAS II-1/3-12
+<span class="t-year">1 Jul 2014</span>  → Noise Code takes effect for new ships (contract on/after this date)
+<span class="t-year">1 Jan 2015 / 1 Jul 2018</span> → Alternative keel-laid / delivery application dates for new ships without a qualifying contract</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">SOLAS II-1, Reg 3-12</span><span class="reg-desc">Mandates compliance with the Noise Code for applicable new ships</span></div>
+    <div class="reg-item"><span class="reg-code">Res. MSC.337(91)</span><span class="reg-desc">Adopts the Code on Noise Levels Onboard Ships — mandatory text and testing criteria</span></div>
+    <div class="reg-item"><span class="reg-code">Applicability</span><span class="reg-desc">New ships ≥ 1,600 GT: contract ≥ 1 Jul 2014 / keel ≥ 1 Jan 2015 / delivery ≥ 1 Jul 2018. Existing ships: hazard-mitigation provisions only, as reasonable/practicable</span></div>
+    <div class="reg-item"><span class="reg-code">Exemptions</span><span class="reg-desc">Fishing vessels, high-speed craft, crane barges, MODUs, pleasure yachts, hydrofoils, non-mechanically-propelled vessels</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 Statutory Noise Limits &amp; Insulation</h3>
+  <table class="revision-table">
+    <tr><th>Compartment</th><th>Max dB(A)</th><th>Design Objective</th></tr>
+    <tr><td>Machinery Space (EIR)</td><td>110</td><td>Hearing protection mandatory; minimise exposure time</td></tr>
+    <tr><td>Engine Control Room (ECR)</td><td>75</td><td>Safe communication and monitoring zone</td></tr>
+    <tr><td>Engine Room Workshop</td><td>85</td><td>Baseline for safe overhaul work</td></tr>
+    <tr><td>Navigation Bridge</td><td>65</td><td>Audibility of foghorn/VHF</td></tr>
+    <tr><td>Crew Cabins</td><td>60</td><td>Rest/sleep restoration zone</td></tr>
+    <tr><td>Mess Rooms</td><td>65</td><td>Recreational/catering comfort</td></tr>
+    <tr><td>Galley</td><td>75</td><td>Operational catering noise limit</td></tr>
+  </table>
+  <p class="notes-body"><strong>Acoustic insulation (R<sub>w</sub>):</strong> Cabin-to-cabin R<sub>w</sub> = 35 · Mess-to-cabin R<sub>w</sub> = 45 · Corridor-to-cabin R<sub>w</sub> = 30. Above 85 dB(A), hearing protection is mandatory, selected using the <strong>HML method</strong> (ISO 4869-2) matching protector attenuation to the dominant frequency band identified by an octave filter set.</p>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Senthil Sir:</strong> Senthil likes to give a specific dB(A) figure (e.g. "114 dB(A) in the EIR — what do you do?") and expects you to correctly classify the zone against the 85/110/120 exposure bands and state the specific protective action, not just "wear ear protection." Also be ready to state the sea-trial test condition precisely: straight course, loaded or heavy ballast, ≥80% MCR — examiners penalise vague answers like "normal service speed" without the 80% MCR figure.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: What operational parameters are required during a statutory noise survey sea trial?</div><div class="qa-a">The vessel must be in a fully loaded or heavy ballast condition, on as straight a course as practical, with main engine output sustained at not less than 80% of MCR — ensuring the survey captures a representative full-seagoing acoustic profile.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: An engine room space reads 114 dB(A). What must the Chief Engineer enforce?</div><div class="qa-a">114 dB(A) sits in the 110–120 dB(A) zone requiring double-attenuation, occasional-entry-only protocol. The CE must restrict routine watchstanding/maintenance in that space; anyone entering for urgent work must wear dual-layer hearing protection (Class 1 earmuffs plus earplugs) with total exposure strictly time-limited.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: What is the purpose of an Octave Filter Set in a noise assessment?</div><div class="qa-a">A standard sound level meter gives total broadband sound pressure but not its frequency composition. An octave filter set (IEC 61260 Class 1) splits the signal into frequency bands, letting engineers identify whether noise is driven by low-frequency machinery vibration or high-frequency fluid/gas dynamics — essential for both structural insulation design and correct hearing-protector (HML) selection.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: Does the Noise Code apply mandatorily to an existing ship built in 2005?</div><div class="qa-a">Not in the same way as a new ship. The Code's full noise-limit table is mandatory only for new ships (contract/keel/delivery thresholds from 2014–2018 onward). For existing ships, only the hazard-mitigation, PPE, and warning-sign provisions apply, and only as far as reasonable and practicable to the Administration's satisfaction — it is not a blanket structural retrofit mandate.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: Give the six mandatory contents of an official Noise Survey Report.</div><div class="qa-a">Ship particulars (name, IMO number, GT, propulsion configuration); machinery particulars (RPM, generator loads, turbocharger parameters during test); measuring instrument details (Class 1 sound level meter serials/calibration); testing conditions (sea state, wind, draft); the full sound pressure level data log across all measurement points; and the general arrangement plan marking each measuring point.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> State the application criteria for the mandatory IMO Noise Code and list five vessel types excluded from it.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Detail the structural/operational requirements for an official shipboard noise survey and the technical sections a survey report must contain.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Explain the design principles managing shipboard noise transmission; define R<sub>w</sub>, outline the ECR/Bridge/Cabin statutory limits, and describe the HML method for hearing-protector selection.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>75 / 85 / 110</strong> — ECR limit / mandatory-protection threshold / EIR absolute limit (dB(A))</li>
+      <li><strong>M-E-D-I-A</strong> — Machinery params, Environmental/draft conditions, Data log, Instrument calibration, All ship particulars — Noise Survey Report contents</li>
+      <li><strong>New ships only, mandatory</strong> — existing ships get hazard-mitigation provisions "as reasonable/practicable" — do not overstate applicability</li>
+      <li><strong>≥80% MCR, straight course, loaded/ballast</strong> — sea trial test condition</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive" id="dd-topic-35">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-35')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Why 1,600 GT Was Chosen</h4>
+      <p>The 1,600 GT threshold roughly captures the point at which vessels carry a full complement of crew accommodation spaces subject to meaningful acoustic design choices, while excluding very small craft where noise mitigation options are physically limited by hull size. Smaller new ships may still have the Code applied voluntarily "as reasonable and practical" at the Administration's discretion.</p>
+      <h4>A-Weighting vs C-Weighting</h4>
+      <p>The Code's dB(A) figures use A-weighting, which approximates human ear sensitivity across frequencies (de-emphasising very low and very high frequencies). Some assessments also record C-weighted (dB(C)) values; comparing L<sub>Ceq</sub> − L<sub>Aeq</sub> helps classify whether a noise source is low-frequency (difference >2 dB) or high/medium-frequency (difference ≤2 dB) dominant, which directly drives HML hearing-protector selection.</p>
+      <h4>Relationship to the Working Environment (National) Regulations</h4>
+      <p>Several flag states (Norway is a documented example) layer national occupational-noise regulations on top of the IMO Noise Code, applying the stricter of the two limits where they diverge. As CE on a Maersk (Danish flag / DMA) vessel, be aware flag-specific circulars may add requirements beyond the bare IMO Code text.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/OurWork/HumanElement/Pages/NoiseCode.aspx" target="_blank">IMO — Code on Noise Levels Onboard Ships (official)</a></li>
+    <li>Resolution MSC.337(91) — Code on Noise Levels on Board Ships</li>
+    <li>SOLAS Chapter II-1, Regulation 3-12 — Protection Against Noise</li>
+    <li>ISO 4869-2 — Hearing protectors, HML method</li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3.html">QB3 — MARPOL &amp; PSC (safety/PPE PSC focus points)</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p8 · Topic 35 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p8 · T35 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 4 — CLC 1992 & FUND CONVENTION -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-36" data-kw="CLC 1992, FUND Convention, oil pollution liability">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 36</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">International Maritime Liability Regimes: CLC 1992 &amp; the FUND Convention</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Liability Law</span>
+        <span class="topic-pages">Uday pp. 192–200</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> All SDR figures cross-checked and confirmed: CLC 1992 first-tier cap 89.77 million SDR (via the 2000 Amendments, in force globally November 2003); base 4.51 million SDR for ships ≤5,000 GT with 631 SDR/GT scaling above that; IOPC Fund 1992 standard cap 203 million SDR, conditional cap 300.74 million SDR; Supplementary Fund Protocol aggregate cap 750 million SDR. These match the platform's standing verified figures for the IOPC Fund. No correction required — this topic is a strong, accurate draft.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">The <strong>Civil Liability Convention (CLC) 1992</strong> establishes strict liability for shipowners for pollution damage from persistent-oil spills, backed by compulsory insurance. The <strong>FUND Convention 1992</strong> is the second-tier compensation mechanism, funded by oil-receiving industry levies, which pays out when claims exceed the CLC's shipowner liability cap. Together they form a two-tier (extendable to three-tier via the Supplementary Fund Protocol) international pollution-compensation system.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>Strict liability means the coastal state does not need to prove your ship was negligent — only that persistent oil escaped from it. This changes how you should document any spill event: your engineering records exist to establish an exemption defence (Force Majeure, third-party sabotage, nav-aid failure), not to prove you weren't negligent.</li>
+    <li>The Blue Card and CLC Certificate are statutory documents you must verify are valid before entering any port with >2,000 tonnes of persistent oil in bulk — an expired certificate is an immediate, high-severity PSC detention trigger.</li>
+    <li>Knowing the persistent vs non-persistent oil distinction matters practically: a light-fuel or gasoline spill is NOT covered under CLC 1992 at all — it falls to the HNS Convention instead, which changes which certificates and response protocols are relevant.</li>
+    <li>BDN records (Bunker Delivery Notes) are your evidence trail for the density/classification of oil actually carried — critical if a liability dispute later turns on whether the discharged product was persistent or non-persistent.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">1967</span>         → Torrey Canyon grounding off England — catalyst for international oil-pollution liability law
+<span class="t-year">1969 / 1971</span>  → Original CLC 1969 and companion Fund Convention 1971 adopted
+<span class="t-year">1992</span>         → CLC 1992 and FUND 1992 adopt higher liability limits, expanded geographic scope, replacing the 1969/1971 regimes
+<span class="t-year">2000 Amendments</span> → Revise CLC/Fund SDR limits upward; enter into force globally November 2003
+<span class="t-year">Post-2003</span>    → Supplementary Fund Protocol (optional third tier) opens for participating states</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">CLC 1992</span><span class="reg-desc">Primary strict-liability convention — shipowner P&amp;I-backed first tier</span></div>
+    <div class="reg-item"><span class="reg-code">FUND 1992 / IOPC Fund</span><span class="reg-desc">Second-tier compensation, administered from London; ratifying CLC 1992 is a prerequisite to joining FUND 1992</span></div>
+    <div class="reg-item"><span class="reg-code">Geographic scope</span><span class="reg-desc">Territorial sea (≤12 nm) and EEZ (≤200 nm) of a contracting state; excludes pure High Seas incidents unless they threaten a contracting state's waters</span></div>
+    <div class="reg-item"><span class="reg-code">HNS Convention</span><span class="reg-desc">Governs non-persistent oil and other hazardous/noxious substance spills — outside CLC 1992's scope</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 The Multi-Tier Liability Structure</h3>
+  <div class="mental-map"><span class="root">MULTI-TIER MARITIME POLLUTION COMPENSATION</span>
+│
+├── TIER 1 — CLC 1992 (shipowner's P&I insurer)
+│     Max 89.77 million SDR (via 2000 Amendments)
+│     ≤5,000 GT: flat 4.51 million SDR
+│     >5,000 GT: 4.51M SDR + [631 × (GT − 5,000)]
+│
+├── TIER 2 — IOPC Fund 1992 (oil-receiving industry levies)
+│     Standard aggregate cap: 203 million SDR
+│     Conditional cap (major contributor threshold met): 300.74 million SDR
+│
+└── TIER 3 — Supplementary Fund Protocol (optional, post-2003)
+      Aggregate cap across all tiers: 750 million SDR</div>
+
+  <table class="compare-table">
+    <tr><th>Aspect</th><th>Persistent Oil</th><th>Non-Persistent Oil</th></tr>
+    <tr><td>Examples</td><td>Crude oil, HFO, lubricating oil, heavy diesel</td><td>Gasoline, light kerosene, most light distillates</td></tr>
+    <tr><td>Distillation criterion</td><td>Does not meet non-persistent test</td><td>≥50% distills at 340°C, ≥95% at 370°C (or non-petroleum oil, sp. gravity &lt;0.8)</td></tr>
+    <tr><td>Governing regime</td><td>CLC 1992 / FUND 1992</td><td>HNS Convention (CLC 1992 does not apply)</td></tr>
+  </table>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair Sir:</strong> Nair tests the persistent/non-persistent boundary precisely — many candidates wrongly assume "all oil spills = CLC." State clearly that a non-persistent oil spill (e.g. gasoline) falls outside CLC 1992 entirely and routes to the HNS Convention. He also likes verifying the exact SDR figures rather than approximations — know 89.77M / 203M / 300.74M / 750M cold, and the 4.51M + 631/GT formula structure, not just the final numbers.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: A vessel discharges non-persistent diesel — can the coastal state claim under CLC 1992?</div><div class="qa-a">No. CLC 1992 applies exclusively to persistent-oil pollution damage. Non-persistent oils dissipate quickly per their distillation profile and are excluded from CLC/FUND; claims instead route to the HNS Convention or applicable national legislation.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: What is a P&amp;I Blue Card, and is the 20 February renewal date a statutory requirement?</div><div class="qa-a">A Blue Card is a certificate issued by a vessel's P&amp;I Club evidencing insurance cover matching the CLC's maximum liability limits — it underpins the Flag State's issuance of the statutory CLC Certificate of Insurance. The widely cited 20 February date is an industry-standard P&amp;I policy renewal convention, not a rule written into the CLC 1992 treaty text itself.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: Outline the tiered compensation structure once CLC 1992 limits are exhausted.</div><div class="qa-a">Tier 1 (CLC 1992, shipowner P&amp;I) caps at 89.77 million SDR via the 2000 Amendments. Once exhausted, Tier 2 (FUND 1992/IOPC Fund) provides a standard aggregate cap of 203 million SDR, rising to 300.74 million SDR conditionally if major-contributor thresholds are met. States that ratified the post-2003 Supplementary Fund Protocol access a Tier 3 aggregate cap of 750 million SDR across all tiers combined.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: Under what conditions does a shipowner lose the right to limit liability entirely?</div><div class="qa-a">The right is lost only if it is proven the damage resulted from the shipowner's own personal act or omission committed with intent to cause such damage, or done recklessly with knowledge that such damage would probably result — a very high evidentiary bar, deliberately set to preserve the limitation regime's insurability in ordinary negligence cases.</div></div>
+    <div class="qa-item"><div class="qa-q">Q5: Calculate the CLC 1992 liability cap for a 65,000 GT tanker.</div><div class="qa-a">Using Total Liability = 4.51 million SDR + [631 × (GT − 5,000)]: 4.51M + [631 × 60,000] = 4.51M + 37.86M = 42.37 million SDR — well under the 89.77 million SDR absolute maximum, so the formula result applies directly.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> Define the technical distinction between persistent and non-persistent oils and explain why it is critical for CLC 1992 liability.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Explain the structural changes made by the 2000 Amendments to CLC 1992 limits. Outline the liability-cap formula for a 65,000 GT vessel and the conditions for total loss of the right to limit liability.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Analyze the complete multi-tiered CLC 1992 / FUND 1992 / Supplementary Fund Protocol framework — financial caps per tier, the distinct funding mechanisms separating Tier 1 from Tier 2, and the geographic limits on enforcement.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>T-I-E-R</strong> — Tonnage formula (4.51M + 631/GT), IOPC standard 203M, Exemptions (war/force majeure/sabotage/nav-aid error), Ratification prerequisite (CLC before FUND)</li>
+      <li><strong>89.77M → 203M (300.74M) → 750M</strong> — the three ascending SDR ceilings, Tier 1 → 2 → 3</li>
+      <li><strong>Persistent oil only</strong> — non-persistent spills go to the HNS Convention, not CLC</li>
+      <li><strong>&gt;2,000 tonnes persistent oil in bulk</strong> — triggers mandatory Blue Card / CLC Certificate carriage</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive" id="dd-topic-36">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-36')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Why Strict Liability Instead of Fault-Based Liability</h4>
+      <p>Pre-Torrey Canyon pollution claims required victims to prove shipowner negligence in ordinary tort, which was slow and often failed against well-resourced defendants. CLC's strict liability inverts this: liability attaches automatically on proof the oil escaped from the ship, subject only to the narrow listed exemptions (war, force majeure, third-party sabotage, nav-aid negligence). This dramatically speeds claim settlement for coastal communities and cleanup authorities.</p>
+      <h4>Why the FUND Exists Separately From CLC</h4>
+      <p>Making shipowners liable for unlimited amounts would make marine insurance commercially unworkable — P&amp;I Clubs price cover against a capped exposure. The FUND spreads the excess-of-cap risk across the oil-receiving industry (the cargo's ultimate economic beneficiaries) via per-tonne levies on entities receiving &gt;150,000 tonnes of contributing oil annually, rather than leaving victims uncompensated once the shipowner's cap is reached.</p>
+      <h4>SDR as the Unit of Account</h4>
+      <p>Special Drawing Rights (SDR) are an IMF-defined basket-currency unit, chosen specifically so liability limits remain stable in real terms across currencies and inflation over decades, rather than being fixed in a single national currency that could depreciate and erode the real value of victim compensation.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://iopcfunds.org" target="_blank">IOPC Funds — official (London)</a></li>
+    <li>International Convention on Civil Liability for Oil Pollution Damage, 1992 (CLC 1992)</li>
+    <li>International Convention on the Establishment of an International Fund for Compensation for Oil Pollution Damage, 1992 (FUND 1992)</li>
+    <li><a href="https://www.imo.org/en/OurWork/Legal/Pages/CivilLiability.aspx" target="_blank">IMO — Civil Liability Conventions (official)</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB1_A.html">QB1_A — Conventions &amp; Liability Law</a>
+    <a href="../QB9_A.html">QB9_A — Commercial Law &amp; Maritime Liability</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p8 · Topic 36 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p8 · T36 · v1.0</span>
+  </div>
+</div>
+
+</main><!-- /#notes-feed -->
+</div><!-- /.main-layout -->
+
+<!-- PAGE FOOTER -->
+<footer class="page-footer">
+  <p><strong>MIW Engineering Management Notes — Part 8</strong> · Pages 176–200 of 768</p>
+  <p style="margin-top:6px;">Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and updated by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.</p>
+  <p style="margin-top:6px;">Subscriber-only content. <a href="https://marineintelligenceweekly.com/SQ/">Subscribe — ₹899</a> for full access to all Engineering Management Notes parts.</p>
+  <p style="margin-top:8px;color:#94a3b8;font-size:11px;">Content is provided for examination preparation purposes only. Always verify regulatory citations against primary IMO instruments at <a href="https://www.imo.org" target="_blank" style="color:#0d9488;">www.imo.org</a>. Marine Intelligence Weekly accepts no liability for exam outcomes.</p>
+  <p style="margin-top:8px;">
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/notes-master-index.html">← Notes Index</a> &nbsp;|&nbsp;
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1 Hub</a> &nbsp;|&nbsp;
+    <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
+  </p>
+</footer>
+
+<script>
+// Deep-dive toggle
+function toggleDD(id){
+  const body=document.getElementById(id).querySelector('.deep-dive-body');
+  const btn=document.getElementById(id).querySelector('.deep-dive-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  btn.textContent=(open?'▶':'▼')+' Deep Dive — Full Reference Detail';
+}
+
+// TOC active highlight on scroll
+const tocLinks=document.querySelectorAll('.toc-link[href^="#"]');
+const topics=document.querySelectorAll('.topic-block[id]');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      tocLinks.forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.2});
+topics.forEach(el=>obs.observe(el));
+
+// Content protection
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+</script>
+</body>
+</html>

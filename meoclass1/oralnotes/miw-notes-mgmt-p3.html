@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>MIW Engineering Management Notes — Part 3 | MEO Class 1 | MARPOL Annex I/II, IOPP, IBC Code</title>
+<meta name="description" content="MEO Class 1 Engineering Management Notes Part 3 — MARPOL Annex I double-hull/OWS, IOPP survey framework, MARPOL Annex II NLS & IBC Code, Tripartite Agreements & persistent floaters. Originally compiled by Uday Sankar S., Anglo-Eastern.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/miw-notes-mgmt-p3.html">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:15px;line-height:1.6;user-select:none;-webkit-user-select:none;}
+.miw-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.05;overflow:hidden;}
+.topbar{background:var(--navy);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logo{width:30px;height:30px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;letter-spacing:-0.5px;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;letter-spacing:0.3px;}
+.topbar-nav{display:flex;gap:20px;}
+.topbar-nav a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.15s;}
+.topbar-nav a:hover{color:#fff;}
+.page-header{background:var(--navy);padding:32px 24px 28px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.notes-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid var(--teal);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.notes-badge-icon{background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;letter-spacing:1px;}
+.notes-badge-text{color:var(--teal-light);font-size:12px;font-weight:600;}
+.page-title{color:#fff;font-size:26px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+.page-sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.header-meta-item{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:12px;color:#cbd5e1;}
+.header-meta-item strong{color:#fff;}
+.attribution-strip{margin-top:14px;padding:10px 14px;background:rgba(201,168,76,0.12);border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;font-size:12px;color:#cbd5e1;}
+.attribution-strip strong{color:#e2c97e;}
+.review-banner{background:#fef2f2;border:1px solid #fecaca;border-left:4px solid #dc2626;border-radius:6px;padding:10px 16px;margin-top:14px;font-size:12.5px;color:#991b1b;font-weight:700;}
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:24px 16px;}
+.sidebar{position:sticky;top:68px;height:calc(100vh - 80px);overflow-y:auto;padding-right:6px;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--grey-border);border-radius:2px;}
+.toc-head{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;font-size:12px;color:var(--grey-text);text-decoration:none;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;transition:all 0.15s;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:700;}
+.toc-divider{height:1px;background:var(--grey-border);margin:14px 0;}
+.qb-sidebar-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:12px;}
+.qb-sidebar-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin-bottom:8px;}
+.qb-sidebar-link{display:block;font-size:12px;color:var(--teal-dark);text-decoration:none;font-weight:600;padding:3px 0;}
+.qb-sidebar-link:hover{text-decoration:underline;}
+#notes-feed{min-width:0;}
+.topic-block{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:24px;margin-bottom:32px;scroll-margin-top:72px;}
+.topic-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--teal-light);}
+.topic-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+.topic-title{margin:0 0 8px;font-size:20px;font-weight:800;color:var(--navy);}
+.topic-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;}
+.topic-tag{background:var(--teal-light);color:var(--teal-dark);padding:3px 8px;border-radius:20px;font-weight:600;}
+.topic-pages{color:var(--grey-text);padding:3px 0;}
+.topic-examiner{background:var(--orange-light);color:#92400e;padding:3px 8px;border-radius:20px;font-weight:600;}
+.freq-high{background:#fef9c3;color:#713f12;padding:3px 8px;border-radius:20px;font-weight:700;}
+.freq-medium{background:#f0fdf4;color:#14532d;padding:3px 8px;border-radius:20px;font-weight:600;}
+.section-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--grey-border);}
+.notes-body{font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:8px;}
+.notes-list{font-family:'Georgia',serif;font-size:14px;line-height:1.8;padding-left:22px;margin-bottom:8px;}
+.notes-list li{margin-bottom:4px;}
+.timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
+.timeline-block .t-year{color:#fff;font-weight:700;}
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
+.reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
+.reg-code{color:var(--orange);font-weight:700;white-space:nowrap;flex-shrink:0;font-family:monospace;font-size:12px;}
+.reg-desc{color:#cbd5e1;line-height:1.5;}
+.verify-note{background:#eff6ff;border:1px solid #bfdbfe;border-left:4px solid #2563eb;border-radius:0 8px 8px 0;padding:12px 16px;margin:0 0 16px;font-size:13px;line-height:1.65;color:#1e3a5f;}
+.verify-note strong{color:#1d4ed8;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:13.5px;font-family:'Georgia',serif;line-height:1.7;}
+.ce-tip strong{color:#92400e;}
+.qa-block{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.qa-item{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.qa-q{background:var(--grey-bg);padding:10px 14px;font-weight:700;font-size:13px;color:var(--navy);}
+.qa-a{padding:10px 14px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;color:var(--ink);}
+.exam-focus-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:16px 0;}
+.exam-focus-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin:0 0 12px;}
+.exam-q{margin:8px 0;font-family:'Georgia',serif;font-size:13.5px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+.marks-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+.memory-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:16px 0;}
+.memory-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#713f12;margin:0 0 10px;}
+.memory-list{font-family:'Georgia',serif;font-size:13.5px;line-height:1.8;padding-left:18px;}
+.memory-list li{margin-bottom:4px;}
+.amend-table,.compare-table,.revision-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.amend-table th,.compare-table th,.revision-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+.amend-table td,.compare-table td,.revision-table td{padding:8px 12px;border-bottom:1px solid var(--grey-border);font-family:'Georgia',serif;line-height:1.6;vertical-align:top;}
+.amend-table tr:nth-child(even) td,.revision-table tr:nth-child(even) td{background:var(--grey-bg);}
+.psc-focus{background:#fef2f2;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);}
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;}
+.mental-map .root{color:#fff;font-weight:700;}
+.qb-link-box{background:var(--teal-light);border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;}
+.qb-link-box strong{color:var(--teal-dark);}
+.qb-link-box a{color:var(--teal-dark);font-weight:600;text-decoration:none;margin-right:12px;}
+.qb-link-box a:hover{text-decoration:underline;}
+.deep-dive{margin:14px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:16px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;}
+.deep-dive-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.deep-dive-body p,.deep-dive-body li{margin-bottom:6px;}
+.deep-dive-body ul{padding-left:20px;}
+.ref-list{font-size:13px;line-height:1.9;padding-left:18px;}
+.ref-list a{color:var(--teal-dark);}
+.topic-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:12px;border-top:1px dashed var(--grey-border);font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.topic-version{font-weight:700;}
+.page-footer{background:var(--grey-bg);border-top:1px solid var(--grey-border);padding:28px 24px;margin-top:40px;font-size:12px;color:var(--grey-text);text-align:center;}
+.page-footer a{color:var(--teal-dark);}
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+
+<div class="miw-watermark" aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wmpat" width="420" height="220" patternTransform="rotate(-30)" patternUnits="userSpaceOnUse">
+        <text x="0" y="60" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">marineintelligenceweekly.com</text>
+        <text x="0" y="90" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wmpat)"/>
+  </svg>
+</div>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-logo">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="notes-badge">
+      <span class="notes-badge-icon">NOTES</span>
+      <span class="notes-badge-text">Engineering Management · Part 3 of 31</span>
+    </div>
+    <h1 class="page-title">Engineering Management Notes — Part 3</h1>
+    <p class="page-sub">MARPOL Annex I Double-Hull &amp; OWS · IOPP Survey Framework · MARPOL Annex II NLS &amp; IBC Code · Tripartite Agreements &amp; Persistent Floaters</p>
+    <div class="header-meta">
+      <span class="header-meta-item"><strong>Pages:</strong> 51–75 of 768</span>
+      <span class="header-meta-item"><strong>Topics:</strong> 5 (T11–T15)</span>
+      <span class="header-meta-item"><strong>Access:</strong> Subscriber Only</span>
+      <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>
+      <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>
+    </div>
+    <div class="attribution-strip">
+      Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, verified and expanded by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.
+    </div>
+      </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="toc-head">Topics — Part 3</div>
+  <a class="toc-link" href="#topic-11">T11 · Double-Hull Structural Geometry</a>
+  <a class="toc-link" href="#topic-12">T12 · OWS Evolution &amp; Discharge Regimes</a>
+  <a class="toc-link" href="#topic-13">T13 · IOPP Survey Framework &amp; HSSC</a>
+  <a class="toc-link" href="#topic-14">T14 · Annex II NLS &amp; IBC Code Classification</a>
+  <a class="toc-link" href="#topic-15">T15 · P&amp;A Manuals, Tripartite &amp; Persistent Floaters</a>
+  <div class="toc-divider"></div>
+  <div class="toc-head">Navigate</div>
+  <a class="toc-link" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Notes Index</a>
+  <a class="toc-link" href="miw-notes-mgmt-p2.html">← Part 2</a>
+  <a class="toc-link" href="miw-notes-mgmt-p4.html">Part 4 →</a>
+  <div class="toc-divider"></div>
+  <div class="qb-sidebar-box">
+    <div class="qb-sidebar-title">🔗 Related QB Files</div>
+    <a class="qb-sidebar-link" href="../QB3.html">QB3 — MARPOL &amp; PSC</a>
+    <a class="qb-sidebar-link" href="../QB2_G.html">QB2_G — Fire/LSA/Chemical Cargo</a>
+  </div>
+</aside>
+
+<!-- NOTES FEED -->
+<main id="notes-feed">
+<!-- ============================================================ -->
+<!-- TOPIC 11 — DOUBLE-HULL STRUCTURAL GEOMETRY & TANK SEGREGATION -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-11" data-kw="double hull, double bottom, wing tank, Reg 19, tank segregation, ballast piping, MARPOL Annex I">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 11</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">MARPOL Annex I: Double-Hull Structural Geometry &amp; Tank Segregation</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">MARPOL Annex I — Structure</span>
+        <span class="topic-pages">Uday pp. 51–53</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> The source draft presented the wing-tank width formula
+    <em>W = 0.5 + DWT/20,000 m</em> and the suction-well clearance rule <em>≥ 0.5h</em> as if they were direct
+    MARPOL Annex I sentences. Neither is printed in that algebraic form in the Annex text itself. Both are
+    re-labelled below as design/unified-interpretation formulas — the double-bottom height rule
+    <em>h = B/15 or 2.0 m, whichever is less (min 1.0 m)</em> is accurately reflected in Reg. 19/13F and is kept
+    as direct regulation wording.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">MARPOL Annex I Reg. 19 requires oil tankers of 5,000 DWT and above to be fitted with double-hull and double-bottom tanks or spaces arranged to protect the cargo tank length against collision or grounding — <strong>passive containment</strong> by structural design, as distinct from the active discharge-control measures covered separately in Topic 12.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>Double-hull geometry defines the physical margin a CE is relying on if the vessel grounds — understanding <em>h</em> and <em>W</em> tells the CE how much sacrificial structure exists before the cargo tank itself is breached.</li>
+    <li>Piping segregation rules (ballast vs cargo) are a direct structural safeguard against a single failure turning into a pollution incident — the CE must be able to explain why this separation exists, not just that it exists.</li>
+    <li>On a Maersk A/S container vessel (non-tanker), Reg. 19 geometry does not apply to the CE's own ship, but it is tested orally on every candidate regardless of vessel type — examiners expect the theory to be solid even without personal operational exposure.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">1989</span> → <em>Exxon Valdez</em> grounding, Prince William Sound
+<span class="t-year">1990</span> → US Oil Pollution Act (OPA 90) mandates double hulls for US trade
+<span class="t-year">1992</span> → MARPOL Annex I Reg. 13F (later renumbered Reg. 19) mandates double hull/bottom for new tankers ≥5,000 DWT
+<span class="t-year">1996</span> → Reg. 19 applies in full to tankers delivered on/after 6 July 1996</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex I, Reg. 19</span><span class="reg-desc">Double-hull/double-bottom requirements for oil tankers ≥5,000 DWT delivered on/after 6 July 1996; reduced dimensions for tankers &lt;5,000 DWT</span></div>
+    <div class="reg-item"><span class="reg-code">Unified Interpretations to Reg. 19</span><span class="reg-desc">Flag/class circulars specifying wing tank width and suction well clearance measurement practice</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 Double-Hull Geometry (≥5,000 DWT)</h3>
+  <div class="mental-map"><span class="root">TYPICAL DOUBLE HULL CROSS-SECTION (≥5,000 DWT)</span>
++-----------------------------------------------+
+|                 DECK LINE                      |
++-------+-------------------------------+-------+
+| Wing  |                               | Wing  |
+| Tank  |          CARGO TANK           | Tank  |
+|  (W)  |      +-----------------+      |  (W)  |
+|       |      |  Suction Well   |      |       |
++-------+------+--------+--------+------+-------+
+|     Double Bottom (h)  |   ≥0.5h clearance     |
++-----------------------------------------------+
+|============== BOTTOM SHELL PLATING ============|
++-----------------------------------------------+
+Reg. 19 (verbatim-quotable): h = B/15 (m) or 2.0 m, whichever is the lesser; minimum h = 1.0 m
+Design/interpretation (not verbatim): W ≈ 0.5 + DWT/20,000 m, bounded 1.0–2.0 m
+Below 5,000 DWT (unified interpretation): W ≈ 0.76 m, h ≈ 0.76 m
+Suction well clearance (unified interpretation): ≥ 0.5h from bottom shell</div>
+
+  <p class="notes-body"><strong>Piping segregation:</strong> ballast, sounding and vent pipes serving ballast tanks must not pass through cargo tanks; cargo lines must never pass through ballast spaces — this keeps a single structural failure from creating a direct cargo-to-sea or cargo-to-ballast pathway.</p>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair:</strong> When asked "what protects the ship if the wing tank width formula and the 0.5h rule aren't in Annex I word-for-word?" — explain that Reg. 19 sets the legal minimum protective distances and areas, while the algebraic forms are unified interpretations/design practice used industry-wide to satisfy that regulation. Examiners reward candidates who can draw this legal-vs-engineering distinction rather than reciting the formula as if it were quoted convention text.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: State the double-bottom height requirement for an oil tanker ≥5,000 DWT under Reg. 19.</div><div class="qa-a">The distance h between the cargo tank bottom and the bottom shell plating must not be less than B/15 (metres) or 2.0 m, whichever is the lesser, with an absolute minimum of 1.0 m. This forms a continuous sacrificial structural zone that absorbs grounding damage before the cargo tank itself is breached.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: Explain the structural logic of the suction-well 0.5h clearance.</div><div class="qa-a">Where a cargo suction well protrudes into the double bottom, it locally reduces the mandated protective depth h. Unified interpretations require the well to be kept shallow enough that at least half of that protective depth (0.5h) remains between the well bottom and the bottom shell plating, so a bottom-shell breach cannot directly puncture the cargo space through the well.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: Why does Reg. 19 mandate piping segregation between ballast and cargo systems?</div><div class="qa-a">Ballast and cargo piping are kept structurally separate — ballast pipes must not pass through cargo tanks and cargo lines must not pass through ballast spaces — so that a single structural or seal failure cannot create a direct pathway for cargo oil to reach the sea via ballast discharge, or for ballast water to contaminate cargo.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: What dimensions apply to oil tankers below 5,000 DWT?</div><div class="qa-a">Unified interpretations permit reduced protective dimensions for smaller oil tankers: a minimum wing tank width of approximately 0.76 m and a minimum double-bottom height of approximately 0.76 m, reflecting the lower absolute outflow risk of a smaller cargo volume.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> Sketch a cross-section of an oil tanker ≥5,000 DWT showing the double-hull and double-bottom boundaries and state the governing dimensional criteria.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Explain the structural and legal distinction between MARPOL Annex I Reg. 19 requirements and the unified-interpretation design formulas commonly used to satisfy them.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>h = B/15 or 2.0 m</strong> (min 1.0 m) — quotable Reg. 19 wording</li>
+      <li><strong>W ≈ 0.5 + DWT/20,000 m</strong> (1.0–2.0 m) — design interpretation, not verbatim</li>
+      <li><strong>Suction well ≥ 0.5h</strong> — unified interpretation</li>
+      <li><strong>&lt;5,000 DWT:</strong> W ≈ h ≈ 0.76 m</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>Double bottom height h (≥5,000 DWT)</td><td>B/15 or 2.0 m, lesser; min 1.0 m</td></tr>
+    <tr><td>Wing tank width W (≥5,000 DWT)</td><td>≈0.5+DWT/20,000 m; bounded 1.0–2.0 m (design rule)</td></tr>
+    <tr><td>&lt;5,000 DWT tankers</td><td>W≈0.76 m, h≈0.76 m (unified interpretation)</td></tr>
+    <tr><td>Suction well clearance</td><td>≥0.5h from bottom shell</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-11">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-11')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Why the Formula Isn't "in" MARPOL</h4>
+      <p>Reg. 19 expresses the wing-tank requirement as a minimum protective width/area sufficient to reduce accidental outflow, evaluated case-by-case in the tanker's approved outflow analysis. The W = 0.5 + DWT/20,000 m relationship is a simplified design heuristic taught industry-wide and consistent with typical CAS (Condition Assessment Scheme) outflow practice, bounded by the 1.0–2.0 m regulatory limits — but it is not the literal regulation sentence, and examiners who probe this distinction are testing whether the candidate over-quotes derived formulas as primary law.</p>
+      <h4>Maersk A/S Container Vessel Context</h4>
+      <p>As a non-tanker, the vessel does not carry the Reg. 19 cargo-tank double-hull geometry at all; container vessels have their own hull/void-space arrangement unrelated to oil cargo outflow protection. This topic is tested purely as general MEO Class 1 knowledge.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/OurWork/Environment/Pages/Oil-Pollution-(Annex-I).aspx" target="_blank">IMO — MARPOL Annex I overview</a></li>
+    <li><a href="https://www.register-iri.com/wp-content/uploads/CL2537.pdf" target="_blank">Marshall Islands Registry — Unified Interpretations, MARPOL Annex I (suction well/wing tank guidance)</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3.html">QB3 — MARPOL Discharge Criteria</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p3 · Topic 11 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p3 · T11 · v1.0</span>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- TOPIC 12 — OWS EVOLUTIONARY DESIGN & OPERATIONAL DISCHARGE REGIMES -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-12" data-kw="oil water separator, OWS, 15 ppm, ODMCS, discharge regime, MARPOL Annex I">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 12</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">MARPOL Annex I: Oil-Water Separator Evolutionary Design &amp; Operational Discharge Regimes</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">MARPOL Annex I — OWS/OCM</span>
+        <span class="topic-pages">Uday pp. 53–56</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> The MEPC 107(49) "5 s sensor response / 20 s total loop" figures are
+    re-framed below as type-approval testing criteria (order-of-magnitude test-protocol benchmarks) rather than
+    quoted Resolution sentences, consistent with standard MIW verification practice for this Resolution.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">Where Topic 11 covers passive structural containment, this topic covers <strong>active separation</strong>: processing machinery-space bilge water and cargo slops through high-efficiency, tamper-resistant monitored equipment before any release to sea, and the operational discharge criteria that govern when and how that release is lawful — with a strict 15 ppm ceiling outside Special Areas and zero discharge in ecologically sensitive zones.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>Every OWS/OCM operation the CE authorises is a statutory act under Reg. 14/15 — a wrong call is a criminal environmental offence in most jurisdictions, not just a company non-conformity.</li>
+    <li>PSC treats OWS/OCM data-log vs ORB mismatches as prima facie evidence of a "magic pipe" bypass — this is one of the single largest sources of criminal prosecution and detention in the tanker/bulk trades.</li>
+    <li>On a Maersk A/S container vessel (non-tanker, ≥400 GT), Reg. 14/15 machinery-space bilge discharge is the CE's day-to-day operational reality — this is the most directly applicable part of Annex I to the CE's own vessel type.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">1995</span> → MEPC 60(33) — first harmonised OWS/OCM type-approval guideline
+<span class="t-year">2005</span> → MEPC 107(49) supersedes MEPC 60(33) for new OWS installations from 1 Jan 2005, addressing surfactant-stabilised emulsions</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex I, Reg. 14</span><span class="reg-desc">Mandatory oil filtering (OWS) equipment for ships ≥400 GT</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex I, Reg. 15 &amp; 34</span><span class="reg-desc">Operational discharge control — machinery spaces (Reg. 15) and cargo areas of oil tankers (Reg. 34)</span></div>
+    <div class="reg-item"><span class="reg-code">MEPC.60(33)</span><span class="reg-desc">Superseded OWS/OCM type-approval guideline — gravity separation only</span></div>
+    <div class="reg-item"><span class="reg-code">MEPC.107(49)</span><span class="reg-desc">Current OWS/OCM type-approval guideline — multi-stage emulsion breaking, tamper-resistant alarm, closed-loop recirculation, data logging</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 OWS Evolution: MEPC 60(33) vs MEPC 107(49)</h3>
+  <table class="compare-table">
+    <tr><th>Parameter</th><th>MEPC 60(33)</th><th>MEPC 107(49)</th></tr>
+    <tr><td>Separation principle</td><td>Gravity/coalescer only — cannot handle surfactant-stabilised emulsions</td><td>Multi-stage: gravity + secondary emulsion-breaking (ultrafiltration/flocculation/carbon adsorption)</td></tr>
+    <tr><td>Alarm &amp; automation</td><td>Basic 15 ppm alarm; auto-stop/recirculation not standardised</td><td>Tamper-resistant 15 ppm alarm + mandatory automatic stopping and closed-loop recirculation</td></tr>
+    <tr><td>OCM sensor response</td><td>Not tightly constrained</td><td>Type-approval testing requires a fast sensor response (order of 5 s) and a bounded total control-loop time (order of 20 s) during slug tests</td></tr>
+    <tr><td>Data logging</td><td>Not required in the instrument — relies on manual ORB entry</td><td>Mandatory internal electronic log of date/time/alarm status/valve position, secure and recoverable for ≥18 months</td></tr>
+    <tr><td>Sampling point</td><td>Not standardised</td><td>Fixed sampling point on a vertical section immediately before the overboard valve</td></tr>
+  </table>
+
+  <h3 class="section-head">🔧 Operational Discharge Criteria</h3>
+  <table class="compare-table">
+    <tr><th>Waste Source</th><th>Outside Special Area</th><th>Inside Special Area</th></tr>
+    <tr><td>Machinery bilge (all vessels ≥400 GT)</td><td>En route; approved 15 ppm OWS; effluent &lt;15 ppm; not from cargo pump-room bilges</td><td>Same, plus OWS must have automatic stopping and recirculation; Antarctic Area — completely prohibited</td></tr>
+    <tr><td>Cargo oil residues/slops (oil tankers)</td><td>En route; &gt;12 NM from land; rate ≤30 L/NM instantaneous; total ≤1/30,000 of that cargo; via ODME, below waterline</td><td>Completely prohibited — retain onboard, shore reception only</td></tr>
+  </table>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Simon:</strong> Simon frequently frames this as a live-fault scenario ("OWS passes clean water but fails on bilge water — troubleshoot") rather than a definitions question. Lead with the mechanical diagnosis (emulsion-breaking failure, not sensor calibration) before citing the regulatory figures.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: A PSC officer notes heavy black oil residue inside the OWS overboard sight-glass, but the ORB shows all recent discharges under 15 ppm. How do you respond?</div><div class="qa-a">I isolate and lock out the OWS overboard line immediately to demonstrate compliance, then launch an internal investigation checking: (1) mechanical failure or seal degradation of the coalescer/filter elements allowing oil slug pass-through; (2) OCM optical-cell scaling or leakage causing a false clean reading; (3) any unauthorised piping bypass ("magic pipe"). I invite the PSC officer to witness a full OCM calibration with certified test fluid and an automated 3-way valve test to confirm system integrity.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: Why is an MEPC 60(33) unit inadequate on a modern vessel?</div><div class="qa-a">MEPC 60(33) units rely on gravity/density separation only, so they cannot break the stable chemical emulsions created by modern surfactants, detergents and scavenge soot in machinery bilges — these emulsions pass through at high ppm. MEPC 107(49) units add a secondary emulsion-breaking stage, a fast-response tamper-resistant alarm with automatic stopping/recirculation, and 18-month secure data logging, none of which MEPC 60(33) units are required to have.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: State the discharge criteria for machinery-space bilge water outside a Special Area.</div><div class="qa-a">The ship must be en route; the effluent must be processed through an approved 15 ppm OWS as per Reg. 14; oil content after treatment must be under 15 ppm, continuously monitored; and the mixture must not originate from cargo pump-room bilges or be mixed with cargo residues. All operations must be recorded in the Oil Record Book Part I.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: The OWS passes on clean water but the OCM spikes above 15 ppm on actual bilge water. What is your troubleshooting sequence?</div><div class="qa-a">Since it passes on clean water, the fault is not sensor calibration but the unit's inability to break a stable emulsion or handle particulate loading. I check for detergent/surfactant contamination or scavenge soot in the bilge well, isolate ongoing chemical cleaning, inspect and clean/replace the primary coalescer and secondary emulsion-breaking elements, and verify the OCM sample line is free of air bubbles or scale before re-testing.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Detail the complete technical and operational differences between OWS equipment type-approved under MEPC 60(33) and MEPC 107(49), focusing on emulsion-breaking capability, response times and data retention.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> A 150,000 DWT crude tanker needs to discharge cargo slops on an international voyage. State the complete regulatory discharge criteria under MARPOL Annex I inside and outside Special Areas, describe the ODME's function, and outline the immediate action if the automated discharge valve fails to shut during a high-rate discharge event.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>60(33) → 107(49)</strong> — gravity-only → multi-stage + data logging + fast alarm</li>
+      <li><strong>Machinery bilge limit:</strong> &lt;15 ppm; 0 in Antarctic Area</li>
+      <li><strong>E-12-30-ODME</strong> — En route · &gt;12 NM · &lt;30 L/NM · ODME below waterline</li>
+      <li><strong>OCM data retention:</strong> ≥18 months</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>Machinery bilge limit</td><td>&lt;15 ppm; 0 in Antarctic Area</td></tr>
+    <tr><td>Cargo slop discharge rate</td><td>≤30 L/NM instantaneous; ≤1/30,000 of cargo total</td></tr>
+    <tr><td>OCM data retention</td><td>≥18 months (MEPC 107(49))</td></tr>
+    <tr><td>OCM sensor response (test benchmark)</td><td>~5 s sensor / ~20 s total loop</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-12">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-12')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Special Area vs Antarctic Area Discharge</h4>
+      <p>Outside Special Areas, machinery bilge water may be discharged en route, through an approved 15 ppm OWS, provided it does not originate from cargo pump-room bilges. Inside Special Areas the same conditions apply but the OWS must additionally have automatic stopping and recirculation. In the Antarctic Area, any discharge of oil or oily mixtures from machinery spaces is completely prohibited — all bilge and sludge must be retained for shore disposal.</p>
+      <h4>Maersk A/S Container Vessel Context</h4>
+      <p>Reg. 14/15 OWS/OCM obligations for machinery-space bilges apply in full to the vessel. The IOPP Form A supplement (see Topic 13) documents the fitted OWS/OCM model and sludge tank arrangement — the CE should be able to cross-reference this topic's technical detail directly against that certificate.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/OurWork/Environment/Pages/Oil-Pollution-(Annex-I).aspx" target="_blank">IMO — MARPOL Annex I overview</a></li>
+    <li><a href="https://dgshipping.gov.in" target="_blank">Directorate General of Shipping, India</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3.html">QB3 — MARPOL Discharge Criteria</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p3 · Topic 12 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p3 · T12 · v1.0</span>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- TOPIC 12 — IOPP SURVEY FRAMEWORK, HSSC & PORT STATE PREPAREDNESS -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-13" data-kw="IOPP certificate, HSSC, survey framework, port state preparedness, MARPOL Annex I survey">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 13</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">MARPOL Annex I Survey Framework, IOPP Certification &amp; Port State Preparedness</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">HSSC / Survey</span>
+        <span class="topic-pages">Uday pp. 57–62</span>
+        <span class="topic-examiner">Examiner: Paul / Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> The source draft's sludge-generation estimate (1–2% of HFO consumption)
+    is presented correctly as an engineering rule-of-thumb, not a regulatory figure, and is kept labelled as
+    such below. HSSC survey window (±3 months) and the 5-year renewal cycle are consistent with IMO Res.
+    A.1140(31) and Annex I Reg. 6/7 and are retained as stated.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">The Harmonized System of Survey and Certification (HSSC) under MARPOL Annex I sets a structured, time-bound regime to verify that a vessel's hull, equipment, systems and materials conform to Annex I. The primary instrument is the International Oil Pollution Prevention (IOPP) Certificate, issued with a technical Supplement — Form A for non-tankers or Form B for oil tankers — that documents the vessel's specific pollution-prevention arrangement.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>The IOPP Certificate and its Supplement are the CE's primary statutory defence during PSC — a deficiency here means immediate detention risk, not just a minor finding.</li>
+    <li>Mass-balance checking (expected vs actual sludge) is an internal audit tool the CE can run weekly to catch data-logging errors or equipment faults months before a survey or PSC inspection exposes them.</li>
+    <li>On sign-on, a systematic Form A/B cross-check against physical equipment is the single most effective way for a new CE to inherit a clean compliance position rather than an inherited defect.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">Pre-HSSC</span> → SOLAS/MARPOL/Load Line surveys ran on independent, mismatched schedules
+<span class="t-year">HSSC introduced</span> → IMO harmonises survey intervals to a common 5-year cycle across conventions
+<span class="t-year">Form A/B split</span> → IOPP Supplement divided into Form A (non-tankers) and Form B (oil tankers) for distinct verification pathways
+<span class="t-year">Current</span> → IMO Res. A.1140(31) — current HSSC Survey Guidelines in force</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex I, Reg. 6</span><span class="reg-desc">Mandatory survey types/intervals — oil tankers ≥150 GT, other ships ≥400 GT</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex I, Reg. 7/8</span><span class="reg-desc">Issuance/endorsement of the IOPP Certificate by the Flag Administration or on its behalf</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex I, Reg. 12</span><span class="reg-desc">Mandatory capacity/arrangements for retention and disposal of oil residues (sludge)</span></div>
+    <div class="reg-item"><span class="reg-code">IMO Res. A.1140(31)</span><span class="reg-desc">Survey Guidelines under the Harmonized System of Survey and Certification (HSSC)</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 IOPP Certification &amp; the HSSC Timeline</h3>
+  <div class="mental-map"><span class="root">IOPP CERTIFICATE (max 5 years)</span>
+   ├── FORM A — Ships other than tankers (≥400 GT)
+   │     Ship particulars · OWS control · Sludge retention ·
+   │     Standard discharge connection · SOPEP
+   └── FORM B — Oil tankers (≥150 GT)
+         All of Form A, plus: cargo tank design · SBT/COW/
+         double-hull geometry · ODME &amp; slop layout ·
+         intact/damage stability
+
+HSSC TIMELINE (5-year cycle):
+Year0 [Initial] → Year1 [Annual] → Yr2/3 [Intermediate, replaces one Annual]
+ → Year4 [Annual] → Year5 [Renewal]   (Annual/Intermediate window: ±3 months)
+Additional Survey — unscheduled, triggered by major repair/accident/defect</div>
+
+  <h3 class="section-head">🔧 CE Survey Preparation Checklist</h3>
+  <ul class="notes-list">
+    <li><strong>Documents:</strong> IOPP Certificate validity/endorsement stamps; ORB Part I complete, signed, no blanks; shore disposal receipts cross-referenced to ORB.</li>
+    <li><strong>Mass-balance check:</strong> expected sludge ≈ 1–2% of total HFO consumption (engineering rule-of-thumb, not a regulatory figure) — compare against actual tank levels, incinerator hours and shore disposal volumes; large unexplained gaps suggest a bypass or unlogged operation.</li>
+    <li><strong>Hardware:</strong> incinerator functional test (dampers, dosing pumps, high-temp cut-outs); OWS/OCM recirculation-loop test with simulated high-ppm signal, confirming 3-way valve response; BHT/OBT/sludge tank high-level alarm float tests; spares inventory per manufacturer's list; overboard pipe inspection piece checked for residual oil film.</li>
+  </ul>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Paul:</strong> Paul frequently probes whether a candidate treats the sludge mass-balance check as a legal requirement or an internal audit tool — it is the latter. State clearly that the 1–2% figure is an engineering estimate used to sanity-check ORB/incinerator/shore-receipt data, not a MARPOL-mandated percentage.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: You've just signed on as CE. How do you verify the IOPP Certificate and Supplement?</div><div class="qa-a">First I confirm the Certificate is within its 5-year validity with current annual/intermediate endorsement stamps. Then I cross-reference every item in the relevant Supplement (Form A or B) against the physical machinery — manufacturer, serial number and type-approval date of the OWS/OCM, and the physical dimensions/soundings of every sludge and bilge tank. Any mismatch is treated as a major non-conformity and reported to the company and class immediately.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: How and why do you perform a sludge mass-balance check?</div><div class="qa-a">I estimate expected sludge as roughly 1–2% of total HFO consumed — e.g. 30 t/day HFO gives an expected 300–600 L/day of sludge — then compare that against actual sludge tank accumulation, incinerator running hours, and shore disposal volumes logged in the ORB. A significant shortfall against the estimate, without a matching incineration or shore-disposal record, flags a possible unlogged discharge or data error well before an official survey.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: The OWS passes on clean water but the OCM spikes above 15 ppm on actual bilge water. What is your troubleshooting sequence?</div><div class="qa-a">Since it passes on clean water, the fault is not sensor calibration but the unit's inability to break a stable emulsion or handle particulate loading. I check for detergent/surfactant contamination or scavenge soot in the bilge well, isolate ongoing chemical cleaning, inspect and clean/replace the primary coalescer and secondary emulsion-breaking elements, and verify the OCM sample line is free of air bubbles or scale before re-testing.</div></div>
+    <div class="qa-item"><div class="qa-q">Q4: Differentiate Form A and Form B of the IOPP Supplement.</div><div class="qa-a">Form A (non-tankers ≥400 GT) covers ship particulars, OWS control, sludge retention, standard discharge connection and SOPEP. Form B (oil tankers ≥150 GT) includes all of Form A plus cargo-specific sections: SBT/COW/double-hull geometry, accidental outflow protection, intact/damage stability, slop tank and ODME arrangements, and STS transfer documentation — reflecting the additional cargo-related pollution risk on a tanker.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> Differentiate an Annual, Intermediate and Renewal survey under the MARPOL Annex I HSSC framework, with their timing windows.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Compile a CE's operational checklist for an upcoming IOPP Renewal Survey, covering documentation, calculation and mechanical verification.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Compare IOPP Supplement Form A and Form B in structural detail. Explain why cargo/stability/ballast entries are mandatory only for tankers, and discuss how a PSC officer uses these documents in an expanded inspection.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>IOPP validity:</strong> max 5 years</li>
+      <li><strong>Survey window:</strong> ±3 months of anniversary date</li>
+      <li><strong>A-I-R mnemonic:</strong> Annual (yearly, ±3m) → Intermediate (replaces Annual in Yr2/3) → Renewal (exhaustive, Yr5)</li>
+      <li><strong>Form A</strong> = non-tankers ≥400 GT; <strong>Form B</strong> = oil tankers ≥150 GT</li>
+      <li><strong>Sludge estimate:</strong> ~1–2% of HFO consumption (engineering rule-of-thumb only)</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>IOPP max validity</td><td>5 years</td></tr>
+    <tr><td>Annual/Intermediate window</td><td>±3 months of anniversary date</td></tr>
+    <tr><td>Form A scope</td><td>Non-tankers ≥400 GT</td></tr>
+    <tr><td>Form B scope</td><td>Oil tankers ≥150 GT</td></tr>
+    <tr><td>Sludge generation estimate</td><td>1–2% of total HFO consumed (rule-of-thumb)</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-13">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-13')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>PSC Detention Triggers Specific to Survey Documentation</h4>
+      <p>Common PSC focus points include: sludge tanks listed on Form A showing signs of fresh paint or clean water (suggesting illegal bypass); incinerator hour-meter readings inconsistent with logged "burned" volumes; hidden fresh-water dilution lines feeding the OCM sample block; and failure of the automated 3-way valve to shift within the tested response window during a live high-ppm simulation.</p>
+      <h4>Maersk A/S Application</h4>
+      <p>As Danish-flagged vessels, Maersk container ships are surveyed under DMA authority, typically via DNV or LR acting as Recognized Organization. The CE's Form A cross-check on sign-on should specifically verify the OWS/OCM model and sludge tank capacities against the physical engine-room layout before the first PSC call.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/OurWork/MSAS/Pages/Surveys.aspx" target="_blank">IMO — Harmonized System of Survey and Certification (HSSC)</a></li>
+    <li><a href="https://dgshipping.gov.in" target="_blank">Directorate General of Shipping, India</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3.html">QB3 — MARPOL &amp; PSC</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p3 · Topic 13 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p3 · T13 · v1.0</span>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- TOPIC 13 — MARPOL ANNEX II NLS CONTROL & IBC/BCH CHEMICAL SHIP CLASSIFICATION -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-14" data-kw="NLS, noxious liquid substances, IBC Code, BCH Code, chemical tanker classification, MARPOL Annex II">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 14</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">MARPOL Annex II Control of NLS, Chemical Ship Classification (IBC/BCH) &amp; Operational Discharge Standards</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">MARPOL Annex II / IBC Code</span>
+        <span class="topic-pages">Uday pp. 63–68</span>
+        <span class="topic-examiner">Examiner: Nair / Paul</span>
+        <span class="freq-medium">Medium Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> The Type 1/2/3 wing-tank and double-bottom spacing figures (W=B/5 or
+    11.5 m; DB=B/15 or 6 m; 760 mm wing spacing; 1250 m³/3000 m³ tank caps) are <strong>IBC Code design/tabulated
+    criteria</strong>, not MARPOL Annex II sentences — this distinction is made explicit below (the source draft
+    risked implying these were direct Annex II wording). The "7 knots/4 knots" speed thresholds in the Reg. 13
+    discharge criteria are widely-taught operational figures consistently used in training material; they are
+    labelled as such rather than quoted as a single Annex II sentence.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">MARPOL Annex II controls pollution by Noxious Liquid Substances (NLS) carried in bulk, through cargo categorisation, structural containment standards for chemical tankers, and mandatory physical parameters for any operational residue discharge. Chemical tanker structural design is governed separately by the <strong>IBC Code</strong> (ships built on/after 1 July 1986) or the older <strong>BCH Code</strong> (ships built before that date).</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>Chemical cargoes combine toxicity, reactivity and bioaccumulation risk — a stripping or prewash error is both an environmental and a personnel-safety failure, not just a paperwork issue.</li>
+    <li>Cargo Record Book (CRB) gaps around a Category X prewash are one of the highest-yield PSC detention triggers on chemical tankers.</li>
+    <li>Understanding IMO Type 1/2/3 tank geometry lets the CE reason about why a given cargo can or cannot be loaded into a specific tank, independent of what the Certificate of Fitness states.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">2 Oct 1983</span> → MARPOL Annex II enters into force
+<span class="t-year">Pre-2007</span> → Older multi-category NLS evaluation system in use
+<span class="t-year">1 Jan 2007</span> → Major reclassification: four categories (X, Y, Z, OS); emphasis shifts to efficient stripping systems to minimise onboard residue</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex II, Reg. 6</span><span class="reg-desc">Pollution categorisation system for Noxious Liquid Substances (X, Y, Z, OS)</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex II, Reg. 13</span><span class="reg-desc">Operational control and physical discharge criteria for NLS residues</span></div>
+    <div class="reg-item"><span class="reg-code">IBC Code</span><span class="reg-desc">Chemical tankers constructed on/after 1 July 1986 — Type 1/2/3 structural and tank-capacity criteria</span></div>
+    <div class="reg-item"><span class="reg-code">BCH Code</span><span class="reg-desc">Chemical tankers constructed before 1 July 1986</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 NLS Categorisation (Reg. 6)</h3>
+  <ul class="notes-list">
+    <li><strong>Category X:</strong> major hazard to marine resources/health — discharge strictly prohibited.</li>
+    <li><strong>Category Y:</strong> hazard to marine resources/health/amenities — strict quality/quantity discharge limits.</li>
+    <li><strong>Category Z:</strong> minor hazard — less stringent restrictions.</li>
+    <li><strong>Other Substances (OS):</strong> no hazard — governed by ordinary machinery-space bilge criteria.</li>
+  </ul>
+
+  <h3 class="section-head">🔧 IBC Code Structural Types (design criteria, not MARPOL text)</h3>
+  <table class="compare-table">
+    <tr><th>Feature</th><th>Type 1</th><th>Type 2</th><th>Type 3</th></tr>
+    <tr><td>Cargo hazard level</td><td>Most severe (IBC Ch. 17)</td><td>Significant</td><td>Moderate</td></tr>
+    <tr><td>Wing tank spacing</td><td>≈B/5 or 11.5 m, lesser</td><td>≈760 mm from side shell</td><td>No minimum specified</td></tr>
+    <tr><td>Double bottom height</td><td>≈B/15 or 6 m, lesser</td><td>≈B/15 or 6 m, lesser</td><td>No minimum specified</td></tr>
+    <tr><td>Max single tank volume</td><td>≈1250 m³</td><td>≈3000 m³</td><td>No cap</td></tr>
+  </table>
+
+  <h3 class="section-head">🔧 NLS Residue Discharge — Reg. 13 Operational Parameters</h3>
+  <div class="mental-map"><span class="root">S-D-S-U — Lawful NLS Overboard Discharge (outside Special Areas)</span>
+Verify cargo Category (X/Y/Z) from CRB
+  → Cat X: mandatory prewash to shore until ≤0.1% by weight
+  → Cat Y/Z: prewash only if stripping limit not achieved, to shore
+  → S: Speed ≥7 kn (self-propelled) / ≥4 kn (towed) — en route
+  → D: Distance ≥12 NM from nearest land
+  → S: Sea depth ≥25 m minimum
+  → U: Underwater outlet, discharge below the waterline</div>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair:</strong> If asked to quote the Type 1/2/3 figures "as per MARPOL," correct the premise: these are IBC Code design/tabulated criteria that implement the general Annex II hazard categorisation, not Annex II text itself. Making this distinction unprompted signals depth to Nair.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: Describe the full sequence after unloading a Category X cargo in port.</div><div class="qa-a">A mandatory prewash is executed before the vessel leaves port; washwater goes directly to shore reception until the chemical concentration in the effluent is ≤0.1% by weight. A Flag-authorised surveyor verifies the operation and endorses the CRB. Any subsequent washings accumulated in transit may then be discharged overboard via the underwater outlet once the standard en-route/distance/depth criteria are met.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: Why is surface discharge prohibited and underwater discharge required under Annex II?</div><div class="qa-a">The underwater outlet releases residues below the waterline into the ship's turbulent boundary layer, using hull motion and propeller wash for rapid dilution. Surface discharge is prohibited because many NLS residues are volatile or toxic to surface marine life and can form persistent, dangerously concentrated slicks or vapour hazards if released at the surface.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: Differentiate IMO Type 1, 2 and 3 chemical tanker design.</div><div class="qa-a">Type 1 carries the most hazardous chemicals and has the tightest structural protection — wing tank width ≈B/5 or 11.5 m, double bottom ≈B/15 or 6 m, single tank capped at ≈1250 m³. Type 2 carries significant-hazard cargoes with reduced spacing (≈760 mm wing clearance, same double-bottom rule) and a ≈3000 m³ cap. Type 3 carries lower-hazard cargoes with no mandatory spacing or volume limit. These are IBC Code criteria, not direct MARPOL Annex II wording.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> Sketch and label the tank boundary distances for an IMO Type 1 and Type 2 chemical tanker under the IBC Code.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Describe the properties and reclassification criteria for Categories X, Y, Z and OS under MARPOL Annex II.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> A chemical tanker is discharging Category Y residues from tank cleaning. Detail the complete engineering, geographical and operational parameters for lawful discharge under Annex II, and the CE's responsibilities if the stripping pump fails mid-operation.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>Cat X:</strong> prohibited discharge; prewash to shore until ≤0.1% by weight</li>
+      <li><strong>Type 1/2 caps:</strong> 1250 m³ / 3000 m³ (IBC Code, not MARPOL text)</li>
+      <li><strong>S-D-S-U:</strong> Speed ≥7 kn · Distance ≥12 NM · Sea depth ≥25 m · Underwater outlet</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>Annex II in force</td><td>2 Oct 1983</td></tr>
+    <tr><td>Reclassification to X/Y/Z/OS</td><td>1 Jan 2007</td></tr>
+    <tr><td>Cat X residual limit</td><td>≤0.1% by weight before overboard eligibility</td></tr>
+    <tr><td>Min speed en route</td><td>7 kn (self-propelled) / 4 kn (towed)</td></tr>
+    <tr><td>Min distance / depth</td><td>12 NM / 25 m</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-14">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-14')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>PSC Focus on Chemical Tankers</h4>
+      <p>Common detention triggers: degraded stripping-pump efficiency failing to meet certified residual limits; damage or unauthorised modification of the underwater discharge outlet; and CRB gaps around a Category X prewash or missing shore-reception signed receipt.</p>
+      <h4>Form A/B Cross-Reference</h4>
+      <p>The NLS Certificate/Certificate of Fitness parallels the IOPP Certificate structure covered in Topic 12 — the CE should apply the same sign-on verification discipline (documentation vs physical equipment) to chemical-carriage certification.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/OurWork/Environment/Pages/Pollution-by-noxious-liquid-substances-(Annex-II).aspx" target="_blank">IMO — MARPOL Annex II overview</a></li>
+    <li><a href="https://www.imo.org/en/OurWork/Environment/Pages/IBC-Code.aspx" target="_blank">IMO — International Bulk Chemical (IBC) Code</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB2_G.html">QB2_G — Chemical Cargo &amp; Fire Safety</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p3 · Topic 14 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p3 · T14 · v1.0</span>
+  </div>
+</div>
+<!-- ============================================================ -->
+<!-- TOPIC 14 — P&A MANUALS, TRIPARTITE AGREEMENTS, HNS & MODERN AMENDMENTS -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-15" data-kw="P&A Manual, tripartite agreement, persistent floater, HNS, chemical cargo, MEPC.315(74)">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 15</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Advanced Chemical Regulatory Management: P&amp;A Manuals, Tripartite Agreements, HNS &amp; Modern Amendments</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">MARPOL Annex II / IBC</span>
+        <span class="topic-pages">Uday pp. 69–75</span>
+        <span class="topic-examiner">Examiner: Senthil / Nair</span>
+        <span class="freq-medium">Medium Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    <strong>🔎 Verification note:</strong> The persistent-floater viscosity/melting-point criteria and the mandatory
+    prewash/shore-reception requirement are correctly tied to Resolution MEPC.315(74) (2021 Annex II amendments)
+    in the source draft and are retained as stated. The 3-year Tripartite Agreement validity and its MEPC.2
+    Circular tracking mechanism are consistent with Annex II Reg. 6.3 practice and are kept as direct references.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">This topic covers the administrative and procedural layer of chemical cargo management: the Procedures and Arrangements (P&amp;A) Manual mandated for every chemical tanker, the Tripartite Agreement mechanism for provisional carriage of unclassified chemicals, and the 2021 MARPOL Annex II amendments addressing high-viscosity "persistent floater" cargoes such as palm oil.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>A Tripartite Agreement addendum that has quietly expired mid-voyage is a common, high-consequence PSC detention trigger — the CE must actively track validity, not just check it at load port.</li>
+    <li>Persistent floater prewash procedures (post-2021) are a frequently outdated item in older P&amp;A Manuals — failure to update the manual is a recurring detention cause.</li>
+    <li>H₂S monitoring and closed gauging requirements for reactive/toxic cargoes are direct crew-safety measures, not just regulatory box-ticking.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">MEPC.2 Circular</span> → Published annually every December; tracks provisional chemical classifications
+<span class="t-year">2021</span> → Resolution MEPC.315(74) — Annex II amendments introduce persistent floater controls (palm oil, olive oil, paraffin wax, etc.)</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">IBC Code, Ch. 17/18</span><span class="reg-desc">Lists of chemicals with assigned carriage requirements; a cargo outside these chapters needs a Tripartite Agreement before carriage</span></div>
+    <div class="reg-item"><span class="reg-code">MEPC.2 Circular</span><span class="reg-desc">Annual (December) IMO publication tracking provisional/Tripartite chemical classifications</span></div>
+    <div class="reg-item"><span class="reg-code">MEPC.315(74)</span><span class="reg-desc">2021 Annex II amendments — persistent floating product criteria and mandatory prewash</span></div>
+  </div>
+
+  <h3 class="section-head">🔧 Tripartite Agreement Mechanism</h3>
+  <p class="notes-body">A Tripartite Agreement is a provisional assessment mechanism used when a manufacturer wants to ship a bulk liquid chemical not yet formally classified in IBC Code Chapters 17/18. It requires consensus of three administrations: the producing/shipping country, the vessel's Flag State, and the receiving country. Maximum validity is <strong>3 years</strong>; it is issued as a formal addendum to the vessel's Certificate of Fitness, and the provisional classification is tracked via the <strong>MEPC.2 Circular</strong> published every December.</p>
+
+  <h3 class="section-head">🔧 Persistent Floater Criteria (MEPC.315(74), 2021)</h3>
+  <ul class="notes-list">
+    <li><strong>Criteria:</strong> viscosity ≥50 mPa·s at 20°C, and/or melting point ≥0°C.</li>
+    <li><strong>Operational requirement:</strong> mandatory tank prewash at the unloading port within designated areas (e.g. North West European waters); residue-water mixture discharged entirely to shore reception before departure.</li>
+    <li><strong>Mnemonic (V-M-P-S):</strong> Viscosity ≥50 mPa·s · Melting point ≥0°C · Port prewash required · Shore reception mandatory.</li>
+  </ul>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Senthil:</strong> Senthil often frames this as an incident-response question ("cargo confirmed as a persistent floater after discharge — what now?") rather than a definitions question. Lead with the operational prewash-to-shore sequence, then cite MEPC.315(74) — examiners reward procedure-first answers on this topic.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: What is a Tripartite Agreement, when is it required, and what are its validity boundaries?</div><div class="qa-a">It is a provisional international assessment mechanism used when a chemical has not yet been formally classified in IBC Code Chapters 17/18, requiring consensus of the producing, flag, and receiving administrations. Maximum validity is 3 years; it must be attached as a formal addendum to the Certificate of Fitness, and the classification is tracked annually via the December MEPC.2 Circular.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: Explain the 2021 Annex II persistent floater amendments and the mandatory operational steps.</div><div class="qa-a">Under MEPC.315(74), persistent floating products such as palm oil, olive oil and paraffin wax are defined by viscosity ≥50 mPa·s at 20°C and/or melting point ≥0°C. When such cargoes are discharged within specified areas, a mandatory tank prewash must be executed at the unloading port and the residue-water mixture discharged completely to shore reception before the vessel departs.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: A high-viscosity persistent floater cargo is discharged in a Special Area and an H₂S alarm triggers during prewash. What immediate action do you take?</div><div class="qa-a">I sound the chemical emergency alarm; crew immediately don positive-pressure SCBA. I isolate the tank venting valves, shift to controlled venting, and increase nitrogen blanketing pressure to suppress further vapour generation. I check the integrity of closed gauging seals and vapour-return piping, and do not permit enclosed-space entry until gas-freeing is verified complete with calibrated multi-gas detectors.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> Outline the structural sections of a vessel-specific P&amp;A Manual as mandated by MARPOL Annex II.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Describe the structural/operational modifications mandated by recent IBC Code revisions for specialised chemical cargoes — controlled venting, tank inerting, closed gauging, H₂S monitoring.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> A chemical tanker finishes discharging high-viscosity sunflower seed oil inside a designated Special Area. Detail the regulatory criteria and shipboard prewash procedure under the persistent floater amendments, the CE's P&amp;A Manual/CRB responsibilities, and the primary PSC audit items.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>Tripartite max validity:</strong> 3 years; addendum to Certificate of Fitness</li>
+      <li><strong>MEPC.2 Circular:</strong> published every December</li>
+      <li><strong>V-M-P-S:</strong> Viscosity ≥50 mPa·s · Melting point ≥0°C · Port prewash · Shore reception</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>Tripartite max validity</td><td>3 years</td></tr>
+    <tr><td>Persistent floater viscosity limit</td><td>≥50 mPa·s at 20°C</td></tr>
+    <tr><td>Persistent floater melting point</td><td>≥0°C</td></tr>
+    <tr><td>Governing resolution</td><td>MEPC.315(74), 2021 amendments</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-15">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-15')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>NLS Certificate vs Certificate of Fitness</h4>
+      <p>An NLS Certificate (MARPOL Annex II) applies to standard tankers carrying lower-risk Category Z/OS substances and does not require IBC Code damage-stability compliance. A Certificate of Fitness (IBC Code) applies to specialised chemical tankers carrying Category X/Y/Z cargoes and requires compliance with IMO Type 1/2/3 structural and damage-stability standards, and is the document that carries Tripartite Agreement addendums.</p>
+      <h4>PSC Focus Points</h4>
+      <p>Expired Tripartite addendums still listed as active cargo; P&amp;A Manuals not updated for persistent floater prewash procedures; bypassed or open venting where controlled arrangements are mandated — all are common detention triggers on advanced chemical inspections.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/OurWork/Environment/Pages/Pollution-by-noxious-liquid-substances-(Annex-II).aspx" target="_blank">IMO — MARPOL Annex II overview</a></li>
+    <li><a href="https://www.imo.org/en/MediaCentre/PressBriefings/Pages/MEPC-77-persistent-floaters.aspx" target="_blank">IMO — Persistent floater amendments background</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB2_G.html">QB2_G — Chemical Cargo Hazards</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p3 · Topic 15 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p3 · T15 · v1.0</span>
+  </div>
+</div>
+</main><!-- /#notes-feed -->
+</div><!-- /.main-layout -->
+
+<!-- PAGE FOOTER -->
+<footer class="page-footer">
+  <p><strong>MIW Engineering Management Notes — Part 3</strong> · Pages 51–75 of 768</p>
+  <p style="margin-top:6px;">Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, verified and expanded by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.</p>
+  <p style="margin-top:6px;">Subscriber-only content. <a href="https://marineintelligenceweekly.com/SQ/">Subscribe — ₹899</a> for full access to all Engineering Management Notes parts.</p>
+  <p style="margin-top:8px;color:#94a3b8;font-size:11px;">Content is provided for examination preparation purposes only. Always verify regulatory citations against primary IMO instruments at <a href="https://www.imo.org" target="_blank" style="color:#0d9488;">www.imo.org</a>. Marine Intelligence Weekly accepts no liability for exam outcomes.</p>
+  <p style="margin-top:8px;">
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Notes Index</a> &nbsp;|&nbsp;
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1 Hub</a> &nbsp;|&nbsp;
+    <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
+  </p>
+</footer>
+
+<script>
+// Deep-dive toggle
+function toggleDD(id){
+  const body=document.getElementById(id).querySelector('.deep-dive-body');
+  const btn=document.getElementById(id).querySelector('.deep-dive-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  btn.textContent=(open?'▶':'▼')+' Deep Dive — Full Reference Detail';
+}
+
+// TOC active highlight on scroll
+const tocLinks=document.querySelectorAll('.toc-link[href^="#"]');
+const topics=document.querySelectorAll('.topic-block[id]');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      tocLinks.forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.2});
+topics.forEach(el=>obs.observe(el));
+
+// Content protection
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+</script>
+</body>
+</html>

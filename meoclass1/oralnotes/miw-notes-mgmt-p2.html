@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>MIW Engineering Management Notes — Part 2 | MEO Class 1 | GHG Framework, GESAMP, MEPC-83, MARPOL Annex I</title>
+<meta name="description" content="MEO Class 1 Engineering Management Notes Part 2 — Legislative Amendment Mechanisms, GESAMP & SDGs, MEPC-83 Decarbonisation, MARPOL Annex I Oily Waste Management. Originally compiled by Uday Sankar S., Anglo-Eastern.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/notes/miw-notes-mgmt-p2.html">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:15px;line-height:1.6;user-select:none;-webkit-user-select:none;}
+.miw-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.05;overflow:hidden;}
+
+/* TOPBAR */
+.topbar{background:var(--navy);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logo{width:30px;height:30px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;letter-spacing:-0.5px;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;letter-spacing:0.3px;}
+.topbar-nav{display:flex;gap:20px;}
+.topbar-nav a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.15s;}
+.topbar-nav a:hover{color:#fff;}
+
+/* PAGE HEADER */
+.page-header{background:var(--navy);padding:32px 24px 28px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.notes-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid var(--teal);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.notes-badge-icon{background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;letter-spacing:1px;}
+.notes-badge-text{color:var(--teal-light);font-size:12px;font-weight:600;}
+.page-title{color:#fff;font-size:26px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+.page-sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.header-meta-item{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:12px;color:#cbd5e1;}
+.header-meta-item strong{color:#fff;}
+.attribution-strip{margin-top:14px;padding:10px 14px;background:rgba(201,168,76,0.12);border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;font-size:12px;color:#cbd5e1;}
+.attribution-strip strong{color:#e2c97e;}
+
+/* LAYOUT */
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:24px 16px;}
+
+/* SIDEBAR */
+.sidebar{position:sticky;top:68px;height:calc(100vh - 80px);overflow-y:auto;padding-right:6px;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--grey-border);border-radius:2px;}
+.toc-head{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;font-size:12px;color:var(--grey-text);text-decoration:none;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;transition:all 0.15s;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:700;}
+.toc-divider{height:1px;background:var(--grey-border);margin:14px 0;}
+.qb-sidebar-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:12px;}
+.qb-sidebar-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin-bottom:8px;}
+.qb-sidebar-link{display:block;font-size:12px;color:var(--teal-dark);text-decoration:none;font-weight:600;padding:3px 0;}
+.qb-sidebar-link:hover{text-decoration:underline;}
+
+/* MAIN FEED */
+#notes-feed{min-width:0;}
+
+/* TOPIC BLOCK */
+.topic-block{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:24px;margin-bottom:32px;scroll-margin-top:72px;}
+.topic-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--teal-light);}
+.topic-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+.topic-title{margin:0 0 8px;font-size:20px;font-weight:800;color:var(--navy);}
+.topic-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;}
+.topic-tag{background:var(--teal-light);color:var(--teal-dark);padding:3px 8px;border-radius:20px;font-weight:600;}
+.topic-pages{color:var(--grey-text);padding:3px 0;}
+.topic-examiner{background:var(--orange-light);color:#92400e;padding:3px 8px;border-radius:20px;font-weight:600;}
+.freq-high{background:#fef9c3;color:#713f12;padding:3px 8px;border-radius:20px;font-weight:700;}
+.freq-medium{background:#f0fdf4;color:#14532d;padding:3px 8px;border-radius:20px;font-weight:600;}
+
+/* SECTION HEAD */
+.section-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--grey-border);}
+
+/* NOTES BODY */
+.notes-body{font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:8px;}
+.notes-list{font-family:'Georgia',serif;font-size:14px;line-height:1.8;padding-left:22px;margin-bottom:8px;}
+.notes-list li{margin-bottom:4px;}
+
+/* TIMELINE */
+.timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
+.timeline-block .t-year{color:#fff;font-weight:700;}
+
+/* REG BOX */
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
+.reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
+.reg-code{color:var(--orange);font-weight:700;white-space:nowrap;flex-shrink:0;font-family:monospace;font-size:12px;}
+.reg-desc{color:#cbd5e1;line-height:1.5;}
+
+/* CE TIP */
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:13.5px;font-family:'Georgia',serif;line-height:1.7;}
+.ce-tip strong{color:#92400e;}
+
+/* ORAL Q&A */
+.qa-block{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.qa-item{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.qa-q{background:var(--grey-bg);padding:10px 14px;font-weight:700;font-size:13px;color:var(--navy);}
+.qa-a{padding:10px 14px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;color:var(--ink);}
+
+/* WRITTEN EXAM */
+.exam-focus-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:16px 0;}
+.exam-focus-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin:0 0 12px;}
+.exam-q{margin:8px 0;font-family:'Georgia',serif;font-size:13.5px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+.marks-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+
+/* MEMORY BOX */
+.memory-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:16px 0;}
+.memory-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#713f12;margin:0 0 10px;}
+.memory-list{font-family:'Georgia',serif;font-size:13.5px;line-height:1.8;padding-left:18px;}
+.memory-list li{margin-bottom:4px;}
+
+/* TABLES */
+.amend-table,.compare-table,.revision-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.amend-table th,.compare-table th,.revision-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+.amend-table td,.compare-table td,.revision-table td{padding:8px 12px;border-bottom:1px solid var(--grey-border);font-family:'Georgia',serif;line-height:1.6;vertical-align:top;}
+.amend-table tr:nth-child(even) td,.revision-table tr:nth-child(even) td{background:var(--grey-bg);}
+
+/* PSC FOCUS */
+.psc-focus{background:#fef2f2;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);}
+
+/* MENTAL MAP / FLOWCHART */
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;}
+.mental-map .root{color:#fff;font-weight:700;}
+
+/* QB LINK BOX */
+.qb-link-box{background:var(--teal-light);border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;}
+.qb-link-box strong{color:var(--teal-dark);}
+.qb-link-box a{color:var(--teal-dark);font-weight:600;text-decoration:none;margin-right:12px;}
+.qb-link-box a:hover{text-decoration:underline;}
+
+/* DEEP DIVE */
+.deep-dive{margin:14px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:16px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;}
+.deep-dive-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.deep-dive-body p,.deep-dive-body li{margin-bottom:6px;}
+.deep-dive-body ul{padding-left:20px;}
+
+/* REFERENCES */
+.ref-list{font-size:13px;line-height:1.9;padding-left:18px;}
+.ref-list a{color:var(--teal-dark);}
+
+/* TOPIC FOOTER */
+.topic-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:12px;border-top:1px dashed var(--grey-border);font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.topic-version{font-weight:700;}
+
+/* PAGE FOOTER */
+.page-footer{background:var(--grey-bg);border-top:1px solid var(--grey-border);padding:28px 24px;margin-top:40px;font-size:12px;color:var(--grey-text);text-align:center;}
+.page-footer a{color:var(--teal-dark);}
+
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+
+<div class="miw-watermark" aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wmpat" width="420" height="220" patternTransform="rotate(-30)" patternUnits="userSpaceOnUse">
+        <text x="0" y="60" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">marineintelligenceweekly.com</text>
+        <text x="0" y="90" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wmpat)"/>
+  </svg>
+</div>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-logo">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/notes/">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="notes-badge">
+      <span class="notes-badge-icon">NOTES</span>
+      <span class="notes-badge-text">Engineering Management · Part 2 of 31</span>
+    </div>
+    <h1 class="page-title">Engineering Management Notes — Part 2</h1>
+    <p class="page-sub">IMO Legislative &amp; Amendment Mechanisms · GESAMP &amp; UN SDGs · MEPC-83 Decarbonisation Pathways · MARPOL Annex I Oily Waste Management</p>
+    <div class="header-meta">
+      <span class="header-meta-item"><strong>Pages:</strong> 26–50 of 768</span>
+      <span class="header-meta-item"><strong>Topics:</strong> 4</span>
+      <span class="header-meta-item"><strong>Access:</strong> Subscriber Only</span>
+      <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>
+      <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>
+    </div>
+    <div class="attribution-strip">
+      Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and updated by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="toc-head">Topics — Part 2</div>
+  <a class="toc-link" href="#topic-7">T7 · Legislative Amendment Mechanisms</a>
+  <a class="toc-link" href="#topic-8">T8 · GESAMP &amp; UN SDGs</a>
+  <a class="toc-link" href="#topic-9">T9 · MEPC-83 Decarbonisation</a>
+  <a class="toc-link" href="#topic-10">T10 · MARPOL Annex I — Oily Waste</a>
+  <div class="toc-divider"></div>
+  <div class="toc-head">Navigate</div>
+  <a class="toc-link" href="https://marineintelligenceweekly.com/meoclass1/notes/">← Notes Index</a>
+  <a class="toc-link" href="miw-notes-mgmt-p1.html">← Part 1</a>
+  <a class="toc-link" href="miw-notes-mgmt-p3.html">Part 3 →</a>
+  <div class="toc-divider"></div>
+  <div class="qb-sidebar-box">
+    <div class="qb-sidebar-title">🔗 Related QB Files</div>
+    <a class="qb-sidebar-link" href="../QB3.html">QB3 — MARPOL &amp; PSC</a>
+    <a class="qb-sidebar-link" href="../QB4.html">QB4 — ISM / ISPS / MLC / STCW</a>
+  </div>
+</aside>
+
+<!-- NOTES FEED -->
+<main id="notes-feed">
+<!-- ============================================================ -->
+<!-- TOPIC 7 — IMO LEGISLATIVE FRAMEWORK & AMENDMENT MECHANISMS -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-7" data-kw="IMO legislative framework, amendment mechanisms">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 7</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">The IMO Legislative Framework &amp; Amendment Mechanisms</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">IMO Governance</span>
+        <span class="topic-pages">Uday pp. 26–33</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ce-tip" style="background:#eff6ff;border-left-color:#2563eb;">
+    <strong>🔎 Verification note:</strong> The quorum (⅓ present) and adoption (⅔ majority) figures below are correctly aligned with SOLAS Article VIII and MARPOL Article 16. The "1/3–2/3–50%" blocking-minority rule is an accurate <em>exam mnemonic</em> summarising those articles, not a word-for-word quotation — for written answers always cite SOLAS Article VIII / MARPOL Article 16 directly rather than quoting the mnemonic as convention text.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">This topic establishes the structural framework of maritime legislation — the legal hierarchy that governs a Chief Engineer's statutory liabilities — and explains how international instruments are proposed, adopted, and systematically amended to keep pace with evolving technology and safety needs.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>A uniform legislative framework prevents conflicting unilateral regional rules — every flag applies the same technical baseline.</li>
+    <li>Understanding how a resolution becomes binding law is critical to avoiding PSC detentions, contractual delays, or criminal liability for non-compliance.</li>
+    <li>Knowing municipal legal hierarchy (Acts → Rules → Regulations) explains why a flag state notice, not the IMO resolution itself, is what actually binds the vessel.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <p class="notes-body">Historically, amendments required "explicit acceptance" — a fixed percentage (typically two-thirds) of contracting states had to formally ratify before entry into force, a process that could take up to a decade. To fix this dangerous lag, IMO introduced <strong>Tacit Acceptance</strong> through convention revisions in the early 1970s, flipping the legal default from "rejected unless explicitly accepted" to "accepted unless explicitly objected to."</p>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">IMO Convention, Part XI</span><span class="reg-desc">Functions and interactions of the principal committees</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS Article VIII</span><span class="reg-desc">Legal framework, timeframes and criteria for amending SOLAS</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Article 16</span><span class="reg-desc">Procedures for adopting and enforcing MARPOL amendments</span></div>
+  </div>
+
+  <h3 class="section-head">🏛 Hierarchy of IMO Instruments</h3>
+  <div class="timeline-block">CONVENTIONS   → Binding primary treaties (SOLAS, MARPOL, STCW)
+PROTOCOLS     → Major structural amendments to an existing convention
+CODES         → Mandatory technical rules once referenced by a convention chapter (ISM, IGF, ISPS)
+RESOLUTIONS   → Formal committee-approved mandates (Assembly / MSC / MEPC)
+CIRCULARS     → Interpretative guidance and clarifications (non-mandatory)</div>
+
+  <h3 class="section-head">🔢 Statutory Nomenclature</h3>
+  <ul class="notes-list">
+    <li><strong>Resolution format — Body.Number(Session):</strong> e.g. <em>MSC.374(93)</em> = 374th resolution of the Maritime Safety Committee, adopted at its 93rd session.</li>
+    <li><strong>Circular format — Body.Category/Circ.Number:</strong> e.g. <em>MSC.1/Circ.1501</em> = sub-category 1 under MSC, informational circular #1501.</li>
+  </ul>
+
+  <h3 class="section-head">⏱ The Amendment Lifecycle — Explicit vs. Tacit Acceptance</h3>
+  <div class="timeline-block"><span class="t-year">1. PROPOSAL</span> → submitted to IMO Secretary-General by a contracting government
+<span class="t-year">2. REVIEW &amp; DRAFT</span> → routed to MSC or MEPC for technical drafting
+<span class="t-year">3. ADOPTION</span> → quorum ≥⅓ of contracting governments present; vote ≥⅔ of those present and voting
+<span class="t-year">4. ACCEPTANCE</span> → tacit period runs (SOLAS min. 15 months / MARPOL min. 10 months, max. 24 months) unless a blocking minority objects
+<span class="t-year">5. ENTRY INTO FORCE</span> → exactly 6 months after acceptance, for both SOLAS and MARPOL</div>
+
+  <table class="revision-table">
+    <tr><th>Criterion</th><th>Amendment by Conference</th><th>Tacit Acceptance</th></tr>
+    <tr><td>Quorum</td><td>≥⅓ of contracting states attend</td><td>≥⅓ of contracting states present for the vote</td></tr>
+    <tr><td>Adoption vote</td><td>≥⅔ majority of attendees</td><td>≥⅔ majority of committee present &amp; voting</td></tr>
+    <tr><td>Acceptance</td><td>Explicit ratification by each state</td><td>Assumed accepted unless a blocking minority objects</td></tr>
+    <tr><td>Blocking minority</td><td>Not applicable — non-signers simply not bound</td><td>≥⅓ of states object, OR objectors represent ≥50% of world gross merchant tonnage</td></tr>
+    <tr><td>Timeframe</td><td>Historically 5–12 years, unpredictable</td><td>SOLAS ≥15 months / MARPOL ≥10 months, max 24 months to acceptance, +6 months buffer to force</td></tr>
+  </table>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair Sir:</strong> When Nair asks about tacit acceptance, always name the source articles (SOLAS Article VIII, MARPOL Article 16) before reciting the 1/3–2/3–50% figures — reciting numbers without the legal source reads as a memorised mnemonic rather than regulatory knowledge, and he marks that down.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: Explain the fundamental difference between an IMO Resolution and an IMO Circular, and how each affects your day-to-day management.</div><div class="qa-a">A Resolution is a formal legislative instrument adopted by the Assembly, MSC, or MEPC to adopt conventions, protocols, or amendments; once it passes tacit acceptance and enters into force it becomes a mandatory international requirement enforced through domestic flag-state law. A Circular is an informational document issued by a committee or sub-committee providing technical clarification or uniform interpretation — generally non-mandatory, but widely used by PSC officers and ROs as the definitive technical benchmark during surveys. As Chief Engineer, I treat resolutions as mandatory structural/operational targets and circulars as the practical guide for meeting them.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: What are the precise legal conditions for a MARPOL amendment to be rejected via tacit acceptance?</div><div class="qa-a">A valid blocking minority of contracting governments must file formal written objections with the IMO Secretary-General within the tacit-acceptance window (minimum 10 months for MARPOL). Rejection requires either (1) at least one-third of all contracting governments to object, or (2) objecting states whose combined merchant fleets represent not less than 50% of world gross merchant shipping tonnage. If neither threshold is met, the amendment is deemed accepted and enters into force exactly 6 months later.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: Decode MSC.1/Circ.1501.</div><div class="qa-a">"MSC.1/" identifies the originating body (Maritime Safety Committee) and its technical sub-category; "Circ." identifies the instrument as an informational/interpretative circular rather than a mandatory resolution; "1501" is the unique chronological index number. Operationally it provides unified global interpretation of a safety matter which shipboard management should align with for flag-state and PSC expectations.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> Outline the precise voting and quorum requirements mandated within the MSC for the legal adoption of a SOLAS amendment.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Explain the structural and legal distinctions between a Convention, a Protocol, and a mandatory Technical Code. Detail how a code transitions from a non-binding recommendation into a mandatory statutory instrument.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Analyze the historical transition from Explicit Acceptance to Tacit Acceptance for maritime amendments. Construct a detailed timeline of a SOLAS amendment's lifecycle from proposal to shipboard entry into force, explaining the legal parameters governing each phase.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>1/3 – 2/3 – 50% Rule (exam mnemonic, not literal article text):</strong> ⅓ = minimum quorum to hold a vote; ⅔ = majority needed to adopt; ⅓ of states (or states representing ≥50% of global gross tonnage) can block via formal objection before the tacit deadline.</li>
+      <li><strong>6-month buffer</strong> — fixed for both SOLAS and MARPOL between acceptance and entry into force.</li>
+      <li><strong>Acts → Rules → Regulations</strong> — Parliament → ministerial decree → statutory technical directive.</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>Adoption quorum</td><td>≥⅓ of contracting states present</td></tr>
+    <tr><td>Adoption vote</td><td>≥⅔ majority of present &amp; voting</td></tr>
+    <tr><td>Tacit rejection threshold</td><td>≥⅓ of states object, or objectors = ≥50% of global gross tonnage</td></tr>
+    <tr><td>Entry-into-force buffer</td><td>Exactly 6 months post-acceptance (SOLAS &amp; MARPOL)</td></tr>
+    <tr><td>Resolution format</td><td>Body.Number(Session) — e.g. MSC.374(93)</td></tr>
+    <tr><td>Circular format</td><td>Body.Category/Circ.Number — e.g. MSC.1/Circ.1501</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-7">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-7')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Failure to Implement — PSC Consequence</h4>
+      <p>Any failure to implement an adopted amendment after its formal entry-into-force date is a high-risk PSC detention ground. Claiming ignorance of a tacitly accepted amendment, or a delay in receiving a company circular, is not accepted as a valid defense by boarding officers.</p>
+      <h4>Municipal Transposition</h4>
+      <p>International conventions are not self-executing — they must be transposed into domestic legislation. In India, the Merchant Shipping Act provides the constitutional/legal authority; rules and regulations issued under DGS authority give the technical detail that flag-state surveyors and PSC actually enforce.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/About/Conventions/Pages/Amendment-Procedure.aspx" target="_blank">IMO — Amendment Procedure (official)</a></li>
+    <li><a href="https://www.jus.uio.no/english/services/library/treaties/08/8-03/safety-life.html" target="_blank">SOLAS 1974 consolidated text — Article VIII</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB4.html">QB4 — IMO Governance</a>
+    <a href="../QB3.html">QB3 — MARPOL &amp; PSC</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p2 · Topic 7 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p2 · T7 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 8 — GESAMP & UN SDGs -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-8" data-kw="GESAMP, UN SDGs, maritime sustainability">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 8</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Global Maritime Sustainability — GESAMP &amp; the UN SDGs</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Environmental Governance</span>
+        <span class="topic-pages">Uday pp. 34–39</span>
+        <span class="topic-examiner">Examiner: Senthil</span>
+        <span class="freq-medium">Medium Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ce-tip" style="background:#eff6ff;border-left-color:#2563eb;">
+    <strong>🔎 Verification note:</strong> GESAMP's 1969 founding and multi-agency sponsorship are accurately described. The SDG mapping is conceptually sound for oral answers, but the SDGs are UN policy goals, not MARPOL/SOLAS regulations — wording below uses "supports/aligns with" rather than "mandates/codifies" for SDG items. The 1.2% women-seafarer figure and 45.8% increase are industry statistics from workforce studies, not regulatory values.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">This topic covers the Group of Experts on the Scientific Aspects of Marine Environmental Protection (GESAMP) and the operational integration of the UN 2030 Agenda's 17 Sustainable Development Goals (SDGs) into the maritime industry — how scientific risk assessment and UN policy goals translate into shipboard engineering management and culture.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>GESAMP's scientific evaluations underpin the discharge limits and chemical carriage classifications the IMO writes into MARPOL Annex II.</li>
+    <li>The UN SDGs give charterers, financiers, and PSC an ESG lens on top of pure technical compliance — increasingly relevant to vetting and inspection.</li>
+    <li>SDG-aligned practices (waste reduction, workforce inclusion, energy efficiency) are audited through existing certification pathways (MLC, MARPOL Annex V, HSSC), not a separate SDG inspection regime.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">1969</span> → GESAMP established as a multidisciplinary, independent scientific advisory body to the UN agency cluster on marine pollution
+<span class="t-year">2015</span> → UN 2030 Agenda for Sustainable Development adopted by all 193 member states; 17 SDGs established
+<span class="t-year">2024–2029</span> → IMO Strategic Plan formally aligns IMO's roadmap with the UN SDGs</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">UN Resolution A/RES/70/1</span><span class="reg-desc">Foundational framework for the 17 SDGs and their targets</span></div>
+    <div class="reg-item"><span class="reg-code">IMO Strategic Plan 2024–2029</span><span class="reg-desc">Aligns IMO's roadmap with the UN SDGs — a policy document, not a convention</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex II, Appendix I</span><span class="reg-desc">Uses the GESAMP Hazard Profile to classify harmful liquid substances carried in bulk</span></div>
+  </div>
+
+  <h3 class="section-head">🏛 GESAMP Institutional Architecture</h3>
+  <div class="timeline-block">10 UN SPONSOR AGENCIES (IMO, UN, FAO, and others)
+        ↓
+GESAMP MAIN BODY — independent experts
+        ↓
+TECHNICAL WORKING GROUPS — e.g. WG 1: Evaluation of Hazards of Harmful Substances Carried by Ships
+        ↓
+GESAMP HAZARD PROFILE (GHP) — bioaccumulation, aquatic toxicity, human-health hazard, physical properties</div>
+
+  <h3 class="section-head">🌍 SDGs Most Relevant to Engine Room Operations</h3>
+  <ul class="notes-list">
+    <li><strong>SDG 5 (Gender Equality):</strong> supports recruitment, visibility and professional advancement of women at sea.</li>
+    <li><strong>SDG 6 (Clean Water &amp; Sanitation):</strong> aligns with MARPOL Annex IV controls on sewage and graywater discharge.</li>
+    <li><strong>SDG 7 (Clean Energy):</strong> supports alternative-fuel research, waste-heat recovery, and machinery efficiency.</li>
+    <li><strong>SDG 8 (Decent Work):</strong> aligns with MLC 2006 seafarer welfare and safe working conditions.</li>
+    <li><strong>SDG 12 (Responsible Consumption):</strong> supports MARPOL Annex V waste segregation and Hong Kong Convention recycling practices.</li>
+    <li><strong>SDG 13 (Climate Action):</strong> aligns with the IMO GHG Strategy via EEDI, EEXI, and CII.</li>
+    <li><strong>SDG 14 (Life Below Water):</strong> supports Ballast Water Management, oil-spill prevention, underwater-noise mitigation.</li>
+  </ul>
+  <p class="notes-body">Global data indicates women make up approximately <strong>1.2%</strong> of the global seafarer workforce — an industry statistic, not a regulatory figure — reflecting an estimated <strong>45.8%</strong> increase since 2015, driven by targeted training, visibility, and recognition programs.</p>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Senthil Sir:</strong> Senthil probes whether candidates conflate SDGs with binding regulation. Always frame SDG answers as "supports/aligns with" a named convention (MLC, MARPOL Annex V, the GHG Strategy) rather than claiming the SDG itself is enforceable law.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: What is the role of GESAMP, and how do its findings impact shipboard operations?</div><div class="qa-a">GESAMP is an independent scientific advisory body sponsored by 10 UN agencies, including the IMO, conducting scientific risk assessments for marine environmental protection. Its GESAMP Hazard Profile classifies bulk liquid chemicals by environmental and human-health risk, which in turn dictates the ship type required under the IBC Code, tank-stripping limits, and discharge criteria the engineering crew must follow.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: How can a Chief Engineer directly support SDG 5 (Gender Equality) on board?</div><div class="qa-a">By enforcing zero tolerance for harassment or bias, assigning duties, training and evaluations strictly by capability and rank, and verifying accommodation and PPE are properly configured for a mixed-gender crew — expanding the talent pool and strengthening overall shipboard safety culture.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: Name three SDGs that intersect with engine room operations and their technical application.</div><div class="qa-a">SDG 7 (Clean Energy) — waste-heat recovery and machinery optimization to cut fuel consumption. SDG 12 (Responsible Consumption) — waste segregation and Garbage Record Book discipline. SDG 13 (Climate Action) — CII monitoring and correct operation of fuel and exhaust systems.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> State the historical origin of GESAMP and its multi-agency UN sponsorship structure.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Discuss the statistical distribution of female seafarers in the modern merchant fleet and the strategic programs supporting SDG 5.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Analyze the operational impact of the UN 2030 Agenda on a modern shipping company. Select five SDGs, explain their relationship to shipboard engineering management, and describe how compliance is evaluated during external audits.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>GESAMP 1969, 10 UN sponsors</strong> — independent scientific advisory body.</li>
+      <li><strong>The 5 P's of the SDGs:</strong> People (3,4,5) · Planet (6,13,14) · Prosperity (7,8,9) · Peace (16) · Partnership (17).</li>
+      <li><strong>1.2% / 45.8%</strong> — women-seafarer share / increase since 2015 (industry stat, not regulation).</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>GESAMP founded</td><td>1969</td></tr>
+    <tr><td>GESAMP sponsors</td><td>10 UN agencies</td></tr>
+    <tr><td>SDGs adopted</td><td>2015, UN Resolution A/RES/70/1, 193 member states</td></tr>
+    <tr><td>Key engineer-relevant SDGs</td><td>5, 6, 7, 8, 12, 13, 14</td></tr>
+    <tr><td>MARPOL Annex II link</td><td>Appendix I uses the GESAMP Hazard Profile</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-8">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-8')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Why "supports" not "mandates"</h4>
+      <p>SDGs are UN policy goals adopted by the General Assembly, not IMO conventions. The IMO Strategic Plan aligns IMO's own work programme with them, but a PSC officer cannot cite an SDG number as a deficiency code — only the underlying convention (MLC, MARPOL, SOLAS) it supports.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org" target="_blank">IMO — Sustainable Development (official)</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3.html">QB3 — MARPOL &amp; PSC</a>
+    <a href="../QB4.html">QB4 — ISM / ISPS / MLC / STCW</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p2 · Topic 8 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p2 · T8 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 9 — MEPC-83 DECARBONISATION PATHWAYS -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-9" data-kw="decarbonisation, IMO Net-Zero Framework, MEPC-83, GFI">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 9</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Decarbonisation Pathways &amp; the IMO Net-Zero Framework (MEPC-83)</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">GHG / Decarbonisation</span>
+        <span class="topic-pages">Uday pp. 40–45</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ce-tip" style="background:#fef2f2;border-left-color:#dc2626;">
+    <strong>🔎 Verification note — read before studying:</strong> MEPC-83 (April 2025) approved <em>in principle</em> a global GHG pricing framework and Net-Zero Fund, to be integrated as new MARPOL Annex VI Chapter 5 — this is correct. However, the fixed dollar tier prices (Tier 1 $300/t, Tier 2 $100/t) and the year-by-year Z-factor percentages below are <strong>draft/indicative values from the approved-in-principle framework, not final adopted statutory figures</strong>. MEPC ES.2 (October 2025) adjourned without final agreement and formal adoption has been rescheduled to November 2026. Treat every number in this topic as illustrative of the tier <em>structure</em> and reduction <em>trend</em>, not as law to quote in a written answer without a "subject to formal adoption" qualifier.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">This topic covers the regulatory mechanisms, market-based instruments, and mid-term technical frameworks approved in principle by MEPC-83 to decarbonise shipping — the GHG pricing concept, the IMO Net-Zero Fund, and extended Carbon Intensity Indicator (CII) reduction trajectories.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>Once adopted, non-compliance with GHG intensity targets converts CII from a reporting exercise into a direct financial penalty per tonne of CO₂e.</li>
+    <li>Fuel procurement, engine-load planning, and SEEMP Part III strategy must anticipate a steepening reduction curve through 2030.</li>
+    <li>DCS data accuracy becomes financially material — reporting errors can translate directly into penalty exposure once the framework is adopted.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">2018</span> → Initial IMO GHG Strategy: 50% total reduction by 2050 vs 2008 baseline
+<span class="t-year">2023</span> → Revised Strategy (Resolution MEPC.385(80)): net-zero by/around 2050, indicative 2030/2040 checkpoints
+<span class="t-year">Apr 2025</span> → MEPC-83 approves in principle the GHG pricing mechanism, Net-Zero Fund, and extended CII trajectory
+<span class="t-year">Oct 2025</span> → MEPC ES.2 adjourns without final agreement
+<span class="t-year">Nov 2026</span> → Formal adoption rescheduled</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Ch.4</span><span class="reg-desc">Carbon intensity of international shipping — currently in force (CII/EEXI)</span></div>
+    <div class="reg-item"><span class="reg-code">Resolution MEPC.385(80)</span><span class="reg-desc">2023 IMO Strategy on Reduction of GHG Emissions from Ships</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Ch.5 (draft)</span><span class="reg-desc">IMO Net-Zero Framework — approved in principle at MEPC-83, formal adoption pending (rescheduled Nov 2026)</span></div>
+  </div>
+
+  <h3 class="section-head">💰 GHG Pricing Concept (Illustrative — Not Yet Final Law)</h3>
+  <div class="timeline-block">TOTAL VESSEL EMISSIONS
+        ↓
+  Exceeds Direct Target ──► Higher-priced Tier (draft ~$300/t CO2e, illustrative)
+  Exceeds Base Target only ─► Lower-priced Tier (draft ~$100/t CO2e, illustrative)
+        ↓
+  IMO NET-ZERO FUND ──► fuel subsidisation for ZNZ fuels + just-transition support for developing states/SIDS</div>
+  <p class="notes-body">Under the concept as approved in principle, a higher-priced tier applies to larger compliance deficits and a lower-priced tier to smaller deficits, with over-compliant vessels earning tradeable surplus units. <strong>Exact US-dollar values remain subject to final adoption</strong> — for oral exams, describe the tier structure and the Fund's dual purpose (fuel subsidy + just transition) rather than quoting fixed figures as settled statutory rates.</p>
+
+  <h3 class="section-head">📉 CII Reduction Trajectory (Z-Factors) — Draft Trend, 2027–2030</h3>
+  <table class="revision-table">
+    <tr><th>Year</th><th>Indicative Z-Factor (draft, illustrative)</th></tr>
+    <tr><td>2026</td><td>11.0% (confirmed baseline window, current in-force trajectory)</td></tr>
+    <tr><td>2027</td><td>~13.1% (draft)</td></tr>
+    <tr><td>2028</td><td>~16.2% (draft)</td></tr>
+    <tr><td>2029</td><td>~18.8% (draft)</td></tr>
+    <tr><td>2030</td><td>~21.5% (draft)</td></tr>
+  </table>
+  <p class="notes-body">The required annual operational CII is $\text{Required CII} = \frac{100-Z}{100}\times \text{CII}_{\text{baseline}}$. The trend — progressively steeper annual reduction steps toward 2030 — is the examinable concept; the exact per-year Z/GFI factor is set only through the formal Annex VI amendment process, so present the trajectory as "discussed/proposed at MEPC-83" rather than immutable law.</p>
+
+  <h3 class="section-head">🔧 Adjacent Frameworks Discussed at MEPC-83</h3>
+  <ul class="notes-list">
+    <li><strong>Onboard Carbon Capture &amp; Storage (OCCS):</strong> draft accounting plan to credit type-approved OCCS installations, deducting captured CO₂ from reported emissions.</li>
+    <li><strong>BWTS type-approval:</strong> more rigorous guidelines discussed for reliable performance in turbid port waters.</li>
+    <li><strong>Lost fishing gear reporting:</strong> proposed global reporting mechanism for marine plastic littering and ghost fishing.</li>
+  </ul>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Simon Sir:</strong> Simon specifically tests whether candidates present MEPC-83 figures as adopted law. Open any Net-Zero Framework answer with "approved in principle at MEPC-83, subject to formal adoption" — candidates who state fixed dollar figures as current statutory penalties are marked down even if the structure they describe is correct.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: Explain the GHG pricing concept discussed at MEPC-83.</div><div class="qa-a">MEPC-83 approved in principle a market-based GHG pricing framework applying financial penalties tied to a vessel's emissions relative to its targets, structured as a higher-priced tier for larger deficits and a lower-priced tier for smaller deficits, with over-compliant vessels earning tradeable surplus units. All collected revenue would flow into the IMO Net-Zero Fund to subsidise zero/near-zero fuels and support developing states. Exact dollar values remain subject to formal adoption, rescheduled for November 2026.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: What CII reduction trend was discussed at MEPC-83 for 2027–2030?</div><div class="qa-a">MEPC-83 discussed extending the mandatory Z-factor reduction trajectory beyond the confirmed 2026 baseline (11.0%) through progressively steeper annual steps toward 2030, broadly in the range of low-teens rising to low-twenties percent. These are draft/indicative figures — the confirmed statutory factors are set only through the formal Annex VI amendment process.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: How would an Onboard Carbon Capture and Storage (OCCS) system affect a vessel's carbon profile under the proposed framework?</div><div class="qa-a">Under the draft accounting approach discussed at MEPC-83, verified captured and stored CO₂ from a type-approved OCCS unit could be deducted from the vessel's gross reported emissions in the IMO Data Collection System, reducing the reported operational CII and helping the vessel meet steeper future reduction targets — subject to the framework's formal adoption.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> Describe the two-tier structure of the GHG pricing mechanism discussed at MEPC-83, noting its current regulatory status.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Explain the structural role and intended revenue redistribution strategy of the IMO Net-Zero Fund.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Analyze the operational impact of the proposed extended CII trajectory (2027–2030) on fleet management, and evaluate OCCS as a potential compliance technology, clearly distinguishing what is currently in force under MARPOL Annex VI Chapter 4 from what remains draft under the proposed Chapter 5.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>MEPC-83 = "approved in principle,"</strong> not "adopted." Formal adoption rescheduled to Nov 2026 after MEPC ES.2 (Oct 2025) adjourned without agreement.</li>
+      <li><strong>Two tiers, one Fund:</strong> higher tier for bigger deficits, lower tier for smaller deficits, both feed the Net-Zero Fund.</li>
+      <li><strong>2026 = 11.0% confirmed</strong>; 2027–2030 figures are draft/indicative only.</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>2018 Strategy target</td><td>50% total reduction by 2050 vs 2008</td></tr>
+    <tr><td>2023 revision</td><td>Net-zero by/around 2050 (Resolution MEPC.385(80))</td></tr>
+    <tr><td>MEPC-83 status</td><td>Approved in principle, April 2025</td></tr>
+    <tr><td>MEPC ES.2</td><td>Adjourned without agreement, October 2025</td></tr>
+    <tr><td>Formal adoption</td><td>Rescheduled to November 2026</td></tr>
+    <tr><td>Confirmed Z-factor</td><td>11.0% for 2026 (current in-force trajectory)</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-9">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-9')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Why the qualifier matters</h4>
+      <p>Presenting draft figures as final statutory law is the single most common written-answer error on this topic. Examiners at Kochi MMD are aware the framework has not been formally adopted; a candidate who says "the IMO Net-Zero Framework was approved at MEPC-83, subject to formal adoption" demonstrates more accurate regulatory literacy than one who states fixed penalty numbers with confidence.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/mediacentre/pressbriefings/pages/imo-approves-netzero-regulations.aspx" target="_blank">IMO — IMO approves net-zero regulations (official)</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3.html">QB3 — GHG / MARPOL Annex VI</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p2 · Topic 9 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p2 · T9 · v1.0</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 10 — MARPOL ANNEX I: CERTIFICATION, RECORDS, OILY WASTE -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-10" data-kw="MARPOL Annex I, statutory certification, oil record book, oily waste management">
+  <div class="topic-header">
+    <div class="topic-badge">Topic 10</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">MARPOL Annex I — Statutory Certification, Record-Keeping &amp; Oily Waste Management</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">MARPOL Annex I</span>
+        <span class="topic-pages">Uday pp. 46–50</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ce-tip" style="background:#eff6ff;border-left-color:#2563eb;">
+    <strong>🔎 Verification note:</strong> Two corrections applied to the original draft: (1) the Special Areas list was missing <strong>Southern South African waters</strong>, and "Oman area" is formally "Oman area of the Arabian Sea" — both added below. (2) The original draft stated cargo-tank-washing discharge must stay "below 34 ppm" — MARPOL Annex I Regulation 34 does not use a fixed ppm threshold for tanker ODMCS operations; it uses instantaneous-rate (≤30 L/NM) and total-quantity (≤1/30,000 of cargo) limits. 15 ppm is the separate machinery-bilge discharge limit. The 34 ppm figure has been removed and replaced with the correct rate/quantity criteria.
+  </div>
+
+  <h3 class="section-head">📖 Definition</h3>
+  <p class="notes-body">This topic covers the statutory framework for preventing oil pollution under MARPOL Annex I — international certification (IOPP), the Oil Record Book (Parts I &amp; II), the physics of the Load on Top (LOT) procedure, and the structural/volumetric design criteria for slop tanks.</p>
+
+  <h3 class="section-head">⚓ Why It Matters (CE Perspective)</h3>
+  <ul class="notes-list">
+    <li>Oil pollution carries some of the most severe consequences in shipping — criminal liability for engineering officers, heavy fines, and immediate detention.</li>
+    <li>Falsified ORB entries or "magic pipe" bypasses are treated as serious criminal offences in most jurisdictions.</li>
+    <li>Every entry the CE signs in the ORB must reconcile with physical tank soundings — discrepancies are read by PSC as evidence of concealment.</li>
+  </ul>
+
+  <h3 class="section-head">📅 Historical Background</h3>
+  <div class="timeline-block"><span class="t-year">1973</span> → MARPOL adopted but insufficient ratification to enter into force
+<span class="t-year">1976–77</span> → Series of severe tanker accidents drives revision
+<span class="t-year">1978</span> → Protocol of 1978 modifies the convention
+<span class="t-year">2 Oct 1983</span> → MARPOL 73/78 (with Annex I) enters into force</div>
+
+  <div class="reg-box">
+    <div class="reg-box-title">⚖ Regulatory References</div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex I, Reg.13</span><span class="reg-desc">Defines Special Areas and their operational discharge criteria</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex I, Reg.17</span><span class="reg-desc">Oil Record Book Part I — carriage, format, entry criteria</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex I, Reg.31</span><span class="reg-desc">Oil Discharge Monitoring and Control Systems (ODMCS)</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annex I, Reg.34</span><span class="reg-desc">Operational discharge criteria for cargo/ballast water from oil tankers</span></div>
+  </div>
+
+  <h3 class="section-head">🌊 MARPOL Annex I Special Areas (Current List — Corrected)</h3>
+  <ul class="notes-list">
+    <li>Mediterranean Sea area</li>
+    <li>Baltic Sea area</li>
+    <li>Black Sea area</li>
+    <li>Red Sea area</li>
+    <li>Gulfs area</li>
+    <li>Gulf of Aden area</li>
+    <li>Antarctic area</li>
+    <li>North West European waters</li>
+    <li>Oman area of the Arabian Sea</li>
+    <li><strong>Southern South African waters</strong> <em>(added — missing from original draft)</em></li>
+  </ul>
+
+  <h3 class="section-head">📜 Statutory Certification &amp; Record-Keeping</h3>
+  <ul class="notes-list">
+    <li><strong>IOPP Certificate:</strong> mandatory for oil tankers ≥150 gross tonnage and all other ships ≥400 gross tonnage. Supplement Form A (non-tankers) / Form B (tankers).</li>
+    <li><strong>Oil Record Book:</strong> retained onboard ≥3 years from the date of the last entry.</li>
+    <li><strong>ORB Part I (Machinery Space, all ships ≥400 GT, tankers ≥150 GT):</strong> Codes A–I covering bunkering, sludge disposal, bilge discharge, and filtering-equipment condition.</li>
+    <li><strong>ORB Part II (Cargo/Ballast, tankers ≥150 GT):</strong> Codes A–R covering loading, COW, ballasting, slop discharge, and ODMCS condition.</li>
+  </ul>
+
+  <h3 class="section-head">⚗ The Physics of Load on Top (LOT)</h3>
+  <div class="timeline-block">1. TANK WASHINGS → wash water routed to slop tank
+2. GRAVITY SEPARATION → oil floats, water settles
+3. DECANTING → clean bottom water discharged via ODMCS; oil residue retained
+4. CO-MINGLED LOADING → next cargo loaded on top of retained residue</div>
+
+  <h3 class="section-head">📏 Tanker Discharge Criteria — Regulation 34 (Corrected)</h3>
+  <ul class="notes-list">
+    <li>Outside a designated Special Area</li>
+    <li>More than 50 nautical miles from the nearest land</li>
+    <li>Vessel underway, en route, at ≥7 knots</li>
+    <li>Instantaneous rate of discharge ≤ 30 litres per nautical mile</li>
+    <li>Total oil discharged ≤ 1/30,000 of the total quantity of the particular cargo from which the residue formed</li>
+    <li>ODMCS and slop tank arrangement operational — <em>oil content and discharge rate are governed by these rate/quantity limits monitored by the ODMCS, not by a fixed ppm figure (that 15 ppm limit applies to machinery-space bilge discharge under Reg. 15, a separate regime)</em></li>
+  </ul>
+
+  <h3 class="section-head">🛢 Slop Tank Structural Capacity</h3>
+  <table class="revision-table">
+    <tr><th>Configuration</th><th>Minimum Slop Tank Capacity</th></tr>
+    <tr><td>Standard baseline</td><td>3% of total oil carrying capacity</td></tr>
+    <tr><td>Eductor-supply tank washing only</td><td>2%</td></tr>
+    <tr><td>Segregated Ballast Tanks (SBT)</td><td>2%</td></tr>
+    <tr><td>SBT + eductor-supply washing</td><td>1.5%</td></tr>
+    <tr><td>Combination carrier, smooth bulkheads</td><td>1%</td></tr>
+    <tr><td>Combination carrier, eductor-supply washing</td><td>0.8%</td></tr>
+  </table>
+  <p class="notes-body">All new oil tankers of 70,000 DWT and above must be fitted with at least two slop tanks. <em>(Per MARPOL Annex I slop tank design criteria and associated IMO guidelines — raw citation markers from the source draft removed.)</em></p>
+
+  <div class="ce-tip">
+    <strong>CE Oral Tip — Nair Sir:</strong> Never quote a fixed ppm figure for tanker cargo-washing discharge — Nair specifically tests for this confusion. State the rate (30 L/NM) and quantity (1/30,000) limits, and reserve 15 ppm strictly for machinery-space bilge water under Regulation 15.
+  </div>
+
+  <h3 class="section-head">🎯 Oral Q&amp;A</h3>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1: Explain the mandatory discharge parameters for an oil tanker discharging cargo tank washings under Regulation 34.</div><div class="qa-a">The vessel must be outside a designated Special Area, more than 50 NM from the nearest land, underway en route, with the instantaneous discharge rate not exceeding 30 L/NM, and the total oil discharged not exceeding 1/30,000 of the cargo quantity from which the residue formed, with an operational ODMCS and slop tank arrangement.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2: Under what code must a routine bilge water transfer and discharge be recorded in the Oil Record Book Part I?</div><div class="qa-a">Internal transfer of bilge water from the bilge wells to the holding tank is logged under Code (D); the subsequent processing and discharge via the 15 ppm oily water separator is logged separately, recording start/stop times, the processing tank, and confirmation that the filtering equipment was operational below the 15 ppm alarm threshold.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3: What are the slop tank capacity rules for a tanker fitted with Segregated Ballast Tanks (SBT)?</div><div class="qa-a">The baseline 3% requirement drops to 2% for SBT-fitted tankers, and further to 1.5% if the tank-washing system also relies on eductor water supply rather than cargo pumps.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Questions</div>
+    <div class="exam-q"><span class="marks-badge">5M</span> List the 10 designated Special Areas under MARPOL Annex I and identify the geographical boundaries of the Mediterranean Sea Special Area.</div>
+    <div class="exam-q"><span class="marks-badge">10M</span> Draw a flowchart of the Load on Top (LOT) process and explain the physics that allow gravity separation to prevent pollution.</div>
+    <div class="exam-q"><span class="marks-badge">15M</span> Analyze the regulatory and legal liabilities associated with shipboard record-keeping under MARPOL Annex I. Provide a scenario analyzing a discrepancy between physical sludge-tank soundings and ORB Part I entries, common PSC focus areas, and technical audit steps for automated data logs.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>The 4 U's (machinery bilge discharge):</strong> Underway · Under 15 ppm · Un-Special (outside Special Area) · Un-bypassed (no magic pipes).</li>
+      <li><strong>Tanker discharge (Reg. 34):</strong> ≥7 kn, &gt;50 NM, ≤30 L/NM, ≤1/30,000 of cargo — never "34 ppm."</li>
+      <li><strong>IOPP thresholds:</strong> tankers ≥150 GT, all others ≥400 GT.</li>
+      <li><strong>ORB retention:</strong> 3 years from last entry.</li>
+    </ul>
+  </div>
+
+  <h3 class="section-head">⚡ Quick Revision</h3>
+  <table class="revision-table">
+    <tr><th>Item</th><th>Key Fact</th></tr>
+    <tr><td>MARPOL 73/78 in force</td><td>2 October 1983</td></tr>
+    <tr><td>Special Areas (current count)</td><td>10 (incl. Southern South African waters, Oman area of the Arabian Sea)</td></tr>
+    <tr><td>IOPP threshold</td><td>Tankers ≥150 GT / others ≥400 GT</td></tr>
+    <tr><td>ORB retention</td><td>3 years from last entry</td></tr>
+    <tr><td>Machinery bilge limit</td><td>&lt;15 ppm (Reg. 15 — separate from tanker Reg. 34)</td></tr>
+    <tr><td>Tanker discharge rate limit</td><td>≤30 L/NM, ≤1/30,000 of cargo (Reg. 34 — no fixed ppm)</td></tr>
+    <tr><td>New tanker (≥70,000 DWT) slop tanks</td><td>Minimum 2 tanks</td></tr>
+  </table>
+
+  <div class="deep-dive" id="dd-topic-10">
+    <button class="deep-dive-toggle" onclick="toggleDD('dd-topic-10')">▶ Deep Dive — Full Reference Detail</button>
+    <div class="deep-dive-body" style="display:none">
+      <h4>Why 34 ppm was wrong</h4>
+      <p>MARPOL Annex I distinguishes two separate discharge regimes: machinery-space bilge water (Regulation 15, 15 ppm limit, applies to all ships) and tanker cargo-tank washings/oily mixtures from slop tanks (Regulation 34, rate- and quantity-based limits, applies to oil tankers). Conflating the two — quoting "34 ppm" — mixes a machinery-space concentration limit with a cargo-operations rate limit that does not use ppm at all in the regulation text.</p>
+    </div>
+  </div>
+
+  <h3 class="section-head">📚 References</h3>
+  <ul class="ref-list">
+    <li><a href="https://www.imo.org/en/ourwork/environment/pages/special-areas-marpol.aspx" target="_blank">IMO — Special Areas under MARPOL (official)</a></li>
+    <li><a href="https://www.law.cornell.edu/cfr/text/33/151.13" target="_blank">33 CFR 151.13 — Annex I discharge criteria reference</a></li>
+  </ul>
+
+  <div class="qb-link-box">
+    <strong>🔗 Related QB Questions:</strong>
+    <a href="../QB3.html">QB3 — MARPOL Annex I / PSC</a>
+  </div>
+
+  <div class="topic-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p2 · Topic 10 · Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="topic-version">Notes-p2 · T10 · v1.0</span>
+  </div>
+</div>
+
+</main><!-- /#notes-feed -->
+</div><!-- /.main-layout -->
+
+<!-- PAGE FOOTER -->
+<footer class="page-footer">
+  <p><strong>MIW Engineering Management Notes — Part 2</strong> · Pages 26–50 of 768</p>
+  <p style="margin-top:6px;">Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and updated by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.</p>
+  <p style="margin-top:6px;">Subscriber-only content. <a href="https://marineintelligenceweekly.com/SQ/">Subscribe — ₹899</a> for full access to all Engineering Management Notes parts.</p>
+  <p style="margin-top:8px;color:#94a3b8;font-size:11px;">Content is provided for examination preparation purposes only. Always verify regulatory citations against primary IMO instruments at <a href="https://www.imo.org" target="_blank" style="color:#0d9488;">www.imo.org</a>. Marine Intelligence Weekly accepts no liability for exam outcomes.</p>
+  <p style="margin-top:8px;">
+    <a href="https://marineintelligenceweekly.com/meoclass1/notes/">← Notes Index</a> &nbsp;|&nbsp;
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1 Hub</a> &nbsp;|&nbsp;
+    <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
+  </p>
+</footer>
+
+<script>
+// Deep-dive toggle
+function toggleDD(id){
+  const body=document.getElementById(id).querySelector('.deep-dive-body');
+  const btn=document.getElementById(id).querySelector('.deep-dive-toggle');
+  const open=body.style.display!=='none';
+  body.style.display=open?'none':'block';
+  btn.textContent=(open?'▶':'▼')+' Deep Dive — Full Reference Detail';
+}
+
+// TOC active highlight on scroll
+const tocLinks=document.querySelectorAll('.toc-link[href^="#"]');
+const topics=document.querySelectorAll('.topic-block[id]');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const id=e.target.id;
+      tocLinks.forEach(a=>{
+        a.classList.toggle('active',a.getAttribute('href')==='#'+id);
+      });
+    }
+  });
+},{threshold:0.2});
+topics.forEach(el=>obs.observe(el));
+
+// Content protection
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('selectstart',e=>e.preventDefault());
+</script>
+</body>
+</html>
