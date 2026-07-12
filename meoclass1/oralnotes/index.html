@@ -36,6 +36,23 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
 .page-header p{color:#94a3b8;font-size:14px;max-width:640px;margin:0 auto;}
 .header-meta{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px;}
 .meta-pill{background:rgba(255,255,255,.08);color:#cbd5e1;font-size:11px;padding:4px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.12);}
+.header-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:820px;margin:22px auto 0;text-align:left;}
+.header-info-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:14px 16px;}
+.header-info-title{color:#fff;font-size:12.5px;font-weight:800;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em;}
+.header-info-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px;}
+.header-info-list li{color:#cbd5e1;font-size:12px;line-height:1.5;padding-left:14px;position:relative;}
+.header-info-list li::before{content:"—";position:absolute;left:0;color:var(--teal);}
+.header-info-list li strong{color:#fff;}
+@media(max-width:700px){.header-info-grid{grid-template-columns:1fr;}}
+.series-float-nav{position:fixed;left:16px;bottom:20px;background:#fff;border:1px solid var(--grey-border);border-radius:10px;box-shadow:0 6px 18px rgba(0,0,0,.12);padding:8px;z-index:140;display:flex;flex-direction:column;gap:2px;max-width:190px;}
+.series-float-nav.collapsed .sfn-list{display:none;}
+.sfn-toggle{display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--navy);color:#fff;border:none;border-radius:6px;padding:6px 10px;font-size:11.5px;font-weight:700;cursor:pointer;}
+.sfn-list{display:flex;flex-direction:column;gap:1px;margin-top:6px;}
+.sfn-list a{color:var(--ink);text-decoration:none;font-size:11.5px;padding:6px 8px;border-radius:6px;}
+.sfn-list a:hover{background:var(--grey-bg);}
+.back-to-top{position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.2);z-index:150;opacity:0;pointer-events:none;transition:opacity .25s,transform .2s;}
+.back-to-top.show{opacity:1;pointer-events:auto;}
+.back-to-top:hover{background:var(--teal-dark);transform:translateY(-2px);}
 
 /* MAIN */
 .main{max-width:860px;margin:0 auto;padding:36px 24px 60px;}
@@ -104,17 +121,28 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
 /* FOOTER */
 .page-footer{background:var(--navy);color:#94a3b8;text-align:center;padding:20px;font-size:12px;line-height:1.8;margin-top:0;}
 .page-footer a{color:var(--teal);text-decoration:none;}
+
+.note-card.index-card{background:linear-gradient(135deg,var(--navy) 0%,#1e3a5f 100%);border-color:var(--navy);}
+.note-card.index-card .nc-part{color:#94a3b8;}
+.note-card.index-card .nc-title{color:#fff;}
+.note-card.index-card .nc-sub{color:#cbd5e1;}
+.note-card.index-card .nc-pages{color:#94a3b8;}
+.note-card.index-card .nc-topic{background:rgba(255,255,255,0.12);color:#fff;}
+.note-card.index-card .nc-btn{background:var(--orange);}
+.note-card.index-card .nc-btn:hover{background:#ea6a0c;}
+
 </style>
 </head>
 <body>
 
-<nav class="topbar">
+<nav class="topbar" id="top">
   <a class="topbar-brand" href="https://marineintelligenceweekly.com">
     <div class="logo-mark">MIW</div>
     <div><div class="brand-name">Marine Intelligence Weekly</div><div class="brand-sub">MEO Class 1 — Oral Notes</div></div>
   </a>
   <div class="topbar-nav">
     <a href="https://marineintelligenceweekly.com/meoclass1/">QB Series</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/examiner-index.html">Examiner Index</a>
     <a href="https://marineintelligenceweekly.com" class="hl">← Home</a>
   </div>
 </nav>
@@ -128,6 +156,27 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
     <span class="meta-pill">📄 200+ Pages</span>
     <span class="meta-pill">🕒 Updated July 2026</span>
     <span class="meta-pill">📍 Kochi MMD Focus</span>
+  </div>
+  <div class="header-info-grid">
+    <div class="header-info-box">
+      <div class="header-info-title">🆕 Recent Updates</div>
+      <ul class="header-info-list">
+        <li>Engineering Management Notes Parts 3–10 built, gated &amp; cross-linked (global topic numbering T11–T46)</li>
+        <li>Uday Sankar Book Index cross-reference added — 263 book topics matched against live notes, 28 coverage gaps flagged</li>
+        <li>WA3: Maritime Liens (3 chapters) added to the Written Question Notes section</li>
+        <li>Examiner Index moved to top navigation for direct access from every page</li>
+      </ul>
+    </div>
+    <div class="header-info-box">
+      <div class="header-info-title">📍 What's on This Page</div>
+      <ul class="header-info-list">
+        <li><strong>Current Topics</strong> — live regulatory &amp; class tracking</li>
+        <li><strong>Simon Sir Notes</strong> — Parts 1–8, plus a Master Index to jump straight to any topic</li>
+        <li><strong>MIW Engineering Management Notes</strong> — Parts 1–10, plus the Uday Book Index cross-reference</li>
+        <li><strong>Written Question Notes</strong> — WA1 (Hong Kong Convention), WA2 (GHG/Decarbonisation), WA3 (Maritime Liens)</li>
+        <li>Use the floating series nav (bottom-left) to jump between sections, or search above</li>
+      </ul>
+    </div>
   </div>
 </div>
 
@@ -152,7 +201,7 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
   <div class="no-search-results" id="indexNoResults">No topics match your search. Try a different term.</div>
 
   <!-- CURRENT TOPICS -->
-  <div class="series-block">
+  <div class="series-block" id="sec-current-topics">
     <div class="series-title">
       <h2>📡 Current Topics — Live Regulatory &amp; Class Tracking</h2>
       <span class="series-badge sb-live">Part 1 Live — Updated July 2026</span>
@@ -181,12 +230,28 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
   </div>
 
   <!-- SIMON SIR NOTES -->
-  <div class="series-block">
+  <div class="series-block" id="sec-simon-notes">
     <div class="series-title">
       <h2>🎯 Simon Sir — Oral Notes Series</h2>
       <span class="series-badge sb-live">Parts 1–8 Live — Series Complete</span>
     </div>
     <div class="notes-grid">
+
+      <a class="note-card index-card" href="notes-master-index.html" data-kw="master index cross reference simon sir notes QB question bank gap analysis coverage all parts jump straight to topic">
+        <div class="nc-header">
+          <span class="nc-part">📍 Start Here</span>
+          <span class="nc-status ncs-live">✅ Live</span>
+        </div>
+        <div class="nc-title">Simon Sir Notes — Master Index</div>
+        <div class="nc-sub">Every note topic across Parts 1–8 in one searchable A-Z list, cross-referenced to its matching QB question. Jump straight to any topic instead of opening each Part in sequence.</div>
+        <div class="nc-pages">📄 162 note topics · 87 linked to QB · 75 flagged gaps</div>
+        <div class="nc-topics">
+          <span class="nc-topic">All 8 Parts</span>
+          <span class="nc-topic">QB Linkage</span>
+          <span class="nc-topic">Gap Tracking</span>
+        </div>
+        <div class="nc-btn">Open Master Index</div>
+      </a>
 
       <a class="note-card available" href="simon-notes-p1.html" data-kw="UKMTO MSCHOA piracy IS Code intact stability CII carbon intensity indicator CF STCW Manila amendments hours of rest lifeboat testing cyber security GISIS maritime security MARPOL Annex VI IMO DCS data collection GHG strategy manning watchkeeping LSA code">
         <div class="nc-header">
@@ -340,12 +405,28 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
   </div>
 
   <!-- ENGINEERING MANAGEMENT NOTES (formerly "Uday Notes") -->
-  <div class="series-block">
+  <div class="series-block" id="sec-miw-notes">
     <div class="series-title">
       <h2>📘 MIW Engineering Management Notes — Updated to June 2026</h2>
       <span class="series-badge sb-live">Parts 1–10 Live</span>
     </div>
     <div class="notes-grid">
+
+      <a class="note-card index-card" href="uday-index-crossref.html" data-kw="uday sankar book index cross reference gap analysis all topics jump straight to topic 768 pages">
+        <div class="nc-header">
+          <span class="nc-part">📍 Start Here</span>
+          <span class="nc-status ncs-live">✅ Live</span>
+        </div>
+        <div class="nc-title">Uday Sankar Book Index — Cross-Reference</div>
+        <div class="nc-sub">The original 768-page source book's own A-Z topic index, matched to live MIW Notes topics. Jump straight to any topic instead of opening each Part in sequence — also shows exactly which book topics aren't built yet.</div>
+        <div class="nc-pages">📄 263 book topics · 53 matched &amp; linked · 28 flagged gaps</div>
+        <div class="nc-topics">
+          <span class="nc-topic">All 10 Parts</span>
+          <span class="nc-topic">Direct Topic Links</span>
+          <span class="nc-topic">Gap Tracking</span>
+        </div>
+        <div class="nc-btn">Open Book Index</div>
+      </a>
 
       <a class="note-card available" href="miw-notes-mgmt-p1.html" data-kw="IMO structure committees sub-committees IMO instruments convention lifecycle adoption ratification tacit acceptance engineering management Uday Sankar">
         <div class="nc-header">
@@ -525,9 +606,9 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
   </div>
 
   <!-- WRITTEN QUESTION NOTES SERIES -->
-  <div class="series-block">
+  <div class="series-block" id="sec-wa1">
     <div class="series-title">
-      <h2>✍️ Written Question Notes — WA1: HKC &amp; Ship Recycling</h2>
+      <h2>✍️ Written Question Notes — WA1: Hong Kong Convention &amp; Ship Recycling</h2>
       <span class="series-badge sb-live">Live</span>
     </div>
     <div class="notes-grid">
@@ -583,7 +664,7 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
     </div>
   </div>
 
-  <div class="series-block">
+  <div class="series-block" id="sec-wa2">
     <div class="series-title">
       <h2>✍️ Written Question Notes — WA2: GHG &amp; Decarbonisation</h2>
       <span class="series-badge sb-live">Live</span>
@@ -625,43 +706,59 @@ body::after{content:"MIW PRIVATE — Nixon Antony — Do Not Redistribute";posit
     </div>
   </div>
 
-  <!-- MASTER INDEX / CROSS-REFERENCE -->
-  <div class="series-block">
+  <div class="series-block" id="sec-wa3">
     <div class="series-title">
-      <h2>🗂️ Master Index — Notes × QB Cross-Reference</h2>
-      <span class="series-badge sb-live">New — Updated July 2026</span>
+      <h2>✍️ Written Question Notes — WA3: Maritime Liens</h2>
+      <span class="series-badge sb-live">Live</span>
     </div>
     <div class="notes-grid">
 
-      <a class="note-card available" href="notes-master-index.html" data-kw="master index cross reference simon sir notes QB question bank gap analysis coverage all parts examiner">
+      <a class="note-card available" href="WA3-LIEN1.html" data-kw="maritime lien in rem in personam property attachment admiralty jurisdiction arrest of ship">
         <div class="nc-header">
-          <span class="nc-part">Master Index</span>
+          <span class="nc-part">WA3-LIEN1</span>
           <span class="nc-status ncs-live">✅ Live</span>
         </div>
-        <div class="nc-title">Simon Sir Notes — Master Index</div>
-        <div class="nc-sub">Every note topic across Parts 1–8, cross-referenced to its matching QB question. Topics with no QB match yet are flagged as gaps, to be linked once the corresponding MIW Written/Engineering Management notes are built.</div>
-        <div class="nc-pages">📄 162 note topics · 87 linked to QB · 75 flagged gaps</div>
+        <div class="nc-title">Legal Foundations of Maritime Liens, In Rem Actions &amp; Property Attachment</div>
+        <div class="nc-sub">Maritime liens, in rem vs in personam actions, and the property-attachment mechanics behind a ship arrest.</div>
+        <div class="nc-pages">📄 15/10/8-mark model answers</div>
         <div class="nc-topics">
-          <span class="nc-topic">All 8 Parts</span>
-          <span class="nc-topic">QB Linkage</span>
-          <span class="nc-topic">Gap Tracking</span>
+          <span class="nc-topic">Maritime Lien</span>
+          <span class="nc-topic">In Rem</span>
+          <span class="nc-topic">Ship Arrest</span>
         </div>
-        <div class="nc-btn">Open Master Index</div>
+        <div class="nc-btn">Open Chapter</div>
       </a>
 
-      <a class="note-card available" href="/meoclass1/examiner-index.html" data-kw="examiner index Nair Simon Rajappan Srivastava Senthil Paul QB questions bundled by examiner panel">
+      <a class="note-card available" href="WA3-LIEN2.html" data-kw="1993 Maritime Liens and Mortgages Convention priority extinction ship financing mortgage">
         <div class="nc-header">
-          <span class="nc-part">Master Index</span>
+          <span class="nc-part">WA3-LIEN2</span>
           <span class="nc-status ncs-live">✅ Live</span>
         </div>
-        <div class="nc-title">Examiner Index — QB by Examiner</div>
-        <div class="nc-sub">Every QB question bundled by Kochi MMD examiner — Nair, Simon, Rajappan, Srivastava, Senthil, Paul. Revise for a specific panel member in one pass.</div>
-        <div class="nc-pages">📄 585 questions tagged across 6 examiners</div>
+        <div class="nc-title">The International Framework: The 1993 Maritime Liens and Mortgages Convention</div>
+        <div class="nc-sub">Structure, priority ranking, extinction, and ship-financing implications of the International Convention on Maritime Liens and Mortgages, 1993.</div>
+        <div class="nc-pages">📄 15/10/8-mark model answers</div>
         <div class="nc-topics">
-          <span class="nc-topic">By Examiner</span>
-          <span class="nc-topic">Confidence Tiers</span>
+          <span class="nc-topic">1993 Convention</span>
+          <span class="nc-topic">Priority Ranking</span>
+          <span class="nc-topic">Ship Mortgage</span>
         </div>
-        <div class="nc-btn">Open Examiner Index</div>
+        <div class="nc-btn">Open Chapter</div>
+      </a>
+
+      <a class="note-card available" href="WA3-LIEN3.html" data-kw="admiralty priority judicial sale proceeds distribution inverse salvage rule chief engineer contingency">
+        <div class="nc-header">
+          <span class="nc-part">WA3-LIEN3</span>
+          <span class="nc-status ncs-live">✅ Live</span>
+        </div>
+        <div class="nc-title">The Admiralty Priority Engine: Claims Settlement &amp; Shipboard Contingency Protocols</div>
+        <div class="nc-sub">How judicial sale proceeds are distributed under the 1993 Convention, the inverse salvage rule, and Chief Engineer contingency protocols.</div>
+        <div class="nc-pages">📄 15/10/8-mark model answers</div>
+        <div class="nc-topics">
+          <span class="nc-topic">Judicial Sale</span>
+          <span class="nc-topic">Inverse Salvage</span>
+          <span class="nc-topic">CE Protocols</span>
+        </div>
+        <div class="nc-btn">Open Chapter</div>
       </a>
 
     </div>
@@ -707,6 +804,27 @@ function notesIndexSearch(q){
 }
 document.addEventListener('contextmenu',e=>e.preventDefault());
 document.addEventListener('copy',e=>e.preventDefault());
+</script>
+<div class="series-float-nav" id="seriesFloatNav">
+  <button class="sfn-toggle" onclick="document.getElementById('seriesFloatNav').classList.toggle('collapsed')">
+    <span>🧭 Jump to Series</span><span id="sfnCaret">▾</span>
+  </button>
+  <div class="sfn-list">
+    <a href="#sec-current-topics">📡 Current Topics</a>
+    <a href="#sec-simon-notes">🎯 Simon Sir Notes</a>
+    <a href="#sec-miw-notes">📘 MIW Engineering Mgmt</a>
+    <a href="#sec-wa1">✍️ Written — WA1 (Hong Kong Convention)</a>
+    <a href="#sec-wa2">✍️ Written — WA2 (GHG)</a>
+    <a href="#sec-wa3">✍️ Written — WA3 (Maritime Liens)</a>
+  </div>
+</div>
+
+<a href="#top" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
+
+<script>
+window.addEventListener('scroll', function(){
+  document.getElementById('backToTop').classList.toggle('show', window.scrollY > 400);
+});
 </script>
 </body>
 </html>
