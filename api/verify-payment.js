@@ -142,6 +142,23 @@ function buildEmail(tier, buyerName, buyerEmail, password) {
     <div style="text-align:center;margin:1.5rem 0">
       <a href="${QB_LOGIN_URL}" style="background:#0d9488;color:#fff;text-decoration:none;padding:13px 32px;border-radius:8px;font-weight:600;font-size:15px;display:inline-block">Access Question Bank →</a>
     </div>
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:1.25rem;margin:1.5rem 0">
+      <p style="font-size:14px;font-weight:600;color:#0f172a;margin:0 0 10px">🧭 What's inside &amp; how to find anything fast</p>
+      <p style="font-size:13px;color:#334155;line-height:1.7;margin:0 0 10px">
+        Your access covers 4 things: the <strong>Question Bank</strong> (417+ real oral questions), <strong>Simon Sir Notes</strong> (8 parts), <strong>MIW Engineering Management Notes</strong> (10 parts, source: Uday Sankar S., Anglo-Eastern), and <strong>Written Answer notes</strong> (HKC, GHG, Maritime Liens).
+      </p>
+      <p style="font-size:13px;color:#334155;line-height:1.7;margin:0 0 6px">
+        Don't open files one by one — start here instead:
+      </p>
+      <table style="width:100%;font-size:13px;border-collapse:collapse;margin-top:6px">
+        <tr><td style="padding:4px 0;color:#64748b;width:130px;vertical-align:top">By examiner</td>
+            <td><a href="https://marineintelligenceweekly.com/meoclass1/examiner-index.html" style="color:#0d9488">Examiner Index</a> — every question bundled under Nair, Simon, Rajappan, Srivastava, Senthil or Paul</td></tr>
+        <tr><td style="padding:4px 0;color:#64748b;vertical-align:top">By topic keyword</td>
+            <td><a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/notes-master-index.html" style="color:#0d9488">Simon Notes Master Index</a> and <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/uday-index-crossref.html" style="color:#0d9488">Engineering Mgmt Book Index</a> — search any keyword, jump straight to the exact note</td></tr>
+        <tr><td style="padding:4px 0;color:#64748b;vertical-align:top">Everything at once</td>
+            <td><a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/" style="color:#0d9488">Notes Home</a> — every series, searchable from one page</td></tr>
+      </table>
+    </div>
     <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:1.25rem;margin:1.5rem 0">
       <p style="font-size:14px;font-weight:600;color:#14532d;margin:0 0 8px">📱 Join the MEO Class 1 WhatsApp Group</p>
       <p style="font-size:13px;color:#166534;margin:0 0 12px;line-height:1.6">Get real oral exam questions, weekly updates, and peer support from fellow candidates.</p>
