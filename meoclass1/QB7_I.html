@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QB7_I — Latest Onboard Technology, Alternative Fuels & Decarbonisation | MEO Class 1 Question Bank | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink)}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 20px;display:flex;align-items:center;gap:10px}
+.topbar b{color:var(--teal-dark)}.topbar a{color:var(--grey-text);text-decoration:none;font-size:13px;margin-left:14px}
+.page-header{background:var(--navy);color:#fff;padding:22px 20px}
+.qb-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;letter-spacing:.5px;padding:3px 9px;border-radius:4px;margin-bottom:8px}
+.page-header h1{margin:4px 0;font-size:22px}.page-header p{color:#cbd5e1;font-size:13px;margin:4px 0}
+.header-meta{display:flex;gap:16px;font-size:12px;color:#94a3b8;margin-top:8px;flex-wrap:wrap}
+.controls-bar{position:sticky;top:41px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);padding:8px 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#search-input{flex:1;min-width:160px;padding:6px 10px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;color:var(--grey-text);font-size:12px;padding:5px 10px;border-radius:14px;cursor:pointer}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+#q-count-label{font-size:12px;color:var(--grey-text)}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;padding:20px;max-width:1100px;margin:0 auto}
+.sidebar{position:sticky;top:95px;align-self:start;font-size:12px}
+.sidebar a{display:block;color:var(--grey-text);text-decoration:none;padding:4px 8px;border-radius:4px;margin-bottom:2px}
+.sidebar a.active{background:var(--teal-light);color:var(--teal-dark);font-weight:600}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:18px 0 8px}
+.section-head h2{font-size:15px;margin:0}.sec-count{font-size:11px;color:var(--grey-text);background:var(--grey-bg);padding:2px 8px;border-radius:10px}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;margin-bottom:10px;overflow:hidden}
+.q-header{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;cursor:pointer}
+.q-header:hover{background:var(--grey-bg)}
+.q-num-badge{background:var(--teal);color:#fff;font-size:12px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.q-text-wrap{flex:1;min-width:0}.q-text{font-size:14px;font-weight:600}
+.q-tags{margin-top:5px}.q-tag{display:inline-block;font-size:10px;background:var(--teal-light);color:var(--teal-dark);padding:2px 7px;border-radius:8px;margin-right:5px}
+.q-chevron{width:18px;flex-shrink:0;transition:transform .2s}
+.q-card.open .q-chevron{transform:rotate(180deg)}
+.q-answer{display:none;padding:0 14px 14px}.q-card.open .q-answer{display:block}
+.answer-body{font-family:Georgia,serif;font-size:14.5px;line-height:1.6}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--teal-dark);margin:14px 0 6px;font-family:'Segoe UI',sans-serif}
+.answer-body ul,.answer-body ol{margin:6px 0;padding-left:20px}
+.formula{background:var(--grey-bg);font-family:monospace;padding:8px 10px;border-radius:6px;font-size:13px}
+.verify-note{background:#fef2f2;border-left:3px solid #dc2626;padding:8px 10px;border-radius:0 6px 6px 0;margin:10px 0;font-size:12.5px;color:#7f1d1d}
+.reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:12px 14px;margin-top:14px}
+.reg-box-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:8px}
+.reg-item{display:flex;gap:10px;font-size:12.5px;padding:3px 0;border-top:1px solid #1e293b}
+.reg-item:first-of-type{border-top:none}
+.reg-code{color:var(--orange);font-family:monospace;min-width:150px;word-break:break-word}
+.reg-desc{color:#cbd5e1;min-width:0}
+.ce-tip{background:var(--orange-light);border-left:3px solid var(--orange);padding:10px 12px;border-radius:0 6px 6px 0;margin-top:12px;font-size:13px}
+details.dd{margin-top:10px;border:1px solid var(--grey-border);border-radius:6px;padding:6px 10px}
+details.dd summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--teal-dark)}
+details.dd p,details.dd div{font-size:13px;margin:6px 0}
+.q-footer{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;border-top:1px solid var(--grey-border);padding-top:8px;margin-top:10px}
+.correction-link{font-size:11px;color:var(--grey-text);min-width:0;word-break:break-all}
+.correction-link a{color:var(--teal-dark)}
+.q-version{font-size:11px;color:var(--grey-text);flex-shrink:0}
+.page-footer{max-width:1100px;margin:20px auto;padding:16px 20px;border-top:1px solid var(--grey-border);font-size:12px;color:var(--grey-text)}
+@media(max-width:700px){.main-layout{grid-template-columns:1fr}.sidebar{display:none}}
+
+body{-webkit-user-select:none;user-select:none}
+</style>
+</head><body oncontextmenu="return false"><script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace('/SQ/pay.html');}</script><div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.04;">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wm" x="0" y="0" width="300" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+        <text x="10" y="60" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">marineintelligenceweekly.com</text>
+        <text x="10" y="120" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wm)"/>
+  </svg>
+</div>
+<div class="topbar"><b>⚓ MIW</b> Marine Intelligence Weekly
+<a href="/">Home</a><a href="/meoclass1/">MEO Class 1</a><a href="mailto:contactus@marineintelligenceweekly.com">Contact</a></div>
+<div class="page-header">
+  <span class="qb-badge">QB7_I</span>
+  <h1>QB7_I — Latest Onboard Technology, Alternative Fuels &amp; Decarbonisation</h1>
+  <p>MEO Class 1 Oral Exam Question Bank — Kochi MMD-focused, verified &amp; approved</p>
+  <div class="header-meta"><span>9 Questions</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span><span>v1.1</span></div>
+</div>
+<div class="controls-bar">
+  <input id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button><button class="filter-btn" onclick="filterTag('ghg',this)">Ghg</button><button class="filter-btn" onclick="filterTag('machinery',this)">Machinery</button>
+  <span id="q-count-label">Showing 9 of 9</span>
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <div style="font-weight:700;font-size:11px;text-transform:uppercase;color:#64748b;margin-bottom:6px">Contents</div>
+    <a class="toc-link" href="#q1">1. What is the present technology used onboar…</a>
+    <a class="toc-link" href="#q2">2. What is the overview of the evolution of t…</a>
+    <a class="toc-link" href="#q3">3. Compare methane slip control between the M…</a>
+    <a class="toc-link" href="#q4">4. What safety systems are unique to ammonia-…</a>
+    <a class="toc-link" href="#q5">5. How does the FuelEU Maritime GHG intensity…</a>
+    <a class="toc-link" href="#q6">6. What is the role of High-Pressure Exhaust…</a>
+    <a class="toc-link" href="#q7">7. What are Wind-Assisted Propulsion Systems…</a>
+    <a class="toc-link" href="#q8">8. What is Onboard Carbon Capture (OCC) techn…</a>
+    <a class="toc-link" href="#q9">9. What is shore power (cold ironing) and how…</a>
+    <div style="border-top:1px solid #e2e8f0;margin:10px 0"></div>
+    <div style="font-size:11px;color:#64748b">More QB files at <a href="/meoclass1/" style="color:#0d9488">/meoclass1/</a></div>
+  </div>
+  <div id="q-feed">
+    <div class="section-head"><h2>🌍 QB7_I — Latest Onboard Technology, Alternative Fuels &amp; Decarbonisation</h2><span class="sec-count">9 questions</span></div>
+
+<div class="q-card" id="q1" data-kw="methane slip MOC methane oxidation catalyst Pd-Pt HP-EGR VVT Miller cycling sulfur poisoning" data-tags="ghg machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is the present technology used onboard to reduce methane slip?</div>
+      <div class="q-tags"><span class="q-tag">GHG</span><span class="q-tag">Machinery</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Present shipboard technology tackles methane slip via a two-pronged strategy: <strong>in-cylinder combustion optimisation</strong> and <strong>exhaust gas aftertreatment</strong>. Low-pressure Otto-cycle engines use Variable Valve Timing (VVT)/Miller cycling, micro-pilot injection, and High-Pressure EGR to minimise unburnt gas trapped in cylinder crevices. Exhaust is then routed through a <strong>Methane Oxidation Catalyst (MOC)</strong> using a Palladium-Platinum (Pd-Pt) substrate to oxidise residual CH4 into CO2 and H2O. Real-world conversion is highly load-dependent — near-100% at low load, dropping to 50-60% at high load — not a flat headline figure.</p>
+      <h4>60-Second Answer</h4>
+      <p>Methane slip is governed primarily by combustion cycle: high-pressure direct injection engines (e.g. MAN ME-GI) have inherently negligible slip (0.2-0.4 g/kWh) because combustion follows the Diesel cycle, avoiding pre-ignition. Low-pressure Otto-cycle systems (4-stroke dual-fuel, and formerly MAN's ME-GA) suffer from crevice trapping and flame quenching, giving baseline slip of 2.0-3.0 g/kWh unmitigated.<br><br>Mitigation combines in-cylinder modification — VVT/Miller cycling and precise micro-pilot fuel injection to ensure complete flame propagation — with High-Pressure EGR, which raises the exhaust thermal baseline and suppresses knock. The resulting elevated exhaust temperature supports the downstream Methane Oxidation Catalyst, which uses a Pd-Pt noble-metal catalyst to crack the C-H bond of unburnt methane, typically becoming active in the 300-500°C range.</p>
+      <h4>In-Cylinder Thermodynamic Modifications</h4>
+<p>The root cause of methane slip in low-pressure dual-fuel (LPDF) engines operating on the Otto cycle is the trapping of the air-gas mixture within cylinder crevices (piston ring land, indicator valve ports, cylinder head recesses) where the flame cannot propagate due to localised wall quenching.</p>
+<ul>
+<li><strong>Variable Valve Timing (VVT) &amp; Miller Cycling:</strong> Early closing of intake valves precisely controls in-cylinder charge temperature and pressure, preventing unburnt gas from short-circuiting into the exhaust manifold during scavenging.</li>
+<li><strong>Micro-Pilot Fuel Injection:</strong> Common-rail electronic injectors deliver multi-stage pilot injections of MGO (~0.5-1% of total energy input), creating multiple ignition nuclei for stable flame propagation across lean air-fuel mixtures.</li>
+<li><strong>High-Pressure EGR:</strong> Routes cooled, filtered exhaust gas back into the charge air receiver, replacing excess oxygen with triatomic CO2/H2O molecules that raise combustion and exhaust temperature.</li>
+</ul>
+<h4>Post-Combustion Aftertreatment: Methane Oxidation Catalyst (MOC)</h4>
+<p>Because methane is a highly stable symmetrical molecule with a C-H bond dissociation energy of approximately <strong>439 kJ/mol</strong>, standard oxidation catalysts are ineffective at low temperature. Dedicated MOC units use a honeycomb washcoat impregnated with Palladium (Pd) and Platinum (Pt) active sites on an Alumina or Zirconia support, typically becoming active in the <strong>300-500°C</strong> range.</p>
+<p class="formula"><strong>CH4 + 2O2 --Pd-Pt catalyst--> CO2 + 2H2O</strong></p>
+<div class="verify-note"><strong>Correction (verified):</strong> Cite this named, sourced study in the oral exam: Lehtoranta et al. (2021), <em>Journal of Marine Science and Engineering</em> 9(2):111 (VTT Technical Research Centre of Finland) — MOC decreases methane emission by <strong>70-80% at 550°C exhaust temperature</strong>, with efficiency declining over time due to sulfur poisoning, recoverable via daily regeneration. This is the authoritative peer-reviewed figure — prefer it over a vague fleet-average hedge or the unsupported "98%" figure. Separately, actual marine exhaust field testing shows conversion is also load-dependent (near-100% at low load, 50-60% at high load).</div>
+<h4>Thermal Regeneration &amp; Sulfur Poisoning</h4>
+<p>Palladium-based MOCs are highly sensitive to <strong>sulfur poisoning</strong> — SOx from cylinder lubricating oil combustion binds to active Pd sites forming Palladium Sulfate (PdSO4), destroying catalytic activity. Thermal regeneration above 500°C desorbs sulfates, but exceeding ~550°C risks <strong>thermal sintering</strong> — permanent coalescing of the noble-metal nanoparticles, destroying active surface area.</p>
+      <h4>System Design Overview</h4><table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0"><tr><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Feature / Metric</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">HPDF (2-Stroke, e.g. ME-GI)</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">LPDF (4-Stroke/Otto-Cycle)</th></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Combustion Principle</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Diesel Cycle</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Otto Cycle</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Inherent Methane Slip</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">0.2 – 0.4 g/kWh</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">2.0 – 3.0 g/kWh unmitigated</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Primary Abatement Tech</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Not required for slip</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">VVT/Miller cycling, HP-EGR, MOC</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">MOC Integration Target</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Not applicable</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Increasingly required for FuelEU compliance</td></tr></table>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg 13</span><span class="reg-desc">NOx Tier III limits — HP-EGR and combustion tuning support compliance in ECAs</span></div><div class="reg-item"><span class="reg-code">FuelEU Maritime (EU) 2023/1805</span><span class="reg-desc">Well-to-Wake GHG intensity — counts methane slip explicitly against compliance</span></div><div class="reg-item"><span class="reg-code">IGF Code (IMO Res MSC.391(95))</span><span class="reg-desc">Safety standards for low-flashpoint gas fuel systems</span></div><div class="reg-item"><span class="reg-code">Lehtoranta et al. 2021, JMSE 9(2):111 (VTT)</span><span class="reg-desc">Peer-reviewed MOC performance study — 70-80% CH4 reduction at 550°C, cite by name in oral</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Kochi MMD examiners (Simon especially) probe whether you understand MOC performance is load-dependent, not a fixed percentage. Quote the load-dependent range and explain the sulfur-poisoning/sintering trade-off — this shows practical operational awareness beyond a memorised headline number.</div>
+    <details class="dd"><summary>⚠️ Technical Risk Warning: Sulfur Poisoning &amp; Sintering Dilemma</summary><p>As a Chief Engineer, you must know that <strong>Palladium-based MOCs are highly sensitive to sulfur poisoning</strong> even on low-sulfur LNG, because lubricating oil combustion still releases SOx. Thermal regeneration above 550°C risks permanently sintering the noble-metal catalyst, destroying its active surface area. Strict monitoring of catalyst differential pressure and temperature is essential.</p></details>
+    <details class="dd"><summary>Deep-Dive: Chief Engineer Relevance</summary><p>A MOC-equipped vessel changes drydock planning (catalyst replacement is a scheduled, costed item) and daily watchkeeping (catalyst differential pressure and bed temperature trending). Since MOC efficiency is load-dependent, the CE must understand that steady high-load passage will show worse instantaneous methane conversion than slow-steaming — this affects how FuelEU/CII compliance data is interpreted, not just engine performance.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p><strong>Q:</strong> "Is the 98% methane abatement figure commonly quoted for MOC systems accurate?"<br><strong>A:</strong> No, Sir. The authoritative peer-reviewed reference is Lehtoranta et al. (2021, VTT/JMSE), which found MOC decreases methane emission by 70-80% at 550°C exhaust temperature, declining over time from sulfur poisoning and recoverable via daily regeneration. Actual marine exhaust testing also shows conversion is load-dependent — near-100% at low load, 50-60% at high load. A flat 98% figure is not supported by published data.</p><p><strong>Q:</strong> "Can a Palladium MOC be used indefinitely without maintenance?"<br><strong>A:</strong> No, Sir. Palladium sites are progressively poisoned by SOx from cylinder lubricating oil, requiring periodic thermal regeneration above 500°C. However, exceeding approximately 550°C risks permanently sintering the catalyst, so regeneration must be tightly controlled.</p></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_I, Q1, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7_I, Q1, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB7_I · Q1 · v1.1</span>
+  </div>
+</div>
+
+<div class="q-card" id="q2" data-kw="ME-GI ME-GA ME-LGIM ME-LGIA MAN Energy Solutions discontinued dual-fuel ammonia methanol LNG" data-tags="ghg machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is the overview of the evolution of the MAN B&amp;W ME-GI and ME-GA engine families to the present day, and what is the next prototype under consideration?</div>
+      <div class="q-tags"><span class="q-tag">GHG</span><span class="q-tag">Machinery</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">MAN B&amp;W's dual-fuel lineage began with the <strong>ME-GI</strong> (high-pressure, ~300 bar, Diesel-cycle LNG injection — negligible methane slip). To cut shipyard CAPEX, MAN introduced the <strong>ME-GA</strong> (low-pressure, ~15-16 bar, Otto-cycle) in 2021 — but <strong>MAN discontinued the ME-GA in November 2024</strong>, citing incoming IMO methane-slip regulation (expected 2027) that would have required costly redesign. MAN ES now offers only the <strong>ME-GI</strong> for LNG. Parallel liquid-fuel variants — <strong>ME-LGIP</strong> (LPG) and <strong>ME-LGIM</strong> (methanol, now the dominant container-newbuild choice) — remain in production. The current next-generation prototype under scale-up is the <strong>ME-LGIA</strong> (liquid ammonia), which passed Type Approval Tests in mid-2024.</p>
+      <h4>60-Second Answer</h4>
+      <p>The <strong>ME-GI</strong> uses late-cycle direct injection of LNG at ~300 bar near TDC, following the Diesel cycle — this avoids knock and gives ultra-low methane slip (0.2-0.4 g/kWh), but requires an expensive high-pressure Fuel Gas Supply System. To lower the CAPEX barrier for LNG carriers, MAN launched the <strong>ME-GA</strong> in 2021, injecting gas at low pressure (~15-16 bar) on the Otto cycle, relying on High-Pressure EGR to control knock and NOx. Over 260 ME-GA engines were ordered, with 46 already in service.<br><br>However, <strong>MAN Energy Solutions discontinued the ME-GA engine line in November 2024</strong> — just three years after launch — after concluding that upcoming IMO methane-slip regulations (expected to enter force around 2027), combined with EU FuelEU Maritime (2025) and EU ETS methane pricing (2026), would require significant technical redesign investment that was not commercially justified. MAN ES now offers only the high-pressure ME-GI for new LNG dual-fuel orders; existing in-service ME-GA units continue operating. In parallel, MAN adapted the ME platform for liquid alternative fuels: <strong>ME-LGIP</strong> (LPG, ~50-60 bar) and <strong>ME-LGIM</strong> (methanol, ~80 bar via Fuel Booster Injection Valves), the latter now the leading choice for container newbuilds including Maersk's methanol-fuelled fleet. The current frontier prototype is the <strong>ME-LGIA</strong> (ammonia), which completed Type Approval Tests in mid-2024 and is undergoing multi-cylinder scale-up and field verification, with the central technical challenge being nitrous oxide (N2O) slip from incomplete ammonia combustion.</p>
+      <h4>ME-GI — High-Pressure Diesel-Cycle LNG (established, still offered)</h4>
+<p>Late-cycle direct injection of LNG at approximately <strong>300 bar</strong> near TDC. Because combustion follows the Diesel cycle, it avoids pre-ignition/knock and achieves ultra-low methane slip (<strong>0.2-0.4 g/kWh</strong>), at the cost of an expensive high-pressure Fuel Gas Supply System.</p>
+<h4>ME-GA — Low-Pressure Otto-Cycle LNG (DISCONTINUED November 2024)</h4>
+<div class="verify-note"><strong>Critical correction — verify before oral:</strong> MAN Energy Solutions <strong>discontinued the ME-GA (G70ME-C10.5-GA) engine line in November 2024</strong>, just three years after its 2021 launch. MAN ES stated the decision was driven by upcoming IMO methane-slip regulations (expected to enter force around 2027) that would have required significant technical redesign investment. Over 260 ME-GA units were ordered with 46 already in service on LNG carriers — these continue operating, but MAN ES no longer offers the engine for new orders, and now provides only the high-pressure ME-GI for LNG dual-fuel newbuilds. This is a high-value trap fact for Kochi MMD examiners testing whether candidates are tracking current industry developments rather than reciting outdated marketing material.</div>
+<p><strong>Oral-exam nuance:</strong> As recently as January 2024, MAN publicly announced continued ME-GA orders (NYK, 8 engines) featuring its proprietary <strong>EGRBP (Exhaust Gas Recirculation ByPass)</strong> technology, confirming MAN was still actively improving the platform right up to the abrupt commercial withdrawal ten months later. This reinforces that the discontinuation was a regulatory-cost decision, not a technology failure — a useful distinction to draw if an examiner probes why a seemingly healthy product line was pulled.</p>
+<p>While offered, the ME-GA admitted gas at low pressure (~15-16 bar) into the scavenge air stream, following the Otto cycle. This simplified the Fuel Gas Supply System dramatically but introduced knock/pre-ignition vulnerability, mitigated with mandatory <strong>High-Pressure EGR</strong>, which reduced methane slip by a reported 30-50% versus early Otto-cycle designs without EGR.</p>
+<h4>Expansion into Liquid Alternative Fuels — ME-LGIP &amp; ME-LGIM</h4>
+<ul>
+<li><strong>ME-LGIP (LPG):</strong> Developed for LPG carriers, injecting liquid petroleum gas at approximately 50-60 bar, using the cargo itself as fuel.</li>
+<li><strong>ME-LGIM (Methanol):</strong> Injects liquid methanol at ~80 bar via dedicated Fuel Booster Injection Valves (FBIV). Because methanol is liquid at ambient temperature, it avoids cryogenic storage complexity — this is why it has become the dominant alternative-fuel standard for container newbuilds, including Maersk A/S's methanol dual-fuel fleet.</li>
+</ul>
+<h4>The Next Prototype — ME-LGIA (Ammonia)</h4>
+<p>The <strong>ME-LGIA</strong> is MAN's zero-carbon frontier engine, using high-pressure liquid direct injection (<strong>600-700 bar</strong>) of ammonia late in the compression stroke, combined with a pilot fuel fraction (~10-15% energy share) because ammonia has a high auto-ignition temperature (~651°C) and narrow flammability limits. It completed <strong>Type Approval Tests in mid-2024</strong> and is undergoing multi-cylinder scale-up and field verification through 2025/2026.</p>
+<div class="verify-note"><strong>Note:</strong> ME-LGIA remains a prototype under scale-up, not yet in commercial fleet service — do not state it as "in service" in the oral exam.</div>
+<p><strong>The N2O Slip Trap:</strong> Incomplete or low-temperature ammonia combustion yields nitrous oxide (N2O), with a global warming potential roughly <strong>265-298 times</strong> that of CO2. Uncontrolled N2O slip can fully negate ammonia's carbon-free advantage, requiring dedicated De-N2O SCR catalyst systems.</p>
+      <h4>Operational Distinction Matrix</h4><table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0"><tr><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Metric</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">ME-GI (Diesel Cycle)</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">ME-GA (Otto Cycle — DISCONTINUED)</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">ME-LGIM (Methanol)</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">ME-LGIA (Ammonia, prototype)</th></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Fuel Supply Pressure</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">~300 bar</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">15–16 bar</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">~80 bar (liquid)</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">600–700 bar (liquid)</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Methane/Emission Slip</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">0.2–0.4 g/kWh</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">2.0–3.0 g/kWh (mitigated w/ HP-EGR)</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Negligible (methanol)</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">N2O slip risk, not methane</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Current Status (2026)</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Sole LNG option offered</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Discontinued Nov 2024; legacy fleet only</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Dominant container newbuild choice</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Prototype, TAT passed mid-2024, scale-up ongoing</td></tr></table>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg 13</span><span class="reg-desc">Tier III NOx limits in ECAs — governs both ME-GI and ME-GA operation</span></div><div class="reg-item"><span class="reg-code">FuelEU Maritime (EU) 2023/1805</span><span class="reg-desc">Well-to-Wake GHG intensity — a factor in MAN's decision to discontinue ME-GA</span></div><div class="reg-item"><span class="reg-code">IGF Code (IMO Res MSC.391(95))</span><span class="reg-desc">Safety standards for low-flashpoint fuel systems, applicable to all ME dual-fuel variants</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> This is the single highest-value trap topic in this file. Examiners increasingly test whether candidates track live industry news, not just textbook engine families. State clearly: ME-GA was discontinued in November 2024; ME-GI remains MAN's only two-stroke LNG offering; ME-LGIM (methanol) is the current dominant alternative-fuel choice for container tonnage; ME-LGIA (ammonia) is a prototype, not yet commercial.</div>
+    <details class="dd"><summary>⚠️ Technical Risk Warning: The N2O Green Potential Trap of Ammonia Prototypes</summary><p>As a Class 1 Chief Engineer, you must look past the "zero-carbon" marketing of the ME-LGIA prototype. While ammonia combustion produces zero CO2, incomplete or poorly tuned combustion produces <strong>Nitrous Oxide (N2O)</strong>, with a GWP roughly <strong>265-298 times</strong> greater than CO2. Even minor N2O slip can severely damage a vessel's compliance rating under FuelEU Maritime and EU ETS. Dedicated De-N2O SCR catalyst systems are required.</p></details>
+    <details class="dd"><summary>Deep-Dive: Chief Engineer Relevance</summary><p>When asked about "the latest dual-fuel engine technology," a CE who confidently cites the ME-GA as a current option without noting its November 2024 discontinuation will read as out of date. On drydock/newbuild planning, this directly affects fuel-flexibility decisions: ME-GI remains the only MAN two-stroke LNG option, methanol (ME-LGIM) is the practical near-term alternative fuel for container tonnage, and ammonia (ME-LGIA) is not yet a commercial option.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p><strong>Q:</strong> "Why did MAN develop the ME-GA when the ME-GI already had lower methane slip?"<br><strong>A:</strong> Sir, ME-GA was developed to cut shipyard CAPEX — the ME-GI's 300 bar Fuel Gas Supply System is expensive, while the ME-GA's low-pressure system (15-16 bar) was far cheaper to install on LNG carriers, despite higher methane slip requiring HP-EGR mitigation.</p><p><strong>Q:</strong> "Is the ME-GA engine still available for new orders today?"<br><strong>A:</strong> No, Sir. MAN Energy Solutions discontinued the ME-GA line in November 2024, citing the cost of redesigning it to meet upcoming IMO methane-slip regulations. MAN ES now offers only the ME-GI for new LNG dual-fuel two-stroke orders; existing ME-GA units in service continue to operate.</p></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_I, Q2, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7_I, Q2, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB7_I · Q2 · v1.1</span>
+  </div>
+</div>
+
+<div class="q-card" id="q3" data-kw="ME-GA four-stroke methane slip comparison uniflow scavenging iCER WinGD X-DF EGR" data-tags="ghg machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Compare methane slip control between the MAN ME-GA (Otto-cycle, two-stroke) engine and low-pressure Otto-cycle 4-stroke dual-fuel engines.</div>
+      <div class="q-tags"><span class="q-tag">GHG</span><span class="q-tag">Machinery</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">The (now-discontinued, legacy-fleet) two-stroke <strong>ME-GA</strong> used uniflow scavenging with gas admission mid-stroke and relied on <strong>High-Pressure EGR</strong> to suppress knock and reduce methane slip. Four-stroke low-pressure Otto engines (e.g. Wärtsilä, WinGD X-DF) suffer slip mainly from <strong>piston ring crevice trapping</strong> and <strong>valve-overlap blow-through</strong>, mitigated with <strong>Variable Valve Timing (VVT)/Miller cycling</strong>. WinGD's second-generation X-DF2.0 uses <strong>iCER</strong> (low-pressure cooled EGR) to cut slip by up to 50%, reaching 1.0-1.2 g/kWh versus 2.0-2.5 g/kWh on first-generation units.</p>
+      <h4>60-Second Answer</h4>
+      <p>Methane slip control depends heavily on combustion chamber geometry and scavenging design. The two-stroke ME-GA admitted gas via valves in the cylinder liner wall at 15-16 bar early in the compression stroke, using a uniflow-scavenged layout with a single overhead exhaust valve. This kept the gas-air mixture concentrated centrally, away from cold liner walls. It controlled knock and slip primarily via High-Pressure EGR.<br><br>Four-stroke low-pressure Otto-cycle engines (Wärtsilä 46DF/31DF, WinGD X-DF) inject gas into the intake port at lower pressure (4-8 bar), making the charge susceptible to escaping during valve overlap. Slip also originates from piston ring crevice volumes where flame quenches against cold cylinder walls. Mitigation relies on VVT/Miller cycling to shorten intake duration and lower compression temperature. WinGD's X-DF2.0 platform introduced <strong>iCER</strong> (Intelligent Control by Exhaust Recycling — cooled low-pressure EGR), cutting fuel consumption and methane slip by up to 50%, bringing slip down to approximately 1.0-1.2 g/kWh versus 2.0-2.5 g/kWh on first-generation units — a very similar approach and outcome to what MAN achieved on the ME-GA using high-pressure EGR.</p>
+      <div class="verify-note"><strong>Context correction:</strong> MAN discontinued the ME-GA engine line in November 2024. This comparison remains valid for understanding the engineering principles and for the existing ME-GA fleet (46+ units in service), but the ME-GA should not be described as a current production option — see Q2.</div>
+<h4>Gas Admission Location and Timing</h4>
+<ul>
+<li><strong>ME-GA (two-stroke):</strong> Gas admission valves in the cylinder liner wall, gas admitted at 15-16 bar early in compression after the piston covers the ports — homogeneous mixture concentrated toward the combustion space centre.</li>
+<li><strong>4-stroke dual-fuel:</strong> Gas injected into the intake port channel upstream of the inlet valve at 4-8 bar, entering with intake air — vulnerable to escaping during valve overlap when both inlet and exhaust valves are briefly open together.</li>
+</ul>
+<h4>Scavenging Architecture and Flame Quenching</h4>
+<p>The two-stroke ME-GA's uniflow scavenging (single overhead exhaust valve, piston-controlled ports) confines the charge dynamically, reducing wall-quenching losses. Four-stroke loop/cross-scavenging designs lose unburnt methane in two distinct zones: piston ring pack crevice volumes (flame cannot propagate due to thermal quenching) and the valve overlap period (direct charge escape to exhaust).</p>
+<h4>Aftertreatment Strategy Comparison</h4>
+<ul>
+<li><strong>Two-stroke (ME-GA):</strong> High-Pressure EGR, reported to cut methane slip 30-50% versus non-EGR first-generation Otto-cycle engines.</li>
+<li><strong>Four-stroke (WinGD X-DF2.0):</strong> iCER — cooled, low-pressure EGR — achieving similar slip reductions, bringing slip to ~1.0-1.2 g/kWh from ~2.0-2.5 g/kWh on first-generation platforms.</li>
+</ul>
+      <h4>Slip Control Mechanism Comparison</h4><table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0"><tr><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Feature</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">ME-GA (2-Stroke, legacy fleet)</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">4-Stroke LPDF (Wärtsilä/WinGD)</th></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Gas Admission Pressure</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">15–16 bar (liner-wall valves)</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">4–8 bar (intake port)</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Primary Slip Source</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Crevice/wall quenching (uniflow-mitigated)</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Ring-pack crevices + valve-overlap blow-through</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Primary Mitigation</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">High-Pressure EGR</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">VVT/Miller cycling + iCER (low-pressure cooled EGR)</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Typical Mitigated Slip</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">~1.0–1.5 g/kWh range (EGR-assisted)</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">~1.0–1.2 g/kWh (X-DF2.0 with iCER)</td></tr></table>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg 13</span><span class="reg-desc">Tier III NOx compliance route for both engine families</span></div><div class="reg-item"><span class="reg-code">FuelEU Maritime (EU) 2023/1805</span><span class="reg-desc">Well-to-Wake methane slip accounting applies regardless of engine stroke count</span></div><div class="reg-item"><span class="reg-code">IMO methane slip guidelines (developing, target ~2027)</span><span class="reg-desc">The regulation cited by MAN as the reason for ME-GA discontinuation</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> If Simon asks you to compare two-stroke and four-stroke slip control, lead with the mechanism difference (uniflow vs loop scavenging), then flag the ME-GA's discontinued status before comparing figures — this shows both technical depth and current industry awareness.</div>
+    <details class="dd"><summary>⚠️ Technical Risk Warning: Assuming the ME-GA Is Still in Production</summary><p>As a Chief Engineer, you must know that <strong>describing the ME-GA as a current MAN two-stroke product is a factual error</strong> — it was discontinued in November 2024. If asked to compare current low-pressure two-stroke and four-stroke dual-fuel options, state clearly that MAN's two-stroke Otto-cycle LNG option is no longer available, and that comparisons involving the ME-GA apply only to legacy in-service tonnage.</p></details>
+    <details class="dd"><summary>Deep-Dive: Chief Engineer Relevance</summary><p>If you serve on or transfer to a vessel with an in-service ME-GA (46+ units afloat), understanding its EGR-based slip control remains directly relevant to daily watchkeeping and Tier III compliance monitoring — even though the design is now legacy rather than current production.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p><strong>Q:</strong> "Which engine has lower baseline methane slip before any aftertreatment — a two-stroke ME-GA or a four-stroke X-DF?"<br><strong>A:</strong> Sir, baseline (unmitigated) slip is broadly comparable in the 2.0-3.0 g/kWh range for both, though the specific mechanism differs — crevice/wall quenching on the two-stroke uniflow design versus ring-pack crevice and valve-overlap losses on the four-stroke. Aftertreatment strategy, not baseline architecture, tends to determine the final compliant figure.</p><p><strong>Q:</strong> "Does the discontinuation of the ME-GA mean two-stroke LNG dual-fuel engines are no longer available?"<br><strong>A:</strong> No, Sir. MAN's high-pressure Diesel-cycle ME-GI remains fully available and in production — only the low-pressure Otto-cycle ME-GA was discontinued.</p></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_I, Q3, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7_I, Q3, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB7_I · Q3 · v1.1</span>
+  </div>
+</div>
+
+<div class="q-card" id="q4" data-kw="ME-LGIA ammonia engine Ammonia Catch System N2O slip nitrous oxide toxic fuel safety" data-tags="ghg machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">4</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What safety systems are unique to ammonia-fuelled two-stroke engines (MAN ME-LGIA), and what is the N2O slip risk associated with ammonia combustion?</div>
+      <div class="q-tags"><span class="q-tag">GHG</span><span class="q-tag">Machinery</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">The <strong>ME-LGIA</strong> prototype uses high-pressure liquid direct injection (600-700 bar) with a 10-15% pilot fuel fraction to stabilise ammonia's slow flame propagation. Because ammonia (NH3) is toxic and corrosive, the engine incorporates an automated <strong>Ammonia Catch System (ACS)</strong> to purge and neutralise vapour during fuel-changeover or emergency shutdown. Incomplete combustion risks <strong>N2O slip</strong> — a greenhouse gas with GWP ~265-298x CO2 — requiring dedicated De-N2O SCR aftertreatment.</p>
+      <h4>60-Second Answer</h4>
+      <p>Ammonia's high auto-ignition temperature (~651°C) and narrow flammability limits mean the ME-LGIA cannot rely on compression ignition alone — it requires a substantial pilot fuel fraction (10-15% energy share, typically MGO) injected alongside high-pressure liquid ammonia (600-700 bar) late in the compression stroke to stabilise the flame front.<br><br>Because ammonia is highly toxic (IDLH ~300 ppm) and corrosive to certain metals, the fuel system uses double-walled piping, nitrogen-purged interspaces, and an automated Ammonia Catch System (ACS) that displaces liquid ammonia out of the injectors into a dedicated catch tank or water-baffled expansion tank during fuel changeover or emergency shutdown — an instant fuel-oil trip is not possible; the changeover follows a choreographed automated sequence to prevent toxic release into the engine room. On the emissions side, incomplete or low-temperature combustion generates N2O, with a GWP of roughly 265-298 times CO2 over 100 years — uncontrolled N2O slip can fully offset ammonia's zero-carbon combustion advantage, making dedicated high-temperature De-N2O SCR catalyst systems (using vanadium-titanium elements) a mandatory design feature.</p>
+      <h4>High-Pressure Injection and Pilot Fuel Requirement</h4>
+<p>Liquid ammonia is injected directly into the cylinder at <strong>600-700 bar</strong> late in the compression stroke. Due to ammonia's high auto-ignition temperature and slow laminar burning velocity, a pilot fuel fraction of approximately <strong>10-15% of energy input</strong> (early-version figure) is required to stabilise the flame front and ensure complete combustion.</p>
+<h4>Toxicity and Emergency Safety Systems</h4>
+<ul>
+<li><strong>Ammonia Catch System (ACS):</strong> An automated system that purges and neutralises toxic ammonia vapour from fuel lines during changeover or emergency shutdown, preventing toxic release into the engine room.</li>
+<li><strong>Double-walled piping and nitrogen purging:</strong> Standard IGF Code-driven design features for toxic, low-flashpoint fuel systems, isolating ammonia from occupied spaces.</li>
+<li><strong>No instant fuel-oil trip:</strong> Unlike conventional fuel changeover, an emergency shift away from ammonia requires a choreographed automated nitrogen purge sequence to safely displace liquid ammonia from the high-pressure rails before switching to conventional injectors.</li>
+</ul>
+<h4>The N2O Emissions Trap</h4>
+<p>Ammonia combustion produces zero CO2, but incomplete combustion — particularly at low load or during transients when flame temperature drops — generates <strong>Nitrous Oxide (N2O)</strong>, with a global warming potential of approximately <strong>265-298 times</strong> that of CO2 over 100 years. Even minor N2O slip can negate the entire carbon-free benefit under Well-to-Wake accounting (FuelEU Maritime, EU ETS).</p>
+<div class="verify-note"><strong>Status note:</strong> The ME-LGIA passed Type Approval Tests in mid-2024 and remains under multi-cylinder scale-up and field verification — it is a prototype, not yet in commercial fleet service. Do not state it as an operational engine in the oral exam.</div>
+      <h4>ME-LGIA Key Design Parameters</h4><table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0"><tr><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Parameter</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Value / Status</th></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Injection Pressure</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">600–700 bar (high-pressure liquid direct injection)</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Pilot Fuel Fraction</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">~10–15% of energy input (early-version figure)</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Ammonia Auto-Ignition Temp</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">~651°C</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">N2O Global Warming Potential</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">~265–298x CO2 (100-yr)</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Development Status (2026)</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Prototype — TAT passed mid-2024, scale-up/field verification ongoing</td></tr></table>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">IGF Code Part A-1</span><span class="reg-desc">Provisional requirements adapted for toxic low-flashpoint liquid fuels</span></div><div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg 13 (Tier III NOx)</span><span class="reg-desc">Ammonia combustion spikes thermal/chemical NOx and N2O, requiring mandatory SCR pairing</span></div><div class="reg-item"><span class="reg-code">IACS UR E26/E27</span><span class="reg-desc">Cyber resilience requirements for modern dual-fuel Engine Control Systems</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> If asked about "the next prototype under consideration," name the ME-LGIA specifically — not conceptual hydrogen engines. Explain the mechanical challenge precisely: ammonia's low laminar burning velocity requires high-pressure liquid direct injection plus a substantial pilot fuel shield for full flame propagation. Always pair this with the N2O trap — examiners specifically test whether candidates understand ammonia is not automatically "clean."</div>
+    <details class="dd"><summary>⚠️ Technical Risk Warning: N2O Secondary Emissions Trap</summary><p>As a Chief Engineer, you must know that <strong>ammonia combustion carries an inherent risk of N2O formation if cylinder peak temperatures drop below optimal thresholds</strong> — typically during low-load operation or rapid transients where ammonia's flame speed is severely retarded. Unmanaged N2O emissions trigger severe compliance failures under FuelEU Maritime's Well-to-Wake accounting. The CE must monitor exhaust temperature deviations and ensure SCR/De-N2O catalyst readiness at all times.</p></details>
+    <details class="dd"><summary>Deep-Dive: Chief Engineer Relevance</summary><p>Crew training for an ammonia-fuelled vessel requires a complete overhaul from conventional HFO/gas operations: strict maintenance protocols for double-walled piping, nitrogen purging sequences, and ACS operational integrity to eliminate toxic exposure risk during routine fuel system work. This is a step-change in engine room hazard profile compared to LNG or methanol dual-fuel operation.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p><strong>Q:</strong> "If ammonia contains no carbon, why worry about its greenhouse gas impact?"<br><strong>A:</strong> Sir, while ammonia contains zero carbon, incomplete combustion under lower temperatures or lean zones generates N2O, which has a GWP 265-298 times greater than CO2. Even minute N2O slip will severely penalise the vessel's GHG intensity score under FuelEU Maritime, so strict catalyst management and temperature control remain mandatory.</p><p><strong>Q:</strong> "Can you execute an instant emergency changeover from ammonia to diesel on the ME-LGIA?"<br><strong>A:</strong> No, Sir — because ammonia is toxic and corrosive, the high-pressure fuel rails cannot simply be cut off. The engine control system runs an automated nitrogen purge sequence that displaces liquid ammonia into the Ammonia Catch System or a water-baffled expansion tank while ramping up conventional injectors to prevent a blackout.</p></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_I, Q4, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7_I, Q4, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB7_I · Q4 · v1.1</span>
+  </div>
+</div>
+
+<div class="q-card" id="q5" data-kw="FuelEU Maritime GHG intensity trajectory well-to-wake penalty VLSFO compliance deficit" data-tags="ghg">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">5</div>
+    <div class="q-text-wrap">
+      <div class="q-text">How does the FuelEU Maritime GHG intensity reduction trajectory influence main engine and fuel technology selection onboard?</div>
+      <div class="q-tags"><span class="q-tag">GHG</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula"><strong>FuelEU Maritime (Regulation (EU) 2023/1805)</strong> sets a step-down <strong>Well-to-Wake GHG intensity trajectory</strong> against a 2020 baseline of <strong>91.16 gCO2eq/MJ</strong>: <strong>2%</strong> reduction from 2025, <strong>6%</strong> from 2030, <strong>14.5%</strong> from 2035, <strong>31%</strong> from 2040, <strong>62%</strong> from 2045, and <strong>80%</strong> from 2050. Because it counts methane and N2O on a lifecycle basis, it directly penalises methane-slip-prone engines and rewards methanol (ME-LGIM) and, longer-term, ammonia (ME-LGIA) platforms.</p>
+      <h4>60-Second Answer</h4>
+      <p>FuelEU Maritime tracks the full lifecycle (Well-to-Wake) GHG intensity of energy used onboard, not just stack emissions. Against the 2020 fleet baseline of 91.16 gCO2eq/MJ, the mandated reduction steps down every five years: <strong>2% (2025), 6% (2030), 14.5% (2035), 31% (2040), 62% (2045), 80% (2050)</strong>. Vessels exceeding the intensity limit face financial penalties; over-performing vessels can bank, borrow, or pool compliance surpluses.<br><br>This structure directly shapes engine and fuel choice. Because CH4 and N2O both carry high global warming potential multipliers, low-pressure Otto-cycle engines with unmitigated methane slip are penalised through default Tank-to-Wake emission factors, while liquid alternative fuels like green methanol (ME-LGIM) — which avoid methane slip entirely — gain a structural compliance advantage. Ammonia (ME-LGIA) offers a long-term zero-carbon pathway but only once N2O slip is controlled and the supply chain shifts to green production. From 2030, container and passenger ships must also connect to shore power at major EU ports (extending to all EU ports with shore power from 2035), further reducing at-berth GHG intensity.</p>
+      <h4>Well-to-Wake Lifecycle Accounting</h4>
+<p>Unlike frameworks measuring only stack emissions, FuelEU Maritime tracks emissions from fuel production and distribution (Well-to-Tank) through combustion (Tank-to-Wake), and explicitly includes <strong>CH4</strong> and <strong>N2O</strong>, not just CO2.</p>
+<h4>The Verified Step-Down Trajectory (against 2020 baseline of 91.16 gCO2eq/MJ)</h4>
+<ul>
+<li><strong>2025:</strong> 2% reduction required</li>
+<li><strong>2030:</strong> 6% reduction required</li>
+<li><strong>2035:</strong> 14.5% reduction required</li>
+<li><strong>2040:</strong> 31% reduction required</li>
+<li><strong>2045:</strong> 62% reduction required</li>
+<li><strong>2050:</strong> 80% reduction required</li>
+</ul>
+<div class="verify-note"><strong>Correction:</strong> The original draft answer omitted the 2040 (31%) and 2045 (62%) steps, jumping straight from 14.5% to 80%. All six figures above are verified against the regulation text and should be quoted in full if the examiner asks for the trajectory.</div>
+<h4>Penalty Structure for Non-Compliance</h4>
+<p>If a vessel does not close its compliance deficit via banking, borrowing, or pooling, the fixed financial penalty is <strong>&euro;2,400 per tonne VLSFO-equivalent</strong> of non-compliant energy. For a ship with a compliance deficit in <strong>two or more consecutive reporting periods</strong>, the penalty is multiplied by 1 + (n-1)/10 — producing escalating multipliers of roughly <strong>+10%, +20%, +30%</strong> for the 2nd, 3rd, 4th consecutive non-compliant year. The Document of Compliance is only issued once the penalty is paid.</p>
+<h4>Impact on Engine and Fuel Selection</h4>
+<ul>
+<li><strong>Methane Slip Penalisation:</strong> Low-pressure Otto-cycle engines are assigned a default Tank-to-Wake methane emission factor that structurally penalises their compliance score.</li>
+<li><strong>Methanol Dominance:</strong> Green methanol (ME-LGIM) avoids methane slip entirely and remains liquid at ambient temperature, making it the preferred current compliance pathway for container newbuilds.</li>
+<li><strong>Ammonia Preparedness:</strong> For post-2045 compliance, zero-carbon ammonia (ME-LGIA) becomes critical — but only if N2O slip is controlled and the fuel is produced via green pathways (grey ammonia retains a high Well-to-Tank score).</li>
+</ul>
+<h4>GWP Multipliers Driving Aftertreatment Investment</h4>
+<p>Methane carries a GWP factor of approximately <strong>28-30x</strong> CO2 (AR5, 100-year), and N2O approximately <strong>265-298x</strong>. These multipliers mean even small slip rates materially affect calculated carbon intensity, driving investment in EGR, MOC, and SCR/De-N2O systems.</p>
+      <h4>FuelEU Reduction Trajectory & Fuel Category Impact</h4><table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0"><tr><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Milestone Year</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Reduction vs 2020 Baseline (91.16 gCO2eq/MJ)</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Structural Engine/Fuel Impact</th></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">2025</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">2%</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Achievable via bio-fuel blends or efficient LNG operation</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">2030</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">6%</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Container/passenger ships must connect to shore power at major EU ports</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">2035</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">14.5%</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Shore power mandate extends to all EU ports with the facility</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">2040</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">31%</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Requires active e-fuel blending or shift to liquid alternative platforms</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">2045</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">62%</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Near-exclusive alternative fuel operation becomes necessary</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">2050</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">80%</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Demands near-exclusive zero-carbon fuel use (green ammonia/e-methanol)</td></tr></table>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">Regulation (EU) 2023/1805</span><span class="reg-desc">Full FuelEU Maritime text and step-down GHG intensity targets</span></div><div class="reg-item"><span class="reg-code">EU ETS Directive (EU) 2023/959</span><span class="reg-desc">Carbon allowance pricing mechanism, complementary to FuelEU</span></div><div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg 12</span><span class="reg-desc">Core structure for onboard emission data logging</span></div><div class="reg-item"><span class="reg-code">FuelEU penalty formula, Art. 20-21</span><span class="reg-desc">&euro;2,400/tonne VLSFO-eq deficit; 1+(n-1)/10 multiplier for consecutive non-compliant years</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> When discussing FuelEU, quote the full six-step trajectory (2%/6%/14.5%/31%/62%/80%) rather than just the 2025 and 2050 endpoints — this signals depth. Emphasise the Well-to-Wake methodology and the GWP multipliers for methane (~28-30x) and N2O (~265-298x).</div>
+    <details class="dd"><summary>⚠️ Technical Risk Warning: Financial Penalties for Fuel Tracking Failures</summary><p>As a Chief Engineer, you must know that <strong>failing to verify and accurately log sustainability certificates (e.g. ISCC proofs) for alternative fuel batches results in port authorities applying worst-case default fossil emission factors</strong>. A batch of green methanol or biofuel treated as standard fossil fuel due to poor record-keeping instantly creates a compliance deficit, with financial penalties under FuelEU Maritime and possible EU-berth detention risk. The CE must personally review the Bunker Delivery Note and verify fuel tracking certificates.</p></details>
+    <details class="dd"><summary>Deep-Dive: Chief Engineer Relevance</summary><p>Fuel choice is no longer determined solely by cost or availability — the CE must maintain precise logs in the Bunker Management System tracking alternative fuel quantities consumed inside versus outside EU/EEA regulatory zones, and closely monitor EGR/SCR system health, since any degradation directly raises the vessel's recorded GHG intensity.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p><strong>Q:</strong> "Does burning zero-carbon green ammonia automatically achieve perfect FuelEU compliance?"<br><strong>A:</strong> No, Sir. FuelEU assesses emissions Well-to-Wake — if the ammonia was produced from fossil energy ("grey" ammonia), its Well-to-Tank score remains high. Any unburnt N2O slip from the engine also counts heavily against the score given its high GWP, so effective aftertreatment remains necessary regardless of fuel choice.</p><p><strong>Q:</strong> "What is the FuelEU reduction requirement for 2040, and why is it often omitted from summaries?"<br><strong>A:</strong> Sir, the 2040 requirement is a 31% reduction against the 2020 baseline. It's often omitted because summaries jump from the well-publicised 14.5% (2035) figure straight to the headline 80% (2050) target, but all six milestone years — 2025 through 2050 — are part of the legislated trajectory.</p><p><strong>Q:</strong> "What is the financial penalty for FuelEU non-compliance, and does it stay flat for repeat offenders?"<br><strong>A:</strong> Sir, the base penalty is €2,400 per tonne of VLSFO-equivalent non-compliant energy. It does not stay flat — for two or more consecutive non-compliant reporting periods, the penalty is multiplied by 1 plus (n minus 1) over 10, giving roughly +10%, +20%, +30% escalation for successive years of deficit. The Document of Compliance is withheld until the penalty is paid.</p></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_I, Q5, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7_I, Q5, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB7_I · Q5 · v1.1</span>
+  </div>
+</div>
+
+<div class="q-card" id="q6" data-kw="HP-EGR high pressure exhaust gas recirculation knock control NOx Otto cycle" data-tags="machinery ghg">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">6</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is the role of High-Pressure Exhaust Gas Recirculation (HP-EGR) in knock control and emissions management on Otto-cycle dual-fuel engines?</div>
+      <div class="q-tags"><span class="q-tag">Machinery</span><span class="q-tag">GHG</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula"><strong>HP-EGR</strong> routes hot exhaust gas from before the turbocharger back into the scavenge air stream on low-pressure Otto-cycle engines. The triatomic CO2/H2O molecules increase the charge's thermal mass and reduce excess oxygen concentration, lowering peak combustion temperature to suppress <strong>knock</strong> and <strong>pre-ignition</strong>, while simultaneously suppressing thermal <strong>NOx</strong> formation to help meet MARPOL Annex VI Tier III limits.</p>
+      <h4>60-Second Answer</h4>
+      <p>On low-pressure Otto-cycle dual-fuel engines, gas is admitted early in the compression stroke, making the charge vulnerable to knocking (uncontrolled auto-ignition of end-gas) and pre-ignition from hot spots or oil droplets. HP-EGR redirects a controlled volume of exhaust gas from before the turbine inlet into the scavenge air receiver.<br><br>The recirculated exhaust contains CO2 and H2O — triatomic molecules with higher molar heat capacity than diatomic O2/N2 — which increases the charge's thermal mass, slows chemical reaction rates, and dampens the heat release profile. This extends the ignition delay period, preventing the erratic pressure waves that cause knock. Reducing oxygen concentration also limits the thermal NOx formation pathway, helping the engine meet Tier III ECA limits, in some designs without secondary SCR aftertreatment.</p>
+      <h4>Thermodynamic Principles of Knock Suppression</h4>
+<p>Engine knock occurs when unburnt end-gas ahead of the flame front is exposed to high temperature/pressure for too long and auto-ignites prematurely.</p>
+<ul>
+<li><strong>Thermal Mass Modification:</strong> CO2 and H2O absorb more thermal energy per degree of temperature rise than standard air, reducing peak localised cylinder temperatures.</li>
+<li><strong>Chemical Kinetics Retardation:</strong> Diluting intake air with inert exhaust components reduces reactive oxygen concentration, extending pre-flame reaction time.</li>
+<li><strong>Ignition Delay Extension:</strong> The pilot-fuel-initiated flame front can travel across the chamber before remaining end-gases can detonate prematurely.</li>
+</ul>
+<h4>System Architecture</h4>
+<p>The loop draws exhaust gas before the turbine inlet, cools/scrubs it, and blows it into the scavenge receiver via an EGR blower, maintaining positive pressure differential across the turbocharging system.</p>
+<h4>NOx Co-Benefit</h4>
+<p>By reducing oxygen concentration and peak flame temperature, HP-EGR suppresses the thermal-NOx formation pathway, supporting Tier III ECA compliance alongside knock control — a genuine dual-purpose system, not solely an emissions add-on.</p>
+      <h4>HP-EGR Function Summary</h4><table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0"><tr><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Function</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Mechanism</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Benefit</th></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Knock suppression</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Increased charge thermal mass, extended ignition delay</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Prevents uncontrolled end-gas auto-ignition</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">NOx reduction</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Reduced O2 concentration, lower peak flame temp</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Supports Tier III ECA compliance</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Methane slip reduction</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Raises exhaust/combustion thermal baseline</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Improves downstream MOC light-off performance</td></tr></table>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg 13</span><span class="reg-desc">Tier III NOx limits — HP-EGR is a primary compliance route in ECAs</span></div><div class="reg-item"><span class="reg-code">IMO NOx Technical Code 2008</span><span class="reg-desc">Certification basis for engine NOx compliance including EGR-equipped engines</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Avoid a generic "EGR cools the charge" answer. Explain the molar heat capacity mechanism and ignition delay extension explicitly — this is the level of technical precision Kochi MMD examiners expect from a Class 1 candidate.</div>
+    <details class="dd"><summary>⚠️ Technical Risk Warning: EGR Fouling and Wash-Water Considerations</summary><p>As a Chief Engineer, you must know that <strong>EGR cooler and blower fouling directly compromises knock protection</strong> — any degradation in EGR flow or cooling efficiency risks engine knock, forcing the control system to de-rate or trip to fuel-oil mode. Where wet-type EGR scrubbing is used, wash-water treatment and discharge compliance (analogous to scrubber wash water) must also be actively managed.</p></details>
+    <details class="dd"><summary>Deep-Dive: Chief Engineer Relevance</summary><p>During watchkeeping, the CE must track EGR differential pressure and cooler performance trends as closely as cylinder pressure indicators — EGR degradation is a direct precursor to knock-related de-rating, not a secondary housekeeping item.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p><strong>Q:</strong> "Does HP-EGR work purely by cooling the intake charge?"<br><strong>A:</strong> No, Sir. While cooling plays a role, the dominant mechanism is increasing the molar heat capacity of the charge via triatomic CO2/H2O molecules and extending the ignition delay period — a chemical kinetics effect, not simply a temperature reduction.</p></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_I, Q6, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7_I, Q6, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB7_I · Q6 · v1.1</span>
+  </div>
+</div>
+
+<div class="q-card" id="q7" data-kw="wind assisted propulsion WAPS Flettner rotor suction wing kite CII decarbonisation" data-tags="ghg">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">7</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What are Wind-Assisted Propulsion Systems (WAPS) and what is their current adoption status on merchant ships?</div>
+      <div class="q-tags"><span class="q-tag">GHG</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula"><strong>WAPS</strong> use mechanical wind technologies — <strong>Flettner rotor sails</strong> (Magnus effect), <strong>rigid suction wings</strong>, and <strong>towing kites</strong> — to generate auxiliary thrust. Documented fuel/emissions savings are route- and speed-dependent, commonly cited in the roughly <strong>5-20%</strong> range. Adoption is growing on tankers and bulk carriers with open deck space, driven by CII rating improvement and EU ETS cost avoidance; container ship retrofits require careful design around crane operations and cargo layout.</p>
+      <h4>60-Second Answer</h4>
+      <p>WAPS reduce main engine load using wind energy. <strong>Flettner rotors</strong> are motor-driven vertical cylinders that exploit the Magnus effect — spinning cylinders create a pressure differential in an airstream, generating forward thrust. <strong>Rigid suction wings</strong> use internal fans to control boundary-layer separation for high lift from a compact footprint. <strong>Towing kites</strong> fly at altitude (commonly cited around 100-300m) to capture stronger, steadier winds.<br><br>Adoption is driven by the IMO Carbon Intensity Indicator and FuelEU Maritime — reducing fuel burn while maintaining speed directly improves CII rating and lowers EU ETS carbon costs. Installation is comparatively straightforward on tankers and bulk carriers with open deck space; retrofitting container vessels is more complex, requiring designs (e.g. tilting foundations) that avoid interfering with cargo crane operations, container stack sightlines, and bridge visibility requirements under SOLAS Chapter V Regulation 22.</p>
+      <h4>Aerodynamic Mechanisms</h4>
+<ul>
+<li><strong>Flettner Rotor Sails:</strong> Motor-driven spinning cylinders; airflow speeds up on one side and slows on the other, creating a pressure differential (Magnus Effect) generating forward thrust.</li>
+<li><strong>Rigid Suction Wings:</strong> Vertical aerofoils with internal fans drawing air through surface slots to control boundary-layer flow, generating high lift from a compact footprint.</li>
+<li><strong>Towing Kites:</strong> Automated foils flown ahead of the vessel at altitude to access stronger, more consistent winds away from surface friction.</li>
+</ul>
+<h4>Fleet Adoption Drivers</h4>
+<ul>
+<li><strong>CII Rating Optimisation:</strong> Reduced fuel consumption directly improves the Carbon Intensity Indicator rating, potentially moving a vessel from a failing band toward a compliant one.</li>
+<li><strong>EU ETS Cost Avoidance:</strong> Lower fuel burn reduces the carbon allowances an operator must purchase.</li>
+</ul>
+<div class="verify-note"><strong>Verify before oral:</strong> Specific percentage savings figures for WAPS vary significantly by source, route, vessel type, and installation — treat any single percentage (including ranges quoted here) as indicative, not a fixed guaranteed figure, and cite the specific technology/vessel/route context if asked for a number.</div>
+<h4>Container Vessel Integration Challenges</h4>
+<ul>
+<li><strong>Deck Space and Cargo Constraints:</strong> Units must avoid interfering with container cell guides or shore gantry cranes; some designs use tilting/folding foundations.</li>
+<li><strong>Stability Impact:</strong> Wind side-forces introduce additional heeling moments — GM management becomes relevant when large WAPS units are fitted.</li>
+<li><strong>Bridge Visibility:</strong> Height/placement must comply with SOLAS Chapter V Regulation 22 forward visibility requirements.</li>
+</ul>
+      <h4>WAPS Technology Comparison</h4><table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0"><tr><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Technology</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Principle</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Container Ship Integration Challenge</th></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Flettner Rotor</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Magnus effect via motorised cylinder</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">High electrical load; heeling moment</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Rigid Suction Wing</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Boundary-layer control via internal fans</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Structural reinforcement; cargo sightline</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Towing Kite</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">High-altitude aerodynamic traction</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Complex launch/retrieval; congested-water limits</td></tr></table>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">SOLAS Chapter V Regulation 22</span><span class="reg-desc">Bridge forward visibility requirements — constrains WAPS placement</span></div><div class="reg-item"><span class="reg-code">IMO CII framework (MARPOL Annex VI Ch 4)</span><span class="reg-desc">Carbon Intensity Indicator — the primary regulatory driver for WAPS adoption</span></div><div class="reg-item"><span class="reg-code">Class society WAPS rules (e.g. DNV, ABS)</span><span class="reg-desc">Structural/deck integration approval requirements</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Discuss both the efficiency gain and the stability/structural trade-off (heeling moment, GM management, torsional vibration risk) — showing balanced judgment on a 'green tech' topic is exactly what Class 1 examiners look for.</div>
+    <details class="dd"><summary>⚠️ Technical Risk Warning: Structural and Torsional Loading Effects</summary><p>As a Chief Engineer, you must know that <strong>the lateral forces from WAPS units place transverse stress on deck structures and coamings</strong>, and sudden wind shifts can introduce unexpected load variations to the propulsion shaft line, potentially triggering torsional vibration if shaft damping is inadequate. Structural stress indicators around sail foundations and shaft vibration dampers require regular inspection.</p></details>
+    <details class="dd"><summary>Deep-Dive: Chief Engineer Relevance</summary><p>During watchkeeping, the Main Engine Governor must be monitored as it adjusts fuel injection downward in response to wind-generated thrust. PMS must expand to cover rotor bearings, drive motors, and foundation structures, and crew safety procedures need updating for safe approach distances and emergency stowage in heavy weather.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p><strong>Q:</strong> "Does a Flettner rotor operate passively like a traditional sail?"<br><strong>A:</strong> No, Sir. It is an active mechanical system requiring an internal electric motor to spin the cylinder, exploiting the Magnus Effect. It consumes some auxiliary electrical power, but the resulting main engine load reduction produces a net fuel saving.</p><p><strong>Q:</strong> "How does the CE verify actual fuel savings from a WAPS installation?"<br><strong>A:</strong> Sir, by cross-referencing intermediate shaft torque meter data against fuel consumption logs, comparing shaft power required to maintain speed with the system active versus a baseline with it stopped under similar sea states.</p></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_I, Q7, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7_I, Q7, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB7_I · Q7 · v1.1</span>
+  </div>
+</div>
+
+<div class="q-card" id="q8" data-kw="onboard carbon capture OCC amine scrubbing CO2 liquefaction EU ETS" data-tags="ghg">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">8</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is Onboard Carbon Capture (OCC) technology and what is its current state of deployment on merchant vessels?</div>
+      <div class="q-tags"><span class="q-tag">GHG</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula"><strong>OCC</strong> captures CO2 from engine exhaust using <strong>amine-based chemical absorption</strong>, then compresses/liquefies it for storage in cryogenic tanks. It remains a <strong>pilot/Approval-in-Principle (AIP)</strong> stage technology on select vessels, carrying a significant energy penalty (commonly cited in the <strong>15-30%</strong> range) from solvent regeneration and liquefaction — a bridge technology for EU ETS and FuelEU compliance, not yet mainstream.</p>
+      <h4>60-Second Answer</h4>
+      <p>OCC is a post-combustion exhaust treatment: exhaust gas passes through an amine solvent absorption column, where the amine chemically binds CO2 (forming carbamates) at lower temperature. The CO2-rich solvent is then heated in a stripper column (commonly cited around 120-140°C using auxiliary steam) to reverse the reaction and release high-purity CO2, regenerating the solvent for reuse.<br><br>Released CO2 is compressed, dehydrated (to prevent hydrate/ice formation), and liquefied cryogenically for storage — commonly cited around -35°C to -50°C and 7-20 bar, figures that vary by system design. The major operational hurdle is the energy penalty: steam for solvent regeneration plus electrical load for cryogenic compression can meaningfully increase fuel consumption, with industry figures commonly cited in the 15-30% range depending on capture rate and vessel integration. Despite this, classification societies have issued Approvals in Principle for maritime OCC, and container/bulk operators are running active shipboard pilots to manage EU ETS and step-down FuelEU liabilities.</p>
+      <h4>Post-Combustion Chemical Absorption</h4>
+<ul>
+<li><strong>Amine Scrubbing Loop:</strong> Exhaust gas contacts a liquid amine solvent in a counter-current absorption tower; the solvent reacts exothermically with CO2 to form stable carbamates.</li>
+<li><strong>Thermal Stripping:</strong> The rich solvent is heated (commonly cited ~120-140°C, using auxiliary boiler steam) in a stripper column, reversing the reaction to release high-purity CO2 and regenerate the solvent.</li>
+</ul>
+<h4>Liquefaction and Storage</h4>
+<p>CO2 is compressed, dehydrated to prevent hydrate/ice formation in downstream piping, and cryogenically liquefied for storage in dedicated tanks.</p>
+<div class="verify-note"><strong>Verify before oral:</strong> Specific temperature/pressure storage figures and the energy-penalty percentage vary meaningfully between vendor designs and are still evolving as pilot data accumulates — quote them as indicative industry figures, not settled engineering constants, and be ready to explain the mechanism even if exact numbers are challenged.</div>
+<h4>Deployment Status</h4>
+<p>OCC remains at the <strong>pilot and Approval-in-Principle (AIP)</strong> stage. Classification societies have issued AIPs for maritime OCC systems, and container/bulk operators are running active shipboard trials, but it is not yet standard commercial equipment — driven primarily by the need to manage EU ETS carbon allowance costs and step-down FuelEU Maritime compliance.</p>
+<h4>Key Failure Mode — Heat Stable Salt (HSS) Formation</h4>
+<p>If upstream SOx scrubbing is inadequate, SOx entering the amine loop forms <strong>Heat Stable Salts</strong> that cannot be thermally regenerated, progressively degrading solvent capacity and requiring costly solvent replacement.</p>
+      <h4>OCC System Overview</h4><table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0"><tr><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Stage</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Function</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Key Risk</th></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Absorption</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Amine solvent binds CO2 from exhaust</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Requires upstream SOx removal to protect solvent</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Stripping/Regeneration</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Steam heat releases CO2, regenerates solvent</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">High auxiliary steam demand — core energy penalty</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Liquefaction/Storage</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Compression, dehydration, cryogenic storage</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Moisture ingress → corrosive carbonic acid + ice blockages</td></tr></table>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">IMO MEPC 81/INF.13</span><span class="reg-desc">Informational update on onboard carbon capture technology status</span></div><div class="reg-item"><span class="reg-code">SOLAS Chapter II-2</span><span class="reg-desc">Fire safety requirements applicable to alternative chemical process spaces</span></div><div class="reg-item"><span class="reg-code">EU ETS Regulation (EU) 2023/959</span><span class="reg-desc">Framework context for verifying and crediting captured carbon</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Do not just praise OCC's carbon-reduction potential — proactively raise the energy penalty and Heat Stable Salt risk if upstream SOx scrubbing fails. Demonstrating balanced technology evaluation is what separates a Class 1 answer from a marketing pitch.</div>
+    <details class="dd"><summary>⚠️ Technical Risk Warning: Energy Penalty and Heat Stable Salt Degradation</summary><p>As a Chief Engineer, you must know that <strong>OCC carries a genuine energy penalty from steam and electrical demand for regeneration and liquefaction</strong> — it does not come 'free.' Additionally, if upstream SOx scrubbing fails, SOx entering the amine loop forms Heat Stable Salts that cannot be regenerated, progressively degrading the solvent and requiring costly replacement.</p></details>
+    <details class="dd"><summary>Deep-Dive: Chief Engineer Relevance</summary><p>OCC integration is a significant plant-engineering undertaking, not a bolt-on accessory — it competes for steam, electrical load, and deck/tank space with existing systems. The CE must weigh the fuel-consumption penalty against carbon-cost avoidance when evaluating OCC for a specific trade route and EU ETS exposure profile.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p><strong>Q:</strong> "What happens if the dehydration unit fails and moisture enters the liquefied CO2 storage tanks?"<br><strong>A:</strong> Sir, moisture reacts with concentrated CO2 to form carbonic acid, creating a corrosive environment attacking internal steel surfaces of piping and storage tanks. Water vapour can also freeze into ice crystals in refrigeration expansion valves and downstream piping, causing blockages that risk overpressure events and system shutdowns.</p><p><strong>Q:</strong> "Does OCC eliminate the need for other emissions controls?"<br><strong>A:</strong> No, Sir. OCC targets CO2 specifically; it does not replace SOx scrubbing, NOx Tier III controls, or methane slip mitigation — and in fact depends on effective upstream SOx removal to protect the amine solvent from Heat Stable Salt formation.</p></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_I, Q8, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7_I, Q8, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB7_I · Q8 · v1.1</span>
+  </div>
+</div>
+
+<div class="q-card" id="q9" data-kw="shore power cold ironing AMP alternative maritime power IEC ISO IEEE 80005 CII FuelEU" data-tags="ghg">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">9</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is shore power (cold ironing) and how does its uptake affect a vessel's CII and emissions compliance?</div>
+      <div class="q-tags"><span class="q-tag">GHG</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula"><strong>Shore power</strong> (cold ironing / Alternative Maritime Power) lets a vessel shut down auxiliary diesel generators at berth by connecting to the shore grid, standardised under <strong>IEC/ISO/IEEE 80005-1</strong> at <strong>6.6 kV or 11 kV</strong>. Eliminating at-berth fuel burn improves the vessel's <strong>CII</strong> rating. Under FuelEU Maritime, container and passenger ships must connect at major EU (TEN-T) ports from <strong>2030</strong>, extending to all EU ports with shore power facility from <strong>2035</strong>.</p>
+      <h4>60-Second Answer</h4>
+      <p>Alternative Maritime Power modifies the ship's electrical distribution to accept external power while moored. Shipboard hardware includes a motorised cable management reel, high-voltage plugs, an isolation transformer (to separate shore and ship grounding), and interlocking switchgear, all conforming to IEC/ISO/IEEE 80005-1. Because shore grids vary (50Hz vs 60Hz, different voltage standards), frequency conversion and step-down transformation to the ship's typical 440V distribution is required.<br><br>CII calculations account for all fuel consumed across transit and port stays, so eliminating auxiliary engine fuel burn during port calls directly lowers annual carbon intensity. Under FuelEU Maritime, container and passenger ships must connect to shore power (or a zero-emission alternative) at major EU TEN-T ports from 2030 when berthed over two hours, with the requirement extending to all EU ports with a shore power facility from 2035. Non-connection at a port where OPS is mandatory and available results in financial penalties.</p>
+      <h4>Technical Equipment and Standards</h4>
+<ul>
+<li><strong>IEC/ISO/IEEE 80005-1:</strong> The governing international standard for high-voltage shore connection systems.</li>
+<li><strong>Cable Management Reel:</strong> Motorised winch deploying/retrieving heavy high-voltage flexible cables.</li>
+<li><strong>Isolation Transformer:</strong> Separates the ship's electrical ground network from the shore grid, preventing stray galvanic currents from accelerating hull corrosion.</li>
+<li><strong>Interlocking Switchgear:</strong> High-voltage breakers with mechanical/electrical interlocks preventing accidental contact with energised circuits.</li>
+</ul>
+<h4>Frequency and Voltage Synchronisation</h4>
+<p>Port grids operate at 50Hz (common in Europe/Asia) or 60Hz (common in the Americas). Where the ship's grid frequency doesn't match the port supply, power must route through an onboard solid-state frequency converter before reaching the main switchboard.</p>
+<h4>Seamless Power Transfer Sequence</h4>
+<ul>
+<li><strong>Parallel Synchronisation:</strong> The CE coordinates with the bridge and shore technicians; the incoming shore breaker is synchronised with the running auxiliary generator using a synchroscope, matching voltage, frequency, and phase angle.</li>
+<li><strong>Load Shedding:</strong> Once breakers are paralleled, load is shifted from the auxiliary diesel to the shore grid by adjusting governor speed control.</li>
+<li><strong>Generator Disconnection:</strong> When generator load approaches zero, its breaker opens and the diesel completes a standard cool-down before stopping.</li>
+</ul>
+<h4>CII and FuelEU Compliance Impact</h4>
+<ul>
+<li><strong>CII:</strong> Eliminating at-berth auxiliary fuel burn lowers total annual carbon emissions, directly improving the numerator of the CII calculation.</li>
+<li><strong>FuelEU At-Berth Mandate:</strong> Container and passenger ships must use OPS at major EU TEN-T ports from <strong>2030</strong> (stays over two hours), extending to all EU ports with the facility from <strong>2035</strong>.</li>
+<li><strong>Local Environmental Zones:</strong> US West Coast (CARB) and Chinese Emission Control Area rules independently mandate/incentivise shore connection with their own penalty structures.</li>
+</ul>
+<div class="verify-note"><strong>Correction:</strong> An earlier draft stated the FuelEU shore power mandate applies "at all major EU ports from 2030" without distinguishing the 2035 extension. The correct phased requirement is: major TEN-T ports from 2030, extending to all EU ports with an available shore power facility from 2035.</div>
+      <h4>Shore Power vs Auxiliary Generator Mode</h4><table style="width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0"><tr><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Operational Metric</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Shore Power (AMP Active)</th><th style="background:var(--navy);color:#fff;border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Auxiliary Generator Mode</th></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Voltage Level</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">6.6 kV or 11 kV (high-voltage standard)</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">440V standard marine distribution</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Port Air Emissions</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Zero localised stack emissions</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Continuous NOx, SOx, PM release</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">FuelEU Compliance (2030+)</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Compliant at mandated TEN-T ports</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Non-compliance risk / financial penalty</td></tr><tr><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Grounding</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Isolated via shipboard transformer</td><td style="border:1px solid var(--grey-border);padding:5px 8px;text-align:left">Standard hull-grounded distribution</td></tr></table>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">IEC/ISO/IEEE 80005-1</span><span class="reg-desc">Standardised design for high-voltage shore connection systems</span></div><div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg 13</span><span class="reg-desc">Air pollution controls relevant to at-berth emissions</span></div><div class="reg-item"><span class="reg-code">FuelEU Maritime Article 6 / Regulation (EU) 2023/1805</span><span class="reg-desc">Onshore power supply mandate — 2030 major TEN-T ports, 2035 all EU ports with facility</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> When explaining the power transfer, use precise terms — parallel synchronisation, phase rotation matching, isolation transformer protection. Also state the phased 2030/2035 FuelEU OPS mandate correctly rather than collapsing it to a single date; examiners test for exactly this kind of regulatory precision.</div>
+    <details class="dd"><summary>⚠️ Technical Risk Warning: Phase Sequence and Ground Potential Failures</summary><p>As a Chief Engineer, you must know that <strong>closing the shore power breaker without verifying phase rotation compatibility and ground potential alignment risks a catastrophic phase-to-phase short circuit</strong>, potentially causing an arc-flash explosion in the switchboard room and total vessel blackout. The CE must personally verify the phase sequence indicator and confirm the shore-side safety ground loop is fully bonded before closing the main shore connection breaker.</p></details>
+    <details class="dd"><summary>Deep-Dive: Chief Engineer Relevance</summary><p>High-voltage shore power shifts engine room focus toward HV safety management — strict LOTO procedures, Megger insulation testing on cables/plugs before connection (checking for voyage moisture ingress), and integration of vacuum breakers/protection relays/cable-reel slip rings into the PMS with regular safety-interlock trip testing.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p><strong>Q:</strong> "Does connecting to shore power completely eliminate a vessel's GHG footprint under FuelEU's Well-to-Wake accounting?"<br><strong>A:</strong> No, Sir. Shore power cuts localised Tank-to-Wake stack emissions to zero at berth, but FuelEU evaluates emissions Well-to-Wake — if the port grid relies on fossil generation, the corresponding Well-to-Tank emission factor still counts toward the vessel's compliance calculation. Only grid power certified from renewable sources achieves a true zero-emission score.</p><p><strong>Q:</strong> "Why can't the high-voltage shore cable connect directly to the ship's 440V switchboard without a transformer?"<br><strong>A:</strong> Sir, a direct connection is impossible and dangerous for two reasons: shore power is supplied at 6.6kV or 11kV to minimise cable thickness and transmission losses, which would destroy a standard 440V switchboard; and the isolation transformer separates the shore grid's neutral grounding from the ship's insulated hull ground, preventing stray currents that cause galvanic corrosion and protecting equipment from shore-side ground faults.</p></details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_I, Q9, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7_I, Q9, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB7_I · Q9 · v1.1</span>
+  </div>
+</div>
+  </div>
+</div>
+<div id="no-results" style="display:none;text-align:center;color:#64748b;padding:30px">No questions match your search/filter.</div>
+<div class="page-footer">
+Compiled by Nixon Antony, 2/E, Maersk A/S · MEO Class 1 exam prep, Kochi MMD · Corrections: contactus@marineintelligenceweekly.com<br>
+Disclaimer: For oral-exam preparation only. Always cross-check against current IMO/class/DG Shipping circulars before your exam — regulations amend frequently.
+</div>
+<script>
+function toggleCard(h){h.closest('.q-card').classList.toggle('open')}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters()}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();const cards=document.querySelectorAll('.q-card');let vis=0;cards.forEach(c=>{const tags=(c.dataset.tags||'').toLowerCase();const text=c.innerText.toLowerCase();const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));c.style.display=show?'':'none';if(show)vis++});document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;document.getElementById('no-results').style.display=vis===0?'block':'none'}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){document.querySelectorAll('.toc-link').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+x.target.id))}})},{threshold:.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+</script>
+<script>
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('copy', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+</body></html>

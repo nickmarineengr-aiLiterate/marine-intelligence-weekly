@@ -1,10 +1,17 @@
 {
   "manifest_version": "1.0",
   "generated": "2026-07-13",
-  "generated_by": "Claude - full resync of qb_content_index.json against live index.html (QB_GROUPS + Q_INDEX arrays, verified as internally consistent: 76 files, 610 questions, zero gaps/orphans before rebuild). Manifest had drifted stale (previously 62 files / 531 questions) after several sessions pushed direct HTML updates without updating this JSON. Rebuilt every file entry: preserved existing detailed entries from the prior manifest where question count matched the live card count exactly (assumed accurate question text/qnum); rebuilt entries from Q_INDEX question text where the prior manifest was missing the file entirely or had a stale/mismatched question count. Recommend spot-checking rebuilt entries' exact qnum sequencing against the live HTML files where practical, since Q_INDEX text order is assumed sequential per file but was not independently re-verified against each HTML file's actual q-card DOM order in this pass.",
-  "total_questions": 610,
-  "total_files": 76,
+  "generated_by": "Claude - added QB7_I (9Q, Latest Onboard Technology/Alternative Fuels/Decarbonisation; verified against VTT Lehtoranta 2021 MOC study, FuelEU EUR2400/tonne penalty structure, MAN EGRBP Jan-2024 nuance, ME-GA Nov-2024 discontinuation; gated with auth cookie + data-kw SEO attributes; v1.1). NOTE: QB7_H.html was already taken by an existing 1-question low-flashpoint-fuel file - new content built as QB7_I to avoid collision. QB1_J and QB3_I entries confirmed already present and unchanged.",
+  "total_questions": 619,
+  "total_files": 77,
   "recently_updated": [
+    {
+      "date": "2026-07-13",
+      "files": [
+        "QB7_I"
+      ],
+      "note": "New file QB7_I (9Q) added — Latest Onboard Technology/Alternative Fuels/Decarbonisation. Verified/corrected against live sources (VTT MOC study citation, FuelEU penalty escalation figures, MAN ME-GA Nov-2024 discontinuation, EGRBP Jan-2024 nuance). Gated + data-kw SEO added. QB1_J and QB3_I already present in manifest, confirmed unchanged."
+    },
     {
       "date": "2026-07-13",
       "files": [
@@ -3742,6 +3749,55 @@
         {
           "qnum": 6,
           "text": "What is the latest thing that happened in OPEC"
+        }
+      ]
+    },
+    "QB7_I.html": {
+      "qb_group": "QB7",
+      "letter": "I",
+      "title": "QB7_I — Latest Onboard Technology, Alternative Fuels & Decarbonisation",
+      "version": "1.1",
+      "tags": [
+        "ghg",
+        "machinery"
+      ],
+      "question_count": 9,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "What is the present technology used onboard to reduce methane slip?"
+        },
+        {
+          "qnum": 2,
+          "text": "What is the overview of the evolution of the MAN B&amp;W ME-GI and ME-GA engine families to the present day, and what is the next prototype under consideration?"
+        },
+        {
+          "qnum": 3,
+          "text": "Compare methane slip control between the MAN ME-GA (Otto-cycle, two-stroke) engine and low-pressure Otto-cycle 4-stroke dual-fuel engines."
+        },
+        {
+          "qnum": 4,
+          "text": "What safety systems are unique to ammonia-fuelled two-stroke engines (MAN ME-LGIA), and what is the N2O slip risk associated with ammonia combustion?"
+        },
+        {
+          "qnum": 5,
+          "text": "How does the FuelEU Maritime GHG intensity reduction trajectory influence main engine and fuel technology selection onboard?"
+        },
+        {
+          "qnum": 6,
+          "text": "What is the role of High-Pressure Exhaust Gas Recirculation (HP-EGR) in knock control and emissions management on Otto-cycle dual-fuel engines?"
+        },
+        {
+          "qnum": 7,
+          "text": "What are Wind-Assisted Propulsion Systems (WAPS) and what is their current adoption status on merchant ships?"
+        },
+        {
+          "qnum": 8,
+          "text": "What is Onboard Carbon Capture (OCC) technology and what is its current state of deployment on merchant vessels?"
+        },
+        {
+          "qnum": 9,
+          "text": "What is shore power (cold ironing) and how does its uptake affect a vessel's CII and emissions compliance?"
         }
       ]
     }
