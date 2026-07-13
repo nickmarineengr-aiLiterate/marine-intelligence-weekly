@@ -1,10 +1,17 @@
 {
   "manifest_version": "1.0",
   "generated": "2026-07-13",
-  "generated_by": "Claude - added QB3_I (AFS Convention, Paint Types & Hydrogel Technology, 7 Qs) and QB1_J (Hull Paint Coating & Propeller Securing Inspection, 2 Qs). Originally drafted as QB3_H/QB1_I but renamed after discovering those filenames were already live with different content (a prior-session update was missed before building) - confirmed via GitHub raw fetch that QB3_H/QB1_I (200) exist with unrelated content and QB3_I/QB1_J (404) were open. All internal references renamed accordingly; both files independently verified against IMO AFS Convention primary text, MEPC.331(76)/MEPC.358(78)/MEPC.405(83), and marine engineering technical references before publishing.",
-  "total_questions": 540,
-  "total_files": 64,
+  "generated_by": "Claude - full resync of qb_content_index.json against live index.html (QB_GROUPS + Q_INDEX arrays, verified as internally consistent: 76 files, 610 questions, zero gaps/orphans before rebuild). Manifest had drifted stale (previously 62 files / 531 questions) after several sessions pushed direct HTML updates without updating this JSON. Rebuilt every file entry: preserved existing detailed entries from the prior manifest where question count matched the live card count exactly (assumed accurate question text/qnum); rebuilt entries from Q_INDEX question text where the prior manifest was missing the file entirely or had a stale/mismatched question count. Recommend spot-checking rebuilt entries' exact qnum sequencing against the live HTML files where practical, since Q_INDEX text order is assumed sequential per file but was not independently re-verified against each HTML file's actual q-card DOM order in this pass.",
+  "total_questions": 610,
+  "total_files": 76,
   "recently_updated": [
+    {
+      "date": "2026-07-13",
+      "files": [
+        "QB4_C"
+      ],
+      "note": "Re-verified QB4_C against live GitHub file after Nixon reported a rebuild/push in another session. Question texts (17), order, tags, and Q3/Q11 corrections (SOLAS XI reg numbers, PSC action codes) all confirmed unchanged and correctly reflected in this manifest - no content update needed. However, manifest version field was stale/wrong (showed '1.2'); corrected to '1.1' to match the live page's actual highest card version (header badge shows v1.0, but Q3 and Q11 card footers are v1.1 per the documented corrections - file-level version should track the highest individual card version)."
+    },
     {
       "date": "2026-07-13",
       "files": [
@@ -55,262 +62,6 @@
     }
   ],
   "files": {
-    "QB1_A.html": {
-      "qb_group": "QB1",
-      "letter": "A",
-      "title": "Conventions & Liability Law",
-      "version": "1.5",
-      "tags": [
-        "cargo",
-        "convention",
-        "ghg",
-        "india",
-        "insurance",
-        "map",
-        "marpol",
-        "salvage",
-        "unclos"
-      ],
-      "question_count": 32,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "P&amp;I Club — What is Protection &amp; Indemnity? How does it differ from other marine insurance?"
-        },
-        {
-          "qnum": 2,
-          "text": "Fund Convention — Explain in detail."
-        },
-        {
-          "qnum": 3,
-          "text": "LLMC Convention — Who pays within and after the limits?"
-        },
-        {
-          "qnum": 4,
-          "text": "Bunker Convention 2001 — Explain in detail. Why was it required despite CLC?"
-        },
-        {
-          "qnum": 5,
-          "text": "CLC — Civil Liability Convention. Explain in detail."
-        },
-        {
-          "qnum": 6,
-          "text": "HNS Convention — For whom does it apply? Is it in force? What is the HNS Protocol and HNS Fund?"
-        },
-        {
-          "qnum": 7,
-          "text": "Admiralty Law — Explain. How is the Chief Engineer related to the Admiralty Act?"
-        },
-        {
-          "qnum": 8,
-          "text": "Maritime Lien — Explain."
-        },
-        {
-          "qnum": 9,
-          "text": "General Average — Explain including act and procedure followed."
-        },
-        {
-          "qnum": 10,
-          "text": "Sue and Labour Clause — Explain."
-        },
-        {
-          "qnum": 11,
-          "text": "Salvage and SCOPIC — Different types of salvage. What is SCOPIC?"
-        },
-        {
-          "qnum": 12,
-          "text": "ITC (Institute Time Clauses) — What are the clauses in it?"
-        },
-        {
-          "qnum": 13,
-          "text": "London Convention — Explain with cross questions."
-        },
-        {
-          "qnum": 14,
-          "text": "OPRC Convention — Full form and explanation."
-        },
-        {
-          "qnum": 15,
-          "text": "NOSDCP — Explain."
-        },
-        {
-          "qnum": 16,
-          "text": "Basel Convention — Explain. Certificates. PIC. ESM."
-        },
-        {
-          "qnum": 17,
-          "text": "SUA Convention — Details and new amendments."
-        },
-        {
-          "qnum": 18,
-          "text": "FAL Convention — Explanation and its effect on maritime security."
-        },
-        {
-          "qnum": 19,
-          "text": "UNCLOS — Under which provision does your ship sail? EEZ and Continental Shelf explained."
-        },
-        {
-          "qnum": 20,
-          "text": "Difference between Sovereign Rights and Jurisdiction under UNCLOS."
-        },
-        {
-          "qnum": 21,
-          "text": "Innocent Passage under UNCLOS — Explain."
-        },
-        {
-          "qnum": 22,
-          "text": "Port State, Coastal State, Flag State — duties in each maritime zone."
-        },
-        {
-          "qnum": 23,
-          "text": "Hot Pursuit — Definition and conditions required."
-        },
-        {
-          "qnum": 24,
-          "text": "Casualty Investigation Code — Why? How to report? Human elements to consider."
-        },
-        {
-          "qnum": 25,
-          "text": "Fair Treatment of Seafarers — Where is it mentioned?"
-        },
-        {
-          "qnum": 26,
-          "text": "Wreck Convention — In open sea, who is responsible for a wreck?"
-        },
-        {
-          "qnum": 27,
-          "text": "Hague-Visby Rules — Explain."
-        },
-        {
-          "qnum": 28,
-          "text": "Subrogation — Explain in context of marine insurance."
-        },
-        {
-          "qnum": 29,
-          "text": "Reinsurance — Types (Facultative and Obligatory)."
-        },
-        {
-          "qnum": 30,
-          "text": "MEPC 84 Outcomes — Explain with cross questions."
-        },
-        {
-          "qnum": 31,
-          "text": "Convention Family Trees — Oil / Bunker / HNS Spill Compensation Routes"
-        },
-        {
-          "qnum": 32,
-          "text": "Master Question Dependency Graph — Revise in Clusters"
-        }
-      ],
-      "corrections_applied": [
-        "Q2 (Fund Convention): corrected stale 135m SDR combined CLC+Fund cap to current 203m SDR (post-1 Nov 2003), added the 300.74m SDR (300,740,000 SDR) step-up tier triggered when top-3 Fund-contributing States combined receive >=600 million tonnes of contributing oil in the preceding calendar year (verified vs IOPC Funds consolidated convention text). Also fixed CE Oral Tip which had incorrectly called 203m 'a common wrong answer'.",
-        "Q5 (CLC): numbers-box also carried the stale 'Combined CLC+Fund cap = 135 million SDR' reference; updated to 203m/300.74m to match Q2."
-      ]
-    },
-    "QB1_B.html": {
-      "qb_group": "QB1",
-      "letter": "B",
-      "title": "Conventions & Liability — B Series",
-      "version": "1.2",
-      "tags": [
-        "convention",
-        "insurance",
-        "ism",
-        "marpol",
-        "mlc",
-        "stcw"
-      ],
-      "question_count": 21,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "Explain the HNS Convention — to whom does it apply, is it currently in force, and if an HNS-type pollution incident occurs where the convention is not yet in force, what is the liability/compensation fallback (LLMC limits)?"
-        },
-        {
-          "qnum": 2,
-          "text": "What is the purpose of the P&A (Procedures and Arrangements) Manual, and who issues it?"
-        },
-        {
-          "qnum": 3,
-          "text": "Give an overview of Admiralty Law as it applies to a ship — cover Maritime Lien, Tort, and Statutory Liability"
-        },
-        {
-          "qnum": 4,
-          "text": "Explain the CLC (Civil Liability Convention) — scope and application, including in the context of a bunker-spill incident"
-        },
-        {
-          "qnum": 5,
-          "text": "What is Salvage, and explain SCOPIC (Special Compensation P&I Clause)"
-        },
-        {
-          "qnum": 6,
-          "text": "Explain civil liability in the context of the CLC and the Fund Convention — how do they work together for oil pollution compensation?"
-        },
-        {
-          "qnum": 7,
-          "text": "What is marine insurance, and how does P&I Club cover differ from other forms of insurance?"
-        },
-        {
-          "qnum": 8,
-          "text": "What is General Average, and what is the procedure followed onboard when GA is declared?"
-        },
-        {
-          "qnum": 9,
-          "text": "What does 'clear ground' mean in the context of marine insurance/claims?"
-        },
-        {
-          "qnum": 10,
-          "text": "What is subrogation in the context of marine insurance/P&I claims?"
-        },
-        {
-          "qnum": 11,
-          "text": "What does STSDSS stand for and what is it?"
-        },
-        {
-          "qnum": 12,
-          "text": "What is a Continuous Synopsis Record (CSR) and what types/categories of CSR entries exist?"
-        },
-        {
-          "qnum": 13,
-          "text": "Explain PSSA (Particularly Sensitive Sea Area) with examples"
-        },
-        {
-          "qnum": 14,
-          "text": "What criteria must an organisation meet to become a Recognised Organisation (RO) under IMO/Flag State delegation?"
-        },
-        {
-          "qnum": 15,
-          "text": "Explain the IMO Casualty Investigation Code — scope and purpose"
-        },
-        {
-          "qnum": 16,
-          "text": "What are the duties and powers of Port State Control?"
-        },
-        {
-          "qnum": 17,
-          "text": "How are MLC 2006 and RPSL (Recruitment and Placement Service Licence) related with respect to seafarer welfare and recruitment?"
-        },
-        {
-          "qnum": 18,
-          "text": "What is MACN, which ships does it apply to, and is it applicable to your vessel?"
-        },
-        {
-          "qnum": 19,
-          "text": "What type of charter party governs your vessel, and how does the shipowner represent the ship to maximise charter opportunities?"
-        },
-        {
-          "qnum": 20,
-          "text": "What is the 'tacit acceptance' procedure in the IMO amendment process?"
-        },
-        {
-          "qnum": 21,
-          "text": "What initiatives is IMO undertaking with respect to gender equality in the maritime industry?"
-        }
-      ],
-      "corrections_applied": [
-        "Q12 (CLC + Fund Convention): 203m SDR base figure was already correct but the 300.74m SDR step-up tier (top-3 contributing States >=600 million tonnes/yr) was missing entirely from diagram, prose, and numbers-box; added throughout."
-      ]
-    },
     "QB1_C.html": {
       "qb_group": "QB1",
       "letter": "C",
@@ -411,6 +162,248 @@
         }
       ]
     },
+    "QB1_F.html": {
+      "qb_group": "QB1",
+      "letter": "F",
+      "title": "Backlog Batch (Statutory, MARPOL, ISM & Survey Mix)",
+      "version": "1.0",
+      "tags": [
+        "fire",
+        "ghg",
+        "iacs",
+        "ism",
+        "isps",
+        "lsa",
+        "machinery",
+        "marpol",
+        "mlc",
+        "solas",
+        "survey"
+      ],
+      "question_count": 20,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "Any incident on your ship"
+        },
+        {
+          "qnum": 2,
+          "text": "All marpol related documents on your type of vessel"
+        },
+        {
+          "qnum": 3,
+          "text": "Vgr who issues and who verifies where it is mentioned and two types of checking vgr"
+        },
+        {
+          "qnum": 4,
+          "text": "Csc convention full explanation, including testing and certification, type of containers and difference in testing reefer containers"
+        },
+        {
+          "qnum": 5,
+          "text": "New technologies related to container ship and engine room machineries"
+        },
+        {
+          "qnum": 6,
+          "text": "Sustainable fuel certificates and who issues it contents of the certificate"
+        },
+        {
+          "qnum": 7,
+          "text": "Documents related to survey (for CE)"
+        },
+        {
+          "qnum": 8,
+          "text": "Hull survey"
+        },
+        {
+          "qnum": 9,
+          "text": "As CE, how will you reduce fuel consumption? Told him many points but he what something related to"
+        },
+        {
+          "qnum": 10,
+          "text": "Prior to entering war risk area, vsl conducts a security drill. How will you evaluate the drill?"
+        },
+        {
+          "qnum": 11,
+          "text": "Sea farer abodment lot of questions"
+        },
+        {
+          "qnum": 12,
+          "text": "seafarer ms act welfare requirement"
+        },
+        {
+          "qnum": 13,
+          "text": "audit, survey,inspection,statutory suvery definitions and differences"
+        },
+        {
+          "qnum": 14,
+          "text": "Types of survey and what is CSM survey"
+        },
+        {
+          "qnum": 15,
+          "text": "What all items cannot be credited by chief engineer in a CSM survey"
+        },
+        {
+          "qnum": 16,
+          "text": "explain ESP.."
+        },
+        {
+          "qnum": 17,
+          "text": "You're allotted a ship to join, how do you identify it is safe. (Refer to SEA)"
+        },
+        {
+          "qnum": 18,
+          "text": "Multimodal Act? Same advantages and disadvantages for ship owner / charterer"
+        },
+        {
+          "qnum": 19,
+          "text": "India government contribution in shipping"
+        },
+        {
+          "qnum": 20,
+          "text": "container latest amendments"
+        }
+      ]
+    },
+    "QB1_G.html": {
+      "qb_group": "QB1",
+      "letter": "G",
+      "title": "Backlog Batch (Class, GHG, Tanker & Structural Mix)",
+      "version": "1.0",
+      "tags": [
+        "fire",
+        "ghg",
+        "iacs",
+        "isps",
+        "load-line",
+        "lsa",
+        "machinery",
+        "marpol",
+        "mlc",
+        "solas",
+        "stability",
+        "stcw",
+        "survey"
+      ],
+      "question_count": 20,
+      "questions": [
+        {
+          "qnum": 21,
+          "text": "sustainable development"
+        },
+        {
+          "qnum": 22,
+          "text": "Midterm measures and technical elements"
+        },
+        {
+          "qnum": 23,
+          "text": "ER ventillation requirement and where its mentioned ( its a cross question by above qstn)"
+        },
+        {
+          "qnum": 24,
+          "text": "Total no of person can accomodate onboard , which certficate mentinong the same ."
+        },
+        {
+          "qnum": 25,
+          "text": "Latest amendment in STCW"
+        },
+        {
+          "qnum": 26,
+          "text": "High voltage course done? - how vacuum breaker earthing is different."
+        },
+        {
+          "qnum": 27,
+          "text": "GT, NT , Container ship calculation"
+        },
+        {
+          "qnum": 28,
+          "text": "⁠electronic cert requirements"
+        },
+        {
+          "qnum": 29,
+          "text": "⁠LATEST AMENDMENT IN IMOLEGAL COMMITTEE"
+        },
+        {
+          "qnum": 30,
+          "text": "⁠Esp complete"
+        },
+        {
+          "qnum": 31,
+          "text": "In water survey details. Conditions"
+        },
+        {
+          "qnum": 32,
+          "text": "Empanelment of salvors. ( ms notice 1 of 202)"
+        },
+        {
+          "qnum": 33,
+          "text": "Chemical tanker construction difference for each type"
+        },
+        {
+          "qnum": 34,
+          "text": "Certificate of fitness details and content"
+        },
+        {
+          "qnum": 35,
+          "text": "Digital inclinometer requirements - need - speciality"
+        },
+        {
+          "qnum": 36,
+          "text": "Class Quarterly listing report contents - significance - contents - what all actions you will take as chief engineer ."
+        },
+        {
+          "qnum": 37,
+          "text": "Why tankers have less freeboard.cross questions."
+        },
+        {
+          "qnum": 38,
+          "text": "Basel convention.cross question"
+        },
+        {
+          "qnum": 39,
+          "text": "Knee in ship structure — what is it and what is its function?"
+        },
+        {
+          "qnum": 40,
+          "text": "CSM (Condition Survey Method) survey — explain the concept, when it applies, and what is assessed."
+        }
+      ]
+    },
+    "QB1_H.html": {
+      "qb_group": "QB1",
+      "letter": "H",
+      "title": "QB1_H — Engine Construction, Stability & Surveys (Backlog H)",
+      "version": "1.0",
+      "tags": [
+        "iacs",
+        "ism",
+        "machinery",
+        "solas",
+        "survey"
+      ],
+      "question_count": 5,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "What is IACS Procedural Requirement (PR) 17 and when does it apply?"
+        },
+        {
+          "qnum": 2,
+          "text": "What is IACS Procedural Requirement (PR) 9 and how does it standardise ISM Code certification?"
+        },
+        {
+          "qnum": 3,
+          "text": "Differentiate between an IACS Unified Requirement (UR), Procedural Requirement (PR), and Unified Interpretation (UI)."
+        },
+        {
+          "qnum": 4,
+          "text": "Describe the windlass/mooring winch brake rendering test — purpose, calculation basis, and procedure."
+        },
+        {
+          "qnum": 5,
+          "text": "Explain the IMO Goal-Based Standards (GBS) framework — the five-tier hierarchy and its scope of application."
+        }
+      ]
+    },
     "QB1_supplementary.html": {
       "qb_group": "QB1",
       "letter": "supplementary",
@@ -507,6 +500,68 @@
         {
           "qnum": 20,
           "text": "Tail Shaft Survey — what is it, when is it due, and what is the complete procedure?"
+        }
+      ]
+    },
+    "QB1_I.html": {
+      "qb_group": "QB1",
+      "letter": "I",
+      "title": "QB1_I — Engine Construction, Stability & Surveys (Backlog I)",
+      "version": "1.1",
+      "tags": [
+        "dgs-order",
+        "esp-code",
+        "iacs",
+        "survey",
+        "tonnage"
+      ],
+      "question_count": 6,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "What is the ESP Code, in full?"
+        },
+        {
+          "qnum": 2,
+          "text": "How will you register a second-hand ship acquisition in India?"
+        },
+        {
+          "qnum": 3,
+          "text": "Relation between DWT, NT, GT and lightweight — how are they related?"
+        },
+        {
+          "qnum": 4,
+          "text": "Anniversary date of a certificate — how is it defined and used?"
+        },
+        {
+          "qnum": 5,
+          "text": "Explain any renewal survey in detail as Chief Engineer."
+        },
+        {
+          "qnum": 6,
+          "text": "IACS — what are its functions?"
+        }
+      ]
+    },
+    "QB1_J.html": {
+      "qb_group": "QB1",
+      "letter": "J",
+      "title": "QB1_J — Hull Paint Coating & Propeller Securing Inspection",
+      "version": "1.0",
+      "tags": [
+        "survey",
+        "iacs",
+        "machinery"
+      ],
+      "question_count": 2,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "Explain the procedure for hull paint coating inspection during drydock."
+        },
+        {
+          "qnum": 2,
+          "text": "Explain the propeller securing/locking arrangement inspection procedure during drydock."
         }
       ]
     },
@@ -842,6 +897,92 @@
         }
       ]
     },
+    "QB2_F.html": {
+      "qb_group": "QB2",
+      "letter": "F",
+      "title": "QB2_F — Fire Safety, LSA & DG Cargo (Backlog Batch)",
+      "version": "1.1",
+      "tags": [
+        "fire",
+        "lsa",
+        "marpol",
+        "solas"
+      ],
+      "question_count": 6,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "What are the latest amendments governing carriage of IMDG cargo?"
+        },
+        {
+          "qnum": 2,
+          "text": "A container catches fire and the UN number shows different EmS symptoms — how do you approach and fight it?"
+        },
+        {
+          "qnum": 3,
+          "text": "What are the latest SOLAS Chapter II amendments and their key changes?"
+        },
+        {
+          "qnum": 4,
+          "text": "A fire breaks out in an undeclared dangerous goods container — how will you fight it?"
+        },
+        {
+          "qnum": 5,
+          "text": "Explain the water mist lance and mobile water monitor: how to use them, on which fires, where the requirement is mentioned, and the functional requirements."
+        },
+        {
+          "qnum": 6,
+          "text": "What are the ventilation requirements for a totally enclosed lifeboat?"
+        }
+      ],
+      "corrections_applied": [
+        "Q6 (Totally enclosed lifeboat ventilation): full rebuild. Previous content was pre-amendment generic LSA 4.6/4.7/4.8 text with a fabricated 10-minute air-support figure. Corrected to IMO Res. MSC.535(107) (adopted 8 June 2023) - new LSA Code paras 4.6.6/4.6.7, ventilation rate 5 m3/h per person for 24h, powered-or-passive rule, fuel-source restriction, MOL Comfort (2013) casualty link, force date 1 Jan 2026, application date 1 Jan 2029 (new-build only)."
+      ]
+    },
+    "QB2_G.html": {
+      "qb_group": "QB2",
+      "letter": "G",
+      "title": "QB2_G — Fire Safety, LSA & FSS Code",
+      "version": "1.0",
+      "tags": [
+        "fire",
+        "lsa"
+      ],
+      "question_count": 2,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "Can you carry timber/log deck cargo on your vessel, and what precautions are taken?"
+        },
+        {
+          "qnum": 2,
+          "text": "Why is the rescue boat typically located on the starboard side of the vessel?"
+        }
+      ]
+    },
+    "QB2_H.html": {
+      "qb_group": "QB2",
+      "letter": "H",
+      "title": "QB2_H — Fire Safety, LSA & FSS Code (Backlog H)",
+      "version": "1.1",
+      "tags": [
+        "fire",
+        "fss-code",
+        "ftp-code",
+        "solas"
+      ],
+      "question_count": 2,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "What do the FSS Code and FTP Code contain?"
+        },
+        {
+          "qnum": 2,
+          "text": "Difference between water lance and 'hydropen' for internal container firefighting, and use of water monitors."
+        }
+      ]
+    },
     "QB3_A.html": {
       "qb_group": "QB3",
       "letter": "A",
@@ -1128,6 +1269,158 @@
         }
       ]
     },
+    "QB3_F.html": {
+      "qb_group": "QB3",
+      "letter": "F",
+      "title": "QB3_F — MARPOL, Environmental & Ship Recycling (Backlog Batch)",
+      "version": "1.0",
+      "tags": [
+        "ghg",
+        "ism",
+        "marpol"
+      ],
+      "question_count": 6,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "Define Special Area and PSSA under MARPOL/IMO, with examples."
+        },
+        {
+          "qnum": 2,
+          "text": "What statutory certificates are required under MARPOL Annex VI?"
+        },
+        {
+          "qnum": 3,
+          "text": "What is the discharge criteria for oil tankers under MARPOL Annex I?"
+        },
+        {
+          "qnum": 4,
+          "text": "Describe MARPOL Annex V record books and the procedure followed onboard."
+        },
+        {
+          "qnum": 5,
+          "text": "Discuss the Hong Kong Convention and India's perspective on ship recycling ratification and implementation."
+        },
+        {
+          "qnum": 6,
+          "text": "What is a ship-breaking credit note and how does it work?"
+        }
+      ]
+    },
+    "QB3_G.html": {
+      "qb_group": "QB3",
+      "letter": "G",
+      "title": "QB3_G — MARPOL Annexes, ORB & Environmental (Backlog G)",
+      "version": "1.0",
+      "tags": [
+        "ghg",
+        "ism",
+        "marpol",
+        "solas"
+      ],
+      "question_count": 4,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "What is a FONAR (Fuel Oil Non-Availability Report) and when must it be filed?"
+        },
+        {
+          "qnum": 2,
+          "text": "What is the 'Dark Fleet' (Shadow Fleet) and what safety/environmental risks does it pose?"
+        },
+        {
+          "qnum": 3,
+          "text": "Describe the ship recycling procedure in India under the Recycling of Ships Act, 2019."
+        },
+        {
+          "qnum": 4,
+          "text": "Ship recycling cross-questions: what practical, safety-critical checks will an examiner probe beyond the standard procedure?"
+        }
+      ]
+    },
+    "QB3_H.html": {
+      "qb_group": "QB3",
+      "letter": "H",
+      "title": "QB3_H — MARPOL & Environmental (Backlog H)",
+      "version": "1.1",
+      "tags": [
+        "hns",
+        "ig-system",
+        "marpol",
+        "pssa",
+        "recycling"
+      ],
+      "question_count": 6,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "What are a PSA and a PSSA? Give an example of each."
+        },
+        {
+          "qnum": 2,
+          "text": "Explain the HNS Convention. Is it in force? Why not? What does the HNS Fund cover?"
+        },
+        {
+          "qnum": 3,
+          "text": "How do you test the high and low-low level alarms on the Inert Gas system?"
+        },
+        {
+          "qnum": 4,
+          "text": "Ship recycling procedure in India?"
+        },
+        {
+          "qnum": 5,
+          "text": "Ship recycling procedure. Cross questions."
+        },
+        {
+          "qnum": 6,
+          "text": "MARPOL Annex II — contents and certificates required?"
+        }
+      ]
+    },
+    "QB3_I.html": {
+      "qb_group": "QB3",
+      "letter": "I",
+      "title": "QB3_I — AFS Convention, Paint Types & Hydrogel Technology",
+      "version": "1.0",
+      "tags": [
+        "marpol",
+        "survey",
+        "iacs",
+        "ghg"
+      ],
+      "question_count": 7,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "What is the AFS Convention? Explain its scope, key prohibitions, and certification requirements."
+        },
+        {
+          "qnum": 2,
+          "text": "What are the latest amendments to the AFS Convention (MEPC.331(76))?"
+        },
+        {
+          "qnum": 3,
+          "text": "Compare the main types of antifouling paint used on ships, including foul-release coatings — what are the benefits of foul-release paint?"
+        },
+        {
+          "qnum": 4,
+          "text": "What is hydrogel antifouling technology and how does it work?"
+        },
+        {
+          "qnum": 5,
+          "text": "What new biocide-free antifouling paint types has class recently approved, and what is their base chemistry?"
+        },
+        {
+          "qnum": 6,
+          "text": "Why is TBT (tributyltin) considered hazardous to the marine environment?"
+        },
+        {
+          "qnum": 7,
+          "text": "If the antifouling system is changed during drydock, what certificate is issued, given that the AFS Certificate itself has no fixed expiry?"
+        }
+      ]
+    },
     "QB4_A.html": {
       "qb_group": "QB4",
       "letter": "A",
@@ -1323,7 +1616,7 @@
       "qb_group": "QB4",
       "letter": "C",
       "title": "ISM Code, ISPS, MLC 2006 & STCW",
-      "version": "1.2",
+      "version": "1.1",
       "tags": [
         "iacs",
         "ism",
@@ -1554,6 +1847,156 @@
         {
           "qnum": 6,
           "text": "LRIT and AIS — difference, purpose, and basic cross questions."
+        }
+      ]
+    },
+    "QB4_G.html": {
+      "qb_group": "QB4",
+      "letter": "G",
+      "title": "ISM/ISPS/MLC/STCW — Backlog Batch",
+      "version": "1.0",
+      "tags": [
+        "isps",
+        "load-line",
+        "management",
+        "marpol",
+        "solas",
+        "stcw",
+        "survey"
+      ],
+      "question_count": 9,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "flag state vs ro diffrence"
+        },
+        {
+          "qnum": 2,
+          "text": "Isps and ssp contents"
+        },
+        {
+          "qnum": 3,
+          "text": "STCW -As a chief engineer how will you decide on watchkeeping composition .(STCW CH-8)"
+        },
+        {
+          "qnum": 4,
+          "text": "During dry dock, how will you calculate manpower requirement for the job list?"
+        },
+        {
+          "qnum": 5,
+          "text": "Dry dock preparation as CE — steps and documents. What is the dry dock interval?"
+        },
+        {
+          "qnum": 6,
+          "text": "Casualty investigation — who investigates? Contents of a casualty investigation report."
+        },
+        {
+          "qnum": 7,
+          "text": "Hull damage or oil pollution incident — as CE how will you proceed? Step by step."
+        },
+        {
+          "qnum": 8,
+          "text": "Which statutory certificate does not need renewal/survey other than AFS certificate?"
+        },
+        {
+          "qnum": 9,
+          "text": "OCIMF — what is it, tools of OCIMF and brief explanation of each."
+        }
+      ]
+    },
+    "QB4_H.html": {
+      "qb_group": "QB4",
+      "letter": "H",
+      "title": "QB4_H — ISM Code, ISPS, MLC 2006 & STCW (Backlog H)",
+      "version": "1.0",
+      "tags": [
+        "ism",
+        "isps",
+        "mlc",
+        "solas",
+        "stcw",
+        "survey"
+      ],
+      "question_count": 11,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "What is the AECS course and who is required to do it?"
+        },
+        {
+          "qnum": 2,
+          "text": "Outline the Best Management Practices for a transit through the Strait of Hormuz."
+        },
+        {
+          "qnum": 3,
+          "text": "What security-related courses are required for seafarers under STCW/ISPS, and what does each cover?"
+        },
+        {
+          "qnum": 4,
+          "text": "Describe the procedure for testing the Ship Security Alert System (SSAS)."
+        },
+        {
+          "qnum": 5,
+          "text": "What does AECS assess, and how does it differ from a routine engine room simulator course?"
+        },
+        {
+          "qnum": 6,
+          "text": "Under what circumstances may AIS be switched off, and what is the procedure?"
+        },
+        {
+          "qnum": 7,
+          "text": "Differentiate between a Certificate of Competency (CoC) and a Certificate of Proficiency (CoP)."
+        },
+        {
+          "qnum": 8,
+          "text": "Explain the difference between GPS/AIS jamming and spoofing, and their implications for a Chief Engineer."
+        },
+        {
+          "qnum": 9,
+          "text": "What ship certificates and documents relate to WHO (World Health Organization) requirements?"
+        },
+        {
+          "qnum": 10,
+          "text": "What is the procedure for extending the validity of a statutory certificate when a survey cannot be completed on time?"
+        },
+        {
+          "qnum": 11,
+          "text": "Describe the key content and operational phases of BMP5 (Best Management Practices, Version 5)."
+        }
+      ]
+    },
+    "QB4_I.html": {
+      "qb_group": "QB4",
+      "letter": "I",
+      "title": "QB4_I — ISM, ISPS & MLC (Backlog I)",
+      "version": "1.1",
+      "tags": [
+        "iii-code",
+        "isps",
+        "ism",
+        "srtp"
+      ],
+      "question_count": 5,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "What types of ISPS-related certificates exist, and what are their validity periods?"
+        },
+        {
+          "qnum": 2,
+          "text": "During an ISM audit, what is the first thing you show a surveyor as CE to demonstrate everything is in good order (PMS system)? How does the surveyor verify your PMS is genuinely in good order, and how does the surveyor know bunkering was carried out safely?"
+        },
+        {
+          "qnum": 3,
+          "text": "What is Safe Return to Port (SRtP)?"
+        },
+        {
+          "qnum": 4,
+          "text": "III Code (IMO Instruments Implementation Code) — what does it say?"
+        },
+        {
+          "qnum": 5,
+          "text": "What is the company's definition/role under maritime law (ISM Code Company definition)?"
         }
       ]
     },
@@ -1923,6 +2366,106 @@
         }
       ]
     },
+    "QB5_G.html": {
+      "qb_group": "QB5",
+      "letter": "C",
+      "title": "Management, Leadership & Human Element — Backlog Batch",
+      "version": "1.0",
+      "tags": [
+        "ghg",
+        "management"
+      ],
+      "question_count": 6,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "Alternate fuels .. transition .. what in your opinion is a long term alternative solution.?"
+        },
+        {
+          "qnum": 2,
+          "text": "How to carry out risk assessment and permit for portable framo pump"
+        },
+        {
+          "qnum": 3,
+          "text": "Dri cargo hazards"
+        },
+        {
+          "qnum": 4,
+          "text": "As CE how will you take decisions onboard? What framework do you use?"
+        },
+        {
+          "qnum": 5,
+          "text": "What is Sagar Mala project and Maritime Amritkal Vision?"
+        },
+        {
+          "qnum": 6,
+          "text": "GPS Spoofing — what is it? How does it affect vessel navigation and what are countermeasures?"
+        }
+      ]
+    },
+    "QB5_H.html": {
+      "qb_group": "QB5",
+      "letter": "H",
+      "title": "QB5_H — Management, Leadership & Human Element",
+      "version": "1.0",
+      "tags": [
+        "ism",
+        "machinery"
+      ],
+      "question_count": 2,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "Is the Chief Engineer a leader? Elaborate."
+        },
+        {
+          "qnum": 2,
+          "text": "You join a ship as Chief Engineer and the main engine type is unfamiliar to you. What actions will you take?"
+        }
+      ]
+    },
+    "QB5_I.html": {
+      "qb_group": "QB5",
+      "letter": "I",
+      "title": "QB5_I — Management, Leadership & Human Element",
+      "version": "1.0",
+      "tags": [
+        "human-element",
+        "iacs",
+        "ism",
+        "management",
+        "mlc",
+        "solas",
+        "stcw"
+      ],
+      "question_count": 6,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "What is the human-machine interface concept called in engine room design (Ergonomic Design)? How do you improve ergonomics, and what do you check when a new design/modification is brought onboard?"
+        },
+        {
+          "qnum": 2,
+          "text": "Cost-value analysis — at company level and at IMO level, what does this involve?"
+        },
+        {
+          "qnum": 3,
+          "text": "Major accident onboard — who exactly will you contact and how? What is the Emergency Response Contact at the bridge, distinct from MRCC?"
+        },
+        {
+          "qnum": 4,
+          "text": "As Chief Engineer, what are your duties as a leader — as distinct from as a manager?"
+        },
+        {
+          "qnum": 5,
+          "text": "What is 'industry-led practice' and 'industry-led management practice' in shipping?"
+        },
+        {
+          "qnum": 6,
+          "text": "How do you control/manage stress onboard as Chief Engineer?"
+        }
+      ]
+    },
     "QB6.html": {
       "qb_group": "QB6",
       "letter": "A",
@@ -2064,6 +2607,87 @@
         {
           "qnum": 3,
           "text": "NOx reduction methods — EGR vs SCR for NOx reduction; which is commercially better?"
+        }
+      ]
+    },
+    "QB6_E.html": {
+      "qb_group": "QB6",
+      "letter": "E",
+      "title": "GHG Basics — CII & GFI — Backlog Batch",
+      "version": "1.0",
+      "tags": [
+        "ghg",
+        "marpol"
+      ],
+      "question_count": 3,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "Carbon Intensity Indicator (CII) Explanation"
+        },
+        {
+          "qnum": 2,
+          "text": "Greenhouse Gas Fuel Intensity (GFI) Calculation & Unit"
+        },
+        {
+          "qnum": 3,
+          "text": "GFI Calculation and Unit (Duplicate/Deepened Focus)"
+        }
+      ]
+    },
+    "QB6_F.html": {
+      "qb_group": "QB6",
+      "letter": "F",
+      "title": "Electrical, Automation & Digitalisation (Backlog F)",
+      "version": "1.1",
+      "tags": [
+        "solas",
+        "ip-code-industrial-personnel",
+        "offshore",
+        "framo",
+        "blockchain"
+      ],
+      "question_count": 5,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "Industrial Personnel (IP) Code — SOLAS Chapter XV"
+        },
+        {
+          "qnum": 2,
+          "text": "Framo latest technology."
+        },
+        {
+          "qnum": 3,
+          "text": "block chain technology"
+        },
+        {
+          "qnum": 4,
+          "text": "mmsi"
+        },
+        {
+          "qnum": 5,
+          "text": "Call sign"
+        }
+      ]
+    },
+    "QB6_G.html": {
+      "qb_group": "QB6",
+      "letter": "G",
+      "title": "QB6_G — Electrical, Automation & Machinery (New Engine Technology)",
+      "version": "1.0",
+      "tags": [
+        "machinery"
+      ],
+      "question_count": 2,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "New type of engine — what problems are commonly faced, how do you mitigate them, and what does the maker recommend to avoid these in future designs?"
+        },
+        {
+          "qnum": 2,
+          "text": "What are the latest developments in main engine technology (not GHG/emissions-related)?"
         }
       ]
     },
@@ -2222,17 +2846,67 @@
         }
       ]
     },
+    "QB7_F.html": {
+      "qb_group": "QB7",
+      "letter": "F",
+      "title": "GHG, CII, EEXI & Decarbonisation — Backlog Batch",
+      "version": "1.0",
+      "tags": [
+        "management"
+      ],
+      "question_count": 1,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "Green, Grey, Blue and Red hydrogen — differentiate between each type."
+        }
+      ]
+    },
+    "QB7_G.html": {
+      "qb_group": "QB7",
+      "letter": "G",
+      "title": "QB7_G — GHG, CII & Decarbonisation",
+      "version": "1.0",
+      "tags": [
+        "ghg"
+      ],
+      "question_count": 1,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "What are e-fuels, and how do they relate to shipping's net-zero target?"
+        }
+      ]
+    },
+    "QB7_H.html": {
+      "qb_group": "QB7",
+      "letter": "H",
+      "title": "QB7_H — GHG, CII & Decarbonisation (Backlog H)",
+      "version": "1.1",
+      "tags": [
+        "ghg",
+        "igf-code",
+        "low-flashpoint"
+      ],
+      "question_count": 1,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "What safety measures are required for using low flash point fuel onboard?"
+        }
+      ]
+    },
     "QB8_A.html": {
       "qb_group": "QB8",
       "letter": "A",
       "title": "Cargo Operations",
-      "version": "1.0",
+      "version": "1.1",
       "tags": [
         "marpol",
         "solas",
         "survey"
       ],
-      "question_count": 7,
+      "question_count": 6,
       "questions": [
         {
           "qnum": 1,
@@ -2257,12 +2931,9 @@
         {
           "qnum": 6,
           "text": "IMDG DG cargo documents?"
-        },
-        {
-          "qnum": 7,
-          "text": "Additional QB8 topics — see QB8_B (P&amp;A Manual, CSC, e-BoL, High Density, VGM, Container Amendments)"
         }
-      ]
+      ],
+      "cheatsheet": "QB8_A_CheatSheet.html"
     },
     "QB8_B.html": {
       "qb_group": "QB8",
@@ -2374,6 +3045,305 @@
           "qnum": 2,
           "text": "IMSBC Code, BLU Code, Grain Code — brief overview and cross-questions."
         }
+      ]
+    },
+    "QB8_F.html": {
+      "qb_group": "QB8",
+      "letter": "F",
+      "title": "QB8_F — Cargo Operations",
+      "version": "1.0",
+      "tags": [
+        "fire",
+        "ghg",
+        "machinery",
+        "marpol"
+      ],
+      "question_count": 2,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "LPG (as an alternative marine fuel) is a hot topic now. Have you experienced any issues onboard?"
+        },
+        {
+          "qnum": 2,
+          "text": "Describe the frame stripping and purging procedure (scavenge space fire response context)."
+        }
+      ]
+    },
+    "QB8_G.html": {
+      "qb_group": "QB8",
+      "letter": "G",
+      "title": "QB8_G — Cargo Operations (Gas Carrier Cargo & IGC Tank Types)",
+      "version": "1.0",
+      "tags": [
+        "iacs"
+      ],
+      "question_count": 2,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "Can an LNG carrier carry chemical cargo?"
+        },
+        {
+          "qnum": 2,
+          "text": "IGC Code — explain Type A, B, and C tanks and membrane tanks: shape of each, which is self-supporting, and which has more carrying capacity."
+        }
+      ]
+    },
+    "QB1_A.html": {
+      "qb_group": "QB1",
+      "letter": "A",
+      "title": "Conventions & Liability Law",
+      "version": "1.5",
+      "tags": [
+        "cargo",
+        "convention",
+        "ghg",
+        "india",
+        "insurance",
+        "map",
+        "marpol",
+        "salvage",
+        "unclos"
+      ],
+      "question_count": 32,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "P&amp;I Club — What is Protection &amp; Indemnity? How does it differ from other marine insurance?"
+        },
+        {
+          "qnum": 2,
+          "text": "Fund Convention — Explain in detail."
+        },
+        {
+          "qnum": 3,
+          "text": "LLMC Convention — Who pays within and after the limits?"
+        },
+        {
+          "qnum": 4,
+          "text": "Bunker Convention 2001 — Explain in detail. Why was it required despite CLC?"
+        },
+        {
+          "qnum": 5,
+          "text": "CLC — Civil Liability Convention. Explain in detail."
+        },
+        {
+          "qnum": 6,
+          "text": "HNS Convention — For whom does it apply? Is it in force? What is the HNS Protocol and HNS Fund?"
+        },
+        {
+          "qnum": 7,
+          "text": "Admiralty Law — Explain. How is the Chief Engineer related to the Admiralty Act?"
+        },
+        {
+          "qnum": 8,
+          "text": "Maritime Lien — Explain."
+        },
+        {
+          "qnum": 9,
+          "text": "General Average — Explain including act and procedure followed."
+        },
+        {
+          "qnum": 10,
+          "text": "Sue and Labour Clause — Explain."
+        },
+        {
+          "qnum": 11,
+          "text": "Salvage and SCOPIC — Different types of salvage. What is SCOPIC?"
+        },
+        {
+          "qnum": 12,
+          "text": "ITC (Institute Time Clauses) — What are the clauses in it?"
+        },
+        {
+          "qnum": 13,
+          "text": "London Convention — Explain with cross questions."
+        },
+        {
+          "qnum": 14,
+          "text": "OPRC Convention — Full form and explanation."
+        },
+        {
+          "qnum": 15,
+          "text": "NOSDCP — Explain."
+        },
+        {
+          "qnum": 16,
+          "text": "Basel Convention — Explain. Certificates. PIC. ESM."
+        },
+        {
+          "qnum": 17,
+          "text": "SUA Convention — Details and new amendments."
+        },
+        {
+          "qnum": 18,
+          "text": "FAL Convention — Explanation and its effect on maritime security."
+        },
+        {
+          "qnum": 19,
+          "text": "UNCLOS — Under which provision does your ship sail? EEZ and Continental Shelf explained."
+        },
+        {
+          "qnum": 20,
+          "text": "Difference between Sovereign Rights and Jurisdiction under UNCLOS."
+        },
+        {
+          "qnum": 21,
+          "text": "Innocent Passage under UNCLOS — Explain."
+        },
+        {
+          "qnum": 22,
+          "text": "Port State, Coastal State, Flag State — duties in each maritime zone."
+        },
+        {
+          "qnum": 23,
+          "text": "Hot Pursuit — Definition and conditions required."
+        },
+        {
+          "qnum": 24,
+          "text": "Casualty Investigation Code — Why? How to report? Human elements to consider."
+        },
+        {
+          "qnum": 25,
+          "text": "Fair Treatment of Seafarers — Where is it mentioned?"
+        },
+        {
+          "qnum": 26,
+          "text": "Wreck Convention — In open sea, who is responsible for a wreck?"
+        },
+        {
+          "qnum": 27,
+          "text": "Hague-Visby Rules — Explain."
+        },
+        {
+          "qnum": 28,
+          "text": "Subrogation — Explain in context of marine insurance."
+        },
+        {
+          "qnum": 29,
+          "text": "Reinsurance — Types (Facultative and Obligatory)."
+        },
+        {
+          "qnum": 30,
+          "text": "MEPC 84 Outcomes — Explain with cross questions."
+        },
+        {
+          "qnum": 31,
+          "text": "Convention Family Trees — Oil / Bunker / HNS Spill Compensation Routes"
+        },
+        {
+          "qnum": 32,
+          "text": "Master Question Dependency Graph — Revise in Clusters"
+        }
+      ],
+      "corrections_applied": [
+        "Q2 (Fund Convention): corrected stale 135m SDR combined CLC+Fund cap to current 203m SDR (post-1 Nov 2003), added the 300.74m SDR (300,740,000 SDR) step-up tier triggered when top-3 Fund-contributing States combined receive >=600 million tonnes of contributing oil in the preceding calendar year (verified vs IOPC Funds consolidated convention text). Also fixed CE Oral Tip which had incorrectly called 203m 'a common wrong answer'.",
+        "Q5 (CLC): numbers-box also carried the stale 'Combined CLC+Fund cap = 135 million SDR' reference; updated to 203m/300.74m to match Q2."
+      ]
+    },
+    "QB1_B.html": {
+      "qb_group": "QB1",
+      "letter": "B",
+      "title": "Conventions & Liability — B Series",
+      "version": "1.2",
+      "tags": [
+        "convention",
+        "insurance",
+        "ism",
+        "marpol",
+        "mlc",
+        "stcw"
+      ],
+      "question_count": 21,
+      "questions": [
+        {
+          "qnum": 1,
+          "text": "Explain the HNS Convention — to whom does it apply, is it currently in force, and if an HNS-type pollution incident occurs where the convention is not yet in force, what is the liability/compensation fallback (LLMC limits)?"
+        },
+        {
+          "qnum": 2,
+          "text": "What is the purpose of the P&A (Procedures and Arrangements) Manual, and who issues it?"
+        },
+        {
+          "qnum": 3,
+          "text": "Give an overview of Admiralty Law as it applies to a ship — cover Maritime Lien, Tort, and Statutory Liability"
+        },
+        {
+          "qnum": 4,
+          "text": "Explain the CLC (Civil Liability Convention) — scope and application, including in the context of a bunker-spill incident"
+        },
+        {
+          "qnum": 5,
+          "text": "What is Salvage, and explain SCOPIC (Special Compensation P&I Clause)"
+        },
+        {
+          "qnum": 6,
+          "text": "Explain civil liability in the context of the CLC and the Fund Convention — how do they work together for oil pollution compensation?"
+        },
+        {
+          "qnum": 7,
+          "text": "What is marine insurance, and how does P&I Club cover differ from other forms of insurance?"
+        },
+        {
+          "qnum": 8,
+          "text": "What is General Average, and what is the procedure followed onboard when GA is declared?"
+        },
+        {
+          "qnum": 9,
+          "text": "What does 'clear ground' mean in the context of marine insurance/claims?"
+        },
+        {
+          "qnum": 10,
+          "text": "What is subrogation in the context of marine insurance/P&I claims?"
+        },
+        {
+          "qnum": 11,
+          "text": "What does STSDSS stand for and what is it?"
+        },
+        {
+          "qnum": 12,
+          "text": "What is a Continuous Synopsis Record (CSR) and what types/categories of CSR entries exist?"
+        },
+        {
+          "qnum": 13,
+          "text": "Explain PSSA (Particularly Sensitive Sea Area) with examples"
+        },
+        {
+          "qnum": 14,
+          "text": "What criteria must an organisation meet to become a Recognised Organisation (RO) under IMO/Flag State delegation?"
+        },
+        {
+          "qnum": 15,
+          "text": "Explain the IMO Casualty Investigation Code — scope and purpose"
+        },
+        {
+          "qnum": 16,
+          "text": "What are the duties and powers of Port State Control?"
+        },
+        {
+          "qnum": 17,
+          "text": "How are MLC 2006 and RPSL (Recruitment and Placement Service Licence) related with respect to seafarer welfare and recruitment?"
+        },
+        {
+          "qnum": 18,
+          "text": "What is MACN, which ships does it apply to, and is it applicable to your vessel?"
+        },
+        {
+          "qnum": 19,
+          "text": "What type of charter party governs your vessel, and how does the shipowner represent the ship to maximise charter opportunities?"
+        },
+        {
+          "qnum": 20,
+          "text": "What is the 'tacit acceptance' procedure in the IMO amendment process?"
+        },
+        {
+          "qnum": 21,
+          "text": "What initiatives is IMO undertaking with respect to gender equality in the maritime industry?"
+        }
+      ],
+      "corrections_applied": [
+        "Q12 (CLC + Fund Convention): 203m SDR base figure was already correct but the 300.74m SDR step-up tier (top-3 contributing States >=600 million tonnes/yr) was missing entirely from diagram, prose, and numbers-box; added throughout."
       ]
     },
     "QB9_A.html": {
@@ -2563,709 +3533,217 @@
         }
       ]
     },
-    "QB4_G.html": {
-      "qb_group": "QB4",
-      "letter": "G",
-      "title": "ISM/ISPS/MLC/STCW — Backlog Batch",
-      "version": "1.0",
-      "tags": [
-        "isps",
-        "load-line",
-        "management",
-        "marpol",
-        "solas",
-        "stcw",
-        "survey"
-      ],
-      "question_count": 9,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "flag state vs ro diffrence"
-        },
-        {
-          "qnum": 2,
-          "text": "Isps and ssp contents"
-        },
-        {
-          "qnum": 3,
-          "text": "STCW -As a chief engineer how will you decide on watchkeeping composition .(STCW CH-8)"
-        },
-        {
-          "qnum": 4,
-          "text": "During dry dock, how will you calculate manpower requirement for the job list?"
-        },
-        {
-          "qnum": 5,
-          "text": "Dry dock preparation as CE — steps and documents. What is the dry dock interval?"
-        },
-        {
-          "qnum": 6,
-          "text": "Casualty investigation — who investigates? Contents of a casualty investigation report."
-        },
-        {
-          "qnum": 7,
-          "text": "Hull damage or oil pollution incident — as CE how will you proceed? Step by step."
-        },
-        {
-          "qnum": 8,
-          "text": "Which statutory certificate does not need renewal/survey other than AFS certificate?"
-        },
-        {
-          "qnum": 9,
-          "text": "OCIMF — what is it, tools of OCIMF and brief explanation of each."
-        }
-      ]
-    },
-    "QB6_E.html": {
-      "qb_group": "QB6",
+    "QB9_E.html": {
+      "qb_group": "QB9",
       "letter": "E",
-      "title": "GHG Basics — CII & GFI — Backlog Batch",
-      "version": "1.0",
+      "title": "Commercial Law & Maritime Liability — Part 1 (Q1-12, Backlog E)",
+      "version": "1.1",
       "tags": [
-        "ghg",
-        "marpol"
+        "commercial-law",
+        "insurance",
+        "tmsa",
+        "clc",
+        "ms-act"
       ],
-      "question_count": 3,
+      "question_count": 12,
       "questions": [
         {
           "qnum": 1,
-          "text": "Carbon Intensity Indicator (CII) Explanation"
+          "text": "TMSA"
         },
         {
           "qnum": 2,
-          "text": "Greenhouse Gas Fuel Intensity (GFI) Calculation & Unit"
+          "text": "Latest MS Act Updates & DG Website Differences"
         },
         {
           "qnum": 3,
-          "text": "GFI Calculation and Unit (Duplicate/Deepened Focus)"
-        }
-      ]
-    },
-    "QB7_F.html": {
-      "qb_group": "QB7",
-      "letter": "F",
-      "title": "GHG, CII, EEXI & Decarbonisation — Backlog Batch",
-      "version": "1.0",
-      "tags": [
-        "management"
-      ],
-      "question_count": 1,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "Green, Grey, Blue and Red hydrogen — differentiate between each type."
-        }
-      ]
-    },
-    "QB4_G_CheatSheet.html": {
-      "qb_group": "QB4",
-      "letter": "G",
-      "title": "ISM/ISPS/MLC/STCW Cheat Sheet (companion to QB4_G)",
-      "version": "1.0",
-      "tags": [
-        "cheat-sheet"
-      ],
-      "question_count": 0,
-      "questions": []
-    },
-    "QB1_F.html": {
-      "qb_group": "QB1",
-      "letter": "F",
-      "title": "Backlog Batch (Statutory, MARPOL, ISM & Survey Mix)",
-      "version": "1.0",
-      "tags": [
-        "fire",
-        "ghg",
-        "iacs",
-        "ism",
-        "isps",
-        "lsa",
-        "machinery",
-        "marpol",
-        "mlc",
-        "solas",
-        "survey"
-      ],
-      "question_count": 20,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "Any incident on your ship"
-        },
-        {
-          "qnum": 2,
-          "text": "All marpol related documents on your type of vessel"
-        },
-        {
-          "qnum": 3,
-          "text": "Vgr who issues and who verifies where it is mentioned and two types of checking vgr"
+          "text": "War Time Marine Insurance & Extra Premiums"
         },
         {
           "qnum": 4,
-          "text": "Csc convention full explanation, including testing and certification, type of containers and difference in testing reefer containers"
+          "text": "CLC and its Explanation"
         },
         {
           "qnum": 5,
-          "text": "New technologies related to container ship and engine room machineries"
+          "text": "What is Insurance?"
         },
         {
           "qnum": 6,
-          "text": "Sustainable fuel certificates and who issues it contents of the certificate"
+          "text": "Blue Economy in Detail"
         },
         {
           "qnum": 7,
-          "text": "Documents related to survey (for CE)"
+          "text": "P&I Club Coverage in Hormuz"
         },
         {
           "qnum": 8,
-          "text": "Hull survey"
+          "text": "MS Act Provisions for Competency Exams"
         },
         {
           "qnum": 9,
-          "text": "As CE, how will you reduce fuel consumption? Told him many points but he what something related to"
+          "text": "Marine Spatial Planning"
         },
         {
           "qnum": 10,
-          "text": "Prior to entering war risk area, vsl conducts a security drill. How will you evaluate the drill?"
+          "text": "Blue Economy"
         },
         {
           "qnum": 11,
-          "text": "Sea farer abodment lot of questions"
+          "text": "Difference Between Tort and Crime in Maritime Context"
         },
         {
           "qnum": 12,
-          "text": "seafarer ms act welfare requirement"
-        },
-        {
-          "qnum": 13,
-          "text": "audit, survey,inspection,statutory suvery definitions and differences"
-        },
-        {
-          "qnum": 14,
-          "text": "Types of survey and what is CSM survey"
-        },
-        {
-          "qnum": 15,
-          "text": "What all items cannot be credited by chief engineer in a CSM survey"
-        },
-        {
-          "qnum": 16,
-          "text": "explain ESP.."
-        },
-        {
-          "qnum": 17,
-          "text": "You're allotted a ship to join, how do you identify it is safe. (Refer to SEA)"
-        },
-        {
-          "qnum": 18,
-          "text": "Multimodal Act? Same advantages and disadvantages for ship owner / charterer"
-        },
-        {
-          "qnum": 19,
-          "text": "India government contribution in shipping"
-        },
-        {
-          "qnum": 20,
-          "text": "container latest amendments"
+          "text": "Inchmaree Clause in Marine Insurance"
         }
-      ]
-    },
-    "QB1_G.html": {
-      "qb_group": "QB1",
-      "letter": "G",
-      "title": "Backlog Batch (Class, GHG, Tanker & Structural Mix)",
-      "version": "1.0",
-      "tags": [
-        "fire",
-        "ghg",
-        "iacs",
-        "isps",
-        "load-line",
-        "lsa",
-        "machinery",
-        "marpol",
-        "mlc",
-        "solas",
-        "stability",
-        "stcw",
-        "survey"
       ],
-      "question_count": 20,
-      "questions": [
-        {
-          "qnum": 21,
-          "text": "sustainable development"
-        },
-        {
-          "qnum": 22,
-          "text": "Midterm measures and technical elements"
-        },
-        {
-          "qnum": 23,
-          "text": "ER ventillation requirement and where its mentioned ( its a cross question by above qstn)"
-        },
-        {
-          "qnum": 24,
-          "text": "Total no of person can accomodate onboard , which certficate mentinong the same ."
-        },
-        {
-          "qnum": 25,
-          "text": "Latest amendment in STCW"
-        },
-        {
-          "qnum": 26,
-          "text": "High voltage course done? - how vacuum breaker earthing is different."
-        },
-        {
-          "qnum": 27,
-          "text": "GT, NT , Container ship calculation"
-        },
-        {
-          "qnum": 28,
-          "text": "⁠electronic cert requirements"
-        },
-        {
-          "qnum": 29,
-          "text": "⁠LATEST AMENDMENT IN IMOLEGAL COMMITTEE"
-        },
-        {
-          "qnum": 30,
-          "text": "⁠Esp complete"
-        },
-        {
-          "qnum": 31,
-          "text": "In water survey details. Conditions"
-        },
-        {
-          "qnum": 32,
-          "text": "Empanelment of salvors. ( ms notice 1 of 202)"
-        },
-        {
-          "qnum": 33,
-          "text": "Chemical tanker construction difference for each type"
-        },
-        {
-          "qnum": 34,
-          "text": "Certificate of fitness details and content"
-        },
-        {
-          "qnum": 35,
-          "text": "Digital inclinometer requirements - need - speciality"
-        },
-        {
-          "qnum": 36,
-          "text": "Class Quarterly listing report contents - significance - contents - what all actions you will take as chief engineer ."
-        },
-        {
-          "qnum": 37,
-          "text": "Why tankers have less freeboard.cross questions."
-        },
-        {
-          "qnum": 38,
-          "text": "Basel convention.cross question"
-        },
-        {
-          "qnum": 39,
-          "text": "Knee in ship structure — what is it and what is its function?"
-        },
-        {
-          "qnum": 40,
-          "text": "CSM (Condition Survey Method) survey — explain the concept, when it applies, and what is assessed."
-        }
-      ]
+      "cheatsheet": "QB9_E_CheatSheet.html"
     },
-    "QB2_F.html": {
-      "qb_group": "QB2",
+    "QB9_F.html": {
+      "qb_group": "QB9",
       "letter": "F",
-      "title": "QB2_F — Fire Safety, LSA & DG Cargo (Backlog Batch)",
+      "title": "Commercial Law & Maritime Liability — Part 2 (Q13-23, Backlog F)",
       "version": "1.1",
       "tags": [
-        "fire",
-        "lsa",
-        "marpol",
-        "solas"
-      ],
-      "question_count": 6,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "What are the latest amendments governing carriage of IMDG cargo?"
-        },
-        {
-          "qnum": 2,
-          "text": "A container catches fire and the UN number shows different EmS symptoms — how do you approach and fight it?"
-        },
-        {
-          "qnum": 3,
-          "text": "What are the latest SOLAS Chapter II amendments and their key changes?"
-        },
-        {
-          "qnum": 4,
-          "text": "A fire breaks out in an undeclared dangerous goods container — how will you fight it?"
-        },
-        {
-          "qnum": 5,
-          "text": "Explain the water mist lance and mobile water monitor: how to use them, on which fires, where the requirement is mentioned, and the functional requirements."
-        },
-        {
-          "qnum": 6,
-          "text": "What are the ventilation requirements for a totally enclosed lifeboat?"
-        }
-      ],
-      "corrections_applied": [
-        "Q6 (Totally enclosed lifeboat ventilation): full rebuild. Previous content was pre-amendment generic LSA 4.6/4.7/4.8 text with a fabricated 10-minute air-support figure. Corrected to IMO Res. MSC.535(107) (adopted 8 June 2023) - new LSA Code paras 4.6.6/4.6.7, ventilation rate 5 m3/h per person for 24h, powered-or-passive rule, fuel-source restriction, MOL Comfort (2013) casualty link, force date 1 Jan 2026, application date 1 Jan 2029 (new-build only)."
-      ]
-    },
-    "QB3_F.html": {
-      "qb_group": "QB3",
-      "letter": "F",
-      "title": "QB3_F — MARPOL, Environmental & Ship Recycling (Backlog Batch)",
-      "version": "1.0",
-      "tags": [
-        "ghg",
-        "ism",
-        "marpol"
-      ],
-      "question_count": 6,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "Define Special Area and PSSA under MARPOL/IMO, with examples."
-        },
-        {
-          "qnum": 2,
-          "text": "What statutory certificates are required under MARPOL Annex VI?"
-        },
-        {
-          "qnum": 3,
-          "text": "What is the discharge criteria for oil tankers under MARPOL Annex I?"
-        },
-        {
-          "qnum": 4,
-          "text": "Describe MARPOL Annex V record books and the procedure followed onboard."
-        },
-        {
-          "qnum": 5,
-          "text": "Discuss the Hong Kong Convention and India's perspective on ship recycling ratification and implementation."
-        },
-        {
-          "qnum": 6,
-          "text": "What is a ship-breaking credit note and how does it work?"
-        }
-      ]
-    },
-    "QB5_G.html": {
-      "qb_group": "QB5",
-      "letter": "C",
-      "title": "Management, Leadership & Human Element — Backlog Batch",
-      "version": "1.0",
-      "tags": [
-        "ghg",
-        "management"
-      ],
-      "question_count": 6,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "Alternate fuels .. transition .. what in your opinion is a long term alternative solution.?"
-        },
-        {
-          "qnum": 2,
-          "text": "How to carry out risk assessment and permit for portable framo pump"
-        },
-        {
-          "qnum": 3,
-          "text": "Dri cargo hazards"
-        },
-        {
-          "qnum": 4,
-          "text": "As CE how will you take decisions onboard? What framework do you use?"
-        },
-        {
-          "qnum": 5,
-          "text": "What is Sagar Mala project and Maritime Amritkal Vision?"
-        },
-        {
-          "qnum": 6,
-          "text": "GPS Spoofing — what is it? How does it affect vessel navigation and what are countermeasures?"
-        }
-      ]
-    },
-    "QB2_G.html": {
-      "qb_group": "QB2",
-      "letter": "G",
-      "title": "QB2_G — Fire Safety, LSA & FSS Code",
-      "version": "1.0",
-      "tags": [
-        "fire",
-        "lsa"
-      ],
-      "question_count": 2,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "Can you carry timber/log deck cargo on your vessel, and what precautions are taken?"
-        },
-        {
-          "qnum": 2,
-          "text": "Why is the rescue boat typically located on the starboard side of the vessel?"
-        }
-      ]
-    },
-    "QB5_H.html": {
-      "qb_group": "QB5",
-      "letter": "H",
-      "title": "QB5_H — Management, Leadership & Human Element",
-      "version": "1.0",
-      "tags": [
-        "ism",
-        "machinery"
-      ],
-      "question_count": 2,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "Is the Chief Engineer a leader? Elaborate."
-        },
-        {
-          "qnum": 2,
-          "text": "You join a ship as Chief Engineer and the main engine type is unfamiliar to you. What actions will you take?"
-        }
-      ]
-    },
-    "QB7_G.html": {
-      "qb_group": "QB7",
-      "letter": "G",
-      "title": "QB7_G — GHG, CII & Decarbonisation",
-      "version": "1.0",
-      "tags": [
-        "ghg"
-      ],
-      "question_count": 1,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "What are e-fuels, and how do they relate to shipping's net-zero target?"
-        }
-      ]
-    },
-    "QB8_F.html": {
-      "qb_group": "QB8",
-      "letter": "F",
-      "title": "QB8_F — Cargo Operations",
-      "version": "1.0",
-      "tags": [
-        "fire",
-        "ghg",
-        "machinery",
-        "marpol"
-      ],
-      "question_count": 2,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "LPG (as an alternative marine fuel) is a hot topic now. Have you experienced any issues onboard?"
-        },
-        {
-          "qnum": 2,
-          "text": "Describe the frame stripping and purging procedure (scavenge space fire response context)."
-        }
-      ]
-    },
-    "QB1_H.html": {
-      "qb_group": "QB1",
-      "letter": "H",
-      "title": "QB1_H — Engine Construction, Stability & Surveys (Backlog H)",
-      "version": "1.0",
-      "tags": [
-        "iacs",
-        "ism",
-        "machinery",
-        "solas",
-        "survey"
-      ],
-      "question_count": 5,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "What is IACS Procedural Requirement (PR) 17 and when does it apply?"
-        },
-        {
-          "qnum": 2,
-          "text": "What is IACS Procedural Requirement (PR) 9 and how does it standardise ISM Code certification?"
-        },
-        {
-          "qnum": 3,
-          "text": "Differentiate between an IACS Unified Requirement (UR), Procedural Requirement (PR), and Unified Interpretation (UI)."
-        },
-        {
-          "qnum": 4,
-          "text": "Describe the windlass/mooring winch brake rendering test — purpose, calculation basis, and procedure."
-        },
-        {
-          "qnum": 5,
-          "text": "Explain the IMO Goal-Based Standards (GBS) framework — the five-tier hierarchy and its scope of application."
-        }
-      ]
-    },
-    "QB3_G.html": {
-      "qb_group": "QB3",
-      "letter": "G",
-      "title": "QB3_G — MARPOL Annexes, ORB & Environmental (Backlog G)",
-      "version": "1.0",
-      "tags": [
-        "ghg",
-        "ism",
-        "marpol",
-        "solas"
-      ],
-      "question_count": 4,
-      "questions": [
-        {
-          "qnum": 1,
-          "text": "What is a FONAR (Fuel Oil Non-Availability Report) and when must it be filed?"
-        },
-        {
-          "qnum": 2,
-          "text": "What is the 'Dark Fleet' (Shadow Fleet) and what safety/environmental risks does it pose?"
-        },
-        {
-          "qnum": 3,
-          "text": "Describe the ship recycling procedure in India under the Recycling of Ships Act, 2019."
-        },
-        {
-          "qnum": 4,
-          "text": "Ship recycling cross-questions: what practical, safety-critical checks will an examiner probe beyond the standard procedure?"
-        }
-      ]
-    },
-    "QB4_H.html": {
-      "qb_group": "QB4",
-      "letter": "H",
-      "title": "QB4_H — ISM Code, ISPS, MLC 2006 & STCW (Backlog H)",
-      "version": "1.0",
-      "tags": [
-        "ism",
-        "isps",
-        "mlc",
-        "solas",
-        "stcw",
-        "survey"
+        "commercial-law",
+        "flag-state",
+        "port-state-control",
+        "registration"
       ],
       "question_count": 11,
       "questions": [
         {
           "qnum": 1,
-          "text": "What is the AECS course and who is required to do it?"
+          "text": "Uniform Law and Conflict of Law in Maritime Context"
         },
         {
           "qnum": 2,
-          "text": "Outline the Best Management Practices for a transit through the Strait of Hormuz."
+          "text": "Port of Refuge"
         },
         {
           "qnum": 3,
-          "text": "What security-related courses are required for seafarers under STCW/ISPS, and what does each cover?"
+          "text": "Machinery Breakdown Insurance Claims"
         },
         {
           "qnum": 4,
-          "text": "Describe the procedure for testing the Ship Security Alert System (SSAS)."
+          "text": "Fraudulent Registration of Ships"
         },
         {
           "qnum": 5,
-          "text": "What does AECS assess, and how does it differ from a routine engine room simulator course?"
+          "text": "Continuous Hot Pursuit"
         },
         {
           "qnum": 6,
-          "text": "Under what circumstances may AIS be switched off, and what is the procedure?"
+          "text": "Cabotage Law"
         },
         {
           "qnum": 7,
-          "text": "Differentiate between a Certificate of Competency (CoC) and a Certificate of Proficiency (CoP)."
+          "text": "STSDSS Full Form and Explanation"
         },
         {
           "qnum": 8,
-          "text": "Explain the difference between GPS/AIS jamming and spoofing, and their implications for a Chief Engineer."
+          "text": "Flag of Convenience (FOC) / Open Registry"
         },
         {
           "qnum": 9,
-          "text": "What ship certificates and documents relate to WHO (World Health Organization) requirements?"
+          "text": "RightShip Inspection"
         },
         {
           "qnum": 10,
-          "text": "What is the procedure for extending the validity of a statutory certificate when a survey cannot be completed on time?"
+          "text": "Clear Grounds"
         },
         {
           "qnum": 11,
-          "text": "Describe the key content and operational phases of BMP5 (Best Management Practices, Version 5)."
+          "text": "Official Number"
         }
-      ]
+      ],
+      "cheatsheet": "QB9_F_CheatSheet.html"
     },
-    "QB3_I.html": {
-      "qb_group": "QB3",
-      "letter": "I",
-      "title": "QB3_I — AFS Convention, Paint Types & Hydrogel Technology",
+    "QB9_G.html": {
+      "qb_group": "QB9",
+      "letter": "G",
+      "title": "QB9_G — Commercial Law & Maritime Liability",
       "version": "1.0",
       "tags": [
+        "commercial-law",
+        "ism",
+        "isps",
         "marpol",
-        "survey",
-        "iacs",
-        "ghg"
+        "mlc",
+        "solas"
       ],
       "question_count": 7,
       "questions": [
         {
           "qnum": 1,
-          "text": "What is the AFS Convention? Explain its scope, key prohibitions, and certification requirements."
+          "text": "Name other Acts related to shipping besides the MS Act (e.g. Recycling of Ships Act, Admiralty Act) — what does the Admiralty Act contain?"
         },
         {
           "qnum": 2,
-          "text": "What are the latest amendments to the AFS Convention (MEPC.331(76))?"
+          "text": "What is meant by 'in rem' and 'in personam' in maritime legal proceedings?"
         },
         {
           "qnum": 3,
-          "text": "Compare the main types of antifouling paint used on ships, including foul-release coatings — what are the benefits of foul-release paint?"
+          "text": "How is an IMO convention formally adopted? Explain the conference process, protocol, amendments, tacit vs explicit acceptance, the role of committees/sub-committees, the FAL Committee's function, and the difference between ratification, acceptance, approval, and accession."
         },
         {
           "qnum": 4,
-          "text": "What is hydrogel antifouling technology and how does it work?"
+          "text": "What is an Official Log Book?"
         },
         {
           "qnum": 5,
-          "text": "What new biocide-free antifouling paint types has class recently approved, and what is their base chemistry?"
+          "text": "Maritime Single Window — what is it, and how does it relate to the FAL Convention?"
         },
         {
           "qnum": 6,
-          "text": "Why is TBT (tributyltin) considered hazardous to the marine environment?"
+          "text": "What is the difference between a Convention, a Protocol, and a Treaty in international maritime law?"
         },
         {
           "qnum": 7,
-          "text": "If the antifouling system is changed during drydock, what certificate is issued, given that the AFS Certificate itself has no fixed expiry?"
+          "text": "What is the difference between General Average and Particular Average?"
         }
-      ]
+      ],
+      "cheatsheet": "QB9_G_CheatSheet.html"
     },
-    "QB1_J.html": {
-      "qb_group": "QB1",
-      "letter": "J",
-      "title": "QB1_J — Hull Paint Coating & Propeller Securing Inspection",
+    "QB10_A.html": {
+      "qb_group": "QB10",
+      "letter": "A",
+      "title": "Maritime Industry, Policy & Current Affairs",
       "version": "1.0",
       "tags": [
-        "survey",
-        "iacs",
-        "machinery"
+        "ship-types",
+        "sagarmala",
+        "amrit-kaal",
+        "technology",
+        "opec",
+        "geopolitics"
       ],
-      "question_count": 2,
+      "question_count": 6,
       "questions": [
         {
           "qnum": 1,
-          "text": "Explain the procedure for hull paint coating inspection during drydock."
+          "text": "Type of vessel sailed on"
         },
         {
           "qnum": 2,
-          "text": "Explain the propeller securing/locking arrangement inspection procedure during drydock."
+          "text": "type of ship sailed - general cargo"
+        },
+        {
+          "qnum": 3,
+          "text": "Sagarmala in detail"
+        },
+        {
+          "qnum": 4,
+          "text": "latest technology in your ship"
+        },
+        {
+          "qnum": 5,
+          "text": "Amrit kal vision details"
+        },
+        {
+          "qnum": 6,
+          "text": "What is the latest thing that happened in OPEC"
         }
       ]
     }
-  },
-  "derived_pages_note": "This manifest does not track examiner-index.html directly (it is a derived/generated page, not a QB question file). See notes_content_index.json > series.cross-reference-pages for its entry, stats, and regeneration triggers."
+  }
 }
