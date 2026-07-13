@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QB3_I — AFS Convention, Paint Types &amp; Hydrogel Technology | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;
+--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;}
+*{box-sizing:border-box;}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);}
+a{color:var(--teal-dark);}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);
+display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;}
+.topbar .logo{width:28px;height:28px;background:var(--teal);border-radius:6px;color:#fff;display:flex;
+align-items:center;justify-content:center;font-weight:700;font-size:.8rem;}
+.topbar .site{font-weight:600;font-size:.95rem;}
+.topbar nav{margin-left:auto;display:flex;gap:1rem;font-size:.85rem;}
+.page-header{background:var(--navy);color:#fff;padding:1.4rem 1rem;}
+.page-header .badge{display:inline-block;background:var(--teal);padding:.15rem .6rem;border-radius:4px;
+font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.5rem;}
+.page-header h1{margin:.2rem 0;font-size:1.4rem;}
+.page-header p{margin:.2rem 0 0;color:#cbd5e1;font-size:.9rem;max-width:760px;}
+.header-meta{margin-top:.7rem;display:flex;gap:1rem;flex-wrap:wrap;font-size:.75rem;color:#94a3b8;}
+.controls-bar{position:sticky;top:48px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);
+padding:.6rem 1rem;display:flex;gap:.5rem;align-items:center;flex-wrap:wrap;}
+.controls-bar input{flex:1;min-width:160px;padding:.45rem .7rem;border:1px solid var(--grey-border);
+border-radius:6px;font-size:.85rem;}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;padding:.35rem .7rem;border-radius:20px;
+font-size:.75rem;cursor:pointer;color:var(--grey-text);}
+.filter-btn.active{background:var(--teal-light);border-color:var(--teal);color:var(--teal-dark);font-weight:600;}
+#q-count-label{font-size:.75rem;color:var(--grey-text);margin-left:auto;}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:1.2rem;max-width:1100px;margin:0 auto;padding:1rem;}
+.sidebar{position:sticky;top:100px;align-self:start;font-size:.82rem;max-height:80vh;overflow:auto;}
+.sidebar .toc-link{display:block;padding:.3rem .5rem;border-radius:5px;color:var(--grey-text);
+text-decoration:none;border-left:3px solid transparent;}
+.sidebar .toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:600;}
+.sidebar hr{border:none;border-top:1px solid var(--grey-border);margin:.7rem 0;}
+.sidebar .upcoming{color:var(--grey-text);font-size:.75rem;font-style:italic;}
+.section-head{display:flex;align-items:center;gap:.5rem;margin:1.4rem 0 .6rem;}
+.section-head h2{font-size:1.05rem;margin:0;}
+.sec-count{font-size:.7rem;background:var(--grey-bg);color:var(--grey-text);padding:.15rem .5rem;border-radius:10px;}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:10px;margin-bottom:.8rem;overflow:hidden;}
+.q-header{display:flex;gap:.7rem;align-items:flex-start;padding:.8rem 1rem;cursor:pointer;}
+.q-header:hover{background:var(--grey-bg);}
+.q-num-badge{flex:none;width:26px;height:26px;border-radius:50%;background:var(--teal);color:#fff;
+display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;}
+.q-text-wrap{flex:1;min-width:0;}
+.q-text{font-weight:600;font-size:.95rem;}
+.q-tags{margin-top:.35rem;display:flex;gap:.35rem;flex-wrap:wrap;}
+.q-tag{font-size:.65rem;background:var(--teal-light);color:var(--teal-dark);padding:.1rem .5rem;border-radius:10px;}
+.q-chevron{flex:none;width:20px;height:20px;transition:transform .2s;stroke:var(--grey-text);}
+.q-card.open .q-chevron{transform:rotate(180deg);}
+.q-answer{display:none;padding:0 1rem 1rem;}
+.q-card.open .q-answer{display:block;}
+.practice-block{background:var(--teal-light);border-left:4px solid var(--teal);padding:.6rem .8rem;
+border-radius:6px;margin:.5rem 0;font-size:.88rem;}
+.practice-block strong{color:var(--teal-dark);}
+.answer-body{font-family:Georgia,serif;font-size:.92rem;line-height:1.55;}
+.answer-body h4{font-family:'Segoe UI',sans-serif;font-size:.72rem;text-transform:uppercase;
+letter-spacing:.05em;color:var(--teal-dark);margin:1rem 0 .3rem;}
+.answer-body ul,.answer-body ol{margin:.3rem 0;padding-left:1.2rem;}
+.answer-body p{margin:.4rem 0;}
+.formula{font-family:monospace;background:var(--grey-bg);padding:.5rem .7rem;border-radius:6px;display:inline-block;}
+.reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:.7rem .9rem;margin:.8rem 0 .5rem;font-size:.82rem;}
+.reg-box-title{font-weight:700;color:#fff;margin-bottom:.4rem;font-size:.78rem;}
+.reg-item{display:flex;gap:.6rem;padding:.2rem 0;border-top:1px solid #1e293b;flex-wrap:wrap;min-width:0;}
+.reg-item:first-of-type{border-top:none;}
+.reg-code{color:var(--orange);font-family:monospace;font-size:.78rem;flex:none;word-break:break-all;}
+.reg-desc{color:#94a3b8;min-width:0;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);padding:.6rem .8rem;
+border-radius:6px;font-size:.85rem;}
+details.deep-dive{margin-top:.6rem;border:1px dashed var(--grey-border);border-radius:8px;padding:.4rem .7rem;}
+details.deep-dive summary{cursor:pointer;font-size:.8rem;font-weight:600;color:var(--teal-dark);}
+details.deep-dive .dd-item{margin:.5rem 0;font-size:.83rem;}
+details.deep-dive .dd-item b{color:var(--ink);}
+.q-footer{display:flex;justify-content:space-between;gap:.6rem;flex-wrap:wrap;padding:.5rem 1rem;
+border-top:1px solid var(--grey-border);background:var(--grey-bg);font-size:.7rem;color:var(--grey-text);
+min-width:0;}
+.correction-link{word-break:break-all;min-width:0;}
+.q-version{flex:none;}
+#no-results{display:none;text-align:center;padding:2rem;color:var(--grey-text);}
+.page-footer{max-width:1100px;margin:1rem auto;padding:1rem;font-size:.78rem;color:var(--grey-text);
+border-top:1px solid var(--grey-border);}
+.cheat-sheet{max-width:1100px;margin:1.5rem auto;padding:0 1rem;}
+.cheat-sheet h2{font-size:1.1rem;color:var(--teal-dark);}
+.flow{display:flex;flex-direction:column;gap:0;align-items:stretch;margin:.6rem 0;}
+.flow .fbox{background:var(--navy);color:#fff;padding:.5rem .8rem;border-radius:6px;font-size:.8rem;text-align:center;}
+.flow .farrow{text-align:center;color:var(--teal);font-size:1rem;line-height:1.2;}
+.cue-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:.7rem;margin:.7rem 0;}
+.cue-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;padding:.6rem .8rem;font-size:.82rem;}
+.cue-card b{color:var(--teal-dark);display:block;font-size:.75rem;text-transform:uppercase;margin-bottom:.3rem;}
+.recall-table{width:100%;border-collapse:collapse;font-size:.82rem;margin:.6rem 0;}
+.recall-table th,.recall-table td{border:1px solid var(--grey-border);padding:.4rem .6rem;text-align:left;}
+.recall-table th{background:var(--grey-bg);}
+@media(max-width:760px){.main-layout{grid-template-columns:1fr;}.sidebar{position:static;max-height:none;}}
+</style>
+</head>
+<body><script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+<div class="topbar">
+  <div class="logo">MI</div>
+  <div class="site">Marine Intelligence Weekly</div>
+  <nav><a href="https://marineintelligenceweekly.com">Home</a><a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a><a href="mailto:contactus@marineintelligenceweekly.com">Contact</a></nav>
+</div>
+<div class="page-header">
+  <span class="badge">QB3_I</span>
+  <h1>QB3_I — AFS Convention, Paint Types &amp; Hydrogel Technology</h1>
+  <p>AFS Convention scope, MEPC.331(76) cybutryne amendment, antifouling paint comparison, hydrogel technology, TBT hazards, and AFS certificate validity — Kochi MMD oral prep.</p>
+  <div class="header-meta"><span>7 Questions</span><span>Examiner: Not yet assigned</span><span>Kochi MMD Oral Prep</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span></div>
+</div>
+<div class="controls-bar">
+  <input id="search-input" placeholder="Search questions…" oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button><button class="filter-btn" onclick="filterTag('marpol',this)">MARPOL</button><button class="filter-btn" onclick="filterTag('survey',this)">Surveys</button><button class="filter-btn" onclick="filterTag('iacs',this)">IACS / Class</button>
+  <span id="q-count-label">Showing 7 of 7</span>
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <a class="toc-link" href="#q1">Q1. What is the AFS Convention?…</a>
+    <a class="toc-link" href="#q2">Q2. Latest AFS amendments (MEPC…</a>
+    <a class="toc-link" href="#q3">Q3. Antifouling paint types compa…</a>
+    <a class="toc-link" href="#q4">Q4. Hydrogel antifouling technolo…</a>
+    <a class="toc-link" href="#q5">Q5. Biocide-free paint types (class…</a>
+    <a class="toc-link" href="#q6">Q6. Why TBT is hazardous…</a>
+    <a class="toc-link" href="#q7">Q7. AFS certificate on paint change…</a>
+    <hr>
+    <div class="upcoming">Q8 (paint coating/propeller lashing inspection) routed separately — not an AFS question. Q9 (alternate paint types) cross-linked from QB1 hull coatings — not duplicated here.</div>
+  </div>
+  <div id="q-feed">
+    <div class="section-head"><h2>&#128167; MARPOL &amp; Environmental — AFS Convention</h2><span class="sec-count">7 questions</span></div>
+
+<div class="q-card" id="q1" data-tags="marpol survey iacs">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is the AFS Convention? Explain its scope, key prohibitions, and certification requirements.</div>
+      <div class="q-tags"><span class="q-tag">marpol</span><span class="q-tag">survey</span><span class="q-tag">iacs</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer:</strong> The AFS Convention, adopted 5 October 2001 and in force since 17 September 2008, bans harmful antifouling biocides — TBT globally, and cybutryne from 2023. Ships ≥400 GT need an International AFS Certificate; ships ≥24m but &lt;400 GT need only an AFS Declaration.</div>
+    <div class="practice-block"><strong>60-Second Answer:</strong> Adopted 5 October 2001, entering into force 17 September 2008, the AFS Convention prohibits harmful organotin compounds (TBT) globally, with cybutryne added from 1 January 2023. Its scope extends to all vessels, including fixed/floating platforms and FPSOs, engaged in international trade. Ships ≥400 GT must undergo initial and periodic surveys to hold an International AFS Certificate (Annex 4, Reg 2). Ships ≥24m length but &lt;400 GT only require an AFS Declaration (Annex 4, Reg 5), signed by the owner and backed by paint manufacturer data — ships under 24m need neither document. A re-survey is triggered by any change of the antifouling system, repairs affecting approximately 25% or more of the coating area, or a major conversion.</div>
+    <div class="answer-body">
+      <h4>Governing Instrument</h4>
+      <p>The International Convention on the Control of Harmful Anti-fouling Systems on Ships (AFS Convention), adopted 5 October 2001, entered into force 17 September 2008, phases out antifouling systems harmful to the marine environment.</p>
+      <h4>Prohibited Substances &amp; Scope</h4>
+      <ul>
+        <li><strong>TBT (tributyltin):</strong> organotin compounds prohibited as biocides in antifouling systems, globally, since the Convention's entry into force (Annex 1).</li>
+        <li><strong>Cybutryne:</strong> added as a controlled substance from 1 January 2023 via MEPC.331(76) — full detail in Q2.</li>
+        <li><strong>Scope:</strong> applies to all ships, platforms, and floating units engaged in international trade.</li>
+      </ul>
+      <h4>Certification — Certificate vs Declaration</h4>
+      <ul>
+        <li><strong>Ships ≥400 GT:</strong> require an International AFS Certificate, issued after initial and periodic surveys (Annex 4, Regulation 2).</li>
+        <li><strong>Ships ≥24m length but &lt;400 GT, on international voyages:</strong> require only an AFS Declaration, signed by the owner or authorised agent, backed by paint manufacturer documentation (Annex 4, Regulation 5) — not class/flag-issued.</li>
+        <li><strong>Ships &lt;24m length:</strong> no AFS Certificate or Declaration required under the Convention.</li>
+        <li><strong>Re-survey triggers:</strong> antifouling system changed/replaced, repairs affecting approximately 25% or more of the antifouling area (per MEPC.358(78) 2022 Guidelines), or a major conversion.</li>
+      </ul>
+      <h4>Certificate vs Declaration — The Examiner's Trap</h4>
+      <p>Candidates often state the threshold as simply "&lt;400 GT," missing the ≥24m length qualifier and the fact that ships under 24m need neither document. If asked <em>"Who issues the AFS Declaration?"</em> — the answer is the shipowner or authorised agent, not Class or Flag, backed by manufacturer technical data.</p>
+      <h4>Chief Engineer Relevance</h4>
+      <p>The CE verifies the AFS Certificate/Declaration is onboard, matches the physical hull coating system, and is ready for PSC inspection — and coordinates documentation updates with drydock planning whenever hull paint specifications change.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">AFS Convention 2001</span><span class="reg-desc">Adopted 5 Oct 2001, in force 17 Sept 2008 — parent framework</span></div>
+      <div class="reg-item"><span class="reg-code">AFS Convention, Annex 1</span><span class="reg-desc">Controlled substances list (TBT, cybutryne)</span></div>
+      <div class="reg-item"><span class="reg-code">AFS Convention, Annex 4, Reg. 2</span><span class="reg-desc">International AFS Certificate — ships ≥400 GT</span></div>
+      <div class="reg-item"><span class="reg-code">AFS Convention, Annex 4, Reg. 5</span><span class="reg-desc">AFS Declaration — ships ≥24m length, &lt;400 GT</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC.358(78) (2022)</span><span class="reg-desc">Survey &amp; certification guidelines — source of the ~25% repair-area trigger</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Examiner: Not yet assigned. State the Certificate/Declaration threshold precisely — ≥400 GT for Certificate, ≥24m &lt;400 GT for Declaration, nothing below 24m — this is the single most testable fact in this topic.</div>
+    <details class="deep-dive"><summary>Deep-Dive: Traps, Failures, Numbers, Regulatory Case, On My Vessel</summary>
+      <div class="dd-item"><b>Trap Questions:</b> "Who issues the AFS Declaration for a ship under 400 GT?" — The shipowner or authorised agent, based on paint manufacturer data, not Class or Flag; applies only ≥24m length.</div>
+      <div class="dd-item"><b>Common CE Failures:</b> Confusing the threshold direction, or assuming all ships need a Class-surveyed Certificate regardless of size.</div>
+      <div class="dd-item"><b>Numbers to Memorise:</b> 17 September 2008 entry into force; 400 GT / 24m thresholds; ~25% repair-area re-survey trigger.</div>
+      <div class="dd-item"><b>Regulatory Case:</b> TBT's documented ecological harm — imposex (male sex characteristics in female marine gastropods) — was the historical driver behind the Convention's adoption.</div>
+      <div class="dd-item"><b>On My Vessel:</b> AFS Certificate maintained in the statutory certificate folder in the ship's office.</div>
+    </details>
+    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: High — verified against IMO primary AFS Convention text, MEPC.358(78) guidelines, and UK MGN 398 (2024) implementing regulations.</em></p>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3_I, Q1, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3_I, Q1, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB3_I · Q1 · v1.0</span>
+  </div>
+</div>
+
+<div class="q-card" id="q2" data-tags="marpol survey ghg">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What are the latest amendments to the AFS Convention (MEPC.331(76))?</div>
+      <div class="q-tags"><span class="q-tag">marpol</span><span class="q-tag">survey</span><span class="q-tag">ghg</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer:</strong> MEPC.331(76), adopted 17 June 2021, in force 1 January 2023, banned cybutryne in antifouling systems. Existing cybutryne coatings must be removed or sealed within 60 months of last application; certificates held as of 1 Jan 2023 needed documentary verification by 31 December 2024.</div>
+    <div class="practice-block"><strong>60-Second Answer:</strong> IMO Resolution MEPC.331(76), adopted 17 June 2021 and in force 1 January 2023, added cybutryne (CAS 28159-98-0, trade name Irgarol-1051) to Annex 1's controlled substances. No application or reapplication is permitted from 1 January 2023. For existing cybutryne coatings, operators must remove the layer or apply an approved barrier/sealer coating, at the next scheduled renewal after 1 Jan 2023 but no later than 60 months from the last application. Separately, all AFS Certificates held as of 1 January 2023 required documentary verification by 31 December 2024 — a paperwork deadline distinct from the 60-month physical compliance clock. Exemptions apply to pre-2023 platforms/FSU/FPSO not drydocked since, non-international-voyage ships, and &lt;400 GT ships with coastal State acceptance.</div>
+    <div class="answer-body">
+      <h4>The 2021 Amendment</h4>
+      <p>IMO Resolution MEPC.331(76), adopted 17 June 2021, entered into force 1 January 2023, added cybutryne (CAS No. 28159-98-0) to the list of controlled anti-fouling substances under Annex 1 of the AFS Convention. Cybutryne (trade name Irgarol-1051) is a biocide that disrupts photosynthesis in marine algae and is highly persistent, accumulating in sediment.</p>
+      <h4>Cybutryne Prohibition &amp; Existing-Coating Compliance</h4>
+      <ul>
+        <li><strong>Application ban:</strong> no application or reapplication of cybutryne-containing antifouling systems on or after 1 January 2023.</li>
+        <li><strong>Remediation options:</strong> existing cybutryne coatings must be removed, OR sealed with a barrier coating to prevent leaching.</li>
+        <li><strong>Compliance window:</strong> at the next scheduled AFS renewal after 1 January 2023, but no later than 60 months (5 years) from the last cybutryne application.</li>
+        <li><strong>Documentary verification:</strong> ships already holding an AFS Certificate as of 1 January 2023 required documentary verification by 31 December 2024, to update the certificate format.</li>
+      </ul>
+      <h4>Exemptions</h4>
+      <ul>
+        <li>Fixed/floating platforms, FSUs, and FPSOs built before 1 January 2023 and not drydocked since.</li>
+        <li>Ships not engaged in international voyages.</li>
+        <li>Ships &lt;400 GT on international voyages, if accepted by the coastal States concerned.</li>
+      </ul>
+      <h4>Two Separate Clocks — Do Not Conflate</h4>
+      <p>The 60-month physical removal/sealing window and the 31 December 2024 documentary verification deadline are two distinct compliance timelines. The 2024 deadline was strictly administrative (updating certificate templates); physical hull correction follows the separate 5-year maximum window from the system's last application.</p>
+      <h4>Compliance Threshold — Biocidal Level</h4>
+      <p>Per the 2022 Guidelines (MEPC.358(78)), a coating is considered compliant when cybutryne is present at a level providing no biocidal effect — originally set at a maximum of 1,000 mg cybutryne per kg of dry paint (with a 250 mg/kg / 25% tolerance range). This threshold was later revised downward to <strong>200 mg/kg</strong> by a subsequent MEPC resolution; Material Declarations prepared on or after 26 June 2025 must use the new format reflecting this lower limit (per MEPC.405(83)).</p>
+      <h4>Chief Engineer Relevance</h4>
+      <p>The CE audits past drydock coating logs to confirm if cybutryne-based paint was used pre-2023, and ensures drydock planning includes full blasting or an approved barrier coat before the 60-month window expires.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MEPC.331(76)</span><span class="reg-desc">Adopted 17 June 2021 — amends Annex 1 and Appendix 1 to Annex 4 (certificate form) to add cybutryne</span></div>
+      <div class="reg-item"><span class="reg-code">In force 1 January 2023</span><span class="reg-desc">Cybutryne application/reapplication ban effective date</span></div>
+      <div class="reg-item"><span class="reg-code">Compliance deadline</span><span class="reg-desc">Next scheduled renewal after 1 Jan 2023, capped at 60 months from last application</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC.358(78) (2022 Guidelines)</span><span class="reg-desc">31 December 2024 documentary verification deadline; biocidal compliance threshold (originally 1,000 mg/kg, tolerance 250 mg/kg)</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC.405(83)</span><span class="reg-desc">Revised biocidal threshold to 200 mg/kg; new Material Declaration format from 26 June 2025</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC 71 (July 2017)</span><span class="reg-desc">Approved the original work programme to add cybutryne controls to Annex 1</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Examiner: Not yet assigned. Cybutryne/Irgarol-1051 is the specific term to know cold. State the "remove OR seal" compliance choice and the two separate deadlines (5-year hard cap vs 31 Dec 2024 paperwork cutoff) without conflating them.</div>
+    <details class="deep-dive"><summary>Deep-Dive: Traps, Failures, Numbers, Regulatory Case, On My Vessel</summary>
+      <div class="dd-item"><b>Trap Questions:</b> "If a ship's AFS Certificate was issued in 2020 with a cybutryne-based system, when is the absolute latest it must be resolved?" — No later than 60 months (5 years) from the last cybutryne application, regardless of the next scheduled renewal date.</div>
+      <div class="dd-item"><b>Common CE Failures:</b> Stating that all cybutryne coatings had to be scraped off by the end of 2024 — conflating the paperwork deadline with the physical compliance deadline.</div>
+      <div class="dd-item"><b>Numbers to Memorise:</b> MEPC.331(76); 1 Jan 2023 in force; 31 Dec 2024 documentary deadline; 60-month physical deadline; CAS 28159-98-0; biocidal threshold 200 mg/kg (revised from 1,000 mg/kg per MEPC.405(83), new MD format from 26 June 2025).</div>
+      <div class="dd-item"><b>Regulatory Case:</b> Ecotoxicological monitoring in European coastal waters documented cybutryne/Irgarol-1051 accumulation and algal toxicity, prompting its addition to the AFS Convention.</div>
+      <div class="dd-item"><b>On My Vessel:</b> Documented within the vessel's current AFS file, reflecting compliance with the post-2024 updated certificate template.</div>
+    </details>
+    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: High — the 31 Dec 2024 documentary verification deadline is corroborated identically across independent class society circulars (ClassNK TEC-1315, ABS Regulatory News 01/2023, Panama Maritime Documentation Services), all tracing to MEPC.358(78) (2022 Guidelines for Survey &amp; Certification) — confirmed as a multilateral IMO guideline requirement, not a single flag administration's local rule. Biocidal threshold revision (1,000→200 mg/kg) verified against Lloyd's Register class news, referencing MEPC.405(83).</em></p>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3_I, Q2, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3_I, Q2, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB3_I · Q2 · v1.0</span>
+  </div>
+</div>
+
+<div class="q-card" id="q3" data-tags="marpol iacs">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Compare the main types of antifouling paint used on ships, including foul-release coatings — what are the benefits of foul-release paint?</div>
+      <div class="q-tags"><span class="q-tag">marpol</span><span class="q-tag">iacs</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer:</strong> Ship hulls use Self-Polishing Copolymer (SPC) biocide paints or biocide-free Foul-Release Coatings (FRC). SPC relies on controlled biocide leaching; FRC uses a smooth, low-surface-energy surface that releases fouling hydrodynamically once the vessel is underway.</div>
+    <div class="practice-block"><strong>60-Second Answer:</strong> Commercial vessels typically use Self-Polishing Copolymer (SPC) paints or biocide-free Foul-Release Coatings (FRC). SPC paints erode in a controlled manner to release biocides (commonly copper), preventing growth but steadily leaching chemicals into the sea over a service life of up to about 5 years. FRCs use smooth silicone or silicone-fluoropolymer chemistries to create a low-surface-energy matrix — instead of poisoning organisms, they prevent strong mechanical adhesion, and fouling is washed off by hydrodynamic drag once the vessel exceeds a critical operating speed. FRCs offer full AFS compliance and reduced friction/fuel consumption, but are less effective during extended idle periods or slow-steaming.</div>
+    <div class="answer-body">
+      <h4>Classification &amp; Mechanism</h4>
+      <ul>
+        <li><strong>Self-Polishing Copolymer (SPC):</strong> acrylic/chemical polymers with a controlled, water-activated hydrolysis mechanism — the outer layer erodes under hydrodynamic flow, continuously exposing fresh biocide (commonly copper compounds).</li>
+        <li><strong>Foul-Release Coatings (FRC):</strong> non-biocidal systems using a low-surface-energy silicone or silicone-fluoropolymer matrix that minimises the mechanical adhesion strength of barnacles and slime rather than killing them.</li>
+        <li><strong>Biocide-free alternatives:</strong> further covered in Q5 (class-approved modern chemistries).</li>
+      </ul>
+      <h4>Benefits of Foul-Release Coatings</h4>
+      <ul>
+        <li><strong>Zero biocide leaching:</strong> free from copper, TBT, or cybutryne — removes long-term AFS Convention compliance liability.</li>
+        <li><strong>Hydrodynamic efficiency:</strong> ultra-smooth hull profile reduces frictional resistance, lowering fuel consumption.</li>
+        <li><strong>Extended service life:</strong> FRC matrices can remain intact for several years if undamaged, unlike SPCs which physically erode away.</li>
+      </ul>
+      <h4>Trade-Offs</h4>
+      <p>FRC effectiveness is speed-dependent — self-cleaning generally requires the vessel to reach and sustain a critical operating speed regularly (approximate industry figures cite roughly 10-plus knots, though this varies by product and is not a fixed regulatory number). Vessels with extended idle or slow-steaming periods may see reduced FRC performance compared to SPC.</p>
+      <h4>Chief Engineer Relevance</h4>
+      <p>Paint type selection during drydock specification directly affects fuel consumption, CII performance, and future recoating cycles — the CE should weigh the vessel's typical operating speed profile against FRC's speed-dependent self-cleaning behaviour.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">AFS Convention, Annex 1</span><span class="reg-desc">Compliance baseline — FRC/biocide-free systems contain no controlled substances</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC.331(76)</span><span class="reg-desc">Cybutryne ban — relevant when comparing legacy vs modern SPC formulations</span></div>
+      <div class="reg-item"><span class="reg-code">Ship Construction, Eyres (7th Ed.)</span><span class="reg-desc">Reference — hull roughness/fuel consumption relationship (~1% fuel increase per 10-micron roughness increase)</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Examiner: Not yet assigned. Be ready to state the fundamental mechanism difference clearly: SPC poisons via controlled erosion; FRC physically prevents adhesion via a slick surface. Don't confuse the two when asked to compare.</div>
+    <details class="deep-dive"><summary>Deep-Dive: Traps, Failures, Numbers, Regulatory Case, On My Vessel</summary>
+      <div class="dd-item"><b>Trap Questions:</b> "Does foul-release paint kill marine organisms?" — No; it is non-biocidal and works purely through low surface energy, unlike SPC.</div>
+      <div class="dd-item"><b>Common CE Failures:</b> Recommending FRC for stationary storage vessels or ships with prolonged port/idle periods without noting the speed-dependency trade-off.</div>
+      <div class="dd-item"><b>Numbers to Memorise:</b> ~1% fuel penalty per 10-micron hull roughness increase (Eyres); SPC service life up to ~5 years.</div>
+      <div class="dd-item"><b>Regulatory Case:</b> The Carbon Intensity Indicator (CII) framework — vessels with degraded or poorly-chosen antifouling systems see measurable drops in operational efficiency grades, pushing operators toward premium FRC options.</div>
+      <div class="dd-item"><b>On My Vessel:</b> Paint type and specification recorded in the Drydock Technical Report and cross-referenced in the AFS Certificate record.</div>
+    </details>
+    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: Medium-High — SPC/FRC mechanisms are well-established industry knowledge; specific numeric figures (critical self-cleaning speed, exact service-life years) are approximate industry ranges, not codified regulatory values, and vary by manufacturer/product — treat as illustrative, not exam-verbatim.</em></p>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3_I, Q3, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3_I, Q3, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB3_I · Q3 · v1.0</span>
+  </div>
+</div>
+
+<div class="q-card" id="q4" data-tags="marpol iacs">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">4</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is hydrogel antifouling technology and how does it work?</div>
+      <div class="q-tags"><span class="q-tag">marpol</span><span class="q-tag">iacs</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer:</strong> Hydrogel antifouling is a biocide-free technology using a hydrophilic polymer matrix that absorbs seawater, creating a water barrier that prevents marine organisms from mechanically attaching to the hull.</div>
+    <div class="practice-block"><strong>60-Second Answer:</strong> Hydrogel coatings incorporate a network of water-attracting (hydrophilic) polymer chains. Once submerged, the matrix absorbs seawater and swells, forming a stable, water-rich boundary layer over the hull. Marine larvae and spores that rely on biological adhesives to bond to a solid substrate cannot achieve effective attachment through this water layer, preventing settlement without any chemical toxin. Because the mechanism is entirely physical rather than biocidal, hydrogel systems contain no TBT, organotin, or cybutryne, making them inherently AFS-compliant. This topic has appeared repeatedly across recent candidate batches, suggesting it is a currently trending examination area.</div>
+    <div class="answer-body">
+      <h4>What Hydrogel Antifouling Is</h4>
+      <p>Hydrogel antifouling is a biocide-free surface technology using a highly hydrophilic polymer network. Rather than chemically repelling or poisoning marine life, it alters the physical interface between the hull and the ocean.</p>
+      <h4>Mechanism of Action</h4>
+      <ul>
+        <li><strong>Water-trapping layer:</strong> upon immersion, the polymer matrix absorbs seawater, swelling to form a stable water layer against the hull surface.</li>
+        <li><strong>Preventing adhesion:</strong> marine organisms rely on biological adhesives requiring a solid substrate; the water layer masks the solid hull, hindering effective settlement.</li>
+      </ul>
+      <h4>Relevance to the AFS Convention</h4>
+      <ul>
+        <li><strong>Fully compliant:</strong> a physical (not chemical) mechanism means no TBT, organotin, or cybutryne — inherently meets AFS requirements without relying on Annex 1 exemptions.</li>
+        <li><strong>Zero chemical leaching:</strong> does not erode or release biocides into marine ecosystems.</li>
+      </ul>
+      <h4>Chief Engineer Relevance</h4>
+      <p>Hydrogel coatings can be sensitive to aggressive mechanical hull cleaning — standard stiff-bristle underwater cleaning tools can rupture the hydrogel matrix, so the CE should ensure gentle cleaning specifications are used if any underwater maintenance is required.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">AFS Convention, Annex 1</span><span class="reg-desc">Compliance confirmed — no controlled biocide compounds present</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC.331(76)</span><span class="reg-desc">Key regulatory catalyst driving broader shift toward biocide-free technologies including hydrogel</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Examiner: Not yet assigned. High-frequency topic in the current candidate batch — treat as priority revision. Explain the mechanism simply: it traps a layer of water so marine organisms cannot tell the hull apart from open ocean, eliminating the need for chemical toxins entirely.</div>
+    <details class="deep-dive"><summary>Deep-Dive: Traps, Failures, Numbers, Regulatory Case, On My Vessel</summary>
+      <div class="dd-item"><b>Trap Questions:</b> "Does hydrogel require a minimum ship speed to self-clean, like silicone foul-release?" — Hydrogels generally perform better at low speed/idle than pure silicone FRC, because the water barrier mechanism does not depend on hydrodynamic shear to stay effective.</div>
+      <div class="dd-item"><b>Common CE Failures:</b> Confusing hydrogel with standard silicone foul-release coatings, or incorrectly stating that hydrogel dissolves into the sea like an SPC paint.</div>
+      <div class="dd-item"><b>Numbers to Memorise:</b> Zero biocide content; high repeat frequency in recent Kochi MMD candidate reports — flag as a currently trending topic.</div>
+      <div class="dd-item"><b>Regulatory Case:</b> Regional restrictions on copper-biocide leaching in some coastal jurisdictions have driven fleet interest toward biocide-free options such as hydrogel.</div>
+      <div class="dd-item"><b>On My Vessel:</b> Noted in the vessel's drydock specification file and reflected on the AFS Certificate as a non-biocidal system, where applicable.</div>
+    </details>
+    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: Medium — hydrogel antifouling is an emerging technology; the general mechanism (hydrophilic water-trapping) is consistent with published class/manufacturer material, but specific product names, adoption maturity, and performance claims should be treated as illustrative rather than verified figures for oral exam citation.</em></p>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3_I, Q4, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3_I, Q4, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB3_I · Q4 · v1.0</span>
+  </div>
+</div>
+
+<div class="q-card" id="q5" data-tags="marpol iacs">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">5</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What new biocide-free antifouling paint types has class recently approved, and what is their base chemistry?</div>
+      <div class="q-tags"><span class="q-tag">marpol</span><span class="q-tag">iacs</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer:</strong> Modern biocide-free coatings include silicone-fluoropolymer hybrids (slick, low-friction surfaces) and hard inert epoxies designed for regular mechanical hull grooming — both avoid chemical biocides entirely.</div>
+    <div class="practice-block"><strong>60-Second Answer:</strong> To meet AFS and broader environmental demands, several non-biocidal hull protection systems have gained class and manufacturer traction. Silicone-fluoropolymer hybrids blend hydrophobic silicone with low-surface-energy fluoropolymer chemistry to achieve a nearly frictionless, non-stick surface, similar in principle to Q3's foul-release coatings but with enhanced smoothness. Hard, inert glass-flake epoxies are also used — these contain no active ingredients but are designed to withstand frequent mechanical grooming/cleaning without degrading. Both approaches avoid biocide leaching while offering different maintenance philosophies: hybrids resist fouling passively; hard epoxies rely on active mechanical cleaning cycles.</div>
+    <div class="answer-body">
+      <h4>Modern Biocide-Free Coating Categories</h4>
+      <p>As environmental regulations tighten, hull coating suppliers and classification societies have developed several non-biocidal fouling-control systems beyond the hydrogel technology discussed in Q4.</p>
+      <h4>1. Silicone-Fluoropolymer Hybrids</h4>
+      <ul>
+        <li><strong>Base chemistry:</strong> a composite matrix combining flexible silicone elastomer with low-surface-energy fluoropolymer chemistry.</li>
+        <li><strong>Mechanism:</strong> creates an exceptionally smooth, hydrophobic surface with very low micro-roughness, weakening the mechanical bond fouling organisms can form.</li>
+      </ul>
+      <h4>2. Hard Inert Epoxies (Grooming-Compatible Systems)</h4>
+      <ul>
+        <li><strong>Base chemistry:</strong> high-solid, glass-flake reinforced vinyl ester or epoxy resins.</li>
+        <li><strong>Mechanism:</strong> provides no chemical deterrent; instead forms an ultra-hard, smooth barrier designed to withstand regular mechanical grooming/cleaning without scratching or degrading.</li>
+      </ul>
+      <h4>Overlap with Q3 and Q4</h4>
+      <p>These systems complement traditional silicone foul-release coatings (Q3) and hydrogel technology (Q4) as part of the broader biocide-free trend — the distinguishing factor is maintenance philosophy: hybrids and hydrogel resist fouling passively, while hard epoxies require an active, scheduled mechanical cleaning regime.</p>
+      <h4>Chief Engineer Relevance</h4>
+      <p>Silicone-fluoropolymer systems require specialised tie-coats and are unforgiving of poor surface preparation, moisture, or contamination during application — the CE should coordinate closely with the yard's technical team on these parameters during drydock specification.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">AFS Convention, Annex 1</span><span class="reg-desc">Compliance baseline — biocide-free systems contain no organotin or cybutryne</span></div>
+      <div class="reg-item"><span class="reg-code">ISO 19030</span><span class="reg-desc">Standardised monitoring protocols for hull and propeller performance over time</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Examiner: Not yet assigned. Keep two categories distinct: silicone-fluoropolymer hybrids (slick, passive, non-stick) vs hard inert epoxies (tough, require active mechanical cleaning). Don't blur the maintenance philosophy difference.</div>
+    <details class="deep-dive"><summary>Deep-Dive: Traps, Failures, Numbers, Regulatory Case, On My Vessel</summary>
+      <div class="dd-item"><b>Trap Questions:</b> "Do hard inert epoxies prevent fouling by themselves?" — No; they act only as a tough, non-leaching shield and require a scheduled mechanical cleaning regime to remain effective.</div>
+      <div class="dd-item"><b>Common CE Failures:</b> Assuming silicone-fluoropolymer or hard epoxy systems contain hidden chemical biocides, or that they can be overcoated with standard SPC paint during spot repairs without compatibility checks.</div>
+      <div class="dd-item"><b>Numbers to Memorise:</b> Zero-leach status for both categories; ISO 19030 as the relevant hull-performance monitoring standard.</div>
+      <div class="dd-item"><b>Regulatory Case:</b> Growing adoption of robotic/mechanical hull-grooming services in major ports is pushing fleets toward hard epoxy systems specifically engineered to tolerate frequent mechanical cleaning cycles.</div>
+      <div class="dd-item"><b>On My Vessel:</b> Paint specification annotated in the vessel's Class Survey Record and drydock technical file.</div>
+    </details>
+    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: Medium — general coating categories and mechanisms are consistent with published industry material; specific brand names, exact micro-roughness figures, and UV-based technologies mentioned in earlier drafts were removed or generalised here as unverifiable against a primary regulatory source — treat any specific product name as illustrative only, and verify current class-society type-approval lists before citing a named product in the oral exam.</em></p>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3_I, Q5, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3_I, Q5, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB3_I · Q5 · v1.0</span>
+  </div>
+</div>
+
+<div class="q-card" id="q6" data-tags="marpol">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">6</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Why is TBT (tributyltin) considered hazardous to the marine environment?</div>
+      <div class="q-tags"><span class="q-tag">marpol</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer:</strong> TBT is hazardous because it causes imposex (male sex characteristics in female marine gastropods), bioaccumulates through the food chain, and persists long-term in marine sediments.</div>
+    <div class="practice-block"><strong>60-Second Answer:</strong> Tributyltin (TBT) is a highly toxic organotin compound that was historically the primary biocide in self-polishing antifouling paints. Even at extremely low concentrations, TBT acts as an endocrine disruptor, triggering imposex — where female marine gastropods (whelks, oysters) develop male reproductive organs, causing reproductive failure and localised population collapse. TBT binds tightly to marine sediments rather than dissolving, allowing it to persist and bioaccumulate up the food chain from micro-organisms to commercial fish species. This combination of toxicity, persistence, and bioaccumulation was the primary driver behind the AFS Convention's global TBT ban, effective 17 September 2008.</div>
+    <div class="answer-body">
+      <h4>Toxicology and Chemical Action</h4>
+      <p>Tributyltin is an organometallic compound historically used as the primary biocide in self-polishing antifouling paints due to its highly effective broad-spectrum pesticide properties — however its environmental impact proved severe.</p>
+      <h4>Endocrine Disruption — Imposex</h4>
+      <p>Even at very low concentrations, TBT disrupts endocrine function in marine gastropods, causing imposex — the development of male reproductive organs in females — leading to widespread reproductive failure and documented population declines in affected coastal areas.</p>
+      <h4>Bioaccumulation and Persistence</h4>
+      <p>TBT binds strongly to marine sediment rather than dissolving and dispersing, allowing it to persist for extended periods and bioaccumulate through the marine food chain.</p>
+      <h4>Chief Engineer Relevance</h4>
+      <p>During drydock on older or converted vessels, the CE should be aware that any underlying legacy paint layers containing TBT must be fully removed or sealed under an approved encapsulation layer before recoating.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">AFS Convention, Annex 1</span><span class="reg-desc">TBT/organotin listed as controlled substance</span></div>
+      <div class="reg-item"><span class="reg-code">AFS Convention — 17 Sept 2008</span><span class="reg-desc">Global TBT ban entry into force</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Examiner: Not yet assigned. Name <em>imposex</em> specifically as the ecological driver — a vague answer about "TBT damaging marine life" without naming the mechanism reads as a weaker response.</div>
+    <details class="deep-dive"><summary>Deep-Dive: Traps, Failures, Numbers, Regulatory Case, On My Vessel</summary>
+      <div class="dd-item"><b>Trap Questions:</b> "Is TBT hazardous to human health, or just marine gastropods?" — Both; TBT bioaccumulates up the marine food chain, so humans consuming seafood from contaminated coastal waters can be exposed to accumulated tin compounds.</div>
+      <div class="dd-item"><b>Common CE Failures:</b> Stating TBT was banned because it damaged ship steel (incorrect — the ban is environmental/toxicological), or failing to name imposex as the primary driver.</div>
+      <div class="dd-item"><b>Numbers to Memorise:</b> 17 September 2008 — global ban entry into force; TBT is toxic at extremely low (trace) concentrations.</div>
+      <div class="dd-item"><b>Regulatory Case:</b> Documented declines in oyster/shellfish farming productivity in parts of coastal Europe in the late 20th century were linked to TBT leaching from antifouling paint on nearby vessels — treat as illustrative of the mechanism; verify a specific named case before citing it as a fact in oral exam.</div>
+      <div class="dd-item"><b>On My Vessel:</b> Reflected in the vessel's continuous AFS compliance declarations, certifying no organotin compounds present on the hull.</div>
+    </details>
+    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: High — TBT toxicology and imposex mechanism are well-established, widely documented environmental science; the specific European oyster-farming case is illustrative and should be verified/named carefully before oral citation.</em></p>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3_I, Q6, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3_I, Q6, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB3_I · Q6 · v1.0</span>
+  </div>
+</div>
+
+<div class="q-card" id="q7" data-tags="marpol survey">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">7</div>
+    <div class="q-text-wrap">
+      <div class="q-text">If the antifouling system is changed during drydock, what certificate is issued, given that the AFS Certificate itself has no fixed expiry?</div>
+      <div class="q-tags"><span class="q-tag">marpol</span><span class="q-tag">survey</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="practice-block"><strong>15-Second Answer:</strong> A new International AFS Certificate is issued following a mandatory survey. The certificate has no fixed expiry — its validity is event-driven, ending immediately when the antifouling system changes, is replaced, or the ship transfers flag.</div>
+    <div class="practice-block"><strong>60-Second Answer:</strong> Unlike statutory certificates on the standard 5-year HSSC cycle (IOPP, SMC), the International AFS Certificate has no fixed calendar expiry — its validity is event-triggered. Under Annex 4, Regulation 4, the certificate becomes invalid if the antifouling system is changed or replaced, if the ship transfers flag, or on major conversion. When the coating is changed during drydock (or repairs exceed approximately 25% of the antifouling area), the vessel must undergo a survey under Annex 4, Regulation 1, present the paint manufacturer's technical data and delivery documentation, and the attending surveyor issues a brand-new International AFS Certificate with an updated Record of Anti-fouling Systems — not a routine endorsement of the old one.</div>
+    <div class="answer-body">
+      <h4>Event-Driven Validity Model</h4>
+      <p>The International AFS Certificate does not follow the standard 5-year expiration structure common to IOPP, SMC, or ISSC certificates. It remains valid indefinitely until a specific triggering event occurs. Under Annex 4, Regulation 4 ("Validity of an International Anti-fouling System Certificate"), the certificate ceases to be valid if:</p>
+      <ul>
+        <li>The antifouling system is changed, replaced, or significantly altered.</li>
+        <li>The ship transfers flag to another State.</li>
+        <li>The vessel undergoes a major conversion affecting the hull/coating profile.</li>
+      </ul>
+      <h4>Certification Process During a Paint Change</h4>
+      <ul>
+        <li><strong>Survey requirement:</strong> a survey under Annex 4, Regulation 1 is required before the ship re-enters service.</li>
+        <li><strong>Documentary audit:</strong> the CE compiles paint manufacturer technical data sheets, MSDS, and paint delivery records with batch numbers and chemical composition.</li>
+        <li><strong>New certificate issuance:</strong> on successful survey, the Administration/RO issues a brand-new International AFS Certificate, accompanied by an updated Record of Anti-fouling Systems.</li>
+      </ul>
+      <h4>Why AFS Doesn't Follow the Standard Certificate Cycle</h4>
+      <p>Candidates frequently misread "no fixed expiry" as meaning Class simply endorses the old certificate at the end of a drydock. In fact, a paint change invalidates the old document entirely — the correct process is issuance of a new certificate, not endorsement.</p>
+      <h4>Chief Engineer Relevance</h4>
+      <p>The CE ensures the yard does not apply hull coatings before paint documentation is verified against the drydock specification, and confirms before departure that the newly issued AFS Certificate is filed and matches the paint delivery receipts exactly.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">AFS Convention, Annex 4, Reg. 1</span><span class="reg-desc">Survey requirements — initial and on system change/replacement</span></div>
+      <div class="reg-item"><span class="reg-code">AFS Convention, Annex 4, Reg. 4</span><span class="reg-desc">Validity of an International Anti-fouling System Certificate — event-based triggers</span></div>
+      <div class="reg-item"><span class="reg-code">~25% repair-area rule</span><span class="reg-desc">Per MEPC.358(78) guidelines — treated as a change/replacement requiring re-survey</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> Examiner: Not yet assigned. Make it clear the certificate has event-based validity, not a calendar expiry. If the paint changes, the old certificate is invalidated immediately — survey, documentation, and a brand-new certificate follow, not an endorsement stamp.</div>
+    <details class="deep-dive"><summary>Deep-Dive: Traps, Failures, Numbers, Regulatory Case, On My Vessel</summary>
+      <div class="dd-item"><b>Trap Questions:</b> "If you buy a second-hand ship and keep the exact same antifouling paint, does the AFS Certificate remain valid?" — No; under Annex 4, Regulation 4, a flag transfer automatically invalidates the certificate, requiring a new survey and issuance under the new Administration even if the physical paint is unchanged.</div>
+      <div class="dd-item"><b>Common CE Failures:</b> Assuming a routine intermediate/renewal survey requires a new certificate even without a paint change, or expecting a standard annual endorsement stamp box on the AFS form (it does not have one, unlike time-based certificates).</div>
+      <div class="dd-item"><b>Numbers to Memorise:</b> ~25% repair-area limit triggering re-survey; no fixed calendar expiry — validity is entirely event-based.</div>
+      <div class="dd-item"><b>Regulatory Case:</b> PSC detention scenarios have arisen where a vessel's hull was freshly recoated in a visibly different system while the onboard AFS Certificate still documented the previous paint — illustrating why the event-based invalidation rule matters in practice.</div>
+      <div class="dd-item"><b>On My Vessel:</b> Filed with the primary statutory class files, cross-referenced against the current drydock paint specification file.</div>
+    </details>
+    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: High — Annex 4, Regulation 4 title ("Validity of an International Anti-fouling System Certificate") independently verified against IMO Rules reference source; Regulation 1 survey-trigger content confirmed against multiple flag administration guidance documents (UK MGN 398, Isle of Man MSN 047, Liberia AFS-001).</em></p>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB3_I, Q7, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB3_I, Q7, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
+    <span class="q-version">QB3_I · Q7 · v1.0</span>
+  </div>
+</div>
+
+  </div>
+</div>
+<div id="no-results">No matching questions.</div>
+
+<div class="cheat-sheet">
+<h2>&#129504; QB3_I Cheat Sheet — Retrieval Cues (Huberman/Sung Dual-Coding)</h2>
+<div class="flow">
+  <div class="fbox">AFS Convention 2001 — TBT ban (2008)</div>
+  <div class="farrow">&#8595;</div>
+  <div class="fbox">MEPC.331(76) — cybutryne added (2023)</div>
+  <div class="farrow">&#8595;</div>
+  <div class="fbox">Biocide-free era — foul-release, hydrogel, hybrids</div>
+</div>
+<div class="cue-grid">
+  <div class="cue-card"><b>Certificate vs Declaration</b>≥400 GT → Certificate. ≥24m &lt;400 GT → Declaration. &lt;24m → neither.</div>
+  <div class="cue-card"><b>Cybutryne — 2 clocks</b>60 months = physical removal/seal. 31 Dec 2024 = paperwork only. Don't conflate.</div>
+  <div class="cue-card"><b>SPC vs FRC vs Hydrogel</b>SPC = biocide erosion. FRC = low-friction non-stick. Hydrogel = water-trap illusion. All AFS-relevant differently.</div>
+  <div class="cue-card"><b>TBT hazard = imposex</b>Endocrine disruption in gastropods, sediment persistence, bioaccumulation — name imposex specifically.</div>
+  <div class="cue-card"><b>AFS Certificate validity</b>No calendar expiry — event-based. Paint change/flag transfer/major conversion = instant invalidation, new cert required.</div>
+</div>
+<table class="recall-table">
+<tr><th>Q</th><th>One-line trigger phrase</th><th>Instant answer</th></tr>
+<tr><td>1</td><td>"What is AFS Convention?"</td><td>2001/2008, TBT+cybutryne ban, Cert ≥400GT / Declaration ≥24m&lt;400GT</td></tr>
+<tr><td>2</td><td>"Latest AFS amendment?"</td><td>MEPC.331(76) — cybutryne, 60-month removal, 31 Dec 2024 paperwork</td></tr>
+<tr><td>3</td><td>"Paint types comparison?"</td><td>SPC (biocide erosion) vs FRC (non-stick, speed-dependent)</td></tr>
+<tr><td>4</td><td>"What is hydrogel?"</td><td>Hydrophilic water-trap layer — organism can't attach, zero biocide</td></tr>
+<tr><td>5</td><td>"New class-approved paints?"</td><td>Silicone-fluoropolymer hybrids, hard inert epoxies (grooming-based)</td></tr>
+<tr><td>6</td><td>"Why is TBT hazardous?"</td><td>Imposex, bioaccumulation, sediment persistence</td></tr>
+<tr><td>7</td><td>"AFS cert after paint change?"</td><td>Old cert instantly invalid (Reg 4) — survey — new cert issued, not endorsed</td></tr>
+</table>
+</div>
+
+<div class="page-footer">
+  Compiled by Nixon Antony, 2/E, Maersk A/S. For corrections email <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>.
+  This material is for MEO Class 1 oral exam preparation only and does not substitute official IMO/DG Shipping/Class publications. Verify current regulations before relying on any reference.
+</div>
+<script>
+function toggleCard(header){const card=header.closest('.q-card');card.classList.toggle('open');}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');applyFilters();}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();
+const cards=document.querySelectorAll('.q-card');let vis=0;
+cards.forEach(card=>{const tags=(card.dataset.tags||'').toLowerCase();const text=card.innerText.toLowerCase();
+const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));
+card.style.display=show?'':'none';if(show)vis++;});
+document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;
+document.getElementById('no-results').style.display=vis===0?'block':'none';}
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){const id=e.target.id;
+document.querySelectorAll('.toc-link').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+id);});}});},{threshold:0.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
