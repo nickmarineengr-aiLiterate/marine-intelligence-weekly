@@ -1,10 +1,10 @@
 {
   "manifest_version": "1.0",
-  "generated": "2026-07-12",
-  "generated_by": "Claude - session pass: Engineering Management Notes Parts 3-10 built out, global topic renumbering T11-T46 applied, fabricated FAL Form 8 claim corrected in Part 10, A.1206(34) PSC update verified, Part 9 verify-notes added, data-kw added to Parts 1-10, Prev/Next nav chained across all 10 Parts, 3 cross-Part topic links added (MLC, GBS, PSC), all 10 Parts gated.",
+  "generated": "2026-07-13",
+  "generated_by": "Claude - gated Parts 11-12 of Engineering Management Notes series and cross-linked Parts 10-12.",
   "scope": "Oral/page-range-based notes series ONLY: Simon Sir Oral Notes, Current Topics, Engineering Management Notes. NOT the WA written question-answer series (see written_content_index.json). NOT the oral QB card-based series (see qb_content_index.json).",
   "source_of_truth_policy": "This JSON is the authoritative source. index.html cards are generated FROM this manifest, not edited independently. Any content change updates this file first.",
-  "total_files": 21,
+  "total_files": 13,
   "series": {
     "simon-notes": {
       "series_name": "Simon Sir — Oral Notes Series",
@@ -26,8 +26,7 @@
             "Lifeboat Testing",
             "Cyber Security"
           ],
-          "last_verified": null,
-          "data_kw_status": "added 2026-07-11 - full search-keyword coverage"
+          "last_verified": null
         },
         "simon-notes-p2.html": {
           "part": 2,
@@ -43,8 +42,7 @@
             "Cabotage",
             "ISMS/ISO"
           ],
-          "last_verified": null,
-          "data_kw_status": "added 2026-07-11 - full search-keyword coverage"
+          "last_verified": null
         },
         "simon-notes-p3.html": {
           "part": 3,
@@ -61,7 +59,7 @@
             "STCW 2027"
           ],
           "last_verified": null,
-          "data_kw_status": "present since original build"
+          "known_issue": "Broken 'Notes Index' topbar link — fix scheduled during batch gate-script pass (Section noted in miw-notes-production skill). Do not replace /SQ/ in paywall redirect when fixing."
         },
         "simon-notes-p4.html": {
           "part": 4,
@@ -78,8 +76,7 @@
             "IWIS"
           ],
           "last_verified": null,
-          "data_kw_status": "added 2026-07-11 - full search-keyword coverage",
-          "cross_link_note": "nav-strip \"next\" button now points to simon-notes-p5.html (was previously the end-of-series Notes Index link, from when Part 4 was the last part built)."
+          "known_issue": "Broken 'Notes Index' topbar link — fix pending, same as p1/p2/p3/p5-p8."
         },
         "simon-notes-p5.html": {
           "part": 5,
@@ -93,8 +90,7 @@
             "UNCLOS"
           ],
           "last_verified": null,
-          "data_kw_status": "added 2026-07-11 - full search-keyword coverage",
-          "page_badge_note": "Real per-note page numbers added 2026-07-11 via linear interpolation across the part page range - estimates, not source-verified. Replace with exact page numbers if/when Vignesh Siva source pagination becomes available."
+          "known_issue": "Broken 'Notes Index' topbar link — fix pending, same as p1-p4/p6-p8."
         },
         "simon-notes-p6.html": {
           "part": 6,
@@ -108,8 +104,7 @@
             "MS Act"
           ],
           "last_verified": null,
-          "data_kw_status": "added 2026-07-11 - full search-keyword coverage",
-          "page_badge_note": "Real per-note page numbers added 2026-07-11 via linear interpolation across the part page range - estimates, not source-verified. Replace with exact page numbers if/when Vignesh Siva source pagination becomes available."
+          "known_issue": "Broken 'Notes Index' topbar link — fix pending."
         },
         "simon-notes-p7.html": {
           "part": 7,
@@ -123,8 +118,7 @@
             "Container CSC"
           ],
           "last_verified": null,
-          "data_kw_status": "added 2026-07-11 - full search-keyword coverage",
-          "page_badge_note": "Real per-note page numbers added 2026-07-11 via linear interpolation across the part page range - estimates, not source-verified. Replace with exact page numbers if/when Vignesh Siva source pagination becomes available."
+          "known_issue": "Broken 'Notes Index' topbar link — fix pending."
         },
         "simon-notes-p8.html": {
           "part": 8,
@@ -138,8 +132,7 @@
             "BWTS Approval"
           ],
           "last_verified": null,
-          "data_kw_status": "added 2026-07-11 - full search-keyword coverage",
-          "page_badge_note": "Real per-note page numbers added 2026-07-11 via linear interpolation across the part page range - estimates, not source-verified. Replace with exact page numbers if/when Vignesh Siva source pagination becomes available."
+          "known_issue": "Broken 'Notes Index' topbar link — fix pending."
         }
       }
     },
@@ -168,7 +161,7 @@
     "engineering-management-notes": {
       "series_name": "MIW Engineering Management Notes",
       "source_attribution": "Originally compiled by Uday Sankar S., Anglo-Eastern. Transcribed, expanded & updated by Nixon Antony, 2/E, Maersk A/S.",
-      "status": "live - Parts 1-10 of planned 31 parts (250 of 768 total source pages)",
+      "status": "live - Parts 1-12 of planned 31 parts (768 total source pages)",
       "file_naming_convention": "miw-notes-mgmt-p<N>.html",
       "files": {
         "miw-notes-mgmt-p1.html": {
@@ -177,122 +170,56 @@
           "title": "IMO Structure & Conventions",
           "summary": "IMO organisational structure, Committees & Sub-Committees, IMO instruments, convention lifecycle (adoption, ratification, tacit acceptance).",
           "status": "gated - live",
-          "last_verified": "2026-07-12",
-          "gating_note": "Applied full content-protection stack this session (gate script, noindex/nofollow/noarchive/nosnippet robots meta, user-select:none, copy/contextmenu/selectstart JS blocks, diagonal watermark). Original upload had robots='index, follow' and no gate — corrected. Footer text also corrected: original said 'This is a free public resource... Subscriber access unlocks Parts 3-31', implying Part 1/2 were meant as an ungated teaser. Now gated per Nixon's explicit instruction — flag if a free-teaser policy for Part 1 was actually intended, since that would need the opposite treatment. data-kw added 2026-07-12 for internal search (6 topics); Part 2 forward-link confirmed."
+          "last_verified": "2026-07-08",
+          "gating_note": "Applied full content-protection stack this session (gate script, noindex/nofollow/noarchive/nosnippet robots meta, user-select:none, copy/contextmenu/selectstart JS blocks, diagonal watermark). Original upload had robots='index, follow' and no gate — corrected. Footer text also corrected: original said 'This is a free public resource... Subscriber access unlocks Parts 3-31', implying Part 1/2 were meant as an ungated teaser. Now gated per Nixon's explicit instruction — flag if a free-teaser policy for Part 1 was actually intended, since that would need the opposite treatment."
         },
         "miw-notes-mgmt-p2.html": {
           "part": 2,
           "page_range": "26-50 of 768",
-          "title": "IMO Legislative Framework, Sustainability & MARPOL Annex I Certification",
-          "summary": "IMO legislative/amendment mechanisms, GESAMP & UN SDGs, decarbonisation pathways & Net-Zero Framework (MEPC-83), MARPOL Annex I statutory certification and oily waste management.",
+          "title": "Amendment Mechanisms, GESAMP & SDGs, MEPC-83, MARPOL Annex I",
+          "topic_count": 4,
+          "topics": [
+            "Legislative Amendment Mechanisms (Tacit Acceptance)",
+            "GESAMP & UN SDGs",
+            "MEPC-83 / IMO Net-Zero Framework Decarbonisation",
+            "MARPOL Annex I — Certification, ORB, LOT, Slop Tanks"
+          ],
+          "summary": "IMO legislative amendment lifecycle (SOLAS Article VIII / MARPOL Article 16 tacit acceptance), GESAMP institutional architecture and UN SDG mapping to shipboard operations, MEPC-83 GHG pricing / Net-Zero Framework / CII Z-factor trajectory (framed as draft pending formal adoption), and MARPOL Annex I statutory certification, Oil Record Book, Load on Top, and slop tank capacity rules.",
           "status": "gated - live",
-          "last_verified": "2026-07-12",
-          "gating_note": "data-kw added for internal search (4 topics, T7-T10); Part 1 <-> Part 3 nav links confirmed/added."
+          "last_verified": "2026-07-08",
+          "gating_note": "Built ungated, presented for Nixon's review, then gated this session with the standard content-protection stack (gate script, noindex/nofollow/noarchive/nosnippet robots meta, user-select:none, copy/contextmenu/selectstart JS blocks, diagonal watermark) matching Part 1. Corrections applied per Perplexity validation pass before build: (1) MARPOL Annex I Special Areas list corrected to add 'Southern South African waters' and rename 'Oman area' to 'Oman area of the Arabian Sea'; (2) fabricated '34 ppm' tanker cargo-tank-washing discharge limit removed and replaced with correct Regulation 34 rate/quantity criteria (≤30 L/NM, ≤1/30,000 of cargo), with 15 ppm correctly scoped to machinery-bilge discharge only; (3) MEPC-83 GHG pricing tiers and CII Z-factors reframed throughout as draft/illustrative pending formal adoption (MEPC ES.2 adjourned Oct 2025 without agreement; adoption rescheduled Nov 2026); (4) SDG-mapping language changed from 'mandates/codifies' to 'supports/aligns with' since SDGs are UN policy goals, not binding IMO regulation; (5) raw '[cite: 5]' citation markers stripped from the slop-tank capacity table. notes index (index.html) note-card added for Part 2 with full topic-keyword data-kw string for the local search feature."
         },
-        "miw-notes-mgmt-p3.html": {
-          "part": 3,
-          "page_range": "51-75 of 768",
-          "title": "MARPOL Annex I Double-Hull/OWS, IOPP Survey Framework, MARPOL Annex II NLS & IBC Code",
-          "summary": "Double-hull structural geometry & tank segregation, OWS evolution & discharge regimes, IOPP survey/HSSC framework, MARPOL Annex II NLS control & IBC/BCH classification, P&A Manuals/Tripartite/persistent floaters.",
+        "miw-notes-mgmt-p11.html": {
+          "part": 11,
+          "page_range": "251-269 of 768 (source batch supplied to 275; pp.270-275 no distinct new topic, rolled into Part 12)",
+          "title": "Load Line Convention, HSSC Statutory Survey Framework, Tonnage & Hong Kong Convention",
+          "topic_count": 3,
+          "topics": [
+            "T47 · Load Line Convention & Freeboard",
+            "T48 · Statutory Survey & HSSC Framework",
+            "T49 · Tonnage Metrics & Hong Kong Convention"
+          ],
+          "summary": "International Load Line Convention 1966 (freeboard, reserve buoyancy, Type A/B ships), statutory survey engineering under the Harmonised System of Survey & Certification (HSSC), and ship tonnage metrics culminating in the Hong Kong Convention IHM/SRF lifecycle. Topic numbering continues the global T-sequence from Part 10 (T46).",
           "status": "gated - live",
-          "last_verified": "2026-07-12",
-          "gating_note": "Global topic numbering T11-T15 confirmed. data-kw added (5 topics). Prev/Next nav to Parts 2/4 added."
+          "last_verified": "2026-07-13",
+          "gating_note": "Received as an ungated review copy (gate script stripped) with full content-protection stack otherwise already in place (robots meta, user-select:none, copy/contextmenu/selectstart JS blocks, diagonal watermark). Added the standard auth gate script (miw_auth=1 cookie check → /SQ/pay.html) this session to match Parts 1-10. Corrections already applied in the review copy per verify-note blocks: FWA formula corrected from the erroneous 'Δ/(40×TPC)' to the correct 'W/(4×TPC) mm'; HSSC Survey Guidelines resolution updated from superseded A.1156(32) to current A.1207(34), 2025; Hong Kong Convention entry-into-force date corrected to 26 June 2025. Cross-linked to Part 10 (backward) and Part 12 (forward) in the sidebar Navigate block."
         },
-        "miw-notes-mgmt-p4.html": {
-          "part": 4,
-          "page_range": "76-100 of 768",
-          "title": "HNS & Harmful Cargoes, Sewage/Garbage, Atmospheric Emissions, NOx Code, SOLAS/FSS/Inert Gas",
-          "summary": "HNS & harmful packaged cargo, MARPOL Annex IV/V sewage & garbage, MARPOL Annex VI atmospheric emissions, NOx Technical Code tiers, SOLAS/FSS/FTP/Class divisions & inert gas.",
+        "miw-notes-mgmt-p12.html": {
+          "part": 12,
+          "page_range": "276-300 of 768",
+          "title": "Ship Recycling & Hong Kong Convention, BWM Convention, Salvage/LOF/SCOPIC, Port of Refuge & GA, III Code & MSAS",
+          "topic_count": 5,
+          "topics": [
+            "Ship Recycling & HKC",
+            "BWM Convention (D-1/D-2)",
+            "Salvage, LOF & SCOPIC",
+            "Port of Refuge & GA",
+            "III Code & MSAS"
+          ],
+          "summary": "Ship Recycling Facility requirements under the Hong Kong Convention, Ballast Water Management Convention D-1/D-2 standards, marine salvage law (Lloyd's Open Form & SCOPIC), Port of Refuge decision-making & General Average, and the IMO Instruments Implementation (III) Code with the Member State Audit Scheme (MSAS/IMSAS). Topic numbering shown as local Part 12 badges (P12-T1–P12-T5) pending global renumbering, per standing platform rule, until all 31 parts are confirmed live.",
           "status": "gated - live",
-          "last_verified": "2026-07-12",
-          "gating_note": "Renumbered local T11-T15 -> global T16-T20 (session pass). data-kw added (5 topics). Prev/Next nav to Parts 3/5 fixed (previously pointed at Part 1). Stale 'Part 3 pending' attribution note removed."
-        },
-        "miw-notes-mgmt-p5.html": {
-          "part": 5,
-          "page_range": "101-125 of 768",
-          "title": "SOLAS VII-XV (Dangerous Goods, ISM/HSC/ISPS, Bulk/IMSAS/Polar), Recent Amendments, MLC 2006",
-          "summary": "SOLAS Chapter VII dangerous goods codes, SOLAS VIII-XI-2 (ISM/HSC/ESP/CSR/ISPS), SOLAS XII-XV (bulk carriers/IMSAS/Polar/IP Code), 2024-2026 statutory amendments, MLC 2006 Titles 1-5.",
-          "status": "gated - live",
-          "last_verified": "2026-07-12",
-          "gating_note": "Renumbered local T1-T6 -> global T21-T26. data-kw added (6 topics). Stale 'topic-numbering pending confirmation' callout removed. Prev/Next nav to Parts 4/6 fixed. Cross-linked to Part 6 T27 (MLC enforcement continuation)."
-        },
-        "miw-notes-mgmt-p6.html": {
-          "part": 6,
-          "page_range": "126-150 of 768",
-          "title": "MLC 2006 Flag/Port State & Grievance, GBS & Ship Construction File, PSC Regimes & NIR",
-          "summary": "MLC 2006 flag-state/port-state enforcement & grievance infrastructure, IMO Goal-Based Standards & Ship Construction File, Port State Control regimes & the New Inspection Regime.",
-          "status": "gated - live",
-          "last_verified": "2026-07-12",
-          "gating_note": "Renumbered local T7-T9 -> global T27-T29. data-kw added (3 topics). Prev/Next nav to Parts 5/7 fixed (previously pointed at Part 1). Cross-linked to Part 5 T25 (MLC architecture), Part 8 T33 (H-CSR), Part 7 T30 (PSC deficiency/appeal)."
-        },
-        "miw-notes-mgmt-p7.html": {
-          "part": 7,
-          "page_range": "151-175 of 768",
-          "title": "Port State Control Deficiencies & Appeals (A.1206(34)), Classification Societies, IACS Framework",
-          "summary": "PSC compliance/deficiency categorisation/detention appeal under Res. A.1206(34) (supersedes A.1185(33), eff. 1 Jan 2026), Classification Society statutory mandates & surveys, IACS unified requirements & multi-class.",
-          "status": "gated - live",
-          "last_verified": "2026-07-12",
-          "gating_note": "Renumbered local T10-T12 -> global T30-T32. Verified A.1206(34) update against primary IMO resolution text - accurate, already correctly applied in draft. data-kw added (3 topics). Prev/Next nav to Parts 6/8 added. Cross-linked to Part 6 T29 (NIR risk-profiling)."
-        },
-        "miw-notes-mgmt-p8.html": {
-          "part": 8,
-          "page_range": "176-200 of 768",
-          "title": "H-CSR & GBS, Class Notations & RO Code, IMO Noise Code, CLC/FUND Liability",
-          "summary": "Harmonized Common Structural Rules & Goal-Based Standards, classification notations & RO Code, IMO Noise Code, CLC 1992 & FUND Convention liability regime.",
-          "status": "gated - live",
-          "last_verified": "2026-07-12",
-          "gating_note": "Renumbered local T1-T4 -> global T33-T36. data-kw added (4 topics). Prev/Next nav to Parts 7/9 added (previously had no Part-level nav at all). Cross-linked to Part 6 T28 (GBS framework)."
-        },
-        "miw-notes-mgmt-p9.html": {
-          "part": 9,
-          "page_range": "201-225 of 768",
-          "title": "IOPC Funds & STOPIA/TOPIA, Bunker Convention, LLMC, Intervention/OPRC, UNCLOS",
-          "summary": "IOPC Fund tiers & STOPIA/TOPIA industry agreements, Bunker Convention 2001 vs CLC 92, LLMC 1976/1996/2012, Intervention Convention 1969 & OPRC 1990, UNCLOS framework & zones.",
-          "status": "gated - live",
-          "last_verified": "2026-07-12",
-          "gating_note": "Renumbered local T1-T5 -> global T37-T41. Verify-notes added to all 5 topics (previously had none) confirming SDR/GT/NM figures checked against primary sources - no errors found. data-kw added (5 topics). Prev/Next nav to Parts 8/10 added."
-        },
-        "miw-notes-mgmt-p10.html": {
-          "part": 10,
-          "page_range": "226-250 of 768",
-          "title": "UNCLOS Pt.XII & Tanker Liability, AFS Convention, Hull Corrosion, FAL Convention, SUA/BMP5",
-          "summary": "Marine environmental governance & tiered oil pollution compensation, AFS Convention & anti-fouling tech, hull corrosion/SACP/ICCP, FAL Convention (7 forms) & Maritime Declaration of Health, SUA Convention & BMP5 counter-piracy.",
-          "status": "gated - live",
-          "last_verified": "2026-07-12",
-          "gating_note": "Renumbered local T1-T5 -> global T42-T46. Corrected a fabricated 'FAL Form 8' claim baked into the original draft (Maritime Declaration of Health is an IHR 2005 document, not an IMO-numbered FAL Form - the Convention has exactly 7 numbered forms) - fixed in title, verify-note, table, Q&A, exam question and memory box. data-kw added (5 topics). Prev/Next nav to Part 9 added."
-        }
-      }
-    },
-    "cross-reference-pages": {
-      "series_name": "Master Index / Cross-Reference Pages",
-      "status": "live",
-      "note": "Utility pages generated by parsing live QB + Notes HTML content, not hand-authored question/note content. Go stale if QB or Notes files are updated without a regeneration pass.",
-      "files": {
-        "notes-master-index.html": {
-          "location": "/meoclass1/oralnotes/",
-          "purpose": "Every Simon Sir Notes topic (Parts 1-8, 162 total) cross-referenced to its matching QB question via keyword-overlap matching. Unmatched topics flagged as gaps pending MIW Written/Engineering Management Notes coverage.",
-          "stats": {
-            "total_notes": 162,
-            "matched_to_qb": 87,
-            "gap_pending_miw_notes": 75
-          },
-          "status": "ungated by design - live 2026-07-11",
-          "regenerate_when": "New Simon Sir Notes parts added, new QB questions added/edited, or MIW Written/Engineering Management Notes reach parity with a flagged gap topic (re-run cross-reference against written_content_index.json to resolve gaps).",
-          "gating_rationale": "Left ungated intentionally, matching oralnotes/index.html and meoclass1/index.html - it is a navigational index/cross-reference page (note titles + QB links only, no note content or QB question text), not a content file. noindex/nofollow keeps it out of search regardless."
-        },
-        "examiner-index.html": {
-          "location": "/meoclass1/",
-          "purpose": "Every QB question (585 total across 79 live files) bundled by Kochi MMD examiner (Nair, Simon, Rajappan, Srivastava, Senthil, Paul). Cross-multi-examiner questions appear under each tagged examiner.",
-          "stats": {
-            "total_tagged_pairs": 811,
-            "confirmed_tier": 359,
-            "ce_tip_tier": 45,
-            "header_tier": 71,
-            "inferred_tier": 316
-          },
-          "status": "gated - live 2026-07-11",
-          "public_teaser": "/SQ/examiner-index.html - Paul Sir fully open (10 Qs), Simon Sir promoted/partially previewed (5 of 212 Qs shown), other 4 examiners shown as locked count-only cards.",
-          "regenerate_when": "New QB questions built without a data-examiner attribute set at creation time (see miw-qb-production skill Section 5/7a) - manifest goes stale silently otherwise."
+          "last_verified": "2026-07-13",
+          "gating_note": "Received as an ungated review copy (gate script stripped) with full content-protection stack otherwise already in place (robots meta, user-select:none, copy/contextmenu/selectstart JS blocks, diagonal watermark). Added the standard auth gate script (miw_auth=1 cookie check → /SQ/pay.html) this session to match Parts 1-11. Sidebar Navigate link corrected from the placeholder 'Part 10 (Part 11 pending)' to a proper '← Part 11' link now that Part 11 is live. Footer topic-numbering note updated to reflect Part 11's confirmation while retaining local P12-T badges per the standing global-renumbering-deferred rule."
         }
       }
     }
