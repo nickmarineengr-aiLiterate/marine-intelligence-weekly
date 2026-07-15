@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MIW Issue 29 | AI Moves Into the Watch | 14 July 2026</title>
+<meta name="description" content="Marine Intelligence Weekly Issue 29 — USCG's CTIME report shows AI cybersecurity tools are only as good as their configuration, DNV RuleAgent and Orca AI-NorthStandard remain the strongest deployment evidence, UK ETS goes live, DNV's July rules edition, and five DGMA/DGS releases affecting Indian seafarers. For marine engineers, fleet managers, and MEO Class 1 candidates.">
+<meta name="keywords" content="maritime cybersecurity, USCG CTIME report, IMO MSC-FAL.1 Circ.3, IACS UR E26 E27, DNV RuleAgent, Orca AI NorthStandard, UK ETS shipping, DNV July 2026 rules, DGMA DGS orders, MEO Class 1 exam, marine intelligence weekly, maritime AI 2026">
+<meta name="author" content="Nixon Antony">
+<link rel="canonical" href="https://marineintelligenceweekly.com/index29.html">
+
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Marine Intelligence Weekly">
+<meta property="og:title" content="MIW Issue 29 — AI Moves Into the Watch">
+<meta property="og:description" content="This week's real AI signal isn't a new launch — it's a cybersecurity report. USCG's CTIME data shows AI defences are only as good as their configuration. RuleAgent, Orca AI, UK ETS, DNV rules, and India's DGMA updates.">
+<meta property="og:url" content="https://marineintelligenceweekly.com/index29.html">
+<meta property="og:image" content="https://marineintelligenceweekly.com/assets/cover29.webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Marine Intelligence Weekly Issue 29 — bridge navigation console with AI overlay at dusk">
+<meta property="og:locale" content="en_GB">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@MarineIntWeekly">
+<meta name="twitter:creator" content="@NixonAntony">
+<meta name="twitter:title" content="MIW Issue 29 — AI Moves Into the Watch">
+<meta name="twitter:description" content="AI is only as trustworthy as its configuration. USCG's CTIME report, RuleAgent, Orca AI, UK ETS, DNV rules, and India's DGMA updates — this week's maritime intelligence.">
+<meta name="twitter:image" content="https://marineintelligenceweekly.com/assets/cover29.webp">
+
+<meta name="theme-color" content="#0D1B2A">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "AI Moves Into the Watch — CTIME, RuleAgent, and the Case for Configuration Over Novelty",
+  "description": "USCG's fifth annual CTIME report finds AI-enabled cyber defences deliver mixed results depending on configuration. DNV's RuleAgent and the Orca AI-NorthStandard fleet study remain the strongest deployment evidence. UK ETS goes live 1 July 2026. DNV's July 2026 rules edition and five DGMA/DGS releases round out the week.",
+  "image": "https://marineintelligenceweekly.com/assets/cover29.webp",
+  "author": {
+    "@type": "Person",
+    "name": "Nixon Antony",
+    "jobTitle": "Second Engineer, Maersk A/S",
+    "url": "https://marineintelligenceweekly.com/index.html"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Marine Intelligence Weekly",
+    "logo": { "@type": "ImageObject", "url": "https://marineintelligenceweekly.com/assets/logo.webp" }
+  },
+  "datePublished": "2026-07-14",
+  "dateModified": "2026-07-14",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "https://marineintelligenceweekly.com/index29.html" }
+}
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+
+<style>
+:root{
+  --teal:#0d9488;
+  --navy:#0f172a;
+  --navy-deep:#0D1B2A;
+  --gold:#f59e0b;
+  --orange:#f97316;
+  --bg:#f8fafc;
+  --grey:#64748b;
+  --line:#e2e8f0;
+  --card:#ffffff;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  font-family:'Source Serif 4',Georgia,'Times New Roman',serif;
+  background:var(--bg);
+  color:#1e293b;
+  line-height:1.7;
+  font-size:17px;
+}
+h1,h2,h3,h4{
+  font-family:'Playfair Display',Georgia,serif;
+  color:var(--navy);
+  line-height:1.25;
+  margin:0 0 .5em;
+}
+a{color:var(--teal);}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
+
+/* Header / nav */
+header.site{
+  position:sticky; top:0; z-index:100;
+  background:var(--navy-deep);
+  color:#fff;
+  padding:10px 20px;
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:10px;
+}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;}
+.brand img{height:32px;width:32px;border-radius:50%;}
+.topnav{display:flex;gap:14px;flex-wrap:wrap;}
+.topnav a{
+  color:#e2e8f0;text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:.8rem;
+  padding:6px 10px;border:1px solid rgba(255,255,255,.15);border-radius:20px;
+  transition:background .2s;
+}
+.topnav a:hover, .topnav a.active{background:var(--teal);color:#fff;border-color:var(--teal);}
+
+/* Floating pill nav (section scroll-spy) */
+.floatnav{
+  position:fixed; top:70px; right:16px; z-index:90;
+  background:rgba(15,23,42,.92);
+  border-radius:30px; padding:8px 6px;
+  display:flex; flex-direction:column; gap:6px;
+  backdrop-filter: blur(6px);
+}
+.floatnav a{
+  width:11px;height:11px;border-radius:50%;background:rgba(255,255,255,.35);
+  display:block; position:relative; text-decoration:none;
+}
+.floatnav a.active{background:var(--teal);}
+.floatnav a span{
+  position:absolute; right:20px; top:50%; transform:translateY(-50%);
+  background:var(--navy); color:#fff; padding:3px 10px; border-radius:4px;
+  font-family:'JetBrains Mono',monospace; font-size:.7rem; white-space:nowrap;
+  opacity:0; pointer-events:none; transition:opacity .15s;
+}
+.floatnav a:hover span{opacity:1;}
+@media (max-width:800px){ .floatnav{display:none;} }
+
+/* Hero */
+.hero-img{width:100%;max-height:560px;object-fit:cover;display:block;}
+.hero{max-width:900px;margin:0 auto;padding:34px 20px 10px;text-align:left;}
+.issue-tag{color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;}
+.hero h1{font-size:2.6rem;margin:.2em 0 .3em;}
+.hero .meta{color:var(--grey);font-family:'JetBrains Mono',monospace;font-size:.85rem;}
+.hero .meta span{margin-right:14px;}
+
+.sectionnav{
+  max-width:900px;margin:18px auto 0;padding:0 20px;
+  display:flex;flex-wrap:wrap;gap:8px;
+  position:sticky; top:52px; z-index:80; background:var(--bg); padding-top:10px; padding-bottom:10px;
+}
+.sectionnav a{
+  text-decoration:none;color:var(--navy);font-family:'JetBrains Mono',monospace;font-size:.78rem;
+  padding:7px 14px;border-radius:20px;border:1px solid var(--line);background:#fff;
+  transition:all .2s;
+}
+.sectionnav a:hover,.sectionnav a.active{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+main{max-width:820px;margin:0 auto;padding:10px 20px 60px;}
+section{scroll-margin-top:130px;padding:36px 0;border-bottom:1px solid var(--line);}
+section:last-of-type{border-bottom:none;}
+h2.section-title{
+  font-size:1.7rem;color:var(--navy);border-left:5px solid var(--teal);
+  padding-left:14px;margin-bottom:20px;
+}
+h3{font-size:1.25rem;margin-top:1.4em;}
+
+.subtext{color:var(--grey);font-style:italic;font-size:.95rem;margin:-8px 0 18px;}
+
+ul.quickread{list-style:none;margin:0;padding:0;}
+ul.quickread li{
+  padding:10px 0 10px 28px;position:relative;border-bottom:1px dashed var(--line);
+}
+ul.quickread li:last-child{border-bottom:none;}
+ul.quickread li::before{content:"▸";position:absolute;left:0;color:var(--teal);font-weight:700;}
+
+img.infographic{width:100%;height:auto;border-radius:8px;margin:26px 0;display:block;}
+img.pullquote-img{width:100%;max-width:520px;height:auto;border-radius:8px;margin:26px auto;display:block;}
+figure{margin:26px 0;}
+figcaption{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--grey);text-align:center;margin-top:8px;}
+
+blockquote{
+  border-left:4px solid var(--gold);background:#fff;
+  padding:16px 22px;margin:22px 0;font-style:italic;color:var(--navy);
+  font-size:1.05rem;
+}
+blockquote cite{display:block;margin-top:10px;font-style:normal;color:var(--teal);font-size:.9rem;}
+
+.decision{
+  background:#ecfdf5;border-left:4px solid var(--teal);padding:12px 16px;margin:14px 0;border-radius:4px;font-size:.95rem;
+}
+.decision strong{color:var(--teal);}
+
+.assessment{
+  background:var(--navy);color:#f1f5f9;border-left:4px solid var(--gold);
+  padding:18px 22px;margin:24px 0;border-radius:6px;font-size:1rem;
+}
+.assessment strong{color:var(--gold);display:block;font-family:'JetBrains Mono',monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;}
+
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;}
+@media(max-width:640px){.card-grid{grid-template-columns:1fr;}}
+.reg-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:16px;}
+.reg-card h4{margin:0 0 6px;font-size:1rem;color:var(--navy);}
+.reg-card .tag{display:inline-block;background:var(--teal);color:#fff;font-size:.7rem;padding:2px 8px;border-radius:10px;margin-top:8px;font-family:'JetBrains Mono',monospace;}
+
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.92rem;}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+th{background:var(--navy);color:#fff;font-family:'JetBrains Mono',monospace;font-size:.78rem;text-transform:uppercase;}
+tr:nth-child(even) td{background:#f1f5f9;}
+
+.source-tag{font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--grey);margin-top:4px;}
+.exam-tip{background:#fff7ed;border-left:4px solid var(--orange);padding:12px 16px;margin:14px 0;border-radius:4px;font-size:.92rem;}
+.exam-tip strong{color:var(--orange);}
+
+.voice-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;}
+.voice-header img{width:64px;height:64px;border-radius:50%;object-fit:cover;}
+.voice-header .who{font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--grey);}
+.voice-header .who strong{color:var(--navy);font-family:'Playfair Display',serif;font-size:1.1rem;display:block;}
+
+.teaser{background:var(--navy);color:#f1f5f9;padding:22px;border-radius:8px;margin:20px 0;font-style:italic;}
+
+.one-sentence{
+  background:#fff;border:2px solid var(--teal);border-radius:8px;
+  padding:20px 22px;margin:24px 0;text-align:center;
+}
+.one-sentence .label{font-family:'JetBrains Mono',monospace;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em;color:var(--teal);margin-bottom:8px;display:block;}
+.one-sentence p{font-family:'Playfair Display',Georgia,serif;font-size:1.25rem;color:var(--navy);margin:0;font-style:italic;}
+
+.deeper-revision{background:#fff;border:1px dashed var(--teal);border-radius:8px;padding:16px 20px;margin:20px 0;}
+
+.sources-list{font-size:.85rem;color:var(--grey);}
+.sources-list a{color:var(--teal);word-break:break-all;}
+.sources-list li{margin-bottom:6px;}
+.sources-list h4{font-family:'JetBrains Mono',monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--navy);margin:16px 0 6px;}
+.sources-list h4:first-child{margin-top:0;}
+.vendor-note{font-size:.85rem;font-style:italic;color:var(--grey);border-top:1px solid var(--line);padding-top:12px;margin-top:16px;}
+
+/* Share bar */
+.sharebar{
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+  padding:22px 0;margin-top:10px;border-top:2px solid var(--line);
+}
+.sharebar a,.sharebar button{
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;
+  padding:9px 16px;border-radius:20px;border:1px solid var(--navy);
+  background:var(--navy);color:#fff;text-decoration:none;cursor:pointer;
+}
+.sharebar a.alt{background:#fff;color:var(--navy);}
+
+footer.site{
+  background:var(--navy-deep);color:#94a3b8;text-align:center;
+  padding:26px 20px;font-family:'JetBrains Mono',monospace;font-size:.8rem;
+}
+footer.site a{color:#e2e8f0;}
+.footlinks{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-bottom:14px;}
+
+/* Return to top */
+#toTop{
+  position:fixed;bottom:24px;right:16px;z-index:95;
+  background:var(--teal);color:#fff;border:none;width:44px;height:44px;border-radius:50%;
+  font-size:1.2rem;cursor:pointer;display:none;box-shadow:0 4px 12px rgba(0,0,0,.25);
+}
+#toTop.show{display:block;}
+
+/* Print */
+@media print{
+  header.site,.floatnav,.sectionnav,.sharebar,#toTop,footer.site{display:none !important;}
+  body{background:#fff;color:#000;}
+  section{border-bottom:none;page-break-inside:avoid;}
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="https://marineintelligenceweekly.com/index.html">
+    <img src="/assets/logo.webp" alt="MIW logo">
+    MIW
+  </a>
+  <nav class="topnav">
+    <a href="https://marineintelligenceweekly.com/index.html">Home</a>
+    <a href="https://marineintelligenceweekly.com/index28.html">← Issue 28</a>
+    <a href="https://marineintelligenceweekly.com/archive/index.html">Archive</a>
+  </nav>
+</header>
+
+<!-- Floating scroll-spy nav -->
+<nav class="floatnav" id="floatnav">
+  <a href="#quickread" data-label="Quick Read"><span>Quick Read</span></a>
+  <a href="#feature" data-label="Feature"><span>Feature</span></a>
+  <a href="#regulatory" data-label="Regulatory Watch"><span>Regulatory Watch</span></a>
+  <a href="#ai" data-label="AI in Maritime"><span>AI in Maritime</span></a>
+  <a href="#class" data-label="Classification"><span>Classification</span></a>
+  <a href="#india" data-label="India Angle"><span>India Angle</span></a>
+  <a href="#voice" data-label="Engineer's Voice"><span>Engineer's Voice</span></a>
+  <a href="#takeaway" data-label="Takeaway"><span>Takeaway</span></a>
+</nav>
+
+<img class="hero-img" src="/assets/cover29.webp" alt="Container ship bridge at dusk, navigation officer silhouetted against radar and ECDIS screens with AI overlay, Marine Intelligence Weekly Issue 29">
+
+<div class="hero">
+  <div class="issue-tag">Issue 29</div>
+  <h1>AI Moves Into the Watch</h1>
+  <div class="meta">
+    <span>Published 14 July 2026</span>
+    <span>·</span>
+    <span id="readtime">~9 min read</span>
+  </div>
+</div>
+
+<div class="sectionnav" id="sectionnav">
+  <a href="#quickread">Quick Read</a>
+  <a href="#feature">Feature</a>
+  <a href="#regulatory">Regulatory Watch</a>
+  <a href="#ai">AI</a>
+  <a href="#class">Classification</a>
+  <a href="#india">India Angle</a>
+  <a href="#voice">Engineer's Voice</a>
+  <a href="#takeaway">Takeaway</a>
+</div>
+
+<main>
+
+<section id="quickread">
+  <h2 class="section-title">Quick Read</h2>
+  <p class="subtext">For shore-side technical managers, fleet operations, and MEO Class 1 candidates alike:</p>
+  <ul class="quickread">
+    <li>The US Coast Guard's fifth annual CTIME report (released 8 July 2026) is this week's genuine AI/cyber signal: reported maritime cyber incidents rose 17% year-on-year, OT systems were involved in 62% of cyber missions (up from 46% in 2024), and AI-enabled cybersecurity tools showed mixed effectiveness tied to how well they're configured.</li>
+    <li>AI adoption continues to concentrate on practical decision support through tools such as DNV's RuleAgent (launched March 2026), the Orca AI–NorthStandard fleet safety study (52% reduction in high-severity close encounters across 139 vessels), predictive machinery-health analytics, and voyage optimisation — normal fleet tools now, not experimental extras.</li>
+    <li>Carbon pricing pressure is now live in practice, with the UK ETS applying to shipping from 1 July 2026 for cargo and passenger ships of 5,000 GT and above.</li>
+    <li>DNV's July 2026 rules edition is the key class development of the week, with new notations and fuel-related rule changes entering into force on 1 January 2027.</li>
+    <li>DGMA/DGS has issued a meaningful set of India-relevant orders and circulars in recent weeks, including Hong Kong Convention implementation, revised CDC eligibility criteria, Gulf-region security precautions, and a seafarer wellness circular.</li>
+    <li>For engineers, the practical message is straightforward: cleaner data, tighter logs, cyber-safe integration, and early class review of retrofits now matter as much as mechanical reliability.</li>
+  </ul>
+  <img class="infographic" src="/assets/image1_29.webp" alt="Quick read summary strip: CTIME cyber report, RuleAgent and Orca AI decision support, UK ETS live, DNV July rules, DGMA India updates, data discipline">
+</section>
+
+<section id="feature">
+  <h2 class="section-title">Feature Article</h2>
+  <h3>AI Is No Longer the Headline. It Is Becoming Part of the Watch.</h3>
+
+  <p>This week's clearest AI signal isn't a new launch — it's a cybersecurity report. The USCG's fifth annual CTIME report (8 July 2026) found maritime cyber incidents up 17% year-on-year, OT involved in 62% of cyber missions (up from 46% in 2024), and AI-enabled cyber defences delivering mixed results depending on configuration, not the tool itself. The lesson: AI doesn't substitute for the fundamentals — secure systems, MFA, incident reporting, continuity planning.</p>
+
+  <p>Two older stories still anchor the wider decision-support trend: DNV's RuleAgent (March 2026), natural-language rule retrieval rather than decision-making, and Orca AI–NorthStandard's fleet study (March–April 2026), a 52% reduction in high-severity close encounters across 139 vessels — still the strongest fleet-scale safety evidence available. The thread through all three is data quality: predictive-maintenance and voyage-optimisation tools are only as good as the vibration trends, defect logs, and noon-report accuracy feeding them, and any AI system should be assessed like any other safety-relevant change — access control, fallback, manual override — before the result is trusted.</p>
+
+  <img class="pullquote-img" src="/assets/image3_29.webp" alt="Pull quote: Poor sensors, missing trends, inconsistent defect reports, or casual alarm handling can quietly destroy the value of otherwise advanced tools — MIW, AI in Maritime, this issue">
+
+  <div class="assessment">
+    <strong>MIW Assessment</strong>
+    The industry's AI debate is quietly shifting away from autonomy and toward operational decision support. The next competitive advantage won't come from the most advanced algorithm — it will come from whoever has the cleanest operational data and the strongest engineering discipline feeding it. That's the filter to apply to every AI story in this issue, not just this one.
+  </div>
+</section>
+
+<section id="regulatory">
+  <h2 class="section-title">IMO &amp; Regulatory Watch</h2>
+  <h3>Standing 2026 Amendments Are Still Doing the Real Work</h3>
+  <p>There were no major new IMO press briefings in the last seven days that changed the compliance picture in the way last week's MASS Code story did. The more important reality for shipboard professionals is that several 2026 amendments already in force are now the items most likely to appear at survey, in company audits, and in oral examination questions.</p>
+
+  <figure>
+    <img class="infographic" src="/assets/image2_29.webp" alt="Regulatory status timeline from 1 January 2026 to 1 March 2027: ECAs and SOx, SOLAS lifting appliances, PFOS ban, fuel flashpoint declaration, and UK ETS marked by in-force date">
+    <figcaption>Five in-force dates. Only one of them is new this week: UK ETS.</figcaption>
+  </figure>
+
+  <table>
+    <thead>
+      <tr><th>Regulation / Instrument</th><th>What Matters Onboard</th><th>Status</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>MARPOL Annex VI new ECAs (Norwegian Sea and Canadian Arctic)</td><td>NOx Tier III applies for relevant new-build engines; SOx 0.10% m/m fuel sulphur cap follows from 1 March 2027.</td><td>In force from 1 March 2026.</td></tr>
+      <tr><td>SOLAS II-1/3-13</td><td>Permanently installed lifting appliances and anchor handling winches require compliant design, testing, marking, examination, and documentation.</td><td>Mandatory from 1 January 2026 for new installations; existing gear at first renewal survey after that date.</td></tr>
+      <tr><td>PFOS fire-fighting media ban</td><td>Existing ships must remove PFOS-containing media by the first survey after 1 January 2026; related fire-detection upgrades affect certain ro-ro and vehicle spaces.</td><td>In force.</td></tr>
+      <tr><td>SOLAS fuel flashpoint declaration amendments</td><td>BDNs must show measured flashpoint or declaration of compliant flashpoint; bunkering verification becomes more documentation-driven.</td><td>In force.</td></tr>
+      <tr><td>UK ETS for shipping</td><td>Cargo and passenger ships of 5,000 GT and above are now exposed to UK-linked carbon-cost compliance from 1 July 2026.</td><td>Live.</td></tr>
+    </tbody>
+  </table>
+
+  <p>A further regulatory pressure line remains the IMO Net-Zero Framework. Current reporting compiled this week indicates that even without final global adoption yet completed, the framework is already shaping expectations around well-to-wake fuel intensity, pricing mechanisms, and future fleet technical choices. For engineers, that means flexible compliance systems and fuel-data quality matter now, even before the final legal architecture is complete.</p>
+</section>
+
+<section id="ai">
+  <h2 class="section-title">AI in Maritime</h2>
+
+  <h3>1. Rules Intelligence: DNV's RuleAgent</h3>
+  <p>DNV launched RuleAgent in March 2026 as an AI-powered tool for navigating maritime rules and standards more quickly and with source traceability. For marine professionals, that matters because the rules burden is growing faster than most crews' available reading time. A tool like this does not replace formal class interpretation, but it can shorten the path from question to relevant clause and reduce preventable errors caused by missed wording.</p>
+  <div class="decision"><strong>Engineer's checklist:</strong> Use AI retrieval for speed, but always verify answers against the cited clause and vessel-specific class arrangement before acting.</div>
+
+  <h3>2. Navigation Safety: Fleet-Scale Evidence, Not Just Pilot Language</h3>
+  <p>This week's stronger AI safety signal is the reported 52% reduction in high-severity close encounters across 139 vessels using Orca AI data with NorthStandard over a 12-month period. Unlike a single trial, this is being presented as a fleet-scale operational outcome. That does not make the technology self-proving, but it does move the discussion from possibility to measurable performance.</p>
+  <div class="decision"><strong>Fleet implication:</strong> Expect AI-assisted bridge systems to be judged increasingly on safety evidence, human-factors integration, and alert quality rather than on novelty alone.</div>
+
+  <figure>
+    <img class="infographic" src="/assets/image6_29.webp" alt="AI adoption on today's merchant ship: flow diagram from Bridge to Engine Room to Technical Office to Class to Cybersecurity, showing where AI is landing today">
+    <figcaption>AI adoption on today's merchant ship — where it's actually landing.</figcaption>
+  </figure>
+
+  <h3>3. Engine Room Relevance: Predictive Analytics Become Normal</h3>
+  <p>Reporting from this week continues to show AI adoption focused on predictive performance analytics, machinery-health support, fuel-efficiency optimisation, and emissions management. That makes the engineer's role central: poor sensors, missing trends, inconsistent defect reports, or casual alarm handling can quietly destroy the value of otherwise advanced tools.</p>
+  <div class="decision"><strong>Engineer's checklist:</strong> Good AI starts with ordinary discipline — baseline readings, repeatable trends, credible logs, and alarms that mean what they say.</div>
+
+  <h3>4. Cybersecurity: The USCG's CTIME Report Is This Week's Real Signal</h3>
+  <p>The US Coast Guard Cyber Command released its fifth annual <em>Cyber Trends and Insights in the Marine Environment</em> (CTIME) report on 8 July 2026, drawing on 2025 operational data. Reported maritime cyber incidents rose 17% year-on-year, phishing remained the primary entry point, and operational technology (OT) featured in 62% of cyber missions, up from 46% in 2024. The report's most useful line for engineers: AI integration with cybersecurity defences produced varied results in 2025, with effectiveness depending heavily on system configuration and tuning — not on the presence of AI itself.</p>
+
+  <img class="infographic" src="/assets/image4_29.webp" alt="CTIME stat card: 17 percent rise in reported maritime cyber incidents, 62 percent of cyber missions involving OT systems, AI cyber tools effective only when properly configured">
+
+  <img class="pullquote-img" src="/assets/image7_29.webp" alt="Pull quote: Effectiveness depends heavily on system configuration and tuning — USCG Cyber Command, CTIME Report">
+
+  <p><strong>What IMO and class are actually saying:</strong> Cyber risk has been a mandatory SMS item since 1 January 2021 under IMO Resolution MSC.428(98). The current working guidance is MSC-FAL.1/Circ.3/Rev.3 (4 April 2025), which realigned IMO's cyber framework to the NIST Cybersecurity Framework 2.0 by adding a <strong>Govern</strong> function alongside the existing Identify–Protect–Detect–Respond–Recover cycle — in practice, this means a named, signed-off cyber policy with assigned shipboard and shoreside roles, not a cyber programme left inside the IT department. Separately, IMO's Facilitation Committee (FAL 50, 23–27 March 2026) approved a Strategy on Maritime Digitalization and adopted mandatory cybersecurity measures for maritime single windows under the FAL Convention — a shore-side signal that digitalisation and cyber governance are now being tied together at IMO level, not treated as separate tracks.</p>
+  <p class="source-tag">Source: IMO</p>
+
+  <p>On the class side, IACS Unified Requirements E26 (ship-level cyber resilience) and E27 (resilience of onboard systems and equipment) are mandatory for newbuilds contracted from 1 July 2024 — design-stage requirements, not retrofit guidance. ABS has gone further for existing tonnage, offering a Cyber Resilience (CR) notation under its January 2026 Marine Vessel Rules, plus optional CS-1, CS-2, and CR-Ex notations depending on how far a vessel's cyber controls have been implemented and evidenced. DNV's own guidance sits alongside this same shift.</p>
+  <p class="source-tag">Sources: IACS, ABS, DNV</p>
+
+  <div class="decision"><strong>Survey implication:</strong> If your company's SMS cyber section still runs the older five-function cycle without a Govern element, that is now a visible gap against the current IMO guidance — worth raising at the next SMS review or internal audit, regardless of what notation (if any) your vessel carries.</div>
+
+  <p>DNV's maritime cyber-security guidance reinforces the same point from the class-society side: digitalisation and AI can improve operations while increasing cyber-exposure where systems are interconnected. This is especially important on vessels where navigation, cargo, machinery, and corporate data pathways are increasingly linked. For engineers, superintendents, and IT/OT managers alike, AI adoption should trigger the same kind of sceptical review applied to any automation upgrade: what happens if the data feed is wrong, delayed, spoofed, or unavailable?</p>
+
+  <div class="decision"><strong>Engineer's checklist:</strong> No AI-assisted function — cyber-defensive or otherwise — should be accepted onboard or ashore without access control, fallback procedure, and manual cross-check in the relevant SMS or company IT policy.</div>
+</section>
+
+<section id="class">
+  <h2 class="section-title">Classification Insights</h2>
+
+  <h3>DNV: July 2026 Rules Edition</h3>
+  <p>DNV's July 2026 rules edition introduces new class notations, revised fatigue-related qualifiers, and a restructured DNV-OS-A101 with expanded support for other fuels, with entry into force on 1 January 2027 unless applied earlier by agreement. This is the clearest class-society change of the week because it affects how future retrofits, fuel-system changes, and machinery-adjacent modifications will be reviewed.</p>
+  <div class="decision"><strong>Survey implication:</strong> The risk is not onboard failure tomorrow but late-stage non-compliance in design approval, modification planning, or retrofit execution if the new rule landscape is ignored until survey stage.</div>
+
+  <h3>ABS: SMART Monitoring and Condition-Based Maintenance</h3>
+  <p>ABS reported that GasLog received combined SMART (MHM) and PMP-CBM notations, signalling stronger class acceptance of continuous machinery-health monitoring and predictive maintenance methods. For engineers, that supports a broader shift away from relying only on fixed overhaul intervals and toward evidence-based machinery management.</p>
+  <div class="decision"><strong>Survey implication:</strong> Condition-based maintenance only works if data quality is trusted. Bad trending is worse than no trending because it creates false confidence.</div>
+
+  <h3>ABS: Automation and Remote Operations</h3>
+  <p>ABS also announced a conditional unmanned-bridge agreement involving Polaris Shipping, HHI, and AVIKUS, indicating continued class engagement with automation and remote-operation architectures. Even on conventional merchant ships, the operational lesson is immediate: more automation means greater dependence on network resilience, alarm integrity, and tested fallback modes.</p>
+
+  <div class="decision">
+    <strong>Operational checklist:</strong>
+    <ul>
+      <li>Review whether any DNV-classed retrofit or fuel conversion will cross into the July 2026 rule set before 1 January 2027.</li>
+      <li>Tighten machinery-trending routines for vibration, bearing temperature, lube-oil condition, and critical auxiliaries where CBM is being pursued.</li>
+      <li>Treat control-network changes and software additions as class-relevant reliability risks, not just IT housekeeping.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="india">
+  <h2 class="section-title">The India Angle</h2>
+  <h3>DGMA / DGS: Orders and Circulars Worth Watching</h3>
+  <p>Five DGS releases issued over the past two months directly affect Indian seafarers, ship managers, and training institutions — and any fleet manager or crewing department with Indian nationals aboard, given India's share of global seafarer supply.</p>
+
+  <img class="infographic" src="/assets/image5_29.webp" alt="DGMA and DGS card grid: Order 17 Hong Kong Convention, Order 12 CDC eligibility, Order 8 abandonment prevention, Circular 33 Gulf precautions, Circular 34 Sagar Mein Yog wellness module">
+
+  <h3>1. DGS Order 17 of 2026 — Hong Kong Convention Implementation</h3>
+  <p>The order, dated 18 June 2026, addresses implementation of the Hong Kong International Convention for the Safe and Environmentally Sound Recycling of Ships, 2009, on Indian-flag vessels and also covers type approval and certification of ship-recycling equipment manufactured in India. This matters not only for end-of-life planning but also for documentation culture onboard, especially where IHM maintenance and recycling-preparedness records are concerned.</p>
+
+  <h3>2. DGS Order 12 of 2026 — Revised CDC Eligibility Criteria</h3>
+  <p>Issued on 23 May 2026, this order revises eligibility criteria for issue of the Continuous Discharge Certificate and seeks to improve seafarer quality standards. While administrative on the surface, it is practically important for junior engineers and ratings moving through documentation pathways.</p>
+
+  <h3>3. DGS Order 8 of 2026 — Prevention of Abandonment of Indian Seafarers</h3>
+  <p>Issued on 14 May 2026, this order sets preventive measures aimed at reducing abandonment of Indian seafarers engaged on foreign-flag vessels. This is relevant to maritime professionals well beyond crewing departments because abandonment risk intersects with welfare, wage security, MLC exposure, and company due diligence.</p>
+
+  <h3>4. DGS Circular 33 of 2026 — Gulf-Region Precautions</h3>
+  <p>Listed in the recent circulars, this circular addresses precautionary measures for Indian seafarers operating in the Gulf region. The operational point is simple: any Gulf transit should be treated as a security-and-welfare briefing issue, not only a navigational one.</p>
+
+  <h3>5. DGS Circular 34 of 2026 — "Sagar Mein Yog" Wellness Module</h3>
+  <p>Issued on 1 July 2026, Circular 34 mandates implementation of a wellness module through the maritime Learning Management System. This may appear soft compared with technical orders, but fatigue, stress, and mental resilience have direct consequences for watchkeeping quality, error rate, and retention.</p>
+
+  <div class="decision">
+    <strong>Engineer's Decision:</strong>
+    <ul>
+      <li>If the vessel is nearing disposal, verify IHM status and confirm awareness of Hong Kong Convention implementation requirements under DGS Order 17/2026.</li>
+      <li>If joining, renewing documents, or mentoring juniors, check CDC-related eligibility changes under DGS Order 12/2026 rather than relying on older assumptions.</li>
+      <li>For Gulf voyages, ensure the latest security precautions are reflected in onboard briefings and SMS practice.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="voice">
+  <h2 class="section-title">Engineer's Voice</h2>
+  <div class="voice-header">
+    <img src="/assets/nixon-photo.webp" alt="Nixon Antony">
+    <div class="who"><strong>Nixon Antony</strong>2nd Engineer, Maersk A/S · Editor, MIW</div>
+  </div>
+
+  <p>The strongest practical theme from the week's material is that the modern marine engineer is being asked to manage three systems at once: machinery, compliance, and data. Ten years ago, those could still be treated as partly separate jobs. That separation is breaking down.</p>
+
+  <p>A vibration trend now matters not only because it may indicate bearing wear, but because it may feed a class-backed CBM decision or a shore-side AI model. A fuel log now matters not only because it supports consumption tracking, but because it may underpin UK ETS, FuelEU, and future IMO carbon-compliance exposure. A software or network change now matters not only because it affects convenience, but because it may alter the cyber-resilience of machinery and navigation systems.</p>
+
+  <p>That can feel like administrative overload, but there is a better way to read it. The engineer's traditional strengths — disciplined rounds, reliable records, scepticism about instrumentation, and respect for failure modes — are becoming more valuable, not less, in a digital fleet. The future is not replacing engineering judgment with AI. It is making engineering judgment the filter through which AI either becomes useful or becomes dangerous. Engineering judgement is becoming the quality-control system for every digital tool brought onboard.</p>
+</section>
+
+<section id="takeaway">
+  <h2 class="section-title">Practical Takeaway</h2>
+  <table>
+    <thead>
+      <tr><th>Topic</th><th>Key Point</th><th>Action for Engineers</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Maritime AI</td><td>AI adoption is concentrating in decision support, not crew replacement.</td><td>Validate AI outputs against real readings and keep human fallback intact.</td></tr>
+      <tr><td>Rule navigation</td><td>DNV RuleAgent (launched March 2026) shows how AI is entering technical documentation workflows.</td><td>Use it to find clauses faster, but verify against source text before acting.</td></tr>
+      <tr><td>Carbon pricing</td><td>UK ETS is now live for shipping from 1 July 2026.</td><td>Tighten bunker records, fuel logs, and voyage-emissions data quality.</td></tr>
+      <tr><td>Class changes</td><td>DNV's July 2026 rules enter into force on 1 January 2027.</td><td>Screen retrofits and fuel-system changes now for rule impact.</td></tr>
+      <tr><td>Machinery monitoring</td><td>ABS developments confirm momentum toward CBM and health monitoring.</td><td>Improve trending discipline for vibration, LO condition, temperatures, and alarms.</td></tr>
+      <tr><td>India regulatory watch</td><td>DGS Orders 17/2026, 12/2026, 8/2026 and Circulars 33/34 of 2026 are immediately relevant.</td><td>Review IHM/recycling status, CDC assumptions, Gulf precautions, and wellness compliance.</td></tr>
+      <tr><td>Cybersecurity</td><td>USCG CTIME (8 July 2026): incidents up 17% y/y, OT in 62% of missions; AI cyber-tools only as good as their configuration.</td><td>Confirm access control, fallback mode, and manual override before trusting new AI-enabled tools.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="exam-tip">
+    <strong>Oral exam tip:</strong> If asked to frame "the present state of maritime AI" in one answer — it's operational, not theoretical, concentrated in rule retrieval, predictive maintenance, and navigation-risk reduction; safe use depends on reliable ship data and cyber-secure OT/IT integration; AI supports human judgement, it doesn't replace watchkeeping or engineering responsibility.
+  </div>
+
+  <div class="teaser">
+    <strong>Next Watch Items:</strong> The next useful signals to track are not broad autonomy headlines but implementation evidence — relevant whether you're studying for an oral or running a fleet technical department: whether more operators publish measurable AI outcomes, whether class societies expand AI-linked assurance pathways, whether flag/coast-guard cyber reporting (CTIME-style) becomes a recurring feature rather than an annual one, and whether DGMA follows recent circular activity with more operational guidance for seafarers and ship managers.
+  </div>
+
+  <div class="one-sentence">
+    <span class="label">This Week in One Sentence</span>
+    <p>The industry's AI race is no longer about autonomy — it's about trustworthy data, disciplined engineering, and cyber-resilient decision support.</p>
+  </div>
+
+  <div class="deeper-revision">
+    <strong>For Deeper Revision:</strong> This issue's AI in Maritime and Regulatory Watch sections map directly onto Class 1 oral topics on cyber risk management and IMO instrument hierarchy. For structured question-and-answer practice, see the <a href="https://marineintelligenceweekly.com/SQ/simon-notes-p1.html">MEO Class 1 Question Bank</a>.
+  </div>
+
+  <details>
+    <summary class="mono" style="cursor:pointer;color:var(--grey);font-size:.85rem;">Sources</summary>
+    <div class="sources-list">
+      <h4>Government</h4>
+      <ul>
+        <li>US Coast Guard Cyber Command — CTIME Report (5th annual, released 8 July 2026), summarised via SAFETY4SEA: <a href="https://safety4sea.com/uscg-maritime-cyber-incidents-rise-17-as-phishing-ai-and-ot-risks-reshape-the-threat-landscape/">safety4sea.com</a></li>
+      </ul>
+      <h4>Primary Sources — IMO</h4>
+      <ul>
+        <li>IMO — Maritime cyber risk / MSC-FAL.1/Circ.3/Rev.3 (4 April 2025), Guidelines on Maritime Cyber Risk Management: <a href="https://www.imo.org/en/ourwork/security/pages/cyber-security.aspx">imo.org</a></li>
+        <li>IMO — Facilitation Committee (FAL 50, 23–27 March 2026) press briefing on the Strategy on Maritime Digitalization and cybersecurity measures: <a href="https://www.imo.org/en/mediacentre/pressbriefings/pages/facilitation-committee-approves-digitalization-strategy-cyber-security-measures.aspx">imo.org</a></li>
+      </ul>
+      <h4>Class &amp; Industry</h4>
+      <ul>
+        <li>IACS — Unified Requirements E26/E27 (Cyber Resilience of Ships / of On-Board Systems and Equipment), mandatory for newbuilds contracted from 1 July 2024: <a href="https://iacs.org.uk/resolutions/unified-requirements/ur-e">iacs.org.uk</a></li>
+        <li>ABS — Maritime Cybersecurity regulatory update, Cyber Resilience (CR) notation under the January 2026 Marine Vessel Rules: <a href="https://ww2.eagle.org/en/rules-and-resources/regulatory-updates/Maritime-Cybersecurity.html">eagle.org</a></li>
+        <li>DNV — RuleAgent launch (March 2026): <a href="https://www.dnv.com/news/2026/new-dnv-ai-tool-makes-maritime-rules-easier-to-navigate/">dnv.com</a></li>
+      </ul>
+      <h4>Research</h4>
+      <ul>
+        <li>Orca AI / NorthStandard — joint safety study (March–April 2026): <a href="https://north-standard.com/insights-and-resources/resources/press-releases/joint-orca-ai-northstandard-study-highlights-strong-impact-of-ai-on-navigational-safety">north-standard.com</a></li>
+      </ul>
+    </div>
+    <p class="vendor-note">CTIME source above is a trade-press summary (SAFETY4SEA) pending confirmation of a direct USCG.mil primary link. All standing regulatory, DNV July 2026 rules, ABS SMART/PMP-CBM, and DGMA/DGS citations carried over from prior sourcing — confirm all URLs are still live before this page goes public.</p>
+  </details>
+
+  <div class="sharebar">
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://marineintelligenceweekly.com/index29.html" target="_blank" rel="noopener">Share on LinkedIn</a>
+    <a class="alt" href="https://wa.me/?text=Marine%20Intelligence%20Weekly%20Issue%2029%20--%20AI%20Moves%20Into%20the%20Watch%3A%20https://marineintelligenceweekly.com/index29.html" target="_blank" rel="noopener">Share on WhatsApp</a>
+    <button class="alt" onclick="window.print()">Save as PDF</button>
+  </div>
+
+  <p style="display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;">
+    <a href="https://marineintelligenceweekly.com/index28.html">← Issue 28</a>
+    <a href="https://marineintelligenceweekly.com/index.html">Home</a>
+    <a href="https://marineintelligenceweekly.com/archive/index.html">Archive</a>
+  </p>
+</section>
+
+</main>
+
+<footer class="site">
+  <div class="footlinks">
+    <a href="https://marineintelligenceweekly.com/index.html">Home</a>
+    <a href="https://marineintelligenceweekly.com/archive/index.html">Archive</a>
+    <a href="https://marineintelligenceweekly.com/SQ/">MEO Class 1 QB</a>
+    <a href="https://www.linkedin.com/in/nixon-antony-marineengineer/">LinkedIn</a>
+    <a href="https://www.youtube.com/@MarineIntelligenceWeekly">YouTube</a>
+  </div>
+  © 2026 Nixon Antony · Marine Intelligence Weekly · Independent Editorial · AI · Maritime · Systems · Insight
+</footer>
+
+<button id="toTop" aria-label="Return to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+// Reading time calculation
+(function(){
+  var text = document.querySelector('main').innerText || '';
+  var words = text.trim().split(/\s+/).length;
+  var mins = Math.max(1, Math.round(words / 200));
+  document.getElementById('readtime').textContent = '~' + mins + ' min read';
+})();
+
+// Return to top visibility
+window.addEventListener('scroll', function(){
+  var btn = document.getElementById('toTop');
+  if(window.scrollY > 600){ btn.classList.add('show'); } else { btn.classList.remove('show'); }
+});
+
+// Scroll-spy for both nav bars (floating pill nav + inline section nav)
+(function(){
+  var sections = document.querySelectorAll('main section[id]');
+  var floatLinks = document.querySelectorAll('.floatnav a');
+  var sectionLinks = document.querySelectorAll('.sectionnav a');
+
+  var map = {};
+  floatLinks.forEach(function(a){ map[a.getAttribute('href').slice(1)] = map[a.getAttribute('href').slice(1)] || {}; map[a.getAttribute('href').slice(1)].f = a; });
+  sectionLinks.forEach(function(a){ var id = a.getAttribute('href').slice(1); map[id] = map[id] || {}; map[id].s = a; });
+
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var id = entry.target.id;
+      if(entry.isIntersecting){
+        floatLinks.forEach(function(a){ a.classList.remove('active'); });
+        sectionLinks.forEach(function(a){ a.classList.remove('active'); });
+        if(map[id] && map[id].f) map[id].f.classList.add('active');
+        if(map[id] && map[id].s) map[id].s.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(function(s){ observer.observe(s); });
+})();
+</script>
+
+</body>
+</html>
