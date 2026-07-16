@@ -8,6 +8,15 @@
     {
       "date": "2026-07-16",
       "files": [
+        "QB4_A",
+        "QB4_C",
+        "QB4_E"
+      ],
+      "note": "PSC appeal-chain correction cascade, triggered by a subscriber correction report (Rathesh) on QB4_E Q8. Root cause: the appeal escalation chain's Stage 3 review deadline was stated platform-wide as '120 days from the ship's release from detention' and implicitly presented as flowing from IMO Resolution A.1206(34) itself. Independent verification against the actual A.1206(34) text confirmed it grants only a general, one-line right of appeal (para 2.3.11) with no numeric deadline or staged mechanism specified at IMO level -- the 3-stage chain and day-count are regional MOU procedure. The 120-day figure is correct only for Paris MOU (measured from date of release); IOMOU -- the regime governing Indian ports and the one relevant for Kochi MMD candidates -- specifies 90 days from the date of detention, verified against IOMOU's own 'Detention Review Panel' procedure document (Section 3.13), with a 3-member review panel (not Paris MOU's 4-member panel). This superseded the same-day entry above where QB4_A Q6 and QB4_E Q8 were logged with the then-uncaught 120-day figure. Corrected in: QB4_A Q6 (deadline + panel size), QB4_E Q8 (deadline + panel size + resolution-vs-MOU attribution), and QB4_C Q11 (separately discovered during the audit: governing resolution was still citing the superseded A.1185(33) instead of A.1206(34) throughout -- action-taken code content itself was already correct and unchanged). All three questions now cross-link to each other (appeal chain <-> action codes <-> IOMOU/Paris MOU deadline comparison). Audited all 78 live QB files for the same 120-day/A.1185(33) pattern -- QB3_C, QB4_I, QB9_F matched only on unrelated generic 'detention' text, no further instances found. Health-checked (tag balance, JS syntax, mandatory block counts, structural parity vs originals) before this manifest update; known_traps.md scanner flags 'A.1185(33)' in all three files as an expected false positive -- the mentions are intentional, explaining the superseded resolution for exam-trap awareness, not errors."
+    },
+    {
+      "date": "2026-07-16",
+      "files": [
         "QB1_A",
         "QB1_B",
         "QB1_supplementary",
@@ -1479,7 +1488,7 @@
       "qb_group": "QB4",
       "letter": "A",
       "title": "ISM Code, ISPS, MLC 2006 & STCW",
-      "version": "1.0",
+      "version": "1.3",
       "tags": [
         "iacs",
         "ism",
@@ -1570,6 +1579,9 @@
           "qnum": 20,
           "text": "What does SOLAS Chapter XII cover, and what are the latest amendments under MSC.520(106)?"
         }
+      ],
+      "corrections_applied": [
+        "Q6 (PSC detention appeal procedure): Stage 3 deadline corrected from '120 days of release' (Paris MOU figure, wrongly presented as universal) to the correct IOMOU figure of 90 days from the date of detention — IOMOU governs Indian ports and is the relevant regime for Kochi. IOMOU panel size corrected to 3 member authorities (was stated as 4, the Paris MOU figure). Cross-linked to QB4_E Q8 (full IOMOU vs Paris MOU comparison) and QB4_C Q11 (action-taken code table, correct governing resolution)."
       ]
     },
     "QB4_B.html": {
@@ -1755,7 +1767,8 @@
       ],
       "corrections_applied": [
         "Q3 (SOLAS Chapter XI): corrected multiple wrong regulation numbers - SSAS is XI-2 Reg 6 (was mislabeled Reg 3, which actually covers Contracting Govt security-level obligations); removed fabricated 'AIS Security Links' (Reg 4) and 'ISSC Certification' (Reg 5) entries; ESP is XI-1 Reg 2 (was mislabeled Reg 6); removed fabricated 'Ship Construction File' from XI-1 (it is a SOLAS II-1 Reg 3-10 item, not XI-1) per Nixon's direct correction; removed stray Gemini '[cite: 1]' draft artifacts from this card.",
-        "Q11 (PSC deficiency action codes): full rebuild. Nearly all action codes were wrong - Code 30 is grounds for detention (file said Code 15/Investigation); Code 17 is rectify-before-departure/non-detainable (file said Flag/Class notified); Code 70 (RO/Class informed) was missing entirely. Verified against current Paris MOU published action-taken code list. Added distinction between 2-digit action-taken codes and 5-digit deficiency item/category codes."
+        "Q11 (PSC deficiency action codes): full rebuild. Nearly all action codes were wrong - Code 30 is grounds for detention (file said Code 15/Investigation); Code 17 is rectify-before-departure/non-detainable (file said Flag/Class notified); Code 70 (RO/Class informed) was missing entirely. Verified against current Paris MOU published action-taken code list. Added distinction between 2-digit action-taken codes and 5-digit deficiency item/category codes.",
+        "Q11 (PSC deficiency action codes): governing resolution updated throughout from the superseded IMO Res. A.1185(33) to the current A.1206(34) (Procedures for Port State Control, 2025, in force 1 January 2026). Action-taken code content (30/70/17/etc.) was already correct and unchanged. Cross-linked to QB4 Q6 and QB4_E Q8 for the appeal escalation chain."
       ]
     },
     "QB4_D.html": {
@@ -1792,7 +1805,7 @@
       "qb_group": "QB4",
       "letter": "E",
       "title": "ISM, MLC, SOLAS, PSC & Class",
-      "version": "1.1",
+      "version": "1.2",
       "tags": [
         "iacs",
         "ism",
@@ -1865,7 +1878,8 @@
         }
       ],
       "corrections_applied": [
-        "Q8 (PSC appeal process): corrected conflation of action-taken codes with deficiency item/category codes, and wrong category numbers - fire safety is category 07 (file said '15-series'), ISM is category 15, MLC 2006 is category 18 (file said '18-series = Stability and Structure', which is fabricated). Verified against current Paris MOU deficiency code categories."
+        "Q8 (PSC appeal process): corrected conflation of action-taken codes with deficiency item/category codes, and wrong category numbers - fire safety is category 07 (file said '15-series'), ISM is category 15, MLC 2006 is category 18 (file said '18-series = Stability and Structure', which is fabricated). Verified against current Paris MOU deficiency code categories.",
+        "Q8 (PSC appeal process): Stage 3 deadline corrected from '120 days of the ship's release' (Paris MOU figure, wrongly presented as flowing from A.1206(34) itself) to the correct IOMOU figure of 90 days from the date of detention — IOMOU governs Indian ports and is the relevant regime for Kochi. Clarified that A.1206(34) itself grants only a bare right of appeal; the staged escalation mechanism (national appeal -> Flag State/RO reconsideration -> Detention Review Panel) is regional MOU procedure, not IMO text. IOMOU panel composition specified as 3 member authorities. Cross-linked to QB4 Q6 and QB4_C Q11."
       ]
     },
     "QB4_F.html": {
