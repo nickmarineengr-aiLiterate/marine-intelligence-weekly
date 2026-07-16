@@ -217,7 +217,10 @@ def check_formula_rendering(html_text):
 
     # Patterns indicating unrendered LaTeX leaking into visible markup
     latex_command_re = re.compile(r'\\(?:frac|sqrt|times|rightarrow|Delta|theta|approx|ge|le|text|pm|cdot|div|circ)\b')
-    dollar_math_re = re.compile(r'\$[^$\n]{1,80}\$')
+    # Only flag $...$ as unrendered LaTeX if it contains actual math markup
+    # (backslash command, ^, _, {}) — plain currency like "$10m ... $100m" is
+    # not LaTeX and must not be flagged just because two $ signs appear nearby.
+    dollar_math_re = re.compile(r'\$[^$\n]{0,80}?[\\^_{}][^$\n]{0,80}?\$')
     subscript_brace_re = re.compile(r'[A-Za-z]_\{[^}]+\}')          # e.g. GM_{0}
     subscript_plain_re = re.compile(r'\b[A-Za-z]{1,4}_[0-9A-Za-z]{1,10}\b')  # e.g. GM_0, X_max — best-effort
 
@@ -403,11 +406,16 @@ def check_manifest(files, file_results=None):
         for fname, meta in manifest_files.items():
             manifest_qcount = meta.get("question_count")
             actual_qcount = counts_on_disk.get(fname)
+            # Only flag when disk count EXCEEDS manifest (a clean signal of a real
+            # under-indexed edit). Manifest > disk is expected/benign when a file
+            # includes non-numeric summary/map cards (e.g. id="family-trees") that
+            # the numeric q-card scanner intentionally excludes but the manifest
+            # legitimately counts — so that direction is not flagged.
             if manifest_qcount is not None and actual_qcount is not None and actual_qcount > 0 \
-                    and manifest_qcount != actual_qcount:
+                    and actual_qcount > manifest_qcount:
                 errors.append(
                     f"Question count mismatch for {fname}: manifest says {manifest_qcount}, "
-                    f"disk has {actual_qcount} — manifest likely stale after an edit"
+                    f"disk has {actual_qcount} numeric q-cards — manifest likely stale after an edit"
                 )
 
     return errors, manifest_files
