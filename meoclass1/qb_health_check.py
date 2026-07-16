@@ -27,6 +27,10 @@ GITHUB_REPO = "nickmarineengr-aiLiterate/marine-intelligence-weekly"
 GITHUB_BRANCH = "main"
 QB_FOLDER_PREFIX = "meoclass1/"          # folder inside repo where QB html + manifest live
 MANIFEST_NAME = "qb_content_index.json"
+NOTES_MANIFEST_NAME = "oralnotes/notes_content_index.json"
+WRITTEN_MANIFEST_NAME = "oralnotes/written_content_index.json"
+NOTES_FOLDER_PREFIX = "oralnotes/"
+NOTES_INDEX_UTILITY_FILES = {"index.html", "notes-master-index.html", "uday-index-crossref.html"}
 GA4_TAG = "G-0YEE2CBNP5"
 KNOWN_TRAPS_PATH = "known_traps.md"   # relative to QB_FOLDER_PREFIX, e.g. meoclass1/known_traps.md
 
@@ -328,6 +332,133 @@ def check_known_traps(html_text, traps):
     return errors
 
 
+# ---------- Notes-series checks (Simon Sir Notes / Engineering Management Notes /
+#             Current Topics / WA Written QA — all live under oralnotes/) ----------
+
+def check_topic_block_counts(html_text):
+    """For files using the topic-block architecture (Simon Sir Notes, Engineering
+    Management Notes, Current Topics): verify each numbered topic-block has a
+    matching topic-footer, and count real (non-CSS) occurrences of each.
+    Accepts both the standard `id="topic-N"` convention and the variant
+    `id="topic-pN-M"` seen in some Parts, flagging the latter as a naming
+    deviation worth a quick look rather than a structural break.
+    Files without any topic-block divs (e.g. WA single-chapter files) are not
+    applicable — caller should skip this check when topic_ids is empty."""
+    errors = []
+    block_divs = re.findall(r'<div class="topic-block"[^>]*\bid="(topic-[a-zA-Z0-9-]+)"', html_text)
+    footer_divs = re.findall(r'<div class="topic-footer">', html_text)
+    if len(block_divs) != len(footer_divs):
+        errors.append(
+            f"topic-block count ({len(block_divs)}) does not match topic-footer count "
+            f"({len(footer_divs)}) — a topic may be missing its closing footer/version tag"
+        )
+    non_standard = [t for t in block_divs if not re.fullmatch(r'topic-\d+', t)]
+    if non_standard:
+        errors.append(
+            f"Topic id(s) don't follow the standard 'topic-N' convention (found {non_standard[:3]}"
+            f"{'...' if len(non_standard) > 3 else ''}) — check against notes-mgmt skill Section 4"
+        )
+    return errors, block_divs
+
+
+def check_topic_id_sequence(topic_ids):
+    """Topic ids should have no duplicates and no internal numbering gaps within
+    this file. Cross-Part continuity (T-numbers continuing from the prior Part)
+    is a separate, manual check per the notes-mgmt skill — not verified here."""
+    errors = []
+    nums = [int(re.search(r'\d+', t).group()) for t in topic_ids]
+    if not nums:
+        return errors
+    seen, dupes = set(), set()
+    for n in nums:
+        if n in seen:
+            dupes.add(n)
+        seen.add(n)
+    if dupes:
+        errors.append(f"Duplicate topic id(s): {sorted(dupes)}")
+    expected = set(range(min(nums), max(nums) + 1))
+    missing = expected - seen
+    if missing:
+        errors.append(f"Gap(s) in topic numbering — missing topic-id(s): {sorted(missing)}")
+    return errors
+
+
+def check_notes_gate(html_text, filename):
+    """Gated notes/WA files must carry the canonical auth-gate script. Flags
+    files that carry the FULL paywall robots signature (noindex, nofollow,
+    noarchive, nosnippet — the standard applied to genuinely gated content per
+    the notes-mgmt skill) but are missing the miw_auth cookie check. A partial
+    'noindex, nofollow' alone (used on some intentionally free/ungated pages)
+    does not trigger this — that's a different, legitimate pattern. Index/nav
+    utility pages are excluded entirely by the caller."""
+    errors = []
+    has_full_paywall_noindex = bool(re.search(
+        r'name="robots"[^>]+noindex[^"]*nofollow[^"]*noarchive[^"]*nosnippet', html_text, re.I))
+    has_gate = "miw_auth=1" in html_text
+    if has_full_paywall_noindex and not has_gate:
+        errors.append("Marked with full paywall noindex signature but no miw_auth gate script found — check if gating step was skipped")
+    return errors
+
+
+def check_notes_file(filename, content_bytes, known_traps=None):
+    try:
+        html_text = content_bytes.decode("utf-8")
+    except UnicodeDecodeError:
+        return {"file": NOTES_FOLDER_PREFIX + filename, "errors": ["File is not valid UTF-8"], "topic_count": 0}
+
+    is_utility_page = filename in NOTES_INDEX_UTILITY_FILES
+
+    errors = []
+    errors += check_tag_balance(html_text, filename)
+    errors += check_ga4_tag(html_text)
+    errors += check_robots_meta(html_text)
+    if not is_utility_page:
+        errors += check_notes_gate(html_text, filename)
+    if known_traps:
+        errors += check_known_traps(html_text, known_traps)
+
+    block_errors, topic_ids = check_topic_block_counts(html_text)
+    if not is_utility_page:
+        errors += block_errors
+    standard_ids = [t for t in topic_ids if re.fullmatch(r'topic-\d+', t)]
+    if standard_ids:
+        errors += check_topic_id_sequence(standard_ids)
+
+    return {"file": NOTES_FOLDER_PREFIX + filename, "errors": errors, "topic_count": len(topic_ids)}
+
+
+def check_notes_manifest(files, notes_results):
+    """Cross-check notes_content_index.json and written_content_index.json against
+    disk reality in both directions, same pattern as check_manifest() for QB."""
+    errors = []
+    notes_files_on_disk = {f[len(NOTES_FOLDER_PREFIX):] for f in files
+                            if f.startswith(NOTES_FOLDER_PREFIX) and f.lower().endswith(".html")}
+    manifest_listed = set()
+
+    for manifest_path, label in ((NOTES_MANIFEST_NAME, "notes_content_index.json"),
+                                  (WRITTEN_MANIFEST_NAME, "written_content_index.json")):
+        raw = files.get(manifest_path)
+        if raw is None:
+            errors.append(f"{label} not found in repo")
+            continue
+        try:
+            manifest = json.loads(raw.decode("utf-8"))
+        except json.JSONDecodeError as e:
+            errors.append(f"{label} is not valid JSON: {e}")
+            continue
+        for series_key, series in manifest.get("series", {}).items():
+            for fname in series.get("files", {}).keys():
+                manifest_listed.add(fname)
+                if fname not in notes_files_on_disk:
+                    errors.append(f"{label} series '{series_key}' references file not found on disk: {fname}")
+
+    orphans = notes_files_on_disk - manifest_listed - NOTES_INDEX_UTILITY_FILES
+    if orphans:
+        errors.append(f"oralnotes/ file(s) on disk but not listed in either manifest: {sorted(orphans)}")
+
+    return errors
+
+
 def check_file(filename, content_bytes, all_files=None, known_traps=None):
     try:
         html_text = content_bytes.decode("utf-8")
@@ -422,28 +553,33 @@ def check_manifest(files, file_results=None):
 
 
 # ---------- Report + email ----------
-def build_report(manifest_errors, file_results, total_files, total_questions_manifest):
+def build_report(manifest_errors, file_results, total_files, total_questions_manifest,
+                  notes_manifest_errors=None, notes_results=None):
     ts = datetime.now(timezone.utc).strftime("%d %b %Y, %H:%M UTC")
     files_with_errors = [r for r in file_results if r["errors"]]
     total_q_counted = sum(r["question_count"] for r in file_results)
+    notes_manifest_errors = notes_manifest_errors or []
+    notes_results = notes_results or []
+    notes_with_errors = [r for r in notes_results if r["errors"]]
 
     lines = []
-    lines.append(f"MIW QB Health Check — {ts}")
+    lines.append(f"MIW QB + Notes Health Check — {ts}")
     lines.append("=" * 50)
+    lines.append("--- QB SERIES ---")
     lines.append(f"Files scanned: {total_files}")
     lines.append(f"Questions found on disk: {total_q_counted}  |  Manifest total: {total_questions_manifest}")
     lines.append(f"Files with errors: {len(files_with_errors)}")
     lines.append("")
 
     if manifest_errors:
-        lines.append("MANIFEST ISSUES")
+        lines.append("QB MANIFEST ISSUES")
         lines.append("-" * 30)
         for e in manifest_errors:
             lines.append(f"  ⚠ {e}")
         lines.append("")
 
     if files_with_errors:
-        lines.append("FILE-LEVEL ISSUES")
+        lines.append("QB FILE-LEVEL ISSUES")
         lines.append("-" * 30)
         for r in sorted(files_with_errors, key=lambda x: x["file"]):
             lines.append(f"\n▶ {r['file']}  ({r['question_count']} questions)")
@@ -453,12 +589,39 @@ def build_report(manifest_errors, file_results, total_files, total_questions_man
         lines.append("✅ No structural errors found in any QB file.")
 
     lines.append("")
+    lines.append("--- NOTES / WA SERIES (oralnotes/) ---")
+    lines.append(f"Files scanned: {len(notes_results)}")
+    lines.append(f"Files with errors: {len(notes_with_errors)}")
+    lines.append("")
+
+    if notes_manifest_errors:
+        lines.append("NOTES MANIFEST ISSUES")
+        lines.append("-" * 30)
+        for e in notes_manifest_errors:
+            lines.append(f"  ⚠ {e}")
+        lines.append("")
+
+    if notes_with_errors:
+        lines.append("NOTES FILE-LEVEL ISSUES")
+        lines.append("-" * 30)
+        for r in sorted(notes_with_errors, key=lambda x: x["file"]):
+            lines.append(f"\n▶ {r['file']}  ({r['topic_count']} topic-blocks)")
+            for e in r["errors"]:
+                lines.append(f"    ✗ {e}")
+    elif notes_results:
+        lines.append("✅ No structural errors found in any notes/WA file.")
+
+    lines.append("")
     lines.append("-" * 50)
-    lines.append("Clean files: " + ", ".join(
+    lines.append("Clean QB files: " + ", ".join(
         sorted(r["file"] for r in file_results if not r["errors"])
     ) if any(not r["errors"] for r in file_results) else "")
+    lines.append("Clean notes files: " + ", ".join(
+        sorted(r["file"] for r in notes_results if not r["errors"])
+    ) if any(not r["errors"] for r in notes_results) else "")
 
-    return "\n".join(lines), len(files_with_errors) + len(manifest_errors)
+    total_errors = len(files_with_errors) + len(manifest_errors) + len(notes_with_errors) + len(notes_manifest_errors)
+    return "\n".join(lines), total_errors
 
 
 def send_email(subject, body):
@@ -510,11 +673,20 @@ def main():
         f.get("question_count", 0) for f in manifest_files.values()
     ) if manifest_files else "?"
 
-    report, error_count = build_report(manifest_errors, results, len(html_files), total_questions_manifest)
+    # --- Notes / WA series (oralnotes/) ---
+    notes_files = {name[len(NOTES_FOLDER_PREFIX):]: content for name, content in files.items()
+                   if name.startswith(NOTES_FOLDER_PREFIX) and name.lower().endswith(".html")}
+    notes_results = []
+    for name, content in sorted(notes_files.items()):
+        notes_results.append(check_notes_file(name, content, known_traps=known_traps))
+    notes_manifest_errors = check_notes_manifest(files, notes_results)
+
+    report, error_count = build_report(manifest_errors, results, len(html_files), total_questions_manifest,
+                                        notes_manifest_errors=notes_manifest_errors, notes_results=notes_results)
 
     status = "🔴" if error_count else "✅"
-    subject = f"{status} MIW QB Health Check — {error_count} issue(s) found" if error_count \
-        else "✅ MIW QB Health Check — all clear"
+    subject = f"{status} MIW QB + Notes Health Check — {error_count} issue(s) found" if error_count \
+        else "✅ MIW QB + Notes Health Check — all clear"
 
     send_email(subject, report)
     print(report)
