@@ -28,6 +28,7 @@ GITHUB_BRANCH = "main"
 QB_FOLDER_PREFIX = "meoclass1/"          # folder inside repo where QB html + manifest live
 MANIFEST_NAME = "qb_content_index.json"
 GA4_TAG = "G-0YEE2CBNP5"
+KNOWN_TRAPS_PATH = "known_traps.md"   # relative to QB_FOLDER_PREFIX, e.g. meoclass1/known_traps.md
 
 VOID_ELEMENTS = {"br", "img", "meta", "link", "hr", "input", "area", "base",
                   "col", "embed", "source", "track", "wbr"}
@@ -291,7 +292,40 @@ def check_image_rendering(html_text, all_files=None):
     return errors
 
 
-def check_file(filename, content_bytes, all_files=None):
+def parse_known_traps(md_bytes):
+    """Extract auto-scannable wrong phrases from known_traps.md 'GREP:' lines.
+    Format: a line 'GREP: <exact phrase>' under each numbered entry. Entries
+    marked 'GREP: SKIP' are intentionally excluded from automated scanning
+    (too generic / context-dependent) and remain manual-review-only."""
+    if md_bytes is None:
+        return []
+    try:
+        text = md_bytes.decode("utf-8")
+    except UnicodeDecodeError:
+        return []
+    traps = []
+    for line in text.splitlines():
+        m = re.match(r'^GREP:\s*(.+)$', line.strip())
+        if m:
+            phrase = m.group(1).strip()
+            if phrase and phrase.upper() != "SKIP":
+                traps.append(phrase)
+    return traps
+
+
+def check_known_traps(html_text, traps):
+    """Flag any live HTML containing a phrase from the known_traps WRONG list.
+    A hit means a previously-identified error pattern has resurfaced —
+    escalate for manual review rather than auto-correct."""
+    errors = []
+    cleaned = re.sub(r"<[^>]+>", " ", html_text)  # strip tags so phrase matching works on visible text
+    for phrase in traps:
+        if phrase.lower() in cleaned.lower():
+            errors.append(f"KNOWN TRAP resurfaced: \"{phrase}\" found in visible text — check against known_traps.md")
+    return errors
+
+
+def check_file(filename, content_bytes, all_files=None, known_traps=None):
     try:
         html_text = content_bytes.decode("utf-8")
     except UnicodeDecodeError:
@@ -320,12 +354,24 @@ def check_file(filename, content_bytes, all_files=None):
         # placement policy (Section 6b of the QB production skill).
         errors += check_formula_rendering(html_text)
         errors += check_image_rendering(html_text, all_files)
+        if known_traps:
+            errors += check_known_traps(html_text, known_traps)
 
     return {"file": filename, "errors": errors, "question_count": q_count}
 
 
-def check_manifest(files):
-    """Validate qb_content_index.json is parseable and its file list matches disk reality."""
+def check_manifest(files, file_results=None):
+    """Validate qb_content_index.json is parseable and cross-check it against
+    disk reality in both directions:
+      1. Manifest references a file that isn't on disk (deleted/renamed but
+         manifest not updated — a 'file didn't get reflected' symptom)
+      2. A QB html file exists on disk but has no manifest entry (built and
+         pushed, but manifest update step was skipped — the other half of the
+         same symptom)
+      3. Manifest's stated question_count for a file doesn't match the actual
+         q-card count found on disk (partial edit landed, index wasn't
+         re-synced)
+    """
     errors = []
     manifest_bytes = files.get(MANIFEST_NAME)
     if manifest_bytes is None:
@@ -341,6 +387,28 @@ def check_manifest(files):
     missing_on_disk = set(manifest_files.keys()) - html_files_on_disk
     if missing_on_disk:
         errors.append(f"Manifest references file(s) not found in repo: {sorted(missing_on_disk)}")
+
+    # Orphan QB files: built HTML present on disk, but never added to the manifest.
+    # Cheat sheets are excluded — they follow a separate A/B pattern and are not
+    # required to carry manifest entries (per QB naming conventions).
+    qb_html_on_disk = {f for f in html_files_on_disk
+                        if re.match(r"QB\d", f.split("/")[-1], re.I)
+                        and "cheatsheet" not in f.lower()}
+    orphan_files = qb_html_on_disk - set(manifest_files.keys())
+    if orphan_files:
+        errors.append(f"QB file(s) on disk but missing from manifest (index not updated after build): {sorted(orphan_files)}")
+
+    if file_results:
+        counts_on_disk = {r["file"]: r["question_count"] for r in file_results}
+        for fname, meta in manifest_files.items():
+            manifest_qcount = meta.get("question_count")
+            actual_qcount = counts_on_disk.get(fname)
+            if manifest_qcount is not None and actual_qcount is not None and actual_qcount > 0 \
+                    and manifest_qcount != actual_qcount:
+                errors.append(
+                    f"Question count mismatch for {fname}: manifest says {manifest_qcount}, "
+                    f"disk has {actual_qcount} — manifest likely stale after an edit"
+                )
 
     return errors, manifest_files
 
@@ -414,14 +482,21 @@ def main():
                     f"Could not fetch the repo to run health checks.\n\nError: {e}")
         sys.exit(1)
 
-    manifest_errors, manifest_files = check_manifest(files)
+    known_traps = parse_known_traps(files.get(KNOWN_TRAPS_PATH))
 
     html_files = {name: content for name, content in files.items()
                   if name.lower().endswith(".html")}
 
     results = []
     for name, content in sorted(html_files.items()):
-        results.append(check_file(name, content, all_files=files))
+        results.append(check_file(name, content, all_files=files, known_traps=known_traps))
+
+    # manifest check runs after file results so it can cross-check question counts
+    manifest_errors, manifest_files = check_manifest(files, file_results=results)
+    if known_traps == [] and KNOWN_TRAPS_PATH not in files:
+        manifest_errors.append(
+            f"{KNOWN_TRAPS_PATH} not found in repo — known-traps check skipped this run"
+        )
 
     total_questions_manifest = sum(
         f.get("question_count", 0) for f in manifest_files.values()
