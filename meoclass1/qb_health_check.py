@@ -31,6 +31,8 @@ NOTES_MANIFEST_NAME = "oralnotes/notes_content_index.json"
 WRITTEN_MANIFEST_NAME = "oralnotes/written_content_index.json"
 NOTES_FOLDER_PREFIX = "oralnotes/"
 NOTES_INDEX_UTILITY_FILES = {"index.html", "notes-master-index.html", "uday-index-crossref.html"}
+SQ_FOLDER_PREFIX = "SQ/"
+SQ_UTILITY_FILES = {"index.html", "pay.html", "examiner-index.html"}
 GA4_TAG = "G-0YEE2CBNP5"
 KNOWN_TRAPS_PATH = "known_traps.md"   # relative to QB_FOLDER_PREFIX, e.g. meoclass1/known_traps.md
 
@@ -49,7 +51,10 @@ SMTP_PORT = 587
 # ---------- Fetch repo snapshot ----------
 def fetch_repo_tarball():
     """Download the repo tarball via codeload.github.com and return a dict
-    of {relative_path: bytes} for everything under QB_FOLDER_PREFIX."""
+    of {relative_path: bytes} for everything under QB_FOLDER_PREFIX (with that
+    prefix stripped), PLUS everything under the top-level SQ/ folder (kept
+    with its 'SQ/' prefix intact, since SQ/ is a sibling of meoclass1/, not
+    nested inside it — the free-sample teaser copies live there)."""
     url = f"https://codeload.github.com/{GITHUB_REPO}/tar.gz/refs/heads/{GITHUB_BRANCH}"
     req = urllib.request.Request(url, headers={"User-Agent": "qb-health-check"})
     with urllib.request.urlopen(req, timeout=60) as resp:
@@ -65,12 +70,16 @@ def fetch_repo_tarball():
             if len(parts) != 2:
                 continue
             rel_path = parts[1]
-            if not rel_path.startswith(QB_FOLDER_PREFIX):
-                continue
-            f = tar.extractfile(member)
-            if f is None:
-                continue
-            files[rel_path[len(QB_FOLDER_PREFIX):]] = f.read()
+            if rel_path.startswith(QB_FOLDER_PREFIX):
+                f = tar.extractfile(member)
+                if f is None:
+                    continue
+                files[rel_path[len(QB_FOLDER_PREFIX):]] = f.read()
+            elif rel_path.startswith(SQ_FOLDER_PREFIX):
+                f = tar.extractfile(member)
+                if f is None:
+                    continue
+                files[rel_path] = f.read()   # keep "SQ/..." prefix as-is
     return files
 
 
@@ -459,6 +468,59 @@ def check_notes_manifest(files, notes_results):
     return errors
 
 
+def check_sq_file(filename, content_bytes, all_files=None, known_traps=None, main_copy_bytes=None):
+    """Files under SQ/ are intentionally free/ungated sample teasers — the
+    miw_auth gate check and manifest cross-check do not apply here by design.
+    Still run: tag balance, GA4, known-traps, and (for QB-style files)
+    formula/image rendering. Also flags if this SQ copy has silently diverged
+    from the corresponding main meoclass1/ copy — SQ files are duplicated by
+    hand and have no automated sync, so drift is a known risk, not something
+    to auto-resolve."""
+    try:
+        html_text = content_bytes.decode("utf-8")
+    except UnicodeDecodeError:
+        return {"file": SQ_FOLDER_PREFIX + filename, "errors": ["File is not valid UTF-8"], "question_count": 0}
+
+    if filename in SQ_UTILITY_FILES:
+        return {"file": SQ_FOLDER_PREFIX + filename, "errors": [], "question_count": 0}
+
+    errors = []
+    errors += check_tag_balance(html_text, filename)
+    errors += check_ga4_tag(html_text)
+    if known_traps:
+        errors += check_known_traps(html_text, known_traps)
+
+    is_qb_style = bool(re.match(r"QB\d", filename, re.I))
+    is_notes_style = "topic-block" in html_text
+
+    q_count = 0
+    if is_qb_style:
+        errors += check_formula_rendering(html_text)
+        errors += check_image_rendering(html_text, all_files)
+        q_ids = re.findall(r'<div class="q-card"[^>]*\bid="q(\d+)"', html_text)
+        q_count = len(q_ids)
+    elif is_notes_style:
+        block_errors, topic_ids = check_topic_block_counts(html_text)
+        errors += block_errors
+        q_count = len(topic_ids)
+
+    if main_copy_bytes is not None:
+        try:
+            main_text = main_copy_bytes.decode("utf-8")
+            # Compare only the shared trailing content (strip SQ-specific topbar/CTA banner
+            # differences at the top) — a crude but effective drift signal: same file length
+            # class and same closing quiz/topic count wildly different flags a stale duplicate.
+            if abs(len(main_text) - len(html_text)) > 0.15 * len(main_text):
+                errors.append(
+                    f"SQ copy size differs from meoclass1/{filename} by >15% — "
+                    f"likely diverged/stale duplicate, check both copies are in sync"
+                )
+        except UnicodeDecodeError:
+            pass
+
+    return {"file": SQ_FOLDER_PREFIX + filename, "errors": errors, "question_count": q_count}
+
+
 def check_file(filename, content_bytes, all_files=None, known_traps=None):
     try:
         html_text = content_bytes.decode("utf-8")
@@ -554,13 +616,15 @@ def check_manifest(files, file_results=None):
 
 # ---------- Report + email ----------
 def build_report(manifest_errors, file_results, total_files, total_questions_manifest,
-                  notes_manifest_errors=None, notes_results=None):
+                  notes_manifest_errors=None, notes_results=None, sq_results=None):
     ts = datetime.now(timezone.utc).strftime("%d %b %Y, %H:%M UTC")
     files_with_errors = [r for r in file_results if r["errors"]]
     total_q_counted = sum(r["question_count"] for r in file_results)
     notes_manifest_errors = notes_manifest_errors or []
     notes_results = notes_results or []
     notes_with_errors = [r for r in notes_results if r["errors"]]
+    sq_results = sq_results or []
+    sq_with_errors = [r for r in sq_results if r["errors"]]
 
     lines = []
     lines.append(f"MIW QB + Notes Health Check — {ts}")
@@ -612,6 +676,22 @@ def build_report(manifest_errors, file_results, total_files, total_questions_man
         lines.append("✅ No structural errors found in any notes/WA file.")
 
     lines.append("")
+    lines.append("--- SQ/ FREE SAMPLES ---")
+    lines.append(f"Files scanned: {len(sq_results)}")
+    lines.append(f"Files with errors: {len(sq_with_errors)}")
+    lines.append("")
+
+    if sq_with_errors:
+        lines.append("SQ FILE-LEVEL ISSUES")
+        lines.append("-" * 30)
+        for r in sorted(sq_with_errors, key=lambda x: x["file"]):
+            lines.append(f"\n▶ {r['file']}")
+            for e in r["errors"]:
+                lines.append(f"    ✗ {e}")
+    elif sq_results:
+        lines.append("✅ No structural errors found in any SQ sample file.")
+
+    lines.append("")
     lines.append("-" * 50)
     lines.append("Clean QB files: " + ", ".join(
         sorted(r["file"] for r in file_results if not r["errors"])
@@ -620,7 +700,8 @@ def build_report(manifest_errors, file_results, total_files, total_questions_man
         sorted(r["file"] for r in notes_results if not r["errors"])
     ) if any(not r["errors"] for r in notes_results) else "")
 
-    total_errors = len(files_with_errors) + len(manifest_errors) + len(notes_with_errors) + len(notes_manifest_errors)
+    total_errors = len(files_with_errors) + len(manifest_errors) + len(notes_with_errors) \
+        + len(notes_manifest_errors) + len(sq_with_errors)
     return "\n".join(lines), total_errors
 
 
@@ -681,8 +762,18 @@ def main():
         notes_results.append(check_notes_file(name, content, known_traps=known_traps))
     notes_manifest_errors = check_notes_manifest(files, notes_results)
 
+    # --- SQ/ free sample teasers ---
+    sq_files = {name[len(SQ_FOLDER_PREFIX):]: content for name, content in files.items()
+                if name.startswith(SQ_FOLDER_PREFIX) and name.lower().endswith(".html")}
+    sq_results = []
+    for name, content in sorted(sq_files.items()):
+        main_copy = files.get(name) or files.get(NOTES_FOLDER_PREFIX + name)
+        sq_results.append(check_sq_file(name, content, all_files=files, known_traps=known_traps,
+                                          main_copy_bytes=main_copy))
+
     report, error_count = build_report(manifest_errors, results, len(html_files), total_questions_manifest,
-                                        notes_manifest_errors=notes_manifest_errors, notes_results=notes_results)
+                                        notes_manifest_errors=notes_manifest_errors, notes_results=notes_results,
+                                        sq_results=sq_results)
 
     status = "🔴" if error_count else "✅"
     subject = f"{status} MIW QB + Notes Health Check — {error_count} issue(s) found" if error_count \
