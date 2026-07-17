@@ -69,6 +69,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
 .notes-list li{margin-bottom:4px;}
 .timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
 .timeline-block .t-year{color:#fff;font-weight:700;}
+.ascii-diagram{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12px;line-height:1.35;overflow-x:auto;white-space:pre;}
 .reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
 .reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
 .reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
@@ -701,16 +702,18 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
   </table>
 
   <div class="section-head">📐 Waterplane Ordinate Diagram (Simpson's First Rule, 3-Ordinate)</div>
-  <div class="timeline-block" style="line-height:1.5;">
-AP                                                    FP
- │←──h──→│←──h──→│
- y₀      y₁      y₂
- │       │       │
- ┌───────┬───────┐   ← waterplane, station spacing h
- │       │       │
- └───────┴───────┘
-Area = h/3 · (y₀ + 4y₁ + y₂)
-y₀, y₂ = half-breadths at AP/FP stations; y₁ = half-breadth at midships
+  <div class="ascii-diagram">
+AP                                              FP
+ |<---- h ---->|<---- h ---->|
+ y0            y1            y2
+ |             |             |
+ +-------------+-------------+   <- waterplane, station spacing h
+ |             |             |
+ +-------------+-------------+
+
+ Area = h/3 x (y0 + 4y1 + y2)
+ y0, y2 = half-breadths at AP/FP stations
+ y1     = half-breadth at midships
   </div>
   <div class="notes-body" style="font-size:13px;color:#64748b;margin-top:-8px;">Simplified station diagram — for the fully worked Bonjean-curve derivation and hull-form sketches, see Eyres &amp; Derrett, <em>Ship Construction</em> and Kemp &amp; Young, <em>Ship Construction Sketches and Notes</em> (reference texts, not reproduced here).</div>
 
@@ -812,17 +815,19 @@ y₀, y₂ = half-breadths at AP/FP stations; y₁ = half-breadth at midships
 <span class="t-year">2020s</span>  Second Generation Intact Stability criteria progressively implemented for dynamic failure modes</div>
 
   <div class="section-head">📐 GZ Curve Sketch (2008 IS Code Weather-Criterion Shape)</div>
-  <div class="timeline-block" style="line-height:1.5;">
-GZ (m)
- │        ___GZmax (beyond 25°, target &gt;30°)
- │      ,'    `.
- │    ,'        `.
- │  ,'             `.
- │,'                  `.___
- 0°───30°────40°────────────► Heel angle
- │  GZ≥0.20m         Area 30°–40° ≥0.030 m·rad
- │  at 30°           Area to 40°/downflood ≥0.090 m·rad
-Area to 30° ≥0.055 m·rad · Initial GM (fluid) ≥0.15 m
+  <div class="ascii-diagram">
+ GZ (m)
+  |
+  |            .--- GZmax (beyond 25 deg, target >30 deg)
+  |         .-'    '-.
+  |       .'           '.
+  |     .'                '.
+  |   .'                     '-.__
+  0--------30-------40----------------> Heel angle (deg)
+  |     GZ>=0.20m           Area 30-40 deg >= 0.030 m.rad
+  |     at 30 deg           Area to 40 deg/downflood >= 0.090 m.rad
+  |
+  Area to 30 deg >= 0.055 m.rad   |   Initial GM (fluid) >= 0.15 m
   </div>
   <div class="notes-body" style="font-size:13px;color:#64748b;margin-top:-8px;">Schematic only, not to scale — for fully worked GZ-curve derivations from hydrostatic/cross-curve data, see the stability references in the platform's Ship Construction/Stability texts.</div>
 

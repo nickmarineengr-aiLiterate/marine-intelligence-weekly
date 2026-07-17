@@ -69,6 +69,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
 .notes-list li{margin-bottom:4px;}
 .timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
 .timeline-block .t-year{color:#fff;font-weight:700;}
+.ascii-diagram{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12px;line-height:1.35;overflow-x:auto;white-space:pre;}
 .reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
 .reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
 .reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
@@ -560,16 +561,17 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
 <span class="t-year">Response</span>  IMO transforms the voluntary BC Code into the mandatory IMSBC Code, formalising Group A/B/C classification and TML/FMP testing</div>
 
   <div class="section-head">📐 Free Surface Effect on Liquefied Cargo (Schematic)</div>
-  <div class="timeline-block" style="line-height:1.5;">
-Solid cargo (stable)         Liquefied cargo (free surface forms)
-┌─────────────────┐          ┌─────────────────┐
-│▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│          │≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈│ ← surface shifts with roll
-│▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│  cyclic  │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
-│▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│  motion  │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
-└─────────────────┘  ──────►  └─────────────────┘
-GM unaffected by cargo shift   Effective GM reduced (GG₁ rise) —
-                                same free-surface-moment principle as
-                                slack tanks; can precipitate capsize
+  <div class="ascii-diagram">
+ Solid cargo (stable)            Liquefied cargo (free surface forms)
+ +-----------------+             +-----------------+
+ |#################|             |~~~~~~~~~~~~~~~~~|  <- surface shifts
+ |#################|   cyclic    |:::::::::::::::::|     with roll
+ |#################|   motion    |:::::::::::::::::|
+ +-----------------+  -------->  +-----------------+
+
+ GM unaffected by cargo shift     Effective GM reduced (GG1 rise) -
+                                  same free-surface-moment principle
+                                  as slack tanks; can precipitate capsize
   </div>
   <div class="notes-body" style="font-size:13px;color:#64748b;margin-top:-8px;">Schematic only — illustrates why a liquefied cargo behaves like a slack tank for GM-reduction purposes, per the standard free-surface-effect treatment in naval architecture references.</div>
 
