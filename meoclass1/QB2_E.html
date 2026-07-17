@@ -222,7 +222,7 @@ details[open] summary{border-bottom:1px solid var(--grey-border);}
         <div class="practice-block"><strong>60-Second Answer:</strong> A rescue boat is carried under SOLAS Chapter III for man-overboard recovery and liferaft marshalling, with arrangements for direct boarding and launching from the stowed position, and recovery within about 5 minutes in moderate sea conditions at up to 5 knots ship speed. SOLAS does not open by mandating "starboard side" — many ships place the rescue boat on starboard as Boat No.1 for fixed drill routine, bridge-deck coordination, and operational convenience; that is shipboard arrangement, not statutory placement.</div>
         <div class="answer-body">
           <h4>1. Governing Basis</h4>
-          <p>The governing framework is <strong>SOLAS Chapter III</strong>, with rescue boat carriage under <strong>Regulation 21</strong> and embarkation/launching/recovery arrangements under <strong>Regulation 17</strong>, both read alongside the <strong>LSA Code</strong> section 5.1. A rescue boat is a davit-launched, motor-propelled boat used for man-overboard retrieval and liferaft marshalling duties.</p>
+          <p>The governing framework is <strong>SOLAS Chapter III</strong>. For cargo ships (including this vessel type), rescue boat carriage is under <strong>Regulation 31</strong> — Reg 21 is the passenger-ship carriage provision (one rescue boat each side, ≥500 GT) and does not apply here. Stowage in continuous readiness is under <strong>Regulation 14</strong>, and embarkation/launching/recovery arrangements under <strong>Regulation 17</strong>, all read alongside the <strong>LSA Code</strong> section 5.1 (construction/performance) and section 6.1.1.11 (launching appliance trim/list capability). A rescue boat is a davit-launched, motor-propelled boat used for man-overboard retrieval and liferaft marshalling duties.</p>
           <h4>2. What the Regulations Actually Require</h4>
           <p>The regulatory emphasis is that the rescue boat is in continuous readiness, can be boarded and launched directly from its stowed position, and can be recovered promptly — not "which side." Recovery is expected within not more than <strong>5 minutes</strong> in moderate sea conditions, with the ship making up to <strong>5 knots</strong>.</p>
           <ul>
@@ -238,9 +238,11 @@ details[open] summary{border-bottom:1px solid var(--grey-border);}
         </div>
         <div class="reg-box">
           <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">SOLAS Ch III Reg 21</span><span class="reg-desc">Survival craft and rescue boats — carriage requirement</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS Ch III Reg 31</span><span class="reg-desc">Survival craft and rescue boats — CARGO ship carriage requirement (Reg 21 is the passenger-ship equivalent)</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS Ch III Reg 14</span><span class="reg-desc">Stowage of rescue boats — continuous readiness, launch within 5 min, non-interference with other survival craft</span></div>
           <div class="reg-item"><span class="reg-code">SOLAS Ch III Reg 17</span><span class="reg-desc">Rescue boat embarkation, launching and recovery arrangements</span></div>
-          <div class="reg-item"><span class="reg-code">LSA Code §5.1</span><span class="reg-desc">Rescue boat construction, length range, recovery performance</span></div>
+          <div class="reg-item"><span class="reg-code">LSA Code §5.1</span><span class="reg-desc">Rescue boat construction, length range (3.8–8.5 m), capacity, testing basis</span></div>
+          <div class="reg-item"><span class="reg-code">LSA Code §6.1.1.11</span><span class="reg-desc">Launching appliance capable of safe launch at trim ≤10° / list ≤20°</span></div>
           <div class="reg-item"><span class="reg-code">MSC.48(66) — LSA Code (as amended)</span><span class="reg-desc">Consolidated embarkation, launching and recovery provisions</span></div>
           <div class="reg-item"><span class="reg-code">COLREG Rule 14</span><span class="reg-desc">Head-on situation — vessels alter to starboard (operational context only)</span></div>
           <div class="reg-item"><span class="reg-code">COLREG Rule 15</span><span class="reg-desc">Crossing situation — give-way vessel keeps clear to starboard (operational context only)</span></div>
@@ -252,7 +254,7 @@ details[open] summary{border-bottom:1px solid var(--grey-border);}
             <h5>CE Relevance</h5>
             <p>Rescue-boat location is only meaningful if the assigned boat is immediately operable: engine starts reliably, battery/charging is sound, winch/davit is serviceable, and the launch/recovery zone is unobstructed. CE ownership shows up in oral through maintenance records, defect reporting before drills or PSC attendance, and readiness verification.</p>
             <h5>Trap Questions</h5>
-            <p><strong>Q:</strong> Is starboard side compulsory by SOLAS? <strong>A:</strong> Not as a universal mandate — SOLAS requires suitable stowage, readiness, and quick launch/recovery; starboard is a common shipboard arrangement, not a statutory placement rule.</p>
+            <p><strong>Q:</strong> Is starboard side compulsory by SOLAS? <strong>A:</strong> Not as a universal mandate — SOLAS Reg 31 (cargo ships) requires suitable stowage, readiness, and quick launch/recovery; starboard is a common shipboard arrangement, not a statutory placement rule. (Reg 21 is the passenger-ship carriage rule and requires one rescue boat on EACH side — don't confuse the two when questioned.)</p>
             <p><strong>Q:</strong> Can a lifeboat also act as a rescue boat? <strong>A:</strong> Yes, provided it independently complies with the rescue-boat requirements.</p>
             <p><strong>Q:</strong> What is the performance figure you must quote? <strong>A:</strong> Recovery within 5 minutes in moderate sea conditions.</p>
             <h5>Common CE Failures</h5>
@@ -285,6 +287,19 @@ details[open] summary{border-bottom:1px solid var(--grey-border);}
   <p>Found an error? <a href="mailto:contactus@marineintelligenceweekly.com" style="color:#5eead4;">contactus@marineintelligenceweekly.com</a></p>
 </div>
 
+<script>
+function toggleCard(h){h.closest('.q-card').classList.toggle('open')}
+let activeTag='all';
+function filterTag(tag,btn){
+  activeTag=tag;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  document.querySelectorAll('.q-card').forEach(c=>{
+    const tags=(c.dataset.tags||'').split(' ');
+    c.style.display=(activeTag==='all'||tags.includes(activeTag))?'':'none';
+  });
+}
+</script>
 <script>
 (function(){
   if(!/miw_auth=1/.test(document.cookie))
