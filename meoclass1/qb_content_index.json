@@ -1,10 +1,22 @@
 {
   "manifest_version": "1.0",
-  "generated": "2026-07-16",
-  "generated_by": "Claude - Merchant Shipping Act 2025 correction pass across 14 files (QB1_F, QB1_A, QB1_G, QB1_I, QB4_C, QB5_A, QB5_B, QB5_G, QB9_A, QB9_D, QB9_E, QB9_F, QB9_G, QB10_A). All citations of the repealed Merchant Shipping Act, 1958 updated to the Merchant Shipping Act, 2025 (Act No. 24 of 2025, in force 15 March 2026) with correct Part/Section mapping; cabotage/coasting-trade questions updated to the new standalone Coastal Shipping Act, 2025 (Act No. 20 of 2025); DG Shipping renamed DGMA throughout. Each affected question's version bumped with a dated correction note in its q-footer. Verified against India Code / PRS primary text. Health-checked (tag balance + mandatory reg-box/ce-tip/q-footer blocks) before manifest update.",
-  "total_questions": 628,
+  "generated": "2026-07-17",
+  "generated_by": "Claude (manifest sync - correction pass)",
+  "total_questions": 629,
   "total_files": 78,
   "recently_updated": [
+    {
+      "date": "2026-07-17",
+      "summary": "Correction pass: QB6_G new Q3 (engine tech retrofit options), QB7_E Q1 CII/WTW causal-error fix, QB4_G Q8 IEEC/COR addition, QB3_C IMO Resolution A.1185(33)→A.1206(34) citation fix. QB2_E JS toggle bug + SOLAS III/rescue-boat citation fix. QB2_G same rescue-boat citation fix (III/14, LSA §6.1.1.11).",
+      "files": [
+        "QB6_G.html",
+        "QB7_E.html",
+        "QB4_G.html",
+        "QB3_C.html",
+        "QB2_E.html",
+        "QB2_G.html"
+      ]
+    },
     {
       "date": "2026-07-16",
       "files": [
@@ -958,6 +970,9 @@
           "qnum": 1,
           "text": "Lifeboat and rescue boat — location, and why is the rescue boat often positioned on the starboard side?"
         }
+      ],
+      "corrections_applied": [
+        "2026-07-17: Fixed missing toggleCard()/filterTag() JavaScript (answer panel was not expanding — only the auth-gate script was present, core UI functions absent). Also corrected regulatory citations: rescue boat carriage requirement corrected from SOLAS III/21 (passenger-ship provision) to III/31 (cargo-ship provision); readiness citation corrected to III/14; embarkation/launching/recovery citation corrected to III/17; launching-appliance trim/list capability citation corrected from LSA Code §5.1.1.1 to §6.1.1.11. Verified against IMO SOLAS Ch. III and IMORules.com. Note: same underlying question also appears as Q2 in QB2_G with the same citation errors — QB2_G fix drafted but not yet pushed to repo as of this manifest update."
       ]
     },
     "QB2_F.html": {
@@ -1006,7 +1021,7 @@
       "qb_group": "QB2",
       "letter": "G",
       "title": "QB2_G — Fire Safety, LSA & FSS Code",
-      "version": "1.0",
+      "version": "1.1",
       "tags": [
         "fire",
         "lsa"
@@ -1021,6 +1036,9 @@
           "qnum": 2,
           "text": "Why is the rescue boat typically located on the starboard side of the vessel?"
         }
+      ],
+      "corrections_applied": [
+        "2026-07-17: Q2 corrected — same rescue-boat citation error as QB2_E: readiness citation corrected to SOLAS III/14, launching-appliance trim/list capability corrected from LSA Code §5.1.1.1 to §6.1.1.11 throughout (reg-box, deep-dive text, and comparison table — two leftover instances missed in first pass, caught and fixed on review). III/31 (cargo-ship carriage) and III/21 (passenger-ship contrast, correctly retained) unaffected."
       ]
     },
     "QB2_H.html": {
@@ -1255,7 +1273,7 @@
       "qb_group": "QB3",
       "letter": "C",
       "title": "MARPOL & Environmental",
-      "version": "1.0",
+      "version": "1.1",
       "tags": [
         "iacs",
         "ism",
@@ -1287,6 +1305,9 @@
           "qnum": 5,
           "text": "Environmentally Sound Management (ESM) in shipping?"
         }
+      ],
+      "corrections_applied": [
+        "2026-07-17: Corrected superseded IMO Resolution A.1185(33) citation to current A.1206(34) with correct effective dates (part of repo-wide health-check remediation pass also touching WA3-LIEN2, simon-notes-p3, simon-notes-p4 in oralnotes)."
       ]
     },
     "QB3_D.html": {
@@ -1926,7 +1947,7 @@
       "qb_group": "QB4",
       "letter": "G",
       "title": "ISM/ISPS/MLC/STCW — Backlog Batch",
-      "version": "1.0",
+      "version": "1.1",
       "tags": [
         "isps",
         "load-line",
@@ -1974,6 +1995,9 @@
           "qnum": 9,
           "text": "OCIMF — what is it, tools of OCIMF and brief explanation of each."
         }
+      ],
+      "corrections_applied": [
+        "2026-07-17: Q8 — added IEEC (International Energy Efficiency Certificate, MARPOL Annex VI Reg 6.4, issued once, no expiry) and COR (Certificate of Registry — flag-dependent; open registries treat as permanent, DGS/Indian-flag practice requires renewal, commonly every 5 years — caveat noted) to the list of certificates with indefinite validity/no renewal requirement."
       ]
     },
     "QB4_H.html": {
@@ -2747,11 +2771,11 @@
       "qb_group": "QB6",
       "letter": "G",
       "title": "QB6_G — Electrical, Automation & Machinery (New Engine Technology)",
-      "version": "1.0",
+      "version": "1.1",
       "tags": [
         "machinery"
       ],
-      "question_count": 2,
+      "question_count": 3,
       "questions": [
         {
           "qnum": 1,
@@ -2760,7 +2784,14 @@
         {
           "qnum": 2,
           "text": "What are the latest developments in main engine technology (not GHG/emissions-related)?"
+        },
+        {
+          "qnum": 3,
+          "text": "What are the latest developments in main engine technology, other than fuel type changes — including OEM retrofit options for existing engines?"
         }
+      ],
+      "corrections_applied": [
+        "2026-07-17: Added new Q3 covering latest main engine tech developments excluding fuel-type/GHG changes, including WinGD (aSTC, WiDE, derating) and MAN/Everllence PrimeServ (turbocharger swap, ME-conversion, PrimeServ Assist) OEM retrofit options. Explicit trap-point callout excludes dual-fuel/iCER-VCR methane-slip topics (belongs to GHG track)."
       ]
     },
     "QB7_A.html": {
@@ -2890,7 +2921,7 @@
       "qb_group": "QB7",
       "letter": "E",
       "title": "GHG, CII & Decarbonisation — Companion E",
-      "version": "1.0",
+      "version": "1.2",
       "tags": [
         "ghg"
       ],
@@ -2916,6 +2947,9 @@
           "qnum": 5,
           "text": "UNFCCC — what is it and its relevance to shipping?"
         }
+      ],
+      "corrections_applied": [
+        "2026-07-17: Q1 corrected — removed false claim that Fuel Lifecycle Label (FLL)/well-to-wake (WTW) data 'directly feeds' or is 'required to calculate' CII. CII (MARPOL Annex VI Reg 28, MEPC.354(78)) is tank-to-wake-only using fixed Cf factors on IMO DCS fuel consumption; FLL/WTW feeds FuelEU Maritime and the IMO Net-Zero Framework GFI rating — separate regulatory tracks. Fixed across 15s answer, 60s answer, Practical Application, CE Oral Tip, Reg-Box. Flagged via candidate feedback."
       ]
     },
     "QB7_F.html": {
