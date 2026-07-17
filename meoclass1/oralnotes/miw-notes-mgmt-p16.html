@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>MIW Engineering Management Notes — Part 16 | MEO Class 1 | Wreck Removal, Loadicator/GMDSS/TQM, Naval Architecture & Stability</title>
+<meta name="description" content="MEO Class 1 Engineering Management Notes Part 16 — Nairobi Wreck Removal Convention & RSV/Sagarmala, Loadicator/COTR/Bridge Navigation, Modernized GMDSS (MSC.496(105)), TQM in Ship Management, Simpson's Rules & Form Coefficients, Intact/Damaged Stability. Originally compiled by Uday Sankar S., Anglo-Eastern.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/miw-notes-mgmt-p16.html">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:15px;line-height:1.6;user-select:none;-webkit-user-select:none;}
+.miw-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.05;overflow:hidden;}
+.topbar{background:var(--navy);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logo{width:30px;height:30px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;letter-spacing:-0.5px;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;letter-spacing:0.3px;}
+.topbar-nav{display:flex;gap:20px;}
+.topbar-nav a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.15s;}
+.topbar-nav a:hover{color:#fff;}
+.page-header{background:var(--navy);padding:32px 24px 28px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.notes-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid var(--teal);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.notes-badge-icon{background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;letter-spacing:1px;}
+.notes-badge-text{color:var(--teal-light);font-size:12px;font-weight:600;}
+.page-title{color:#fff;font-size:26px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+.page-sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.header-meta-item{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:12px;color:#cbd5e1;}
+.header-meta-item strong{color:#fff;}
+.attribution-strip{margin-top:14px;padding:10px 14px;background:rgba(201,168,76,0.12);border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;font-size:12px;color:#cbd5e1;}
+.attribution-strip strong{color:#e2c97e;}
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:24px 16px;}
+.sidebar{position:sticky;top:68px;height:calc(100vh - 80px);overflow-y:auto;padding-right:6px;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--grey-border);border-radius:2px;}
+.toc-head{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;font-size:12px;color:var(--grey-text);text-decoration:none;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;transition:all 0.15s;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:700;}
+.toc-divider{height:1px;background:var(--grey-border);margin:14px 0;}
+.qb-sidebar-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:12px;}
+.qb-sidebar-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin-bottom:8px;}
+.qb-sidebar-link{display:block;font-size:12px;color:var(--teal-dark);text-decoration:none;font-weight:600;padding:3px 0;}
+.qb-sidebar-link:hover{text-decoration:underline;}
+#notes-feed{min-width:0;}
+.topic-block{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:24px;margin-bottom:32px;scroll-margin-top:72px;}
+.topic-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--teal-light);}
+.topic-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+.topic-title{margin:0 0 8px;font-size:20px;font-weight:800;color:var(--navy);}
+.topic-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;}
+.topic-tag{background:var(--teal-light);color:var(--teal-dark);padding:3px 8px;border-radius:20px;font-weight:600;}
+.topic-pages{color:var(--grey-text);padding:3px 0;}
+.topic-examiner{background:var(--orange-light);color:#92400e;padding:3px 8px;border-radius:20px;font-weight:600;}
+.freq-high{background:#fef9c3;color:#713f12;padding:3px 8px;border-radius:20px;font-weight:700;}
+.freq-medium{background:#f0fdf4;color:#14532d;padding:3px 8px;border-radius:20px;font-weight:600;}
+.section-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--grey-border);}
+.notes-body{font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:8px;}
+.notes-list{font-family:'Georgia',serif;font-size:14px;line-height:1.8;padding-left:22px;margin-bottom:8px;}
+.notes-list li{margin-bottom:4px;}
+.timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
+.timeline-block .t-year{color:#fff;font-weight:700;}
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
+.reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
+.reg-code{color:var(--orange);font-weight:700;white-space:nowrap;flex-shrink:0;font-family:monospace;font-size:12px;}
+.reg-desc{color:#cbd5e1;line-height:1.5;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:13.5px;font-family:'Georgia',serif;line-height:1.7;}
+.ce-tip strong{color:#92400e;}
+.qa-block{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.qa-item{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.qa-q{background:var(--grey-bg);padding:10px 14px;font-weight:700;font-size:13px;color:var(--navy);}
+.qa-a{padding:10px 14px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;color:var(--ink);}
+.exam-focus-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:16px 0;}
+.exam-focus-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin:0 0 12px;}
+.exam-q{margin:8px 0;font-family:'Georgia',serif;font-size:13.5px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+.marks-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+.memory-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:16px 0;}
+.memory-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#713f12;margin:0 0 10px;}
+.memory-list{font-family:'Georgia',serif;font-size:13.5px;line-height:1.8;padding-left:18px;}
+.memory-list li{margin-bottom:4px;}
+.amend-table,.compare-table,.revision-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.amend-table th,.compare-table th,.revision-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+.amend-table td,.compare-table td,.revision-table td{padding:8px 12px;border-bottom:1px solid var(--grey-border);font-family:'Georgia',serif;line-height:1.6;vertical-align:top;}
+.amend-table tr:nth-child(even) td,.revision-table tr:nth-child(even) td{background:var(--grey-bg);}
+.psc-focus{background:#fef2f2;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);}
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;}
+.mental-map .root{color:#fff;font-weight:700;}
+.qb-link-box{background:var(--teal-light);border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;}
+.qb-link-box strong{color:var(--teal-dark);}
+.qb-link-box a{color:var(--teal-dark);font-weight:600;text-decoration:none;margin-right:12px;}
+.qb-link-box a:hover{text-decoration:underline;}
+.deep-dive{margin:14px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:16px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;display:none;}
+.deep-dive-body.open{display:block;}
+.deep-dive-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.deep-dive-body p,.deep-dive-body li{margin-bottom:6px;}
+.deep-dive-body ul{padding-left:20px;}
+.verify-note{background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:16px;font-size:13px;font-family:'Georgia',serif;line-height:1.7;color:#1e3a5f;}
+.verify-note strong{color:#1d4ed8;}
+.ref-list{font-size:13px;line-height:1.9;padding-left:18px;}
+.ref-list a{color:var(--teal-dark);}
+.topic-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:12px;border-top:1px dashed var(--grey-border);font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.topic-version{font-weight:700;}
+.page-footer{background:var(--grey-bg);border-top:1px solid var(--grey-border);padding:28px 24px;margin-top:40px;font-size:12px;color:var(--grey-text);text-align:center;}
+.page-footer a{color:var(--teal-dark);}
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+
+<div class="miw-watermark" aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wmpat" width="420" height="220" patternTransform="rotate(-30)" patternUnits="userSpaceOnUse">
+        <text x="0" y="60" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">marineintelligenceweekly.com</text>
+        <text x="0" y="90" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wmpat)"/>
+  </svg>
+</div>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-logo">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="notes-badge">
+      <span class="notes-badge-icon">NOTES</span>
+      <span class="notes-badge-text">Engineering Management · Part 16 of 31</span>
+    </div>
+    <h1 class="page-title">Engineering Management Notes — Part 16</h1>
+    <p class="page-sub">Nairobi Wreck Removal Convention, RSV Classification & Sagarmala/Blue Economy · Loadicator, COTR & Integrated Bridge Systems · Modernized GMDSS (MSC.496(105)) · Total Quality Management in Ship Operations · Numerical Naval Architecture (Simpson's Rules, LCB/VCB/LCF, Form Coefficients) · Intact & Damaged Stability</p>
+    <div class="header-meta">
+      <span class="header-meta-item"><strong>Pages:</strong> 376–400 of 768</span>
+      <span class="header-meta-item"><strong>Topics:</strong> 6 (local P16-T1–P16-T6 — see note below)</span>
+      <span class="header-meta-item"><strong>Access:</strong> Subscriber Only</span>
+      <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>
+      <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>
+    </div>
+    <div class="attribution-strip">
+      Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and verified by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly. <strong>Sequencing note:</strong> Part 16 (pp. 376–400) is being built ahead of Parts 13–15 (pp. 301–375) at Nixon's request, pending separate supply/confirmation of those pages. Topic numbering below therefore uses local <strong>Part 16</strong> badges (not a continuous global T-number), consistent with the platform's standing rule to defer global renumbering until all 31 Parts are confirmed live.
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="toc-head">Topics — Part 16</div>
+  <a class="toc-link" href="#topic-p16-1">T1 · Wreck Removal, RSV & Sagarmala</a>
+  <a class="toc-link" href="#topic-p16-2">T2 · Loadicator, COTR & Bridge Systems</a>
+  <a class="toc-link" href="#topic-p16-3">T3 · Modernized GMDSS</a>
+  <a class="toc-link" href="#topic-p16-4">T4 · TQM in Ship Management</a>
+  <a class="toc-link" href="#topic-p16-5">T5 · Naval Architecture — Numerical Integration</a>
+  <a class="toc-link" href="#topic-p16-6">T6 · Intact & Damaged Stability</a>
+  <div class="toc-divider"></div>
+  <div class="toc-head">Navigate</div>
+  <a class="toc-link" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Notes Index</a>
+  <a class="toc-link" href="miw-notes-mgmt-p15.html">← Part 15</a>
+  <div class="toc-divider"></div>
+  <div class="qb-sidebar-box">
+    <div class="qb-sidebar-title">🔗 Related QB Files</div>
+    <a class="qb-sidebar-link" href="../QB3.html">QB3 — MARPOL & PSC</a>
+    <a class="qb-sidebar-link" href="../QB6.html">QB6 — Stability & Naval Architecture</a>
+  </div>
+</aside>
+
+<!-- NOTES FEED -->
+<main id="notes-feed">
+
+<!-- ============================================================ -->
+<!-- TOPIC 1 — NAIROBI WRECK REMOVAL CONVENTION, RSV & SAGARMALA -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p16-1" data-kw="Nairobi Convention, wreck removal, wreck removal certificate, RSV, river sea vessel, Inland Vessels Act 2021, Merchant Shipping Act 1958, Sagarmala, Blue Economy, SDG 14, Sagar Manthan">
+  <div class="topic-header">
+    <div class="topic-badge">Part 16 · Topic 1</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Nairobi Wreck Removal Convention, River Sea Vessel (RSV) Classification & India's Sagarmala/Blue Economy Strategy</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Nairobi Convention · RSV · Sagarmala</span>
+        <span class="topic-pages">Uday pp. 376–380 (approx.)</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> Checked against the IMO Nairobi International Convention on the Removal of Wrecks, 2007 text and multiple P&amp;I club circulars. The Convention's <strong>entry-into-force date (14 April 2015)</strong>, the <strong>300 GT compulsory-insurance/certification threshold</strong>, and the <strong>3-year / 6-year prescription periods</strong> (3 years from formal hazard determination; absolute cap of 6 years from the date of the casualty) in the source draft are all correct and confirmed against Article 13 and Article 12 of the Convention text. The RSV Type I–IV classification, the 3000 GT/3000 kW threshold, and the Sagarmala five-pillar structure are India-specific administrative frameworks (DG Shipping/Ministry of Ports, Shipping & Waterways) rather than IMO instruments; these numbers match the source draft and are consistent with publicly available DG Shipping RSV guidance, but candidates should cross-check the current RSV notification against the latest DG Shipping/DGMA circular before the oral, since domestic coastal-vessel notifications are amended more frequently than IMO conventions. Also note: as of March 2026 the domestic Merchant Shipping Act, 1958 was repealed and replaced by the <strong>Merchant Shipping Act, 2025</strong> (in force 15 March 2026), and DG Shipping was renamed the <strong>Directorate General of Maritime Administration (DGMA)</strong> — the RSV framework referenced by the source (originally issued under the 1958 Act) should now be read as continuing under the 2025 Act pending confirmation of a re-notification; Nixon should verify the current statutory basis before this topic is gated.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">This topic covers two separate but examinable strands. First, the <strong>Nairobi International Convention on the Removal of Wrecks, 2007</strong> — the IMO instrument that gives coastal states a clear legal basis, strict liability regime, and compulsory insurance mechanism to compel the removal of hazardous wrecks. Second, India's domestic <strong>River Sea Vessel (RSV)</strong> classification system and the linked national strategic programmes — <strong>Sagarmala</strong>, the <strong>Blue Economy</strong>, and the <strong>Sagar Manthan</strong> digital monitoring platform — which a Chief Engineer serving on Indian-flagged or India-trading coastal tonnage is expected to know at MEO Class 1 level.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>The <strong>Wreck Removal Certificate</strong> is a statutory document for any ship ≥300 GT — as with any P&amp;I-linked "blue card" certificate, the Chief Engineer should know it exists, know it is verified by PSC, and know it is separate from the ship's ordinary H&amp;M/P&amp;I cover.</li>
+    <li>Nair likes to test whether candidates confuse the <strong>3-year window</strong> (from formal hazard determination) with the <strong>6-year absolute cap</strong> (from the casualty date) — these run on different clocks and only the second is a hard ceiling regardless of when the hazard is formally determined.</li>
+    <li>On coastal/RSV-type tonnage, understanding why a vessel is Type I/II (Inland Vessels Act) versus Type III/IV (Merchant Shipping Act) affects which statutory survey regime, manning scale, and certification pathway applies.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">1917</span>  Inland Steam-Vessels Act (India) — original, now-repealed inland vessel statute
+<span class="t-year">1958</span>  Merchant Shipping Act (India) — foundational ocean-going/coastal statute
+<span class="t-year">2007</span>  Nairobi Wreck Removal Convention adopted (Nairobi, Kenya)
+<span class="t-year">2014</span>  Nairobi Convention reaches 10 ratifications — 12-month countdown triggered
+<span class="t-year">2015</span>  Nairobi Convention enters into force — <span class="t-year">14 April</span>
+<span class="t-year">2021</span>  Inland Vessels Act, 2021 replaces the 1917 Act
+<span class="t-year">2025</span>  Merchant Shipping Act, 2025 replaces the 1958 Act (in force 15 Mar 2026); DG Shipping renamed DGMA</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">Nairobi Convention 2007</span><span class="reg-desc">In force 14 Apr 2015. Applies to ships ≥300 GT — compulsory insurance/financial security, Wreck Removal Certificate, direct action against insurers. Article 13 sets the 3-year/6-year prescription periods.</span></div>
+    <div class="reg-item"><span class="reg-code">LLMC 1976 (as amended)</span><span class="reg-desc">Financial security under Nairobi Art. 12 must match the shipowner's applicable LLMC limitation tonnage bracket.</span></div>
+    <div class="reg-item"><span class="reg-code">Inland Vessels Act, 2021</span><span class="reg-desc">Governs RSV Type I & II; repealed and replaced the Inland Steam-Vessels Act, 1917.</span></div>
+    <div class="reg-item"><span class="reg-code">Merchant Shipping Act, 2025</span><span class="reg-desc">Governs RSV Type III & IV; repealed the MS Act, 1958, effective 15 Mar 2026 (DG Shipping renamed DGMA).</span></div>
+    <div class="reg-item"><span class="reg-code">SDG 14 (UN 2030 Agenda)</span><span class="reg-desc">"Life Below Water" — the sustainability framework the Blue Economy programme is aligned to; a policy goal, not binding IMO/domestic regulation.</span></div>
+  </div>
+
+  <div class="section-head">🚢 RSV Operational Classification (India)</div>
+  <table class="revision-table">
+    <tr><th>Type</th><th>Operational Range</th><th>Weather/Time Restriction</th><th>Governing Act</th></tr>
+    <tr><td>Type I</td><td>Within 12 NM of nearest land/baseline</td><td>Fairweather, daylight only</td><td>Inland Vessels Act, 2021</td></tr>
+    <tr><td>Type II</td><td>Between nearby ports, up to 12 NM</td><td>Fairweather, no daylight restriction</td><td>Inland Vessels Act, 2021</td></tr>
+    <tr><td>Type III</td><td>Up to 12 NM (30 NM in Gulf of Khambhat/Kutch); voyage ≤24 hours</td><td>All-weather</td><td>Merchant Shipping Act (2025, successor to 1958)</td></tr>
+    <tr><td>Type IV</td><td>Any Indian ports along the coastline</td><td>All-weather, unrestricted distance</td><td>Merchant Shipping Act (2025, successor to 1958)</td></tr>
+  </table>
+  <p class="notes-body">All four RSV categories are capped at a maximum propulsion power of <strong>3000 kW</strong> and a maximum tonnage of <strong>3000 GT</strong> — exceeding either threshold takes the vessel out of the RSV framework entirely and into standard ocean-going coastal vessel certification.</p>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Nair):</strong> Nair's classic follow-up after the RSV table is "why does the Act change between Type II and Type III?" The answer is the shift from purely inland/fairweather operation to all-weather coastal operation — Type III/IV vessels face open-sea risk exposure closer to that of standard coastal tonnage, so they sit under the general Merchant Shipping framework rather than the inland-waterways-focused Act.</div>
+
+  <div class="section-head">🇮🇳 National Strategic Frameworks: Sagarmala, Blue Economy & Sagar Manthan</div>
+  <p class="notes-body">The <strong>Sagarmala Programme</strong> is India's national port-led infrastructure development initiative, executed through five pillars: (1) Port Modernisation & New Port Development, (2) Port Connectivity Enhancement (rail/road/freight-corridor links), (3) Port-Linked Industrialisation, (4) Coastal Community Development, and (5) Coastal Shipping & Inland Waterways Transport. The <strong>Blue Economy</strong> concept — sustainable economic use of marine resources aligned with SDG 14 — covers offshore renewable energy, the Deep Ocean Mission, and sustainable aquaculture/tourism. <strong>Sagar Manthan</strong> is the Ministry of Ports, Shipping & Waterways' unified digital dashboard for real-time tracking, data visualisation, and inter-departmental accountability across these national maritime projects.</p>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. What are the exact prescription periods under the Nairobi Convention, and how do they interact?</div><div class="qa-a">Claims for the cost of locating, marking, or removing a wreck must be brought within <strong>3 years</strong> of the coastal state's formal determination that the wreck constitutes a hazard. Independently, no action may ever be brought more than <strong>6 years</strong> after the date of the maritime casualty that caused the wreck — this is an absolute cap that applies even if the hazard determination itself came late. Both time bars must be satisfied; whichever expires first extinguishes the right of action.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. As Chief Engineer, what would you check regarding the Wreck Removal Certificate before departure?</div><div class="qa-a">That the certificate is valid and matches the vessel's current name, call sign and IMO number; that the financial security provider (typically the P&amp;I Club) is named and active for the voyage; and that the certificate is filed with the ship's statutory documents for PSC presentation. This applies to any ship of 300 GT and above under Article 12 of the Convention.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Differentiate RSV Type I/II from Type III/IV in terms of governing legislation and operational envelope.</div><div class="qa-a">Type I and II are inland/coastal-fringe classifications limited to fairweather operation within 12 NM of land, governed by the Inland Vessels Act, 2021. Type III and IV are all-weather coastal classifications — Type III capped at a 24-hour voyage and 12 NM (30 NM in the Gulf of Khambhat/Kutch), Type IV unrestricted along the coastline — both governed by the Merchant Shipping Act framework. All four types share the same 3000 GT / 3000 kW upper engineering threshold.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Summarise the five pillars of the Sagarmala Programme and how each supports domestic maritime logistics.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>A 2,500 GT coastal cargo vessel with a 2,200 kW engine plans an 18-hour voyage between two Indian ports. Determine its RSV category, governing Act, and applicable distance/weather constraints.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Analyse the regulatory and engineering response to a hard grounding within a foreign coastal state's contiguous zone, covering Wreck Removal Certificate validation, the 3-/6-year liability windows, and the Chief Engineer's hull/pollution-prevention responsibilities.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>"3 to determine, 6 to end it"</strong> — 3 years from hazard determination; absolute 6-year cap from the casualty date.</li>
+      <li><strong>300 GT</strong> — Nairobi Convention compulsory insurance/certificate threshold.</li>
+      <li><strong>I & II = Inland Act, fairweather; III & IV = MS Act, all-weather</strong> — RSV governing-Act split; 3000 GT/3000 kW ceiling applies to all four.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Grounding Response Sequence Under the Nairobi Framework</button>
+    <div class="deep-dive-body">
+      <h4>Immediate Actions</h4>
+      <p>Preserve the VDR, conduct full tank soundings/void assessments, and consolidate fuel oil away from breached tanks into intact settling/service tanks to minimise pollution risk before the Coastal State and Flag State are formally notified.</p>
+      <h4>Wreck Marking & Certification</h4>
+      <p>Once the Coastal State determines the vessel a navigational hazard, physical marking (buoys, AIS hazard transponder) is deployed and the Wreck Removal Certificate is produced to confirm financial security is in place for the salvage/removal costs to follow.</p>
+      <h4>Salvage Coordination</h4>
+      <p>The shipowner typically contracts salvage under a Lloyd's Open Form (LOF) with SCOPIC clauses; the Chief Engineer's role is to hand over precise fuel-system, ballast and structural-access data to the salvage master to enable safe defueling ahead of any hull-recovery operation.</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>Container ships trading deep-sea are outside the RSV framework entirely, but the Nairobi Convention's 300 GT threshold and the Wreck Removal Certificate apply identically — every port call statutory-document check should confirm this certificate alongside the standard P&amp;I blue card.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>IMO — Nairobi International Convention on the Removal of Wrecks, 2007</li>
+    <li>Inland Vessels Act, 2021 (India)</li>
+    <li>Merchant Shipping Act, 2025 (India) — successor to the MS Act, 1958</li>
+    <li>Ministry of Ports, Shipping & Waterways — Sagarmala Programme / Sagar Manthan</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p16 · Topic 1 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p16 · P16-T1 · v1.0</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 2 — LOADICATOR, COTR & INTEGRATED BRIDGE SYSTEMS -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p16-2" data-kw="Loadicator, SOLAS Chapter XII Regulation 11, COTR, Controlled Document Transmittal Record, Great Circle, Rhumb Line, ECDIS, AIS, LRIT, Integrated Bridge System">
+  <div class="topic-header">
+    <div class="topic-badge">Part 16 · Topic 2</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Loadicator Statutory Compliance, Controlled Document Transmittal Records & Integrated Bridge System Architecture</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">SOLAS XII/11 · COTR · IBS</span>
+        <span class="topic-pages">Uday pp. 381–384 (approx.)</span>
+        <span class="topic-examiner">Examiner: Paul / Nair</span>
+        <span class="freq-medium">Medium Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> SOLAS Chapter XII, Regulation 11 (loading and stability computer requirement for bulk carriers ≥150 m in length) and the three mandatory Loadicator documents (Class Certificate, Approved Manual, Approved Test Conditions) were checked against the SOLAS XII text and class-society statutory guidance and are correctly stated. The source draft's LRIT reporting frequency ("four times daily") is consistent with SOLAS V/19-1 and IMO LRIT guidance (default 6-hourly automatic position reporting). Radar frequency bands (S-Band ≈3 GHz, X-Band ≈9 GHz) are standard and correct. No numeric fabrications were found in this topic's source draft; the COTR system is an internal ship-management/document-control practice rather than a named statutory instrument, and is presented here as good-practice terminology rather than a cited regulation.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">This topic covers three linked shipboard systems that a senior engineer must understand for both statutory compliance and safe operation: the <strong>Loadicator</strong> — a ship-specific loading/stability computer; the <strong>Controlled Document Transmittal Record (COTR)</strong> — the administrative discipline for tracking revision-controlled technical documents; and the sensor/navigation network that makes up the modern <strong>Integrated Bridge System (IBS)</strong>.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>The Loadicator's accuracy depends on correct tank-level sensor data — as Chief Engineer you own the calibration of the draft gauges and tank sounding transducers that feed it, even though the Chief Officer runs the calculations.</li>
+    <li>A COTR gap (using an outdated stability booklet or SMS revision) is a documentation deficiency PSC treats as a proxy for wider quality-control failure — keep the ledger current on every structural modification.</li>
+    <li>Great Circle vs Rhumb Line routing directly affects voyage fuel planning and ETA calculations that the engine department must align main engine RPM/consumption schedules against.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">Pre-1980s</span>  Manual hydrostatic-table stress/stability calculations
+<span class="t-year">1980s–90s</span>  Digital microprocessor-based Loadicators introduced fleet-wide
+<span class="t-year">1997</span>  SOLAS Chapter XII adopted (bulk carrier structural safety, incl. loading computer mandate)
+<span class="t-year">2000s</span>  Bridge instruments progressively networked into Integrated Bridge Systems (IBS)</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch XII, Reg 11</span><span class="reg-desc">Bulk carriers ≥150 m length must carry a type-approved loading instrument capable of providing hull girder shear force/bending moment and stability data.</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch V, Reg 19</span><span class="reg-desc">Mandatory carriage requirements for Gyro Compass, Echo Sounder, Radar/ARPA, ECDIS, AIS, and VDR by ship type/tonnage.</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch V, Reg 19-1</span><span class="reg-desc">Long-Range Identification and Tracking (LRIT) — automatic position reporting to the Flag State/data centres, standard interval 6-hourly.</span></div>
+  </div>
+
+  <div class="section-head">📋 Loadicator Statutory Documentation & Testing</div>
+  <table class="revision-table">
+    <tr><th>Requirement</th><th>Content</th></tr>
+    <tr><td>Class Certificate</td><td>Formal approval of the software/hardware configuration for the specific hull</td></tr>
+    <tr><td>Approved Manual</td><td>Operating instructions, input constraints, default execution guidelines</td></tr>
+    <tr><td>Approved Test Conditions</td><td>Standard loading profiles used to cross-check computer output against shipyard data</td></tr>
+  </table>
+  <p class="notes-body">Crew must periodically re-run the approved test conditions per the ship's SMS and compare outputs to the manual; a Class Surveyor witnesses this test annually at Class Renewal Survey.</p>
+
+  <div class="section-head">🧭 Great Circle vs Rhumb Line Navigation</div>
+  <ul class="notes-list">
+    <li><strong>Great Circle:</strong> shortest physical distance between two points on the globe; requires continuous heading changes as the vessel crosses meridians.</li>
+    <li><strong>Rhumb Line:</strong> constant compass heading throughout; visually straight on a Mercator chart, but a longer physical track on ocean transits.</li>
+    <li><strong>Composite Great Circle:</strong> hybrid — follows a Great Circle path but caps maximum latitude to avoid polar ice/heavy-weather hazards.</li>
+  </ul>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Paul):</strong> Paul's typical probe is "what happens if the Loadicator fails during cargo operations?" The expected answer: stop loading, switch to the secondary/backup terminal or manual hydrostatic-table calculation, cross-check tank sensor data against manual soundings, and only resume once the discrepancy is diagnosed and the Class Surveyor (if survey-linked) has re-witnessed the test conditions.</div>
+
+  <div class="section-head">📡 Integrated Bridge System Components</div>
+  <table class="revision-table">
+    <tr><th>Component</th><th>Function</th><th>Common Failure Mode</th></tr>
+    <tr><td>Gyro Compass</td><td>True-north heading reference</td><td>Spin-motor breakdown, power inverter fault</td></tr>
+    <tr><td>Radar/ARPA</td><td>Target detection, collision-risk tracking (S-Band ≈3 GHz, X-Band ≈9 GHz)</td><td>Magnetron degradation, waveguide moisture</td></tr>
+    <tr><td>ECDIS</td><td>Electronic chart display integrated with position/target data</td><td>Chart update omissions, data corruption</td></tr>
+    <tr><td>AIS</td><td>Broadcasts ship identity/position via VHF</td><td>Antenna damage, GPS sync fault</td></tr>
+    <tr><td>LRIT</td><td>Reports position to Flag State via satellite (typically 6-hourly)</td><td>Satellite terminal/power loss</td></tr>
+  </table>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. What three documents must be on board to validate a Loadicator under SOLAS Chapter XII?</div><div class="qa-a">The Class Certificate for the Loadicator, the Class Approved Loadicator Manual, and the Class Approved Loadicator Test Conditions. Routine crew verification against the approved test conditions is required per the SMS, plus annual witnessed testing during Class Renewal Survey.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Differentiate Great Circle and Rhumb Line navigation.</div><div class="qa-a">A Great Circle track is the shortest distance between two points on a sphere but requires continuous heading adjustment as meridians are crossed. A Rhumb Line holds a constant compass heading, simplifying helm control, but is physically longer on transoceanic transits. A Composite Great Circle blends both, capping latitude to avoid hazards like ice fields.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. What is a COTR and why does it matter to a Chief Engineer?</div><div class="qa-a">A Controlled Document Transmittal Record is the administrative ledger tracking revision numbers and distribution of safety-critical documents — stability booklets, SMS manuals, structural drawings. The Chief Engineer must ensure machinery drawings and structural modification records are logged and outdated revisions archived, since PSC treats document-control gaps as evidence of wider quality-management weakness.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Explain the role of the Loadicator under SOLAS Chapter XII and the difference between routine crew testing and annual Class witnessing.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Sketch a block diagram of data flow between the Gyro Compass, GPS, Echo Sounder and ECDIS, and describe the consequences of a sudden Gyro heading step-error.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>The primary Loadicator terminal fails hardware pre-loading. Outline (a) the alternative stability-verification steps, and (b) the documentation/testing process to restore full Class compliance via the COTR.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>"C-M-T"</strong> — Class Certificate, Manual, Test Conditions: the three statutory Loadicator documents.</li>
+      <li><strong>≥150 m bulk carriers</strong> — SOLAS XII/11 loading-computer applicability threshold.</li>
+      <li><strong>GC = shortest, changing heading; RL = constant heading, longer</strong> — the core navigation-geometry contrast.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Loadicator Verification Failure Case Study</button>
+    <div class="deep-dive-body">
+      <h4>Scenario</h4>
+      <p>During annual survey, a re-run of the approved test conditions on an 85,000 DWT Capesize bulker showed a bending-moment discrepancy against the manual's printed values.</p>
+      <h4>Response Sequence</h4>
+      <p>Isolate the primary terminal and switch to the backup unit → re-run the same test profile on the backup (confirming the fault is local to the primary database, not the sensor network) → cross-check tank radar readings against manual tape soundings → reinstall the approved hydrostatic profile on the primary terminal under Class technical guidance → re-run and re-witness the test conditions → Class endorses the certificate and the event is logged in the COTR.</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>Container ships are not SOLAS XII bulk-carrier-mandated for a Loadicator, but virtually all carry an equivalent stability/loading computer for lashing and GM verification — the same verification-test discipline against a backup terminal applies before every loading operation.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>SOLAS Chapter XII (Additional Safety Measures for Bulk Carriers)</li>
+    <li>SOLAS Chapter V (Safety of Navigation)</li>
+    <li>IMO Performance Standards for ECDIS</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p16 · Topic 2 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p16 · P16-T2 · v1.0</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 3 — MODERNIZED GMDSS (MSC.496(105)) -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p16-3" data-kw="GMDSS, MSC.496(105), RMSS, Recognized Mobile Satellite Service, NBDP, Sea Area A1 A2 A3 A4, EPIRB, SART, reserve source of energy">
+  <div class="topic-header">
+    <div class="topic-badge">Part 16 · Topic 3</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Modernized GMDSS Architecture Under Resolution MSC.496(105) — RMSS, Sea Areas & Reserve Energy</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">GMDSS · SOLAS Ch IV · RMSS</span>
+        <span class="topic-pages">Uday pp. 385–388 (approx.)</span>
+        <span class="topic-examiner">Examiner: Srivastava / Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> Checked against IMO Resolution MSC.496(105), class-society statutory circulars (Bureau Veritas, Lloyd's Register, ABS) and SAFETY4SEA coverage. The <strong>1 January 2024 entry-into-force date</strong>, the replacement of "Inmarsat" with the generic term <strong>Recognized Mobile Satellite Service (RMSS)</strong>, the <strong>removal of the NBDP carriage requirement</strong>, and the <strong>exclusion of VHF-EPIRB as a substitute for satellite EPIRB in Sea Area A1</strong> are all confirmed correct. One correction to the source draft: MSC.496(105) was <strong>adopted in April 2022</strong> (not simply described as originating from "the modernization program" with no adoption date) and entered into force 1 January 2024 — both dates are now stated. The GMDSS <strong>reserve source of energy duration (1 hour with an emergency generator fitted, 6 hours without)</strong> was not explicitly numbered in the source draft's Chief Engineer responsibilities section; this figure has been added and verified against SOLAS Chapter IV, Regulation 13, since it is a standard, high-frequency oral-exam number. The Sea Area A₁ line-of-sight formula (𝒜 = 2.5·(√H + √h)) is the standard ITU/IMO VHF coverage approximation and is correctly stated.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">The Global Maritime Distress and Safety System (GMDSS) was comprehensively modernized under <strong>IMO Resolution MSC.496(105)</strong>, adopted April 2022 and effective <strong>1 January 2024</strong>, replacing satellite-provider-specific and obsolete terrestrial-telegraphy requirements with generalized, technology-neutral terminology.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>The GMDSS console's electrical supply chain — main, emergency, and reserve source — is a Chief Engineer responsibility; a battery bank that cannot sustain the required duration is a PSC detention risk under SOLAS Chapter IV.</li>
+    <li>Post-2024, a Safety Radio Certificate must name the specific RMSS provider (e.g. Inmarsat or Iridium) fitted — a mismatch between the certificate and the actual installed terminal is grounds for detention.</li>
+    <li>Weekly battery load testing, specific-gravity checks, and confirming automatic boost-to-float charger transition remain core engine-room GMDSS maintenance tasks unaffected by the 2024 modernization.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">1988</span>  GMDSS framework established under SOLAS Chapter IV
+<span class="t-year">1992–99</span>  Phased GMDSS implementation across SOLAS fleet
+<span class="t-year">2022</span>  Res. MSC.496(105) adopted (April) — GMDSS modernization
+<span class="t-year">2024</span>  MSC.496(105) enters into force — <span class="t-year">1 January</span></div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">Res. MSC.496(105)</span><span class="reg-desc">In force 1 Jan 2024. Full rewrite of SOLAS Chapter IV: RMSS terminology, NBDP removal, VHF-EPIRB exclusion from A1, consolidated SART/AIS-SART carriage.</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch IV, Reg 13</span><span class="reg-desc">GMDSS reserve source of energy: must sustain full radio operation for 1 hour (emergency generator fitted) or 6 hours (no emergency generator); recharge to minimum within 10 hours.</span></div>
+    <div class="reg-item"><span class="reg-code">ITU Radio Regulations</span><span class="reg-desc">Governs DSC/satellite operating frequencies and transmission power limits.</span></div>
+  </div>
+
+  <div class="section-head">🌐 GMDSS Sea Areas</div>
+  <table class="revision-table">
+    <tr><th>Sea Area</th><th>Definition</th></tr>
+    <tr><td>A1</td><td>VHF DSC coastal coverage; 𝒜 = 2.5·(√H + √h) NM, H = coast antenna height, h = ship antenna height (both in metres)</td></tr>
+    <tr><td>A2</td><td>MF DSC coverage, excluding A1; boundary set per Coastal State per ITU guidance</td></tr>
+    <tr><td>A3</td><td>RMSS/SES satellite coverage, excluding A1 & A2; coverage now varies by the specific RMSS constellation installed</td></tr>
+    <tr><td>A4</td><td>Remaining polar/other areas outside A1–A3; relies on HF or non-geostationary RMSS terminals</td></tr>
+  </table>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Srivastava):</strong> Srivastava frequently asks candidates to state the A1 formula and correctly identify which variable is the coastal station's antenna height and which is the ship's. He then follows with "what changed for A3 after 2024?" — the expected answer is that A3 coverage is no longer a fixed geostationary boundary but depends on the specific RMSS/SES system fitted, which must now be explicitly named on the Safety Radio Certificate.</div>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. List the major structural changes introduced by Resolution MSC.496(105).</div><div class="qa-a">Replacement of "Inmarsat" with the generic "Recognized Mobile Satellite Service (RMSS)"; removal of the mandatory Narrow-Band Direct Printing (NBDP) carriage requirement; consolidation of SART/AIS-SART carriage directly into Chapter IV; exclusion of VHF-EPIRB as a substitute for satellite EPIRB in Sea Area A1; and a requirement for the Safety Radio Certificate to name the specific RMSS terminal fitted.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. State the GMDSS reserve source of energy duration requirement.</div><div class="qa-a">Under SOLAS Chapter IV, Regulation 13, the reserve battery bank must sustain full GMDSS radio operation for 1 hour if the vessel is fitted with an emergency generator, or 6 hours if it is not. The batteries must recharge to the required minimum capacity within 10 hours, and capacity must be tested at intervals not exceeding 12 months.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Give the Sea Area A1 line-of-sight formula and define each term.</div><div class="qa-a">𝒜 = 2.5 × (√H + √h), where 𝒜 is the maximum theoretical VHF coverage radius in nautical miles, H is the coastal VHF station's antenna elevation above sea level in metres, and h is the vessel's primary VHF antenna height above sea level in metres. This approximates the radio line-of-sight limit accounting for Earth's curvature.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Compare a 9 GHz Radar SART and an AIS-SART regarding transmission method and display on an approaching rescue vessel.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Sketch the GMDSS console power supply schematic, showing the main AC board, emergency switchboard link, automatic battery charger, reserve battery bank, and DC bus feeding the RMSS terminal.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>During an A4 transit, the HF transceiver and main satellite terminal fail simultaneously due to an electrical surge. Outline (a) alternative distress-alerting arrangements available, and (b) the testing/certification steps required post-repair under the modernized GMDSS framework.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>1 Jan 2024</strong> — MSC.496(105) entry into force (adopted April 2022).</li>
+      <li><strong>1 hr / 6 hr</strong> — GMDSS reserve energy: with / without emergency generator.</li>
+      <li><strong>RMSS replaces Inmarsat; NBDP removed; VHF-EPIRB excluded from A1</strong> — the three headline 2024 changes.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Distress Alerting Sequence in Sea Area A3</button>
+    <div class="deep-dive-body">
+      <h4>Scenario</h4>
+      <p>A fire in the auxiliary machinery space causes total loss of the main switchboard while transiting Sea Area A3.</p>
+      <h4>Response Sequence</h4>
+      <p>Activate the primary RMSS/SES distress button → transmit a backup MF/HF DSC alert → GMDSS console automatically transfers to the reserve battery bank as main power fails → shed non-essential bridge loads to preserve the reserve duration → establish MRCC voice contact via the RMSS terminal → if abandonment becomes necessary, deploy the satellite EPIRB and activate both radar SART and AIS-SART.</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>Weekly GMDSS battery load tests and specific-gravity checks are logged in the radio log per the SMS — confirming the reserve source meets its rated duration is a standing engine-room task irrespective of the 2024 RMSS terminology change.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>IMO Resolution MSC.496(105) — Amendments to SOLAS Chapter IV</li>
+    <li>SOLAS Chapter IV — Radiocommunications</li>
+    <li>COMSAR.1/Circ.32/Rev.3 — Harmonization of GMDSS Requirements</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p16 · Topic 3 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p16 · P16-T3 · v1.0</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 4 — TOTAL QUALITY MANAGEMENT IN SHIP OPERATIONS -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p16-4" data-kw="TQM, Total Quality Management, ISM Code, ISO 9001, zero cargo claims, zero downtime, PDCA, continuous improvement">
+  <div class="topic-header">
+    <div class="topic-badge">Part 16 · Topic 4</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Total Quality Management (TQM) and Strategic Operational Excellence in Maritime Engineering</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">TQM · ISM Code · ISO 9001</span>
+        <span class="topic-pages">Uday pp. 389–392 (approx.)</span>
+        <span class="topic-examiner">Examiner: Senthil</span>
+        <span class="freq-medium">Medium Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> The ISM Code's statutory basis (SOLAS Chapter IX) and the ISO 9001:2015 / ISO 14001:2015 / ISO 50001:2018 standard numbers were checked against IMO and ISO publication records and are correct. TQM itself is a management methodology, not a cited IMO regulation, so this topic is framed as applied management practice supporting statutory compliance rather than a regulation with numeric thresholds to verify — no fabricated regulatory figures were present in the source draft for this topic.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">Total Quality Management (TQM) is an organisation-wide, continuous-improvement management philosophy that mobilises every employee — shore and ship — toward sustained customer satisfaction, safety, and operational reliability. In shipping, TQM is applied as the practical engine that drives compliance with the statutory ISM Code and voluntary ISO management-system standards.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>TQM gives the Chief Engineer a structured language for root-cause analysis — moving the engine room from reactive repair to planned, data-driven maintenance.</li>
+    <li>Fleet management increasingly measures technical departments against TQM-style KPIs (zero off-hire, zero PSC deficiency) rather than pass/fail survey outcomes alone.</li>
+    <li>Senthil often links TQM questions directly to ISM internal audit findings — know how a TQM culture reduces open non-conformities.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">1950s</span>  TQM principles pioneered in manufacturing (Deming, Juran)
+<span class="t-year">1990s</span>  ISM Code introduced — first structured, mandatory shipboard safety management
+<span class="t-year">2015</span>  ISO 9001:2015 / ISO 14001:2015 published
+<span class="t-year">2018</span>  ISO 50001:2018 (energy management) published</div>
+
+  <div class="section-head">⚖ Regulatory & Standards References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">ISM Code (SOLAS Ch IX)</span><span class="reg-desc">Mandates a structured Safety Management System (SMS) for the safe operation of ships and pollution prevention — the statutory backbone TQM practice supports.</span></div>
+    <div class="reg-item"><span class="reg-code">ISO 9001:2015</span><span class="reg-desc">Global quality management system standard, widely adopted by ship managers alongside the ISM SMS.</span></div>
+    <div class="reg-item"><span class="reg-code">ISO 14001:2015 / ISO 50001:2018</span><span class="reg-desc">Environmental management and energy management system standards supporting continuous emissions/fuel-efficiency improvement.</span></div>
+  </div>
+
+  <div class="section-head">🎯 The Eight TQM Tenets & Five Engineering Targets</div>
+  <table class="revision-table">
+    <tr><th>TQM Principle</th><th>Shipboard Application</th></tr>
+    <tr><td>Customer Focus</td><td>Align propulsion reliability/transit speed with charterer requirements</td></tr>
+    <tr><td>Employee Involvement</td><td>Empower crew to raise near-miss reports and process improvements</td></tr>
+    <tr><td>Process-Centred</td><td>Standardise workflows (e.g. FO purification) to reduce variability</td></tr>
+    <tr><td>Integrated Systems</td><td>Connect SMS with ISO 9001/14001/50001 into one operating framework</td></tr>
+    <tr><td>Fact-Based Decisions</td><td>Use oil analysis, vibration data and telemetry, not intuition</td></tr>
+    <tr><td>Continuous Improvement</td><td>Apply PDCA cycles to recurring machinery/process issues</td></tr>
+  </table>
+  <p class="notes-body">Applied commercially, TQM in ship management targets five engineering objectives: <strong>zero cargo claims, zero machinery-driven off-hire, zero PSC/vetting deficiencies, controlled operating costs, and zero ISM/MARPOL non-conformities.</strong></p>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Senthil):</strong> Senthil typically asks for a concrete example rather than the theory — be ready with one real root-cause-analysis case from your own vessel (e.g. a recurring auxiliary engine or purifier issue resolved through structured data review and an SMS checklist change) rather than reciting the eight tenets alone.</div>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. How is TQM practically applied in an engine room to reduce operating costs?</div><div class="qa-a">By shifting from reactive to proactive maintenance: using condition monitoring/oil analysis to catch wear early, standardising fuel-treatment workflows to reduce liner wear, right-sizing spare-parts inventories, and engaging the whole crew in maintaining zero PSC deficiencies to avoid detention costs.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Name the five engineering performance targets TQM sets for protecting commercial margins.</div><div class="qa-a">Zero cargo claims, zero machinery-driven lost time, zero vetting/PSC deficiencies, controlled operating costs, and zero ISM/MARPOL non-conformities.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. How does fact-based decision-making apply during a main engine overhaul?</div><div class="qa-a">Measured data — liner wear via micrometer, piston-ring clearances, crankshaft deflections — is compared directly against the maker's design limits, and decisions (hone, replace, adjust) are made on those figures rather than estimation, avoiding both premature part replacement and unplanned failure.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Explain how employee involvement and near-miss reporting help identify systematic engineering failures.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Describe how a company integrates TQM with the mandatory ISM Code to achieve a zero-deficiency external audit outcome.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>A container fleet shows rising SFOC on its auxiliary engines. Outline a structured TQM investigation and the KPIs the Chief Engineer should track for long-term efficiency.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>Five Zeros</strong> — cargo claims, machinery down-time, PSC/vetting deficiencies, MARPOL/ISM non-conformities, wasted cost.</li>
+      <li><strong>ISM = statutory floor; TQM = the culture built on top of it.</strong></li>
+      <li><strong>Fact over intuition</strong> — the core TQM decision principle Senthil probes hardest.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Eliminating Repeated Turbocharger Bearing Failures</button>
+    <div class="deep-dive-body">
+      <h4>Scenario</h4>
+      <p>A sister-ship fleet shows repeated auxiliary engine turbocharger bearing failures.</p>
+      <h4>TQM Response Sequence</h4>
+      <p>Gather lube-oil telemetry and filtration logs → identify a process gap (no mandatory pre-lubrication step before starting after standstill) → update SOP with a pre-lube checklist step, upgrade filtration, and revise the fuel-injection maintenance schedule → monitor via vibration/oil analysis over six months to confirm the failure mode is eliminated.</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>Fleet-wide reliability trend reviews (comparing sister vessels on the same trade) are a standard TQM mechanism for catching a systemic issue before it becomes a class-wide off-hire event.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>ISM Code (International Safety Management Code), SOLAS Chapter IX</li>
+    <li>ISO 9001:2015 — Quality Management Systems</li>
+    <li>ISO 14001:2015 / ISO 50001:2018 — Environmental & Energy Management</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p16 · Topic 4 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p16 · P16-T4 · v1.0</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 5 — NAVAL ARCHITECTURE: NUMERICAL INTEGRATION -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p16-5" data-kw="Simpson's Rules, LCB, VCB, LCF, Bonjean curve, block coefficient, prismatic coefficient, Admiralty Coefficient, inclining test sister ship exemption">
+  <div class="topic-header">
+    <div class="topic-badge">Part 16 · Topic 5</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Theoretical Naval Architecture: Simpson's Rules, Hydrostatic Parameters & Form Coefficients</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Simpson's Rules · LCB/VCB/LCF · Cb/Cp</span>
+        <span class="topic-pages">Uday pp. 393–396 (approx.)</span>
+        <span class="topic-examiner">Examiner: Rajappan</span>
+        <span class="freq-high">⭐ High Frequency (Written)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> Simpson's First Rule (h/3 · (y₀+4y₁+y₂), applicable to an odd number of ordinates/even number of intervals) and Simpson's Second Rule (3h/8 · (y₀+3y₁+3y₂+y₃), applicable when intervals are a multiple of three) are standard naval-architecture numerical-integration formulae and are correctly stated. The Block Coefficient (Cb = ∇/(L×B×T)) and Prismatic Coefficient (Cp = ∇/(L×Am)) definitions are correct. The Admiralty Coefficient formula (P = Δ^(2/3)·V³/Ac) is the standard empirical form. The <strong>SOLAS Chapter II-1, Regulation 5 sister-ship inclining-test exemption thresholds</strong> (lightship displacement deviation &lt;1%, LCG deviation &lt;0.5% of subdivided length) in the source draft match the commonly cited IACS/Class practice for lightweight survey-based exemptions; candidates should confirm the exact current wording against their own Class society's applied procedure, as the precise percentage thresholds are set through IACS Unified Interpretations rather than the bare SOLAS text itself, which leaves discretion to the Administration/RO.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">This topic covers the mathematical toolset naval architects use to convert a ship's curved hull geometry into usable hydrostatic numbers: Simpson's numerical integration rules, the spatial centres of buoyancy and floatation, and the dimensionless coefficients that describe hull fullness and propulsive performance.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>Understanding how the ship's hydrostatic tables were derived lets a senior engineer sanity-check Loadicator output rather than trusting it blindly.</li>
+    <li>The Admiralty Coefficient is a practical fuel-monitoring tool — a sudden drop in transit signals hull fouling or propeller damage and should trigger a hull-condition investigation.</li>
+    <li>Rajappan sets numeric Simpson's Rule problems routinely at written level — practice the arithmetic, not just the theory.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">18th c.</span>  Thomas Simpson codifies numerical integration rules for irregular areas
+<span class="t-year">Pre-computer era</span>  Bonjean curves and displacement scales built by hand from Simpson's calculations
+<span class="t-year">Modern era</span>  Loadicators automate these calculations; underlying theory remains an oral/written staple</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch II-1, Reg 5</span><span class="reg-desc">Mandates the inclining test to establish lightship displacement and LCG; permits the Administration to waive individual sister-ship tests subject to a verified deadweight-survey comparison against the lead ship.</span></div>
+    <div class="reg-item"><span class="reg-code">International Load Line Convention, 1966</span><span class="reg-desc">Uses block coefficient in freeboard-height calculations.</span></div>
+    <div class="reg-item"><span class="reg-code">ITTC Guidelines</span><span class="reg-desc">Standardises form-factor/coefficient scaling from model-test data to full-scale predictions.</span></div>
+  </div>
+
+  <div class="section-head">📐 Simpson's Rules</div>
+  <table class="revision-table">
+    <tr><th>Rule</th><th>Applicability</th><th>Formula</th></tr>
+    <tr><td>First Rule (3-ordinate)</td><td>Odd number of ordinates / even number of intervals</td><td>Area = h/3 · (y₀ + 4y₁ + y₂ + ... + 4y_(n-1) + yₙ)</td></tr>
+    <tr><td>Second Rule (4-ordinate)</td><td>Intervals a multiple of 3</td><td>Area = 3h/8 · (y₀ + 3y₁ + 3y₂ + y₃)</td></tr>
+  </table>
+
+  <div class="section-head">📐 Waterplane Ordinate Diagram (Simpson's First Rule, 3-Ordinate)</div>
+  <div class="timeline-block" style="line-height:1.5;">
+AP                                                    FP
+ │←──h──→│←──h──→│
+ y₀      y₁      y₂
+ │       │       │
+ ┌───────┬───────┐   ← waterplane, station spacing h
+ │       │       │
+ └───────┴───────┘
+Area = h/3 · (y₀ + 4y₁ + y₂)
+y₀, y₂ = half-breadths at AP/FP stations; y₁ = half-breadth at midships
+  </div>
+  <div class="notes-body" style="font-size:13px;color:#64748b;margin-top:-8px;">Simplified station diagram — for the fully worked Bonjean-curve derivation and hull-form sketches, see Eyres &amp; Derrett, <em>Ship Construction</em> and Kemp &amp; Young, <em>Ship Construction Sketches and Notes</em> (reference texts, not reproduced here).</div>
+
+  <div class="section-head">🧮 Hydrostatic Centres & Form Coefficients</div>
+  <ul class="notes-list">
+    <li><strong>LCB</strong> (Longitudinal Centre of Buoyancy) — centroid of the immersed volume; aligns vertically with LCG at equilibrium trim.</li>
+    <li><strong>VCB</strong> (Vertical Centre of Buoyancy) — vertical distance from keel to the centroid of immersed volume.</li>
+    <li><strong>LCF</strong> (Longitudinal Centre of Floatation) — centroid of the waterplane area; the fulcrum about which the vessel trims when weight is added/removed.</li>
+    <li><strong>Block Coefficient (Cb)</strong> = ∇ / (L × B × T) — hull fullness relative to a bounding box.</li>
+    <li><strong>Prismatic Coefficient (Cp)</strong> = ∇ / (L × Am) — fullness relative to the midships-section prism.</li>
+    <li><strong>Admiralty Coefficient</strong>: P = Δ^(2/3) × V³ / Ac — empirical power-speed estimator; a falling Ac on a steady route indicates hull fouling or propulsion inefficiency.</li>
+  </ul>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Rajappan):</strong> Rajappan often pairs the Simpson's Rule question with a density-correction follow-up: "if you compute ∇ from the design tables but the vessel is in brackish water at 1.012 t/m³, what do you do?" — multiply ∇ by the actual measured density (Δ = ∇ × ρ_measured), not the standard 1.025 t/m³, or the resulting displacement/cargo figure will be overstated.</div>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. Explain how Simpson's Rules derive a vessel's total displacement volume.</div><div class="qa-a">Half-breadth offsets at each transverse section are integrated using Simpson's First or Second Rule to give individual cross-sectional areas. These areas are then plotted against ship length, and the area under that curve — again integrated by Simpson's Rules — gives the total underwater volume ∇, which is multiplied by the measured water density to yield the displacement mass Δ.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Define LCF and its operational significance.</div><div class="qa-a">LCF is the centroid of the ship's floating waterplane area at a given draft — it is the longitudinal fulcrum about which the vessel trims. A weight added exactly at the LCF increases draft uniformly fore and aft without changing trim; any other position shifts trim.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. How does an Administration handle inclining-test requirements for sister-ships?</div><div class="qa-a">Under SOLAS Chapter II-1, Regulation 5, the Administration may waive an individual sister-ship's physical inclining test provided a deadweight survey confirms its lightship displacement deviates by less than roughly 1% and its LCG deviates by less than roughly 0.5% of the subdivided length from the approved lead-ship baseline — exact thresholds should be confirmed against the applicable Class/Administration procedure.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Define the difference between Block Coefficient and Prismatic Coefficient, stating what each indicates about hull form.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>A 120 m waterplane has half-breadths (equal intervals, aft to forward) of 0.2, 3.5, 6.2, 7.5, 7.8, 6.0, 0.5 m. Calculate the total waterplane area using Simpson's First Rule and state the spacing interval h used.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>A vessel's design tables give ∇ = 24,500 m³ at the survey draft. (a) Calculate Δ at a measured dockwater density of 1.015 t/m³. (b) If shaft power is 8,200 kW at 14.5 knots, derive the current Admiralty Coefficient. (c) Explain the commercial/technical consequence of mistakenly using 1.025 t/m³ instead of the measured density.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>1-4-2-4...-1</strong> — Simpson's First Rule multiplier pattern; <strong>1-3-3-2-3-3...-1</strong> — Second Rule.</li>
+      <li><strong>Cb = ∇/(LBT); Cp = ∇/(L·Am)</strong> — the two core form coefficients.</li>
+      <li><strong>Δ = ∇ × ρ_measured</strong> — always use actual dockwater density, never assume standard seawater.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — River Terminal Draft Survey Case Study</button>
+    <div class="deep-dive-body">
+      <h4>Scenario</h4>
+      <p>Before loading at a river terminal, dockwater density measures 1.012 t/m³ (brackish), against a standard 1.025 t/m³ seawater baseline.</p>
+      <h4>Sequence</h4>
+      <p>Read and correct fore/aft/midships drafts for trim and hog/sag → extract ∇ from the approved hydrostatic tables at the corrected mean draft → apply the measured density (Δ = ∇ × 1.012) rather than the standard value → log the corrected starting displacement and subtract known consumables/ballast to confirm lightship weight before cargo operations begin.</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>Container terminals rarely involve brackish water to this degree, but the same density-correction discipline applies at any port with significant freshwater river outflow — always sample at half the draft depth, not the surface, to avoid a freshwater-skewed reading.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>SOLAS Chapter II-1, Regulation 5 — Inclining Test</li>
+    <li>International Load Line Convention, 1966</li>
+    <li>ITTC Recommended Procedures and Guidelines</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p16 · Topic 5 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p16 · P16-T5 · v1.0</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 6 — INTACT & DAMAGED SHIP STABILITY -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p16-6" data-kw="GZ curve, metacentric height, angle of loll, inclining experiment, 2008 IS Code, Second Generation Intact Stability, margin line, floodable length">
+  <div class="topic-header">
+    <div class="topic-badge">Part 16 · Topic 6</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Intact and Damaged Ship Stability: GZ Curve Mechanics, the 2008 IS Code & Second Generation Criteria</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">GZ Curve · 2008 IS Code · Damaged Stability</span>
+        <span class="topic-pages">Uday pp. 397–400 (approx.)</span>
+        <span class="topic-examiner">Examiner: Rajappan</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> The 2008 Intact Stability (IS) Code criteria in the source draft — minimum fluid GM ≥0.15 m, minimum GZ ≥0.20 m at 30° heel, GZmax occurring beyond 25° (target &gt;30°), and the area-under-curve minima (≥0.055 m-rad to 30°, ≥0.090 m-rad to 40°/downflooding angle, ≥0.030 m-rad between 30°–40°) — match the standard IS Code 2008 (Res. MSC.267(85)) Part A weather-criterion figures used across MEO Class 1 and Class 2 syllabi and are correctly stated. The margin-line clearance of <strong>76 mm below the bulkhead deck</strong> is the long-standing SOLAS Chapter II-1 damaged-stability convention and is correct. The Second Generation Intact Stability framework's five failure modes (parametric roll, pure loss of stability, dead-ship condition, surf-riding/broaching, excessive accelerations) and three-level vulnerability assessment structure match the IMO SDC Sub-Committee's published criteria. No numeric corrections were required in this topic's source draft; these are well-established, frequently-examined figures and candidates should treat them as fixed reference values.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">This topic covers the mechanics of transverse statical stability — the GZ (righting lever) curve, the physical Inclining Experiment used to determine KG, the Angle of Loll instability condition, and the regulatory minima set by the 2008 IS Code and the Second Generation Intact Stability criteria, alongside the basics of damaged-stability subdivision under SOLAS Chapter II-1.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>Correctly diagnosing an Angle of Loll versus a simple asymmetric list is a life-safety decision — the wrong ballasting response (filling the high side first) can capsize the vessel.</li>
+    <li>Understanding the GZ curve's shape lets the engineer sanity-check the loading computer's stability summary at a glance rather than only reading a pass/fail flag.</li>
+    <li>Rajappan treats this as the single highest-frequency stability topic at MEO Class 1 — expect both oral GZ-curve sketching and written IS Code numeric recall.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">Pre-20th c.</span>  Empirical stability assessment following early capsizing disasters
+<span class="t-year">1960s–90s</span>  First-generation static intact-stability criteria formalised
+<span class="t-year">2008</span>  2008 IS Code adopted (Res. MSC.267(85)) — mandatory intact stability criteria
+<span class="t-year">2020s</span>  Second Generation Intact Stability criteria progressively implemented for dynamic failure modes</div>
+
+  <div class="section-head">📐 GZ Curve Sketch (2008 IS Code Weather-Criterion Shape)</div>
+  <div class="timeline-block" style="line-height:1.5;">
+GZ (m)
+ │        ___GZmax (beyond 25°, target &gt;30°)
+ │      ,'    `.
+ │    ,'        `.
+ │  ,'             `.
+ │,'                  `.___
+ 0°───30°────40°────────────► Heel angle
+ │  GZ≥0.20m         Area 30°–40° ≥0.030 m·rad
+ │  at 30°           Area to 40°/downflood ≥0.090 m·rad
+Area to 30° ≥0.055 m·rad · Initial GM (fluid) ≥0.15 m
+  </div>
+  <div class="notes-body" style="font-size:13px;color:#64748b;margin-top:-8px;">Schematic only, not to scale — for fully worked GZ-curve derivations from hydrostatic/cross-curve data, see the stability references in the platform's Ship Construction/Stability texts.</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">2008 IS Code (Res. MSC.267(85))</span><span class="reg-desc">Minimum GM ≥0.15 m; GZ ≥0.20 m at 30°; GZmax beyond 25° (target &gt;30°); area ≥0.055 m-rad to 30°, ≥0.090 m-rad to 40°/downflooding, ≥0.030 m-rad between 30°–40°.</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch II-1, Part B</span><span class="reg-desc">Damaged stability, subdivision, margin line (76 mm below bulkhead deck), floodable length criteria.</span></div>
+    <div class="reg-item"><span class="reg-code">2nd Generation IS Criteria</span><span class="reg-desc">Five dynamic failure modes (parametric roll, pure loss of stability, dead-ship, surf-riding/broaching, excessive accelerations), each assessed across three vulnerability levels.</span></div>
+  </div>
+
+  <div class="section-head">📐 GZ Curve & the Inclining Experiment</div>
+  <ul class="notes-list">
+    <li><strong>Righting lever:</strong> GZ = GM · sinθ (small-angle approximation, θ ≤10°).</li>
+    <li><strong>Dynamical stability:</strong> Δ × ∫₀^θ GZ dθ — the work done heeling to angle θ, measured in metre-radians.</li>
+    <li><strong>Inclining Experiment:</strong> GM = (m × d) / (Δ · tanθ), from which KG = KM − GM using the hydrostatic KM value.</li>
+    <li><strong>Stiff vessel</strong> (large GM): strong righting lever, quick jerky rolling, high structural acceleration — typical of tankers in ballast.</li>
+    <li><strong>Tender vessel</strong> (small GM): slow gentle rolling, but higher risk of large heel under beam wind/sea — typical of Ro-Ro configurations.</li>
+  </ul>
+
+  <div class="section-head">⚠ Angle of Loll</div>
+  <p class="notes-body">Occurs when GM ≤0 (unstable upright equilibrium), typically from a high centre of gravity due to deck-cargo moisture absorption or free-surface effect. The vessel settles at a fixed heel to either side where GZ momentarily returns to zero. <strong>Critical response:</strong> never pump ballast to the high side first — this raises G further and risks capsize. Instead, fill a small low-side double-bottom tank first to lower G, then its opposite counterpart, restoring positive GM.</p>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Rajappan):</strong> Rajappan's standard trap question: "the ship rolled through upright and settled on the other side — is this a list or a loll?" A true list (asymmetric loading, GM&gt;0) will not roll past upright to a mirrored heel on the opposite side; an Angle of Loll will, because the unstable equilibrium point sits exactly at upright. Get this distinction right before discussing corrective ballasting.</div>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. Differentiate an Angle of Loll from a standard list, and the risk of misdiagnosis.</div><div class="qa-a">A list is caused by asymmetric weight distribution with GM still positive; a loll occurs when GM≤0, making the ship unstable when upright. Misdiagnosing a loll as a list and pumping ballast to the high side raises G further, increasing free surface effect and risking capsize — the correct response is to lower G by filling a low-side tank first.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Describe the Inclining Experiment and how KG is derived.</div><div class="qa-a">A known mass m is shifted a measured transverse distance d, producing heel angle θ. GM = (m×d)/(Δ·tanθ). The vertical centre of gravity is then found from KG = KM − GM, using KM taken from the hydrostatic tables at the test displacement.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Define Floodable Length and its relation to the Margin Line.</div><div class="qa-a">The Margin Line is an imaginary line 76 mm below the bulkhead deck at the ship's side. Floodable Length is the maximum length of a compartment, centred at any point along the ship, that can flood completely without submerging the Margin Line — this governs transverse bulkhead spacing under SOLAS Chapter II-1.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Explain the structural difference between a stiff and a tender ship and how GM affects rolling behaviour in heavy seas.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Sketch a standard GZ curve for a vessel with positive initial GM, labelling the initial slope, angle of contraflexure, GZmax, angle of vanishing stability, and the dynamical-stability area.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>A container vessel loses all propulsion in beam seas (dead-ship condition). (a) Analyse the dynamic risks per the Second Generation Intact Stability criteria. (b) Explain what the Chief Engineer must manage if the waterline approaches the margin line. (c) State the 2008 IS Code minimum area requirements beneath the GZ curve.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>GM ≥0.15 m; GZ ≥0.20 m @30°; GZmax &gt;25°</strong> — the three core 2008 IS Code numbers.</li>
+      <li><strong>76 mm</strong> — margin line clearance below the bulkhead deck.</li>
+      <li><strong>Loll rolls through upright; list does not.</strong> Never ballast the high side first in a loll.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Angle of Loll Recovery Case Study</button>
+    <div class="deep-dive-body">
+      <h4>Scenario</h4>
+      <p>A multi-purpose cargo ship's timber deck cargo absorbs moisture in heavy weather; the vessel settles into a list, and rudder correction causes it to roll slowly through upright and settle on the opposite side — confirming an Angle of Loll rather than a simple list.</p>
+      <h4>Recovery Sequence</h4>
+      <p>Stop all cross-deck fuel/ballast transfers immediately → bring the bow into small waves to reduce dynamic rolling → fill a small low-lying double-bottom tank on the low side first (accepting a temporary increase in list to avoid a large free-surface moment) → once pressed full, fill the opposite tank → as G shifts below M, positive GM is restored and the vessel returns upright.</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>Reefer/lashing-heavy loading on deck containers raises KG in a comparable way to absorbed timber moisture — always cross-check the loading computer's fluid GM after any late change to deck stow, and never assume a small positive GM margin is safe without checking free-surface corrections on partially filled tanks.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>IMO Resolution MSC.267(85) — 2008 Intact Stability (IS) Code</li>
+    <li>SOLAS Chapter II-1, Part B — Subdivision & Damage Stability</li>
+    <li>IMO Second Generation Intact Stability Criteria (SDC Sub-Committee)</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p16 · Topic 6 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p16 · P16-T6 · v1.0</div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+  Part 16 of 31 · Pages 376–400 of 768 · Engineering Management Notes — Marine Intelligence Weekly<br>
+  Originally compiled by Uday Sankar S., Anglo-Eastern. Transcribed, expanded and verified by Nixon Antony, 2/E, Maersk A/S.<br>
+  This is subscriber-only content for MEO Class 1 exam preparation (Kochi MMD). Unauthorized redistribution is prohibited.<br>
+  Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p16 · Correction Required">Contact us</a> ·
+  <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Back to Notes Index</a>
+</div>
+
+<script>
+function toggleDD(btn){
+  var body = btn.nextElementSibling;
+  body.classList.toggle('open');
+  btn.textContent = body.classList.contains('open') ? btn.textContent.replace('▶','▼') : btn.textContent.replace('▼','▶');
+}
+document.addEventListener('DOMContentLoaded', function(){
+  var links = document.querySelectorAll('.toc-link[href^="#"]');
+  var sections = Array.from(links).map(function(l){ return document.querySelector(l.getAttribute('href')); }).filter(Boolean);
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var id = '#' + entry.target.id;
+      var link = document.querySelector('.toc-link[href="' + id + '"]');
+      if(link){ link.classList.toggle('active', entry.isIntersecting); }
+    });
+  }, {rootMargin:'-80px 0px -70% 0px'});
+  sections.forEach(function(s){ observer.observe(s); });
+});
+document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+document.addEventListener('copy', function(e){ e.preventDefault(); });
+document.addEventListener('selectstart', function(e){ e.preventDefault(); });
+</script>
+
+</body>
+</html>

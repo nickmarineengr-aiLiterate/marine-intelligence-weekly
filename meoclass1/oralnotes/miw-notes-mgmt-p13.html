@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>MIW Engineering Management Notes — Part 13 | MEO Class 1 | III Code Deep-Dive, ISM Code & Polar Code</title>
+<meta name="description" content="MEO Class 1 Engineering Management Notes Part 13 — Deep-dive expansion of the III Code/IMSAS engineering control loop, the ISM Code (SMS, DOC/SMC, NC/MNC), and the Polar Code (Category A/B/C, PWOM, winterization). Originally compiled by Uday Sankar S., Anglo-Eastern.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/miw-notes-mgmt-p13.html">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:15px;line-height:1.6;user-select:none;-webkit-user-select:none;}
+.miw-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.05;overflow:hidden;}
+.topbar{background:var(--navy);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logo{width:30px;height:30px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;letter-spacing:-0.5px;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;letter-spacing:0.3px;}
+.topbar-nav{display:flex;gap:20px;}
+.topbar-nav a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.15s;}
+.topbar-nav a:hover{color:#fff;}
+.page-header{background:var(--navy);padding:32px 24px 28px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.notes-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid var(--teal);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.notes-badge-icon{background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;letter-spacing:1px;}
+.notes-badge-text{color:var(--teal-light);font-size:12px;font-weight:600;}
+.page-title{color:#fff;font-size:26px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+.page-sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.header-meta-item{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:12px;color:#cbd5e1;}
+.header-meta-item strong{color:#fff;}
+.attribution-strip{margin-top:14px;padding:10px 14px;background:rgba(201,168,76,0.12);border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;font-size:12px;color:#cbd5e1;}
+.attribution-strip strong{color:#e2c97e;}
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:24px 16px;}
+.sidebar{position:sticky;top:68px;height:calc(100vh - 80px);overflow-y:auto;padding-right:6px;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--grey-border);border-radius:2px;}
+.toc-head{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;font-size:12px;color:var(--grey-text);text-decoration:none;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;transition:all 0.15s;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:700;}
+.toc-divider{height:1px;background:var(--grey-border);margin:14px 0;}
+.qb-sidebar-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:12px;}
+.qb-sidebar-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin-bottom:8px;}
+.qb-sidebar-link{display:block;font-size:12px;color:var(--teal-dark);text-decoration:none;font-weight:600;padding:3px 0;}
+.qb-sidebar-link:hover{text-decoration:underline;}
+#notes-feed{min-width:0;}
+.topic-block{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:24px;margin-bottom:32px;scroll-margin-top:72px;}
+.topic-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--teal-light);}
+.topic-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+.topic-title{margin:0 0 8px;font-size:20px;font-weight:800;color:var(--navy);}
+.topic-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;}
+.topic-tag{background:var(--teal-light);color:var(--teal-dark);padding:3px 8px;border-radius:20px;font-weight:600;}
+.topic-pages{color:var(--grey-text);padding:3px 0;}
+.topic-examiner{background:var(--orange-light);color:#92400e;padding:3px 8px;border-radius:20px;font-weight:600;}
+.freq-high{background:#fef9c3;color:#713f12;padding:3px 8px;border-radius:20px;font-weight:700;}
+.freq-medium{background:#f0fdf4;color:#14532d;padding:3px 8px;border-radius:20px;font-weight:600;}
+.section-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--grey-border);}
+.notes-body{font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:8px;}
+.notes-list{font-family:'Georgia',serif;font-size:14px;line-height:1.8;padding-left:22px;margin-bottom:8px;}
+.notes-list li{margin-bottom:4px;}
+.timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
+.timeline-block .t-year{color:#fff;font-weight:700;}
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
+.reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
+.reg-code{color:var(--orange);font-weight:700;white-space:nowrap;flex-shrink:0;font-family:monospace;font-size:12px;}
+.reg-desc{color:#cbd5e1;line-height:1.5;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:13.5px;font-family:'Georgia',serif;line-height:1.7;}
+.ce-tip strong{color:#92400e;}
+.qa-block{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.qa-item{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.qa-q{background:var(--grey-bg);padding:10px 14px;font-weight:700;font-size:13px;color:var(--navy);}
+.qa-a{padding:10px 14px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;color:var(--ink);}
+.exam-focus-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:16px 0;}
+.exam-focus-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin:0 0 12px;}
+.exam-q{margin:8px 0;font-family:'Georgia',serif;font-size:13.5px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+.marks-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+.memory-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:16px 0;}
+.memory-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#713f12;margin:0 0 10px;}
+.memory-list{font-family:'Georgia',serif;font-size:13.5px;line-height:1.8;padding-left:18px;}
+.memory-list li{margin-bottom:4px;}
+.amend-table,.compare-table,.revision-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.amend-table th,.compare-table th,.revision-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+.amend-table td,.compare-table td,.revision-table td{padding:8px 12px;border-bottom:1px solid var(--grey-border);font-family:'Georgia',serif;line-height:1.6;vertical-align:top;}
+.amend-table tr:nth-child(even) td,.revision-table tr:nth-child(even) td{background:var(--grey-bg);}
+.psc-focus{background:#fef2f2;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);}
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;}
+.mental-map .root{color:#fff;font-weight:700;}
+.qb-link-box{background:var(--teal-light);border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;}
+.qb-link-box strong{color:var(--teal-dark);}
+.qb-link-box a{color:var(--teal-dark);font-weight:600;text-decoration:none;margin-right:12px;}
+.qb-link-box a:hover{text-decoration:underline;}
+.deep-dive{margin:14px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:16px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;display:none;}
+.deep-dive-body.open{display:block;}
+.deep-dive-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.deep-dive-body p,.deep-dive-body li{margin-bottom:6px;}
+.deep-dive-body ul{padding-left:20px;}
+.verify-note{background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:16px;font-size:13px;font-family:'Georgia',serif;line-height:1.7;color:#1e3a5f;}
+.verify-note strong{color:#1d4ed8;}
+.ref-list{font-size:13px;line-height:1.9;padding-left:18px;}
+.ref-list a{color:var(--teal-dark);}
+.topic-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:12px;border-top:1px dashed var(--grey-border);font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.topic-version{font-weight:700;}
+.page-footer{background:var(--grey-bg);border-top:1px solid var(--grey-border);padding:28px 24px;margin-top:40px;font-size:12px;color:var(--grey-text);text-align:center;}
+.page-footer a{color:var(--teal-dark);}
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+
+<div class="miw-watermark" aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wmpat" width="420" height="220" patternTransform="rotate(-30)" patternUnits="userSpaceOnUse">
+        <text x="0" y="60" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">marineintelligenceweekly.com</text>
+        <text x="0" y="90" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wmpat)"/>
+  </svg>
+</div>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-logo">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="notes-badge">
+      <span class="notes-badge-icon">NOTES</span>
+      <span class="notes-badge-text">Engineering Management · Part 13 of 31</span>
+    </div>
+    <h1 class="page-title">Engineering Management Notes — Part 13</h1>
+    <p class="page-sub">Deep-Dive: The III Code & IMSAS Engineering Control Loop · The ISM Code (SMS, DOC/SMC, NC/MNC) · The Polar Code (Category A/B/C, PWOM, Winterization)</p>
+    <div class="header-meta">
+      <span class="header-meta-item"><strong>Pages:</strong> 301–325 of 768</span>
+      <span class="header-meta-item"><strong>Topics:</strong> 3 (local P13-T1–P13-T3 — see note below)</span>
+      <span class="header-meta-item"><strong>Access:</strong> Subscriber Only</span>
+      <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>
+      <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>
+    </div>
+    <div class="attribution-strip">
+      Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and verified by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="toc-head">Topics — Part 13</div>
+  <a class="toc-link" href="#topic-p13-1">T1 · III Code Deep-Dive (IMSAS)</a>
+  <a class="toc-link" href="#topic-p13-2">T2 · ISM Code & SMS</a>
+  <a class="toc-link" href="#topic-p13-3">T3 · Polar Code</a>
+  <div class="toc-divider"></div>
+  <div class="toc-head">Navigate</div>
+  <a class="toc-link" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Notes Index</a>
+  <a class="toc-link" href="miw-notes-mgmt-p12.html">← Part 12</a>
+  <a class="toc-link" href="miw-notes-mgmt-p14.html">Part 14 →</a>
+  <div class="toc-divider"></div>
+  <div class="qb-sidebar-box">
+    <div class="qb-sidebar-title">🔗 Related QB Files</div>
+    <a class="qb-sidebar-link" href="../QB4.html">QB4 — ISM / ISPS / MLC / STCW</a>
+    <a class="qb-sidebar-link" href="../QB3.html">QB3 — MARPOL & PSC</a>
+  </div>
+</aside>
+
+<!-- NOTES FEED -->
+<main id="notes-feed">
+
+<!-- ============================================================ -->
+<!-- TOPIC 1 — III CODE & IMSAS ENGINEERING CONTROL LOOP (DEEP-DIVE) -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p13-1" data-kw="III Code, Resolution A.1070(28), IMSAS, nine scope areas, control loop, Flag State, Coastal State, Port State, casualty investigation, KPI">
+  <div class="topic-header">
+    <div class="topic-badge">Part 13 · Topic 1</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">The III Code & IMSAS — Deep-Dive: The Nine-Scope-Area Control Loop, Tri-State Jurisdiction & Casualty Reporting</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">III Code · IMSAS · Nine Scope Areas</span>
+        <span class="topic-pages">Uday pp. 301–310 (approx.)</span>
+        <span class="topic-examiner">Examiner: Nair / Paul</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> This topic is a <strong>deep-dive expansion</strong> of the III Code, already introduced compactly in <a href="miw-notes-mgmt-p12.html#topic-p12-5">Part 12 · Topic 5</a>. Part 12 covers the adoption date, the strategy/methodology/review loop and basic Q&A; this topic goes further into the nine IMSAS scope areas, the tripartite Flag/Coastal/Port jurisdictional split, and a full incident-response case study. All facts were independently re-verified against IMO primary sources: <strong>Resolution A.1070(28)</strong> was adopted on <strong>4 December 2013</strong>; IMSAS became mandatory on <strong>1 January 2016</strong> via amendments to SOLAS, MARPOL, STCW, the Load Line Convention, the Tonnage Convention and COLREG. The source draft's claim that <strong>OPRC 1990 is explicitly excluded</strong> from the III Code's scope of covered instruments is correct — OPRC is not among the nine core conventions audited under IMSAS. One correction: the source draft's mathematical "performance index" formula (P_f = f(C_l, P_m, M_r, I_c, R_o)) is <strong>not an IMO-published formula</strong> — it does not appear in Resolution A.1070(28) or any IMSAS guidance document. It is retained below only as an illustrative memory framework for the five qualitative KPI themes IMO auditors actually assess, explicitly labelled as such, not as a quoted regulatory formula.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">The <strong>IMO Instruments Implementation Code (III Code)</strong>, adopted under <strong>Resolution A.1070(28)</strong>, is the global audit standard IMO uses to verify how completely and effectively a member state discharges its treaty obligations as a <strong>Flag State</strong>, <strong>Coastal State</strong>, and <strong>Port State</strong>. It is not a code that ships or crews are audited against directly — it audits the <strong>administration itself</strong>, treating national maritime governance as an engineering control system that must be measured, verified, and corrected on a recurring cycle.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>Every certificate a Chief Engineer relies on — Safety Construction, Safety Equipment, IOPP, SMC — ultimately derives its credibility from the Flag State (or its RO) having passed its own IMSAS audit; a poorly audited flag means weaker downstream certificate integrity.</li>
+    <li>Nair frequently uses this topic as a "systems thinking" question — asking candidates to trace how a single onboard failure (e.g. an OWS bypass) can, if repeated across a fleet, eventually surface in a flag's own IMSAS audit findings.</li>
+    <li>Understanding the Flag/Coastal/Port tripartite split lets a CE correctly identify which authority to engage first during an incident — sending the wrong report to the wrong jurisdiction wastes critical response time.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">2006</span>  Voluntary IMO Member State Audit Scheme (VIMSAS) launched
+<span class="t-year">4 Dec 2013</span>  Resolution A.1070(28) adopts the III Code
+<span class="t-year">1 Jan 2016</span>  III Code becomes mandatory; VIMSAS transitions to IMSAS
+<span class="t-year">Ongoing</span>  Member states audited on a 7-year recurring cycle</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Primary Sources</div>
+    <div class="reg-item"><span class="reg-code">Res. A.1070(28)</span><span class="reg-desc">Adopts the III Code — the audit standard itself (4 Dec 2013).</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch. XIII</span><span class="reg-desc">"Verification of Compliance" — makes the III Code mandatory under SOLAS.</span></div>
+    <div class="reg-item"><span class="reg-code">MARPOL Annexes I–VI</span><span class="reg-desc">Amended to render III Code compliance mandatory across all Annexes.</span></div>
+    <div class="reg-item"><span class="reg-code">STCW Reg. I/16</span><span class="reg-desc">Brings STCW implementation and enforcement within III Code audit scope.</span></div>
+    <div class="reg-item"><span class="reg-code">ICLL 66/88 · Tonnage 1969 · COLREG 1972</span><span class="reg-desc">Also amended so structural, tonnage and navigation-safety enforcement fall within audit scope.</span></div>
+  </div>
+
+  <div class="section-head">⚙ Engineering Explanation — The Control Loop Model</div>
+  <p class="notes-body">The III Code can be visualised as a closed-loop control system, where IMO conventions are the "setpoint," domestic legislation is the controller, Flag State implementation (surveys, audits, ROs) is the actuator, and IMSAS audits form the continuous feedback path back to oversight and correction:</p>
+  <div class="mental-map"><span class="root">IMO Conventions/Standards</span>
+   → Domestic Legislation
+   → Flag State Implementation (Surveys, Audits, ROs)
+   → Enforcement & Operations
+   → Oversight & KPIs (Detentions, Casualties)
+   ↺ feeds back via the IMSAS audit into Domestic Legislation, closing the loop</div>
+
+  <div class="section-head">🔢 The Nine IMSAS Scope Areas</div>
+  <p class="notes-body">Per Resolution A.1070(28), Part 1, an IMSAS audit strictly evaluates nine core areas of a member state's administration:</p>
+  <table class="revision-table">
+    <tr><th>#</th><th>Scope Area</th></tr>
+    <tr><td>1</td><td>Jurisdiction</td></tr>
+    <tr><td>2</td><td>Organization and authority</td></tr>
+    <tr><td>3</td><td>Legislation, rules and regulations</td></tr>
+    <tr><td>4</td><td>Promulgation of applicable mandatory instruments</td></tr>
+    <tr><td>5</td><td>Enforcement arrangements</td></tr>
+    <tr><td>6</td><td>Control, survey, inspection, audit, verification, approval and certification functions</td></tr>
+    <tr><td>7</td><td>Selection, recognition, authorization, empowerment and monitoring of ROs and nominated surveyors</td></tr>
+    <tr><td>8</td><td>Investigations required to be reported to the Organization</td></tr>
+    <tr><td>9</td><td>Reporting to the Organization and other administrations</td></tr>
+  </table>
+
+  <div class="section-head">👷 Chief Engineer & Flag State Responsibilities</div>
+  <table class="compare-table">
+    <tr><th>Jurisdiction</th><th>Core Operational Responsibilities</th></tr>
+    <tr><td><strong>Flag State</strong></td><td>Transposes treaties into national law; conducts (or delegates via RO) surveys and certification; issues Minimum Safe Manning Certificates; investigates marine casualties and reports findings to the IMO.</td></tr>
+    <tr><td><strong>Coastal State</strong></td><td>Provides SAR infrastructure, hydrographic charting, VTS and ship-routing systems, and meteorological/radio warning services within its waters.</td></tr>
+    <tr><td><strong>Port State</strong></td><td>Conducts PSC inspections on foreign vessels; provides MARPOL waste reception facilities; maintains registers of local fuel suppliers.</td></tr>
+  </table>
+  <p class="notes-body">As the onboard technical representative under the Flag State's authority, the Chief Engineer maintains the plant in demonstrable compliance with the applicable national legislation, verifies engine room officers hold valid STCW-endorsed certificates recognised by the Flag Administration, and presents objective evidence transparently during any Flag State or RO inspection.</p>
+
+  <div class="section-head">🛠 Practical Application — Incident Case Study</div>
+  <p class="notes-body"><strong>Scenario:</strong> A bulk carrier suffers a sudden hydraulic lock in the steering gear while transiting a traffic separation scheme in a Coastal State's territorial waters, grounds, and breaches a double-bottom fuel tank.</p>
+  <ul class="notes-list">
+    <li><strong>1. Immediate stabilisation (CE):</strong> emergency steering procedures, isolate ruptured hydraulic lines, shift to standby power, start emergency bilge pumping.</li>
+    <li><strong>2. Coastal State notification:</strong> Master transmits a GMDSS distress/urgency message to the Coastal State's VTS/SAR centres per its mandatory reporting system.</li>
+    <li><strong>3. Flag State reporting:</strong> DPA and Master report the casualty to the Flag Administration, triggering its statutory obligation to investigate and report findings to the IMO.</li>
+    <li><strong>4. RO activation:</strong> CE requests emergency attendance by the Classification Society (acting as RO) to assess structural integrity and issue conditions of class for temporary repair.</li>
+    <li><strong>5. Port State intervention:</strong> once at a repair berth, PSC conducts an expanded inspection and verifies adequate reception facilities exist for the damaged tank's oily waste.</li>
+  </ul>
+
+  <div class="section-head">🚨 Survey & PSC Focus</div>
+  <div class="psc-focus">
+    <strong>High-Risk Detention Item:</strong> unauthorized or undocumented modification to safety-critical equipment (emergency fire pumps, OWS, steering gear controls) that has not been reported to the Flag State or RO is treated as an immediate cause for detention — it signals a systemic III Code compliance failure, not just an isolated technical fault.
+  </div>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Nair):</strong> If Nair asks "which convention is deliberately left out of the III Code's scope," the answer is <strong>OPRC 1990</strong> — say it cleanly and move on; over-explaining a simple recall fact reads as uncertainty.</div>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. List the nine scope areas audited under IMSAS.</div><div class="qa-a">Jurisdiction; organization and authority; legislation, rules and regulations; promulgation of mandatory instruments; enforcement arrangements; control/survey/certification functions; RO selection and monitoring; investigations reportable to IMO; and reporting to IMO and other administrations.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Distinguish the Flag, Coastal and Port State roles under the III Code with a practical example.</div><div class="qa-a">Flag State exercises sovereign authority over the ship (registry, legislation, casualty investigation); Coastal State manages safety within its territorial waters (SAR, VTS, charting); Port State enforces compliance through PSC when a foreign ship calls at its ports. In a grounding within territorial waters, the Coastal State handles SAR, the Flag State investigates the casualty, and the Port State inspects the vessel once it reaches a repair berth.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. Why does the III Code audit the administration rather than individual ships?</div><div class="qa-a">Because uneven national enforcement — not any single ship's non-compliance — was the systemic weakness the III Code was designed to fix. Auditing the administration verifies the legislative, survey, RO-oversight and reporting systems that ultimately determine whether every ship under that flag is properly regulated.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>List the nine scope areas evaluated in an IMSAS audit.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Explain the tripartite Flag/Coastal/Port State jurisdictional framework under the III Code, with one responsibility per state.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Using a steering-gear-failure grounding scenario, trace the sequence of Flag, Coastal, Port State and RO involvement from initial casualty through to repair-berth PSC inspection, explaining each authority's statutory basis for acting.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>"J.O.L.P.E.C.R.I.R"</strong> — the nine IMSAS scope areas in order: Jurisdiction, Organization, Legislation, Promulgation, Enforcement, Control/Certification, RO oversight, Investigations, Reporting.</li>
+      <li><strong>Flag = owns it. Coastal = protects its waters. Port = checks it at the door.</strong></li>
+      <li>The KPI "formula" in some study aids (P_f = f(C_l, P_m, M_r, I_c, R_o)) is a <strong>memory device only</strong> — it is not IMO-published text; the five themes it encodes (legislative transposition, promulgation speed, RO monitoring, casualty-investigation completion, reporting compliance) are real audit focus areas.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Distinguishing III Code Audit Findings from PSC Deficiency Codes</button>
+    <div class="deep-dive-body">
+      <h4>Two Different Audit Layers</h4>
+      <p>An IMSAS finding is a statement about the <em>administration's</em> systemic capability (e.g. "the flag's RO oversight program lacks a documented escalation procedure"). A PSC deficiency code is a statement about a <em>specific ship's</em> condition at the time of inspection (e.g. Code 30 grounds for detention on a specific fire door). A single ship detention does not automatically generate an IMSAS finding, but a pattern of similar detentions across a flag's fleet is exactly the kind of trend data IMO auditors examine when assessing scope area 6 (control/certification functions) and area 7 (RO oversight).</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>Flag performance is visible in practice through how quickly the Flag Administration or its RO responds to a condition-of-class request, how current their circular guidance is, and how smoothly Interim/renewal certificate processes run — all downstream signals of how that flag performed at its last IMSAS audit.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>IMO — Resolution A.1070(28), IMO Instruments Implementation Code (III Code)</li>
+    <li>IMO — IMO Member State Audit Scheme (IMSAS) overview, imo.org/en/ourwork/iiis</li>
+  </ul>
+
+  <div class="qb-link-box"><strong>🔗 Related:</strong> <a href="miw-notes-mgmt-p12.html#topic-p12-5">Part 12 · Topic 5 — III Code & MSAS (base topic)</a> <a href="../QB3.html">QB3 — MARPOL & PSC</a></div>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p13 · Topic 1 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p13 · P13-T1 · v1.0</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 2 — THE ISM CODE & SAFETY MANAGEMENT SYSTEM -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p13-2" data-kw="ISM Code, SOLAS Chapter IX, Herald of Free Enterprise, SMS, DOC, SMC, non-conformity, major non-conformity, DPA, ISO 9001, ISO 14001, ISO 45001">
+  <div class="topic-header">
+    <div class="topic-badge">Part 13 · Topic 2</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">The International Safety Management (ISM) Code — SMS Architecture, DOC/SMC Certification & Non-Conformity Management</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">ISM Code · SOLAS Ch. IX · SMS</span>
+        <span class="topic-pages">Uday pp. 311–318 (approx.)</span>
+        <span class="topic-examiner">Examiner: Senthil</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> The ISM Code is already introduced under <a href="miw-notes-mgmt-p5.html">Part 5 · "SOLAS Chapters VIII–XI-2 — ISM, HSC, ESP/CSR & ISPS"</a>; this topic is a deep-dive covering the full DOC/SMC certification architecture, NC/MNC/Observation taxonomy, and a fuel-contamination incident case study that Part 5 does not detail. Facts re-verified against IMO's own account: the <strong>Herald of Free Enterprise</strong> capsized on <strong>6 March 1987</strong> with the loss of <strong>193 lives</strong> — confirmed against IMO, UK gov.uk and independent casualty records. Resolution <strong>A.647(16)</strong> (1989) and <strong>A.741(18)</strong> (adopted 4 November 1993) are correctly cited; SOLAS Chapter IX entered into force on <strong>1 July 1998</strong> for Phase I ship types, extending to Phase II ship types on 1 July 2002 — both dates confirmed against IMO's official ISM Code history page. No numeric corrections were required to the certification validity periods (DOC/SMC 5 years; Interim DOC 12 months; Interim SMC 6 months), which match IMO's Guidelines on ISM Code implementation.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">The <strong>International Safety Management (ISM) Code</strong> — formally the International Management Code for the Safe Operation of Ships and for Pollution Prevention — sets the international standard for a documented, company-wide <strong>Safety Management System (SMS)</strong>. It shifts responsibility for safety and pollution prevention from being a purely shipboard, reactive matter to a shared, proactive obligation between shore management and the vessel.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>The ISM Code closed the historical loophole where shore management could disclaim responsibility for shipboard failures — every Major Non-Conformity traces back through a documented root-cause and corrective-action chain that shore management must own.</li>
+    <li>Senthil typically probes whether a candidate can distinguish an <strong>Observation</strong> from a <strong>Non-Conformity (NC)</strong> from a <strong>Major Non-Conformity (MNC)</strong> — getting this taxonomy wrong is a common oral failure point.</li>
+    <li>The Chief Engineer is the primary owner of Section 10 (Maintenance) within the SMS — safety-critical equipment failure histories, spare-parts management and PMS compliance all sit directly under CE accountability.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">6 Mar 1987</span>  Herald of Free Enterprise capsizes off Zeebrugge — 193 lives lost
+<span class="t-year">1989</span>  Resolution A.647(16) — preliminary management guidelines
+<span class="t-year">1993</span>  Resolution A.741(18) adopted 4 Nov — formalises the ISM Code
+<span class="t-year">1 Jul 1998</span>  Mandatory — Phase I (passenger, tanker, gas/chemical carrier, bulk carrier ≥500GT)
+<span class="t-year">1 Jul 2002</span>  Mandatory — Phase II (other cargo ships & MODUs ≥500GT)</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Primary Sources</div>
+    <div class="reg-item"><span class="reg-code">Res. A.741(18)</span><span class="reg-desc">Adopts the ISM Code (4 Nov 1993).</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch. IX</span><span class="reg-desc">"Management for the Safe Operation of Ships" — makes ISM mandatory.</span></div>
+    <div class="reg-item"><span class="reg-code">ISM Part A §1–12</span><span class="reg-desc">Implementation requirements — policy, DPA, resources, operations, emergency preparedness, NC reporting, maintenance, documentation, audit.</span></div>
+    <div class="reg-item"><span class="reg-code">ISM Part B</span><span class="reg-desc">Certification — DOC and SMC issuance, validity and audit requirements.</span></div>
+  </div>
+
+  <div class="section-head">⚙ Engineering Explanation — SMS Taxonomy & the ISMS Extension</div>
+  <p class="notes-body">An SMS is verified through <strong>objective evidence</strong>. Four terms define how deviations are classified:</p>
+  <ul class="notes-list">
+    <li><strong>Non-Conformity (NC):</strong> observed non-fulfilment of a specified requirement.</li>
+    <li><strong>Major Non-Conformity (MNC):</strong> a deviation posing a serious threat to personnel/ship safety or the environment, requiring immediate corrective action — or a systemic failure to effectively implement any part of the Code.</li>
+    <li><strong>Observation:</strong> a stated weakness that, left uncorrected, may become a future NC.</li>
+    <li><strong>Corrective Action (CA) / Preventive Action (PA):</strong> CA eliminates the root cause of an existing NC; PA proactively eliminates the cause of a potential future NC.</li>
+  </ul>
+  <p class="notes-body">Some companies extend the baseline ISM Code into an <strong>Integrated Safety Management System (ISMS)</strong>, layering ISO 9001 (quality), ISO 14001 (environment) and ISO 45001 (occupational health & safety) on top of the regulatory minimum for a more proactive, ISO 31000-based risk posture. This is a voluntary commercial practice, not an IMO mandate.</p>
+  <table class="compare-table">
+    <tr><th>Attribute</th><th>ISM Code (baseline)</th><th>ISMS (voluntary extension)</th></tr>
+    <tr><td>Legal status</td><td>Mandatory under SOLAS Ch. IX</td><td>Voluntary, commercially driven</td></tr>
+    <tr><td>Objective</td><td>Baseline safety/pollution compliance</td><td>Continuous operational-efficiency improvement</td></tr>
+    <tr><td>Risk method</td><td>Basic hazard ID, reactive tracking</td><td>Proactive ISO 31000 risk framing</td></tr>
+    <tr><td>Audit structure</td><td>Statutory DOC/SMC audits only</td><td>Unified ISM + ISO + environmental audits</td></tr>
+  </table>
+
+  <div class="section-head">👷 Chief Engineer & Company Responsibilities — ISM Part A Sections</div>
+  <p class="notes-body">Part A structures the SMS in 12 sections; the Chief Engineer's core operational accountability sits primarily in <strong>Section 7</strong> (documented critical shipboard operating procedures) and <strong>Section 10</strong> (maintenance of ship and equipment, including identification of safety-critical equipment liable to sudden failure). All non-conformities affecting engine room systems must be documented with objective evidence, root-caused, and escalated to the DPA (Section 4) before a corrective action plan closes them out.</p>
+
+  <div class="section-head">📜 Certification Framework (Part B)</div>
+  <table class="revision-table">
+    <tr><th>Certificate</th><th>Issued To</th><th>Validity</th><th>Audit Cycle</th></tr>
+    <tr><td><strong>Document of Compliance (DOC)</strong></td><td>The Company (shore-based)</td><td>5 years</td><td>Mandatory annual verification audit; Interim DOC valid max. 12 months</td></tr>
+    <tr><td><strong>Safety Management Certificate (SMC)</strong></td><td>The individual vessel (requires valid parental DOC)</td><td>5 years</td><td>Intermediate audit between 2nd–3rd anniversary; Interim SMC valid max. 6 months</td></tr>
+  </table>
+
+  <div class="section-head">🛠 Practical Application — Incident Case Study</div>
+  <p class="notes-body"><strong>Scenario:</strong> A container ship bunkers 3,500 MT of VLSFO; within 48 hours all three auxiliary generator fuel pumps suffer abrasive wear and seize, causing a total blackout in a congested shipping lane.</p>
+  <ul class="notes-list">
+    <li><strong>1. Emergency response:</strong> Section 8 blackout recovery procedure — start emergency diesel generator, shift to a clean, isolated, tested fuel tank.</li>
+    <li><strong>2. MNC documentation:</strong> CE raises an immediate Major Non-Conformity under Section 9; representative fuel samples from manifold, settling tank and generator rails are drawn, sealed and logged as objective evidence.</li>
+    <li><strong>3. DPA intervention:</strong> Master notifies the DPA, who alerts Flag State and Class.</li>
+    <li><strong>4. Root-cause investigation:</strong> ISO 8217 analytical parameters used to test for contamination (e.g. elevated total sediment).</li>
+    <li><strong>5. CA/PA implementation:</strong> Section 10 maintenance procedures updated — purifier efficiency tracking increased, pre-consumption fuel testing protocol revised.</li>
+  </ul>
+
+  <div class="section-head">🚨 Survey & PSC Focus</div>
+  <div class="psc-focus">
+    <strong>High-Risk Item:</strong> an SMC becomes invalid the moment its parental DOC lapses or is suspended — PSC checks this DOC-SMC linkage directly, and an expired/suspended DOC is grounds to treat the SMC as invalid regardless of its printed expiry date.
+  </div>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Senthil):</strong> Senthil often tests the NC/MNC distinction with a scenario, not a definition question — practise stating which category a described failure falls into and why, rather than reciting the definitions cold.</div>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. What incident triggered the ISM Code, and what was its central finding?</div><div class="qa-a">The capsizing of the Herald of Free Enterprise on 6 March 1987, with the loss of 193 lives. The Sheen inquiry found a "disease of sloppiness" running from the ship's deckplates to the company's board of directors, establishing that management-level failures — not just crew error — caused the disaster.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Distinguish a Non-Conformity from a Major Non-Conformity.</div><div class="qa-a">An NC is any observed non-fulfilment of a specified SMS requirement. It becomes an MNC when it poses a serious threat to personnel/ship safety or the environment and demands immediate corrective action, or when it reflects a systemic failure to implement a Code requirement at all — not just an isolated lapse.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. What happens to a vessel's SMC if the company's DOC is suspended?</div><div class="qa-a">The SMC becomes invalid, since it can only be issued and maintained against a valid parental DOC. The vessel cannot legally trade under SOLAS Chapter IX until the DOC is restored or a new one is issued.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Define Non-Conformity, Major Non-Conformity, and Observation under the ISM Code.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Explain the DOC and SMC certification framework, including validity periods and the Interim certificate provisions.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Using a fuel-contamination blackout scenario, describe the full ISM-compliant management response from initial emergency action through Major Non-Conformity documentation, DPA escalation, root-cause investigation and preventive action.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>"Herald → Sheen → 647 → 741 → Ch. IX (1998)"</strong> — the ISM causal chain from disaster to mandatory code.</li>
+      <li><strong>DOC = Company, SMC = Ship</strong> — but the SMC is only as valid as its parental DOC.</li>
+      <li><strong>Observation → NC → MNC</strong> is a severity ladder, not three unrelated categories.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Audit Typologies Under ISM</button>
+    <div class="deep-dive-body">
+      <h4>Company (DOC) Audits</h4>
+      <p>Interim (max 12 months, new companies/ship types) → Initial → Annual Verification (mandatory, ±3 months of anniversary) → Renewal (before 5-year expiry).</p>
+      <h4>Ship (SMC) Audits</h4>
+      <p>Interim (max 6 months, new deliveries/flag changes/company takeover) → Initial → Intermediate (mandatory, between 2nd and 3rd anniversary) → Renewal (before 5-year expiry). Additional and Surveillance audits may be triggered outside this schedule following an MNC or a reported serious incident.</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>The practical CE takeaway is that Intermediate SMC audits fall in a fixed window (Yr 2–3) — missing that window is itself a compliance failure independent of the ship's actual technical condition, so tracking audit due-dates belongs on the same PMS-style calendar as machinery surveys.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>IMO — Resolution A.741(18), International Safety Management (ISM) Code</li>
+    <li>IMO — Safety Management and Safety Culture overview, imo.org/en/OurWork/HumanElement</li>
+  </ul>
+
+  <div class="qb-link-box"><strong>🔗 Related:</strong> <a href="miw-notes-mgmt-p5.html">Part 5 — SOLAS Ch. VIII–XI-2 (ISM base topic)</a> <a href="../QB4.html">QB4 — ISM / ISPS / MLC / STCW</a></div>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p13 · Topic 2 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p13 · P13-T2 · v1.0</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 3 — THE POLAR CODE -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p13-3" data-kw="Polar Code, MSC.385(94), MEPC.264(68), SOLAS Chapter XIV, Category A B C, PWOM, Polar Ship Certificate, frazil ice, sea chest, winterization">
+  <div class="topic-header">
+    <div class="topic-badge">Part 13 · Topic 3</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">The Polar Code — Ship Categories, PWOM, Winterization Engineering & Zero-Discharge Zones</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">Polar Code · SOLAS Ch. XIV</span>
+        <span class="topic-pages">Uday pp. 319–325 (approx.)</span>
+        <span class="topic-examiner">Examiner: Simon</span>
+        <span class="freq-medium">Medium Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> The Polar Code is already listed under <a href="miw-notes-mgmt-p5.html">Part 5 · "SOLAS Chapters XII–XV — Bulk Carriers, IMSAS, Polar Code & IP Code"</a> as a brief mention; this topic is a full deep-dive covering ship categorisation, PWOM/Polar Ship Certificate mechanics, sea-inlet de-icing engineering, and MARPOL discharge zone restrictions. Facts re-verified against IMO and flag-administration primary sources: the Polar Code was adopted by <strong>Resolution MSC.385(94)</strong> (safety, adopted 21 November 2014) and <strong>Resolution MEPC.264(68)</strong> (environment, adopted 15 May 2015), entering into force on <strong>1 January 2017</strong> via new <strong>SOLAS Chapter XIV</strong> (inserted by MSC.386(94)) and amendments to MARPOL Annexes I, II, IV and V (via MEPC.265(68)). All four resolution numbers and the 2017 in-force date are confirmed and correct as drafted — no numeric corrections were required in this topic.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">The <strong>International Code for Ships Operating in Polar Waters (Polar Code)</strong> is a mandatory regime addressing the specific hazards of Arctic and Antarctic navigation — extreme cold, extended darkness, ice accumulation, compass unreliability at high latitude, and remote SAR coverage — through additional structural, machinery, equipment and operational requirements beyond conventional SOLAS/MARPOL baselines.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>As Arctic sea routes (Northern Sea Route, Northwest Passage) open with reduced ice cover, more conventional trading patterns may intersect polar or near-polar waters, making winterization engineering a growing rather than niche competency.</li>
+    <li>Simon uses this topic to test whether a candidate understands the difference between a ship being ice-classed for structural strength and being winterized for low-temperature machinery operation — the two are related but distinct engineering problems.</li>
+    <li>The zero-discharge rules in polar zones are among the strictest in MARPOL — a CE who defaults to standard 15-ppm OWS discharge logic in a polar area is committing a serious environmental violation.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">Pre-2014</span>  Fragmented national rules (Canada's ASPPR, Russia's NSR navigation rules)
+<span class="t-year">21 Nov 2014</span>  MSC.385(94) adopts Polar Code safety provisions (Parts I-A/I-B) + SOLAS Ch. XIV (MSC.386(94))
+<span class="t-year">15 May 2015</span>  MEPC.264(68) adopts Polar Code environmental provisions (Parts II-A/II-B) + MARPOL amendments (MEPC.265(68))
+<span class="t-year">1 Jan 2017</span>  Polar Code enters into force</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Primary Sources</div>
+    <div class="reg-item"><span class="reg-code">MSC.385(94)</span><span class="reg-desc">Adopts Polar Code Introduction (safety) + Parts I-A (mandatory) and I-B (recommendatory).</span></div>
+    <div class="reg-item"><span class="reg-code">MSC.386(94)</span><span class="reg-desc">Inserts SOLAS Chapter XIV, making the safety provisions mandatory.</span></div>
+    <div class="reg-item"><span class="reg-code">MEPC.264(68)</span><span class="reg-desc">Adopts Polar Code Introduction (environment) + Parts II-A (mandatory) and II-B (recommendatory).</span></div>
+    <div class="reg-item"><span class="reg-code">MEPC.265(68)</span><span class="reg-desc">Amends MARPOL Annexes I, II, IV, V, making the environmental provisions mandatory.</span></div>
+  </div>
+
+  <div class="section-head">⚙ Engineering Explanation — Ship Categories & Winterization Systems</div>
+  <table class="revision-table">
+    <tr><th>Category</th><th>Ice Capability</th></tr>
+    <tr><td><strong>A</strong></td><td>Designed for at least medium first-year ice, which may include old ice inclusions</td></tr>
+    <tr><td><strong>B</strong></td><td>Designed for at least thin first-year ice (not meeting Category A)</td></tr>
+    <tr><td><strong>C</strong></td><td>Open water, or ice conditions less severe than Categories A and B</td></tr>
+  </table>
+  <p class="notes-body">Three core engineering systems combat polar hazards:</p>
+  <ul class="notes-list">
+    <li><strong>Hull structural integrity:</strong> low-temperature notch-tough steel alloys prevent brittle fracture below the ship's Polar Service Temperature (PST).</li>
+    <li><strong>Sea inlet de-icing:</strong> internal recirculation loops route warm engine cooling discharge back into the sea chest to melt frazil ice before it blocks strainers.</li>
+    <li><strong>Winterized emergency systems:</strong> emergency generators, lifeboats and LSA enclosed/heated; trace heating fitted on emergency fire lines to prevent freeze-bursts.</li>
+  </ul>
+  <div class="mental-map"><span class="root">Main Engine Warm Discharge</span> → Recirculation Control Valve → Low Sea Chest Intake (melts frazil ice) → SW Cooling Pumps → Machinery Heat Exchangers</div>
+
+  <div class="section-head">👷 Flag State & Chief Engineer Responsibilities</div>
+  <p class="notes-body">The Flag State (or its RO) reviews and approves the vessel's <strong>Polar Water Operational Manual (PWOM)</strong> — the ship-specific document setting out operational limits, risk profiles and emergency procedures — and issues the <strong>Polar Ship Certificate</strong> confirming Part I-A structural, machinery and operational compliance. The Chief Engineer verifies heat-tracing and de-icing equipment functionality, ensures fuel/lubricant cloud and pour points suit the PST to prevent waxing, and maintains logs demonstrating strict adherence to the Part II-A discharge restrictions.</p>
+
+  <div class="section-head">🛠 Practical Application — MARPOL Discharge Restrictions</div>
+  <table class="compare-table">
+    <tr><th>Waste Stream</th><th>Arctic</th><th>Antarctic</th></tr>
+    <tr><td>Oily bilge/sludge (Annex I)</td><td>Absolute zero discharge</td><td>Absolute zero discharge</td></tr>
+    <tr><td>Sewage/blackwater (Annex IV)</td><td>Prohibited unless &gt;12 NM from ice shelf/fast ice via approved plant</td><td>Absolute zero discharge in treaty area</td></tr>
+    <tr><td>Garbage/food waste (Annex V)</td><td>Comminuted food waste only, &gt;12 NM from ice, en route; no plastic/ash</td><td>Absolute zero discharge — all waste retained</td></tr>
+  </table>
+
+  <div class="section-head">🛠 Incident Case Study — Frazil Ice Blockage</div>
+  <p class="notes-body"><strong>Scenario:</strong> A Category B vessel at 71°N, air temp −25°C, sea temp −1.8°C, gets a main engine jacket-cooling high-temperature alarm with falling SW cooling pump discharge pressure.</p>
+  <ul class="notes-list">
+    <li><strong>1. Diagnosis (CE):</strong> frazil ice blockage of the active low sea chest strainer.</li>
+    <li><strong>2. PWOM de-icing protocol:</strong> open the recirculation valve, routing warm condenser/cooler discharge back into the sea chest.</li>
+    <li><strong>3. Shift suction:</strong> watch engineer shifts to the high sea chest or alternate de-iced chest while clearing the blocked strainer.</li>
+    <li><strong>4. Monitor:</strong> track jacket water temperature and pump pressure, keeping sea chest temperature above 5°C via recirculation volume.</li>
+    <li><strong>5. Log:</strong> CE logs the incident, structural performance and any operational modification for future transits.</li>
+  </ul>
+
+  <div class="section-head">🚨 Survey & PSC Focus</div>
+  <div class="psc-focus">
+    <strong>High-Risk Detention Item:</strong> operating in polar waters without an approved PWOM aboard, or any outboard discharge of oily waste/garbage within a restricted polar zone, is treated as critical non-compliance warranting immediate detention and severe environmental penalty.
+  </div>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Simon):</strong> Simon typically pairs the Category A/B/C question with "what document governs this ship's actual operational limits" — always answer with the <strong>PWOM</strong>, not the Polar Ship Certificate; the certificate confirms compliance, the PWOM is the operational reference document the crew actually works from.</div>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. Differentiate Polar Code Category A, B and C vessels, and name the document governing operational limits.</div><div class="qa-a">Category A ships are structurally capable of at least medium first-year ice, possibly including old ice inclusions; Category B ships handle at least thin first-year ice; Category C ships are for open water or ice conditions milder than A/B. The vessel's operational limits and procedures are documented in the mandatory Polar Water Operational Manual (PWOM).</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. What engine room modification prevents frazil ice from blocking sea water cooling suctions?</div><div class="qa-a">An internal recirculation loop that routes a portion of the warm sea water discharge from the main heat exchangers back into the sea chest, melting frazil ice crystals before they clog the strainers, supplemented by steam/compressed-air blow-down connections for mechanical clearing.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. What is the MARPOL discharge standard for oily mixtures in Arctic and Antarctic polar waters?</div><div class="qa-a">Absolute zero discharge under Part II-A of the Polar Code — the standard 15-ppm OWS allowance is suspended in both regions, and all oily residues must be retained onboard for shore reception.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Outline the mandatory LSA and emergency-system winterization requirements under Polar Code Part I-A.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Explain the structural and thermodynamic risks of operating conventional machinery in polar regions, and the preventative engineering controls a Chief Engineer implements before a scheduled polar transit.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Analyse how the Polar Code integrates with SOLAS and MARPOL, the Polar Ship Certificate issuance process, and how the PWOM functions as an operational safety tool during a hull breach or machinery failure in ice.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>"385 Safety, 264 Environment, 2017 In Force"</strong> — MSC.385(94) / MEPC.264(68) / 1 Jan 2017.</li>
+      <li><strong>A = Medium ice, B = Thin ice, C = Open water</strong> — descending ice severity.</li>
+      <li><strong>PWOM = the manual. Certificate = the proof.</strong></li>
+      <li><strong>Polar waters = zero discharge default</strong> for oil and garbage — assume stricter than home-water MARPOL unless the Code states otherwise.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — PST, Cloud/Pour Point Management & Structural Steel Grades</button>
+    <div class="deep-dive-body">
+      <h4>Polar Service Temperature (PST) Logic</h4>
+      <p>The PST is set at least 10°C below the lowest Mean Daily Low Temperature for the ship's intended area and season of operation. Structural steel grades, lubricant pour points and fuel cloud points are all selected against this single PST reference, not against the ambient temperature on any given day — meaning the ship is engineered for a worst-case seasonal figure, not real-time conditions.</p>
+      <h4>Fuel & Lubricant Management</h4>
+      <p>Unheated exposed piping and storage tanks must carry fuels/lubricants with pour and cloud points safely below PST; where this is impractical, trace heating or internal (heated) tank relocation is used instead of relying on additive treatment alone.</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>Even without formal polar certification, the underlying principle — knowing your fuel/lubricant cold-flow properties against the coldest routing you may realistically encounter — is directly transferable to any winter North Atlantic or high-latitude container service routing.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>IMO — Resolution MSC.385(94) and MEPC.264(68), International Code for Ships Operating in Polar Waters</li>
+    <li>IMO — SOLAS Chapter XIV and MARPOL Annexes I/II/IV/V (Polar Code amendments)</li>
+  </ul>
+
+  <div class="qb-link-box"><strong>🔗 Related:</strong> <a href="miw-notes-mgmt-p5.html">Part 5 — SOLAS Ch. XII–XV (Polar Code base topic)</a></div>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p13 · Topic 3 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p13 · P13-T3 · v1.0</div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+  Part 13 of 31 · Pages 301–325 of 768 · Engineering Management Notes — Marine Intelligence Weekly<br>
+  Originally compiled by Uday Sankar S., Anglo-Eastern. Transcribed &amp; verified by Nixon Antony, 2/E, Maersk A/S.<br>
+  This Part is a deep-dive expansion of the III Code (base topic: Part 12 · Topic 5), the ISM Code (base topic: Part 5) and the Polar Code (base topic: Part 5) — cross-links provided in each topic above. Topic numbering shown as local Part 13 badges (P13-T1–P13-T3). Global T-sequence renumbering across all parts remains deferred until Parts 14–31 are complete, per standing platform rule.<br>
+  <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Back to Notes Index</a> · <a href="mailto:contactus@marineintelligenceweekly.com">Report a correction</a>
+</div>
+
+<script>
+function toggleDD(btn){
+  var body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+document.addEventListener('copy', function(e){ e.preventDefault(); });
+document.addEventListener('selectstart', function(e){ e.preventDefault(); });
+</script>
+</body>
+</html>

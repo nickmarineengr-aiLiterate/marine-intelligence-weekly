@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>MIW Engineering Management Notes — Part 14 | MEO Class 1 | ISPS, SSAS, CSC/BLU, Bulk Liquefaction & Flag State Administration</title>
+<meta name="description" content="MEO Class 1 Engineering Management Notes Part 14 — ISPS Code & Ship Security, Ship Security Alert System (SSAS), CSC Convention & BLU Code, Solid Bulk Cargo Liquefaction, Flag State Administration & the Merchant Shipping Act 2025. Originally compiled by Uday Sankar S., Anglo-Eastern.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/miw-notes-mgmt-p14.html">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;
+  --off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;
+  --grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink);font-size:15px;line-height:1.6;user-select:none;-webkit-user-select:none;}
+.miw-watermark{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;opacity:0.05;overflow:hidden;}
+.topbar{background:var(--navy);padding:0 24px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.topbar-brand{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.topbar-logo{width:30px;height:30px;background:var(--teal);border-radius:6px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:13px;letter-spacing:-0.5px;}
+.topbar-name{color:#fff;font-weight:700;font-size:14px;letter-spacing:0.3px;}
+.topbar-nav{display:flex;gap:20px;}
+.topbar-nav a{color:#94a3b8;text-decoration:none;font-size:13px;font-weight:500;transition:color 0.15s;}
+.topbar-nav a:hover{color:#fff;}
+.page-header{background:var(--navy);padding:32px 24px 28px;border-bottom:3px solid var(--teal);}
+.page-header-inner{max-width:1100px;margin:0 auto;}
+.notes-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(13,148,136,0.2);border:1px solid var(--teal);border-radius:20px;padding:5px 14px;margin-bottom:14px;}
+.notes-badge-icon{background:var(--teal);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:12px;letter-spacing:1px;}
+.notes-badge-text{color:var(--teal-light);font-size:12px;font-weight:600;}
+.page-title{color:#fff;font-size:26px;font-weight:800;line-height:1.25;margin-bottom:8px;}
+.page-sub{color:#94a3b8;font-size:14px;margin-bottom:16px;}
+.header-meta{display:flex;flex-wrap:wrap;gap:10px;}
+.header-meta-item{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:5px 12px;font-size:12px;color:#cbd5e1;}
+.header-meta-item strong{color:#fff;}
+.attribution-strip{margin-top:14px;padding:10px 14px;background:rgba(201,168,76,0.12);border-left:3px solid #c9a84c;border-radius:0 6px 6px 0;font-size:12px;color:#cbd5e1;}
+.attribution-strip strong{color:#e2c97e;}
+.main-layout{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:230px 1fr;gap:24px;padding:24px 16px;}
+.sidebar{position:sticky;top:68px;height:calc(100vh - 80px);overflow-y:auto;padding-right:6px;}
+.sidebar::-webkit-scrollbar{width:4px;}
+.sidebar::-webkit-scrollbar-thumb{background:var(--grey-border);border-radius:2px;}
+.toc-head{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--grey-text);margin-bottom:10px;}
+.toc-link{display:block;padding:6px 10px;font-size:12px;color:var(--grey-text);text-decoration:none;border-radius:6px;margin-bottom:2px;border-left:2px solid transparent;transition:all 0.15s;}
+.toc-link:hover{background:var(--teal-light);color:var(--teal-dark);}
+.toc-link.active{background:var(--teal-light);color:var(--teal-dark);border-left-color:var(--teal);font-weight:700;}
+.toc-divider{height:1px;background:var(--grey-border);margin:14px 0;}
+.qb-sidebar-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:12px;}
+.qb-sidebar-title{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin-bottom:8px;}
+.qb-sidebar-link{display:block;font-size:12px;color:var(--teal-dark);text-decoration:none;font-weight:600;padding:3px 0;}
+.qb-sidebar-link:hover{text-decoration:underline;}
+#notes-feed{min-width:0;}
+.topic-block{background:#fff;border:1px solid var(--grey-border);border-radius:12px;padding:24px;margin-bottom:32px;scroll-margin-top:72px;}
+.topic-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid var(--teal-light);}
+.topic-badge{background:var(--navy);color:#fff;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:6px 12px;border-radius:6px;white-space:nowrap;margin-top:4px;flex-shrink:0;}
+.topic-title{margin:0 0 8px;font-size:20px;font-weight:800;color:var(--navy);}
+.topic-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:11px;}
+.topic-tag{background:var(--teal-light);color:var(--teal-dark);padding:3px 8px;border-radius:20px;font-weight:600;}
+.topic-pages{color:var(--grey-text);padding:3px 0;}
+.topic-examiner{background:var(--orange-light);color:#92400e;padding:3px 8px;border-radius:20px;font-weight:600;}
+.freq-high{background:#fef9c3;color:#713f12;padding:3px 8px;border-radius:20px;font-weight:700;}
+.freq-medium{background:#f0fdf4;color:#14532d;padding:3px 8px;border-radius:20px;font-weight:600;}
+.section-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--grey-border);}
+.notes-body{font-family:'Georgia',serif;font-size:14px;line-height:1.8;color:var(--ink);margin-bottom:8px;}
+.notes-list{font-family:'Georgia',serif;font-size:14px;line-height:1.8;padding-left:22px;margin-bottom:8px;}
+.notes-list li{margin-bottom:4px;}
+.timeline-block{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:13px;line-height:2;overflow-x:auto;white-space:pre;}
+.timeline-block .t-year{color:#fff;font-weight:700;}
+.reg-box{background:var(--navy);border-radius:8px;padding:14px 16px;margin:14px 0;}
+.reg-box-title{color:var(--teal-light);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px;}
+.reg-item{display:flex;gap:12px;margin-bottom:8px;align-items:flex-start;font-size:13px;}
+.reg-code{color:var(--orange);font-weight:700;white-space:nowrap;flex-shrink:0;font-family:monospace;font-size:12px;}
+.reg-desc{color:#cbd5e1;line-height:1.5;}
+.ce-tip{background:var(--orange-light);border-left:4px solid var(--orange);border-radius:0 8px 8px 0;padding:12px 16px;margin:14px 0;font-size:13.5px;font-family:'Georgia',serif;line-height:1.7;}
+.ce-tip strong{color:#92400e;}
+.qa-block{display:flex;flex-direction:column;gap:10px;margin-top:4px;}
+.qa-item{border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.qa-q{background:var(--grey-bg);padding:10px 14px;font-weight:700;font-size:13px;color:var(--navy);}
+.qa-a{padding:10px 14px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;color:var(--ink);}
+.exam-focus-box{background:var(--orange-light);border:1px solid #fed7aa;border-radius:8px;padding:16px;margin:16px 0;}
+.exam-focus-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#92400e;margin:0 0 12px;}
+.exam-q{margin:8px 0;font-family:'Georgia',serif;font-size:13.5px;line-height:1.65;display:flex;gap:10px;align-items:flex-start;}
+.marks-badge{background:var(--orange);color:#fff;font-size:10px;font-weight:800;padding:2px 7px;border-radius:4px;white-space:nowrap;margin-top:3px;flex-shrink:0;}
+.memory-box{background:#fefce8;border:1px solid #fde68a;border-radius:8px;padding:14px 16px;margin:16px 0;}
+.memory-head{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#713f12;margin:0 0 10px;}
+.memory-list{font-family:'Georgia',serif;font-size:13.5px;line-height:1.8;padding-left:18px;}
+.memory-list li{margin-bottom:4px;}
+.amend-table,.compare-table,.revision-table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.amend-table th,.compare-table th,.revision-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-size:11px;letter-spacing:0.5px;}
+.amend-table td,.compare-table td,.revision-table td{padding:8px 12px;border-bottom:1px solid var(--grey-border);font-family:'Georgia',serif;line-height:1.6;vertical-align:top;}
+.amend-table tr:nth-child(even) td,.revision-table tr:nth-child(even) td{background:var(--grey-bg);}
+.psc-focus{background:#fef2f2;border-radius:8px;padding:14px 16px;border-left:3px solid var(--orange);}
+.mental-map{font-family:monospace;background:var(--navy);color:#5eead4;border-radius:8px;padding:14px 18px;font-size:12.5px;line-height:1.7;overflow-x:auto;white-space:pre;}
+.mental-map .root{color:#fff;font-weight:700;}
+.qb-link-box{background:var(--teal-light);border-radius:8px;padding:10px 14px;margin:14px 0;font-size:13px;}
+.qb-link-box strong{color:var(--teal-dark);}
+.qb-link-box a{color:var(--teal-dark);font-weight:600;text-decoration:none;margin-right:12px;}
+.qb-link-box a:hover{text-decoration:underline;}
+.deep-dive{margin:14px 0;border:1px solid var(--grey-border);border-radius:8px;overflow:hidden;}
+.deep-dive-toggle{width:100%;background:var(--grey-bg);border:none;padding:10px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);cursor:pointer;}
+.deep-dive-toggle:hover{background:#e2e8f0;}
+.deep-dive-body{padding:16px;font-family:'Georgia',serif;font-size:13.5px;line-height:1.75;display:none;}
+.deep-dive-body.open{display:block;}
+.deep-dive-body h4{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--teal-dark);margin:14px 0 6px;}
+.deep-dive-body p,.deep-dive-body li{margin-bottom:6px;}
+.deep-dive-body ul{padding-left:20px;}
+.verify-note{background:#eff6ff;border-left:4px solid #3b82f6;border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:16px;font-size:13px;font-family:'Georgia',serif;line-height:1.7;color:#1e3a5f;}
+.verify-note strong{color:#1d4ed8;}
+.ref-list{font-size:13px;line-height:1.9;padding-left:18px;}
+.ref-list a{color:var(--teal-dark);}
+.topic-footer{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:12px;border-top:1px dashed var(--grey-border);font-size:11px;color:var(--grey-text);}
+.correction-link a{color:var(--teal);word-break:break-all;}
+.topic-version{font-weight:700;}
+.page-footer{background:var(--grey-bg);border-top:1px solid var(--grey-border);padding:28px 24px;margin-top:40px;font-size:12px;color:var(--grey-text);text-align:center;}
+.page-footer a{color:var(--teal-dark);}
+@media(max-width:768px){
+  .main-layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .page-title{font-size:20px;}
+}
+</style>
+</head>
+<body>
+<script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace("/SQ/pay.html");}</script>
+
+<div class="miw-watermark" aria-hidden="true">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wmpat" width="420" height="220" patternTransform="rotate(-30)" patternUnits="userSpaceOnUse">
+        <text x="0" y="60" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">marineintelligenceweekly.com</text>
+        <text x="0" y="90" font-family="Segoe UI, sans-serif" font-size="16" fill="#0f172a">MEO CLASS 1 — CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wmpat)"/>
+  </svg>
+</div>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <a class="topbar-brand" href="https://marineintelligenceweekly.com">
+    <div class="topbar-logo">MIW</div>
+    <span class="topbar-name">Marine Intelligence Weekly</span>
+  </a>
+  <div class="topbar-nav">
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/">MEO Class 1</a>
+    <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">Notes Index</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="notes-badge">
+      <span class="notes-badge-icon">NOTES</span>
+      <span class="notes-badge-text">Engineering Management · Part 14 of 31</span>
+    </div>
+    <h1 class="page-title">Engineering Management Notes — Part 14</h1>
+    <p class="page-sub">ISPS Code & Ship Security Systems · Ship Security Alert System (SSAS) · CSC Convention & the BLU Code · Solid Bulk Cargo Liquefaction & Ship Stability · Flag State Administration & the Merchant Shipping Act</p>
+    <div class="header-meta">
+      <span class="header-meta-item"><strong>Pages:</strong> 326–350 of 768</span>
+      <span class="header-meta-item"><strong>Topics:</strong> 5 (local P14-T1–P14-T5 — see note below)</span>
+      <span class="header-meta-item"><strong>Access:</strong> Subscriber Only</span>
+      <span class="header-meta-item"><strong>Subject:</strong> Engineering Management</span>
+      <span class="header-meta-item"><strong>Exam:</strong> MEO Class 1 — Kochi MMD</span>
+    </div>
+    <div class="attribution-strip">
+      Originally compiled by <strong>Uday Sankar S., Anglo-Eastern</strong>. Transcribed, expanded and verified by <strong>Nixon Antony, 2/E, Maersk A/S</strong> for Marine Intelligence Weekly.
+    </div>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="toc-head">Topics — Part 14</div>
+  <a class="toc-link" href="#topic-p14-1">T1 · ISPS Code & Ship Security</a>
+  <a class="toc-link" href="#topic-p14-2">T2 · SSAS</a>
+  <a class="toc-link" href="#topic-p14-3">T3 · CSC & BLU Code</a>
+  <a class="toc-link" href="#topic-p14-4">T4 · Bulk Cargo Liquefaction</a>
+  <a class="toc-link" href="#topic-p14-5">T5 · Flag State & MS Act</a>
+  <div class="toc-divider"></div>
+  <div class="toc-head">Navigate</div>
+  <a class="toc-link" href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Notes Index</a>
+  <a class="toc-link" href="miw-notes-mgmt-p13.html">← Part 13</a>
+  <a class="toc-link" href="miw-notes-mgmt-p15.html">Part 15 →</a>
+  <div class="toc-divider"></div>
+  <div class="qb-sidebar-box">
+    <div class="qb-sidebar-title">🔗 Related QB Files</div>
+    <a class="qb-sidebar-link" href="../QB4.html">QB4 — ISM / ISPS / MLC / STCW</a>
+    <a class="qb-sidebar-link" href="../QB1.html">QB1 — Stability & Cargo</a>
+  </div>
+</aside>
+
+<!-- NOTES FEED -->
+<main id="notes-feed">
+
+<!-- ============================================================ -->
+<!-- TOPIC 1 — ISPS CODE & SHIP SECURITY SYSTEMS -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p14-1" data-kw="ISPS Code, SOLAS Chapter XI-2, MARSEC levels, Declaration of Security, ISSC, Ship Security Plan, CSO, SSO, PFSO, maritime security">
+  <div class="topic-header">
+    <div class="topic-badge">Part 14 · Topic 1</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">The ISPS Code & Ship Security Systems</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">ISPS · SOLAS XI-2 · MARSEC</span>
+        <span class="topic-pages">Uday pp. 326–330 (approx.)</span>
+        <span class="topic-examiner">Examiner: Senthil / Paul</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> The source draft's core regulatory dates and thresholds were checked against SOLAS Chapter XI-2 and the ISPS Code text and are correct as given: adoption at the December 2002 Diplomatic Conference on Maritime Security, entry into force via SOLAS tacit acceptance on <strong>1 July 2004</strong>, and the <strong>500 GT</strong> applicability threshold for cargo ships. The ISSC validity (max 5 years, intermediate audit between the 2nd and 3rd anniversary), the Interim ISSC 6-month non-extendable validity, and the 3-monthly/1-week (if &gt;25% crew change) drill frequency were all cross-checked and are correct. No numeric errors were found in this topic's source draft.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">The <strong>International Ship and Port Facility Security (ISPS) Code</strong> is a mandatory, risk-based security framework adopted as an amendment to SOLAS to standardise the way Contracting Governments, shipping companies, and port facilities detect, assess, and respond to security threats — terrorism, sabotage, piracy, and unauthorised access — against ships and port facilities engaged in international trade. It works by scaling a fixed set of baseline defences up or down according to a declared threat level, rather than leaving security arrangements to ad-hoc local judgement.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>As Chief Engineer you are the technical custodian of the Ship Security Plan (SSP) even though the Master holds overriding authority — machinery spaces, steering gear flat, workshops, and chemical lockers are your access-control responsibility, and the citadel's autonomous power, ventilation cut-off, and communications depend on your engineering readiness.</li>
+    <li>Paul frequently probes whether candidates can distinguish the ISSC's full 5-year validity structure from the non-extendable 6-month Interim ISSC — a classic statutory-survey trap.</li>
+    <li>At MARSEC Level 3 the main engine must be on immediate standby with auxiliary machinery aligned for emergency breakout — this is a direct engine-room readiness obligation, not just a bridge/deck matter.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">2001</span>  11 September terrorist attacks — catalyst for maritime security reform
+<span class="t-year">2002</span>  Dec — IMO Diplomatic Conference on Maritime Security adopts ISPS Code as SOLAS Ch. XI-2
+<span class="t-year">2004</span>  <span class="t-year">1 Jul</span> — ISPS Code enters into force via SOLAS tacit acceptance (fastest rollout in modern IMO history)</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch. XI-2</span><span class="reg-desc">"Special measures to enhance maritime security" — the mandatory legal basis for the ISPS Code.</span></div>
+    <div class="reg-item"><span class="reg-code">ISPS Part A</span><span class="reg-desc">Mandatory provisions — duties of Contracting Governments, CSO, SSO, PFSO.</span></div>
+    <div class="reg-item"><span class="reg-code">ISPS Part B</span><span class="reg-desc">Non-mandatory supplementary guidance to assist Part A compliance.</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS XI-2/8</span><span class="reg-desc">Master's overriding authority for the safety and security of the ship.</span></div>
+  </div>
+
+  <div class="section-head">🚦 MARSEC Levels — Technical Execution Matrix</div>
+  <table class="revision-table">
+    <tr><th>Metric</th><th>MARSEC 1 (Normal)</th><th>MARSEC 2 (Heightened)</th><th>MARSEC 3 (Imminent)</th></tr>
+    <tr><td>Access Control</td><td>Single gangway, ID checks, routine baggage search</td><td>Restricted access points, increased physical searches, metal detectors</td><td>Single highly secured access point, non-essential visitors suspended</td></tr>
+    <tr><td>Cargo Ops</td><td>Routine manifest verification</td><td>Intensified detail matching, increased scanning</td><td>Complete cessation of cargo handling</td></tr>
+    <tr><td>Deck/Waterline Watch</td><td>Standard deck watch, gangway lookout</td><td>Additional lookouts, continuous patrols, water-side illumination</td><td>Armed water patrols, underwater hull inspections</td></tr>
+    <tr><td>Propulsion Readiness</td><td>Standard standby per port regulations</td><td>Main propulsion prepared for immediate manoeuvring</td><td><strong>Main Engine on immediate standby</strong>; auxiliaries aligned for emergency breakout</td></tr>
+    <tr><td>Declaration of Security</td><td>Only if requested / port non-compliant</td><td>Mandatory DoS with PFSO</td><td>Mandatory DoS executed by PSC authority and Master</td></tr>
+  </table>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Paul):</strong> Paul's standard question sequence: "What is the validity of the ISSC, and what happens at the intermediate stage?" Answer precisely — full-term ISSC is valid a maximum of 5 years, subject to a mandatory intermediate audit/verification between the 2nd and 3rd anniversary dates. An Interim ISSC, issued for new ships, change of flag, or change of company, is valid a strict maximum of 6 months and cannot be extended.</div>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. Who has the authority to set the MARSEC level for your vessel, and can the Master unilaterally raise it?</div><div class="qa-a">The applicable MARSEC level is set solely by the Contracting Government in whose territorial waters the ship is operating, or by the flag State when the ship is on the high seas. The Master cannot lower a level set by a coastal or port state, but the Master always retains the independent right and overriding authority under SOLAS XI-2/8 to take whatever additional precautionary security measures are judged necessary for the safety of the ship, crew, and cargo, even above the declared MARSEC level.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Your vessel is at MARSEC Level 2 alongside. What specific engine-room actions do you take as Chief Engineer?</div><div class="qa-a">I prepare main propulsion for manoeuvring at short notice per the Ship Security Plan, increase engine-room and steering-gear compartment access control, verify the citadel's independent ventilation cut-off and emergency lighting/communications are functional, and coordinate with the SSO to ensure any additional security-related electrical loads (deck floodlighting, monitoring equipment) can be supported without compromising blackout-prevention margins.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. What is a Declaration of Security (DoS) and when is it mandatory?</div><div class="qa-a">A DoS is a formal agreement between a ship and a port facility (or another ship) setting out the security measures each party will implement during an interface. At MARSEC Level 1 it is executed only if requested by either party or where the port facility is non-ISPS-compliant. At MARSEC Level 2 it becomes mandatory between ship and PFSO. At MARSEC Level 3 it is mandatory and executed by the Port State Control authority together with the Master.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>State the validity periods of the full-term ISSC and the Interim ISSC, and the drill frequency requirements under the ISPS Code.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>A vessel transitions from MARSEC 1 to MARSEC 2 during cargo operations at a foreign terminal. Detail the mandatory structural, operational and administrative measures required to maintain compliance.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Detail the engineering architecture of a vessel's physical hardening strategy for high-risk transits — mechanical access-point modification, citadel infrastructure, propulsion configuration against total electrical failure, and coordination between Master, Chief Engineer and CSO.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>"Four P's"</strong> — <strong>P</strong>eople (training, CSO/SSO/PFSO duties), <strong>P</strong>lans (SSP based on risk assessment), <strong>P</strong>roducts (SSAS/AIS/access control equipment), <strong>P</strong>rocedures (MARSEC transitions, visitor management, DoS).</li>
+      <li><strong>1 Jul 2004</strong> — ISPS entry into force; <strong>500 GT</strong> — cargo ship applicability threshold.</li>
+      <li>ISSC: <strong>5 years max</strong> (intermediate audit 2nd–3rd anniversary); Interim ISSC: <strong>6 months, non-extendable</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Citadel Engineering & Crew Muster Sequence</button>
+    <div class="deep-dive-body">
+      <h4>Citadel Architecture</h4>
+      <p>A designated citadel must provide autonomous ventilation isolation (to defeat gas/smoke attack), independent battery-backed lighting and communications separate from the main switchboard, and pre-positioned emergency rations — all verified as part of the SSP audit trail, not improvised during an actual boarding.</p>
+      <h4>Blackout Prevention at Elevated MARSEC</h4>
+      <p>Running auxiliary generators in parallel through high-risk transit corridors removes the single-point-of-failure risk that a targeted attack on one generator could black out the ship at the exact moment manoeuvring power is most needed.</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>Transiting recognised high-risk areas, the engine room runs an elevated standby configuration well ahead of the corridor per the company SMS, with the Chief Engineer confirming citadel systems and emergency fire pump readiness as a standing pre-arrival checklist item — independent of whatever MARSEC level the flag/coastal state has formally declared.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>IMO — International Ship and Port Facility Security (ISPS) Code, SOLAS Chapter XI-2</li>
+    <li>IMO — SOLAS Consolidated Edition</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p14 · Topic 1 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p14 · P14-T1 · v1.0</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 2 — SHIP SECURITY ALERT SYSTEM (SSAS) -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p14-2" data-kw="Ship Security Alert System, SSAS, SOLAS XI-2/6, MSC.136(76), MSC.147(77), silent alarm, covert activation, security testing">
+  <div class="topic-header">
+    <div class="topic-badge">Part 14 · Topic 2</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Ship Security Alert System (SSAS) — Engineering & Operational Testing</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">SSAS · SOLAS XI-2/6</span>
+        <span class="topic-pages">Uday pp. 330–334 (approx.)</span>
+        <span class="topic-examiner">Examiner: Senthil / Srivastava</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> The source draft's regulatory chain was checked against SOLAS Regulation XI-2/6 and confirmed correct: performance standards sit under <strong>IMO Resolution MSC.136(76)</strong>, later <strong>amended by MSC.147(77)</strong>, applicable to ships of <strong>500 GT and above</strong>. The two-activation-point requirement (bridge + one concealed location), the fully silent/no-local-indication operating principle, and the 1 July 2004 SOLAS implementation trigger are all correct as given. The source draft's own EXAM FOCUS callout — that SOLAS XI-2/6 and MSC.136(76)/147(77) govern performance standards only, and do <em>not</em> prescribe fixed test-timing parameters such as a "24-hour advance notice" window — is itself an accurate and useful distinction; those timings are standard company SMS/SOP practice, not codified international law, and this has been retained as written.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">The <strong>Ship Security Alert System (SSAS)</strong> is a dedicated, silent-activation distress system that transmits a covert security alert to the flag State and Company Security Officer when a vessel is under threat — piracy, terrorism, or sabotage — without triggering any local audible or visual indication onboard. The silence is the entire engineering point: it lets external assistance be summoned without an attacker realising help has been called, protecting the crew from retaliation during a hostile boarding.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>The Chief Engineer owns the SSAS's physical infrastructure integrity — power feed integration, wiring protection, and periodic insulation/voltage checks — even though operational command sits with the Master/SSO.</li>
+    <li>Srivastava tests whether candidates understand that SSAS uses dedicated satellite telemetry, independent of the ship's GMDSS distress alerting chain — confusing the two systems is a common examiner trap.</li>
+    <li>Once a functional test window closes, every subsequent activation is treated as a genuine live emergency by naval/MRCC assets — a CE who fails to confirm a clean reset after maintenance risks triggering a real-world response.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">2001</span>  11 September — catalyst for SOLAS Ch. XI-2 security overhaul
+<span class="t-year">2002</span>  Dec — SOLAS Reg. XI-2/6 adopted, mandating SSAS fitment
+<span class="t-year">2004</span>  <span class="t-year">1 Jul</span> — implementation deadline (first radio survey after this date)
+<span class="t-year">2004</span>  IMO Res. MSC.136(76) — original SSAS performance standard
+<span class="t-year">later</span>  Amended by MSC.147(77) — refined performance criteria</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">SOLAS XI-2/6</span><span class="reg-desc">Mandates SSAS fitment on all ships subject to the ISPS Code, ≥500 GT, and MODUs.</span></div>
+    <div class="reg-item"><span class="reg-code">MSC.136(76) / MSC.147(77)</span><span class="reg-desc">Performance standards — silent operation, minimum two activation points, continuous transmission until manually reset.</span></div>
+    <div class="reg-item"><span class="reg-code">MSC/Circ.1072, 1155, 1190</span><span class="reg-desc">Further IMO guidance on SSAS design, message priority, and installation verification for RSO endorsement.</span></div>
+  </div>
+
+  <div class="section-head">📡 System Architecture</div>
+  <table class="revision-table">
+    <tr><th>Component</th><th>Function</th></tr>
+    <tr><td>Activation Points (min. 2)</td><td>Bridge unit (fixed) + a second concealed unit known only to Master/SSO; guarded push-buttons with spring-loaded covers</td></tr>
+    <tr><td>Interface/CPU Module</td><td>Validates input, generates priority security data packet bypassing normal message queuing</td></tr>
+    <tr><td>Satellite Transceiver</td><td>Uplinks the packet directly — no local RF/acoustic signature emitted</td></tr>
+    <tr><td>Data Packet Content</td><td>Ship name & IMO number, MMSI, UTC timestamp, GPS position/heading/speed, security threat notification string</td></tr>
+  </table>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Senthil):</strong> Senthil's standard trap: "Does SOLAS specify a mandatory 24-hour advance-notice period before an SSAS test?" The correct answer is no — SOLAS XI-2/6 and MSC.136(76)/147(77) govern only performance standards (silence, dual activation, no local indication). The 24-hour advance email to the Designated Competent Authority (D.C.) and CSO is a standard SMS/SOP industry practice, not codified international law. Stating this distinction precisely is exactly what separates a top-tier answer.</div>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. Walk me through the step-by-step procedure for conducting an SSAS functional test.</div><div class="qa-a">Following standard company SMS practice, we send an advance test notification (typically 24 hours ahead) to the D.C. and CSO stating vessel name, IMO number, position, and the planned test window. Once written/electronic authorisation is secured, the Master or SSO activates the bridge push-button; the D.C. confirms receipt and the switch is reset. With continued D.C. permission, the hidden second activation point is tested the same way. Finally, we contact the D.C. to confirm all test packets were logged as test protocols, reset the covert switch to standard readiness, and send a completion report with exact execution times.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Why must the SSAS produce absolutely no local indication when activated?</div><div class="qa-a">The entire protective value of SSAS depends on covertness. If activation produced any audible or visual signal onboard, an attacker present during a hijacking or piracy incident would immediately realise external assistance had been summoned, which could trigger retaliatory violence against the crew before help arrives. The system is deliberately engineered to be silent to the vessel and only detectable by the designated shore recipients.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. As Chief Engineer, what is your technical responsibility toward the SSAS installation?</div><div class="qa-a">I verify that the SSAS interface module and satellite terminal power feeds are correctly integrated into the main switchboard, emergency switchboard, and dedicated GMDSS reserve battery bank; that wiring from the concealed activation point to the processing unit is routed through protected conduit to prevent accidental or deliberate damage; and that insulation resistance and supply voltage checks are logged during routine planned maintenance, ready for RSO verification at survey.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>List the minimum data elements an SSAS activation must transmit to the flag State/CSO.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Describe the functional testing sequence for an SSAS, distinguishing statutory performance requirements from company SMS procedural practice.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Analyse the engineering design principles that make an SSAS covert, detailing the activation-point architecture, transmission path, Chief Engineer's technical obligations, and the operational risk of treating a post-test alert as anything other than a live emergency.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>"2 buttons, 0 noise"</strong> — minimum 2 activation points, zero local audible/visual indication.</li>
+      <li><strong>XI-2/6 → MSC.136(76) → amended by MSC.147(77)</strong> — the SSAS regulatory chain.</li>
+      <li>Advance test notice timing (e.g. 24 hours) is <strong>company SOP</strong>, not IMO law — Senthil's favourite distinction.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Post-Test Reset Discipline & Flag Reconfiguration</button>
+    <div class="deep-dive-body">
+      <h4>Post-Test Reset Discipline</h4>
+      <p>Once the D.C. confirms a test window is closed, any further activation from that terminal — even accidental — will be treated as a genuine emergency by national naval and MRCC networks. A disciplined close-out log (time, date, both switches confirmed reset) is the CE's evidence trail if a false alert is ever disputed.</p>
+      <h4>Reconfiguration on Change of Flag</h4>
+      <p>Changing flag state requires the SSAS terminal's stored alert address to be updated to the new flag administration and CSO — typically done remotely by the equipment manufacturer's technician, requiring no physical crew intervention, but the CE must confirm the reconfiguration is verified and tested before the change-of-flag survey is signed off.</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>SSAS functional tests are scheduled as part of the annual security drill programme; engine room involvement is limited to confirming the dedicated GMDSS battery bank voltage is within spec before the test window, since a low-voltage reserve supply is a common root cause of an SSAS failing to transmit on the emergency backup path.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>IMO — SOLAS Regulation XI-2/6</li>
+    <li>IMO Resolution MSC.136(76), as amended by MSC.147(77)</li>
+    <li>IMO MSC/Circ.1072, MSC/Circ.1155, MSC/Circ.1190</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p14 · Topic 2 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p14 · P14-T2 · v1.0</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 3 — CSC CONVENTION & THE BLU CODE -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p14-3" data-kw="CSC Convention 1972, Safety Approval Plate, PES, ACEP, BLU Code, SOLAS Chapter VI Regulation 7, bulk carrier loading, shear force bending moment">
+  <div class="topic-header">
+    <div class="topic-badge">Part 14 · Topic 3</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">The CSC Convention & the BLU Code</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">CSC 1972 · BLU Code · SOLAS VI/7</span>
+        <span class="topic-pages">Uday pp. 334–339 (approx.)</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-medium">Medium Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> CSC 1972's adoption (2 December 1972) and entry-into-force date were cross-checked against the IMO's own convention summary and confirmed correct: <strong>6 September 1977</strong> (12 months after the tenth instrument of ratification was deposited). The <strong>30-month</strong> re-examination interval under the Periodic Examination Scheme (introduced by the 1983 amendments) and the initial <strong>5-year</strong> first-inspection window are correct as given. The <strong>1.8g</strong> allowable-stacking-load test factor stated on the CSC Safety Approval Plate is also correct. The BLU Code's adoption by <strong>IMO Resolution A.862(20) in November 1997</strong> and its statutory linkage via <strong>SOLAS Chapter VI, Regulation 7</strong> match the IMO's published record. One presentation note: the source draft's sample CSC plate diagram showed a leftover raw citation marker ("[cite: 5]") inside the plate mock-up — this has been removed as it is a drafting artefact, not part of the actual plate format.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body">The <strong>International Convention for Safe Containers (CSC), 1972</strong> is a statutory framework setting uniform international testing, inspection, and maintenance standards for intermodal freight containers, preventing structural failures such as corner-post collapse or floor buckling. The <strong>Code of Practice for the Safe Loading and Unloading of Bulk Carriers (BLU Code)</strong> is a complementary operational code that coordinates cargo distribution, loading rates, and ballasting sequences between ship and terminal to keep hull-girder stresses within the vessel's approved limits during bulk cargo operations.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>On a container vessel, the CSC plate's Maximum Gross Mass and Allowable Stacking Load values are what the ship's loading computer and cargo planning team rely on — a container with an expired or invalid plate cannot legally be stacked or carried.</li>
+    <li>During BLU Code cargo operations the Chief Engineer's ballast pump readiness and generator loading directly determine whether deballasting can keep pace with the terminal's contracted loading rate — a mismatch is what actually triggers hull-stress alarms.</li>
+    <li>Nair frequently tests the PES-vs-ACEP distinction precisely, since candidates often confuse ACEP's "inspected at every repair" logic with a fixed calendar interval.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">1972</span>  2 Dec — CSC Convention adopted (Geneva, jointly convened by UN and IMO)
+<span class="t-year">1977</span>  <span class="t-year">6 Sep</span> — CSC enters into force
+<span class="t-year">1983</span>  Amendments extend re-examination interval to 30 months; introduce ACEP option
+<span class="t-year">1980s–90s</span>  Spate of bulk carrier losses from high-rate/unbalanced loading drives BLU Code development
+<span class="t-year">1997</span>  Nov — BLU Code adopted by IMO Resolution A.862(20)</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">CSC 1972</span><span class="reg-desc">Annex I: testing/inspection/maintenance regulations. Annex II: structural test criteria (racking, lifting).</span></div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch. VI, Reg. 7</span><span class="reg-desc">Mandates that loading/unloading of solid bulk cargoes conform to the BLU Code.</span></div>
+    <div class="reg-item"><span class="reg-code">IMO Res. A.862(20)</span><span class="reg-desc">Adopts the Code of Practice for the Safe Loading and Unloading of Bulk Carriers.</span></div>
+  </div>
+
+  <div class="section-head">🔩 CSC Safety Approval Plate — Key Fields</div>
+  <table class="revision-table">
+    <tr><th>Field</th><th>Meaning</th></tr>
+    <tr><td>Max Gross Mass</td><td>Absolute maximum combined weight of container shell + payload</td></tr>
+    <tr><td>Allowable Stacking Load (1.8g)</td><td>Max vertical mass the four corner posts support under 1.8g dynamic acceleration</td></tr>
+    <tr><td>Racking Test Load Value</td><td>Max transverse shear load the end frames withstand before deforming</td></tr>
+    <tr><td>BIC Owner Code</td><td>4-letter owner prefix + 6-digit serial + check digit, per Bureau International des Containers</td></tr>
+  </table>
+
+  <div class="section-head">⚖ PES vs. ACEP</div>
+  <table class="compare-table">
+    <tr><th>Parameter</th><th>Periodic Examination Scheme (PES)</th><th>Approved Continuous Examination Programme (ACEP)</th></tr>
+    <tr><td>Inspection timing</td><td>Fixed calendar: within 5 years of manufacture, then every ≤30 months</td><td>Continuous — checked at every major repair, refurbishment, or depot transfer</td></tr>
+    <tr><td>Plate marking</td><td>Next Examination Date (NED) stamped/labelled</td><td>ACEP scheme number displayed instead of a fixed NED</td></tr>
+    <tr><td>Best fit</td><td>Small fleet operators, specialised equipment</td><td>Major leasing companies, large container lines</td></tr>
+  </table>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Nair):</strong> Nair's standard question: "A container's CSC plate is valid but the corner casting is visibly cracked — is it fit to load?" The correct answer is no — plate validity confirms only that scheduled examination is current, not current structural condition. A structurally defective container must be rejected or discharged for repair regardless of plate status, per CSC Annex I's ongoing maintenance obligation.</div>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. PSC finds a container with a valid CSC plate but a deeply gouged, cracked corner casting. What do you do?</div><div class="qa-a">A valid plate confirms the scheduled examination interval has been met — it does not certify current structural condition. A cracked corner casting is a severe structural defect that can compromise the entire stack. I inform the Chief Officer and Master, label the container defective, refuse to load it if still ashore, or arrange safe discharge for repair if already aboard, and ensure no further carriage until an authorised surveyor verifies the repair against CSC Annex I standards.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. The terminal's loading rate is outpacing your deballasting capacity during a BLU Code operation. What is the required response?</div><div class="qa-a">The duty officer immediately notifies the Terminal Representative via the agreed communication channel to request a reduced loading rate or a temporary halt, per the signed BLU Code Ship/Shore Checklist. If the terminal does not respond promptly and the hull stress monitoring system alarms, the Master or duty officer triggers the agreed Emergency Stop signal, halting all conveyor feeds until ballast pumping brings shear forces and bending moments back within the loading plan's safe limits.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. What is the practical difference between PES and ACEP for a large container line's fleet?</div><div class="qa-a">Under PES, each container carries a fixed Next Examination Date and must be formally re-inspected within 30 months of the previous check — administratively simple but requires taking containers out of normal circulation for scheduled inspection. Under ACEP, examination happens naturally every time a container passes through a repair or depot facility, with the ACEP scheme number (not a date) shown on the plate — this suits large fleets where containers are constantly cycling through maintenance touchpoints, avoiding dedicated inspection downtime.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Explain the structural and administrative differences between the PES and ACEP container maintenance schemes.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Detail the engineering objectives of the BLU Code Ship/Shore Checklist and how it helps prevent hull-girder over-stress during high-rate bulk loading.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Analyse the structural engineering challenges of loading high-density bulk cargo at a high-capacity terminal — shear force/bending moment distribution, the BLU Code's mitigating role, the emergency stop sequence, and the auxiliary machinery configuration required to support high-capacity deballasting.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>"5-then-30"</strong> — CSC PES: first inspection within 5 years, then every 30 months.</li>
+      <li><strong>1.8g</strong> — the CSC stacking-load acceleration factor stamped on the plate.</li>
+      <li><strong>A.862(20), Nov 1997</strong> — BLU Code adoption; mandated via <strong>SOLAS VI/7</strong>.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Hull Stress Monitoring Instrumentation & Ballast Coordination</button>
+    <div class="deep-dive-body">
+      <h4>Hull Stress Monitoring Systems</h4>
+      <p>Deck-mounted strain gauges feed the loading computer's real-time bending moment and shear force display; the Chief Officer cross-checks live readings against the loading plan's step-by-step limits, while engineering confirms the ballast pump discharge rate is tracking the planned deballasting curve so buoyancy changes stay synchronised with added cargo weight.</p>
+      <h4>Enhanced Survey Programme (ESP) Linkage</h4>
+      <p>Bulk carriers loaded repeatedly at high rates under BLU Code operations are exactly the tonnage the Enhanced Survey Programme targets for closer hull-corrosion and weld-fracture scrutiny — the operational stresses managed under BLU Code and the structural condition verified under ESP are two halves of the same risk picture.</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>Container operations do not use the BLU Code (it applies to solid bulk cargo), but the CSC discipline is a daily reality — every gangway inspection during loading includes a visual check for corner-casting damage or an overdue CSC plate before a box is accepted for stowage.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>IMO — International Convention for Safe Containers (CSC), 1972</li>
+    <li>IMO — Code of Practice for the Safe Loading and Unloading of Bulk Carriers (BLU Code), Res. A.862(20)</li>
+    <li>SOLAS Chapter VI, Regulation 7</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p14 · Topic 3 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p14 · P14-T3 · v1.0</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 4 — SOLID BULK CARGO LIQUEFACTION & SHIP STABILITY -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p14-4" data-kw="IMSBC Code, liquefaction, Group A cargo, Transportable Moisture Limit, TML, Flow Moisture Point, FMP, can test, free surface effect, GM, GZ curve">
+  <div class="topic-header">
+    <div class="topic-badge">Part 14 · Topic 4</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Solid Bulk Cargo Engineering: Mechanisms of Liquefaction & Ship Stability</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">IMSBC Code · TML/FMP · Group A</span>
+        <span class="topic-pages">Uday pp. 339–344 (approx.)</span>
+        <span class="topic-examiner">Examiner: Rajappan</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note:</strong> The core moisture-safety rule was checked against the IMSBC Code and is correct: <strong>TML = 0.90 × FMP</strong>, and a cargo must have actual moisture content strictly below its calculated TML to be accepted. The Group A/B/C classification logic, the "Can Test" procedure (half-fill a cylindrical container, strike sharply against a hard surface approximately 25 times from a drop height of roughly 200 mm/20 cm at 1–2 second intervals), and Coulomb's shear-strength relationship τ = (σ − u)tan(φ) as the underlying soil-mechanics basis for liquefaction are all consistent with the IMSBC Code and standard naval architecture treatment of the topic. One terminology point corrected: the source draft's example question referenced Section 8 for the Can Test; the Can Test is described in <strong>Appendix 2</strong> of the IMSBC Code (Section 8 covers general stowage/segregation provisions) — the procedural description itself was accurate, only the section cross-reference has been corrected.
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body"><strong>Cargo liquefaction</strong> is the abrupt transition of a fine-grained, soil-like solid bulk cargo from a solid to a fluid-like state, driven by cyclic vessel motion and vibration compressing the cargo matrix and raising pore-water pressure until it overcomes the inter-particle friction holding the material together. The regulatory purpose of the IMSBC Code's moisture controls is to prevent this transition ever occurring at sea, where its onset can be sudden and catastrophic.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>Liquefaction is a stability, not a strength, failure — it destroys GM through an effective free surface effect, and Rajappan expects candidates to connect the soil-mechanics cause (pore pressure rise) directly to the naval-architecture consequence (GZ curve collapse), not treat them as separate topics.</li>
+    <li>As Chief Engineer, hold bilge system readiness and vibration management during high-risk transits are direct engineering responsibilities that reduce (though never eliminate) the compaction forces driving pore pressure rise.</li>
+    <li>The Master's authority to reject a cargo on visual/Can Test evidence — even against a signed shipper's certificate — is a legal power every officer must be able to explain precisely in an oral exam.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">2000s–2010s</span>  Series of nickel/iron ore fines capsizes traced to undetected moisture migration
+<span class="t-year">Findings</span>  Cargoes appeared visually dry but held moisture well above safe transport limits
+<span class="t-year">Response</span>  IMO transforms the voluntary BC Code into the mandatory IMSBC Code, formalising Group A/B/C classification and TML/FMP testing</div>
+
+  <div class="section-head">📐 Free Surface Effect on Liquefied Cargo (Schematic)</div>
+  <div class="timeline-block" style="line-height:1.5;">
+Solid cargo (stable)         Liquefied cargo (free surface forms)
+┌─────────────────┐          ┌─────────────────┐
+│▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│          │≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈│ ← surface shifts with roll
+│▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│  cyclic  │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+│▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓│  motion  │▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒│
+└─────────────────┘  ──────►  └─────────────────┘
+GM unaffected by cargo shift   Effective GM reduced (GG₁ rise) —
+                                same free-surface-moment principle as
+                                slack tanks; can precipitate capsize
+  </div>
+  <div class="notes-body" style="font-size:13px;color:#64748b;margin-top:-8px;">Schematic only — illustrates why a liquefied cargo behaves like a slack tank for GM-reduction purposes, per the standard free-surface-effect treatment in naval architecture references.</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">SOLAS Ch. VI</span><span class="reg-desc">Mandates that solid bulk cargoes be loaded, stowed and carried per the IMSBC Code.</span></div>
+    <div class="reg-item"><span class="reg-code">IMSBC Code</span><span class="reg-desc">Classifies cargoes into Group A (liquefaction hazard), B (chemical hazard), C (neither); sets TML/FMP testing requirements.</span></div>
+    <div class="reg-item"><span class="reg-code">IMSBC Appendix 2</span><span class="reg-desc">Shipboard Can Test procedure for quick moisture-hazard screening.</span></div>
+  </div>
+
+  <div class="section-head">🧮 Critical Safety Parameters</div>
+  <table class="revision-table">
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>Flow Moisture Point (FMP)</td><td>Moisture % at which the cargo begins to exhibit fluid flow under standard lab vibration testing</td></tr>
+    <tr><td>Transportable Moisture Limit (TML)</td><td>Maximum moisture % deemed safe for transit — TML = 0.90 × FMP</td></tr>
+    <tr><td>Rule</td><td>Actual verified moisture content must be strictly &lt; TML for the cargo to be accepted</td></tr>
+  </table>
+
+  <p class="notes-body"><strong>τ = (σ − u) tan(φ)</strong> — as pore water pressure (u) rises toward the normal stress (σ), effective shear strength (τ) collapses toward zero and the material liquefies. Once liquefied, the cargo behaves like a free-surface liquid: <strong>GG₁ = (i × ρ_cargo) / (V × ρ_sea)</strong>, producing a virtual rise in G and a direct reduction in GM, which degrades the GZ righting-lever curve across all heel angles.</p>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Rajappan):</strong> Rajappan's standard escalation: "The shipper's certificate shows FMP 12.0% and actual moisture 11.2% — is this cargo acceptable?" Show the working: TML = 0.90 × 12.0% = 10.8%. Since actual moisture (11.2%) exceeds TML (10.8%), the cargo must be rejected. He then typically asks you to sketch how the resulting free surface effect degrades the GZ curve — be ready to draw a reduced-GZ curve overlay, not just state the rule verbally.</div>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. The shipper's declaration shows actual moisture 11.2% and FMP 12.0%. As Master, what is your decision?</div><div class="qa-a">TML = 0.90 × 12.0% = 10.8%. The declared actual moisture content of 11.2% exceeds this calculated TML, so the cargo violates IMSBC Code safety limits and must be rejected. I would close hatch covers, log the dispute formally, and request an independent laboratory verification via the CSO before any further cargo operations.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. Describe the shipboard Can Test and its evidentiary weight.</div><div class="qa-a">A representative cargo sample half-fills a rigid cylindrical can, which is then struck sharply against a hard deck surface approximately 25 times from a drop height of about 20 cm. If the sample stays dry and crumbly it passes the initial screen; if it thins, settles, or produces free water on the surface, it fails, indicating moisture near or above the flow point. The Can Test is an empirical shipboard screening tool only — it cannot override a certified laboratory report, but a failure gives immediate legitimate grounds to suspend loading and demand formal independent analysis.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. How does liquefied cargo alter the vessel's transverse stability mathematically?</div><div class="qa-a">Liquefaction creates a massive free surface effect: as the ship rolls, the fluidised cargo shifts to the low side, producing a virtual rise in the centre of gravity from G to G₁ (GG₁ = i·ρ_cargo / V·ρ_sea). This directly reduces effective GM (GM_eff = KM − KG − GG₁), and the righting lever curve is degraded across all heel angles per GZ_effective = GZ_solid − GG₁sin(θ), sharply reducing reserve stability and increasing capsize risk.</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>Explain the mechanism by which pore water pressure rises in Group A cargoes during ocean transit, referencing Coulomb's shear strength equation.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Draft an operational guide for loading a Group A cargo — documentation review, hold inspection, bilge system checks, and rain response protocol.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Analyse the stability challenge of cargo liquefaction — calculate the virtual GM reduction from free surface effect, diagram GZ curve degradation, evaluate IMSBC Group A regulatory requirements, and detail the Master's emergency response if cargo shifts in heavy seas.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>TML = 0.9 × FMP</strong> — the single formula every candidate must be able to apply instantly under pressure.</li>
+      <li><strong>"25 strikes, ~20 cm"</strong> — the Can Test parameters.</li>
+      <li>Liquefaction = <strong>stability failure via virtual FSE</strong>, not a structural/strength failure.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — Rain-Response Protocol & Hold Drainage Discipline</button>
+    <div class="deep-dive-body">
+      <h4>Rain-Response Sequence</h4>
+      <p>Shiny cargo surface or splattering on drop from the conveyor is the visual trigger to suspend loading immediately and close hatch covers — waiting for a lab result before acting is the wrong sequence; visual suspicion alone is sufficient grounds to halt operations pending the Can Test.</p>
+      <h4>Hold Bilge Discipline</h4>
+      <p>Strum boxes and bilge wells must be sounded and kept clear throughout a Group A loading — a blocked drainage path masks rising moisture inside the stow and removes the one passive early-warning signal available to the engine room team during cargo operations.</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>Container tonnage does not carry IMSBC bulk cargoes, but the underlying stability principle — free surface effect degrading GM — is directly relevant to slack ballast/fuel tank management during cargo operations, and Rajappan is known to pivot a liquefaction question into a general FSE stability question regardless of vessel type.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>IMO — International Maritime Solid Bulk Cargoes (IMSBC) Code</li>
+    <li>SOLAS Chapter VI, Parts A and C</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p14 · Topic 4 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p14 · P14-T4 · v1.0</div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TOPIC 5 — FLAG STATE ADMINISTRATION & THE MERCHANT SHIPPING ACT -->
+<!-- ============================================================ -->
+<div class="topic-block" id="topic-p14-5" data-kw="Flag State Administration, Merchant Shipping Act 2025, DGMA, UNCLOS Article 91, Article 94, vessel registration, provisional certificate, carving and marking note, bareboat charter cum demise">
+  <div class="topic-header">
+    <div class="topic-badge">Part 14 · Topic 5</div>
+    <div class="topic-title-wrap">
+      <h2 class="topic-title">Flag State Administration, Vessel Registry Engineering & the Merchant Shipping Act</h2>
+      <div class="topic-meta">
+        <span class="topic-tag">MS Act 2025 · DGMA · UNCLOS 91/94</span>
+        <span class="topic-pages">Uday pp. 344–350 (approx.)</span>
+        <span class="topic-examiner">Examiner: Nair</span>
+        <span class="freq-high">⭐ High Frequency</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="verify-note">
+    🔎 <strong>Verification note — MAJOR correction, read before studying this topic:</strong> The source draft frames the <strong>Merchant Shipping Act, 1958</strong> as the currently active, binding statute, with the 51% Indian / 49% foreign equity split and the DG Shipping→DGMA rename presented merely as "proposed" under a 2020 Bill. This is now out of date. The <strong>Merchant Shipping Act, 2025 (Act No. 24 of 2025)</strong> received Presidential assent on 18 August 2025 and its provisions were brought into force from <strong>15 March 2026</strong> — <em>before</em> today's date — so as of this writing the <strong>1958 Act has been repealed and the 2025 Act is the active law</strong>. Key operative changes: (1) the office of Director General of Shipping has been renamed <strong>Director-General of Maritime Administration (DGMA)</strong>, with expanded statutory powers; (2) the rigid "100% Indian ownership" rule is gone — Indian-flagged vessels may now be wholly or partly owned by Indian citizens, companies, NRIs, OCIs, or other Central-Government-notified entities, with the exact ownership thresholds fixed by subordinate Rules rather than the Act itself (draft Registration of Vessels Rules, out for public consultation Dec 2025–Jan 2026, specify a minimum 51% Indian ownership share for partly-owned vessels — this is a draft rule figure, not yet a finalised, gazetted requirement, and should be stated as such); (3) the Act formally enables registration of foreign vessels under a Bareboat Charter-cum-Demise (BBCD) structure (Section 16); (4) Part V "Registration of Indian Ships" language from the 1958 Act is superseded by the 2025 Act's own registration Part (Sections 15–19 cover eligible owners, BBCD registration, and provisional registration). The Registrar of Indian vessels remains the Principal Officer of the Mercantile Marine Department (or a person the Central Government notifies) — this did not change. In an oral exam, state clearly that the 2025 Act is now in force and describe the 1958 Act only as the repealed predecessor framework, not as "currently active."
+  </div>
+
+  <div class="section-head">📖 Definition</div>
+  <p class="notes-body"><strong>Flag State Administration</strong> is the statutory framework through which a sovereign nation exercises legal authority and technical oversight over vessels flying its flag. <strong>Vessel Registry Engineering</strong> is the structured legal/technical process of entering a ship into a national register — verifying title, confirming tonnage, and certifying regulatory compliance. In India this framework now sits under the <strong>Merchant Shipping Act, 2025</strong>, administered by the Directorate General of Maritime Administration (DGMA) through the Mercantile Marine Department (MMD) at regional field offices including Kochi.</p>
+
+  <div class="section-head">⚓ Why It Matters (CE Perspective)</div>
+  <ul class="notes-list">
+    <li>As Chief Engineer you maintain the Continuous Synopsis Record (CSR), Oil Record Book, and engine room log discipline that flag-state and DGMA audits check first — registry compliance is a live, continuous engineering obligation, not a one-time paperwork event.</li>
+    <li>Nair frequently pivots between "1958 Act era" facts and "2025 Act era" facts specifically to test whether candidates are current — stating "2025 Act, now in force" without hesitation is itself part of a strong answer.</li>
+    <li>On a change-of-flag voyage, the engineering department is directly responsible for reprogramming SSAS/AIS/EPIRB/LRIT with new flag identifiers and re-engraving the wheelhouse tonnage plate — this is CE-owned technical work, not administrative-only.</li>
+  </ul>
+
+  <div class="section-head">📅 Historical Background</div>
+  <div class="timeline-block"><span class="t-year">1958</span>  Merchant Shipping Act, 1958 enacted — closed registry, 100% Indian ownership required
+<span class="t-year">2020</span>  Merchant Shipping Bill 2020 proposes 51%/49% equity liberalisation — never enacted as such
+<span class="t-year">2025</span>  18 Aug — Merchant Shipping Act, 2025 (Act No. 24 of 2025) receives Presidential assent, repealing the 1958 Act
+<span class="t-year">2026</span>  <span class="t-year">15 Mar</span> — MS Act 2025 provisions come into force; DG Shipping renamed DGMA</div>
+
+  <div class="section-head">⚖ Regulatory References</div>
+  <div class="reg-box">
+    <div class="reg-box-title">Key Instruments</div>
+    <div class="reg-item"><span class="reg-code">UNCLOS Art. 91</span><span class="reg-desc">Every State fixes conditions for granting nationality/registration to ships; requires a "genuine link" between State and ship.</span></div>
+    <div class="reg-item"><span class="reg-code">UNCLOS Art. 94</span><span class="reg-desc">Core duties of the Flag State — effective jurisdiction over the ship, master, officers and crew.</span></div>
+    <div class="reg-item"><span class="reg-code">Merchant Shipping Act, 2025 (Act No. 24 of 2025)</span><span class="reg-desc">In force from 15 March 2026; replaces the 1958 Act; 16 Parts, 325 sections (down from 561 sections in the 1958 Act).</span></div>
+    <div class="reg-item"><span class="reg-code">MSA 2025, ss.15–19</span><span class="reg-desc">Eligible owner categories, BBCD registration, provisional registration, and the Registrar's role.</span></div>
+  </div>
+
+  <div class="section-head">🏛 Ownership & Registration — Old vs. Now</div>
+  <table class="compare-table">
+    <tr><th>Parameter</th><th>MS Act 1958 (repealed)</th><th>MS Act 2025 (in force since 15 Mar 2026)</th></tr>
+    <tr><td>Eligible owners</td><td>Indian citizen / eligible corporate body / co-operative society only — 100% Indian ownership</td><td>Indian citizens, companies, NRIs, OCIs, and other Central-Government-notified entities; co-operative societies dropped from the list</td></tr>
+    <tr><td>Foreign equity</td><td>Not permitted (100% domestic rule)</td><td>Permitted; exact partial-ownership thresholds to be fixed by subordinate Rules (draft Rules propose a 51% minimum Indian share — not yet finalised)</td></tr>
+    <tr><td>Administering authority</td><td>Director General of Shipping (DGS)</td><td>Director-General of Maritime Administration (DGMA) — same office, renamed with expanded powers</td></tr>
+    <tr><td>Bareboat charter registration</td><td>No dedicated statutory route</td><td>Formally enabled — BBCD vessels registrable under Section 16</td></tr>
+  </table>
+
+  <div class="ce-tip"><strong>🎓 CE Oral Tip (Nair):</strong> Nair's current-affairs trap: "What is the active statutory framework for Indian ship registration today?" A candidate who answers "the Merchant Shipping Act, 1958" without qualification is giving a stale answer — the correct response is the <strong>Merchant Shipping Act, 2025</strong>, in force since 15 March 2026, with the 1958 Act now repealed. Follow immediately with the DGMA rename and the liberalised (NRI/OCI/company) ownership categories to show full command of the current framework.</div>
+
+  <div class="section-head">🎯 Oral Q&A</div>
+  <div class="qa-block">
+    <div class="qa-item"><div class="qa-q">Q1. What is the currently active statutory framework governing Indian vessel registration, and what changed from the earlier law?</div><div class="qa-a">The currently active law is the Merchant Shipping Act, 2025, in force since 15 March 2026, which repealed the Merchant Shipping Act, 1958. Under the 1958 Act, Indian registration required 100% Indian ownership by a citizen, eligible company, or co-operative society. The 2025 Act liberalises this: Indian-flagged vessels may now be wholly or partly owned by Indian citizens, companies, NRIs, OCIs, or other Central-Government-notified entities, with exact partial-ownership thresholds to be prescribed by subordinate Rules rather than fixed in the Act itself. The Director General of Shipping has also been renamed the Director-General of Maritime Administration (DGMA) under the new Act.</div></div>
+    <div class="qa-item"><div class="qa-q">Q2. What are the statutory duties of a Shipping Master regarding crew agreements and shipboard disputes?</div><div class="qa-a">The Shipping Master supervises the formal engagement and discharge of seafarers in line with national law and the Maritime Labour Convention, hears and arbitrates disputes between Master, owners and crew over wages or working conditions, verifies the vessel meets its Safe Manning Document before issuing port clearances for outbound voyages, and maintains records of Certificates of Competency and seafarers' discharge books.</div></div>
+    <div class="qa-item"><div class="qa-q">Q3. An Indian company buys a vessel located at a foreign port. How is she registered to make her delivery voyage to India?</div><div class="qa-a">The Registrar can authorise a local Indian Consular Officer or an RO surveyor to inspect the vessel at the foreign port, verifying ownership documents and the Carving and Marking Note details against the vessel's tonnage. Once satisfied, a Provisional Certificate of Registration is issued, giving the vessel legal flag status for her transit voyage to India, where permanent registration is then completed. (Note: under the 2025 Act the precise validity period and extension/cancellation procedure for this provisional certificate is left to subordinate Rules rather than a fixed figure in the Act — confirm the current prescribed period against the notified Rules rather than quoting a specific number as statute.)</div></div>
+  </div>
+
+  <div class="exam-focus-box">
+    <div class="exam-focus-head">✍ Written Exam Focus</div>
+    <div class="exam-q"><span class="marks-badge">5</span>State the key differences between the Merchant Shipping Act, 1958 and the Merchant Shipping Act, 2025 regarding vessel ownership eligibility.</div>
+    <div class="exam-q"><span class="marks-badge">10</span>Detail the complete administrative and technical process to register a newly built commercial vessel under the Merchant Shipping Act, 2025, from name application through to permanent registration.</div>
+    <div class="exam-q"><span class="marks-badge">15</span>Analyse the technical and regulatory steps in a change-of-flag procedure for an operational cargo vessel — hull marking and wheelhouse tonnage plate modifications, GMDSS/SSAS/LRIT reprogramming, classification society verification, and the statutory audits required for interim certification.</div>
+  </div>
+
+  <div class="memory-box">
+    <div class="memory-head">🧠 Memory Box</div>
+    <ul class="memory-list">
+      <li><strong>"2025, not 1958"</strong> — the active statute is the Merchant Shipping Act, 2025, in force since 15 March 2026.</li>
+      <li><strong>DGS → DGMA</strong> — Director General of Shipping renamed Director-General of Maritime Administration.</li>
+      <li>Ownership: closed 100% domestic rule under 1958 Act → liberalised to citizens/companies/NRIs/OCIs under 2025 Act, thresholds set by Rules.</li>
+    </ul>
+  </div>
+
+  <div class="deep-dive">
+    <button class="deep-dive-toggle" onclick="toggleDD(this)">▶ Deep Dive — MMD/DGMA Administrative Hierarchy & Change-of-Flag Sequence</button>
+    <div class="deep-dive-body">
+      <h4>Administrative Hierarchy</h4>
+      <p>DGMA (Mumbai, national policy and IMO coordination) sits above regional MMD field offices — including Kochi — each headed by a Principal Officer who executes ship surveys, physical registration, and local crew examinations. Technical staff at MMD level include Ship Surveyors, Engineer & Ship Surveyors, Nautical Surveyors, and Radio Surveyors; the Shipping Master handles crew/MLC matters regionally.</p>
+      <h4>Change-of-Flag Technical Sequence</h4>
+      <p>Application and name allotment → Carving and Marking Note issued → GMDSS/AIS/EPIRB/SSAS/LRIT reprogrammed with new flag identifiers → hull markings repainted and wheelhouse brass plate re-engraved → new flag/RO surveys for SMC, ISSC and MLC → interim certificates issued pending permanent documentation.</p>
+      <h4>On My Vessel (Maersk A/S container tonnage)</h4>
+      <p>Continuous Synopsis Record (CSR) entries must be updated within the statutory window whenever registry particulars change — the Chief Engineer's role is ensuring machinery certification records in the technical file match the CSR and current flag documentation before any external flag or PSC audit.</p>
+    </div>
+  </div>
+
+  <div class="section-head">📚 References</div>
+  <ul class="ref-list">
+    <li>The Merchant Shipping Act, 2025 (Act No. 24 of 2025), India Code</li>
+    <li>UNCLOS Articles 91 and 94</li>
+    <li>Draft Merchant Shipping (Registration of Vessels) Rules, 2026 (public consultation draft)</li>
+  </ul>
+
+  <div class="topic-footer">
+    <div class="correction-link">Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p14 · Topic 5 · Correction Required">Report correction</a></div>
+    <div class="topic-version">Notes-p14 · P14-T5 · v1.0</div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+  Part 14 of 31 · Pages 326–350 of 768 · Engineering Management Notes — Marine Intelligence Weekly<br>
+  Originally compiled by Uday Sankar S., Anglo-Eastern. Transcribed &amp; verified by Nixon Antony, 2/E, Maersk A/S.<br>
+  Topic numbering shown as local Part 14 badges (P14-T1–P14-T5). Part 13 (pages 301–325) is pending separately; global T-sequence renumbering across all parts remains deferred until Parts 13–31 are complete, per standing platform rule.<br>
+  <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Back to Notes Index</a> · <a href="mailto:contactus@marineintelligenceweekly.com">Report a correction</a>
+</div>
+
+<script>
+function toggleDD(btn){
+  var body = btn.nextElementSibling;
+  body.classList.toggle('open');
+}
+document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+document.addEventListener('copy', function(e){ e.preventDefault(); });
+document.addEventListener('selectstart', function(e){ e.preventDefault(); });
+</script>
+</body>
+</html>
+
