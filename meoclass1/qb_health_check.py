@@ -736,8 +736,17 @@ def main():
 
     known_traps = parse_known_traps(files.get(KNOWN_TRAPS_PATH))
 
+    # Exclude SQ/ and oralnotes/ files here — they get dedicated handling via
+    # check_sq_file() and check_notes_file() below, which know about their
+    # different rules (e.g. SQ/ files are intentionally free/ungated and use
+    # "index, follow" rather than the paywall noindex signature, and aren't
+    # tracked in qb_content_index.json). Without this exclusion these files
+    # were also run through the generic check_file() meant for meoclass1/
+    # gated QB content, producing false-positive robots/manifest errors.
     html_files = {name: content for name, content in files.items()
-                  if name.lower().endswith(".html")}
+                  if name.lower().endswith(".html")
+                  and not name.startswith(SQ_FOLDER_PREFIX)
+                  and not name.startswith(NOTES_FOLDER_PREFIX)}
 
     results = []
     for name, content in sorted(html_files.items()):
