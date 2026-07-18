@@ -67,6 +67,21 @@ GREP: Net-Zero Framework has been adopted
 0.10% sulphur limit takes effect 1 March 2027, not earlier.
 GREP: SKIP
 
+### 11. IMO GFI reference value vs FuelEU Maritime baseline — cross-track contamination
+The IMO GFI (GHG Fuel Intensity, MEPC 83 / MARPOL Annex VI Chapter 5) reference
+value is 93.3 gCO2eq/MJ (2008 fleet-average, well-to-wake). FuelEU Maritime
+(EU Regulation 2023/1805) is a separate regulation using the same units and
+WtW logic but its own 91.16 gCO2eq/MJ baseline (2020 reference). These are
+two distinct regulatory tracks (IMO global vs EU regional) that share
+terminology ("GFI"/"GHG intensity") and units, making them easy to conflate.
+Caught in QB6_E (Q2, Q3): the file used 91.16 as if it were the IMO GFI
+reference and computed reduction targets (2%/6%/14.5%) off the wrong
+baseline — those percentages are actually FuelEU's own schedule, not IMO's.
+Flagged by a candidate (Rathesh) via annotated screenshot correction.
+GREP: SKIP (91.16 is legitimate when correctly attributed to FuelEU Maritime;
+the trap is only when it's presented as the IMO GFI reference — needs manual
+context check, not a safe auto-grep)
+
 ---
 
 ## How to use this file
@@ -91,3 +106,4 @@ GREP: SKIP
 | Date | Entry added | Source |
 |---|---|---|
 | 2026-07-16 | Initial 10 entries | Compiled from Claude memory / prior correction sessions |
+| 2026-07-18 | Entry 11: IMO GFI vs FuelEU Maritime baseline | Candidate (Rathesh) annotated-screenshot correction on QB6_E |
