@@ -323,66 +323,74 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
       </div>
       <div class="q-answer">
         <div class="answer-body">
-          <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>Manual desludging is done when auto-desludge fails or as scheduled maintenance: stop and isolate (LOTO), wait for complete bowl stop, drain, disassemble and clean the bowl manually with non-metallic tools, inspect, reassemble to torque, then recommission with a water seal.</div>
-          <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Sir, this is high-risk due to bowl speeds up to 10,000 RPM. I isolate feed and heating steam, press stop, apply LOTO, and wait for a verified complete stop before touching the casing. I then drain the bowl, remove the main locking ring with special tools, extract the disc stack, and scrape sludge using wooden/brass tools only — never steel. After inspecting O-rings and disc alignment marks, I reassemble to the correct torque, restore power, re-establish the water seal, and bring the unit back online while watching for vibration.</div>
+          <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>With the purifier idling at normal rpm and amps but feed off — bowl already emptied by a few desludge cycles — I take manual control of the water solenoids and step through the maker's timing table: closing water to confirm the bowl is shut, interface water, then opening water for the desludge itself, confirmed by sound and vibration, then closing water again, checking rpm/amps return to normal before repeating or restoring feed.</div>
+          <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Sir, first the correct PPE — face shield, gloves, ear muffs, torch, the specific screwdriver or tool for that maker's solenoid valves, a spanner for the inspection plug, and a stopwatch for timing. If the purifier is already running, I run a few desludge cycles to empty the bowl, then initiate the stopping sequence for the FO feed and let it come down to idle running — I do not switch on a fresh starting sequence with feed on. As a precaution I also shut the manual FO inlet/outlet valves. With the automatic program not started or stopped, I take manual control of the solenoids at the local panel. I confirm bowl-operation water is open using the pressure gauge, then open and shut the closing water per the timing table to confirm the bowl is closed — visible on amps and rpm. I open and shut the interface water per timing, then open the opening water — immediately I hear the desludge sound and feel the vibration — then shut it, then open and shut closing water again, and confirm rpm and amps return to normal. This cycle can be repeated. Finally I open the interface water per the timing chart, check the inspection hole for leaks, and after a satisfactory inspection I open the FO feed valves and start the auto run program on a shortened desludge interval to confirm the whole cycle is working, then restore the interval to 60 minutes or more as required.</div>
 
-          <h4>When Manual Desludging Is Required</h4>
+          <h4>When Manual Desludging Is Used</h4>
           <ul>
-            <li>Automatic desludge failure (operating water fails to drop the sliding bottom).</li>
-            <li>Heavy fuel contamination / incompatible blend dropout.</li>
-            <li>PMS-scheduled overhaul (typically every 500–1000 hours per maker).</li>
-            <li>Pre-drydocking system clearance.</li>
+            <li>Auto desludge program is faulty, not started, or has been deliberately stopped so the engineer can control the sequence by hand.</li>
+            <li>Troubleshooting a suspected bowl-closing or sealing problem.</li>
+            <li>After a major overhaul — to verify the bowl closes properly before returning the unit to full unattended service.</li>
+            <li>Forcing an off-cycle desludge on heavy contamination ahead of the next scheduled auto interval.</li>
+          </ul>
+          <h4>PPE &amp; Tools Required</h4>
+          <ul>
+            <li>Face shield and gloves — protection against water/oil spray from solenoid valves and the inspection plug.</li>
+            <li>Ear muffs — purifier noise at running speed.</li>
+            <li>Torch light — for viewing through the inspection hole and reading local panel indications.</li>
+            <li>Maker-specific tool for the solenoid valves — often a Phillips screwdriver, sometimes a special tool depending on design.</li>
+            <li>Spanner/tool to open the inspection plug.</li>
+            <li>Stopwatch or watch — to time each stage against the maker's timing table.</li>
           </ul>
 
-          <h4>Safety Precautions Before Starting</h4>
+          <h4>Precautions Before Starting</h4>
           <ul>
-            <li>Permit to Work and risk assessment for high-speed rotating machinery.</li>
-            <li>LOTO on the motor breaker with warning notices.</li>
-            <li><strong>Verify zero speed</strong> physically (revolution indicator/spindle check) — bowls run 6,000–10,000 RPM and may spin down for 15–30 minutes on inertia. Never open a spinning bowl.</li>
-            <li>PPE for thermal hazard — bowl/oil components may still be near 98°C.</li>
+            <li><strong>Feed must be off, not on</strong> — this is not the starting sequence. If the purifier is already running, first run a few desludge cycles to empty the bowl, then initiate the normal stopping sequence for the FO feed and let the unit settle to idle running (bowl spinning at normal rpm/amps, no oil feed). As a precaution, shut the manual FO inlet/outlet valves as well.</li>
+            <li>Have the specific unit's desludge sequence and timing table at hand — timings differ by purifier type and size, and even between units from the same maker.</li>
+            <li><strong>Check your own vessel's purifier manual for exact timings on your type/model</strong> before the oral — quoting figures from your last vessel's actual maker table (not a generic value) makes for a far more confident, examiner-proof answer. <em>Example — Mitsubishi HBC-1 (Table 5-4, SJ-series):</em> T00 Interval, the gap between each solenoid valve operation, is 15 sec across most SJ models (20 sec on larger SJ160H/SJ220H); T01 Opening bowl (bowl-opening/desludge water) is a fixed 3 sec across all models; T02 Replacement water and T03 Sealing water scale with bowl size (roughly 6–39 sec and 6–34 sec respectively); T04 Bowl washing water is 0 sec for fuel oil but 10–56 sec for lube oil, sized by model; T16 Operating water supply for closing the bowl is a fixed 5 sec. These confirm the general pattern in this answer — closing/interface-type water in single-digit seconds, opening/discharge water only a few seconds, with a set interval gap between each solenoid step — but the candidate must quote their own vessel's actual table, not these Mitsubishi figures, unless that is genuinely their type.</li>
+            <li>Water naming is maker-specific and inconsistent across manufacturers — think in functional terms: water for <em>opening</em> the bowl, water for <em>closing</em> the bowl, and water for <em>creating the interface</em> (oil/water interface inside the bowl) — rather than memorising one maker's terms as universal.</li>
+            <li>Some designs use both high-pressure and low-pressure water for different stages, and solenoid valve throughput (flow rate) also differs by maker — Alfa Laval, Mitsubishi, and Westfalia each have their own values, so always confirm against that unit's table rather than assuming.</li>
           </ul>
 
           <h4>Step-by-Step Procedure</h4>
-          <p><strong>1. Stop and Isolate:</strong> shut dirty-oil inlet and clean-oil outlet, shut steam heating, press stop, verify zero current, engage LOTO, confirm complete physical stop.</p>
-          <p><strong>2. Drain the Bowl:</strong> open the housing drain to clear residual oil/liquid to the sludge line.</p>
-          <p><strong>3. Disassemble:</strong> open cover clamps, fit locking/braking tool if required, slacken the main locking ring (left-hand thread — turn clockwise to loosen) with the special spanner, lift out the disc stack with the maker's tool.</p>
-          <p><strong>4. Manual Cleaning:</strong> scrape sludge with wooden/brass/plastic tools only (steel scores the alloy and creates stress points); soak disc stack in diesel/chemical bath, clear inter-disc channels.</p>
-          <p><strong>5. Inspect Components:</strong> check O-rings, main and sliding-bottom seal rings, disc distribution holes, gravity/paring disc for erosion or cavitation.</p>
-          <p><strong>6. Reassemble:</strong> seat sliding bottom, drop disc stack matching alignment marks, lubricate and thread the (left-hand) locking ring counter-clockwise to the correct torque until marks align.</p>
-          <p><strong>7. Recommission:</strong> close casing, remove LOTO, restore power, start and verify current draws to normal, supply sealing water until it overflows the waste line, slowly open feed and monitor 15 minutes for vibration/noise.</p>
-          <p><strong>8. Record:</strong> log in PMS; enter sludge quantity in the <strong>Oil Record Book Part I, Code C</strong> (retention and disposal of residues).</p>
+          <p><strong>1. Prepare Purifier:</strong> if already running, complete a few desludge cycles to empty the bowl, then run the normal stopping sequence for the FO feed and let it settle to idle running (normal rpm/amps, feed off); shut manual FO inlet/outlet valves as a precaution.</p>
+          <p><strong>2. Take Manual Control:</strong> confirm the automatic desludge program is not started, or is stopped, so the water solenoid valves can be operated by hand at the local panel.</p>
+          <p><strong>3. Confirm Bowl-Operation Water:</strong> ensure the water supply for bowl operation is open, verified on the water pressure gauge.</p>
+          <p><strong>4. Confirm Bowl Closed:</strong> open the closing water solenoid per the maker's timing table, then shut it — confirm the bowl is fully closed by watching rpm and amps hold steady.</p>
+          <p><strong>5. Interface Water:</strong> open and shut the interface-creating water solenoid per the timing table.</p>
+          <p><strong>6. Desludge (Opening Water):</strong> open the opening water solenoid per the timing table — immediately confirm the desludge by the characteristic sound and vibration felt through the casing — then shut it.</p>
+          <p><strong>7. Re-close the Bowl:</strong> open and shut the closing water again per the timing table, and confirm rpm and normal amps are restored to steady running before proceeding.</p>
+          <p><strong>8. Repeat if Required:</strong> steps 4–7 can be repeated for further desludge cycles as needed.</p>
+          <p><strong>9. Interface Water &amp; Leak Check:</strong> open the interface water once more per the timing chart, then check through the inspection hole/plug for any water leakage.</p>
+          <p><strong>10. Restore Feed &amp; Auto Program:</strong> after satisfactory inspection, open the FO feed valves and initiate the auto run program with a shortened desludge interval to confirm the complete cycle — all sequences — is working correctly; once confirmed, restore the desludge interval to 60 minutes or more as required by the maker/PMS.</p>
 
-          <div class="trap-box"><strong class="trap-label">Trap Question</strong>"Alignment marks are off by ~5mm on reassembly — what do you do?" — Disassemble again: a disc is out of place, sludge is trapped under the stack, or the seal ring is not seated. Running with marks misaligned risks catastrophic bowl imbalance and mechanical failure.</div>
+          <div class="trap-box"><strong class="trap-label">Trap Question</strong>"Why would you run this manual sequence after a major overhaul, when the purifier hasn't even started producing sludge yet?" — Because the purpose isn't just sludge removal: stepping through the closing/interface/opening water sequence by hand and confirming sound, vibration, and no leakage at the inspection hole is how you verify the bowl closes and seals correctly after reassembly, before trusting the unit to automatic unattended operation.</div>
 
           <h4>CE Relevance</h4>
-          <p>The Chief Engineer must ensure crew never bypass zero-speed interlocks, and that recorded sludge volumes reconcile with the ORB Part I entries and sounding records.</p>
+          <p>The Chief Engineer must ensure watchkeepers know each unit's specific water-naming convention, sequence, and timing table — since terms and timings are not standardised across makers — and understand that this manual sequence is used both for routine desludging and as a functional check after overhaul or during troubleshooting.</p>
 
           <h4>Common CE Failures</h4>
-          <p>Omitting LOTO and zero-speed verification; forgetting the steel-scraper warning; failing to mention the mandatory ORB Part I sludge entry.</p>
+          <p>Starting the manual sequence with feed still on instead of first emptying the bowl and idling; assuming one maker's water-naming convention applies universally; not knowing the model-specific timing table; skipping the inspection-hole leak check; not recognising this manual sequence as a valid post-overhaul functional test.</p>
 
-          <div class="numbers-box"><h4>Numbers / Regs</h4>MARPOL Annex I Reg 12 (sludge tank retention and ORB recording) · Maker's manual torque and alignment specs</div>
-
-          <div class="casualty-box"><strong class="cas-label">Casualty Link</strong>A tanker (2017) suffered an engine-room fire when a third engineer opened a purifier cover before the bowl had fully stopped — the unbalanced bowl shattered its casing, ruptured a fuel line, and ignited on the adjacent auxiliary engine exhaust.</div>
+          <div class="numbers-box"><h4>Numbers / Regs</h4>The manual desludge sequence itself is a maker's-manual operational procedure, not governed by a specific SOLAS/MARPOL clause. MARPOL Annex I Reg 12 and ORB Part I Code C apply to the retention, disposal, and recording of the sludge once ejected.</div>
 
           <h4>Examiner Chain</h4>
-          <p>Nair &rarr; manual desludging steps &rarr; sludge destination and handling &rarr; ORB entry protocol &rarr; action on a cracked separator disc.</p>
+          <p>Nair &rarr; manual desludging sequence &rarr; why feed must be off before starting &rarr; why the same sequence is used after overhaul &rarr; how you confirm no leakage &rarr; sludge destination and ORB entry.</p>
 
           <h4>On My Vessel</h4>
-          <p><strong>Container (Maersk):</strong> centralised fuel treatment plant with Alfa Laval ALCAP separators; manual overhaul mandated every 1000 running hours per SMS PMS. Cleaning residues route to the sludge tank, measured by sounding table, and logged in the ORB by the Second Engineer, verified by the Chief Engineer.</p>
+          <p><strong>Container (Maersk):</strong> Alfa Laval ALCAP separators in the centralised fuel treatment plant, normally on automatic PLC-timed desludge. When manual control is taken at the local panel, feed is stopped and the unit brought to idle running first, then the closing/interface/opening water sequence is stepped through per that unit's timing table — used for troubleshooting, and always run after a major overhaul to confirm the bowl closes and seals properly before returning to automatic operation.</p>
         </div>
         <div class="reg-box">
           <div class="reg-box-title">⚖ Regulatory References</div>
           <div class="reg-item"><span class="reg-code">MARPOL Annex I Reg 12</span><span class="reg-desc">Sludge tank retention, disposal, and ORB Part I entries</span></div>
-          <div class="reg-item"><span class="reg-code">ISM Code Sec. 7</span><span class="reg-desc">Shipboard operations — mandatory PTW and LOTO</span></div>
-          <div class="reg-item"><span class="reg-code">ISM Code Sec. 10</span><span class="reg-desc">Maintenance — purifier as critical machinery</span></div>
-          <div class="reg-item"><span class="reg-code">SOLAS II-1 Reg 26</span><span class="reg-desc">Machinery safety shielding around rotating parts</span></div>
-          <div class="reg-item"><span class="reg-code">Purifier Maker Manual</span><span class="reg-desc">Assembly torque, alignment tolerances, gravity disc sizing</span></div>
+          <div class="reg-item"><span class="reg-code">ISM Code Sec. 10</span><span class="reg-desc">Maintenance — purifier as critical machinery, PMS-defined procedures</span></div>
+          <div class="reg-item"><span class="reg-code">Purifier Maker Manual</span><span class="reg-desc">Unit-specific water solenoid sequence and timing table</span></div>
         </div>
-        <div class="ce-tip"><strong>CE Oral Tip:</strong> Open with safety: "Sir, before any purifier maintenance I will raise a Permit to Work, apply LOTO, and only open the bowl after physically verifying zero speed." Then walk the 8 steps. The ORB sludge entry and correct disc reassembly are the two most common failure points.</div>
+        <div class="ce-tip"><strong>CE Oral Tip:</strong> Open with the feed-off correction: "Sir, feed must be off, not on — the purifier is idling after a few desludge cycles, not freshly started." Then don't lock onto one maker's water names — closing, interface, opening water is the functional sequence, timed per that unit's table. Walk the 10 steps, and mention the post-overhaul functional-check use case if the examiner probes further.</div>
       </div>
       <div class="q-footer">
         <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_C, Q3, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-        <span class="q-version">QB6_C · Q3 · v1.0</span>
+        <span class="q-version">QB6_C · Q3 · v1.5</span>
       </div>
     </div>
 
