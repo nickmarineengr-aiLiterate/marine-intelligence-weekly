@@ -84,6 +84,35 @@ context check, not a safe auto-grep)
 
 ---
 
+## Health-check grep — negation-context noise
+
+The daily `qb_health_check.py` trap scan (`check_known_traps()`) currently
+flags a `GREP:` phrase on any occurrence, including when the surrounding
+sentence is correctly citing the old/wrong term in order to supersede,
+repeal, or debunk it (e.g. "the old Merchant Shipping Act, 1958... has been
+replaced by", "supersedes A.1185(33)", "IMO does not designate it 'FAL Form
+8'"). Verified 2026-07-19: every trap hit in that day's run (MS Act 1958 x6
+files, A.1185(33) x4 files, FAL Form 8 x1 file) was a false positive of
+this kind — correctly-framed corrections, not resurfaced errors.
+
+Before treating a future flag as confirmed, check whether the matched line
+also contains a negation/supersession marker, e.g.:
+- "superseded by" / "supersedes"
+- "replaced by" / "replaces"
+- "repealed"
+- "not... but" / "not the... but"
+- "does not designate" / "is not"
+- "formerly" / "now succeeded by" / "since replaced by"
+
+If one of these markers appears in the same sentence as the trap phrase,
+treat it as likely-correct usage and verify manually rather than flagging
+as an error. `qb_health_check.py` should ideally skip-list lines matching
+these markers (or downgrade them to a "review" tier instead of "error") to
+cut noise in future runs — this is a suggested script enhancement, not yet
+implemented.
+
+---
+
 ## How to use this file
 
 - Before building any new QB batch or notes part, check the drafted answer
