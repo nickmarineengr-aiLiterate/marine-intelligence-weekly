@@ -82,6 +82,20 @@ GREP: SKIP (91.16 is legitimate when correctly attributed to FuelEU Maritime;
 the trap is only when it's presented as the IMO GFI reference — needs manual
 context check, not a safe auto-grep)
 
+### 12. CLC 1992 scope — mineral oil only, not animal/vegetable oil
+CLC 1992 (Civil Liability Convention) applies only to **persistent
+hydrocarbon mineral oil** — crude oil, heavy fuel oil, lubricating oil.
+It does NOT cover non-mineral oils such as whale oil or other animal/
+vegetable oils, regardless of persistence — those are classed as
+hazardous and noxious substances and fall under the **HNS Convention
+1996, as revised by the 2010 HNS Protocol**, instead. Note the 2010 HNS
+Protocol is not yet in force (confirmed entry into force 29 November
+2027); until then such incidents fall back on national law, LLMC
+limitation, and P&I cover — not a CLC/Fund-style regime. Caught in QB1_A
+(Q5, CLC), which listed "whale oil" alongside crude/HFO/lube oil as if
+covered by CLC. Flagged by a candidate (Vivek) via screenshot correction.
+GREP: lubricating oil, whale oil
+
 ---
 
 ## Health-check grep — negation-context noise
@@ -136,3 +150,4 @@ implemented.
 |---|---|---|
 | 2026-07-16 | Initial 10 entries | Compiled from Claude memory / prior correction sessions |
 | 2026-07-18 | Entry 11: IMO GFI vs FuelEU Maritime baseline | Candidate (Rathesh) annotated-screenshot correction on QB6_E |
+| 2026-07-19 | Entry 12: CLC scope — mineral oil only (whale oil trap) | Candidate (Vivek) screenshot correction on QB1_A |
