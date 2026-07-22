@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marine Intelligence Weekly | Issue 30 | Deployed vs. Demonstrated</title>
+<meta name="description" content="Marine Intelligence Weekly Issue 30 — sorting deployed maritime AI from vendor-reported claims: MOL×IBM, Korean Register×Microsoft, HiddenLayer's AI security data, the IMO Net-Zero Framework's real adoption status, FuelEU's 2026 deadlines, and DGMA's Strait of Hormuz circular.">
+<link rel="canonical" href="https://marineintelligenceweekly.com/index30.html">
+<meta property="og:title" content="MIW Issue 30 — Deployed vs. Demonstrated">
+<meta property="og:description" content="Which maritime AI claims are actually deployed — and which are still a slide deck. Issue 30 of Marine Intelligence Weekly.">
+<meta property="og:image" content="https://marineintelligenceweekly.com/assets/cover30.webp">
+<meta property="og:type" content="article">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://marineintelligenceweekly.com/assets/cover30.webp">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-0YEE2CBNP5');
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Source+Sans+3:wght@300;400;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --navy:#0f172a; --teal:#0d9488; --orange:#f97316;
+    --off-white:#f8fafc; --grey:#64748b; --gold:#c9a84c;
+    --line:#e2e8f0; --shadow:0 12px 30px rgba(15,23,42,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Source Sans 3",sans-serif;background:var(--off-white);color:var(--navy);line-height:1.7}
+  img{max-width:100%;display:block;border-radius:10px}
+  a{color:inherit}
+  h1,h2,h3{font-family:"Playfair Display",serif;color:var(--navy)}
+  .skip-link{position:absolute;left:-9999px}
+  .skip-link:focus{left:12px;top:12px;background:#fff;padding:8px 12px;z-index:999}
+
+  /* ===== NAV ===== */
+  .topbar{position:sticky;top:0;z-index:80;background:rgba(15,23,42,.97);backdrop-filter:blur(10px);border-bottom:2px solid var(--gold)}
+  .topbar-inner{max-width:1180px;margin:0 auto;padding:12px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none}
+  .brand img{width:34px;height:34px;border-radius:0}
+  .brand-text{font-size:13px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+  .brand-text small{display:block;font-size:9.5px;color:var(--gold);letter-spacing:.15em;font-weight:600}
+  .nav-links{display:flex;gap:4px;flex-wrap:wrap;font-size:11.5px}
+  .nav-links a{text-decoration:none;padding:7px 12px;border-radius:999px;color:rgba(255,255,255,.75);font-weight:600;transition:.2s;white-space:nowrap}
+  .nav-links a:hover{background:rgba(255,255,255,.08);color:#fff}
+  .nav-links a.active{background:var(--teal);color:#fff}
+  .nav-toplinks{display:flex;gap:10px;font-size:11px}
+  .nav-toplinks a{color:var(--gold);text-decoration:none;font-weight:700;letter-spacing:.05em}
+  .nav-toplinks a:hover{text-decoration:underline}
+  @media(max-width:900px){.nav-links{overflow-x:auto;flex-wrap:nowrap;width:100%;padding-bottom:4px}}
+
+  /* ===== HERO ===== */
+  .hero{background:linear-gradient(160deg,#0f172a 0%,#132436 55%,#0d3b36 100%);color:#fff;position:relative;overflow:hidden}
+  .hero:before{content:"";position:absolute;width:520px;height:520px;right:-140px;top:-120px;background:radial-gradient(circle,rgba(249,115,22,.18),transparent 65%);border-radius:50%}
+  .hero-inner{max-width:1100px;margin:0 auto;padding:56px 24px 48px;position:relative;z-index:1;display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:center}
+  @media(max-width:860px){.hero-inner{grid-template-columns:1fr}}
+  .issue-badge{display:inline-block;background:var(--gold);color:#0f172a;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;padding:6px 14px;border-radius:4px;margin-bottom:16px}
+  .hero h1{font-size:44px;line-height:1.05;letter-spacing:-.02em;margin-bottom:14px;color:#fff}
+  .hero h1 em{color:var(--orange);font-style:normal}
+  .hero-deck{font-family:"Source Serif 4",serif;font-size:17px;color:rgba(255,255,255,.82);max-width:56ch;margin-bottom:18px}
+  .hero-meta{font-size:12.5px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;font-weight:700;display:flex;gap:18px;flex-wrap:wrap}
+  .hero-cover{border-radius:14px;overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(255,255,255,.12)}
+
+  /* ===== SHARE BAR ===== */
+  .share-bar{max-width:1100px;margin:0 auto;padding:14px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+  .share-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--grey);font-weight:700;margin-right:6px}
+  .share-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:999px;font-size:12.5px;font-weight:700;text-decoration:none;border:1px solid var(--line);color:var(--navy);background:#fff;cursor:pointer;transition:.2s}
+  .share-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .share-btn.whatsapp:hover{background:#25D366;border-color:#25D366}
+  .share-btn.linkedin:hover{background:#0A66C2;border-color:#0A66C2}
+
+  /* ===== SECTIONS ===== */
+  main{max-width:880px;margin:0 auto;padding:0 24px}
+  section.block{padding:52px 0;border-bottom:1px solid var(--line);scroll-margin-top:90px}
+  .kicker{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:8px}
+  .block h2{font-size:30px;margin-bottom:18px}
+  .block p{margin-bottom:16px;font-size:16.5px}
+  .lede{font-family:"Source Serif 4",serif;font-size:18px;color:#334155}
+
+  /* Quick read */
+  .quick-list{list-style:none;display:grid;gap:12px}
+  .quick-list li{background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:8px;padding:14px 18px;font-size:15.5px}
+
+  /* Feature */
+  .word-note{font-size:12.5px;color:var(--grey);font-style:italic;margin-bottom:20px}
+  .label{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:600;padding:2px 8px;border-radius:4px;margin-right:4px;letter-spacing:.02em}
+  .label.deployed{background:#ccfbf1;color:#0f766e}
+  .label.vendor{background:#ffedd5;color:#c2410c}
+  .label.study{background:#dbeafe;color:#1d4ed8}
+  .label.reg{background:#fef3c7;color:#92400e}
+  .pullquote-img{margin:28px 0;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+  .infographic{margin:28px 0;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}
+  .infographic-caption{font-size:12.5px;color:var(--grey);text-align:center;margin-top:8px}
+  .thesis-line{font-family:"Source Serif 4",serif;font-size:19px;font-style:italic;color:var(--navy);border-left:4px solid var(--orange);padding:14px 20px;margin:26px 0;background:#fff7ed}
+
+  /* Regulatory Pulse table */
+  .reg-table{width:100%;border-collapse:collapse;font-size:14px;margin:20px 0;background:#fff;border-radius:10px;overflow:hidden;box-shadow:var(--shadow)}
+  .reg-table th{background:var(--navy);color:#fff;text-align:left;padding:10px 12px;font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+  .reg-table td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+  .reg-table tr:last-child td{border-bottom:none}
+  .conf{font-family:"JetBrains Mono",monospace;font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:4px;white-space:nowrap;display:inline-block}
+  .conf.adopted{background:#dcfce7;color:#166534}
+  .conf.rule{background:#dbeafe;color:#1d4ed8}
+  .conf.recommended{background:#fef9c3;color:#854d0e}
+  .conf.study{background:#e0e7ff;color:#4338ca}
+  .conf.proposal{background:#fef3c7;color:#92400e}
+  .conf.force{background:#fee2e2;color:#991b1b}
+
+  /* India Angle */
+  .editorial-note{font-size:13.5px;color:var(--grey);font-style:italic;background:#f1f5f9;border-radius:8px;padding:12px 16px;margin-bottom:20px}
+
+  /* Nixon's Voice */
+  .voice-block{display:flex;gap:20px;align-items:flex-start}
+  .voice-photo{width:76px;height:76px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid var(--gold)}
+  @media(max-width:600px){.voice-block{flex-direction:column;align-items:center;text-align:center}}
+
+  /* Takeaway table */
+  .takeaway-table{width:100%;border-collapse:collapse;font-size:14.5px;margin-top:16px}
+  .takeaway-table th{background:var(--teal);color:#fff;padding:10px 12px;text-align:left;font-size:12px;text-transform:uppercase;letter-spacing:.05em}
+  .takeaway-table td{padding:12px;border-bottom:1px solid var(--line)}
+  .takeaway-table tr:nth-child(even){background:#f8fafc}
+
+  /* Teaser */
+  .teaser-box{background:var(--navy);color:#fff;border-radius:14px;padding:30px;margin-top:20px}
+  .teaser-box .kicker{color:var(--gold)}
+  .teaser-box p{color:rgba(255,255,255,.85)}
+
+  /* ===== FOOTER ===== */
+  footer{background:var(--navy);color:rgba(255,255,255,.75);padding:48px 24px 32px;margin-top:20px}
+  .footer-inner{max-width:1100px;margin:0 auto}
+  .footer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;margin-bottom:32px}
+  @media(max-width:760px){.footer-grid{grid-template-columns:1fr 1fr}}
+  .footer-grid h4{color:#fff;font-family:"Source Sans 3",sans-serif;font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+  .footer-grid a{display:block;color:rgba(255,255,255,.65);text-decoration:none;font-size:13.5px;margin-bottom:8px}
+  .footer-grid a:hover{color:var(--gold)}
+  .footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding-top:20px;font-size:12px;color:rgba(255,255,255,.5);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+  /* ===== FLOATING CONTROLS ===== */
+  #backToTop{position:fixed;bottom:24px;right:24px;width:46px;height:46px;border-radius:50%;background:var(--navy);color:#fff;border:2px solid var(--gold);display:none;align-items:center;justify-content:center;cursor:pointer;z-index:90;box-shadow:var(--shadow);font-size:18px}
+  #bookmarkBtn{position:fixed;bottom:24px;right:80px;width:46px;height:46px;border-radius:50%;background:#fff;color:var(--navy);border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:90;box-shadow:var(--shadow);font-size:18px}
+  #bookmarkBtn.saved{background:var(--teal);color:#fff}
+  @media(max-width:600px){#backToTop{bottom:16px;right:16px}#bookmarkBtn{bottom:16px;right:70px}}
+
+  /* ===== PRINT ===== */
+  @media print{
+    .topbar,.share-bar,#backToTop,#bookmarkBtn,footer{display:none !important}
+    body{background:#fff}
+    section.block{border-bottom:1px solid #ccc;page-break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+<a href="#feature" class="skip-link">Skip to content</a>
+
+<!-- ===== NAV ===== -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      <img src="assets/logo.webp" alt="MIW logo">
+      <span class="brand-text">Marine Intelligence Weekly<small>Issue 30 — 22 July 2026</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#quickread">Quick Read</a>
+      <a href="#feature">Feature</a>
+      <a href="#regulatory">Regulatory</a>
+      <a href="#ai">AI</a>
+      <a href="#india">India</a>
+      <a href="#voice">Voice</a>
+      <a href="#takeaway">Takeaway</a>
+      <a href="#teaser">Next Issue</a>
+    </nav>
+    <div class="nav-toplinks">
+      <a href="index29.html">← Issue 29</a>
+      <a href="index.html">Home</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="issue-badge">Issue 30</span>
+      <h1>Deployed vs. <em>Demonstrated</em></h1>
+      <p class="hero-deck">Reading maritime AI claims without the hype — plus the IMO Net-Zero Framework's real adoption status, FuelEU's 2026 deadlines, and the DGMA circular reshaping Indian seafarer deployment through the Strait of Hormuz.</p>
+      <div class="hero-meta">
+        <span>22 July 2026</span>
+        <span>~9 min read</span>
+        <span>By Nixon Antony</span>
+      </div>
+    </div>
+    <div class="hero-cover">
+      <img src="assets/cover30.webp" alt="Marine Intelligence Weekly Issue 30 cover — Deployed vs. Demonstrated">
+    </div>
+  </div>
+</section>
+
+<!-- ===== SHARE BAR ===== -->
+<div class="share-bar">
+  <span class="share-label">Share</span>
+  <a class="share-btn whatsapp" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?text=Marine%20Intelligence%20Weekly%20Issue%2030%20%E2%80%94%20Deployed%20vs.%20Demonstrated%3A%20https%3A%2F%2Fmarineintelligenceweekly.com%2Findex30.html">WhatsApp</a>
+  <a class="share-btn linkedin" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=https://marineintelligenceweekly.com/index30.html">LinkedIn</a>
+  <button class="share-btn" onclick="window.print()">Save PDF</button>
+</div>
+
+<main>
+
+  <!-- ===== QUICK READ ===== -->
+  <section class="block" id="quickread">
+    <div class="kicker">Executive summary</div>
+    <h2>Quick Read</h2>
+    <ul class="quick-list">
+      <li>Real AI deployment evidence is diverging fast from AI announcement volume: Uni-Tankers has committed all 44 tankers to voyage-optimisation software on a vendor-reported 6.9% saving, while HiddenLayer's 2026 data shows only 14.4% of live AI agents carry full security sign-off.</li>
+      <li>MOL and IBM Japan went live 1 July 2026 with a generative-AI risk platform inside a real operations centre — one of this cycle's few examples of AI in a named, running system rather than a pilot or MoU.</li>
+      <li>Korean Register and Microsoft Korea are embedding AI agents directly into classification and inspection workflows — the regulatory trust layer itself is going digital.</li>
+      <li>The IMO Net-Zero Framework remains <strong>unadopted</strong> — MEPC's vote was delayed to October 2026 — a useful reminder that regulatory signal often lags both the AI hype cycle and the operational reality.</li>
+      <li>India's DGMA hosted its National Maritime Security Coordinator at the Mercantile Marine Domain Awareness Centre (MMDAC) on 17 July 2026 — live, operational vessel-tracking and LRIT infrastructure, not a pitch, reviewed at the highest level days after the Hormuz circular.</li>
+    </ul>
+  </section>
+
+  <!-- ===== FEATURE ===== -->
+  <section class="block" id="feature">
+    <div class="kicker">Feature Article</div>
+    <h2>Deployed vs. Demonstrated — Reading Maritime AI Claims Without the Hype</h2>
+    <p class="word-note">~880 words — Nixon's Voice</p>
+
+    <p class="lede">Every week now brings a fresh maritime AI announcement — a platform launch, a funding round, an MoU, a "pilot" that gets a press release. Most of it is noise dressed as signal. The job of this section, every issue, is to sort the two apart: what's actually running on a real vessel with a named operator behind it, versus what's still a slide deck. This week gives a cleaner-than-usual split.</p>
+
+    <p><strong>What's deployed.</strong> <span class="label deployed">CONFIRMED DEPLOYMENT</span> MOL and IBM Japan went live on 1 July 2026 with a generative-AI risk-extraction platform inside MOL's Safety Operation Supporting Center — a named operator, a named system, a live date, fusing weather, sea state, position, and geopolitical data into real-time decision support for a 24/7 operations centre. <span class="label deployed">CONFIRMED DEPLOYMENT</span> Korean Register and Microsoft Korea are doing something structurally similar on the regulatory side: embedding AI agents across classification, inspection, and technical services, with a planned AI-centred ship data centre. If that holds, the trust layer every other maritime AI claim ultimately has to pass through — class approval — starts going digital itself. <span class="label deployed">CONFIRMED DEPLOYMENT</span> Hafnia's Complexio rollout is the third genuine data point: a large tanker owner reporting operational gains from an enterprise-AI deployment at scale, not a pilot.</p>
+
+    <figure class="pullquote-img">
+      <img src="assets/image5_30.webp" alt="Pull quote: A platform-average fuel-saving figure is not the same claim as an audited, fleet-wide result. — Nixon Antony, Editor, Marine Intelligence Weekly Issue 30">
+    </figure>
+
+    <p><strong>What's still demonstrated, not deployed.</strong> <span class="label vendor">VENDOR REPORTED</span> Uni-Tankers has committed all 44 tankers to Sofar Ocean's Wayfinder voyage-optimisation platform, citing an average 6.9% fuel saving per voyage in 2025. That's a real commercial decision by a real operator — but the 6.9% figure is vendor-reported, not an independently audited before-and-after comparison across the fleet. A platform-average saving from early adopters doesn't automatically hold once it's applied across every trade pattern and level of crew adherence. Until Uni-Tankers or Sofar Ocean publishes its own before-and-after numbers, the honest read is "promising operator bet," not "proven CII dividend." <span class="label vendor">VENDOR/OPERATOR REPORTED</span> Adani Ports' up-to-$100 million Kaleris rollout sits in the same bucket — a 20% RTG crane-productivity target is a target, not a measured result, until named-terminal turnaround data comes out.</p>
+
+    <figure class="infographic">
+      <img src="assets/image2_30.webp" alt="Deployed vs Demonstrated infographic comparing MOL x IBM, Korean Register x Microsoft, Hafnia (confirmed deployment) against Uni-Tankers x Sofar Ocean and Adani Ports x Kaleris (vendor reported)">
+      <p class="infographic-caption">Confirmed deployment vs. vendor-reported claims — this week's split, sorted.</p>
+    </figure>
+
+    <p><strong>What the industry isn't talking about enough.</strong> <span class="label study">INDEPENDENT STUDY</span> HiddenLayer's 2026 AI Threat Landscape Report is the number that should be reshaping every deployment conversation above: autonomous agents now drive more than one in eight reported AI security breaches, at an average cost near $4.7 million per breach, and only 14.4% of AI agents currently live in production carry full security sign-off. MOL's risk platform, Wayfinder's routing agents, Korean Register's classification agents — every one of these is exactly the kind of system HiddenLayer is describing. IMO's digitalisation work has started pairing cybersecurity output with digital-shipping guidance, which is the right instinct — but no binding maritime instrument yet requires an AI agent to clear a security bar before it goes live.</p>
+
+    <figure class="infographic">
+      <img src="assets/image3_30.webp" alt="AI security by the numbers: 1 in 8 AI security breaches driven by autonomous agents, $4.7 million average breach cost, 14.4% of live AI agents carry full security sign-off — HiddenLayer 2026 AI Threat Landscape Report">
+      <p class="infographic-caption">Source: HiddenLayer 2026 AI Threat Landscape Report.</p>
+    </figure>
+
+    <p>That's the piece this newsletter exists to keep in front of readers: not "AI is coming to shipping" — it's already here, in named systems, with named operators — but "which of these claims would survive an audit." A platform-average fuel-saving figure is not the same claim as an audited, fleet-wide result. A "live" AI agent is not the same claim as a security-signed-off one. None of this is cynicism about maritime AI — MOL/IBM and Korean Register are genuinely real, running systems. It's a discipline: read every claim for what kind of claim it actually is before deciding how much weight to put on it.</p>
+
+    <p>For engineers, the practical takeaway is narrower than "AI is changing shipping." If your vessel or fleet is adopting any AI-assisted decision-support, voyage-optimisation, or risk-extraction tool, the first question isn't "does it work" — early evidence on that is often genuinely good — it's "who signed off on its security posture, and can I see the audited numbers behind the headline saving." Engine-room and shipboard digital systems need strict change control, access management, patch discipline, and backup procedures before AI integration goes further than it already has. HiddenLayer's data says most of what's live right now hasn't cleared that bar.</p>
+
+    <p><span class="label reg">REGULATORY PROPOSAL — NOT ADOPTED</span> One footnote worth holding onto while reading AI deployment claims: the IMO Net-Zero Framework — the industry's single biggest pending regulatory event — is still not adopted. MEPC's extraordinary session adjourned the vote 57–49 in October 2025 and reconvenes in October 2026; the earliest realistic entry into force, if adopted then, is around March 2028. A regulatory framework needs to be checked against the actual MEPC calendar before it's treated as adopted, exactly as a vendor's saving claim needs auditing before it's treated as fact.</p>
+
+    <p class="thesis-line">In maritime AI, the important question isn't whether a system is intelligent — it's whether its claims can withstand operational and regulatory scrutiny.</p>
+  </section>
+
+  <!-- ===== REGULATORY PULSE ===== -->
+  <section class="block" id="regulatory">
+    <div class="kicker">Regulatory Pulse</div>
+    <h2>What Changed This Week</h2>
+    <table class="reg-table">
+      <thead><tr><th>What changed</th><th>Source</th><th>Confidence</th><th>Why it matters</th></tr></thead>
+      <tbody>
+        <tr><td><strong>IMO Net-Zero Framework — still not adopted.</strong> MEPC/ES.2 adjourned the vote (57–49) in October 2025; reconvenes October 2026. If adopted then, earliest EIF ~March 2028.</td><td>IMO (MEPC)</td><td><span class="conf proposal">Regulatory proposal</span></td><td>Don't cite "adopted" or "March 2027" in orals or planning — track the actual October 2026 MEPC outcome directly.</td></tr>
+        <tr><td><strong>FuelEU Maritime — 2026 compliance calendar now live.</strong> Ship reports due 31 Jan; compliance-balance approval by 30 Apr; DoC onboard by 30 Jun. GHG-intensity limit starts at 2% below 2020 baseline, ramping to 80% by 2050.</td><td>EU (Reg. 2023/1805)</td><td><span class="conf adopted">Adopted regulation</span></td><td>Bunker Delivery Notes now need GHG intensity + LCV data; reconcile fuel records across EU MRV, IMO DCS, and FuelEU.</td></tr>
+        <tr><td><strong>EU ETS — methane and N₂O in scope from 1 Jan 2026</strong>, alongside CO₂. Targeted revision proposed, ring-fencing more revenue for maritime decarbonisation.</td><td>European Commission</td><td><span class="conf adopted">Adopted (scope)</span> / <span class="conf proposal">Proposal (revision)</span></td><td>Methane slip on dual-fuel engines now carries a direct compliance cost; poor combustion raises N₂O, also now counted.</td></tr>
+        <tr><td><strong>FuelEU/AFIR shore-power mandate</strong> — passenger/container ships must use onshore power at qualifying berths (&gt;2 hrs) from 2030, wherever available from 1 Jan 2035.</td><td>EU (FuelEU + AFIR)</td><td><span class="conf adopted">Adopted regulation</span></td><td>Long-lead item — shore-power procedures need to enter training well before 2030.</td></tr>
+        <tr><td><strong>DNV Alternative Fuels Insight</strong> — 119 alt-fuel vessels ordered Jan–May 2026; LNG (~60) and LPG/ethane (~50) dominate; methanol/ammonia/hydrogen orders remain marginal.</td><td>DNV</td><td><span class="conf study">Independent study</span></td><td>Near-term focus stays on gas-fuel systems, not exotic fuels.</td></tr>
+        <tr><td><strong>DNV July 2026 Class Rules edition</strong> — new notations for shore-power readiness, battery integration, clarified fatigue-life (FL) assessment.</td><td>DNV</td><td><span class="conf rule">Adopted rule (class)</span></td><td>Update PMS now; mandatory for new contracts from 1 Jan 2027.</td></tr>
+        <tr><td><strong>DNV-RP-0703</strong> — competence benchmark for hydrogen-fuel crews, supplementing STCW/ISM.</td><td>DNV</td><td><span class="conf recommended">Recommended practice</span></td><td>Map current training matrix against it before it's cited as best practice.</td></tr>
+        <tr><td><strong>LR alarm-management research</strong> — 40M+ alarm events, 11 vessels; alarm fatigue undermines critical-alarm response.</td><td>Lloyd's Register</td><td><span class="conf study">Independent study</span></td><td>Audit your own ECR alarm log for chronic nuisance sources.</td></tr>
+        <tr><td><strong>ABS rolling Marine Vessel Rules updates</strong> — alt-fuel systems, bilge/slop-tank arrangements, automation cybersecurity.</td><td>ABS</td><td><span class="conf rule">Adopted rule (class)</span></td><td>Verify OWS/15ppm alarm testing against current approved drawings.</td></tr>
+        <tr><td><strong>DGMA Circular No. 36 of 2026</strong> — suspends deployment of Indian seafarers on vessels transiting the Strait of Hormuz; mandates strict ISPS/SSP compliance.</td><td>DGMA / DG Shipping, India</td><td><span class="conf force">Confirmed / in force</span></td><td>See India Angle. Applies wherever Indian ratings are aboard, regardless of flag.</td></tr>
+      </tbody>
+    </table>
+    <figure class="infographic">
+      <img src="assets/image4_30.webp" alt="Regulatory timeline: IMO Net-Zero Framework not adopted yet — MEPC 83 April 2025, adjourned October 2025, reconvenes October 2026, earliest entry into force March 2028; FuelEU Maritime 2026 deadlines already adopted and in force">
+      <p class="infographic-caption">The Net-Zero Framework's actual calendar vs. FuelEU's already-adopted 2026 deadlines.</p>
+    </figure>
+  </section>
+
+  <!-- ===== AI IN MARITIME ===== -->
+  <section class="block" id="ai">
+    <div class="kicker">AI in Maritime</div>
+    <h2>Regulatory Groundwork Around the Deployments</h2>
+    <p>IMO's Facilitation Committee has advanced a work plan toward an IMO Strategy on Maritime Digitalization, targeting adoption by end-2027, explicitly naming AI and autonomous navigation as transformative while flagging cybersecurity and the digital divide as the associated risks. IMO's digitalisation work now also includes cybersecurity output for Maritime Single Window systems and electronic-certificate guidance — a sign that digital shipping and formal cyber safeguards are being built together rather than sequentially, even if binding AI-agent-specific rules aren't there yet.</p>
+    <p><strong>Engineer's checklist:</strong> for any AI-assisted decision-support, voyage-optimisation, or risk-extraction tool on your vessel or fleet — ask who owns security sign-off, and ask to see audited performance numbers rather than platform-average headline figures.</p>
+  </section>
+
+  <!-- ===== INDIA ANGLE ===== -->
+  <section class="block" id="india">
+    <div class="kicker">India Angle</div>
+    <h2>Terminal AI, Classing, and the Flag State's Own Infrastructure</h2>
+    <div class="editorial-note">Editorial note: Dtyle AI, Docker Vision, MariApps, Planys Technologies, PierSight, and Sagar Defence Engineering have all had prior coverage in this newsletter. Adani/Kaleris has not — new to these pages. This section applies the same deployed-vs-demonstrated discipline as the Feature Article throughout.</div>
+    <p><strong>Adani Ports (APSEZ)</strong> has committed up to $100 million to scale Kaleris' AI-augmented terminal platform across 15 container terminals at nine ports, targeting a 20% RTG crane-productivity gain and roughly 91 million tonnes of added capacity by 2030. Read against this issue's own standard: that's a commercial commitment and a stated target, not yet a published result. What's actually confirmed working today is the contract and the rollout scope — the productivity and capacity numbers are Adani's own projections.</p>
+    <p>On classification: <strong>Indian Register of Shipping (IRS)</strong> took <em>Lila Jamnagar</em> — a 298,997 DWT VLCC and one of the largest vessels ever under Indian flag — into class in March 2026, alongside continued growth in naval newbuild classing under the Atmanirbhar Bharat programme. This is a confirmed, completed classing action — the strongest "deployed" claim in this section.</p>
+    <p>On the security side: on 17 July 2026, DGMA hosted National Maritime Security Coordinator Vice Admiral Biswajit Dasgupta and Rear Admiral Rahul Shankar at its Mercantile Marine Domain Awareness Centre (MMDAC) in Mumbai — live, operational infrastructure (DG Communication Centre, LRIT system), not a pitch, reviewed at the highest level days after the Hormuz circular. Separately, following attacks on merchant vessels in the strait this month, DGMA issued Circular No. 36 of 2026, suspending deployment of Indian seafarers on vessels transiting the strait and directing strict ISPS/SSP compliance. <strong>For MEO Class 1 candidates:</strong> the relevant takeaway is the mechanism, not the incident — a flag-state circular can suspend crew deployment and tighten voyage-risk-assessment requirements in response to a live security situation, sitting squarely inside ISPS Code and SSP doctrine.</p>
+  </section>
+
+  <!-- ===== NIXON'S VOICE ===== -->
+  <section class="block" id="voice">
+    <div class="kicker">Nixon's Voice</div>
+    <h2>Read the Claim, Not the Headline</h2>
+    <div class="voice-block">
+      <img src="assets/nixon-photo.webp" alt="Nixon Antony, Editor, Marine Intelligence Weekly" class="voice-photo">
+      <p>The line I keep drawing this issue is the one this whole publication is built on: deployed versus demonstrated, audited versus vendor-reported, adopted versus expected-to-be-adopted. MOL's risk platform is deployed. Uni-Tankers' 6.9% is demonstrated but not yet audited. The Net-Zero Framework is expected, not adopted. None of those distinctions make the underlying story less real — AI is genuinely running on real ships now, and the Net-Zero Framework is genuinely coming. But the distinction is the whole value of reading a publication like this one instead of a press release: knowing which claim you're actually looking at before you plan a training matrix, a PMS update, or an oral-exam answer around it.</p>
+    </div>
+  </section>
+
+  <!-- ===== TAKEAWAY TABLE ===== -->
+  <section class="block" id="takeaway">
+    <div class="kicker">Takeaway Table</div>
+    <h2>This Week, At a Glance</h2>
+    <table class="takeaway-table">
+      <thead><tr><th>Topic</th><th>Key Point</th><th>Action for Engineers</th></tr></thead>
+      <tbody>
+        <tr><td>AI deployment evidence</td><td>MOL/IBM, Korean Register/Microsoft, Hafnia genuinely deployed; Uni-Tankers/Sofar Ocean and Adani/Kaleris figures vendor/operator-reported, not yet audited</td><td>Ask for audited, named-fleet numbers before treating any AI-tool saving claim as proven</td></tr>
+        <tr><td>AI agent security gap</td><td>Only 14.4% of live AI agents have full security sign-off; agents drive 1 in 8 AI breaches</td><td>Ask who owns security sign-off for any AI tool your vessel/fleet is adopting</td></tr>
+        <tr><td>IMO Net-Zero Framework</td><td><strong>Not adopted</strong> — MEPC reconvenes October 2026; earliest EIF ~March 2028 if adopted</td><td>Don't cite "adopted" or "March 2027" in orals or planning</td></tr>
+        <tr><td>FuelEU Maritime 2026 deadlines</td><td>Reports (31 Jan), compliance-balance approval (30 Apr), DoC onboard (30 Jun) all due for 2025 reporting year</td><td>Confirm your vessel's FuelEU DoC is onboard; reconcile fuel records across EU MRV/IMO DCS/FuelEU</td></tr>
+        <tr><td>Alarm fatigue (LR research)</td><td>40M+ alarms analysed; nuisance alarms measurably degrade critical-alarm response</td><td>Audit your own ECR alarm log for chronic nuisance sources</td></tr>
+        <tr><td>Strait of Hormuz — DGMA Circular 36/2026</td><td>Deployment of Indian seafarers suspended; ISPS/voyage-risk-assessment mechanism</td><td>Verify current DGMA advisory status before any Hormuz/Gulf transit</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ===== ISSUE TEASER ===== -->
+  <section class="block" id="teaser" style="border-bottom:none">
+    <div class="teaser-box">
+      <div class="kicker">Next Issue</div>
+      <p>What actually happens at MEPC's reconvened session in October 2026 — and how to prep an oral answer on the Net-Zero Framework that stays accurate whichever way the vote goes.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div>
+        <h4>Marine Intelligence Weekly</h4>
+        <a href="index.html">Home</a>
+        <a href="archive/index.html">Archive</a>
+        <a href="index29.html">Previous Issue — 29</a>
+        <a href="youtube/index.html">YouTube Walkthroughs</a>
+      </div>
+      <div>
+        <h4>This Issue</h4>
+        <a href="#quickread">Quick Read</a>
+        <a href="#feature">Feature Article</a>
+        <a href="#regulatory">Regulatory Pulse</a>
+        <a href="#takeaway">Takeaway Table</a>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <a href="meoclass1/index.html">MEO Class 1 Question Bank</a>
+        <a href="timeline.html">AI in Maritime Timeline</a>
+        <a href="ecosystem.html">Maritime Tech Ecosystem Map</a>
+        <a href="GHGDecarb/timeline.html">GHG &amp; Decarb Timeline</a>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <a href="https://www.linkedin.com/in/nixon-antony-marineengineer" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:nickmarineengr@gmail.com">Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Marine Intelligence Weekly — Nixon Antony. All rights reserved.</span>
+      <span>Second Engineer, Maersk A/S · MEO Class 1 Candidate</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== FLOATING CONTROLS ===== -->
+<button id="bookmarkBtn" title="Bookmark this issue" aria-label="Bookmark this issue">☆</button>
+<button id="backToTop" title="Back to top" aria-label="Back to top">↑</button>
+
+<script>
+  // Scroll-follow nav highlight
+  const sections = document.querySelectorAll('section.block[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const id = entry.target.getAttribute('id');
+      const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => observer.observe(s));
+
+  // Return to top
+  const backToTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', () => {
+    backToTop.style.display = window.scrollY > 600 ? 'flex' : 'none';
+  });
+  backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+  // Floating bookmark (localStorage — plain static site, not a Claude artifact)
+  const bookmarkBtn = document.getElementById('bookmarkBtn');
+  const bookmarkKey = 'miw_bookmark_index30';
+  function refreshBookmarkState() {
+    if (localStorage.getItem(bookmarkKey)) {
+      bookmarkBtn.classList.add('saved');
+      bookmarkBtn.textContent = '★';
+    } else {
+      bookmarkBtn.classList.remove('saved');
+      bookmarkBtn.textContent = '☆';
+    }
+  }
+  bookmarkBtn.addEventListener('click', () => {
+    if (localStorage.getItem(bookmarkKey)) {
+      localStorage.removeItem(bookmarkKey);
+    } else {
+      localStorage.setItem(bookmarkKey, '1');
+    }
+    refreshBookmarkState();
+  });
+  refreshBookmarkState();
+</script>
+
+</body>
+</html>
