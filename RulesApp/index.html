@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RulesApp — Maritime Regulatory Knowledge Base | Launch Portal</title>
+<meta name="description" content="RulesApp Version 1.0 Alpha — Offline maritime regulatory knowledge repository for MEO Class 1 oral & engineering evaluation.">
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root{
+  --teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;
+  --navy:#0f172a;--navy-mid:#1e293b;--navy-light:#334155;
+  --orange:#f97316;--off-white:#f8fafc;--grey-text:#64748b;
+  --grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--navy);color:#fff;min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;line-height:1.6;}
 
+/* TOPBAR */
+.topbar{background:rgba(15,23,42,.95);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.1);}
+.topbar-brand{display:flex;align-items:center;gap:12px;}
+.logo-mark{background:var(--teal);color:#fff;font-weight:800;font-size:14px;padding:4px 10px;border-radius:6px;letter-spacing:1px;}
+.site-name{color:#fff;font-size:14px;font-weight:600;opacity:.9;}
+.badge-alpha{background:rgba(249,115,22,.2);border:1px solid rgba(249,115,22,.4);color:var(--orange);font-size:11px;font-weight:700;padding:3px 10px;border-radius:12px;text-transform:uppercase;letter-spacing:1px;}
+
+/* HERO PORTAL */
+.portal-hero{max-width:1100px;margin:40px auto;padding:0 24px;text-align:center;}
+.hero-title{font-size:clamp(28px,5vw,46px);font-weight:800;letter-spacing:-.5px;margin-bottom:16px;line-height:1.2;}
+.hero-title span{color:var(--teal);}
+.hero-sub{font-size:16px;color:rgba(255,255,255,.75);max-width:760px;margin:0 auto 36px;line-height:1.7;}
+
+/* LAUNCH CTA */
+.launch-bar{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:48px;}
+.btn-launch-primary{background:var(--teal);color:#fff;font-size:16px;font-weight:700;padding:14px 36px;border-radius:10px;text-decoration:none;transition:all .2s;box-shadow:0 10px 25px rgba(13,148,136,.3);display:inline-flex;align-items:center;gap:10px;}
+.btn-launch-primary:hover{background:var(--teal-dark);transform:translateY(-2px);box-shadow:0 14px 30px rgba(13,148,136,.4);}
+.btn-launch-secondary{background:rgba(255,255,255,.1);color:#fff;font-size:15px;font-weight:600;padding:14px 28px;border-radius:10px;text-decoration:none;transition:all .2s;border:1px solid rgba(255,255,255,.15);}
+.btn-launch-secondary:hover{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3);}
+
+/* TELEMETRY GRID */
+.telemetry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;max-width:1000px;margin:0 auto 40px;}
+.t-card{background:rgba(30,41,59,.7);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;text-align:center;backdrop-filter:blur(10px);}
+.t-val{font-size:32px;font-weight:800;color:var(--teal-light);line-height:1;margin-bottom:6px;}
+.t-lbl{font-size:12px;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:1px;font-weight:600;}
+
+/* QUICK WORKFLOW CARDS */
+.workflow-section{max-width:1000px;margin:0 auto 40px;}
+.sec-title{font-size:13px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:16px;text-align:center;}
+.w-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+.w-card{background:rgba(30,41,59,.5);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;text-decoration:none;color:#fff;transition:all .2s;display:block;}
+.w-card:hover{background:rgba(30,41,59,.9);border-color:var(--teal);transform:translateY(-2px);}
+.w-card h3{font-size:16px;font-weight:700;color:var(--teal-light);margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.w-card p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.5;}
+
+/* FOOTER */
+.portal-footer{background:rgba(15,23,42,.98);border-top:1px solid rgba(255,255,255,.08);padding:20px;text-align:center;font-size:12px;color:rgba(255,255,255,.5);}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-brand">
+    <span class="logo-mark">MIW</span>
+    <span class="site-name">RulesApp — Marine Regulatory Knowledge Base</span>
+  </div>
+  <span class="badge-alpha" id="badge-alpha">Version 1.0 Alpha</span>
+</header>
+
+<main class="portal-hero">
+  <h1 class="hero-title">Authoritative <span>Maritime Regulatory</span> Knowledge Engine</h1>
+  <p class="header-sub">Document-centric, 100% offline knowledge base built for Marine Engineers and Chief Engineers. Decomposed to paragraph-level regulations with typed bidirectional cross-references, defined terms, and equipment-centric Engineering Objects.</p>
+
+  <div class="launch-bar">
+    <a href="app/index.html" class="btn-launch-primary">
+      🚀 Launch RulesApp Application
+    </a>
+    <a href="app/index.html#search" class="btn-launch-secondary">
+      🔍 Instant Search &amp; Regulations
+    </a>
+    <a href="app/index.html#engineering" class="btn-launch-secondary">
+      ⚙️ Equipment &amp; Engineering Objects
+    </a>
+  </div>
+
+  <div class="telemetry-grid" id="telemetry-grid">
+    <div class="t-card">
+      <div class="t-val" id="t-val-nodes">—</div>
+      <div class="t-lbl">Decomposed Provisions</div>
+    </div>
+    <div class="t-card">
+      <div class="t-val" id="t-val-definitions">—</div>
+      <div class="t-lbl">Defined Terms</div>
+    </div>
+    <div class="t-card">
+      <div class="t-val" id="t-val-eo">—</div>
+      <div class="t-lbl">Engineering Objects</div>
+    </div>
+    <div class="t-card">
+      <div class="t-val" id="t-val-standards">—</div>
+      <div class="t-lbl">IMO / IRS / DGS Standards</div>
+    </div>
+    <div class="t-card">
+      <div class="t-val" id="t-val-relationships">—</div>
+      <div class="t-lbl">Graph Relationships</div>
+    </div>
+  </div>
+
+  <div class="workflow-section">
+    <div class="sec-title">Core Engineering Workflows</div>
+    <div class="w-grid">
+      <a href="app/index.html#search" class="w-card">
+        <h3>🔍 Search &amp; Regulations</h3>
+        <p>Instant regulation lookup across SOLAS, MARPOL, FSS Code, LSA Code, IGF Code, FTP Code, IRS Rules, and DG Shipping notices.</p>
+      </a>
+      <a href="app/index.html#engineering" class="w-card">
+        <h3>⚙️ Engineering Objects</h3>
+        <p>Explore equipment-centric hubs (Boiler, Steering Gear, Emergency Generator, OWS, EGCS, Gas Fuel Containment) linking every governing provision.</p>
+      </a>
+      <a href="app/index.html#crossref" class="w-card">
+        <h3>📖 Definitions &amp; Cross-References</h3>
+        <p>Browse 29 cross-instrument defined terms and navigate typed graph relationships (depends_on, amends, supersedes).</p>
+      </a>
+    </div>
+  </div>
+</main>
+
+<footer class="portal-footer" id="portal-footer">
+  RulesApp Version 1.0 Alpha · Marine Intelligence Weekly · Fully Offline Data Architecture
+</footer>
+
+<script>
+// Auto-launch if launched with hashtag or URL parameter
+if (window.location.hash) {
+  window.location.href = 'app/index.html' + window.location.hash;
+}
+
+// Live telemetry: fetched from the generated repository index, never
+// hand-typed here — this is the one file every release must regenerate
+// via repository/build/build-index.js, so the portal can't go stale.
+fetch('repository/index/version.json')
+  .then((r) => r.json())
+  .then((v) => {
+    document.getElementById('badge-alpha').textContent = v.releaseName || ('Version ' + v.appVersion);
+    const s = v.stats || {};
+    document.getElementById('t-val-nodes').textContent = s.nodes ?? '—';
+    document.getElementById('t-val-definitions').textContent = s.definitions ?? '—';
+    document.getElementById('t-val-eo').textContent = s.engineeringObjects ?? '—';
+    document.getElementById('t-val-standards').textContent = s.standards ?? '—';
+    document.getElementById('t-val-relationships').textContent = s.relationships ?? '—';
+    document.getElementById('portal-footer').textContent =
+      `RulesApp ${v.releaseName || v.appVersion} · Marine Intelligence Weekly · Fully Offline Data Architecture`;
+  })
+  .catch((err) => {
+    console.error('Failed to load repository/index/version.json', err);
+  });
+</script>
+
+</body>
+</html>
