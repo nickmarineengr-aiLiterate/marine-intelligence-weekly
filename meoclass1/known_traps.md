@@ -98,6 +98,26 @@ GREP: lubricating oil, whale oil
 
 ---
 
+### 13. Garbage Record Book threshold — 400 GT is obsolete, now 100 GT
+MARPOL Annex V Regulation 10.3 was amended by **Resolution MEPC.360(79)**
+(adopted 16 Dec 2022, in force **1 May 2024**), lowering the Garbage
+Record Book (GRB) threshold from ≥ 400 GT to **≥ 100 GT** — converging
+it with the existing Garbage Management Plan (GMP) threshold, which was
+already ≥ 100 GT and is unchanged. Any content stating the GRB applies
+only to ships ≥ 400 GT, or explicitly separating GMP-at-100GT from
+GRB-at-400GT as two different thresholds, is citing the pre-2024
+position. The 400 GT GRB figure should only appear with clear historical
+framing (e.g. "formerly 400 GT, now 100 GT since 1 May 2024"). GRB
+document format itself is unaffected and remains per Resolution
+MEPC.277(70). Caught in QB3_C (Q1, MARPOL Annex V garbage amendments) —
+error appeared in the 15-Second Answer, 60-Second Answer, comparison
+table, CE Oral Tip, and Common CE Failures (the failures line had it
+fully inverted, flagging the correct 100 GT answer as the candidate
+error). Flagged by Nixon via screenshot correction.
+GREP: Garbage Record Book tracking is required at 400, Record Book for ships ≥ 400 GT, Record Book (Parts I and II) for all ships ≥ 400 GT
+
+---
+
 ## Health-check grep — negation-context noise
 
 The daily `qb_health_check.py` trap scan (`check_known_traps()`) currently
@@ -151,3 +171,4 @@ implemented.
 | 2026-07-16 | Initial 10 entries | Compiled from Claude memory / prior correction sessions |
 | 2026-07-18 | Entry 11: IMO GFI vs FuelEU Maritime baseline | Candidate (Rathesh) annotated-screenshot correction on QB6_E |
 | 2026-07-19 | Entry 12: CLC scope — mineral oil only (whale oil trap) | Candidate (Vivek) screenshot correction on QB1_A |
+| 2026-07-25 | Entry 13: GRB threshold now 100 GT, not 400 GT (MEPC.360(79)) | Nixon screenshot correction on QB3_C |
