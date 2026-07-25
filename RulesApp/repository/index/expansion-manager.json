@@ -1,0 +1,218 @@
+{
+  "generatedAt": "2026-07-23",
+  "planLastReviewed": "2026-07-22",
+  "packagesCompleted": [],
+  "packagesInProgressCount": 8,
+  "packagesPlannedCount": 6,
+  "priorityCounts": {
+    "high": 0,
+    "medium": 8,
+    "low": 2,
+    "long-term": 4
+  },
+  "items": [
+    {
+      "id": "imo-conventions",
+      "package": "IMO Conventions",
+      "title": "Remaining IMO Conventions decomposition",
+      "stage": "in-progress",
+      "priority": "medium",
+      "sourceAvailability": "Most conventions already page-cited from local/public sources; SAR 1979 is the shallowest (depth 1, 40%) and needs its actual articles decomposed.",
+      "verificationStatus": "unverified",
+      "estimatedEffort": "M",
+      "notes": "20 of 21 conventions are at depth 2 (60%); none yet at paragraph level (80%+).",
+      "computedFacts": {
+        "standardCount": 21,
+        "avgCoveragePct": 61,
+        "allComplete": false,
+        "documentLevelOnlyCount": 0
+      }
+    },
+    {
+      "id": "imo-codes-fss-igf",
+      "package": "IMO Codes",
+      "title": "FSS Code and IGF Code — decomposed to chapter/section level (Stage 4 package)",
+      "stage": "in-progress",
+      "priority": "medium",
+      "sourceAvailability": "Done: FSS Code from local PDF (FSS_CODE_INTERNATIONAL_CODE_FOR_FIRE_SAFETY_SYSTEMES_2015_EDITION.pdf, all 16 chapters); IGF Code from the official IMO resolution PDF (MSC.391(95).pdf, downloaded from wwwcdn.imo.org — Parts A/A-1 in section-level detail through Ch.5, Parts A-1 Ch.6-15/B-1/C-1/D at chapter level from the verified table of contents). Remaining: paragraph-level depth for FSS Code Chapters 7-14/16 sub-provisions, and IGF Code Chapters 6-19's full regulation text (currently chapter-level summaries only).",
+      "verificationStatus": "unverified — page-cited, pending human (Nixon) review",
+      "estimatedEffort": "S (remaining paragraph-level depth pass)",
+      "notes": "Completed as Stage 4's first content package — see releases/2026-07-21-package-imo-codes-fss-igf.md. Confirmed by live crossref-graph.json data before starting: fss-code had 5 existing edges, igf-code had 9, together the highest relationship-leverage pick on the board versus 1-2 for every other high-priority candidate.",
+      "computedFacts": {
+        "standardCount": 11,
+        "avgCoveragePct": 60,
+        "allComplete": false,
+        "documentLevelOnlyCount": 0
+      }
+    },
+    {
+      "id": "imo-circulars-expansion",
+      "package": "IMO Circulars",
+      "title": "Additional MSC.1/MEPC.1 circulars",
+      "stage": "in-progress",
+      "priority": "medium",
+      "sourceAvailability": "Public IMO circulars; several already fetched and cached this session (see .claude/pdf-text-cache/).",
+      "verificationStatus": "unverified",
+      "estimatedEffort": "S per additional circular",
+      "notes": "Only 4 circulars decomposed so far; dozens of MSC.1/Circ. and MEPC.1/Circ. series exist.",
+      "computedFacts": {
+        "standardCount": 4,
+        "avgCoveragePct": 60,
+        "allComplete": false,
+        "documentLevelOnlyCount": 0
+      }
+    },
+    {
+      "id": "msc-assembly-resolutions",
+      "package": "MSC/Assembly Resolutions",
+      "title": "MSC.532(107) and A.1207(34) — decomposed (Stage 4 package), stale status and mischaracterization corrected",
+      "stage": "in-progress",
+      "priority": "medium",
+      "sourceAvailability": "Done: both official IMO PDFs downloaded and read in full. MSC.532(107) (11 pages) decomposed to 13 nodes across the 4 SOLAS chapters it actually amends (II-1, II-2, V, XIV) — its meta.json previously described only the II-1/3-13 lifting-appliances regulation, undercounting three other substantive amendment groups, now corrected. A.1207(34) (233 pages) decomposed to 12 nodes at General-section/Annex level (5 General sections + Annexes 1-5 + Appendix 1); its 5 certificate-survey Annexes are not yet broken out to individual certificate/survey-type level. Remaining: A.1207(34) Annex-level deepening; MSC.532(107) already at regulation level, no further decomposition needed for its 4 amended chapters.",
+      "verificationStatus": "unverified — page-cited, pending human (Nixon) review",
+      "estimatedEffort": "M (A.1207(34) annex deepening)",
+      "notes": "Completed as a Stage 4 package — see releases/2026-07-22-package-msc-assembly-resolutions.md. Also fixed a genuine editorial defect flagged by amendment-tracker.js: msc-532-107's edition status was stuck at \"future-effective\" after its 1 January 2026 entry-into-force date had already passed (as of 2026-07-21/22) — corrected to \"current\", clearing the stale-status-flags count to 0. Selected over irs-ssr-parts-2-3 because it combined higher relationship leverage (completing existing SOLAS-side edges) with a documented accuracy defect (both the stale status and the metadata undercounting), consistent with \"repository quality has priority over repository size.\"",
+      "computedFacts": {
+        "standardCount": 3,
+        "avgCoveragePct": 53,
+        "allComplete": false,
+        "documentLevelOnlyCount": 0
+      }
+    },
+    {
+      "id": "mepc-328-76-full-decomposition",
+      "package": "MEPC Resolutions",
+      "title": "MEPC.328(76) — decomposed to chapter/regulation level (Stage 4 package), mischaracterization corrected",
+      "stage": "in-progress",
+      "priority": "medium",
+      "sourceAvailability": "Done: full 86-page official IMO PDF (downloaded from wwwcdn.imo.org) read chapter-by-chapter; all 5 chapters / 31 regulations authored with real page citations. meta.json corrected — title/summary/keywords/tags/citations/provenance/applicability had previously mischaracterized this resolution around its minor UNSP-barge-exemption clause (Reg. 3.4/8.4) instead of its primary EEXI/CII/SEEMP content; now corrected and cross-checked against pre-existing MARPOL-VI-13/14/23/26/28 nodes for consistency. Remaining: paragraph-level depth for the longer regulations (Reg. 13 NOx, Reg. 24/25 EEDI/EEXI tables), and Chapter 5/Appendix I (IAPP Certificate form) is intentionally not planned for node-level decomposition (pure form, not substantive regulation).",
+      "verificationStatus": "unverified — page-cited, pending human (Nixon) review",
+      "estimatedEffort": "S (remaining paragraph-level depth pass)",
+      "notes": "Completed as a Stage 4 package — see releases/2026-07-22-package-mepc-328-76.md. Selected over msc-532-107 and irs-ssr-parts-2-3 because it carried a documented content-accuracy defect (mischaracterization), not just a coverage gap or a metadata staleness issue — directly serving 'repository quality has priority over repository size.' Added regulation-level amends relationships from Reg. 13/23/25/26/28 to the pre-existing MARPOL-VI-13/23/26/28 nodes (previously zero relationships), and a third major-conversion.json instrument entry sourced from this resolution's own Reg. 2.2.17 definition.",
+      "computedFacts": {
+        "standardCount": 1,
+        "avgCoveragePct": 60,
+        "allComplete": false,
+        "documentLevelOnlyCount": 0
+      }
+    },
+    {
+      "id": "dg-shipping-expansion",
+      "package": "DG Shipping",
+      "title": "Remaining DGMA circulars/orders/notices at document-level only",
+      "stage": "in-progress",
+      "priority": "medium",
+      "sourceAvailability": "DGMA website (dgma.gov.in); most already fetched for meta.json — full circular/order/notice text needed for decomposition.",
+      "verificationStatus": "unverified",
+      "estimatedEffort": "L",
+      "notes": "19 of 22 DGMA entries are still at 10% (document-level only) — the lowest average-coverage package after IRS.",
+      "computedFacts": null
+    },
+    {
+      "id": "irs-ssr-parts-2-3",
+      "package": "IRS",
+      "title": "IRS Steel Ship Rules Parts 2 (Inspection & Testing of Materials) and 3 (General Hull Structural Requirements) — decomposed to full chapter level (Stage 4 package)",
+      "stage": "in-progress",
+      "priority": "medium",
+      "sourceAvailability": "Done: same local PDF already used for Parts 1/4/5 (IRS class main_rules_july_2024-edition.pdf, 2840 pages) — Part 2 (11 chapters) and Part 3 (17 chapters, 2 volumes) fully mapped from their real tables of contents and all chapters authored with real page citations verified against actual chapter-start pages (not just TOC page references). Both parts went from a single 1-chapter stub (4 nodes each) to full chapter-level coverage (11 and 17 chapters respectively, 71 nodes total for the whole standard, up from 45). Remaining: section/paragraph-level depth within the newly-added chapters (only the pre-existing Ch.11 Welding Consumables and Ch.16 Welding chapters have section-level children).",
+      "verificationStatus": "unverified — page-cited, pending human (Nixon) review",
+      "estimatedEffort": "L (remaining section-level depth pass across 26 chapters)",
+      "notes": "Completed as a Stage 4 package — see releases/2026-07-22-package-irs-ssr-parts-2-3.md. Selected as the sole high-priority expansion-manager item this session — no tie to break. The coverage-report.js depth heuristic already read this standard at 80% before this package (Parts 1/4/5 were already 3+ levels deep), so this package's real contribution — 26 new chapters across 2 previously single-chapter-stub parts — does not move that percentage; it is measured in node count and breadth instead, a known limitation of the depth-only heuristic (see coverage-report.js's own header comment). Added one relatedTo relationship (Part 3 Ch.4 Stability -> SOLAS-II1) where a genuine, verifiable cross-standard connection existed; no originatingInstrument/documentFamily applicable since IRS is a classification society issuing its own rules directly, not adopting them via an external resolution.",
+      "computedFacts": {
+        "standardCount": 16,
+        "avgCoveragePct": 14,
+        "allComplete": false,
+        "documentLevelOnlyCount": 15
+      }
+    },
+    {
+      "id": "irs-guidance-notes-circulars",
+      "package": "IRS",
+      "title": "IRS technical circulars, classification notes, and guidance notes",
+      "stage": "planned",
+      "priority": "medium",
+      "sourceAvailability": "Public IRS circular listings partially fetched; several (IRS-G-SAF-*, IRS-G-SUR-02, Classification Notes 7A/28) have no local source identified yet.",
+      "verificationStatus": "not started",
+      "estimatedEffort": "L",
+      "notes": "14 of 16 IRS entries besides the main rulebook are at document-level only — locate sources before attempting decomposition, per the honesty rule.",
+      "computedFacts": {
+        "standardCount": 16,
+        "avgCoveragePct": 14,
+        "allComplete": false,
+        "documentLevelOnlyCount": 15
+      }
+    },
+    {
+      "id": "iacs-package",
+      "package": "IACS",
+      "title": "IACS Unified Requirements / Unified Interpretations",
+      "stage": "planned",
+      "priority": "low",
+      "sourceAvailability": "Not yet located. The organization registry entry (organizations/iacs/org.json) is a placeholder only. iacs.org.uk publishes some Unified Requirements/Interpretations publicly — needs a research pass before any content work.",
+      "verificationStatus": "not started",
+      "estimatedEffort": "L",
+      "notes": "No content authored yet; this is genuinely package 8 starting from zero, not a coverage gap in existing content.",
+      "computedFacts": null
+    },
+    {
+      "id": "miw-extensions-expansion",
+      "package": "MIW Extensions",
+      "title": "Additional Marine Intelligence Weekly notes/commentary",
+      "stage": "in-progress",
+      "priority": "low",
+      "sourceAvailability": "Internal MIW-original commentary, not sourced from external documents — depends on MIW editorial priorities, not repository research.",
+      "verificationStatus": "unverified",
+      "estimatedEffort": "ongoing",
+      "notes": "Only one extension note exists (extensions/miw/notes/solas-ii2-10-ce-tip.json).",
+      "computedFacts": null
+    },
+    {
+      "id": "validity-metadata-backfill",
+      "package": "Cross-cutting",
+      "title": "Populate validity metadata across existing content",
+      "stage": "planned",
+      "priority": "long-term",
+      "sourceAvailability": "Derivable from re-reading already-decomposed nodes' own text (ship types, tonnage thresholds, build dates already appear in most summaries) — no new external source needed.",
+      "verificationStatus": "not started",
+      "estimatedEffort": "XL",
+      "notes": "585/585 standards+nodes have no structured validity metadata as of Stage 2B's health-check — the single largest coverage gap by item count, but mechanical rather than research-heavy.",
+      "computedFacts": null
+    },
+    {
+      "id": "engineering-objects-expansion",
+      "package": "Cross-cutting",
+      "title": "Additional Engineering Objects beyond Boiler",
+      "stage": "planned",
+      "priority": "long-term",
+      "sourceAvailability": "Synthesized from already-decomposed nodes — candidates include Inert Gas System, Emergency Generator, Oily Water Separator, Steering Gear, all already referenced by decomposed SOLAS/IRS content.",
+      "verificationStatus": "not started",
+      "estimatedEffort": "M per object",
+      "notes": "Only 1 of an eventually much larger set exists — this is the repository's most distinctive feature and its thinnest content area by ratio.",
+      "computedFacts": null
+    },
+    {
+      "id": "definitions-expansion",
+      "package": "Cross-cutting",
+      "title": "Additional cross-instrument definitions beyond Major Conversion",
+      "stage": "planned",
+      "priority": "long-term",
+      "sourceAvailability": "10 nodes literally titled \"Definitions\" already exist in decomposed standards and are not yet mined into the definitions registry (see index/health-check.json's definitionsGapNodes) — this is the first, lowest-effort place to look.",
+      "verificationStatus": "not started",
+      "estimatedEffort": "M",
+      "notes": "Directly actionable from an existing, already-computed health-check signal — no new research needed to find the starting list.",
+      "computedFacts": null
+    },
+    {
+      "id": "localization",
+      "package": "Cross-cutting",
+      "title": "Non-English content (Hindi, other languages)",
+      "stage": "planned",
+      "priority": "long-term",
+      "sourceAvailability": "language/locale/translatedFrom schema fields exist and default to en/en-IN but are entirely unused — this requires an actual human translator's judgment, not AI-assisted paraphrase, given the regulatory stakes of a mistranslation.",
+      "verificationStatus": "not started",
+      "estimatedEffort": "XL",
+      "notes": "Schema-ready, zero content — explicitly deferred since Stage 1's plan.",
+      "computedFacts": null
+    }
+  ]
+}

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RulesApp — Maritime Regulatory Knowledge Repository | Marine Intelligence Weekly</title>
+<meta name="description" content="Document-centric offline maritime regulatory knowledge repository for MEO Class 1 prep — IMO conventions/codes, DGMA circulars, IRS rules, with citations, typed cross-references, amendment history and engineering-object browsing.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<script>
+(function(){
+  if(!/miw_auth=1/.test(document.cookie))
+    window.location.replace('https://marineintelligenceweekly.com/SQ/pay.html');
+})();
+</script>
+
+<nav class="topbar">
+  <div class="topbar-brand">
+    <span class="logo-mark">MIW</span>
+    <span class="site-name">Marine Intelligence Weekly</span>
+  </div>
+  <div class="topbar-right">
+    <button type="button" id="theme-toggle" class="chrome-btn">🌙 Dark mode</button>
+    <button type="button" id="print-btn" class="chrome-btn">🖨 Print</button>
+    <a href="https://marineintelligenceweekly.com">Home</a>
+    <a href="mailto:contactus@marineintelligenceweekly.com">Contact</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="app-badge">RulesApp Repository · Stage 3</div>
+    <h1>Maritime Regulatory <span>Knowledge Repository</span></h1>
+    <p class="header-sub">A document-centric repository — not a flat list — decomposing conventions/codes to paragraph level, with typed bidirectional cross-references, a citation engine, amendment/version/edition history, a cross-cutting definitions glossary, and Engineering Objects linking real-world equipment to every provision that governs it. Fully offline; runs from generated JSON only.</p>
+    <div class="header-meta" id="header-meta">Loading repository…</div>
+  </div>
+</header>
+
+<div class="tab-nav" id="tab-nav">
+  <button class="tab-btn active" data-tab="search">🔍 Search &amp; Regulations</button>
+  <button class="tab-btn" data-tab="engineering">⚙️ Engineering Objects</button>
+  <button class="tab-btn" data-tab="crossref">🔗 Cross-References</button>
+  <button class="tab-btn" data-tab="illustrations">📐 Illustrations</button>
+  <button class="tab-btn" data-tab="study">🎓 Study Mode</button>
+  
+  <!--
+    "Repository Maintenance" is gated out of the subscriber-facing nav
+    entirely (not just visually demoted) per
+    MIW_INTELLIGENCE_PRODUCT_SPECIFICATION.md §8/§10 -- RulesApp Engine's
+    internal QA/editorial tooling (Timeline & Status, Repository Metrics,
+    Editorial Dashboard, Diff Viewer, Expansion Manager, Coverage Matrix)
+    must never be subscriber-facing chrome. The tabs and their screens are
+    intentionally left intact and reachable by direct hash URL
+    (e.g. #tab=editorial) for founder/internal use -- only the discoverable
+    nav entry point is removed here, not the underlying feature. Re-enable
+    by uncommenting this block for an internal/founder build.
+  <div class="maintenance-dropdown">
+    <button class="tab-btn secondary-tab" id="maint-dropdown-btn" type="button">🛠 Repository Maintenance ▾</button>
+    <div class="maint-menu" id="maint-menu" style="display:none;">
+      <button class="maint-item" data-tab="timeline">Timeline &amp; Status</button>
+      <button class="maint-item" data-tab="stats">Repository Metrics</button>
+      <button class="maint-item" data-tab="editorial">Editorial Dashboard</button>
+      <button class="maint-item" data-tab="diff">Diff Viewer</button>
+      <button class="maint-item" data-tab="expansion">Expansion Manager</button>
+      <button class="maint-item" data-tab="matrix">Coverage Matrix</button>
+    </div>
+  </div>
+  -->
+</div>
+
+<main>
+
+<!-- ================= SEARCH & BROWSE ================= -->
+<section id="screen-search" class="screen active">
+  <div class="controls-bar">
+    <div class="search-wrap">
+      <input type="text" id="search-input" placeholder="Search title, citation (e.g. SOLAS II-2/10), term, or equipment... (try status:current, type:code)">
+    </div>
+    <div class="filter-row" id="filter-row">
+      <button class="filter-btn active" data-kind="">All</button>
+      <button class="filter-btn" data-kind="standard">Standards</button>
+      <button class="filter-btn" data-kind="node">Provisions</button>
+      <button class="filter-btn" data-kind="definition">Definitions</button>
+      <button class="filter-btn" data-kind="engineering-object">Engineering Objects</button>
+    </div>
+    <button type="button" id="adv-toggle" class="chrome-btn">Advanced ▾</button>
+  </div>
+
+  <div class="adv-panel" id="adv-panel">
+    <div class="adv-field"><label>Status</label><select id="adv-status"></select></div>
+    <div class="adv-field"><label>Document type</label><select id="adv-type"></select></div>
+    <div class="adv-field"><label>Publisher / organization</label><select id="adv-publisher"></select></div>
+    <div class="adv-field"><label>Edition contains</label><input type="text" id="adv-edition" placeholder="e.g. 2024"></div>
+    <div class="adv-field"><label>Validity metadata</label><select id="adv-validity"></select></div>
+    <div class="adv-field"><label>Dependency of (id or title)</label><input type="text" id="adv-depends" placeholder="e.g. igf-code"></div>
+    <button type="button" id="adv-clear" class="chrome-btn">Clear filters</button>
+  </div>
+
+  <div class="main-layout">
+    <div class="result-panel">
+      <div class="subtab-row">
+        <button class="subtab-btn active" data-subtab="search">Search results</button>
+        <button class="subtab-btn" data-subtab="browse">Browse tree</button>
+      </div>
+      <div id="result-list-wrap" class="subtab-pane active">
+        <span id="result-count"></span>
+        <div id="result-list"></div>
+      </div>
+      <div id="browse-tree-wrap" class="subtab-pane">
+        <p class="muted">Every standard, grouped by package — browse the hierarchy without searching.</p>
+        <div id="browse-tree"></div>
+      </div>
+    </div>
+    <div class="detail-panel" id="detail-panel"></div>
+  </div>
+</section>
+
+<!-- ================= CROSS REFERENCE EXPLORER ================= -->
+<section id="screen-crossref" class="screen">
+  <div class="screen-inner">
+    <h2 class="screen-title">Cross Reference Explorer</h2>
+    <p class="screen-sub">Pick any regulation, code, circular, definition, or engineering object and drill down through its typed relationship graph — interprets, implements, amends, supersedes, cites, depends on, and related engineering objects.</p>
+    <div class="search-wrap" style="position:relative;max-width:520px;">
+      <input type="text" id="crossref-search" placeholder="Search a regulation, code, circular, or equipment...">
+      <div id="crossref-suggestions" class="suggest-box"></div>
+    </div>
+    <div id="crossref-graph" class="crossref-graph"></div>
+  </div>
+</section>
+
+<!-- ================= ENGINEERING OBJECT EXPLORER ================= -->
+<section id="screen-engineering" class="screen">
+  <div class="screen-inner">
+    <h2 class="screen-title">Engineering Object Explorer</h2>
+    <p class="screen-sub">Real-world equipment and systems, browsable by concept rather than by document — every applicable convention, code, IRS rule, circular, definition, and cross-referenced object in one place.</p>
+    <div id="eo-grid" class="eo-grid"></div>
+    <div id="eo-detail" class="detail-panel eo-detail-panel open"></div>
+  </div>
+</section>
+
+<!-- ================= STUDY MODE ================= -->
+<section id="screen-study" class="screen">
+  <div class="screen-inner">
+    <h2 class="screen-title">Study Mode</h2>
+    <p class="screen-sub">An optional study interface layered on the existing repository data — prerequisite documents, a suggested reading order, recently amended regulations, the most frequently referenced provisions, related equipment, and the definitions glossary.</p>
+    <div class="adv-field" style="max-width:420px;"><label>Document</label><select id="study-standard-select"></select></div>
+    <div id="study-plan" class="study-plan"></div>
+    <div class="study-global-grid">
+      <div><h4>Recently amended (repository-wide)</h4><div id="study-recent" class="reg-box"></div></div>
+      <div><h4>Most frequently referenced</h4><div id="study-frequent" class="reg-box"></div></div>
+      <div><h4>Definitions glossary</h4><div id="study-definitions" class="reg-box"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TIMELINE VIEW ================= -->
+<section id="screen-timeline" class="screen">
+  <div class="screen-inner">
+    <h2 class="screen-title">Timeline View</h2>
+    <p class="screen-sub">Chronological navigation over every edition and amendment recorded in the repository.</p>
+    <div class="adv-field" style="max-width:420px;"><label>Document</label><select id="timeline-standard-select"></select></div>
+    <div id="timeline-track" class="timeline-track"></div>
+  </div>
+</section>
+
+<!-- ================= ILLUSTRATION FRAMEWORK ================= -->
+<section id="screen-illustrations" class="screen">
+  <div class="screen-inner">
+    <h2 class="screen-title">Engineering Illustrations &amp; Technical Diagrams</h2>
+    <p class="screen-sub">Phase 2 Illustration Support — Bidirectionally linked vector SVG schematics and MIW technical diagram placeholders linked to Engineering Objects and IMO/IRS regulations.</p>
+    <div id="illustration-grid" class="eo-grid" style="margin-top:20px;"></div>
+  </div>
+</section>
+
+<!-- ================= REPOSITORY STATISTICS ================= -->
+<section id="screen-stats" class="screen">
+  <div class="screen-inner">
+    <h2 class="screen-title">Repository Statistics</h2>
+    <p class="screen-sub">Generated directly from the current build's index files — never hand-maintained.</p>
+    <div id="stats-content"></div>
+  </div>
+</section>
+
+<!-- ================= EDITORIAL DASHBOARD + QA REPORTS ================= -->
+<section id="screen-editorial" class="screen">
+  <div class="screen-inner">
+    <h2 class="screen-title">Editorial Dashboard</h2>
+    <p class="screen-sub">Internal maintainer tooling — what needs editorial attention, and the QA reports that back it up. Nothing here changes repository data; it only reads the last build's health check, change log, and workflow state.</p>
+    <div class="ed-grid" id="editorial-dashboard"></div>
+    <h2 class="screen-title" style="margin-top:32px;">Repository QA Reports</h2>
+    <p class="screen-sub">Coverage, Integrity, Citation, Relationship, Definition, Engineering Object, Package, and Repository Health — each exportable as JSON or a standalone HTML page.</p>
+    <div class="qa-grid" id="qa-reports"></div>
+  </div>
+</section>
+
+<!-- ================= REPOSITORY DIFF VIEWER ================= -->
+<section id="screen-diff" class="screen">
+  <div class="screen-inner">
+    <h2 class="screen-title">Repository Diff Viewer</h2>
+    <p class="screen-sub">Compares a standard's decomposed tree between two points in its git history — new regulations, modified summaries, new relationships, and new definitions/engineering objects added in between. Computed by repository/build/diff-report.js (git-based; a static app can't do this itself) and rendered here from the generated report.</p>
+    <div class="adv-field" style="max-width:520px;"><label>Diff report</label><select id="diff-select"></select></div>
+    <div id="diff-content" class="diff-content"></div>
+  </div>
+</section>
+
+<!-- ================= EXPANSION MANAGER ================= -->
+<section id="screen-expansion" class="screen">
+  <div class="screen-inner">
+    <h2 class="screen-title">Expansion Manager</h2>
+    <p class="screen-sub">Packages completed/in-progress/planned, priority, source availability, verification status, and estimated effort — merging the hand-curated expansion plan with computed coverage facts so a stale plan can't silently drift from what the repository actually contains. See ROADMAP.md for the narrative version.</p>
+    <div id="expansion-manager-content"></div>
+
+    <h2 class="screen-title" style="margin-top:32px;">Amendment Tracker</h2>
+    <p class="screen-sub">Current version, latest amendment, pending amendments, last repository review, and next review required per standard — computed from CHANGELOG.json and the maintenance cadence policy (see MAINTENANCE_SCHEDULE.md).</p>
+    <div id="amendment-tracker-content"></div>
+
+    <h2 class="screen-title" style="margin-top:32px;">Repository Metrics</h2>
+    <p class="screen-sub">A real growth trend reconstructed from git history (not a single-point estimate) — every commit that touched the repository's manifest, replayed via `git show`.</p>
+    <div id="metrics-content"></div>
+  </div>
+</section>
+
+<!-- ================= COVERAGE MATRIX ================= -->
+<section id="screen-matrix" class="screen">
+  <div class="screen-inner">
+    <h2 class="screen-title">Repository Coverage Matrix</h2>
+    <p class="screen-sub">Document/chapter/regulation/paragraph-level presence, verification percentage, relationship completeness, and Engineering Object coverage — per standard and rolled up per package.</p>
+    <div class="stats-grid" id="matrix-summary"></div>
+    <div class="filter-row" id="matrix-filter" style="margin:16px 0;"></div>
+    <div class="stats-table-scroll" id="matrix-table-wrap"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="page-footer">
+  <strong>RulesApp Repository</strong> — document-centric maritime regulatory knowledge base for MEO Class 1 preparation.<br>
+  Summaries are original paraphrases for study purposes only, not a substitute for the official text. Verify against
+  <a href="https://www.imo.org" target="_blank" rel="noopener">imo.org</a>,
+  <a href="https://dgma.gov.in" target="_blank" rel="noopener">dgma.gov.in</a>, and
+  <a href="https://www.irclass.org" target="_blank" rel="noopener">irclass.org</a> before relying on any provision.<br>
+  <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
+</footer>
+
+<script src="js/db.js"></script>
+<script src="js/search.js"></script>
+<script src="js/render.js"></script>
+<script src="js/views/advanced-search.js"></script>
+<script src="js/views/crossref.js"></script>
+<script src="js/views/engineering.js"></script>
+<script src="js/views/study.js"></script>
+<script src="js/views/timeline.js"></script>
+<script src="js/views/stats.js"></script>
+<script src="js/views/editorial.js"></script>
+<script src="js/views/diff-viewer.js"></script>
+<script src="js/views/expansion.js"></script>
+<script src="js/views/coverage-matrix.js"></script>
+<script src="js/views/illustrations.js"></script>
+<script src="js/nav.js"></script>
+<script>
+(function () {
+  let activeKind = '';
+
+  function runSearch() {
+    const q = document.getElementById('search-input').value;
+    const filters = window.RulesAdvancedSearch.getFilters();
+    const results = window.RulesSearch.search(q, { kind: activeKind || undefined, filters });
+    window.RulesRender.renderList(results);
+  }
+
+  document.getElementById('search-input').addEventListener('input', runSearch);
+  document.getElementById('filter-row').addEventListener('click', (e) => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('.filter-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeKind = btn.dataset.kind;
+    runSearch();
+  });
+
+  // Keyboard Shortcuts: '/' to focus search, 'Esc' to clear/close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+      e.preventDefault();
+      window.RulesNav.showTab('search');
+      const searchInput = document.getElementById('search-input');
+      if (searchInput) searchInput.focus();
+    } else if (e.key === 'Escape') {
+      const modal = document.getElementById('ill-modal');
+      if (modal) {
+        modal.remove();
+      } else {
+        const searchInput = document.getElementById('search-input');
+        if (searchInput && document.activeElement === searchInput) {
+          searchInput.value = '';
+          runSearch();
+          searchInput.blur();
+        }
+      }
+    }
+  });
+
+  window.RulesDB.load().then((manifest) => {
+    document.getElementById('header-meta').innerHTML =
+      `<span><strong>${manifest.counts.organizations}</strong> organizations</span>` +
+      `<span><strong>${manifest.counts.standards}</strong> standards</span>` +
+      `<span><strong>${manifest.counts.nodes}</strong> decomposed provisions</span>` +
+      `<span><strong>${manifest.counts.definitions}</strong> definitions</span>` +
+      `<span><strong>${manifest.counts.engineeringObjects}</strong> engineering objects</span>` +
+      `<span>Built ${manifest.generatedAt}</span>`;
+    window.RulesAdvancedSearch.init(runSearch);
+    window.RulesNav.init();
+    runSearch();
+  }).catch((err) => {
+    document.getElementById('header-meta').textContent = 'Failed to load repository: ' + err.message;
+    console.error(err);
+  });
+})();
+</script>
+</body>
+</html>

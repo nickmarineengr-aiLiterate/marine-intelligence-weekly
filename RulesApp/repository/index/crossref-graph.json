@@ -1,0 +1,5809 @@
+{
+  "SOLAS-II2-4-42": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "hot-surface",
+        "note": "Defines 220°C hot surface temperature limit.",
+        "fromId": "SOLAS-II2-4-42"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "boiler",
+        "note": "Boiler fuel piping and surface insulation.",
+        "fromId": "SOLAS-II2-4-42"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "msc-circ-1321-fire-prevention",
+        "note": "Engine room fire prevention code of practice.",
+        "fromId": "SOLAS-II2-4-42"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Fuel oil line jacketing and 220°C hot surface insulation requirements applicable to boiler fuel supply systems.",
+        "fromId": "boiler"
+      }
+    ]
+  },
+  "hot-surface": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "cites",
+        "note": "Defines 220°C hot surface temperature limit.",
+        "fromId": "SOLAS-II2-4-42"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Insulation of hot machinery surfaces exceeding 220°C.",
+        "fromId": "main-engine-safeguard-system"
+      }
+    ]
+  },
+  "boiler": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-10",
+        "note": "Machinery-space fixed/portable fire-fighting requirements apply to the space housing the boiler.",
+        "fromId": "boiler"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-4-42",
+        "note": "Fuel oil line jacketing and 220°C hot surface insulation requirements applicable to boiler fuel supply systems.",
+        "fromId": "boiler"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "msc-circ-1321-fire-prevention",
+        "note": "Guidance on measures to prevent fires in engine/boiler rooms, including soot-fire and fuel-leak prevention specific to exhaust gas boilers.",
+        "fromId": "boiler"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IRSSSR-4",
+        "note": "Class design/construction/testing requirements for boilers and pressure vessels (Part 4 machinery requirements).",
+        "fromId": "boiler"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "fss-code",
+        "note": "Fixed fire-detection/suppression system specifications for the space containing the boiler.",
+        "fromId": "boiler"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Boiler fuel piping and surface insulation.",
+        "fromId": "SOLAS-II2-4-42"
+      }
+    ]
+  },
+  "msc-circ-1321-fire-prevention": {
+    "outgoing": [
+      {
+        "type": "interprets",
+        "targetId": "SOLAS-II2-10",
+        "note": "Provides detailed engine-room/pump-room fire-prevention guidance supplementing the fixed/portable fire-fighting requirements of SOLAS Ch. II-2 Reg. 10.",
+        "fromId": "msc-circ-1321-fire-prevention"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Engine room fire prevention code of practice.",
+        "fromId": "SOLAS-II2-4-42"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Provides mandatory guidelines for maintenance and inspection of fixed CO2 fire-extinguishing systems.",
+        "fromId": "fss-code"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Provides code of practice for fire prevention in machinery spaces.",
+        "fromId": "fss-code"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Guidance on measures to prevent fires in engine/boiler rooms, including soot-fire and fuel-leak prevention specific to exhaust gas boilers.",
+        "fromId": "boiler"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Mandatory 10-year hydrostatic testing and periodic inspection guidelines for CO2 cylinders.",
+        "fromId": "co2-fire-extinguishing-system"
+      }
+    ]
+  },
+  "SOLAS-II2-4-455": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "fss-code",
+        "note": "FSS Code Chapter 15 inert gas system requirements.",
+        "fromId": "SOLAS-II2-4-455"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "inert-gas-system",
+        "note": "Links Inert Gas System Engineering Object.",
+        "fromId": "SOLAS-II2-4-455"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Cargo tank inerting requirements for oil tankers of 20,000 DWT and above.",
+        "fromId": "inert-gas-system"
+      }
+    ]
+  },
+  "fss-code": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "note": "Made mandatory as an integral part of SOLAS Chapter II-2.",
+        "fromId": "fss-code"
+      },
+      {
+        "type": "depends_on",
+        "targetId": "ftp-code",
+        "note": "Fire-safety equipment and materials specified by the FSS Code are tested/approved to the FTP Code.",
+        "fromId": "fss-code"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "msc-circ-1321-fire-prevention",
+        "note": "Provides mandatory guidelines for maintenance and inspection of fixed CO2 fire-extinguishing systems.",
+        "fromId": "fss-code"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "msc-circ-1321-fire-prevention",
+        "note": "Provides code of practice for fire prevention in machinery spaces.",
+        "fromId": "fss-code"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "cites",
+        "note": "FSS Code Chapter 15 inert gas system requirements.",
+        "fromId": "SOLAS-II2-4-455"
+      },
+      {
+        "type": "cites",
+        "note": "International shore connection and several fixed system requirements referenced in Reg. 10 are specified in detail by the FSS Code.",
+        "fromId": "SOLAS-II2-10"
+      },
+      {
+        "type": "cites",
+        "note": "FSS Code Chapter 2 sets the specification for the International Shore Connection required by Reg. 10.2.1 on ships of 500 GT and above.",
+        "fromId": "SOLAS-II2-10"
+      },
+      {
+        "type": "cites",
+        "note": "FSS Code Chapter 12 sets the general specification for the fixed independently driven power operated emergency fire pump required by Reg. 10.2.2.",
+        "fromId": "SOLAS-II2-10"
+      },
+      {
+        "type": "cites",
+        "note": "International shore connection specification.",
+        "fromId": "SOLAS-II2-10-2-21"
+      },
+      {
+        "type": "cites",
+        "note": "FSS Code Chapter 5 fixed gas system requirements.",
+        "fromId": "SOLAS-II2-10-4"
+      },
+      {
+        "type": "cites",
+        "note": "FSS Code Chapter 7 water-spraying and water mist requirements.",
+        "fromId": "SOLAS-II2-10-5"
+      },
+      {
+        "type": "cites",
+        "note": "FSS Code Chapter 8 sprinkler system requirements.",
+        "fromId": "SOLAS-II2-10-7"
+      },
+      {
+        "type": "cites",
+        "note": "FSS Code Chapters 6 and 14 deck foam requirements.",
+        "fromId": "SOLAS-II2-10-8"
+      },
+      {
+        "type": "depends_on",
+        "note": "Fixed fire-detection/suppression arrangements for gas-fuelled machinery spaces draw on FSS Code specifications.",
+        "fromId": "igf-code"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Fixed fire-detection/suppression system specifications for the space containing the boiler.",
+        "fromId": "boiler"
+      },
+      {
+        "type": "relatedTo",
+        "note": "FSS Code Chapter 12 sets the detailed specification for fixed independently driven power operated emergency fire pumps; Chapter 2 covers the International Shore Connection this system must be fitted with on ships of 500 GT and above.",
+        "fromId": "fire-main-and-pump-system"
+      }
+    ]
+  },
+  "inert-gas-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-4-455",
+        "note": "Cargo tank inerting requirements for oil tankers of 20,000 DWT and above.",
+        "fromId": "inert-gas-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-15-21",
+        "note": "Definitions for inert gas, inert condition, and gas-free condition.",
+        "fromId": "inert-gas-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-15-22",
+        "note": "General functional requirements for inert gas systems.",
+        "fromId": "inert-gas-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-15-22-221",
+        "note": "Gas-free condition, cargo tank oxygen limits (≤ 8%), and non-flammable atmosphere criteria.",
+        "fromId": "inert-gas-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-15-22-222",
+        "note": "Blower capacity (125% max discharge rate) and oxygen delivery limits (≤ 5%).",
+        "fromId": "inert-gas-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-15-22-223",
+        "note": "Flue gas scrubber, oil-fired inert gas generator, and nitrogen generator specifications.",
+        "fromId": "inert-gas-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-15-22-224",
+        "note": "System monitoring instruments, continuous oxygen recording, alarms, and automatic shutdown valves.",
+        "fromId": "inert-gas-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Inert Gas System Engineering Object.",
+        "fromId": "SOLAS-II2-4-455"
+      }
+    ]
+  },
+  "SOLAS-II2-9-92": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "ftp-code",
+        "note": "FTP Code fire test procedures for A, B, and C class divisions.",
+        "fromId": "SOLAS-II2-9-92"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Fire integrity tables for bulkheads and decks separating adjacent spaces.",
+        "fromId": "fire-rated-division-system"
+      }
+    ]
+  },
+  "ftp-code": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "cites",
+        "note": "FTP Code fire test procedures for A, B, and C class divisions.",
+        "fromId": "SOLAS-II2-9-92"
+      },
+      {
+        "type": "depends_on",
+        "note": "Fire-safety equipment and materials specified by the FSS Code are tested/approved to the FTP Code.",
+        "fromId": "fss-code"
+      }
+    ]
+  },
+  "SOLAS-II2-10": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "fss-code",
+        "note": "International shore connection and several fixed system requirements referenced in Reg. 10 are specified in detail by the FSS Code.",
+        "fromId": "SOLAS-II2-10"
+      },
+      {
+        "type": "cites",
+        "targetId": "fss-code",
+        "note": "FSS Code Chapter 2 sets the specification for the International Shore Connection required by Reg. 10.2.1 on ships of 500 GT and above.",
+        "fromId": "SOLAS-II2-10"
+      },
+      {
+        "type": "cites",
+        "targetId": "fss-code",
+        "note": "FSS Code Chapter 12 sets the general specification for the fixed independently driven power operated emergency fire pump required by Reg. 10.2.2.",
+        "fromId": "SOLAS-II2-10"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "fire-main-and-pump-system",
+        "note": "Reg. 10 is the parent regulation establishing the fire main, pump, hydrant and hose system this Engineering Object represents; several of the object's Engineering Intelligence extensions (engineering-context, regulatory-lineage, ce-tip) target this parent node directly rather than only its numbered sub-paragraphs.",
+        "fromId": "SOLAS-II2-10"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "interprets",
+        "note": "Provides detailed engine-room/pump-room fire-prevention guidance supplementing the fixed/portable fire-fighting requirements of SOLAS Ch. II-2 Reg. 10.",
+        "fromId": "msc-circ-1321-fire-prevention"
+      },
+      {
+        "type": "amends",
+        "note": "Adds new paragraph 11 (fire-extinguishing media restrictions, incl. a PFOS ban) to the existing Fire fighting regulation.",
+        "fromId": "MSC532107-II2-10"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Machinery-space fixed/portable fire-fighting requirements apply to the space housing the boiler.",
+        "fromId": "boiler"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Parent regulation ('Fire fighting'); three Engineering Intelligence extensions (engineering-context, regulatory-lineage, ce-tip) target this node directly rather than only its numbered sub-paragraphs — see TECHNICAL_DEBT.md TD-1.",
+        "fromId": "fire-main-and-pump-system"
+      }
+    ]
+  },
+  "fire-main-and-pump-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-10",
+        "note": "Parent regulation ('Fire fighting'); three Engineering Intelligence extensions (engineering-context, regulatory-lineage, ce-tip) target this node directly rather than only its numbered sub-paragraphs — see TECHNICAL_DEBT.md TD-1.",
+        "fromId": "fire-main-and-pump-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-10-2",
+        "note": "SOLAS II-2 Reg. 10.2 is the core requirement establishing the fire main, pump, hydrant and hose system this object represents.",
+        "fromId": "fire-main-and-pump-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-10-2-21",
+        "note": "Fire main and hydrant material, isolating-valve segregation, and minimum hydrant pressure requirements.",
+        "fromId": "fire-main-and-pump-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-10-2-22",
+        "note": "Main and emergency fire pump number, independence, capacity, and location/segregation requirements.",
+        "fromId": "fire-main-and-pump-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-10-2-23",
+        "note": "Fire hose length and nozzle interchangeability requirements.",
+        "fromId": "fire-main-and-pump-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "fss-code",
+        "note": "FSS Code Chapter 12 sets the detailed specification for fixed independently driven power operated emergency fire pumps; Chapter 2 covers the International Shore Connection this system must be fitted with on ships of 500 GT and above.",
+        "fromId": "fire-main-and-pump-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Reg. 10 is the parent regulation establishing the fire main, pump, hydrant and hose system this Engineering Object represents; several of the object's Engineering Intelligence extensions (engineering-context, regulatory-lineage, ce-tip) target this parent node directly rather than only its numbered sub-paragraphs.",
+        "fromId": "SOLAS-II2-10"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Fire Main and Fire Pump System Engineering Object -- cross-verified against UK MCA MSIS 12 Chapter 5 (Crown Copyright/OGL) per OFFICIAL_CONTENT_COMPLETION_PROGRAMME.md's Evidence-Derived Engineering Intelligence workflow, 2026-07-25.",
+        "fromId": "SOLAS-II2-10-2-22"
+      }
+    ]
+  },
+  "SOLAS-II2-10-2-21": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "fss-code",
+        "note": "International shore connection specification.",
+        "fromId": "SOLAS-II2-10-2-21"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Fire main and hydrant material, isolating-valve segregation, and minimum hydrant pressure requirements.",
+        "fromId": "fire-main-and-pump-system"
+      }
+    ]
+  },
+  "SOLAS-II2-10-2-22": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "fire-main-and-pump-system",
+        "note": "Links Fire Main and Fire Pump System Engineering Object -- cross-verified against UK MCA MSIS 12 Chapter 5 (Crown Copyright/OGL) per OFFICIAL_CONTENT_COMPLETION_PROGRAMME.md's Evidence-Derived Engineering Intelligence workflow, 2026-07-25.",
+        "fromId": "SOLAS-II2-10-2-22"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Main and emergency fire pump number, independence, capacity, and location/segregation requirements.",
+        "fromId": "fire-main-and-pump-system"
+      }
+    ]
+  },
+  "SOLAS-II2-10-4": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "fss-code",
+        "note": "FSS Code Chapter 5 fixed gas system requirements.",
+        "fromId": "SOLAS-II2-10-4"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "co2-fire-extinguishing-system",
+        "note": "Links Fixed CO2 System Engineering Object.",
+        "fromId": "SOLAS-II2-10-4"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "SOLAS carriage and installation requirements for fixed gas fire-extinguishing systems in machinery and cargo spaces.",
+        "fromId": "co2-fire-extinguishing-system"
+      }
+    ]
+  },
+  "co2-fire-extinguishing-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-10-4",
+        "note": "SOLAS carriage and installation requirements for fixed gas fire-extinguishing systems in machinery and cargo spaces.",
+        "fromId": "co2-fire-extinguishing-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-5-21-211",
+        "note": "General medium calculation, starting air additions, container siting, and 925°C fire resistance piping rules.",
+        "fromId": "co2-fire-extinguishing-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-5-21-212",
+        "note": "Pre-discharge audible and visual release alarm requirements.",
+        "fromId": "co2-fire-extinguishing-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-5-21-213",
+        "note": "Distribution piping and container siting rules.",
+        "fromId": "co2-fire-extinguishing-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-5-22-221",
+        "note": "High-pressure CO2 machinery space (40%/35%) and cargo space (30%) volumetric calculations and 85% 2-minute discharge.",
+        "fromId": "co2-fire-extinguishing-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-5-22-222",
+        "note": "Cargo and vehicle space CO2 volumetric quantity calculations.",
+        "fromId": "co2-fire-extinguishing-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-5-22-223",
+        "note": "Dual-control release sequence and break-glass release box requirements.",
+        "fromId": "co2-fire-extinguishing-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-5-224-2241",
+        "note": "Low-pressure CO2 storage working pressure (1.8-2.2 N/mm²), 95% fill capacity, and volumetric fill limits.",
+        "fromId": "co2-fire-extinguishing-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-5-224-2242",
+        "note": "Low-pressure CO2 refrigeration units, pressure relief valves, and alarm limits.",
+        "fromId": "co2-fire-extinguishing-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "msc-circ-1321-fire-prevention",
+        "note": "Mandatory 10-year hydrostatic testing and periodic inspection guidelines for CO2 cylinders.",
+        "fromId": "co2-fire-extinguishing-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Fixed CO2 System Engineering Object.",
+        "fromId": "SOLAS-II2-10-4"
+      }
+    ]
+  },
+  "SOLAS-II2-10-5": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "fss-code",
+        "note": "FSS Code Chapter 7 water-spraying and water mist requirements.",
+        "fromId": "SOLAS-II2-10-5"
+      }
+    ],
+    "incoming": []
+  },
+  "SOLAS-II2-10-7": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "fss-code",
+        "note": "FSS Code Chapter 8 sprinkler system requirements.",
+        "fromId": "SOLAS-II2-10-7"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "SOLAS requirements for automatic sprinkler, fire detection, and fire alarm systems.",
+        "fromId": "fire-detection-and-alarm-system"
+      }
+    ]
+  },
+  "SOLAS-II2-10-8": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "fss-code",
+        "note": "FSS Code Chapters 6 and 14 deck foam requirements.",
+        "fromId": "SOLAS-II2-10-8"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "fixed-foam-system",
+        "note": "Links Fixed Foam System Engineering Object.",
+        "fromId": "SOLAS-II2-10-8"
+      }
+    ],
+    "incoming": []
+  },
+  "fixed-foam-system": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Fixed Foam System Engineering Object.",
+        "fromId": "SOLAS-II2-10-8"
+      }
+    ]
+  },
+  "SOLAS-I-12": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "msc-circ-1646-certificates-list",
+        "note": "MSC.1/Circ.1646 lists the full set of certificates and documents these regulations require to be carried.",
+        "fromId": "SOLAS-I-12"
+      }
+    ],
+    "incoming": []
+  },
+  "msc-circ-1646-certificates-list": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MSC.1/Circ.1646 lists the full set of certificates and documents these regulations require to be carried.",
+        "fromId": "SOLAS-I-12"
+      }
+    ]
+  },
+  "SOLAS-II1-26-261": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "main-engine-safeguard-system",
+        "note": "Links Machinery Safeguard System.",
+        "fromId": "SOLAS-II1-26-261"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Main propulsion and essential auxiliary machinery reliability under maneuvering conditions.",
+        "fromId": "main-engine-safeguard-system"
+      }
+    ]
+  },
+  "main-engine-safeguard-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-26-261",
+        "note": "Main propulsion and essential auxiliary machinery reliability under maneuvering conditions.",
+        "fromId": "main-engine-safeguard-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-27-274",
+        "note": "Crankcase explosion relief valves for engines of 200 mm bore or 0.6 m³ volume and above.",
+        "fromId": "main-engine-safeguard-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-27-275",
+        "note": "Automatic safety shutdown arrangements for critical failures such as lube-oil supply loss.",
+        "fromId": "main-engine-safeguard-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "hot-surface",
+        "note": "Insulation of hot machinery surfaces exceeding 220°C.",
+        "fromId": "main-engine-safeguard-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Machinery Safeguard System.",
+        "fromId": "SOLAS-II1-26-261"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Machinery Safeguard System.",
+        "fromId": "SOLAS-II1-27-274"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Machinery Safeguard System.",
+        "fromId": "SOLAS-II1-27-275"
+      }
+    ]
+  },
+  "SOLAS-II1-26-262": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "emergency-generator-system",
+        "note": "Links Emergency Generator System.",
+        "fromId": "SOLAS-II1-26-262"
+      }
+    ],
+    "incoming": []
+  },
+  "emergency-generator-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-41-415",
+        "note": "Dead-ship starting capability for main and emergency generating sets.",
+        "fromId": "emergency-generator-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-42",
+        "note": "The parent regulation this system implements in full -- general emergency-source requirement, its components, and the amendment history (MSC.496(105)) that attaches to the regulation as a whole rather than any single sub-paragraph.",
+        "fromId": "emergency-generator-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-42-422",
+        "note": "36-hour emergency load schedule for passenger ships (18-hour for cargo ships per Reg 43).",
+        "fromId": "emergency-generator-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-42-423",
+        "note": "Automatic starting and switchboard connection within 45 seconds of main power loss.",
+        "fromId": "emergency-generator-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-42-427",
+        "note": "Operational capability upright and at list angles up to 22.5° and trim up to 10°.",
+        "fromId": "emergency-generator-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "emergency-switchboard-def",
+        "note": "Definition of emergency switchboard.",
+        "fromId": "emergency-generator-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Emergency Generator System.",
+        "fromId": "SOLAS-II1-26-262"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Emergency Generator System.",
+        "fromId": "SOLAS-II1-41-411"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Emergency Generator System.",
+        "fromId": "SOLAS-II1-41-415"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Emergency Generator System — parent regulation, components, engineering context, failure modes, and amendment history.",
+        "fromId": "SOLAS-II1-42"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Emergency Generator System.",
+        "fromId": "SOLAS-II1-42-422"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Emergency Generator System.",
+        "fromId": "SOLAS-II1-42-423"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Emergency Generator System.",
+        "fromId": "SOLAS-II1-42-427"
+      }
+    ]
+  },
+  "SOLAS-II1-27-274": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "main-engine-safeguard-system",
+        "note": "Links Machinery Safeguard System.",
+        "fromId": "SOLAS-II1-27-274"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Crankcase explosion relief valves for engines of 200 mm bore or 0.6 m³ volume and above.",
+        "fromId": "main-engine-safeguard-system"
+      }
+    ]
+  },
+  "SOLAS-II1-27-275": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "main-engine-safeguard-system",
+        "note": "Links Machinery Safeguard System.",
+        "fromId": "SOLAS-II1-27-275"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Automatic safety shutdown arrangements for critical failures such as lube-oil supply loss.",
+        "fromId": "main-engine-safeguard-system"
+      }
+    ]
+  },
+  "SOLAS-II1-28-281": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "machinery-automation-system",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-28-281"
+      }
+    ],
+    "incoming": []
+  },
+  "machinery-automation-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-31-312",
+        "note": "Bridge propulsion control and independent emergency stop.",
+        "fromId": "machinery-automation-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-31-317",
+        "note": "Engine order telegraph communication between bridge and machinery control room.",
+        "fromId": "machinery-automation-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-47-471",
+        "note": "Fuel leakage alarms and high-pressure fuel line jacketing in unattended spaces.",
+        "fromId": "machinery-automation-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-53-531",
+        "note": "Centralized machinery control station alarm system for pressures, temperatures, and fluid levels.",
+        "fromId": "machinery-automation-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-53-534",
+        "note": "Automatic standby auxiliary pump changeover upon primary pump failure.",
+        "fromId": "machinery-automation-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "periodically-unattended-machinery-spaces-def",
+        "note": "Definition of UMS operating conditions.",
+        "fromId": "machinery-automation-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-28-281"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-28-282"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-31-312"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-31-317"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-47-471"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-53-531"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-53-534"
+      }
+    ]
+  },
+  "SOLAS-II1-28-282": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "machinery-automation-system",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-28-282"
+      }
+    ],
+    "incoming": []
+  },
+  "SOLAS-II1-29": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "SOLAS-V-26",
+        "note": "The testing/drill regime for this regulation's equipment is set out separately in SOLAS Ch. V Reg. 26 (Steering gear: testing and drills).",
+        "fromId": "SOLAS-II1-29"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "steering-gear-system",
+        "note": "Links Steering Gear System — parent regulation, components, engineering context, failure modes, and amendment history.",
+        "fromId": "SOLAS-II1-29"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "The parent regulation this system implements in full — general dual-gear requirement, construction standards, and the amendment history (MSC.365(93)) that attaches to the regulation as a whole rather than any single sub-paragraph.",
+        "fromId": "steering-gear-system"
+      }
+    ]
+  },
+  "SOLAS-V-26": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "steering-gear-system",
+        "note": "Links Steering Gear System — pre-departure testing and 3-monthly drill regime.",
+        "fromId": "SOLAS-V-26"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "cites",
+        "note": "The testing/drill regime for this regulation's equipment is set out separately in SOLAS Ch. V Reg. 26 (Steering gear: testing and drills).",
+        "fromId": "SOLAS-II1-29"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Pre-departure testing regime (12-hour window, 9 systems) and 3-monthly emergency steering drill requirement.",
+        "fromId": "steering-gear-system"
+      }
+    ]
+  },
+  "steering-gear-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-29",
+        "note": "The parent regulation this system implements in full — general dual-gear requirement, construction standards, and the amendment history (MSC.365(93)) that attaches to the regulation as a whole rather than any single sub-paragraph.",
+        "fromId": "steering-gear-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-29-293",
+        "note": "Main steering gear performance: 35° port/stbd, 35° to 30° opposite side within 28 seconds.",
+        "fromId": "steering-gear-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-29-294",
+        "note": "Auxiliary steering gear performance: 15° to 15° within 60 seconds at half speed or 7 knots.",
+        "fromId": "steering-gear-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-29-296",
+        "note": "Power operation requirement where rudder stock diameter exceeds 230 mm.",
+        "fromId": "steering-gear-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1-29-2914",
+        "note": "Hydraulic loop isolation and single-failure criterion for tankers of 10,000 GT and above.",
+        "fromId": "steering-gear-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-V-25",
+        "note": "Multiple steering gear power-unit operation requirement in areas demanding special caution (restricted navigation, river passages, port approaches).",
+        "fromId": "steering-gear-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-V-26",
+        "note": "Pre-departure testing regime (12-hour window, 9 systems) and 3-monthly emergency steering drill requirement.",
+        "fromId": "steering-gear-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "steering-gear-def",
+        "note": "Definition of main and auxiliary steering gear.",
+        "fromId": "steering-gear-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Steering Gear System — parent regulation, components, engineering context, failure modes, and amendment history.",
+        "fromId": "SOLAS-II1-29"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Steering Gear System.",
+        "fromId": "SOLAS-II1-29-293"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Steering Gear System.",
+        "fromId": "SOLAS-II1-29-294"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Steering Gear System.",
+        "fromId": "SOLAS-II1-29-296"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Steering Gear System.",
+        "fromId": "SOLAS-II1-29-2914"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Steering Gear System — multiple power-unit operation requirement for restricted-navigation areas.",
+        "fromId": "SOLAS-V-25"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Steering Gear System — pre-departure testing and 3-monthly drill regime.",
+        "fromId": "SOLAS-V-26"
+      }
+    ]
+  },
+  "SOLAS-II1-29-293": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "steering-gear-system",
+        "note": "Links Steering Gear System.",
+        "fromId": "SOLAS-II1-29-293"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Main steering gear performance: 35° port/stbd, 35° to 30° opposite side within 28 seconds.",
+        "fromId": "steering-gear-system"
+      }
+    ]
+  },
+  "SOLAS-II1-29-294": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "steering-gear-system",
+        "note": "Links Steering Gear System.",
+        "fromId": "SOLAS-II1-29-294"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Auxiliary steering gear performance: 15° to 15° within 60 seconds at half speed or 7 knots.",
+        "fromId": "steering-gear-system"
+      }
+    ]
+  },
+  "SOLAS-II1-29-296": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "steering-gear-system",
+        "note": "Links Steering Gear System.",
+        "fromId": "SOLAS-II1-29-296"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Power operation requirement where rudder stock diameter exceeds 230 mm.",
+        "fromId": "steering-gear-system"
+      }
+    ]
+  },
+  "SOLAS-II1-29-2914": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "steering-gear-system",
+        "note": "Links Steering Gear System.",
+        "fromId": "SOLAS-II1-29-2914"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Hydraulic loop isolation and single-failure criterion for tankers of 10,000 GT and above.",
+        "fromId": "steering-gear-system"
+      }
+    ]
+  },
+  "SOLAS-II1-31-312": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "machinery-automation-system",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-31-312"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Bridge propulsion control and independent emergency stop.",
+        "fromId": "machinery-automation-system"
+      }
+    ]
+  },
+  "SOLAS-II1-31-317": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "machinery-automation-system",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-31-317"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Engine order telegraph communication between bridge and machinery control room.",
+        "fromId": "machinery-automation-system"
+      }
+    ]
+  },
+  "SOLAS-II1-41-411": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "emergency-generator-system",
+        "note": "Links Emergency Generator System.",
+        "fromId": "SOLAS-II1-41-411"
+      }
+    ],
+    "incoming": []
+  },
+  "SOLAS-II1-41-415": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "emergency-generator-system",
+        "note": "Links Emergency Generator System.",
+        "fromId": "SOLAS-II1-41-415"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Dead-ship starting capability for main and emergency generating sets.",
+        "fromId": "emergency-generator-system"
+      }
+    ]
+  },
+  "SOLAS-II1-42": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "emergency-generator-system",
+        "note": "Links Emergency Generator System — parent regulation, components, engineering context, failure modes, and amendment history.",
+        "fromId": "SOLAS-II1-42"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "The parent regulation this system implements in full -- general emergency-source requirement, its components, and the amendment history (MSC.496(105)) that attaches to the regulation as a whole rather than any single sub-paragraph.",
+        "fromId": "emergency-generator-system"
+      }
+    ]
+  },
+  "SOLAS-II1-42-422": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "emergency-generator-system",
+        "note": "Links Emergency Generator System.",
+        "fromId": "SOLAS-II1-42-422"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "36-hour emergency load schedule for passenger ships (18-hour for cargo ships per Reg 43).",
+        "fromId": "emergency-generator-system"
+      }
+    ]
+  },
+  "SOLAS-II1-42-423": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "emergency-generator-system",
+        "note": "Links Emergency Generator System.",
+        "fromId": "SOLAS-II1-42-423"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Automatic starting and switchboard connection within 45 seconds of main power loss.",
+        "fromId": "emergency-generator-system"
+      }
+    ]
+  },
+  "SOLAS-II1-42-427": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "emergency-generator-system",
+        "note": "Links Emergency Generator System.",
+        "fromId": "SOLAS-II1-42-427"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Operational capability upright and at list angles up to 22.5° and trim up to 10°.",
+        "fromId": "emergency-generator-system"
+      }
+    ]
+  },
+  "SOLAS-II1-47-471": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "machinery-automation-system",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-47-471"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Fuel leakage alarms and high-pressure fuel line jacketing in unattended spaces.",
+        "fromId": "machinery-automation-system"
+      }
+    ]
+  },
+  "SOLAS-II1-53-531": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "machinery-automation-system",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-53-531"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Centralized machinery control station alarm system for pressures, temperatures, and fluid levels.",
+        "fromId": "machinery-automation-system"
+      }
+    ]
+  },
+  "SOLAS-II1-53-534": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "machinery-automation-system",
+        "note": "Links Machinery Automation System.",
+        "fromId": "SOLAS-II1-53-534"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Automatic standby auxiliary pump changeover upon primary pump failure.",
+        "fromId": "machinery-automation-system"
+      }
+    ]
+  },
+  "SOLAS-III": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "lsa-code",
+        "note": "Appliance performance standards required by this chapter are specified by the LSA Code.",
+        "fromId": "SOLAS-III"
+      }
+    ],
+    "incoming": []
+  },
+  "lsa-code": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "cites",
+        "note": "Appliance performance standards required by this chapter are specified by the LSA Code.",
+        "fromId": "SOLAS-III"
+      },
+      {
+        "type": "cites",
+        "note": "Replacement lifeboat release-and-retrieval system statement of acceptance ties directly to LSA Code paragraph 4.4.7.6.",
+        "fromId": "MSC1Circ1646-1-1b"
+      }
+    ]
+  },
+  "SOLAS-III-10": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "lifeboat",
+        "note": "Links Lifeboat -- manning, person-in-charge, and second-in-command requirements.",
+        "fromId": "SOLAS-III-10"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Manning of survival craft -- sufficient certificated crew, person in charge, and a nominated second-in-command for each lifeboat.",
+        "fromId": "lifeboat"
+      }
+    ]
+  },
+  "lifeboat": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "LSACode-IV-44",
+        "note": "The parent LSA Code section this system implements in full -- general lifeboat requirements, approval/certification, and the release-system engineering that spans several of its numbered sub-paragraphs.",
+        "fromId": "lifeboat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-III-31-311",
+        "note": "SOLAS Chapter III Regulation 31.1 cargo ship survival craft carriage requirements.",
+        "fromId": "lifeboat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-III-10",
+        "note": "Manning of survival craft -- sufficient certificated crew, person in charge, and a nominated second-in-command for each lifeboat.",
+        "fromId": "lifeboat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-III-19-193",
+        "note": "3-monthly requirement to launch and manoeuvre each lifeboat in the water with its assigned operating crew.",
+        "fromId": "lifeboat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-III-19-194",
+        "note": "6-monthly free-fall launch drill requirement, with only the required operating crew on board.",
+        "fromId": "lifeboat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "LSACode-IV-44-441",
+        "note": "LSA Code Section 4.4.1 general structural strength and 3.0 m drop test performance rules.",
+        "fromId": "lifeboat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "LSACode-IV-44-446",
+        "note": "LSA Code Section 4.4.6 propulsion, cold-start (-15°C), 24 h fuel, and 6-knot speed standards.",
+        "fromId": "lifeboat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "LSACode-IV-44-447",
+        "note": "LSA Code Section 4.4.7 on-load/off-load release mechanism -- shared with the dedicated offload-release-hook Engineering Object, which covers the mechanism's own engineering detail.",
+        "fromId": "lifeboat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "LSACode-IV-46-461",
+        "note": "LSA Code Section 4.6.1 totally enclosed lifeboat self-righting and canopy integrity rules.",
+        "fromId": "lifeboat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "LSACode-IV-46-463",
+        "note": "LSA Code Section 4.6.3 self-contained air support system -- 10-minute minimum duration, cabin overpressure not exceeding 20 hPa.",
+        "fromId": "lifeboat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "LSACode-IV-47",
+        "note": "LSA Code Section 4.7 free-fall lifeboat-specific requirements -- launch headway, drop-height strength margin, and dual-activation internal-only release.",
+        "fromId": "lifeboat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "msc-circ-1327-fall-preventer-devices",
+        "note": "IMO MSC.1/Circ.1327 guidelines for fall preventer devices (FPDs) on lifeboat release hooks.",
+        "fromId": "lifeboat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "certificated-person",
+        "note": "Command and manning requirements by STCW certificated proficiency holders.",
+        "fromId": "lifeboat"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Lifeboat -- manning, person-in-charge, and second-in-command requirements.",
+        "fromId": "SOLAS-III-10"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "SOLAS-III-19-193"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "SOLAS-III-19-194"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "SOLAS-III-31-311"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "LSACode-IV-44-441"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "LSACode-IV-44-446"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Lifeboat -- release mechanism as fitted to the lifeboat system as a whole; see offload-release-hook for the mechanism's own detailed engineering.",
+        "fromId": "LSACode-IV-44-447"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "LSACode-IV-46-461"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "LSACode-IV-46-463"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Lifeboat -- free-fall-specific launch, structural and release requirements.",
+        "fromId": "LSACode-IV-47"
+      }
+    ]
+  },
+  "SOLAS-III-17-171": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "rescue-boat",
+        "note": "Links Rescue Boat Engineering Object.",
+        "fromId": "SOLAS-III-17-171"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "SOLAS Chapter III Regulation 17 davit launching arrangements for rescue boats.",
+        "fromId": "lifeboat-davit"
+      },
+      {
+        "type": "relatedTo",
+        "note": "SOLAS Chapter III Regulation 17.1 embarkation, launching, and 5-minute recovery requirements.",
+        "fromId": "rescue-boat"
+      },
+      {
+        "type": "relatedTo",
+        "note": "SOLAS Chapter III Regulation 17 launching arrangements for rescue boats.",
+        "fromId": "launching-appliance"
+      }
+    ]
+  },
+  "rescue-boat": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-III-17-171",
+        "note": "SOLAS Chapter III Regulation 17.1 embarkation, launching, and 5-minute recovery requirements.",
+        "fromId": "rescue-boat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-III-17-172",
+        "note": "SOLAS Chapter III Regulation 17.2 capability to launch and recover rescue boat with ship making 5 knots headway.",
+        "fromId": "rescue-boat"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "anti-exposure-suit",
+        "note": "Carriage of approved anti-exposure suits for rescue boat crews.",
+        "fromId": "rescue-boat"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Rescue Boat Engineering Object.",
+        "fromId": "SOLAS-III-17-171"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Rescue Boat Engineering Object.",
+        "fromId": "SOLAS-III-17-172"
+      }
+    ]
+  },
+  "SOLAS-III-17-172": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "rescue-boat",
+        "note": "Links Rescue Boat Engineering Object.",
+        "fromId": "SOLAS-III-17-172"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "SOLAS Chapter III Regulation 17.2 capability to launch and recover rescue boat with ship making 5 knots headway.",
+        "fromId": "rescue-boat"
+      }
+    ]
+  },
+  "SOLAS-III-19-193": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "lifeboat",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "SOLAS-III-19-193"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "3-monthly requirement to launch and manoeuvre each lifeboat in the water with its assigned operating crew.",
+        "fromId": "lifeboat"
+      }
+    ]
+  },
+  "SOLAS-III-19-194": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "lifeboat",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "SOLAS-III-19-194"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "6-monthly free-fall launch drill requirement, with only the required operating crew on board.",
+        "fromId": "lifeboat"
+      }
+    ]
+  },
+  "SOLAS-III-31-311": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "lifeboat",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "SOLAS-III-31-311"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "lifeboat-davit",
+        "note": "Links Lifeboat Davit Engineering Object.",
+        "fromId": "SOLAS-III-31-311"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "SOLAS Chapter III Regulation 31.1 cargo ship survival craft carriage requirements.",
+        "fromId": "lifeboat"
+      }
+    ]
+  },
+  "lifeboat-davit": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-III-17-171",
+        "note": "SOLAS Chapter III Regulation 17 davit launching arrangements for rescue boats.",
+        "fromId": "lifeboat-davit"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "LSACode-VI-61-611",
+        "note": "LSA Code Section 6.1.1 structural strength, factor of safety (4.5), and 10° trim / 20° list launching rules.",
+        "fromId": "lifeboat-davit"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "LSACode-VI-61-612",
+        "note": "LSA Code Section 6.1.2 davit winch brake holding capacity and centrifugal governor requirements.",
+        "fromId": "lifeboat-davit"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Lifeboat Davit Engineering Object.",
+        "fromId": "SOLAS-III-31-311"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Davit Engineering Object.",
+        "fromId": "LSACode-VI-61-611"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Davit Engineering Object.",
+        "fromId": "LSACode-VI-61-612"
+      }
+    ]
+  },
+  "SOLAS-V-25": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "steering-gear-system",
+        "note": "Links Steering Gear System — multiple power-unit operation requirement for restricted-navigation areas.",
+        "fromId": "SOLAS-V-25"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Multiple steering gear power-unit operation requirement in areas demanding special caution (restricted navigation, river passages, port approaches).",
+        "fromId": "steering-gear-system"
+      }
+    ]
+  },
+  "SOLAS-VI": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "imsbc-code",
+        "note": "Solid bulk cargo information and acceptability requirements are implemented through the IMSBC Code.",
+        "fromId": "SOLAS-VI"
+      }
+    ],
+    "incoming": []
+  },
+  "imsbc-code": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "cites",
+        "note": "Solid bulk cargo information and acceptability requirements are implemented through the IMSBC Code.",
+        "fromId": "SOLAS-VI"
+      },
+      {
+        "type": "cites",
+        "note": "Regulation 7-5 requires solid bulk dangerous goods to comply with the IMSBC Code.",
+        "fromId": "SOLAS-VII"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-nau-imsbc-tml-approved-laboratories"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      }
+    ]
+  },
+  "SOLAS-IX": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "ism-code",
+        "note": "Regulation 3 makes the ISM Code's requirements mandatory for company and ship.",
+        "fromId": "SOLAS-IX"
+      }
+    ],
+    "incoming": []
+  },
+  "ism-code": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "cites",
+        "note": "Regulation 3 makes the ISM Code's requirements mandatory for company and ship.",
+        "fromId": "SOLAS-IX"
+      },
+      {
+        "type": "cites",
+        "note": "The EmS Guide instructs that its fire/spillage procedures be integrated into the ship's Safety Management System and contingency plan.",
+        "fromId": "IMDGCode-Suppl-EmSFire"
+      },
+      {
+        "type": "cites",
+        "note": "Safety Management Certificate and Document of Compliance are the certification instruments of the ISM Code SMS.",
+        "fromId": "MSC1Circ1646-1-1d"
+      },
+      {
+        "type": "cites",
+        "note": "FPD operating procedure and any drill/emergency variance must be documented in the ship's ISM Code SMS procedures and training manual.",
+        "fromId": "MSC1Circ1327-3"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-cyber-risk-sms-2017"
+      }
+    ]
+  },
+  "SOLAS-XI2": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "isps-code",
+        "note": "Regulation 4 requires companies and ships to comply with ISPS Code Part A, taking Part B guidance into account.",
+        "fromId": "SOLAS-XI2"
+      }
+    ],
+    "incoming": []
+  },
+  "isps-code": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "cites",
+        "note": "Regulation 4 requires companies and ships to comply with ISPS Code Part A, taking Part B guidance into account.",
+        "fromId": "SOLAS-XI2"
+      }
+    ]
+  },
+  "SOLAS-VII": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "imdg-code",
+        "note": "Regulation 4 requires dangerous-goods documentation per the relevant provisions of the IMDG Code.",
+        "fromId": "SOLAS-VII"
+      },
+      {
+        "type": "cites",
+        "targetId": "imsbc-code",
+        "note": "Regulation 7-5 requires solid bulk dangerous goods to comply with the IMSBC Code.",
+        "fromId": "SOLAS-VII"
+      }
+    ],
+    "incoming": []
+  },
+  "imdg-code": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "cites",
+        "note": "Regulation 4 requires dangerous-goods documentation per the relevant provisions of the IMDG Code.",
+        "fromId": "SOLAS-VII"
+      },
+      {
+        "type": "cites",
+        "note": "Annex III's definition of 'harmful substances' and its packing/marking/labelling detail both draw on the IMDG Code.",
+        "fromId": "MARPOL-III"
+      },
+      {
+        "type": "cites",
+        "note": "Section 8/9 dangerous-goods certificates in this same annex reference the IMDG Code; sections 4-6 instead cover bulk-liquid IBC/IGC-Code cargoes, a related but distinct dangerous-cargo regime.",
+        "fromId": "MSC1Circ1646-46"
+      },
+      {
+        "type": "cites",
+        "note": "Section 9 transport information/packing certification for packaged dangerous goods is governed by the IMDG Code.",
+        "fromId": "MSC1Circ1646-811"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      }
+    ]
+  },
+  "SOLAS-XIV": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "polar-code",
+        "note": "This chapter is what makes Polar Code Part I-A mandatory under SOLAS.",
+        "fromId": "SOLAS-XIV"
+      }
+    ],
+    "incoming": []
+  },
+  "polar-code": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "implements",
+        "note": "This chapter is what makes Polar Code Part I-A mandatory under SOLAS.",
+        "fromId": "SOLAS-XIV"
+      }
+    ]
+  },
+  "MARPOL-I-12-121": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "oily-water-separator",
+        "note": "Links Oily Water Separator -- destination sludge tank for separated oil residues.",
+        "fromId": "MARPOL-I-12-121"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Dedicated sludge tank capacity requirement for oil residues the separator removes from bilge water.",
+        "fromId": "oily-water-separator"
+      }
+    ]
+  },
+  "oily-water-separator": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-I-14",
+        "note": "The parent regulation this system implements in full -- oil filtering equipment carriage, the 15 ppm limit, and the MEPC.60(33)/MEPC.107(49) equipment-standard history that attaches to the regulation as a whole rather than any single sub-paragraph.",
+        "fromId": "oily-water-separator"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-I-14-141",
+        "note": "MARPOL Annex I Regulation 14.1 carriage requirements for 15 ppm oil filtering equipment on ships of 400 GT and above.",
+        "fromId": "oily-water-separator"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-I-14-142",
+        "note": "MARPOL Annex I Regulation 14.2 requirements for automatic 15 ppm alarm and 3-way stopping device on ships of 10,000 GT and above.",
+        "fromId": "oily-water-separator"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-I-15-151",
+        "note": "Operational conditions governing machinery space 15 ppm discharge outside special areas.",
+        "fromId": "oily-water-separator"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-I-15-152",
+        "note": "Stricter special-area discharge conditions (automatic stopping/recirculation required) and complete discharge prohibition in the Antarctic Area.",
+        "fromId": "oily-water-separator"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-I-12-121",
+        "note": "Dedicated sludge tank capacity requirement for oil residues the separator removes from bilge water.",
+        "fromId": "oily-water-separator"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-I-12-122",
+        "note": "Piping isolation requirement -- sludge piping must have no direct connection to bilge discharge piping or overboard other than the standard discharge connection, the regulatory basis for detecting unauthorised bypass ('magic pipe') arrangements.",
+        "fromId": "oily-water-separator"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-I-12-123",
+        "note": "Standard discharge connection flange dimensions for shore reception of sludge/oil residues.",
+        "fromId": "oily-water-separator"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-I-17",
+        "note": "Oil Record Book Part I -- mandatory chronological log of every bilge transfer, sludge disposal and OWS operation, the primary document PSC cross-checks against actual equipment operation.",
+        "fromId": "oily-water-separator"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IRSSSR-4",
+        "note": "IRS Class rules for machinery space bilge piping and electrical power connections.",
+        "fromId": "oily-water-separator"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Oily Water Separator -- destination sludge tank for separated oil residues.",
+        "fromId": "MARPOL-I-12-121"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Oily Water Separator -- piping isolation basis for detecting unauthorised bypass arrangements.",
+        "fromId": "MARPOL-I-12-122"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Oily Water Separator -- shore reception connection for separated oil residues.",
+        "fromId": "MARPOL-I-12-123"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Oily Water Separator -- parent regulation, equipment carriage, and MEPC.60(33)/MEPC.107(49) standard history.",
+        "fromId": "MARPOL-I-14"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links 15 ppm OWS Engineering Object.",
+        "fromId": "MARPOL-I-14-141"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links 15 ppm OWS Engineering Object.",
+        "fromId": "MARPOL-I-14-142"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Oily Water Separator -- stricter special-area discharge conditions.",
+        "fromId": "MARPOL-I-15-152"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Oily Water Separator -- mandatory operational log PSC cross-checks against actual equipment operation.",
+        "fromId": "MARPOL-I-17"
+      }
+    ]
+  },
+  "MARPOL-I-12-122": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "oily-water-separator",
+        "note": "Links Oily Water Separator -- piping isolation basis for detecting unauthorised bypass arrangements.",
+        "fromId": "MARPOL-I-12-122"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Piping isolation requirement -- sludge piping must have no direct connection to bilge discharge piping or overboard other than the standard discharge connection, the regulatory basis for detecting unauthorised bypass ('magic pipe') arrangements.",
+        "fromId": "oily-water-separator"
+      }
+    ]
+  },
+  "MARPOL-I-12-123": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "oily-water-separator",
+        "note": "Links Oily Water Separator -- shore reception connection for separated oil residues.",
+        "fromId": "MARPOL-I-12-123"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Standard discharge connection flange dimensions for shore reception of sludge/oil residues.",
+        "fromId": "oily-water-separator"
+      }
+    ]
+  },
+  "MARPOL-I-14": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "oily-water-separator",
+        "note": "Links Oily Water Separator -- parent regulation, equipment carriage, and MEPC.60(33)/MEPC.107(49) standard history.",
+        "fromId": "MARPOL-I-14"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "The parent regulation this system implements in full -- oil filtering equipment carriage, the 15 ppm limit, and the MEPC.60(33)/MEPC.107(49) equipment-standard history that attaches to the regulation as a whole rather than any single sub-paragraph.",
+        "fromId": "oily-water-separator"
+      }
+    ]
+  },
+  "MARPOL-I-14-141": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "oily-water-separator",
+        "note": "Links 15 ppm OWS Engineering Object.",
+        "fromId": "MARPOL-I-14-141"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex I Regulation 14.1 carriage requirements for 15 ppm oil filtering equipment on ships of 400 GT and above.",
+        "fromId": "oily-water-separator"
+      }
+    ]
+  },
+  "MARPOL-I-14-142": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "oily-water-separator",
+        "note": "Links 15 ppm OWS Engineering Object.",
+        "fromId": "MARPOL-I-14-142"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex I Regulation 14.2 requirements for automatic 15 ppm alarm and 3-way stopping device on ships of 10,000 GT and above.",
+        "fromId": "oily-water-separator"
+      }
+    ]
+  },
+  "MARPOL-I-14-143": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "oil-discharge-monitoring-equipment",
+        "note": "Links ODME Engineering Object.",
+        "fromId": "MARPOL-I-14-143"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex I Regulation 14.3 carriage and operational requirements for ODME on oil tankers.",
+        "fromId": "oil-discharge-monitoring-equipment"
+      }
+    ]
+  },
+  "oil-discharge-monitoring-equipment": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-I-14-143",
+        "note": "MARPOL Annex I Regulation 14.3 carriage and operational requirements for ODME on oil tankers.",
+        "fromId": "oil-discharge-monitoring-equipment"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-I-15-153",
+        "note": "Operational conditions governing oil tanker cargo area discharges (30 L/NM limit, 50 NM distance, total 1/30,000 limit).",
+        "fromId": "oil-discharge-monitoring-equipment"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links ODME Engineering Object.",
+        "fromId": "MARPOL-I-14-143"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links ODME Engineering Object.",
+        "fromId": "MARPOL-I-15-153"
+      }
+    ]
+  },
+  "MARPOL-I-15-152": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "oily-water-separator",
+        "note": "Links Oily Water Separator -- stricter special-area discharge conditions.",
+        "fromId": "MARPOL-I-15-152"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Stricter special-area discharge conditions (automatic stopping/recirculation required) and complete discharge prohibition in the Antarctic Area.",
+        "fromId": "oily-water-separator"
+      }
+    ]
+  },
+  "MARPOL-I-15-153": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "oil-discharge-monitoring-equipment",
+        "note": "Links ODME Engineering Object.",
+        "fromId": "MARPOL-I-15-153"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Operational conditions governing oil tanker cargo area discharges (30 L/NM limit, 50 NM distance, total 1/30,000 limit).",
+        "fromId": "oil-discharge-monitoring-equipment"
+      }
+    ]
+  },
+  "MARPOL-I-17": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "oily-water-separator",
+        "note": "Links Oily Water Separator -- mandatory operational log PSC cross-checks against actual equipment operation.",
+        "fromId": "MARPOL-I-17"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Oil Record Book Part I -- mandatory chronological log of every bilge transfer, sludge disposal and OWS operation, the primary document PSC cross-checks against actual equipment operation.",
+        "fromId": "oily-water-separator"
+      }
+    ]
+  },
+  "MARPOL-I-37": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "sopep-plan",
+        "note": "Links SOPEP Plan Engineering Object.",
+        "fromId": "MARPOL-I-37"
+      }
+    ],
+    "incoming": []
+  },
+  "sopep-plan": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-I-37-371",
+        "note": "MARPOL Annex I Regulation 37.1 mandatory carriage thresholds (150 GT tankers / 400 GT non-tankers).",
+        "fromId": "sopep-plan"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-I-37-372",
+        "note": "Mandatory plan structure, reporting procedures, and initial response actions to contain oil spills.",
+        "fromId": "sopep-plan"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links SOPEP Plan Engineering Object.",
+        "fromId": "MARPOL-I-37"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links SOPEP Plan Engineering Object.",
+        "fromId": "MARPOL-I-37-372"
+      }
+    ]
+  },
+  "MARPOL-I-37-372": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "sopep-plan",
+        "note": "Links SOPEP Plan Engineering Object.",
+        "fromId": "MARPOL-I-37-372"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Mandatory plan structure, reporting procedures, and initial response actions to contain oil spills.",
+        "fromId": "sopep-plan"
+      }
+    ]
+  },
+  "MARPOL-II": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "ibc-code",
+        "note": "Annex II relies on the IBC Code for the categorisation and construction/equipment standards applied to the ships it covers.",
+        "fromId": "MARPOL-II"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "The chapter 17 table carries each product's X/Y/Z pollution category, which drives the MARPOL Annex II discharge and prewash regime for that cargo.",
+        "fromId": "IBCCode-17"
+      }
+    ]
+  },
+  "ibc-code": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "cites",
+        "note": "Annex II relies on the IBC Code for the categorisation and construction/equipment standards applied to the ships it covers.",
+        "fromId": "MARPOL-II"
+      },
+      {
+        "type": "cites",
+        "note": "Applies the harmonized survey scheme to the IBC Code's Certificate of Fitness.",
+        "fromId": "HSSCSurveyGuidelines-Annex5"
+      }
+    ]
+  },
+  "MARPOL-III": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "imdg-code",
+        "note": "Annex III's definition of 'harmful substances' and its packing/marking/labelling detail both draw on the IMDG Code.",
+        "fromId": "MARPOL-III"
+      }
+    ],
+    "incoming": []
+  },
+  "MARPOL-VI-13-131": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "selective-catalytic-reduction",
+        "note": "Links NOx Reduction System Engineering Object.",
+        "fromId": "MARPOL-VI-13-131"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex VI Regulation 13.1 marine diesel engine output applicability threshold (> 130 kW).",
+        "fromId": "selective-catalytic-reduction"
+      }
+    ]
+  },
+  "selective-catalytic-reduction": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-VI-13-131",
+        "note": "MARPOL Annex VI Regulation 13.1 marine diesel engine output applicability threshold (> 130 kW).",
+        "fromId": "selective-catalytic-reduction"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-VI-13-135",
+        "note": "MARPOL Annex VI Regulation 13.5 Tier III ECA emission limit (3.4 g/kWh) compliance.",
+        "fromId": "selective-catalytic-reduction"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links NOx Reduction System Engineering Object.",
+        "fromId": "MARPOL-VI-13-131"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links NOx Reduction System Engineering Object.",
+        "fromId": "MARPOL-VI-13-133"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links NOx Reduction System Engineering Object.",
+        "fromId": "MARPOL-VI-13-134"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links NOx Reduction System Engineering Object.",
+        "fromId": "MARPOL-VI-13-135"
+      }
+    ]
+  },
+  "MARPOL-VI-13-133": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "selective-catalytic-reduction",
+        "note": "Links NOx Reduction System Engineering Object.",
+        "fromId": "MARPOL-VI-13-133"
+      }
+    ],
+    "incoming": []
+  },
+  "MARPOL-VI-13-134": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "selective-catalytic-reduction",
+        "note": "Links NOx Reduction System Engineering Object.",
+        "fromId": "MARPOL-VI-13-134"
+      }
+    ],
+    "incoming": []
+  },
+  "MARPOL-VI-13-135": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "selective-catalytic-reduction",
+        "note": "Links NOx Reduction System Engineering Object.",
+        "fromId": "MARPOL-VI-13-135"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex VI Regulation 13.5 Tier III ECA emission limit (3.4 g/kWh) compliance.",
+        "fromId": "selective-catalytic-reduction"
+      }
+    ]
+  },
+  "MARPOL-VI-14-141": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "exhaust-gas-cleaning-system",
+        "note": "Links SOx Scrubber Engineering Object.",
+        "fromId": "MARPOL-VI-14-141"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex VI Regulation 14.1 global 0.50% fuel sulfur cap equivalent compliance.",
+        "fromId": "exhaust-gas-cleaning-system"
+      }
+    ]
+  },
+  "exhaust-gas-cleaning-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-VI-14-141",
+        "note": "MARPOL Annex VI Regulation 14.1 global 0.50% fuel sulfur cap equivalent compliance.",
+        "fromId": "exhaust-gas-cleaning-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-VI-14-144",
+        "note": "MARPOL Annex VI Regulation 14.4 ECA 0.10% fuel sulfur cap equivalent compliance inside Emission Control Areas.",
+        "fromId": "exhaust-gas-cleaning-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-VI-14-148",
+        "note": "MARPOL Annex VI Regulation 14.8 exhaust gas cleaning system approval and operating guidelines.",
+        "fromId": "exhaust-gas-cleaning-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links SOx Scrubber Engineering Object.",
+        "fromId": "MARPOL-VI-14-141"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links SOx Scrubber Engineering Object.",
+        "fromId": "MARPOL-VI-14-144"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links SOx Scrubber Engineering Object.",
+        "fromId": "MARPOL-VI-14-148"
+      }
+    ]
+  },
+  "MARPOL-VI-14-144": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "exhaust-gas-cleaning-system",
+        "note": "Links SOx Scrubber Engineering Object.",
+        "fromId": "MARPOL-VI-14-144"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex VI Regulation 14.4 ECA 0.10% fuel sulfur cap equivalent compliance inside Emission Control Areas.",
+        "fromId": "exhaust-gas-cleaning-system"
+      }
+    ]
+  },
+  "MARPOL-VI-14-148": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "exhaust-gas-cleaning-system",
+        "note": "Links SOx Scrubber Engineering Object.",
+        "fromId": "MARPOL-VI-14-148"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex VI Regulation 14.8 exhaust gas cleaning system approval and operating guidelines.",
+        "fromId": "exhaust-gas-cleaning-system"
+      }
+    ]
+  },
+  "MARPOL-VI-23-231": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "ship-energy-efficiency-system",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-23-231"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex VI Regulation 23.1 attained EEXI technical file calculation for ships of 400 GT and above.",
+        "fromId": "ship-energy-efficiency-system"
+      }
+    ]
+  },
+  "ship-energy-efficiency-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-VI-23-231",
+        "note": "MARPOL Annex VI Regulation 23.1 attained EEXI technical file calculation for ships of 400 GT and above.",
+        "fromId": "ship-energy-efficiency-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-VI-23-232",
+        "note": "MARPOL Annex VI Regulation 23.2 required EEXI compliance and Engine Power Limitation (EPL) retrofits.",
+        "fromId": "ship-energy-efficiency-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-VI-26-261",
+        "note": "MARPOL Annex VI Regulation 26.1 SEEMP Part I carriage requirement for ships of 400 GT and above.",
+        "fromId": "ship-energy-efficiency-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-VI-26-262",
+        "note": "MARPOL Annex VI Regulation 26.2 SEEMP Part II (IMO DCS fuel data) and Part III (CII operational plan).",
+        "fromId": "ship-energy-efficiency-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-VI-28-281",
+        "note": "MARPOL Annex VI Regulation 28.1 annual attained operational CII calculation for ships of 5,000 GT and above.",
+        "fromId": "ship-energy-efficiency-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-VI-28-282",
+        "note": "MARPOL Annex VI Regulation 28.2 annual CII operational carbon intensity ratings A through E.",
+        "fromId": "ship-energy-efficiency-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-VI-28-283",
+        "note": "MARPOL Annex VI Regulation 28.3 mandatory corrective action plan for ships rated D (3 consecutive years) or E.",
+        "fromId": "ship-energy-efficiency-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "major-conversion",
+        "note": "Major conversion limb 5 for alterations substantially affecting ship energy efficiency or EEDI/EEXI.",
+        "fromId": "ship-energy-efficiency-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-23-231"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-23-232"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-26-261"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-26-262"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-28-281"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-28-282"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-28-283"
+      }
+    ]
+  },
+  "MARPOL-VI-23-232": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "ship-energy-efficiency-system",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-23-232"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex VI Regulation 23.2 required EEXI compliance and Engine Power Limitation (EPL) retrofits.",
+        "fromId": "ship-energy-efficiency-system"
+      }
+    ]
+  },
+  "MARPOL-VI-26-261": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "ship-energy-efficiency-system",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-26-261"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex VI Regulation 26.1 SEEMP Part I carriage requirement for ships of 400 GT and above.",
+        "fromId": "ship-energy-efficiency-system"
+      }
+    ]
+  },
+  "MARPOL-VI-26-262": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "ship-energy-efficiency-system",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-26-262"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex VI Regulation 26.2 SEEMP Part II (IMO DCS fuel data) and Part III (CII operational plan).",
+        "fromId": "ship-energy-efficiency-system"
+      }
+    ]
+  },
+  "MARPOL-VI-28-281": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "ship-energy-efficiency-system",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-28-281"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex VI Regulation 28.1 annual attained operational CII calculation for ships of 5,000 GT and above.",
+        "fromId": "ship-energy-efficiency-system"
+      }
+    ]
+  },
+  "MARPOL-VI-28-282": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "ship-energy-efficiency-system",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-28-282"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex VI Regulation 28.2 annual CII operational carbon intensity ratings A through E.",
+        "fromId": "ship-energy-efficiency-system"
+      }
+    ]
+  },
+  "MARPOL-VI-28-283": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "ship-energy-efficiency-system",
+        "note": "Links Energy Efficiency System Object.",
+        "fromId": "MARPOL-VI-28-283"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex VI Regulation 28.3 mandatory corrective action plan for ships rated D (3 consecutive years) or E.",
+        "fromId": "ship-energy-efficiency-system"
+      }
+    ]
+  },
+  "STCW-V-12": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "igc-code",
+        "note": "Gas-tanker cargo hazards trained under this regulation are the same cargo containment/handling systems specified in construction terms by the IGC Code.",
+        "fromId": "STCW-V-12"
+      }
+    ],
+    "incoming": []
+  },
+  "igc-code": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "cites",
+        "note": "Gas-tanker cargo hazards trained under this regulation are the same cargo containment/handling systems specified in construction terms by the IGC Code.",
+        "fromId": "STCW-V-12"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      },
+      {
+        "type": "cites",
+        "note": "Applies the harmonized survey scheme to the IGC Code's Certificate of Fitness.",
+        "fromId": "HSSCSurveyGuidelines-Annex5"
+      }
+    ]
+  },
+  "SAR-4": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "solas-1974",
+        "note": "Works alongside SOLAS Chapter V Regulation 33, which obliges the master of a ship to proceed to assist persons in distress at sea.",
+        "fromId": "SAR-4"
+      }
+    ],
+    "incoming": []
+  },
+  "solas-1974": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Works alongside SOLAS Chapter V Regulation 33, which obliges the master of a ship to proceed to assist persons in distress at sea.",
+        "fromId": "SAR-4"
+      },
+      {
+        "type": "implements",
+        "note": "ISM Code made mandatory under SOLAS Chapter IX.",
+        "fromId": "ISM-4"
+      },
+      {
+        "type": "depends_on",
+        "note": "Specifically SOLAS Chapter II-1 Part G, which makes the IGF Code mandatory and sets the goal-based framework it operates within.",
+        "fromId": "igf-code"
+      },
+      {
+        "type": "implements",
+        "note": "SOLAS chapter XIV makes the Introduction and Part I-A of the Polar Code mandatory for ships operating in polar waters.",
+        "fromId": "PolarCode-IA"
+      },
+      {
+        "type": "implements",
+        "note": "Made mandatory as an integral part of SOLAS Chapter II-2.",
+        "fromId": "fss-code"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-steel-ship-rules"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "IRSSSR-4"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-merchant-shipping-act-2025"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-nau-ais-mandatory-installation-2018"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-survey-window-period-2011"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-nau-imsbc-tml-approved-laboratories"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-030-2016-statutory-certificates-cargo-ships"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-063-2022-dgs-order20-offshore-eez"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-026-2025-lifting-appliances-anchor-handling-winches"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      },
+      {
+        "type": "amends",
+        "note": "Amends four SOLAS chapters (II-1, II-2, V, XIV) — see the regulation-level amends relationships on this standard's own decomposed nodes for the specific provisions each touches.",
+        "fromId": "msc-532-107"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-nau-ais-non-operational-2022"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-statutory-survey-framework-2021"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-nau-lsa-service-provider-authorization-2020"
+      }
+    ]
+  },
+  "CLC1992-Articles": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "fund-1992",
+        "note": "The 1992 Fund Convention supplements this Convention with a second tier of compensation when the owner's CLC liability is insufficient or unavailable.",
+        "fromId": "CLC1992-Articles"
+      }
+    ],
+    "incoming": []
+  },
+  "fund-1992": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "The 1992 Fund Convention supplements this Convention with a second tier of compensation when the owner's CLC liability is insufficient or unavailable.",
+        "fromId": "CLC1992-Articles"
+      }
+    ]
+  },
+  "FundConvention1992-Fund": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "clc-1992",
+        "note": "The Fund tops up compensation above the registered owner's CLC liability, forming the second tier of the CLC/Fund two-tier regime.",
+        "fromId": "FundConvention1992-Fund"
+      }
+    ],
+    "incoming": []
+  },
+  "clc-1992": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "The Fund tops up compensation above the registered owner's CLC liability, forming the second tier of the CLC/Fund two-tier regime.",
+        "fromId": "FundConvention1992-Fund"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Oil-pollution claims governed by the CLC are excepted from the LLMC ceiling and limited under the CLC's own regime instead.",
+        "fromId": "LLMC197696-Articles-3"
+      },
+      {
+        "type": "derived_from",
+        "note": "Models its strict-liability/compulsory-insurance civil-liability regime directly on CLC's, extending the same structure from persistent-oil cargo spills (CLC's scope) to bunker fuel spills from any seagoing ship — a structural derivation, not an amendment to CLC itself, per this record's own existing summary.",
+        "fromId": "bunker-convention-2001"
+      }
+    ]
+  },
+  "LLMC197696-Articles-3": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "clc-1992",
+        "note": "Oil-pollution claims governed by the CLC are excepted from the LLMC ceiling and limited under the CLC's own regime instead.",
+        "fromId": "LLMC197696-Articles-3"
+      }
+    ],
+    "incoming": []
+  },
+  "bunker-convention-2001": {
+    "outgoing": [
+      {
+        "type": "derived_from",
+        "targetId": "clc-1992",
+        "note": "Models its strict-liability/compulsory-insurance civil-liability regime directly on CLC's, extending the same structure from persistent-oil cargo spills (CLC's scope) to bunker fuel spills from any seagoing ship — a structural derivation, not an amendment to CLC itself, per this record's own existing summary.",
+        "fromId": "bunker-convention-2001"
+      }
+    ],
+    "incoming": []
+  },
+  "BunkerConvention2001-Articles-6": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "llmc-1976",
+        "note": "Bunker Convention liability is limited by reference to the LLMC's tonnage-based ceilings rather than a scale of its own.",
+        "fromId": "BunkerConvention2001-Articles-6"
+      }
+    ],
+    "incoming": []
+  },
+  "llmc-1976": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Bunker Convention liability is limited by reference to the LLMC's tonnage-based ceilings rather than a scale of its own.",
+        "fromId": "BunkerConvention2001-Articles-6"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-admin-llmc-1996-protocol-amendment-rules-2016"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "RefNoSLRULLLMC31112DraftMerchantShippingLimitationofLiabilityforMaritimeClaimsAmendmentRules2016-Annex2"
+      }
+    ]
+  },
+  "ISM-4": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "note": "ISM Code made mandatory under SOLAS Chapter IX.",
+        "fromId": "ISM-4"
+      }
+    ],
+    "incoming": []
+  },
+  "ISPSCode-A": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "SOLAS-XI2-4",
+        "note": "SOLAS regulation XI-2/4 obliges companies and ships to comply with Part A of the ISPS Code, taking the Part B guidance into account.",
+        "fromId": "ISPSCode-A"
+      }
+    ],
+    "incoming": []
+  },
+  "SOLAS-XI2-4": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "implements",
+        "note": "SOLAS regulation XI-2/4 obliges companies and ships to comply with Part A of the ISPS Code, taking the Part B guidance into account.",
+        "fromId": "ISPSCode-A"
+      }
+    ]
+  },
+  "LSACode-IV-44": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "msc-circ-1327-fall-preventer-devices",
+        "note": "The on-load release hook safety issues this section's reset-indicator and factor-of-safety requirements address are the same accidents that prompted MSC.1/Circ.1327's fall preventer device guidance.",
+        "fromId": "LSACode-IV-44"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "The parent LSA Code section this system implements in full -- general lifeboat requirements, approval/certification, and the release-system engineering that spans several of its numbered sub-paragraphs.",
+        "fromId": "lifeboat"
+      }
+    ]
+  },
+  "msc-circ-1327-fall-preventer-devices": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "cites",
+        "note": "The on-load release hook safety issues this section's reset-indicator and factor-of-safety requirements address are the same accidents that prompted MSC.1/Circ.1327's fall preventer device guidance.",
+        "fromId": "LSACode-IV-44"
+      },
+      {
+        "type": "cites",
+        "note": "MSC.1/Circ.1327 FPD operational guidelines.",
+        "fromId": "LSACode-IV-44-447"
+      },
+      {
+        "type": "relatedTo",
+        "note": "IMO MSC.1/Circ.1327 operational guidelines for fall preventer devices (FPDs) installed during maintenance and drills.",
+        "fromId": "offload-release-hook"
+      },
+      {
+        "type": "relatedTo",
+        "note": "IMO MSC.1/Circ.1327 guidelines for fall preventer devices (FPDs) on lifeboat release hooks.",
+        "fromId": "lifeboat"
+      }
+    ]
+  },
+  "LSACode-IV-44-441": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "lifeboat",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "LSACode-IV-44-441"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "LSA Code Section 4.4.1 general structural strength and 3.0 m drop test performance rules.",
+        "fromId": "lifeboat"
+      }
+    ]
+  },
+  "LSACode-IV-44-446": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "lifeboat",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "LSACode-IV-44-446"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "LSA Code Section 4.4.6 propulsion, cold-start (-15°C), 24 h fuel, and 6-knot speed standards.",
+        "fromId": "lifeboat"
+      }
+    ]
+  },
+  "LSACode-IV-44-447": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "offload-release-hook",
+        "note": "Links Release Hook Engineering Object.",
+        "fromId": "LSACode-IV-44-447"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "lifeboat",
+        "note": "Links Lifeboat -- release mechanism as fitted to the lifeboat system as a whole; see offload-release-hook for the mechanism's own detailed engineering.",
+        "fromId": "LSACode-IV-44-447"
+      },
+      {
+        "type": "cites",
+        "targetId": "msc-circ-1327-fall-preventer-devices",
+        "note": "MSC.1/Circ.1327 FPD operational guidelines.",
+        "fromId": "LSACode-IV-44-447"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "LSA Code Section 4.4.7.6 release hook hydrostatic interlock, reset indicator, and factor of safety 6 rules.",
+        "fromId": "offload-release-hook"
+      },
+      {
+        "type": "relatedTo",
+        "note": "LSA Code Section 4.4.7 on-load/off-load release mechanism -- shared with the dedicated offload-release-hook Engineering Object, which covers the mechanism's own engineering detail.",
+        "fromId": "lifeboat"
+      }
+    ]
+  },
+  "offload-release-hook": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "LSACode-IV-44-447",
+        "note": "LSA Code Section 4.4.7.6 release hook hydrostatic interlock, reset indicator, and factor of safety 6 rules.",
+        "fromId": "offload-release-hook"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "msc-circ-1327-fall-preventer-devices",
+        "note": "IMO MSC.1/Circ.1327 operational guidelines for fall preventer devices (FPDs) installed during maintenance and drills.",
+        "fromId": "offload-release-hook"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Release Hook Engineering Object.",
+        "fromId": "LSACode-IV-44-447"
+      }
+    ]
+  },
+  "LSACode-IV-46-461": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "lifeboat",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "LSACode-IV-46-461"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "LSA Code Section 4.6.1 totally enclosed lifeboat self-righting and canopy integrity rules.",
+        "fromId": "lifeboat"
+      }
+    ]
+  },
+  "LSACode-IV-46-463": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "lifeboat",
+        "note": "Links Lifeboat Engineering Object.",
+        "fromId": "LSACode-IV-46-463"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "LSA Code Section 4.6.3 self-contained air support system -- 10-minute minimum duration, cabin overpressure not exceeding 20 hPa.",
+        "fromId": "lifeboat"
+      }
+    ]
+  },
+  "LSACode-IV-47": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "lifeboat",
+        "note": "Links Lifeboat -- free-fall-specific launch, structural and release requirements.",
+        "fromId": "LSACode-IV-47"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "LSA Code Section 4.7 free-fall lifeboat-specific requirements -- launch headway, drop-height strength margin, and dual-activation internal-only release.",
+        "fromId": "lifeboat"
+      }
+    ]
+  },
+  "LSACode-VI-61-611": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "lifeboat-davit",
+        "note": "Links Davit Engineering Object.",
+        "fromId": "LSACode-VI-61-611"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "launching-appliance",
+        "note": "Links Launching Appliance Object.",
+        "fromId": "LSACode-VI-61-611"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "LSA Code Section 6.1.1 structural strength, factor of safety (4.5), and 10° trim / 20° list launching rules.",
+        "fromId": "lifeboat-davit"
+      },
+      {
+        "type": "relatedTo",
+        "note": "LSA Code Section 6.1.1 launching appliance general requirements, list/trim launching, and factor of safety.",
+        "fromId": "launching-appliance"
+      }
+    ]
+  },
+  "launching-appliance": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-III-17-171",
+        "note": "SOLAS Chapter III Regulation 17 launching arrangements for rescue boats.",
+        "fromId": "launching-appliance"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "LSACode-VI-61-611",
+        "note": "LSA Code Section 6.1.1 launching appliance general requirements, list/trim launching, and factor of safety.",
+        "fromId": "launching-appliance"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "LSACode-VI-61-612",
+        "note": "LSA Code Section 6.1.2 winch brake holding capacity (1.5x proof load) and lowering speed control.",
+        "fromId": "launching-appliance"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Launching Appliance Object.",
+        "fromId": "LSACode-VI-61-611"
+      }
+    ]
+  },
+  "LSACode-VI-61-612": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "lifeboat-davit",
+        "note": "Links Davit Engineering Object.",
+        "fromId": "LSACode-VI-61-612"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "LSA Code Section 6.1.2 davit winch brake holding capacity and centrifugal governor requirements.",
+        "fromId": "lifeboat-davit"
+      },
+      {
+        "type": "relatedTo",
+        "note": "LSA Code Section 6.1.2 winch brake holding capacity (1.5x proof load) and lowering speed control.",
+        "fromId": "launching-appliance"
+      }
+    ]
+  },
+  "FTPCode-Annex1Part1-P11": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "structural-fire-insulation-system",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Part1-P11"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Non-combustibility 750°C furnace test criteria: max temp rise ≤ 30°C, flaming ≤ 10s, mass loss ≤ 50%.",
+        "fromId": "structural-fire-insulation-system"
+      }
+    ]
+  },
+  "structural-fire-insulation-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-9-97",
+        "note": "Insulation of ventilation ducts passing through main vertical zones and machinery spaces.",
+        "fromId": "structural-fire-insulation-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FTPCode-Annex1Part1",
+        "note": "Non-combustibility test procedures for structural fire insulation materials.",
+        "fromId": "structural-fire-insulation-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FTPCode-Annex1Part1-P11",
+        "note": "Non-combustibility 750°C furnace test criteria: max temp rise ≤ 30°C, flaming ≤ 10s, mass loss ≤ 50%.",
+        "fromId": "structural-fire-insulation-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FTPCode-Annex1Parts56-P51",
+        "note": "Surface flammability test criteria for exposed insulation finishes.",
+        "fromId": "structural-fire-insulation-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FTPCode-Annex1Parts56-P61",
+        "note": "Primary deck covering fire test criteria and smoke emission limits.",
+        "fromId": "structural-fire-insulation-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Part1-P11"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Part2-P21"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Parts56-P51"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Parts56-P61"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Parts79-P71"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Parts79-P81"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Parts79-P91"
+      }
+    ]
+  },
+  "FTPCode-Annex1Part2-P21": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "structural-fire-insulation-system",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Part2-P21"
+      }
+    ],
+    "incoming": []
+  },
+  "FTPCode-Annex1Part3-P31": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "fire-rated-division-system",
+        "note": "Links Fire-Rated Division System.",
+        "fromId": "FTPCode-Annex1Part3-P31"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "'A' Class division 60-minute standard fire resistance test requirements.",
+        "fromId": "fire-rated-division-system"
+      }
+    ]
+  },
+  "fire-rated-division-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-9-92",
+        "note": "Fire integrity tables for bulkheads and decks separating adjacent spaces.",
+        "fromId": "fire-rated-division-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-9-93",
+        "note": "Penetrations in A and B class divisions and fire damper arrangements.",
+        "fromId": "fire-rated-division-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-10-1",
+        "note": "Containment and structural fire protection arrangements.",
+        "fromId": "fire-rated-division-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FTPCode-Annex1Part3-P31",
+        "note": "'A' Class division 60-minute standard fire resistance test requirements.",
+        "fromId": "fire-rated-division-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FTPCode-Annex1Part3-P32",
+        "note": "'B' Class division 30-minute standard fire resistance test requirements.",
+        "fromId": "fire-rated-division-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FTPCode-Annex1Part3-P33",
+        "note": "'F' Class division fire resistance test criteria.",
+        "fromId": "fire-rated-division-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FTPCode-Annex1Part4-P41",
+        "note": "Fire door control system thermal release and prototype furnace test procedures.",
+        "fromId": "fire-rated-division-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Fire-Rated Division System.",
+        "fromId": "FTPCode-Annex1Part3-P31"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Fire-Rated Division System.",
+        "fromId": "FTPCode-Annex1Part3-P32"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Fire-Rated Division System.",
+        "fromId": "FTPCode-Annex1Part3-P33"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Fire-Rated Division System.",
+        "fromId": "FTPCode-Annex1Part4-P41"
+      }
+    ]
+  },
+  "FTPCode-Annex1Part3-P32": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "fire-rated-division-system",
+        "note": "Links Fire-Rated Division System.",
+        "fromId": "FTPCode-Annex1Part3-P32"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "'B' Class division 30-minute standard fire resistance test requirements.",
+        "fromId": "fire-rated-division-system"
+      }
+    ]
+  },
+  "FTPCode-Annex1Part3-P33": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "fire-rated-division-system",
+        "note": "Links Fire-Rated Division System.",
+        "fromId": "FTPCode-Annex1Part3-P33"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "'F' Class division fire resistance test criteria.",
+        "fromId": "fire-rated-division-system"
+      }
+    ]
+  },
+  "FTPCode-Annex1Part4-P41": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "fire-rated-division-system",
+        "note": "Links Fire-Rated Division System.",
+        "fromId": "FTPCode-Annex1Part4-P41"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Fire door control system thermal release and prototype furnace test procedures.",
+        "fromId": "fire-rated-division-system"
+      }
+    ]
+  },
+  "FTPCode-Annex1Parts56-P51": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "structural-fire-insulation-system",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Parts56-P51"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Surface flammability test criteria for exposed insulation finishes.",
+        "fromId": "structural-fire-insulation-system"
+      }
+    ]
+  },
+  "FTPCode-Annex1Parts56-P61": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "structural-fire-insulation-system",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Parts56-P61"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Primary deck covering fire test criteria and smoke emission limits.",
+        "fromId": "structural-fire-insulation-system"
+      }
+    ]
+  },
+  "FTPCode-Annex1Parts79-P71": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "structural-fire-insulation-system",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Parts79-P71"
+      }
+    ],
+    "incoming": []
+  },
+  "FTPCode-Annex1Parts79-P81": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "structural-fire-insulation-system",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Parts79-P81"
+      }
+    ],
+    "incoming": []
+  },
+  "FTPCode-Annex1Parts79-P91": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "structural-fire-insulation-system",
+        "note": "Links Structural Fire Insulation System.",
+        "fromId": "FTPCode-Annex1Parts79-P91"
+      }
+    ],
+    "incoming": []
+  },
+  "igf-code": {
+    "outgoing": [
+      {
+        "type": "depends_on",
+        "targetId": "solas-1974",
+        "note": "Specifically SOLAS Chapter II-1 Part G, which makes the IGF Code mandatory and sets the goal-based framework it operates within.",
+        "fromId": "igf-code"
+      },
+      {
+        "type": "depends_on",
+        "targetId": "fss-code",
+        "note": "Fixed fire-detection/suppression arrangements for gas-fuelled machinery spaces draw on FSS Code specifications.",
+        "fromId": "igf-code"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Chapter 16 governs gas carriers burning their own cargo; the IGF Code is the parallel regime for non-gas-carrier ships using low-flashpoint fuels such as LNG.",
+        "fromId": "IGCCode-16"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-guideline-saf-07-lpg-fuelled-vessels"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-guideline-saf-05-fuel-cell-installations"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-guideline-saf-03-methanol-fuelled-vessels"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-classification-note-7a-approval-ic-engines"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Guidelines explicitly exclude fire hazards from gas-fuel arrangements, deferring to the IGF Code.",
+        "fromId": "MSC1Circ1321-1"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      }
+    ]
+  },
+  "IGFCode-A1-5-53": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-containment-system",
+        "note": "Links Gas Fuel Containment System.",
+        "fromId": "IGFCode-A1-5-53"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Fuel tank protective distance location requirements (B/5 inboard, B/15 bottom clearance).",
+        "fromId": "gas-fuel-containment-system"
+      }
+    ]
+  },
+  "gas-fuel-containment-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-5-53",
+        "note": "Fuel tank protective distance location requirements (B/5 inboard, B/15 bottom clearance).",
+        "fromId": "gas-fuel-containment-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-6-64",
+        "note": "Type C independent tank design parameters, vacuum insulation, and MARVS pressure settings.",
+        "fromId": "gas-fuel-containment-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-6-67",
+        "note": "Pressure relief valve sizing, venting to open deck, and boil-off gas management.",
+        "fromId": "gas-fuel-containment-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-6-68",
+        "note": "Tank filling limits and thermal expansion safety margins.",
+        "fromId": "gas-fuel-containment-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-11-113",
+        "note": "Fixed water spray deluge protection for fuel storage tank exposed surfaces.",
+        "fromId": "gas-fuel-containment-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-def",
+        "note": "Definition of gas fuel / low-flashpoint fuel.",
+        "fromId": "gas-fuel-containment-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Fuel Containment System.",
+        "fromId": "IGFCode-A1-5-53"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Fuel Containment System.",
+        "fromId": "IGFCode-A1-6-64"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Fuel Containment System.",
+        "fromId": "IGFCode-A1-6-67"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Fuel Containment System.",
+        "fromId": "IGFCode-A1-6-68"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Fuel Containment System.",
+        "fromId": "IGFCode-A1-11-113"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Fuel Containment System.",
+        "fromId": "IGFCode-A1-12-1251"
+      }
+    ]
+  },
+  "IGFCode-A1-5-54": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "double-walled-gas-fuel-piping",
+        "note": "Links Double-Walled Gas Fuel Piping.",
+        "fromId": "IGFCode-A1-5-54"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Gas-safe machinery space requirement for double-walled gas piping throughout.",
+        "fromId": "double-walled-gas-fuel-piping"
+      }
+    ]
+  },
+  "double-walled-gas-fuel-piping": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-5-54",
+        "note": "Gas-safe machinery space requirement for double-walled gas piping throughout.",
+        "fromId": "double-walled-gas-fuel-piping"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-9-96",
+        "note": "Concentric double-wall pipe construction and annular ducting requirements.",
+        "fromId": "double-walled-gas-fuel-piping"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-13-135",
+        "note": "Continuous mechanical ventilation of outer gas fuel ducting at 30 air changes/hour.",
+        "fromId": "double-walled-gas-fuel-piping"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-def",
+        "note": "Definition of gas fuel / low-flashpoint fuel.",
+        "fromId": "double-walled-gas-fuel-piping"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Double-Walled Gas Fuel Piping.",
+        "fromId": "IGFCode-A1-5-54"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Double-Walled Gas Fuel Piping.",
+        "fromId": "IGFCode-A1-9-96"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Double-Walled Gas Fuel Piping.",
+        "fromId": "IGFCode-A1-13-135"
+      }
+    ]
+  },
+  "IGFCode-A1-5-55": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-detection-and-esd-system",
+        "note": "Links Gas Detection & ESD System.",
+        "fromId": "IGFCode-A1-5-55"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "ESD-protected machinery space automatic shutdown of non-safe electrical equipment and gas supply.",
+        "fromId": "gas-detection-and-esd-system"
+      }
+    ]
+  },
+  "gas-detection-and-esd-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-5-55",
+        "note": "ESD-protected machinery space automatic shutdown of non-safe electrical equipment and gas supply.",
+        "fromId": "gas-detection-and-esd-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-9-92",
+        "note": "Redundancy of gas fuel supply preventing complete power loss during ESD trip.",
+        "fromId": "gas-detection-and-esd-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-9-93",
+        "note": "Master Gas Fuel Valve operation and double block and bleed valve venting within 3 seconds.",
+        "fromId": "gas-detection-and-esd-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-15-1581",
+        "note": "Gas detection alarm activation at 20% Lower Explosive Limit (LEL).",
+        "fromId": "gas-detection-and-esd-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-15-1582",
+        "note": "Automatic Master Gas Fuel Valve trip and ESD activation at 40% Lower Explosive Limit (LEL).",
+        "fromId": "gas-detection-and-esd-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "esd-protected-machinery-space-def",
+        "note": "Definition of ESD-protected machinery space.",
+        "fromId": "gas-detection-and-esd-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "hazardous-area-def",
+        "note": "Definition of hazardous area classification.",
+        "fromId": "gas-detection-and-esd-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Detection & ESD System.",
+        "fromId": "IGFCode-A1-5-55"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Detection & ESD System.",
+        "fromId": "IGFCode-A1-9-92"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Detection & ESD System.",
+        "fromId": "IGFCode-A1-9-93"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Detection & ESD System.",
+        "fromId": "IGFCode-A1-15-1581"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Detection & ESD System.",
+        "fromId": "IGFCode-A1-15-1582"
+      }
+    ]
+  },
+  "IGFCode-A1-5-511": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-conditioning-system",
+        "note": "Links Gas Fuel Conditioning System.",
+        "fromId": "IGFCode-A1-5-511"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Airlock access design with two self-closing gastight doors and positive pressure differential.",
+        "fromId": "gas-fuel-conditioning-system"
+      }
+    ]
+  },
+  "gas-fuel-conditioning-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-5-511",
+        "note": "Airlock access design with two self-closing gastight doors and positive pressure differential.",
+        "fromId": "gas-fuel-conditioning-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-12-1252",
+        "note": "Zone 1 hazardous area classification for enclosed fuel preparation rooms.",
+        "fromId": "gas-fuel-conditioning-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-13-133",
+        "note": "Dedicated mechanical extraction ventilation maintaining negative pressure at 30 air changes/hour.",
+        "fromId": "gas-fuel-conditioning-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "fuel-preparation-room-def",
+        "note": "Definition of fuel preparation room.",
+        "fromId": "gas-fuel-conditioning-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "hazardous-area-def",
+        "note": "Definition of hazardous area and Zone 1 classification.",
+        "fromId": "gas-fuel-conditioning-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Fuel Conditioning System.",
+        "fromId": "IGFCode-A1-5-511"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Fuel Conditioning System.",
+        "fromId": "IGFCode-A1-12-1252"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Fuel Conditioning System.",
+        "fromId": "IGFCode-A1-12-1253"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Fuel Conditioning System.",
+        "fromId": "IGFCode-A1-13-133"
+      }
+    ]
+  },
+  "IGFCode-A1-6-64": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-containment-system",
+        "note": "Links Gas Fuel Containment System.",
+        "fromId": "IGFCode-A1-6-64"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Type C independent tank design parameters, vacuum insulation, and MARVS pressure settings.",
+        "fromId": "gas-fuel-containment-system"
+      }
+    ]
+  },
+  "IGFCode-A1-6-67": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-containment-system",
+        "note": "Links Gas Fuel Containment System.",
+        "fromId": "IGFCode-A1-6-67"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Pressure relief valve sizing, venting to open deck, and boil-off gas management.",
+        "fromId": "gas-fuel-containment-system"
+      }
+    ]
+  },
+  "IGFCode-A1-6-68": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-containment-system",
+        "note": "Links Gas Fuel Containment System.",
+        "fromId": "IGFCode-A1-6-68"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Tank filling limits and thermal expansion safety margins.",
+        "fromId": "gas-fuel-containment-system"
+      }
+    ]
+  },
+  "IGFCode-A1-8-83": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-bunkering-system",
+        "note": "Links Gas Fuel Bunkering System.",
+        "fromId": "IGFCode-A1-8-83"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Bunkering station arrangements, manifold isolation valves, dry-break couplings, and ERC safety systems.",
+        "fromId": "gas-fuel-bunkering-system"
+      }
+    ]
+  },
+  "gas-fuel-bunkering-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-8-83",
+        "note": "Bunkering station arrangements, manifold isolation valves, dry-break couplings, and ERC safety systems.",
+        "fromId": "gas-fuel-bunkering-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-8-84",
+        "note": "Nitrogen inerting and purging requirements for bunkering lines prior to and following fuel transfer.",
+        "fromId": "gas-fuel-bunkering-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "IGFCode-A1-11-114",
+        "note": "Fixed dry chemical powder fire-extinguishing protection for bunkering manifold stations.",
+        "fromId": "gas-fuel-bunkering-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "bunkering-station-def",
+        "note": "Definition of bunkering station.",
+        "fromId": "gas-fuel-bunkering-system"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Fuel Bunkering System.",
+        "fromId": "IGFCode-A1-8-83"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Fuel Bunkering System.",
+        "fromId": "IGFCode-A1-8-84"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Links Gas Fuel Bunkering System.",
+        "fromId": "IGFCode-A1-11-114"
+      }
+    ]
+  },
+  "IGFCode-A1-8-84": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-bunkering-system",
+        "note": "Links Gas Fuel Bunkering System.",
+        "fromId": "IGFCode-A1-8-84"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Nitrogen inerting and purging requirements for bunkering lines prior to and following fuel transfer.",
+        "fromId": "gas-fuel-bunkering-system"
+      }
+    ]
+  },
+  "IGFCode-A1-9-92": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-detection-and-esd-system",
+        "note": "Links Gas Detection & ESD System.",
+        "fromId": "IGFCode-A1-9-92"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Redundancy of gas fuel supply preventing complete power loss during ESD trip.",
+        "fromId": "gas-detection-and-esd-system"
+      }
+    ]
+  },
+  "IGFCode-A1-9-93": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-detection-and-esd-system",
+        "note": "Links Gas Detection & ESD System.",
+        "fromId": "IGFCode-A1-9-93"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Master Gas Fuel Valve operation and double block and bleed valve venting within 3 seconds.",
+        "fromId": "gas-detection-and-esd-system"
+      }
+    ]
+  },
+  "IGFCode-A1-9-96": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "double-walled-gas-fuel-piping",
+        "note": "Links Double-Walled Gas Fuel Piping.",
+        "fromId": "IGFCode-A1-9-96"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Concentric double-wall pipe construction and annular ducting requirements.",
+        "fromId": "double-walled-gas-fuel-piping"
+      }
+    ]
+  },
+  "IGFCode-A1-11-113": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-containment-system",
+        "note": "Links Gas Fuel Containment System.",
+        "fromId": "IGFCode-A1-11-113"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Fixed water spray deluge protection for fuel storage tank exposed surfaces.",
+        "fromId": "gas-fuel-containment-system"
+      }
+    ]
+  },
+  "IGFCode-A1-11-114": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-bunkering-system",
+        "note": "Links Gas Fuel Bunkering System.",
+        "fromId": "IGFCode-A1-11-114"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Fixed dry chemical powder fire-extinguishing protection for bunkering manifold stations.",
+        "fromId": "gas-fuel-bunkering-system"
+      }
+    ]
+  },
+  "IGFCode-A1-12-1251": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-containment-system",
+        "note": "Links Gas Fuel Containment System.",
+        "fromId": "IGFCode-A1-12-1251"
+      }
+    ],
+    "incoming": []
+  },
+  "IGFCode-A1-12-1252": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-conditioning-system",
+        "note": "Links Gas Fuel Conditioning System.",
+        "fromId": "IGFCode-A1-12-1252"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Zone 1 hazardous area classification for enclosed fuel preparation rooms.",
+        "fromId": "gas-fuel-conditioning-system"
+      }
+    ]
+  },
+  "IGFCode-A1-12-1253": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-conditioning-system",
+        "note": "Links Gas Fuel Conditioning System.",
+        "fromId": "IGFCode-A1-12-1253"
+      }
+    ],
+    "incoming": []
+  },
+  "IGFCode-A1-13-133": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-fuel-conditioning-system",
+        "note": "Links Gas Fuel Conditioning System.",
+        "fromId": "IGFCode-A1-13-133"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Dedicated mechanical extraction ventilation maintaining negative pressure at 30 air changes/hour.",
+        "fromId": "gas-fuel-conditioning-system"
+      }
+    ]
+  },
+  "IGFCode-A1-13-135": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "double-walled-gas-fuel-piping",
+        "note": "Links Double-Walled Gas Fuel Piping.",
+        "fromId": "IGFCode-A1-13-135"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Continuous mechanical ventilation of outer gas fuel ducting at 30 air changes/hour.",
+        "fromId": "double-walled-gas-fuel-piping"
+      }
+    ]
+  },
+  "IGFCode-A1-15-1581": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-detection-and-esd-system",
+        "note": "Links Gas Detection & ESD System.",
+        "fromId": "IGFCode-A1-15-1581"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Gas detection alarm activation at 20% Lower Explosive Limit (LEL).",
+        "fromId": "gas-detection-and-esd-system"
+      }
+    ]
+  },
+  "IGFCode-A1-15-1582": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "gas-detection-and-esd-system",
+        "note": "Links Gas Detection & ESD System.",
+        "fromId": "IGFCode-A1-15-1582"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Automatic Master Gas Fuel Valve trip and ESD activation at 40% Lower Explosive Limit (LEL).",
+        "fromId": "gas-detection-and-esd-system"
+      }
+    ]
+  },
+  "IBCCode-17": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "MARPOL-II",
+        "note": "The chapter 17 table carries each product's X/Y/Z pollution category, which drives the MARPOL Annex II discharge and prewash regime for that cargo.",
+        "fromId": "IBCCode-17"
+      }
+    ],
+    "incoming": []
+  },
+  "IGCCode-16": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "igf-code",
+        "note": "Chapter 16 governs gas carriers burning their own cargo; the IGF Code is the parallel regime for non-gas-carrier ships using low-flashpoint fuels such as LNG.",
+        "fromId": "IGCCode-16"
+      }
+    ],
+    "incoming": []
+  },
+  "IMDGCode-Suppl-EmSFire": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "ism-code",
+        "note": "The EmS Guide instructs that its fire/spillage procedures be integrated into the ship's Safety Management System and contingency plan.",
+        "fromId": "IMDGCode-Suppl-EmSFire"
+      }
+    ],
+    "incoming": []
+  },
+  "IMSBCCode-4": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "SOLAS-VI-2",
+        "note": "The shipper's cargo declaration required here gives detailed effect to the SOLAS VI/2 cargo information duty for solid bulk cargoes.",
+        "fromId": "IMSBCCode-4"
+      }
+    ],
+    "incoming": []
+  },
+  "SOLAS-VI-2": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "implements",
+        "note": "The shipper's cargo declaration required here gives detailed effect to the SOLAS VI/2 cargo information duty for solid bulk cargoes.",
+        "fromId": "IMSBCCode-4"
+      }
+    ]
+  },
+  "PolarCode-IA": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "note": "SOLAS chapter XIV makes the Introduction and Part I-A of the Polar Code mandatory for ships operating in polar waters.",
+        "fromId": "PolarCode-IA"
+      }
+    ],
+    "incoming": []
+  },
+  "PolarCode-IIA": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "note": "Part II-A is made mandatory through amendments to MARPOL Annexes I, II, IV and V, layering stricter polar discharge rules over each annex's baseline regime.",
+        "fromId": "PolarCode-IIA"
+      }
+    ],
+    "incoming": []
+  },
+  "marpol-73-78": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "implements",
+        "note": "Part II-A is made mandatory through amendments to MARPOL Annexes I, II, IV and V, layering stricter polar discharge rules over each annex's baseline regime.",
+        "fromId": "PolarCode-IIA"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-steel-ship-rules"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "IRSSSR-5"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-merchant-shipping-act-2025"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-marpol-vi-sulphur-egcs-2019"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-marpol-vi-fonar-corrigendum-2023"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-eexi-cii-data-collection-2023"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-survey-window-period-2011"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-030-2016-statutory-certificates-cargo-ships"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-041-2019-sulphur-cap-implementation"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-006-2022-unsp-barges-marpol-exemption"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      },
+      {
+        "type": "amends",
+        "note": "Replaces MARPOL Annex VI in full with the 2021 Revised Annex VI text — see the regulation-level amends relationships on this standard's own decomposed nodes for the specific provisions each new/amended regulation touches.",
+        "fromId": "mepc-328-76"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-statutory-survey-framework-2021"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-marpol-vi-consolidated-notice-2023"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-marpol-iv-sewage-implementation-2023"
+      }
+    ]
+  },
+  "irs-guideline-saf-07-lpg-fuelled-vessels": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "igf-code",
+        "fromId": "irs-guideline-saf-07-lpg-fuelled-vessels"
+      }
+    ],
+    "incoming": []
+  },
+  "irs-guideline-saf-05-fuel-cell-installations": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "igf-code",
+        "fromId": "irs-guideline-saf-05-fuel-cell-installations"
+      }
+    ],
+    "incoming": []
+  },
+  "irs-guideline-saf-03-methanol-fuelled-vessels": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "igf-code",
+        "fromId": "irs-guideline-saf-03-methanol-fuelled-vessels"
+      }
+    ],
+    "incoming": []
+  },
+  "irs-classification-note-7a-approval-ic-engines": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "igf-code",
+        "fromId": "irs-classification-note-7a-approval-ic-engines"
+      }
+    ],
+    "incoming": []
+  },
+  "irs-steel-ship-rules": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "load-lines-1966",
+        "fromId": "irs-steel-ship-rules"
+      },
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "fromId": "irs-steel-ship-rules"
+      },
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "irs-steel-ship-rules"
+      }
+    ],
+    "incoming": []
+  },
+  "load-lines-1966": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-steel-ship-rules"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "IRSSSR-3"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-030-2016-statutory-certificates-cargo-ships"
+      },
+      {
+        "type": "cites",
+        "note": "Applies the harmonized survey scheme to the certificates issued under the Load Line Convention.",
+        "fromId": "HSSCSurveyGuidelines-Annex2"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-statutory-survey-framework-2021"
+      }
+    ]
+  },
+  "IRSSSR-3": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "load-lines-1966",
+        "fromId": "IRSSSR-3"
+      }
+    ],
+    "incoming": []
+  },
+  "IRSSSR-3-4": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II1",
+        "note": "Intact/damage stability requirements in this chapter work alongside SOLAS Chapter II-1's own subdivision and damage-stability regulations; this is a classification-rule chapter applying IRS's own stability documentation/assessment requirements, not an amendment to SOLAS itself.",
+        "fromId": "IRSSSR-3-4"
+      }
+    ],
+    "incoming": []
+  },
+  "SOLAS-II1": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Intact/damage stability requirements in this chapter work alongside SOLAS Chapter II-1's own subdivision and damage-stability regulations; this is a classification-rule chapter applying IRS's own stability documentation/assessment requirements, not an amendment to SOLAS itself.",
+        "fromId": "IRSSSR-3-4"
+      }
+    ]
+  },
+  "IRSSSR-4": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "fromId": "IRSSSR-4"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Class design/construction/testing requirements for boilers and pressure vessels (Part 4 machinery requirements).",
+        "fromId": "boiler"
+      },
+      {
+        "type": "relatedTo",
+        "note": "IRS Class rules for machinery space bilge piping and electrical power connections.",
+        "fromId": "oily-water-separator"
+      }
+    ]
+  },
+  "IRSSSR-5": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "IRSSSR-5"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-merchant-shipping-act-2025": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "fromId": "dgma-merchant-shipping-act-2025"
+      },
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "dgma-merchant-shipping-act-2025"
+      },
+      {
+        "type": "implements",
+        "targetId": "bwm-2004",
+        "fromId": "dgma-merchant-shipping-act-2025"
+      },
+      {
+        "type": "implements",
+        "targetId": "mlc-2006",
+        "fromId": "dgma-merchant-shipping-act-2025"
+      },
+      {
+        "type": "supersedes",
+        "targetId": "ms-act-1958",
+        "note": "Replaces the Merchant Shipping Act, 1958 in its entirety, effective 15 March 2026.",
+        "fromId": "dgma-merchant-shipping-act-2025"
+      }
+    ],
+    "incoming": []
+  },
+  "bwm-2004": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-merchant-shipping-act-2025"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-bwm-convention-implementation-2020"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-bwm-experience-building-data-2022"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-bwm-soc-ro-addendum-2022"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-055-2016-bwm-soc-indian-flag"
+      },
+      {
+        "type": "cites",
+        "note": "Applies the harmonized survey scheme to the International Ballast Water Management Certificate under the BWM Convention.",
+        "fromId": "HSSCSurveyGuidelines-Annex4"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Flags that storing treated sewage/grey water in a ballast tank can compromise the BWTS's ability to meet the D-2 discharge standard.",
+        "fromId": "MSNoticeNo13of2023FileNo132001132020ENGGDGSC3205-1923"
+      }
+    ]
+  },
+  "mlc-2006": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-merchant-shipping-act-2025"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-015-2017-mlc-certification-procedures"
+      }
+    ]
+  },
+  "ms-act-1958": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "supersedes",
+        "note": "Replaces the Merchant Shipping Act, 1958 in its entirety, effective 15 March 2026.",
+        "fromId": "dgma-merchant-shipping-act-2025"
+      }
+    ]
+  },
+  "MSC1Circ1321-1": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "igf-code",
+        "note": "Guidelines explicitly exclude fire hazards from gas-fuel arrangements, deferring to the IGF Code.",
+        "fromId": "MSC1Circ1321-1"
+      }
+    ],
+    "incoming": []
+  },
+  "MSC1Circ1646-1-1b": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "lsa-code",
+        "note": "Replacement lifeboat release-and-retrieval system statement of acceptance ties directly to LSA Code paragraph 4.4.7.6.",
+        "fromId": "MSC1Circ1646-1-1b"
+      }
+    ],
+    "incoming": []
+  },
+  "MSC1Circ1646-1-1d": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "ism-code",
+        "note": "Safety Management Certificate and Document of Compliance are the certification instruments of the ISM Code SMS.",
+        "fromId": "MSC1Circ1646-1-1d"
+      }
+    ],
+    "incoming": []
+  },
+  "MSC1Circ1646-46": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "imdg-code",
+        "note": "Section 8/9 dangerous-goods certificates in this same annex reference the IMDG Code; sections 4-6 instead cover bulk-liquid IBC/IGC-Code cargoes, a related but distinct dangerous-cargo regime.",
+        "fromId": "MSC1Circ1646-46"
+      }
+    ],
+    "incoming": []
+  },
+  "MSC1Circ1646-811": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "imdg-code",
+        "note": "Section 9 transport information/packing certification for packaged dangerous goods is governed by the IMDG Code.",
+        "fromId": "MSC1Circ1646-811"
+      }
+    ],
+    "incoming": []
+  },
+  "MSC1Circ1327-3": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "ism-code",
+        "note": "FPD operating procedure and any drill/emergency variance must be documented in the ship's ISM Code SMS procedures and training manual.",
+        "fromId": "MSC1Circ1327-3"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-eng-marpol-vi-sulphur-egcs-2019": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "dgma-eng-marpol-vi-sulphur-egcs-2019"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "amends",
+        "note": "Corrects/clarifies the FONAR wording of the 2019 circular's Regulation 18 fuel-oil-availability provisions — the corrigendum relationship this record's own title and summary already describe in prose but had not previously been captured as a structured link.",
+        "fromId": "dgma-eng-marpol-vi-fonar-corrigendum-2023"
+      }
+    ]
+  },
+  "dgma-eng-marpol-vi-fonar-corrigendum-2023": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "dgma-eng-marpol-vi-fonar-corrigendum-2023"
+      },
+      {
+        "type": "amends",
+        "targetId": "dgma-eng-marpol-vi-sulphur-egcs-2019",
+        "note": "Corrects/clarifies the FONAR wording of the 2019 circular's Regulation 18 fuel-oil-availability provisions — the corrigendum relationship this record's own title and summary already describe in prose but had not previously been captured as a structured link.",
+        "fromId": "dgma-eng-marpol-vi-fonar-corrigendum-2023"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-eng-eexi-cii-data-collection-2023": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "dgma-eng-eexi-cii-data-collection-2023"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-eng-bwm-convention-implementation-2020": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "bwm-2004",
+        "fromId": "dgma-eng-bwm-convention-implementation-2020"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "amends",
+        "note": "Adds a Recognized-Organization Statement-of-Compliance dispensation pathway to the 2020 circular's implementation requirements — the addendum relationship this record's own abbreviation already names in prose but had not previously been captured as a structured link.",
+        "fromId": "dgma-eng-bwm-soc-ro-addendum-2022"
+      }
+    ]
+  },
+  "dgma-eng-bwm-experience-building-data-2022": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "bwm-2004",
+        "fromId": "dgma-eng-bwm-experience-building-data-2022"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-eng-bwm-soc-ro-addendum-2022": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "bwm-2004",
+        "fromId": "dgma-eng-bwm-soc-ro-addendum-2022"
+      },
+      {
+        "type": "amends",
+        "targetId": "dgma-eng-bwm-convention-implementation-2020",
+        "note": "Adds a Recognized-Organization Statement-of-Compliance dispensation pathway to the 2020 circular's implementation requirements — the addendum relationship this record's own abbreviation already names in prose but had not previously been captured as a structured link.",
+        "fromId": "dgma-eng-bwm-soc-ro-addendum-2022"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-eng-cyber-risk-sms-2017": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "ism-code",
+        "fromId": "dgma-eng-cyber-risk-sms-2017"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-nau-ais-mandatory-installation-2018": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "fromId": "dgma-nau-ais-mandatory-installation-2018"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-eng-survey-window-period-2011": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "fromId": "dgma-eng-survey-window-period-2011"
+      },
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "dgma-eng-survey-window-period-2011"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "cites",
+        "note": "The six-month survey time window and the transfer-of-flag/extension mechanics described here are the same HSSC provisions that DGMA's survey-window circular applies to Indian-flag ships.",
+        "fromId": "HSSCSurveyGuidelines-5"
+      }
+    ]
+  },
+  "dgma-eng-meo-coc-revalidation-course-2018": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "stcw-1978",
+        "fromId": "dgma-eng-meo-coc-revalidation-course-2018"
+      }
+    ],
+    "incoming": []
+  },
+  "stcw-1978": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-meo-coc-revalidation-course-2018"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-exam-schedule-notice-2025"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-eng-eac-eto-etr-eligibility-2026"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "DGSEACENGGCircularNo25of2026-III"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      },
+      {
+        "type": "implements",
+        "note": null,
+        "fromId": "dgma-crew-coc-deemed-revalidation-covid-2020"
+      }
+    ]
+  },
+  "dgma-eng-exam-schedule-notice-2025": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "stcw-1978",
+        "fromId": "dgma-eng-exam-schedule-notice-2025"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-nau-imsbc-tml-approved-laboratories": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "imsbc-code",
+        "fromId": "dgma-nau-imsbc-tml-approved-laboratories"
+      },
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "fromId": "dgma-nau-imsbc-tml-approved-laboratories"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-eng-eac-eto-etr-eligibility-2026": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "stcw-1978",
+        "fromId": "dgma-eng-eac-eto-etr-eligibility-2026"
+      }
+    ],
+    "incoming": []
+  },
+  "DGSEACENGGCircularNo25of2026-III": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "stcw-1978",
+        "fromId": "DGSEACENGGCircularNo25of2026-III"
+      }
+    ],
+    "incoming": []
+  },
+  "irs-circular-030-2016-statutory-certificates-cargo-ships": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "fromId": "irs-circular-030-2016-statutory-certificates-cargo-ships"
+      },
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "irs-circular-030-2016-statutory-certificates-cargo-ships"
+      },
+      {
+        "type": "implements",
+        "targetId": "load-lines-1966",
+        "fromId": "irs-circular-030-2016-statutory-certificates-cargo-ships"
+      }
+    ],
+    "incoming": []
+  },
+  "irs-circular-055-2016-bwm-soc-indian-flag": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "bwm-2004",
+        "fromId": "irs-circular-055-2016-bwm-soc-indian-flag"
+      }
+    ],
+    "incoming": []
+  },
+  "irs-circular-015-2017-mlc-certification-procedures": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "mlc-2006",
+        "fromId": "irs-circular-015-2017-mlc-certification-procedures"
+      }
+    ],
+    "incoming": []
+  },
+  "irs-circular-041-2019-sulphur-cap-implementation": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "irs-circular-041-2019-sulphur-cap-implementation"
+      }
+    ],
+    "incoming": []
+  },
+  "irs-circular-063-2022-dgs-order20-offshore-eez": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "fromId": "irs-circular-063-2022-dgs-order20-offshore-eez"
+      }
+    ],
+    "incoming": []
+  },
+  "irs-circular-006-2022-unsp-barges-marpol-exemption": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "irs-circular-006-2022-unsp-barges-marpol-exemption"
+      }
+    ],
+    "incoming": [
+      {
+        "type": "implements",
+        "note": "IRS's procedure for granting the UNSP barge exemption (Reg. 3.4/8.4 of this resolution) directly implements this narrower part of the resolution.",
+        "fromId": "mepc-328-76"
+      }
+    ]
+  },
+  "irs-circular-026-2025-lifting-appliances-anchor-handling-winches": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "fromId": "irs-circular-026-2025-lifting-appliances-anchor-handling-winches"
+      }
+    ],
+    "incoming": []
+  },
+  "irs-circular-033-2025-new-imo-requirements-2026": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      },
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      },
+      {
+        "type": "implements",
+        "targetId": "stcw-1978",
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      },
+      {
+        "type": "implements",
+        "targetId": "igf-code",
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      },
+      {
+        "type": "implements",
+        "targetId": "igc-code",
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      },
+      {
+        "type": "implements",
+        "targetId": "imsbc-code",
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      },
+      {
+        "type": "implements",
+        "targetId": "imdg-code",
+        "fromId": "irs-circular-033-2025-new-imo-requirements-2026"
+      }
+    ],
+    "incoming": []
+  },
+  "msc-532-107": {
+    "outgoing": [
+      {
+        "type": "amends",
+        "targetId": "solas-1974",
+        "note": "Amends four SOLAS chapters (II-1, II-2, V, XIV) — see the regulation-level amends relationships on this standard's own decomposed nodes for the specific provisions each touches.",
+        "fromId": "msc-532-107"
+      }
+    ],
+    "incoming": []
+  },
+  "MSC532107-II2-10": {
+    "outgoing": [
+      {
+        "type": "amends",
+        "targetId": "SOLAS-II2-10",
+        "note": "Adds new paragraph 11 (fire-extinguishing media restrictions, incl. a PFOS ban) to the existing Fire fighting regulation.",
+        "fromId": "MSC532107-II2-10"
+      }
+    ],
+    "incoming": []
+  },
+  "MSC532107-V-19": {
+    "outgoing": [
+      {
+        "type": "amends",
+        "targetId": "SOLAS-V-19",
+        "note": "Adds new paragraph 2.12 (electronic inclinometer carriage requirement for containerships/bulk carriers of 3,000 GT+) to the existing regulation.",
+        "fromId": "MSC532107-V-19"
+      }
+    ],
+    "incoming": []
+  },
+  "SOLAS-V-19": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "amends",
+        "note": "Adds new paragraph 2.12 (electronic inclinometer carriage requirement for containerships/bulk carriers of 3,000 GT+) to the existing regulation.",
+        "fromId": "MSC532107-V-19"
+      }
+    ]
+  },
+  "MSC532107-XIV-3": {
+    "outgoing": [
+      {
+        "type": "amends",
+        "targetId": "SOLAS-XIV-3",
+        "note": "Replaces this regulation in full, restating the Chapter-I-certified-ship Polar Code requirement and adding a port State control cross-reference.",
+        "fromId": "MSC532107-XIV-3"
+      }
+    ],
+    "incoming": []
+  },
+  "SOLAS-XIV-3": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "amends",
+        "note": "Replaces this regulation in full, restating the Chapter-I-certified-ship Polar Code requirement and adding a port State control cross-reference.",
+        "fromId": "MSC532107-XIV-3"
+      }
+    ]
+  },
+  "mepc-328-76": {
+    "outgoing": [
+      {
+        "type": "amends",
+        "targetId": "marpol-73-78",
+        "note": "Replaces MARPOL Annex VI in full with the 2021 Revised Annex VI text — see the regulation-level amends relationships on this standard's own decomposed nodes for the specific provisions each new/amended regulation touches.",
+        "fromId": "mepc-328-76"
+      },
+      {
+        "type": "implements",
+        "targetId": "irs-circular-006-2022-unsp-barges-marpol-exemption",
+        "note": "IRS's procedure for granting the UNSP barge exemption (Reg. 3.4/8.4 of this resolution) directly implements this narrower part of the resolution.",
+        "fromId": "mepc-328-76"
+      }
+    ],
+    "incoming": []
+  },
+  "MEPC32876-3-13": {
+    "outgoing": [
+      {
+        "type": "amends",
+        "targetId": "MARPOL-VI-13",
+        "note": "This regulation is the source text for MARPOL Annex VI's current Nitrogen oxides (NOx) regulation.",
+        "fromId": "MEPC32876-3-13"
+      }
+    ],
+    "incoming": []
+  },
+  "MARPOL-VI-13": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "amends",
+        "note": "This regulation is the source text for MARPOL Annex VI's current Nitrogen oxides (NOx) regulation.",
+        "fromId": "MEPC32876-3-13"
+      }
+    ]
+  },
+  "MEPC32876-3-14": {
+    "outgoing": [
+      {
+        "type": "amends",
+        "targetId": "MARPOL-VI-14",
+        "note": "This regulation is the source text for MARPOL Annex VI's current Sulphur oxides (SOx) and particulate matter regulation.",
+        "fromId": "MEPC32876-3-14"
+      }
+    ],
+    "incoming": []
+  },
+  "MARPOL-VI-14": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "amends",
+        "note": "This regulation is the source text for MARPOL Annex VI's current Sulphur oxides (SOx) and particulate matter regulation.",
+        "fromId": "MEPC32876-3-14"
+      }
+    ]
+  },
+  "MEPC32876-4-23": {
+    "outgoing": [
+      {
+        "type": "amends",
+        "targetId": "MARPOL-VI-23",
+        "note": "This regulation is the source text for MARPOL Annex VI's current Energy Efficiency Existing Ship Index (EEXI) regulation.",
+        "fromId": "MEPC32876-4-23"
+      }
+    ],
+    "incoming": []
+  },
+  "MARPOL-VI-23": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "amends",
+        "note": "This regulation is the source text for MARPOL Annex VI's current Energy Efficiency Existing Ship Index (EEXI) regulation.",
+        "fromId": "MEPC32876-4-23"
+      },
+      {
+        "type": "amends",
+        "note": "This regulation (Required EEXI) works together with Regulation 23 (Attained EEXI), both amending MARPOL Annex VI's EEXI regime.",
+        "fromId": "MEPC32876-4-25"
+      }
+    ]
+  },
+  "MEPC32876-4-25": {
+    "outgoing": [
+      {
+        "type": "amends",
+        "targetId": "MARPOL-VI-23",
+        "note": "This regulation (Required EEXI) works together with Regulation 23 (Attained EEXI), both amending MARPOL Annex VI's EEXI regime.",
+        "fromId": "MEPC32876-4-25"
+      }
+    ],
+    "incoming": []
+  },
+  "MEPC32876-4-26": {
+    "outgoing": [
+      {
+        "type": "amends",
+        "targetId": "MARPOL-VI-26",
+        "note": "This regulation is the source text for MARPOL Annex VI's current Ship Energy Efficiency Management Plan (SEEMP) regulation.",
+        "fromId": "MEPC32876-4-26"
+      }
+    ],
+    "incoming": []
+  },
+  "MARPOL-VI-26": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "amends",
+        "note": "This regulation is the source text for MARPOL Annex VI's current Ship Energy Efficiency Management Plan (SEEMP) regulation.",
+        "fromId": "MEPC32876-4-26"
+      }
+    ]
+  },
+  "MEPC32876-4-28": {
+    "outgoing": [
+      {
+        "type": "amends",
+        "targetId": "MARPOL-VI-28",
+        "note": "This regulation is the source text for MARPOL Annex VI's current Operational carbon intensity (CII) regulation.",
+        "fromId": "MEPC32876-4-28"
+      }
+    ],
+    "incoming": []
+  },
+  "MARPOL-VI-28": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "amends",
+        "note": "This regulation is the source text for MARPOL Annex VI's current Operational carbon intensity (CII) regulation.",
+        "fromId": "MEPC32876-4-28"
+      }
+    ]
+  },
+  "hssc-survey-guidelines": {
+    "outgoing": [
+      {
+        "type": "supersededBy",
+        "targetId": "a-1207-34",
+        "note": "Revoked and replaced by the 2025 edition, adopted at IMO Assembly 34.",
+        "fromId": "hssc-survey-guidelines"
+      }
+    ],
+    "incoming": []
+  },
+  "a-1207-34": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "supersededBy",
+        "note": "Revoked and replaced by the 2025 edition, adopted at IMO Assembly 34.",
+        "fromId": "hssc-survey-guidelines"
+      }
+    ]
+  },
+  "HSSCSurveyGuidelines-5": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "dgma-eng-survey-window-period-2011",
+        "note": "The six-month survey time window and the transfer-of-flag/extension mechanics described here are the same HSSC provisions that DGMA's survey-window circular applies to Indian-flag ships.",
+        "fromId": "HSSCSurveyGuidelines-5"
+      }
+    ],
+    "incoming": []
+  },
+  "HSSCSurveyGuidelines-Annex2": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "load-lines-1966",
+        "note": "Applies the harmonized survey scheme to the certificates issued under the Load Line Convention.",
+        "fromId": "HSSCSurveyGuidelines-Annex2"
+      }
+    ],
+    "incoming": []
+  },
+  "HSSCSurveyGuidelines-Annex4": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "bwm-2004",
+        "note": "Applies the harmonized survey scheme to the International Ballast Water Management Certificate under the BWM Convention.",
+        "fromId": "HSSCSurveyGuidelines-Annex4"
+      }
+    ],
+    "incoming": []
+  },
+  "HSSCSurveyGuidelines-Annex5": {
+    "outgoing": [
+      {
+        "type": "cites",
+        "targetId": "igc-code",
+        "note": "Applies the harmonized survey scheme to the IGC Code's Certificate of Fitness.",
+        "fromId": "HSSCSurveyGuidelines-Annex5"
+      },
+      {
+        "type": "cites",
+        "targetId": "ibc-code",
+        "note": "Applies the harmonized survey scheme to the IBC Code's Certificate of Fitness.",
+        "fromId": "HSSCSurveyGuidelines-Annex5"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-nau-ais-non-operational-2022": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "fromId": "dgma-nau-ais-non-operational-2022"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-eng-statutory-survey-framework-2021": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "fromId": "dgma-eng-statutory-survey-framework-2021"
+      },
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "dgma-eng-statutory-survey-framework-2021"
+      },
+      {
+        "type": "implements",
+        "targetId": "load-lines-1966",
+        "fromId": "dgma-eng-statutory-survey-framework-2021"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-crew-coc-deemed-revalidation-covid-2020": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "stcw-1978",
+        "fromId": "dgma-crew-coc-deemed-revalidation-covid-2020"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-eng-marpol-vi-consolidated-notice-2023": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "dgma-eng-marpol-vi-consolidated-notice-2023"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-nau-lsa-service-provider-authorization-2020": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "solas-1974",
+        "fromId": "dgma-nau-lsa-service-provider-authorization-2020"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-eng-marpol-iv-sewage-implementation-2023": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "marpol-73-78",
+        "fromId": "dgma-eng-marpol-iv-sewage-implementation-2023"
+      }
+    ],
+    "incoming": []
+  },
+  "MSNoticeNo13of2023FileNo132001132020ENGGDGSC3205-1923": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "bwm-2004",
+        "note": "Flags that storing treated sewage/grey water in a ballast tank can compromise the BWTS's ability to meet the D-2 discharge standard.",
+        "fromId": "MSNoticeNo13of2023FileNo132001132020ENGGDGSC3205-1923"
+      }
+    ],
+    "incoming": []
+  },
+  "dgma-admin-llmc-1996-protocol-amendment-rules-2016": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "llmc-1976",
+        "fromId": "dgma-admin-llmc-1996-protocol-amendment-rules-2016"
+      }
+    ],
+    "incoming": []
+  },
+  "RefNoSLRULLLMC31112DraftMerchantShippingLimitationofLiabilityforMaritimeClaimsAmendmentRules2016-Annex2": {
+    "outgoing": [
+      {
+        "type": "implements",
+        "targetId": "llmc-1976",
+        "fromId": "RefNoSLRULLLMC31112DraftMerchantShippingLimitationofLiabilityforMaritimeClaimsAmendmentRules2016-Annex2"
+      }
+    ],
+    "incoming": []
+  },
+  "MARPOL-I-37-371": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "MARPOL Annex I Regulation 37.1 mandatory carriage thresholds (150 GT tankers / 400 GT non-tankers).",
+        "fromId": "sopep-plan"
+      }
+    ]
+  },
+  "anti-exposure-suit": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Carriage of approved anti-exposure suits for rescue boat crews.",
+        "fromId": "rescue-boat"
+      }
+    ]
+  },
+  "major-conversion": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Major conversion limb 5 for alterations substantially affecting ship energy efficiency or EEDI/EEXI.",
+        "fromId": "ship-energy-efficiency-system"
+      }
+    ]
+  },
+  "periodically-unattended-machinery-spaces-def": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Definition of UMS operating conditions.",
+        "fromId": "machinery-automation-system"
+      }
+    ]
+  },
+  "bunkering-station-def": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Definition of bunkering station.",
+        "fromId": "gas-fuel-bunkering-system"
+      }
+    ]
+  },
+  "gas-fuel-def": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Definition of gas fuel / low-flashpoint fuel.",
+        "fromId": "gas-fuel-containment-system"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Definition of gas fuel / low-flashpoint fuel.",
+        "fromId": "double-walled-gas-fuel-piping"
+      }
+    ]
+  },
+  "fuel-preparation-room-def": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Definition of fuel preparation room.",
+        "fromId": "gas-fuel-conditioning-system"
+      }
+    ]
+  },
+  "hazardous-area-def": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Definition of hazardous area and Zone 1 classification.",
+        "fromId": "gas-fuel-conditioning-system"
+      },
+      {
+        "type": "relatedTo",
+        "note": "Definition of hazardous area classification.",
+        "fromId": "gas-detection-and-esd-system"
+      }
+    ]
+  },
+  "esd-protected-machinery-space-def": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Definition of ESD-protected machinery space.",
+        "fromId": "gas-detection-and-esd-system"
+      }
+    ]
+  },
+  "steering-gear-def": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Definition of main and auxiliary steering gear.",
+        "fromId": "steering-gear-system"
+      }
+    ]
+  },
+  "emergency-switchboard-def": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Definition of emergency switchboard.",
+        "fromId": "emergency-generator-system"
+      }
+    ]
+  },
+  "certificated-person": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Command and manning requirements by STCW certificated proficiency holders.",
+        "fromId": "lifeboat"
+      }
+    ]
+  },
+  "MARPOL-I-15-151": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Operational conditions governing machinery space 15 ppm discharge outside special areas.",
+        "fromId": "oily-water-separator"
+      }
+    ]
+  },
+  "SOLAS-II2-10-2": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "SOLAS II-2 Reg. 10.2 is the core requirement establishing the fire main, pump, hydrant and hose system this object represents.",
+        "fromId": "fire-main-and-pump-system"
+      }
+    ]
+  },
+  "SOLAS-II2-10-2-23": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Fire hose length and nozzle interchangeability requirements.",
+        "fromId": "fire-main-and-pump-system"
+      }
+    ]
+  },
+  "FSSCode-15-21": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Definitions for inert gas, inert condition, and gas-free condition.",
+        "fromId": "inert-gas-system"
+      }
+    ]
+  },
+  "FSSCode-15-22": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "General functional requirements for inert gas systems.",
+        "fromId": "inert-gas-system"
+      }
+    ]
+  },
+  "FSSCode-15-22-221": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Gas-free condition, cargo tank oxygen limits (≤ 8%), and non-flammable atmosphere criteria.",
+        "fromId": "inert-gas-system"
+      }
+    ]
+  },
+  "FSSCode-15-22-222": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Blower capacity (125% max discharge rate) and oxygen delivery limits (≤ 5%).",
+        "fromId": "inert-gas-system"
+      }
+    ]
+  },
+  "FSSCode-15-22-223": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Flue gas scrubber, oil-fired inert gas generator, and nitrogen generator specifications.",
+        "fromId": "inert-gas-system"
+      }
+    ]
+  },
+  "FSSCode-15-22-224": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "System monitoring instruments, continuous oxygen recording, alarms, and automatic shutdown valves.",
+        "fromId": "inert-gas-system"
+      }
+    ]
+  },
+  "FSSCode-5-21-211": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "General medium calculation, starting air additions, container siting, and 925°C fire resistance piping rules.",
+        "fromId": "co2-fire-extinguishing-system"
+      }
+    ]
+  },
+  "FSSCode-5-21-212": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Pre-discharge audible and visual release alarm requirements.",
+        "fromId": "co2-fire-extinguishing-system"
+      }
+    ]
+  },
+  "FSSCode-5-21-213": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Distribution piping and container siting rules.",
+        "fromId": "co2-fire-extinguishing-system"
+      }
+    ]
+  },
+  "FSSCode-5-22-221": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "High-pressure CO2 machinery space (40%/35%) and cargo space (30%) volumetric calculations and 85% 2-minute discharge.",
+        "fromId": "co2-fire-extinguishing-system"
+      }
+    ]
+  },
+  "FSSCode-5-22-222": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Cargo and vehicle space CO2 volumetric quantity calculations.",
+        "fromId": "co2-fire-extinguishing-system"
+      }
+    ]
+  },
+  "FSSCode-5-22-223": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Dual-control release sequence and break-glass release box requirements.",
+        "fromId": "co2-fire-extinguishing-system"
+      }
+    ]
+  },
+  "FSSCode-5-224-2241": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Low-pressure CO2 storage working pressure (1.8-2.2 N/mm²), 95% fill capacity, and volumetric fill limits.",
+        "fromId": "co2-fire-extinguishing-system"
+      }
+    ]
+  },
+  "FSSCode-5-224-2242": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Low-pressure CO2 refrigeration units, pressure relief valves, and alarm limits.",
+        "fromId": "co2-fire-extinguishing-system"
+      }
+    ]
+  },
+  "fire-detection-and-alarm-system": {
+    "outgoing": [
+      {
+        "type": "relatedTo",
+        "targetId": "SOLAS-II2-10-7",
+        "note": "SOLAS requirements for automatic sprinkler, fire detection, and fire alarm systems.",
+        "fromId": "fire-detection-and-alarm-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-9-12",
+        "note": "Definitions for section, section loop, and addressable fire detection systems.",
+        "fromId": "fire-detection-and-alarm-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-9-21",
+        "note": "System control, dual power supply monitoring, and fault signaling specifications.",
+        "fromId": "fire-detection-and-alarm-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-9-22",
+        "note": "Detector section limits, maximum enclosed room coverage, and loop zoning rules.",
+        "fromId": "fire-detection-and-alarm-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-9-23",
+        "note": "Detector installation spacing, ceiling positioning, and heat/smoke activation thresholds.",
+        "fromId": "fire-detection-and-alarm-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-10",
+        "note": "Sample extraction smoke detection system requirements for cargo holds.",
+        "fromId": "fire-detection-and-alarm-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-16-21",
+        "note": "Fixed hydrocarbon gas sampling lines and suction arrangements.",
+        "fromId": "fire-detection-and-alarm-system"
+      },
+      {
+        "type": "relatedTo",
+        "targetId": "FSSCode-16-22",
+        "note": "Gas analysis unit, continuous sequential sampling, and alarm threshold rules.",
+        "fromId": "fire-detection-and-alarm-system"
+      }
+    ],
+    "incoming": []
+  },
+  "FSSCode-9-12": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Definitions for section, section loop, and addressable fire detection systems.",
+        "fromId": "fire-detection-and-alarm-system"
+      }
+    ]
+  },
+  "FSSCode-9-21": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "System control, dual power supply monitoring, and fault signaling specifications.",
+        "fromId": "fire-detection-and-alarm-system"
+      }
+    ]
+  },
+  "FSSCode-9-22": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Detector section limits, maximum enclosed room coverage, and loop zoning rules.",
+        "fromId": "fire-detection-and-alarm-system"
+      }
+    ]
+  },
+  "FSSCode-9-23": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Detector installation spacing, ceiling positioning, and heat/smoke activation thresholds.",
+        "fromId": "fire-detection-and-alarm-system"
+      }
+    ]
+  },
+  "FSSCode-10": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Sample extraction smoke detection system requirements for cargo holds.",
+        "fromId": "fire-detection-and-alarm-system"
+      }
+    ]
+  },
+  "FSSCode-16-21": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Fixed hydrocarbon gas sampling lines and suction arrangements.",
+        "fromId": "fire-detection-and-alarm-system"
+      }
+    ]
+  },
+  "FSSCode-16-22": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Gas analysis unit, continuous sequential sampling, and alarm threshold rules.",
+        "fromId": "fire-detection-and-alarm-system"
+      }
+    ]
+  },
+  "SOLAS-II2-9-93": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Penetrations in A and B class divisions and fire damper arrangements.",
+        "fromId": "fire-rated-division-system"
+      }
+    ]
+  },
+  "SOLAS-II2-10-1": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Containment and structural fire protection arrangements.",
+        "fromId": "fire-rated-division-system"
+      }
+    ]
+  },
+  "SOLAS-II2-9-97": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Insulation of ventilation ducts passing through main vertical zones and machinery spaces.",
+        "fromId": "structural-fire-insulation-system"
+      }
+    ]
+  },
+  "FTPCode-Annex1Part1": {
+    "outgoing": [],
+    "incoming": [
+      {
+        "type": "relatedTo",
+        "note": "Non-combustibility test procedures for structural fire insulation materials.",
+        "fromId": "structural-fire-insulation-system"
+      }
+    ]
+  }
+}
