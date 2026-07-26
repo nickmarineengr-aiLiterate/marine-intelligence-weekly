@@ -143,6 +143,24 @@ a resurfaced error without checking the surrounding sentence.
 
 ---
 
+### 15. IMO convention adoption — quorum is 1/3 present, not 2/3
+The "How an IMO Convention Enters into Force — 5 Steps" flow (Simon Sir
+Notes, Part 3, card n18, "International Legislation Hierarchy & EIF
+Process") stated Step 2 (Adoption) as "Assembly conference: 2/3 quorum
+present; 2/3 vote in favour." The quorum figure is wrong. The correct
+requirement is a quorum of **at least 1/3 of contracting governments
+present** to hold the vote, with **at least 2/3 of those present** voting
+in favour for adoption — the same 1/3–2/3 figures already correctly
+verified elsewhere in this platform's content (Engineering Management
+Notes Part 2, SOLAS Article VIII / MARPOL Article 16 tacit-acceptance
+mnemonic). Do not conflate this adoption-quorum figure with the separate
+tacit-acceptance objection threshold (1/3 of states or 50% of world
+tonnage), which is a different stage of the process. Flagged by a
+candidate via screenshot correction, 27 Jul 2026.
+GREP: 2/3 quorum present
+
+---
+
 ## Health-check grep — negation-context noise
 
 The daily `qb_health_check.py` trap scan (`check_known_traps()`) currently
@@ -197,3 +215,4 @@ implemented.
 | 2026-07-18 | Entry 11: IMO GFI vs FuelEU Maritime baseline | Candidate (Rathesh) annotated-screenshot correction on QB6_E |
 | 2026-07-19 | Entry 12: CLC scope — mineral oil only (whale oil trap) | Candidate (Vivek) screenshot correction on QB1_A |
 | 2026-07-25 | Entry 13: GRB threshold now 100 GT, not 400 GT (MEPC.360(79)) | Nixon screenshot correction on QB3_C |
+| 2026-07-27 | Entry 15: IMO convention adoption quorum is 1/3, not 2/3 | Candidate screenshot correction on simon-notes-p3 |
