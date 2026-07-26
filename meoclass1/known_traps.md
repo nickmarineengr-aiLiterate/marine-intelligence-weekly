@@ -118,6 +118,31 @@ GREP: Garbage Record Book tracking is required at 400, Record Book for ships ≥
 
 ---
 
+### 14. PSCO qualification pipeline — 10 Flag State Inspections, not 60
+The PSC Officer qualification pipeline (Simon Sir Notes, Part 3, card n13,
+"PSC Officer — Qualification Criteria") stated the candidate must complete
+at least **60 Flag State Inspections** as an authorised FSI Officer before
+being eligible for supervised PSC inspections. The correct figure per the
+DGS Standard Operating Procedure for Port State Control and Flag State
+Inspection (referencing Merchant Shipping Notice No. 9 of 2013) is **10
+Flag State Inspections** — the same figure as the FSI-officer qualification
+threshold itself (card n12), which the PSCO pipeline builds on. The
+remainder of the pipeline (6 months as FSI officer, 1 year as flag
+surveyor, 10 supervised PSC inspections, 2/year re-qualification) was
+already correct and unchanged. Flagged by a candidate (Rathesh) via the
+site correction form (Topic 62, "Simon Sir Notes — Pages 51–75", 26 Jul
+2026). Verified against primary source:
+https://www.dgshipping.gov.in/WriteReadData/userfiles/file/sop_psc__fsi141016.pdf
+GREP: 60 Flag State Inspections, 60 FSIs
+Note: the corrected page intentionally retains the phrase "60 Flag State
+Inspections" once, inside the in-page `.correction-note` block that
+describes the old error ("Prior revision incorrectly stated 60 Flag State
+Inspections... the correct figure is 10 Flag State Inspections"). This is a
+negation-context false positive per the pattern below — do not treat it as
+a resurfaced error without checking the surrounding sentence.
+
+---
+
 ## Health-check grep — negation-context noise
 
 The daily `qb_health_check.py` trap scan (`check_known_traps()`) currently
