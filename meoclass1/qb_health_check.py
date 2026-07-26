@@ -323,22 +323,83 @@ def parse_known_traps(md_bytes):
     for line in text.splitlines():
         m = re.match(r'^GREP:\s*(.+)$', line.strip())
         if m:
-            phrase = m.group(1).strip()
-            if phrase and phrase.upper() != "SKIP":
-                traps.append(phrase)
+            raw = m.group(1).strip()
+            if not raw:
+                continue
+            # "SKIP" entries (with or without a trailing explanation in
+            # parentheses, e.g. "SKIP (91.16 is legitimate when...)") are
+            # manual-review-only and must not become literal scan targets.
+            if raw.upper() == "SKIP" or raw.upper().startswith("SKIP "):
+                continue
+            # NOTE: some GREP lines legitimately contain a comma inside a
+            # single phrase (e.g. "Merchant Shipping Act, 1958"), while others
+            # use the comma to separate multiple independent phrases (e.g.
+            # "60 Flag State Inspections, 60 FSIs"). These are not
+            # distinguishable by a generic rule without risking a regression
+            # (a naive split turns "Merchant Shipping Act, 1958" into a
+            # standalone "1958" trap, which would false-positive on almost
+            # any year mention). Kept as one literal phrase per line, as
+            # before — flagged to Nixon as a known limitation rather than
+            # silently "fixed" in an unsafe way. To make multi-phrase lines
+            # actually scannable, known_traps.md should move to one GREP
+            # line per phrase instead of comma-joining them.
+            traps.append(raw)
     return traps
+
+
+NEGATION_MARKERS = [
+    "superseded by", "supersedes", "replaced by", "replaces",
+    "repealed", "not... but", "not the... but", "does not designate",
+    "is not", "formerly", "now succeeded by", "since replaced by",
+    "prior revision incorrectly stated", "previously stated",
+    "previously cited", "previous revision", "old error", "the old",
+    "corrected from", "corrected to", "incorrectly stated",
+]
+
+
+def _split_sentences(text):
+    # Cheap sentence splitter — good enough for negation-marker co-occurrence
+    # checks; doesn't need to be linguistically perfect, just needs to keep
+    # the trap phrase and a same-sentence marker together.
+    return re.split(r'(?<=[.!?])\s+', text)
 
 
 def check_known_traps(html_text, traps):
     """Flag any live HTML containing a phrase from the known_traps WRONG list.
     A hit means a previously-identified error pattern has resurfaced —
-    escalate for manual review rather than auto-correct."""
+    escalate for manual review rather than auto-correct.
+
+    Negation-aware: per known_traps.md ("Health-check grep — negation-context
+    noise", added 2026-07-19), a bare substring hit is frequently a correctly-
+    framed sentence citing the old/wrong term in order to supersede, repeal,
+    or debunk it (e.g. a `.correction-note` block, "superseded by" prose).
+    Before flagging as a confirmed resurfaced error, check whether a
+    negation/supersession marker appears in the same sentence as the trap
+    phrase — if so, downgrade to a "review" note instead of an error, so it's
+    still visible but doesn't count as a structural fault requiring urgent fix.
+    """
     errors = []
+    reviews = []
     cleaned = re.sub(r"<[^>]+>", " ", html_text)  # strip tags so phrase matching works on visible text
+    cleaned = re.sub(r"\s+", " ", cleaned)
+    sentences = _split_sentences(cleaned)
     for phrase in traps:
-        if phrase.lower() in cleaned.lower():
-            errors.append(f"KNOWN TRAP resurfaced: \"{phrase}\" found in visible text — check against known_traps.md")
-    return errors
+        phrase_l = phrase.lower()
+        if phrase_l not in cleaned.lower():
+            continue
+        hit_sentences = [s for s in sentences if phrase_l in s.lower()]
+        if not hit_sentences:
+            hit_sentences = [cleaned]  # fallback if sentence split missed it (e.g. spans a split point)
+        for s in hit_sentences:
+            s_l = s.lower()
+            if any(marker in s_l for marker in NEGATION_MARKERS):
+                reviews.append(
+                    f"KNOWN TRAP phrase present but in negation/correction context: \"{phrase}\" "
+                    f"— likely correctly framed (supersession/correction note); verify manually rather than treating as a resurfaced error"
+                )
+            else:
+                errors.append(f"KNOWN TRAP resurfaced: \"{phrase}\" found in visible text — check against known_traps.md")
+    return errors + [f"[REVIEW] {r}" for r in reviews]
 
 
 # ---------- Notes-series checks (Simon Sir Notes / Engineering Management Notes /
@@ -609,6 +670,32 @@ def check_manifest(files, file_results=None):
                 errors.append(
                     f"Question count mismatch for {fname}: manifest says {manifest_qcount}, "
                     f"disk has {actual_qcount} numeric q-cards — manifest likely stale after an edit"
+                )
+
+    # Changelog completeness: a file mentioned in a recently_updated summary
+    # should have a corrections_applied entry to match — otherwise the fix
+    # landed in the file but the audit trail was never appended (the exact
+    # gap found in the 2026-07-26 manifest audit: QB6_C, QB6_E, QB7_A, QB9_C,
+    # QB9_D, QB4_I all had version bumps + live fixes but zero-length
+    # corrections_applied arrays).
+    recently_updated = manifest.get("recently_updated", [])
+    filename_pattern = re.compile(r'\bQB\d+(?:_[A-Za-z]+)*(?:\.html)?\b')
+    for entry in recently_updated:
+        summary = entry.get("summary", "")
+        date = entry.get("date", "unknown date")
+        mentioned = set()
+        for m in filename_pattern.findall(summary):
+            base = m if m.lower().endswith(".html") else m + ".html"
+            mentioned.add(base)
+        for fname in mentioned:
+            meta = manifest_files.get(fname)
+            if meta is None:
+                continue  # not a QB-series file this manifest tracks (e.g. cheat sheet), skip
+            corrections = meta.get("corrections_applied", [])
+            if len(corrections) == 0:
+                errors.append(
+                    f"Changelog gap: {fname} is named in the {date} recently_updated summary "
+                    f"but has an empty corrections_applied array — fix likely landed without a logged entry"
                 )
 
     return errors, manifest_files
