@@ -1,10 +1,21 @@
 {
   "manifest_version": "1.0",
-  "generated": "2026-07-19",
-  "generated_by": "Claude (manifest sync - correction pass)",
+  "generated": "2026-07-29",
+  "generated_by": "Claude (pipe-table formatting correction pass)",
   "total_questions": 629,
   "total_files": 78,
   "recently_updated": [
+    {
+      "date": "2026-07-29",
+      "summary": "Formatting correction pass (candidate screenshot feedback via Nixon): 19 comparative tables across 5 files were rendered as raw markdown-style pipe-delimited rows inside <p> tags instead of real <table> markup, causing unpredictable text wrapping and loss of column alignment on mobile. Converted to proper HTML tables in QB2_A (6 tables: container thicknesses, tanker types, tonnage fees, watertight vs weathertight boundaries, inclinometer types, bulk cargo failure modes), QB1_B (1), QB1_F (7), QB1_G (10), and QB3_H (1, embedded NLS cargo categorization table). No content/regulatory changes — question text and answers unchanged, formatting only. Added .answer-body table/th/td CSS to QB1_F and QB1_G, which had no table styling at all prior to this fix; QB3_H matched using its existing rem-based CSS convention. Added a new automated check_pipe_table_format() function to qb_health_check.py to catch any future regression of this pattern (scans for the '| --- |' separator-row signature across all QB files and notes/WA files in the daily 03:00 UTC run). Logged as known_traps.md Entry 16 (formatting standard, not a factual correction).",
+      "files": [
+        "QB2_A.html",
+        "QB1_B.html",
+        "QB1_F.html",
+        "QB1_G.html",
+        "QB3_H.html"
+      ]
+    },
     {
       "date": "2026-07-18",
       "summary": "Second correction pass same day (candidate-sourced, submitted by Nixon): (1) QB6_C Q3 — answer was mismatched to the question; replaced with the correct purifier manual desludging procedure (previous answer described a disc-stack overhaul instead). (2) GFI/FuelEU conflation fixed across QB6_E Q2, QB7_A Q3, and QB7_A_CheatSheet: GFI (Greenhouse Gas Fuel Intensity) is the IMO's own Net-Zero Framework metric (93.3 gCO2eq/MJ, 2008 baseline, MEPC 83 / new MARPOL Annex VI Chapter 5) and is a separate regulatory track from FuelEU Maritime's Greenhouse Gas Intensity metric (91.16 gCO2eq/MJ, 2020 baseline, EU Regulation 2023/1805). Prior content wrongly applied the 'GFI' label and/or the IMO 93.3 baseline to FuelEU Maritime, or vice versa. Both tracks now clearly separated with correct baselines, reference years, and reduction schedules attributed to the right regulation. Verified against IMO MEPC 83 official summaries and Global Maritime Forum guidance. QB7_A_CheatSheet untracked in this manifest (cheat sheets not indexed here).",

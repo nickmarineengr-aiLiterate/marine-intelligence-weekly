@@ -161,7 +161,27 @@ GREP: 2/3 quorum present
 
 ---
 
-## Health-check grep — negation-context noise
+### 16. Pipe-delimited markdown tables leaked into live HTML — formatting standard, not a factual error
+Six comparative tables in QB2_A (container thicknesses, tanker types, tonnage
+fees, watertight vs weathertight boundaries, inclinometer types, bulk cargo
+failure modes) plus 13 more across QB1_B (1), QB1_F (7), QB1_G (10), and
+QB3_H (1) were rendered as raw markdown-style pipe rows inside `<p>` tags
+(e.g. `| Col A | Col B | | --- | --- | | val | val |`) instead of real
+`<table>` markup. This is a legacy artifact from earlier AI-assisted drafting
+sessions, not a regulatory/factual error — the content itself was correct.
+On mobile (the primary subscriber device) these wrap unpredictably and lose
+column alignment entirely, defeating the purpose of a comparison table.
+Flagged by a candidate via screenshot, 29 Jul 2026 (Nixon relay). All 19
+instances converted to real `<table>` markup with the site's standard
+`.answer-body table/th/td` CSS (added to QB1_F and QB1_G, which had no table
+CSS at all prior to this fix); QB3_H matched using its own rem-based CSS
+convention. Fixed and pushed 2026-07-29.
+This is a **formatting standard**, not a wrong-phrase fact — no single GREP
+phrase applies. A dedicated automated check (`check_pipe_table_format()`)
+was added to `qb_health_check.py` instead, scanning for the separator-row
+pattern `\|\s*-{2,}\s*\|` (any dash count/spacing) across all QB files and
+Engineering Management Notes/WA files, run in the same daily 03:00 UTC job.
+GREP: SKIP
 
 The daily `qb_health_check.py` trap scan (`check_known_traps()`) currently
 flags a `GREP:` phrase on any occurrence, including when the surrounding
@@ -216,3 +236,4 @@ implemented.
 | 2026-07-19 | Entry 12: CLC scope — mineral oil only (whale oil trap) | Candidate (Vivek) screenshot correction on QB1_A |
 | 2026-07-25 | Entry 13: GRB threshold now 100 GT, not 400 GT (MEPC.360(79)) | Nixon screenshot correction on QB3_C |
 | 2026-07-27 | Entry 15: IMO convention adoption quorum is 1/3, not 2/3 | Candidate screenshot correction on simon-notes-p3 |
+| 2026-07-29 | Entry 16: Pipe-delimited markdown tables → real `<table>` markup (formatting standard, not a fact error); added `check_pipe_table_format()` to health check | Candidate screenshot correction on QB2_A, repo-wide grep found 4 more affected files |

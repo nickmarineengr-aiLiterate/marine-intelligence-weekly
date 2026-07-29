@@ -52,6 +52,9 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-w
 .answer-body p{margin:6px 0;}
 .answer-body ul{margin:6px 0;padding-left:20px;}
 .answer-body li{margin-bottom:4px;}
+.answer-body table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;}
+.answer-body th{background:var(--grey-bg);text-align:left;padding:6px 8px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;text-transform:uppercase;color:var(--grey-text);}
+.answer-body td{padding:6px 8px;border-top:1px solid var(--grey-border);}
 .formula{background:var(--grey-bg);font-family:monospace;padding:8px 12px;border-radius:6px;}
 .practice-block{border-radius:8px;padding:12px 16px;margin:10px 0;font-size:13.5px;line-height:1.65;}
 .practice-label{font-weight:800;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px;display:block;}
@@ -280,12 +283,13 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-w
 <li><strong>VOC Management Plan:</strong> Required if carrying specialized cargoes under Annex VI provisions.</li>
 <li><strong>Bunker Delivery Notes (BDNs):</strong> Retained onboard for a minimum of 3 years, along with the representative fuel samples (MARPOL samples) kept for at least 1 year or until the fuel is substantially consumed.</li>
 </ul>
-<p>| MARPOL Annex | Primary Certificate | Key Operational Record |</p>
-<p>| --- | --- | --- |</p>
-<p>| <strong>Annex I</strong> | IOPP Certificate (Form A) | Oil Record Book Part I, SOPEP |</p>
-<p>| <strong>Annex IV</strong> | ISPP Certificate | Sewage Discharge Log / Treatment Plant parameters |</p>
-<p>| <strong>Annex V</strong> | N/A | Garbage Record Book Parts I & II, GMP |</p>
-<p>| <strong>Annex VI</strong> | IAPP, IEE, EIAPP Certificates | BDNs, MARPOL Fuel Samples, SEEMP I/II/III, ODS Log |</p>
+<table>
+<tr><th>MARPOL Annex</th><th>Primary Certificate</th><th>Key Operational Record</th></tr>
+<tr><td><strong>Annex I</strong></td><td>IOPP Certificate (Form A)</td><td>Oil Record Book Part I, SOPEP</td></tr>
+<tr><td><strong>Annex IV</strong></td><td>ISPP Certificate</td><td>Sewage Discharge Log / Treatment Plant parameters</td></tr>
+<tr><td><strong>Annex V</strong></td><td>N/A</td><td>Garbage Record Book Parts I & II, GMP</td></tr>
+<tr><td><strong>Annex VI</strong></td><td>IAPP, IEE, EIAPP Certificates</td><td>BDNs, MARPOL Fuel Samples, SEEMP I/II/III, ODS Log</td></tr>
+</table>
     </div>
     <div class="numbers-box"><h4>Chief Engineer Relevance</h4>On a Maersk container vessel, MARPOL documentation is the Chief Engineer's ultimate legal shield. Any administrative error, missing entry, or chronological mismatch in the ORB Part I can be construed by Port State Control as an attempt to deceive, leading to vessel detention, heavy financial penalties, or criminal prosecution of the Chief Engineer.</div>
     <div class="reg-box">
@@ -627,11 +631,12 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-w
 <li><strong>Regulatory Compliance Statement:</strong> Explicit certification that the fuel meets the sustainability and greenhouse gas saving criteria defined in the EU Renewable Energy Directive (RED II/III) or the IMO Guidelines on Lifecycle GHG Intensity of Marine Fuels.</li>
 </ul>
 <h4>3. Comparison of Standard Bunkering vs. Sustainable Bunkering Documentation</h4>
-<p>| Document Element | Standard Fossil Bunkering | Sustainable Bio/Synthetic Bunkering |</p>
-<p>| --- | --- | --- |</p>
-<p>| <strong>Primary Document</strong> | Bunker Delivery Note (BDN) | BDN + Proof of Sustainability (PoS) Certificate |</p>
-<p>| <strong>Key Metric Verified</strong> | Viscosity, Density, Flashpoint, Sulfur % | Feedstock Origin, Lifecycle gCO_2eq/MJ value |</p>
-<p>| <strong>Verification Focus</strong> | MARPOL Annex VI Annexes (Fuel Quality) | Carbon Accounting, RED III / FuelEU Compliance |</p>
+<table>
+<tr><th>Document Element</th><th>Standard Fossil Bunkering</th><th>Sustainable Bio/Synthetic Bunkering</th></tr>
+<tr><td><strong>Primary Document</strong></td><td>Bunker Delivery Note (BDN)</td><td>BDN + Proof of Sustainability (PoS) Certificate</td></tr>
+<tr><td><strong>Key Metric Verified</strong></td><td>Viscosity, Density, Flashpoint, Sulfur %</td><td>Feedstock Origin, Lifecycle gCO_2eq/MJ value</td></tr>
+<tr><td><strong>Verification Focus</strong></td><td>MARPOL Annex VI Annexes (Fuel Quality)</td><td>Carbon Accounting, RED III / FuelEU Compliance</td></tr>
+</table>
     </div>
     <div class="numbers-box"><h4>Chief Engineer Relevance</h4>As Chief Engineer, when sustainable fuel is received onboard a Maersk vessel, I am legally responsible for ensuring that the PoS matches the physical quantity and batch numbers listed on the BDN. During annual commercial audits or verification under the IMO Data Collection System (IMO-DCS), any mismatch or unverified carbon factor will result in the fuel being penalized as standard heavy fuel oil, creating massive financial liabilities and compliance shortfalls for the company.</div>
     <div class="reg-box">
@@ -1194,12 +1199,13 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-w
 </ul>
 <h4>2. Comprehensive Comparison Matrix</h4>
 <p>The structural differences across these oversight regimes can be mapped across four parameters:</p>
-<p>| Parameter | Survey | Audit | Inspection | Statutory Survey |</p>
-<p>| --- | --- | --- | --- | --- |</p>
-<p>| <strong>Primary Target</strong> | Physical Hardware & Machinery | Procedural Workflows & Safety Systems | Immediate Operational Readiness | Convention-mandated Equipment & Hull |</p>
-<p>| <strong>Governing Rules</strong> | Classification Society Rules | ISM Code, ISPS Code, MLC 2006 | National Laws, PSC MOUs, SMS | SOLAS, MARPOL, Load Line, LLC |</p>
-<p>| <strong>Primary Method</strong> | Calibrated Gauges, Overhauls, UTM | Interviews, Document Logs, Checklists | Visual Spot-checks, Function Tests | Close-up Testing, Structural Gauging |</p>
-<p>| <strong>End Result</strong> | Class Status Endorsement | Safety Management Certificate (SMC) | PSC Report (Form A/B), Log Entry | Statutory International Certificates |</p>
+<table>
+<tr><th>Parameter</th><th>Survey</th><th>Audit</th><th>Inspection</th><th>Statutory Survey</th></tr>
+<tr><td><strong>Primary Target</strong></td><td>Physical Hardware & Machinery</td><td>Procedural Workflows & Safety Systems</td><td>Immediate Operational Readiness</td><td>Convention-mandated Equipment & Hull</td></tr>
+<tr><td><strong>Governing Rules</strong></td><td>Classification Society Rules</td><td>ISM Code, ISPS Code, MLC 2006</td><td>National Laws, PSC MOUs, SMS</td><td>SOLAS, MARPOL, Load Line, LLC</td></tr>
+<tr><td><strong>Primary Method</strong></td><td>Calibrated Gauges, Overhauls, UTM</td><td>Interviews, Document Logs, Checklists</td><td>Visual Spot-checks, Function Tests</td><td>Close-up Testing, Structural Gauging</td></tr>
+<tr><td><strong>End Result</strong></td><td>Class Status Endorsement</td><td>Safety Management Certificate (SMC)</td><td>PSC Report (Form A/B), Log Entry</td><td>Statutory International Certificates</td></tr>
+</table>
 <h4>3. Chief Engineer’s Practical Execution Strategies</h4>
 <ul>
 <li><strong>Preparing for a Survey/Statutory Survey:</strong> The CE coordinates physical preparations. This means stripping machinery for visual checks, arranging calibration certificates for all pressure transducers, and prepping tanks for thickness measurement.</li>
@@ -1283,11 +1289,12 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-w
 </div>
 </ul>
 <h4>3. Comparison of Survey Scheduling Arrangements</h4>
-<p>| Feature | Standard Special Machinery Survey | Continuous Machinery Survey (CSM) |</p>
-<p>| --- | --- | --- |</p>
-<p>| <strong>Operational Impact</strong> | High downtime; concentrated workload during docking | Low operational impact; balanced rolling workload |</p>
-<p>| <strong>Inspection Timing</strong> | Concentrated at the 5th-year renewal window | Distributed across the entire 5-year Class cycle |</p>
-<p>| <strong>Workload Distribution</strong> | Heavy burden on ship staff and yard contractors | Managed incrementally by ship's crew during voyages |</p>
+<table>
+<tr><th>Feature</th><th>Standard Special Machinery Survey</th><th>Continuous Machinery Survey (CSM)</th></tr>
+<tr><td><strong>Operational Impact</strong></td><td>High downtime; concentrated workload during docking</td><td>Low operational impact; balanced rolling workload</td></tr>
+<tr><td><strong>Inspection Timing</strong></td><td>Concentrated at the 5th-year renewal window</td><td>Distributed across the entire 5-year Class cycle</td></tr>
+<tr><td><strong>Workload Distribution</strong></td><td>Heavy burden on ship staff and yard contractors</td><td>Managed incrementally by ship's crew during voyages</td></tr>
+</table>
     </div>
     <div class="numbers-box"><h4>Chief Engineer Relevance</h4>Managing the CSM schedule is a critical duty for a Chief Engineer. I must track the open items within our PMS to ensure that no auxiliary pump or air compressor slips past its 5-year maximum inspection limit, which would trigger an automatic suspension of the vessel's Class status.</div>
     <div class="reg-box">
@@ -1377,11 +1384,12 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-w
 <li><strong>Surveyor Verification:</strong> The physical parts, worn components, and logged measurements must be presented to the Class surveyor at the next port call for final statutory sign-off.</li>
 </ul>
 <h4>3. Structural Comparison Matrix: CE Crediting vs. Surveyor-Only Items</h4>
-<p>| Component Type | Chief Engineer Approved Credit | Surveyor Only Verification |</p>
-<p>| --- | --- | --- |</p>
-<p>| <strong>Pumps & Auxiliaries</strong> | General cooling water pumps, oil transfer pumps, purifiers | Emergency fire pumps, high-pressure hydraulic steering lines |</p>
-<p>| <strong>Prime Movers</strong> | Minor auxiliary fans, small service motors | Main Engine internal bearings, Emergency Diesel Generator |</p>
-<p>| <strong>Pressure Systems</strong> | Low-pressure domestic water tanks | Main Air Receivers, Auxiliary Steam Boilers |</p>
+<table>
+<tr><th>Component Type</th><th>Chief Engineer Approved Credit</th><th>Surveyor Only Verification</th></tr>
+<tr><td><strong>Pumps & Auxiliaries</strong></td><td>General cooling water pumps, oil transfer pumps, purifiers</td><td>Emergency fire pumps, high-pressure hydraulic steering lines</td></tr>
+<tr><td><strong>Prime Movers</strong></td><td>Minor auxiliary fans, small service motors</td><td>Main Engine internal bearings, Emergency Diesel Generator</td></tr>
+<tr><td><strong>Pressure Systems</strong></td><td>Low-pressure domestic water tanks</td><td>Main Air Receivers, Auxiliary Steam Boilers</td></tr>
+</table>
     </div>
     <div class="numbers-box"><h4>Chief Engineer Relevance</h4>A Chief Engineer must understand these boundaries to maintain clear compliance logs. Attempting to self-credit an excluded item like an air receiver is an administrative failure that can compromise the ship's Class status during an audit.</div>
     <div class="reg-box">
@@ -1465,11 +1473,12 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-w
 </div>
 </ul>
 <h4>3. Structural Evaluation Scaling Based on Vessel Age (Special Survey Milestones)</h4>
-<p>| Vessel Age | Close-Up Survey Scope | Thickness Gauging (UTM) Requirement |</p>
-<p>| --- | --- | --- |</p>
-<p>| <strong>le 5 Years</strong> | Selected web frames in one ballast tank; one transverse bulkhead. | Suspect areas and selected internal brackets. |</p>
-<p>| <strong>5 to 10 Years</strong> | All web frames in a representative ballast tank; structural components in cargo spaces. | One complete transverse section within the cargo length region. |</p>
-<p>| <strong>10 to 15 Years</strong> | All web frames and bulkheads within all ballast tanks; extensive cargo area scanning. | Two complete transverse sections within the midship 0.5L zone. |</p>
+<table>
+<tr><th>Vessel Age</th><th>Close-Up Survey Scope</th><th>Thickness Gauging (UTM) Requirement</th></tr>
+<tr><td><strong>le 5 Years</strong></td><td>Selected web frames in one ballast tank; one transverse bulkhead.</td><td>Suspect areas and selected internal brackets.</td></tr>
+<tr><td><strong>5 to 10 Years</strong></td><td>All web frames in a representative ballast tank; structural components in cargo spaces.</td><td>One complete transverse section within the cargo length region.</td></tr>
+<tr><td><strong>10 to 15 Years</strong></td><td>All web frames and bulkheads within all ballast tanks; extensive cargo area scanning.</td><td>Two complete transverse sections within the midship 0.5L zone.</td></tr>
+</table>
     </div>
     <div class="numbers-box"><h4>Chief Engineer Relevance</h4>While hull structural monitoring is actively coordinated by the Chief Officer, the Chief Engineer oversees the safety and mechanical logistics required for an ESP audit. I am responsible for ensuring that all tank venting arrangements are functional, that the gas-freeing of spaces is executed safely, and that sufficient auxiliary power is delivered to support the lighting, scaffolding, and NDT equipment used during the survey.</div>
     <div class="reg-box">
@@ -1640,11 +1649,12 @@ body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-w
 </div>
 </ul>
 <h4>4. Operational Comparison Matrix</h4>
-<p>| Commercial Element | Advantages for Owner / MTO | Disadvantages / Risks for Owner / MTO |</p>
-<p>| --- | --- | --- |</p>
-<p>| <strong>Market Positioning</strong> | Enables integrated door-to-door sales. | High commercial exposure to inland delays. |</p>
-<p>| <strong>Liability Scope</strong> | Clear statutory caps on cargo claims. | Continuous liability across all transit segments. |</p>
-<p>| <strong>Administrative Control</strong> | A single MTD streamlines documentation. | High reliance on sub-contractor operational quality. |</p>
+<table>
+<tr><th>Commercial Element</th><th>Advantages for Owner / MTO</th><th>Disadvantages / Risks for Owner / MTO</th></tr>
+<tr><td><strong>Market Positioning</strong></td><td>Enables integrated door-to-door sales.</td><td>High commercial exposure to inland delays.</td></tr>
+<tr><td><strong>Liability Scope</strong></td><td>Clear statutory caps on cargo claims.</td><td>Continuous liability across all transit segments.</td></tr>
+<tr><td><strong>Administrative Control</strong></td><td>A single MTD streamlines documentation.</td><td>High reliance on sub-contractor operational quality.</td></tr>
+</table>
     </div>
     <div class="numbers-box"><h4>Chief Engineer Relevance</h4>While the Multimodal Act is a commercial and legal instrument managed by shore-based logistics teams and the Master, the Chief Engineer ensures the technical reliability that underpins the contract. On container vessels carrying thousands of refrigerated units, any machinery space failure—such as an auxiliary generator breakdown that cuts power to reefers—directly triggers a high-value cargo claim under the MTD, exposing the company to extensive financial liabilities.</div>
     <div class="reg-box">

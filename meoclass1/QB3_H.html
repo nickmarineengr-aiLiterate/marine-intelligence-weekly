@@ -64,6 +64,9 @@ border-radius:6px;margin:.5rem 0;font-size:.88rem;}
 letter-spacing:.05em;color:var(--teal-dark);margin:1rem 0 .3rem;}
 .answer-body ul,.answer-body ol{margin:.3rem 0;padding-left:1.2rem;}
 .answer-body p{margin:.4rem 0;}
+.answer-body table{width:100%;border-collapse:collapse;margin:.5rem 0;font-size:.85rem;}
+.answer-body th{background:var(--grey-bg);text-align:left;padding:.4rem .5rem;font-family:'Segoe UI',sans-serif;font-size:.7rem;text-transform:uppercase;color:var(--grey-text);}
+.answer-body td{padding:.4rem .5rem;border-top:1px solid var(--grey-border);}
 .formula{font-family:monospace;background:var(--grey-bg);padding:.5rem .7rem;border-radius:6px;display:inline-block;}
 .reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:.7rem .9rem;margin:.8rem 0 .5rem;font-size:.82rem;}
 .reg-box-title{font-weight:700;color:#fff;margin-bottom:.4rem;font-size:.78rem;}
@@ -502,13 +505,14 @@ body{user-select:none;}
 <h4>Key Requirements or Procedure</h4>
 <ul>
 <li>
-<p><strong>NLS Cargo Categorization:</strong>
-| Category | Hazard Level | Discharge / Operational Requirement |
-| --- | --- | --- |
-| <strong>Category X</strong> | Major Hazard | Mandatory tank prewash in port; residues discharged to a shore reception facility. |
-| <strong>Category Y</strong> | Moderate Hazard | Limited discharge allowed subject to strict stripping and underwater discharge limits. |
-| <strong>Category Z</strong> | Minor Hazard | Less stringent limits, but still requires underwater discharge. |
-| <strong>OS (Other)</strong> | Non-Hazardous | Outside the strict scope of Annex II control limits. |</p>
+<p><strong>NLS Cargo Categorization:</strong></p>
+<table>
+<tr><th>Category</th><th>Hazard Level</th><th>Discharge / Operational Requirement</th></tr>
+<tr><td><strong>Category X</strong></td><td>Major Hazard</td><td>Mandatory tank prewash in port; residues discharged to a shore reception facility.</td></tr>
+<tr><td><strong>Category Y</strong></td><td>Moderate Hazard</td><td>Limited discharge allowed subject to strict stripping and underwater discharge limits.</td></tr>
+<tr><td><strong>Category Z</strong></td><td>Minor Hazard</td><td>Less stringent limits, but still requires underwater discharge.</td></tr>
+<tr><td><strong>OS (Other)</strong></td><td>Non-Hazardous</td><td>Outside the strict scope of Annex II control limits.</td></tr>
+</table>
 </li>
 <li>
 <p><strong>Operational Discharge Criteria:</strong> Any permissible discharge of NLS residues must happen <strong>below the waterline</strong> through the dedicated underwater discharge outlet, while the ship is proceeding en route at a minimum speed of <strong>7 knots</strong> (for self-propelled vessels), in water depths of at least <strong>25 meters</strong>, and at a minimum distance of <strong>12 nautical miles</strong> from the nearest land.</p>

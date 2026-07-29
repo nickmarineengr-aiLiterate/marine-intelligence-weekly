@@ -170,6 +170,20 @@ def check_robots_meta(html_text):
     return ["Missing or incorrect robots noindex meta tag"]
 
 
+def check_pipe_table_format(html_text):
+    """Flag markdown-style pipe-delimited tables leaked into live HTML instead of
+    being converted to real <table> markup. These render as unscannable wrapped
+    text on mobile (the primary subscriber device) and defeat the purpose of a
+    comparison table. Pattern: a separator row like '| --- | --- |' (any dash
+    count/spacing), whether alone in a <p> or embedded inline with newlines.
+    Fixed repo-wide 2026-07-29 across QB1_B, QB1_F, QB1_G, QB2_A, QB3_H — see
+    known_traps.md entry on pipe-table formatting."""
+    if re.search(r'\|\s*-{2,}\s*\|', html_text):
+        count = len(re.findall(r'\|\s*-{2,}\s*\|', html_text))
+        return [f"Pipe-delimited markdown table detected ({count} instance(s)) — convert to real <table> markup"]
+    return []
+
+
 def check_q_id_sequence(html_text):
     """Ids should be sequential with no internal gaps or dupes. Some companion
     files (e.g. QB1_G continuing from QB1_F) legitimately start above q1, so
@@ -482,6 +496,7 @@ def check_notes_file(filename, content_bytes, known_traps=None):
     errors += check_tag_balance(html_text, filename)
     errors += check_ga4_tag(html_text)
     errors += check_robots_meta(html_text)
+    errors += check_pipe_table_format(html_text)
     if not is_utility_page:
         errors += check_notes_gate(html_text, filename)
     if known_traps:
@@ -597,6 +612,7 @@ def check_file(filename, content_bytes, all_files=None, known_traps=None):
     errors += check_tag_balance(html_text, filename)
     errors += check_ga4_tag(html_text)
     errors += check_robots_meta(html_text)
+    errors += check_pipe_table_format(html_text)
 
     q_count = 0
     if is_qb_question_file:

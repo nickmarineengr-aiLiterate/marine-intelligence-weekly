@@ -89,6 +89,9 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
 .answer-body li{margin-bottom:5px;}
 .answer-body strong{font-weight:700;}
 .answer-body em{font-style:italic;color:var(--grey-text);}
+.answer-body table{width:100%;border-collapse:collapse;margin:10px 0;font-size:13px;}
+.answer-body th{background:var(--grey-bg);text-align:left;padding:6px 8px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;text-transform:uppercase;color:var(--grey-text);}
+.answer-body td{padding:6px 8px;border-top:1px solid var(--grey-border);}
 .formula{font-family:monospace;background:var(--grey-bg);border-radius:5px;padding:8px 12px;font-size:13px;margin:8px 0;display:block;overflow-x:auto;}
 .sketch-box{font-family:monospace;font-size:11px;background:var(--grey-bg);border:1px solid var(--grey-border);border-radius:6px;padding:12px 14px;margin:10px 0;line-height:1.6;overflow-x:auto;white-space:pre;color:var(--ink);}
 .comp-table{width:100%;border-collapse:collapse;font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;margin:10px 0;}
@@ -466,7 +469,14 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
 </ul>
 <h4>Wall Thickness by Component Matrix</h4>
 <p>To minimize the empty tare weight of the unit while preserving structural integrity, varying steel gauges are applied:</p>
-<p>| Component Profile | Thickness Range | Primary Structural Purpose | | --- | --- | --- | | <strong>Corner Posts</strong> | 5.0 mm - 6.0 mm | Absorbs vertical compressive loads in a stack. | | <strong>Side Panels</strong> | 1.6 mm - 2.0 mm | Resists lateral cargo pressures and external impacts. | | <strong>Roof Panels</strong> | 1.6 mm - 2.0 mm | Provides weather protection and minor top-load tolerance. | | <strong>Floor Crossmembers</strong> | 3.0 mm - 4.0 mm | Transfers forklift and payload weights to the bottom side rails. | | <strong>Door Panels</strong> | 1.6 mm - 2.0 mm | Secures the rear frame structure and limits racking distortion. |</p>
+<table>
+<tr><th>Component Profile</th><th>Thickness Range</th><th>Primary Structural Purpose</th></tr>
+<tr><td><strong>Corner Posts</strong></td><td>5.0 mm - 6.0 mm</td><td>Absorbs vertical compressive loads in a stack.</td></tr>
+<tr><td><strong>Side Panels</strong></td><td>1.6 mm - 2.0 mm</td><td>Resists lateral cargo pressures and external impacts.</td></tr>
+<tr><td><strong>Roof Panels</strong></td><td>1.6 mm - 2.0 mm</td><td>Provides weather protection and minor top-load tolerance.</td></tr>
+<tr><td><strong>Floor Crossmembers</strong></td><td>3.0 mm - 4.0 mm</td><td>Transfers forklift and payload weights to the bottom side rails.</td></tr>
+<tr><td><strong>Door Panels</strong></td><td>1.6 mm - 2.0 mm</td><td>Secures the rear frame structure and limits racking distortion.</td></tr>
+</table>
 <h4>Mechanics of Corrugation</h4>
 <p>Flat thin-gauge steel sheet possesses almost zero resistance to bending forces along its transverse axis. Corrugation introduces a repetitive wave pattern (trapezoidal or sinusoidal profiles) that:</p>
 <ul>
@@ -1591,7 +1601,12 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
 </ul>
 <h4>Chemical Tanker Classification (Types 1, 2, and 3)</h4>
 <p>The IBC Code establishes three distinct vessel construction types based on a chemical's potential to cause environmental or public health disasters if released:</p>
-<p>| Ship Design Profile | Damage Survival Capability | Tank Location Requirements | Cargo Hazard Level Example | | --- | --- | --- | --- | | <strong>Type 1 Tanker</strong> | Maximum capability to survive prescribed hull punctures or strandings. | High buffer zone; cargo tanks must be stowed far inward from the side-shell and bottom plating (B/15 or 11.5 m). | Extremely severe environmental or safety hazards (e.g., Phosphorus yellow, Chlorosulfonic acid). | | <strong>Type 2 Tanker</strong> | Moderate structural survival capability against collision or stranding damage. | Intermediate buffer clearances from the outer hull skin. | Significant safety or pollution hazards (e.g., Acrylonitrile, Nitric acid). | | <strong>Type 3 Tanker</strong> | Standard industrial survival profile for general bulk products. | No special inward structural clearance restrictions; can use integral skin tanks. | Milder, less critical hazards (e.g., Toluene, Vegetable oils, Benzene). |</p>
+<table>
+<tr><th>Ship Design Profile</th><th>Damage Survival Capability</th><th>Tank Location Requirements</th><th>Cargo Hazard Level Example</th></tr>
+<tr><td><strong>Type 1 Tanker</strong></td><td>Maximum capability to survive prescribed hull punctures or strandings.</td><td>High buffer zone; cargo tanks must be stowed far inward from the side-shell and bottom plating (B/15 or 11.5 m).</td><td>Extremely severe environmental or safety hazards (e.g., Phosphorus yellow, Chlorosulfonic acid).</td></tr>
+<tr><td><strong>Type 2 Tanker</strong></td><td>Moderate structural survival capability against collision or stranding damage.</td><td>Intermediate buffer clearances from the outer hull skin.</td><td>Significant safety or pollution hazards (e.g., Acrylonitrile, Nitric acid).</td></tr>
+<tr><td><strong>Type 3 Tanker</strong></td><td>Standard industrial survival profile for general bulk products.</td><td>No special inward structural clearance restrictions; can use integral skin tanks.</td><td>Milder, less critical hazards (e.g., Toluene, Vegetable oils, Benzene).</td></tr>
+</table>
 <h4>Core Differences: IBC Code vs. BCH Code</h4>
 <ul>
 <li><strong>IBC Code (International Bulk Chemical Code):</strong> Mandatory for all chemical tankers whose keels were laid <strong>on or after July 1, 1986</strong>. It features modernized structural regulations, comprehensive safety system requirements, and is updated continuously by the IMO.</li>
@@ -2095,7 +2110,14 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
 <li>Fuel oil, diesel oil, lube oil, and water ballast tanks.</li>
 </ul>
 <h4>Allocation of Maritime Fees and Dues</h4>
-<p>| Maritime Fee/Duty Type | Tonnage Baseline Used | Operational Justification | | --- | --- | --- | | <strong>Port & Harbour Dues</strong> | <strong>Gross Tonnage (GT)</strong> | Reflects the total physical volume and displacement footprint the vessel occupies within the port infrastructure. | | <strong>Canal Transit Dues (Suez/Panama)</strong> | <strong>Net Tonnage (NT)</strong> <em>(Special Net Rules)</em> | Billed directly against the structural earning/cargo capacity traversing the canal system. | | <strong>Pilotage Fees</strong> | <strong>Gross Tonnage (GT)</strong> | Corresponds to the overall handling mass and physical sizing parameters handled by the pilot. | | <strong>Drydocking Charges</strong> | <strong>Gross Tonnage (GT)</strong> | Based on the dimensional volume and structural blocking space required inside the dock. | | <strong>Light Dues</strong> | <strong>Net Tonnage (NT)</strong> | A tax levied on the cargo-carrying capacity to fund coastal navigational aids. |</p>
+<table>
+<tr><th>Maritime Fee/Duty Type</th><th>Tonnage Baseline Used</th><th>Operational Justification</th></tr>
+<tr><td><strong>Port & Harbour Dues</strong></td><td><strong>Gross Tonnage (GT)</strong></td><td>Reflects the total physical volume and displacement footprint the vessel occupies within the port infrastructure.</td></tr>
+<tr><td><strong>Canal Transit Dues (Suez/Panama)</strong></td><td><strong>Net Tonnage (NT)</strong> <em>(Special Net Rules)</em></td><td>Billed directly against the structural earning/cargo capacity traversing the canal system.</td></tr>
+<tr><td><strong>Pilotage Fees</strong></td><td><strong>Gross Tonnage (GT)</strong></td><td>Corresponds to the overall handling mass and physical sizing parameters handled by the pilot.</td></tr>
+<tr><td><strong>Drydocking Charges</strong></td><td><strong>Gross Tonnage (GT)</strong></td><td>Based on the dimensional volume and structural blocking space required inside the dock.</td></tr>
+<tr><td><strong>Light Dues</strong></td><td><strong>Net Tonnage (NT)</strong></td><td>A tax levied on the cargo-carrying capacity to fund coastal navigational aids.</td></tr>
+</table>
     </div>
     <div class="numbers-box">
   <h4>Key Numbers</h4>
@@ -2304,7 +2326,13 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
 </ul>
 <p>Designed to ensure that water will not penetrate into the ship under any ambient sea or weather conditions, including green water impact, driving rain, or sea spray. This structural rating applies to openings above the freeboard deck.</p>
 <h4>Critical Structural Differences</h4>
-<p>| Functional Parameter | Watertight Boundaries | Weathertight Boundaries | | --- | --- | --- | | <strong>Pressure Direction</strong> | Must resist hydrostatic pressure from <strong>both sides</strong> (internal and external flooding scenarios). | Designed to resist penetration from the <strong>outside only</strong>. | | <strong>Primary Location</strong> | Below the bulkhead deck line (e.g., watertight bulkheads, shaft tunnels, tank tops, double bottom plates). | Above the freeboard deck line (e.g., cargo hatch covers, superstructure doors, air pipes, vent coamings). | | <strong>Locking Mechanism</strong> | Heavy-duty automated hydraulic sliding systems or multi-point high-torque manual dogs. | Simple quick-acting manual clips, toggles, or perimeter packing compression clamps. | | <strong>Safety Mandate</strong> | Prevents progressive flooding between internal compartments during hull breach events. | Preserves the vessel's reserve buoyancy against weather and sea spray accumulation on deck. |</p>
+<table>
+<tr><th>Functional Parameter</th><th>Watertight Boundaries</th><th>Weathertight Boundaries</th></tr>
+<tr><td><strong>Pressure Direction</strong></td><td>Must resist hydrostatic pressure from <strong>both sides</strong> (internal and external flooding scenarios).</td><td>Designed to resist penetration from the <strong>outside only</strong>.</td></tr>
+<tr><td><strong>Primary Location</strong></td><td>Below the bulkhead deck line (e.g., watertight bulkheads, shaft tunnels, tank tops, double bottom plates).</td><td>Above the freeboard deck line (e.g., cargo hatch covers, superstructure doors, air pipes, vent coamings).</td></tr>
+<tr><td><strong>Locking Mechanism</strong></td><td>Heavy-duty automated hydraulic sliding systems or multi-point high-torque manual dogs.</td><td>Simple quick-acting manual clips, toggles, or perimeter packing compression clamps.</td></tr>
+<tr><td><strong>Safety Mandate</strong></td><td>Prevents progressive flooding between internal compartments during hull breach events.</td><td>Preserves the vessel's reserve buoyancy against weather and sea spray accumulation on deck.</td></tr>
+</table>
 <h4>Testing Methodologies and Validation Regimes</h4>
 <p>To verify compliance with classification rules, multiple testing protocols are utilized during surveys or after major structural repairs:</p>
 <ul>
@@ -2628,7 +2656,13 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
 </ul>
 <p>MEMS Sensor Process: Vessel Rolls ──> Internal Micro-Mass Shifts ──> Alters Electrical Capacitance ──> Microprocessor Filters Vibration ──> Outputs Precise Digital Angle to Bridge & VDR</p>
 <h4>Core Differences: Digital vs. Traditional Inclinometers</h4>
-<p>| Technical Parameter | Traditional Mechanical Inclinometer | Modern Digital Inclinometer | | --- | --- | --- | | <strong>Sensing Mechanism</strong> | Gravity-fed weighted mechanical pendulum or rolling ball in a curved glass tube. | Solid-state MEMS electronic capacitive accelerometers. | | <strong>Inertial Error & Over-swing</strong> | <strong>High.</strong> Violent rolling causes the pendulum to overshoot the true angle due to momentum, creating inaccurate readings. | <strong>Zero.</strong> Advanced software filters isolate and remove centripetal forces, providing accurate tilt readings. | | <strong>Data Output Capabilities</strong> | Visual indication only; requires manual reading by watch officers. | Digital output strings transmitted directly to the VDR, loading computer, and bridge alarm panels. | | <strong>Dynamic Capabilities</strong> | Cannot compute the vessel's roll period or track complex wave-encounter frequencies. | Calculates exact roll periods (Tr) in real time, alerting the crew to potential resonance risks. |</p>
+<table>
+<tr><th>Technical Parameter</th><th>Traditional Mechanical Inclinometer</th><th>Modern Digital Inclinometer</th></tr>
+<tr><td><strong>Sensing Mechanism</strong></td><td>Gravity-fed weighted mechanical pendulum or rolling ball in a curved glass tube.</td><td>Solid-state MEMS electronic capacitive accelerometers.</td></tr>
+<tr><td><strong>Inertial Error & Over-swing</strong></td><td><strong>High.</strong> Violent rolling causes the pendulum to overshoot the true angle due to momentum, creating inaccurate readings.</td><td><strong>Zero.</strong> Advanced software filters isolate and remove centripetal forces, providing accurate tilt readings.</td></tr>
+<tr><td><strong>Data Output Capabilities</strong></td><td>Visual indication only; requires manual reading by watch officers.</td><td>Digital output strings transmitted directly to the VDR, loading computer, and bridge alarm panels.</td></tr>
+<tr><td><strong>Dynamic Capabilities</strong></td><td>Cannot compute the vessel's roll period or track complex wave-encounter frequencies.</td><td>Calculates exact roll periods (Tr) in real time, alerting the crew to potential resonance risks.</td></tr>
+</table>
 <h4>Operational Purpose for Ships</h4>
 <ul>
 <li><strong>Early Warning for Dynamic Risks:</strong> By monitoring the vessel's exact roll period, the system can alert watch officers if the encounter frequency approaches dangerous thresholds for <strong>parametric or synchronous rolling</strong>.</li>
@@ -2910,7 +2944,12 @@ body{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-se
     <div class="answer-body">
       <h4>Comparative Mechanical Breakdown</h4>
 <p>Solid bulk commodities carry unique physical and chemical characteristics that can fail structurally during transit if not properly managed, creating direct threats to the ship's stability profile:</p>
-<p>| Cargo Structural Profiling | Underlying Failure Mechanism | Primary Stability Risk Induced | Core Regulatory Control Method | | --- | --- | --- | --- | | <strong>Liquefaction</strong> <em>(Group A Cargo fines like Nickel Ore)</em> | Ship vibrations and dynamic wave motions compress the material, packing the cargo particles together. This builds up internal water pressure until it equals the weight of the solids, changing the cargo from a solid state into a fluid slurry. | <strong>Dynamic Fluid Sloshing:</strong> The wet slurry flows freely to one side as the ship rolls, creating a large free surface effect that can cause an unrecoverable list or sudden capsizing. | <strong>TML Compliance Certification:</strong> Shippers must test and verify that the cargo's actual moisture content remains strictly below its designated <strong>Transportable Moisture Limit (TML)</strong> before loading. | | <strong>Cohesive Cargo Collapse</strong> <em>(Fine sticky materials like damp coal)</em> | Intermolecular attraction and moisture cause the fine particles to stick together. Instead of sliding freely, the material builds up steep, unstable vertical faces or large overhanging structures inside the hold during loading or discharge. | <strong>Sudden Weight Shift:</strong> The steep, cohesive structures can collapse abruptly due to ship motion, causing a rapid shift in cargo weight that introduces an unexpected transverse list or structural impact stress. | <strong>Mechanical Trimming:</strong> Leveling the material across the hold using bulldozers or trimming spouts to eliminate vertical faces and create a stable, uniform cargo distribution. | | <strong>Grain Shift</strong> <em>(Agricultural Bulks under the Grain Code)</em> | Agricultural grain naturally settles and compacts during the early stages of a voyage, leaving a wedge-shaped horizontal void space at the top of the hold beneath the deck beams. | <strong>Permanent Transverse Heel:</strong> As the ship rolls in heavy weather, the grain surface flows laterally into these void spaces, creating an asymmetric weight distribution and a permanent list. | <strong>Feeder Shifting Boards & Strapping:</strong> Using structural division boards to restrict lateral movement, filling holds completely to minimize voids, or securing partly filled holds with strapping and bundling systems. |</p>
+<table>
+<tr><th>Cargo Structural Profiling</th><th>Underlying Failure Mechanism</th><th>Primary Stability Risk Induced</th><th>Core Regulatory Control Method</th></tr>
+<tr><td><strong>Liquefaction</strong> <em>(Group A Cargo fines like Nickel Ore)</em></td><td>Ship vibrations and dynamic wave motions compress the material, packing the cargo particles together. This builds up internal water pressure until it equals the weight of the solids, changing the cargo from a solid state into a fluid slurry.</td><td><strong>Dynamic Fluid Sloshing:</strong> The wet slurry flows freely to one side as the ship rolls, creating a large free surface effect that can cause an unrecoverable list or sudden capsizing.</td><td><strong>TML Compliance Certification:</strong> Shippers must test and verify that the cargo's actual moisture content remains strictly below its designated <strong>Transportable Moisture Limit (TML)</strong> before loading.</td></tr>
+<tr><td><strong>Cohesive Cargo Collapse</strong> <em>(Fine sticky materials like damp coal)</em></td><td>Intermolecular attraction and moisture cause the fine particles to stick together. Instead of sliding freely, the material builds up steep, unstable vertical faces or large overhanging structures inside the hold during loading or discharge.</td><td><strong>Sudden Weight Shift:</strong> The steep, cohesive structures can collapse abruptly due to ship motion, causing a rapid shift in cargo weight that introduces an unexpected transverse list or structural impact stress.</td><td><strong>Mechanical Trimming:</strong> Leveling the material across the hold using bulldozers or trimming spouts to eliminate vertical faces and create a stable, uniform cargo distribution.</td></tr>
+<tr><td><strong>Grain Shift</strong> <em>(Agricultural Bulks under the Grain Code)</em></td><td>Agricultural grain naturally settles and compacts during the early stages of a voyage, leaving a wedge-shaped horizontal void space at the top of the hold beneath the deck beams.</td><td><strong>Permanent Transverse Heel:</strong> As the ship rolls in heavy weather, the grain surface flows laterally into these void spaces, creating an asymmetric weight distribution and a permanent list.</td><td><strong>Feeder Shifting Boards & Strapping:</strong> Using structural division boards to restrict lateral movement, filling holds completely to minimize voids, or securing partly filled holds with strapping and bundling systems.</td></tr>
+</table>
 <p>Bulk Cargo Failure Matrix: ├── Liquefaction  ──> Compaction raises pore pressure ──> Solids become fluid slurry ├── Cohesive      ──> Fine particle cohesion fails    ──> Steep vertical face collapses └── Grain Shift   ──> Material settles during transit ──> Surface flows into top void spaces</p>
 <h4>Risk Mitigations and Operational Engineering Controls</h4>
 <ul>
