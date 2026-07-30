@@ -1,10 +1,20 @@
 {
   "manifest_version": "1.0",
-  "generated": "2026-07-29",
-  "generated_by": "Claude (cheat sheet consistency pass following DGMA/IRS/MMD examiner-readiness round)",
+  "generated": "2026-07-30",
+  "generated_by": "Claude (Form E / FFA conflation correction pass)",
   "total_questions": 629,
   "total_files": 78,
   "recently_updated": [
+    {
+      "date": "2026-07-30",
+      "summary": "Form E / fire-fighting equipment conflation correction (Nixon-flagged, SEQ Q15 review). Form E (Record of Equipment supplement to the Cargo Ship Safety Equipment Certificate) has three SOLAS Appendix sections — LSA, Equivalent Arrangements, Navigational Systems/Equipment — with NO fire-fighting section. Corrected QB3_A.html (Q15 full answer, cheat sheet, reg-box, CE Oral Tip, and full deep-dive: trap Q&A, CE Relevance, Common CE Failures, Numbers to Memorise, Casualty Link, Examiner Chain, On My Vessel — version bumped v1.0→v1.1), QB3_A_CheatSheet.html (SVG diagram label + Quick-Fire 15s index), QB8_B.html (MSC.520(106) portable water monitor/mist lance record location), and QB8_A.html (certificate/Form E labeling precision). All four files now correctly route FFA compliance to the certificate's own attestation and the ship's Fire Control Plan/PMS instead of Form E. Added known_traps.md Entry 17 (SKIP-tagged — negation-context false-positive risk for auto-scan, same pattern as Entry 6's false-positive note).",
+      "files_touched": [
+        "QB3_A.html",
+        "QB3_A_CheatSheet.html",
+        "QB8_A.html",
+        "QB8_B.html"
+      ]
+    },
     {
       "date": "2026-07-29",
       "summary": "Cheat sheet consistency pass — checked every cheat sheet (embedded and standalone) attached to files touched in the three correction rounds today, since quick-reference/retrieval-cue material can silently drift out of sync with a corrected main answer. Found and fixed real regressions, not just omissions: (1) QB1_H's embedded cheat sheet quick-recall row for the brake rendering test still stated the generic pre-correction formula without the corrected 60% SDMBL (mooring winch, OCIMF MEG4) vs 80%/45% chain MBS (windlass, IACS UR A3) distinction — fixed both the cue-card and the recall-table row. (2) QB1_D's embedded cheat sheet quick-reference table AND its SVG flow diagram both still showed the flat '1.25 x SWL' proof-load figure that was corrected in the main Q2/Q3 answers to the actual basis (MSC.1/Circ.1663 Table 1); also added a new DGMA MS Notice 02/2026 quick-recall row. (3) QB1_E's embedded cheat sheet quick-reference table still cited the stale IMO Res. A.1156(32) HSSC guideline that was corrected to A.1207(34) in the main Q1 answer during the SEQ survey depth-expansion round — fixed. (4) QB4_A_CheatSheet.html (standalone file, linked via cheat-btn from QB4_A, not tracked in this manifest's files{} dict) still had the stale 'DGS India' naming in its PSC trap-row — corrected to 'MMD offices under DGMA', matching the fix already applied to the main QB4_A file; version bumped v1.1->v1.2. (5) QB4_H_cheatsheet.html (standalone file, same non-tracked category) — no factual error, but enriched its WHO-certificate recall row with the DGMA Maritime Health Branch / DGS Order 10/2018 reference added to the main QB4_H Q9 answer. Checked and found clean (no changes needed): QB3_I's embedded cheat sheet (AFS Convention topic — no issuing-authority claim to conflict with), QB4_I's embedded cheat-section (ISSC/ISM content — accurate, no conflict). Confirmed no cheat sheet exists at all for QB1_A, QB1_B, QB1_F, QB1_G, QB2_A, QB3_A, QB3_B, QB3_H (verified via manifest files{} dict and direct href search across each file). All 5 corrected cheat sheet files QC'd: HTML tag balance clean, GA4 tag and auth gate present, live JS blocks pass node --check.",
