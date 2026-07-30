@@ -227,39 +227,53 @@ body{user-select:none;}
     <span class="q-version">QB1_H · Q3 · v1.0</span>
   </div>
 </div>
-<div class="q-card" id="q4" data-tags="machinery survey">
+<div class="q-card" id="q4" data-tags="machinery survey iacs">
   <div class="q-header" onclick="toggleCard(this)">
     <div class="q-num-badge">4</div>
     <div class="q-text-wrap">
       <div class="q-text">Describe the windlass/mooring winch brake rendering test — purpose, calculation basis, and procedure.</div>
-      <div class="q-tags"><span class="q-tag">machinery</span><span class="q-tag">survey</span></div>
+      <div class="q-tags"><span class="q-tag">machinery</span><span class="q-tag">survey</span><span class="q-tag">IACS</span></div>
     </div>
     <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
   </div>
   <div class="q-answer">
-    <div class="practice-block"><strong>15-Second Answer:</strong> A brake rendering test confirms the mechanical band brake holds the design mooring/anchoring load but slips before the windlass foundation, deck fittings, or the chain/line itself is overloaded — typically tested to a percentage of the chain's or line's Minimum Breaking Strength (MBS) using a calibrated hydraulic test kit.</div>
-    <div class="practice-block"><strong>60-Second Answer:</strong> The CE converts the required rendering torque into a hydraulic test pressure applied via a lever-arm test kit clamped to the drum or wildcat. The brake must hold under normal environmental loads but render before the windlass/winch foundation, deck structure, or the line/chain itself is damaged. Required rendering force is typically 45–50% of line MBS for mooring winches, up to around 80% of chain MBS for windlass brakes, depending on Class rules — verify against the specific vessel's approved brake data sheet rather than quoting a single fixed figure, since exact percentages are class- and OEM-specific.</div>
-    <div class="answer-body"><h4>Purpose</h4><p>The brake acts as a mechanical "safety valve": it must hold the chain/line under standard environmental forces but slip (render) before those forces exceed the structural limits of the mooring line, chain, windlass, or its deck foundation.</p>
-<h4>Calculation Basis</h4><p class="formula">Torque required (M) = F &times; R</p><p>where F is the design rendering force (a percentage of chain/line MBS per the vessel's approved Class/OEM data) and R is the effective radius of the outer rope layer or wildcat pitch circle. The test kit converts this to a required hydraulic pressure P = M / (A &times; L), where A is the test cylinder's cross-sectional area and L is the lever-arm length.</p>
-<h4>Procedure</h4><ol><li>Inspect brake linings for wear, oil/grease contamination, and scoring; lubricate linkages.</li>
+    <div class="practice-block"><strong>15-Second Answer:</strong> A brake rendering test confirms the mechanical brake holds the design load but slips (renders) before the winch/windlass foundation, deck fittings, or the line/chain itself is overloaded. Two distinct standards apply: mooring winch brakes render at <strong>60% of the ship's Design Minimum Breaking Load (SDMBL)</strong> under OCIMF MEG4, while windlass anchor brakes are sized to <strong>80% of chain MBS</strong> (or 45% if a chain cable stopper is fitted) under IACS UR A3 — these are commonly, and incorrectly, treated as one figure.</div>
+    <div class="practice-block"><strong>60-Second Answer:</strong> The CE converts the required rendering torque into a hydraulic test pressure applied via a lever-arm test kit clamped to the drum or wildcat. The brake must hold under normal environmental loads but render before the winch/windlass foundation, deck structure, or the line/chain itself is damaged. Mooring winch brakes are set to render at 60% of the vessel's Design MBL (SDMBL) — derived from the ship's Class-assigned Equipment Number (EN) — per OCIMF MEG4; new-build winches are typically designed to hold 80% but adjustable down to 60%. Windlass anchor brakes follow a separate IACS UR A3 standard: holding torque equivalent to 80% of chain cable MBS with no chain stopper fitted, or 45% if a stopper is fitted. Always verify the exact target against the vessel's approved Class/OEM data sheet, not a memorised universal number.</div>
+    <div class="answer-body"><h4>Purpose</h4><p>The brake acts as a mechanical "safety valve": it must hold the chain/line under standard environmental forces but slip (render) before those forces exceed the structural limits of the mooring line, chain, windlass, or its deck foundation. Rendering keeps the brake as the deliberate weak link in the mooring/anchoring system, rather than allowing a line to part or a windlass foundation to fail.</p>
+<h4>Two Distinct Standards — Do Not Conflate Them</h4>
+<ul>
+<li><strong>Mooring Winch Brake (OCIMF MEG4 &quot;Render Test&quot;):</strong> Set to render at <strong>60% of the Ship Design Minimum Breaking Load (SDMBL)</strong>. SDMBL is derived from the vessel's Class-assigned <strong>Equipment Number (EN)</strong>, which also sets minimum mooring rope MBL, heaving speed, and the minimum number of mooring lines. New equipment is typically designed to hold 80% of SDMBL but adjustable down to 60% for the test.</li>
+<li><strong>Windlass Anchor Brake (IACS UR A3):</strong> Holding capacity must withstand <strong>80% of the chain cable's Minimum Breaking Strength (MBS)</strong> where no chain cable stopper is fitted, or <strong>45% of chain MBS</strong> where a stopper is fitted (the stopper carries the remaining static holding load once anchored).</li>
+</ul>
+<h4>Calculation Basis</h4><p class="formula">Torque required (M) = F &times; R</p><p>where F is the design rendering force — <strong>0.6 &times; SDMBL</strong> for a mooring winch, or <strong>0.8 &times; chain MBS</strong> (0.45 &times; if a stopper is fitted) for a windlass — and R is the effective radius of the outer rope layer or wildcat pitch circle. The test kit converts this to a required hydraulic pressure P = M / (A &times; L), where A is the test cylinder's cross-sectional area and L is the lever-arm length.</p>
+<h4>Procedure</h4><ol><li>Confirm the brake, brake drum, and linings are in satisfactory condition before testing; rectify any damage or excessive wear first.</li>
+<li>Inspect brake linings for wear, oil/grease contamination, and scoring; lubricate linkages.</li>
 <li>Rig the manufacturer's test frame to deck foundations; attach the test arm to the drum/wildcat; connect the calibrated hydraulic hand pump and gauge.</li>
 <li>Tighten the brake handwheel to its standard operating torque using a calibrated torque wrench.</li>
 <li>Disengage the drive motor/clutch so the drum turns freely against the brake alone; slowly pressurise while monitoring the gauge.</li>
-<li>Record the exact pressure at which the brake slips and compare against the calculated target.</li>
+<li>Record the exact pressure at which the brake slips and compare against the calculated target — the test must show a clear slip event, not just that the brake held at the calculated pressure.</li>
 <li>Adjust linkages or replace linings if it slips early; if it doesn't slip at the calculated limit, the brake is over-tightened and structurally hazardous.</li></ol>
+<h4>When the Test Must Be Repeated</h4>
+<ul>
+<li>Prior to a new-build vessel's delivery, and within 30 days of taking over an existing vessel</li>
+<li>After any brake lining renewal or replacement</li>
+<li>At an interval not exceeding <strong>1 year</strong></li>
+<li>Non-tanker vessels: brake linings are renewed at every drydock regardless of measured condition</li>
+<li>Where premature slippage, related malfunction, or a change to a different-diameter mooring line has occurred</li>
+</ul>
       <h4>Chief Engineer Relevance</h4><p>On a Maersk container vessel, high windage areas and frequent berthing make annual brake test sign-off a CE responsibility. Maintain a clear witness mark or turn-count for the standard handwheel tightening position for vetting/audit scrutiny, and ensure crew never use cheater bars, which defeats the calculated rendering limit.</p>
       
     </div>
-    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div><div class="reg-item"><span class="reg-code">SOLAS Ch. II-1, Reg. 3-8</span><span class="reg-desc">Towing and mooring equipment</span></div><div class="reg-item"><span class="reg-code">ISO 3730:2012</span><span class="reg-desc">Shipbuilding — mooring winches</span></div><div class="reg-item"><span class="reg-code">OCIMF MEG4</span><span class="reg-desc">Mooring Equipment Guidelines</span></div><div class="reg-item"><span class="reg-code">IACS UR — Deck Machinery</span><span class="reg-desc">Class rules for windlass/winch design and testing</span></div></div>
+    <div class="reg-box"><div class="reg-box-title">&#9878; Regulatory References</div><div class="reg-item"><span class="reg-code">SOLAS Ch. II-1, Reg. 3-8</span><span class="reg-desc">Towing and mooring equipment</span></div><div class="reg-item"><span class="reg-code">IACS UR A3</span><span class="reg-desc">Anchor windlass design and testing — brake holding capacity (80%/45% chain MBS). Ref: <a href="https://www.marinetopics.com/articles-desktop-en/anchor-windlass-design-and-testing-iacs-2018-requirement/" target="_blank" rel="noopener">IACS UR A3 summary</a></span></div><div class="reg-item"><span class="reg-code">OCIMF MEG4</span><span class="reg-desc">Mooring Equipment Guidelines, 4th Ed. — winch brake render point (60% SDMBL). Ref: <a href="https://rightship.com/insights/what-is-render-testing" target="_blank" rel="noopener">RightShip — What is Render Testing?</a></span></div><div class="reg-item"><span class="reg-code">ISO 3730:2012</span><span class="reg-desc">Shipbuilding — mooring winches</span></div></div>
     <div class="ce-tip"><strong>CE Oral Tip:</strong> Rajappan often frames this on an LNG carrier or large container vessel with extreme mooring forces. Emphasise you're checking the slip point, not just that the brake holds, and that the clutch/drive must be disengaged during the live test.</div>
     <details class="deep-dive"><summary>Deep-Dive: Traps, Failures, Numbers, Casualty, On My Vessel</summary>
-      <div class="dd-item"><b>Trap Questions:</b> "Can you use a cheater bar to make the brake hold in a storm?" — No; over-tightening past design spec prevents rendering, risking the winch being torn off its foundation instead of the line slipping safely.</div><div class="dd-item"><b>Common CE Failures:</b> Ignoring oil/grease contamination on brake linings, which sharply reduces the friction coefficient and causes premature slip.</div><div class="dd-item"><b>Numbers to Memorise:</b> Typical order-of-magnitude: ~45–50% of line MBS (mooring winches) up to ~80% of chain MBS (windlass) — always confirm the vessel-specific approved figure, don't quote a single universal number.</div><div class="dd-item"><b>Casualty Link:</b> Snap-back fatalities have resulted from over-tightened brakes failing to render, storing elastic energy until the line parted violently.</div><div class="dd-item"><b>On My Vessel:</b> Maersk vessels carry standard hydraulic brake test kits; confirm the pressure gauge calibration certificate is in date before each test.</div>
+      <div class="dd-item"><b>Trap Questions:</b> "Can you use a cheater bar to make the brake hold in a storm?" — No; over-tightening past design spec prevents rendering, risking the winch being torn off its foundation instead of the line slipping safely. "Is the render percentage the same for the windlass and the mooring winch?" — No; this is the most common examiner trap on this topic. Windlass = 80%/45% of chain MBS (IACS UR A3). Mooring winch = 60% of SDMBL (OCIMF MEG4). Quoting one figure for both is an immediate red flag to the examiner.</div><div class="dd-item"><b>Common CE Failures:</b> Ignoring oil/grease contamination on brake linings, which sharply reduces the friction coefficient and causes premature slip. Using the mooring rope's actual/Line MBL instead of the Ship Design MBL (SDMBL) as the test reference — SDMBL is fixed by the vessel's EN at build and does not change even if a stronger replacement line is later fitted.</div><div class="dd-item"><b>Numbers to Memorise:</b> Mooring winch: render at <strong>60% SDMBL</strong> (design target up to 80%, adjustable down). Windlass: <strong>80% chain MBS</strong> with no stopper, <strong>45%</strong> with a chain cable stopper fitted (IACS UR A3). Retest: after any lining renewal, within 30 days of vessel takeover, at least annually, and linings renewed every drydock on non-tankers.</div><div class="dd-item"><b>Casualty Link:</b> Snap-back fatalities have resulted from over-tightened brakes failing to render, storing elastic energy until the line parted violently.</div><div class="dd-item"><b>On My Vessel:</b> Maersk vessels carry standard hydraulic brake test kits; confirm the pressure gauge calibration certificate is in date before each test.</div>
     </details>
-    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: Moderate-high — general engineering principle and OCIMF MEG4 guidance are standard; the specific %MBS rendering target must always be checked against the individual vessel's approved brake test procedure/Class-approved data sheet rather than treated as a universal fixed number.</em></p>
+    <p style="font-size:.72rem;color:var(--grey-text);margin-top:.5rem;"><em>Source confidence: High — 60% SDMBL (OCIMF MEG4, per RightShip/BHP Hay Point technical guidance) and 80%/45% chain MBS (IACS UR A3) are both documented industry-standard figures. The exact vessel-specific value must still be confirmed against the individual ship's approved brake test procedure/Class-approved data sheet before quoting a number in an actual survey.</em></p>
   </div>
   <div class="q-footer">
     <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_H, Q4, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB1_H, Q4, Correction Required — [correction text] — Rank, Company, LinkedIn URL</span>
-    <span class="q-version">QB1_H · Q4 · v1.0</span>
+    <span class="q-version">QB1_H · Q4 · v1.1</span>
   </div>
 </div>
 <div class="q-card" id="q5" data-tags="solas iacs">
@@ -313,7 +327,7 @@ body{user-select:none;}
 <div class="cue-grid">
   <div class="cue-card"><b>PR 9 vs PR 17</b>PR 9 = how the RO audits ISM (NC ≤3 months / MNC = no sailing). PR 17 = when a survey defect must be escalated as a possible SMS failure.</div>
   <div class="cue-card"><b>UR / PR / UI — one line each</b>UR = Class rule minimum. PR = how the RO itself operates. UI = clarifies vague IMO statutory wording.</div>
-  <div class="cue-card"><b>Brake test logic</b>Hold under normal load &#8594; render before structure/line fails. Check the slip point, not just the hold.</div>
+  <div class="cue-card"><b>Brake test logic</b>Hold under normal load &#8594; render before structure/line fails. Check the slip point, not just the hold. Two DIFFERENT standards: mooring winch = 60% SDMBL (OCIMF MEG4); windlass = 80%/45% chain MBS (IACS UR A3). Never quote one figure for both.</div>
   <div class="cue-card"><b>GBS scope — memorise this first</b>Bulk carriers &amp; oil tankers ≥150m only. NOT container ships. Say this before anything else on GBS.</div>
 </div>
 <table class="recall-table">
@@ -321,7 +335,7 @@ body{user-select:none;}
 <tr><td>1</td><td>"Surveyor found an ISM-relevant defect"</td><td>PR 17 report to SMC RO</td></tr>
 <tr><td>2</td><td>"How is an ISM audit conducted uniformly?"</td><td>PR 9 — NC 3 months / MNC immediate</td></tr>
 <tr><td>3</td><td>"UR vs PR vs UI?"</td><td>Class min / RO conduct / statutory clarity</td></tr>
-<tr><td>4</td><td>"Brake rendering test"</td><td>M=F×R, test to slip point, disengage clutch</td></tr>
+<tr><td>4</td><td>"Brake rendering test"</td><td>Mooring winch: 60% SDMBL. Windlass: 80%/45% chain MBS. Test to slip point, disengage clutch.</td></tr>
 <tr><td>5</td><td>"GBS?"</td><td>Bulk/tanker ≥150m only, 5 tiers, 25-yr design life</td></tr>
 </table>
 </div>

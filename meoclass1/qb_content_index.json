@@ -1,10 +1,46 @@
 {
   "manifest_version": "1.0",
   "generated": "2026-07-29",
-  "generated_by": "Claude (pipe-table formatting correction pass)",
+  "generated_by": "Claude (cheat sheet consistency pass following DGMA/IRS/MMD examiner-readiness round)",
   "total_questions": 629,
   "total_files": 78,
   "recently_updated": [
+    {
+      "date": "2026-07-29",
+      "summary": "Cheat sheet consistency pass — checked every cheat sheet (embedded and standalone) attached to files touched in the three correction rounds today, since quick-reference/retrieval-cue material can silently drift out of sync with a corrected main answer. Found and fixed real regressions, not just omissions: (1) QB1_H's embedded cheat sheet quick-recall row for the brake rendering test still stated the generic pre-correction formula without the corrected 60% SDMBL (mooring winch, OCIMF MEG4) vs 80%/45% chain MBS (windlass, IACS UR A3) distinction — fixed both the cue-card and the recall-table row. (2) QB1_D's embedded cheat sheet quick-reference table AND its SVG flow diagram both still showed the flat '1.25 x SWL' proof-load figure that was corrected in the main Q2/Q3 answers to the actual basis (MSC.1/Circ.1663 Table 1); also added a new DGMA MS Notice 02/2026 quick-recall row. (3) QB1_E's embedded cheat sheet quick-reference table still cited the stale IMO Res. A.1156(32) HSSC guideline that was corrected to A.1207(34) in the main Q1 answer during the SEQ survey depth-expansion round — fixed. (4) QB4_A_CheatSheet.html (standalone file, linked via cheat-btn from QB4_A, not tracked in this manifest's files{} dict) still had the stale 'DGS India' naming in its PSC trap-row — corrected to 'MMD offices under DGMA', matching the fix already applied to the main QB4_A file; version bumped v1.1->v1.2. (5) QB4_H_cheatsheet.html (standalone file, same non-tracked category) — no factual error, but enriched its WHO-certificate recall row with the DGMA Maritime Health Branch / DGS Order 10/2018 reference added to the main QB4_H Q9 answer. Checked and found clean (no changes needed): QB3_I's embedded cheat sheet (AFS Convention topic — no issuing-authority claim to conflict with), QB4_I's embedded cheat-section (ISSC/ISM content — accurate, no conflict). Confirmed no cheat sheet exists at all for QB1_A, QB1_B, QB1_F, QB1_G, QB2_A, QB3_A, QB3_B, QB3_H (verified via manifest files{} dict and direct href search across each file). All 5 corrected cheat sheet files QC'd: HTML tag balance clean, GA4 tag and auth gate present, live JS blocks pass node --check.",
+      "files": [
+        "QB1_H.html",
+        "QB1_D.html",
+        "QB1_E.html",
+        "QB4_A_CheatSheet.html",
+        "QB4_H_cheatsheet.html"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "summary": "Indian MMD examiner-readiness pass: added/corrected DGMA (formerly DG Shipping) / IRS / MMD-specific regulatory scope across 28 question cards spanning 9 files, following a full statutory/certification/PSC content scan of the QB series. Purpose: candidates are working surveyors sitting Kochi MMD orals and going on to PSC/survey/inspection duty, so answers need the Indian flag-state execution layer, not just generic IMO/SOLAS text. QB4_A (8 cards: Q3, Q4, Q5, Q7, Q9, Q10, Q16, Q18) — corrected stale 'DGS India' naming to DGMA/MMD throughout; added the DGMA RO Authorization Agreement framework (MS Act 1958 section 7(3)/9(1-A)) for Condition of Class, statutory certificate definition, and ISM audit questions; added IOMOU founding-member detail and PSC Form B to the PSC card; Q18 (STCW Manila/CE benchmark) received a substantial new section on the actual Indian CoC issuance pathway — Chief Examiner of Masters and Mates, MMD Kochi as an exam centre, INDoS number, e-Samudra portal, IMO STCW White List status, 5-year RUT revalidation cycle. QB4_I Q1 (ISPS certs) — added DGMA/Registrar of Shipping ISSC delegation detail. QB4_H Q9 (WHO-linked certs) — added DGMA Maritime Health Branch as IHR 2005 Competent Authority, DGS Order 10/2018 (SSCC/SSCEC) and DGS Order 2/2017 (Medical Examiner approval). QB1_A Q22 (flag/port/coastal state duties) — corrected a stale citation (IMO Res. A.1138(31), two supersessions out of date) to current A.1206(34), and added India's specific role in each capacity (DGMA as flag state, MMD/IOMOU as port state, Territorial Waters Act 1976 as coastal-state legislation). QB2_A Q15 (ICOF) — corrected DGS-to-DGMA naming, added RO Authorization Agreement detail explaining the RO issues on DGMA's behalf, not its own class authority. QB3_A (7 cards: Q4, Q6, Q7, Q9, Q11, Q13, Q17) and QB3_B (7 cards: Q1 supplemented, Q2, Q3, Q4, Q5, Q8, Q9, Q11) and QB3_I Q1 — added the DGMA RO Authorization Agreement as the consistent legal mechanism underlying class-notation, ESP, hull survey, steel renewal, ballast tank inspection, drydock, and AFS certificate questions on Indian-flag ships; QB3_A Q7 also had a stale HSSC citation (A.997(25)) corrected to current A.1207(34). QB4_E Q8 (PSC appeal) was reviewed and found already comprehensive with full IOMOU-specific detail — no changes made. All edits verified: HTML tag-balance clean, GA4 tag and auth gate intact, all live JS blocks pass node --check on every file in this batch.",
+      "files": [
+        "QB4_A.html",
+        "QB4_I.html",
+        "QB4_H.html",
+        "QB1_A.html",
+        "QB2_A.html",
+        "QB3_A.html",
+        "QB3_B.html",
+        "QB3_I.html"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "summary": "Checklist-verification correction pass across 5 statutory-survey questions, cross-checked against official DGMA/MMD/IACS/IMO checklists following candidate feedback. Fixes and additions: (1) QB1_H Q4 (windlass/mooring winch brake rendering test) — corrected an inaccurate mooring-winch render figure; the answer previously conflated two distinct standards. Mooring winch brakes render at 60% of Ship Design MBL (SDMBL) per OCIMF MEG4, while windlass anchor brakes are sized to 80%/45% of chain MBS per IACS UR A3 — now stated separately with sources, plus retest-trigger conditions (lining renewal, vessel takeover, annual interval, drydock relining) added. (2) QB1_D Q2 and Q3 (lifting appliance amendments/survey) — added DGMA Merchant Shipping Notice No. 02 of 2026 (Indian flag implementation of SOLAS II-1/3-13), the mandatory rigging plan/block list requirement, and corrected the proof-load-test description from a flat '1.25x SWL' to the actual basis (MSC.1/Circ.1663 Table 1, para 3.2.1.5). (3) QB1_F Q8, QB3_A Q5, and QB3_B Q1 (hull survey / drydock planning) — added the mandatory annual close-up survey extension for bulk carriers/oil tankers (25% of cargo hold side shell frames, forward hold + one other selected hold), previously missing across all three versions of this content. QB1_F Q8's Deep Dive section also had a pre-existing content-duplication defect (cascading repeated text across trap/failure/numbers/casualty blocks) that was cleaned up during this pass — unrelated to the checklist gap but caught during review. All reg-boxes now carry direct source links (DGMA circular, RightShip/IACS technical references, MarineGyaan survey checklists) rather than bare citations. Versions incremented v1.0 to v1.1 on all 6 corrected question cards (QB1_H Q4, QB1_D Q2, QB1_D Q3, QB1_F Q8, QB3_A Q5, QB3_B Q1).",
+      "files": [
+        "QB1_H.html",
+        "QB1_D.html",
+        "QB1_F.html",
+        "QB3_A.html",
+        "QB3_B.html"
+      ]
+    },
     {
       "date": "2026-07-29",
       "summary": "Formatting correction pass (candidate screenshot feedback via Nixon): 19 comparative tables across 5 files were rendered as raw markdown-style pipe-delimited rows inside <p> tags instead of real <table> markup, causing unpredictable text wrapping and loss of column alignment on mobile. Converted to proper HTML tables in QB2_A (6 tables: container thicknesses, tanker types, tonnage fees, watertight vs weathertight boundaries, inclinometer types, bulk cargo failure modes), QB1_B (1), QB1_F (7), QB1_G (10), and QB3_H (1, embedded NLS cargo categorization table). No content/regulatory changes — question text and answers unchanged, formatting only. Added .answer-body table/th/td CSS to QB1_F and QB1_G, which had no table styling at all prior to this fix; QB3_H matched using its existing rem-based CSS convention. Added a new automated check_pipe_table_format() function to qb_health_check.py to catch any future regression of this pattern (scans for the '| --- |' separator-row signature across all QB files and notes/WA files in the daily 03:00 UTC run). Logged as known_traps.md Entry 16 (formatting standard, not a factual correction).",
