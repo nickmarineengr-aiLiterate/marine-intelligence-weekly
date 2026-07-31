@@ -113,7 +113,7 @@ async function assignPassword(buyerEmail) {
 function buildEmail(tier, buyerName, buyerEmail, password) {
   const isFounders = tier === "founders";
   const tierLabel = isFounders ? "Founders Access" : "Standard Access";
-  const price = isFounders ? "₹499" : "₹899";
+  const price = isFounders ? "₹899" : "₹1,499";
 
   const founderNote = isFounders
     ? `<p style="background:#f0fdfa;border-left:3px solid #0d9488;padding:10px 14px;margin:16px 0;font-size:14px;color:#134e4a;">
