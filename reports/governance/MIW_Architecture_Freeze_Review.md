@@ -1,6 +1,6 @@
 # MIW Repository — Final Architecture Review: `engineering/` Wrapper Proposal
 **Role:** Chief Software Architect (pre-freeze review)
-**Status:** Final structural decision before PKG-1
+**Status:** Approved (Founder decision, 2026-07-31) — final structural decision, ratified before PKG-1
 **Date:** 2026-07-30
 
 ---

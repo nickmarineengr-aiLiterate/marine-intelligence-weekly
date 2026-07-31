@@ -1,5 +1,5 @@
 # IMPLEMENTATION_CONTRACT.md
-**Status:** Proposed — pending Founder approval
+**Status:** Approved (Founder decision, 2026-07-31)
 **Governs:** Execution of PKG-1 through PKG-13 (MIW Repository Engineering Bootstrap)
 **Does not describe:** Repository structure or architecture (see `docs/ARCHITECTURE.md` once created) or governance rationale (see governance review). This document defines **how** work is executed, not **what** exists.
 
