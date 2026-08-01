@@ -368,6 +368,7 @@ NEGATION_MARKERS = [
     "prior revision incorrectly stated", "previously stated",
     "previously cited", "previous revision", "old error", "the old",
     "corrected from", "corrected to", "incorrectly stated",
+    "re-enacted as", "reenacted as", "re-enacted", "now in force as",
 ]
 
 
@@ -664,9 +665,15 @@ def check_manifest(files, file_results=None):
     # Orphan QB files: built HTML present on disk, but never added to the manifest.
     # Cheat sheets are excluded — they follow a separate A/B pattern and are not
     # required to carry manifest entries (per QB naming conventions).
+    # SQ/ files are excluded — these are public marketing/teaser copies (free
+    # samples) that intentionally live outside the gated meoclass1/ manifest
+    # scope, even when their basename matches the QB\d pattern (e.g.
+    # SQ/QB1_A.html is a teaser mirroring meoclass1/QB1_A.html's content but
+    # is not itself a manifest-tracked file).
     qb_html_on_disk = {f for f in html_files_on_disk
                         if re.match(r"QB\d", f.split("/")[-1], re.I)
-                        and "cheatsheet" not in f.lower()}
+                        and "cheatsheet" not in f.lower()
+                        and not f.lower().startswith("sq/")}
     orphan_files = qb_html_on_disk - set(manifest_files.keys())
     if orphan_files:
         errors.append(f"QB file(s) on disk but missing from manifest (index not updated after build): {sorted(orphan_files)}")
