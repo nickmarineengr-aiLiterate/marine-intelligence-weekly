@@ -808,12 +808,37 @@ def build_report(manifest_errors, file_results, total_files, total_questions_man
     return "\n".join(lines), total_errors
 
 
+def _safe_console_print(text):
+    """Print text to stdout without crashing on consoles using a narrow
+    codec (e.g. Windows cp1252) that can't encode report glyphs like
+    checkmarks/warning signs, and without leaving stdout in a broken
+    state for later prints.
+
+    IMPORTANT: do NOT construct a new io.TextIOWrapper around
+    sys.stdout.buffer here — TextIOWrapper takes ownership of the
+    underlying buffer, and when the wrapper is garbage-collected it
+    closes sys.stdout.buffer as a side effect, breaking every print()
+    call for the rest of the process (raises "I/O operation on closed
+    file"). Write bytes to the buffer directly instead, with no wrapper
+    object left holding ownership.
+    """
+    try:
+        print(text)
+    except UnicodeEncodeError:
+        encoding = getattr(sys.stdout, "encoding", None) or "utf-8"
+        payload = (text + "\n").encode(encoding, errors="replace")
+        sys.stdout.buffer.write(payload)
+        sys.stdout.buffer.flush()
+
+
 def send_email(subject, body):
+    """Returns True if the report was actually emailed, False if it fell
+    back to console printing (so callers don't double-print it)."""
     smtp_key = os.environ.get("BREVO_SMTP_KEY")
     if not SMTP_LOGIN or not smtp_key:
-        print("BREVO_SMTP_LOGIN / BREVO_SMTP_KEY not set — printing report instead of emailing.\n")
-        print(body)
-        return
+        _safe_console_print("BREVO_SMTP_LOGIN / BREVO_SMTP_KEY not set — printing report instead of emailing.\n")
+        _safe_console_print(body)
+        return False
 
     msg = MIMEText(body, "plain", "utf-8")
     msg["Subject"] = subject
@@ -825,7 +850,8 @@ def send_email(subject, body):
         server.starttls(context=context)
         server.login(SMTP_LOGIN, smtp_key)          # auth uses the SMTP relay login
         server.sendmail(EMAIL_FROM, [EMAIL_TO], msg.as_string())  # envelope/From uses the verified sender
-    print(f"Email sent to {EMAIL_TO}")
+    _safe_console_print(f"Email sent to {EMAIL_TO}")
+    return True
 
 
 def main():
@@ -891,8 +917,9 @@ def main():
     subject = f"{status} MIW QB + Notes Health Check — {error_count} issue(s) found" if error_count \
         else "✅ MIW QB + Notes Health Check — all clear"
 
-    send_email(subject, report)
-    print(report)
+    emailed = send_email(subject, report)
+    if emailed:
+        _safe_console_print(report)
 
 
 if __name__ == "__main__":
