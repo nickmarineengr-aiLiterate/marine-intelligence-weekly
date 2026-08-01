@@ -230,6 +230,21 @@ GREP: SKIP
 
 Same convention fix as Entry 18: "Tehran Toll Booth" is correct content we just added, not a wrong phrase to catch resurfacing — SKIP-tagged for the same reason.
 
+### 20. Health-check negation-marker gap — grammatical variants of supersession language ("superseding", active-voice "replaced", "re-enacted as") were missed
+
+While closing out the Rathesh correction session (1 Aug 2026), a full health-check run surfaced ~40 "KNOWN TRAP resurfaced" hits across many QB and notes files for "A.1185(33)", "Merchant Shipping Act, 1958", and "FAL Form 8" — none flagged in this session's own edits. Root cause: `NEGATION_MARKERS` in `qb_health_check.py` only listed exact phrases ("supersedes", "replaced by", "repealed") and missed other grammatical forms of the same correction language actually used in the content — "superseding" (present participle), active-voice "replaced the... Act" (no "by"), and "has already been replaced". Fixed in two passes: (1) added "re-enacted as"/"re-enacted"/"now in force as" variants, which cleared the SQ/QB1_A.html false positive; (2) broadened to word-stem markers ("supersed", "replac", "repeal", "revok", "carried into"/"carried from"/"carried forward into") to catch every grammatical form at once rather than chasing exact phrases — this is safe because a stem hit only *downgrades* a flag to `[REVIEW]`, never suppresses it. This cut hard-error resurfaced-trap flags from ~40 to 15 across the whole repo.
+
+The remaining 15 were individually spot-checked (QB4_A_CheatSheet.html, oralnotes/WA3-LIEN2.html, oralnotes/miw-notes-mgmt-p7/p10/p14/p15.html) by reading the actual surrounding text — every one is correctly-framed content (the supersession/correction marker is present in the same paragraph, just not always inside the checker's simple sentence-boundary window, or the file has multiple mentions in one dense reference table/paragraph where only one mention sits next to the marker). No genuine resurfaced content error was found among them. This residual gap is a sentence-splitter granularity limitation (the checker's own `_split_sentences()` is a "cheap splitter", not linguistically precise, per its own docstring) rather than a marker-vocabulary gap, and is lower priority than the marker-vocabulary fix above — logged here rather than chased further to avoid open-ended regex tuning.
+GREP: SKIP
+
+---
+
+## Meta-corrections to `qb_health_check.py` itself (non-content fixes, logged here for continuity)
+
+- 2026-08-01: Fixed a Windows-console `UnicodeEncodeError` crash in the Brevo-fallback print path when SMTP credentials aren't set locally (was crashing on ⚠/✅ glyphs; also fixed a related bug where the fallback path's temporary `TextIOWrapper` around `sys.stdout.buffer` closed the underlying buffer on garbage collection, breaking all later prints in the same run).
+- 2026-08-01: Fixed the "QB file(s) on disk but missing from manifest" orphan check to exclude `SQ/` — those are public teaser copies intentionally outside the gated `meoclass1/` manifest scope, not orphaned builds.
+- 2026-08-01: Broadened `NEGATION_MARKERS` per Entry 20 above.
+
 ---
 
 ## How to use this file
