@@ -369,6 +369,17 @@ NEGATION_MARKERS = [
     "previously cited", "previous revision", "old error", "the old",
     "corrected from", "corrected to", "incorrectly stated",
     "re-enacted as", "reenacted as", "re-enacted", "now in force as",
+    # Word-stem markers (2026-08-01): substring matches on the stem catch
+    # every grammatical form (supersede/supersedes/superseded/superseding,
+    # replace/replaces/replaced/replacing, repeal/repeals/repealed/repealing)
+    # instead of whack-a-mole exact phrases. Safe to broaden — a hit here
+    # only DOWNGRADES an error to a [REVIEW] note, it never suppresses
+    # visibility, so a slightly loose stem match trades a few over-cautious
+    # reviews for catching real supersession/correction framing that the
+    # exact-phrase list above was missing (e.g. "...superseding A.1185(33)"
+    # and "has already been replaced" were both missed pre-fix).
+    "supersed", "replac", "repeal", "revok", "carried into", "carried from",
+    "carried forward into",
 ]
 
 
