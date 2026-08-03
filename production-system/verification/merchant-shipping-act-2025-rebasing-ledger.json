@@ -1,0 +1,39 @@
+{
+  "schema": "miw.verification.msa2025-rebasing-ledger.v1",
+  "package": "MSA-2025 QB re-basing (first corpus-backed correction package)",
+  "date": "2026-08-03",
+  "corpusEvidence": {
+    "act": "Merchant Shipping Act, 2025 (Act No. 24 of 2025)",
+    "source": "true-source/06-india-law-and-dg-shipping/Merchant-Shipping-Act-2025 (PRS Gazette reproduction, SHA-256 in corpus SOURCE_REGISTER; RQ-32 original-replacement open)",
+    "commencement": "2026-03-15 per S.O. 1244(E) dated 2026-03-10 (verified online 2026-08-03)",
+    "repeal": "s.324(1): MS Act 1958 repealed except Part XIV (s.411A excluded from the saving = repealed; substance re-enacted as s.323); Coasting Vessels Act 1838 repealed. s.324(2)(a): subordinate rules continue until revoked. s.324(2)(c): documents citing repealed enactments construed as citing the 2025 Act.",
+    "boundedExtraction": "full text extracted (118 pp, 393,179 chars) to session scratchpad for section verification only",
+    "coastalShipping": "Coastal Shipping Act, 2025 (Act No. 20 of 2025, assent 2025-08-09) separately repeals/replaces 1958 Part XIV coasting-trade licensing (verified online 2026-08-03; commencement date: verification required — corpus RQ-43)"
+  },
+  "priorFounderPass": "15 Jul 2026 — most QB statutory content already re-based (v1.1/v1.2 card footers); this package corrected residual defects only",
+  "corrections": [
+    {"rebasingId":"RB-001","file":"meoclass1/QB9_D.html","anchor":"q9 (x2 duplicated block)","oldSection":"none ('1958 = current parent Act, 2025 upcoming')","outcome":"SUBSTANCE_RETAINED_CITATION_UPDATED","confidence":"verified","note":"glossary line contradicted the corrected card; footer bumped v1.2"},
+    {"rebasingId":"RB-002","file":"meoclass1/QB9_D.html","anchor":"q6 reg-box","oldSection":"'MS Act Section 76 & 87' (1958 numbering, no Act year)","outcome":"ACT_UPDATED_SECTION_UNVERIFIED","confidence":"high","note":"2025 Part IV, exact sections flagged pending verification"},
+    {"rebasingId":"RB-003","file":"meoclass1/QB9_F.html","anchor":"cabotage card","oldSection":"claim: 1958 s.411A 'excepted from repeal and continues'","outcome":"EXACT_REBASE_VERIFIED","confidence":"verified","note":"LEGAL ERROR REVERSED: s.324 excludes 411A from the Part XIV saving (repealed); substance re-enacted as MS Act 2025 s.323 — verified from Act text"},
+    {"rebasingId":"RB-004","file":"meoclass1/QB9_G.html","anchor":"governing-instrument line","oldSection":"'MS Act 1958 (baseline)'","outcome":"SUBSTANCE_RETAINED_CITATION_UPDATED","confidence":"verified"},
+    {"rebasingId":"RB-005","file":"meoclass1/QB1_I.html","anchor":"q2 reg-box (2 rows) + footer v1.2","oldSection":"1958 Sec 24 / Sec 34 as current","outcome":"ACT_UPDATED_SECTION_UNVERIFIED","confidence":"high","note":"Part III cited; exact 2025 sections flagged"},
+    {"rebasingId":"RB-006","file":"QB2_A, QB3_A(x2), QB3_B(x3), QB3_I, QB4_A(x3), QB1_A — 10 occurrences","anchor":"RO-authorization citations","oldSection":"MS Act 1958 §7(3)/9(1-A) as current legal basis","outcome":"ACT_UPDATED_SECTION_UNVERIFIED + SUBORDINATE_RULE_STILL_APPLICABLE","confidence":"high","note":"re-based to MS Act 2025 RO-delegation powers, 1958 sections kept as 'formerly', continuity via s.324(2)(a) savings; exact 2025 delegation section pending verification"},
+    {"rebasingId":"RB-007","file":"meoclass1/QB4_A.html","anchor":"MLC rules reg-box","oldSection":"MS (Maritime Labour) Rules 2016 'under MS Act 1958 §218A/457'","outcome":"SUBORDINATE_RULE_STILL_APPLICABLE","confidence":"verified","note":"savings clause s.324(2)(a) cited"},
+    {"rebasingId":"RB-008","file":"meoclass1/QB5_B.html","anchor":"ORB liability para","oldSection":"'M.S. Act 1958' as current criminal-liability basis","outcome":"SUBSTANCE_RETAINED_CITATION_UPDATED","confidence":"verified"},
+    {"rebasingId":"RB-009","file":"meoclass1/QB5_B_CheatSheet.html","anchor":"takeover table","oldSection":"MS Act 1958 §77","outcome":"ACT_UPDATED_SECTION_UNVERIFIED","confidence":"high"},
+    {"rebasingId":"RB-010","file":"meoclass1/QB5_A_CheatSheet.html","anchor":"SVG diagram","oldSection":"'MS Act 1958' label","outcome":"SUBSTANCE_RETAINED_CITATION_UPDATED","confidence":"verified"},
+    {"rebasingId":"RB-011","file":"oralnotes/simon-notes-p6.html","anchor":"n8 MS Act structure","oldSection":"1958 structure (18 Parts/460 sections) presented as current","outcome":"SUBSTANCE_RETAINED_CITATION_UPDATED","confidence":"verified","note":"marked historical; 2025 16 Parts/325 sections noted"},
+    {"rebasingId":"RB-012","file":"oralnotes/uday-index-crossref.html","anchor":"index row","oldSection":"'MS ACT 1958' label","outcome":"SUBSTANCE_RETAINED_CITATION_UPDATED","confidence":"verified"}
+  ],
+  "noChangeVerified": [
+    {"file":"QB10_A/QB10_B","note":"already current incl. Coastal Shipping Act 2025 and the §406/407 timing-trap explainer — NO_CHANGE_REQUIRED (July-facing, verified)"},
+    {"file":"QB4_D (MS Act 2025 card), QB9_E, QB9_F (other rows), QB1_A (Part IX rows), QB1_F, QB1_G, QB5_A, QB5_G, QB9_A, QB9_G:213, oralnotes p14/p15/p16, simon-notes-p3","note":"Founder 15-Jul pass verified consistent; 2025 section citations sampled against extracted Act text (s.112 logbook ✓, wreck ch. range ✓, wages range ✓)"}
+  ],
+  "held": [
+    {"id":"HOLD-01","issue":"Exact 2025 sections for: RO delegation, CoC issuance/suspension (1958 76/87), CE takeover (1958 77), registration (1958 24/34)","recommendation":"one bounded text pass against held Act PDF","founderDecision":"pending"},
+    {"id":"HOLD-02","issue":"Coastal Shipping Act 2025 commencement date + text not in corpus","recommendation":"acquire Act 20 of 2025 text (indiacode/PRS) — corpus RQ-43","founderDecision":"pending"},
+    {"id":"HOLD-03","issue":"QB1_A note: 1958 s.159 'no direct restated equivalent' (Founder 15-Jul flag) — legal interpretation","founderDecision":"pending"},
+    {"id":"HOLD-04","issue":"Local working-tree deletions of meoclass1/known_traps.md and qb_content_index.json (unstaged, Founder-side?) — preserved untouched","founderDecision":"confirm intent"}
+  ],
+  "classificationTotals": {"filesInScope":58,"hits1958":243,"correctionsApplied":24,"filesEdited":14,"CORRECT_CURRENT_REFERENCE":"~200 hits (historical/transition framing, verified by pattern + sample)","heldCases":4}
+}
