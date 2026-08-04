@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QB2_I — Fire Safety, LSA &amp; FSS Code | MEO Class 1 Question Bank | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink)}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 20px;display:flex;align-items:center;gap:10px}
+.topbar b{color:var(--teal-dark)}.topbar a{color:var(--grey-text);text-decoration:none;font-size:13px;margin-left:14px}
+.page-header{background:var(--navy);color:#fff;padding:22px 20px}
+.qb-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;letter-spacing:.5px;padding:3px 9px;border-radius:4px;margin-bottom:8px}
+.page-header h1{margin:4px 0;font-size:22px}.page-header p{color:#cbd5e1;font-size:13px;margin:4px 0}
+.header-meta{display:flex;gap:16px;font-size:12px;color:#94a3b8;margin-top:8px;flex-wrap:wrap}
+.controls-bar{position:sticky;top:41px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);padding:8px 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#search-input{flex:1;min-width:160px;padding:6px 10px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;color:var(--grey-text);font-size:12px;padding:5px 10px;border-radius:14px;cursor:pointer}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+#q-count-label{font-size:12px;color:var(--grey-text)}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;padding:20px;max-width:1100px;margin:0 auto}
+.sidebar{position:sticky;top:95px;align-self:start;font-size:12px}
+.sidebar a{display:block;color:var(--grey-text);text-decoration:none;padding:4px 8px;border-radius:4px;margin-bottom:2px}
+.sidebar a.active{background:var(--teal-light);color:var(--teal-dark);font-weight:600}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:18px 0 8px}
+.section-head h2{font-size:15px;margin:0}.sec-count{font-size:11px;color:var(--grey-text);background:var(--grey-bg);padding:2px 8px;border-radius:10px}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;margin-bottom:10px;overflow:hidden}
+.q-header{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;cursor:pointer}
+.q-header:hover{background:var(--grey-bg)}
+.q-num-badge{background:var(--teal);color:#fff;font-size:12px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.q-text-wrap{flex:1;min-width:0}.q-text{font-size:14px;font-weight:600}
+.q-tags{margin-top:5px}.q-tag{display:inline-block;font-size:10px;background:var(--teal-light);color:var(--teal-dark);padding:2px 7px;border-radius:8px;margin-right:5px}
+.q-chevron{width:18px;flex-shrink:0;transition:transform .2s}
+.q-card.open .q-chevron{transform:rotate(180deg)}
+.q-answer{display:none;padding:0 14px 14px}.q-card.open .q-answer{display:block}
+.answer-body{font-family:Georgia,serif;font-size:14.5px;line-height:1.6}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--teal-dark);margin:14px 0 6px;font-family:'Segoe UI',sans-serif}
+.answer-body ul,.answer-body ol{margin:6px 0;padding-left:20px}
+.formula{background:var(--grey-bg);font-family:monospace;padding:8px 10px;border-radius:6px;font-size:13px}
+.reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:12px 14px;margin-top:14px}
+.reg-box-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:8px}
+.reg-item{display:flex;gap:10px;font-size:12.5px;padding:3px 0;border-top:1px solid #1e293b}
+.reg-item:first-of-type{border-top:none}
+.reg-code{color:var(--orange);font-family:monospace;min-width:150px;word-break:break-word}
+.reg-desc{color:#cbd5e1;min-width:0}
+.ce-tip{background:var(--orange-light);border-left:3px solid var(--orange);padding:10px 12px;border-radius:0 6px 6px 0;margin-top:12px;font-size:13px}
+details.dd{margin-top:10px;border:1px solid var(--grey-border);border-radius:6px;padding:6px 10px}
+details.dd summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--teal-dark)}
+details.dd p,details.dd div{font-size:13px;margin:6px 0}
+.q-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;border-top:1px solid var(--grey-border);padding-top:8px;margin-top:10px}
+.correction-btn{background:none;border:1px solid var(--grey-border);color:var(--teal-dark);font-size:11px;padding:4px 10px;border-radius:12px;cursor:pointer}
+.correction-btn:hover{background:var(--teal-light)}
+.q-version{font-size:11px;color:var(--grey-text);flex-shrink:0}
+.page-footer{max-width:1100px;margin:20px auto;padding:16px 20px;border-top:1px solid var(--grey-border);font-size:12px;color:var(--grey-text)}
+.cheat{background:#fff;border:2px dashed var(--teal);border-radius:10px;padding:16px;margin:20px 0}
+.cheat h2{color:var(--teal-dark);font-size:16px;margin-top:0}
+.cheat .flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0}
+.cheat .node{background:var(--teal-light);color:var(--teal-dark);font-size:12px;font-weight:600;padding:6px 10px;border-radius:6px}
+.cheat .arrow{color:var(--teal);font-weight:700}
+.cheat .memcard{background:var(--grey-bg);border-left:3px solid var(--orange);border-radius:0 6px 6px 0;padding:8px 10px;font-size:12.5px;margin:6px 0}
+.cheat table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+.cheat th,.cheat td{border:1px solid var(--grey-border);padding:5px 8px;text-align:left}
+.cheat th{background:var(--navy);color:#fff}
+.comment-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center}
+.comment-overlay.open{display:flex}
+.comment-modal{background:#fff;border-radius:14px;padding:28px;max-width:440px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.comment-modal h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.comment-modal p{font-size:12px;color:var(--grey-text);margin-bottom:18px}
+.comment-modal label{display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.comment-modal select,.comment-modal textarea,.comment-modal input{width:100%;padding:9px 12px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px;font-family:inherit;margin-bottom:12px;outline:none}
+.comment-modal select:focus,.comment-modal textarea:focus,.comment-modal input:focus{border-color:var(--teal)}
+.comment-modal textarea{resize:vertical;min-height:90px}
+.comment-btns{display:flex;gap:10px;justify-content:flex-end}
+.btn-cancel{background:var(--grey-bg);border:1px solid var(--grey-border);color:var(--grey-text);padding:8px 18px;border-radius:6px;font-size:13px;cursor:pointer}
+.btn-submit{background:var(--teal);color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer}
+.btn-submit:hover{background:var(--teal-dark)}
+.comment-success{display:none;text-align:center;padding:20px}
+.comment-success svg{color:var(--teal);margin-bottom:10px}
+.comment-success p{font-size:14px;color:var(--navy);font-weight:600}
+@media(max-width:700px){.main-layout{grid-template-columns:1fr}.sidebar{display:none}}
+body{-webkit-user-select:none;user-select:none}
+</style>
+
+</head><body oncontextmenu="return false"><script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace('/SQ/pay.html');}</script><div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.04;">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wm" x="0" y="0" width="300" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+        <text x="10" y="60" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">marineintelligenceweekly.com</text>
+        <text x="10" y="120" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">MEO CLASS 1 &#8212; CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wm)"/>
+  </svg>
+</div>
+
+<div class="topbar"><b>&#9875; MIW</b> Marine Intelligence Weekly
+<a href="/">Home</a><a href="/meoclass1/">MEO Class 1</a><a href="mailto:contactus@marineintelligenceweekly.com">Contact</a></div>
+<div class="page-header">
+  <span class="qb-badge">QB2_I</span>
+  <h1>QB2_I &#8212; Fire Safety, LSA &amp; FSS Code</h1>
+  <p>MEO Class 1 Oral Exam Question Bank &#8212; Kochi MMD-focused, Examiners: Senthil &amp; Simon, Jul 2026 batch</p>
+  <div class="header-meta"><span>7 Questions</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span><span>v1.0</span><span><a href="QB2_I_CheatSheet.html" style="color:#5eead4">Cheat Sheet &#8594;</a></span></div>
+</div>
+<div class="controls-bar">
+  <input id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag(&#39;all&#39;,this)">All</button><button class="filter-btn" onclick="filterTag(&#39;fire&#39;,this)">Fire</button><button class="filter-btn" onclick="filterTag(&#39;survey&#39;,this)">Surveys</button><button class="filter-btn" onclick="filterTag(&#39;solas&#39;,this)">SOLAS</button>
+  <span id="q-count-label">Showing 7 of 7</span>
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <div style="font-weight:700;font-size:11px;text-transform:uppercase;color:#64748b;margin-bottom:6px">Contents</div>
+    <a class="toc-link" href="#q1">1. CO2 relief valve &amp; line test</a>
+    <a class="toc-link" href="#q2">2. Fire in the CO2 room</a>
+    <a class="toc-link" href="#q3">3. Bursting disc mechanism</a>
+    <a class="toc-link" href="#q4">4. CO2 bottle pressure testing</a>
+    <a class="toc-link" href="#q5">5. Em&#39;cy fire pump failed at survey</a>
+    <a class="toc-link" href="#q6">6. Polar Code latest amendment</a>
+    <a class="toc-link" href="#q7">7. What is the IGC Code?</a>
+    <div style="border-top:1px solid #e2e8f0;margin:10px 0"></div>
+    <div style="font-size:11px;color:#64748b">Cheat sheet: <a href="QB2_I_CheatSheet.html" style="color:#0d9488">QB2_I_CheatSheet</a></div>
+  </div>
+  <div id="q-feed">
+    <div class="section-head"><h2>&#128293; QB2_I &#8212; Fire Safety, LSA &amp; FSS Code</h2><span class="sec-count">7 questions</span></div>
+    <div class="q-card" id="q1" data-tags="fire solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Fixed CO&#8322; fire system — what is the relief valve setting, and how is the line pressure tested?</div>
+      <div class="q-tags"><span class="q-tag">FIRE</span><span class="q-tag">CO2</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">The manifold relief valve protects any section of pipework that can be isolated between valves against trapped-liquid or leaking-cylinder pressure — its exact setting is a <strong>design value on the class-approved system drawings</strong>, not a universal number. Line testing per <strong>MSC.1/Circ.1318/Rev.1</strong>: every <strong>2 years</strong> (cargo-ship survey cycle) blow-through of discharge piping with dry air/nitrogen to prove nozzles clear, and at the <strong>10-year</strong> inspection the discharge pipelines are pressure-tested to the maximum working pressure of the respective sections.</p>
+      <h4>60-Second Answer</h4>
+      <p>The <strong>FSS Code Chapter 5</strong> requires that where any section of CO&#8322; distribution piping can be isolated (e.g. between the cylinder manifold and a closed distribution valve), means are provided to relieve over-pressure — a relief valve or safety disc venting to open deck. This protects against pressure build-up from a leaking cylinder valve into a blocked section, or thermal expansion of trapped liquid CO&#8322;. The <strong>setting is system-specific</strong>: it comes from the maker's class-approved drawings, set above normal cylinder pressure (~<strong>52 bar at 15&#176;C</strong>, and higher in hot climates) but below the design pressure of the manifold section — so in the oral, name the governing document rather than inventing a universal figure. <strong>Line testing:</strong> under MSC.1/Circ.1318/Rev.1, at every intermediate/periodical/renewal survey the discharge piping and nozzles are proven clear by isolating the piping and <strong>blowing dry air or nitrogen</strong> from test cylinders through each section; hoses are replaced at maker intervals not exceeding <strong>10 years</strong>; and at the 10-yearly inspection the discharge pipelines are pressure-tested to the maximum working pressure of the section (flag/class practice, e.g. IRS fixed-fire-fighting annex). Control valves get an internal examination at least every <strong>5 years</strong>.</p>
+      <h4>Governing instrument</h4>
+      <p>SOLAS II-2/10 with FSS Code Ch. 5 (fixed gas fire-extinguishing systems); maintenance and testing per MSC.1/Circ.1318/Rev.1; the relief setting itself is a class-approved design value on the ship's system drawings.</p>
+      <h4>Why the Relief Arrangement Exists</h4>
+      <ul>
+        <li><strong>Trapped liquid:</strong> liquid CO&#8322; isolated in a pipe section expands with temperature — hydraulic lock can burst pipework without a relief path.</li>
+        <li><strong>Leaking cylinder valve:</strong> a passing pilot/cylinder valve slowly pressurises a closed manifold; the relief valve vents this safely to open deck instead of into the CO&#8322; room.</li>
+        <li><strong>Outlet routing:</strong> the relief discharge is led to <strong>open deck</strong>, clear of accommodation and ventilation intakes — the same principle as the cylinder safety-disc vent line.</li>
+      </ul>
+      <h4>Honest Boundary — Ship-Specific Value</h4>
+      <p><em>Relief settings and section design pressures vary by maker and system (e.g. two-valve pilot systems vs. direct release). The pass answer names the source: "set per the class-approved CO&#8322; system drawings and maker's manual for my ship" — then gives the physics of why it exists.</em></p>
+      <h4>Trap point</h4>
+      <p>There is no universal CO&#8322; relief setting — it is a class-approved drawing value; and line tightness is proven with air/N&#8322; test methods, never by releasing CO&#8322; charge.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-2/10.4</span><span class="reg-desc">Fixed gas fire-extinguishing systems — general requirements incl. storage room and release arrangements</span></div>
+      <div class="reg-item"><span class="reg-code">FSS Code Ch.5</span><span class="reg-desc">Fixed gas systems — quantity (30%/35%), 85% release within 2 min for machinery spaces, pressure-relief of isolatable sections</span></div>
+      <div class="reg-item"><span class="reg-code">MSC.1/Circ.1318/Rev.1</span><span class="reg-desc">Maintenance/inspection of fixed CO&#8322; systems (25 May 2021) — blow-through tests, hose renewal ≤10 yr, 5-yearly control-valve internal exam</span></div>
+      <div class="reg-item"><span class="reg-code">MSC.1/Circ.1432</span><span class="reg-desc">Revised guidelines for maintenance and inspection of fire-protection systems and appliances — survey-linked schedule</span></div>
+      <div class="reg-item"><span class="reg-code">Maker's approved drawings</span><span class="reg-desc">The governing document for relief-valve set pressure and section design pressure — ship-specific, class-approved</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Senthil/Simon):</strong> Do not quote a universal relief setting — the examiner is testing whether you know it is a <strong>design value from the approved drawings</strong>. Give the physics (trapped liquid CO&#8322;, leaking cylinder valve), the venting-to-open-deck principle, then the testing regime with its three numbers: blow-through at each survey, hoses ≤<strong>10 yr</strong>, pipelines pressure-tested at <strong>10 yr</strong>. Candidates fail by inventing "the relief valve is set at X bar" for a value they cannot defend.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE owns the CO&#8322; system PMS lines: weekly visual of the room, quarterly level checks (ultrasonic liquid-level gauging in situ), survey-linked blow-throughs with class attendance, hose renewal records and the hydrostatic-test date register per cylinder. Any blow-through is done under a rigorous isolation/PTW regime — accidental release incidents almost always trace to maintenance done with the system not positively secured.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Why not test the line with CO&#8322; itself?" A: Cost, asphyxiation risk and residue — dry air/nitrogen proves the pipes clear safely with the system isolated. Q: "Where does the relief valve discharge?" A: To open deck, clear of openings — never into the protected space or CO&#8322; room. Q: "What pressure is in the cylinders?" A: Saturation pressure of liquid CO&#8322; — ~52 bar at 15&#176;C, rising steeply with temperature; not a "charged" pressure like nitrogen.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Quoting an invented universal relief setting; confusing the manifold relief valve with the cylinder safety (bursting) disc; not knowing the blow-through medium is dry air/N&#8322;; missing the ≤10-yr hose rule and 5-yr control-valve internal exam from Circ.1318/Rev.1.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>CO&#8322; quantity: <strong>35%</strong> of machinery-space gross volume (30% excluding casing); <strong>85% in 2 min</strong> for machinery spaces; cylinder pressure ~<strong>52 bar @ 15&#176;C</strong>; hoses ≤<strong>10 yr</strong>; control valves internal exam ≤<strong>5 yr</strong>; pipeline pressure test at <strong>10 yr</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>UK MCA Safety Bulletin 12 (accidental CO&#8322; releases on two UK merchant vessels) — maintenance without positive isolation caused releases into manned spaces, driving the tightened Circ.1318/Rev.1 regime and in-situ level-gauging practice.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Senthil:</strong> System quantity/discharge requirements → release procedure and interlocks → relief valve purpose/setting source → testing regime and intervals → what if a cylinder leaks in the room (bridging to Q2).</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel: high-pressure cylinder bank protecting engine room, cargo holds (if fitted) and purifier room; two-valve release cabinet with time delay and alarms; PMS lines mirror Circ.1318/Rev.1 intervals; approved drawings in the CO&#8322; room and CE's office define the relief settings for each isolatable section.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB2_I','Q1 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB2_I · Q1 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q2" data-tags="fire solas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Fire in the CO&#8322; room — how do you fight it, and where is the relief valve outlet?</div>
+      <div class="q-tags"><span class="q-tag">FIRE</span><span class="q-tag">CO2</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Fight it from <strong>outside</strong>: raise the alarm, shut ventilation, and apply <strong>boundary cooling with water</strong> — do not enter, because heated cylinders will self-vent through their safety (bursting) discs, whose relief line discharges to <strong>open deck</strong>, and a heat-weakened cylinder can fail violently. The CO&#8322; room is deliberately located with access from open deck and separated from protected spaces (SOLAS II-2/10.4, FSS Code Ch.5) precisely so it can be fought externally.</p>
+      <h4>60-Second Answer</h4>
+      <p>A fire inside the CO&#8322; room is one of the few scenarios where the extinguishing installation is itself the casualty. Actions: <strong>(1)</strong> alarm, muster, inform bridge/master; <strong>(2)</strong> stop ventilation to the room and close its openings; <strong>(3)</strong> <strong>boundary cooling</strong> of the room's bulkheads and, if safely accessible, water spray onto the cylinder bank through the door/vent openings from a protected position — the aim is to keep cylinder metal temperature down; <strong>(4)</strong> do not commit a BA team inside while cylinders are heating: each cylinder carries a <strong>safety disc</strong> that ruptures on over-pressure, and the collective relief piping discharges to <strong>open deck clear of accommodation, muster stations and ventilation intakes</strong> — so expect and account for a massive CO&#8322; cloud at that outlet, and cordon it; <strong>(5)</strong> after the fire, treat the system as unavailable — inform class/flag, quantify remaining cylinders (level gauging), and apply interim fire-safety measures for the now-unprotected spaces. Design context: SOLAS II-2/10.4.3 and FSS Code Ch.5 require the storage room to be used for no other purpose, sited with access preferably from open deck, ventilated, and independent of the protected spaces — the layout assumes external firefighting.</p>
+      <h4>Governing instrument</h4>
+      <p>FSS Code Ch. 5 and SOLAS II-2 (CO&#8322; room arrangement and ventilation); cylinder safety-disc relief lines routed per the approved system drawings; response actions per the ship's fire training manual (SOLAS II-2/15).</p>
+      <h4>Why You Fight It From Outside</h4>
+      <ul>
+        <li><strong>Cylinder over-pressure:</strong> CO&#8322; pressure rises steeply with temperature (above the critical point <strong>31.1&#176;C</strong> the full cylinder behaves near-hydraulically) — discs rupture, and a defective disc path can mean cylinder failure.</li>
+        <li><strong>Asphyxiation:</strong> venting cylinders can flood the room and adjacent areas with CO&#8322; — an entering team faces an oxygen-deficient, zero-visibility space.</li>
+        <li><strong>Missile hazard:</strong> a heat-failed high-pressure cylinder or sheared valve is a projectile.</li>
+      </ul>
+      <h4>Relief Valve / Safety Disc Outlet</h4>
+      <p>Each cylinder's safety disc and the manifold relief valve vent into a common relief line led to <strong>open deck</strong>, terminating clear of openings, intakes and normally-manned areas — know the physical location of this outlet on your own ship and include it in the incident cordon.</p>
+      <h4>Trap point</h4>
+      <p>Entering the CO&#8322; room to fight the fire is the fail — heated cylinders self-vent through their safety discs (relief piped to open deck); the answer is outside boundary cooling with ventilation shut.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-2/10.4.3</span><span class="reg-desc">Storage of fire-extinguishing medium — dedicated room, location and access requirements</span></div>
+      <div class="reg-item"><span class="reg-code">FSS Code Ch.5, 2.1.1</span><span class="reg-desc">Fixed gas systems — storage room requirements, pressure relief of isolatable sections vented safely</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-2/Reg.4 &amp; 9</span><span class="reg-desc">Containment of fire — boundary cooling doctrine and structural fire protection of the room</span></div>
+      <div class="reg-item"><span class="reg-code">MSC.1/Circ.1318/Rev.1</span><span class="reg-desc">Post-incident: system maintenance/verification regime before it can be relied on again</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code Sec.8</span><span class="reg-desc">Emergency preparedness — the drill scenario and contingency procedures covering loss of the fixed system</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Senthil):</strong> The two keywords he is listening for: <strong>boundary cooling from outside</strong> and <strong>relief outlet on open deck</strong>. Say why entry is prohibited — heated cylinders self-venting via bursting discs — and close with the follow-through most candidates miss: the ship has now lost its fixed system, so inform class/flag and set interim measures. The failing answer is "release the CO&#8322;" (into its own room — meaningless) or committing a BA team onto a heating cylinder bank.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE's contingency: know the relief-outlet location, keep the room's boundary-cooling access points identified in the fire plan, ensure the CO&#8322; room appears in drill rotation, and have the "fixed system unavailable" procedure ready — extra patrols, hot-work prohibition, port-authority notification if alongside.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Can you release the system to fight this fire?" A: No — the fire is in the storage room itself; the system protects other spaces. Q: "Cylinders are venting — is the danger over?" A: No — the disc is doing its job, but the escaping CO&#8322; is an asphyxiant and remaining heated cylinders are still a failure risk; maintain cordon and cooling. Q: "Ship's fixed system is now empty — can you sail?" A: Only with flag/class agreement — the system is a statutory requirement (Safety Equipment Certificate); expect conditions/dispensation with interim measures.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Proposing to enter with BA immediately; not knowing where the relief line discharges; forgetting the room's ventilation must be stopped; no post-fire statutory follow-up (class, certificate impact, interim measures).</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>CO&#8322; critical temperature <strong>31.1&#176;C</strong>; cylinder pressure ~<strong>52 bar @ 15&#176;C</strong> rising steeply when heated; room requirements: dedicated use, open-deck access preferred, independent ventilation — SOLAS <strong>II-2/10.4.3</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Multiple flag-state accidental-release investigations (e.g. UK MCA Safety Bulletin 12) show CO&#8322; escaping into occupied spaces kills without fire — the same asphyxiation mechanics that make entering a venting CO&#8322; room during a fire indefensible.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Senthil:</strong> Fire in CO&#8322; room → why not enter → where does the relief vent → what have you lost (fixed protection) → who do you inform → interim measures → drill requirements for this scenario.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel: CO&#8322; room on upper deck level with direct external access; relief line outlet on the open deck above, marked on the fire plan; boundary-cooling positions from the adjacent deck; contingency procedure in the SMS emergency manual covers loss of fixed fire-extinguishing capability.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB2_I','Q2 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB2_I · Q2 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q3" data-tags="fire">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Bursting disc — how does it burst?</div>
+      <div class="q-tags"><span class="q-tag">FIRE</span><span class="q-tag">MACHINERY</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">A bursting (rupture) disc is a thin, precisely manufactured metal membrane — often pre-scored or domed — clamped across the pressure path. It bursts by <strong>mechanical failure of the membrane itself</strong>: when the pressure differential across it exceeds its rated burst pressure at the operating temperature, the material's stress passes its ultimate strength and the disc tears open along the score lines (or reverses and shears, in reverse-acting types), giving instant, full-bore, non-reclosing relief.</p>
+      <h4>60-Second Answer</h4>
+      <p>Unlike a spring-loaded relief valve, a bursting disc is a <strong>one-shot, sacrificial</strong> device. The disc is a calibrated diaphragm (nickel, stainless steel, Inconel or graphite) whose thickness, dome shape and scoring are manufactured so that it fails at a certified burst pressure ±tolerance at a stated temperature. <strong>Forward-acting (tension) discs:</strong> pressure loads the concave side; membrane stress rises with pressure until the material yields and tears — score lines control the opening into petals that fold back cleanly without fragmenting. <strong>Reverse-acting (buckling) discs:</strong> pressure loads the convex side; at the set pressure the dome snaps through (buckles) and is cut open by a knife ring or its own score pattern — these give tighter tolerance and better fatigue life under pulsating pressure. Because burst pressure is temperature-dependent (material strength falls when hot), the disc is rated for its service temperature — critical on a CO&#8322; cylinder, where the disc's real job is <strong>over-temperature protection</strong>: heating the cylinder raises the CO&#8322; pressure until the disc bursts and vents the charge through the relief line to open deck, instead of the cylinder failing. Once burst, the disc must be <strong>replaced</strong> — it cannot reseat.</p>
+      <h4>Governing instrument</h4>
+      <p>FSS Code Ch. 5 cylinder overpressure protection; disc characteristics per the manufacturer's rating to pressure-equipment standards (ISO 4126-2 family); installed values per the class-approved drawings.</p>
+      <h4>Where You Meet Them Onboard</h4>
+      <ul>
+        <li><strong>CO&#8322; cylinder safety caps</strong> — over-temperature/over-pressure protection, venting to the common relief line.</li>
+        <li><strong>Main engine crankcase explosion relief valves</strong> — <em>note: these are spring-loaded self-closing valves per IACS UR M9/SOLAS, not bursting discs — a classic confusion.</em></li>
+        <li><strong>Starting-air line bursting caps</strong> — relief of a starting-air-line explosion on some designs.</li>
+        <li><strong>Boiler/economiser and thermal-oil systems, refrigeration plants</strong> — where instant full-bore relief or isolation of a relief valve from corrosive media is needed (disc fitted below a relief valve).</li>
+      </ul>
+      <h4>Key Characteristics vs Relief Valve</h4>
+      <ul>
+        <li><strong>Non-reclosing</strong> — total loss of contents; system down until disc renewed.</li>
+        <li><strong>Instant full-bore opening</strong> — better for explosion/rapid-transient relief.</li>
+        <li><strong>No moving parts, perfect tightness</strong> until burst — no simmer, no leakage.</li>
+        <li><strong>Rated at temperature</strong> — the marked burst pressure applies at the stamped temperature; hotter means lower actual burst pressure for metal discs.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>A bursting disc is single-use and non-reclosing — confusing it with a reseating relief valve (or assuming it can be 'set' like one) is the standard trap.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">FSS Code Ch.5</span><span class="reg-desc">Fixed gas systems — over-pressure protection of cylinders and isolatable sections</span></div>
+      <div class="reg-item"><span class="reg-code">ISO 4126-2</span><span class="reg-desc">Safety devices for protection against excessive pressure — Part 2: Bursting disc safety devices</span></div>
+      <div class="reg-item"><span class="reg-code">IACS UR M9 / SOLAS II-1/27</span><span class="reg-desc">Crankcase explosion relief — spring-loaded self-closing valves (the contrast case, not discs)</span></div>
+      <div class="reg-item"><span class="reg-code">Class rules (Pressure vessels)</span><span class="reg-desc">Acceptance of bursting discs as pressure-relief devices, sizing and marking requirements</span></div>
+      <div class="reg-item"><span class="reg-code">Maker's certificate</span><span class="reg-desc">Each disc carries a certified burst pressure ± tolerance at rated temperature — the governing figure for the fitted disc</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Senthil/Simon):</strong> Answer the mechanism, not just the purpose: "membrane stress exceeds ultimate strength at the rated pressure/temperature → tears along the score lines / snap-buckles onto the knife ring." Distinguish forward-acting from reverse-acting if pushed. Two traps: claiming crankcase relief doors are bursting discs (they are spring-loaded, self-closing) and forgetting the disc's burst pressure is temperature-rated — on a CO&#8322; cylinder it is fundamentally an over-temperature protection.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Discs are PMS items with certificates: verify the stamped burst pressure/temperature against the approved drawing when renewing, never refit a burst or dented disc, and after any disc operation investigate the cause (why did pressure/temperature rise?) before restoring the system.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Can a bursting disc reseat after operating?" A: No — non-reclosing; replace it. Q: "Why fit a disc under a relief valve?" A: To isolate the valve from corrosive/fouling media and guarantee zero leakage in normal service; the valve then controls the relief after the disc opens. Q: "What happens to a metal disc's burst pressure when hot?" A: It falls — material strength drops with temperature; discs are rated at a stated temperature.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Describing only "it bursts at high pressure" with no material-failure mechanism; confusing discs with spring-loaded relief valves or crankcase relief doors; ignoring temperature dependence; not knowing discs fragment-free by design (scored petals).</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>ISO <strong>4126-2</strong>; CO&#8322; cylinder pressure ~<strong>52 bar @ 15&#176;C</strong>, rising steeply above critical <strong>31.1&#176;C</strong> — the temperature-pressure ramp that operates the cylinder disc; disc burst tolerance typically stated as ±% on the certificate — quote the certificate, not a universal number.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Starting-air line explosions (historic casualties from leaking air-start valves igniting oil films) are the design driver for bursting caps/relief devices on air-start manifolds — instant full-bore relief where a spring valve is too slow.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Senthil:</strong> How does it burst → forward vs reverse acting → disc vs relief valve → where used onboard → what do you check when renewing → crankcase relief (the contrast trap).</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel: CO&#8322; cylinder safety caps (disc type per maker), discs in the refrigeration plant relief arrangement, bursting caps on ME starting-air branch pipes per the engine maker's design — each with certificates filed against the PMS renewal job.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB2_I','Q3 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB2_I · Q3 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q4" data-tags="fire survey">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">4</div>
+    <div class="q-text-wrap">
+      <div class="q-text">CO&#8322; bottle pressure testing — what is the regime?</div>
+      <div class="q-tags"><span class="q-tag">FIRE</span><span class="q-tag">SURVEYS</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Per <strong>MSC.1/Circ.1318/Rev.1</strong> (25 May 2021): high-pressure CO&#8322; cylinders are periodically tested at intervals <strong>not exceeding 10 years</strong> — at the 10-year inspection at least <strong>10%</strong> get internal inspection and hydrostatic test (one failure → <strong>50%</strong>; further failures → <strong>100%</strong>) — and <strong>before the 20-year anniversary, and every 10 years thereafter, ALL cylinders</strong> are hydrostatically tested. Test standard: <strong>ISO 18119:2018</strong>; test pressure per the cylinder's stamped marking.</p>
+      <h4>60-Second Answer</h4>
+      <p>The governing document is <strong>MSC.1/Circ.1318/Rev.1</strong>, which revised the 2009 guidelines specifically to clarify the hydrostatic-testing regime and align it with MSC.1/Circ.1432. The regime: <strong>(1) every survey</strong> (intermediate/periodical/renewal for cargo ships; biennially for passenger ships) — visual inspection of all cylinders for damage/corrosion/loose mounting, check of hydrostatic-test dates, level verification of contents; <strong>(2) 10-year anniversary</strong> — internal inspection + hydrostatic test of at least <strong>10%</strong> of the cylinders, with the sampling escalation 10% → 50% → 100% on failures, and different cylinders selected at the next cycle; <strong>(3) 20-year anniversary and every 10 years after</strong> — <strong>100% of cylinders</strong> hydro-tested; <strong>(4)</strong> flexible discharge hoses renewed at maker intervals, <strong>not exceeding 10 years</strong>. The test itself follows <strong>ISO 18119:2018</strong> (periodic inspection and testing of seamless steel cylinders) at the test pressure stamped on the cylinder neck — a cylinder-marking value, not a single universal figure. When cylinders are landed for test, the remaining quantity must still satisfy FSS Code Ch.5 §2.2.1 (SOLAS II-2/14.2 allows the arrangement to be agreed) — so testing is staged, or replacement cylinders arranged. Contents are checked without discharge, typically by <strong>ultrasonic liquid-level gauging</strong>; a cylinder more than <strong>10% short</strong> of charge is refilled or replaced.</p>
+      <h4>Governing instrument</h4>
+      <p>MSC.1/Circ.1318/Rev.1 (25 May 2021) — maintenance and inspection of fixed CO&#8322; systems: the 10-year hydrostatic regime with 10% &rarr; 50% &rarr; 100% escalation — as implemented by flag and class instructions.</p>
+      <h4>The Regime at a Glance</h4>
+      <ul>
+        <li><strong>Every survey:</strong> visual + dates + contents check (all cylinders).</li>
+        <li><strong>10 yr:</strong> ≥10% internal + hydro (escalate 50% → 100% on failures; rotate the sample).</li>
+        <li><strong>Before 20 yr, then every 10 yr:</strong> 100% hydro.</li>
+        <li><strong>Hoses:</strong> ≤10 yr renewal. <strong>Control valves:</strong> internal exam ≤5 yr.</li>
+        <li><strong>Standard:</strong> ISO 18119:2018; flag interpretations vary slightly (e.g. Indian flag requires overdue ships to test at next scheduled dry-docking) — check your flag's circular.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Mixing the hydrostatic regime with routine content checks — Circ.1318/Rev.1's 10-year/10%&rarr;50%&rarr;100% testing is distinct from periodic level/weight verification (refill at 10% loss).</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MSC.1/Circ.1318/Rev.1</span><span class="reg-desc">Maintenance and inspection of fixed CO&#8322; systems (25 May 2021) — the 10%/50%/100% and 20-year rules</span></div>
+      <div class="reg-item"><span class="reg-code">MSC.1/Circ.1432</span><span class="reg-desc">Revised maintenance/inspection guidelines for fire-protection systems — the survey-linked framework Circ.1318/Rev.1 aligns with</span></div>
+      <div class="reg-item"><span class="reg-code">ISO 18119:2018</span><span class="reg-desc">Periodic inspection and testing of seamless steel and aluminium-alloy gas cylinders — the referenced test standard</span></div>
+      <div class="reg-item"><span class="reg-code">FSS Code Ch.5 §2.2.1</span><span class="reg-desc">Required quantity of medium — must remain satisfied while cylinders are ashore for testing (SOLAS II-2/14.2)</span></div>
+      <div class="reg-item"><span class="reg-code">Flag circulars (e.g. DGS/DGMA, MPA)</span><span class="reg-desc">National implementation details and deadlines for the Rev.1 regime — verify your flag's current circular</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Senthil):</strong> The examiner wants the escalation sequence verbatim: "<strong>10 years — at least 10%; a failure — 50%; further failures — all; before 20 years — all, then every 10</strong>." Add the practical pair most candidates miss: coverage must be maintained while cylinders are ashore (FSS Ch.5 quantity), and contents are checked in situ by ultrasonic level gauging. The stale answer quoting the pre-2021 position without the Rev.1 20-year 100% rule marks you as out of date.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE keeps the cylinder register: serial numbers, stamp dates, last-hydro dates, sample rotation history (Rev.1 expects different cylinders each cycle unless 100% were done), hose renewal dates and level-gauging records — the exact file a class surveyor and PSC officer will ask to see against the Safety Equipment Certificate.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Test pressure of a CO&#8322; cylinder?" A: The value stamped on the cylinder per its manufacturing standard — quote the marking, not a universal number. Q: "How do you check contents without discharging?" A: Ultrasonic liquid-level gauge (or weighing where practical); &gt;10% loss → refill/replace. Q: "Ship trades with cylinders overdue — consequence?" A: Statutory deficiency against the fixed system; flag interpretations (e.g. Indian flag: test at next dry-docking for ships joining the flag) and possible PSC detention if the system's reliability is not demonstrable.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Quoting only "10-yearly hydro" without the sampling escalation and the 20-year 100% rule; forgetting hose renewal ≤10 yr and 5-yearly control-valve internal exam; no answer for maintaining coverage during testing; inventing a universal test pressure.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p><strong>10 yr / ≥10% → 50% → 100%</strong>; <strong>20 yr: 100%</strong>, then every <strong>10 yr</strong>; hoses ≤<strong>10 yr</strong>; control valves ≤<strong>5 yr</strong>; content shortfall limit <strong>10%</strong>; standard <strong>ISO 18119:2018</strong>; circular date <strong>25 May 2021</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>The Rev.1 tightening followed accidental-release and system-failure experience (UK MCA Safety Bulletin 12 among others) — corroded, untested cylinders and perished hoses were recurring findings behind both failures-to-discharge and uncontrolled releases.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Senthil:</strong> Testing intervals → sampling escalation → who does it (shore facility, certificates) → maintaining coverage meanwhile → contents checking → hose/control-valve intervals → link back to survey type where each check falls due.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel: cylinder register in the PMS with stamp/hydro dates per serial; testing staged through dry-dock windows with class attendance; ultrasonic level checks annually by shore service with certificates filed; hose renewals tracked as dated PMS jobs.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB2_I','Q4 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB2_I · Q4 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q5" data-tags="fire survey ism">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">5</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What actions do you take if the emergency fire pump is not working during a Class survey?</div>
+      <div class="q-tags"><span class="q-tag">FIRE</span><span class="q-tag">SURVEYS</span><span class="q-tag">ISM</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Be transparent with the surveyor — never conceal it. Troubleshoot immediately (prime/suction loss, starting system, discharge valve line-up are the usual suspects) and rectify if possible during the survey. If it cannot be rectified, the surveyor will record it — typically a <strong>condition of class / statutory deficiency with a time limit</strong> — and I raise an <strong>SMS non-conformity</strong>, apply risk-assessed interim fire-safety measures, inform the company and flag, and arrange repair with re-survey. The pump is a statutory item: <strong>SOLAS II-2/10.2</strong> and <strong>FSS Code Ch.12</strong> (≥40% of total required fire-pump capacity, minimum <strong>25 m³/h</strong>, fully independent of the engine room).</p>
+      <h4>60-Second Answer</h4>
+      <p><strong>Immediate technical actions:</strong> attempt a systematic restart in front of the surveyor — check the prime (the classic failure: loss of suction/priming on a high-mounted pump; verify the priming unit, foot valve/suction line air-tightness), starting arrangement (battery/hydraulic/compressed-air starter of the independent diesel drive, or emergency generator supply if motor-driven), fuel (dedicated tank level), sea suction valve open, and discharge line-up to the main correct. Many "failed" demonstrations are line-up or priming errors and are recoverable within the survey. <strong>If genuinely defective:</strong> tell the surveyor plainly and show your troubleshooting — credibility with class matters. The surveyor's options: allow rectification during the survey; or impose a <strong>condition/recommendation of class</strong> and statutory deficiency with a completion window, potentially with operational restrictions, since the emergency fire pump is required by the Safety Equipment Certificate. <strong>Management actions (what the examiner is really testing):</strong> raise an SMS <strong>non-conformity</strong> with root-cause analysis; risk assessment and interim measures — continuous availability of main/other fire pumps, restricted hot work, additional fire patrols, port authority notification if alongside; inform the <strong>company (DPA)</strong> and, through class, the <strong>flag</strong>; order spares/shore assistance; close out with repair, test in the surveyor's presence, and deletion of the condition. <strong>Requirements to quote:</strong> FSS Code Ch.12 — capacity not less than <strong>40%</strong> of the total fire-pump capacity required by SOLAS II-2/10.2 and in any case not less than <strong>25 m³/h</strong>, two jets of water, self-priming or with an approved priming arrangement, situated with its sea suction, power source and fuel outside the space containing the main fire pumps.</p>
+      <h4>Governing instrument</h4>
+      <p>SOLAS II-2/10.2 (fire pumps including the emergency fire pump) and FSS Code Ch. 12; the statutory/class survey regime under SOLAS Ch. I, with deficiency handling through the society's Condition-of-Class machinery.</p>
+      <h4>Likely Failure Causes — the Diagnostic Sequence</h4>
+      <ol>
+        <li><strong>Priming/suction:</strong> lost prime, leaking suction glands/joints, choked strainer or foot valve — commonest cause on high-located pumps.</li>
+        <li><strong>Starting:</strong> flat battery / low hydraulic accumulator or air pressure on the independent prime mover; emergency switchboard supply faults on motor-driven units.</li>
+        <li><strong>Driver:</strong> diesel fuel (dedicated tank), cooling, governor; motor overload trips.</li>
+        <li><strong>Hydraulic path:</strong> discharge/isolating valve line-up, relief bypassing, worn wear rings giving pressure but no flow.</li>
+      </ol>
+      <h4>Trap point</h4>
+      <p>Concealing the defect from the surveyor is the fail — declare it, troubleshoot transparently, and accept the Condition-of-Class route if not immediately rectifiable; the ship does not automatically lose class.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-2/10.2</span><span class="reg-desc">Water supplies, fire mains and pumps — the requirement the emergency pump backs up</span></div>
+      <div class="reg-item"><span class="reg-code">FSS Code Ch.12</span><span class="reg-desc">Fixed emergency fire pump — ≥40% of required total capacity, ≥25 m³/h, independent location, power, fuel and sea suction</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code Sec.9 &amp; 10</span><span class="reg-desc">Non-conformity reporting/analysis and maintenance of ship and equipment — the SMS actions</span></div>
+      <div class="reg-item"><span class="reg-code">IMO Res. A.1207(34)</span><span class="reg-desc">Survey Guidelines under the HSSC, 2025 (current — supersedes A.1186(33)/2023 and A.1140(31)/2019) — the statutory survey context in which the defect is recorded</span></div>
+      <div class="reg-item"><span class="reg-code">Class Rules (e.g. IRS/DNV survey regs)</span><span class="reg-desc">Conditions/recommendations of class — imposition, time limits and deletion on rectification</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Senthil):</strong> Structure as <strong>Technical → Class → SMS</strong>. Start with honest disclosure and the priming check (say "prime" early — it is the expected first diagnosis), quote FSS Ch.12's two numbers (<strong>40% / 25 m³/h</strong>), then show management maturity: non-conformity, risk-assessed interim measures, DPA informed, re-test with surveyor. The instant-fail answers: hiding the defect from the surveyor, or having no interim-measures plan for a ship whose emergency fire pump is dead.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Pre-survey, the CE runs the emergency fire pump on load (two jets, pressure at the most remote hydrant) — not just a start check. The recurring institutional failure is testing it unloaded monthly and discovering at survey it cannot hold prime under real suction lift.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Surveyor is not aboard yet — do you still report it?" A: Yes — concealment discovered later is far worse for ship and CE; SMS requires the non-conformity regardless. Q: "Can the ship sail with the pump defective?" A: Only within whatever condition/dispensation class/flag impose, with documented interim measures — not on the CE's own authority. Q: "Why must its services be outside the engine room?" A: It exists for the scenario where the main space (and its pumps/power) is lost to fire — sea suction, prime mover, fuel and location must all be independent.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Jumping to "inform class" without any troubleshooting sequence; not knowing the 40%/25 m³/h figures; treating it purely as a technical fault with no SMS non-conformity or interim measures; suggesting concealment or "test it later".</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>FSS Ch.12: ≥<strong>40%</strong> of required total fire-pump capacity, ≥<strong>25 m³/h</strong>, <strong>two jets</strong>; independence: location, power, fuel, sea suction all outside the main machinery space; condition-of-class completion windows are set by the surveyor — quote "time-limited", not an invented universal figure.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Engine-room fire casualties repeatedly show total loss of main fire pumps with the space — the emergency pump's independence requirements exist because of exactly those fires; PSC detention statistics consistently rank inoperative emergency fire pumps among the most common detainable deficiencies.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Senthil:</strong> Pump won't start at survey → your actions → requirements/capacity → why independent → condition of class: what is it → SMS non-conformity flow → interim measures → who deletes the condition and how.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel: emergency fire pump in the bow thruster/forward compartment with its own sea chest and emergency switchboard supply; weekly start and monthly on-load test to the foredeck hydrants recorded in the PMS; priming unit condition is a standing internal-audit check item.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB2_I','Q5 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB2_I · Q5 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q6" data-tags="solas survey">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">6</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Polar Code — what is the latest amendment, and what is its CE relevance?</div>
+      <div class="q-tags"><span class="q-tag">SOLAS</span><span class="q-tag">POLAR</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">The latest amendment is <strong>Resolution MSC.538(107)</strong> (adopted 8 June 2023, in force <strong>1 January 2026</strong>): it inserts new chapters <strong>9-1 (safety of navigation)</strong> and <strong>11-1 (voyage planning)</strong> into Part I-A, extending mandatory navigation and voyage-planning requirements to <strong>non-SOLAS ships</strong> — fishing vessels ≥<strong>24 m</strong>, pleasure yachts ≥<strong>300 GT</strong>, and cargo ships <strong>300–&lt;500 GT</strong> — together with the parallel SOLAS Chapter XIV amendments (MSC.532(107)). Existing such ships have until <strong>1 January 2027</strong> to comply.</p>
+      <h4>60-Second Answer</h4>
+      <p>The Polar Code (in force <strong>1 January 2017</strong> via SOLAS Ch. XIV and MARPOL amendments) sets safety (Part I) and pollution-prevention (Part II) requirements for ships in Arctic/Antarctic waters. The latest amendment package, <strong>MSC.538(107)</strong> with the companion SOLAS XIV amendment MSC.532(107), entered into force <strong>1 January 2026</strong>. Its substance: new chapters <strong>9-1</strong> and <strong>11-1</strong> in Part I-A applying safety-of-navigation and voyage-planning measures to previously-exempt non-SOLAS categories, plus tightened navigation-equipment provisions — e.g. ice-strengthened ships built on/after 1 Jan 2026 need <strong>two independent echo-sounders</strong> (or one with two independent transducers); ships ≥500 GT need <strong>two independent non-magnetic heading devices</strong> on main and emergency power; ships going above <strong>80&#176; latitude</strong> need a GNSS-independent position input; and Category A/B ships built on/after 1 Jan 2026 need <strong>enclosed bridge wings</strong>. <strong>CE relevance:</strong> although navigation-focused, the machinery consequences are the CE's: emergency-power reliability feeding the duplicated navigation equipment, low-temperature operability of machinery and fuel/hydraulic/cooling systems per the ship's <strong>Polar Ship Certificate</strong> and <strong>Polar Water Operational Manual (PWOM)</strong> — the PWOM's machinery chapters (heating, sea-water suction ice protection, materials at Polar Service Temperature) are CE-owned documents at survey.</p>
+      <h4>Governing instrument</h4>
+      <p>Polar Code, mandatory via SOLAS Ch. XIV; latest amendment Res. MSC.538(107) (adopted 8 Jun 2023, in force 1 Jan 2026) inserting chapters 9-1 and 11-1 into Part I-A.</p>
+      <h4>Amendment Chain — Say It in Order</h4>
+      <ul>
+        <li><strong>MSC.385(94)/MEPC.264(68):</strong> Polar Code adopted; in force <strong>1 Jan 2017</strong>.</li>
+        <li><strong>MSC.538(107) + MSC.532(107) (SOLAS XIV):</strong> in force <strong>1 Jan 2026</strong> — non-SOLAS extension (Ch. 9-1/11-1) + navigation equipment upgrades; grace to <strong>1 Jan 2027</strong> for existing ships in the new categories.</li>
+        <li><strong>Also 1 Jan 2026 (context):</strong> the same amendment wave brought SOLAS II-1/3-13 lifting appliances, FSS MSC.555(108), LSA MSC.535/554 — useful to show currency if the examiner broadens the question.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Quoting the base Polar Code without the amendment is the stale answer — MSC.538(107) (chapters 9-1 and 11-1) applies from 1 Jan 2026, including to some non-SOLAS craft.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IMO Res. MSC.538(107)</span><span class="reg-desc">Polar Code amendments — Ch. 9-1 &amp; 11-1, navigation equipment; adopted 8 Jun 2023, EIF 1 Jan 2026</span></div>
+      <div class="reg-item"><span class="reg-code">IMO Res. MSC.532(107)</span><span class="reg-desc">SOLAS Ch. XIV amendments applying the Code's new provisions to the additional ship categories</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS Ch. XIV</span><span class="reg-desc">Safety measures for ships operating in polar waters — makes Polar Code Part I-A mandatory</span></div>
+      <div class="reg-item"><span class="reg-code">Polar Code Part I-A Ch.2</span><span class="reg-desc">PWOM — the operational manual (machinery chapters CE-owned); Polar Ship Certificate categories A/B/C</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL I/II/IV/V (Polar)</span><span class="reg-desc">Part II-A environmental provisions — zero oil/noxious discharge in polar waters</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon/Nair):</strong> Name the resolution number and both dates first — <strong>MSC.538(107), in force 1 January 2026, grace to 1 January 2027</strong> — then the one-line substance: navigation/voyage-planning extended to non-SOLAS ships (fishing ≥24 m, yachts ≥300 GT, cargo 300–500 GT). Then pivot to CE ground unprompted: PWOM machinery chapters, Polar Service Temperature, emergency power behind the duplicated nav equipment. The dated answer describing only the 2017 baseline with no 2026 amendment fails the "latest amendment" question outright.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>For a polar-trading ship the CE demonstrates at survey: machinery and EER equipment functional at the Polar Service Temperature, sea-inlet/cooling ice protection, fuel-oil heating and viscosity management in extreme cold, hydraulic oils rated for PST, and the emergency source of power supporting the (now expanded) navigation fit — all documented in the PWOM against the Polar Ship Certificate.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Does MSC.538(107) apply to your container ship?" A: The new Ch. 9-1/11-1 target the additional non-SOLAS categories — a SOLAS cargo ship ≥500 GT was already fully covered by the Code; the 2026 navigation-equipment provisions bite by construction date and operation area. Q: "What are the Polar ship categories?" A: A (at least medium first-year ice), B (at least thin first-year ice), C (open water/lesser ice). Q: "Is the Polar Code only about safety?" A: No — Part II amends MARPOL: effectively zero discharge of oil/NLS in polar waters, stricter garbage/sewage rules.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Answering with the 2017 entry-into-force as "the latest"; not knowing the resolution number or the 2027 grace date; unable to name one concrete new requirement (echo-sounders, non-magnetic heading, &gt;80&#176; GNSS-independent fix, enclosed bridge wings); no machinery/PWOM angle when asked for CE relevance.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p><strong>MSC.538(107)</strong> — EIF <strong>1 Jan 2026</strong>, grace <strong>1 Jan 2027</strong>; new scope: fishing ≥<strong>24 m</strong>, yachts ≥<strong>300 GT</strong>, cargo <strong>300–&lt;500 GT</strong>; &gt;<strong>80&#176;</strong> latitude GNSS-independent position; Code baseline EIF <strong>1 Jan 2017</strong>; categories <strong>A/B/C</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p><strong>Explorer (2007)</strong> — the cruise ship sunk by ice in the Antarctic; the loss demonstrated that conventional SOLAS ships were not fit for polar hazards and directly accelerated the mandatory Polar Code's development.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Nair/Simon:</strong> Latest Polar amendment → what changed and for whom → categories A/B/C → PWOM contents → machinery at PST → MARPOL polar discharge rules → STCW polar training (Reg. V/4).</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container tonnage does not routinely trade polar waters, so no Polar Ship Certificate is held — the CE relevance is exam-level currency plus the transferable engineering: cold-weather precautions (sea-chest steam clearing, fuel heating, hydraulic oil selection) applied on winter North-Pacific/North-Atlantic routings.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB2_I','Q6 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB2_I · Q6 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q7" data-tags="solas fire">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">7</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is the IGC Code?</div>
+      <div class="q-tags"><span class="q-tag">SOLAS</span><span class="q-tag">GAS CARRIER</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">The <strong>International Code for the Construction and Equipment of Ships Carrying Liquefied Gases in Bulk</strong> — mandatory under <strong>SOLAS Chapter VII</strong> for gas carriers built on/after 1 July 1986. It sets design/construction/equipment standards (survival capability, cargo containment tank types, materials, vent systems, fire protection) for carrying liquefied gases such as LNG and LPG, evidenced by an <strong>International Certificate of Fitness</strong>. The current comprehensive edition is the <strong>MSC.370(93)</strong> rewrite (in force 1 July 2016), amended since — most recently <strong>MSC.523(106)</strong> (high-manganese austenitic steel, in force 1 Jan 2026) and <strong>MSC.566(109)</strong> (in force 1 Jul 2026).</p>
+      <h4>60-Second Answer</h4>
+      <p>The IGC Code is the mandatory international standard for gas carriers, made compulsory by <strong>SOLAS VII/11–13</strong>. Its goal: minimise risk to ship, crew and environment from cargoes that are flammable, toxic, asphyxiant, reactive or cryogenic. Structure highlights: <strong>Ch.2</strong> survival capability and cargo-tank location (damage stability by ship type 1G/2G/2PG/3G — the more hazardous the cargo, the more severe the assumed damage and the further inboard the tanks); <strong>Ch.4</strong> cargo containment — independent tanks <strong>Type A</strong> (prismatic, full secondary barrier), <strong>Type B</strong> (e.g. Moss sphere, partial secondary barrier justified by crack-propagation analysis), <strong>Type C</strong> (pressure vessels, no secondary barrier), plus membrane tanks (full secondary barrier); <strong>Ch.5–6</strong> process pressure vessels, piping and cryogenic materials; <strong>Ch.8</strong> vent/relief systems; <strong>Ch.11</strong> fire protection (water spray, dry chemical powder); <strong>Ch.13–17</strong> instrumentation, gas detection, personnel protection; <strong>Ch.16</strong> use of cargo as fuel; <strong>Ch.19</strong> the product table. Certification: <strong>International Certificate of Fitness for the Carriage of Liquefied Gases in Bulk</strong>. Amendment chain after the 2016 rewrite (MSC.370(93)): <strong>MSC.411(97)</strong> in force 1 Jul 2018, <strong>MSC.441/447(99)</strong> in force 1 Jan 2020 (Certificate of Fitness forms), <strong>MSC.523(106)</strong> in force 1 Jan 2026 (Table 6.3 — high-manganese austenitic steel for cryogenic service, mirrored in the IGF Code by MSC.524(106)), and <strong>MSC.566(109)</strong> in force 1 Jul 2026. Ships built before 1986 follow the non-mandatory GC/eGC Codes.</p>
+      <h4>Governing instrument</h4>
+      <p>IGC Code, mandatory under SOLAS Ch. VII Part C for gas carriers built on/after 1 Jul 1986 — current text Res. MSC.370(93) with the amendment chain to MSC.566(109); gas as fuel on other ships is the IGF Code (SOLAS II-1 Part G).</p>
+      <h4>Do Not Confuse</h4>
+      <ul>
+        <li><strong>IGC Code</strong> — ships <em>carrying</em> liquefied gas as cargo (gas carriers).</li>
+        <li><strong>IGF Code</strong> — ships <em>using</em> gas/low-flashpoint fuels (e.g. LNG-fuelled container ships) — SOLAS II-1 Part G.</li>
+        <li><strong>IP Code</strong> — Industrial Personnel (SOLAS Ch. XV, MSC.527(106)) — an entirely different code despite the similar acronym.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>IGC governs carriage of liquefied gas cargo; gas as fuel on other ship types is the IGF Code — applying IGC to a gas-fuelled container ship is the trap.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS VII, Part C</span><span class="reg-desc">Makes the IGC Code mandatory for ships carrying liquefied gases in bulk (constructed on/after 1 Jul 1986)</span></div>
+      <div class="reg-item"><span class="reg-code">IMO Res. MSC.370(93)</span><span class="reg-desc">Complete rewrite of the IGC Code — in force 1 Jul 2016 (ships constructed on/after that date)</span></div>
+      <div class="reg-item"><span class="reg-code">MSC.411(97) / MSC.441-447(99)</span><span class="reg-desc">Subsequent amendments — in force 1 Jul 2018 and 1 Jan 2020 (incl. Certificate of Fitness forms)</span></div>
+      <div class="reg-item"><span class="reg-code">IMO Res. MSC.523(106)</span><span class="reg-desc">Table 6.3 amendment — high-manganese austenitic steel for cryogenic service; in force 1 Jan 2026 (IGF mirror: MSC.524(106))</span></div>
+      <div class="reg-item"><span class="reg-code">IMO Res. MSC.566(109)</span><span class="reg-desc">Latest IGC amendment — in force 1 Jul 2026</span></div>
+      <div class="reg-item"><span class="reg-code">IGC Code Ch.4 / Ch.19</span><span class="reg-desc">Cargo containment tank types A/B/C &amp; membrane; product carriage table</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Expand the name exactly, anchor it to SOLAS Ch. VII, then show depth with the tank types — <strong>A (full secondary barrier), B (partial, crack-propagation justified — Moss sphere), C (pressure vessel, none), membrane (full)</strong> — and separate IGC from IGF in one sentence before he asks. Currency scores: mention MSC.523(106) high-Mn steel from 1 Jan 2026. The weak answer says "code for gas ships" and cannot distinguish the tank types or IGC vs IGF.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Even on a container ship the IGC/IGF boundary is live for a Maersk engineer: dual-fuel newbuildings run under the IGF Code, whose cryogenic-material and gas-safety philosophy is lifted from the IGC Code — bunker tank types (usually Type C), gas detection zoning, ESD philosophy and vent mast arrangements all trace to IGC concepts.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Why does a Type B tank need only a partial secondary barrier?" A: Its design is validated by refined stress/fatigue and crack-propagation analysis ("leak-before-failure") so a small drip tray suffices; Type A relies on conventional analysis, hence a full barrier. Q: "Which certificate does an IGC ship carry?" A: The International Certificate of Fitness for the Carriage of Liquefied Gases in Bulk. Q: "Ship built 1984 — which code?" A: The GC Code (non-mandatory, recommendatory) — IGC applies from 1 Jul 1986 builds.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Confusing IGC with IGF (carrier vs fuel-user); no tank-type knowledge; claiming membrane tanks are Type B; not knowing the CoF; presenting the 1983/1986 text as current instead of the MSC.370(93) 2016 rewrite; missing that cargo-as-fuel is IGC Ch.16 on a gas carrier but IGF on any other ship.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>Mandatory from <strong>1 Jul 1986</strong> builds; rewrite <strong>MSC.370(93)</strong> in force <strong>1 Jul 2016</strong>; amendments in force <strong>1 Jul 2018</strong> / <strong>1 Jan 2020</strong> / <strong>1 Jan 2026 (MSC.523(106))</strong> / <strong>1 Jul 2026 (MSC.566(109))</strong>; ship types <strong>1G/2G/2PG/3G</strong>; tank types <strong>A/B/C + membrane</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>The gas-carrier safety record is the code's own evidence: no major loss-of-containment casualty on an IGC-class LNG carrier in decades of trading — the leak-before-failure and secondary-barrier philosophy is the cited reason, which is exactly the engineering argument an examiner enjoys hearing.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> What is the IGC Code → tank types and secondary barriers → why Type C needs none → boil-off handling and cargo as fuel (Ch.16) → IGC vs IGF → latest amendments → certificate carried.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk's methanol dual-fuel newbuildings sit outside both codes' gas chapters (methanol is under the IGF Code's alternative-fuel provisions via the interim guidelines MSC.1/Circ.1621), but the fleet's LNG-era studies and the IGC-derived safety philosophy — zoning, ESD, vent masts — inform the company's low-flashpoint fuel procedures the CE administers.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB2_I','Q7 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB2_I · Q7 · v1.0</span>
+  </div>
+</div>
+  </div>
+</div>
+<div id="no-results" style="display:none;text-align:center;color:#64748b;padding:30px">No questions match your search/filter.</div>
+
+<div class="comment-overlay" id="comment-overlay" onclick="if(event.target===this)closeComment()">
+  <div class="comment-modal">
+    <div id="comment-form-wrap">
+      <h3>Report a Correction</h3>
+      <p id="comment-context-label">Your comment goes directly to the editor. Not public.</p>
+      <form id="comment-form" action="https://formspree.io/f/maqgoeww" method="POST" onsubmit="submitComment(event)">
+        <input type="hidden" name="qb_reference" id="form-qb-ref" value="">
+        <label>Type</label>
+        <select name="comment_type">
+          <option value="Error / Correction">🔴 Error / Correction</option>
+          <option value="Suggestion">💡 Suggestion</option>
+          <option value="Missing Topic">📋 Missing Topic</option>
+        </select>
+        <label>Comment</label>
+        <textarea name="comment" placeholder="Describe the issue, suggestion, or what's missing…" required></textarea>
+        <label>Your name (optional)</label>
+        <input type="text" name="name" placeholder="Anonymous">
+        <div class="comment-btns">
+          <button type="button" class="btn-cancel" onclick="closeComment()">Cancel</button>
+          <button type="submit" class="btn-submit">Send →</button>
+        </div>
+      </form>
+    </div>
+    <div class="comment-success" id="comment-success">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <p>Sent! Thank you.</p>
+      <p style="font-size:12px;color:#64748b;margin-top:6px;">The editor will review your comment.</p>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+Compiled by Nixon Antony, 2/E, Maersk A/S · MEO Class 1 exam prep, Kochi MMD · Corrections: contactus@marineintelligenceweekly.com<br>
+Disclaimer: For oral-exam preparation only. Always cross-check against current IMO/class/DG Shipping circulars before your exam — regulations amend frequently.
+</div>
+<script>
+function toggleCard(h){h.closest('.q-card').classList.toggle('open')}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters()}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();const cards=document.querySelectorAll('.q-card');let vis=0;cards.forEach(c=>{const tags=(c.dataset.tags||'').toLowerCase();const text=c.innerText.toLowerCase();const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));c.style.display=show?'':'none';if(show)vis++});document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;document.getElementById('no-results').style.display=vis===0?'block':'none'}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){document.querySelectorAll('.toc-link').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+x.target.id))}})},{threshold:.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+function openComment(qbId,qNum){const ref=qbId+(qNum?' · '+qNum:'');document.getElementById('form-qb-ref').value=ref;document.getElementById('comment-context-label').textContent='Reference: '+ref+' · Goes directly to the editor. Not public.';document.getElementById('comment-form-wrap').style.display='';document.getElementById('comment-success').style.display='none';document.getElementById('comment-overlay').classList.add('open')}
+function closeComment(){document.getElementById('comment-overlay').classList.remove('open')}
+function submitComment(e){e.preventDefault();const form=e.target;const data=new FormData(form);fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}}).then(()=>{document.getElementById('comment-form-wrap').style.display='none';document.getElementById('comment-success').style.display='block';form.reset();setTimeout(closeComment,2000)}).catch(()=>{window.location.href='mailto:contactus@marineintelligenceweekly.com?subject=QB Comment: '+encodeURIComponent(document.getElementById('form-qb-ref').value)})}
+</script>
+<script>
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('copy', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+</body></html>

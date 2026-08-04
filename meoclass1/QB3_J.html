@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QB3_J — MARPOL Annexes, ORB &amp; Environmental | MEO Class 1 Question Bank | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink)}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 20px;display:flex;align-items:center;gap:10px}
+.topbar b{color:var(--teal-dark)}.topbar a{color:var(--grey-text);text-decoration:none;font-size:13px;margin-left:14px}
+.page-header{background:var(--navy);color:#fff;padding:22px 20px}
+.qb-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;letter-spacing:.5px;padding:3px 9px;border-radius:4px;margin-bottom:8px}
+.page-header h1{margin:4px 0;font-size:22px}.page-header p{color:#cbd5e1;font-size:13px;margin:4px 0}
+.header-meta{display:flex;gap:16px;font-size:12px;color:#94a3b8;margin-top:8px;flex-wrap:wrap}
+.controls-bar{position:sticky;top:41px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);padding:8px 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#search-input{flex:1;min-width:160px;padding:6px 10px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;color:var(--grey-text);font-size:12px;padding:5px 10px;border-radius:14px;cursor:pointer}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+#q-count-label{font-size:12px;color:var(--grey-text)}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;padding:20px;max-width:1100px;margin:0 auto}
+.sidebar{position:sticky;top:95px;align-self:start;font-size:12px}
+.sidebar a{display:block;color:var(--grey-text);text-decoration:none;padding:4px 8px;border-radius:4px;margin-bottom:2px}
+.sidebar a.active{background:var(--teal-light);color:var(--teal-dark);font-weight:600}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:18px 0 8px}
+.section-head h2{font-size:15px;margin:0}.sec-count{font-size:11px;color:var(--grey-text);background:var(--grey-bg);padding:2px 8px;border-radius:10px}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;margin-bottom:10px;overflow:hidden}
+.q-header{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;cursor:pointer}
+.q-header:hover{background:var(--grey-bg)}
+.q-num-badge{background:var(--teal);color:#fff;font-size:12px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.q-text-wrap{flex:1;min-width:0}.q-text{font-size:14px;font-weight:600}
+.q-tags{margin-top:5px}.q-tag{display:inline-block;font-size:10px;background:var(--teal-light);color:var(--teal-dark);padding:2px 7px;border-radius:8px;margin-right:5px}
+.q-chevron{width:18px;flex-shrink:0;transition:transform .2s}
+.q-card.open .q-chevron{transform:rotate(180deg)}
+.q-answer{display:none;padding:0 14px 14px}.q-card.open .q-answer{display:block}
+.answer-body{font-family:Georgia,serif;font-size:14.5px;line-height:1.6}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--teal-dark);margin:14px 0 6px;font-family:'Segoe UI',sans-serif}
+.answer-body ul,.answer-body ol{margin:6px 0;padding-left:20px}
+.formula{background:var(--grey-bg);font-family:monospace;padding:8px 10px;border-radius:6px;font-size:13px}
+.reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:12px 14px;margin-top:14px}
+.reg-box-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:8px}
+.reg-item{display:flex;gap:10px;font-size:12.5px;padding:3px 0;border-top:1px solid #1e293b}
+.reg-item:first-of-type{border-top:none}
+.reg-code{color:var(--orange);font-family:monospace;min-width:150px;word-break:break-word}
+.reg-desc{color:#cbd5e1;min-width:0}
+.ce-tip{background:var(--orange-light);border-left:3px solid var(--orange);padding:10px 12px;border-radius:0 6px 6px 0;margin-top:12px;font-size:13px}
+details.dd{margin-top:10px;border:1px solid var(--grey-border);border-radius:6px;padding:6px 10px}
+details.dd summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--teal-dark)}
+details.dd p,details.dd div{font-size:13px;margin:6px 0}
+.q-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;border-top:1px solid var(--grey-border);padding-top:8px;margin-top:10px}
+.correction-btn{background:none;border:1px solid var(--grey-border);color:var(--teal-dark);font-size:11px;padding:4px 10px;border-radius:12px;cursor:pointer}
+.correction-btn:hover{background:var(--teal-light)}
+.q-version{font-size:11px;color:var(--grey-text);flex-shrink:0}
+.page-footer{max-width:1100px;margin:20px auto;padding:16px 20px;border-top:1px solid var(--grey-border);font-size:12px;color:var(--grey-text)}
+.cheat{background:#fff;border:2px dashed var(--teal);border-radius:10px;padding:16px;margin:20px 0}
+.cheat h2{color:var(--teal-dark);font-size:16px;margin-top:0}
+.cheat .flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0}
+.cheat .node{background:var(--teal-light);color:var(--teal-dark);font-size:12px;font-weight:600;padding:6px 10px;border-radius:6px}
+.cheat .arrow{color:var(--teal);font-weight:700}
+.cheat .memcard{background:var(--grey-bg);border-left:3px solid var(--orange);border-radius:0 6px 6px 0;padding:8px 10px;font-size:12.5px;margin:6px 0}
+.cheat table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+.cheat th,.cheat td{border:1px solid var(--grey-border);padding:5px 8px;text-align:left}
+.cheat th{background:var(--navy);color:#fff}
+.comment-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center}
+.comment-overlay.open{display:flex}
+.comment-modal{background:#fff;border-radius:14px;padding:28px;max-width:440px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.comment-modal h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.comment-modal p{font-size:12px;color:var(--grey-text);margin-bottom:18px}
+.comment-modal label{display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.comment-modal select,.comment-modal textarea,.comment-modal input{width:100%;padding:9px 12px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px;font-family:inherit;margin-bottom:12px;outline:none}
+.comment-modal select:focus,.comment-modal textarea:focus,.comment-modal input:focus{border-color:var(--teal)}
+.comment-modal textarea{resize:vertical;min-height:90px}
+.comment-btns{display:flex;gap:10px;justify-content:flex-end}
+.btn-cancel{background:var(--grey-bg);border:1px solid var(--grey-border);color:var(--grey-text);padding:8px 18px;border-radius:6px;font-size:13px;cursor:pointer}
+.btn-submit{background:var(--teal);color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer}
+.btn-submit:hover{background:var(--teal-dark)}
+.comment-success{display:none;text-align:center;padding:20px}
+.comment-success svg{color:var(--teal);margin-bottom:10px}
+.comment-success p{font-size:14px;color:var(--navy);font-weight:600}
+@media(max-width:700px){.main-layout{grid-template-columns:1fr}.sidebar{display:none}}
+body{-webkit-user-select:none;user-select:none}
+</style>
+</head><body oncontextmenu="return false"><script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace('/SQ/pay.html');}</script><div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.04;">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wm" x="0" y="0" width="300" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+        <text x="10" y="60" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">marineintelligenceweekly.com</text>
+        <text x="10" y="120" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">MEO CLASS 1 &#8212; CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wm)"/>
+  </svg>
+</div>
+
+<div class="topbar"><b>⚓ MIW</b> Marine Intelligence Weekly
+<a href="/">Home</a><a href="/meoclass1/">MEO Class 1</a><a href="mailto:contactus@marineintelligenceweekly.com">Contact</a></div>
+<div class="page-header">
+  <span class="qb-badge">QB3_J</span>
+  <h1>QB3_J — MARPOL Annexes, ORB &amp; Environmental</h1>
+  <p>MEO Class 1 Oral Exam Question Bank — Kochi MMD-focused, Examiner: Simon, Jul 2026 batch</p>
+  <div class="header-meta"><span>5 Questions</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span><span>v1.0</span></div>
+</div>
+<div class="controls-bar">
+  <input id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button><button class="filter-btn" onclick="filterTag('marpol',this)">Marpol</button><button class="filter-btn" onclick="filterTag('ghg',this)">GHG</button>
+  <span id="q-count-label">Showing 5 of 5</span>
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <div style="font-weight:700;font-size:11px;text-transform:uppercase;color:#64748b;margin-bottom:6px">Contents</div>
+    <a class="toc-link" href="#q1">1. CO2 &amp; methane in atmosphere</a>
+    <a class="toc-link" href="#q2">2. Carbon footprint of a ship</a>
+    <a class="toc-link" href="#q3">3. SOLAS &amp; MARPOL certificates</a>
+    <a class="toc-link" href="#q4">4. Tiers under OPRC</a>
+    <a class="toc-link" href="#q5">5. NOS-DCP</a>
+    <div style="border-top:1px solid #e2e8f0;margin:10px 0"></div>
+    <div style="font-size:11px;color:#64748b">More QB files at <a href="/meoclass1/" style="color:#0d9488">/meoclass1/</a></div>
+  </div>
+  <div id="q-feed">
+    <div class="section-head"><h2>🛢 QB3_J — MARPOL Annexes, ORB &amp; Environmental</h2><span class="sec-count">5 questions</span></div>
+    <div class="q-card" id="q1" data-tags="marpol ghg">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Effects of CO&#8322; and methane on the atmosphere.</div>
+      <div class="q-tags"><span class="q-tag">MARPOL</span><span class="q-tag">GHG</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Both are greenhouse gases: they absorb outgoing long-wave (infrared) radiation from the Earth's surface and re-radiate it, warming the lower atmosphere. CO&#8322; is the largest anthropogenic contributor and persists for centuries; methane (CH&#8324;) is far more potent per molecule — roughly <strong>28–30 times</strong> CO&#8322; over 100 years and around <strong>80 times</strong> over 20 years (IPCC AR6 values) — but is shorter-lived (~12 years). Shipping's response sits in <strong>MARPOL Annex VI</strong> and the <strong>2023 IMO GHG Strategy</strong>.</p>
+      <h4>60-Second Answer</h4>
+      <p>Solar radiation reaching the Earth is re-emitted as long-wave infrared; greenhouse gases absorb this outgoing radiation and re-emit it in all directions, trapping heat — the greenhouse effect. <strong>CO&#8322;</strong> from fossil-fuel combustion is the dominant driver of anthropogenic warming because of the sheer quantity emitted and its atmospheric lifetime of <strong>centuries</strong>; a portion also dissolves into seawater, driving <strong>ocean acidification</strong>. <strong>Methane</strong> is a much stronger infrared absorber per molecule — a Global Warming Potential of roughly <strong>28–30 (100-yr)</strong> and about <strong>80 (20-yr)</strong> per IPCC AR6 — but oxidises in the atmosphere within about <strong>12 years</strong>, so its warming effect is intense but shorter-lived. For a marine engineer the methane point has a hard practical edge: <strong>methane slip</strong> — unburned CH&#8324; escaping from LNG-fuelled engines, particularly low-pressure Otto-cycle types — can erode much of LNG's CO&#8322; advantage on a CO&#8322;-equivalent basis. The regulatory response is the <strong>2023 IMO GHG Strategy</strong> (net-zero "by or around 2050") implemented through MARPOL Annex VI (EEXI, CII, SEEMP), with a well-to-wake fuel-intensity framework (GFI) still in draft.</p>
+      <h4>Governing instrument</h4>
+      <p>IPCC assessment framework (source of GWP values and lifetimes); MARPOL Annex VI and the 2023 IMO GHG Strategy (Res. MEPC.377(80)) — the shipping regulatory response resting on this science.</p>
+      <h4>The Mechanism</h4>
+      <ul>
+        <li><strong>Greenhouse effect:</strong> gases with three or more atoms (CO&#8322;, CH&#8324;, N&#8322;O, water vapour) have vibrational modes that absorb infrared; N&#8322; and O&#8322; do not — that molecular difference is the whole story.</li>
+        <li><strong>CO&#8322;:</strong> long-lived (a large fraction remains for <strong>100+ years</strong>, some for millennia); cumulative — total emitted mass is what fixes peak warming; also acidifies the ocean (carbonic acid), affecting marine ecosystems.</li>
+        <li><strong>Methane:</strong> lifetime ~<strong>12 years</strong>; oxidises to CO&#8322; and water vapour; per-kg far more potent while it lasts — cutting methane gives fast near-term climate benefit.</li>
+      </ul>
+      <h4>Why This Matters in Shipping</h4>
+      <ul>
+        <li><strong>Fuel choice:</strong> LNG cuts CO&#8322; at the funnel (~20–25% lower carbon per unit energy) but methane slip can offset the gain when counted as CO&#8322;-equivalent — this is exactly why newer frameworks move to <strong>well-to-wake CO&#8322;-equivalent</strong> accounting (all GHGs), while the current <strong>CII remains tank-to-wake CO&#8322;-only</strong> with fixed Cf factors.</li>
+        <li><strong>Regulation:</strong> MARPOL Annex VI Chapter 4 (EEXI/CII/SEEMP) addresses CO&#8322;; the 2023 IMO GHG Strategy targets net-zero GHG (all gases) by or around 2050, with checkpoints at 2030 and 2040.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Quoting a GWP without its time horizon is the classic fail — methane is ~80&times; CO&#8322; over 20 years but ~28–30&times; over 100 years; and the persistence pair matters: CO&#8322; endures for centuries while methane's atmospheric lifetime is ~12 years.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Ch.4</span><span class="reg-desc">Energy-efficiency regulations — EEXI, CII, SEEMP — the CO&#8322;-focused operational regime currently in force</span></div>
+      <div class="reg-item"><span class="reg-code">IMO Res. MEPC.377(80)</span><span class="reg-desc">2023 IMO Strategy on Reduction of GHG Emissions from Ships — net-zero by or around 2050, covers all GHGs incl. methane</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg.28</span><span class="reg-desc">CII — tank-to-wake CO&#8322; only, fixed Cf fuel conversion factors</span></div>
+      <div class="reg-item"><span class="reg-code">IPCC AR6 (2021)</span><span class="reg-desc">Scientific basis for GWP values — CH&#8324; ≈ 28–30 (100-yr), ≈ 80 (20-yr) vs CO&#8322; = 1</span></div>
+      <div class="reg-item"><span class="reg-code">IMO GFI framework (DRAFT)</span><span class="reg-desc">Well-to-wake GHG fuel intensity — draft, not adopted; MEPC resumes Oct 2026 — do not cite as current law</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Simon wants the physics first — "absorbs outgoing infrared and re-radiates it" — then the comparison in two numbers: methane ~<strong>28–30×</strong> CO&#8322; over 100 years but only ~<strong>12 years</strong> atmospheric lifetime, CO&#8322; weaker per molecule but persists for centuries. Then land the engineering hook he is fishing for: <strong>methane slip on LNG-fuelled ships</strong>. The weak answer is "they cause global warming" with no mechanism, no numbers, and no connection to fuel choice.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Fuel-changeover decisions, SEEMP Part III measures and charterer emissions reporting all rest on this science. A CE on an LNG dual-fuel ship manages methane slip operationally: engine load point selection (slip is worst at low load on Otto-cycle engines), correct gas-mode operation, and honest fuel-consumption reporting split by fuel type for DCS/MRV.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "So LNG is the clean fuel — agreed?" A: Partly — at the funnel it cuts CO&#8322; ~20–25% and nearly eliminates SOx/PM, but unburned methane slip, counted as CO&#8322;-equivalent, can erode much of the climate benefit — which is why well-to-wake CO&#8322;e frameworks are being introduced. Q: "Does CII capture methane slip?" A: No — CII is tank-to-wake CO&#8322;-only with fixed Cf factors; methane is addressed in the GHG Strategy and the draft well-to-wake GFI framework, a separate track.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>No mechanism (just "traps heat" without infrared absorption); quoting a single GWP number as gospel without the time horizon (28–30 is the 100-yr figure; ~80 is the 20-yr figure); claiming CII already regulates methane; presenting the draft GFI/Net-Zero framework as adopted law.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>CH&#8324; GWP ≈ <strong>28–30 (100-yr)</strong>, ≈ <strong>80 (20-yr)</strong> — IPCC AR6; CH&#8324; lifetime ≈ <strong>12 years</strong>; CO&#8322; lifetime <strong>centuries</strong>; 2023 GHG Strategy: net-zero <strong>by/around 2050</strong>, checkpoints <strong>2030/2040</strong>; MEPC.377(80).</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Not a casualty in the classic sense — the relevant "incident" is the industry-wide methane-slip measurement campaigns (e.g. EU-funded on-water studies from 2023 onward) showing real-world slip from low-pressure dual-fuel engines exceeding some certification values, which pushed regulators toward well-to-wake CO&#8322;e accounting.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> Effects of CO&#8322;/methane → which is worse and why → what is GWP → LNG as fuel: advantages/drawbacks → methane slip → how does CII treat this → current IMO strategy targets.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>On a conventional HFO/VLSFO-burning Maersk container vessel the CO&#8322; link is direct: every tonne of fuel burned becomes ~3.1 t CO&#8322; in the CII calculation; fleet decarbonisation is via methanol dual-fuel newbuildings — Maersk chose methanol partly to avoid the methane-slip problem entirely.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB3_J','Q1 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB3_J · Q1 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q2" data-tags="marpol ghg">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is carbon footprint, and how do you check the carbon footprint of your ship?</div>
+      <div class="q-tags"><span class="q-tag">MARPOL</span><span class="q-tag">GHG</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">A carbon footprint is the total CO&#8322; (or CO&#8322;-equivalent) emitted by an activity. For a ship I check it from <strong>measured fuel consumption × the fixed carbon conversion factor Cf</strong> for each fuel — e.g. <strong>3.114</strong> t CO&#8322; per tonne of HFO — reported annually through the <strong>IMO DCS</strong> (MARPOL Annex VI Reg.27), and expressed per transport work as the <strong>attained CII</strong> (Reg.28), verified against the ship's rating boundaries.</p>
+      <h4>60-Second Answer</h4>
+      <p>Carbon footprint is the total mass of CO&#8322; (or CO&#8322;e) attributable to the ship's operation over a period. Onboard, the primary measurement is <strong>fuel consumption</strong> — from mass flowmeters, bunker delivery notes and tank soundings — because CO&#8322; emitted is simply fuel burned multiplied by a fuel-specific carbon factor <strong>Cf</strong> (HFO <strong>3.114</strong>, MDO/MGO <strong>3.206</strong>, LNG <strong>2.750</strong> t CO&#8322;/t fuel). Verification runs through three regimes: <strong>(1) IMO DCS</strong> — annual fuel-consumption data under MARPOL Annex VI Reg.27, verified by the Administration/RO, leading to a Statement of Compliance; <strong>(2) CII</strong> — Reg.28 converts that data into attained CII = CO&#8322; emitted ÷ (capacity × distance sailed), in gCO&#8322;/DWT·nm for my ship type, rated A–E annually against a reducing required CII, with a corrective action plan mandatory for a D three years running or a single E; and <strong>(3) EU MRV / EU ETS</strong> for voyages touching EU ports — per-voyage monitoring and, since 2024, surrender of emission allowances. The SEEMP (Part III) is the ship-specific plan for keeping the footprint inside its rating.</p>
+      <h4>Governing instrument</h4>
+      <p>MARPOL Annex VI Regs 26–28 (SEEMP, IMO DCS, CII) with the fixed Cf conversion factors of the IMO guidelines — a Tank-to-Wake track; EU MRV and FuelEU Maritime run a separate Well-to-Wake track.</p>
+      <h4>How It Is Checked in Practice</h4>
+      <ol>
+        <li><strong>Measure:</strong> daily fuel oil consumption per fuel type (flowmeters/soundings), distance sailed, hours underway — logged and reported in noon data.</li>
+        <li><strong>Convert:</strong> CO&#8322; = Σ (fuel consumed × Cf) per fuel grade.</li>
+        <li><strong>Report:</strong> annual aggregated data to the DCS verifier by <strong>31 March</strong>; SoC issued and retained onboard <em>(and EU MRV emissions report for EU-scope voyages)</em>.</li>
+        <li><strong>Rate:</strong> attained CII computed and compared with required CII → rating A–E; documented in SEEMP Part III with verified corrective actions where required.</li>
+      </ol>
+      <p class="formula">Attained CII = M / (C × D&#8339;) — M = total CO&#8322; (g), C = capacity (DWT for container ships), D&#8339; = distance sailed (nm)</p>
+      <h4>The Boundary Trap — Which Footprint?</h4>
+      <ul>
+        <li><strong>CII (MARPOL Annex VI Reg.28):</strong> <strong>tank-to-wake, CO&#8322; only</strong>, fixed Cf factors.</li>
+        <li><strong>FuelEU Maritime / draft IMO GFI:</strong> <strong>well-to-wake CO&#8322;e</strong> (includes upstream emissions and CH&#8324;/N&#8322;O) — separate regulatory tracks; do not mix their baselines or scopes in one sentence.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Track confusion: CII is Tank-to-Wake only (fixed Cf factors, MARPOL Annex VI Reg 28), while FuelEU Maritime and the IMO GFI work Well-to-Wake — separate regulatory tracks; merging their baselines or scopes in one sentence is the trap.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg.27</span><span class="reg-desc">IMO Data Collection System — annual fuel-consumption reporting, verified Statement of Compliance</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg.28</span><span class="reg-desc">Operational carbon intensity — attained/required CII, A–E rating, corrective action plan for D×3 or E</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg.26</span><span class="reg-desc">SEEMP — Part II fuel-data collection plan, Part III CII implementation plan (verified)</span></div>
+      <div class="reg-item"><span class="reg-code">IMO Res. MEPC.364(79) etc.</span><span class="reg-desc">CII calculation guidelines (G1) — Cf factors: HFO 3.114, MDO/MGO 3.206, LNG 2.750 t CO&#8322;/t fuel</span></div>
+      <div class="reg-item"><span class="reg-code">EU Reg. 2015/757 (MRV) + EU ETS</span><span class="reg-desc">Per-voyage monitoring, reporting and verification for EU-scope voyages; allowance surrender from 2024</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Simon asked this on a container-ship session — answer with your own ship's chain: flowmeter/BDN data → CO&#8322; = fuel × Cf (say <strong>3.114 for HFO</strong> unprompted) → DCS annual report by <strong>31 March</strong> → attained CII vs required → A–E rating. The common failure is describing carbon footprint as an abstract concept and never saying how it is actually measured onboard. If he pushes to "what if you get a D or E" — corrective action plan in SEEMP Part III, verified.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE owns data integrity at the source: flowmeter calibration and drift, correct segregation of consumption by fuel grade, honest logging of at-anchor vs underway consumption, and reconciliation of BDNs against soundings. Bad primary data becomes a wrong CII rating that the office cannot fix downstream.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Is CII well-to-wake?" A: No — tank-to-wake, CO&#8322; only, fixed Cf factors; well-to-wake CO&#8322;e belongs to FuelEU Maritime and the draft IMO GFI framework — separate tracks. Q: "Who verifies the footprint?" A: The DCS data is verified by the Administration or its RO before the Statement of Compliance is issued; EU MRV uses an accredited independent verifier. Q: "Can you improve CII without cutting fuel?" A: Yes — CII is intensity per capacity-mile, so more distance at efficient speed improves it; but slow-steaming with long idle periods can worsen it — a known perversity of the metric.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Confusing CII (TtW, CO&#8322;-only) with FuelEU/GFI (WtW, CO&#8322;e); mixing the baselines of different regimes; not knowing the Cf values; saying "EEDI" when the question is operational footprint (EEDI/EEXI are design indices); forgetting the DCS 31 March reporting deadline and the SoC.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>Cf: HFO <strong>3.114</strong>, MDO/MGO <strong>3.206</strong>, LNG <strong>2.750</strong>; DCS report by <strong>31 March</strong>; CII rating bands <strong>A–E</strong>; corrective plan trigger: <strong>3×D or 1×E</strong>; CII units for container ships: <strong>gCO&#8322;/DWT·nm</strong> (AER).</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>No physical casualty — the relevant enforcement risk is commercial/regulatory: ships with E ratings or unverified corrective plans face charterer exclusion clauses and PSC scrutiny of the SEEMP/SoC; EU ETS non-surrender carries financial penalties and ultimately expulsion orders from EU ports.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> Define carbon footprint → how measured onboard → Cf factors → DCS process and deadline → CII formula and rating → what if D/E → difference from EU MRV/ETS → (advanced) TtW vs WtW boundary.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessels report through the fleet performance system: automated flowmeter data feeds daily consumption per grade; the office compiles the DCS submission; attained CII is tracked live against the year's required CII so speed/routing decisions can protect the rating before year-end — the CE verifies the primary data behind all of it.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB3_J','Q2 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB3_J · Q2 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q3" data-tags="marpol solas survey">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Statutory certificates under SOLAS and MARPOL — give a comprehensive list, beyond just Annex VI.</div>
+      <div class="q-tags"><span class="q-tag">MARPOL</span><span class="q-tag">SOLAS</span><span class="q-tag">SURVEYS</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Under <strong>SOLAS</strong>: Cargo Ship Safety Construction, Safety Equipment and Safety Radio Certificates (or the combined Cargo Ship Safety Certificate), plus ISM <strong>DOC/SMC</strong>, ISPS <strong>ISSC</strong>, Minimum Safe Manning Document, and trade-specific documents (Polar Ship Certificate, IGC Certificate of Fitness, Document of Compliance for Dangerous Goods). Under <strong>MARPOL</strong>: <strong>IOPP</strong> (Annex I), NLS/CoF (Annex II), <strong>ISPP</strong> (Annex IV), and <strong>IAPP + IEE Certificate + SEEMP SoC</strong> (Annex VI) — Annexes III and V carry no certificate, only documented compliance.</p>
+      <h4>60-Second Answer</h4>
+      <p>Statutory certificates are issued by or on behalf of the flag State under the HSSC survey system (Resolution A.1140(31) survey guidelines). <strong>SOLAS certificates for a cargo ship:</strong> Cargo Ship <strong>Safety Construction</strong> Certificate (hull/machinery, Ch. II-1), Cargo Ship <strong>Safety Equipment</strong> Certificate (LSA/FFA/nav, Ch. II-1/II-2/III/V), Cargo Ship <strong>Safety Radio</strong> Certificate (Ch. IV) — or one combined <strong>Cargo Ship Safety Certificate</strong>; the <strong>Safety Management Certificate</strong> (ship) with the company's <strong>Document of Compliance</strong> (ISM Code, Ch. IX); the <strong>International Ship Security Certificate</strong> (ISPS, Ch. XI-2); the <strong>Minimum Safe Manning Document</strong> (Reg. V/14); and where applicable the <strong>Polar Ship Certificate</strong> (Ch. XIV), <strong>Document of Compliance for Carriage of Dangerous Goods</strong> (Reg. II-2/19), and for a gas carrier the <strong>Certificate of Fitness under the IGC Code</strong> (Ch. VII). <strong>MARPOL:</strong> Annex I — <strong>IOPP</strong>; Annex II — Certificate of Fitness/NLS Certificate; Annex III — no certificate (packaged goods, IMDG compliance); Annex IV — <strong>ISPP</strong>; Annex V — no certificate (Garbage Management Plan + Record Book + placards); Annex VI — <strong>IAPP</strong>, <strong>IEE Certificate</strong> (EEDI/EEXI), <strong>EIAPP</strong> per engine (NOx), and the DCS <strong>Statement of Compliance</strong>. Related statutory but non-SOLAS/MARPOL: Load Line, Tonnage, AFS, BWM, MLC, CLC/Bunker CLC insurance certificates, and the HKC <strong>IHM/Inventory certification</strong> now that Hong Kong Convention is in force (26 June 2025).</p>
+      <h4>Governing instrument</h4>
+      <p>SOLAS Ch. I Reg 12 certificate suite, with Ch. IX (ISM DOC/SMC) and Ch. XI-2 (ISSC); MARPOL certification per annex — Annex I Reg 7 (IOPP), Annex IV Reg 5 (ISPP), Annex VI Regs 6–8 (IAPP/EIAPP).</p>
+      <h4>Structured List — SOLAS</h4>
+      <ul>
+        <li><strong>Safety Construction Cert.</strong> — hull, machinery, electrical (5-yr, annual/intermediate under HSSC).</li>
+        <li><strong>Safety Equipment Cert.</strong> — LSA, fire protection, navigation equipment (with Record of Equipment Form E).</li>
+        <li><strong>Safety Radio Cert.</strong> — GMDSS installation (Form R).</li>
+        <li><strong>SMC + DOC</strong> — ISM Code; SMC for the ship, DOC for the company, verified by audit not survey.</li>
+        <li><strong>ISSC</strong> — ISPS Part A; verification audits.</li>
+        <li><strong>Minimum Safe Manning Document</strong> — SOLAS V/14.</li>
+        <li><strong>Trade-specific:</strong> Polar Ship Cert. (Ch. XIV); DoC Dangerous Goods (II-2/19); IGC/IBC Certificates of Fitness (Ch. VII); Grain loading authorisation (Ch. VI).</li>
+      </ul>
+      <h4>Structured List — MARPOL</h4>
+      <ul>
+        <li><strong>Annex I:</strong> IOPP Certificate + Supplement (Form B for ships ≥400 GT).</li>
+        <li><strong>Annex II:</strong> International Certificate of Fitness (IBC ships) / NLS Certificate.</li>
+        <li><strong>Annex III:</strong> no certificate — IMDG Code compliance for packaged harmful substances.</li>
+        <li><strong>Annex IV:</strong> ISPP Certificate (sewage).</li>
+        <li><strong>Annex V:</strong> no certificate — Garbage Management Plan, Garbage Record Book, placards.</li>
+        <li><strong>Annex VI:</strong> IAPP (ship), EIAPP (each engine &gt;130 kW, NOx Technical Code), IEE Certificate, SEEMP onboard, DCS Statement of Compliance.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Mixing class documents into the statutory list — a class certificate or Condition of Class is not a statutory certificate; statutory means issued under a convention by or on behalf of the flag.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS I/12</span><span class="reg-desc">Issue of certificates — the SOLAS certificate framework for cargo and passenger ships</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annexes I–VI</span><span class="reg-desc">IOPP (I), CoF/NLS (II), ISPP (IV), IAPP/IEE/EIAPP + DCS SoC (VI) — III and V documentary only</span></div>
+      <div class="reg-item"><span class="reg-code">IMO Res. A.1207(34)</span><span class="reg-desc">Survey Guidelines under the Harmonized System of Survey and Certification (HSSC), 2025 (current — supersedes A.1186(33)/2023 and A.1140(31)/2019) — 5-yr cycle, annual/intermediate/renewal</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS Ch. IX / XI-2</span><span class="reg-desc">ISM Code (DOC/SMC) and ISPS Code (ISSC) certification by audit</span></div>
+      <div class="reg-item"><span class="reg-code">Hong Kong Convention 2009</span><span class="reg-desc">In force 26 Jun 2025 — IHM certification joins the statutory set (International Certificate on Inventory of Hazardous Materials)</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> The question came on an LNG-carrier session — so after the standard list, volunteer the gas-ship additions unprompted: <strong>Certificate of Fitness under the IGC Code</strong> and the Annex II CoF distinction. Structure beats completeness here: say "three safety certificates or one combined, plus audit-based ISM/ISPS certificates, then MARPOL annex by annex." The classic failure is claiming Annex V has a certificate (it has a plan and a record book, not a certificate) or forgetting EIAPP is per-engine.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE personally maintains the machinery-side survey window: Safety Construction items, EIAPP technical files for each engine, IAPP survey prep (BN/sulphur documentation, ODS record), IEE/EEXI files, and the DCS data behind the SoC. Certificate expiry tracking sits in the PMS; PSC deficiency code families map directly onto which certificate is at risk.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Is the SEEMP a certificate?" A: No — a plan kept onboard; the certificate-family document under Annex VI energy-efficiency is the IEE Certificate, plus the annual DCS Statement of Compliance. Q: "Annex V certificate?" A: None — Garbage Management Plan and Record Book. Q: "Who issues them?" A: The flag Administration, or a Recognized Organization on its behalf — class issuing statutory certificates acts as RO, a delegated role distinct from classification.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Inventing an "Annex V certificate"; mixing classification certificates (Class certificate, CSM records) into a statutory list; forgetting the DOC lives with the company and the SMC with the ship; forgetting EIAPP is per engine &gt;130 kW; omitting the Record of Equipment forms (E/R) attached to the safety certificates.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>HSSC cycle: <strong>5 years</strong>, annual windows <strong>±3 months</strong>, intermediate between 2nd and 3rd anniversary; IOPP Supplement Form B ≥ <strong>400 GT</strong>; EIAPP engines &gt; <strong>130 kW</strong>; HKC in force <strong>26 Jun 2025</strong>; combined Cargo Ship Safety Certificate replaces the three separates.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p><strong>Erika (1999)</strong> — the loss and pollution exposed weaknesses in survey/certification of ageing tonnage, driving CAS for tankers and tighter RO oversight (later the RO Code) — the reason examiners test whether you know who stands behind each certificate.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> List the certificates → who issues them → survey cycle behind each → which have no certificate → gas-ship specials (IGC CoF) → what PSC checks first → what happens when one expires at sea (short-term extensions, flag dispensation).</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>On a Maersk container vessel the working set is: combined Cargo Ship Safety Certificate (or the three separates depending on flag), SMC/DOC copies, ISSC, MSMD, IOPP+Form B, ISPP, IAPP+IEE, EIAPP files for ME/AEs/boiler-independent engines, DCS SoC, plus Load Line, Tonnage, AFS, BWM, MLC and the IHM certificate — the master's certificate file the CE cross-checks before every PSC-likely port.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB3_J','Q3 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB3_J · Q3 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q4" data-tags="marpol">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">4</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What are the tiers under OPRC?</div>
+      <div class="q-tags"><span class="q-tag">MARPOL</span><span class="q-tag">OPRC</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">The tiered response concept classifies oil-spill preparedness by scale: <strong>Tier 1</strong> — small, local spill handled by the ship/terminal's own resources; <strong>Tier 2</strong> — larger spill needing regional/national resources beyond the facility; <strong>Tier 3</strong> — major spill requiring national and international assistance. The international framework is the <strong>OPRC Convention 1990</strong>; the tier structure itself is applied through national contingency plans (in India, the <strong>NOS-DCP</strong>) and IPIECA/IMO industry guidance.</p>
+      <h4>60-Second Answer</h4>
+      <p>The <strong>OPRC Convention 1990</strong> (in force <strong>13 May 1995</strong>) obliges parties to establish national systems for oil-pollution preparedness and response — a national contingency plan, designated authorities, and ships carrying an approved <strong>SOPEP</strong> (linked to MARPOL Annex I Reg.37). The convention establishes the preparedness-and-cooperation framework; the familiar <strong>three-tier classification</strong> is how that framework is operationalised in national plans and IMO/IPIECA guidance: <strong>Tier 1</strong> — operational spills at or near a facility/ship, contained with local on-site resources (ship's SOPEP equipment, terminal booms); <strong>Tier 2</strong> — spills exceeding local capability, escalated to regional/mutual-aid and national resources; <strong>Tier 3</strong> — major incidents overwhelming national capacity, drawing international assistance (regional agreements, industry stockpiles such as Oil Spill Response Ltd., and OPRC's mutual-assistance provisions). Escalation is by response capability required, not a fixed tonnage alone — national plans define their own working thresholds. In India the tiers are implemented through the <strong>NOS-DCP</strong>, coordinated by the Indian Coast Guard.</p>
+      <h4>Governing instrument</h4>
+      <p>OPRC Convention 1990 (Art. 3 shipboard plans, Art. 6 national response systems); the tiered-preparedness concept per IPIECA/industry good practice, adopted into national plans including India's NOS-DCP.</p>
+      <h4>The Tier Structure</h4>
+      <ul>
+        <li><strong>Tier 1 — Local:</strong> ship and terminal resources; SOPEP actions — stop transfer, contain on deck, plug scuppers, notify; typical of bunkering/transfer spills.</li>
+        <li><strong>Tier 2 — Regional:</strong> mutual-aid arrangements, port/state equipment stockpiles, national agencies mobilised; the ship's role becomes reporting, cooperation and evidence preservation.</li>
+        <li><strong>Tier 3 — National/International:</strong> full national plan activation plus international assistance under OPRC Articles on co-operation; industry Tier-3 centres (e.g. OSRL) provide global response capability.</li>
+      </ul>
+      <h4>Honest Boundary</h4>
+      <p><em>The tier concept originates in industry/IMO guidance and national plans rather than in the OPRC treaty text itself — the convention mandates the national system; the tiers are the standard structure that national plans (like India's NOS-DCP) use to build it. Say this distinction and you separate yourself from candidates reciting "OPRC has three tiers" as if it were an article of the convention.</em></p>
+      <h4>Trap point</h4>
+      <p>The tiers grade escalation of response capability, not fixed spill-size tonnage bands — quoting hard tonnage thresholds as if they were in OPRC is the trap.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">OPRC Convention 1990</span><span class="reg-desc">International framework for oil-pollution preparedness, response and co-operation — in force 13 May 1995</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex I Reg.37</span><span class="reg-desc">Shipboard Oil Pollution Emergency Plan (SOPEP) — the ship's Tier-1 instrument, required for oil tankers ≥150 GT and other ships ≥400 GT</span></div>
+      <div class="reg-item"><span class="reg-code">OPRC-HNS Protocol 2000</span><span class="reg-desc">Extends the OPRC preparedness/response framework to hazardous and noxious substances</span></div>
+      <div class="reg-item"><span class="reg-code">NOS-DCP (India)</span><span class="reg-desc">National Oil Spill Disaster Contingency Plan — India's tiered national plan, Indian Coast Guard as Central Coordinating Authority</span></div>
+      <div class="reg-item"><span class="reg-code">IMO/IPIECA guidance</span><span class="reg-desc">Tiered Preparedness and Response — the source of the Tier 1/2/3 classification used in national plans worldwide</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Give the three tiers by <strong>capability</strong>, not by tonnage — "local resources / regional-national resources / international assistance" — and anchor each with one concrete example (Tier 1: bunker spill handled with SOPEP gear; Tier 3: Exxon Valdez-scale). Then link to India: NOS-DCP, Coast Guard as coordinating authority. The trap is inventing fixed tonnage thresholds — the working figures vary by national plan, and quoting one as universal is exactly the kind of over-claim Simon probes.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE's tier is Tier 1: SOPEP equipment inventory and locker maintenance, quarterly SOPEP drills, transfer-procedure discipline, and — if a spill occurs — the initial-actions checklist and the reporting chain (nearest coastal State per MARPOL Protocol I, company, P&amp;I). Beyond Tier 1 the CE's duty shifts to co-operation with responders and evidence integrity (ORB, soundings, samples).</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Quote the tier tonnage limits from OPRC." A: The convention doesn't set tonnage tiers — tiering is a capability-based classification defined in national plans and IPIECA/IMO guidance; India's working thresholds are defined in the current NOS-DCP. Q: "What must the ship carry under OPRC?" A: An approved oil pollution emergency plan — the SOPEP, which MARPOL Annex I Reg.37 requires; OPRC Article 3 mirrors this. Q: "Does OPRC cover chemicals?" A: Through the OPRC-HNS Protocol 2000, yes.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Reciting invented universal tonnage thresholds; claiming the tiers appear in the OPRC treaty articles; confusing SOPEP (Annex I Reg.37) with SMPEP (Annex II ships); not knowing India's implementing plan (NOS-DCP) or its coordinating authority.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>OPRC adopted <strong>1990</strong>, in force <strong>13 May 1995</strong>; SOPEP: tankers ≥ <strong>150 GT</strong>, others ≥ <strong>400 GT</strong>; OPRC-HNS Protocol <strong>2000</strong>; three tiers — <strong>local / regional-national / international</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p><strong>Exxon Valdez (1989)</strong> — the disaster that directly triggered OPRC 1990: the response was slow and fragmented, proving the need for pre-arranged national systems, tiered escalation and international co-operation.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> Tiers under OPRC → what is NOS-DCP → SOPEP contents and drills → initial actions for a bunker spill → reporting chain and Protocol I → who pays (CLC/Fund — bridging into liability territory).</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel: SOPEP under Annex I Reg.37 with the flag-approved coastal-State contact list kept current; Tier-1 hardware at the bunker station (Wilden pump, absorbents, scupper plugs); company mutual-aid and OSRL membership provide the Tier-2/3 escalation path documented in the SMS emergency procedures.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB3_J','Q4 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB3_J · Q4 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q5" data-tags="marpol">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">5</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is NOS-DCP?</div>
+      <div class="q-tags"><span class="q-tag">MARPOL</span><span class="q-tag">INDIA</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">NOS-DCP is the <strong>National Oil Spill Disaster Contingency Plan</strong> — India's national plan for responding to marine oil spills, implementing the <strong>OPRC Convention 1990</strong>, with the <strong>Director General, Indian Coast Guard</strong> as the Central Coordinating Authority, structured around a <strong>Tier I / II / III</strong> response escalation.</p>
+      <h4>60-Second Answer</h4>
+      <p>The National Oil Spill Disaster Contingency Plan is India's apex framework for oil-spill preparedness and response in Indian waters. The <strong>Indian Coast Guard</strong> has been the central coordinating agency for marine oil-pollution response since <strong>1986</strong>, and the DG Coast Guard chairs the plan as Central Coordinating Authority; the plan is reviewed periodically at national NOS-DCP preparedness meetings and exercised through pollution-response drills. It defines the responsibilities of resource agencies — ports, oil companies, state governments, Navy, shipping — the reporting and alerting chain, response operations, and the escalation structure: <strong>Tier I</strong> (local spill, port/facility resources), <strong>Tier II</strong> (regional response, Coast Guard pollution-response assets), <strong>Tier III</strong> (national mobilisation with international assistance). It is India's implementation of its obligations as a party to <strong>OPRC 1990</strong>, and the shore-side counterpart of the ship's own <strong>SOPEP</strong>: if my vessel spills oil in Indian waters, my report to the coastal State (MARPOL Protocol I) lands in the NOS-DCP machinery, with the Coast Guard's Marine Rescue/Pollution Response centres as the operational contact.</p>
+      <h4>Governing instrument</h4>
+      <p>OPRC 1990 as implemented nationally by India's NOS-DCP, with the Director General, Indian Coast Guard as Central Coordinating Authority; the shipboard interface is the SOPEP under MARPOL Annex I Reg 37.</p>
+      <h4>Key Elements</h4>
+      <ul>
+        <li><strong>Central Coordinating Authority:</strong> Director General, Indian Coast Guard (Ministry of Defence) — coordination role dating from March 1986.</li>
+        <li><strong>Scope:</strong> reporting/alerting, spill assessment, response operations, dispersant policy, waste management, cost recovery and claims interface, exercises and training.</li>
+        <li><strong>Tiered response:</strong> Tier I/II/III by scale and capability. <em>Exact working volume thresholds are defined in the current NOS-DCP text — verify against the latest ICG edition before quoting figures in the oral.</em></li>
+        <li><strong>Resource agencies:</strong> major ports (Tier-1 equipment holdings), oil-handling agencies, coastal states, ICG pollution-response vessels and Dornier aircraft.</li>
+      </ul>
+      <h4>A Nuance Worth Knowing</h4>
+      <p><em>Legal commentary has noted that the NOS-DCP operates as an executive/administrative plan rather than under a dedicated statute — a point about India's oil-spill legal architecture that a well-read candidate can raise carefully ("commentators have observed…") rather than as a settled fact, since the position may evolve under the Merchant Shipping Act 2025 framework.</em></p>
+      <h4>Trap point</h4>
+      <p>NOS-DCP is India's national response plan (ICG-coordinated) — it is not a shipboard document; the ship-level counterpart the examiner may be fishing for is the SOPEP.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">NOS-DCP (ICG)</span><span class="reg-desc">National Oil Spill Disaster Contingency Plan — India's national response plan; DG Indian Coast Guard as Central Coordinating Authority</span></div>
+      <div class="reg-item"><span class="reg-code">OPRC Convention 1990</span><span class="reg-desc">International basis — national systems for preparedness and response; India is a party</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex I Reg.37</span><span class="reg-desc">SOPEP — the shipboard plan that interfaces with NOS-DCP when a spill occurs in Indian waters</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Protocol I</span><span class="reg-desc">Reporting of incidents involving harmful substances — the report that triggers the national plan</span></div>
+      <div class="reg-item"><span class="reg-code">Merchant Shipping Act 2025 (India)</span><span class="reg-desc">In force 15 Mar 2026 — the statutory frame for pollution jurisdiction in Indian waters (Part-level citation; section mapping pending verification)</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Expand the acronym instantly and correctly — <strong>National Oil Spill Disaster Contingency Plan</strong> — then give the two facts that show real knowledge: <strong>Indian Coast Guard is the Central Coordinating Authority</strong>, and it implements <strong>OPRC 1990</strong> with Tier I/II/III escalation. Note the session context: the very next question in the same transcript was "tiers under OPRC" — treat Q4 and Q5 as one chain. The common failure is mis-expanding DCP (it is not Dry Chemical Powder here) or having no idea which agency coordinates.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>If your ship spills oil in Indian waters/EEZ: SOPEP initial actions, then report per the SOPEP coastal-State contact list — the Indian entries route to Coast Guard MRCCs — and thereafter co-operate with the NOS-DCP response while preserving ORB entries, soundings and samples. Knowing the national machinery exists changes how you frame the reporting duty in the oral.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Who is the Central Coordinating Authority?" A: The Director General, Indian Coast Guard. Q: "Is NOS-DCP an IMO instrument?" A: No — it is India's national plan implementing the IMO OPRC Convention 1990. Q: "What does DCP stand for here?" A: Disaster Contingency Plan — not Dry Chemical Powder; the fire-fighting DCP is an entirely different context.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Wrong expansion of the acronym; naming DG Shipping/DGMA instead of the Indian Coast Guard as coordinating authority; quoting invented tier tonnage thresholds; not connecting NOS-DCP to OPRC or to the ship's own SOPEP.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>ICG central coordinating agency since <strong>1986</strong>; OPRC <strong>1990</strong> (in force <strong>1995</strong>); tiers <strong>I / II / III</strong>; SOPEP thresholds: tankers ≥ <strong>150 GT</strong>, others ≥ <strong>400 GT</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p><strong>MSC Chitra / Khalijia collision, Mumbai (2010)</strong> — the resulting oil spill and container loss was a live activation of India's national spill machinery and drove strengthening of ICG pollution-response capability and NOS-DCP review cycles.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> What is NOS-DCP → tiers under OPRC (asked back-to-back in the source session) → SOPEP contents/drills → reporting chain for a spill in Indian waters → who pays (CLC 1992/Fund, Bunker Convention).</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel calling Indian ports (e.g. Mundra, Nhava Sheva, Vizhinjam): the SOPEP coastal-State contact annex carries the Indian reporting entries; a Tier-1 bunker spill alongside would be fought with ship/terminal resources while the mandatory report simultaneously enters the NOS-DCP chain via the port and Coast Guard.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB3_J','Q5 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB3_J · Q5 · v1.0</span>
+  </div>
+</div>
+  </div>
+</div>
+<div id="no-results" style="display:none;text-align:center;color:#64748b;padding:30px">No questions match your search/filter.</div>
+
+<div class="cheat"><h2>🧠 QB3_J Cheat Sheet — Visual Recall</h2>
+<div class="flow"><span class="node">GHG mechanism</span><span class="arrow">=</span><span class="node">absorb outgoing infrared → re-radiate → warm</span></div>
+<div class="flow"><span class="node">Ship footprint chain</span><span class="arrow">=</span><span class="node">fuel × Cf → DCS (31 Mar) → CII rating A–E → SEEMP Part III</span></div>
+<div class="flow"><span class="node">Spill escalation</span><span class="arrow">=</span><span class="node">Tier 1 local (SOPEP) → Tier 2 regional → Tier 3 international</span></div>
+<div class="memcard"><strong>CO&#8322; vs CH&#8324;</strong> → CO&#8322;: weaker per molecule, lives centuries, also acidifies oceans. CH&#8324;: ~28–30× (100-yr) / ~80× (20-yr), lives ~12 yrs. Engineering hook: methane slip on LNG-fuelled ships.</div>
+<div class="memcard"><strong>Cf factors</strong> → HFO 3.114 · MDO/MGO 3.206 · LNG 2.750 t CO&#8322;/t fuel. CII = tank-to-wake CO&#8322;-only; FuelEU/draft GFI = well-to-wake CO&#8322;e — separate tracks, never mix.</div>
+<div class="memcard"><strong>No-certificate annexes</strong> → Annex III (IMDG compliance) and Annex V (Garbage Plan + Record Book). Everything else has paper: IOPP · CoF/NLS · ISPP · IAPP+IEE+EIAPP+SoC.</div>
+<div class="memcard"><strong>NOS-DCP</strong> → National Oil Spill Disaster Contingency Plan · Indian Coast Guard = Central Coordinating Authority (since 1986) · implements OPRC 1990 · Tier I/II/III. Not Dry Chemical Powder.</div>
+<table><tr><th>Trigger phrase</th><th>Must-say term</th></tr>
+<tr><td>"how potent is methane"</td><td>GWP ≈ 28–30 (100-yr), ≈ 80 (20-yr) — IPCC AR6; lifetime ~12 yrs</td></tr>
+<tr><td>"check ship's carbon footprint"</td><td>fuel × Cf → IMO DCS Reg.27 → attained CII Reg.28</td></tr>
+<tr><td>"CII scope"</td><td>Tank-to-wake, CO&#8322; only, fixed Cf</td></tr>
+<tr><td>"SOLAS cargo ship certificates"</td><td>Safety Construction + Equipment + Radio (or combined) + SMC/DOC + ISSC + MSMD</td></tr>
+<tr><td>"OPRC tiers in the treaty?"</td><td>Tiers come from national plans/IPIECA guidance — OPRC mandates the national system</td></tr>
+<tr><td>"who coordinates NOS-DCP"</td><td>DG, Indian Coast Guard — Central Coordinating Authority</td></tr>
+</table>
+<p style="font-size:11px;color:#64748b;margin-top:10px">Self-test protocol: cover the right-hand column, recall the term aloud, then check — retrieval practice beats passive re-reading before the oral.</p>
+</div>
+
+<div class="comment-overlay" id="comment-overlay" onclick="if(event.target===this)closeComment()">
+  <div class="comment-modal">
+    <div id="comment-form-wrap">
+      <h3>Report a Correction</h3>
+      <p id="comment-context-label">Your comment goes directly to the editor. Not public.</p>
+      <form id="comment-form" action="https://formspree.io/f/maqgoeww" method="POST" onsubmit="submitComment(event)">
+        <input type="hidden" name="qb_reference" id="form-qb-ref" value="">
+        <label>Type</label>
+        <select name="comment_type">
+          <option value="Error / Correction">🔴 Error / Correction</option>
+          <option value="Suggestion">💡 Suggestion</option>
+          <option value="Missing Topic">📋 Missing Topic</option>
+        </select>
+        <label>Comment</label>
+        <textarea name="comment" placeholder="Describe the issue, suggestion, or what's missing…" required></textarea>
+        <label>Your name (optional)</label>
+        <input type="text" name="name" placeholder="Anonymous">
+        <div class="comment-btns">
+          <button type="button" class="btn-cancel" onclick="closeComment()">Cancel</button>
+          <button type="submit" class="btn-submit">Send →</button>
+        </div>
+      </form>
+    </div>
+    <div class="comment-success" id="comment-success">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <p>Sent! Thank you.</p>
+      <p style="font-size:12px;color:#64748b;margin-top:6px;">The editor will review your comment.</p>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+Compiled by Nixon Antony, 2/E, Maersk A/S · MEO Class 1 exam prep, Kochi MMD · Corrections: contactus@marineintelligenceweekly.com<br>
+Disclaimer: For oral-exam preparation only. Always cross-check against current IMO/class/DG Shipping circulars before your exam — regulations amend frequently.
+</div>
+<script>
+function toggleCard(h){h.closest('.q-card').classList.toggle('open')}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters()}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();const cards=document.querySelectorAll('.q-card');let vis=0;cards.forEach(c=>{const tags=(c.dataset.tags||'').toLowerCase();const text=c.innerText.toLowerCase();const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));c.style.display=show?'':'none';if(show)vis++});document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;document.getElementById('no-results').style.display=vis===0?'block':'none'}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){document.querySelectorAll('.toc-link').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+x.target.id))}})},{threshold:.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+function openComment(qbId,qNum){const ref=qbId+(qNum?' · '+qNum:'');document.getElementById('form-qb-ref').value=ref;document.getElementById('comment-context-label').textContent='Reference: '+ref+' · Goes directly to the editor. Not public.';document.getElementById('comment-form-wrap').style.display='';document.getElementById('comment-success').style.display='none';document.getElementById('comment-overlay').classList.add('open')}
+function closeComment(){document.getElementById('comment-overlay').classList.remove('open')}
+function submitComment(e){e.preventDefault();const form=e.target;const data=new FormData(form);fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}}).then(()=>{document.getElementById('comment-form-wrap').style.display='none';document.getElementById('comment-success').style.display='block';form.reset();setTimeout(closeComment,2000)}).catch(()=>{window.location.href='mailto:contactus@marineintelligenceweekly.com?subject=QB Comment: '+encodeURIComponent(document.getElementById('form-qb-ref').value)})}
+</script>
+<script>
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('copy', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+</body></html>

@@ -248,6 +248,16 @@ GREP: Salvage costs</li>
 
 ---
 
+### 22. HSSC Survey Guidelines — A.1140(31) is three revisions stale; current is A.1207(34)
+The Survey Guidelines under the Harmonized System of Survey and Certification (HSSC) are revised roughly every two years at the IMO Assembly. Chain: A.1140(31) [2019] → A.1156(32) [2021] → A.1186(33) [2023] → **A.1207(34) [2025, current]**. A.1140(31) was found cited as the live HSSC reference in the July 2026 batch (QB2_I.html Q5, QB3_J.html Q3) and, on a wider repo check, in several pre-existing files too: `QB4_F.html`, `QB4_H.html`, `QB1_I.html`, and `oralnotes/miw-notes-mgmt-p3.html`. Easily confused with the separate, similarly-numbered Procedures for Port State Control resolution chain (Entry 5: A.1185(33) → A.1206(34)) — both instruments are revised at the same biennial Assembly, one resolution number apart, which is exactly what causes the mix-up; check which instrument (HSSC survey guidelines vs. PSC procedures) before citing either number. Corrected in QB2_I.html and QB3_J.html during the July 2026 batch review (Claude, 4 Aug 2026); the four pre-existing files above are flagged for a separate cleanup pass.
+GREP: A.1140(31)
+
+### 23. QB2_I.html `&lt;title&gt;` tag mismatch — read "QB3_J" instead of "QB2_I"
+Isolated copy-paste artifact from adjacent file creation during the July 2026 batch build: the browser-tab `&lt;title&gt;` element read "QB3_J — MARPOL Annexes, ORB &amp; Environmental," while the actual page content (h1, badge, all cards) correctly read QB2_I throughout. Affects SEO/tab display only, not visible page content. Checked all 8 files in the batch for the same mistake — isolated to this one file. Corrected (Claude, 4 Aug 2026).
+GREP: SKIP
+
+---
+
 ## Meta-corrections to `qb_health_check.py` itself (non-content fixes, logged here for continuity)
 
 - 2026-08-01: Fixed a Windows-console `UnicodeEncodeError` crash in the Brevo-fallback print path when SMTP credentials aren't set locally (was crashing on ⚠/✅ glyphs; also fixed a related bug where the fallback path's temporary `TextIOWrapper` around `sys.stdout.buffer` closed the underlying buffer on garbage collection, breaking all later prints in the same run).
@@ -287,3 +297,5 @@ GREP: Salvage costs</li>
 | 2026-08-01 | Entry 18: BMP5 already covers weapon-of-war threats via safe muster point (distinct from citadel) — added to QB4_H Q2 + cheat sheet | Candidate (Rathesh) via Nixon |
 | 2026-08-01 | Entry 19: QB4_H Q2 expanded — Hormuz routing dispute (Iran redrawn TSS), hardening purpose split, AIS/coastal-state clarification | Candidate (Rathesh) via Nixon |
 | 2026-08-02 | Entry 21: Admiralty Act 2017 S.9 maritime lien priority order inverted (Salvage 1st/Wages 2nd → corrected to Wages 1st) — QB1_A.html (SQ + meoclass1) and WA3-LIEN1.html | Candidate correction via Nixon (indiacode.nic.in source link) |
+| 2026-08-04 | Entry 22: HSSC Survey Guidelines A.1140(31) three revisions stale, current A.1207(34) | Claude Chat verification pass on July 2026 batch; also found in 4 pre-existing files, flagged for separate cleanup |
+| 2026-08-04 | Entry 23: QB2_I.html title-tag mismatch (read "QB3_J") | Claude Chat verification pass on July 2026 batch |

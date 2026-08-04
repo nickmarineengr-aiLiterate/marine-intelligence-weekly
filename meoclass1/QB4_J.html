@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QB4_J — ISM Code, ISPS, MLC 2006 &amp; STCW | MEO Class 1 Question Bank | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink)}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 20px;display:flex;align-items:center;gap:10px}
+.topbar b{color:var(--teal-dark)}.topbar a{color:var(--grey-text);text-decoration:none;font-size:13px;margin-left:14px}
+.page-header{background:var(--navy);color:#fff;padding:22px 20px}
+.qb-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;letter-spacing:.5px;padding:3px 9px;border-radius:4px;margin-bottom:8px}
+.page-header h1{margin:4px 0;font-size:22px}.page-header p{color:#cbd5e1;font-size:13px;margin:4px 0}
+.header-meta{display:flex;gap:16px;font-size:12px;color:#94a3b8;margin-top:8px;flex-wrap:wrap}
+.controls-bar{position:sticky;top:41px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);padding:8px 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#search-input{flex:1;min-width:160px;padding:6px 10px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;color:var(--grey-text);font-size:12px;padding:5px 10px;border-radius:14px;cursor:pointer}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+#q-count-label{font-size:12px;color:var(--grey-text)}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;padding:20px;max-width:1100px;margin:0 auto}
+.sidebar{position:sticky;top:95px;align-self:start;font-size:12px}
+.sidebar a{display:block;color:var(--grey-text);text-decoration:none;padding:4px 8px;border-radius:4px;margin-bottom:2px}
+.sidebar a.active{background:var(--teal-light);color:var(--teal-dark);font-weight:600}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:18px 0 8px}
+.section-head h2{font-size:15px;margin:0}.sec-count{font-size:11px;color:var(--grey-text);background:var(--grey-bg);padding:2px 8px;border-radius:10px}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;margin-bottom:10px;overflow:hidden}
+.q-header{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;cursor:pointer}
+.q-header:hover{background:var(--grey-bg)}
+.q-num-badge{background:var(--teal);color:#fff;font-size:12px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.q-text-wrap{flex:1;min-width:0}.q-text{font-size:14px;font-weight:600}
+.q-tags{margin-top:5px}.q-tag{display:inline-block;font-size:10px;background:var(--teal-light);color:var(--teal-dark);padding:2px 7px;border-radius:8px;margin-right:5px}
+.q-chevron{width:18px;flex-shrink:0;transition:transform .2s}
+.q-card.open .q-chevron{transform:rotate(180deg)}
+.q-answer{display:none;padding:0 14px 14px}.q-card.open .q-answer{display:block}
+.answer-body{font-family:Georgia,serif;font-size:14.5px;line-height:1.6}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--teal-dark);margin:14px 0 6px;font-family:'Segoe UI',sans-serif}
+.answer-body ul,.answer-body ol{margin:6px 0;padding-left:20px}
+.formula{background:var(--grey-bg);font-family:monospace;padding:8px 10px;border-radius:6px;font-size:13px}
+.reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:12px 14px;margin-top:14px}
+.reg-box-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:8px}
+.reg-item{display:flex;gap:10px;font-size:12.5px;padding:3px 0;border-top:1px solid #1e293b}
+.reg-item:first-of-type{border-top:none}
+.reg-code{color:var(--orange);font-family:monospace;min-width:150px;word-break:break-word}
+.reg-desc{color:#cbd5e1;min-width:0}
+.ce-tip{background:var(--orange-light);border-left:3px solid var(--orange);padding:10px 12px;border-radius:0 6px 6px 0;margin-top:12px;font-size:13px}
+details.dd{margin-top:10px;border:1px solid var(--grey-border);border-radius:6px;padding:6px 10px}
+details.dd summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--teal-dark)}
+details.dd p,details.dd div{font-size:13px;margin:6px 0}
+.q-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;border-top:1px solid var(--grey-border);padding-top:8px;margin-top:10px}
+.correction-btn{background:none;border:1px solid var(--grey-border);color:var(--teal-dark);font-size:11px;padding:4px 10px;border-radius:12px;cursor:pointer}
+.correction-btn:hover{background:var(--teal-light)}
+.q-version{font-size:11px;color:var(--grey-text);flex-shrink:0}
+.page-footer{max-width:1100px;margin:20px auto;padding:16px 20px;border-top:1px solid var(--grey-border);font-size:12px;color:var(--grey-text)}
+.cheat{background:#fff;border:2px dashed var(--teal);border-radius:10px;padding:16px;margin:20px 0}
+.cheat h2{color:var(--teal-dark);font-size:16px;margin-top:0}
+.cheat .flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0}
+.cheat .node{background:var(--teal-light);color:var(--teal-dark);font-size:12px;font-weight:600;padding:6px 10px;border-radius:6px}
+.cheat .arrow{color:var(--teal);font-weight:700}
+.cheat .memcard{background:var(--grey-bg);border-left:3px solid var(--orange);border-radius:0 6px 6px 0;padding:8px 10px;font-size:12.5px;margin:6px 0}
+.cheat table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+.cheat th,.cheat td{border:1px solid var(--grey-border);padding:5px 8px;text-align:left}
+.cheat th{background:var(--navy);color:#fff}
+.comment-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center}
+.comment-overlay.open{display:flex}
+.comment-modal{background:#fff;border-radius:14px;padding:28px;max-width:440px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.comment-modal h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.comment-modal p{font-size:12px;color:var(--grey-text);margin-bottom:18px}
+.comment-modal label{display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.comment-modal select,.comment-modal textarea,.comment-modal input{width:100%;padding:9px 12px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px;font-family:inherit;margin-bottom:12px;outline:none}
+.comment-modal select:focus,.comment-modal textarea:focus,.comment-modal input:focus{border-color:var(--teal)}
+.comment-modal textarea{resize:vertical;min-height:90px}
+.comment-btns{display:flex;gap:10px;justify-content:flex-end}
+.btn-cancel{background:var(--grey-bg);border:1px solid var(--grey-border);color:var(--grey-text);padding:8px 18px;border-radius:6px;font-size:13px;cursor:pointer}
+.btn-submit{background:var(--teal);color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer}
+.btn-submit:hover{background:var(--teal-dark)}
+.comment-success{display:none;text-align:center;padding:20px}
+.comment-success svg{color:var(--teal);margin-bottom:10px}
+.comment-success p{font-size:14px;color:var(--navy);font-weight:600}
+@media(max-width:700px){.main-layout{grid-template-columns:1fr}.sidebar{display:none}}
+body{-webkit-user-select:none;user-select:none}
+</style>
+</head><body oncontextmenu="return false"><script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace('/SQ/pay.html');}</script><div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.04;">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wm" x="0" y="0" width="300" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+        <text x="10" y="60" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">marineintelligenceweekly.com</text>
+        <text x="10" y="120" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">MEO CLASS 1 &#8212; CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wm)"/>
+  </svg>
+</div>
+
+<div class="topbar"><b>⚓ MIW</b> Marine Intelligence Weekly
+<a href="/">Home</a><a href="/meoclass1/">MEO Class 1</a><a href="mailto:contactus@marineintelligenceweekly.com">Contact</a></div>
+<div class="page-header">
+  <span class="qb-badge">QB4_J</span>
+  <h1>QB4_J — ISM Code, ISPS, MLC 2006 &amp; STCW</h1>
+  <p>MEO Class 1 Oral Exam Question Bank — Kochi MMD-focused, Examiners: Simon, Paul &amp; Nair, Jul 2026 batch</p>
+  <div class="header-meta"><span>10 Questions</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span><span>v1.0</span><span><a href="QB4_J_CheatSheet.html" style="color:#5eead4">Cheat Sheet →</a></span></div>
+</div>
+<div class="controls-bar">
+  <input id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button><button class="filter-btn" onclick="filterTag('ism',this)">ISM</button><button class="filter-btn" onclick="filterTag('stcw',this)">STCW</button><button class="filter-btn" onclick="filterTag('mlc',this)">MLC</button>
+  <span id="q-count-label">Showing 10 of 10</span>
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <div style="font-weight:700;font-size:11px;text-transform:uppercase;color:#64748b;margin-bottom:6px">Contents</div>
+    <a class="toc-link" href="#q1">1. Engine room watch composition</a>
+    <a class="toc-link" href="#q2">2. Independent watchkeeper</a>
+    <a class="toc-link" href="#q3">3. Risk Based Planning</a>
+    <a class="toc-link" href="#q4">4. Training manual contents</a>
+    <a class="toc-link" href="#q5">5. Safety manuals onboard</a>
+    <a class="toc-link" href="#q6">6. ISM manuals</a>
+    <a class="toc-link" href="#q7">7. ISM survey vs ISM audit</a>
+    <a class="toc-link" href="#q8">8. Types of leadership</a>
+    <a class="toc-link" href="#q9">9. MLC &amp; war risk</a>
+    <a class="toc-link" href="#q10">10. Seafarer abandonment</a>
+    <div style="border-top:1px solid #e2e8f0;margin:10px 0"></div>
+    <div style="font-size:11px;color:#64748b">Cheat sheet: <a href="QB4_J_CheatSheet.html" style="color:#0d9488">QB4_J_CheatSheet</a></div>
+  </div>
+  <div id="q-feed">
+    <div class="section-head"><h2>📋 QB4_J — ISM Code, ISPS, MLC 2006 &amp; STCW</h2><span class="sec-count">10 questions</span></div>
+    <div class="q-card" id="q1" data-tags="stcw machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">How do you compose the engine room watch (watchkeeping levels)?</div>
+      <div class="q-tags"><span class="q-tag">STCW</span><span class="q-tag">WATCHKEEPING</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Watch composition is set under <strong>STCW Chapter VIII (Section A-VIII/2, Part 3-2 engineering watch)</strong>: the CE, in consultation with the Master, determines a watch <strong>adequate at all times for safe operation</strong>, considering machinery state and mode (manned/UMS), automation and alarm fitness, weather/ice/traffic and emergencies, qualifications and fatigue (rest-hour compliance, A-VIII/1), special operations (bunkering, manoeuvring, restricted waters), and the <strong>Minimum Safe Manning Document</strong> floor. On a UMS ship the "watch" becomes a <strong>duty engineer</strong> arrangement with the machinery-space alarm/monitoring fit (SOLAS II-1/Reg.46-53 automation provisions) proven operational.</p>
+      <h4>60-Second Answer</h4>
+      <p>There is no universal table — the answer is the <strong>decision process</strong>. The CE composes the watch so it can: monitor and control main/auxiliary machinery, respond to alarms and emergencies, and maintain safety of the ship. Factors from STCW A-VIII/2: <strong>(1) mode</strong> — continuously manned ER (traditional 4-on-8-off watches: watchkeeping engineer + rating(s) as needed) vs <strong>UMS</strong> (Administration-accepted unattended operation with a designated duty engineer on call, bridge/cabin alarm extensions, dead-man/patrol-man system, and the automation surveyed operational); <strong>(2) machinery condition</strong> — defects, manual operation of any critical system forces manning up; <strong>(3) operational phase</strong> — manoeuvring/standby, bunkering, restricted visibility, heavy weather, entering/leaving port typically require the ER manned regardless of UMS notation; <strong>(4) people</strong> — competency (certificates and familiarisation), experience mix (never an unaccompanied trainee), and <strong>rest hours</strong> per STCW A-VIII/1 / MLC (minimum <strong>10 h in any 24 / 77 h in any 7 days</strong>); <strong>(5) floor</strong> — never below the Safe Manning Document. The CE documents the standing arrangement in standing orders and adjusts by written order for special conditions — and the Master must be informed of any change affecting ship safety.</p>
+      <h4>Governing instrument</h4>
+      <p>STCW Section A-VIII/2 Part 3-2 (engineering watch composition) with Part B-VIII/2 guidance; ISM Code Sec. 6; the ship's Minimum Safe Manning Document under SOLAS V/14.</p>
+      <h4>Decision Factors — the Checklist to Recite</h4>
+      <ul>
+        <li><strong>Mode:</strong> manned vs UMS; automation/alarm system status.</li>
+        <li><strong>Machinery:</strong> defects, critical equipment on manual, redundancy state.</li>
+        <li><strong>Operation:</strong> manoeuvring, bunkering, heavy weather, restricted waters, cargo ops needing ER support.</li>
+        <li><strong>People:</strong> certification, experience, fatigue/rest-hour compliance.</li>
+        <li><strong>Floor:</strong> Minimum Safe Manning Document (SOLAS V/14).</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Quoting a fixed watch composition is the fail — it is a CE determination under A-VIII/2 against machinery state, mode (manned/UMS) and conditions, never below the Safe Manning Document floor.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">STCW A-VIII/2, Part 3-2</span><span class="reg-desc">Principles of the engineering watch — composition factors and duties</span></div>
+      <div class="reg-item"><span class="reg-code">STCW A-VIII/1 + MLC Std A2.3</span><span class="reg-desc">Fitness for duty — minimum rest 10 h/24 h and 77 h/7 days</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS V/14</span><span class="reg-desc">Minimum Safe Manning Document — the manning floor</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1, Regs.46–53</span><span class="reg-desc">Periodically unattended machinery spaces — automation, alarms and safety provisions enabling UMS</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code Sec.6 &amp; 7</span><span class="reg-desc">Resources/personnel and shipboard operations — the SMS home of watch arrangements and standing orders</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Simon wants the CE's decision logic, not a crew list. Structure: "adequate at all times" test → the five factors → UMS vs manned distinction → the Safe Manning floor → rest hours. Quote <strong>10/24 and 77/7</strong> unprompted. The failing answer gives a fixed roster ("one engineer and one oiler") with no conditions under which it changes.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>This is literally the CE's daily authority: standing orders define the default watch; night orders/manning-up decisions for weather, defects and port approaches are the CE's written record that the A-VIII/2 factors were actually applied — the document an investigator reads after an incident.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "UMS ship, purifier room flooding alarm at 0300 — who responds?" A: The designated duty engineer immediately, with the dead-man system active; the CE mans up if the situation exceeds one-man response. Q: "Can you run UMS with the main alarm printer/extension defective?" A: No — UMS is conditional on the surveyed automation being operational; revert to manned watches and record it. Q: "Cadet alone on watch?" A: Never — trainees keep watch only under supervision of a qualified officer.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Reciting a fixed roster with no factor logic; forgetting the Safe Manning floor; not knowing the rest-hour numbers; treating UMS as unconditional; omitting that manoeuvring/bunkering normally mans the ER regardless of notation.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>Rest: <strong>10 h / 24 h</strong> (divisible into max 2 periods, one ≥6 h) and <strong>77 h / 7 days</strong>; UMS provisions SOLAS II-1 <strong>Regs.46–53</strong>; Safe Manning SOLAS <strong>V/14</strong>; STCW <strong>A-VIII/2 Part 3-2</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Fatigue-linked machinery casualties in MAIB/ATSB reports — single watchkeepers exceeding rest limits during port-intensive schedules — are why rest-hour compliance is a composition factor, not an HR formality.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> Compose the ER watch → what changes it → UMS conditions → duty engineer vs watchkeeper (bridging to Q2) → rest hours → standing/night orders → who informs the Master.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel, UMS notation: sea passage on duty-engineer rotation with alarm extensions and dead-man system; ER manned for arrival/departure, bunkering, canal transits and any critical-equipment defect — the changeover recorded in the ER log against the CE's standing orders.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB4_J','Q1 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB4_J · Q1 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q2" data-tags="stcw machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Who is an independent watchkeeper?</div>
+      <div class="q-tags"><span class="q-tag">STCW</span><span class="q-tag">WATCHKEEPING</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">An independent watchkeeper is an engineer <strong>certified and assessed as competent to take sole charge of an engineering watch without supervision</strong> — i.e. holding at least the <strong>STCW Reg. III/1 officer-in-charge of an engineering watch</strong> certification (or III/7 EOOW-supporting ratings under direction), completed shipboard familiarisation, and formally signed off by the CE/company as fit for unsupervised watch on that ship's plant. The contrast is the <em>supervised</em> watchkeeper — a cadet/junior standing watch only under a qualified officer.</p>
+      <h4>60-Second Answer</h4>
+      <p>The term captures the transition every junior engineer makes: from keeping watch <em>with</em> someone to keeping watch <em>alone, in sole charge</em>. Requirements layer up: <strong>(1) certification</strong> — STCW Reg. <strong>III/1</strong> (officer in charge of an engineering watch in a manned engine-room, or designated duty engineer in a periodically unmanned engine-room — the certificate wording itself covers both roles); <strong>(2) ship-specific competence</strong> — ISM Sec.6 familiarisation with this plant: main engine type, power plant, automation, emergency procedures — documented in the familiarisation checklist; <strong>(3) formal release</strong> — the CE assesses and authorises the officer for independent watch/duty-engineer rotation, recorded per the SMS (many companies use a written "watchkeeping release"); <strong>(4) fitness</strong> — medically fit, rest-hour compliant. For ratings, STCW <strong>III/4</strong> (watch rating) and <strong>III/5</strong> (able seafarer engine) contribute to the watch but do not keep it independently; an engine cadet never does. In UMS operation "independent watchkeeper" maps onto the <strong>designated duty engineer</strong> able to respond alone to alarms. The concept the examiner is probing: sole-charge responsibility — the independent watchkeeper answers directly to the CE for the machinery during his watch and must know when his independence ends: call for assistance and inform the CE when any situation exceeds safe one-person response (A-VIII/2 duty to call the CE in doubt — doing so is competence, not weakness).</p>
+      <h4>Governing instrument</h4>
+      <p>STCW Reg III/1 (officer in charge of an engineering watch) and Section A-VIII/2 sole-charge standards; the company's assessment/release procedure under ISM Code Sec. 6.</p>
+      <h4>Build-Up to Independence</h4>
+      <ul>
+        <li><strong>Certificate:</strong> STCW III/1 minimum (III/2 for senior watch on larger plants as assigned).</li>
+        <li><strong>Familiarisation:</strong> ISM Sec.6.3 — before being assigned, documented.</li>
+        <li><strong>Release:</strong> CE's assessment and written authorisation for sole charge / UMS duty.</li>
+        <li><strong>Limits:</strong> knows the call-the-CE triggers; never delegates the watch to an uncertified person.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>An 'independent watchkeeper' is not simply any certificated engineer — the CoC is the floor; sole-charge release additionally requires company assessment and documented familiarisation.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">STCW Reg. III/1 (A-III/1)</span><span class="reg-desc">Officer in charge of an engineering watch / duty engineer in a periodically unmanned ER — the base certificate</span></div>
+      <div class="reg-item"><span class="reg-code">STCW A-VIII/2 Part 3-2</span><span class="reg-desc">Watch duties — sole-charge responsibilities and the duty to call the Chief Engineer when in doubt</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code Sec.6.3 &amp; 6.5</span><span class="reg-desc">Familiarisation before assignment and identification of training needs</span></div>
+      <div class="reg-item"><span class="reg-code">STCW III/4 &amp; III/5</span><span class="reg-desc">Watch rating / able seafarer engine — support the watch, never keep it independently</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS V/14 (Safe Manning)</span><span class="reg-desc">The manning document listing the certificated watchkeepers the arrangement relies on</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Define it in one line — "certified, familiarised and formally released to keep the watch in sole charge" — then the three layers (STCW III/1 → ISM familiarisation → CE's release). Simon's follow-up on a container session is the UMS mapping: independent watchkeeper = the designated duty engineer answering alarms alone. The weak answer stops at "someone with a CoC" and misses ship-specific familiarisation and the CE's authorisation step.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Releasing a new 4/E for independent watch is a CE decision with legal weight: the assessment record is what shows due diligence if that engineer's watch later features in a casualty. Structured release — witnessed rounds, alarm-response drills, emergency-scenario questioning — is the professional standard.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "New 4/E joins with a valid III/1 CoC — can he take tonight's watch?" A: Not until ship-specific familiarisation is completed and he is released — the certificate is necessary, not sufficient (ISM 6.3). Q: "Can an electro-technical officer keep the engineering watch?" A: No — ETO (III/6) is not an engineering watchkeeping certificate; he supports, the watch needs a III/1 holder. Q: "Does calling the CE at night mean the watchkeeper isn't independent?" A: The opposite — A-VIII/2 obliges it in doubt; knowing the limit is part of the competence.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Equating certificate with competence (skipping familiarisation/release); not knowing III/4-III/5 ratings can't hold the watch; unable to map the concept onto UMS duty-engineer practice; forgetting the sole-charge accountability to the CE.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>STCW Regs: <strong>III/1</strong> (EOOW/duty engineer), <strong>III/2</strong> (C/E &amp; 2/E ≥3000 kW), <strong>III/4/III/5</strong> (ratings), <strong>III/6</strong> (ETO), <strong>III/7</strong> (electro-technical rating); ISM familiarisation: <strong>Sec.6.3</strong>, before assignment.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Engine-room fires and blackouts where an unfamiliarised officer misdiagnosed the specific plant (documented across MAIB reports) are the standing argument for the familiarisation-plus-release model over certificate-only manning.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> Who is an independent watchkeeper → certificate vs competence → familiarisation requirements → how you as CE release someone → when independence ends (call the CE) → UMS duty engineer mapping.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk practice: computer-based plus walked familiarisation checklists per rank, and the CE's documented handover/assessment before a joining engineer enters the UMS duty roster — typically after a supervised period matched to plant complexity.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB4_J','Q2 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB4_J · Q2 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q3" data-tags="ism">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is Risk Based Planning?</div>
+      <div class="q-tags"><span class="q-tag">ISM</span><span class="q-tag">RISK</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Risk-based planning means prioritising and designing work, maintenance and operations according to <strong>assessed risk (likelihood × consequence)</strong> rather than fixed routine alone. Its ISM anchor is <strong>Section 1.2.2.2 — "assess all identified risks to ships, personnel and the environment and establish appropriate safeguards."</strong> In practice: risk assessments before non-routine jobs, a risk matrix driving controls to <strong>ALARP</strong>, and risk-based maintenance (criticality-ranked PMS, condition-based intervals under class-approved schemes) instead of purely calendar-based routines.</p>
+      <h4>60-Second Answer</h4>
+      <p>The traditional model plans by fixed rules — calendar overhauls, standard checklists. Risk-based planning inverts it: identify hazards, evaluate likelihood and severity, and allocate effort/controls where risk is highest. <strong>Framework:</strong> hazard identification → risk evaluation (matrix) → controls by the hierarchy (eliminate → substitute → engineering → administrative → PPE) → residual risk to <strong>ALARP</strong> → implement, monitor, review. <strong>Where the CE applies it:</strong> (1) <strong>operations</strong> — every non-routine or high-hazard job (enclosed space, hot work, HV work, working aloft/overside) gets a documented risk assessment linked to the PTW system, per ISM 1.2.2.2 and Sec.7; (2) <strong>maintenance</strong> — criticality analysis ranks equipment by failure consequence; critical equipment (ISM Sec.10.3) gets tighter intervals, redundancy testing and standby verification, while low-criticality items can move to longer or condition-based intervals — the class-approved <strong>PMS/CBM survey arrangements</strong> are risk-based planning institutionalised; (3) <strong>voyage/resource planning</strong> — spares, manning-up decisions, weather routing. <strong>Benefits:</strong> resources follow consequence, hidden high-risk tasks surface, and deviations become visible decisions. <strong>Boundary:</strong> risk-based never overrides statutory/class minimums — you may tighten beyond them, extending beyond them needs the approving authority (class/flag).</p>
+      <h4>Governing instrument</h4>
+      <p>ISM Code Sec. 1.2.2.2 (assess all identified risks to ships, personnel and the environment — 2010 amendments, MSC.273(85)); the company's risk-assessment procedures implementing it.</p>
+      <h4>The Matrix — Say It Concretely</h4>
+      <ul>
+        <li><strong>Likelihood bands</strong> × <strong>consequence bands</strong> (people/environment/asset) → risk ranking (typically 5×5 in company SMS forms).</li>
+        <li><strong>ALARP:</strong> reduce until further reduction is grossly disproportionate to the gain — then manage the residual.</li>
+        <li><strong>Review triggers:</strong> incident, near-miss, change of method/equipment/people (Management of Change).</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Treating risk assessment as permit paperwork is the trap — ISM 1.2.2.2 requires assessment of ALL identified risks as a system property, feeding maintenance, manning and operational planning.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">ISM Code Sec.1.2.2.2</span><span class="reg-desc">"Assess all identified risks… establish appropriate safeguards" — the mandate for risk assessment in the SMS</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code Sec.7 &amp; 10.3</span><span class="reg-desc">Shipboard operations planning · critical equipment identification and standby testing</span></div>
+      <div class="reg-item"><span class="reg-code">Res. A.1118(30)</span><span class="reg-desc">Revised ISM implementation guidelines — risk assessment expectations in practice</span></div>
+      <div class="reg-item"><span class="reg-code">Class PMS/CBM schemes</span><span class="reg-desc">Approved machinery survey arrangements — risk/condition-based maintenance recognised by class</span></div>
+      <div class="reg-item"><span class="reg-code">MSC-MEPC.2/Circ.12/Rev.2 (FSA)</span><span class="reg-desc">Formal Safety Assessment — IMO's own risk-based method for rule-making (the concept at regulatory level)</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Anchor it to ISM 1.2.2.2 verbatim, then give one operational and one maintenance example from your own plant: "risk assessment + PTW before entering the scavenge space" and "criticality-ranked PMS with class-approved CBM on purifier bearings." Close with the boundary — risk-based can tighten, never relax, statutory/class minimums without approval. The weak answer defines a matrix in the abstract with no shipboard application.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE signs the risk assessments that matter most onboard — combustion-space entry, HV isolation, retarded maintenance decisions — and owns the criticality register behind the PMS. When deferring a job for spares, the risk assessment is what converts "we couldn't" into a defensible managed decision.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Condition monitoring looks good — extend the overhaul?" A: Only within a class-approved CBM/PMS scheme; outside it, class agreement first — risk-based planning works inside the approved envelope. Q: "Difference between risk assessment and PTW?" A: The RA analyses and sets controls; the PTW is the administrative control that enforces them for that job — the PTW references the RA. Q: "What is ALARP?" A: As Low As Reasonably Practicable — reduce risk until further measures are grossly disproportionate to the benefit.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Matrix-only answers with no application; confusing RA with PTW; suggesting risk assessment can override statutory intervals; not knowing ISM 1.2.2.2 as the anchor; no mention of criticality/critical equipment (10.3).</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>ISM <strong>1.2.2.2</strong> (risk), <strong>7</strong> (operations), <strong>10.3</strong> (critical equipment); hierarchy of controls (5 levels); typical SMS matrix <strong>5×5</strong>; review triggers: incident / near-miss / change.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Enclosed-space fatalities — still among the most repeated shipboard killers — almost always show a missing or paper-only risk assessment; they are the standing case for risk-based planning as practice, not paperwork.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> What is risk-based planning → ISM anchor → matrix and ALARP → hierarchy of controls → application to maintenance (CBM/criticality) → who approves deviations → Management of Change.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk SMS: electronic risk-assessment library with job-specific templates, PTW integration, and a criticality-coded PMS; CBM data (vibration, LO analysis) feeds interval decisions within the class-approved machinery survey arrangement — the CE reviews the criticality register at each internal audit.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB4_J','Q3 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB4_J · Q3 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q4" data-tags="solas lsa fire">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">4</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Contents of the training manual.</div>
+      <div class="q-tags"><span class="q-tag">SOLAS</span><span class="q-tag">LSA</span><span class="q-tag">FIRE</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Two statutory training manuals exist. <strong>LSA training manual (SOLAS III/35):</strong> instructions and information, in easily understood terms and illustrated wherever possible, on the ship's life-saving appliances and the best survival methods — kept in each crew mess/recreation room. <strong>Fire training manual (SOLAS II-2/15.2.3):</strong> instructions on fire safety practice, fire-fighting operations and the ship's systems — same accessibility rule. Both must be <strong>ship-specific</strong>, and any part may be provided as audio-visual aids instead of text.</p>
+      <h4>60-Second Answer</h4>
+      <p><strong>SOLAS III/35 (LSA training manual)</strong> — contents include, for the ship's actual equipment: donning of lifejackets, immersion suits and anti-exposure suits; muster at assigned stations; boarding, launching and clearing survival craft and rescue boats, including use of marine evacuation systems where fitted; method of launching from within the craft; release from launching appliances; use and deployment of protection in launching areas; illumination in launching areas; use of all survival equipment (rations, water, pyrotechnics, EPIRB/SART); use of detection equipment; assistance-rendering with radio LSA; drogues; engine and accessories of motor lifeboats; recovery of craft; hazards of exposure, hypothermia and first-aid; best use of survival craft facilities for survival; methods of retrieval including helicopter rescue strops/baskets and breeches buoy; and all other functions in the muster list and emergency instructions. <strong>SOLAS II-2/15.2.3 (fire training manual)</strong> — the fire-safety operational counterpart: general fire safety practice and precautions (smoking, electrical hazards, flammables, common hazards), general instructions on fire-fighting activities and procedures — reporting a fire, use of manual call points — meaning of alarms, operation and use of fire-fighting systems/appliances, operation and use of fire doors and fire/smoke dampers, and escape systems and appliances. Companions, not substitutes: the <strong>maintenance manuals</strong> (III/36 for LSA; II-2/14.2.2 fire maintenance plan) cover upkeep, while the training manuals cover use; drills (III/19) are where the manual's content is exercised.</p>
+      <h4>Governing instrument</h4>
+      <p>SOLAS III/35 (LSA training manual) and SOLAS II-2/15.2.3 (fire training manual) — contents as those regulations specify, ship-specific in detail.</p>
+      <h4>Memory Skeleton</h4>
+      <ul>
+        <li><strong>LSA manual = wear it, board it, launch it, survive in it, get rescued from it</strong> — for this ship's specific gear.</li>
+        <li><strong>Fire manual = prevent, report, respond, operate systems, escape.</strong></li>
+        <li><strong>Format:</strong> easily understood, illustrated, ship-specific; A/V aids acceptable in lieu; a copy in every crew mess/recreation room (or each cabin).</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>'The training manual' singular is the trap — there are two statutory training manuals (LSA III/35; fire II-2/15.2.3), and SOLAS III/36 maintenance instructions are a different document again.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS III/35</span><span class="reg-desc">Training manual and onboard training aids — LSA use and survival methods; location requirement</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-2/15.2.3</span><span class="reg-desc">Fire training manual — contents and accessibility</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS III/36 &amp; II-2/14</span><span class="reg-desc">The maintenance counterparts — instructions for onboard maintenance of LSA; fire-system maintenance plan</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS III/19</span><span class="reg-desc">Emergency training and drills — where the manuals' content is practised and recorded</span></div>
+      <div class="reg-item"><span class="reg-code">LSA Code / FSS Code</span><span class="reg-desc">The equipment standards the manuals describe for this ship's specific fit</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Paul):</strong> First disambiguate — "two statutory training manuals: LSA (III/35) and fire (II-2/15.2.3)" — that alone beats most candidates. Then the skeleton (wear-board-launch-survive-rescue / prevent-report-respond-operate-escape) with two or three concrete items each, the location rule (every mess/recreation room), and the trap distinction from the maintenance manuals. Reciting a memorised list without knowing it must be <strong>ship-specific</strong> is the common shortfall.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The engine department's emergency duties (fire parties, emergency generator, fire pumps, quick-closing valves) must be reflected in the ship-specific fire training manual; the CE checks his systems are correctly described after any modification — an outdated manual is a PSC/audit finding.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Where must the training manual be kept?" A: In each crew mess room and recreation room, or in each cabin (III/35.2). Q: "Training manual vs maintenance manual?" A: Use vs upkeep — III/35 vs III/36 for LSA; II-2/15.2.3 vs the II-2/14 maintenance plan for fire. Q: "Can it be a video?" A: Yes — any part may be provided as audio-visual aids in lieu of the manual.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Merging the two manuals into one vague "safety manual"; not knowing the location rule; confusing training with maintenance manuals; generic contents with no ship-specific requirement; no link to drills where the content is exercised.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>LSA training manual: SOLAS <strong>III/35</strong>; fire training manual: <strong>II-2/15.2.3</strong>; maintenance: <strong>III/36</strong> / <strong>II-2/14</strong>; drills: <strong>III/19</strong> (abandon-ship and fire drill monthly for cargo-ship crew, within 24 h of port departure if &gt;25% crew changed).</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Lifeboat-drill fatalities (on-load release accidents across multiple flags) exposed crews trained on generic material rather than their own hooks — driving both the ship-specific manual emphasis and the LSA release-gear amendments.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Paul:</strong> Training manual contents → where kept → LSA vs fire manuals → training vs maintenance manual → drill requirements → who updates it after equipment change.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel: both manuals ship-specific in the crew mess and electronically in the document system; engine-room emergency-equipment sections (EDG, emergency fire pump, quick-closing valves, CO&#8322; release) verified by the CE at internal audit and after any system modification.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB4_J','Q4 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB4_J · Q4 · v1.0</span>
+  </div>
+</div>
+
+    <div class="q-card" id="q5" data-tags="ism">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">5</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What are the safety manuals kept onboard?</div>
+      <div class="q-tags"><span class="q-tag">ISM</span><span class="q-tag">SOLAS</span><span class="q-tag">MARPOL</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Group them by origin: <strong>(1) SMS documentation</strong> under ISM Code Sec. 11 — safety &amp; environmental policy, procedures manuals, shipboard operations and emergency-preparedness manuals; <strong>(2) statutory SOLAS manuals</strong> — LSA training manual (III/35), LSA maintenance instructions (III/36), fire training manual (II-2/15.2.3), fire safety operational booklet (II-2/16.2), maintenance plan (II-2/14); <strong>(3) MARPOL/emergency plans</strong> — SOPEP/SMPEP (Annex I Reg 37 / Annex II Reg 17), garbage management plan (Annex V), VOC plan where applicable; <strong>(4) cargo/operations manuals</strong> — Cargo Securing Manual (VI/5.6 &amp; VII/5), stability booklet, loading manual; plus SSP under ISPS (restricted).</p>
+      <h4>60-Second Answer</h4>
+      <p>A CE-level answer surveys the statutory manual landscape rather than reciting a random list. <strong>SMS family (ISM Code):</strong> the company's documented system — policies, shipboard procedures, planned maintenance documentation, emergency preparedness (Sec. 8), all controlled documents under Sec. 11 with current versions onboard and obsolete ones removed. <strong>SOLAS family:</strong> the two training manuals (LSA III/35, fire II-2/15.2.3), their maintenance counterparts (III/36 instructions for onboard maintenance; II-2/14 maintenance plan), the fire safety operational booklet (II-2/16.2), damage control plans/booklet (II-1/19), and for the engine room the engine-room manuals and UMS documentation the Administration accepts. <strong>MARPOL family:</strong> SOPEP or SMPEP, Garbage Management Plan, Ballast Water Management Plan (BWM Convention Reg B-1), SEEMP (Annex VI Reg 26). <strong>Cargo family:</strong> Cargo Securing Manual, grain loading manual where applicable, stability/loading manuals approved by the Administration or class. Each manual has an owner, an approval basis (flag, class, or company) and a controlled-document status in the SMS — that framing is what distinguishes a management-level answer.</p>
+      <h4>Governing instrument</h4>
+      <p>ISM Code Sec. 11 (SMS documentation); SOLAS III/35–36 and II-2/14–16 (training and maintenance manuals, fire safety operational booklet); MARPOL manuals — SOPEP (Annex I Reg 37), SMPEP (Annex II Reg 17), SEEMP (Annex VI Reg 26).</p>
+      <h4>Memory Skeleton</h4>
+      <ul>
+        <li><strong>Four families:</strong> SMS (ISM) · SOLAS (train/maintain/operate) · MARPOL (pollution plans) · Cargo (securing/stability).</li>
+        <li><strong>Each manual = owner + approval basis + document control.</strong></li>
+        <li><strong>Ship-specific</strong> wherever the regulation says so (training manuals, SOPEP, CSM, stability booklet).</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Merging SMS manuals with statutory manuals — and inside SOLAS, confusing the fire training manual (II-2/15.2.3) with the fire safety operational booklet (II-2/16.2) is the classic slip.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">ISM Code Sec. 11</span><span class="reg-desc">Documentation — SMS document control; valid documents onboard, obsolete promptly removed</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS III/35, III/36</span><span class="reg-desc">LSA training manual; instructions for onboard maintenance of LSA</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-2/14, 15.2.3, 16.2</span><span class="reg-desc">Fire maintenance plan; fire training manual; fire safety operational booklet</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex I Reg 37 / Annex II Reg 17</span><span class="reg-desc">SOPEP / SMPEP shipboard pollution emergency plans</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex V Reg 10 / Annex VI Reg 26</span><span class="reg-desc">Garbage management plan; SEEMP</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS VI/5.6 &amp; VII/5</span><span class="reg-desc">Cargo Securing Manual — approved by the Administration</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Paul):</strong> Don't dump a list — give the four-family structure first, then one or two examples per family with their regulation. Paul often follows with "who approves that manual?" — know that CSM and stability booklet are flag/class-approved, SOPEP flag-approved, SMS manuals company-controlled under ISM document control.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE is document-owner for engine-room SMS procedures, the maintenance plan entries for fire and LSA machinery items, SEEMP Part measures affecting machinery operation, and the engine-room pages of SOPEP (bunkering, transfer procedures). Audit findings frequently trace to obsolete manual revisions still in circulation.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Is SOPEP an ISM document?" A: It is a statutory MARPOL plan, flag-approved — but it is also controlled within the SMS. Q: "Fire training manual vs fire safety operational booklet?" A: Training manual (II-2/15.2.3) teaches the crew; the operational booklet (II-2/16.2) contains information and instructions for the safe operation of the ship and cargo-handling in relation to fire safety. Q: "Where is the SSP kept?" A: Restricted access under ISPS — not open in the mess room.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Unstructured lists; confusing training with maintenance manuals; not knowing the approval authority for each manual; forgetting BWMP and SEEMP as newer statutory plans; claiming the SSP is freely available.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>III/35 &amp; III/36 (LSA train/maintain); II-2/14, 15.2.3, 16.2 (fire maintain/train/operate); Annex I Reg 37 (SOPEP); Annex II Reg 17 (SMPEP); Annex VI Reg 26 (SEEMP); ISM Sec. 11 (document control).</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>PSC concentrated inspection campaigns repeatedly find outdated SOPEP contact lists (Annex I Reg 37 requires current coastal-State contacts) — a small document-control failure that becomes a detainable deficiency in a real spill.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Paul:</strong> Safety manuals onboard → who approves each → training vs maintenance manual → SOPEP contents → document control under ISM → what happens to obsolete documents.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel: electronic document management with controlled master list; paper copies of SOPEP, training manuals and muster documentation at stations; CE verifies engine-room manual revisions at each internal audit.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB4_J','Q5 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB4_J · Q5 · v1.0</span>
+  </div>
+</div>
+
+    <div class="q-card" id="q6" data-tags="ism">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">6</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What are the ISM manuals? Describe the SMS documentation structure.</div>
+      <div class="q-tags"><span class="q-tag">ISM</span><span class="q-tag">SMS</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">ISM Code Sec. 11.3: SMS documentation is kept in a form the Company considers most effective, typically a <strong>Safety Management Manual</strong>. In practice it is a hierarchy: <strong>Level 1</strong> — policy manual (safety &amp; environmental protection policy, Sec. 2; company responsibility/authority, Sec. 3; DPA, Sec. 4); <strong>Level 2</strong> — procedures manuals (shipboard operations Sec. 7, emergency preparedness Sec. 8, reporting Sec. 9, maintenance Sec. 10); <strong>Level 3</strong> — work instructions, checklists, forms and records — all under Sec. 11 document control.</p>
+      <h4>60-Second Answer</h4>
+      <p>The Code deliberately does not prescribe manual titles — Sec. 1.4 lists the functional requirements the documentation must deliver: policies, instructions and procedures for safe operation, defined levels of authority and communication, reporting of accidents and non-conformities, emergency preparedness, and internal audit/review procedures. The conventional company structure maps those onto a pyramid. The <strong>policy level</strong> states commitments and the organisation — masters' overriding authority (Sec. 5.2), DPA link to highest management (Sec. 4). The <strong>procedure level</strong> holds the fleet manuals: shipboard operations (key operations and special operations, mooring, bunkering, watchkeeping), emergency preparedness with drill programmes (Sec. 8), maintenance system procedures including critical equipment identification (Sec. 10.3), and personnel/familiarisation procedures (Sec. 6). The <strong>working level</strong> is the ship-specific material: checklists, standing orders, forms, records — the objective evidence auditors sample. Sec. 11.2 requires valid documents at all relevant locations, review and approval by authorised personnel, and prompt removal of obsolete documents; Sec. 12 closes the loop with internal audits and management review feeding revisions back down the pyramid.</p>
+      <h4>Governing instrument</h4>
+      <p>ISM Code Secs. 1.4 (functional requirements — mandatory in substance) and 11.3 (form free); certification under Sec. 13 (DOC/SMC cycles).</p>
+      <h4>Memory Skeleton</h4>
+      <ul>
+        <li><strong>Pyramid: Policy → Procedures → Work instructions/records.</strong></li>
+        <li><strong>Sections to anchor:</strong> 2 policy · 4 DPA · 5 master's authority · 7 shipboard ops · 8 emergency · 10 maintenance · 11 documentation · 12 audit &amp; review.</li>
+        <li><strong>Form is free (11.3), function is mandatory (1.4).</strong></li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Claiming ISM prescribes a manual structure is the fail — Sec. 11.3 leaves the form free; what is mandatory is function (Sec. 1.4's functional requirements), evidenced at audit.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">ISM Code Sec. 1.4</span><span class="reg-desc">Functional requirements for a safety management system</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code Sec. 11</span><span class="reg-desc">Documentation — control, availability, removal of obsolete documents; Safety Management Manual</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code Secs. 7, 8, 10</span><span class="reg-desc">Shipboard operations; emergency preparedness; maintenance of ship and equipment</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS Chapter IX</span><span class="reg-desc">Makes the ISM Code mandatory; DOC/SMC certification basis</span></div>
+      <div class="reg-item"><span class="reg-code">RO Code / MSC.349(92)</span><span class="reg-desc">Recognized organizations performing ISM certification on behalf of flag</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Paul):</strong> Answer with the pyramid and the section numbers, then immediately say the Code prescribes function not format (1.4 vs 11.3) — that one sentence shows you have read the Code rather than a company intranet. Expect the follow-up "what is a controlled document?" — valid at all relevant locations, approved by authorised personnel, obsolete copies removed.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE owns the engine-room procedure set: UMS changeover, bunkering, critical-equipment list justification (Sec. 10.3), standing orders that must not contradict fleet procedures, and the maintenance records that form audit evidence. A CE who cannot map his daily paperwork to ISM sections fails the management layer of the oral.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Is a Safety Management Manual mandatory by that name?" A: No — Sec. 11.3 says documentation may be kept in the form the Company considers most effective; the SMM is convention, the functions of Sec. 1.4 are mandatory. Q: "Difference between DOC and SMC?" A: DOC to the Company per ship type (valid 5 years, annual verification); SMC to the ship (5 years, intermediate verification between 2nd and 3rd anniversary). Q: "Who removes obsolete documents?" A: The Company's document-control procedure — onboard, in practice the master/designated officers per that procedure.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Naming company manual titles with no Code sections; not knowing 10.3 critical equipment; confusing DOC with SMC validity/verification cycles; treating checklists as optional rather than controlled documents.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>DOC/SMC: <strong>5-year</strong> validity; DOC <strong>annual</strong> verification (±3 months); SMC <strong>intermediate</strong> between 2nd and 3rd anniversary; ISM Secs. <strong>1.4, 4, 5.2, 10.3, 11.2, 12</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Herald of Free Enterprise (1987) — the management failures ("disease of sloppiness" in the Sheen report) that drove Resolution A.741(18) and SOLAS Chapter IX: no defined shore responsibility, no procedures, no feedback loop — exactly the functions Sec. 1.4 now mandates.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Paul:</strong> ISM manuals → pyramid and sections → DOC vs SMC → document control → critical equipment → internal audit and management review → what happens with a major non-conformity.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk: fleet-wide electronic SMS with type-specific supplements; engine department work instructions and UMS checklists sit at level 3; CE reviews engine procedures at management-of-change and before internal audits.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB4_J','Q6 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB4_J · Q6 · v1.0</span>
+  </div>
+</div>
+
+    <div class="q-card" id="q7" data-tags="ism">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">7</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Difference between ISM survey and ISM audit.</div>
+      <div class="q-tags"><span class="q-tag">ISM</span><span class="q-tag">AUDIT</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Strictly, ISM verification is by <strong>audit</strong>, not survey. An <strong>audit</strong> is a systematic, independent examination of whether the safety management system conforms to the ISM Code and is effectively implemented — it produces DOC/SMC certification and non-conformity findings. A <strong>survey</strong> is the physical examination of the ship's structure, machinery and equipment against convention/class requirements — it produces statutory and class certificates. Different object (system vs ship), different verifier competence, different output.</p>
+      <h4>60-Second Answer</h4>
+      <p>The trap in this question is the premise: there is no "ISM survey" in the Code — verification of the SMS is done by audit (external audits by the flag Administration or its RO for the DOC and SMC, and the Company's own internal audits under Sec. 12). The auditor samples documents, records and people — interviews, evidence of drills, non-conformity close-outs — asking "does the system work?". A surveyor, by contrast, examines the physical ship: hull thickness, boiler internals, LSA/FFA condition, machinery trials — asking "does the ship comply?". The two interact: a surveyor finding poorly maintained equipment may report objective evidence that Sec. 10 (maintenance) is not implemented, which can trigger an additional ISM audit; conversely an audit non-conformity in maintenance procedures may prompt closer survey attention. Certification also differs — audits sustain the DOC (annual verification) and SMC (intermediate verification), while surveys sustain Safety Construction, Safety Equipment, Load Line, MARPOL certificates and class. A major non-conformity — a serious threat to safety or serious lack of effective implementation — can invalidate the SMC and thereby detain the ship even when every survey certificate is clean.</p>
+      <h4>Governing instrument</h4>
+      <p>ISM Code Sec. 13 with Res. A.1118(30) (revised ISM implementation guidelines); the RO Code for organisations performing the audits; physical survey regimes sit separately under class/statutory rules.</p>
+      <h4>Memory Skeleton</h4>
+      <ul>
+        <li><strong>Audit = management system</strong> (paper, people, practice) → DOC/SMC.</li>
+        <li><strong>Survey = physical ship</strong> (steel, machinery, equipment) → statutory/class certificates.</li>
+        <li><strong>Bridge:</strong> bad hardware is objective evidence of a Sec. 10 system failure.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Saying 'ISM survey' is itself the trap — ISM verification is by audit of the system; surveys examine the physical ship; a major non-conformity is defined by the Code, not by the surveyor's discretion.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">ISM Code Part B (Secs. 13–15)</span><span class="reg-desc">Certification and verification — DOC, SMC, audit-based verification</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code Sec. 12</span><span class="reg-desc">Company verification — internal audits and management review</span></div>
+      <div class="reg-item"><span class="reg-code">Res. A.1118(30)</span><span class="reg-desc">Revised guidelines on implementation of the ISM Code by Administrations</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS I/7–I/10</span><span class="reg-desc">Statutory surveys of passenger and cargo ships — the survey regime proper</span></div>
+      <div class="reg-item"><span class="reg-code">RO Code (MSC.349(92))</span><span class="reg-desc">Recognized organizations conducting both audits and surveys on behalf of flag</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Open by correcting the premise politely — "ISM works by audit; surveys are the physical-examination regime" — then give the object/verifier/output triple. Simon (LNG background) likes the interaction case: a surveyor's finding as objective evidence in an audit. Finish with the major non-conformity definition; that is his standard follow-up.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE faces both: surveyors for CSM/boiler/shaft surveys and auditors for the SMS. Presenting maintenance records that satisfy the auditor (system evidence) and machinery that satisfies the surveyor (physical condition) are distinct preparations — conflating them leaves one exposed.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Define major non-conformity." A: An identifiable deviation that poses a serious threat to the safety of personnel or the ship or a serious risk to the environment and requires immediate corrective action; includes lack of effective and systematic implementation of a Code requirement. Q: "Can the ship sail with a major NC?" A: The SMC/DOC is affected — the major NC must be downgraded to an NC with an agreed corrective-action plan before certification continues per flag procedures. Q: "Who audits the Company office?" A: Flag or RO for the DOC; the Company audits itself internally under Sec. 12.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Accepting the "ISM survey" premise; not knowing DOC vs SMC audit cycles; unable to define major non-conformity; missing that internal audits are a Code requirement, not company goodwill.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>DOC annual verification; SMC intermediate between <strong>2nd and 3rd</strong> anniversary; both certificates <strong>5-year</strong> validity; interim DOC <strong>12 months</strong>, interim SMC <strong>6 months</strong> (extendable by flag).</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Post-casualty investigations (e.g. multiple MAIB/ATSB reports) repeatedly show ships with valid survey certificates but hollow SMS implementation — the gap this question probes, and the reason audits sample effectiveness, not paperwork existence.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> Survey vs audit → who conducts each → DOC/SMC cycles → major non-conformity → surveyor finding as audit evidence → internal audit programme onboard.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk: annual internal audit per ship plus external SMC audits; CE prepares maintenance-system evidence (PMS compliance, critical-equipment tests) for audits and physical readiness for class/statutory surveys — two parallel checklists.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB4_J','Q7 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB4_J · Q7 · v1.0</span>
+  </div>
+</div>
+
+    <div class="q-card" id="q8" data-tags="stcw">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">8</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What are the different types of leadership?</div>
+      <div class="q-tags"><span class="q-tag">STCW</span><span class="q-tag">HELM</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Classic styles: <strong>autocratic</strong> (leader decides — right in emergencies), <strong>democratic/participative</strong> (team consulted — best for planning and buy-in), <strong>laissez-faire/delegative</strong> (leader hands over — only with competent, motivated specialists). Broader models: <strong>transactional</strong> (task-and-reward, procedures and compliance), <strong>transformational</strong> (vision and development of people), and <strong>situational leadership</strong> — matching style to the follower's competence and commitment. STCW anchors this under management-level competence: leadership and managerial skills, Table A-III/2 (HELM).</p>
+      <h4>60-Second Answer</h4>
+      <p>The examiner wants two things: the taxonomy, and the judgement of <strong>when each style is correct in the engine room</strong>. Autocratic: engine-room fire, blackout recovery, flooding — one voice, closed-loop orders, no debate; the cost is suppressed input, so it must be temporary. Democratic: planning a main-engine unit overhaul or a risk assessment — drawing on the 3/E's and fitters' knowledge produces better plans and ownership; the cost is time. Laissez-faire: a proven electro-technical officer on a familiar task — micromanaging him wastes the CE and demotivates the specialist; the failure mode is abdication when competence was overestimated. Situational leadership formalises the choice: direct low-competence/high-commitment newcomers, coach, support, then delegate as competence grows — which is precisely watchkeeper development under an engine-room training programme. Transactional leadership underpins the SMS itself — procedures, compliance, corrective action — while transformational behaviour (explaining why, developing juniors, modelling standards) is what turns a compliant department into a resilient one. The STCW hook: Reg III/2 and Section A-III/2 require "leadership and managerial skills" including task and workload management, resource management, decision-making techniques — delivered through HELM(M) courses, and assessable in the oral.</p>
+      <h4>Governing instrument</h4>
+      <p>STCW Table A-III/2 (management level) — leadership and managerial skills competence, introduced by the 2010 Manila amendments; company HELM(M) training implementing it.</p>
+      <h4>Memory Skeleton</h4>
+      <ul>
+        <li><strong>A-D-L:</strong> Autocratic = emergency · Democratic = planning · Laissez-faire = proven specialist.</li>
+        <li><strong>Transactional = run the system; Transformational = grow the people.</strong></li>
+        <li><strong>Situational = match style to competence &amp; commitment</strong> — direct → coach → support → delegate.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Naming one 'best' style is the fail — the management-level answer is situational fit (direct &rarr; coach &rarr; support &rarr; delegate), with autocratic decision-making correct in emergencies.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">STCW Reg III/2 &amp; Sec. A-III/2</span><span class="reg-desc">Management level — use of leadership and managerial skills (competence table)</span></div>
+      <div class="reg-item"><span class="reg-code">STCW Sec. A-III/1</span><span class="reg-desc">Operational level — application of leadership and teamworking skills</span></div>
+      <div class="reg-item"><span class="reg-code">STCW Sec. A-VIII/2</span><span class="reg-desc">Watchkeeping principles — resource management context</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code Sec. 6</span><span class="reg-desc">Resources and personnel — Company's duty to ensure competent, motivated crew</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Paul):</strong> Name three classic styles with one engine-room situation each — emergency, overhaul planning, trusted specialist — then close with situational leadership as "the answer to which style: it depends on the person and the task". Paul's follow-up is usually "which style during a blackout?" — autocratic, closed-loop communication, then debrief democratically afterwards.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE's daily reality is switching styles within one watch: directive during manoeuvring stations, participative in the morning planning meeting, delegative with the 2/E's maintenance domain — and knowing the switch is deliberate is what A-III/2 assesses.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Which is the best leadership style?" A: None universally — situational; the skill is diagnosis. Q: "Difference between leadership and management?" A: Management administers systems (planning, organising, controlling); leadership influences people toward the goal — the CE needs both. Q: "Where does STCW require this?" A: Management level Table A-III/2 — leadership and managerial skills; HELM(M) is the standard delivery.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Reciting styles with no shipboard application; claiming democratic is always best; not linking to STCW/HELM; missing that laissez-faire fails when competence is overestimated.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>STCW Table <strong>A-III/2</strong> (management), <strong>A-III/1</strong> (operational teamworking); situational model: <strong>4 modes</strong> — direct, coach, support, delegate.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Investigations from Herald of Free Enterprise to modern engine-room fires cite failures of challenge-and-response and one-man error chains — the human-element findings that put leadership, teamwork and resource management into STCW via the 2010 Manila amendments.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Paul:</strong> Types of leadership → which in an emergency → leadership vs management → how you develop a weak 4/E → where STCW requires it → ERM link.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel: morning meeting run participatively; UMS emergencies drilled with directive closed-loop orders; junior-engineer development follows a staged delegation matched to demonstrated competence — situational leadership in practice.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB4_J','Q8 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB4_J · Q8 · v1.0</span>
+  </div>
+</div>
+
+    <div class="q-card" id="q9" data-tags="mlc">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">9</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What does MLC say about war risk? Can a seafarer refuse to sail into a war zone?</div>
+      <div class="q-tags"><span class="q-tag">MLC</span><span class="q-tag">WAR RISK</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Answer honestly in two layers. <strong>MLC text:</strong> the 2018 amendments (in force 26 Dec 2020) amended Standards A2.1 and A2.2 so that a seafarer's employment agreement continues to have effect and <strong>wages and entitlements continue to be paid</strong> throughout captivity by pirates or armed robbers, even after the SEA would otherwise expire — and repatriation cannot lapse during captivity. <strong>Right to refuse a war zone:</strong> that right is NOT in the MLC text — it lives in collective bargaining agreements (IBF/ITF Warlike Operations Areas): typically the right to refuse to sail, repatriation at company cost, and bonus/doubled compensation for those who sail.</p>
+      <h4>60-Second Answer</h4>
+      <p>Candidates who claim "MLC gives the right to refuse war zones" fail on precision. What the Convention itself does: Regulation 2.1/Standard A2.1 (SEA) and Standard A2.2 (wages) as amended in 2018 address the piracy/armed-robbery captivity gap exposed off Somalia — before the amendment, owners could treat a hijacked seafarer's contract as expired mid-captivity. Now the SEA continues to have effect while the seafarer is held captive on or off the ship, wages and allotments continue, and entitlement to repatriation (Reg 2.5) survives. Definitions of piracy and armed robbery follow UNCLOS Art. 101 and IMO usage. What the Convention does not do: grant a general statutory right to refuse entry into warlike areas. That protection is contractual — IBF and national CBAs designate <strong>Warlike Operations Areas and High Risk Areas</strong>; within them seafarers typically get the right to refuse to sail with repatriation at the owner's expense, compensation bonuses (commonly 100% of basic wage for the transit period), and death/disability doubled. The employer's overarching MLC duties still bite: Reg 4.3 (occupational safety and health — risk assessment applies to security threats), Reg 2.5 and Standard A2.5.2 (financial security), and flag-State war-risk insurance requirements. So the exam-safe formula: MLC 2018 = wages and SEA protected during captivity; refusal rights = CBA layer, not MLC text.</p>
+      <h4>Governing instrument</h4>
+      <p>MLC 2018 amendments to Stds A2.1 and A2.2 (in force 26 Dec 2020) — SEA and wages continue through piracy captivity; refusal-to-sail rights arise from CBA/IBF Warlike Operations Area machinery, not the MLC text.</p>
+      <h4>Memory Skeleton</h4>
+      <ul>
+        <li><strong>MLC 2018 amendments:</strong> SEA + wages + repatriation continue during piracy/armed-robbery captivity (A2.1, A2.2, in force 26 Dec 2020).</li>
+        <li><strong>Refusal right = CBA (IBF/ITF Warlike Operations Areas)</strong>, not MLC text.</li>
+        <li><strong>Supporting MLC duties:</strong> Reg 4.3 OSH risk assessment; Reg 2.5 repatriation.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Claiming the MLC text grants a right to refuse to sail into a war-risk area is the trap — that right lives in the CBA/IBF Warlike Operations Area machinery; MLC 2018 secures the SEA and wages during captivity.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MLC Std A2.1.7 &amp; A2.2.7 (2018 amdts)</span><span class="reg-desc">SEA continues and wages payable throughout captivity by pirates/armed robbers; in force 26 Dec 2020</span></div>
+      <div class="reg-item"><span class="reg-code">MLC Reg 2.5 / Std A2.5.2</span><span class="reg-desc">Repatriation and financial security — cannot lapse during captivity</span></div>
+      <div class="reg-item"><span class="reg-code">MLC Reg 4.3</span><span class="reg-desc">Health and safety protection — risk assessment extends to security threats</span></div>
+      <div class="reg-item"><span class="reg-code">UNCLOS Art. 101</span><span class="reg-desc">Definition of piracy referenced by the MLC amendments</span></div>
+      <div class="reg-item"><span class="reg-code">IBF/ITF CBA — Warlike Operations Areas</span><span class="reg-desc">Contractual right to refuse, repatriation at owner's cost, war-risk bonus and doubled compensation</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> Nair rewards the two-layer honesty: "the Convention protects wages and the SEA during captivity — the 2018 amendments; the right to refuse a war zone is a CBA right under the IBF Warlike Operations Area framework." Quote the in-force date (26 Dec 2020) and the Somalia-piracy driver, and you have separated yourself from the crowd.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Transits of designated High Risk Areas (Gulf of Aden, Red Sea) put the CE inside the ship-security plan: engine-room hardening, safe-muster/citadel readiness with independent comms and machinery control considerations, fuel and speed planning for group transits — the technical face of the same risk the MLC amendments address.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "So MLC lets me refuse to enter a war zone?" A: No — that right comes from the applicable CBA (IBF Warlike Operations Area); MLC's contribution is wage/SEA/repatriation protection during captivity. Q: "When did the captivity amendments enter force?" A: 26 December 2020. Q: "Who designates warlike areas?" A: For CBA purposes, the IBF (ITF and employers' JNG) — not the IMO.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Attributing the refusal right to MLC text; not knowing the 2018 amendments exist; confusing IBF Warlike Operations Areas with military/insurance HRA designations; forgetting wages continue past SEA expiry during captivity.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>2018 amendments in force <strong>26 Dec 2020</strong>; typical CBA war bonus <strong>100% of basic wage</strong> for the warlike-area period with <strong>doubled</strong> death/disability compensation (CBA-dependent — state as typical, not statutory).</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Somali piracy captivity cases (some crews held years, e.g. MV Iceberg 1 — ~1,000 days) exposed wage stoppage and contract expiry mid-captivity — the direct driver of the 2018 MLC amendments.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Nair:</strong> MLC and war risk → 2018 amendments → can you refuse → who pays the bonus → repatriation during captivity → CE's role in HRA transit preparation.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel, Red Sea/Gulf of Aden decisions: company routing per threat assessment; where transit proceeds, crew consultation, hardening per BMP, and CBA war-risk terms applied — the CE briefing the engine team on citadel machinery arrangements and readiness.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB4_J','Q9 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB4_J · Q9 · v1.0</span>
+  </div>
+</div>
+
+    <div class="q-card" id="q10" data-tags="mlc">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">10</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is seafarer abandonment? What protection does MLC provide?</div>
+      <div class="q-tags"><span class="q-tag">MLC</span><span class="q-tag">ABANDONMENT</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Under MLC Standard A2.5.2 (2014 amendments, in force 18 Jan 2017) a seafarer is <strong>abandoned</strong> when the shipowner: (a) fails to cover the cost of repatriation; or (b) leaves the seafarer without necessary maintenance and support; or (c) otherwise unilaterally severs ties, including failing to pay contractual wages for <strong>at least two months</strong>. Every ship must carry a <strong>financial-security certificate</strong> (insurance/P&amp;I) giving seafarers direct access to cover: up to <strong>four months</strong> outstanding wages and entitlements, repatriation costs, and essential needs (food, accommodation, water, fuel, medical care) until arrival home.</p>
+      <h4>60-Second Answer</h4>
+      <p>Abandonment is the ugly end of shipowner failure — crews left unpaid on arrested or laid-up ships for months. The 2014 amendments closed the gap with a compulsory financial-security system. <strong>Definition (A2.5.2.2):</strong> the three limbs above; "necessary maintenance and support" means adequate food, accommodation, drinking water, essential fuel for survival on board, and necessary medical care (A2.5.2.5). <strong>The instrument:</strong> a certificate or other documentary evidence of financial security issued by the provider (typically the P&amp;I club) must be carried on board and posted where seafarers can see it, in English, covering all seafarers on the ship. <strong>The cover (A2.5.2.9):</strong> outstanding wages and other entitlements limited to four months, all reasonable repatriation expenses, and essential needs from abandonment until arrival home; the seafarer has <strong>direct access</strong> to the provider — no need to sue the owner first. The system sits alongside Regulation 2.5 repatriation proper (entitlement after maximum service periods under 12 months, at no cost to the seafarer for standard circumstances) with the fallback chain when the owner defaults: <strong>flag State → port State → labour-supplying State</strong>, with the paying State entitled to recover from the owner including by ship arrest. Cases are logged in the joint <strong>ILO/IMO database on abandonment of seafarers</strong> — cite it; examiners know incidents from it. Parallel financial security for death/long-term disability sits in Standard A4.2 from the same amendment package.</p>
+      <h4>Governing instrument</h4>
+      <p>MLC Std A2.5.2 (2014 amendments, in force 18 Jan 2017) — abandonment definition and compulsory financial security, certificates carried and posted onboard; the ILO/IMO abandonment database.</p>
+      <h4>Memory Skeleton</h4>
+      <ul>
+        <li><strong>Three limbs:</strong> no repatriation · no maintenance &amp; support · ties severed / ≥2 months unpaid.</li>
+        <li><strong>Certificate on board, posted, English</strong> — direct access to provider.</li>
+        <li><strong>Cover: 4 months wages + repatriation + essential needs.</strong></li>
+        <li><strong>Fallback: flag → port → labour-supplying State; ILO/IMO database.</strong></li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Reducing abandonment to failed repatriation is the trap — the definition has three limbs including &ge;2 months' unpaid wages, and the financial security is capped at four months' wages.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MLC Std A2.5.2</span><span class="reg-desc">Financial security for abandonment — definition, certificate, scope of cover (2014 amdts, in force 18 Jan 2017)</span></div>
+      <div class="reg-item"><span class="reg-code">MLC Reg 2.5 / Std A2.5.1</span><span class="reg-desc">Repatriation — entitlement, circumstances, prohibition of recovering costs from seafarers (save serious default)</span></div>
+      <div class="reg-item"><span class="reg-code">MLC Std A4.2.1–A4.2.2</span><span class="reg-desc">Parallel financial security for death and long-term disability claims</span></div>
+      <div class="reg-item"><span class="reg-code">ILO/IMO joint database</span><span class="reg-desc">Reported incidents of abandonment of seafarers — monitoring mechanism</span></div>
+      <div class="reg-item"><span class="reg-code">MLC Reg 5.1 / 5.2</span><span class="reg-desc">Flag-State certification (DMLC) and port-State inspection enforcing the certificates</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Lead with the three-limb definition and the two-months wage trigger, then the certificate and the four-month cap — those four numbers-and-limbs are the whole answer. Simon's follow-up is reliably "where would I see proof on board?" — the financial-security certificate posted in a conspicuous place, alongside the MLC certificate and DMLC.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>On an arrested or laid-up ship the CE keeps generators, fresh water and sanitation alive — "essential fuel for survival on board" in A2.5.2.5 is literally his fuel calculation; knowing the crew's direct-access rights also makes the CE the informed senior officer when wages stop.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Is the wage cover unlimited?" A: No — outstanding wages and entitlements limited to four months (A2.5.2.9). Q: "Two months of what triggers abandonment?" A: Failure to pay contractual wages for a period of at least two months under the severed-ties limb. Q: "Who repatriates if the owner and flag both fail?" A: The port State or labour-supplying State may arrange it and recover costs from the owner — including detention/arrest of the ship.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Confusing abandonment financial security (A2.5.2) with death/disability security (A4.2); not knowing the 4-month wage cap or 2-month trigger; unaware the certificate must be posted on board; treating repatriation as charity rather than an enforceable entitlement.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>2014 amendments in force <strong>18 Jan 2017</strong>; wage trigger <strong>≥2 months</strong>; cover cap <strong>4 months</strong> wages; max service period before repatriation entitlement <strong>&lt;12 months</strong>; certificates posted in <strong>English</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>The ILO/IMO database recorded record abandonment numbers in the 2020s (hundreds of ships per year at peak); long-running cases such as MT Iba (crew unpaid ~32 months, Umm Al Quwain) illustrate exactly the limbs and the P&amp;I direct-access remedy the amendments created.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> Define abandonment → financial-security certificate → what it pays → repatriation fallback chain → ILO/IMO database → CE's duties on an abandoned ship.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel: P&amp;I-issued MLC financial-security certificates (A2.5.2 and A4.2) posted with the MLC/DMLC on the crew notice board; verified at each MLC inspection and PSC boarding.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB4_J','Q10 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB4_J · Q10 · v1.0</span>
+  </div>
+</div>
+
+  </div>
+</div>
+<div id="no-results" style="display:none;text-align:center;color:#64748b;padding:30px">No questions match your search/filter.</div>
+
+<div class="comment-overlay" id="comment-overlay" onclick="if(event.target===this)closeComment()">
+  <div class="comment-modal">
+    <div id="comment-form-wrap">
+      <h3>Report a Correction</h3>
+      <p id="comment-context-label">Your comment goes directly to the editor. Not public.</p>
+      <form id="comment-form" action="https://formspree.io/f/maqgoeww" method="POST" onsubmit="submitComment(event)">
+        <input type="hidden" name="qb_reference" id="form-qb-ref" value="">
+        <label>Type</label>
+        <select name="comment_type">
+          <option value="Error / Correction">🔴 Error / Correction</option>
+          <option value="Suggestion">💡 Suggestion</option>
+          <option value="Missing Topic">📋 Missing Topic</option>
+        </select>
+        <label>Comment</label>
+        <textarea name="comment" placeholder="Describe the issue, suggestion, or what's missing…" required></textarea>
+        <label>Your name (optional)</label>
+        <input type="text" name="name" placeholder="Anonymous">
+        <div class="comment-btns">
+          <button type="button" class="btn-cancel" onclick="closeComment()">Cancel</button>
+          <button type="submit" class="btn-submit">Send →</button>
+        </div>
+      </form>
+    </div>
+    <div class="comment-success" id="comment-success">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <p>Sent! Thank you.</p>
+      <p style="font-size:12px;color:#64748b;margin-top:6px;">The editor will review your comment.</p>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+Compiled by Nixon Antony, 2/E, Maersk A/S · MEO Class 1 exam prep, Kochi MMD · Corrections: contactus@marineintelligenceweekly.com<br>
+Disclaimer: For oral-exam preparation only. Always cross-check against current IMO/class/DG Shipping circulars before your exam — regulations amend frequently.
+</div>
+<script>
+function toggleCard(h){h.closest('.q-card').classList.toggle('open')}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters()}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();const cards=document.querySelectorAll('.q-card');let vis=0;cards.forEach(c=>{const tags=(c.dataset.tags||'').toLowerCase();const text=c.innerText.toLowerCase();const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));c.style.display=show?'':'none';if(show)vis++});document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;document.getElementById('no-results').style.display=vis===0?'block':'none'}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){document.querySelectorAll('.toc-link').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+x.target.id))}})},{threshold:.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+function openComment(qbId,qNum){const ref=qbId+(qNum?' · '+qNum:'');document.getElementById('form-qb-ref').value=ref;document.getElementById('comment-context-label').textContent='Reference: '+ref+' · Goes directly to the editor. Not public.';document.getElementById('comment-form-wrap').style.display='';document.getElementById('comment-success').style.display='none';document.getElementById('comment-overlay').classList.add('open')}
+function closeComment(){document.getElementById('comment-overlay').classList.remove('open')}
+function submitComment(e){e.preventDefault();const form=e.target;const data=new FormData(form);fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}}).then(()=>{document.getElementById('comment-form-wrap').style.display='none';document.getElementById('comment-success').style.display='block';form.reset();setTimeout(closeComment,2000)}).catch(()=>{window.location.href='mailto:contactus@marineintelligenceweekly.com?subject=QB Comment: '+encodeURIComponent(document.getElementById('form-qb-ref').value)})}
+</script>
+<script>
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('copy', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+</body></html>

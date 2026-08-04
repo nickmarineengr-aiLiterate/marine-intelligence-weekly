@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QB1_K — Engine Construction, Stability &amp; Surveys | MEO Class 1 Question Bank | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink)}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 20px;display:flex;align-items:center;gap:10px}
+.topbar b{color:var(--teal-dark)}.topbar a{color:var(--grey-text);text-decoration:none;font-size:13px;margin-left:14px}
+.page-header{background:var(--navy);color:#fff;padding:22px 20px}
+.qb-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;letter-spacing:.5px;padding:3px 9px;border-radius:4px;margin-bottom:8px}
+.page-header h1{margin:4px 0;font-size:22px}.page-header p{color:#cbd5e1;font-size:13px;margin:4px 0}
+.header-meta{display:flex;gap:16px;font-size:12px;color:#94a3b8;margin-top:8px;flex-wrap:wrap}
+.controls-bar{position:sticky;top:41px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);padding:8px 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#search-input{flex:1;min-width:160px;padding:6px 10px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;color:var(--grey-text);font-size:12px;padding:5px 10px;border-radius:14px;cursor:pointer}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+#q-count-label{font-size:12px;color:var(--grey-text)}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;padding:20px;max-width:1100px;margin:0 auto}
+.sidebar{position:sticky;top:95px;align-self:start;font-size:12px}
+.sidebar a{display:block;color:var(--grey-text);text-decoration:none;padding:4px 8px;border-radius:4px;margin-bottom:2px}
+.sidebar a.active{background:var(--teal-light);color:var(--teal-dark);font-weight:600}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:18px 0 8px}
+.section-head h2{font-size:15px;margin:0}.sec-count{font-size:11px;color:var(--grey-text);background:var(--grey-bg);padding:2px 8px;border-radius:10px}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;margin-bottom:10px;overflow:hidden}
+.q-header{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;cursor:pointer}
+.q-header:hover{background:var(--grey-bg)}
+.q-num-badge{background:var(--teal);color:#fff;font-size:12px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.q-text-wrap{flex:1;min-width:0}.q-text{font-size:14px;font-weight:600}
+.q-tags{margin-top:5px}.q-tag{display:inline-block;font-size:10px;background:var(--teal-light);color:var(--teal-dark);padding:2px 7px;border-radius:8px;margin-right:5px}
+.q-chevron{width:18px;flex-shrink:0;transition:transform .2s}
+.q-card.open .q-chevron{transform:rotate(180deg)}
+.q-answer{display:none;padding:0 14px 14px}.q-card.open .q-answer{display:block}
+.answer-body{font-family:Georgia,serif;font-size:14.5px;line-height:1.6}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--teal-dark);margin:14px 0 6px;font-family:'Segoe UI',sans-serif}
+.answer-body ul,.answer-body ol{margin:6px 0;padding-left:20px}
+.formula{background:var(--grey-bg);font-family:monospace;padding:8px 10px;border-radius:6px;font-size:13px}
+.reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:12px 14px;margin-top:14px}
+.reg-box-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:8px}
+.reg-item{display:flex;gap:10px;font-size:12.5px;padding:3px 0;border-top:1px solid #1e293b}
+.reg-item:first-of-type{border-top:none}
+.reg-code{color:var(--orange);font-family:monospace;min-width:150px;word-break:break-word}
+.reg-desc{color:#cbd5e1;min-width:0}
+.ce-tip{background:var(--orange-light);border-left:3px solid var(--orange);padding:10px 12px;border-radius:0 6px 6px 0;margin-top:12px;font-size:13px}
+details.dd{margin-top:10px;border:1px solid var(--grey-border);border-radius:6px;padding:6px 10px}
+details.dd summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--teal-dark)}
+details.dd p,details.dd div{font-size:13px;margin:6px 0}
+.q-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;border-top:1px solid var(--grey-border);padding-top:8px;margin-top:10px}
+.correction-btn{background:none;border:1px solid var(--grey-border);color:var(--teal-dark);font-size:11px;padding:4px 10px;border-radius:12px;cursor:pointer}
+.correction-btn:hover{background:var(--teal-light)}
+.q-version{font-size:11px;color:var(--grey-text);flex-shrink:0}
+.page-footer{max-width:1100px;margin:20px auto;padding:16px 20px;border-top:1px solid var(--grey-border);font-size:12px;color:var(--grey-text)}
+.cheat{background:#fff;border:2px dashed var(--teal);border-radius:10px;padding:16px;margin:20px 0}
+.cheat h2{color:var(--teal-dark);font-size:16px;margin-top:0}
+.cheat .flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0}
+.cheat .node{background:var(--teal-light);color:var(--teal-dark);font-size:12px;font-weight:600;padding:6px 10px;border-radius:6px}
+.cheat .arrow{color:var(--teal);font-weight:700}
+.cheat .memcard{background:var(--grey-bg);border-left:3px solid var(--orange);border-radius:0 6px 6px 0;padding:8px 10px;font-size:12.5px;margin:6px 0}
+.cheat table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+.cheat th,.cheat td{border:1px solid var(--grey-border);padding:5px 8px;text-align:left}
+.cheat th{background:var(--navy);color:#fff}
+.comment-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center}
+.comment-overlay.open{display:flex}
+.comment-modal{background:#fff;border-radius:14px;padding:28px;max-width:440px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.comment-modal h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.comment-modal p{font-size:12px;color:var(--grey-text);margin-bottom:18px}
+.comment-modal label{display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.comment-modal select,.comment-modal textarea,.comment-modal input{width:100%;padding:9px 12px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px;font-family:inherit;margin-bottom:12px;outline:none}
+.comment-modal select:focus,.comment-modal textarea:focus,.comment-modal input:focus{border-color:var(--teal)}
+.comment-modal textarea{resize:vertical;min-height:90px}
+.comment-btns{display:flex;gap:10px;justify-content:flex-end}
+.btn-cancel{background:var(--grey-bg);border:1px solid var(--grey-border);color:var(--grey-text);padding:8px 18px;border-radius:6px;font-size:13px;cursor:pointer}
+.btn-submit{background:var(--teal);color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer}
+.btn-submit:hover{background:var(--teal-dark)}
+.comment-success{display:none;text-align:center;padding:20px}
+.comment-success svg{color:var(--teal);margin-bottom:10px}
+.comment-success p{font-size:14px;color:var(--navy);font-weight:600}
+@media(max-width:700px){.main-layout{grid-template-columns:1fr}.sidebar{display:none}}
+body{-webkit-user-select:none;user-select:none}
+</style>
+</head><body oncontextmenu="return false"><script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace('/SQ/pay.html');}</script><div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.04;">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wm" x="0" y="0" width="300" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+        <text x="10" y="60" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">marineintelligenceweekly.com</text>
+        <text x="10" y="120" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">MEO CLASS 1 &#8212; CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wm)"/>
+  </svg>
+</div>
+
+<div class="topbar"><b>⚓ MIW</b> Marine Intelligence Weekly
+<a href="/">Home</a><a href="/meoclass1/">MEO Class 1</a><a href="mailto:contactus@marineintelligenceweekly.com">Contact</a></div>
+<div class="page-header">
+  <span class="qb-badge">QB1_K</span>
+  <h1>QB1_K — Engine Construction, Stability &amp; Surveys</h1>
+  <p>MEO Class 1 Oral Exam Question Bank — Kochi MMD-focused, Examiners: Simon, Nair &amp; Paul, Jul 2026 batch</p>
+  <div class="header-meta"><span>7 Questions</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span><span>v1.0</span><span><a href="QB1_K_CheatSheet.html" style="color:#5eead4">Cheat Sheet →</a></span></div>
+</div>
+<div class="controls-bar">
+  <input id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag('all',this)">All</button><button class="filter-btn" onclick="filterTag('survey',this)">Surveys</button><button class="filter-btn" onclick="filterTag('iacs',this)">IACS / Class</button><button class="filter-btn" onclick="filterTag('machinery',this)">Machinery</button>
+  <span id="q-count-label">Showing 7 of 7</span>
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <div style="font-weight:700;font-size:11px;text-transform:uppercase;color:#64748b;margin-bottom:6px">Contents</div>
+    <a class="toc-link" href="#q1">1. Class auditor qualifications</a>
+    <a class="toc-link" href="#q2">2. Condition of Class</a>
+    <a class="toc-link" href="#q3">3. GT vs DWT</a>
+    <a class="toc-link" href="#q4">4. Container ship size trend</a>
+    <a class="toc-link" href="#q5">5. DP-1 vs DP-2</a>
+    <a class="toc-link" href="#q6">6. Structural plans onboard</a>
+    <a class="toc-link" href="#q7">7. Lifting appliance documents</a>
+    <div style="border-top:1px solid #e2e8f0;margin:10px 0"></div>
+    <div style="font-size:11px;color:#64748b">Cheat sheet: <a href="QB1_K_CheatSheet.html" style="color:#0d9488">QB1_K_CheatSheet</a></div>
+  </div>
+  <div id="q-feed">
+    <div class="section-head"><h2>🔍 QB1_K — Engine Construction, Stability &amp; Surveys</h2><span class="sec-count">7 questions</span></div>
+    <div class="q-card" id="q1" data-tags="survey iacs ism">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What qualifications are needed to become a Class auditor?</div>
+      <div class="q-tags"><span class="q-tag">SURVEYS</span><span class="q-tag">IACS</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">The framework is the <strong>RO Code</strong> (Res. MSC.349(92)/MEPC.237(65)): a classification society acting as Recognized Organization must have documented qualification, training and authorization systems for its surveyors and auditors. In practice: a <strong>marine engineering / naval architecture degree or a management-level CoC</strong> (Chief Engineer / Master) with sea service, followed by the society's structured surveyor/auditor training, a formal <strong>lead-auditor course</strong> (ISO 19011 methodology, ISM/ISPS/MLC modules), supervised audits, and individual authorization by the RO and the flag for the audit types performed.</p>
+      <h4>60-Second Answer</h4>
+      <p>"Class auditor" in the oral usually means the RO auditor performing statutory management audits — ISM (DOC/SMC), ISPS (ISSC), MLC inspection — on the flag's behalf, distinct from a hull/machinery surveyor. The governing standard is <strong>Part 2 of the RO Code</strong>, which requires the RO to define competency criteria, deliver documented training, examine, and formally authorize each auditor for each scheme, with continued-competence monitoring. The typical pathway: <strong>(1) base qualification</strong> — degree in naval architecture/marine/mechanical/electrical engineering, or a management-level certificate of competency with sea experience (a sailing CE or Master converting ashore is a classic entry); <strong>(2) society induction</strong> — class rules, statutory conventions, survey procedures; <strong>(3) auditor formation</strong> — accredited lead-auditor training built on <strong>ISO 19011</strong> auditing methodology and, for ISM, the Code plus the flag's implementation guidelines (in India, DGS/DGMA requirements for authorized ISM auditors); <strong>(4) supervised audits</strong> as trainee/observer with a qualified lead auditor, then formal <strong>authorization</strong> in the individual's name for defined audit types; <strong>(5) maintenance</strong> — minimum audit activity, refresher training and periodic re-approval, all subject to the RO's ISO 9001-family quality system and IACS/flag vertical audits. For internal SMS audits onboard, the ISM Code (Sec. 12) requires the company to use trained internal auditors independent of the area audited — a lighter version of the same competency logic.</p>
+      <h4>Governing instrument</h4>
+      <p>RO Code (Res. MSC.349(92)/MEPC.237(65)) Part 2 — qualification, training and authorisation of RO survey/audit personnel; society ISO 9001-based competence systems; ISM auditor criteria applied under Res. A.1118(30) guidance.</p>
+      <h4>Structure the Answer</h4>
+      <ul>
+        <li><strong>Base:</strong> engineering degree or management-level CoC + sea service.</li>
+        <li><strong>Formation:</strong> RO training scheme + ISO 19011-based lead-auditor course (ISM/ISPS/MLC endorsements).</li>
+        <li><strong>Field:</strong> supervised audits → individual authorization by RO/flag.</li>
+        <li><strong>Governance:</strong> RO Code Part 2 competency system; flag oversight; IACS QSCS.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Auditor and surveyor are different competence tracks — the ISM auditor examines the management system, the surveyor the physical ship; blending the two qualification routes is the fail.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">RO Code (MSC.349(92)/MEPC.237(65))</span><span class="reg-desc">Part 2 — RO's qualification, training and authorization system for surveyors and auditors; mandatory via SOLAS XI-1/1</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code Sec.12 + Res. A.1118(30)</span><span class="reg-desc">Internal audits and the revised guidelines on ISM implementation — auditor independence and competence</span></div>
+      <div class="reg-item"><span class="reg-code">ISO 19011</span><span class="reg-desc">Guidelines for auditing management systems — the auditing methodology lead-auditor courses are built on</span></div>
+      <div class="reg-item"><span class="reg-code">IACS QSCS</span><span class="reg-desc">Quality System Certification Scheme — external verification of member societies' training/authorization systems</span></div>
+      <div class="reg-item"><span class="reg-code">DGS/DGMA requirements (India)</span><span class="reg-desc">Flag-specific approval of ROs and their auditors for Indian-flag statutory certification</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Simon likes the career-path framing — answer as the route <em>you</em> could take: management CoC + sea time → society training → ISO 19011 lead-auditor course → supervised audits → named authorization. Anchor it to the <strong>RO Code Part 2</strong> so it isn't just anecdote. The weak answer is "an ISM course" with no base qualification, no supervised-audit stage, and no authorization concept.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE meets auditors from the other side of the table — knowing their competency framework changes how you handle an audit: you may verify the auditor's authorization scope, and you understand why findings must trace to objective evidence (their own quality system is audited on exactly that).</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Is a class surveyor automatically an ISM auditor?" A: No — hull/machinery survey authorization and management-audit authorization are separate competency streams under the RO Code; each requires its own training and named authorization. Q: "Who audits the auditors?" A: The RO's internal quality system, IACS QSCS assessments, and the flag State's oversight of its ROs (RO Code Part 3). Q: "Can you, as CE, do the internal SMS audit of the engine department?" A: Only if trained as internal auditor and independent of the area audited — ISM Sec.12 independence rule, unless company size makes it impracticable and the SMS says how objectivity is preserved.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Confusing surveyor with auditor; no mention of the RO Code as the governing standard; forgetting ISO 19011 as the audit methodology; not knowing internal auditors also need training and independence.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>RO Code mandatory since <strong>1 Jan 2015</strong> (SOLAS XI-1/1, MARPOL, LL amendments); ISO <strong>19011</strong>; ISM internal audits at intervals not exceeding <strong>12 months</strong> (per A.1118(30) practice); ISM Sections <strong>12</strong> (verification) and <strong>13</strong> (certification).</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p><strong>Herald of Free Enterprise (1987)</strong> — the management failures behind the capsize produced the ISM Code itself, and with it the profession of the marine management-system auditor whose qualifications this question probes.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> Auditor qualifications → surveyor vs auditor → who authorizes them → internal vs external audits → your own path to becoming one after Class 1 → what an auditor looks for in the engine room.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>On a Maersk vessel the annual internal ISM audit is done by trained company auditors from the fleet group; external DOC/SMC audits by the RO's authorized auditors — the CE hosts the engine-room portion, presenting PMS, critical-equipment and non-conformity records as objective evidence.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB1_K','Q1 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB1_K · Q1 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q2" data-tags="survey iacs">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Condition of Class — who issues it, and when?</div>
+      <div class="q-tags"><span class="q-tag">SURVEYS</span><span class="q-tag">IACS</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">A Condition of Class (some societies say "Recommendation") is imposed by the <strong>classification society, through its attending surveyor</strong>, whenever a defect or outstanding item affecting class is found — at any survey, or after damage/breakdown — requiring <strong>specific measures, repairs or surveys to be completed within a stated time limit in order to retain class</strong> (the IACS harmonized definition). Miss the deadline without an agreed extension and class is <strong>suspended</strong>, which collapses the statutory certificates issued on class's behalf and the ship's insurance basis.</p>
+      <h4>60-Second Answer</h4>
+      <p><strong>Who:</strong> only the classification society — in practice the attending surveyor, ratified by the society's technical office. Neither the owner nor the flag issues it; the flag's parallel instrument for statutory defects is a deficiency/dispensation. <strong>When:</strong> (1) at periodical surveys (annual/intermediate/special) when an item cannot be fully rectified or credited at the time; (2) after <strong>damage, grounding, collision, fire or machinery breakdown</strong> affecting class, where permanent repair is deferred — e.g. a temporary doubler accepted with a CoC to effect permanent repair at the next docking; (3) when a survey item is postponed by agreement (e.g. tailshaft survey extension conditions); (4) on transfer-of-class, where outstanding CoCs follow the ship under the IACS transfer-of-class procedures (TOCA) — the gaining society must deal with them. <strong>Character:</strong> each CoC states the requirement and a <strong>due date</strong>; it appears in the ship's class status (visible to charterers, insurers, PSC via Equasis-linked records). <strong>Consequences of default:</strong> class suspension — automatic on an overdue CoC unless postponed — which voids the basis of statutory certificates issued by that society as RO and typically breaches H&amp;M/P&amp;I cover terms. The CE's duties: track CoCs like survey due-dates in the PMS, plan repairs/spares to close them, and never let one lapse silently.</p>
+      <h4>Governing instrument</h4>
+      <p>Classification society rules (class maintenance and survey parts, IACS-aligned); the statutory interface where the society acts as RO and an outstanding CoC can affect statutory certification.</p>
+      <h4>Say It in the Examiner's Frame</h4>
+      <ul>
+        <li><strong>Definition (IACS harmonized):</strong> requirement for specific measures/repairs/surveys within a time limit to retain class.</li>
+        <li><strong>Issuer:</strong> class surveyor / society — not flag, not owner.</li>
+        <li><strong>Triggers:</strong> survey findings · damage/breakdown · postponed items · transfer of class.</li>
+        <li><strong>Default:</strong> suspension of class → statutory/insurance cascade.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>A Condition of Class is a class instrument with a due date — not a PSC detention and not itself a statutory deficiency, though ignoring it can cascade into statutory and insurance consequences.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IACS UR Z-series / PRs</span><span class="reg-desc">Harmonized survey requirements and the common definition of Condition of Class / Recommendation with time limits</span></div>
+      <div class="reg-item"><span class="reg-code">Class Rules (e.g. IRS Pt.1, DNV Pt.1 Ch.3)</span><span class="reg-desc">Society-specific rules on imposition, extension, and suspension/withdrawal of class for overdue conditions</span></div>
+      <div class="reg-item"><span class="reg-code">IACS TOCA procedure</span><span class="reg-desc">Transfer of Class Agreement — outstanding CoCs must be addressed by the gaining society</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS XI-1/1 + RO Code</span><span class="reg-desc">Class as RO — why suspension of class undermines the statutory certificates it issued</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS I/11(c)</span><span class="reg-desc">Duty to report damage/defects affecting the ship — the trigger for the damage-related CoC route</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Lead with the IACS harmonized definition — "specific measures within a specific time limit to retain class" — then the issuer (class surveyor, never flag/owner) and the four trigger scenarios. Simon's follow-up is predictable: "what if it's not complied with?" — answer <strong>suspension of class</strong> and the statutory/insurance cascade without hesitation. The failing answer treats a CoC as a casual "note" rather than a time-limited retention condition.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE owns machinery-side CoCs end to end: understand exactly what the surveyor wrote, agree a realistic due date before he leaves, enter it in the PMS with lead-time alarms, arrange spares/workshop, and present the closure survey with evidence — an overdue machinery CoC discovered by a charterer's vetting is a commercial incident as much as a technical one.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Difference between a Condition of Class and a Memorandum?" A: A memo/note records information (e.g. acceptable wastage being monitored) with no compliance time limit; a CoC is a time-limited requirement to retain class. Q: "Can the Master/CE get a CoC extended?" A: Only the society can extend, on application with justification — usually with an attending survey. Q: "Ship sails with an overdue CoC — status?" A: Class is suspended; statutory certificates issued by that RO lose their basis; insurers must be notified — the ship is effectively untradeable until reinstated.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Saying the flag or PSC issues it; no time-limit concept; not knowing suspension is the sanction; confusing CoC with a PSC deficiency or an SMS non-conformity — three different regimes that can all arise from one defect.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>No universal CoC duration — the <strong>surveyor sets the due date</strong> case-by-case (say this explicitly); IACS transfer-of-class: outstanding items handled under <strong>TOCA</strong>; suspension is per society rules — typically automatic when a CoC falls overdue.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p><strong>Prestige (2002)</strong> — scrutiny of the ship's survey and repair history, and of how class handled known structural conditions, drove tighter IACS harmonization of survey/condition regimes and EU oversight of ROs.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> What is a CoC → who issues → when → what if overdue → CoC vs memo vs PSC deficiency → how you as CE manage one on the main engine → transfer of class with open CoCs.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk practice: class status reports reviewed monthly by ship and office; any machinery CoC gets a repair plan with owner's superintendent within days; closure surveys are combined with scheduled port calls to avoid off-hire — the CE drafts the technical completion evidence.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB1_K','Q2 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB1_K · Q2 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q3" data-tags="load-line survey">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Difference between GT and DWT.</div>
+      <div class="q-tags"><span class="q-tag">TONNAGE</span><span class="q-tag">LOAD LINE</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula"><strong>Gross Tonnage</strong> is a <strong>dimensionless index of the ship's total enclosed volume</strong>, computed under the <strong>Tonnage Convention 1969</strong> as GT = K&#8321;·V (V = total enclosed volume in m³) — it measures size, not weight, and drives regulatory thresholds and fees. <strong>Deadweight</strong> is a <strong>mass in tonnes</strong>: the carrying capacity — displacement at the summer load draught minus lightship — i.e. cargo + fuel + fresh water + ballast + stores + crew.</p>
+      <h4>60-Second Answer</h4>
+      <p><strong>GT (ITC 1969, in force 18 July 1982):</strong> a logarithmic function of the total volume of all enclosed spaces, GT = K&#8321;V with K&#8321; = 0.2 + 0.02·log&#8321;&#8320;V. It has <strong>no units</strong> — "GT 95,000" is an index, not tonnes. It is the trigger for most statutory applicability (SOLAS ≥500 GT cargo ship regime, MARPOL thresholds like 400 GT / oil tanker 150 GT, manning, STCW, port and canal dues, registration fees). Its sibling <strong>NT</strong> indexes the cargo-earning volume. <strong>DWT:</strong> a physical mass — displacement (Archimedean mass of water displaced) at the summer load line minus the lightship mass. It is what the ship can lift: cargo, bunkers, FW, ballast, stores, crew and effects. DWT is the commercial capacity number for bulk trades and the capacity term <strong>C</strong> in the container-ship CII (gCO&#8322;/DWT·nm). The two do not convert into each other: a volume-carrier like a car carrier or container ship has huge GT relative to DWT; a dense-cargo bulker the reverse. Complete the triangle for the examiner: <strong>Displacement = Lightship + Deadweight</strong>, all in tonnes; GT/NT stand apart as volume indices under a different convention.</p>
+      <h4>Governing instrument</h4>
+      <p>International Convention on Tonnage Measurement of Ships 1969 (GT/NT formulae); deadweight follows from the Load Line Convention 1966/88 assignment and the ship's approved stability and loading documents.</p>
+      <h4>Side-by-Side</h4>
+      <ul>
+        <li><strong>Nature:</strong> GT — volume index, unitless · DWT — mass, tonnes.</li>
+        <li><strong>Source:</strong> GT — Tonnage Convention 1969 (International Tonnage Certificate) · DWT — hydrostatics/Load Line assignment (stability booklet, Load Line Certificate context).</li>
+        <li><strong>Use:</strong> GT — regulatory applicability, fees, manning · DWT — cargo capacity, chartering, CII capacity for most ship types.</li>
+        <li><strong>Formula anchors:</strong> GT = K&#8321;V · DWT = Δ(summer) − Lightship.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Saying 'GT in tonnes' is the instant fail — GT is a dimensionless volume-based index under the 1969 Convention; deadweight is a mass in tonnes at the assigned load line.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">Tonnage Convention 1969</span><span class="reg-desc">GT/NT measurement — in force 18 Jul 1982; evidenced by the International Tonnage Certificate (1969)</span></div>
+      <div class="reg-item"><span class="reg-code">Load Lines Convention 1966/88</span><span class="reg-desc">Summer load line assignment — fixes the maximum draught from which deadweight is derived</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS I/3 &amp; various</span><span class="reg-desc">GT-based applicability thresholds across the convention (e.g. 500 GT cargo-ship certificates)</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex I/VI thresholds</span><span class="reg-desc">400 GT general / 150 GT tanker applicability; DWT appears in tanker structural regs and CII capacity</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC CII guidelines (G1)</span><span class="reg-desc">Capacity = DWT for most ship types (GT for cruise ships and vehicle carriers) — the modern exam link</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> The one sentence that scores immediately: "GT is a dimensionless volume index under the 1969 Tonnage Convention; DWT is a mass — displacement minus lightship." Add the formula GT = K&#8321;V and the triangle Δ = LS + DWT. Simon's favourite follow-up on a container/DP session: "which one does CII use?" — <strong>DWT for most ship types, GT for cruise ships and vehicle carriers</strong>. The classic fail is "gross tonnes" — saying GT is a weight.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE quotes GT when establishing which statutory regime applies (EIAPP &gt;130 kW engines on ships ≥400 GT, ISPP ≥400 GT, etc.) and DWT when working CII, bunker planning against deadweight limits, and load-line compliance during heavy bunkering — mixing them up in paperwork creates real compliance errors.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Is GT measured in tonnes?" A: No — dimensionless index of volume (the 1969 Convention deliberately dropped 'tons'). Q: "What is NT?" A: Net tonnage — the index of cargo-earning volume, GT-derived with deductions, floor at 0.30 GT. Q: "Lightship includes what?" A: Hull, machinery, outfit and liquids in machinery at working level — no cargo, no bunkers, no stores, no crew.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Calling GT a weight; equating GT with displacement; not knowing DWT = Δ − lightship; unable to name the certificate (International Tonnage Certificate 1969); missing the CII capacity nuance.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>GT = <strong>K&#8321;V</strong>, K&#8321; = <strong>0.2 + 0.02 log&#8321;&#8320;V</strong>; ITC 1969 in force <strong>18 Jul 1982</strong>; NT floor <strong>0.30 GT</strong>; <strong>Δ = Lightship + DWT</strong>; CII capacity: <strong>DWT</strong> (containers/bulkers/tankers), <strong>GT</strong> (cruise, vehicle carriers).</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Not a casualty topic — the historical driver was tonnage-measurement gaming under pre-1969 national rules (open shelter-deckers) distorting safety applicability, which the universal ITC 1969 volume basis closed.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> GT vs DWT → NT → displacement/lightship triangle → which certificates state them → CII capacity → why a container ship is "big in GT, modest in DWT".</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>A large Maersk container vessel illustrates the split perfectly: GT well above 200,000 on the ULCV classes while DWT sits near 220–240k tonnes but is rarely the operating constraint — slot/stack limits and draught govern before deadweight does.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB1_K','Q3 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB1_K · Q3 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q4" data-tags="machinery ghg">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">4</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What is the recent trend in large container ship size, and why?</div>
+      <div class="q-tags"><span class="q-tag">CONTAINER</span><span class="q-tag">GHG</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">The ULCV generation has plateaued around <strong>24,000+ TEU</strong> (~<strong>400 m LOA × 61 m beam</strong>, 24 bays / 24-wide) — driven there by <strong>economies of scale</strong>: cost, fuel and CO&#8322; <strong>per TEU-mile</strong> fall as size rises, which also improves EEDI/CII. The newer trend is a shift from ever-bigger to <strong>mid-size (8,000–17,000 TEU) dual-fuel newbuildings</strong>, because port/canal/crane limits, cargo-concentration risk and network flexibility now outweigh further scale gains.</p>
+      <h4>60-Second Answer</h4>
+      <p>Size growth ran from Panamax (~4,500 TEU) through post-Panamax and the 18,000 TEU Triple-E generation (2013) to today's <strong>24,000+ TEU ULCVs</strong> capped near 400 m × 61 m. <strong>Why bigger:</strong> slot cost per TEU falls (hull steel, crew, machinery scale sub-linearly with capacity); propulsion power per TEU falls (wetted surface and wave resistance grow slower than volume), so <strong>fuel and CO&#8322; per TEU-mile drop</strong> — directly improving EEDI at design and CII in operation, and cutting unit cost on the deep-sea Asia–Europe trades where the giants deploy. <strong>Why the plateau and the pivot:</strong> diminishing returns meet hard constraints — berth depth, crane outreach and yard capacity at only a handful of ports; Suez/Malacca dimensional practicalities; longer port stays eroding the sea-leg savings; insurance and salvage exposure of concentrating &gt;$1bn of cargo in one hull (the industry read <em>Ever Given</em>, 2021, as the case study); and schedule-resilience lessons from the pandemic squeeze. So the current ordering trend is <strong>fleet renewal at mid sizes with alternative-fuel propulsion</strong> — methanol and LNG dual-fuel — where decarbonisation compliance, port flexibility and cascading economics beat raw scale; Maersk's methanol-fuelled series is the flagship example.</p>
+      <h4>Governing instrument</h4>
+      <p>MARPOL Annex VI (EEDI/EEXI/CII) as the efficiency driver of the trend; classification rules for ULCV structural design (whipping/springing, torsional strength notations) — a market-plus-regulation question, not a single statute.</p>
+      <h4>The Engineering Logic — Say the Physics</h4>
+      <ul>
+        <li><strong>Cube-square scaling:</strong> capacity ~ volume; resistance ~ wetted area → power per TEU falls with size.</li>
+        <li><strong>Regulatory coupling:</strong> lower fuel per TEU-mile = better EEDI/CII — scale was the cheapest early decarbonisation lever.</li>
+        <li><strong>Limits:</strong> port infrastructure, canal dimensions, cargo-risk concentration, network flexibility — the reasons scale stopped paying.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Assuming bigger means faster — the driver is cost, fuel and CO&#8322; per TEU-mile (economies of scale), with the current trend shifting from ever-larger hulls toward fuel/fleet flexibility.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg.24-25</span><span class="reg-desc">EEDI/EEXI — design-efficiency indices that scale economics helped satisfy</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex VI Reg.28</span><span class="reg-desc">CII — operational intensity per capacity-mile; the per-TEU fuel logic in regulatory form</span></div>
+      <div class="reg-item"><span class="reg-code">IMO Res. MEPC.377(80)</span><span class="reg-desc">2023 GHG Strategy — the driver behind the dual-fuel mid-size ordering pivot</span></div>
+      <div class="reg-item"><span class="reg-code">IGF Code / MSC.1/Circ.1621</span><span class="reg-desc">Low-flashpoint fuel rules (LNG; interim guidelines for methyl/ethyl alcohol) governing the new tonnage</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1 subdivision &amp; II-2/10 (cargo)</span><span class="reg-desc">Safety framework scaling with ULCV size — subdivision and container-fire protection debates</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> Nair asked this on a container session — he wants the <em>why</em> in engineering-economic terms, not a list of ship names. Give the cube-square argument ("power per TEU falls with size"), tie it to EEDI/CII, then show currency with the pivot: <strong>mid-size methanol/LNG dual-fuel ordering</strong> — and name your own company's methanol series as the live example. The weak answer is "ships are getting bigger" with no mechanism and no awareness that the trend has actually turned.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Scale changes the CE's plant: single large-bore 2-stroke at very low RPM with de-rated layouts, shaft generators/PTO for reefer loads, EGCS or 0.50% fuels, and on the new tonnage dual-fuel systems (fuel-supply rooms, gas/methanol detection, ESD philosophy) — the size question is really a propulsion-technology question one layer down.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "If bigger is more efficient, why not 30,000 TEU?" A: Port/canal limits, cargo-risk concentration, port-stay share of round-voyage time, and network inflexibility — the marginal saving no longer covers the marginal constraint. Q: "Does a bigger ship automatically get a better CII?" A: Generally yes per TEU-capacity — but CII uses DWT-based AER for container ships, and idle/waiting time can still wreck the rating. Q: "Why did Maersk choose methanol over LNG?" A: Simpler ambient-temperature storage, no methane slip, and green-methanol offtake strategy — accepting lower energy density.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>No mechanism (economies of scale asserted, not explained); not knowing the plateau/pivot; quoting TEU numbers wildly wrong; missing the EEDI/CII coupling that makes this a regulatory question, not just commercial.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>ULCV plateau ~<strong>24,000+ TEU</strong>, ~<strong>400 m × 61 m</strong>; Triple-E <strong>18,270 TEU (2013)</strong>; pivot band ~<strong>8,000–17,000 TEU dual-fuel</strong>; <em>Ever Given</em> grounding <strong>2021</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p><strong>Ever Given, Suez (2021)</strong> — six days blocking the canal quantified the systemic risk of extreme scale; with ULCV container-fire losses (e.g. <em>Maersk Honam</em>, 2018) it reframed "bigger" as a risk-concentration question, feeding the mid-size pivot.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Nair:</strong> Size trend and why → economies of scale mechanism → EEDI/CII link → why the plateau → dual-fuel pivot and fuel choice → what changes for the CE on such tonnage.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk operates both ends of the story: Triple-E/E-class ULCVs on mainhaul loops, and the methanol dual-fuel series leading the renewal — a CE moving between them sees the size-vs-fuel-technology trade-off first-hand in bunkering, machinery arrangement and CII management.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB1_K','Q4 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB1_K · Q4 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q5" data-tags="machinery iacs">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">5</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Difference between DP-1 and DP-2.</div>
+      <div class="q-tags"><span class="q-tag">MACHINERY</span><span class="q-tag">DP</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">IMO DP equipment classes come from <strong>MSC.1/Circ.1580</strong> (2017 guidelines, applying to vessels built on/after 9 June 2017; MSC/Circ.645 for earlier builds). <strong>Class 1:</strong> loss of position <em>may</em> occur after a single fault — no redundancy required. <strong>Class 2:</strong> loss of position must <strong>not</strong> occur from a <strong>single fault in any active component or system</strong> — generators, thrusters, switchboards, control computers, position references — so full redundancy of active elements, verified by <strong>FMEA and proving trials</strong>, with the class recorded in the vessel's <strong>DPVAD</strong>. (Class 3 additionally survives fire/flooding of any one compartment — A-60-separated backup systems.)</p>
+      <h4>60-Second Answer</h4>
+      <p>The equipment class expresses the <strong>worst-case single failure</strong> the DP system must ride through while keeping position and heading. <strong>DP-1 (Class 1):</strong> a single DP control system, non-redundant power and thrusters permitted; a single fault — one generator trip, one thruster loss, one control computer failure — may lose position. Used where drift-off consequences are low. <strong>DP-2 (Class 2):</strong> the design criterion is <strong>no loss of position from any single failure of an active component/system</strong>; static components (cables, pipes, manual valves) may be excluded if adequately protected. That drives the architecture: split main switchboards (bus-tie philosophy defined in the FMEA), redundant generator groups, thrusters in independent groups sized so the remaining group holds position after worst-case failure, <strong>at least two DP control computers</strong> with automatic transfer, redundant networks, an automatic <strong>power management system</strong> with blackout prevention, and <strong>three position-reference systems</strong> (of at least two different principles) for class 2/3 operations. The whole redundancy claim is proven by <strong>FMEA + annual trials</strong>, and the Administration states the class in the <strong>DP Verification Acceptance Document</strong>. Class notations map across societies (ABS DPS-1/2/3, DNV DYNPOS-AUT/AUTR family) aligned to the IMO classes. The one-line discriminator for the examiner: <em>DP-1 tolerates no fault; DP-2 tolerates any single active-component fault; DP-3 tolerates loss of a whole compartment to fire or flood.</em></p>
+      <h4>Governing instrument</h4>
+      <p>MSC.1/Circ.1580 (16 Jun 2017 DP guidelines, vessels built on/after 9 Jun 2017; MSC/Circ.645 for earlier builds) — equipment classes 1–3, implemented through class DP notations.</p>
+      <h4>What the Single-Failure Criterion Buys — Architecture Deltas DP-1 → DP-2</h4>
+      <ul>
+        <li><strong>Power:</strong> single plant → redundant generator/switchboard groups + auto PMS with blackout prevention.</li>
+        <li><strong>Thrust:</strong> any layout → independent thruster groups, each able to hold position alone in the design environment.</li>
+        <li><strong>Control:</strong> one DP computer → minimum two, auto changeover; redundant networks and UPSs.</li>
+        <li><strong>References:</strong> minimum fit → three PRS of ≥2 different principles online for the operation.</li>
+        <li><strong>Verification:</strong> — → FMEA, proving trials, annual trials; DPVAD states the class.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Mixing DP-2 and DP-3 — DP-2 survives a single failure of any active component; DP-3 additionally covers static components and loss of a whole compartment to fire or flooding.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MSC.1/Circ.1580 (16 Jun 2017)</span><span class="reg-desc">Guidelines for vessels/units with DP systems — equipment classes 1/2/3; vessels constructed on/after 9 Jun 2017</span></div>
+      <div class="reg-item"><span class="reg-code">MSC/Circ.645 (1994)</span><span class="reg-desc">Previous DP guidelines — may continue to apply to 1994–2017 builds (Sec.4 of 1580 recommended for all)</span></div>
+      <div class="reg-item"><span class="reg-code">DPVAD</span><span class="reg-desc">DP Verification Acceptance Document — Administration-stated equipment class, kept with FMEA/trials results</span></div>
+      <div class="reg-item"><span class="reg-code">Class notations (ABS DPS-1/2/3; DNV DYNPOS)</span><span class="reg-desc">Society notations structured in line with the IMO equipment classes</span></div>
+      <div class="reg-item"><span class="reg-code">IMCA M103 / MTS DP guidance</span><span class="reg-desc">Industry operational guidance — FMEA practice, annual DP trials, ASOG/CAM operating modes</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> The source session was a DP-2 vessel — answer as its engineer. Lead with the criterion, not the kit: "DP-2 = no loss of position from any single active-component failure, proven by FMEA and trials." Then give the four architecture deltas (split power + PMS, thruster groups, dual DP computers, three PRS) and name the paper: <strong>MSC.1/Circ.1580, DPVAD</strong>. The classic fail is defining the classes by equipment counts ("DP-2 has two computers") without the single-failure design criterion they exist to satisfy.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>On a DP-2 ship the CE lives inside the FMEA: bus-tie open/closed philosophy for the operation, generator standby/spinning-reserve settings against blackout prevention, maintenance isolations that would breach redundancy (a "DP-degraded" notification item), and the annual DP trials where the engine department proves the worst-case failure ride-through.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Is a closed bus-tie allowed in DP-2?" A: Only if the FMEA proves a single fault (e.g. a bus short) cannot propagate across — otherwise operate split; the FMEA/ASOG governs, not habit. Q: "Are cables and pipes included in the single-failure criterion for DP-2?" A: Static components may be excepted where adequately protected — but they ARE included at DP-3, along with fire/flood of a compartment. Q: "Who states the equipment class?" A: The Administration, in the DPVAD, based on the guidelines' criteria.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Defining classes by hardware count instead of the failure criterion; not knowing MSC.1/Circ.1580 vs 645 applicability; forgetting FMEA/annual trials as the verification backbone; confusing class notations (DPS-2, DYNPOS-AUTR) with the IMO class they implement.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p><strong>MSC.1/Circ.1580</strong> — 16 Jun 2017, builds on/after <strong>9 Jun 2017</strong>; classes <strong>1/2/3</strong>; DP-2/3 operations: <strong>3 position references, ≥2 principles</strong>; DP-3 separation: <strong>A-60</strong> + watertight compartmentation; document: <strong>DPVAD</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Offshore drive-off/drift-off incidents catalogued by IMCA — typically single hidden failures defeating assumed redundancy — are the reason 1580 added hidden-failure monitoring and hardened FMEA expectations over the 1994 guidelines.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> DP-1 vs DP-2 → what single failure means → bus-tie philosophy → position references → FMEA and annual trials → DP-3 delta → who certifies (DPVAD/class notation).</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessels are not DP-classed, but Maersk Supply Service's fleet runs DP-2 AHTS/SSVs — and the transferable engineering (PMS blackout prevention, split-board operation, UPS integrity testing) mirrors what a container-ship CE already manages during manoeuvring redundancy.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB1_K','Q5 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB1_K · Q5 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q6" data-tags="survey iacs load-line">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">6</div>
+    <div class="q-text-wrap">
+      <div class="q-text">List the plans onboard related to ship structure.</div>
+      <div class="q-tags"><span class="q-tag">SURVEYS</span><span class="q-tag">STRUCTURE</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Core structural plan set: <strong>General Arrangement, Capacity Plan (with deadweight scale), Midship Section &amp; scantling drawings, Shell Expansion, Docking Plan, construction profiles/decks, Loading Manual &amp; Stability Booklet, Damage Control Plan &amp; Booklet, Fire Control Plan</strong> (structural fire divisions), plus the modern statutory additions: <strong>Coating Technical File</strong> (PSPC), thickness-measurement/survey reports and, where applicable, the <strong>ESP file</strong> (tankers/bulkers) and the GBS <strong>Ship Construction File</strong>.</p>
+      <h4>60-Second Answer</h4>
+      <p>Group them so the list has architecture. <strong>(1) Geometry and arrangement:</strong> General Arrangement plan; Capacity Plan with deadweight scale; Lines/hydrostatics reference data. <strong>(2) Structure proper:</strong> Midship section with scantlings; construction profile and deck plans; Shell Expansion plan (plate-by-plate — the working drawing for locating wastage/damage and for thickness-measurement reporting); Docking Plan (block positions, plugs, appendages) for dry-docking. <strong>(3) Strength and loading:</strong> class-approved <strong>Loading Manual</strong> (permissible still-water bending moments/shear forces, loading conditions) and the loading instrument with its approved test conditions; Stability Booklet (Trim &amp; Stability) approved under the IS Code/Load Line. <strong>(4) Damage/emergency structure:</strong> Damage Control Plan and Booklet (SOLAS II-1/19 — watertight subdivision, closures, cross-flooding); Fire Control Plan (SOLAS II-2/15) showing A/B-class divisions. <strong>(5) Survey-support records:</strong> <strong>Coating Technical File</strong> (SOLAS II-1/3-2, PSPC for ballast tanks); thickness measurement reports and the survey report file; the <strong>ESP file</strong> for tankers and bulk carriers (SOLAS XI-1/2, 2011 ESP Code); and for CSR tankers/bulkers delivered under Goal-Based Standards, the <strong>Ship Construction File</strong> (SOLAS II-1/3-10) kept onboard and ashore. On a container vessel add the Container Securing Manual (lashing forces into structure) as the cargo-interface plan.</p>
+      <h4>Governing instrument</h4>
+      <p>Class rules' onboard documentation requirements plus SOLAS anchors — Damage Control Plan (II-1/19), stability information (II-1/5-1); Loading Manual per class and the Load Line assignment.</p>
+      <h4>Why Each Exists — One-Liners the Examiner Rewards</h4>
+      <ul>
+        <li><strong>Shell expansion:</strong> the plate map — every gauging point and doubler in survey reports is referenced to it.</li>
+        <li><strong>Loading manual:</strong> the legal envelope for SWBM/SF — exceeding it is a structural, class and insurance event.</li>
+        <li><strong>Docking plan:</strong> wrong block loading has broken ships in dock — the yard works from this plan.</li>
+        <li><strong>CTF/ESP/SCF:</strong> the paper trail that lets a surveyor judge structural condition across the ship's life.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Confusing the docking plan with the shell expansion — one locates blocks/plugs for dry-docking, the other maps every shell plate and weld seam for survey and repair reference.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1/3-10 &amp; 3-2</span><span class="reg-desc">Ship Construction File (GBS, CSR tankers/bulkers) · PSPC Coating Technical File</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1/19 &amp; II-2/15</span><span class="reg-desc">Damage Control Plan/Booklet · Fire Control Plan — the emergency structural plans</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS XI-1/2 + 2011 ESP Code</span><span class="reg-desc">Enhanced Survey Programme file for tankers and bulk carriers (as amended, MSC.525(106) EIF 1 Jan 2026)</span></div>
+      <div class="reg-item"><span class="reg-code">Load Lines 66/88 + IS Code 2008</span><span class="reg-desc">Approved stability information and loading conditions — the strength/stability documentation basis</span></div>
+      <div class="reg-item"><span class="reg-code">Class Rules (loading manual/instrument)</span><span class="reg-desc">Approval of loading manual and loading instrument; permissible SWBM/SF limits</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Paul):</strong> Don't machine-gun a flat list — give the five groups (arrangement / structure / strength / emergency / survey records) and one purpose-line each. Paul's likely probes: "which plan do you open when a gauging shows wastage?" — <strong>shell expansion</strong>; "which plan does the dock master need?" — <strong>docking plan</strong>. Including the modern trio (CTF, ESP file, Ship Construction File) separates a Class 1 answer from a Class 2 one.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE is custodian of the machinery-space structural interfaces: engine seating and tank-top drawings for chocking/alignment work, shell expansion for any hull penetration or doubler decision, docking plan liaison before every dry-dock, and the loading instrument's approved condition file at annual survey.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Is the stability booklet a structural plan?" A: It is approved stability information — grouped here because loading/strength limits (SWBM/SF) live alongside it; strictly the loading manual is the strength document. Q: "Where must the Ship Construction File be kept?" A: Onboard and, for the as-built full set, ashore per SOLAS II-1/3-10 arrangements. Q: "What is in the CTF?" A: PSPC coating specification, inspection records at build, and maintenance/repair records of ballast-tank coatings through life.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Unstructured list-dumping; omitting shell expansion or docking plan; not knowing CTF/ESP/SCF exist; unable to say what any plan is <em>for</em>; confusing fire control plan (statutory, structural divisions) with the SOPEP or muster list.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>SCF — SOLAS <strong>II-1/3-10</strong>; PSPC/CTF — <strong>II-1/3-2</strong>; DC Plan — <strong>II-1/19</strong>; Fire Control Plan — <strong>II-2/15</strong>; ESP — <strong>XI-1/2</strong> + 2011 ESP Code (amended by <strong>MSC.525(106)</strong>, EIF 1 Jan 2026).</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p><strong>MOL Comfort (2013)</strong> — the container-ship hull-girder failure put loading-manual compliance, whipping loads and construction records under the spotlight and accelerated ULCV longitudinal-strength rule development.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Paul:</strong> List structural plans → purpose of shell expansion → loading manual limits → docking plan contents → CTF/PSPC → ESP applicability → where each is used at survey/dry-dock.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel: full approved plan set in the ship's office and electronically in the fleet document system; the CE's working trio is the shell expansion (gaugings/doubler decisions), docking plan (every 5-yr docking) and the loading instrument's approved test conditions verified at annual survey.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB1_K','Q6 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB1_K · Q6 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q7" data-tags="survey solas machinery">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">7</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What documents must be maintained for lifting appliances — and what does the CE check?</div>
+      <div class="q-tags"><span class="q-tag">SURVEYS</span><span class="q-tag">SOLAS</span><span class="q-tag">CRANES</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Since <strong>1 January 2026</strong>, lifting appliances and anchor-handling winches are directly under SOLAS — new <strong>Regulation II-1/3-13</strong> (MSC.532(107)): design/construction per Administration-accepted standards, and through life <strong>operational testing, thorough examinations, inspection and maintenance</strong> documented in a <strong>register of lifting appliances and loose gear kept onboard</strong>, per the associated IMO guidelines (approved at MSC 107, 2023). The working paper set: the register, <strong>test/load certificates</strong> per appliance, annual thorough-examination records, <strong>5-yearly load-test</strong> certificates, loose-gear certificates (wires, shackles, blocks), and maker-based maintenance in the PMS — the same family as the long-standing ILO C.152 cargo-gear regime.</p>
+      <h4>60-Second Answer</h4>
+      <p><strong>Regulatory frame:</strong> SOLAS II-1/3-13 (in force 1 Jan 2026) closed the gap that shipboard cranes were previously governed only by class rules, ILO Convention 152 (dock-work cargo gear) and flag practice. It requires: design/construction/installation to standards acceptable to the Administration; testing after installation and after repairs/alterations; periodic <strong>operational testing and thorough examination</strong>; documented inspection/maintenance per the manufacturer; and records maintained onboard — implemented through the IMO guidelines for lifting appliances and for anchor-handling winches approved alongside the amendment, which recommend a <strong>register of lifting appliances</strong> with proof tests and annual thorough examination, including loose gear. <strong>The document set the CE maintains:</strong> (1) the <strong>Register</strong> (ILO/flag format — Form of Register with certificates attached); (2) initial and 5-yearly <strong>proof-load test certificates</strong> per appliance (test load per the standard — e.g. 25% overload up to 20 t SWL band under the classic cargo-gear regime — quote the certificate/standard, not one universal number); (3) <strong>annual thorough examination</strong> entries by a competent person; (4) <strong>loose gear certificates</strong> — wire ropes (with renewal criteria), shackles, hooks, blocks — each traceable by ID; (5) maker's manual-based <strong>PMS records</strong>: brake tests, limit-switch and safety-device (overload cut-out) function tests, NDT of critical welds where specified; (6) repair/alteration records with re-test. <strong>What the CE physically checks before use/survey:</strong> SWL markings legible and matching certificates; brake holding (noting winch/windlass brake-test values are <strong>ship-specific per the class-approved procedure</strong> — name the document, don't invent numbers); limit switches and emergency stops; wire condition against discard criteria; slew/luffing systems; hydraulic/electrical safety devices; and register entries current with no overdue examination.</p>
+      <h4>Governing instrument</h4>
+      <p>SOLAS Reg II-1/3-13 (Res. MSC.532(107), in force 1 Jan 2026) with MSC.1/Circ.1663 guidelines; the ILO Convention 152 regime for cargo-gear registers and test certificates.</p>
+      <h4>Structure the Answer — Documents vs Checks</h4>
+      <ul>
+        <li><strong>Documents:</strong> Register · test certificates (initial/5-yearly/after repair) · annual thorough-exam records · loose-gear certificates · maker-based PMS records.</li>
+        <li><strong>CE checks:</strong> SWL vs certificate · brakes &amp; safety devices per approved procedure · wire discard criteria · limits/E-stops · register currency.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Quoting universal proof-load percentages is the trap — test values follow the applicable standard/flag table and the appliance's register documents; and from 1 Jan 2026 the governing anchor is SOLAS II-1/3-13.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1/3-13 (MSC.532(107))</span><span class="reg-desc">Lifting appliances and anchor handling winches — in force 1 Jan 2026; testing, thorough examination, onboard records</span></div>
+      <div class="reg-item"><span class="reg-code">IMO Guidelines (MSC 107, 2023)</span><span class="reg-desc">Guidelines for lifting appliances / for anchor-handling winches — register, proof tests, annual thorough examination incl. loose gear</span></div>
+      <div class="reg-item"><span class="reg-code">ILO Convention 152 (1979)</span><span class="reg-desc">Occupational safety in dock work — the classic cargo-gear register/certificate regime (Form of Register)</span></div>
+      <div class="reg-item"><span class="reg-code">Class rules (e.g. DNV, LR Code for Lifting Appliances)</span><span class="reg-desc">Certification of shipboard cranes (CG notations), survey and load-test practice</span></div>
+      <div class="reg-item"><span class="reg-code">Maker's manual / approved PMS</span><span class="reg-desc">The governing document for brake-test values, maintenance intervals and safety-device settings — ship-specific</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Paul):</strong> Open with the currency point — "since <strong>1 January 2026</strong> this is directly SOLAS: new Reg. II-1/3-13" — that alone signals an up-to-date candidate. Then the document pentad (register · test certs · annual thorough exams · loose-gear certs · maker-based PMS) and the CE's physical checks. On brake-test values, say "per the class-approved procedure for my ship" — Paul is testing whether you invent a universal number.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Provision cranes, engine-room overhead cranes, hose/bunker davits and stores cranes are the CE's appliances: he owns their PMS lines, keeps the register current, hosts the annual thorough examination, and stops any lift when certificates, markings or safety devices don't line up — a PSC-visible area since the SOLAS amendment.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "What changed on 1 Jan 2026?" A: Lifting appliances/anchor-handling winches came under SOLAS directly (II-1/3-13) — previously only class/ILO/flag regimes. Q: "Proof-load value for a 10 t crane?" A: Per the applicable standard/certificate — the classic cargo-gear scale uses 25% overload in that band, but the governing figure is the appliance's test certificate/class standard. Q: "Who is the 'competent person' for thorough examination?" A: As accepted by the flag/class — typically a class surveyor or approved service firm; crew inspections supplement, not replace, it.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Not knowing the 2026 SOLAS change; treating the register as deck-only paperwork; quoting invented universal brake/proof-load numbers; no wire-discard criteria knowledge; forgetting loose gear needs individual traceable certificates.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>SOLAS <strong>II-1/3-13</strong> — <strong>MSC.532(107)</strong>, EIF <strong>1 Jan 2026</strong>; annual thorough examination; <strong>5-yearly</strong> proof load test (regime-dependent — quote the certificate); ILO <strong>C.152</strong>; SWL marking mandatory on every appliance and loose-gear item.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Recurring crane-wire and slew-bearing failures on shipboard cranes (multiple MAIB/flag reports of provision-crane fatalities) drove the industry submission that produced Reg. II-1/3-13 — inspection regimes existed on paper but were inconsistently applied without a SOLAS hook.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Paul:</strong> Documents for lifting appliances → what changed in 2026 → register contents → annual vs 5-yearly requirements → wire discard criteria → who examines → CE's pre-use checks → windlass/winch brake testing (name the governing document).</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel: provision cranes and ER overhead cranes carry SWL plates matched to certificates in the register; annual thorough examination by an approved service company with class endorsement; brake and limit-switch tests as dated PMS jobs per the maker's manual; wire changes recorded with new certificates attached to the register.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB1_K','Q7 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB1_K · Q7 · v1.0</span>
+  </div>
+</div>
+  </div>
+</div>
+<div id="no-results" style="display:none;text-align:center;color:#64748b;padding:30px">No questions match your search/filter.</div>
+
+<div class="comment-overlay" id="comment-overlay" onclick="if(event.target===this)closeComment()">
+  <div class="comment-modal">
+    <div id="comment-form-wrap">
+      <h3>Report a Correction</h3>
+      <p id="comment-context-label">Your comment goes directly to the editor. Not public.</p>
+      <form id="comment-form" action="https://formspree.io/f/maqgoeww" method="POST" onsubmit="submitComment(event)">
+        <input type="hidden" name="qb_reference" id="form-qb-ref" value="">
+        <label>Type</label>
+        <select name="comment_type">
+          <option value="Error / Correction">🔴 Error / Correction</option>
+          <option value="Suggestion">💡 Suggestion</option>
+          <option value="Missing Topic">📋 Missing Topic</option>
+        </select>
+        <label>Comment</label>
+        <textarea name="comment" placeholder="Describe the issue, suggestion, or what's missing…" required></textarea>
+        <label>Your name (optional)</label>
+        <input type="text" name="name" placeholder="Anonymous">
+        <div class="comment-btns">
+          <button type="button" class="btn-cancel" onclick="closeComment()">Cancel</button>
+          <button type="submit" class="btn-submit">Send →</button>
+        </div>
+      </form>
+    </div>
+    <div class="comment-success" id="comment-success">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <p>Sent! Thank you.</p>
+      <p style="font-size:12px;color:#64748b;margin-top:6px;">The editor will review your comment.</p>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+Compiled by Nixon Antony, 2/E, Maersk A/S · MEO Class 1 exam prep, Kochi MMD · Corrections: contactus@marineintelligenceweekly.com<br>
+Disclaimer: For oral-exam preparation only. Always cross-check against current IMO/class/DG Shipping circulars before your exam — regulations amend frequently.
+</div>
+<script>
+function toggleCard(h){h.closest('.q-card').classList.toggle('open')}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters()}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();const cards=document.querySelectorAll('.q-card');let vis=0;cards.forEach(c=>{const tags=(c.dataset.tags||'').toLowerCase();const text=c.innerText.toLowerCase();const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));c.style.display=show?'':'none';if(show)vis++});document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;document.getElementById('no-results').style.display=vis===0?'block':'none'}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){document.querySelectorAll('.toc-link').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+x.target.id))}})},{threshold:.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+function openComment(qbId,qNum){const ref=qbId+(qNum?' · '+qNum:'');document.getElementById('form-qb-ref').value=ref;document.getElementById('comment-context-label').textContent='Reference: '+ref+' · Goes directly to the editor. Not public.';document.getElementById('comment-form-wrap').style.display='';document.getElementById('comment-success').style.display='none';document.getElementById('comment-overlay').classList.add('open')}
+function closeComment(){document.getElementById('comment-overlay').classList.remove('open')}
+function submitComment(e){e.preventDefault();const form=e.target;const data=new FormData(form);fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}}).then(()=>{document.getElementById('comment-form-wrap').style.display='none';document.getElementById('comment-success').style.display='block';form.reset();setTimeout(closeComment,2000)}).catch(()=>{window.location.href='mailto:contactus@marineintelligenceweekly.com?subject=QB Comment: '+encodeURIComponent(document.getElementById('form-qb-ref').value)})}
+</script>
+<script>
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('copy', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+</body></html>

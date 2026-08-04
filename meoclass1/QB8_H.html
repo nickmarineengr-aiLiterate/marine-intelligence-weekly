@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>QB8_H &#8212; Cargo Operations: Containers, Gas &amp; Chemical | Marine Intelligence Weekly</title>
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0YEE2CBNP5"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-0YEE2CBNP5');</script>
+<style>
+:root{--teal:#0d9488;--teal-dark:#0f766e;--teal-light:#ccfbf1;--navy:#0f172a;--orange:#f97316;--orange-light:#fff7ed;--off-white:#f8fafc;--grey-text:#64748b;--grey-border:#e2e8f0;--grey-bg:#f1f5f9;--ink:#0f172a}
+*{box-sizing:border-box}body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);color:var(--ink)}
+.topbar{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 20px;display:flex;align-items:center;gap:10px}
+.topbar b{color:var(--teal-dark)}.topbar a{color:var(--grey-text);text-decoration:none;font-size:13px;margin-left:14px}
+.page-header{background:var(--navy);color:#fff;padding:22px 20px}
+.qb-badge{display:inline-block;background:var(--teal);color:#fff;font-size:11px;letter-spacing:.5px;padding:3px 9px;border-radius:4px;margin-bottom:8px}
+.page-header h1{margin:4px 0;font-size:22px}.page-header p{color:#cbd5e1;font-size:13px;margin:4px 0}
+.header-meta{display:flex;gap:16px;font-size:12px;color:#94a3b8;margin-top:8px;flex-wrap:wrap}
+.controls-bar{position:sticky;top:41px;z-index:40;background:#fff;border-bottom:1px solid var(--grey-border);padding:8px 20px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#search-input{flex:1;min-width:160px;padding:6px 10px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px}
+.filter-btn{border:1px solid var(--grey-border);background:#fff;color:var(--grey-text);font-size:12px;padding:5px 10px;border-radius:14px;cursor:pointer}
+.filter-btn.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+#q-count-label{font-size:12px;color:var(--grey-text)}
+.main-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;padding:20px;max-width:1100px;margin:0 auto}
+.sidebar{position:sticky;top:95px;align-self:start;font-size:12px}
+.sidebar a{display:block;color:var(--grey-text);text-decoration:none;padding:4px 8px;border-radius:4px;margin-bottom:2px}
+.sidebar a.active{background:var(--teal-light);color:var(--teal-dark);font-weight:600}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:18px 0 8px}
+.section-head h2{font-size:15px;margin:0}.sec-count{font-size:11px;color:var(--grey-text);background:var(--grey-bg);padding:2px 8px;border-radius:10px}
+.q-card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;margin-bottom:10px;overflow:hidden}
+.q-header{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;cursor:pointer}
+.q-header:hover{background:var(--grey-bg)}
+.q-num-badge{background:var(--teal);color:#fff;font-size:12px;font-weight:700;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.q-text-wrap{flex:1;min-width:0}.q-text{font-size:14px;font-weight:600}
+.q-tags{margin-top:5px}.q-tag{display:inline-block;font-size:10px;background:var(--teal-light);color:var(--teal-dark);padding:2px 7px;border-radius:8px;margin-right:5px}
+.q-chevron{width:18px;flex-shrink:0;transition:transform .2s}
+.q-card.open .q-chevron{transform:rotate(180deg)}
+.q-answer{display:none;padding:0 14px 14px}.q-card.open .q-answer{display:block}
+.answer-body{font-family:Georgia,serif;font-size:14.5px;line-height:1.6}
+.answer-body h4{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--teal-dark);margin:14px 0 6px;font-family:'Segoe UI',sans-serif}
+.answer-body ul,.answer-body ol{margin:6px 0;padding-left:20px}
+.formula{background:var(--grey-bg);font-family:monospace;padding:8px 10px;border-radius:6px;font-size:13px}
+.reg-box{background:var(--navy);color:#e2e8f0;border-radius:8px;padding:12px 14px;margin-top:14px}
+.reg-box-title{color:#fff;font-size:12px;font-weight:700;margin-bottom:8px}
+.reg-item{display:flex;gap:10px;font-size:12.5px;padding:3px 0;border-top:1px solid #1e293b}
+.reg-item:first-of-type{border-top:none}
+.reg-code{color:var(--orange);font-family:monospace;min-width:150px;word-break:break-word}
+.reg-desc{color:#cbd5e1;min-width:0}
+.ce-tip{background:var(--orange-light);border-left:3px solid var(--orange);padding:10px 12px;border-radius:0 6px 6px 0;margin-top:12px;font-size:13px}
+details.dd{margin-top:10px;border:1px solid var(--grey-border);border-radius:6px;padding:6px 10px}
+details.dd summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--teal-dark)}
+details.dd p,details.dd div{font-size:13px;margin:6px 0}
+.q-footer{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px;border-top:1px solid var(--grey-border);padding-top:8px;margin-top:10px}
+.correction-btn{background:none;border:1px solid var(--grey-border);color:var(--teal-dark);font-size:11px;padding:4px 10px;border-radius:12px;cursor:pointer}
+.correction-btn:hover{background:var(--teal-light)}
+.q-version{font-size:11px;color:var(--grey-text);flex-shrink:0}
+.page-footer{max-width:1100px;margin:20px auto;padding:16px 20px;border-top:1px solid var(--grey-border);font-size:12px;color:var(--grey-text)}
+.cheat{background:#fff;border:2px dashed var(--teal);border-radius:10px;padding:16px;margin:20px 0}
+.cheat h2{color:var(--teal-dark);font-size:16px;margin-top:0}
+.cheat .flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0}
+.cheat .node{background:var(--teal-light);color:var(--teal-dark);font-size:12px;font-weight:600;padding:6px 10px;border-radius:6px}
+.cheat .arrow{color:var(--teal);font-weight:700}
+.cheat .memcard{background:var(--grey-bg);border-left:3px solid var(--orange);border-radius:0 6px 6px 0;padding:8px 10px;font-size:12.5px;margin:6px 0}
+.cheat table{width:100%;border-collapse:collapse;font-size:12.5px;margin:8px 0}
+.cheat th,.cheat td{border:1px solid var(--grey-border);padding:5px 8px;text-align:left}
+.cheat th{background:var(--navy);color:#fff}
+.comment-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center}
+.comment-overlay.open{display:flex}
+.comment-modal{background:#fff;border-radius:14px;padding:28px;max-width:440px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.comment-modal h3{font-size:16px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.comment-modal p{font-size:12px;color:var(--grey-text);margin-bottom:18px}
+.comment-modal label{display:block;font-size:12px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.comment-modal select,.comment-modal textarea,.comment-modal input{width:100%;padding:9px 12px;border:1px solid var(--grey-border);border-radius:6px;font-size:13px;font-family:inherit;margin-bottom:12px;outline:none}
+.comment-modal select:focus,.comment-modal textarea:focus,.comment-modal input:focus{border-color:var(--teal)}
+.comment-modal textarea{resize:vertical;min-height:90px}
+.comment-btns{display:flex;gap:10px;justify-content:flex-end}
+.btn-cancel{background:var(--grey-bg);border:1px solid var(--grey-border);color:var(--grey-text);padding:8px 18px;border-radius:6px;font-size:13px;cursor:pointer}
+.btn-submit{background:var(--teal);color:#fff;border:none;padding:8px 18px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer}
+.btn-submit:hover{background:var(--teal-dark)}
+.comment-success{display:none;text-align:center;padding:20px}
+.comment-success svg{color:var(--teal);margin-bottom:10px}
+.comment-success p{font-size:14px;color:var(--navy);font-weight:600}
+@media(max-width:700px){.main-layout{grid-template-columns:1fr}.sidebar{display:none}}
+body{-webkit-user-select:none;user-select:none}
+</style>
+</head><body oncontextmenu="return false"><script>if(!/miw_auth=1/.test(document.cookie)){window.location.replace('/SQ/pay.html');}</script><div style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden;opacity:0.04;">
+  <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="wm" x="0" y="0" width="300" height="200" patternUnits="userSpaceOnUse" patternTransform="rotate(-35)">
+        <text x="10" y="60" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">marineintelligenceweekly.com</text>
+        <text x="10" y="120" font-size="18" fill="#0f172a" font-family="monospace" font-weight="bold">MEO CLASS 1 &#8212; CONFIDENTIAL</text>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wm)"/>
+  </svg>
+</div>
+
+<div class="topbar"><b>&#9875; MIW</b> Marine Intelligence Weekly
+<a href="/">Home</a><a href="/meoclass1/">MEO Class 1</a><a href="mailto:contactus@marineintelligenceweekly.com">Contact</a></div>
+<div class="page-header">
+  <span class="qb-badge">QB8_H</span>
+  <h1>QB8_H &#8212; Cargo Operations: Containers, Gas &amp; Chemical</h1>
+  <p>MEO Class 1 Oral Exam Question Bank &#8212; Kochi MMD-focused, Examiners: Simon, Nair &amp; Paul, Jul 2026 batch</p>
+  <div class="header-meta"><span>9 Questions</span><span>Compiled by Nixon Antony, 2/E, Maersk A/S</span><span>v1.0</span><span><a href="QB8_H_CheatSheet.html" style="color:#5eead4">Cheat Sheet &#8594;</a></span></div>
+</div>
+<div class="controls-bar">
+  <input id="search-input" placeholder="Search questions..." oninput="applyFilters()">
+  <button class="filter-btn active" onclick="filterTag(&#39;all&#39;,this)">All</button><button class="filter-btn" onclick="filterTag(&#39;container&#39;,this)">Container</button><button class="filter-btn" onclick="filterTag(&#39;chemical&#39;,this)">Chemical</button><button class="filter-btn" onclick="filterTag(&#39;gas&#39;,this)">Gas</button>
+  <span id="q-count-label">Showing 9 of 9</span>
+</div>
+<div class="main-layout">
+  <div class="sidebar">
+    <div style="font-weight:700;font-size:11px;text-transform:uppercase;color:#64748b;margin-bottom:6px">Contents</div>
+    <a class="toc-link" href="#q1">1. Container vessel common problems</a>
+    <a class="toc-link" href="#q2">2. Type 1 vs Type 2 chemical tankers</a>
+    <a class="toc-link" href="#q3">3. Chemicals carried &amp; reference if in doubt</a>
+    <a class="toc-link" href="#q4">4. Verifying first-time tank cleaning</a>
+    <a class="toc-link" href="#q5">5. Onboard test of cargo under IMSBC</a>
+    <a class="toc-link" href="#q6">6. LPG reliquefaction &amp; relief settings</a>
+    <a class="toc-link" href="#q7">7. Type of reliquefaction plant</a>
+    <a class="toc-link" href="#q8">8. LNG carriage temp/pressure</a>
+    <a class="toc-link" href="#q9">9. LNG containment tank types</a>
+    <div style="border-top:1px solid #e2e8f0;margin:10px 0"></div>
+    <div style="font-size:11px;color:#64748b">Cheat sheet: <a href="QB8_H_CheatSheet.html" style="color:#0d9488">QB8_H_CheatSheet</a></div>
+  </div>
+  <div id="q-feed">
+    <div class="section-head"><h2>&#128230; QB8_H &#8212; Cargo Operations: Containers, Gas &amp; Chemical</h2><span class="sec-count">9 questions</span></div>
+    <div class="q-card" id="q1" data-tags="container">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">1</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What are the common problems associated with container vessels?</div>
+      <div class="q-tags"><span class="q-tag">CONTAINER</span><span class="q-tag">STABILITY</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Cluster them: <strong>seakeeping/stability</strong> — parametric rolling and synchronous rolling (fine bow/wide stern hull forms), large GM variation with stack weight, whipping/springing of the long flexible hull; <strong>cargo</strong> — lashing failures and container loss, mis-declared weights (SOLAS VI/2 VGM) and mis-declared dangerous goods leading to deck/hold fires; <strong>fire-fighting limitation</strong> — inaccessible seat of fire inside boxes; <strong>machinery/operation</strong> — high-load 2-stroke plants on tight schedules, EGCS/fuel-switch demands in ECAs, and bridge-visibility/air-draught constraints from high deck stacks.</p>
+      <h4>60-Second Answer</h4>
+      <p><strong>Parametric rolling</strong> is the signature hazard: with a fine bow, flared sections and a broad transom, the waterplane — and hence GM — varies strongly as waves pass; when the encounter period is near half the natural roll period (head/following seas), roll can build to 30°+ in a few cycles, generating the lashing-failure and stack-collapse casualties (APL China 1998; more recently ONE Apus 2020, ~1,800 boxes lost). <strong>Cargo integrity</strong>: mis-declared weight was answered by the SOLAS VI/2 verified gross mass (VGM) requirement (in force 1 July 2016 — no VGM, no load); mis-declared dangerous goods (calcium hypochlorite, charcoal, lithium batteries) drives the major fires (MSC Flaminia 2012, Maersk Honam 2018, X-Press Pearl 2021), and IMDG segregation only works if the declaration is honest. <strong>Fire-fighting</strong>: a fire inside a stack is shielded from CO&#8322;/water; boundary cooling and early external help are the realistic responses, which is why SOLAS II-2/10.7.3 added water-mist lances and mobile monitors for ships designed to carry containers on deck (builds on/after 1 Jan 2016). Add hull-girder <strong>whipping and springing</strong> fatigue on ultra-large ships (MSC Napoli 2007 and the MOL Comfort 2013 hull-girder failure are the case studies), <strong>bridge visibility</strong> limits under SOLAS V/22 constraining stack heights, wind heel and increased windage in port manoeuvring, and the commercial reality — minimal port stays pressing maintenance windows. A CE frames each problem with its mitigation: route/heading change and roll-damping awareness, VGM and lashing plan compliance (Cargo Securing Manual, SOLAS VI/5.6), DG manifest verification, and drilled boundary-cooling strategies.</p>
+      <h4>Governing instrument</h4>
+      <p>SOLAS VI/2 (VGM, 1 Jul 2016), SOLAS II-2/10.7 (container-ship fire provisions, builds &ge;2016), MSC.1/Circ.1228 (avoiding dangerous situations in adverse weather); CSS Code and the ship's Cargo Securing Manual.</p>
+      <h4>Key Numbers</h4>
+      <ul>
+        <li><strong>VGM:</strong> SOLAS VI/2, in force <strong>1 Jul 2016</strong>.</li>
+        <li><strong>Parametric rolling trigger:</strong> encounter period &asymp; &frac12; natural roll period.</li>
+        <li><strong>II-2/10.7.3:</strong> water-mist lance + mobile monitors, container ships built &ge; 1 Jan 2016.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Parametric is not synchronous rolling — GM fluctuation building at about half the roll period in head/following seas versus classic beam-sea resonance; naming the wrong mechanism fails the question.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS VI/2</span><span class="reg-desc">Verified gross mass of packed containers — condition for loading</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS VI/5.6 &amp; CSS Code</span><span class="reg-desc">Cargo Securing Manual and securing arrangements; MSC.1/Circ.1353/Rev.2 CSM guidelines</span></div>
+      <div class="reg-item"><span class="reg-code">IMDG Code (SOLAS VII)</span><span class="reg-desc">Dangerous-goods declaration, stowage and segregation</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-2/10.7</span><span class="reg-desc">Fire protection for ships carrying containers on or above the weather deck</span></div>
+      <div class="reg-item"><span class="reg-code">MSC.1/Circ.1228</span><span class="reg-desc">Guidance to the master for avoiding dangerous situations in adverse weather (parametric/synchronous rolling)</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Structure wins — "seakeeping, cargo, fire, machinery" — then go one level deep on parametric rolling (why GM varies, the half-period resonance) because that is the follow-up. Tie each problem to a named casualty and a named regulation; that converts a list into a management-level answer.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Parametric rolling puts sudden load swings on the main engine (racing, torque fluctuation) and demands rapid manual intervention with governor/load programmes; reefer loads size the auxiliary plant; ECA fuel changeovers and EGCS operation sit with the CE on the schedule the deck cannot slip.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Parametric vs synchronous rolling?" A: Synchronous — encounter period equals natural roll period, typically beam seas, classic resonance; parametric — restoring moment itself varies (GM fluctuation) at about twice roll frequency, head/following seas. Q: "What did SOLAS do about mis-declared weight?" A: VGM, VI/2, 1 Jul 2016 — no verified mass, container shall not be loaded. Q: "Can you flood a hold for a container fire?" A: Consider stability/hull stress first — free surface and weight; it is a masters'-level decision with the CE calculating.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Unstructured lists; explaining parametric rolling as ordinary resonance without the GM-variation mechanism; no casualty names; no regulatory hooks (VGM, II-2/10.7, CSM); ignoring the machinery consequences.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>VGM 1 Jul 2016; II-2/10.7.3 builds &ge; 1 Jan 2016; parametric threshold T&#8337; &asymp; T&#7523;/2; ONE Apus ~1,800 containers lost (Nov 2020).</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>APL China (1998) — parametric rolling benchmark; MSC Flaminia (2012) &amp; Maersk Honam (2018) — DG fires with fatalities; MOL Comfort (2013) — hull-girder failure of a 8,000+ TEU ship; X-Press Pearl (2021) — DG fire and environmental disaster; ONE Apus (2020) — weather-routeing/stack-collapse.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> Common problems → parametric rolling mechanism → what the watch does → VGM requirement → container fire strategy → II-2/10.7 equipment → lashing/CSM responsibility.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Maersk container vessel: weather-routeing with parametric-roll polar warnings, lashing software linked to the approved CSM, reefer-load management, and drilled deck-fire response with mist lances and mobile monitors per II-2/10.7 — the daily face of every cluster above.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB8_H','Q1 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB8_H · Q1 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q2" data-tags="chemical">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">2</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Difference between Type 1 and Type 2 chemical tankers.</div>
+      <div class="q-tags"><span class="q-tag">CHEMICAL</span><span class="q-tag">IBC</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">IBC Code Ch. 2 ship types graded by cargo hazard and survival capability. <strong>Type 1:</strong> products with very severe environmental and safety hazards — maximum preventive measures: cargo tanks outside B/5 (max 11.5 m) from the side and B/15 (max 6 m) from the bottom, survives the most onerous damage assumptions, tank size limited to <strong>1,250 m&sup3;</strong>. <strong>Type 2:</strong> appreciably severe hazards — significant measures: tanks at least <strong>760 mm</strong> from the shell, B/15 from bottom, tank size limited to <strong>3,000 m&sup3;</strong>. (Type 3 completes the scale — no special tank-location requirement.) The ship type each product needs is column (e) of IBC Ch. 17.</p>
+      <h4>60-Second Answer</h4>
+      <p>The logic is <strong>containment survivability proportional to consequence</strong>: the worse the product, the further its tanks sit from plausible collision/grounding damage and the smaller any single release can be. Type 1 ships must survive damage anywhere in their length; the tank-location minima (B/5 side, B/15 bottom, with the metre caps) keep cargo out of the statistical damage-penetration zone, and the 1,250 m&sup3; per-tank cap limits the worst single-tank release. Type 2 relaxes location to 760 mm from the shell plating and caps tanks at 3,000 m&sup3;; damage-stability assumptions also grade by ship length. In practice very few full Type-1 products remain in Ch. 17; most modern parcel tankers are certified Type 2/Type 3 with stainless or coated tanks, and one ship commonly holds multiple type entries on its <strong>Certificate of Fitness</strong> — the certificate plus the approved <strong>P&amp;A Manual</strong> and the ship's Ch. 17 product list define exactly what may be carried in which tank. The examiner's follow-up is always an example: Type 1 — e.g. certain phosphorus/propylene oxide-class entries; Type 2 — the bulk of common solvents/acids (always answer "per column (e) of Chapter 17 for the specific product" rather than guessing).</p>
+      <h4>Governing instrument</h4>
+      <p>IBC Code Ch. 2 (ship types and survivability) with Ch. 17 column (e) assignment — mandatory via SOLAS VII and MARPOL Annex II; current text per MEPC.318(74)/MSC.460(101), in force 1 Jan 2021.</p>
+      <h4>Key Numbers</h4>
+      <ul>
+        <li><strong>Type 1:</strong> B/5 (&le;11.5 m) side, B/15 (&le;6 m) bottom, tank &le; <strong>1,250 m&sup3;</strong>.</li>
+        <li><strong>Type 2:</strong> &ge;760 mm from shell, B/15 bottom, tank &le; <strong>3,000 m&sup3;</strong>.</li>
+        <li><strong>Assignment:</strong> IBC Ch. 17, column (e); certification: Certificate of Fitness (IBC 1.5).</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Ship type (IBC safety/survivability) is not Category X/Y/Z (MARPOL pollution) — a product carries both labels answering different questions; and a higher type may carry lower-type cargo, never the reverse.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IBC Code Ch. 2.1.2</span><span class="reg-desc">Ship types 1, 2, 3 — hazard grading and survival capability</span></div>
+      <div class="reg-item"><span class="reg-code">IBC Code Ch. 2.6</span><span class="reg-desc">Cargo tank location — distances from shell; tank-size limits</span></div>
+      <div class="reg-item"><span class="reg-code">IBC Code Ch. 17</span><span class="reg-desc">Minimum requirements table — column (e) ship type per product</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS VII Part B / MARPOL Annex II</span><span class="reg-desc">Make the IBC Code mandatory for both safety and pollution</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC.318(74)/MSC.460(101)</span><span class="reg-desc">Major IBC Code revision (in force 1 Jan 2021) — current Ch. 17/18 product tables</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> Give the principle first — "containment survivability graded to cargo hazard" — then the two number sets. When Nair asks "which chemicals need Type 1?", the safe management answer is the method: check column (e) of Ch. 17 and the ship's Certificate of Fitness; quoting a memorised product wrongly is worse than quoting the lookup.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Ship type drives the machinery the CE runs: tank-material limits and heating/cooling ranges per the P&amp;A Manual, pump-room ventilation and gas detection, and damage-stability documentation kept with the loading computer — the CE co-owns the certificate conditions with the master.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Where is a product's ship type found?" A: IBC Ch. 17 column (e). Q: "Can a Type 2 ship carry a Type 3 cargo?" A: Yes — higher type covers lower; never the reverse. Q: "What limits a Type 1 tank?" A: 1,250 m&sup3; and the B/5 / B/15 location minima. Q: "Who issues the Certificate of Fitness?" A: Flag or RO under IBC 1.5.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Swapping the 1,250/3,000 m&sup3; caps; forgetting the 760 mm Type-2 figure; claiming ship type is about tank material rather than location/survivability; unable to name where product-to-type assignment lives.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p><strong>B/5 &le;11.5 m; B/15 &le;6 m; 760 mm; 1,250 m&sup3;; 3,000 m&sup3;</strong>; IBC Chs. <strong>2</strong> (types), <strong>17</strong> (table), <strong>1.5</strong> (certification).</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>The type system embodies pre-IBC chemical-spill experience: collision releases of highly toxic parcels drove the location-plus-size philosophy — small maximum releases, tanks clear of the damage zone — formalised when SOLAS/MARPOL made the Code mandatory (1986 builds onward).</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Nair:</strong> Type 1 vs 2 → the numbers → where assignment is found → Certificate of Fitness → can Type 2 carry Type 1 cargo (no) → P&amp;A Manual role.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Container-vessel candidates: answer from the Code, then bridge honestly — "my DG exposure is packaged IMDG, not bulk IBC" — and show the parallel: segregation and quantity limits serve the same release-limitation philosophy.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB8_H','Q2 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB8_H · Q2 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q3" data-tags="chemical">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">What different chemicals are carried, and where do you refer if in doubt about a chemical?</div>
+      <div class="q-tags"><span class="q-tag">CHEMICAL</span><span class="q-tag">IBC</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Families: <strong>petrochemicals</strong> (aromatics — benzene, toluene, xylene; olefins), <strong>alcohols &amp; glycols</strong> (methanol, ethanol, MEG), <strong>acids &amp; caustics</strong> (sulphuric, phosphoric, caustic soda), <strong>vegetable/animal oils and fats</strong>, <strong>lube-oil additives and esters</strong>, <strong>molten products</strong> (sulphur, asphalt). If in doubt: <strong>IBC Code Ch. 17/18</strong> (carriage requirements per product), the ship's <strong>Certificate of Fitness</strong> product list, the approved <strong>P&amp;A Manual</strong>, the shipper's <strong>MSDS/SDS</strong>, and for products not yet in the Code, the latest <strong>MEPC.2/Circular</strong> provisional/tripartite assessments — backed by the ICS Tanker Safety Guide (Chemicals) and company/charterer vetting desks.</p>
+      <h4>60-Second Answer</h4>
+      <p>Structure the cargo universe by hazard driver: flammability (aromatics, alcohols), toxicity (benzene, acrylonitrile, phenol), corrosivity (acids, caustics), reactivity/self-reaction (styrene monomer and other inhibited cargoes, propylene oxide), pollution category X/Y/Z under MARPOL Annex II, and carriage-condition demands (heated molten sulphur/asphalt, high-melting-point veg oils). The reference chain in doubt is hierarchical and the examiner wants it in order. <strong>(1)</strong> Is the product listed — IBC Ch. 17 (dangerous/noxious, full requirement line: ship type, tank type, venting, gauging, fire protection, special requirements in Ch. 15) or Ch. 18 (non-dangerous NLS); if unlisted, it may not be carried until assessed — the <strong>MEPC.2/Circ</strong> annual circular publishes provisional classifications and tripartite agreements between flag, port and shipping states. <strong>(2)</strong> May THIS ship carry it — Certificate of Fitness attachment list and the P&amp;A Manual (tank coatings/materials compatibility, heating limits, cleaning and prewash requirements). <strong>(3)</strong> How to handle it — shipper's SDS (mandatory before loading), compatibility chart for adjacent-tank stowage (e.g. USCG-style compatibility grouping), inhibitor certificate where required (Ch. 15.13), and the ICS Tanker Safety Guide (Chemicals). Never load on verbal assurance: no listing + no assessment = no carriage.</p>
+      <h4>Governing instrument</h4>
+      <p>IBC Code Chs. 17/18, MARPOL Annex II Reg 6 (Categories X/Y/Z) and Reg 14 (P&amp;A Manual); the annual MEPC.2/Circular for products not yet in the Code.</p>
+      <h4>Key Forms</h4>
+      <ul>
+        <li><strong>Certificate of Fitness</strong> + product attachment list (IBC 1.5).</li>
+        <li><strong>P&amp;A Manual</strong> (MARPOL Annex II Reg 14) — approved, ship-specific.</li>
+        <li><strong>SDS</strong> per cargo; <strong>inhibitor certificate</strong> for inhibited cargoes; <strong>MEPC.2/Circ</strong> for unlisted products.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Assuming the SDS authorises carriage is the fail — a product absent from Chs. 17/18 with no tripartite/MEPC.2 assessment simply may not be carried.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IBC Code Ch. 17 &amp; 18</span><span class="reg-desc">Summary of minimum requirements; list of products to which the Code does not apply</span></div>
+      <div class="reg-item"><span class="reg-code">IBC Code Ch. 15</span><span class="reg-desc">Special requirements — inhibited cargoes, propylene oxide, acids, etc.</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex II Regs 6 &amp; 14</span><span class="reg-desc">Categorization of NLS (X/Y/Z); Procedures &amp; Arrangements Manual</span></div>
+      <div class="reg-item"><span class="reg-code">MEPC.2/Circ (annual)</span><span class="reg-desc">Provisional categorization and tripartite assessment of products not in the Code</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS VII / MARPOL Annex II</span><span class="reg-desc">Mandatory status of the IBC Code</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> The question is really "what is your lookup discipline?" Give families in one breath, then the ordered chain: Ch. 17 line → Certificate of Fitness → P&amp;A Manual → SDS → MEPC.2/Circ if unlisted. Saying "if it is not listed and not assessed, it does not load" is the sentence Nair is waiting for.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Every Ch. 17 line lands on CE systems: tank heating coils to SDS limits, nitrogen padding, pump-room gas detection matched to the product, cargo-pump seals and materials per the P&amp;A Manual, and prewash/slop handling under Annex II — cargo chemistry read as machinery constraints.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Cargo not in Ch. 17 — can you carry it?" A: Only after assessment — check the current MEPC.2/Circ tripartite/provisional entry naming the flag; otherwise no. Q: "What are categories X, Y, Z?" A: MARPOL Annex II pollution categories (X worst — prewash mandatory) — distinct from ship types 1/2/3. Q: "Where are heating and tank-material limits?" A: P&amp;A Manual and the certificate documentation, product by product.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Random chemical name-dropping with no families; jumping straight to "MSDS" without the Code chain; confusing pollution categories with ship types; not knowing MEPC.2/Circ exists for unlisted products.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>IBC Ch. <strong>17</strong> (listed) / <strong>18</strong> (non-dangerous NLS) / <strong>15</strong> (special requirements); Annex II Reg <strong>6</strong> (X/Y/Z), Reg <strong>13</strong> (discharge/prewash), Reg <strong>14</strong> (P&amp;A Manual); MEPC.2/Circ issued <strong>annually</strong> (December).</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Stolt Groenland (Ulsan, 2019) — styrene monomer runaway polymerisation and explosion in port: inhibited-cargo management, temperature monitoring and the Ch. 15/SDS discipline this question tests, in one casualty.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Nair:</strong> What chemicals → reference in doubt → unlisted product → X/Y/Z vs ship type → inhibited cargo controls → prewash rules → who approves the P&amp;A Manual.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>From a container ship, translate: the IMDG declaration + segregation table is my Ch. 17; the DG manifest is my certificate attachment; the discipline — no verified paperwork, no loading — is identical.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB8_H','Q3 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB8_H · Q3 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q4" data-tags="chemical">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">4</div>
+    <div class="q-text-wrap">
+      <div class="q-text">After ship delivery, how do you verify tank cleaning is proper (first-time tank cleaning machine operation)?</div>
+      <div class="q-tags"><span class="q-tag">CHEMICAL</span><span class="q-tag">TANK CLEANING</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Three layers of verification. <strong>Coverage:</strong> confirm the fixed machines actually wash the whole tank — run against the maker's/yard's <strong>shadow diagram</strong> for each machine position, checking drop lengths, nozzle rotation cycle and wash pressure against the P&amp;A Manual/maker data. <strong>Process evidence:</strong> monitor wash-water supply pressure/temperature and machine rotation (audible cycle/portable check), stripping performance and tank-atmosphere readings. <strong>Result evidence:</strong> physical inspection (dry, odour-free, no residues/scale in way of shadows, sumps and under heating coils) and, for high-purity first cargoes, a surveyor's <strong>wall-wash test</strong> — methanol wipe samples analysed for chlorides, hydrocarbons, permanganate time and appearance against the charterer's specification.</p>
+      <h4>60-Second Answer</h4>
+      <p>A newly delivered ship has never proven its cleaning system, so treat the first operation as commissioning, not routine. <strong>Before washing:</strong> study the tank drawings and the cleaning-machine <strong>shadow diagrams</strong> — every fixed machine has zones blocked by structure (stringers, heating coils, pump stack); the diagram tells you where portable machines or hand work must supplement. Verify machine drive type and cycle time, programmed drop steps, design throughput and pressure from maker data, and line up per the P&amp;A Manual. <strong>During washing:</strong> confirm each machine is actually rotating/indexing (listen at the deck flange or use the indicator), hold wash pressure and temperature at the specified values, strip continuously so pooling does not mask coverage, and log the sequence — cold/hot seawater, chemical additive stage if used, fresh-water rinse, then steaming/drying as the next cargo demands. <strong>After washing:</strong> enclosed-space entry under permit, physical inspection of shadow areas, sumps, behind coils and the aft bulkhead; check for loose mill-scale/coating defects typical of a new ship. For a first high-spec cargo (e.g. methanol-class purity), an independent cargo surveyor performs the wall-wash: solvent wiped over defined plate areas, lab-tested — chlorides (ppm), hydrocarbons, permanganate time (min), colour/appearance — against the charterer specification; failures map back to specific machines/shadows, closing the loop on the coverage verification. Acceptance values are <strong>cargo- and charterer-specific</strong> — quote the method, not universal numbers.</p>
+      <h4>Governing instrument</h4>
+      <p>MARPOL Annex II Regs 13/14 and the ship's approved P&amp;A Manual (cleaning/prewash procedures); wall-wash acceptance figures are charterer/commercial criteria, not statutory values.</p>
+      <h4>Trap Warning</h4>
+      <ul>
+        <li>Wall-wash acceptance limits are <strong>commercial/charterer figures</strong>, not statutory — never quote them as regulation.</li>
+        <li>Shadow diagram first — a passed wall-wash on accessible plating proves nothing about un-washed shadow zones.</li>
+        <li>Tank entry only under the enclosed-space permit system (SOLAS III/19 drills context; company procedure).</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Quoting wall-wash limits as regulation is the trap — chlorides/hydrocarbons/permanganate-time acceptance figures are charterer commercial criteria, never statutory values.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex II Reg 14 (P&amp;A Manual)</span><span class="reg-desc">Approved procedures for washing, prewash and residue handling — the governing ship document</span></div>
+      <div class="reg-item"><span class="reg-code">MARPOL Annex II Reg 13 &amp; Appendix VI</span><span class="reg-desc">Discharge control and prewash procedures where applicable</span></div>
+      <div class="reg-item"><span class="reg-code">Maker manuals / yard shadow diagrams</span><span class="reg-desc">Machine coverage, cycle, pressure/throughput — ship-specific controlling data</span></div>
+      <div class="reg-item"><span class="reg-code">ICS Tanker Safety Guide (Chemicals)</span><span class="reg-desc">Industry-standard cleaning and inspection practice</span></div>
+      <div class="reg-item"><span class="reg-code">Company SMS / enclosed-space procedures</span><span class="reg-desc">Permit-to-work regime for post-wash inspection entries</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> The word the examiner wants is <strong>shadow diagram</strong> — open with it. Then the three-layer frame (coverage / process / result) and the wall-wash parameters by name (chlorides, hydrocarbons, permanganate time). Close with "acceptance values are charterer-specific; my job is proving coverage and process per the P&amp;A Manual".</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE owns the hardware proof: tank-cleaning pump/heater performance to spec, machine drive condition, stripping/eductor performance, and the steam/FW consumption plan — on a new ship, first-operation data becomes the baseline the PMS trends against for the ship's life.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "What is permanganate time?" A: A wall-wash purity test — time for KMnO&#8324; colour to fade in the sample; shorter time indicates oxidisable contamination; limit per charterer spec. Q: "Machine not rotating — how would you know?" A: Cycle sound/vibration at the deck stand, indexing indicator where fitted, and ultimately an uncleaned sector at inspection matching that machine's arc. Q: "Who accepts the tank?" A: Commercially, the cargo surveyor against the charterer spec; the P&amp;A Manual governs the statutory side.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>No mention of shadow diagrams; quoting wall-wash limits as statutory; skipping the during-wash process checks; forgetting enclosed-space permits for inspection; treating a new ship like a proven one.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>Method names, not figures: <strong>chlorides &middot; hydrocarbons &middot; permanganate time &middot; appearance</strong>; all acceptance values <strong>[ship-/charterer-specific]</strong> per the cargo specification and P&amp;A Manual.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Cargo-contamination claims are the chemical trade's silent casualties — multi-million-dollar off-spec cargoes traced to shadow-zone residues or wet tanks; and tank-entry fatalities during post-wash inspection keep this question welded to the enclosed-space regime.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Nair:</strong> First-time verification → shadow diagram → during-wash checks → wall-wash parameters → who sets limits → what if one sector fails → enclosed-space entry controls.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Container-vessel bridge to the concept: commissioning verification of any new system — first ballast-tank coating survey, first EGCS washwater run — follows the same coverage/process/result discipline with maker data as the yardstick.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB8_H','Q4 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB8_H · Q4 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q5" data-tags="container">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">5</div>
+    <div class="q-text-wrap">
+      <div class="q-text">How do you carry out an onboard test of cargo under IMSBC?</div>
+      <div class="q-tags"><span class="q-tag">IMSBC</span><span class="q-tag">BULK</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">The <strong>"can test"</strong> — the complementary shipboard check in IMSBC Code Sec. 8 for Group A (liquefiable) cargoes: half fill a cylindrical can or jar (~0.5–1 litre) with a sample, and bring it down sharply against a hard surface from about <strong>0.2 m, 25 times at 1–2 second intervals</strong>. If <strong>free moisture or a fluid condition</strong> appears on the surface, the moisture content may exceed the Transportable Moisture Limit — do NOT load; require additional laboratory testing. A "passed" can test does not prove safety — it can only raise the alarm; the governing documents remain the shipper's declaration with moisture content and TML certificates (Sec. 4).</p>
+      <h4>60-Second Answer</h4>
+      <p>Group A cargoes (concentrates, nickel ore, certain fines) can <strong>liquefy</strong>: cyclic vibration and engine/sea motion compact the granular mass, pore-water pressure rises, and a solid-behaving cargo becomes a dense fluid that shifts to one side — the free-surface effect capsizes the ship, often too fast for the crew (Bulk Jupiter 2015, nickel-ore losses off Indonesia/Philippines). The statutory defence is documentary: the shipper's declaration of moisture content (sampled per Sec. 4.5, within 7 days of loading, re-sampled after significant rain) against a certified <strong>TML</strong> (test within 6 months), with moisture required below TML — the TML itself being 90% of the Flow Moisture Point from laboratory tests (flow-table and alternatives, Appendix 2). The <strong>can test is the master's cross-check</strong> when appearance raises doubt — visual free moisture, cargo splattering, rain during loading. Procedure exactly as the Code states it; interpretation in the Code's own words: if free moisture or fluid conditions appear, the master should arrange additional laboratory tests before accepting the cargo — and the master's SOLAS right to refuse doubtful cargo (VI/7.2 context) backs the decision commercially. State clearly what the test cannot do: a dry-looking can does not certify moisture below TML; only the lab does that. Follow-through onboard: trim per the schedule, monitor for splatter/fluid state during the voyage where accessible, and treat any observed cargo surface wetness as an emergency stability review.</p>
+      <h4>Governing instrument</h4>
+      <p>IMSBC Code Sec. 8.4 (can test) with Secs. 4.3/4.5 (TML = 90% of FMP; moisture certificate &le;7 days, TML certificate &le;6 months) — mandatory via SOLAS VI.</p>
+      <h4>Key Numbers</h4>
+      <ul>
+        <li><strong>Can test:</strong> half-filled ~0.5–1 L can, ~<strong>0.2 m</strong> drop, <strong>25</strong> strikes, <strong>1–2 s</strong> intervals (IMSBC Sec. 8.4).</li>
+        <li><strong>TML = 90% of FMP</strong>; moisture certificate sampling &le; <strong>7 days</strong> before loading; TML test &le; <strong>6 months</strong>.</li>
+        <li><strong>Groups:</strong> A liquefy &middot; B chemical hazard &middot; C neither.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>The can test can only condemn, never clear — a satisfactory appearance does not authorise loading; only the laboratory TML/moisture certificates (&le;6 months / &le;7 days) do.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IMSBC Code Sec. 8 (8.4)</span><span class="reg-desc">Test procedures for cargoes that may liquefy — complementary shipboard can test</span></div>
+      <div class="reg-item"><span class="reg-code">IMSBC Code Sec. 4</span><span class="reg-desc">Shipper's declaration, moisture certificate, TML certificate, sampling intervals</span></div>
+      <div class="reg-item"><span class="reg-code">IMSBC Code Sec. 7 &amp; Appendix 2</span><span class="reg-desc">Liquefaction mechanism; laboratory FMP/TML test methods</span></div>
+      <div class="reg-item"><span class="reg-code">SOLAS VI &amp; VII</span><span class="reg-desc">Mandatory status of the IMSBC Code for bulk cargoes</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Paul):</strong> Recite the procedure with its numbers (half-fill, 0.2 m, 25 strikes, 1–2 s), then immediately give the limitation sentence — "it can only trigger lab testing, never clear a cargo" — and the paperwork chain (declaration, moisture cert 7 days, TML cert 6 months, TML = 90% FMP). That combination is a complete Paul answer.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Liquefaction is a stability casualty the engine room feels first — unexplained list, heavy autopilot/rudder demand, rolling character change. The CE's contributions: ballast readiness for corrective action, weather-tight hold bilge monitoring (rising hold-bilge water = pore water draining), and honest fuel/stability data for the master's decisions.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Can test passed — safe to load?" A: No — it cannot verify moisture below TML; only laboratory certification does. Q: "What is TML?" A: Transportable Moisture Limit = 90% of the Flow Moisture Point determined by lab test. Q: "It rains during loading?" A: Stop loading uncovered Group A cargo; re-check moisture — the certificate's sampling validity is broken by significant wetting.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Wrong mechanics (shaking instead of striking); missing the 25/0.2 m/1–2 s details; claiming the test certifies the cargo; not knowing TML = 90% FMP; unable to name Group A/B/C.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p><strong>25 strikes &middot; 0.2 m &middot; 1–2 s &middot; TML = 0.9 &times; FMP &middot; 7 days &middot; 6 months</strong>; IMSBC Secs. <strong>4, 7, 8</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Bulk Jupiter (2015, bauxite, 18 dead) and the nickel-ore losses from Indonesian/Philippine anchorages (multiple ships, 2010–2019) — wet-season loading with paper moisture certificates contradicted by the cargo's appearance; the can test exists exactly for that contradiction.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Paul:</strong> Onboard IMSBC test → procedure numbers → what a positive result means → TML/FMP relation → shipper documentation timing → master's refusal right → voyage monitoring.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Not applicable hardware on a container ship — answer from the Code and casualties; the transferable discipline is verification culture: paperwork that contradicts physical evidence loses, every time.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB8_H','Q5 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB8_H · Q5 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q6" data-tags="gas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">6</div>
+    <div class="q-text-wrap">
+      <div class="q-text">LPG cargo — reliquefaction temperature/pressure, plant operation, relief valve setting, discharge pressure for butane and propane.</div>
+      <div class="q-tags"><span class="q-tag">GAS</span><span class="q-tag">LPG</span><span class="q-tag">IGC</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Fully refrigerated carriage keeps cargo at its atmospheric boiling point, tank pressure slightly above atmospheric: <strong>propane &asymp; &minus;42 &deg;C</strong>, <strong>n-butane &asymp; &minus;0.5 &deg;C</strong>. Boil-off from heat ingress is drawn off by the reliquefaction plant — cargo compressor(s) raise vapour pressure so it condenses against seawater in the cargo condenser; condensate returns via float/expansion valve to the tank. <strong>Relief valve (MARVS) setting</strong> and <strong>pump discharge pressures</strong> are <strong>ship-specific</strong> — MARVS per the IGC-approved design (fully refrigerated ships commonly of the order of 0.25 barg class; state "per my Certificate of Fitness/approved drawings"), discharge pressure per the approved pump curves and terminal manifold requirements in the cargo operating manual.</p>
+      <h4>60-Second Answer</h4>
+      <p><strong>Physics first:</strong> a fully refrigerated tank is a boiling liquid in equilibrium — tank pressure fixes temperature. Heat ingress through insulation boils cargo; removing that vapour and returning it as liquid holds the state point. <strong>Single-stage direct cycle</strong> (butane, warm-condensing conditions): compressor suction from tank vapour space → discharge into seawater-cooled condenser → liquid receiver → expansion/float valve → return to tank spray line. <strong>Two-stage with interstage cooling</strong> (propane): higher compression ratio needed to condense &minus;42 &deg;C boil-off against tropical seawater; two-stage with intercooler limits discharge temperature and improves efficiency. <strong>Operation points the examiner probes:</strong> incondensables (nitrogen, air) collect in the condenser, raising condensing pressure — purge them; liquid carry-over to the compressor is prevented by suction knock-out/superheat control; oil management per maker; capacity control by speed/cylinder unloading against tank pressure. <strong>Relief valves:</strong> each cargo tank has at least two pressure-relief valves (IGC Ch. 8); the set pressure is the MARVS on the ship's certificate — a design value, not a universal number; pilot-operated valves with full-flow capacity for the fire case per IGC 8.4. Some ships carry dual-set arrangements (harbour/riser settings) — changeover is a documented, flag-notified procedure per the approved manual. <strong>Discharge pressure:</strong> deepwell/booster pump head is laid down in the approved cargo handling manual and pump characteristic curves; typical practice quotes manifold pressure agreed with the terminal — quote your ship's documents, never a memorised universal figure. Anchor every number you do give: propane &minus;42 &deg;C, butane &asymp; 0 &deg;C, and "MARVS per certificate".</p>
+      <h4>Governing instrument</h4>
+      <p>IGC Code Ch. 7 (cargo pressure/temperature control) and Ch. 8 (relief systems — MARVS, &ge;2 PRVs, fire-case sizing); actual settings per the ship's Certificate of Fitness and approved cargo operating manual.</p>
+      <h4>Key Numbers</h4>
+      <ul>
+        <li><strong>Atmospheric boiling points:</strong> propane <strong>&minus;42 &deg;C</strong>; n-butane <strong>&minus;0.5 &deg;C</strong> (i-butane &minus;12 &deg;C).</li>
+        <li><strong>MARVS, pump discharge, dual RV settings:</strong> [ship-specific] — Certificate of Fitness, approved drawings, cargo operating manual.</li>
+        <li><strong>IGC Ch. 8:</strong> &ge;2 PRVs per cargo tank; fire-case sizing; MARVS defined in IGC Ch. 1.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Inventing a universal MARVS or discharge pressure is the fail — these are Certificate of Fitness/approved-manual values; the memorable universals are only the boiling points (propane &minus;42 &deg;C, n-butane &minus;0.5 &deg;C).</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IGC Code Ch. 8 (as amended by MSC.370(93))</span><span class="reg-desc">Vent systems for cargo containment — PRV requirements, MARVS, fire-case capacity</span></div>
+      <div class="reg-item"><span class="reg-code">IGC Code Ch. 7</span><span class="reg-desc">Cargo pressure/temperature control — reliquefaction as the accepted method</span></div>
+      <div class="reg-item"><span class="reg-code">IGC Code Ch. 1 (definitions)</span><span class="reg-desc">MARVS — maximum allowable relief valve setting of a cargo tank</span></div>
+      <div class="reg-item"><span class="reg-code">Certificate of Fitness + approved cargo handling manual</span><span class="reg-desc">Ship-specific MARVS, pump curves, manifold pressures — the controlling documents</span></div>
+      <div class="reg-item"><span class="reg-code">SIGTTO LPG shipping guides</span><span class="reg-desc">Industry-standard operating practice for reliquefaction plants</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Give the two boiling points instantly — that is the memory test — then the cycle in one breath (compress → condense vs seawater → expand → return), then the discipline answer for settings: "MARVS and discharge pressures are certificate/manual values on my ship; I verify against the approved documents." Simon (LNG/gas background) fails candidates who invent universal relief settings faster than candidates who say "ship-specific".</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The reliquefaction plant is engine-department machinery on most LPG ships: compressor maintenance, seal-gas/oil systems, condenser SW side fouling (condensing pressure creep = the CE's trend alarm), incondensable purging routines, and capacity planning for cargo-tank cooldown before loading.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Why two-stage for propane but single-stage for butane?" A: Compression ratio — condensing &minus;42 &deg;C vapour against ~30 &deg;C seawater needs a ratio a single stage cannot deliver efficiently without excessive discharge temperature; butane's near-ambient boiling point keeps the ratio low. Q: "Condensing pressure rising steadily — cause?" A: Incondensables in the condenser or SW-side fouling; purge first, then check cooling. Q: "What is MARVS?" A: Maximum Allowable Relief Valve Setting — the certificate design value defining maximum tank vapour pressure.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Quoting a universal relief-valve figure as regulation; wrong boiling points; describing the cycle without the incondensables/purging point; not knowing MARVS by name; forgetting the fire-case sizing basis of the PRVs.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>Propane <strong>&minus;42 &deg;C</strong>, n-butane <strong>&minus;0.5 &deg;C</strong>, i-butane <strong>&minus;12 &deg;C</strong>; &ge;<strong>2</strong> PRVs per tank (IGC 8.2); everything else <strong>[ship-specific]</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>LPG carrier incidents cluster around overpressure during loading with blocked/isolated vapour return and PRV lifting to the mast riser — the operational reason dual settings, purge routines and MARVS discipline are drilled; SIGTTO guidance codifies the lessons.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> Carriage temp/pressure → cycle description → single vs two-stage → incondensables → MARVS and PRV rules → dual settings changeover → discharge pressure source documents.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Container-ship candidate: answer from the IGC framework and thermodynamics, then bridge — "my reefer plant is the same vapour-compression cycle; the LPG plant simply condenses the cargo itself." That bridge shows understanding rather than memorisation.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB8_H','Q6 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB8_H · Q6 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q7" data-tags="gas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">7</div>
+    <div class="q-text-wrap">
+      <div class="q-text">Type of reliquefaction plant onboard.</div>
+      <div class="q-tags"><span class="q-tag">GAS</span><span class="q-tag">LPG</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">Two families. <strong>Direct cycles</strong> — the cargo vapour itself is the working fluid: <strong>single-stage</strong> (butane and warmer cargoes), <strong>two-stage with intercooler</strong> (propane/ammonia against warm seawater), and <strong>cascade</strong> — cargo condensed against a separate closed refrigerant circuit (typically R404A-class) whose own cycle rejects heat to seawater; required for <strong>ethylene</strong> (&minus;104 &deg;C), where no practical single compression can condense against seawater. <strong>Indirect cycles</strong> — cargo is cooled without being compressed, via a refrigerant-cooled heat exchanger/coils; rare, reserved for cargoes unsuitable for compression (e.g. easily polymerising products such as certain butadiene/VCM operations per the ship's approval).</p>
+      <h4>60-Second Answer</h4>
+      <p>Answer as a selection logic, then say what YOUR ship has (or, from a container vessel, present the taxonomy and state your plant per the approved cargo operating manual — the manual and the Certificate of Fitness name the plant, its capacity and the cargoes it serves). <strong>Single-stage direct:</strong> compressor → SW condenser → receiver → expansion to tank; adequate while compression ratio stays modest — butane, and propane in cold-water trades. <strong>Two-stage direct:</strong> splits the ratio across LP and HP stages with an intercooler (often liquid-injection or open flash type), keeping discharge temperature within limits and improving volumetric efficiency — the standard fully-refrigerated propane/ammonia solution; ammonia additionally demands compatible materials (no copper alloys) and dedicated arrangements. <strong>Cascade:</strong> the cargo cycle condenses in a cargo condenser cooled not by seawater but by an evaporating closed-loop refrigerant; that refrigerant's own compressor/condenser rejects heat to seawater. This solves the ethylene problem — condensing at &asymp; &minus;104 &deg;C needs a low-temperature sink no seawater condenser can offer. <strong>Indirect:</strong> tank coils or an external exchanger cooled by a refrigeration plant; the cargo never enters a compressor — chosen where compression risks polymerisation or contamination; capacity is limited, so it suits low heat-ingress designs. Semi-pressurised ships pair reliquefaction with pressure-capable Type C tanks, giving flexibility between pressurised and refrigerated carriage. The design driver in every case: <strong>condensing temperature vs available cooling medium, and cargo chemistry</strong>.</p>
+      <h4>Governing instrument</h4>
+      <p>IGC Code Chs. 5, 7 and 17; the fitted plant, capacity and approved cargo list are stated in the Certificate of Fitness and cargo operating manual.</p>
+      <h4>Key Numbers</h4>
+      <ul>
+        <li><strong>Ethylene b.p. &asymp; &minus;104 &deg;C</strong> → cascade mandatory in practice; propane &minus;42 &deg;C → two-stage; butane &asymp; 0 &deg;C → single-stage.</li>
+        <li><strong>Plant type, capacity, served cargoes:</strong> [ship-specific] — Certificate of Fitness &amp; approved cargo operating manual.</li>
+        <li><strong>Ammonia:</strong> no copper/copper-alloy components in cargo systems (IGC Ch. 17 special requirements).</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Missing WHY ethylene forces cascade (&minus;104 &deg;C cannot condense against seawater) — and forgetting the indirect cycle exists for polymerising cargoes — are the two standard gaps.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IGC Code Ch. 7</span><span class="reg-desc">Cargo pressure/temperature control — refrigeration/reliquefaction systems and their redundancy basis</span></div>
+      <div class="reg-item"><span class="reg-code">IGC Code Ch. 17</span><span class="reg-desc">Special requirements — cargo-specific constraints (ammonia materials, inhibited cargoes)</span></div>
+      <div class="reg-item"><span class="reg-code">IGC Code Ch. 5</span><span class="reg-desc">Process pressure vessels and piping — cargo compressors, condensers, heat exchangers</span></div>
+      <div class="reg-item"><span class="reg-code">Certificate of Fitness / cargo operating manual</span><span class="reg-desc">Names the fitted plant, capacity and approved cargo list — the controlling ship documents</span></div>
+      <div class="reg-item"><span class="reg-code">SIGTTO liquefied gas handling principles</span><span class="reg-desc">Industry-standard treatment of plant types and selection</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Present it as engineering selection — "condensing temperature against the cooling medium decides the cycle" — then the ladder: butane/single, propane/two-stage, ethylene/cascade, polymerising cargo/indirect. Ending with "my plant, capacity and approved cargoes are stated in the Certificate of Fitness and cargo operating manual" converts taxonomy into command knowledge.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>Plant type sets the CE's maintenance world: reciprocating cargo-compressor overhauls (rings, valves, seal gas), intercooler level control, cascade-loop refrigerant management and leak accounting, condenser SW-side cleaning — and cooldown-capacity planning that decides whether the ship makes its loading window.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Why cascade for ethylene?" A: Condensing at &asymp;&minus;104 &deg;C is impossible against seawater; the closed refrigerant loop provides the low-temperature sink. Q: "Why indirect at all?" A: Cargo chemistry — compression heat/contact risks polymerisation or contamination. Q: "What limits single-stage propane?" A: Compression ratio → discharge temperature and volumetric efficiency collapse against warm seawater.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Listing types with no selection logic; not knowing ethylene forces cascade; forgetting indirect exists; unable to say where the fitted plant is documented; ignoring ammonia's materials restriction.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p>Ethylene <strong>&minus;104 &deg;C</strong> &middot; propane <strong>&minus;42 &deg;C</strong> &middot; butane <strong>&asymp;0 &deg;C</strong>; IGC Chs. <strong>5, 7, 17</strong>; plant data <strong>[ship-specific]</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>Cargo-compressor liquid slugging (carry-over from the tank vapour space) is the recurring plant casualty — broken valves/rods mid-voyage and rising tank pressure with no reliquefaction capability; suction knock-out drums and superheat discipline exist because of it.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> Plant types → selection logic → ethylene case → indirect case → what your certificate says → failure of the plant at sea, options (pressure rise margin to MARVS, speed/route, vent as last resort per flag/company policy).</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Container-vessel bridge: the ship's reefer and AC plants are single-stage vapour-compression cycles; a two-stage cargo plant is the same thermodynamics with the ratio split — presenting it that way shows transfer of understanding, which is what the management-level oral rewards.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB8_H','Q7 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB8_H · Q7 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q8" data-tags="gas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">8</div>
+    <div class="q-text-wrap">
+      <div class="q-text">LNG cargo — carriage temperature and pressure; how is temperature maintained?</div>
+      <div class="q-tags"><span class="q-tag">GAS</span><span class="q-tag">LNG</span><span class="q-tag">IGC</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">LNG is carried fully refrigerated at about <strong>&minus;162 &deg;C</strong>, at near-atmospheric tank pressure — membrane tanks typically run a small positive gauge pressure of the order of <strong>0.05–0.25 barg</strong> [ship-specific per the certificate/CTS]. Temperature is maintained by <strong>auto-refrigeration</strong>: the cargo is a boiling liquid, so heat ingress converts to latent heat of vaporisation rather than temperature rise; managing the resulting <strong>boil-off gas (~0.10–0.15%/day modern designs, design BOR ship-specific)</strong> — burning it in the propulsion plant (DF engines/GCU), reliquefying it where fitted, or controlled pressure accumulation — holds the state point. Insulation limits ingress; it cannot stop it.</p>
+      <h4>60-Second Answer</h4>
+      <p><strong>Thermodynamic core</strong> (say this first): a liquid in equilibrium with its vapour sits at the saturation temperature for the tank pressure. At ~1 bar abs, methane saturates at &minus;161.5 &deg;C. Heat leaking through insulation cannot warm the bulk liquid while it boils — energy leaves as latent heat in the vapour. So "how is temperature maintained?" = "how is pressure maintained?" — remove vapour at the rate it forms and the temperature holds itself. <strong>The BOG destinations:</strong> (1) fuel — dual-fuel/ME-GI/X-DF propulsion or the gas combustion unit (GCU) when the plant cannot absorb it; IGC Ch. 16 permits methane as fuel; (2) onboard reliquefaction where fitted (nitrogen reverse-Brayton plants on large conventional ships); (3) a bounded pressure rise within tank limits toward MARVS as a short-term buffer. <strong>Supporting management:</strong> insulation system performance (membrane interbarrier-space nitrogen sweep, monitored for methane — leak detection and barrier inertisation in one), sloshing limits enforced through filling-level restrictions per the loading manual, cooldown/spray circuits keeping tanks cold on ballast passages using retained heel, and stripping/spray pumps circulating liquid to avoid stratification. Mention <strong>rollover</strong> awareness (stratified layers of differing density suddenly mixing with a BOG surge) — primarily a terminal-tank phenomenon but a known ship-cargo risk after loading LNGs of different densities; prevention is density management and circulation. Close with document discipline: exact operating pressure band, design BOR and filling limits are Certificate of Fitness / cargo operating manual values.</p>
+      <h4>Governing instrument</h4>
+      <p>IGC Code Chs. 7 (BOG management), 16 (methane as fuel) and 8 (relief/MARVS); ship-specific operating band, BOR and filling limits per the Certificate of Fitness and loading manual.</p>
+      <h4>Key Numbers</h4>
+      <ul>
+        <li><strong>&minus;162 &deg;C</strong> at ~atmospheric; methane saturation &minus;161.5 &deg;C @ 1.013 bar.</li>
+        <li><strong>BOR:</strong> ~<strong>0.10–0.15%/day</strong> modern designs (older ships up to ~0.25) — design value [ship-specific].</li>
+        <li><strong>Operating pressure band &amp; MARVS:</strong> [ship-specific]; membrane ships near-atmospheric by design.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>Saying insulation 'keeps the LNG cold' is the trap — heat ingress leaves as latent heat of boil-off; temperature control IS pressure control, and venting is protection, not an operating method.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IGC Code Ch. 7</span><span class="reg-desc">Cargo pressure/temperature control — BOG use, reliquefaction, GCU, pressure accumulation</span></div>
+      <div class="reg-item"><span class="reg-code">IGC Code Ch. 16</span><span class="reg-desc">Use of cargo as fuel — methane; the DF-propulsion basis</span></div>
+      <div class="reg-item"><span class="reg-code">IGC Code Ch. 8</span><span class="reg-desc">Relief systems — MARVS, tank PRV arrangements</span></div>
+      <div class="reg-item"><span class="reg-code">IGC Code Ch. 4 / IACS interpretations</span><span class="reg-desc">Containment design incl. secondary barriers and interbarrier spaces</span></div>
+      <div class="reg-item"><span class="reg-code">Certificate of Fitness / CTS &amp; cargo operating manual</span><span class="reg-desc">Ship-specific pressure band, BOR, filling limits — controlling documents</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Simon examines from LNG experience — lead with the saturation argument ("temperature control IS pressure control"), then the three BOG destinations. Quoting a BOR with the phrase "design value on my ship's documents" and naming the nitrogen-swept interbarrier space marks you as someone who understands the system, not the brochure.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>On DF ships the CE literally runs the temperature control: gas trains, fuel-gas supply systems (pumps/compressors, heaters/vaporisers), GCU availability as the mandatory BOG sink when engines trip, nitrogen generators feeding interbarrier spaces, and ESD philosophy tying cargo and machinery together.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Why doesn't the LNG warm up despite heat ingress?" A: It does absorb the heat — as latent heat of boil-off at constant saturation temperature; remove the vapour and temperature is fixed by pressure. Q: "Engines stopped, reliquefaction unavailable — options?" A: GCU burns the BOG; short-term controlled pressure rise within limits; PRV lift to the vent mast is the last-resort protected outcome, not an operating method. Q: "What is in the interbarrier space?" A: Nitrogen, continuously swept and monitored for methane — inertisation plus leak detection.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Claiming insulation "keeps it cold" with no boil-off mechanism; wrong temperature; treating venting as a normal control method; not knowing the GCU's role; missing filling-limit/sloshing constraints.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p><strong>&minus;162 &deg;C &middot; ~1 bar &middot; BOR 0.10–0.15%/day (design, ship-specific) &middot; IGC Chs. 4, 7, 8, 16</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>The LNG trade's safety record rests on this containment philosophy; the instructive events are near-misses — membrane cold spots found by IBS methane monitoring, and terminal rollover events (La Spezia 1971 benchmark) that created today's density-management and circulation practice.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> Carriage temp/pressure → why temperature holds → BOG destinations → GCU purpose → interbarrier space → ballast-passage cooldown/heel → rollover → where the exact numbers live.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Container-vessel candidate: answer from IGC + thermodynamics and bridge to familiar plant — "a boiling cargo tank is a flooded evaporator; the ship's job is to be its condenser and consumer." Methanol/LNG dual-fuel newbuild exposure in the fleet makes this increasingly first-hand.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB8_H','Q8 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB8_H · Q8 · v1.0</span>
+  </div>
+</div>
+    <div class="q-card" id="q9" data-tags="gas">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">9</div>
+    <div class="q-text-wrap">
+      <div class="q-text">LNG containment/tank type — material, properties, structure and construction.</div>
+      <div class="q-tags"><span class="q-tag">GAS</span><span class="q-tag">LNG</span><span class="q-tag">IGC</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">IGC Ch. 4 families. <strong>Membrane</strong> (GTT — dominant today): thin metallic membrane carried by insulation on the inner hull — <strong>Mark III</strong>: 1.2 mm corrugated 304L stainless primary + reinforced-polyurethane-foam panels + Triplex secondary membrane; <strong>NO96</strong>: 0.7 mm <strong>Invar</strong> (36% Ni-Fe, near-zero thermal expansion) primary and secondary + plywood boxes of perlite/glass wool; both need a <strong>complete secondary barrier</strong>. <strong>Independent Type B</strong>: self-supporting, e.g. Moss spherical tanks (aluminium 5083 or 9% Ni steel) — refined stress/fatigue/crack-propagation analysis, so only a <strong>partial</strong> secondary barrier (drip tray + splash shield). <strong>Type C</strong>: pressure vessels (small-scale/bunker ships) — no secondary barrier. <strong>Type A</strong> (full secondary barrier) is the LPG prismatic solution, not used for LNG in practice.</p>
+      <h4>60-Second Answer</h4>
+      <p><strong>Material logic first:</strong> at &minus;162 &deg;C ordinary carbon steel is far below its ductile–brittle transition — a crack propagates catastrophically. Cryogenic service therefore uses materials with no transition or transition well below service temperature: austenitic stainless (304L), <strong>9% nickel steel</strong>, aluminium alloy 5083, and Invar where thermal contraction itself is the enemy. That is why each containment system pairs a material choice with a structural concept. <strong>Membrane systems</strong> put the load path through the insulation into the inner hull: Mark III's corrugations absorb thermal contraction geometrically in the stainless sheet; NO96 instead absorbs it metallurgically — Invar's expansion coefficient is ~1/10th of steel's, so flat strakes suffice. Interbarrier and insulation spaces are nitrogen-swept and methane-monitored — the secondary barrier (Triplex composite / second Invar skin) must hold cargo for the IGC-defined period (15 days basis) after a primary leak. <strong>Type B Moss:</strong> a sphere welded from aluminium petals (or 9% Ni plates), supported on an equatorial skirt that also manages the thermal short; because the design is verified by first-principles fatigue and crack-propagation analysis ("leak-before-failure"), IGC accepts a partial secondary barrier — a drip tray under the tank with the hold space inerted/monitored. Sloshing-tolerant (spheres have no flat free surfaces at critical fillings), at the cost of deck space and boil-off performance vs modern membranes. <strong>Type C:</strong> cylindrical/bilobe pressure vessels designed to full pressure-vessel code stresses; the accumulated-pressure capability makes them standard for bunker vessels and small-scale LNG. Construction quality lives in the details: membrane weld/glue integrity testing (global vacuum/ammonia tests per system), insulation-space tightness, and the pump tower hanging from the liquid dome with its own thermal design. Filling limits and sloshing restrictions are <strong>[ship-specific]</strong> loading-manual values.</p>
+      <h4>Governing instrument</h4>
+      <p>IGC Code Ch. 4 (containment systems; 4.7 secondary-barrier matrix and 15-day basis) and Ch. 6 (materials of construction); detailed containment approval per IACS/class rules.</p>
+      <h4>Key Numbers</h4>
+      <ul>
+        <li><strong>Mark III:</strong> 1.2 mm 304L corrugated; <strong>NO96:</strong> 0.7 mm Invar (36% Ni); <strong>Moss:</strong> Al 5083 / 9% Ni steel.</li>
+        <li><strong>Secondary barrier:</strong> membrane &amp; Type A — complete; Type B — partial; Type C — none. 15-day containment basis (IGC 4.7).</li>
+        <li><strong>Invar &alpha; &asymp; 1.2&times;10&#8315;&#8310;/K</strong> — ~an order below carbon steel; the whole reason NO96 works flat.</li>
+      </ul>
+      <h4>Trap point</h4>
+      <p>The secondary-barrier matrix is the trap — membrane systems need a COMPLETE barrier, Type B earns a PARTIAL one through leak-before-failure analysis, Type C needs none; mixing these fails the question.</p>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">IGC Code Ch. 4 (MSC.370(93) revision)</span><span class="reg-desc">Cargo containment — tank type definitions, secondary barrier requirements, design basis</span></div>
+      <div class="reg-item"><span class="reg-code">IGC Code 4.7</span><span class="reg-desc">Secondary barrier — complete/partial/none matrix and 15-day containment basis</span></div>
+      <div class="reg-item"><span class="reg-code">IGC Code Ch. 6</span><span class="reg-desc">Materials of construction — low-temperature toughness requirements, test temperatures</span></div>
+      <div class="reg-item"><span class="reg-code">IACS UR G / class rules (DNV, LR, ABS)</span><span class="reg-desc">Detailed containment-system approval incl. sloshing and fatigue analysis</span></div>
+      <div class="reg-item"><span class="reg-code">Ship's loading manual / Certificate of Fitness</span><span class="reg-desc">Filling limits, sloshing restrictions, approved cargo conditions — ship-specific</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Open with the brittle-fracture argument — it explains every material on the list — then the secondary-barrier matrix (complete/partial/none) mapped to membrane/Type B/Type C. Knowing WHY Type B earns a partial barrier (leak-before-failure analysis) is the sentence that separates management-level candidates.</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The CE monitors containment health daily: interbarrier-space nitrogen pressures and methane readings, cofferdam/hold temperatures (heating on membrane ships to keep the inner hull above design minimum), glycol/heater plants, and cooldown-rate discipline protecting the membranes from thermal shock.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p>Q: "Why does a Moss ship not need a full secondary barrier?" A: Type B status — refined fatigue/crack-propagation analysis demonstrating leak-before-failure; a partial barrier (drip tray) suffices per IGC 4.7. Q: "Why Invar in NO96?" A: Near-zero thermal expansion — flat membranes without corrugations; contraction is absorbed metallurgically, not geometrically. Q: "Why not 9% Ni everywhere?" A: It is used (Moss option, shore tanks); membranes chose thin stainless/Invar for weight, formability and the load-bearing-insulation concept.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Mixing up which systems need complete vs partial secondary barriers; not knowing the materials by name and why; describing Mark III/NO96 interchangeably; forgetting Type C and bunker-vessel relevance; no brittle-fracture foundation.</p></details>
+    <details class="dd"><summary>Deep-Dive: Numbers to Memorise</summary><p><strong>1.2 mm 304L &middot; 0.7 mm Invar &middot; 36% Ni &middot; Al 5083 &middot; 9% Ni steel &middot; 15 days &middot; IGC Chs. 4 &amp; 6</strong>.</p></details>
+    <details class="dd"><summary>Deep-Dive: Casualty Link</summary><p>The founding lesson predates LNG ships: brittle-fracture failures of wartime welded ships (Liberty ships) built the toughness/test-temperature regime in IGC Ch. 6; in-service, membrane cold-spot and secondary-barrier tightness findings — caught by nitrogen-space monitoring — validate the barrier philosophy.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p><strong>Simon:</strong> Containment types → materials and why → secondary-barrier matrix → Mark III vs NO96 → why Moss is Type B → sloshing/filling limits → interbarrier-space monitoring → construction/tightness testing.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Container-vessel candidate: anchor on materials science — the same ductile–brittle transition governs ship steel grade selection (A/B/D/E) on my own hull; LNG containment is that principle taken to its extreme, plus the fleet's LNG/methanol dual-fuel newbuilds carrying Type C bunker tanks.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB8_H','Q9 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB8_H · Q9 · v1.0</span>
+  </div>
+</div>
+
+  </div>
+</div>
+<div id="no-results" style="display:none;text-align:center;color:#64748b;padding:30px">No questions match your search/filter.</div>
+
+<div class="comment-overlay" id="comment-overlay" onclick="if(event.target===this)closeComment()">
+  <div class="comment-modal">
+    <div id="comment-form-wrap">
+      <h3>Report a Correction</h3>
+      <p id="comment-context-label">Your comment goes directly to the editor. Not public.</p>
+      <form id="comment-form" action="https://formspree.io/f/maqgoeww" method="POST" onsubmit="submitComment(event)">
+        <input type="hidden" name="qb_reference" id="form-qb-ref" value="">
+        <label>Type</label>
+        <select name="comment_type">
+          <option value="Error / Correction">🔴 Error / Correction</option>
+          <option value="Suggestion">💡 Suggestion</option>
+          <option value="Missing Topic">📋 Missing Topic</option>
+        </select>
+        <label>Comment</label>
+        <textarea name="comment" placeholder="Describe the issue, suggestion, or what's missing…" required></textarea>
+        <label>Your name (optional)</label>
+        <input type="text" name="name" placeholder="Anonymous">
+        <div class="comment-btns">
+          <button type="button" class="btn-cancel" onclick="closeComment()">Cancel</button>
+          <button type="submit" class="btn-submit">Send →</button>
+        </div>
+      </form>
+    </div>
+    <div class="comment-success" id="comment-success">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <p>Sent! Thank you.</p>
+      <p style="font-size:12px;color:#64748b;margin-top:6px;">The editor will review your comment.</p>
+    </div>
+  </div>
+</div>
+
+<div class="page-footer">
+Compiled by Nixon Antony, 2/E, Maersk A/S · MEO Class 1 exam prep, Kochi MMD · Corrections: contactus@marineintelligenceweekly.com<br>
+Disclaimer: For oral-exam preparation only. Always cross-check against current IMO/class/DG Shipping circulars before your exam — regulations amend frequently.
+</div>
+<script>
+function toggleCard(h){h.closest('.q-card').classList.toggle('open')}
+let activeTag='all';
+function filterTag(tag,btn){activeTag=tag;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');applyFilters()}
+function applyFilters(){const q=document.getElementById('search-input').value.toLowerCase();const cards=document.querySelectorAll('.q-card');let vis=0;cards.forEach(c=>{const tags=(c.dataset.tags||'').toLowerCase();const text=c.innerText.toLowerCase();const show=(activeTag==='all'||tags.includes(activeTag))&&(!q||text.includes(q));c.style.display=show?'':'none';if(show)vis++});document.getElementById('q-count-label').textContent=`Showing ${vis} of ${cards.length}`;document.getElementById('no-results').style.display=vis===0?'block':'none'}
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){document.querySelectorAll('.toc-link').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+x.target.id))}})},{threshold:.3});
+document.querySelectorAll('.q-card[id]').forEach(el=>obs.observe(el));
+function openComment(qbId,qNum){const ref=qbId+(qNum?' · '+qNum:'');document.getElementById('form-qb-ref').value=ref;document.getElementById('comment-context-label').textContent='Reference: '+ref+' · Goes directly to the editor. Not public.';document.getElementById('comment-form-wrap').style.display='';document.getElementById('comment-success').style.display='none';document.getElementById('comment-overlay').classList.add('open')}
+function closeComment(){document.getElementById('comment-overlay').classList.remove('open')}
+function submitComment(e){e.preventDefault();const form=e.target;const data=new FormData(form);fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}}).then(()=>{document.getElementById('comment-form-wrap').style.display='none';document.getElementById('comment-success').style.display='block';form.reset();setTimeout(closeComment,2000)}).catch(()=>{window.location.href='mailto:contactus@marineintelligenceweekly.com?subject=QB Comment: '+encodeURIComponent(document.getElementById('form-qb-ref').value)})}
+</script>
+<script>
+  document.addEventListener('contextmenu', e => e.preventDefault());
+  document.addEventListener('copy', e => e.preventDefault());
+  document.addEventListener('selectstart', e => e.preventDefault());
+</script>
+</body></html>
