@@ -260,6 +260,30 @@ GREP: SKIP
 A.949(23) (2003) "Guidelines on Places of Refuge for Ships in Need of Assistance" was revoked and updated by **A.1184(33), adopted 6 December 2023**, at the 33rd Assembly. Do not confuse with the separate, still-current **A.950(23)** (Maritime Assistance Services, MAS) — the two resolutions were adopted together in 2003 and are frequently cited side-by-side in this content, which is exactly why the stale one slipped through repeatedly: fixing A.949(23) must never touch A.950(23) mentions in the same sentence/reg-box. Found in QB9_F.html Q2 (candidate flagged this via the general "port of refuge" topic; file was misidentified as "QB1" in the report but content match was exact), oralnotes/simon-notes-p5.html, and oralnotes/miw-notes-mgmt-p12.html Topic 4 — the latter's own `verify-note` had explicitly (and incorrectly) asserted A.949(23) was "checked against the IMO's published regulation summaries and are correctly cited," which is itself now corrected. 7 total instances fixed across the 3 files (Claude, 5 Aug 2026; edited directly against the local clone at F:\marine-intelligence-weekly, manifest and this entry updated in the same pass).
 GREP: SKIP — corrected sentences legitimately retain "A.949(23)" in historical/negation context ("revoked A.949(23)", "IMO adopts Res. A.949(23) and A.950(23)" timeline entries), so a bare-phrase auto-scan would false-positive; manual verification-pass only.
 
+### 25. Bills of Lading Act, 2025 (India) — supersedes the 1856 Act
+The Indian **Bills of Lading Act, 2025** received Presidential assent on **24 July 2025** and repeals the **Indian Bills of Lading Act, 1856**. Source drafts commonly lag this and either cite "the Bills of Lading Bill, 2025" (still pending) or the 1856 Act as current law. Corrected across Notes Part 19.
+GREP: SKIP — "Indian Bills of Lading Act, 1856" and "Bills of Lading Bill, 2025" both appear legitimately in historical/negation context ("assent... repeals the Indian Bills of Lading Act, 1856"); manual verification-pass only.
+
+### 26. Carriage of Goods by Sea Act, 2025 (India) — supersedes the 1925 Act; India now Hague-Visby basis
+The Indian **Carriage of Goods by Sea Act, 2025 (Act No. 19 of 2025)** received assent **8 August 2025** and commenced **10 September 2025**, repealing the **Indian Carriage of Goods by Sea Act, 1925**. Its Schedule applies the Hague Rules as amended by the 1968 and 1979 Protocols — India is therefore now on a **Hague-Visby basis with SDR limits (666.67 SDR/package or 2 SDR/kg, whichever higher)**, not the old 1925 Act's Hague/gold-value basis. Corrected across Notes Parts 19–20.
+GREP: SKIP — "Carriage of Goods by Sea Act, 1925" legitimately appears in historical/negation context; manual verification-pass only.
+
+### 27. BARECON — no "BARECON C" exists
+BIMCO's 1974 bareboat forms were **BARECON A** (commissioned vessels, with or without an existing mortgage) and **BARECON B** (newbuildings financed by mortgage) — amalgamated into BARECON 89, revised as BARECON 2001, current form BARECON 2017. The A/B split was about the *subject vessel and financing structure*, not insurance-premium allocation. A fabricated "BARECON C" (and an invented insurance-premium A/B/C scheme) appeared in a source draft and was removed. Found in Notes Part 19 Topic 3.
+GREP: BARECON C
+
+### 28. Volumetric weight ratios — express as volume per tonne, not weight per volume
+Industry convention states volumetric charging as **CBM per tonne**: ocean 1 CBM/tonne, road 3 CBM/tonne, air 6 CBM/tonne (IATA divisor 6,000 cm³/kg ⇒ 1 CBM ≈ 167 kg). A source draft inverted this for air freight ("1 CBM = 6 tonnes" for air cargo), which is physically absurd — it would mean bulky, light cargo is charged *less*, the opposite of the actual penalty. Corrected in Notes Part 19 Topic 4.
+GREP: SKIP — the specific wrong phrasing varies too much (numbers/units differ by draft) to safely auto-scan; manual verification-pass only.
+
+### 29. ESP Code — correct citation is resolution A.1049(27), not "ESP Code 2017"
+The Enhanced Survey Programme instrument is the **International Code on the Enhanced Programme of Inspections during Surveys of Bulk Carriers and Oil Tankers, 2011 (2011 ESP Code)**, adopted by **resolution A.1049(27)** on 30 November 2011, made mandatory via SOLAS XI-1/2 (resolution MSC.325(90)) from 1 January 2014. "ESP Code 2017" is not a recognised designation. Corrected in Notes Part 21 Topic 2.
+GREP: ESP Code 2017
+
+### 30. IMO Net-Zero Framework adoption status is a moving target — always re-verify the current MEPC session outcome before stating a date
+The Framework was approved at MEPC 83 (April 2025), submitted for adoption at MEPC/ES.2 (14–17 October 2025) which adjourned it for one year (57/49/21 vote), discussed again at MEPC 84 (27 April – 1 May 2026) which also reached no final agreement, with the next scheduled decision point a resumed MEPC/ES.2 on **4 December 2026** (immediately after MEPC 85, 30 Nov–3 Dec 2026). Every one of those dates has already superseded an earlier one in this content's own history — found stale in Notes Part 2 Topic 9 (said "rescheduled to November 2026," corrected to 4 December 2026 across 6 occurrences) and in Notes Part 22 Topic 3 (said "reconvenes October 2026," same correction). **Never state this Framework as adopted, in force, or on a fixed future date without a fresh web search against the current MEPC session** — the underlying regulatory position changes roughly every 6 months.
+GREP: SKIP — the specific stale date varies with each drafting session (this is a recurring-currency trap, not a fixed wrong phrase); manual verification-pass only, but treat any date associated with NZF adoption as suspect until re-checked.
+
 ---
 
 ## Meta-corrections to `qb_health_check.py` itself (non-content fixes, logged here for continuity)
@@ -304,3 +328,4 @@ GREP: SKIP — corrected sentences legitimately retain "A.949(23)" in historical
 | 2026-08-04 | Entry 22: HSSC Survey Guidelines A.1140(31) three revisions stale, current A.1207(34) | Claude Chat verification pass on July 2026 batch; also found in 4 pre-existing files, flagged for separate cleanup |
 | 2026-08-04 | Entry 23: QB2_I.html title-tag mismatch (read "QB3_J") | Claude Chat verification pass on July 2026 batch |
 | 2026-08-05 | Entry 24: Places of Refuge A.949(23) stale, current A.1184(33) | Candidate correction via Nixon |
+| 2026-08-05 | Entries 25–30: Bills of Lading Act 2025, COGSA 2025 (India now Hague-Visby), fabricated "BARECON C", inverted air-freight volumetric ratio, ESP Code citation (A.1049(27)), IMO NZF adoption-status currency reminder — all found while building Notes Parts 19–22 and cross-checking against Parts 1–18 (Part 2 T9 and Part 22 T3 both had a stale NZF date, corrected in the same pass) | Claude Chat, building Notes Parts 19–22 (Uday Sankar S. source, pp. 451–550) |

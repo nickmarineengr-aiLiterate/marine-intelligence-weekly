@@ -1,0 +1,36 @@
+
+
+</main>
+</div>
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+  Part 18 of 31 · Pages 426–450 of 768 · Engineering Management Notes — Marine Intelligence Weekly<br>
+  Originally compiled by Uday Sankar S., Anglo-Eastern. Transcribed, expanded and verified by Nixon Antony, 2/E, Maersk A/S.<br>
+  This is subscriber-only content for MEO Class 1 exam preparation (Kochi MMD). Unauthorized redistribution is prohibited.<br>
+  Found an error? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Notes-p18 · Correction Required">Contact us</a> ·
+  <a href="https://marineintelligenceweekly.com/meoclass1/oralnotes/">← Back to Notes Index</a>
+</div>
+
+<script>
+function toggleDD(btn){
+  var body = btn.nextElementSibling;
+  body.classList.toggle('open');
+  btn.textContent = body.classList.contains('open') ? btn.textContent.replace('▶','▼') : btn.textContent.replace('▼','▶');
+}
+document.addEventListener('DOMContentLoaded', function(){
+  var links = document.querySelectorAll('.toc-link[href^="#"]');
+  var sections = Array.from(links).map(function(l){ return document.querySelector(l.getAttribute('href')); }).filter(Boolean);
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      var id = '#' + entry.target.id;
+      var link = document.querySelector('.toc-link[href="' + id + '"]');
+      if(link){ link.classList.toggle('active', entry.isIntersecting); }
+    });
+  }, {rootMargin:'-80px 0px -70% 0px'});
+  sections.forEach(function(s){ observer.observe(s); });
+});
+</script>
+
+</body>
+</html>
