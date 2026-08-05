@@ -335,8 +335,7 @@ SIRE 2.0/CDI/TMSA, Kyoto/Paris genesis, e-Certificates, the statutory/commercial
 | 21 | QB4_A, QB3_A, QB1_B |
 | 22 | QB6_E, QB7_C, QB10_B, QB5_A |
 
-**Not done — needs Nixon's decision:**
-- No back-links were added from Parts 1-18 (P2T9, P3T13, P11T48, P13T2, P15T1, P18T4) pointing forward to the
-  new P19-22 topics that cross-reference them. Only the forward direction (P19-22 → P1-18) was added. Making
-  this bidirectional means editing five live Parts 1-18 files, which is a larger, separate task.
-- P2T9's stale NZF date ("November 2026" → should be "4 December 2026") has not been corrected.
+**Not done as of the original audit — both actioned later the same day, see §10:**
+- Back-links from Parts 1-18 (P3T13, P11T48, P13T2, P15T1, P18T4) pointing forward to the new P19-22
+  topics — **added**.
+- P2T9's stale NZF date ("November 2026" → "4 December 2026") — **corrected**, 6 occurrences.
