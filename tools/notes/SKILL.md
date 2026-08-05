@@ -228,10 +228,22 @@ Why this failed silently for 11 days: nothing loads the oral manifest at request
 breaks no page and throws no error. The only defence is discipline — **update the manifest in the same
 session as the content change**, exactly as `qb_content_index.json` is handled for the QB series.
 
-Known recurrence risk: the manifest path is hard-coded as a bare string in
-`meoclass1/qb_health_check.py`, `tools/notes/audit_master_index.py` and `tools/notes/build_part.py`.
-Routing all three through one shared path constant would make a second divergence structurally
-impossible; until that lands, grep for both spellings before trusting any manifest-related result.
+Known recurrence risk — **mitigated 2026-08-06**. Manifest paths are now defined once in
+`tools/notes/miw_paths.py` (`NOTES_MANIFEST`, `WRITTEN_MANIFEST`, `QB_MANIFEST`, plus repo-relative
+`*_REL` forms). Never spell a manifest filename as a bare inline string again — import it.
+
+- `tools/notes/audit_master_index.py` and `tools/notes/match_qb.py` import from `miw_paths` and call
+  `assert_no_legacy_manifest()` at startup.
+- `meoclass1/qb_health_check.py` keeps its own repo-relative constants **by design** — it scans the
+  GitHub tree, not local disk, so it cannot import a local-path module. It now carries
+  `LEGACY_NOTES_MANIFEST_NAME` and raises a hard error from `check_notes_manifest()` if the retired
+  file reappears in the repo. If a manifest is ever renamed, change **both** places.
+- `build_part.py` does not read any manifest — it only emits Part HTML. Manifest updating is a
+  separate, manual step (workflow step 10).
+
+`assert_no_legacy_manifest()` keys severity to git tracking, not mere presence: a **tracked**
+duplicate raises (it would be pushed and would mislead every future session), while an **untracked**
+local remnant warns on stderr and continues (it cannot reach the repo, and must not block work).
 
 ---
 

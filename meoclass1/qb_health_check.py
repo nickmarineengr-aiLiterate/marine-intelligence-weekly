@@ -27,8 +27,14 @@ GITHUB_REPO = "nickmarineengr-aiLiterate/marine-intelligence-weekly"
 GITHUB_BRANCH = "main"
 QB_FOLDER_PREFIX = "meoclass1/"          # folder inside repo where QB html + manifest live
 MANIFEST_NAME = "qb_content_index.json"
+# Manifest filenames are defined canonically in tools/notes/miw_paths.py. This checker
+# scans the GitHub tree rather than local disk, so it keeps its own repo-relative copies
+# instead of importing. If a manifest is ever renamed, change BOTH places.
+# NOTE: the oral-notes manifest uses UNDERSCORES. A hyphenated `notes-content-index.json`
+# was a stale duplicate, deleted 2026-08-06 (commit 89291e5). Never reintroduce it.
 NOTES_MANIFEST_NAME = "oralnotes/notes_content_index.json"
 WRITTEN_MANIFEST_NAME = "oralnotes/written_content_index.json"
+LEGACY_NOTES_MANIFEST_NAME = "oralnotes/notes-content-index.json"   # must never exist
 NOTES_FOLDER_PREFIX = "oralnotes/"
 NOTES_INDEX_UTILITY_FILES = {"index.html", "notes-master-index.html", "uday-index-crossref.html"}
 SQ_FOLDER_PREFIX = "SQ/"
@@ -531,6 +537,18 @@ def check_notes_manifest(files, notes_results):
     notes_files_on_disk = {f[len(NOTES_FOLDER_PREFIX):] for f in files
                             if f.startswith(NOTES_FOLDER_PREFIX) and f.lower().endswith(".html")}
     manifest_listed = set()
+
+    # Duplicate-truth guard. A second, divergent copy of the oral-notes manifest
+    # (hyphenated) coexisted with the canonical one for 11 days in Jul-Aug 2026 and
+    # was invisible because nothing loads these manifests at request time. Fail loudly
+    # if it ever returns.
+    if LEGACY_NOTES_MANIFEST_NAME in files:
+        errors.append(
+            f"RETIRED MANIFEST HAS REAPPEARED: {NOTES_FOLDER_PREFIX.rstrip('/')}/"
+            f"{LEGACY_NOTES_MANIFEST_NAME.split('/')[-1]} exists in the repo. The canonical "
+            f"oral-notes manifest is notes_content_index.json (underscores). Delete the "
+            f"hyphenated file — do not edit or read it. See tools/notes/SKILL.md section 8a."
+        )
 
     for manifest_path, label in ((NOTES_MANIFEST_NAME, "notes_content_index.json"),
                                   (WRITTEN_MANIFEST_NAME, "written_content_index.json")):

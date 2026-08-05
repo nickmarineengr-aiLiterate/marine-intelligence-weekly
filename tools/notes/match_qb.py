@@ -1,11 +1,17 @@
-import io, json, os, re
-ROOT = r'F:\marine-intelligence-weekly'
+import io, json, os, re, sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from miw_paths import REPO_ROOT, QB_MANIFEST, assert_no_legacy_manifest
+
+assert_no_legacy_manifest()
+
+ROOT = REPO_ROOT
 OUT = open(os.path.join(ROOT, 'tools', 'notes', '_qb_matches.txt'), 'w', encoding='utf-8', newline='\n')
 def print(*a, **k):
     k['file'] = OUT
     __import__('builtins').print(*a, **k)
 
-d = json.load(open(os.path.join(ROOT, 'meoclass1', 'qb_content_index.json'), encoding='utf-8'))
+d = json.load(open(QB_MANIFEST, encoding='utf-8'))
 files = d['files']
 
 # flatten each QB file into a searchable blob: title + tags + all question texts

@@ -1,12 +1,17 @@
-import json, re
+import json, re, os, sys
 
-ROOT = r'F:\marine-intelligence-weekly'
-qb = json.load(open(ROOT + r'\meoclass1\qb_content_index.json', encoding='utf-8'))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from miw_paths import REPO_ROOT, QB_MANIFEST, NOTES_MANIFEST, ORALNOTES, assert_no_legacy_manifest
+
+assert_no_legacy_manifest()
+
+ROOT = REPO_ROOT
+qb = json.load(open(QB_MANIFEST, encoding='utf-8'))
 qb_files = qb['files']
-notes = json.load(open(ROOT + r'\meoclass1\oralnotes\notes_content_index.json', encoding='utf-8'))
+notes = json.load(open(NOTES_MANIFEST, encoding='utf-8'))
 mg_files = notes['series']['engineering-management-notes']['files']
 
-h = open(ROOT + r'\meoclass1\oralnotes\notes-master-index.html', encoding='utf-8').read()
+h = open(os.path.join(ORALNOTES, 'notes-master-index.html'), encoding='utf-8').read()
 
 OUT = open(ROOT + r'\tools\notes\_master_index_audit.txt', 'w', encoding='utf-8')
 def p(*a):
