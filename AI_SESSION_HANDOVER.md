@@ -29,7 +29,7 @@
 **PKG-1 — Repository Audit.** Complete, committed, verified.
 - `reports/audit/2026-07-30_repo_audit.md` — commit `e8cd853`
 - `reports/packages/PKG-1_COMPLETION_SUMMARY.md` — commit `0359cbe`
-- Surfaced real, evidence-based findings: non-functional `.gitignore` (missing leading dot), two competing Notes manifests (`notes-content-index.json` vs `notes_content_index.json`), `RulesApp/` confirmed co-located rather than external, duplicated legacy issue content (root vs `archive/`), duplicate `SQ/` file pairs, an undocumented/missing `api/verify-session.js`. Full detail in the audit report itself — not restated here.
+- Surfaced real, evidence-based findings: non-functional `.gitignore` (missing leading dot), two competing Notes manifests (`notes-content-index.json` vs `notes_content_index.json` — **RESOLVED 2026-08-06**: hyphen copy verified a strict subset and removed, commit `89291e5`; `notes_content_index.json` is canonical, see `tools/notes/SKILL.md` §8a), `RulesApp/` confirmed co-located rather than external, duplicated legacy issue content (root vs `archive/`), duplicate `SQ/` file pairs, an undocumented/missing `api/verify-session.js`. Full detail in the audit report itself — not restated here.
 
 No other package has reached Commit.
 

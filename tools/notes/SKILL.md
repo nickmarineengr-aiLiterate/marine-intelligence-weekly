@@ -196,12 +196,42 @@ Default: Nair for regulatory/legislative, Senthil for management/organisational,
 7. **Present the ungated review copy to Nixon.** Do not gate without approval.
 8. **Revise the JSON** (never the HTML) and rebuild.
 9. **Gate**: `build_part.py … --gated`, then `health_check.py … --require-gate`.
-10. **Manifest**: update `meoclass1/oralnotes/notes_content_index.json` — Part entry, page range, topic
-    count, topic titles.
+10. **Manifest**: update `meoclass1/oralnotes/notes_content_index.json` (UNDERSCORE — see Section 8a)
+    in the **same session** as the build — Part entry, page range, topic count, topic titles, and bump
+    `total_files` + `generated`. A Part is not "done" until the manifest reflects it.
 11. **Index**: update the notes index `index.html` card for the new Part, and add the forward
     `Part N+1 →` link into Part N−1's sidebar spec and rebuild that Part.
 12. **Commit**: stage files **explicitly by name** (never `git add .`), push to `origin/main`,
     cache-busted live verification.
+
+---
+
+## 8a. Manifest authority — ONE file per series, no exceptions
+
+Two manifests exist. They are **separate by design and must never be merged**:
+
+| Manifest | Covers | Do not confuse with |
+|---|---|---|
+| `meoclass1/oralnotes/notes_content_index.json` | **Oral / page-range series**: Simon Sir Notes, Current Topics, MIW Engineering Management Notes (Uday Notes) | the written manifest |
+| `meoclass1/oralnotes/written_content_index.json` | **Written Answer series**: WA1-HKC, WA2-GHG, WA3-LIEN | the oral manifest |
+
+**The oral manifest filename uses UNDERSCORES: `notes_content_index.json`.**
+
+A hyphenated `notes-content-index.json` existed until 2026-08-06 as a stale divergent duplicate
+(generated 2026-07-18, `total_files` 25, EM Notes Parts 1–16). It was verified a strict subset of the
+underscore file — all 25 shared entries byte-identical, nothing unique to it — and removed via
+`git rm` (commit `89291e5`; content recoverable at `64ab22d`). **Never recreate the hyphenated name.**
+If a tool, script or session note refers to `notes-content-index.json`, that reference is wrong — fix
+the reference, do not recreate the file.
+
+Why this failed silently for 11 days: nothing loads the oral manifest at request time, so a stale copy
+breaks no page and throws no error. The only defence is discipline — **update the manifest in the same
+session as the content change**, exactly as `qb_content_index.json` is handled for the QB series.
+
+Known recurrence risk: the manifest path is hard-coded as a bare string in
+`meoclass1/qb_health_check.py`, `tools/notes/audit_master_index.py` and `tools/notes/build_part.py`.
+Routing all three through one shared path constant would make a second divergence structurally
+impossible; until that lands, grep for both spellings before trusting any manifest-related result.
 
 ---
 
