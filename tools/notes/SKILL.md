@@ -259,11 +259,17 @@ Default: Nair for regulatory/legislative, Senthil for management/organisational,
 - **Skill-file provenance note (2026-08-05):** the version of this skill uploaded to Claude's project
   knowledge (`miw-notes-mgmt_SKILL.md`) is a stale v1 — it describes Part 2 as the current frontier and a
   continuous global topic-numbering scheme that was abandoned before Part 11. Project knowledge files are
-  read-only from inside a chat; **this repo file (`tools/notes/SKILL.md`) is the actual living, current
-  version** and has been kept in sync throughout the Parts 19-22 build. Nixon should re-upload this file to
-  replace the stale project-knowledge copy so future chats searching project knowledge get accurate
-  context. There is also no formal Claude Skill entry for this series (unlike `miw-qb-production`, which
-  has one) — worth setting up via skill-creator if auto-triggering without an explicit mention is wanted.
+  read-only from inside a chat and there is no tool to push to it directly, so this repo file
+  (`tools/notes/SKILL.md`) remains the actual living, current version and is kept in sync every session.
+  **Same-day follow-up:** Claude prepared a corrected standalone copy and delivered it via `present_files`
+  for Nixon to drag into Project Knowledge (replacing the stale upload), and packaged this file as a
+  formal Claude Skill (`miw-notes-mgmt.skill`, mirroring the existing `miw-qb-production` entry) delivered
+  the same way with a "Save skill" button. **Two human actions remain, both one click:** (1) drag the
+  corrected `.md` into the project's Files/Knowledge panel to replace the old upload, (2) click "Save
+  skill" on the packaged `.skill` card to install it so it auto-triggers without needing to be named or
+  found in the repo. Once installed, the Skill's own copy will drift from this repo file over time unless
+  re-packaged after future sessions — treat the repo file as the source of truth and re-run the packaging
+  step periodically, not as a one-time action.
 - Reusable audit tools kept for future Parts: `audit_overlap.py` (cross-checks new topics against
   `uday-index-crossref.html` and a direct Parts 1-18 grep) and `match_qb.py` (matches new topics against
   `qb_content_index.json` for real, justified QB sidebar links). Both are hard-coded to Parts 19-22 in
