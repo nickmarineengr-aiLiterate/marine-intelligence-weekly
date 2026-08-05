@@ -60,10 +60,10 @@ Part 18 = 426–450 · Part 19 = 451–475 · Part 20 = 476–500 · Part 21 = 5
 | Part | Pages | Topics | Status |
 |---|---|---|---|
 | 1–18 | 1–450 | varies | Live, gated |
-| 19 | 451–475 | 5 | **Built ungated — reviewed and approved by Nixon; awaiting gating instruction** |
-| 20 | 476–500 | 3 | **Built ungated (2026-08-05) — awaiting review** |
-| 21 | 501–525 | 3 | **Built ungated (2026-08-05) — awaiting review** |
-| 22 | 526–550 | 3 | **Built ungated (2026-08-05) — awaiting review** |
+| 19 | 451–475 | 5 | **Live, gated** (2026-08-05) |
+| 20 | 476–500 | 3 | **Live, gated** (2026-08-05) |
+| 21 | 501–525 | 3 | **Live, gated** (2026-08-05) |
+| 22 | 526–550 | 3 | **Live, gated** (2026-08-05) |
 | 23–31 | 551–768 | TBD | Planned |
 
 ---
@@ -222,18 +222,31 @@ Default: Nair for regulatory/legislative, Senthil for management/organisational,
 
 ## 10. Open items
 
-- **Parts 19–22 all built ungated and health-check clean. None gated, none indexed, nothing committed.**
-- `notes_content_index.json` not yet updated for Parts 19–22.
-- Notes `index.html` cards not yet added for Parts 19–22.
-- Part 18 sidebar needs a `Part 19 →` forward link; Parts 19/20/21 need forward links added once the
-  following Part is live. Add by editing the spec (`next_part`) and rebuilding — never by hand-editing HTML.
-- **Volatile content re-verified 2026-08-05 (second pass):** MEPC 84 (27 Apr–1 May 2026) has now happened — the
-  Net-Zero Framework was discussed again and reached **no final agreement**. Part 22 Topic 3 has been updated
-  throughout (verify note, timeline, regs box, section body, CE tip, Q&A, memory box, refs) to reflect this and
-  the new decision point: **MEPC 85 (30 Nov–3 Dec 2026) → MEPC/ES.2 resumes 4 Dec 2026**. The original
-  "reconvenes October 2026" framing (accurate when Part 22 was first built, per the Oct 2025 adjournment
-  announcement) is superseded and has been corrected everywhere it appeared. If gating occurs after
-  4 December 2026, re-verify this topic again before publishing — the adoption decision may have landed by then.
+- **Parts 19–22: complete, gated, live, pushed, verified on GitHub raw and on the live site (2026-08-05).**
+  `notes_content_index.json` updated (+4 entries, `total_files` 27→31), `oralnotes/index.html` has 4 new
+  live cards, Part 18 sidebar has the `Part 19 →` forward link. Nothing outstanding for these four Parts.
+- **Two flagged issues from the overlap audit (§11) rectified same day:** Part 2 Topic 9's stale NZF date
+  (6 occurrences, "November 2026" → confirmed 4 December 2026) fixed directly on the live file; back-links
+  added in both directions — Parts 3, 11, 13, 15 and 18 (old) now each carry a "See also" reference forward
+  to the new Part 19-22 topic that generalises or complements them, matching the forward links already in
+  the new topics' verify notes.
+- **`known_traps.md` entries #25-30 added** (Bills of Lading Act 2025, COGSA 2025/India-now-Hague-Visby,
+  fictional "BARECON C", inverted air-freight volumetric ratio, ESP Code citation A.1049(27), and an
+  evergreen "always re-verify the current MEPC session" reminder for the Net-Zero Framework specifically).
+- **`uday-index-crossref.html` reconciled for pages 451-550**, using actual built topic locations rather
+  than the original page-based Part guess (several terms landed in a different Part than assumed — e.g.
+  CSR and CAS/CAP were guessed for Part 20 but actually built in Part 21; SIRE/Kyoto/GHG were guessed for
+  Part 21 but actually built in Part 22). Stats: 118/28/117 → 155/30/78 matched/gap/planned (263 total).
+  Two terms ("ZESIS") could not be verified against any built content and were honestly left as a gap
+  rather than force-matched — if a future session identifies what this refers to in the source book, close
+  it out in the crossref index directly (search for `idx-gap` rows with that text).
+- **Volatile content re-verified 2026-08-05 (second pass), same day as the above:** MEPC 84 (27 Apr–1 May
+  2026) reached **no final agreement** on the Net-Zero Framework. Both Part 22 Topic 3 and Part 2 Topic 9
+  now correctly state the current decision point as **4 December 2026** (resumed MEPC/ES.2, immediately
+  after MEPC 85, 30 Nov–3 Dec 2026), superseding the original "October/November 2026" framing that was
+  accurate only at initial drafting. **If any future session touches NZF content, re-verify the MEPC
+  session status again before publishing — this has now moved twice in the time this series has existed
+  and will keep moving until the Framework is actually adopted.**
 - Also re-verified this pass, both confirmed accurate, no changes needed: the SOLAS I/14 extension figures
   (5 months / 3 months / 1 month, Part 21 Topic 1) against primary SOLAS text; the ESP Code citation
   A.1049(27), adopted 30 Nov 2011, mandatory via SOLAS XI-1/2 from 1 Jan 2014 (Part 21 Topic 2).
@@ -243,6 +256,21 @@ Default: Nair for regulatory/legislative, Senthil for management/organisational,
   Applied as: P19 = 5 topics (5 source chapters), P20/21/22 = 3 topics each. Deliberate cross-Part
   hand-offs, cross-referenced rather than split: GA (P18 T4 → P19 T1), B/L and charterparties
   (P19 T2/T3 → P20 T2), HSSC surveys vs certification (P20 T3 → P21 T1), vetting (P21 T3 → P22 T1).
+- **Skill-file provenance note (2026-08-05):** the version of this skill uploaded to Claude's project
+  knowledge (`miw-notes-mgmt_SKILL.md`) is a stale v1 — it describes Part 2 as the current frontier and a
+  continuous global topic-numbering scheme that was abandoned before Part 11. Project knowledge files are
+  read-only from inside a chat; **this repo file (`tools/notes/SKILL.md`) is the actual living, current
+  version** and has been kept in sync throughout the Parts 19-22 build. Nixon should re-upload this file to
+  replace the stale project-knowledge copy so future chats searching project knowledge get accurate
+  context. There is also no formal Claude Skill entry for this series (unlike `miw-qb-production`, which
+  has one) — worth setting up via skill-creator if auto-triggering without an explicit mention is wanted.
+- Reusable audit tools kept for future Parts: `audit_overlap.py` (cross-checks new topics against
+  `uday-index-crossref.html` and a direct Parts 1-18 grep) and `match_qb.py` (matches new topics against
+  `qb_content_index.json` for real, justified QB sidebar links). Both are hard-coded to Parts 19-22 in
+  their current form — update the Part-number list at the top of each before reusing on Parts 23+. The
+  one-off backfill scripts used to apply the Part 19-22 reconciliation to the crossref index and manifest
+  (`update_crossref_19_22.py`, `update_manifest.py`) were scratch and have been deleted; the method and
+  findings are preserved in §11 below for the next reconciliation pass.
 
 ---
 
