@@ -1,7 +1,7 @@
 {
   "manifest_version": "1.0",
   "generated": "2026-08-07",
-  "generated_by": "Claude (QB3_A_CheatSheet GZ curve / angle of loll diagram correction, Nixon-flagged)",
+  "generated_by": "Claude (QB3_A_CheatSheet GZ curve full redraw, Nixon-flagged, two-pass)",
   "total_questions": 683,
   "total_files": 91,
   "recently_updated": [
@@ -10,7 +10,14 @@
       "files": [
         "QB3_A_CheatSheet.html"
       ],
-      "summary": "Diagram correction (Nixon-flagged, screenshot review): in the 'GZ Curve & Angle of Loll — The Three GM States' SVG diagram, the angle-of-loll marker/label was plotted at the negative-GM curve's trough (most negative GZ) instead of the point where the curve crosses GZ=0 — a self-contradiction, since the label read 'GZ=0, ship sits here at rest' at a point that was clearly not zero. Verified against Ship Stability for Masters and Mates (Fig 31.2) and Ship Stability — Notes & Examples (Fig 9.9): the angle of loll is specifically where GZ returns to zero after the initial negative excursion; between 0° and the loll angle GZ is negative (capsizing moment). Marker and drop-line moved to the curve's actual zero-crossing point (cx=400, cy=200 on the SVG path). q-version bumped v1.0 -> v1.1. See known_traps.md Entry 31."
+      "summary": "Diagram redraw, pass 2 (Nixon-flagged): after Pass 1 fixed the angle-of-loll marker position, Nixon correctly flagged the underlying curve shape was still wrong -- negative-stability span (0deg-loll) was drawn wider than positive-stability span (loll-AVS), backwards from reality. Rebuilt using Fig 17.5's documented worked example (Ship Stability for Masters and Mates): loll=18deg, range of stability 18deg-90deg, AVS=90deg. Negative-GM curve now split red (0-18deg, GZ negative, capsizing) / green (18-90deg, GZ positive, restores toward the LOLL angle not upright) at the loll point. Orange 'Zero GM / Tender' curve relabelled 'Zero GM - Neutral Equilibrium' with explicit note distinguishing it from a 'tender' ship (small POSITIVE GM per Ch.40, not zero GM per Fig 6.4) -- these are distinct textbook concepts that were conflated. Teal 'Positive GM - Stable' comparison curve dropped per Nixon's instruction. Section retitled 'Zero GM vs Negative GM'; range-of-stability bracket added. q-version v1.1 -> v1.2. See known_traps.md Entry 31 (Pass 2)."
+    },
+    {
+      "date": "2026-08-07",
+      "files": [
+        "QB3_A_CheatSheet.html"
+      ],
+      "summary": "Diagram correction, pass 1 (Nixon-flagged, screenshot review): in the 'GZ Curve & Angle of Loll -- The Three GM States' SVG diagram, the angle-of-loll marker/label was plotted at the negative-GM curve's trough (most negative GZ) instead of the point where the curve crosses GZ=0. Marker and drop-line moved to the curve's actual zero-crossing point. q-version bumped v1.0 -> v1.1. Superseded same-day by Pass 2 above. See known_traps.md Entry 31 (Pass 1)."
     },
     {
       "date": "2026-08-05",
