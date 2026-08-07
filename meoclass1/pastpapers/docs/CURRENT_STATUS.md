@@ -18,7 +18,8 @@ Last updated: 2026-08-08. Written at session closeout; read this first.
 | Remote | `https://github.com/nickmarineengr-aiLiterate/marine-intelligence-weekly.git` |
 | Branch at closeout | `pastpapers/em2607-founder-review` |
 | Branched from | `main` @ `2bf6e49` (unchanged; nothing merged to main) |
-| Checkpoint commit | see §12 — filled in at commit time |
+| Checkpoint commit | `f8b39de` — *local only, NOT pushed* |
+| Push status | **BLOCKED** — the sandbox permission classifier denied `git push`. Not a credential or network failure. See §17. |
 
 All git commands in this repo should be run with `-c safe.directory=*`.
 
@@ -320,6 +321,27 @@ python tools/pastpapers/run_toolchain.py --self-test
 - **Building the autonomous production agent.** Not until the workflow is proven on more
   than one paper.
 - **Any change to the settled architecture in §3–§4** without test evidence of a defect.
+
+---
+
+## 17. Push status — checkpoint is LOCAL ONLY
+
+The checkpoint commit `f8b39de` exists **only on this machine**, on branch
+`pastpapers/em2607-founder-review`. The `git push -u origin
+pastpapers/em2607-founder-review` was **denied by the session's permission classifier**,
+not by git, GitHub, credentials or the network. No authentication configuration was
+changed, and no retry or workaround was attempted.
+
+**There is currently no off-machine backup of this work.** The first thing the next
+session should do, once it has permission to push, is:
+
+```bash
+cd /d F:\Marine-Intelligence-Weekly
+git -c safe.directory=* push -u origin pastpapers/em2607-founder-review
+```
+
+Do **not** force push. Do **not** merge into `main`. Do **not** open a pull request unless
+the Founder asks.
 
 ---
 
