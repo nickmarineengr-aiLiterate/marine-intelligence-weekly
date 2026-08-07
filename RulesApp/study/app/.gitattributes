@@ -1,0 +1,7 @@
+# RulesApp Study Mode pilot — content-hashed runtime assets.
+#
+# Each filename encodes a hash of that file's content, so the bytes must be
+# identical on every checkout. Git's CRLF normalisation would rewrite them
+# per-platform while leaving the hashed name unchanged — a file that claims,
+# by its own name, to be something it no longer is. Never normalise these.
+* -text

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Study Mode — MIW</title>
+<link rel="stylesheet" href="study.123700498bf2.css">
+<script>
+/* Appearance bootstrap. Its ONLY job is to stamp the two root attributes
+   before the first paint, so a reader who chose dark never sees a white
+   flash while app.js loads. It reads the same key and accepts the same
+   controlled values as app.js, which re-applies them authoritatively a
+   moment later; it renders nothing, navigates nowhere and requests nothing.
+   Deliberately not the full implementation -- duplicating that would give
+   two places for the rules to drift apart. */
+(function () {
+  var A = { light: 1, dark: 1 }, C = { multicolour: 1, monochrome: 1 };
+  var p = {};
+  try { p = JSON.parse(localStorage.getItem('rulesapp.study.preferences.v1')) || {}; }
+  catch (e) { p = {}; }
+  if (!p || typeof p !== 'object' || p instanceof Array) p = {};
+  var dark = false;
+  try { dark = !!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches); }
+  catch (e) { dark = false; }
+  var r = document.documentElement;
+  r.setAttribute('data-appearance', A[p.appearance] ? p.appearance : (dark ? 'dark' : 'light'));
+  r.setAttribute('data-colour', C[p.colour] ? p.colour : 'multicolour');
+})();
+</script>
+</head>
+<body>
+<header class="bar">
+  <a href="#/" class="home">Study Mode</a>
+  <span class="crumb-sep" id="crumb-sep" hidden>/</span>
+  <span class="crumb" id="crumb-q"></span>
+  <span class="spacer"></span>
+  <!-- Display preferences. Outside #modes on purpose: #modes is hidden on the
+       Overview view, so a control placed inside it would disappear from the
+       first screen a reader sees. Populated by app.js. -->
+  <div class="prefs" id="prefs" role="group" aria-label="Display preferences"></div>
+  <nav class="modes" id="modes" hidden>
+    <a href="#" id="mode-cards" class="mode">Study Cards</a>
+    <a href="#" id="mode-map" class="mode">Knowledge Map</a>
+    <button id="sidebar-toggle" class="ghost" title="Study panel">&#9776;</button>
+  </nav>
+</header>
+
+<main id="view-home" class="view">
+  <div class="hero">
+    <h1>Study Mode</h1>
+    <input type="search" id="q-search" placeholder="Search a repeated question&hellip;" autocomplete="off">
+    <ul id="q-list" class="topic-list"></ul>
+    <p class="muted" id="home-note"></p>
+  </div>
+</main>
+
+<main id="view-question" class="view" hidden>
+  <p class="muted" id="q-topic"></p>
+  <h1 id="q-canonical"></h1>
+  <p class="muted" id="q-counts"></p>
+  <div class="choice">
+    <a href="#" id="go-map" class="big">Knowledge Map<span>orientation</span></a>
+    <a href="#" id="go-cards" class="big primary">Study Cards<span>the curated answer</span></a>
+  </div>
+</main>
+
+<main id="view-cards" class="view" hidden>
+  <div class="layout">
+    <div id="cards-root" class="cards"></div>
+    <aside id="sidebar" class="sidebar">
+      <h3>Study panel</h3>
+      <label class="fld">Status
+        <select id="status-select">
+          <option value="not-started">Not started</option>
+          <option value="in-progress">In progress</option>
+          <option value="covered">Covered</option>
+          <option value="needs-revision">Needs revision</option>
+        </select>
+      </label>
+      <label class="chk"><input type="checkbox" id="flag-revision"> Flag for revision</label>
+      <div class="side-block"><h4>Curated answer</h4><div id="side-answer"></div></div>
+      <div class="side-block"><h4>Cheat sheet</h4><div id="side-cheat"></div></div>
+      <div class="side-block"><h4>Examiner evidence</h4><div id="side-exam" class="tiny"></div></div>
+      <div class="side-block"><h4>Provenance</h4><div id="side-prov" class="tiny"></div></div>
+    </aside>
+  </div>
+</main>
+
+<main id="view-map" class="view" hidden>
+  <h2 id="map-title"></h2>
+  <p class="muted">Numbers match the Study Card sections. Select a branch to jump to it.</p>
+  <div id="map-root" class="map"></div>
+</main>
+
+<script src="data.1c6fd2cd8736.js"></script>
+<script src="app.d1de03ab7e86.js"></script>
+</body>
+</html>

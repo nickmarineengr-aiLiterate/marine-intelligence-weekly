@@ -1,0 +1,672 @@
+/* GENERATED from src/study.css by build_qso.py@1.0.0 -- do not edit. build 123700498bf2 */
+/* Study Mode — calm, quiet, built for long reading sessions.
+   No framework, no bundler, no external font, no network request. */
+
+/* =====================================================================
+   Appearance is owned by ONE attribute on the document root, not by the
+   media query it used to live in. `prefers-color-scheme` is still honoured,
+   but in JavaScript, where a stored choice can outrank it -- a media query
+   cannot be overruled by a preference, which is exactly what a reader who
+   picks light on a dark machine is asking for.
+
+   The palette is therefore defined once per appearance rather than twice
+   (once for the query, once for the attribute), so the two can never drift.
+   Light is the base, so a document that never got its attribute stamped is
+   still fully readable.
+   ===================================================================== */
+:root{
+  --bg:#f7f6f3; --fg:#23282e; --muted:#5f6873; --line:#e2e0da;
+  --card:#fffefb; --accent:#2f6f6a; --accent-soft:#e8f0ef;
+  --warn:#7d6115; --warn-soft:#fbf3dd;
+  /* Focus is FUNCTIONAL colour: it must stay distinct from whatever a branch
+     happens to be, and it must survive monochrome, so it is its own token and
+     is never borrowed from --c. */
+  --focus:#1d5c58;
+  /* Disabled text is a token because opacity cannot be made accessible: a
+     45%-opacity label computes to whatever the background makes of it. */
+  --disabled-fg:#6a737e;
+  --radius:10px; --maxw:860px;
+}
+:root[data-appearance="dark"]{
+  --bg:#161a1d; --fg:#e6e4df; --muted:#a3acb6; --line:#2c3237;
+  --card:#1d2226; --accent:#7fbdb6; --accent-soft:#1e2c2b;
+  --warn:#d8b968; --warn-soft:#2b2718;
+  --focus:#9fd6cf;
+  --disabled-fg:#98a1ab;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--fg);
+  font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--accent); text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Baseline keyboard focus for EVERY interactive element, stated once.
+   Found live: tabbing to a view tab produced the user agent's own 0.67px
+   auto ring instead of the token -- the tabs and the sidebar toggle never had
+   a rule and had been relying on that default, which is under 2px and takes
+   no part in the appearance system. Placed early on purpose: the specific
+   rules further down (card headers, in-card controls, branch numbers, map
+   nodes) still win and keep their own offsets. */
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible{
+  outline:2px solid var(--focus); outline-offset:2px;
+}
+h1{font-size:1.7rem; font-weight:600; letter-spacing:-.01em; margin:0 0 .3em}
+h2{font-size:1.25rem; font-weight:600; margin:0 0 .4em}
+.muted{color:var(--muted); font-size:.92rem}
+.tiny{font-size:.8rem; color:var(--muted); line-height:1.5}
+
+/* ---- bar ---- */
+.bar{
+  display:flex; align-items:center; gap:.5rem; padding:.7rem 1.2rem;
+  border-bottom:1px solid var(--line); background:var(--card); position:sticky; top:0; z-index:5;
+}
+.bar .home{font-weight:600}
+.crumb{font-weight:500}
+.crumb-sep{color:var(--muted)}
+.spacer{flex:1}
+.modes{display:flex; align-items:center; gap:.4rem}
+.mode{
+  font-size:.86rem; padding:.32rem .7rem; border:1px solid var(--line);
+  border-radius:999px; color:var(--muted);
+}
+.mode.active{background:var(--accent-soft); border-color:var(--accent); color:var(--accent); font-weight:500}
+.ghost{
+  background:none; border:1px solid var(--line); border-radius:8px;
+  color:var(--muted); cursor:pointer; padding:.3rem .55rem; font-size:1rem;
+}
+
+/* ---- views ---- */
+.view{max-width:var(--maxw); margin:0 auto; padding:2rem 1.2rem 4rem}
+.hero{max-width:560px; margin:12vh auto 0; text-align:center}
+.hero h1{font-size:2.1rem; margin-bottom:1.4rem}
+#topic-search{
+  width:100%; padding:.85rem 1rem; font-size:1rem; color:var(--fg);
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+}
+#topic-search:focus-visible{outline:2px solid var(--focus); outline-offset:2px; border-color:var(--focus)}
+.topic-list{list-style:none; margin:1.4rem 0 0; padding:0; text-align:left}
+.topic-list li{border-bottom:1px solid var(--line)}
+.topic-list a{display:flex; justify-content:space-between; gap:1rem; padding:.75rem .2rem}
+.topic-list .meta{color:var(--muted); font-size:.85rem; white-space:nowrap}
+
+.choice{display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.6rem}
+.big{
+  flex:1 1 220px; padding:1.3rem; background:var(--card); border:1px solid var(--line);
+  border-radius:var(--radius); font-size:1.05rem; font-weight:600; color:var(--fg);
+}
+.big span{display:block; font-weight:400; font-size:.85rem; color:var(--muted); margin-top:.2rem}
+.big.primary{border-color:var(--accent); background:var(--accent-soft)}
+.big:hover{text-decoration:none; border-color:var(--accent)}
+
+/* ---- cards ---- */
+.layout{display:flex; gap:1.5rem; align-items:flex-start}
+.cards{flex:1; min-width:0}
+.branch{margin:0 0 2rem; scroll-margin-top:70px}
+.branch-h{display:flex; align-items:baseline; gap:.6rem; margin-bottom:.7rem}
+.bnum{
+  flex:none; width:1.7rem; height:1.7rem; border-radius:50%; background:var(--accent-soft);
+  color:var(--accent); font-size:.85rem; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+}
+.card{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+  padding:.85rem 1rem; margin-bottom:.6rem;
+}
+.card-top{display:flex; gap:.5rem; align-items:baseline; flex-wrap:wrap}
+.kind{
+  font-size:.7rem; text-transform:uppercase; letter-spacing:.05em;
+  color:var(--muted); border:1px solid var(--line); border-radius:4px; padding:.05rem .35rem;
+}
+.card-title{font-weight:600}
+.extract{margin:.45rem 0 .3rem; color:var(--fg)}
+.card-foot{display:flex; gap:.9rem; flex-wrap:wrap; font-size:.8rem; color:var(--muted); margin-top:.4rem}
+.gap{background:var(--warn-soft); border-color:var(--warn)}
+.gap .kind{border-color:var(--warn); color:var(--warn)}
+
+/* ---- sidebar ---- */
+.sidebar{
+  flex:none; width:250px; background:var(--card); border:1px solid var(--line);
+  border-radius:var(--radius); padding:1rem; position:sticky; top:70px;
+}
+.sidebar[hidden]{display:none}
+.sidebar h3{margin:0 0 .8rem; font-size:.95rem}
+.sidebar h4{margin:0 0 .3rem; font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; color:var(--muted)}
+.side-block{margin-top:1rem; padding-top:.8rem; border-top:1px solid var(--line); font-size:.85rem}
+.fld{display:block; font-size:.85rem; color:var(--muted)}
+.fld select{
+  width:100%; margin-top:.25rem; padding:.4rem; border-radius:6px;
+  border:1px solid var(--line); background:var(--bg); color:var(--fg);
+}
+.chk{display:flex; gap:.4rem; align-items:center; margin-top:.7rem; font-size:.85rem}
+
+/* ---- map ---- */
+.map{margin-top:1rem; overflow-x:auto}
+.map svg{display:block; margin:0 auto; max-width:100%; height:auto}
+.node{cursor:pointer}
+.node circle{fill:var(--card); stroke:var(--line); stroke-width:1.5; transition:.15s}
+.node:hover circle{stroke:var(--accent); fill:var(--accent-soft)}
+.node .nn{fill:var(--accent); font-weight:700; font-size:13px; text-anchor:middle}
+.node .nl{fill:var(--fg); font-size:11px; text-anchor:middle}
+.centre circle{fill:var(--accent-soft); stroke:var(--accent); stroke-width:2}
+.centre text{fill:var(--fg); font-size:13px; font-weight:600; text-anchor:middle}
+.spoke{stroke:var(--line); stroke-width:1.5}
+
+@media (max-width:760px){
+  .layout{flex-direction:column}
+  .sidebar{width:100%; position:static}
+}
+
+/* =====================================================================
+   Semantic category system — shared by map branches and card headers.
+   One palette, defined once, so a colour means the same thing everywhere.
+   Contrast checked against both surfaces in light and dark.
+   ===================================================================== */
+:root{
+  --cat-core:#1f6f8b;    --cat-core-soft:#e2f0f4;
+  --cat-operation:#2c7450; --cat-operation-soft:#e3f1e9;
+  --cat-regulatory:#8a6116; --cat-regulatory-soft:#f8efdc;
+  --cat-examiner:#6b4a8f;  --cat-examiner-soft:#efe7f6;
+  --cat-recall:#a34d3c;    --cat-recall-soft:#fbe9e5;
+  --cat-safety:#a03a4e;    --cat-safety-soft:#fbe6ea;
+  --cat-resource:#3f5871;  --cat-resource-soft:#e7ecf2;
+  --cat-gap:#8a6d1f;       --cat-gap-soft:#fbf3dd;
+}
+:root[data-appearance="dark"]{
+  --cat-core:#7fc3d8;    --cat-core-soft:#16303a;
+  --cat-operation:#84c9a2; --cat-operation-soft:#16301f;
+  --cat-regulatory:#e0b968; --cat-regulatory-soft:#312712;
+  --cat-examiner:#bfa3dd;  --cat-examiner-soft:#241a30;
+  --cat-recall:#e8a292;    --cat-recall-soft:#331b16;
+  --cat-safety:#e2909f;    --cat-safety-soft:#331820;
+  --cat-resource:#a8bdd4;  --cat-resource-soft:#1b2531;
+  --cat-gap:#d8b968;       --cat-gap-soft:#2b2718;
+}
+
+/* ---- monochrome ----
+   Colour is removed from the DECORATIVE channel only. The category tokens are
+   the whole of that channel -- every card rule, chip, blob, connector and
+   legend swatch reads --c/--cs and nothing else -- so overriding eight pairs
+   is the entire change, with no rule rewritten.
+
+   The seven branches keep their numbers, labels, positions, borders and map
+   coordinates: those are the primary identity and always were, which is why
+   this mode is honest rather than a loss of information. The neutral tones
+   below step in lightness so the branches do not read as one grey block, but
+   they are a supporting signal, not a replacement for the number beside them.
+
+   Deliberately NOT filter:grayscale() -- that would desaturate text, focus
+   rings and the landing highlight along with the decoration, and it cannot be
+   reasoned about token by token or measured for contrast.
+
+   --focus and --accent stay chromatic: focus is functional, not decorative,
+   and a reader who wants calm branches still needs to see where they are. */
+:root[data-colour="monochrome"]{
+  --cat-core:#333b44;      --cat-core-soft:#e9eaec;
+  --cat-operation:#4a545e; --cat-operation-soft:#eef0f1;
+  --cat-regulatory:#3e4750; --cat-regulatory-soft:#e4e6e8;
+  --cat-examiner:#565f69;  --cat-examiner-soft:#f1f2f3;
+  --cat-recall:#2b323a;    --cat-recall-soft:#dfe1e4;
+  --cat-safety:#454e57;    --cat-safety-soft:#ebedee;
+  --cat-resource:#5c656f;  --cat-resource-soft:#f3f4f5;
+  --cat-gap:#3a424a;       --cat-gap-soft:#e6e7e9;
+  --warn:#3a424a;          --warn-soft:#e6e7e9;
+}
+:root[data-appearance="dark"][data-colour="monochrome"]{
+  --cat-core:#d3d8dd;      --cat-core-soft:#282e34;
+  --cat-operation:#bcc3ca; --cat-operation-soft:#222831;
+  --cat-regulatory:#c8cfd5; --cat-regulatory-soft:#2d343a;
+  --cat-examiner:#aeb6be;  --cat-examiner-soft:#1f252b;
+  --cat-recall:#dfe4e8;    --cat-recall-soft:#31383e;
+  --cat-safety:#c1c8cf;    --cat-safety-soft:#252b31;
+  --cat-resource:#a7afb8;  --cat-resource-soft:#1b2127;
+  --cat-gap:#cbd2d8;       --cat-gap-soft:#2a3037;
+  --warn:#cbd2d8;          --warn-soft:#2a3037;
+}
+.cat-core-technical{--c:var(--cat-core);--cs:var(--cat-core-soft);}
+.cat-operation{--c:var(--cat-operation);--cs:var(--cat-operation-soft);}
+.cat-regulatory{--c:var(--cat-regulatory);--cs:var(--cat-regulatory-soft);}
+.cat-examiner{--c:var(--cat-examiner);--cs:var(--cat-examiner-soft);}
+.cat-recall{--c:var(--cat-recall);--cs:var(--cat-recall-soft);}
+.cat-safety{--c:var(--cat-safety);--cs:var(--cat-safety-soft);}
+.cat-resource{--c:var(--cat-resource);--cs:var(--cat-resource-soft);}
+
+/* ---- cards carry their category as a left rule + tinted header ---- */
+.card{border-left:3px solid var(--c,var(--line));}
+.card .kind{background:var(--cs,transparent);border-color:var(--c,var(--line));color:var(--c,var(--muted));font-weight:700;}
+.card-role{font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+  border:1px dashed var(--line);border-radius:4px;padding:.02rem .3rem;}
+.branch-h .bnum{background:var(--cs,var(--accent-soft));color:var(--c,var(--accent));border:1.5px solid var(--c,transparent);}
+.branch.secondary .branch-h h2{font-size:1.05rem;color:var(--muted);}
+
+/* ---- organic map ---- */
+.map svg{max-width:100%;height:auto;}
+.link{fill:none;stroke:var(--c,var(--line));stroke-linecap:round;opacity:.55;}
+.link.primary{stroke-width:2.6;}
+.link.secondary{stroke-width:1.6;stroke-dasharray:5 4;opacity:.45;}
+.qnode{cursor:pointer;}
+.qnode .blob{fill:var(--cs);stroke:var(--c);stroke-width:2;transition:transform .18s ease, filter .18s ease;transform-origin:center;}
+.qnode.secondary .blob{stroke-width:1.5;stroke-dasharray:6 4;}
+.qnode:hover .blob,.qnode:focus .blob{filter:brightness(1.07);transform:scale(1.06);}
+.qnode:focus{outline:none;}
+.qnode:focus .blob{stroke:var(--focus); stroke-width:4;}
+.qnode .nnum{fill:var(--c);font-weight:800;font-size:14px;text-anchor:middle;}
+.qnode .nlabel{fill:var(--fg);font-size:11.5px;font-weight:600;text-anchor:middle;}
+.qnode.secondary .nlabel{fill:var(--muted);font-weight:500;}
+.hub .hubshape{fill:var(--card);stroke:var(--accent);stroke-width:2.5;}
+.hub .hubq{fill:var(--fg);font-size:13px;font-weight:700;text-anchor:middle;}
+.hub .hubmeta{fill:var(--muted);font-size:10px;text-anchor:middle;}
+.map-legend{display:flex;flex-wrap:wrap;gap:.5rem 1rem;margin:1rem auto 0;max-width:640px;font-size:.78rem;}
+.map-legend span{display:flex;align-items:center;gap:.35rem;color:var(--muted);}
+.map-legend i{width:.7rem;height:.7rem;border-radius:3px;background:var(--cs);border:1.5px solid var(--c);display:inline-block;}
+
+/* =====================================================================
+   Milestone 1 — header responsiveness and map readability.
+   Overrides only; no HTML restructure, so the existing app.js keeps
+   working against the same element ids.
+   ===================================================================== */
+
+/* ---- header: brand never wraps mid-word, breadcrumb never strands ---- */
+.bar{flex-wrap:wrap; row-gap:.35rem; padding:.55rem 1rem;}
+.bar .home{white-space:nowrap; font-size:.95rem;}
+.crumb{
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  max-width:min(42ch, 42vw); font-size:.9rem; color:var(--muted);
+}
+.crumb-sep{flex:0 0 auto;}
+.crumb-sep[hidden]{display:none;}
+.modes{flex:0 0 auto;}
+.mode{white-space:nowrap; font-size:.82rem; padding:.28rem .7rem;}
+
+/* Narrow: two deliberate rows — identity on row 1, controls on row 2.
+   The full canonical question lives in the map centre and the QSO body,
+   so the header is free to use a concise title. */
+@media (max-width:640px){
+  .bar{padding:.5rem .8rem;}
+  .bar .home{flex:0 0 auto;}
+  .crumb{
+    order:3; flex:1 0 100%; max-width:100%;
+    white-space:normal; font-size:.82rem; line-height:1.35;
+  }
+  .crumb-sep{display:none;}          /* no stranded punctuation on its own row */
+  .spacer{display:none;}
+  .modes{order:2; margin-left:auto;}
+}
+
+/* ---- map: fill the panel, keep text legible ---- */
+.map{margin-top:.75rem; overflow-x:auto;}
+.map svg{
+  display:block; width:100%; max-width:100%; height:auto;
+  min-height:clamp(430px, 62vh, 700px);
+}
+/* Labels sized in absolute px against a fixed viewBox, so they do not
+   shrink with the container the way font-size:% would. */
+.qnode .nnum{font-size:20px; font-weight:800;}
+.qnode .nl,.qnode .nlabel{font-size:16px; font-weight:600;}
+.qnode.secondary .nlabel{font-weight:500;}
+.centre text,.hub .hubq{font-size:17px;}
+.hub .hubmeta{font-size:12.5px;}
+
+/* ---- legend: attached to the map, compact, collapsible ---- */
+.map-legend{
+  margin:.5rem 0 0; padding:.5rem .75rem; font-size:.78rem;
+  border:1px solid var(--line); border-radius:8px; background:var(--card);
+  gap:.35rem .9rem;
+}
+.map-legend[hidden]{display:none;}
+
+/* ---- narrow screens: scroll a readable map rather than shrink it ----
+   Option 2 of the three offered: the simplest that keeps every label,
+   the centre question, category identity and branch selection intact. */
+@media (max-width:700px){
+  .map{overflow-x:auto; -webkit-overflow-scrolling:touch;}
+  .map svg{width:760px; max-width:none; min-height:520px;}
+  .map-legend{position:sticky; left:0;}
+}
+
+/* The map is the study object, not a diagram inside a reading column, so it
+   is not bound by the prose max-width the other views use. */
+#view-map{max-width:min(1240px, 96vw);}
+#view-map .map svg{min-height:clamp(480px, 66vh, 760px);}
+
+/* =====================================================================
+   Milestone 2 — bidirectional Map <-> Cards navigation.
+   ===================================================================== */
+
+/* ---- the branch number is now the return path to the map ---- */
+a.bnum{
+  text-decoration:none; cursor:pointer;
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+a.bnum:hover{
+  text-decoration:none; transform:scale(1.09);
+  box-shadow:0 0 0 3px var(--cs,var(--accent-soft));
+}
+a.bnum:focus-visible{
+  outline:2px solid var(--focus); outline-offset:2px;
+}
+
+/* ---- where the jump landed ----
+   Focus is the accessible signal and this is the visual one. It fades on its
+   own after ~1.6s: a permanent marker would compete with the reader's own
+   sense of place at the next jump. */
+@keyframes nav-land{
+  0%   {background:var(--cs,var(--accent-soft)); box-shadow:0 0 0 6px var(--cs,var(--accent-soft));}
+  100% {background:transparent; box-shadow:0 0 0 6px transparent;}
+}
+.branch.nav-target{
+  border-radius:var(--radius);
+  animation:nav-land 1.6s ease-out forwards;
+}
+.branch:focus{outline:none;}
+.branch:focus-visible{
+  outline:2px solid var(--focus); outline-offset:6px; border-radius:var(--radius);
+}
+@keyframes nav-blob{
+  0%   {stroke-width:6; filter:brightness(1.18);}
+  100% {stroke-width:2; filter:none;}
+}
+.qnode.nav-target .blob{animation:nav-blob 1.6s ease-out forwards;}
+
+/* ---- reduced motion: keep every signal, drop the movement ----
+   The landing still marks itself and still takes focus; it simply appears
+   and holds rather than animating, and scrolling is instant (set in JS). */
+@media (prefers-reduced-motion:reduce){
+  a.bnum,a.bnum:hover{transition:none; transform:none;}
+  .qnode .blob{transition:none;}
+  .qnode:hover .blob,.qnode:focus .blob{transform:none;}
+  .branch.nav-target{animation:none; box-shadow:0 0 0 4px var(--cs,var(--accent-soft));}
+  .qnode.nav-target .blob{animation:none; stroke-width:5;}
+}
+
+/* =====================================================================
+   Milestone 3 — accordion cards, in-branch navigation, larger tap target.
+   Overrides and additions only; index.html is untouched again, so the
+   structure the browser gets still comes entirely from app.js.
+   ===================================================================== */
+
+/* ---- the accordion shell ----
+   Only cards that carry a card identity are accordions. Declared-gap cards
+   keep the flat .card-top layout: a gap has nothing to open and a header that
+   toggled nothing would be a dead control. */
+.card[data-card]{padding:0; overflow:hidden;}
+.card{scroll-margin-top:70px;}
+.card-h{margin:0; font-size:1rem; font-weight:400;}
+
+/* A real button, sized like a header. Inheriting font and colour keeps it
+   reading as text rather than as a form control. */
+.card-btn{
+  display:flex; align-items:baseline; flex-wrap:wrap; gap:.5rem;
+  width:100%; margin:0; padding:.7rem 1rem; min-height:2.75rem;
+  background:none; border:0; border-radius:var(--radius);
+  font:inherit; color:inherit; text-align:left; cursor:pointer;
+}
+.card-btn:hover{background:var(--cs,var(--accent-soft));}
+.card-btn:focus{outline:none;}
+.card-btn:focus-visible{outline:2px solid var(--focus); outline-offset:-2px;}
+.card-btn .card-title{flex:1 1 auto; min-width:0;}
+
+/* A disclosure indicator, not an icon font: one rotated glyph, hidden from
+   assistive technology because aria-expanded already says the same thing. */
+.card-chev{
+  margin-left:auto; flex:none; color:var(--c,var(--muted)); font-size:.8rem;
+  transition:transform .15s ease; display:inline-block;
+}
+.card-chev::before{content:"\25B8";}
+.card-btn[aria-expanded="true"] .card-chev{transform:rotate(90deg);}
+.card[data-card].open{border-color:var(--c,var(--accent));}
+
+.card-panel{padding:0 1rem .2rem;}
+.card-panel[hidden]{display:none;}          /* explicit: nothing may re-show it */
+.card-panel .card-foot{margin-bottom:.2rem;}
+
+/* ---- Previous / Next / Return to Map ----
+   Previous and Next are buttons so the branch boundary can use real disabled
+   semantics; an aria-disabled link still navigates. Return to Map is a link
+   because it goes somewhere, and the browser should own that history entry. */
+.card-nav{
+  display:flex; align-items:center; flex-wrap:wrap; gap:.5rem;
+  margin-top:.5rem; padding:.6rem 0 .75rem; border-top:1px solid var(--line);
+}
+.cnav{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:2.75rem; padding:.4rem .85rem;
+  background:var(--bg); border:1px solid var(--line); border-radius:8px;
+  font:inherit; font-size:.86rem; color:var(--fg); cursor:pointer;
+}
+.cnav:hover:not(:disabled){border-color:var(--c,var(--accent)); text-decoration:none;}
+.cnav:focus{outline:none;}
+.cnav:focus-visible{outline:2px solid var(--focus); outline-offset:2px;}
+/* A boundary must look closed, not merely be closed. */
+.cnav:disabled{
+  cursor:not-allowed; color:var(--disabled-fg);
+  border-style:dashed; background:none;
+}
+.cnav-map{margin-left:auto; color:var(--c,var(--accent)); border-color:var(--c,var(--line));}
+
+/* ---- branch number: ~44x44px effective target ----
+   The visible circle stays 1.7rem so the branch header keeps its proportions;
+   an invisible centred pseudo-element carries the target. Hit-testing on a
+   pseudo-element resolves to its originating element, so the whole 44x44 area
+   activates the link and nothing else. Layout is untouched, because an
+   absolutely positioned box takes no space.
+
+   The overhang is (44 - 27.2) / 2 = 8.4px per side, so .branch-h's gap goes
+   from .6rem to .75rem (12px) to guarantee the target cannot reach the
+   heading beside it. The gaps section's <span class="bnum"> is deliberately
+   not matched: it is not a control and must not grow a tap target. */
+.branch-h{gap:.75rem;}
+a.bnum{position:relative;}
+a.bnum::before{
+  content:""; position:absolute; left:50%; top:50%;
+  width:44px; height:44px; transform:translate(-50%,-50%);
+  /* Deliberately NOT border-radius:50%. A 44px circle was measured live and
+     its corners fell outside the target -- (+-21, +-21) missed the link while
+     the edge midpoints hit it. A rectangle gives the full 44x44 area. The
+     pseudo-element is transparent, so the visible badge stays a circle. */
+}
+
+/* =====================================================================
+   Milestone 4 — Study Card front/back reveal.
+   Study Cards only. Resource Cards and declared gaps get nothing from this
+   block: a Resource Card has no .card-face to match, and a gap has no panel.
+   index.html is untouched again — the structure still comes from app.js.
+   ===================================================================== */
+
+/* One face at a time. The attribute selector is explicit for the same reason
+   .card-panel[hidden] is: a hidden face must be genuinely not rendered, so it
+   leaves the accessibility tree and find-in-page along with its controls. A
+   later display rule that resurrected it would hand over the answer, so the
+   rule is stated rather than left to the UA sheet. */
+.card-face[hidden]{display:none;}
+
+/* The front is the recall side: branch context, then the prompt, then the
+   control. Deliberately sparse — there is nothing to read ahead to. */
+.face-context{
+  margin:.65rem 0 .2rem; font-size:.75rem; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--muted);
+}
+.face-prompt{margin:0 0 .75rem; color:var(--fg); max-width:60ch;}
+.face-prompt strong{color:var(--c,var(--fg));}
+
+/* The reveal pair reuses .cnav, so the 2.75rem touch target and the focus
+   ring come from one place and cannot drift. Only the emphasis differs: this
+   is the card's primary action, where Previous and Next are secondary. */
+.cnav-face{
+  border-color:var(--c,var(--line)); background:var(--cs,var(--bg));
+  color:var(--c,var(--accent)); font-weight:600;
+}
+.card-back > .cnav-face{margin-bottom:.35rem;}
+
+/* A restrained reveal: a 4px settle, no rotation, no perspective, no mirrored
+   text, no bounce.
+
+   An ANIMATION rather than a transition, and not by preference: a face
+   arrives from display:none, and a transition has no previous computed value
+   to run from on an element that was not being rendered a frame earlier.
+
+   POSITION ONLY — deliberately no opacity ramp, and this was found live
+   rather than reasoned. The first version faded from opacity:0. In a document
+   whose timeline does not advance, an animation sits on its FIRST keyframe
+   indefinitely: measured here as playState "running" with currentTime stuck
+   at 0, so the revealed answer computed to opacity:0 and stayed there. A
+   document's timeline stops advancing in a background tab, under paused
+   animations, and in headless capture — which is exactly how Milestone 7's
+   Founder screenshots and this package's file:// checks are taken. Animating
+   anything that affects legibility makes the content's visibility depend on
+   the animation actually running. A 4px offset degrades to "4px out of
+   place"; opacity:0 degrades to "the answer is gone".
+
+   Nothing in the JavaScript waits for it either. showFace() has already
+   finished before the first frame is painted, so disabling animation entirely
+   cannot strand a face. No animationend or transitionend listener exists.
+
+   Height is left alone. The back is naturally taller than the front and is
+   allowed to be: forcing both into one box would either clip the answer or
+   leave the front floating in empty space. */
+@keyframes face-in{
+  from{transform:translateY(-4px);}
+  to{transform:none;}
+}
+.card-face:not([hidden]){animation:face-in .16s ease-out;}
+
+@media (prefers-reduced-motion:reduce){
+  .card-chev{transition:none;}
+  .card-btn,.cnav{transition:none;}
+  /* Instant, and instant by removal rather than by a 0s duration, so there is
+     no zero-length animation for anything to wait on. */
+  .card-face:not([hidden]){animation:none;}
+}
+
+/* =====================================================================
+   Milestone 5 — Resource Card identity, provenance and link safety.
+   Resource Cards only. Study Cards and declared gaps get nothing from this
+   block: neither renders a .res-list. index.html is untouched again.
+   ===================================================================== */
+
+/* Visually hidden, still read aloud. Carries the new-tab warning for external
+   links, so the warning cannot be lost the way an icon is lost to a screen
+   reader. Deliberately NOT display:none or visibility:hidden -- both remove it
+   from the accessibility tree, which is the one thing it exists for. */
+.sr-only{
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;
+}
+
+/* One block per resource. A list, because that is what it is -- a screen
+   reader announces the count before the reader commits to hearing all five. */
+.res-list{list-style:none; margin:.5rem 0 .2rem; padding:0;}
+.res{
+  padding:.7rem 0 .8rem; border-top:1px solid var(--line);
+}
+.res:first-child{border-top:0; padding-top:.3rem;}
+
+.res-code{margin:0 0 .15rem; font-weight:700; color:var(--c,var(--fg));}
+.res-meta{margin:0 0 .35rem; font-size:.8rem; color:var(--muted);}
+.res-desc{margin:0 0 .45rem;}
+
+/* Availability is stated, never implied by a missing link. The flag is a word,
+   not a colour: colour alone would not survive monochrome mode (Milestone 6)
+   and does not survive a screen reader at all. */
+.res-status{margin:0 0 .2rem; font-size:.88rem;}
+.res-flag{
+  display:inline-block; margin-right:.4rem; padding:.05rem .45rem;
+  border:1px solid var(--line); border-radius:999px;
+  font-size:.72rem; letter-spacing:.04em; text-transform:uppercase;
+  color:var(--muted); white-space:nowrap;
+}
+.res-evidence{margin:0; font-size:.82rem; color:var(--muted); max-width:70ch;}
+
+/* An action appears only when there is somewhere to go. It reuses .cnav, so
+   the 2.75rem touch target and the focus ring come from one place. */
+.res-link{margin-top:.5rem;}
+
+/* =====================================================================
+   Milestone 6 — appearance preference controls.
+   Two native radio groups. Not one toggle: a single button is ambiguous
+   whether it is labelled with the state you are in or the state it would
+   move you to, and a reader should never have to click to find out.
+   ===================================================================== */
+.prefs{display:flex; align-items:center; gap:.55rem; flex-wrap:wrap;}
+.pref-set{
+  display:flex; align-items:center; gap:.3rem;
+  margin:0; padding:0 .1rem; border:0;              /* the fieldset box would
+                                                       double the header rules */
+}
+/* The legend stays a real legend -- it is the group's accessible name and the
+   only thing that says what these two buttons are FOR. Compact, not hidden. */
+.pref-set legend{
+  float:left; padding:0 .4rem 0 0; font-size:.68rem; letter-spacing:.05em;
+  text-transform:uppercase; color:var(--muted); white-space:nowrap;
+}
+.pref-opt{
+  display:inline-flex; align-items:center; gap:.3rem;
+  min-height:2.75rem; padding:.15rem .55rem;        /* ~44px effective target */
+  border:1px solid var(--line); border-radius:999px;
+  font-size:.8rem; color:var(--muted); cursor:pointer; white-space:nowrap;
+}
+/* The radio stays a real, visible, native input. Not clipped, not opacity:0,
+   not replaced by a styled span: it must keep its own focus ring, its own
+   forced-colours treatment and its own hit area. */
+.pref-opt input{margin:0; accent-color:var(--accent); cursor:pointer;}
+.pref-opt:hover{border-color:var(--accent);}
+/* Selection is carried by the checked radio AND by weight and border, so it
+   does not depend on colour alone. */
+.pref-opt:has(input:checked){
+  border-color:var(--accent); background:var(--accent-soft);
+  color:var(--fg); font-weight:600;
+}
+.pref-opt:has(input:focus-visible){outline:2px solid var(--focus); outline-offset:2px;}
+
+@media (max-width:640px){
+  /* Its own full-width row rather than four pills crushed against the mode
+     tabs. The header already wraps, so this only chooses where the break is. */
+  .prefs{order:4; flex:1 0 100%; gap:.4rem .7rem;}
+  .pref-opt{font-size:.78rem; padding:.15rem .5rem;}
+  /* Measured at 375x812: with the preferences added the header reaches 203px,
+     and sticky made that a permanent 25% of the screen. Four 44px targets on
+     two rows cannot be made shorter without either shrinking the targets or
+     abbreviating the labels, and both cost more than they save. So the header
+     scrolls away here instead -- normal on a phone, and the whole viewport
+     goes back to the reader. It stays sticky on wider screens, where the
+     preferences cost one short row. */
+  .bar{position:static;}
+}
+
+/* Same defect, same cause, a viewport Milestone 6 did not measure: at
+   812x375 the header is 132px, so sticky costs 35% of a short landscape
+   screen. Keyed on HEIGHT rather than width, because that is what actually
+   makes a sticky header expensive. */
+@media (max-height:480px){
+  .bar{position:static;}
+}
+
+/* ---- print ----
+   Whatever the reader chose on screen, paper is white. Bounded on purpose:
+   this restores legibility, it does not redesign the printed document. */
+@media print{
+  :root, :root[data-appearance="dark"]{
+    --bg:#fff; --card:#fff; --fg:#000; --muted:#333; --line:#999;
+    --accent:#000; --accent-soft:#fff; --disabled-fg:#555;
+    --warn:#000; --warn-soft:#fff;
+  }
+  .prefs, .modes, #sidebar-toggle{display:none;}   /* controls are not content */
+  .card{border:1px solid #999; box-shadow:none;}
+  .card-panel[hidden], .card-face[hidden]{display:none;}
+}
+
+/* Measured live at 375px: the source-answer link inherited inline-text sizing
+   and came out 21px tall. It is the only action in this card's foot, not a
+   word inside a sentence, so it gets a real target. Scoped to the Resource
+   Card on purpose -- the Study Cards' foot is verified Milestone 4 output and
+   is not being restyled here on the way past. */
+.card[data-role="resource"] .card-foot a{
+  display:inline-flex; align-items:center; min-height:2.75rem;
+}
