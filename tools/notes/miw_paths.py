@@ -26,8 +26,9 @@ REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 MEOCLASS1 = os.path.join(REPO_ROOT, 'meoclass1')
 ORALNOTES = os.path.join(MEOCLASS1, 'oralnotes')
+PASTPAPERS = os.path.join(MEOCLASS1, 'pastpapers')
 
-# --- Manifests: three, each authoritative for its own series. Never merge. ---
+# --- Manifests: four, each authoritative for its own series. Never merge. ---
 
 # ORAL / page-range series: Simon Sir Notes, Current Topics, MIW Engineering
 # Management Notes (Uday Notes). UNDERSCORES.
@@ -39,11 +40,19 @@ WRITTEN_MANIFEST = os.path.join(ORALNOTES, 'written_content_index.json')
 # QB series.
 QB_MANIFEST = os.path.join(MEOCLASS1, 'qb_content_index.json')
 
+# PAST PAPERS series: one full official written sitting per file (EM2607 etc.).
+# Fourth series, added 2026-08-07. Deliberately NOT folded into WRITTEN_MANIFEST:
+# that file is reserved for the WA topic-chapter series, which is a different
+# content shape (one topic, unlimited depth) from this one (one exam sitting,
+# marks-calibrated and time-boxed).
+PASTPAPERS_MANIFEST = os.path.join(PASTPAPERS, 'pastpapers_content_index.json')
+
 # Repo-relative forms, for tools that address GitHub rather than the local disk
 # (e.g. meoclass1/qb_health_check.py, which scans the remote tree).
 NOTES_MANIFEST_REL = 'meoclass1/oralnotes/notes_content_index.json'
 WRITTEN_MANIFEST_REL = 'meoclass1/oralnotes/written_content_index.json'
 QB_MANIFEST_REL = 'meoclass1/qb_content_index.json'
+PASTPAPERS_MANIFEST_REL = 'meoclass1/pastpapers/pastpapers_content_index.json'
 
 # Names that must never exist again. Deleted 2026-08-06 (commit 89291e5;
 # content recoverable at 64ab22d).
