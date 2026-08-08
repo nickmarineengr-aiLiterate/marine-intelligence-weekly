@@ -86,6 +86,31 @@ const FIXTURES = {
     recurrence: ['2022/mar/1', 'QP2601-Q7'],
     narrow: ['artificial general average', 'QP2601-Q3'],
   },
+  QP2602: {
+    probes: [
+      ['tojo maru', 'QP2602-Q1'],
+      ['carbon intensity indicator', 'QP2602-Q2'],
+      ['thermal runaway', 'QP2602-Q3'],
+      ['fatigue', 'QP2602-Q4'],
+      ['unseaworthy', 'QP2602-Q5'],
+      ['york antwerp', 'QP2602-Q6'],
+      ['accession', 'QP2602-Q7'],
+      ['net-zero framework', 'QP2602-Q8'],
+      ['exclusive economic zone', 'QP2602-Q9'],
+    ],
+    aliases: [
+      ['channelling', 'QP2602-Q1', 'the LLMC question (word never rendered on the card)'],
+      ['annual efficiency ratio', 'QP2602-Q2', 'Q2'],
+      ['un3480', 'QP2602-Q3', 'Q3'],
+      ['doctrine of stages', 'QP2602-Q5', 'Q5'],
+    ],
+    regulation: ['mepc.377(80)', 'QP2602-Q8'],
+    recurrence: ['2025/aug/q5', 'QP2602-Q5'],
+    // Must resolve to exactly ONE card on this page. February sets general
+    // average twice over (Q1 excepts it from limitation, Q6 is about it), so
+    // the narrow probe has to be Rule VII's own wording.
+    narrow: ['damage to machinery and boilers', 'QP2602-Q6'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';
