@@ -1,11 +1,14 @@
 # CURRENT STATUS — MEO Class I Written Questions / QP2607
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-08, at the close of the content-QA session. Read this first.
+Last updated: 2026-08-08, at the close of the V1 freeze / true-source demand session. Read this first.
 
 > **QP2607 IS THE FOUNDER REVIEW CANDIDATE.** There are **no class A (blocking) flags left**.
 > Q7's two publication blockers were closed against primary Gazette text this session. What
 > remains is four class B currency checks and two class C accepted limitations — see §8.
+
+> **QP2607 V1 TEMPLATE — FROZEN FOR CROSS-PAPER VALIDATION.** See §2a. First paper validated;
+> cross-paper validation still required. One paper does not prove the method universally.
 
 > Scope note: `AI_SESSION_HANDOVER.md` at the repository root is a *repository bootstrap*
 > handover dated 2026-07-30 and is stale. This file is the product-scoped status for Past
@@ -49,6 +52,77 @@ deployed. There is no such thing as a "private" field inside a committed spec.
 | Local provenance | `meoclass1/pastpapers/verification/LOCAL_SOURCE_PROVENANCE.md` | **git-ignored, local only** |
 
 Everything is FOUNDER REVIEW state: not published, not gated, not indexable.
+
+---
+
+## 2a. QP2607 V1 TEMPLATE FREEZE — 2026-08-08
+
+**QP2607 is frozen as `MIW WRITTEN QUESTIONS — V1 TEMPLATE`.**
+
+```
+FIRST-PAPER VALIDATED
+CROSS-PAPER VALIDATION STILL REQUIRED
+```
+
+One paper validates that the architecture *works*; it does not prove the method universally.
+QP2601 exists to test that, and has not been built.
+
+**Frozen at commit `b2535d8` — "Stabilise MIW learning and true-source reference contract".**
+
+### What is frozen
+
+| | |
+|---|---|
+| Learning modes | **Five, and no more**: Understand · Exam Plan · **Answer (default)** · Study Guide · Recall |
+| Spine | one canonical `answer_route`; knowledge map, recall test, exam plan and rapid-revision line are **derived, never authored** |
+| Written answer | numbered principal sections matching the route; blank skeleton for recall |
+| Remember / Cover | *Remember N route headings · Cover M core points beneath them* — two different targets, stated explicitly |
+| Support | flashcards (≥4, stable ids) · Quick / Rapid Revision · optional `understand_first` · optional `memory_cue` |
+| Verification | optional `reference_shelf` — **outside the mode selector**, currently empty by design |
+| Semantic guard | `SEMANTIC_GUARDS` in `validate_spec.py` — a derived layer may never be more categorical than its source |
+
+**Do not add a sixth mode.** Verification is a capability, not a way of studying — see
+`MIW_TRUE_SOURCE_CONTRACT.md` §1.
+
+### Founder decisions recorded this session
+
+**1 — Canonical corpus is separate from the relationship repository.**
+
+The MIW True Source corpus is a **separately governed canonical regulatory-content layer**: source
+content, edition, amendment/consolidation state, provenance, effective dates, structured and PDF
+representations, canonical section destinations.
+
+`RulesApp/repository/` **is not** to become the physical master store merely because it already
+holds regulatory nodes. It is an intelligence and relationship **consumer**. What is reused is its
+**logical ID convention** (`MARPOL-VI-14`, `IMSBCCode-4`, `FSSCode-9-2`), which is adequate and was
+adopted rather than replaced. One canonical source, many consumers.
+
+Nothing was moved, copied or imported. The other corpus was **not** assumed to be
+GitHub-synchronised — it is not checked out on this machine and was not inspected.
+
+**2 — CSS and JS stay inline for QP V1.**
+
+Paper pages are generated, so UI code cannot drift independently of the spec; the repeated payload
+is modest at one paper; and shared content-hashed assets previously introduced checkout/CRLF risk.
+No measured user problem justifies extraction.
+
+> **REVISIT AFTER MULTI-PAPER REAL-USAGE DATA.** Not before.
+
+### True source demand map
+
+**`docs/QP2607_TRUE_SOURCE_DEMAND_MAP.md`** — the handoff contract to the corpus-production track.
+
+Q1–Q9 object demand classified P / S / C, with both availability axes recorded separately: the
+**identity** axis verified against `RulesApp/repository/index/repo-data.json` (78 standards, 1,006
+nodes, measured 2026-08-08), and the **corpus** axis honestly `UNKNOWN` because the True Source
+store is separately governed and was not inspected.
+
+Headline: **49 primary objects; ≈29% have a stable identity today.** Full-corpus priority
+**MARPOL Annex VI → MARPOL Annex I → IMSBC (licence-gated)**; reference-pack priority
+**Merchant Shipping Act 2025 → Marine Insurance Act 1963 → IACS/RO Code**. FSS and LSA:
+**no direct July demand**.
+
+**`reference_shelf` stays empty** until a real resolvable object exists. No placeholders.
 
 ---
 
@@ -431,11 +505,17 @@ python tools/pastpapers/run_toolchain.py --self-test
 4. **Founder approval.**
 5. Only then decide gating / publication / indexability — and work the four class B
    currency checks in §8 immediately before publishing, not earlier.
-6. **Only after QP2607 is approved**, build QP2601–QP2606 against the frozen pattern.
+6. **Only after QP2607 is approved**, build QP2601–QP2606 against the frozen V1 template (§2a).
+   QP2601 is the **cross-paper validation** of the method, not merely the next paper.
 7. **Only after more than one paper**, mature the skill draft and consider the production
    agent. **Do not build the agent yet.**
 
 Q7 primary-source resolution is **done** (§8) and is no longer on this list.
+
+**Running in parallel, on a separate track:** the corpus session works
+`docs/QP2607_TRUE_SOURCE_DEMAND_MAP.md`. It does not block Founder review, and Founder review does
+not block it. The QP track's next involvement is step 8 of that document's handoff sequence —
+populating `reference_shelf` from returned object mappings. Nothing before then.
 
 ---
 
@@ -464,6 +544,12 @@ no horizontal overflow at 375px; `#q5` deep link opens expanded; searching
 - **Starting a second paper.** Not until QP2607 is approved.
 - **Building the autonomous production agent.**
 - **Any change to the settled architecture in §4–§6** without test evidence of a defect.
+- **Any change to the frozen V1 template in §2a** — adding a sixth learning mode, extracting shared
+  CSS/JS, or making `RulesApp/repository/` the physical corpus master. All three are Founder
+  decisions already taken; reopening one needs a Founder decision, not a session's judgement.
+- **Populating `reference_shelf`** before a real resolvable corpus object exists. No placeholders.
+- **Building any part of the viewer or resolver** — no PDF.js, no auth, no entitlement, no
+  watermarking, no source ingestion. Only the `reference_href()` seam exists, and it stays a seam.
 
 ---
 

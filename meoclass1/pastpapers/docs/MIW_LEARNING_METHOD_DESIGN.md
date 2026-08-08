@@ -3,6 +3,11 @@
 **Status: PILOT. Not final until the Founder has reviewed QP2607.**
 Written 2026-08-08. Applies to the Past Written Papers (QP) series.
 
+> **Structurally frozen as the V1 template on 2026-08-08** — five modes, one canonical
+> `answer_route`, everything else derived. See `CURRENT_STATUS.md` §2a. The structure is settled;
+> whether the *method* works remains open until the Founder has reviewed QP2607 and until QP2601
+> provides cross-paper validation. **Do not add a sixth mode.**
+
 This document explains *why* the QP question object has the shape it has. It is the design
 rationale a future paper-production session should read before authoring QP2601–QP2612.
 

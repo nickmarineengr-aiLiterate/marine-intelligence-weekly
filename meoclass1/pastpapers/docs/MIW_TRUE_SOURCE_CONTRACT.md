@@ -241,7 +241,37 @@ schedules Q1 needs do not exist (only chapter-level nodes), and
 That mixed state is the normal condition this contract is designed for, and it is why the
 availability states in section 8 exist.
 
-**FOUNDER DECISION REQUIRED — one question only:** is `RulesApp/repository/` the intended
-resolver for QP references, or is the July corpus a separate store? The contract works either
-way; only `reference_href()` and the resolver lookup depend on the answer. Nothing should be
-populated until that is settled.
+**FOUNDER DECISION — SETTLED 2026-08-08. The July corpus is a SEPARATE STORE.**
+
+The MIW True Source corpus is a separately governed canonical regulatory-content layer.
+`RulesApp/repository/` is an intelligence and relationship **consumer**, not the physical master
+copy. What is reused from it is the **logical ID convention** in §4, which is adequate and was
+adopted rather than replaced. One canonical source, many consumers — Written Questions, Question
+Bank, Oral Notes, MIW Notes, RulesApp engineering objects, future verification engines.
+
+`reference_href()` and the resolver lookup therefore resolve against the True Source layer, not
+against `repo-data.json`. Nothing is populated until real objects exist there.
+
+Recorded in `CURRENT_STATUS.md` §2a. The demand this decision has to serve is enumerated in
+**`QP2607_TRUE_SOURCE_DEMAND_MAP.md`**.
+
+---
+
+## 13. Coverage figures — re-measured 2026-08-08
+
+The 788-node figure in §4 is stale. Measured directly from `repo-data.json`: **78 registered
+standards, 1,006 nodes, of which 31 standards are registered shells carrying zero nodes.**
+Re-measure rather than quoting either number.
+
+Two findings from that survey belong here because they affect the **resolver**, not just the corpus:
+
+- **MARPOL Annex VI is represented twice**, under `marpol-73-78` (`MARPOL-VI-14…`) and
+  `mepc-328-76` (`MEPC32876-3-14…`), with disjoint node vocabularies. A question citing "Annex VI
+  regulation 14" has two candidate ids and no stated rule for choosing. **Resolve before populating
+  any Q4 reference.** `repository/index/provision-truth-aliases.json` already provides the mechanism.
+- **Sub-paragraph tails repeat across annexes.** `MARPOL-I-14-146` (oil filtering, 15 ppm) exists;
+  Q4 needs `MARPOL-VI-14-146` (fuel changeover record). The annex token disambiguates correctly and
+  the scheme works — but **every label must name the annex**, so no derived layer can render
+  "reg 14.6" unqualified. This is §10 applied to ids.
+
+No syntax collision was found across 1,006 nodes. The convention in §4 is **adopted unchanged**.
