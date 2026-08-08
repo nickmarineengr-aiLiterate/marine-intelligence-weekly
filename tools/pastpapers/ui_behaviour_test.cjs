@@ -111,6 +111,33 @@ const FIXTURES = {
     // the narrow probe has to be Rule VII's own wording.
     narrow: ['damage to machinery and boilers', 'QP2602-Q6'],
   },
+  QP2603: {
+    probes: [
+      ['signature subject to ratification', 'QP2603-Q1'],
+      ['cargo securing manual', 'QP2603-Q2'],
+      ['joint war committee', 'QP2603-Q3'],
+      ['ship sanitation', 'QP2603-Q4'],
+      ['gassing up', 'QP2603-Q5'],
+      ['condition assessment', 'QP2603-Q6'],
+      ['propeller', 'QP2603-Q7'],
+      ['thermal runaway', 'QP2603-Q8'],
+      ['hong kong convention', 'QP2603-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['hkc', 'QP2603-Q9', 'the ship recycling question (abbreviation never rendered)'],
+      ['dpt', 'QP2603-Q7', 'Q7'],
+      ['strait of hormuz', 'QP2603-Q3', 'Q3'],
+    ],
+    regulation: ['a.1049(27)', 'QP2603-Q6'],
+    // March Q1 is an EXACT repeat of February Q7, so its recurrence table
+    // carries the February code -- which is exactly what should be findable.
+    recurrence: ['2026/feb/q7', 'QP2603-Q1'],
+    // Must resolve to exactly ONE card. March sets three questions that mention
+    // emergency shutdown or release in some form, so the probe is the coupling's
+    // own full name.
+    narrow: ['emergency release coupling', 'QP2603-Q5'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';
@@ -353,7 +380,22 @@ ok('load() returns empty rather than throwing', JSON.stringify(load(blocked, KEY
 let threw = false;
 try { save(blocked, KEY_BM, { a: 1 }); } catch (e) { threw = true; }
 ok('save() is a no-op rather than throwing', threw === false);
-ok('search still works with storage blocked', search('general average').length === 1);
+// Search is pure and must keep working when localStorage is unavailable.
+//
+// This probe is derived from the paper's OWN fixtures. It previously read
+// `search('general average').length === 1`, which quietly assumed every paper
+// in the series sets a general average question -- true of QP2607, QP2601 and
+// QP2602 by coincidence, false of QP2603, which failed here on a page whose
+// search was working perfectly. That is the same defect class as the old
+// glob('EM*.html') and the hard-coded QP2607 fixtures: a harness that derives
+// its page list dynamically while keeping a paper-specific assumption inline.
+// The guard was NOT weakened -- it still fails if search returns nothing, and
+// a paper with no probes at all is already failed above.
+const blockedProbe = (F.probes[0] || [null])[0];
+ok('search still works with storage blocked',
+   !!blockedProbe && storageOK(blocked) === false && search(blockedProbe).length > 0,
+   'probe ' + JSON.stringify(blockedProbe) + ' returned ' +
+   JSON.stringify(blockedProbe ? search(blockedProbe).map(c => c.qid) : []));
 
 // corrupt payload
 const corrupt = makeStore(false);
