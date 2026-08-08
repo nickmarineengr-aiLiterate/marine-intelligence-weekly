@@ -237,7 +237,10 @@ fixed by making the field conform to its own vocabulary while stating the truth 
 HIGH, Q7 is now MEDIUM because its statutory facts are settled. Neither was suppressed.
 
 Q7 briefly went 13 words over band when the section citations were added; it was tightened
-back to 645 rather than becoming a third documented exception.
+back to **650**, the band ceiling, rather than becoming a third documented exception.
+
+Model answer lengths, for reference: Q1 614 · Q2 709 · Q3 606 · Q4 593 · Q5 560 · Q6 695 ·
+Q7 650 · Q8 568 · Q9 579.
 
 ### `.gitattributes` now pins LF
 
