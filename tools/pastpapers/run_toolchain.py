@@ -149,6 +149,8 @@ def main():
         argv = [os.path.join(T, 'audit_paper.py'), rel]
         if args.gated:
             argv.append('--require-gate')
+        if args.publish:
+            argv.append('--publish')
         rc, w = run('AUDIT', argv, args.verbose)
         rc_total += rc
         warn_total += w

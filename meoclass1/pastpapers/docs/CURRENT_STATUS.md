@@ -1,7 +1,11 @@
 # CURRENT STATUS — MEO Class I Written Questions / QP2607
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-08, at the close of the QP-series architecture session. Read this first.
+Last updated: 2026-08-08, at the close of the content-QA session. Read this first.
+
+> **QP2607 IS THE FOUNDER REVIEW CANDIDATE.** There are **no class A (blocking) flags left**.
+> Q7's two publication blockers were closed against primary Gazette text this session. What
+> remains is four class B currency checks and two class C accepted limitations — see §8.
 
 > Scope note: `AI_SESSION_HANDOVER.md` at the repository root is a *repository bootstrap*
 > handover dated 2026-07-30 and is stale. This file is the product-scoped status for Past
@@ -16,9 +20,10 @@ Last updated: 2026-08-08, at the close of the QP-series architecture session. Re
 | Path | `F:\Marine-Intelligence-Weekly` |
 | Remote | `https://github.com/nickmarineengr-aiLiterate/marine-intelligence-weekly.git` |
 | **Visibility** | **PUBLIC** — verified via the GitHub API this session (`"private": false`) |
-| Branch | `pastpapers/em2607-founder-review` |
+| Branch | `pastpapers/em2607-founder-review` — the branch NAME deliberately keeps the historical wording; the product identity is QP2607. Do not rename the branch for cosmetics. |
 | Branched from | `main` @ `2bf6e49` (unchanged; nothing merged to main) |
-| Push status | **RESOLVED.** Branch pushed and tracking `origin/pastpapers/em2607-founder-review`. An off-machine backup now exists. |
+| Push status | **RESOLVED.** Branch pushed and tracking `origin/pastpapers/em2607-founder-review`. |
+| Architecture checkpoint | `d078843` — "Build scalable QP series architecture and migrate EM2607 to QP2607" |
 
 All git commands in this repo need `-c safe.directory=*`.
 
@@ -143,6 +148,11 @@ QUESTION
   -> cross-links / recurrence
 ```
 
+**Every re-verification flag must carry a class** from `A_BLOCKING` / `B_CURRENCY_CHECK` /
+`C_ACCEPTED_LIMITATION`, plus a `claim` and a `why`. `validate_spec.py` rejects anything
+else and prints the blocking count, so "is this publishable?" is answered by the toolchain
+rather than by reading prose. A flag that no longer applies is **deleted**, not downgraded.
+
 **Study guide spine — all six required:** Why this structure scores · Common mistakes ·
 Examiner traps · Likely oral follow-up · Memory framework · Regulation and source map.
 Plus at least one section whose heading **starts with** `Uncertainty` — the tail is
@@ -189,15 +199,20 @@ python tools/pastpapers/run_toolchain.py --self-test
 ```
 
 ```
-SPEC          PASS  (4 warning(s))
+SPEC          PASS  (2 warning(s))
 PAPER BUILD   PASS
 INDEX BUILD   PASS
 UI BEHAVIOUR  PASS  1 page(s)      42 assertions, was 34
 KNOWN TRAPS   PASS
 HEALTH        PASS
 AUDIT         PASS
-ALL STAGES PASS   4 warning(s)
+ALL STAGES PASS   2 warning(s)
 ```
+
+`--publish` also passes in full. That is new: `audit_paper.py` used to rebuild in review
+mode and compare against a publish-built page, so **`--publish` could never pass its own
+audit** — a failure that would have surfaced only at the moment of publication. It now
+takes `--publish` and `run_toolchain.py` passes it through.
 
 Rebuild is **byte-identical** — verified by hashing all four generated artefacts before
 and after a second run.
@@ -207,15 +222,22 @@ asserts they are caught. Faults that are an *absence* (a page that lost its stud
 migration; a month cell that lost its link) are controlled by `strip_from_pages`, which
 removes the marker instead of appending one. Keep it that way.
 
-### The 4 warnings are accepted, not defects
+### The 2 remaining warnings are accepted, not defects
 
 | Warning | Decision |
 |---|---|
 | Q2 model answer ≈ 709 words (band 450–650) | **Accepted.** Corrected Bunkers/CLC legal wording. Do not shorten. |
 | Q6 model answer ≈ 695 words | **Accepted.** Zero-carbon qualification + ICE-vs-fuel-cell contrast. Do not shorten. |
-| 2 × re-verify notices | Informational — see §8. |
 
 **Do not spend a session trimming these.**
+
+Warnings went 4 → 2. The other two were `freshness_risk` values that did not start with
+LOW/MEDIUM/HIGH (`"MEDIUM-HIGH …"` on Q4, `"HIGHEST IN THE PAPER …"` on Q7). Both were
+fixed by making the field conform to its own vocabulary while stating the truth — Q4 is
+HIGH, Q7 is now MEDIUM because its statutory facts are settled. Neither was suppressed.
+
+Q7 briefly went 13 words over band when the section citations were added; it was tightened
+back to 645 rather than becoming a third documented exception.
 
 ### `.gitattributes` now pins LF
 
@@ -226,24 +248,61 @@ which makes the byte-reproducibility guarantee actually true.
 
 ---
 
-## 8. PUBLICATION BLOCKER: Q7 primary-source verification
+## 8. Q7 — RESOLVED against primary sources. Publication register.
 
-**Q7 — Merchant Shipping Act, 2025.** Two blockers, both real:
+**Both Q7 blockers are closed.** Full detail in `verification/QP2607/Q7.md`.
 
-1. **Commencement scope not established.** `S.O. 1244(E)` of 10 March 2026 brought the Act
-   into force from **15 March 2026**. Whether that commenced **every** provision is **not
-   confirmed** — the Act permits different dates for different provisions.
-2. **No section-level citations.** Full statutory text could not be retrieved (India Code
-   PDF returned HTTP 403). **No section number of the 2025 Act is cited anywhere**,
-   deliberately.
+**Sources actually read**, both in full:
 
-Re-ground from primary Government of India / Gazette / DG Shipping sources before any
-release. Verified and safe: Act No. 24 of 2025, assent 18 August 2025, in force
-15 March 2026 by S.O. 1244(E), repeals the MS Act 1958 (saving Part XIV, not s.411A) and
-the Coasting Vessels Act 1838.
+- **The Act** — Gazette of India, Extraordinary, Part II Section 1, No. 29, 18 August 2025,
+  `CG-DL-E-19082025-265484`, via **`dgma.gov.in`** (118 pages).
+- **S.O. 1244(E)** — Gazette of India, Extraordinary, Part II Section 3(ii), No. 1192,
+  10 March 2026, Ministry of Ports, Shipping and Waterways, `F. No. SR-20020/5/2020-ML`,
+  `CG-DL-E-11032026-270832`, via **`shipmin.gov.in`**.
 
-**Seven claims carry `reverify_before_publication` flags** (Q1 ×2, Q4 ×1, Q6 ×2, Q7 ×2).
-`validate_spec.py` prints them every run.
+`indiacode.nic.in` returned **HTTP 403** again. **The reusable lesson: when India Code
+blocks automated retrieval, go to the administering Ministry (`shipmin.gov.in`) and to
+`dgma.gov.in`.** That is what cleared a blocker the previous session could not.
+
+**Commencement — the question mattered.** Section 1(2) *expressly* permits different dates
+for different provisions, so partial commencement was a real possibility. But S.O. 1244(E)
+appoints a single date for "the provisions of said Act", enumerating nothing and excluding
+nothing. **The whole Act came into force on 15 March 2026; the staging power was not
+exercised.**
+
+**Section-level citations now carried**, each read in the Gazette: `s.1(2)` commencement ·
+`s.15(1)` ownership incl. NRI/OCI · `s.15(2)` OCI-wholly-owned not required to register ·
+`s.16` bareboat charter-cum-demise · `s.17` recycling registration · `s.59` minimum age
+sixteen · `s.324(1)` repeal · `s.325` consequential amendment. **325 sections, 16 Parts.**
+
+**One claim was corrected.** The answer said the Act gives effect to "**IMO** and ILO
+instruments". The Act never names the IMO (0 occurrences). It now cites the **long title's**
+treaty-compliance purpose and the **MLC 2006**, which *is* named in the Act.
+
+> Caution for the corpus: a widely-read public secondary source still described the Act as
+> *"not yet in force"* in late March 2026, after commencement. Go to the Gazette.
+
+### The publication register — `A` / `B` / `C`, now enforced
+
+`validate_spec.py` requires every flag to carry a class and prints the blocking count.
+
+| Class | Meaning | Count |
+|---|---|---|
+| **A — blocking** | Publication cannot proceed | **0** |
+| **B — currency check** | Ships, but re-check immediately before publication | 4 |
+| **C — accepted limitation** | Ships as-is with the limitation stated in the answer | 2 |
+
+| Q | Flag | Class |
+|---|---|---|
+| Q1 | IMSBC amendment currency (08-25 mandatory 1 Jan 2027) | B |
+| Q1 | IRON ORE PELLETS = Group C, authoritative-secondary only — MIW holds no licensed IMSBC Code | C |
+| Q4 | ECA list and dates; Canadian Arctic / Norwegian Sea limits bite 1 Mar 2027 | B |
+| Q6 | MSC.1/Circ.1687 still operative and non-mandatory — confirm MSC 111 did not supersede/renumber it | B |
+| Q6 | Marine fuel cell maturity vs ammonia dual-fuel | C |
+| Q7 | Status of subordinate Merchant Shipping Rules 2026 (draft as at Aug 2026) | B |
+
+**Class C is not a promotion to primary.** It is a decision to publish with the limitation
+stated. Do not silently re-label a C as verified.
 
 ---
 
@@ -256,9 +315,18 @@ utmost good faith, s.20 disclosure incl. the four s.20(3) exceptions).
 wrong statute for an Indian examination. QP2607 Q9 carries an **explicit caution** rather
 than silently inheriting it. `meoclass1/QB9_E.html` handles it correctly.
 
+**The QB9_C cross-link has been REMOVED from Q9.** The caution was carried as the link
+*label*, so the entire warning rendered as one long hyperlink pointing at the flawed page —
+the warning text was the click target. The warning now lives as prose in the Q9 study guide,
+where it informs without inviting the click. Q9 still links to `QB9_E`, which is correct.
+
 A broad Question Bank repair is **deliberately deferred** and is a separate task. Once
-QB9_C is fixed, soften the caution in `specs/QP2607.json` (Q9 `cross_links`) and
+QB9_C is fixed, restore the cross-link in `specs/QP2607.json` (Q9 `cross_links`) and
 regenerate. Recorded as trap 8.
+
+> Template lesson: a `cross_links` entry renders as an anchor, so its `label` must be a
+> destination name, never a warning. If a target needs a caveat, the caveat belongs in the
+> study guide and the link belongs nowhere.
 
 ---
 
@@ -327,16 +395,18 @@ python tools/pastpapers/run_toolchain.py --self-test
 
 ## 14. Outstanding work — priority order
 
-1. **Founder visual review** of the three pages. Four CSS/render defects were found and
-   fixed this session (§15); the pages have not yet been seen by the Founder.
-2. **Q7 primary-source resolution** (§8). The publication blocker.
-3. Correct any defects found in review. **Edit the spec, never the HTML.**
-4. Re-run the toolchain; confirm deterministic rebuild.
-5. **Founder approval.**
-6. Only then decide gating / publication / indexability.
-7. **Only after QP2607 is approved**, build QP2601–QP2606 against the frozen pattern.
-8. **Only after more than one paper**, mature the skill draft and consider the production
+1. **Founder content and UI review of QP2607.** This is now the only thing in the way.
+   The pages have still not been seen by the Founder. Everything machine-checkable passes.
+2. Correct any defects found in review. **Edit the spec, never the HTML.**
+3. Re-run the toolchain; confirm deterministic rebuild.
+4. **Founder approval.**
+5. Only then decide gating / publication / indexability — and work the four class B
+   currency checks in §8 immediately before publishing, not earlier.
+6. **Only after QP2607 is approved**, build QP2601–QP2606 against the frozen pattern.
+7. **Only after more than one paper**, mature the skill draft and consider the production
    agent. **Do not build the agent yet.**
+
+Q7 primary-source resolution is **done** (§8) and is no longer on this list.
 
 ---
 

@@ -81,6 +81,11 @@ def main():
     ap.add_argument('--html')
     ap.add_argument('--manifest')
     ap.add_argument('--require-gate', action='store_true')
+    # Must mirror the mode the page on disk was built in. Without this the
+    # reproducibility check rebuilds in review mode and compares against a
+    # publish-mode page, so --publish could never pass its own audit -- the
+    # failure would surface only at the moment of publication.
+    ap.add_argument('--publish', action='store_true')
     args = ap.parse_args()
 
     # -- 1 valid JSON -------------------------------------------------------
@@ -202,6 +207,7 @@ def main():
 
     # -- 10 gate state ------------------------------------------------------
     gated = bool(GATE_RE.search(html))
+    publish = args.publish
     stub = GATE_STUB in html
     if args.require_gate and not gated:
         err('10 gate required but not present')
@@ -234,7 +240,7 @@ def main():
     try:
         sys.path.insert(0, HERE)
         import build_paper
-        rebuilt = build_paper.build(d, gated=gated)
+        rebuilt = build_paper.build(d, gated=gated, publish=publish)
         # Compare on normalised line endings. git's autocrlf can hand back a
         # CRLF working copy of an LF-written file, which is not a content
         # difference and must not be reported as one. This repo has been bitten

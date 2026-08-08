@@ -53,8 +53,24 @@ PROV_CLASSES = ['P1_PRIMARY_VERIFIED', 'P2_AUTHORITATIVE_SECONDARY',
 
 RISK = ('LOW', 'MEDIUM', 'HIGH')
 
+# The publication register. Every re-verification flag must say what kind of
+# obligation it creates, because "re-verify before publication" on its own does
+# not tell a future session whether the paper can ship.
+#
+#   A  blocks publication until resolved
+#   B  ships, but the fact is date-driven and must be re-checked immediately
+#      before publication and before each new sitting
+#   C  ships as-is: a known, accepted limit on the evidence (typically an
+#      authoritative-secondary source where the primary is not held). Recording
+#      it as C is NOT a promotion to primary -- it is a decision to publish with
+#      the limitation stated in the answer.
+#
+# A flag that is no longer needed is DELETED, not downgraded to a fourth class.
+REVERIFY_CLASSES = ('A_BLOCKING', 'B_CURRENCY_CHECK', 'C_ACCEPTED_LIMITATION')
+
 errs, warns = [], []
 total_reverify = [0]
+blocking = [0]
 
 
 def err(m):
@@ -334,8 +350,18 @@ def main(path):
                 err('%s: missing reverify_before_publication (use [] if none)' % qn)
             else:
                 for item in rv:
-                    print('  [REVFY] %s: %s -- %s'
-                          % (qn, item.get('claim', '?'), item.get('why', '')))
+                    cls = item.get('class')
+                    if cls not in REVERIFY_CLASSES:
+                        err('%s: reverify class %r not one of %s. Every flag must '
+                            'say whether it blocks publication (A), needs a currency '
+                            'check first (B), or is an accepted limitation (C).'
+                            % (qn, cls, list(REVERIFY_CLASSES)))
+                    if not item.get('claim') or not item.get('why'):
+                        err('%s: reverify entry needs both claim and why' % qn)
+                    print('  [REVFY] %s [%s]: %s -- %s'
+                          % (qn, cls, item.get('claim', '?'), item.get('why', '')))
+                    if cls == 'A_BLOCKING':
+                        blocking[0] += 1
                 total_reverify[0] += len(rv)
 
         vf = q.get('verification_file')
@@ -388,8 +414,11 @@ def main(path):
         print('  [ERROR] %s' % e)
     print()
     print('%s: %d question(s), %d error(s), %d warning(s), %d claim(s) flagged '
-          'for re-verification before publication'
-          % (d.get('paper_id', '?'), len(qs), len(errs), len(warns), total_reverify[0]))
+          'for re-verification before publication (%d blocking)'
+          % (d.get('paper_id', '?'), len(qs), len(errs), len(warns),
+             total_reverify[0], blocking[0]))
+    if blocking[0]:
+        print('  PUBLICATION BLOCKED: %d class A flag(s) outstanding.' % blocking[0])
     sys.exit(1 if errs else 0)
 
 
