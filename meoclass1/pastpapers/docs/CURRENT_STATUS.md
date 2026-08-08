@@ -1,14 +1,20 @@
-# CURRENT STATUS — MEO Class I Written Questions / QP2607
+# CURRENT STATUS — MEO Class I Written Questions / QP2607 + QP2601
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-08, at the close of the V1 freeze / true-source demand session. Read this first.
+Last updated: 2026-08-08, at the close of the **QP2601 cross-paper validation** session. Read this first.
 
-> **QP2607 IS THE FOUNDER REVIEW CANDIDATE.** There are **no class A (blocking) flags left**.
-> Q7's two publication blockers were closed against primary Gazette text this session. What
+> **TWO PAPERS ARE NOW BUILT. 2 of the 6 available 2026 sittings.**
+> **QP2607 (July)** — frozen V1 template, Founder review candidate.
+> **QP2601 (January)** — Founder review candidate, built this session. **0 class A blocking flags.**
+> Next planned: **QP2602 (February)**. Not started, and not to be started in this session.
+
+> **QP2607 IS A FOUNDER REVIEW CANDIDATE.** There are **no class A (blocking) flags left**.
+> Q7's two publication blockers were closed against primary Gazette text. What
 > remains is four class B currency checks and two class C accepted limitations — see §8.
 
-> **QP2607 V1 TEMPLATE — FROZEN FOR CROSS-PAPER VALIDATION.** See §2a. First paper validated;
-> cross-paper validation still required. One paper does not prove the method universally.
+> **QP2607 V1 TEMPLATE — FROZEN, AND NOW CROSS-PAPER VALIDATED.** See §2a and the new §2b.
+> QP2601 was built on the frozen template **without a single schema change**. Two defects were
+> found — both in the *test harness and trap layer*, not in the template — and both are fixed.
 
 > Scope note: `AI_SESSION_HANDOVER.md` at the repository root is a *repository bootstrap*
 > handover dated 2026-07-30 and is stale. This file is the product-scoped status for Past
@@ -23,7 +29,8 @@ Last updated: 2026-08-08, at the close of the V1 freeze / true-source demand ses
 | Path | `F:\Marine-Intelligence-Weekly` |
 | Remote | `https://github.com/nickmarineengr-aiLiterate/marine-intelligence-weekly.git` |
 | **Visibility** | **PUBLIC** — verified via the GitHub API this session (`"private": false`) |
-| Branch | `pastpapers/em2607-founder-review` — the branch NAME deliberately keeps the historical wording; the product identity is QP2607. Do not rename the branch for cosmetics. |
+| Branch | **`pastpapers/qp2601-founder-review`** — current working branch, created from `4230a83` (the QP2607 V1 freeze). Follows the established `pastpapers/<paper>-founder-review` convention. |
+| Previous branch | `pastpapers/em2607-founder-review` — **untouched and preserved** at `4230a83`. The branch NAME deliberately keeps the historical wording; the product identity is QP2607. Do not rename it for cosmetics. |
 | Branched from | `main` @ `2bf6e49` (unchanged; nothing merged to main) |
 | Push status | **RESOLVED.** Branch pushed and tracking `origin/pastpapers/em2607-founder-review`. |
 | Architecture checkpoint | `d078843` — "Build scalable QP series architecture and migrate EM2607 to QP2607" |
@@ -123,6 +130,64 @@ Headline: **49 primary objects; ≈29% have a stable identity today.** Full-corp
 **no direct July demand**.
 
 **`reference_shelf` stays empty** until a real resolvable object exists. No placeholders.
+
+---
+
+## 2b. QP2601 — CROSS-PAPER VALIDATION RESULT, 2026-08-08
+
+**QP2601 (January 2026) is built: all 9 questions, Founder review candidate, 0 blocking flags.**
+
+| Output | Path |
+|---|---|
+| Paper | `meoclass1/pastpapers/QP2601.html` — **generated** |
+| Canonical content | `meoclass1/pastpapers/specs/QP2601.json` — **SOURCE OF TRUTH** |
+| Verification records | `meoclass1/pastpapers/verification/QP2601/Q1..Q9.md` + `DEDUP_AND_SOURCE_PLAN.md` |
+| True source demand | `docs/QP2601_TRUE_SOURCE_DEMAND_MAP.md` |
+| Pattern register | `docs/2026_PATTERN_REGISTER.md` — **new, opened this session** |
+
+### The template held
+
+**No schema change was required.** The frozen question object absorbed a six-limb legal question
+(Q3), a four-task institutional question (Q6) and a four-sub-item technical question (Q5) unchanged.
+Five modes, one `answer_route`, everything else derived — all held. **No sixth mode. No new
+archetype. No new primary category.** `reference_shelf` remains empty on every question.
+
+### Two defects found — both in the harness, not the template
+
+1. **`ui_behaviour_test.cjs` hard-coded QP2607 fixtures while deriving its page list from the specs.**
+   Adding a second spec made it run the July assertions against the January page: **17 failures**.
+   Fixed by keying probes to `paper_id`, deriving study-state ids from the actual cards, and — the
+   important part — **failing loudly when a page has no fixtures**, so a future paper cannot report a
+   clean run having tested nothing. This is the same class of defect as the old `glob('EM*.html')`
+   lesson in §4. *Add a `FIXTURES` entry whenever a paper is added.*
+2. **Known trap 1 fired on correct prose.** Its GREP phrase, `strict liability on the registered
+   owner`, is right for the **Nairobi Wreck Removal Convention** and for **CLC channelling** — it is
+   only wrong for the Bunkers Convention. The guard was **left at full strength** and the QP2601
+   wording changed instead; a scope warning is recorded in `known_traps.md`. If a later paper hits it
+   again on correct prose, that is the evidence to move it to `GREP: SKIP`. Not on one paper.
+
+### Regression against QP2607 — clean
+
+`QP2607.html` is **byte-identical** before and after (`a574cd36261778e4`), and `specs/QP2607.json`
+has **no diff** against `4230a83`. `index.html`, `topics-2026.html` and the manifest changed, which
+is correct — they are multi-paper aggregates that must now include January. Rebuild is deterministic:
+all five artefacts byte-identical across two consecutive runs.
+
+### Cross-paper behaviour now demonstrable
+
+- Searching *"general average"* on the index returns **both** `QP2601.html#q3` and `QP2607.html#q5`.
+- `topics-2026.html` renders **18 question links, zero duplicates** — the one-primary-category rule
+  holds at two papers.
+- Study state is namespaced per `question_id`, so January and July progress coexist.
+
+### The one open quality question — for Founder decision
+
+**All 9 QP2601 model answers exceed the 450–650 word band (744–981); July had 2 of 9, ceiling 709.**
+A trim pass removed ~400 words by moving explanation into the study guide, where the three-layer rule
+puts it, but they remain above band. Part is real — January's questions carry more printed limbs than
+July's. Part is authoring drift. **Decide before QP2602 whether the band should be expressed per
+limb-count.** Related: `understand_first` was used on **9/9** questions where the design says it is
+conditional (July: 6/9). Both are recorded in `docs/2026_PATTERN_REGISTER.md` §4.
 
 ---
 
@@ -297,15 +362,22 @@ python tools/pastpapers/run_toolchain.py --self-test
 ```
 
 ```
-SPEC          PASS  (2 warning(s))
+SPEC          PASS  (9 warning(s))     <- QP2601, all 9 are word-count band warnings
+SPEC          PASS  (2 warning(s))     <- QP2607, the two accepted exceptions below
+PAPER BUILD   PASS
 PAPER BUILD   PASS
 INDEX BUILD   PASS
-UI BEHAVIOUR  PASS  1 page(s)      58 assertions
+UI BEHAVIOUR  PASS  2 page(s)
 KNOWN TRAPS   PASS
 HEALTH        PASS
 AUDIT         PASS
-ALL STAGES PASS   2 warning(s)
+AUDIT         PASS
+ALL STAGES PASS   11 warning(s)
 ```
+
+Two specs now, so the per-spec stages run twice. **11 warnings = 2 QP2607 (accepted, below) +
+9 QP2601 word-count warnings** — see §2b for the open question those raise. Zero errors, zero
+blocking flags on either paper.
 
 `--publish` also passes in full. That is new: `audit_paper.py` used to rebuild in review
 mode and compare against a publish-built page, so **`--publish` could never pass its own
@@ -505,10 +577,23 @@ python tools/pastpapers/run_toolchain.py --self-test
 4. **Founder approval.**
 5. Only then decide gating / publication / indexability — and work the four class B
    currency checks in §8 immediately before publishing, not earlier.
-6. **Only after QP2607 is approved**, build QP2601–QP2606 against the frozen V1 template (§2a).
-   QP2601 is the **cross-paper validation** of the method, not merely the next paper.
-7. **Only after more than one paper**, mature the skill draft and consider the production
-   agent. **Do not build the agent yet.**
+6. ~~Only after QP2607 is approved, build QP2601.~~ **DONE.** The Founder directed production to
+   continue, and QP2601 is built and cross-paper validated — see §2b.
+7. **Founder content and UI review of QP2601**, alongside QP2607. Two decisions are waiting: the
+   model-answer word band (§2b) and whether `understand_first` should be pruned to the questions
+   that genuinely need it.
+8. **Build QP2602 (February 2026)** against the frozen template, once QP2601 is accepted. Then
+   QP2603, QP2604, QP2606. **May 2026 does not exist in the source set** — keep it unavailable.
+   Add a `FIXTURES` entry to `ui_behaviour_test.cjs` for every new paper.
+9. **After all six 2026 papers**, run the full pattern/repeat/reference analysis using
+   `docs/2026_PATTERN_REGISTER.md`, then begin the 2025 papers.
+10. **Only after more than one paper**, mature the skill draft and consider the production
+   agent. Two papers now exist, so the skill draft is worth maturing — but **do not build the
+   agent yet.**
+
+**Search payload watch:** `index.html` carries both papers' search blobs. The threshold recorded in
+§4 — split the search index into a fetched JSON file **when the sixth paper is added** — is unchanged
+and has not been reached.
 
 Q7 primary-source resolution is **done** (§8) and is no longer on this list.
 
@@ -541,7 +626,10 @@ no horizontal overflow at 375px; `#q5` deep link opens expanded; searching
 - **Publication, gating or removing `noindex`.** Blocked on Q7 regardless.
 - **Committing the source PDFs**, or deleting them.
 - **Merging this branch into `main`.**
-- **Starting a second paper.** Not until QP2607 is approved.
+- ~~Starting a second paper. Not until QP2607 is approved.~~ **LIFTED by Founder direction,
+  2026-08-08.** The Founder directed production to continue through the six available 2026 sittings
+  before a broader publication decision. QP2601 was built under that direction. Starting **QP2602**
+  still needs QP2601 to be accepted first.
 - **Building the autonomous production agent.**
 - **Any change to the settled architecture in §4–§6** without test evidence of a defect.
 - **Any change to the frozen V1 template in §2a** — adding a sixth learning mode, extracting shared

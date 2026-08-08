@@ -21,6 +21,19 @@ bareboat charterer, manager and operator**. Article 3 makes them liable jointly 
 severally. Article 7(1) separately puts the **compulsory insurance** duty on the
 **registered owner** alone, for ships over 1,000 GT. Liability and the insurance
 obligation attach to different persons. Found in QP2607 Q2 v0.1 (red-team RT-07).
+
+**Scope warning — added during QP2601 production, 2026-08-08.** This GREP phrase is
+*not* wrong in every context. Liability **is** on the registered owner under the
+**Nairobi Wreck Removal Convention 2007**, and CLC 1992 **channels** liability to the
+registered owner. QP2601 Q4 tripped this trap with a sentence about Nairobi that was
+correct. The phrase was left auto-scanned at full strength and the QP2601 wording was
+changed instead — "makes the registered owner strictly liable" — so no protection was
+given up.
+
+If a later paper hits this again on a correct Nairobi or CLC statement, that is
+evidence the phrase belongs at `GREP: SKIP`, with trap 2 — which carries the
+Bunkers-qualified wording — remaining the auto-scanned form. Do not make that change
+on one paper's evidence.
 GREP: strict liability on the registered owner
 
 ### 2. Bunkers Convention — same error, other phrasings

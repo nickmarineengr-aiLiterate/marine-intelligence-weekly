@@ -32,7 +32,67 @@ function ok(name, cond, extra) {
   else { fail++; console.log('  FAIL  ' + name + (extra ? '  -> ' + extra : '')); }
 }
 
+// ---- per-paper fixtures -----------------------------------------------------
+// The harness runs against EVERY page derived from the specs, so the content
+// probes cannot be hard-coded to one paper. Adding QP2601 made a single fixed
+// QP2607 probe list fail 17 assertions on the new page while still reporting
+// "2 page(s)" -- the same class of defect as deriving build targets from a
+// filename glob. Probes are therefore keyed by paper_id, and a page whose id has
+// no fixture entry FAILS rather than silently testing nothing.
+//
+// Each probe term is chosen to identify exactly one question on its own paper.
+// Alias probes deliberately use words that appear ONLY in search metadata and
+// are never rendered on the card, which is the behaviour being guarded.
+const FIXTURES = {
+  QP2607: {
+    probes: [
+      ['general average', 'QP2607-Q5'],
+      ['sopep', 'QP2607-Q2'],
+      ['ammonia', 'QP2607-Q6'],
+      ['iacs', 'QP2607-Q3'],
+      ['uberrimae fidei', 'QP2607-Q9'],
+      ['marpol annex vi', 'QP2607-Q4'],
+      ['merchant shipping act 2025', 'QP2607-Q7'],
+      ['automation', 'QP2607-Q8'],
+      ['iron ore pellets', 'QP2607-Q1'],
+    ],
+    aliases: [
+      ['seca', 'QP2607-Q4', 'the ECA question (word never rendered on the card)'],
+      ['fuel switching', 'QP2607-Q4', 'Q4'],
+      ['material circumstance', 'QP2607-Q9', 'Q9'],
+    ],
+    regulation: ['msc.255(84)', 'QP2607-Q2'],
+    recurrence: ['2023/apr/q3', 'QP2607-Q5'],
+    narrow: ['ammonia fuel cell', 'QP2607-Q6'],
+  },
+  QP2601: {
+    probes: [
+      ['cold corrosion', 'QP2601-Q1'],
+      ['toolbox talk', 'QP2601-Q2'],
+      ['general average', 'QP2601-Q3'],
+      ['wreck removal', 'QP2601-Q4'],
+      ['coating technical file', 'QP2601-Q5'],
+      ['ship sanitation', 'QP2601-Q6'],
+      ['genuine link', 'QP2601-Q7'],
+      ['very serious marine casualty', 'QP2601-Q8'],
+      ['fatigue', 'QP2601-Q9'],
+    ],
+    aliases: [
+      ['shapoli', 'QP2601-Q1', 'the low-load question (word never rendered on the card)'],
+      ['loto', 'QP2601-Q2', 'Q2'],
+      ['imsas', 'QP2601-Q7', 'Q7'],
+    ],
+    regulation: ['msc.1/circ.1598', 'QP2601-Q9'],
+    recurrence: ['2022/mar/1', 'QP2601-Q7'],
+    narrow: ['artificial general average', 'QP2601-Q3'],
+  },
+};
+
+const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';
+const FIX = FIXTURES[PAPER_ID];
+
 console.log('Generated page: ' + path.basename(PAPER));
+console.log('Paper id: ' + (PAPER_ID || '(none detected)'));
 console.log('Cards found: ' + cards.length);
 console.log('');
 console.log('-- search behaviour (driven by data-search, not innerText) --');
@@ -42,35 +102,38 @@ function search(q) {
   return cards.filter(c => terms.every(t => c.search.indexOf(t) !== -1));
 }
 
+// A page with no fixtures must FAIL, never pass quietly. A new paper that nobody
+// wrote probes for would otherwise report a clean run having tested nothing.
+ok('paper has content fixtures for its id', !!FIX,
+   'no FIXTURES entry for ' + JSON.stringify(PAPER_ID) + ' -- add one when a paper is added');
+
+const F = FIX || { probes: [], aliases: [], regulation: null, recurrence: null, narrow: null };
+
 // The core requirement: these all match while every card is COLLAPSED.
-const probes = [
-  ['general average', 'QP2607-Q5'],
-  ['sopep', 'QP2607-Q2'],
-  ['ammonia', 'QP2607-Q6'],
-  ['iacs', 'QP2607-Q3'],
-  ['uberrimae fidei', 'QP2607-Q9'],
-  ['marpol annex vi', 'QP2607-Q4'],
-  ['merchant shipping act 2025', 'QP2607-Q7'],
-  ['automation', 'QP2607-Q8'],
-  ['iron ore pellets', 'QP2607-Q1'],
-];
-probes.forEach(([q, expect]) => {
+F.probes.forEach(([q, expect]) => {
   const hits = search(q).map(c => c.qid);
   ok(`search "${q}" finds ${expect}`, hits.includes(expect), 'got ' + JSON.stringify(hits));
 });
 
 console.log('');
 console.log('-- search matches metadata that is never displayed --');
-ok('alias "seca" finds the ECA question (word never rendered on the card)',
-   search('seca').map(c => c.qid).includes('QP2607-Q4'));
-ok('alias "fuel switching" finds Q4', search('fuel switching').map(c => c.qid).includes('QP2607-Q4'));
-ok('alias "material circumstance" finds Q9',
-   search('material circumstance').map(c => c.qid).includes('QP2607-Q9'));
-ok('regulation "msc.255(84)" finds Q2', search('msc.255(84)').map(c => c.qid).includes('QP2607-Q2'));
-ok('recurrence code "2023/apr/q3" finds Q5', search('2023/apr/q3').map(c => c.qid).includes('QP2607-Q5'));
-ok('multi-term "ammonia fuel cell" narrows to Q6',
-   JSON.stringify(search('ammonia fuel cell').map(c => c.qid)) === '["QP2607-Q6"]',
-   JSON.stringify(search('ammonia fuel cell').map(c => c.qid)));
+F.aliases.forEach(([term, expect, label]) => {
+  ok(`alias "${term}" finds ${label}`, search(term).map(c => c.qid).includes(expect),
+     'got ' + JSON.stringify(search(term).map(c => c.qid)));
+});
+if (F.regulation) {
+  ok(`regulation "${F.regulation[0]}" finds ${F.regulation[1]}`,
+     search(F.regulation[0]).map(c => c.qid).includes(F.regulation[1]));
+}
+if (F.recurrence) {
+  ok(`recurrence code "${F.recurrence[0]}" finds ${F.recurrence[1]}`,
+     search(F.recurrence[0]).map(c => c.qid).includes(F.recurrence[1]));
+}
+if (F.narrow) {
+  ok(`multi-term "${F.narrow[0]}" narrows to ${F.narrow[1]}`,
+     JSON.stringify(search(F.narrow[0]).map(c => c.qid)) === JSON.stringify([F.narrow[1]]),
+     JSON.stringify(search(F.narrow[0]).map(c => c.qid)));
+}
 ok('nonsense term returns nothing', search('zzzznotathing').length === 0);
 
 console.log('');
@@ -112,9 +175,14 @@ let bookmarks = load(store, KEY_BM);
 let progress = load(store, KEY_PR);
 ok('fresh device starts with no bookmarks', Object.keys(bookmarks).length === 0);
 
-bookmarks['QP2607-Q5'] = 1;
-bookmarks['QP2607-Q9'] = 1;
-progress['QP2607-Q1'] = 'studied';
+// Study-state ids are taken from the page under test rather than hard-coded, so
+// these assertions hold for any paper. Cards are in document order, so these are
+// the 5th, 9th and 1st questions of whichever paper is being exercised.
+const Q_BM1 = cards[4].qid, Q_BM2 = cards[8].qid, Q_STUDIED = cards[0].qid;
+
+bookmarks[Q_BM1] = 1;
+bookmarks[Q_BM2] = 1;
+progress[Q_STUDIED] = 'studied';
 save(store, KEY_BM, bookmarks);
 save(store, KEY_PR, progress);
 ok('bookmarks written under the namespaced key', KEY_BM in store._dump());
@@ -123,8 +191,8 @@ ok('progress written under the namespaced key', KEY_PR in store._dump());
 // "close the browser, come back tomorrow"
 const bm2 = load(store, KEY_BM);
 const pr2 = load(store, KEY_PR);
-ok('bookmarks survive a restart', bm2['QP2607-Q5'] === 1 && bm2['QP2607-Q9'] === 1);
-ok('studied state survives a restart', pr2['QP2607-Q1'] === 'studied');
+ok('bookmarks survive a restart', bm2[Q_BM1] === 1 && bm2[Q_BM2] === 1);
+ok('studied state survives a restart', pr2[Q_STUDIED] === 'studied');
 ok('state is keyed by stable question_id, not DOM order',
    Object.keys(bm2).every(k => /^QP\d{4}-Q\d+$/.test(k)));
 
@@ -139,23 +207,26 @@ function filtered(mode) {
   }).map(c => c.qid);
 }
 ok('Bookmarked filter returns exactly the starred questions',
-   JSON.stringify(filtered('bookmarked')) === '["QP2607-Q5","QP2607-Q9"]',
+   JSON.stringify(filtered('bookmarked')) === JSON.stringify([Q_BM1, Q_BM2]),
    JSON.stringify(filtered('bookmarked')));
 ok('Studied filter returns exactly the studied questions',
-   JSON.stringify(filtered('studied')) === '["QP2607-Q1"]', JSON.stringify(filtered('studied')));
-ok('Not-studied filter excludes the studied one', !filtered('unstudied').includes('QP2607-Q1'));
+   JSON.stringify(filtered('studied')) === JSON.stringify([Q_STUDIED]),
+   JSON.stringify(filtered('studied')));
+ok('Not-studied filter excludes the studied one', !filtered('unstudied').includes(Q_STUDIED));
 ok('All filter returns every card', filtered('all').length === cards.length);
 
 // unbookmark round-trip
-delete bookmarks['QP2607-Q9'];
+delete bookmarks[Q_BM2];
 save(store, KEY_BM, bookmarks);
 ok('unbookmark removes only that question',
-   JSON.stringify(Object.keys(load(store, KEY_BM))) === '["QP2607-Q5"]');
+   JSON.stringify(Object.keys(load(store, KEY_BM))) === JSON.stringify([Q_BM1]));
 
-// future-paper safety
-bookmarks['QP2601-Q3'] = 1;
+// Cross-paper safety: a question id from a DIFFERENT paper must coexist. Use a
+// sitting that does not exist as a spec, so this stays a pure namespacing test
+// even as real papers are added.
+bookmarks['QP2512-Q3'] = 1;
 save(store, KEY_BM, bookmarks);
-ok('storage model accommodates a future paper without collision',
+ok('storage model keeps another paper\'s state without collision',
    Object.keys(load(store, KEY_BM)).length === 2);
 
 console.log('');
