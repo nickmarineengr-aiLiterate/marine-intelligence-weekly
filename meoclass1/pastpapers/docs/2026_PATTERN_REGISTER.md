@@ -1,93 +1,118 @@
 # 2026 PRODUCTION PATTERN REGISTER
 
 **Observations accumulated across the 2026 Engineering Management sittings as they are built.**
-Opened 2026-08-08 at the close of QP2601. Updated at the close of QP2602, and again at the close
-of **QP2603**.
+Opened 2026-08-08 at the close of QP2601. Updated at the close of QP2602, QP2603, and again at
+the close of **QP2604**.
 
-> **Four papers is two thirds of the available evidence, and still not a conclusion.** Every entry
-> states its count. The register exists so that the six-paper analysis has real data instead of
-> recollection. A 4/4 observation is stronger than a 3/3 but is not yet a rule.
+> **Five papers is five sixths of the available evidence, and still not a conclusion.** Every
+> entry states its count. The register exists so that the six-paper analysis has real data
+> instead of recollection. A 5/5 observation is stronger than a 4/4 but is not yet a rule —
+> and this session found two 3/3-and-4/4 observations that did not survive contact with the
+> fifth paper.
 
 **Papers in the set:** QP2607 (July, built) · QP2601 (January, built) · QP2602 (February, built) ·
-**QP2603 (March, built)** · QP2604, QP2606 (not built). **May 2026 does not exist in the source
-set** and is not expected.
+QP2603 (March, built) · **QP2604 (April, built)** · QP2606 (June, not built). **May 2026 does not
+exist in the source set** and is not expected.
 
-**Evidence base: 4 papers, 36 questions.**
+**Evidence base: 5 papers, 45 questions.**
+
+---
+
+## 0. CORRECTION TO A PREVIOUSLY RECORDED NUMBER
+
+**The QP2607 word-count row in §4(a) was wrong in the three earlier versions of this register**
+and has been corrected here. It recorded **mean 560, range 441–709**. Measuring the built spec
+gives **mean 632, range 572–709**, and `CURRENT_STATUS.md` §7 lists the nine per-question counts
+that sum to exactly that.
+
+The stale row predates the heading renumbering that §7 of `CURRENT_STATUS.md` itself documents —
+principal headings were given route titles, and heading text counts toward the word count. The
+register was never updated. **This matters because the six-paper review will compare against
+these numbers**, and a 72-word error in the baseline paper would have made every later paper look
+worse than it is. Found by measuring rather than by copying the previous row forward.
 
 ---
 
 ## 1. Measured structure
 
-| Measure | QP2607 | QP2601 | QP2602 | **QP2603** | Evidence |
-|---|---|---|---|---|---|
-| Questions offered / to answer | 9 / 6 | 9 / 6 | 9 / 6 | **9 / 6** | **4/4** |
-| Printed total marks | 100 | 100 | 100 | **100** | **4/4** |
-| Marks per question (derived) | 16 | 16 | 16 | **16** | **4/4** |
-| **Printed-total discrepancy** (6 × 16 = 96 vs 100) | present | present | present | **present** | **4/4** |
-| Average route length | 5.8 | 6.0 | 6.0 | **5.9** | 4/4 — comfortably inside the 5–9 chunking band |
-| Average core points | 24.3 | 30.2 | 30.3 | **30.9** | 4/4 |
-| Average retrieval cards | 6.6 | 9.8 | 7.6 | **8.4** | 4/4 |
-| `understand_first` present | 6 / 9 | 9 / 9 | 7 / 9 | **6 / 9** | see §4(b) |
-| `memory_cue` present | 3 / 9 | 7 / 9 | 9 / 9 | **9 / 9** | rising steadily |
-| Model answer word range | 572–709 | 744–981 | 829–1022 | **745–953** | see §4(a) |
+| Measure | QP2607 | QP2601 | QP2602 | QP2603 | **QP2604** | Evidence |
+|---|---|---|---|---|---|---|
+| Questions offered / to answer | 9 / 6 | 9 / 6 | 9 / 6 | 9 / 6 | **9 / 6** | **5/5** |
+| Printed total marks | 100 | 100 | 100 | 100 | **100** | **5/5** |
+| Marks per question (derived) | 16 | 16 | 16 | 16 | **16** | **5/5** |
+| **Printed-total discrepancy** (6 × 16 = 96 vs 100) | present | present | present | present | **present** | **5/5** |
+| Average route length | 5.8 | 6.0 | 6.0 | 5.9 | **5.8** | 5/5 — comfortably inside the 5–9 chunking band |
+| Average core points | 24.3 | 30.2 | 30.3 | 30.9 | **31.6** | 5/5 |
+| Average retrieval cards | 6.6 | 9.8 | 7.6 | 8.4 | **9.6** | 5/5 |
+| `understand_first` present | 6 / 9 | 9 / 9 | 7 / 9 | 6 / 9 | **8 / 9** | see §4(b) |
+| `memory_cue` present | 3 / 9 | 7 / 9 | 9 / 9 | 9 / 9 | **8 / 9** | plateaued |
+| Model answer word range | 572–709 | 744–981 | 829–1022 | 745–953 | **771–1238** | see §4(a) |
 
-**The 96-vs-100 discrepancy is now 4/4.** All four papers print "Total Marks – 100", require six
-answers, and state that all questions carry equal marks. All four were recorded as-is rather than
-normalised. At 4/4 this is very likely a property of the paper series.
+**The 96-vs-100 discrepancy is now 5/5.** All five papers print "Total Marks – 100", require six
+answers, and state that all questions carry equal marks. All five were recorded as-is rather than
+normalised. At 5/5 this is a property of the paper series.
 
-### Printed per-limb marks — a THIRD distinct pattern
+### Printed per-limb marks — a FOURTH distinct pattern, and the extreme
 
 | Paper | Questions printing any mark allocation |
 |---|---|
 | QP2607 | most questions carry a printed split |
 | QP2601 | **2 of 9** (Q3 4+4+8; Q9 8+8) |
 | QP2602 | **6 of 9** |
-| **QP2603** | **3 of 9 — and only ONE is a per-limb split** |
+| QP2603 | **3 of 9 — and only ONE a genuine per-limb split** |
+| **QP2604** | **9 of 9 — every question carries a printed allocation** |
 
-March prints `(16)` against Q1 and Q9 as *whole-question* figures, and a genuine per-limb split
-only on Q8 `(10)+(6)`. **Q2 to Q7 print nothing at all — including four questions that are
-divided into lettered limbs.** Nothing was inferred for them.
+**Conclusion, now at 5/5 and stronger than ever: there is no series convention for printed
+marks.** The variation runs 2/9 → 6/9 → 1/9 → 9/9 across four consecutive sittings of the same
+paper. **Read the marks off the rendered page every time.**
 
-**Conclusion, now at 4/4: there is no series convention for printed marks.** The variation runs
-2/9 → 6/9 → 1/9 across three consecutive sittings of the same paper. **Read the marks off the
-rendered page every time.** This is the direct answer to the QP2601 defect in which limb marks
-were initially invented, and March is the strongest evidence for it yet.
+### NEW — a printed arithmetic conflict INSIDE a single question
 
-### Printed limb labels are inconsistent — now 2/4 papers observed
+**QP2604 Q6 prints (5) against each of four limbs. They sum to 20 against a question the paper's
+own instruction 2 values at 16.** Every other question on the paper sums to exactly 16.
 
-Within March alone: Q2 uses `i)/ii)`, Q3 and Q8 use `a)/b)`, Q5 uses `a. b. c. d.`, Q6 uses
-`a)/b)/c)`. All preserved as printed. Grammatical oddities preserved on Q1 (a question mark
-inside a "Discuss" instruction; a misplaced comma), Q2 ("it's content"), Q5 (a sentence fragment)
-and Q6 (three different capitalisations of "Enhanced Survey Program" across three limbs).
+This is a **new anomaly class**. The four earlier papers all carry the 96-versus-100 discrepancy
+at *paper* level; none carries a limb-versus-question conflict on a *single* question.
+
+It was recorded as printed and **not normalised**. The machine-readable subpart marks are carried
+as `null`: writing 5 into each would assert a 20-mark total the paper contradicts, and
+normalising to 4 would invent figures the examiner never printed. The printed figures are
+preserved verbatim in prose. **A future session must not "fix" this.**
+
+### Printed limb labels remain inconsistent — now 3/5 papers observed
+
+April alone uses `a) b) c) d)` (Q2, Q5, Q6, Q7, Q8, Q9), `A. B.` with lowercase roman `i.–iv.`
+(Q3), and `(a) (b)` (Q4). Grammatical and typographic oddities preserved: **Q5 spells its own
+subject three different ways across four limbs** — `biofouling`, `Bio Fouling Management Plan`,
+`Bio fouling Record Book`; Q5 limbs b), c) and d) are questions printed with a full stop; **Q6 b)
+contains the ungrammatical "the procedure followed by in India"**; Q7 and Q8 use curly quotation
+marks where January used straight doubles.
 
 ---
 
 ## 2. Question archetypes
 
-| Archetype | QP2607 | QP2601 | QP2602 | **QP2603** | Total |
-|---|---|---|---|---|---|
-| `explain` | 2 | 6 | 2 | **3** | 13 |
-| `legal` | 2 | 3 | 4 | **0** | 9 |
-| `procedure` | 2 | 0 | 2 | **4** | 8 |
-| `evaluate` | 2 | 0 | 1 | **1** | 4 |
-| `compare` | 1 | 0 | 0 | **1** | 2 |
+| Archetype | QP2607 | QP2601 | QP2602 | QP2603 | **QP2604** | Total |
+|---|---|---|---|---|---|---|
+| `explain` | 2 | 6 | 2 | 3 | **5** | **18** |
+| `legal` | 2 | 3 | 4 | 0 | **3** | 12 |
+| `procedure` | 2 | 0 | 2 | 4 | **1** | 9 |
+| `evaluate` | 2 | 0 | 1 | 1 | **0** | 4 |
+| `compare` | 1 | 0 | 0 | 1 | **0** | 2 |
 
-**Two findings.**
+**Three findings.**
 
-- **March is the first paper with NO `legal` question**, after February's 4. The March questions
-  that touch law (Q3 war risk, Q9 Hong Kong Convention) were classed `explain` and `evaluate`
-  respectively on centre-of-gravity grounds: Q3's spine is the content and operation of a class of
-  cover plus underwriting practice, not the application of a legal rule to facts; Q9's limb 2 is
-  expressly a two-sided weighing. Both classifications are recorded because both were arguable.
-- **`compare` recurred.** It sat at 1/27 after February and was flagged as the only archetype not
-  to have repeated. QP2603 Q6 (ESP versus CAP) is a genuine second instance — limb (a) is expressly
-  "the differences between", and the route opens define-A / define-B / distinctions. **At 2/36 it
-  is no longer a candidate for removal**, but it remains the rarest.
-
-**`procedure` is the March signature at 4/9** — Q1 (treaty process), Q5 (four named operations),
-Q7 (steps to handle a defect) and Q8 (the five FSA steps). This is the most procedural paper in the
-set and matches its subject matter, which is markedly more operational than January's or
-February's.
+- **`legal` returned at 3/9** after March's zero, confirming that March's absence was a property
+  of that paper and not a trend. Q3 (salvage and general average), Q4 (VLCC liabilities) and Q7
+  (UNCLOS and India's constitutional mechanism) are all rule-application questions.
+- **April is the first paper with no `evaluate` question**, and the second with no `compare`.
+  Two of five archetypes are empty — the same shape March showed with different archetypes. The
+  categories and archetypes are **not evenly sampled per sitting**, which is now 2/5 evidence.
+- **`explain` at 5/9 is the April signature** and it is now the largest archetype in the set at
+  18/45. Note that Q1 (MARPOL Article 16) was classed `explain` rather than `procedure` on
+  centre-of-gravity grounds: the question asks for the *ways* an instrument may be amended and
+  the discrimination between them, not for a sequence to be executed. That call was arguable and
+  is recorded.
 
 **No archetype was added or changed. The five continue to do real work.**
 
@@ -95,113 +120,116 @@ February's.
 
 ## 3. Primary category distribution
 
-| Category | QP2607 | QP2601 | QP2602 | **QP2603** | Total |
-|---|---|---|---|---|---|
-| Statutory Framework & Class | 1 | 3 | 2 | **4** | **10** |
-| Marine Insurance & Commercial Law | 2 | 2 | 2 | **1** | 7 |
-| Alternative Fuels & Decarbonisation | 1 | 1 | 2 | **1** | **5 — 4/4 papers** |
-| Human Element & Management | 1 | 2 | 1 | **0** | 4 |
-| Cargo & Bulk Carriage | 1 | 0 | 1 | **2** | 4 |
-| Pollution Prevention & Response | 2 | 1 | 0 | **0** | 3 |
-| Indian Maritime Legislation | 1 | 0 | 1 | **1** | 3 |
+| Category | QP2607 | QP2601 | QP2602 | QP2603 | **QP2604** | Total |
+|---|---|---|---|---|---|---|
+| Statutory Framework & Class | 1 | 3 | 2 | 4 | **2** | **12** |
+| Marine Insurance & Commercial Law | 2 | 2 | 2 | 1 | **2** | 9 |
+| Pollution Prevention & Response | 2 | 1 | 0 | 0 | **3** | 6 |
+| Alternative Fuels & Decarbonisation | 1 | 1 | 2 | 1 | **0** | 5 |
+| Cargo & Bulk Carriage | 1 | 0 | 1 | 2 | **1** | 5 |
+| Human Element & Management | 1 | 2 | 1 | 0 | **1** | 5 |
+| Indian Maritime Legislation | 1 | 0 | 1 | 1 | **0** | 3 |
 
-**Three findings, and one broken pattern.**
+**THE STRONGEST SURVIVING CATEGORY SIGNAL BROKE.**
 
-- **THE STEADIEST SIGNAL IN THE SET BROKE.** Marine Insurance & Commercial Law had been *3/3
-  papers at exactly 2 questions each* — recorded in February as "the steadiest signal in the set".
-  **March carries only 1.** The pattern was real for three papers and did not survive the fourth.
-  This is exactly why the register counts rather than concludes.
-- **Alternative Fuels & Decarbonisation is now 4/4** and is the only category present on every
-  paper. It is the strongest surviving category signal.
-- **March is the first paper with no Human Element and no Pollution Prevention question at all.**
-  Two of seven categories are empty. Set against February's spread of six categories, this shows
-  the categories are not evenly sampled per sitting.
-- **Statutory Framework & Class reached 4/9 in one paper** and is now the largest total. Note that
-  one of those four (Q7, propeller crack) was an arguable call: the "you as Chief Engineer" framing
-  suggests management, but the decisive content is class attendance and repair approval. It follows
-  the **QP2607 Q2 precedent** — that a "you as CE" framing does not drive the category; the
-  technical domain does.
-- **Indian content by demand is 4/4** — a whole question in July (Q7), limbs in January, a whole
-  question in February (Q5), and a whole question in March (Q9), plus Indian law load-bearing in
-  March Q3 (MIA 1963) and Q4 (Port Health Rules).
+**Alternative Fuels & Decarbonisation was 4/4 and was recorded in March as "the only 4/4 category"
+and "the strongest surviving category signal". APRIL CARRIES NONE.** It is now 4/5.
 
-**No new primary category was created**, and none was needed. Three new secondary subject tags
-were added (`Cargo Securing`, `War Risks`, `Ship Recycling`), which the vocabulary permits.
+This is the second consecutive paper to break the register's headline category finding —
+February's "Marine Insurance at exactly 2 per paper, the steadiest signal in the set" broke in
+March, and March's "Decarbonisation is 4/4" broke in April. **Two headline category signals, two
+consecutive refutations.** The honest reading is that per-category counts at this sample size are
+not predictive, and the register should stop nominating a "strongest signal" until six papers
+exist.
+
+Other observations:
+
+- **Pollution Prevention & Response jumped to 3/9**, its highest, driven by two genuinely new
+  questions (Q1 MARPOL amendment, Q5 biofouling) plus Q8.
+- **Marine Insurance & Commercial Law returned to exactly 2**, so the broken 3/3 pattern now
+  reads 2, 2, 2, 1, 2 across five papers — close to steady but no longer clean.
+- **Indian content by demand is 5/5**, and remains the single most durable topic observation in
+  the register: a whole question in July (Q7), limbs in January, a whole question in February
+  (Q5), a whole question in March (Q9), and in April **two** load-bearing Indian limbs (Q6 b) and
+  d) on the Port Health Rules and competent authority; Q7 c) on the constitutional and
+  legislative mechanism). April carries no question whose *primary category* is Indian Maritime
+  Legislation while carrying more Indian content than March — which shows the category count
+  understates Indian demand and should not be used to measure it.
+
+**No new primary category was created**, and none was needed. Two new secondary subject tags were
+added (`Salvage Law`, `Biofouling`).
 
 ---
 
-## 4. The authoring drifts — status after March
+## 4. The authoring drifts — status after April
 
 ### (a) Model answer length
 
 | Paper | Range | Mean | Median | Over the 450–650 validator band |
 |---|---|---|---|---|
-| QP2607 | 441–709 | 560 | 541 | 2 / 9 |
+| QP2607 | 572–709 | **632** | 640 | 2 / 9 |
 | QP2601 | 744–981 | 844 | 827 | 9 / 9 |
 | QP2602 | 829–1022 | 925 | 933 | 9 / 9 |
-| **QP2603** | **745–953** | **863** | **860** | **9 / 9** |
+| QP2603 | 745–953 | 864 | 860 | 9 / 9 |
+| **QP2604** | **771–1238** | **984** | **962** | **9 / 9** |
 
-**27 of 36 questions now exceed the band, and 3 of 4 papers exceed it on every single question.
-It generates 27 of the toolchain's 29 warnings.**
+**36 of 45 questions now exceed the band, and 4 of 5 papers exceed it on every single question.
+It generates 36 of the toolchain's 38 warnings.**
 
-**Does March look closer to July, January or February?** **January.** Mean 863 against January's
-844, February's 925 and July's 560. Median 860 against January's 827.
+**April is the longest paper in the set, and the widest.** Its range of 467 words is more than
+double March's 208.
 
 Distinguishing measured fact from inference:
 
-- **Measured:** March's mean sits 62 words *below* February's and 19 above January's. Its *range*
-  is the tightest of the three long papers (208 words, against January's 237 and February's 193 —
-  comparable). Its maximum, 953, is the lowest maximum of the three.
-- **Inferred, with reasons:** March had **fewer printed limbs than February** (1 question with a
-  printed split versus 6) yet more *named sub-tasks* — Q5 names four processes, Q6 three, Q2 two,
-  Q9 three inside a running stem. Every named task must be visibly answered, which sets a floor
-  independent of how the marks are printed. That is the most likely reason March did not fall back
-  towards July's 560 despite a deliberate layering pass.
-- **Also measured:** a real trim pass ran. Q7 came down 956→918 and Q9 952→921 by moving
-  explanation into the study guide, and Q2 938→847 and Q5 884→852 likewise. **No scoring
-  proposition was removed on any of them.** What moved was reasoning about *why an instrument is
-  shaped the way it is*, which the study guide already carried — in Q9's case the same proposition
-  had been sitting in three layers at once.
-- **One measurement artefact worth recording:** Q6 measures 892, of which roughly 150 words are a
-  **comparison table**. The table *is* limb (a) and is the most compact possible form of it. The
-  validator counts table cells, so a compare-archetype question measures long precisely because it
-  is being concise. **A future word-count rule should account for tables.**
+- **Measured:** mean 984 against February's 925 and March's 864. Three questions exceed 1150
+  (Q5 1166, Q7 1186, Q9 1238); three sit below 810 (Q6 784, Q8 771, Q4 803).
+- **Measured:** a real layering pass ran and is recorded — **Q1 1071→1015, Q5 1244→1166,
+  Q7 1226→1186, Q9 1264→1238**, moving explanation into the study guide. **No scoring proposition
+  was removed.** The residual length is not un-reviewed drift.
+- **Inferred, with reasons:** April sets **more named sub-tasks than any prior paper** — roughly
+  29 against March's ~20. Q3 sets six (A, B and four sub-items), Q5 four, Q6 four (and limb b)
+  and d) each contain two or three questions of their own), Q7 three, Q8 three, Q9 four (limb b)
+  alone sets three). **Every named task must be visibly answered**, which sets a floor
+  independent of the mark total. The three longest answers are precisely the three with the most
+  internal tasks.
+- **This is the strongest evidence yet for the per-named-sub-task band.** A per-*printed-limb*
+  band fails March (six of nine print no limb marks); a per-*mark* band fails everything. A
+  per-named-sub-task band is the only shape that has fitted all five papers.
 
-**Recommendation, unchanged and now at four data points:** the 450–650 band should be **retired or
-re-derived**, not defended. Per *printed limb* does not work for March, where six of nine questions
-print no limb marks at all. **Per named sub-task** fits all four papers better and is the shape to
-test at six.
+> **No validator change was made.** The Founder's decision to keep the current policy until all
+> six papers exist stands. April adds the fifth and most extreme data point.
 
-> **No validator change was made.** The Founder's decision to keep the current policy until all six
-> papers exist stands, and March adds a fourth data point rather than a reason to change early.
-
-### (b) `understand_first` — the conditional test held
+### (b) `understand_first` — the drift returned
 
 | Paper | Count | Note |
 |---|---|---|
 | QP2607 | 6 / 9 | |
 | QP2601 | **9 / 9** | flagged as drift |
 | QP2602 | 7 / 9 | applied conditionally |
-| **QP2603** | **6 / 9** | applied conditionally, and the lowest of the three that applied it |
+| QP2603 | 6 / 9 | applied conditionally |
+| **QP2604** | **8 / 9** | **see below — this is a partly inherited number** |
 
-March's six new questions initially came out at **6/6** — the January pattern re-emerging. The
-conditional test was then applied deliberately and **Q9 was dropped**, on the ground that route
-step 3 is expressly "What it requires of recycling facilities" and the study guide already
-develops the point, so an `understand_first` would have been a *third* copy of one proposition.
-The three reused questions carry whatever their source paper decided (Q1 none, Q4 present, Q8
-none).
+**The honest account.** April's two new questions were both given an `understand_first` (Q1 and
+Q5), and both earn it: Article 16's two-speed design and the dual nature of biofouling are each
+genuinely counter-intuitive. **The other six of the eight are INHERITED** — the Tier D sources
+(QP2601 Q3, Q4, Q6, Q7, Q9) all carry one, because January applied the field to 9/9. Only Q2,
+whose source is QP2603 Q8, has none.
 
-**Assessment: three papers that applied the conditional test landed at 6/9, 7/9 and 6/9. The one
-that did not landed at 9/9.** The recommendation to prune QP2601's on Founder review is now
-supported by three papers rather than two. **The honest caveat: 6/6 before review shows the drift
-is a live authoring pull, not a solved problem — it was corrected by an explicit check, not by
-instinct.**
+**So April's 8/9 is not a fresh authoring decision at 8/9; it is 2/2 on new questions plus
+whatever January decided.** That makes the standing recommendation sharper, not weaker: **pruning
+QP2601's `understand_first` on Founder review would automatically improve QP2604 as well**,
+because five of April's eight inherit directly from it. The two questions are linked, and a
+correction to one should be applied to the other.
 
-### (c) Retrieval card count — stable
+Papers that applied the conditional test to new questions: 6/9, 7/9, 6/9, and 2/2. The paper that
+did not: 9/9 — and it has now propagated.
 
-January 9.8 (7 of 9 at exactly 10) → February 7.6 → **March 8.4**, range 7–10 with no clustering
-at a round number. Cards were authored to cover route, distinctions, critical regulation, critical
-number and traps, then stopped. **This drift remains resolved.**
+### (c) Retrieval card count — stable, at the top of its range
+
+January 9.8 → February 7.6 → March 8.4 → **April 9.6**, range 7–10. Seven of April's nine sit at
+exactly 10, which is the January pattern and worth watching, but the cards were authored to cover
+route, distinctions, critical regulation, critical number and traps and then stopped. **Not
+treated as a defect; recorded for the six-paper review.**
 
 ---
 
@@ -209,99 +237,160 @@ number and traps, then stopped. **This drift remains resolved.**
 
 | Pattern | Evidence | Note |
 |---|---|---|
-| Source copy is a third-party scan with watermark, marketing and host-added recurrence tables | **4/4** | Neutral provenance model handled it unchanged all four times. |
-| Recurrence tables printed on the copy support `topic_recurrence` only | **4/4** | Held again. All three March EXACT claims were established by **string comparison of transcribed stems**, not from the table. |
-| At least one question turns on a **date** rather than a fact | **4/4** | July Q7; January Q7; February Q8 and Q5; **March Q9** (does the MS Act 2025 repeal reach the Recycling of Ships Act 2019?). |
-| Licence-gated instrument blocks a claim to P1 | **4/4** | **March is the widest gap yet: seven instruments** — SOLAS, CSS Code, IGF Code, ISO 20519, 2011 ESP Code, ISO 484, Hong Kong Convention. |
-| Class A blocking flags at completion | 0, 0, 0, **0** | **4/4** |
+| Source copy is a third-party scan with watermark, marketing and host-added recurrence tables | **5/5** | Neutral provenance model handled it unchanged all five times. |
+| Recurrence tables printed on the copy support `topic_recurrence` only | **5/5** | **April is the decisive instance — see §6.** |
+| At least one question turns on a **date** rather than a fact | **5/5** | July Q7; January Q7; February Q8 and Q5; March Q9; **April Q7 and Q4**. |
+| Licence-gated instrument blocks a claim to P1 | **5/5** | **April is the NARROWEST gap: three instruments** (SOLAS, STCW Code, a consolidated MARPOL edition), against March's seven. |
+| Class A blocking flags at completion | 0, 0, 0, 0, **0** | **5/5** |
 
 **Re-verification register by paper:** QP2607 A0 B4 C2 (6) · QP2601 A0 B6 C8 (14) · QP2602 A0 B7
-C12 (19) · **QP2603 A0 B7 C18 (25)**. The C count rises with the licence gap, which is the honest
-signal: March's answers are complete but a larger share of them rest on authoritative restatement
-rather than on the instrument.
+C12 (19) · QP2603 A0 B7 C18 (25) · **QP2604 A0 B9 C10 (19)**.
 
-### The March verification finding
+**The C count fell for the first time**, from 18 to 10, and the B count rose from 7 to 9. That is
+the honest signal of April's narrow licence gap: both of its genuinely new questions rest on
+**freely published primary sources** read in full (MARPOL Article 16; MEPC.378(80)), so fewer
+claims sit on authoritative restatement. The B rise is date-driven rather than evidential — the
+Merchant Shipping Act currency point now bites on two questions.
 
-**The sitting date could not be established, and it mattered more here than on any other paper.**
-The Merchant Shipping Act 2025 commenced on **15 March 2026** — mid-sitting-month. No examination
-date is printed, and the source copy's PDF metadata records only **20 April 2026**, the date the
-third-party host batch-generated *all six* 2026 files, which is after every sitting.
+### The April verification findings
 
-The brief's rule is that this becomes `A_BLOCKING` only if a statutory answer turns on 15 March.
-**All nine questions were checked individually and none does.** The decisive one is Q9: India's
-recycling law is the **Recycling of Ships Act 2019**, separate legislation, and **s.324(1) of the
-2025 Act repeals the MS Act 1958 and the Coasting Vessels Act 1838 only** — a closed list read in
-the Gazette for QP2607 Q7. The July Gazette work has now paid for itself a **third** time.
+**1. Two errors in circulation were caught by opening the instrument.**
 
-Two supporting checks were also needed and both came out clear: QP2601 Q6 (reused as March Q4) has
-**zero** Merchant Shipping Act references, resting on the IHR and the Indian Port Health Rules 1955
-made under the **Indian Ports Act 1908**; and the four "MSA" hits in QP2602 Q3 (reused as March Q8)
-are all the substring inside **EMSA**.
+- A search summary asserted that *"severe damage to the environment means a discharge of 50MT or
+  more of pollutant"*. The Casualty Investigation Code, paragraph **2.19**, defines it as damage
+  which, as evaluated by the State(s) affected or the flag State, produces a **major deleterious
+  effect upon the environment** — an **evaluative test, not a tonnage threshold**. Had it gone
+  in, April Q8 would carry a confidently wrong number in a 4-mark definition limb.
+- Several published summaries give the objection threshold for a tacit MARPOL amendment as *two
+  thirds*. Article **16(2)(f)(iii)** says **one third of the Parties, or Parties holding 50 per
+  cent of world tonnage, whichever is fulfilled**.
+
+**This is the fifth consecutive paper on which "do not trust search-result summaries; open the
+source" has caught a substantive error.**
+
+**2. The sitting date was decisive again, and this time in the opposite direction.** April 2026
+falls **after** the 15 March 2026 commencement of the Merchant Shipping Act 2025. January fell
+before it. **The same question (Q7 / QP2601 Q7) therefore has a different correct answer at the
+two sittings** — the 2025 Act in April, the 1958 Act in January. See §6.
 
 ---
 
-## 6. Recurrence — three EXACT repeats in one paper
+## 6. Recurrence — the profile inverted
 
-**March contains three questions word-for-word identical to questions already built:**
+**April contains NO exact repeat of any previously built question.**
 
 | Q | Class | Against | Evidence |
 |---|---|---|---|
-| Q1 | **EXACT** | QP2602 Q7 (February) | String equality, 398 characters |
-| Q4 | **EXACT** | QP2601 Q6 (January) | String equality, 453 characters |
-| Q8 | **EXACT** | QP2602 Q3 (February) | String equality, 245 characters |
-| Q2 | **NONE** | — | Empty recurrence table; no sweep match above 0.5 |
-| Q3, Q5, Q6, Q7, Q9 | TOPIC | see each spec's `recurrence_note` | |
+| Q1 | TOPIC | QP2602 Q7 / QP2603 Q1 | Best sweep score 0.271; relationship reasoned, not scored |
+| Q2 | **NEAR** | QP2602 Q3 / QP2603 Q8 | 0.6409, 4 change blocks |
+| Q3 | **NEAR** | QP2601 Q3 | 0.8656, 9 change blocks |
+| Q4 | **NEAR** | QP2601 Q4 | **0.9946**, 2 change blocks, both typographic |
+| Q5 | **NONE** | — | Best 0.248; new to the corpus |
+| Q6 | **NEAR** | QP2601 Q6 / QP2603 Q4 | Task-by-task; ratio 0.1527 is a length artefact |
+| Q7 | **NEAR** | QP2601 Q7 | Task-by-task; ratio 0.1880 is a length artefact |
+| Q8 | **NEAR** | QP2601 Q8 | 0.9177, 7 change blocks |
+| Q9 | **NEAR** | QP2601 Q9 / QP2602 Q4 | 0.4382, 6 change blocks |
 
-**EXACT 3 · NEAR 0 · TOPIC 5 · NONE 1.**
+**EXACT 0 · NEAR 7 · TOPIC 1 · NONE 1.**
 
-**Set totals: 4 exact recurrences across 36 questions**, forming four linked pairs
-(QP2601 Q9 ↔ QP2602 Q4; QP2602 Q7 ↔ QP2603 Q1; QP2601 Q6 ↔ QP2603 Q4; QP2602 Q3 ↔ QP2603 Q8).
+Compare March: **EXACT 3 · NEAR 0 · TOPIC 5 · NONE 1.** The two papers are almost exact
+complements.
 
-Three observations:
+### Three findings, and two refuted predecessors
 
-- **Q1 is the first repeat in consecutive months** — February to March.
-- **March broke February's "every question has at least a topic relationship" finding.** Q2
-  (container cargo securing) has an empty recurrence table and no relationship above 0.5 to any of
-  the 27 prior stems. **NONE is a real classification and was not avoided.**
-- **The similarity sweep found no middle ground.** Every March stem was compared against all 27
-  prior stems; exactly three pairs scored above 0.5, and all three scored **1.0000**. February
-  produced two genuine NEAR recurrences; March produced none. A March question is either identical
-  to a prior one or clearly unrelated in wording.
-- **Q8 is EXACT against February and NEAR against July simultaneously** (February had classed it
-  NEAR against QP2607 Q1(a)). A question can hold different recurrence relationships against
-  different papers at once.
+**1. MARCH'S "NO MIDDLE GROUND" FINDING DID NOT SURVIVE.** March recorded that every stem pair
+was either 1.0000 or below 0.5 — *"a March question is either identical to a prior one or clearly
+unrelated in wording."* April produces a genuine gradient: **0.995, 0.918, 0.866, 0.641, 0.641,
+0.438**. The finding was true of March and is not a property of the series.
 
-### THE REUSE FINDING — an exact question is not an exact answer object
+**2. SIX OF APRIL'S NINE QUESTIONS MAP ONTO THE JANUARY PAPER — AT THE SAME QUESTION NUMBER.**
+Apr Q3↔Jan Q3, Q4↔Jan Q4, Q6↔Jan Q6, Q7↔Jan Q7, Q8↔Jan Q8, Q9↔Jan Q9. April reads as a
+**systematic re-issue of January** with limbs and marks made explicit and several limbs widened.
+Nothing comparable has appeared before: the four earlier exact pairs are scattered across
+different question numbers. **This is the single most striking structural observation in the
+register**, and it is descriptive only — it is one instance and predicts nothing.
 
-**This is the most important architectural outcome of the March session, and it is new.**
+**3. THE HOST TABLE FAILED IN BOTH DIRECTIONS ON THE SAME PAPER.**
 
-February established the rule with one instance: an identical question keeps its verified answer
-and canonical route. March applied it three times and found what one instance did not expose.
-
-> **A verified answer contains sitting-relative prose, and that prose is false at the new sitting
-> even when every underlying fact is unchanged.**
-
-**Ten such statements were found** across the three reused questions:
-
-| From | Statement | Why it fails in March |
+| | Host table | Reality |
 |---|---|---|
-| QP2602 Q7 | *"The Net-Zero Framework in **Q8 of this paper**…"* | February's Q8 **is** the Net-Zero question; March's Q8 is the lithium-battery FSA question. |
-| QP2602 Q3 (×7) | *"in force 1 January 2026 — **five weeks** before this examination"* and variants; *"back onto **February** 2026"* | Correct arithmetic for February, wrong for March. |
-| QP2601 Q6 (×2) | *"**four months** before this sitting"*; *"the **January 2026** position"* | 19 September 2025 is four months before January, six before March. |
+| **Q2** | lists FEB/Q3 and MAR/Q8, implying a third instance of a known exact pair | **NEAR, 0.6409** — limb b) rewritten to a broader task |
+| **Q6** | lists **only this sitting** | **NEAR** against Jan Q6 and Mar Q4 — omitted entirely |
 
-Each was re-anchored by an **asserted patch** in the assembly step: the build fails if a patch does
-not fire, and fails again if the old string survives. **The tenth was found only by sweeping the
-assembled spec** — the patch list built by reading the source had missed it, which is itself the
-argument for the sweep.
+**Over-claimed on one, under-claimed on another.** This is the strongest evidence in the set for
+the standing rule, and it is now 5/5.
 
-**Mandatory for QP2604 and QP2606:** treat "scan the reused object for sitting-relative prose" as a
-**required step** of Tier D reuse, not a judgement call, and **sweep the assembled spec afterwards**
-rather than trusting the patch list. Search for: `this paper`, `this sitting`, `this examination`,
-`weeks/months before`, a named month-year, and any cross-reference to another question **by number**
-on the same paper.
+### A new sub-class: NEAR by punctuation alone
 
-**This does not reopen the reuse rule.** The verified answer and canonical route were reused exactly
-as February decided. No scoring proposition was altered on any of the three.
+**Q4 scores 0.9946 with exactly two change blocks — an inserted colon and an inserted printed
+`(16)`. There is no semantic difference whatsoever.** It is classified NEAR because the March
+precedent defines EXACT as string equality *including printed mark allocations*, and these
+strings are not equal.
+
+**The classification and the treatment were deliberately separated.** It is recorded as NEAR and
+**reused as though it were EXACT**, because it is beyond argument the same examinable question.
+A future session must not read "NEAR" as licence to re-author it.
+
+> **THE LENGTH-SENSITIVITY WARNING — new and important.** `difflib` similarity is strongly
+> length-sensitive. **Q6 scores 0.1527 and Q7 scores 0.1880 against questions whose tasks map
+> one-to-one**, purely because April's stems are 764 and 474 characters against January's 453 and
+> 257. A session that ranked by score alone would have called both NONE and needlessly
+> re-authored two answers. **The ratio surfaces candidates; a task-by-task comparison classifies
+> them.**
+
+### Set totals across 45 questions
+
+| Class | Count |
+|---|---|
+| `topic_recurrence` | 22 |
+| `near_recurrence` | **10** (was 3 before April) |
+| `new` (includes both NONEs) | 9 |
+| `exact_recurrence` | 4 |
+
+**Four linked exact pairs remain** (QP2601 Q9 ↔ QP2602 Q4 · QP2602 Q7 ↔ QP2603 Q1 · QP2601 Q6 ↔
+QP2603 Q4 · QP2602 Q3 ↔ QP2603 Q8). **April adds no exact pair but adds seven near-linked
+questions**, six of them to January.
+
+> **STANDING CONSEQUENCE, WIDENED.** A correction to **QP2601 Q3, Q4, Q6, Q7, Q8 or Q9** on
+> Founder review must now be considered against **QP2604 Q3, Q4, Q6, Q7, Q8 and Q9** as well.
+> Six of April's nine questions inherit verified propositions from January. This is recorded in
+> each spec's `question_delta` and in each verification record.
+
+### THE REUSE FINDING — a changed STATUTE is not a re-anchor
+
+March established that a verified answer contains **sitting-relative prose** that is false at a
+new sitting even when every underlying fact is unchanged, and that it must be re-anchored.
+
+**April establishes the category above it.**
+
+> **Sometimes the underlying legal truth is itself different at the two sittings, and no amount
+> of re-anchoring will fix it.**
+
+**QP2604 Q7** is the instance. January's limb (c) is correctly built on the **Merchant Shipping
+Act 1958**; April falls after the 15 March 2026 commencement of the **Merchant Shipping Act
+2025**. A statute sweep found the 1958 Act asserted in the model answer, the study guide,
+`recall_15s`, `major_trap`, an `answer_route` core point, a retrieval card, `regulations` and
+`search_aliases` — **eight surfaces**. Limb (c) was **re-authored**, not patched.
+
+The distinction is worth holding:
+
+| | March's finding | April's finding |
+|---|---|---|
+| what changed | the *arithmetic* relative to the sitting | the *governing instrument* |
+| example | "five weeks before this examination" | MS Act 1958 → MS Act 2025 |
+| correct treatment | asserted patch, re-anchor | **re-author the limb; record a currentness change** |
+
+**And the sweep caught a miss again — exactly as March predicted it would.** The hand-built patch
+list re-anchored seven of the eight surfaces and **missed the Regulation and source map**, which
+still asserted the 1958 Act was operative at the date of the paper. **It was found only by
+sweeping the assembled spec.** March's rule that the patch list must never be trusted alone is
+now 2/2, and it should be treated as permanent.
+
+**A refinement, new from April: the sweep produces false positives and a human must adjudicate
+every hit.** Of 55 hits on the assembled April spec, **exactly one was a defect**. Q1's fourteen
+hits are all provisions of Article 16 ("six months", "ten months"); Q3's three are the absolute
+historical date "adopted by the CMI in May 2016". A session that treated the sweep output as a
+defect list would have converted correct law and correct history into vagueness.
 
 ---
 
@@ -309,64 +398,80 @@ as February decided. No scoring proposition was altered on any of the three.
 
 | Trap | Papers |
 |---|---|
-| Quoting an instrument **from a superseded edition or state** | **4/4** — July MS Act 2025; January pre-Manila STCW; February pre-October-2025 NZF material; **March, avoided by refusing to cite ISO 20519 clause numbers from an unheld edition** |
-| Treating a **liability convention as insurance** | 3/4 — July Q2, January Q4, February Q1 |
-| Treating a **contractual regime as statute** (York-Antwerp) | 3/4 — March sets no general average question |
-| Presenting **policy objectives as statutory effects** | 3/4 |
-| Using the **UK** statute where the **Indian** one governs | **4/4** — March Q3 turns on the Marine Insurance Act **1963**, not the English 1906 Act |
-| Confusing a **means of compliance** with a **requirement** | 2/4 — March Q6 (CAP is not CAS) is a second instance |
+| Quoting an instrument **from a superseded edition or state** | **5/5** — April: the 2011 Biofouling Guidelines (MEPC.207(62)) are **revoked** by MEPC.378(80) |
+| Treating a **voluntary instrument as mandatory** | **NEW at 1/5, and April's headline trap** — the Biofouling Guidelines, BFMP and BFRB are recommendatory |
+| Using the **UK** statute where the **Indian** one governs | 4/5 — April sets no question where it bites |
+| Treating a **liability convention as insurance** | 4/5 — April Q4 inherits January's guard |
+| Treating a **contractual regime as statute** (York-Antwerp) | 4/5 — April Q3 restores it |
+| Presenting **policy objectives as statutory effects** | 3/5 |
+| Confusing a **means of compliance** with a **requirement** | 2/5 |
 
-**Two new March-specific traps recorded**, both of the "same abbreviation, opposite legal status"
-family:
+**Three new April-specific traps recorded:**
 
-- **CAP is not CAS.** The voluntary Condition Assessment *Programme* against the mandatory
-  Condition Assessment *Scheme* under MARPOL Annex I. The confusion **inverts** the answer to a
-  question whose whole point is the mandatory/voluntary contrast.
-- **Convention compliance is not EU acceptance.** The Hong Kong Convention does **not** prohibit
-  beaching; the EU Ship Recycling Regulation maintains its own stricter approved list.
+- **The BFRB is not an Oil Record Book.** MEPC.378(80) *requests* Member States to apply the
+  Guidelines. There is no MARPOL annex on biofouling. The confusion converts a voluntary
+  record into a statutory one and is the most likely legal error in Q5.
+- **The AFS Convention is not the Biofouling Guidelines.** The Convention is mandatory and
+  regulates the anti-fouling *system*; the Guidelines are voluntary and manage the *fouling*.
+  Opposite subjects, opposite legal status.
+- **MARPOL is not amended by tacit acceptance without qualification.** Tacit acceptance is the
+  default for the **Annexes and appendices**; an **article** amendment needs explicit acceptance
+  by two thirds of Parties holding at least 50 per cent of world tonnage, and by Art 16(5) so
+  does a wholly new Annex.
 
-**No existing trap guard was weakened.** Known trap 1's scope warning (recorded in January) was not
-triggered by March.
+**No existing trap guard was weakened, and none fired on correct April prose.** Known trap 1's
+scope warning (recorded in January) was not triggered.
 
 ---
 
 ## 8. Topic clusters worth watching
 
-- **Decarbonisation / alternative fuels: 4/4 papers** — now the only 4/4 category.
-- **Indian law by demand: 4/4** — whole question or load-bearing limb every time.
-- **General average: 3/4** — QP2607 Q5, QP2601 Q3, QP2602 Q6. **March sets none**, which ends its
-  run as the strongest single topic signal.
-- **Human element / STCW: 3/4** — March sets none.
-- **Marine Insurance at exactly 2 per paper: broken at 3/4** — see §3.
-- **Survey and structural condition: 2/4** — QP2601 Q5 (coatings, CTF) and QP2603 Q6 (ESP/CAP)
-  approach the same subject from opposite sides. Worth watching as a possible emerging cluster.
+- **Indian law by demand: 5/5** — the most durable topic observation in the register.
+- **Decarbonisation / alternative fuels: 4/5** — **broke in April**, having been the only 4/4.
+- **General average: 4/5** — QP2607 Q5, QP2601 Q3, QP2602 Q6, **QP2604 Q3**. March remains the
+  only paper setting none, so its "run ended" note in the March register was premature.
+- **Human element / STCW: 4/5** — March remains the only paper setting none.
+- **Casualty and investigation: 2/5** — QP2601 Q8 and QP2604 Q8, the same question re-set.
+- **Treaty procedure as a subject in its own right: 3/5** — QP2602 Q7, QP2603 Q1 (entry into
+  force) and **QP2604 Q1** (amendment). Adjacent stages of one lifecycle, and a genuine emerging
+  cluster: the examiner has now set the procedural law of IMO instruments on three of five
+  papers.
+- **Invasive species / hull condition: 1/5** — new with April Q5. Note QP2601 Q5 (coatings, CTF)
+  and QP2603 Q6 (ESP/CAP) approach hull condition from the survey side. Worth watching.
 
 ---
 
 ## 9. What to record next
 
-For QP2604 and QP2606, continue recording: archetype assignment with justification; word counts
-against whatever band is settled in §4(a); whether Indian content appears as a whole question or as
-a limb; per-limb marks printed or not; any instrument reaching 4/6 demand; every recurrence
-classification with the evidence used; and — **new from March** — every sitting-relative statement
-re-anchored on a Tier D reuse.
+For QP2606, continue recording: archetype assignment with justification; word counts against
+whatever band is settled in §4(a); whether Indian content appears as a whole question or as a
+limb; per-limb marks printed or not, **and whether they sum to the question total**; any
+instrument reaching 5/6 demand; every recurrence classification **with the evidence used and
+whether the ratio or a task comparison decided it**; every sitting-relative statement re-anchored
+on a Tier D reuse; and — **new from April** — **every question whose governing instrument differs
+from that of its reuse source**.
 
-**Three decisions are waiting on the Founder** rather than on more data:
+**Four decisions are waiting on the Founder** rather than on more data:
 
-1. **Retire or re-derive the 450–650 word band.** It now fails 27/36 questions and produces 27 of
-   the 29 toolchain warnings. A per-*printed-limb* band does **not** fit March; a per-*named
-   sub-task* band fits all four. Any replacement must account for **tables**, which count as words
-   while being the most compact form of a comparison.
-2. **Prune QP2601's `understand_first`** on the questions that do not earn it. Three papers
-   applying the conditional test have now landed at 6/9, 7/9 and 6/9.
-3. **Mobile sticky chrome** remains pre-existing and unfixed: measured at 375px, QP2603 **59.6%**,
-   QP2602 60%, QP2601 60%, QP2607 51%. March matches January and February; the difference is filter
-   chip count (25 filter buttons on the March page). Desktop is 20.2% at 1280×900. No horizontal
-   overflow at either width on any page.
+1. **Retire or re-derive the 450–650 word band.** It now fails **36/45** questions and produces
+   36 of the 38 toolchain warnings. A per-*named-sub-task* band is the only shape that has fitted
+   all five papers. Any replacement must account for **tables**, which count as words while being
+   the most compact form of a comparison.
+2. **Prune QP2601's `understand_first`** on the questions that do not earn it — and note that
+   **five of April's eight inherit from it**, so the correction propagates.
+3. **Mobile sticky chrome** remains pre-existing and unfixed: measured at 375px, QP2604 **60.5%**,
+   QP2603 59.6%, QP2602 60%, QP2601 60%, QP2607 51%. Desktop 182px, **20.2%** at 1280×900 —
+   identical to March. No horizontal overflow at either width on any page. April is not a
+   regression.
+4. **The corpus "live external list" state** — now at **four instances across four papers**, with
+   April Q5 adding national biofouling arrival requirements. See
+   `QP2604_TRUE_SOURCE_DEMAND_MAP.md` §4, which also records a **useful refinement**: a live
+   register may still carry **immutable historical facts** (India's UNCLOS ratification date),
+   and those are safe to hold as corpus objects even when the register's current state is not.
 
-**A fourth item is now added: the corpus temporal model needs a "live external list" state.** See
-`QP2603_TRUE_SOURCE_DEMAND_MAP.md` §4 — three instances across three papers (Joint War Committee
-Listed Areas, authorised Indian ports for ship sanitation certificates, EU-approved recycling
-facilities). Not a QP problem and no workaround was invented.
+**A fifth item is added by April: MARPOL corpus objects must resolve to the ARTICLES of the
+parent Convention, to the third level of sub-paragraph.** Every prior paper demanded MARPOL at
+Annex/regulation level. QP2604 Q1 turns on the difference between `16(2)(f)(i)` and
+`16(2)(f)(iii)`.
 
-Re-read the whole register only when all six exist.
+**One paper remains. Re-read the whole register only when all six exist.**

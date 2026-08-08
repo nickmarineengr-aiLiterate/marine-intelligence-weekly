@@ -138,6 +138,35 @@ const FIXTURES = {
     // own full name.
     narrow: ['emergency release coupling', 'QP2603-Q5'],
   },
+  QP2604: {
+    probes: [
+      ['tacit acceptance', 'QP2604-Q1'],
+      ['thermal runaway', 'QP2604-Q2'],
+      ['contestation', 'QP2604-Q3'],
+      ['vlcc', 'QP2604-Q4'],
+      ['biofouling', 'QP2604-Q5'],
+      ['ship sanitation', 'QP2604-Q6'],
+      // NOT 'unclos' -- April Q8 also cites UNCLOS article 94(7), so the bare
+      // convention name resolves to two cards. The constitutional article is
+      // unique to Q7, and is also the limb April added over January.
+      ['article 253', 'QP2604-Q7'],
+      ['very serious marine casualty', 'QP2604-Q8'],
+      ['fatigue', 'QP2604-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['bfrb', 'QP2604-Q5', 'the biofouling record book (abbreviation never rendered)'],
+      ['dualist', 'QP2604-Q7', 'Q7'],
+      ['treaty amendment', 'QP2604-Q1', 'Q1'],
+    ],
+    regulation: ['mepc.378(80)', 'QP2604-Q5'],
+    // April Q2 is a NEAR repeat of February Q3 and March Q8, so its recurrence
+    // table carries their codes -- which is exactly what should be findable.
+    recurrence: ['2026/mar/q8', 'QP2604-Q2'],
+    // Must resolve to exactly ONE card. April sets biofouling once, and the
+    // record book's full name cannot collide with anything else on the paper.
+    narrow: ['biofouling record book', 'QP2604-Q5'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';

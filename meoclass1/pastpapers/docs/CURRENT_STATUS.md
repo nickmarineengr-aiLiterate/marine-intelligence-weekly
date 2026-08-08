@@ -1,15 +1,19 @@
-# CURRENT STATUS — MEO Class I Written Questions / QP2607 + QP2601 + QP2602 + QP2603
+# CURRENT STATUS — MEO Class I Written Questions / QP2607 + QP2601 + QP2602 + QP2603 + QP2604
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-08, at the close of the **QP2603 (March) production** session. Read this first.
+Last updated: 2026-08-09, at the close of the **QP2604 (April) production** session. Read this first.
 
-> **FOUR PAPERS ARE NOW BUILT. 4 of the 6 available 2026 sittings.**
+> **FIVE PAPERS ARE NOW BUILT. 5 of the 6 available 2026 sittings.**
 > **QP2607 (July)** — frozen V1 template, Founder review candidate.
 > **QP2601 (January)** — Founder review candidate, cross-paper validation. **0 class A blocking flags.**
 > **QP2602 (February)** — Founder review candidate. **0 class A blocking flags.**
-> **QP2603 (March)** — Founder review candidate, built this session. **0 class A blocking flags.**
-> Next planned: **QP2604 (April)**. Not started, and not to be started in this session.
-> Then QP2606 (June). **May 2026 does not exist in the source set.**
+> **QP2603 (March)** — Founder review candidate. **0 class A blocking flags.**
+> **QP2604 (April)** — Founder review candidate, built this session. **0 class A blocking flags.**
+> Next planned: **QP2606 (June)**. Not started, and not to be started in this session.
+> **May 2026 does not exist in the source set.**
+
+> **BRANCH: `pastpapers/qp2604-founder-review`**, created from `03799dc` (the QP2603 completion).
+> The March, February, January and July branches are untouched and preserved.
 
 > **QP2607 IS A FOUNDER REVIEW CANDIDATE.** There are **no class A (blocking) flags left**.
 > Q7's two publication blockers were closed against primary Gazette text. What
@@ -465,6 +469,169 @@ instinct is itself worth recording.
 
 ---
 
+## 2e. QP2604 — APRIL PRODUCTION RESULT, 2026-08-09
+
+**QP2604 (April 2026) is built: all 9 questions, Founder review candidate, 0 blocking flags.**
+
+| Output | Path |
+|---|---|
+| Paper | `meoclass1/pastpapers/QP2604.html` — **generated** |
+| Canonical content | `meoclass1/pastpapers/specs/QP2604.json` — **SOURCE OF TRUTH** |
+| Verification records | `meoclass1/pastpapers/verification/QP2604/Q1..Q9.md` + `DEDUP_AND_SOURCE_PLAN.md` |
+| True source demand | `docs/QP2604_TRUE_SOURCE_DEMAND_MAP.md` |
+| Pattern register | `docs/2026_PATTERN_REGISTER.md` — **updated to 5 papers / 45 questions** |
+
+### The template held again — fourth consecutive paper with no schema change
+
+**No schema change was required.** The frozen question object absorbed a paper printing marks on
+**all nine** questions, one question whose printed limb marks **contradict the paper's own
+equal-marks instruction**, **seven NEAR recurrences** each needing re-authoring against changed
+wording, and a reuse whose **governing statute changed** between the two sittings. Five modes,
+one `answer_route`, everything else derived. **No sixth mode. No new archetype. No new primary
+category.** `reference_shelf` remains empty on every question. Two new secondary `subject_tags`
+were added (`Salvage Law`, `Biofouling`).
+
+### THE ARCHITECTURE FINDING — a changed STATUTE is not a re-anchor
+
+March established that a verified answer carries **sitting-relative prose** which must be
+re-anchored. April establishes the category above it:
+
+> **Sometimes the underlying legal truth is itself different at the two sittings, and no amount
+> of re-anchoring will fix it.**
+
+**Q7** is the instance. April falls **after** the 15 March 2026 commencement of the **Merchant
+Shipping Act 2025**; January fell before it. January's limb (c) is correctly built on the **1958
+Act**, and a statute sweep found that Act asserted on **eight surfaces** of the January object —
+model answer, study guide, `recall_15s`, `major_trap`, an `answer_route` core point, a retrieval
+card, `regulations` and `search_aliases`. **Limb (c) was re-authored, not patched**, and recorded
+as a currentness change. The same commencement also re-anchored a study-guide note on **Q4**.
+
+**The sweep caught a miss again, exactly as March predicted.** The hand-built patch list
+re-anchored seven of the eight surfaces and **missed the Regulation and source map**. It was
+found only by sweeping the **assembled** spec. March's rule is now 2/2 and should be treated as
+permanent.
+
+**A refinement, new from April:** the sweep produces **false positives** and every hit needs
+human adjudication. Of **55 hits** on the assembled spec, **exactly one was a defect**. Q1's
+fourteen are provisions of MARPOL Article 16 ("six months", "ten months"); Q3's three are the
+absolute historical date "adopted by the CMI in May 2016".
+
+### Recurrence — the profile inverted, and the host table failed both ways
+
+**EXACT 0 · NEAR 7 · TOPIC 1 · NONE 1**, against March's EXACT 3 · NEAR 0 · TOPIC 5 · NONE 1.
+**April is the first paper containing no exact repeat of any previously built question.**
+
+**Six of April's nine questions map onto the January paper at the SAME question number** — Q3,
+Q4, Q6, Q7, Q8 and Q9. April reads as a systematic re-issue of January with limbs and marks made
+explicit and several limbs widened.
+
+**The host recurrence table over-claimed on Q2** (listing FEB/Q3 and MAR/Q8, implying a third
+instance of a known exact pair — it is NEAR at 0.6409, limb b) rewritten) **and under-claimed on
+Q6** (listing only this sitting, omitting the Jan/Mar relationship entirely). Strongest evidence
+yet for the standing rule that host tables establish topic recurrence only.
+
+> **NEW WARNING — the similarity ratio is length-sensitive.** Q6 scores **0.1527** and Q7
+> **0.1880** against questions whose tasks map one-to-one, purely because April's stems are much
+> longer. **The ratio surfaces candidates; a task-by-task comparison classifies them.** A session
+> ranking by score alone would have called both NONE and needlessly re-authored two answers.
+
+> **NEW SUB-CLASS — NEAR by punctuation alone.** **Q4 scores 0.9946** against QP2601 Q4, with
+> exactly two change blocks: an inserted colon and an inserted printed `(16)`. **No semantic
+> difference at all.** Classified NEAR because EXACT means string equality, but **reused as
+> though EXACT**. Do not read "NEAR" here as licence to re-author.
+
+> **STANDING CONSEQUENCE, WIDENED.** A correction to **QP2601 Q3, Q4, Q6, Q7, Q8 or Q9** on
+> Founder review must now be considered against **QP2604 Q3, Q4, Q6, Q7, Q8 and Q9** as well.
+
+### The printed-marks anomaly — new class
+
+**April prints a mark allocation on all nine questions** (QP2601 2/9, QP2602 6/9, QP2603 3/9).
+Eight sum to exactly 16. **Q6 alone prints (5)+(5)+(5)+(5) = 20** against a question instruction 2
+values at 16.
+
+**Recorded as printed, NOT normalised.** Q6's machine-readable subpart marks are `null`: writing
+5 into each would assert a 20-mark total the paper contradicts, and normalising to 4 would invent
+figures the examiner never printed. **A future session must not "fix" this.**
+
+### Two errors caught by opening the source
+
+- A search summary asserted *"severe damage to the environment means a discharge of 50MT or more
+  of pollutant"*. The Casualty Investigation Code **2.19** defines it as damage producing a
+  **major deleterious effect upon the environment** as evaluated by the State(s) affected or the
+  flag State — an **evaluative test, not a tonnage threshold**.
+- Published summaries give the tacit-amendment objection threshold as *two thirds*. MARPOL
+  **16(2)(f)(iii)** says **one third of Parties, or 50 per cent of world tonnage, whichever is
+  fulfilled**.
+
+**Fifth consecutive paper on which "open the source" caught a substantive error.**
+
+### Regression against all four prior papers — clean
+
+`QP2601.html` (`38b420fc88da8ad4`), `QP2602.html` (`abad5ab7706e370c`), `QP2603.html`
+(`895bf9ca1e0a993e`) and `QP2607.html` (`a574cd36261778e4`) are **byte-identical** before and
+after, and their specs have **no diff** against `03799dc`. `index.html`, `topics-2026.html` and
+the manifest changed, which is correct. Rebuild is deterministic: all eight artefacts
+byte-identical across two consecutive runs. `--publish` passes in full, and review/noindex
+artefacts were restored afterwards.
+
+### Cross-paper behaviour at five papers
+
+- The index carries **45 questions, 9 per paper**; `topics-2026.html` renders **45 links, zero
+  duplicates**.
+- Searching *"general average"* returns **four** sittings and correctly **not** March.
+- The Jan/Mar/Apr health-certificate family is discoverable as a trio via *"ship sanitation"*;
+  the treaty-procedure family via *"tacit acceptance"* (Feb Q7, Feb Q8, Mar Q1, Apr Q1).
+- *"biofouling"* returns April alone; the metadata-only alias *"bfrb"* resolves to QP2604 Q5.
+- **The §4 search-payload threshold — split into a fetched JSON file when the SIXTH paper is
+  added — is now ONE paper away.** `index.html` is **155.5 KB**, of which the search blob is
+  **90.8 KB**. **Expect to act on it during QP2606.**
+
+### Measured statistics
+
+| | QP2607 | QP2601 | QP2602 | QP2603 | **QP2604** |
+|---|---|---|---|---|---|
+| Answer words, mean | **632** | 844 | 925 | 864 | **984** |
+| Answer words, range | 572–709 | 744–981 | 829–1022 | 745–953 | **771–1238** |
+| `understand_first` | 6/9 | 9/9 | 7/9 | 6/9 | **8/9** |
+| Route steps, mean | 5.8 | 6.0 | 6.0 | 5.9 | **5.8** |
+| Core points, mean | 24.3 | 30.2 | 30.3 | 30.9 | **31.6** |
+| Flashcards, mean | 6.6 | 9.8 | 7.6 | 8.4 | **9.6** |
+| Reverify A / B / C | 0/4/2 | 0/6/8 | 0/7/12 | 0/7/18 | **0/9/10** |
+
+> **The QP2607 mean is corrected here from 560 to 632.** The old figure predates the heading
+> renumbering documented in §7 below and was never updated in the register. See
+> `2026_PATTERN_REGISTER.md` §0.
+
+**April is the longest and widest paper in the set.** A real layering pass ran and is recorded —
+Q1 1071→1015, Q5 1244→1166, Q7 1226→1186, Q9 1264→1238 — with **no scoring proposition removed**.
+The residual length tracks April's **~29 named sub-tasks**, more than any prior paper: the three
+longest answers are precisely the three with the most internal tasks. **The C-flag count fell for
+the first time** (18→10) because both new questions rest on freely published primary sources read
+in full.
+
+**`understand_first` at 8/9 is partly inherited**, not a fresh 8/9 decision: April's two new
+questions are 2/2, and five of the remaining six inherit from QP2601's 9/9. **Pruning QP2601's on
+review would automatically improve QP2604.**
+
+### Open quality questions — unchanged, plus one sharpened
+
+1. **The 450–650 word band** now fails **36/45** and produces 36 of the 38 warnings. A
+   per-*named-sub-task* band is the only shape that has fitted all five papers. **No validator
+   change was made.**
+2. **`understand_first` pruning on QP2601** now propagates to five April questions.
+3. **Mobile sticky chrome**: QP2604 **60.5%** at 375px, against QP2603 59.6%, QP2602 60%,
+   QP2601 60%, QP2607 51%. Desktop 182px = **20.2%** at 1280×900, identical to March. No
+   horizontal overflow at either width. **Pre-existing, not an April regression.**
+4. **The corpus "live external list" state** reaches a **fourth** instance (national biofouling
+   arrival requirements). The demand map adds a refinement: a live register may carry
+   **immutable historical facts** — India's UNCLOS ratification date — which *are* safe as corpus
+   objects.
+5. **NEW — MARPOL corpus objects must resolve to the ARTICLES of the parent Convention**, to the
+   third level of sub-paragraph. Every prior paper demanded Annex/regulation level; Q1 turns on
+   the difference between `16(2)(f)(i)` and `16(2)(f)(iii)`.
+
+---
+
 ## 3. Naming — canonical, one identity everywhere
 
 ```
@@ -639,28 +806,41 @@ python tools/pastpapers/run_toolchain.py --self-test
 SPEC          PASS  (9 warning(s))     <- QP2601, all 9 are word-count band warnings
 SPEC          PASS  (9 warning(s))     <- QP2602, all 9 are word-count band warnings
 SPEC          PASS  (9 warning(s))     <- QP2603, all 9 are word-count band warnings
+SPEC          PASS  (9 warning(s))     <- QP2604, all 9 are word-count band warnings
 SPEC          PASS  (2 warning(s))     <- QP2607, the two accepted exceptions below
 PAPER BUILD   PASS
 PAPER BUILD   PASS
 PAPER BUILD   PASS
 PAPER BUILD   PASS
+PAPER BUILD   PASS
 INDEX BUILD   PASS
-UI BEHAVIOUR  PASS  4 page(s)
+UI BEHAVIOUR  PASS  5 page(s)
 KNOWN TRAPS   PASS
 HEALTH        PASS
 AUDIT         PASS
 AUDIT         PASS
 AUDIT         PASS
 AUDIT         PASS
-ALL STAGES PASS   29 warning(s)
+AUDIT         PASS
+ALL STAGES PASS   38 warning(s)
 ```
 
-Four specs now, so the per-spec stages run four times. **29 warnings = 2 QP2607 (accepted, below)
-+ 9 QP2601 + 9 QP2602 + 9 QP2603 word-count warnings** — see §2d for the open question those
-raise. Zero errors, zero blocking flags on any of the four papers.
+Five specs now, so the per-spec stages run five times. **38 warnings = 2 QP2607 (accepted, below)
++ 9 QP2601 + 9 QP2602 + 9 QP2603 + 9 QP2604 word-count warnings** — see §2e for the open question
+those raise. Zero errors, zero blocking flags on any of the five papers.
 
-**27 of the 29 warnings are the one disputed band.** That is warning noise rather than signal, and
-it is the reason §2c and §2d recommend retiring or re-deriving the 450–650 band.
+**36 of the 38 warnings are the one disputed band.** That is warning noise rather than signal, and
+it is the reason §2c, §2d and §2e recommend retiring or re-deriving the 450–650 band.
+
+QP2604 carries **19 re-verification flags: 0 class A, 9 class B, 10 class C.** The most important
+class B is the pair on Q7 and Q4 — that the **Merchant Shipping Act 2025** is the operative Indian
+statute at the April sitting, which must be re-checked as a unit if either question is corrected.
+The most important class C is on Q1: **MIW holds no licensed IMO consolidated MARPOL edition**, so
+Article 16's consolidation state is not independently established.
+
+**A `FIXTURES` entry for QP2604 was added to `ui_behaviour_test.cjs`**, per the standing rule. Its
+probe for Q7 is deliberately `article 253` rather than `unclos`, because April Q8 also cites
+UNCLOS article 94(7) and the bare convention name resolves to two cards.
 
 QP2602 carries **19 re-verification flags: 0 class A, 7 class B, 12 class C.** The single most
 important is the class B on Q8 — the approved-but-not-adopted status of MARPOL Annex VI Chapter 5,
@@ -801,7 +981,7 @@ regenerate. Recorded as trap 8.
 
 ## 10. Review / publication state — do not change without Founder approval
 
-- All **four** paper pages are **`noindex`**; **no gate** is enabled.
+- All **five** paper pages are **`noindex`**; **no gate** is enabled.
 - **Nothing deployed. Nothing published. No publication approval given.**
 - `meoclass1/index.html` has one nav link to `/meoclass1/pastpapers/`.
 
@@ -877,25 +1057,42 @@ python tools/pastpapers/run_toolchain.py --self-test
    are waiting, all in §2d: the model-answer word band, whether `understand_first` should be pruned
    to the questions that genuinely need it, the pre-existing mobile sticky-chrome proportion, and
    the new corpus "live external list" state.
-8. ~~Build QP2602 (February 2026).~~ **DONE.** ~~Build QP2603 (March 2026).~~ **DONE** — see §2d.
-   Next is **QP2604 (April 2026)**, then QP2606 (June). **May 2026 does not exist in the source
-   set** — keep it unavailable. Add a `FIXTURES` entry to `ui_behaviour_test.cjs` for every new
-   paper.
-   **FOUR LINKED PAIRS now exist and each must be corrected as a unit on review:**
+8. ~~Build QP2602 (February 2026).~~ **DONE.** ~~Build QP2603 (March 2026).~~ **DONE.**
+   ~~Build QP2604 (April 2026).~~ **DONE** — see §2e.
+   Next is **QP2606 (June 2026)**, the last available sitting. **May 2026 does not exist in the
+   source set** — keep it unavailable. Add a `FIXTURES` entry to `ui_behaviour_test.cjs` for
+   every new paper.
+
+   **FOUR LINKED EXACT PAIRS** must each be corrected as a unit on review:
    QP2601 Q9 ↔ QP2602 Q4 · QP2602 Q7 ↔ QP2603 Q1 · QP2601 Q6 ↔ QP2603 Q4 · QP2602 Q3 ↔ QP2603 Q8.
-   **Tier D reuse now carries a mandatory step:** scan the reused object for sitting-relative prose
-   (`this paper`, `this sitting`, `this examination`, `weeks/months before`, a named month-year, a
-   cross-reference to another question by number) and **sweep the assembled spec afterwards** — the
-   March patch list built by reading the sources missed one, and it was caught only by the sweep.
+
+   **SEVEN NEAR-LINKED APRIL QUESTIONS now join them.** A correction to **QP2601 Q3, Q4, Q6, Q7,
+   Q8 or Q9** must be considered against **QP2604 Q3, Q4, Q6, Q7, Q8 and Q9**; and QP2604 Q2
+   inherits from QP2602 Q3 / QP2603 Q8.
+
+   **Tier D reuse carries three mandatory steps, now proven over two papers:**
+   1. **Scan the reused object for sitting-relative prose** (`this paper`, `this sitting`,
+      `this examination`, `weeks/months before`, a named month-year, a cross-reference to another
+      question by number).
+   2. **Sweep the ASSEMBLED spec afterwards** — never trust the patch list. It missed one in
+      March and one in April, and the sweep caught both. **But adjudicate every hit by hand:**
+      of 55 April hits exactly one was a defect, the rest being provisions and absolute historical
+      dates.
+   3. **NEW FROM APRIL — check whether the GOVERNING INSTRUMENT itself differs at the two
+      sittings.** This is a category above re-anchoring: where the law changed, the limb must be
+      **re-authored** and recorded as a currentness change. QP2604 Q7 is the worked example, and
+      the 1958 Act was asserted on **eight** separate surfaces of the January object.
 9. **After all six 2026 papers**, run the full pattern/repeat/reference analysis using
    `docs/2026_PATTERN_REGISTER.md`, then begin the 2025 papers.
 10. **Only after more than one paper**, mature the skill draft and consider the production
    agent. Two papers now exist, so the skill draft is worth maturing — but **do not build the
    agent yet.**
 
-**Search payload watch:** `index.html` carries **all four** papers' search blobs — 36 questions. The
-threshold recorded in §4 — split the search index into a fetched JSON file **when the sixth paper is
-added** — is unchanged and is now **two papers away**. Expect to act on it during QP2606.
+**Search payload watch:** `index.html` carries **all five** papers' search blobs — 45 questions,
+**155.5 KB total of which 90.8 KB is the search blob**. The threshold recorded in §4 — split the
+search index into a fetched JSON file **when the sixth paper is added** — is unchanged and is now
+**ONE paper away**. **Act on it during QP2606.** Measured, not estimated: no performance problem
+is observable at five papers, so nothing was changed now.
 
 Q7 primary-source resolution is **done** (§8) and is no longer on this list.
 
