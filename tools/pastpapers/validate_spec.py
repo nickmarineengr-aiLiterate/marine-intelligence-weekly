@@ -188,6 +188,176 @@ def check_answer_route(q, qn):
             'the other, or the answer and the route have drifted.' % (qn, h))
 
 
+# Semantic-integrity guards.
+#
+# Structural consistency is not semantic consistency. A route point, a flashcard
+# or a cheat-sheet line is a DERIVED representation, and the failure mode is that
+# it flattens a conditional verified statement into a categorical one. The model
+# answer said "carried as Group C ... but establish that from the declared BCSN
+# and its current individual schedule"; three derived layers had reduced that to
+# "pellets are Group C", which is the exact error earlier red-teaming rejected.
+#
+# These are deliberately narrow, known-issue guards. There is no general truth
+# validator here and there should not be: subjective educational quality stays a
+# human review. Each entry is (name, pattern, hedge words, where to look).
+SEMANTIC_GUARDS = [
+    (
+        'unconditional IMSBC group',
+        # "X is/are Group A" with no reference to the schedule or declaration
+        re.compile(r'\b(?:is|are|=)\s*Group\s*[ABC]\b', re.I),
+        ('schedule', 'declar', 'bcsn'),
+        'IMSBC classification and carriage requirements follow the declared BCSN '
+        'and its current individual schedule, not the commodity name used in the '
+        'question. State the group only alongside that qualification.',
+    ),
+]
+
+
+def _derived_texts(q):
+    """Every place a verified statement gets re-expressed for learning.
+
+    The model answer and study guide are the SOURCE and are excluded: they are
+    allowed to carry the full conditional sentence. These are the short forms.
+    """
+    out = []
+    for s in (q.get('answer_route') or {}).get('steps') or []:
+        out.append(('route step %s title' % s.get('n'), s.get('title', '')))
+        for p in s.get('points') or []:
+            out.append(('route step %s core point' % s.get('n'), p))
+    qr = q.get('quick_revision') or {}
+    for k in ('recall_15s', 'major_trap', 'critical_regulation'):
+        out.append(('quick_revision.%s' % k, qr.get(k) or ''))
+    for n in qr.get('critical_numbers') or []:
+        out.append(('quick_revision.critical_numbers', n))
+    for c in q.get('retrieval_cards') or []:
+        out.append(('card %s prompt' % c.get('id'), c.get('prompt') or ''))
+        out.append(('card %s answer' % c.get('id'), c.get('answer') or ''))
+    if q.get('memory_cue'):
+        out.append(('memory_cue', q['memory_cue']))
+    return out
+
+
+# --- MIW True Source reference contract -----------------------------------
+# A question points at a CORPUS OBJECT. It never points at a document, an
+# edition, a bookmark or a page. The corpus resolver owns all of that, so the
+# question survives PDF regeneration, re-pagination, consolidated amendments and
+# replacement editions without being touched. See docs/MIW_TRUE_SOURCE_CONTRACT.md.
+#
+# object_id follows the node-id convention ALREADY established in the MIW
+# reference repository (RulesApp/repository/index/repo-data.json): an instrument
+# token followed by hyphen-separated structural tokens, e.g. SOLAS-II2-10,
+# MARPOL-VI-14, FSSCode-9-2, BunkerConvention2001-Articles-7.
+REF_RELATIONSHIPS = ('PRIMARY_RULE', 'SUPPORTING_RULE', 'DEFINITION', 'PROCEDURE',
+                     'LEGAL_BASIS', 'NUMERIC_SOURCE', 'CONTEXT')
+REF_STATES = ('REFERENCE_AVAILABLE', 'REFERENCE_PENDING', 'NO_CORPUS_OBJECT_YET')
+REF_ID_RE = re.compile(r'^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)+$')
+
+# Frozen architectural rule. Enforced from the outset, before any reference
+# exists, because the cheap moment to forbid page coupling is before the first
+# one is written.
+PDF_PAGE_RE = re.compile(r'\.pdf\s*#\s*page\s*=|pdf-page-\d|#page=\d|\bpage\s*=\s*\d{1,4}\b', re.I)
+
+
+def check_primary_category(q, qn):
+    """Exactly one primary category, from the topic tree.
+
+    Imported from build_index so there is a single list of categories. A second
+    hand-maintained copy here would drift, and the first symptom would be a
+    question quietly vanishing from the topic page.
+    """
+    try:
+        from build_index import TOPIC_TREE
+    except Exception as e:                       # pragma: no cover
+        warn('%s: could not import TOPIC_TREE to validate primary_category (%s)' % (qn, e))
+        return
+    cats = [c for c, _ in TOPIC_TREE]
+    pc = q.get('primary_category')
+    if pc not in cats:
+        err('%s: primary_category %r is not one of the topic-tree categories %s. '
+            'The topic page renders each question once, under this category.'
+            % (qn, pc, cats))
+
+
+def check_reference_shelf(q, qn):
+    """OPTIONAL. A question with no shelf is valid: answers and corpus objects
+    are produced on parallel tracks, and a missing object must never block a
+    paper build or force a fabricated reference."""
+    shelf = q.get('reference_shelf')
+    if shelf is None:
+        return
+    if not isinstance(shelf, list):
+        err('%s: reference_shelf must be a list' % qn)
+        return
+    seen = set()
+    for i, r in enumerate(shelf):
+        oid = (r.get('object_id') or '').strip()
+        if not oid:
+            err('%s reference_shelf[%d]: no object_id' % (qn, i))
+            continue
+        if not REF_ID_RE.match(oid):
+            err('%s reference_shelf[%d]: object_id %r is not a corpus node id. '
+                'Expected the established convention, e.g. MARPOL-VI-14.' % (qn, i, oid))
+        if oid in seen:
+            err('%s reference_shelf[%d]: duplicate object_id %r' % (qn, i, oid))
+        seen.add(oid)
+        if r.get('relationship') not in REF_RELATIONSHIPS:
+            err('%s reference_shelf[%d]: relationship %r not one of %s'
+                % (qn, i, r.get('relationship'), list(REF_RELATIONSHIPS)))
+        if r.get('state') not in REF_STATES:
+            err('%s reference_shelf[%d]: state %r not one of %s'
+                % (qn, i, r.get('state'), list(REF_STATES)))
+        if not (r.get('label') or '').strip():
+            err('%s reference_shelf[%d]: no label' % (qn, i))
+
+
+def check_no_pdf_coupling(d, path):
+    """No part of a question spec may bind a claim to a PDF page.
+
+    Page numbers move. The corpus may record them in its own provenance; the
+    question must not, or every re-pagination silently invalidates the product.
+    """
+    blob = json.dumps(d, ensure_ascii=False)
+    for m in PDF_PAGE_RE.finditer(blob):
+        err('%s: a PDF page reference appears in the spec (%r). Questions must '
+            'reference corpus OBJECT ids, never documents or pages.'
+            % (os.path.basename(path), blob[max(0, m.start() - 50):m.end() + 30]))
+
+
+def check_semantic_integrity(q, qn):
+    for name, rx, hedges, why in SEMANTIC_GUARDS:
+        for where, text in _derived_texts(q):
+            plain = re.sub(r'<[^>]+>', '', str(text))
+            m = rx.search(plain)
+            if not m:
+                continue
+            if any(h in plain.lower() for h in hedges):
+                continue
+            err('%s %s: %s -- %r. %s'
+                % (qn, where, name, plain[max(0, m.start() - 40):m.end() + 40], why))
+
+
+def check_memory_cue(q, qn):
+    """A cue may support the canonical route. It must not become a second route.
+
+    If a cue enumerates its own anchors, the candidate ends up holding two
+    sequences of different lengths and has to reconcile them under exam
+    pressure -- which is the opposite of the point.
+    """
+    cue = q.get('memory_cue')
+    if not cue:
+        return
+    steps = (q.get('answer_route') or {}).get('steps') or []
+    anchors = re.findall(r'\b[A-Z]{3,}(?:\s+[A-Z]{3,})*\b', re.sub(r'<[^>]+>', '', cue))
+    anchors = [a for a in anchors if a not in ('MIW', 'IMO', 'BCSN', 'TML', 'ISM')]
+    if len(anchors) < 2:
+        return              # prose cue, nothing to reconcile
+    if not re.search(r'\(\d', cue):
+        err('%s memory_cue enumerates %d anchor(s) but maps none of them to a route '
+            'step number. A cue must point AT the canonical route, not create a '
+            'second sequence. Add step numbers, or drop the cue.'
+            % (qn, len(anchors)))
+
+
 def check_retrieval_cards(q, qn):
     cards = q.get('retrieval_cards')
     if not isinstance(cards, list) or len(cards) < CARDS_MIN:
@@ -293,6 +463,8 @@ def main(path):
         print('  line %d col %d' % (e.lineno, e.colno))
         print('  >> %s' % line[max(0, e.colno - 80):e.colno + 80])
         sys.exit(1)
+
+    check_no_pdf_coupling(d, path)
 
     for k in TOP:
         if k not in d:
@@ -470,6 +642,10 @@ def main(path):
             check_quick_revision(q, qn)
             check_answer_route(q, qn)
             check_retrieval_cards(q, qn)
+            check_semantic_integrity(q, qn)
+            check_memory_cue(q, qn)
+            check_primary_category(q, qn)
+        check_reference_shelf(q, qn)
 
         if has_ans:
             n = words(q['model_answer'])

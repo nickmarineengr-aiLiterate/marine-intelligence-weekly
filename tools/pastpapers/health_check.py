@@ -409,6 +409,23 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
         if re.search(r'data-mode="answer"[^>]*\shidden', page):
             err('%s: the model answer mode is emitted pre-hidden' % d['paper_id'])
 
+    # ---------- 11 topic page renders each question exactly once ----------
+    for year in sorted({p['year'] for p in man['papers']}):
+        tp = pages.get(N(PP, 'topics-%d.html' % year))
+        if not tp:
+            continue
+        for q in man['questions']:
+            if q['year'] != year:
+                continue
+            n = tp.count('%s.html#%s"' % (q['paper_id'], q['anchor']))
+            if n != 1:
+                err('topics-%d.html: %s appears %d time(s), expected exactly 1. '
+                    'One primary category per question -- a question rendered under '
+                    'several categories is duplication, not navigation.'
+                    % (year, q['question_id'], n))
+    if not any('appears' in e and 'primary category' in e for e in errs):
+        ok('topic page renders every question exactly once under its primary category')
+
     if not any('route step' in e or 'derived view' in e or 'retrieval card' in e
                or 'learner mode' in e or 'pre-hidden' in e for e in errs):
         ok('learning layer coherent: map, recall blanks and flashcards all derive '

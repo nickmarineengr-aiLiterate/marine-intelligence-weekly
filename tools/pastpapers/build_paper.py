@@ -105,8 +105,8 @@ def quick_revision(qr, out):
 # are the map branches, the recall blanks and the exam plan. A candidate learns
 # one route, not four competing structures. See docs/MIW_LEARNING_METHOD_DESIGN.md.
 
-MODES = [('understand', 'Understand'), ('plan', 'Plan'), ('answer', 'Answer'),
-         ('guide', 'Study guide'), ('recall', 'Recall')]
+MODES = [('understand', 'Understand'), ('plan', 'Exam Plan'), ('answer', 'Answer'),
+         ('guide', 'Study Guide'), ('recall', 'Recall')]
 
 
 def route_steps(q):
@@ -217,12 +217,21 @@ def plan_view(q, out):
     if q.get('memory_cue'):
         out.append('    <p class="plan-cue"><b>Memory cue.</b> %s</p>'
                    % esc(q['memory_cue']))
-    out.append('    <div class="plan-cov">Core points to cover: '
-               '<b>%d</b> across <b>%d</b> sections</div>' % (n_pts, len(steps)))
-    out.append('    <p class="plan-note">A core point is one distinct exam-relevant '
-               'proposition, action, requirement or distinction &mdash; not one sentence. '
-               'This is a completeness check, not a mark scheme.</p>')
-    out.append('    <details class="plan-points"><summary>Show the core points</summary>')
+    # The two-level hierarchy is explicit, because the memory target and the
+    # coverage target are different things. Candidates who try to memorise 25
+    # core points are doing the wrong work: the route is what gets memorised.
+    out.append('    <div class="plan-cov">')
+    out.append('      <div class="cov-row"><span class="cov-k">Remember</span>'
+               '<span class="cov-v"><b>%d</b> route headings</span></div>' % len(steps))
+    out.append('      <div class="cov-row"><span class="cov-k">Cover</span>'
+               '<span class="cov-v"><b>%d</b> core points beneath them</span></div>' % n_pts)
+    out.append('    </div>')
+    out.append('    <p class="plan-note">Memorise the <b>%d headings</b>. The core points '
+               'are there to help you check whether an answer is too thin &mdash; they are '
+               'not a mark scheme, and they are not %d separate facts to learn '
+               'individually.</p>' % (len(steps), n_pts))
+    out.append('    <details class="plan-points">'
+               '<summary>Show the core points to cover</summary>')
     for limb, group in limb_groups(q):
         for s in group:
             out.append('      <div class="pp-step"><b>%d. %s</b><ul>%s</ul></div>'
@@ -230,6 +239,68 @@ def plan_view(q, out):
                           ''.join('<li>%s</li>' % esc(p) for p in (s.get('points') or []))))
     out.append('    </details>')
     out.append('  </section>')
+
+
+def reference_shelf(q, out, publish):
+    """The verification layer. NOT a sixth study mode.
+
+    The five modes are a study cycle: understand, plan, write, review, recall.
+    "Where does this actually come from?" is a different question -- it is
+    evidence, not another way of studying the same answer -- so the shelf sits
+    after the answer content rather than competing with the learning sequence.
+
+    Renders nothing at all when a question carries no shelf, which is the state
+    of every question until the Founder supplies corpus mappings. Answers and
+    corpus objects are produced on parallel tracks: a missing object must never
+    block a build, and must never be papered over with a fabricated link.
+
+    Publish behaviour omits anything not resolvable, rather than shipping a
+    control that leads nowhere. Review behaviour shows the pending state so
+    production can see the gap.
+    """
+    shelf = q.get('reference_shelf') or []
+    if not shelf:
+        return
+    shown = [r for r in shelf
+             if publish is False or r.get('state') == 'REFERENCE_AVAILABLE']
+    if not shown:
+        return
+    out.append('  <section class="layer refshelf" aria-label="Reference shelf">')
+    out.append('    <div class="layer-title">Reference shelf</div>')
+    out.append('    <p class="rs-lead">Where the requirements in this answer come from.</p>')
+    for r in shown:
+        avail = r.get('state') == 'REFERENCE_AVAILABLE'
+        out.append('    <div class="rs-item%s">' % ('' if avail else ' rs-pending'))
+        out.append('      <div class="rs-rel">%s</div>'
+                   % esc(r.get('relationship', '').replace('_', ' ').title()))
+        out.append('      <div class="rs-label">%s</div>' % esc(r['label']))
+        if r.get('claim_scope'):
+            out.append('      <div class="rs-scope">%s</div>' % esc(r['claim_scope']))
+        if avail:
+            # The resolver owns document, edition, bookmark and page. This link
+            # carries the OBJECT id only, so re-pagination cannot break it.
+            out.append('      <a class="nav-btn rs-open" href="%s">Verify source</a>'
+                       % esc_attr(reference_href(r['object_id'])))
+        elif not publish:
+            out.append('      <span class="rs-state">%s</span>'
+                       % esc(r.get('state', '').replace('_', ' ').lower()))
+        out.append('    </div>')
+    out.append('  </section>')
+
+
+def reference_href(object_id):
+    """Single place that knows how an object id becomes a viewer route.
+
+    Deliberately the ONLY coupling point between the paper builder and the
+    reference viewer. When the resolver and viewer land, this function changes
+    and nothing else does. It never emits a document or page.
+    """
+    return '%s/%s' % (REFERENCE_ROUTE_BASE, object_id)
+
+
+# Provisional. Not a committed public URL: no viewer exists yet, and nothing
+# renders this until a question carries a REFERENCE_AVAILABLE object.
+REFERENCE_ROUTE_BASE = '/reference'
 
 
 def recall_view(q, out):
@@ -350,6 +421,11 @@ def build_card(q, paper, out, publish):
     recall_view(q, out)
     quick_revision(q.get('quick_revision') or {}, out)
     out.append('  </div>')
+
+    # Verification layer, outside the mode selector. Distinct from cross_links
+    # below: the shelf answers "where does this truth come from?", cross_links
+    # answers "where else has this been examined?". Different relationships.
+    reference_shelf(q, out, publish)
 
     xl = q.get('cross_links') or []
     if xl:

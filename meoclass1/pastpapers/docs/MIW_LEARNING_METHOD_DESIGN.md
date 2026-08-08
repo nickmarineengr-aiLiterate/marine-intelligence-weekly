@@ -62,6 +62,33 @@ Stack is unchanged: **structured JSON → deterministic Python renderer → vani
 
 ---
 
+## 3a. SEMANTIC INTEGRITY — the rule that outranks the rest
+
+> **Structural consistency is not semantic consistency.**
+
+Every derived representation — route, core points, knowledge map, flashcards, Quick Revision,
+Rapid Revision, memory cue, reference label — is a *short form* of a verified answer. The
+failure mode is not that it goes out of sync structurally; the toolchain catches that. It is
+that a nuanced conditional statement gets **flattened into a categorical one** on the way out.
+
+**A derived layer may never be more categorical than its source.** Every one must preserve:
+
+scope · conditions · uncertainty · jurisdiction · applicability · regulatory status
+
+This was found for real, not hypothetically. Q1's model answer said iron ore pellets are
+"carried as Group C … but establish that from the declared BCSN and its current individual
+schedule"; a route core point, `recall_15s`, `major_trap` and a flashcard had all reduced it
+to **"pellets are Group C"**. `recall_15s` contradicted itself inside a single field. It also
+overstated provenance: the group rests on authoritative-secondary sources and is recorded as
+a class C limitation.
+
+Enforced by `SEMANTIC_GUARDS` in `validate_spec.py`, which scans the **derived fields only** —
+the model answer and study guide are the source and may carry the full conditional sentence.
+Guards are narrow and known-issue-specific. There is deliberately **no general truth
+validator**; subjective quality stays a human review.
+
+Recorded as `known_traps.md` trap 16.
+
 ## 4. The core principle — do not memorise 650 words
 
 A candidate cannot reliably reproduce 650 words of prose under pressure, and the evidence
@@ -128,8 +155,22 @@ UNDERSTAND  ->  PLAN  ->  WRITE  ->  RECALL  ->  TEST
 Rendered as one mode selector inside the already-proven expandable question card:
 
 ```
-[ Understand ] [ Plan ] [ Answer ] [ Study guide ] [ Recall ]
+[ Understand ] [ Exam Plan ] [ Answer ] [ Study Guide ] [ Recall ]
 ```
+
+**Verification is a capability, not a sixth tab.** "Where does this come from?" is a
+confidence question, not another way of studying the same answer, so the Reference Shelf sits
+after the answer content and outside this selector. See `MIW_TRUE_SOURCE_CONTRACT.md`.
+
+**A memory cue must not create a second route.** A cue may point *at* the canonical route; it
+may not introduce its own sequence of a different length. Q2's cue originally listed seven
+anchors against a six-step route — the candidate then has to reconcile two structures under
+exam pressure, which is the opposite of the point. Cues now carry the step numbers they map
+to, and `check_memory_cue()` rejects an enumerated cue that maps to none.
+
+**Remember vs Cover.** The memory target and the coverage target are different sizes, and the
+UI now says so explicitly: *Remember 5 route headings · Cover 23 core points beneath them*.
+A candidate trying to memorise 23 core points is doing the wrong work.
 
 **`Answer` is the default open view.** Expertise reversal is the reason: a candidate who
 already knows the topic must not be walked through scaffolding to reach the model answer,

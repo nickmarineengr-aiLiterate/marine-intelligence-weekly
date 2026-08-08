@@ -126,6 +126,7 @@ def build_manifest(specs):
                 'question_number': q['q_no'], 'marks': q['total_marks'],
                 'question_text': strip_tags(q['text_verbatim']),
                 'short_title': q.get('short_title', ''),
+                'primary_category': q.get('primary_category'),
                 'subject_tags': q.get('subject_tags') or [],
                 'topic_tags': q.get('topic_tags') or [],
                 'intent_tags': q.get('intent_tags') or [],
@@ -379,9 +380,17 @@ def build_topics_page(man, year, publish):
           '<code>tools/pastpapers/build_index.py</code>. Updates automatically as papers are built.</div>')
     a('<main id="t-main" style="max-width:1000px;margin:0 auto;padding:20px;">')
 
+    # ONE primary category per question, plus secondary tags.
+    #
+    # Previously a question rendered under every category whose subject_tags it
+    # touched: 9 questions became 13 cards, and the placements misled -- an iron
+    # ore FSA question sat under "Statutory Framework & Class" purely because it
+    # carried a SOLAS tag. At 12 papers a year that is a few hundred duplicate
+    # cards and a topic page nobody can navigate. The primary category says where
+    # a question's SUBSTANCE sits; subject_tags stay searchable and filterable.
     used = set()
     for cat, subs in TOPIC_TREE:
-        group = [q for q in qs if set(q['subject_tags']) & set(subs)]
+        group = [q for q in qs if q.get('primary_category') == cat]
         if not group:
             continue
         a('<section class="topic-group">')
@@ -396,8 +405,15 @@ def build_topics_page(man, year, publish):
             a('    <div class="hit-title"><a href="%s">%s</a></div>'
               % (esc_attr('%s.html#%s' % (q['paper_id'], q['anchor'])), esc(q['short_title'])))
             a('    <div class="hit-stem">%s</div>' % esc(q['question_text'][:230] + '&hellip;'))
-            a('    <div class="pc-topics" style="margin-top:6px;">%s</div>'
-              % ''.join('<span class="q-tag sub">%s</span>' % esc(t) for t in q['topic_tags'][:5]))
+            # Secondary tags: the subject tags this question carries other than
+            # the one naming its primary category, plus its topic tags. They are
+            # shown so the cross-cutting relevance is visible, and they remain
+            # searchable -- but they no longer duplicate the card.
+            secondary = [t for t in q['subject_tags'] if t not in subs]
+            a('    <div class="pc-topics" style="margin-top:6px;">%s%s</div>'
+              % (''.join('<span class="q-tag">%s</span>' % esc(t) for t in secondary),
+                 ''.join('<span class="q-tag sub">%s</span>' % esc(t)
+                         for t in q['topic_tags'][:4])))
             prior = [r for r in q['recurrence'] if not r.startswith('%d/' % year)]
             if prior:
                 a('    <div class="rec-note">Other recorded sittings: %s. '

@@ -268,6 +268,10 @@
   .plan-list li{margin:4px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
+  .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
+  .cov-row + .cov-row{border-top:1px dashed var(--grey-border);}
+  .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
+  .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
   .plan-points{margin-top:9px;font-size:12.5px;}
   .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
@@ -301,6 +305,21 @@
   .card-a{padding:0 12px 11px;font-size:13.5px;border-top:1px solid var(--grey-border);}
   .card-a p{margin:9px 0 0;}
   .card-why{font-size:12px;color:var(--grey-text);border-left:3px solid var(--orange);padding-left:9px;}
+
+  /* Reference shelf: the verification layer, after the answer content and
+     outside the mode selector. Concise by design - it is evidence, not a
+     bibliography. Renders only when a question carries corpus objects. */
+  .refshelf{background:#fff;border:1.5px solid var(--grey-text);padding:0 16px 12px;margin-top:14px;}
+  .refshelf .layer-title{background:var(--grey-text);color:#fff;margin:0 -16px 10px;}
+  .rs-lead{margin:0 0 9px;font-size:13px;color:var(--grey-text);}
+  .rs-item{border:1px solid var(--grey-border);border-left:3px solid var(--teal-dark);border-radius:8px;padding:9px 12px;margin:7px 0;}
+  .rs-item.rs-pending{border-left-color:var(--grey-border);background:var(--grey-bg);}
+  .rs-rel{font-family:'Segoe UI',system-ui,sans-serif;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-dark);}
+  .rs-item.rs-pending .rs-rel{color:var(--grey-text);}
+  .rs-label{font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;margin-top:2px;}
+  .rs-scope{font-size:12.5px;color:var(--grey-text);margin-top:3px;}
+  .rs-open{margin-top:8px;font-size:12px;padding:7px 12px;}
+  .rs-state{display:inline-block;margin-top:7px;font-family:'Segoe UI',system-ui,sans-serif;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-text);border:1px dashed var(--grey-border);border-radius:999px;padding:3px 9px;}
 
   /* Study guide in its own mode is always open, so it needs .sg's look without
      the <details> mechanics. */
@@ -414,14 +433,14 @@
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q2 <span class="sep">&middot;</span> 16 marks</div>
     <div class="hit-title"><a href="QP2607.html#q2">Bunker Overflow in Foreign Waters</a></div>
     <div class="hit-stem">There is a bunker overflow from a large merchant ship while in foreign waters, in which you are the Chief Engineer. State in systematic detail the actions which you will need to take: (16) 1. Keeping in mind that the oil-spill/con&hellip;</div>
-    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">MARPOL Annex I</span><span class="q-tag sub">bunkering</span><span class="q-tag sub">oil pollution</span><span class="q-tag sub">SOPEP</span><span class="q-tag sub">Oil Record Book</span></div>
+    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">MARPOL Annex I</span><span class="q-tag sub">bunkering</span><span class="q-tag sub">oil pollution</span><span class="q-tag sub">SOPEP</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
   </div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q4 <span class="sep">&middot;</span> 16 marks</div>
     <div class="hit-title"><a href="QP2607.html#q4">ECA Fuel Changeover</a></div>
     <div class="hit-stem">As the Chief Engineer of a large merchant ship, you are about to enter an Emission Control Area. Explain, with justification, the instructions you need to give to your colleagues with respect to the procedures to be followed regar&hellip;</div>
-    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">MARPOL Annex VI</span><span class="q-tag sub">ECA</span><span class="q-tag sub">fuel changeover</span><span class="q-tag sub">boilers</span><span class="q-tag sub">sulphur</span></div>
+    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">MARPOL Annex VI</span><span class="q-tag sub">ECA</span><span class="q-tag sub">fuel changeover</span><span class="q-tag sub">boilers</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
   </div>
 </section>
@@ -432,7 +451,7 @@
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q1 <span class="sep">&middot;</span> 16 marks</div>
     <div class="hit-title"><a href="QP2607.html#q1">Iron Ore Pellets / FSA</a></div>
     <div class="hit-stem">(a) Discuss the application of a formal safety assessment in loading and carriage of iron ore pellets as cargo in bulk. (8) (b) What are the specific carriage and voyage monitoring requirements for a vessel transporting iron ore p&hellip;</div>
-    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">IMSBC</span><span class="q-tag sub">bulk cargo</span><span class="q-tag sub">iron ore pellets</span><span class="q-tag sub">FSA</span><span class="q-tag sub">SOLAS XII</span></div>
+    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag">SOLAS</span><span class="q-tag sub">IMSBC</span><span class="q-tag sub">bulk cargo</span><span class="q-tag sub">iron ore pellets</span><span class="q-tag sub">FSA</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
   </div>
 </section>
@@ -440,25 +459,11 @@
   <h3>Statutory Framework &amp; Class</h3>
   <div class="tg-sub">SOLAS &middot; Classification</div>
   <div class="hit">
-    <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q1 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="QP2607.html#q1">Iron Ore Pellets / FSA</a></div>
-    <div class="hit-stem">(a) Discuss the application of a formal safety assessment in loading and carriage of iron ore pellets as cargo in bulk. (8) (b) What are the specific carriage and voyage monitoring requirements for a vessel transporting iron ore p&hellip;</div>
-    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">IMSBC</span><span class="q-tag sub">bulk cargo</span><span class="q-tag sub">iron ore pellets</span><span class="q-tag sub">FSA</span><span class="q-tag sub">SOLAS XII</span></div>
-    <div class="rec-note">No prior sitting recorded.</div>
-  </div>
-  <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q3 <span class="sep">&middot;</span> 16 marks</div>
     <div class="hit-title"><a href="QP2607.html#q3">IACS Structure / UR, UI, PR / RO Code</a></div>
     <div class="hit-stem">a) Enumerate the structure of IACS and explain difference between UI, UR, PR from IACS. Does it have any significance to ship owners/operators? (8) b) What is a Recognized organization? What are the salient features of the R.O. Co&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">IACS</span><span class="q-tag sub">classification societies</span><span class="q-tag sub">RO Code</span><span class="q-tag sub">flag State</span></div>
     <div class="rec-note">Other recorded sittings: 2023/MAR/Q8, 2024/JAN/Q5. <i>Topic recurrence only &mdash; wording not compared.</i></div>
-  </div>
-  <div class="hit">
-    <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q6 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="QP2607.html#q6">Green Ammonia - ICE vs Fuel Cells</a></div>
-    <div class="hit-stem">Evaluate the use of Green Ammonia as a zero-carbon marine fuel. What are the primary safety, storage and combustion challenges of using ammonia in marine internal combustion engines versus fuel cells? (16)&hellip;</div>
-    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">green ammonia</span><span class="q-tag sub">alternative fuels</span><span class="q-tag sub">fuel cells</span><span class="q-tag sub">IGF Code</span><span class="q-tag sub">decarbonisation</span></div>
-    <div class="rec-note">No prior sitting recorded.</div>
   </div>
 </section>
 <section class="topic-group">
@@ -468,7 +473,7 @@
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q6 <span class="sep">&middot;</span> 16 marks</div>
     <div class="hit-title"><a href="QP2607.html#q6">Green Ammonia - ICE vs Fuel Cells</a></div>
     <div class="hit-stem">Evaluate the use of Green Ammonia as a zero-carbon marine fuel. What are the primary safety, storage and combustion challenges of using ammonia in marine internal combustion engines versus fuel cells? (16)&hellip;</div>
-    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">green ammonia</span><span class="q-tag sub">alternative fuels</span><span class="q-tag sub">fuel cells</span><span class="q-tag sub">IGF Code</span><span class="q-tag sub">decarbonisation</span></div>
+    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag">SOLAS</span><span class="q-tag sub">green ammonia</span><span class="q-tag sub">alternative fuels</span><span class="q-tag sub">fuel cells</span><span class="q-tag sub">IGF Code</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
   </div>
 </section>
@@ -483,17 +488,10 @@
     <div class="rec-note">Other recorded sittings: 2023/APR/Q3, 2025/SEP/Q3. <i>Topic recurrence only &mdash; wording not compared.</i></div>
   </div>
   <div class="hit">
-    <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q7 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="QP2607.html#q7">Merchant Shipping Act 2025</a></div>
-    <div class="hit-stem">India has recently taken significant legislative measures that are critical to streamlining maritime governance and bringing India's shipping regulation in line with global practices. Explain the significance of the Merchant Shipp&hellip;</div>
-    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">Merchant Shipping Act 2025</span><span class="q-tag sub">India</span><span class="q-tag sub">DGMA</span><span class="q-tag sub">tonnage</span><span class="q-tag sub">maritime governance</span></div>
-    <div class="rec-note">No prior sitting recorded.</div>
-  </div>
-  <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q9 <span class="sep">&middot;</span> 16 marks</div>
     <div class="hit-title"><a href="QP2607.html#q9">Uberrimae Fidei / Disclosure</a></div>
     <div class="hit-stem">Explain the principle of "Uberrimae Fidei" in Marine Insurance. What are the different disclosures which must be made by the insured to the insurer in Marine Insurance? List the circumstances which need not be disclosed to the ins&hellip;</div>
-    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">marine insurance</span><span class="q-tag sub">uberrimae fidei</span><span class="q-tag sub">disclosure</span><span class="q-tag sub">utmost good faith</span></div>
+    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag">Indian Legislation</span><span class="q-tag sub">marine insurance</span><span class="q-tag sub">uberrimae fidei</span><span class="q-tag sub">disclosure</span><span class="q-tag sub">utmost good faith</span></div>
     <div class="rec-note">Other recorded sittings: 2022/OCT/Q2, 2024/JAN/Q1. <i>Topic recurrence only &mdash; wording not compared.</i></div>
   </div>
 </section>
@@ -504,7 +502,7 @@
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q8 <span class="sep">&middot;</span> 16 marks</div>
     <div class="hit-title"><a href="QP2607.html#q8">Competence vs Performance / Automation</a></div>
     <div class="hit-stem">(a) In the context of the human element, explain the difference between crew "competence" and crew "performance." Discuss the role of ongoing training and drills in ensuring that competence translates into high performance, especi&hellip;</div>
-    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">human element</span><span class="q-tag sub">STCW</span><span class="q-tag sub">competence</span><span class="q-tag sub">automation</span><span class="q-tag sub">drills</span></div>
+    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">human element</span><span class="q-tag sub">STCW</span><span class="q-tag sub">competence</span><span class="q-tag sub">automation</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
   </div>
 </section>
@@ -515,15 +513,8 @@
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q7 <span class="sep">&middot;</span> 16 marks</div>
     <div class="hit-title"><a href="QP2607.html#q7">Merchant Shipping Act 2025</a></div>
     <div class="hit-stem">India has recently taken significant legislative measures that are critical to streamlining maritime governance and bringing India's shipping regulation in line with global practices. Explain the significance of the Merchant Shipp&hellip;</div>
-    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">Merchant Shipping Act 2025</span><span class="q-tag sub">India</span><span class="q-tag sub">DGMA</span><span class="q-tag sub">tonnage</span><span class="q-tag sub">maritime governance</span></div>
+    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag">Commercial Law</span><span class="q-tag sub">Merchant Shipping Act 2025</span><span class="q-tag sub">India</span><span class="q-tag sub">DGMA</span><span class="q-tag sub">tonnage</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
-  </div>
-  <div class="hit">
-    <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q9 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="QP2607.html#q9">Uberrimae Fidei / Disclosure</a></div>
-    <div class="hit-stem">Explain the principle of "Uberrimae Fidei" in Marine Insurance. What are the different disclosures which must be made by the insured to the insurer in Marine Insurance? List the circumstances which need not be disclosed to the ins&hellip;</div>
-    <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">marine insurance</span><span class="q-tag sub">uberrimae fidei</span><span class="q-tag sub">disclosure</span><span class="q-tag sub">utmost good faith</span></div>
-    <div class="rec-note">Other recorded sittings: 2022/OCT/Q2, 2024/JAN/Q1. <i>Topic recurrence only &mdash; wording not compared.</i></div>
   </div>
 </section>
 </main>

@@ -295,6 +295,42 @@ changes needed there.
 > corrected or superseded. They are not a licence to automate. The skill becomes
 > `miw-pastpapers-production_SKILL.md` only after the complete QP2607 paper passes Founder review.
 
+## Z. THE PRODUCTION ORDER (supersedes any earlier ordering in this draft)
+
+```
+1  verified source research            primary sources; provenance class per claim
+2  verified Model Answer               the three-layer test
+3  answer_route                        ONE canonical numbered sequence, 5-9 steps
+4  derived learning aids               map, recall, exam plan, cards, cheat sheet
+5  SEMANTIC REGRESSION REVIEW          <-- mandatory gate, see below
+6  reference-object mapping            ONLY where a corpus object already exists
+7  deterministic build                 run_toolchain.py --self-test
+8  known traps / health                positive-controlled
+9  human Founder review
+```
+
+### Step 5 is a gate, not a formality
+
+Derived aids are written from the answer, and the recurring failure is that they come out
+**more categorical than the answer**. Before building, re-read every derived field against
+its source and confirm scope, conditions, uncertainty, jurisdiction, applicability and
+regulatory status all survived. `SEMANTIC_GUARDS` in `validate_spec.py` catches known
+patterns; it is not a substitute for reading. See `MIW_LEARNING_METHOD_DESIGN.md` §3a.
+
+### Step 6: absence of a corpus object is a normal outcome
+
+**Never invent a corpus object id.** If no verified object exists for a claim, leave
+`reference_shelf` absent, or record the entry with `state: NO_CORPUS_OBJECT_YET`. A question
+with no shelf is valid and builds cleanly. Questions and corpus objects are produced on
+parallel tracks, and a fabricated reference is worse than a missing one because it looks
+authoritative. Never copy regulation text into a question spec, and never reference a PDF
+page — `validate_spec.py` fails the build on both. See `MIW_TRUE_SOURCE_CONTRACT.md`.
+
+### One primary category per question
+
+Assign exactly one `primary_category` from the topic tree; the topic page renders each
+question once, under it. `subject_tags` remain the searchable secondary tags.
+
 ## A. Superseded assumptions
 
 | Draft said | Superseded by | Why |

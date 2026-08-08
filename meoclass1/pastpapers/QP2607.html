@@ -268,6 +268,10 @@
   .plan-list li{margin:4px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
+  .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
+  .cov-row + .cov-row{border-top:1px dashed var(--grey-border);}
+  .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
+  .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
   .plan-points{margin-top:9px;font-size:12.5px;}
   .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
@@ -301,6 +305,21 @@
   .card-a{padding:0 12px 11px;font-size:13.5px;border-top:1px solid var(--grey-border);}
   .card-a p{margin:9px 0 0;}
   .card-why{font-size:12px;color:var(--grey-text);border-left:3px solid var(--orange);padding-left:9px;}
+
+  /* Reference shelf: the verification layer, after the answer content and
+     outside the mode selector. Concise by design - it is evidence, not a
+     bibliography. Renders only when a question carries corpus objects. */
+  .refshelf{background:#fff;border:1.5px solid var(--grey-text);padding:0 16px 12px;margin-top:14px;}
+  .refshelf .layer-title{background:var(--grey-text);color:#fff;margin:0 -16px 10px;}
+  .rs-lead{margin:0 0 9px;font-size:13px;color:var(--grey-text);}
+  .rs-item{border:1px solid var(--grey-border);border-left:3px solid var(--teal-dark);border-radius:8px;padding:9px 12px;margin:7px 0;}
+  .rs-item.rs-pending{border-left-color:var(--grey-border);background:var(--grey-bg);}
+  .rs-rel{font-family:'Segoe UI',system-ui,sans-serif;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-dark);}
+  .rs-item.rs-pending .rs-rel{color:var(--grey-text);}
+  .rs-label{font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;margin-top:2px;}
+  .rs-scope{font-size:12.5px;color:var(--grey-text);margin-top:3px;}
+  .rs-open{margin-top:8px;font-size:12px;padding:7px 12px;}
+  .rs-state{display:inline-block;margin-top:7px;font-family:'Segoe UI',system-ui,sans-serif;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-text);border:1px dashed var(--grey-border);border-radius:999px;padding:3px 9px;}
 
   /* Study guide in its own mode is always open, so it needs .sg's look without
      the <details> mechanics. */
@@ -507,9 +526,9 @@
   <div class="q-body" id="q1-body" hidden>
   <div class="learn-bar" role="tablist" aria-label="Study mode">
     <button class="learn-btn" type="button" role="tab" data-mode="understand" aria-selected="false">Understand</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Plan</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Exam Plan</button>
     <button class="learn-btn" type="button" role="tab" data-mode="answer" aria-selected="true">Answer</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study guide</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study Guide</button>
     <button class="learn-btn" type="button" role="tab" data-mode="recall" aria-selected="false">Recall</button>
   </div>
   <div class="mode" data-mode="understand">
@@ -537,7 +556,7 @@
       <li class="kmap-limb"><span class="kmap-limb-l">(b)</span>
         <ol>
           <li class="kmap-branch"><span class="kmap-n">4</span><span class="kmap-t">Before loading</span>
-            <ul class="kmap-kids"><li>shipper's declaration, SOLAS VI/2 and IMSBC 4.2</li><li>declared BCSN governs, never the commodity name</li><li>pellets are Group C, not Group A</li></ul>
+            <ul class="kmap-kids"><li>shipper's declaration, SOLAS VI/2 and IMSBC 4.2</li><li>declared BCSN and its current schedule govern, never the commodity name</li><li>IRON ORE, FINES, PELLETS and DRI (B) are separate schedules</li></ul>
           </li>
           <li class="kmap-branch"><span class="kmap-n">5</span><span class="kmap-t">During loading</span>
             <ul class="kmap-kids"><li>approved loading sequence</li><li>shear force and bending moment on the loading instrument</li><li>tank-top strength limit</li></ul>
@@ -566,14 +585,17 @@
       <li value="5">During loading</li>
       <li value="6">Voyage monitoring</li>
     </ol>
-    <p class="plan-cue"><b>Memory cue.</b> Part (b) is simply before, during, after: BEFORE LOADING - DURING LOADING - VOYAGE.</p>
-    <div class="plan-cov">Core points to cover: <b>28</b> across <b>6</b> sections</div>
-    <p class="plan-note">A core point is one distinct exam-relevant proposition, action, requirement or distinction &mdash; not one sentence. This is a completeness check, not a mark scheme.</p>
-    <details class="plan-points"><summary>Show the core points</summary>
+    <p class="plan-cue"><b>Memory cue.</b> Part (b) is simply before, during, after: BEFORE LOADING (4) - DURING LOADING (5) - VOYAGE (6).</p>
+    <div class="plan-cov">
+      <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>6</b> route headings</span></div>
+      <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>28</b> core points beneath them</span></div>
+    </div>
+    <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 28 separate facts to learn individually.</p>
+    <details class="plan-points"><summary>Show the core points to cover</summary>
       <div class="pp-step"><b>1. Define FSA and cite the governing instrument</b><ul><li>structured, systematic methodology</li><li>MSC-MEPC.2/Circ.12/Rev.2</li><li>enhances safety including the environment</li><li>uses risk analysis and cost-benefit</li></ul></div>
       <div class="pp-step"><b>2. The five FSA steps applied to the cargo</b><ul><li>hazard identification</li><li>risk analysis</li><li>risk control options</li><li>cost-benefit assessment</li><li>recommendations for decision-making</li></ul></div>
       <div class="pp-step"><b>3. Where FSA applies, and the shipboard analogue</b><ul><li>a rule-development tool, not a ship tool</li><li>applied by States and IMO committees (para 1.3.1)</li><li>IMO used it for bulk carrier safety</li><li>shipboard analogue is ISM 1.2.2.2</li></ul></div>
-      <div class="pp-step"><b>4. Before loading</b><ul><li>shipper's declaration, SOLAS VI/2 and IMSBC 4.2</li><li>declared BCSN governs, never the commodity name</li><li>pellets are Group C, not Group A</li><li>holds clean and dry, bilges proved</li><li>hatch covers weathertight</li></ul></div>
+      <div class="pp-step"><b>4. Before loading</b><ul><li>shipper's declaration, SOLAS VI/2 and IMSBC 4.2</li><li>declared BCSN and its current schedule govern, never the commodity name</li><li>IRON ORE, FINES, PELLETS and DRI (B) are separate schedules</li><li>holds clean and dry, bilges proved</li><li>hatch covers weathertight</li></ul></div>
       <div class="pp-step"><b>5. During loading</b><ul><li>approved loading sequence</li><li>shear force and bending moment on the loading instrument</li><li>tank-top strength limit</li><li>BLU Code and trimming</li><li>watch for excessive GM and a stiff ship</li></ul></div>
       <div class="pp-step"><b>6. Voyage monitoring</b><ul><li>hold bilge soundings at SMS frequency</li><li>SOLAS XII/12 water ingress alarms</li><li>weather routeing, avoid slamming</li><li>enclosed space entry precautions</li><li>record everything</li></ul></div>
     </details>
@@ -600,7 +622,7 @@
     <h3>4. Before loading</h3>
     <ul>
       <li>Obtain the shipper's cargo declaration required by SOLAS VI/2 and IMSBC section 4.2, stating the Bulk Cargo Shipping Name and Group, and read that BCSN's individual schedule. <b>The declared BCSN governs, never the commodity name</b> - IRON ORE, IRON ORE FINES, IRON ORE PELLETS and DIRECT REDUCED IRON (B) are different cargoes in different Groups, and pellets appears in two of those names.</li>
-      <li>Iron ore pellets are carried as Group C - neither liable to liquefy nor a chemical hazard - but confirm it from the declaration and schedule, noting that the fines schedule carries qualifying criteria under which fines may also be Group C.</li>
+      <li>Iron ore pellets are carried as Group C - neither liable to liquefy nor a chemical hazard - but establish that from the declared BCSN and its <b>current individual schedule</b>, noting that the fines schedule carries qualifying criteria under which fines may also be Group C.</li>
       <li>Holds clean and dry; bilge wells clear; strainers, non-return valves and bilge lines proved; hold bilge suctions protected against ingress of fines.</li>
       <li>Hatch covers weathertight-tested.</li>
     </ul>
@@ -699,10 +721,10 @@
       </div>
     </div>
     <div class="card" id="QP2607-Q1-C4">
-      <button class="card-q" type="button" aria-expanded="false" aria-controls="QP2607-Q1-C4-a"><span class="card-type">trap</span>Iron ore pellets - which IMSBC group, and what is the trap?</button>
+      <button class="card-q" type="button" aria-expanded="false" aria-controls="QP2607-Q1-C4-a"><span class="card-type">trap</span>You are asked about iron ore pellets carried in bulk. What is the biggest structural trap in the answer?</button>
       <div class="card-a" id="QP2607-Q1-C4-a" hidden>
-        <p>Group C. The trap is writing a liquefaction and TML answer, which belongs to Group A. "Pellets" also appears in the DIRECT REDUCED IRON (B) schedule name, which is Group B.</p>
-        <p class="card-why">IRON ORE, IRON ORE FINES, IRON ORE PELLETS and DRI (B) are four separate schedules.</p>
+        <p>Writing a liquefaction and Transportable Moisture Limit answer. TML is a Group A concept. Establish the group from the declared BCSN and its current individual schedule before applying any carriage regime.</p>
+        <p class="card-why">IRON ORE, IRON ORE FINES, IRON ORE PELLETS and DIRECT REDUCED IRON (B) are four separate schedules, and 'pellets' appears in the DRI (B) name. MIW holds no licensed IMSBC Code, so this cargo's group rests on authoritative secondary sources - recorded as a class C limitation, not as primary-verified fact.</p>
       </div>
     </div>
     <div class="card" id="QP2607-Q1-C5">
@@ -727,7 +749,7 @@
   <section class="layer qr" aria-label="Quick revision">
     <div class="layer-title">Quick revision</div>
     <dl>
-      <dt>15-second recall</dt><dd>FSA is IMO's five-step rule-making methodology - hazards, risk analysis, control options, cost-benefit, recommendations. Applied to iron ore pellets the hazards are structural and water ingress, not liquefaction: pellets are Group C. The declared BCSN and its schedule govern, never the commodity name.</dd>
+      <dt>15-second recall</dt><dd>FSA is IMO's five-step rule-making methodology - hazards, risk analysis, control options, cost-benefit, recommendations. Applied to iron ore pellets the hazards are structural and water ingress rather than liquefaction - but the group follows the declared BCSN and its current individual schedule, never the commodity name.</dd>
       <dt>Keywords</dt><dd><span class="kw">FSA</span><span class="kw">ALARP</span><span class="kw">Group C</span><span class="kw">BCSN</span><span class="kw">SOLAS XII/12</span><span class="kw">loading instrument</span><span class="kw">IMSBC</span><span class="kw">trimming</span></dd>
       <dt>Critical numbers</dt><dd><ul>
         <li>XII/12 alarms: 0.5 m above inner bottom, and 15% of hold depth but not more than 2.0 m</li>
@@ -735,7 +757,7 @@
         <li>IMSBC 07-23 mandatory; 08-25 voluntary 1 Jan 2026, mandatory 1 Jan 2027</li>
       </ul></dd>
       <dt>Critical regulation</dt><dd>MSC-MEPC.2/Circ.12/Rev.2 para 1.3.1 - FSA is applied by Member States and IMO Committees, not by ships</dd>
-      <dt>Major trap</dt><dd class="trap">Writing a liquefaction/TML answer. Pellets are Group C. And 'pellets' also appears in the DIRECT REDUCED IRON (B) schedule name, which is Group B.</dd>
+      <dt>Major trap</dt><dd class="trap">Writing a liquefaction and TML answer. TML is a Group A concept. Read the declared BCSN's current individual schedule before assuming any group: IRON ORE, IRON ORE FINES, IRON ORE PELLETS and DIRECT REDUCED IRON (B) are separate schedules, and 'pellets' appears in the DRI (B) name too.</dd>
     </dl>
   </section>
   </div>
@@ -802,9 +824,9 @@
   <div class="q-body" id="q2-body" hidden>
   <div class="learn-bar" role="tablist" aria-label="Study mode">
     <button class="learn-btn" type="button" role="tab" data-mode="understand" aria-selected="false">Understand</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Plan</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Exam Plan</button>
     <button class="learn-btn" type="button" role="tab" data-mode="answer" aria-selected="true">Answer</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study guide</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study Guide</button>
     <button class="learn-btn" type="button" role="tab" data-mode="recall" aria-selected="false">Recall</button>
   </div>
   <div class="mode" data-mode="understand">
@@ -845,10 +867,13 @@
       <li value="5">Liabilities to guard against</li>
       <li value="6">Post-incident corrective action</li>
     </ol>
-    <p class="plan-cue"><b>Memory cue.</b> Follow the incident in real time: STOP - CONTAIN - RECORD - REPORT - COOPERATE - PAY - PREVENT. The order is the order things actually happen on deck.</p>
-    <div class="plan-cov">Core points to cover: <b>27</b> across <b>6</b> sections</div>
-    <p class="plan-note">A core point is one distinct exam-relevant proposition, action, requirement or distinction &mdash; not one sentence. This is a completeness check, not a mark scheme.</p>
-    <details class="plan-points"><summary>Show the core points</summary>
+    <p class="plan-cue"><b>Memory cue.</b> Follow the incident in real time: STOP and CONTAIN (1) - RECORD (2) - REPORT (3) - COOPERATE (4) - LIABILITY (5) - PREVENT (6). Six anchors for six sections; stopping and containing are both section 1.</p>
+    <div class="plan-cov">
+      <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>6</b> route headings</span></div>
+      <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>27</b> core points beneath them</span></div>
+    </div>
+    <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 27 separate facts to learn individually.</p>
+    <details class="plan-points"><summary>Show the core points to cover</summary>
       <div class="pp-step"><b>1. Immediate action and containment</b><ul><li>stop the transfer</li><li>raise the alarm and muster</li><li>close valves and isolate</li><li>deploy SOPEP containment</li><li>find and stop the cause</li></ul></div>
       <div class="pp-step"><b>2. Critical documentation</b><ul><li>Oil Record Book parts (G) and (H)</li><li>bunker delivery note and samples</li><li>tank soundings before and after</li><li>alarm and monitoring logs</li><li>never overwrite or backdate</li></ul></div>
       <div class="pp-step"><b>3. Mandatory reporting</b><ul><li>coastal State by its designated system</li><li>MARPOL art. 8 and Protocol I</li><li>Res. A.851(20) reporting format</li><li>SOPEP under reg 37</li><li>notify company, flag, class and P&amp;I</li></ul></div>
@@ -1082,9 +1107,9 @@
   <div class="q-body" id="q3-body" hidden>
   <div class="learn-bar" role="tablist" aria-label="Study mode">
     <button class="learn-btn" type="button" role="tab" data-mode="understand" aria-selected="false">Understand</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Plan</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Exam Plan</button>
     <button class="learn-btn" type="button" role="tab" data-mode="answer" aria-selected="true">Answer</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study guide</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study Guide</button>
     <button class="learn-btn" type="button" role="tab" data-mode="recall" aria-selected="false">Recall</button>
   </div>
   <div class="mode" data-mode="understand">
@@ -1137,9 +1162,12 @@
       <li value="5">The RO Code and its salient features</li>
       <li value="6">How Administrations monitor ROs</li>
     </ol>
-    <div class="plan-cov">Core points to cover: <b>25</b> across <b>6</b> sections</div>
-    <p class="plan-note">A core point is one distinct exam-relevant proposition, action, requirement or distinction &mdash; not one sentence. This is a completeness check, not a mark scheme.</p>
-    <details class="plan-points"><summary>Show the core points</summary>
+    <div class="plan-cov">
+      <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>6</b> route headings</span></div>
+      <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>25</b> core points beneath them</span></div>
+    </div>
+    <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 25 separate facts to learn individually.</p>
+    <details class="plan-points"><summary>Show the core points to cover</summary>
       <div class="pp-step"><b>1. What IACS is and how it is structured</b><ul><li>non-governmental association of class societies</li><li>IMO consultative status</li><li>Council, GPG, Panels, Secretariat</li><li>members must meet the Quality System Certification Scheme</li></ul></div>
       <div class="pp-step"><b>2. UR, UI and PR - what each is and its effect</b><ul><li>UR: minimum technical requirement, a floor</li><li>UI: common interpretation of an IMO instrument</li><li>PR: procedural requirement for how members work</li><li>members implement in their own rules by a set date</li></ul></div>
       <div class="pp-step"><b>3. Significance to owners and operators</b><ul><li>a predictable technical floor whoever classes the ship</li><li>no shopping for materially softer rules</li><li>consistency at port State control</li><li>orderly transfer of class</li></ul></div>
@@ -1349,9 +1377,9 @@
   <div class="q-body" id="q4-body" hidden>
   <div class="learn-bar" role="tablist" aria-label="Study mode">
     <button class="learn-btn" type="button" role="tab" data-mode="understand" aria-selected="false">Understand</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Plan</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Exam Plan</button>
     <button class="learn-btn" type="button" role="tab" data-mode="answer" aria-selected="true">Answer</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study guide</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study Guide</button>
     <button class="learn-btn" type="button" role="tab" data-mode="recall" aria-selected="false">Recall</button>
   </div>
   <div class="mode" data-mode="understand">
@@ -1400,10 +1428,13 @@
       <li value="7">Contingency</li>
       <li value="8">Statutes and instruments involved</li>
     </ol>
-    <p class="plan-cue"><b>Memory cue.</b> Follow the fuel: WHERE (limit) - WHEN (start early) - TANKS - ENGINES - BOILERS - RECORDS - WHAT IF. Plant order, then paperwork, then contingency.</p>
-    <div class="plan-cov">Core points to cover: <b>29</b> across <b>8</b> sections</div>
-    <p class="plan-note">A core point is one distinct exam-relevant proposition, action, requirement or distinction &mdash; not one sentence. This is a completeness check, not a mark scheme.</p>
-    <details class="plan-points"><summary>Show the core points</summary>
+    <p class="plan-cue"><b>Memory cue.</b> Follow the fuel: WHERE (1) - WHEN (2) - TANKS (3) - ENGINES (4) - BOILERS (5) - RECORDS (6) - WHAT IF (7), then cite the instruments (8).</p>
+    <div class="plan-cov">
+      <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>8</b> route headings</span></div>
+      <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>29</b> core points beneath them</span></div>
+    </div>
+    <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 29 separate facts to learn individually.</p>
+    <details class="plan-points"><summary>Show the core points to cover</summary>
       <div class="pp-step"><b>1. Establish the entry point and the applicable limit</b><ul><li>identify the ECA and its boundary</li><li>ECA limit 0.10% m/m sulphur</li><li>global limit 0.50% outside</li><li>plan from the passage plan, not on sight of land</li></ul></div>
       <div class="pp-step"><b>2. Calculate the changeover and start early enough</b><ul><li>flushing volume of the whole system</li><li>consumption rate at sea speed</li><li>begin well before the boundary</li><li>complete before entering</li></ul></div>
       <div class="pp-step"><b>3. Tank segregation and compatibility</b><ul><li>separate tanks and lines for each grade</li><li>compatibility test before commingling</li><li>avoid sludge and asphaltene precipitation</li><li>plan quantities so neither grade runs short</li></ul></div>
@@ -1635,9 +1666,9 @@
   <div class="q-body" id="q5-body" hidden>
   <div class="learn-bar" role="tablist" aria-label="Study mode">
     <button class="learn-btn" type="button" role="tab" data-mode="understand" aria-selected="false">Understand</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Plan</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Exam Plan</button>
     <button class="learn-btn" type="button" role="tab" data-mode="answer" aria-selected="true">Answer</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study guide</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study Guide</button>
     <button class="learn-btn" type="button" role="tab" data-mode="recall" aria-selected="false">Recall</button>
   </div>
   <div class="mode" data-mode="understand">
@@ -1678,9 +1709,12 @@
       <li value="4">Average adjusters and their role</li>
       <li value="5">Which rules actually apply</li>
     </ol>
-    <div class="plan-cov">Core points to cover: <b>23</b> across <b>5</b> sections</div>
-    <p class="plan-note">A core point is one distinct exam-relevant proposition, action, requirement or distinction &mdash; not one sentence. This is a completeness check, not a mark scheme.</p>
-    <details class="plan-points"><summary>Show the core points</summary>
+    <div class="plan-cov">
+      <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>5</b> route headings</span></div>
+      <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>23</b> core points beneath them</span></div>
+    </div>
+    <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 23 separate facts to learn individually.</p>
+    <details class="plan-points"><summary>Show the core points to cover</summary>
       <div class="pp-step"><b>1. Particular Average</b><ul><li>a partial loss</li><li>accidental, by a peril insured against</li><li>not a general average loss</li><li>falls solely on the interest damaged</li></ul></div>
       <div class="pp-step"><b>2. General Average, and how it differs</b><ul><li>extraordinary sacrifice or expenditure</li><li>intentional and reasonable</li><li>in time of peril, for the common safety</li><li>shared rateably by all interests</li><li>Marine Insurance Act 1963 s.66</li></ul></div>
       <div class="pp-step"><b>3. When General Average may be declared</b><ul><li>York-Antwerp Rule A elements must all be present</li><li>peril must be real, not merely feared</li><li>the act must be deliberate</li><li>the sacrifice must be extraordinary</li><li>the adventure must be preserved</li></ul></div>
@@ -1885,9 +1919,9 @@
   <div class="q-body" id="q6-body" hidden>
   <div class="learn-bar" role="tablist" aria-label="Study mode">
     <button class="learn-btn" type="button" role="tab" data-mode="understand" aria-selected="false">Understand</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Plan</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Exam Plan</button>
     <button class="learn-btn" type="button" role="tab" data-mode="answer" aria-selected="true">Answer</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study guide</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study Guide</button>
     <button class="learn-btn" type="button" role="tab" data-mode="recall" aria-selected="false">Recall</button>
   </div>
   <div class="mode" data-mode="understand">
@@ -1928,9 +1962,12 @@
       <li value="4">Combustion: IC engines versus fuel cells</li>
       <li value="5">Regulatory status - state it carefully</li>
     </ol>
-    <div class="plan-cov">Core points to cover: <b>20</b> across <b>5</b> sections</div>
-    <p class="plan-note">A core point is one distinct exam-relevant proposition, action, requirement or distinction &mdash; not one sentence. This is a completeness check, not a mark scheme.</p>
-    <details class="plan-points"><summary>Show the core points</summary>
+    <div class="plan-cov">
+      <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>5</b> route headings</span></div>
+      <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>20</b> core points beneath them</span></div>
+    </div>
+    <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 20 separate facts to learn individually.</p>
+    <details class="plan-points"><summary>Show the core points to cover</summary>
       <div class="pp-step"><b>1. Qualify "zero-carbon" before evaluating</b><ul><li>no carbon in the molecule, so no CO2 from combustion</li><li>lifecycle depends on the production pathway</li><li>green only if renewable hydrogen is used</li><li>N2O and ammonia slip are still emissions</li></ul></div>
       <div class="pp-step"><b>2. Evaluation - the case for and against</b><ul><li>high hydrogen density by volume, no carbon</li><li>established production and handling industry</li><li>low energy density per unit volume vs fuel oil</li><li>large bunker tanks displace cargo</li></ul></div>
       <div class="pp-step"><b>3. Safety, toxicity and storage</b><ul><li>toxicity dominates the risk case, not flammability</li><li>refrigerated or pressurised containment</li><li>material compatibility, copper alloys attacked</li><li>gas detection, water spray, citadel and escape sets</li></ul></div>
@@ -2146,12 +2183,16 @@
   <div class="q-body" id="q7-body" hidden>
   <div class="learn-bar" role="tablist" aria-label="Study mode">
     <button class="learn-btn" type="button" role="tab" data-mode="understand" aria-selected="false">Understand</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Plan</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Exam Plan</button>
     <button class="learn-btn" type="button" role="tab" data-mode="answer" aria-selected="true">Answer</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study guide</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study Guide</button>
     <button class="learn-btn" type="button" role="tab" data-mode="recall" aria-selected="false">Recall</button>
   </div>
   <div class="mode" data-mode="understand">
+  <section class="layer uf" aria-label="Understand this first">
+    <div class="layer-title">Understand this first</div>
+    <p>The examiner is not asking for a tour of 325 sections. The task is to connect a small number of specific legal reforms - who may own an Indian vessel, what may be registered, what the repeal sweeps away - to the four things the question names: trade, tonnage, investment and international alignment. The discipline is to keep what the Act legally does separate from what the Government hopes it will cause.</p>
+  </section>
   <section class="layer kmap" aria-label="Knowledge map">
     <div class="layer-title">Knowledge map<button class="kmap-toggle" type="button" aria-pressed="false">Hide branches</button></div>
     <div class="kmap-root">Merchant Shipping Act 2025</div>
@@ -2185,9 +2226,12 @@
       <li value="4">Alignment with global practice</li>
       <li value="5">Assessment - law versus expectation</li>
     </ol>
-    <div class="plan-cov">Core points to cover: <b>20</b> across <b>5</b> sections</div>
-    <p class="plan-note">A core point is one distinct exam-relevant proposition, action, requirement or distinction &mdash; not one sentence. This is a completeness check, not a mark scheme.</p>
-    <details class="plan-points"><summary>Show the core points</summary>
+    <div class="plan-cov">
+      <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>5</b> route headings</span></div>
+      <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>20</b> core points beneath them</span></div>
+    </div>
+    <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 20 separate facts to learn individually.</p>
+    <details class="plan-points"><summary>Show the core points to cover</summary>
       <div class="pp-step"><b>1. What the Act is</b><ul><li>Act No. 24 of 2025, assent 18 August 2025</li><li>whole Act in force 15 March 2026 by S.O. 1244(E)</li><li>325 sections in 16 Parts</li><li>s.324(1) repeals the 1958 Act and the 1838 Act</li></ul></div>
       <div class="pp-step"><b>2. Trade and tonnage expansion</b><ul><li>s.15(1) ownership widened to NRIs and OCIs</li><li>s.16 bareboat charter-cum-demise registration</li><li>s.17 temporary registration for recycling</li><li>broader vessel coverage</li></ul></div>
       <div class="pp-step"><b>3. Attracting foreign investment</b><ul><li>wider ownership base</li><li>recognition of chartered-in tonnage</li><li>provisional and temporary registration routes</li><li>detail moved to rules, so the regime can be updated administratively</li></ul></div>
@@ -2397,9 +2441,9 @@
   <div class="q-body" id="q8-body" hidden>
   <div class="learn-bar" role="tablist" aria-label="Study mode">
     <button class="learn-btn" type="button" role="tab" data-mode="understand" aria-selected="false">Understand</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Plan</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Exam Plan</button>
     <button class="learn-btn" type="button" role="tab" data-mode="answer" aria-selected="true">Answer</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study guide</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study Guide</button>
     <button class="learn-btn" type="button" role="tab" data-mode="recall" aria-selected="false">Recall</button>
   </div>
   <div class="mode" data-mode="understand">
@@ -2456,9 +2500,12 @@
       <li value="5">Automation - positive and negative effects</li>
       <li value="6">The IMO human-element framework</li>
     </ol>
-    <div class="plan-cov">Core points to cover: <b>26</b> across <b>6</b> sections</div>
-    <p class="plan-note">A core point is one distinct exam-relevant proposition, action, requirement or distinction &mdash; not one sentence. This is a completeness check, not a mark scheme.</p>
-    <details class="plan-points"><summary>Show the core points</summary>
+    <div class="plan-cov">
+      <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>6</b> route headings</span></div>
+      <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>26</b> core points beneath them</span></div>
+    </div>
+    <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 26 separate facts to learn individually.</p>
+    <details class="plan-points"><summary>Show the core points to cover</summary>
       <div class="pp-step"><b>1. Competence defined</b><ul><li>demonstrated ability to a defined standard</li><li>assessed against stated criteria</li><li>STCW Code part A competence tables</li></ul></div>
       <div class="pp-step"><b>2. Performance defined</b><ul><li>what the seafarer actually does in the real situation</li><li>at 0300, fatigued, incomplete alarm picture</li><li>in a team that may not have worked together</li></ul></div>
       <div class="pp-step"><b>3. Why competence does not guarantee performance</b><ul><li>fatigue and hours of rest</li><li>workload and manning level</li><li>leadership and command climate</li><li>communication and language</li><li>stress and time pressure</li></ul></div>
@@ -2664,9 +2711,9 @@
   <div class="q-body" id="q9-body" hidden>
   <div class="learn-bar" role="tablist" aria-label="Study mode">
     <button class="learn-btn" type="button" role="tab" data-mode="understand" aria-selected="false">Understand</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Plan</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="plan" aria-selected="false">Exam Plan</button>
     <button class="learn-btn" type="button" role="tab" data-mode="answer" aria-selected="true">Answer</button>
-    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study guide</button>
+    <button class="learn-btn" type="button" role="tab" data-mode="guide" aria-selected="false">Study Guide</button>
     <button class="learn-btn" type="button" role="tab" data-mode="recall" aria-selected="false">Recall</button>
   </div>
   <div class="mode" data-mode="understand">
@@ -2707,9 +2754,12 @@
       <li value="4">Circumstances which need NOT be disclosed</li>
       <li value="5">Effect of non-disclosure</li>
     </ol>
-    <div class="plan-cov">Core points to cover: <b>21</b> across <b>5</b> sections</div>
-    <p class="plan-note">A core point is one distinct exam-relevant proposition, action, requirement or distinction &mdash; not one sentence. This is a completeness check, not a mark scheme.</p>
-    <details class="plan-points"><summary>Show the core points</summary>
+    <div class="plan-cov">
+      <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>5</b> route headings</span></div>
+      <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>21</b> core points beneath them</span></div>
+    </div>
+    <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 21 separate facts to learn individually.</p>
+    <details class="plan-points"><summary>Show the core points to cover</summary>
       <div class="pp-step"><b>1. The governing statute</b><ul><li>Indian examination, so the Marine Insurance Act 1963</li><li>follows the English 1906 Act but is the one to cite</li><li>the UK Insurance Act 2015 reform does not apply</li></ul></div>
       <div class="pp-step"><b>2. The principle of Uberrimae Fidei</b><ul><li>s.19 - utmost good faith</li><li>mutual, binding on both parties</li><li>applies before the contract is concluded</li><li>remedy is avoidance by the other party</li></ul></div>
       <div class="pp-step"><b>3. Disclosures the assured must make</b><ul><li>s.20 - every material circumstance known</li><li>material = would influence a prudent insurer</li><li>deemed knowledge in the ordinary course of business</li><li>s.21 agent, s.22 representations</li></ul></div>
@@ -2888,7 +2938,7 @@
         <td data-l="Topic">Iron Ore Pellets / FSA<br><span class="rec-note">16 marks</span></td>
         <td data-l="Answer route">Define FSA and cite the governing instrument &rarr; The five FSA steps applied to the cargo &rarr; Where FSA applies, and the shipboard analogue &rarr; Before loading &rarr; During loading &rarr; Voyage monitoring</td>
         <td data-l="Critical rule">MSC-MEPC.2/Circ.12/Rev.2 para 1.3.1 - FSA is applied by Member States and IMO Committees, not by ships<br><span class="rec-note">XII/12 alarms: 0.5 m above inner bottom, and 15% of hold depth but not more than 2.0 m</span></td>
-        <td data-l="Major trap">Writing a liquefaction/TML answer. Pellets are Group C. And 'pellets' also appears in the DIRECT REDUCED IRON (B) schedule name, which is Group B.</td>
+        <td data-l="Major trap">Writing a liquefaction and TML answer. TML is a Group A concept. Read the declared BCSN's current individual schedule before assuming any group: IRON ORE, IRON ORE FINES, IRON ORE PELLETS and DIRECT REDUCED IRON (B) are separate schedules, and 'pellets' appears in the DRI (B) name too.</td>
       </tr>
       <tr>
         <td data-l="Question"><a href="#q2">Q2</a></td>

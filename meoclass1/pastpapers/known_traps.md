@@ -115,6 +115,29 @@ much as one in a page. The host identity now lives only in
 covers generated pages, specs and the manifest alike.
 GREP: dieselship
 
+### 16. A derived learning layer must never out-state its source answer
+**Structural consistency is not semantic consistency.** The route, core points, knowledge
+map, flashcards, Quick Revision, Rapid Revision and memory cues are all *derived*
+representations of a verified answer. The failure mode is that a nuanced conditional
+statement gets flattened into a categorical one on the way out.
+
+Found for real in Q1: the model answer said iron ore pellets are "carried as Group C ... but
+establish that from the declared BCSN and its current individual schedule", while a route
+core point, `recall_15s`, `major_trap` and a flashcard all said flatly **"pellets are
+Group C"**. `recall_15s` even contradicted itself inside one field. That is precisely the
+simplification earlier red-teaming rejected, and it also overstated provenance: the group
+rests on authoritative-secondary sources and is recorded as a class C limitation.
+
+Founder policy: **IMSBC cargo classification and carriage requirements follow the declared
+BCSN and its current applicable individual schedule, not the casual commodity name used in
+the examination question.**
+
+Every derived layer must preserve scope, conditions, uncertainty, jurisdiction,
+applicability and regulatory status. Enforced structurally by `SEMANTIC_GUARDS` in
+`validate_spec.py`, which scans the derived fields only -- the model answer and study guide
+are the source and are allowed to carry the full conditional sentence.
+GREP: pellets are Group C
+
 ### 15. Stale build-state terminology
 Once a question's status moves on, "Pilot Built" must not survive in generated HTML.
 Generated pages are rebuilt from the spec, so this only appears if someone hand-edited

@@ -268,6 +268,10 @@
   .plan-list li{margin:4px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
+  .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
+  .cov-row + .cov-row{border-top:1px dashed var(--grey-border);}
+  .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
+  .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
   .plan-points{margin-top:9px;font-size:12.5px;}
   .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
@@ -301,6 +305,21 @@
   .card-a{padding:0 12px 11px;font-size:13.5px;border-top:1px solid var(--grey-border);}
   .card-a p{margin:9px 0 0;}
   .card-why{font-size:12px;color:var(--grey-text);border-left:3px solid var(--orange);padding-left:9px;}
+
+  /* Reference shelf: the verification layer, after the answer content and
+     outside the mode selector. Concise by design - it is evidence, not a
+     bibliography. Renders only when a question carries corpus objects. */
+  .refshelf{background:#fff;border:1.5px solid var(--grey-text);padding:0 16px 12px;margin-top:14px;}
+  .refshelf .layer-title{background:var(--grey-text);color:#fff;margin:0 -16px 10px;}
+  .rs-lead{margin:0 0 9px;font-size:13px;color:var(--grey-text);}
+  .rs-item{border:1px solid var(--grey-border);border-left:3px solid var(--teal-dark);border-radius:8px;padding:9px 12px;margin:7px 0;}
+  .rs-item.rs-pending{border-left-color:var(--grey-border);background:var(--grey-bg);}
+  .rs-rel{font-family:'Segoe UI',system-ui,sans-serif;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-dark);}
+  .rs-item.rs-pending .rs-rel{color:var(--grey-text);}
+  .rs-label{font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;margin-top:2px;}
+  .rs-scope{font-size:12.5px;color:var(--grey-text);margin-top:3px;}
+  .rs-open{margin-top:8px;font-size:12px;padding:7px 12px;}
+  .rs-state{display:inline-block;margin-top:7px;font-family:'Segoe UI',system-ui,sans-serif;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--grey-text);border:1px dashed var(--grey-border);border-radius:999px;padding:3px 9px;}
 
   /* Study guide in its own mode is always open, so it needs .sg's look without
      the <details> mechanics. */
