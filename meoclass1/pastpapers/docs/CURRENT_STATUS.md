@@ -148,6 +148,30 @@ QUESTION
   -> cross-links / recurrence
 ```
 
+### The learning layer — `answer_route` is the spine
+
+Design rationale: **`docs/MIW_LEARNING_METHOD_DESIGN.md`**. Read it before authoring a paper.
+
+One canonical numbered route per question. **Everything else is derived from it** — the
+model answer's principal headings, the knowledge map branches, the blank-skeleton recall
+test, the exam plan and the rapid-revision route line. `validate_spec.py` enforces the
+correspondence, so a route step and its heading cannot drift apart.
+
+| Field | Status |
+|---|---|
+| `answer_route` — `archetype`, `steps[]` (`n`, `limb`, `title`, `points[]`) | **REQUIRED** on a built answer |
+| `retrieval_cards[]` — `id`, `type`, `prompt`, `answer`, `why` | **REQUIRED**, ≥4, stable ids |
+| `understand_first` | **CONDITIONAL** — only where the topic is counter-intuitive |
+| `memory_cue` | **OPTIONAL** — only where genuinely memorable. No invented acronyms. |
+| knowledge map · recall test · exam plan | **DERIVED — never authored** |
+
+`quick_revision.skeleton` was **removed**: it was a second copy of the route. Five
+archetypes cover the corpus: `procedure`, `explain`, `compare`, `legal`, `evaluate`.
+
+**The learning layer must never be able to hide the answer.** Every mode renders unhidden
+and only the script hides them, so with scripting off the whole card still reads top to
+bottom. `health_check.py` fails the build if the answer mode is emitted pre-hidden.
+
 **Every re-verification flag must carry a class** from `A_BLOCKING` / `B_CURRENCY_CHECK` /
 `C_ACCEPTED_LIMITATION`, plus a `claim` and a `why`. `validate_spec.py` rejects anything
 else and prints the blocking count, so "is this publishable?" is answered by the toolchain
@@ -202,7 +226,7 @@ python tools/pastpapers/run_toolchain.py --self-test
 SPEC          PASS  (2 warning(s))
 PAPER BUILD   PASS
 INDEX BUILD   PASS
-UI BEHAVIOUR  PASS  1 page(s)      42 assertions, was 34
+UI BEHAVIOUR  PASS  1 page(s)      58 assertions
 KNOWN TRAPS   PASS
 HEALTH        PASS
 AUDIT         PASS
@@ -239,8 +263,10 @@ HIGH, Q7 is now MEDIUM because its statutory facts are settled. Neither was supp
 Q7 briefly went 13 words over band when the section citations were added; it was tightened
 back to **650**, the band ceiling, rather than becoming a third documented exception.
 
-Model answer lengths, for reference: Q1 614 · Q2 709 · Q3 606 · Q4 593 · Q5 560 · Q6 695 ·
-Q7 650 · Q8 568 · Q9 579.
+Model answer lengths: Q1 643 · Q2 709 · Q3 640 · Q4 594 · Q5 572 · Q6 708 · Q7 650 ·
+Q8 588 · Q9 581. These rose slightly when the principal headings were renumbered and given
+route titles — heading text counts toward the word count. Q6 moved 695 → 708 for that
+reason alone; **no answer content was added or removed.**
 
 ### `.gitattributes` now pins LF
 

@@ -128,14 +128,92 @@
   .sg .inner{padding-top:10px;}
   .sg h3{color:var(--navy);border-bottom-color:var(--grey-border);margin-top:14px;}
   .sg p,.sg li{font-size:14px;}
-  /* Exam approach: the answer skeleton, rendered above the model answer.
-     Deliberately a different hue from .ma so it reads as a plan to write to,
-     not as answer content to reproduce. */
-  .skel{background:var(--orange-light);border:1.5px solid var(--orange);padding:0 16px 12px;}
-  .skel .layer-title{background:var(--orange);color:#fff;margin:0 -16px 10px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;}
-  .skel-marks{margin-left:auto;font-weight:600;letter-spacing:.02em;text-transform:none;opacity:.92;}
-  .skel-list{margin:0;padding-left:20px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;color:var(--ink);}
-  .skel-list li{margin:4px 0;}
+  /* ---- learner modes ----------------------------------------------------
+     One selector inside the already-proven question card. "Answer" is
+     pre-selected: a candidate must never have to hunt for the model answer. */
+  .learn-bar{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 12px;}
+  .learn-btn{font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:600;padding:7px 13px;border-radius:999px;border:1px solid var(--grey-border);background:#fff;color:var(--grey-text);cursor:pointer;}
+  .learn-btn:hover{border-color:var(--teal);color:var(--teal-dark);}
+  .learn-btn[aria-selected="true"]{background:var(--teal-dark);border-color:var(--teal-dark);color:#fff;}
+  .learn-btn:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+
+  /* Understand this first: the plain-language mental model, before exam language. */
+  .uf{background:var(--teal-light);border:1.5px solid var(--teal);padding:0 16px 12px;}
+  .uf .layer-title{background:var(--teal);color:#fff;margin:0 -16px 10px;}
+  .uf p{margin:0;font-size:14.5px;}
+
+  /* Knowledge map: a semantic nested list, not an SVG island. Reflows on a
+     phone for free and a screen reader can walk it. */
+  .kmap{background:#fff;border:1.5px solid var(--navy);padding:0 16px 14px;}
+  .kmap .layer-title{background:var(--navy);color:var(--teal-light);margin:0 -16px 12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  /* min-height 24px: WCAG 2.2 target size (minimum). Measured at 21.3px before
+     this, which failed on touch. The mobile rules below take the learning
+     controls further, to a comfortable thumb target. */
+  .kmap-toggle{margin-left:auto;font-family:'Segoe UI',system-ui,sans-serif;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:5px 11px;min-height:24px;border-radius:999px;border:1px solid var(--teal-light);background:transparent;color:var(--teal-light);cursor:pointer;}
+  .kmap-toggle:focus-visible{outline:2px solid #fff;outline-offset:1px;}
+  .kmap-root{font-family:'Segoe UI',system-ui,sans-serif;font-weight:700;font-size:14px;color:var(--navy);background:var(--grey-bg);border:1px solid var(--grey-border);border-radius:8px;padding:8px 12px;display:inline-block;}
+  .kmap-tree,.kmap-tree ol{list-style:none;margin:8px 0 0;padding:0 0 0 14px;}
+  .kmap-limb-l{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;color:var(--grey-text);text-transform:uppercase;letter-spacing:.05em;}
+  .kmap-branch{position:relative;padding:5px 0 5px 16px;border-left:2px solid var(--grey-border);}
+  .kmap-branch::before{content:"";position:absolute;left:0;top:15px;width:12px;height:2px;background:var(--grey-border);}
+  .kmap-n{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;border-radius:50%;background:var(--teal-dark);color:#fff;font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;margin-right:8px;}
+  .kmap-t{font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;color:var(--ink);}
+  .kmap-kids{list-style:disc;margin:4px 0 0 44px;padding:0;font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;color:var(--grey-text);}
+  /* Retrieval mode: branch labels blanked so the map is reconstructed, not read. */
+  .kmap.branches-hidden .kmap-t,.kmap.branches-hidden .kmap-kids{visibility:hidden;}
+  .kmap.branches-hidden .kmap-t::after{content:"__________";visibility:visible;display:inline-block;color:var(--grey-border);}
+
+  /* Start here: the exam execution plan. Different hue from .ma so it reads as
+     a plan to write to, not as answer content to reproduce. */
+  .plan{background:var(--orange-light);border:1.5px solid var(--orange);padding:0 16px 12px;}
+  .plan .layer-title{background:var(--orange);color:#fff;margin:0 -16px 10px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;}
+  .plan-marks{margin-left:auto;font-weight:600;letter-spacing:.02em;text-transform:none;opacity:.92;}
+  .plan-lead{margin:0 0 8px;font-size:13.5px;}
+  .plan-limb{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;margin-top:8px;}
+  .plan-list{margin:4px 0 0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;}
+  .plan-list li{margin:4px 0;}
+  .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
+  .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
+  .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
+  .plan-points{margin-top:9px;font-size:12.5px;}
+  .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
+  .plan-points:focus-within > summary{outline:2px solid var(--orange);outline-offset:2px;}
+  .pp-step{margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;}
+  .pp-step ul{margin:3px 0 0;padding-left:20px;color:var(--grey-text);}
+
+  /* Recall: blanks first, reveal on demand. */
+  .recall{background:#fff;border:1.5px solid var(--teal-dark);padding:0 16px 13px;}
+  .recall .layer-title{background:var(--teal-dark);color:#fff;margin:0 -16px 10px;}
+  .recall-lead{margin:0 0 8px;font-size:13.5px;}
+  .recall-list{margin:0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;}
+  .recall-list li{margin:6px 0;}
+  .recall-blank{color:var(--grey-border);letter-spacing:.08em;}
+  .recall-answer{font-weight:600;color:var(--teal-dark);}
+  .recall-toggle{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:12px;font-weight:600;padding:8px 14px;border-radius:8px;border:1px solid var(--teal-dark);background:var(--teal-dark);color:#fff;cursor:pointer;}
+  .recall-toggle:hover{background:var(--teal);border-color:var(--teal);}
+  .recall-toggle:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+
+  /* Flashcards: prompt is the button; answer reveals beneath it. */
+  .cards{background:var(--grey-bg);border:1.5px solid var(--grey-border);padding:0 16px 12px;}
+  .cards .layer-title{background:var(--grey-text);color:#fff;margin:0 -16px 10px;}
+  .cards-n{margin-left:6px;opacity:.85;}
+  .card{background:#fff;border:1px solid var(--grey-border);border-radius:8px;margin:8px 0;overflow:hidden;}
+  .card-q{display:block;width:100%;text-align:left;background:none;border:0;padding:10px 12px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;}
+  .card-q:hover{background:var(--teal-light);}
+  .card-q:focus-visible{outline:2px solid var(--teal);outline-offset:-2px;}
+  .card-q::after{content:" \25BC";font-size:9px;color:var(--grey-text);}
+  .card-q[aria-expanded="true"]::after{content:" \25B2";}
+  .card-type{display:inline-block;font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-dark);background:var(--teal-light);border-radius:4px;padding:2px 6px;margin-right:8px;vertical-align:middle;}
+  .card-a{padding:0 12px 11px;font-size:13.5px;border-top:1px solid var(--grey-border);}
+  .card-a p{margin:9px 0 0;}
+  .card-why{font-size:12px;color:var(--grey-text);border-left:3px solid var(--orange);padding-left:9px;}
+
+  /* Study guide in its own mode is always open, so it needs .sg's look without
+     the <details> mechanics. */
+  .sg-open{background:var(--grey-bg);border:1.5px solid var(--navy);padding:0 16px 12px;}
+  .sg-open .layer-title{background:var(--navy);color:var(--teal-light);margin:0 -16px 10px;}
+  .sg-open h3{color:var(--navy);border-bottom-color:var(--grey-border);margin-top:14px;}
+  .sg-open p,.sg-open li{font-size:14px;}
   .qr{background:var(--teal-light);border:1.5px solid var(--teal);padding:0 16px 12px;}
   .qr .layer-title{background:var(--teal);color:#fff;margin:0 -16px 10px;}
   .qr dl{margin:0;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;}
@@ -187,6 +265,12 @@
     /* No top override here. The measured --topbar-h is correct at every width;
        forcing top:0 was what made both bars claim the same slot on a phone. */
     .count-label{margin-left:0;width:100%;}
+    /* Touch targets. Every learning control is finger-operated on a phone, so
+       they get real height here rather than the tighter desktop sizing. */
+    .learn-btn{padding:11px 15px;min-height:44px;}
+    .card-q{padding:13px 12px;min-height:44px;}
+    .recall-toggle{padding:12px 16px;min-height:44px;}
+    .kmap-toggle{padding:8px 12px;min-height:32px;}
     .q-stem{font-size:13px;}
     .rapid,.rapid tbody,.rapid tr,.rapid td{display:block;width:100%;}
     .rapid thead{display:none;}

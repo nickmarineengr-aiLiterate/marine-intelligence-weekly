@@ -98,31 +98,183 @@ def quick_revision(qr, out):
     out.append('  </section>')
 
 
-def exam_approach(q, out):
-    """The answer skeleton, rendered BEFORE the model answer.
+# --------------------------------------------------------------- learner views
+#
+# Everything below is DERIVED from answer_route. The route is the one canonical
+# numbered sequence: the model answer's principal headings are its steps, and so
+# are the map branches, the recall blanks and the exam plan. A candidate learns
+# one route, not four competing structures. See docs/MIW_LEARNING_METHOD_DESIGN.md.
 
-    Purpose is exam-writing, not revision: it is the map a candidate plans on
-    paper in the first two minutes. Placing it after the full model answer --
-    which is where it used to live, inside Quick Revision -- meant a student
-    only met the plan once they had already read the finished essay.
+MODES = [('understand', 'Understand'), ('plan', 'Plan'), ('answer', 'Answer'),
+         ('guide', 'Study guide'), ('recall', 'Recall')]
 
-    Always visible inside the card body rather than a nested <details>. Cards
-    are collapsed by default, so this adds nothing to the list view, and a
-    plan that has to be un-hidden is a plan that gets skipped. It renders from
-    quick_revision.skeleton, so there is still exactly one copy of this text in
-    the spec feeding both this block and the paper-level Rapid Revision table.
+
+def route_steps(q):
+    return ((q.get('answer_route') or {}).get('steps')) or []
+
+
+def limb_groups(q):
+    """Route steps grouped by question limb, preserving order."""
+    groups, cur = [], None
+    for s in route_steps(q):
+        if cur is None or cur[0] != s.get('limb'):
+            cur = (s.get('limb'), [])
+            groups.append(cur)
+        cur[1].append(s)
+    return groups
+
+
+def learn_bar(q, out):
+    """Mode selector. 'Answer' is pre-selected.
+
+    Expertise reversal: scaffolding that helps a novice costs an expert. A
+    candidate who already knows the topic must reach the model answer without
+    being walked through the ladder, so the answer is the default view and every
+    other mode is one click, never a gate.
     """
-    skel = (q.get('quick_revision') or {}).get('skeleton') or []
-    if not skel:
+    out.append('  <div class="learn-bar" role="tablist" aria-label="Study mode">')
+    for key, label in MODES:
+        if key == 'understand' and not (q.get('understand_first') or route_steps(q)):
+            continue
+        cur = 'true' if key == 'answer' else 'false'
+        out.append('    <button class="learn-btn" type="button" role="tab" '
+                   'data-mode="%s" aria-selected="%s">%s</button>' % (key, cur, label))
+    out.append('  </div>')
+
+
+def understand_view(q, out):
+    uf = q.get('understand_first')
+    if uf:
+        out.append('  <section class="layer uf" aria-label="Understand this first">')
+        out.append('    <div class="layer-title">Understand this first</div>')
+        out.append('    <p>%s</p>' % esc(uf))
+        out.append('  </section>')
+    knowledge_map(q, out)
+
+
+def knowledge_map(q, out):
+    """Knowledge map: root, then one branch per route step.
+
+    A semantic nested list, not an SVG island -- it reflows on a phone for free
+    and a screen reader can walk it. The branch titles can be hidden so the map
+    works as RETRIEVAL rather than as a picture to read: the evidence for mapping
+    is much stronger when the learner reconstructs it than when they consume it.
+    """
+    steps = route_steps(q)
+    if not steps:
         return
-    out.append('  <section class="layer skel" aria-label="Exam approach">')
-    out.append('    <div class="layer-title">Exam approach &mdash; answer skeleton '
-               '<span class="skel-marks">%s marks</span></div>' % q['total_marks'])
-    out.append('    <ol class="skel-list">')
-    for s in skel:
-        out.append('      <li>%s</li>' % esc(s))
+    out.append('  <section class="layer kmap" aria-label="Knowledge map">')
+    out.append('    <div class="layer-title">Knowledge map'
+               '<button class="kmap-toggle" type="button" aria-pressed="false">'
+               'Hide branches</button></div>')
+    out.append('    <div class="kmap-root">%s</div>' % esc(q.get('short_title', q['q_no'])))
+    out.append('    <ol class="kmap-tree">')
+    for limb, group in limb_groups(q):
+        if limb:
+            out.append('      <li class="kmap-limb"><span class="kmap-limb-l">%s</span>'
+                       % esc(limb))
+            out.append('        <ol>')
+        for s in group:
+            out.append('%s<li class="kmap-branch"><span class="kmap-n">%d</span>'
+                       '<span class="kmap-t">%s</span>'
+                       % ('          ' if limb else '      ', s['n'], esc(s['title'])))
+            kids = (s.get('points') or [])[:3]
+            if kids:
+                out.append('%s<ul class="kmap-kids">%s</ul>'
+                           % ('            ' if limb else '        ',
+                              ''.join('<li>%s</li>' % esc(k) for k in kids)))
+            out.append('%s</li>' % ('          ' if limb else '      '))
+        if limb:
+            out.append('        </ol>')
+            out.append('      </li>')
     out.append('    </ol>')
     out.append('  </section>')
+
+
+def plan_view(q, out):
+    """Start here: the headings to write first, then the coverage checklist.
+
+    This is the fix for "I could not finish in time". Writing the framework
+    first means an interrupted answer still shows the examiner the whole shape.
+    """
+    steps = route_steps(q)
+    if not steps:
+        return
+    n_pts = sum(len(s.get('points') or []) for s in steps)
+    out.append('  <section class="layer plan" aria-label="Exam plan">')
+    out.append('    <div class="layer-title">Start here '
+               '<span class="plan-marks">%s marks</span></div>' % q['total_marks'])
+    out.append('    <p class="plan-lead">Write these headings first, then expand them '
+               'in order. If time is short, get every heading down before you expand '
+               'any of them.</p>')
+    for limb, group in limb_groups(q):
+        if limb:
+            out.append('    <div class="plan-limb">%s</div>' % esc(limb))
+        out.append('    <ol class="plan-list">')
+        for s in group:
+            out.append('      <li value="%d">%s</li>' % (s['n'], esc(s['title'])))
+        out.append('    </ol>')
+    if q.get('memory_cue'):
+        out.append('    <p class="plan-cue"><b>Memory cue.</b> %s</p>'
+                   % esc(q['memory_cue']))
+    out.append('    <div class="plan-cov">Core points to cover: '
+               '<b>%d</b> across <b>%d</b> sections</div>' % (n_pts, len(steps)))
+    out.append('    <p class="plan-note">A core point is one distinct exam-relevant '
+               'proposition, action, requirement or distinction &mdash; not one sentence. '
+               'This is a completeness check, not a mark scheme.</p>')
+    out.append('    <details class="plan-points"><summary>Show the core points</summary>')
+    for limb, group in limb_groups(q):
+        for s in group:
+            out.append('      <div class="pp-step"><b>%d. %s</b><ul>%s</ul></div>'
+                       % (s['n'], esc(s['title']),
+                          ''.join('<li>%s</li>' % esc(p) for p in (s.get('points') or []))))
+    out.append('    </details>')
+    out.append('  </section>')
+
+
+def recall_view(q, out):
+    """Blank skeleton first, then cards.
+
+    Pretesting: attempting to retrieve BEFORE seeing the material helps even when
+    the attempt fails, provided the correct answer follows immediately. So the
+    blanks come first and reveal on demand. No typing is required -- the attempt
+    is what matters, not capturing it.
+    """
+    steps = route_steps(q)
+    if steps:
+        out.append('  <section class="layer recall" aria-label="Recall the structure">')
+        out.append('    <div class="layer-title">Recall the structure</div>')
+        out.append('    <p class="recall-lead">Before you read the answer: can you name '
+                   'all %d sections, in order? Say them or write them down, then reveal.</p>'
+                   % len(steps))
+        out.append('    <ol class="recall-list" data-state="hidden">')
+        for s in steps:
+            out.append('      <li value="%d"><span class="recall-blank" aria-hidden="true">'
+                       '__________</span><span class="recall-answer" hidden>%s%s</span></li>'
+                       % (s['n'], ('%s ' % esc(s['limb'])) if s.get('limb') else '',
+                          esc(s['title'])))
+        out.append('    </ol>')
+        out.append('    <button class="recall-toggle" type="button" aria-expanded="false">'
+                   'Reveal the structure</button>')
+        out.append('  </section>')
+
+    cards = q.get('retrieval_cards') or []
+    if cards:
+        out.append('  <section class="layer cards" aria-label="Flashcards">')
+        out.append('    <div class="layer-title">Flashcards '
+                   '<span class="cards-n">%d</span></div>' % len(cards))
+        for c in cards:
+            out.append('    <div class="card" id="%s">' % esc_attr(c['id']))
+            out.append('      <button class="card-q" type="button" aria-expanded="false" '
+                       'aria-controls="%s-a"><span class="card-type">%s</span>%s</button>'
+                       % (esc_attr(c['id']), esc(c.get('type', '')), esc(c['prompt'])))
+            out.append('      <div class="card-a" id="%s-a" hidden>' % esc_attr(c['id']))
+            out.append('        <p>%s</p>' % esc(c['answer']))
+            if c.get('why'):
+                out.append('        <p class="card-why">%s</p>' % esc(c['why']))
+            out.append('      </div>')
+            out.append('    </div>')
+        out.append('  </section>')
 
 
 def build_card(q, paper, out, publish):
@@ -167,21 +319,37 @@ def build_card(q, paper, out, publish):
 
     out.append('  <div class="q-body" id="%s-body" hidden>' % esc_attr(q['anchor']))
 
-    exam_approach(q, out)
+    # Learner modes. Every section renders unhidden; paper.js switches them once
+    # it has run. With scripting off nothing is hidden, so the model answer is
+    # still reachable -- the learning layer must never be able to hide the answer.
+    learn_bar(q, out)
 
+    out.append('  <div class="mode" data-mode="understand">')
+    understand_view(q, out)
+    out.append('  </div>')
+
+    out.append('  <div class="mode" data-mode="plan">')
+    plan_view(q, out)
+    out.append('  </div>')
+
+    out.append('  <div class="mode" data-mode="answer">')
     out.append('  <section class="layer ma" aria-label="Model written answer">')
     out.append('    <div class="layer-title">Model written answer</div>')
     render_blocks(q['model_answer'], out)
     out.append('  </section>')
+    out.append('  </div>')
 
-    out.append('  <details class="layer sg">')
-    out.append('    <summary>Study guide</summary>')
-    out.append('    <div class="inner">')
+    out.append('  <div class="mode" data-mode="guide">')
+    out.append('  <section class="layer sg-open" aria-label="Study guide">')
+    out.append('    <div class="layer-title">Study guide</div>')
     render_blocks(q['study_notes'], out, indent='      ')
-    out.append('    </div>')
-    out.append('  </details>')
+    out.append('  </section>')
+    out.append('  </div>')
 
+    out.append('  <div class="mode" data-mode="recall">')
+    recall_view(q, out)
     quick_revision(q.get('quick_revision') or {}, out)
+    out.append('  </div>')
 
     xl = q.get('cross_links') or []
     if xl:
@@ -388,12 +556,14 @@ def build(spec, gated=False, publish=False):
     a('  <p class="lead">Every question in one pass. Generated from each question\'s Quick Revision '
       'block &mdash; open the full answer from the question number.</p>')
     a('  <table class="rapid">')
-    a('    <thead><tr><th>Q</th><th>Topic</th><th>Answer skeleton</th>'
+    a('    <thead><tr><th>Q</th><th>Topic</th><th>Answer route</th>'
       '<th>Critical rule / number</th><th>Major trap</th></tr></thead>')
     a('    <tbody>')
     for q in built:
         qr = q.get('quick_revision') or {}
-        skel = ' &rarr; '.join(esc(s) for s in (qr.get('skeleton') or [])[:6])
+        # The route comes from answer_route, exactly as it does in the plan, the
+        # map and the recall test. There is only one route in the system.
+        skel = ' &rarr; '.join(esc(s['title']) for s in route_steps(q))
         crit = esc(qr.get('critical_regulation', ''))
         nums = (qr.get('critical_numbers') or [])
         if nums:
@@ -402,7 +572,7 @@ def build(spec, gated=False, publish=False):
         a('        <td data-l="Question"><a href="#%s">%s</a></td>' % (q['anchor'], esc(q['q_no'])))
         a('        <td data-l="Topic">%s<br><span class="rec-note">%s marks</span></td>'
           % (esc(q.get('short_title', '')), q['total_marks']))
-        a('        <td data-l="Answer skeleton">%s</td>' % skel)
+        a('        <td data-l="Answer route">%s</td>' % skel)
         a('        <td data-l="Critical rule">%s</td>' % crit)
         a('        <td data-l="Major trap">%s</td>' % esc(qr.get('major_trap', '')))
         a('      </tr>')

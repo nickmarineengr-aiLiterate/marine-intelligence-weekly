@@ -125,8 +125,97 @@ STUDY_GUIDE_SPINE = (
 # whose uncertainty is of a different kind.
 STUDY_GUIDE_PREFIXES = ('Uncertainty',)
 
-QUICK_REVISION_FIELDS = ('recall_15s', 'skeleton', 'keywords',
+# 'skeleton' is deliberately absent: the answer route lives in answer_route and
+# nowhere else, so quick revision renders the route rather than storing a second
+# copy of it. See docs/MIW_LEARNING_METHOD_DESIGN.md section 5.
+QUICK_REVISION_FIELDS = ('recall_15s', 'keywords',
                          'critical_numbers', 'critical_regulation', 'major_trap')
+
+# --- learning layer -------------------------------------------------------
+ARCHETYPES = ('procedure', 'explain', 'compare', 'legal', 'evaluate')
+CARD_TYPES = ('definition', 'distinction', 'procedure', 'regulation',
+              'number', 'trap', 'structure')
+ROUTE_MIN, ROUTE_MAX = 4, 9      # chunking; outside this range is a warning
+CARDS_MIN = 4
+
+
+def check_answer_route(q, qn):
+    """The route is the one canonical sequence every other view derives from.
+
+    The correspondence check below is the load-bearing one. If a route step and
+    its model-answer heading can drift apart, the candidate is taught one order
+    and shown another, and every derived view (map, recall blanks, exam plan,
+    rapid revision) inherits the inconsistency.
+    """
+    r = q.get('answer_route')
+    if not isinstance(r, dict) or not isinstance(r.get('steps'), list) or not r['steps']:
+        err('%s: built answer with no answer_route. The route is required -- the '
+            'map, recall test, exam plan and rapid revision are all derived from it.' % qn)
+        return
+    if r.get('archetype') not in ARCHETYPES:
+        err('%s: answer_route.archetype %r not one of %s'
+            % (qn, r.get('archetype'), list(ARCHETYPES)))
+
+    steps = r['steps']
+    if not (ROUTE_MIN <= len(steps) <= ROUTE_MAX):
+        warn('%s: answer_route has %d steps, outside the %d-%d chunking range'
+             % (qn, len(steps), ROUTE_MIN, ROUTE_MAX))
+
+    for i, s in enumerate(steps, start=1):
+        if s.get('n') != i:
+            err('%s: answer_route step %d is numbered %r -- steps must run 1..N '
+                'with no gaps, because the numbers are what the candidate memorises'
+                % (qn, i, s.get('n')))
+        if not (s.get('title') or '').strip():
+            err('%s: answer_route step %d has no title' % (qn, i))
+        if not (s.get('points') or []):
+            err('%s: answer_route step %d has no core points' % (qn, i))
+
+    # correspondence with the model answer
+    heads = _headings(q.get('model_answer'))
+    want = ['%d. %s' % (s['n'], s['title']) for s in steps]
+    for w in want:
+        if w not in heads:
+            err('%s: answer_route step has no matching model-answer heading: %r. '
+                'The principal headings of the model answer ARE the route.' % (qn, w))
+    for h in heads:
+        if h in want:
+            continue
+        if re.match(r'^\([a-z]\)', h):
+            continue        # limb heading, mirrors the printed question
+        err('%s: model answer has principal heading %r which is not a route step '
+            'and is not a question limb. Every principal heading must be one or '
+            'the other, or the answer and the route have drifted.' % (qn, h))
+
+
+def check_retrieval_cards(q, qn):
+    cards = q.get('retrieval_cards')
+    if not isinstance(cards, list) or len(cards) < CARDS_MIN:
+        err('%s: needs at least %d retrieval_cards (has %s)'
+            % (qn, CARDS_MIN, len(cards) if isinstance(cards, list) else 'none'))
+        return
+    seen_id, seen_prompt = set(), set()
+    for c in cards:
+        cid = c.get('id')
+        if not cid or not cid.startswith(q['question_id'] + '-C'):
+            err('%s: card id %r must start with %s-C so a future scheduling layer '
+                'can attach to a stable key' % (qn, cid, q['question_id']))
+        if cid in seen_id:
+            err('%s: duplicate card id %r' % (qn, cid))
+        seen_id.add(cid)
+        if c.get('type') not in CARD_TYPES:
+            err('%s: card %s type %r not one of %s' % (qn, cid, c.get('type'), list(CARD_TYPES)))
+        p, a = (c.get('prompt') or '').strip(), (c.get('answer') or '').strip()
+        if not p or not a:
+            err('%s: card %s has an empty prompt or answer' % (qn, cid))
+            continue
+        key = p.lower()
+        if key in seen_prompt:
+            err('%s: duplicate card prompt %r' % (qn, p[:50]))
+        seen_prompt.add(key)
+        if len(a.split()) > 90:
+            warn('%s: card %s answer is %d words -- a flashcard answer that long '
+                 'is being read, not retrieved' % (qn, cid, len(a.split())))
 
 
 def _headings(blocks):
@@ -379,6 +468,8 @@ def main(path):
             check_study_guide_spine(q, qn)
         if has_ans:
             check_quick_revision(q, qn)
+            check_answer_route(q, qn)
+            check_retrieval_cards(q, qn)
 
         if has_ans:
             n = words(q['model_answer'])

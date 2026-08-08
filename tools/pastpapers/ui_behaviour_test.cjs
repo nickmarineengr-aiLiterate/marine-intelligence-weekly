@@ -197,6 +197,59 @@ ok('keys that are not legacy question ids are left alone',
    unrelated['QP2601-Q3'] === 1 && unrelated['miw:other'] === 1);
 
 console.log('');
+console.log('-- learning layer (derived from the answer route) --');
+
+// The answer must survive the learning layer. If the page ships the answer mode
+// pre-hidden, a reader without JavaScript loses the thing they came for.
+ok('answer has its own learner mode', html.includes('<div class="mode" data-mode="answer">'));
+ok('answer mode is NOT emitted pre-hidden', !/data-mode="answer"[^>]*\shidden/.test(html));
+ok('every card offers the five study modes',
+   (html.match(/class="learn-bar"/g) || []).length === cards.length);
+ok('Answer is the pre-selected mode',
+   (html.match(/data-mode="answer" aria-selected="true"/g) || []).length === cards.length);
+
+// One entry per route step in every derived view.
+const nBranch = (html.match(/class="kmap-branch"/g) || []).length;
+const nBlank = (html.match(/class="recall-blank"/g) || []).length;
+ok('knowledge map and recall test have the same number of items',
+   nBranch === nBlank && nBranch > 0, `map=${nBranch} recall=${nBlank}`);
+ok('every question has a knowledge map',
+   (html.match(/class="layer kmap"/g) || []).length === cards.length);
+ok('every question has a blank-skeleton recall test',
+   (html.match(/class="layer recall"/g) || []).length === cards.length);
+ok('every question has an exam plan',
+   (html.match(/class="layer plan"/g) || []).length === cards.length);
+
+// Flashcards: keyboard-operable buttons carrying ARIA, answers hidden until asked.
+const nCardQ = (html.match(/class="card-q"/g) || []).length;
+ok('flashcards are real buttons, not click-divs',
+   (html.match(/<button class="card-q"/g) || []).length === nCardQ && nCardQ > 0);
+ok('every flashcard prompt carries aria-expanded',
+   (html.match(/class="card-q" type="button" aria-expanded="false"/g) || []).length === nCardQ);
+ok('every flashcard answer starts hidden',
+   (html.match(/class="card-a" id="[^"]+-a" hidden/g) || []).length === nCardQ);
+ok('flashcard ids are unique', (() => {
+  const ids = (html.match(/<div class="card" id="([^"]+)"/g) || []);
+  return new Set(ids).size === ids.length && ids.length > 0;
+})());
+
+// The recall reveal and the map retrieval toggle must be operable controls.
+ok('recall reveal is a button with aria-expanded',
+   (html.match(/class="recall-toggle" type="button" aria-expanded="false"/g) || []).length
+   === cards.length);
+ok('knowledge map has a hide-branches control',
+   (html.match(/class="kmap-toggle" type="button" aria-pressed="false"/g) || []).length
+   === cards.length);
+
+// The map is semantic markup, not an inaccessible SVG island.
+ok('knowledge map is a semantic list, not an SVG island',
+   html.includes('<ol class="kmap-tree">') && !/<svg[^>]*class="kmap/.test(html));
+
+// Route numbering must be the same everywhere it appears.
+ok('model answer principal headings carry the route numbers',
+   /<h3>1\. /.test(html) || /<h3[^>]*>1\. /.test(html), 'no numbered h found');
+
+console.log('');
 console.log('-- graceful degradation --');
 const blocked = makeStore(true);
 ok('storage probe reports unavailable', storageOK(blocked) === false);

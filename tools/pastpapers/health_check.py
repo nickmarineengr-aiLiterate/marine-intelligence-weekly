@@ -118,12 +118,21 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
                 if not q.get('study_notes'):
                     err('%s: model answer with no study guide' % tag)
                 qr = q.get('quick_revision') or {}
-                missing = [k for k in ('recall_15s', 'skeleton', 'keywords',
+                # No 'skeleton' here: the answer route lives in answer_route and
+                # is rendered from there. Requiring it in two places was how the
+                # product would have ended up teaching two competing sequences.
+                missing = [k for k in ('recall_15s', 'keywords',
                                        'critical_regulation', 'major_trap') if not qr.get(k)]
                 if missing:
                     err('%s: quick_revision missing %s' % (tag, ', '.join(missing)))
-    if not any('quick_revision' in e for e in errs):
-        ok('every built question carries a study guide and quick revision')
+                if not ((q.get('answer_route') or {}).get('steps')):
+                    err('%s: built answer with no answer_route' % tag)
+                if len(q.get('retrieval_cards') or []) < 4:
+                    err('%s: built answer with fewer than 4 retrieval cards' % tag)
+    if not any('quick_revision' in e or 'answer_route' in e or 'retrieval card' in e
+               for e in errs):
+        ok('every built question carries a study guide, quick revision, '
+           'an answer route and retrieval cards')
 
     # ---------- 3 pages, links, anchors ----------
     idx = os.path.join(PP, 'index.html')
@@ -356,6 +365,55 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
             ok('sitting navigator renders every advertised year and links each '
                'available month to its paper')
 
+    # ---------- 10 learning layer ----------
+    # Structural only. Whether a flashcard is a GOOD flashcard is human judgement
+    # and is deliberately not regex-policed here.
+    for sp in sorted(glob.glob(os.path.join(PP, 'specs', '*.json'))):
+        d = json.loads(rd(sp))
+        page = pages.get(N(PP, '%s.html' % d['paper_id']))
+        if not page:
+            continue
+        built_qs = [q for q in d['questions'] if q.get('model_answer')]
+
+        for q in built_qs:
+            steps = (q.get('answer_route') or {}).get('steps') or []
+            for s in steps:
+                want = ('%d. %s' % (s['n'], s['title'])).replace(
+                    '&', '&amp;')       # matches render_common.esc on bare ampersands
+                if want not in page:
+                    err('%s: route step %r is not rendered on the page'
+                        % (q['question_id'], want))
+            for c in q.get('retrieval_cards') or []:
+                if 'id="%s"' % c['id'] not in page:
+                    err('%s: retrieval card %s is not rendered'
+                        % (q['question_id'], c['id']))
+
+        # One map branch, one recall blank and one flashcard prompt per source
+        # item. A count mismatch is how a derived view silently loses a step.
+        n_steps = sum(len((q.get('answer_route') or {}).get('steps') or []) for q in built_qs)
+        n_cards = sum(len(q.get('retrieval_cards') or []) for q in built_qs)
+        for needle, expected, what in (
+                ('class="kmap-branch"', n_steps, 'knowledge map branches'),
+                ('class="recall-blank"', n_steps, 'recall blanks'),
+                ('class="card-q"', n_cards, 'flashcard prompts')):
+            got = page.count(needle)
+            if got != expected:
+                err('%s: %d %s rendered, expected %d -- a derived view has drifted '
+                    'from the answer route' % (d['paper_id'], got, what, expected))
+
+        # The learning layer must never be able to hide the answer. Sections are
+        # emitted unhidden and only the script hides them, so a page built with a
+        # pre-hidden answer mode would strand a no-JS reader.
+        if '<div class="mode" data-mode="answer">' not in page:
+            err('%s: model answer is not inside its own learner mode' % d['paper_id'])
+        if re.search(r'data-mode="answer"[^>]*\shidden', page):
+            err('%s: the model answer mode is emitted pre-hidden' % d['paper_id'])
+
+    if not any('route step' in e or 'derived view' in e or 'retrieval card' in e
+               or 'learner mode' in e or 'pre-hidden' in e for e in errs):
+        ok('learning layer coherent: map, recall blanks and flashcards all derive '
+           'from the answer route, and the answer renders unhidden')
+
 
 def strip(s):
     return re.sub(r'\s+', ' ', str(s)).strip()
@@ -411,10 +469,18 @@ def main():
             if not errs:
                 bad.append('%s did NOT fire' % name)
 
+        cases.append(('model answer emitted pre-hidden',
+                      {paper: '<div class="mode" data-mode="answer" hidden></div>'}))
+
         # Absence faults: positive-controlled by removal, not injection.
         for name, marker in [('missing study-state migration', 'migrateLegacyKeys'),
                              ('missing month cell for an available paper',
-                              'class="m avail"')]:
+                              'class="m avail"'),
+                             ('knowledge map branch lost from the route',
+                              'class="kmap-branch"'),
+                             ('recall blank lost from the route',
+                              'class="recall-blank"'),
+                             ('flashcard prompt lost', 'class="card-q"')]:
             check(publish_mode=False, strip_from_pages=marker)
             if not errs:
                 bad.append('%s did NOT fire' % name)

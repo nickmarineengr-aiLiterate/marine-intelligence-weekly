@@ -176,6 +176,68 @@ __LS_MIGRATE__
     });
   });
 
+  // ---- learner modes -------------------------------------------------------
+  // The sections are rendered UNHIDDEN. Hiding only happens here, so if this
+  // script never runs the whole card still reads top to bottom and the model
+  // answer is reachable. The learning layer must never be able to hide the answer.
+  function showMode(card, mode) {
+    Array.prototype.forEach.call(card.querySelectorAll('.mode'), function (m) {
+      m.hidden = m.getAttribute('data-mode') !== mode;
+    });
+    Array.prototype.forEach.call(card.querySelectorAll('.learn-btn'), function (b) {
+      b.setAttribute('aria-selected', b.getAttribute('data-mode') === mode ? 'true' : 'false');
+    });
+  }
+
+  cards.forEach(function (card) {
+    var bar = card.querySelector('.learn-bar');
+    if (!bar) return;
+    showMode(card, 'answer');
+    Array.prototype.forEach.call(card.querySelectorAll('.learn-btn'), function (b) {
+      b.addEventListener('click', function () {
+        showMode(card, b.getAttribute('data-mode'));
+      });
+    });
+  });
+
+  // ---- knowledge map: branches hidden so the map can be used as recall ------
+  Array.prototype.forEach.call(document.querySelectorAll('.kmap-toggle'), function (btn) {
+    btn.addEventListener('click', function () {
+      var map = btn.closest('.kmap');
+      var hidden = map.classList.toggle('branches-hidden');
+      btn.setAttribute('aria-pressed', hidden ? 'true' : 'false');
+      btn.textContent = hidden ? 'Show branches' : 'Hide branches';
+    });
+  });
+
+  // ---- blank skeleton recall ----------------------------------------------
+  Array.prototype.forEach.call(document.querySelectorAll('.recall-toggle'), function (btn) {
+    btn.addEventListener('click', function () {
+      var sec = btn.closest('.recall');
+      var list = sec.querySelector('.recall-list');
+      var show = list.getAttribute('data-state') === 'hidden';
+      list.setAttribute('data-state', show ? 'shown' : 'hidden');
+      Array.prototype.forEach.call(sec.querySelectorAll('.recall-answer'), function (a) {
+        a.hidden = !show;
+      });
+      Array.prototype.forEach.call(sec.querySelectorAll('.recall-blank'), function (a) {
+        a.hidden = show;
+      });
+      btn.setAttribute('aria-expanded', show ? 'true' : 'false');
+      btn.textContent = show ? 'Hide the structure' : 'Reveal the structure';
+    });
+  });
+
+  // ---- flashcards ----------------------------------------------------------
+  Array.prototype.forEach.call(document.querySelectorAll('.card-q'), function (btn) {
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      var ans = document.getElementById(btn.getAttribute('aria-controls'));
+      if (ans) ans.hidden = !open;
+    });
+  });
+
   // ---- side index: active state while scrolling ----------------------------
   if ('IntersectionObserver' in window) {
     var obs = new IntersectionObserver(function (entries) {
