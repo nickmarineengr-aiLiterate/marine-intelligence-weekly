@@ -19,7 +19,7 @@ status: DRAFT — pending Nixon's review/approval of the open questions in Secti
 These are judgment calls made while planning this series. Flag/confirm rather than silently lock in:
 
 1. **Folder & naming.** Proposed: new top-level folder `meoclass1/pastpapers/`, one file per paper
-   named `EM<YYMM>.html` (e.g. `EM2601.html` for Jan 2026), reusing DG Shipping's own official Sr.
+   named `QP<YYMM>.html` (e.g. `QP2601.html` for Jan 2026), reusing DG Shipping's own official Sr.
    No. scheme rather than inventing a new prefix. [Judgement — confirm you're happy reusing "EM" as
    the file code rather than a MIW-native prefix like "PP".]
 2. **Coverage.** Proposed: build model answers for **all 9 questions** in every paper (not just the
@@ -154,7 +154,7 @@ reinvented:**
 
 **Folder:** `meoclass1/pastpapers/` (new, sibling to `meoclass1/oralnotes/`)
 
-**File per paper:** `EM<YYMM>.html` — e.g. `EM2601.html`. All 9 questions live in one file (anchored
+**File per paper:** `QP<YYMM>.html` — e.g. `QP2601.html`. All 9 questions live in one file (anchored
 `#q1`…`#q9`) unless a paper genuinely oversizes past ~150–200KB, in which case split PartA/PartB by
 size (same convention as oversized QB files) — do not split by default.
 
@@ -168,11 +168,11 @@ instruction. Proposed schema:
   "generated_by": "",
   "papers": [
     {
-      "paper_id": "EM2601",
+      "paper_id": "QP2601",
       "sr_no": "EM-2601",
       "month": "January 2026",
       "source_pdf": "01_-_JANUARY_-_2026.pdf",
-      "file": "meoclass1/pastpapers/EM2601.html",
+      "file": "meoclass1/pastpapers/QP2601.html",
       "total_marks": 100,
       "build_status": "Not Started",
       "questions": [
@@ -274,7 +274,7 @@ changes needed there.
 13. **Commit** (stage files explicitly, not `git add .`) **and push** to `origin/main`.
 14. **Cache-busted live verification** against `raw.githubusercontent.com`.
 15. **known_traps.md** — no new file needed; this series' corrections use the existing shared file, just
-    tagged with `meoclass1/pastpapers/EM<YYMM>.html` paths like any other correction.
+    tagged with `meoclass1/pastpapers/QP<YYMM>.html` paths like any other correction.
 
 ---
 
@@ -289,11 +289,11 @@ changes needed there.
 ---
 ---
 
-# ANNOTATIONS FROM THE EM2607 BUILD (2026-08-07 / 08)
+# ANNOTATIONS FROM THE QP2607 BUILD (2026-08-07 / 08)
 
 > **Status: still a DRAFT.** These annotations record what the first real production run validated,
 > corrected or superseded. They are not a licence to automate. The skill becomes
-> `miw-pastpapers-production_SKILL.md` only after the complete EM2607 paper passes Founder review.
+> `miw-pastpapers-production_SKILL.md` only after the complete QP2607 paper passes Founder review.
 
 ## A. Superseded assumptions
 
@@ -374,7 +374,7 @@ re-verification before publication*, and *which came from internal reuse versus 
 
 ## F. AGENT_LESSONS
 
-Reusable rules extracted from real work on EM2607. Each was paid for by an actual defect.
+Reusable rules extracted from real work on QP2607. Each was paid for by an actual defect.
 
 1. **Answer the grammatical object of the question.** "Application of X to Y" puts the marks in the
    applying. A correct-but-off-axis insight is still off-axis. *(RT-01)*

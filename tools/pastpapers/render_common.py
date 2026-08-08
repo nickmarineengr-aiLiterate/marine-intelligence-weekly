@@ -6,6 +6,7 @@ pages cannot drift in escaping, search-token construction, storage keys or
 chrome. Nothing here reads the clock or the filesystem beyond the template
 directory, so every generated file stays byte-reproducible.
 """
+import html as html_mod
 import os, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -17,9 +18,52 @@ CONTACT = 'contactus@marineintelligenceweekly.com'
 
 # localStorage keys. Namespaced by product and schema so a future schema change
 # cannot silently reinterpret old state. Values are keyed by stable question_id
-# (EM2607-Q1), never by DOM order.
+# (QP2607-Q1), never by DOM order.
 LS_BOOKMARKS = 'miw:pastpapers:v1:bookmarks'
 LS_PROGRESS = 'miw:pastpapers:v1:progress'
+
+# Migration of study state saved before papers were renamed to the QP series.
+# Injected into BOTH page scripts from here so the two can never drift apart.
+#
+# Properties: idempotent (a second run is a no-op), non-destructive (an existing
+# QP key always wins, so a device that has studied under both spellings keeps the
+# newer state), and safe to run on a fresh device (no legacy keys, no write).
+# Keys are snapshotted before mutating, rather than deleting mid for-in.
+# The topbar and the controls bar are both sticky and stack, so the controls bar
+# must be offset by exactly the topbar's height. That height is content-driven --
+# it wraps to two or three lines as the viewport narrows -- so no CSS constant
+# can be right at every width. Hardcoding it produced two real defects: a 29px
+# gap where content showed through between the bars on desktop, and on a 375px
+# phone both bars claimed top:0, so the topbar covered the controls bar and the
+# search input became unreachable. Measuring is the only correct answer.
+STICKY_SYNC_JS = """  function syncStickyOffsets() {
+    var root = document.documentElement;
+    var tb = document.querySelector('.topbar');
+    var cb = document.querySelector('.controls-bar');
+    if (tb) root.style.setProperty('--topbar-h', tb.offsetHeight + 'px');
+    if (cb) root.style.setProperty('--controls-h', cb.offsetHeight + 'px');
+  }
+  syncStickyOffsets();
+  window.addEventListener('resize', syncStickyOffsets);
+  window.addEventListener('orientationchange', syncStickyOffsets);
+  if (window.document.fonts && window.document.fonts.ready &&
+      typeof window.document.fonts.ready.then === 'function') {
+    // Web fonts land after first paint and change the bars' wrapped height.
+    window.document.fonts.ready.then(syncStickyOffsets);
+  }"""
+
+LS_MIGRATE_JS = """  function migrateLegacyKeys(o) {
+    var keys = Object.keys(o), changed = false, i, m, nk;
+    for (i = 0; i < keys.length; i++) {
+      m = /^EM(\\d{4}-Q\\d+)$/.exec(keys[i]);
+      if (!m) continue;
+      nk = 'QP' + m[1];
+      if (!Object.prototype.hasOwnProperty.call(o, nk)) o[nk] = o[keys[i]];
+      delete o[keys[i]];
+      changed = true;
+    }
+    return changed;
+  }"""
 
 GATE = ('<script>if(!/miw_auth=1/.test(document.cookie))'
         '{window.location.replace("/SQ/pay.html");}</script>')
@@ -39,6 +83,18 @@ def esc_attr(s):
 
 def strip_tags(s):
     return re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', str(s))).strip()
+
+
+def plain_text(s):
+    """Tag-free, entity-DECODED text for <title> and meta@content.
+
+    Those are plain-text slots: a browser does not render markup inside them.
+    Page titles are authored with display entities like '&mdash;', and running
+    esc_attr() straight over one yields '&amp;mdash;', which the browser then
+    shows as the literal characters "&mdash;" in the tab and in every share
+    preview. Decoding first means esc_attr only ever escapes real characters.
+    """
+    return html_mod.unescape(strip_tags(s))
 
 
 def read_css():
@@ -136,14 +192,14 @@ def head_meta(title, description, canonical_path, publish, extra=()):
     o = ['<!DOCTYPE html>', '<html lang="en">', '<head>',
          '<meta charset="UTF-8">',
          '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
-         '<title>%s</title>' % esc_attr(title),
-         '<meta name="description" content="%s">' % esc_attr(description)]
+         '<title>%s</title>' % esc_attr(plain_text(title)),
+         '<meta name="description" content="%s">' % esc_attr(plain_text(description))]
     if publish:
         o.append('<meta name="robots" content="index, follow, max-image-preview:large">')
         o.append('<link rel="canonical" href="%s%s">' % (BASE, canonical_path))
         o.append('<meta property="og:type" content="article">')
-        o.append('<meta property="og:title" content="%s">' % esc_attr(title))
-        o.append('<meta property="og:description" content="%s">' % esc_attr(description))
+        o.append('<meta property="og:title" content="%s">' % esc_attr(plain_text(title)))
+        o.append('<meta property="og:description" content="%s">' % esc_attr(plain_text(description)))
         o.append('<meta property="og:url" content="%s%s">' % (BASE, canonical_path))
         o.append('<meta property="og:site_name" content="Marine Intelligence Weekly">')
         o.append('<meta name="twitter:card" content="summary">')

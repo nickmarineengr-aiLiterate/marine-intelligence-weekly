@@ -29,13 +29,43 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(HERE)), 'tools', 'notes'))
 from render_common import (REPO_ROOT, BASE, CONTACT, esc, esc_attr, strip_tags,
                            read_css, search_tokens, topbar, head_meta, footer,
-                           GATE_STUB)
+                           GATE_STUB, LS_BOOKMARKS, LS_PROGRESS, LS_MIGRATE_JS,
+                           STICKY_SYNC_JS)
 
 PP_DIR = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers')
 SPEC_GLOB = os.path.join(PP_DIR, 'specs', '*.json')
 
 # Small deterministic topic layer (brief section 27). Controlled parent
 # categories over the subject_tags vocabulary -- a grouping, not a graph database.
+MONTHS = ('January', 'February', 'March', 'April', 'May', 'June',
+          'July', 'August', 'September', 'October', 'November', 'December')
+MONTH_ABBR = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+              'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
+
+# Years the sitting navigator advertises, newest first. A year listed here
+# renders all twelve months whether or not a paper exists for each: unbuilt
+# months come from THIS configuration, never from placeholder spec files. That
+# is what lets the index scale to 12 papers a year without the repository
+# filling up with empty JSON.
+#
+# Any year that has a spec is included automatically, so this list only needs to
+# name years we want to advertise BEFORE the first paper of that year is built.
+SERIES_YEARS = (2026, 2025)
+
+
+def paper_status(answers_built):
+    """Student-facing availability. Deliberately two-valued.
+
+    Production has richer internal state (build_state, review_state,
+    official_source_verified) and the manifest keeps all of it. The student view
+    does not: the only thing a student can act on is whether there is an answer
+    to read. Holding a source copy of a sitting is not a product, so a month is
+    'available' only when answers actually exist -- a paper can never appear
+    solved because a PDF sits in a folder.
+    """
+    return 'available' if answers_built > 0 else 'coming_later'
+
+
 TOPIC_TREE = [
     ('Pollution Prevention & Response', ['MARPOL', 'Pollution Prevention', 'Casualty & Investigation']),
     ('Cargo & Bulk Carriage', ['IMSBC']),
@@ -64,15 +94,23 @@ def build_manifest(specs):
         built = [q for q in d['questions'] if q.get('model_answer')]
         papers.append({
             'paper_id': pid, 'sr_no': d['sr_no'], 'year': d['year'], 'month': d['month'],
+            'month_num': MONTHS.index(d['month']) + 1,
+            'paper_status': paper_status(len(built)),
             'month_year': d['month_year'], 'subject': d['subject'], 'class': d['class'],
             'function': d['function'], 'total_marks': d['total_marks'],
             'marks_note': d['marks_note'],
             'file': url, 'spec': 'meoclass1/pastpapers/specs/%s.json' % pid,
             'dedup_plan': 'meoclass1/pastpapers/verification/%s/DEDUP_AND_SOURCE_PLAN.md' % pid,
             'red_team_review': 'meoclass1/pastpapers/verification/%s/PILOT_RED_TEAM_REVIEW.md' % pid,
-            'source_copy_provenance': '%s (host branding: %s)' % (
-                d['source_copy_provenance']['described_as'],
-                d['source_copy_provenance']['host_branding']),
+            # Source-copy classification is neutral by policy: it records WHAT
+            # kind of copy this is, never WHO hosted it. The host's identity is
+            # kept locally, outside this public repository.
+            'source_copy_provenance': d['source_copy_provenance']['described_as'],
+            'source_copy_type': d['source_copy_provenance']['source_copy_type'],
+            'source_authority': d['source_copy_provenance']['source_authority'],
+            # Deliberately distinct from source_authority. Removing a host's name
+            # from a scan does not make the scan an official source, so this
+            # continues to report actual verification status.
             'official_source_verified': d['official_source_verified'],
             'transcription_verified': d['transcription_verified']['state'],
             'build_state': d['build_state'], 'review_state': d['review_state'],
@@ -117,7 +155,9 @@ def build_manifest(specs):
         'scope': ('Past Written Papers (PP) series retrieval index. One entry per paper and one per '
                   'question. This file is an INDEX, not a content source: answer text lives only in '
                   'the paper spec. Regenerate with build_index.py; never hand-edit.'),
-        'naming_convention': "EM<YYMM>.html; question_id EM<YYMM>-Q<n>; anchors #q1..#q9",
+        'naming_convention': ("QP<YY><MM>.html, where QP = Question Paper, YY = year and "
+                              "MM = month of the sitting (QP2607 = July 2026); "
+                              "question_id QP<YY><MM>-Q<n>; anchors #q1..#q9"),
         'source_of_truth_policy': ('specs/<PAPER>.json is authoritative for content. This manifest is '
                                    'authoritative for retrieval. Both index pages and the paper page '
                                    'are generated; editing generated HTML is always wrong.'),
@@ -129,6 +169,17 @@ def build_manifest(specs):
         'recurrence_rule': ('A third-party recurrence table alone only supports topic_recurrence. '
                             'near_ and exact_ require the prior paper wording to have been compared.'),
         'topic_tree': [{'category': c, 'subject_tags': t} for c, t in TOPIC_TREE],
+        # Navigator shape. Years carrying a spec plus any advertised ahead of
+        # their first paper. Consumers can render the full grid from this
+        # without a placeholder spec existing for every month.
+        'series_years': sorted(set(SERIES_YEARS) | {p['year'] for p in papers}, reverse=True),
+        'months': list(MONTHS),
+        'paper_status_model': {
+            'available': 'Answers are published for this sitting.',
+            'coming_later': ('No answers yet. Covers every case a student cannot act on -- '
+                             'not transcribed, in production, or source copy held only. '
+                             'Holding a source copy never reads as solved.'),
+        },
         'total_papers': len(papers), 'total_questions': len(questions),
         'total_reverify_before_publication': sum(len(q['reverify_before_publication']) for q in questions),
         'papers': papers, 'questions': questions,
@@ -179,61 +230,117 @@ def build_index_page(man, publish):
           '<code>tools/pastpapers/build_index.py</code> from the paper specs. Not published, '
           'not indexed.</div>')
 
-    a('<div class="controls-bar"><div class="controls-inner">')
-    a('  <label class="search-wrap"><span aria-hidden="true">&#128269;</span>')
-    a('    <input id="q-search" type="search" autocomplete="off" '
+    # Search is the only thing in the sticky bar. The previous build also put a
+    # filter button per year and per subject tag here: seventeen buttons with a
+    # single paper, and a bar 303px tall on a phone, which pushed the search
+    # input itself off screen. Year selection now lives in the sitting grid and
+    # subject selection on the topics page, so this bar stays one row.
+    a('  <div class="controls-bar"><div class="controls-inner">')
+    a('    <label class="search-wrap"><span aria-hidden="true">&#128269;</span>')
+    a('      <input id="q-search" type="search" autocomplete="off" '
       'placeholder="Search every question &mdash; e.g. general average, SOPEP, ammonia, MARPOL Annex VI" '
       'aria-label="Search all written questions">')
-    a('    <button id="q-clear" class="icon-btn" type="button" aria-label="Clear search">&times;</button>')
-    a('  </label>')
-    a('  <button class="filter-btn" type="button" data-f="all" aria-pressed="true">All</button>')
-    a('  <button class="filter-btn" type="button" data-f="bookmarked" aria-pressed="false">My bookmarks</button>')
-    a('  <button class="filter-btn" type="button" data-f="unstudied" aria-pressed="false">Not studied</button>')
-    for y in sorted({p['year'] for p in man['papers']}):
-        a('  <button class="filter-btn" type="button" data-f="y:%d" aria-pressed="false">%d</button>' % (y, y))
-    for s in sorted({s for p in man['papers'] for s in p['subject_tags']}):
-        a('  <button class="filter-btn" type="button" data-f="s:%s" aria-pressed="false">%s</button>'
-          % (esc_attr(s.lower()), esc(s)))
-    a('  <span class="count-label" id="idx-count" role="status" aria-live="polite"></span>')
-    a('</div></div>')
+    a('      <button id="q-clear" class="icon-btn" type="button" aria-label="Clear search">&times;</button>')
+    a('    </label>')
+    a('    <span class="count-label" id="idx-count" role="status" aria-live="polite"></span>')
+    a('  </div></div>')
 
-    a('<main id="idx-main" style="max-width:1000px;margin:0 auto;padding:20px;">')
-    a('<h2 style="font-size:15px;color:var(--teal-dark);text-transform:uppercase;letter-spacing:.05em;">Papers</h2>')
-    for p in man['papers']:
-        a('<article class="paper-card" data-paper="%s" data-year="%d" data-subjects="%s">'
-          % (esc_attr(p['paper_id']), p['year'], esc_attr(' '.join(p['subject_tags']).lower())))
-        a('  <h3><a href="%s" style="color:inherit;text-decoration:none;">%s &mdash; %s</a></h3>'
-          % (esc_attr('%s.html' % p['paper_id']), esc(p['month_year']), esc(p['subject'])))
-        a('  <div class="pc-meta">%s &middot; %s &middot; %s &middot; <b>%d of %d questions '
-          'with model answers</b></div>'
-          % (esc(p['sr_no']), esc(p['class']), esc(p['function']),
-             p['answers_built'], p['question_count']))
-        a('  <div class="pc-topics">%s</div>'
-          % ''.join('<span class="q-tag">%s</span>' % esc(t) for t in p['subject_tags']))
-        a('  <p style="margin:12px 0 0;"><a class="nav-btn" href="%s.html">Open paper</a>'
-          ' <a class="nav-btn" href="%s.html#rapid-revision" '
-          'style="background:var(--navy);">Rapid revision</a></p>'
-          % (esc_attr(p['paper_id']), esc_attr(p['paper_id'])))
-        if not publish:
-            a('  <p class="rec-note">Build state: %s &middot; review state: %s &middot; '
-              'official source verified: %s</p>'
-              % (esc(p['build_state']), esc(p['review_state']),
+    a('<main id="idx-main">')
+
+    # ---- A. "I know the sitting" -----------------------------------------
+    # One compact block per year, twelve months each, whatever exists. This
+    # replaced a full article per paper: at 24 papers that was 24 large cards
+    # to scroll, which is a list, not a navigator.
+    by_ym = {(p['year'], p['month_num']): p for p in man['papers']}
+    a('<section class="nav-block" aria-labelledby="h-sittings">')
+    a('  <h2 id="h-sittings" class="sec-h">Browse by sitting</h2>')
+    for year in man['series_years']:
+        got = sum(1 for (y, _), p in by_ym.items()
+                  if y == year and p['paper_status'] == 'available')
+        a('  <article class="year-block">')
+        a('    <div class="year-head"><h3>%d</h3>'
+          '<span class="year-count">%s</span></div>'
+          % (year, 'no papers yet' if not got else
+             '%d of 12 available' % got))
+        a('    <ol class="month-grid">')
+        for i, abbr in enumerate(MONTH_ABBR, start=1):
+            p = by_ym.get((year, i))
+            avail = bool(p) and p['paper_status'] == 'available'
+            if avail:
+                a('      <li class="m avail"><a href="%s.html" '
+                  'aria-label="%s %d &mdash; %d questions with model answers">'
+                  '<span class="m-ab">%s</span>'
+                  '<span class="m-st">%d Qs</span></a></li>'
+                  % (esc_attr(p['paper_id']), MONTHS[i - 1], year,
+                     p['answers_built'], abbr, p['answers_built']))
+            else:
+                # Not a link and not focusable: there is nothing to open. The
+                # state is announced in text, never by colour alone.
+                a('      <li class="m soon"><span aria-label="%s %d &mdash; coming later">'
+                  '<span class="m-ab">%s</span>'
+                  '<span class="m-st">&mdash;</span></span></li>'
+                  % (MONTHS[i - 1], year, abbr))
+        a('    </ol>')
+        a('  </article>')
+    a('  <p class="rec-note">Months marked &mdash; are not yet available. A sitting appears '
+      'here only once its answers are written; holding a copy of a paper is not the same '
+      'as having solved it.</p>')
+    a('</section>')
+
+    # ---- B. "I know the topic" -------------------------------------------
+    a('<section class="nav-block" aria-labelledby="h-topics">')
+    a('  <h2 id="h-topics" class="sec-h">Browse by topic</h2>')
+    a('  <p class="rec-note" style="margin-top:0;">Where each topic has appeared, with its '
+      'recurrence history.</p>')
+    a('  <p class="btn-row">')
+    for year in sorted({p['year'] for p in man['papers']}, reverse=True):
+        a('    <a class="nav-btn" href="topics-%d.html">%d topic coverage</a>' % (year, year))
+    a('  </p>')
+    a('</section>')
+
+    # ---- C. "I want to carry on studying" --------------------------------
+    a('<section class="nav-block" aria-labelledby="h-study">')
+    a('  <h2 id="h-study" class="sec-h">My study</h2>')
+    a('  <p class="rec-note" style="margin-top:0;">Saved on this device only. '
+      'No account, nothing sent anywhere.</p>')
+    a('  <p class="btn-row">')
+    a('    <button class="filter-btn" type="button" data-f="all" aria-pressed="true">All questions</button>')
+    a('    <button class="filter-btn" type="button" data-f="bookmarked" aria-pressed="false">&#9733; Bookmarked</button>')
+    a('    <button class="filter-btn" type="button" data-f="studied" aria-pressed="false">&#10003; Studied</button>')
+    a('    <button class="filter-btn" type="button" data-f="unstudied" aria-pressed="false">Not studied</button>')
+    a('  </p>')
+    a('</section>')
+
+    a('<section class="nav-block" aria-labelledby="results-head">')
+    a('  <h2 id="results-head" class="sec-h">Questions</h2>')
+    a('  <p class="rec-note" id="idx-hint" style="margin-top:0;">Search above, or pick a study '
+      'filter, to look inside every question across every paper. You do not need to know which '
+      'paper it came from. Results link straight to the answer.</p>')
+    a('  <div id="idx-results"></div>')
+    a('  <div id="idx-empty" style="display:none;" class="rec-note">No question matches that search.</div>')
+    a('</section>')
+
+    if not publish:
+        a('<section class="nav-block"><h2 class="sec-h">Production state</h2>')
+        a('  <table class="prod-table"><thead><tr><th>Paper</th><th>Build</th>'
+          '<th>Review</th><th>Official source verified</th></tr></thead><tbody>')
+        for p in man['papers']:
+            a('    <tr><td>%s &middot; %s</td><td>%s</td><td>%s</td><td>%s</td></tr>'
+              % (esc(p['paper_id']), esc(p['month_year']), esc(p['build_state']),
+                 esc(p['review_state']),
                  'yes' if p['official_source_verified'] else 'NO'))
-        a('</article>')
+        a('  </tbody></table>')
+        a('</section>')
 
-    a('<h2 id="results-head" style="font-size:15px;color:var(--teal-dark);text-transform:uppercase;'
-      'letter-spacing:.05em;margin-top:28px;">Questions</h2>')
-    a('<p class="rec-note" id="idx-hint">Type above to search every question across every paper. '
-      'Results link straight to the answer.</p>')
-    a('<div id="idx-results"></div>')
-    a('<div id="idx-empty" style="display:none;" class="rec-note">No question matches that search.</div>')
     a('</main>')
     o.extend(footer(publish))
     a('<script>')
     a('var ROWS=%s;' % _index_js(man))
     a(open(os.path.join(HERE, 'template', 'index.js'), encoding='utf-8').read().rstrip('\n')
-      .replace('__LS_BOOKMARKS__', 'miw:pastpapers:v1:bookmarks')
-      .replace('__LS_PROGRESS__', 'miw:pastpapers:v1:progress'))
+      .replace('__LS_BOOKMARKS__', LS_BOOKMARKS)
+      .replace('__LS_PROGRESS__', LS_PROGRESS)
+      .replace('__LS_MIGRATE__', LS_MIGRATE_JS)
+      .replace('__STICKY_SYNC__', STICKY_SYNC_JS))
     a('</script>')
     a('</body>')
     a('</html>')

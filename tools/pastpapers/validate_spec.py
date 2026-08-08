@@ -83,6 +83,77 @@ def check_blocks(blocks, label):
                 % (label, i, len(found), sorted(found) or '(none)'))
 
 
+# ---------------------------------------------------------------- template
+# The canonical Written Answer template, derived from the nine QP2607 answers
+# rather than invented. Every built question already satisfies it; enforcing it
+# here is what stops the next eleven papers from each drifting a little.
+#
+# The spine is fixed so a student meets the same shape in every answer and a
+# future extractor can rely on it. The question-specific analysis sections in
+# between are deliberately NOT constrained -- that is where the thinking lives,
+# and forcing irrelevant sections into every answer is exactly what the brief
+# rules out.
+STUDY_GUIDE_SPINE = (
+    'Why this structure scores',
+    'Common mistakes',
+    'Examiner traps',
+    'Likely oral follow-up',
+    'Memory framework',
+    'Regulation and source map',
+)
+
+# Every built answer also discloses what is uncertain, but the tail of the
+# heading is question-specific ("Uncertainty and jurisdiction notes",
+# "Uncertainty and currency", ...). Match the prefix, not the whole string:
+# requiring one exact wording would force a dishonest heading onto a question
+# whose uncertainty is of a different kind.
+STUDY_GUIDE_PREFIXES = ('Uncertainty',)
+
+QUICK_REVISION_FIELDS = ('recall_15s', 'skeleton', 'keywords',
+                         'critical_numbers', 'critical_regulation', 'major_trap')
+
+
+def _headings(blocks):
+    """Heading text with inline markup removed, so <b>/<i> cannot defeat a match."""
+    return [re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', b['h'])).strip()
+            for b in (blocks or {}).get('blocks', []) if 'h' in b]
+
+
+def check_study_guide_spine(q, qn):
+    hs = _headings(q.get('study_notes'))
+    for want in STUDY_GUIDE_SPINE:
+        if want not in hs:
+            err('%s study_notes: missing required section %r. The canonical '
+                'template is: %s (plus question-specific sections).'
+                % (qn, want, ', '.join(STUDY_GUIDE_SPINE)))
+    for pre in STUDY_GUIDE_PREFIXES:
+        if not any(h.startswith(pre) for h in hs):
+            err('%s study_notes: no %r section. Every built answer must state '
+                'what is uncertain; the heading tail may be question-specific.'
+                % (qn, pre))
+
+
+def check_quick_revision(q, qn):
+    """Quick Revision is generated from the question object, never hand-kept.
+
+    It is also the source of the Exam Approach block and of the paper-level
+    Rapid Revision table, so a missing field silently empties two other
+    surfaces rather than just this one.
+    """
+    qr = q.get('quick_revision')
+    if not isinstance(qr, dict):
+        err('%s: built answer with no quick_revision object' % qn)
+        return
+    for f in QUICK_REVISION_FIELDS:
+        if not qr.get(f):
+            err('%s quick_revision: missing or empty %r (required: %s)'
+                % (qn, f, ', '.join(QUICK_REVISION_FIELDS)))
+    if isinstance(qr.get('skeleton'), list) and len(qr['skeleton']) < 3:
+        err('%s quick_revision.skeleton has %d step(s). An answer skeleton with '
+            'fewer than 3 is not a usable exam-writing map.'
+            % (qn, len(qr['skeleton'])))
+
+
 def words(blocks):
     """Count words in a rendered-text sense: strip inline tags, join all text."""
     if not blocks:
@@ -126,9 +197,31 @@ def main(path):
         err('build_state %r not one of %s' % (d.get('build_state'), BUILD_STATES))
 
     # --- provenance honesty -------------------------------------------------
+    # Source-copy classification is NEUTRAL: it records what kind of copy this
+    # is, never who hosted it. This repository is public, so a host's name in a
+    # spec is a public brand trace. The host identity is kept in a local-only
+    # file. Note that this is a separate axis from official_source_verified --
+    # deleting a brand name must never promote a scan to an official source.
+    SOURCE_COPY_TYPES = ('third_party_scan', 'official_publication', 'candidate_transcript')
+    SOURCE_AUTHORITIES = ('unverified', 'verified_official')
     prov = d.get('source_copy_provenance') or {}
     if not isinstance(prov, dict) or 'described_as' not in prov:
         err('source_copy_provenance must be an object carrying described_as')
+    else:
+        if prov.get('source_copy_type') not in SOURCE_COPY_TYPES:
+            err('source_copy_provenance.source_copy_type %r not one of %s'
+                % (prov.get('source_copy_type'), list(SOURCE_COPY_TYPES)))
+        if prov.get('source_authority') not in SOURCE_AUTHORITIES:
+            err('source_copy_provenance.source_authority %r not one of %s'
+                % (prov.get('source_authority'), list(SOURCE_AUTHORITIES)))
+        if 'host_branding' in prov:
+            err('source_copy_provenance carries host_branding. Third-party host '
+                'identity must not live in this public repository; record it in '
+                'verification/LOCAL_SOURCE_PROVENANCE.md and use source_copy_type.')
+        if prov.get('source_authority') == 'verified_official' and \
+                d.get('official_source_verified') is not True:
+            err('source_authority is verified_official but official_source_verified '
+                'is not True. These two must agree.')
     if d.get('official_source_verified') is not False and \
             not d.get('official_source_verification_note'):
         err('official_source_verified is not False and carries no verification note. '
@@ -257,6 +350,9 @@ def main(path):
             check_blocks(q['model_answer'], '%s model_answer' % qn)
         if has_notes:
             check_blocks(q['study_notes'], '%s study_notes' % qn)
+            check_study_guide_spine(q, qn)
+        if has_ans:
+            check_quick_revision(q, qn)
 
         if has_ans:
             n = words(q['model_answer'])

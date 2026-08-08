@@ -51,7 +51,7 @@ def N(*parts):
     return os.path.normpath(os.path.join(*parts))
 
 
-def check(publish_mode=False, inject=None):
+def check(publish_mode=False, inject=None, strip_from_pages=None):
     global errs, warns, oks
     errs, warns, oks = [], [], []
 
@@ -141,6 +141,12 @@ def check(publish_mode=False, inject=None):
         for p, extra in inject.items():
             if p in pages:
                 pages[p] = pages[p] + extra
+    if strip_from_pages:
+        # Some faults are an ABSENCE -- a page that lost its study-state
+        # migration, say. Those cannot be positive-controlled by appending, so
+        # the self-test removes the marker instead.
+        for p in pages:
+            pages[p] = pages[p].replace(strip_from_pages, '')
 
     dead = 0
     for p, body in pages.items():
@@ -264,7 +270,91 @@ def check(publish_mode=False, inject=None):
                         % (os.path.basename(p), internal))
     if not any('leaked' in e or 'marketing' in e or 'production metadata exposed' in e
                for e in errs):
-        ok('no path leakage, no aggregator branding, production metadata correctly scoped')
+        ok('no path leakage, no third-party branding, production metadata correctly scoped')
+
+    # ---------- 8 QP identity migration ----------
+    # These exist because the EM -> QP rename touched 26 files, and the failure
+    # mode of a half-done rename is not a crash: it is a page that loads, a link
+    # that 404s only when clicked, and study state silently orphaned.
+    QP_ID = re.compile(r'^QP\d{4}$')
+    LEGACY_ID = re.compile(r'\bEM-?\d{4}\b')
+
+    for pid in pids:
+        if not QP_ID.match(pid):
+            err('paper_id %r does not match the canonical QP<YY><MM> convention' % pid)
+    for q in man['questions']:
+        want = '%s-%s' % (q['paper_id'], q['question_number'])
+        if q['question_id'] != want:
+            err('question_id %r does not match paper_id + question number (%r)'
+                % (q['question_id'], want))
+
+    # Canonical identity must be gone from every product surface. Prose that
+    # merely DESCRIBES the migration is legitimate, so this deliberately scans
+    # the manifest and the generated pages, not the documentation or the
+    # verification records.
+    for label, body in ([('manifest', rd(mpath))] +
+                        [(os.path.basename(p), b) for p, b in pages.items()]):
+        m = LEGACY_ID.search(body)
+        if m:
+            err('%s: legacy paper identifier %r still present. One canonical '
+                'identity everywhere: the QP series.' % (label, m.group(0)))
+
+    for pid in pids:
+        pg = N(PP, '%s.html' % pid)
+        if not os.path.exists(pg):
+            err('no generated page for paper %s (expected %s.html)' % (pid, pid))
+        sp = N(PP, 'specs', '%s.json' % pid)
+        if not os.path.exists(sp):
+            err('no spec named for paper %s (expected specs/%s.json)' % (pid, pid))
+        vdir = N(PP, 'verification', pid)
+        if not os.path.isdir(vdir):
+            err('no verification directory for paper %s (expected verification/%s/)'
+                % (pid, pid))
+
+    # The shipped migration itself. Without this, a rebuild that dropped the
+    # snippet would orphan every bookmark a student had saved, silently.
+    for p, body in pages.items():
+        # Scope by what a page DOES, not by what it looks like: the shared
+        # stylesheet is inlined everywhere, so matching on a class name like
+        # .q-card matches the topics page too. A page needs the migration only
+        # if it actually reads saved study state.
+        if 'miw:pastpapers:v1:bookmarks' not in body:
+            continue
+        if 'migrateLegacyKeys' not in body:
+            err('%s: no legacy study-state migration in the page script. Renaming '
+                'the paper without it silently orphans saved bookmarks and progress.'
+                % os.path.basename(p))
+
+    if not any('legacy' in e or 'canonical' in e or 'no generated page' in e for e in errs):
+        ok('QP identity is canonical everywhere; specs, pages and verification '
+           'records all present; study-state migration shipped')
+
+    # ---------- 9 sitting navigator ----------
+    for key in ('series_years', 'months', 'paper_status_model'):
+        if key not in man:
+            err('manifest missing navigator key: %s' % key)
+    idx = pages.get(N(PP, 'index.html'))
+    if idx:
+        for p in man['papers']:
+            if p['paper_status'] != 'available':
+                continue
+            cell = 'href="%s.html"' % p['paper_id']
+            if cell not in idx:
+                err('index.html: %s is available but has no month cell linking to it'
+                    % p['paper_id'])
+            if p['month'] not in idx:
+                err('index.html: no %s cell for %s' % (p['month'], p['paper_id']))
+        for y in man.get('series_years', []):
+            if '>%d<' % y not in idx:
+                err('index.html: series year %d is not rendered in the navigator' % y)
+        # A month with no answers must never read as solved.
+        if idx.count('class="m avail"') != sum(
+                1 for p in man['papers'] if p['paper_status'] == 'available'):
+            err('index.html: count of "available" month cells does not match the '
+                'number of papers with answers built')
+        if not any('month cell' in e or 'navigator' in e for e in errs):
+            ok('sitting navigator renders every advertised year and links each '
+               'available month to its paper')
 
 
 def strip(s):
@@ -294,11 +384,25 @@ def main():
     if args.self_test:
         print()
         print('  self-test: injecting faults and asserting the checker fires')
-        paper = N(PP, 'EM2607.html')
+        # Derive the page to inject into from the specs. Hardcoding a filename
+        # here means a paper rename silently changes what the self-test covers.
+        spec_ids = sorted(json.loads(rd(p))['paper_id']
+                          for p in glob.glob(os.path.join(PP, 'specs', '*.json')))
+        if not spec_ids:
+            print('  [SELFTEST FAIL] no spec found to derive a paper page from')
+            sys.exit(1)
+        paper = N(PP, '%s.html' % spec_ids[0])
+        if not os.path.exists(paper):
+            print('  [SELFTEST FAIL] derived paper page does not exist: %s' % paper)
+            sys.exit(1)
         cases = [
             ('filesystem path leak', {paper: '<!-- C:/Users/User/secret.pdf -->'}),
-            ('aggregator branding', {paper: '<!-- dieselship -->'}),
+            ('third-party branding', {paper: '<!-- dieselship -->'}),
             ('dead anchor', {paper: '<a href="index.html#does-not-exist">x</a>'}),
+            # A half-finished rename leaves a legacy identifier behind in one
+            # generated surface. That must fail loudly, not read as cosmetic.
+            ('legacy EM identifier in a generated page', {paper: '<!-- EM2607 -->'}),
+            ('legacy EM sr_no in a generated page', {paper: '<!-- EM-2607 -->'}),
         ]
         bad = []
         for name, inject in cases:
@@ -306,6 +410,15 @@ def main():
             # the injected copy also breaks reproducibility, which is itself correct
             if not errs:
                 bad.append('%s did NOT fire' % name)
+
+        # Absence faults: positive-controlled by removal, not injection.
+        for name, marker in [('missing study-state migration', 'migrateLegacyKeys'),
+                             ('missing month cell for an available paper',
+                              'class="m avail"')]:
+            check(publish_mode=False, strip_from_pages=marker)
+            if not errs:
+                bad.append('%s did NOT fire' % name)
+
         for b in bad:
             print('  [SELFTEST FAIL] %s' % b)
         print('  self-test: %s' % ('FAILED' if bad else 'all injected faults detected'))

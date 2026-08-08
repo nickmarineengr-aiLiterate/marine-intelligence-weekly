@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MEO Class I Written Questions &amp;mdash; 2026 topic coverage | Marine Intelligence Weekly</title>
+<title>MEO Class I Written Questions — 2026 topic coverage | Marine Intelligence Weekly</title>
 <meta name="description" content="Every MEO Class I written examination question recorded for 2026, grouped by topic, with recurrence history and direct links to the model answers.">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 <link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/pastpapers/topics-2026.html">
@@ -123,7 +123,13 @@
   .review-banner{background:var(--orange-light);border:1.5px dashed var(--orange);border-radius:8px;padding:10px 14px;margin:14px auto;max-width:1140px;font-size:12.5px;color:#7c2d12;}
   .review-banner strong{color:#c2410c;}
 
-  .controls-bar{position:sticky;top:47px;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 18px;}
+  /* --topbar-h is measured and set by syncStickyOffsets() on load, resize and
+     font load. The bar wraps to two or three lines as the viewport narrows, so
+     a constant here is wrong at some width by construction: the old value of
+     47px left a visible gap on desktop, and the mobile override of top:0 put
+     this bar underneath the topbar and hid the search input entirely. The
+     fallback only applies if scripting is off, where nothing is sticky anyway. */
+  .controls-bar{position:sticky;top:var(--topbar-h,47px);z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 18px;}
   .controls-inner{max-width:1140px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
   .search-wrap{flex:1;min-width:180px;display:flex;align-items:center;gap:6px;border:1px solid var(--grey-border);border-radius:8px;padding:0 10px;background:#fff;}
   .search-wrap:focus-within{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-light);}
@@ -133,8 +139,43 @@
   .filter-btn[aria-pressed="true"]{background:var(--teal);color:#fff;border-color:var(--teal);}
   .count-label{font-size:12px;color:var(--grey-text);margin-left:auto;white-space:nowrap;}
 
+  /* nav-btn had NO rule at all. Both index buttons therefore rendered as bare
+     browser links -- and "Rapid revision" carried an inline navy background, so
+     it was #0000EE text on #0F172A: a contrast ratio of about 1.9:1 against the
+     4.5:1 minimum, i.e. unreadable. Defined here so no caller needs inline
+     colour. */
+  .nav-btn{display:inline-block;background:var(--teal-dark);color:#fff;text-decoration:none;font-family:'Segoe UI',system-ui,sans-serif;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:8px;border:1px solid var(--teal-dark);line-height:1.2;}
+  .nav-btn:hover{background:var(--teal);border-color:var(--teal);}
+  .nav-btn:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+  .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0;}
+
+  /* Sitting navigator. A year must stay one glance at any width, so the grid
+     flows from 12 across on a desktop down to 4 on a phone rather than being
+     pinned to twelve columns. */
+  .sec-h{font-size:15px;color:var(--teal-dark);text-transform:uppercase;letter-spacing:.05em;margin:0 0 10px;}
+  .nav-block{margin:0 0 30px;}
+  .year-block{background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:14px 16px;margin-bottom:12px;}
+  .year-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px;}
+  .year-head h3{margin:0;font-size:20px;color:var(--navy);letter-spacing:.02em;}
+  .year-count{font-size:12px;color:var(--grey-text);}
+  .month-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(66px,1fr));gap:6px;}
+  .month-grid .m > *{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:8px;font-family:'Segoe UI',system-ui,sans-serif;text-decoration:none;border:1px solid var(--grey-border);}
+  .m-ab{font-size:12.5px;font-weight:700;letter-spacing:.02em;}
+  .m-st{font-size:10.5px;letter-spacing:.02em;}
+  .m.avail > a{background:var(--teal-light);border-color:var(--teal);color:var(--teal-dark);}
+  .m.avail > a:hover{background:var(--teal);color:#fff;}
+  .m.avail > a:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+  /* Unavailable months are stated in text (an em dash plus an aria-label), not
+     by colour alone, and are not links or focus stops: there is nothing to open. */
+  .m.soon > span{background:var(--grey-bg);color:var(--grey-text);border-style:dashed;}
+
+  .prod-table{width:100%;border-collapse:collapse;font-family:'Segoe UI',system-ui,sans-serif;font-size:12.5px;}
+  .prod-table th,.prod-table td{border:1px solid var(--grey-border);padding:6px 9px;text-align:left;}
+  .prod-table th{background:var(--grey-bg);color:var(--navy);}
+
   .main-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:24px;padding:20px;max-width:1140px;margin:0 auto;}
-  .sidebar{position:sticky;top:112px;align-self:start;font-size:13px;max-height:calc(100vh - 130px);overflow-y:auto;}
+  #idx-main{max-width:1000px;margin:0 auto;padding:20px;}
+  .sidebar{position:sticky;top:calc(var(--topbar-h,47px) + var(--controls-h,65px) + 12px);align-self:start;font-size:13px;max-height:calc(100vh - var(--topbar-h,47px) - var(--controls-h,65px) - 30px);overflow-y:auto;}
   .sidebar h2{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--grey-text);margin:0 0 8px 8px;}
   .toc-link{display:flex;gap:8px;padding:6px 8px;border-radius:6px;color:var(--grey-text);text-decoration:none;line-height:1.35;}
   .toc-link:hover{background:var(--grey-bg);}
@@ -181,6 +222,14 @@
   .sg .inner{padding-top:10px;}
   .sg h3{color:var(--navy);border-bottom-color:var(--grey-border);margin-top:14px;}
   .sg p,.sg li{font-size:14px;}
+  /* Exam approach: the answer skeleton, rendered above the model answer.
+     Deliberately a different hue from .ma so it reads as a plan to write to,
+     not as answer content to reproduce. */
+  .skel{background:var(--orange-light);border:1.5px solid var(--orange);padding:0 16px 12px;}
+  .skel .layer-title{background:var(--orange);color:#fff;margin:0 -16px 10px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;}
+  .skel-marks{margin-left:auto;font-weight:600;letter-spacing:.02em;text-transform:none;opacity:.92;}
+  .skel-list{margin:0;padding-left:20px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;color:var(--ink);}
+  .skel-list li{margin:4px 0;}
   .qr{background:var(--teal-light);border:1.5px solid var(--teal);padding:0 16px 12px;}
   .qr .layer-title{background:var(--teal);color:#fff;margin:0 -16px 10px;}
   .qr dl{margin:0;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;}
@@ -229,7 +278,8 @@
     .main-layout{grid-template-columns:minmax(0,1fr);padding:14px;gap:14px;}
     .sidebar{position:static;max-height:none;overflow:visible;border:1px solid var(--grey-border);border-radius:10px;background:#fff;padding:10px;}
     .sidebar .toc-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px;}
-    .controls-bar{top:0;position:sticky;}
+    /* No top override here. The measured --topbar-h is correct at every width;
+       forcing top:0 was what made both bars claim the same slot on a phone. */
     .count-label{margin-left:0;width:100%;}
     .q-stem{font-size:13px;}
     .rapid,.rapid tbody,.rapid tr,.rapid td{display:block;width:100%;}
@@ -278,14 +328,14 @@
   <div class="tg-sub">MARPOL &middot; Pollution Prevention &middot; Casualty &amp; Investigation</div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q2 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="EM2607.html#q2">Bunker Overflow in Foreign Waters</a></div>
+    <div class="hit-title"><a href="QP2607.html#q2">Bunker Overflow in Foreign Waters</a></div>
     <div class="hit-stem">There is a bunker overflow from a large merchant ship while in foreign waters, in which you are the Chief Engineer. State in systematic detail the actions which you will need to take: (16) 1. Keeping in mind that the oil-spill/con&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">MARPOL Annex I</span><span class="q-tag sub">bunkering</span><span class="q-tag sub">oil pollution</span><span class="q-tag sub">SOPEP</span><span class="q-tag sub">Oil Record Book</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
   </div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q4 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="EM2607.html#q4">ECA Fuel Changeover</a></div>
+    <div class="hit-title"><a href="QP2607.html#q4">ECA Fuel Changeover</a></div>
     <div class="hit-stem">As the Chief Engineer of a large merchant ship, you are about to enter an Emission Control Area. Explain, with justification, the instructions you need to give to your colleagues with respect to the procedures to be followed regar&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">MARPOL Annex VI</span><span class="q-tag sub">ECA</span><span class="q-tag sub">fuel changeover</span><span class="q-tag sub">boilers</span><span class="q-tag sub">sulphur</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
@@ -296,7 +346,7 @@
   <div class="tg-sub">IMSBC</div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q1 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="EM2607.html#q1">Iron Ore Pellets / FSA</a></div>
+    <div class="hit-title"><a href="QP2607.html#q1">Iron Ore Pellets / FSA</a></div>
     <div class="hit-stem">(a) Discuss the application of a formal safety assessment in loading and carriage of iron ore pellets as cargo in bulk. (8) (b) What are the specific carriage and voyage monitoring requirements for a vessel transporting iron ore p&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">IMSBC</span><span class="q-tag sub">bulk cargo</span><span class="q-tag sub">iron ore pellets</span><span class="q-tag sub">FSA</span><span class="q-tag sub">SOLAS XII</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
@@ -307,21 +357,21 @@
   <div class="tg-sub">SOLAS &middot; Classification</div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q1 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="EM2607.html#q1">Iron Ore Pellets / FSA</a></div>
+    <div class="hit-title"><a href="QP2607.html#q1">Iron Ore Pellets / FSA</a></div>
     <div class="hit-stem">(a) Discuss the application of a formal safety assessment in loading and carriage of iron ore pellets as cargo in bulk. (8) (b) What are the specific carriage and voyage monitoring requirements for a vessel transporting iron ore p&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">IMSBC</span><span class="q-tag sub">bulk cargo</span><span class="q-tag sub">iron ore pellets</span><span class="q-tag sub">FSA</span><span class="q-tag sub">SOLAS XII</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
   </div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q3 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="EM2607.html#q3">IACS Structure / UR, UI, PR / RO Code</a></div>
+    <div class="hit-title"><a href="QP2607.html#q3">IACS Structure / UR, UI, PR / RO Code</a></div>
     <div class="hit-stem">a) Enumerate the structure of IACS and explain difference between UI, UR, PR from IACS. Does it have any significance to ship owners/operators? (8) b) What is a Recognized organization? What are the salient features of the R.O. Co&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">IACS</span><span class="q-tag sub">classification societies</span><span class="q-tag sub">RO Code</span><span class="q-tag sub">flag State</span></div>
     <div class="rec-note">Other recorded sittings: 2023/MAR/Q8, 2024/JAN/Q5. <i>Topic recurrence only &mdash; wording not compared.</i></div>
   </div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q6 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="EM2607.html#q6">Green Ammonia - ICE vs Fuel Cells</a></div>
+    <div class="hit-title"><a href="QP2607.html#q6">Green Ammonia - ICE vs Fuel Cells</a></div>
     <div class="hit-stem">Evaluate the use of Green Ammonia as a zero-carbon marine fuel. What are the primary safety, storage and combustion challenges of using ammonia in marine internal combustion engines versus fuel cells? (16)&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">green ammonia</span><span class="q-tag sub">alternative fuels</span><span class="q-tag sub">fuel cells</span><span class="q-tag sub">IGF Code</span><span class="q-tag sub">decarbonisation</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
@@ -332,7 +382,7 @@
   <div class="tg-sub">Alternative Fuels</div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q6 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="EM2607.html#q6">Green Ammonia - ICE vs Fuel Cells</a></div>
+    <div class="hit-title"><a href="QP2607.html#q6">Green Ammonia - ICE vs Fuel Cells</a></div>
     <div class="hit-stem">Evaluate the use of Green Ammonia as a zero-carbon marine fuel. What are the primary safety, storage and combustion challenges of using ammonia in marine internal combustion engines versus fuel cells? (16)&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">green ammonia</span><span class="q-tag sub">alternative fuels</span><span class="q-tag sub">fuel cells</span><span class="q-tag sub">IGF Code</span><span class="q-tag sub">decarbonisation</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
@@ -343,21 +393,21 @@
   <div class="tg-sub">Marine Insurance &middot; Commercial Law</div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q5 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="EM2607.html#q5">Particular &amp; General Average / Adjusters</a></div>
+    <div class="hit-title"><a href="QP2607.html#q5">Particular &amp; General Average / Adjusters</a></div>
     <div class="hit-stem">Explain the concepts of "Particular Average" and "General Average". What are the circumstances when a general average can be declared? Who are average adjusters and what is their role in general average loss situations? (16)&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">general average</span><span class="q-tag sub">particular average</span><span class="q-tag sub">York-Antwerp Rules</span><span class="q-tag sub">marine insurance</span></div>
     <div class="rec-note">Other recorded sittings: 2023/APR/Q3, 2025/SEP/Q3. <i>Topic recurrence only &mdash; wording not compared.</i></div>
   </div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q7 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="EM2607.html#q7">Merchant Shipping Act 2025</a></div>
+    <div class="hit-title"><a href="QP2607.html#q7">Merchant Shipping Act 2025</a></div>
     <div class="hit-stem">India has recently taken significant legislative measures that are critical to streamlining maritime governance and bringing India's shipping regulation in line with global practices. Explain the significance of the Merchant Shipp&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">Merchant Shipping Act 2025</span><span class="q-tag sub">India</span><span class="q-tag sub">DGMA</span><span class="q-tag sub">tonnage</span><span class="q-tag sub">maritime governance</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
   </div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q9 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="EM2607.html#q9">Uberrimae Fidei / Disclosure</a></div>
+    <div class="hit-title"><a href="QP2607.html#q9">Uberrimae Fidei / Disclosure</a></div>
     <div class="hit-stem">Explain the principle of "Uberrimae Fidei" in Marine Insurance. What are the different disclosures which must be made by the insured to the insurer in Marine Insurance? List the circumstances which need not be disclosed to the ins&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">marine insurance</span><span class="q-tag sub">uberrimae fidei</span><span class="q-tag sub">disclosure</span><span class="q-tag sub">utmost good faith</span></div>
     <div class="rec-note">Other recorded sittings: 2022/OCT/Q2, 2024/JAN/Q1. <i>Topic recurrence only &mdash; wording not compared.</i></div>
@@ -368,7 +418,7 @@
   <div class="tg-sub">Human Element &middot; STCW &middot; ISM</div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q8 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="EM2607.html#q8">Competence vs Performance / Automation</a></div>
+    <div class="hit-title"><a href="QP2607.html#q8">Competence vs Performance / Automation</a></div>
     <div class="hit-stem">(a) In the context of the human element, explain the difference between crew "competence" and crew "performance." Discuss the role of ongoing training and drills in ensuring that competence translates into high performance, especi&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">human element</span><span class="q-tag sub">STCW</span><span class="q-tag sub">competence</span><span class="q-tag sub">automation</span><span class="q-tag sub">drills</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
@@ -379,14 +429,14 @@
   <div class="tg-sub">Indian Legislation</div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q7 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="EM2607.html#q7">Merchant Shipping Act 2025</a></div>
+    <div class="hit-title"><a href="QP2607.html#q7">Merchant Shipping Act 2025</a></div>
     <div class="hit-stem">India has recently taken significant legislative measures that are critical to streamlining maritime governance and bringing India's shipping regulation in line with global practices. Explain the significance of the Merchant Shipp&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">Merchant Shipping Act 2025</span><span class="q-tag sub">India</span><span class="q-tag sub">DGMA</span><span class="q-tag sub">tonnage</span><span class="q-tag sub">maritime governance</span></div>
     <div class="rec-note">No prior sitting recorded.</div>
   </div>
   <div class="hit">
     <div class="hit-top">July 2026 <span class="sep">&middot;</span> Q9 <span class="sep">&middot;</span> 16 marks</div>
-    <div class="hit-title"><a href="EM2607.html#q9">Uberrimae Fidei / Disclosure</a></div>
+    <div class="hit-title"><a href="QP2607.html#q9">Uberrimae Fidei / Disclosure</a></div>
     <div class="hit-stem">Explain the principle of "Uberrimae Fidei" in Marine Insurance. What are the different disclosures which must be made by the insured to the insurer in Marine Insurance? List the circumstances which need not be disclosed to the ins&hellip;</div>
     <div class="pc-topics" style="margin-top:6px;"><span class="q-tag sub">marine insurance</span><span class="q-tag sub">uberrimae fidei</span><span class="q-tag sub">disclosure</span><span class="q-tag sub">utmost good faith</span></div>
     <div class="rec-note">Other recorded sittings: 2022/OCT/Q2, 2024/JAN/Q1. <i>Topic recurrence only &mdash; wording not compared.</i></div>

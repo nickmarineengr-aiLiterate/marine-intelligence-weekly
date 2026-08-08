@@ -40,7 +40,7 @@ WRITTEN_MANIFEST = os.path.join(ORALNOTES, 'written_content_index.json')
 # QB series.
 QB_MANIFEST = os.path.join(MEOCLASS1, 'qb_content_index.json')
 
-# PAST PAPERS series: one full official written sitting per file (EM2607 etc.).
+# PAST PAPERS series: one full official written sitting per file (QP2607 etc.).
 # Fourth series, added 2026-08-07. Deliberately NOT folded into WRITTEN_MANIFEST:
 # that file is reserved for the WA topic-chapter series, which is a different
 # content shape (one topic, unlimited depth) from this one (one exam sitting,

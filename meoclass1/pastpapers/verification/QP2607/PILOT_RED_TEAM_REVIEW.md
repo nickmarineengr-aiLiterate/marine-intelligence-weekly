@@ -1,4 +1,4 @@
-# EM2607 — Pilot red-team review of Q1 and Q2
+# QP2607 — Pilot red-team review of Q1 and Q2
 
 Reviewed: 2026-08-08. Reviewer stance: adversarial. The v0.1 answers were treated as prototypes
 containing probable defects, not as work to be defended.

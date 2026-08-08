@@ -19,9 +19,19 @@
       return (v && typeof v === 'object' && !Array.isArray(v)) ? v : {};
     } catch (e) { return {}; }
   }
+  function save(key, obj) {
+    try { window.localStorage.setItem(key, JSON.stringify(obj)); } catch (e) { /* quota, private mode */ }
+  }
+
+__LS_MIGRATE__
 
   var bookmarks = load(LS_BM);
   var progress = load(LS_PR);
+
+  // The index may be the first page a returning student opens, so it migrates
+  // legacy study state too rather than waiting for a paper page to be visited.
+  if (migrateLegacyKeys(bookmarks)) save(LS_BM, bookmarks);
+  if (migrateLegacyKeys(progress)) save(LS_PR, progress);
 
   var input = document.getElementById('q-search');
   var clearBtn = document.getElementById('q-clear');
@@ -29,9 +39,10 @@
   var empty = document.getElementById('idx-empty');
   var hint = document.getElementById('idx-hint');
   var count = document.getElementById('idx-count');
-  var papers = Array.prototype.slice.call(document.querySelectorAll('.paper-card'));
   var btns = Array.prototype.slice.call(document.querySelectorAll('.filter-btn[data-f]'));
   var filter = 'all';
+
+__STICKY_SYNC__
 
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -40,11 +51,11 @@
   function passes(r) {
     if (filter === 'all') return true;
     if (filter === 'bookmarked') return !!bookmarks[r.qid];
+    if (filter === 'studied') return progress[r.qid] === 'studied';
     if (filter === 'unstudied') return progress[r.qid] !== 'studied';
-    if (filter.indexOf('y:') === 0) return String(r.y) === filter.slice(2);
-    if (filter.indexOf('s:') === 0) {
-      return r.sub.join(' ').toLowerCase().indexOf(filter.slice(2)) !== -1;
-    }
+    // Year and subject filters used to live here as button rows. Year is now
+    // the sitting grid and subject is the topics page, so both are gone; the
+    // clauses are kept out rather than left dead.
     return true;
   }
 
@@ -56,13 +67,6 @@
     var hits = ROWS.filter(function (r) {
       if (!passes(r)) return false;
       return terms.every(function (t) { return r.s.indexOf(t) !== -1; });
-    });
-
-    // paper cards follow the same filter so the two halves agree
-    papers.forEach(function (card) {
-      var pid = card.getAttribute('data-paper');
-      var any = hits.some(function (r) { return r.p === pid; });
-      card.hidden = searching && !any;
     });
 
     if (!searching) {

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Engineering Management July 2026 &amp;mdash; MEO Class I Written Questions &amp; Answers | Marine Intelligence Weekly</title>
-<meta name="description" content="All 9 questions from the July 2026 MEO Class I Engineering Management written paper (EM-2607), with model written answers, study guides and quick revision.">
+<title>Engineering Management July 2026 — MEO Class I Written Questions &amp; Answers | Marine Intelligence Weekly</title>
+<meta name="description" content="All 9 questions from the July 2026 MEO Class I Engineering Management written paper (QP-2607), with model written answers, study guides and quick revision.">
 <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/pastpapers/EM2607.html">
+<link rel="canonical" href="https://marineintelligenceweekly.com/meoclass1/pastpapers/QP2607.html">
 <meta name="geo.region" content="IN-KL">
 <style>
 
@@ -123,7 +123,13 @@
   .review-banner{background:var(--orange-light);border:1.5px dashed var(--orange);border-radius:8px;padding:10px 14px;margin:14px auto;max-width:1140px;font-size:12.5px;color:#7c2d12;}
   .review-banner strong{color:#c2410c;}
 
-  .controls-bar{position:sticky;top:47px;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 18px;}
+  /* --topbar-h is measured and set by syncStickyOffsets() on load, resize and
+     font load. The bar wraps to two or three lines as the viewport narrows, so
+     a constant here is wrong at some width by construction: the old value of
+     47px left a visible gap on desktop, and the mobile override of top:0 put
+     this bar underneath the topbar and hid the search input entirely. The
+     fallback only applies if scripting is off, where nothing is sticky anyway. */
+  .controls-bar{position:sticky;top:var(--topbar-h,47px);z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 18px;}
   .controls-inner{max-width:1140px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
   .search-wrap{flex:1;min-width:180px;display:flex;align-items:center;gap:6px;border:1px solid var(--grey-border);border-radius:8px;padding:0 10px;background:#fff;}
   .search-wrap:focus-within{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-light);}
@@ -133,8 +139,43 @@
   .filter-btn[aria-pressed="true"]{background:var(--teal);color:#fff;border-color:var(--teal);}
   .count-label{font-size:12px;color:var(--grey-text);margin-left:auto;white-space:nowrap;}
 
+  /* nav-btn had NO rule at all. Both index buttons therefore rendered as bare
+     browser links -- and "Rapid revision" carried an inline navy background, so
+     it was #0000EE text on #0F172A: a contrast ratio of about 1.9:1 against the
+     4.5:1 minimum, i.e. unreadable. Defined here so no caller needs inline
+     colour. */
+  .nav-btn{display:inline-block;background:var(--teal-dark);color:#fff;text-decoration:none;font-family:'Segoe UI',system-ui,sans-serif;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:8px;border:1px solid var(--teal-dark);line-height:1.2;}
+  .nav-btn:hover{background:var(--teal);border-color:var(--teal);}
+  .nav-btn:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+  .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0;}
+
+  /* Sitting navigator. A year must stay one glance at any width, so the grid
+     flows from 12 across on a desktop down to 4 on a phone rather than being
+     pinned to twelve columns. */
+  .sec-h{font-size:15px;color:var(--teal-dark);text-transform:uppercase;letter-spacing:.05em;margin:0 0 10px;}
+  .nav-block{margin:0 0 30px;}
+  .year-block{background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:14px 16px;margin-bottom:12px;}
+  .year-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px;}
+  .year-head h3{margin:0;font-size:20px;color:var(--navy);letter-spacing:.02em;}
+  .year-count{font-size:12px;color:var(--grey-text);}
+  .month-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(66px,1fr));gap:6px;}
+  .month-grid .m > *{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:8px;font-family:'Segoe UI',system-ui,sans-serif;text-decoration:none;border:1px solid var(--grey-border);}
+  .m-ab{font-size:12.5px;font-weight:700;letter-spacing:.02em;}
+  .m-st{font-size:10.5px;letter-spacing:.02em;}
+  .m.avail > a{background:var(--teal-light);border-color:var(--teal);color:var(--teal-dark);}
+  .m.avail > a:hover{background:var(--teal);color:#fff;}
+  .m.avail > a:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+  /* Unavailable months are stated in text (an em dash plus an aria-label), not
+     by colour alone, and are not links or focus stops: there is nothing to open. */
+  .m.soon > span{background:var(--grey-bg);color:var(--grey-text);border-style:dashed;}
+
+  .prod-table{width:100%;border-collapse:collapse;font-family:'Segoe UI',system-ui,sans-serif;font-size:12.5px;}
+  .prod-table th,.prod-table td{border:1px solid var(--grey-border);padding:6px 9px;text-align:left;}
+  .prod-table th{background:var(--grey-bg);color:var(--navy);}
+
   .main-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:24px;padding:20px;max-width:1140px;margin:0 auto;}
-  .sidebar{position:sticky;top:112px;align-self:start;font-size:13px;max-height:calc(100vh - 130px);overflow-y:auto;}
+  #idx-main{max-width:1000px;margin:0 auto;padding:20px;}
+  .sidebar{position:sticky;top:calc(var(--topbar-h,47px) + var(--controls-h,65px) + 12px);align-self:start;font-size:13px;max-height:calc(100vh - var(--topbar-h,47px) - var(--controls-h,65px) - 30px);overflow-y:auto;}
   .sidebar h2{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--grey-text);margin:0 0 8px 8px;}
   .toc-link{display:flex;gap:8px;padding:6px 8px;border-radius:6px;color:var(--grey-text);text-decoration:none;line-height:1.35;}
   .toc-link:hover{background:var(--grey-bg);}
@@ -181,6 +222,14 @@
   .sg .inner{padding-top:10px;}
   .sg h3{color:var(--navy);border-bottom-color:var(--grey-border);margin-top:14px;}
   .sg p,.sg li{font-size:14px;}
+  /* Exam approach: the answer skeleton, rendered above the model answer.
+     Deliberately a different hue from .ma so it reads as a plan to write to,
+     not as answer content to reproduce. */
+  .skel{background:var(--orange-light);border:1.5px solid var(--orange);padding:0 16px 12px;}
+  .skel .layer-title{background:var(--orange);color:#fff;margin:0 -16px 10px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;}
+  .skel-marks{margin-left:auto;font-weight:600;letter-spacing:.02em;text-transform:none;opacity:.92;}
+  .skel-list{margin:0;padding-left:20px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;color:var(--ink);}
+  .skel-list li{margin:4px 0;}
   .qr{background:var(--teal-light);border:1.5px solid var(--teal);padding:0 16px 12px;}
   .qr .layer-title{background:var(--teal);color:#fff;margin:0 -16px 10px;}
   .qr dl{margin:0;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;}
@@ -229,7 +278,8 @@
     .main-layout{grid-template-columns:minmax(0,1fr);padding:14px;gap:14px;}
     .sidebar{position:static;max-height:none;overflow:visible;border:1px solid var(--grey-border);border-radius:10px;background:#fff;padding:10px;}
     .sidebar .toc-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px;}
-    .controls-bar{top:0;position:sticky;}
+    /* No top override here. The measured --topbar-h is correct at every width;
+       forcing top:0 was what made both bars claim the same slot on a phone. */
     .count-label{margin-left:0;width:100%;}
     .q-stem{font-size:13px;}
     .rapid,.rapid tbody,.rapid tr,.rapid td{display:block;width:100%;}
@@ -270,11 +320,11 @@
 
 <header class="page-header">
   <div class="wrap">
-    <span class="badge">Written Questions &amp; Answers &middot; EM-2607</span>
+    <span class="badge">Written Questions &amp; Answers &middot; QP-2607</span>
     <h1>Engineering Management &mdash; July 2026</h1>
     <p class="sub">EXAMINATION OF MARINE ENGINEER OFFICER &middot; Function: Marine Engineering Management at Management Level &middot; M.E.O. Class I</p>
     <div class="header-meta">
-      <span>Sr. No. EM-2607</span>
+      <span>Sr. No. QP-2607</span>
       <span>3 hours</span>
       <span>Total marks 100</span>
       <span>9 questions &middot; answer six</span>
@@ -284,7 +334,7 @@
 </header>
 
 <div class="review-banner">
-  <strong>Founder review copy &mdash; ungated, uncommitted, not published.</strong> Generated from <code>specs/EM2607.json</code> by the Past Papers toolchain. Build state <strong>Pilot Review Ready</strong>, review state <strong>Awaiting Founder Review - complete paper</strong>, version 0.3, updated 2026-08-08. Production metadata is shown per question in this build only.
+  <strong>Founder review copy &mdash; ungated, uncommitted, not published.</strong> Generated from <code>specs/QP2607.json</code> by the Past Papers toolchain. Build state <strong>Pilot Review Ready</strong>, review state <strong>Awaiting Founder Review - complete paper</strong>, version 0.3, updated 2026-08-08. Production metadata is shown per question in this build only.
 </div>
 <div class="controls-bar">
   <div class="controls-inner">
@@ -319,15 +369,15 @@
 <nav class="sidebar" aria-label="Question index">
   <h2>Questions</h2>
   <div class="toc-list">
-    <a class="toc-link" href="#q1" data-qid="EM2607-Q1"><span class="tn">Q1</span><span class="tt">Iron Ore Pellets / FSA</span></a>
-    <a class="toc-link" href="#q2" data-qid="EM2607-Q2"><span class="tn">Q2</span><span class="tt">Bunker Overflow in Foreign Waters</span></a>
-    <a class="toc-link" href="#q3" data-qid="EM2607-Q3"><span class="tn">Q3</span><span class="tt">IACS Structure / UR, UI, PR / RO Code</span></a>
-    <a class="toc-link" href="#q4" data-qid="EM2607-Q4"><span class="tn">Q4</span><span class="tt">ECA Fuel Changeover</span></a>
-    <a class="toc-link" href="#q5" data-qid="EM2607-Q5"><span class="tn">Q5</span><span class="tt">Particular &amp; General Average / Adjusters</span></a>
-    <a class="toc-link" href="#q6" data-qid="EM2607-Q6"><span class="tn">Q6</span><span class="tt">Green Ammonia - ICE vs Fuel Cells</span></a>
-    <a class="toc-link" href="#q7" data-qid="EM2607-Q7"><span class="tn">Q7</span><span class="tt">Merchant Shipping Act 2025</span></a>
-    <a class="toc-link" href="#q8" data-qid="EM2607-Q8"><span class="tn">Q8</span><span class="tt">Competence vs Performance / Automation</span></a>
-    <a class="toc-link" href="#q9" data-qid="EM2607-Q9"><span class="tn">Q9</span><span class="tt">Uberrimae Fidei / Disclosure</span></a>
+    <a class="toc-link" href="#q1" data-qid="QP2607-Q1"><span class="tn">Q1</span><span class="tt">Iron Ore Pellets / FSA</span></a>
+    <a class="toc-link" href="#q2" data-qid="QP2607-Q2"><span class="tn">Q2</span><span class="tt">Bunker Overflow in Foreign Waters</span></a>
+    <a class="toc-link" href="#q3" data-qid="QP2607-Q3"><span class="tn">Q3</span><span class="tt">IACS Structure / UR, UI, PR / RO Code</span></a>
+    <a class="toc-link" href="#q4" data-qid="QP2607-Q4"><span class="tn">Q4</span><span class="tt">ECA Fuel Changeover</span></a>
+    <a class="toc-link" href="#q5" data-qid="QP2607-Q5"><span class="tn">Q5</span><span class="tt">Particular &amp; General Average / Adjusters</span></a>
+    <a class="toc-link" href="#q6" data-qid="QP2607-Q6"><span class="tn">Q6</span><span class="tt">Green Ammonia - ICE vs Fuel Cells</span></a>
+    <a class="toc-link" href="#q7" data-qid="QP2607-Q7"><span class="tn">Q7</span><span class="tt">Merchant Shipping Act 2025</span></a>
+    <a class="toc-link" href="#q8" data-qid="QP2607-Q8"><span class="tn">Q8</span><span class="tt">Competence vs Performance / Automation</span></a>
+    <a class="toc-link" href="#q9" data-qid="QP2607-Q9"><span class="tn">Q9</span><span class="tt">Uberrimae Fidei / Disclosure</span></a>
     <a class="toc-link" href="#rapid-revision"><span class="tn">&#9733;</span><span class="tt">Rapid revision</span></a>
   </div>
 </nav>
@@ -345,7 +395,7 @@
   <p class="rec-note">Every question on the paper carries 16 marks (8+8 for Q1, Q3 and Q8). Six answered questions therefore total 96 against the printed 'Total Marks - 100'. The discrepancy is printed on the source paper and has been recorded as-is, not normalised. The audit checks that subparts sum to each question's total, not that questions sum to 100.</p>
 </section>
 
-<article class="q-card" id="q1" data-qid="EM2607-Q1" data-subjects="imsbc solas" data-search="q1 em2607-q1 em2607 em-2607 july 2026 july 2026 engineering management iron ore pellets / fsa (a) discuss the application of a formal safety assessment in loading and carriage of iron ore pellets as cargo in bulk. (8) (b) what are the specific carriage and voyage monitoring requirements for a vessel transporting iron ore pellets? (8) 16 marks new imsbc bulk cargo iron ore pellets fsa solas xii bulk carrier solas explain procedure formal safety assessment alarp risk control options iron ore fines group a group c liquefaction tml transportable moisture limit bcsn bulk cargo shipping name direct reduced iron dri loading instrument water level detector blu code trimming stowage factor derbyshire hazard identification msc-mepc.2/circ.12/rev.2 solas vi/2 solas xii/11 solas xii/12 imsbc code section 4.2 ism code 1.2.2.2 msc.393(95) 2026/jul/q1 (a) application of formal safety assessment (b) carriage and voyage monitoring requirements why this structure scores the distinction worth knowing, but not worth the whole answer cargo identity - the real trap common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and currency msc-mepc.2/circ.12/rev.2 para 1.3.1 - fsa is applied by member states and imo committees, not by ships">
+<article class="q-card" id="q1" data-qid="QP2607-Q1" data-subjects="imsbc solas" data-search="q1 qp2607-q1 qp2607 qp-2607 july 2026 july 2026 engineering management iron ore pellets / fsa (a) discuss the application of a formal safety assessment in loading and carriage of iron ore pellets as cargo in bulk. (8) (b) what are the specific carriage and voyage monitoring requirements for a vessel transporting iron ore pellets? (8) 16 marks new imsbc bulk cargo iron ore pellets fsa solas xii bulk carrier solas explain procedure formal safety assessment alarp risk control options iron ore fines group a group c liquefaction tml transportable moisture limit bcsn bulk cargo shipping name direct reduced iron dri loading instrument water level detector blu code trimming stowage factor derbyshire hazard identification msc-mepc.2/circ.12/rev.2 solas vi/2 solas xii/11 solas xii/12 imsbc code section 4.2 ism code 1.2.2.2 msc.393(95) 2026/jul/q1 (a) application of formal safety assessment (b) carriage and voyage monitoring requirements why this structure scores the distinction worth knowing, but not worth the whole answer cargo identity - the real trap common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and currency msc-mepc.2/circ.12/rev.2 para 1.3.1 - fsa is applied by member states and imo committees, not by ships">
   <div class="q-head">
     <button class="q-toggle" type="button" aria-expanded="false" aria-controls="q1-body">
       <span class="q-num">Q1</span>
@@ -366,11 +416,22 @@
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="q-acts">
-      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark EM2607-Q1" title="Bookmark this question">&#9733;</button>
-      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark EM2607-Q1 as studied" title="Mark as studied">&#10003;</button>
+      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark QP2607-Q1" title="Bookmark this question">&#9733;</button>
+      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark QP2607-Q1 as studied" title="Mark as studied">&#10003;</button>
     </div>
   </div>
   <div class="q-body" id="q1-body" hidden>
+  <section class="layer skel" aria-label="Exam approach">
+    <div class="layer-title">Exam approach &mdash; answer skeleton <span class="skel-marks">16 marks</span></div>
+    <ol class="skel-list">
+      <li>Define FSA + cite MSC-MEPC.2/Circ.12/Rev.2</li>
+      <li>Five steps applied to the cargo (table)</li>
+      <li>Two-line caveat: FSA is rule-development; shipboard = ISM 1.2.2.2</li>
+      <li>(b) Before loading: declaration, BCSN, holds, hatch covers</li>
+      <li>(b) Loading: loading instrument, tank-top limits, BLU Code, trim, GM</li>
+      <li>(b) Voyage: bilge soundings, XII/12 detectors, weather, enclosed space</li>
+    </ol>
+  </section>
   <section class="layer ma" aria-label="Model written answer">
     <div class="layer-title">Model written answer</div>
     <h3>(a) Application of formal safety assessment</h3>
@@ -454,14 +515,6 @@
     <div class="layer-title">Quick revision</div>
     <dl>
       <dt>15-second recall</dt><dd>FSA is IMO's five-step rule-making methodology - hazards, risk analysis, control options, cost-benefit, recommendations. Applied to iron ore pellets the hazards are structural and water ingress, not liquefaction: pellets are Group C. The declared BCSN and its schedule govern, never the commodity name.</dd>
-      <dt>Answer skeleton</dt><dd><ol>
-        <li>Define FSA + cite MSC-MEPC.2/Circ.12/Rev.2</li>
-        <li>Five steps applied to the cargo (table)</li>
-        <li>Two-line caveat: FSA is rule-development; shipboard = ISM 1.2.2.2</li>
-        <li>(b) Before loading: declaration, BCSN, holds, hatch covers</li>
-        <li>(b) Loading: loading instrument, tank-top limits, BLU Code, trim, GM</li>
-        <li>(b) Voyage: bilge soundings, XII/12 detectors, weather, enclosed space</li>
-      </ol></dd>
       <dt>Keywords</dt><dd><span class="kw">FSA</span><span class="kw">ALARP</span><span class="kw">Group C</span><span class="kw">BCSN</span><span class="kw">SOLAS XII/12</span><span class="kw">loading instrument</span><span class="kw">IMSBC</span><span class="kw">trimming</span></dd>
       <dt>Critical numbers</dt><dd><ul>
         <li>XII/12 alarms: 0.5 m above inner bottom, and 15% of hold depth but not more than 2.0 m</li>
@@ -502,7 +555,7 @@
   </div>
 </article>
 
-<article class="q-card" id="q2" data-qid="EM2607-Q2" data-subjects="marpol pollution prevention casualty &amp; investigation" data-search="q2 em2607-q2 em2607 em-2607 july 2026 july 2026 engineering management bunker overflow in foreign waters there is a bunker overflow from a large merchant ship while in foreign waters, in which you are the chief engineer. state in systematic detail the actions which you will need to take: (16) 1. keeping in mind that the oil-spill/contamination needs to be kept to a minimum. 2. the documentation that you will need to consider to be critical. 3. local regulatory reporting that you would mandatorily need to do. 4. the cooperation that you would need to extend to the investigators, and 5. the liabilities which you are likely to face and thereby must guard against. 16 marks new marpol annex i bunkering oil pollution sopep oil record book bunkers convention casualty investigation marpol pollution prevention casualty &amp; investigation chief engineer scenario procedure bunker overflow oil spill shipboard oil pollution emergency plan orb code g code h bunker delivery note bdn clc civil liability convention llmc p&amp;i casualty investigation code very serious marine casualty marine incident fair treatment of seafarers oprc coastal state reporting scuppers shipowner liability registered owner marpol annex i reg 17 marpol annex i reg 17.6 marpol annex i reg 37 marpol art. 8 &amp; protocol i res. a.851(20) marpol annex vi reg 18 bunkers convention 2001 clc 1992 res. msc.255(84) res. leg.3(91) oprc 1990 ism code 8 ism code 9 2026/jul/q2 1. immediate action and containment 2. critical documentation 3. mandatory reporting 4. cooperation with investigators 5. liabilities to guard against 6. post-incident corrective action why this structure scores the jurisdiction question clc or bunkers convention - the distinction most candidates get backwards liability is not the same as the insurance duty when is the casualty investigation code actually engaged? common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and jurisdiction notes orb code (g) protocol i reg 17.6 marpol annex i reg 17.6 - a master-certified copy of an orb entry is admissible in juridical proceedings as evidence of the facts stated">
+<article class="q-card" id="q2" data-qid="QP2607-Q2" data-subjects="marpol pollution prevention casualty &amp; investigation" data-search="q2 qp2607-q2 qp2607 qp-2607 july 2026 july 2026 engineering management bunker overflow in foreign waters there is a bunker overflow from a large merchant ship while in foreign waters, in which you are the chief engineer. state in systematic detail the actions which you will need to take: (16) 1. keeping in mind that the oil-spill/contamination needs to be kept to a minimum. 2. the documentation that you will need to consider to be critical. 3. local regulatory reporting that you would mandatorily need to do. 4. the cooperation that you would need to extend to the investigators, and 5. the liabilities which you are likely to face and thereby must guard against. 16 marks new marpol annex i bunkering oil pollution sopep oil record book bunkers convention casualty investigation marpol pollution prevention casualty &amp; investigation chief engineer scenario procedure bunker overflow oil spill shipboard oil pollution emergency plan orb code g code h bunker delivery note bdn clc civil liability convention llmc p&amp;i casualty investigation code very serious marine casualty marine incident fair treatment of seafarers oprc coastal state reporting scuppers shipowner liability registered owner marpol annex i reg 17 marpol annex i reg 17.6 marpol annex i reg 37 marpol art. 8 &amp; protocol i res. a.851(20) marpol annex vi reg 18 bunkers convention 2001 clc 1992 res. msc.255(84) res. leg.3(91) oprc 1990 ism code 8 ism code 9 2026/jul/q2 1. immediate action and containment 2. critical documentation 3. mandatory reporting 4. cooperation with investigators 5. liabilities to guard against 6. post-incident corrective action why this structure scores the jurisdiction question clc or bunkers convention - the distinction most candidates get backwards liability is not the same as the insurance duty when is the casualty investigation code actually engaged? common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and jurisdiction notes orb code (g) protocol i reg 17.6 marpol annex i reg 17.6 - a master-certified copy of an orb entry is admissible in juridical proceedings as evidence of the facts stated">
   <div class="q-head">
     <button class="q-toggle" type="button" aria-expanded="false" aria-controls="q2-body">
       <span class="q-num">Q2</span>
@@ -528,11 +581,23 @@
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="q-acts">
-      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark EM2607-Q2" title="Bookmark this question">&#9733;</button>
-      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark EM2607-Q2 as studied" title="Mark as studied">&#10003;</button>
+      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark QP2607-Q2" title="Bookmark this question">&#9733;</button>
+      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark QP2607-Q2 as studied" title="Mark as studied">&#10003;</button>
     </div>
   </div>
   <div class="q-body" id="q2-body" hidden>
+  <section class="layer skel" aria-label="Exam approach">
+    <div class="layer-title">Exam approach &mdash; answer skeleton <span class="skel-marks">16 marks</span></div>
+    <ol class="skel-list">
+      <li>Jurisdiction preamble - coastal State's designated system</li>
+      <li>1. Stop, contain, muster, find the cause</li>
+      <li>2. Documentation - ORB (G) and (H), BDN, soundings, alarm logs</li>
+      <li>3. Reporting - art. 8 / Protocol I, A.851(20), reg 37 SOPEP, notify company/flag/class/P&amp;I</li>
+      <li>4. Cooperation - conditional on the Casualty Code threshold; no speculation, no admission</li>
+      <li>5. Liabilities - CLC vs Bunkers conditional; shipowner vs registered owner; admin; criminal</li>
+      <li>6. ISM 9 corrective action</li>
+    </ol>
+  </section>
   <section class="layer ma" aria-label="Model written answer">
     <div class="layer-title">Model written answer</div>
     <p>The jurisdiction is unstated, so I would report through the coastal State's designated system and local contingency arrangements, using the SOPEP contact list.</p>
@@ -629,15 +694,6 @@
     <div class="layer-title">Quick revision</div>
     <dl>
       <dt>15-second recall</dt><dd>Stop the transfer and contain. Enter ORB code (G) accidental discharge. Report without delay to the nearest coastal State under MARPOL art. 8 and Protocol I. Cooperate factually. Which liability regime applies depends on whether she is a CLC ship and whether the oil is persistent.</dd>
-      <dt>Answer skeleton</dt><dd><ol>
-        <li>Jurisdiction preamble - coastal State's designated system</li>
-        <li>1. Stop, contain, muster, find the cause</li>
-        <li>2. Documentation - ORB (G) and (H), BDN, soundings, alarm logs</li>
-        <li>3. Reporting - art. 8 / Protocol I, A.851(20), reg 37 SOPEP, notify company/flag/class/P&amp;I</li>
-        <li>4. Cooperation - conditional on the Casualty Code threshold; no speculation, no admission</li>
-        <li>5. Liabilities - CLC vs Bunkers conditional; shipowner vs registered owner; admin; criminal</li>
-        <li>6. ISM 9 corrective action</li>
-      </ol></dd>
       <dt>Keywords</dt><dd><span class="kw">SOPEP</span><span class="kw">ORB code (G)</span><span class="kw">Protocol I</span><span class="kw">Bunkers Convention</span><span class="kw">CLC</span><span class="kw">marine incident</span><span class="kw">reg 17.6</span><span class="kw">LLMC</span></dd>
       <dt>Critical numbers</dt><dd><ul>
         <li>SOPEP: oil tankers 150 GT+, other ships 400 GT+ (Annex I reg 37)</li>
@@ -673,7 +729,7 @@
   </div>
 </article>
 
-<article class="q-card" id="q3" data-qid="EM2607-Q3" data-subjects="classification solas" data-search="q3 em2607-q3 em2607 em-2607 july 2026 july 2026 engineering management iacs structure / ur, ui, pr / ro code a) enumerate the structure of iacs and explain difference between ui, ur, pr from iacs. does it have any significance to ship owners/operators? (8) b) what is a recognized organization? what are the salient features of the r.o. code? how do administrations monitor r.o.s? (8) 16 marks topic_recurrence iacs classification societies ro code flag state classification solas enumerate explain compare unified requirement ur unified interpretation ui procedural requirement pr recognized organization ro classification society class rules general policy group gpg council delegated authority authorization agreement iii code member state audit scheme imsas transfer of class res. msc.349(92) res. mepc.237(65) res. msc.350(92) res. msc.356(92) res. mepc.238(65) 2023/mar/q8 2024/jan/q5 2026/jul/q3 (a) iacs structure, and ur / ui / pr (b) recognized organizations and the ro code why this structure scores the distinction candidates get wrong classification society is not a synonym for ro common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and currency ro code - parts 1 and 2 are mandatory; part 3 is guidelines for oversight">
+<article class="q-card" id="q3" data-qid="QP2607-Q3" data-subjects="classification solas" data-search="q3 qp2607-q3 qp2607 qp-2607 july 2026 july 2026 engineering management iacs structure / ur, ui, pr / ro code a) enumerate the structure of iacs and explain difference between ui, ur, pr from iacs. does it have any significance to ship owners/operators? (8) b) what is a recognized organization? what are the salient features of the r.o. code? how do administrations monitor r.o.s? (8) 16 marks topic_recurrence iacs classification societies ro code flag state classification solas enumerate explain compare unified requirement ur unified interpretation ui procedural requirement pr recognized organization ro classification society class rules general policy group gpg council delegated authority authorization agreement iii code member state audit scheme imsas transfer of class res. msc.349(92) res. mepc.237(65) res. msc.350(92) res. msc.356(92) res. mepc.238(65) 2023/mar/q8 2024/jan/q5 2026/jul/q3 (a) iacs structure, and ur / ui / pr (b) recognized organizations and the ro code why this structure scores the distinction candidates get wrong classification society is not a synonym for ro common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and currency ro code - parts 1 and 2 are mandatory; part 3 is guidelines for oversight">
   <div class="q-head">
     <button class="q-toggle" type="button" aria-expanded="false" aria-controls="q3-body">
       <span class="q-num">Q3</span>
@@ -695,11 +751,22 @@
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="q-acts">
-      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark EM2607-Q3" title="Bookmark this question">&#9733;</button>
-      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark EM2607-Q3 as studied" title="Mark as studied">&#10003;</button>
+      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark QP2607-Q3" title="Bookmark this question">&#9733;</button>
+      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark QP2607-Q3 as studied" title="Mark as studied">&#10003;</button>
     </div>
   </div>
   <div class="q-body" id="q3-body" hidden>
+  <section class="layer skel" aria-label="Exam approach">
+    <div class="layer-title">Exam approach &mdash; answer skeleton <span class="skel-marks">16 marks</span></div>
+    <ol class="skel-list">
+      <li>(a) IACS structure - Council, GPG, Panels, Secretariat</li>
+      <li>(a) UR / UI / PR table with status and effect</li>
+      <li>(a) Significance - predictable floor, PSC consistency, transfer of class</li>
+      <li>(b) RO definition - delegation of function, not responsibility</li>
+      <li>(b) RO Code Parts 1, 2, 3 and mandatory dates</li>
+      <li>(b) Oversight - agreement, audit, PSC performance, withdrawal, IMSAS</li>
+    </ol>
+  </section>
   <section class="layer ma" aria-label="Model written answer">
     <div class="layer-title">Model written answer</div>
     <h3>(a) IACS structure, and UR / UI / PR</h3>
@@ -776,14 +843,6 @@
     <div class="layer-title">Quick revision</div>
     <dl>
       <dt>15-second recall</dt><dd>IACS: Council, GPG, Panels, Permanent Secretariat. UR touches the ship through class rules; UI interprets an IMO convention; PR governs the society's own procedures. An RO holds delegated statutory authority - the Administration keeps the responsibility. RO Code Parts 1 and 2 mandatory, Part 3 guidance.</dd>
-      <dt>Answer skeleton</dt><dd><ol>
-        <li>(a) IACS structure - Council, GPG, Panels, Secretariat</li>
-        <li>(a) UR / UI / PR table with status and effect</li>
-        <li>(a) Significance - predictable floor, PSC consistency, transfer of class</li>
-        <li>(b) RO definition - delegation of function, not responsibility</li>
-        <li>(b) RO Code Parts 1, 2, 3 and mandatory dates</li>
-        <li>(b) Oversight - agreement, audit, PSC performance, withdrawal, IMSAS</li>
-      </ol></dd>
       <dt>Keywords</dt><dd><span class="kw">UR</span><span class="kw">UI</span><span class="kw">PR</span><span class="kw">GPG</span><span class="kw">RO Code</span><span class="kw">delegated authority</span><span class="kw">IMSAS</span><span class="kw">III Code</span></dd>
       <dt>Critical numbers</dt><dd><ul>
         <li>RO Code adopted by MSC.349(92), 21 June 2013, and MEPC.237(65)</li>
@@ -818,7 +877,7 @@
   </div>
 </article>
 
-<article class="q-card" id="q4" data-qid="EM2607-Q4" data-subjects="marpol pollution prevention" data-search="q4 em2607-q4 em2607 em-2607 july 2026 july 2026 engineering management eca fuel changeover as the chief engineer of a large merchant ship, you are about to enter an emission control area. explain, with justification, the instructions you need to give to your colleagues with respect to the procedures to be followed regarding fuel changeover, considering the boilers and engines. enumerate the statutes involved, if any, in this regard. (16) 16 marks new marpol annex vi eca fuel changeover boilers sulphur marpol pollution prevention chief engineer scenario procedure explain emission control area seca sulphur emission control area fuel switching changeover procedure lsfo low sulphur marpol annex vi regulation 14 0.10% 0.50% sulphur cap thermal shock viscosity atomising pressure burner boiler asphaltene compatibility bunker delivery note fuel oil non-availability report fonar scrubber exhaust gas cleaning system mediterranean eca marpol annex vi reg 14 marpol annex vi reg 14.6 marpol annex vi reg 14.7 marpol annex vi reg 18 ism code 2026/jul/q4 1. establish the entry point and the applicable limit 2. calculate the changeover and start early enough 3. tank segregation and compatibility 4. engines 5. boilers 6. records 7. contingency statutes and instruments involved why this structure scores the eca list is the currency trap never quote a universal changeover rate common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and maker-specific limits reg 14 reg 14.6 atomisation marpol annex vi reg 14.6 - written changeover procedure, plus logbook record of tank volumes and date/time/position at completion before entry and commencement after exit">
+<article class="q-card" id="q4" data-qid="QP2607-Q4" data-subjects="marpol pollution prevention" data-search="q4 qp2607-q4 qp2607 qp-2607 july 2026 july 2026 engineering management eca fuel changeover as the chief engineer of a large merchant ship, you are about to enter an emission control area. explain, with justification, the instructions you need to give to your colleagues with respect to the procedures to be followed regarding fuel changeover, considering the boilers and engines. enumerate the statutes involved, if any, in this regard. (16) 16 marks new marpol annex vi eca fuel changeover boilers sulphur marpol pollution prevention chief engineer scenario procedure explain emission control area seca sulphur emission control area fuel switching changeover procedure lsfo low sulphur marpol annex vi regulation 14 0.10% 0.50% sulphur cap thermal shock viscosity atomising pressure burner boiler asphaltene compatibility bunker delivery note fuel oil non-availability report fonar scrubber exhaust gas cleaning system mediterranean eca marpol annex vi reg 14 marpol annex vi reg 14.6 marpol annex vi reg 14.7 marpol annex vi reg 18 ism code 2026/jul/q4 1. establish the entry point and the applicable limit 2. calculate the changeover and start early enough 3. tank segregation and compatibility 4. engines 5. boilers 6. records 7. contingency statutes and instruments involved why this structure scores the eca list is the currency trap never quote a universal changeover rate common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and maker-specific limits reg 14 reg 14.6 atomisation marpol annex vi reg 14.6 - written changeover procedure, plus logbook record of tank volumes and date/time/position at completion before entry and commencement after exit">
   <div class="q-head">
     <button class="q-toggle" type="button" aria-expanded="false" aria-controls="q4-body">
       <span class="q-num">Q4</span>
@@ -838,11 +897,24 @@
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="q-acts">
-      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark EM2607-Q4" title="Bookmark this question">&#9733;</button>
-      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark EM2607-Q4 as studied" title="Mark as studied">&#10003;</button>
+      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark QP2607-Q4" title="Bookmark this question">&#9733;</button>
+      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark QP2607-Q4 as studied" title="Mark as studied">&#10003;</button>
     </div>
   </div>
   <div class="q-body" id="q4-body" hidden>
+  <section class="layer skel" aria-label="Exam approach">
+    <div class="layer-title">Exam approach &mdash; answer skeleton <span class="skel-marks">16 marks</span></div>
+    <ol class="skel-list">
+      <li>1. Entry point and applicable limit</li>
+      <li>2. Calculate flushing time, start early</li>
+      <li>3. Segregation and compatibility</li>
+      <li>4. Engines - gradual temperature, viscosity, maker's limits</li>
+      <li>5. Boilers - atomising pressure, burner tips</li>
+      <li>6. Records - reg 14.6 logbook entries, BDN, samples</li>
+      <li>7. Contingency - FONAR; equivalents</li>
+      <li>Statutes list</li>
+    </ol>
+  </section>
   <section class="layer ma" aria-label="Model written answer">
     <div class="layer-title">Model written answer</div>
     <p>I would brief the watchkeepers and issue written standing instructions covering the following sequence.</p>
@@ -938,16 +1010,6 @@
     <div class="layer-title">Quick revision</div>
     <dl>
       <dt>15-second recall</dt><dd>Compliant 0.10% fuel must already be burning on entry. Calculate flushing time from service-system volume. Change temperature slowly - thermal shock. Adjust boiler atomising pressure. Record tank volumes plus date, time and position at completion, under reg 14.6.</dd>
-      <dt>Answer skeleton</dt><dd><ol>
-        <li>1. Entry point and applicable limit</li>
-        <li>2. Calculate flushing time, start early</li>
-        <li>3. Segregation and compatibility</li>
-        <li>4. Engines - gradual temperature, viscosity, maker's limits</li>
-        <li>5. Boilers - atomising pressure, burner tips</li>
-        <li>6. Records - reg 14.6 logbook entries, BDN, samples</li>
-        <li>7. Contingency - FONAR; equivalents</li>
-        <li>Statutes list</li>
-      </ol></dd>
       <dt>Keywords</dt><dd><span class="kw">reg 14</span><span class="kw">reg 14.6</span><span class="kw">0.10%</span><span class="kw">thermal shock</span><span class="kw">viscosity</span><span class="kw">atomisation</span><span class="kw">FONAR</span><span class="kw">ECA</span></dd>
       <dt>Critical numbers</dt><dd><ul>
         <li>ECA sulphur limit 0.10% m/m; global cap 0.50% m/m</li>
@@ -986,7 +1048,7 @@
   </div>
 </article>
 
-<article class="q-card" id="q5" data-qid="EM2607-Q5" data-subjects="marine insurance commercial law" data-search="q5 em2607-q5 em2607 em-2607 july 2026 july 2026 engineering management particular &amp; general average / adjusters explain the concepts of &quot;particular average&quot; and &quot;general average&quot;. what are the circumstances when a general average can be declared? who are average adjusters and what is their role in general average loss situations? (16) 16 marks topic_recurrence general average particular average york-antwerp rules marine insurance commercial law explain compare ga pa average adjuster yar yar 2016 rule a ga declaration average bond ga guarantee contributory value jettison port of refuge voluntary stranding common maritime adventure extraordinary sacrifice marine insurance act 1963 section 66 maersk honam salvage york-antwerp rules rule a marine insurance act 1963 (india) s.66 2023/apr/q3 2025/sep/q3 2026/jul/q5 when may general average be declared? average adjusters which rules actually apply why this structure scores the two traps the right of contribution is the whole point common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and jurisdiction notes s.66 extraordinary common safety york-antwerp rules rule a - extraordinary sacrifice or expenditure intentionally and reasonably made for the common safety">
+<article class="q-card" id="q5" data-qid="QP2607-Q5" data-subjects="marine insurance commercial law" data-search="q5 qp2607-q5 qp2607 qp-2607 july 2026 july 2026 engineering management particular &amp; general average / adjusters explain the concepts of &quot;particular average&quot; and &quot;general average&quot;. what are the circumstances when a general average can be declared? who are average adjusters and what is their role in general average loss situations? (16) 16 marks topic_recurrence general average particular average york-antwerp rules marine insurance commercial law explain compare ga pa average adjuster yar yar 2016 rule a ga declaration average bond ga guarantee contributory value jettison port of refuge voluntary stranding common maritime adventure extraordinary sacrifice marine insurance act 1963 section 66 maersk honam salvage york-antwerp rules rule a marine insurance act 1963 (india) s.66 2023/apr/q3 2025/sep/q3 2026/jul/q5 when may general average be declared? average adjusters which rules actually apply why this structure scores the two traps the right of contribution is the whole point common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and jurisdiction notes s.66 extraordinary common safety york-antwerp rules rule a - extraordinary sacrifice or expenditure intentionally and reasonably made for the common safety">
   <div class="q-head">
     <button class="q-toggle" type="button" aria-expanded="false" aria-controls="q5-body">
       <span class="q-num">Q5</span>
@@ -1007,11 +1069,22 @@
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="q-acts">
-      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark EM2607-Q5" title="Bookmark this question">&#9733;</button>
-      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark EM2607-Q5 as studied" title="Mark as studied">&#10003;</button>
+      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark QP2607-Q5" title="Bookmark this question">&#9733;</button>
+      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark QP2607-Q5 as studied" title="Mark as studied">&#10003;</button>
     </div>
   </div>
   <div class="q-body" id="q5-body" hidden>
+  <section class="layer skel" aria-label="Exam approach">
+    <div class="layer-title">Exam approach &mdash; answer skeleton <span class="skel-marks">16 marks</span></div>
+    <ol class="skel-list">
+      <li>Particular Average - accidental, borne alone</li>
+      <li>General Average - Rule A quoted; shared rateably; MIA 1963 s.66</li>
+      <li>PA vs GA contrast table</li>
+      <li>Rule A elements - all must be present</li>
+      <li>Average adjusters - secure, allow, apportion; impartial; does NOT declare</li>
+      <li>Which rules apply - YAR contractual, edition named in the contract</li>
+    </ol>
+  </section>
   <section class="layer ma" aria-label="Model written answer">
     <div class="layer-title">Model written answer</div>
     <h3>Particular Average</h3>
@@ -1092,14 +1165,6 @@
     <div class="layer-title">Quick revision</div>
     <dl>
       <dt>15-second recall</dt><dd>Particular average is accidental partial loss borne by the property owner alone. General average is an intentional extraordinary sacrifice for the common safety, shared rateably by all saved interests. The shipowner declares GA; the adjuster prepares the adjustment. The York-Antwerp Rules are contractual, not law.</dd>
-      <dt>Answer skeleton</dt><dd><ol>
-        <li>Particular Average - accidental, borne alone</li>
-        <li>General Average - Rule A quoted; shared rateably; MIA 1963 s.66</li>
-        <li>PA vs GA contrast table</li>
-        <li>Rule A elements - all must be present</li>
-        <li>Average adjusters - secure, allow, apportion; impartial; does NOT declare</li>
-        <li>Which rules apply - YAR contractual, edition named in the contract</li>
-      </ol></dd>
       <dt>Keywords</dt><dd><span class="kw">Rule A</span><span class="kw">YAR 2016</span><span class="kw">contributory value</span><span class="kw">average bond</span><span class="kw">s.66</span><span class="kw">extraordinary</span><span class="kw">common safety</span></dd>
       <dt>Critical numbers</dt><dd><ul>
         <li>YAR 2016 adopted by the CMI at New York, May 2016</li>
@@ -1127,7 +1192,7 @@
   </div>
 </article>
 
-<article class="q-card" id="q6" data-qid="EM2607-Q6" data-subjects="alternative fuels solas" data-search="q6 em2607-q6 em2607 em-2607 july 2026 july 2026 engineering management green ammonia - ice vs fuel cells evaluate the use of green ammonia as a zero-carbon marine fuel. what are the primary safety, storage and combustion challenges of using ammonia in marine internal combustion engines versus fuel cells? (16) 16 marks new green ammonia alternative fuels fuel cells igf code decarbonisation solas evaluate compare ammonia nh3 zero carbon fuel alternative fuel fuel cell sofc pem cracking pilot fuel n2o nitrous oxide ammonia slip toxicity low flashpoint msc.1/circ.1687 interim guidelines alternative design solas ii-1/55 well-to-wake scr material compatibility copper 2026/jul/q6 &quot;zero-carbon&quot; needs qualifying first evaluation safety combustion: internal combustion engines versus fuel cells regulatory status - state it carefully why this structure scores the zero-carbon qualification is the opening mark toxicity is the answer&#39;s centre of gravity common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and currency - read this before using the answer msc.1/circ.1687 - interim guidelines for the safety of ships using ammonia as fuel; non-mandatory; alternative design via solas ii-1/55">
+<article class="q-card" id="q6" data-qid="QP2607-Q6" data-subjects="alternative fuels solas" data-search="q6 qp2607-q6 qp2607 qp-2607 july 2026 july 2026 engineering management green ammonia - ice vs fuel cells evaluate the use of green ammonia as a zero-carbon marine fuel. what are the primary safety, storage and combustion challenges of using ammonia in marine internal combustion engines versus fuel cells? (16) 16 marks new green ammonia alternative fuels fuel cells igf code decarbonisation solas evaluate compare ammonia nh3 zero carbon fuel alternative fuel fuel cell sofc pem cracking pilot fuel n2o nitrous oxide ammonia slip toxicity low flashpoint msc.1/circ.1687 interim guidelines alternative design solas ii-1/55 well-to-wake scr material compatibility copper 2026/jul/q6 &quot;zero-carbon&quot; needs qualifying first evaluation safety combustion: internal combustion engines versus fuel cells regulatory status - state it carefully why this structure scores the zero-carbon qualification is the opening mark toxicity is the answer&#39;s centre of gravity common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and currency - read this before using the answer msc.1/circ.1687 - interim guidelines for the safety of ships using ammonia as fuel; non-mandatory; alternative design via solas ii-1/55">
   <div class="q-head">
     <button class="q-toggle" type="button" aria-expanded="false" aria-controls="q6-body">
       <span class="q-num">Q6</span>
@@ -1147,11 +1212,22 @@
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="q-acts">
-      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark EM2607-Q6" title="Bookmark this question">&#9733;</button>
-      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark EM2607-Q6 as studied" title="Mark as studied">&#10003;</button>
+      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark QP2607-Q6" title="Bookmark this question">&#9733;</button>
+      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark QP2607-Q6 as studied" title="Mark as studied">&#10003;</button>
     </div>
   </div>
   <div class="q-body" id="q6-body" hidden>
+  <section class="layer skel" aria-label="Exam approach">
+    <div class="layer-title">Exam approach &mdash; answer skeleton <span class="skel-marks">16 marks</span></div>
+    <ol class="skel-list">
+      <li>Qualify 'zero-carbon' - molecule vs lifecycle; N2O</li>
+      <li>Evaluation - for and against, balanced</li>
+      <li>Safety - toxicity dominates; containment philosophy</li>
+      <li>Storage - refrigerated/pressurised; volume; materials</li>
+      <li>Combustion - ICE vs fuel cell table</li>
+      <li>Regulatory status - interim, non-mandatory, SOLAS II-1/55 alternative design</li>
+    </ol>
+  </section>
   <section class="layer ma" aria-label="Model written answer">
     <div class="layer-title">Model written answer</div>
     <h3>"Zero-carbon" needs qualifying first</h3>
@@ -1232,14 +1308,6 @@
     <div class="layer-title">Quick revision</div>
     <dl>
       <dt>15-second recall</dt><dd>Ammonia has no carbon so no direct CO2 - but N2O, ammonia slip and the production pathway all qualify 'zero-carbon'. Toxicity, not fire, is the dominant hazard. ICE needs a pilot fuel and SCR; SOFC can use ammonia directly, PEM needs cracking. MSC.1/Circ.1687 is interim and NON-mandatory.</dd>
-      <dt>Answer skeleton</dt><dd><ol>
-        <li>Qualify 'zero-carbon' - molecule vs lifecycle; N2O</li>
-        <li>Evaluation - for and against, balanced</li>
-        <li>Safety - toxicity dominates; containment philosophy</li>
-        <li>Storage - refrigerated/pressurised; volume; materials</li>
-        <li>Combustion - ICE vs fuel cell table</li>
-        <li>Regulatory status - interim, non-mandatory, SOLAS II-1/55 alternative design</li>
-      </ol></dd>
       <dt>Keywords</dt><dd><span class="kw">toxicity</span><span class="kw">pilot fuel</span><span class="kw">N2O</span><span class="kw">ammonia slip</span><span class="kw">SOFC</span><span class="kw">PEM</span><span class="kw">cracking</span><span class="kw">MSC.1/Circ.1687</span></dd>
       <dt>Critical numbers</dt><dd><ul>
         <li>MSC.1/Circ.1687 dated 26 February 2025, approved at MSC 109</li>
@@ -1277,7 +1345,7 @@
   </div>
 </article>
 
-<article class="q-card" id="q7" data-qid="EM2607-Q7" data-subjects="indian legislation commercial law" data-search="q7 em2607-q7 em2607 em-2607 july 2026 july 2026 engineering management merchant shipping act 2025 india has recently taken significant legislative measures that are critical to streamlining maritime governance and bringing india&#39;s shipping regulation in line with global practices. explain the significance of the merchant shipping act, 2025, particularly in the context of how it shall contribute to trade and tonnage expansion, attract foreign investment and enhance india&#39;s maritime standing, aligning with global best practices. (16) 16 marks new india dgma tonnage maritime governance indian legislation commercial law explain legislation ms act 2025 act 24 of 2025 dg shipping ship registration indian flag nri oci bareboat charter bareboat charter-cum-demise foreign investment coastal shipping ship recycling seafarer welfare mlc 2006 merchant shipping act 1958 coasting vessels act 1838 merchant shipping act 2025 (act 24 of 2025) s.o. 1244(e) merchant shipping act 1958 (repealed) coasting vessels act 1838 (repealed) 2026/jul/q7 what the act is trade and tonnage expansion attracting foreign investment alignment with global practice and india&#39;s maritime standing assessment - distinguishing law from expectation why this structure scores get the statutory facts exactly right the registration reform is the heart of it common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty - read before using this answer part xiv merchant shipping act, 2025 - repeals the merchant shipping act 1958 (saving part xiv, not section 411a) and the coasting vessels act 1838">
+<article class="q-card" id="q7" data-qid="QP2607-Q7" data-subjects="indian legislation commercial law" data-search="q7 qp2607-q7 qp2607 qp-2607 july 2026 july 2026 engineering management merchant shipping act 2025 india has recently taken significant legislative measures that are critical to streamlining maritime governance and bringing india&#39;s shipping regulation in line with global practices. explain the significance of the merchant shipping act, 2025, particularly in the context of how it shall contribute to trade and tonnage expansion, attract foreign investment and enhance india&#39;s maritime standing, aligning with global best practices. (16) 16 marks new india dgma tonnage maritime governance indian legislation commercial law explain legislation ms act 2025 act 24 of 2025 dg shipping ship registration indian flag nri oci bareboat charter bareboat charter-cum-demise foreign investment coastal shipping ship recycling seafarer welfare mlc 2006 merchant shipping act 1958 coasting vessels act 1838 merchant shipping act 2025 (act 24 of 2025) s.o. 1244(e) merchant shipping act 1958 (repealed) coasting vessels act 1838 (repealed) 2026/jul/q7 what the act is trade and tonnage expansion attracting foreign investment alignment with global practice and india&#39;s maritime standing assessment - distinguishing law from expectation why this structure scores get the statutory facts exactly right the registration reform is the heart of it common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty - read before using this answer part xiv merchant shipping act, 2025 - repeals the merchant shipping act 1958 (saving part xiv, not section 411a) and the coasting vessels act 1838">
   <div class="q-head">
     <button class="q-toggle" type="button" aria-expanded="false" aria-controls="q7-body">
       <span class="q-num">Q7</span>
@@ -1297,11 +1365,21 @@
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="q-acts">
-      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark EM2607-Q7" title="Bookmark this question">&#9733;</button>
-      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark EM2607-Q7 as studied" title="Mark as studied">&#10003;</button>
+      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark QP2607-Q7" title="Bookmark this question">&#9733;</button>
+      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark QP2607-Q7 as studied" title="Mark as studied">&#10003;</button>
     </div>
   </div>
   <div class="q-body" id="q7-body" hidden>
+  <section class="layer skel" aria-label="Exam approach">
+    <div class="layer-title">Exam approach &mdash; answer skeleton <span class="skel-marks">16 marks</span></div>
+    <ol class="skel-list">
+      <li>What the Act is - number, assent, commencement, repeals</li>
+      <li>Trade and tonnage - ownership widened, bareboat charter-cum-demise, recycling registration</li>
+      <li>Foreign investment - registration reform plus procedural simplification</li>
+      <li>Convention alignment - IMO/ILO, MLC 2006, minimum age 16</li>
+      <li>Assessment - separate what the Act does from what Government expects</li>
+    </ol>
+  </section>
   <section class="layer ma" aria-label="Model written answer">
     <div class="layer-title">Model written answer</div>
     <h3>What the Act is</h3>
@@ -1369,13 +1447,6 @@
     <div class="layer-title">Quick revision</div>
     <dl>
       <dt>15-second recall</dt><dd>Act No. 24 of 2025, assent 18 Aug 2025, in force 15 Mar 2026 by S.O. 1244(E). Repeals the 1958 Act (saving Part XIV, not s.411A) and the Coasting Vessels Act 1838. Widens ownership to NRIs and OCIs, permits bareboat charter-cum-demise registration, aligns with IMO and ILO instruments.</dd>
-      <dt>Answer skeleton</dt><dd><ol>
-        <li>What the Act is - number, assent, commencement, repeals</li>
-        <li>Trade and tonnage - ownership widened, bareboat charter-cum-demise, recycling registration</li>
-        <li>Foreign investment - registration reform plus procedural simplification</li>
-        <li>Convention alignment - IMO/ILO, MLC 2006, minimum age 16</li>
-        <li>Assessment - separate what the Act does from what Government expects</li>
-      </ol></dd>
       <dt>Keywords</dt><dd><span class="kw">Act 24 of 2025</span><span class="kw">S.O. 1244(E)</span><span class="kw">NRI</span><span class="kw">OCI</span><span class="kw">bareboat charter-cum-demise</span><span class="kw">Part XIV</span><span class="kw">MLC 2006</span></dd>
       <dt>Critical numbers</dt><dd><ul>
         <li>Act No. 24 of 2025; assent 18 August 2025</li>
@@ -1414,7 +1485,7 @@
   </div>
 </article>
 
-<article class="q-card" id="q8" data-qid="EM2607-Q8" data-subjects="human element stcw ism" data-search="q8 em2607-q8 em2607 em-2607 july 2026 july 2026 engineering management competence vs performance / automation (a) in the context of the human element, explain the difference between crew &quot;competence&quot; and crew &quot;performance.&quot; discuss the role of ongoing training and drills in ensuring that competence translates into high performance, especially during emergencies. (8) (b) discuss the positive and negative effects of advanced technology and automation on the human element in shipping. (8) 16 marks new human element stcw competence automation drills ism explain compare evaluate performance training automation bias complacency mode confusion skill fade alarm fatigue situational awareness fatigue a-i/6 competence tables ism element 8 emergency preparedness a.947(23) out of the loop ums condition monitoring stcw reg i/6 stcw code section a-i/6 ism code 6 ism code 8 ism code 9 res. a.947(23) 2026/jul/q8 (a) competence and performance (b) technology and automation - both directions why this structure scores the distinction, stated sharply name the mechanism, not the mood common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and scope notes ism 8 stcw regulation i/6 and code section a-i/6 - training and assessment administered, supervised and monitored">
+<article class="q-card" id="q8" data-qid="QP2607-Q8" data-subjects="human element stcw ism" data-search="q8 qp2607-q8 qp2607 qp-2607 july 2026 july 2026 engineering management competence vs performance / automation (a) in the context of the human element, explain the difference between crew &quot;competence&quot; and crew &quot;performance.&quot; discuss the role of ongoing training and drills in ensuring that competence translates into high performance, especially during emergencies. (8) (b) discuss the positive and negative effects of advanced technology and automation on the human element in shipping. (8) 16 marks new human element stcw competence automation drills ism explain compare evaluate performance training automation bias complacency mode confusion skill fade alarm fatigue situational awareness fatigue a-i/6 competence tables ism element 8 emergency preparedness a.947(23) out of the loop ums condition monitoring stcw reg i/6 stcw code section a-i/6 ism code 6 ism code 8 ism code 9 res. a.947(23) 2026/jul/q8 (a) competence and performance (b) technology and automation - both directions why this structure scores the distinction, stated sharply name the mechanism, not the mood common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and scope notes ism 8 stcw regulation i/6 and code section a-i/6 - training and assessment administered, supervised and monitored">
   <div class="q-head">
     <button class="q-toggle" type="button" aria-expanded="false" aria-controls="q8-body">
       <span class="q-num">Q8</span>
@@ -1436,11 +1507,22 @@
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="q-acts">
-      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark EM2607-Q8" title="Bookmark this question">&#9733;</button>
-      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark EM2607-Q8 as studied" title="Mark as studied">&#10003;</button>
+      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark QP2607-Q8" title="Bookmark this question">&#9733;</button>
+      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark QP2607-Q8 as studied" title="Mark as studied">&#10003;</button>
     </div>
   </div>
   <div class="q-body" id="q8-body" hidden>
+  <section class="layer skel" aria-label="Exam approach">
+    <div class="layer-title">Exam approach &mdash; answer skeleton <span class="skel-marks">16 marks</span></div>
+    <ol class="skel-list">
+      <li>(a) Competence defined - STCW tables, reg I/6, A-I/6</li>
+      <li>(a) Performance defined - the operational situation</li>
+      <li>(a) Why the gap - fatigue, workload, leadership, communication, SA</li>
+      <li>(a) What drills do - ISM 8; automaticity, latent defects, rare skills, ISM 9 closure</li>
+      <li>(b) Positive/negative table</li>
+      <li>(b) A.947(23) - human-centred design, matched training, honest reporting</li>
+    </ol>
+  </section>
   <section class="layer ma" aria-label="Model written answer">
     <div class="layer-title">Model written answer</div>
     <h3>(a) Competence and performance</h3>
@@ -1515,14 +1597,6 @@
     <div class="layer-title">Quick revision</div>
     <dl>
       <dt>15-second recall</dt><dd>Competence is assessed capability; performance is behaviour in context. Competence is a property of the individual, performance of the individual in a system. Drills convert one into the other. Automation removes routine error and creates monitoring error - bias, complacency, mode confusion, alarm fatigue, skill fade.</dd>
-      <dt>Answer skeleton</dt><dd><ol>
-        <li>(a) Competence defined - STCW tables, reg I/6, A-I/6</li>
-        <li>(a) Performance defined - the operational situation</li>
-        <li>(a) Why the gap - fatigue, workload, leadership, communication, SA</li>
-        <li>(a) What drills do - ISM 8; automaticity, latent defects, rare skills, ISM 9 closure</li>
-        <li>(b) Positive/negative table</li>
-        <li>(b) A.947(23) - human-centred design, matched training, honest reporting</li>
-      </ol></dd>
       <dt>Keywords</dt><dd><span class="kw">competence</span><span class="kw">performance</span><span class="kw">A-I/6</span><span class="kw">ISM 8</span><span class="kw">automation bias</span><span class="kw">mode confusion</span><span class="kw">skill fade</span><span class="kw">A.947(23)</span></dd>
       <dt>Critical numbers</dt><dd><ul>
         <li>IMO res. A.947(23), adopted 27 November 2003, updating A.850(20)</li>
@@ -1554,7 +1628,7 @@
   </div>
 </article>
 
-<article class="q-card" id="q9" data-qid="EM2607-Q9" data-subjects="marine insurance indian legislation commercial law" data-search="q9 em2607-q9 em2607 em-2607 july 2026 july 2026 engineering management uberrimae fidei / disclosure explain the principle of &quot;uberrimae fidei&quot; in marine insurance. what are the different disclosures which must be made by the insured to the insurer in marine insurance? list the circumstances which need not be disclosed to the insurer. what happens to the marine insurance contract if the disclosures are not made to the insurer at the time of the conclusion of the contract? (16) 16 marks topic_recurrence marine insurance uberrimae fidei disclosure utmost good faith indian legislation commercial law explain enumerate legislation non-disclosure material circumstance prudent insurer avoidance voidable marine insurance act 1963 section 19 section 20 circumstances need not be disclosed diminishes the risk waiver warranty insurance act 2015 marine insurance act 1906 insurable interest marine insurance act 1963 (india) s.19 s.20(1) s.20(2) s.20(3) s.20(4) s.20(5) s.21 s.22 2022/oct/q2 2024/jan/q1 2026/jul/q9 the principle of uberrimae fidei disclosures the assured must make circumstances which need not be disclosed effect of non-disclosure at the conclusion of the contract why this structure scores the jurisdiction trap - this is the point of the question the english reform, and why it does not belong in your answer common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and jurisdiction notes s.19 in the absence of enquiry marine insurance act, 1963 (india) sections 19 and 20 - not the uk marine insurance act 1906">
+<article class="q-card" id="q9" data-qid="QP2607-Q9" data-subjects="marine insurance indian legislation commercial law" data-search="q9 qp2607-q9 qp2607 qp-2607 july 2026 july 2026 engineering management uberrimae fidei / disclosure explain the principle of &quot;uberrimae fidei&quot; in marine insurance. what are the different disclosures which must be made by the insured to the insurer in marine insurance? list the circumstances which need not be disclosed to the insurer. what happens to the marine insurance contract if the disclosures are not made to the insurer at the time of the conclusion of the contract? (16) 16 marks topic_recurrence marine insurance uberrimae fidei disclosure utmost good faith indian legislation commercial law explain enumerate legislation non-disclosure material circumstance prudent insurer avoidance voidable marine insurance act 1963 section 19 section 20 circumstances need not be disclosed diminishes the risk waiver warranty insurance act 2015 marine insurance act 1906 insurable interest marine insurance act 1963 (india) s.19 s.20(1) s.20(2) s.20(3) s.20(4) s.20(5) s.21 s.22 2022/oct/q2 2024/jan/q1 2026/jul/q9 the principle of uberrimae fidei disclosures the assured must make circumstances which need not be disclosed effect of non-disclosure at the conclusion of the contract why this structure scores the jurisdiction trap - this is the point of the question the english reform, and why it does not belong in your answer common mistakes examiner traps likely oral follow-up memory framework regulation and source map uncertainty and jurisdiction notes s.19 in the absence of enquiry marine insurance act, 1963 (india) sections 19 and 20 - not the uk marine insurance act 1906">
   <div class="q-head">
     <button class="q-toggle" type="button" aria-expanded="false" aria-controls="q9-body">
       <span class="q-num">Q9</span>
@@ -1576,11 +1650,22 @@
       <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
     </button>
     <div class="q-acts">
-      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark EM2607-Q9" title="Bookmark this question">&#9733;</button>
-      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark EM2607-Q9 as studied" title="Mark as studied">&#10003;</button>
+      <button class="icon-btn bm" type="button" aria-pressed="false" aria-label="Bookmark QP2607-Q9" title="Bookmark this question">&#9733;</button>
+      <button class="icon-btn st" type="button" aria-pressed="false" aria-label="Mark QP2607-Q9 as studied" title="Mark as studied">&#10003;</button>
     </div>
   </div>
   <div class="q-body" id="q9-body" hidden>
+  <section class="layer skel" aria-label="Exam approach">
+    <div class="layer-title">Exam approach &mdash; answer skeleton <span class="skel-marks">16 marks</span></div>
+    <ol class="skel-list">
+      <li>Jurisdiction statement - MIA 1963, not the UK 1906 Act</li>
+      <li>s.19 - the principle, mutual, pre-contractual</li>
+      <li>s.20(1),(2),(5) - what must be disclosed; prudent insurer test</li>
+      <li>s.21, s.22 - agent and representations</li>
+      <li>s.20(3) - the four exceptions, in the absence of enquiry</li>
+      <li>Effect - avoidance ab initio; voidable not void; need not be fraudulent</li>
+    </ol>
+  </section>
   <section class="layer ma" aria-label="Model written answer">
     <div class="layer-title">Model written answer</div>
     <p>This is an Indian examination, so the governing statute is the <b>Marine Insurance Act, 1963</b>. It closely follows the English Marine Insurance Act 1906, but the Indian Act is the one to cite.</p>
@@ -1649,14 +1734,6 @@
     <div class="layer-title">Quick revision</div>
     <dl>
       <dt>15-second recall</dt><dd>Indian exam - Marine Insurance Act 1963. s.19 makes the contract uberrimae fidei, avoidable by either party. s.20(1) requires disclosure of every material circumstance; s.20(2) prudent insurer test; s.20(3) four exceptions in the absence of enquiry. Remedy is avoidance - voidable, not void.</dd>
-      <dt>Answer skeleton</dt><dd><ol>
-        <li>Jurisdiction statement - MIA 1963, not the UK 1906 Act</li>
-        <li>s.19 - the principle, mutual, pre-contractual</li>
-        <li>s.20(1),(2),(5) - what must be disclosed; prudent insurer test</li>
-        <li>s.21, s.22 - agent and representations</li>
-        <li>s.20(3) - the four exceptions, in the absence of enquiry</li>
-        <li>Effect - avoidance ab initio; voidable not void; need not be fraudulent</li>
-      </ol></dd>
       <dt>Keywords</dt><dd><span class="kw">s.19</span><span class="kw">s.20(3)</span><span class="kw">material circumstance</span><span class="kw">prudent insurer</span><span class="kw">avoidance</span><span class="kw">voidable</span><span class="kw">in the absence of enquiry</span></dd>
       <dt>Critical numbers</dt><dd><ul>
         <li>MIA 1963 s.20(3) - four categories which need not be disclosed</li>
@@ -1763,8 +1840,8 @@
   </table>
 </section>
 <div class="q-footer">
-  <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Past%20Paper%20EM2607%2C%20Correction%20Required">contactus@marineintelligenceweekly.com</a></span>
-  <span class="q-version">Written Questions &middot; EM2607 &middot; v0.3 &middot; UNGATED REVIEW COPY</span>
+  <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Past%20Paper%20QP2607%2C%20Correction%20Required">contactus@marineintelligenceweekly.com</a></span>
+  <span class="q-version">Written Questions &middot; QP2607 &middot; v0.3 &middot; UNGATED REVIEW COPY</span>
 </div>
 </main>
 </div>
@@ -1781,7 +1858,7 @@
    Design notes:
    - Search reads data-search (generated from the spec), never innerText, so it
      matches while cards are collapsed and can match metadata that is never shown.
-   - Bookmarks and progress are keyed by stable question_id (EM2607-Q1), never by
+   - Bookmarks and progress are keyed by stable question_id (QP2607-Q1), never by
      DOM order, so future papers and reordering cannot corrupt saved state.
    - If localStorage is unavailable (private mode, disabled storage), every read
      returns empty and every write is a no-op; the page still works.
@@ -1817,8 +1894,41 @@
     try { window.localStorage.setItem(key, JSON.stringify(obj)); } catch (e) { /* quota */ }
   }
 
+  function syncStickyOffsets() {
+    var root = document.documentElement;
+    var tb = document.querySelector('.topbar');
+    var cb = document.querySelector('.controls-bar');
+    if (tb) root.style.setProperty('--topbar-h', tb.offsetHeight + 'px');
+    if (cb) root.style.setProperty('--controls-h', cb.offsetHeight + 'px');
+  }
+  syncStickyOffsets();
+  window.addEventListener('resize', syncStickyOffsets);
+  window.addEventListener('orientationchange', syncStickyOffsets);
+  if (window.document.fonts && window.document.fonts.ready &&
+      typeof window.document.fonts.ready.then === 'function') {
+    // Web fonts land after first paint and change the bars' wrapped height.
+    window.document.fonts.ready.then(syncStickyOffsets);
+  }
+
+  function migrateLegacyKeys(o) {
+    var keys = Object.keys(o), changed = false, i, m, nk;
+    for (i = 0; i < keys.length; i++) {
+      m = /^EM(\d{4}-Q\d+)$/.exec(keys[i]);
+      if (!m) continue;
+      nk = 'QP' + m[1];
+      if (!Object.prototype.hasOwnProperty.call(o, nk)) o[nk] = o[keys[i]];
+      delete o[keys[i]];
+      changed = true;
+    }
+    return changed;
+  }
+
   var bookmarks = load(LS_BM);
   var progress = load(LS_PR);
+
+  // Study state saved before the QP rename is carried forward, not discarded.
+  if (migrateLegacyKeys(bookmarks)) save(LS_BM, bookmarks);
+  if (migrateLegacyKeys(progress)) save(LS_PR, progress);
 
   // ---- elements ------------------------------------------------------------
   var cards = Array.prototype.slice.call(document.querySelectorAll('.q-card[data-qid]'));

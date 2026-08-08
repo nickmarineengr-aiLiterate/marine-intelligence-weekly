@@ -1,4 +1,4 @@
-# Build prompt — MIW Past Paper EM2601 (January 2026)
+# Build prompt — MIW Past Paper QP2601 (January 2026)
 
 > **How to use:** Paste this whole document as your first message to Claude Opus, in a session with
 > Desktop Commander MCP (local clone at `F:\marine-intelligence-weekly`) and GitHub MCP connected —
@@ -32,7 +32,7 @@ Full architecture, rationale, and open questions are in
 starting). If it isn't present in this session, ask Nixon for it rather than guessing the schema. Key
 points from it, restated here so you don't have to re-derive them:
 
-- **New folder:** `meoclass1/pastpapers/`. **New file:** `meoclass1/pastpapers/EM2601.html`, all 9
+- **New folder:** `meoclass1/pastpapers/`. **New file:** `meoclass1/pastpapers/QP2601.html`, all 9
   questions in one file, anchored `#q1`…`#q9`.
 - **New manifest:** `meoclass1/pastpapers/pastpapers_content_index.json` — do not touch
   `qb_content_index.json`, `notes_content_index.json`, or `written_content_index.json`.
@@ -143,7 +143,7 @@ fatigue mitigation and management on board ships. (8)
    mechanism) intersect with the Merchant Shipping Act 2025/DGMA transition already tracked in project
    memory — check current status, don't assume the pre-2025 MSA framework still applies where India-
    specific mechanisms are asked.
-4. Build `meoclass1/pastpapers/EM2601.html` per the Section 7 page structure in the skill draft — gate
+4. Build `meoclass1/pastpapers/QP2601.html` per the Section 7 page structure in the skill draft — gate
    stripped, review-copy comment in its place.
 5. Run an HTML tag-balance check (Python `HTMLParser` stack check) before presenting anything.
 6. Present the full ungated file to Nixon for review. **Stop here and wait for his approval** — do not

@@ -85,8 +85,9 @@ def grep_layer(traps, extra_text=None):
         checked += 1
         needle = phrase.lower()
         for name, body in corpus:
-            # SCOPE: html limits a trap to generated pages. Specs and the manifest
-            # must record aggregator provenance verbatim; only OUTPUT must be clean.
+            # SCOPE: html limits a trap to generated pages, for traps that are
+            # genuinely about rendered output. Brand traces are NOT such a trap:
+            # the repository is public, so specs and the manifest are scanned too.
             if scope == 'html' and not name.endswith('.html') and name != '<injected>':
                 continue
             if needle in body:

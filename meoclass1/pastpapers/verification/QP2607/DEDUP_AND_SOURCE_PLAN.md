@@ -1,6 +1,6 @@
-# EM2607 — Dedup and source plan (Q1–Q9)
+# QP2607 — Dedup and source plan (Q1–Q9)
 
-Paper: EM-2607, July 2026, Engineering Management, MEO Class I.
+Paper: QP-2607, July 2026, Engineering Management, MEO Class I.
 Assessed: 2026-08-07. Status: **Dedup Assessed**.
 
 Reuse tiers per the brief:
@@ -26,7 +26,7 @@ and an image-only *June 2025* set. Every one of the 325 text pages carries the p
 (occurrence count verified: 325/325). It is also third-party copyright material and watermarked.
 
 Its genuine value is structural: the June 2025 set is organised **by past-paper question**, so it maps
-questions to topics. Example: its Casualty Investigation page reproduces the EM2601 Q8 stem verbatim.
+questions to topics. Example: its Casualty Investigation page reproduces the QP2601 Q8 stem verbatim.
 Use it to know what is examined. Never to know what is true.
 
 One exception in that folder: `DOC-20251125-WA0009.pdf` is **IRS Guidelines on Ballast Water

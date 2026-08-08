@@ -17,7 +17,7 @@ Exit code is non-zero if any stage fails. Warnings stay warnings.
 
 This is the command a future production agent runs. Keep its output stable.
 """
-import argparse, glob, io, os, subprocess, sys
+import argparse, glob, io, json, os, subprocess, sys
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
@@ -55,6 +55,10 @@ def main():
         print('ERROR: no specs found under meoclass1/pastpapers/specs/')
         sys.exit(1)
 
+    # The spec is the source of truth for which pages must exist. Every later
+    # stage derives its targets from this list rather than from a filename glob.
+    paper_ids = [json.load(open(sp, encoding='utf-8'))['paper_id'] for sp in specs]
+
     mode = 'PUBLISH' if args.publish else 'review (noindex)'
     print('MIW Written Questions & Answers -- toolchain')
     print('mode: %s%s   specs: %d' % (mode, ', gated' if args.gated else '', len(specs)))
@@ -90,18 +94,35 @@ def main():
     # Optional UI stage: exercises search, bookmarks and progress against the
     # generated page. Skipped cleanly where node is unavailable -- the product
     # itself has no node dependency.
+    #
+    # The pages under test are derived from the specs, never from a filename
+    # glob. A glob that matches nothing sums to a zero return code and reports
+    # PASS, so a paper rename would silently delete this entire stage while
+    # still printing success. Deriving from the specs makes a missing page a
+    # hard failure instead.
     import shutil
     if shutil.which('node'):
-        node_rc = 0
-        for pg in sorted(glob.glob(os.path.join(PP, 'EM*.html'))):
+        node_rc, tested = 0, 0
+        for pid in paper_ids:
+            pg = os.path.join(PP, '%s.html' % pid)
+            if not os.path.exists(pg):
+                print('    MISSING generated page for spec %s: %s'
+                      % (pid, os.path.relpath(pg, REPO_ROOT)))
+                node_rc += 1
+                continue
             r = subprocess.run(['node', os.path.join(T, 'ui_behaviour_test.cjs'),
                                 os.path.relpath(pg, REPO_ROOT)],
                                cwd=REPO_ROOT, capture_output=True, text=True,
                                encoding='utf-8', errors='replace')
             node_rc += r.returncode
+            tested += 1
             if args.verbose or r.returncode:
                 print((r.stdout or '') + (r.stderr or ''))
-        print('%-13s %s' % ('UI BEHAVIOUR', 'PASS' if node_rc == 0 else 'FAIL'))
+        if not tested:
+            print('    no paper page was exercised -- refusing to report PASS')
+            node_rc += 1
+        print('%-13s %-5s %d page(s)'
+              % ('UI BEHAVIOUR', 'PASS' if node_rc == 0 else 'FAIL', tested))
         rc_total += node_rc
     else:
         print('%-13s SKIP  (node not available; product has no node dependency)'

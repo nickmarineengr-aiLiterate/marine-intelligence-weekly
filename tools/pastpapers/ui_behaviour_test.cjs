@@ -44,15 +44,15 @@ function search(q) {
 
 // The core requirement: these all match while every card is COLLAPSED.
 const probes = [
-  ['general average', 'EM2607-Q5'],
-  ['sopep', 'EM2607-Q2'],
-  ['ammonia', 'EM2607-Q6'],
-  ['iacs', 'EM2607-Q3'],
-  ['uberrimae fidei', 'EM2607-Q9'],
-  ['marpol annex vi', 'EM2607-Q4'],
-  ['merchant shipping act 2025', 'EM2607-Q7'],
-  ['automation', 'EM2607-Q8'],
-  ['iron ore pellets', 'EM2607-Q1'],
+  ['general average', 'QP2607-Q5'],
+  ['sopep', 'QP2607-Q2'],
+  ['ammonia', 'QP2607-Q6'],
+  ['iacs', 'QP2607-Q3'],
+  ['uberrimae fidei', 'QP2607-Q9'],
+  ['marpol annex vi', 'QP2607-Q4'],
+  ['merchant shipping act 2025', 'QP2607-Q7'],
+  ['automation', 'QP2607-Q8'],
+  ['iron ore pellets', 'QP2607-Q1'],
 ];
 probes.forEach(([q, expect]) => {
   const hits = search(q).map(c => c.qid);
@@ -62,14 +62,14 @@ probes.forEach(([q, expect]) => {
 console.log('');
 console.log('-- search matches metadata that is never displayed --');
 ok('alias "seca" finds the ECA question (word never rendered on the card)',
-   search('seca').map(c => c.qid).includes('EM2607-Q4'));
-ok('alias "fuel switching" finds Q4', search('fuel switching').map(c => c.qid).includes('EM2607-Q4'));
+   search('seca').map(c => c.qid).includes('QP2607-Q4'));
+ok('alias "fuel switching" finds Q4', search('fuel switching').map(c => c.qid).includes('QP2607-Q4'));
 ok('alias "material circumstance" finds Q9',
-   search('material circumstance').map(c => c.qid).includes('EM2607-Q9'));
-ok('regulation "msc.255(84)" finds Q2', search('msc.255(84)').map(c => c.qid).includes('EM2607-Q2'));
-ok('recurrence code "2023/apr/q3" finds Q5', search('2023/apr/q3').map(c => c.qid).includes('EM2607-Q5'));
+   search('material circumstance').map(c => c.qid).includes('QP2607-Q9'));
+ok('regulation "msc.255(84)" finds Q2', search('msc.255(84)').map(c => c.qid).includes('QP2607-Q2'));
+ok('recurrence code "2023/apr/q3" finds Q5', search('2023/apr/q3').map(c => c.qid).includes('QP2607-Q5'));
 ok('multi-term "ammonia fuel cell" narrows to Q6',
-   JSON.stringify(search('ammonia fuel cell').map(c => c.qid)) === '["EM2607-Q6"]',
+   JSON.stringify(search('ammonia fuel cell').map(c => c.qid)) === '["QP2607-Q6"]',
    JSON.stringify(search('ammonia fuel cell').map(c => c.qid)));
 ok('nonsense term returns nothing', search('zzzznotathing').length === 0);
 
@@ -112,9 +112,9 @@ let bookmarks = load(store, KEY_BM);
 let progress = load(store, KEY_PR);
 ok('fresh device starts with no bookmarks', Object.keys(bookmarks).length === 0);
 
-bookmarks['EM2607-Q5'] = 1;
-bookmarks['EM2607-Q9'] = 1;
-progress['EM2607-Q1'] = 'studied';
+bookmarks['QP2607-Q5'] = 1;
+bookmarks['QP2607-Q9'] = 1;
+progress['QP2607-Q1'] = 'studied';
 save(store, KEY_BM, bookmarks);
 save(store, KEY_PR, progress);
 ok('bookmarks written under the namespaced key', KEY_BM in store._dump());
@@ -123,10 +123,10 @@ ok('progress written under the namespaced key', KEY_PR in store._dump());
 // "close the browser, come back tomorrow"
 const bm2 = load(store, KEY_BM);
 const pr2 = load(store, KEY_PR);
-ok('bookmarks survive a restart', bm2['EM2607-Q5'] === 1 && bm2['EM2607-Q9'] === 1);
-ok('studied state survives a restart', pr2['EM2607-Q1'] === 'studied');
+ok('bookmarks survive a restart', bm2['QP2607-Q5'] === 1 && bm2['QP2607-Q9'] === 1);
+ok('studied state survives a restart', pr2['QP2607-Q1'] === 'studied');
 ok('state is keyed by stable question_id, not DOM order',
-   Object.keys(bm2).every(k => /^EM\d{4}-Q\d+$/.test(k)));
+   Object.keys(bm2).every(k => /^QP\d{4}-Q\d+$/.test(k)));
 
 // filters
 function filtered(mode) {
@@ -139,24 +139,62 @@ function filtered(mode) {
   }).map(c => c.qid);
 }
 ok('Bookmarked filter returns exactly the starred questions',
-   JSON.stringify(filtered('bookmarked')) === '["EM2607-Q5","EM2607-Q9"]',
+   JSON.stringify(filtered('bookmarked')) === '["QP2607-Q5","QP2607-Q9"]',
    JSON.stringify(filtered('bookmarked')));
 ok('Studied filter returns exactly the studied questions',
-   JSON.stringify(filtered('studied')) === '["EM2607-Q1"]', JSON.stringify(filtered('studied')));
-ok('Not-studied filter excludes the studied one', !filtered('unstudied').includes('EM2607-Q1'));
+   JSON.stringify(filtered('studied')) === '["QP2607-Q1"]', JSON.stringify(filtered('studied')));
+ok('Not-studied filter excludes the studied one', !filtered('unstudied').includes('QP2607-Q1'));
 ok('All filter returns every card', filtered('all').length === cards.length);
 
 // unbookmark round-trip
-delete bookmarks['EM2607-Q9'];
+delete bookmarks['QP2607-Q9'];
 save(store, KEY_BM, bookmarks);
 ok('unbookmark removes only that question',
-   JSON.stringify(Object.keys(load(store, KEY_BM))) === '["EM2607-Q5"]');
+   JSON.stringify(Object.keys(load(store, KEY_BM))) === '["QP2607-Q5"]');
 
 // future-paper safety
-bookmarks['EM2601-Q3'] = 1;
+bookmarks['QP2601-Q3'] = 1;
 save(store, KEY_BM, bookmarks);
 ok('storage model accommodates a future paper without collision',
    Object.keys(load(store, KEY_BM)).length === 2);
+
+console.log('');
+console.log('-- legacy study-state migration (EM -> QP rename) --');
+
+// Pull the REAL migration function out of the generated page and run it, rather
+// than reimplementing it here. A reimplementation can pass while the code the
+// student actually runs is broken, which is the whole failure mode this guards.
+const migSrc = (/function migrateLegacyKeys\(o\) \{[\s\S]*?\n  \}/.exec(html) || [])[0];
+ok('generated page ships the legacy-key migration', !!migSrc);
+const migrateLegacyKeys = migSrc ? eval('(' + migSrc + ')') : function () { return false; };
+
+const legacy = { 'EM2607-Q5': 1, 'EM2607-Q9': 1 };
+const didMigrate = migrateLegacyKeys(legacy);
+ok('a device that studied under EM keys reports a migration', didMigrate === true);
+ok('EM bookmarks are carried forward to QP keys',
+   legacy['QP2607-Q5'] === 1 && legacy['QP2607-Q9'] === 1, JSON.stringify(legacy));
+ok('no EM key survives the migration',
+   Object.keys(legacy).every(k => !/^EM/.test(k)), JSON.stringify(legacy));
+
+ok('migration is idempotent', migrateLegacyKeys(legacy) === false &&
+   JSON.stringify(Object.keys(legacy).sort()) === '["QP2607-Q5","QP2607-Q9"]');
+
+// A student who studied both before and after the rename must not lose the newer
+// state: an existing QP value always wins over the legacy one it collides with.
+const collide = { 'EM2607-Q1': 1, 'QP2607-Q1': 'studied' };
+migrateLegacyKeys(collide);
+ok('an existing QP value is never overwritten by a legacy key',
+   collide['QP2607-Q1'] === 'studied' && !('EM2607-Q1' in collide),
+   JSON.stringify(collide));
+
+const fresh = {};
+ok('a fresh device needs no migration and triggers no write',
+   migrateLegacyKeys(fresh) === false && Object.keys(fresh).length === 0);
+
+const unrelated = { 'QP2601-Q3': 1, 'miw:other': 1 };
+migrateLegacyKeys(unrelated);
+ok('keys that are not legacy question ids are left alone',
+   unrelated['QP2601-Q3'] === 1 && unrelated['miw:other'] === 1);
 
 console.log('');
 console.log('-- graceful degradation --');

@@ -1,0 +1,23 @@
+# Line-ending policy.
+#
+# core.autocrlf is true on the authoring machine, which rewrites LF to CRLF on
+# checkout. The Past Papers builders write LF explicitly (newline='\n'), so
+# without this file the committed bytes never match the bytes the toolchain
+# produces: every build dirties the working tree and the "byte-reproducible"
+# guarantee in tools/pastpapers/render_common.py is not actually true.
+#
+# Pin every generated and canonical text artefact to LF so that a rebuild of
+# unchanged input is a genuine no-op in git.
+
+* text=auto
+
+*.html   text eol=lf
+*.json   text eol=lf
+*.css    text eol=lf
+*.js     text eol=lf
+*.cjs    text eol=lf
+*.py     text eol=lf
+*.md     text eol=lf
+
+# Source-copy scans are binary and must never be line-ending converted.
+*.pdf    binary

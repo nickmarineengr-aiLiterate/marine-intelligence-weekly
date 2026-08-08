@@ -20,7 +20,7 @@ Article 1(3) defines "ship-owner" as the owner, **including the registered owner
 bareboat charterer, manager and operator**. Article 3 makes them liable jointly and
 severally. Article 7(1) separately puts the **compulsory insurance** duty on the
 **registered owner** alone, for ships over 1,000 GT. Liability and the insurance
-obligation attach to different persons. Found in EM2607 Q2 v0.1 (red-team RT-07).
+obligation attach to different persons. Found in QP2607 Q2 v0.1 (red-team RT-07).
 GREP: strict liability on the registered owner
 
 ### 2. Bunkers Convention — same error, other phrasings
@@ -31,7 +31,7 @@ CLC 1992 Art I(5) covers persistent oil "whether carried on board a ship as carg
 the bunkers of such a ship**", and Bunkers Convention Art 4(1) excludes itself where the
 damage is CLC pollution damage. So a bunker spill from a CLC ship IS CLC damage. Whether
 CLC applies turns on two facts: is she a CLC ship, and is the oil persistent. Found in
-EM2607 Q2 v0.1 (red-team RT-08).
+QP2607 Q2 v0.1 (red-team RT-08).
 GREP: CLC 1992 does not apply
 
 ### 4. CLC — same error, other phrasing
@@ -43,7 +43,7 @@ A **mandatory** marine safety investigation under Part II chapter 6 is required 
 the environment (§2.22). Marine casualties short of that, and marine incidents, fall under
 Part III **recommended practice** (chapter 17). The environmental limb of §2.9.7 also
 requires damage "brought about by the damage of a ship". A bunker overflow from an intact
-ship is usually a **marine incident**. Found in EM2607 Q2 v0.1 (red-team RT-06).
+ship is usually a **marine incident**. Found in QP2607 Q2 v0.1 (red-team RT-06).
 GREP: SKIP
 
 ### 6. Iron ore pellets are not iron ore fines — and the split is not a clean binary
@@ -52,7 +52,7 @@ schedules in different Groups, and "pellets" appears in the DRI (B) schedule nam
 The fines schedule itself carries qualifying criteria (goethite content, particle size
 distribution) under which fines may be carried as Group C. The declared Bulk Cargo
 Shipping Name and its individual schedule govern — never the commodity name. Found in
-EM2607 Q1 v0.1 (red-team RT-03).
+QP2607 Q1 v0.1 (red-team RT-03).
 GREP: SKIP
 
 ### 7. Do not state a TML for a Group C cargo
@@ -106,9 +106,14 @@ an official DG Shipping or MMD source unless an independently authoritative copy
 actually been compared.
 GREP: official DG Shipping PDF
 
-### 14. Aggregator branding must never reach output
+### 14. Third-party host branding must never appear in the product
+Previously scoped to generated HTML only, on the reasoning that the spec and manifest
+should record host provenance verbatim. That reasoning does not survive the fact that
+**this repository is public**: a host name in a spec is a published brand trace just as
+much as one in a page. The host identity now lives only in
+`verification/LOCAL_SOURCE_PROVENANCE.md`, which is git-ignored. The scan therefore
+covers generated pages, specs and the manifest alike.
 GREP: dieselship
-SCOPE: html
 
 ### 15. Stale build-state terminology
 Once a question's status moves on, "Pilot Built" must not survive in generated HTML.

@@ -29,7 +29,13 @@
   .review-banner{background:var(--orange-light);border:1.5px dashed var(--orange);border-radius:8px;padding:10px 14px;margin:14px auto;max-width:1140px;font-size:12.5px;color:#7c2d12;}
   .review-banner strong{color:#c2410c;}
 
-  .controls-bar{position:sticky;top:47px;z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 18px;}
+  /* --topbar-h is measured and set by syncStickyOffsets() on load, resize and
+     font load. The bar wraps to two or three lines as the viewport narrows, so
+     a constant here is wrong at some width by construction: the old value of
+     47px left a visible gap on desktop, and the mobile override of top:0 put
+     this bar underneath the topbar and hid the search input entirely. The
+     fallback only applies if scripting is off, where nothing is sticky anyway. */
+  .controls-bar{position:sticky;top:var(--topbar-h,47px);z-index:50;background:#fff;border-bottom:1px solid var(--grey-border);padding:10px 18px;}
   .controls-inner{max-width:1140px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center;}
   .search-wrap{flex:1;min-width:180px;display:flex;align-items:center;gap:6px;border:1px solid var(--grey-border);border-radius:8px;padding:0 10px;background:#fff;}
   .search-wrap:focus-within{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-light);}
@@ -39,8 +45,43 @@
   .filter-btn[aria-pressed="true"]{background:var(--teal);color:#fff;border-color:var(--teal);}
   .count-label{font-size:12px;color:var(--grey-text);margin-left:auto;white-space:nowrap;}
 
+  /* nav-btn had NO rule at all. Both index buttons therefore rendered as bare
+     browser links -- and "Rapid revision" carried an inline navy background, so
+     it was #0000EE text on #0F172A: a contrast ratio of about 1.9:1 against the
+     4.5:1 minimum, i.e. unreadable. Defined here so no caller needs inline
+     colour. */
+  .nav-btn{display:inline-block;background:var(--teal-dark);color:#fff;text-decoration:none;font-family:'Segoe UI',system-ui,sans-serif;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:8px;border:1px solid var(--teal-dark);line-height:1.2;}
+  .nav-btn:hover{background:var(--teal);border-color:var(--teal);}
+  .nav-btn:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+  .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0;}
+
+  /* Sitting navigator. A year must stay one glance at any width, so the grid
+     flows from 12 across on a desktop down to 4 on a phone rather than being
+     pinned to twelve columns. */
+  .sec-h{font-size:15px;color:var(--teal-dark);text-transform:uppercase;letter-spacing:.05em;margin:0 0 10px;}
+  .nav-block{margin:0 0 30px;}
+  .year-block{background:#fff;border:1px solid var(--grey-border);border-radius:10px;padding:14px 16px;margin-bottom:12px;}
+  .year-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px;}
+  .year-head h3{margin:0;font-size:20px;color:var(--navy);letter-spacing:.02em;}
+  .year-count{font-size:12px;color:var(--grey-text);}
+  .month-grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(66px,1fr));gap:6px;}
+  .month-grid .m > *{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:8px;font-family:'Segoe UI',system-ui,sans-serif;text-decoration:none;border:1px solid var(--grey-border);}
+  .m-ab{font-size:12.5px;font-weight:700;letter-spacing:.02em;}
+  .m-st{font-size:10.5px;letter-spacing:.02em;}
+  .m.avail > a{background:var(--teal-light);border-color:var(--teal);color:var(--teal-dark);}
+  .m.avail > a:hover{background:var(--teal);color:#fff;}
+  .m.avail > a:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+  /* Unavailable months are stated in text (an em dash plus an aria-label), not
+     by colour alone, and are not links or focus stops: there is nothing to open. */
+  .m.soon > span{background:var(--grey-bg);color:var(--grey-text);border-style:dashed;}
+
+  .prod-table{width:100%;border-collapse:collapse;font-family:'Segoe UI',system-ui,sans-serif;font-size:12.5px;}
+  .prod-table th,.prod-table td{border:1px solid var(--grey-border);padding:6px 9px;text-align:left;}
+  .prod-table th{background:var(--grey-bg);color:var(--navy);}
+
   .main-layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:24px;padding:20px;max-width:1140px;margin:0 auto;}
-  .sidebar{position:sticky;top:112px;align-self:start;font-size:13px;max-height:calc(100vh - 130px);overflow-y:auto;}
+  #idx-main{max-width:1000px;margin:0 auto;padding:20px;}
+  .sidebar{position:sticky;top:calc(var(--topbar-h,47px) + var(--controls-h,65px) + 12px);align-self:start;font-size:13px;max-height:calc(100vh - var(--topbar-h,47px) - var(--controls-h,65px) - 30px);overflow-y:auto;}
   .sidebar h2{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--grey-text);margin:0 0 8px 8px;}
   .toc-link{display:flex;gap:8px;padding:6px 8px;border-radius:6px;color:var(--grey-text);text-decoration:none;line-height:1.35;}
   .toc-link:hover{background:var(--grey-bg);}
@@ -87,6 +128,14 @@
   .sg .inner{padding-top:10px;}
   .sg h3{color:var(--navy);border-bottom-color:var(--grey-border);margin-top:14px;}
   .sg p,.sg li{font-size:14px;}
+  /* Exam approach: the answer skeleton, rendered above the model answer.
+     Deliberately a different hue from .ma so it reads as a plan to write to,
+     not as answer content to reproduce. */
+  .skel{background:var(--orange-light);border:1.5px solid var(--orange);padding:0 16px 12px;}
+  .skel .layer-title{background:var(--orange);color:#fff;margin:0 -16px 10px;display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;}
+  .skel-marks{margin-left:auto;font-weight:600;letter-spacing:.02em;text-transform:none;opacity:.92;}
+  .skel-list{margin:0;padding-left:20px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;color:var(--ink);}
+  .skel-list li{margin:4px 0;}
   .qr{background:var(--teal-light);border:1.5px solid var(--teal);padding:0 16px 12px;}
   .qr .layer-title{background:var(--teal);color:#fff;margin:0 -16px 10px;}
   .qr dl{margin:0;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;}
@@ -135,7 +184,8 @@
     .main-layout{grid-template-columns:minmax(0,1fr);padding:14px;gap:14px;}
     .sidebar{position:static;max-height:none;overflow:visible;border:1px solid var(--grey-border);border-radius:10px;background:#fff;padding:10px;}
     .sidebar .toc-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px;}
-    .controls-bar{top:0;position:sticky;}
+    /* No top override here. The measured --topbar-h is correct at every width;
+       forcing top:0 was what made both bars claim the same slot on a phone. */
     .count-label{margin-left:0;width:100%;}
     .q-stem{font-size:13px;}
     .rapid,.rapid tbody,.rapid tr,.rapid td{display:block;width:100%;}

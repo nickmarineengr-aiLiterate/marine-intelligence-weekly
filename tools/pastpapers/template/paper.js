@@ -4,7 +4,7 @@
    Design notes:
    - Search reads data-search (generated from the spec), never innerText, so it
      matches while cards are collapsed and can match metadata that is never shown.
-   - Bookmarks and progress are keyed by stable question_id (EM2607-Q1), never by
+   - Bookmarks and progress are keyed by stable question_id (QP2607-Q1), never by
      DOM order, so future papers and reordering cannot corrupt saved state.
    - If localStorage is unavailable (private mode, disabled storage), every read
      returns empty and every write is a no-op; the page still works.
@@ -40,8 +40,16 @@
     try { window.localStorage.setItem(key, JSON.stringify(obj)); } catch (e) { /* quota */ }
   }
 
+__STICKY_SYNC__
+
+__LS_MIGRATE__
+
   var bookmarks = load(LS_BM);
   var progress = load(LS_PR);
+
+  // Study state saved before the QP rename is carried forward, not discarded.
+  if (migrateLegacyKeys(bookmarks)) save(LS_BM, bookmarks);
+  if (migrateLegacyKeys(progress)) save(LS_PR, progress);
 
   // ---- elements ------------------------------------------------------------
   var cards = Array.prototype.slice.call(document.querySelectorAll('.q-card[data-qid]'));

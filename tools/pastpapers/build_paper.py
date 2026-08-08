@@ -33,8 +33,8 @@ if __name__ == '__main__':
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from render_common import (REPO_ROOT, TPL, BASE, CONTACT, LS_BOOKMARKS, LS_PROGRESS,
-                           GATE, GATE_STUB, esc, esc_attr, strip_tags, read_css,
-                           block_text, search_tokens, topbar, head_meta, footer)
+                           LS_MIGRATE_JS, STICKY_SYNC_JS, GATE, GATE_STUB, esc, esc_attr, strip_tags,
+                           read_css, block_text, search_tokens, topbar, head_meta, footer)
 
 CHEV = ('<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>')
@@ -79,11 +79,9 @@ def quick_revision(qr, out):
     out.append('    <dl>')
     if qr.get('recall_15s'):
         out.append('      <dt>15-second recall</dt><dd>%s</dd>' % esc(qr['recall_15s']))
-    if qr.get('skeleton'):
-        out.append('      <dt>Answer skeleton</dt><dd><ol>')
-        for s in qr['skeleton']:
-            out.append('        <li>%s</li>' % esc(s))
-        out.append('      </ol></dd>')
+    # The skeleton is NOT repeated here. It renders once per card, as the Exam
+    # Approach block above the model answer, where it does its actual job:
+    # showing the shape of the answer before the prose rather than after it.
     if qr.get('keywords'):
         out.append('      <dt>Keywords</dt><dd>%s</dd>'
                    % ''.join('<span class="kw">%s</span>' % esc(k) for k in qr['keywords']))
@@ -97,6 +95,33 @@ def quick_revision(qr, out):
     if qr.get('major_trap'):
         out.append('      <dt>Major trap</dt><dd class="trap">%s</dd>' % esc(qr['major_trap']))
     out.append('    </dl>')
+    out.append('  </section>')
+
+
+def exam_approach(q, out):
+    """The answer skeleton, rendered BEFORE the model answer.
+
+    Purpose is exam-writing, not revision: it is the map a candidate plans on
+    paper in the first two minutes. Placing it after the full model answer --
+    which is where it used to live, inside Quick Revision -- meant a student
+    only met the plan once they had already read the finished essay.
+
+    Always visible inside the card body rather than a nested <details>. Cards
+    are collapsed by default, so this adds nothing to the list view, and a
+    plan that has to be un-hidden is a plan that gets skipped. It renders from
+    quick_revision.skeleton, so there is still exactly one copy of this text in
+    the spec feeding both this block and the paper-level Rapid Revision table.
+    """
+    skel = (q.get('quick_revision') or {}).get('skeleton') or []
+    if not skel:
+        return
+    out.append('  <section class="layer skel" aria-label="Exam approach">')
+    out.append('    <div class="layer-title">Exam approach &mdash; answer skeleton '
+               '<span class="skel-marks">%s marks</span></div>' % q['total_marks'])
+    out.append('    <ol class="skel-list">')
+    for s in skel:
+        out.append('      <li>%s</li>' % esc(s))
+    out.append('    </ol>')
     out.append('  </section>')
 
 
@@ -141,6 +166,8 @@ def build_card(q, paper, out, publish):
     out.append('  </div>')
 
     out.append('  <div class="q-body" id="%s-body" hidden>' % esc_attr(q['anchor']))
+
+    exam_approach(q, out)
 
     out.append('  <section class="layer ma" aria-label="Model written answer">')
     out.append('    <div class="layer-title">Model written answer</div>')
@@ -395,7 +422,10 @@ def build(spec, gated=False, publish=False):
     o.extend(footer(publish))
     a('')
     js = open(os.path.join(TPL, 'paper.js'), encoding='utf-8').read()
-    js = js.replace('__LS_BOOKMARKS__', LS_BOOKMARKS).replace('__LS_PROGRESS__', LS_PROGRESS)
+    js = (js.replace('__LS_BOOKMARKS__', LS_BOOKMARKS)
+            .replace('__LS_PROGRESS__', LS_PROGRESS)
+            .replace('__LS_MIGRATE__', LS_MIGRATE_JS)
+            .replace('__STICKY_SYNC__', STICKY_SYNC_JS))
     a('<script>')
     a(js.rstrip('\n'))
     a('</script>')
