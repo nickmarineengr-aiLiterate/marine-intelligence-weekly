@@ -96,6 +96,7 @@ def run():
             specs.append(json.load(fh))
 
     check_storefront(specs)
+    check_oral_promo(specs)
 
     expected = []
     total_q = 0
@@ -134,6 +135,65 @@ def run():
     else:
         print('[ OK  ] %d questions delivered across %d papers'
               % (delivered, sum(1 for e in expected if re.match(r'^QP\d+\.html$', e))))
+
+
+def check_oral_promo(specs):
+    """The complete January paper shown to existing ORAL subscribers.
+
+    Two things must hold at once, and they pull in opposite directions:
+      * it must be COMPLETE — every question, every answer, nothing held
+        back, because a half-sample would misrepresent the product;
+      * it must not tell an Oral subscriber they own the Written library.
+    """
+    CHECKS[0] += 1
+    path = os.path.join(REPO_ROOT, 'meoclass1', 'oralnotes',
+                        'written-sample-january-2026.html')
+    if not os.path.exists(path):
+        fail('oral promo', 'January Written promo is missing')
+        return
+    with open(path, encoding='utf-8', newline='') as fh:
+        html = fh.read()
+
+    jan = next((d for d in specs if d['paper_id'] == 'QP2601'), None)
+    if jan:
+        n = len(re.findall(r'class="q-num"', html))
+        if n != len(jan['questions']):
+            fail('oral promo', 'has %d questions, the January spec has %d'
+                 % (n, len(jan['questions'])))
+        if 'Model written answer' not in html:
+            fail('oral promo', 'no model answers — the promo must be complete')
+
+    if 'noindex' not in html:
+        fail('oral promo', 'must be noindex — it is inside the paid Oral product')
+    if 'Unlock the full Solved QP' not in html:
+        fail('oral promo', 'header CTA missing')
+    if 'Get Solved QP Access' not in html:
+        fail('oral promo', 'footer CTA missing')
+
+    # The newest sitting in the closing CTA is derived; guard the claim.
+    solved = [d for d in specs if any(q.get('model_answer') for q in d['questions'])]
+    if solved:
+        import recurrence_model as _RM
+        newest = sorted(solved, key=lambda d: (d['year'], _RM.MONTH_NUM[d['month']]))[-1]
+        if newest['month_year'] not in html:
+            fail('oral promo', 'closing CTA does not name the newest sitting %r'
+                 % newest['month_year'])
+
+    # Must not imply the Oral subscriber already owns the Written library.
+    for rx, why in [
+        (re.compile(r'you (?:now )?own the (?:full|complete)', re.I), 'claims ownership'),
+        (re.compile(r'included (?:with|in) your (?:Oral )?subscription', re.I),
+         'implies the library is included'),
+    ]:
+        if rx.search(html):
+            fail('oral promo', 'copy %s of the Solved QP library' % why)
+
+    for rx, label in THIRD_PARTY + AUTHORING[:2]:
+        m = rx.search(html)
+        if m:
+            fail('oral promo', 'leak (%s): %r' % (label, m.group(0)[:40]))
+
+    print('[ OK  ] oral promo complete and correctly scoped')
 
 
 def check_storefront(specs):

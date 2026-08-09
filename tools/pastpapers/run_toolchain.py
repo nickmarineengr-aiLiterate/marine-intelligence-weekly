@@ -180,6 +180,17 @@ def main():
     rc_total += rc
     warn_total += w
 
+    # The complete January paper shown to existing ORAL subscribers. Same
+    # canonical spec as the paid product, so it cannot drift from it.
+    promo_spec = os.path.join(PP, 'specs', 'QP2601.json')
+    if os.path.exists(promo_spec):
+        rc, w = run('ORALPROMO BLD',
+                    [os.path.join(T, 'build_paper.py'),
+                     os.path.relpath(promo_spec, REPO_ROOT), '--oral-promo'],
+                    args.verbose)
+        rc_total += rc
+        warn_total += w
+
     argv = [os.path.join(T, 'solvedqp_check.py')]
     if args.self_test:
         argv.append('--self-test')

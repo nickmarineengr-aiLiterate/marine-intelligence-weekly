@@ -521,7 +521,41 @@ def build_card(q, paper, out, publish):
 
 # ------------------------------------------------------------------ document
 
-def build(spec, gated=False, publish=False, deliver=False):
+PROMO_SLUG = 'written-sample-january-2026'
+
+
+def promo_header(newest_label):
+    """Top banner on the Oral-subscriber Written promo."""
+    return [
+        '<div class="review-banner" style="background:#f0fdfa;border-color:#99f6e4;color:#134e4a">',
+        '  <strong>Written Question Paper sample.</strong> Preparing for Written too? '
+        'As an MIW Oral subscriber you can study this complete January 2026 Written paper '
+        'here &mdash; all nine questions, all five study modes, nothing withheld. '
+        '<a href="/SQ/index.html#solved-qp" style="font-weight:600">Unlock the full Solved QP '
+        'collection &mdash; &#8377;1,500 &rarr;</a>',
+        '</div>',
+    ]
+
+
+def promo_footer(newest_label):
+    """Closing CTA. The newest sitting is derived, never hard-coded."""
+    newest = newest_label or 'the newest available sitting'
+    return [
+        '<section class="cheat" id="solved-qp-cta">',
+        '  <h2>Continue with all solved Written papers</h2>',
+        '  <p class="lead">January is your complete subscriber sample. Full Solved QP access '
+        'includes every currently available solved paper, including the newest available '
+        'sitting &mdash; <strong>%s</strong> &mdash; and every paper added after it.</p>' % esc(newest),
+        '  <p class="lead" style="font-size:1.05rem"><strong>&#8377;1,500</strong> one-time.</p>',
+        '  <p><a class="sample-card-btn" href="/SQ/index.html#solved-qp" '
+        'style="display:inline-block;background:#0d9488;color:#fff;text-decoration:none;'
+        'padding:11px 22px;border-radius:8px;font-weight:600">Get Solved QP Access &rarr;</a></p>',
+        '</section>',
+        '',
+    ]
+
+
+def build(spec, gated=False, publish=False, deliver=False, promo=False, newest_label=None):
     # deliver = the paid customer copy served from /solvedQP/.
     # It shows the same content as a publish build (no production
     # metadata, no review banner, and per memory no recurrence_class
@@ -529,7 +563,12 @@ def build(spec, gated=False, publish=False, deliver=False):
     # because paid answers must never reach structured data.
     # publish stays False in this mode, which is what makes head_meta
     # emit noindex and what keeps the JSON-LD block below switched off.
-    content_publish = publish or deliver
+    # promo = the complete January paper shown to existing ORAL subscribers
+    # inside /meoclass1/oralnotes/. It is a customer-facing copy (so it gets
+    # no production metadata and no authoring verdicts) but it lives under
+    # the Oral product root and is opened by the ORAL entitlement, not by
+    # SOLVED_QP. It demonstrates the Written product; it does not grant it.
+    content_publish = publish or deliver or promo
     d = spec
     pid = d['paper_id']
     qs = d['questions']
@@ -584,7 +623,12 @@ def build(spec, gated=False, publish=False, deliver=False):
             ]}, indent=2, ensure_ascii=False))
         extra.append('</script>')
 
-    canonical = ('/solvedQP/%s.html' % pid) if deliver else ('/meoclass1/pastpapers/%s.html' % pid)
+    if deliver:
+        canonical = '/solvedQP/%s.html' % pid
+    elif promo:
+        canonical = '/meoclass1/oralnotes/%s.html' % PROMO_SLUG
+    else:
+        canonical = '/meoclass1/pastpapers/%s.html' % pid
     o.extend(head_meta(strip_tags(title), strip_tags(desc), canonical, publish, extra))
     a('<style>')
     a(read_css())
@@ -614,6 +658,10 @@ def build(spec, gated=False, publish=False, deliver=False):
     a('  </div>')
     a('</header>')
     a('')
+
+    if promo:
+        o.extend(promo_header(newest_label))
+        a('')
 
     if not content_publish:
         a('<div class="review-banner">')
@@ -712,6 +760,9 @@ def build(spec, gated=False, publish=False, deliver=False):
     a('  </table>')
     a('</section>')
 
+    if promo:
+        o.extend(promo_footer(newest_label))
+
     a('<div class="q-footer">')
     a('  <span class="correction-link">Correction? <a href="mailto:%s?subject=Past%%20Paper%%20%s%%2C%%20Correction%%20Required">%s</a></span>'
       % (CONTACT, pid, CONTACT))
@@ -746,13 +797,38 @@ def main():
     ap.add_argument('--deliver', action='store_true',
                     help='paid customer copy for /solvedQP/ (noindex, no production '
                          'metadata, no JSON-LD, Solved QP navigation)')
+    ap.add_argument('--oral-promo', action='store_true',
+                    help='complete Written paper shown to existing ORAL subscribers '
+                         'inside /meoclass1/oralnotes/, with purchase CTAs')
     args = ap.parse_args()
 
     spec = json.load(open(args.spec, encoding='utf-8'))
-    html = build(spec, gated=args.gated, publish=args.publish, deliver=args.deliver)
+
+    # The promo's closing CTA names the newest solved sitting. Derive it from
+    # the specs so it moves on its own as papers are added, rather than
+    # becoming a stale claim in hand-written copy.
+    newest_label = None
+    if args.oral_promo:
+        import glob as _glob
+        sys.path.insert(0, HERE)
+        import recurrence_model as _RM
+        solved = []
+        for sp in _glob.glob(os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers',
+                                          'specs', '*.json')):
+            d = json.load(open(sp, encoding='utf-8'))
+            if any(q.get('model_answer') for q in d['questions']):
+                solved.append(d)
+        if solved:
+            solved.sort(key=lambda d: (d['year'], _RM.MONTH_NUM[d['month']]))
+            newest_label = solved[-1]['month_year']
+
+    html = build(spec, gated=args.gated, publish=args.publish, deliver=args.deliver,
+                 promo=args.oral_promo, newest_label=newest_label)
 
     if args.out:
         out = args.out
+    elif args.oral_promo:
+        out = os.path.join(REPO_ROOT, 'meoclass1', 'oralnotes', '%s.html' % PROMO_SLUG)
     elif args.deliver:
         out = os.path.join(REPO_ROOT, 'solvedQP', '%s.html' % spec['paper_id'])
     else:
