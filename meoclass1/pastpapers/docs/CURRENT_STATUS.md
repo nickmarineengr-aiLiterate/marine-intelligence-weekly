@@ -3,17 +3,20 @@
 **Canonical restart document for the Past Written Papers product.**
 Last updated: 2026-08-09, at the close of the **QP2604 (April) production** session. Read this first.
 
-> **FIVE PAPERS ARE NOW BUILT. 5 of the 6 available 2026 sittings.**
+> **FIVE PAPERS ARE BUILT. 5 of the 6 available 2026 sittings.**
 > **QP2607 (July)** — frozen V1 template, Founder review candidate.
 > **QP2601 (January)** — Founder review candidate, cross-paper validation. **0 class A blocking flags.**
 > **QP2602 (February)** — Founder review candidate. **0 class A blocking flags.**
 > **QP2603 (March)** — Founder review candidate. **0 class A blocking flags.**
-> **QP2604 (April)** — Founder review candidate, built this session. **0 class A blocking flags.**
-> Next planned: **QP2606 (June)**. Not started, and not to be started in this session.
+> **QP2604 (April)** — Founder review candidate. **0 class A blocking flags.**
+> **QP2606 (June)** — **STARTED, NOT BUILT.** Transcription and recurrence analysis are complete
+> and verified; Q1 and Q2 are verified against primary sources; **Q3–Q9 are not.** There is no
+> `specs/QP2606.json`. See **§2f** and
+> `docs/QP2606_SOURCE_TRANSCRIPTION_AND_RECURRENCE.md`.
 > **May 2026 does not exist in the source set.**
 
-> **BRANCH: `pastpapers/qp2604-founder-review`**, created from `03799dc` (the QP2603 completion).
-> The March, February, January and July branches are untouched and preserved.
+> **BRANCH: `pastpapers/qp2606-founder-review`**, created from `5744143` (the QP2604 completion).
+> The April, March, February, January and July branches are untouched and preserved.
 
 > **QP2607 IS A FOUNDER REVIEW CANDIDATE.** There are **no class A (blocking) flags left**.
 > Q7's two publication blockers were closed against primary Gazette text. What
@@ -629,6 +632,66 @@ review would automatically improve QP2604.**
 5. **NEW — MARPOL corpus objects must resolve to the ARTICLES of the parent Convention**, to the
    third level of sub-paragraph. Every prior paper demanded Annex/regulation level; Q1 turns on
    the difference between `16(2)(f)(i)` and `16(2)(f)(iii)`.
+
+---
+
+## 2f. QP2606 — JUNE, STARTED AND NOT FINISHED, 2026-08-09
+
+**QP2606 is NOT built.** No spec, no page, no verification records. The toolchain still reports
+**five** papers and `ALL STAGES PASS   38 warning(s)` — unchanged from the QP2604 baseline.
+
+Full detail: **`docs/QP2606_SOURCE_TRANSCRIPTION_AND_RECURRENCE.md`**, which is complete and is
+the resume point. Headlines:
+
+- **Transcription complete and visually verified** against both pages rendered at 150 dpi.
+- **96-vs-100 is present — now 6/6** and settled across the whole available 2026 set.
+- **A fifth distinct marks pattern.** June prints an allocation on **all nine** questions **and
+  all nine sum to exactly 16.** It is the only paper in the set that does both — April printed
+  nine of nine but contradicted itself on Q6. Q8's **10 + 6** is June's only unequal split.
+- **Anomalies preserved as printed**, including `SOLAS ch.ll-1` (two lowercase L's, confirmed by
+  codepoint), the mismatched quote on `"Andaman and Nicobar Islands'`, and unhyphenated
+  "York Antwerp Rules 1994". **Do not "fix" these.**
+- **Recurrence: EXACT 0 · NEAR 0 · TOPIC 4 · NONE 5** — a **third distinct profile**, and the
+  first paper with neither an exact nor a near repeat. **Five genuinely new questions, more than
+  the previous five papers produced between them.**
+- **ZERO Tier D reuse** — the first paper since January with none. Tiers are **C ×5, B ×4**.
+  This is why June is not finishable in one session: almost nothing can be inherited.
+- **Two new recurrence failure modes recorded.** The ratio **ranked the wrong neighbour** on Q3
+  (top scorer QP2601 Q3 is a salvage question; the real relative is QP2607 Q5, which scores
+  lower but shares a near-verbatim task). And Q4 shares the token "decarbonisation" with
+  QP2601 Q2 as a **homonym** — main-engine decarbonisation versus the energy transition.
+- **A stale recorded fact was corrected.** The claim that the host batch-generated *all six*
+  PDFs on 20 April 2026 is wrong: that batch covers **four**. June was generated 18 June 2026
+  and July 21 July 2026. See the transcription document §1a.
+- **Controlled-vocabulary audit is clean** — `new` is canonical, `no_recurrence` appears nowhere,
+  and **Tier A has never been used** in 45 questions.
+
+**Verified against primary sources so far: Q1 and Q2 only, plus the paper-wide temporal anchors.**
+
+- **The IMO Net-Zero Framework was still approved-but-NOT-adopted at the June sitting.** The
+  adjourned extraordinary MEPC session **reconvenes 16–27 November 2026**, five months after the
+  paper. February's finding holds unchanged. Bites on Q4 a).
+- **Q1 (GBS)** — MSC.287(87) read in full. The **framework is five tiers; the instrument contains
+  three**. Fifteen Tier II functional requirements in four lifecycle groups. Applies to bulk
+  carriers and oil tankers **≥150 m contracted on or after 1 July 2016**. **The verification
+  guidelines are MSC.454(100), not MSC.296(87)** — superseded-edition trap.
+- **Q2 (PSC)** — **A.1206(34), Procedures for Port State Control, 2025, adopted 3 December 2025,
+  revokes A.1185(33)** and is the operative instrument at the June sitting. The right of appeal
+  is **§2.3.11**: it belongs to **the company or its representative, not to the Chief Engineer**,
+  and **the appeal does not suspend the detention**. Chapter 5 is titled "Review Procedures" and
+  is **not** the appeal route — it is IMO-level evaluation of deficiency-report summaries.
+
+> **Sixth consecutive paper on which opening the primary source caught a substantive error.**
+> An automated summary of MSC.287(87) asserted a "four-tier framework"; the instrument says a
+> five-tier system of which the Standards comprise three.
+
+**Q3–Q9 are unverified and unauthored.** Highest-risk items, in order: **Q7** (Indian statutory
+protection of the island groups after the MS Act 2025 commencement, and whether the islands hold
+any actual PSSA status — they may hold none); **Q3** (the question names the **superseded
+York Antwerp Rules 1994** specifically); **Q6** (ship cost structure and inventory theory sit
+largely outside the regulatory corpus — expect many C flags and **do not manufacture citations**);
+**Q5** (ISM cyber position and current amendment state); **Q9** (confirm MSC-MEPC.2/Circ.12/Rev.2
+is still operative).
 
 ---
 
