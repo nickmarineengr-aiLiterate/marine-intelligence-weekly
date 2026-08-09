@@ -1836,3 +1836,74 @@ on a preview deployment before launch. That is a Founder action, not an outstand
 **2025 remains next, after commercial Founder review.** No 2025 answer generation has begun.
 The plan is unchanged: 11 source papers → answerless canonical intake → Questions 2025 →
 2025↔2026 recurrence → reuse map → solved-paper production.
+
+---
+
+# 23. SESSION 2026-08-09 — SECURITY V2 PRESERVATION & HANDOVER
+
+| Field | Value |
+|---|---|
+| Branch | `commerce/solvedqp-security-v2` (continued — no new branch) |
+| Starting commit | `76cc003` |
+| Security V2 | Code complete; **two-session policy implemented** |
+| Preview state | **NOT VERIFIED** — no Vercel access in this environment |
+| Production | **NOT ACTIVATED · NOT MERGED TO MAIN · SOLVED QP NOT LIVE** |
+| Incident archive | Created **outside the repository**; unencrypted; path not recorded here |
+| Password rotation | **NOT DONE** — recommendation is ROTATE, after endpoint removal |
+| Content produced | **NONE** — no 2025 work started, by instruction |
+
+## 23a. What changed in code
+
+* Session policy **ONE → TWO** active sessions (Founder promise: mobile +
+  laptop). `miw:sessions:<email>` sorted set replaces
+  `miw:active_session:<email>`. New module `api/_lib/sessions.js`.
+* `authorizeRequest()` extracted into `api/_lib/routes.js` so the edge
+  decision is provable offline.
+* Removed a **dead duplicate** `requiredEntitlementForPath()` from
+  `api/_lib/products.js`. Nothing imported it, but it disagreed with
+  `routes.js` and mapped `/meoclass1/pastpapers/` to `ORAL_QB_NOTES` — i.e.
+  it would have handed the whole ₹1,500 Written library to Oral customers.
+* Fixed `npm run security:test`, which **did not execute any tests** on this
+  Node version (`node --test <dir>` was resolved as a module). Now a glob.
+* `entitlement_admin.mjs` updated to the new session set.
+
+## 23b. Tests
+
+* `npm run security:test` → **62/62 pass** (34 pre-existing + 28 new).
+* `python tools/pastpapers/run_toolchain.py --self-test` → **ALL STAGES PASS**,
+  47 warnings (all SPEC-stage, pre-existing, unchanged).
+* Migration tool dry-run exercised against a mock store: correct counts,
+  masked addresses, **zero writes**.
+
+## 23c. Content regression
+
+No product content was modified. The six canonical papers, the year sheet,
+the public January sample and the Oral promo are **byte-identical** to
+`76cc003`; the diff touches only `api/`, `middleware.js`, `docs/`,
+`tools/security/` and `package.json`. 54 questions verified present (9 × 6).
+
+## 23d. THE URGENT ITEM
+
+`api/check-db.js` and `api/migrate-users.js` are **still on `main`**, the
+branch production deploys — the deletion is only on this unmerged branch, and
+the repository is public. `/api/check-db?email=<address>` requires **no
+authentication** and returns that account's password.
+
+**Remove those two files from `main` and redeploy before rotating anything** —
+rotating first would just disclose the new passwords the same way. This is
+independent of the content roadmap and of Security V2 activation.
+
+## 23e. NEXT SESSION
+
+**2025 QUESTION-ONLY CANONICAL INTAKE + CROSS-YEAR RECURRENCE FOUNDATION.**
+
+Not another security session. Security V2 is frozen at
+*preview-pending / production deferred* and should only be reopened for a real
+defect, production activation, credential remediation, or a new commercial
+requirement.
+
+Plan unchanged: 11 available 2025 papers → answerless canonical intake →
+Questions 2025 → 2025↔2026 recurrence → A/B/C/D reuse map → solved-paper
+production. **All 2025 sittings predate the 15 March 2026 commencement of the
+Merchant Shipping Act 2025** — no post-commencement 2026 legal answer may be
+copied backwards without a sitting-date currentness sweep.

@@ -70,6 +70,27 @@ export async function redisSetNX(key, value, ttlSeconds = 86400) {
   return data.result === "OK";
 }
 
+/**
+ * Multi-command pipeline via Upstash's /pipeline endpoint.
+ * Returns an array of {result} objects, one per command, in order.
+ *
+ * Commands run sequentially on one connection but are NOT a MULTI
+ * transaction. Every caller here is written so that any interleaving
+ * of two concurrent pipelines still leaves a correct final state.
+ */
+export async function redisPipeline(commands) {
+  assertConfigured();
+  const r = await fetch(`${URL_BASE()}/pipeline`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${TOKEN()}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(commands),
+  });
+  return r.json();
+}
+
 /** SCAN wrapper for the migration tool. Returns {cursor, keys}. */
 export async function redisScan(cursor, match, count = 200) {
   const data = await redisCmd(["SCAN", String(cursor), "MATCH", match, "COUNT", String(count)]);

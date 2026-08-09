@@ -56,8 +56,10 @@ bytes are never read from the CDN.
 Per request to a protected path:
 
 1. verify the HMAC-signed session token (Web Crypto);
-2. one Upstash pipeline call → active session id + the required entitlement;
-3. session must match the stored id (single active session);
+2. one Upstash pipeline call → `ZSCORE` on the session set + the required
+   entitlement;
+3. the session id must still be a member of the account's set (**up to two**
+   live sessions — mobile + laptop);
 4. entitlement field must be `"1"`;
 5. otherwise redirect to `/SQ/pay.html?next=…&reason=…`.
 
@@ -95,11 +97,46 @@ Passwords: new accounts are stored `sha256$salt$hash`. Legacy plaintext
 records still verify and are **transparently upgraded on next login**, so no
 customer is locked out.
 
+### Two active sessions — `api/_lib/sessions.js`
+
+**Founder policy: a customer may stay signed in on TWO devices** (typically a
+mobile and a laptop). This is a standing commitment to existing customers, and
+it overrides the earlier single-session draft.
+
+| Event | Result |
+|---|---|
+| Login A | A valid |
+| Login B | A **and** B valid |
+| Login C | oldest (A) retired; B and C valid |
+| Logout on B | B invalid; C still valid |
+| Expired / tampered token | invalid |
+
+`miw:sessions:<email>` is a **sorted set**: member = session id, score = login
+time. Login runs one pipeline — prune by score, `ZADD`, trim to the newest two
+(`ZREMRANGEBYRANK key 0 -3`), refresh TTL, delete the superseded
+`miw:active_session` key. Trimming *after* adding is what enforces the cap.
+Two concurrent logins converge on "the newest two" under every interleaving,
+so no transaction is required.
+
+Authorization is one `ZSCORE` — the same single-command cost as the previous
+single-session `GET`. **There is no device fingerprinting**: the server counts
+independent session ids and nothing more.
+
+Entitlements are per **account**, never per device. Both sessions see exactly
+the same product set. Logout signs out only the calling device;
+`{action:"logout", scope:"all"}` signs out everywhere and is what credential
+rotation must use.
+
+The decision itself lives in `api/_lib/routes.js` as `authorizeRequest()`, a
+pure function, so the full deny/allow matrix is proven offline in
+`tools/security/sessions.test.mjs` exactly as it runs at the edge.
+
 ### Entitlements — Redis
 
 ```
 miw:ent:<email>              HASH   ORAL_QB_NOTES = "1", SOLVED_QP = "1"
-miw:active_session:<email>   STRING the one live session id
+miw:sessions:<email>         ZSET   up to TWO live session ids,
+                                    member = session id, score = login epoch
 miw:user:<email>             STRING sha256$salt$hash (legacy: plaintext)
 miw:send_lock:<paymentId>    STRING fulfilment idempotency claim
 ```
@@ -307,3 +344,95 @@ treated as **publicly disclosed**.
    not an implementation detail.
 3. The 28 addresses are real customer personal data. They are not reproduced
    in this document, in any commit message, or in any session output.
+
+---
+
+## 23. Status — 2026-08-09 (Security V2 preservation & handover session)
+
+### 23a. CORRECTION: the exposure is not only in history
+
+The section above says the two endpoints "are deleted on this branch". That is
+true and it is not sufficient. Verified this session:
+
+* `api/check-db.js` and `api/migrate-users.js` are **still present in the tree
+  of `main`** (`f4d1058`), which is the branch production deploys.
+* The deletion commit `76cc003` exists **only** on
+  `commerce/solvedqp-security-v2`, which is **not merged**.
+* The repository is **public** (confirmed via the GitHub API).
+
+So the credential table is readable in the *current default branch* of a public
+repository — not merely recoverable from history — and `/api/check-db` is
+expected to still be deployed. That endpoint takes **no secret at all**:
+`GET /api/check-db?email=<address>` returns that account's stored password.
+
+**Consequence for sequencing:** rotating the 28 passwords while
+`/api/check-db` is still live would simply disclose the *new* passwords by the
+same mechanism. **Endpoint removal must come first.**
+
+Recommended order, independent of the Solved QP launch schedule:
+
+1. Remove both endpoints from `main`; redeploy production.
+2. Confirm `/api/check-db` no longer resolves.
+3. Back-fill entitlements (§23c step 3).
+4. Rotate all 28 credentials and invalidate every session
+   (`clearAllSessions`, i.e. `{action:"logout", scope:"all"}` semantics).
+5. Notify affected customers.
+6. Only then consider a history purge.
+
+Steps 1–2 do not depend on Security V2, on the content roadmap, or on any
+launch decision. They can be done at any time.
+
+A private incident archive holding the exact historical files, a SHA-256
+manifest and an incident record has been created **outside this repository**
+so a future history purge can be considered without losing the reference. Its
+contents are deliberately not described here and are not in Git.
+
+### 23b. Session policy changed: ONE → TWO
+
+Superseding the earlier single-session design. See "Two active sessions"
+above. This honours the standing Founder promise that a customer may remain
+signed in on both a mobile and a laptop.
+
+### 23c. Production activation sequence — DEFERRED, do not execute early
+
+Security V2 is **not** active in production and **must not** be activated
+before the entitlement back-fill, or valid customers will authenticate
+successfully and still be denied access.
+
+1. Security code ready ✔ (this branch)
+2. `MIW_SESSION_SECRET` configured in Vercel — Edge **and** Node runtimes
+3. Entitlement migration prepared ✔ (`tools/security/migrate_entitlements.mjs`)
+4. Controlled back-fill — dry run, then `--apply`
+5. Validate an existing customer login
+6. Deploy / activate middleware
+7. Verify the access matrix
+8. Activate Solved QP commerce **only** when the Founder launches the product
+
+### 23d. Vercel preview verification — NOT PERFORMED
+
+Preview verification could **not** be carried out in this session. The
+environment has no Vercel CLI, no `.vercel` project link, no Vercel API token
+and no Vercel connector, and the session is non-interactive so no login flow
+could be completed. Nothing was changed in any Vercel environment, and
+production was not touched — which is the correct outcome when Preview cannot
+be cleanly isolated.
+
+Still outstanding, to be run against a preview deployment once Vercel access
+exists:
+
+* unauthenticated `curl` of `/solvedQP/QP2607.html` and a paid `/meoclass1/`
+  page must not return proprietary bytes;
+* `miw_auth=1` alone must be denied;
+* the two-session eviction matrix across separate cookie jars.
+
+These are **deployment** proofs. The underlying **decision** logic is proven
+offline: `authorizeRequest()` is the exact function the edge runs, and
+`tools/security/sessions.test.mjs` drives the full matrix, including
+fail-closed, forged-cookie and eviction cases.
+
+### 23e. Launch posture
+
+Solved QP is **not** live and no launch date is set. The product goes back to
+content production first: complete 2025 → add available 2024 → multi-year
+recurrence intelligence → derived Written study materials → Founder review →
+Security V2 production activation → launch.

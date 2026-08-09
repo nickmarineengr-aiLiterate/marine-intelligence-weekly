@@ -19,7 +19,9 @@
 //
 // ABSENCE OF A FIELD MEANS NO ACCESS. There is no default-true.
 //
-//   miw:active_session:<email>   string — the one live session id
+//   miw:sessions:<email>         sorted set — up to TWO live session
+//                                ids, scored by login time. Defined in
+//                                api/_lib/sessions.js.
 //   miw:user:<email>             string — password (legacy plaintext
 //                                or sha256$salt$hash after upgrade)
 // =============================================================
@@ -28,7 +30,6 @@ import { redisCmd } from "./redis.js";
 import { ALL_ENTITLEMENTS } from "./products.js";
 
 export const entKey = (email) => `miw:ent:${String(email).toLowerCase().trim()}`;
-export const sessionKey = (email) => `miw:active_session:${String(email).toLowerCase().trim()}`;
 export const userKey = (email) => `miw:user:${String(email).toLowerCase().trim()}`;
 
 /**
@@ -80,21 +81,21 @@ export async function revokeEntitlement(email, entitlement) {
 }
 
 // -------------------------------------------------------------
-// Single active session. Second login replaces the first; the
-// evicted session's next request fails the id comparison.
+// Active sessions now live in api/_lib/sessions.js as a bounded
+// sorted set (Founder policy: TWO devices, e.g. mobile + laptop).
+//
+// The single-value helpers that used to live here are gone rather
+// than deprecated-in-place, so there is exactly ONE definition of
+// "is this session valid" in the codebase. Re-exported here only so
+// existing importers keep a single obvious entry point.
 // -------------------------------------------------------------
 
-export async function setActiveSession(email, sessionId, ttlSeconds) {
-  await redisCmd(["SET", sessionKey(email), sessionId, "EX", ttlSeconds]);
-  return true;
-}
-
-export async function getActiveSession(email) {
-  const data = await redisCmd(["GET", sessionKey(email)]);
-  return data.result ?? null;
-}
-
-export async function clearActiveSession(email) {
-  await redisCmd(["DEL", sessionKey(email)]);
-  return true;
-}
+export {
+  MAX_ACTIVE_SESSIONS,
+  sessionsKey,
+  addActiveSession,
+  isActiveSession,
+  listActiveSessions,
+  removeActiveSession,
+  clearAllSessions,
+} from "./sessions.js";

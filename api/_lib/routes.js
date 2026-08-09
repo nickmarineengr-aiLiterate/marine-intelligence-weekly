@@ -60,6 +60,52 @@ export function requiredEntitlementForPath(pathname) {
   return null;
 }
 
+/**
+ * The authorization decision itself, as a pure function.
+ *
+ * middleware.js does the I/O (read cookie, verify HMAC, ask Redis) and
+ * then calls this with what it found. Keeping the DECISION separate
+ * from the FETCH means the deny/allow matrix can be proven offline,
+ * exactly as it will run at the edge — no Vercel deployment required
+ * to know that "no entitlement" denies.
+ *
+ * Every branch fails CLOSED: anything not explicitly allowed denies.
+ *
+ * @param {object}  i
+ * @param {string}  i.pathname
+ * @param {boolean} i.configured   secret + Redis credentials present
+ * @param {object|null} i.payload  verified token payload, or null
+ * @param {*}       i.sessionScore ZSCORE result (null ⇒ not a live session)
+ * @param {*}       i.entitled     HGET result ("1" ⇒ owns the product)
+ * @returns {{allow: boolean, reason: string, required: string|null}}
+ */
+export function authorizeRequest({ pathname, configured, payload, sessionScore, entitled }) {
+  const required = requiredEntitlementForPath(pathname);
+
+  // Public surface — storefront, samples, login, API.
+  if (!required) return { allow: true, reason: "public", required: null };
+
+  // A missing secret or unreachable auth store must never serve paid
+  // bytes "because the check could not run".
+  if (!configured) return { allow: false, reason: "misconfigured", required };
+
+  // No cookie, bad signature, expired, or forged.
+  if (!payload) return { allow: false, reason: "nosession", required };
+
+  // Signature valid, but this session id is no longer one of the
+  // account's live sessions (retired by a third login, or logged out).
+  if (sessionScore === null || sessionScore === undefined) {
+    return { allow: false, reason: "evicted", required };
+  }
+
+  // Authenticated, live session — but does the account own THIS product?
+  if (!(entitled === "1" || entitled === 1)) {
+    return { allow: false, reason: "noentitlement", required };
+  }
+
+  return { allow: true, reason: "ok", required };
+}
+
 function normalise(pathname) {
   let p = String(pathname || "/");
   // Defensive: collapse traversal and duplicate slashes before matching,

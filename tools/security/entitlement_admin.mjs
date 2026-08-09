@@ -68,11 +68,13 @@ async function show() {
   } else if (raw && typeof raw === "object") Object.assign(held, raw);
 
   const acct = await cmd(["EXISTS", `miw:user:${email}`]);
-  const sess = await cmd(["GET", `miw:active_session:${email}`]);
+  // Up to TWO live sessions per account (mobile + laptop).
+  const sess = await cmd(["ZCARD", `miw:sessions:${email}`]);
+  const live = Number(sess.result || 0);
 
   console.log(`account   : ${mask(email)}`);
   console.log(`credential: ${acct.result ? "present" : "NONE — no login exists"}`);
-  console.log(`session   : ${sess.result ? "active" : "none"}`);
+  console.log(`sessions  : ${live} of 2 active`);
   for (const k of KNOWN) console.log(`  ${k.padEnd(15)} ${held[k] === "1" ? "YES" : "no"}`);
 }
 
@@ -80,8 +82,11 @@ async function main() {
   if (action === "show") return show();
 
   if (action === "logout") {
+    // Signs out EVERY device for this account. The legacy single-session
+    // key is cleared too so no pre-V2 remnant can linger.
+    await cmd(["DEL", `miw:sessions:${email}`]);
     await cmd(["DEL", `miw:active_session:${email}`]);
-    console.log(`active session cleared for ${mask(email)}`);
+    console.log(`all active sessions cleared for ${mask(email)}`);
     return;
   }
 

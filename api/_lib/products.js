@@ -127,25 +127,20 @@ export function resolvePurchase(input = {}) {
   };
 }
 
-/**
- * Which entitlement (if any) does a request path require?
- * Returns null for public paths. Used by middleware and by tests,
- * so route policy has exactly one definition.
- */
-export function requiredEntitlementForPath(pathname) {
-  const p = String(pathname || "");
-  for (const key of Object.keys(PRODUCTS)) {
-    const product = PRODUCTS[key];
-    for (const root of product.protectedRoots) {
-      if (p === root.replace(/\/$/, "") || p.startsWith(root)) {
-        // A product root maps to its FIRST grant — the atomic
-        // entitlement that owns that surface.
-        return product.grants[0];
-      }
-    }
-  }
-  return null;
-}
+// -----------------------------------------------------------
+// NOTE: route policy deliberately does NOT live here.
+//
+// This file previously also exported requiredEntitlementForPath(),
+// derived from each product's `protectedRoots`. Nothing imported it —
+// middleware.js and the tests both use api/_lib/routes.js — but it
+// disagreed with routes.js on the case that matters most:
+// /meoclass1/pastpapers/ resolved to ORAL_QB_NOTES here, which would
+// hand the entire ₹1,500 Written library to every Oral customer.
+//
+// Two definitions of "who may read this URL" is one too many, and the
+// wrong one was the easier import to reach for. It has been removed.
+// api/_lib/routes.js is the single source of route policy.
+// -----------------------------------------------------------
 
 export class PurchaseError extends Error {
   constructor(message, status = 400) {

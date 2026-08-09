@@ -26,7 +26,7 @@ import {
   sessionCookies, SESSION_TTL_SECONDS,
 } from "./_lib/session.js";
 import {
-  userKey, setActiveSession, getEntitlements,
+  userKey, addActiveSession, getEntitlements, MAX_ACTIVE_SESSIONS,
 } from "./_lib/entitlements.js";
 
 const THIRTY_DAYS = 30 * 24 * 60 * 60;
@@ -72,9 +72,12 @@ export default async function handler(req, res) {
       }
     }
 
-    // ---- Establish THE active session (single active session) ----
+    // ---- Register this device's session (up to TWO per account) ----
+    // Founder policy: a customer may stay signed in on a phone AND a
+    // laptop. A third login does not fail — it retires the OLDEST
+    // session, so the device in the customer's hand always works.
     const sessionId = newSessionId();
-    await setActiveSession(emailKey, sessionId, SESSION_TTL_SECONDS);
+    const active = await addActiveSession(emailKey, sessionId, SESSION_TTL_SECONDS);
     const token = createSessionToken(emailKey, sessionId);
 
     // Legacy device bookkeeping retained so existing behaviour and
@@ -87,12 +90,19 @@ export default async function handler(req, res) {
     const entitlements = await getEntitlements(emailKey);
 
     res.setHeader("Set-Cookie", sessionCookies(token));
-    console.log(`✓ Login: ${emailKey} | session ${sessionId.slice(0, 8)}…`);
+    console.log(
+      `✓ Login: ${emailKey} | session ${sessionId.slice(0, 8)}… | ` +
+      `${active.length}/${MAX_ACTIVE_SESSIONS} devices active`
+    );
 
     return res.status(200).json({
       success: true,
       email: emailKey,
       entitlements,
+      // Lets the UI say "signed in on 2 of 2 devices" without another
+      // round trip. Carries no authority — it is a count, not a token.
+      activeSessions: active.length,
+      maxSessions: MAX_ACTIVE_SESSIONS,
     });
 
   } catch (error) {

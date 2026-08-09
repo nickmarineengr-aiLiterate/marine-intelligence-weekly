@@ -10,7 +10,10 @@
 // =============================================================
 
 import { parseCookies, verifySessionToken, clearCookies, SESSION_COOKIE } from "./_lib/session.js";
-import { getActiveSession, clearActiveSession, getEntitlements } from "./_lib/entitlements.js";
+import {
+  isActiveSession, removeActiveSession, clearAllSessions,
+  getEntitlements, MAX_ACTIVE_SESSIONS,
+} from "./_lib/entitlements.js";
 
 export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "https://marineintelligenceweekly.com");
@@ -24,9 +27,21 @@ export default async function handler(req, res) {
   const payload = verifySessionToken(cookies[SESSION_COOKIE]);
 
   if (req.method === "POST") {
-    const action = String((req.body || {}).action || "");
+    const body = req.body || {};
+    const action = String(body.action || "");
     if (action !== "logout") return res.status(400).json({ error: "Unknown action" });
-    if (payload) await clearActiveSession(payload.e).catch(() => {});
+
+    if (payload) {
+      // Default logout signs out THIS device only — the customer's
+      // other device stays signed in, which is the point of allowing
+      // two. {scope:"all"} is the deliberate "sign out everywhere"
+      // escape hatch, and is what credential rotation must use.
+      if (String(body.scope || "") === "all") {
+        await clearAllSessions(payload.e).catch(() => {});
+      } else {
+        await removeActiveSession(payload.e, payload.s).catch(() => {});
+      }
+    }
     res.setHeader("Set-Cookie", clearCookies());
     return res.status(200).json({ success: true, authenticated: false });
   }
@@ -37,10 +52,10 @@ export default async function handler(req, res) {
     return res.status(200).json({ authenticated: false, entitlements: {} });
   }
 
-  // A valid signature is not enough — the session must still be THE
-  // active one. A second login elsewhere evicts this token.
-  const active = await getActiveSession(payload.e);
-  if (!active || active !== payload.s) {
+  // A valid signature is not enough — the session must still be one
+  // of the account's live sessions. Logging in on a THIRD device
+  // retires the oldest, and that retired token lands here.
+  if (!(await isActiveSession(payload.e, payload.s))) {
     res.setHeader("Set-Cookie", clearCookies());
     return res.status(200).json({
       authenticated: false, reason: "evicted", entitlements: {},
@@ -53,5 +68,6 @@ export default async function handler(req, res) {
     email: payload.e,
     expires: payload.x,
     entitlements,
+    maxSessions: MAX_ACTIVE_SESSIONS,
   });
 }

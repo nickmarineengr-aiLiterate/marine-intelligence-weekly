@@ -20,7 +20,7 @@
 // =============================================================
 
 import { next } from "@vercel/edge";
-import { requiredEntitlementForPath } from "./api/_lib/routes.js";
+import { requiredEntitlementForPath, authorizeRequest } from "./api/_lib/routes.js";
 
 export const config = {
   // Gate the two paid product roots. /SQ/, /api/ and the marketing
@@ -125,9 +125,11 @@ export default async function middleware(request) {
   const redisUrl = process.env.KV_REST_API_URL;
   const redisToken = process.env.KV_REST_API_TOKEN;
 
+  const configured = Boolean(secret && redisUrl && redisToken);
+
   // Fail CLOSED. Paid content must never be served because a
   // dependency was missing or unreachable.
-  if (!secret || !redisUrl || !redisToken) return deny(request, "misconfigured");
+  if (!configured) return deny(request, "misconfigured");
 
   const cookies = parseCookies(request.headers.get("cookie"));
   // NOTE: cookies.miw_auth is deliberately NOT consulted. It is a
@@ -145,8 +147,11 @@ export default async function middleware(request) {
         Authorization: `Bearer ${redisToken}`,
         "Content-Type": "application/json",
       },
+      // ZSCORE returns non-null only if this session id is one of the
+      // account's live sessions (up to two — mobile + laptop). Same
+      // single-command cost as the old single-session GET.
       body: JSON.stringify([
-        ["GET", `miw:active_session:${email}`],
+        ["ZSCORE", `miw:sessions:${email}`, payload.s],
         ["HGET", `miw:ent:${email}`, required],
       ]),
     });
@@ -156,14 +161,20 @@ export default async function middleware(request) {
     return deny(request, "authstore");
   }
 
-  const activeSession = results?.[0]?.result ?? null;
-  const entitled = results?.[1]?.result;
+  // The decision itself lives in api/_lib/routes.js so it can be
+  // proven offline against the full deny/allow matrix. Two active
+  // sessions per account: a token stays valid while its id is still a
+  // member of the set; a THIRD login retires the oldest, and that
+  // retired token fails the ZSCORE lookup here.
+  const decision = authorizeRequest({
+    pathname: url.pathname,
+    configured,
+    payload,
+    sessionScore: results?.[0]?.result ?? null,
+    entitled: results?.[1]?.result,
+  });
 
-  // Single active session: a token minted before a newer login
-  // no longer matches the stored id and is refused.
-  if (!activeSession || activeSession !== payload.s) return deny(request, "evicted");
-
-  if (!(entitled === "1" || entitled === 1)) return deny(request, "noentitlement");
+  if (!decision.allow) return deny(request, decision.reason);
 
   const res = next();
   res.headers.set("Cache-Control", "no-store, private");
