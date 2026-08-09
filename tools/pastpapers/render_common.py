@@ -16,6 +16,32 @@ TPL = os.path.join(HERE, 'template')
 BASE = 'https://marineintelligenceweekly.com'
 CONTACT = 'contactus@marineintelligenceweekly.com'
 
+
+def answers_built(spec):
+    """How many questions in this spec carry an authored model answer."""
+    return sum(1 for q in spec['questions'] if q.get('model_answer'))
+
+
+def is_intake(spec):
+    """True for an INTAKE spec: real transcribed questions, no answers yet.
+
+    Defined here, once, because five stages need the same answer, and a spec
+    that is intake to one stage but solved to another produces exactly the
+    failure this predicate exists to prevent -- a topic page linking to a paper
+    page that was never built.
+
+    The rule matches build_index.paper_status(): a paper is a product only when
+    an answer exists. Holding a transcription is not a product, so an intake
+    paper has NO paper page, no verification directory and no answer-layer
+    fields. Its questions reach the candidate through questions-<year>.html,
+    which already renders them as 'Questions transcribed' and withholds every
+    link to a solved answer.
+
+    An intake paper becomes an ordinary paper the moment its first answer is
+    authored. Nothing is cached and no spec field has to be flipped by hand.
+    """
+    return answers_built(spec) == 0
+
 # localStorage keys. Namespaced by product and schema so a future schema change
 # cannot silently reinterpret old state. Values are keyed by stable question_id
 # (QP2607-Q1), never by DOM order.

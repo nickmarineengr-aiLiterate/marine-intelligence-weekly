@@ -119,9 +119,16 @@ def build_manifest(specs):
             'question_count': len(d['questions']), 'answers_built': len(built),
             'subject_tags': sorted({t for q in d['questions'] for t in (q.get('subject_tags') or [])}),
         })
+        # An intake paper has no page, so its questions have no deep link. A url
+        # that 404s would make the manifest -- which IS the search index --
+        # advertise a destination that does not exist. Null says "not yet" and
+        # forces every consumer to handle it explicitly.
+        status = paper_status(len(built))
+        available = status == 'available'
         for q in d['questions']:
             questions.append({
                 'paper_id': pid, 'question_id': q['question_id'],
+                'paper_status': status,
                 'year': d['year'], 'month': d['month'], 'month_year': d['month_year'],
                 'question_number': q['q_no'], 'marks': q['total_marks'],
                 'question_text': strip_tags(q['text_verbatim']),
@@ -139,8 +146,8 @@ def build_manifest(specs):
                 'answer_status': q['answer_status'],
                 'verification_status': q.get('verification_status'),
                 'verification_file': q.get('verification_file'),
-                'url': url, 'anchor': q['anchor'],
-                'deep_link': '%s#%s' % (url, q['anchor']),
+                'url': url if available else None, 'anchor': q['anchor'],
+                'deep_link': '%s#%s' % (url, q['anchor']) if available else None,
                 'study_guide_available': bool(q.get('study_notes')),
                 'cheat_sheet_available': bool(q.get('quick_revision')),
                 'last_verified': d['updated'],
@@ -193,7 +200,12 @@ def _index_js(man):
     rows = [{'qid': q['question_id'], 'p': q['paper_id'], 'n': q['question_number'],
              'my': q['month_year'], 'y': q['year'], 'm': q['month'], 't': q['short_title'],
              'mk': q['marks'], 'st': q['question_text'][:180],
-             'u': '%s#%s' % (os.path.basename(q['url']), q['anchor']),
+             # Where this search hit goes. A solved question goes to its answer
+             # on the paper page; an intake question has no paper page, so it
+             # goes to where it actually renders -- its card on the year sheet.
+             # Search must never return a result it cannot open.
+             'u': ('%s#%s' % (os.path.basename(q['url']), q['anchor'])
+                   if q['url'] else 'questions-%d.html#%s' % (q['year'], q['question_id'])),
              'sub': q['subject_tags'], 'built': q['answer_status'] != 'Not Built',
              's': q['search_blob']} for q in man['questions']]
     return json.dumps(rows, ensure_ascii=False, separators=(',', ':'))
@@ -398,12 +410,24 @@ def build_topics_page(man, year, publish):
         a('  <div class="tg-sub">%s</div>' % esc(' &middot; '.join(subs)))
         for q in sorted(group, key=lambda x: (x['paper_id'], x['question_number'])):
             used.add(q['question_id'])
-            a('  <div class="hit">')
+            # Stable card identity. The once-only guard counts this, not the
+            # href: a card is a card whether or not its answer exists yet, and
+            # counting links made the guard silently unenforceable for any
+            # question that legitimately has none.
+            a('  <div class="hit" data-qid="%s">' % esc_attr(q['question_id']))
             a('    <div class="hit-top">%s <span class="sep">&middot;</span> %s '
               '<span class="sep">&middot;</span> %s marks</div>'
               % (esc(q['month_year']), esc(q['question_number']), q['marks']))
-            a('    <div class="hit-title"><a href="%s">%s</a></div>'
-              % (esc_attr('%s.html#%s' % (q['paper_id'], q['anchor'])), esc(q['short_title'])))
+            # Link only where there is somewhere to go. A question from an
+            # intake paper is real and belongs on this page, but its answer does
+            # not exist yet, so it renders as plain text with an explicit state
+            # rather than as a link to a page that was never built.
+            if q.get('paper_status') == 'available':
+                a('    <div class="hit-title"><a href="%s">%s</a></div>'
+                  % (esc_attr('%s.html#%s' % (q['paper_id'], q['anchor'])), esc(q['short_title'])))
+            else:
+                a('    <div class="hit-title">%s <span class="q-tag sub">Solution in '
+                  'production</span></div>' % esc(q['short_title']))
             a('    <div class="hit-stem">%s</div>' % esc(q['question_text'][:230] + '&hellip;'))
             # Secondary tags: the subject tags this question carries other than
             # the one naming its primary category, plus its topic tags. They are
@@ -430,9 +454,13 @@ def build_topics_page(man, year, publish):
         a('  <div class="tg-sub">Subject tags not yet mapped in the topic tree &mdash; '
           'extend TOPIC_TREE in build_index.py</div>')
         for q in leftover:
-            a('  <div class="hit"><div class="hit-title"><a href="%s.html#%s">%s %s</a></div></div>'
-              % (esc_attr(q['paper_id']), esc_attr(q['anchor']), esc(q['question_number']),
-                 esc(q['short_title'])))
+            inner = ('<a href="%s.html#%s">%s %s</a>'
+                     % (esc_attr(q['paper_id']), esc_attr(q['anchor']),
+                        esc(q['question_number']), esc(q['short_title']))
+                     if q.get('paper_status') == 'available'
+                     else '%s %s' % (esc(q['question_number']), esc(q['short_title'])))
+            a('  <div class="hit" data-qid="%s"><div class="hit-title">%s</div></div>'
+              % (esc_attr(q['question_id']), inner))
         a('</section>')
 
     a('</main>')

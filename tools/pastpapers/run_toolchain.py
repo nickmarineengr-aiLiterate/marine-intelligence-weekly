@@ -26,6 +26,8 @@ import argparse, glob, io, json, os, subprocess, sys
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+from render_common import is_intake  # noqa: E402
 REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 PP = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers')
 PY = sys.executable
@@ -61,11 +63,23 @@ def main():
 
     # The spec is the source of truth for which pages must exist. Every later
     # stage derives its targets from this list rather than from a filename glob.
-    paper_ids = [json.load(open(sp, encoding='utf-8'))['paper_id'] for sp in specs]
+    #
+    # INTAKE specs -- questions transcribed, no answers authored -- are split out
+    # here. They are validated and they feed the year sheet and the manifest, but
+    # they have no paper page, so building or auditing one is not a thing that
+    # can succeed. Splitting once, from the specs, keeps every later stage
+    # consistent about which papers are products.
+    loaded = [(sp, json.load(open(sp, encoding='utf-8'))) for sp in specs]
+    paper_ids = [d['paper_id'] for _, d in loaded]
+    solved = [(sp, d) for sp, d in loaded if not is_intake(d)]
+    intake = [d['paper_id'] for _, d in loaded if is_intake(d)]
 
     mode = 'PUBLISH' if args.publish else 'review (noindex)'
     print('MIW Written Questions & Answers -- toolchain')
-    print('mode: %s%s   specs: %d' % (mode, ', gated' if args.gated else '', len(specs)))
+    print('mode: %s%s   specs: %d%s'
+          % (mode, ', gated' if args.gated else '', len(specs),
+             '   (%d intake, questions only: %s)' % (len(intake), ', '.join(intake))
+             if intake else ''))
     print('-' * 58)
 
     rc_total, warn_total = 0, 0
@@ -77,7 +91,7 @@ def main():
         rc_total += rc
         warn_total += w
 
-    for sp in specs:
+    for sp, _ in solved:
         rel = os.path.relpath(sp, REPO_ROOT)
         argv = [os.path.join(T, 'build_paper.py'), rel]
         if args.publish:
@@ -107,7 +121,8 @@ def main():
     import shutil
     if shutil.which('node'):
         node_rc, tested = 0, 0
-        for pid in paper_ids:
+        for _, d in solved:
+            pid = d['paper_id']
             pg = os.path.join(PP, '%s.html' % pid)
             if not os.path.exists(pg):
                 print('    MISSING generated page for spec %s: %s'
@@ -175,7 +190,7 @@ def main():
     rc_total += rc
     warn_total += w
 
-    for sp in specs:
+    for sp, _ in solved:
         rel = os.path.relpath(sp, REPO_ROOT)
         argv = [os.path.join(T, 'audit_paper.py'), rel]
         if args.gated:

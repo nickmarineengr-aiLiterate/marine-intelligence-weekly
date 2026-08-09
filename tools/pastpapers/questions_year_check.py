@@ -22,6 +22,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+from html import unescape as _unescape
 from render_common import REPO_ROOT, strip_tags
 import recurrence_model as RM
 
@@ -92,7 +93,13 @@ def check_year(year, errors, warnings):
         # The FULL printed stem must be present, not a preview. Compare on
         # collapsed whitespace so the line-splitting in the renderer is allowed.
         stem = re.sub(r'\s+', ' ', strip_tags(n['text_verbatim'])).strip()
-        flat = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', html))
+        # Unescape before comparing. The spec holds "Hull & Propeller"; the page
+        # correctly holds "Hull &amp; Propeller", so comparing raw spec text
+        # against escaped HTML reports a missing stem for any question with an
+        # ampersand -- or any other escaped character -- in its first 120
+        # characters. No 2026 stem had one, so this stayed latent until the 2025
+        # intake landed three of them.
+        flat = _unescape(re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', html)))
         if stem[:120] not in flat:
             errors.append('%s printed stem not found in the page' % n['question_id'])
         if '%s marks' % n['marks'] not in html:

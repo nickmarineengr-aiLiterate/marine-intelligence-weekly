@@ -34,7 +34,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from render_common import (REPO_ROOT, TPL, BASE, CONTACT, LS_BOOKMARKS, LS_PROGRESS,
                            LS_MIGRATE_JS, STICKY_SYNC_JS, GATE, GATE_STUB, esc, esc_attr, strip_tags,
-                           read_css, block_text, search_tokens, topbar, head_meta, footer)
+                           read_css, block_text, search_tokens, topbar, head_meta, footer,
+                           is_intake)
 
 CHEV = ('<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>')
@@ -689,6 +690,17 @@ def main():
     args = ap.parse_args()
 
     spec = json.load(open(args.spec, encoding='utf-8'))
+
+    # An intake spec has questions but no answers, so there is no paper page to
+    # build. Refusing here -- rather than rendering a page of empty answer cards
+    # -- is what stops a transcription from ever looking like a product. Exit 0:
+    # this is the correct outcome for such a spec, not a failure.
+    if is_intake(spec):
+        print('SKIP %s: intake spec, no answers authored yet. Its questions '
+              'render on questions-%d.html; a paper page is built once the '
+              'first answer exists.' % (spec['paper_id'], spec['year']))
+        return
+
     html = build(spec, gated=args.gated, publish=args.publish)
 
     out = args.out or os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers',

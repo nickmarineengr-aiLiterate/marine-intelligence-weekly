@@ -81,6 +81,19 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
     if not errs:
         ok('%d paper id(s) and %d question id(s) unique' % (len(pids), len(qids)))
 
+    # Intake papers -- transcribed questions, no answers -- are held to a
+    # DIFFERENT contract, not a weaker one. They must not have a paper page, must
+    # not claim a deep link, and must never report as available; what they must
+    # have is a complete, tagged transcription. Separating the two sets here is
+    # what lets each be checked against the rules that actually apply to it.
+    intake = {p['paper_id'] for p in man['papers']
+              if p.get('paper_status') != 'available'}
+    # Every check below that reads a rendered paper page runs over this list, not
+    # over man['papers']. An intake paper has no page, so those checks have
+    # nothing to read and would report the absence as a defect.
+    solved_papers = [p for p in man['papers'] if p['paper_id'] not in intake]
+
+    errs_before = len(errs)
     specs = {}
     for p in man['papers']:
         sp = os.path.join(REPO_ROOT, p['spec'])
@@ -88,10 +101,25 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
             err('spec missing for %s: %s' % (p['paper_id'], p['spec']))
             continue
         specs[p['paper_id']] = json.loads(rd(sp))
-        if not os.path.exists(os.path.join(REPO_ROOT, p['file'])):
+        page_exists = os.path.exists(os.path.join(REPO_ROOT, p['file']))
+        if p['paper_id'] in intake:
+            # The dangerous direction: a page left behind after a paper's answers
+            # were removed would keep serving content the manifest calls unbuilt.
+            if page_exists:
+                err('%s is an intake paper (no answers) but a generated page exists at %s. '
+                    'Delete it: a transcription must never be reachable as a solved paper.'
+                    % (p['paper_id'], p['file']))
+            if p['answers_built']:
+                err('%s: paper_status is not available but answers_built is %d'
+                    % (p['paper_id'], p['answers_built']))
+        elif not page_exists:
             err('generated page missing for %s: %s' % (p['paper_id'], p['file']))
-    if len(specs) == len(man['papers']):
-        ok('every manifest paper has a spec and a generated page')
+    # Report success only if this section actually raised nothing. Gating on
+    # len(specs) alone printed the all-clear beside its own contradicting error.
+    if len(specs) == len(man['papers']) and len(errs) == errs_before:
+        ok('every manifest paper has a spec; every solved paper has a page and no '
+           'intake paper does (%d solved, %d intake)'
+           % (len(man['papers']) - len(intake), len(intake)))
 
     # ---------- 2 content completeness ----------
     for pid, d in specs.items():
@@ -108,7 +136,11 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
                 err('%s: no short_title (side index and search need it)' % tag)
             if not (q.get('topic_tags') or q.get('subject_tags')):
                 err('%s: no tags' % tag)
-            if not q.get('search_aliases'):
+            # search_aliases are authored alongside the answer -- they encode the
+            # vocabulary a candidate searches for having read it. Demanding them
+            # at intake would force a guess, and a guessed alias is worse than
+            # none: the year sheet's own tokens already cover the printed stem.
+            if not q.get('search_aliases') and pid not in intake:
                 err('%s: no search_aliases' % tag)
             if not q.get('total_marks'):
                 err('%s: no marks' % tag)
@@ -178,7 +210,7 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
     if not dead:
         ok('all relative links and cross-page anchors resolve (%d page(s))' % len(pages))
 
-    for p in man['papers']:
+    for p in solved_papers:
         body = pages.get(N(REPO_ROOT, p['file']), '')
         missing = [q['anchor'] for q in specs[p['paper_id']]['questions']
                    if 'id="%s"' % q['anchor'] not in body]
@@ -189,13 +221,25 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
 
     # deep links recorded in the manifest must actually resolve
     bad_deep = 0
+    linked = 0
     for q in man['questions']:
+        if q['paper_id'] in intake:
+            # Both halves matter. A null deep link on an intake question is
+            # correct; a non-null one would advertise a page that was never
+            # built, which is the precise defect this pair of checks exists for.
+            if q.get('url') or q.get('deep_link'):
+                err('%s: intake question carries a deep link (%s) but its paper has no page'
+                    % (q['question_id'], q.get('deep_link')))
+                bad_deep += 1
+            continue
+        linked += 1
         tp = N(REPO_ROOT, q['url'])
         if tp in pages and ('id="%s"' % q['anchor']) not in pages[tp]:
             err('manifest deep_link does not resolve: %s' % q['deep_link'])
             bad_deep += 1
     if not bad_deep:
-        ok('all %d manifest deep links resolve' % len(man['questions']))
+        ok('all %d manifest deep links resolve; the other %d are intake questions '
+           'and correctly carry none' % (linked, len(man['questions']) - linked))
 
     # MEO Class I hub link
     hub = os.path.join(REPO_ROOT, 'meoclass1', 'index.html')
@@ -206,7 +250,7 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
             warn('MEO Class I hub does not yet link to /meoclass1/pastpapers/')
 
     # ---------- 4 search + interaction metadata ----------
-    for p in man['papers']:
+    for p in solved_papers:
         body = pages.get(N(REPO_ROOT, p['file']), '')
         n_search = body.count('data-search=')
         n_qid = body.count('data-qid=')
@@ -226,7 +270,7 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
     # ---------- 5 build reproducibility ----------
     try:
         import build_paper, build_index
-        for p in man['papers']:
+        for p in solved_papers:
             d = specs[p['paper_id']]
             rebuilt = build_paper.build(d, gated=False, publish=publish_mode)
             disk = pages[N(REPO_ROOT, p['file'])]
@@ -244,7 +288,7 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
         warn('reproducibility check could not run: %s' % e)
 
     # ---------- 6 review / publication state ----------
-    for p in man['papers']:
+    for p in solved_papers:
         body = pages.get(N(REPO_ROOT, p['file']), '')
         noindex = 'noindex' in body
         gated = 'miw_auth=1' in body
@@ -309,12 +353,17 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
                 'identity everywhere: the QP series.' % (label, m.group(0)))
 
     for pid in pids:
-        pg = N(PP, '%s.html' % pid)
-        if not os.path.exists(pg):
-            err('no generated page for paper %s (expected %s.html)' % (pid, pid))
         sp = N(PP, 'specs', '%s.json' % pid)
         if not os.path.exists(sp):
             err('no spec named for paper %s (expected specs/%s.json)' % (pid, pid))
+        if pid in intake:
+            # A verification directory records how an ANSWER was sourced and
+            # red-teamed. An intake paper has no answer, so requiring one would
+            # invite an empty directory that asserts work nobody did.
+            continue
+        pg = N(PP, '%s.html' % pid)
+        if not os.path.exists(pg):
+            err('no generated page for paper %s (expected %s.html)' % (pid, pid))
         vdir = N(PP, 'verification', pid)
         if not os.path.isdir(vdir):
             err('no verification directory for paper %s (expected verification/%s/)'
@@ -417,7 +466,10 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
         for q in man['questions']:
             if q['year'] != year:
                 continue
-            n = tp.count('%s.html#%s"' % (q['paper_id'], q['anchor']))
+            # Count the card, not the link. An intake question renders a card
+            # with no href, so counting links would score it 0 and, worse, would
+            # stop detecting genuine duplication for exactly those questions.
+            n = tp.count('data-qid="%s"' % q['question_id'])
             if n != 1:
                 err('topics-%d.html: %s appears %d time(s), expected exactly 1. '
                     'One primary category per question -- a question rendered under '
@@ -461,10 +513,16 @@ def main():
         print('  self-test: injecting faults and asserting the checker fires')
         # Derive the page to inject into from the specs. Hardcoding a filename
         # here means a paper rename silently changes what the self-test covers.
-        spec_ids = sorted(json.loads(rd(p))['paper_id']
-                          for p in glob.glob(os.path.join(PP, 'specs', '*.json')))
+        # Only a SOLVED paper has a page to inject a fault into. Sorting all
+        # spec ids and taking the first would pick QP2501 -- an intake spec with
+        # no page -- and abort the whole self-test, silently removing the
+        # positive control that proves these checks can fail.
+        spec_ids = sorted(d['paper_id'] for d in
+                          (json.loads(rd(p))
+                           for p in glob.glob(os.path.join(PP, 'specs', '*.json')))
+                          if any(q.get('model_answer') for q in d['questions']))
         if not spec_ids:
-            print('  [SELFTEST FAIL] no spec found to derive a paper page from')
+            print('  [SELFTEST FAIL] no solved spec found to derive a paper page from')
             sys.exit(1)
         paper = N(PP, '%s.html' % spec_ids[0])
         if not os.path.exists(paper):
