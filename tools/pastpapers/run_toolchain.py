@@ -9,6 +9,10 @@ Runs, in dependency order:
     PAPER BUILD   build_paper.py        one interactive page per paper
     INDEX BUILD   build_index.py        manifest + index.html + topics-<year>.html
     UI BEHAVIOUR  ui_behaviour_test.cjs search/bookmarks/progress (skipped if no node)
+    QYEAR BUILD   build_questions_year.py   questions-<year>.html, answers excluded
+    QYEAR CHECK   questions_year_check.py   54-question integrity + answer-leak sweep
+    SAMPLE BUILD  build_sample.py           free conversion sample from a projection
+    SAMPLE CHECK  sample_check.py           withheld content absent from shipped bytes
     KNOWN TRAPS   known_traps_check.py  traps we have already been caught by
     HEALTH        health_check.py       product coherence, links, safety, review state
     AUDIT         audit_paper.py        each page faithful to its spec
@@ -127,6 +131,33 @@ def main():
     else:
         print('%-13s SKIP  (node not available; product has no node dependency)'
               % 'UI BEHAVIOUR')
+
+    # Questions-only year sheet and the free conversion sample. Both are
+    # generated from the same specs and both are checked immediately after
+    # being built, because the thing that can go wrong with them is not a
+    # broken page but a page that quietly gives the paid product away.
+    argv = [os.path.join(T, 'build_questions_year.py')]
+    if args.publish:
+        argv.append('--publish')
+    rc, w = run('QYEAR BUILD', argv, args.verbose)
+    rc_total += rc
+    warn_total += w
+
+    rc, w = run('QYEAR CHECK', [os.path.join(T, 'questions_year_check.py')], args.verbose)
+    rc_total += rc
+    warn_total += w
+
+    if glob.glob(os.path.join(PP, 'sample', '*.sample.json')):
+        argv = [os.path.join(T, 'build_sample.py')]
+        if args.publish:
+            argv.append('--publish')
+        rc, w = run('SAMPLE BUILD', argv, args.verbose)
+        rc_total += rc
+        warn_total += w
+
+        rc, w = run('SAMPLE CHECK', [os.path.join(T, 'sample_check.py')], args.verbose)
+        rc_total += rc
+        warn_total += w
 
     argv = [os.path.join(T, 'known_traps_check.py')]
     if args.self_test:

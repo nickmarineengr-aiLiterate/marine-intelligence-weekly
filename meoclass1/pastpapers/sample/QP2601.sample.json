@@ -1,0 +1,64 @@
+{
+  "sample_version": "1",
+  "paper_id": "QP2601",
+  "output": "SQ/solved-qp-sample-january-2026.html",
+  "canonical_note": "This file is a PROJECTION CONFIGURATION, not content. Every word the sample page shows is read from specs/QP2601.json at build time. If the January paper is corrected, rebuild the sample; never edit the generated HTML and never copy answer text into this file.",
+
+  "full_demo_questions": ["Q1", "Q5"],
+
+  "selection_rule": "A full-demo question must be a SINGLETON in the canonical recurrence model. Six of January's nine questions are the first occurrence of a family that returns in a later 2026 sitting, so publishing one of them in full also publishes its paid twin. Q3 is the worst case: its family reaches QP2607-Q5, the July paper the storefront is trying to sell. build_sample.py enforces this and fails the build if a chosen question has relatives.",
+
+  "selection_rationale": {
+    "Q1": {
+      "title": "Low-Load Two-Stroke Operation",
+      "category": "Alternative Fuels & Decarbonisation",
+      "archetype": "explain",
+      "why_commercial": "Slow steaming is the most recognisable operational topic on the paper. An engineer scanning a sample page stops here, and it is immediately obvious that the answer is written by someone who has run the machinery.",
+      "why_the_modes_work": "Longest route in the paper at 8 steps over 32 core points, and the only January question carrying a memory_cue. The knowledge map and the Recall skeleton have something real to show, which is exactly the thing a plain model answer cannot demonstrate.",
+      "why_safe": "Family singleton - unlocks no other sitting. 0 blocking flags.",
+      "known_cost": "Carries one B-class currency flag (IMO Net-Zero Framework approved but not adopted). It must be re-checked immediately before publication, and again if the reconvened extraordinary MEPC session adopts the framework."
+    },
+    "Q5": {
+      "title": "Tank Corrosion, Coatings and the Coating Technical File",
+      "category": "Statutory Framework & Class",
+      "archetype": "explain",
+      "why_commercial": "Four printed sub-limbs, so it demonstrates the thing candidates lose marks on: answering every limb visibly and in order.",
+      "why_the_modes_work": "The Exam Plan maps one route step to each printed limb, so the value of planning before writing is visible rather than asserted.",
+      "why_safe": "Family singleton. 0 blocking flags and NO currency flags at all - the cleanest verification record available for a permanently public page.",
+      "known_cost": "None recorded."
+    },
+    "variety_limitation": "The Founder asked for one technical and one legal/regulatory demonstration. That combination is not available in January without a commercial cost: every legal-archetype question in the paper (Q3, Q4, Q7) is a family first-occurrence. Q1 + Q5 is the closest honest pairing - an operational engineering question and a statutory/class-framework question, in two different primary categories. If a legal demonstration is wanted, Q4 is the cheapest at one extra unlocked question (QP2604-Q4); Q3 is the most expensive and must not be used, because it unlocks July.",
+    "alternates_considered": {
+      "Q2": "Also a safe singleton with the richest knowledge map in the paper (41 core points) and no currency flags. Held as the reserve if the Founder wants to swap either demo. Not chosen only because 'Human Element & Management' is a softer hook on a first visit than machinery or class survey."
+    }
+  },
+
+  "preview_pattern": "understand_plus_route_titles",
+  "preview_contract": {
+    "shows": [
+      "the full printed question, verbatim, with every sub-limb and its printed marks",
+      "marks, primary category and honest recurrence intelligence",
+      "the Understand orientation paragraph in full",
+      "the first N answer_route step TITLES, with the remaining count stated",
+      "a depth summary: route steps, core points, flashcards"
+    ],
+    "withholds": [
+      "the model written answer, entirely",
+      "the study guide, entirely",
+      "the recall test and the blank skeleton",
+      "flashcard fronts and backs",
+      "quick revision, critical numbers, critical regulation and major trap",
+      "every answer_route POINT beneath a step title"
+    ],
+    "route_titles_shown": 3,
+    "why_titles_not_points": "A step title says WHERE TO START AND IN WHAT ORDER, which is the conversion argument the Founder asked for. The points beneath it are the scoring propositions in compressed form - 25 to 41 of them per question - and publishing those for seven questions would hand over most of the paper.",
+    "why_understand_first": "understand_first is orientation, not scoring content. The three-layer rule puts scoring material in the model answer and explanation in the study guide, so this is the one authored layer that can be given away in full without giving away marks. It is also the layer that best demonstrates that a human who understands the topic wrote the paper."
+  },
+
+  "commercial": {
+    "price_display": "PRICE_TBD",
+    "price_note": "No Solved QP price has been approved. The generator refuses to render a currency value while this is PRICE_TBD, so a placeholder cannot be published by accident.",
+    "cta_href": "/SQ/index.html#solved-qp",
+    "cta_label": "Unlock the complete solved papers"
+  }
+}
