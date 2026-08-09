@@ -48,9 +48,25 @@ def _years(specs):
     return sorted({d['year'] for d in specs})
 
 
-def _solved_years(specs):
+def _solved_papers(specs):
+    """Papers with every question built.
+
+    This replaced _solved_years at the first paper-by-paper build. The old
+    function returned every year containing ANY built answer, and the planning
+    sections then skipped those years wholesale -- which was correct only while
+    a year was either entirely solved or entirely untouched. Solving one 2025
+    paper made 2025 a "solved year" and silently deleted the other ten 2025
+    papers, and ninety unsolved questions, from the tier table, the temporal
+    table and the recommended solving order. Exclusion is per PAPER.
+    """
+    return {d['paper_id'] for d in specs
+            if all(q.get('model_answer') for q in d['questions'])}
+
+
+def _open_years(specs, built):
+    """Years that still contain at least one unsolved question."""
     return sorted({d['year'] for d in specs
-                   if any(q.get('model_answer') for q in d['questions'])})
+                   for q in d['questions'] if q['question_id'] not in built})
 
 
 def build():
@@ -58,7 +74,8 @@ def build():
     byq = {q['question_id']: (d, q) for d in specs for q in d['questions']}
     built = {qid for qid, (_, q) in byq.items() if q.get('model_answer')}
     years = _years(specs)
-    solved_years = _solved_years(specs)
+    solved_papers = _solved_papers(specs)
+    open_years = _open_years(specs, built)
     unsolved = [n for n in nodes.values() if n['question_id'] not in built]
 
     o = []
@@ -185,14 +202,16 @@ def build():
     # ---- 5 reuse tiers
     a('## 5. REUSE MAP')
     a('')
-    open_years = [y for y in years if y not in solved_years]
     a('| Tier | %s | Definition as applied |' % ' | '.join(str(y) for y in open_years))
     a('|' + '---|' * (len(open_years) + 2))
     for t, why in (('A', 'Not assigned. An existing canonical object fully covers the demand.'),
                    ('B', 'Not assigned. An existing canonical object partly covers the demand.'),
                    ('C', 'No family member with a built answer. New research.'),
                    ('D', 'Family contains a question whose answer is built and verified.')):
-        counts = [sum(1 for n in nodes.values() if n['year'] == y
+        # Count UNSOLVED questions only. A tier is a statement about work still
+        # to do, so a solved question inside a part-solved year must not be
+        # counted against it.
+        counts = [sum(1 for n in unsolved if n['year'] == y
                       and byq[n['question_id']][1].get('reuse_tier') == t)
                   for y in open_years]
         a('| %s | %s | %s |' % (t, ' | '.join('**%d**' % c if t == 'D' else str(c)
@@ -249,9 +268,7 @@ def build():
     flagged = [(n, t) for n, t in tr if t.get('state') != 'STABLE']
     a('| Year | Stable | Review required | HIGH | MEDIUM |')
     a('|---|---|---|---|---|')
-    for y in years:
-        if y in solved_years:
-            continue
+    for y in open_years:
         yf = [(n, t) for n, t in flagged if n['year'] == y]
         yt = [(n, t) for n, t in tr if n['year'] == y]
         a('| %d | %d | **%d** | %d | %d |'
@@ -291,7 +308,7 @@ def build():
     a('')
     rows = []
     for d in specs:
-        if d['year'] in solved_years:
+        if d['paper_id'] in solved_papers:
             continue
         pid = d['paper_id']
         qs = [q['question_id'] for q in d['questions']]

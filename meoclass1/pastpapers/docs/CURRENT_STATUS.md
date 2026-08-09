@@ -1,9 +1,15 @@
-# CURRENT STATUS — MEO Class I Written Questions / 2026 solved, 2025 intake complete
+# CURRENT STATUS — MEO Class I Written Questions / 2026 solved, QP2508 solved, 2024-2025 intake complete
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-09, at the close of the **2025 QUESTION INTELLIGENCE** session. Read this first.
+Last updated: 2026-08-10, at the close of the **QP2508 AUGUST 2025 SOLVED-PAPER PRODUCTION** session. Read this first.
 
-> # **§22 IS THE NEWEST SECTION. READ IT BEFORE ANYTHING BELOW IT, INCLUDING §21.**
+> # **§24 IS THE NEWEST SECTION. READ IT FIRST.**
+>
+> **QP2508 August 2025 is SOLVED — 63 of 252 questions built, 7 solved papers.**
+> Branch `pastpapers/qp2508-founder-review`. Next session is **QP2403 March 2024**.
+> Two temporal findings, one of which the intake flag missed; three generator defects fixed.
+
+> # **§22 — superseded by §24, still current for the 2025 intake picture.**
 >
 > Branch **`pastpapers/2025-question-intake`**, cut from `217fbba` — the accepted content baseline,
 > deliberately **not** the Security V2 branch. Security V2 stays frozen at `eaedfda` and was not
@@ -2026,3 +2032,170 @@ two sittings.
   PRODUCTION** — there are no new solved answers to measure, and the standing warnings are the
   existing 2026 answers exceeding the 450–650 band for 16 marks. Re-derive the band per printed limb
   when authoring resumes, not before.
+
+---
+
+# §24 — QP2508 AUGUST 2025 SOLVED. FIRST PAPER OF THE 2025 PRODUCTION RUN. 2026-08-10
+
+> **§24 IS NOW THE NEWEST SECTION. READ IT BEFORE §23 AND §22.**
+
+Branch **`pastpapers/qp2508-founder-review`**, cut from `7ca36b6`. Security V2 untouched at `eaedfda`.
+Nothing merged, nothing published, no source PDF committed.
+
+## 24.1 What exists now — FACT
+
+| | Before | After |
+|---|---|---|
+| Papers | 28 | 28 |
+| Question instances | 252 | 252 |
+| **Solved** | **54** | **63** |
+| Unsolved | 198 | 189 |
+| Solved papers | 6 (all 2026) | **7 (2025–2026)** |
+
+**QP2508 August 2025 is built: 9 / 9 READY, 0 class A blocking flags**, 21 re-verification flags
+(B_CURRENCY_CHECK on the date-driven claims, the rest C_ACCEPTED_LIMITATION).
+
+**All six 2026 specs and all six 2026 paper pages are byte-identical to `7ca36b6`.** No 2024 spec and
+no other 2025 spec was touched. `questions-2025.html` now deep-links only QP2508's nine questions;
+the other ninety 2025 questions remain answerless year-card destinations.
+
+Toolchain: **ALL STAGES PASS, 59 warnings** (47 pre-existing + 12 QP2508 word-band). Build run twice:
+**41 generated files, 0 differ.**
+
+## 24.2 The two temporal findings — one predicted, one NOT
+
+**Q8 (predicted, HIGH).** The intake correctly called this the most dangerous reuse in the set, and
+it was. The February 2026 donor's status step is an account of the **MEPC/ES.2 adjournment of 14–17
+October 2025** — an event **four months in the future** when this paper was sat. The step was
+**replaced, not adapted**. The correct August 2025 position, fixed against **IMO Circular Letter
+No.5005 of 11 April 2025** (the article 16(2)(a) circulation itself): approved at MEPC 83
+(7–11 April 2025), **circulated for adoption at MEPC/ES.2 (14–17 October 2025)**, therefore
+**approved and circulated, NOT adopted, NOT in force, adoption session not yet held.**
+
+A second-order contamination was also caught: the donor lists "it enters into force in 2027" among
+its *common mistakes*. At **this** sitting that was the reasonable expectation, so importing the
+bullet would have taught the candidate that a correct August 2025 statement was an error.
+
+**Q3 (NOT predicted — the intake flag was WRONG).** The intake records
+`temporal_review: STABLE / LOW` for Q3. It is not stable. The donor closes on resolutions
+**MSC.550(108)** and **MSC.555(108)** as amendments *in force* — true from **1 January 2026**, and
+**five months in the future** at this sitting, where they were **adopted (MSC 108, May 2024) but not
+yet in force**. An in-force date falls *between* this sitting and every donor in the family.
+
+> **This was caught by the mandatory assembled-answer sweep, not by the flag.** Had the flag been
+> trusted, a five-month currency error would have shipped inside a question labelled low risk.
+> **The sweep is not a formality.** The intake flag is reported here, deliberately not silently
+> patched — a future session should decide whether to correct the `temporal_review` on that question.
+
+## 24.3 A verification upgrade the 2026 set should inherit
+
+QP2602 Q8 records as an accepted limitation that the draft Chapter 5 text "was not read" and that
+"**no consolidated text exists**". The second half is **not correct**: the draft consolidated revised
+MARPOL Annex VI **is the annex to Circular Letter No.5005**, and it was read here — regulations 30
+to 44 in full. Every Chapter 5 figure in QP2508 Q8 (5,000 GT threshold; GFI reference 93.3; Table 4
+base/direct factors 4.0/17.0 for 2028 rising to 30.0/43.0 for 2035; US$100 and US$380 remedial units;
+ZNZ 19.0 tightening to 14.0 from 2035; two-year surplus unit validity; the reg 44 review
+contemplating 400 GT) is therefore **primary-verified**, where the donor held it at
+authoritative-secondary.
+
+**Recommended follow-up, not actioned:** revisit QP2602 Q8's `unresolved` and
+`reverify_before_publication` in the light of this.
+
+## 24.4 Indian statutory boundary — resolved, and sharper than the donor's
+
+Both Q5 and Q9 carried `INDIAN STATUTE BOUNDARY / HIGH`. **The boundary lies after this sitting**, so
+the Merchant Shipping Act 1958 governs both, exactly as it did for the February 2026 donors — **no
+statutory regression was required**. What this sitting adds is a better fact than the donor's
+"five weeks":
+
+> The **Merchant Shipping Act, 2025** (Act No. 24 of 2025) received the assent of the President on
+> **18 August 2025 — the same month as this examination** — and still did not commence until
+> **15 March 2026** (S.O. 1244(E)). **Assent is not commencement.**
+
+That is now the teaching point of Q5, and it ties to Q7 (adoption versus entry into force) and Q8
+(the same problem in an IMO instrument). The Bharatiya Nyaya Sanhita 2023 had been in force since
+**1 July 2024**, over a year before this sitting, so citing the IPC was *already* an error here.
+
+## 24.5 Three generator defects found by being the first non-2026 paper
+
+**(a) `build_reuse_map.py` dropped a whole year.** `_solved_years()` returned every year containing
+*any* built answer, and three planning sections then skipped those years wholesale. Solving one 2025
+paper made 2025 a "solved year" and **silently deleted the other ten 2025 papers — ninety unsolved
+questions — from the tier table, the temporal table and the recommended solving order.** Solving
+QP2403 next would have deleted 2024 too, leaving the map empty.
+
+Fixed: exclusion is now **per paper** (`_solved_papers`), open years are those still containing an
+unsolved question, and tier counts count unsolved questions only. **Positive control run:** QP2506
+temporarily marked fully built → QP2506 alone left the solving order, 2025 stayed in the tier table,
+the other nine 2025 papers remained listed. Clean state restored.
+
+**(b) `build_sample.py` mislabelled the commercial sample.** The offer block hard-coded "The complete
+**2026** solved paper set" and then listed **August 2025** beneath it; the count read "every 6
+sitting", ungrammatical for every N. Both now derive from the data: "The complete 2025–2026 solved
+paper set … all 7 sittings". Wording only — no commercial activation.
+
+**(c) `ui_behaviour_test.cjs`** required a `FIXTURES` entry for the new paper, as its own comment
+says. Added, including the inverted host-recurrence leak probe. **61 passed, 0 failed.**
+
+## 24.6 Reuse map — before and after
+
+| Tier | 2024 before | 2024 after | 2025 before | 2025 after |
+|---|---|---|---|---|
+| C | 92 | 92 | 79 | **78** |
+| D | 7 | 7 | 20 | **12** |
+
+2025 D falls by the eight Tier D questions solved; 2025 C falls by one (Q6, the only Tier C). Totals
+reconcile: 92 + 78 + 7 + 12 = **189 unsolved**.
+
+**Seven unsolved questions gained a QP2508 donor**, and they are *date-adjacent*, which matters more
+than the count:
+
+| Question | Gains | Why it beats the 2026 donor |
+|---|---|---|
+| QP2506-Q9 (June 2025) | QP2508-Q5 | same statute era — no 15 March 2026 boundary to regress across |
+| QP2509-Q2 (September 2025) | QP2508-Q2 | **same CII review window** (after MEPC 83, before 1 Jan 2026) — **zero temporal change needed** |
+| QP2506-Q2, QP2511-Q9 | QP2508-Q7 | stable either way |
+| QP2404-Q7, QP2502-Q2, QP2506-Q8 | QP2508-Q4 | stable either way |
+
+## 24.7 Next session — QP2403 MARCH 2024. The recommendation HOLDS, on stronger evidence
+
+| Paper | Tier D | Family reach | Temporal flags |
+|---|---|---|---|
+| QP2506 June 2025 | 4 / 9 | 5 | 1 |
+| **QP2403 March 2024** | **0 / 9** | **12** | **0** |
+| QP2510 October 2025 | 0 / 9 | 12 | 0 |
+
+QP2506 is now top of the *readiness* table, but its reach fell from 9 to 5 — QP2508 already converted
+what they shared. **QP2403's reach of 12 is the only one QP2508 did not touch**, and the decisive
+fact is re-verified from the regenerated map:
+
+> **All nine March 2024 questions map one-to-one onto October 2025** — Q1→Q1 through Q9→Q9.
+> **QP2403 and QP2510 are the same paper.** Solving QP2403 takes QP2510 from **0/9 to 9/9 Tier D**.
+
+It is the only paper in the corpus whose solution hands over a *complete second paper*; it has **zero
+temporal flags**, unique at its size; and it is nine questions of genuinely new research, the
+opposite workload from QP2508, which will test the pipeline where QP2508 did not.
+
+**Next session: QP2403 — MARCH 2024 SOLVED-PAPER PRODUCTION.**
+
+## 24.8 Open items carried forward
+
+- **Answer-length band.** Now measurable. QP2508: **837–1141 words, mean 1029**. The 2026 corpus:
+  median 905, range 572–1516, **7 of 54 inside the 450–650 band**. With QP2508 the band now fails
+  **59 of 63** built answers, so it is not a useful warning as written. Evidence for re-deriving it:
+  median **29.4 words per core point**, with QP2508 at 30–34 core points per question. **Founder
+  decision still required; deliberately not changed here.**
+- **The Q3 intake temporal flag is wrong** (§24.2). Reported, not patched.
+- **`primary_category` divergence.** QP2602-Q9 is `Statutory Framework & Class`; the QP2508 intake
+  classifies the identical question `Indian Maritime Legislation`. The **intake value was kept**, so
+  that an answer build does not move a question on `topics-2025.html`. Pre-existing, reported.
+- **QP2508 Q4 is one of four identical objects** (QP2601-Q9, QP2602-Q4, QP2604-Q9). A correction to
+  any one must be applied to all four.
+
+## 24.9 Stop conditions still in force
+
+- **Do not** start QP2403's answers without authorisation. 189 questions remain `Not Built`.
+- **Do not** ingest another year. Intake is closed at 2024–2026.
+- **Do not** reopen Security V2 (`eaedfda`), Vercel, Razorpay or customer migration.
+- **Do not** merge to `main`. **Do not** publish QP2508 into `/solvedQP/`. Founder review first.
+- **Do not** commit or delete the source PDFs.

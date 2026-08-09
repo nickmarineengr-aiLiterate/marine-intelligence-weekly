@@ -200,6 +200,40 @@ const FIXTURES = {
     // radio certificate's full name cannot collide with anything else.
     narrow: ['cargo ship safety radio certificate', 'QP2606-Q8'],
   },
+  // First paper of the 2025 solved-production run, and the first entry here for
+  // a paper that is not from the 2026 set.
+  QP2508: {
+    probes: [
+      ['tojo maru', 'QP2508-Q1'],
+      ['carbon intensity indicator', 'QP2508-Q2'],
+      ['thermal runaway', 'QP2508-Q3'],
+      // 'fatigue' would also resolve to Q4 alone, but sleep debt is unique to
+      // the Guidelines half of the question and so probes the more specific limb.
+      ['sleep debt', 'QP2508-Q4'],
+      ['unseaworthy', 'QP2508-Q5'],
+      ['york antwerp', 'QP2508-Q6'],
+      ['signature subject to ratification', 'QP2508-Q7'],
+      // NOT 'net-zero framework' -- Q2 cross-refers to it when separating the
+      // in-force CII from the proposed Chapter V, so it resolves to two cards.
+      ['ghg fuel intensity', 'QP2508-Q8'],
+      ['exclusive economic zone', 'QP2508-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['special drawing rights', 'QP2508-Q1', 'the LLMC question (the card writes only SDR)'],
+      ['annual efficiency ratio', 'QP2508-Q2', 'Q2 (the card writes only AER)'],
+      ['yar', 'QP2508-Q6', 'Q6 (the abbreviation is never rendered)'],
+      ['world merchant fleet tonnage', 'QP2508-Q7', 'Q7'],
+    ],
+    regulation: ['mepc.377(80)', 'QP2508-Q8'],
+    // Leak probe. This code is printed on the source copy against Q5, which
+    // carries the heaviest host annotation on the paper - six prior sittings.
+    // None of it may reach the shipped bytes.
+    recurrence: ['2023/jul/q9', 'QP2508-Q5'],
+    // Must resolve to exactly ONE card. August sets general average in Q6 and
+    // excepts it from limitation in Q1, so the probe is Rule VII's own heading.
+    narrow: ['damage to machinery and boilers', 'QP2508-Q6'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';

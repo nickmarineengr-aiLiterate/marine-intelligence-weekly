@@ -430,10 +430,17 @@ def build_sample(cfg, specs, publish):
         a('')
 
     # ---- paper-level offer ----------------------------------------------
+    # The year label is DERIVED, not hard-coded. It read "2026" while every
+    # solved paper was from 2026; the first 2025 paper to be solved made that
+    # heading false while listing the 2025 sitting immediately beneath it.
+    # "every N sitting" was also ungrammatical for every N.
+    yrs = sorted({d['year'] for d in solved_papers})
+    span = str(yrs[0]) if len(yrs) == 1 else '%d&ndash;%d' % (yrs[0], yrs[-1])
     a('<section class="sq-offer" id="unlock">')
-    a('  <h2>The complete 2026 solved paper set</h2>')
-    a('  <p>January is your free sample. MIW Solved QP covers every %d sitting we have solved, '
-      'each question with the same five-mode treatment you have just used.</p>' % len(solved_papers))
+    a('  <h2>The complete %s solved paper set</h2>' % span)
+    a('  <p>January is your free sample. MIW Solved QP covers all %d sitting%s we have solved, '
+      'each question with the same five-mode treatment you have just used.</p>'
+      % (len(solved_papers), '' if len(solved_papers) == 1 else 's'))
     a('  <div class="sq-months">')
     for d in solved_papers:
         newest_flag = (newest is not None and d['paper_id'] == newest['paper_id'])
