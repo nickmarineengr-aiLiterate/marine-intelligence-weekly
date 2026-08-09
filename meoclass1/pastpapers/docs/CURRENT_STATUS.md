@@ -1,9 +1,23 @@
 # CURRENT STATUS — MEO Class I Written Questions / the complete 2026 set
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-09, at the close of the **2026 V1 PRODUCT REVIEW** session. Read this first.
+Last updated: 2026-08-09, at the close of the **COMMERCIAL SECURITY V2** session. Read this first.
 
-> # **§21 IS THE NEWEST SECTION. READ IT BEFORE ANYTHING BELOW IT.**
+> # **§22 IS THE NEWEST SECTION. READ IT FIRST — IT SUPERSEDES ONE OF §21's OPEN FINDINGS.**
+>
+> Branch **`commerce/solvedqp-security-v2`**, cut from `217fbba`. It delivered MIW Paid Content
+> Security V2, the root-level `/solvedQP/` product, ₹1,500 Solved QP commerce, and the complete
+> January Written promo for Oral subscribers. See **§22** and `docs/COMMERCIAL_ARCHITECTURE.md`.
+>
+> **The third-party recurrence blocker named in §21 is FIXED** — it was leaking in three places,
+> not one, including the invisible `data-search` payload on every page.
+>
+> **The answer-length finding from §21 remains open and was deliberately deferred.** See §22.
+>
+> **All six specs and all six review papers remain byte-identical to `0c6932a`.** Nothing merged
+> to `main`.
+
+> # **§21 IS THE PREVIOUS SECTION. READ IT BEFORE ANYTHING BELOW IT.**
 >
 > The review session promised by §18 has happened. Branch **`pastpapers/2026-v1-product-review`**,
 > cut from `0c6932a`. It produced the six-paper intelligence review, the V1 decision register, the
@@ -1694,3 +1708,131 @@ making the two filter rows single-line and horizontally scrollable. The paper pa
 No spec edited · no validator changed · no generated paper page changed · nothing published ·
 `noindex` intact · **`SQ/index.html`, `SQ/pay.html` and `api/**` untouched** · no Razorpay pricing
 touched · no test orders issued · no 2025 production · no merge to `main` · no production agent.
+
+---
+
+# §22 — COMMERCIAL SECURITY V2 + ROOT-LEVEL SOLVED QP PRODUCT
+
+**Session date:** 2026-08-09
+**Branch:** `commerce/solvedqp-security-v2`, cut from `217fbba`
+**Merged to main:** NO. Nothing published.
+**Full design document:** `docs/COMMERCIAL_ARCHITECTURE.md` — read that for the architecture;
+this section is the restart record.
+
+## 22a. What this session changed
+
+Four commits:
+
+| Commit | Subject |
+|--------|---------|
+| `3b550b6` | Harden MIW paid access with server-trusted product entitlements |
+| `9582070` | Build the root-level Solved QP paid product from canonical specs |
+| `eea3b0b` | Wire Solved QP commerce into the storefront, login and migration |
+| `fe76bb7` | Add the complete January Written promo for existing Oral subscribers |
+
+## 22b. The product layout is now three siblings
+
+```
+/SQ/           PUBLIC   storefront, samples, login, product hub
+/meoclass1/    PAID     Oral QB + Notes        → ORAL_QB_NOTES
+/solvedQP/     PAID     Solved Written papers  → SOLVED_QP
+```
+
+`/solvedQP/` is at the **site root**, not inside `/meoclass1/`.
+
+## 22c. Security — what was actually wrong
+
+There was **no server-side gate of any kind**: no `middleware.js`, no `vercel.json`. Paid pages
+carried a client-side redirect that runs only after Vercel has already delivered the whole
+document, checking a cookie (`miw_auth=1`) that is readable, unsigned and carries no identity.
+
+`create-order.js` took the amount from the request body. `verify-payment.js` took the product
+tier from the request body and never checked the amount. **A ₹1 payment claiming
+`tier:"founders"` produced full access with a valid Razorpay signature** — a signature proves a
+payment belongs to an order, not what it cost.
+
+Also found: passwords stored in plaintext in Redis; the raw password kept in `localStorage`; and
+`meoclass1/pastpapers/QP2601.html` (512 KB of complete solved answers) publicly fetchable.
+
+## 22d. What protects it now
+
+`middleware.js` — Vercel Edge Middleware, runs **before** static serving. Verifies an
+HMAC-signed HttpOnly session token, checks the single-active-session id and the per-product
+entitlement in one Upstash pipeline call, then allows or redirects. **Fails closed.** Never
+reads `miw_auth`.
+
+`/meoclass1/pastpapers/*` requires **SOLVED_QP**, not ORAL_QB_NOTES — it holds the built Written
+papers, and mapping it to Oral would give every Oral customer the ₹1,500 library.
+
+## 22e. One answer truth — unchanged and enforced
+
+The six canonical specs remain the only source. Four projections:
+
+```
+specs/*.json → review build · /solvedQP/ paid · SQ/ January teaser · oralnotes/ January promo
+```
+
+`build_paper.py` gained `--deliver` and `--oral-promo`. No answer text is copied anywhere.
+
+**Regression: all six specs and all six review papers are byte-identical.** Verified by
+`git diff --stat meoclass1/pastpapers/` returning empty after every build.
+
+## 22f. §21's third-party recurrence blocker — FIXED
+
+It was leaking in **three** places, not one:
+
+1. a visible note — "Recurrence recorded on the source paper: 2018/APR, 2018/JULY, …";
+2. a visible "12 prior sittings" tag;
+3. **the invisible `data-search` payload on every page** — shipped bytes, searchable.
+
+All three are now review-build only. Candidates instead see recurrence MIW actually verified,
+from `reused_from`: "MIW has also built this question in July 2026." `recurrence_class` no
+longer reaches a candidate in any build.
+
+Provenance was **not** deleted from the specs. Guarded by `tools/pastpapers/solvedqp_check.py`.
+
+## 22g. §21's answer-length finding — DEFERRED, not done
+
+The review recommended replacing the fixed 450–650 word band with a complexity-aware window of
+**20–36 words per core point** (printed-limb correlation ~0.103; core-point correlation ~0.827;
+mean ~29.6 words/core point).
+
+**Not implemented this session.** It is not a commercial blocker, it touches the validator that
+governs every answer, and the session's priority was security and launch. The evidence is
+recorded in §21 and unchanged. Pick it up in a session that can re-derive the band per printed
+limb and re-run all 54 questions against it.
+
+## 22h. Toolchain
+
+`python tools/pastpapers/run_toolchain.py --self-test` — **ALL STAGES PASS, 47 warnings**
+(same 47 as before this session).
+
+New stages: `SOLVEDQP BLD` ×6, `SOLVEDQP QY`, `SOLVEDQP HOME`, `ORALPROMO BLD`, `SOLVEDQP CHK`.
+
+`npm run security:test` — **34 offline tests pass**. No network, Redis, Razorpay or secrets.
+
+Every guard has a positive control. `solvedqp_check.py --self-test` drives a synthetic page
+carrying every defect and requires all ten guards to fire.
+
+## 22i. BEFORE THIS CAN BE DEPLOYED
+
+1. **Set `MIW_SESSION_SECRET`** (≥16 random chars) in Vercel, for **both** the Edge and Node
+   runtimes. Without it middleware denies everything and login refuses to issue sessions.
+   This is the one genuinely new environment variable.
+2. **Run the migration** — `node tools/security/migrate_entitlements.mjs` (dry run first, then
+   `--apply`). Until it runs, existing Oral customers hold no entitlement and middleware will
+   correctly refuse them. This is the step that must not be forgotten.
+3. Verify the access matrix on a Vercel preview deployment (see 22j).
+
+## 22j. What could NOT be verified in this session
+
+The middleware gate is **verified by unit tests over its exact route and token logic**, and by
+reading the code — but it has **not been exercised against a running Vercel Edge runtime**,
+because that needs a deployment with real secrets. The `curl`-without-session test must be run
+on a preview deployment before launch. That is a Founder action, not an outstanding code task.
+
+## 22k. NEXT SESSION
+
+**2025 remains next, after commercial Founder review.** No 2025 answer generation has begun.
+The plan is unchanged: 11 source papers → answerless canonical intake → Questions 2025 →
+2025↔2026 recurrence → reuse map → solved-paper production.
