@@ -1,7 +1,20 @@
 # CURRENT STATUS — MEO Class I Written Questions / the complete 2026 set
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-09, at the close of the **QP2606 (June) production** session. Read this first.
+Last updated: 2026-08-09, at the close of the **2026 V1 PRODUCT REVIEW** session. Read this first.
+
+> # **§21 IS THE NEWEST SECTION. READ IT BEFORE ANYTHING BELOW IT.**
+>
+> The review session promised by §18 has happened. Branch **`pastpapers/2026-v1-product-review`**,
+> cut from `0c6932a`. It produced the six-paper intelligence review, the V1 decision register, the
+> generated **ONLY QUESTIONS** year sheet, the **free January Solved QP sample**, the commercial and
+> access architecture, and the 2025 strategy.
+>
+> **All six papers and all six specs are byte-identical to `0c6932a`.** No spec was edited, no
+> validator was changed, nothing was published, nothing was merged.
+>
+> **Two findings in §21 need a Founder decision before publication**, and one of them is a blocker:
+> the answer-length band, and the third-party recurrence table that currently ships to students.
 
 > # **THE 2026 PRODUCTION DATASET IS COMPLETE. 6 of 6 available sittings, 54 questions.**
 >
@@ -1552,3 +1565,132 @@ none should be until the Founder decides.
 > 2025 files are covered by the same ignore rule before any commit that touches `docs/`.**
 
 **Nothing about 2025 production has been decided or started.**
+
+---
+
+## 21. THE 2026 V1 PRODUCT REVIEW SESSION — 2026-08-09
+
+**This is the session §18 reserved. It was a review and design session, not a production session.**
+
+| | |
+|---|---|
+| Branch | **`pastpapers/2026-v1-product-review`**, cut from `0c6932a` (QP2606 completion) |
+| Previous branches | all six preserved and untouched |
+| Baseline | `ALL STAGES PASS`, 6 specs, 54 questions, UI 6 pages, 47 warnings |
+| Close | `ALL STAGES PASS`, **26 stages** (4 new), 47 warnings — unchanged |
+| Regression | six paper pages and all six specs **byte-identical to `0c6932a`** |
+
+### 21a. Deliverable documents
+
+| Document | Contents |
+|---|---|
+| `docs/2026_SIX_PAPER_INTELLIGENCE_REVIEW.md` | dataset, recurrence, families, answer length, five-mode verdict, taxonomy, **V1 decision register**, True Source six-paper ranking |
+| `docs/SOLVED_QP_COMMERCIAL_ARCHITECTURE.md` | traced payment/auth flow, **security findings**, entitlements, login, email, delivery, SQ integration, folder decision |
+| `docs/2025_PRODUCTION_STRATEGY.md` | A→E intake staging, the 2025 statute-boundary risk, sequencing |
+
+### 21b. New products — built, tested, NOT published
+
+| Artefact | Path | State |
+|---|---|---|
+| Questions-only year sheet | `meoclass1/pastpapers/questions-2026.html` | generated, **noindex** |
+| Free conversion sample | `SQ/solved-qp-sample-january-2026.html` | generated, **noindex** |
+| Projection config | `meoclass1/pastpapers/sample/QP2601.sample.json` | hand-maintained |
+
+New tools: `recurrence_model.py` · `build_questions_year.py` · `questions_year_check.py` ·
+`build_sample.py` · `sample_check.py`. Four new toolchain stages: **QYEAR BUILD · QYEAR CHECK ·
+SAMPLE BUILD · SAMPLE CHECK**.
+
+> **STANDING RULE, same class as the `FIXTURES` rule.** Adding a paper requires nothing for the year
+> sheet — it is generic. But **`sample_check.py` must keep passing**, and it will start failing if a
+> future paper joins a recurrence family containing a sample demo question. That failure is correct
+> and must be resolved by changing the sample, never by weakening the check.
+
+### 21c. THE CHRONOLOGY DEFECT — found and fixed in the derived layer
+
+**`recurrence_class` is an AUTHORING field and must never face a candidate.** Production order is
+not sitting order, and on three of 54 questions they now disagree outright:
+
+| Question | Sitting | Stored | Chronological truth |
+|---|---|---|---|
+| QP2601-Q3 | January | `near_recurrence` | **first occurrence** |
+| QP2602-Q3 | February | `near_recurrence` | **first occurrence** |
+| QP2607-Q1 | July | `new` | **a repeat** — set in Feb, Mar and Apr first |
+
+`reused_from` is an authoring-lineage pointer (July was the pilot and was built first), not a
+chronological one. **`recurrence_model.py` derives status from `(year, month)` only** and consumes
+`reused_from` as an undirected edge. **No spec was changed** — the stored field is correct for what
+it records. This is exactly what §19 predicted the year sheet would expose.
+
+**Canonical chronological recurrence at six papers:** 33 set once · 8 first occurrence ·
+4 repeat same wording · 9 repeat reworded. **8 families over 21 questions.**
+
+### 21d. FOUNDER DECISIONS WAITING
+
+1. **Answer-length band — evidence is now decisive.** Correlation of answer words against printed
+   limbs **0.103**, named sub-tasks 0.560, **core points 0.827**. Words per core point: mean 29.6,
+   σ 4.23. **Recommendation: retire 450–650 and warn outside 20–36 words per core point** — 3 of 54
+   outside, against 47 of 54 today. Validator change = Founder decision. **Not made.**
+2. **PUBLICATION BLOCKER — the host recurrence table ships to students.** `build_paper.py:435` and
+   `build_index.py:417` render the third-party source copy's own recurrence annotation **outside**
+   the `if not publish:` guard. Policy classes it discovery-only and the 2026 set measured it wrong
+   in both directions. Recommendation: replace it with the canonical `recurrence_model` output.
+   **Not changed** — it alters six approved pages.
+3. **`understand_first`** — prune QP2601 only (9/9 against 6/9, 7/9, 6/9, 6/9 elsewhere); five
+   QP2604 questions improve automatically.
+4. **Solved QP price** — `PRICE_TBD`. `sample_check.py` fails the build if any rupee value renders.
+5. **Free/paid placement of the year sheet** — MIW recommends **free and indexable**.
+6. **Search payload split** — recommendation changed to **DEFER to a measured UX trigger** rather
+   than splitting on the six-paper threshold. No observable problem.
+
+### 21e. SECURITY — the existing commerce stack, traced
+
+Findings in full in `SOLVED_QP_COMMERCIAL_ARCHITECTURE.md` §2. Three matter here:
+
+- **The paid content is not access-controlled.** `meoclass1/QB1_A.html:165` is a client-side regex
+  on `miw_auth=1` — a non-HttpOnly cookie whose value is the literal `1`. **There is no `vercel.json`
+  and no `middleware.js` in the repository**, so `curl` returns any paid file in full.
+- **The client sets the price.** `api/create-order.js:77` takes `amount` from the request body;
+  `verify-payment.js` verifies the signature correctly but never checks the amount.
+- **There is no entitlement model.** Adding Solved QP on top would grant it to every existing Oral QB
+  customer, and vice versa.
+
+> **Solved QP must not ship on this stack unchanged.** The recommended V1 is a ~40-line
+> `middleware.js` gate plus a server-side price table and a per-product entitlement set — extending
+> the three existing endpoints, not cloning them.
+
+### 21f. Folder decision — **DO NOT MOVE**
+
+Canonical content stays at `meoclass1/pastpapers/`. Commercial independence comes from the gate and
+the entitlement, not from the directory name. Reasons in `SOLVED_QP_COMMERCIAL_ARCHITECTURE.md` §7.
+
+### 21g. Sample selection — a commercial constraint the recurrence model exposed
+
+The January sample's two full demos are **Q1 (Low-Load Two-Stroke Operation)** and **Q5 (Tank
+Corrosion, Coatings and the CTF)**. Both are **recurrence-family singletons**.
+
+**Six of January's nine questions are the first occurrence of a family that returns later in 2026**,
+so publishing one in full publishes its paid twin — and **Q3's family reaches QP2607-Q5, the July
+paper the storefront exists to sell**. `build_sample.py` enforces this and refuses to build
+otherwise. A consequence worth recording: **no legal-archetype demonstration is available in
+January**, because Q3, Q4 and Q7 are all family firsts.
+
+### 21h. Verified at source this session
+
+- **The 2025 serial gap.** Extracted from page 1 of all eleven PDFs: `2501–2504, 2506–2512`, **no
+  2505**. May is the examiner's gap in both years. This now appears on a candidate-facing page, so
+  it was re-verified rather than inherited.
+- **All 17 source PDFs are git-ignored** (`.gitignore:42`). The §20 commit risk is **closed**.
+- **`validate_spec.py` already tolerates an answerless question** (`answer_status: "Not Built"`), so
+  2025 Stage A needs no validator change.
+
+### 21i. Mobile chrome
+
+The year sheet was measured at 375px, found at **56.3%** sticky chrome, and **fixed to 31.7%** by
+making the two filter rows single-line and horizontally scrollable. The paper pages' pre-existing
+51–60.5% is unchanged and remains a Founder decision — but the fix pattern is now proven and cheap.
+
+### 21j. What this session did NOT do
+
+No spec edited · no validator changed · no generated paper page changed · nothing published ·
+`noindex` intact · **`SQ/index.html`, `SQ/pay.html` and `api/**` untouched** · no Razorpay pricing
+touched · no test orders issued · no 2025 production · no merge to `main` · no production agent.
