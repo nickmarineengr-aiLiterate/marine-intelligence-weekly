@@ -1846,7 +1846,7 @@ The plan is unchanged: 11 source papers → answerless canonical intake → Ques
 | Branch | `commerce/solvedqp-security-v2` (continued — no new branch) |
 | Starting commit | `76cc003` |
 | Security V2 | Code complete; **two-session policy implemented** |
-| Preview state | **NOT VERIFIED** — no Vercel access in this environment |
+| Preview state | **VERIFIED on the real Edge network** — see 23f |
 | Production | **NOT ACTIVATED · NOT MERGED TO MAIN · SOLVED QP NOT LIVE** |
 | Incident archive | Created **outside the repository**; unencrypted; path not recorded here |
 | Password rotation | **NOT DONE** — recommendation is ROTATE, after endpoint removal |
@@ -1902,6 +1902,38 @@ public repository's history and in any clone or fork taken before `0766d00`.
 Removal closed the live disclosure path — it did not un-publish them. Rotation
 is now safe to perform, which it was not before: rotating while the oracle was
 live would have disclosed the new passwords by the same route.
+
+## 23f. VERCEL PREVIEW — VERIFIED
+
+`MIW_SESSION_SECRET` set on **Preview only**. Production neither has it nor
+needs it: `main` carries no `middleware.js`.
+
+Against a live preview deployment, `middleware.js` emits `X-MIW-Gate`, so the
+gate is directly observable:
+
+* `/solvedQP/QP2607.html`, `/solvedQP/QP2601.html`, `/meoclass1/QB1_A.html`
+  and `/meoclass1/pastpapers/QP2601.html` unauthenticated -> **302,
+  `gate=nosession`, 15 bytes** (QP2607 is 303,439 bytes on disk).
+* `miw_auth=1` -> denied. The old forgeable cookie authorises nothing.
+* Valid signed token with no live session -> **`gate=evicted`**: the signature
+  verified, so execution reached `ZSCORE miw:sessions:<email>` and was refused
+  there. That is two-session enforcement on the real edge, and it proves the
+  secret is wired into the Edge runtime (otherwise: `misconfigured`).
+* Wrong-secret, tampered-payload, expired and traversal probes -> all denied.
+* **Public control** `/SQ/pay.html` -> **200 with 11,645 bytes**, proving the
+  middleware discriminates rather than blanket-denying.
+
+**A false pass was caught.** Vercel Deployment Protection initially answered
+*every* request — including the public path — with an SSO redirect and no
+`X-MIW-Gate`, so the middleware never ran. Judged on status code alone that
+looks like a passing gate. Tests were re-run through a temporary automation
+bypass secret, now **revoked**; SSO remains on.
+
+**Not proven live:** the positive path (an entitled account being allowed) and
+the literal A->B->C login sequence. Preview shares **Production** Redis and all
+credentials are marked *Sensitive*, so their values cannot be read even by the
+CLI — no test account could be seeded and **nothing was written to production
+Redis**. Those cases stay covered by the 62 offline tests.
 
 ## 23e. NEXT SESSION
 

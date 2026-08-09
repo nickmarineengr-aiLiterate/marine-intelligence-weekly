@@ -431,27 +431,58 @@ successfully and still be denied access.
 7. Verify the access matrix
 8. Activate Solved QP commerce **only** when the Founder launches the product
 
-### 23d. Vercel preview verification — NOT PERFORMED
+### 23d. Vercel Preview verification — PASSED on the real Edge network
 
-Preview verification could **not** be carried out in this session. The
-environment has no Vercel CLI, no `.vercel` project link, no Vercel API token
-and no Vercel connector, and the session is non-interactive so no login flow
-could be completed. Nothing was changed in any Vercel environment, and
-production was not touched — which is the correct outcome when Preview cannot
-be cleanly isolated.
+Project `marineintelligenceweekly/marine-intelligence-weekly`. A
+`MIW_SESSION_SECRET` was set on **Preview only** — Production does not have it
+and does not need it, because `main` carries no `middleware.js`.
 
-Still outstanding, to be run against a preview deployment once Vercel access
-exists:
+`middleware.js` sets `X-MIW-Gate: <reason>` on every denial, which makes the
+gate directly observable. Results against a live preview deployment:
 
-* unauthenticated `curl` of `/solvedQP/QP2607.html` and a paid `/meoclass1/`
-  page must not return proprietary bytes;
-* `miw_auth=1` alone must be denied;
-* the two-session eviction matrix across separate cookie jars.
+| Probe | HTTP | `X-MIW-Gate` | Body |
+|---|---|---|---|
+| `GET /solvedQP/QP2607.html` (no session) | 302 | `nosession` | **15 B** |
+| `GET /solvedQP/QP2601.html` (no session) | 302 | `nosession` | **15 B** |
+| `GET /meoclass1/QB1_A.html` (no session) | 302 | `nosession` | **15 B** |
+| `GET /meoclass1/pastpapers/QP2601.html` | 302 | `nosession` | **15 B** |
+| `Cookie: miw_auth=1` | 302 | `nosession` | 15 B |
+| valid signed token, no live session | 302 | **`evicted`** | 15 B |
+| token signed with the wrong secret | 302 | `nosession` | 15 B |
+| tampered payload, replayed signature | 302 | `nosession` | 15 B |
+| expired token | 302 | `nosession` | 15 B |
+| `/meoclass1/../solvedQP/QP2607.html` | 302 | `nosession` | 15 B |
+| `GET /SQ/pay.html` (public control) | **200** | — | **11,645 B** |
 
-These are **deployment** proofs. The underlying **decision** logic is proven
-offline: `authorizeRequest()` is the exact function the edge runs, and
-`tools/security/sessions.test.mjs` drives the full matrix, including
-fail-closed, forged-cookie and eviction cases.
+`QP2607.html` is 303,439 bytes on disk and 15 bytes come back, so the paid
+document is never served. The public control returning full bytes proves the
+middleware is discriminating, not blanket-denying.
+
+The `evicted` row is the important one: the HMAC signature **verified**, so
+execution reached the `ZSCORE miw:sessions:<email>` lookup and was refused
+there. That is the two-session enforcement running on the real edge, and it
+also proves `MIW_SESSION_SECRET` is correctly wired into the Edge runtime —
+had it been missing, the reason would have been `misconfigured`.
+
+**A false pass was avoided.** Vercel Deployment Protection
+(`ssoProtection: all_except_custom_domains`) initially intercepted every
+request, including the *public* path, returning 302s to `vercel.com/sso-api`
+with **no** `X-MIW-Gate` header — the MIW middleware never ran. An SSO
+redirect looks exactly like a successful gate if you only check the status
+code. The tests above were run through a temporary
+`x-vercel-protection-bypass` automation secret, which has since been
+**revoked** (0 configured); SSO remains enabled.
+
+#### Still not proven on a deployment
+
+The **positive** path — a genuinely entitled account being ALLOWED, and the
+literal A→B→C login eviction sequence — was not run live. Preview shares
+**Production** Redis, and every credential is marked *Sensitive* in Vercel, so
+the values cannot be read even by the CLI (`env pull` returns a redacted
+placeholder). No test account could therefore be seeded, and **nothing was
+written to production Redis**. Those cases remain covered by the 62 offline
+tests, which exercise the real `sessions.js` and the same `authorizeRequest()`
+the edge runs.
 
 ### 23e. Launch posture
 
