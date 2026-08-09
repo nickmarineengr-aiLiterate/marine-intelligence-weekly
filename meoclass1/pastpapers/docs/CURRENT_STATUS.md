@@ -1850,3 +1850,179 @@ the two sittings.
 - **Do not** commit or delete the source PDFs. All 17 are git-ignored; verified this session.
 - The two §21 blockers — the answer-length band and the third-party recurrence table shipping to
   students — are **still open** and now apply to eleven more papers.
+
+---
+
+# §23 — 2024–2026 INTELLIGENCE FOUNDATION. Three years transcribed, intake is closed.
+
+**Session of 2026-08-10. Branch `pastpapers/2024-question-intake`, cut from `3a4aa14`.**
+No answer was authored. No paper was published. Nothing was merged to `main`. Security V2 untouched.
+
+Commits: `a09c1c6` recurrence provenance boundary · `c75b0aa` 2024 intake · `619e0ba` intelligence layer.
+
+## 23.1 What exists now — FACT
+
+| | |
+|---|---|
+| Papers | **28** — 6 solved (2026), 22 intake (2024, 2025) |
+| Questions | **252** — 54 with built answers, 198 questions only |
+| 2024 papers | QP2401–QP2404, QP2406–QP2412 |
+| Source-page read-back | **2024: 24 of 24. 2025: 25 of 25.** Both years now complete. |
+| Toolchain | `ALL STAGES PASS`, self-test included, one new stage |
+| 2026 regression | Six paper pages changed on **recurrence surfaces only**. Answer content byte-identical. |
+
+Read next, in this order. Both are **generated** by `tools/pastpapers/build_reuse_map.py`; do not
+hand-edit either, and re-run it after any spec change or `run_toolchain.py` will fail on staleness.
+
+- `docs/SOURCE_INVENTORY.md` — what was transcribed, from what, how far verified, every anomaly.
+- `docs/2024_2026_RECURRENCE_AND_REUSE_MAP.md` — families, year-pair matrix, tiers, temporal risk,
+  solving order, study intelligence.
+
+`2025_2026_RECURRENCE_AND_REUSE_MAP.md` and `2025_SOURCE_INVENTORY.md` are **deleted**, not
+archived. They were the same derivation over a smaller corpus and leaving them would leave two
+generated documents making different current claims.
+
+## 23.2 The §21 recurrence blocker is CLOSED, and it was worse than recorded
+
+It was not only that the host's recurrence table shipped to students. It shipped on **four**
+surfaces, and a fifth signal was wrong in a different way:
+
+| Surface | What was there |
+|---|---|
+| Paper page, per question | `<p class="rec-note">Recurrence recorded on the source paper: 2018/APR, …` |
+| `data-search` on every card | the same tokens, invisible on screen and present in the bytes |
+| `pastpapers_content_index.json` | `recurrence`, `recurrence_class`, `prior_sittings`, published |
+| `topics-<year>.html` | "Other recorded sittings: …" |
+| Question-card badge | `recurrence_class` — an **authoring** field, in production order |
+
+The last one is the subtle one. `recurrence_class` records what was true of the MIW corpus when the
+question was *built*, and production order is not sitting order — for three questions in the 2026 set
+it stated the opposite of the chronological truth. Both are now unrenderable anywhere:
+
+- `host_recurrence_hint` — the host's printed table. Discovery provenance, kept in the spec, never rendered.
+- `recurrence_class` — authoring record. Kept, never rendered.
+- `recurrence_adjudication` — MIW's own reading of two printed stems, on 62 questions. Kept, never rendered.
+- `prior_sittings` — a **count of host claims** presented as MIW truth. Deleted outright.
+
+Everything candidate-facing now comes from `recurrence_model.py` and the calendar.
+`recurrence_check.py` is a new toolchain stage that fails the build if a host sitting token or an
+authoring class reaches any generated artefact, if a spec reinstates a retired key, or if the stem
+normalisation is loosened. Every layer is positive-controlled. The UI test that used to **require** a
+host code be findable is now a leak probe.
+
+## 23.3 Printed marks are metadata — and the fix paid for itself immediately
+
+`normalise_stem` compared the marks token as if it were examiner wording, so the same task printed
+once with `(16)` and once without compared unequal and was labelled **"Repeated — reworded"** to a
+candidate who could see the two stems were word for word the same.
+
+A marks token is now stripped, but only when it is a bare parenthesised integer with whitespace
+before the bracket **and** its value is one the question itself declares. `MEPC.312(74)` survives on
+both tests. Regression: **4 questions** upgraded from reworded to same wording, **0 families merged**,
+104 families before and after on the 2025–2026 corpus. All four were read; all four are correct
+(`QP2508-Q5`, `QP2512-Q2`, `QP2602-Q5`, `QP2604-Q4` — each differs from its family's first sitting by
+the trailing `(16)` and nothing else).
+
+The payoff landed in the same session: `QP2510-Q5` is EXACT with `QP2403-Q5` **only** because of this
+fix, which is what makes October 2025 a complete re-run rather than an eight-ninths one.
+
+## 23.4 `reused_from` is not always "the same examiner task"
+
+`QP2602-Q3` (formal safety assessment applied to **lithium batteries** in vehicles, containers and
+ro-ro spaces) was authored from `QP2607-Q1` (the same method applied to **iron ore pellets** in bulk
+carriers). What was reused is the method and the answer shape. Different cargo, ship type, hazard and
+carriage requirements. Treating that pointer as a family edge told a candidate the lithium question
+had been set five times when it had been set four.
+
+`reuse_kind` now separates `same_task` from `shape_only`. Absent means `same_task`, so the 38 genuine
+edges needed no annotation and the claim that needs evidence is the one that has to be written down.
+All 39 edges were re-read this session; exactly one was rejected.
+
+## 23.5 The headline finding — October 2025 is March 2024, reprinted whole
+
+**Nine of nine questions, every one word-for-word identical.** Not a topic overlap, not a rewording.
+`QP2403` and `QP2510` are the same paper set twice, nineteen months apart.
+
+Adding 2024 moved **34 of the 153** previously transcribed questions with **no spec edited** — the
+2024-readiness guarantee the chronological model was built for, tested for real. Two questions on
+*published* 2026 pages went from "Once in this set" to "Repeated — same wording" because January 2024
+had set them first (`QP2607-Q3` IACS/RO Code, `QP2607-Q9` Uberrimae Fidei).
+
+Corpus shape: **174 families, 52 multi-sitting, 34 cross-year, 3 in all three years.**
+
+| Year pair | EXACT | NEAR |
+|---|---|---|
+| 2024 internal | 8 | 0 |
+| 2024 ↔ 2025 | 27 | 3 |
+| 2024 ↔ 2026 | 8 | 1 |
+| 2025 internal | 17 | 7 |
+| 2025 ↔ 2026 | 23 | 11 |
+| 2026 internal | 5 | 11 |
+
+**TOPIC is deliberately not a canonical relation** and never has been. A shared subject is not a
+repeated question. Shared-subject browsing is `topics-<year>.html`, which says nothing about
+recurrence.
+
+## 23.6 Reuse and temporal — 2024 did NOT move the 2025 map
+
+**2024: Tier C 92, Tier D 7. 2025: Tier C 79, Tier D 20 — unchanged.** 2024 bridges no 2025 question
+to a built answer, so the previous session's numbers stand exactly. A and B remain unassigned for the
+same reason as before: neither can be claimed without reading the candidate object.
+
+**Temporal: 40 of 198 flagged — 22 HIGH, 18 MEDIUM.** Classes: IMO instrument in flux 17, Indian
+statute boundary 12, guideline edition 6, convention not yet in force 3, recent SOLAS chapter 1,
+convention newly in force 1.
+
+> Every available 2024 and 2025 sitting predates 15 March 2026. Reuse runs **backwards** and a 2026
+> donor is a **statute regression**, not a re-anchor.
+
+The sharpest new case is **`QP2410-Q4`**: it asks about the Hong Kong Convention in October 2024,
+**eight months before that convention entered into force**, and its November 2025 relative
+(`QP2511-Q8`) is answered on the opposite footing. Same family, same wording, opposite legal status.
+`QP2508-Q8` (GHG) remains the single most dangerous Tier D reuse in the set.
+
+## 23.7 Next session — BATCH 1 is still AUGUST 2025, then MARCH 2024
+
+The three-year evidence did **not** overturn `QP2508`. It reinforced it and added a second paper
+behind it that was invisible before.
+
+| Paper | Sitting | Tier D | Family reach | Temporal flags |
+|---|---|---|---|---|
+| **QP2508** | August 2025 | **8 / 9** | 10 | 4 |
+| **QP2403** | March 2024 | 0 / 9 | **12** | 0 |
+| QP2506 | June 2025 | 4 / 9 | 9 | 1 |
+| QP2404 | April 2024 | 1 / 9 | 10 | 1 |
+
+*Family reach* is how many OTHER unsolved questions across the corpus sit in the same families as
+this paper's questions.
+
+- **QP2508 alone** puts **19 of the 198** unsolved questions in scope.
+- **QP2508 + QP2403** puts **40 of 198** in scope — a fifth of the remaining corpus from two papers
+  of research, because QP2403 carries the whole of QP2510 with it and has **zero temporal flags**.
+
+Then QP2506, QP2404. Calendar order remains the worst available choice.
+
+**PAPER-FIRST, ordered by family reach.** Not family-first. The evidence: 198 unsolved questions sit
+in 150 distinct families, and only **85** of them share a family with another unsolved question. A
+family-first pass would leave most papers incomplete for a long time while the customer product is a
+complete paper — and paper-first ordered by reach already captures the leverage (40 of 198 from two
+papers). The rule that matters is inside each paper: **research a family once**, then adapt per
+sitting under the temporal review.
+
+**Every Tier D reuse still carries three mandatory steps, none optional:** scan the donor for
+sitting-relative prose; sweep the assembled spec afterwards rather than trusting the patch list (it
+missed one in March and one in April); check whether the governing instrument itself differed at the
+two sittings.
+
+## 23.8 Stop conditions still in force
+
+- **Do not** author answers beyond the agreed batch. 198 questions are `Not Built` and must stay so
+  until a solving session is authorised.
+- **Do not** ingest another year. Intake is closed at 2024–2026 until the Founder says otherwise.
+- **Do not** reopen Security V2 (`eaedfda`), Vercel, Razorpay or customer migration.
+- **Do not** merge to `main`. **Do not** publish 2024 or 2025 into `/solvedQP/`.
+- **Do not** commit or delete the source PDFs. All 28 are git-ignored; verified this session.
+- The **answer-length band** is the one §21 blocker still open. It is **DEFERRED TO SOLVED-PAPER
+  PRODUCTION** — there are no new solved answers to measure, and the standing warnings are the
+  existing 2026 answers exceeding the 450–650 band for 16 marks. Re-derive the band per printed limb
+  when authoring resumes, not before.
