@@ -50,11 +50,13 @@ SPEC_GLOB = os.path.join(PP_DIR, 'specs', '*.json')
 # never render the same way: one is a fact about the examination, the other is a
 # fact about MIW's backlog. Keyed (year, month_number).
 KNOWN_ABSENT = {
-    (2026, 5): 'No May sitting appears in the MIW source set, and the examiner&rsquo;s own '
-               'serial numbering skips it in 2025 as well &mdash; the 2025 serials run '
-               '&hellip;2504, 2506&hellip; with nothing at 2505.',
-    (2025, 5): 'No May sitting. The examiner&rsquo;s serial numbering runs &hellip;2504, '
-               '2506&hellip; with nothing at 2505.',
+    (2026, 5): 'No May sitting appears in the MIW source set, and the printed serial numbering '
+               'skips it in 2024 and 2025 as well &mdash; those serials run &hellip;2404, '
+               '2406&hellip; and &hellip;2504, 2506&hellip;, with nothing at 2405 or 2505.',
+    (2025, 5): 'No May sitting. The printed serial numbering runs &hellip;2504, 2506&hellip; '
+               'with nothing at 2505.',
+    (2024, 5): 'No May sitting. The printed serial numbering runs &hellip;2404, 2406&hellip; '
+               'with nothing at 2405.',
 }
 
 
