@@ -86,17 +86,21 @@ def check_page(path, text, is_paper):
 
 
 def run():
-    specs = sorted(glob.glob(SPEC_GLOB))
-    if not specs:
+    spec_paths = sorted(glob.glob(SPEC_GLOB))
+    if not spec_paths:
         fail('specs', 'no specs found')
         return
+    specs = []
+    for sp in spec_paths:
+        with open(sp, encoding='utf-8') as fh:
+            specs.append(json.load(fh))
+
+    check_storefront(specs)
 
     expected = []
     total_q = 0
     years = set()
-    for sp in specs:
-        with open(sp, encoding='utf-8') as fh:
-            d = json.load(fh)
+    for d in specs:
         if not any(q.get('model_answer') for q in d['questions']):
             continue
         expected.append('%s.html' % d['paper_id'])
@@ -130,6 +134,54 @@ def run():
     else:
         print('[ OK  ] %d questions delivered across %d papers'
               % (delivered, sum(1 for e in expected if re.match(r'^QP\d+\.html$', e))))
+
+
+def check_storefront(specs):
+    """The storefront is hand-written HTML. Guard the two facts in it that
+    are really derived from elsewhere, so they cannot drift silently:
+
+      * the newest solved sitting  -- derived from the specs
+      * the Solved QP price        -- owned by api/_lib/products.js
+    """
+    CHECKS[0] += 1
+    idx = os.path.join(REPO_ROOT, 'SQ', 'index.html')
+    if not os.path.exists(idx):
+        fail('SQ/index.html', 'storefront missing')
+        return
+    with open(idx, encoding='utf-8', newline='') as fh:
+        html = fh.read()
+
+    # newest solved sitting
+    solved = [d for d in specs if any(q.get('model_answer') for q in d['questions'])]
+    if solved:
+        import recurrence_model as _RM
+        newest = sorted(solved, key=lambda d: (d['year'], _RM.MONTH_NUM[d['month']]))[-1]
+        m = re.search(r'data-newest-sitting="([^"]+)"', html)
+        if not m:
+            fail('SQ/index.html', 'Written card has no data-newest-sitting marker')
+        elif m.group(1).strip() != newest['month_year']:
+            fail('SQ/index.html',
+                 'newest sitting claims %r but the specs say %r'
+                 % (m.group(1), newest['month_year']))
+
+    # price agreement with the server catalogue
+    cat = os.path.join(REPO_ROOT, 'api', '_lib', 'products.js')
+    if os.path.exists(cat):
+        with open(cat, encoding='utf-8', newline='') as fh:
+            src = fh.read()
+        m = re.search(r'SOLVED_QP\s*:\s*\{.*?amount:\s*(\d+)', src, re.S)
+        if not m:
+            fail('products.js', 'could not read the SOLVED_QP amount')
+        else:
+            paise = int(m.group(1))
+            rupees = paise // 100
+            shown = '₹%s,%03d' % (rupees // 1000, rupees % 1000) if rupees >= 1000 else '₹%d' % rupees
+            if shown not in html:
+                fail('SQ/index.html',
+                     'storefront does not show the catalogue price %s (%d paise)' % (shown, paise))
+            else:
+                print('[ OK  ] storefront price %s agrees with the catalogue (%d paise)'
+                      % (shown, paise))
 
 
 def self_test():
