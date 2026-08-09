@@ -1,9 +1,23 @@
-# CURRENT STATUS — MEO Class I Written Questions / the complete 2026 set
+# CURRENT STATUS — MEO Class I Written Questions / 2026 solved, 2025 intake complete
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-09, at the close of the **2026 V1 PRODUCT REVIEW** session. Read this first.
+Last updated: 2026-08-09, at the close of the **2025 QUESTION INTELLIGENCE** session. Read this first.
 
-> # **§21 IS THE NEWEST SECTION. READ IT BEFORE ANYTHING BELOW IT.**
+> # **§22 IS THE NEWEST SECTION. READ IT BEFORE ANYTHING BELOW IT, INCLUDING §21.**
+>
+> Branch **`pastpapers/2025-question-intake`**, cut from `217fbba` — the accepted content baseline,
+> deliberately **not** the Security V2 branch. Security V2 stays frozen at `eaedfda` and was not
+> touched.
+>
+> **All eleven 2025 papers are transcribed. 99 questions, questions only, no answers anywhere.**
+> The corpus is now **17 papers / 153 questions**, 54 of them with built answers.
+>
+> **The six 2026 paper pages are byte-identical. 54 solved questions unchanged.**
+>
+> **The next session is 2025 SOLVED-PAPER PRODUCTION — BATCH 1, and it must start with QP2508
+> (August), not January.** August carries **8 of 9** Tier D donors. See §22.
+
+> # **§21 — the 2026 V1 product review. Still current except where §22 supersedes it.**
 >
 > The review session promised by §18 has happened. Branch **`pastpapers/2026-v1-product-review`**,
 > cut from `0c6932a`. It produced the six-paper intelligence review, the V1 decision register, the
@@ -1694,3 +1708,145 @@ making the two filter rows single-line and horizontally scrollable. The paper pa
 No spec edited · no validator changed · no generated paper page changed · nothing published ·
 `noindex` intact · **`SQ/index.html`, `SQ/pay.html` and `api/**` untouched** · no Razorpay pricing
 touched · no test orders issued · no 2025 production · no merge to `main` · no production agent.
+
+---
+
+# §22 — 2025 QUESTION INTELLIGENCE. Eleven papers ingested, cross-year map built.
+
+**Session of 2026-08-09. Branch `pastpapers/2025-question-intake`, cut from `217fbba`.**
+No answer was authored. No paper was published. Nothing was merged to `main`.
+
+## 22.1 What exists now — FACT
+
+| | |
+|---|---|
+| Papers | **17** — 6 solved (2026), 11 intake (2025) |
+| Questions | **153** — 54 with built answers, 99 questions only |
+| 2025 papers | QP2501–QP2504, QP2506–QP2512. **May absent from the available source set, both years.** |
+| Toolchain | `ALL STAGES PASS`, self-test included |
+| 2026 regression | Six paper pages **byte-identical**. `solvedQP/`, the January sample and the oral promo untouched. |
+
+Read next, in this order:
+
+- `docs/2025_SOURCE_INVENTORY.md` — **generated.** What was transcribed, from what, and how far verified.
+- `docs/2025_2026_RECURRENCE_AND_REUSE_MAP.md` — **generated.** Families, tiers, temporal risk, solving order.
+
+Both are derived from `specs/*.json` by `tools/pastpapers/build_reuse_map.py`. **Do not hand-edit
+either.** `run_toolchain.py` runs `--check` on them and fails the build if they go stale.
+
+## 22.2 The toolchain learned a new concept — INTAKE
+
+An intake spec is real transcribed questions with no answers. Before this session every stage
+assumed each spec was a solvable paper, and the first answerless spec broke four of them.
+`render_common.is_intake()` is now the single shared predicate. Consequences:
+
+- an intake paper has **no paper page**, no verification directory, and null `url`/`deep_link`;
+- search routes an intake question to its card on `questions-<year>.html`, so it can never return a
+  result it cannot open;
+- the topic page renders it as plain text plus **"Solution in production"**;
+- health_check gained the **inverse** guard: an intake paper that *has* a page is an error.
+
+Both new guards were positive-controlled by injection and both fired.
+
+## 22.3 Recurrence — the payoff of fixing chronology first
+
+Adding 2025 re-ranked 2026 with **no spec edit**, exactly as §21 predicted. Across 153 questions:
+**104 families, 33 multi-sitting, 14 spanning both years.** The 2026 year sheet's scope sentence
+corrected itself from "6 2026 sittings" to "7 sittings across 2025–2026".
+
+**The similarity tool failed a third time, in a new way.** `QP2502-Q5` and `QP2504-Q5` are a
+one-to-one task match — both are (a) scope of Indian admiralty law, (b) assessors and their
+qualifications — and lexical similarity scores them at **0.101**. Any usable threshold discards
+them. Conversely it offered `QP2502-Q5`/`QP2504-Q6` at **0.470**: admiralty law versus CII rating,
+no relationship at all. **Eight same-task edges were adjudicated by reading both printed stems;
+two candidates were rejected as TOPIC.** Host annotations were used only to propose candidates, and
+their bare-month tokens (`2019/OCT`) linked wholly unrelated questions.
+
+## 22.4 Reuse tiers — and why A and B are zero
+
+**Tier D 20 · Tier C 79 · Tier A 0 · Tier B 0.**
+
+Tier D is mechanical and certain: the question's family contains a 2026 question whose answer is
+built and verified.
+
+**A and B were deliberately not assigned, and that is a finding, not a gap.** Both claim an existing
+canonical object covers the examiner demand, which cannot be asserted without reading the object —
+and this session authors and verifies nothing. A keyword sweep of the 132-file Oral corpus was run
+and rejected as a basis for B: no threshold produced a natural break (2 terms → 91 hits, 3 → 76,
+4 → 49). A manufactured B count would have been planned against. The sweep output is recorded per
+question in `reuse_evidence` as **named candidate files to read**, explicitly labelled discovery;
+**71 of the 79 Tier C questions carry them.** Promotion to A or B belongs to the solving session.
+
+## 22.5 Temporal risk — 24 flagged, and one that is worse than the rest
+
+**24 of 99 flagged: 13 HIGH, 11 MEDIUM.** Classes: Indian statute boundary 9, IMO instrument in
+flux 9, convention not yet in force 2, guideline edition 2, convention newly in force 1, recent
+SOLAS chapter 1.
+
+> **Every available 2025 sitting predates 15 March 2026**, when the Merchant Shipping Act, 2025
+> commenced and repealed the 1958 Act by s.324(1).
+
+So reuse runs **backwards** here: a 2026 answer pulled into a 2025 paper is a **statute
+regression**, not a re-anchor. The April 2026 sweep found the 1958 Act asserted on **eight separate
+surfaces** of one question object. Expect eight again, in reverse. A 2025 answer must **never** be
+"corrected" to current law — it answers the examination as sat.
+
+**`QP2508-Q8` is the single most dangerous Tier D reuse in the set.** It asks about the revised IMO
+GHG strategy and the proposed MARPOL Annex VI Chapter V, and its own stem says the amendments are
+"being considered". The status of the Net-Zero Framework moved repeatedly between August 2025 and
+its 2026 relative. **The same question has a different correct answer at the two sittings.**
+
+## 22.6 Marks and source anomalies
+
+**13 of 99 questions print no mark allocation at all**, across four papers (QP2506, QP2509, QP2510,
+QP2511). Each is recorded at 16 under instruction 2 with `printed_marks_absent` set. The omission is
+demonstrably the printed copy's: `QP2506-Q9` prints none where the identical question printed (16)
+in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
+
+> **Correction to the record.** The commit message on `bec8543` says "Nine questions across five
+> papers". The correct figure is **13 across four**, as derived in `2025_SOURCE_INVENTORY.md`, which
+> is the authority. The specs were always right; the prose was not.
+
+`QP2507-Q9` carries a host **"PROVIOUSLY ASKED"** block (the misspelling is the host's) quoting the
+March wording beneath the July question. It is host annotation, not examiner text, excluded from
+`text_verbatim` and recorded in a note.
+
+## 22.7 Next session — BATCH 1 is AUGUST, not January
+
+Figures below are the generated ones in `2025_2026_RECURRENCE_AND_REUSE_MAP.md` §6, which is the
+authority. **Six of the eleven papers have no Tier D donor at all**, which is precisely why calendar
+order is the wrong sequence.
+
+| Paper | Sitting | Tier D | Temporal flags |
+|---|---|---|---|
+| **QP2508** | August 2025 | **8 / 9** | 4 |
+| QP2506 | June 2025 | **4 / 9** | 1 |
+| QP2509 | September 2025 | **3 / 9** | 2 |
+| QP2511 | November 2025 | **3 / 9** | 2 |
+| QP2502 | February 2025 | **2 / 9** | 2 |
+| QP2501 · QP2503 · QP2504 · QP2507 · QP2510 · QP2512 | — | **0 / 9** | 2 · 3 · 4 · 2 · 0 · 2 |
+
+**Start with QP2508.** Eight of its nine questions have a verified donor, so it converts more
+research into review than any other paper — and it carries the joint-highest temporal load (4), so
+it front-loads the two hardest problems, `QP2508-Q8` (GHG) and the Indian statute boundary on
+`QP2508-Q5`/`Q9`, rather than meeting them later on a paper chosen for its date.
+
+Then QP2506, QP2509, QP2511, QP2502. Calendar order would be the worst available choice: **January
+has zero Tier D donors**, and it would research the same families twice — **QP2501 and QP2507 share
+five families**, July 2025 being very largely a re-run of January and March.
+
+**Every Tier D reuse carries three mandatory steps, none optional:** scan the donor for
+sitting-relative prose; sweep the assembled spec afterwards rather than trusting the patch list (it
+missed one in March and one in April); and check whether the governing instrument itself differed at
+the two sittings.
+
+## 22.8 Stop conditions still in force
+
+- **Do not** author 2025 answers beyond the agreed batch.
+- **Do not** ingest 2024 yet. The family model re-derives from the calendar, so 2024 will demote
+  current "first occurrence" claims automatically — nothing is cached and no spec needs editing.
+- **Do not** reopen Security V2 (`eaedfda`), Vercel, Razorpay or customer migration.
+- **Do not** merge to `main`. **Do not** publish 2025 into `/solvedQP/`.
+- **Do not** commit or delete the source PDFs. All 17 are git-ignored; verified this session.
+- The two §21 blockers — the answer-length band and the third-party recurrence table shipping to
+  students — are **still open** and now apply to eleven more papers.

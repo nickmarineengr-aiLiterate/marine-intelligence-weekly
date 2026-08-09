@@ -13,6 +13,7 @@ Runs, in dependency order:
     QYEAR CHECK   questions_year_check.py   54-question integrity + answer-leak sweep
     SAMPLE BUILD  build_sample.py           free conversion sample from a projection
     SAMPLE CHECK  sample_check.py           withheld content absent from shipped bytes
+    REUSE MAP     build_reuse_map.py --check  cross-year map + source inventory current
     KNOWN TRAPS   known_traps_check.py  traps we have already been caught by
     HEALTH        health_check.py       product coherence, links, safety, review state
     AUDIT         audit_paper.py        each page faithful to its spec
@@ -173,6 +174,14 @@ def main():
         rc, w = run('SAMPLE CHECK', [os.path.join(T, 'sample_check.py')], args.verbose)
         rc_total += rc
         warn_total += w
+
+    # The cross-year map and the source inventory are DERIVED from the specs.
+    # Checking rather than rebuilding here keeps this command read-only over
+    # documentation, while still failing the build if either has gone stale --
+    # which is what a hand-edit or an unregenerated spec change looks like.
+    rc, w = run('REUSE MAP', [os.path.join(T, 'build_reuse_map.py'), '--check'], args.verbose)
+    rc_total += rc
+    warn_total += w
 
     argv = [os.path.join(T, 'known_traps_check.py')]
     if args.self_test:
