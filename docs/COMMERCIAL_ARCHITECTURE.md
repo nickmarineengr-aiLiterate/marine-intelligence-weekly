@@ -349,38 +349,61 @@ treated as **publicly disclosed**.
 
 ## 23. Status — 2026-08-09 (Security V2 preservation & handover session)
 
-### 23a. CORRECTION: the exposure is not only in history
+### 23a. Emergency production patch — RESOLVED
 
-The section above says the two endpoints "are deleted on this branch". That is
-true and it is not sufficient. Verified this session:
+The section above says the two endpoints "are deleted on this branch". That was
+true and it was **not sufficient**. Verified this session: both files were
+still in the tree of `main` (`f4d1058`) — the branch production deploys — because
+the deletion commit `76cc003` lives only on this unmerged branch. The
+repository is **public**, so the credential table sat in the *current default
+branch*, and `/api/check-db` required **no authentication at all**:
+`GET /api/check-db?email=<address>` returned that account's stored password.
 
-* `api/check-db.js` and `api/migrate-users.js` are **still present in the tree
-  of `main`** (`f4d1058`), which is the branch production deploys.
-* The deletion commit `76cc003` exists **only** on
-  `commerce/solvedqp-security-v2`, which is **not merged**.
-* The repository is **public** (confirmed via the GitHub API).
+**Fixed.** Founder-authorised emergency patch, scoped to two deletions and
+nothing else:
 
-So the credential table is readable in the *current default branch* of a public
-repository — not merely recoverable from history — and `/api/check-db` is
-expected to still be deployed. That endpoint takes **no secret at all**:
-`GET /api/check-db?email=<address>` returns that account's stored password.
+| Field | Value |
+|---|---|
+| Commit | **`0766d00`** on `main` (parent `f4d1058`) |
+| Contents | deletes `api/check-db.js` and `api/migrate-users.js` only |
+| Security V2 merged | **NO** — this branch remains unmerged |
+| Solved QP activated | **NO** |
+| Gate / payment architecture changed | **NO** |
 
-**Consequence for sequencing:** rotating the 28 passwords while
-`/api/check-db` is still live would simply disclose the *new* passwords by the
-same mechanism. **Endpoint removal must come first.**
+Post-deployment verification (raw HTTP):
 
-Recommended order, independent of the Solved QP launch schedule:
+| Request | Result |
+|---|---|
+| `GET /api/check-db` | **404** |
+| `GET /api/migrate-users` | **404** |
+| `GET /api/check-password` (control) | **405** — functions deployed, routing live |
 
-1. Remove both endpoints from `main`; redeploy production.
-2. Confirm `/api/check-db` no longer resolves.
-3. Back-fill entitlements (§23c step 3).
-4. Rotate all 28 credentials and invalidate every session
-   (`clearAllSessions`, i.e. `{action:"logout", scope:"all"}` semantics).
+The control is what makes the 404s meaningful: without it, a 404 could simply
+mean the API surface was not deployed.
+
+**Sequencing rationale:** rotation was deliberately ordered *after* removal.
+Rotating while the disclosure endpoint was live would have exposed the new
+passwords by the same mechanism.
+
+Remaining, in order:
+
+1. ~~Remove both endpoints from `main`; redeploy.~~ **DONE** — `0766d00`
+2. ~~Confirm the endpoints no longer resolve.~~ **DONE** — 404 verified
+3. Back-fill entitlements (§23c step 4).
+4. **Rotate all 28 credentials** and invalidate every session
+   (`clearAllSessions`, i.e. `{action:"logout", scope:"all"}` semantics). ← now unblocked
 5. Notify affected customers.
 6. Only then consider a history purge.
 
-Steps 1–2 do not depend on Security V2, on the content roadmap, or on any
-launch decision. They can be done at any time.
+The credentials remain readable in the public repository's **history**, and in
+any clone or fork taken before `0766d00`. Removal closed the live oracle; it
+did not un-publish them. They must still be treated as compromised, and step 4
+is still required.
+
+A private incident archive holding the exact historical files, a SHA-256
+manifest and an incident record exists **outside this repository** on
+ACL-protected NTFS storage. Its path and contents are deliberately not recorded
+here and are not in Git.
 
 A private incident archive holding the exact historical files, a SHA-256
 manifest and an incident record has been created **outside this repository**

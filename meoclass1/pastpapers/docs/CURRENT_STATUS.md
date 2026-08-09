@@ -1882,16 +1882,26 @@ the public January sample and the Oral promo are **byte-identical** to
 `76cc003`; the diff touches only `api/`, `middleware.js`, `docs/`,
 `tools/security/` and `package.json`. 54 questions verified present (9 × 6).
 
-## 23d. THE URGENT ITEM
+## 23d. THE URGENT ITEM — RESOLVED THIS SESSION
 
-`api/check-db.js` and `api/migrate-users.js` are **still on `main`**, the
-branch production deploys — the deletion is only on this unmerged branch, and
-the repository is public. `/api/check-db?email=<address>` requires **no
-authentication** and returns that account's password.
+`api/check-db.js` and `api/migrate-users.js` were **still on `main`**, the
+branch production deploys — the deletion existed only on this unmerged branch,
+in a public repository. `/api/check-db?email=<address>` required **no
+authentication** and returned that account's password.
 
-**Remove those two files from `main` and redeploy before rotating anything** —
-rotating first would just disclose the new passwords the same way. This is
-independent of the content roadmap and of Security V2 activation.
+**Fixed** by a Founder-authorised emergency patch, **`0766d00` on `main`**: two
+deletions, nothing else. Security V2 was **not** merged, Solved QP was **not**
+activated, and the gate/payment architecture was **not** touched.
+
+Verified after deployment: `/api/check-db` → 404, `/api/migrate-users` → 404,
+with `/api/check-password` → 405 as the control proving functions are deployed
+and routing is live.
+
+**Still outstanding: rotate the 28 credentials.** They remain readable in the
+public repository's history and in any clone or fork taken before `0766d00`.
+Removal closed the live disclosure path — it did not un-publish them. Rotation
+is now safe to perform, which it was not before: rotating while the oracle was
+live would have disclosed the new passwords by the same route.
 
 ## 23e. NEXT SESSION
 
