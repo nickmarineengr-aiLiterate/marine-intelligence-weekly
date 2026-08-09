@@ -159,6 +159,34 @@ def main():
         rc_total += rc
         warn_total += w
 
+    # ---- paid Solved QP delivery surface -------------------------------
+    # Same specs, projected into /solvedQP/ for paying customers. Built and
+    # then immediately checked, because the failure that matters here is not
+    # a broken page but a page that leaks the third-party source copy's
+    # recurrence annotations, an authoring verdict, or the review banner.
+    for sp in specs:
+        rel = os.path.relpath(sp, REPO_ROOT)
+        rc, w = run('SOLVEDQP BLD', [os.path.join(T, 'build_paper.py'), rel, '--deliver'],
+                    args.verbose)
+        rc_total += rc
+        warn_total += w
+
+    rc, w = run('SOLVEDQP QY', [os.path.join(T, 'build_questions_year.py'), '--deliver'],
+                args.verbose)
+    rc_total += rc
+    warn_total += w
+
+    rc, w = run('SOLVEDQP HOME', [os.path.join(T, 'build_solvedqp_home.py')], args.verbose)
+    rc_total += rc
+    warn_total += w
+
+    argv = [os.path.join(T, 'solvedqp_check.py')]
+    if args.self_test:
+        argv.append('--self-test')
+    rc, w = run('SOLVEDQP CHK', argv, args.verbose)
+    rc_total += rc
+    warn_total += w
+
     argv = [os.path.join(T, 'known_traps_check.py')]
     if args.self_test:
         argv.append('--self-test')

@@ -130,8 +130,16 @@ def block_headings(blocks):
     return [strip_tags(b['h']) for b in blocks.get('blocks', []) if 'h' in b]
 
 
-def search_tokens(q, paper):
+def search_tokens(q, paper, publish=False):
     """Deterministic search string for a question card.
+
+    publish=True is a candidate-facing build. It drops two authoring inputs:
+      * recurrence_class   -- tells a candidate what to expect; not ours to say;
+      * recurrence         -- third-party source-copy annotations for sittings
+                              MIW never read.
+    Both stay in the review build. They were previously baked into every
+    shipped page's data-search attribute, so although invisible they were
+    present in the delivered bytes and searchable by anyone who looked.
 
     Driven from the spec, NOT from rendered text. QB10_A searches
     `card.innerText`, which excludes display:none subtrees -- so its search
@@ -144,14 +152,15 @@ def search_tokens(q, paper):
         paper['month'], str(paper['year']), paper['month_year'], paper['subject'],
         q.get('short_title', ''), strip_tags(q['text_verbatim']),
         '%s marks' % q['total_marks'],
-        q.get('recurrence_class', ''),
+        '' if publish else q.get('recurrence_class', ''),
     ]
     parts += q.get('topic_tags') or []
     parts += q.get('subject_tags') or []
     parts += q.get('intent_tags') or []
     parts += q.get('search_aliases') or []
     parts += q.get('regulations') or []
-    parts += q.get('recurrence') or []
+    if not publish:
+        parts += q.get('recurrence') or []
     parts += block_headings(q.get('model_answer'))
     parts += block_headings(q.get('study_notes'))
     qr = q.get('quick_revision') or {}
@@ -167,14 +176,24 @@ def search_tokens(q, paper):
     return ' '.join(out)
 
 
-def topbar(active=''):
+# Navigation for the paid Written delivery surface at /solvedQP/. It must not
+# link into /meoclass1/: a customer who owns SOLVED_QP but not ORAL_QB_NOTES
+# would be bounced to the login page by their own product's own navigation.
+DELIVERY_LINKS = [
+    ('Solved QP', '/solvedQP/'),
+    ('Questions by year', '/solvedQP/questions-2026.html'),
+]
+
+
+def topbar(active='', links=None):
     """Consistent navigation across every Past Papers page. Kept compact."""
-    links = [
-        ('MEO Class I', '/meoclass1/'),
-        ('Written Questions', '/meoclass1/pastpapers/'),
-        ('2026 Topics', '/meoclass1/pastpapers/topics-2026.html'),
-        ('Question Bank', '/meoclass1/#question-banks'),
-    ]
+    if links is None:
+        links = [
+            ('MEO Class I', '/meoclass1/'),
+            ('Written Questions', '/meoclass1/pastpapers/'),
+            ('2026 Topics', '/meoclass1/pastpapers/topics-2026.html'),
+            ('Question Bank', '/meoclass1/#question-banks'),
+        ]
     out = ['<nav class="topbar" aria-label="Primary">',
            '  <span class="logo">&#9875; MIW</span>',
            '  <span class="topbar-sub">Written Questions &amp; Answers</span>',

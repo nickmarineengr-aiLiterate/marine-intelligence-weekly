@@ -33,11 +33,28 @@ if __name__ == '__main__':
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from render_common import (REPO_ROOT, TPL, BASE, CONTACT, LS_BOOKMARKS, LS_PROGRESS,
-                           LS_MIGRATE_JS, STICKY_SYNC_JS, GATE, GATE_STUB, esc, esc_attr, strip_tags,
+                           LS_MIGRATE_JS, STICKY_SYNC_JS, GATE, GATE_STUB, DELIVERY_LINKS,
+                           esc, esc_attr, strip_tags,
                            read_css, block_text, search_tokens, topbar, head_meta, footer)
 
 CHEV = ('<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>')
+
+_MONTHS = {1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June',
+           7: 'July', 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December'}
+
+
+def miw_sitting_label(paper_id):
+    """'QP2607' -> 'July 2026'. Derived from the id, so no cross-spec lookup.
+
+    Used only for MIW-verified recurrence: a sitting MIW has actually built
+    and compared wording against. Never used for third-party annotations.
+    """
+    try:
+        yy, mm = int(paper_id[2:4]), int(paper_id[4:6])
+        return '%s 20%02d' % (_MONTHS[mm], yy)
+    except (ValueError, KeyError, IndexError):
+        return paper_id
 
 
 # ------------------------------------------------------------------ blocks
@@ -353,19 +370,27 @@ def build_card(q, paper, out, publish):
     subjects = ' '.join((q.get('subject_tags') or [])).lower()
     out.append('<article class="q-card" id="%s" data-qid="%s" data-subjects="%s" data-search="%s">'
                % (q['anchor'], esc_attr(qid), esc_attr(subjects),
-                  esc_attr(search_tokens(q, paper))))
+                  esc_attr(search_tokens(q, paper, publish))))
     out.append('  <div class="q-head">')
     out.append('    <button class="q-toggle" type="button" aria-expanded="false" '
                'aria-controls="%s-body">' % esc_attr(q['anchor']))
     out.append('      <span class="q-num">%s</span>' % esc(q['q_no']))
     out.append('      <span class="q-main">')
     out.append('        <span class="q-title">%s</span>' % esc(q.get('short_title', q['q_no'])))
-    rec = q.get('recurrence_class', 'new')
-    rec_label = {'new': 'New', 'topic_recurrence': 'Topic recurs',
-                 'near_recurrence': 'Near repeat', 'exact_recurrence': 'Exact repeat'}.get(rec, rec)
-    out.append('        <span class="q-meta">%s marks<span class="sep">&middot;</span>%s'
-               '<span class="sep">&middot;</span>%s</span>'
-               % (q['total_marks'], esc(paper['month_year']), esc(rec_label)))
+    # recurrence_class is an AUTHORING field. Telling a candidate a question
+    # is an "Exact repeat" is telling them what to expect, which is not ours
+    # to promise -- it only ever belonged in the Founder review build.
+    if publish:
+        out.append('        <span class="q-meta">%s marks<span class="sep">&middot;</span>%s</span>'
+                   % (q['total_marks'], esc(paper['month_year'])))
+    else:
+        rec = q.get('recurrence_class', 'new')
+        rec_label = {'new': 'New', 'topic_recurrence': 'Topic recurs',
+                     'near_recurrence': 'Near repeat',
+                     'exact_recurrence': 'Exact repeat'}.get(rec, rec)
+        out.append('        <span class="q-meta">%s marks<span class="sep">&middot;</span>%s'
+                   '<span class="sep">&middot;</span>%s</span>'
+                   % (q['total_marks'], esc(paper['month_year']), esc(rec_label)))
     for line in q['text_verbatim'].split('\n'):
         out.append('        <span class="q-stem">%s</span>' % esc(line))
     out.append('        <span class="q-tags">')
@@ -373,9 +398,18 @@ def build_card(q, paper, out, publish):
         out.append('          <span class="q-tag">%s</span>' % esc(t))
     for t in (q.get('topic_tags') or [])[:4]:
         out.append('          <span class="q-tag sub">%s</span>' % esc(t))
-    if q.get('prior_sittings'):
-        out.append('          <span class="q-tag rec">%d prior sitting%s</span>'
-                   % (q['prior_sittings'], '' if q['prior_sittings'] == 1 else 's'))
+    # prior_sittings counts what the THIRD-PARTY SOURCE COPY annotated. Those
+    # papers were never read by MIW -- the specs' own recurrence_note says so.
+    # It is discovery evidence, not MIW recurrence intelligence, so it stays in
+    # the review build and never reaches a candidate. What a candidate may see
+    # is a sitting MIW has actually built and compared wording against.
+    if not publish:
+        if q.get('prior_sittings'):
+            out.append('          <span class="q-tag rec">%d prior sitting%s</span>'
+                       % (q['prior_sittings'], '' if q['prior_sittings'] == 1 else 's'))
+    elif q.get('reused_from'):
+        out.append('          <span class="q-tag rec">Also set in %s</span>'
+                   % esc(miw_sitting_label(str(q['reused_from']).split('-')[0])))
     out.append('        </span>')
     out.append('      </span>')
     out.append('      %s' % CHEV)
@@ -432,10 +466,23 @@ def build_card(q, paper, out, publish):
         out.append('  <p class="rec-note">Also on the platform: %s</p>'
                    % ' &middot; '.join('<a href="%s">%s</a>'
                                        % (esc_attr(x['href']), esc(x['label'])) for x in xl))
-    if q.get('recurrence'):
-        out.append('  <p class="rec-note">Recurrence recorded on the source paper: %s. %s</p>'
-                   % (', '.join(esc(r) for r in q['recurrence']),
-                      esc(q.get('recurrence_note', ''))))
+    # THIRD-PARTY RECURRENCE GUARD.
+    # q['recurrence'] and q['recurrence_note'] describe what the third-party
+    # source copy annotated -- sittings MIW has never read. Presenting that to
+    # a paying candidate as "recurrence" would pass off a provider's marketing
+    # annotation as MIW intelligence. It stays in the review build, where it is
+    # editorial evidence, and is replaced for candidates by the recurrence MIW
+    # has actually verified: another MIW-built sitting whose wording was
+    # compared directly. The spec keeps both fields; only the view changes.
+    if not publish:
+        if q.get('recurrence'):
+            out.append('  <p class="rec-note">Recurrence recorded on the source paper: %s. %s</p>'
+                       % (', '.join(esc(r) for r in q['recurrence']),
+                          esc(q.get('recurrence_note', ''))))
+    elif q.get('reused_from'):
+        out.append('  <p class="rec-note">MIW has also built this question in %s. '
+                   'The two wordings were compared directly.</p>'
+                   % esc(miw_sitting_label(str(q['reused_from']).split('-')[0])))
 
     # Production metadata: review mode only. Never shipped to students.
     if not publish:
@@ -474,7 +521,15 @@ def build_card(q, paper, out, publish):
 
 # ------------------------------------------------------------------ document
 
-def build(spec, gated=False, publish=False):
+def build(spec, gated=False, publish=False, deliver=False):
+    # deliver = the paid customer copy served from /solvedQP/.
+    # It shows the same content as a publish build (no production
+    # metadata, no review banner, and per memory no recurrence_class
+    # facing a candidate) but stays noindex and carries no JSON-LD,
+    # because paid answers must never reach structured data.
+    # publish stays False in this mode, which is what makes head_meta
+    # emit noindex and what keeps the JSON-LD block below switched off.
+    content_publish = publish or deliver
     d = spec
     pid = d['paper_id']
     qs = d['questions']
@@ -529,8 +584,8 @@ def build(spec, gated=False, publish=False):
             ]}, indent=2, ensure_ascii=False))
         extra.append('</script>')
 
-    o.extend(head_meta(strip_tags(title), strip_tags(desc),
-                       '/meoclass1/pastpapers/%s.html' % pid, publish, extra))
+    canonical = ('/solvedQP/%s.html' % pid) if deliver else ('/meoclass1/pastpapers/%s.html' % pid)
+    o.extend(head_meta(strip_tags(title), strip_tags(desc), canonical, publish, extra))
     a('<style>')
     a(read_css())
     a('</style>')
@@ -540,7 +595,8 @@ def build(spec, gated=False, publish=False):
     a(GATE if gated else GATE_STUB)
     a('<a class="skip" href="#paper-main">Skip to questions</a>')
     a('')
-    o.extend(topbar('Written Questions'))
+    o.extend(topbar('Solved QP' if deliver else 'Written Questions',
+                    links=DELIVERY_LINKS if deliver else None))
     a('')
     a('<header class="page-header">')
     a('  <div class="wrap">')
@@ -559,7 +615,7 @@ def build(spec, gated=False, publish=False):
     a('</header>')
     a('')
 
-    if not publish:
+    if not content_publish:
         a('<div class="review-banner">')
         a('  <strong>Founder review copy &mdash; ungated, uncommitted, not published.</strong> '
           'Generated from <code>specs/%s.json</code> by the Past Papers toolchain. '
@@ -620,7 +676,7 @@ def build(spec, gated=False, publish=False):
     a('')
 
     for q in qs:
-        build_card(q, d, o, publish)
+        build_card(q, d, o, content_publish)
         a('')
 
     a('<div id="no-results">No question matches that search. Try a topic, a regulation '
@@ -660,12 +716,13 @@ def build(spec, gated=False, publish=False):
     a('  <span class="correction-link">Correction? <a href="mailto:%s?subject=Past%%20Paper%%20%s%%2C%%20Correction%%20Required">%s</a></span>'
       % (CONTACT, pid, CONTACT))
     a('  <span class="q-version">Written Questions &middot; %s &middot; v%s &middot; %s</span>'
-      % (pid, esc(d['version']), 'GATED' if gated else 'UNGATED REVIEW COPY'))
+      % (pid, esc(d['version']),
+         'SOLVED QP' if deliver else ('GATED' if gated else 'UNGATED REVIEW COPY')))
     a('</div>')
     a('</main>')
     a('</div>')
     a('')
-    o.extend(footer(publish))
+    o.extend(footer(content_publish))
     a('')
     js = open(os.path.join(TPL, 'paper.js'), encoding='utf-8').read()
     js = (js.replace('__LS_BOOKMARKS__', LS_BOOKMARKS)
@@ -686,13 +743,21 @@ def main():
     ap.add_argument('-o', '--out')
     ap.add_argument('--gated', action='store_true')
     ap.add_argument('--publish', action='store_true')
+    ap.add_argument('--deliver', action='store_true',
+                    help='paid customer copy for /solvedQP/ (noindex, no production '
+                         'metadata, no JSON-LD, Solved QP navigation)')
     args = ap.parse_args()
 
     spec = json.load(open(args.spec, encoding='utf-8'))
-    html = build(spec, gated=args.gated, publish=args.publish)
+    html = build(spec, gated=args.gated, publish=args.publish, deliver=args.deliver)
 
-    out = args.out or os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers',
-                                   '%s.html' % spec['paper_id'])
+    if args.out:
+        out = args.out
+    elif args.deliver:
+        out = os.path.join(REPO_ROOT, 'solvedQP', '%s.html' % spec['paper_id'])
+    else:
+        out = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers', '%s.html' % spec['paper_id'])
+    os.makedirs(os.path.dirname(out), exist_ok=True)
     prev = open(out, encoding='utf-8', newline='').read() if os.path.exists(out) else None
     with io.open(out, 'w', encoding='utf-8', newline='\n') as fh:
         fh.write(html)
@@ -707,7 +772,8 @@ def main():
     print('  %d bytes, %d questions, %d with answers'
           % (len(html.encode('utf-8')), len(spec['questions']), n))
     print('  mode: %s, gate: %s'
-          % ('PUBLISH' if args.publish else 'review (noindex)',
+          % ('PUBLISH' if args.publish
+             else ('SOLVED QP delivery (noindex)' if args.deliver else 'review (noindex)'),
              'PRESENT' if args.gated else 'stripped'))
     if prev is not None:
         print('  rebuild: %s' % ('IDENTICAL to previous output' if prev == html else 'CHANGED'))
