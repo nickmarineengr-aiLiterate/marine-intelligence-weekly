@@ -150,6 +150,7 @@ applicability and regulatory status. Enforced structurally by `SEMANTIC_GUARDS` 
 `validate_spec.py`, which scans the derived fields only -- the model answer and study guide
 are the source and are allowed to carry the full conditional sentence.
 GREP: pellets are Group C
+SCOPE: product
 
 ### 15. Stale build-state terminology
 Once a question's status moves on, "Pilot Built" must not survive in generated HTML.

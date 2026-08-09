@@ -26,10 +26,22 @@ TOP = [
 
 QUESTION = [
     'q_no', 'anchor', 'text_verbatim', 'subparts', 'total_marks', 'topic_tags',
-    'recurrence', 'command_verbs', 'decomposition', 'reuse_tier', 'reuse_evidence',
-    'reused_from', 'question_delta', 'answer_status', 'verification_status',
-    'sources', 'unresolved', 'cross_links', 'model_answer', 'study_notes',
+    'host_recurrence_hint', 'command_verbs', 'decomposition', 'reuse_tier',
+    'reuse_evidence', 'reused_from', 'question_delta', 'answer_status',
+    'verification_status', 'sources', 'unresolved', 'cross_links', 'model_answer',
+    'study_notes',
 ]
+
+# Retired at schema 1.3, when the recurrence provenance boundary was drawn.
+# `recurrence` is the host's own printed annotation and is now named for what it
+# is; `prior_sittings` was a COUNT of those host claims rendered to candidates as
+# though MIW had established it; `recurrence_note` was 153 identical copies of a
+# rule that belongs in controlled_vocabulary once. See recurrence_check.py.
+RETIRED_QUESTION_KEYS = {
+    'recurrence': 'renamed to host_recurrence_hint',
+    'prior_sittings': 'deleted -- canonical family size comes from recurrence_model.py',
+    'recurrence_note': 'deleted -- the rule lives in controlled_vocabulary.recurrence_rule',
+}
 
 BUILD_STATES = ['Intake Complete', 'Dedup Assessed', 'Pilot In Progress',
                 'Pilot Review Ready', 'Founder Approved', 'Complete']
@@ -525,6 +537,9 @@ def main(path):
         for k in QUESTION:
             if k not in q:
                 err('%s: missing key %s' % (qn, k))
+        for k, why in RETIRED_QUESTION_KEYS.items():
+            if k in q:
+                err('%s: retired key %r (%s)' % (qn, k, why))
 
         if qn in seen_no:
             err('duplicate q_no: %s' % qn)

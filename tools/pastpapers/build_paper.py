@@ -35,7 +35,8 @@ sys.path.insert(0, HERE)
 from render_common import (REPO_ROOT, TPL, BASE, CONTACT, LS_BOOKMARKS, LS_PROGRESS,
                            LS_MIGRATE_JS, STICKY_SYNC_JS, GATE, GATE_STUB, esc, esc_attr, strip_tags,
                            read_css, block_text, search_tokens, topbar, head_meta, footer,
-                           is_intake)
+                           is_intake, corpus_relations)
+import recurrence_model as RM
 
 CHEV = ('<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
         'stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>')
@@ -349,24 +350,27 @@ def recall_view(q, out):
         out.append('  </section>')
 
 
-def build_card(q, paper, out, publish):
+def build_card(q, paper, out, publish, corpus=None):
     qid = q['question_id']
     subjects = ' '.join((q.get('subject_tags') or [])).lower()
+    # Canonical, chronological recurrence -- computed over the whole corpus, not
+    # read off this spec. The two fields that used to drive this badge were the
+    # host's printed annotation and the authoring field recurrence_class, and
+    # both state things that are not true of the calendar. See recurrence_check.py.
+    nodes, relations = corpus if corpus else corpus_relations()
+    rel = relations[qid]
     out.append('<article class="q-card" id="%s" data-qid="%s" data-subjects="%s" data-search="%s">'
                % (q['anchor'], esc_attr(qid), esc_attr(subjects),
-                  esc_attr(search_tokens(q, paper))))
+                  esc_attr(search_tokens(q, paper, rel))))
     out.append('  <div class="q-head">')
     out.append('    <button class="q-toggle" type="button" aria-expanded="false" '
                'aria-controls="%s-body">' % esc_attr(q['anchor']))
     out.append('      <span class="q-num">%s</span>' % esc(q['q_no']))
     out.append('      <span class="q-main">')
     out.append('        <span class="q-title">%s</span>' % esc(q.get('short_title', q['q_no'])))
-    rec = q.get('recurrence_class', 'new')
-    rec_label = {'new': 'New', 'topic_recurrence': 'Topic recurs',
-                 'near_recurrence': 'Near repeat', 'exact_recurrence': 'Exact repeat'}.get(rec, rec)
     out.append('        <span class="q-meta">%s marks<span class="sep">&middot;</span>%s'
                '<span class="sep">&middot;</span>%s</span>'
-               % (q['total_marks'], esc(paper['month_year']), esc(rec_label)))
+               % (q['total_marks'], esc(paper['month_year']), rel['label']))
     for line in q['text_verbatim'].split('\n'):
         out.append('        <span class="q-stem">%s</span>' % esc(line))
     out.append('        <span class="q-tags">')
@@ -374,9 +378,9 @@ def build_card(q, paper, out, publish):
         out.append('          <span class="q-tag">%s</span>' % esc(t))
     for t in (q.get('topic_tags') or [])[:4]:
         out.append('          <span class="q-tag sub">%s</span>' % esc(t))
-    if q.get('prior_sittings'):
-        out.append('          <span class="q-tag rec">%d prior sitting%s</span>'
-                   % (q['prior_sittings'], '' if q['prior_sittings'] == 1 else 's'))
+    if rel['family_size'] > 1:
+        out.append('          <span class="q-tag rec">%d sitting%s in this set</span>'
+                   % (rel['family_size'], '' if rel['family_size'] == 1 else 's'))
     out.append('        </span>')
     out.append('      </span>')
     out.append('      %s' % CHEV)
@@ -433,10 +437,13 @@ def build_card(q, paper, out, publish):
         out.append('  <p class="rec-note">Also on the platform: %s</p>'
                    % ' &middot; '.join('<a href="%s">%s</a>'
                                        % (esc_attr(x['href']), esc(x['label'])) for x in xl))
-    if q.get('recurrence'):
-        out.append('  <p class="rec-note">Recurrence recorded on the source paper: %s. %s</p>'
-                   % (', '.join(esc(r) for r in q['recurrence']),
-                      esc(q.get('recurrence_note', ''))))
+    # Recurrence, candidate-facing. One honest sentence, computed from the
+    # calendar over MIW's own transcriptions. What used to stand here was the
+    # source copy host's printed "previously asked" table, republished verbatim
+    # -- another party's analysis, proved wrong in both directions by the 2026
+    # set, shipped to a paying student as though MIW had established it.
+    out.append('  <p class="rec-note"><span class="q-tag rec">%s</span> %s</p>'
+               % (rel['label'], RM.family_summary(nodes, relations, qid)))
 
     # Production metadata: review mode only. Never shipped to students.
     if not publish:
@@ -620,8 +627,11 @@ def build(spec, gated=False, publish=False):
     a('</section>')
     a('')
 
+    # Loaded once for the whole paper: the family model is a property of the
+    # corpus, so recomputing it per card would be nine identical passes.
+    corpus = corpus_relations()
     for q in qs:
-        build_card(q, d, o, publish)
+        build_card(q, d, o, publish, corpus)
         a('')
 
     a('<div id="no-results">No question matches that search. Try a topic, a regulation '

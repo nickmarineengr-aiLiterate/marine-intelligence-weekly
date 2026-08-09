@@ -4,7 +4,7 @@ description: >
   Full production, verification, dedup, and correction workflow for the Marine Intelligence Weekly
   MEO Class 1 Engineering Management PAST WRITTEN PAPER model-answer series at
   marineintelligenceweekly.com/meoclass1/pastpapers/. Use this skill whenever Nixon mentions "past
-  paper", "full question paper", "written paper answers", "EM-26xx", "dieselship paper", or any task
+  paper", "full question paper", "written paper answers", "EM-26xx", "the third-party paper copy", or any task
   involving building complete model answers for an entire official MEO Class 1 written exam sitting.
   Distinct from: miw-qb-production (oral card Q&A), miw-notes-mgmt (page-range topic notes),
   miw-written-qa-production (single-topic deep-dive WA chapters). This series answers EVERY question
@@ -63,7 +63,8 @@ reserved for the WA topic-chapter series and must not absorb this different cont
 ## 2. Source material handling
 
 - Source: the official DG Shipping / Kochi MMD written exam papers, currently sourced via aggregator
-  PDFs (dieselship.com "EM" series). The **exam questions themselves are official government exam
+  PDFs (the third-party-hosted "EM" series; the host is named only in the git-ignored
+  verification/LOCAL_SOURCE_PROVENANCE.md). The **exam questions themselves are official government exam
   content**, not the aggregator's creative work — reproducing the verbatim question text is standard,
   necessary exam-prep practice (the WA skill already does this for its primary question per chapter).
 - **Do not reproduce** the aggregator's own marketing copy, watermark text, or the "recurrence index"

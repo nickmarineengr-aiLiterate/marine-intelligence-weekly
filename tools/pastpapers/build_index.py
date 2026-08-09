@@ -30,7 +30,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(HERE)), 'tools',
 from render_common import (REPO_ROOT, BASE, CONTACT, esc, esc_attr, strip_tags,
                            read_css, search_tokens, topbar, head_meta, footer,
                            GATE_STUB, LS_BOOKMARKS, LS_PROGRESS, LS_MIGRATE_JS,
-                           STICKY_SYNC_JS)
+                           STICKY_SYNC_JS, corpus_relations)
+import recurrence_model as RM
 
 PP_DIR = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers')
 SPEC_GLOB = os.path.join(PP_DIR, 'specs', '*.json')
@@ -88,6 +89,7 @@ def load_specs():
 
 def build_manifest(specs):
     papers, questions = [], []
+    _nodes, rel = corpus_relations(specs)
     for d in specs:
         pid = d['paper_id']
         url = 'meoclass1/pastpapers/%s.html' % pid
@@ -139,9 +141,18 @@ def build_manifest(specs):
                 'intent_tags': q.get('intent_tags') or [],
                 'search_aliases': q.get('search_aliases') or [],
                 'regulations': q.get('regulations') or [],
-                'recurrence': q.get('recurrence') or [],
-                'recurrence_class': q.get('recurrence_class', 'new'),
-                'prior_sittings': q.get('prior_sittings', 0),
+                # Canonical recurrence only, computed from the calendar. The
+                # host's printed annotation and the authoring field
+                # recurrence_class are both absent by design -- see
+                # recurrence_check.py for why either one in a public manifest is
+                # a false claim rather than a harmless extra field.
+                'recurrence_status': rel[q['question_id']]['status'],
+                'recurrence_label': rel[q['question_id']]['label_plain'],
+                'family_id': rel[q['question_id']]['family_id'],
+                'family_size': rel[q['question_id']]['family_size'],
+                'family_members': rel[q['question_id']]['members'],
+                'first_occurrence': rel[q['question_id']]['first_occurrence'],
+                'family_summary': RM.family_summary(_nodes, rel, q['question_id']),
                 'reuse_tier': q.get('reuse_tier'),
                 'answer_status': q['answer_status'],
                 'verification_status': q.get('verification_status'),
@@ -154,7 +165,7 @@ def build_manifest(specs):
                 'unresolved_count': len(q.get('unresolved') or []),
                 'reverify_before_publication': q.get('reverify_before_publication') or [],
                 'provenance_summary': q.get('provenance_summary'),
-                'search_blob': search_tokens(q, d),
+                'search_blob': search_tokens(q, d, rel[q['question_id']]),
             })
     return {
         'manifest_version': '2.0',
@@ -169,13 +180,18 @@ def build_manifest(specs):
         'source_of_truth_policy': ('specs/<PAPER>.json is authoritative for content. This manifest is '
                                    'authoritative for retrieval. Both index pages and the paper page '
                                    'are generated; editing generated HTML is always wrong.'),
-        'recurrence_classes': {
-            'new': 'No prior sitting recorded on the source paper.',
-            'topic_recurrence': 'Prior sittings recorded for the same topic; wording NOT compared.',
-            'near_recurrence': 'Wording compared and substantially similar, with a recorded delta.',
-            'exact_recurrence': 'Wording compared and materially identical.'},
-        'recurrence_rule': ('A third-party recurrence table alone only supports topic_recurrence. '
-                            'near_ and exact_ require the prior paper wording to have been compared.'),
+        'recurrence_statuses': {
+            'single': 'Set once in the sittings MIW has transcribed. NOT "never asked before".',
+            'first': 'Earliest sitting of a family that returns at a later sitting.',
+            'repeat_exact': 'Later sitting; normalised printed stem identical to the first.',
+            'repeat_near': 'Later sitting; printed stem materially reworded.'},
+        'recurrence_rule': ('Canonical recurrence is computed chronologically in '
+                            'recurrence_model.py from (year, month) over MIW\'s own '
+                            'transcriptions, and from nothing else. The source copy host\'s '
+                            'printed annotation is discovery-only provenance held in the spec as '
+                            'host_recurrence_hint and is never published; the authoring field '
+                            'recurrence_class records production order, not sitting order. '
+                            'Every count here is scoped to the sittings MIW has transcribed.'),
         'topic_tree': [{'category': c, 'subject_tags': t} for c, t in TOPIC_TREE],
         # Navigator shape. Years carrying a spec plus any advertised ahead of
         # their first paper. Consumers can render the full grid from this
@@ -438,13 +454,11 @@ def build_topics_page(man, year, publish):
               % (''.join('<span class="q-tag">%s</span>' % esc(t) for t in secondary),
                  ''.join('<span class="q-tag sub">%s</span>' % esc(t)
                          for t in q['topic_tags'][:4])))
-            prior = [r for r in q['recurrence'] if not r.startswith('%d/' % year)]
-            if prior:
-                a('    <div class="rec-note">Other recorded sittings: %s. '
-                  '<i>Topic recurrence only &mdash; wording not compared.</i></div>'
-                  % ', '.join(esc(r) for r in prior))
-            else:
-                a('    <div class="rec-note">No prior sitting recorded.</div>')
+            # Canonical recurrence, one sentence, scoped to what MIW has
+            # transcribed. What stood here was the host's own "other recorded
+            # sittings" list -- a third party's claim, republished.
+            a('    <div class="rec-note"><span class="q-tag rec">%s</span> %s</div>'
+              % (q['recurrence_label'], esc(q['family_summary'])))
             a('  </div>')
         a('</section>')
 

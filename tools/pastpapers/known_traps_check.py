@@ -65,6 +65,15 @@ def scannable_files():
         files.append(p)
     for p in sorted(glob.glob(os.path.join(PP, 'specs', '*.json'))):
         files.append(p)
+    # Committed documentation under docs/, for trap 14 in particular. The scan
+    # used to stop at pages, specs and the manifest, and a tracked design draft
+    # under docs/ named the source-copy host twice in ordinary prose -- a
+    # published brand trace in a public repository that nothing was looking for.
+    # The source PDFs themselves live in the same directory and are git-ignored;
+    # they are excluded here because scanning a file that can never be committed
+    # would fail the build for a file nobody can fix.
+    for p in sorted(glob.glob(os.path.join(PP, 'docs', '*.md'))):
+        files.append(p)
     files.append(os.path.join(PP, 'pastpapers_content_index.json'))
     return [f for f in files if os.path.exists(f)
             and os.path.basename(f) not in EXEMPT_PATHS
@@ -85,11 +94,22 @@ def grep_layer(traps, extra_text=None):
         checked += 1
         needle = phrase.lower()
         for name, body in corpus:
-            # SCOPE: html limits a trap to generated pages, for traps that are
-            # genuinely about rendered output. Brand traces are NOT such a trap:
-            # the repository is public, so specs and the manifest are scanned too.
-            if scope == 'html' and not name.endswith('.html') and name != '<injected>':
-                continue
+            # SCOPE narrows a trap to the surfaces it is actually about.
+            #
+            #   html      generated pages only
+            #   product   pages, specs and the manifest -- everything a student
+            #             can fetch, but not design documentation. A doc that
+            #             DISCUSSES a wrong formulation in order to forbid it is
+            #             not committing it, which is the same reasoning that
+            #             already exempts known_traps.md itself.
+            #   all       (default) every scanned file. Brand traces are this:
+            #             the repository is public, so a host name is a published
+            #             trace wherever it sits.
+            if name != '<injected>':
+                if scope == 'html' and not name.endswith('.html'):
+                    continue
+                if scope == 'product' and name.endswith('.md'):
+                    continue
             if needle in body:
                 fails.append('trap %s (%s): found %r in %s' % (num, title[:52], phrase, name))
     return fails, checked

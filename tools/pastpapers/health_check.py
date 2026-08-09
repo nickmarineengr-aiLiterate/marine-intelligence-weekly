@@ -68,7 +68,7 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
     ok('manifest parses')
 
     for k in ('manifest_version', 'papers', 'questions', 'topic_tree',
-              'source_of_truth_policy', 'recurrence_classes'):
+              'source_of_truth_policy', 'recurrence_statuses'):
         if k not in man:
             err('manifest missing required key: %s' % k)
 

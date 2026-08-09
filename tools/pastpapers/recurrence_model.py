@@ -26,6 +26,21 @@ things. Mixing them produces candidate-facing statements that are false.
    reason. This module treats it as an UNDIRECTED edge -- "these two questions
    are the same examiner task" -- and recovers direction from the calendar.
 
+   That equivalence is not automatic, and assuming it was produced a false
+   family. QP2602-Q3 (formal safety assessment applied to LITHIUM BATTERIES in
+   vehicles, containers and ro-ro spaces) was authored from QP2607-Q1 (formal
+   safety assessment applied to IRON ORE PELLETS in bulk carriers). What was
+   reused is the METHOD, not the question: different cargo, different ship type,
+   different hazard, different carriage requirements. Treating that pointer as a
+   family edge told a candidate the lithium question had been set five times
+   when it had been set four. So ``reuse_kind`` distinguishes the two meanings:
+
+     same_task   (default) the examiner set the same task; a family edge
+     shape_only  only the answer's shape or method was reused; NOT a family edge
+
+   Absent means same_task, so the 38 genuine edges need no annotation and the
+   claim that needs evidence is the one that has to be written down.
+
 The rule this module enforces
 -----------------------------
     Chronology comes from (year, month) and from nothing else.
@@ -67,6 +82,13 @@ STATUS_LABEL = {
     STATUS_REPEAT_NEAR: 'Repeated &mdash; reworded',
 }
 
+# The same four labels as plain text. STATUS_LABEL carries an HTML entity, which
+# is right for a rendered badge and wrong for a search token or a JSON field: an
+# entity inside a `data-search` attribute is double-escaped, so a candidate
+# searching "repeated" would match and a candidate searching the label as it
+# appears on screen would not.
+STATUS_LABEL_PLAIN = {k: v.replace('&mdash;', '-') for k, v in STATUS_LABEL.items()}
+
 # Coarse filter buckets. 'repeated' covers both repeat flavours so a candidate
 # can ask the only question they actually have: "has this come back?"
 STATUS_FILTER = {
@@ -77,7 +99,27 @@ STATUS_FILTER = {
 }
 
 
-def normalise_stem(text):
+# A printed marks token: a bare integer in parentheses, standing on its own.
+#
+# The lookbehind is what makes this safe. It requires whitespace or an opening
+# bracket immediately before the "(", so a parenthetical that is ATTACHED to an
+# identifier is never touched: MEPC.312(74), MEPC.203(62), resolution A.1070(28)
+# all keep their numbers, because those digits are part of the instrument's
+# name and deleting them would merge two questions about different resolutions.
+MARKS_TOKEN = re.compile(r'(?:(?<=\s)|(?<=^)|(?<=\())\((\d{1,2})\)')
+
+
+def _marks_values(marks, subparts):
+    """Every number this question could legitimately print as a marks token."""
+    vals = {int(marks)} if marks else set()
+    for s in subparts or []:
+        m = s.get('marks')
+        if m:
+            vals.add(int(m))
+    return vals
+
+
+def normalise_stem(text, marks=None, subparts=None):
     """Aggressively normalised printed stem, for equality testing only.
 
     Case, punctuation and whitespace are discarded because the 2026 set contains
@@ -87,8 +129,43 @@ def normalise_stem(text):
     equality testing, never similarity scoring -- similarity ranking is a
     DISCOVERY tool that has already ranked the wrong neighbour twice in this
     corpus, and it is deliberately not used here.
+
+    PRINTED MARKS ARE METADATA, NOT EXAMINER-DEMAND WORDING
+    ------------------------------------------------------
+    The same examiner task is printed with different marks tokens at different
+    sittings, and the marks are already carried structurally in ``total_marks``
+    and ``subparts[].marks``. Leaving them in the stem made two identical tasks
+    compare unequal and label the later one "Repeated -- reworded", which tells a
+    candidate the examiner changed the question when the examiner did not. Three
+    real cases in this corpus:
+
+      * QP2403-Q7 prints (6)(4)(6) and QP2412-Q9 prints (6)(5)(5) for the III
+        Code question, word for word otherwise;
+      * QP2510-Q5 prints a total ``(16)`` after "elaborate following:" where
+        QP2403-Q5 prints none, word for word otherwise;
+      * QP2403-Q4 prints no marks at all where its relatives print (16).
+
+    So a marks token is stripped, but ONLY when both of these hold:
+
+      1. it is a bare parenthesised integer with whitespace (or nothing) before
+         the bracket -- ``MEPC.312(74)`` is attached and survives; and
+      2. its value is one this question actually declares, i.e. its own
+         ``total_marks`` or one of its subpart marks -- so ``(74)`` would
+         survive rule 2 as well, and a number that is part of the examiner's
+         demand cannot be removed unless it happens to equal a declared mark.
+
+    Numbers inside the demand -- percentages, years, regulation and section
+    numbers, capacities, "Phase 2 (of 20% - 30% reduction)" -- are untouched
+    because none of them is a bare parenthesised declared-marks integer.
+
+    Callers that pass no marks get the old behaviour, so the function is still
+    usable on a bare string.
     """
-    t = unicodedata.normalize('NFKC', text or '').lower()
+    t = unicodedata.normalize('NFKC', text or '')
+    keep = _marks_values(marks, subparts)
+    if keep:
+        t = MARKS_TOKEN.sub(lambda m: ' ' if int(m.group(1)) in keep else m.group(0), t)
+    t = t.lower()
     t = re.sub(r'<[^>]+>', ' ', t)
     t = re.sub(r'[^a-z0-9 ]', ' ', t)
     return re.sub(r'\s+', ' ', t).strip()
@@ -117,8 +194,11 @@ def load_nodes(specs):
                 'subject_tags': q.get('subject_tags') or [],
                 'topic_tags': q.get('topic_tags') or [],
                 'answers_built': bool(q.get('model_answer')),
-                '_reused_from': q.get('reused_from'),
-                '_stem': normalise_stem(q['text_verbatim']),
+                '_reused_from': (q.get('reused_from')
+                                 if q.get('reuse_kind', 'same_task') == 'same_task' else None),
+                '_reuse_kind': q.get('reuse_kind', 'same_task'),
+                '_stem': normalise_stem(q['text_verbatim'], q['total_marks'],
+                                        q.get('subparts')),
             }
     return nodes
 
@@ -187,6 +267,7 @@ def build_families(nodes):
                 'status': status,
                 'filter': STATUS_FILTER[status],
                 'label': STATUS_LABEL[status],
+                'label_plain': STATUS_LABEL_PLAIN[status],
                 'first_occurrence': first,
                 'members': list(members),
                 'others': [m for m in members if m != qid],

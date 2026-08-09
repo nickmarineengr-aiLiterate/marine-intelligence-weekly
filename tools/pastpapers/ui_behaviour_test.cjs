@@ -239,10 +239,28 @@ if (F.regulation) {
   ok(`regulation "${F.regulation[0]}" finds ${F.regulation[1]}`,
      search(F.regulation[0]).map(c => c.qid).includes(F.regulation[1]));
 }
+// INVERTED at schema 1.3. This assertion used to REQUIRE that searching a
+// third-party host sitting code found the question -- which is only possible
+// because the host's printed annotation was inside the shipped data-search
+// attribute: invisible on screen, present in the bytes, and another party's
+// claim either way. It is now a leak probe. The canonical status label, which
+// MIW does compute, is searchable in its place.
 if (F.recurrence) {
-  ok(`recurrence code "${F.recurrence[0]}" finds ${F.recurrence[1]}`,
-     search(F.recurrence[0]).map(c => c.qid).includes(F.recurrence[1]));
+  ok(`host recurrence code "${F.recurrence[0]}" is NOT searchable`,
+     search(F.recurrence[0]).length === 0,
+     'got ' + JSON.stringify(search(F.recurrence[0]).map(c => c.qid)));
 }
+// ...and every card must carry exactly one of the four canonical status labels,
+// so the search that was lost is genuinely replaced rather than just removed.
+// Asserted structurally rather than by fixture: the label of any given question
+// changes the moment another year is transcribed, which is the whole point of
+// computing it from the calendar.
+const STATUS_LABELS = ['once in this set', 'first in set',
+                       'repeated - same wording', 'repeated - reworded'];
+const missing = cards.filter(c =>
+  !STATUS_LABELS.some(l => c.search.indexOf(l) !== -1)).map(c => c.qid);
+ok('every card is searchable by its canonical recurrence status',
+   missing.length === 0, 'without a status label: ' + JSON.stringify(missing));
 if (F.narrow) {
   ok(`multi-term "${F.narrow[0]}" narrows to ${F.narrow[1]}`,
      JSON.stringify(search(F.narrow[0]).map(c => c.qid)) === JSON.stringify([F.narrow[1]]),

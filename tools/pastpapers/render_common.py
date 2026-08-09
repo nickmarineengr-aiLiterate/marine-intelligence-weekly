@@ -7,7 +7,7 @@ chrome. Nothing here reads the clock or the filesystem beyond the template
 directory, so every generated file stays byte-reproducible.
 """
 import html as html_mod
-import os, re
+import io, json, os, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
@@ -156,7 +156,38 @@ def block_headings(blocks):
     return [strip_tags(b['h']) for b in blocks.get('blocks', []) if 'h' in b]
 
 
-def search_tokens(q, paper):
+SPEC_GLOB = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers', 'specs', '*.json')
+
+
+def load_all_specs():
+    """Every spec in the corpus, in stable paper_id order.
+
+    Several builders need the WHOLE corpus rather than the one spec they were
+    handed, because chronological recurrence is a property of the corpus and not
+    of any single paper. Loading it in one place keeps them from disagreeing
+    about which papers exist.
+    """
+    import glob
+    return [json.load(io.open(p, encoding='utf-8'))
+            for p in sorted(glob.glob(SPEC_GLOB))]
+
+
+def corpus_relations(specs=None):
+    """(nodes, relations) for the whole corpus, from recurrence_model.
+
+    This is the ONLY source of candidate-facing recurrence. The host's printed
+    annotation (``host_recurrence_hint``) is discovery-only provenance and never
+    reaches a rendered surface; the authoring field ``recurrence_class`` records
+    what was true in PRODUCTION order and is not chronology. See
+    recurrence_model.py for the three questions where the two disagree.
+    """
+    import recurrence_model as RM
+    specs = specs if specs is not None else load_all_specs()
+    nodes = RM.load_nodes(specs)
+    return nodes, RM.build_families(nodes)
+
+
+def search_tokens(q, paper, relation=None):
     """Deterministic search string for a question card.
 
     Driven from the spec, NOT from rendered text. QB10_A searches
@@ -164,20 +195,28 @@ def search_tokens(q, paper):
     silently misses answer content while a card is collapsed. Generating the
     tokens here means search works on collapsed cards and on metadata that is
     never displayed at all.
+
+    Two recurrence signals are deliberately ABSENT. ``host_recurrence_hint`` is
+    the source copy host's own claim, which policy classes discovery-only and
+    which the 2026 set proved wrong in both directions; shipping it inside a
+    data-search attribute makes it invisible on screen and still present in the
+    bytes, which is the worst of both. ``recurrence_class`` is an authoring
+    field recorded in production order, so searching "exact repeat" against it
+    returns the wrong questions. The canonical status label is passed in as
+    ``relation`` instead.
     """
     parts = [
         q['q_no'], q['question_id'], paper['paper_id'], paper['sr_no'],
         paper['month'], str(paper['year']), paper['month_year'], paper['subject'],
         q.get('short_title', ''), strip_tags(q['text_verbatim']),
         '%s marks' % q['total_marks'],
-        q.get('recurrence_class', ''),
+        relation['label_plain'] if relation else '',
     ]
     parts += q.get('topic_tags') or []
     parts += q.get('subject_tags') or []
     parts += q.get('intent_tags') or []
     parts += q.get('search_aliases') or []
     parts += q.get('regulations') or []
-    parts += q.get('recurrence') or []
     parts += block_headings(q.get('model_answer'))
     parts += block_headings(q.get('study_notes'))
     qr = q.get('quick_revision') or {}
