@@ -167,6 +167,39 @@ const FIXTURES = {
     // record book's full name cannot collide with anything else on the paper.
     narrow: ['biofouling record book', 'QP2604-Q5'],
   },
+  QP2606: {
+    probes: [
+      // Q1 sets goal-based standards and Q8 refers to them when explaining why
+      // class rules must be verified, so "goal-based" resolves to two cards.
+      // The Ship Construction File is the part of GBS only Q1 carries.
+      ['ship construction file', 'QP2606-Q1'],
+      ['no more favourable treatment', 'QP2606-Q2'],
+      ['york antwerp', 'QP2606-Q3'],
+      ['upskill', 'QP2606-Q4'],
+      ['msc.428(98)', 'QP2606-Q5'],
+      ['inventory control', 'QP2606-Q6'],
+      ['particularly sensitive sea area', 'QP2606-Q7'],
+      ['periodical survey', 'QP2606-Q8'],
+      ['formal safety assessment', 'QP2606-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases. Each
+      // answer spells the term out in full, so the abbreviation exists in
+      // metadata alone, which is the behaviour being guarded.
+      ['scf', 'QP2606-Q1', 'the ship construction file (abbreviation never rendered)'],
+      ['ship risk profile', 'QP2606-Q2', 'Q2'],
+      ['dpa', 'QP2606-Q5', 'Q5'],
+      ['nosdcp', 'QP2606-Q7', 'Q7'],
+    ],
+    regulation: ['a.1207(34)', 'QP2606-Q8'],
+    // June's host table lists no other 2026 sitting against any question, so the
+    // recurrence probe has to be a historical code. 2025/FEB/Q9 is unique to Q7;
+    // Q8 carries 2025/SEP/Q9, which differs only in the month.
+    recurrence: ['2025/feb/q9', 'QP2606-Q7'],
+    // Must resolve to exactly ONE card. June sets surveys only in Q8, and the
+    // radio certificate's full name cannot collide with anything else.
+    narrow: ['cargo ship safety radio certificate', 'QP2606-Q8'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';

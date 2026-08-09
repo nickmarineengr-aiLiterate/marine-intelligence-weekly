@@ -1,19 +1,26 @@
-# CURRENT STATUS — MEO Class I Written Questions / QP2607 + QP2601 + QP2602 + QP2603 + QP2604
+# CURRENT STATUS — MEO Class I Written Questions / the complete 2026 set
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-09, at the close of the **QP2604 (April) production** session. Read this first.
+Last updated: 2026-08-09, at the close of the **QP2606 (June) production** session. Read this first.
 
-> **FIVE PAPERS ARE BUILT. 5 of the 6 available 2026 sittings.**
+> # **THE 2026 PRODUCTION DATASET IS COMPLETE. 6 of 6 available sittings, 54 questions.**
+>
 > **QP2607 (July)** — frozen V1 template, Founder review candidate.
 > **QP2601 (January)** — Founder review candidate, cross-paper validation. **0 class A blocking flags.**
 > **QP2602 (February)** — Founder review candidate. **0 class A blocking flags.**
 > **QP2603 (March)** — Founder review candidate. **0 class A blocking flags.**
 > **QP2604 (April)** — Founder review candidate. **0 class A blocking flags.**
-> **QP2606 (June)** — **STARTED, NOT BUILT.** Transcription and recurrence analysis are complete
-> and verified; Q1 and Q2 are verified against primary sources; **Q3–Q9 are not.** There is no
-> `specs/QP2606.json`. See **§2f** and
-> `docs/QP2606_SOURCE_TRANSCRIPTION_AND_RECURRENCE.md`.
-> **May 2026 does not exist in the source set.**
+> **QP2606 (June)** — **BUILT AND VERIFIED.** Founder review candidate. **0 class A blocking flags.**
+> See **§2f**, `verification/QP2606/` and `docs/QP2606_TRUE_SOURCE_DEMAND_MAP.md`.
+>
+> **May 2026 does not exist in the source set — and the examiner's own serial numbering confirms
+> it.** The 2025 bundle runs `EM–2501 … 2504, 2506 … 2512`, with a gap exactly at **2505**. May is
+> absent in both years. Keep it `coming_later`; do not create a QP2605 spec.
+
+> **NEXT SESSION IS A REVIEW SESSION, NOT A PRODUCTION SESSION.** See §18. The six-paper
+> intelligence review, the generated ONLY QUESTIONS year sheet, the V1 freeze/refinement decisions
+> and the 2025 production strategy are all reserved for it and were deliberately **not** started
+> during June production.
 
 > **BRANCH: `pastpapers/qp2606-founder-review`**, created from `5744143` (the QP2604 completion).
 > The April, March, February, January and July branches are untouched and preserved.
@@ -635,63 +642,254 @@ review would automatically improve QP2604.**
 
 ---
 
-## 2f. QP2606 — JUNE, STARTED AND NOT FINISHED, 2026-08-09
+## 2f. QP2606 — JUNE PRODUCTION RESULT, 2026-08-09. THE 2026 SET IS COMPLETE.
 
-**QP2606 is NOT built.** No spec, no page, no verification records. The toolchain still reports
-**five** papers and `ALL STAGES PASS   38 warning(s)` — unchanged from the QP2604 baseline.
+**QP2606 (June 2026) is built: all 9 questions, Founder review candidate, 0 blocking flags.**
+**This completes the six available 2026 sittings — 54 questions.**
 
-Full detail: **`docs/QP2606_SOURCE_TRANSCRIPTION_AND_RECURRENCE.md`**, which is complete and is
-the resume point. Headlines:
+| Output | Path |
+|---|---|
+| Paper | `meoclass1/pastpapers/QP2606.html` — **generated** |
+| Canonical content | `meoclass1/pastpapers/specs/QP2606.json` — **SOURCE OF TRUTH** |
+| Verification records | `meoclass1/pastpapers/verification/QP2606/Q1..Q9.md` + `DEDUP_AND_SOURCE_PLAN.md` |
+| True source demand | `docs/QP2606_TRUE_SOURCE_DEMAND_MAP.md` — **carries the six-paper aggregate** |
+| Transcription record | `docs/QP2606_SOURCE_TRANSCRIPTION_AND_RECURRENCE.md` — unchanged, still accurate |
+| Pattern register | `docs/2026_PATTERN_REGISTER.md` — **updated to 6 papers / 54 questions** |
 
-- **Transcription complete and visually verified** against both pages rendered at 150 dpi.
-- **96-vs-100 is present — now 6/6** and settled across the whole available 2026 set.
-- **A fifth distinct marks pattern.** June prints an allocation on **all nine** questions **and
-  all nine sum to exactly 16.** It is the only paper in the set that does both — April printed
-  nine of nine but contradicted itself on Q6. Q8's **10 + 6** is June's only unequal split.
-- **Anomalies preserved as printed**, including `SOLAS ch.ll-1` (two lowercase L's, confirmed by
-  codepoint), the mismatched quote on `"Andaman and Nicobar Islands'`, and unhyphenated
-  "York Antwerp Rules 1994". **Do not "fix" these.**
-- **Recurrence: EXACT 0 · NEAR 0 · TOPIC 4 · NONE 5** — a **third distinct profile**, and the
-  first paper with neither an exact nor a near repeat. **Five genuinely new questions, more than
-  the previous five papers produced between them.**
-- **ZERO Tier D reuse** — the first paper since January with none. Tiers are **C ×5, B ×4**.
-  This is why June is not finishable in one session: almost nothing can be inherited.
-- **Two new recurrence failure modes recorded.** The ratio **ranked the wrong neighbour** on Q3
-  (top scorer QP2601 Q3 is a salvage question; the real relative is QP2607 Q5, which scores
-  lower but shares a near-verbatim task). And Q4 shares the token "decarbonisation" with
-  QP2601 Q2 as a **homonym** — main-engine decarbonisation versus the energy transition.
-- **A stale recorded fact was corrected.** The claim that the host batch-generated *all six*
-  PDFs on 20 April 2026 is wrong: that batch covers **four**. June was generated 18 June 2026
-  and July 21 July 2026. See the transcription document §1a.
-- **Controlled-vocabulary audit is clean** — `new` is canonical, `no_recurrence` appears nowhere,
-  and **Tier A has never been used** in 45 questions.
+### The template held again — fifth consecutive paper with no schema change
 
-**Verified against primary sources so far: Q1 and Q2 only, plus the paper-wide temporal anchors.**
+**No schema change was required.** The frozen question object absorbed the most expensive paper in
+the set: **five questions with no relationship at all to any of the 45 previously built**, **zero
+Tier D reuse**, one question (Q6) sitting substantially **outside the regulatory corpus**, and one
+question (Q3) requiring **two editions of the same instrument to be held simultaneously**. Five
+modes, one `answer_route`, everything else derived. **No sixth mode. No new archetype. No new
+primary category.** `reference_shelf` remains empty on every question. Two new secondary
+`subject_tags` were added (`Port State Control`, `Ship Economics`).
 
-- **The IMO Net-Zero Framework was still approved-but-NOT-adopted at the June sitting.** The
-  adjourned extraordinary MEPC session **reconvenes 16–27 November 2026**, five months after the
-  paper. February's finding holds unchanged. Bites on Q4 a).
-- **Q1 (GBS)** — MSC.287(87) read in full. The **framework is five tiers; the instrument contains
-  three**. Fifteen Tier II functional requirements in four lifecycle groups. Applies to bulk
-  carriers and oil tankers **≥150 m contracted on or after 1 July 2016**. **The verification
-  guidelines are MSC.454(100), not MSC.296(87)** — superseded-edition trap.
-- **Q2 (PSC)** — **A.1206(34), Procedures for Port State Control, 2025, adopted 3 December 2025,
-  revokes A.1185(33)** and is the operative instrument at the June sitting. The right of appeal
-  is **§2.3.11**: it belongs to **the company or its representative, not to the Chief Engineer**,
-  and **the appeal does not suspend the detention**. Chapter 5 is titled "Review Procedures" and
-  is **not** the appeal route — it is IMO-level evaluation of deficiency-report summaries.
+### June was resumed from a checkpoint, and the checkpoint held
 
-> **Sixth consecutive paper on which opening the primary source caught a substantive error.**
-> An automated summary of MSC.287(87) asserted a "four-tier framework"; the instrument says a
-> five-tier system of which the Standards comprise three.
+The previous session deliberately stopped after transcription, recurrence and the verification of
+Q1 and Q2, rather than lowering verification quality. **That decision was correct and the handover
+worked.** This session re-derived the transcription independently from the source PDF and
+**every anomaly the checkpoint recorded reproduced exactly** — the `SOLAS ch.ll-1` double-L, the
+mismatched quote on `"Andaman and Nicobar Islands'`, the unhyphenated York Antwerp, and all nine
+printed mark allocations. Nothing in the checkpoint had to be revised.
 
-**Q3–Q9 are unverified and unauthored.** Highest-risk items, in order: **Q7** (Indian statutory
-protection of the island groups after the MS Act 2025 commencement, and whether the islands hold
-any actual PSSA status — they may hold none); **Q3** (the question names the **superseded
-York Antwerp Rules 1994** specifically); **Q6** (ship cost structure and inventory theory sit
-largely outside the regulatory corpus — expect many C flags and **do not manufacture citations**);
-**Q5** (ISM cyber position and current amendment state); **Q9** (confirm MSC-MEPC.2/Circ.12/Rev.2
-is still operative).
+### Recurrence — a third distinct profile, and the first paper with no repeat at all
+
+**EXACT 0 · NEAR 0 · TOPIC 4 · NONE 5.** The checkpoint's classification was re-read and
+**left unchanged**; no new evidence contradicted it.
+
+| Paper | EXACT | NEAR | TOPIC | NONE |
+|---|---|---|---|---|
+| QP2603 March | 3 | 0 | 5 | 1 |
+| QP2604 April | 0 | 7 | 1 | 1 |
+| **QP2606 June** | **0** | **0** | **4** | **5** |
+
+**June is the first paper with neither an exact nor a near recurrence**, and it carries **five
+genuinely new questions — more than the previous five papers produced between them.** Tiers are
+**C ×5, B ×4, no A, and NO TIER D.**
+
+**Two recurrence failure modes were recorded, both new:** the similarity ratio **ranked the wrong
+neighbour** on Q3 (top scorer QP2601 Q3 is a salvage question; the real relative QP2607 Q5 scores
+lower), and Q4 shares the token "decarbonisation" with QP2601 Q2 as a **homonym** — main-engine
+decarbonisation versus the energy transition. Full detail in
+`verification/QP2606/DEDUP_AND_SOURCE_PLAN.md` §3.
+
+### THE ARCHITECTURE FINDING — the edition axis is load-bearing, not metadata
+
+March established that a reused answer carries sitting-relative prose. April established that the
+governing statute can itself differ between sittings. **June establishes the case above both:**
+
+> **A question can require TWO EDITIONS OF THE SAME INSTRUMENT AT ONCE.**
+
+Q3 names the **York Antwerp Rules 1994** — an edition superseded twice. It cannot be answered on
+YAR 2016, and it cannot be answered without knowing YAR 2016 either. The finding that made it
+tractable is that **Rule A is word-for-word identical in the 1994 and 2016 editions**, while
+Rules VI, XX, XXI and XXIII differ materially and the 1994 Rules contain **no time bar at all**.
+
+**Consequence for the corpus:** an object model that stores "the York-Antwerp Rules" as current
+text plus an edition tag **cannot answer this question**. Editions must be first-class objects with
+a diff relationship. Recorded in the demand map §2, Q3.
+
+### Seven substantive findings from opening the primary source
+
+**Seventh consecutive paper on which reading the instrument caught something the summaries got
+wrong.** June produced an unusually rich crop:
+
+1. **GBS tier count (Q1).** MSC.287(87) §1.5 records a **five-tier system**; §3 states the
+   Standards **consist of three tiers**. Both are true. An automated summary of that same
+   resolution asserted a "four-tier framework", which is neither.
+2. **GBS verification guidelines (Q1).** No longer MSC.296(87) — now **MSC.454(100)**.
+3. **PSC procedures (Q2).** **A.1206(34), adopted 3 December 2025, revokes A.1185(33)** and is
+   operative at this sitting. Much material dated well into 2025 still cites the old one.
+4. **The PSC "Review Procedures" trap (Q2).** Chapter 5 carries that title and is **not** the
+   appeal route; the owner's remedy is §2.3.11, which also establishes that the right belongs to
+   **the company, not the Chief Engineer**, and that **an appeal does not suspend the detention**.
+5. **Cyber guidelines (Q5).** **MSC-FAL.1/Circ.3/Rev.3, 4 April 2025**, sets out **SIX** functional
+   elements — **Govern** was added ahead of Identify, Protect, Detect, Respond, Recover. Almost all
+   published material, including industry guidance, still says five.
+6. **HSSC survey guidelines (Q8).** **A.1207(34), adopted 3 December 2025, revokes A.1186(33)** —
+   the same Assembly session as the PSC resolution. And the **periodical survey has two different
+   frequencies**: second-or-third anniversary for the Safety Equipment Certificate, **every**
+   anniversary for the Safety Radio Certificate.
+7. **FSA criterion (Q9).** The Guidelines prescribe **no mandatory monetary threshold** for
+   averting a fatality. §9.2.2 says no risk acceptance standard is universally accepted, and
+   appendix 7 says its values are "provided for illustrative purposes only". The widely quoted
+   figure is not an IMO requirement.
+
+One further correction was caught before it reached an answer: the **RO Code is MSC.349(92)**, not
+MSC.349(90) as a search summary asserted.
+
+### THE HIGHEST-RISK CLAIM ON THE PAPER WAS TESTED AND REJECTED
+
+**Q7's stem invites a false statement, and the answer does not make it.**
+
+The question asserts that the Lakshadweep and Andaman and Nicobar Islands "are known for their
+critical habitat and required to be protected". True — and it tempts the candidate into saying they
+**are** Particularly Sensitive Sea Areas.
+
+**They are not.** IMO's own record of designations was checked: **nineteen PSSAs exist worldwide
+and none of them is in India.** Indian waters hold no MARPOL Special Area and no Emission Control
+Area either. **The examiner wrote "could be protected", in the conditional**, and the answer is
+written prospectively for exactly that reason.
+
+The Indian statutory layer was established at a sitting falling **after 15 March 2026**: the
+**Merchant Shipping Act, 2025** governs ship-source pollution, but the islands' coastal-zone and
+habitat protection rests on the **Island Coastal Regulation Zone Notification, 2019** under the
+**Environment (Protection) Act, 1986** and on the **Wild Life (Protection) Act, 1972** — specialist
+legislation the shipping Act does not displace. **The QP2607 Gazette work has now paid for itself a
+fourth time.**
+
+> **One citation is deliberately not asserted.** The exact Gazette number and date of the ICRZ
+> Notification, 2019 could not be settled — published sources give both a January 2019 and a
+> January 2021 instrument bearing the 2019 title, consistent with a draft followed by a final
+> notification. The substance is consistently supported and is what the answer states.
+> `B_CURRENCY_CHECK`. India Code returned **HTTP 403** again.
+
+### Q6 — the deliberate abstention
+
+**Q6 sits substantially outside the regulatory corpus, and no citations were manufactured for it.**
+The capital/voyage/operating cost taxonomy and every inventory technique — ABC, VED, FSN, SDE, HML,
+economic order quantity, reorder level, safety stock — are accepted shipping-economics and
+operations-management practice, **not the content of any instrument**. They are presented as
+reasoning and practice, and recorded as `C_ACCEPTED_LIMITATION`.
+
+Exactly two regulatory constraints genuinely bear on the question and are used only there:
+**ISM Code 10.3** (critical equipment — which is why critical spares cannot be run just-in-time)
+and **MARPOL Annex VI regs 25 and 28** (efficiency as a compliance outcome). **No numerical cost
+proportions are asserted anywhere**, because MIW holds no verified dataset for them.
+
+> This is the first question in the set with a near-empty demand map entry, and that is the correct
+> outcome rather than a gap. See the demand map §2, Q6.
+
+### One known trap fired, and the CONTENT was fixed rather than the guard weakened
+
+`known_traps_check.py` **trap 10 — "Ammonia is not a zero-emission fuel"** — failed on QP2606 Q4,
+because the quick-revision named ammonia but neither N2O nor slip.
+
+**The guard was right.** The answer discussed ammonia purely as a toxicity hazard and never said it
+is not zero-emission, so a candidate could have inferred that it is. **The guard was left at full
+strength and the answer was extended**: the fuel table now records that there is no carbon in the
+molecule but combustion produces **N2O and ammonia slip** and the lifecycle result depends on the
+production pathway, with a matching route point, `major_trap` entry and retrieval card. This is the
+QP2601 precedent applied a second time — *fix the content, not the guard*.
+
+### Regression against all five prior papers — clean
+
+`QP2601.html` (`38b420fc88da8ad4`), `QP2602.html` (`abad5ab7706e370c`), `QP2603.html`
+(`895bf9ca1e0a993e`), `QP2604.html` (`93984e85c6f6c136`) and `QP2607.html` (`a574cd36261778e4`) are
+**byte-identical** before and after, and all five specs show **zero diff** against `13d29cc`.
+`index.html`, `topics-2026.html` and the manifest changed, which is correct. Rebuild is
+deterministic: **all nine generated artefacts byte-identical across two consecutive runs.**
+`--publish` passes in full, and review/noindex artefacts were restored afterwards.
+
+### Cross-paper behaviour at six papers — the complete year
+
+- The index carries **54 questions, 9 per paper**; `topics-2026.html` renders **54 links, zero
+  duplicates**.
+- **May renders as `coming later`** with an em-dash and no link. **`QP2605` appears nowhere.**
+- Searching *"general average"* returns **five** sittings — Jan, Feb, Apr, Jun, Jul — and correctly
+  not March.
+- The FSA family is discoverable across **five** papers; June is the only one that asks for the
+  method rather than an application.
+- A `FIXTURES` entry for QP2606 was added to `ui_behaviour_test.cjs`, per the standing rule.
+  Its Q1 probe is deliberately `ship construction file` rather than `goal-based`, because Q8 also
+  refers to goal-based standards and the bare term resolves to two cards.
+
+### THE SEARCH-PAYLOAD THRESHOLD IS NOW REACHED — MEASURED, NOT ACTED ON
+
+§4 records the threshold as *"split the search index into a fetched JSON file when the sixth paper
+is added"*, and §14 said to act on it during QP2606. **It has been measured and deliberately NOT
+implemented**, because the June session brief explicitly reserved search architecture for the
+Founder review and forbade redesign during production.
+
+**Measured at six papers:** `index.html` is **181.4 KB**, of which the inlined search payload is
+**134.9 KB — 74% of the page** — and the `search_blob` field alone is **112.7 KB**. Projecting
+linearly, twelve papers gives roughly **270 KB of payload**.
+
+> **FOUNDER DECISION REQUIRED.** No performance problem is observable at six papers. The decision
+> is whether to split now, at the threshold as originally written, or to defer to a measured
+> user-experience trigger. **This is a §16 stop condition item; do not implement it inside a
+> production session.**
+
+### Measured statistics
+
+| | QP2607 | QP2601 | QP2602 | QP2603 | QP2604 | **QP2606** |
+|---|---|---|---|---|---|---|
+| Answer words, mean | 632 | 844 | 925 | 864 | 984 | **1334** |
+| Answer words, median | — | — | — | — | — | **1394** |
+| Answer words, range | 572–709 | 744–981 | 829–1022 | 745–953 | 771–1238 | **1010–1516** |
+| `understand_first` | 6/9 | 9/9 | 7/9 | 6/9 | 8/9 | **6/9** |
+| Route steps, mean | 5.8 | 6.0 | 6.0 | 5.9 | 5.8 | **7.1** |
+| Core points, mean | 24.3 | 30.2 | 30.3 | 30.9 | 31.6 | **41.1** |
+| Flashcards, mean | 6.6 | 9.8 | 7.6 | 8.4 | 9.6 | **9.7** |
+| Reverify A / B / C | 0/4/2 | 0/6/8 | 0/7/12 | 0/7/18 | 0/9/10 | **0/12/15** |
+
+**June is by a wide margin the longest paper in the set, and the reason is structural rather than
+stylistic.** It carries the most named sub-tasks of any paper — Q3 sets five distinct tasks, Q9
+names three deliverables and then singles out three of five steps for detailed explanation, Q6
+carries three tasks in an unlimbed sixteen-mark question — and **five of nine questions had no
+reusable material at all**, so every proposition had to be stated rather than inherited. Route
+steps (7.1) and core points (41.1) rose in the same proportion, which is the honest signal: the
+answers are longer because there is more to answer, not because the prose is looser.
+
+**A layering pass was run on Q9**, the outlier, moving explanatory material into the study guide
+(1577 → 1516) **with no scoring proposition removed**. No further trimming was attempted, because
+the session brief was explicit: **record June's datapoint, do not change the length policy, and do
+not cut scoring propositions to hit a number.**
+
+**`understand_first` was pruned from 9/9 to 6/9 by applying the conditional test explicitly.**
+Q1, Q4 and Q6 were dropped because each duplicated a study-guide section that already made the same
+point. This reproduces the pattern exactly: the three papers that applied the test landed at 6/9,
+7/9 and 6/9; the paper that did not landed at 9/9. **The drift is real and it needs an explicit
+check every time.** Note that the Understand *tab* still renders on all nine cards — it carries the
+derived knowledge map, which is always present, so pruning removes clutter without emptying a mode.
+
+### Mandatory assembled-spec sweep — run, and clean
+
+Run per the standing rule despite June carrying **no Tier D reuse** and therefore no inherited
+prose. **~385 hits across ten patterns, adjudicated by hand, ZERO defects.** Every hit is a
+deliberate "this is superseded" teaching point, a correctly anchored sitting-relative statement
+(the arithmetic was checked), or a real instrument date. `cross-ref by number` returned **0 hits**.
+
+### Open quality questions — unchanged, plus one sharpened
+
+1. **The 450–650 word band** now fails **45/54** and produces 45 of the 47 warnings. A
+   per-*named-sub-task* band remains the only shape that has fitted every paper, and **June is the
+   strongest evidence yet**: it has the most sub-tasks and the highest word count, and the two rose
+   together. **No validator change was made.** All six papers now exist; the decision is ripe.
+2. **`understand_first` pruning on QP2601** is now supported by four papers at 6/9, 7/9, 6/9 and
+   6/9 against January's unchecked 9/9.
+3. **Mobile sticky chrome**: QP2606 **55.3%** at 375px, against QP2604 60.5%, QP2603 59.6%,
+   QP2602 60%, QP2601 60%, QP2607 51%. **Pre-existing, not a June regression.** No horizontal
+   overflow at 375px; search input visible; deep link `#q7` opens expanded.
+4. **The corpus "live external list" state reaches a FIFTH instance** — the IMO register of
+   designated PSSAs — **with a new and sharper sub-class: the load-bearing claim is a NEGATIVE.**
+   Q7 depends on no Indian area being designated, and a negative claim decays silently when the
+   list changes. A live-list object needs an **absence** relationship, not just membership. Also
+   new from June: **a meeting outcome is not an instrument** (the HTW 12 result is load-bearing for
+   Q4 and has no edition). Both handed to the corpus track in the demand map §4.
 
 ---
 
@@ -870,14 +1068,16 @@ SPEC          PASS  (9 warning(s))     <- QP2601, all 9 are word-count band warn
 SPEC          PASS  (9 warning(s))     <- QP2602, all 9 are word-count band warnings
 SPEC          PASS  (9 warning(s))     <- QP2603, all 9 are word-count band warnings
 SPEC          PASS  (9 warning(s))     <- QP2604, all 9 are word-count band warnings
+SPEC          PASS  (9 warning(s))     <- QP2606, all 9 are word-count band warnings
 SPEC          PASS  (2 warning(s))     <- QP2607, the two accepted exceptions below
 PAPER BUILD   PASS
 PAPER BUILD   PASS
 PAPER BUILD   PASS
 PAPER BUILD   PASS
 PAPER BUILD   PASS
+PAPER BUILD   PASS
 INDEX BUILD   PASS
-UI BEHAVIOUR  PASS  5 page(s)
+UI BEHAVIOUR  PASS  6 page(s)
 KNOWN TRAPS   PASS
 HEALTH        PASS
 AUDIT         PASS
@@ -885,15 +1085,24 @@ AUDIT         PASS
 AUDIT         PASS
 AUDIT         PASS
 AUDIT         PASS
-ALL STAGES PASS   38 warning(s)
+AUDIT         PASS
+ALL STAGES PASS   47 warning(s)
 ```
 
-Five specs now, so the per-spec stages run five times. **38 warnings = 2 QP2607 (accepted, below)
-+ 9 QP2601 + 9 QP2602 + 9 QP2603 + 9 QP2604 word-count warnings** — see §2e for the open question
-those raise. Zero errors, zero blocking flags on any of the five papers.
+Six specs now, so the per-spec stages run six times. **47 warnings = 2 QP2607 (accepted, below)
++ 9 each for QP2601, QP2602, QP2603, QP2604 and QP2606 word-count warnings** — see §2f for the open
+question those raise. Zero errors, zero blocking flags on any of the six papers.
 
-**36 of the 38 warnings are the one disputed band.** That is warning noise rather than signal, and
-it is the reason §2c, §2d and §2e recommend retiring or re-deriving the 450–650 band.
+**45 of the 47 warnings are the one disputed band.** That is warning noise rather than signal, and
+it is the reason §2c, §2d, §2e and §2f recommend retiring or re-deriving the 450–650 band. **All six
+papers now exist, so that decision is ripe and belongs to the Founder review.**
+
+QP2606 carries **27 re-verification flags: 0 class A, 12 class B, 15 class C** — the highest B count
+in the set, which is the honest signal of a paper resting on four instruments that are re-adopted on
+a cycle (A.1206(34), A.1207(34), MSC-FAL.1/Circ.3/Rev.3, MSC.454(100)) plus an unsettled Indian
+Gazette citation. The single most important class B is on **Q7**: that **no Indian sea area holds
+PSSA designation**. That is the negative claim the whole of Q7 limb (a) rests on, and it decays
+silently — re-confirm it against IMO's record before publication.
 
 QP2604 carries **19 re-verification flags: 0 class A, 9 class B, 10 class C.** The most important
 class B is the pair on Q7 and Q4 — that the **Merchant Shipping Act 2025** is the operative Indian
@@ -1122,9 +1331,11 @@ python tools/pastpapers/run_toolchain.py --self-test
    the new corpus "live external list" state.
 8. ~~Build QP2602 (February 2026).~~ **DONE.** ~~Build QP2603 (March 2026).~~ **DONE.**
    ~~Build QP2604 (April 2026).~~ **DONE** — see §2e.
-   Next is **QP2606 (June 2026)**, the last available sitting. **May 2026 does not exist in the
-   source set** — keep it unavailable. Add a `FIXTURES` entry to `ui_behaviour_test.cjs` for
-   every new paper.
+   ~~Build QP2606 (June 2026), the last available sitting.~~ **DONE** — see §2f.
+   **ALL SIX AVAILABLE 2026 SITTINGS ARE NOW BUILT. 54 questions. Production for 2026 is closed.**
+   **May 2026 does not exist in the source set** — keep it unavailable, and note that the 2025
+   serials confirm the gap is the examiner's, not the source set's. Add a `FIXTURES` entry to
+   `ui_behaviour_test.cjs` for every new paper.
 
    **FOUR LINKED EXACT PAIRS** must each be corrected as a unit on review:
    QP2601 Q9 ↔ QP2602 Q4 · QP2602 Q7 ↔ QP2603 Q1 · QP2601 Q6 ↔ QP2603 Q4 · QP2602 Q3 ↔ QP2603 Q8.
@@ -1146,16 +1357,22 @@ python tools/pastpapers/run_toolchain.py --self-test
       **re-authored** and recorded as a currentness change. QP2604 Q7 is the worked example, and
       the 1958 Act was asserted on **eight** separate surfaces of the January object.
 9. **After all six 2026 papers**, run the full pattern/repeat/reference analysis using
-   `docs/2026_PATTERN_REGISTER.md`, then begin the 2025 papers.
+   `docs/2026_PATTERN_REGISTER.md`, then begin the 2025 papers. **THE SIX PAPERS NOW EXIST. This
+   is the next session — see §18. It was deliberately NOT started during June production.**
 10. **Only after more than one paper**, mature the skill draft and consider the production
-   agent. Two papers now exist, so the skill draft is worth maturing — but **do not build the
+   agent. Six papers now exist, so the skill draft is well supported — but **do not build the
    agent yet.**
 
-**Search payload watch:** `index.html` carries **all five** papers' search blobs — 45 questions,
-**155.5 KB total of which 90.8 KB is the search blob**. The threshold recorded in §4 — split the
-search index into a fetched JSON file **when the sixth paper is added** — is unchanged and is now
-**ONE paper away**. **Act on it during QP2606.** Measured, not estimated: no performance problem
-is observable at five papers, so nothing was changed now.
+**Search payload watch — THRESHOLD REACHED, MEASURED, NOT ACTED ON.** `index.html` carries **all
+six** papers' search blobs: **54 questions, 181.4 KB total, of which the inlined search payload is
+134.9 KB (74% of the page) and the `search_blob` field alone is 112.7 KB.** Projecting linearly,
+twelve papers gives roughly **270 KB of payload**.
+
+The §4 threshold — split into a fetched JSON file when the sixth paper is added — **has been reached
+and deliberately not implemented**, because the June session brief reserved search architecture for
+the Founder review and forbade redesign during production. **No performance problem is observable at
+six papers.** This is now a §16 stop-condition item and a Founder decision: split at the threshold as
+originally written, or defer to a measured user-experience trigger.
 
 Q7 primary-source resolution is **done** (§8) and is no longer on this list.
 
@@ -1212,3 +1429,126 @@ no horizontal overflow at 375px; `#q5` deep link opens expanded; searching
 - `package.json` sets `"type": "module"`, so Node test files must use `.cjs`.
 - The in-app browser cannot inspect `file://` pages (they load as non-inspectable
   snapshots) and `Control_Chrome` is macOS-only. Serve over HTTP for visual review.
+
+---
+
+## 18. THE 2026 SET IS CLOSED — what the next session is, and what it must not do
+
+**Production for 2026 is finished.** The next session is a **review and design session**, not a
+production session. The June session deliberately did **not** start any of the following, and the
+next one should take them in this order:
+
+1. **The six-paper intelligence / refinement review.** All six papers, 54 questions, in front of the
+   Founder. Six decisions are waiting and are now ripe because the complete dataset exists:
+   the model-answer word band (45/54 fail it); `understand_first` pruning on QP2601;
+   the pre-existing mobile sticky-chrome proportion; the corpus **live external list** state
+   (now five instances, plus the **negative-claim** sub-class from June Q7); the **search payload
+   threshold**, reached and measured at 134.9 KB but not implemented; and whether the **edition
+   axis** finding from June Q3 changes the corpus object model.
+2. **Design and build the generated ONLY QUESTIONS year sheet** — see §19.
+3. **V1 freeze / refinement decisions.**
+4. **2025 production strategy** — see §20.
+
+> **These are reserved deliberately.** Turning June's observations into frozen product decisions
+> inside a production session is exactly the drift the register exists to prevent. The pattern
+> register is labelled **DATA COMPLETE — FOUNDER INTERPRETATION PENDING** for the same reason.
+
+---
+
+## 19. ONLY QUESTIONS YEAR SHEET — approved in direction, NOT built
+
+**The Founder has approved the direction. It was deliberately not implemented during June
+production.** Recorded here so the requirement survives the session.
+
+**Concept:** a generated `questions-2026.html`, later `questions-2025.html`, showing every question
+month by month **without answers**.
+
+| Requirement | Detail |
+|---|---|
+| Generated | From the canonical paper specs. **Never hand-maintained**, exactly like `topics-<year>.html`. |
+| Per item | month · Q number · full question text · marks · primary category · recurrence status · related sittings · link to the solved question where one exists |
+| Recurrence display | Candidate-facing intelligence must distinguish **NEW** from **REPEATED**, with useful detail — **EXACT / NEAR / TOPIC** — and the occurrences and sittings |
+| Missing months | May, or any absent month, must appear **explicitly** as *"No paper available in MIW source set."* — never silently omitted |
+
+### A recurrence-model requirement to solve at design time, not now
+
+**Annual aggregate status and historical-direction status are different things, and the year sheet
+will expose the difference.**
+
+A January question may belong to a family that recurs in July. In the annual sheet it may correctly
+read *"appears in 2 sittings"* — but internally January is the **first known occurrence within that
+dataset** and July is the **repeated** one. Once 2025 and 2026 coexist, an **earlier-year
+occurrence** must also be considered, and a question that looks "new" in 2026 may not be.
+
+**Do not solve this architecture during a production session.** It is recorded as a design input.
+
+---
+
+## 20. THE 2025 SOURCE BUNDLE — inventoried only, NOT produced
+
+The Founder has placed a 2025 Engineering Management question-paper bundle under
+`meoclass1/pastpapers/docs/`. **A lightweight file inventory was taken and nothing else was done:
+no transcription, no recurrence analysis, no answers, no specs, and no files were moved, renamed or
+deleted.**
+
+### Inventory — 11 files, all readable, all Engineering Management, all nine questions
+
+| Month | Filename | Serial | Pages | Bytes | Readable | Likely source paper |
+|---|---|---|---|---|---|---|
+| January | `JANUARY 2025.pdf` | `EM – 2501` | 3 | 222,721 | yes | yes |
+| February | `FEBRUARY 2025.pdf` | `EM – 2502` | 2 | 204,437 | yes | yes |
+| March | `MARCH 2025.pdf` | `EM – 2503` | 2 | 222,263 | yes | yes |
+| April | `APRIL 2025.pdf` | `EM – 2504` | 2 | 223,717 | yes | yes |
+| **May** | **— absent —** | **(2505 missing)** | — | — | — | — |
+| June | `JUNE 2025.pdf` | `EM – 2506` | 2 | 272,127 | yes | yes |
+| July | `JULY 2025.pdf` | `EM – 2507` | 3 | 225,320 | yes | yes |
+| August | `AUGUST 2025.pdf` | `EM – 2508` | 2 | 223,183 | yes | yes |
+| September | `SEPTEMBER 2025.pdf` | `EM – 2509` | 2 | 225,337 | yes | yes |
+| October | `OCTOBER - 2025.pdf` | `EM – 2510` | 3 | 241,977 | yes | yes |
+| November | `NOVEMBER 2025.pdf` | `EM – 2511` | 2 | 232,004 | yes | yes |
+| December | `DECEMBER  - 2025.pdf` | `EM – 2512` | 2 | 234,066 | yes | yes |
+
+Every file carries `EXAMINATION OF MARINE ENGINEER OFFICER`, the subject `ENGINEERING MANAGEMENT`
+and nine question markers. **Approximately 99 additional question instances.**
+
+> ### **MAY IS ABSENT — AND THE SERIAL NUMBERING PROVES IT IS THE EXAMINER'S GAP**
+>
+> The serials run `EM–2501, 2502, 2503, 2504, **2506**, 2507 … 2512`. **There is no 2505.** May is
+> missing from the examiner's own numbering, not merely from the files the Founder supplied — and
+> May is likewise absent in 2026. This is a much stronger statement than "no file was provided",
+> and it should inform the year-sheet design in §19.
+
+**Filename inconsistency, recorded and not corrected:** `OCTOBER - 2025.pdf` and
+`DECEMBER  - 2025.pdf` (two spaces) do not match the pattern of the others. This is the same class
+of anomaly as `06- JUNE - 2026.pdf` in the 2026 set. **Recorded, not renamed.**
+
+### PROVENANCE WARNING FOR WHOEVER PRODUCES 2025
+
+The 2025 files come from the same third-party host as the 2026 set and carry the same material:
+
+- **Host branding and purchase advertising.** This repository is **PUBLIC**. Host branding must
+  never reach a spec, a generated page or the manifest — `validate_spec.py` rejects `host_branding`
+  and trap 14 scans pages, specs *and* the manifest.
+- **Host-printed recurrence annotations** such as `2024/MAR/Q5`. These are **DISCOVERY ONLY**.
+  They are **not** canonical recurrence, and the 2026 set proved why: April's table over-claimed on
+  one question and under-claimed on another, and June's table under-claimed on two.
+  **Canonical recurrence is decided by comparing actual question stems**, then adjudicated by hand.
+- **The question-paper wording itself is source-copy content** and requires the same
+  character-level transcription and visual verification every 2026 paper received.
+
+**Do not delete the raw local files** merely because they carry branding.
+
+### LOCATION — flagged, not changed
+
+**The 2025 bundle currently sits under `meoclass1/pastpapers/docs/`**, alongside the six 2026
+source copies and the project's own markdown documentation. **No file was moved this session**, and
+none should be until the Founder decides.
+
+> **RECOMMENDATION FOR THE REVIEW SESSION.** `docs/` is where the product's *documentation* lives.
+> Mixing seventeen raw third-party source PDFs into it is workable but is not the long-term shape,
+> and the risk is not theoretical: everything under `meoclass1/pastpapers/docs/` that is not
+> git-ignored is publishable, and this repository is public. **A dedicated raw-source area, kept
+> git-ignored, is the cleaner arrangement.** The 2026 PDFs are already git-ignored; **confirm the
+> 2025 files are covered by the same ignore rule before any commit that touches `docs/`.**
+
+**Nothing about 2025 production has been decided or started.**

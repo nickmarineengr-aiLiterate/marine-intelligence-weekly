@@ -1,20 +1,29 @@
 # 2026 PRODUCTION PATTERN REGISTER
 
 **Observations accumulated across the 2026 Engineering Management sittings as they are built.**
-Opened 2026-08-08 at the close of QP2601. Updated at the close of QP2602, QP2603, and again at
-the close of **QP2604**.
+Opened 2026-08-08 at the close of QP2601. Updated at the close of QP2602, QP2603, QP2604 and,
+finally, **QP2606**.
 
-> **Five papers is five sixths of the available evidence, and still not a conclusion.** Every
-> entry states its count. The register exists so that the six-paper analysis has real data
-> instead of recollection. A 5/5 observation is stronger than a 4/4 but is not yet a rule —
-> and this session found two 3/3-and-4/4 observations that did not survive contact with the
-> fifth paper.
+> # **DATA COMPLETE — FOUNDER INTERPRETATION PENDING**
+>
+> **All six available 2026 sittings are built. The evidence base is complete and the register is
+> closed to new 2026 production data.** Every entry states its count.
+>
+> What this register deliberately does **not** do is convert observations into product decisions.
+> The model-answer word band, `understand_first` pruning, the recurrence model, the search
+> architecture and the corpus object model are **Founder decisions**, and June production left all
+> of them open on purpose.
+>
+> **A 6/6 observation is the strongest this dataset can produce — and it is still six papers.**
+> Two observations that held at 3/3 and 4/4 did not survive the fifth paper, and June qualified
+> several more. Read the counts, not the impressions.
 
 **Papers in the set:** QP2607 (July, built) · QP2601 (January, built) · QP2602 (February, built) ·
-QP2603 (March, built) · **QP2604 (April, built)** · QP2606 (June, not built). **May 2026 does not
-exist in the source set** and is not expected.
+QP2603 (March, built) · QP2604 (April, built) · **QP2606 (June, built)**. **May 2026 does not
+exist in the source set** — and the 2025 bundle shows the same gap, its serials running
+`EM–2501 … 2504, 2506 … 2512` with **no 2505**. The gap is the examiner's, not the source set's.
 
-**Evidence base: 5 papers, 45 questions.**
+**Evidence base: 6 papers, 54 questions. COMPLETE.**
 
 ---
 
@@ -475,3 +484,126 @@ Annex/regulation level. QP2604 Q1 turns on the difference between `16(2)(f)(i)` 
 `16(2)(f)(iii)`.
 
 **One paper remains. Re-read the whole register only when all six exist.**
+
+---
+
+## 10. JUNE (QP2606) — THE SIXTH PAPER. DATASET NOW COMPLETE.
+
+**Factual counts only.** Interpretation is reserved for the Founder review; nothing below is a
+product decision.
+
+### 10a. Measured statistics, all six papers
+
+| | QP2607 | QP2601 | QP2602 | QP2603 | QP2604 | **QP2606** |
+|---|---|---|---|---|---|---|
+| Answer words, mean | 632 | 844 | 925 | 863 | 983 | **1334** |
+| Answer words, median | 640 | 827 | 933 | 860 | 962 | **1394** |
+| Answer words, range | 572–709 | 744–981 | 829–1022 | 745–953 | 771–1238 | **1010–1516** |
+| `understand_first` | 6/9 | 9/9 | 7/9 | 6/9 | 8/9 | **6/9** |
+| Route steps, mean | 5.8 | 6.0 | 6.0 | 5.9 | 5.8 | **7.1** |
+| Core points, mean | 24.3 | 30.2 | 30.3 | 30.9 | 31.6 | **41.1** |
+| Retrieval cards, mean | 6.6 | 9.8 | 7.6 | 8.4 | 9.6 | **9.8** |
+| Reverify A / B / C | 0/4/2 | 0/6/8 | 0/7/12 | 0/7/18 | 0/9/10 | **0/12/15** |
+
+**June is the outlier on every length measure, and the three length measures moved together.**
+Words, route steps and core points all rose in roughly the same proportion — which is the signal
+that the paper carries more to answer, not that the prose is looser. June sets the most named
+sub-tasks of any paper in the set: Q3 sets five distinct tasks, Q9 names three deliverables and
+then singles out three of five steps for detailed explanation, and Q6 carries three tasks in an
+unlimbed sixteen-mark question.
+
+**A layering pass was run on Q9** (1577 → 1516) with no scoring proposition removed. No further
+trimming was attempted: the session brief required June's datapoint to be recorded, not optimised.
+
+**`understand_first` was pruned 9/9 → 6/9** by applying the conditional test explicitly. **The
+pattern is now unambiguous at four papers:** every paper that applied the test landed at 6/9, 7/9,
+6/9 or 6/9; the one paper that did not apply it landed at **9/9**. The drift is real and needs an
+explicit check every time.
+
+### 10b. Set totals across all 54 questions
+
+| Field | Distribution |
+|---|---|
+| `recurrence_class` | `topic_recurrence` 26 · `new` **14** · `near_recurrence` 10 · `exact_recurrence` 4 |
+| `reuse_tier` | `B` 27 · `C` **14** · `D` 13 · **`A` 0 — never used in 54 questions** |
+| `archetype` | `explain` 23 · `legal` 15 · `procedure` 10 · `evaluate` 4 · `compare` 2 |
+| `primary_category` | Statutory Framework & Class 16 · Marine Insurance & Commercial Law 10 · Human Element & Management 8 · Pollution Prevention & Response 7 · Cargo & Bulk Carriage 5 · Alternative Fuels & Decarbonisation 5 · Indian Maritime Legislation 3 |
+
+**June contributed 5 of the set's 14 `new` questions — more than any other single paper**, and
+took `C` from 9 to 14 while adding nothing to `D`.
+
+**Tier `A` has still never been used**, in 54 questions across six papers. The draft skill defines
+it; the corpus has never produced an instance. That is worth a decision at review: either the tier
+is genuinely reachable and no paper has reached it, or the definition should be retired.
+
+### 10c. Recurrence profiles — three distinct shapes, no convergence
+
+| Paper | EXACT | NEAR | TOPIC | NONE |
+|---|---|---|---|---|
+| QP2607 July | — | — | 9 | 0 |
+| QP2601 January | 0 | 0 | 8 | 1 |
+| QP2602 February | 1 | 0 | 8 | 0 |
+| QP2603 March | 3 | 0 | 5 | 1 |
+| QP2604 April | 0 | 7 | 1 | 1 |
+| **QP2606 June** | **0** | **0** | **4** | **5** |
+
+**Six papers produced no convergent profile.** March was dominated by exact repeats, April by near
+repeats, June by genuinely new questions. **The strongest statement the dataset supports is that
+the profile is not predictable from the preceding papers** — which is itself the finding, and it
+matters for any attempt to forecast a future sitting.
+
+### 10d. Recurrence-method failure modes — the running list, now five
+
+1. **Host recurrence tables establish topic recurrence at most** (6/6 papers).
+2. **The similarity ratio is length-sensitive** — April Q6 scored 0.1527 against a task-for-task
+   match.
+3. **NEAR by punctuation alone** — April Q4 scored 0.9946 with no semantic difference.
+4. **NEW FROM JUNE — the ratio can rank the WRONG neighbour.** June Q3's top scorer (QP2601 Q3,
+   0.3080) is a salvage question; its real relative, QP2607 Q5, scores lower.
+5. **NEW FROM JUNE — a shared token can be a homonym.** QP2601 Q2 and QP2606 Q4 share
+   "decarbonisation", meaning main-engine decarbonisation in one and the energy transition in the
+   other.
+
+**Consequence, unchanged and now 6/6: the ratio surfaces candidates; a task-by-task human
+comparison classifies them.** Numbers 4 and 5 both defeat a purely automated dedup step.
+
+### 10e. "Open the source" — 6/6, and June was the richest
+
+Every paper in the set produced at least one substantive correction from reading the primary
+instrument rather than a summary. **June produced seven**, listed in `CURRENT_STATUS.md` §2f.
+
+The three most transferable:
+
+- **A summary of an instrument can be wrong about the instrument's own structure.** An automated
+  summary of MSC.287(87) asserted a "four-tier framework"; the resolution says a five-tier *system*
+  of which the Standards comprise *three*.
+- **Two Assembly resolutions used on this paper were re-adopted six months before the sitting**
+  (A.1206(34), A.1207(34)), and most published material still cites their predecessors. **Any
+  instrument on a re-adoption cycle must have its edition established at the sitting date, every
+  time.**
+- **A widely repeated number can have no instrument behind it.** The FSA "cost of averting a
+  fatality" is not an IMO threshold: §9.2.2 says no risk acceptance standard is universally
+  accepted and appendix 7 calls its values illustrative.
+
+### 10f. Assembled-spec sweep — the rule now has a negative control
+
+March and April each found exactly one real defect by sweeping the assembled spec. **June carries
+zero Tier D reuse and the sweep found zero defects** across ~385 hits.
+
+> That is not evidence the sweep is unnecessary. It is the **negative control** the rule needed:
+> the sweep finds defects on papers that inherit prose and finds none on the paper that inherits
+> nothing. **Keep running it — the cost is trivial and the failure mode is silent.**
+
+### 10g. What the complete dataset now permits — for the Founder, not for this register
+
+The six-paper review can now decide, on complete evidence:
+
+1. the **model-answer word band** — 45 of 54 questions fail it, and it produces 45 of 47 warnings;
+2. **`understand_first`** — prune QP2601 to match the four papers that applied the test;
+3. the **mobile sticky-chrome proportion** — pre-existing on all six, measured 51%–60.5%;
+4. the **search payload split** — threshold reached, measured at 134.9 KB of a 181.4 KB index;
+5. the **corpus live-list model**, now five instances, plus June's **negative-claim** sub-class;
+6. the **edition axis** — June Q3 shows a question can require two editions of one instrument;
+7. whether **reuse tier `A`** should exist at all.
+
+**None of these was decided during June production, and none should be decided outside the review.**
