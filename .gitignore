@@ -4,6 +4,10 @@
 .env.*.local
 .env.production.local
 
+# Vercel CLI local link — holds the project and org ids plus a local cache.
+# THIS REPOSITORY IS PUBLIC, so those identifiers stay out of it.
+.vercel/
+
 # Node
 node_modules/
 npm-debug.log
@@ -48,3 +52,8 @@ meoclass1/pastpapers/verification/LOCAL_SOURCE_PROVENANCE.md
 
 # Coaching handouts. Never a verification source, never redistributed.
 Notes-for-written-answers/
+
+# Catch-all for any env file the Vercel CLI writes (it creates .env.local
+# holding an OIDC token on `vercel link`). Broader than the named patterns
+# at the top of this file, which it deliberately overlaps.
+.env*
