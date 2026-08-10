@@ -234,6 +234,42 @@ const FIXTURES = {
     // excepts it from limitation in Q1, so the probe is Rule VII's own heading.
     narrow: ['damage to machinery and boilers', 'QP2508-Q6'],
   },
+  QP2403: {
+    probes: [
+      ['big data', 'QP2403-Q1'],
+      ['bill of lading', 'QP2403-Q2'],
+      // NOT 'general average' -- it resolves to Q3 alone on this paper, but
+      // contribution is the limb the examiner singled out, so probe that.
+      ['contributory values', 'QP2403-Q3'],
+      ['kappel', 'QP2403-Q4'],
+      // NOT 'cyber' -- Q1 reaches the same instruments when it reaches the
+      // security barrier, so the term resolves to two cards.
+      ['functional elements', 'QP2403-Q5'],
+      ['electronic record book', 'QP2403-Q6'],
+      ['iii code', 'QP2403-Q7'],
+      // NOT 'bridge control' -- Q5 lists bridge systems among the vulnerable
+      // onboard systems, so it resolves to Q5 and Q8.
+      ['starting air distributor', 'QP2403-Q8'],
+      ['maritime labour convention', 'QP2403-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['eu mrv', 'QP2403-Q1', 'the big data question (the card names no reporting regime)'],
+      ['machine learning', 'QP2403-Q1', 'Q1 (the card writes only analytics)'],
+      ['azipod', 'QP2403-Q4', 'Q4 (the card writes only azimuth or podded propulsion)'],
+      ['seafarers bill of rights', 'QP2403-Q9', 'Q9 (the card never uses the phrase)'],
+    ],
+    regulation: ['a.1070(28)', 'QP2403-Q7'],
+    // Leak probe. The March 2024 source copy carries the host's own provider
+    // codes against Q8 -- 2010/SR12, 2011/SR4, 2011/SR8 - a different code
+    // shape from the year/month/question form used elsewhere in the set, and
+    // the only place it appears on this paper. None of it may reach the
+    // shipped bytes.
+    recurrence: ['2011/sr8', 'QP2403-Q8'],
+    // Must narrow. 'bridge control' alone resolves to Q5 and Q8; adding the
+    // astern term takes it to Q8 on its own.
+    narrow: ['bridge control astern', 'QP2403-Q8'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';

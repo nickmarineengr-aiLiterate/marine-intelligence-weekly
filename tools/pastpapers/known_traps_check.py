@@ -170,10 +170,18 @@ def structural_layer(specs):
                                  % (pid, q['q_no']))
 
         # T12: HATC must never appear as a source for any question.
+        #
+        # Match HATC as a WORD, not as a substring. A bare `'hatc' in src` also
+        # fires on 'hatches' -- unavoidable the moment a question quotes
+        # York-Antwerp Rule II ("water which goes down a ship's hatches opened
+        # for the purpose of making a jettison"). QP2403 Q3 tripped it exactly
+        # that way. The word-boundary form still catches every genuine
+        # reference -- "HATC", "HATC's", "HATC-sourced" -- because the boundary
+        # falls on a non-word character in each case.
         checked += 1
         for q in d['questions']:
             for src in (q.get('sources') or []):
-                if 'hatc' in src.lower() and 'not used' not in src.lower():
+                if re.search(r'\bHATC\b', src, re.I) and 'not used' not in src.lower():
                     fails.append('%s %s: HATC appears in sources (trap 12)' % (pid, q['q_no']))
 
         # T10: ammonia content must not be recorded as zero-emission.

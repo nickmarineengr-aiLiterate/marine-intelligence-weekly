@@ -37,10 +37,10 @@
   "method": "Text extracted with PyMuPDF from the born-digital text layer and carried into text_verbatim without retyping, then read back against every page rendered at 150 dpi. Pages read back this session: 3 of 3. Every page carrying a marks anomaly, a page-straddling question or host editorial insertion was among them. No discrepancy between the text layer and the render was found on any page. Q2 and Q7 straddle page breaks; four questions print no marks.",
   "residual_risk": "None outstanding for this paper: every source page was read back at 150 dpi against the text layer. The source is born-digital, not a scan, so extraction is character-exact; the read-back exists to catch dropped marks, reading-order faults and host editorial insertions. A solving session must still re-read its own paper in full before an answer is authored against it."
  },
- "build_state": "Intake Complete",
- "review_state": "Answerless intake - questions only, no answers authored",
+ "build_state": "Pilot Review Ready",
+ "review_state": "Awaiting Founder Review - complete paper",
  "gated": false,
- "version": "0.1",
+ "version": "1.0",
  "created": "2026-08-10",
  "updated": "2026-08-10",
  "questions": [
@@ -87,29 +87,566 @@
     "2024/MAR/Q1"
    ],
    "question_id": "QP2403-Q1",
-   "decomposition": null,
+   "decomposition": [
+    "What big data means specifically in a maritime setting, and the one mandatory instrument that now applies",
+    "(A) Where the data actually comes from, ship and shore",
+    "(A) Use in shipping operations and fleet optimisation",
+    "(A) Use in port management, cargo tracking and maritime safety",
+    "(B) How it changes decision-making, and at which levels",
+    "(B) The technical and data barriers",
+    "(B) The commercial, human and regulatory barriers"
+   ],
    "reuse_tier": "C",
    "reuse_evidence": [
-    "No family member with a built answer. Treat as new research until a solving session establishes otherwise."
+    "No built question addresses maritime big data, digitalisation or the Single Window.",
+    "QP2403 Q5 (authored in the previous session) establishes the operative cyber instrument at this sitting and is cited for the security barrier in route step 7. Supporting reuse only.",
+    "FAL.14(46) was obtained and read directly. No donor exists and none was manufactured."
    ],
    "reused_from": null,
-   "question_delta": null,
-   "answer_status": "Not Built",
-   "verification_status": "Not Started",
-   "verification_file": null,
-   "sources": [],
-   "unresolved": [],
-   "cross_links": [],
-   "model_answer": null,
-   "study_notes": null,
+   "question_delta": "New research. No donor. One authored sibling supplies the cyber barrier only.",
+   "answer_status": "Pilot Review Ready",
+   "verification_status": "Verified where a primary source exists, and honestly bounded where none does. Resolution FAL.14(46), Amendments to the Annex to the Convention on Facilitation of International Maritime Traffic 1965, adopted 13 May 2022, was obtained from the IMO resolutions CDN and read - operative paragraph 2 determines entry into force on 1 January 2024, Standard 1.3quin requires public authorities to introduce arrangements enabling all Standard 2.1 information to be provided to a \"single window\" by electronic means, and the annex defines \"single window\". That is the one hard, dated, mandatory instrument on this question and it took effect two months before the sitting. Everything else in the answer is engineering and industry practice, stated as such, with no percentage claims and no invented citations.",
+   "verification_file": "verification/QP2403/Q1.md",
+   "sources": [
+    "PRIMARY: Resolution FAL.14(46), adopted 13 May 2022, Amendments to the Annex to the Convention on Facilitation of International Maritime Traffic, 1965 - read from the IMO resolutions CDN",
+    "PRIMARY: FAL.14(46) operative paragraph 2 - the amendments enter into force on 1 January 2024 under the tacit acceptance procedure of article VII(2)(b), unless one third of Contracting Governments object before 1 October 2023",
+    "PRIMARY: FAL Convention annex, Standard 1.3quin as amended - public authorities shall introduce arrangements to enable the provision of all information required under Standard 2.1 to a \"single window\" by electronic means, and shall consider the single window as the channel for communicating decisions",
+    "PRIMARY: FAL Convention annex definition - \"Single window. An environment that allows for the submission or provision of standardized and harmonized information and declarations to a single entry point, typically by electronic means.\"",
+    "PRIMARY: FAL Convention annex, Standard 2.1bis and 2.1.2 - no more information than appendix 1, and procedures for pre-arrival and pre-departure information",
+    "PRIMARY: MSC-FAL.1/Circ.3/Rev.2 (7 June 2022) and resolution MSC.428(98) - the cyber counterpart of maritime data exposure, as established and read for QP2403 Q5",
+    "INTERNAL REUSE, VERIFIED: QP2403 Q5 verification record for the operative cyber-risk instrument at this sitting",
+    "ENGINEERING AND INDUSTRY PRACTICE, stated as such: shipboard and shore data sources; analytics applications in voyage optimisation, condition-based maintenance, port call optimisation, cargo visibility and safety analytics; and the barriers to adoption"
+   ],
+   "unresolved": [
+    "No percentage figures for fuel saving, emissions reduction or cost benefit are given anywhere in the answer. Vendor and industry figures for big-data and analytics benefits vary by an order of magnitude, are hull and trade specific, and none was verifiable from a primary source. A qualitative, mechanistic explanation is given instead. This is a deliberate C_ACCEPTED_LIMITATION.",
+    "The EEXI and CII framing is used only as context for why operational data now has regulatory consequence. The MARPOL Annex VI regulations were NOT read in a licensed consolidated edition this session; the in-force position is carried from the corpus temporal record. No regulation number is asserted in the Model Answer for EEXI or CII.",
+    "No claim is made about the number of ships fitted with performance monitoring, the market size of maritime analytics, or the state of any particular commercial platform."
+   ],
+   "cross_links": [
+    {
+     "label": "QP2403 Q5 - maritime cyber risk management, the security consequence of connecting ship data to shore",
+     "href": "QP2403.html#q5"
+    },
+    {
+     "label": "QP2403 Q2 - the bill of lading, and the documentary flow the Single Window digitises",
+     "href": "QP2403.html#q2"
+    },
+    {
+     "label": "QP2403 Q4 - propeller efficiency, where performance data turns into a retrofit decision",
+     "href": "QP2403.html#q4"
+    }
+   ],
+   "model_answer": {
+    "blocks": [
+     {
+      "h": "1. What big data means in a maritime setting"
+     },
+     {
+      "p": "<b>Big data</b> describes datasets whose <b>volume, velocity and variety</b> exceed what conventional tools can store, process and analyse; <b>veracity</b> and <b>value</b> are usually added, because data that is unreliable or that supports no decision is a cost rather than an asset. In the maritime sector the point is not that the industry has recently begun generating data - ships have kept logs for centuries - but that a modern ship is in effect a <b>distributed sensor network</b>, continuously producing machinery, navigation, cargo and environmental data which can now be transmitted, pooled across a fleet and analysed ashore."
+     },
+     {
+      "p": "The distinction that matters is between <b>data and information</b>. Big data is only useful where <b>analytics</b> turn it into something a person can act on; volume without interpretation simply moves the problem."
+     },
+     {
+      "p": "One point of regulatory hard edge belongs at the start, because at this sitting digital data exchange is <b>no longer voluntary</b>. The <b>2022 amendments to the annex of the FAL Convention, resolution FAL.14(46) adopted on 13 May 2022</b>, entered into force on <b>1 January 2024</b> under the tacit acceptance procedure. <b>Standard 1.3quin</b> now requires public authorities to <b>introduce arrangements to enable the provision of all the information required under Standard 2.1 to a \"single window\" by electronic means</b>, and to consider that single window as the channel through which they communicate decisions. The Convention defines a <b>single window</b> as <i>\"an environment that allows for the submission or provision of standardized and harmonized information and declarations to a single entry point, typically by electronic means\"</i>. In the FAL Convention a <b>Standard is mandatory</b>, a Recommended Practice is not - so this is an obligation, and it took effect <b>two months before this examination</b>."
+     },
+     {
+      "h": "2. Where the data comes from"
+     },
+     {
+      "ul": [
+       "<b>Machinery.</b> Engine power, revolutions, fuel rack or index position, exhaust and scavenge temperatures and pressures, turbocharger speeds, torque and shaft power meters.",
+       "<b>Condition monitoring.</b> Vibration analysis, lubricating oil and scrape-down analysis, thermography, and the continuous record held by the alarm and monitoring system.",
+       "<b>Navigation.</b> AIS, ECDIS, GNSS, gyro, echo sounder, radar and the voyage data recorder.",
+       "<b>Hull and voyage.</b> Speed through water and over ground, draught and trim, rudder angle, weather routeing and metocean feeds, and hull and propeller condition.",
+       "<b>Cargo.</b> Reefer container monitoring, tank gauging, loading computer output, temperature and humidity, and increasingly IoT tags at package level.",
+       "<b>Fuel and emissions.</b> Mass flow meters and tank soundings, feeding the mandatory fuel oil consumption reporting regimes.",
+       "<b>Shore side.</b> Port call and terminal operating systems, customs and single-window declarations, classification society records, port State control databases, satellite imagery and AIS aggregation services."
+      ]
+     },
+     {
+      "p": "The weakest element is the one the industry has relied on longest: the <b>manually compiled noon report</b>, which is low frequency, self-reported and inconsistent. Much of the value of automated acquisition lies simply in replacing it."
+     },
+     {
+      "h": "3. Shipping operations and fleet optimisation"
+     },
+     {
+      "ul": [
+       "<b>Voyage optimisation.</b> Weather routeing against measured ship response rather than assumed performance, and <b>just-in-time arrival</b> - slowing to a berth-ready time instead of steaming hard and waiting at anchor, which saves fuel that no engine modification can.",
+       "<b>Trim and speed optimisation.</b> Measured resistance across draught and trim combinations, so the ship is operated at the point the data shows rather than the point the trim table assumes.",
+       "<b>Hull and propeller performance.</b> Continuous monitoring separates the fouling penalty from weather and loading effects, which allows <b>hull cleaning and propeller polishing to be timed on evidence</b> and the payback of a coating or an energy-saving device to be measured rather than asserted.",
+       "<b>Condition-based maintenance.</b> The largest single change to the Chief Engineer's work. Vibration signatures, lube oil particle counts and temperature trends give warning of bearing, liner and turbocharger deterioration, so overhauls move from a calendar interval to a demonstrated need - reducing both unnecessary opening-up and unexpected failure.",
+       "<b>Fuel management.</b> Consumption verification against bunker delivery notes, bunker quality trending, and detection of loss or discrepancy.",
+       "<b>Commercial performance.</b> Charterparty speed and consumption warranties are now argued from continuously logged data rather than from noon reports."
+      ]
+     },
+     {
+      "p": "This has acquired regulatory consequence. Ship energy efficiency is now assessed not only by design but by <b>operational outcome</b>, and an operational rating is computed from exactly the consumption and distance data described above. Data quality has therefore stopped being purely a commercial matter."
+     },
+     {
+      "h": "4. Port management, cargo tracking and safety"
+     },
+     {
+      "ul": [
+       "<b>Port management.</b> Berth allocation, ETA prediction, pilot and tug scheduling, yard and gate planning, and port call optimisation. The <b>Maritime Single Window</b> is the regulatory spine of this: mandatory from <b>1 January 2024</b>, it replaces repeated submission of the same information to different authorities. The Convention's design principle is <b>submit once and re-use to the maximum extent possible</b>, and <b>Standard 2.1bis</b> caps what may be demanded - public authorities <b>shall not require more than the information shown in appendix 1</b>.",
+       "<b>Cargo tracking.</b> Container-level visibility across the chain, reefer and cold-chain integrity monitoring with alarm before spoilage rather than a claim after it, and control of demurrage and detention exposure.",
+       "<b>Maritime safety.</b> The shift is from investigating casualties one at a time to analysing them in aggregate. Casualty and near-miss databases expose recurring causal patterns; <b>port State control deficiency data drives the risk-based targeting</b> used by the regional memoranda; <b>AIS traffic density analysis</b> informs routeing measures, traffic separation and VTS design; hours-of-rest and fatigue analytics identify manning pressure; and machinery analytics turn alarms from <b>reactive into predictive</b>."
+      ]
+     },
+     {
+      "h": "5. How it changes decision-making"
+     },
+     {
+      "p": "The essential change is from <b>reactive to anticipatory</b> decision-making: acting on a trend rather than on a failure. It operates at three levels, and a good answer separates them."
+     },
+     {
+      "ul": [
+       "<b>Shipboard, immediate.</b> A rising bearing temperature trend, a change in vibration signature, a fuel consumption step change - decisions in hours.",
+       "<b>Shore technical and fleet, medium term.</b> Maintenance planning, spares provisioning, dry-docking scope, hull cleaning intervals - decisions in weeks and months.",
+       "<b>Commercial and strategic, long term.</b> Retrofit business cases, fleet renewal, trade selection and compliance planning - decisions in years."
+      ]
+     },
+     {
+      "p": "Two further effects are worth stating. <b>Fleet benchmarking</b> exposes the outlier ship that her own crew cannot see, because they have no comparator. And <b>regulatory reporting has become a decision input rather than only an output</b> - an operational efficiency rating affects how a ship can be traded, so the data feeds the commercial decision instead of merely recording it."
+     },
+     {
+      "p": "For a Chief Engineer the relationship is a specific one. You are simultaneously the <b>largest producer</b> of this data and the person best placed to <b>interpret</b> it. The analytics reports a trend; the engineer decides what it means and what to do. Preserving that division - and the competence that underpins it - is itself a management responsibility."
+     },
+     {
+      "h": "6. Technical and data barriers"
+     },
+     {
+      "ul": [
+       "<b>Connectivity.</b> Bandwidth at sea has improved greatly but remains variable and costly compared with shore, so systems must be designed to <b>filter and aggregate on board</b> and to tolerate long periods offline.",
+       "<b>Data quality - the dominant problem.</b> Uncalibrated or drifting sensors, manual entry, and inconsistent measurement bases, such as <b>speed through water against speed over ground</b> or fuel by mass against by volume. Analytics does not improve bad data; it <b>launders it into confident-looking output</b>, which is more dangerous than no output at all.",
+       "<b>Standardisation and interoperability.</b> There is no universally adopted ship data model. Equipment from many makers uses proprietary formats and closed interfaces, so integration is a bespoke project on each ship.",
+       "<b>Legacy tonnage.</b> Older ships were never instrumented for this. Retrofitting flow meters, torque meters and networked sensors costs real money on an asset that may have few years remaining.",
+       "<b>IT and OT convergence.</b> Extracting data from operational technology - the systems that actually control machinery - is technically harder and riskier than extracting it from administrative systems, and it is where the security problem begins."
+      ]
+     },
+     {
+      "h": "7. Commercial, human and regulatory barriers"
+     },
+     {
+      "ul": [
+       "<b>Cyber risk.</b> The direct consequence of the previous point. Connecting operational technology to shore multiplies the attack surface, and a compromise reaches propulsion, steering or cargo systems rather than merely an office network. At this sitting the governing guidance is <b>MSC-FAL.1/Circ.3/Rev.2</b>, and <b>resolution MSC.428(98)</b> requires cyber risks to be addressed in the safety management system - so this is an ISM obligation, not an IT preference.",
+       "<b>Data ownership and confidentiality.</b> Owner, charterer, manager and equipment maker all claim rights in the same data stream, and contracts frequently do not say who owns it. Owners are reasonably wary that <b>performance data will be used adversarially</b> in a charterparty dispute.",
+       "<b>Split incentives.</b> On a time charter the <b>owner buys the sensor and the charterer saves the fuel</b>. Until the contract allocates the benefit, the investment case is weak for whoever must pay.",
+       "<b>Industry structure.</b> Shipping is fragmented into very many small owners, which slows the emergence of any common standard and prevents the scale that makes analytics cheap.",
+       "<b>Cost and uncertain return.</b> Benefits are real but hull-specific and hard to attribute, particularly on older tonnage with limited remaining life.",
+       "<b>Skills and culture.</b> Seagoing and superintendent staff need enough analytics literacy to challenge an output. Training and recruitment lag the technology, and a system nobody trusts is a system nobody uses.",
+       "<b>Crew privacy.</b> Where monitoring extends from machinery to people - hours worked, location, behaviour - there are legitimate data protection and industrial relations limits.",
+       "<b>Regulatory fragmentation.</b> Different reporting regimes demand differently shaped data for the same voyage, and port systems differ between and within States, which is precisely the problem the Single Window obligation is intended to reduce.",
+       "<b>Automation bias.</b> The subtlest barrier is one of judgement: decision <i>support</i> becoming, in practice, an unexamined decision <i>maker</i>. A model trained on normal operation is least reliable in exactly the abnormal conditions where a good decision matters most."
+      ]
+     }
+    ]
+   },
+   "study_notes": {
+    "blocks": [
+     {
+      "h": "Why this structure scores"
+     },
+     {
+      "p": "The marks are <b>8 + 8</b> and limb (A) names <b>five segments</b> - shipping operations, port management, fleet optimisation, cargo tracking and maritime safety. It is a coverage test, and route steps 3 and 4 exist so that all five are reached. Limb (B) has two distinct halves: <b>role in decision-making</b>, then <b>evaluate the challenges and barriers</b>. \"Evaluate\" is the higher command word on the paper, so steps 6 and 7 carry the greater weight."
+     },
+     {
+      "p": "The single thing that lifts this answer above a general essay is <b>route step 1's dated instrument</b>. Any candidate can write about analytics; very few can say that the Maritime Single Window became <b>mandatory on 1 January 2024</b> under FAL Standard 1.3quin, two months before the paper. One sentence, and it changes the register of the whole answer."
+     },
+     {
+      "h": "The one hard instrument, and how to use it"
+     },
+     {
+      "p": "<b>Resolution FAL.14(46)</b>, adopted 13 May 2022, amended the annex to the FAL Convention and entered into force on <b>1 January 2024</b> by tacit acceptance. <b>Standard 1.3quin</b> obliges public authorities to enable all Standard 2.1 information to be provided to a <b>single window by electronic means</b>. Two supporting points are cheap to remember and show real reading: in the FAL Convention a <b>Standard is mandatory</b> while a <b>Recommended Practice</b> is not; and <b>Standard 2.1bis</b> caps the demand - authorities <b>shall not require more than the information in appendix 1</b>."
+     },
+     {
+      "h": "Common mistakes"
+     },
+     {
+      "ul": [
+       "Writing a general artificial-intelligence essay. The examiner asked about the <b>maritime sector</b> and named five segments.",
+       "Quoting <b>percentage savings</b>. They are vendor figures, hull-specific, and an examiner who knows the field will discount the whole answer.",
+       "Missing the <b>regulatory anchor</b> entirely and losing the one dated, citable fact available.",
+       "Treating limb (B) as a list of benefits. It asks you to <b>evaluate challenges and barriers</b>.",
+       "Ignoring <b>data quality</b>, which is the barrier practitioners rate first and candidates mention last.",
+       "Forgetting the <b>cyber</b> consequence of connecting operational technology to shore."
+      ]
+     },
+     {
+      "h": "Examiner traps"
+     },
+     {
+      "ul": [
+       "<b>Data is not information.</b> Say so early; it frames everything after it.",
+       "<b>The noon report.</b> Naming it as the weak link shows operational understanding rather than brochure knowledge.",
+       "<b>Split incentives.</b> The owner-buys / charterer-saves problem is the commercial reason adoption is slower than the technology allows, and almost nobody writes it.",
+       "<b>Speed through water against speed over ground.</b> A concrete, checkable example of inconsistent measurement basis.",
+       "<b>Automation bias.</b> A model is least reliable in the abnormal conditions where the decision matters most. This is the mature closing point."
+      ]
+     },
+     {
+      "h": "Likely oral follow-up"
+     },
+     {
+      "ul": [
+       "\"What is the Maritime Single Window and when did it become mandatory?\" - FAL Standard 1.3quin, from 1 January 2024, under the FAL.14(46) amendments.",
+       "\"Give a practical example of condition-based maintenance in your engine room.\" - vibration and lube oil trending on a turbocharger or main bearing, with the overhaul triggered by trend rather than running hours.",
+       "\"How would you know your hull needed cleaning?\" - performance monitoring separating the fouling penalty from weather and loading, not a fixed interval.",
+       "\"What is the risk in connecting the engine control system to a shore network?\" - it is an operational technology exposure; MSC-FAL.1/Circ.3/Rev.2 and MSC.428(98) make it an ISM matter.",
+       "\"Whose data is it?\" - contested between owner, charterer, manager and maker; usually a contractual gap."
+      ]
+     },
+     {
+      "h": "Memory framework"
+     },
+     {
+      "p": "Limb (A) is <b>SOURCE - SHIP - SHORE</b>: where the data comes from (2), what it does at sea (3), what it does in port and for safety (4). Limb (B) is <b>DECIDE - THEN WHAT STOPS IT</b>: decision levels (5), then barriers split into <b>technical</b> (6) and <b>human and commercial</b> (7)."
+     },
+     {
+      "p": "For the barriers, five words in order of practitioner priority: <b>QUALITY, CONNECTIVITY, STANDARDS, SECURITY, OWNERSHIP.</b>"
+     },
+     {
+      "h": "Regulation and source map"
+     },
+     {
+      "ul": [
+       "<b>Resolution FAL.14(46)</b>, 13 May 2022 - amendments to the FAL annex; in force <b>1 January 2024</b> by tacit acceptance under article VII(2)(b).",
+       "<b>FAL Standard 1.3quin</b> - all Standard 2.1 information to a single window electronically.",
+       "<b>FAL Standard 2.1bis</b> - no more than appendix 1 may be required.",
+       "<b>FAL definition</b> - a single window is one entry point for standardized and harmonized information.",
+       "<b>MSC-FAL.1/Circ.3/Rev.2</b> (7 June 2022) and <b>MSC.428(98)</b> - the cyber counterpart, as established for Q5 of this paper."
+      ]
+     },
+     {
+      "h": "Uncertainty and the limits of this answer"
+     },
+     {
+      "p": "This question sits substantially <b>outside the regulatory corpus</b>, and the answer is written to say so rather than to disguise it. The FAL material is primary and was read. Everything else - data sources, analytics applications, decision levels and barriers - is <b>engineering and industry practice</b>, presented as reasoning rather than as citation."
+     },
+     {
+      "p": "<b>No percentage figures appear anywhere.</b> Published claims for fuel saving or emissions benefit from analytics vary by an order of magnitude, are specific to hull and trade, and none was verifiable from a primary source. A mechanism explained is worth more in an examination than a number that cannot be defended."
+     },
+     {
+      "p": "The efficiency-rating framing in route step 3 is deliberately expressed <b>without regulation numbers</b>. The MARPOL Annex VI provisions were not read in a licensed consolidated edition for this question, so the answer states the effect and not a citation."
+     }
+    ]
+   },
    "temporal_review": {
-    "state": "STABLE",
-    "risk": "LOW",
-    "classes": [],
-    "notes": [],
+    "state": "CONFIRMED",
+    "risk": "MODERATE",
+    "classes": [
+     "mandatory instrument took effect shortly before the sitting"
+    ],
+    "notes": [
+     "The intake recorded STABLE / LOW. Checked rather than trusted. The topic is stable but the instrument is not, and the plan correctly flagged this as a research instruction.",
+     "Resolution FAL.14(46), adopted 13 May 2022, determined entry into force on 1 January 2024 - TWO MONTHS BEFORE THIS SITTING. The Maritime Single Window obligation is therefore live at the sitting and the answer uses it in the present tense.",
+     "An answer written on pre-2024 material would describe the Single Window as forthcoming. That would be wrong at this sitting, which is the mirror image of the usual error.",
+     "MSC-FAL.1/Circ.3/Rev.2 is the operative cyber edition at this sitting, carried from the Q5 verification. Rev.3 of 4 April 2025 must not be used here.",
+     "For QP2510 the Single Window obligation is equally in force and the answer needs no change; the cyber cross-reference must move to Rev.3."
+    ],
     "sitting": "March 2024"
    },
-   "subpart_marks_note": "Prints a mid-sentence comma and capital: \"maritime sector, Such as shipping operations\". Reproduced as printed."
+   "subpart_marks_note": "Prints a mid-sentence comma and capital: \"maritime sector, Such as shipping operations\". Reproduced as printed.",
+   "recurrence_class": "new",
+   "recurrence_adjudication": "No built question addresses big data, maritime digitalisation or the Maritime Single Window. QP2403 Q5 (cyber risk) is the nearest neighbour and is used as supporting reuse for the security barrier only. Tier C: new research. reused_from stays null.",
+   "regulations": [
+    "Resolution FAL.14(46) (13 May 2022)",
+    "FAL Convention annex, Standard 1.3quin",
+    "FAL Convention annex, Standard 2.1 and 2.1bis",
+    "MSC-FAL.1/Circ.3/Rev.2 (7 June 2022)",
+    "Resolution MSC.428(98)"
+   ],
+   "search_aliases": [
+    "big data",
+    "maritime big data",
+    "data analytics",
+    "digitalisation",
+    "digitalization",
+    "Maritime Single Window",
+    "MSW",
+    "single window",
+    "FAL Convention",
+    "FAL.14(46)",
+    "e-navigation",
+    "AIS",
+    "noon report",
+    "performance monitoring",
+    "condition monitoring",
+    "condition-based maintenance",
+    "predictive maintenance",
+    "voyage optimisation",
+    "weather routeing",
+    "just in time arrival",
+    "port call optimisation",
+    "hull fouling",
+    "cargo tracking",
+    "reefer monitoring",
+    "IoT",
+    "machine learning",
+    "decision support",
+    "data quality",
+    "interoperability",
+    "data ownership",
+    "bandwidth",
+    "connectivity",
+    "IT and OT",
+    "cyber risk",
+    "EEXI",
+    "CII",
+    "IMO DCS",
+    "EU MRV"
+   ],
+   "answer_route": {
+    "archetype": "evaluate",
+    "steps": [
+     {
+      "n": 1,
+      "limb": "(A)",
+      "title": "What big data means in a maritime setting",
+      "points": [
+       "data too large, too fast or too varied for conventional processing",
+       "characterised by volume, velocity, variety, veracity and value",
+       "in shipping the fleet is in effect a distributed sensor network",
+       "data is not information - analytics is what turns it into a decision",
+       "digital reporting is no longer voluntary at this sitting",
+       "resolution FAL.14(46), adopted 13 May 2022, in force 1 JANUARY 2024",
+       "Standard 1.3quin - all Standard 2.1 information to a \"single window\" by electronic means",
+       "in the FAL Convention a Standard is mandatory; a Recommended Practice is not",
+       "FAL defines a single window as one entry point for standardized and harmonized information"
+      ]
+     },
+     {
+      "n": 2,
+      "limb": "(A)",
+      "title": "Where the data comes from",
+      "points": [
+       "machinery - power, rpm, fuel rack, temperatures and pressures, torque and shaft power",
+       "condition monitoring - vibration, lube oil analysis, alarm and monitoring system logs",
+       "navigation - AIS, ECDIS, GNSS, gyro, echo sounder, radar and the VDR",
+       "hull and voyage - speed through water and over ground, draught, trim, weather feeds",
+       "cargo - reefer monitoring, tank gauging, loading computer, temperature and humidity",
+       "fuel and emissions - flow meters, and the data underlying mandatory consumption reporting",
+       "shore - port call and terminal systems, customs single windows, class records, PSC databases",
+       "the noon report is the weakest link because it is manual and low frequency"
+      ]
+     },
+     {
+      "n": 3,
+      "limb": "(A)",
+      "title": "Shipping operations and fleet optimisation",
+      "points": [
+       "voyage and weather routeing, and just-in-time arrival instead of waiting at anchor",
+       "trim and speed optimisation against measured, not assumed, resistance",
+       "hull and propeller performance monitoring - measuring the fouling penalty",
+       "timing hull cleaning and propeller polishing on evidence rather than calendar",
+       "condition-based maintenance replacing calendar-based overhaul",
+       "vibration and lube-oil trends give warning of bearing and liner deterioration",
+       "fuel management, bunker quality trending and consumption verification",
+       "charterparty speed and consumption warranties tested against measured data",
+       "operational data now carries regulatory consequence through the CII rating"
+      ]
+     },
+     {
+      "n": 4,
+      "limb": "(A)",
+      "title": "Port management, cargo tracking and safety",
+      "points": [
+       "berth allocation, ETA prediction, pilot and tug scheduling, yard and gate planning",
+       "the Maritime Single Window itself - mandatory from 1 January 2024",
+       "FAL Standard 2.1bis - no more information than appendix 1 may be demanded",
+       "submit once, re-use to the maximum extent possible",
+       "cargo visibility, reefer and cold-chain integrity, demurrage and detention control",
+       "safety - casualty and near-miss data analysed for trend rather than one at a time",
+       "PSC deficiency data drives risk-based targeting under the regional memoranda",
+       "AIS traffic density analysis informs routeing measures and VTS",
+       "fatigue and hours-of-rest analytics, and predictive rather than reactive alarms"
+      ]
+     },
+     {
+      "n": 5,
+      "limb": "(B)",
+      "title": "How it changes decision-making",
+      "points": [
+       "the shift is from reactive to anticipatory - acting on a trend, not on a failure",
+       "three levels: shipboard immediate, shore technical medium, commercial and strategic long",
+       "it gives an evidence base for capital decisions such as retrofits and fleet renewal",
+       "fleet benchmarking exposes an outlier ship that her own crew cannot see",
+       "regulatory reporting becomes a decision INPUT, not only an output",
+       "the Chief Engineer is the largest producer of the data and the interpreter of it",
+       "analytics reports a trend; the engineer decides - and must remain able to"
+      ]
+     },
+     {
+      "n": 6,
+      "limb": "(B)",
+      "title": "Technical and data barriers",
+      "points": [
+       "connectivity and bandwidth at sea remain variable and costly",
+       "much data must therefore be filtered or aggregated on board before transmission",
+       "DATA QUALITY is the dominant problem - uncalibrated sensors and manual entry",
+       "inconsistent measurement bases, such as speed through water against over ground",
+       "garbage in, garbage out - a confident output from bad data is worse than no output",
+       "no universal ship data model; proprietary formats and mixed maker equipment",
+       "legacy ships carry few sensors, and retrofit cost is real",
+       "integrating information technology with operational technology is the hard part"
+      ]
+     },
+     {
+      "n": 7,
+      "limb": "(B)",
+      "title": "Commercial, human and regulatory barriers",
+      "points": [
+       "CYBER RISK - connecting operational technology to shore multiplies the attack surface",
+       "MSC-FAL.1/Circ.3/Rev.2 is the operative guidance at this sitting; MSC.428(98) makes it an ISM matter",
+       "data ownership is contested between owner, charterer, manager and equipment maker",
+       "performance data can be used adversarially in a charterparty dispute",
+       "split incentives - the owner buys the sensor, the charterer saves the fuel",
+       "a fragmented industry of many small owners slows any common standard",
+       "cost and uncertain return on investment, particularly on older tonnage",
+       "skills - crews and superintendents need analytics literacy, and training lags",
+       "crew privacy where monitoring extends from machinery to people",
+       "regulatory fragmentation - different regimes demand differently shaped data",
+       "automation bias - the risk that decision support quietly becomes decision making"
+      ]
+     }
+    ]
+   },
+   "understand_first": "The examiner is not asking what big data is in general - he is asking what it is FOR, in five named parts of the maritime sector, and then what stops it working. Two things separate a strong answer from a magazine article. First, one hard dated fact: the Maritime Single Window became MANDATORY on 1 January 2024, two months before this paper, under FAL Standard 1.3quin. Second, honesty about the barriers - the real obstacles are not computing power but data quality, bandwidth, who owns the data, who pays for the sensor against who saves the fuel, and the cyber exposure created by connecting machinery to shore. Resist percentages; explain mechanisms.",
+   "memory_cue": "Limb (A) walks SOURCE, SHIP, SHORE - where data comes from (2), what it does at sea (3), what it does in port and for safety (4). Limb (B) is DECIDE then BLOCKERS - the three decision levels (5), technical barriers (6), human and commercial barriers (7). Five blockers in priority order: QUALITY, CONNECTIVITY, STANDARDS, SECURITY, OWNERSHIP (6, 7).",
+   "quick_revision": {
+    "recall_15s": "Big data = volume, velocity, variety, plus veracity and value. A ship is a distributed sensor network; analytics turns data into decisions. The hard instrument: resolution FAL.14(46) of 13 May 2022 entered into force 1 January 2024, and Standard 1.3quin requires public authorities to enable all Standard 2.1 information to be provided to a single window by electronic means - in the FAL Convention a Standard is mandatory. Uses: voyage and trim optimisation, just-in-time arrival, hull and propeller performance, condition-based maintenance, fuel management, port call optimisation, cargo and reefer visibility, risk-based PSC targeting and AIS traffic analysis. Barriers: data quality first, then connectivity, standardisation, legacy tonnage, cyber risk under MSC-FAL.1/Circ.3/Rev.2 and MSC.428(98), data ownership, split incentives, skills and automation bias.",
+    "keywords": [
+     "volume, velocity, variety, veracity, value",
+     "FAL.14(46) - in force 1 January 2024",
+     "Standard 1.3quin - single window, and a Standard is mandatory",
+     "condition-based maintenance replaces calendar-based",
+     "just-in-time arrival, hull and propeller performance",
+     "data quality is the first barrier, not computing power",
+     "split incentives - owner buys the sensor, charterer saves the fuel",
+     "cyber - OT exposure, MSC.428(98) makes it an ISM matter"
+    ],
+    "critical_numbers": [
+     "Resolution FAL.14(46), adopted 13 May 2022",
+     "Maritime Single Window mandatory from 1 January 2024",
+     "FAL Standard 1.3quin - the single window obligation",
+     "FAL Standard 2.1bis - no more than appendix 1 may be required",
+     "MSC-FAL.1/Circ.3/Rev.2 (7 June 2022) - the operative cyber guidance at this sitting"
+    ],
+    "critical_regulation": "FAL Convention annex Standard 1.3quin, as amended by resolution FAL.14(46) and in force from 1 January 2024 - public authorities shall introduce arrangements to enable the provision of all information required under Standard 2.1 to a \"single window\" by electronic means. In the FAL Convention a Standard is mandatory and a Recommended Practice is not.",
+    "major_trap": "Writing a general artificial-intelligence essay with quoted percentage savings, and missing the one dated mandatory instrument. The Maritime Single Window obligation entered into force on 1 January 2024, two months before this sitting. Give no percentage figures - they are vendor claims and hull-specific."
+   },
+   "retrieval_cards": [
+    {
+     "id": "QP2403-Q1-C1",
+     "type": "structure",
+     "prompt": "Give the route for the maritime big data question.",
+     "answer": "1 What big data means at sea, and the FAL single window obligation. 2 (A) Where the data comes from. 3 (A) Shipping operations and fleet optimisation. 4 (A) Port management, cargo tracking and safety. 5 (B) How decision-making changes. 6 (B) Technical and data barriers. 7 (B) Commercial, human and regulatory barriers.",
+     "why": "Steps 3 and 4 exist to cover the five segments the examiner named."
+    },
+    {
+     "id": "QP2403-Q1-C2",
+     "type": "regulation",
+     "prompt": "What is the Maritime Single Window obligation, and when did it take effect?",
+     "answer": "FAL Convention annex Standard 1.3quin, as amended by resolution FAL.14(46) adopted 13 May 2022, in force 1 January 2024. Public authorities shall introduce arrangements to enable all information required under Standard 2.1 to be provided to a single window by electronic means. A \"Standard\" in the FAL Convention is mandatory.",
+     "why": "The only dated, mandatory, citable instrument on this question."
+    },
+    {
+     "id": "QP2403-Q1-C3",
+     "type": "definition",
+     "prompt": "How does the FAL Convention define a single window?",
+     "answer": "An environment that allows for the submission or provision of standardized and harmonized information and declarations to a single entry point, typically by electronic means. The design principle is submit once and re-use to the maximum extent possible.",
+     "why": "Quoting the definition is worth more than describing the concept."
+    },
+    {
+     "id": "QP2403-Q1-C4",
+     "type": "trap",
+     "prompt": "What is the first barrier to maritime big data, and why is it worse than no data?",
+     "answer": "Data quality. Uncalibrated or drifting sensors, manual noon-report entry and inconsistent measurement bases such as speed through water against speed over ground. Analytics does not improve bad data; it turns it into confident-looking output, which is more dangerous than no output because it is acted upon.",
+     "why": "Practitioners rate this first; candidates mention it last, if at all."
+    },
+    {
+     "id": "QP2403-Q1-C5",
+     "type": "distinction",
+     "prompt": "Explain the split-incentive problem in maritime data investment.",
+     "answer": "On a time charter the owner pays for the sensors, the monitoring system and the bandwidth, while the charterer pays for and therefore saves the fuel. Unless the charterparty allocates the benefit, neither party has a complete business case, which slows adoption independently of the technology.",
+     "why": "The commercial reason adoption lags the technology, and rarely written."
+    },
+    {
+     "id": "QP2403-Q1-C6",
+     "type": "procedure",
+     "prompt": "Name the three decision levels big data supports, with a timescale for each.",
+     "answer": "Shipboard and immediate - a temperature or vibration trend, decided in hours. Shore technical and fleet, medium term - maintenance planning, spares, dry-dock scope, hull cleaning, decided in weeks to months. Commercial and strategic, long term - retrofit business cases, fleet renewal and trade selection, decided in years.",
+     "why": "Limb (B) asks about decision-making; separating the levels is what \"discuss\" means."
+    },
+    {
+     "id": "QP2403-Q1-C7",
+     "type": "regulation",
+     "prompt": "What is the cyber consequence of maritime big data, and which instruments apply?",
+     "answer": "Connecting operational technology to shore multiplies the attack surface, and a compromise can reach propulsion, steering or cargo systems rather than only an office network. At this sitting the guidance is MSC-FAL.1/Circ.3/Rev.2, and resolution MSC.428(98) requires cyber risks to be addressed in the safety management system - making it an ISM obligation.",
+     "why": "Links this question to Q5 of the same paper and shows the regime, not just the risk."
+    },
+    {
+     "id": "QP2403-Q1-C8",
+     "type": "trap",
+     "prompt": "Why should you give no percentage savings figures in this answer?",
+     "answer": "Published figures for fuel or emissions benefit from analytics vary by an order of magnitude, are specific to hull, trade and baseline, and originate largely from vendors. An unverifiable number invites challenge and devalues the surrounding answer; an explained mechanism does not.",
+     "why": "The most common way a good big-data answer loses credibility."
+    }
+   ],
+   "decomposition_gate": {
+    "question_intent": "Limb (A) is a coverage test across five named segments plus a definition. Limb (B) has two halves - the role in decision-making, and an EVALUATION of challenges and barriers. \"Evaluate\" is the higher command word and carries the weight.",
+    "mark_allocation": "16 marks printed as 8 + 8, with (A) definition plus five segments and (B) role plus barriers.",
+    "examiner_expectation": "Maritime specificity and at least one dated regulatory anchor. A general technology essay scores poorly however well written.",
+    "primary_source_plan": [
+     "Establish whether any mandatory instrument bears on this topic at the sitting date",
+     "Obtain and read FAL.14(46) rather than relying on a press summary",
+     "Take the single window obligation and the definition verbatim",
+     "Use the already-verified Q5 cyber instrument for the security barrier",
+     "Give no percentage figures and invent no citations for the practice material"
+    ],
+    "freshness_risk": "MODERATE and handled. The Maritime Single Window obligation took effect 1 January 2024, two months before the sitting - so it is live, and an answer written on pre-2024 material would understate it. Nothing else on the question turns on a date.",
+    "jurisdiction_risk": "LOW. The FAL Convention applies to Contracting Governments generally.",
+    "technical_ambiguities": [
+     "Whether the Single Window was mandatory at the sitting - it was, from 1 January 2024",
+     "Whether a FAL \"Standard\" binds - it does; a Recommended Practice does not",
+     "Whether any quantified benefit can be stated - not from a defensible source",
+     "Where the dominant barrier lies - data quality, not computing capability"
+    ],
+    "target_answer_shape": "Definition and the mandatory instrument first, because it is the one hard fact; then the data sources; then the five named segments across two steps; then decision levels; then barriers split technical against human and commercial, closing on automation bias.",
+    "note": "Command verbs -> command_verbs. Required components -> decomposition. Reuse map -> reuse_evidence.",
+    "completed": "2026-08-10, before drafting"
+   },
+   "provenance_summary": {
+    "P1_PRIMARY_VERIFIED": 9,
+    "P2_AUTHORITATIVE_SECONDARY": 1,
+    "P3_INDUSTRY_GUIDANCE": 0,
+    "INTERNAL_REUSE_VERIFIED": 2,
+    "ENGINEERING_JUDGEMENT": 34,
+    "UNRESOLVED": 3,
+    "TIME_SENSITIVE_REVERIFY": 2
+   },
+   "reverify_before_publication": [
+    {
+     "claim": "The Maritime Single Window obligation was in force at the March 2024 sitting",
+     "why": "FAL.14(46) operative paragraph 2 determines entry into force on 1 January 2024 under tacit acceptance, conditional on fewer than one third of Contracting Governments objecting before 1 October 2023. The resolution states the mechanism, not the outcome. Confirm from IMO status information that the amendments did in fact enter into force on that date.",
+     "class": "B_CURRENCY_CHECK"
+    },
+    {
+     "claim": "The EEXI and CII framing used in route step 3",
+     "why": "Stated WITHOUT regulation numbers and without dates in the Model Answer, precisely because MARPOL Annex VI was not read in a licensed consolidated edition for this question. If a future revision wishes to cite regulation numbers, the Annex must be read first.",
+     "class": "C_ACCEPTED_LIMITATION"
+    },
+    {
+     "claim": "The data sources, applications, decision levels and barriers",
+     "why": "Engineering and industry practice, presented as reasoning rather than citation. No instrument prescribes them and none is cited. This is the expected posture for a question largely outside the regulatory corpus.",
+     "class": "C_ACCEPTED_LIMITATION"
+    },
+    {
+     "claim": "No quantified benefit is asserted anywhere",
+     "why": "A deliberate omission, recorded so that a later editor does not \"improve\" the answer by adding vendor percentages.",
+     "class": "C_ACCEPTED_LIMITATION"
+    }
+   ]
   },
   {
    "q_no": "Q2",
@@ -1581,30 +2118,506 @@
     "2024/MAR/Q4"
    ],
    "question_id": "QP2403-Q4",
-   "decomposition": null,
+   "decomposition": [
+    "Why propeller efficiency is worth pursuing, and what the stem's framing rests on",
+    "Where the losses actually occur - the physics each device attacks",
+    "Ducted propellers - principle, merits, demerits",
+    "Kappel propellers - principle, merits, demerits",
+    "Contra-rotating propellers - principle, merits, demerits",
+    "Choosing between them, and answering the printed demand correctly"
+   ],
    "reuse_tier": "C",
    "reuse_evidence": [
-    "No family member with a built answer. Treat as new research until a solving session establishes otherwise."
+    "No built question addresses propeller design, propulsive efficiency or energy-saving devices.",
+    "No donor exists and none was manufactured."
    ],
    "reused_from": null,
-   "question_delta": null,
-   "answer_status": "Not Built",
-   "verification_status": "Not Started",
-   "verification_file": null,
-   "sources": [],
-   "unresolved": [],
-   "cross_links": [],
-   "model_answer": null,
-   "study_notes": null,
+   "question_delta": "New research. No donor.",
+   "answer_status": "Pilot Review Ready",
+   "verification_status": "Verified as an engineering answer, and honestly bounded. No instrument prescribes a propeller type, so ENGINEERING_JUDGEMENT is the dominant provenance class by design and this is stated rather than disguised. The hydrodynamics - the decomposition of propulsive efficiency, the axial, rotational and frictional loss mechanisms, the tip vortex, and the loading-dependence of duct benefit - are settled naval architecture and are explained mechanistically. NO PERCENTAGE EFFICIENCY GAIN IS QUOTED ANYWHERE, because published figures are vendor-sourced, hull-specific and were not verifiable. The regulatory framing that the stem supplies (ship energy efficiency) is stated WITHOUT regulation numbers, because MARPOL Annex VI was not read in a licensed consolidated edition for this question.",
+   "verification_file": "verification/QP2403/Q4.md",
+   "sources": [
+    "ENGINEERING JUDGEMENT, settled naval architecture: propulsive efficiency as the product of hull efficiency, open-water efficiency and relative rotative efficiency",
+    "ENGINEERING JUDGEMENT, settled naval architecture: the three recoverable loss mechanisms in a propeller race - axial (slipstream) loss, rotational (swirl) loss, and blade frictional loss - together with tip vortex loss",
+    "ENGINEERING JUDGEMENT: the thrust loading coefficient as the parameter that determines whether an accelerating duct helps or hurts",
+    "ENGINEERING JUDGEMENT: ducted (Kort nozzle) principle - an annular aerofoil generating its own thrust while accelerating flow through the disc and suppressing tip loss",
+    "ENGINEERING JUDGEMENT: Kappel principle - blade tips curved smoothly towards the suction side as an integrated continuous winglet, redistributing load and weakening the tip vortex",
+    "ENGINEERING JUDGEMENT: contra-rotating principle - a second coaxial propeller turning in the opposite direction to recover rotational energy left in the race",
+    "ENGINEERING JUDGEMENT: azimuth propulsion principle and trade-offs, given in the Study Guide as the fourth option the candidate may substitute",
+    "ENGINEERING JUDGEMENT: cavitation as the constraint on blade loading, and its erosion, vibration and noise consequences",
+    "CONTEXT ONLY, no regulation number asserted: ship energy efficiency requirements were in force before this sitting and supply the stem's framing"
+   ],
+   "unresolved": [
+    "NO PERCENTAGE EFFICIENCY GAIN is given for any device. Published figures for ducts, tip-modified propellers and contra-rotating arrangements vary widely, depend entirely on hull form, wake field, loading and operating profile, and originate largely from manufacturers. A qualitative, mechanistic treatment was chosen instead, per the standing instruction not to invent numerical claims.",
+    "The MARPOL Annex VI energy efficiency provisions were NOT read in a licensed consolidated edition for this question. The Model Answer therefore refers to the regulatory driver in general terms and asserts NO regulation number and NO date for EEXI or CII.",
+    "No claim is made about the installed population of any device, nor about any particular manufacturer's product."
+   ],
+   "cross_links": [
+    {
+     "label": "QP2403 Q1 - performance monitoring, which is how a retrofit decision is actually justified",
+     "href": "QP2403.html#q1"
+    },
+    {
+     "label": "QP2403 Q8 - the propulsion control chain behind the propeller",
+     "href": "QP2403.html#q8"
+    }
+   ],
+   "model_answer": {
+    "blocks": [
+     {
+      "h": "1. Why propeller efficiency is worth pursuing"
+     },
+     {
+      "p": "The propeller is the <b>final energy conversion</b> in the propulsion chain and one of the least efficient links in it: a large proportion of the delivered power never becomes useful thrust. Because resistance rises steeply with speed, a modest improvement in propulsive efficiency releases a disproportionate saving in fuel and therefore in emissions."
+     },
+     {
+      "p": "The stem supplies its own framing - <i>\"improving efficiency of propellers is recognized as a growing means to improve energy efficiency of ships\"</i> - and that framing is sound at this sitting, because ship energy efficiency requirements, technical and operational, were <b>already in force</b>. A propeller change has a particular attraction in that context: it improves the ship's <b>technical</b> efficiency and her measured <b>operational</b> performance at the same time, and unlike reducing speed it <b>costs the operator no time</b>."
+     },
+     {
+      "h": "2. Where the losses occur"
+     },
+     {
+      "p": "A useful answer explains <b>what each device is attacking</b> before describing it. Overall propulsive efficiency is the product of <b>hull efficiency</b>, <b>open-water (propeller) efficiency</b> and <b>relative rotative efficiency</b>. The devices in this question act chiefly on the second, where the energy is lost in four ways:"
+     },
+     {
+      "ul": [
+       "<b>Axial or slipstream loss.</b> The propeller works by accelerating water aft; the kinetic energy left in that accelerated column is lost. It falls as the disc area is increased and the acceleration reduced.",
+       "<b>Rotational loss.</b> A single propeller leaves the race <b>rotating</b>. That swirl carries energy which does nothing to propel the ship, and it is the <b>largest single recoverable loss</b> in a conventional installation.",
+       "<b>Frictional loss.</b> Viscous drag over the blade surfaces - irreducible, and worsened by roughness and fouling.",
+       "<b>Tip vortex loss.</b> At the blade tip the pressure difference between face and back equalises around the edge, shedding a strong vortex which carries away energy and is a principal source of pressure pulses, hull vibration and cavitation erosion."
+      ]
+     },
+     {
+      "p": "<b>Cavitation</b> sets the ceiling. Blade loading cannot simply be increased, because local pressure falling to vapour pressure produces cavities whose collapse causes <b>erosion, vibration and noise</b>. Every device below is an attempt to recover one of these losses <b>without</b> breaching that ceiling: the <b>duct</b> attacks axial loss and tip loss, <b>Kappel</b> attacks tip vortex loss, and <b>contra-rotation</b> attacks rotational loss."
+     },
+     {
+      "h": "3. Ducted propellers"
+     },
+     {
+      "p": "<b>Principle.</b> The propeller runs inside an <b>annular aerofoil</b> - a nozzle, the classic form being the Kort nozzle. In an <b>accelerating duct</b> the internal section converges, so flow is accelerated into the disc; each blade then has to generate less thrust for the same total, and the <b>duct itself, being a lifting surface with circulation, produces additional forward thrust</b>. The close tip clearance also largely <b>suppresses the tip vortex</b>. A <b>decelerating duct</b> reverses the section to raise pressure at the disc and suppress cavitation and radiated noise - mainly a naval application."
+     },
+     {
+      "p": "The governing parameter is <b>thrust loading</b>. The duct earns its keep where the propeller is <b>heavily loaded at low speed</b>: tugs, trawlers, pushers, and slow, full-form ships whose diameter is limited by draught."
+     },
+     {
+      "ul": [
+       "<b>Merits.</b> Substantial <b>thrust augmentation at high loading</b>, which is why bollard pull vessels are almost universally ducted; improved efficiency where the propeller would otherwise be overloaded; suppression of tip vortex and its associated erosion; <b>physical protection</b> of the propeller from debris and quay contact; improved <b>course stability</b> with a fixed nozzle; and, with a <b>steerable nozzle</b>, a genuine manoeuvring gain that can remove the need for a separate rudder.",
+       "<b>Demerits.</b> The duct is an <b>appendage with its own drag</b>, and at <b>light loading and higher speed that drag exceeds the benefit</b> - a duct can make a fast, lightly loaded ship <b>worse</b>. It <b>fouls and corrodes</b>, and marine growth inside the nozzle degrades performance quickly; it can be <b>damaged or blocked by debris or ice</b>; internal <b>cavitation erosion</b> occurs on the inner surface and at the tip gap; <b>clearances are critical</b> and alignment must be maintained; it adds weight and structure; and it complicates <b>survey, inspection and propeller removal</b> in dry dock."
+      ]
+     },
+     {
+      "h": "4. Kappel propellers"
+     },
+     {
+      "p": "<b>Principle.</b> A Kappel propeller is a conventional-diameter propeller whose <b>blade tips are curved smoothly towards the suction side</b>, forming an <b>integrated, continuous winglet</b> rather than a bolted-on end plate. The curvature allows blade loading to be carried further outboard while the <b>tip vortex is weakened and displaced away from the blade</b>. The aeronautical analogy is exact: it is the marine equivalent of an aircraft <b>winglet</b>, and it recovers energy from the same mechanism."
+     },
+     {
+      "ul": [
+       "<b>Merits.</b> It reduces <b>tip vortex loss for the same diameter</b>, which matters when draught or aperture fixes the diameter. There is <b>no additional appendage</b>, so no added drag, no added fouling surface and <b>no new maintenance item</b>. The weakened tip vortex produces a <b>more uniform wake into the rudder</b>, reducing <b>pressure pulses, hull vibration and radiated noise</b> - a real habitability and structural benefit as well as an efficiency one. And it is <b>retrofittable</b> as a straight propeller replacement at a scheduled dry docking.",
+       "<b>Demerits.</b> The gain is <b>modest</b> and is <b>highly dependent on the hull wake field</b>, so it must be designed for the specific ship - which means <b>CFD and model testing</b>, and a <b>high design cost</b> that is hard to justify on a single vessel. The <b>curved tip geometry is complex to cast</b>, dearer than a conventional blade, and <b>more difficult to repair, straighten or re-pitch</b> after damage; the tip is also relatively <b>vulnerable</b>. Finally, the benefit is <b>design-point dependent</b> - a ship trading persistently away from the draught and speed for which the blade was designed may realise little of it."
+      ]
+     },
+     {
+      "h": "5. Contra-rotating propellers"
+     },
+     {
+      "p": "<b>Principle.</b> Two propellers are mounted <b>coaxially on the same axis and turn in opposite directions</b>. The forward propeller leaves a rotating race; the after propeller, turning the other way, is designed to <b>recover that rotational energy</b> and convert it into additional thrust. Because rotational loss is the largest single recoverable loss in a conventional installation, this attacks the biggest target directly. Mechanically it requires either <b>coaxial inner and outer shafting with epicyclic gearing</b>, or a <b>podded after unit</b> driven electrically in the hybrid arrangement."
+     },
+     {
+      "ul": [
+       "<b>Merits.</b> The <b>highest theoretical efficiency gain</b> of the three, because it recovers swirl rather than merely avoiding a loss. The total thrust is <b>divided between two propellers</b>, so <b>loading per propeller falls</b> - which reduces <b>cavitation risk</b>, <b>pressure pulses and induced vibration</b>, and permits a <b>smaller diameter for a given thrust</b>, valuable where draught constrains the aperture. <b>Torque reaction is largely cancelled</b>, improving course keeping and reducing rudder correction.",
+       "<b>Demerits.</b> The objection is mechanical, and it is serious. The arrangement demands <b>concentric inner and outer shafting</b> with <b>complex reduction and reversing gearing</b>, and the <b>sealing of two concentric shafts at the stern tube is a recognised reliability weak point</b>. Capital cost is high; <b>alignment, maintenance, and dry-dock withdrawal are all substantially harder</b>; there are more components to fail in a system whose failure immobilises the ship. <b>Service experience in the large merchant fleet remains limited</b>, so spares support and operator confidence lag the theory - which, more than the engineering, is why adoption has been slow."
+      ]
+     },
+     {
+      "h": "6. Choosing between them, and the printed demand"
+     },
+     {
+      "p": "The three are not competitors for the same ship. The choice follows the <b>thrust loading coefficient and the operating profile</b>:"
+     },
+     {
+      "ul": [
+       "<b>Heavily loaded, low speed, high thrust</b> - tug, trawler, pusher, slow full-form ship: the <b>duct</b> earns its drag several times over.",
+       "<b>Moderately loaded single screw with a reasonably clean wake</b>: a <b>tip-modified blade</b> such as Kappel gives a real gain with no new appendage and no new maintenance.",
+       "<b>Where rotational loss is large and mechanical complexity is acceptable</b>: <b>contra-rotating</b> offers the most, at the highest engineering and commercial risk.",
+       "<b>Lightly loaded and fast</b>: a duct is likely to make the ship <b>worse</b>, and this is the trap in the question - a device is not \"high efficiency\" in the abstract."
+      ]
+     },
+     {
+      "p": "Two points on answering. The stem asks for <b>any three of the four</b>, <b>with merits and demerits</b>. <b>Three treated properly earns more than four treated superficially</b>, and an answer that gives only merits has answered half the question. And <b>give no percentage figures</b>: published gains are manufacturer-sourced and depend entirely on hull form, wake field, loading and trade. A correctly explained <b>mechanism</b> is worth more than a number you cannot defend."
+     }
+    ]
+   },
+   "study_notes": {
+    "blocks": [
+     {
+      "h": "Why this structure scores"
+     },
+     {
+      "p": "The question prints <b>no mark allocation</b> and asks for <b>three of four</b> devices <b>with merits and demerits</b>. That is effectively four equal blocks of about four marks: one for the framing and the loss mechanisms, and one for each device. Route steps 1 and 2 are the framing; steps 3, 4 and 5 are the three devices in the printed order; step 6 is the comparative judgement that turns three descriptions into a discussion."
+     },
+     {
+      "p": "Step 2 is what separates a Class I answer from a Class II one. Anyone can describe a nozzle. Explaining that a propeller loses energy <b>axially, rotationally, frictionally and at the tip</b>, and that each device attacks a <b>different one of those</b>, gives the whole answer a spine and makes the merits and demerits follow logically instead of being recited."
+     },
+     {
+      "h": "The fourth option - azimuth propulsion"
+     },
+     {
+      "p": "The Model Answer takes <b>ducted, Kappel and contra-rotating</b>, which is the printed demand of three. If you would rather substitute <b>azimuth propulsion</b> for one of them, here is the same treatment."
+     },
+     {
+      "p": "<b>Principle.</b> The propeller is carried in a <b>steerable unit that rotates about a vertical axis</b>, so thrust can be directed through a full circle. Drive is either mechanical through bevel gearing in a Z-drive, or electrical to a motor housed in a submerged pod. In a <b>pulling (tractor)</b> configuration the propeller runs ahead of the pod, in <b>undisturbed inflow</b>, which is the main hydrodynamic advantage."
+     },
+     {
+      "ul": [
+       "<b>Merits.</b> The propeller works in a <b>clean, uniform wake</b> rather than in the hull's disturbed boundary layer, which improves efficiency and reduces cavitation and vibration; <b>no rudder, no long shaft line, no stern tube</b> and no separate reversing arrangement; <b>outstanding manoeuvrability</b> with full thrust in any direction and strong crash-stop performance; <b>freed hull volume</b> forward of the pod for cargo or machinery; and, with diesel-electric drive, the prime movers can be <b>loaded efficiently</b> and sited flexibly.",
+       "<b>Demerits.</b> <b>High capital cost</b> and dependence on the <b>electrical chain</b>, so a switchboard, converter or motor fault removes propulsion; the pod is a <b>submerged, largely inaccessible unit</b>, so significant repair usually means dry docking and specialist attendance; <b>slewing bearings and seals</b> are highly loaded and are the recognised failure mode; <b>appendage drag</b> of the pod and strut partly offsets the inflow benefit at higher speeds; <b>conversion losses</b> through the electrical chain; and crew familiarity and spares support are <b>less widespread</b> than for conventional shafting."
+      ]
+     },
+     {
+      "h": "Common mistakes"
+     },
+     {
+      "ul": [
+       "Describing <b>all four</b> superficially when the stem asked for <b>three</b>. This is the single commonest error on this question.",
+       "Giving <b>merits only</b>. The stem says <b>merits and demerits</b>; half the marks are in the second half.",
+       "Quoting <b>percentage gains</b>. Vendor figures, hull-specific, indefensible under questioning.",
+       "Saying a duct always improves efficiency. It <b>does not</b> - at light loading its drag makes the ship worse. Loading is the whole story.",
+       "Confusing <b>Kappel</b> with a bolted-on end plate or a tip fin. It is an <b>integrated blade geometry</b>.",
+       "Treating contra-rotating as merely \"two propellers\". The point is <b>recovery of rotational energy</b>.",
+       "Omitting <b>cavitation</b>, which is the constraint that makes all of this difficult."
+      ]
+     },
+     {
+      "h": "Examiner traps"
+     },
+     {
+      "ul": [
+       "<b>Thrust loading decides everything about a duct.</b> If you can state that, you have shown you understand rather than remember.",
+       "<b>Accelerating against decelerating ducts.</b> The second exists for cavitation and noise, not for efficiency.",
+       "<b>The vibration benefit.</b> Kappel and contra-rotation both reduce pressure pulses into the hull - an easy extra mark that connects to habitability and structural fatigue.",
+       "<b>The stern tube seal on concentric shafting.</b> The most credible practical objection to contra-rotating propellers, and a Chief Engineer is expected to raise it.",
+       "<b>Design point.</b> Every one of these devices is optimised for a condition; a ship trading away from it realises less."
+      ]
+     },
+     {
+      "h": "Likely oral follow-up"
+     },
+     {
+      "ul": [
+       "\"Why is a tug ducted and a container ship not?\" - thrust loading. High loading at low speed is where the accelerating duct pays; at light loading its drag dominates.",
+       "\"What is the largest recoverable loss in a conventional propeller?\" - the rotational loss left in the race, which is what contra-rotation targets.",
+       "\"How does a winglet on a propeller help?\" - it weakens and displaces the tip vortex, reducing the energy shed at the tip and the pressure pulses into the hull.",
+       "\"What limits how hard you can load a blade?\" - cavitation, and its erosion, vibration and noise consequences.",
+       "\"What would you inspect on a ducted propeller in dry dock?\" - tip clearance and duct alignment, internal erosion at the tip gap, fouling and coating condition, structural attachment and any debris damage.",
+       "\"You are offered a propeller retrofit. How would you justify it?\" - measured hull and propeller performance data before and after, separating the effect from weather, loading and fouling. This links directly to Q1."
+      ]
+     },
+     {
+      "h": "Memory framework"
+     },
+     {
+      "p": "Four losses, three devices: <b>AXIAL, ROTATIONAL, FRICTIONAL, TIP</b>. The <b>duct</b> attacks axial and tip; <b>Kappel</b> attacks tip; <b>contra-rotation</b> attacks rotational. Nothing usefully attacks frictional except cleanliness. If you hold that one sentence you can reconstruct the whole answer, including why a duct is wrong for a fast ship."
+     },
+     {
+      "h": "Regulation and source map"
+     },
+     {
+      "p": "<b>No instrument prescribes a propeller type</b>, and none is cited. The regulatory connection is indirect: ship energy efficiency requirements, technical and operational, were in force before this sitting and are what make propeller efficiency a compliance matter as well as a commercial one. The Model Answer states that connection <b>without regulation numbers</b>, deliberately - see below."
+     },
+     {
+      "h": "Uncertainty and the limits of this answer"
+     },
+     {
+      "p": "This is an <b>engineering</b> question and the answer says so. The hydrodynamics - the decomposition of propulsive efficiency, the four loss mechanisms, the loading-dependence of duct benefit, the tip vortex and the cavitation ceiling - is settled naval architecture and is explained <b>mechanistically</b> rather than cited."
+     },
+     {
+      "p": "<b>No percentage efficiency gain is quoted anywhere in this answer, for any device.</b> Published figures vary widely, depend entirely on hull form, wake field, loading and operating profile, and originate largely from manufacturers. This is a deliberate decision, recorded so that a later editor does not \"improve\" the answer by adding them."
+     },
+     {
+      "p": "The <b>MARPOL Annex VI energy efficiency provisions were not read</b> in a licensed consolidated edition for this question. The Model Answer therefore refers to the regulatory driver <b>in general terms and asserts no regulation number and no date</b>. If a future revision wishes to cite EEXI or CII by regulation, the Annex must be read first."
+     }
+    ]
+   },
    "temporal_review": {
-    "state": "STABLE",
+    "state": "CONFIRMED",
     "risk": "LOW",
     "classes": [],
-    "notes": [],
+    "notes": [
+     "The intake recorded STABLE / LOW. Checked rather than trusted.",
+     "Propeller hydrodynamics is not time-dependent and does not differ between the two sittings.",
+     "The regulatory framing the stem uses - improving ship energy efficiency - rests on requirements already in force well before March 2024, and unchanged in character by October 2025.",
+     "The answer deliberately asserts NO regulation number and NO date, which removes the only currency risk this question could carry.",
+     "For QP2510 this question is reusable with no legal update at all - the cleanest donor on the paper alongside Q6 and Q3."
+    ],
     "sitting": "March 2024"
    },
    "subpart_marks_note": "ANOMALY: the source copy prints NO mark allocation. Recorded at 16 marks under instruction 2 (\"all questions carry equal marks\"); the absence is the printed copy's, not a transcription loss. Sub-part marks are null. Note the demand is \"any three of the following\" four - a candidate answers three limbs, not four.",
-   "printed_marks_absent": true
+   "printed_marks_absent": true,
+   "recurrence_class": "new",
+   "recurrence_adjudication": "No built question addresses propeller design or propulsive efficiency devices. Tier C: new research. reused_from stays null.",
+   "regulations": [],
+   "search_aliases": [
+    "high efficiency propeller",
+    "ducted propeller",
+    "Kort nozzle",
+    "nozzle propeller",
+    "Kappel propeller",
+    "tip loaded propeller",
+    "winglet propeller",
+    "contra rotating propeller",
+    "CRP",
+    "azimuth propulsion",
+    "azipod",
+    "podded propulsion",
+    "propulsive efficiency",
+    "open water efficiency",
+    "hull efficiency",
+    "relative rotative efficiency",
+    "tip vortex",
+    "slipstream loss",
+    "rotational loss",
+    "swirl",
+    "cavitation",
+    "erosion",
+    "pressure pulses",
+    "thrust loading",
+    "bollard pull",
+    "energy saving device",
+    "ESD",
+    "propeller retrofit",
+    "EEXI",
+    "CII",
+    "energy efficiency"
+   ],
+   "answer_route": {
+    "archetype": "compare",
+    "steps": [
+     {
+      "n": 1,
+      "limb": "framing",
+      "title": "Why propeller efficiency is worth pursuing",
+      "points": [
+       "the propeller is the last energy conversion in the chain and one of the least efficient",
+       "resistance rises steeply with speed, so a small efficiency gain is worth real fuel",
+       "the stem itself supplies the framing - improving the energy efficiency of ships",
+       "ship energy efficiency requirements were already in force before this sitting",
+       "a propeller change is one of the few measures that improves both design and operational performance",
+       "and unlike slow steaming it does not cost the operator time"
+      ]
+     },
+     {
+      "n": 2,
+      "limb": "framing",
+      "title": "Where the losses occur",
+      "points": [
+       "propulsive efficiency = hull efficiency x open-water efficiency x relative rotative efficiency",
+       "open-water efficiency is the part these devices attack",
+       "AXIAL loss - kinetic energy left in the accelerated slipstream",
+       "ROTATIONAL loss - the race leaves the propeller spinning, and that swirl is wasted",
+       "FRICTIONAL loss - viscous drag on the blade surfaces",
+       "TIP VORTEX loss - pressure equalises around the blade tip and sheds a vortex",
+       "cavitation sets the ceiling on how hard a blade may be loaded",
+       "each of the three devices attacks a different one of these losses"
+      ]
+     },
+     {
+      "n": 3,
+      "limb": "a)",
+      "title": "Ducted propellers",
+      "points": [
+       "an annular aerofoil - a nozzle - surrounding the propeller",
+       "an ACCELERATING duct increases velocity through the disc and reduces the thrust each blade must produce",
+       "the duct is itself a lifting surface, so it generates additional forward thrust",
+       "it also closes the tip gap and suppresses the tip vortex",
+       "the benefit rises with THRUST LOADING - tugs, trawlers, slow full-form ships",
+       "a decelerating duct is used instead where cavitation and noise must be suppressed",
+       "MERIT - large thrust augmentation at high loading; better bollard pull",
+       "MERIT - protects the propeller and, with a fixed nozzle, improves course stability",
+       "MERIT - a steerable nozzle adds manoeuvring capability",
+       "DEMERIT - the duct is an appendage, and its drag becomes a net penalty at light loading",
+       "DEMERIT - fouling, corrosion, debris and ice damage; clearances are critical",
+       "DEMERIT - cavitation erosion on the inner surface; added weight, survey and maintenance burden"
+      ]
+     },
+     {
+      "n": 4,
+      "limb": "b)",
+      "title": "Kappel propellers",
+      "points": [
+       "blade tips curved smoothly towards the SUCTION side, as an integrated continuous winglet",
+       "not a bolted-on device - the curvature is part of the blade geometry",
+       "load is redistributed outward while the tip vortex is weakened and displaced",
+       "the aeronautical analogy is the aircraft winglet",
+       "MERIT - reduces tip vortex loss for the SAME diameter",
+       "MERIT - no additional appendage, so no added drag and no added maintenance item",
+       "MERIT - smoother wake into the rudder, so lower pressure pulses, vibration and noise",
+       "MERIT - retrofittable as a straight propeller replacement",
+       "DEMERIT - the gain is modest and highly dependent on the hull wake field",
+       "DEMERIT - requires hull-specific design, CFD and model testing, so design cost is high",
+       "DEMERIT - complex curved geometry is harder and dearer to cast, repair and re-pitch",
+       "DEMERIT - benefit falls away if the ship operates far from the design condition"
+      ]
+     },
+     {
+      "n": 5,
+      "limb": "c)",
+      "title": "Contra-rotating propellers",
+      "points": [
+       "two coaxial propellers on the same axis turning in OPPOSITE directions",
+       "the after propeller recovers the rotational energy left in the race by the forward one",
+       "rotational loss is the largest single recoverable loss in a conventional installation",
+       "requires coaxial shafting with epicyclic gearing, or a podded after unit",
+       "MERIT - the highest theoretical gain of the three, because it recovers swirl directly",
+       "MERIT - total thrust is split between two propellers, so blade loading per propeller falls",
+       "MERIT - lower loading means reduced cavitation risk and lower induced vibration",
+       "MERIT - torque reaction is largely cancelled, improving course keeping",
+       "MERIT - a smaller diameter can deliver a given thrust, useful where draught limits diameter",
+       "DEMERIT - mechanically complex and expensive; coaxial shafts and complex gearing",
+       "DEMERIT - the concentric shaft SEALING arrangement is a known reliability weak point",
+       "DEMERIT - maintenance, alignment and drydock work are all harder",
+       "DEMERIT - limited large-merchant service experience, so operator confidence is low"
+      ]
+     },
+     {
+      "n": 6,
+      "limb": "closing",
+      "title": "Choosing between them, and the printed demand",
+      "points": [
+       "the choice follows the THRUST LOADING and the operating profile, not fashion",
+       "heavily loaded and slow - the duct earns its drag",
+       "moderately loaded single screw with a clean wake - a tip-modified blade such as Kappel",
+       "large rotational loss and complexity acceptable - contra-rotating",
+       "lightly loaded and fast - a duct is likely to make matters worse",
+       "the stem asks for ANY THREE of four, with merits AND demerits for each",
+       "three treated properly scores more than four treated superficially",
+       "give no percentage figures - they are vendor claims and hull-specific"
+      ]
+     }
+    ]
+   },
+   "understand_first": "This is a physics question dressed as a list. Every one of these devices exists to recover ONE of the ways a propeller wastes energy - axially in the slipstream, rotationally as swirl, frictionally on the blades, and at the tip as a shed vortex - without crossing the cavitation limit. The duct attacks axial and tip loss, Kappel attacks tip loss, contra-rotation attacks rotational loss. Once you hold that, the merits and demerits stop being a list to memorise and become consequences you can derive. The other half of the question is discipline: the stem asks for THREE of four, with merits AND demerits, and gives no marks for a fourth device or for unbalanced praise.",
+   "memory_cue": "Four losses - AXIAL, ROTATIONAL, FRICTIONAL, TIP - are set out in route step 2. Then each device attacks one: DUCT takes axial and tip (3), KAPPEL takes tip (4), CONTRA takes rotational (5). Choose by loading in route step 6.",
+   "quick_revision": {
+    "recall_15s": "Propulsive efficiency = hull x open-water x relative rotative. Open-water losses are axial (slipstream), rotational (swirl), frictional (blade drag) and tip vortex; cavitation caps blade loading. Ducted: an annular aerofoil accelerating flow, generating its own thrust and closing the tip gap - excellent at high thrust loading and low speed, a net penalty at light loading because of appendage drag, plus fouling, debris, erosion and survey burden. Kappel: blade tips curved to the suction side as an integrated winglet - weakens the tip vortex at the same diameter, no new appendage, smoother wake and less vibration, but modest, hull-specific, costly to design and hard to repair. Contra-rotating: two coaxial propellers turning opposite ways recovering swirl - highest theoretical gain, lower loading per propeller, torque cancelled, but complex shafting and gearing, concentric shaft sealing as the weak point, and limited service experience. Choose by thrust loading. Give no percentages.",
+    "keywords": [
+     "axial, rotational, frictional, tip vortex",
+     "cavitation caps blade loading",
+     "duct = annular aerofoil, thrust loading decides",
+     "Kappel = integrated winglet, same diameter",
+     "contra-rotating = recovers swirl, sealing is the weak point",
+     "three of four, merits AND demerits",
+     "no percentage figures"
+    ],
+    "critical_numbers": [
+     "Three of four devices required by the stem - not four",
+     "Propulsive efficiency is the product of three efficiencies: hull, open-water, relative rotative",
+     "Four open-water loss mechanisms: axial, rotational, frictional, tip vortex",
+     "Two duct types: accelerating for thrust, decelerating for cavitation and noise"
+    ],
+    "critical_regulation": "No instrument prescribes a propeller type, and none is cited. The regulatory connection is indirect - ship energy efficiency requirements, technical and operational, were in force before this sitting and make propeller efficiency a compliance matter as well as a commercial one. State the connection; do not invent a regulation number.",
+    "major_trap": "Assuming a duct always improves efficiency. It improves efficiency only at HIGH THRUST LOADING; on a fast, lightly loaded ship the duct's own appendage drag makes the ship worse. The second trap is answering all four devices when the stem asks for three, and the third is giving merits without demerits."
+   },
+   "retrieval_cards": [
+    {
+     "id": "QP2403-Q4-C1",
+     "type": "structure",
+     "prompt": "Give the route for the high-efficiency propeller question.",
+     "answer": "1 Why propeller efficiency matters. 2 Where the losses occur. 3 Ducted. 4 Kappel. 5 Contra-rotating. 6 Choosing between them and answering the printed demand.",
+     "why": "Step 2 is the spine - each device attacks a different loss."
+    },
+    {
+     "id": "QP2403-Q4-C2",
+     "type": "definition",
+     "prompt": "Name the four ways a propeller loses energy, and what caps blade loading.",
+     "answer": "Axial or slipstream loss - kinetic energy in the accelerated race. Rotational loss - swirl left in the race, the largest recoverable loss. Frictional loss - viscous drag on the blades. Tip vortex loss - pressure equalising around the tip. Cavitation caps how hard a blade may be loaded, through erosion, vibration and noise.",
+     "why": "Derive every merit and demerit from this rather than memorising lists."
+    },
+    {
+     "id": "QP2403-Q4-C3",
+     "type": "trap",
+     "prompt": "When does a duct make a ship worse, and why?",
+     "answer": "At light thrust loading and higher speed. The duct is an appendage with its own drag; the accelerating effect and the duct's own thrust only outweigh that drag when the propeller is heavily loaded, as on a tug, trawler or slow full-form ship. On a fast, lightly loaded ship the drag dominates and efficiency falls.",
+     "why": "The central discriminating fact about ducted propellers."
+    },
+    {
+     "id": "QP2403-Q4-C4",
+     "type": "definition",
+     "prompt": "What is a Kappel propeller and what does it attack?",
+     "answer": "A conventional-diameter propeller whose blade tips are curved smoothly towards the suction side as an integrated, continuous winglet - not a bolted-on end plate. It redistributes load outboard while weakening and displacing the tip vortex, so it attacks tip vortex loss at the same diameter, and gives a smoother wake into the rudder with lower pressure pulses.",
+     "why": "Candidates routinely describe it as an add-on device, which it is not."
+    },
+    {
+     "id": "QP2403-Q4-C5",
+     "type": "distinction",
+     "prompt": "What does a contra-rotating arrangement recover, and what is its main practical weakness?",
+     "answer": "It recovers the rotational energy - swirl - left in the race by the forward propeller, which is the largest single recoverable loss in a conventional installation. Its main practical weakness is mechanical: coaxial inner and outer shafting with complex gearing, and the sealing of two concentric shafts at the stern tube, which is the recognised reliability weak point. Maintenance, alignment and dry-dock withdrawal are all harder.",
+     "why": "The theory is attractive; the objection is engineering, and that is what is examined."
+    },
+    {
+     "id": "QP2403-Q4-C6",
+     "type": "trap",
+     "prompt": "The stem lists four propellers. How many should you answer, and how?",
+     "answer": "Exactly three, each with merits AND demerits. Three treated properly earns more than four treated superficially, and an answer giving only merits has answered half the question. Give no percentage efficiency figures - they are manufacturer-sourced and depend entirely on hull form, wake field and operating profile.",
+     "why": "Reading the stem correctly is itself part of the assessment."
+    },
+    {
+     "id": "QP2403-Q4-C7",
+     "type": "distinction",
+     "prompt": "Why is a pulling azimuth or podded unit hydrodynamically attractive?",
+     "answer": "In the pulling or tractor configuration the propeller runs ahead of the pod in undisturbed inflow rather than in the hull's disturbed boundary layer, which improves efficiency and reduces cavitation and vibration. Its costs are capital expense, dependence on the electrical chain, inaccessibility of a submerged unit, and slewing bearing and seal reliability.",
+     "why": "The fourth option, if you choose to substitute it for one of the three."
+    }
+   ],
+   "decomposition_gate": {
+    "question_intent": "An engineering comparison. Three of four named devices, each with merits and demerits, framed on ship energy efficiency. The examiner is testing whether the candidate understands WHY each device works, not whether they can recite brochure claims.",
+    "mark_allocation": "16 marks, NO printed allocation - the paper prints no marks on Q4, Q5, Q6 or Q8 and instruction 2 says all questions carry equal marks. In practice about four marks each for framing and for the three devices.",
+    "examiner_expectation": "The loss mechanisms, the loading-dependence of duct benefit, and balanced treatment. An answer of merits only, or of four devices, is a reading failure.",
+    "primary_source_plan": [
+     "Establish that no instrument prescribes a propeller type, and say so rather than inventing one",
+     "Explain the loss mechanisms first so merits and demerits are derived, not listed",
+     "Give no percentage efficiency figures for any device",
+     "Do not cite MARPOL Annex VI regulation numbers without reading the Annex",
+     "Put the fourth device in the Study Guide so the learner has it without harming the Model Answer"
+    ],
+    "freshness_risk": "LOW. Propeller hydrodynamics does not change between sittings, and the energy efficiency framing was already in force well before March 2024. The only currency risk would come from citing a regulation number, which the answer deliberately does not do.",
+    "jurisdiction_risk": "NONE. Pure engineering.",
+    "technical_ambiguities": [
+     "Whether a duct always improves efficiency - it does not; loading decides",
+     "Whether Kappel is an add-on or integrated geometry - it is integrated",
+     "Whether contra-rotation is limited by hydrodynamics or by mechanics - by mechanics",
+     "Whether any quantified gain can be defended - not from a verifiable source"
+    ],
+    "target_answer_shape": "Framing and loss mechanisms first so the rest follows; then the three devices in the printed order with principle, merits and demerits; then the comparative judgement and an explicit note on answering three rather than four.",
+    "note": "Command verbs -> command_verbs. Required components -> decomposition. Reuse map -> reuse_evidence.",
+    "completed": "2026-08-10, before drafting"
+   },
+   "provenance_summary": {
+    "P1_PRIMARY_VERIFIED": 0,
+    "P2_AUTHORITATIVE_SECONDARY": 0,
+    "P3_INDUSTRY_GUIDANCE": 0,
+    "INTERNAL_REUSE_VERIFIED": 0,
+    "ENGINEERING_JUDGEMENT": 47,
+    "UNRESOLVED": 3,
+    "TIME_SENSITIVE_REVERIFY": 1
+   },
+   "reverify_before_publication": [
+    {
+     "claim": "The hydrodynamic content of the whole answer",
+     "why": "ENGINEERING_JUDGEMENT is the sole provenance class on this question. No instrument prescribes a propeller type, so nothing here is verifiable against a regulation. The content is settled naval architecture explained mechanistically. A naval architect review before publication would be appropriate; a regulatory check would not find anything to check.",
+     "class": "C_ACCEPTED_LIMITATION"
+    },
+    {
+     "claim": "No percentage efficiency gain is quoted for any device",
+     "why": "A deliberate omission. Published gains are vendor-sourced and hull-specific. Recorded so that a later editor does not add them.",
+     "class": "C_ACCEPTED_LIMITATION"
+    },
+    {
+     "claim": "The ship energy efficiency framing is stated without regulation numbers or dates",
+     "why": "MARPOL Annex VI was not read in a licensed consolidated edition for this question. If a future revision wants to cite EEXI or CII by regulation number, the Annex must be read first.",
+     "class": "C_ACCEPTED_LIMITATION"
+    }
+   ]
   },
   {
    "q_no": "Q5",
@@ -3593,30 +4606,589 @@
     "2024/MAR/Q8"
    ],
    "question_id": "QP2403-Q8",
-   "decomposition": null,
+   "decomposition": [
+    "The report itself - form, addressee, and the evidence to be preserved and attached",
+    "Immediate action taken and the condition of the ship after contact",
+    "Why the engines did not respond - the control chain, fault by fault",
+    "The distinction the report must draw: lost control, incapable engine, or a late order",
+    "Temporary measures instituted for the remainder of this voyage",
+    "Permanent measures - technical",
+    "Permanent measures - management, testing and the statutory follow-up"
+   ],
    "reuse_tier": "C",
    "reuse_evidence": [
-    "No family member with a built answer. Treat as new research until a solving session establishes otherwise."
+    "No built question addresses bridge control failure or a propulsion incident report.",
+    "QP2403 Q5 establishes the safety management system framing used in route step 7. Supporting reuse only.",
+    "No donor exists and none was manufactured."
    ],
    "reused_from": null,
-   "question_delta": null,
-   "answer_status": "Not Built",
-   "verification_status": "Not Started",
-   "verification_file": null,
-   "sources": [],
-   "unresolved": [],
-   "cross_links": [],
-   "model_answer": null,
-   "study_notes": null,
+   "question_delta": "New research. No donor.",
+   "answer_status": "Pilot Review Ready",
+   "verification_status": "Verified as an operational and procedural answer, and honestly bounded. The fault tree, the temporary measures and the permanent measures are Chief Engineer engineering judgement grounded in the architecture of a bridge-control installation - control transmitter, remote control system, safety and interlock logic, control air, starting air, reversing arrangement and fuel. Nothing unsafe is recommended: the answer expressly forbids resetting or overriding protective trips before the cause is established. The ISM Code elements and the SOLAS chapter II-1 bridge-control requirements are referred to at the level of their well-known effect and are FLAGGED as not read in a licensed consolidated edition this session, consistent with the posture already taken on the ISM Code in Q5 of this paper. No clause is quoted.",
+   "verification_file": "verification/QP2403/Q8.md",
+   "sources": [
+    "ENGINEERING JUDGEMENT: the bridge-control chain - bridge lever and telegraph, control transmitter, remote control system, safety and interlock logic, starting air distributor and manoeuvring valves, reversing servo or electronic control units, fuel index",
+    "ENGINEERING JUDGEMENT: the three distinct failure categories - loss of remote control, mechanical inability to produce astern thrust, and adequate response ordered too late",
+    "ENGINEERING JUDGEMENT: control air quality and moisture as a recognised cause of intermittent pneumatic control failure",
+    "ENGINEERING JUDGEMENT: starting air capacity, distributor timing and main starting valve faults under repeated manoeuvring",
+    "ENGINEERING JUDGEMENT: reversing servo, camshaft shift and interlock non-satisfaction as astern-failure modes on camshaft engines; ECU, HCU and angle-encoder faults on electronically controlled engines",
+    "ENGINEERING JUDGEMENT: evidence sources for the report - engine movement recorder and telegraph logger, alarm and monitoring history, VDR, bell book, engine room log, control system fault log, maintenance and test records",
+    "ENGINEERING JUDGEMENT: temporary control from the engine control room or local manoeuvring platform, pre-arrival astern trial, increased notice of engines and tug assistance as risk controls",
+    "ENGINEERING JUDGEMENT: permanent measures - root cause analysis with maker and class, control air drying and filtration, redundancy and separate supplies, planned maintenance and functional testing, critical spares",
+    "FLAGGED, NOT READ IN A LICENSED EDITION: ISM Code element 9 (reports and analysis of non-conformities, accidents and hazardous occurrences), element 10 (maintenance of the ship and equipment, including identification of critical equipment and systems), element 8 (emergency preparedness) and element 7 (shipboard operations)",
+    "FLAGGED, NOT READ IN A LICENSED EDITION: SOLAS chapter II-1 requirements for control of propulsion machinery from the navigation bridge, with independent local control and indication of shaft speed and direction of thrust"
+   ],
+   "unresolved": [
+    "The ISM Code was NOT read in a licensed consolidated edition this session. Element numbers 7, 8, 9 and 10 are referred to at the level of their well-known effect, no clause is quoted, and no argument in the answer depends on precise clause wording. This is the same posture already recorded for QP2403 Q5.",
+    "SOLAS chapter II-1 was NOT read in a licensed consolidated edition this session. The requirement for bridge control of propulsion machinery with an independent local means and indication of shaft speed and direction is stated in general terms, with NO regulation number asserted. If a future revision wishes to cite the regulation, the chapter must be read first.",
+    "The stem does not state the engine type, whether the installation is camshaft or electronically controlled, whether the control system is pneumatic or electronic, or whether a controllable pitch propeller is fitted. The answer therefore presents a FAULT TREE across the plausible architectures rather than a single diagnosis, and says so. That is the correct treatment of an under-specified scenario and is not a limitation of research.",
+    "The report format used is a conventional company incident report. No company procedure was available, and none is claimed."
+   ],
+   "cross_links": [
+    {
+     "label": "QP2403 Q4 - the propeller at the end of the propulsion chain",
+     "href": "QP2403.html#q4"
+    },
+    {
+     "label": "QP2403 Q5 - the safety management system obligations that frame the follow-up",
+     "href": "QP2403.html#q5"
+    },
+    {
+     "label": "QP2403 Q1 - data and alarm records, which are the evidence for this report",
+     "href": "QP2403.html#q1"
+    }
+   ],
+   "model_answer": {
+    "blocks": [
+     {
+      "h": "1. The report, and the evidence behind it"
+     },
+     {
+      "p": "The report is addressed to the <b>Designated Person and the technical superintendent</b>, copied to the master, and headed with <b>ship, voyage, port, berth, date and time</b> and the bare fact - that on approaching the dock gates the main engine did not respond to bridge control, ran ahead when astern was ordered, and the bow made contact with the dock wall."
+     },
+     {
+      "p": "It is structured as <b>summary; sequence of events; damage sustained; cause; temporary measures instituted; permanent measures recommended</b>. Two disciplines matter more than the format. <b>Separate fact from opinion, and label the opinion as opinion</b> - this report will be read by the classification society, by underwriters and quite possibly by an investigating authority, and a confident wrong diagnosis in the first report is very difficult to withdraw. And <b>preserve the evidence before anything is reset or repaired</b>."
+     },
+     {
+      "p": "Attached: the <b>engine movement and telegraph logger record</b>, the <b>alarm and monitoring history</b>, the <b>control system fault log downloaded rather than cleared</b>, the <b>VDR data secured</b> before it is overwritten, the <b>bell book and engine room log</b>, and the <b>maintenance and test records</b> for the remote control, control air and starting air systems, including the date of the last proven astern test."
+     },
+     {
+      "h": "2. Immediate action and the state of the ship"
+     },
+     {
+      "ul": [
+       "Control was taken at the <b>local manoeuvring platform</b>, the engine stopped and astern movement obtained locally; the master was informed immediately and the bridge advised to call for <b>tug assistance</b>.",
+       "After contact: <b>forepeak, forward tanks and void spaces sounded</b>, and an internal inspection made for <b>set-in plating, fractured or cracked welds, and ingress</b>. Forward draught, list and trim checked for change.",
+       "<b>Pollution risk assessed</b> - whether any bunker or oily tank lies in the affected area, and whether any boundary is compromised.",
+       "Machinery <b>secured and not restarted on bridge control</b>; the engine left available on local control only.",
+       "Notifications made to <b>company, classification society, flag State and the port authority</b> as the circumstances required, and the occurrence recorded as a reportable event under the safety management system."
+      ]
+     },
+     {
+      "h": "3. Why the engines did not respond"
+     },
+     {
+      "p": "The bridge control chain runs: <b>bridge lever and telegraph → control transmitter → remote control system → safety and interlock logic → control air → starting air distributor and manoeuvring valves → reversing arrangement → fuel</b>. A failure anywhere in that chain produces the same symptom on the bridge, which is why the report must work through it systematically rather than name a favourite cause."
+     },
+     {
+      "ul": [
+       "<b>Control signal.</b> Bridge lever encoder or potentiometer fault; chafed, broken or water-ingressed control cable; loose terminal; failed input/output card; <b>loss of control system power or a failed UPS battery</b> that had never been load-tested.",
+       "<b>Control logic and location.</b> Control not correctly transferred to the bridge, or a take-over left in an intermediate state; a mismatch between lever position and actual demand; <b>loss of shaft speed or direction feedback</b>, so the system never confirmed the reversal and held the ahead order.",
+       "<b>Control air.</b> On pneumatic and hybrid systems this is the classic cause of an <b>intermittent</b> failure: low control air pressure, <b>moisture, oil carry-over or ice in the lines</b>, a sticking pilot valve, a leaking diaphragm, a blocked orifice, a dirty filter or reducing valve, or water carried over from an undrained receiver.",
+       "<b>Starting air.</b> Receiver pressure fallen after repeated manoeuvres; <b>starting air distributor timing or leakage</b>; a stuck cylinder starting valve; the main starting valve failing to open; line drains left shut.",
+       "<b>Reversing arrangement.</b> On a camshaft engine, <b>low servo oil pressure or a sticking reversing servo</b> so the camshaft failed to shift, worn linkage, or a <b>reversing interlock never satisfied</b> so fuel was never admitted in the astern direction. On an electronically controlled engine, an <b>ECU or hydraulic control unit fault, or an angle encoder failure</b>, with a latched alarm blocking the reversal.",
+       "<b>Fuel side.</b> A sticking fuel rack or index linkage, so the engine received the order but no fuel.",
+       "<b>Interlocks and safety system.</b> Turning gear interlock, a low lubricating oil pressure or other shutdown active, an unacknowledged alarm inhibiting a start - or, worse, <b>an override left in place</b> from earlier work.",
+       "<b>Human and organisational.</b> This must be stated honestly: the astern movement may have been <b>ordered too late</b> for the engine to absorb the headway, or the <b>astern power may have been insufficient</b> for the displacement and approach speed. It is also relevant whether a <b>full astern trial was carried out before arrival</b> and, if not, why not."
+      ]
+     },
+     {
+      "p": "The most probable composite explanation, and the one the report should advance as a working hypothesis until proven, is a <b>latent defect in the remote control or control air system which only manifested under the rapid, repeated manoeuvring of a dock approach</b>, on a system whose astern function had not recently been proven under load. <b>No protective trip should be reset, and no interlock bypassed, before the cause is established</b> - resetting destroys the evidence and may re-create the hazard."
+     },
+     {
+      "h": "4. Lost control, incapable engine, or a late order"
+     },
+     {
+      "p": "The report must distinguish <b>three genuinely different failures</b>, because the temporary and permanent measures differ completely and an incorrect classification sends the company down the wrong corrective path."
+     },
+     {
+      "ul": [
+       "<b>Loss of remote (bridge) control.</b> The engine was <b>capable</b> of running astern but never received or executed the order. The remedy is immediate <b>transfer to the engine control room or local station</b> - which is precisely why those independent control positions are required - and then repair of the control system.",
+       "<b>Mechanical inability to produce astern thrust.</b> The engine could not start or run astern at all: starting air, reversing arrangement, or fuel. Transferring control would have achieved <b>nothing</b>; the remedy is mechanical.",
+       "<b>An adequate response ordered too late.</b> The engine <b>did</b> respond, but the headway could not be absorbed in the distance available. The remedy is <b>navigational and procedural</b> - notice of engines, approach speed, tug use - not engineering."
+      ]
+     },
+     {
+      "p": "The <b>engine movement recorder settles it</b>: it shows what was ordered on the bridge, at what time, whether the engine received the order, and whether and when the shaft actually reversed. Until that record has been read, the report should <b>attribute cause to neither the bridge nor the engine room</b>. Saying so explicitly is a mark of a competent report rather than a defensive one."
+     },
+     {
+      "h": "5. Temporary measures for the remainder of the voyage"
+     },
+     {
+      "p": "These were instituted immediately and are recorded as <b>risk controls, not repairs</b>."
+     },
+     {
+      "ul": [
+       "<b>All manoeuvring from the engine control room or local platform</b> until the cause is proven and rectified, with a <b>qualified engineer stationed at the manoeuvring platform</b> for every arrival, departure and passage in confined waters.",
+       "<b>Two independent, tested means of communication</b> between bridge and engine room, with an agreed and rehearsed order-and-repeat protocol, and the engine movement book kept manually.",
+       "A <b>full ahead and astern engine trial before every arrival</b>, conducted at a safe distance from danger and <b>recorded</b> - the astern movement in particular, which is the function that failed.",
+       "<b>Control air system</b>: receivers and lines drained, filters renewed or dried, reducing valves checked, air dryer proved, and control air pressure and quality confirmed before each manoeuvring period.",
+       "<b>Starting air</b>: both receivers at full pressure before manoeuvring, compressors confirmed on automatic, and all drains proved clear.",
+       "<b>Increased notice of engines</b>, earlier stand-by, and a <b>reduced approach speed</b>; <b>tug assistance for berthing and unberthing</b> for the remainder of the voyage.",
+       "The master to brief <b>pilots and port authorities</b> of the restriction, and to consider <b>daylight-only berthing</b>.",
+       "<b>No undocumented overrides</b>, and no bypass or isolation without the agreement of class.",
+       "A written <b>risk assessment</b> and a toolbox talk with the engine room and bridge teams; class notified and attendance arranged at the next convenient port."
+      ]
+     },
+     {
+      "h": "6. Permanent measures - technical"
+     },
+     {
+      "ul": [
+       "<b>Root cause analysis</b> with the maker's service engineer and with class in attendance, working from the <b>downloaded fault log</b> rather than from a cleared system. Repair or renew <b>the proven defective component, not the suspected one</b>.",
+       "If the control system is <b>obsolete or no longer supported</b>, plan a controlled <b>upgrade or retrofit</b> with assured spares support, rather than repeated repair of unobtainable parts.",
+       "<b>Control air quality.</b> Fit or renew a <b>refrigerant or desiccant dryer and coalescing filters</b>, fit <b>automatic drains</b>, use corrosion-resistant piping, and introduce <b>periodic dew point checks</b>. Fit a <b>low control air pressure alarm</b> if not already provided.",
+       "<b>Verify genuine redundancy.</b> Confirm that the bridge, engine control room and local positions are truly independent, with <b>separate power supplies</b> and a <b>UPS with a tested battery and a defined replacement interval</b>. Establish that <b>no single point of failure is common to all three</b> - which is the design question this incident raises.",
+       "<b>Critical spares.</b> Hold control cards, solenoid and pilot valves, pressure switches and position sensors on board as identified critical spares.",
+       "Fit <b>independent shaft speed and direction of rotation indication</b> on the bridge if it is not already provided, so that the bridge team can see whether the engine has actually reversed rather than inferring it from the telegraph."
+      ]
+     },
+     {
+      "h": "7. Permanent measures - management and follow-up"
+     },
+     {
+      "ul": [
+       "<b>Report and analyse the occurrence under the safety management system</b>, with corrective action assigned, dated and verified. A propulsion failure resulting in contact damage is exactly the kind of hazardous occurrence the system exists to capture.",
+       "<b>Identify the remote control system and the control air system as critical equipment.</b> Critical equipment attracts <b>specific measures to promote reliability, including regular testing of arrangements that are not in continuous use</b> - and the astern function under bridge control is precisely such an arrangement.",
+       "<b>Planned maintenance.</b> Bring the remote control system, control air system, starting air distributor, reversing servo and interlock logic into the PMS with defined intervals and, critically, <b>functional tests rather than visual inspections</b>. A test that does not prove the astern function does not test what failed.",
+       "<b>Contingency procedure.</b> Write a documented <b>loss of bridge control</b> procedure into the SMS - who takes control, where, how the order is passed and acknowledged, and what the bridge does meanwhile - and <b>drill it jointly</b> with the bridge team, not as an engine room exercise.",
+       "<b>Checklists.</b> Amend the pre-arrival and manoeuvring checklists to require a <b>recorded ahead and astern engine test</b> at a stated time before arrival, and include propulsion status and any restriction in the <b>master and pilot exchange</b>.",
+       "<b>Precursors.</b> Review earlier logs and defect reports for <b>intermittent faults on the same system</b>, and state in the report whether any existed and, if so, why they were not escalated. If the answer is uncomfortable, that is the most valuable finding in the document.",
+       "<b>Fleet action.</b> Check sister ships and similar installations across the fleet, and review the company PMS templates. Close the loop by <b>verifying effectiveness at the next internal audit</b> rather than closing the non-conformity on the strength of the repair alone."
+      ]
+     }
+    ]
+   },
+   "study_notes": {
+    "blocks": [
+     {
+      "h": "Why this structure scores"
+     },
+     {
+      "p": "The stem is a single paragraph but it contains <b>three explicit demands</b>: <b>why</b> the engines failed, the <b>temporary measure instituted to avoid further trouble on this voyage</b>, and <b>permanent measures to avoid repetition</b>. Roughly a third of the marks each. The commonest failure is to write four hundred words of fault-finding and then two lines on permanent measures, throwing away a third of the question."
+     },
+     {
+      "p": "The second structural decision is <b>route step 4</b>. Separating <b>loss of remote control</b> from <b>mechanical inability to go astern</b> from <b>a late order</b> is what turns a list of possible faults into an engineer's analysis - and the examiner is looking for exactly that judgement, because the three lead to entirely different corrective action."
+     },
+     {
+      "h": "Answer it as a report, because it says so"
+     },
+     {
+      "p": "The stem says <b>\"As Chief Engineer, report to head office\"</b>. Use report form: a heading, short numbered sections, and factual language. Two things earn credit almost free - <b>separating fact from opinion</b>, and <b>listing the attachments</b> (movement recorder, alarm history, fault log, VDR, bell book, logs, maintenance records). They show you understand who will read the document and what it will be used for."
+     },
+     {
+      "p": "Do not use the report to allocate blame. A first report that blames the bridge, or the engine room, before the movement recorder has been read is a report that will have to be withdrawn."
+     },
+     {
+      "h": "The safety point that must not be got wrong"
+     },
+     {
+      "p": "<b>Never reset protective trips or bypass interlocks to get the engine running again before the cause is known.</b> A trip that operated may have been doing its job; an interlock that blocked the reversal may have been protecting the engine. Resetting also destroys the evidence in the fault log. If an isolation or bypass is unavoidable to move the ship, it must be risk-assessed, documented, time-limited and agreed with class - never done quietly."
+     },
+     {
+      "h": "Common mistakes"
+     },
+     {
+      "ul": [
+       "Writing only about the engine and ignoring the <b>control system</b>, which is where this fault almost certainly lay.",
+       "Giving <b>one cause</b> confidently. The scenario does not state the engine or control architecture; a fault tree is the correct answer, and saying why is a strength.",
+       "Skipping <b>temporary measures</b>, which are a third of the marks and the part that shows operational judgement.",
+       "Recommending <b>\"repair the fault\"</b> as the permanent measure. The permanent measure is the <b>system change</b> that stops it recurring - testing regime, air quality, redundancy, PMS, critical spares.",
+       "Forgetting the <b>ship</b>. After contact with a dock wall, soundings, internal inspection and pollution assessment come before diagnosis.",
+       "Blaming the bridge team. It may be right, but not before the record is read.",
+       "Recommending resetting trips to prove the engine works."
+      ]
+     },
+     {
+      "h": "Examiner traps"
+     },
+     {
+      "ul": [
+       "<b>Loss of control is not inability to go astern.</b> The single most valuable distinction in the answer.",
+       "<b>Control air moisture.</b> The classic cause of an intermittent failure that appears only under repeated manoeuvring - and a favourite oral question.",
+       "<b>Repeated manoeuvring depletes starting air.</b> A dock approach is exactly when receiver pressure falls and the distributor is worked hardest.",
+       "<b>The astern function is rarely tested.</b> Ahead running proves itself every day; astern is proved only when it is deliberately tested, which is why it is the function that fails when needed.",
+       "<b>Critical equipment.</b> Naming the remote control and control air systems as critical equipment, requiring regular testing of arrangements not in continuous use, is the management-level answer.",
+       "<b>Precursors.</b> Asking whether the fault had been seen before, and whether it was escalated, is what distinguishes a management-level report."
+      ]
+     },
+     {
+      "h": "Likely oral follow-up"
+     },
+     {
+      "ul": [
+       "\"The engine will not answer the bridge. What do you do first?\" - take local control, get the engine responding from the platform, tell the bridge, and get tugs. Diagnose second.",
+       "\"How would you know whether the bridge ordered astern?\" - the engine movement and telegraph logger, and the VDR.",
+       "\"Why does control air moisture cause an intermittent fault?\" - water and oil collect in low points and pilot valves, and a valve that works in steady conditions sticks under rapid repeated operation, or ice forms on expansion.",
+       "\"Would you reset the trip to get moving?\" - no, not before the cause is known; and any unavoidable bypass must be risk-assessed, documented, time-limited and agreed with class.",
+       "\"What is your permanent recommendation in one sentence?\" - a proven astern test before every arrival, control air drying and filtration, verified redundancy with separate supplies, and both systems identified as critical equipment in the PMS.",
+       "\"What do you check on the ship after contact?\" - forepeak and forward tank soundings, internal structural inspection, draughts and trim, and pollution risk."
+      ]
+     },
+     {
+      "h": "Memory framework"
+     },
+     {
+      "p": "The report has three demands - <b>WHY, NOW, NEVER AGAIN</b>. For <b>WHY</b>, walk the chain in order: <b>LEVER, SIGNAL, LOGIC, AIR, START, REVERSE, FUEL, INTERLOCK</b>. For <b>NOW</b>, three words: <b>LOCAL, TEST, TUGS</b> - manoeuvre from local control, prove astern before every arrival, take tugs. For <b>NEVER AGAIN</b>, four words: <b>CAUSE, AIR, REDUNDANCY, TESTING</b>."
+     },
+     {
+      "h": "Regulation and source map"
+     },
+     {
+      "p": "This is an operational question and <b>no instrument is quoted</b>. Two regimes frame the follow-up and are referred to at the level of their effect only:"
+     },
+     {
+      "ul": [
+       "<b>The ISM Code</b> - the obligations to <b>report and analyse</b> non-conformities, accidents and hazardous occurrences; to <b>maintain the ship and equipment</b> including the identification of <b>critical equipment and systems</b> whose sudden failure may create a hazardous situation, with <b>specific measures to promote reliability including regular testing of arrangements not in continuous use</b>; and <b>emergency preparedness</b> through drills.",
+       "<b>SOLAS chapter II-1</b> - the requirement that propulsion machinery be controllable from the <b>navigation bridge</b>, with an <b>independent local means of control</b> and <b>indication of shaft speed and direction of thrust</b>. That architecture is exactly why the temporary measure in route step 5 is available."
+      ]
+     },
+     {
+      "h": "Uncertainty and the limits of this answer"
+     },
+     {
+      "p": "The <b>ISM Code and SOLAS chapter II-1 were not read in licensed consolidated editions</b> this session. Both are therefore referred to <b>at the level of their well-known effect</b>, with <b>no clause quoted and no regulation number asserted</b>. This is the same posture already recorded for the ISM Code in Q5 of this paper, and no argument in the answer depends on precise wording."
+     },
+     {
+      "p": "The stem does <b>not</b> state the engine type, the control architecture, whether the installation is camshaft or electronically controlled, or whether a controllable pitch propeller is fitted. The answer therefore presents a <b>fault tree across the plausible architectures</b> and says so. That is the correct treatment of an under-specified scenario, not a gap in research - and in the examination, stating that the diagnosis depends on the installation is itself a mark of competence."
+     },
+     {
+      "p": "The report format used is a conventional company incident report. <b>No company procedure was available and none is claimed.</b>"
+     }
+    ]
+   },
    "temporal_review": {
-    "state": "STABLE",
+    "state": "CONFIRMED",
     "risk": "LOW",
     "classes": [],
-    "notes": [],
+    "notes": [
+     "The intake recorded STABLE / LOW. Checked rather than trusted, per the standing rule, and confirmed with a recorded reason.",
+     "The SOLAS chapter II-1 machinery and bridge-control provisions did not change between the March 2024 and October 2025 sittings.",
+     "The ISM Code was unamended between the sittings in any respect bearing on this answer.",
+     "The answer asserts NO regulation number and NO date anywhere, which removes the only currency risk it could carry.",
+     "For QP2510 this question is reusable with no legal update - alongside Q4 and Q6 it is one of the clean donors on the paper."
+    ],
     "sitting": "March 2024"
    },
    "subpart_marks_note": "ANOMALY: the source copy prints NO mark allocation. Recorded at 16 marks under instruction 2 (\"all questions carry equal marks\"); the absence is the printed copy's, not a transcription loss. The source sets a double space after \"dock wall.\"; whitespace is normalised to a single space in text_verbatim.",
-   "printed_marks_absent": true
+   "printed_marks_absent": true,
+   "recurrence_class": "new",
+   "recurrence_adjudication": "No built question addresses failure of main engine bridge control, or a Chief Engineer report to head office on a propulsion failure. Tier C: new research. reused_from stays null.",
+   "regulations": [],
+   "search_aliases": [
+    "bridge control",
+    "remote control",
+    "engine did not respond",
+    "failure to respond",
+    "main engine astern",
+    "reversing failure",
+    "manoeuvring",
+    "telegraph",
+    "control air",
+    "starting air",
+    "starting air distributor",
+    "main starting valve",
+    "reversing servo",
+    "camshaft",
+    "interlock",
+    "safety system",
+    "shutdown",
+    "slowdown",
+    "override",
+    "local control",
+    "engine control room",
+    "ECR",
+    "manoeuvring platform",
+    "chief engineer report",
+    "incident report",
+    "head office report",
+    "contact damage",
+    "allision",
+    "dock wall",
+    "temporary measure",
+    "permanent measure",
+    "root cause",
+    "ISM Code",
+    "critical equipment",
+    "planned maintenance",
+    "VDR",
+    "movement recorder"
+   ],
+   "answer_route": {
+    "archetype": "procedure",
+    "steps": [
+     {
+      "n": 1,
+      "limb": "report",
+      "title": "The report, and the evidence behind it",
+      "points": [
+       "address it to the Designated Person and technical superintendent, copied to the master",
+       "head it with ship, voyage, port, date and time, and the fact of contact",
+       "structure: summary, sequence, damage, cause, temporary measures, permanent measures",
+       "separate FACT from OPINION and label the opinion as such",
+       "the report will be read by class, underwriters and possibly investigators",
+       "preserve and attach the engine movement and telegraph logger record",
+       "attach the alarm and monitoring history, the control system fault log and the VDR data",
+       "attach bell book, engine room log, and the maintenance and test records for the control system",
+       "preserve the evidence BEFORE anything is reset or repaired"
+      ]
+     },
+     {
+      "n": 2,
+      "limb": "report",
+      "title": "Immediate action and the state of the ship",
+      "points": [
+       "control taken locally and the engine stopped, then astern from the manoeuvring platform",
+       "master informed, tugs and the port informed, general alarm as the situation required",
+       "after contact: sound forepeak, forward tanks and void spaces",
+       "internal inspection for set-in plating, fractured welds and ingress",
+       "check bow structure, forward draught and any list or trim change",
+       "assess pollution risk and any bunker tank in the affected area",
+       "no engine restart on bridge control until the cause is understood",
+       "notify company, class, flag State and the port authority as required"
+      ]
+     },
+     {
+      "n": 3,
+      "limb": "cause",
+      "title": "Why the engines did not respond",
+      "points": [
+       "the chain is: bridge lever, control transmitter, remote control system, interlocks, air, reversing, fuel",
+       "CONTROL SIGNAL - lever encoder or potentiometer fault, chafed cable, loose terminal, failed I/O card",
+       "CONTROL SIGNAL - loss of control system power or a failed UPS battery",
+       "CONTROL LOGIC - control not correctly transferred, or a take-over left in the wrong state",
+       "CONTROL LOGIC - loss of shaft speed or direction feedback, so reversal was never confirmed",
+       "PNEUMATIC - low control air pressure, moisture, oil or ice in the lines, sticking pilot valve",
+       "PNEUMATIC - blocked orifice, dirty filter or reducer, water carried over from the receiver",
+       "STARTING AIR - low receiver pressure after repeated manoeuvres, distributor timing, stuck starting valve",
+       "REVERSING - servo oil pressure low, camshaft failing to shift, worn linkage, interlock never satisfied",
+       "ELECTRONIC ENGINES - ECU or HCU fault, angle encoder failure, latched alarm blocking the reversal",
+       "FUEL - sticking fuel rack or index linkage so no fuel was admitted astern",
+       "INTERLOCKS - turning gear, low lube oil pressure, an unacknowledged shutdown, or an override left in place",
+       "HUMAN AND ORGANISATIONAL - astern ordered too late, or insufficient astern power for the headway",
+       "the likely composite: a latent fault that only appeared under repeated rapid manoeuvring"
+      ]
+     },
+     {
+      "n": 4,
+      "limb": "cause",
+      "title": "Lost control, incapable engine, or a late order",
+      "points": [
+       "these are THREE different failures with three different remedies - the report must say which",
+       "LOST REMOTE CONTROL - the engine could have run astern but never received or executed the order",
+       "the remedy is transfer to the engine control room or local station, which is why they exist",
+       "INCAPABLE ENGINE - it could not start or run astern: air, reversing gear or fuel",
+       "the remedy is mechanical repair; transferring control would have achieved nothing",
+       "LATE OR INADEQUATE ORDER - the engine did respond but the headway could not be absorbed",
+       "the remedy is navigational and procedural, not engineering",
+       "the movement recorder settles it - what was ordered, what was received, what the shaft did",
+       "do not blame the bridge or the engine before the record is read"
+      ]
+     },
+     {
+      "n": 5,
+      "limb": "temporary",
+      "title": "Temporary measures for the remainder of the voyage",
+      "points": [
+       "ALL manoeuvring from the engine control room or local platform until the cause is proven",
+       "a qualified engineer stationed at the manoeuvring platform for every arrival and departure",
+       "two independent, tested means of bridge to engine room communication, with an agreed protocol",
+       "a full ahead and ASTERN engine trial before every arrival, at a safe distance, and recorded",
+       "control air: drain receivers and lines, renew or dry filters, prove pressure and quality",
+       "starting air: both receivers at full pressure before manoeuvring, drains proved clear",
+       "increased notice of engines, earlier stand-by, and a reduced approach speed",
+       "TUG ASSISTANCE for berthing and unberthing for the rest of the voyage",
+       "master to brief pilots and the port; consider daylight-only berthing",
+       "no undocumented overrides, and no bypass without class agreement",
+       "record a risk assessment and hold a toolbox talk; notify class and arrange attendance",
+       "state plainly in the report that these are MITIGATIONS, not repairs"
+      ]
+     },
+     {
+      "n": 6,
+      "limb": "permanent",
+      "title": "Permanent measures - technical",
+      "points": [
+       "formal root cause analysis with the maker's service engineer and class in attendance",
+       "download and analyse the control system fault log rather than clearing it",
+       "renew or repair the proven defective component, not the suspected one",
+       "if the control system is obsolete and unsupported, plan a controlled upgrade",
+       "control air quality - fit or renew dryer and coalescing filters, automatic drains",
+       "periodic dew point checks and an alarm on low control air pressure",
+       "verify genuine redundancy - independent bridge, control room and local paths",
+       "separate power supplies and a tested UPS with a battery replacement interval",
+       "confirm there is no single point of failure common to all three control positions",
+       "hold control cards, solenoids, pilot valves and sensors as identified critical spares",
+       "fit independent shaft speed and direction indication on the bridge if not already fitted"
+      ]
+     },
+     {
+      "n": 7,
+      "limb": "permanent",
+      "title": "Permanent measures - management and follow-up",
+      "points": [
+       "report and analyse the occurrence under the safety management system",
+       "identify the remote control and control air systems as CRITICAL EQUIPMENT",
+       "critical equipment requires specific measures to promote reliability, including regular testing",
+       "bring the remote control system, control air, starting air distributor, reversing servo and interlocks into the planned maintenance system",
+       "functional testing, not visual inspection - a test that proves the astern function",
+       "write a documented LOSS OF BRIDGE CONTROL contingency procedure into the SMS",
+       "drill it, jointly, bridge team and engine room",
+       "update the manoeuvring and pre-arrival checklists to require a recorded astern test",
+       "master and pilot exchange to include propulsion status and any restriction",
+       "check the earlier logs for precursor intermittent faults, and say in the report whether any existed",
+       "fleet-wide check of sister ships and a review of the company PMS",
+       "close the loop - verify effectiveness at the next internal audit"
+      ]
+     }
+    ]
+   },
+   "understand_first": "This is a management-level incident report, not a fault-finding exercise, and the stem tells you its three parts: WHY it failed, what you did NOW for the rest of this voyage, and what must change so it NEVER happens again. The engineering insight the examiner is looking for is a distinction: losing bridge control is not the same as the engine being unable to go astern, and neither is the same as an astern order given too late to stop the ship. Those three have three different remedies, and the engine movement recorder tells you which one you had. The safety line you must not cross is resetting trips or bypassing interlocks to get moving before you know the cause.",
+   "memory_cue": "Three demands - WHY, NOW, NEVER AGAIN. WHY walks the chain in route step 3: LEVER, SIGNAL, LOGIC, AIR, START, REVERSE, FUEL, INTERLOCK (3). NOW is three words in route step 5: LOCAL, TEST, TUGS (5). NEVER AGAIN is four words across route steps 6 and 7: CAUSE, AIR, REDUNDANCY, TESTING (6, 7).",
+   "quick_revision": {
+    "recall_15s": "Report to the Designated Person and superintendent: summary, sequence, damage, cause, temporary measures, permanent measures. Preserve the movement recorder, alarm history, control system fault log and VDR before resetting anything. Ship first - sound forepeak and forward tanks, inspect internally, check pollution risk. The chain is lever, signal, logic, control air, starting air, reversing, fuel, interlocks; control air moisture and an unproven astern function are the classic causes. Distinguish loss of remote control from mechanical inability to go astern from an astern order given too late - three different remedies, and the movement recorder decides which. Temporary: manoeuvre from local control with an engineer at the platform, two communication means, a recorded ahead and astern trial before every arrival, drained control and starting air, more notice of engines, and tugs. Permanent: root cause with maker and class, air drying and filtration, verified redundancy with separate supplies and tested UPS, both systems identified as critical equipment with functional testing in the PMS, critical spares, a documented loss-of-control procedure drilled jointly, and a fleet-wide check.",
+    "keywords": [
+     "WHY, NOW, NEVER AGAIN - three demands",
+     "preserve evidence before resetting anything",
+     "lever, signal, logic, air, start, reverse, fuel, interlock",
+     "control air moisture - the classic intermittent fault",
+     "lost control is not inability to go astern",
+     "local control, recorded astern trial, tugs",
+     "critical equipment and regular testing of arrangements not in continuous use",
+     "never reset trips before the cause is known"
+    ],
+    "critical_numbers": [
+     "Three demands in the stem: cause, temporary measure, permanent measures",
+     "Three failure categories: lost remote control, incapable engine, late order",
+     "Three control positions: bridge, engine control room, local platform",
+     "Two independent means of bridge to engine room communication",
+     "One recorded ahead and astern engine trial before every arrival"
+    ],
+    "critical_regulation": "No instrument is quoted. Two regimes frame the follow-up at the level of their effect only: the ISM Code obligations to report and analyse hazardous occurrences and to identify CRITICAL EQUIPMENT with specific measures to promote reliability including regular testing of arrangements not in continuous use; and the SOLAS chapter II-1 architecture requiring bridge control of propulsion with an independent local means and indication of shaft speed and direction, which is what makes the temporary measure possible.",
+    "major_trap": "Treating this as a fault-finding question and losing the two thirds of the marks that sit in the temporary and permanent measures. The second trap is failing to distinguish loss of remote control from mechanical inability to produce astern thrust from an astern order given too late - three different failures with three different remedies. The third is recommending that trips be reset to get the engine running before the cause is known."
+   },
+   "retrieval_cards": [
+    {
+     "id": "QP2403-Q8-C1",
+     "type": "structure",
+     "prompt": "Give the route for the bridge control failure report.",
+     "answer": "1 The report and its evidence. 2 Immediate action and the state of the ship. 3 Why the engines did not respond. 4 Lost control, incapable engine, or a late order. 5 Temporary measures for this voyage. 6 Permanent measures - technical. 7 Permanent measures - management and follow-up.",
+     "why": "The stem has three demands; steps 5, 6 and 7 carry two thirds of the marks."
+    },
+    {
+     "id": "QP2403-Q8-C2",
+     "type": "procedure",
+     "prompt": "Walk the bridge control chain from lever to fuel.",
+     "answer": "Bridge lever and telegraph, control transmitter, remote control system, safety and interlock logic, control air, starting air distributor and manoeuvring valves, reversing arrangement (camshaft servo or electronic control units), fuel index. A failure anywhere gives the same symptom on the bridge.",
+     "why": "The systematic walk is what makes the diagnosis credible."
+    },
+    {
+     "id": "QP2403-Q8-C3",
+     "type": "distinction",
+     "prompt": "Distinguish the three failures this scenario could be, and how you tell them apart.",
+     "answer": "Loss of remote control - the engine could run astern but never received or executed the order; remedy is local control then repair. Mechanical inability to produce astern thrust - air, reversing gear or fuel; transferring control achieves nothing and the remedy is mechanical. An adequate response ordered too late - the engine did respond but the headway could not be absorbed; the remedy is navigational and procedural. The engine movement recorder shows what was ordered, what was received and whether the shaft reversed.",
+     "why": "The single most valuable judgement in the whole answer."
+    },
+    {
+     "id": "QP2403-Q8-C4",
+     "type": "trap",
+     "prompt": "Why is control air moisture the classic cause of an intermittent bridge control failure?",
+     "answer": "Water and oil collect at low points, in filters and in pilot valves. A valve that operates reliably in steady conditions sticks under rapid repeated operation, and ice can form where air expands. The fault therefore appears exactly when the system is worked hardest - a dock approach - and cannot be reproduced afterwards at the berth.",
+     "why": "Explains why the fault appeared when it did and disappeared afterwards."
+    },
+    {
+     "id": "QP2403-Q8-C5",
+     "type": "procedure",
+     "prompt": "What temporary measures would you institute for the rest of the voyage?",
+     "answer": "All manoeuvring from the engine control room or local platform with an engineer stationed there; two independent tested means of communication with an agreed protocol; a recorded ahead and astern engine trial at a safe distance before every arrival; control and starting air drained, filtered and proved; increased notice of engines and reduced approach speed; tug assistance for berthing; pilots and port informed; no undocumented overrides; class notified. These are mitigations, not repairs.",
+     "why": "A third of the marks, and the part that shows operational judgement."
+    },
+    {
+     "id": "QP2403-Q8-C6",
+     "type": "trap",
+     "prompt": "Would you reset the trip to get the engine running again?",
+     "answer": "No - not before the cause is established. A trip that operated may have been doing its job and an interlock that blocked the reversal may have been protecting the engine; resetting also destroys the fault log evidence. If a bypass is unavoidable to move the ship it must be risk-assessed, documented, time-limited and agreed with class.",
+     "why": "The safety judgement the examiner is most likely to probe."
+    },
+    {
+     "id": "QP2403-Q8-C7",
+     "type": "regulation",
+     "prompt": "What is the management-level permanent measure, expressed in safety-management terms?",
+     "answer": "Identify the remote control system and the control air system as CRITICAL EQUIPMENT whose sudden operational failure may result in a hazardous situation, and apply specific measures to promote reliability - including regular functional testing of arrangements not in continuous use, which is exactly what the astern function is. Bring them into the planned maintenance system with functional tests rather than visual inspections.",
+     "why": "Turns a repair into a system change, which is what \"permanent measure\" means."
+    },
+    {
+     "id": "QP2403-Q8-C8",
+     "type": "procedure",
+     "prompt": "What do you check on the ship immediately after contact with the dock wall?",
+     "answer": "Sound the forepeak, forward tanks and void spaces; inspect internally for set-in plating, cracked or fractured welds and ingress; check forward draught, list and trim for change; assess pollution risk including any bunker or oily tank in the affected area; and notify company, class, flag State and port authority as required.",
+     "why": "The ship comes before the diagnosis, and candidates routinely forget it."
+    }
+   ],
+   "decomposition_gate": {
+    "question_intent": "A management-level incident report with three explicit demands - cause, temporary measure for this voyage, permanent measures against repetition. The engineering discrimination being tested is between loss of remote control, mechanical inability to go astern, and an astern order given too late.",
+    "mark_allocation": "16 marks, NO printed allocation - the paper prints no marks on Q4, Q5, Q6 or Q8 and instruction 2 says all questions carry equal marks. In practice about a third each to the three demands, with the report framing and the ship's condition absorbed into the first.",
+    "examiner_expectation": "Report form; a systematic walk of the control chain rather than a single guessed cause; the three-way distinction; and permanent measures that are SYSTEM changes rather than \"repair the fault\". A candidate who recommends resetting trips to restore propulsion has failed the safety test.",
+    "primary_source_plan": [
+     "Recognise that this question sits outside the regulatory corpus and do not manufacture citations",
+     "Refer to ISM and SOLAS at the level of effect only, and flag that neither was read in a licensed edition",
+     "Build a fault tree across plausible architectures, because the stem does not specify the installation",
+     "State explicitly that trips must not be reset before the cause is established",
+     "Separate mitigations from repairs in the temporary measures"
+    ],
+    "freshness_risk": "LOW. Machinery and bridge-control requirements did not change between the two sittings, and the answer asserts no regulation number that could go stale.",
+    "jurisdiction_risk": "LOW. The regimes referred to apply generally.",
+    "technical_ambiguities": [
+     "Engine type and control architecture are not stated in the stem",
+     "Whether the failure was of control, of capability, or of timing",
+     "Whether a controllable pitch propeller is fitted",
+     "Whether the astern function had been proven before arrival"
+    ],
+    "target_answer_shape": "Report framing and evidence preservation; the ship's condition; then the fault tree; then the three-way classification that decides everything else; then temporary measures as explicit mitigations; then permanent measures split technical and management, closing on audit verification.",
+    "note": "Command verbs -> command_verbs. Required components -> decomposition. Reuse map -> reuse_evidence.",
+    "completed": "2026-08-10, before drafting"
+   },
+   "provenance_summary": {
+    "P1_PRIMARY_VERIFIED": 0,
+    "P2_AUTHORITATIVE_SECONDARY": 2,
+    "P3_INDUSTRY_GUIDANCE": 0,
+    "INTERNAL_REUSE_VERIFIED": 1,
+    "ENGINEERING_JUDGEMENT": 58,
+    "UNRESOLVED": 4,
+    "TIME_SENSITIVE_REVERIFY": 0
+   },
+   "reverify_before_publication": [
+    {
+     "claim": "The ISM Code element references (reporting and analysis; maintenance and critical equipment; emergency preparedness; shipboard operations)",
+     "why": "The ISM Code was not read in a licensed consolidated edition this session. The elements are referred to at the level of their well-known effect, no clause is quoted, and no argument depends on precise wording. Same posture as QP2403 Q5. Confirm against a licensed edition before publication.",
+     "class": "C_ACCEPTED_LIMITATION"
+    },
+    {
+     "claim": "The SOLAS chapter II-1 bridge-control architecture - bridge control of propulsion, independent local control, and indication of shaft speed and direction",
+     "why": "SOLAS chapter II-1 was not read in a licensed consolidated edition this session. The requirement is stated in general terms with NO regulation number asserted. Confirm and add the regulation number before publication if a citation is wanted.",
+     "class": "C_ACCEPTED_LIMITATION"
+    },
+    {
+     "claim": "The fault tree, the temporary measures and the permanent measures",
+     "why": "ENGINEERING_JUDGEMENT throughout. No instrument prescribes them. A senior marine engineer review before publication would be appropriate; a regulatory check would find nothing to check.",
+     "class": "C_ACCEPTED_LIMITATION"
+    },
+    {
+     "claim": "The answer does not diagnose a single cause",
+     "why": "Deliberate. The stem specifies neither engine type nor control architecture, so a fault tree is the correct treatment and the answer says so. Recorded so that a later editor does not \"improve\" it by choosing one cause.",
+     "class": "C_ACCEPTED_LIMITATION"
+    }
+   ]
   },
   {
    "q_no": "Q9",
@@ -4333,7 +5905,7 @@
  ],
  "controlled_vocabulary": {
   "note": "Closed lists, inherited unchanged from the 2025 and 2026 sets. Do not invent values at author time; extend the vocabulary first so the indexes stay stable.",
-  "answer_layer": "This is an INTAKE spec. answer_status is \"Not Built\" on every question and no answer-layer field is populated. A future session promotes a question by authoring model_answer, study_notes, answer_route, sources, verification_file and decomposition_gate together -- validate_spec.py rejects any partial promotion.",
+  "answer_layer": "This is a BUILT spec. All nine questions carry a full answer layer. answer_status is \"Pilot Review Ready\" on every question. Do not re-open a question without re-running its verification record in verification/QP2403/.",
   "recurrence_rule": "host_recurrence_hint is the source copy host's own printed annotation. It is DISCOVERY-ONLY provenance: it never reaches a candidate-facing surface and never creates a family edge. Canonical recurrence is computed chronologically from MIW transcriptions in recurrence_model.py."
  }
 }
