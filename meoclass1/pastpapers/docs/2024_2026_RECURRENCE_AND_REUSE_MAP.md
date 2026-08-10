@@ -114,36 +114,59 @@ Every pair of questions inside one family, counted by the two sittings it joins.
 
 ## 5. REUSE MAP
 
+**Tiers C and D below are DERIVED from the current built set on every run, not read from the stored `reuse_tier` field.** The stored field is intake metadata: it records what was true when the question was transcribed and it does not move when a sibling paper is solved. Planning off it means planning off the past. Section 5.1 records exactly what that drift currently costs.
+
 | Tier | 2024 | 2025 | Definition as applied |
 |---|---|---|---|
-| A | 0 | 0 | Not assigned. An existing canonical object fully covers the demand. |
-| B | 0 | 0 | Not assigned. An existing canonical object partly covers the demand. |
-| C | 83 | 64 | No family member with a built answer. New research. |
-| D | **7** | **8** | Family contains a question whose answer is built and verified. |
+| A | 0 | 0 | Carried from the adjudicated intake field. An existing canonical object fully covers the demand. |
+| B | 0 | 0 | Carried from the adjudicated intake field. An existing canonical object partly covers the demand. |
+| C | 79 | 63 | Derived: no family member has a built answer. New research. |
+| D | **11** | **9** | Derived: the family contains at least one question whose answer is built and verified. |
 
 **Why A and B are still zero, and why that is a finding rather than a gap.** Both tiers claim that an existing canonical object covers some or all of the examiner demand. That claim cannot be made without reading the object, and this session authors and verifies nothing. A keyword sweep of the Oral corpus was run for the 2025 intake and deliberately **not** used to assign B: no threshold produced a natural break, so any cut point would be arbitrary, and a manufactured B count is worse than none because it would be planned against. That sweep output survives per question in `reuse_evidence` as named candidate files to read, explicitly labelled discovery. Promotion to A or B belongs to the solving session, which will have read them.
+
+### 5.1 Derived tier against stored intake tier
+
+Every unsolved question whose CURRENT readiness differs from the tier frozen at intake. Each row is a question that acquired a verified donor because some other paper was solved after this question was transcribed. **Nothing in any spec changed to produce this table** &mdash; that is the point of deriving it.
+
+| Question | Sitting | Stored | Derived | Donor that arrived |
+|---|---|---|---|---|
+| QP2401-Q9 | January 2024 Q9 | C | **D** | QP2403-Q7, QP2510-Q7 |
+| QP2404-Q6 | April 2024 Q6 | C | **D** | QP2506-Q6, QP2508-Q6 |
+| QP2410-Q9 | October 2024 Q9 | C | **D** | QP2506-Q6, QP2508-Q6 |
+| QP2412-Q9 | December 2024 Q9 | C | **D** | QP2403-Q7, QP2510-Q7 |
+| QP2504-Q9 | April 2025 Q9 | C | **D** | QP2403-Q5, QP2510-Q5 |
+
+Stored Tier D over the unsolved set counts **15**; derived counts **20**. Planning off the stored field would have under-counted ready work by 5 question(s) and would have sent a solving session to research answers that already have a verified donor.
 
 ### Tier D in full &mdash; every unsolved question with a verified donor
 
 Direction matters and is easy to get backwards: **the unsolved sitting is the earlier one.** The donor is a later answer being pulled *backwards*, so any currency correction made for the later sitting must be reversed, not inherited.
 
-| Question | Sitting | Donor | Wording | Temporal |
-|---|---|---|---|---|
-| QP2401-Q1 | January 2024 Q1 | QP2607-Q9 | identical | stable |
-| QP2401-Q5 | January 2024 Q5 | QP2607-Q3 | identical | stable |
-| QP2402-Q6 | February 2024 Q6 | QP2606-Q6 | identical | stable |
-| QP2404-Q7 | April 2024 Q7 | QP2506-Q8, QP2508-Q4, QP2601-Q9, QP2602-Q4, QP2604-Q9 | identical | stable |
-| QP2408-Q9 | August 2024 Q9 | QP2606-Q5 | identical | stable |
-| QP2410-Q4 | October 2024 Q4 | QP2603-Q9 | identical | **HIGH** |
-| QP2412-Q4 | December 2024 Q4 | QP2606-Q8 | identical | stable |
-| QP2502-Q2 | February 2025 Q2 | QP2506-Q8, QP2508-Q4, QP2601-Q9, QP2602-Q4, QP2604-Q9 | identical | stable |
-| QP2502-Q9 | February 2025 Q9 | QP2606-Q7 | identical | stable |
-| QP2509-Q2 | September 2025 Q2 | QP2508-Q2, QP2602-Q2 | identical | **MEDIUM** |
-| QP2509-Q3 | September 2025 Q3 | QP2601-Q3, QP2604-Q3, QP2607-Q5 | identical | stable |
-| QP2509-Q9 | September 2025 Q9 | QP2606-Q8 | identical | stable |
-| QP2511-Q5 | November 2025 Q5 | QP2603-Q6 | identical | stable |
-| QP2511-Q8 | November 2025 Q8 | QP2603-Q9 | identical | **HIGH** |
-| QP2511-Q9 | November 2025 Q9 | QP2506-Q2, QP2508-Q7, QP2602-Q7, QP2603-Q1 | identical | stable |
+`Preferred` is one donor selected deterministically from the family: an EXACT printed stem first, then the nearest sitting, then question id. It is a starting point for the solving session, not an instruction &mdash; **the target question always owns its own answer**, and every other donor in the row remains available.
+
+| Question | Sitting | Preferred | Wording | Other donors | Temporal |
+|---|---|---|---|---|---|
+| QP2401-Q1 | January 2024 Q1 | QP2607-Q9 | identical | &mdash; | stable |
+| QP2401-Q5 | January 2024 Q5 | QP2607-Q3 | identical | &mdash; | stable |
+| QP2401-Q9 | January 2024 Q9 | QP2403-Q7 | identical | QP2510-Q7 | stable |
+| QP2402-Q6 | February 2024 Q6 | QP2606-Q6 | identical | &mdash; | stable |
+| QP2404-Q6 | April 2024 Q6 | QP2506-Q6 | identical | QP2508-Q6 | stable |
+| QP2404-Q7 | April 2024 Q7 | QP2508-Q4 | identical | QP2506-Q8, QP2601-Q9, QP2602-Q4, QP2604-Q9 | stable |
+| QP2408-Q9 | August 2024 Q9 | QP2606-Q5 | identical | &mdash; | stable |
+| QP2410-Q4 | October 2024 Q4 | QP2603-Q9 | identical | &mdash; | **HIGH** |
+| QP2410-Q9 | October 2024 Q9 | QP2506-Q6 | identical | QP2508-Q6 | stable |
+| QP2412-Q4 | December 2024 Q4 | QP2606-Q8 | identical | &mdash; | stable |
+| QP2412-Q9 | December 2024 Q9 | QP2403-Q7 | identical | QP2510-Q7 | stable |
+| QP2502-Q2 | February 2025 Q2 | QP2506-Q8 | identical | QP2508-Q4, QP2601-Q9, QP2602-Q4, QP2604-Q9 | stable |
+| QP2502-Q9 | February 2025 Q9 | QP2606-Q7 | identical | &mdash; | stable |
+| QP2504-Q9 | April 2025 Q9 | QP2510-Q5 | identical | QP2403-Q5 | stable |
+| QP2509-Q2 | September 2025 Q2 | QP2508-Q2 | identical | QP2602-Q2 | **MEDIUM** |
+| QP2509-Q3 | September 2025 Q3 | QP2607-Q5 | identical | QP2601-Q3, QP2604-Q3 | stable |
+| QP2509-Q9 | September 2025 Q9 | QP2606-Q8 | identical | &mdash; | stable |
+| QP2511-Q5 | November 2025 Q5 | QP2603-Q6 | identical | &mdash; | stable |
+| QP2511-Q8 | November 2025 Q8 | QP2603-Q9 | identical | &mdash; | **HIGH** |
+| QP2511-Q9 | November 2025 Q9 | QP2508-Q7 | identical | QP2506-Q2, QP2602-Q7, QP2603-Q1 | stable |
 
 ## 6. TEMPORAL REVIEW
 
@@ -212,22 +235,22 @@ An earlier answer must **not** be corrected to current law. It answers the exami
 
 Not calendar order. Calendar order would research the same family several times and would meet the hardest temporal problem in the set on a paper chosen for its date rather than its readiness.
 
-`Tier D` is how many of the nine questions already have a verified donor. `Family reach` is how many OTHER unsolved questions across the whole corpus sit in the same families as this paper's questions &mdash; the research this paper converts for free elsewhere.
+`Tier D` is how many of the nine questions already have a verified donor, **derived from the current built set** (§5.1). `Family reach` is how many OTHER unsolved questions across the whole corpus sit in the same families as this paper's questions &mdash; the research this paper converts for free elsewhere.
 
 | Paper | Sitting | Tier D | Family reach | Temporal flags |
 |---|---|---|---|---|
 | QP2509 | September 2025 | **3 / 9** | 4 | 2 |
 | QP2511 | November 2025 | **3 / 9** | 4 | 2 |
+| QP2401 | January 2024 | **3 / 9** | 3 | 2 |
+| QP2404 | April 2024 | **2 / 9** | 6 | 1 |
 | QP2502 | February 2025 | **2 / 9** | 6 | 2 |
-| QP2401 | January 2024 | **2 / 9** | 3 | 2 |
-| QP2404 | April 2024 | **1 / 9** | 6 | 1 |
+| QP2410 | October 2024 | **2 / 9** | 3 | 4 |
+| QP2412 | December 2024 | **2 / 9** | 2 | 0 |
+| QP2504 | April 2025 | **1 / 9** | 5 | 4 |
 | QP2402 | February 2024 | **1 / 9** | 3 | 2 |
-| QP2410 | October 2024 | **1 / 9** | 3 | 4 |
-| QP2412 | December 2024 | **1 / 9** | 2 | 0 |
 | QP2408 | August 2024 | **1 / 9** | 0 | 2 |
 | QP2507 | July 2025 | **0 / 9** | 8 | 2 |
 | QP2503 | March 2025 | **0 / 9** | 6 | 3 |
-| QP2504 | April 2025 | **0 / 9** | 5 | 4 |
 | QP2512 | December 2025 | **0 / 9** | 4 | 2 |
 | QP2501 | January 2025 | **0 / 9** | 3 | 2 |
 | QP2406 | June 2024 | **0 / 9** | 2 | 0 |

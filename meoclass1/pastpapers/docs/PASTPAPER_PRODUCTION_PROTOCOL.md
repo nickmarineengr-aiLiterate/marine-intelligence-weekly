@@ -36,6 +36,39 @@ Hard rules:
 - **Source PDFs are never committed.** This repository is public. Source papers live outside
   version control.
 
+### 2.1 Technical claims with no regulatory source
+
+The ladder above is the authority ladder for a **legal, regulatory or official** claim. Where
+such a claim has an applicable primary source, that source is **mandatory**. Nothing below
+relaxes that.
+
+But engineering explanation does not require a regulation to exist. Where a question asks how
+something works, why it fails, or how it is operated, and **no instrument prescribes the
+answer**, acceptable authority for those limbs includes:
+
+- manufacturer manuals and maker's technical documentation;
+- classification-society technical material;
+- recognised engineering references and standard textbooks;
+- authoritative technical papers.
+
+Three rules bound this, and none is negotiable:
+
+- **Never manufacture an IMO, class or statutory rule to satisfy a "primary source"
+  checkbox.** An invented regulation number is a far worse defect than an openly declared
+  engineering-judgement answer. If no instrument prescribes the answer, record that fact.
+- **The relaxation is limb-by-limb, not question-by-question.** A question mixing an
+  engineering limb with a regulatory limb still requires primary verification of the
+  regulatory limb, and the two must be distinguishable in the verification record.
+- **An unverifiable quantity is omitted, not quoted.** Vendor-sourced or installation-specific
+  figures — efficiency gains, consumption savings, percentage improvements — are left out
+  rather than given false precision.
+
+A technical answer is verified when its mechanism is sound, its provenance class is **stated
+rather than disguised**, and the boundary of what could not be verified is written down.
+`QP2506-Q1` is the worked precedent: no instrument prescribes a propeller type, so the answer
+declares engineering judgement as its dominant provenance class, explains the hydrodynamics
+mechanistically, and quotes no efficiency percentage anywhere.
+
 ---
 
 ## 3. ONE PAPER PER FOUNDER-REVIEW BRANCH

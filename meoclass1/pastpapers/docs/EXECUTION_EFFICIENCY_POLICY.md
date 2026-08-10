@@ -36,13 +36,19 @@ that should be automated, batched, or skipped.
 **Do not parallelise RAM- or disk-heavy operations merely because they are logically
 independent.**
 
-The production laptop has 7.87 GB RAM, 4 cores and a SATA SSD. Concurrent Python, Node,
-browser, PDF-render and build jobs push it into paging, and paging is shared — so the whole
-machine stalls and the parallel run finishes *later* than a sequential one would.
+The production laptop has **4 cores / 8 threads and a single SATA SSD**. Concurrent Python,
+Node, browser, PDF-render and build jobs contend for the same four cores and the same one disk
+queue, so the parallel run finishes *later* than a sequential one would.
 
 - Prefer **one structured batch pass**.
 - Parallelise only cheap read-only work whose cost is known and small.
-- Run **one heavy Claude session at a time**.
+
+**Machine-specific numbers are deliberately not repeated here.** RAM size, session-concurrency
+limits and cleanup procedure live in `CLAUDE_MACHINE_OPERATING_POLICY.md` (see
+`PRODUCTION_PROTOCOL_INDEX.md` §4), because they describe one laptop and not the product. This
+file previously restated a 7.87 GB figure that became false the moment the machine was
+upgraded — which is exactly the duplicate-truth failure the protocol architecture exists to
+prevent. Read the machine policy for the current concurrency rule.
 
 ## Local servers — mandatory teardown
 

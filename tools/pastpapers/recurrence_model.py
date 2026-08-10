@@ -275,6 +275,85 @@ def build_families(nodes):
     return relations
 
 
+def sitting_index(node):
+    """Sitting as a single monotonic integer, for measuring temporal distance."""
+    return node['year'] * 12 + node['month_num']
+
+
+def donor_readiness(nodes, relations, built, qid):
+    """CURRENT donor readiness for one question, derived from built state.
+
+    Why this exists
+    ---------------
+    ``reuse_tier`` in a spec is INTAKE metadata. It records what was true when
+    the question was transcribed, and it is frozen at that moment. Donor
+    readiness is not frozen: every paper that gets solved turns some other
+    paper's tier C into a tier D, without any spec being touched.
+
+    Reading the stored field to answer "does this question have a verified
+    donor?" therefore answers a question about the past. After QP2506 was
+    solved, five unsolved questions had a built donor while still storing C:
+
+        QP2401-Q9, QP2404-Q6, QP2410-Q9, QP2412-Q9, QP2504-Q9
+
+    Two of those (QP2404-Q6, QP2410-Q9) acquired their donor from QP2506-Q6
+    in the session immediately before this one, which is exactly the drift
+    this function removes.
+
+    DONOR READINESS IS DERIVED FROM CURRENT CANONICAL SOLVED STATE,
+    NEVER FROM FROZEN INTAKE METADATA.
+
+    Family membership is not the same thing as donor choice
+    -------------------------------------------------------
+    ``relations[qid]['others']`` is the RECURRENCE family: every question the
+    examiner set as the same task. Only the members that have a built answer
+    are donors, and only one of those is the PREFERRED donor. Conflating the
+    three has been a live source of planning error, so they are returned
+    separately and named separately.
+
+    Returns a dict:
+        family     every other member of the recurrence family, sitting order
+        donors     the subset whose answer is built, sitting order
+        preferred  the single best donor, or None
+        exact      True if the preferred donor's printed stem is identical
+    """
+    n = nodes[qid]
+    family = sorted(relations[qid]['others'], key=lambda m: _sort_key(nodes[m]))
+    donors = [m for m in family if m in built]
+
+    def rank(m):
+        # Wording first, then nearness. An EXACT donor is the same printed task,
+        # so its answer structure transfers whole and only the facts need
+        # re-anchoring. A merely NEAR donor needs the task itself re-read, which
+        # is more work than re-dating a distant EXACT one. Sitting distance
+        # breaks the tie because it is the size of the temporal re-anchoring;
+        # question_id breaks the remainder so the choice is deterministic.
+        return (0 if nodes[m]['_stem'] == n['_stem'] else 1,
+                abs(sitting_index(nodes[m]) - sitting_index(n)),
+                m)
+
+    preferred = min(donors, key=rank) if donors else None
+    return {'family': family, 'donors': donors, 'preferred': preferred,
+            'exact': bool(preferred) and nodes[preferred]['_stem'] == n['_stem']}
+
+
+def derive_reuse_tier(stored_tier, donors):
+    """The tier as it stands NOW, given the donors available NOW.
+
+    A and B are claims about the True Source corpus -- that an existing
+    canonical object covers all or part of the examiner demand -- and are
+    orthogonal to whether a sibling paper has been solved. They are adjudicated
+    by a human who has read the object, so they are carried through from the
+    stored field rather than recomputed. C and D are pure functions of build
+    state and are always recomputed.
+    """
+    if donors:
+        return 'D'
+    if stored_tier in ('A', 'B'):
+        return stored_tier
+    return 'C'
+
+
 def family_summary(nodes, relations, qid):
     """One honest candidate-facing sentence about this question's history.
 

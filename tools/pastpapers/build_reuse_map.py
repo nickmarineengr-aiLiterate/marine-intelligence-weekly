@@ -78,6 +78,15 @@ def build():
     open_years = _open_years(specs, built)
     unsolved = [n for n in nodes.values() if n['question_id'] not in built]
 
+    # Donor readiness is DERIVED from the current built set, never read from the
+    # stored intake tier. See recurrence_model.donor_readiness for why.
+    ready = {qid: RM.donor_readiness(nodes, rel, built, qid) for qid in nodes}
+    tier = {qid: RM.derive_reuse_tier(byq[qid][1].get('reuse_tier'),
+                                      ready[qid]['donors']) for qid in nodes}
+    drift = sorted((n for n in unsolved
+                    if tier[n['question_id']] != byq[n['question_id']][1].get('reuse_tier')),
+                   key=RM._sort_key)
+
     o = []
     a = o.append
     a('# %d &ndash; %d RECURRENCE AND REUSE MAP' % (years[0], years[-1]))
@@ -202,17 +211,25 @@ def build():
     # ---- 5 reuse tiers
     a('## 5. REUSE MAP')
     a('')
+    a('**Tiers C and D below are DERIVED from the current built set on every run, not read from '
+      'the stored `reuse_tier` field.** The stored field is intake metadata: it records what was '
+      'true when the question was transcribed and it does not move when a sibling paper is '
+      'solved. Planning off it means planning off the past. Section 5.1 records exactly what that '
+      'drift currently costs.')
+    a('')
     a('| Tier | %s | Definition as applied |' % ' | '.join(str(y) for y in open_years))
     a('|' + '---|' * (len(open_years) + 2))
-    for t, why in (('A', 'Not assigned. An existing canonical object fully covers the demand.'),
-                   ('B', 'Not assigned. An existing canonical object partly covers the demand.'),
-                   ('C', 'No family member with a built answer. New research.'),
-                   ('D', 'Family contains a question whose answer is built and verified.')):
+    for t, why in (('A', 'Carried from the adjudicated intake field. An existing canonical object '
+                         'fully covers the demand.'),
+                   ('B', 'Carried from the adjudicated intake field. An existing canonical object '
+                         'partly covers the demand.'),
+                   ('C', 'Derived: no family member has a built answer. New research.'),
+                   ('D', 'Derived: the family contains at least one question whose answer is '
+                         'built and verified.')):
         # Count UNSOLVED questions only. A tier is a statement about work still
         # to do, so a solved question inside a part-solved year must not be
         # counted against it.
-        counts = [sum(1 for n in unsolved if n['year'] == y
-                      and byq[n['question_id']][1].get('reuse_tier') == t)
+        counts = [sum(1 for n in unsolved if n['year'] == y and tier[n['question_id']] == t)
                   for y in open_years]
         a('| %s | %s | %s |' % (t, ' | '.join('**%d**' % c if t == 'D' else str(c)
                                               for c in counts), why))
@@ -227,24 +244,56 @@ def build():
       'files to read, explicitly labelled discovery. Promotion to A or B belongs to the solving '
       'session, which will have read them.')
     a('')
+    a('### 5.1 Derived tier against stored intake tier')
+    a('')
+    a('Every unsolved question whose CURRENT readiness differs from the tier frozen at intake. '
+      'Each row is a question that acquired a verified donor because some other paper was solved '
+      'after this question was transcribed. **Nothing in any spec changed to produce this table** '
+      '&mdash; that is the point of deriving it.')
+    a('')
+    if drift:
+        a('| Question | Sitting | Stored | Derived | Donor that arrived |')
+        a('|---|---|---|---|---|')
+        for n in drift:
+            qid = n['question_id']
+            a('| %s | %s %s | %s | **%s** | %s |'
+              % (qid, n['month_year'], n['q_no'],
+                 byq[qid][1].get('reuse_tier') or '&mdash;', tier[qid],
+                 ', '.join(ready[qid]['donors']) or '&mdash;'))
+        a('')
+        a('Stored Tier D over the unsolved set counts **%d**; derived counts **%d**. Planning off '
+          'the stored field would have under-counted ready work by %d question(s) and would have '
+          'sent a solving session to research answers that already have a verified donor.'
+          % (sum(1 for n in unsolved if byq[n['question_id']][1].get('reuse_tier') == 'D'),
+             sum(1 for n in unsolved if tier[n['question_id']] == 'D'), len(drift)))
+    else:
+        a('None. Every unsolved question\'s stored tier currently agrees with its derived '
+          'readiness. This table is expected to repopulate as soon as the next paper is solved.')
+    a('')
     a('### Tier D in full &mdash; every unsolved question with a verified donor')
     a('')
     a('Direction matters and is easy to get backwards: **the unsolved sitting is the earlier '
       'one.** The donor is a later answer being pulled *backwards*, so any currency correction '
       'made for the later sitting must be reversed, not inherited.')
     a('')
-    a('| Question | Sitting | Donor | Wording | Temporal |')
-    a('|---|---|---|---|---|')
+    a('`Preferred` is one donor selected deterministically from the family: an EXACT printed stem '
+      'first, then the nearest sitting, then question id. It is a starting point for the solving '
+      'session, not an instruction &mdash; **the target question always owns its own answer**, and '
+      'every other donor in the row remains available.')
+    a('')
+    a('| Question | Sitting | Preferred | Wording | Other donors | Temporal |')
+    a('|---|---|---|---|---|---|')
     for n in sorted(unsolved, key=RM._sort_key):
-        d, q = byq[n['question_id']]
-        if q.get('reuse_tier') != 'D':
+        qid = n['question_id']
+        if tier[qid] != 'D':
             continue
-        donors = sorted(m for m in rel[n['question_id']]['others'] if m in built)
-        same = any(nodes[m]['_stem'] == n['_stem'] for m in donors)
+        q = byq[qid][1]
+        r = ready[qid]
         tr = q.get('temporal_review') or {}
-        a('| %s | %s %s | %s | %s | %s |'
-          % (n['question_id'], n['month_year'], n['q_no'], ', '.join(donors),
-             'identical' if same else 'reworded',
+        rest = [m for m in r['donors'] if m != r['preferred']]
+        a('| %s | %s %s | %s | %s | %s | %s |'
+          % (qid, n['month_year'], n['q_no'], r['preferred'],
+             'identical' if r['exact'] else 'reworded', ', '.join(rest) or '&mdash;',
              '**%s**' % tr.get('risk') if tr.get('state') != 'STABLE' else 'stable'))
     a('')
 
@@ -302,9 +351,10 @@ def build():
       'meet the hardest temporal problem in the set on a paper chosen for its date rather than '
       'its readiness.')
     a('')
-    a('`Tier D` is how many of the nine questions already have a verified donor. `Family reach` '
-      'is how many OTHER unsolved questions across the whole corpus sit in the same families as '
-      'this paper\'s questions &mdash; the research this paper converts for free elsewhere.')
+    a('`Tier D` is how many of the nine questions already have a verified donor, **derived from '
+      'the current built set** (§5.1). `Family reach` is how many OTHER unsolved questions across '
+      'the whole corpus sit in the same families as this paper\'s questions &mdash; the research '
+      'this paper converts for free elsewhere.')
     a('')
     rows = []
     for d in specs:
@@ -312,7 +362,7 @@ def build():
             continue
         pid = d['paper_id']
         qs = [q['question_id'] for q in d['questions']]
-        dcount = sum(1 for q in d['questions'] if q.get('reuse_tier') == 'D')
+        dcount = sum(1 for q in d['questions'] if tier[q['question_id']] == 'D')
         flags = sum(1 for q in d['questions']
                     if (q.get('temporal_review') or {}).get('state') != 'STABLE')
         reach = len({m for q in qs for m in rel[q]['others']
@@ -477,11 +527,116 @@ SUPERSEDED = [os.path.join(DOCS, '2025_2026_RECURRENCE_AND_REUSE_MAP.md'),
               os.path.join(DOCS, '2025_SOURCE_INVENTORY.md')]
 
 
+def self_test():
+    """Positive-control the donor-readiness derivation. Writes nothing.
+
+    A check that only ever reads the real corpus cannot tell the difference
+    between "derived correctly" and "read a stored field that happens to
+    agree". Every case below therefore MUTATES the built set and asserts the
+    tier moves with it. If any of these pass while the classifier is reading
+    frozen intake metadata, the test is worthless -- so case 1 and case 2 are
+    written to fail loudly in exactly that situation.
+    """
+    specs, nodes, rel = load()
+    byq = {q['question_id']: (d, q) for d in specs for q in d['questions']}
+    built = {qid for qid, (_, q) in byq.items() if q.get('model_answer')}
+    fails = []
+
+    def check(label, ok, detail=''):
+        print('  %-4s %s%s' % ('PASS' if ok else 'FAIL', label,
+                               '' if ok else '  -- %s' % detail))
+        if not ok:
+            fails.append(label)
+
+    def tier_of(qid, b):
+        r = RM.donor_readiness(nodes, rel, b, qid)
+        return RM.derive_reuse_tier(byq[qid][1].get('reuse_tier'), r['donors']), r
+
+    unsolved = [n['question_id'] for n in nodes.values() if n['question_id'] not in built]
+
+    # ---- case 1: solving a donor must CREATE a tier D (C -> D)
+    # A stored-field classifier cannot move here, because no spec is touched.
+    cand = next((q for q in sorted(unsolved)
+                 if not [m for m in rel[q]['others'] if m in built] and rel[q]['others']), None)
+    if cand is None:
+        check('case 1 C->D on donor arrival', False, 'no unsolved question with an unsolved family')
+    else:
+        sibling = sorted(rel[cand]['others'])[0]
+        before, _ = tier_of(cand, built)
+        after, r = tier_of(cand, built | {sibling})
+        check('case 1 C->D when %s is solved (%s)' % (sibling, cand),
+              before == 'C' and after == 'D' and r['preferred'] == sibling,
+              'before=%s after=%s preferred=%s' % (before, after, r['preferred']))
+
+    # ---- case 2: un-solving every donor must DESTROY a tier D (D -> C)
+    cand2 = next((q for q in sorted(unsolved)
+                  if [m for m in rel[q]['others'] if m in built]), None)
+    if cand2 is None:
+        check('case 2 D->C on donor loss', False, 'no unsolved question currently has a donor')
+    else:
+        donors = {m for m in rel[cand2]['others'] if m in built}
+        before, r0 = tier_of(cand2, built)
+        after, r1 = tier_of(cand2, built - donors)
+        check('case 2 D->C when %s un-built (%s)' % (','.join(sorted(donors)), cand2),
+              before == 'D' and after == 'C'
+              and r0['preferred'] in donors and r1['preferred'] is None,
+              'before=%s after=%s' % (before, after))
+
+    # ---- case 3: family membership alone must NOT create a donor
+    # This is the "recurrence family is not a preferred donor" boundary.
+    fam_only = [q for q in unsolved if rel[q]['others']
+                and not [m for m in rel[q]['others'] if m in built]]
+    check('case 3 unsolved family members are not donors (%d question(s))' % len(fam_only),
+          all(tier_of(q, built)[0] == 'C' and tier_of(q, built)[1]['preferred'] is None
+              for q in fam_only))
+
+    # ---- case 4: preferred donor prefers EXACT wording over a nearer sitting
+    # QP2509-Q3 (September 2025) has three donors: QP2601-Q3 and QP2604-Q3 are
+    # reworded and nearer; QP2607-Q5 is an identical printed stem and further
+    # away. The identical stem must win.
+    if 'QP2509-Q3' in nodes:
+        _, r = tier_of('QP2509-Q3', built)
+        check('case 4 EXACT donor beats a nearer reworded one (QP2509-Q3)',
+              r['preferred'] == 'QP2607-Q5' and r['exact'] is True,
+              'preferred=%s exact=%s donors=%s' % (r['preferred'], r['exact'], r['donors']))
+
+    # ---- case 5: among equally EXACT donors, the nearest sitting wins
+    # QP2509-Q2 (September 2025) has two identical-stem donors: QP2508-Q2 is one
+    # month earlier, QP2602-Q2 is five months later. The one-month donor wins.
+    if 'QP2509-Q2' in nodes:
+        _, r = tier_of('QP2509-Q2', built)
+        check('case 5 nearest sitting breaks an EXACT tie (QP2509-Q2)',
+              r['preferred'] == 'QP2508-Q2' and r['exact'] is True,
+              'preferred=%s donors=%s' % (r['preferred'], r['donors']))
+
+    # ---- case 6: derivation must never LOSE a stored D that still has a donor
+    lost = [q for q in unsolved if byq[q][1].get('reuse_tier') == 'D'
+            and tier_of(q, built)[0] != 'D']
+    check('case 6 no stored tier D with a live donor is demoted', not lost, ', '.join(lost))
+
+    # ---- case 7: the regression itself -- stored and derived must be allowed
+    # to disagree, and every disagreement must be explained by a real donor.
+    drift = [q for q in unsolved if tier_of(q, built)[0] != byq[q][1].get('reuse_tier')]
+    unexplained = [q for q in drift if not tier_of(q, built)[1]['donors']
+                   and byq[q][1].get('reuse_tier') not in ('A', 'B')]
+    print('  INFO stored-vs-derived drift: %d unsolved question(s)%s'
+          % (len(drift), ': ' + ', '.join(sorted(drift)) if drift else ''))
+    check('case 7 every drift row is explained by a built donor', not unexplained,
+          ', '.join(unexplained))
+
+    print('reuse map self-test: %s' % ('PASS' if not fails else 'FAIL (%d)' % len(fails)))
+    return 1 if fails else 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--check', action='store_true',
                     help='write nothing; fail if a file on disk is stale')
+    ap.add_argument('--self-test', action='store_true',
+                    help='positive-control the donor-readiness derivation; writes nothing')
     args = ap.parse_args()
+    if args.self_test:
+        sys.exit(self_test())
     stale = 0
     for path, fn in DOCUMENTS:
         body = fn()
