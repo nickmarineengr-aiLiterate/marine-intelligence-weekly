@@ -1,7 +1,25 @@
-# CURRENT STATUS — MEO Class I Written Questions / 2026 solved, QP2508 and QP2403 solved, 2024-2025 intake complete
+# CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-10, at **QP2510 RESEARCH CHECKPOINT**. Read this first.
+Last updated: 2026-08-10, after the **QP2510 BUILD** (§28). Read this first.
+
+---
+
+## CURRENT STATE — read this table, not the history below
+
+| | |
+|---|---|
+| **Corpus** | **252 questions / 81 solved / 171 unsolved** — 28 papers, **9 solved**, 19 answerless intake |
+| **Solved papers** | QP2601, QP2602, QP2603, QP2604, QP2606, QP2607 (2026) · QP2403 · QP2508 · QP2510 |
+| **Toolchain** | `health_check.py` green at `30de4b3`: 0 errors, 0 warnings |
+| **Branch at last checkpoint** | `pastpapers/qp2510-founder-review`, head `30de4b3` |
+| **Published** | Nothing. No paper merged to `main`; all pages `noindex` and ungated |
+| **Next paper** | **QP2506 June 2025** — reasoning at §28.12 |
+| **Standing stop conditions** | §28.13 |
+
+Everything below this table is **historical narrative**, newest section first. A section marked
+*superseded* was accurate when written and is retained as the record of how a decision arose — it is
+not the present state.
 
 ---
 
@@ -27,25 +45,41 @@ Last updated: 2026-08-10, at **QP2510 RESEARCH CHECKPOINT**. Read this first.
 > This file should answer only: *where are we now, what was completed, what is next, what is
 > blocked.* Do not add policy to it. Append state; do not rewrite history.
 >
-> ### ⚠ UNRESOLVED STATE CONFLICT — needs Founder reconciliation
+> ### ✔ STATE CONFLICT RESOLVED — 2026-08-10, at the start of QP2506 production
 >
-> The header block below records QP2510 as a research checkpoint, **"NOT built, NOT solved"**,
-> with corpus **252 / 72 / 180**.
+> The conflict was between the **§27 research-checkpoint header** (QP2510 *"NOT built, NOT
+> solved"*, corpus **252 / 72 / 180**) and the repository.
 >
-> The repository disagrees. `tools/pastpapers/health_check.py` run on 2026-08-10 at commit
-> `4d0487a` reports **9 solved papers, 19 intake**, **81 manifest deep links** and **171 intake
-> questions** — i.e. corpus **252 / 81 / 171**, consistent with QP2510 being solved and built.
+> **The repository was right and the header was stale.** Re-verified at `30de4b3` before any
+> QP2506 work:
 >
-> Nothing was changed to resolve this. The next production session must reconcile the two
-> before relying on either figure.
+> | Evidence | Result |
+> |---|---|
+> | `health_check.py` | 9 solved papers, 19 intake; **81 manifest deep links**, 171 intake questions; 0 errors, 0 warnings |
+> | Generated pages | `QP2510.html` present and reproducing exactly from its spec |
+> | Git history | `b6ecd40` *Build QP2510 and recompute the three-year donor intelligence*, then `4d0487a`, then `30de4b3` |
+> | §28 of this file | already recorded **252 / 81 / 171** and the post-build donor analysis |
+>
+> **The §27 header simply predated the §28 build and was never demoted.** §27 has now been
+> marked superseded and the CURRENT STATE table above carries the live figures. No historical
+> section was rewritten and no count in §26–§28 was altered.
 
 ---
 
-> # **§27 IS THE NEWEST SECTION. READ IT FIRST.**
+> # **§28 IS THE NEWEST SECTION. READ IT FIRST.**
 >
-> **QP2510 October 2025 is a RESEARCH CHECKPOINT: every temporal blocker resolved against primary
-> sources, but NO answer authored. NOT built, NOT solved.** Branch
-> `pastpapers/qp2510-founder-review`. Corpus unchanged at **252 / 72 / 180**.
+> **QP2510 October 2025 is COMPLETE: 9 of 9 authored, built, toolchain ALL STAGES PASS.**
+> Corpus **252 / 81 / 171**, 9 solved papers. Branch `pastpapers/qp2510-founder-review`, head
+> `30de4b3`. Its two load-bearing findings: **QP2510 created ZERO new donors** (§28.9), and a
+> pure temporal adaptation must be budgeted as *product*, not as capacity building (§28.10).
+> Next paper: **QP2506 June 2025** (§28.12).
+
+> # **§27 — SUPERSEDED by §28. The research checkpoint that preceded the QP2510 build.**
+>
+> **At the time this was written**, QP2510 was a RESEARCH CHECKPOINT: every temporal blocker
+> resolved against primary sources, but NO answer authored, and corpus stood at **252 / 72 /
+> 180**. §28 then authored and built the paper. The temporal adjudications recorded here remain
+> valid; the counts and the "NOT built" state do not.
 >
 > Headline: **the Carriage of Goods by Sea Act 2025 does NOT carry the Hague-Visby position
 > unchanged.** It redefines "goods" to *include* live animals and deck cargo, omits Article IV bis,
