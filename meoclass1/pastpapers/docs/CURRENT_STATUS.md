@@ -1,7 +1,8 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-10, after the **QP2506 BUILD** (§29). Read this first.
+Last updated: 2026-08-11, after the **DONOR-READINESS FIX and QP2509 PRE-AUTHORING** (§30).
+Read this first.
 
 ---
 
@@ -12,10 +13,11 @@ Last updated: 2026-08-10, after the **QP2506 BUILD** (§29). Read this first.
 | **Corpus** | **252 questions / 90 solved / 162 unsolved** — 28 papers, **10 solved**, 18 answerless intake |
 | **Solved papers** | QP2601, QP2602, QP2603, QP2604, QP2606, QP2607 (2026) · QP2403 · **QP2506** · QP2508 · QP2510 |
 | **Toolchain** | ALL STAGES PASS, 102 warnings; `health_check.py` 0 errors, 0 warnings; double build 18 artefacts, 0 byte differences |
-| **Branch** | `pastpapers/qp2506-founder-review`, cut from `8fa4f5f` |
+| **Branch** | `pastpapers/qp2509-founder-review`, cut from `0d7f872` |
 | **Published** | Nothing. No paper merged to `main`; all pages `noindex` and ungated |
-| **Next paper** | **QP2509 September 2025** — reasoning at §29.6 |
-| **Open defect** | `build_reuse_map.py` reads the stored `reuse_tier` instead of computing it, understating Tier D by six questions corpus-wide — §29.3 |
+| **Current paper** | **QP2509 September 2025 — PRE-AUTHORING, 0 / 9 authored.** Source verified, donors recomputed, temporal sweep complete. **Spec is untouched intake.** §30 |
+| **Open defect** | **CLOSED** at `0d7f872`. Donor readiness is derived from current solved state — §30.1 |
+| **Tier D (derived)** | **20** of 162 unsolved, against 15 under the stored field |
 | **Standing stop conditions** | §28.13, unchanged |
 
 Everything below this table is **historical narrative**, newest section first. A section marked
@@ -3177,3 +3179,97 @@ exposed at Q1 argues for it eventually, but it is the more expensive paper of th
   most are the A.1184(33) currency check and the Part XA / MS Act 1958 boundary shared with Q9.
 - **QP2506-Q8 is substantively identical to QP2508-Q4, QP2601-Q9, QP2602-Q4 and QP2604-Q9.** A
   correction to any one of the five must be applied to all five.
+
+---
+
+# 30. DONOR-READINESS FIX AND QP2509 PRE-AUTHORING — 2026-08-11
+
+Branch `pastpapers/qp2509-founder-review`, cut from **`0d7f872`**.
+Corpus unchanged: **252 / 90 / 162**. Toolchain ALL STAGES PASS with `--self-test`.
+
+**QP2509 is at 0 / 9 authored and `specs/QP2509.json` is untouched intake.** This session did
+the machine preflight, closed the §29.3 defect, clarified the source-authority protocol, and
+completed QP2509's source verification, donor map and temporal sweep. It stopped **before**
+authoring rather than leave the half-authored state `PASTPAPER_PRODUCTION_PROTOCOL.md` §3
+forbids.
+
+Full pre-authoring record: **`QP2509_TEMPORAL_AND_DONOR_ANCHOR.md`**.
+
+## 30.1 The §29.3 defect is CLOSED — and the "six" reconciles to five
+
+`build_reuse_map.py` classified tier D by reading the stored `reuse_tier` field, which is
+frozen at intake and cannot move when some *other* paper is solved. Donor readiness is now
+derived on every run from the current built set (`recurrence_model.donor_readiness`).
+
+**Stored 15 → derived 20** over the unsolved corpus (2024: 7→11, 2025: 8→9; tier C 147→142,
+per-year totals conserved). Five questions moved:
+
+`QP2401-Q9`, `QP2404-Q6`, `QP2410-Q9`, `QP2412-Q9`, `QP2504-Q9`.
+
+**§29.3 recorded six, and both counts are right.** Its sixth row was `QP2506-Q6` — a question
+inside the paper being solved in that session. When QP2506 completed, its nine questions left
+the unsolved set carrying 4 stored-D and 5 derived-D with them: 19−4 = 15, 25−5 = 20. A tier-D
+count is only meaningful relative to the solved state at which it was computed, which is
+precisely why it is now derived rather than stored.
+
+Stored `reuse_tier` is **retained** as the authoring record — `validate_spec.py`,
+`build_paper.py`, `build_index.py` and `audit_paper.py` all still depend on it. Intake metadata
+and current production readiness are now two named things.
+
+Recurrence family, donor set and **preferred donor** are also separated. Preferred selection is
+deterministic: EXACT printed stem first, then nearest sitting, then question id.
+
+Regression coverage: `build_reuse_map.py --self-test`, wired into `run_toolchain.py
+--self-test`. Cases 1–2 mutate the built set and assert the tier follows; reintroducing the
+defect fails both and exits 1 (verified by mutation). Cases 4–5 pin preferred-donor selection
+on `QP2509-Q3` and `QP2509-Q2`. §5.1 of the generated map now prints stored against derived.
+
+No spec and no generated page changed.
+
+## 30.2 Solving order changed — five papers re-ranked
+
+`QP2401` 2→3, `QP2404` 1→2, `QP2410` 1→2, `QP2412` 1→2, `QP2504` 0→1.
+`QP2509` and `QP2511` are unchanged at **3 / 9** and remain joint top of the order.
+
+## 30.3 QP2509 — source PASS, donors 3/9, and the QP2506 expectation was wrong
+
+Source verification: 9/9 stems verbatim, serial `EM – 2509`, 2 pages, instructions and marks
+match, `printed_marks_absent` correct on Q1/Q6/Q8. **No source correction needed.** Q9 prints
+`SOLAS ch.ll-1` and Q8 prints a capital `B).`; both are reproduced, not fixed.
+
+Tier D 3/9 — **Q2** (`QP2508-Q2`, EXACT, one month), **Q3** (`QP2607-Q5`, EXACT),
+**Q9** (`QP2606-Q8`, EXACT).
+
+**§29.6 expected Q7 and Q8 to have useful existing coverage. They do not.** Both are family
+singletons with no donor at any tier. Q8 has real *topical* leverage in the fatigue material
+already verified for `QP2602-Q4` and its four relatives, but that is research to be re-read,
+not a donor. Promotion of Q7 or Q8 to tier B remains open to the authoring session.
+
+## 30.4 Temporal findings — three that change the answer
+
+- **Q5 HNS is the highest risk in the paper and it runs forward.** Not in force at the sitting,
+  and its Article 21 conditions were not met until **29 May 2026**, with force on **29 November
+  2027**. Every present-day HNS fact is unusable. The stem's "expected shortly to come into
+  force" is the sitting's state and must be preserved. **Quote no Contracting-State count** —
+  the September-2025 figure could not be established.
+- **Q2 CII sits one month before the decision.** MEPC 83 (April 2025) **approved** amendments
+  to regs 20/25/28 for adoption at the extraordinary session in **October 2025** — after the
+  sitting. Approved, not adopted, not in force. The `QP2602-Q2` donor is on the far side.
+- **Q8 MLC is a three-state trap in both directions.** The 2022 amendments were in force
+  (23 December 2024). The **2025 amendments were ADOPTED on 6 June 2025** — three months before
+  the sitting — but not in force (expected late 2027). Omitting them is as wrong as applying
+  them.
+
+Also verified: IMSBC **07-23** mandatory from 1 January 2025 is the operative edition for Q1;
+the **MS Act 1958** governs (2025 Act commenced 15 March 2026, so the Q3 and Q9 donors must be
+statute-reversed); maritime cyber Rev.3 is **not load-bearing**; and the Indian carriage-law
+commencement of **10 September 2025 is not load-bearing** — no question raises a bill of lading
+or contract of carriage, so the unprinted sitting day does not need resolving for this paper.
+
+## 30.5 Next session
+
+**Author QP2509 from `QP2509_TEMPORAL_AND_DONOR_ANCHOR.md` §4.** The temporal work is done and
+verified; seven items are carried as TO VERIFY at §5 of that file. Do not re-derive the donor
+map — regenerate it only if another paper is solved first.
+
+**NO MAIN MERGE. NO SOLVED-QP LAUNCH. QP2509 is Founder-review only.**
