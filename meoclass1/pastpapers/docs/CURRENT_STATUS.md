@@ -3273,3 +3273,35 @@ verified; seven items are carried as TO VERIFY at §5 of that file. Do not re-de
 map — regenerate it only if another paper is solved first.
 
 **NO MAIN MERGE. NO SOLVED-QP LAUNCH. QP2509 is Founder-review only.**
+
+# 31. CURRENT STATE — 2026-08-11 (QP2509 authoring, PARTIAL)
+
+**Delta only. The full record is `QP2509_AUTHORING_CHECKPOINT.md`; this section is the pointer
+and must not be expanded into a narrative.**
+
+| | |
+|---|---|
+| Corpus | **252 / 90 / 162**, 10 solved papers — **unchanged** |
+| QP2509 | **3 of 9 authored — Q2, Q5, Q7 READY.** `specs/QP2509.json` is **untouched intake** |
+| Where the work is | staged at `staging/QP2509/authored_questions.json`; records at `verification/QP2509/` |
+| Toolchain | `ALL STAGES PASS`, 102 warnings, `REUSE SELFTEST` PASS — identical to baseline |
+| Built page | **none, correctly** |
+
+**Why the spec is untouched.** `build_paper.py` selects a paper by the **presence of answers**,
+not by `build_state`, so a 3/9 spec enters the build pipeline and turns the branch red. That was
+observed, not assumed. The protocol's "no valid half-authored-paper state" is therefore
+mechanically enforced, and the resolution was to park the verified objects outside the spec
+rather than discard them or leave a failing build.
+
+**Resume with one command:** `python meoclass1/pastpapers/staging/QP2509/apply_staged.py`, then
+author **Q8 → Q3 → Q9 → Q4 → Q1 → Q6**. Do not commit an applied spec until 9/9.
+
+**Three findings not to re-derive:** the `QP2508-Q2` donor carried **"See Q8"** on four surfaces
+pointing at its own paper's Net-Zero question — a dateless defect a temporal sweep cannot see,
+and the Q3 and Q9 donors should be expected to carry the same class; the HNS Convention contains
+**no bunkers exclusion** (the word does not appear in it — bunkers are outside because article
+1.5(a) reaches only cargo); and the Bunkers Convention sets **no limitation figure of its own**,
+article 6 referring out to the LLMC. Anchor §5 items 2 and 5 are **discharged**; item 7 is
+answered for Q7 (**no tier B promotion**) and still open for Q8.
+
+**NO MAIN MERGE. NO SOLVED-QP LAUNCH. NO BUILD. QP2509 remains unfinished.**
