@@ -2756,3 +2756,216 @@ adjudicate every hit by hand (April: 55 hits, one defect).
 - **The intake `temporal_review` field is a review prompt, never evidence.**
 - **The broken `validate_antipatterns.py` PostToolUse hook did not fire this session.** No `hooks`
   key exists in any settings file; only historical transcripts mention it. Environment noise, gone.
+
+---
+
+# 28. QP2510 OCTOBER 2025 — **SOLVED 9/9 AND BUILT**
+
+**Branch:** `pastpapers/qp2510-founder-review`, continued from the §27 research checkpoint `b97d207`
+**Date:** 2026-08-10
+**Verdict:** **READY FOR FOUNDER REVIEW.** Not merged, not launched.
+
+## 28.1 The checkpoint held, and was used rather than redone
+
+§27 stopped after the research and before the answers. **That research was inherited whole.** No
+source was re-pulled, no Gazette re-read, no circular re-obtained. The three resolved legal positions,
+the source re-read, the pair audit and the per-question adaptation class were all used as given.
+
+This session authored **all nine answers**, in the §27 order: Q2, Q5, Q9, then Q7 and Q1, then Q3,
+Q6, Q4, Q8.
+
+## 28.2 Adaptation result — the plan survived contact
+
+| Class | Questions | Outcome |
+|---|---|---|
+| **C — substantive** | Q2, Q5, Q9 | as planned |
+| **B — minor** | Q1, Q7 | as planned |
+| **A — reuse after re-verification** | Q3, Q4, Q6, Q8 | as planned |
+
+**Four A, two B, three C — exactly the shape §27.8 predicted on evidence.**
+
+## 28.3 The three substantive transitions
+
+**Q2 — the Indian statute book changed five weeks before the sitting.** Bills of Lading Act 2025
+(18 of 2025) and Carriage of Goods by Sea Act 2025 (19 of 2025), both in force **10 September 2025**.
+The load-bearing edit was **not** the citations: Schedule **Article I(d)** now *includes* live animals
+and deck cargo, **reversing** a donor P1 primary claim. Article IV *bis* was removed as an Indian
+citation (the Schedule runs I–IX with no "bis"); the three-month judicial extension at III(6)(c) was
+added; Article I and IV(5) were re-lettered clause by clause. New enacting-section content — s.3,
+s.4, s.5, s.12(3) — was added, which the donor never had.
+
+> A find-and-replace on article letters alone would have shipped a **correctly cited falsehood**.
+> This remains the most dangerous single edit in the corpus to date.
+
+**Q5 — cyber Rev.3.** MSC-FAL.1/Circ.3/**Rev.3 of 4 April 2025**. Five functional elements became
+**six**, with **GOVERN** added and placed first; eight vulnerable systems became **nine** at annex
+**2.2.1** as a *restructure, not an append*; IT and OT became **formal definitions** with the
+circular's own examples; **CBS** was introduced; segregation became a stated duty at 2.2.2. The
+donor's emphasised trap — *"five, not six"* — was **inverted, not deleted**. IPDRR → **G-IPDRR**.
+One reversal in the target's favour: **IACS UR E26/E27 ARE in application here** (ships contracted
+on or after 1 July 2024), where the donor correctly recorded them as not yet applying.
+
+**Q9 — the MLC 2022 amendments are simply the law.** In force **23 December 2024**, ten months
+before the sitting. Five requirements **integrated into the limb-(a) sections they amend**, not
+appended: A3.1 §17 social connectivity; A4.3 §1(b) appropriately-sized PPE; B4.3.1 §3 with A4.3 §2
+the hierarchy of controls; A4.3 §5(a) deaths reported annually for a **global register**; Appendix
+A4-I(g) registered owner. Every donor statement describing them as *not yet in force* was reversed —
+the largest re-anchoring job on the paper. Limb (b) gained exactly one proposition.
+
+**The 2025 MLC amendments are quarantined.** Adopted June 2025 — *four months before the sitting* —
+not in force, expected 2027. They appear nowhere in the Model Answer. **No ratification count is
+asserted anywhere**, because the available figures are as at 2026.
+
+## 28.4 Q7 — the trap that runs backwards
+
+Wording character-identical; marks moved **6+4+6 → 6+5+5**. Handled as **emphasis**: limb (b)'s
+guidance was rewritten on every surface that stated the split, and **no proposition was deleted from
+limb (c)**.
+
+**A.1187(33) was RETAINED on 18 candidate-facing references.** A.1208(34) revokes it but was adopted
+**3 December 2025 — roughly seven weeks AFTER the examination** — and gathers obligations entering
+into force by 1 July 2026. It is named only as the thing not to substitute, with a `B_CURRENCY_CHECK`
+guard so a later editor does not "modernise" the citation.
+
+## 28.5 Q1 — the cross-reference that was real
+
+The apparent oddity of a Big Data question needing a cyber update was **tested, not assumed**. Q1
+genuinely carries the circular across **eight surfaces**; all eight moved Rev.2 → Rev.3. Nine
+candidate-facing Rev.3 references stand and **zero Rev.2 references remain**. Big Data content was
+deliberately **not** modernised — the Maritime Single Window obligation is in force at both sittings.
+
+Independent confirmation from the built page: searching `msc-fal.1/circ.3` resolves to **Q1 and Q5**.
+
+## 28.6 A defect the toolchain could not see
+
+The HTTP visual review caught one real defect. An ordered-replacement rule — a specific pattern
+followed by a broad fallback — met an instance with `</b>` between the label and the date. The
+specific rule missed it, the fallback fired, and the result was **"Rev.3 (7 June 2022)"**: a Rev.3
+label carrying Rev.2's issue date. Both fragments are individually well-formed, so every validator
+passed it.
+
+> **A broad fallback after a specific rule does not merely under-match — it can synthesise a claim
+> present in neither the source nor the target.** Fixed, and a guard added asserting that no edition
+> label sits with another edition's date. This is the fourth defect class that only HTTP review has
+> caught.
+
+## 28.7 Sweeps
+
+Run on the **assembled** spec and split by surface, because the rule is not "these words must not
+appear":
+
+- **Model-answer surfaces** — superseded and not-yet-in-force material must be **zero as an
+  assertion**. 15 hits found; **all 15 adjudicated as explicit exclusions** (Rev.2 named as the wrong
+  edition, the 2025 MLC set named as not in force). None asserts superseded or future law.
+- **Study Guide** — change context is **required**, and is present and labelled for Q2, Q5, Q7, Q9.
+- **Donor contamination** — `March 2024` and `QP2403` pointers: **zero** on candidate-facing surfaces.
+- **Future contamination** — A.1208(34), the 2025 MLC amendments and 2027 appear **only** as
+  labelled exclusions.
+
+## 28.8 Build, determinism and regression
+
+| Check | Result |
+|---|---|
+| Toolchain | **ALL STAGES PASS**, 92 warnings (76 baseline + 16 new QP2510 length warnings) |
+| Determinism | **21 generated artefacts compared, 0 byte differences** across a full double build |
+| Corpus | **252 / 81 / 171** — 9 solved papers, 19 intake, as predicted |
+| questions-2025 | exactly **nine** QP2510 deep links, 0 broken; all other 2025 sittings still intake |
+| Regression | **QP2403, QP2508 and all six 2026 papers byte-unchanged.** No other spec touched |
+| UI | 9 cards, 5 modes, Answer default, **0px horizontal overflow at 1280 and 375**, no console errors |
+| Provenance | every host recurrence code clean; the new leak probe **positive-controlled** |
+| Security | untouched |
+
+A `FIXTURES` entry was added for QP2510 — nine content probes **re-tested against this page rather
+than inherited**, plus three *temporal fingerprint* probes (`carriage of goods by sea act 2025`,
+`six functional elements`, `social connectivity`) that a regression to donor content would remove.
+
+## 28.9 **The donor finding — and it is not the comfortable one**
+
+**QP2510 created ZERO new donors.**
+
+Tier D fell from 21 to 12 for 2025, which is exactly QP2510's own nine rows leaving the unsolved
+list. Computed directly: **four** unsolved questions share a family with a QP2510 question —
+QP2504-Q9, QP2401-Q9, QP2410-Q7, QP2412-Q9 — and **all four already had QP2403 in the same family**.
+
+**Nor does QP2510 become the preferred donor for any of them.** Three targets (January 2024, October
+2024, December 2024) are *earlier* than both donors, and QP2403 is temporally closer; pulling QP2510
+backwards would mean reversing currency corrections rather than inheriting them.
+
+> **The one genuinely interesting case is QP2504-Q9, April 2025**, which falls *between* the two
+> donors and sits almost exactly on the Rev.3 boundary — the circular is dated **4 April 2025**.
+> Whether Rev.2 or Rev.3 governs that sitting depends on the examination date itself. **This is now
+> the most temporally delicate unsolved question in the corpus**, and it must not be answered from
+> either donor without establishing that date first.
+
+Family reach also *fell* for three papers (QP2401 4→3, QP2412 3→2, QP2504 6→5), because QP2510's
+questions are no longer unsolved members of those families.
+
+**Why this happened, and it was structurally inevitable:** QP2510 is a question-for-question reprint
+of a paper that was *already solved*. Every family it touches was already covered by QP2403.
+
+## 28.10 What that means for the production rhythm
+
+§27 proposed: research-heavy family creator → donor-heavy temporal adaptation → repeat. **The
+evidence does not support that as a standing rule**, and it should not be adopted as one.
+
+- QP2403, the creator, produced donors for **QP2510 (9) and four other questions**.
+- QP2510, the adapter, produced donors for **none**.
+
+A pure temporal adaptation of an already-solved paper delivers **real product value and zero donor
+reach**. It is worth doing — the October 2025 candidate needs the October 2025 law — but it must be
+budgeted as *product*, not as *capacity building*, and it should not be scheduled on the expectation
+that it will make the next paper cheaper.
+
+**The better shape is the hybrid**, which is what the next paper is: part donor adaptation, part
+family creation, so each paper both consumes and produces reach.
+
+## 28.11 Study intelligence — stable route, changing law
+
+The QP2403 → QP2510 pair is the cleanest demonstration in the corpus of a principle worth teaching:
+
+> **MEMORISE A STABLE ROUTE. UPDATE THE TIME-SENSITIVE CONTENT.**
+
+**Q5 is the exemplar.** Seven route steps, identical at both sittings; steps 1, 3, 5 and 7 reuse
+verbatim, and only the *content of steps 2, 4 and 6* changes. A candidate who learned the route in
+2024 still knows where to start, in what order to write and where to stop. They update two facts.
+
+**Q2 is the counter-example.** Same question, same route, but the governing statute was replaced and
+one proposition **inverted**. Route stability does **not** imply answer stability.
+
+**Q9 sits between them** — the architecture of limb (a) survives; five requirements thread into it.
+
+**Q7 is the fourth case**: same truth, different emphasis, driven only by a mark split.
+
+This is the raw material for *"How this topic has been asked"* and the question-family study guides.
+**Not built now** — recorded for the derivation session.
+
+## 28.12 NEXT SESSION — **QP2506, JUNE 2025**
+
+Ranked across all 19 remaining unsolved papers on the recomputed map:
+
+| | |
+|---|---|
+| **Tier D readiness** | **4 / 9** — the highest in the set. Q2 ← QP2602-Q7, Q7 ← QP2601-Q8, Q8 ← QP2601-Q9, Q9 ← QP2602-Q5 |
+| **Family reach** | **5** other unsolved questions in the same families — real donor creation |
+| **Temporal burden** | **1** flag, the lowest of any paper with donors. Q9 *Unseaworthy Vessels under the Merchant Shipping Act* is HIGH — June 2025 is on the **MS Act 1958**, and the donor QP2602-Q5 (February 2026) is also pre-15-March-2026, so the donor is on the same Act |
+| **Fresh research** | **5** — rudder efficiency devices, marine insurance short notes, SCOPIC and post-collision jurisdiction, LLMC, and general average. Q3 and Q6 sit adjacent to the general-average work already built at QP2403-Q3 and QP2510-Q3, which is supporting material rather than a donor |
+
+**Why not the alternatives.** QP2511 (3/9, reach 5) and QP2509 (3/9, reach 4) each carry two
+temporal flags. QP2507 has the highest reach in the corpus at **8** but **0/9** Tier D and two flags,
+so it is a pure creator and the most expensive single paper available. QP2502 has reach 7 but only
+2/9.
+
+**QP2506 is the hybrid the rhythm finding at §28.10 argues for**: four donors to consume, five
+families to create, and the lightest temporal burden available to a paper with donors.
+
+## 28.13 Stop conditions still in force
+
+- **Do not** merge to `main`. **Do not** publish into `/solvedQP/`. **Do not** reopen Security V2.
+- **Do not** commit or delete the source PDFs.
+- **QP2504-Q9 must not be answered from either cyber donor** until the April 2025 examination date
+  is established against the 4 April 2025 issue date of Rev.3. See §28.9.
+- **Write specs with LF line endings.** Verified byte-identical on a JSON round-trip before the first
+  write this session.
+- **The intake `temporal_review` field is a review prompt, never evidence.** It was 0 for 9 on the
+  donor and was not trusted here; all nine classifications are evidence-based.
+- **A broad find-and-replace fallback is not safe on citation text.** See §28.6.

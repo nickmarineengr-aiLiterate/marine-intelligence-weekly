@@ -270,6 +270,50 @@ const FIXTURES = {
     // astern term takes it to Q8 on its own.
     narrow: ['bridge control astern', 'QP2403-Q8'],
   },
+  // October 2025 reprints the March 2024 paper question-for-question, so the
+  // nine content probes are the same terms -- but they were re-tested against
+  // THIS page rather than inherited, because the answers behind them changed.
+  QP2510: {
+    probes: [
+      ['big data', 'QP2510-Q1'],
+      ['bill of lading', 'QP2510-Q2'],
+      ['contributory values', 'QP2510-Q3'],
+      ['kappel', 'QP2510-Q4'],
+      ['functional elements', 'QP2510-Q5'],
+      ['electronic record book', 'QP2510-Q6'],
+      ['iii code', 'QP2510-Q7'],
+      ['starting air distributor', 'QP2510-Q8'],
+      ['maritime labour convention', 'QP2510-Q9'],
+      // Temporal fingerprints. Each of these exists ONLY because this sitting
+      // is answered on law the March 2024 paper could not use, so a regression
+      // to donor content would take them out and fail here rather than ship.
+      ['carriage of goods by sea act 2025', 'QP2510-Q2'],
+      ['six functional elements', 'QP2510-Q5'],
+      ['social connectivity', 'QP2510-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['eu mrv', 'QP2510-Q1', 'the big data question (the card names no reporting regime)'],
+      ['machine learning', 'QP2510-Q1', 'Q1 (the card writes only analytics)'],
+      ['azipod', 'QP2510-Q4', 'Q4 (the card writes only azimuth or podded propulsion)'],
+      ['seafarers bill of rights', 'QP2510-Q9', 'Q9 (the card never uses the phrase)'],
+      // Rev.3 mnemonic. Rev.2's was IPDRR; if the answer regressed to five
+      // elements this alias would go with it.
+      ['g-ipdrr', 'QP2510-Q5', 'Q5 (the six-element mnemonic, never rendered)'],
+      // The inverted proposition. The donor asserts these are EXCLUDED from
+      // "goods"; the 2025 Indian Schedule includes them.
+      ['live animals deck cargo', 'QP2510-Q2', 'Q2 (the Article I(d) reversal)'],
+    ],
+    regulation: ['a.1070(28)', 'QP2510-Q7'],
+    // Leak probe. 2025/APR/Q9 is a host annotation carried against Q5 on THIS
+    // source copy and on no earlier one, so it is specific to this paper rather
+    // than inherited from the donor's probe list. None of it may reach the
+    // shipped bytes.
+    recurrence: ['2025/apr/q9', 'QP2510-Q5'],
+    // Must narrow. 'bridge control' alone resolves to Q5 and Q8 -- Q5 lists
+    // bridge systems among the vulnerable onboard systems.
+    narrow: ['bridge control astern', 'QP2510-Q8'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';
