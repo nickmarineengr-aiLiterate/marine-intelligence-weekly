@@ -1,15 +1,23 @@
-# CURRENT STATUS — MEO Class I Written Questions / 2026 solved, QP2508 solved, 2024-2025 intake complete
+# CURRENT STATUS — MEO Class I Written Questions / 2026 solved, QP2508 and QP2403 solved, 2024-2025 intake complete
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-10, at the **QP2403 MARCH 2024 CHECKPOINT**. Read this first.
+Last updated: 2026-08-10, at **QP2403 MARCH 2024 COMPLETE**. Read this first.
 
-> # **§25 IS THE NEWEST SECTION. READ IT FIRST.**
+> # **§26 IS THE NEWEST SECTION. READ IT FIRST.**
 >
-> **QP2403 March 2024 is a CHECKPOINT: 2 of 9 authored, paper NOT built, toolchain RED by design.**
-> Branch `pastpapers/qp2403-founder-review`. The next session **finishes QP2403** and must not redo
-> the source re-read, the QP2510 pair audit, the tier classification or the temporal sweep, all of
-> which are complete. **Three intake temporal flags were WRONG (Q2, Q5, Q9)**, one of them a
-> statutory boundary the corpus had not seen. Solved count is **unchanged at 63**.
+> **QP2403 March 2024 is COMPLETE: 9 of 9 authored, built, toolchain ALL STAGES PASS.**
+> Branch `pastpapers/qp2403-founder-review`. Solved count **63 → 72 of 252**; 180 unsolved.
+> **QP2510 October 2025 goes 0/9 → 9/9 Tier D** — metadata only; it is NOT built and NOT solved.
+> Five QP2510 intake temporal flags corrected: **Q2, Q5, Q9 HIGH; Q1, Q7 MEDIUM.**
+> The previous session's open question is **CLOSED**: both 2025 Indian carriage Acts came into
+> force **10 September 2025**, five weeks before the October sitting.
+
+> # **§25 — superseded by §26. The checkpoint that produced Q5 and Q6.**
+>
+> QP2403 was deliberately stopped at 2 of 9 rather than lower verification quality. That decision,
+> and the whole-paper groundwork it produced — the source re-read, the QP2510 pair audit, the tier
+> classification and the nine-question temporal sweep — are recorded in
+> `verification/QP2403/DEDUP_AND_SOURCE_PLAN.md` and were **used, not redone**, by §26.
 
 > # **§24 — superseded by §25, still current for the solved corpus.**
 >
@@ -2363,3 +2371,190 @@ for QP2403 in `ui_behaviour_test.cjs`, and the sample regression.
 - **Do not** commit or delete the source PDFs.
 - **Write specs with LF line endings.** A patch script writing CRLF was caught this session; the
   rest of the corpus is LF and content-hashed comparisons depend on it.
+
+---
+
+# §26 — QP2403 MARCH 2024: **COMPLETE**. 2026-08-10
+
+> **9 of 9 authored and verified. Paper built. `run_toolchain.py --self-test` = ALL STAGES PASS.**
+> **63 → 72 solved of 252. 180 unsolved. Double build: 0 byte differences over 18 artefacts.**
+
+## 26.1 What this session did, and what it deliberately did not redo
+
+Authored **Q7, Q3, Q9, Q2, Q1, Q4, Q8** — the seven the checkpoint left. **Q5 and Q6 were not
+touched**; they were reviewed against the finished paper and left unchanged (see §26.6).
+
+The §25 groundwork was **used as given**: no re-read of the source paper, no re-run of the QP2510
+pair audit, no re-derivation of the tier classification. That was the point of the checkpoint, and
+it held.
+
+## 26.2 Verification — every question opened its own primary source where one exists
+
+| Q | Primary source | How obtained |
+|---|---|---|
+| Q1 | **FAL.14(46)**, 13 May 2022 | IMO resolutions CDN, read in full |
+| Q2 | **Hague-Visby Rules**; **India Code** (BoLA 2025, COGSA 2025) | scheduled official text; India Code **by browser** |
+| Q3 | **York-Antwerp Rules 2016**; **MIA 1963 ss.64–66** | IG P&I copy — **no text layer, so rendered at 160 dpi and read visually page by page** |
+| Q4 | none — no instrument prescribes a propeller type | `regulations: []`, and that is correct |
+| Q7 | **A.1070(28)** in full; **A.1187(33)** | IMO CDN; local true-source corpus |
+| Q8 | none — operational question | `regulations: []`; ISM and SOLAS referred to by effect only |
+| Q9 | **MLC 2006 as amended to 2018** | local true-source corpus — **the edition operative at the sitting** |
+
+**Q9 is the methodological high point.** The corpus holds *both* ILO consolidations — to-2018 and
+to-2022. Normalising both and probing term by term turned "the 2022 amendments were not in force"
+from a recollection into a **reproducible textual fact**: `social connectivity` appears 0 times in
+one text and 1 in the other. Six 2022-only provisions were identified and excluded that way.
+
+The **positive** marker matters as much: **Appendix A5-I lists SIXTEEN items, not the original
+fourteen**, because the 2014 amendments added the two financial-security entries. An answer that
+says "sixteen" has dated itself correctly; one that says "fourteen" is pre-2017.
+
+## 26.3 Temporal review — the intake flag is now 0 for 9 as evidence
+
+All nine intake flags said `STABLE / LOW`. **Five are wrong or materially incomplete.**
+
+| Q | Intake | Actual | Why |
+|---|---|---|---|
+| Q2 | STABLE/LOW | **CORRECTED — HIGH** | both Indian carriage Acts replaced between the sittings |
+| Q5 | STABLE/LOW | **CORRECTED — HIGH** | Rev.2 → Rev.3, five elements → six |
+| Q9 | STABLE/LOW | **CORRECTED — HIGH** | MLC 2022 amendments in force between the sittings |
+| Q1 | STABLE/LOW | **CONFIRMED — MODERATE** | MSW became mandatory 1 Jan 2024, *two months before* the sitting |
+| Q7 | STABLE/LOW | **CONFIRMED — LOW** | but A.1187(33) replaced the 2021 list *three months before* the sitting |
+| Q3, Q4, Q6, Q8 | STABLE/LOW | **CONFIRMED — LOW** | with a recorded reason in each case |
+
+> **Q1 is the mirror-image error, and it is new to the corpus.** The habitual risk is importing
+> *later* law. Q1's risk is writing on *pre-2024* material and describing the Maritime Single Window
+> as forthcoming — which would be wrong at this sitting. **The flag must be checked in both
+> directions, not just for contamination from the future.**
+
+## 26.4 The Q2 statutory boundary — the §25 open question is **CLOSED**
+
+§25 flagged that commencement of the two 2025 Acts *"was not established and must be, before
+QP2510-Q2 is answered — assent is not commencement"*. Established this session from **India Code by
+browser** (it refuses automated retrieval — `curl` returns an HTML shell):
+
+| Act | Commencement | Notification |
+|---|---|---|
+| **Bills of Lading Act 2025** (18 of 2025) | **10 September 2025** | S.O. **4083(E)** of 8 Sep 2025 |
+| **Carriage of Goods by Sea Act 2025** (19 of 2025) | **10 September 2025** | S.O. **4082(E)** of 8 Sep 2025 |
+
+Both fall **after** March 2024 and about **five weeks before** October 2025. Section **6(1)** of the
+former reads *"The Indian Bills of Lading Act, 1856 (9 of 1856) is hereby repealed"*, with savings
+at 6(2).
+
+**Mitigation:** the 2025 Act **re-enacts rather than reforms** — its ss.2, 3 and 4 carry the same
+three subjects as the 1856 Act's ss.1, 2 and 3. QP2510-Q2 therefore needs a **citation update, not
+new law**.
+
+> **STILL OPEN, deliberately:** whether **COGSA 2025 carries the Hague-Visby Rules unchanged**.
+> **Read that Act before authoring QP2510-Q2.** It is the single open research item on the donor set.
+
+## 26.5 Answer statistics — the paper sits at corpus density
+
+| Q | Steps | Core points | Words | w/cp |
+|---|---|---|---|---|
+| Q1 | 7 | 61 | 1,635 | 26.8 |
+| Q2 | 7 | 67 | 2,170 | 32.4 |
+| Q3 | 7 | 64 | 1,941 | 30.3 |
+| Q4 | 6 | 59 | 1,420 | 24.1 |
+| Q5 | 7 | 43 | 1,471 | 34.2 |
+| Q6 | 7 | 44 | 1,318 | 30.0 |
+| Q7 | 7 | 54 | 1,848 | 34.2 |
+| Q8 | 7 | **75** | 1,841 | 24.5 |
+| Q9 | 7 | 71 | 2,082 | 29.3 |
+| **Paper** | **62** | **538** | **15,726** | **29.2** |
+
+**Paper mean 29.2 against the corpus centre of 29.4.** The 450–650 band warning fires on all nine
+and remains **uncalibrated**; it is not evidence of verbosity here. The validator was **not**
+changed.
+
+## 26.6 Whole-paper layering review — Q5 and Q6 were **NOT** changed
+
+§25 asked whether Q5 is over-layered. **Measured against the finished paper, it is not.** Q5 sits at
+**34.2 w/cp — identical to Q7**, and its absolute length is the 4th shortest of nine. It carries the
+*fewest core points* (43), which is a property of the question rather than of the writing. **No
+change made.** Q6 at 30.0 is at the corpus centre. **No change made.**
+
+Three questions did get layering passes at authoring time: Q7 (surveyor regime moved to Study
+Guide), Q3 (two passes, 2,368 → 1,941), Q2 (route steps 6–7 colour moved to Study Guide).
+
+## 26.7 QP2510 — **0/9 → 9/9 Tier D. Metadata only.**
+
+`reuse_tier: D` plus `reused_from` on an unsolved spec is the established donor pointer (precedent:
+QP2511-Q5 → QP2603-Q6). **No `answer_status` was touched. QP2510 is NOT built and NOT solved.**
+
+| QP2510 | Donor | Class | Temporal delta | Production-usable? |
+|---|---|---|---|---|
+| Q1 | QP2403-Q1 | EXACT | cyber cross-ref Rev.2 → **Rev.3** | yes, one cross-ref update |
+| Q2 | QP2403-Q2 | EXACT | **statutes replaced 10 Sep 2025** | **NO — read COGSA 2025 first** |
+| Q3 | QP2403-Q3 | EXACT | none | **yes, as is** |
+| Q4 | QP2403-Q4 | EXACT | none | **yes, as is** |
+| Q5 | QP2403-Q5 | NEAR (marks token) | **Rev.2 → Rev.3, five → six elements** | substantive update to limb (B) |
+| Q6 | QP2403-Q6 | EXACT | none | **yes, as is — cleanest on the paper** |
+| Q7 | QP2403-Q7 | NEAR (**6+4+6 → 6+5+5**) | A.1187(33) currency check | yes, **re-weight** limbs (b)/(c) |
+| Q8 | QP2403-Q8 | EXACT | none | **yes, as is** |
+| Q9 | QP2403-Q9 | EXACT | **MLC 2022 amendments in force** | substantive update — **4 requirements to ADD** |
+
+The four Q9 additions are **exact rather than approximate**, because they came from textual
+comparison: social connectivity and internet access; appropriately-sized PPE and the precedence of
+engineering controls over PPE; annual reporting of seafarer deaths to the ILO for a global register;
+the registered owner on the financial security certificate.
+
+**Five QP2510 intake temporal flags were corrected**, because the reuse map was reporting "stable"
+for three questions carrying a material legal delta. That is precisely the failure this corpus keeps
+hitting, and it is now visible in the generated artefact instead of hidden in it.
+
+## 26.8 Two guard changes, each positive-controlled and then restored
+
+- **`known_traps_check.py`** — the HATC guard used `'hatc' in src.lower()`, a substring test that
+  also fires on **"hatches"**. QP2403-Q3 tripped it the moment it quoted York-Antwerp Rule II. It is
+  now a **word-boundary** match. **Proved both ways:** injecting a real HATC source fires it;
+  "hatches" alone does not. A *precision* fix — no true positive is lost.
+- **`ui_behaviour_test.cjs`** — QP2403 fixture added; **61/61 pass**. The leak probe is `2011/SR8`,
+  a host provider code unique to Q8 on this paper. **Proved by injection:** putting that code into a
+  search alias and rebuilding makes the probe fail.
+
+## 26.9 Sweeps
+
+| Sweep | Result |
+|---|---|
+| Corpus transition | **252 / 72 / 180** — verified, not assumed |
+| questions-2024 deep links | **exactly 9**, all QP2403, no others, no dead anchors |
+| Determinism | **0 byte differences**, 18 artefacts, double build |
+| Year survival in reuse map | **11 papers in 2024, 11 in 2025** — no year disappeared |
+| Post-sitting years in model answers | **zero** mentions of 2025 or 2026 anywhere |
+| QP2510 contamination | 2 hits, **both false positives** (FAL *2022 amendments*; the verb *govern*) |
+| Host recurrence codes in output | **0 of 19** across every generated file |
+| Candidate-facing field leak | none — the two field-name hits are in the build manifest, which no page fetches |
+| UI 1280 / 375 | 9 cards, 5 modes, Answer pre-selected, search narrows live, all 9 anchors resolve, **no console errors, no horizontal overflow** |
+| Regression | six 2026 papers, QP2508, their specs, the 2025/2026 year sheets and the public sample **byte-identical** |
+| Security V2 | **untouched** |
+
+## 26.10 NEXT SESSION — **QP2510 OCTOBER 2025**
+
+Unambiguous on the data: QP2510 is the **only** unsolved paper at **9/9 Tier D**, and its donor is a
+paper solved in this session with a verification record for every question. Four of the nine reuse
+with no legal change at all.
+
+**Before authoring, do these three things:**
+
+1. **Read the Carriage of Goods by Sea Act 2025.** Establish whether it carries Hague-Visby
+   unchanged. This is the one open research item, and it blocks Q2.
+2. **Obtain MSC-FAL.1/Circ.3/Rev.3** (4 April 2025) for Q5 — six functional elements including
+   Govern.
+3. **Confirm whether A.1187(33) was still the current Non-exhaustive list** at October 2025.
+
+Then Q3, Q4, Q6 and Q8 reuse as is; Q1 and Q7 need one update each; Q2, Q5 and Q9 need substantive
+work. **Expected outcome: 72 → 81 solved.**
+
+## 26.11 Stop conditions still in force
+
+- **Do not** merge to `main`. **Do not** publish QP2403 or QP2508 into `/solvedQP/`.
+- **Do not** reopen Security V2 (`eaedfda`), Vercel, Razorpay or customer migration.
+- **Do not** commit or delete the source PDFs.
+- **Do not** mark QP2510 built. A donor is not a solved target.
+- **Write specs with LF line endings.** Both specs touched this session are LF — verified.
+- **The intake `temporal_review` field is a review prompt, never evidence.** It is now 0 for 9 on
+  this paper, and it failed in **both** directions — Q1 understated an obligation that was already
+  live.
+
