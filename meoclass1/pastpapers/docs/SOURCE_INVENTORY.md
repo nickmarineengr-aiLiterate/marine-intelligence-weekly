@@ -29,7 +29,7 @@
 | QP2502 | February 2025 | `FEBRUARY 2025.pdf` | EM - 2502 | 2 | 9 | 2 of 2 |
 | QP2503 | March 2025 | `MARCH 2025.pdf` | EM - 2503 | 2 | 9 | 2 of 2 |
 | QP2504 | April 2025 | `APRIL 2025.pdf` | EM - 2504 | 2 | 9 | 2 of 2 |
-| QP2506 | June 2025 | `JUNE 2025.pdf` | EM - 2506 | 2 | 9 | 2 of 2 |
+| QP2506 | June 2025 | `JUNE 2025.pdf` | EM - 2506 | 2 | 9 | ? of 2 |
 | QP2507 | July 2025 | `JULY 2025.pdf` | EM - 2507 | 3 | 9 | 2 of 3 |
 | QP2508 | August 2025 | `AUGUST 2025.pdf` | EM - 2508 | 2 | 9 | 2 of 2 |
 | QP2509 | September 2025 | `SEPTEMBER 2025.pdf` | EM - 2509 | 2 | 9 | 1 of 2 |
@@ -55,7 +55,7 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 
 ### Questions printing NO mark allocation
 
-**18 of 252**, across 6 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
+**17 of 252**, across 5 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
 
 | Question | Sitting | Title |
 |---|---|---|
@@ -64,7 +64,6 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 | QP2403-Q5 | March 2024 Q5 | Maritime Cyber Risk Management Guidelines |
 | QP2403-Q6 | March 2024 Q6 | Electronic Record Books under MARPOL |
 | QP2403-Q8 | March 2024 Q8 | Main Engine Failure to Respond to Bridge Control at Dock Gates |
-| QP2506-Q9 | June 2025 Q9 | Unseaworthy Vessels under the Merchant Shipping Act, 1958 |
 | QP2509-Q1 | September 2025 Q1 | Bauxite Casualties and Safe Carriage in Bulk |
 | QP2509-Q6 | September 2025 Q6 | Communication, Barriers, and Decarbonisation Work Hazards |
 | QP2509-Q8 | September 2025 Q8 | IMO and ILO Human Element Regimes, and Fatigue Guidance |
@@ -141,11 +140,11 @@ Examiner wording is reproduced exactly, errors included. Each is recorded in a n
 | QP2504-Q7 | Prints "How does vetting inspections contribute" (number disagreement). Reproduced as printed. |
 | QP2504-Q8 | Prints "What is P&I clubs?", "How does P&I clubs handle" and "filling a claim" (for "filing"). All reproduced as printed. |
 | QP2504-Q9 | The four limbs are printed as an unmarked list under a single printed (16); sub-part marks are null. Prints "MSC. FAL.1/Circ.3" with a space after "MSC." and "prone of cyber risks". Reproduced as printed. |
+| QP2506-Q2 | Prints "technical nature state, the general rules" - a comma the June sitting does not carry - and capitalises "Signature" and "Ratification" where June does not. Reproduced as printed. |
 | QP2506-Q3 | The three notes are printed as an unmarked list under a single printed (16). Sub-part marks are null. |
 | QP2506-Q4 | Both limbs sit under a single printed (16) at the end of limb (b)(iii); sub-part marks are null. |
-| QP2506-Q6 | Prints "be Included" with a capital I mid-sentence. Reproduced as printed. |
-| QP2506-Q7 | The three limbs sit under a single printed (16) at the end of limb (c); sub-part marks are null. |
-| QP2506-Q9 | ANOMALY: the source copy prints NO mark allocation for this question. Every other question on the paper carries one. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. The same question printed (16) at the August sitting. |
+| QP2506-Q7 | The paper prints (16) at the end of limb c) only. Read with instruction 2 (all questions carry equal marks) and the paper total, the (16) is taken as the value of the WHOLE question rather than of limb c) alone. The paper allocates no marks between a), b) and c); that ambiguity is preserved and not resolved on the paper itself. |
+| QP2506-Q8 | Limb A opens "How is Human Element issue addressed" where February and June print "Explain how Human Element issue is addressed". The demand is the same; the wording differs. |
 | QP2507-Q3 | Prints "Charter’s Liability Insurance" (for "Charterer’s") and mixes "(a)" with "b) c) d)" limb markers. Reproduced as printed. |
 | QP2507-Q8 | Prints "a ship is classes by two classification societies" (for "classed"), identically to the March sitting. Reproduced as printed. |
 | QP2507-Q9 | SOURCE EDITORIAL BLOCK: below the printed question the source copy inserts a centred, italic host heading "-  -  PROVIOUSLY ASKED  -  -  -" (the misspelling is the host's) followed by the March 2025 wording of the same question. That block is the host's own annotation, not examiner text, and is excluded from text_verbatim. It is recorded here because it is the host's own evidence of the March-to-July rewording. |

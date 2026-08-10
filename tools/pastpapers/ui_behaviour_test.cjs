@@ -314,6 +314,50 @@ const FIXTURES = {
     // bridge systems among the vulnerable onboard systems.
     narrow: ['bridge control astern', 'QP2510-Q8'],
   },
+  QP2506: {
+    probes: [
+      ['grim vane wheel', 'QP2506-Q1'],
+      ['tacit acceptance', 'QP2506-Q2'],
+      ['port of refuge', 'QP2506-Q3'],
+      ['scopic', 'QP2506-Q4'],
+      ['privity', 'QP2506-Q5'],
+      ['refloat', 'QP2506-Q6'],
+      ['very serious marine casualty', 'QP2506-Q7'],
+      ['msc.1/circ.1598', 'QP2506-Q8'],
+      ['unseaworthy', 'QP2506-Q9'],
+      // Temporal fingerprints. Each exists ONLY because this sitting is June
+      // 2025, so a regression to a donor's content would remove it and fail
+      // here rather than ship.
+      //
+      // The August 2025 donor teaches "assent is not commencement", because the
+      // 2025 Act was assented in the month of its own sitting. At June 2025 the
+      // Bill had been passed by neither House, so the point is one rung
+      // earlier. If this probe stops resolving, the donor's currency paragraph
+      // has come back.
+      ['a bill is not an act', 'QP2506-Q9'],
+      // The revoked predecessor. A.949(23) is the number nearly every note set
+      // still carries; A.1184(33) revoked it on 6 December 2023, eighteen
+      // months before this sitting. This probe guards against an answer
+      // regressing to the widely published wrong edition.
+      ['a.1184(33)', 'QP2506-Q3'],
+      // SCOPIC is new to the corpus with this paper; the version in force at
+      // the sitting is 2020 and the answer's figures are read from that text.
+      ['scopic 2020', 'QP2506-Q4'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['costa bulb', 'QP2506-Q1', 'Q1 (the answer never uses the trade name)'],
+      ['atl', 'QP2506-Q3', 'Q3 (the answer always writes actual total loss in full)'],
+      ['nagasaki spirit', 'QP2506-Q4', 'Q4 (the case is never named in the prose)'],
+    ],
+    regulation: ['msc.255(84)', 'QP2506-Q7'],
+    // Leak probe. 2022/JAN/Q7 is a host annotation printed against Q1 on THIS
+    // source copy. None of it may reach the shipped bytes.
+    recurrence: ['2022/jan/q7', 'QP2506-Q1'],
+    // Must narrow. 'rule vii' alone also resolves to Q8, whose A-VIII/1
+    // citation contains the same letters.
+    narrow: ['rule vii general average', 'QP2506-Q6'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';

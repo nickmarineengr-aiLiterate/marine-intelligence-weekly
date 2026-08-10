@@ -10,9 +10,9 @@ Scope honesty: every count below is scoped to the sittings MIW has actually tran
 | Year | Papers | Questions | Answers built |
 |---|---|---|---|
 | 2024 | 11 | 99 | 9 |
-| 2025 | 11 | 99 | 18 |
+| 2025 | 11 | 99 | 27 |
 | 2026 | 6 | 54 | 54 |
-| **Total** | **28** | **252** | **81** |
+| **Total** | **28** | **252** | **90** |
 
 Every paper sets nine questions and every question is recorded at 16 marks under printed instruction 2. **May is absent from the available MIW source set in all three years.**
 
@@ -55,8 +55,8 @@ A family is a connected component over two undirected edge kinds: an adjudicated
 | 3 | 2024&ndash;2025 | P&I Clubs - Funding, Cover and Claims Handling | June 2024 Q7 &rarr; February 2025 Q7 &rarr; April 2025 Q8 |
 | 3 | 2024&ndash;2026 | Hong Kong Convention and Indian Ship Recycling | October 2024 Q4 &rarr; November 2025 Q8 &rarr; March 2026 Q9 |
 | 3 | 2024&ndash;2026 | Classification Societies in Rule Formation, and Survey Types | December 2024 Q4 &rarr; September 2025 Q9 &rarr; June 2026 Q8 |
-| 3 | 2025&ndash;2026 | Casualty Investigation - Obligation, Code and Very Serious Casualty | June 2025 Q7 &rarr; January 2026 Q8 &rarr; April 2026 Q8 |
-| 3 | 2025&ndash;2026 | Unseaworthy Vessels under the Merchant Shipping Act, 1958 | June 2025 Q9 &rarr; August 2025 Q5 &rarr; February 2026 Q5 |
+| 3 | 2025&ndash;2026 | Casualty Investigation Code and VSMC | June 2025 Q7 &rarr; January 2026 Q8 &rarr; April 2026 Q8 |
+| 3 | 2025&ndash;2026 | Unseaworthy and Unsafe Ships under the Merchant Shipping Act 1958 | June 2025 Q9 &rarr; August 2025 Q5 &rarr; February 2026 Q5 |
 | 3 | 2025&ndash;2026 | CII - Concept, Commercial Impact and Shortcomings | August 2025 Q2 &rarr; September 2025 Q2 &rarr; February 2026 Q2 |
 | 3 | 2026 | WHO, Disease Vectors and Ship Health Certificates | January 2026 Q6 &rarr; March 2026 Q4 &rarr; April 2026 Q6 |
 | 2 | 2024&ndash;2026 | Uberrimae Fidei and Disclosure in Marine Insurance | January 2024 Q1 &rarr; July 2026 Q9 |
@@ -118,8 +118,8 @@ Every pair of questions inside one family, counted by the two sittings it joins.
 |---|---|---|---|
 | A | 0 | 0 | Not assigned. An existing canonical object fully covers the demand. |
 | B | 0 | 0 | Not assigned. An existing canonical object partly covers the demand. |
-| C | 83 | 69 | No family member with a built answer. New research. |
-| D | **7** | **12** | Family contains a question whose answer is built and verified. |
+| C | 83 | 64 | No family member with a built answer. New research. |
+| D | **7** | **8** | Family contains a question whose answer is built and verified. |
 
 **Why A and B are still zero, and why that is a finding rather than a gap.** Both tiers claim that an existing canonical object covers some or all of the examiner demand. That claim cannot be made without reading the object, and this session authors and verifies nothing. A keyword sweep of the Oral corpus was run for the 2025 intake and deliberately **not** used to assign B: no threshold produced a natural break, so any cut point would be arbitrary, and a manufactured B count is worse than none because it would be planned against. That sweep output survives per question in `reuse_evidence` as named candidate files to read, explicitly labelled discovery. Promotion to A or B belongs to the solving session, which will have read them.
 
@@ -132,22 +132,18 @@ Direction matters and is easy to get backwards: **the unsolved sitting is the ea
 | QP2401-Q1 | January 2024 Q1 | QP2607-Q9 | identical | stable |
 | QP2401-Q5 | January 2024 Q5 | QP2607-Q3 | identical | stable |
 | QP2402-Q6 | February 2024 Q6 | QP2606-Q6 | identical | stable |
-| QP2404-Q7 | April 2024 Q7 | QP2508-Q4, QP2601-Q9, QP2602-Q4, QP2604-Q9 | identical | stable |
+| QP2404-Q7 | April 2024 Q7 | QP2506-Q8, QP2508-Q4, QP2601-Q9, QP2602-Q4, QP2604-Q9 | identical | stable |
 | QP2408-Q9 | August 2024 Q9 | QP2606-Q5 | identical | stable |
 | QP2410-Q4 | October 2024 Q4 | QP2603-Q9 | identical | **HIGH** |
 | QP2412-Q4 | December 2024 Q4 | QP2606-Q8 | identical | stable |
-| QP2502-Q2 | February 2025 Q2 | QP2508-Q4, QP2601-Q9, QP2602-Q4, QP2604-Q9 | reworded | stable |
+| QP2502-Q2 | February 2025 Q2 | QP2506-Q8, QP2508-Q4, QP2601-Q9, QP2602-Q4, QP2604-Q9 | identical | stable |
 | QP2502-Q9 | February 2025 Q9 | QP2606-Q7 | identical | stable |
-| QP2506-Q2 | June 2025 Q2 | QP2508-Q7, QP2602-Q7, QP2603-Q1 | identical | stable |
-| QP2506-Q7 | June 2025 Q7 | QP2601-Q8, QP2604-Q8 | identical | stable |
-| QP2506-Q8 | June 2025 Q8 | QP2508-Q4, QP2601-Q9, QP2602-Q4, QP2604-Q9 | reworded | stable |
-| QP2506-Q9 | June 2025 Q9 | QP2508-Q5, QP2602-Q5 | identical | **HIGH** |
 | QP2509-Q2 | September 2025 Q2 | QP2508-Q2, QP2602-Q2 | identical | **MEDIUM** |
 | QP2509-Q3 | September 2025 Q3 | QP2601-Q3, QP2604-Q3, QP2607-Q5 | identical | stable |
 | QP2509-Q9 | September 2025 Q9 | QP2606-Q8 | identical | stable |
 | QP2511-Q5 | November 2025 Q5 | QP2603-Q6 | identical | stable |
 | QP2511-Q8 | November 2025 Q8 | QP2603-Q9 | identical | **HIGH** |
-| QP2511-Q9 | November 2025 Q9 | QP2508-Q7, QP2602-Q7, QP2603-Q1 | identical | stable |
+| QP2511-Q9 | November 2025 Q9 | QP2506-Q2, QP2508-Q7, QP2602-Q7, QP2603-Q1 | identical | stable |
 
 ## 6. TEMPORAL REVIEW
 
@@ -160,13 +156,13 @@ An earlier answer must **not** be corrected to current law. It answers the exami
 | Year | Stable | Review required | HIGH | MEDIUM |
 |---|---|---|---|---|
 | 2024 | 74 | **16** | 9 | 7 |
-| 2025 | 61 | **20** | 10 | 10 |
-| **Total** | 135 | **36** | 19 | 17 |
+| 2025 | 53 | **19** | 9 | 10 |
+| **Total** | 127 | **35** | 18 | 17 |
 
 | Risk class | Count |
 |---|---|
 | IMO INSTRUMENT IN FLUX | 15 |
-| INDIAN STATUTE BOUNDARY | 10 |
+| INDIAN STATUTE BOUNDARY | 9 |
 | GUIDELINE EDITION | 6 |
 | CONVENTION NOT YET IN FORCE | 3 |
 | RECENT SOLAS CHAPTER | 1 |
@@ -203,7 +199,6 @@ An earlier answer must **not** be corrected to current law. It answers the exami
 | QP2504-Q3 | April 2025 Q3 | MEDIUM | GUIDELINE EDITION |
 | QP2504-Q5 | April 2025 Q5 | HIGH | INDIAN STATUTE BOUNDARY |
 | QP2504-Q6 | April 2025 Q6 | MEDIUM | IMO INSTRUMENT IN FLUX |
-| QP2506-Q9 | June 2025 Q9 | HIGH | INDIAN STATUTE BOUNDARY |
 | QP2507-Q2 | July 2025 Q2 | MEDIUM | IMO INSTRUMENT IN FLUX |
 | QP2507-Q9 | July 2025 Q9 | HIGH | INDIAN STATUTE BOUNDARY |
 | QP2509-Q2 | September 2025 Q2 | MEDIUM | IMO INSTRUMENT IN FLUX |
@@ -221,14 +216,13 @@ Not calendar order. Calendar order would research the same family several times 
 
 | Paper | Sitting | Tier D | Family reach | Temporal flags |
 |---|---|---|---|---|
-| QP2506 | June 2025 | **4 / 9** | 5 | 1 |
-| QP2511 | November 2025 | **3 / 9** | 5 | 2 |
 | QP2509 | September 2025 | **3 / 9** | 4 | 2 |
-| QP2502 | February 2025 | **2 / 9** | 7 | 2 |
+| QP2511 | November 2025 | **3 / 9** | 4 | 2 |
+| QP2502 | February 2025 | **2 / 9** | 6 | 2 |
 | QP2401 | January 2024 | **2 / 9** | 3 | 2 |
-| QP2404 | April 2024 | **1 / 9** | 8 | 1 |
-| QP2410 | October 2024 | **1 / 9** | 4 | 4 |
+| QP2404 | April 2024 | **1 / 9** | 6 | 1 |
 | QP2402 | February 2024 | **1 / 9** | 3 | 2 |
+| QP2410 | October 2024 | **1 / 9** | 3 | 4 |
 | QP2412 | December 2024 | **1 / 9** | 2 | 0 |
 | QP2408 | August 2024 | **1 / 9** | 0 | 2 |
 | QP2507 | July 2025 | **0 / 9** | 8 | 2 |
