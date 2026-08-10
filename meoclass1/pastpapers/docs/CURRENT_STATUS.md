@@ -1,9 +1,17 @@
 # CURRENT STATUS — MEO Class I Written Questions / 2026 solved, QP2508 solved, 2024-2025 intake complete
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-10, at the close of the **QP2508 AUGUST 2025 SOLVED-PAPER PRODUCTION** session. Read this first.
+Last updated: 2026-08-10, at the **QP2403 MARCH 2024 CHECKPOINT**. Read this first.
 
-> # **§24 IS THE NEWEST SECTION. READ IT FIRST.**
+> # **§25 IS THE NEWEST SECTION. READ IT FIRST.**
+>
+> **QP2403 March 2024 is a CHECKPOINT: 2 of 9 authored, paper NOT built, toolchain RED by design.**
+> Branch `pastpapers/qp2403-founder-review`. The next session **finishes QP2403** and must not redo
+> the source re-read, the QP2510 pair audit, the tier classification or the temporal sweep, all of
+> which are complete. **Three intake temporal flags were WRONG (Q2, Q5, Q9)**, one of them a
+> statutory boundary the corpus had not seen. Solved count is **unchanged at 63**.
+
+> # **§24 — superseded by §25, still current for the solved corpus.**
 >
 > **QP2508 August 2025 is SOLVED — 63 of 252 questions built, 7 solved papers.**
 > Branch `pastpapers/qp2508-founder-review`. Next session is **QP2403 March 2024**.
@@ -2199,3 +2207,159 @@ opposite workload from QP2508, which will test the pipeline where QP2508 did not
 - **Do not** reopen Security V2 (`eaedfda`), Vercel, Razorpay or customer migration.
 - **Do not** merge to `main`. **Do not** publish QP2508 into `/solvedQP/`. Founder review first.
 - **Do not** commit or delete the source PDFs.
+
+---
+
+# §25 — QP2403 MARCH 2024: CHECKPOINT, NOT COMPLETE. 2026-08-10
+
+> **§25 IS NOW THE NEWEST SECTION. READ IT BEFORE §24.**
+>
+> **QP2403 is 2 of 9 authored. The paper is NOT built and the toolchain is RED by design.**
+> This is a deliberate checkpoint on the QP2606 precedent — stop rather than lower verification
+> quality — not a failure and not a partial claim of completion.
+
+Branch **`pastpapers/qp2403-founder-review`**, cut from `dedce2c` (the QP2508 completion).
+Security V2 untouched at `eaedfda`. Nothing merged, nothing published, no source PDF committed.
+
+## 25.1 What exists now — FACT
+
+| | Before | After |
+|---|---|---|
+| Papers | 28 | 28 |
+| Question instances | 252 | 252 |
+| **Solved (built + page generated)** | **63** | **63 — unchanged** |
+| QP2403 questions authored in the spec | 0 | **2 (Q5, Q6)** |
+| QP2403 page generated | no | **no** |
+
+**Every generated artefact is byte-identical to `dedce2c`.** `index.html`, the manifest,
+`questions-2024.html`, `topics-2024.html`, the January sample and all seven built paper pages were
+regenerated during testing and then **restored**, deliberately, so that the committed tree
+contains **no dead link to a QP2403 page that does not exist**. The only content change is
+`specs/QP2403.json` plus new verification records.
+
+**The toolchain is RED and the reason is exactly one thing:** the corpus is **all-or-nothing per
+paper**. `health_check.py`, `audit_paper.py` and `ui_behaviour_test.cjs` all require a generated
+page for any spec containing a built question. Two authored questions therefore fail the build
+until the other seven are authored. **Nothing else is broken.** `validate_spec.py` on QP2403 is
+**0 errors, 2 warnings** (both the known word-band warning).
+
+> **This is itself a finding worth recording: there is no valid "half-authored paper" state.**
+> A future session must either finish a paper or leave its spec at intake. Reverting verified
+> content to make a checker green was rejected as the wrong trade.
+
+## 25.2 The three temporal findings — and the intake model is now 4 for 4 wrong
+
+The mandatory sitting-date sweep was run on **all nine** questions, not only the authored ones.
+**The intake recorded `STABLE / LOW` on all nine. Three are wrong, and all three are material.**
+
+| Q | Intake | Truth at March 2024 |
+|---|---|---|
+| **Q2** Bill of lading | STABLE/LOW | **WRONG.** Governed by the **Indian Bills of Lading Act 1856** and the **Indian Carriage of Goods by Sea Act 1925** (as amended 1993, Hague-Visby). Both repealed in 2025 — Bills of Lading Act 2025 (assent 24 July 2025), Carriage of Goods by Sea Act 2025 (assent 8 August 2025). |
+| **Q5** Cyber | STABLE/LOW | **WRONG.** `MSC-FAL.1/Circ.3/Rev.2` (7 June 2022) governs — **FIVE** functional elements. Rev.3 (4 April 2025) adds **Govern** for six, thirteen months *after* the sitting. |
+| **Q9** MLC 2006 | STABLE/LOW | **WRONG.** The **2022 amendments** entered into force **23 December 2024**, nine months *after* the sitting. Social connectivity/internet, sized PPE, registered-owner financial-security certificates and ILO fatality reporting are **not** requirements at this sitting. |
+
+> **A NEW INDIAN STATUTORY BOUNDARY.** Every prior finding concerned the MS Act 1958 → 2025
+> boundary of 15 March 2026. Q2 crosses a **different** pair of Acts on a **different** date, in
+> mid-2025 — and it falls **between QP2403 and QP2510**. §23.6's framing that "reuse runs
+> backwards across one boundary" is **incomplete**. Commencement dates of the two 2025 Acts were
+> **not** established and must be before QP2510-Q2 is answered; assent is not commencement.
+
+**Two further currency facts, not flag corrections:** the **FAL Convention Maritime Single Window
+became mandatory 1 January 2024**, two months before this sitting (Q1 must use it); and
+**A.1187(33), 6 December 2023** replaced the 2021 Non-exhaustive List of Obligations under the III
+Code, three months before the sitting (Q7). **IACS UR E26/E27 were NOT in application** — the
+1 January 2024 date was withdrawn and the revised requirements apply from **1 July 2024**.
+
+> **Treat `temporal_review` as populated at intake as UNEVALUATED, not as evidence.** It has now
+> failed on QP2508-Q3 and on three QP2403 questions. Only the sweep is evidence.
+
+## 25.3 Source re-read and the QP2403 to QP2510 pair audit — both COMPLETE
+
+**Full visual re-read of all 3 pages at 150 dpi against the text layer: NO discrepancy, NO
+transcription correction required.** New provenance fact: the source PDF was generated
+**1 April 2024**, days after the sitting — a tighter sitting bound than any 2026 paper has.
+
+**All nine pairs verified directly by string comparison, not inherited from the previous report.
+The one-to-one claim HOLDS.** Seven **EXACT**; two **NEAR differing only in a printed marks
+token** — Q5 (inserted `(16)`, semantically identical) and Q7 (**6+4+6 → 6+5+5**, identical
+words: a new sub-class, *NEAR by limb-mark redistribution*).
+
+> **But "the same paper twice" is true of the QUESTIONS and false of the ANSWERS.** Four of the
+> nine carry a temporal delta across the nineteen months and **three are material (Q2, Q5, Q9)**.
+> A session that treats QP2510 as a copy job will ship three legal errors. **Q6 is the cleanest
+> donor on the paper**: identical question, identical marks, no temporal movement.
+
+## 25.4 Reuse classification — zero Tier D, and one rejected near-miss
+
+All 63 built answers reviewed by examiner demand. **Tier B x2 (Q3 general average, Q7 III Code),
+Tier C x7, Tier D x0.** `reused_from` is null on all nine. **No false donor was manufactured.**
+
+`QP2606-Q5` route step 6 ("Cyber risk") would have been offered by any lexical search for Q5. It
+was rejected on two independent grounds — it is one step of an ISM Code question (the
+QP2602-Q3/QP2607-Q1 *shape_only* precedent), and it is written on **Rev.3**, so importing it would
+have placed a **non-existent functional element** in a March 2024 answer.
+
+## 25.5 What was authored, and what "open the source" caught
+
+**Q5** — cyber risk. `MSC-FAL.1/Circ.3/Rev.2` read in full. **Q6** — electronic record books.
+`MEPC.312(74)` read in full. Both `Pilot Review Ready`, both with verification records.
+
+**Eighth consecutive paper on which reading the instrument caught a summary error.** An automated
+summary of MEPC.312(74) offered the **Ballast Water Record Book** (not MARPOL), "engine
+maintenance and fuel consumption logs" (not a MARPOL record), and **omitted the Cargo Record Book,
+the ODS Record Book and the NOx Technical Code engine parameter book**. The correct list at annex
+2.1 is **seven** items. Limb (a) asks the candidate to name them *all*.
+
+## 25.6 Measured statistics so far
+
+| | Q5 | Q6 |
+|---|---|---|
+| Route steps | 7 | 7 |
+| Core points | 43 | 44 |
+| Model answer words | 1471 | 1318 |
+| Words per core point | 34.2 | 30.0 |
+| Study notes words | 1564 | 1464 |
+| Retrieval cards | 10 | 10 |
+| Reverify A / B / C | 0 / 1 / 3 | 0 / 1 / 2 |
+
+Both exceed the 450–650 band, as 59 of the previous 63 do. **No validator change was made** and
+no scoring proposition was trimmed to hit a number. Q5 at 34.2 words per core point is above the
+corpus median of 29.4 and a further layering pass is a reasonable review action.
+
+## 25.7 NEXT SESSION — finish QP2403. Do not start another paper.
+
+**Everything below is already done and must NOT be redone:** the source re-read, the pair audit,
+the tier classification, the temporal sweep on all nine, the source-demand map, and Q5 and Q6.
+They are recorded in **`verification/QP2403/DEDUP_AND_SOURCE_PLAN.md`**, `Q5.md` and `Q6.md`.
+
+**Author Q1, Q2, Q3, Q4, Q7, Q8, Q9**, then build, recompute the reuse map, and run the QP2510
+donor test. Suggested order, cheapest first:
+
+1. **Q7** — `A.1070(28)` has already been **read in full** and the paragraph map is in the plan
+   (objective para 1, strategy para 3, scope para 6, KPIs paras 42–44, coastal paras 45–51, port
+   paras 52–63). Note the trap: the Code's scope at para 6 is **six subject areas and does NOT
+   include maritime security**, while IMSAS audits **nine treaty instruments**. Both answer
+   "which instruments".
+2. **Q3** — Tier B support from `QP2607-Q5`, `QP2602-Q6`, `QP2606-Q3`. What is *not* covered and
+   must be researched: **contribution among the parties** (contributory values, GA bond and
+   guarantee, the adjustment process) and limb (b)'s worked examples.
+3. **Q9, Q2** — the two India/ILO temporal questions. The boundary facts are established; the
+   substantive research is not.
+4. **Q1, Q4, Q8** — expect `ENGINEERING_JUDGEMENT` and `C_ACCEPTED_LIMITATION` to dominate; Q4 and
+   Q8 sit substantially outside the regulatory corpus, like `QP2606-Q6`. Do not manufacture
+   citations for them.
+
+Then: build, determinism double-build, `build_reuse_map.py` (verify **no year disappears** — the
+§24.5 per-paper fix), the QP2510 0/9 → 9/9 Tier D test, UI review at 1280/375, a `FIXTURES` entry
+for QP2403 in `ui_behaviour_test.cjs`, and the sample regression.
+
+## 25.8 Stop conditions still in force
+
+- **Do not** mark QP2510 built. A donor is not a solved target, and three of its nine questions
+  need a substantive legal update rather than a re-anchor.
+- **Do not** start any other paper. **Do not** ingest another year.
+- **Do not** reopen Security V2 (`eaedfda`), Vercel, Razorpay or customer migration.
+- **Do not** merge to `main`. **Do not** publish QP2403 or QP2508 into `/solvedQP/`.
+- **Do not** commit or delete the source PDFs.
+- **Write specs with LF line endings.** A patch script writing CRLF was caught this session; the
+  rest of the corpus is LF and content-hashed comparisons depend on it.
