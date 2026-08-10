@@ -1,9 +1,23 @@
 # CURRENT STATUS — MEO Class I Written Questions / 2026 solved, QP2508 and QP2403 solved, 2024-2025 intake complete
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-10, at **QP2403 MARCH 2024 COMPLETE**. Read this first.
+Last updated: 2026-08-10, at **QP2510 RESEARCH CHECKPOINT**. Read this first.
 
-> # **§26 IS THE NEWEST SECTION. READ IT FIRST.**
+> # **§27 IS THE NEWEST SECTION. READ IT FIRST.**
+>
+> **QP2510 October 2025 is a RESEARCH CHECKPOINT: every temporal blocker resolved against primary
+> sources, but NO answer authored. NOT built, NOT solved.** Branch
+> `pastpapers/qp2510-founder-review`. Corpus unchanged at **252 / 72 / 180**.
+>
+> Headline: **the Carriage of Goods by Sea Act 2025 does NOT carry the Hague-Visby position
+> unchanged.** It redefines "goods" to *include* live animals and deck cargo, omits Article IV bis,
+> adds a three-month judicial extension of the time bar, and re-letters Article I throughout.
+>
+> A **fourth** item was found and closed: **A.1187(33) was still current at the sitting.** Its
+> successor A.1208(34) was adopted **3 December 2025 — after the paper** — so citing it would be
+> future-date contamination.
+
+> # **§26 — superseded by §27 for the QP2510 handover; still current for the solved corpus.**
 >
 > **QP2403 March 2024 is COMPLETE: 9 of 9 authored, built, toolchain ALL STAGES PASS.**
 > Branch `pastpapers/qp2403-founder-review`. Solved count **63 → 72 of 252**; 180 unsolved.
@@ -2558,3 +2572,187 @@ work. **Expected outcome: 72 → 81 solved.**
   this paper, and it failed in **both** directions — Q1 understated an obligation that was already
   live.
 
+
+---
+
+# §27 — QP2510 OCTOBER 2025: **RESEARCH COMPLETE, ANSWERS NOT AUTHORED.** 2026-08-10
+
+> **All three temporal blockers RESOLVED against primary sources, plus a fourth found and closed.**
+> **No answer authored. No `answer_status` touched. QP2510 is NOT built and NOT solved.**
+> Branch `pastpapers/qp2510-founder-review`, cut from `e7d8bc0`. Corpus unchanged at **252 / 72 / 180**.
+
+## 27.1 What this session did
+
+Ground truth first: baseline toolchain **ALL STAGES PASS** (28 specs, 8 solved papers, 76 warnings),
+corpus counted from spec truth at **252 / 72 / 180**. Then the four things the brief front-loaded:
+
+1. **Full source re-read** of `OCTOBER - 2025.pdf` — **zero transcription corrections**.
+2. **Direct QP2403 ↔ QP2510 pair audit** — confirms §26.7 exactly.
+3. **The "Q1 cyber → Rev.3" adjudication** — resolved, and it is neither a typo nor a defect.
+4. **The three temporal blockers** — all resolved from primary text.
+
+Everything is recorded in `verification/QP2510/DEDUP_AND_SOURCE_PLAN.md` and three research records.
+
+## 27.2 Source re-read and pair audit
+
+Every one of the nine `text_verbatim` strings occurs **character-for-character** in the source PDF
+(substring containment, not eyeballing). Header, serial `EM – 2510`, all four instructions and every
+printed mark match the spec. **No correction was required.**
+
+| Q | Ratio | Class | Delta |
+|---|---|---|---|
+| Q1 Q2 Q3 Q4 Q6 Q8 Q9 | **1.0000** | EXACT | none |
+| Q5 | 0.9947 | NEAR | **only** the printed `(16)` token — demand identical |
+| Q7 | 0.9926 | NEAR | wording identical; **6+4+6 → 6+5+5** |
+
+**Seven EXACT, two NEAR, neither NEAR carrying an examiner-demand change.**
+
+## 27.3 The "Q1 cyber → Rev.3" statement — **REPORT CORRECT, METADATA CORRECT**
+
+Tested, not assumed. **QP2403-Q1 (big data) genuinely carries the cyber circular in its own answer**
+— 10 hits on `MSC-FAL.1/Circ.3` and 10 on `Rev.2` across **eight surfaces**. The donor's own
+`temporal_review.notes[4]` says *"the cyber cross-reference must move to Rev.3"*.
+
+> Q1 cross-references the circular; Q5 **is** the circular question. Both §26.7 rows are right.
+> **Q1 still needs the Rev.2 → Rev.3 update on all eight surfaces.**
+
+## 27.4 **Q2 — THE BLOCKER IS CLOSED, AND THE ANSWER IS NO**
+
+Both 2025 Acts read **in full in the official Gazette of India**. India Code refused automated
+retrieval a third time (HTTP 302 to an HTML shell); the Gazette is the better source regardless.
+
+**COGSA 2025 does NOT carry the Hague-Visby position unchanged.** Its preamble enacts the rules
+*"with modifications"*, and four are material:
+
+1. **"Goods" now INCLUDES live animals and deck cargo** — Schedule Art **I(d)**, verbatim
+   *"including live animals … irrespective of whether such property is to be or is carried on or
+   under deck"*. **The donor asserts the Hague-Visby exclusion as a P1 claim. True for March 2024,
+   FALSE for October 2025.**
+2. **Article IV bis is not reproduced.** Schedule runs Articles **I–IX**; **zero** occurrences of
+   `bis`. The donor cites *"Article IV bis rules 1–3"* — no referent in Indian law at this sitting.
+3. **Three-month judicial extension of the one-year time bar** — Art III(6)(c) proviso. Hague-Visby
+   allows extension only by agreement.
+4. **Article I and Article IV(5) re-lettered throughout** — carrier I(a)→**I(b)**, contract
+   I(b)→**I(c)**, goods I(c)→**I(d)**, ship I(d)→**I(e)**, carriage I(e)→**I(a)**, recklessness
+   IV r.5(e)→**IV(5)(c)**.
+
+**Repeals from primary text:** BoLA 2025 **s.6(1)** repeals the 1856 Act; COGSA 2025 **s.12(1)**
+repeals the 1925 Act. **s.12(3) preserves s.331 and Part XA of the Merchant Shipping Act 1958** —
+correct at this sitting, since the MS Act 2025 did not commence until 15 March 2026. **Do not
+modernise that reference.**
+
+**BoLA 2025 confirmed as a re-enactment**: ss.2, 3, 4 carry the same subjects as the 1856 Act's
+ss.1, 2, 3. **There, the change really is a citation update.**
+
+**Assent-date discrepancy from §26.4 is RESOLVED**: the Gazette gives BoLA assent as **24 July
+2025** (matching the corpus record, not India Code's 17 June field) and COGSA as 8 August 2025.
+Commencement **10 September 2025** for both, corroborated independently of the donor.
+
+## 27.5 Q5 — cyber Rev.3, **both editions read**
+
+`MSC-FAL.1/Circ.3/Rev.3`, **4 April 2025**, read in full from the IMO CDN; **Rev.2 re-read** so the
+delta is measured. Approved by **MSC 108** (May 2024) and **FAL 49** (March 2025).
+
+| | Rev.2 — March 2024 | Rev.3 — October 2025 |
+|---|---|---|
+| Functional elements | **five**, annex 3.5 | **six** — **Govern added and placed FIRST** |
+| Vulnerable systems | **eight**, annex **2.1.1** | **nine**, annex **2.2.1** — Communication folded into Bridge; **Ship-port interfaces** and **Ship-to-shore integrated systems (MASS)** added |
+| IT / OT | annex 2.1.2, descriptive | annex **2.1**, formally **defined** with examples; OT/IT segregation duty at 2.2.2 |
+| New terms | — | **Computer Based System (CBS)**, cyber incident |
+
+**Three of the four printed limbs are touched.** The **OT definition example is a marine-engineering
+example** (main engine oil temperature forwarded to the control room) — the most useful sentence in
+the circular for limb (D), which asks for *"suitable examples"*.
+
+> **HIGHEST CONTAMINATION RISK ON THE PAPER.** The donor emphasises *"There are five functional
+> elements at this sitting, not six."* Reused verbatim that is a confident false statement.
+> **The trap must be INVERTED, not deleted.** The mnemonic goes **IPDRR → G-IPDRR**.
+
+## 27.6 Q9 — MLC, and a future-date trap already armed
+
+**2022 amendments in force 23 December 2024**, corroborated twice — the corpus instrument log
+(verified against the ILO 2026 Compendium) and the ILO's own notice. The 2022 consolidation is held
+locally. **All four additions located verbatim:**
+
+| Addition | Provision |
+|---|---|
+| Social connectivity, incl. internet access | **Standard A3.1 §17** |
+| Appropriately-sized PPE | **Standard A4.3 §1(b)** |
+| Engineering/design control has precedence over PPE | **Guideline B4.3.1 §3** |
+| Deaths reported annually to the ILO for a **global register** | **Standard A4.3 §5(a)** |
+| Registered owner on the financial security certificate | **Appendix A4-I(g)** |
+
+> **QUARANTINE — the 2025 MLC amendments are ADOPTED BUT NOT IN FORCE** (ILC 113th Session, June
+> 2025; expected December 2027). They were adopted **four months before this sitting**, so anything
+> written from current ILO pages will present them as law. The corpus already segregates them under
+> `not-yet-in-force/`. **They must not appear in an October 2025 answer.**
+
+## 27.7 **Q7 — a FOURTH item found, and the trap runs backwards**
+
+The brief's third pre-authoring item was to confirm A.1187(33)'s currency. It moved — but too late
+to matter, and in the dangerous direction.
+
+**Resolution A.1208(34), adopted 3 December 2025**, is the *2025 Non-exhaustive list of obligations
+under instruments relevant to the III Code*, and states **"REVOKES resolution A.1187(33)"** — read
+on the IMO CDN. **That is AFTER the October 2025 sitting.**
+
+> **A.1187(33) WAS still current at this sitting. RETAIN the donor's citation. Citing A.1208(34)
+> would be future-date contamination.** The A.1208(34) List gathers requirements entering into force
+> by 1 July 2026 — none of which existed for this candidate.
+
+This is the **§26.3 Q1 mirror-image error in a new place**: the risk is not staleness but an author
+in 2026 finding the successor presented as current. **Same 34th Assembly session as A.1206(34) and
+A.1207(34)** from the June 2026 paper — that session revised this whole family.
+
+## 27.8 Adaptation map — evidence-based, not expectation-based
+
+**Four A · two B · three C.**
+
+| Q | Class | Work |
+|---|---|---|
+| Q3 Q4 Q6 Q8 | **A — reuse as is** | re-verify at the sitting, re-key, re-anchor, sweep |
+| Q1 | **B** | Rev.2 → Rev.3 cross-reference on **eight surfaces**; substance stands |
+| Q7 | **B** | retain A.1187(33); re-weight limbs (b)/(c) for 6+5+5 |
+| Q2 | **C** | re-cite to the 2025 Acts; **invert the deck-cargo/live-animals proposition**; drop Art IV bis; add the three-month extension; re-letter all Article I citations |
+| Q5 | **C** | six elements with Govern; nine systems; annex renumbering; formal IT/OT definitions |
+| Q9 | **C** | integrate four additions **into** limb (a)'s sections; reverse the "not yet in force" prose; quarantine the 2025 set |
+
+## 27.9 Why this session stopped here
+
+The three temporal questions had to be researched **before** any of the nine could be written: Q2's
+result changes what limb (c) may assert, Q5's changes three of four limbs, Q9's changes half of limb
+(a). That research is done and primary-sourced. Authoring nine ~45 KB objects, nine verification
+records, the build, sweeps and regression on top of it was not achievable in the remainder of the
+session at the standard §59 sets — and §59 forbids lowering it because eight of nine look easy.
+
+**This is the §25 precedent.** QP2403 was deliberately stopped at 2 of 9 rather than lower
+verification quality; §26 records that the checkpoint held and its groundwork was *used, not redone*.
+
+> **The expensive, hard-to-redo work is the part that is finished.** Three resolved legal positions,
+> a verified source re-read, a confirmed pair audit, a per-question adaptation class, and four
+> primary instruments pulled and read.
+
+## 27.10 NEXT SESSION — **finish QP2510. Do not start another paper.**
+
+All four pre-authoring research items from §26.10 are **CLOSED**. Nothing blocks authoring.
+
+**Author Q2, Q5, Q9 first** (the three C-class), then Q7 and Q1, then Q3, Q6, Q4, Q8. Then build,
+recompute the reuse map, run the sweeps, UI review at 1280/375, add a `FIXTURES` entry for QP2510,
+double-build for determinism, and regression the eight solved papers.
+
+**Expected outcome: 72 → 81 solved, 252 / 81 / 171.**
+
+Mandatory for every question including class A — re-key ids/`verification_file`/in-paper
+`cross_links`; re-anchor sitting-relative prose; sweep the **assembled** spec, not the patch list;
+adjudicate every hit by hand (April: 55 hits, one defect).
+
+## 27.11 Stop conditions still in force
+
+- **Do not** merge to `main`. **Do not** publish into `/solvedQP/`. **Do not** reopen Security V2.
+- **Do not** commit or delete the source PDFs. The four instruments pulled this session were written
+  to the session scratchpad, **outside the repository**, and are not committed.
+- **Do not** mark QP2510 built. A donor is not a solved target, and it is still not solved.
+- **Write specs with LF line endings.** All four files added this session are LF — verified.
+- **The intake `temporal_review` field is a review prompt, never evidence.**
+- **The broken `validate_antipatterns.py` PostToolUse hook did not fire this session.** No `hooks`
+  key exists in any settings file; only historical transcripts mention it. Environment noise, gone.
