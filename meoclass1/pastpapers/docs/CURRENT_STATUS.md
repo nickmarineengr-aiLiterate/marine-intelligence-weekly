@@ -3,6 +3,44 @@
 **Canonical restart document for the Past Written Papers product.**
 Last updated: 2026-08-10, at **QP2510 RESEARCH CHECKPOINT**. Read this first.
 
+---
+
+> ## THIS FILE IS **STATE**, NOT **POLICY** — added 2026-08-10
+>
+> Stable policy now lives in governed protocol files. Start from
+> **[`PRODUCTION_PROTOCOL_INDEX.md`](PRODUCTION_PROTOCOL_INDEX.md)**, which defines precedence
+> and routing:
+>
+> | File | Owns |
+> |---|---|
+> | [`PASTPAPER_PRODUCTION_PROTOCOL.md`](PASTPAPER_PRODUCTION_PROTOCOL.md) | sources, spec→build, learning architecture, branch/review rules |
+> | [`TEMPORAL_AND_DONOR_VERIFICATION_PROTOCOL.md`](TEMPORAL_AND_DONOR_VERIFICATION_PROTOCOL.md) | sitting-date truth, donor reuse, recurrence, contamination sweeps |
+> | [`EXECUTION_EFFICIENCY_POLICY.md`](EXECUTION_EFFICIENCY_POLICY.md) | how work is executed on this project |
+> | [`QA_AND_HANDOVER_PROTOCOL.md`](QA_AND_HANDOVER_PROTOCOL.md) | validation, determinism, Git, report schema |
+>
+> **Where this file restates a rule that a protocol file also states, the protocol file
+> wins.** Sections here that read as policy — naming, architecture, template, provenance,
+> standing content rules, source-PDF policy, restart commands, environment quirks — are
+> retained as **historical record of how the rule arose**, not as the authoritative statement
+> of it.
+>
+> This file should answer only: *where are we now, what was completed, what is next, what is
+> blocked.* Do not add policy to it. Append state; do not rewrite history.
+>
+> ### ⚠ UNRESOLVED STATE CONFLICT — needs Founder reconciliation
+>
+> The header block below records QP2510 as a research checkpoint, **"NOT built, NOT solved"**,
+> with corpus **252 / 72 / 180**.
+>
+> The repository disagrees. `tools/pastpapers/health_check.py` run on 2026-08-10 at commit
+> `4d0487a` reports **9 solved papers, 19 intake**, **81 manifest deep links** and **171 intake
+> questions** — i.e. corpus **252 / 81 / 171**, consistent with QP2510 being solved and built.
+>
+> Nothing was changed to resolve this. The next production session must reconcile the two
+> before relying on either figure.
+
+---
+
 > # **§27 IS THE NEWEST SECTION. READ IT FIRST.**
 >
 > **QP2510 October 2025 is a RESEARCH CHECKPOINT: every temporal blocker resolved against primary
