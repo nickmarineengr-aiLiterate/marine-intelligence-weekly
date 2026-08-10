@@ -1,7 +1,7 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-10, after the **QP2510 BUILD** (§28). Read this first.
+Last updated: 2026-08-10, after the **QP2506 BUILD** (§29). Read this first.
 
 ---
 
@@ -9,13 +9,14 @@ Last updated: 2026-08-10, after the **QP2510 BUILD** (§28). Read this first.
 
 | | |
 |---|---|
-| **Corpus** | **252 questions / 81 solved / 171 unsolved** — 28 papers, **9 solved**, 19 answerless intake |
-| **Solved papers** | QP2601, QP2602, QP2603, QP2604, QP2606, QP2607 (2026) · QP2403 · QP2508 · QP2510 |
-| **Toolchain** | `health_check.py` green at `30de4b3`: 0 errors, 0 warnings |
-| **Branch at last checkpoint** | `pastpapers/qp2510-founder-review`, head `30de4b3` |
+| **Corpus** | **252 questions / 90 solved / 162 unsolved** — 28 papers, **10 solved**, 18 answerless intake |
+| **Solved papers** | QP2601, QP2602, QP2603, QP2604, QP2606, QP2607 (2026) · QP2403 · **QP2506** · QP2508 · QP2510 |
+| **Toolchain** | ALL STAGES PASS, 102 warnings; `health_check.py` 0 errors, 0 warnings; double build 18 artefacts, 0 byte differences |
+| **Branch** | `pastpapers/qp2506-founder-review`, cut from `8fa4f5f` |
 | **Published** | Nothing. No paper merged to `main`; all pages `noindex` and ungated |
-| **Next paper** | **QP2506 June 2025** — reasoning at §28.12 |
-| **Standing stop conditions** | §28.13 |
+| **Next paper** | **QP2509 September 2025** — reasoning at §29.6 |
+| **Open defect** | `build_reuse_map.py` reads the stored `reuse_tier` instead of computing it, understating Tier D by six questions corpus-wide — §29.3 |
+| **Standing stop conditions** | §28.13, unchanged |
 
 Everything below this table is **historical narrative**, newest section first. A section marked
 *superseded* was accurate when written and is retained as the record of how a decision arose — it is
@@ -66,7 +67,16 @@ not the present state.
 
 ---
 
-> # **§28 IS THE NEWEST SECTION. READ IT FIRST.**
+> # **§29 IS THE NEWEST SECTION. READ IT FIRST.**
+>
+> **QP2506 June 2025 is COMPLETE: 9 of 9 authored, built, toolchain ALL STAGES PASS.**
+> Corpus **252 / 90 / 162**, 10 solved papers. Branch `pastpapers/qp2506-founder-review`.
+> Headline: **the IMO places of refuge guidance is A.1184(33), which revoked A.949(23) on
+> 6 December 2023 — eighteen months BEFORE this sitting.** Second finding: the generated reuse
+> map understates Tier D because it reads a stored field instead of computing it (§29.3).
+> Next paper: **QP2509 September 2025** (§29.6).
+
+> # **§28 — superseded by §29 for the handover; still current for QP2510 and the rhythm finding.**
 >
 > **QP2510 October 2025 is COMPLETE: 9 of 9 authored, built, toolchain ALL STAGES PASS.**
 > Corpus **252 / 81 / 171**, 9 solved papers. Branch `pastpapers/qp2510-founder-review`, head
@@ -3041,3 +3051,129 @@ families to create, and the lightest temporal burden available to a paper with d
 - **The intake `temporal_review` field is a review prompt, never evidence.** It was 0 for 9 on the
   donor and was not trusted here; all nine classifications are evidence-based.
 - **A broad find-and-replace fallback is not safe on citation text.** See §28.6.
+
+---
+
+# §29 — QP2506 JUNE 2025, COMPLETE
+
+**Branch `pastpapers/qp2506-founder-review`**, cut from `8fa4f5f`, which is `30de4b3` plus the
+state reconciliation described in the header. Commits `f610818` (verify and author) and `fb22611`
+(build and refresh intelligence).
+
+## 29.1 State
+
+| | |
+|---|---|
+| Corpus | **252 / 90 / 162** — 10 solved papers, 18 intake |
+| Toolchain | **ALL STAGES PASS**, 102 warnings (76 baseline + the new QP2506 length warnings) |
+| Determinism | 18 generated artefacts, **0 byte differences** on a full double build |
+| Regression | QP2403, QP2508, QP2510 and all six 2026 papers **byte-unchanged**; no other spec touched |
+| UI | 5 modes, 6 numbered route headings identical across map / plan / answer / recall, **0px overflow at 1280 and 375**, no console errors, noindex and ungated, no host branding |
+
+## 29.2 Donor map as built
+
+Tier was recomputed from repository truth rather than taken from the intake metadata, which was
+frozen before QP2508 was solved.
+
+| Q | Tier | Donor used | Wording | Temporal work |
+|---|---|---|---|---|
+| Q1 Rudder efficiency devices | **C** | none — no donor and no adjacent built material anywhere | — | none |
+| Q2 Entry into force | **D** | QP2508-Q7 (Aug 2025) | EXACT task | nil; April 2025 worked example kept and re-checked |
+| Q3 Marine insurance short notes | **B** | QP2607-Q5, QP2606-Q3, QP2601-Q4 | — | **A.949(23) → A.1184(33)** |
+| Q4 SCOPIC and collision | **B** | QP2601-Q3, QP2602-Q1 | — | none; SCOPIC 2020 primary-verified |
+| Q5 LLMC | **B** | QP2508-Q1, QP2602-Q1 | — | none; stability argument inherited |
+| Q6 General average refloating | **D** | QP2508-Q6 (Aug 2025) | **EXACT, raw-identical** | nil |
+| Q7 Casualty investigation | **D** | QP2601-Q8 (Jan 2026) | EXACT | nil; only question with no 2025 donor |
+| Q8 Human element and fatigue | **D** | QP2508-Q4 (Aug 2025) | NEAR | nil |
+| Q9 Unseaworthy ships | **D** | QP2508-Q5 (Aug 2025) | EXACT task, June prints no marks | **12 surfaces rewritten** |
+
+## 29.3 **The reuse map understates Tier D, and it is a real defect**
+
+`tools/pastpapers/build_reuse_map.py` prints the definition *"Tier D — family contains a question
+whose answer is built and verified"* but its implementation reads the **stored `reuse_tier` field**
+off the spec rather than computing it. That field was written during the 2025 intake, before
+QP2403, QP2508 and QP2510 were solved, and was never recomputed.
+
+Six unsolved questions are misclassified as Tier C when their family already contains a built
+answer. True Tier D across the unsolved corpus is **25, not 19**:
+
+| Question | Stored | True | Donor |
+|---|---|---|---|
+| QP2401-Q9 | C | **D** | QP2403-Q7, QP2510-Q7 |
+| QP2404-Q6 | C | **D** | QP2508-Q6 |
+| QP2410-Q9 | C | **D** | QP2508-Q6 |
+| QP2412-Q9 | C | **D** | QP2403-Q7, QP2510-Q7 |
+| QP2504-Q9 | C | **D** | QP2403-Q5, QP2510-Q5 |
+| QP2506-Q6 | C | **D** | QP2508-Q6 — corrected in this paper's spec |
+
+**The generator was deliberately not changed on a paper branch.** Fixing it would alter the recorded
+Tier D counts for five other papers in a corpus-wide planning artefact, which is a governance
+change rather than a production one. Only QP2506's own stored field was corrected. **The ranking at
+§29.6 is computed from repository truth, not from the map.**
+
+## 29.4 Temporal review — the finding runs backwards
+
+> **The IMO Guidelines on places of refuge are resolution A.1184(33), adopted 6 December 2023.
+> Operative paragraph 4: "REVOKES resolution A.949(23)."**
+
+The revocation is **eighteen months before this sitting**, so the 2003 resolution that practically
+every circulating note set still quotes is not merely dated for June 2025 — it is wrong for it. It
+is freely available on an official domain, and an answer built on it would be internally coherent,
+confidently written and wrong. **The intake temporal review had this question as STABLE / LOW with
+no risk classes.** The sweep found it; the flag list did not.
+
+The Q9 hazard was also not the one predicted. Both donors are pre-15-March-2026 and already sit on
+the 1958 Act, so there was **no statute regression to undo**. The realised hazard came from the
+donor's *currency paragraph*: QP2508-Q5 turns on the 2025 Act having received assent on 18 August
+2025, in the month of its own sitting — which is after this paper. At June 2025 the Merchant
+Shipping Bill, 2024 had been introduced on **10 December 2024** and passed by **neither House**. The
+teaching point becomes **"a Bill is not an Act"**, one rung earlier on the same ladder, and it was
+rewritten across **twelve** surfaces. The intake flag predicted eight.
+
+Everything else was checked in both directions and recorded as checked, including the explicit
+finding that the MLC 2022 amendments in force 23 December 2024 neither add to nor subtract from Q8.
+
+## 29.5 What the sweeps caught that the patches did not
+
+The assembled-answer sweep found **four defects** the targeted patches had missed, all of one class:
+cross-references left pointing at the **donor paper**. Q2 carried three `see Q8` references to the
+August paper's GHG question — on this paper Q8 is human element — and a currency paragraph still
+naming *"the February 2026 donor"* after the donor had been changed to August 2025.
+
+This is the argument for the sweep being mandatory rather than a formality: the targeted patch
+fixes what you looked for, and the sweep finds what you did not.
+
+Every replacement in this session was written as an **asserted exact substitution required to fire
+exactly once**, never as a pattern with a fallback — §28.6.
+
+## 29.6 NEXT SESSION — **QP2509, SEPTEMBER 2025**
+
+Ranked across all 18 remaining unsolved papers, on Tier D **computed from repository truth**:
+
+| | |
+|---|---|
+| **Tier D** | **3 / 9** — Q2 ← QP2508-Q2/QP2602-Q2, Q3 ← QP2601-Q3/QP2604-Q3/QP2607-Q5, Q9 ← QP2606-Q8. Tied top with QP2511 |
+| **Nearest donor** | **QP2508, one month earlier** — the tightest donor interval anywhere in the corpus |
+| **Family reach** | 4 |
+| **Temporal burden** | 2 flags, and both are *clean adjudications* rather than boundary problems: Q5 HNS Convention **not yet in force** (a statement of fact) and Q2 CII in flux (bounded) |
+| **Hidden Tier B** | at least two more questions the tier field cannot see. **Q8** IMO and ILO human element regimes and fatigue — the largest family in the corpus is fully researched at QP2506-Q8. **Q7** Bunker Convention 2001 against CLC 92 — both verified at QP2607-Q2. Effectively **5 of 9 already covered** |
+
+**Why not QP2511 November 2025**, which ties on Tier D and reach: its flags are harder. Q8 is the
+**Hong Kong Convention newly in force**, which needs the entry-into-force position established
+against the Indian Recycling of Ships Act, and Q7 is FAL amendments. Its six Tier C questions are
+also genuinely new technical ground — LNG bunkering, torque-rich operation, SOLAS chapter XII, a
+propeller blade crack. That is valuable corpus breadth, and the engineering thinness this paper
+exposed at Q1 argues for it eventually, but it is the more expensive paper of the two.
+
+**Do not start it.** QP2506 is Founder-review only.
+
+## 29.7 Carried forward
+
+- **Q1 carries a validator warning that no claim is primary-verified, and that is correct.** No
+  primary instrument governs rudder hydrodynamics. It was not engineered away, and every efficiency
+  figure is an industry-quoted range with its dependency stated. **This is the corpus's first
+  naval-architecture question** and the solved set remains heavily weighted to law and management.
+- **17 claims are flagged for re-verification before publication, 0 blocking.** The two that matter
+  most are the A.1184(33) currency check and the Part XA / MS Act 1958 boundary shared with Q9.
+- **QP2506-Q8 is substantively identical to QP2508-Q4, QP2601-Q9, QP2602-Q4 and QP2604-Q9.** A
+  correction to any one of the five must be applied to all five.
