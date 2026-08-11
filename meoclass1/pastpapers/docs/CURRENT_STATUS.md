@@ -1,7 +1,18 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-11, after **QP2511 was completed 9/9, built and delivered**.
+Last updated: 2026-08-11, after the **pre-corpus-sync hygiene and freeze** session.
+
+> # QP PRODUCTION IS PAUSED AFTER QP2511.
+>
+> **Do not start another paper. Not QP2512, not QP2507, not any other.**
+> The queue in §7 remains recorded and is **PAUSED — DO NOT START UNTIL THE FOUNDER RESUMES**.
+>
+> Paused for: repository hygiene · MARPOL Annex VI corpus synchronisation ·
+> corpus-consumption integration · online product testing · parallel desktop production setup.
+>
+> **The next Founder action is the corpus sync**, not a paper — see
+> [`CORPUS_SYNC_AND_CONSUMPTION_PLAN.md`](CORPUS_SYNC_AND_CONSUMPTION_PLAN.md) §3.
 
 This file answers four questions and nothing else: *where are we now, what was completed,
 what is next, what is blocked.*
@@ -27,6 +38,8 @@ what is next, what is blocked.*
 | Content head | `a5f2551` on `pastpapers/qp2509-founder-review` — the newest solved-paper state |
 | Tooling head | `850bdde` on `workflow/pil-v1` — content head plus the Production Intelligence Layer |
 | This branch | `pastpapers/qp2511-founder-review` — **QP2511 COMPLETE 9/9, built and delivered.** Branched from `commerce/solvedqp-recovery` @ `462cfbc`. `staging/` has been retired |
+| **Head** | `fddae20` — verified this session. Tracked tree was clean before the freeze commits |
+| **Freeze baseline** | `fddae20` is the **proposed PARALLEL PRODUCTION BASELINE COMMIT**, awaiting Founder nomination — see [`PARALLEL_PRODUCTION_BOARD.md`](PARALLEL_PRODUCTION_BOARD.md) §2 |
 
 All git commands in this repository need `-c safe.directory=*`.
 
@@ -45,6 +58,8 @@ from a previous handover.
 | **Tier D (derived)** | **20** of the 135 unsolved carry a verified donor. Unchanged in total by QP2511: its own six left the unsolved set when it was solved, and solving it unlocked six replacements — most usefully `QP2512-Q1` (from `QP2511-Q3`) and `QP2512-Q2` (from `QP2511-Q4`), the adjacent December 2025 sitting |
 | **Delivery** | `solvedQP/` — **13 papers, 117 questions, 3 year sheets, 1 index** |
 | **Toolchain** | ALL STAGES PASS · `health_check.py` **0 errors, 0 warnings** · reuse map current |
+| **Security (offline)** | **62/62 pass** — `security.test.mjs` 34, `sessions.test.mjs` 28. Architecture recovered and proven offline; **nothing deployed, no secret set** |
+| **Corpus projection** | `RulesApp/repository/index/` is a **2026-07-25 snapshot at 788 nodes**. The canonical corpus at `F:\RulesApp\repository\` holds **1,006**, and `provision-truth-aliases.json` is **absent** from the MIW copy. **218 nodes behind** — this is the sync gap |
 
 ---
 
@@ -198,7 +213,12 @@ Fixed in `caf5020`.
 
 ---
 
-## 7. Next production target
+## 7. Production queue — **PAUSED**
+
+> **PAUSED — DO NOT START UNTIL THE FOUNDER RESUMES.**
+> Everything below is the queue **as recorded**, not work that is authorised. QP2512 is **not**
+> the next immediate work; the corpus sync is. The queue is kept intact so that no donor
+> intelligence is lost across the pause.
 
 **QP2511 — November 2025 — IS COMPLETE 9/9, BUILT AND DELIVERED.** Awaiting Founder review.
 
@@ -232,7 +252,15 @@ being rebuilt. Two of its questions now have direct donors from QP2511 itself (`
 > examination date against 3 December 2025 is the **first** task of that session, and if it cannot be
 > established the `A.12xx(34)` family must be treated as excluded rather than assumed available.
 
-**Do not start a new paper without a Founder go-ahead.**
+**Do not start a new paper. Production is paused — see the banner at the top of this file.**
+
+### Planned work while production is paused
+
+| Workstream | State | Plan |
+|---|---|---|
+| **MARPOL Annex VI corpus sync** | **NEXT — Founder action** | [`CORPUS_SYNC_AND_CONSUMPTION_PLAN.md`](CORPUS_SYNC_AND_CONSUMPTION_PLAN.md) |
+| Online product testing | planned, **not deployed** | [`ONLINE_TEST_PLAN.md`](ONLINE_TEST_PLAN.md) |
+| Parallel desktop production | designed, **not started, no branch created, no paper allocated** | [`PARALLEL_PRODUCTION_BOARD.md`](PARALLEL_PRODUCTION_BOARD.md) |
 
 ### Standing stop conditions
 
@@ -288,6 +316,9 @@ Write specs with LF line endings; CRLF corrupts content-hashed assets.
 | Source inventory | [`SOURCE_INVENTORY.md`](SOURCE_INVENTORY.md) |
 | Commercial and access architecture | [`SOLVED_QP_COMMERCIAL_ARCHITECTURE.md`](SOLVED_QP_COMMERCIAL_ARCHITECTURE.md) |
 | Corpus object reference contract | [`MIW_TRUE_SOURCE_CONTRACT.md`](MIW_TRUE_SOURCE_CONTRACT.md) |
+| **Corpus sync destination, consumption, pilot** | [`CORPUS_SYNC_AND_CONSUMPTION_PLAN.md`](CORPUS_SYNC_AND_CONSUMPTION_PLAN.md) |
+| **Online test plan / Planned-soon design** | [`ONLINE_TEST_PLAN.md`](ONLINE_TEST_PLAN.md) |
+| **Parallel desktop production / paper ownership** | [`PARALLEL_PRODUCTION_BOARD.md`](PARALLEL_PRODUCTION_BOARD.md) |
 | Learning architecture (frozen) | [`MIW_LEARNING_METHOD_DESIGN.md`](MIW_LEARNING_METHOD_DESIGN.md) |
 
 ### Where the old `§N` sections went
