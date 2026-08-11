@@ -1,18 +1,19 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-11, after the **pre-corpus-sync hygiene and freeze** session.
+Last updated: 2026-08-11, after the **first True Source consumer integration** session.
 
 > # QP PRODUCTION IS PAUSED AFTER QP2511.
 >
 > **Do not start another paper. Not QP2512, not QP2507, not any other.**
 > The queue in §7 remains recorded and is **PAUSED — DO NOT START UNTIL THE FOUNDER RESUMES**.
 >
-> Paused for: repository hygiene · MARPOL Annex VI corpus synchronisation ·
-> corpus-consumption integration · online product testing · parallel desktop production setup.
+> Paused for: repository hygiene · corpus-consumption integration · online product testing ·
+> parallel desktop production setup.
 >
-> **The next Founder action is the corpus sync**, not a paper — see
-> [`CORPUS_SYNC_AND_CONSUMPTION_PLAN.md`](CORPUS_SYNC_AND_CONSUMPTION_PLAN.md) §3.
+> **Corpus consumption is now integrated** (§2a) — the corpus is consumed read-only from its own
+> private repository and is NOT synced into MIW, so that prerequisite is discharged rather than
+> pending. **The next Founder actions are the provision-view decisions in §6**, not a paper.
 
 This file answers four questions and nothing else: *where are we now, what was completed,
 what is next, what is blocked.*
@@ -39,7 +40,7 @@ what is next, what is blocked.*
 | Tooling head | `850bdde` on `workflow/pil-v1` — content head plus the Production Intelligence Layer |
 | This branch | `pastpapers/qp2511-founder-review` — **QP2511 COMPLETE 9/9, built and delivered.** Branched from `commerce/solvedqp-recovery` @ `462cfbc`. `staging/` has been retired |
 | **Head** | `fddae20` — verified in the freeze session. Tracked tree was clean before the freeze commits |
-| **Consumer branch** | `workflow/corpus-consumer-integration` @ **`541c5e4`**, branched from the freeze head `9904af4`. First True Source consumer integration and honest product coverage. **Not merged to `main`** |
+| **Consumer branch** | `workflow/corpus-consumer-integration`, branched from the freeze head `9904af4`. First True Source consumer integration and honest product coverage. **Not merged to `main`** |
 | **Freeze baseline** | **The head of `workflow/corpus-consumer-integration` is the proposed PARALLEL PRODUCTION BASELINE**, awaiting Founder nomination. It supersedes the earlier `fddae20` proposal because it carries the consumer architecture every future paper branch should inherit. Named as a branch head rather than a hash, because a review correction would move it — see [`PARALLEL_PRODUCTION_BOARD.md`](PARALLEL_PRODUCTION_BOARD.md) §2 |
 
 All git commands in this repository need `-c safe.directory=*`.
