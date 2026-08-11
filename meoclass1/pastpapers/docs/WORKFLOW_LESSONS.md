@@ -1062,3 +1062,113 @@ scanning candidate-facing fields for sitting patterns after drafting, not only b
 Confirmed by inspection of `build_paper.py` that `subpart_marks_note`, `recurrence_adjudication`,
 `host_recurrence_hint`, `reuse_evidence` and `question_delta` are **not rendered at all** — recurrence
 reasoning recorded in those fields is safe. `sources` and `unresolved` **are** rendered.
+
+---
+
+## SECURITY, DEPLOYMENT AND DATA-MIGRATION LESSONS — 2026-08-12
+
+Added after the credential remediation and the first production cutover of Security V2. These are
+the reusable ones; the narrative is in `history/SESSION_HISTORY.md`.
+
+### A gate and the data it reads must be verified together
+
+The single most expensive lesson of the session. `middleware.js` was correct, well tested and
+enforced exactly the right rule. `miw:ent:*` was empty for all 100 accounts because the back-fill
+had never been run. Deploying the correct gate over absent data locked out every paying customer.
+
+**A correct gate over absent data fails exactly as hard as a broken gate, and it fails silently
+until a real user arrives.** Before deploying any authorisation layer, count the records it will
+read — not just the rules it will apply. The check is one SCAN and it would have taken a minute.
+
+### A silent build step is a security control that never runs
+
+`middleware.js` had imported `@vercel/edge` without declaring it since the day it was written. The
+build script is `echo 'Build successful'`, so nothing resolved the import until the Edge bundler
+tried — which had never happened, because the middleware had never deployed. The whole security
+boundary silently did not ship, and the visible symptom was a *public content exposure*, which
+looks nothing like a dependency error.
+
+**If a build step cannot fail, it is not verifying anything.** Where a security control depends on
+a build succeeding, prove the control is live by probing the deployed artefact, never by observing
+that the push succeeded.
+
+### Measure production; never carry a hypothesis forward as a fact
+
+Two sessions carried "the affected count is 28" and "some accounts will have been hash-upgraded by
+now". Both were wrong: 100 and zero. Neither had been measured, and both were plausible enough to
+survive review.
+
+**Any claim about production state that has not been measured this session is a hypothesis.** Write
+the read-only audit tool first. It is usually an hour, it is reusable, and it is the only thing
+that converts a briefing number into a fact.
+
+### Order remediation so that the fix cannot re-arm the vulnerability
+
+Setting `MIW_SESSION_SECRET` was the briefed fix for LAUNCH-BLOCK-2. Doing it first would have
+restored the login path and made 100 leaked passwords usable again — the missing secret was, by
+accident, the thing keeping them inert. The correct order was rotate, then remove the legacy
+verifier, then set the secret, then deploy.
+
+**Before fixing a broken-but-protective failure, ask what it is currently preventing.** A
+misconfiguration that fails closed is a control until you fix it.
+
+### Delete a compatibility path; do not disable it
+
+The legacy plaintext verifier was removed outright rather than flagged off, and the `legacy` return
+field was deleted so no caller could branch on the stored form. A second accepted representation of
+a credential is precisely how the original exposure stayed live for as long as it did.
+
+**Two accepted forms of a secret is one form too many.** Remove the branch, delete the flag it
+returned, and invert the test that asserted the old behaviour — in place, with a comment saying it
+was inverted and why.
+
+### Put the retry where the irreversible step is
+
+A rotation replaces the credential, then revokes sessions, then emails. The email is last because
+it is the only unrecoverable step: by the time it runs, the old password is dead and the new one
+exists nowhere else. A transient relay throttle at message 60 of 100 would have permanently locked
+out 60 paying customers.
+
+**Retry belongs inside the last call before the point of no return**, not around the whole
+operation. And authenticate the relay once, before the first record is touched — a bad key found
+at message 1 costs nothing.
+
+### For an unauthenticated endpoint, uniform responses are not enough — the timing must be uniform too
+
+The password-reset endpoint claims its throttle slot *before* checking whether the account exists.
+The other order returns "no such account" without a Redis write, making it measurably faster than
+"throttled", so the clock becomes the enumeration oracle that the identical response text was
+written to close.
+
+**A constant response string does not make an endpoint non-enumerable.** Make the work uniform, not
+just the words. The same applies to client-side error handling: a distinguishable network-failure
+message leaks what the server refused to.
+
+### A finite resource in a payment path is an outage with a delay on it
+
+`QB_PASSWORD_POOL` capped how many customers the product could ever take, and the throw happened
+*after* Razorpay captured the payment and after the fulfilment lock was claimed: money taken, no
+entitlement, no email, a webhook retrying the identical failure forever, and no alert.
+
+**Audit payment paths for anything that can run out.** If the resource has no reason to be
+pre-agreed — a credential does not — generate it instead of drawing it from a list.
+
+### Concurrency between agents is a real hazard on customer-impacting work
+
+Two sessions were committing to the same release branch. A merge reported "Already up to date"
+because another session had performed it seconds earlier. Two concurrent `rotate --confirm` runs
+would have rotated and emailed every customer twice, the first password dead on arrival.
+
+**Before any irreversible customer-facing batch, confirm no other session is running it.** Design
+the tool so a second run is a no-op — scoping rotation to unhashed records made a double run
+structurally safe, which mattered more than the process check that was skipped.
+
+### Secrets belong in a file, never in a conversation
+
+A git-ignored file was prepared precisely so operator credentials would not enter the transcript.
+They were pasted into the chat anyway, and had to be treated as exposed and scheduled for rotation
+— a second incident opened while closing the first. A live enumeration probe was then run against
+the Founder's real address, resetting their password unnecessarily.
+
+**Use throwaway addresses for probes against live endpoints**, and when a secure channel has been
+prepared, say plainly that using the insecure one creates new work rather than saving time.

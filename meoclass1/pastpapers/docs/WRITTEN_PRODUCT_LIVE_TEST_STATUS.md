@@ -500,3 +500,90 @@ History was **not** rewritten, deliberately. It would disturb every branch inclu
 desktop baseline `9c97359`, and it would not undo anything — the repository is public and anyone who
 cloned holds a copy. Credential invalidation was the remedy; pretending the blob never existed is
 not one.
+
+---
+
+## 19. POST-DEPLOYMENT WORK, SAME SESSION
+
+Three changes shipped after the remediation, each verified live.
+
+### 19.1 Cross-product funnel — `527677a`, `28405d2`
+
+Nothing under `/meoclass1/` linked to `/solvedQP/`, and nothing under `/solvedQP/` linked back. The
+two paid products were entirely disconnected, so all 100 Oral subscribers had no route to discover
+the Written product; the only entry was `/SQ/`, which a customer had to already know to visit.
+
+Compounding it, the Oral product contains a section called **"Written Question Notes"**
+(WA1/WA2/WA3) which *is* part of that subscription, while **"Solved Question Papers"** is a separate
+one. Two different things called "Written", in two products, with nothing explaining the difference.
+The Founder hit exactly this confusion looking for QP2601 in the Oral notes.
+
+- cross-sell banner at the foot of the Oral notes index and on the Oral hub
+- a fuller card in the Oral notes **header**, carrying the five-mode explainer verbatim from
+  `solvedQP/index.html` — the method is what is being sold, so it belongs in front of the paywall
+- CTA is the January 2026 sample, which opens with no login
+- `pay.html` now shows the bounce reason to **signed-in** customers too. It was rendered only in
+  the not-authenticated branch, so a subscriber bounced off `/solvedQP/` with
+  `reason=noentitlement` landed on the hub and was told nothing at all
+
+The five-mode copy is now duplicated in two files deliberately. If the marketing description of the
+method drifts from the description inside the product, the promise a buyer reads before paying
+stops matching what they get. `grep -rl "How every question is worked"` finds both.
+
+### 19.2 Subscriber ceiling removed — `28405d2`
+
+`assignNewPassword` drew from `QB_PASSWORD_POOL` by index and threw `pool_exhausted` past its end.
+The counter stood at **98**, so remaining capacity was whatever that Sensitive variable had left —
+a number nobody could see.
+
+The failure mode is what settled it: the throw happens **after** Razorpay captures the payment and
+after the fulfilment lock is claimed. Exhaustion meant money taken, no entitlement granted, no email
+sent, and a webhook retrying the identical failure forever, with nothing alerting anyone.
+
+Credentials are now generated per sale by the same `generatePassword()` used for the rotation: 16
+characters, 32-symbol ambiguity-free alphabet, `crypto.randomInt`, ~80 bits. No ceiling, no variable
+to top up, no exhaustion path — and a credential now exists only from the moment of sale rather than
+sitting in an environment variable for months beforehand.
+
+`QB_PASSWORD_POOL` is now unused by application logic. Left configured deliberately; deleting a
+production variable is a separate decision. `miw:password_counter` and `miw:pwd_assigned:*` are kept
+and still advanced so the issued-credential record stays continuous, but they gate nothing.
+
+### 19.3 Self-service password reset — `f626d6b`
+
+Replaces "Lost your password? Email us".
+
+**It issues a NEW password and cannot resend the existing one** — records are `sha256$salt$digest`
+and the plaintext exists nowhere. The link reads "Email me a new one" for that reason.
+
+An unauthenticated endpoint that changes a paying customer's credential is the highest-risk surface
+on the site. Three properties make it acceptable, each pinned by tests:
+
+| Property | Why it is load-bearing |
+|---|---|
+| **No enumeration** | One constant response for sent / throttled / no-account / malformed / exception. Verified live across three probes: byte-identical |
+| **Throttled**, 1 per address per 15 min | Anyone may reset anyone. Unthrottled it is a lockout weapon against a paying customer, anonymously, from a form |
+| **Sessions revoked** | If the reset happened because someone else got in, leaving their session alive remediates nothing |
+
+The throttle is claimed **before** the existence check. The other order returns "no account"
+without a Redis write, making it measurably faster than "throttled" — the timing then becomes the
+oracle that the identical response text was written to close.
+
+A throttled request is not a degraded path: the email sent moments ago still holds a working
+password, which is what keeps the generic response honest rather than merely vague. If the relay
+dies, the password **has** already changed and the customer was not told, so the throttle is
+released and they can retry at once instead of waiting out the window holding a credential they
+never received.
+
+Verified live on a disposable account: credential changed, new value a hash, throttle held on the
+second attempt, entitlement survived, account destroyed after.
+
+Also corrected: the password placeholder still read `MIW-xxxxxxxx`, a shape no longer issued.
+
+### 19.4 Founder access
+
+`SOLVED_QP` granted to one account so the Written product can be reviewed. It is the **only**
+account holding it — the back-fill deliberately granted `ORAL_QB_NOTES` only, because nobody paid
+for the Written product under the old model.
+
+**Test totals after this work: 112 green** — 38 security, 32 sessions, 22 rotation, 20 reset.

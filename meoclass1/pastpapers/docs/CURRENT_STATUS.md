@@ -1,7 +1,8 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-11, after the **first True Source consumer integration** session.
+Last updated: 2026-08-12, after the **security remediation and live production deployment**
+session. See §1a for the security and deployment state — it is the newest thing here.
 
 > # QP PRODUCTION IS PAUSED AFTER QP2511.
 >
@@ -35,13 +36,43 @@ what is next, what is blocked.*
 | Path | `F:\Marine-Intelligence-Weekly` |
 | Remote | `https://github.com/nickmarineengr-aiLiterate/marine-intelligence-weekly.git` |
 | **Visibility** | **PUBLIC** — anything committed here is published, on any branch, `noindex` or not |
-| `main` | `0766d00` — nothing from the pastpapers line has been merged into it |
+| **`main`** | **`f626d6b` — LIVE IN PRODUCTION.** The Written product, Security V2 and the whole pastpapers line were merged to `main` and deployed 2026-08-12. `main` is no longer a stale pre-product branch; it is what customers are served |
 | Content head | `a5f2551` on `pastpapers/qp2509-founder-review` — the newest solved-paper state |
 | Tooling head | `850bdde` on `workflow/pil-v1` — content head plus the Production Intelligence Layer |
-| This branch | `pastpapers/qp2511-founder-review` — **QP2511 COMPLETE 9/9, built and delivered.** Branched from `commerce/solvedqp-recovery` @ `462cfbc`. `staging/` has been retired |
-| **Head** | `fddae20` — verified in the freeze session. Tracked tree was clean before the freeze commits |
-| **Consumer branch** | `workflow/corpus-consumer-integration`, branched from the freeze head `9904af4`. First True Source consumer integration and honest product coverage. **Not merged to `main`** |
-| **Freeze baseline** | **The head of `workflow/corpus-consumer-integration` is the proposed PARALLEL PRODUCTION BASELINE**, awaiting Founder nomination. It supersedes the earlier `fddae20` proposal because it carries the consumer architecture every future paper branch should inherit. Named as a branch head rather than a hash, because a review correction would move it — see [`PARALLEL_PRODUCTION_BOARD.md`](PARALLEL_PRODUCTION_BOARD.md) §2 |
+| Release branch | `release/written-live-test-v1` — the reconciliation branch the cutover was assembled on. Fast-forwarded into `main`; kept as the release lineage |
+| **Desktop baseline** | **`9c97359` — UNCHANGED and immutable.** The six 2024 paper branches were allocated from it and are unaffected by everything below. Do NOT tell the desktop team to rebase because `main` moved |
+| **Consumer branch** | `workflow/corpus-consumer-integration` @ `d2e09a4` — now fully contained in `main` |
+
+All git commands in this repository need `-c safe.directory=*`.
+
+---
+
+## 1a. Security and deployment state — 2026-08-12
+
+**The product is LIVE for controlled testing.** Four blockers were closed in one session; two of
+them were discovered during the work, not inherited.
+
+| | |
+|---|---|
+| Production commit | `f626d6b` |
+| Public URL | https://marineintelligenceweekly.com |
+| **Credential exposure** | **CLOSED.** 100 accounts rotated to random 16-character credentials, stored as salted hashes. Audit: 100 legacy plaintext → **0**. 100 notified, 0 failures |
+| **Affected count** | **100, not 28.** 28 was the size of the leaked git blob; the removed `api/check-db.js` disclosed any stored credential to an unauthenticated GET, so the exposure was never limited to it |
+| **Legacy plaintext auth** | **REMOVED**, not disabled. `verifyPassword` accepts `sha256$salt$digest` only |
+| **`MIW_SESSION_SECRET`** | CONFIGURED, Production and Preview. 14/14 Production variables present |
+| **Edge gate** | LIVE and enforcing. A forged `miw_auth=1` now grants nothing |
+| **Entitlements** | 100 back-filled to `ORAL_QB_NOTES`. `SOLVED_QP` granted to **one** account only |
+| **Subscriber ceiling** | **REMOVED.** `QB_PASSWORD_POOL` no longer gates sign-ups; credentials are generated per sale |
+| **Password reset** | Self-service, live. Issues a NEW credential — the old one is unrecoverable by design |
+| Test suites | **112 green** — 38 security, 32 sessions, 22 rotation, 20 reset |
+
+Full record, including the four open non-blocking defects and the classification of the
+historical git exposure, is in
+[`WRITTEN_PRODUCT_LIVE_TEST_STATUS.md`](WRITTEN_PRODUCT_LIVE_TEST_STATUS.md) §10–§21.
+
+**Outstanding and NOT closed by that session:** the Upstash REST token, the Brevo SMTP key and a
+Brevo account password were pasted into a chat transcript during the work and must be rotated at
+source. That is independent of the git-history incident.
 
 All git commands in this repository need `-c safe.directory=*`.
 

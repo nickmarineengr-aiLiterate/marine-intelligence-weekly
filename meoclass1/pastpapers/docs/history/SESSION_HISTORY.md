@@ -4450,3 +4450,101 @@ questions, 3 year sheets, 1 index**.
 
 **QP production remains PAUSED.** The next Founder actions are the provision-view decisions in
 `CURRENT_STATUS.md` §6, not a paper.
+
+---
+
+# SESSION — 2026-08-12 — SECURITY REMEDIATION AND LIVE DEPLOYMENT
+
+**Outcome: SECURITY REMEDIATED — WRITTEN PRODUCT LIVE FOR CONTROLLED TESTING.**
+Production commit `f626d6b`. Started on `workflow/corpus-consumer-integration` @ `d2e09a4`.
+
+Two blockers were briefed. Four were closed. The two that were not briefed were the ones that
+mattered most, and both were invisible from inside the repository.
+
+## What the brief got wrong, and how it was found
+
+**The affected-account count was 100, not 28.** 28 was the size of the leaked git blob. Measuring
+production instead of trusting the brief found 100 accounts holding legacy plaintext and zero
+hashed. The second cause was `api/check-db.js`, a removed endpoint that had answered an
+unauthenticated `GET /api/check-db?email=...` with the stored credential for any address supplied.
+The exposure was therefore never limited to the git blob, and the brief's instruction — *"do not
+assume all 28 still need work if production truth differs"* — was the single most valuable line in
+it.
+
+A previous session had hypothesised that some accounts would have been silently hash-upgraded by
+ordinary logins. **Measurement disproved it: zero had.** Security V2 had never been deployed, so
+the opportunistic upgrade path had never executed once. A hypothesis about production that nobody
+had measured had been carried forward across two sessions.
+
+## LAUNCH-BLOCK-3 — the gate had never shipped, because of a missing dependency
+
+Probing the live domain to verify LAUNCH-BLOCK-2 found `/meoclass1/QB1_A.html` returning **HTTP
+200, 280,350 bytes, to an anonymous request**. `middleware.js`, `routes.js` and `sessions.js` were
+absent from `origin/main` entirely.
+
+The cutover then failed to deploy:
+
+    The Edge Function "middleware" is referencing unsupported modules:
+        - __vc__ns__/0/middleware.js: @vercel/edge
+
+`middleware.js` had imported `next` from `@vercel/edge` since it was written, but the package was
+never in `dependencies`. Nothing caught it: the build script is `echo 'Build successful'`, and the
+Edge bundler is the first stage that resolves the import — which had never run, because the
+middleware had never been deployed. **A missing dependency presented for weeks as a public content
+exposure.**
+
+## LAUNCH-BLOCK-4 — the deploy caused it, the Founder found it in minutes
+
+Immediately after the cutover the Founder signed in and saw *"No products are attached to this
+account yet."*
+
+`miw:ent:*` held **zero records for all 100 accounts**. `migrate_entitlements.mjs` — which
+translates the pre-V2 model (*has a password therefore may open /meoclass1/*) into per-product
+entitlements — had never been run. While `/meoclass1/` was ungated this was invisible: customers
+read the content regardless. The gate then began correctly enforcing an entitlement that had never
+been recorded for anyone.
+
+**The deploy converted a silent data gap into 100 locked-out paying customers**, and the only
+signal was a real person signing in. Closed by running the back-fill: 100 granted
+`ORAL_QB_NOTES`, 0 granted `SOLVED_QP`.
+
+## Ordering decisions that mattered
+
+- **The secret was set AFTER rotation.** Setting `MIW_SESSION_SECRET` first would have re-armed
+  every leaked password, because the secret is what makes the login path operative at all. While
+  it was absent, `check-password.js` returned 500 before even reaching the password check — the
+  compromised credentials were unusable, and restoring service was what re-armed them.
+- **Legacy plaintext was removed AFTER rotation, never before.** Removing it earlier would have
+  locked out every customer whose record had not been upgraded — which, since V2 had never
+  deployed, was all 100.
+- **Rotation writes the credential, then revokes sessions, then emails.** Revoking first and
+  failing to write leaves the old password valid; emailing first announces a change that has not
+  happened. The email is last because it is the only irreversible step and the only one whose
+  failure leaves a recoverable state.
+
+## Work delivered beyond the brief
+
+- **Funnel**: nothing under `/meoclass1/` linked to `/solvedQP/` and nothing linked back. All 100
+  Oral subscribers had no route to discover the Written product. Cross-sell added to the Oral hub
+  and the Oral notes header, carrying the five-mode explainer verbatim from `solvedQP/index.html`.
+- **Subscriber ceiling removed**: `assignNewPassword` drew from `QB_PASSWORD_POOL` by index and
+  threw past its end — *after* Razorpay captured the payment and after the fulfilment lock was
+  claimed. Exhaustion meant money taken, no entitlement, no email, and a webhook retrying the same
+  failure forever. Credentials are now generated per sale.
+- **Self-service password reset**: cannot resend an existing password and never will be able to.
+  Issues a new one, throttled one per address per 15 minutes, revoking all sessions, with a single
+  constant response for every path.
+
+## Process failures worth recording
+
+- **Two Claude sessions were committing to the same release branch concurrently.** Detected when
+  a merge reported "Already up to date" seconds after another session had performed it, and two
+  unfamiliar commits appeared. Concurrent `rotate --confirm` runs would have rotated and emailed
+  every customer twice, with the first password dead on arrival. The rotation tool's default scope
+  excludes already-hashed records, which limits the damage structurally, but the session should
+  have been confirmed stopped before any customer-impacting run.
+- **Operator credentials were pasted into the chat transcript** rather than into the git-ignored
+  file that had been prepared for them. The Upstash token, Brevo SMTP key and a Brevo account
+  password must be rotated at source.
+- **A live enumeration probe used the Founder's real address**, resetting their password a second
+  time. A throwaway address should have been used.
