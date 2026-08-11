@@ -141,11 +141,35 @@ export function parseCookies(header) {
 }
 
 // -------------------------------------------------------------
-// Password storage. Existing accounts hold PLAINTEXT passwords in
-// miw:user:<email> (assigned from QB_PASSWORD_POOL). We must keep
-// verifying those, but we stop creating new ones: verifyPassword
-// reports whether the stored form was legacy so the caller can
-// transparently upgrade it to a salted hash on next successful login.
+// Password storage. HASHED RECORDS ONLY.
+//
+// This module used to accept a legacy PLAINTEXT record and upgrade it
+// to a salted hash on first successful login. That branch has been
+// REMOVED, not disabled, and the reason is an incident rather than a
+// tidy-up: 28 credentials reached this repository's public git history,
+// and a since-removed endpoint (api/check-db.js) disclosed any stored
+// credential to an unauthenticated GET. Every exposed password was
+// therefore a working password for exactly as long as this function
+// would compare one.
+//
+// All 100 production credentials were rotated to fresh random values
+// and re-stored as hashes before this branch was deleted. Deleting it
+// any earlier would have locked out every customer whose record had
+// not yet been upgraded by a login — and since Security V2 had never
+// been deployed, that was all of them.
+//
+// A record that is not `sha256$salt$digest` now fails, whatever it
+// contains. There is deliberately no fallback, no migration path and
+// no "upgrade on read": a second form of stored credential is exactly
+// how the first exposure survived as long as it did.
+//
+// NOTE ON THE HASH. This is a single unsalted-iteration SHA-256 with a
+// per-record salt — not a KDF. It is adequate HERE because every
+// credential is now a 16-character value drawn from a 32-symbol
+// alphabet by crypto.randomInt (80 bits), which is not brute-forceable
+// regardless of hash speed. It would NOT be adequate for user-chosen
+// passwords. If self-chosen passwords are ever introduced, this must
+// become scrypt or Argon2 first.
 // -------------------------------------------------------------
 
 export function hashPassword(password, salt = crypto.randomBytes(16).toString("hex")) {
@@ -153,22 +177,20 @@ export function hashPassword(password, salt = crypto.randomBytes(16).toString("h
   return `sha256$${salt}$${h}`;
 }
 
+/**
+ * @returns {{ok: boolean}} — no `legacy` field any more. Callers must
+ * not branch on the stored form, because there is only one.
+ */
 export function verifyPassword(stored, supplied) {
-  if (!stored) return { ok: false, legacy: false };
+  if (!stored || typeof stored !== "string") return { ok: false };
+  if (!stored.startsWith("sha256$")) return { ok: false };
+
+  const parts = stored.split("$");
+  if (parts.length !== 3 || !parts[1] || !parts[2]) return { ok: false };
+
   const given = String(supplied || "").trim();
-
-  if (stored.startsWith("sha256$")) {
-    const [, salt] = stored.split("$");
-    const candidate = hashPassword(given, salt);
-    const a = Buffer.from(candidate);
-    const b = Buffer.from(stored);
-    const ok = a.length === b.length && crypto.timingSafeEqual(a, b);
-    return { ok, legacy: false };
-  }
-
-  // Legacy plaintext record.
-  const a = Buffer.from(stored);
-  const b = Buffer.from(given);
-  const ok = a.length === b.length && crypto.timingSafeEqual(a, b);
-  return { ok, legacy: true };
+  const candidate = hashPassword(given, parts[1]);
+  const a = Buffer.from(candidate);
+  const b = Buffer.from(stored);
+  return { ok: a.length === b.length && crypto.timingSafeEqual(a, b) };
 }

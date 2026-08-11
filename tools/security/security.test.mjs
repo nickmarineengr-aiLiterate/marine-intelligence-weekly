@@ -180,13 +180,18 @@ describe("session tokens — unforgeable, identifying, expiring", () => {
     assert.doesNotMatch(flag, /HttpOnly/);
   });
 
-  test("password hashing verifies, and legacy plaintext still verifies once", () => {
+  test("password hashing verifies, and legacy plaintext NO LONGER verifies at all", () => {
     const h = hashPassword("MIW-abc12345");
     assert.match(h, /^sha256\$/);
-    assert.deepEqual(verifyPassword(h, "MIW-abc12345"), { ok: true, legacy: false });
-    assert.deepEqual(verifyPassword(h, "wrong"), { ok: false, legacy: false });
-    // Legacy record: correct password works and is flagged for upgrade.
-    assert.deepEqual(verifyPassword("MIW-abc12345", "MIW-abc12345"), { ok: true, legacy: true });
+    assert.deepEqual(verifyPassword(h, "MIW-abc12345"), { ok: true });
+    assert.deepEqual(verifyPassword(h, "wrong"), { ok: false });
+
+    // This assertion is INVERTED from what it said before the incident
+    // remediation. A plaintext record used to authenticate and report
+    // itself as upgradeable; every credential exposed in public git
+    // history was usable for exactly that reason. It now fails, and
+    // the `legacy` flag it used to return no longer exists.
+    assert.deepEqual(verifyPassword("MIW-abc12345", "MIW-abc12345"), { ok: false });
     assert.equal(verifyPassword("MIW-abc12345", "nope").ok, false);
   });
 

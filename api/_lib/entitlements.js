@@ -22,8 +22,9 @@
 //   miw:sessions:<email>         sorted set — up to TWO live session
 //                                ids, scored by login time. Defined in
 //                                api/_lib/sessions.js.
-//   miw:user:<email>             string — password (legacy plaintext
-//                                or sha256$salt$hash after upgrade)
+//   miw:user:<email>             string — sha256$salt$digest ONLY.
+//                                Plaintext records no longer verify;
+//                                see api/_lib/session.js.
 // =============================================================
 
 import { redisCmd } from "./redis.js";

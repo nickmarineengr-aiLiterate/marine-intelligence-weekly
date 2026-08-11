@@ -15,14 +15,18 @@
 // owned. `miw_auth=1` is still set, but purely as a UI hint that
 // authorizes nothing (middleware never reads it).
 //
-// Password storage is also being migrated: existing accounts hold
-// plaintext from QB_PASSWORD_POOL. Those still verify, and are
-// transparently upgraded to a salted hash on first successful login.
+// Password storage accepts HASHED RECORDS ONLY. Accounts once held
+// plaintext from QB_PASSWORD_POOL, and for a time a plaintext record
+// still verified and was upgraded on login. After the git-history
+// credential exposure all 100 production credentials were rotated to
+// fresh random values stored as hashes, and that legacy branch was
+// deleted from _lib/session.js. A non-hash record now fails to
+// authenticate rather than being repaired.
 // =============================================================
 
-import { redisGet, redisSet, redisSetEx } from "./_lib/redis.js";
+import { redisGet, redisSetEx } from "./_lib/redis.js";
 import {
-  verifyPassword, hashPassword, createSessionToken, newSessionId,
+  verifyPassword, createSessionToken, newSessionId,
   sessionCookies, SESSION_TTL_SECONDS,
 } from "./_lib/session.js";
 import {
@@ -52,25 +56,21 @@ export default async function handler(req, res) {
     const emailKey = String(email).toLowerCase().trim();
     const stored = await redisGet(userKey(emailKey));
 
-    const { ok, legacy } = verifyPassword(stored, password);
+    const { ok } = verifyPassword(stored, password);
     if (!ok) {
-      // Deliberately identical response for "no such account" and
-      // "wrong password" — no account enumeration.
+      // Deliberately identical response for "no such account",
+      // "wrong password" and "stored record is not a hash" — no
+      // account enumeration, and no signal that a record exists but
+      // is in an unusable form.
       return res.status(200).json({ success: false });
     }
 
-    // Opportunistic upgrade: replace the plaintext record with a
-    // salted hash now that we've confirmed the password. Same
-    // password keeps working; the stored form stops being readable.
-    if (legacy) {
-      try {
-        await redisSet(userKey(emailKey), hashPassword(String(password).trim()));
-        console.log(`[check-password] upgraded stored password to hash for ${emailKey}`);
-      } catch (e) {
-        // Non-fatal: login still succeeds on the legacy record.
-        console.error("[check-password] hash upgrade failed:", e.message);
-      }
-    }
+    // There is no opportunistic plaintext->hash upgrade here any more.
+    // It was removed with the legacy verify branch in _lib/session.js
+    // after all 100 production credentials were rotated to hashes; see
+    // the note there. A login can no longer write to the credential
+    // record at all, which is the property that makes this endpoint
+    // read-only with respect to stored secrets.
 
     // ---- Register this device's session (up to TWO per account) ----
     // Founder policy: a customer may stay signed in on a phone AND a

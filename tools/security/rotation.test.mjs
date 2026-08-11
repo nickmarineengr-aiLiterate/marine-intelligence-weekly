@@ -151,6 +151,33 @@ async function login(redis, email, password) {
   return { ok: true, sessionId, token: createSessionToken(email, sessionId) };
 }
 
+/**
+ * THE DELETED VERIFIER, reproduced verbatim.
+ *
+ * api/_lib/session.js used to fall through to a direct comparison
+ * against a plaintext record. That branch is now gone — which is what
+ * closes the incident — but its removal also removes the ability to
+ * demonstrate the "before" half of a rotation through the production
+ * function, since a plaintext record no longer authenticates at all.
+ *
+ * Reproducing it here keeps the rehearsal meaningful: it proves the
+ * rotation moved each record from a form the OLD code would accept to
+ * a form only the NEW code accepts. It is a historical fixture and is
+ * deliberately NOT imported from anywhere — nothing in the shipped
+ * codebase can reach this behaviour any more.
+ */
+async function legacyLogin(redis, email, password) {
+  const stored = await redis.store.get(userKey(email));
+  if (!stored) return { ok: false };
+  const ok = stored.startsWith("sha256$")
+    ? verifyPassword(stored, password).ok
+    : stored === String(password || "").trim();
+  if (!ok) return { ok: false };
+  const sessionId = newSessionId();
+  await addActiveSession(email, sessionId, TTL, redis.deps);
+  return { ok: true, sessionId, token: createSessionToken(email, sessionId) };
+}
+
 /** A store seeded exactly as an affected historical account looks. */
 async function seedAffectedAccount(redis) {
   await redis.store.set(userKey(TEST_EMAIL), OLD_PASSWORD);       // legacy plaintext
@@ -211,11 +238,16 @@ describe("classification — who actually needs remediation", () => {
 
 // =============================================================
 describe("the full rotation path — rehearsed on a disposable account", () => {
-  test("CLAIM 1: the exposed password works BEFORE rotation", async () => {
+  test("CLAIM 1: the exposed password worked BEFORE rotation, under the code of the time", async () => {
     const redis = fakeRedis();
     await seedAffectedAccount(redis);
-    const before = await login(redis, TEST_EMAIL, OLD_PASSWORD);
-    assert.equal(before.ok, true, "the control must hold or the rest proves nothing");
+    // Against the verifier that shipped while the records were plaintext.
+    assert.equal((await legacyLogin(redis, TEST_EMAIL, OLD_PASSWORD)).ok, true,
+      "the control must hold or the rest proves nothing");
+    // And against today's verifier it already fails — the second,
+    // independent barrier added by removing the legacy branch.
+    assert.equal((await login(redis, TEST_EMAIL, OLD_PASSWORD)).ok, false,
+      "current code must refuse a plaintext record outright");
   });
 
   test("CLAIMS 2-8: rotation invalidates the old, issues the new, keeps what was paid for", async () => {
@@ -224,8 +256,10 @@ describe("the full rotation path — rehearsed on a disposable account", () => {
     await seedAffectedAccount(redis);
 
     // Two live sessions — the Founder's mobile + laptop policy in force.
-    const s1 = await login(redis, TEST_EMAIL, OLD_PASSWORD);
-    const s2 = await login(redis, TEST_EMAIL, OLD_PASSWORD);
+    // Established through the verifier of the time, because that is the
+    // state a real affected account was actually in.
+    const s1 = await legacyLogin(redis, TEST_EMAIL, OLD_PASSWORD);
+    const s2 = await legacyLogin(redis, TEST_EMAIL, OLD_PASSWORD);
     assert.equal(await isActiveSession(TEST_EMAIL, s1.sessionId, redis.deps), true);
     assert.equal(await isActiveSession(TEST_EMAIL, s2.sessionId, redis.deps), true);
 
@@ -245,9 +279,13 @@ describe("the full rotation path — rehearsed on a disposable account", () => {
     assert.equal(classifyStored(stored), "hashed");
     assert.ok(!stored.includes(OLD_PASSWORD), "the old secret must not survive in the record");
 
-    // CLAIM 3 — the exposed password no longer authenticates. This single
-    // assertion is the closure test for the whole incident.
+    // CLAIM 3 — the exposed password no longer authenticates. This is the
+    // closure test for the whole incident, and it is asserted against
+    // the OLD verifier as well: rotation alone must be sufficient, so
+    // that closure does not depend on the code removal having shipped.
     assert.equal((await login(redis, TEST_EMAIL, OLD_PASSWORD)).ok, false);
+    assert.equal((await legacyLogin(redis, TEST_EMAIL, OLD_PASSWORD)).ok, false,
+      "rotation must close the exposure on its own, not only via the removal");
 
     // CLAIM 4 + 7 — the credential that was emailed does authenticate,
     // and a fresh session can be established with it.
@@ -409,7 +447,7 @@ describe("the full rotation path — rehearsed on a disposable account", () => {
   test("POSITIVE CONTROL: without rotation the exposed password still works", async () => {
     const redis = fakeRedis();
     await seedAffectedAccount(redis);
-    assert.equal((await login(redis, TEST_EMAIL, OLD_PASSWORD)).ok, true,
+    assert.equal((await legacyLogin(redis, TEST_EMAIL, OLD_PASSWORD)).ok, true,
       "if this ever fails, CLAIM 3 above is passing for the wrong reason");
   });
 });

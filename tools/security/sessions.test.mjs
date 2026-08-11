@@ -258,45 +258,84 @@ describe("existing QB customer — login must keep working", () => {
   beforeEach(() => { R = fakeRedis(); });
 
   /**
-   * Replays api/check-password.js's decision sequence against the
-   * real session/password functions: verify -> upgrade if legacy ->
-   * register session -> mint token.
+   * Replays api/check-password.js's decision sequence against the real
+   * session/password functions: verify -> register session -> mint
+   * token. The "upgrade if legacy" step that used to sit in the middle
+   * is gone; a login can no longer write to a credential record.
    */
   async function login(email, supplied, storedRecord) {
-    const { ok, legacy } = verifyPassword(storedRecord, supplied);
+    const { ok } = verifyPassword(storedRecord, supplied);
     if (!ok) return { ok: false };
-    const upgraded = legacy ? hashPassword(String(supplied).trim()) : storedRecord;
     const sid = newSessionId();
     await addActiveSession(email, sid, TTL, R.deps);
-    return { ok: true, sid, token: createSessionToken(email, sid), upgraded, legacy };
+    return { ok: true, sid, token: createSessionToken(email, sid) };
   }
 
-  test("LEGACY plaintext account: logs in, upgrades to a hash, keeps the SAME password", async () => {
+  // -----------------------------------------------------------
+  // LEGACY PLAINTEXT REJECTION (§14 of the remediation brief).
+  //
+  // These assertions are the standing guarantee that the git-history
+  // exposure stays closed. Every one of them FAILED — correctly, by
+  // design — before the plaintext branch was removed from session.js,
+  // because until then a leaked password was a working password.
+  // -----------------------------------------------------------
+  test("a stored PLAINTEXT record no longer authenticates, even with the right password", async () => {
     const theirPassword = "MIW-legacy001";
-    let stored = theirPassword;                       // pre-V2 plaintext record
-
-    const first = await login(EMAIL, theirPassword, stored);
-    assert.equal(first.ok, true, "the existing customer must still get in");
-    assert.equal(first.legacy, true, "record recognised as legacy");
-    stored = first.upgraded;
-    assert.match(stored, /^sha256\$/, "stored form must stop being readable");
-    assert.ok(!stored.includes(theirPassword), "plaintext must not survive the upgrade");
-
-    // The customer types the SAME password next time — nothing changed for them.
-    const second = await login(EMAIL, theirPassword, stored);
-    assert.equal(second.ok, true, "their password must not silently change");
-    assert.equal(second.legacy, false, "second login uses the hashed record");
+    const stored = theirPassword;              // exactly the exposed form
+    assert.equal((await login(EMAIL, theirPassword, stored)).ok, false,
+      "the historical plaintext representation must be unusable");
   });
 
-  test("the upgrade is not a password reset — the old password still fails if wrong", async () => {
-    const stored = hashPassword("MIW-legacy001");
-    assert.equal((await login(EMAIL, "MIW-wrongpw01", stored)).ok, false);
-  });
-
-  test("a legacy customer can hold mobile + laptop sessions simultaneously", async () => {
+  test("a login cannot repair a plaintext record — no upgrade-on-read remains", async () => {
     const stored = "MIW-legacy001";
-    const phone = await login(EMAIL, stored, stored);
-    const laptop = await login(EMAIL, stored, stored);
+    await login(EMAIL, stored, stored);
+    // Nothing was written anywhere; the only way a record becomes a
+    // hash is the operator rotation tool.
+    assert.equal(R.strings.size, 0, "authentication must not write to the credential store");
+  });
+
+  test("MUTATION: near-miss stored forms are all refused", async () => {
+    const pw = "MIW-legacy001";
+    for (const bad of [
+      pw,                              // bare plaintext
+      `sha256-${pw}`,                  // wrong separator
+      `SHA256$salt$${pw}`,             // wrong case
+      "sha256$",                       // truncated
+      "sha256$saltonly",               // two fields, not three
+      "sha256$$digest",                // empty salt
+      "sha256$salt$",                  // empty digest
+    ]) {
+      assert.equal((await login(EMAIL, pw, bad)).ok, false, `must refuse: ${bad.slice(0, 20)}`);
+    }
+  });
+
+  test("a VALID hash still passes — the guard rejects the old form, not everything", async () => {
+    const pw = "MIW-legacy001";
+    assert.equal((await login(EMAIL, pw, hashPassword(pw))).ok, true);
+  });
+
+  test("a rotated credential authenticates and the previous one does not", async () => {
+    const oldPw = "MIW-legacy001";
+    const newPw = "K7QRTVWX23456789";
+    const stored = hashPassword(newPw);        // post-rotation record
+    assert.equal((await login(EMAIL, newPw, stored)).ok, true);
+    assert.equal((await login(EMAIL, oldPw, stored)).ok, false,
+      "this is the closure test for the credential exposure");
+  });
+
+  test("POSITIVE CONTROL: the rejection is about the STORED form, not the supplied one", async () => {
+    // Same supplied password, same value — only the storage form
+    // differs. If this pair ever agrees, the guard has stopped working.
+    const pw = "MIW-legacy001";
+    assert.equal((await login(EMAIL, pw, pw)).ok, false);
+    assert.equal((await login(EMAIL, pw, hashPassword(pw))).ok, true);
+  });
+
+  test("a customer can hold mobile + laptop sessions simultaneously", async () => {
+    const pw = "MIW-legacy001";
+    const stored = hashPassword(pw);
+    const phone = await login(EMAIL, pw, stored);
+    const laptop = await login(EMAIL, pw, stored);
 
     assert.equal(await isActiveSession(EMAIL, phone.sid, R.deps), true);
     assert.equal(await isActiveSession(EMAIL, laptop.sid, R.deps), true);
@@ -340,7 +379,7 @@ describe("existing QB customer — login must keep working", () => {
   });
 
   test("POSITIVE CONTROL: a wrong password is refused", async () => {
-    assert.equal((await login(EMAIL, "not-the-password", "MIW-legacy001")).ok, false,
+    assert.equal((await login(EMAIL, "not-the-password", hashPassword("MIW-legacy001"))).ok, false,
       "the password guard is inert");
   });
 });
