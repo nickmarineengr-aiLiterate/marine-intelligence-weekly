@@ -80,6 +80,7 @@ input:focus{border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.15)}
   <div id="panel-hub" class="hidden">
     <h2>Your MIW access</h2>
     <div class="who" id="hub-who"></div>
+    <div class="note info hidden" id="hub-msg"></div>
     <div id="hub-products"></div>
     <hr class="divider">
     <div class="help">
@@ -161,6 +162,20 @@ const REASONS = {
   misconfigured: "Access is temporarily unavailable. Please contact support.",
   authstore: "Access is temporarily unavailable. Please try again shortly.",
 };
+
+/**
+ * Name the product they were reaching for, so the notice says what they
+ * hit rather than only that they were stopped. The product card directly
+ * underneath already carries the price and the buy link, so this needs to
+ * point, not to sell.
+ */
+function wantedSuffix(path) {
+  if (!path) return "";
+  const key = /^\/solvedQP\//.test(path) || /^\/meoclass1\/pastpapers\//.test(path)
+    ? "SOLVED_QP"
+    : /^\/meoclass1\//.test(path) ? "ORAL_QB_NOTES" : null;
+  return key ? " That page is part of " + PRODUCTS[key].name + " — see below." : "";
+}
 
 function renderHub(session) {
   $("hub-who").textContent = "Signed in as " + session.email;
@@ -285,11 +300,21 @@ $("logout").addEventListener("click", async (e) => {
   try { localStorage.removeItem("miw_auth"); } catch (_) {}
 
   const s = await loadSession({ redirectIfAllowed: true });
+  const reason = params.get("reason");
+
   if (s && s.authenticated) {
     renderHub(s);
+    // A signed-in customer bounced off a product they do not own used to
+    // land here with NO explanation — the reason string existed but was
+    // only rendered on the login panel, which they never see. Being
+    // silently teleported reads as a broken link, not as a locked door.
+    if (reason && REASONS[reason]) {
+      const el = $("hub-msg");
+      el.textContent = REASONS[reason] + wantedSuffix(nextPath);
+      el.classList.remove("hidden");
+    }
     show("hub");
   } else {
-    const reason = params.get("reason");
     if (reason && REASONS[reason]) msg(REASONS[reason], "info");
     show("login");
     $("login-email").focus();
