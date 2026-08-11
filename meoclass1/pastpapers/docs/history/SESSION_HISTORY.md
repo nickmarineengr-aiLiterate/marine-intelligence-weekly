@@ -3861,3 +3861,57 @@ green either way. Another paper's branch; reported, not touched.
 
 Three stale clusters reaped under the governed policy at session start (~4.3 GB eligible). Two
 further ended clusters sat under the 120-minute threshold and the rule was **not** weakened.
+
+
+## 34.10 Founder follow-up — both reported items fixed
+
+The Founder authorised both items reported at the close of §34. Commit `caf5020`.
+
+**The scan found three times what the report named.** The report said two candidate-facing
+authoring-date leaks. A field-class-aware scan of the whole corpus — the discipline of lesson 13,
+applied properly this time — found **six across five papers**, and corrected two errors in the
+original report: the second instance is `QP2602-Q4`, not `QP2602-Q2` (the earlier id came from a
+line-number grep rather than a parsed object), and `QP2506-Q5`, `QP2508-Q1`, `QP2602-Q8` and
+`QP2607-Q7` had been missed entirely because the first grep searched only for *"August 2026"* —
+**two of them say February 2026**.
+
+*Searching for the string you happened to find is not the same as searching for the defect.* The
+scan now tests `as at <month> <year>`, `as of <month> <year>` and the bare token, and classifies
+every hit by render path.
+
+**Five corrected, each judged separately:**
+
+| Paper | Sitting | What the authoring date was doing | Fix |
+|---|---|---|---|
+| `QP2506-Q5` | Jun 2025 | provenance reasoning (*"verified unchanged as at February 2026, which covers this sitting"*) | anchored to the sitting; the provenance belongs in the verification record |
+| `QP2508-Q1` | Aug 2025 | the reasoning **is** the point — why stability *"can be asserted rather than hoped"* | logic preserved in sitting-relative form, month removed |
+| `QP2601-Q1` | Jan 2026 | pure authoring context; the heading already said *"what was true in January 2026"* | clause removed |
+| `QP2602-Q4` | Feb 2026 | the STCW paragraph already corrected on `QP2601-Q9` | identical edit, so the family stays identical |
+| `QP2607-Q7` | Jul 2026 | asserted a state **one month after its own sitting** | anchored to the sitting; the checking instruction kept |
+
+**One deliberately kept.** `QP2602-Q8` reads *"Currency warning for anyone revising this after
+August 2026: … the sitting-date answer above remains correct for February 2026 but the current
+position will differ."* Explicitly labelled as later context, clearly quarantined, and it
+**protects** the sitting answer. The date is load-bearing — it tells the reader when the snapshot
+was taken and therefore what to re-check. Editing it to make a counter read zero is precisely what
+lesson 14 forbids.
+
+**`QP2509` state corrected** to `Pilot Review Ready` / *"Awaiting Founder Review — complete paper"*,
+version 1.0. All 28 papers now check consistent.
+
+**A correction to §34.8.** That section said nothing downstream reads `build_state` and
+`review_state`. That is wrong. The two HTML renderings are publish-guarded, but `build_index.py`
+writes both into `pastpapers_content_index.json` **unconditionally**, and `surface_impact.py`
+classifies that manifest as `PUBLIC_FREE`. The stale value was sitting in a public artefact, which
+makes the fix more clearly right than the original report implied.
+
+**Verification.** Toolchain and self-test both ALL STAGES PASS; determinism zero drift over 20
+files. The load-bearing check was on **shipped bytes**: each built page was stripped of its
+`prod-meta` and review-banner blocks and re-scanned, leaving **exactly one hit corpus-wide** — the
+`QP2602-Q8` keep. That strip is also the first empirical test of lesson 13's field-class model
+against rendered output rather than against source: every review-only instance really is confined
+to the review build.
+
+Surface impact against `440eebf`: 8 non-target changes — six `CANDIDATE_FACING_PAID` paper pages
+plus `index.html` and the manifest. All are the intended effect of a Founder-authorised correction,
+and all are reported rather than assumed.

@@ -131,20 +131,28 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 4. **Solved QP price** — `PRICE_TBD`; `sample_check.py` fails the build if any rupee value renders.
 5. **Free/paid placement of the ONLY QUESTIONS year sheet** — MIW recommends free and indexable.
 6. **Search payload split** — deferred to a measured UX trigger; no observable problem.
-### Raised by the QP2404 session, 2026-08-11 — awaiting a Founder decision
+### Raised and CLOSED by the QP2404 session, 2026-08-11
 
-9. **Two candidate-facing authoring-date leaks remain, outside the authorised scope.** The Founder
-   authorised the correction of `QP2601-Q9`, which is done (`9916744`). The identical defect —
-   an unqualified *"as at August 2026"* in candidate-facing `study_notes` — also stands on
-   **`QP2601-Q1`** and on **`QP2602-Q2`**, which carries the same STCW paragraph as a recurrence
-   sibling. Both are already-approved pages, so they were **reported, not silently fixed**. The
-   whole family is deliberately kept identical, so a correction to one should be applied to all.
-10. **`QP2509` carries stale paper-level state.** It is answered 9/9 but its spec still records
-    `build_state: Intake Complete` and `review_state: "Answerless intake — questions only, no
-    answers authored"`. Every other solved paper records `Pilot Review Ready` / *"Awaiting Founder
-    Review — complete paper"*. Nothing downstream reads these fields, so the toolchain is green
-    either way; it is a truthfulness defect in the record, not a build defect. Found while setting
-    QP2404's own state and **left alone** as another paper's branch.
+Both were reported at the end of the QP2404 production run and the Founder authorised both.
+Fixed in `caf5020`.
+
+9. **Candidate-facing authoring-date leaks — CLOSED.** A field-class-aware scan of the whole
+   corpus found **six**, not the two originally reported: `QP2506-Q5`, `QP2508-Q1`, `QP2601-Q1`,
+   `QP2602-Q4` (not Q2 — the earlier id came from a line-number grep), `QP2602-Q8` and
+   `QP2607-Q7`. Two of them said **February 2026**, which the first grep never looked for.
+   **Five were corrected**, each judged individually rather than blind-replaced.
+   **One was deliberately kept:** `QP2602-Q8` carries an explicitly labelled, quarantined
+   *"Currency warning for anyone revising this after August 2026"* which protects the sitting
+   answer rather than competing with it — the one case the governing rule permits to remain.
+   Verified against **shipped bytes**, not just specs: the built pages stripped of `prod-meta`
+   and review-banner blocks contain exactly that one hit corpus-wide.
+10. **`QP2509` stale paper-level state — CLOSED.** Now `Pilot Review Ready` /
+    *"Awaiting Founder Review — complete paper"*, version 1.0. All 28 papers now check
+    consistent: solved → `Pilot Review Ready`, intake → `Intake Complete`.
+    Correction to the original report: these fields are **not** unread downstream. The two HTML
+    renderings are publish-guarded, but `build_index.py` writes both into
+    `pastpapers_content_index.json` **unconditionally**, and that manifest is classified
+    `PUBLIC_FREE` — so the stale value was in a public artefact.
 
 ### Known open defects
 

@@ -367,15 +367,26 @@ guard before deciding anything. This is the same shape as lesson 9, which kept p
 out of a contamination sweep, and it generalises: **a sweep over a spec must be field-class-aware
 or it will produce confident answers to the wrong question.**
 
+**Corollary, learned the hard way on the follow-up: searching for the string you happened to
+find is not the same as searching for the defect.** The first pass grepped `"August 2026"` — the
+literal text of the instance in hand — and reported two candidate-facing leaks. A proper scan,
+testing `as at <month> <year>` as a pattern, found **six across five papers**, two of which said
+**February 2026** and were invisible to the original search. It also corrected a mis-identified
+question id that came from reading a line number rather than a parsed object. Derive the pattern
+from the defect class; never from the one example you are looking at.
+
 ```
-EVIDENCE:  QP2404 session, 2026-08-11, commit 9916744. "as at August 2026" found in
+EVIDENCE:  QP2404 session, 2026-08-11, commits 9916744 and caf5020. "as at <month> 2026" found in
            QP2601-Q9 study_notes (candidate-facing, corrected), QP2601-Q9 unresolved[1] and
            QP2601-Q7 reverify_before_publication[0].why (review-only, deliberately kept).
-           Two further candidate-facing instances on QP2601-Q1 and QP2602-Q2 reported for a
-           Founder decision rather than fixed, being outside the authorised scope.
+           The Founder-authorised follow-up scan then found SIX candidate-facing instances, not
+           two - QP2506-Q5, QP2508-Q1, QP2601-Q1, QP2602-Q4, QP2602-Q8, QP2607-Q7 - five fixed and
+           QP2602-Q8 kept as a labelled quarantined warning under lesson 14. Verified against
+           shipped bytes by stripping prod-meta and review-banner blocks from the built pages,
+           which also confirmed the field-class model empirically: exactly one hit survived.
 CATEGORY:  TEMPORAL_VERIFICATION
 STATUS:    PROVEN
-SEEN:      1
+SEEN:      2
 OWNER:     NONE. temporal_sweep.py reports the token; it does not classify the field by render
            path, and the adjudication is Claude's under lesson 8.
 REVISIT:   if authoring-date leakage is found a second time on a shipped page, give
