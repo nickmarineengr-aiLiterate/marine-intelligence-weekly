@@ -100,6 +100,25 @@ RULES = [
     (r'^meoclass1/pastpapers/QP\d{4}\.html$', PAID,
      'solved paper page -- the paid product'),
 
+    # --- the paid Written DELIVERY surface. /solvedQP/ is the customer's copy
+    #     of the same specs that meoclass1/pastpapers/ renders for review, and
+    #     it is gated by SOLVED_QP. Every file under it is read by someone who
+    #     paid, so it escalates like any other paid surface. Without these
+    #     rules the whole delivered product fell through to UNKNOWN_REVIEW,
+    #     which reports it but cannot say what it is.
+    (r'^solvedQP/QP\d{4}\.html$', PAID,
+     'delivered solved paper -- the paid Written product'),
+    (r'^solvedQP/(index|questions-\d{4})\.html$', PAID,
+     'delivered product home / year sheet -- inside the paid surface'),
+    (r'^solvedQP/', PAID,
+     'paid Written delivery surface'),
+
+    # The complete January paper shown to existing Oral subscribers. It lives
+    # inside the Oral product root and is opened by ORAL_QB_NOTES, so it is
+    # paid content even though what it advertises has not been bought yet.
+    (r'^meoclass1/oralnotes/', PAID,
+     'Oral product content -- paid, opened by ORAL_QB_NOTES'),
+
     # --- public pages generated from the same specs.
     (r'^meoclass1/pastpapers/(index|questions-\d{4}|topics-\d{4})\.html$', FREE,
      'public index / questions-only year sheet / topic page'),
@@ -125,6 +144,12 @@ RULES = [
 GENERATED = re.compile(
     r'^(meoclass1/pastpapers/(QP\d{4}|index|questions-\d{4}|topics-\d{4})\.html'
     r'|meoclass1/pastpapers/pastpapers_content_index\.json'
+    # The paid delivery projection and the Oral-subscriber promo are built from
+    # the same specs by the same toolchain, so a change to them is derived, not
+    # hand-authored -- the distinction PIL uses to tell a regeneration from an
+    # edit someone made directly to a shipped page.
+    r'|solvedQP/(QP\d{4}|index|questions-\d{4})\.html'
+    r'|meoclass1/oralnotes/written-sample-january-2026\.html'
     r'|SQ/solved-qp-sample-.*\.html)$')
 
 
