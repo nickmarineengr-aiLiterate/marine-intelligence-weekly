@@ -3470,3 +3470,152 @@ which is the safer one for any pre-December-2025 sitting.
 section are what any session actually needs; §26–§30 are narrative. **Recommend splitting
 `SESSION_HISTORY.md` out of it**, leaving state plus the newest delta here. Not done this
 session — it would be a large diff landing on top of a paper awaiting review.
+
+---
+
+# 32. PRE-QP2404 INFRASTRUCTURE HARDENING — 2026-08-11
+
+**Branch:** `workflow/pre-qp2404-hardening`, from `75cccb8` on `workflow/state-history-hygiene`
+(verified to descend from `850bdde` PIL V1 and `a5f2551` QP2509).
+**Verdict:** READY FOR FOUNDER REVIEW. Not merged, not launched. **No QP2404 work started.**
+**No semantic answer content touched.** Zero generated-artefact drift.
+
+## 32.1 §31.3 was right about the symptom and wrong about the layer
+
+§31.3 recorded "host recurrence edges are DIRECTIONAL **in the donor derivation**" and proposed
+symmetrising the edges. `WORKFLOW_LESSONS.md` R4 then deferred that fix because symmetrising edges
+would move donor rankings and recurrence semantics, and doing it safely needs a semantic
+equivalence oracle. **The deferral reasoning was sound. The premise it rested on was not.**
+
+Reproduced mechanically before changing anything, by rewinding to the state immediately before
+QP2509 was authored — its answers removed, its `reused_from` edges un-adjudicated:
+
+```
+PRE  QP2509-Q6 family : []
+PRE  QP2509-Q6 donors : []
+PRE  QP2509-Q6 tier   : C          <-- "no donor"
+PRE  QP2601-Q2 built  : True       <-- ...while the counterpart was already solved
+PRE  stems equal      : False      <-- near, not exact: stem equality could not save it
+```
+
+Then the diagnosis was tested rather than trusted. Two synthetic fixtures recorded the same
+adjudicated edge on one side only, in each direction:
+
+```
+edge recorded on B only ->  A family: ['QP2409-Q9','QP2506-Q1']  donors: ['QP2506-Q1']
+edge recorded on A only ->  A family: ['QP2409-Q9','QP2506-Q1']  donors: ['QP2506-Q1']
+```
+
+**The adjudicated layer was never directional.** `build_families` unions `reused_from` as an
+undirected edge and has always traversed both ways. There were no edges to symmetrise, and
+"fixing" it would have meant inventing them.
+
+## 32.2 The directionality is in the host annotation, one layer up
+
+Census over every host token in the corpus:
+
+| Direction | Tokens |
+|---|---|
+| Backward | 551 |
+| Self | 252 |
+| **Forward** | **0** |
+| Unresolvable month | 16 |
+
+The host prints a **cumulative** table — each token names the current sitting or an earlier one.
+It is structurally incapable of naming a later sitting. MIW produces **newest-paper-first**. So
+the only machine-readable trace of a relationship always sits on the paper MIW has *already*
+solved, pointing at the paper it has not: invisible in the direction of travel.
+
+Naming the layer correctly also dissolved R4's blocker. Inverting an *annotation* into a queue for
+a human needs **no equivalence oracle** — the tool moves visibility, the author still makes every
+judgement.
+
+## 32.3 The fix — visibility, not judgement
+
+`recurrence_model.reverse_hint_candidates` inverts the annotation and subtracts everything MIW has
+already adjudicated. It creates **no family, no donor, no tier, no ranking**. `build_families` and
+`donor_readiness` were not modified.
+
+**Corpus delta: zero.** `2024_2026_RECURRENCE_AND_REUSE_MAP.md` and `SOURCE_INVENTORY.md`
+regenerate **byte-identical**. No question changed donor state, readiness, preferred donor or
+tier. No candidate-facing surface changed. `QP2404` remains the next production paper (3/9 Tier D,
+reach 5, 1 temporal flag).
+
+New generated document `REVERSE_HINT_CANDIDATES.md`, all 819 tokens accounted for and none
+silently dropped:
+
+| | Tokens |
+|---|---|
+| Ambiguous form (`SR09`, `JAN2`, `JULY(M)`) | 16 |
+| Names a sitting but not a question | 225 |
+| Outside the transcribed corpus | 199 |
+| Points at itself | 251 |
+| Already adjudicated by MIW | 103 |
+| **Surfaced as unadjudicated** | **25** (16 targets) |
+
+## 32.4 STOP-AND-REPORT — 25 pairs rest on host metadata alone
+
+Per the session's own boundary: every surfaced row depends **only** on raw host metadata with no
+MIW adjudication, so **none was promoted**. **12** of the 16 targets pair an unsolved question with
+an already-built counterpart — the exact shape of the QP2509-Q6 miss. **Two are in QP2404 itself:**
+`QP2404-Q4` ← `QP2506-Q1` and `QP2404-Q6` ← `QP2602-Q6`.
+
+**These are not donors.** A row becomes real only when an author reads both questions and writes
+`reused_from` — at which point the adjudicated layer picks it up in both directions unaided.
+
+## 32.5 Positive control — pre-fix FAIL, post-fix PASS
+
+Self-test cases 8–11 added to `build_reuse_map.py --self-test`. Run against the **pre-fix**
+`recurrence_model.py` restored from `HEAD`:
+
+```
+AttributeError: module 'recurrence_model' has no attribute 'reverse_hint_candidates'
+```
+
+The capability did not exist, so the test cannot pass by accident. Post-fix: 8a the boundary holds
+(no adjudicated donor appears — if this ever flips, provider metadata has been promoted to truth);
+8b the reverse index surfaces `QP2601-Q2`; 9 no reverse candidate leaks into any family or donor
+list across all 25 rows; 10 a mutation removing the adjudication filter makes the adjudicated pair
+reappear, proving the filter load-bearing; 11 all 819 tokens accounted for. **All PASS.**
+
+## 32.6 PIL V1.1 — implemented
+
+`CANDIDATE_FACING_PAID` joined `ESCALATING`. The V1 advisory NOTE was **removed** rather than kept
+alongside: reporting the same page twice under two severities is how a signal gets learned as
+noise. Retrospective proof over `a5f2551^..a5f2551 --target QP2509`:
+
+```
+FOUNDER REVIEW REQUIRED -- 8 change(s)
+    CANDIDATE_FACING_PAID DERIVED_NON_TARGET  meoclass1/pastpapers/QP2601.html
+```
+
+Detection and reporting only, as decided — nothing blocks. 42 controls, 0 failed, including a
+mutation that removes `PAID` and confirms the escalation falls silent again.
+
+## 32.7 `validate_antipatterns.py` — there was nothing to repair
+
+Verified: **no `hooks` key in any settings file** — `~/.claude/settings.json`, both repo `.claude/`
+trees, no `settings.local.json`, no managed-policy directory — and **`validate_antipatterns.py`
+exists nowhere on disk**. §2901 of this file had already reached that conclusion; `CURRENT_STATUS.md`
+item 10 was the stale half of a contradiction between the two documents, and it re-cost
+investigation time in this session. Struck from state.
+
+Acceptance-tested with a representative scratch write and edit: no hook error, no silent failure,
+no process leak. Its intended protection is already carried by `validate_spec.py`,
+`known_traps_check.py`, `recurrence_check.py`, `temporal_sweep.py` and `health_check.py`, each of
+which positive-controls itself.
+
+## 32.8 Validation
+
+`run_toolchain.py --self-test`: **ALL STAGES PASS**, 110 warnings — identical to the pre-change
+baseline. TEMPORAL, SURFACE, REUSE and RECURRENCE self-tests all green; known traps, health, audit
+and 11 UI pages green. Determinism: after a full build the only modified tracked files are the
+three tool files. No generated artefact moved.
+
+## 32.9 Next
+
+**QP2404 — April 2024, unchanged.** Not started, deliberately. Before authoring `QP2404-Q4` and
+`QP2404-Q6`, read `REVERSE_HINT_CANDIDATES.md` — the host links each to a built counterpart and
+MIW has not ruled on either. **Adjudicate by reading both questions. Do not plan them as donors.**
+
+**NO MAIN MERGE. NO PRODUCT LAUNCH. INFRASTRUCTURE FOUNDER-REVIEW ONLY.**

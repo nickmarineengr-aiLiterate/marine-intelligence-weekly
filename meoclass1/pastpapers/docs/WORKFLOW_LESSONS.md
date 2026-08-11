@@ -271,6 +271,72 @@ REVISIT:   if a provenance field ever starts being rendered to candidates in pub
 
 ---
 
+### 10. Separate the LAYER a defect lives in from the layer it is noticed in
+
+The QP2509 miss was recorded for three sessions as "host recurrence edges are directional in the
+**donor derivation**", and the recorded fix was "symmetrise the edges". Both were wrong about the
+layer, and acting on either would have damaged the model.
+
+The donor derivation was **already symmetric**. `build_families` unions `reused_from` as an
+undirected edge, so an edge recorded on *either* side traverses *both* ways — a synthetic
+one-sided fixture proves it in both directions. There was nothing there to fix, and
+"symmetrising" it would have meant inventing edges.
+
+The directionality was one layer **up**, in discovery. The third-party host prints a *cumulative*
+table: measured over this corpus, **819 tokens — 551 backward, 252 self, zero forward**. It is
+structurally incapable of naming a later sitting. MIW produces newest-paper-first. So the only
+machine-readable trace of a relationship always sat on the paper MIW had *already* solved,
+pointing at the paper it had not — invisible in the direction of travel.
+
+Naming the layer correctly also dissolved the blocker. R4 deferred the fix because symmetrising
+edges "needs a semantic equivalence oracle". Inverting an *annotation* into a queue for a human
+needs no oracle at all: the tool moves visibility, the author still makes every judgement.
+
+**Before fixing a defect, reproduce it and confirm which layer it is actually in.** A defect
+recorded against the wrong layer proposes a dangerous fix and looks unfixable.
+
+```
+EVIDENCE:  pre-QP2404 hardening session, 2026-08-11. Pre-authoring rewind reproduced QP2509-Q6
+           deriving tier C with QP2601-Q2 already built; one-sided synthetic fixtures proved
+           build_families was never directional; 819-token direction census.
+CATEGORY:  DONOR_ADAPTATION
+STATUS:    PROVEN → PROMOTED_TO_TOOL
+SEEN:      1
+OWNER:     recurrence_model.reverse_hint_candidates + build_reuse_map self-test cases 8-11
+REVISIT:   if a host source ever prints a forward-looking annotation, the census premise breaks
+           and the inversion must be re-derived rather than assumed.
+```
+
+---
+
+### 11. A broken non-blocking hook trains the operator to ignore errors
+
+`validate_antipatterns.py` was carried in `CURRENT_STATUS.md` as an open defect across several
+sessions — "errors on every file write, blocks nothing". This session verified it does not exist:
+**no `hooks` key in any settings file**, and **no such file anywhere on disk**. It was transient
+environment noise, and `SESSION_HISTORY.md` §2901 had already said so. The state document and the
+history document had been contradicting each other, and the state document lost.
+
+Two things worth keeping. First: a hook that errors without blocking is worse than no hook, because
+it teaches the operator that a red line in the transcript is normal — either repair it so it can
+actually fail, or remove it. Second, and the one that cost the sessions: **a defect that has been
+disproved must be struck from the state document, not merely discussed in the history.** Otherwise
+every future session re-investigates it. The evidence belongs in history; the *entry* belongs
+deleted.
+
+```
+EVIDENCE:  pre-QP2404 hardening session, 2026-08-11. CURRENT_STATUS.md item 10 vs
+           SESSION_HISTORY.md §2901; filesystem and settings sweep found neither hook nor config.
+CATEGORY:  STATE_HANDOVER
+STATUS:    PROVEN → PROMOTED_TO_POLICY
+SEEN:      1
+OWNER:     QA_AND_HANDOVER_PROTOCOL.md — state carries what is TRUE NOW, history carries why
+REVISIT:   if a hook is ever adopted deliberately, it must positive-control like every other
+           governed checker; a hook that can only exit 0 is not a guard.
+```
+
+---
+
 # PART 2 — REJECTED AND DEFERRED
 
 Recorded so they are not re-litigated for free, and reopened when their premise changes.
@@ -338,24 +404,28 @@ REVISIT:   when the band is re-derived per printed limb. Until then do NOT adjus
 
 ---
 
-### R4. Symmetrising host-recurrence donor edges — DEFERRED
+### R4. Symmetrising host-recurrence donor edges — SUPERSEDED by lesson 10
 
-Host recurrence edges are directional: an earlier paper cannot see a later paper that names
-it, so the donor model under-reports readiness. It cost one missed donor during QP2509.
+Deferred on the reasoning that symmetrising edges changes **donor rankings and recurrence
+semantics**, and that doing it safely needs an oracle for whether two questions are genuinely the
+same — a semantic judgement no deterministic tool may make.
 
-Not fixed here, and deliberately not fixed inside PIL. Symmetrising edges changes **donor
-rankings and recurrence semantics**, which is reuse-model territory, and doing it safely needs
-an oracle for whether two questions are genuinely the same — a semantic judgement PIL is
-barred from making.
+**That reasoning was correct and is retained.** What was wrong was the premise underneath it: the
+donor derivation was never directional, so there were no edges to symmetrise. The directionality
+was in the host annotation, one layer up. Inverting an annotation into a queue for a human needs
+no equivalence oracle, because the tool moves visibility and the author still makes every
+judgement — so the blocker that justified the deferral never applied to the fix that was needed.
+
+Full reasoning in lesson 10. **Do not reopen this as an edge-symmetrisation task.**
 
 ```
-EVIDENCE:  CURRENT_STATUS.md §31.3, "SECOND FINDING — host recurrence edges are DIRECTIONAL".
+EVIDENCE:  superseded 2026-08-11 in the pre-QP2404 hardening session. build_families proved
+           already undirected; recurrence_model.reverse_hint_candidates ships the real fix.
 CATEGORY:  DONOR_ADAPTATION
-STATUS:    CANDIDATE / DEFERRED
+STATUS:    SUPERSEDED
 SEEN:      1
-OWNER:     NONE — belongs to the recurrence/reuse model, not PIL
-REVISIT:   when a semantic-safe equivalence oracle exists, or when Claude adjudicates the
-           edges by hand for a bounded set.
+OWNER:     lesson 10
+REVISIT:   only if someone proposes promoting a host hint to a family edge — the answer is no.
 ```
 
 ---

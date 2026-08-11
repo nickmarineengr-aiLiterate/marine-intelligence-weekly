@@ -129,20 +129,24 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 4. **Solved QP price** — `PRICE_TBD`; `sample_check.py` fails the build if any rupee value renders.
 5. **Free/paid placement of the ONLY QUESTIONS year sheet** — MIW recommends free and indexable.
 6. **Search payload split** — deferred to a measured UX trigger; no observable problem.
-7. **PIL V1.1 — approved follow-up, NOT implemented.** A **candidate-facing PAID** page that
-   changes as a **derived non-target** effect is currently reported only as a NOTE;
-   `QP2601.html` moved during QP2509 production this way. Founder decision:
-   `CANDIDATE_FACING_PAID + DERIVED_NON_TARGET` should escalate to **FOUNDER REVIEW REQUIRED**,
-   the same as public/free non-target changes. **Detect and report only — do not broaden to
-   automatic blocking.** No change made to `surface_impact.py` in this session.
-
 ### Known open defects
 
-8. **Host recurrence edges are directional** in the donor derivation — an earlier paper cannot see
-   a later paper that names it. Cost one missed donor on QP2509. Recorded, not fixed.
-9. **Q9 / QB9_C cross-link** — known, repair deferred.
-10. **`validate_antipatterns.py` repo hook is misconfigured** — its plugin path does not exist, so
-    it errors on every file write. Blocks nothing, but it is a no-op safety net.
+7. **Q9 / QB9_C cross-link** — known, repair deferred.
+8. **25 host-linked question pairs are UNADJUDICATED.** `REVERSE_HINT_CANDIDATES.md` lists them;
+   **12** pair an unsolved question with an already-built counterpart, two of them in `QP2404`
+   itself (`QP2404-Q4` ← `QP2506-Q1`, `QP2404-Q6` ← `QP2602-Q6`). These are **not** donors and
+   must not be planned as such: only an author who has read both questions may write
+   `reused_from`. This is a queue, not a finding.
+
+### Closed in the pre-QP2404 hardening session — detail in `history/SESSION_HISTORY.md` §32
+
+- **PIL V1.1 is IMPLEMENTED.** `CANDIDATE_FACING_PAID` escalates when it is not the target;
+  the V1 advisory NOTE is gone. Detection and reporting only — nothing blocks.
+- **The donor model was never directional.** `build_families` has always traversed adjudicated
+  edges both ways; it was not changed. The blind spot was in *discovery* — the host annotation
+  cannot point forward (819 tokens, zero forward) — and is now inverted into the queue above.
+- **`validate_antipatterns.py` does not exist and never had a hook entry.** No `hooks` key in
+  any settings file, no such file on disk. The entry was stale; struck rather than carried.
 
 ---
 
