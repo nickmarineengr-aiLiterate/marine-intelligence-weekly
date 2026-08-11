@@ -23,8 +23,8 @@ Every token is accounted for. A token that cannot be resolved is **counted here,
 | Names a sitting, not a question | 225 | bare-month form such as `2018/APR` |
 | Outside the transcribed corpus | 199 | resolves to a sitting MIW does not hold |
 | Points at itself | 251 | the host lists the current sitting in its own table |
-| Already adjudicated by MIW | 103 | the pair is a recurrence family already |
-| **Surfaced below** | **25** | **host-linked, MIW has not ruled** |
+| Already adjudicated by MIW | 110 | the pair is a recurrence family already |
+| **Surfaced below** | **18** | **host-linked, MIW has not ruled** |
 
 ## The queue
 
@@ -33,16 +33,9 @@ Every token is accounted for. A token that cannot be resolved is **counted here,
 | Target | Sitting | Target solved | Named by | Named-by built | MIW adjudicated |
 |---|---|---|---|---|---|
 | `QP2402-Q3` | February 2024 Q3 | **no** | `QP2411-Q3` | &mdash; | **no** |
-| `QP2404-Q4` | April 2024 Q4 | **no** | `QP2506-Q1` | `QP2506-Q1` | **no** |
-| `QP2404-Q5` | April 2024 Q5 | **no** | `QP2409-Q8` | &mdash; | **no** |
-| `QP2404-Q6` | April 2024 Q6 | **no** | `QP2602-Q6` | `QP2602-Q6` | **no** |
 | `QP2406-Q8` | June 2024 Q8 | **no** | `QP2601-Q3`, `QP2604-Q3` | `QP2601-Q3`, `QP2604-Q3` | **no** |
 | `QP2408-Q3` | August 2024 Q3 | **no** | `QP2506-Q7`, `QP2601-Q8`, `QP2604-Q8` | `QP2506-Q7`, `QP2601-Q8`, `QP2604-Q8` | **no** |
-| `QP2409-Q9` | September 2024 Q9 | **no** | `QP2506-Q1` | `QP2506-Q1` | **no** |
 | `QP2410-Q1` | October 2024 Q1 | **no** | `QP2506-Q9`, `QP2508-Q5`, `QP2602-Q5` | `QP2506-Q9`, `QP2508-Q5`, `QP2602-Q5` | **no** |
-| `QP2410-Q9` | October 2024 Q9 | **no** | `QP2602-Q6` | `QP2602-Q6` | **no** |
-| `QP2506-Q6` | June 2025 Q6 | yes | `QP2602-Q6` | `QP2602-Q6` | **no** |
-| `QP2508-Q6` | August 2025 Q6 | yes | `QP2602-Q6` | `QP2602-Q6` | **no** |
 | `QP2511-Q3` | November 2025 Q3 | **no** | `QP2601-Q6`, `QP2603-Q4`, `QP2604-Q6` | `QP2601-Q6`, `QP2603-Q4`, `QP2604-Q6` | **no** |
 | `QP2511-Q4` | November 2025 Q4 | **no** | `QP2603-Q5` | `QP2603-Q5` | **no** |
 | `QP2511-Q6` | November 2025 Q6 | **no** | `QP2603-Q7` | `QP2603-Q7` | **no** |
@@ -51,17 +44,13 @@ Every token is accounted for. A token that cannot be resolved is **counted here,
 
 ### Highest value to adjudicate first
 
-**12** of the 16 rows pair an **unsolved** target with an **already-built** counterpart. Those are the ones where adjudication could convert research into reuse, and they are the exact shape of the QP2509-Q6 miss.
+**8** of the 9 rows pair an **unsolved** target with an **already-built** counterpart. Those are the ones where adjudication could convert research into reuse, and they are the exact shape of the QP2509-Q6 miss.
 
 | Question | Sitting | Paper | Built counterpart(s) |
 |---|---|---|---|
-| `QP2404-Q4` | April 2024 Q4 | QP2404 | `QP2506-Q1` |
-| `QP2404-Q6` | April 2024 Q6 | QP2404 | `QP2602-Q6` |
 | `QP2406-Q8` | June 2024 Q8 | QP2406 | `QP2601-Q3`, `QP2604-Q3` |
 | `QP2408-Q3` | August 2024 Q3 | QP2408 | `QP2506-Q7`, `QP2601-Q8`, `QP2604-Q8` |
-| `QP2409-Q9` | September 2024 Q9 | QP2409 | `QP2506-Q1` |
 | `QP2410-Q1` | October 2024 Q1 | QP2410 | `QP2506-Q9`, `QP2508-Q5`, `QP2602-Q5` |
-| `QP2410-Q9` | October 2024 Q9 | QP2410 | `QP2602-Q6` |
 | `QP2511-Q3` | November 2025 Q3 | QP2511 | `QP2601-Q6`, `QP2603-Q4`, `QP2604-Q6` |
 | `QP2511-Q4` | November 2025 Q4 | QP2511 | `QP2603-Q5` |
 | `QP2511-Q6` | November 2025 Q6 | QP2511 | `QP2603-Q7` |
