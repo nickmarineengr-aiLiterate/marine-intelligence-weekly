@@ -25,8 +25,19 @@ sys.path.insert(0, HERE)
 from render_common import (REPO_ROOT, CONTACT, esc, strip_tags, read_css,
                            topbar, head_meta, footer, GATE_STUB, delivery_links)
 import recurrence_model as RM
+# KNOWN_ABSENT is owned by the year-sheet builder, which already distinguishes
+# "no sitting was held" from "not yet in the MIW set". Importing it keeps ONE
+# statement of which months genuinely have no examination -- a second hand-kept
+# list here would drift, and a wrong "No sitting" is a factual claim about the
+# examination, not a presentation detail.
+from build_questions_year import KNOWN_ABSENT
 
 SPEC_GLOB = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers', 'specs', '*.json')
+
+# Coverage states shown on the product home.
+AVAILABLE = 'AVAILABLE'
+PLANNED_SOON = 'PLANNED_SOON'
+NO_SITTING = 'NO_SITTING'
 
 MODES = [
     ('Understand', 'What the examiner is actually asking, and the trap in the wording.'),
@@ -60,6 +71,16 @@ HOME_CSS = """
   .sq-card .meta{color:var(--grey-text);font-size:.8rem;line-height:1.6;margin:0;}
   .sq-card .go{margin-top:auto;font-size:.85rem;font-weight:600;color:var(--teal);text-decoration:none;}
   .sq-newest{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal) inset;}
+  .cov-year{font-size:1rem;margin:1.1rem 0 .6rem;color:var(--grey-text);}
+  .cov-grid{grid-template-columns:repeat(auto-fill,minmax(210px,1fr));margin-bottom:.4rem;}
+  .sq-card.cov{padding:.85rem .95rem;gap:.35rem;}
+  .sq-card.cov h3{font-size:.95rem;}
+  /* Unavailable states are visibly quieter than an available paper, so the
+     difference reads at a glance rather than only on the label. */
+  .cov-planned,.cov-absent{background:#f8fafc;border-style:dashed;}
+  .cov-planned .m{color:var(--grey-text);}
+  .cov-absent .m{color:#94a3b8;}
+  .cov-absent h3{color:#94a3b8;}
   .sq-modes{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.85rem;}
   .sq-mode{border:1px solid var(--grey-border);border-radius:10px;padding:.85rem .95rem;background:#fff;}
   .sq-mode b{display:block;font-size:.9rem;margin-bottom:.25rem;}
@@ -81,6 +102,38 @@ def solved_sittings(specs):
     """Specs that actually carry model answers, oldest first."""
     solved = [d for d in specs if any(q.get('model_answer') for q in d['questions'])]
     return sorted(solved, key=lambda d: (d['year'], RM.MONTH_NUM[d['month']]))
+
+
+def coverage(specs):
+    """Honest month-by-month coverage: (year, month_num, month, state, paper_id).
+
+    Three states, and one deliberate silence:
+
+      AVAILABLE     a solved paper exists -- clickable
+      PLANNED_SOON  the sitting is in the MIW set and transcribed, but not yet
+                    solved. Shown so a candidate can see what is coming, with
+                    NO link, because there is no answer page to open.
+      NO_SITTING    no examination was held that month (KNOWN_ABSENT)
+
+    A month that is neither in the spec set nor in KNOWN_ABSENT is NOT RENDERED
+    AT ALL. That is what stops the page inventing sittings: the later months of
+    the current year simply do not appear until a real source paper exists for
+    them. Coverage is asserted from evidence, never from the calendar.
+    """
+    by_key = {(d['year'], RM.MONTH_NUM[d['month']]): d for d in specs}
+    years = sorted({y for y, _ in by_key} | {y for y, _ in KNOWN_ABSENT})
+    rows = []
+    for y in years:
+        for mn in range(1, 13):
+            d = by_key.get((y, mn))
+            if d is not None:
+                solved = any(q.get('model_answer') for q in d['questions'])
+                rows.append((y, mn, RM.MONTHS[mn - 1],
+                             AVAILABLE if solved else PLANNED_SOON,
+                             d['paper_id']))
+            elif (y, mn) in KNOWN_ABSENT:
+                rows.append((y, mn, RM.MONTHS[mn - 1], NO_SITTING, None))
+    return rows
 
 
 def newest_sitting(specs):
@@ -152,6 +205,45 @@ def build(specs):
         a('    </article>')
     a('  </div>')
     a('</section>')
+
+    # ---- coverage, stated honestly ---------------------------------
+    # The product is deliberately partial during controlled testing. A candidate
+    # is owed a straight answer about what exists, what is coming and what was
+    # never set -- not a grid that quietly omits the difference.
+    rows = coverage(specs)
+    if rows:
+        a('<section class="sq-section">')
+        a('  <h2>Coverage by sitting</h2>')
+        a('  <p class="lead">What is solved today, what is being worked on, and which months '
+          'had no examination. Months with no entry below are simply not in the MIW source '
+          'set yet &mdash; that is a statement about our coverage, not about whether a '
+          'sitting was held.</p>')
+        for y in sorted({r[0] for r in rows}, reverse=True):
+            a('  <h3 class="cov-year">%d</h3>' % y)
+            a('  <div class="sq-grid cov-grid">')
+            for (_yr, _mn, month, state, pid) in [r for r in rows if r[0] == y]:
+                if state == AVAILABLE:
+                    a('    <article class="sq-card cov cov-available">')
+                    a('      <span class="m">Available</span>')
+                    a('      <h3><a href="/solvedQP/%s.html">%s %d</a></h3>' % (pid, esc(month), y))
+                    a('      <a class="go" href="/solvedQP/%s.html">Open %s &rarr;</a>'
+                      % (pid, esc(month)))
+                elif state == PLANNED_SOON:
+                    # No anchor at all. A disabled-looking link that does nothing
+                    # reads as a broken product; absence of a control is honest.
+                    a('    <article class="sq-card cov cov-planned">')
+                    a('      <span class="m">Planned soon</span>')
+                    a('      <h3>%s %d</h3>' % (esc(month), y))
+                    a('      <p class="meta">Questions transcribed from the printed paper. '
+                      'Worked answers are in preparation.</p>')
+                else:
+                    a('    <article class="sq-card cov cov-absent">')
+                    a('      <span class="m">No sitting</span>')
+                    a('      <h3>%s %d</h3>' % (esc(month), y))
+                    a('      <p class="meta">No examination paper exists for this month.</p>')
+                a('    </article>')
+            a('  </div>')
+        a('</section>')
 
     # ---- how each question is worked -------------------------------
     a('<section class="sq-section">')
