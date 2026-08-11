@@ -99,7 +99,8 @@ def adapt(q_no, donor_id=None, patch=None, write=True):
     if write:
         out = STAGING / f"{q_no}.json"
         out.write_text(
-            json.dumps(obj, indent=1, ensure_ascii=False) + "\n", encoding="utf-8"
+            json.dumps(obj, indent=1, ensure_ascii=False) + "\n",
+            encoding="utf-8", newline="\n",
         )
     return obj
 
@@ -153,8 +154,10 @@ def assemble(write=True):
     spec["version"] = "1.0"
     spec["updated"] = "2026-08-12"
     if write:
+        # LF only. CRLF corrupts the content-hashed build artefacts on checkout.
         spec_path.write_text(
-            json.dumps(spec, indent=1, ensure_ascii=False) + "\n", encoding="utf-8"
+            json.dumps(spec, indent=1, ensure_ascii=False) + "\n",
+            encoding="utf-8", newline="\n",
         )
     print(f"assembled {len(staged)} question(s) into specs/QP2512.json")
     return True

@@ -4,17 +4,20 @@
 Last updated: 2026-08-12, after the **security remediation and live production deployment**
 session. See §1a for the security and deployment state — it is the newest thing here.
 
-> # QP PRODUCTION IS PAUSED AFTER QP2511.
+> # QP PRODUCTION HAS RESUMED. QP2512 IS THE ACTIVE LAPTOP PAPER.
 >
-> **Do not start another paper. Not QP2512, not QP2507, not any other.**
-> The queue in §7 remains recorded and is **PAUSED — DO NOT START UNTIL THE FOUNDER RESUMES**.
+> **The Founder lifted the pause on 2026-08-12 and authorised QP2512 — December 2025 — as the sole
+> laptop production object.** The pause banner that stood here is superseded.
 >
-> Paused for: repository hygiene · corpus-consumption integration · online product testing ·
-> parallel desktop production setup.
+> **QP2512 is PARTIAL: 3 of 9 authored and safely checkpointed.** See §7a. The canonical spec is
+> untouched and still reads `Intake Complete`; the finished questions are staged at
+> `staging/QP2512/`. **Resume QP2512 before starting anything else.**
 >
-> **Corpus consumption is now integrated** (§2a) — the corpus is consumed read-only from its own
-> private repository and is NOT synced into MIW, so that prerequisite is discharged rather than
-> pending. **The next Founder actions are the provision-view decisions in §6**, not a paper.
+> **Do not start any other paper**, and in particular do not touch the six desktop-allocated 2024
+> papers (`QP2401`, `QP2412`, `QP2402`, `QP2409`, `QP2411`, `QP2410`).
+>
+> Corpus consumption remains integrated (§2a) and read-only. **The Founder decisions in §6 are
+> still open and still do not block QP authoring** — QP2512 cites none of the three corpora.
 
 This file answers four questions and nothing else: *where are we now, what was completed,
 what is next, what is blocked.*
@@ -319,12 +322,40 @@ Fixed in `caf5020`.
 
 ---
 
-## 7. Production queue — **PAUSED**
+## 7a. QP2512 — December 2025 — **ACTIVE, PARTIAL, CHECKPOINTED**
 
-> **PAUSED — DO NOT START UNTIL THE FOUNDER RESUMES.**
-> Everything below is the queue **as recorded**, not work that is authorised. QP2512 is **not**
-> the next immediate work; the corpus sync is. The queue is kept intact so that no donor
-> intelligence is lost across the pause.
+**3 of 9 authored.** Branch `pastpapers/qp2512-founder-review`, based on `7e51b97`.
+
+| | |
+|---|---|
+| **Authored and staged** | **Q1, Q2, Q9** — each with a verification record at `verification/QP2512/` |
+| **Not started** | Q3, Q4, Q5, Q6, Q7, Q8 |
+| **Canonical spec** | **UNTOUCHED.** `specs/QP2512.json` still reads `Intake Complete`. No partial promotion |
+| **Build / delivery / UI** | **NOT RUN**, correctly — the paper is incomplete |
+| **Delivery surface** | QP2512 remains `PLANNED_SOON`. It is **not** advertised as available |
+| **Resume from** | [`staging/QP2512/CHECKPOINT.md`](../staging/QP2512/CHECKPOINT.md) — exact instructions, and the research foundation for all six remaining questions |
+| **Read first** | [`QP2512_TEMPORAL_AND_DONOR_ANCHOR.md`](QP2512_TEMPORAL_AND_DONOR_ANCHOR.md) |
+
+**Two findings a resuming session must not re-derive:**
+
+1. **The whole `A.12xx(34)` family is excluded from this paper**, and the reason is a *document*
+   date rather than an adoption date. The source copy prints `DECEMBER 2025` with **no day**, but
+   `A 34/Res.1206` was adopted 3 December 2025 and **issued 5 December 2025**, so the exclusion holds
+   without pinning the sitting.
+2. **The Procedures for Port State Control have three editions, not two.** `A.1185(33)` of
+   **6 December 2023** is operative at this sitting — `A.1155(32)` was revoked in 2023 and
+   `A.1206(34)` did not yet exist. This governs Q8, whose natural support `QP2606-Q2` is built
+   entirely on `A.1206(34)`.
+
+**Known dependency:** `Q1` cross-links to `QP2512.html#q8`, so `health_check.py` will fail link
+resolution until Q8 is authored. Intended, not a defect.
+
+---
+
+## 7. Production queue — resumed for QP2512 only
+
+> **QP2512 is authorised and active (§7a). Everything else below remains the queue as recorded,
+> not work that is authorised.** Finish QP2512 before nominating another laptop paper.
 
 **QP2511 — November 2025 — IS COMPLETE 9/9, BUILT AND DELIVERED.** Awaiting Founder review.
 
@@ -358,7 +389,11 @@ being rebuilt. Two of its questions now have direct donors from QP2511 itself (`
 > examination date against 3 December 2025 is the **first** task of that session, and if it cannot be
 > established the `A.12xx(34)` family must be treated as excluded rather than assumed available.
 
-**Do not start a new paper. Production is paused — see the banner at the top of this file.**
+**QP2512 was started on 2026-08-12 and is partial — see §7a. Finish it before starting anything
+else.** The one adjustment flagged above was worked and is now settled: the December sitting date is
+**not printed**, and the `A.12xx(34)` exclusion was established from the resolution's **issue date**
+of 5 December 2025 rather than by pinning the sitting. It also surfaced a third edition of the
+Procedures for Port State Control that this note did not anticipate — see §7a.
 
 ### Planned work while production is paused
 

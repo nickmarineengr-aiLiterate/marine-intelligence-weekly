@@ -736,6 +736,84 @@ REVISIT:   if an Assembly ever adopts at the opening of a session rather than at
 
 ---
 
+## When the adoption date is ambiguous, the resolution's ISSUE date settles it
+
+The Assembly-boundary lesson above resolves a sitting by **adoption** date. That works for every
+month except the one the adoption falls in. `QP2512` is that month: the 34th Assembly adopted on
+**3 December 2025** and the source copy prints `DECEMBER 2025` with **no day**, so a December
+sitting can fall on either side of the boundary and the governed fallback — exclude when the date
+cannot be established — leaves the question merely *defaulted* rather than answered.
+
+**A second date closes it.** An IMO resolution carries a **document date** as well as an adoption
+date, and the document date is later. `A 34/Res.1206` reads *"adopted on 3 December 2025"* on a
+cover dated **5 December 2025**. The Organization had not circulated the text until then, so no
+sitting anywhere in the month could be examined against it. The exclusion becomes **reasoned rather
+than defaulted**, and it does not depend on pinning the examination to a day.
+
+**How to apply.** When a sitting month contains the adoption date, read the resolution's cover for
+its document date before falling back on "cannot establish, therefore exclude". The fallback reaches
+the same answer; the document date tells you *why*, which is what a verification record has to
+carry. The gap is small — two days here — but it is the difference between a defensible finding and
+an admitted unknown.
+
+```
+EVIDENCE:  QP2512 session, 2026-08-12. A 34/Res.1206 obtained from the IMO resolutions CDN and its
+           cover read directly: "A 34/Res.1206, 5 December 2025 ... adopted on 3 December 2025".
+           Recorded in docs/QP2512_TEMPORAL_AND_DONOR_ANCHOR.md section 2.
+CATEGORY:  TEMPORAL_VERIFICATION
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     NONE -- adjudication, not detection. R7 rejected teaching the sweep resolution dates and
+           that rejection stands; this is a reading instruction for the author, not a table.
+REVISIT:   if a sitting is ever found whose month contains BOTH the adoption and the document date,
+           at which point neither settles it and the examination date must be established directly.
+```
+
+---
+
+## A re-issued instrument may have an edition you have never seen between the two you know
+
+The Assembly-boundary lesson predicts that a later donor cites a newer edition of a re-issued
+instrument. It leaves implicit a two-edition mental model — *the donor's* and *the one before it* —
+and that model is wrong often enough to matter.
+
+The Procedures for Port State Control have **three** editions in play across this corpus:
+
+```
+A.1155(32)   Procedures for PSC, 2021    adopted 15 December 2021
+A.1185(33)   Procedures for PSC, 2023    adopted  6 December 2023   revokes A.1155(32)
+A.1206(34)   Procedures for PSC, 2025    adopted  3 December 2025   revokes A.1185(33)
+```
+
+A session re-anchoring `QP2606-Q2` (June 2026, built entirely on `A.1206(34)`) back onto a December
+2025 sitting has to land on `A.1185(33)`. The intuitive move — *"before the 2025 Procedures came the
+2021 Procedures"* — **skips an entire edition and reaches an instrument that had been revoked for
+two years.** Nothing downstream catches it: the citation is real, the resolution exists, the content
+is close, and the answer reads correctly.
+
+**How to apply.** Never infer the predecessor edition. Open the donor's own resolution and read
+operative paragraph 4 — an IMO resolution that supersedes another **names what it revokes**, and its
+preamble recites the chain before that. Two reads give the whole lineage from the document you
+already have. Note also that **section numbering does not carry across editions**: `QP2606-Q2` cites
+`A.1206(34)` §2.3.11 for the right of appeal, and the equivalent in `A.1185(33)` must be located,
+not assumed.
+
+```
+EVIDENCE:  QP2512 session, 2026-08-12. A 34-Res.1206 and A 33-Res.1185 both obtained from the IMO
+           resolutions CDN and their operative paragraph 4 and preambles read directly.
+           Recorded in docs/QP2512_TEMPORAL_AND_DONOR_ANCHOR.md section 2.1.
+CATEGORY:  TEMPORAL_VERIFICATION
+STATUS:    PROVEN
+SEEN:      1   (prospective catch on QP2512-Q8; no defect shipped)
+OWNER:     NONE -- adjudication. No tool holds a resolution lineage table and R7 declined to give
+           one to the sweep.
+REVISIT:   if a per-instrument edition ledger is ever built, this becomes a lookup rather than a
+           reading instruction. The HSSC Survey Guidelines and the III Code obligations list are on
+           the same biennial cycle and will have the same three-edition shape.
+```
+
+---
+
 ## The contaminated donor was the FORWARD one, not the backward ones
 
 `QP2511` is a backwards-pull paper: five of its six donors are 2026 answers dragged back to a
