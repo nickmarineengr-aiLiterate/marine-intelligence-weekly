@@ -469,6 +469,141 @@ REVISIT:   if a hook is ever adopted deliberately, it must positive-control like
 
 ---
 
+### 15. A three-way comparison PROVES a port is safe; reading the diffs only guesses
+
+Before porting anything off a long-unmerged branch, compare every overlapping file three
+ways: fork point, the branch, and current.
+
+In the Solved QP recovery all six overlapping files -- the four money paths, `SQ/pay.html`,
+`SQ/index.html` -- hashed **identical between the fork point and current**. This lineage had
+never touched them after the branch was cut, so there was no later fix to preserve and
+taking the branch version was a port, not a regression.
+
+That is a *proof*, produced by six `git rev-parse` calls. No amount of reading the diffs
+establishes it, because reading tells you what the branch changed and never tells you what
+current changed underneath it. Run the comparison first; it also decides how much care the
+rest of the port needs.
+
+```
+EVIDENCE:  commerce/solvedqp-recovery, 2026-08-11. fork 217fbba == HEAD for all six
+           overlapping files; the four delivery-tooling files diverged on BOTH sides and
+           needed a genuine hand-port.
+CATEGORY:  BUILD_QA
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     NONE -- a session practice, not yet a tool
+REVISIT:   if a port is ever attempted without it and lands clean anyway.
+```
+
+---
+
+### 16. When two branches solve one problem differently, port the PLUMBING, not the POLICY
+
+A long-lived branch and the trunk will often have fixed the same hazard in different ways.
+Applying both is not belt-and-braces -- it can *undo* the better fix.
+
+The commerce branch kept `recurrence_class` and the host's recurrence annotation away from
+candidates by **gating them behind `publish`**. Current had since **deleted both**:
+`search_tokens` drops them in every mode and the card renders `corpus_relations()` instead.
+Porting the gating would have reintroduced exactly the fields current removed.
+
+Test the two rules against each other rather than merging them. Here the delivery checker
+settled it independently: current's labels ("Once in this set", "Repeated -- reworded") do
+not match the forbidden-label list at all, so the stronger rule already satisfied the
+weaker gate. Only the delivery plumbing was taken.
+
+```
+EVIDENCE:  commerce/solvedqp-recovery, 2026-08-11. build_paper.py --deliver ported;
+           the commerce publish-gating of recurrence_class/prior_sittings/recurrence
+           deliberately not.
+CATEGORY:  BUILD_QA
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     tools/pastpapers/solvedqp_check.py -- the guard that adjudicates
+REVISIT:   if a case appears where both rules are needed together.
+```
+
+---
+
+### 17. A number written into prose is frozen at its authoring date and no test will notice
+
+`SQ/index.html` advertised "Six complete solved sittings -- 54 questions". True when the
+commerce branch was cut; the product is now twelve sittings and 108 questions. The month
+list was 2026-only. Restoring the file verbatim would have under-described a **paid
+product on a public page**.
+
+Nothing catches this. Every test passed, the page rendered, the links worked. The delivery
+checker guards `data-newest-sitting` because it is a *marker*, and markers can be checked;
+the sentence beside it could not be, because it is prose.
+
+The generated surfaces already derive their counts -- the product home computes twelve
+sittings and 108 questions from the specs. The hand-written storefront is where frozen
+claims survive. Treat every number in hand-written commercial copy as stale until re-derived,
+and prefer a checked marker over a sentence wherever the fact is really derived.
+
+```
+EVIDENCE:  commerce/solvedqp-recovery, 2026-08-11. Corrected 6->12 sittings and
+           54->108 questions from the canonical specs during the storefront port.
+CATEGORY:  SURFACE_IMPACT
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     tools/pastpapers/solvedqp_check.py (markers only; prose remains unguarded)
+REVISIT:   when storefront counts are generated rather than typed.
+```
+
+---
+
+### 18. A relative link is a claim about where the page LIVES, and a projection moves it
+
+`cross_links` are authored relative to the review location `/meoclass1/pastpapers/`, so
+`../QB10_B.html` resolves correctly there. The delivery projection serves the same content
+from `/solvedQP/`, where that link resolves to a non-existent root path.
+
+The guard did not catch it: it matches absolute `href="/meoclass1/..."`, and these links
+never say `meoclass1`. They would have shipped as silent dead ends inside a paid page --
+no error, no console warning, nothing to see unless clicked.
+
+Whenever the same content is projected to a second base path, relative links are the first
+thing to re-examine, and a guard written for absolute paths does not cover them.
+
+```
+EVIDENCE:  commerce/solvedqp-recovery, 2026-08-11. Delivery now keeps only sibling
+           QP links whose target is actually delivered.
+CATEGORY:  BUILD_QA
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     tools/pastpapers/build_paper.py (deliver-mode cross-link filter)
+REVISIT:   if cross_links ever become absolute in the specs, which would retire this.
+```
+
+---
+
+### 19. Fix a defect that breaks nothing, then GUARD it -- that is the class that returns
+
+Delivery navigation carried one hard-coded link to `questions-2026.html`. Correct while
+2026 was the only solved year. Once 2024 and 2025 were solved, a reader of a 2024 paper was
+offered the 2026 sheet and had no route to their own.
+
+Nothing failed. The link resolved, the page existed, every check passed. A defect with no
+failure signal has nothing to stop it being reintroduced by the next person who needs "a
+link to the questions page" -- so the fix was paired with a guard, and the guard proved by
+mutation: a synthetic 2024 page offering only the 2026 sheet must be rejected, and is.
+
+The general rule: when a defect is found by reading rather than by failing, the guard is
+the deliverable, not the fix.
+
+```
+EVIDENCE:  commerce/solvedqp-recovery, 2026-08-11. delivery_links(year=...) plus
+           check_year_nav() and its mutation control in solvedqp_check.py --self-test.
+CATEGORY:  BUILD_QA
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     tools/pastpapers/solvedqp_check.py
+REVISIT:   never -- guarding a silent defect has no downside worth reopening.
+```
+
+---
+
 # PART 2 — REJECTED AND DEFERRED
 
 Recorded so they are not re-litigated for free, and reopened when their premise changes.

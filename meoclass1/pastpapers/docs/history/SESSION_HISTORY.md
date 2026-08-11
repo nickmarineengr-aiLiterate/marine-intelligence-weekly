@@ -3915,3 +3915,132 @@ to the review build.
 Surface impact against `440eebf`: 8 non-target changes — six `CANDIDATE_FACING_PAID` paper pages
 plus `index.html` and the manifest. All are the intended effect of a Founder-authorised correction,
 and all are reported rather than assumed.
+
+---
+
+# 35. Solved QP commercial architecture recovery — 2026-08-11
+
+Branch `commerce/solvedqp-recovery`, from `bf87b1a` on
+`pastpapers/qp2404-founder-review`. Six commits. Nothing merged, nothing deployed,
+no secret set, no payment path exercised.
+
+## 35.1 What this session was
+
+The Solved QP delivery architecture and the Security V2 access stack existed only on
+`commerce/solvedqp-security-v2`, which was never merged. The production lineage forked
+at `217fbba`, *before* that branch's own security work, and had been carrying paper
+production forward ever since. The task was to bring the architecture across
+selectively, without merging the branch and without regressing eleven papers' worth of
+later production work.
+
+## 35.2 The security incident came first
+
+`api/check-db.js` and `api/migrate-users.js` — unauthenticated handlers, one exposing
+database state and one performing a bulk user migration — were still live in this
+lineage. They had been deleted on the commerce branch by `76cc003`, but that deletion
+lived only on the branch nobody merged. **The fix existed; it just was not where it
+mattered.** Deleted here in its own commit before any recovery work.
+
+A sweep of the tracked tree afterwards found no hardcoded customer credentials. The one
+`MIW-` literal in `SQ/pay.html` is an input `placeholder` attribute showing the password
+*format*, not a password. `surface_impact.py` already classifies both deleted paths as
+`SECURITY`, so a reappearance escalates rather than passing quietly.
+
+**Password rotation: UNCONFIRMED.** No evidence of completion exists in the repository.
+Not attempted, not assumed. Launch blocker, not an engineering blocker.
+
+## 35.3 The recovery was cleaner than expected, and provably so
+
+Before porting anything, every overlapping file was compared three ways: fork point
+`217fbba`, the commerce branch, and current.
+
+For all six overlapping files — the four money paths, `SQ/pay.html`, `SQ/index.html` —
+**current was byte-identical to the fork point.** This lineage had never touched them
+after the branch was cut, so there was no later fix to preserve and taking the commerce
+version was a port rather than a regression. The three-way comparison did not just guide
+the merge; it *proved the merge was safe*, which no amount of reading the diffs would
+have established on its own.
+
+The eighteen additive files had no counterpart at all and were recovered by path with
+their index blob hashes verified identical to the source branch.
+
+## 35.4 Where the two branches genuinely disagreed
+
+The four delivery-tooling files had diverged on **both** sides, and one disagreement
+mattered.
+
+The commerce branch kept a candidate from seeing the source-copy host's recurrence
+annotation and the `recurrence_class` authoring field by **gating them behind
+`publish`**. This lineage had since solved the same problem by **deleting both**:
+`search_tokens` drops them unconditionally in every mode, and the card renders
+`corpus_relations()` — MIW's own chronological model over its own transcriptions.
+
+Porting the commerce gating would have *reintroduced the very fields current removed*.
+The delivery guards settle it independently: current's labels are "Once in this set" and
+"Repeated — reworded", which the checker's forbidden-label list does not match. The
+stronger rule already satisfied the weaker one, so only the delivery plumbing was taken.
+
+## 35.5 Two defects found while porting, neither reported by any test
+
+**The storefront was frozen at fork time.** `SQ/index.html` advertised "Six complete
+solved sittings — 54 questions" and listed 2026 months only. The product is twelve
+sittings and 108 questions across three years. Restoring the file unchanged would have
+under-described a paid product on a public page. No test asserts on marketing copy;
+only the three-way comparison surfaced it. Corrected from the specs.
+
+**Cross-links break on the delivery surface.** `cross_links` are authored relative to
+`/meoclass1/pastpapers/`, so `../QB10_B.html` resolves correctly there and resolves to a
+non-existent root path from `/solvedQP/`. The delivery guard matches *absolute*
+`href="/meoclass1/..."` only, so these would have shipped as silent dead ends inside a
+paid page. Delivery now keeps only sibling links to papers that are actually delivered.
+
+## 35.6 Year-aware navigation
+
+The audit's known defect: delivery navigation carried one hard-coded link to
+`questions-2026.html`. Correct while 2026 was the only solved year; with 2024 and 2025
+solved it offered a 2024 reader the 2026 sheet and no route to their own. The link
+resolved and the page existed, so nothing failed.
+
+Fixed by `delivery_links(year=...)` — a paper links to its own year, a year sheet links
+to itself, the home carries one link per solved year — and then **guarded**, because a
+defect that breaks nothing is exactly the kind that returns. The guard is proved by
+mutation: a synthetic 2024 page offering only the 2026 sheet must be rejected, and is.
+
+## 35.7 Results
+
+- Offline security: **62 tests pass, 0 fail** across both suites, each carrying positive
+  controls, so passing is evidence the guards fire rather than evidence they never ran.
+- Offline gate matrix: `/meoclass1/pastpapers/` requires `SOLVED_QP`, not
+  `ORAL_QB_NOTES` — the rule that stops the ₹1,500 Written library being handed to every
+  Oral customer. Traversal normalises before matching. Misconfigured and evicted both
+  deny.
+- Delivery: **16 files** — 12 papers, 3 year sheets, 1 index — plus the Oral-subscriber
+  promo. 108 questions across 12 papers, derived by the checker, never asserted by the
+  generator. The 16 intake specs were skipped by `is_intake()`.
+- `solvedqp_check.py --self-test`: all eleven guards fire on pages built to trip them.
+- Determinism: two consecutive full builds byte-identical across all 16 files. All output
+  LF. `*.mjs` was unpinned in `.gitattributes` and is now pinned — the recovered security
+  tests were the tree's only `.mjs` files and would have been checked out CRLF.
+- Review build byte-identical after the refactor: the existing product is untouched.
+- Full toolchain: **ALL STAGES PASS**, `run_toolchain.py` is `+43/-0`, no stage lost.
+
+## 35.8 PIL
+
+Surface impact against `bf87b1a`: **38 changes escalated for Founder review** — 17
+`SECURITY_SENSITIVE`, 17 `CANDIDATE_FACING_PAID`, 2 `COMMERCIAL`, 1 `PUBLIC_FREE`, 1
+`UNKNOWN_REVIEW`. This is the expected shape for a recovery and is reported, not
+suppressed.
+
+The first run classified the whole delivered product as `UNKNOWN_REVIEW` — escalated, so
+nothing was hidden, but "unclassified" is weaker than the truth. Rules for `solvedQP/`
+and `meoclass1/oralnotes/` were added as `CANDIDATE_FACING_PAID`. `.gitattributes` stays
+`UNKNOWN_REVIEW` deliberately: it carries no rule and it silently determines the bytes
+every delivered file is checked out with, so being asked about it is correct.
+
+## 35.9 Carried, not lost
+
+`SQ/solved-qp-sample-january-2026.html` was already modified in the working tree when the
+session began: 11 → 12 sittings, April 2024 added, and the removal of "and still as at
+August 2026", an authoring-date leak that dates the page the moment the month passes.
+Verified against the specs and committed on its own, so it reads as current product work
+rather than as part of the recovery.

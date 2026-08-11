@@ -77,6 +77,12 @@ Settled. Do not redesign without test evidence of a defect — see §7 below and
 | Build / check tooling | `tools/pastpapers/` — `run_toolchain.py` is the entry point |
 | Verification evidence | `meoclass1/pastpapers/verification/QP####/` |
 | Local provenance | `verification/LOCAL_SOURCE_PROVENANCE.md` — git-ignored, local only |
+| **Delivery projection** | `solvedQP/` — the paid customer copy, built from the same specs by `build_paper.py --deliver`. **Projection, not source.** Never hand-edit it |
+| **Route authorization** | `api/_lib/routes.js` — the single definition of which URL needs which entitlement. `middleware.js` enforces it; nothing else may decide |
+| **Price** | `api/_lib/products.js` — the only place an amount is decided. The browser may display a price, never choose one |
+
+`meoclass1/pastpapers/` is the **review** build of the specs; `solvedQP/` is the **delivery**
+build of the same specs. Two views, one source. Both are gated by `SOLVED_QP`.
 
 **Production Intelligence Layer (PIL) V1** exists on `workflow/pil-v1` and is **Founder-review
 only** — not merged, not on the content branch. It is two detectors wired into `run_toolchain.py`:
@@ -107,7 +113,8 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 | `pastpapers/2024-question-intake` | `7ca36b6` | 2024–2026 intake |
 | `pastpapers/2025-question-intake` | `3a4aa14` | 2025 intake |
 | `pastpapers/2026-v1-product-review` | `217fbba` | the 2026 V1 product review |
-| `commerce/solvedqp-security-v2` | `eaedfda` | frozen; do not reopen without a Founder decision |
+| `commerce/solvedqp-recovery` | this branch | **the Solved QP delivery product and the offline security stack** — Founder review. Branched from `bf87b1a`; inert, nothing deployed |
+| `commerce/solvedqp-security-v2` | `eaedfda` | frozen. **Do not merge.** Its content was selectively recovered onto `commerce/solvedqp-recovery`; its stale `solvedQP/` HTML was deliberately not |
 
 ---
 
@@ -115,13 +122,26 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 
 ### Blocking publication
 
-1. **The commerce stack cannot carry a paid product as it stands.** Paid content is publicly
-   readable (no `vercel.json`, no `middleware.js`), the **client sets the price**
-   (`api/create-order.js`), and there is **no entitlement model**. Detail in
-   `SOLVED_QP_COMMERCIAL_ARCHITECTURE.md` §2.
-2. **The third-party host recurrence annotation ships to students.** `build_paper.py` and
-   `build_index.py` render it outside the `if not publish:` guard, and the 2026 set measured it
-   wrong in both directions. Fixing it alters six approved pages.
+1. **Customer passwords have not been confirmed rotated.** The Security V2 incident record
+   requires rotation for the existing customer base after two unauthenticated endpoints were
+   found reachable in production. No evidence of completion exists anywhere in this repository.
+   Treat as **UNCONFIRMED**. This blocks launch, not further engineering.
+2. **The recovered security stack is inert.** `commerce/solvedqp-recovery` holds `middleware.js`,
+   `vercel.json`, `api/session.js` and `api/_lib/*`, all proven offline, but **nothing is
+   deployed and no secret is set**. Until `MIW_SESSION_SECRET`, `KV_REST_API_URL` and
+   `KV_REST_API_TOKEN` exist in the Vercel project and the branch is deployed, production paid
+   content remains as exposed as before. Middleware fails closed, so a half-configured deploy
+   denies rather than leaks — but it denies *everyone*, including paying customers.
+3. **`BUNDLE` has no approved price** and `create-order` refuses it. A bundle cannot be sold
+   until the Founder sets an amount. None was invented.
+
+*Resolved by the recovery session, 2026-08-11 — architecture only, not activation:* the client
+no longer sets the price (`api/create-order.js` reads `api/_lib/products.js` and discards any
+amount in the body); an entitlement model exists and is enforced by a single route policy
+(`api/_lib/routes.js`); and `/meoclass1/pastpapers/` now requires `SOLVED_QP`, so the Written
+library is not handed to Oral customers. The third-party host recurrence annotation blocker was
+already closed earlier in this lineage — `search_tokens` drops it in every mode and the card
+renders `corpus_relations()` instead — and the delivery checker now guards that boundary.
 
 ### Awaiting a decision, not blocking
 

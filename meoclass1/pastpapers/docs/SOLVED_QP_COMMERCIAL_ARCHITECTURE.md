@@ -11,6 +11,14 @@ line that supports it.
 
 ## 1. WHAT EXISTS TODAY — TRACED
 
+> **Dated snapshot.** §1 records the tree **as audited before the Security V2 work**. It is
+> kept verbatim as the "before" state the rest of this document argues against; do not read
+> it as current. Since then, on `commerce/solvedqp-recovery` (2026-08-11):
+> `api/check-db.js` and `api/migrate-users.js` are **deleted**; `vercel.json`,
+> `middleware.js`, `api/session.js` and `api/_lib/*` **now exist**; and route authorization
+> lives in `api/_lib/routes.js` with price in `api/_lib/products.js`. None of it is deployed.
+> Current state is in `CURRENT_STATUS.md` §4 and §6.
+
 ### 1.1 Files
 
 | Area | Files |
@@ -201,7 +209,14 @@ miw:ent:<email> = {
 
 **Migration matters and is easy to get wrong.** Every existing customer must be back-filled with
 `ORAL_QB_NOTES` **only**. A default of "has_access ⇒ everything" would hand the new product to the
-entire existing customer base. `api/migrate-users.js` already exists and is the natural home.
+entire existing customer base.
+
+> **Superseded, 2026-08-11.** This paragraph named `api/migrate-users.js` as the natural home.
+> That endpoint has been **deleted**: it was an unauthenticated handler performing a bulk user
+> migration, reachable in production. Back-fill now runs offline through
+> `tools/security/migrate_entitlements.mjs`, an operator tool with no HTTP surface. The
+> requirement is unchanged — back-fill `ORAL_QB_NOTES` **only** — but it must never again be
+> carried out by a public endpoint.
 
 **RECOMMENDATION — extend the three existing endpoints with a `product` dimension. Do not create
 `verify-qp-payment.js`, `check-qp-password.js` or `send-qp-email.js`.** Duplicating them would fork
@@ -293,7 +308,7 @@ Least-disruptive option that actually works, in preference order:
 | `api/create-order.js` | server-side price table; drop the client `amount` |
 | `api/verify-payment.js` | re-fetch order, check amount, read product from `order.notes`, write entitlement |
 | `api/check-password.js` | return the entitlement set; harden per §4.3 |
-| `api/migrate-users.js` | back-fill every existing user with `ORAL_QB_NOTES` only |
+| ~~`api/migrate-users.js`~~ → `tools/security/migrate_entitlements.mjs` | back-fill every existing user with `ORAL_QB_NOTES` only. The endpoint was **deleted** 2026-08-11; back-fill is an offline operator tool with no HTTP surface |
 | `middleware.js` | **new** — server-side gate for `/meoclass1/**` |
 
 ### 5.2 Free-sample card — ready to paste, uses existing SQ classes
