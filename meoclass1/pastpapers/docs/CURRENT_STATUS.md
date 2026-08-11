@@ -1,7 +1,7 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product.**
-Last updated: 2026-08-11, after the **DONOR-READINESS FIX and QP2509 PRE-AUTHORING** (§30).
+Last updated: 2026-08-11, after **QP2509 SEPTEMBER 2025 — COMPLETE** (§31).
 Read this first.
 
 ---
@@ -10,14 +10,15 @@ Read this first.
 
 | | |
 |---|---|
-| **Corpus** | **252 questions / 90 solved / 162 unsolved** — 28 papers, **10 solved**, 18 answerless intake |
-| **Solved papers** | QP2601, QP2602, QP2603, QP2604, QP2606, QP2607 (2026) · QP2403 · **QP2506** · QP2508 · QP2510 |
-| **Toolchain** | ALL STAGES PASS, 102 warnings; `health_check.py` 0 errors, 0 warnings; double build 18 artefacts, 0 byte differences |
+| **Corpus** | **252 questions / 99 solved / 153 unsolved** — 28 papers, **11 solved**, 17 answerless intake |
+| **Solved papers** | QP2601, QP2602, QP2603, QP2604, QP2606, QP2607 (2026) · QP2403 · QP2506 · QP2508 · **QP2509** · QP2510 |
+| **Toolchain** | ALL STAGES PASS, 110 warnings; `REUSE SELFTEST` PASS; `health_check.py` 0 errors; double build **23 artefacts, 0 byte differences** |
 | **Branch** | `pastpapers/qp2509-founder-review`, cut from `0d7f872` |
 | **Published** | Nothing. No paper merged to `main`; all pages `noindex` and ungated |
-| **Current paper** | **QP2509 September 2025 — PRE-AUTHORING, 0 / 9 authored.** Source verified, donors recomputed, temporal sweep complete. **Spec is untouched intake.** §30 |
-| **Open defect** | **CLOSED** at `0d7f872`. Donor readiness is derived from current solved state — §30.1 |
-| **Tier D (derived)** | **20** of 162 unsolved, against 15 under the stored field |
+| **Current paper** | **QP2509 September 2025 — COMPLETE, 9 / 9 authored, built, QA green. FOUNDER REVIEW.** §31 |
+| **Open defect** | **Host recurrence edges are DIRECTIONAL** in the donor derivation — an earlier paper cannot see a later paper that names it. Cost one missed donor this session. §31.3 |
+| **Tier D (derived)** | **21** of 153 unsolved; QP2509 promoted 3 questions C→D and improved 1 |
+| **Next paper** | **QP2404 April 2024** — 3/9 Tier D, family reach 5, 1 temporal flag. §31.5 |
 | **Standing stop conditions** | §28.13, unchanged |
 
 Everything below this table is **historical narrative**, newest section first. A section marked
@@ -69,7 +70,23 @@ not the present state.
 
 ---
 
-> # **§29 IS THE NEWEST SECTION. READ IT FIRST.**
+> # **§31 IS THE NEWEST SECTION. READ IT FIRST.**
+>
+> **QP2509 September 2025 is COMPLETE: 9 of 9 authored, built, toolchain ALL STAGES PASS,
+> `REUSE SELFTEST` PASS, determinism 23/23 byte-identical.** Corpus **252 / 99 / 153**,
+> 11 solved papers. Branch `pastpapers/qp2509-founder-review`.
+> Headline: **the Q9 donor cited `A.1207(34)`, adopted 3 December 2025 — three months AFTER
+> the sitting — on FOURTEEN surfaces, and its own "common mistake" bullet was inverted.** The
+> operative edition is `A.1186(33)`. Second finding: **host recurrence edges are directional**,
+> so QP2509-Q6 was scored "no donor" when a near-identical built answer existed (§31.3).
+> Next paper: **QP2404 April 2024** (§31.5).
+
+> # **§30 — superseded by §31. The donor-readiness fix and the QP2509 pre-authoring anchor.**
+>
+> Its temporal adjudications remain valid and were the input to §31; its "0 / 9 authored,
+> spec untouched" state does not.
+
+> # **§29 — superseded by §31 for the handover; still current for QP2506.**
 >
 > **QP2506 June 2025 is COMPLETE: 9 of 9 authored, built, toolchain ALL STAGES PASS.**
 > Corpus **252 / 90 / 162**, 10 solved papers. Branch `pastpapers/qp2506-founder-review`.
@@ -3305,3 +3322,108 @@ article 6 referring out to the LLMC. Anchor §5 items 2 and 5 are **discharged**
 answered for Q7 (**no tier B promotion**) and still open for Q8.
 
 **NO MAIN MERGE. NO SOLVED-QP LAUNCH. NO BUILD. QP2509 remains unfinished.**
+
+> **§30 is SUPERSEDED by §31.** The resume command above has been executed, the staging
+> directory has been retired, and QP2509 is complete. The temporal adjudications in §30.4 remain
+> valid and were the input to §31.
+
+---
+
+# §31 — QP2509 SEPTEMBER 2025, COMPLETE
+
+Authored 2026-08-11, resuming from checkpoint `25e049f`. Detail lives in the nine records at
+`verification/QP2509/`; this section carries state and the two findings that change how the
+next paper is chosen.
+
+## 31.1 State
+
+| | |
+|---|---|
+| Corpus | **252 / 99 / 153**, **11** solved papers (was 252 / 90 / 162, 10) |
+| Toolchain | `ALL STAGES PASS`, 110 warnings; `REUSE SELFTEST` PASS |
+| Determinism | rebuild produced **23 generated artefacts, 0 byte differences** |
+| UI | 61 assertions PASS on QP2509; desktop 1280 and mobile 375 clean, no console errors, no horizontal overflow, Answer is the default mode, host recurrence not searchable |
+| Staged work | Q2, Q5 and Q7 restored **mechanically** by the committed applier; staging then retired |
+
+The nine word-count warnings are the corpus-normal band excursion and were not trimmed.
+
+## 31.2 THE HEADLINE — a donor cited a resolution that did not exist at the sitting
+
+`QP2606-Q8` (June 2026) cites **`A.1207(34)`**, *Survey Guidelines under the HSSC 2025*, adopted
+**3 December 2025**. **QP2509 was sat in September 2025.** The operative edition is
+**`A.1186(33)`**, adopted 6 December 2023, revoking `A.1156(32)`.
+
+Three things make this the most instructive defect the series has produced:
+
+1. **It occupied FOURTEEN surfaces** — sources ×6, model answer, route, `regulations`,
+   `search_aliases`, `quick_revision` ×2, four study-guide sections, a retrieval card,
+   `reverify_before_publication` and `verification_status`.
+2. **The donor's own trap warning was inverted.** Its *Common mistakes* list said *"Citing
+   A.1186(33) as the current Survey Guidelines. It was revoked by A.1207(34)."* For this sitting
+   that instruction is exactly backwards.
+3. **The routine sweep could not see it.** The contamination sweep probes future *year* tokens.
+   This defect is dated **3 December 2025** — the same calendar year as the sitting.
+   **A future-contamination sweep must be date-aware relative to the sitting MONTH.**
+
+The survey *content* is identical in both editions, so the answer would have read as entirely
+correct. This is the §8 "wrong edition" case in its purest form. It joins `A.1208(34)` (§27) and
+`A.1184(33)` (§29) — **the 34th Assembly of December 2025 is now a standing boundary** for every
+2025 sitting.
+
+## 31.3 SECOND FINDING — host recurrence edges are DIRECTIONAL
+
+`QP2509-Q6` was scored **Tier C, "no family member with a built answer"**. `QP2601-Q2` is a
+built, verified answer to the **same printed question**, differing in two words.
+
+`QP2601-Q2`'s hint list names `2025/SEP/Q6`. `QP2509-Q6`'s cannot name `2026/JAN/Q2` — its source
+paper was printed before that sitting existed. **If edges are built from each paper's own hint
+list without symmetrising, an earlier paper can never see a later paper that names it** — and
+that is the direction a backwards-working programme needs.
+
+**Recommended fix, deliberately NOT made this session:** treat host recurrence hints as an
+**undirected** relation in `recurrence_model.py` / `build_reuse_map.py`. It would alter the map
+for the whole corpus and must not be done mid-paper.
+
+Together with the Q8 finding — the model is blind to a **limb-level** exact donor, where
+`QP2509-Q8` limb B) matches `QP2508-Q4` limb B word for word — the derivation has **two known
+blind spots**, both understating readiness.
+
+## 31.4 Three anticipated traps that did not exist
+
+The anchor flagged **Q3, Q4 and Q9** for reversal of the Merchant Shipping Act 2025 to the 1958
+Act. **None of the three engages that Act.** Q3 runs on the **Marine Insurance Act 1963 s.66**,
+Q9 is wholly international, and Q4 runs on the **Admiralty (Jurisdiction and Settlement of
+Maritime Claims) Act, 2017**. The prediction was reasonable from the donors' sitting dates and
+wrong in every case — but it caused all three donors to be swept carefully, which is how §31.2
+was found. Recorded as *checked, no temporal issue*, per protocol §2.
+
+Two questions declined a claim rather than guess: **Q4** states nothing about India's party
+status to the 1993 Convention (the UN document retrieved is the treaty text, not the
+participation list), and **Q1** quotes no TML value.
+
+## 31.5 NEXT SESSION — **QP2404, APRIL 2024**
+
+| Paper | Tier D | Family reach | Temporal flags |
+|---|---|---|---|
+| **QP2404** | **3 / 9** | **5** | **1** |
+| QP2511 | 3 / 9 | 4 | 2 |
+| QP2401 | 3 / 9 | 3 | 2 |
+| QP2507 | 0 / 9 | 8 | 2 |
+
+Chosen because it ties for the highest derived Tier D while carrying the **fewest temporal
+flags** of that group, and because **QP2509 itself created one of its donors** — `QP2404-Q3`
+(maritime lien) ← `QP2509-Q4`. Its one flag, `QP2404-Q2` **GUIDELINE EDITION**, should be taken
+seriously in light of §31.2.
+
+QP2509 created three C→D promotions — `QP2404-Q3` and `QP2512-Q9` from Q4, `QP2503-Q6` from Q5
+(flagged **HIGH**, HNS) — and gave `QP2412-Q4` a second donor that **predates the 34th Assembly**,
+which is the safer one for any pre-December-2025 sitting.
+
+**NO MAIN MERGE. NO SOLVED-QP LAUNCH. QP2509 IS FOUNDER-REVIEW ONLY.**
+
+## 31.6 Recommendation — split this file
+
+`CURRENT_STATUS.md` is now **~196 KB / 3,300+ lines**. The CURRENT STATE table and the newest
+section are what any session actually needs; §26–§30 are narrative. **Recommend splitting
+`SESSION_HISTORY.md` out of it**, leaving state plus the newest delta here. Not done this
+session — it would be a large diff landing on top of a paper awaiting review.

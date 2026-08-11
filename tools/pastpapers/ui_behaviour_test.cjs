@@ -358,6 +358,40 @@ const FIXTURES = {
     // citation contains the same letters.
     narrow: ['rule vii general average', 'QP2506-Q6'],
   },
+  QP2509: {
+    probes: [
+      ['bauxite', 'QP2509-Q1'],
+      ['carbon intensity indicator', 'QP2509-Q2'],
+      ['particular average', 'QP2509-Q3'],
+      ['maritime lien', 'QP2509-Q4'],
+      ['hazardous and noxious', 'QP2509-Q5'],
+      ['toolbox talk', 'QP2509-Q6'],
+      ['bunkers 2001', 'QP2509-Q7'],
+      ['maritime labour convention', 'QP2509-Q8'],
+      ['classification society', 'QP2509-Q9'],
+    ],
+    aliases: [
+      ['d40', 'QP2509-Q1', 'the bauxite question (the particle-size term is never rendered)'],
+      ['pari passu', 'QP2509-Q4', 'Q4'],
+      ['loto', 'QP2509-Q6', 'Q6'],
+      ['sleep debt', 'QP2509-Q8', 'Q8'],
+    ],
+    // A.1186(33) is the edition of the HSSC Survey Guidelines operative at THIS
+    // sitting. Its successor A.1207(34) was adopted 3 December 2025, after the
+    // paper was sat, and is deliberately absent from the answer. Probing the
+    // correct edition therefore also guards the reversal.
+    regulation: ['a.1186(33)', 'QP2509-Q9'],
+    // Leak probe. 2022/OCT/Q5 is a host annotation printed against Q9 on THIS
+    // source copy and appears on no other question of this paper. None of it
+    // may reach the shipped bytes.
+    recurrence: ['2022/oct/q5', 'QP2509-Q9'],
+    // Must resolve to exactly ONE card. September sets pollution liability
+    // twice over -- Q5 explains why a ship's own fuel falls outside HNS and Q7
+    // is the Bunkers/CLC comparison -- so 'bunker' and even 'bunkers 2001'
+    // resolve to both. Surveys are set only in Q9, and the radio certificate's
+    // full name cannot collide with anything else on the paper.
+    narrow: ['cargo ship safety radio certificate', 'QP2509-Q9'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';

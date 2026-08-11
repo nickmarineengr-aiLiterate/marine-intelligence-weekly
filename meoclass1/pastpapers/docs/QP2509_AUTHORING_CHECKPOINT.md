@@ -1,7 +1,22 @@
 # QP2509 — AUTHORING CHECKPOINT
 
-**Status: PARTIAL — 3 of 9 authored. `specs/QP2509.json` is UNTOUCHED INTAKE.
-The three authored objects are STAGED, not applied. DO NOT BUILD.**
+> # ⚑ CLOSED — 2026-08-11. THIS CHECKPOINT HAS BEEN CONSUMED.
+>
+> **QP2509 is COMPLETE: 9 of 9 authored, built, toolchain `ALL STAGES PASS`.**
+> See **`CURRENT_STATUS.md` §31** and the nine records at `verification/QP2509/`.
+>
+> The resume command in §3 below **has been executed**; Q2, Q5 and Q7 were restored mechanically
+> by the applier and the applier reported them byte-identical to the spec afterwards. The
+> **`staging/QP2509/` directory has been deleted** — it is obsolete and its docstring
+> ("DO NOT BUILD") is now actively misleading.
+>
+> **Nothing below has been rewritten.** The §5 substantive findings and the §4 record of the
+> authoring order remain accurate and were the input to the completing session. Only this header
+> is new. Read §5 for what not to re-derive; ignore §1, §3, §7 and §8, whose "partial" state is
+> superseded.
+
+**Status at the time of writing: PARTIAL — 3 of 9 authored. `specs/QP2509.json` was UNTOUCHED
+INTAKE and the three authored objects were STAGED, not applied.**
 
 Session 2026-08-11, branch `pastpapers/qp2509-founder-review`, from `c5e85f2`.
 
