@@ -262,7 +262,22 @@ def _derived_texts(q):
 REF_RELATIONSHIPS = ('PRIMARY_RULE', 'SUPPORTING_RULE', 'DEFINITION', 'PROCEDURE',
                      'LEGAL_BASIS', 'NUMERIC_SOURCE', 'CONTEXT')
 REF_STATES = ('REFERENCE_AVAILABLE', 'REFERENCE_PENDING', 'NO_CORPUS_OBJECT_YET')
-REF_ID_RE = re.compile(r'^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)+$')
+# Dots are permitted INSIDE a hyphen-separated segment because two of the three
+# ready True Source corpora address provisions that way, and the corpus contract
+# says to use their identities as-is rather than inventing a third vocabulary:
+#
+#   LSA   provisionId is natively dotted            -- LSA-1.1.1
+#   FSS   numbering restarts in every chapter, so
+#         the chapter is part of the identity       -- FSSCode-9-2.5.1.11
+#
+# The original pattern was written when MARPOL Annex VI (MARPOL-VI-14-146) was
+# the only worked example, so it encoded an accidental assumption rather than a
+# rule -- and it rejected LSA, the one corpus that is frozen, text-bearing AND
+# quotation-cleared. Segments still may not be empty and an id still may not
+# start or end with a separator, so nothing looser than "dotted segment" is
+# admitted here.
+REF_ID_RE = re.compile(r'^[A-Za-z0-9]+(?:\.[A-Za-z0-9]+)*'
+                       r'(?:-[A-Za-z0-9]+(?:\.[A-Za-z0-9]+)*)+$')
 
 # Frozen architectural rule. Enforced from the outset, before any reference
 # exists, because the cheap moment to forbid page coupling is before the first
