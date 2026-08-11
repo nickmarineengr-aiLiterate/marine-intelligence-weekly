@@ -321,3 +321,182 @@ worse.
 | Secrets set or displayed | **NONE** |
 | Merge to `main` | **NOT PERFORMED** |
 | Verdict | **SECURITY REMEDIATION BLOCKED — DO NOT DEPLOY** |
+
+---
+
+# SESSION 3 — 2026-08-12 — REMEDIATED AND DEPLOYED
+
+Both launch blockers are closed, a third was found and closed, and a fourth defect was found
+*because* of the deploy and closed the same session. The Written product and the Security V2
+gate are live.
+
+| | |
+|---|---|
+| Production commit | `2c97950` |
+| Deployment | LIVE, verified against the domain rather than assumed from the push |
+| Verdict | **SECURITY REMEDIATED — LIVE FOR CONTROLLED TESTING** |
+
+## 10. THE AFFECTED-ACCOUNT COUNT WAS 100, NOT 28
+
+28 was the size of the leaked git blob. Production truth was measured, not assumed, and it
+differed:
+
+| Measurement | Before | After |
+|---|---|---|
+| Accounts holding a credential | 100 | 100 |
+| Legacy plaintext | **100** | **0** |
+| Hashed | 0 | **100** |
+| Distinct salts | — | 100, one per record |
+
+The divergence has a second cause beyond the blob. The removed `api/check-db.js` was an
+unauthenticated `GET /api/check-db?email=...` returning the stored credential for *any* address
+supplied. Every stored credential was retrievable while it was deployed, so the exposure was
+never limited to the 28 in git history.
+
+Session 2 hypothesised that some accounts would have been silently hash-upgraded by ordinary
+logins. That is **disproven by measurement**: zero were. Security V2 had never been deployed, so
+the opportunistic upgrade path had never executed even once.
+
+## 11. ROTATION — EXECUTED
+
+| | |
+|---|---|
+| Affected | 100 |
+| Rotated and notified | **100** |
+| Rotated, email failed | 0 |
+| Already safe | 0 |
+| Failed | 0 |
+| Sessions revoked | 0, none existed — V2 had never issued one |
+
+Delivery was proven end-to-end on a disposable address before the batch ran. Every record was
+read back after writing and re-checked as a hash, so a store that accepted a write without
+persisting it would have raised rather than being tallied as a success.
+
+No password, no address and no secret was printed, logged or committed at any point.
+
+## 12. LAUNCH-BLOCK-1 — CLOSED
+
+Legacy plaintext authentication is **removed, not disabled**. `verifyPassword` accepts
+`sha256$salt$digest` and nothing else; the `legacy` return field is gone, so no caller can branch
+on the stored form. `check-password.js` lost its opportunistic upgrade block with it, so
+authentication no longer writes to the credential store at all.
+
+Closure test: zero legacy plaintext records remain, so no exposed password can authenticate.
+88 offline tests green — 34 security, 32 sessions, 22 rotation — including seven mutation cases
+and a positive control that differs only in the *stored* form.
+
+## 13. LAUNCH-BLOCK-2 — CLOSED
+
+`MIW_SESSION_SECRET` generated with 48 bytes of CSPRNG entropy, set for Production and Preview,
+never displayed. Presence-only verification: 14 of 14 Production variables CONFIGURED.
+
+Ordering mattered and was deliberate: the secret was set **after** rotation. Setting it first
+would have re-armed every leaked password as a working credential, because the secret is what
+makes the login path operative at all.
+
+## 14. LAUNCH-BLOCK-3 — CLOSED, VIA A ONE-LINE DEPENDENCY
+
+The Security V2 cutover initially **failed to deploy**:
+
+    The Edge Function "middleware" is referencing unsupported modules:
+        - __vc__ns__/0/middleware.js: @vercel/edge
+
+`middleware.js` had imported `next` from `@vercel/edge` since it was written, but the package was
+never in `dependencies`. Nothing caught it: the build script is `echo 'Build successful'`, and the
+Edge bundler is the first stage that actually resolves the import — which had never run, because
+middleware.js had never been deployed.
+
+**A missing dependency presented as a security exposure.** The gate silently did not ship, and the
+paid Oral product stayed publicly readable for as long as that was true.
+
+## 15. LAUNCH-BLOCK-4 — CAUSED BY THE DEPLOY, FOUND BY THE FOUNDER, CLOSED
+
+Immediately after the cutover the Founder signed in successfully and saw *"No products are
+attached to this account yet."*
+
+`miw:ent:*` contained **zero records, across all 100 accounts**. `tools/security/
+migrate_entitlements.mjs` — which translates the pre-V2 model, *has a password therefore may open
+/meoclass1/*, into per-product entitlements — had never been run.
+
+While `/meoclass1/` was ungated this was invisible; customers read the content regardless. The gate
+then began correctly enforcing an entitlement that had never been recorded for anyone, so **the
+deploy converted a silent data gap into 100 locked-out paying customers.**
+
+Closed by running the back-fill: 100 granted `ORAL_QB_NOTES`, 0 granted `SOLVED_QP` — nobody paid
+for the Written product under the old model, and a blanket grant would have handed away the entire
+library. Census after: 100 entitled, 0 unentitled, 0 entitlement records without a credential.
+Confirmed live by the Founder regaining access.
+
+**The lesson is an ordering one.** A gate and the data it reads must be verified together. A correct
+gate over absent data fails exactly as hard as a broken gate, and it fails silently until a real
+customer signs in.
+
+## 16. LIVE VERIFICATION
+
+Access matrix, live against the production domain:
+
+| Route | none | ORAL | SOLVED | DUAL |
+|---|---|---|---|---|
+| `/meoclass1/`, `/meoclass1/QB1_A.html` | 302 nosession | **200** | 302 noentitlement | **200** |
+| `/meoclass1/oralnotes/` | 302 nosession | **200** | 302 noentitlement | **200** |
+| `/meoclass1/pastpapers/` | 302 nosession | 302 noentitlement | **200** | **200** |
+| `/solvedQP/`, `/solvedQP/QP2601.html` | 302 nosession | 302 noentitlement | **200** | **200** |
+| `/`, `/SQ/`, `/SQ/pay.html` | **200** | **200** | **200** | **200** |
+
+Also verified live:
+
+- **a forged `miw_auth=1` grants nothing** — the original V1 vulnerability, now inert
+- a forged `miw_session` signature is rejected
+- deep link logged-out redirects to `/SQ/pay.html?next=%2FsolvedQP%2FQP2601.html&reason=nosession`,
+  then returns 200 on the same URL once signed in as SOLVED
+- two devices stay signed in; a third login evicts the oldest (`gate=evicted`) rather than failing
+- logout invalidates immediately (`gate=nosession`)
+- the free January sample is readable with **no session**, and links into `/solvedQP/` **zero**
+  times — the paid library does not leak through the funnel
+- live product truth matches the offline build exactly: **13 papers, 15 planned soon, 3 no
+  sitting**; `questions-2024/2025/2026.html` all 200
+
+Only one free-sample route exists, from `/SQ/index.html`. The brief anticipated a second path via
+Oral Notes; no page under `/meoclass1/` links the sample, so there is nothing there to gate.
+
+Test accounts were disposable `example.com` records, created for the run and destroyed after. The
+store was re-audited afterwards and holds exactly the 100 customer records.
+
+## 17. KNOWN DEFECTS — OPEN, NOT BLOCKING
+
+1. **Session eviction tie-break.** `loginCommands` issues `ZREMRANGEBYRANK key 0 -3` and scores
+   sessions in whole seconds. Three logins inside one second tie on score, and Redis breaks a rank
+   tie lexicographically by member — a random session id. The evicted session can therefore be the
+   *newest*, contradicting the "retires the OLDEST, so the device in the customer's hand always
+   works" guarantee in `api/check-password.js`. Low severity, needs three logins inside one second.
+   Deliberately not fixed: the two-session design is frozen architecture.
+
+2. **nodemailer <= 9.0.0, eight high-severity advisories** — SMTP command injection via
+   `envelope.size` and via transport name, CRLF header injection, `raw` and `jsonTransport`
+   file-access bypass, OAuth2 TLS validation, addressparser DoS. None of the affected vectors are
+   reachable here: message content, headers and envelope are entirely server-authored. The fix is
+   `nodemailer@9.0.5`, a breaking major. Deliberately not taken mid-incident — destabilising the
+   mail path while it was the sole delivery channel for 100 credentials was the larger risk.
+
+3. **Password hashing is a single-round salted SHA-256, not a KDF.** Adequate *only* because every
+   credential is now 16 characters from a 32-symbol alphabet drawn by `crypto.randomInt`, about 80
+   bits, which is not brute-forceable regardless of hash speed. **If self-chosen passwords are ever
+   introduced this must become scrypt or Argon2 first.** Recorded in `session.js`.
+
+4. **Operator credentials were pasted into a chat transcript** during this session. The Upstash
+   REST token, the Brevo SMTP key and a Brevo account password must be treated as exposed and
+   rotated at source. Independent of the git-history incident.
+
+## 18. HISTORICAL GIT EXPOSURE — CLASSIFICATION
+
+**NOT REQUIRED FOR AUTHENTICATION SAFETY AFTER ROTATION.** Every credential in the blob is dead:
+the store holds no plaintext record, and the code path that would compare one no longer exists.
+
+**RECOMMENDED FOR DATA MINIMISATION.** The blob still carries 28 customer email addresses in a
+public repository. That is a privacy consideration rather than an access one, and it is a separate
+Founder decision.
+
+History was **not** rewritten, deliberately. It would disturb every branch including the immutable
+desktop baseline `9c97359`, and it would not undo anything — the repository is public and anyone who
+cloned holds a copy. Credential invalidation was the remedy; pretending the blob never existed is
+not one.
