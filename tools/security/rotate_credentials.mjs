@@ -159,9 +159,39 @@ async function main() {
   }
 
   const transport = NO_EMAIL ? null : await makeTransport();
+  if (transport) {
+    // Authenticate ONCE, before the first account is touched. A bad key
+    // discovered at message 1 costs nothing; discovered at message 60 it
+    // has already locked out 60 paying customers.
+    await transport.verify();
+    console.log("mail relay: authenticated");
+  }
+
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+  /**
+   * Delivery is the LAST step of a rotation and the only one that cannot
+   * be retried afterwards — by the time it runs, the old password is
+   * already dead and the new one exists nowhere but this message. A
+   * transient relay throttle must therefore be retried HERE, inside the
+   * one call rotateAccount will treat as final.
+   */
   const sendMail = NO_EMAIL
     ? async () => { throw new Error("email suppressed by --no-email"); }
-    : async (message) => transport.sendMail(message);
+    : async (message) => {
+        let lastError;
+        for (let attempt = 1; attempt <= 3; attempt++) {
+          try {
+            return await transport.sendMail(message);
+          } catch (e) {
+            lastError = e;
+            // 4xx/timeouts are worth retrying; a hard rejection is not,
+            // but retrying it twice costs two seconds and risks nothing.
+            if (attempt < 3) await sleep(attempt * 2000);
+          }
+        }
+        throw lastError;
+      };
 
   const tally = {
     rotated: 0, rotated_email_failed: 0,
@@ -186,6 +216,10 @@ async function main() {
       tally.failed++;
       console.error(`   ${maskEmail(email)}  FAILED  ${e.code || e.message}`);
     }
+    // Pace the relay. A hundred messages fired back-to-back is exactly
+    // the shape that trips a shared-relay rate limit, and here a
+    // throttle costs a customer their access, not just a retry.
+    if (!NO_EMAIL) await sleep(250);
   }
 
   console.log("\n--- RESULT ---");
