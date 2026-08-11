@@ -213,3 +213,111 @@ When `LAUNCH-BLOCK-1` action 1 is complete, the next session must, **in this ord
 | Credentials in this file | **NONE**, by design. The affected accounts are identified by their location in history, never reproduced here |
 | Merge to `main` | **NOT PERFORMED** |
 | Verdict | **LIVE DEPLOYMENT BLOCKED** |
+
+---
+
+# SESSION 2 — 2026-08-12 — REMEDIATION ATTEMPT
+
+Assessed on `release/written-live-test-v1`. The intent was to close both blockers, reconcile with
+`main`, and deploy for controlled testing. **Deployment was again not performed.** Two of the three
+blockers cannot be closed from an engineering session at all, and the third was found to be larger
+than previously recorded.
+
+## 8. `LAUNCH-BLOCK-3` — production has no Security V2 at any level
+
+**Severity: BLOCKER. Status: OPEN. Newly characterised this session.**
+
+Earlier sessions recorded that paid content was exposed. This session established *why*, and the
+reason changes what deployment means.
+
+`origin/main` (`0766d00`) contains **no `api/_lib/`, no `middleware.js`, and no Security V2
+`check-password.js`**. Verified by `git ls-tree -r origin/main`. The entire signed-session
+architecture — session minting, entitlement lookup, Edge middleware gating — exists **only on
+unmerged branches**. Production has never run any of it.
+
+Two consequences follow, and both were verified live against `marineintelligenceweekly.com`:
+
+| Probe | Result |
+|---|---|
+| `GET /meoclass1/QB1_A.html`, no cookie, no session | **HTTP 200, 280,350 bytes** — the complete paid question bank |
+| Gate present in that payload | `if(!/miw_auth=1/.test(document.cookie))` — client-side only |
+| `GET /solvedQP/…` | 404 — the Written product has never been deployed, so nothing leaks there |
+
+**The paid Oral product is currently readable by anyone with `curl`.** The redirect is evaluated in
+the browser *after* the bytes have already been delivered, so it protects nothing against a client
+that simply does not run it. Setting `document.cookie="miw_auth=1"` defeats it in a browser too.
+
+This also explains `LAUNCH-BLOCK-2`. `MIW_SESSION_SECRET` is not "missing by oversight" — it is
+absent because **nothing in production consumes it yet**. The two facts are one fact.
+
+> Deployment is therefore not a configuration change. It is an **architecture cutover**: merging
+> Security V2 to `main` for the first time, on a live paying product. That is not a step to take in
+> the same motion as an unrelated release, and not one to take while `LAUNCH-BLOCK-1` is open.
+
+## 9. WHY ROTATION COULD NOT BE EXECUTED
+
+The rotation mechanism is **built, committed and proven** (`eeb8cfe`; `api/_lib/rotation.js`,
+`tools/security/rotate_credentials.mjs`, 22 rehearsal tests). It was not run, for one reason:
+
+**The production datastore is unreachable from an engineering session.** Every credential-bearing
+variable on the Vercel project is marked *Sensitive*. `vercel env pull` returns all of them as a
+single identical 11-character placeholder — confirmed by an identity test across five variables and
+by the fact that `KV_REST_API_URL` does not parse as a URL. No value was displayed at any point.
+
+`rotate_credentials.mjs` requires `KV_REST_API_URL` and `KV_REST_API_TOKEN` and exits `2` without
+them. **This is correct behaviour and must not be worked around.** Sensitive-marking is doing its
+job; the appropriate response is for the Founder to supply the credentials through a governed
+channel, not for the tooling to be loosened.
+
+Consequently the affected-account audit (§4–5 of the session brief) returned **no counts**. The
+often-quoted figure of 28 is the size of the *leaked blob*, not a production measurement. The two
+diverge: some accounts will have been silently hash-upgraded by ordinary logins since the leak, and
+some may no longer exist. **Do not rotate from the blob.** `audit` must be run first.
+
+## 10. WHAT WAS COMPLETED THIS SESSION
+
+| Item | Result |
+|---|---|
+| Machine preflight, governed stale-session reap | 1 cluster reaped, 259 MB recovered |
+| `origin/main` reconciled into `release/written-live-test-v1` | **clean merge**, no conflicts |
+| LLMC correction `LEG.3(91)` → `LEG.5(99)` preserved | **YES** — 7 corrected citations; the 2 remaining mentions are correction-footer text documenting the fix |
+| Security-endpoint removal preserved | **YES** — `api/check-db.js`, `api/migrate-users.js` absent |
+| `security.test.mjs` / `sessions.test.mjs` / `rotation.test.mjs` | **34 + 28 + 22 = 84/84 pass** |
+| `run_toolchain.py` and `--self-test` | **ALL STAGES PASS**, 140 warnings |
+| `solvedqp_check.py` and `--self-test` | **PASS** — 117 questions, 13 papers |
+| Determinism | **byte-identical** across a double build |
+| Local site test (10 routes, server torn down) | all **200** |
+| Product inventory | **13 Available · 15 Planned soon · 3 No sitting**; 13 papers, 3 year sheets, 1 index |
+| Legacy credential-path audit | **clean** — 5 endpoints, no debug/migration/credential-return route; new accounts stored **hashed** |
+| `MIW_SESSION_SECRET` set | **NO — deliberately not set.** Per §4a it must follow `LAUNCH-BLOCK-1`, and per §8 it would do nothing until Security V2 ships |
+
+Nothing was pushed, nothing was merged to `main`, no secret was set, no customer record was read or
+written, and no email was sent.
+
+## 11. THE THREE BLOCKERS, AND WHO CAN CLOSE THEM
+
+| Blocker | Closable by an engineering session? |
+|---|---|
+| **1** — published credentials still authenticate | **No.** Needs production datastore credentials from the Founder, then `rotate_credentials.mjs audit`, then `rotate --confirm` |
+| **2** — `MIW_SESSION_SECRET` missing | **Yes**, but only meaningfully after 1 and 3 |
+| **3** — paid content requires no authentication in production | **No.** Requires a Founder decision to cut Security V2 over to `main` on a live paying product |
+
+**Ordering is forced:** 3 must ship for 2 to matter, and 1 must close before 3 ships — because
+deploying the entitlement gate while published passwords still work hands an attacker a legitimate
+customer identity rather than merely exposing content. Closing them in any other order makes things
+worse.
+
+## 12. SESSION 2 RECORD
+
+| | |
+|---|---|
+| Assessed | 2026-08-12 |
+| Assessed at | `release/written-live-test-v1` (reconciled with `origin/main`) |
+| Deployment commit | **NONE — not deployed** |
+| Routes tested live | **read-only unauthenticated probes only**, to establish exposure |
+| Test accounts created | **NONE** |
+| Credentials rotated | **NONE** — mechanism proven, execution blocked on datastore access |
+| Emails sent | **NONE** |
+| Secrets set or displayed | **NONE** |
+| Merge to `main` | **NOT PERFORMED** |
+| Verdict | **SECURITY REMEDIATION BLOCKED — DO NOT DEPLOY** |
