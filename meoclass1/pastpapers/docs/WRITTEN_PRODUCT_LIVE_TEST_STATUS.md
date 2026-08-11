@@ -587,3 +587,20 @@ account holding it — the back-fill deliberately granted `ORAL_QB_NOTES` only, 
 for the Written product under the old model.
 
 **Test totals after this work: 112 green** — 38 security, 32 sessions, 22 rotation, 20 reset.
+
+### 19.5 Issued-time stamp on credential emails — `089ce8b`
+
+A credential can be replaced several times in a day and each replacement kills the one before it.
+`buildRotationEmail` and `buildResetEmail` are distinct, but two of the three paths share a subject
+line, so a recipient could only infer which email was live from its position in the inbox — which
+mail clients reorder, thread and collapse.
+
+The Founder hit this directly: four emails in one night, three carrying real credentials, only the
+last valid, and nothing in the content to say so.
+
+The credentials block now carries an **Issued** row in IST plus one line of instruction. An UPGRADE
+email deliberately carries no stamp, because it issues no credential and a timestamp would imply
+one had been sent. `issuedStamp(date)` takes an injectable date so the formatter is testable — an
+untested date formatter is how a mail goes out reading "Invalid Date".
+
+**Test totals after this work: 121 green** — 38 security, 32 sessions, 22 rotation, 29 reset.
