@@ -54,9 +54,13 @@ integration a merge archaeology exercise instead of a review.
 ### PARALLEL PRODUCTION BASELINE COMMIT — proposed, awaiting Founder nomination
 
 ```
-541c5e4   workflow/corpus-consumer-integration
-          "feat(solvedqp): state coverage honestly for controlled online testing"
+workflow/corpus-consumer-integration   -- HEAD at Founder approval
+                                          935428d at the time of writing
 ```
+
+Deliberately named as **the branch head, not a frozen hash**: this branch is under Founder review
+and any review correction would move the hash, leaving a nominated commit that is no longer the
+state anyone reviewed. The Founder nominates the head as approved.
 
 **Supersedes the earlier `fddae20` proposal.** That commit was the newest state in which the
 corpus, the toolchain, the delivery product and the recovered security stack were simultaneously

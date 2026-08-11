@@ -40,7 +40,7 @@ what is next, what is blocked.*
 | This branch | `pastpapers/qp2511-founder-review` — **QP2511 COMPLETE 9/9, built and delivered.** Branched from `commerce/solvedqp-recovery` @ `462cfbc`. `staging/` has been retired |
 | **Head** | `fddae20` — verified in the freeze session. Tracked tree was clean before the freeze commits |
 | **Consumer branch** | `workflow/corpus-consumer-integration` @ **`541c5e4`**, branched from the freeze head `9904af4`. First True Source consumer integration and honest product coverage. **Not merged to `main`** |
-| **Freeze baseline** | **`541c5e4` is the proposed PARALLEL PRODUCTION BASELINE COMMIT**, awaiting Founder nomination. It supersedes the earlier `fddae20` proposal because it carries the consumer architecture every future paper branch should inherit — see [`PARALLEL_PRODUCTION_BOARD.md`](PARALLEL_PRODUCTION_BOARD.md) §2 |
+| **Freeze baseline** | **The head of `workflow/corpus-consumer-integration` is the proposed PARALLEL PRODUCTION BASELINE**, awaiting Founder nomination. It supersedes the earlier `fddae20` proposal because it carries the consumer architecture every future paper branch should inherit. Named as a branch head rather than a hash, because a review correction would move it — see [`PARALLEL_PRODUCTION_BOARD.md`](PARALLEL_PRODUCTION_BOARD.md) §2 |
 
 All git commands in this repository need `-c safe.directory=*`.
 
