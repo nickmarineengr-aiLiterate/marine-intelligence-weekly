@@ -84,11 +84,24 @@ have produced — no scratch output, no stray render, no leftover temporary file
 - **No merge to `main` without Founder approval.**
 - Finish with a clean tracked tree and state the branch and commit in the report.
 
-## 7. CURRENT_STATUS UPDATE
+## 7. STATE, HISTORY AND LESSONS — three files, three owners
 
-Update `CURRENT_STATUS.md` with **state only**: what now exists, what is next, what is
-blocked. Do not add policy to it — policy belongs in the protocol files. Do not rewrite
-historical entries; append.
+At finalisation you update up to three files, and each takes a different kind of writing. Do not
+put the session narrative in `CURRENT_STATUS.md`; that is what made it 200 KB.
+
+| File | What you write | How |
+|---|---|---|
+| `CURRENT_STATUS.md` | **current-state delta only** — new corpus totals, the new latest paper, the new next target, blockers opened or closed | **edit in place.** Replace the superseded rows. It must stay small and scannable |
+| `history/SESSION_HISTORY.md` | the **session narrative** — what you did, what you found, what you rejected and why | **append** a new `§NN` section using the schema at the top of that file. Never renumber or rewrite an existing section |
+| `WORKFLOW_LESSONS.md` | only when a **reusable** lesson or rejection genuinely changed | edit the relevant entry |
+
+Three rules that are easy to get wrong:
+
+- **Do not add policy to `CURRENT_STATUS.md`** — policy belongs in the protocol files.
+- **Do not correct history to match current state.** Old counts, old decisions and old mistakes are
+  evidence. If a historical section is superseded, say so in a new section; do not edit the old one.
+- **A session with no reusable lesson writes nothing to `WORKFLOW_LESSONS.md`.** Padding it
+  devalues the entries that are load-bearing.
 
 ## 8. STANDARD REPORT SCHEMA
 

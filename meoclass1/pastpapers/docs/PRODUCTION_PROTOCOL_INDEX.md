@@ -24,6 +24,9 @@ Two consequences that are easy to get wrong:
 - **`CURRENT_STATUS.md` describes STATE, not POLICY.** Where it restates a rule that a
   protocol file below also states, the **protocol file wins**. `CURRENT_STATUS` may not
   silently redefine stable policy.
+- **`history/SESSION_HISTORY.md` is HISTORY, not state and not policy.** It is append-only
+  evidence and was accurate when written. It never overrides `CURRENT_STATUS.md` on state or a
+  protocol file on policy, however emphatically an old section is worded.
 - **A handover or NEXT_SESSION file carries DELTA only.** It does not override repository
   governance unless the Founder explicitly authorises that in the session prompt.
 - **`WORKFLOW_LESSONS.md` is EVIDENCE, not policy.** Where a lesson has been promoted, the
@@ -41,7 +44,7 @@ Two consequences that are easy to get wrong:
 | `TEMPORAL_AND_DONOR_VERIFICATION_PROTOCOL.md` | sitting-date truth, donor reuse, recurrence, contamination sweeps | **always**, for any paper production |
 | `EXECUTION_EFFICIENCY_POLICY.md` | how Claude should execute work on this project | **always** — it is short |
 | `QA_AND_HANDOVER_PROTOCOL.md` | validation, determinism, UI check, Git, report schema | **before finalisation** — not needed while authoring |
-| `CURRENT_STATUS.md` | state: what exists, what is next, blockers | **always**, but read the state sections, not the historical narrative |
+| `CURRENT_STATUS.md` | **current state only**: what exists now, what is next, what is blocked, restart instructions | **always** — it is small on purpose |
 
 **Mandatory for a normal solved-paper production session:**
 
@@ -60,6 +63,7 @@ authoring wastes context.
 
 | File | Read only when |
 |---|---|
+| `history/SESSION_HISTORY.md` | you need the historical record — a past session narrative, an old paper checkpoint, a superseded state snapshot, or how a decision arose. **Read the one section you need, never the file.** Other documents cite `CURRENT_STATUS.md §N`; every one of those sections now lives here under the same number, and `CURRENT_STATUS.md` §9 carries the locator table. It is ~200 KB — loading it by reflex costs more context than the whole governed set |
 | `WORKFLOW_LESSONS.md` | **read the relevant ENTRIES, never the whole file.** Lessons about how the work is done — proven practices, and rejected or deferred optimisations with the condition for reopening each. Go to it when you are about to adapt a donor, run a temporal sweep, stop a paper part-finished, add a guard, or change a public surface. It is indexed by category so a task-relevant read is cheap; loading all of it is not |
 | `2024_2026_RECURRENCE_AND_REUSE_MAP.md` | you need the donor map for the specific paper in hand |
 | `QP####_TRUE_SOURCE_DEMAND_MAP.md` | producing that specific paper |
