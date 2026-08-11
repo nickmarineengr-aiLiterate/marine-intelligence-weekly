@@ -30,7 +30,8 @@ const { classifyStored } = await import("../../api/_lib/rotation.js");
 const { verifyPassword, hashPassword, newSessionId } = await import("../../api/_lib/session.js");
 const { sessionsKey, addActiveSession, isActiveSession } = await import("../../api/_lib/sessions.js");
 const { userKey, entKey } = await import("../../api/_lib/entitlements.js");
-const { buildResetEmail } = await import("../../api/_lib/email.js");
+const { buildResetEmail, buildRotationEmail, buildAccessEmail, issuedStamp } =
+  await import("../../api/_lib/email.js");
 
 const EMAIL = "customer@example.com";
 const OLD_PW = "OLDPASSWORD23456";
@@ -303,5 +304,87 @@ describe("the reset email", () => {
 
   test("POSITIVE CONTROL: the leak assertion fires on a message that does mention one", () => {
     assert.throws(() => assert.ok(!"<p>your sha256 hash</p>".includes("sha256")));
+  });
+});
+
+// =============================================================
+// The ISSUED stamp.
+//
+// A credential can be replaced several times in a day and each
+// replacement kills the one before it. Two of the three paths share a
+// subject line, so without a stamp a recipient can only infer which
+// email is current from its position in the inbox — which mail clients
+// reorder, thread and collapse. This is the fix for that.
+// =============================================================
+describe("issued timestamp — which email is the live one", () => {
+  const AT = new Date("2026-08-12T02:47:00+05:30");
+
+  test("renders the date and time in IST", () => {
+    const s = issuedStamp(AT);
+    assert.match(s, /12 Aug 2026/);
+    assert.match(s, /02:47/);
+    assert.match(s, /IST$/);
+  });
+
+  test("converts from UTC rather than printing server-local time", () => {
+    // Same instant, expressed as UTC. A formatter that ignored timeZone
+    // would render 21:17 on the 11th and the customer would be told
+    // their newest password was issued yesterday.
+    assert.equal(issuedStamp(new Date("2026-08-11T21:17:00Z")), issuedStamp(AT));
+  });
+
+  test("a later issue reads as later — the whole point of the field", () => {
+    const earlier = issuedStamp(new Date("2026-08-12T00:30:00+05:30"));
+    const later = issuedStamp(AT);
+    assert.notEqual(earlier, later);
+    assert.match(earlier, /00:30/);
+  });
+
+  test("the reset email carries the stamp and tells the reader how to use it", () => {
+    const msg = buildResetEmail(EMAIL, "NEWPASSWORD23456", { issuedAt: AT });
+    assert.match(msg.html, /Issued/);
+    assert.match(msg.html, /12 Aug 2026 02:47 IST/);
+    assert.match(msg.html, /latest/i);
+    assert.match(msg.html, /earlier passwords stop working/i);
+  });
+
+  test("the rotation email carries it too — the two shared a subject line", () => {
+    const msg = buildRotationEmail(EMAIL, "NEWPASSWORD23456", { issuedAt: AT });
+    assert.match(msg.html, /12 Aug 2026 02:47 IST/);
+  });
+
+  test("a purchase email carries it", () => {
+    const msg = buildAccessEmail({
+      productId: "SOLVED_QP", buyerEmail: EMAIL, buyerName: "Test",
+      password: "NEWPASSWORD23456", priceDisplay: "₹1,500", isUpgrade: false, issuedAt: AT,
+    });
+    assert.match(msg.html, /12 Aug 2026 02:47 IST/);
+  });
+
+  test("an UPGRADE email has no stamp, because it issues no credential", () => {
+    const msg = buildAccessEmail({
+      productId: "SOLVED_QP", buyerEmail: EMAIL, buyerName: "Test",
+      password: null, priceDisplay: "₹1,500", isUpgrade: true, issuedAt: AT,
+    });
+    assert.doesNotMatch(msg.html, /Issued/,
+      "a stamp with no password would imply a credential that was never sent");
+  });
+
+  test("defaults to now when nothing is injected, and never renders Invalid Date", () => {
+    for (const html of [
+      buildResetEmail(EMAIL, "NEWPASSWORD23456").html,
+      buildRotationEmail(EMAIL, "NEWPASSWORD23456").html,
+    ]) {
+      assert.doesNotMatch(html, /Invalid Date/);
+      assert.match(html, /\d{1,2} \w{3} \d{4} \d{2}:\d{2} IST/);
+    }
+  });
+
+  test("POSITIVE CONTROL: two different instants must not format identically", () => {
+    assert.notEqual(
+      issuedStamp(new Date("2026-08-12T02:47:00+05:30")),
+      issuedStamp(new Date("2026-08-12T02:48:00+05:30")),
+      "if this passes the field cannot distinguish two emails and is useless"
+    );
   });
 });

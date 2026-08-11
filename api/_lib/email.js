@@ -52,7 +52,36 @@ const shell = (bodyHtml, headline) => `<!DOCTYPE html>
   </div>
 </div></body></html>`;
 
-const credentialsBlock = (email, password) => password ? `
+/**
+ * When this credential was issued, in IST.
+ *
+ * WHY IT IS ON THE EMAIL AT ALL
+ * -----------------------------
+ * A password can be replaced several times in a day — a purchase, an
+ * incident rotation, a self-service reset — and each replacement kills
+ * the one before it. Two of those paths share a subject line, so a
+ * recipient holding three emails had no way to tell which credential is
+ * live except by inferring it from message order, which mail clients
+ * reorder, thread and collapse. The Founder hit exactly this after four
+ * emails in one night.
+ *
+ * The stamp makes the newest credential identifiable from the CONTENT
+ * rather than from its position in an inbox.
+ *
+ * IST because that is where the readers are. `date` is injectable so the
+ * tests are not time-dependent — a formatter that reads the clock is
+ * untestable, and an untested formatter is how a mail goes out saying
+ * "Invalid Date".
+ */
+export function issuedStamp(date = new Date()) {
+  return new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Kolkata",
+    day: "numeric", month: "short", year: "numeric",
+    hour: "2-digit", minute: "2-digit", hour12: false,
+  }).format(date).replace(",", "") + " IST";
+}
+
+const credentialsBlock = (email, password, issuedAt = new Date()) => password ? `
   <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:1.25rem;margin:1.5rem 0">
     <p style="font-size:12px;color:#64748b;margin:0 0 12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em">Your Login Credentials</p>
     <table style="width:100%;font-size:14px;border-collapse:collapse">
@@ -62,7 +91,13 @@ const credentialsBlock = (email, password) => password ? `
           <td style="color:#0f172a;font-weight:500">${email}</td></tr>
       <tr><td style="color:#64748b;padding:5px 0">Password</td>
           <td style="color:#0f172a;font-weight:700;font-family:monospace;font-size:16px;letter-spacing:1px">${password}</td></tr>
+      <tr><td style="color:#64748b;padding:5px 0;vertical-align:top">Issued</td>
+          <td style="color:#0f172a;font-weight:500">${issuedStamp(issuedAt)}</td></tr>
     </table>
+    <p style="font-size:12px;color:#64748b;margin:12px 0 0;line-height:1.5">
+      If you have more than one email from us, <strong>use the one with the latest
+      &ldquo;Issued&rdquo; time</strong> — earlier passwords stop working.
+    </p>
   </div>` : `
   <div style="background:#f0fdfa;border-left:3px solid #0d9488;padding:12px 16px;margin:1.5rem 0">
     <p style="margin:0;font-size:14px;color:#134e4a">
@@ -109,7 +144,7 @@ export function buildAccessEmail(o) {
           ? `Thank you — <strong>Solved Question Papers</strong> (${o.priceDisplay}) has been added to your existing MIW access. ⚓`
           : `Thank you for your purchase — <strong>MIW Solved Question Papers</strong> (${o.priceDisplay}). Your Written access is ready. ⚓`}
       </p>
-      ${credentialsBlock(o.buyerEmail, o.password)}
+      ${credentialsBlock(o.buyerEmail, o.password, o.issuedAt)}
       ${cta("Open Solved Question Papers")}
       <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:1.25rem;margin:1.5rem 0">
         <p style="font-size:14px;font-weight:600;color:#0f172a;margin:0 0 10px">📘 What's inside</p>
@@ -140,7 +175,7 @@ export function buildAccessEmail(o) {
         ? `Thank you — <strong>Oral QB + Notes</strong> (${o.priceDisplay}) has been added to your existing MIW access. ⚓`
         : `Thank you for your purchase (${o.priceDisplay}). Your QB access is ready. ⚓`}
     </p>
-    ${credentialsBlock(o.buyerEmail, o.password)}
+    ${credentialsBlock(o.buyerEmail, o.password, o.issuedAt)}
     ${cta("Access Question Bank")}
     <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:1.25rem;margin:1.5rem 0">
       <p style="font-size:14px;font-weight:600;color:#0f172a;margin:0 0 10px">🧭 How to find anything fast</p>
@@ -183,7 +218,7 @@ export function buildAccessEmail(o) {
  * password is gone, since the natural expectation of "forgot password"
  * is that the original will be sent back, and it cannot be.
  */
-export function buildResetEmail(email, password, { name = "" } = {}) {
+export function buildResetEmail(email, password, { name = "", issuedAt = new Date() } = {}) {
   const greeting = name.trim() || "there";
   const body = `
     <p style="font-size:16px;color:#0f172a;margin:0 0 12px">Hi ${greeting},</p>
@@ -197,7 +232,7 @@ export function buildResetEmail(email, password, { name = "" } = {}) {
         Only the password has changed.
       </p>
     </div>
-    ${credentialsBlock(email, password)}
+    ${credentialsBlock(email, password, issuedAt)}
     ${cta("Sign in with your new password")}
     <p style="color:#334155;line-height:1.6;font-size:14px;margin:0 0 8px">
       You have been signed out on all devices, so you will need to sign in
@@ -218,7 +253,7 @@ export function buildResetEmail(email, password, { name = "" } = {}) {
   };
 }
 
-export function buildRotationEmail(email, password, { name = "" } = {}) {
+export function buildRotationEmail(email, password, { name = "", issuedAt = new Date() } = {}) {
   const greeting = name.trim() || "there";
   const body = `
     <p style="font-size:16px;color:#0f172a;margin:0 0 12px">Hi ${greeting},</p>
@@ -233,7 +268,7 @@ export function buildRotationEmail(email, password, { name = "" } = {}) {
         still on your account exactly as before. Only the password has changed.
       </p>
     </div>
-    ${credentialsBlock(email, password)}
+    ${credentialsBlock(email, password, issuedAt)}
     ${cta("Sign in with your new password")}
     <p style="color:#334155;line-height:1.6;font-size:14px;margin:0 0 8px">
       You will need to sign in again on each of your devices. If you were signed
