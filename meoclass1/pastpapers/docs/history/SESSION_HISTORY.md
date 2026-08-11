@@ -4347,3 +4347,106 @@ delivery byte moved, no public sample changed, no security behaviour changed.** 
 sheets, 1 index**.
 
 **QP production is PAUSED after QP2511.** The next Founder action is the corpus sync, not a paper.
+
+---
+
+# SESSION — 2026-08-11 — FIRST TRUE SOURCE CONSUMER INTEGRATION
+
+**Branch:** `workflow/corpus-consumer-integration`, from the freeze head `9904af4`.
+**Corpus consumed:** `RulesApp-Local-Input` @ `64977b8` (= `origin/main`, clean, 0 ahead / 0 behind).
+**Work order:** `MIW::consumer-team::first-integration`. **No paper was authored.**
+
+## What the corpus turned out to be
+
+The receiving plan written in the freeze session assumed the completed corpus would arrive through
+`F:\RulesApp\repository\` and be consumed as `repo-data.json` nodes. It does not. The True Source is
+a **different private repository** — `RulesApp-Local-Input` — with its own governance, freeze records
+and rights register. The `RulesApp` projection remains a legacy consumer store and is no longer the
+resolver target.
+
+That single fact retired a recorded blocker. `CORPUS_SYNC_AND_CONSUMPTION_PLAN.md` §2.1 made the
+MARPOL Annex VI dual-representation problem a **stop condition** before any Annex VI reference could
+be written. Measured this session: in the legacy projection the problem is real (56 Annex VI-shaped
+nodes, 36 `MEPC32876-*` against 20 `MARPOL-VI-*`, no rule for choosing). In True Source it does not
+exist — all **320** resolver entries are canonical `MARPOL-VI-*`, and `MEPC32876-*` appears only
+among the 527 aliases, resolving **in** and never out, by a stated `identityPolicy`. The stop
+condition was answered by reading the right store, not by adjudicating a tie.
+
+## The finding the documents could not have told us
+
+Three governing documents — the handover, `FD-RIGHTS-1` and the founder aim — agree that FSS is
+cleared and text-bearing, and that the required non-official-status statement is *"already built into
+the LSA and FSS consolidations"*. The **artifact disagrees**. The FSS derivative's own embedded
+disclaimer, identical across BUILD-1 and BUILD-2, states its wording is a *"verified summary, NOT the
+official text"*, marked INTERNAL USE ONLY and *"never for redistribution"*. Its `natureStatement`
+certifies every provision **statement**, not every provision text.
+
+The measurements agree with the artifact and not with the documents: 35 of 421 FSS provisions carry
+no text at all, and 22 of the 386 that do are labels — `"Section"`, `"test switches"`, `"sea inlet to
+pump"`. LSA, by contrast, carries 292 of 292 with per-provision `textSource:
+official-base-ocr(MSC.48(66)) page-verified` and a shortest entry of 65 characters.
+
+A Founder decision can reclassify MIW's own record; it cannot turn a summary into wording. Raised as
+**TSCR-1**, not corrected — the corpus is read-only to consumers. FSS is integrated as verification
+evidence and is refused as a quotation source, behind a guard test that fails on purpose if a future
+FSS build ever carries real wording.
+
+## What was built
+
+`tools/corpus/consumer_adapter.py` keeps four questions apart on every result rather than collapsing
+them into one boolean: `rights_cleared` (read live from the register, because the clearance is
+revocable), `text_available`, `text_is_verbatim`, `text_adequate`. Only all four together make a
+provision `quotable`. Bulk access is refused structurally — there is no chapter-level text call to
+reach for. Missing objects return `NOT_FOUND`; nothing is ever fabricated.
+
+`validate_spec.py` needed one honest correction. `REF_ID_RE` admitted hyphen segments only, so it
+**rejected `LSA-1.1.1`** — the one corpus that is frozen, text-bearing and quotation-cleared. The
+pattern had encoded an accident of the only worked example (`MARPOL-VI-14-146`) as though it were a
+rule. **No schema change was needed**: the five `reference_shelf` fields were sufficient, exactly as
+the contract predicted.
+
+Pilot on three already-solved questions — `QP2508-Q3`, `QP2602-Q3`, `QP2607-Q4` — six entries, no
+answer wording touched. The corpus **independently confirmed** the MSC.555(108) entry-into-force date
+of 1 January 2026 that those answers had previously taken from a class-society notice, and confirmed
+their sitting-relative handling was already right: QP2508 (August 2025) correctly records the
+amendments as adopted but not yet in force; QP2602 (February 2026) correctly records them in force.
+**No QP correction was required.** The FSS half of a recorded `unresolved` item is retired; the SOLAS
+half stands, because SOLAS is not a ready corpus.
+
+## Why the provision view is not built
+
+Not caution — arithmetic. Of the three corpora, the one with real demand from solved answers
+(MARPOL Annex VI) has **no text**; the one with both text and demand (FSS) has **summaries, not
+wording**; and the one that is fully quotation-ready (LSA) is **cited by none of the 117 solved
+questions**. There is no instrument on which the feature could be piloted today. Compounding it,
+this repository is **PUBLIC**, so rendering corpus text into `solvedQP/` is a publication decision
+distinct from the quotation clearance, and no ID→anchor deep link exists for any corpus.
+
+Every pilot entry is therefore `REFERENCE_PENDING`: the paid publish build is byte-unchanged and no
+dead "Verify source" control was emitted.
+
+## Coverage, stated honestly
+
+The product home derived its cards from `solved_sittings()` alone, so the 15 transcribed-but-unsolved
+sittings were not unlinked — they were **absent**, indistinguishable from months that never had an
+examination. Added a coverage section with three states and one deliberate silence: a month with
+neither a spec nor a `KNOWN_ABSENT` record is **not rendered at all**, which is what stops the page
+asserting sittings for the rest of 2026. `KNOWN_ABSENT` is imported from the year-sheet builder
+rather than restated, so there is one statement of which months are genuinely absent.
+
+Measured on the built page: 13 available (all linked), 15 planned soon (zero links), 3 no sitting.
+August–December 2026 do not appear.
+
+## Outcome
+
+`run_toolchain` PASS and `--self-test` PASS · `solvedqp_check` PASS and `--self-test` PASS ·
+`coverage_check` PASS with a self-test that patches the builder to emit an unevidenced sitting and
+requires the check to catch it · `security.test.mjs` 34/34 · `sessions.test.mjs` 28/28 ·
+`consumer_adapter_test` 60/60, deterministic across runs. Frozen corpus verified **unmodified** by
+SHA-256 before and after. No private corpus file, source PDF or corpus text entered this repository.
+
+Corpus unchanged at **252 / 117 / 135, 13 solved papers**; delivery unchanged at **13 papers, 117
+questions, 3 year sheets, 1 index**.
+
+**QP production remains PAUSED.** The next Founder actions are the provision-view decisions in
+`CURRENT_STATUS.md` §6, not a paper.

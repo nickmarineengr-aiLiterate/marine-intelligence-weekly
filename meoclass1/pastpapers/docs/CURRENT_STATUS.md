@@ -38,8 +38,9 @@ what is next, what is blocked.*
 | Content head | `a5f2551` on `pastpapers/qp2509-founder-review` — the newest solved-paper state |
 | Tooling head | `850bdde` on `workflow/pil-v1` — content head plus the Production Intelligence Layer |
 | This branch | `pastpapers/qp2511-founder-review` — **QP2511 COMPLETE 9/9, built and delivered.** Branched from `commerce/solvedqp-recovery` @ `462cfbc`. `staging/` has been retired |
-| **Head** | `fddae20` — verified this session. Tracked tree was clean before the freeze commits |
-| **Freeze baseline** | `fddae20` is the **proposed PARALLEL PRODUCTION BASELINE COMMIT**, awaiting Founder nomination — see [`PARALLEL_PRODUCTION_BOARD.md`](PARALLEL_PRODUCTION_BOARD.md) §2 |
+| **Head** | `fddae20` — verified in the freeze session. Tracked tree was clean before the freeze commits |
+| **Consumer branch** | `workflow/corpus-consumer-integration` @ **`541c5e4`**, branched from the freeze head `9904af4`. First True Source consumer integration and honest product coverage. **Not merged to `main`** |
+| **Freeze baseline** | **`541c5e4` is the proposed PARALLEL PRODUCTION BASELINE COMMIT**, awaiting Founder nomination. It supersedes the earlier `fddae20` proposal because it carries the consumer architecture every future paper branch should inherit — see [`PARALLEL_PRODUCTION_BOARD.md`](PARALLEL_PRODUCTION_BOARD.md) §2 |
 
 All git commands in this repository need `-c safe.directory=*`.
 
@@ -59,7 +60,53 @@ from a previous handover.
 | **Delivery** | `solvedQP/` — **13 papers, 117 questions, 3 year sheets, 1 index** |
 | **Toolchain** | ALL STAGES PASS · `health_check.py` **0 errors, 0 warnings** · reuse map current |
 | **Security (offline)** | **62/62 pass** — `security.test.mjs` 34, `sessions.test.mjs` 28. Architecture recovered and proven offline; **nothing deployed, no secret set** |
-| **Corpus projection** | `RulesApp/repository/index/` is a **2026-07-25 snapshot at 788 nodes**. The canonical corpus at `F:\RulesApp\repository\` holds **1,006**, and `provision-truth-aliases.json` is **absent** from the MIW copy. **218 nodes behind** — this is the sync gap |
+| **Corpus projection (legacy)** | `RulesApp/repository/index/` is a **2026-07-25 snapshot at 788 nodes** of the `RulesApp` repository. **This is NOT the True Source corpus** — see §2a. It remains 218 nodes behind its own master and is no longer the resolver target |
+
+---
+
+## 2a. True Source consumer integration
+
+The True Source corpus is a **separate private repository**, not the `RulesApp` tree §2 describes.
+Consuming it is integrated, tested and **read-only**.
+
+| | |
+|---|---|
+| **Corpus repository** | `nickmarineengr-aiLiterate/RulesApp-Local-Input` (**PRIVATE**), checkout `F:\RulesApp-Local-Input` |
+| **Corpus commit consumed** | **`64977b86ed9c601e273f1d0cb55abb0461835811`** = `origin/main`, 0 ahead / 0 behind, tracked tree clean |
+| **Rights** | `FD-RIGHTS-1`, status **ACTIVE**. Read live from `true-source/source-rights-register.json` at every call — never hard-coded, because the clearance is revocable |
+| **Open reservations** | `FD-RIGHTS-1-R1` (FSS, Digitrace licence) and `FD-RIGHTS-1-R2` (all three, IMO copyright) — both **OPEN, disclosed, not discharged**. Neither blocks citation or reference use |
+| **Consumer seam** | `tools/corpus/consumer_adapter.py`, read-only, degrades to `CORPUS_UNAVAILABLE` when the private corpus is absent so no build depends on it |
+| **Schema change** | **NONE.** `reference_shelf`'s five fields were sufficient. Only `validate_spec.py::REF_ID_RE` widened, to admit dotted ids such as `LSA-1.1.1` |
+| **Consumer tests** | `tools/corpus/consumer_adapter_test.py` — **60 checks, 0 failures**, positive and negative controls, deterministic. Skips cleanly when the corpus is absent |
+
+### Instrument readiness — three different shapes
+
+**RIGHT TO QUOTE and TEXT AVAILABLE TO QUOTE are different fields.** No two of these agree.
+
+| | Rights operative today | Addressing | Provision text | Consumer readiness |
+|---|---|---|---|---|
+| **LSA Code** | **YES** | native `provisionId` — `LSA-1.1.1` | **292/292 verbatim**, page-verified, shortest 65 chars | **Quotation-ready.** The only corpus a verbatim view can be built on |
+| **FSS Code** | YES, with `R1` | chapter **+** number — `FSSCode-9-2.5.1.3`; chapter is part of the identity | **Summary, not wording** — the derivative self-declares it. 35/421 have no text, 22/386 are labels | **Evidence-ready, NOT quotation-ready** — see [`TRUE_SOURCE_CORRECTION_REQUESTS.md`](TRUE_SOURCE_CORRECTION_REQUESTS.md) TSCR-1 |
+| **MARPOL Annex VI** | **NO** — `operativeToday: false` | resolver, 320 entries — `MARPOL-VI-14-146` | **NONE.** `finalDerivativeBuildId: null` | **Citation-ready only.** Resolves to identity, citation and provenance; never to text |
+
+**MARPOL identity is not split.** All 320 resolver entries are canonical `MARPOL-VI-*`;
+`MEPC32876-*` appears only among the 527 aliases and resolves **in**, never out. The dual-vocabulary
+problem recorded in `CORPUS_SYNC_AND_CONSUMPTION_PLAN.md` §2.1 is a property of the **legacy
+`RulesApp` projection** (56 nodes, 36 `MEPC32876` / 20 `MARPOL-VI`), not of True Source. It is
+therefore **not a blocker** to writing Annex VI references.
+
+### Pilot — already-solved questions only
+
+`QP2508-Q3`, `QP2602-Q3`, `QP2607-Q4`. Six shelf entries, **no answer wording changed**. All
+`REFERENCE_PENDING`, because no viewer route can land on a provision for any corpus yet, so the
+paid publish build is byte-unchanged and **no dead "Verify source" control is emitted**.
+
+### Blocked
+
+The **candidate-facing verbatim provision view is not implemented.** Of the three corpora, the one
+with real demand from solved answers (MARPOL Annex VI) has no text, the one with text and demand
+(FSS) carries summaries rather than wording, and the one that is fully quotation-ready (LSA) is
+**cited by none of the 117 solved questions**. See §6.
 
 ---
 
@@ -137,6 +184,27 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 ---
 
 ## 6. Current blockers / Founder decisions
+
+### Blocking the candidate-facing provision view
+
+**A. No corpus can currently carry a verbatim provision view to a solved candidate.** Not one
+blocker but three, one per instrument, and each needs a different action:
+
+| Corpus | Why it cannot be shown today | What would unblock it |
+|---|---|---|
+| **MARPOL Annex VI** | No derivative exists; `FD-RIGHTS-1` records `operativeToday: false` | Producer-team **MARPOL Annex VI derivative build** carrying provision text. New engineering, not a build step — the derivative engine has adapters for FSS and LSA only |
+| **FSS Code** | The derivative declares its wording a *"verified summary, NOT the official text"* | Founder/producer resolution of **TSCR-1** — amend the rights record, or build a wording-bearing FSS derivative |
+| **LSA Code** | Nothing technical. **No solved question cites the LSA Code**, so there is nothing to attach a view to | A Founder decision on whether to author LSA-dependent questions, or accept the view lands with future papers |
+
+**B. Publication boundary — Founder decision required.** This repository is **PUBLIC**. Rendering
+provision text into `solvedQP/` commits corpus text to a world-readable repository, which is not
+the same permission as `FD-RIGHTS-1`'s candidate-facing quotation clearance and sits directly
+against its prohibition on *"any surface from which the corpus text can be reassembled wholesale"*.
+This compounds the known commerce-stack exposure in the items below. **No corpus text was
+committed.** The viewer must be decided together with where its text is served from.
+
+**C. No ID→anchor deep link exists for any corpus** (TSCR-2). `reference_href()` can address an
+object; nothing can land on the exact section. Every pilot entry is therefore `REFERENCE_PENDING`.
 
 ### Blocking publication
 

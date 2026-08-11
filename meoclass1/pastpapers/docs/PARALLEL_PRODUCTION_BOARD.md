@@ -54,18 +54,39 @@ integration a merge archaeology exercise instead of a review.
 ### PARALLEL PRODUCTION BASELINE COMMIT — proposed, awaiting Founder nomination
 
 ```
-fddae20   pastpapers/qp2511-founder-review
-          "Route the QP2511 completion through state, history and lessons"
+541c5e4   workflow/corpus-consumer-integration
+          "feat(solvedqp): state coverage honestly for controlled online testing"
 ```
 
-Why this commit: it is the newest state in which the corpus, the toolchain, the delivery
-product and the recovered security stack are all simultaneously green — 252/117/135, 13 papers
-delivered, `health_check.py` 0/0, security 62/62. Every earlier candidate is missing at least
-one of those.
+**Supersedes the earlier `fddae20` proposal.** That commit was the newest state in which the
+corpus, the toolchain, the delivery product and the recovered security stack were simultaneously
+green — 252/117/135, 13 papers delivered, `health_check.py` 0/0, security 62/62. `541c5e4`
+descends from the freeze head that carries all of it and adds the two things every future paper
+branch should inherit rather than reinvent: the **True Source consumer seam**
+(`tools/corpus/consumer_adapter.py`, the widened `REF_ID_RE`, the pilot shelf pattern) and the
+**honest coverage** rendering.
 
-**If the Founder syncs the MARPOL Annex VI corpus before allocating** — which is the
-recommended order — the baseline should instead be the commit that lands the sync, so no paper
-branch is authored against a stale corpus projection.
+The earlier note said the baseline should instead be "the commit that lands the corpus sync". That
+condition is now satisfied differently and better: **the corpus is not synced into MIW at all.** It
+is consumed read-only from its own private repository, so there is no corpus projection inside a
+paper branch to go stale.
+
+### REQUIRED CORPUS COMMIT FOR PARALLEL WORK
+
+```
+64977b86ed9c601e273f1d0cb55abb0461835811
+nickmarineengr-aiLiterate/RulesApp-Local-Input   (PRIVATE)   origin/main
+```
+
+Every desktop or laptop paper branch must consume **this** corpus state.
+
+- **Do not copy a corpus snapshot into a QP branch.** The consumer adapter reads the corpus from
+  `MIW_TRUE_SOURCE_ROOT` (defaulting to `F:\RulesApp-Local-Input`) and degrades to
+  `CORPUS_UNAVAILABLE` when it is absent, so nothing in the build depends on its presence.
+- **Record the pair.** A paper's provenance is the MIW commit **and** the corpus commit. Only that
+  pair makes its references reproducible.
+- The corpus is **PRIVATE** and this repository is **PUBLIC**. No corpus file, source PDF or
+  provision text may ever be committed here.
 
 ---
 

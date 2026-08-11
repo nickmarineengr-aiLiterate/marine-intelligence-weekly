@@ -602,6 +602,100 @@ OWNER:     tools/pastpapers/solvedqp_check.py
 REVISIT:   never -- guarding a silent defect has no downside worth reopening.
 ```
 
+### 20. Read the ARTIFACT, not the document that describes the artifact
+
+Three governing documents -- the consumer handover, the Founder rights decision `FD-RIGHTS-1`
+and the founder aim -- agreed that the FSS corpus was cleared and text-bearing, and that the
+required non-official-status statement was "already built into the LSA and FSS consolidations".
+Every one of them was written in good faith by a session that had the corpus in front of it.
+
+The file disagreed. The FSS derivative's own embedded disclaimer -- identical in BUILD-1 and
+BUILD-2, so not a stray string -- declares its wording a "verified summary, NOT the official
+text", INTERNAL USE ONLY, "never for redistribution". The measurements agreed with the file:
+35 of 421 provisions carry no text, and 22 of the 386 that do are labels such as "Section" and
+"sea inlet to pump". The sibling corpus is the control -- LSA carries 292 of 292 with
+per-provision `textSource: official-base-ocr(...) page-verified` and a 65-character minimum.
+
+A consumer that had trusted the contract would have shipped MIW summaries to candidates as
+regulation text. The cost of checking was one file read; the cost of not checking was a
+correctness failure on the exact surface the whole corpus exists to serve.
+
+The general rule: a contract states an INTENTION about an artifact. Before building on a
+property the contract asserts -- text exists, text is verbatim, a field is populated, a
+statement is embedded -- open the artifact and confirm it. Where they disagree, the artifact
+wins and the disagreement is REPORTED, never silently absorbed.
+
+```
+EVIDENCE:  workflow/corpus-consumer-integration, 2026-08-11. TSCR-1 in
+           TRUE_SOURCE_CORRECTION_REQUESTS.md; TEXT_NATURE and its guard test in
+           tools/corpus/consumer_adapter.py and consumer_adapter_test.py.
+CATEGORY:  SOURCE_HANDLING
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     tools/corpus/consumer_adapter.py -- the guard test asserts the FSS disclaimer still
+           says "NOT the official text", so a wording-bearing rebuild reopens the question
+           instead of leaving a stale block in place.
+REVISIT:   never -- but note the guard is the durable part, not the classification.
+```
+
+---
+
+### 21. A validator pattern encodes the example it was written against
+
+`REF_ID_RE` admitted `^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)+$` -- hyphen-separated segments only. It was
+written when `MARPOL-VI-14-146` was the sole worked example, and it was correct for it. It
+therefore silently rejected `LSA-1.1.1`: the identity of the one corpus that is frozen,
+text-bearing AND quotation-cleared, and the only one on which the flagship feature could have been
+built.
+
+Nothing failed, because no spec had ever carried an LSA reference. The pattern would have failed
+the first person to write one, at the moment they were least able to tell an accidental assumption
+from a deliberate rule -- the comment above it described the convention, not the constraint.
+
+The general rule: when a validator is written against one worked example, record which parts of
+the pattern are RULE and which are ARTEFACT OF THE EXAMPLE. Re-derive it the first time a second
+real instance arrives, and prove the widening with negative controls -- `LSA-1..1`, `LSA-`,
+`-LSA-1` must all still be rejected -- so "more permissive" does not quietly become "unvalidated".
+
+```
+EVIDENCE:  workflow/corpus-consumer-integration, 2026-08-11. REF_ID_RE in
+           tools/pastpapers/validate_spec.py, widened to admit dotted segments with eight
+           positive and eight negative controls.
+CATEGORY:  BUILD_QA
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     tools/pastpapers/validate_spec.py
+REVISIT:   if a third corpus arrives with an identity shape neither dotted nor hyphenated.
+```
+
+---
+
+## NOT recorded this session -- "corpus availability is not sitting applicability"
+
+Deliberately **not** promoted to a lesson, although it was the outcome most expected in advance.
+
+The pilot was the natural place to prove it: `QP2508-Q3` sits in August 2025 and cites
+MSC.555(108), whose entry into force is 1 January 2026. The trap was fully loaded. It did not
+fire -- the answer already recorded the amendments as adopted but not yet in force at that
+sitting, and the corpus **confirmed** the very date the answer had taken from a class-society
+notice. No QP correction was required by any of the three pilot questions.
+
+A lesson recorded from an event that did not happen is indistinguishable from a lesson recorded
+from one that did, and this file is read as evidence. The principle is already stated as policy in
+`CORPUS_SYNC_AND_CONSUMPTION_PLAN.md` section 5, which is the correct home for a rule that has been
+reasoned but not yet paid for.
+
+```
+EVIDENCE:  workflow/corpus-consumer-integration, 2026-08-11. Pilot questions QP2508-Q3,
+           QP2602-Q3, QP2607-Q4 -- corpus AGREED with all three.
+CATEGORY:  TEMPORAL_VERIFICATION
+STATUS:    CANDIDATE
+SEEN:      0
+OWNER:     CORPUS_SYNC_AND_CONSUMPTION_PLAN.md section 5 (as policy, not as a proven lesson)
+REVISIT:   promote the first time a corpus lookup actually contradicts a verified answer's
+           sitting-relative handling.
+```
+
 ---
 
 ## An Assembly boundary is fixed by the ADOPTION date, not by the session's opening month
