@@ -35,7 +35,7 @@ sys.path.insert(0, HERE)
 from render_common import (REPO_ROOT, TPL, BASE, CONTACT, LS_BOOKMARKS, LS_PROGRESS,
                            LS_MIGRATE_JS, STICKY_SYNC_JS, GATE, GATE_STUB, esc, esc_attr, strip_tags,
                            read_css, block_text, search_tokens, topbar, head_meta, footer,
-                           is_intake, corpus_relations)
+                           is_intake, corpus_relations, delivery_links, load_all_specs)
 import recurrence_model as RM
 
 CHEV = ('<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
@@ -350,7 +350,7 @@ def recall_view(q, out):
         out.append('  </section>')
 
 
-def build_card(q, paper, out, publish, corpus=None):
+def build_card(q, paper, out, publish, corpus=None, deliver=False, delivered_ids=None):
     qid = q['question_id']
     subjects = ' '.join((q.get('subject_tags') or [])).lower()
     # Canonical, chronological recurrence -- computed over the whole corpus, not
@@ -433,6 +433,22 @@ def build_card(q, paper, out, publish, corpus=None):
     reference_shelf(q, out, publish)
 
     xl = q.get('cross_links') or []
+    if deliver:
+        # Cross-links are authored RELATIVE to the review location
+        # /meoclass1/pastpapers/, so '../QB10_B.html' and
+        # '../oralnotes/...' resolve correctly there and resolve to
+        # non-existent root paths from /solvedQP/. They also point into the
+        # Oral product, which a Written-only customer does not own.
+        #
+        # The delivery guard in solvedqp_check.py matches absolute
+        # href="/meoclass1/..." only, so these relative links would ship as
+        # silent dead ends inside a paid page. Keep only sibling links to
+        # papers that are actually delivered; those resolve within
+        # /solvedQP/ unchanged.
+        xl = [x for x in xl
+              if re.match(r'^QP\d+\.html(?:#|$)', str(x.get('href', '')))
+              and (delivered_ids is None
+                   or str(x['href']).split('.')[0] in delivered_ids)]
     if xl:
         out.append('  <p class="rec-note">Also on the platform: %s</p>'
                    % ' &middot; '.join('<a href="%s">%s</a>'
@@ -482,7 +498,60 @@ def build_card(q, paper, out, publish, corpus=None):
 
 # ------------------------------------------------------------------ document
 
-def build(spec, gated=False, publish=False):
+PROMO_SLUG = 'written-sample-january-2026'
+
+
+def promo_header():
+    """Top banner on the Written promo shown to existing Oral subscribers."""
+    return [
+        '<div class="review-banner" style="background:#f0fdfa;border-color:#99f6e4;color:#134e4a">',
+        '  <strong>Written Question Paper sample.</strong> Preparing for Written too? '
+        'As an MIW Oral subscriber you can study this complete January 2026 Written paper '
+        'here &mdash; all nine questions, all five study modes, nothing withheld. '
+        '<a href="/SQ/index.html#solved-qp" style="font-weight:600">Unlock the full Solved QP '
+        'collection &mdash; &#8377;1,500 &rarr;</a>',
+        '</div>',
+    ]
+
+
+def promo_footer(newest_label):
+    """Closing CTA. The newest sitting is derived from the specs, never typed."""
+    newest = newest_label or 'the newest available sitting'
+    return [
+        '<section class="cheat" id="solved-qp-cta">',
+        '  <h2>Continue with all solved Written papers</h2>',
+        '  <p class="lead">January is your complete subscriber sample. Full Solved QP access '
+        'includes every currently available solved paper, including the newest available '
+        'sitting &mdash; <strong>%s</strong> &mdash; and every paper added after it.</p>' % esc(newest),
+        '  <p class="lead" style="font-size:1.05rem"><strong>&#8377;1,500</strong> one-time.</p>',
+        '  <p><a class="sample-card-btn" href="/SQ/index.html#solved-qp" '
+        'style="display:inline-block;background:#0d9488;color:#fff;text-decoration:none;'
+        'padding:11px 22px;border-radius:8px;font-weight:600">Get Solved QP Access &rarr;</a></p>',
+        '</section>',
+        '',
+    ]
+
+
+def build(spec, gated=False, publish=False, deliver=False, promo=False, newest_label=None):
+    # promo = the complete January paper shown to existing ORAL subscribers
+    # inside /meoclass1/oralnotes/. It is customer-facing (so no production
+    # metadata and no review banner) but it lives under the Oral product root
+    # and is opened by the ORAL entitlement, not by SOLVED_QP. It demonstrates
+    # the Written product; it does not grant it.
+    # deliver = the paid customer copy served from /solvedQP/.
+    #
+    # It is a customer-facing build, so it carries no production metadata and
+    # no Founder review banner. It stays noindex and emits NO JSON-LD, because
+    # paid answers must never reach structured data -- which is why `publish`
+    # itself stays False here and only `content_publish` is raised.
+    #
+    # It does NOT need to suppress recurrence. The two signals that were unsafe
+    # to show a candidate -- the source copy host's printed annotation and the
+    # authoring field recurrence_class -- are no longer rendered or searched in
+    # ANY mode: render_common.search_tokens drops both unconditionally and the
+    # card renders recurrence from corpus_relations(), which is MIW's own
+    # chronological model. There is nothing left here to gate.
+    content_publish = publish or deliver or promo
     d = spec
     pid = d['paper_id']
     qs = d['questions']
@@ -537,8 +606,13 @@ def build(spec, gated=False, publish=False):
             ]}, indent=2, ensure_ascii=False))
         extra.append('</script>')
 
-    o.extend(head_meta(strip_tags(title), strip_tags(desc),
-                       '/meoclass1/pastpapers/%s.html' % pid, publish, extra))
+    if deliver:
+        canonical = '/solvedQP/%s.html' % pid
+    elif promo:
+        canonical = '/meoclass1/oralnotes/%s.html' % PROMO_SLUG
+    else:
+        canonical = '/meoclass1/pastpapers/%s.html' % pid
+    o.extend(head_meta(strip_tags(title), strip_tags(desc), canonical, publish, extra))
     a('<style>')
     a(read_css())
     a('</style>')
@@ -548,7 +622,10 @@ def build(spec, gated=False, publish=False):
     a(GATE if gated else GATE_STUB)
     a('<a class="skip" href="#paper-main">Skip to questions</a>')
     a('')
-    o.extend(topbar('Written Questions'))
+    # A delivered paper navigates within /solvedQP/ only, and its year link
+    # points at its OWN year's sheet.
+    o.extend(topbar('Solved QP' if deliver else 'Written Questions',
+                    links=delivery_links(year=d['year']) if deliver else None))
     a('')
     a('<header class="page-header">')
     a('  <div class="wrap">')
@@ -567,7 +644,11 @@ def build(spec, gated=False, publish=False):
     a('</header>')
     a('')
 
-    if not publish:
+    if promo:
+        o.extend(promo_header())
+        a('')
+
+    if not content_publish:
         a('<div class="review-banner">')
         a('  <strong>Founder review copy &mdash; ungated, uncommitted, not published.</strong> '
           'Generated from <code>specs/%s.json</code> by the Past Papers toolchain. '
@@ -630,8 +711,14 @@ def build(spec, gated=False, publish=False):
     # Loaded once for the whole paper: the family model is a property of the
     # corpus, so recomputing it per card would be nine identical passes.
     corpus = corpus_relations()
+    # Which papers actually exist on the delivery surface, so a cross-link is
+    # only kept when its target is really there.
+    delivered_ids = None
+    if deliver:
+        delivered_ids = {s['paper_id'] for s in load_all_specs() if not is_intake(s)}
     for q in qs:
-        build_card(q, d, o, publish, corpus)
+        build_card(q, d, o, content_publish, corpus,
+                   deliver=deliver, delivered_ids=delivered_ids)
         a('')
 
     a('<div id="no-results">No question matches that search. Try a topic, a regulation '
@@ -667,16 +754,20 @@ def build(spec, gated=False, publish=False):
     a('  </table>')
     a('</section>')
 
+    if promo:
+        o.extend(promo_footer(newest_label))
+
     a('<div class="q-footer">')
     a('  <span class="correction-link">Correction? <a href="mailto:%s?subject=Past%%20Paper%%20%s%%2C%%20Correction%%20Required">%s</a></span>'
       % (CONTACT, pid, CONTACT))
     a('  <span class="q-version">Written Questions &middot; %s &middot; v%s &middot; %s</span>'
-      % (pid, esc(d['version']), 'GATED' if gated else 'UNGATED REVIEW COPY'))
+      % (pid, esc(d['version']),
+         'SOLVED QP' if deliver else ('GATED' if gated else 'UNGATED REVIEW COPY')))
     a('</div>')
     a('</main>')
     a('</div>')
     a('')
-    o.extend(footer(publish))
+    o.extend(footer(content_publish))
     a('')
     js = open(os.path.join(TPL, 'paper.js'), encoding='utf-8').read()
     js = (js.replace('__LS_BOOKMARKS__', LS_BOOKMARKS)
@@ -697,6 +788,12 @@ def main():
     ap.add_argument('-o', '--out')
     ap.add_argument('--gated', action='store_true')
     ap.add_argument('--publish', action='store_true')
+    ap.add_argument('--deliver', action='store_true',
+                    help='paid customer copy for /solvedQP/ (noindex, no JSON-LD, '
+                         'no production metadata, Solved QP navigation)')
+    ap.add_argument('--oral-promo', action='store_true',
+                    help='complete Written paper shown to existing ORAL subscribers '
+                         'inside /meoclass1/oralnotes/, with purchase CTAs')
     args = ap.parse_args()
 
     spec = json.load(open(args.spec, encoding='utf-8'))
@@ -711,10 +808,29 @@ def main():
               'first answer exists.' % (spec['paper_id'], spec['year']))
         return
 
-    html = build(spec, gated=args.gated, publish=args.publish)
+    # The promo's closing CTA names the newest solved sitting. Derive it from
+    # the specs so it moves on its own as papers are added, rather than
+    # becoming a stale claim in hand-written copy.
+    newest_label = None
+    if args.oral_promo:
+        solved = [s for s in load_all_specs() if not is_intake(s)]
+        if solved:
+            solved.sort(key=lambda s: (s['year'], RM.MONTH_NUM[s['month']]))
+            newest_label = solved[-1]['month_year']
 
-    out = args.out or os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers',
-                                   '%s.html' % spec['paper_id'])
+    html = build(spec, gated=args.gated, publish=args.publish, deliver=args.deliver,
+                 promo=args.oral_promo, newest_label=newest_label)
+
+    if args.out:
+        out = args.out
+    elif args.oral_promo:
+        out = os.path.join(REPO_ROOT, 'meoclass1', 'oralnotes', '%s.html' % PROMO_SLUG)
+    elif args.deliver:
+        out = os.path.join(REPO_ROOT, 'solvedQP', '%s.html' % spec['paper_id'])
+    else:
+        out = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers',
+                           '%s.html' % spec['paper_id'])
+    os.makedirs(os.path.dirname(out), exist_ok=True)
     prev = open(out, encoding='utf-8', newline='').read() if os.path.exists(out) else None
     with io.open(out, 'w', encoding='utf-8', newline='\n') as fh:
         fh.write(html)
@@ -729,7 +845,8 @@ def main():
     print('  %d bytes, %d questions, %d with answers'
           % (len(html.encode('utf-8')), len(spec['questions']), n))
     print('  mode: %s, gate: %s'
-          % ('PUBLISH' if args.publish else 'review (noindex)',
+          % ('PUBLISH' if args.publish
+             else ('SOLVED QP delivery (noindex)' if args.deliver else 'review (noindex)'),
              'PRESENT' if args.gated else 'stripped'))
     if prev is not None:
         print('  rebuild: %s' % ('IDENTICAL to previous output' if prev == html else 'CHANGED'))

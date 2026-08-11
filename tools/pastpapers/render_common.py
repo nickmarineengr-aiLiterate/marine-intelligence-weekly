@@ -232,14 +232,56 @@ def search_tokens(q, paper, relation=None):
     return ' '.join(out)
 
 
-def topbar(active=''):
-    """Consistent navigation across every Past Papers page. Kept compact."""
-    links = [
-        ('MEO Class I', '/meoclass1/'),
-        ('Written Questions', '/meoclass1/pastpapers/'),
-        ('2026 Topics', '/meoclass1/pastpapers/topics-2026.html'),
-        ('Question Bank', '/meoclass1/#question-banks'),
-    ]
+def solved_years(specs=None):
+    """Years holding at least one solved paper, ascending.
+
+    Derived from the specs every time. A year appears in the delivered
+    navigation because a paper in it was solved, never because a builder
+    was told the year exists.
+    """
+    specs = specs if specs is not None else load_all_specs()
+    return sorted({s['year'] for s in specs if not is_intake(s)})
+
+
+def delivery_links(year=None, years=None):
+    """Navigation for the paid Written delivery surface at /solvedQP/.
+
+    It must not link into /meoclass1/: a customer who owns SOLVED_QP but not
+    ORAL_QB_NOTES would be bounced to the login page by their own product's
+    own navigation.
+
+    The year link is CONTEXTUAL, not global. A paper page links to the sheet
+    for ITS OWN year -- QP2404 to questions-2024.html, QP2601 to
+    questions-2026.html -- because that is the sheet its reader is actually
+    in. This replaces a single hard-coded link to questions-2026.html, which
+    was correct only while 2026 was the only solved year and silently sent a
+    2024 reader to the wrong sheet once 2024 and 2025 were solved.
+
+    Pages with no single year -- the product home -- get one link per solved
+    year instead, so every sheet stays reachable without guessing a URL.
+    """
+    links = [('Solved QP', '/solvedQP/')]
+    if year is not None:
+        links.append(('Questions by year', '/solvedQP/questions-%d.html' % year))
+    else:
+        for y in (years if years is not None else solved_years()):
+            links.append(('%d questions' % y, '/solvedQP/questions-%d.html' % y))
+    return links
+
+
+def topbar(active='', links=None):
+    """Consistent navigation across every Past Papers page. Kept compact.
+
+    `links` overrides the default set. The paid delivery surface passes
+    delivery_links(), which keeps its navigation inside /solvedQP/.
+    """
+    if links is None:
+        links = [
+            ('MEO Class I', '/meoclass1/'),
+            ('Written Questions', '/meoclass1/pastpapers/'),
+            ('2026 Topics', '/meoclass1/pastpapers/topics-2026.html'),
+            ('Question Bank', '/meoclass1/#question-banks'),
+        ]
     out = ['<nav class="topbar" aria-label="Primary">',
            '  <span class="logo">&#9875; MIW</span>',
            '  <span class="topbar-sub">Written Questions &amp; Answers</span>',

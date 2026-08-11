@@ -23,7 +23,7 @@ if __name__ == '__main__':
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from render_common import (REPO_ROOT, CONTACT, esc, strip_tags, read_css,
-                           topbar, head_meta, footer, GATE_STUB, DELIVERY_LINKS)
+                           topbar, head_meta, footer, GATE_STUB, delivery_links)
 import recurrence_model as RM
 
 SPEC_GLOB = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers', 'specs', '*.json')
@@ -109,7 +109,10 @@ def build(specs):
     a('<body>')
     a(GATE_STUB)
     a('<a class="skip" href="#sq-main">Skip to papers</a>')
-    o.extend(topbar('Solved QP', links=DELIVERY_LINKS))
+    # The home covers every solved year, so its navigation carries one link
+    # per year rather than a single hard-coded sheet.
+    home_years = sorted({d['year'] for d in sittings})
+    o.extend(topbar('Solved QP', links=delivery_links(years=home_years)))
 
     a('<header class="sq-hero">')
     a('  <div class="wrap">')

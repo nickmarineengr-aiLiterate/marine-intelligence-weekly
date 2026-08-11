@@ -97,6 +97,7 @@ def run():
 
     check_storefront(specs)
     check_oral_promo(specs)
+    check_year_nav(specs)
 
     expected = []
     total_q = 0
@@ -244,6 +245,63 @@ def check_storefront(specs):
                       % (shown, paise))
 
 
+def check_year_nav(specs):
+    """Every delivered page must offer the year sheet for ITS OWN year.
+
+    The delivery navigation used to carry a single hard-coded link to
+    questions-2026.html. That was right only while 2026 was the only solved
+    year: once 2024 and 2025 were solved, a reader of a 2024 paper was
+    offered the 2026 sheet and had no route to their own. Nothing failed --
+    the link resolved, the page existed, and every other guard passed --
+    which is exactly why it needs a guard of its own.
+
+    A paper links to its own year. A year sheet links to itself. The home
+    covers every solved year, since it belongs to no single one.
+    """
+    CHECKS[0] += 1
+    solved_years = sorted({d['year'] for d in specs
+                           if any(q.get('model_answer') for q in d['questions'])})
+
+    def nav_years(text):
+        return sorted({int(y) for y in
+                       re.findall(r'href="/solvedQP/questions-(\d{4})\.html"', text)})
+
+    for d in specs:
+        if not any(q.get('model_answer') for q in d['questions']):
+            continue
+        path = os.path.join(SQP, '%s.html' % d['paper_id'])
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding='utf-8', newline='') as fh:
+            found = nav_years(fh.read())
+        if d['year'] not in found:
+            fail('%s.html' % d['paper_id'],
+                 'year navigation offers %s but this paper is from %d'
+                 % (found or 'nothing', d['year']))
+
+    for y in solved_years:
+        path = os.path.join(SQP, 'questions-%d.html' % y)
+        if not os.path.exists(path):
+            continue
+        with open(path, encoding='utf-8', newline='') as fh:
+            found = nav_years(fh.read())
+        if y not in found:
+            fail('questions-%d.html' % y,
+                 'year sheet does not link to its own year; offers %s' % (found or 'nothing'))
+
+    home = os.path.join(SQP, 'index.html')
+    if os.path.exists(home):
+        with open(home, encoding='utf-8', newline='') as fh:
+            found = nav_years(fh.read())
+        missing = [y for y in solved_years if y not in found]
+        if missing:
+            fail('index.html', 'product home does not reach solved year(s) %s'
+                 % ', '.join(str(y) for y in missing))
+
+    print('[ OK  ] year navigation is year-aware across %d solved year(s)'
+          % len(solved_years))
+
+
 def self_test():
     """Positive control: every guard must fire on a page built to trip it."""
     print('-- self-test: a deliberately defective page must be REJECTED --')
@@ -271,6 +329,32 @@ def self_test():
         print('SELF-TEST FAILED — these guards did not fire: %s' % ', '.join(missing))
         return False
     print('   %d guards fired as expected' % len(fired))
+
+    # Year-aware navigation, proved by mutation. A 2024 paper whose nav offers
+    # only the 2026 sheet is the exact regression the fix removed, so the guard
+    # is asserted against that page rather than against the fixed one.
+    before = len(FAILS)
+    stale = '<a href="/solvedQP/questions-2026.html">Questions by year</a>'
+    fake = [{'year': 2024, 'paper_id': '__selftestyear__',
+             'questions': [{'model_answer': {'blocks': []}}]}]
+    tmp = os.path.join(SQP, '__selftestyear__.html')
+    wrote = False
+    try:
+        os.makedirs(SQP, exist_ok=True)
+        with open(tmp, 'w', encoding='utf-8', newline='\n') as fh:
+            fh.write(stale)
+        wrote = True
+        check_year_nav(fake)
+    finally:
+        if wrote:
+            os.remove(tmp)
+    year_fired = FAILS[before:]
+    del FAILS[before:]
+    if not any('2024' in f for f in year_fired):
+        print('SELF-TEST FAILED — the year-navigation guard did not fire on a '
+              '2024 paper offering only the 2026 sheet')
+        return False
+    print('   year-navigation guard fired on the stale-2026 regression')
     return True
 
 

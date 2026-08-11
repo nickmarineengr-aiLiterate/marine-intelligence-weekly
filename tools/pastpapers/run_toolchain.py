@@ -229,6 +229,49 @@ def main():
     rc_total += rc
     warn_total += w
 
+    # ---- paid Solved QP delivery surface -------------------------------
+    # The same canonical specs, projected into /solvedQP/ for paying
+    # customers. Built and then immediately checked, because the failure that
+    # matters here is not a broken page but a page that leaks the third-party
+    # source copy's recurrence annotations, an authoring verdict, or the
+    # Founder review banner into a product someone paid for.
+    #
+    # This runs AFTER the review build and its checks, so a spec that cannot
+    # produce a sound review page never reaches the delivery surface.
+    for sp in specs:
+        rel = os.path.relpath(sp, REPO_ROOT)
+        rc, w = run('SOLVEDQP BLD',
+                    [os.path.join(T, 'build_paper.py'), rel, '--deliver'], args.verbose)
+        rc_total += rc
+        warn_total += w
+
+    rc, w = run('SOLVEDQP QY',
+                [os.path.join(T, 'build_questions_year.py'), '--deliver'], args.verbose)
+    rc_total += rc
+    warn_total += w
+
+    rc, w = run('SOLVEDQP HOME', [os.path.join(T, 'build_solvedqp_home.py')], args.verbose)
+    rc_total += rc
+    warn_total += w
+
+    # The complete January paper shown to existing ORAL subscribers. Built
+    # from the same canonical spec as the paid product, so it cannot drift
+    # from what it is advertising.
+    promo_spec = os.path.join(PP, 'specs', 'QP2601.json')
+    if os.path.exists(promo_spec):
+        rc, w = run('ORALPROMO BLD',
+                    [os.path.join(T, 'build_paper.py'),
+                     os.path.relpath(promo_spec, REPO_ROOT), '--oral-promo'], args.verbose)
+        rc_total += rc
+        warn_total += w
+
+    argv = [os.path.join(T, 'solvedqp_check.py')]
+    if args.self_test:
+        argv.append('--self-test')
+    rc, w = run('SOLVEDQP CHK', argv, args.verbose)
+    rc_total += rc
+    warn_total += w
+
     argv = [os.path.join(T, 'known_traps_check.py')]
     if args.self_test:
         argv.append('--self-test')
