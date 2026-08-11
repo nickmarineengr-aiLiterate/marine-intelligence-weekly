@@ -162,3 +162,47 @@ export function buildAccessEmail(o) {
     html: shell(body, "MEO Class 1 Question Bank"),
   };
 }
+
+// -------------------------------------------------------------
+// Security notification — credential rotation.
+//
+// This is an ACCESS notice, not marketing and not an apology letter.
+// It answers the only three questions the customer actually has:
+// what stopped working, what to use instead, and did I lose what I
+// paid for. It says nothing about repositories, commits or internal
+// architecture — that detail helps no customer and tells anyone who
+// forwards the mail exactly where to go looking.
+//
+// The password is interpolated here and nowhere else. Delivery is the
+// ONLY channel permitted to carry it; see api/_lib/rotation.js.
+// -------------------------------------------------------------
+export function buildRotationEmail(email, password, { name = "" } = {}) {
+  const greeting = name.trim() || "there";
+  const body = `
+    <p style="font-size:16px;color:#0f172a;margin:0 0 12px">Hi ${greeting},</p>
+    <p style="color:#334155;line-height:1.6;margin:0 0 16px">
+      As a precaution, we have issued you a <strong>new password</strong> for your
+      Marine Intelligence Weekly account. Your previous password has been
+      retired and will no longer work.
+    </p>
+    <div style="background:#fffbeb;border-left:3px solid #f59e0b;padding:12px 16px;margin:0 0 8px">
+      <p style="margin:0;font-size:14px;color:#78350f">
+        <strong>Your access is unchanged.</strong> Everything you have purchased is
+        still on your account exactly as before. Only the password has changed.
+      </p>
+    </div>
+    ${credentialsBlock(email, password)}
+    ${cta("Sign in with your new password")}
+    <p style="color:#334155;line-height:1.6;font-size:14px;margin:0 0 8px">
+      You will need to sign in again on each of your devices. If you were signed
+      in on your phone and your laptop, both will ask for the new password once.
+    </p>
+    ${support}`;
+
+  return {
+    from: FROM,
+    to: email,
+    subject: "Your MIW password has been reset — action needed",
+    html: shell(body, "Account security — new password issued"),
+  };
+}
