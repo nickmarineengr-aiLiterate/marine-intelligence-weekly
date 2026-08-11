@@ -4224,3 +4224,126 @@ Security **62/62**. Server torn down and the listener confirmed gone.
 
 Corpus **252 / 117 / 135, 13 solved papers**. Staging retired after verifying all nine staged objects
 were hash-identical to the promoted spec.
+
+---
+
+## §38 — PRE-CORPUS-SYNC HYGIENE AND PRODUCTION FREEZE (2026-08-11)
+
+Not a paper session. No question was authored, no spec changed, no verification record moved.
+The purpose was to close the QP2511 lineage cleanly, audit repository hygiene, and freeze a
+trustworthy checkpoint before the Founder synchronises the completed MARPOL Annex VI corpus.
+
+### 38.1 State was re-derived, not carried forward
+
+Head verified as `fddae20` on `pastpapers/qp2511-founder-review`, tracked tree clean.
+`health_check.py` 0 errors / 0 warnings; corpus **252 questions / 117 solved / 135 intake**,
+**28 papers -- 13 solved, 15 intake**; `solvedqp_check.py` and `--self-test` green, **13 papers,
+117 questions, 3 year sheets, 1 index**; security **62/62** (34 + 28). Every figure matched the
+expectation in the session brief, so nothing had drifted while the branch sat.
+
+### 38.2 The `.vercel` finding -- the one real hygiene defect
+
+`.vercel/project.json` was **untracked and unignored** in a **public** repository. It carries the
+Vercel `projectId` and the `orgId`. Vercel's own bundled README in that folder says it should not
+be shared and states that linking normally self-adds the `.gitignore` entry -- which had not
+happened here.
+
+Nothing had leaked: the folder was never committed. But the only thing preventing publication was
+the standing "never `git add .`" discipline, and a rule enforced by discipline is one slip from
+failing. Ignored, along with `tools/notes/_*.txt` scratch output and the Founder's master
+question-bank spreadsheets under `docs/MIW-master-Question-bank/`, each with the reason and the
+reversal written into `.gitignore` beside it.
+
+Untracked paths fell from **30 to 16**. The remaining 16 are all governance and design markdown
+-- `Claude skill/`, `docs/agent-build/`, three root `ENGINEERING_PRINCIPLES` / `REPOSITORY_STATUS`
+documents -- classified **FOUNDER REVIEW**. None was deleted. Ownership was not proven, so nothing
+was moved.
+
+### 38.3 Staging was already retired; one orphan remained
+
+`meoclass1/pastpapers/staging/` held nothing but a `__pycache__` containing
+`qpio.cpython-314.pyc`, bytecode for a helper whose source no longer exists. Git saw the
+directory as clean because `__pycache__/` is ignored and git does not track empty directories.
+The `.pyc` was removed. Two empty directories remain; a recursive removal was declined by the
+environment and they are harmless, git-invisible, and safe for the Founder to delete.
+
+**No finished paper looks partial.** QP2509, QP2404 and QP2511 all have their staging retired,
+and `QP2509_AUTHORING_CHECKPOINT.md` was **kept** -- it is governed historical evidence, not
+residue.
+
+### 38.4 The corpus drift, which is the actual finding of this session
+
+Two `RulesApp` trees exist on this machine and they are not the same thing:
+
+| | canonical | MIW projection |
+|---|---|---|
+| `F:\RulesApp\repository\` | **1,006 nodes**, 14 subdirectories, `provision-truth/` present | -- |
+| `F:\Marine-Intelligence-Weekly\RulesApp\repository\` | -- | **788 nodes**, `index/` only, `provision-truth-aliases.json` **absent** |
+
+Both counted directly this session. The MIW copy is a **2026-07-25 snapshot, 218 nodes behind**,
+and its `manifest.json` and `version.json` still report the old figure.
+
+This also reconciles an apparent contradiction. `MIW_TRUE_SOURCE_CONTRACT.md` §13 reports 1,006
+nodes; MIW's own `manifest.json` reports 788. **Neither is wrong** -- §13 measured the canonical
+repository and the manifest describes the projection. The lesson generalises: a corpus count is
+meaningless unless it names the tree it was taken from.
+
+`provision-truth-aliases.json` being absent from MIW matters specifically, because §13 names that
+file as the mechanism for resolving the **MARPOL Annex VI dual representation** -- 56 Annex
+VI-shaped nodes split across `MARPOL-VI-*` and `MEPC32876-*` with no stated rule for choosing.
+The resolver cannot answer an Annex VI question without it, and picking an id per paper would
+fragment the corpus silently, without any build failing.
+
+Recorded, with the sync destination and the consumption contract, in
+`CORPUS_SYNC_AND_CONSUMPTION_PLAN.md`. **No corpus file was imported, copied or moved.** The
+completed Annex VI work is not in the local canonical repository either -- only Annex I ODME
+reg 31 and the two SOLAS II-1 batches are -- so the Founder's sync from the desktop is a genuine
+prerequisite and no source path was invented.
+
+### 38.5 Planned-soon was already built
+
+The session brief asked for a design to generate "Planned soon" cards rather than hand-maintain
+them. **That design already exists and already ships.** `build_questions_year.py` renders three
+governed month states -- available, `KNOWN_ABSENT` -> *"No sitting"* with the serial-numbering
+proof, and otherwise *"Not yet in the MIW set"*, worded explicitly as a statement about MIW's
+coverage rather than about whether the examination was held. `paper_status()` returns
+`'available'` only when answers exist, so a source PDF in a folder can never make a paper look
+solved. Two checkers guard it.
+
+The real delta is **one function**: `build_solvedqp_home.py::solved_sittings()` filters intake
+papers out entirely, so the delivery home implies a 13-paper library rather than 13 of 28. Scoped
+in `ONLINE_TEST_PLAN.md` §3.1 and deliberately **not implemented here**, because it moves
+candidate-facing delivery bytes and this session's determinism requirement was that no product
+byte moves.
+
+### 38.6 Parallel production, and the conflict that would have bitten
+
+Designed in `PARALLEL_PRODUCTION_BOARD.md` with an **empty** allocation table -- no branch
+created, no paper allocated.
+
+The load-bearing decision is the global-derived-artefact rule. Six paper branches would each
+regenerate the reuse map, recurrence surfaces, search index, year sheets, `solvedQP/` and the
+state documents wholesale. Git cannot merge that meaningfully, and a textual merge that
+*succeeds* is worse than one that fails: it yields an index describing a corpus state that never
+existed. So paper branches own `specs/QPxxxx.json`, `verification/QPxxxx/**` and that paper's
+anchor doc; integration owns everything global and regenerates it **once per paper**.
+
+One-at-a-time integration is a correctness requirement, not a throughput compromise -- solving a
+paper changes the derived readiness of other papers, proven twice already in this corpus.
+
+Six candidates proposed (QP2401, QP2410, QP2412, QP2409, QP2502, QP2411), with three constraints
+that must travel with any allocation: QP2401-Q9 and QP2412-Q9 share an **identical donor set** and
+must go to one owner or be sequenced; QP2410 carries the corpus's only HIGH-volatility donor pair
+and must be re-anchored to October 2024 rather than inheriting November 2025 prose; and QP2504 is
+**blocked** by the standing Rev.3 stop condition. QP2512 is deliberately excluded despite scoring
+best -- its 34th Assembly boundary risk belongs where the temporal history lives.
+
+### Outcome
+
+Hygiene and state only. **No QP semantic spec changed, no verification record changed, no
+delivery byte moved, no public sample changed, no security behaviour changed.** Toolchain,
+`solvedqp_check.py` and both security suites re-run green after the changes. Corpus unchanged at
+**252 / 117 / 135, 13 solved papers**; delivery unchanged at **13 papers, 117 questions, 3 year
+sheets, 1 index**.
+
+**QP production is PAUSED after QP2511.** The next Founder action is the corpus sync, not a paper.
