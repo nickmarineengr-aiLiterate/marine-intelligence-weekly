@@ -38,7 +38,13 @@ TRAPS_MD = os.path.join(PP, 'known_traps.md')
 # Phrases that legitimately appear in our own machinery and must not self-trip.
 # The known_traps.md file itself quotes every wrong phrase by design, and the
 # verification records quote them when recording the correction.
-EXEMPT_PATHS = ('known_traps.md',)
+#
+# WORKFLOW_LESSONS.md is exempt for the same reason and no more: it is a
+# registry, not product prose, and a lesson ABOUT a trap has to be able to name
+# the wrong phrase. It records, for instance, why trap 1 was kept at full
+# strength after QP2601 Q4 hit it on a correct statement -- which cannot be
+# written without quoting it. Neither file is ever served to a candidate.
+EXEMPT_PATHS = ('known_traps.md', 'WORKFLOW_LESSONS.md')
 EXEMPT_DIRS = ('verification',)
 
 

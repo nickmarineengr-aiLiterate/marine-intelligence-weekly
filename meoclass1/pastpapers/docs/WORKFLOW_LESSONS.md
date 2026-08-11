@@ -1,0 +1,423 @@
+# WORKFLOW LESSONS — Past Written Papers
+
+**Governed by `PRODUCTION_PROTOCOL_INDEX.md`. Read only the entries relevant to the task in
+hand. Do not load this whole file by reflex.**
+
+This is the Production Intelligence Layer's memory. Same format and discipline as
+`known_traps.md`, and for the same reason: a thing this project learned the expensive way,
+written down once, so the next session does not pay for it again.
+
+**`known_traps.md` holds facts about the SUBJECT.** A regulation we drafted wrong.
+
+**This file holds facts about the WORK.** A way of working that failed, or that was proven
+and should be repeated.
+
+No entry here states a regulatory, legal or technical fact. If a lesson needs one, it belongs
+in `known_traps.md` or in a verification record instead.
+
+---
+
+## HOW TO READ AN ENTRY
+
+Each entry carries trailers:
+
+```
+EVIDENCE:  what actually happened, with the paper/commit/file it happened in
+CATEGORY:  one of the categories below
+STATUS:    CANDIDATE | PROVEN | PROMOTED_TO_TOOL | PROMOTED_TO_POLICY | REJECTED | SUPERSEDED
+SEEN:      how many separate production events support it — real counts only, never inflated
+OWNER:     the tool or protocol file that now enforces it, or NONE
+REVISIT:   the condition under which this conclusion should be reopened
+```
+
+`REVISIT:` is mandatory on every REJECTED and every CANDIDATE entry. A rejection with no
+reopening condition is dogma, and dogma is how a decision that was right on one machine, or
+one corpus size, quietly becomes wrong.
+
+**Categories:** `PROCESS_LIFECYCLE`, `SOURCE_HANDLING`, `DONOR_ADAPTATION`,
+`TEMPORAL_VERIFICATION`, `BUILD_QA`, `STATE_HANDOVER`, `SURFACE_IMPACT`, `AUTOMATION`,
+`REJECTED`.
+
+---
+
+# PART 1 — PROVEN LESSONS
+
+---
+
+### 1. Future-contamination checks must be DATE-granular, not year-granular
+
+A contamination sweep that compares only the **year** cannot see the failure that actually
+happened. The dangerous case is same-calendar-year: an instrument adopted in December of the
+sitting's own year, cited in a paper sat in September of that year.
+
+QP2509 Q9 (September 2025) inherited from its donor QP2606-Q8 (June 2026) the claim that
+resolution **A.1207(34)** was the operative HSSC Survey Guidelines. That resolution was
+adopted **3 December 2025** — three months *after* the sitting, in the *same calendar year*.
+The correct edition at the sitting was A.1186(33). The defect had reached **fourteen
+surfaces** of the question before it was caught.
+
+The same Assembly session is a standing boundary for every 2025 sitting, and it recurred:
+QP2510 carries A.1208(34) from the same 34th Assembly.
+
+Compare against the **sitting month**, at minimum.
+
+```
+EVIDENCE:  QP2509 Q9 — A.1207(34)/3 Dec 2025 in a Sept 2025 paper, reversed on 14 surfaces
+           (spec Q9 temporal_review notes 1-3). QP2510 — A.1208(34), same Assembly boundary.
+CATEGORY:  TEMPORAL_VERIFICATION
+STATUS:    PROVEN → PROMOTED_TO_TOOL
+SEEN:      2
+OWNER:     tools/pastpapers/temporal_sweep.py (POST_SITTING_DATE_CANDIDATE)
+REVISIT:   if a spec ever records an exact exam DAY, tighten the comparison from month to day.
+```
+
+---
+
+### 2. Donor adaptation must sweep for internal Q-references in prose
+
+A donor's prose refers to the donor's **own** question numbering. Copied forward, it points at
+a question in the target paper that is about something else entirely — and it reads perfectly.
+
+QP2509 Q2 inherited three `See Q8` pointers from donor QP2508 Q2. QP2508's Q8 was the
+Net-Zero Framework question. QP2509's Q8 is the human element. The pointers survived on
+`major_trap`, the study-guide instrument comparison, and the regulation and source map — all
+candidate-facing.
+
+Sweep for the bounded prose forms: `See Qn`, `Qn of this paper`, `Qn of the same paper`,
+`refer to Qn`, `as discussed in Qn`. A **structured** `cross_links` entry is not this defect —
+it names its paper and is controlled.
+
+```
+EVIDENCE:  QP2509 Q2 — three inherited "See Q8" pointers removed (spec Q2 reuse_evidence[5],
+           temporal_review/notes[2]).
+CATEGORY:  DONOR_ADAPTATION
+STATUS:    PROVEN → PROMOTED_TO_TOOL
+SEEN:      1
+OWNER:     tools/pastpapers/temporal_sweep.py (INTERNAL_QREF_CANDIDATE / _OUT_OF_RANGE)
+REVISIT:   if a target ever legitimately needs a same-paper prose pointer, the sweep stays and
+           the hit is adjudicated — do not weaken the pattern to make one paper quiet.
+```
+
+---
+
+### 3. Derived readiness must never be frozen as intake truth
+
+`reuse_tier` in a spec records what was true when the spec was written. Building a *later*
+paper can turn an earlier paper's tier C into a tier D without any spec being touched, because
+a donor that did not exist then exists now.
+
+Reading the stored field as current truth misclassified six questions across five papers;
+five moved C→D once the tier was derived from the built set instead.
+
+The general form: **anything downstream of "what exists now" must be derived at read time, not
+stored at write time.**
+
+```
+EVIDENCE:  reuse-tier classification defect, 2026-08-11 — 6 questions misclassified, 5 C→D.
+CATEGORY:  AUTOMATION
+STATUS:    PROMOTED_TO_TOOL
+SEEN:      1
+OWNER:     tools/pastpapers/recurrence_model.py :: derive_reuse_tier()
+REVISIT:   if another stored field is found being read as current state, this entry generalises
+           and should be restated as a rule rather than a single fix.
+```
+
+---
+
+### 4. A partially authored paper is not a valid canonical build state
+
+A session that cannot finish a paper must not leave half its questions in the canonical spec.
+The build rejects it, the corpus counts lie, and the next session inherits an object that is
+neither intake nor product.
+
+QP2403 stopped at 2/9 and QP2509 reached 3/9; both required the incomplete work to be moved
+out of the spec. QP2509 used a governed staging area outside `specs/` and applied it back in
+one asserted step when the paper was complete.
+
+Stage outside the canonical spec. Finish, then land.
+
+```
+EVIDENCE:  QP2403 stopped 2/9 (2026-08-10). QP2509 3/9 violated PASTPAPER_PRODUCTION_PROTOCOL
+           §3; staged under meoclass1/pastpapers/staging/QP2509/ and applied at completion.
+CATEGORY:  PROCESS_LIFECYCLE
+STATUS:    PROMOTED_TO_POLICY
+SEEN:      2
+OWNER:     PASTPAPER_PRODUCTION_PROTOCOL.md
+REVISIT:   NONE expected — but if staging itself is ever found drifting from the spec, the
+           staging mechanism needs its own equality check.
+```
+
+---
+
+### 5. Prefer exact asserted substitution to broad blind replacement
+
+For a high-risk structured edit, an applier that **asserts the exact expected old value** and
+fails loudly when it does not match is worth far more than a substitution that quietly matches
+more than intended.
+
+The QP2509 staging applier worked this way, and re-running it was idempotent rather than
+destructive.
+
+```
+EVIDENCE:  meoclass1/pastpapers/staging/QP2509/apply_staged.py (in history at 25e049f;
+           retired at a5f2551 once applied).
+CATEGORY:  BUILD_QA
+STATUS:    PROMOTED_TO_POLICY
+SEEN:      1
+OWNER:     QA_AND_HANDOVER_PROTOCOL.md
+REVISIT:   NONE expected.
+```
+
+---
+
+### 6. A guard that has never been demonstrated to fail is not proven
+
+A check that has only ever passed is indistinguishable from a check that cannot fail. Several
+in this toolchain have been caught in exactly that state: a glob matching nothing sums to
+return code 0 and prints PASS, deleting a whole stage while reporting success.
+
+Every guard carries a positive control that **mutates the input and asserts the guard fires**.
+This is why `--self-test` exists on the validators, and why the QP2509 QA pass deliberately
+broke `health_check` to confirm it was caught.
+
+```
+EVIDENCE:  UI BEHAVIOUR stage rewritten to derive pages from specs after a glob-matches-nothing
+           PASS was identified (run_toolchain.py). QP2509 QA: health_check broken on purpose,
+           correctly caught (2026-08-11).
+CATEGORY:  BUILD_QA
+STATUS:    PROMOTED_TO_TOOL and PROMOTED_TO_POLICY
+SEEN:      2
+OWNER:     run_toolchain.py --self-test; every *_check.py and the two PIL tools
+REVISIT:   NONE. A new guard without a positive control is not acceptable.
+```
+
+---
+
+### 7. A valid internal change can move public, free and paid surfaces indirectly
+
+Solving one paper regenerates derived artefacts across the whole product. Those artefacts
+include **public, free and commercial** pages that were not the target of the session.
+
+Solving QP2509 changed the public free January 2026 sample, the public index, both questions
+year sheets, both topic pages, the shipped search payload — and `QP2601.html`, a *paid* page.
+Every guard passed, correctly. Nothing surfaced that a free page and a paid page had moved.
+
+Measured retrospectively, this is not a one-off: the QP2506 range moved five public surfaces
+including the same free sample. It has been happening on every paper build.
+
+Regeneration is *permitted* to do this. Doing it *invisibly* is not.
+
+```
+EVIDENCE:  c5e85f2^..a5f2551 (QP2509) — 7 public-free changes + 1 non-target paid page.
+           f610818^..6a790b2 (QP2506) — 5 public-free changes. Both measured 2026-08-11.
+CATEGORY:  SURFACE_IMPACT
+STATUS:    PROVEN → PROMOTED_TO_TOOL
+SEEN:      2
+OWNER:     tools/pastpapers/surface_impact.py
+REVISIT:   if a non-target PAID page change is judged to warrant the same escalation as a
+           public one, widen the escalation set — that is a Founder decision, and the tool
+           currently reports it as a separate NOTE rather than deciding.
+```
+
+---
+
+### 8. PIL flags; Claude adjudicates
+
+The two sweeps above report **candidates**, never errors. A post-sitting date can be entirely
+correct for its sitting: QP2509 Q9's study guide deliberately tells the candidate that
+A.1207(34) was adopted after their exam, and QP2509 Q8's "expected December 2027" for the MLC
+2025 amendments is derivable from MLC Article XV and was published by IMO in April 2025 —
+before the sitting.
+
+A tool that suppressed those would be making a legal judgement from a string. So no
+suppression on `not yet` / `expected` / `future` exists, and none should be added. Noise is
+controlled by **field targeting**, which is mechanical, not by guessing at meaning.
+
+```
+EVIDENCE:  QP2509 Q8 forward date verified correct against MLC Art XV(6) and XV(8), 2026-08-11.
+           QP2509 Q9 candidate-facing warning text legitimately contains 3 December 2025.
+CATEGORY:  AUTOMATION
+STATUS:    PROMOTED_TO_POLICY
+SEEN:      2
+OWNER:     temporal_sweep.py; EXECUTION_EFFICIENCY_POLICY.md rule 9
+REVISIT:   NONE. If a suppression is ever proposed it must be proven mechanically safe first.
+```
+
+---
+
+### 9. Provenance fields must stay outside a contamination sweep
+
+`sources`, `verification_status`, `reverify_before_publication`, `temporal_review`,
+`decomposition_gate` and `reuse_evidence` carry post-sitting dates **by construction** — they
+record when the work was done, which is always after the sitting.
+
+Worse, they are where a *removed* defect is written down. QP2509 Q2 records that three
+`See Q8` pointers were removed; QP2509 Q9 records the full A.1207(34) reversal. A sweep over
+those fields flags the audit trail that proves the fix, which is the same self-trip
+`known_traps_check.py` already guards with `EXEMPT_PATHS`.
+
+Scope a contamination sweep to what a candidate reads.
+
+```
+EVIDENCE:  found while building temporal_sweep.py, 2026-08-11 — the only surviving "See Q8"
+           strings in QP2509 are in the records describing their own removal.
+CATEGORY:  AUTOMATION
+STATUS:    PROVEN → PROMOTED_TO_TOOL
+SEEN:      1
+OWNER:     temporal_sweep.py :: CANDIDATE_FACING / EXCLUDED_INTERNAL
+REVISIT:   if a provenance field ever starts being rendered to candidates in publish mode,
+           this exclusion must be re-argued.
+```
+
+---
+
+# PART 2 — REJECTED AND DEFERRED
+
+Recorded so they are not re-litigated for free, and reopened when their premise changes.
+
+---
+
+### R1. Parallelising heavy build / PDF / browser work — REJECTED on this machine
+
+Logically independent work is not free to run concurrently. Python, Node, browser and
+PDF-render jobs contend for the same cores and the same disk queue, so the parallel run
+finishes later than the sequential one.
+
+```
+EVIDENCE:  EXECUTION_EFFICIENCY_POLICY.md, "Resource-aware execution — binding on this machine".
+CATEGORY:  REJECTED
+STATUS:    REJECTED
+SEEN:      1
+OWNER:     EXECUTION_EFFICIENCY_POLICY.md
+REVISIT:   on a material change to CORE COUNT or DISK. Note that the 2026-08-11 RAM upgrade did
+           NOT reopen this: the constraint is cores and the single disk queue, not memory.
+           Cheap read-only work may still be batched.
+```
+
+---
+
+### R2. Duplicating machine RAM / concurrency numbers into repository policy — REJECTED
+
+A machine number written into product policy is a second copy of a truth that lives elsewhere,
+and it goes stale silently. `EXECUTION_EFFICIENCY_POLICY.md` previously restated a 7.87 GB
+figure that became false the moment the laptop was upgraded.
+
+Machine facts live in `CLAUDE_MACHINE_OPERATING_POLICY.md`, outside this repository.
+
+```
+EVIDENCE:  the stale 7.87 GB figure, removed from EXECUTION_EFFICIENCY_POLICY.md.
+CATEGORY:  REJECTED
+STATUS:    REJECTED
+SEEN:      1
+OWNER:     PRODUCTION_PROTOCOL_INDEX.md §4
+REVISIT:   only if the product ever ships on managed infrastructure whose specification is
+           genuinely part of the product.
+```
+
+---
+
+### R3. Re-litigating the model-answer word-count warning — DEFERRED
+
+The band is `450–650 words` for 16 marks. **91 of the 99 solved model answers fall outside it**
+(measured 2026-08-11). A warning that fires on 92% of the corpus carries no information: it is
+neither enforced nor believed, and it trains readers to skip warnings generally.
+
+The answer is not to raise the ceiling until it stops complaining. The band was derived for a
+single undivided 16-mark answer and is being applied to answers printed as `10+6`, `6+5+5` and
+`4+4+4+4`. **Re-derive it per printed limb**, then re-measure.
+
+```
+EVIDENCE:  validate_spec.py:53 — {10: (240,340), 16: (450,650)}; 91/99 outside band.
+CATEGORY:  BUILD_QA
+STATUS:    CANDIDATE / DEFERRED
+SEEN:      1 (corpus-wide measurement)
+OWNER:     NONE yet — validate_spec.py owns the current band
+REVISIT:   when the band is re-derived per printed limb. Until then do NOT adjust the numbers
+           and do NOT silence the warning.
+```
+
+---
+
+### R4. Symmetrising host-recurrence donor edges — DEFERRED
+
+Host recurrence edges are directional: an earlier paper cannot see a later paper that names
+it, so the donor model under-reports readiness. It cost one missed donor during QP2509.
+
+Not fixed here, and deliberately not fixed inside PIL. Symmetrising edges changes **donor
+rankings and recurrence semantics**, which is reuse-model territory, and doing it safely needs
+an oracle for whether two questions are genuinely the same — a semantic judgement PIL is
+barred from making.
+
+```
+EVIDENCE:  CURRENT_STATUS.md §31.3, "SECOND FINDING — host recurrence edges are DIRECTIONAL".
+CATEGORY:  DONOR_ADAPTATION
+STATUS:    CANDIDATE / DEFERRED
+SEEN:      1
+OWNER:     NONE — belongs to the recurrence/reuse model, not PIL
+REVISIT:   when a semantic-safe equivalence oracle exists, or when Claude adjudicates the
+           edges by hand for a bounded set.
+```
+
+---
+
+### R5. Weakening a known trap after one correct hit — REJECTED
+
+QP2601 Q4 tripped the Bunkers "strict liability on the registered owner" trap with a sentence
+about the Nairobi Wreck Removal Convention that was **correct**. The trap was left at full
+strength and the QP2601 wording was changed instead, so no protection was given up.
+
+One correct hit is not evidence a trap is too broad. It is evidence the trap is live.
+
+```
+EVIDENCE:  known_traps.md trap 1, "Scope warning — added during QP2601 production, 2026-08-08".
+CATEGORY:  REJECTED
+STATUS:    REJECTED
+SEEN:      1
+OWNER:     known_traps.md
+REVISIT:   on a SECOND independent correct-statement hit — at which point the phrase moves to
+           GREP: SKIP and the narrower qualified form stays auto-scanned.
+```
+
+---
+
+### R6. Limb-level semantic reuse — DEFERRED, not implemented
+
+QP2509 Q8 demonstrated that reuse can be supported at the level of an individual limb rather
+than a whole question. The opportunity is recorded; nothing is built.
+
+PIL may one day surface **exact string similarities** for Claude to review, which is mechanical.
+Decomposing a question into limbs and judging semantic equivalence is not, and is outside PIL's
+authority.
+
+```
+EVIDENCE:  QP2509 Q8 limb-level donor support, 2026-08-11.
+CATEGORY:  DONOR_ADAPTATION
+STATUS:    CANDIDATE / DEFERRED
+SEEN:      1
+OWNER:     NONE
+REVISIT:   when a second paper shows limb-level support, and only as exact-string surfacing for
+           human review — never as automated equivalence.
+```
+
+---
+
+### R7. Resolution-session date inference in the temporal sweep — REJECTED for V1
+
+Turning `A.1207(34)` into "adopted 3 December 2025" requires knowing when the 34th Assembly
+sat. That is source knowledge, and encoding it would make a detection tool assert regulatory
+facts.
+
+In practice the surrounding prose carries the date token anyway — which is exactly how the
+QP2509 A.1207(34) defect reads, and the retrospective test confirms the date sweep catches it
+without any resolution table.
+
+```
+EVIDENCE:  temporal_sweep.py --retrospective surfaces the A.1207(34) case via its
+           "3 December 2025" token alone, from real donor bytes (QP2606 Q8).
+CATEGORY:  REJECTED
+STATUS:    REJECTED
+SEEN:      1
+OWNER:     temporal_sweep.py (documented in the module docstring, sweep B)
+REVISIT:   only if a resolution is ever found cited with NO date anywhere in its field — at
+           which point the mapping belongs in known_traps.md as a verified fact, not in a tool.
+```
