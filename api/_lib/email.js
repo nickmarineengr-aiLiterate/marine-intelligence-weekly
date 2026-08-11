@@ -176,6 +176,48 @@ export function buildAccessEmail(o) {
 // The password is interpolated here and nowhere else. Delivery is the
 // ONLY channel permitted to carry it; see api/_lib/rotation.js.
 // -------------------------------------------------------------
+/**
+ * Self-service reset. Distinct from buildRotationEmail because the
+ * customer ASKED for this one — it should read as a reply to their
+ * request, not as an alarm. It also has to state plainly that the old
+ * password is gone, since the natural expectation of "forgot password"
+ * is that the original will be sent back, and it cannot be.
+ */
+export function buildResetEmail(email, password, { name = "" } = {}) {
+  const greeting = name.trim() || "there";
+  const body = `
+    <p style="font-size:16px;color:#0f172a;margin:0 0 12px">Hi ${greeting},</p>
+    <p style="color:#334155;line-height:1.6;margin:0 0 16px">
+      You asked to reset your Marine Intelligence Weekly password. Here is a
+      new one. Your previous password no longer works.
+    </p>
+    <div style="background:#f0fdfa;border-left:3px solid #0d9488;padding:12px 16px;margin:0 0 8px">
+      <p style="margin:0;font-size:14px;color:#134e4a">
+        <strong>Everything you have purchased is still on your account.</strong>
+        Only the password has changed.
+      </p>
+    </div>
+    ${credentialsBlock(email, password)}
+    ${cta("Sign in with your new password")}
+    <p style="color:#334155;line-height:1.6;font-size:14px;margin:0 0 8px">
+      You have been signed out on all devices, so you will need to sign in
+      again on each one.
+    </p>
+    <p style="color:#64748b;line-height:1.6;font-size:13px;margin:0">
+      If you did not request this, someone entered your address on the reset
+      form. Your account is safe — simply use the new password above, or
+      contact us and we will help.
+    </p>
+    ${support}`;
+
+  return {
+    from: FROM,
+    to: email,
+    subject: "Your new MIW password",
+    html: shell(body, "Password reset"),
+  };
+}
+
 export function buildRotationEmail(email, password, { name = "" } = {}) {
   const greeting = name.trim() || "there";
   const body = `

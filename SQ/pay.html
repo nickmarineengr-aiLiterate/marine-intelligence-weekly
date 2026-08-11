@@ -65,13 +65,16 @@ input:focus{border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.15)}
     </div>
     <div class="field">
       <label for="login-pwd">Password</label>
-      <input type="password" id="login-pwd" placeholder="MIW-xxxxxxxx" autocomplete="current-password">
+      <!-- Placeholder shows the CURRENT credential shape. Passwords are
+           no longer drawn from the MIW-xxxxxxxx pool; they are generated
+           per account, 16 characters, no ambiguous letters or digits. -->
+      <input type="password" id="login-pwd" placeholder="16-character password" autocomplete="current-password">
     </div>
     <div class="note" id="login-msg"></div>
     <button class="btn" id="login-btn">Sign in →</button>
     <hr class="divider">
     <div class="help">
-      Lost your password? <a href="mailto:contactus@marineintelligenceweekly.com">Email us</a><br>
+      Forgotten your password? <a href="#" id="reset-link">Email me a new one</a><br>
       Don't have access yet? <a href="/SQ/">See what's available →</a>
     </div>
   </div>
@@ -276,6 +279,49 @@ async function doLogin() {
   }
 }
 
+/**
+ * Forgotten password.
+ *
+ * This ISSUES A NEW PASSWORD — it cannot resend the existing one,
+ * because the stored form is a salted hash and the plaintext exists
+ * nowhere. The button text says "Email me a new one" for that reason;
+ * "send my password" would be a promise the system cannot keep.
+ *
+ * The server answers identically whether or not the address has an
+ * account, so this handler must not branch on the outcome either — the
+ * UI would otherwise leak exactly what the endpoint refuses to.
+ */
+async function doReset(e) {
+  e.preventDefault();
+  const email = $("login-email").value.trim().toLowerCase();
+  if (!email) {
+    msg("Enter your email address above first, then tap the link.", "info");
+    $("login-email").focus();
+    return;
+  }
+
+  const link = $("reset-link");
+  link.textContent = "Sending…";
+  link.style.pointerEvents = "none";
+  try {
+    const r = await fetch("/api/reset-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    const d = await r.json();
+    msg(d.message || "If that address has an account, a new password has been emailed to it.", "info");
+  } catch {
+    // Even a network failure gets the neutral line. A distinguishable
+    // error here would be a second way to probe the same question.
+    msg("If that address has an account, a new password has been emailed to it.", "info");
+  } finally {
+    link.textContent = "Email me a new one";
+    link.style.pointerEvents = "";
+  }
+}
+
+$("reset-link").addEventListener("click", doReset);
 $("login-btn").addEventListener("click", doLogin);
 for (const id of ["login-email", "login-pwd"]) {
   $(id).addEventListener("keydown", (e) => { if (e.key === "Enter") doLogin(); });
