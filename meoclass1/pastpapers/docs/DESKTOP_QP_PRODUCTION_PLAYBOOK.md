@@ -15,7 +15,7 @@ If you are that session: read this file completely before you touch a spec.
 | | |
 |---|---|
 | **MIW remote** | `https://github.com/nickmarineengr-aiLiterate/marine-intelligence-weekly.git` — **PUBLIC** |
-| **Desktop parallel baseline commit** | recorded in §16 — **immutable for all six papers** |
+| **Desktop parallel baseline commit** | **`9c97359`** — see §16. **Immutable for all six papers** |
 | **Corpus remote** | `https://github.com/nickmarineengr-aiLiterate/RulesApp-Local-Input.git` — **PRIVATE** |
 | **Required corpus commit** | recorded in §16 |
 | **Allocation** | [`DESKTOP_QP_ALLOCATION_2024.md`](DESKTOP_QP_ALLOCATION_2024.md) — exactly six 2024 papers |
@@ -470,7 +470,7 @@ Use the standard report schema in `QA_AND_HANDOVER_PROTOCOL.md` §8.
 
 | | |
 |---|---|
-| **MIW baseline commit** | `SEE_ALLOCATION_FILE` — recorded in [`DESKTOP_QP_ALLOCATION_2024.md`](DESKTOP_QP_ALLOCATION_2024.md) §2 |
+| **MIW baseline commit** | **`9c973596edb04db32c7bf4feb3cb5898b162662a`** (`9c97359`) on `workflow/corpus-consumer-integration` |
 | **Required corpus commit** | `64977b86ed9c601e273f1d0cb55abb0461835811` (`RulesApp-Local-Input` `origin/main`) |
 | **Corpus verification** | 0 ahead / 0 behind `origin/main`, tracked tree clean, at time of baseline |
 
@@ -488,8 +488,8 @@ git clone https://github.com/nickmarineengr-aiLiterate/marine-intelligence-weekl
 cd marine-intelligence-weekly
 git -c safe.directory=* fetch origin --prune
 
-# 2. Check out the recorded baseline (see DESKTOP_QP_ALLOCATION_2024.md §2)
-git -c safe.directory=* checkout <BASELINE_COMMIT>
+# 2. Check out the recorded baseline
+git -c safe.directory=* checkout 9c973596edb04db32c7bf4feb3cb5898b162662a
 
 # 3. Clone the private corpus SEPARATELY, alongside — never inside MIW.
 git clone https://github.com/nickmarineengr-aiLiterate/RulesApp-Local-Input.git

@@ -33,7 +33,7 @@ May is absent from the source set in all three years. There is no `QP2405`.
 
 | | |
 |---|---|
-| **MIW baseline commit** | `PENDING — recorded by the follow-up metadata commit; see §2.1` |
+| **MIW baseline commit** | **`9c973596edb04db32c7bf4feb3cb5898b162662a`** (`9c97359`) |
 | Baseline branch | `workflow/corpus-consumer-integration` |
 | Baseline contents | corpus consumer seam · honest product coverage · 252/117/135 · 13 papers delivered · toolchain green |
 | **Required corpus commit** | `64977b86ed9c601e273f1d0cb55abb0461835811` |
@@ -43,21 +43,19 @@ May is absent from the source set in all three years. There is no `QP2405`.
 
 **All six branches start from that one commit.** Not from six historic paper heads.
 
-### 2.1 How the baseline hash is recorded
+### 2.1 How the baseline hash was recorded
 
-The baseline is **the commit that introduces this file and the playbook**. Its hash cannot be
-written inside itself, so it is recorded by a small follow-up metadata commit that names its own
-parent. Until that commit exists, the row above reads `PENDING`.
-
-**Verify before you branch** — the value in §2 must equal:
+The baseline is **the commit that introduced this file and the playbook**. A commit cannot contain
+its own hash, so `9c97359` was written in by a small follow-up metadata commit whose **parent is
+the baseline**. This is unambiguous and self-verifying:
 
 ```bash
-git -c safe.directory=* log --oneline -2 workflow/corpus-consumer-integration
-# the metadata commit's PARENT is the baseline
+git -c safe.directory=* cat-file -p HEAD^{commit} | head -2   # on the metadata commit
+# its 'parent' line must read 9c973596edb04db32c7bf4feb3cb5898b162662a
 ```
 
-If §2 still says `PENDING` in the copy you cloned, **fetch again** — you are behind the metadata
-commit. Do not guess a hash and do not branch from a hash that is not written here.
+Branch every paper from `9c97359` — **not** from the metadata commit, and not from the branch head,
+which will move as the laptop team integrates. Do not guess a hash.
 
 If the corpus team lands FSS or MARPOL work after this baseline, **do not move the desktop branches
 onto a newer corpus commit.** Record the commit you consumed; the laptop enriches at integration.
