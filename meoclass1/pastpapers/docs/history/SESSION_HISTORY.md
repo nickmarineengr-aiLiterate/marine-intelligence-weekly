@@ -4044,3 +4044,94 @@ session began: 11 → 12 sittings, April 2024 added, and the removal of "and sti
 August 2026", an authoring-date leak that dates the page the moment the month passes.
 Verified against the specs and committed on its own, so it reads as current product work
 rather than as part of the recovery.
+
+---
+
+# §36 — QP2511, NOVEMBER 2025: STOPPED AT 1 OF 9
+
+**2026-08-11.** Branch `pastpapers/qp2511-founder-review`, from `commerce/solvedqp-recovery`
+@ `462cfbc`. Heads: `4c22510` (anchor), `886cfd0` (Q9 + checkpoint), and the state/history
+commit that follows.
+
+## 36.1 What this session was and was not
+
+It was a full production attempt on QP2511 and it did **not** produce a paper. It produced the
+complete research foundation for one, plus one finished question. The spec was left untouched at
+answerless intake, nothing was built, and `solvedQP/` still delivers 12 papers and 108 questions.
+
+That is the protocol working rather than failing. `PASTPAPER_PRODUCTION_PROTOCOL.md` §3 forbids a
+half-authored-paper state and §4 forbids building an incomplete paper; promoting the one authored
+question into the spec would have produced a paper that renders, indexes and counts as solved with
+eight answers missing. The corpus's own history calibrates this — QP2404 stopped at 4/9 and QP2403
+at 2/9 before later sessions finished them.
+
+## 36.2 Baselines, all three green before anything was touched
+
+Corpus 252 / 108 / 144 across 12 solved papers, derived from the specs rather than carried
+forward. `solvedqp_check.py` and its self-test green — 12 papers, 3 year sheets, 1 index, 19 pages
+clean, 10 guards firing on the deliberately defective fixture. Offline security **62 / 62**
+(34 + 28). `run_toolchain.py` ALL STAGES PASS. Every one of these was re-run at the end unchanged.
+
+## 36.3 Source truth needed no correction
+
+Both pages read back visually against a 150 dpi render, closing the residual risk the intake spec
+had itself recorded (*"Pages read back this session: 1 of 2"*). Serial `EM – 2511`, marks printed
+only on Q7/Q8/Q9, and all three printed anomalies — Q2's sentence break, Q3's missing word, Q6's
+missing verb — confirmed and correctly preserved.
+
+## 36.4 The reverse-hint queue paid out again
+
+Three unadjudicated rows, all three ruled by reading both printed stems. Q4 and Q6 are EXACT
+(`fueled`/`fuelled`; a dropped verb). Q3 is NEAR — the November stem is a **compressed** form that
+folds "who can issue these certificates in India" into "the different certificates in India".
+`QP2604-Q6` was rejected as preferred donor on shape and recorded as a family member so it cannot
+silently become one later. **Tier D 3/9 → 6/9.**
+
+## 36.5 The stored donor field was stale and the derived layer was right
+
+The intake spec named `QP2602-Q7` (February 2026) for Q9. The derived reuse map prefers
+`QP2508-Q7` (August 2025), and it is correct: an earlier same-year donor is a **forward**
+adaptation and avoids a backwards pull entirely. `QP2508-Q7`'s own verification record had
+predicted exactly this under *Family benefit*. This is the concrete instance of the standing rule
+that stored `reuse_tier` and `reused_from` are not to be trusted.
+
+## 36.6 Three boundaries established, two of which bite on unauthored questions
+
+**The 34th Assembly sat 24 November – 3 December 2025** — it convened *inside* the sitting month
+and adopted at the close. The exclusion therefore holds for the whole `A.12xx(34)` family, and the
+operative Assembly editions at this sitting are the 33rd Assembly's of 6 December 2023. This bites
+on **Q5**, whose March 2026 donor may legitimately cite the **2025** HSSC Survey Guidelines.
+
+**The Merchant Shipping Act 2025** was assented 18 August 2025 and commenced only **15 March 2026**
+(`S.O. 1244(E)`), established repository-first from the `QP2607/Q7` record which read the Gazette
+and the commencement notification directly. At this sitting the **1958** Act governs. This bites on
+**Q8**, whose donor reasons about the 2025 Act as live law across several study-note blocks.
+
+**FAL** was researched to primary level for Q7 even though Q7 is unauthored: `FAL.15(47)` was read
+in full from the IMO resolutions CDN. Its operative paragraph 2 is a quotable tacit-acceptance
+determination — in force 1 January 2025 unless one third objected before 1 October 2024 — and it
+amends **Recommended Practice 7.11**, not the garbage-record-book item the IMO summary page
+attributes to it. The primary text governs; that summary page must not be authored from.
+
+## 36.7 A legitimate future date, kept
+
+`26 June 2030` appears seven times in the Q8 donor and is the Hong Kong Convention's **own**
+transitional deadline for existing ships — equally true and equally stateable in November 2025. It
+was adjudicated as keep. A blind date-strip would have deleted a correct answer point. `PIL FLAGS;
+CLAUDE ADJUDICATES` earned its keep on a paper where five of six donors run backwards.
+
+## 36.8 The contamination was where it was least expected
+
+The session was set up to reverse the currency corrections of five backwards donors. The internal
+`Q`-reference defect — the QP2509 class — turned up in `QP2508-Q7`, **the one donor pushed
+forward**. Promoted to a workflow lesson: post-sitting dates travel backwards, but internal
+cross-references are relative to the donor's own paper and travel in both directions, so the
+reference sweep must never be directional.
+
+## 36.9 PIL surface impact, and `staging/`
+
+4 changed paths, all `TARGET_DIRECT`; nothing touched a non-target public, paid, commercial or
+security surface. Two rows classify `UNKNOWN_REVIEW` because `staging/` is a new top-level
+directory with no rule. **No rule was added.** Following the `.gitattributes` precedent of §35.8,
+being asked about a new top-level directory in a public repository is the correct outcome, and it
+is reported to the Founder rather than suppressed.

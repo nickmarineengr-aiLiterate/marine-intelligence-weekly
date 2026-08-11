@@ -604,6 +604,78 @@ REVISIT:   never -- guarding a silent defect has no downside worth reopening.
 
 ---
 
+## An Assembly boundary is fixed by the ADOPTION date, not by the session's opening month
+
+The QP2509 incident produced the working rule *"the 34th Assembly is December 2025, so it
+postdates any earlier sitting"*. That rule gives the right answer for the wrong reason, and the
+reason matters as soon as a November sitting is worked.
+
+**The 34th Assembly sat 24 November to 3 December 2025.** It *convened inside November* — the
+sitting month of `QP2511` — and adopted its resolutions at the **close** of the session.
+`A.1207(34)` is dated **3 December 2025**. A session that reasons from "which month did the
+Assembly meet in" reaches an ambiguous answer for a November paper; a session that reasons from
+the adoption date reaches a clean one.
+
+The same shape recurs: the 33rd Assembly's `A.1187(33)` is dated **6 December 2023**, which is
+why the 33rd Assembly editions are the operative ones for any sitting up to that date.
+
+**The practical consequence is a whole family of instruments, not one resolution.** Assembly
+sessions re-issue the HSSC Survey Guidelines, the Procedures for Port State Control and the III
+Code obligations list on a biennial cycle. A donor from a later sitting may legitimately cite the
+newer edition of any of them, and that citation is a future instrument for the earlier target.
+On `QP2511` this lands on Q5, whose March 2026 donor may cite the 2025 HSSC guidelines where the
+sitting requires the 2023 ones — a defect no downstream check would catch, because the donor was
+correct for the donor.
+
+```
+EVIDENCE:  QP2511 session, 2026-08-11. Assembly 34 dates verified against IMO's own meeting
+           summary; A.1187(33) of 6 December 2023 already primary-verified in QP2403-Q7.
+           Recorded in docs/QP2511_TEMPORAL_AND_DONOR_ANCHOR.md section 2.
+CATEGORY:  TEMPORAL_VERIFICATION
+STATUS:    PROVEN
+SEEN:      2   (QP2509 realised defect; QP2511 prospective catch)
+OWNER:     NONE -- adjudication, not detection. temporal_sweep.py flags a post-sitting date but
+           cannot know that a re-issued Assembly instrument has an earlier operative edition.
+REVISIT:   if an Assembly ever adopts at the opening of a session rather than at its close, or
+           if a per-paper Assembly-edition table is built that a tool could check against.
+```
+
+---
+
+## The contaminated donor was the FORWARD one, not the backward ones
+
+`QP2511` is a backwards-pull paper: five of its six donors are 2026 answers dragged back to a
+November 2025 sitting, and the whole session was set up to reverse *their* currency corrections.
+
+The internal `Q`-reference defect — the QP2509 defect class, where a donor's "see Q8" silently
+re-points at an unrelated question on the new paper — was found in **`QP2508-Q7`, the one donor
+pushed forward** from an earlier sitting. It carries *"see Q8"*, *"Q8 of this paper"* and
+*"Q5 of this paper"*; on `QP2511` those numbers mean the Hong Kong Convention and the Enhanced
+Survey Programme.
+
+The lesson is that **direction of pull predicts *which* contamination class to expect, and a
+session that has correctly identified itself as a backwards-pull paper is primed to look the
+wrong way.** Post-sitting dates travel backwards; internal cross-references travel in **both**
+directions, because they are relative to the donor's own paper and not to any date at all.
+
+Sweep every donor for internal `Q`-references regardless of direction. The date sweep may be
+directional; the reference sweep never is.
+
+```
+EVIDENCE:  QP2511 session, 2026-08-11. Donor scan against the target sitting found the
+           POST_SITTING_DATE flags concentrated in the 2026 donors as expected, and the
+           INTERNAL_QREF flags concentrated in QP2508-Q7. Recorded in verification/QP2511/Q9.md.
+CATEGORY:  DONOR_ADAPTATION
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     tools/pastpapers/temporal_sweep.py detects INTERNAL_QREF_CANDIDATE, but only on
+           solved specs against their own sitting -- it cannot sweep a donor against a target.
+REVISIT:   if temporal_sweep.py gains a --target-sitting mode, this becomes tool-enforced and
+           the entry should be reclassified PROMOTED_TO_TOOL.
+```
+
+---
+
 # PART 2 — REJECTED AND DEFERRED
 
 Recorded so they are not re-litigated for free, and reopened when their premise changes.

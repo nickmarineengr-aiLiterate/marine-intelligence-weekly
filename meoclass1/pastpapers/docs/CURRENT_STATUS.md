@@ -1,7 +1,7 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-11, after QP2404 was completed.
+Last updated: 2026-08-11, after the QP2511 session stopped at a guarded checkpoint.
 
 This file answers four questions and nothing else: *where are we now, what was completed,
 what is next, what is blocked.*
@@ -26,7 +26,7 @@ what is next, what is blocked.*
 | `main` | `0766d00` — nothing from the pastpapers line has been merged into it |
 | Content head | `a5f2551` on `pastpapers/qp2509-founder-review` — the newest solved-paper state |
 | Tooling head | `850bdde` on `workflow/pil-v1` — content head plus the Production Intelligence Layer |
-| This branch | `pastpapers/qp2404-founder-review` @ `84fee6f` — **QP2404 COMPLETE 9/9**, built and verified. Founder review |
+| This branch | `pastpapers/qp2511-founder-review` @ `886cfd0` — **QP2511 IN PROGRESS, 1 of 9 authored.** Branched from `commerce/solvedqp-recovery` @ `462cfbc`. **Not built.** Resume from `staging/QP2511/CHECKPOINT.md` |
 
 All git commands in this repository need `-c safe.directory=*`.
 
@@ -113,7 +113,8 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 | `pastpapers/2024-question-intake` | `7ca36b6` | 2024–2026 intake |
 | `pastpapers/2025-question-intake` | `3a4aa14` | 2025 intake |
 | `pastpapers/2026-v1-product-review` | `217fbba` | the 2026 V1 product review |
-| `commerce/solvedqp-recovery` | this branch | **the Solved QP delivery product and the offline security stack** — Founder review. Branched from `bf87b1a`; inert, nothing deployed |
+| `pastpapers/qp2511-founder-review` | this branch | **QP2511, IN PROGRESS 1 of 9.** Branched from `commerce/solvedqp-recovery` @ `462cfbc`; not built, spec still intake |
+| `commerce/solvedqp-recovery` | `462cfbc` | **the Solved QP delivery product and the offline security stack** — Founder review. Branched from `bf87b1a`; inert, nothing deployed |
 | `commerce/solvedqp-security-v2` | `eaedfda` | frozen. **Do not merge.** Its content was selectively recovered onto `commerce/solvedqp-recovery`; its stale `solvedQP/` HTML was deliberately not |
 
 ---
@@ -197,22 +198,40 @@ Fixed in `caf5020`.
 
 ## 7. Next production target
 
-**QP2404 is COMPLETE and awaiting Founder review. Nothing is in progress.**
+**QP2511 — November 2025 — IS IN PROGRESS AND STOPPED AT 1 OF 9.**
 
-The recommended next paper is **QP2511 — November 2025**, on current derived intelligence:
+Resume from **`staging/QP2511/CHECKPOINT.md`**, having first read
+[`QP2511_TEMPORAL_AND_DONOR_ANCHOR.md`](QP2511_TEMPORAL_AND_DONOR_ANCHOR.md).
+
+| | |
+|---|---|
+| Authored | **Q9 only** — staged at `staging/QP2511/Q9.json`, verified at `verification/QP2511/Q9.md` |
+| Not started | Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8 |
+| Spec | **UNTOUCHED — answerless intake.** No half-authored-paper state exists |
+| Built | **No.** No page, no `solvedQP/` regeneration. Delivery remains 12 papers |
+| Tier D | **6 / 9** after reverse-hint adjudication accepted three edges (was 3 / 9) |
+| Research banked | Q7's FAL position is complete to primary level; Q5's and Q8's temporal regressions are identified but not applied |
+
+The corpus counts in §2 are therefore **unchanged**: solving QP2511 has not begun to affect them.
+
+Do **not** promote Q9 into the spec on its own. Promote all nine in one operation, then build.
+
+### After QP2511 — the ranking that led here, for reference
 
 | Paper | Tier D | Family reach | Temporal flags |
 |---|---|---|---|
-| **QP2511** | **3 / 9** | 4 | 2 |
+| **QP2511** | **6 / 9** (was 3 / 9) | 4 | 2 |
 | QP2401 | 3 / 9 | 3 | 2 |
 | QP2502 | 2 / 9 | 5 | 2 |
 | QP2507 | 0 / 9 | **8** | 2 |
 
-`QP2511` leads on donor-backed work. `QP2507` remains the highest *family reach* in the corpus —
-solving it converts the most research elsewhere — but it starts from zero verified donors, so it is
-the better second choice, not the better next one.
+`QP2511` led on donor-backed work and now leads by more: reverse-hint adjudication took it from
+3 / 9 to **6 / 9** Tier D. `QP2507` remains the highest *family reach* in the corpus — solving it
+converts the most research elsewhere — but it starts from zero verified donors, so it is the better
+paper *after* QP2511, not instead of it.
 
-**Do not start it without a Founder go-ahead.**
+**Finish QP2511 before starting anything else. Do not start a new paper without a Founder
+go-ahead.**
 
 ### Standing stop conditions
 
