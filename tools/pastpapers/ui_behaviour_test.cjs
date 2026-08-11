@@ -44,6 +44,36 @@ function ok(name, cond, extra) {
 // Alias probes deliberately use words that appear ONLY in search metadata and
 // are never rendered on the card, which is the behaviour being guarded.
 const FIXTURES = {
+  QP2511: {
+    probes: [
+      ['bulk carrier losses', 'QP2511-Q1'],
+      ['torque rich', 'QP2511-Q2'],
+      ['ship sanitation control certificate', 'QP2511-Q3'],
+      ['gassing up', 'QP2511-Q4'],
+      ['condition assessment programme', 'QP2511-Q5'],
+      ['dye penetrant', 'QP2511-Q6'],
+      ['single window', 'QP2511-Q7'],
+      ['alang', 'QP2511-Q8'],
+      ['signature subject to ratification', 'QP2511-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['lrm', 'QP2511-Q2', 'Q2 (the light running margin abbreviation)'],
+      ['deratting certificate', 'QP2511-Q3', 'Q3 (the superseded name of the SSCC)'],
+      ['maritime declaration of health', 'QP2511-Q3',
+       'Q3 (the name Article 37 carried before the amendments in force from 19 September 2025)'],
+      ['beaching', 'QP2511-Q8', 'Q8 (the Convention does not prohibit it)'],
+      ['vclt', 'QP2511-Q9', 'Q9 (the Vienna Convention abbreviation)'],
+    ],
+    // MSC.215(82) is the Performance Standard for Protective Coatings, reached
+    // through SOLAS XII/6 -- the bulk carrier limb. It belongs to Q1's casualty
+    // answer, not to Q5's survey regime, which is why A.1049(27) is not used here.
+    regulation: ['msc.215(82)', 'QP2511-Q1'],
+    // Q5 is the EARLIER member of an exact pair, so its recurrence points FORWARD
+    // to March 2026 -- the opposite direction from most fixtures in this file.
+    recurrence: ['2026/mar/q6', 'QP2511-Q5'],
+    narrow: ['restriction from sailing with a hold empty', 'QP2511-Q1'],
+  },
   QP2404: {
     probes: [
       ['internet of things', 'QP2404-Q1'],

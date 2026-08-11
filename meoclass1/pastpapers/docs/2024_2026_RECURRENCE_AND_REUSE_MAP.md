@@ -10,9 +10,9 @@ Scope honesty: every count below is scoped to the sittings MIW has actually tran
 | Year | Papers | Questions | Answers built |
 |---|---|---|---|
 | 2024 | 11 | 99 | 18 |
-| 2025 | 11 | 99 | 36 |
+| 2025 | 11 | 99 | 45 |
 | 2026 | 6 | 54 | 54 |
-| **Total** | **28** | **252** | **108** |
+| **Total** | **28** | **252** | **117** |
 
 Every paper sets nine questions and every question is recorded at 16 marks under printed instruction 2. **May is absent from the available MIW source set in all three years.**
 
@@ -23,8 +23,8 @@ Computed in `recurrence_model.py` from `(year, month)` and nothing else. The sou
 | Year | First in set | Repeated, same wording | Repeated, reworded | Once in this set |
 |---|---|---|---|---|
 | 2024 | 27 | 7 | 1 | 64 |
-| 2025 | 24 | 34 | 8 | 33 |
-| 2026 | 3 | 23 | 9 | 19 |
+| 2025 | 25 | 34 | 8 | 32 |
+| 2026 | 2 | 22 | 13 | 17 |
 
 An earliest year cannot contain a "repeated, reworded" question that looks backwards, so 2024's repeats are all internal to itself.
 
@@ -34,9 +34,9 @@ A family is a connected component over two undirected edge kinds: an adjudicated
 
 | | |
 |---|---|
-| Families total | 170 |
+| Families total | 167 |
 | Multi-sitting families | **54** |
-| Spanning more than one year | 36 |
+| Spanning more than one year | 39 |
 | Spanning all 3 years | **4** |
 
 ### Multi-sitting families, largest first
@@ -46,6 +46,7 @@ A family is a connected component over two undirected edge kinds: an adjudicated
 | 7 | 2024&ndash;2026 | Human Element in STCW and IMO Fatigue Guidance | April 2024 Q7 &rarr; February 2025 Q2 &rarr; June 2025 Q8 &rarr; August 2025 Q4 &rarr; January 2026 Q9 &rarr; February 2026 Q4 &rarr; April 2026 Q9 |
 | 5 | 2024&ndash;2026 | General Average - Essential Features and a Refloating Scenario | April 2024 Q6 &rarr; October 2024 Q9 &rarr; June 2025 Q6 &rarr; August 2025 Q6 &rarr; February 2026 Q6 |
 | 5 | 2025&ndash;2026 | Entry into Force of an IMO Convention | June 2025 Q2 &rarr; August 2025 Q7 &rarr; November 2025 Q9 &rarr; February 2026 Q7 &rarr; March 2026 Q1 |
+| 5 | 2025&ndash;2026 | WHO, Disease Vectors and Ship Health Certificates | November 2025 Q3 &rarr; December 2025 Q1 &rarr; January 2026 Q6 &rarr; March 2026 Q4 &rarr; April 2026 Q6 |
 | 4 | 2024&ndash;2025 | IMO Instruments Implementation Code - Objectives and Flag State Performance | January 2024 Q9 &rarr; March 2024 Q7 &rarr; December 2024 Q9 &rarr; October 2025 Q7 |
 | 4 | 2025&ndash;2026 | Formal Safety Assessment for Lithium Batteries in RORO Carriage | August 2025 Q3 &rarr; February 2026 Q3 &rarr; March 2026 Q8 &rarr; April 2026 Q2 |
 | 4 | 2025&ndash;2026 | Particular and General Average, and Average Adjusters | September 2025 Q3 &rarr; January 2026 Q3 &rarr; April 2026 Q3 &rarr; July 2026 Q5 |
@@ -59,7 +60,7 @@ A family is a connected component over two undirected edge kinds: an adjudicated
 | 3 | 2025&ndash;2026 | Casualty Investigation Code and VSMC | June 2025 Q7 &rarr; January 2026 Q8 &rarr; April 2026 Q8 |
 | 3 | 2025&ndash;2026 | Unseaworthy and Unsafe Ships under the Merchant Shipping Act 1958 | June 2025 Q9 &rarr; August 2025 Q5 &rarr; February 2026 Q5 |
 | 3 | 2025&ndash;2026 | CII - Concept, Commercial Impact and Shortcomings | August 2025 Q2 &rarr; September 2025 Q2 &rarr; February 2026 Q2 |
-| 3 | 2026 | WHO, Disease Vectors and Ship Health Certificates | January 2026 Q6 &rarr; March 2026 Q4 &rarr; April 2026 Q6 |
+| 3 | 2025&ndash;2026 | LNG Bunkering - Gassing Up, Cooldown, Vapour and Release | November 2025 Q4 &rarr; December 2025 Q2 &rarr; March 2026 Q5 |
 | 2 | 2024&ndash;2026 | Uberrimae Fidei and Disclosure in Marine Insurance | January 2024 Q1 &rarr; July 2026 Q9 |
 | 2 | 2024&ndash;2025 | CII Rating, AER and EEOI | January 2024 Q3 &rarr; April 2025 Q6 |
 | 2 | 2024&ndash;2026 | IACS Structure and the RO Code | January 2024 Q5 &rarr; July 2026 Q3 |
@@ -92,9 +93,8 @@ A family is a connected component over two undirected edge kinds: an adjudicated
 | 2 | 2025&ndash;2026 | Revised IMO GHG Strategy and the Proposed MARPOL Annex VI Chapter V | August 2025 Q8 &rarr; February 2026 Q8 |
 | 2 | 2025&ndash;2026 | UNCLOS Maritime Zones and a Missing Cadet in the EEZ | August 2025 Q9 &rarr; February 2026 Q9 |
 | 2 | 2025&ndash;2026 | Communication, Barriers, and Decarbonisation Work Hazards | September 2025 Q6 &rarr; January 2026 Q2 |
-| 2 | 2025 | Disease Vector Control and Ship Health Certificates | November 2025 Q3 &rarr; December 2025 Q1 |
-| 2 | 2025 | LNG Bunkering Procedures | November 2025 Q4 &rarr; December 2025 Q2 |
-| 2 | 2025&ndash;2026 | Enhanced Survey Programme and Condition Assessment Programme | November 2025 Q5 &rarr; March 2026 Q6 |
+| 2 | 2025&ndash;2026 | Enhanced Survey Programme versus Condition Assessment Programme | November 2025 Q5 &rarr; March 2026 Q6 |
+| 2 | 2025&ndash;2026 | Propeller Blade Crack Found in Dry Dock | November 2025 Q6 &rarr; March 2026 Q7 |
 | 2 | 2026 | VLCC Total Loss - Insurance and Conventions | January 2026 Q4 &rarr; April 2026 Q4 |
 | 2 | 2026 | UNCLOS Flag State Duties and India's Mechanism | January 2026 Q7 &rarr; April 2026 Q7 |
 
@@ -110,9 +110,9 @@ Every pair of questions inside one family, counted by the two sittings it joins.
 | 2024 &harr; 2025 | 27 | 5 | 32 |
 | 2024 &harr; 2026 | 8 | 3 | 11 |
 | 2025 internal | 17 | 7 | 24 |
-| 2025 &harr; 2026 | 23 | 14 | 37 |
+| 2025 &harr; 2026 | 23 | 23 | 46 |
 | 2026 internal | 5 | 11 | 16 |
-| **All pairs** | **88** | **41** | **129** |
+| **All pairs** | **88** | **50** | **138** |
 
 ## 5. REUSE MAP
 
@@ -122,8 +122,8 @@ Every pair of questions inside one family, counted by the two sittings it joins.
 |---|---|---|---|
 | A | 0 | 0 | Carried from the adjudicated intake field. An existing canonical object fully covers the demand. |
 | B | 0 | 0 | Carried from the adjudicated intake field. An existing canonical object partly covers the demand. |
-| C | 69 | 55 | Derived: no family member has a built answer. New research. |
-| D | **12** | **8** | Derived: the family contains at least one question whose answer is built and verified. |
+| C | 68 | 47 | Derived: no family member has a built answer. New research. |
+| D | **13** | **7** | Derived: the family contains at least one question whose answer is built and verified. |
 
 **Why A and B are still zero, and why that is a finding rather than a gap.** Both tiers claim that an existing canonical object covers some or all of the examiner demand. That claim cannot be made without reading the object, and this session authors and verifies nothing. A keyword sweep of the Oral corpus was run for the 2025 intake and deliberately **not** used to assign B: no threshold produced a natural break, so any cut point would be arbitrary, and a manufactured B count is worse than none because it would be planned against. That sweep output survives per question in `reuse_evidence` as named candidate files to read, explicitly labelled discovery. Promotion to A or B belongs to the solving session, which will have read them.
 
@@ -136,14 +136,17 @@ Every unsolved question whose CURRENT readiness differs from the tier frozen at 
 | QP2401-Q9 | January 2024 Q9 | C | **D** | QP2403-Q7, QP2510-Q7 |
 | QP2409-Q8 | September 2024 Q8 | C | **D** | QP2404-Q5 |
 | QP2409-Q9 | September 2024 Q9 | C | **D** | QP2404-Q4, QP2506-Q1 |
+| QP2410-Q5 | October 2024 Q5 | C | **D** | QP2511-Q7 |
 | QP2410-Q9 | October 2024 Q9 | C | **D** | QP2404-Q6, QP2506-Q6, QP2508-Q6, QP2602-Q6 |
 | QP2411-Q2 | November 2024 Q2 | C | **D** | QP2404-Q2 |
 | QP2412-Q9 | December 2024 Q9 | C | **D** | QP2403-Q7, QP2510-Q7 |
 | QP2503-Q6 | March 2025 Q6 | C | **D** | QP2509-Q5 |
 | QP2504-Q9 | April 2025 Q9 | C | **D** | QP2403-Q5, QP2510-Q5 |
+| QP2512-Q1 | December 2025 Q1 | C | **D** | QP2511-Q3, QP2601-Q6, QP2603-Q4, QP2604-Q6 |
+| QP2512-Q2 | December 2025 Q2 | C | **D** | QP2511-Q4, QP2603-Q5 |
 | QP2512-Q9 | December 2025 Q9 | C | **D** | QP2404-Q3, QP2509-Q4 |
 
-Stored Tier D over the unsolved set counts **11**; derived counts **20**. Planning off the stored field would have under-counted ready work by 9 question(s) and would have sent a solving session to research answers that already have a verified donor.
+Stored Tier D over the unsolved set counts **8**; derived counts **20**. Planning off the stored field would have under-counted ready work by 12 question(s) and would have sent a solving session to research answers that already have a verified donor.
 
 ### Tier D in full &mdash; every unsolved question with a verified donor
 
@@ -160,7 +163,8 @@ Direction matters and is easy to get backwards: **the unsolved sitting is the ea
 | QP2408-Q9 | August 2024 Q9 | QP2606-Q5 | identical | &mdash; | stable |
 | QP2409-Q8 | September 2024 Q8 | QP2404-Q5 | reworded | &mdash; | stable |
 | QP2409-Q9 | September 2024 Q9 | QP2404-Q4 | identical | QP2506-Q1 | stable |
-| QP2410-Q4 | October 2024 Q4 | QP2603-Q9 | identical | &mdash; | **HIGH** |
+| QP2410-Q4 | October 2024 Q4 | QP2511-Q8 | identical | QP2603-Q9 | **HIGH** |
+| QP2410-Q5 | October 2024 Q5 | QP2511-Q7 | identical | &mdash; | **MEDIUM** |
 | QP2410-Q9 | October 2024 Q9 | QP2404-Q6 | identical | QP2506-Q6, QP2508-Q6, QP2602-Q6 | stable |
 | QP2411-Q2 | November 2024 Q2 | QP2404-Q2 | identical | &mdash; | **MEDIUM** |
 | QP2412-Q4 | December 2024 Q4 | QP2509-Q9 | identical | QP2606-Q8 | stable |
@@ -169,9 +173,8 @@ Direction matters and is easy to get backwards: **the unsolved sitting is the ea
 | QP2502-Q9 | February 2025 Q9 | QP2606-Q7 | identical | &mdash; | stable |
 | QP2503-Q6 | March 2025 Q6 | QP2509-Q5 | identical | &mdash; | **HIGH** |
 | QP2504-Q9 | April 2025 Q9 | QP2510-Q5 | identical | QP2403-Q5 | stable |
-| QP2511-Q5 | November 2025 Q5 | QP2603-Q6 | identical | &mdash; | stable |
-| QP2511-Q8 | November 2025 Q8 | QP2603-Q9 | identical | &mdash; | **HIGH** |
-| QP2511-Q9 | November 2025 Q9 | QP2508-Q7 | identical | QP2506-Q2, QP2602-Q7, QP2603-Q1 | stable |
+| QP2512-Q1 | December 2025 Q1 | QP2511-Q3 | reworded | QP2601-Q6, QP2603-Q4, QP2604-Q6 | stable |
+| QP2512-Q2 | December 2025 Q2 | QP2511-Q4 | identical | QP2603-Q5 | stable |
 | QP2512-Q9 | December 2025 Q9 | QP2509-Q4 | identical | QP2404-Q3 | stable |
 
 ## 6. TEMPORAL REVIEW
@@ -185,17 +188,16 @@ An earlier answer must **not** be corrected to current law. It answers the exami
 | Year | Stable | Review required | HIGH | MEDIUM |
 |---|---|---|---|---|
 | 2024 | 66 | **15** | 9 | 6 |
-| 2025 | 46 | **17** | 8 | 9 |
-| **Total** | 112 | **32** | 17 | 15 |
+| 2025 | 39 | **15** | 7 | 8 |
+| **Total** | 105 | **30** | 16 | 14 |
 
 | Risk class | Count |
 |---|---|
-| IMO INSTRUMENT IN FLUX | 14 |
+| IMO INSTRUMENT IN FLUX | 13 |
 | INDIAN STATUTE BOUNDARY | 9 |
 | GUIDELINE EDITION | 5 |
 | CONVENTION NOT YET IN FORCE | 2 |
 | RECENT SOLAS CHAPTER | 1 |
-| CONVENTION NEWLY IN FORCE | 1 |
 
 ### Flagged questions
 
@@ -229,8 +231,6 @@ An earlier answer must **not** be corrected to current law. It answers the exami
 | QP2504-Q6 | April 2025 Q6 | MEDIUM | IMO INSTRUMENT IN FLUX |
 | QP2507-Q2 | July 2025 Q2 | MEDIUM | IMO INSTRUMENT IN FLUX |
 | QP2507-Q9 | July 2025 Q9 | HIGH | INDIAN STATUTE BOUNDARY |
-| QP2511-Q7 | November 2025 Q7 | MEDIUM | IMO INSTRUMENT IN FLUX |
-| QP2511-Q8 | November 2025 Q8 | HIGH | CONVENTION NEWLY IN FORCE |
 | QP2512-Q5 | December 2025 Q5 | HIGH | INDIAN STATUTE BOUNDARY |
 | QP2512-Q8 | December 2025 Q8 | HIGH | INDIAN STATUTE BOUNDARY |
 
@@ -242,16 +242,15 @@ Not calendar order. Calendar order would research the same family several times 
 
 | Paper | Sitting | Tier D | Family reach | Temporal flags |
 |---|---|---|---|---|
-| QP2511 | November 2025 | **3 / 9** | 4 | 2 |
 | QP2401 | January 2024 | **3 / 9** | 3 | 2 |
+| QP2410 | October 2024 | **3 / 9** | 0 | 4 |
+| QP2512 | December 2025 | **3 / 9** | 0 | 2 |
 | QP2502 | February 2025 | **2 / 9** | 5 | 2 |
-| QP2410 | October 2024 | **2 / 9** | 2 | 4 |
 | QP2409 | September 2024 | **2 / 9** | 1 | 2 |
 | QP2412 | December 2024 | **2 / 9** | 1 | 0 |
 | QP2503 | March 2025 | **1 / 9** | 5 | 3 |
 | QP2504 | April 2025 | **1 / 9** | 5 | 4 |
 | QP2402 | February 2024 | **1 / 9** | 3 | 2 |
-| QP2512 | December 2025 | **1 / 9** | 2 | 2 |
 | QP2408 | August 2024 | **1 / 9** | 0 | 2 |
 | QP2411 | November 2024 | **1 / 9** | 0 | 2 |
 | QP2507 | July 2025 | **0 / 9** | 8 | 2 |
@@ -268,11 +267,11 @@ Evidence for a future Written study product. **No prediction of future examinati
 | Sittings | Families |
 |---|---|
 | 7 | 1 |
-| 5 | 2 |
+| 5 | 3 |
 | 4 | 3 |
 | 3 | 11 |
-| 2 | 37 |
-| 1 | 116 |
+| 2 | 36 |
+| 1 | 113 |
 
 ### Families appearing in every available year
 
@@ -287,13 +286,13 @@ Evidence for a future Written study product. **No prediction of future examinati
 
 | Category | Questions | Distinct families |
 |---|---|---|
-| Statutory Framework & Class | 66 | 45 |
-| Human Element & Management | 48 | 32 |
+| Statutory Framework & Class | 67 | 44 |
 | Marine Insurance & Commercial Law | 47 | 30 |
-| Alternative Fuels & Decarbonisation | 36 | 26 |
-| Pollution Prevention & Response | 30 | 21 |
-| Indian Maritime Legislation | 14 | 9 |
-| Cargo & Bulk Carriage | 11 | 7 |
+| Human Element & Management | 47 | 31 |
+| Alternative Fuels & Decarbonisation | 37 | 26 |
+| Pollution Prevention & Response | 29 | 21 |
+| Indian Maritime Legislation | 15 | 9 |
+| Cargo & Bulk Carriage | 10 | 6 |
 
 The ratio of the two columns is the study-material signal: a category with many questions and few families is one where a single verified engineering base serves several sittings. A category where the two numbers are close is one where each sitting asked something genuinely different.
 

@@ -70,11 +70,11 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 | QP2510-Q4 | October 2025 Q4 | High-Efficiency Propeller Types |
 | QP2510-Q6 | October 2025 Q6 | Electronic Record Books under MARPOL |
 | QP2510-Q8 | October 2025 Q8 | Main Engine Failure to Respond to Bridge Control |
-| QP2511-Q1 | November 2025 Q1 | Bulk Carrier Losses and SOLAS Chapter XII |
-| QP2511-Q2 | November 2025 Q2 | Torque Rich Operation and the Propeller Curve |
-| QP2511-Q3 | November 2025 Q3 | Disease Vector Control and Ship Health Certificates |
-| QP2511-Q4 | November 2025 Q4 | LNG Bunkering Procedures |
-| QP2511-Q5 | November 2025 Q5 | Enhanced Survey Programme and Condition Assessment Programme |
+| QP2511-Q1 | November 2025 Q1 | Bulk Carrier Losses of the Early 1990s and SOLAS Chapter XII |
+| QP2511-Q2 | November 2025 Q2 | Torque Rich (Heavy Running) and the Propeller Curve |
+| QP2511-Q3 | November 2025 Q3 | WHO, Disease Vectors and Ship Health Certificates |
+| QP2511-Q4 | November 2025 Q4 | LNG Bunkering - Gassing Up, Cooldown, Vapour and Release |
+| QP2511-Q5 | November 2025 Q5 | Enhanced Survey Programme versus Condition Assessment Programme |
 | QP2511-Q6 | November 2025 Q6 | Propeller Blade Crack Found in Dry Dock |
 
 Printed marks are **metadata, not examiner wording**. `recurrence_model.normalise_stem` removes a marks token before comparing two stems, so the same task set once with a printed (16) and once without is EXACT rather than "reworded". Three real pairs in this corpus turn on exactly that, and the guard against over-stripping is tested in `recurrence_check.py`.
@@ -162,12 +162,15 @@ Examiner wording is reproduced exactly, errors included. Each is recorded in a n
 | QP2510-Q5 | The four limbs are printed as an unmarked list under a single printed (16); sub-part marks are null. |
 | QP2510-Q6 | ANOMALY: the source copy prints NO mark allocation. Recorded at 16 marks under instruction 2; sub-part marks are null. |
 | QP2510-Q8 | ANOMALY: the source copy prints NO mark allocation. Recorded at 16 marks under instruction 2. The source sets a double space after "dock wall."; normalised to a single space in text_verbatim. |
-| QP2511-Q1 | ANOMALY: the source copy prints NO mark allocation. Recorded at 16 marks under instruction 2. |
-| QP2511-Q2 | ANOMALY: the source copy prints NO mark allocation, for the question or its limbs. Recorded at 16 marks under instruction 2; sub-part marks are null. Limb (d) prints a sentence break before the condition: "take. If your vessel is torque rich." Reproduced as printed. |
-| QP2511-Q3 | ANOMALY: the source copy prints NO mark allocation. Recorded at 16 marks under instruction 2. Prints "What is the Role the WHO organisation" (a word appears to be missing). Reproduced as printed. |
-| QP2511-Q4 | ANOMALY: the source copy prints NO mark allocation. Recorded at 16 marks under instruction 2; sub-part marks are null. The same question printed (16) at the December sitting. |
-| QP2511-Q5 | ANOMALY: the source copy prints NO mark allocation, for the question or its limbs. Recorded at 16 marks under instruction 2; sub-part marks are null. |
-| QP2511-Q6 | ANOMALY: the source copy prints NO mark allocation. Recorded at 16 marks under instruction 2. Prints "during which you a surface crack" (a verb appears to be missing). Reproduced as printed. |
+| QP2511-Q1 | ANOMALY: the source copy prints NO mark allocation. Recorded at 16 marks under instruction 2. Two tasks are set inside one running stem - the reasons for the losses, and how chapter XII contributes to safety - with no marks printed against either. The stem prints 'Briefly discuss' for the first task and 'explain' for the second, which is the examiner's own weighting and is followed. |
+| QP2511-Q2 | ANOMALY: the source copy prints NO mark allocation, for the question or for any of its four limbs a) to d). Recorded at 16 marks under instruction 2; sub-part marks are null and no split has been invented. A second printed anomaly is reproduced as printed: limb d) carries a sentence break in the wrong place - 'What action will you ask your second engineer to take. If your vessel is torque rich.' The sense is plainly conditional and is answered as such. |
+| QP2511-Q3 | ANOMALY: the source copy prints NO mark allocation. Recorded at 16 marks under instruction 2. THREE tasks are set inside the running stem, not the four the January 2026 sitting prints: the role of WHO, the national agencies, and the certificates in India with their validity and extension. Two printed slips are reproduced as printed - "What is the Role the WHO organisation" (the word 'of' is missing) and "tasked with this maintenance" where the later sitting prints "the maintenance". |
+| QP2511-Q4 | ANOMALY: the source copy prints NO mark allocation, for the question or for any of its four named processes a. to d. Recorded at 16 marks under instruction 2; sub-part marks are null and no split has been invented. The March 2026 sitting prints the identical stem and likewise prints no allocation. The stem is printed as a sentence fragment ending in a full stop and is transcribed exactly as printed; the only orthographic difference between the two sittings is 'fueled' here against 'fuelled' there. |
+| QP2511-Q5 | Three limbs are printed, a) to c), with NO mark allocation against the question or against any limb. Recorded at the paper's equal-marks value of 16 under instruction 2; sub-part marks are null and no split has been invented. The printed capitalisation is internally inconsistent - 'Enhanced Survey Program' in a), 'Enhanced survey program' in b) and 'enhanced survey program' in c) - and is transcribed as printed. The March 2026 sitting prints the same three limbs with the same inconsistent capitalisation. |
+| QP2511-Q6 | ANOMALY: the source copy prints NO mark allocation. Set as a single undivided question with no lettered limbs; recorded at 16 marks under instruction 2. The stem also drops a verb - it prints 'during which you a surface crack' where the March 2026 sitting prints 'during which you noticed a surface crack'. That is a printing slip, not a change of task, and it is reproduced exactly as printed. |
+| QP2511-Q7 | Set as a single undivided question carrying a printed (16) - one of only three questions on this paper that print a mark figure at all. Three tasks are set inside the running stem: the objectives and importance of the Convention, the recent amendments, and an analysis of their impact on modern shipping operations with digitalization and sustainability named expressly. No marks are printed against them individually. |
+| QP2511-Q8 | Set as a single undivided question carrying a printed (16). Three tasks are set inside the running stem - the Convention itself, its significance for India, and the benefit or impact on India's shipbreaking industry - with no marks printed against them individually. The March 2026 sitting prints the identical stem. |
+| QP2511-Q9 | Prints "technical nature state the general rules" with NO comma - matching the June 2025 sitting and not the August 2025 one - while capitalising "Signature" and "Ratification" as August does. Third occurrence of this family within 2025. Reproduced as printed. |
 | QP2512-Q1 | Expands the November wording: November asks "What are the different certificates in India"; December splits this into the certificates issued and who may issue them, and adds a printed (16) that November omits. |
 | QP2512-Q2 | Identical to the November wording except that December prints (16) and November prints no marks. Sub-part marks are null on both. |
 | QP2512-Q3 | Prints "each of the principle" (number disagreement). Reproduced as printed. |
