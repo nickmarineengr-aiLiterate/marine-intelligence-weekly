@@ -3619,3 +3619,106 @@ three tool files. No generated artefact moved.
 MIW has not ruled on either. **Adjudicate by reading both questions. Do not plan them as donors.**
 
 **NO MAIN MERGE. NO PRODUCT LAUNCH. INFRASTRUCTURE FOUNDER-REVIEW ONLY.**
+
+# 33. QP2404 — REVERSE-HINT ADJUDICATION LANDED, AUTHORING STOPPED AT 4/9 — 2026-08-11
+
+Branch `pastpapers/qp2404-founder-review`, cut from the verified hardening head `c612a02`
+(confirmed a descendant of both the QP2509 content head `a5f2551` and the PIL V1 tooling head
+`850bdde`). Baseline reproduced from canonical tooling, not carried forward: 252 / 99 / 153,
+11 solved papers, `health_check.py` 0 errors 0 warnings.
+
+## 33.1 Source verification
+
+`APRIL 2024.pdf`, serial **EM-2404**, two pages, nine questions. The transcribed spec matches the
+printed paper exactly, **including the examiner's own errors**, which are reproduced and not
+corrected: `loT` for IoT throughout Q1, `(Ill)` for `(iii)` in Q5, the `Q7)` numbering style, and
+the host tokens `2024/APR/Q78` and `2024/APR/9`. Printed marks sum to 16 per question; six answered
+questions give 96 against a printed "Total Marks — 100", and that discrepancy is on the source copy
+and is preserved.
+
+## 33.2 The reverse-hint queue's first production test — 3 surfaced, 3 accepted, 0 rejected
+
+Three rows touched this paper. All three were adjudicated by reading both printed stems. Diffs are
+on the **normalised** stem, so case, punctuation and printed marks are already discounted.
+
+| Pair | Normalised difference | Ruling | Effect |
+|---|---|---|---|
+| `QP2404-Q4` ← `QP2506-Q1` | `to`→`in`, `improvements`→`improvement` | EXACT | **new donor, C → D** |
+| `QP2404-Q6` ← `QP2602-Q6` | one inserted `proper` | EXACT | already D; third donor |
+| `QP2404-Q5` ← `QP2409-Q8` | `(Ill)` → `(iii)`, a scanning artifact | EXACT | none — counterpart unbuilt |
+
+**The mechanism is useful, and this is why.** A family edge forms on `reused_from` or on EXACT
+equality of the normalised stem. Each pair above is the same examiner task and misses that equality
+by one or two words. The exact-equality rule is correct and was not weakened; the queue is what
+reaches the cases sitting just outside it. In Q5's case the corpus was hidden from itself by an
+**OCR error** — the source copy renders the roman numeral `(iii)` as `(Ill)`, and nothing else in
+the pipeline was looking for that.
+
+**It also corrected two already-built pages.** Before adjudication `QP2506-Q1` and `QP2602-Q6` each
+rendered **"Once in this set"**. Both are repeats — the rudder question is held at three sittings and
+the general-average question at five. Landing the edges moved both to "Repeated — reworded" and grew
+`QP2508-Q6`'s family from four members to five. Three built pages changed as a result.
+
+## 33.3 PIL run prospectively, before adaptation — its first such use
+
+`temporal_sweep.py` was run over the donor and support specs **before** any answer was adapted.
+13 findings fell on this paper's donor set and each was adjudicated:
+
+- **4 `INTERNAL_QREF` — REAL.** `QP2506-Q6` carries "See Q5 of this paper" and `QP2508-Q6` "See Q1
+  of this paper", both pointing at their own paper's LLMC limitation question. **QP2404 has no
+  limitation question**, so on this paper those numbers are antifouling paint and IoT. The
+  cross-reference was **dropped, not renumbered**.
+- **5 `POST_SITTING` `2027` — LEGITIMATE.** The STCW comprehensive review. HTW 10 sat **5–9 February
+  2024**, two months before this examination, and agreed the roadmap, methodology and review areas
+  with adoption targeted 2027. Sitting-known and citable, with nothing adopted.
+- **2 `POST_SITTING` `August 2026` — REAL.** "Nothing had been adopted as at August 2026" is an
+  authoring-date statement and does not travel backwards.
+- **2 `2026` — FALSE POSITIVE** as a temporal flag: internal corpus provenance ("identical to three
+  built 2026 objects"), not a regulatory date. Rewritten anyway because the count changes.
+
+Nothing was suppressed to produce a clean list. One methodological catch worth recording: an initial
+filter of the sweep's JSON keyed on `question_id` where the field is `question`, and returned **zero
+findings on the donor set**. That false clean was noticed and corrected. A filter that returns
+nothing is a claim that must be tested, not a result.
+
+## 33.4 Temporal findings from primary sources
+
+- **Q2 — the flag was real.** At April 2024 **no IMO instrument governed ammonia as fuel**.
+  `MSC.1/Circ.1687` is dated **26 February 2025** and was approved at **MSC 109 (2–6 December 2024)**
+  on a proposal from CCC 10 — read verbatim from the circular. The route at this sitting was SOLAS
+  II-1/55 alternative design read with the IGF Code's goal and functional requirements.
+- **Q8 — a wrong-edition trap, and the sharper of the two.** `A.1188(33)`, adopted **6 December
+  2023**, paragraph 5: **"REVOKES resolution A.1118(30)."** So the operative edition at April 2024 is
+  the **2023 Guidelines**, and A.1118(30) — which stood for six years and is the natural default —
+  had been revoked **four months before the sitting**.
+- **Q5 — a trap running backwards.** Cybutryne controls under `MEPC.331(76)` entered into force
+  **1 January 2023** and were in force at this sitting. An answer describing only the TBT position
+  is wrong for April 2024.
+- **EU.** EU ETS extended to maritime 1 January 2024 — in force. FuelEU Maritime adopted September
+  2023 but applying only from 1 January 2025 — nameable as upcoming, never as applying.
+
+**The generalisable finding: the 33rd IMO Assembly (December 2023) is a standing boundary for every
+2024 sitting**, exactly as the 34th (December 2025) already is for 2025 sittings.
+
+## 33.5 Why authoring stopped at 4/9
+
+Q3, Q4, Q6 and Q7 were authored — the four donor-backed questions — and validated. The five
+remaining are full fresh research, and two of them (Q2, Q8) sit on the wrong-edition trap the
+protocol calls the most dangerous single error. Completing them plus nine verification records, the
+sweeps, build, QA, determinism, UI review and surface impact would have meant writing regulatory
+answers at speed. That is the failure this protocol exists to prevent, so the session stopped.
+
+`PASTPAPER_PRODUCTION_PROTOCOL.md` §3 was applied: the completed objects were staged to
+`staging/QP2404/`, the canonical spec was **restored to intake**, and the branch left green. The spec
+on the branch carries **no answers** — only the three adjudicated edges, which stand on their own.
+
+The resume is mechanical and was **verified this session by running it**: the two staged scripts
+reproduce exactly 4 answered questions and preserve `reused_from` as `QP2509-Q4`, `QP2506-Q1`,
+`QP2602-Q6`, `QP2508-Q4`. Two hazards in the staged scripts were found and closed before commit — a
+hardcoded drive letter, and an overwrite of the `QP2602-Q6` edge that would have regressed an
+already-built page to "Once in this set".
+
+## 33.6 Machine
+
+One stale session cluster reaped under the governed policy (+395 MB). Four further ended clusters
+held ~5.8 GB but sat under the 120-minute threshold; the rule was **not** weakened to reclaim them.

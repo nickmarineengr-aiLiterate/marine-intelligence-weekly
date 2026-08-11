@@ -309,6 +309,41 @@ REVISIT:   if a host source ever prints a forward-looking annotation, the census
 
 ---
 
+### 12. A filter that returns nothing is a claim, not a result
+
+The prospective PIL sweep over QP2404's donor specs was filtered down to the donor questions with
+a one-line comprehension keyed on `question_id`. It printed **"TOTAL findings 411 | ON MY DONORS:
+0"** — a clean bill of health for exactly the material about to be adapted.
+
+The field is called `question`. Every row failed the test, so the filter could only ever return
+zero. Re-run with the right key it returned **13** findings, four of which were real defects that
+would have been copied into the target paper — the donor cross-references that point at an LLMC
+question this paper does not have.
+
+The dangerous property is that the false clean is **indistinguishable from success** and arrives
+in the shape you were hoping for. A sweep that reports nothing is the single easiest result to
+accept without reading.
+
+**When a filter, query or sweep returns zero, prove the zero before believing it** — dump one raw
+record and check the keys, or assert that a known-positive row survives the filter. This costs one
+command. The protocol already says the sweeps are what clear a paper; a sweep silently filtered to
+nothing clears nothing while appearing to.
+
+```
+EVIDENCE:  QP2404 session, 2026-08-11. Scratch filter on temporal_sweep.py --json keyed on
+           'question_id' where the field is 'question'; reported 0 findings on the donor set,
+           actual 13, of which 4 were real INTERNAL_QREF defects in QP2506-Q6 / QP2508-Q6.
+CATEGORY:  BUILD_QA
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     NONE - this is an operator discipline, not a tool behaviour. temporal_sweep.py itself
+           was correct throughout and reported all 411 findings.
+REVISIT:   if scratch querying of tool JSON becomes frequent enough to justify it, give the
+           sweeps a --question filter so the key is never retyped by hand.
+```
+
+---
+
 ### 11. A broken non-blocking hook trains the operator to ignore errors
 
 `validate_antipatterns.py` was carried in `CURRENT_STATUS.md` as an open defect across several

@@ -26,7 +26,7 @@ what is next, what is blocked.*
 | `main` | `0766d00` — nothing from the pastpapers line has been merged into it |
 | Content head | `a5f2551` on `pastpapers/qp2509-founder-review` — the newest solved-paper state |
 | Tooling head | `850bdde` on `workflow/pil-v1` — content head plus the Production Intelligence Layer |
-| This branch | `workflow/state-history-hygiene`, cut from `850bdde` — documentation and routing only |
+| This branch | `pastpapers/qp2404-founder-review`, cut from `c612a02` — QP2404 reverse-hint adjudication; authoring **stopped at 4/9 and staged** |
 
 All git commands in this repository need `-c safe.directory=*`.
 
@@ -42,7 +42,7 @@ from a previous handover.
 | **Corpus** | **252 questions / 99 solved / 153 unsolved** |
 | **Papers** | 28 — **11 solved**, 17 answerless intake |
 | **Years** | 2024 (11 papers), 2025 (11), 2026 (6). May is absent from the source set in all three years |
-| **Tier D (derived)** | **20** of the 153 unsolved carry a verified donor |
+| **Tier D (derived)** | **22** of the 153 unsolved carry a verified donor — was 20; `QP2404-Q4` and `QP2409-Q9` were unlocked by one adjudicated reverse-hint edge to `QP2506-Q1` |
 | **Toolchain** | ALL STAGES PASS · `health_check.py` **0 errors, 0 warnings** · reuse map current |
 
 ---
@@ -132,11 +132,11 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 ### Known open defects
 
 7. **Q9 / QB9_C cross-link** — known, repair deferred.
-8. **25 host-linked question pairs are UNADJUDICATED.** `REVERSE_HINT_CANDIDATES.md` lists them;
-   **12** pair an unsolved question with an already-built counterpart, two of them in `QP2404`
-   itself (`QP2404-Q4` ← `QP2506-Q1`, `QP2404-Q6` ← `QP2602-Q6`). These are **not** donors and
-   must not be planned as such: only an author who has read both questions may write
-   `reused_from`. This is a queue, not a finding.
+8. **The reverse-hint queue is partly adjudicated.** The three `QP2404` rows were ruled on
+   2026-08-11 by reading both printed stems — **all three accepted as the same examiner task**, and
+   the edges are landed. The remaining rows are still **unadjudicated** and are **not** donors:
+   only an author who has read both questions may write `reused_from`. This is a queue, not a
+   finding.
 
 ### Closed in the pre-QP2404 hardening session — detail in `history/SESSION_HISTORY.md` §32
 
@@ -152,19 +152,26 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 
 ## 7. Next production target
 
-**QP2404 — April 2024.** Verified against the current generated reuse map, not carried forward.
+**QP2404 — April 2024. IN PROGRESS, STOPPED AT 4 / 9 AND STAGED.** Resume this paper before
+starting any other.
 
 | Paper | Tier D | Family reach | Temporal flags |
 |---|---|---|---|
-| **QP2404** | **3 / 9** | **5** | **1** |
+| **QP2404** | **4 / 9** | **6** | **1** |
 | QP2511 | 3 / 9 | 4 | 2 |
 | QP2401 | 3 / 9 | 3 | 2 |
 | QP2507 | 0 / 9 | 8 | 2 |
 
-Chosen because it ties for the highest derived Tier D while carrying the fewest temporal flags of
-that group. Its one flag is `QP2404-Q2` **GUIDELINE EDITION** and must be taken seriously.
+`specs/QP2404.json` on this branch is **intake plus three adjudicated recurrence edges and nothing
+else — it carries no answers.** Q3, Q4, Q6 and Q7 were authored and are staged at
+`staging/QP2404/`, whose `CHECKPOINT.md` carries the resume command, the banked primary-source
+research for Q1/Q2/Q5/Q8/Q9, and one trap that must not be tidied away. The resume is mechanical and
+was verified by running it.
 
-**Not started. Do not start it as part of a hygiene or tooling session.**
+Its one flag, `QP2404-Q2` **GUIDELINE EDITION**, was investigated and is **REAL**: `MSC.1/Circ.1687`
+postdates the sitting by eight months. A second, unflagged wrong-edition trap was found on `Q8`
+(`A.1188(33)` revoked `A.1118(30)` four months before the sitting). Both are written up in
+`QP2404_TEMPORAL_AND_DONOR_ANCHOR.md`.
 
 ### Standing stop conditions
 
