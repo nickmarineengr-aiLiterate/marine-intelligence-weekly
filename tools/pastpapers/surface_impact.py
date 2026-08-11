@@ -31,10 +31,16 @@ TWO INDEPENDENT AXES
     states the mechanical fact and stops there.
 
 WHAT GETS ESCALATED
-    Any PUBLIC_FREE, COMMERCIAL or SECURITY_SENSITIVE artefact whose relation is
-    NOT TARGET_DIRECT, plus everything classified UNKNOWN_REVIEW, is reported as
-    FOUNDER REVIEW REQUIRED. That is a request for a human decision, not a
-    verdict that the change is wrong.
+    Any PUBLIC_FREE, CANDIDATE_FACING_PAID, COMMERCIAL or SECURITY_SENSITIVE
+    artefact whose relation is NOT TARGET_DIRECT, plus everything classified
+    UNKNOWN_REVIEW, is reported as FOUNDER REVIEW REQUIRED. That is a request
+    for a human decision, not a verdict that the change is wrong.
+
+    CANDIDATE_FACING_PAID was added in V1.1 by Founder decision. In V1 a paid
+    page that moved without being the target was printed in a separate advisory
+    NOTE, on the reasoning that widening the escalation set was the Founder's
+    call and not this tool's. That call has now been made, so the NOTE is gone
+    and those rows escalate with the rest -- one signal, not two.
 
 Exit code is 0 whenever the comparison runs, including when review is required
 -- this is a finalisation report, not a build gate. --self-test exits non-zero
@@ -55,7 +61,12 @@ COMMERCIAL = 'COMMERCIAL'
 SECURITY = 'SECURITY_SENSITIVE'
 UNKNOWN = 'UNKNOWN_REVIEW'
 
-ESCALATING = (FREE, COMMERCIAL, SECURITY)
+# PIL V1.1. CANDIDATE_FACING_PAID joined this set by Founder decision. A paid
+# paper page that regenerates without being the session's target is exactly what
+# QP2601.html did during QP2509 -- a page a paying candidate reads, moved by a
+# session that was not about it. V1 reported that in a separate advisory NOTE
+# block, which is a weaker signal than the thing deserves. It now escalates.
+ESCALATING = (FREE, COMMERCIAL, SECURITY, PAID)
 
 TARGET_DIRECT = 'TARGET_DIRECT'
 DERIVED = 'DERIVED_NON_TARGET'
@@ -217,6 +228,15 @@ def self_test():
     rows = analyse([('A', 'meoclass1/pastpapers/QP2509.html')], 'QP2509')
     expect('the target paid page itself -> no review escalation',
            not rows[0]['review_required'], repr(rows[0]))
+    # PIL V1.1 -- the paid product escalates when it is not the target. This is
+    # the retrospective QP2509 case: solving September 2025 regenerated the
+    # January 2026 paid page, and V1 only whispered about it in a NOTE.
+    rows = analyse([('M', 'meoclass1/pastpapers/QP2601.html')], 'QP2509')
+    expect('V1.1 paid page moved by a non-target session -> FOUNDER REVIEW REQUIRED',
+           rows[0]['review_required']
+           and rows[0]['surface'] == PAID and rows[0]['relation'] == DERIVED,
+           repr(rows[0]))
+
     rows = analyse([('M', 'tools/pastpapers/build_paper.py')], 'QP2509')
     expect('internal tooling -> no review escalation',
            not rows[0]['review_required'], repr(rows[0]))
@@ -256,6 +276,20 @@ def self_test():
         globals()['ESCALATING'] = saved_esc
     rows = analyse([('M', 'SQ/solved-qp-sample-january-2026.html')], 'QP2509')
     expect('MUTATION reverted -> free sample escalates again',
+           rows[0]['review_required'], repr(rows[0]))
+
+    # MUTATION -- V1.1 specifically. Drop PAID back out of the escalation set and
+    # the non-target paid page must fall silent again, which is what V1 did. If
+    # this control cannot fail, V1.1 is not actually wired to anything.
+    try:
+        globals()['ESCALATING'] = (FREE, COMMERCIAL, SECURITY)
+        rows = analyse([('M', 'meoclass1/pastpapers/QP2601.html')], 'QP2509')
+        expect('MUTATION: PAID removed from ESCALATING -> V1.1 escalation stops',
+               not rows[0]['review_required'], repr(rows[0]))
+    finally:
+        globals()['ESCALATING'] = saved_esc
+    rows = analyse([('M', 'meoclass1/pastpapers/QP2601.html')], 'QP2509')
+    expect('MUTATION reverted -> non-target paid page escalates again',
            rows[0]['review_required'], repr(rows[0]))
 
     width = max(len(n) for n, _, _ in checks)
@@ -320,9 +354,9 @@ def main():
     review = [r for r in rows if r['review_required']]
     print('-' * 78)
     if review:
-        print('FOUNDER REVIEW REQUIRED -- %d change(s) to a public, commercial, '
-              'security-sensitive' % len(review))
-        print('or unclassified surface that is NOT the declared target:')
+        print('FOUNDER REVIEW REQUIRED -- %d change(s) to a public, paid, commercial,'
+              % len(review))
+        print('security-sensitive or unclassified surface that is NOT the declared target:')
         for r in review:
             print('    %-21s %-19s %s' % (r['surface'], r['relation'], r['path']))
         print('')
@@ -330,18 +364,12 @@ def main():
               'these surfaces;')
         print('what is not permitted is moving them without saying so.')
     else:
-        print('No public, commercial or security-sensitive non-target change.')
+        print('No public, paid, commercial or security-sensitive non-target change.')
 
-    # Reported separately rather than folded into the escalation set. A paid
-    # page that moves without being the target is worth seeing -- QP2601.html
-    # did exactly that during QP2509 -- but the escalation set is a governed
-    # decision, so widening it is the Founder's call, not this tool's.
-    paid = [r for r in rows if r['surface'] == PAID and r['relation'] != TARGET_DIRECT]
-    if paid:
-        print('')
-        print('NOTE -- %d paid page(s) regenerated without being the target:' % len(paid))
-        for r in paid:
-            print('    %-19s %s' % (r['relation'], r['path']))
+    # The V1 advisory NOTE for non-target paid pages lived here. It is gone in
+    # V1.1: PAID is in ESCALATING now, so those rows are already printed above.
+    # Keeping both would report the same page twice under two different
+    # severities, which is how a signal gets learned as noise.
     sys.exit(0)
 
 
