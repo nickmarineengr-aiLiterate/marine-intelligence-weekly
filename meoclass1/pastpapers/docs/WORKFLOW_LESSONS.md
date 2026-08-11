@@ -344,6 +344,92 @@ REVISIT:   if scratch querying of tool JSON becomes frequent enough to justify i
 
 ---
 
+### 13. An authoring-date leak is a FIELD-CLASS defect, not a string defect
+
+`QP2601-Q9` carried *"nothing had been adopted as at August 2026"* on a **January 2026** paper.
+The obvious reaction is to purge the string. That would have been wrong in both directions.
+
+A corpus-wide scan found the same string in three different kinds of field:
+
+| Where | Renders to a candidate? | Verdict |
+|---|---|---|
+| `study_notes` | **YES** — Study guide mode | **DEFECT.** Dates the product and is not a statement about the sitting. |
+| `unresolved` | NO — inside `if not publish:` | **CORRECT.** Honest authoring context, properly quarantined. |
+| `reverify_before_publication[].why` | NO — inside `if not publish:` | **CORRECT.** This is exactly where an authoring date belongs. |
+
+Purging the string globally would have destroyed the audit trail that says *when this was checked
+and against what*. Leaving it globally ships the authoring month to a paying candidate. **The same
+sentence is right in one field and wrong in another, and only the render path distinguishes them.**
+
+So the test is not "does this string appear?" but **"does this string reach a candidate?"** —
+which means reading `build_paper.py` to establish which fields sit inside the `if not publish:`
+guard before deciding anything. This is the same shape as lesson 9, which kept provenance fields
+out of a contamination sweep, and it generalises: **a sweep over a spec must be field-class-aware
+or it will produce confident answers to the wrong question.**
+
+```
+EVIDENCE:  QP2404 session, 2026-08-11, commit 9916744. "as at August 2026" found in
+           QP2601-Q9 study_notes (candidate-facing, corrected), QP2601-Q9 unresolved[1] and
+           QP2601-Q7 reverify_before_publication[0].why (review-only, deliberately kept).
+           Two further candidate-facing instances on QP2601-Q1 and QP2602-Q2 reported for a
+           Founder decision rather than fixed, being outside the authorised scope.
+CATEGORY:  TEMPORAL_VERIFICATION
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     NONE. temporal_sweep.py reports the token; it does not classify the field by render
+           path, and the adjudication is Claude's under lesson 8.
+REVISIT:   if authoring-date leakage is found a second time on a shipped page, give
+           temporal_sweep.py a candidate-facing / review-only column derived from build_paper.py
+           so the classification stops being manual.
+```
+
+---
+
+### 14. A post-sitting date inside an EXCLUSION statement is the guard, not the contamination
+
+Every one of the four `temporal_sweep.py` candidates on the finished QP2404 was a post-sitting
+date, and **all four were kept**. Three of them read, in substance, *"X is dated 4 April 2025 and
+is EXCLUDED"* and *"they were approved in December 2024 and issued in February 2025 — AFTER this
+sitting"*.
+
+These are the sentences that **prevent** the wrong-edition error. They name the later instrument
+precisely so the candidate can recognise it and rule it out. Deleting them to reach a clean sweep
+would have removed the warning while leaving the trap, and produced a paper that scores better on
+the detector and worse for the reader.
+
+The distinction is not the date. It is **what the sentence does with the date**:
+
+- **asserts** it as applicable at the sitting → contamination, remove;
+- **excludes** it, or marks it as later context → the guard, keep;
+- **states it as sitting-known future work** ("targeted for 2027", agreed at a meeting two months
+  before the paper) → legitimate, keep.
+
+The fourth flag, `2027` on Q7, is the third kind: HTW 10 sat 5–9 February 2024 and set that target,
+so it was knowable at the sitting.
+
+This is the practical edge of lesson 8. `PIL FLAGS; CLAUDE ADJUDICATES` is easy to agree with and
+easy to abandon under pressure to show a zero. **A sweep result of "4 candidates, 4 legitimate" is
+a better outcome than "0 candidates", and the report should say so rather than quietly engineering
+the count down.**
+
+```
+EVIDENCE:  QP2404 session, 2026-08-11. temporal_sweep.py returned 4 candidates on the completed
+           paper: '4 April 2025' (Q1, MSC-FAL.1/Circ.3/Rev.3 named in order to exclude it),
+           'December 2024' and 'February 2025' (Q2 quick_revision.major_trap, naming MSC 109 and
+           MSC.1/Circ.1687 in order to exclude them), '2027' (Q7, STCW review target agreed at
+           HTW 10 two months before the sitting). All four adjudicated KEEP.
+CATEGORY:  TEMPORAL_VERIFICATION
+STATUS:    PROVEN
+SEEN:      2 - the same adjudication class was reached prospectively on the donor set in §33,
+           where 5 of 13 findings were legitimate sitting-known 2027 references.
+OWNER:     NONE - operator adjudication under lesson 8.
+REVISIT:   if exclusion-sentence flags become a large share of every sweep, consider a spec-level
+           convention marking a field as deliberately-excluding so the sweep can report them
+           separately - but NOT suppress them, or the guard becomes unauditable.
+```
+
+---
+
 ### 11. A broken non-blocking hook trains the operator to ignore errors
 
 `validate_antipatterns.py` was carried in `CURRENT_STATUS.md` as an open defect across several

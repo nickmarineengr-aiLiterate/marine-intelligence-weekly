@@ -3722,3 +3722,142 @@ already-built page to "Once in this set".
 
 One stale session cluster reaped under the governed policy (+395 MB). Four further ended clusters
 held ~5.8 GB but sat under the 120-minute threshold; the rule was **not** weakened to reclaim them.
+
+
+---
+
+# §34 QP2404 COMPLETED — 2026-08-11
+
+Continuation of §33. Branch `pastpapers/qp2404-founder-review`, resumed at `b26ea45`, closed at
+`84fee6f`. Three commits. No merge to `main`, no launch.
+
+## 34.1 QP2601-Q9 authoring-date leakage — corrected
+
+Founder decision 2 of the session prompt. The candidate-facing `study_notes` of a **January 2026**
+paper carried *"and nothing had been adopted **as at August 2026**"* under the heading *"Currency —
+what applies and what does not"*. August 2026 is the month the answer was authored.
+
+Removed. One line, one clause, nothing else touched — the sentence already carried the
+sitting-relative form ahead of it.
+
+**The load-bearing check was on the sentence that was NOT changed.** The same paragraph says the
+STCW comprehensive review had *"completion targeted around 2027"*. The IMO's own FAQ now gives
+**2029–2030**. That revision is **not** a January 2026 fact: **HTW 12 (23–27 February 2026) agreed
+the work plan extending to 2029**, a month *after* the sitting. "Modernising" the figure would have
+been a forward temporal violation on an approved page. It was deliberately left alone.
+
+**Scope held.** The same string also appears in `QP2601-Q9 unresolved[1]` and
+`QP2601-Q7 reverify_before_publication[0].why`, but `build_paper.py` renders both inside
+`if not publish:` — review build only. There the authoring date is correctly quarantined and it
+stays. Two further **candidate-facing** instances — `QP2601-Q1` and `QP2602-Q2` — were **reported
+for a Founder decision, not silently fixed**, being outside the authorised target and on
+already-approved pages.
+
+## 34.2 Guarded resume
+
+`author_q4.py` then `author_q367.py`, exactly as `CHECKPOINT.md` specified. Reproduced Q3, Q4, Q6,
+Q7; five unanswered. The one trap held: **`QP2404-Q6.reused_from` is still `QP2602-Q6`** —
+verified after restore. `QP2506-Q6` and `QP2508-Q6` join the general-average family by exact stem
+equality on their own; `QP2602-Q6` differs by the single inserted word *"proper"*, so the explicit
+edge is the only thing keeping it in, and "tidying" it would have regressed an approved page to
+*"Once in this set"*.
+
+Exactly the four predicted errors on validation — the four missing verification records.
+
+## 34.3 The five questions
+
+Authored Q2 → Q8 → Q5 → Q1 → Q9, taking the demonstrated edition traps first.
+
+**Q2 — ammonia.** Intake `GUIDELINE EDITION` flag confirmed **REAL**. At April 2024 no IMO
+instrument governed ammonia as a fuel; `MSC.1/Circ.1687` is dated 26 February 2025, approved at
+MSC 109 (2–6 December 2024). Answered through **SOLAS II-1/55 alternative design**, with CCC 9
+(20–29 September 2023, toxicity principles agreed) as work in progress. The circular appears on
+**no candidate-facing surface**.
+
+**Q8 — ISM certification. The unflagged trap, and the more dangerous one.** `A.1188(33)` read at
+source from the IMO's own copy; operative paragraph 5: *"REVOKES resolution A.1118(30)."* Adopted
+**6 December 2023**, four months before the sitting. Eleven of its paragraphs carry the answer
+(1.3.1, 1.3.2, 4.4.1–4.4.4, 4.5.1, 4.13.1–4.13.3, 4.14.1–4.14.3, Part 2). ISM Code section 13
+(13.5, 13.5.1, 13.9) from an Administration reproduction. It bites because the substance barely
+moved between editions: an answer citing `A.1118(30)` **reads correctly and is wrong only about its
+authority**.
+
+**Q8's open item, closed honestly.** Limbs (b)(iii) *extension of the SMC* and (b)(iv) *revision of
+an entry* correspond to **no named IMO provision**. The whole of `A.1188(33)` was searched at
+source for "extension", "revision", "withdraw" and "invalid" — none appears — and the ISM Code
+provides renewal, not extension. Both limbs are answered by reasoning from the RO's delegated
+authority, with the absence stated in the answer. Protocol §2.1 applied deliberately: an invented
+paragraph number would have been far worse.
+
+**Q5 — anti-fouling. The trap that runs backwards, and the intake flag was WRONG.** Intake said
+`STABLE / LOW`. `MEPC.331(76)` read at source: cybutryne controls in force **1 January 2023**,
+fifteen months *before* the sitting; remove or barrier-coat at the next renewal after that date and
+**no later than 60 months** after the last application, with the platform/FSU/FPSO,
+non-international and sub-400 GT exclusions; Annex 4 regulation 2(3) replaced; amended certificate
+form read. Both the 60-month limit and the certificate transition were **still running at the
+sitting** and are stated for that reason.
+
+**Q1 — IoT.** Predominantly `ENGINEERING_JUDGEMENT`, declared. A third edition boundary was found:
+`MSC-FAL.1/Circ.3/Rev.3` is dated **4 April 2025** and withdrew Rev.2 (7 June 2022). Resolved by
+relying on `MSC.428(98)`, which is mandatory and has not moved, and putting **no revision number in
+front of the candidate**.
+
+**Q9 — UNCLOS.** The one question whose intake flag was **correct**, recorded as answered rather
+than passed over. Live boundary: the **BBNJ Agreement**, adopted 19 June 2023 (before) and in force
+17 January 2026 (long after) — named as adopted and awaiting entry into force, never as applying.
+
+## 34.4 Sweeps
+
+`temporal_sweep.py` returned **4** candidates on QP2404, **all four legitimate**: `4 April 2025`
+(Q1), `December 2024` and `February 2025` (Q2), `2027` (Q7). The first three sit inside explicit
+**exclusion** statements; the fourth is sitting-known (HTW 10 sat 5–9 February 2024, two months
+before the paper). See lesson 14.
+
+The zero-result control of lesson 12 was applied and passed: the output key is `question`, the base
+run returned 4 non-zero, and `--self-test` / `--retrospective` both fire.
+
+Targeted sweeps over the finished paper: **zero** occurrences of "as at August 2026"; **zero**
+candidate-facing `MSC.1/Circ.1687`; **zero** candidate-facing internal Q-references; all eleven
+candidate-facing `A.1118(30)` occurrences name it **as the revoked predecessor**.
+
+## 34.5 Build, QA, UI
+
+`run_toolchain.py` and `--self-test` both **ALL STAGES PASS**. Determinism: **20 generated files
+byte-identical** across a rebuild. `ui_behaviour_test.cjs` **61 passed, 0 failed** after a QP2404
+fixture was added through the established pattern — its `regulation` probe is `a.1188(33)`, so the
+probe guards the wrong-edition trap, and its `recurrence` entry is a **leak** probe asserting the
+host sitting code is not searchable.
+
+HTTP review at 1280 and 375. Nine cards, five modes, Answer the visible default on all nine, no
+console errors, no horizontal page scroll at either width, deep links `q1`–`q9` resolve, live
+search verified including an alias never rendered (`nh3` → Q2) and the host-code probe returning
+empty. **The server survived the first teardown**: the bash job id was not the Windows PID. Killed
+by real PID and the listener confirmed gone.
+
+## 34.6 Surface impact
+
+`surface_impact.py --base b26ea45 --target QP2404`, 42 controls passing. **5 new**
+`DERIVED_NON_TARGET` changes, distinct from the 11 the Founder accepted in §33:
+`QP2601.html` (`CANDIDATE_FACING_PAID`, from the §34.1 correction) and four `PUBLIC_FREE`
+surfaces regenerating because QP2404 joined the solved set.
+
+## 34.7 Corpus
+
+**252 / 108 solved / 144 unsolved**, 12 solved papers — the predicted +9 / −9, calculated not
+assumed. Derived Tier D over the unsolved set **22 → 20**: QP2404's own four left the set, and
+solving it newly unlocked **`QP2409-Q8`** (from `QP2404-Q5` — the reverse-hint edge paying off
+directly) and **`QP2411-Q2`** (from `QP2404-Q2`).
+
+Next paper recommended: **QP2511**. Not started.
+
+## 34.8 Found and left alone
+
+`QP2509` is answered 9/9 but its spec still records `build_state: Intake Complete` and
+`review_state: "Answerless intake — questions only, no answers authored"`. Every other solved
+paper records `Pilot Review Ready`. Nothing downstream reads these fields, so the toolchain is
+green either way. Another paper's branch; reported, not touched.
+
+## 34.9 Machine
+
+Three stale clusters reaped under the governed policy at session start (~4.3 GB eligible). Two
+further ended clusters sat under the 120-minute threshold and the rule was **not** weakened.

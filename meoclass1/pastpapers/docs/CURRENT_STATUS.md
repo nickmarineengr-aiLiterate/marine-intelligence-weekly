@@ -1,7 +1,7 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-11, after the state/history split.
+Last updated: 2026-08-11, after QP2404 was completed.
 
 This file answers four questions and nothing else: *where are we now, what was completed,
 what is next, what is blocked.*
@@ -26,7 +26,7 @@ what is next, what is blocked.*
 | `main` | `0766d00` — nothing from the pastpapers line has been merged into it |
 | Content head | `a5f2551` on `pastpapers/qp2509-founder-review` — the newest solved-paper state |
 | Tooling head | `850bdde` on `workflow/pil-v1` — content head plus the Production Intelligence Layer |
-| This branch | `pastpapers/qp2404-founder-review`, cut from `c612a02` — QP2404 reverse-hint adjudication; authoring **stopped at 4/9 and staged** |
+| This branch | `pastpapers/qp2404-founder-review` @ `84fee6f` — **QP2404 COMPLETE 9/9**, built and verified. Founder review |
 
 All git commands in this repository need `-c safe.directory=*`.
 
@@ -39,10 +39,10 @@ from a previous handover.
 
 | | |
 |---|---|
-| **Corpus** | **252 questions / 99 solved / 153 unsolved** |
-| **Papers** | 28 — **11 solved**, 17 answerless intake |
+| **Corpus** | **252 questions / 108 solved / 144 unsolved** |
+| **Papers** | 28 — **12 solved**, 16 answerless intake |
 | **Years** | 2024 (11 papers), 2025 (11), 2026 (6). May is absent from the source set in all three years |
-| **Tier D (derived)** | **22** of the 153 unsolved carry a verified donor — was 20; `QP2404-Q4` and `QP2409-Q9` were unlocked by one adjudicated reverse-hint edge to `QP2506-Q1` |
+| **Tier D (derived)** | **20** of the 144 unsolved carry a verified donor. Was 22; QP2404's own four left the unsolved set when it was solved, and solving it newly unlocked **`QP2409-Q8`** (from `QP2404-Q5`, via the adjudicated reverse-hint edge) and **`QP2411-Q2`** (from `QP2404-Q2`) |
 | **Toolchain** | ALL STAGES PASS · `health_check.py` **0 errors, 0 warnings** · reuse map current |
 
 ---
@@ -51,15 +51,16 @@ from a previous handover.
 
 | Paper | Sitting | State | Branch |
 |---|---|---|---|
-| **QP2509** | September 2025 | **COMPLETE 9/9 — newest. Founder review.** | `pastpapers/qp2509-founder-review` @ `a5f2551` |
+| **QP2404** | April 2024 | **COMPLETE 9/9 — newest. Founder review.** | `pastpapers/qp2404-founder-review` @ `84fee6f` |
+| QP2509 | September 2025 | complete 9/9 | `pastpapers/qp2509-founder-review` @ `a5f2551` |
 | QP2506 | June 2025 | complete 9/9 | `pastpapers/qp2506-founder-review` @ `0d7f872` |
 | QP2510 | October 2025 | complete 9/9 | `pastpapers/qp2510-founder-review` @ `8fa4f5f` |
 | QP2508 | August 2025 | complete 9/9 | `pastpapers/qp2508-founder-review` @ `dedce2c` |
 | QP2403 | March 2024 | complete 9/9 | `pastpapers/qp2403-founder-review` @ `e7d8bc0` |
 | QP2601–QP2604, QP2606, QP2607 | 2026 set | complete, 6 of 6 available sittings | one review branch each |
 
-Full solved set: QP2403 · QP2506 · QP2508 · QP2509 · QP2510 · QP2601 · QP2602 · QP2603 ·
-QP2604 · QP2606 · QP2607.
+Full solved set: QP2403 · **QP2404** · QP2506 · QP2508 · QP2509 · QP2510 · QP2601 · QP2602 ·
+QP2603 · QP2604 · QP2606 · QP2607.
 
 ---
 
@@ -95,7 +96,8 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 |---|---|---|
 | `workflow/pil-v1` | `850bdde` | PIL V1 — Founder review |
 | `workflow/state-history-hygiene` | this branch | the state/history split — Founder review |
-| `pastpapers/qp2509-founder-review` | `a5f2551` | QP2509, the newest paper |
+| `pastpapers/qp2404-founder-review` | `84fee6f` | **QP2404, the newest paper** |
+| `pastpapers/qp2509-founder-review` | `a5f2551` | QP2509 |
 | `pastpapers/qp2506-founder-review` | `0d7f872` | QP2506 |
 | `pastpapers/qp2510-founder-review` | `8fa4f5f` | QP2510 |
 | `pastpapers/qp2508-founder-review` | `dedce2c` | QP2508 |
@@ -129,6 +131,21 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 4. **Solved QP price** — `PRICE_TBD`; `sample_check.py` fails the build if any rupee value renders.
 5. **Free/paid placement of the ONLY QUESTIONS year sheet** — MIW recommends free and indexable.
 6. **Search payload split** — deferred to a measured UX trigger; no observable problem.
+### Raised by the QP2404 session, 2026-08-11 — awaiting a Founder decision
+
+9. **Two candidate-facing authoring-date leaks remain, outside the authorised scope.** The Founder
+   authorised the correction of `QP2601-Q9`, which is done (`9916744`). The identical defect —
+   an unqualified *"as at August 2026"* in candidate-facing `study_notes` — also stands on
+   **`QP2601-Q1`** and on **`QP2602-Q2`**, which carries the same STCW paragraph as a recurrence
+   sibling. Both are already-approved pages, so they were **reported, not silently fixed**. The
+   whole family is deliberately kept identical, so a correction to one should be applied to all.
+10. **`QP2509` carries stale paper-level state.** It is answered 9/9 but its spec still records
+    `build_state: Intake Complete` and `review_state: "Answerless intake — questions only, no
+    answers authored"`. Every other solved paper records `Pilot Review Ready` / *"Awaiting Founder
+    Review — complete paper"*. Nothing downstream reads these fields, so the toolchain is green
+    either way; it is a truthfulness defect in the record, not a build defect. Found while setting
+    QP2404's own state and **left alone** as another paper's branch.
+
 ### Known open defects
 
 7. **Q9 / QB9_C cross-link** — known, repair deferred.
@@ -152,26 +169,22 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 
 ## 7. Next production target
 
-**QP2404 — April 2024. IN PROGRESS, STOPPED AT 4 / 9 AND STAGED.** Resume this paper before
-starting any other.
+**QP2404 is COMPLETE and awaiting Founder review. Nothing is in progress.**
+
+The recommended next paper is **QP2511 — November 2025**, on current derived intelligence:
 
 | Paper | Tier D | Family reach | Temporal flags |
 |---|---|---|---|
-| **QP2404** | **4 / 9** | **6** | **1** |
-| QP2511 | 3 / 9 | 4 | 2 |
+| **QP2511** | **3 / 9** | 4 | 2 |
 | QP2401 | 3 / 9 | 3 | 2 |
-| QP2507 | 0 / 9 | 8 | 2 |
+| QP2502 | 2 / 9 | 5 | 2 |
+| QP2507 | 0 / 9 | **8** | 2 |
 
-`specs/QP2404.json` on this branch is **intake plus three adjudicated recurrence edges and nothing
-else — it carries no answers.** Q3, Q4, Q6 and Q7 were authored and are staged at
-`staging/QP2404/`, whose `CHECKPOINT.md` carries the resume command, the banked primary-source
-research for Q1/Q2/Q5/Q8/Q9, and one trap that must not be tidied away. The resume is mechanical and
-was verified by running it.
+`QP2511` leads on donor-backed work. `QP2507` remains the highest *family reach* in the corpus —
+solving it converts the most research elsewhere — but it starts from zero verified donors, so it is
+the better second choice, not the better next one.
 
-Its one flag, `QP2404-Q2` **GUIDELINE EDITION**, was investigated and is **REAL**: `MSC.1/Circ.1687`
-postdates the sitting by eight months. A second, unflagged wrong-edition trap was found on `Q8`
-(`A.1188(33)` revoked `A.1118(30)` four months before the sitting). Both are written up in
-`QP2404_TEMPORAL_AND_DONOR_ANCHOR.md`.
+**Do not start it without a Founder go-ahead.**
 
 ### Standing stop conditions
 
