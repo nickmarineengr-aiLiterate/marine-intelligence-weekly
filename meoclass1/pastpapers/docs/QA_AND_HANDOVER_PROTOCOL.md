@@ -19,6 +19,20 @@ Run in this order. Each must pass before the next is meaningful.
 | 5 | `health_check.py` | **the whole-repository gate** |
 | 6 | `ui_behaviour_test.cjs` | interactive behaviour |
 | 7 | visual check over HTTP | what the candidate actually sees |
+| 8 | `temporal_sweep.py` | post-sitting dates and inherited donor prose Q-references |
+| 9 | `surface_impact.py --base <ref>` | **which public / paid / commercial surfaces moved** |
+
+Steps 1–7 are gates: they pass or the paper does not ship. **Steps 8 and 9 are not gates.**
+They are the Production Intelligence Layer, and they detect rather than decide —
+`PIL FLAGS; CLAUDE ADJUDICATES`. A post-sitting date can be perfectly correct for its sitting,
+so the sweep reports candidates and Claude rules on each under
+`TEMPORAL_AND_DONOR_VERIFICATION_PROTOCOL.md`. Both run inside `run_toolchain.py`; step 9 only
+when a `--base` ref is supplied, because there is no safe default to compare against.
+
+**Step 9 is mandatory at finalisation.** A change to a public, free, commercial or
+security-sensitive surface that was *not* the target of the session must be reported to the
+Founder even when every gate passes — regeneration is allowed to move those surfaces, but not
+silently. See `WORKFLOW_LESSONS.md` lesson 7.
 
 `health_check.py` must end **0 errors, 0 warnings**. Among other things it verifies id
 uniqueness, spec/page correspondence, that every built question carries a study guide, quick
@@ -40,6 +54,11 @@ A check that has never failed has not been shown to work. Where a validator is l
 confirm at least once that it *fails* on a deliberately broken input. Two defects have
 previously been found in the harness rather than the content — a passing suite is not
 self-validating.
+
+`run_toolchain.py --self-test` exercises every positive control, including the PIL sweeps.
+**A new guard without a positive control is not acceptable.** Each PIL tool additionally
+carries a mutation control that disables its own detection and asserts the control stops
+firing, then restores it and asserts detection returns.
 
 ## 4. UI VERIFICATION
 

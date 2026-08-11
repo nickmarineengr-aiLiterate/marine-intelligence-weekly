@@ -18,10 +18,22 @@ Runs, in dependency order:
                                         recurrence on any shipped surface, plus the
                                         marks-safe stem normalisation cases
     KNOWN TRAPS   known_traps_check.py  traps we have already been caught by
+    TEMPORAL      temporal_sweep.py     post-sitting dates and donor prose Q-refs,
+                                        reported as CANDIDATES for adjudication
     HEALTH        health_check.py       product coherence, links, safety, review state
     AUDIT         audit_paper.py        each page faithful to its spec
 
+    SURFACE       surface_impact.py     only when --base <ref> is given: which
+                                        public / paid / commercial surfaces this
+                                        change moved. A finalisation report.
+
 Exit code is non-zero if any stage fails. Warnings stay warnings.
+
+TEMPORAL does not fail the build. A post-sitting date can be correct for its
+sitting, so its output is a candidate list, and whether any given flag blocks
+READY is Claude's judgement under TEMPORAL_AND_DONOR_VERIFICATION_PROTOCOL.md.
+SURFACE never runs without an explicit --base: there is no safe default ref, and
+guessing one would be exactly the invisible Git assumption it exists to prevent.
 
 This is the command a future production agent runs. Keep its output stable.
 """
@@ -37,7 +49,10 @@ PP = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers')
 PY = sys.executable
 
 
-def run(label, argv, verbose):
+def run(label, argv, verbose, echo=None):
+    """Run a stage. ``echo`` is a predicate over output lines that must be shown
+    even on a passing quiet run -- used by the PIL stages, whose whole value is
+    the report they print rather than their return code."""
     r = subprocess.run([PY] + argv, cwd=REPO_ROOT, capture_output=True, text=True,
                        encoding='utf-8', errors='replace')
     out = (r.stdout or '') + (r.stderr or '')
@@ -47,6 +62,10 @@ def run(label, argv, verbose):
     if verbose or r.returncode != 0:
         for line in out.rstrip('\n').split('\n'):
             print('    %s' % line)
+    elif echo:
+        for line in out.rstrip('\n').split('\n'):
+            if echo(line):
+                print('    %s' % line)
     return r.returncode, warns
 
 
@@ -56,7 +75,12 @@ def main():
                     help='build student-facing pages (indexable, no production metadata)')
     ap.add_argument('--gated', action='store_true', help='add the access gate')
     ap.add_argument('--self-test', action='store_true',
-                    help='positive-control the health and trap checks')
+                    help='positive-control the health, trap and PIL checks')
+    ap.add_argument('--base', help='base git ref: adds the SURFACE IMPACT '
+                                   'finalisation report. No default -- omitted, '
+                                   'the stage does not run.')
+    ap.add_argument('--target', help='paper id this session was meant to change '
+                                     '(SURFACE IMPACT only)')
     ap.add_argument('-v', '--verbose', action='store_true')
     args = ap.parse_args()
 
@@ -212,6 +236,32 @@ def main():
     rc_total += rc
     warn_total += w
 
+    # Production Intelligence Layer. Detection only -- PIL FLAGS, CLAUDE
+    # ADJUDICATES -- so the sweep's candidate list never fails the build. What
+    # it must do is be impossible to miss, which is why the summary counts and
+    # every out-of-range prose Q-reference print on a quiet run too.
+    #
+    # An out-of-range reference is the one case that is mechanically certain
+    # rather than a candidate: the prose points at a question number this paper
+    # does not have, which no sitting-date argument can excuse.
+    if args.self_test:
+        rc, w = run('TEMPORAL ST', [os.path.join(T, 'temporal_sweep.py'), '--self-test'],
+                    args.verbose)
+        rc_total += rc
+        warn_total += w
+        rc, w = run('SURFACE ST', [os.path.join(T, 'surface_impact.py'), '--self-test'],
+                    args.verbose)
+        rc_total += rc
+        warn_total += w
+
+    rc, w = run('TEMPORAL', [os.path.join(T, 'temporal_sweep.py')], args.verbose,
+                echo=lambda l: (l.startswith('temporal sweep:')
+                                or l.strip().startswith(('INTERNAL_QREF',
+                                                         'POST_SITTING'))
+                                or 'INTERNAL_QREF_OUT_OF_RANGE' in l))
+    rc_total += rc
+    warn_total += w
+
     argv = [os.path.join(T, 'health_check.py')]
     if args.publish:
         argv.append('--publish')
@@ -229,6 +279,16 @@ def main():
         if args.publish:
             argv.append('--publish')
         rc, w = run('AUDIT', argv, args.verbose)
+        rc_total += rc
+        warn_total += w
+
+    # Finalisation only, and only against a ref the caller supplied. Its whole
+    # report is the point, so it always echoes rather than only on --verbose.
+    if args.base:
+        argv = [os.path.join(T, 'surface_impact.py'), '--base', args.base]
+        if args.target:
+            argv += ['--target', args.target]
+        rc, w = run('SURFACE', argv, args.verbose, echo=lambda l: True)
         rc_total += rc
         warn_total += w
 
