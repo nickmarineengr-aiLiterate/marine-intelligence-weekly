@@ -350,7 +350,7 @@ footer a{color:#64748b;text-decoration:none}
           <path d="M12 4V20M12 20L6 14M12 20L18 14" stroke="#0d9488" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </div>
-      <button class="pay-btn pay-btn-standard pulse" id="btn-standard" onclick="startCheckout('standard')">
+      <button class="pay-btn pay-btn-standard pulse" id="btn-standard" onclick="startCheckout('ORAL_QB_NOTES','standard')">
         Get Standard Access — ₹1,499
       </button>
       <p style="font-size:11.5px;color:#64748b;text-align:center;margin-top:.5rem;line-height:1.5">📱 Have your UPI app ready before you tap — you'll get ~90 seconds to approve the payment there.</p>
@@ -359,9 +359,76 @@ footer a{color:#64748b;text-decoration:none}
 
 </div>
 
+<!-- =========================================================
+     SOLVED WRITTEN QUESTION PAPERS — a SEPARATE product.
+     This does NOT include the Oral QB + Notes above, and the Oral
+     product does not include this. Two purchases, two entitlements.
+     data-newest-sitting is verified against the canonical specs by
+     tools/pastpapers/solvedqp_check.py, so it cannot silently drift
+     as new papers are added.
+     ========================================================= -->
+<div class="sample-section" id="solved-qp" style="max-width:900px;margin:2.5rem auto 2rem">
+  <div class="tier-card featured" data-newest-sitting="July 2026" style="padding:1.75rem">
+    <div class="tier-badge">Written — separate product</div>
+    <div style="margin-top:.5rem">
+      <div class="tier-label">Solved Written Question Papers</div>
+      <div class="tier-name">MEO Class I — Engineering Management</div>
+      <div class="tier-price">₹1,500 <span>one-time</span></div>
+      <div class="tier-slots" style="background:#f0fdfa;color:#0f766e">
+        📘 Currently includes 2024: Mar · Apr — 2025: Jun · Aug · Sep · Oct —
+        2026: Jan · Feb · Mar · Apr · Jun · Jul —
+        newest solved sitting: <strong>July 2026</strong>
+      </div>
+      <ul class="feat-list">
+        <li><span class="ck">✓</span>Twelve complete solved sittings — 108 questions, every one worked</li>
+        <li><span class="ck">✓</span>Understand → Exam Plan → Answer → Study Guide → Recall</li>
+        <li><span class="ck">✓</span>Questions-by-year sheets for 2024, 2025 and 2026, with recurrence across sittings</li>
+        <li><span class="ck">✓</span>Search across every paper; bookmarks and progress</li>
+        <li><span class="ck">✓</span>All future solved papers included</li>
+      </ul>
+      <p style="font-size:12px;color:#64748b;line-height:1.6;margin:.25rem 0 .9rem">
+        This is the <strong>Written</strong> product. It is sold separately from the
+        Oral QB + Notes above and does not include it.
+      </p>
+      <button class="pay-btn pay-btn-standard" id="btn-solvedqp" onclick="startCheckout('SOLVED_QP','standard')">
+        Get Solved QP Access — ₹1,500
+      </button>
+      <p style="font-size:11.5px;color:#64748b;text-align:center;margin-top:.5rem;line-height:1.5">
+        Not sure yet? <a href="/SQ/solved-qp-sample-january-2026.html" style="color:#0d9488;font-weight:600">Read the free January 2026 paper first →</a>
+      </p>
+    </div>
+  </div>
+</div>
+
 <!-- FREE SAMPLE CARD -->
 <div class="sample-section">
+
+  <!-- Written sample. Two questions are complete; the other seven are
+       previews only — no withheld answer text exists in those bytes.
+       tools/pastpapers/sample_check.py enforces that. -->
   <div class="sample-card">
+    <div class="sample-card-left">
+      <div class="sample-q-count">9</div>
+      <div class="sample-q-label">Written Qs</div>
+    </div>
+    <div class="sample-card-divider"></div>
+    <div class="sample-card-body">
+      <div class="sample-card-badge">🔓 Free — No login required</div>
+      <div class="sample-card-title">Solved Written Paper — January 2026</div>
+      <div class="sample-card-desc">See a complete examination sitting. Two selected questions include the full MIW study experience — Understand, Exam Plan, Answer, Study Guide and Recall; preview how the remaining questions are structured.</div>
+      <div class="sample-tags">
+        <span class="sample-tag">Engineering Management</span>
+        <span class="sample-tag">Written</span>
+        <span class="sample-tag">Q1 &amp; Q5 complete</span>
+        <span class="sample-tag">Model answers</span>
+      </div>
+      <a class="sample-card-btn" href="/SQ/solved-qp-sample-january-2026.html">
+        Open Free Written Paper Sample →
+      </a>
+    </div>
+  </div>
+
+  <div class="sample-card" style="margin-top:1rem;">
     <div class="sample-card-left">
       <div class="sample-q-count">30</div>
       <div class="sample-q-label">Q&amp;A solved</div>
@@ -611,14 +678,37 @@ footer a{color:#64748b;text-decoration:none}
 const RAZORPAY_KEY_ID = "rzp_live_T6oKwIiVJK27LV";
 const VERCEL_API_URL = "https://marineintelligenceweekly.com"; // ← UPDATE THIS
 
-const PRICES = {
-  founders: 899,    // INR
-  standard: 1499,    // INR
+// DISPLAY ONLY. These strings are what the visitor reads; they are not
+// what anyone is charged. The amount is decided server-side in
+// api/_lib/products.js and this page no longer sends one. If a price
+// here ever disagrees with the catalogue, the catalogue wins and the
+// order is created at the catalogue amount.
+const CATALOGUE = {
+  ORAL_QB_NOTES: {
+    name: "MEO Class 1 QB",
+    tiers: {
+      founders: { label: "Founders Access", display: "₹899" },
+      standard: { label: "Standard Access", display: "₹1,499" },
+    },
+  },
+  SOLVED_QP: {
+    name: "MIW Solved Question Papers",
+    tiers: {
+      standard: { label: "Solved QP Access", display: "₹1,500" },
+    },
+  },
 };
 
-const TIER_LABELS = {
-  founders: "Founders Access",
-  standard: "Standard Access",
+const BUTTON_FOR = {
+  "ORAL_QB_NOTES:founders": "btn-founders",
+  "ORAL_QB_NOTES:standard": "btn-standard",
+  "SOLVED_QP:standard": "btn-solvedqp",
+};
+
+const BUTTON_LABEL = {
+  "ORAL_QB_NOTES:founders": "Get Founders Access — ₹899",
+  "ORAL_QB_NOTES:standard": "Get Standard Access — ₹1,499",
+  "SOLVED_QP:standard": "Get Solved QP Access — ₹1,500",
 };
 
 // =============================================================
@@ -643,26 +733,28 @@ function disableButton(btn, text) {
   btn.textContent = text;
 }
 
-function enableButton(btn, tier) {
+function enableButton(btn, key) {
   btn.disabled = false;
-  btn.textContent = tier === "founders"
-    ? "Get Founders Access — ₹899"
-    : "Get Standard Access — ₹1,499";
+  btn.textContent = BUTTON_LABEL[key] || "Get access";
 }
 
 // =============================================================
 // STEP 1: CREATE ORDER ON RAZORPAY
 // =============================================================
 
-async function createOrder(tier, buyerEmail) {
+async function createOrder(product, tier, buyerEmail, buyerName) {
   try {
     const response = await fetch(`${VERCEL_API_URL}/api/create-order`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      // No amount is sent. The server prices the named product itself and
+      // writes the product identity into the Razorpay order notes, which
+      // is what payment verification later trusts.
       body: JSON.stringify({
-        amount: PRICES[tier],
+        product: product,
         tier: tier,
         buyer_email: buyerEmail,
+        buyer_name: buyerName || "",
       }),
     });
 
@@ -672,7 +764,9 @@ async function createOrder(tier, buyerEmail) {
       throw new Error(data.error || "Failed to create order");
     }
 
-    return data.order_id;
+    // Return the whole order: the amount Razorpay must charge comes back
+    // from the server, so checkout cannot open at a different figure.
+    return data;
   } catch (error) {
     showError(`Error: ${error.message}`);
     throw error;
@@ -683,11 +777,14 @@ async function createOrder(tier, buyerEmail) {
 // STEP 2: OPEN RAZORPAY CHECKOUT
 // =============================================================
 
-async function startCheckout(tier) {
+async function startCheckout(product, tier) {
+  tier = tier || "standard";
+  const key = product + ":" + tier;
   // Get inputs
   const buyerName = document.getElementById("buyer-name").value.trim();
   const buyerEmail = document.getElementById("buyer-email").value.trim();
-  const btn = document.getElementById(tier === "founders" ? "btn-founders" : "btn-standard");
+  const btn = document.getElementById(BUTTON_FOR[key]);
+  if (!btn) return;
 
   // Validate
   if (!buyerEmail) {
@@ -705,17 +802,17 @@ async function startCheckout(tier) {
   disableButton(btn, "Creating order...");
 
   try {
-    // Step 1: Create order on Razorpay
-    const orderId = await createOrder(tier, buyerEmail);
+    // Step 1: Create order on Razorpay (server prices it)
+    const order = await createOrder(product, tier, buyerEmail, buyerName);
 
     // Step 2: Open Razorpay checkout with order_id
     const options = {
-      key: RAZORPAY_KEY_ID,
-      order_id: orderId,
-      amount: PRICES[tier] * 100, // Convert to paise
-      currency: "INR",
+      key: order.key_id || RAZORPAY_KEY_ID,
+      order_id: order.order_id,
+      amount: order.amount,        // paise, straight from the server
+      currency: order.currency,
       name: "Marine Intelligence Weekly",
-      description: `MEO Class 1 QB — ${TIER_LABELS[tier]}`,
+      description: order.label || CATALOGUE[product].name,
       image: "https://marineintelligenceweekly.com/logo.webp",
       theme: { color: "#0d9488" },
 
@@ -726,13 +823,13 @@ async function startCheckout(tier) {
 
       handler: function (response) {
         // Payment successful — verify on backend
-        verifyPayment(response, tier, buyerEmail, buyerName, btn);
+        verifyPayment(response, key, order, btn);
       },
 
       modal: {
         ondismiss: function () {
           // User closed modal
-          enableButton(btn, tier);
+          enableButton(btn, key);
         },
       },
     };
@@ -740,7 +837,7 @@ async function startCheckout(tier) {
     const rzp = new Razorpay(options);
 
     rzp.on("payment.failed", function (response) {
-      enableButton(btn, tier);
+      enableButton(btn, key);
       const desc = (response.error && response.error.description) || "";
       if (/could not complete it in time|timed out|timeout/i.test(desc)) {
         showError("Your UPI approval didn't come through in time. Nothing was charged — tap the button again, and approve the payment in your UPI app as soon as it opens.");
@@ -752,7 +849,7 @@ async function startCheckout(tier) {
     rzp.open();
 
   } catch (error) {
-    enableButton(btn, tier);
+    enableButton(btn, key);
   }
 }
 
@@ -760,17 +857,19 @@ async function startCheckout(tier) {
 // STEP 3: VERIFY PAYMENT SIGNATURE
 // =============================================================
 
-async function verifyPayment(razorpayResponse, tier, buyerEmail, buyerName, btn) {
+async function verifyPayment(razorpayResponse, key, order, btn) {
   disableButton(btn, "Verifying payment...");
 
   try {
+    // Only the three Razorpay identifiers are sent. What was bought, for
+    // how much, and who gets it are all re-read server-side from the order
+    // Razorpay actually holds. This page used to send `tier`, and the
+    // server believed it — which is how a ₹1 payment could claim the
+    // ₹1,499 product with a perfectly valid signature.
     const payload = {
       razorpay_order_id: razorpayResponse.razorpay_order_id,
       razorpay_payment_id: razorpayResponse.razorpay_payment_id,
       razorpay_signature: razorpayResponse.razorpay_signature,
-      buyer_email: buyerEmail,
-      buyer_name: buyerName || "Marine Engineer",
-      tier: tier,
     };
 
     const response = await fetch(`${VERCEL_API_URL}/api/verify-payment`, {
@@ -792,8 +891,8 @@ async function verifyPayment(razorpayResponse, tier, buyerEmail, buyerName, btn)
     // Track purchase in GA4
     gtag("event", "purchase", {
       currency: "INR",
-      value: PRICES[tier],
-      items: [{ item_name: `MEO QB ${tier}` }],
+      value: (order && order.amount ? order.amount / 100 : 0),
+      items: [{ item_name: key }],
     });
 
     // Clear inputs
@@ -803,7 +902,7 @@ async function verifyPayment(razorpayResponse, tier, buyerEmail, buyerName, btn)
   } catch (error) {
     showError(`Your payment may have gone through even though this step failed — please don't pay twice. Email contactus@marineintelligenceweekly.com with your payment ID (starts "pay_") or the email you used, and access will be sorted manually within a few hours. (${error.message})`);
   } finally {
-    enableButton(btn, tier);
+    enableButton(btn, key);
   }
 }
 document.getElementById('access-tab-btn').addEventListener('click',function(e){
