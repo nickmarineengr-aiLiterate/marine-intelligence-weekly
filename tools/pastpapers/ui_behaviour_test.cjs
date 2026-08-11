@@ -44,6 +44,33 @@ function ok(name, cond, extra) {
 // Alias probes deliberately use words that appear ONLY in search metadata and
 // are never rendered on the card, which is the behaviour being guarded.
 const FIXTURES = {
+  QP2404: {
+    probes: [
+      ['internet of things', 'QP2404-Q1'],
+      ['ammonia', 'QP2404-Q2'],
+      ['maritime lien', 'QP2404-Q3'],
+      ['rudder', 'QP2404-Q4'],
+      ['cybutryne', 'QP2404-Q5'],
+      ['general average', 'QP2404-Q6'],
+      ['human element', 'QP2404-Q7'],
+      ['recognized organization', 'QP2404-Q8'],
+      ['unclos', 'QP2404-Q9'],
+    ],
+    aliases: [
+      ['nh3', 'QP2404-Q2', 'the ammonia question (the formula is never rendered on the card)'],
+      ['leitrad', 'QP2404-Q4', 'Q4 (the vane wheel\'s original name)'],
+      ['irgarol', 'QP2404-Q5', 'Q5 (the trade name of cybutryne, never rendered)'],
+      ['sleep debt', 'QP2404-Q7', 'Q7'],
+      ['constitution of the oceans', 'QP2404-Q9', 'Q9'],
+    ],
+    // A.1188(33) is the edition of the ISM implementation Guidelines operative
+    // at THIS sitting. Its predecessor A.1118(30) was revoked by it on
+    // 6 December 2023, four months before the paper was sat, and appears in the
+    // answer only as the revoked edition. Probing the correct edition therefore
+    // also guards the wrong-edition trap this question is built on.
+    regulation: ['a.1188(33)', 'QP2404-Q8'],
+    recurrence: ['2023/aug/q1', 'QP2404-Q1'],
+  },
   QP2607: {
     probes: [
       ['general average', 'QP2607-Q5'],
