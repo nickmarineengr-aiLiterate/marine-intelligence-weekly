@@ -368,6 +368,63 @@ describe("payment fulfilment — the signature is not the authority", () => {
     assert.match(h.mails[0].html, /MIW-testpw01/);
   });
 
+  // -----------------------------------------------------------
+  // NO SUBSCRIBER CEILING.
+  //
+  // Credentials were drawn from a fixed QB_PASSWORD_POOL by index, so
+  // the product could take only as many customers as that list had
+  // entries. Running out threw AFTER Razorpay had captured the payment
+  // and after the fulfilment lock was claimed: money taken, nothing
+  // granted, no email, and a webhook retrying the same failure forever.
+  // -----------------------------------------------------------
+  test("with no pool configured a credential is still minted — no ceiling", async () => {
+    const h = harness({ order: goodOrder(), payment: goodPayment() });
+    const deps = { ...h.deps };
+    delete deps.passwordPool;                    // production shape
+    await fulfilPayment({ orderId: "order_TEST1", paymentId: "pay_TEST1", source: "test", deps });
+
+    const stored = h.kv.get("miw:user:buyer@example.com");
+    assert.match(stored, /^sha256\$/, "must still be stored hashed");
+
+    const emailed = h.mails[0].html.match(/letter-spacing:1px">([A-Z2-9]+)</)?.[1];
+    assert.ok(emailed, "the buyer must still be told their password");
+    assert.equal(emailed.length, 16);
+    assert.match(emailed, /^[ABCDEFGHJKLMNPQRSTUVWXYZ23456789]+$/);
+  });
+
+  test("issuing past the end of the old pool no longer fails", async () => {
+    // The counter sits beyond the fixture pool's 2 entries — precisely
+    // the state that used to throw "pool_exhausted".
+    const h = harness({ order: goodOrder(), payment: goodPayment() });
+    h.kv.set("miw:password_counter", "5000");
+    const r = await fulfilPayment({
+      orderId: "order_TEST1", paymentId: "pay_TEST1", source: "test", deps: h.deps,
+    });
+    assert.equal(r.status, "granted", "a sale past the pool length must still complete");
+    assert.match(h.kv.get("miw:user:buyer@example.com"), /^sha256\$/);
+    assert.deepEqual(h.granted[0].ents, ["SOLVED_QP"], "the customer gets what they paid for");
+  });
+
+  test("two new buyers never receive the same credential", async () => {
+    const seen = new Set();
+    for (let i = 0; i < 25; i++) {
+      const order = goodOrder();
+      order.notes.buyer_email = `buyer${i}@example.com`;
+      const h = harness({ order, payment: goodPayment() });
+      const deps = { ...h.deps };
+      delete deps.passwordPool;
+      await fulfilPayment({ orderId: "o", paymentId: `pay_${i}`, source: "test", deps });
+      seen.add(h.mails[0].html.match(/letter-spacing:1px">([A-Z2-9]+)</)[1]);
+    }
+    assert.equal(seen.size, 25, "a collision here means the generator is broken");
+  });
+
+  test("POSITIVE CONTROL: an explicit pool still pins the value, so the test above is meaningful", async () => {
+    const h = harness({ order: goodOrder(), payment: goodPayment() });
+    await fulfilPayment({ orderId: "order_TEST1", paymentId: "pay_TEST1", source: "test", deps: h.deps });
+    assert.match(h.mails[0].html, /MIW-testpw01/, "poolOverride must still win when supplied");
+  });
+
   test("a failure inside the lock releases it so a retry can succeed", async () => {
     const h = harness({ order: goodOrder(), payment: goodPayment() });
     let attempt = 0;

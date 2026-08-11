@@ -29,6 +29,7 @@ import { PRODUCTS } from "./products.js";
 import { redisGet, redisSet, redisIncr, redisSetNX, redisDel } from "./redis.js";
 import { grantEntitlements, userKey } from "./entitlements.js";
 import { hashPassword } from "./session.js";
+import { generatePassword } from "./rotation.js";
 import { makeTransport, buildAccessEmail } from "./email.js";
 
 async function defaultRazorpayGet(path) {
@@ -181,28 +182,56 @@ export async function fulfilPayment({ orderId, paymentId, source, deps = {} }) {
 }
 
 /**
- * New accounts draw from QB_PASSWORD_POOL exactly as before, so the
- * Founder's existing credential workflow is unchanged — but the value
- * is now STORED hashed. The plaintext exists only long enough to be
- * emailed to the buyer.
+ * Mint a credential for a NEW account.
+ *
+ * WHY THIS NO LONGER USES QB_PASSWORD_POOL
+ * ----------------------------------------
+ * It used to draw from a fixed list in that variable, by index, behind
+ * an incrementing counter:
+ *
+ *     const pwdIndex = (await store.incr(counterKey)) - 1;
+ *     if (pwdIndex >= pool.length) throw ... "pool_exhausted"
+ *
+ * which put a HARD CEILING on the number of customers the product could
+ * ever take. The counter stood at 98 when this was changed, so the
+ * remaining capacity was whatever the pool had left — a number nobody
+ * could see without opening a Sensitive environment variable.
+ *
+ * The failure mode is what settled it. The throw happens AFTER Razorpay
+ * has captured the payment and after the fulfilment lock is claimed, so
+ * exhaustion means: money taken, no entitlement granted, no email sent,
+ * and a webhook that retries and fails identically forever. The customer
+ * has paid and received nothing, and nothing alerts anyone.
+ *
+ * A credential does not need to be pre-agreed with anything, so drawing
+ * it from a list bought no property worth that risk. It is now generated
+ * per account: 16 characters from a 32-symbol ambiguity-free alphabet by
+ * crypto.randomInt, about 80 bits. Unlimited subscribers, no variable to
+ * top up, no exhaustion path — and each credential is created at the
+ * moment of sale rather than existing in an environment variable months
+ * beforehand, which is strictly better for the same reason the rotated
+ * credentials are.
+ *
+ * `deps.passwordPool` is still honoured, ONLY so existing tests can pin
+ * an exact value. Nothing in production passes it.
+ *
+ * miw:password_counter and miw:pwd_assigned:* are left in place but are
+ * now vestigial; the counter is still advanced so the historical record
+ * of "how many credentials have been issued" stays continuous.
  */
 async function assignNewPassword(email, store, poolOverride) {
-  const pool = poolOverride || JSON.parse(process.env.QB_PASSWORD_POOL || "[]");
-  if (pool.length === 0) throw new FulfilError("QB_PASSWORD_POOL is empty", "no_pool");
-
   const counterKey = "miw:password_counter";
   const current = await store.get(counterKey);
   if (current === null || current === undefined) await store.set(counterKey, "28");
+  const issueIndex = (await store.incr(counterKey)) - 1;
 
-  const nextIndex = await store.incr(counterKey);
-  const pwdIndex = nextIndex - 1;
-  if (pwdIndex >= pool.length) {
-    throw new FulfilError(`Password pool exhausted (index ${pwdIndex})`, "pool_exhausted");
-  }
+  // A test-supplied pool still pins the value; production generates.
+  const password = (poolOverride && poolOverride[issueIndex] !== undefined)
+    ? poolOverride[issueIndex]
+    : generatePassword();
 
-  const password = pool[pwdIndex];
   await store.set(userKey(email), hashPassword(password));
-  await store.set(`miw:pwd_assigned:${pwdIndex}`, email);
+  await store.set(`miw:pwd_assigned:${issueIndex}`, email);
   return password;
 }
 
