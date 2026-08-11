@@ -134,6 +134,36 @@ index**, clean across 22 pages.
 
 ---
 
+## 4a. PRODUCTION ENVIRONMENT CONFIGURATION
+
+Read from the Vercel project `marineintelligenceweekly/marine-intelligence-weekly` on 2026-08-11.
+**Presence only. No value was displayed, and every entry is marked Sensitive and unreadable.**
+
+| Variable | Production | Note |
+|---|---|---|
+| `KV_REST_API_URL` | **CONFIGURED** | |
+| `KV_REST_API_TOKEN` | **CONFIGURED** | |
+| `KV_URL` · `REDIS_URL` · `KV_REST_API_READ_ONLY_TOKEN` | CONFIGURED | |
+| `RAZORPAY_KEY_ID` · `RAZORPAY_KEY_SECRET` · `RAZORPAY_WEBHOOK_SECRET` | CONFIGURED | |
+| `BREVO_*` (4) | CONFIGURED | |
+| `QB_PASSWORD_POOL` | CONFIGURED | the legacy plaintext pool — in scope for `LAUNCH-BLOCK-1` rotation |
+| **`MIW_SESSION_SECRET`** | **MISSING** | |
+
+### `LAUNCH-BLOCK-2` — `MIW_SESSION_SECRET` is not set in production
+
+**Severity: BLOCKER for a working deployment. Independent of `LAUNCH-BLOCK-1`.**
+
+`check-password.js` refuses to issue sessions without it, and `middleware.js` fails closed. A
+deploy in this state would therefore be *safe but useless*: it denies **everyone**, including
+paying customers. It must be set (≥16 random characters, for **both** the Edge and Node runtimes)
+before deployment — but **only after** `LAUNCH-BLOCK-1` is closed, since setting it is what turns
+the gate on.
+
+This is a genuine second gate, not a restatement of the first. Closing `LAUNCH-BLOCK-1` alone would
+still not produce a working live product.
+
+---
+
 ## 5. NOT TESTED — because nothing was deployed
 
 Every item below was in scope and is **untested**, not passed:
