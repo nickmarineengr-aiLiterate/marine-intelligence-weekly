@@ -209,10 +209,16 @@ object; nothing can land on the exact section. Every pilot entry is therefore `R
 
 ### Blocking publication
 
-1. **Customer passwords have not been confirmed rotated.** The Security V2 incident record
-   requires rotation for the existing customer base after two unauthenticated endpoints were
-   found reachable in production. No evidence of completion exists anywhere in this repository.
-   Treat as **UNCONFIRMED**. This blocks launch, not further engineering.
+1. **`LAUNCH-BLOCK-1` — published customer credentials still authenticate. CONFIRMED, not merely
+   unconfirmed.** Upgraded from *"rotation UNCONFIRMED"* on 2026-08-11 after direct verification.
+   **28 real customer email/plaintext-password pairs are published in this PUBLIC repository's
+   history** (reachable at `0766d00^:api/migrate-users.js`; `0766d00` is `origin/main`), and
+   `verifyPassword` still accepts legacy plaintext, so every one of them **authenticates today**.
+   Removing the files in `0766d00` stopped the live endpoints but could not remove the blobs from
+   published history — `git ls-tree HEAD` reporting ABSENT proves *"not in the tree"*, not
+   *"no longer disclosed"*. **This blocks live deployment of any paid surface.** It does not block
+   QP authoring or further engineering. Full record, evidence and the five required Founder actions:
+   [`WRITTEN_PRODUCT_LIVE_TEST_STATUS.md`](WRITTEN_PRODUCT_LIVE_TEST_STATUS.md) §1–§2.
 2. **The recovered security stack is inert.** `commerce/solvedqp-recovery` holds `middleware.js`,
    `vercel.json`, `api/session.js` and `api/_lib/*`, all proven offline, but **nothing is
    deployed and no secret is set**. Until `MIW_SESSION_SECRET`, `KV_REST_API_URL` and
@@ -328,8 +334,17 @@ being rebuilt. Two of its questions now have direct donors from QP2511 itself (`
 | Workstream | State | Plan |
 |---|---|---|
 | **MARPOL Annex VI corpus sync** | **NEXT — Founder action** | [`CORPUS_SYNC_AND_CONSUMPTION_PLAN.md`](CORPUS_SYNC_AND_CONSUMPTION_PLAN.md) |
-| Online product testing | planned, **not deployed** | [`ONLINE_TEST_PLAN.md`](ONLINE_TEST_PLAN.md) |
-| Parallel desktop production | designed, **not started, no branch created, no paper allocated** | [`PARALLEL_PRODUCTION_BOARD.md`](PARALLEL_PRODUCTION_BOARD.md) |
+| Online product testing | **BLOCKED — not deployed.** Release candidate is green; `LAUNCH-BLOCK-1` gates it | [`WRITTEN_PRODUCT_LIVE_TEST_STATUS.md`](WRITTEN_PRODUCT_LIVE_TEST_STATUS.md) |
+| **Parallel desktop production** | **SIX 2024 PAPERS ALLOCATED — NOT STARTED.** Playbook and board written; baseline nominated | [`DESKTOP_QP_ALLOCATION_2024.md`](DESKTOP_QP_ALLOCATION_2024.md) · [`DESKTOP_QP_PRODUCTION_PLAYBOOK.md`](DESKTOP_QP_PRODUCTION_PLAYBOOK.md) |
+
+### Written product deployment status — 2026-08-11
+
+**NOT LIVE. NOT DEPLOYED. NO MERGE TO `main` WAS PERFORMED.** The Founder authorised live
+deployment for controlled testing; the authorisation was conditioned on no unresolved security
+prerequisite, and `LAUNCH-BLOCK-1` above is unresolved. Pre-deploy acceptance is otherwise **green**
+— toolchain ALL STAGES PASS, security 62/62, corpus consumer 60/60, coverage and solvedqp
+self-tests pass on seeded positives, and a full toolchain run left the tracked tree byte-identical.
+**Desktop QP production is unaffected and may start.**
 
 ### Standing stop conditions
 
