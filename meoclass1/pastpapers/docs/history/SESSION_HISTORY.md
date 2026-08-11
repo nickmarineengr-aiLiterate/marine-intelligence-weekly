@@ -4135,3 +4135,92 @@ security surface. Two rows classify `UNKNOWN_REVIEW` because `staging/` is a new
 directory with no rule. **No rule was added.** Following the `.gitattributes` precedent of §35.8,
 being asked about a new top-level directory in a public repository is the correct outcome, and it
 is reported to the Founder rather than suppressed.
+
+---
+
+## §37 — QP2511 RESUMED AND COMPLETED 9/9 (2026-08-11)
+
+Resumed `pastpapers/qp2511-founder-review` from `cb85c82` with **1 of 9 authored**. Ended with the
+paper **complete, assembled, built, delivered and swept**, and `staging/` retired.
+
+### Starting state, verified rather than assumed
+
+Branch and head matched the prompt exactly. `run_toolchain.py` **ALL STAGES PASS**; corpus derived
+independently at **252 / 108 / 144, 12 solved papers**; delivery at **12 papers, 3 year sheets, 1
+index**; offline security **62/62**. Governed stale-session cleanup reaped **2 eligible clusters**
+(184 min and 155 min old), recovering 735 MB; the 82-minute cluster was correctly skipped and the
+120-minute threshold was **not weakened**.
+
+### The three anchor predictions — one confirmed, two cleared
+
+The paper's temporal anchor named three places where a backwards donor would bite. Investigating a
+prediction and finding **nothing** is a completed piece of work, and all three are recorded either way.
+
+| Question | Anchor prediction | Outcome |
+|---|---|---|
+| **Q8** | The March 2026 donor reasons under the **Merchant Shipping Act, 2025** | **CONFIRMED — reversed in six places** |
+| Q5 | The March 2026 donor may cite the **2025 HSSC Survey Guidelines** | **ABSENT.** Donor cites no HSSC, no `A.12xx(34)`, no 2025/2026 edition |
+| Q3 | The Merchant Shipping Act boundary is "available" on the Indian issuing authority | **ABSENT.** Donor contains **zero** occurrences of "Merchant Shipping" in any field |
+
+### Q8 — the conclusion survived, the reasoning did not
+
+The donor was sat on or after **15 March 2026**, the commencement date of the 2025 Act, and treated
+it as live law in six fields. At this sitting the Act had **assent (18 Aug 2025) but not
+commencement**, so the **Merchant Shipping Act 1958** governs.
+
+The subtlety worth preserving: **India's recycling law is the same at both sittings** — the Recycling
+of Ships Act, 2019 is separate legislation either way. So the donor reaches a **right conclusion
+through a premature premise**: it asserts the effect of a repeal provision that had not yet taken
+effect. Nothing downstream catches that; the sentence is coherent, confident and about the right
+statute. `26 June 2030` was adjudicated **KEEP** — the Convention's own transitional deadline.
+
+### Q3 — the compressed stem changed the answer
+
+This sitting prints **three** demands where the January 2026 donor prints four, folding *"certificates
+issued to a vessel **for maintenance of the ship in good health**"* and *"who can issue these in
+India"* into *"the different certificates **in India**"*. The deleted qualifier is the one the donor's
+own gate had relied on to confine the limb to the ship — and this stem's first sentence names *"the
+ship **and the crew**"*. A **sixth route step** was authored on the seafarer's medical certificate,
+primary-verified this session from the ILO's own MLC FAQ: Standard A1.2 ¶7 (two years / one / six)
+and ¶9 (expiry in voyage, to the next port, **not exceeding three months**). The printed word
+*"options"* is plural and now has two answers: **ship 6+1, crew 2 years + 3 months**.
+
+### Fresh questions
+
+**Q7 (FAL)** paid back the checkpoint's prediction exactly: `FAL.15(47)`, read in full for Q9, made
+the amendment limb cheap to author *correctly*, and the two questions now cite the same instrument for
+different purposes. **Q1** asserts **no casualty statistic** and **no `Derbyshire` date** — IMO's own
+material does not quantify the losses. **Q2** is the corpus's first question with
+`P1_PRIMARY_VERIFIED: 0`, correctly: no instrument prescribes what a torque rich condition is, and the
+`regulations` field **states the absence** instead of being padded. MAN Energy Solutions' *Basic
+Principles of Ship Propulsion* was read in full and supplies every quantity.
+
+### The assembly guard earned its place
+
+Assembly asserted identity, printed stem against intake, marks, state, evidence and card ids for all
+nine **before** touching the spec. It **blocked**, on a real defect: the previously staged Q9 carried
+the **donor's** `host_recurrence_hint` (7 entries) and had lost this paper's own `2025/NOV/Q9`.
+Authoring-only and never rendered, so nothing candidate-facing was affected — but the donor's list
+would have flowed into the recurrence intelligence as this paper's own. Corrected from intake and
+recorded on the object.
+
+### Defects found in my own drafting, and removed
+
+- A study-notes block on Q8 originally taught the entry-into-force boundary **by naming the sittings
+  at which this question has appeared** — provider recurrence intelligence, derived from
+  `host_recurrence_hint`, on a candidate-facing surface. Rewritten to make the identical point
+  (*check whether your notes predate 26 June 2025*) **without disclosing any sitting**. Verified 0 hits.
+- Nine model-answer headings had drifted from their route steps, and Q2 used a non-vocabulary
+  `primary_category` and a non-vocabulary archetype. The single-spine validator caught all of it.
+
+### Outcome
+
+`0 errors`. **ALL STAGES PASS** on `run_toolchain.py` and `--self-test`. Double-build **byte-identical
+across 38 artefacts**. `solvedqp_check.py` and `--self-test` pass and **independently discovered** the
+new paper: **13 papers, 117 questions**. UI reviewed over HTTP at 1280 and 375 — nine cards, five
+modes, Answer default, every anchor and same-paper link resolving, no console errors, no horizontal
+overflow, and the delivery pages carrying **no review banner, no provider leakage and no price**.
+Security **62/62**. Server torn down and the listener confirmed gone.
+
+Corpus **252 / 117 / 135, 13 solved papers**. Staging retired after verifying all nine staged objects
+were hash-identical to the promoted spec.

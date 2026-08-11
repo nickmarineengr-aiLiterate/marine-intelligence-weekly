@@ -830,3 +830,141 @@ OWNER:     temporal_sweep.py (documented in the module docstring, sweep B)
 REVISIT:   only if a resolution is ever found cited with NO date anywhere in its field — at
            which point the mapping belongs in known_traps.md as a verified fact, not in a tool.
 ```
+
+---
+
+## A right conclusion reached through a PREMATURE premise
+
+**Status: PROVEN.** Evidence: `QP2511-Q8`, 2026-08-11.
+
+The known backwards-donor failure is a *wrong answer* inherited from a later sitting. This is the
+harder variant: the donor's **conclusion is correct at both sittings** and only its **reasoning** is
+impossible at the earlier one.
+
+`QP2603-Q9` (March 2026) says India's ship recycling law survives *"because s.324(1) of the Merchant
+Shipping Act, 2025 repeals only the 1958 Act and the Coasting Vessels Act 1838"*. At November 2025 the
+2025 Act had **assent but not commencement**. The conclusion — the Recycling of Ships Act, 2019
+governs — is right at both sittings, because that Act is separate legislation either way. The premise
+is not: it asserts the effect of a repeal provision that had not yet taken effect.
+
+**Why nothing catches it.** The sentence is internally coherent, names the right statute, and reaches
+the right answer. A date sweep flags `15 March 2026` — but a reviewer who checks *"is the conclusion
+correct?"* answers yes and moves on. Only asking **"could this REASON have been given at this
+sitting?"** exposes it.
+
+**How to apply.** On any backwards donor, check the *premise* separately from the *conclusion*. Where
+a donor explains **why** something is so by reference to an instrument, confirm that instrument was
+operative at the target sitting — even when the conclusion is unarguable. A correct answer supported
+by a premature reason is still a defect, and it is the one most likely to survive review.
+
+---
+
+## Investigating a predicted regression and finding NOTHING is a completed piece of work
+
+**Status: PROVEN.** Evidence: `QP2511-Q5` and `QP2511-Q3`, 2026-08-11.
+
+`QP2511_TEMPORAL_AND_DONOR_ANCHOR.md` named three questions where a backwards donor would bite. **One
+was real. Two were not** — the Q5 donor cites no HSSC guidelines and no `A.12xx(34)` resolution at
+all, and the Q3 donor contains **zero** occurrences of "Merchant Shipping" in any field.
+
+Both negatives are recorded in `reuse_evidence` and `temporal_review` as findings, not omitted.
+
+**Why it matters.** An anchor prediction is a **question, not a verdict** — the same principle as
+`PIL FLAGS; CLAUDE ADJUDICATES`, applied to the paper's own forecast. Treating the prediction as
+established invites the opposite error to the one feared: **deleting a correct citation that was never
+there**, or "restoring" an earlier edition into an answer that never cited one.
+
+**How to apply.** Sweep for the predicted token family explicitly, and write the result **either way**.
+A recorded negative is reusable — the Q5 result establishes that the ESP family does not touch
+Assembly-level survey instruments at all, so the 33rd/34th Assembly boundary can be cleared cheaply for
+any future member rather than re-investigated.
+
+---
+
+## A token sweep prompts a look; it never delivers a verdict — the false-positive case
+
+**Status: PROVEN.** Evidence: `QP2511-Q6`, 2026-08-11.
+
+The Q6 donor sweep returned **fourteen hits and all fourteen were false positives**. Eleven were the
+word `current` inside the technical terms **`eddy current`** and **`impressed current`**. One was the
+host recurrence annotation, one an authoring date, and one the word `now` inside a hypothetical
+(*"the blade geometry may now be outside tolerance"* — narrative sequence after grinding, not a claim
+about the sitting date).
+
+**The cost of getting this wrong is concrete.** Treating the flags as findings would have stripped the
+answer's NDT method selection and its cathodic-protection failure mechanism — both correct, both
+central to the question.
+
+**How to apply.** `eddy current` and `impressed current` are permanent false positives for any
+`current` rule; expect them on machinery questions rather than re-adjudicating from scratch. More
+generally, record the false-positive adjudication on the object, so the next session does not repeat
+the analysis or, worse, reach a different conclusion.
+
+---
+
+## The staged-object assembler should assert against INTAKE, not against the donor
+
+**Status: PROVEN for the guard; CANDIDATE for promotion to `tools/`.**
+Evidence: `QP2511-Q9`, 2026-08-11.
+
+A paper stopped part-finished is staged outside the canonical spec. On resumption, assembly asserted —
+for all nine questions, **before writing anything** — identity, printed stem **against the intake
+spec**, marks, `printed_marks_absent`, answer state, verification-file existence, `temporal_review`
+sitting and state, and retrieval-card id prefixes.
+
+**It blocked, on a real defect.** The Q9 object staged by the previous session carried the **donor's**
+`host_recurrence_hint` (seven entries, copied wholesale from `QP2508-Q7`) and had lost this paper's own
+`2025/NOV/Q9`. The field is authoring-only and never rendered, so nothing candidate-facing was
+affected — but the donor's annotation would have entered the recurrence intelligence as though it were
+this paper's.
+
+**The rule.** *Printed truth comes from the intake spec and is re-asserted LAST*, after both donor
+inheritance and authored patches. Anything a donor supplies for a printed-truth field is presumptively
+wrong, because the donor's printed truth is a different paper's.
+
+**What would reopen promotion to `tools/`.** One observed staged-paper workflow is not enough to
+justify a new governed tool. If a paper is stopped part-finished again, promote the assertion set —
+**not** the paper-specific payload — to `tools/pastpapers/`.
+
+---
+
+## A compressed stem is a CHANGED TASK, not a shorter one
+
+**Status: PROVEN.** Evidence: `QP2511-Q3` against `QP2601-Q6`, 2026-08-11.
+
+The November 2025 stem folds the January 2026 stem's two separate demands into one, and in doing so
+**deletes a qualifier**: *"certificates issued to a vessel **for maintenance of the ship in good
+health**"* becomes *"the different certificates **in India**"*.
+
+That qualifier was doing real work. The donor's own `decomposition_gate` records the ambiguity —
+whether crew medical certificates are in scope — and resolves it **as ship-only precisely because of
+the qualifier the target does not print**. Meanwhile the target's first sentence names *"the ship
+**and the crew**"*. The compressed stem is therefore **wider**, not narrower, and a sixth route step
+was authored to answer it.
+
+**How to apply.** When a NEAR donor differs by compression, diff the stems **word by word** and ask
+what each removed word was doing. Read the donor's own recorded ambiguities: where a donor says *"I
+resolved this narrowly because the stem says X"*, and the target does **not** say X, that resolution
+does not transfer. Then hedge structurally rather than in prose — answer the narrow reading first and
+at greater length, so a marker taking it loses nothing.
+
+---
+
+## Deriving a teaching point from `host_recurrence_hint` leaks it to the candidate
+
+**Status: PROVEN.** Evidence: `QP2511-Q8`, 2026-08-11, caught and removed before build.
+
+A study-notes block drafted for Q8 taught the entry-into-force boundary by **naming the sittings at
+which the question has appeared**. The enumeration was derived from `host_recurrence_hint` — an
+authoring field — and `study_notes` **is rendered**.
+
+This is the guarded provider-recurrence leak arriving by a new route: not through a field that leaks,
+but through an author **reading** an authoring field and writing its content into prose.
+
+**How to apply.** The teaching point almost never needs the sittings. The block was rewritten to say
+*"check whether your notes predate 26 June 2025"* — identical pedagogy, no disclosure. Verify by
+scanning candidate-facing fields for sitting patterns after drafting, not only before.
+
+Confirmed by inspection of `build_paper.py` that `subpart_marks_note`, `recurrence_adjudication`,
+`host_recurrence_hint`, `reuse_evidence` and `question_delta` are **not rendered at all** — recurrence
+reasoning recorded in those fields is safe. `sources` and `unresolved` **are** rendered.

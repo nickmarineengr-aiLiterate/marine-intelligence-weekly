@@ -1,7 +1,7 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-11, after the QP2511 session stopped at a guarded checkpoint.
+Last updated: 2026-08-11, after **QP2511 was completed 9/9, built and delivered**.
 
 This file answers four questions and nothing else: *where are we now, what was completed,
 what is next, what is blocked.*
@@ -26,7 +26,7 @@ what is next, what is blocked.*
 | `main` | `0766d00` — nothing from the pastpapers line has been merged into it |
 | Content head | `a5f2551` on `pastpapers/qp2509-founder-review` — the newest solved-paper state |
 | Tooling head | `850bdde` on `workflow/pil-v1` — content head plus the Production Intelligence Layer |
-| This branch | `pastpapers/qp2511-founder-review` @ `886cfd0` — **QP2511 IN PROGRESS, 1 of 9 authored.** Branched from `commerce/solvedqp-recovery` @ `462cfbc`. **Not built.** Resume from `staging/QP2511/CHECKPOINT.md` |
+| This branch | `pastpapers/qp2511-founder-review` — **QP2511 COMPLETE 9/9, built and delivered.** Branched from `commerce/solvedqp-recovery` @ `462cfbc`. `staging/` has been retired |
 
 All git commands in this repository need `-c safe.directory=*`.
 
@@ -39,10 +39,11 @@ from a previous handover.
 
 | | |
 |---|---|
-| **Corpus** | **252 questions / 108 solved / 144 unsolved** |
-| **Papers** | 28 — **12 solved**, 16 answerless intake |
+| **Corpus** | **252 questions / 117 solved / 135 unsolved** |
+| **Papers** | 28 — **13 solved**, 15 answerless intake |
 | **Years** | 2024 (11 papers), 2025 (11), 2026 (6). May is absent from the source set in all three years |
-| **Tier D (derived)** | **20** of the 144 unsolved carry a verified donor. Was 22; QP2404's own four left the unsolved set when it was solved, and solving it newly unlocked **`QP2409-Q8`** (from `QP2404-Q5`, via the adjudicated reverse-hint edge) and **`QP2411-Q2`** (from `QP2404-Q2`) |
+| **Tier D (derived)** | **20** of the 135 unsolved carry a verified donor. Unchanged in total by QP2511: its own six left the unsolved set when it was solved, and solving it unlocked six replacements — most usefully `QP2512-Q1` (from `QP2511-Q3`) and `QP2512-Q2` (from `QP2511-Q4`), the adjacent December 2025 sitting |
+| **Delivery** | `solvedQP/` — **13 papers, 117 questions, 3 year sheets, 1 index** |
 | **Toolchain** | ALL STAGES PASS · `health_check.py` **0 errors, 0 warnings** · reuse map current |
 
 ---
@@ -51,7 +52,8 @@ from a previous handover.
 
 | Paper | Sitting | State | Branch |
 |---|---|---|---|
-| **QP2404** | April 2024 | **COMPLETE 9/9 — newest. Founder review.** | `pastpapers/qp2404-founder-review` @ `84fee6f` |
+| **QP2511** | November 2025 | **COMPLETE 9/9 — newest. Founder review.** | `pastpapers/qp2511-founder-review` |
+| QP2404 | April 2024 | complete 9/9 | `pastpapers/qp2404-founder-review` @ `84fee6f` |
 | QP2509 | September 2025 | complete 9/9 | `pastpapers/qp2509-founder-review` @ `a5f2551` |
 | QP2506 | June 2025 | complete 9/9 | `pastpapers/qp2506-founder-review` @ `0d7f872` |
 | QP2510 | October 2025 | complete 9/9 | `pastpapers/qp2510-founder-review` @ `8fa4f5f` |
@@ -59,8 +61,8 @@ from a previous handover.
 | QP2403 | March 2024 | complete 9/9 | `pastpapers/qp2403-founder-review` @ `e7d8bc0` |
 | QP2601–QP2604, QP2606, QP2607 | 2026 set | complete, 6 of 6 available sittings | one review branch each |
 
-Full solved set: QP2403 · **QP2404** · QP2506 · QP2508 · QP2509 · QP2510 · QP2601 · QP2602 ·
-QP2603 · QP2604 · QP2606 · QP2607.
+Full solved set: QP2403 · QP2404 · QP2506 · QP2508 · QP2509 · QP2510 · **QP2511** · QP2601 ·
+QP2602 · QP2603 · QP2604 · QP2606 · QP2607.
 
 ---
 
@@ -102,7 +104,7 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 |---|---|---|
 | `workflow/pil-v1` | `850bdde` | PIL V1 — Founder review |
 | `workflow/state-history-hygiene` | this branch | the state/history split — Founder review |
-| `pastpapers/qp2404-founder-review` | `84fee6f` | **QP2404, the newest paper** |
+| `pastpapers/qp2404-founder-review` | `84fee6f` | QP2404 |
 | `pastpapers/qp2509-founder-review` | `a5f2551` | QP2509 |
 | `pastpapers/qp2506-founder-review` | `0d7f872` | QP2506 |
 | `pastpapers/qp2510-founder-review` | `8fa4f5f` | QP2510 |
@@ -113,7 +115,7 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 | `pastpapers/2024-question-intake` | `7ca36b6` | 2024–2026 intake |
 | `pastpapers/2025-question-intake` | `3a4aa14` | 2025 intake |
 | `pastpapers/2026-v1-product-review` | `217fbba` | the 2026 V1 product review |
-| `pastpapers/qp2511-founder-review` | this branch | **QP2511, IN PROGRESS 1 of 9.** Branched from `commerce/solvedqp-recovery` @ `462cfbc`; not built, spec still intake |
+| `pastpapers/qp2511-founder-review` | this branch | **QP2511, COMPLETE 9/9 — the newest paper.** Branched from `commerce/solvedqp-recovery` @ `462cfbc`; built, delivered, `staging/` retired |
 | `commerce/solvedqp-recovery` | `462cfbc` | **the Solved QP delivery product and the offline security stack** — Founder review. Branched from `bf87b1a`; inert, nothing deployed |
 | `commerce/solvedqp-security-v2` | `eaedfda` | frozen. **Do not merge.** Its content was selectively recovered onto `commerce/solvedqp-recovery`; its stale `solvedQP/` HTML was deliberately not |
 
@@ -198,40 +200,39 @@ Fixed in `caf5020`.
 
 ## 7. Next production target
 
-**QP2511 — November 2025 — IS IN PROGRESS AND STOPPED AT 1 OF 9.**
+**QP2511 — November 2025 — IS COMPLETE 9/9, BUILT AND DELIVERED.** Awaiting Founder review.
 
-Resume from **`staging/QP2511/CHECKPOINT.md`**, having first read
-[`QP2511_TEMPORAL_AND_DONOR_ANCHOR.md`](QP2511_TEMPORAL_AND_DONOR_ANCHOR.md).
+Its temporal foundation is recorded in
+[`QP2511_TEMPORAL_AND_DONOR_ANCHOR.md`](QP2511_TEMPORAL_AND_DONOR_ANCHOR.md), and the nine
+verification records are at `verification/QP2511/`. The `staging/` directory has been **retired**.
 
-| | |
-|---|---|
-| Authored | **Q9 only** — staged at `staging/QP2511/Q9.json`, verified at `verification/QP2511/Q9.md` |
-| Not started | Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8 |
-| Spec | **UNTOUCHED — answerless intake.** No half-authored-paper state exists |
-| Built | **No.** No page, no `solvedQP/` regeneration. Delivery remains 12 papers |
-| Tier D | **6 / 9** after reverse-hint adjudication accepted three edges (was 3 / 9) |
-| Research banked | Q7's FAL position is complete to primary level; Q5's and Q8's temporal regressions are identified but not applied |
-
-The corpus counts in §2 are therefore **unchanged**: solving QP2511 has not begun to affect them.
-
-Do **not** promote Q9 into the spec on its own. Promote all nine in one operation, then build.
-
-### After QP2511 — the ranking that led here, for reference
+### Recommended next paper: **QP2512 — December 2025**
 
 | Paper | Tier D | Family reach | Temporal flags |
 |---|---|---|---|
-| **QP2511** | **6 / 9** (was 3 / 9) | 4 | 2 |
+| **QP2512** | **3 / 9** | 0 | 2 |
 | QP2401 | 3 / 9 | 3 | 2 |
-| QP2502 | 2 / 9 | 5 | 2 |
+| QP2410 | 3 / 9 | 0 | 4 |
 | QP2507 | 0 / 9 | **8** | 2 |
 
-`QP2511` led on donor-backed work and now leads by more: reverse-hint adjudication took it from
-3 / 9 to **6 / 9** Tier D. `QP2507` remains the highest *family reach* in the corpus — solving it
-converts the most research elsewhere — but it starts from zero verified donors, so it is the better
-paper *after* QP2511, not instead of it.
+QP2507 still holds the highest *family reach* in the corpus, and on that measure alone it leads. It
+is nevertheless **not** the recommendation, for the same reason it was not the recommendation before
+QP2511: it starts from **zero** verified donors, so every one of its nine questions is fresh research.
 
-**Finish QP2511 before starting anything else. Do not start a new paper without a Founder
-go-ahead.**
+**QP2512 is recommended because the research just completed transfers to it almost whole.** It is the
+sitting immediately after QP2511, so the entire November 2025 line — the 34th Assembly boundary, the
+Merchant Shipping Act 1958 position, the Net-Zero Framework as approved-but-not-adopted, the FAL
+amendment position, the Hong Kong Convention in force — applies with **one** adjustment rather than
+being rebuilt. Two of its questions now have direct donors from QP2511 itself (`QP2512-Q1` from
+`QP2511-Q3`, `QP2512-Q2` from `QP2511-Q4`).
+
+> **The one adjustment, and it is sharp.** The **34th IMO Assembly sat 24 November – 3 December 2025
+> and adopted its resolutions at the close of that session**. A December 2025 sitting may therefore
+> fall on **either side** of that boundary, where a November one cannot. Establishing the December
+> examination date against 3 December 2025 is the **first** task of that session, and if it cannot be
+> established the `A.12xx(34)` family must be treated as excluded rather than assumed available.
+
+**Do not start a new paper without a Founder go-ahead.**
 
 ### Standing stop conditions
 
