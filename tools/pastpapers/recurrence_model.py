@@ -354,6 +354,128 @@ def derive_reuse_tier(stored_tier, donors):
     return 'C'
 
 
+# --------------------------------------------------------- reverse hint index
+#
+# A host month token as the source copies print them. The vocabulary is the
+# corpus's own, not a guess: APR AUG DEC FEB JAN JUL JULY JUN JUNE MAR NOV OCT
+# SEP all appear. Deliberately ABSENT are the four ambiguous forms that also
+# appear -- SR03/SR04/SR09/SR11/SR12/SR4/SR8 (supplementary sittings with no
+# month), JAN2 (a second January sitting) and JULY(M). None of them resolves to
+# one sitting, and a token that cannot be resolved is COUNTED AND REPORTED
+# rather than dropped, because a silently discarded token reads as "no
+# candidate" when it means "not looked at".
+HOST_MONTH = {'JAN': 1, 'FEB': 2, 'MAR': 3, 'APR': 4, 'MAY': 5, 'JUN': 6,
+              'JUNE': 6, 'JUL': 7, 'JULY': 7, 'AUG': 8, 'SEP': 9, 'SEPT': 9,
+              'OCT': 10, 'NOV': 11, 'DEC': 12}
+
+# 2025/SEP/Q6, 2022/MAR/1, 2018/APR. Only the three-part form names a question.
+HOST_TOKEN = re.compile(r'^(\d{4})/([A-Z0-9()]+)(?:/Q?(\d+))?$', re.I)
+
+
+def parse_host_token(token):
+    """(year, month_num, q_no) for a host sitting token, or None if ambiguous.
+
+    Returns q_no as ``None`` for a bare-month token like ``2018/APR``: it names
+    a sitting but not a question, so it can never identify a counterpart.
+    """
+    m = HOST_TOKEN.match((token or '').strip())
+    if not m:
+        return None
+    mon = HOST_MONTH.get(m.group(2).upper())
+    if mon is None:
+        return None
+    return int(m.group(1)), mon, (int(m.group(3)) if m.group(3) else None)
+
+
+def reverse_hint_candidates(specs, nodes, relations):
+    """Invert the host annotation so a question can see who names IT.
+
+    THIS IS DISCOVERY, NOT ADJUDICATION. Read the boundary before changing it.
+
+    Why the inversion is needed
+    ---------------------------
+    The third-party host prints a CUMULATIVE "previously asked" table: every
+    token names the current sitting or an earlier one. Measured over this
+    corpus, 819 tokens resolve to 551 backward, 252 self and **zero forward**.
+    That is not a convention, it is structural -- a January 2026 copy can name
+    September 2025, and no September 2025 copy can ever name January 2026.
+
+    So the annotation is only ever readable in the direction production is NOT
+    going. MIW solves backwards, newest first. When QP2509 (September 2025) was
+    authored, QP2601-Q2 (January 2026) was already built and was the same
+    examiner task -- and the only machine-readable trace of that link lived on
+    QP2601's record, pointing back. QP2509-Q6 derived as tier C, "no donor",
+    and a human found the donor by hand.
+
+    What this function does and does NOT do
+    ---------------------------------------
+    It answers exactly one question: *which later questions' host annotations
+    name this sitting, and which of those has MIW not already adjudicated?*
+
+    It does NOT create a family edge, does NOT create a donor, does NOT move a
+    reuse tier and does NOT touch ``build_families`` or ``donor_readiness``.
+    Their output is byte-identical whether or not this function is ever called,
+    and ``self_test`` case 9 asserts precisely that. A host hint is worthless as
+    evidence -- the 2026 review found it over-claiming and under-claiming in
+    both directions, and its bare-month tokens link wholly unrelated questions.
+    Promoting one to a relation would be inferring equivalence from provider
+    metadata, which is the one thing a deterministic tool must never do here.
+
+    The output is a QUEUE FOR A HUMAN. Each row is "the host says these two
+    sittings are related; MIW has not ruled on it; go and read them." A row
+    becomes real only when an author writes ``reused_from`` after reading both
+    questions -- and at that moment ``build_families`` picks it up in BOTH
+    directions already, because the adjudicated layer has always been undirected.
+
+    Returns a dict:
+        candidates    {target_qid: [source_qid, ...]}  unadjudicated only
+        stats         token accounting, so nothing is silently dropped
+    """
+    sitting = {}
+    for d in specs:
+        sitting[(d['year'], MONTH_NUM[d['month']])] = d['paper_id']
+
+    stats = {'tokens': 0, 'ambiguous': 0, 'no_question': 0,
+             'outside_corpus': 0, 'self_reference': 0,
+             'already_adjudicated': 0, 'surfaced': 0}
+    found = {}
+    for d in specs:
+        for q in d['questions']:
+            src = q['question_id']
+            for token in (q.get('host_recurrence_hint') or []):
+                stats['tokens'] += 1
+                parsed = parse_host_token(token)
+                if parsed is None:
+                    stats['ambiguous'] += 1
+                    continue
+                year, mon, qno = parsed
+                if qno is None:
+                    stats['no_question'] += 1
+                    continue
+                pid = sitting.get((year, mon))
+                if pid is None:
+                    stats['outside_corpus'] += 1
+                    continue
+                tgt = '%s-Q%d' % (pid, qno)
+                if tgt not in nodes:
+                    stats['outside_corpus'] += 1
+                    continue
+                if tgt == src:
+                    stats['self_reference'] += 1
+                    continue
+                # Already an adjudicated MIW family member: the relation exists,
+                # traversal is symmetric, and there is nothing for a human to do.
+                if tgt in relations and src in relations[tgt]['others']:
+                    stats['already_adjudicated'] += 1
+                    continue
+                found.setdefault(tgt, set()).add(src)
+
+    candidates = {t: sorted(s, key=lambda m: _sort_key(nodes[m]))
+                  for t, s in found.items()}
+    stats['surfaced'] = sum(len(v) for v in candidates.values())
+    return {'candidates': candidates, 'stats': stats}
+
+
 def family_summary(nodes, relations, qid):
     """One honest candidate-facing sentence about this question's history.
 
