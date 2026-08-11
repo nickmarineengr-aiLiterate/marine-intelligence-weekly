@@ -292,6 +292,31 @@ Two-pass correction (both Nixon-flagged screenshot review, same session).
 **Pass 2**: Nixon correctly identified the shape was still wrong even after Pass 1 — the negative-stability span (0°→loll) was drawn wider than the positive-stability span (loll→AVS), backwards from reality. Rebuilt using the exact proportions of a documented worked example (Ship Stability for Masters and Mates, Fig 17.5): loll = 18°, range of stability 18°→90°, AVS = 90°. The negative-GM curve is now drawn in two colours split exactly at the loll angle — red (0°→18°, GZ negative, capsizing moment per Fig 6.5(a)) and green (18°→90°, GZ positive but restoring toward the LOLL angle, not upright, per Fig 6.5(c)) — so the positive-stability segment visibly starts at the loll angle rather than at 0°. Separately, the orange "Zero GM — Neutral / 'Tender'" curve conflated two distinct textbook concepts: **tender** = small POSITIVE GM (Ch. 40: 0.16–0.20 m, 25–35 s roll period) vs **zero GM / neutral equilibrium** = GM exactly 0 (Fig 6.4: no righting or capsizing moment at all). Relabelled to "Zero GM — Neutral Equilibrium" with an explicit note distinguishing it from "tender," and flattened the curve shape to match the neutral-equilibrium definition. The unrelated teal "Positive GM — Stable" comparison curve (a separate healthy vessel) was dropped per Nixon's instruction, since it risked reading as a continuation of the same ship's story; section retitled "Zero GM vs Negative GM" and a range-of-stability bracket added (measured from the loll angle, not 0°, per the explicit textbook note in Fig 9.9). v1.1 → v1.2.
 GREP: SKIP — SVG coordinate/diagram error and terminology/proportion error, not a fixed text phrase; repo-wide grep for "ship sits here at rest" confirmed this diagram is not duplicated elsewhere.
 
+### 32. LLMC 2012 Amendments wrongly cited as Resolution LEG.3(91) — should be LEG.5(99)
+**LEG.3(91)** is "Guidelines on fair treatment of seafarers in the event of a maritime
+accident," adopted by the Legal Committee at its 91st session on 27 April 2006 — an
+entirely unrelated instrument (also adopted by the ILO Governing Body, 296th session,
+12 June 2006). It has nothing to do with LLMC or limitation of liability.
+
+The correct citation for the **2012 Amendments to the Protocol of 1996 to amend the
+LLMC Convention 1976** is **Resolution LEG.5(99)**, adopted by the Legal Committee at
+its 99th session, raising the Article 3 limits by 51% (verified against IMO's own
+resolution text, uploaded by candidate). It entered into force 8 June 2015 via tacit
+acceptance. `meoclass1/oralnotes/miw-notes-mgmt-p9.html` already carried the correct
+LEG.5(99) citation before this fix — used as a cross-check confirming which number
+was right.
+
+Fixed in `QB1_A.html`: 4 instances in the Q3 LLMC card (intro paragraph, limits
+subheading, Indian-context paragraph, reg-box) and 1 cross-reference instance in the
+Q5 CLC card's parenthetical remark. q-version bumped Q3 v1.1→v1.2, Q5 v1.1→v1.2.
+Repo-wide scoped search (`meoclass1/` tree) confirmed no other file carried this
+conflation.
+GREP: SKIP — "LEG.3(91)" is a real, correctly-usable resolution number in a different
+context (fair treatment of seafarers guidelines); an exact-phrase auto-scan would
+false-positive against any future correct usage. Manual verification-pass only: check
+that any "LEG.3(91)" hit is actually about seafarer fair-treatment guidelines, not
+misattributed to LLMC.
+
 ---
 
 ## Meta-corrections to `qb_health_check.py` itself (non-content fixes, logged here for continuity)
@@ -338,3 +363,4 @@ GREP: SKIP — SVG coordinate/diagram error and terminology/proportion error, no
 | 2026-08-05 | Entry 24: Places of Refuge A.949(23) stale, current A.1184(33) | Candidate correction via Nixon |
 | 2026-08-05 | Entries 25–30: Bills of Lading Act 2025, COGSA 2025 (India now Hague-Visby), fabricated "BARECON C", inverted air-freight volumetric ratio, ESP Code citation (A.1049(27)), IMO NZF adoption-status currency reminder — all found while building Notes Parts 19–22 and cross-checking against Parts 1–18 (Part 2 T9 and Part 22 T3 both had a stale NZF date, corrected in the same pass) | Claude Chat, building Notes Parts 19–22 (Uday Sankar S. source, pp. 451–550) |
 | 2026-08-07 | Entry 31: QB3_A_CheatSheet.html GZ curve diagram, two-pass — trough-vs-zero-crossing marker error, then negative/positive span proportions and "tender" mislabel, per full redraw against a documented textbook worked example | Nixon Antony (screenshot review, iterative) |
+| 2026-08-08 | Entry 32: LLMC 2012 Amendments wrongly cited as LEG.3(91) (fair treatment of seafarers guidelines) instead of LEG.5(99) — QB1_A.html Q3 (4 instances) and Q5 cross-reference (1 instance) | Candidate correction via Nixon (IMO resolution PDF attached) |
