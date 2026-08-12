@@ -222,10 +222,46 @@ exists so a candidate can tell when an answer is *probably too thin* — that is
 
 ## 10. Component specifications
 
-**Understand this first** — 2–4 sentences, plain engineering language, the central mental
-model *before* examination phrasing. **Optional by design**: present only where the topic is
-genuinely counter-intuitive. Adding it to a self-evident question is clutter, and clutter is
-what expertise reversal punishes.
+**Understand this first** — plain engineering language, the central mental model *before*
+examination phrasing. **Conditional by design**: present only where the topic has a genuinely
+counter-intuitive core. Adding it to a self-evident question is clutter, and clutter is what
+expertise reversal punishes.
+
+*Clarified 2026-08-12 by the candidate-feedback audit (`CANDIDATE_FEEDBACK_AUDIT_2026-08-12.md`).
+The conditional gate above is unchanged. What the audit settled is the job the section must do when
+it is present, after a candidate reported that the column did not help him write once he had
+forgotten the technical term.*
+
+**The purpose test.** Understand exists to answer one question: *can I remember and explain the idea
+even if I forget the official term?* It is not a second Model Answer, not a regulation dump, not a
+synonym-rewritten Answer, and not a mini Study Guide.
+
+**The reconstruction test — the acceptance criterion.** Delete every bold term from the section. If
+what remains would still let a candidate rebuild the shape of a decent answer, it passes. If what
+remains is exam advice, or nothing, it fails.
+
+**Seven rules, derived from the sections that measurably passed that test:**
+
+1. Open on the **situation or the problem**, in ordinary words. Never open on a citation.
+2. Explain the **mechanism** — what happens, why it matters, what follows from what.
+3. **Plain idea first, formal term second.** Write "the paperwork and enforcement side, the physical
+   condition of the ship, and the conditions of the people aboard", and *then* name them
+   *administrative, technical and social* matters. The concept must survive the term being forgotten.
+4. **Carry no dates, resolution numbers or article numbers.** Those belong in Answer and Recall,
+   where they are already verified. A number in Understand is a number maintained in two places.
+5. **Describe the limbs conceptually; do not address the examiner.** "The examiner has asked for
+   three things" teaches nothing and duplicates the Exam Plan. Naming a limb to orient the reader is
+   fine; substituting exam strategy for explanation is the defect.
+6. **Length follows the job, not a sentence count.** Measured practice across the solved corpus is a
+   median of ~120 words, and up to ~200 is right where the question has two unrelated halves. The
+   former "2–4 sentences" figure described the QP2607 pilot and had already been overtaken by the
+   corpus it was meant to govern.
+7. **Stay question-specific**, and keep the same spine as Exam Plan, Answer and Recall. A friendlier
+   explanation that reorganises the route is a defect, not an improvement.
+
+Because rule 4 keeps dates and citations out, an Understand section is normally
+**sitting-independent** and transfers unchanged across an exact-recurrence family — unlike answer
+prose, which must be re-anchored on every Tier D reuse.
 
 **Start here** — the route headings, and the instruction to write all headings first and then
 expand in order. Must be usable in seconds. This is the F1 fix.
@@ -261,7 +297,7 @@ Avoiding schema inflation. New fields:
 |---|---|---|
 | `answer_route` (`archetype`, `steps[]` with `n`, `title`, `limb?`, `points[]`) | **REQUIRED** for every built answer | It is the spine every derived view depends on |
 | `retrieval_cards[]` (`id`, `type`, `prompt`, `answer`, `why?`) | **REQUIRED**, ≥4 authored | The primary evidence-backed intervention |
-| `understand_first` | **CONDITIONAL** — where the topic is counter-intuitive | Forcing it everywhere creates clutter |
+| `understand_first` | **CONDITIONAL** — where the topic is counter-intuitive. Where present it must pass the **reconstruction test** in §10 | Forcing it everywhere creates clutter; but where it *is* present and fails the purpose test, the mode silently stops working |
 | `memory_cue` | **OPTIONAL** | Only where a cue is genuinely memorable. **No invented acronyms.** |
 | `knowledge_map`, recall test, start-here | **DERIVED — never authored** | Single source of truth |
 

@@ -253,6 +253,45 @@ regression.
 **No generic template masquerading as question-specific structure.** If the Understand section
 would read the same for any question in the family, it is not finished.
 
+### 10.1 UNDERSTAND MODE — mandatory standard from Batch 2 onward
+
+Added 2026-08-12 by the candidate-feedback audit. A candidate reported that Understand was written
+too technically to help him write when he had forgotten the formal term. The audit confirmed the
+complaint on a minority of questions and produced the standard below. **Batch 2 (QP2501, QP2502,
+QP2503, QP2504, QP2507, QP2406) must author to it.** Full derivation:
+`MIW_LEARNING_METHOD_DESIGN.md` §10 and `CANDIDATE_FEEDBACK_AUDIT_2026-08-12.md`.
+
+Understand answers exactly one question: **can I remember and explain the idea even if I forget the
+official term?**
+
+**Acceptance criterion — the reconstruction test.** Delete every bold term. If what remains still
+lets a candidate rebuild the shape of a decent answer, it passes. If what remains is exam advice, or
+nothing, it fails and the section is not finished.
+
+| Do | Do not |
+|---|---|
+| Open on the situation or problem, in ordinary words | Open on a citation |
+| Explain the mechanism — cause, effect, what follows from what | Restate the Answer in shorter sentences |
+| Give the plain idea first, then attach the formal term to it | Name the term and assume the idea |
+| Leave dates, resolution and article numbers to Answer and Recall | Carry a number that is now maintained in two places |
+| Name a limb to orient the reader | Write "the examiner has asked for three things" — that is the Exam Plan's job |
+| Let length follow the job: ~120 words typical, ~200 where the question has two unrelated halves | Pad to a word count, or truncate a two-part question to one paragraph |
+
+**Worked example of the plain-then-formal pattern** (QP2601 Q7, rewritten in this audit):
+
+> "…the State has to exercise real control, not merely bank the registration fee. That control is
+> described under three heads — the paperwork and enforcement side, the physical condition of the
+> ship, and the conditions of the people living and working aboard her — which the Convention calls
+> **administrative, technical and social** matters."
+
+The candidate who forgets "administrative, technical and social" still has three usable headings.
+
+**Two consequences worth knowing.** Because the standard keeps dates and citations out, an Understand
+section is normally **sitting-independent** and may transfer unchanged across an exact-recurrence
+family — the one part of an answer object that may. And a section that omits Understand entirely is
+acceptable *only* where the topic has no counter-intuitive core; if you cannot state that core in one
+sentence to yourself, the section is required.
+
 ---
 
 ## 11. MIW EXAM-ANSWER STYLE
