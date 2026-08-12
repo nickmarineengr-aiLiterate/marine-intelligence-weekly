@@ -4548,3 +4548,94 @@ signal was a real person signing in. Closed by running the back-fill: 100 grante
   password must be rotated at source.
 - **A live enumeration probe used the Founder's real address**, resetting their password a second
   time. A throwaway address should have been used.
+
+---
+
+## 20. STOREFRONT AND SAMPLE WORK — 2026-08-12 (second session)
+
+Production commits `a3a3003` and `2f38586`. Started as a request to change one link on the Oral
+notes header; found two live exposures on the way.
+
+### 20.1 The public QB page was publishing the paid product — `a3a3003`
+
+`SQ/QB1_A.html` served **94.7% of the paid `meoclass1/QB1_A.html`** to anyone, no gate, linked from
+the storefront. 11 of 12 randomly sampled long sentences from the paid file appeared verbatim.
+
+This was **not** a gate failure. `/SQ/` is deliberately outside the middleware matcher so the
+storefront and login work without a session, which means anything placed there is *published by
+definition*. `examiner-index.html` (4% of paid) and `index.html` (39%) are correctly trimmed; this
+one was a near-complete copy dropped in and never cut.
+
+The 17 "lock" markers already in the file were a **red herring** — the substring `lock` inside CSS
+`display:block` and `white-space:nowrap`. There was no locking mechanism at all.
+
+Founder decision: the free QB was kept deliberately to build trust, so keep the first 15 answered
+and tease the rest. All 30 questions remain listed; answers 16–30 became a ₹1,499 subscriber panel.
+Withheld answers are **deleted from the bytes**, never CSS-hidden.
+
+| | Before | After |
+|---|---|---|
+| Public share of paid content | 94.7% | **50.2%** |
+| Withheld answers readable | all | **0 of 20 sampled** |
+| Questions listed | 30 | 30 |
+
+Also removed three internal sections from that public page: *QB1 Upgrade Notes v1.2*, *QB1 Roadmap
+to v1.3*, *QB1 Roadmap to v1.4* — feature plans and a per-question editorial changelog that also
+enumerated edits to answers now behind the paywall.
+
+### 20.2 THE ROOT CAUSE: publish state lived on the command line — `2f38586`
+
+The live public sample was telling customers **"Founder review copy — not published, not
+indexable"**, showing `PRICE_TBD`, naming internal file paths, and carrying `noindex` — on the page
+the entire Oral→Written funnel points at.
+
+The cause was not a bad build. `--publish` is a **flag**, and `run_toolchain.py:194` calls
+`build_sample.py` with no arguments, so **every routine rebuild silently reverted a published page
+to a review copy.** Nothing failed and nothing warned. This was observed live mid-session: the
+banner was removed, the toolchain was run, and it came back.
+
+Publish state is a property of the artefact, so it now lives in the projection config
+(`"publish": true`). A flagless rebuild — proven in the commit — keeps both pages published.
+`--publish` survives as an override.
+
+### 20.3 The public sample became a real marketing page
+
+No review banner, no internal paths, `index, follow` instead of `noindex`, and the approved
+**₹1,500** in three places. `PRICE_TBD` remains the sentinel and every price renders through one
+helper, so a placeholder still cannot reach a customer by accident.
+
+Added the five-mode explainer to the header (same copy as `solvedQP/index.html`) and a mid-page
+conversion strip placed **after** a worked question, never before one — leading with the offer is
+what makes a sample read as an advert. The strip is suppressed on a gated build, where the reader
+already holds what it sells.
+
+### 20.4 Gated full January paper for Oral subscribers
+
+`meoclass1/oralnotes/solved-qp-january-2026-full.html` — inside the `ORAL_QB_NOTES` prefix, verified
+against `routes.js#requiredEntitlementForPath` and live (`302 nosession`). All nine questions worked
+in full, for customers who already bought the Oral product. Badged *"Included with your Oral
+access"*, not "Free sample".
+
+**MEASURED COST, printed by the build on every run: 18 questions across 11 other sittings** —
+QP2404-Q7, QP2502-Q2, QP2506-Q7/Q8, QP2508-Q4, QP2509-Q3/Q6, QP2511-Q3, QP2512-Q1, QP2602-Q4,
+QP2603-Q4, QP2604-Q3/Q4/Q6/Q7/Q8/Q9, QP2607-Q5. **QP2604 loses six of its nine questions**;
+QP2607-Q5 is in the July paper the storefront exists to sell.
+
+An earlier estimate of "February, March, April and July" **understated this**. The Founder decided
+on the understated figure; the true one is now printed by the build and recorded in the config, and
+the decision is reversible by deleting `sample/QP2601.full.sample.json` and rebuilding.
+
+The guard is **not disabled**. `allow_family_members` requires a written reason AND a named
+entitlement, refuses any output under `SQ/`, and prints every question it unlocks. `sample_check.py`
+honours the identical exception and **verifies the gate claim against the output path** rather than
+believing it — otherwise the build passes while the check fails forever, which is how a real guard
+gets deleted by someone who does not know why it existed.
+
+A gated page is forced to `noindex` whatever publish says: a crawler cannot read a page behind the
+gate and would only surface the login bounce as content.
+
+### 20.5 Verification
+
+Toolchain ALL STAGES PASS · `sample_check` OK · 121 security tests green (38+32+22+29) ·
+double-build byte-identical · no horizontal overflow at 1280 or 375 · every claim above re-checked
+against the **live production URLs**, not just local files.

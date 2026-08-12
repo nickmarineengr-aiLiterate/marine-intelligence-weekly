@@ -1172,3 +1172,73 @@ the Founder's real address, resetting their password unnecessarily.
 
 **Use throwaway addresses for probes against live endpoints**, and when a secure channel has been
 prepared, say plainly that using the insecure one creates new work rather than saving time.
+
+---
+
+## STOREFRONT, SAMPLE AND MEASUREMENT LESSONS — 2026-08-12 (second session)
+
+### Publish state belongs to the artefact, never to the invocation
+
+`--publish` was a command-line flag, so it lived only in the memory of whoever last typed the
+command. `run_toolchain.py` rebuilds samples with no arguments, so every routine build silently
+reverted a published page to a review copy — telling customers "not published, not indexable" with
+a `PRICE_TBD` placeholder, on the page the whole funnel pointed at. Nothing failed and nothing
+warned.
+
+**If a property must survive the next rebuild by someone who does not know about it, it belongs in
+the config, not in the command.** The test is simple and worth running: rebuild with no arguments
+and see whether the artefact is still what you published.
+
+### A public directory publishes whatever is put in it
+
+The Edge gate was correct and enforcing. `SQ/QB1_A.html` still exposed ~95% of the paid Question
+Bank, because `/SQ/` is deliberately outside the middleware matcher so login and the storefront
+work without a session. No amount of boundary correctness catches a **placement** error.
+
+**Audit the public directory by content, not by route.** For every file under a public prefix, ask
+what fraction of a paid artefact it reproduces. The comparison is one script and it found this in
+a minute.
+
+### Counting a short string is a hypothesis, not a measurement
+
+Three times in one session a naive count sent the work the wrong way:
+
+- `grep 'Exam Plan'` returned 0 because the label is `Exam plan` — concluded, wrongly, that the
+  sample did not demonstrate all five modes.
+- 17 "lock" markers looked like a paywall. They were the substring `lock` inside `display:block`
+  and `white-space:nowrap`. There was no lock.
+- A leak check compared tag-stripped sentences against **raw HTML**, so any sentence containing
+  `<strong>` could never match. It reported 2 false leaks and 6 false losses simultaneously.
+
+**Compare like with like, and confirm what a count means before acting on it.** Text belongs
+against text, markup against markup. A verification that can fail in both directions at once is
+not a verification.
+
+### State the cost from the tool, never from prose
+
+The commercial cost of publishing the January paper in full was described as "February, March,
+April and July". The build, asked properly, printed **18 questions across 11 sittings**, one paper
+losing six of its nine. The Founder had already decided on the understated figure.
+
+**When a decision has a measurable price, measure it before presenting the choice**, and make the
+tool print it on every run so the number cannot drift back into prose. Where the decision was taken
+on a wrong figure, say so plainly and give the one-line reversal.
+
+### A guard exception must be honoured everywhere the guard lives
+
+The recurrence guard existed twice: in `build_sample.py` and again in `sample_check.py`. Adding a
+legitimate override to one left the other failing 21 times with no way to go green except deleting
+something.
+
+**Mirror the exception wherever the rule is mirrored, and make the exception prove itself** — here
+the config claims a gate, and the checker verifies that claim against the output path rather than
+believing it. A permanently red check trains people to ignore checks, which costs more than the
+check ever saved.
+
+### Verify the deployed artefact, and read it, not its status code
+
+The review banner sat live on the public sample through an entire prior session that had verified
+the page returned HTTP 200 and leaked no paid links — but never read what it said.
+
+**A 200 is not a verification.** Fetch the live page and assert on its content: the words a customer
+sees, the robots tag, the price, and the absence of internal paths.
