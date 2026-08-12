@@ -94,6 +94,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
 .q-chevron{width:18px;height:18px;min-width:18px;color:var(--grey-text);transition:transform .25s;margin-top:2px;}
 .q-card.open .q-chevron{transform:rotate(180deg);color:var(--teal);}
 
+/* PARTIAL-VIEW LOCK (public storefront copy only) */
+.qb-lock{margin:4px 0;padding:18px 20px;border:1.5px solid #99f6e4;border-radius:12px;
+  background:linear-gradient(180deg,#f0fdfa,#ffffff);}
+.qb-lock-t{font-size:14px;font-weight:800;color:#0f766e;margin:0 0 6px;}
+.qb-lock-d{font-size:13px;color:#475569;line-height:1.6;margin:0 0 14px;}
+.qb-lock-d b{color:#0f172a;}
+.qb-cta{display:inline-block;background:#0d9488;color:#fff;text-decoration:none;
+  padding:10px 20px;border-radius:8px;font-size:13px;font-weight:700;}
+.qb-cta:hover{background:#0f766e;}
+
 /* ANSWER PANEL */
 .q-answer{display:none;padding:0 18px 18px;}
 .q-card.open .q-answer{display:block;}
@@ -177,8 +187,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
 
 <!-- CTA BANNER -->
 <div style="background:#fff7ed;border-bottom:2px solid #f97316;padding:9px 20px;text-align:center;font-size:13px;color:#9a3412;font-weight:600;">
-  📚 This is a free 30-question sample — 600+ questions across QB1–QB10 unlock with full access →
-  <a href="https://marineintelligenceweekly.com/SQ/pay.html" onclick="gtag('event','subscribe_click',{content_name:'QB1_A',cta_location:'banner'});" style="background:#f97316;color:#fff;text-decoration:none;padding:5px 14px;border-radius:6px;font-size:12px;font-weight:700;margin-left:8px;">Get Full Access →</a>
+  📚 All 30 questions below, with the first 15 answered in full &mdash; judge the depth for yourself. Answers 16&ndash;30, plus 600+ questions across QB1&ndash;QB10, unlock with full access<a href="https://marineintelligenceweekly.com/SQ/pay.html" onclick="gtag('event','subscribe_click',{content_name:'QB1_A',cta_location:'banner'});" style="background:#f97316;color:#fff;text-decoration:none;padding:5px 14px;border-radius:6px;font-size:12px;font-weight:700;margin-left:8px;">Get Full Access →</a>
 </div>
 
 <!-- PAGE HEADER -->
@@ -1196,45 +1205,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>Purpose</h4>
-          <p>The <strong>Basel Convention on the Control of Transboundary Movements of Hazardous Wastes and Their Disposal, 1989</strong> (in force 1992) controls international movement of hazardous wastes and obliges parties to ensure environmentally sound management — preventing "toxic trade" (export from developed to developing countries for unsafe disposal).</p>
-          <h4>Maritime Relevance — Ship Recycling</h4>
-          <p>Ship-breaking generates Basel-listed hazardous materials (asbestos, PCBs, TBT, heavy metals from anti-corrosive paints). Under Basel, sending an end-of-life vessel to a developing country for breaking is a transboundary movement of hazardous waste.</p>
-          <p>The <strong>Hong Kong Convention (HKC) 2009 entered into force in June 2025</strong> — providing a ship-recycling-specific regime that for HKC member states supersedes Basel for end-of-life vessels. Under HKC, the <strong>Inventory of Hazardous Materials (IHM) is now mandatory globally</strong>:</p>
-          <ul>
-            <li><strong>Part I:</strong> Maintained throughout the ship's operational life; updated after any modification, repair, or structural change — <em>CE responsibility</em></li>
-            <li><strong>Parts II &amp; III:</strong> Completed when ship proceeds to recycling</li>
-          </ul>
-          <h4>PIC — Prior Informed Consent</h4>
-          <p>Before any transboundary movement of hazardous waste: exporting state notifies importing state and transit states in writing; receives <strong>written consent</strong> from importing state; only proceeds after all consents received. Full information (composition, quantity, disposal method) must be provided before consent is sought.</p>
-          <h4>ESM — Environmentally Sound Management</h4>
-          <p>Defined in Basel Art. 2(8) — taking all practicable steps to ensure hazardous wastes are managed in a manner that protects human health and the environment throughout the waste lifecycle. Not just legal compliance — genuine environmental protection.</p>
-          <h4>Basel Ban Amendment (1995)</h4>
-          <p>Prohibits export of hazardous wastes for any purpose (including recycling) from OECD/EU member states to non-OECD states. <strong>Entered into force 5 December 2019.</strong></p>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>The Basel Convention controls transboundary movements of hazardous wastes and their disposal, while the Hong Kong Convention, in force from 2025, provides a ship-specific recycling regime requiring an Inventory of Hazardous Materials maintained throughout the ship's life.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>The Basel Convention 1989 regulates international movements of hazardous wastes using Prior Informed Consent and requires Environmentally Sound Management, historically applying to end-of-life ships sent for breaking as hazardous waste movements. The Hong Kong Convention 2009, in force from June 2025, creates a specific regime for safe and environmentally sound ship recycling; for HKC states it becomes the primary framework, mandating an Inventory of Hazardous Materials (IHM) — Part I continuously updated during operational life, Parts II and III completed at recycling.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">Basel Convention 1989</span><span class="reg-desc">In force 1992 — transboundary hazardous waste movement and disposal</span></div>
-          <div class="reg-item"><span class="reg-code">Basel Ban Amendment 1995</span><span class="reg-desc">Decision III/1 — in force 5 Dec 2019; export ban from OECD to non-OECD</span></div>
-          <div class="reg-item"><span class="reg-code">Hong Kong Convention 2009</span><span class="reg-desc">In force June 2025 — IHM mandatory; ship-recycling-specific Basel complement</span></div>
-          <div class="reg-item"><span class="reg-code">EU SRR</span><span class="reg-desc">EU Ship Recycling Regulation — parallel regime for EU-flagged vessels</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> HKC entered into force <strong>June 2025</strong> — this is current and examiners will test it. IHM Part I is a living document that the CE must maintain — every modification to the ship that introduces or removes a hazardous material (new paint, new insulation, new piping) must be recorded. If asked "does Basel apply to your ship?" — HKC now provides the primary regime for member states; Basel remains relevant where the recycling yard's state has not ratified HKC.</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>"Now that Hong Kong Convention is in force, does Basel no longer apply to ship recycling?" — For HKC member states, <strong>HKC is the primary regime</strong> for end-of-life ships, but Basel remains relevant where the exporting or importing state has not ratified HKC, and for other hazardous waste movements.</div>
-        <div class="numbers-box"><h4>Numbers/Concepts to Memorise</h4>Basel Ban Amendment in force since <strong>5 December 2019</strong> (OECD/EU → non-OECD export ban) · HKC entry into force = <strong>June 2025</strong> · IHM Part I = throughout operational life; Parts II &amp; III = at recycling.</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Scenario Anchor</strong>Ageing tanker sold for recycling in a South Asian yard — under HKC it must carry a verified IHM and go to an approved facility; Basel rules still apply if the receiving state isn't party to HKC.</div>
-        <div class="mental-map"><span class="root">Ship Recycling Regime</span>
- End-of-Life Ship
-  ├─ HKC 2025 (primary for member states): IHM I/II/III
-  └─ Basel Convention: PIC + ESM (where HKC not ratified)</div>
-        <div class="related-q">🔗 Related: <a href="#q22">Q22 MARPOL/UNCLOS</a> (dismantling pollution) · <a href="#q1">Q1 P&amp;I</a> (abandonment/crew at recycling) · <a href="#q30">Q30 MEPC GHG</a> (green scrapping)</div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q16, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q16 · v1.0</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 16 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1249,48 +1229,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>Full Form and Background</h4>
-          <p><strong>SUA = Convention for the Suppression of Unlawful Acts against the Safety of Maritime Navigation, 1988</strong> (in force 1992). Adopted after the <em>Achille Lauro</em> hijacking (1985). Criminalises maritime terrorism and ensures perpetrators are prosecuted or extradited (aut dedere aut judicare — extradite or prosecute).</p>
-          <h4>SUA 1988 — What It Criminalises (Art. 3)</h4>
-          <ul>
-            <li>Seizing or exercising control over a ship by force/threat</li>
-            <li>Acts of violence against persons on board likely to endanger safe navigation</li>
-            <li>Destroying a ship or placing a device/substance likely to endanger it</li>
-            <li>Destroying maritime navigational facilities or causing serious interference</li>
-            <li>Communicating false information thereby endangering safe navigation</li>
-          </ul>
-          <h4>2005 SUA Protocol — Key Amendments (In force 28 July 2010)</h4>
-          <ul>
-            <li><strong>WMD transport:</strong> Offence to use a ship to transport nuclear, chemical, or biological weapons — even without direct violence</li>
-            <li><strong>Ship as weapon:</strong> Offence to use a ship itself as a weapon or terrorist platform</li>
-            <li><strong>Boarding provisions (Art. 8bis) — The 4-Hour Rule:</strong> A state may request flag state permission to board a ship on the high seas suspected of a SUA offence. If the flag state receives the request and does not respond within <strong>4 hours</strong>, this may be interpreted as tacit authorisation (depending on bilateral declarations made at ratification). Flag state consent → requesting state may board, search, and if evidence found, arrest persons and detain vessel</li>
-            <li><strong>Extradite or prosecute:</strong> Strengthened — no safe haven for maritime terrorists</li>
-          </ul>
-          <h4>CE Relevance</h4>
-          <p>SUA creates criminal liability for crew who knowingly participate in SUA offences. If a foreign warship boards under Art. 8bis, CE must cooperate and provide access to machinery spaces, cargo records, and engineering systems.</p>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>The SUA Convention criminalises unlawful acts against the safety of maritime navigation, such as hijacking or attacks on ships, and obliges states to either prosecute or extradite offenders, with the 2005 Protocol adding offences like transporting WMDs and allowing boarding on the high seas under a 4-hour tacit-consent rule.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>SUA 1988, adopted after Achille Lauro, defines offences including seizure of ships by force, violence against persons on board, destruction or damage likely to endanger navigation, and serious interference with navigational facilities, and requires states to either prosecute or extradite suspects (aut dedere aut judicare). The 2005 Protocol extends SUA to the use of ships to transport WMDs or as weapons, and introduces boarding provisions where a state may request flag-state consent to board a suspected ship on the high seas; if no response is received within four hours, flag-state silence can, depending on declarations, be treated as tacit consent to board.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">SUA Convention 1988</span><span class="reg-desc">IMO SUA/CONF/15/Rev.1 — in force 1992; criminalises maritime terrorism</span></div>
-          <div class="reg-item"><span class="reg-code">SUA Protocol 2005</span><span class="reg-desc">MSC.82(70) — in force 28 July 2010; WMD, boarding provisions, 4-hour rule</span></div>
-          <div class="reg-item"><span class="reg-code">ISPS Code</span><span class="reg-desc">SOLAS Chapter XI-2 — preventive security measures; operational complement to SUA</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> SUA vs ISPS distinction: ISPS = preventive operational measures on ships and ports. SUA = criminal law convention defining offences and extradition obligations. The 4-hour boarding rule is the most examined element of the 2005 Protocol — flag state silence for 4 hours may equal tacit consent to boarding, depending on bilateral declarations. This directly affects the CE: if boarded, full cooperation is legally required.</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap — SUA vs ISPS</strong>"Does SUA tell you how to lock engine room doors and set security levels on board?" — <strong>No.</strong> ISPS Code is the operational security regime; SUA is a criminal law convention defining offences and extradition/prosecution obligations.</div>
-        <div class="numbers-box"><h4>Numbers/Concepts to Memorise</h4>SUA 1988 in force since <strong>1992</strong> · 2005 Protocol boarding window = <strong>4 hours</strong> of flag-state silence may equal consent, subject to declarations.</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Scenario Anchor</strong>Suspicious ship suspected of transporting prohibited materials — coastal state requests flag-state consent and boards under SUA Protocol 2005 Art. 8bis.</div>
-        <div class="mental-map"><span class="root">SUA → ISPS → FAL</span>
- SUA = legal basis to act (criminal law)
- ISPS = how ship secures &amp; manages during boarding
- FAL/MSW/PANS = data cross-checked during boarding</div>
-        <div class="related-q">🔗 Related: <a href="#q18">Q18 FAL/MSW</a> · ISPS Code (other QB) · <a href="#q19">Q19 UNCLOS</a> (high seas jurisdiction)</div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q17, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q17 · v1.0</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 17 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1305,49 +1253,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>Purpose</h4>
-          <p><strong>FAL = Convention on Facilitation of International Maritime Traffic, 1965</strong> (in force 1967). The only IMO convention focused on simplifying and standardising documentary requirements at ports — preventing unnecessary delays to ships, persons, and cargo.</p>
-          <h4>FAL Standardised Forms (9 Forms)</h4>
-          <ul>
-            <li>FAL Form 1 — General Declaration</li>
-            <li>FAL Form 2 — Cargo Declaration</li>
-            <li>FAL Form 3 — Ship's Stores Declaration (signed by CE)</li>
-            <li>FAL Form 4 — Crew's Effects Declaration</li>
-            <li>FAL Form 5 — Crew List</li>
-            <li>FAL Form 6 — Passenger List</li>
-            <li>FAL Form 7 — Dangerous Goods Manifest (CE responsible for ER DG items)</li>
-          </ul>
-          <h4>IMO Maritime Single Window — Mandatory from 1 January 2024</h4>
-          <p>FAL Amendment 2018 (Res. FAL.13(42)) — each member state must establish a <strong>single electronic window</strong> where all FAL information is submitted once and shared among all authorities (customs, immigration, port authority, health). As of <strong>1 January 2024</strong>, the IMO Maritime Single Window (MSW) is mandatory for all member state ports. Manual paper presentation of the 9 FAL forms is now obsolete.</p>
-          <h4>Effect on Maritime Security</h4>
-          <p>FAL facilitates; ISPS secures. The balance is maintained through advance notification requirements: <strong>96-hour advance arrival notification</strong> (SOLAS XI-2 / ISPS Code) with crew and cargo details feeds port state security assessments before the ship arrives.</p>
-          <p>India-specific: <strong>PANS (Pre-Arrival Notification of Security)</strong> — ships notify DGS port office <strong>96 hours before arrival</strong>, containing crew details, cargo, voyage history, security status.</p>
-          <h4>CE Relevance</h4>
-          <p>CE signs the <strong>Stores Declaration (FAL Form 3)</strong> and ensures the <strong>Dangerous Goods Manifest (FAL Form 7)</strong> accurately lists all DG items in the engine room — CO2 cylinders, AFFF, pyrotechnics, battery acid, paint.</p>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>The FAL Convention standardises documentary and electronic reporting for ships at ports, now requiring use of a Maritime Single Window from 1 January 2024, and includes forms like the General Declaration, Stores Declaration and Dangerous Goods Manifest that involve the Chief Engineer.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>The FAL Convention 1965 aims to facilitate international maritime traffic by standardising nine core forms — General Declaration, Cargo Declaration, Ship's Stores Declaration, Crew's Effects, Crew List, Passenger List, and Dangerous Goods Manifest among others. Amendments now require all ports of member states to use a Maritime Single Window by 1 January 2024 so that all FAL data is submitted once electronically and shared between customs, immigration, port and health authorities, replacing paper-based submission.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">FAL Convention 1965</span><span class="reg-desc">Facilitation of international maritime traffic — 9 standard forms</span></div>
-          <div class="reg-item"><span class="reg-code">FAL Amend. 2018 — FAL.13(42)</span><span class="reg-desc">IMO Maritime Single Window — mandatory from 1 January 2024</span></div>
-          <div class="reg-item"><span class="reg-code">SOLAS XI-2 / ISPS Code</span><span class="reg-desc">96-hour advance security notification — security layer to FAL facilitation</span></div>
-          <div class="reg-item"><span class="reg-code">DGS MS Notice — PANS</span><span class="reg-desc">India: Pre-Arrival Notification of Security — 96-hour submission to DGS</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> IMO MSW mandatory from <strong>1 January 2024</strong> — know this date. FAL creates the data framework; ISPS uses that data for security screening. CE responsibility: FAL Form 3 (Stores Declaration) and FAL Form 7 (DG Manifest for ER items). PANS: India requires 96-hour pre-arrival security notification — this is submitted by the master/agent but the CE's DG data feeds directly into it.</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap — Paper vs MSW</strong>"Can you rely purely on paper FAL forms now if the port is in an IMO member state?" — <strong>No.</strong> Since 1 January 2024, member states must operate a Maritime Single Window; data is submitted electronically, and paper is now backup, not the primary method.</div>
-        <div class="numbers-box"><h4>Numbers/Concepts to Memorise</h4>FAL MSW mandatory date = <strong>1 January 2024</strong> · Typical security notice = <strong>96-hour PANS</strong> pre-arrival notification for Indian ports · CE-relevant forms: <strong>Form 3</strong> (Stores) and <strong>Form 7</strong> (DG Manifest).</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Scenario Anchor</strong>A port state security inspection cross-checks the DG Manifest (FAL Form 7) with ER stores; inconsistencies trigger closer inspection and possible detention.</div>
-        <div class="mental-map"><span class="root">FAL — CE-Relevant Forms</span>
- Form 3 — Stores Declaration (CE signs)
- Form 7 — Dangerous Goods Manifest (CE's ER DG items)
-  ↓ feeds into MSW (mandatory 1 Jan 2024) + PANS (96h, India)</div>
-        <div class="related-q">🔗 Related: <a href="#q17">Q17 SUA</a> (security) · <a href="#q14">Q14 NOSDCP</a> (national plans vs reporting) · <a href="#q7">Q7 Admiralty</a> · <a href="#q27">Q27 Hague-Visby</a> (documents as evidence)</div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q18, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q18 · v1.0</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 18 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1365,50 +1280,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>UNCLOS — The Constitution of the Oceans</h4>
-          <p><strong>UNCLOS = United Nations Convention on the Law of the Sea, 1982</strong> (in force 16 November 1994). The primary international instrument defining the rights and duties of states in all maritime zones.</p>
-          <h4>Maritime Zones</h4>
-          <ul>
-            <li><strong>Internal Waters (Art. 8):</strong> Landward of baseline. Full sovereignty. No innocent passage. Examples: ports, harbours</li>
-            <li><strong>Territorial Sea (Art. 3):</strong> 0–<strong>12 nm</strong>. Full sovereignty. Foreign ships have right of <em>innocent passage</em></li>
-            <li><strong>Contiguous Zone (Art. 33):</strong> 12–<strong>24 nm</strong>. Coastal state may enforce customs, fiscal, immigration, sanitary laws only</li>
-            <li><strong>EEZ (Art. 55–75):</strong> Up to <strong>200 nm</strong>. Coastal state has <em>sovereign rights</em> (not full sovereignty) over resources, research, and environmental protection. Foreign ships: freedom of navigation and overflight</li>
-            <li><strong>Continental Shelf (Art. 76–85):</strong> To outer edge of continental margin or 200 nm (up to 350 nm with CLCS approval). Sovereign rights over seabed/subsoil resources. Does not affect navigation</li>
-            <li><strong>High Seas (Art. 86):</strong> Beyond EEZ. Freedom of navigation (<strong>Art. 87</strong>). <strong>Art. 90</strong> gives every State — coastal or land-locked — the right to sail ships flying its flag on the high seas. Flag state exclusive jurisdiction over its ships</li>
-          </ul>
-          <h4>Under Which Provision Does a Maersk Container Ship Sail?</h4>
-          <ul>
-            <li><strong>In port:</strong> Internal waters — port state and flag state jurisdiction</li>
-            <li><strong>0–12 nm:</strong> Territorial sea — <strong>innocent passage (Art. 17–32)</strong></li>
-            <li><strong>12–200 nm:</strong> EEZ — <strong>freedom of navigation (Art. 58)</strong> with coastal state MARPOL enforcement rights</li>
-            <li><strong>Beyond 200 nm:</strong> High seas — <strong>freedom of navigation (Art. 87)</strong> and <strong>right of navigation under flag (Art. 90)</strong>, flag state exclusive jurisdiction</li>
-            <li><strong>International Straits:</strong> Transit passage (Art. 37–44) — e.g. Malacca, Hormuz, Gibraltar; unrestricted, stronger than innocent passage</li>
-          </ul>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>A merchant ship sails under innocent passage in the territorial sea (0–12 nm), freedom of navigation in the EEZ (12–200 nm) subject to coastal-state MARPOL enforcement, and freedom of navigation under flag-state jurisdiction on the high seas beyond 200 nm.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>UNCLOS 1982 defines maritime zones from baseline outward: internal waters (full sovereignty, no innocent passage), territorial sea to 12 nm (sovereignty but foreign ships enjoy innocent passage), contiguous zone to 24 nm (limited customs/fiscal/immigration/sanitary enforcement), EEZ to 200 nm (coastal state sovereign rights over resources, foreign ships retain freedom of navigation, and Art. 220 lets the coastal state enforce MARPOL discharge standards), continental shelf (seabed resource rights, doesn't affect navigation), and high seas beyond 200 nm (freedom of navigation, exclusive flag-state jurisdiction). International straits like Malacca or Hormuz attract transit passage, a stronger right than innocent passage.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">UNCLOS 1982</span><span class="reg-desc">UN Treaty Series Vol. 1833 — maritime zones, rights, duties</span></div>
-          <div class="reg-item"><span class="reg-code">India — MZA 1976</span><span class="reg-desc">Territorial Waters, Continental Shelf, EEZ and Other Maritime Zones Act 1976</span></div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 220</span><span class="reg-desc">Coastal state enforcement of MARPOL discharge standards in EEZ</span></div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 90</span><span class="reg-desc">Right of navigation — every State's right to sail ships flying its flag on the high seas</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> Nair asks "under which provision does your ship sail?" — have a zone-by-zone answer ready. The most important CE-specific point: in the EEZ, coastal states can enforce MARPOL discharge standards against your ship under Art. 220. A wilful discharge in the EEZ is not just a MARPOL violation — it also makes the passage non-innocent and triggers Art. 220 enforcement. Know the difference between territorial sea (innocent passage) and EEZ (freedom of navigation with MARPOL enforcement).</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>"In the EEZ, does the coastal state have full sovereignty over your ship like in the territorial sea?" — <strong>No.</strong> In the EEZ the coastal state has sovereign rights only over resources, research and environmental protection (Art. 56), not full sovereignty; ships retain freedom of navigation, subject to MARPOL enforcement under Art. 220.</div>
-        <div class="numbers-box"><h4>Numbers to Memorise</h4>Territorial Sea = <strong>0–12 nm</strong> · Contiguous Zone = <strong>12–24 nm</strong> · EEZ = up to <strong>200 nm</strong> · Continental Shelf = up to <strong>200/350 nm</strong> (with CLCS) · UNCLOS in force = <strong>16 Nov 1994</strong>.</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Scenario Anchor</strong>An oil sheen detected from a vessel transiting a coastal state's EEZ — the coastal state may invoke Art. 220 to inspect and, if evidence is clear, institute proceedings for MARPOL violations even though the ship was exercising freedom of navigation.</div>
-        <div class="mental-map"><span class="root">Zones by Distance</span>
- 0–12nm   Territorial Sea (innocent passage)
- 12–24nm  Contiguous Zone (customs/fiscal/sanitary)
- ≤200nm   EEZ (sovereign rights + MARPOL Art.220)
- >200nm   High Seas (flag state jurisdiction)</div>
-        <div class="related-q">🔗 Related: <a href="#q20">Q20 Sovereignty vs Jurisdiction</a> · <a href="#q21">Q21 Flag State</a> · <a href="#q5">Q5 CLC</a> (TS/EEZ scope) · <a href="#q23">Q23 Port State Control</a></div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q19, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q19 · v1.1</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 19 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1423,39 +1304,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>Full Sovereignty</h4>
-          <p>Complete and exclusive authority of a state over a defined territory — the state can enact and enforce ALL its laws; no other state may exercise authority without consent. Applies to: land territory, internal waters, territorial sea (with innocent passage exception).</p>
-          <h4>Sovereign Rights</h4>
-          <p>A <strong>limited, functional form of authority</strong> over specific activities in a zone — not full sovereignty. The state may exercise authority ONLY for the purposes defined by UNCLOS; other states retain their navigation rights. Applies to EEZ (resource exploitation) and Continental Shelf (seabed resource exploitation).</p>
-          <h4>Jurisdiction</h4>
-          <p>The right to exercise specific legal authority — legislative, enforcement, or adjudicative — over persons, things, or events. Narrower than sovereignty; specific to defined subject matter. In EEZ: coastal state has jurisdiction over marine scientific research, environmental protection (MARPOL enforcement), and artificial islands — but NOT general criminal jurisdiction over foreign ships for non-environmental offences.</p>
-          <h4>Practical CE Example</h4>
-          <ul>
-            <li>In EEZ: coastal state can board your ship for a MARPOL discharge violation (Art. 220 — sovereign rights over environment) but <em>cannot</em> enforce its immigration law against your crew</li>
-            <li>On high seas: only flag state can board — unless piracy (universal jurisdiction), hot pursuit, SUA, or bilateral agreement</li>
-          </ul>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>Sovereignty is full, general authority over a territory; sovereign rights are a limited functional authority over specific activities like resources in the EEZ/shelf; jurisdiction is the narrower right to legislate, enforce or adjudicate over specific matters such as MARPOL enforcement.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Full sovereignty (land, internal waters, territorial sea) means a state's laws apply generally and other states need consent to act. Sovereign rights, applying to the EEZ and continental shelf, are limited to UNCLOS-defined purposes — mainly resource exploitation and environmental protection — while other states retain navigation rights. Jurisdiction is the specific legal competence to legislate, enforce, or adjudicate over defined subject matter; in the EEZ the coastal state has jurisdiction over marine scientific research, environmental protection (including MARPOL enforcement under Art. 220) and artificial islands, but not general criminal jurisdiction over a foreign ship for matters unrelated to those purposes.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 56</span><span class="reg-desc">EEZ sovereign rights — resource exploitation, environment</span></div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 77</span><span class="reg-desc">Continental Shelf sovereign rights — seabed and subsoil</span></div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 92</span><span class="reg-desc">High seas — flag state exclusive jurisdiction</span></div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 220</span><span class="reg-desc">Coastal state enforcement jurisdiction over MARPOL in EEZ</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> This conceptual distinction is a favourite Nair cross-question after Q19. The clean answer: "Sovereignty = all laws apply. Sovereign rights = only resource and environmental authority, not general police power. Jurisdiction = specific subject-matter authority." Can India board a Liberian-flagged Maersk vessel in India's EEZ? Yes — for MARPOL violation under Art. 220, India has enforcement jurisdiction. But not for a crew immigration issue — that requires flag state involvement.</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>"If the coastal state has 'sovereign rights' over the EEZ, can it stop and search any foreign ship for any reason?" — <strong>No.</strong> Sovereign rights in the EEZ are limited to UNCLOS-defined purposes (resources, environment, research); general stop-and-search outside those purposes is not authorised — freedom of navigation prevails otherwise.</div>
-        <div class="numbers-box"><h4>Concepts to Memorise</h4>Sovereignty → <strong>land, internal waters, TS</strong> · Sovereign Rights → <strong>EEZ + Continental Shelf</strong> (resources/environment only) · Jurisdiction → <strong>specific subject matter</strong> (e.g., Art. 220 MARPOL enforcement).</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Scenario Anchor</strong>Coastal state inspects a foreign ship in its EEZ for a suspected oil discharge (sovereign-rights/jurisdiction basis) but cannot simultaneously enforce its domestic immigration laws on the same vessel.</div>
-        <div class="mental-map"><span class="root">Authority Spectrum</span>
- Sovereignty (full) > Sovereign Rights (resources/env, EEZ/shelf) > Jurisdiction (specific subject matter)</div>
-        <div class="related-q">🔗 Related: <a href="#q19">Q19 UNCLOS Zones</a> · <a href="#q21">Q21 Innocent Passage</a> · <a href="#q23">Q23 Port State Control</a> · <a href="#q22">Q22 MARPOL</a></div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q20, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q20 · v1.0</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 20 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1475,51 +1333,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>Definition (UNCLOS Art. 17–32)</h4>
-          <p>Innocent Passage is the right of all ships to navigate <strong>continuously and expeditiously</strong> through the territorial sea of a coastal state without entering internal waters, without stopping except in distress — provided the passage is not prejudicial to the peace, good order, or security of the coastal state.</p>
-          <h4>Conditions</h4>
-          <ul>
-            <li><strong>Continuous and expeditious</strong> — no anchoring or loitering except in distress or to render assistance</li>
-            <li><strong>Not prejudicial</strong> to peace, good order, or security</li>
-            <li>Submarines must navigate <strong>on the surface and show their flag</strong></li>
-          </ul>
-          <h4>Non-Innocent Passage — Art. 19(2) Exhaustive List</h4>
-          <ul>
-            <li>Threat or use of force against coastal state sovereignty</li>
-            <li>Exercise or practice with weapons</li>
-            <li>Intelligence collection against coastal state</li>
-            <li>Launch/landing of aircraft or military devices</li>
-            <li>Loading/unloading cargo contrary to customs, immigration, sanitary laws</li>
-            <li><strong>Wilful and serious pollution</strong> — any deliberate discharge contrary to MARPOL or UNCLOS Part XII <strong>automatically strips the vessel of innocent passage status</strong> and converts the transit into a coastal state enforcement event under Art. 220</li>
-            <li>Fishing, research, interference with communications</li>
-            <li>Any activity not having a direct bearing on passage</li>
-          </ul>
-          <h4>CE Relevance</h4>
-          <p>CE must enforce zero-tolerance on discharges when transiting territorial sea. A wilful discharge is not just a MARPOL violation — it makes the vessel's passage non-innocent and triggers full coastal state enforcement authority.</p>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>Innocent passage is the right of all ships to transit a coastal state's territorial sea continuously and expeditiously without prejudicing its peace or security; Art. 19(2) lists activities — including wilful and serious pollution — that strip a ship of this status.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Under UNCLOS Art. 17-32, ships of all states enjoy innocent passage through the territorial sea provided transit is continuous and expeditious, with no stopping or anchoring except in distress, and submarines must navigate on the surface showing their flag. Art. 19(2) gives an exhaustive list of activities that make passage non-innocent — use or threat of force, weapons exercises, intelligence gathering, illegal loading/unloading, fishing, research, and critically, wilful and serious pollution contrary to MARPOL/UNCLOS Part XII. If passage becomes non-innocent, the coastal state gains enforcement rights it would not otherwise have, including under Art. 220 for pollution. Transit passage through international straits (Malacca, Hormuz) is a separate, stronger right under Art. 37-44.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 17–32</span><span class="reg-desc">Innocent passage in the territorial sea — conditions and restrictions</span></div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 19(2)</span><span class="reg-desc">Exhaustive list of activities making passage non-innocent</span></div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 37–44</span><span class="reg-desc">Transit passage — stronger right through international straits</span></div>
-          <div class="reg-item"><span class="reg-code">MARPOL</span><span class="reg-desc">Wilful discharge in territorial sea = non-innocent act under UNCLOS Art. 19(2)(h)</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> Nair's key question: "What makes a passage non-innocent?" State all items from Art. 19(2) but always emphasise <strong>wilful and serious pollution</strong> — the CE's direct responsibility. Transit passage through international straits (Malacca, Hormuz) is a stronger right than innocent passage: even submarines may submerge, and the coastal state has fewer restrictions. Know the difference between innocent passage (territorial sea) and transit passage (straits).</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>"Does an accidental, unavoidable discharge (e.g. due to genuine equipment failure with no negligence) make a passage non-innocent under Art. 19(2)?" — The article targets <strong>wilful and serious</strong> pollution; a genuinely accidental discharge despite due diligence is treated differently from a deliberate or negligent one — though it still triggers MARPOL reporting and may invite coastal-state scrutiny.</div>
-        <div class="numbers-box"><h4>Concepts to Memorise</h4>Innocent passage = TS only, <strong>continuous &amp; expeditious</strong>, Art.17-32 · Non-innocent triggers = Art.19(2), exhaustive list · Transit passage (straits) = <strong>stronger</strong>, Art.37-44, submarines may submerge.</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Scenario Anchor</strong>A ship deliberately bypasses its OWS and discharges oily bilge in another state's territorial sea — this is wilful/serious pollution under Art.19(2)(h), making the passage non-innocent and exposing the vessel to full coastal-state enforcement.</div>
-        <div class="mental-map"><span class="root">Passage Types</span>
- Innocent Passage (TS, Art.17-32)
-  └─ lost if Art.19(2) breached (esp. wilful pollution)
- Transit Passage (Straits, Art.37-44) — stronger, fewer restrictions</div>
-        <div class="related-q">🔗 Related: <a href="#q19">Q19 UNCLOS Zones</a> · <a href="#q20">Q20 Sovereignty vs Jurisdiction</a> · <a href="#q22">Q22 Flag/Port/Coastal State</a> · <a href="#q23">Q23 PSC</a></div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q21, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q21 · v1.0</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 21 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1534,60 +1357,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>Flag State — Primary Responsibility</h4>
-          <p>The state whose flag the ship flies. Primary responsibility under UNCLOS and IMO conventions.</p>
-          <ul>
-            <li>Ensure ships comply with all international conventions (SOLAS, MARPOL, STCW, MLC)</li>
-            <li>Exercise <strong>exclusive jurisdiction on the high seas</strong> (Art. 92)</li>
-            <li>Investigate casualties (Casualty Investigation Code)</li>
-            <li>Ensure crew qualifications, safe manning, statutory certificates</li>
-          </ul>
-          <h4>Port State — Enforcement Role</h4>
-          <ul>
-            <li>PSC inspection — verify compliance with international conventions</li>
-            <li>Can <strong>detain</strong> a ship posing serious hazard to safety or environment</li>
-            <li>Can investigate and prosecute MARPOL violations in the port or territorial sea (Art. 218)</li>
-            <li>No-more-favourable-treatment principle: foreign ships meet same standards as flag state ships</li>
-          </ul>
-          <h4>Coastal State — Zone-Specific Rights</h4>
-          <ul>
-            <li><strong>Territorial Sea:</strong> Full sovereignty; enforce all national laws; must allow innocent passage</li>
-            <li><strong>Contiguous Zone:</strong> Enforce customs, immigration, fiscal, sanitary laws</li>
-            <li><strong>EEZ:</strong> Sovereign rights over resources and environment; enforce MARPOL (Art. 220)</li>
-            <li><strong>Continental Shelf:</strong> Sovereign rights over seabed resources; no effect on navigation</li>
-          </ul>
-          <h4>Summary — Zone / Jurisdiction Matrix</h4>
-          <table class="comp-table">
-            <tr><th>Zone</th><th>Flag State</th><th>Port State</th><th>Coastal State</th></tr>
-            <tr><td>High Seas</td><td>Exclusive</td><td>None</td><td>None</td></tr>
-            <tr><td>EEZ</td><td>Concurrent</td><td>None</td><td>Sovereign rights (environment)</td></tr>
-            <tr><td>Territorial Sea</td><td>Concurrent</td><td>Concurrent</td><td>Full sovereignty</td></tr>
-            <tr><td>Port</td><td>Concurrent</td><td>Primary</td><td>Port = Coastal State</td></tr>
-          </table>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>The flag state has primary, exclusive responsibility for its ships on the high seas; the port state can inspect, detain, and prosecute foreign ships in port for convention violations; the coastal state's authority varies by zone, from full sovereignty in the territorial sea to limited environmental enforcement in the EEZ.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>The flag state must ensure its ships comply with SOLAS, MARPOL, STCW and MLC, investigates casualties, and exercises exclusive jurisdiction on the high seas (Art. 92, 94). The port state conducts PSC inspections, can detain ships posing a serious hazard, and can investigate and prosecute MARPOL violations under Art. 218, applying the no-more-favourable-treatment principle so foreign ships meet the same standards as domestic ones. The coastal state's powers depend on the zone: full sovereignty (with innocent passage) in the territorial sea, limited customs/immigration/sanitary enforcement in the contiguous zone, and sovereign rights over resources and environment — including MARPOL enforcement under Art. 220 — in the EEZ and continental shelf.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 92, 94</span><span class="reg-desc">Flag state exclusive jurisdiction on high seas; duties of flag state</span></div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 217–220</span><span class="reg-desc">Flag state, port state, coastal state enforcement of MARPOL</span></div>
-          <div class="reg-item"><span class="reg-code">IMO Res. A.1138(31)</span><span class="reg-desc">Revised Procedures for Port State Control</span></div>
-          <div class="reg-item"><span class="reg-code">Paris MOU / Indian Ocean MOU</span><span class="reg-desc">PSC coordination among port state authorities</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> The matrix question — Nair may draw three columns (flag/port/coastal state) and ask you to fill in the zones. Know it cold. The key CE point: "no-more-favourable treatment" means a foreign ship cannot be held to a lower standard than an Indian-flag ship in an Indian port. PSC can inspect, detain, and prosecute regardless of flag. India is a member of the Indian Ocean MOU for PSC coordination.</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>"On the high seas, can a port state of a different country board and prosecute your ship for a MARPOL discharge violation that occurred there?" — Generally <strong>no</strong> — on the high seas the <strong>flag state has exclusive jurisdiction</strong> (Art. 92); however, if the ship subsequently enters that state's port, Art. 218 allows the port state to investigate and, in some cases, institute proceedings for discharge violations committed beyond its own waters.</div>
-        <div class="numbers-box"><h4>Numbers/Concepts to Memorise</h4>Flag state = exclusive on <strong>high seas</strong> (Art.92) · Port state MARPOL enforcement = <strong>Art.218</strong> · Coastal state EEZ MARPOL enforcement = <strong>Art.220</strong> · India's PSC regime = <strong>Indian Ocean MOU</strong>.</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Scenario Anchor</strong>A ship with a falsified ORB arrives at an Indian port; PSC under Art.218/Indian Ocean MOU inspects, finds discrepancies, and detains the vessel — flag state is separately notified for investigation.</div>
-        <div class="mental-map"><span class="root">Three-State Roles</span>
- Flag State  → exclusive jurisdiction (high seas), conventions compliance
- Port State  → PSC inspection/detention (Art.218), no-more-favourable-treatment
- Coastal State → zone-based (TS sovereignty → EEZ Art.220)</div>
-        <div class="related-q">🔗 Related: <a href="#q19">Q19 UNCLOS Zones</a> · <a href="#q20">Q20 Sovereignty vs Jurisdiction</a> · <a href="#q23">Q23 Hot Pursuit</a> · <a href="#q17">Q17 SUA</a> (boarding)</div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q22, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q22 · v1.0</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 22 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1602,43 +1381,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>Definition (UNCLOS Art. 111)</h4>
-          <p>Hot pursuit is the right of a coastal state to pursue a foreign vessel on the high seas when that vessel has violated the laws of the coastal state in internal waters, territorial sea, contiguous zone, or EEZ — provided pursuit commenced while the vessel was still in those waters and has been <strong>continuous and uninterrupted</strong>.</p>
-          <h4>Conditions — All Must Be Met</h4>
-          <ol>
-            <li><strong>Good reason to believe</strong> the foreign ship violated coastal state laws</li>
-            <li><strong>Commenced in the relevant zone:</strong> From internal waters/territorial sea = any violation; From contiguous zone = only customs, fiscal, immigration, sanitary violations; From EEZ/continental shelf = only violations of coastal state rights in those zones</li>
-            <li><strong>Visual or auditory signal:</strong> Order to stop given by sight/sound/radio while the ship is still within the relevant zone</li>
-            <li><strong>Pursuit is hot (continuous):</strong> Once begun, must not be interrupted — loss of contact ends the right</li>
-            <li><strong>Pursuing vessel:</strong> Must be a warship, military aircraft, or authorised government vessel clearly marked as being on government service</li>
-            <li><strong>Ceases</strong> when the vessel enters the territorial sea of its own state or a third state</li>
-          </ol>
-          <h4>Consequences of Unlawful Hot Pursuit</h4>
-          <p>If conditions are not met and a ship is arrested, the arrested vessel must be compensated for any loss or damage. <em>M/V Saiga (No. 2) case — ITLOS 1999</em> is the leading ITLOS case on conditions for hot pursuit.</p>
-          <h4>Piracy — Distinguished from Hot Pursuit</h4>
-          <p>Hot pursuit = a coastal state right. Piracy = <strong>universal jurisdiction</strong> (Art. 105) — any state's warship may seize a pirate vessel on the high seas without hot pursuit conditions.</p>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>Hot pursuit under Art. 111 lets a coastal state chase a foreign ship onto the high seas for a violation in its waters, provided pursuit starts while the ship is still in the relevant zone, is continuous, and ceases on entering another state's territorial sea.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Hot pursuit requires good reason to believe a foreign ship violated coastal-state laws, with the type of violation matching the zone (any law in internal waters/TS, customs/fiscal/immigration/sanitary from the contiguous zone, resource/environmental rights from the EEZ/shelf). A stop signal must be given while the ship is still in the relevant zone, pursuit must be continuous and uninterrupted by an authorised government vessel, and it ceases once the pursued ship enters its own or a third state's territorial sea. If these conditions aren't met, the pursuing state must compensate the ship for loss or damage — as established in the M/V Saiga (No. 2) case. Piracy is different: Art. 105 gives any state universal jurisdiction to seize pirate vessels on the high seas without needing hot-pursuit conditions.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 111</span><span class="reg-desc">Hot pursuit — conditions, commencement, cessation, compensation</span></div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 105</span><span class="reg-desc">Universal jurisdiction for piracy on the high seas — distinct from hot pursuit</span></div>
-          <div class="reg-item"><span class="reg-code">M/V Saiga (No.2) 1999</span><span class="reg-desc">ITLOS — leading case on conditions for lawful hot pursuit</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> Hot pursuit is a coastal state right requiring <em>all six conditions simultaneously</em>. The critical CE point: if pursuit is interrupted — even briefly in a fogbank — the right of hot pursuit is extinguished. It cannot be "resumed." Piracy does not require hot pursuit conditions: any warship of any state can intercept a pirate vessel on the high seas under Art. 105 universal jurisdiction. Nair may ask "can India pursue a foreign ship into international waters?" — only if all Art. 111 conditions are met.</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>"If a coastal state loses radar/visual contact with the pursued ship for a short time but regains it later, can hot pursuit continue?" — <strong>No.</strong> Once the pursuit is interrupted, the right of hot pursuit is extinguished and cannot be resumed; a fresh basis would be needed to act.</div>
-        <div class="numbers-box"><h4>Concepts to Memorise</h4>UNCLOS <strong>Art.111</strong> = hot pursuit (6 conditions) · <strong>Art.105</strong> = piracy, universal jurisdiction (no hot-pursuit conditions needed) · Leading case = <strong>M/V Saiga (No.2), ITLOS 1999</strong>.</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Casualty Anchor</strong><strong>M/V Saiga (No.2)</strong> — ITLOS found Guinea's hot pursuit and use of force unlawful, illustrating how strictly the Art.111 conditions are interpreted.</div>
-        <div class="mental-map"><span class="root">Hot Pursuit — 6 Conditions</span>
- 1.Good reason 2.Started in correct zone 3.Stop signal given in-zone
- 4.Continuous (no break) 5.By authorised govt vessel 6.Ceases at TS of own/3rd state</div>
-        <div class="related-q">🔗 Related: <a href="#q19">Q19 UNCLOS Zones</a> · <a href="#q22">Q22 Flag/Port/Coastal</a> · <a href="#q17">Q17 SUA</a> (piracy/boarding) · <a href="#q20">Q20 Jurisdiction</a></div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q23, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q23 · v1.0</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 23 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1656,60 +1408,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>Code and Purpose</h4>
-          <p>The <strong>Casualty Investigation Code</strong> (Code of the International Standards and Recommended Practices for a Safety Investigation into a Marine Casualty or Marine Incident) was adopted by <strong>IMO Resolution MSC.255(84) (2008)</strong>. Purpose: identify contributing factors — including the human element — to prevent recurrence. <strong>NOT</strong> to determine fault or liability.</p>
-          <h4>Definitions</h4>
-          <ul>
-            <li><strong>Very Serious Marine Casualty:</strong> Loss of ship, loss of life, or severe damage to environment</li>
-            <li><strong>Serious Marine Casualty:</strong> Fire, explosion, collision, stranding, flooding, structural failure resulting in danger to life, significant pollution, or ship rendered unseaworthy</li>
-            <li><strong>Marine Incident:</strong> Near-miss event that could have endangered ship, persons, or environment</li>
-          </ul>
-          <h4>Reporting Chain</h4>
-          <ol>
-            <li><strong>Immediate notification:</strong> Master reports to flag state and coastal/port state via GMDSS or fastest available means</li>
-            <li><strong>Preliminary report:</strong> Flag state submits to IMO GISIS (Global Integrated Shipping Information System) database</li>
-            <li><strong>Investigation:</strong> Flag state conducts safety investigation; substantially interested states may participate</li>
-            <li><strong>Final report:</strong> Published on IMO GISIS — lessons learned publicly available</li>
-          </ol>
-          <h4>The Critical Firewall</h4>
-          <p>The safety investigation under MSC.255(84) is <strong>strictly separated</strong> from any criminal or civil liability investigation. <strong>SAFETY INVESTIGATION REPORTS AND WITNESS STATEMENTS ARE STRICTLY NON-ADMISSIBLE FOR CIVIL/CRIMINAL LIABILITY PROCEEDINGS</strong> — the Code recommends flag states enact legal protections for this. Safety investigators want root causes, not scapegoats. CE must always clarify which type of investigation is taking place before making any statement.</p>
-          <h4>Human Element Factors to Consider</h4>
-          <ul>
-            <li>Fatigue and rest hours violations (STCW Ch VIII, MLC)</li>
-            <li>Communication failure (language barriers, cultural)</li>
-            <li>Manning deficiencies</li>
-            <li>Training deficiencies (STCW, familiarisation)</li>
-            <li>Procedural non-compliance (SMS/ISM)</li>
-            <li>Situational awareness breakdown</li>
-            <li>Leadership failure (bridge/engine room resource management)</li>
-            <li>Stress, personal factors, drug and alcohol</li>
-            <li>Organisational factors: company culture, management pressure on crew</li>
-          </ul>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>The Casualty Investigation Code (MSC.255(84)) requires flag states to conduct safety investigations into marine casualties to find root causes including human factors, strictly separate from any liability investigation, with reports submitted to IMO GISIS.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Adopted as MSC.255(84) in 2008, the Code defines very serious casualties (loss of ship/life/severe environmental damage), serious casualties (fire, explosion, collision, stranding, flooding, structural failure with danger, significant pollution, or unseaworthiness), and marine incidents (near-misses). The master reports immediately to flag and port/coastal states; the flag state submits preliminary and final reports to IMO GISIS, with substantially interested states able to participate. Critically, the safety investigation is firewalled from criminal/civil proceedings — statements made to safety investigators are intended to be non-admissible as evidence of liability, so investigators focus on root causes including human-element factors like fatigue, communication, training, SMS compliance, leadership and organisational pressure, not blame.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">MSC.255(84)</span><span class="reg-desc">Casualty Investigation Code — 2008; safety investigation framework</span></div>
-          <div class="reg-item"><span class="reg-code">SOLAS Reg. XI-1/6</span><span class="reg-desc">Accident investigation requirements</span></div>
-          <div class="reg-item"><span class="reg-code">UNCLOS Art. 94</span><span class="reg-desc">Flag state duty to investigate casualties</span></div>
-          <div class="reg-item"><span class="reg-code">IMO GISIS</span><span class="reg-desc">Global Integrated Shipping Information System — casualty report database</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> The firewall is the Class 1 differentiator — safety investigation statements are <strong>not admissible</strong> in criminal proceedings (when flag state has enacted protections). CE should cooperate fully with safety investigators; be cautious with criminal investigators. Always clarify which investigation is occurring before making written statements. For human element, give a broad list — Nair expects: fatigue, communication, training, SMS compliance, leadership, organisational pressure.</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>"If the CE gives a frank statement to the safety investigator admitting a PMS oversight, can that statement be used against him in a criminal prosecution?" — The Code's intent and recommended flag-state protections are that safety-investigation statements should be <strong>non-admissible for liability purposes</strong>; however, the CE should still confirm which investigation (safety vs criminal) is underway before speaking, as protections depend on the flag state having enacted them.</div>
-        <div class="numbers-box"><h4>Concepts to Memorise</h4>Code reference = <strong>MSC.255(84), 2008</strong> · Three categories: <strong>Very Serious / Serious / Marine Incident</strong> · Database = <strong>IMO GISIS</strong>.</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Casualty Anchor</strong>Major ER fire investigated under MSC.255(84) — safety investigators examine PMS records and human factors separately from any parallel flag-state criminal inquiry.</div>
-        <div class="mental-map"><span class="root">Casualty Classes</span>
- Very Serious — loss of ship/life/severe env. damage
- Serious — fire/explosion/collision/stranding/flooding/structural, danger or pollution
- Marine Incident — near-miss
-  ↓ Safety Investigation (firewalled) → IMO GISIS</div>
-        <div class="related-q">🔗 Related: <a href="#q25">Q25 Wreck/Nairobi</a> · <a href="#q26">Q26 MLC</a> · <a href="#q9">Q9 General Average</a> (casualty link) · <a href="#q22">Q22 Flag State duties</a></div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q24, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q24 · v1.0</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 24 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1724,50 +1432,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>Primary References</h4>
-          <ul>
-            <li><strong>IMO Resolution A.987(24)</strong> — Guidelines on Fair Treatment of Seafarers in the Event of a Maritime Accident (2005): Adopted jointly by IMO and ILO. Establishes principles that seafarers must not be subjected to unfair treatment or undue hardship following a maritime accident. Recent sessions of the <strong>IMO Legal Committee (LEG 110 / LEG 111 outputs)</strong> have updated these guidelines — extending protections to cover automated data, VDR recordings, and digital tracking records that may be used against seafarers, and reinforcing the obligation that no seafarer be held without immediate consular access and legal representation</li>
-            <li><strong>MLC 2006 — Regulation 5.2.7 and Standard A5.2.7:</strong> Flag state and port state responsibilities — seafarers must be treated fairly and provided with consular access, legal representation, and basic welfare if detained following a maritime accident</li>
-            <li><strong>SOLAS Ch XI-1/Reg. 6:</strong> Casualty investigation — supports fair treatment by separating safety investigation from criminal proceedings</li>
-            <li><strong>Vienna Convention on Consular Relations 1963:</strong> Right of detained foreign seafarer to communicate with and receive assistance from their home country consul</li>
-          </ul>
-          <h4>Key Principles</h4>
-          <ul>
-            <li>Seafarers must not be detained longer than necessary</li>
-            <li>Seafarers must have access to consular officials of their flag/nationality state</li>
-            <li>Seafarers must be informed of charges in a language they understand</li>
-            <li>Seafarers must have access to legal representation</li>
-            <li>Seafarers must not be used as scapegoats for systemic failures</li>
-          </ul>
-          <h4>Background — Hebei Spirit Case (2007)</h4>
-          <p>Korean court convicted the Master after a barge collision caused an oil spill — case highlighted criminalisation of seafarers for accidents; a direct driver for strengthening fair treatment guidelines at IMO.</p>
-          <h4>Oral Delivery</h4>
-          <p><em>"Fair treatment is anchored under IMO Resolution A.987(24) and explicitly structured into Port State responsibilities under MLC 2006 Regulation 5.2.7. IMO Legal Committee sessions have continuously updated these guidelines to ensure seafarers are not criminalised or held without consular access following a maritime casualty."</em></p>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>Fair treatment of seafarers after a maritime accident is anchored in IMO/ILO Resolution A.987(24) and MLC 2006 Regulation 5.2.7, guaranteeing consular access, legal representation, and protection from prolonged detention or scapegoating.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>IMO Resolution A.987(24) (2005), adopted jointly with the ILO, sets out guidelines that seafarers must not be subjected to unfair treatment following a maritime accident, including timely consular access, information on charges in an understandable language, legal representation, and no unnecessary detention. MLC 2006 Regulation 5.2.7 and Standard A5.2.7 build this into flag and port state responsibilities for detained seafarers. The Vienna Convention on Consular Relations 1963 underpins consular access rights, and SOLAS XI-1 Reg.6 supports fair treatment by separating safety investigation from criminal process. The Hebei Spirit case, where the Master was convicted after a barge collision, was a key driver for strengthening these protections, and recent IMO Legal Committee sessions have extended guidance to digital/VDR evidence.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">IMO Res. A.987(24)</span><span class="reg-desc">Guidelines on Fair Treatment of Seafarers — 2005; joint IMO/ILO adoption</span></div>
-          <div class="reg-item"><span class="reg-code">MLC 2006 — Reg.5.2.7</span><span class="reg-desc">Standard A5.2.7 — port state responsibilities for detained seafarers</span></div>
-          <div class="reg-item"><span class="reg-code">IMO LEG Committee</span><span class="reg-desc">LEG 110/111 outputs — updated guidelines on VDR data, digital evidence, consular access</span></div>
-          <div class="reg-item"><span class="reg-code">Vienna Convention 1963</span><span class="reg-desc">Consular relations — right of foreign seafarers to consular access when detained</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> Nair expects you to name Resolution A.987(24) — not a vague reference to "MLC" alone. The examiner tests whether you know the joint IMO/ILO origin and the MLC Regulation 5.2.7 port state responsibility angle. The Hebei Spirit case is the background context. Recent LEG Committee updates on VDR and automated data access show you are tracking modern regulatory developments — a clear Class 1 differentiator.</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>"Is A.987(24) a binding IMO Convention?" — <strong>No.</strong> It is an IMO Assembly Resolution (Guidelines), not a binding convention; its principles are given binding force through instruments like MLC 2006 (Reg. 5.2.7) and national implementation.</div>
-        <div class="numbers-box"><h4>Numbers/Concepts to Memorise</h4>Resolution = <strong>A.987(24), 2005</strong> (IMO/ILO joint) · MLC reference = <strong>Reg.5.2.7 / Standard A5.2.7</strong> · Background case = <strong>Hebei Spirit (2007)</strong>.</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Casualty Anchor</strong><strong>Hebei Spirit (2007)</strong> — Master convicted by Korean court after a barge collision and resulting oil spill, becoming the central case driving fair-treatment guideline reforms.</div>
-        <div class="mental-map"><span class="root">Fair Treatment Framework</span>
- A.987(24) (IMO/ILO guidelines)
-  └─ MLC Reg.5.2.7 (binding port/flag state duty)
-       └─ Vienna Convention 1963 (consular access)
-       └─ SOLAS XI-1/6 (safety vs criminal firewall)</div>
-        <div class="related-q">🔗 Related: <a href="#q24">Q24 Casualty Investigation</a> (firewall) · <a href="#q26">Q26 MLC</a> · <a href="#q7">Q7 Admiralty</a> (detention)</div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q25, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q25 · v1.0</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 25 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1782,43 +1456,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>Convention</h4>
-          <p>The <strong>Nairobi International Convention on the Removal of Wrecks, 2007</strong> (in force <strong>14 April 2015</strong>) places responsibility on the registered shipowner to locate, mark, and remove wrecks that pose a hazard to navigation or the marine environment in the Convention Area.</p>
-          <h4>Scope — Convention Area</h4>
-          <p>The Convention Area = the <strong>EEZ of contracting states</strong> (up to 200 nm). States may opt in to extend to their territorial sea. Does NOT apply to warships or government vessels on non-commercial service.</p>
-          <h4>Strict Liability</h4>
-          <p>The registered shipowner is <strong>strictly liable</strong> for the costs of: locating the wreck, marking the wreck with navigational aids, and removing the wreck.</p>
-          <h4>Compulsory Insurance</h4>
-          <p>Ships over <strong>300 GT</strong> must carry compulsory insurance/financial security for wreck removal liability. A <strong>Certificate of Insurance</strong> issued by flag state/RO — must be carried on board at all times. <strong>Direct action against the insurer (P&amp;I club) is permitted</strong>.</p>
-          <h4>If Owner Fails to Remove</h4>
-          <p>The affected state may carry out removal at the owner's cost and recover those costs from the owner or their insurer directly.</p>
-          <h4>India</h4>
-          <p>India has acceded to the Nairobi Wreck Removal Convention. Domestically, the provisions are enacted through <strong>Part XII, Chapter I (Wreck), Sections 233–246 of the Merchant Shipping Act, 2025</strong> (in force 15 March 2026, replacing the 1958 Act), which empower Indian port authorities and the ICG to direct owners to locate, mark, and remove wrecks within the Indian EEZ. Any vessel over <strong>300 GT</strong> entering an Indian port or transit zone must carry a valid <strong>Wreck Removal Convention Certificate</strong> backed by an IG or DGS-approved P&amp;I blue card.</p>
-          <h4>High Seas — Outside Convention</h4>
-          <p>On the high seas (beyond EEZ), the Nairobi Convention does not apply. Responsibility falls on the flag state under customary international law — enforcement is weak; COLREGS and SOLAS distress provisions apply but do not create a removal regime.</p>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>Under the Nairobi Wreck Removal Convention 2007, the registered shipowner is strictly liable for locating, marking and removing wrecks in the convention area (up to the EEZ), backed by compulsory insurance for ships over 300 GT with direct action against the P&amp;I club.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>The Nairobi Convention 2007, in force since 14 April 2015, makes the registered shipowner strictly liable for costs of locating, marking and removing wrecks that pose a hazard to navigation or the environment within the Convention Area — generally the EEZ of contracting states, extendable to the territorial sea. Ships over 300 GT must carry compulsory insurance evidenced by a certificate, and claimants have direct action against the insurer; if the owner fails to act, the affected state can remove the wreck and recover costs from the owner or insurer. India has acceded and implements this through the Merchant Shipping Act, requiring a valid Wreck Removal Convention Certificate for vessels over 300 GT. Outside the Convention Area — on the high seas — there is no equivalent removal regime; responsibility rests loosely with the flag state under customary international law, with COLREGS Rule 28 governing wreck marking.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">Nairobi Convention 2007</span><span class="reg-desc">IMO LEG/CONF.16/19 — in force 14 April 2015; wreck removal liability and compulsory insurance</span></div>
-          <div class="reg-item"><span class="reg-code">LLMC 1996 Protocol</span><span class="reg-desc">Limitation interaction — India's LLMC reservation means wreck removal may fall outside LLMC limits in Indian jurisdiction</span></div>
-          <div class="reg-item"><span class="reg-code">Merchant Shipping Act, 2025, Part XII Ch I (Sec 233–246)</span><span class="reg-desc">In force 15 March 2026; domestic implementation of Nairobi Convention; ICG and port authority powers (replaces the 1958 Act equivalent).</span></div>
-          <div class="reg-item"><span class="reg-code">COLREGS 1972</span><span class="reg-desc">Rule 28 — marking of wrecks; SOLAS distress provisions</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> If pressed on India's enforcement mechanism: <em>"India is a contracting state to the Nairobi Wreck Convention. Domestically, execution powers are governed under Part XII, Chapter I of the Merchant Shipping Act, 2025, which mandates that any vessel over 300 GT entering an Indian port must carry a valid Wreck Removal Convention Certificate backed by an IG or DGMA-approved P&amp;I blue card."</em> Know the 300 GT threshold and that direct action against the P&amp;I club is permitted — the insurer can be sued directly without going through the owner.</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>"Your ship sinks on the high seas, well beyond any state's EEZ. Does the Nairobi Convention require you to remove it?" — <strong>No.</strong> The Nairobi Convention's "Convention Area" is generally the EEZ of contracting states; on the high seas there is no equivalent removal regime, though COLREGS Rule 28 and general flag-state obligations still apply.</div>
-        <div class="numbers-box"><h4>Numbers to Memorise</h4>Nairobi Convention in force = <strong>14 April 2015</strong> · Compulsory insurance threshold = <strong>&gt;300 GT</strong> · Convention Area = generally <strong>EEZ (≤200 nm)</strong>, extendable to TS.</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Scenario Anchor</strong><strong>Costa Concordia</strong> wreck removal — a large-scale operation illustrating shipowner strict liability and P&amp;I-funded costs consistent with Nairobi Convention principles.</div>
-        <div class="mental-map"><span class="root">Wreck Responsibility</span>
- Within EEZ (Convention Area) → Nairobi Conv.: owner strict liability + insurance (&gt;300GT) + direct action
- Beyond EEZ (High Seas) → no removal regime; flag state / COLREGS Rule 28 marking only</div>
-        <div class="related-q">🔗 Related: <a href="#q3">Q3 LLMC</a> (India's wreck reservation) · <a href="#q1">Q1 P&amp;I</a> (direct action/insurance) · <a href="#q11">Q11 Salvage/SCOPIC</a> · <a href="#q19">Q19 UNCLOS Zones</a></div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q26, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q26 · v1.1 — corrected 15 Jul 2026: Nairobi Wreck Removal domestic implementation updated to MS Act 2025, Part XII Ch I (Sec 233-246)</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 26 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1836,53 +1483,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>Definition</h4>
-          <p>The <strong>Hague-Visby Rules</strong> = Hague Rules 1924 + Visby Protocol 1968 + SDR Protocol 1979. The dominant international framework for carrier liability under bills of lading. Allocates responsibilities between carrier (shipowner) and cargo owner for loss or damage to cargo carried under bills of lading in international trade.</p>
-          <h4>Carrier Obligations (Art. III)</h4>
-          <p>Before and at the beginning of voyage, carrier must exercise <strong>due diligence</strong> to:</p>
-          <ol>
-            <li>Make the ship <strong>seaworthy</strong></li>
-            <li>Properly man, equip, and supply the ship</li>
-            <li>Make holds, refrigerating, and cool chambers fit and safe for reception, carriage, and preservation of goods</li>
-          </ol>
-          <p>During voyage: properly and carefully load, handle, stow, carry, keep, care for, and discharge goods.</p>
-          <h4>Nautical Fault Defence (Art. IV Rule 2(a)) — Critical CE Point</h4>
-          <p>The carrier is NOT liable for cargo damage resulting from errors in the navigation or <strong>management of the vessel</strong>. "Management of the vessel" includes engine room acts directed at the ship itself (ballasting decisions, trim adjustments, operating main engine for ship's safety).</p>
-          <p><strong>However:</strong> this defence does NOT cover failure to exercise due diligence in making the vessel seaworthy <em>before the voyage begins</em>. If a pre-voyage machinery defect causes cargo damage, the carrier cannot invoke the nautical fault defence — the seaworthiness duty (Art. III Rule 1) must be discharged first.</p>
-          <h4>Fire Defence (Art. IV Rule 2(b))</h4>
-          <p>Carrier not liable for fire damage to cargo unless caused by the actual fault or privity of the carrier. Note the cross-link: a CE deliberately flooding a hold to fight an engine room fire may trigger both the fire defence (Art. IV 2(b)) and General Average (see Q9).</p>
-          <h4>Limitation of Liability</h4>
-          <p><strong>667 SDR per package</strong> or <strong>2 SDR per kilogram</strong> — whichever is higher. (SDR Protocol 1979 values)</p>
-          <h4>Indian Application</h4>
-          <p>India ratified the Hague Rules 1924 through the <strong>Carriage of Goods by Sea Act 1925</strong>. The Visby Protocol has not been formally ratified by India — in practice, most charterparties and bills of lading issued in India incorporate Hague-Visby by reference.</p>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>The Hague-Visby Rules govern carrier liability for cargo under bills of lading, requiring due diligence to make the ship seaworthy before the voyage, granting a nautical fault and fire defence during the voyage, and limiting liability to 667 SDR per package or 2 SDR per kg, whichever is higher.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>The Hague-Visby Rules combine the Hague Rules 1924, the 1968 Visby Protocol and the 1979 SDR Protocol to allocate cargo-loss liability between carrier and shipper. Under Art. III, the carrier must exercise due diligence before and at the start of the voyage to make the ship seaworthy, properly man and equip it, and make cargo spaces fit, then properly care for cargo during the voyage. Art. IV gives the carrier defences: the nautical fault defence (Rule 2(a)) for errors in navigation or management of the ship, and the fire defence (Rule 2(b)) unless the fire results from the carrier's actual fault. Neither defence helps if the underlying cause was a failure of pre-voyage seaworthiness (Art. III Rule 1) — that duty must be discharged first. Liability is capped at 667 SDR per package or 2 SDR per kg, whichever is higher. India applies the Hague Rules via COGSA 1925, with Hague-Visby commonly incorporated by contract.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">Hague Rules 1924</span><span class="reg-desc">International Convention for Unification of Certain Rules Relating to Bills of Lading</span></div>
-          <div class="reg-item"><span class="reg-code">Visby Protocol 1968</span><span class="reg-desc">Amendment raising limits and clarifying scope</span></div>
-          <div class="reg-item"><span class="reg-code">SDR Protocol 1979</span><span class="reg-desc">667 SDR/package or 2 SDR/kg — current limitation amounts</span></div>
-          <div class="reg-item"><span class="reg-code">COGSA 1925 (India)</span><span class="reg-desc">Carriage of Goods by Sea Act — Indian domestic implementation of Hague Rules</span></div>
-          <div class="reg-item"><span class="reg-code">Hamburg Rules 1978</span><span class="reg-desc">Shipper-friendly alternative — not adopted by major maritime nations; comparison reference</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Simon/Nair):</strong> The nautical fault defence is the most CE-relevant clause — and the most misunderstood. "Management of the vessel" = engine room acts for the ship's benefit (ballasting, power adjustments). This is a defence. But — if the cargo damage resulted from the CE's failure to make the ship seaworthy before the voyage (e.g. known machinery defect not repaired), the defence fails. The seaworthiness duty (Art. III Rule 1) must be discharged first. Cross-link with Q9: the same fire can trigger GA contribution AND the Art. IV fire defence simultaneously.</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap — Sequencing</strong>"A known main engine defect causes the CE to make an emergency ballasting decision mid-voyage that damages cargo. Can the carrier rely on the nautical fault defence (Art. IV 2(a))?" — <strong>No</strong>, if the known pre-existing defect means the ship was unseaworthy at the start of the voyage and due diligence (Art. III Rule 1) was not exercised, that failure is examined first — the carrier cannot reach the nautical fault defence until seaworthiness is established.
-        <br><br><strong class="trap-label" style="margin-top:6px;">⚠ Trap — India Ratification</strong>"Has India ratified the Visby Protocol?" — <strong>No.</strong> India applies the original Hague Rules via COGSA 1925; Hague-Visby terms are typically incorporated into Indian bills of lading by contractual reference, not by direct statutory ratification of the Protocol.</div>
-        <div class="numbers-box"><h4>Numbers to Memorise</h4>Limitation = <strong>667 SDR/package or 2 SDR/kg</strong>, whichever higher (SDR Protocol 1979) · India's statute = <strong>COGSA 1925</strong> (Hague Rules basis).</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Scenario Anchor</strong>Engine room fire leads to flooding a hold to save the ship — potentially triggers both the Art.IV(2)(b) fire defence for cargo damage and a General Average claim (Q9) for the same event.</div>
-        <div class="mental-map"><span class="root">Hague-Visby Sequence</span>
- 1. Seaworthiness (Art.III r.1, due diligence) — MUST be satisfied first
- 2. THEN defences apply:
-     ├─ Nautical Fault (Art.IV r.2a)
-     └─ Fire (Art.IV r.2b)
- 3. Limitation: 667 SDR/pkg or 2 SDR/kg</div>
-        <div class="related-q">🔗 Related: <a href="#q9">Q9 General Average</a> (fire cross-link) · <a href="#q12">Q12 ITC Hulls</a> (due diligence parallel) · <a href="#q28">Q28 Subrogation</a> · <a href="#q3">Q3 LLMC</a></div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q27, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q27 · v1.0</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 27 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1897,53 +1507,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>Definition</h4>
-          <p>Subrogation is a principle of insurance law under which the insurer, having paid a claim to the insured, <strong>steps into the shoes of the insured</strong> and acquires the insured's rights to recover the loss from the party responsible for causing it. Legal basis: <strong>Marine Insurance Act 1906 (UK) Section 79</strong>.</p>
-          <h4>How It Works</h4>
-          <ol>
-            <li>Insured (shipowner) suffers a loss (e.g. cargo claim due to engine room flooding)</li>
-            <li>P&amp;I club pays the cargo claim on behalf of the shipowner</li>
-            <li>P&amp;I club is now subrogated to the shipowner's right to sue the third party responsible (e.g. defective part manufacturer, repair yard that caused the flooding)</li>
-            <li>P&amp;I club sues the third party in the shipowner's name to recover what it paid</li>
-          </ol>
-          <h4>Practical Examples in Shipping</h4>
-          <ul>
-            <li>P&amp;I pays a collision damage claim → subrogated to sue the other vessel's owner for the collision</li>
-            <li>H&amp;M insurer pays for engine damage → subrogated to claim against the repair yard that caused it</li>
-            <li>Cargo insurer pays cargo owner for damaged cargo → subrogated to claim against the carrier under Hague-Visby</li>
-          </ul>
-          <h4>Limitations</h4>
-          <ul>
-            <li>Insurer cannot recover more than it paid</li>
-            <li>Insurer stands in the same legal position as the insured — subject to the same defences</li>
-            <li>Insured must not act to prejudice the insurer's subrogation rights (settling directly with the wrongdoer after being indemnified = voids the claim)</li>
-          </ul>
-          <h4>CE Relevance</h4>
-          <p>If the CE's negligence causes damage, the H&amp;M or P&amp;I insurer may — after paying the claim — seek recovery against the CE personally via subrogation. In practice, rare for crew under normal operation; documented gross negligence or wilful misconduct creates genuine exposure.</p>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>Subrogation under Section 79 of the Marine Insurance Act 1906 lets an insurer, after paying a claim, step into the insured's shoes and pursue the third party responsible for the loss, recovering up to but not exceeding what it paid.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Subrogation is the principle that once an insurer indemnifies the insured for a loss, it acquires the insured's rights to recover that loss from any third party at fault, suing in the insured's name under MIA 1906 Section 79. Common shipping examples: a P&amp;I club pays a cargo claim caused by a defective repair and then sues the repair yard; an H&amp;M insurer pays for engine damage and pursues the manufacturer of a faulty part; a cargo insurer indemnifies the cargo owner and then sues the carrier under Hague-Visby. The insurer cannot recover more than it paid, stands subject to the same defences as the insured would face, and the insured must not prejudice these rights — e.g. by settling directly with the wrongdoer after being paid, which can void the claim.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">MIA 1906 — S.79</span><span class="reg-desc">Marine Insurance Act 1906 (UK) — subrogation legal basis</span></div>
-          <div class="reg-item"><span class="reg-code">ITC (Hulls) — Claims Clause</span><span class="reg-desc">Subrogation provisions in hull policies</span></div>
-          <div class="reg-item"><span class="reg-code">P&amp;I Club Rules</span><span class="reg-desc">Subrogation provisions vary by club — clubs generally waive against members for ordinary acts</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> Subrogation vs assignment: assignment = voluntary transfer of rights before payment (by agreement); subrogation = automatic legal right arising after the insurer pays the claim. The CE must not allow the company to settle directly with a third-party wrongdoer after the P&amp;I club has paid — this prejudices the club's subrogation right and may void future coverage. Document all incidents meticulously: your records are the evidence base for any subrogation recovery action.</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap — Subrogation vs Assignment</strong>"Is subrogation the same as assigning your rights to the insurer?" — <strong>No.</strong> Assignment is a voluntary contractual transfer of rights (often agreed in advance); subrogation is an automatic legal right that arises by operation of law (MIA 1906 S.79) once the insurer indemnifies the insured — no separate transfer document is required.</div>
-        <div class="numbers-box"><h4>Concepts to Memorise</h4>Legal basis = <strong>MIA 1906, Section 79</strong> · Recovery cap = <strong>amount actually paid</strong> by insurer · Insured's duty = <strong>do not prejudice</strong> subrogation rights (no direct settlement post-payment).</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Scenario Anchor</strong>A faulty spare part from a manufacturer causes engine damage; H&amp;M insurer pays the owner, then sues the manufacturer under subrogation to recover the payout.</div>
-        <div class="mental-map"><span class="root">Subrogation Flow</span>
- Insured suffers loss → Insurer PAYS claim
-  → Insurer steps into insured's shoes (S.79)
-  → Insurer sues responsible 3rd party (in insured's name)
-  → Recovery capped at amount paid</div>
-        <div class="related-q">🔗 Related: <a href="#q1">Q1 P&amp;I</a> · <a href="#q12">Q12 ITC Hulls</a> · <a href="#q27">Q27 Hague-Visby</a> (cargo subrogation) · <a href="#q10">Q10 Sue &amp; Labour</a></div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q28, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q28 · v1.0</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 28 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -1958,46 +1531,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>Definition</h4>
-          <p>Reinsurance is insurance purchased by an insurer from another insurer — the primary insurer transfers part of the risk to a reinsurer, limiting its own exposure. Enables insurers to write larger policies, stabilise loss experience, and spread catastrophic risk.</p>
-          <h4>Types</h4>
-          <ul>
-            <li><strong>Facultative Reinsurance:</strong> Individual risk negotiation for a <em>specific policy or risk</em>. Each arrangement negotiated separately; reinsurer examines and decides whether to accept. Used for unusual, large, or complex risks. More expensive; more flexible. Marine example: a very large tanker or a one-off voyage where the primary H&amp;M insurer needs extra capacity for that specific ship</li>
-            <li><strong>Obligatory (Treaty) Reinsurance:</strong> A standing agreement — primary insurer must cede a defined class of risks and the reinsurer must accept. More efficient; lower administration cost. Types: Proportional (quota share / surplus share — reinsurer takes a fixed percentage of every risk, sharing premium and losses proportionally) and Non-proportional (excess of loss / stop loss — reinsurer pays only when losses exceed a threshold)</li>
-          </ul>
-          <h4>IG P&amp;I Pool — Tiered Structure</h4>
-          <ul>
-            <li><strong>Individual club retention:</strong> ~<strong>$10 million</strong> — each club pays entirely from its own resources</li>
-            <li><strong>Pool (shared among all 12 IG clubs):</strong> Claims between ~$10m and ~<strong>$100 million</strong> — all clubs share proportionally</li>
-            <li><strong>Commercial reinsurance (GXL):</strong> Above $100m — IG purchases General Excess of Loss reinsurance from the international market up to ~<strong>$2.35 billion</strong> any one claim ($1bn sub-limit for oil pollution)</li>
-            <li><strong>Collective Overspill:</strong> A further ~<strong>$1 billion</strong> of reinsurance is purchased above the $2.35bn GXL limit, bringing total reinsurance cover to ~<strong>$3.35 billion</strong></li>
-            <li><strong>Overspill calls:</strong> If a claim exceeds $3.35bn, all IG member clubs are called upon via supplementary overspill calls — theoretically unlimited cover</li>
-          </ul>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>Reinsurance is insurance for insurers — facultative covers individual specific risks negotiated separately, while obligatory/treaty reinsurance is a standing agreement covering a whole class of risks, and the IG P&amp;I Pool uses tiered reinsurance from club retention through pooling to commercial reinsurance and overspill.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>Reinsurance lets an insurer transfer part of its risk to another insurer to limit exposure and write larger policies. Facultative reinsurance is negotiated risk-by-risk for unusual or large exposures, giving flexibility at higher cost. Obligatory (treaty) reinsurance is a standing agreement where the primary insurer must cede, and the reinsurer must accept, a defined class of risks — either proportional (quota share/surplus share, sharing premium and losses by percentage) or non-proportional (excess of loss, paying only above a threshold). The IG P&amp;I Pool layers these: each club retains the first ~$10m, the pool of all 12 IG clubs shares claims up to ~$100m, market GXL reinsurance covers up to ~$2.35bn ($1bn sub-limit for oil pollution), Collective Overspill reinsurance adds a further ~$1bn (total ~$3.35bn), and overspill calls on all IG clubs apply above that, giving theoretically unlimited cover.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">MIA 1906 (UK)</span><span class="reg-desc">Marine Insurance Act — legal basis for reinsurance arrangements</span></div>
-          <div class="reg-item"><span class="reg-code">IG Pool Agreement</span><span class="reg-desc">International Group of P&amp;I Clubs — pooling and reinsurance structure</span></div>
-          <div class="reg-item"><span class="reg-code">Lloyd's Act 1982 (UK)</span><span class="reg-desc">Lloyd's of London — marketplace where IG reinsurance is placed</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> The IG pool thresholds are frequently examined at Class 1 level — know all four tiers: $10m (club retention) → $100m (pool) → $2.35bn (market GXL reinsurance) → $3.35bn (adding Collective Overspill) → overspill calls beyond that. The key concept: the IG structure means that in theory, unlimited cover is available for catastrophic pollution claims. Facultative vs obligatory: if Nair asks the difference, use the container vessel example — a large ship with unusual cargo characteristics might need facultative reinsurance for that specific voyage.</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap</strong>"Does treaty (obligatory) reinsurance let the reinsurer pick and choose which individual risks to accept within the agreed class?" — <strong>No.</strong> Under treaty reinsurance, the reinsurer is bound to accept all risks falling within the defined class as ceded by the primary insurer — selection happens only in facultative reinsurance.</div>
-        <div class="numbers-box"><h4>Numbers to Memorise — IG Pool Tiers</h4>Club retention ≈ <strong>$10m</strong> → IG Pool ≈ <strong>$100m</strong> → Market GXL reinsurance ≈ <strong>$2.35bn</strong> → Collective Overspill adds ≈ <strong>$1bn</strong> (total ≈ <strong>$3.35bn</strong>) → Overspill calls (all 12 IG clubs, theoretically unlimited).</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Scenario Anchor</strong>Catastrophic oil pollution claim exceeding $3.35bn — triggers overspill calls across all 12 IG clubs, illustrating the theoretically unlimited nature of the pooled reinsurance structure.</div>
-        <div class="mental-map"><span class="root">Reinsurance Types</span>
- Facultative — per-risk, negotiated individually
- Obligatory/Treaty
-  ├─ Proportional (quota/surplus share)
-  └─ Non-proportional (excess of loss)
- IG Pool = Treaty-style layered structure (retention→pool→reinsurance→overspill)</div>
-        <div class="related-q">🔗 Related: <a href="#q1">Q1 P&amp;I</a> (pool origin) · <a href="#q2">Q2 Fund</a> (compensation caps) · <a href="#q28">Q28 Subrogation</a> · <a href="#q3">Q3 LLMC</a></div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q29, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q29 · v1.1 — corrected 18 Jul 2026: IG club count updated 13→12 (NorthStandard merger); reinsurance figures updated to GXL USD 2.35bn + Collective Overspill USD 1bn = USD 3.35bn total (2026/27 policy year)</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 29 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
@@ -2012,88 +1555,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off-white);col
         </div>
         <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
       </div>
-      <div class="q-answer">
+      <div class="q-answer q-teaser">
         <div class="answer-body">
-          <h4>MEPC 84 — 27 April to 1 May 2026</h4>
-          <p>MEPC 84 (Marine Environment Protection Committee, 84th Session) was held <strong>in person at IMO Headquarters, London (4 Albert Embankment)</strong>, from <strong>27 April to 1 May 2026</strong>, chaired by Dr. Harry Conway (Liberia). It was the first full MEPC session after the Net-Zero Framework (NZF) adoption was adjourned for one year at the extraordinary session <strong>MEPC/ES.2 (13–17 October 2025)</strong>.</p>
-          <h4>2023 GHG Strategy Targets</h4>
-          <ul>
-            <li><strong>Net-zero GHG emissions by 2050</strong> (approximately)</li>
-            <li><strong>20–30% GHG reduction by 2030</strong> compared to 2008 levels</li>
-            <li><strong>70–80% reduction by 2040</strong></li>
-          </ul>
-          <h4>Net-Zero Framework (NZF) — Where It Stands</h4>
-          <p>The GFS/levy package (Global Fuel Standard tied to a GHG Fuel Intensity limit, backed by an economic levy feeding an IMO Net-Zero Fund) was <strong>approved at MEPC 83 (April 2025)</strong> but its <strong>adoption was adjourned for one year at MEPC/ES.2 (Oct 2025)</strong> after a contested vote (57 for adjournment, 49 against, 21 abstained). At MEPC 84, <strong>no agreement was reached on the NZF</strong> or the alternative proposals on the table — the Committee reaffirmed the goal of a globally applicable, consensus-based framework and pushed further technical/political work into the intersessional period ahead of MEPC 85.</p>
-          <h4>Confirmed Outcomes at MEPC 84 (2026)</h4>
-          <ul>
-            <li><strong>Fifth IMO GHG Study:</strong> Terms of Reference approved; delivery scheduled for <strong>MEPC 87 (Spring 2028)</strong>, feeding the scheduled 2028 review of the 2023 GHG Strategy</li>
-            <li><strong>Life-Cycle GHG (LCA) Assessment:</strong> progressed default emission factors and fuel-pathway/carbon-capture methodology; GESAMP-LCA to report back to MEPC 85</li>
-            <li><strong>CH₄/N₂O measurement package adopted:</strong> <strong>MEPC.414(84)</strong> (test-bed/onboard measurement guidelines), <strong>MEPC.415(84)</strong> (Engine Load Monitoring guidelines) and <strong>MEPC.416(84)</strong> (Continuous Emission Monitoring System guidelines) — all voluntary at this stage</li>
-            <li><strong>EEDI package adopted:</strong> <strong>MEPC.410(84)</strong> (dual-fuel/hybrid calculation amendments) and <strong>MEPC.411(84)</strong> (survey and certification guidelines)</li>
-            <li><strong>CII/SEEMP clarifications adopted:</strong> <strong>MEPC.412(84)</strong> (CII Guidelines G1) and <strong>MEPC.413(84)</strong> (SEEMP Guidelines) — confirm supply-based transport work as the CII proxy pending the Phase 2 short-term-measures review</li>
-            <li><strong>Onboard Carbon Capture (OCCS):</strong> advanced draft testing/survey/certification guidelines via a re-established correspondence group reporting to MEPC 86</li>
-            <li><strong>Ballast Water Management:</strong> approved draft BWM Convention amendments (system must be proven working/maintained, not just installed) and adopted <strong>MEPC.409(84)</strong> 2026 G4 Guidelines; amendments targeted for adoption at MEPC 85, entry into force ~May 2027</li>
-            <li><strong>MARPOL Annex VI amendments adopted:</strong> <strong>MEPC.407(84)</strong> (North-East Atlantic ECA, DCS accessibility, short-term-measure review clause) and <strong>MEPC.408(84)</strong> (multiple engine operational profiles) — both enter into force <strong>1 September 2027</strong></li>
-            <li><strong>New ECA:</strong> North-East Atlantic — NOx Tier III for ships contracted on/after 1 Jan 2027; 0.10% m/m sulphur fuel required from 1 September 2028</li>
-            <li><strong>Marine Plastic Litter:</strong> adopted <strong>MEPC.417(84)</strong> 2026 Strategy and Action Plan (supersedes the 2021 Strategy/2025 Action Plan); PPR tasked to draft a mandatory plastic-pellet code under MARPOL Annex III/SOLAS</li>
-            <li><strong>Underwater Radiated Noise (URN):</strong> agreed in principle to extend the Experience-Building Phase by two years, to end-2028, subject to Secretariat cost review ahead of MEPC 85</li>
-            <li><strong>MARPOL Annex I — Integrated Bilge Water Treatment (IBTS):</strong> approved draft new <strong>Regulation 12B</strong> permitting controlled dewatering of oily bilge water by forced evaporation, with consequential IOPP Certificate and Oil Record Book Part I amendments — final adoption expected MEPC 85</li>
-            <li><strong>Biofuel Carbon Conversion Factor (Cf) fix:</strong> approved <strong>MEPC.1/Circ.905/Rev.1</strong> (EIF 1 January 2027) — corrects the Cf calculation for biofuel blends from energy-weighted to <strong>mass-weighted average</strong>, removing the mathematical flaw where blended-fuel emissions could exceed the sum of its parts</li>
-            <li><strong>Energy Consumption Index (ECI) — not supported:</strong> a proposed performance-based cross-check linking reported fuel use to engine power, running hours and specific fuel consumption was <strong>rejected at this stage</strong> over administrative burden, data accuracy and methodology concerns; further examples invited for a future session</li>
-            <li><strong>Plastic pellets in bulk:</strong> beyond the mandatory Annex III/SOLAS code, MEPC forwarded a proposal to <strong>CCC</strong> to add an explicit "plastic pellets shall not be carried in bulk" prohibition to the <strong>IMSBC Code</strong></li>
-            <li><strong>Fishing gear marking:</strong> approved <strong>MEPC.1/Circ.921</strong> promoting fishing-gear marking systems and the FAO Voluntary Guidelines, pending mandatory measures</li>
-            <li><strong>Methane slip correction:</strong> methane slip in TtW emissions must now be corrected for fuel composition using a reference-gas method based on <strong>ISO 23306</strong> average LNG composition</li>
-            <li><strong>URN design guidance:</strong> approved <strong>MEPC.1/Circ.922</strong> — non-mandatory technical guidance on co-optimising energy efficiency and underwater radiated noise at design/retrofit stage</li>
-            <li><strong>EEDI Hybrid Definition:</strong> under <strong>MEPC.410(84)</strong>, hybrid propulsion is now formally defined as a system based on a power threshold relative to main engine MCR, as certified under the <strong>NOx Technical Code (NTC) 2008</strong></li>
-            <li><strong>Uncertified Biofuel Fallback:</strong> <strong>MEPC.1/Circ.905/Rev.1</strong> requires that if the biogenic component of a biofuel blend is not certified, the whole blend is treated as an equivalent fossil fuel type for Cf purposes</li>
-            <li><strong>ODS Gap Closed (new output):</strong> agreed to amend <strong>Regulation 12 of MARPOL Annex VI</strong> to close a loophole letting ships reintroduce ozone-depleting substances (HCFCs, e.g. R-22) into equipment originally designed for non-ODS refrigerants</li>
-            <li><strong>MASS Regulatory Scoping:</strong> tasked the <strong>PPR Sub-Committee</strong> to conduct a regulatory scoping exercise and develop a MEPC-instrument roadmap for Maritime Autonomous Surface Ships (MASS)</li>
-            <li><strong>BWM Active Substances tightened:</strong> new <strong>Regulation D-2.3</strong> sets mandatory discharge limits for Active Substances, backed by new <strong>Regulation E-1.4.3</strong> annual residual-sampling; exceeding MADC limits is now a <strong>regulatory non-compliance</strong>, not just a technical defect</li>
-            <li><strong>2016 G8 / BWMS Code Unified Interpretation:</strong> agreed a new UI on Regulation D-3 (to update <strong>BWM.2/Circ.66</strong>) confirming BWMS approved under the 2016 G8 Guidelines remain deemed compliant with the BWMS Code even if installed on/after 28 Oct 2020 — correcting wrongful PSC detentions seen in 2025 Paris/Tokyo MOU CICs</li>
-            <li><strong>BBNJ Coordination:</strong> agreed in principle (subject to MEPC 85) to a new output aligning MARPOL Special Areas, PSSAs, ECAs, ballast water, biofouling, URN and dumping regimes with the UN BBNJ (Biodiversity Beyond National Jurisdiction) Agreement</li>
-            <li><strong>New PSSAs:</strong> agreed the Nasca Ridge (Peru) PSSA Associated Protective Measure (a proposed ballast water exchange ban inside it was <em>not</em> agreed); noted a proposed Arabian Sea PSSA off Oman to address cetacean ship-strikes</li>
-            <li><strong>LCA Fuel Pathway Codes:</strong> based on GESAMP-LCA recommendations, new provisional default factors moved toward inclusion in the 2024 LCA Guidelines — <code>EtOH_b_FR_intcorn_r_CHP</code> (intermediate crop corn-based ethanol) at <strong>20.8 gCO₂eq/MJ</strong>, and <code>LNG_f_SLP_CCS_gm</code> (LNG with upstream CCS); a sugarcane ethanol pathway remained pending further submitter data</li>
-            <li><strong>Arctic Black Carbon — "Polar Fuels":</strong> noted PPR 13's ongoing work on a "polar fuels" concept to control Arctic black carbon, to be developed consistent with the existing Arctic HFO carriage/use ban under <strong>Regulation 43A of MARPOL Annex I</strong></li>
-            <li><strong>EGCS Wash Water — proposal only, not yet adopted:</strong> PPR 13 is considering a change to Regulation 4 of MARPOL Annex VI that would let coastal States seek additional EGCS discharge restrictions via PSSA protective measures; MEPC only noted this discussion. A new GISIS tab under the MARPOL Annex VI module now lets States log existing local/regional EGCS discharge restrictions</li>
-            <li><strong>Biofouling:</strong> agreed the future legally binding instrument should be a standalone convention and approved its draft Terms of Reference — no adoption timeline fixed yet</li>
-          </ul>
-          <h4>Timeline Ahead</h4>
-          <p>Two intersessional meetings (1–4 September and 23–27 November 2026) precede <strong>MEPC 85 (30 November–3 December 2026)</strong>, plus a one-day expert workshop on fuel "chain of custody" traceability. The Committee will resume MEPC/ES.2 on <strong>4 December 2026</strong>, subject to confirmation at MEPC 85.</p>
-          <h4>Key Cross-Questions</h4>
-          <ul>
-            <li><strong>What is GFI?</strong> GHG Fuel Intensity — g CO₂eq/MJ; the metric for the global fuel standard</li>
-            <li><strong>EEXI vs CII vs GFI?</strong> EEXI = technical efficiency (design/power limitation); CII = operational carbon intensity rating (annual, A–E); GFI = fuel lifecycle GHG intensity — proposed new standard</li>
-            <li><strong>What is CBDR?</strong> Common But Differentiated Responsibilities — UNFCCC principle that developing states bear less historical emissions responsibility; contentious in IMO context since conventions apply equally to all flag states; central to the levy revenue distribution debate</li>
-            <li><strong>What is the IMO Net-Zero Fund?</strong> Proposed economic levy on non-compliant ships; revenue to developing states and zero-emission fuel R&amp;D</li>
-          </ul>
-        </div>
-        <div class="oral-box oral-15"><span class="oral-label">15-Second Answer</span>MEPC 84 (27 April–1 May 2026, IMO HQ London) reaffirmed the goal of a globally applicable Net-Zero Framework but reached no agreement on it, while delivering concrete outcomes on LCA methodology, ballast water, a new ECA, marine plastic litter and underwater noise.</div>
-        <div class="oral-box oral-60"><span class="oral-label">60-Second Answer</span>MEPC 84 was held in person at IMO Headquarters, London, from 27 April to 1 May 2026 — the first full session after the Net-Zero Framework's adoption was adjourned for a year at MEPC/ES.2 in October 2025. No agreement was reached on the NZF or the alternative proposals; that work continues intersessionally toward MEPC 85 (30 Nov–3 Dec 2026). Concrete outcomes at MEPC 84 included: Terms of Reference for the Fifth IMO GHG Study; progress on Life-Cycle GHG (LCA) assessment methodology; adoption of 2026 CH4/N2O measurement guidelines; draft ballast water amendments; adoption of the North-East Atlantic ECA; adoption of the 2026 Marine Plastic Litter Strategy and Action Plan; a two-year extension of the URN Experience-Building Phase to 2028; and agreement in principle to develop a legally binding biofouling instrument by 2029. The underlying 2023 GHG Strategy targets — net-zero by ~2050, 20-30% cut by 2030, 70-80% by 2040 versus 2008 — remain the reference framework the NZF is meant to deliver.</div>
-        <div class="reg-box">
-          <div class="reg-box-title">⚖ Regulatory References</div>
-          <div class="reg-item"><span class="reg-code">MEPC 84 — 27 Apr–1 May 2026</span><span class="reg-desc">IMO HQ, London — NZF reaffirmed, no agreement reached</span></div>
-          <div class="reg-item"><span class="reg-code">MEPC/ES.2 — Oct 2025</span><span class="reg-desc">NZF adoption adjourned one year (57 for / 49 against / 21 abstain)</span></div>
-          <div class="reg-item"><span class="reg-code">MEPC.407(84) &amp; .408(84)</span><span class="reg-desc">MARPOL Annex VI amendments — NE Atlantic ECA, DCS access, engine profiles; EIF 1 Sep 2027</span></div>
-          <div class="reg-item"><span class="reg-code">MEPC.409(84)–.416(84)</span><span class="reg-desc">2026 BWM (G4), EEDI, CII/SEEMP clarification, CH4/N2O/ELM/CEMS Guidelines</span></div>
-          <div class="reg-item"><span class="reg-code">MEPC.417(84)</span><span class="reg-desc">2026 Strategy and Action Plan to Address Marine Plastic Litter from Ships</span></div>
-          <div class="reg-item"><span class="reg-code">MEPC.377(80) — 2023</span><span class="reg-desc">2023 IMO GHG Strategy — net-zero 2050; 20–30% by 2030; 70–80% by 2040</span></div>
-          <div class="reg-item"><span class="reg-code">IMO — MEPC</span><span class="reg-desc">https://www.imo.org/en/mediacentre/meetingsummaries/pages/temporary-mepc-84th-session.aspx</span></div>
-        </div>
-        <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> MEPC outcomes are live regulatory developments — Nair tests whether you read beyond textbooks and know the current status, not last year's news. Get the date right first: MEPC 84 was 27 April–1 May 2026 at IMO HQ London, not 2024. The headline point is that the NZF was <em>not</em> adopted at MEPC 84 — it was adjourned at MEPC/ES.2 in October 2025 and remains unresolved, with work continuing toward MEPC 85 (Nov–Dec 2026). Nair rewards candidates who can cite an actual resolution number rather than a vague description — know that the North-East Atlantic ECA and DCS access amendments sit in MEPC.407(84) and MEPC.408(84) (in force 1 Sep 2027), and that the plastic litter strategy is MEPC.417(84). Know the three 2023 GHG Strategy targets (net-zero 2050; 20–30% by 2030; 70–80% by 2040) as the reference framework the NZF debate sits under.</div>
-        <div class="trap-box"><strong class="trap-label">⚠ Examiner Trap — Was the NZF Adopted at MEPC 84?</strong>"So the Net-Zero Framework was adopted at MEPC 84?" — <strong>No.</strong> The GFS/levy package was approved in principle at MEPC 83 (April 2025), its adoption was adjourned for a year at MEPC/ES.2 (October 2025), and MEPC 84 (April–May 2026) reaffirmed the goal but reached no agreement — the framework is still pending, with further intersessional work ahead of MEPC 85.
-        <br><br><strong class="trap-label" style="margin-top:6px;">⚠ Trap — GFI vs CII</strong>"Is GFI just a renamed version of CII?" — <strong>No.</strong> CII rates a ship's annual operational carbon intensity (A-E rating, based on fuel consumed and distance sailed); GFI is a fuel-based lifecycle GHG intensity standard (well-to-wake, gCO2eq/MJ) under the proposed Global Fuel Standard — a different metric addressing fuel choice, not just operational efficiency.
-        <br><br><strong class="trap-label" style="margin-top:6px;">⚠ Trap — Was the Energy Consumption Index (ECI) adopted?</strong>"I heard MEPC brought in a new Energy Consumption Index to fix DCS fuel data — what does it require?" — <strong>Nothing, it wasn't adopted.</strong> The ECI was proposed as a cross-check linking reported fuel consumption to engine power, running hours and specific fuel consumption, but MEPC did not support it at MEPC 84 over administrative burden and methodology concerns.         <br><br><strong class="trap-label" style="margin-top:6px;">⚠ Trap — Is a 2016 G8-approved BWMS installed after Oct 2020 non-compliant?</strong>"PSC in Rotterdam flagged our BWMS as non-compliant with D-3 because it was installed after 28 October 2020 but only holds a 2016 G8 approval — is that a valid detention?" — <strong>No, and MEPC 84 confirmed it.</strong> A new Unified Interpretation of Regulation D-3 (to update BWM.2/Circ.66) clarifies that BWMS approved under the 2016 G8 Guidelines are deemed compliant with the BWMS Code regardless of install date. Some Paris/Tokyo MOU CIC inspectors wrongly treated these as non-compliant in 2025 — know this UI exists to push back with the correct reference.</div>
-        <div class="numbers-box"><h4>Numbers to Memorise</h4>MEPC 84 = <strong>27 Apr–1 May 2026</strong>, IMO HQ London · MEPC/ES.2 NZF adjournment vote = <strong>57 for / 49 against / 21 abstain</strong> (Oct 2025) · MEPC 85 = <strong>30 Nov–3 Dec 2026</strong> · MARPOL Annex VI amendments (MEPC.407/408(84)) enter into force <strong>1 Sep 2027</strong> · NE Atlantic ECA sulphur limit (0.10%) applies from <strong>1 Sep 2028</strong> · 5th IMO GHG Study delivery = <strong>MEPC 87, Spring 2028</strong> · URN EBP extended to <strong>end-2028</strong> · 2023 GHG Strategy: net-zero ≈ <strong>2050</strong>, <strong>20-30%</strong> cut by 2030, <strong>70-80%</strong> by 2040 (vs 2008).</div>
-        <div class="casualty-box"><strong class="cas-label">⚓ Scenario Anchor</strong>A vessel operator budgeting for compliance costs cannot yet price in the GFS/levy because the NZF remains unadopted post-MEPC 84 — illustrating why "targeted" IMO timelines still carry real political risk of slippage.</div>
-        <div class="mental-map"><span class="root">MEPC 84 (Apr–May 2026)</span>
- NZF: reaffirmed, NOT adopted → MEPC 85
- Adopted: MEPC.407-417(84) — ECA, BWM(G4), EEDI, CII/SEEMP, CH4/N2O/ELM/CEMS, Plastic Litter
- Progressed: LCA methodology, OCCS guidelines, 5th GHG Study (→MEPC 87, 2028)
- Agreed in principle: URN EBP→2028, Biofouling standalone instrument (no fixed date)</div>
-        <div class="related-q">🔗 Related: <a href="#q16">Q16 Basel/HKC</a> (green recycling) · <a href="#q13">Q13 London Protocol</a> (CO2 storage) · <a href="#q14">Q14 OPRC</a> (MARPOL Annex enforcement)</div>
-        <div class="q-footer">
-          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1, Q30, Correction Required">contactus@marineintelligenceweekly.com</a></span>
-          <span class="q-version">QB1 · Q30 · v1.5</span>
+          <div class="qb-lock">
+            <p class="qb-lock-t">&#128274; Answer 30 of 30 &mdash; subscriber content</p>
+            <p class="qb-lock-d">Questions 1&ndash;15 are answered in full above, so you can
+              judge the depth and the referencing for yourself. The remaining
+              15 answers &mdash; including this one &mdash; come with the
+              <b>MEO Class 1 Oral QB + Notes</b> subscription at <b>&#8377;1,499</b>.</p>
+            <a class="qb-cta" href="https://marineintelligenceweekly.com/SQ/pay.html">Get the full Question Bank &rarr;</a>
+          </div>
         </div>
       </div>
     </div>
