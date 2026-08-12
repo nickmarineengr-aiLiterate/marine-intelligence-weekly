@@ -10,9 +10,9 @@ Scope honesty: every count below is scoped to the sittings MIW has actually tran
 | Year | Papers | Questions | Answers built |
 |---|---|---|---|
 | 2024 | 11 | 99 | 72 |
-| 2025 | 11 | 99 | 90 |
+| 2025 | 11 | 99 | 99 |
 | 2026 | 6 | 54 | 54 |
-| **Total** | **28** | **252** | **216** |
+| **Total** | **28** | **252** | **225** |
 
 Every paper sets nine questions and every question is recorded at 16 marks under printed instruction 2. **May is absent from the available MIW source set in all three years.**
 
@@ -120,12 +120,12 @@ Every pair of questions inside one family, counted by the two sittings it joins.
 
 **Tiers C and D below are DERIVED from the current built set on every run, not read from the stored `reuse_tier` field.** The stored field is intake metadata: it records what was true when the question was transcribed and it does not move when a sibling paper is solved. Planning off it means planning off the past. Section 5.1 records exactly what that drift currently costs.
 
-| Tier | 2024 | 2025 | Definition as applied |
-|---|---|---|---|
-| A | 0 | 0 | Carried from the adjudicated intake field. An existing canonical object fully covers the demand. |
-| B | 0 | 0 | Carried from the adjudicated intake field. An existing canonical object partly covers the demand. |
-| C | 24 | 1 | Derived: no family member has a built answer. New research. |
-| D | **3** | **8** | Derived: the family contains at least one question whose answer is built and verified. |
+| Tier | 2024 | Definition as applied |
+|---|---|---|
+| A | 0 | Carried from the adjudicated intake field. An existing canonical object fully covers the demand. |
+| B | 0 | Carried from the adjudicated intake field. An existing canonical object partly covers the demand. |
+| C | 24 | Derived: no family member has a built answer. New research. |
+| D | **3** | Derived: the family contains at least one question whose answer is built and verified. |
 
 **Why A and B are still zero, and why that is a finding rather than a gap.** Both tiers claim that an existing canonical object covers some or all of the examiner demand. That claim cannot be made without reading the object, and this session authors and verifies nothing. A keyword sweep of the Oral corpus was run for the 2025 intake and deliberately **not** used to assign B: no threshold produced a natural break, so any cut point would be arbitrary, and a manufactured B count is worse than none because it would be planned against. That sweep output survives per question in `reuse_evidence` as named candidate files to read, explicitly labelled discovery. Promotion to A or B belongs to the solving session, which will have read them.
 
@@ -137,16 +137,8 @@ Every unsolved question whose CURRENT readiness differs from the tier frozen at 
 |---|---|---|---|---|
 | QP2406-Q7 | June 2024 Q7 | C | **D** | QP2502-Q7, QP2504-Q8 |
 | QP2407-Q3 | July 2024 Q3 | C | **D** | QP2402-Q1, QP2502-Q1 |
-| QP2507-Q1 | July 2025 Q1 | C | **D** | QP2501-Q1 |
-| QP2507-Q2 | July 2025 Q2 | C | **D** | QP2501-Q7 |
-| QP2507-Q4 | July 2025 Q4 | C | **D** | QP2501-Q9 |
-| QP2507-Q5 | July 2025 Q5 | C | **D** | QP2503-Q5 |
-| QP2507-Q6 | July 2025 Q6 | C | **D** | QP2503-Q3 |
-| QP2507-Q7 | July 2025 Q7 | C | **D** | QP2503-Q2 |
-| QP2507-Q8 | July 2025 Q8 | C | **D** | QP2503-Q1 |
-| QP2507-Q9 | July 2025 Q9 | C | **D** | QP2503-Q9 |
 
-Stored Tier D over the unsolved set counts **1**; derived counts **11**. Planning off the stored field would have under-counted ready work by 10 question(s) and would have sent a solving session to research answers that already have a verified donor.
+Stored Tier D over the unsolved set counts **1**; derived counts **3**. Planning off the stored field would have under-counted ready work by 2 question(s) and would have sent a solving session to research answers that already have a verified donor.
 
 ### Tier D in full &mdash; every unsolved question with a verified donor
 
@@ -159,14 +151,6 @@ Direction matters and is easy to get backwards: **the unsolved sitting is the ea
 | QP2406-Q7 | June 2024 Q7 | QP2504-Q8 | identical | QP2502-Q7 | stable |
 | QP2407-Q3 | July 2024 Q3 | QP2402-Q1 | identical | QP2502-Q1 | stable |
 | QP2408-Q9 | August 2024 Q9 | QP2606-Q5 | identical | &mdash; | stable |
-| QP2507-Q1 | July 2025 Q1 | QP2501-Q1 | reworded | &mdash; | stable |
-| QP2507-Q2 | July 2025 Q2 | QP2501-Q7 | identical | &mdash; | **MEDIUM** |
-| QP2507-Q4 | July 2025 Q4 | QP2501-Q9 | identical | &mdash; | stable |
-| QP2507-Q5 | July 2025 Q5 | QP2503-Q5 | identical | &mdash; | stable |
-| QP2507-Q6 | July 2025 Q6 | QP2503-Q3 | identical | &mdash; | stable |
-| QP2507-Q7 | July 2025 Q7 | QP2503-Q2 | identical | &mdash; | stable |
-| QP2507-Q8 | July 2025 Q8 | QP2503-Q1 | identical | &mdash; | stable |
-| QP2507-Q9 | July 2025 Q9 | QP2503-Q9 | reworded | &mdash; | **HIGH** |
 
 ## 6. TEMPORAL REVIEW
 
@@ -179,14 +163,12 @@ An earlier answer must **not** be corrected to current law. It answers the exami
 | Year | Stable | Review required | HIGH | MEDIUM |
 |---|---|---|---|---|
 | 2024 | 24 | **3** | 2 | 1 |
-| 2025 | 7 | **2** | 1 | 1 |
-| **Total** | 31 | **5** | 3 | 2 |
+| **Total** | 24 | **3** | 2 | 1 |
 
 | Risk class | Count |
 |---|---|
-| IMO INSTRUMENT IN FLUX | 3 |
+| IMO INSTRUMENT IN FLUX | 2 |
 | GUIDELINE EDITION | 1 |
-| INDIAN STATUTE BOUNDARY | 1 |
 
 ### Flagged questions
 
@@ -195,8 +177,6 @@ An earlier answer must **not** be corrected to current law. It answers the exami
 | QP2407-Q4 | July 2024 Q4 | HIGH | IMO INSTRUMENT IN FLUX |
 | QP2408-Q4 | August 2024 Q4 | HIGH | IMO INSTRUMENT IN FLUX |
 | QP2408-Q6 | August 2024 Q6 | MEDIUM | GUIDELINE EDITION |
-| QP2507-Q2 | July 2025 Q2 | MEDIUM | IMO INSTRUMENT IN FLUX |
-| QP2507-Q9 | July 2025 Q9 | HIGH | INDIAN STATUTE BOUNDARY |
 
 ## 7. RECOMMENDED SOLVING ORDER
 
@@ -206,7 +186,6 @@ Not calendar order. Calendar order would research the same family several times 
 
 | Paper | Sitting | Tier D | Family reach | Temporal flags |
 |---|---|---|---|---|
-| QP2507 | July 2025 | **8 / 9** | 0 | 2 |
 | QP2406 | June 2024 | **1 / 9** | 0 | 0 |
 | QP2407 | July 2024 | **1 / 9** | 0 | 1 |
 | QP2408 | August 2024 | **1 / 9** | 0 | 2 |

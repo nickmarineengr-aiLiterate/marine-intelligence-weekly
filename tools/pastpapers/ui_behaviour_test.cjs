@@ -138,6 +138,51 @@ const FIXTURES = {
     recurrence: ['2022/sep/q3'],
     narrow: ['aggregate number', 'QP2504-Q1'],
   },
+  QP2507: {
+    // Every probe below was derived from the BUILT page's data-search attributes
+    // and re-tested for within-paper uniqueness: each resolves to exactly one
+    // card. 'perils of the sea' was rejected for Q5 because it also matches Q3,
+    // whose limb (c) discusses excepted perils; 'inchmaree' is unique.
+    probes: [
+      ['hazard', 'QP2507-Q1'],
+      ['life cycle', 'QP2507-Q2'],
+      ['charterparty', 'QP2507-Q3'],
+      ['liquefaction', 'QP2507-Q4'],
+      ['inchmaree', 'QP2507-Q5'],
+      ['gender', 'QP2507-Q6'],
+      ['substantial corrosion', 'QP2507-Q7'],
+      ['dual class', 'QP2507-Q8'],
+      ['place of refuge', 'QP2507-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases. Each
+      // was checked against the card's own visible text, not merely assumed.
+      ['iala buoyage', 'QP2507-Q1', 'Q1 (the buoyage system a marked wreck is lit under)'],
+      ['grey hydrogen', 'QP2507-Q2', 'Q2 (the unabated fossil pathway well-to-wake exposes)'],
+      ['bunker contamination', 'QP2507-Q3', "Q3 (the charterer's classic own-ship liability)"],
+      ['proctor fagerberg', 'QP2507-Q4', 'Q4 (a named TML determination method)'],
+      ['negligence clause', 'QP2507-Q5', 'Q5 (the other name the Inchmaree clause goes by)'],
+      ['ics itf guidance', 'QP2507-Q6', 'Q6 (the industry guidance behind the harassment limb)'],
+      ['enhanced survey programme', 'QP2507-Q7', 'Q7 (what ESP stands for)'],
+      ['suspension of class', 'QP2507-Q8', 'Q8 (the sanction short of withdrawal)'],
+      ['admiralty act 2017', 'QP2507-Q9', 'Q9 (the Indian admiralty jurisdiction statute)'],
+    ],
+    // The LCA edition is this paper's fragile adjudication. MEPC.376(80) was
+    // REVOKED by MEPC.391(81) on 22 March 2024 -- more than a year before this
+    // sitting -- and the corpus's own instrument log still presents the revoked
+    // resolution as current. Q2 departs from the corpus on primary evidence. If
+    // this probe stops resolving to Q2, that correction has been lost from the
+    // built page and the answer has silently reverted to the revoked edition.
+    regulation: ['mepc.391(81)', 'QP2507-Q2'],
+    // Host sitting code printed against Q2 on the source copy, pointing at the
+    // January 2025 sitting. It is the host's annotation, not MIW's recurrence
+    // model, and must never be searchable.
+    recurrence: ['2025/jan/q7'],
+    // Q9's stem was NARROWED from its March donor to ask only what the coastal
+    // State initiates. 'action in default' is a coastal-State power and must
+    // resolve to Q9 alone.
+    narrow: ['action in default', 'QP2507-Q9'],
+  },
   QP2503: {
     probes: [
       ['two classification societies', 'QP2503-Q1'],
