@@ -195,9 +195,24 @@ and all global regeneration, remains laptop-owned and one paper at a time.
 
 | | |
 |---|---|
-| **Batch 2 baseline** | `main` at the QP2512 publication commit — see `CURRENT_STATUS.md` for the hash |
+| **Batch 2 baseline** | `main` at **`333e814`** — the QP2512 publication commit |
+| Baseline contents | QP2512 live · 14 papers / 126 questions · publish-state fix · storefront trim · SolvedQP manifest, search and daily health |
 | MIW remote | `github.com/nickmarineengr-aiLiterate/marine-intelligence-weekly` — **PUBLIC** |
 | Corpus remote | `github.com/nickmarineengr-aiLiterate/RulesApp-Local-Input` — **PRIVATE** |
+
+### 7.1 How the baseline hash was recorded
+
+The baseline is the commit that published QP2512 and built the derived layer. A commit cannot
+contain its own hash, so `333e814` is written in by a small follow-up metadata commit whose
+**parent is the baseline** — the same self-verifying pattern Batch 1 used:
+
+```bash
+git -c safe.directory=* cat-file -p HEAD^{commit} | head -2   # on the metadata commit
+# its 'parent' line must read 333e814...
+```
+
+Branch every Batch 2 paper from `333e814` — not from the metadata commit, and not from the
+branch head, which moves as the laptop integrates Batch 1.
 
 A paper branch **owns** its spec, its verification records, its anchor and
 checkpoint evidence, and its review HTML.
