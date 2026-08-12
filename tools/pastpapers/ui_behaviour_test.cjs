@@ -44,6 +44,41 @@ function ok(name, cond, extra) {
 // Alias probes deliberately use words that appear ONLY in search metadata and
 // are never rendered on the card, which is the behaviour being guarded.
 const FIXTURES = {
+  QP2512: {
+    probes: [
+      ['disease vector', 'QP2512-Q1'],
+      ['gassing up', 'QP2512-Q2'],
+      ['insurable interest', 'QP2512-Q3'],
+      ['maslow', 'QP2512-Q4'],
+      ['shipping casualty', 'QP2512-Q5'],
+      ['minimum age', 'QP2512-Q6'],
+      ['off-hire', 'QP2512-Q7'],
+      ['detainable deficiency', 'QP2512-Q8'],
+      ['maritime lien', 'QP2512-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['self-actualization', 'QP2512-Q4',
+       'Q4 (the American spelling; the answer renders self-actualisation)'],
+      ['ms act 334', 'QP2512-Q8', 'Q8 (the compressed form of the section reference)'],
+      ['underperformance', 'QP2512-Q7',
+       'Q7 (the one-word form of the speed and consumption claim)'],
+      ['section 361', 'QP2512-Q5',
+       'Q5 (the court empowered to make a formal investigation)'],
+      ['judicial sale', 'QP2512-Q9', 'Q9 (the mechanism behind the order of settlement)'],
+    ],
+    // A.1185(33) is the Procedures for Port State Control, 2023 -- the OPERATIVE
+    // edition at a December 2025 sitting. It is used here rather than a SOLAS
+    // regulation precisely because the edition is this paper's sharpest temporal
+    // trap: the 2021 edition was revoked in 2023 and the 2025 edition had not been
+    // issued. If this probe ever starts resolving to a different resolution
+    // number, the paper has been re-anchored onto the wrong Procedures.
+    regulation: ['a.1185(33)', 'QP2512-Q8'],
+    // Leak probe: the third-party host's own printed sitting code for Q8 must NOT
+    // be searchable in the shipped bytes.
+    recurrence: ['2025/dec/q8', 'QP2512-Q8'],
+    narrow: ['nearest appropriate repair yard', 'QP2512-Q8'],
+  },
   QP2511: {
     probes: [
       ['bulk carrier losses', 'QP2511-Q1'],

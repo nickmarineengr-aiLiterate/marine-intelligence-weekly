@@ -736,6 +736,84 @@ REVISIT:   if an Assembly ever adopts at the opening of a session rather than at
 
 ---
 
+## When the adoption date is ambiguous, the resolution's ISSUE date settles it
+
+The Assembly-boundary lesson above resolves a sitting by **adoption** date. That works for every
+month except the one the adoption falls in. `QP2512` is that month: the 34th Assembly adopted on
+**3 December 2025** and the source copy prints `DECEMBER 2025` with **no day**, so a December
+sitting can fall on either side of the boundary and the governed fallback — exclude when the date
+cannot be established — leaves the question merely *defaulted* rather than answered.
+
+**A second date closes it.** An IMO resolution carries a **document date** as well as an adoption
+date, and the document date is later. `A 34/Res.1206` reads *"adopted on 3 December 2025"* on a
+cover dated **5 December 2025**. The Organization had not circulated the text until then, so no
+sitting anywhere in the month could be examined against it. The exclusion becomes **reasoned rather
+than defaulted**, and it does not depend on pinning the examination to a day.
+
+**How to apply.** When a sitting month contains the adoption date, read the resolution's cover for
+its document date before falling back on "cannot establish, therefore exclude". The fallback reaches
+the same answer; the document date tells you *why*, which is what a verification record has to
+carry. The gap is small — two days here — but it is the difference between a defensible finding and
+an admitted unknown.
+
+```
+EVIDENCE:  QP2512 session, 2026-08-12. A 34/Res.1206 obtained from the IMO resolutions CDN and its
+           cover read directly: "A 34/Res.1206, 5 December 2025 ... adopted on 3 December 2025".
+           Recorded in docs/QP2512_TEMPORAL_AND_DONOR_ANCHOR.md section 2.
+CATEGORY:  TEMPORAL_VERIFICATION
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     NONE -- adjudication, not detection. R7 rejected teaching the sweep resolution dates and
+           that rejection stands; this is a reading instruction for the author, not a table.
+REVISIT:   if a sitting is ever found whose month contains BOTH the adoption and the document date,
+           at which point neither settles it and the examination date must be established directly.
+```
+
+---
+
+## A re-issued instrument may have an edition you have never seen between the two you know
+
+The Assembly-boundary lesson predicts that a later donor cites a newer edition of a re-issued
+instrument. It leaves implicit a two-edition mental model — *the donor's* and *the one before it* —
+and that model is wrong often enough to matter.
+
+The Procedures for Port State Control have **three** editions in play across this corpus:
+
+```
+A.1155(32)   Procedures for PSC, 2021    adopted 15 December 2021
+A.1185(33)   Procedures for PSC, 2023    adopted  6 December 2023   revokes A.1155(32)
+A.1206(34)   Procedures for PSC, 2025    adopted  3 December 2025   revokes A.1185(33)
+```
+
+A session re-anchoring `QP2606-Q2` (June 2026, built entirely on `A.1206(34)`) back onto a December
+2025 sitting has to land on `A.1185(33)`. The intuitive move — *"before the 2025 Procedures came the
+2021 Procedures"* — **skips an entire edition and reaches an instrument that had been revoked for
+two years.** Nothing downstream catches it: the citation is real, the resolution exists, the content
+is close, and the answer reads correctly.
+
+**How to apply.** Never infer the predecessor edition. Open the donor's own resolution and read
+operative paragraph 4 — an IMO resolution that supersedes another **names what it revokes**, and its
+preamble recites the chain before that. Two reads give the whole lineage from the document you
+already have. Note also that **section numbering does not carry across editions**: `QP2606-Q2` cites
+`A.1206(34)` §2.3.11 for the right of appeal, and the equivalent in `A.1185(33)` must be located,
+not assumed.
+
+```
+EVIDENCE:  QP2512 session, 2026-08-12. A 34-Res.1206 and A 33-Res.1185 both obtained from the IMO
+           resolutions CDN and their operative paragraph 4 and preambles read directly.
+           Recorded in docs/QP2512_TEMPORAL_AND_DONOR_ANCHOR.md section 2.1.
+CATEGORY:  TEMPORAL_VERIFICATION
+STATUS:    PROVEN
+SEEN:      1   (prospective catch on QP2512-Q8; no defect shipped)
+OWNER:     NONE -- adjudication. No tool holds a resolution lineage table and R7 declined to give
+           one to the sweep.
+REVISIT:   if a per-instrument edition ledger is ever built, this becomes a lookup rather than a
+           reading instruction. The HSSC Survey Guidelines and the III Code obligations list are on
+           the same biennial cycle and will have the same three-edition shape.
+```
+
+---
+
 ## The contaminated donor was the FORWARD one, not the backward ones
 
 `QP2511` is a backwards-pull paper: five of its six donors are 2026 answers dragged back to a
@@ -1242,3 +1320,81 @@ the page returned HTTP 200 and leaked no paid links — but never read what it s
 
 **A 200 is not a verification.** Fetch the live page and assert on its content: the words a customer
 sees, the robots tag, the price, and the absence of internal paths.
+
+---
+
+## When an excluded instrument would spread across a whole object, AUTHOR FRESH rather than clone-and-patch
+
+**Status: PROVEN.** Evidence: `QP2512-Q8`, 2026-08-12.
+
+The three-edition lesson above says a re-issued instrument may have an edition you have never seen.
+This is the *authoring* consequence of it, and it is a different rule.
+
+`QP2606-Q2` was the natural support for `QP2512-Q8`'s port State control limbs. It is built
+**entirely** on the 2025 Procedures for Port State Control, which had not been issued at a December
+2025 sitting. The staging harness would happily have cloned it and taken a patch.
+
+**It was not cloned, and the reason is arithmetic rather than caution.** The intake temporal note for
+this question predicts an instrument asserted across **eight separate surfaces** of a single question
+object — model answer, study guide, `recall_15s`, `major_trap`, a route core point, a retrieval card,
+`regulations` and `search_aliases`. Cloning means finding and reversing the excluded edition on all
+eight, and being right eight times. Authoring fresh means it **cannot enter at all**, and the donor's
+value — its section structure and its sense of what the examiner wants — is not lost, because
+structure can be read without copying text.
+
+**The rule.** *Before cloning a donor, ask how many surfaces the contaminant occupies. Where an
+instrument, statute or date is excluded at the target sitting and the donor is built on it, author
+fresh and record the donor as structural support.* Clone-and-patch is for donors whose contamination
+is **local**; it is the wrong tool when the contamination is **pervasive**, because it converts one
+structural decision into eight independent chances to miss something.
+
+**What would reopen this.** A donor whose excluded instrument genuinely occupies one or two fields.
+Cloning is still cheaper there, and this lesson is not an argument for always authoring fresh.
+
+---
+
+## Solving a paper does not necessarily REPLENISH the derived tier-D pool
+
+**Status: PROVEN.** Evidence: QP2511 versus QP2512, 2026-08-12.
+
+`CURRENT_STATUS.md` recorded, after QP2511, that its derived tier-D total was *"unchanged in total:
+its own six left the unsolved set when it was solved, and solving it unlocked six replacements."*
+That is a real observation, and it quietly became an expectation.
+
+**QP2512 did not behave that way.** It consumed three tier-D donors of its own and **unlocked none**:
+the derived count over the unsolved set fell 20 → 17, by exactly the three it took. Six of its nine
+questions were adjudicated as **fresh or limb-supported** rather than family-linked, and a question
+with no family produces no edge for anyone else however well it is answered.
+
+**The rule.** *Donor readiness is a property of the corpus's family structure, not a conserved
+quantity that solving papers tops up.* A planning session must **recompute** the derived tier-D count
+after each paper rather than assume the pool is self-sustaining — and a paper rich in fresh questions
+is worth **more** to candidates and **less** to the next session's donor budget at the same time.
+Those two facts are not in tension; they are simply different measures.
+
+---
+
+## A newly solved paper needs a UI fixture, and its regulation probe is a free temporal tripwire
+
+**Status: PROVEN.** Evidence: `QP2512`, 2026-08-12.
+
+`ui_behaviour_test.cjs` fails a page whose `paper_id` has no `FIXTURES` entry, deliberately, so a new
+paper cannot report a clean run having tested nothing. That gate fired the first time QP2512 was
+built, which is the gate working.
+
+Two things were learned in satisfying it.
+
+**Choose the terms by probing the built page, not by intuition.** Every candidate probe, alias,
+narrowing phrase and leak token was run against the generated `data-search` attributes before being
+written into the fixture. Three intuitive alias candidates turned out to be rendered on the card and
+were therefore useless as *alias* probes; the true alias-only terms were found by diffing
+`search_aliases` against the rendered text.
+
+**Spend the `regulation` probe on the paper's sharpest temporal anchor.** The slot takes one
+regulation term. For QP2512 it is `a.1185(33)` — the operative edition of the Procedures for Port
+State Control at that sitting — rather than a SOLAS regulation that could never be wrong. The effect
+is a **mechanical tripwire**: if a future edit re-anchors the paper onto a different edition, the
+fixture fails on the wrong resolution number, in CI, without anyone having to remember the trap.
+
+**The rule.** *A per-paper UI fixture is not boilerplate. Derive its terms from the built artefact,
+and aim its single regulation slot at whatever the paper is most likely to be got wrong about later.*
