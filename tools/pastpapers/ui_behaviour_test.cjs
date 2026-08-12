@@ -75,6 +75,36 @@ const FIXTURES = {
     // re-anchored onto guidelines that did not exist at the sitting.
     regulation: ['mepc.391(81)', 'QP2501-Q7'],
   },
+  QP2502: {
+    probes: [
+      ['sub-committee', 'QP2502-Q1'],
+      ['fatigue', 'QP2502-Q2'],
+      ['integrated safety', 'QP2502-Q3'],
+      ['tmsa', 'QP2502-Q4'],
+      ['assessor', 'QP2502-Q5'],
+      ['preliminary verification', 'QP2502-Q6'],
+      ['protection and indemnity', 'QP2502-Q7'],
+      ['pre-swirl', 'QP2502-Q8'],
+      ['lakshadweep', 'QP2502-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['engine room resource management', 'QP2502-Q2',
+       'Q2 (the STCW competence behind the human-element limb)'],
+      ['sister ship arrest', 'QP2502-Q5', 'Q5 (the in rem remedy the Act carries forward)'],
+      ['excess of loss reinsurance', 'QP2502-Q7',
+       'Q7 (how the clubs cover the layer above the pool)'],
+      ['Schneekluth duct', 'QP2502-Q8', 'Q8 (a named wake equalising device)'],
+      ['Wild Life Protection Act 1972', 'QP2502-Q9',
+       'Q9 (the habitat statute, as distinct from the ship-source one)'],
+    ],
+    // MSC.560(108) amends STCW Code table A-VI/1-4 and enters into force on
+    // 1 January 2026 -- ELEVEN MONTHS AFTER this February 2025 sitting. It is used
+    // as the regulation probe precisely because it is the paper's sharpest
+    // forward boundary: the answer must say STCW WILL require the training, never
+    // that it does. If this probe stops resolving to Q2, the guard has been lost.
+    regulation: ['msc.560(108)', 'QP2502-Q2'],
+  },
   QP2512: {
     probes: [
       ['disease vector', 'QP2512-Q1'],
