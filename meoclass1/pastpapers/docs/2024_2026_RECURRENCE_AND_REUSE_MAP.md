@@ -10,9 +10,9 @@ Scope honesty: every count below is scoped to the sittings MIW has actually tran
 | Year | Papers | Questions | Answers built |
 |---|---|---|---|
 | 2024 | 11 | 99 | 72 |
-| 2025 | 11 | 99 | 72 |
+| 2025 | 11 | 99 | 81 |
 | 2026 | 6 | 54 | 54 |
-| **Total** | **28** | **252** | **198** |
+| **Total** | **28** | **252** | **207** |
 
 Every paper sets nine questions and every question is recorded at 16 marks under printed instruction 2. **May is absent from the available MIW source set in all three years.**
 
@@ -124,8 +124,8 @@ Every pair of questions inside one family, counted by the two sittings it joins.
 |---|---|---|---|
 | A | 0 | 0 | Carried from the adjudicated intake field. An existing canonical object fully covers the demand. |
 | B | 0 | 0 | Carried from the adjudicated intake field. An existing canonical object partly covers the demand. |
-| C | 24 | 18 | Derived: no family member has a built answer. New research. |
-| D | **3** | **9** | Derived: the family contains at least one question whose answer is built and verified. |
+| C | 24 | 5 | Derived: no family member has a built answer. New research. |
+| D | **3** | **13** | Derived: the family contains at least one question whose answer is built and verified. |
 
 **Why A and B are still zero, and why that is a finding rather than a gap.** Both tiers claim that an existing canonical object covers some or all of the examiner demand. That claim cannot be made without reading the object, and this session authors and verifies nothing. A keyword sweep of the Oral corpus was run for the 2025 intake and deliberately **not** used to assign B: no threshold produced a natural break, so any cut point would be arbitrary, and a manufactured B count is worse than none because it would be planned against. That sweep output survives per question in `reuse_evidence` as named candidate files to read, explicitly labelled discovery. Promotion to A or B belongs to the solving session, which will have read them.
 
@@ -137,7 +137,6 @@ Every unsolved question whose CURRENT readiness differs from the tier frozen at 
 |---|---|---|---|---|
 | QP2406-Q7 | June 2024 Q7 | C | **D** | QP2502-Q7 |
 | QP2407-Q3 | July 2024 Q3 | C | **D** | QP2402-Q1, QP2502-Q1 |
-| QP2503-Q6 | March 2025 Q6 | C | **D** | QP2509-Q5 |
 | QP2504-Q5 | April 2025 Q5 | C | **D** | QP2502-Q5 |
 | QP2504-Q6 | April 2025 Q6 | C | **D** | QP2401-Q3, QP2410-Q8 |
 | QP2504-Q7 | April 2025 Q7 | C | **D** | QP2401-Q7 |
@@ -146,8 +145,13 @@ Every unsolved question whose CURRENT readiness differs from the tier frozen at 
 | QP2507-Q1 | July 2025 Q1 | C | **D** | QP2501-Q1 |
 | QP2507-Q2 | July 2025 Q2 | C | **D** | QP2501-Q7 |
 | QP2507-Q4 | July 2025 Q4 | C | **D** | QP2501-Q9 |
+| QP2507-Q5 | July 2025 Q5 | C | **D** | QP2503-Q5 |
+| QP2507-Q6 | July 2025 Q6 | C | **D** | QP2503-Q3 |
+| QP2507-Q7 | July 2025 Q7 | C | **D** | QP2503-Q2 |
+| QP2507-Q8 | July 2025 Q8 | C | **D** | QP2503-Q1 |
+| QP2507-Q9 | July 2025 Q9 | C | **D** | QP2503-Q9 |
 
-Stored Tier D over the unsolved set counts **1**; derived counts **12**. Planning off the stored field would have under-counted ready work by 11 question(s) and would have sent a solving session to research answers that already have a verified donor.
+Stored Tier D over the unsolved set counts **1**; derived counts **16**. Planning off the stored field would have under-counted ready work by 15 question(s) and would have sent a solving session to research answers that already have a verified donor.
 
 ### Tier D in full &mdash; every unsolved question with a verified donor
 
@@ -160,7 +164,6 @@ Direction matters and is easy to get backwards: **the unsolved sitting is the ea
 | QP2406-Q7 | June 2024 Q7 | QP2502-Q7 | reworded | &mdash; | stable |
 | QP2407-Q3 | July 2024 Q3 | QP2402-Q1 | identical | QP2502-Q1 | stable |
 | QP2408-Q9 | August 2024 Q9 | QP2606-Q5 | identical | &mdash; | stable |
-| QP2503-Q6 | March 2025 Q6 | QP2509-Q5 | identical | &mdash; | **HIGH** |
 | QP2504-Q5 | April 2025 Q5 | QP2502-Q5 | reworded | &mdash; | **HIGH** |
 | QP2504-Q6 | April 2025 Q6 | QP2401-Q3 | identical | QP2410-Q8 | **MEDIUM** |
 | QP2504-Q7 | April 2025 Q7 | QP2401-Q7 | identical | &mdash; | stable |
@@ -169,6 +172,11 @@ Direction matters and is easy to get backwards: **the unsolved sitting is the ea
 | QP2507-Q1 | July 2025 Q1 | QP2501-Q1 | reworded | &mdash; | stable |
 | QP2507-Q2 | July 2025 Q2 | QP2501-Q7 | identical | &mdash; | **MEDIUM** |
 | QP2507-Q4 | July 2025 Q4 | QP2501-Q9 | identical | &mdash; | stable |
+| QP2507-Q5 | July 2025 Q5 | QP2503-Q5 | identical | &mdash; | stable |
+| QP2507-Q6 | July 2025 Q6 | QP2503-Q3 | identical | &mdash; | stable |
+| QP2507-Q7 | July 2025 Q7 | QP2503-Q2 | identical | &mdash; | stable |
+| QP2507-Q8 | July 2025 Q8 | QP2503-Q1 | identical | &mdash; | stable |
+| QP2507-Q9 | July 2025 Q9 | QP2503-Q9 | reworded | &mdash; | **HIGH** |
 
 ## 6. TEMPORAL REVIEW
 
@@ -181,15 +189,14 @@ An earlier answer must **not** be corrected to current law. It answers the exami
 | Year | Stable | Review required | HIGH | MEDIUM |
 |---|---|---|---|---|
 | 2024 | 24 | **3** | 2 | 1 |
-| 2025 | 18 | **9** | 4 | 5 |
-| **Total** | 42 | **12** | 6 | 6 |
+| 2025 | 12 | **6** | 2 | 4 |
+| **Total** | 36 | **9** | 4 | 5 |
 
 | Risk class | Count |
 |---|---|
-| IMO INSTRUMENT IN FLUX | 5 |
-| INDIAN STATUTE BOUNDARY | 3 |
+| IMO INSTRUMENT IN FLUX | 4 |
 | GUIDELINE EDITION | 2 |
-| CONVENTION NOT YET IN FORCE | 1 |
+| INDIAN STATUTE BOUNDARY | 2 |
 | RECENT SOLAS CHAPTER | 1 |
 
 ### Flagged questions
@@ -199,9 +206,6 @@ An earlier answer must **not** be corrected to current law. It answers the exami
 | QP2407-Q4 | July 2024 Q4 | HIGH | IMO INSTRUMENT IN FLUX |
 | QP2408-Q4 | August 2024 Q4 | HIGH | IMO INSTRUMENT IN FLUX |
 | QP2408-Q6 | August 2024 Q6 | MEDIUM | GUIDELINE EDITION |
-| QP2503-Q6 | March 2025 Q6 | HIGH | CONVENTION NOT YET IN FORCE |
-| QP2503-Q7 | March 2025 Q7 | MEDIUM | IMO INSTRUMENT IN FLUX |
-| QP2503-Q9 | March 2025 Q9 | HIGH | INDIAN STATUTE BOUNDARY |
 | QP2504-Q1 | April 2025 Q1 | MEDIUM | RECENT SOLAS CHAPTER |
 | QP2504-Q3 | April 2025 Q3 | MEDIUM | GUIDELINE EDITION |
 | QP2504-Q5 | April 2025 Q5 | HIGH | INDIAN STATUTE BOUNDARY |
@@ -217,9 +221,8 @@ Not calendar order. Calendar order would research the same family several times 
 
 | Paper | Sitting | Tier D | Family reach | Temporal flags |
 |---|---|---|---|---|
+| QP2507 | July 2025 | **8 / 9** | 0 | 2 |
 | QP2504 | April 2025 | **5 / 9** | 1 | 4 |
-| QP2507 | July 2025 | **3 / 9** | 5 | 2 |
-| QP2503 | March 2025 | **1 / 9** | 5 | 3 |
 | QP2406 | June 2024 | **1 / 9** | 1 | 0 |
 | QP2407 | July 2024 | **1 / 9** | 0 | 1 |
 | QP2408 | August 2024 | **1 / 9** | 0 | 2 |

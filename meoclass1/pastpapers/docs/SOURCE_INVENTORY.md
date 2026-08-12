@@ -133,9 +133,6 @@ Examiner wording is reproduced exactly, errors included. Each is recorded in a n
 | QP2502-Q3 | Prints "international Safety Management (ISM) Code" with a lower-case "international". Reproduced as printed. |
 | QP2502-Q7 | Prints "What is P&I clubs?" (number disagreement) and lists 2011/APR twice in its host table. Both reproduced as printed; the host cell for 2021/AUG/Q5 is clipped by the table width on the source copy. |
 | QP2502-Q9 | Prints a mismatched quote pair: opening double quote, closing single quote, on "Andaman and Nicobar Islands'. Reproduced exactly as printed. |
-| QP2503-Q1 | Prints "a ship is classes by two classification societies" (for "classed"). Reproduced as printed. |
-| QP2503-Q3 | Prints "international Maritime Organization" with a lower-case "international". Reproduced as printed. |
-| QP2503-Q7 | Prints "EEDl" with a lower-case L in the first occurrence and "EEDI" thereafter. The source sets CO2 with a subscript 2, which the text layer flattens to "CO2". Both reproduced as extracted. |
 | QP2504-Q1 | Prints "SOLAS Chapter XV Describe the types" with no sentence break. Reproduced as printed. |
 | QP2504-Q3 | Limb (a) carries no printed "a)" marker on the source copy; the question opens directly and the "b)" marker appears on page 2. The limb structure is inferred from the printed marks and the "b)" marker. |
 | QP2504-Q4 | Prints a comma splice: "...Convention, Discuss the responsibilities...". Reproduced as printed. |

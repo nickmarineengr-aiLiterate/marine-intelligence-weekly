@@ -670,13 +670,31 @@ def self_test():
     # A stored-field classifier cannot move here, because no spec is touched.
     cand = next((q for q in sorted(unsolved)
                  if not [m for m in rel[q]['others'] if m in built] and rel[q]['others']), None)
+    # A naturally donorless family is the cleanest fixture, but it is a WASTING
+    # asset: every paper solved hands some unsolved family its first built
+    # member. QP2503 consumed the last five (QP2507-Q5..Q9), so from that point
+    # the natural fixture is gone for good and this case would fail forever on a
+    # corpus that had become MORE complete -- a harness limitation reported as a
+    # content regression. Fall back to synthesising the same starting state: take
+    # a question that does have donors and un-build them. That is the identical
+    # mutation case 2 already relies on, still touches no spec, and so a
+    # stored-field classifier cannot pass it either.
+    synthesised = False
+    baseline = built
     if cand is None:
-        check('case 1 C->D on donor arrival', False, 'no unsolved question with an unsolved family')
+        cand = next((q for q in sorted(unsolved)
+                     if [m for m in rel[q]['others'] if m in built]), None)
+        if cand is not None:
+            baseline = built - {m for m in rel[cand]['others'] if m in built}
+            synthesised = True
+    if cand is None:
+        check('case 1 C->D on donor arrival', False, 'no unsolved question has a family at all')
     else:
-        sibling = sorted(rel[cand]['others'])[0]
-        before, _ = tier_of(cand, built)
-        after, r = tier_of(cand, built | {sibling})
-        check('case 1 C->D when %s is solved (%s)' % (sibling, cand),
+        sibling = sorted(m for m in rel[cand]['others'] if m not in baseline)[0]
+        before, _ = tier_of(cand, baseline)
+        after, r = tier_of(cand, baseline | {sibling})
+        check('case 1 C->D when %s is solved (%s)%s'
+              % (sibling, cand, ' [synthesised baseline]' if synthesised else ''),
               before == 'C' and after == 'D' and r['preferred'] == sibling,
               'before=%s after=%s preferred=%s' % (before, after, r['preferred']))
 

@@ -105,6 +105,40 @@ const FIXTURES = {
     // that it does. If this probe stops resolving to Q2, the guard has been lost.
     regulation: ['msc.560(108)', 'QP2502-Q2'],
   },
+  QP2503: {
+    probes: [
+      ['two classification societies', 'QP2503-Q1'],
+      ['substantial corrosion', 'QP2503-Q2'],
+      ['gender', 'QP2503-Q3'],
+      ['3d printing', 'QP2503-Q4'],
+      ['inchmaree', 'QP2503-Q5'],
+      ['hns', 'QP2503-Q6'],
+      ['eedi', 'QP2503-Q7'],
+      ['propeller polishing', 'QP2503-Q8'],
+      ['very serious marine casualty', 'QP2503-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['joint classification', 'QP2503-Q1', 'Q1 (the other name a dual-class arrangement goes by)'],
+      ['selective laser melting', 'QP2503-Q4', 'Q4 (a named powder bed fusion process)'],
+      ['itc hulls', 'QP2503-Q5', 'Q5 (the market clause set carrying the Inchmaree cover)'],
+      ['biocide free', 'QP2503-Q8', 'Q8 (an antifouling coating family)'],
+      ['nosdcp', 'QP2503-Q9', 'Q9 (the national oil spill contingency plan behind the response)'],
+    ],
+    // Regulation 24.5 is the minimum propulsion power floor. It is used as this
+    // paper's regulation probe because Q7 is where the sitting bites hardest:
+    // the printed stem calls Phase 2 "the present" framework, and at March 2025
+    // Phase 2 has closed on BOTH of Table 1's timetables -- 1 April 2022 for
+    // containerships and the larger gas carriers, 1 January 2025 for tankers,
+    // bulk carriers and the ro-ro classes, ten weeks before this paper. The
+    // answer preserves the stem and adjudicates it. If this probe stops
+    // resolving to Q7, the adjudication has been lost from the built page.
+    regulation: ['regulation 24.5', 'QP2503-Q7'],
+    // Host sitting code printed against Q7 on the source copy. It must never be
+    // searchable: it is a third party's annotation, not MIW's recurrence model.
+    recurrence: ['2022/oct/q8'],
+    narrow: ['phase 2 reduction factor', 'QP2503-Q7'],
+  },
   QP2512: {
     probes: [
       ['disease vector', 'QP2512-Q1'],
