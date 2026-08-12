@@ -124,9 +124,9 @@ Examiner wording is reproduced exactly, errors included. Each is recorded in a n
 | QP2411-Q5 | The question number and the first limb marker run together on the printed copy: "Q5.a)". Reproduced as printed. |
 | QP2411-Q6 | The question number and the first limb marker run together on the printed copy: "Q6.a)". Reproduced as printed. |
 | QP2411-Q9 | The printed (16) is a total; the four limbs carry no separate allocation. The June 2024 sitting sets the same four techniques behind a longer preamble. |
-| QP2412-Q3 | Prints "Explain the salient features NIR" (a word appears to be missing). Reproduced as printed. |
+| QP2412-Q3 | Prints "Explain the salient features NIR" - a word appears to be missing between 'features' and 'NIR'. Reproduced as printed; the answer proceeds on the plain meaning, the salient features OF the NIR. |
 | QP2412-Q4 | Prints "SOLAS ch.ll-1" with two lower-case L characters where Chapter II-1 is meant. Reproduced exactly as encoded; the identical misspelling appears in the 2025 and 2026 sittings of this family and is recorded there too. |
-| QP2412-Q9 | Word-for-word the January and March 2024 question, but split 6 + 5 + 5 where those two sittings print 6 + 4 + 6. The examiner demand is unchanged; only the weighting moved. |
+| QP2412-Q9 | Word-for-word the January and March 2024 question, but split 6 + 5 + 5 where those two sittings print 6 + 4 + 6. The examiner demand is unchanged; only the weighting moved. The October 2025 sitting prints the same 6 + 5 + 5 split as this paper. |
 | QP2501-Q5 | The six terms are printed as an unmarked list under a single printed (16). Sub-part marks are null. |
 | QP2501-Q6 | Limb (c) prints "different liabilities Identify these entities" with no sentence break. Reproduced as printed. |
 | QP2501-Q8 | Prints "due the condition" (missing "to"). Reproduced as printed. |

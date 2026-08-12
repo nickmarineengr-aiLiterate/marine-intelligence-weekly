@@ -9,10 +9,10 @@ Scope honesty: every count below is scoped to the sittings MIW has actually tran
 
 | Year | Papers | Questions | Answers built |
 |---|---|---|---|
-| 2024 | 11 | 99 | 27 |
+| 2024 | 11 | 99 | 36 |
 | 2025 | 11 | 99 | 54 |
 | 2026 | 6 | 54 | 54 |
-| **Total** | **28** | **252** | **135** |
+| **Total** | **28** | **252** | **144** |
 
 Every paper sets nine questions and every question is recorded at 16 marks under printed instruction 2. **May is absent from the available MIW source set in all three years.**
 
@@ -122,8 +122,8 @@ Every pair of questions inside one family, counted by the two sittings it joins.
 |---|---|---|---|
 | A | 0 | 0 | Carried from the adjudicated intake field. An existing canonical object fully covers the demand. |
 | B | 0 | 0 | Carried from the adjudicated intake field. An existing canonical object partly covers the demand. |
-| C | 62 | 39 | Derived: no family member has a built answer. New research. |
-| D | **10** | **6** | Derived: the family contains at least one question whose answer is built and verified. |
+| C | 55 | 39 | Derived: no family member has a built answer. New research. |
+| D | **8** | **6** | Derived: the family contains at least one question whose answer is built and verified. |
 
 **Why A and B are still zero, and why that is a finding rather than a gap.** Both tiers claim that an existing canonical object covers some or all of the examiner demand. That claim cannot be made without reading the object, and this session authors and verifies nothing. A keyword sweep of the Oral corpus was run for the 2025 intake and deliberately **not** used to assign B: no threshold produced a natural break, so any cut point would be arbitrary, and a manufactured B count is worse than none because it would be planned against. That sweep output survives per question in `reuse_evidence` as named candidate files to read, explicitly labelled discovery. Promotion to A or B belongs to the solving session, which will have read them.
 
@@ -138,13 +138,12 @@ Every unsolved question whose CURRENT readiness differs from the tier frozen at 
 | QP2410-Q5 | October 2024 Q5 | C | **D** | QP2511-Q7 |
 | QP2410-Q9 | October 2024 Q9 | C | **D** | QP2404-Q6, QP2506-Q6, QP2508-Q6, QP2602-Q6 |
 | QP2411-Q2 | November 2024 Q2 | C | **D** | QP2404-Q2 |
-| QP2412-Q9 | December 2024 Q9 | C | **D** | QP2401-Q9, QP2403-Q7, QP2510-Q7 |
 | QP2503-Q6 | March 2025 Q6 | C | **D** | QP2509-Q5 |
 | QP2504-Q6 | April 2025 Q6 | C | **D** | QP2401-Q3 |
 | QP2504-Q7 | April 2025 Q7 | C | **D** | QP2401-Q7 |
 | QP2504-Q9 | April 2025 Q9 | C | **D** | QP2403-Q5, QP2510-Q5 |
 
-Stored Tier D over the unsolved set counts **6**; derived counts **16**. Planning off the stored field would have under-counted ready work by 10 question(s) and would have sent a solving session to research answers that already have a verified donor.
+Stored Tier D over the unsolved set counts **5**; derived counts **14**. Planning off the stored field would have under-counted ready work by 9 question(s) and would have sent a solving session to research answers that already have a verified donor.
 
 ### Tier D in full &mdash; every unsolved question with a verified donor
 
@@ -162,8 +161,6 @@ Direction matters and is easy to get backwards: **the unsolved sitting is the ea
 | QP2410-Q5 | October 2024 Q5 | QP2511-Q7 | identical | &mdash; | **MEDIUM** |
 | QP2410-Q9 | October 2024 Q9 | QP2404-Q6 | identical | QP2506-Q6, QP2508-Q6, QP2602-Q6 | stable |
 | QP2411-Q2 | November 2024 Q2 | QP2404-Q2 | identical | &mdash; | **MEDIUM** |
-| QP2412-Q4 | December 2024 Q4 | QP2509-Q9 | identical | QP2606-Q8 | stable |
-| QP2412-Q9 | December 2024 Q9 | QP2403-Q7 | identical | QP2401-Q9, QP2510-Q7 | stable |
 | QP2502-Q2 | February 2025 Q2 | QP2506-Q8 | identical | QP2404-Q7, QP2508-Q4, QP2601-Q9, QP2602-Q4, QP2604-Q9 | stable |
 | QP2502-Q9 | February 2025 Q9 | QP2606-Q7 | identical | &mdash; | stable |
 | QP2503-Q6 | March 2025 Q6 | QP2509-Q5 | identical | &mdash; | **HIGH** |
@@ -181,9 +178,9 @@ An earlier answer must **not** be corrected to current law. It answers the exami
 
 | Year | Stable | Review required | HIGH | MEDIUM |
 |---|---|---|---|---|
-| 2024 | 59 | **13** | 9 | 4 |
+| 2024 | 50 | **13** | 9 | 4 |
 | 2025 | 32 | **13** | 5 | 8 |
-| **Total** | 91 | **26** | 14 | 12 |
+| **Total** | 82 | **26** | 14 | 12 |
 
 | Risk class | Count |
 |---|---|
@@ -236,7 +233,6 @@ Not calendar order. Calendar order would research the same family several times 
 | QP2410 | October 2024 | **3 / 9** | 0 | 4 |
 | QP2502 | February 2025 | **2 / 9** | 5 | 2 |
 | QP2409 | September 2024 | **2 / 9** | 1 | 2 |
-| QP2412 | December 2024 | **2 / 9** | 0 | 0 |
 | QP2503 | March 2025 | **1 / 9** | 5 | 3 |
 | QP2402 | February 2024 | **1 / 9** | 3 | 2 |
 | QP2408 | August 2024 | **1 / 9** | 0 | 2 |

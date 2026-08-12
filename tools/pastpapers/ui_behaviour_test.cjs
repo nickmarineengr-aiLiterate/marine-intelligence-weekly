@@ -522,6 +522,41 @@ const FIXTURES = {
     // questionnaire's full name is SIRE 2.0 vocabulary and cannot collide.
     narrow: ['compiled vessel inspection questionnaire', 'QP2401-Q7'],
   },
+  QP2412: {
+    probes: [
+      ['sustainable development goals', 'QP2412-Q1'],
+      ['noise levels', 'QP2412-Q2'],
+      ['paris mou', 'QP2412-Q3'],
+      ['classification society', 'QP2412-Q4'],
+      ['root cause analysis', 'QP2412-Q5'],
+      ['maritime labour convention', 'QP2412-Q6'],
+      ['hague-visby', 'QP2412-Q7'],
+      ['seemp', 'QP2412-Q8'],
+      ['flag state performance indicators', 'QP2412-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['swiss cheese', 'QP2412-Q5', 'Q5 (the Reason model by its informal name)'],
+      ['dmlc', 'QP2412-Q6', 'Q6 (the compressed form of the Declaration)'],
+      ['ship risk profile', 'QP2412-Q3', 'Q3 (the NIR ranking mechanism)'],
+      ['latent failure', 'QP2412-Q5', 'Q5 (the organisational half of the failure pair)'],
+    ],
+    // MEPC.395(82) rather than a SOLAS regulation, because the SEEMP guideline
+    // edition is this paper's sharpest temporal anchor: adopted 4 October 2024,
+    // it revoked MEPC.346(78) just TWO MONTHS before the sitting. A January 2024
+    // treatment of Q8 would still cite MEPC.346(78) and be eleven months stale
+    // by December. If this probe stops resolving, Q8 has been re-anchored onto
+    // the superseded guidelines.
+    regulation: ['mepc.395(82)', 'QP2412-Q8'],
+    // Leak probe. 2022/OCT/Q5 is a host annotation printed against Q4 on THIS
+    // source copy. None of it may reach the shipped bytes.
+    recurrence: ['2022/oct/q5', 'QP2412-Q4'],
+    // Must resolve to exactly ONE card. December sets compliance documents more
+    // than once -- Q4 carries class certificates and Q8 the SEEMP -- so
+    // 'declaration' and 'compliance' are each ambiguous. The DMLC's full printed
+    // name belongs to Q6 alone.
+    narrow: ['declaration of maritime labour compliance', 'QP2412-Q6'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';
