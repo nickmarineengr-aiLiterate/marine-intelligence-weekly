@@ -12,8 +12,8 @@ See §7a for QP2512, §7b for the derived layer, §7c for the desktop batches, �
 > extraction onto current `main` rather than by merging its stale branch. All six desktop branches
 > are **retained** as provenance evidence and were not deleted.
 >
-> **Product: 20 available papers · 180 published questions · 252 in the corpus.**
-> 72 unsolved questions remain across 8 unsolved papers.
+> **Product: 22 available papers · 198 published questions · 252 in the corpus.**
+> 54 unsolved questions remain across 6 unsolved papers.
 >
 > **Three defects were corrected, two of them on already-live papers.** The referred
 > `QP2402-Q3` regulation-21 defect was confirmed against the corpus copy of `MEPC.328(76)` and
@@ -29,7 +29,8 @@ See §7a for QP2512, §7b for the derived layer, §7c for the desktop batches, �
 > presence of model answers, so no status was ever edited by hand.
 >
 > **Nothing is authorised for laptop authoring.** Do not start a paper without the Founder.
-> Batch 1 is closed. **Batch 2 (§7c) is ALLOCATED — NOT STARTED** and belongs to the desktop.
+> Batch 1 is closed. **Batch 2 is 2/6 LIVE** — QP2501 and QP2502 authored by the desktop,
+> laptop-reviewed and published 2026-08-12 (§7e). QP2503 is next and belongs to the desktop.
 >
 > Corpus consumption remains integrated (§2a) and read-only. **The Founder decisions in §6 are
 > still open and did not block QP2512** — it cites none of the three corpora, so its
@@ -102,7 +103,7 @@ Recomputed from the specs, `build_reuse_map.py` and `solvedqp_check.py` after QP
 
 | | |
 |---|---|
-| **Corpus** | **252 questions / 180 solved / 72 unsolved** — past the halfway point |
+| **Corpus** | **252 questions / 198 solved / 54 unsolved** — 78.6 per cent solved |
 | **Papers** | 28 — **20 solved**, 8 answerless intake |
 | **Years** | 2024 (11 papers), 2025 (11), 2026 (6). May is absent from the source set in all three years |
 | **Tier D (frozen intake field)** | **3** of the 72 unsolved, down from 17. Batch 1 consumed most of the pool. **Do not plan from this number** — it is the frozen intake field, and Batch 1 proved again that it goes stale: `QP2401-Q9` was frozen at tier C and derived to D, and `QP2410`'s board was wrong in both directions. The derived tier from `build_reuse_map.py` governs, and it is what makes the Batch 2 ordering constraint (`QP2507` after `QP2501` and `QP2503`) real |
@@ -395,7 +396,7 @@ Built 2026-08-12. Full architecture: [`SOLVEDQP_DERIVED_LAYER.md`](SOLVEDQP_DERI
 
 | Component | Path | State |
 |---|---|---|
-| **Manifest** | `solvedQP/solvedqp_content_index.json` | **ACTIVE** — 28 papers, 20 available, 180 published questions, 8 planned, 3 known-absent |
+| **Manifest** | `solvedQP/solvedqp_content_index.json` | **ACTIVE** — 28 papers, 22 available, 198 published questions, 6 planned, 3 known-absent |
 | Generator | `tools/pastpapers/build_solvedqp_manifest.py` | in the toolchain, `--check` and `--self-test` |
 | **Topic search** | `solvedQP/index.html`, over the manifest | **ACTIVE** — question-level, grouped by sitting, links to the anchor |
 | Search tests | `tools/pastpapers/solvedqp_search_test.py` | 13 / 13 |
@@ -436,7 +437,7 @@ when the sitting and the boundary share a month.
 | Batch | Papers | Status |
 |---|---|---|
 | **1** | QP2401 · QP2412 · QP2402 · QP2409 · QP2411 · QP2410 | **CLOSED — 6/6 reviewed, integrated and LIVE.** Branches retained as provenance, not deleted |
-| **2** | **QP2501 · QP2502 · QP2503 · QP2504 · QP2507 · QP2406** | **ALLOCATED — NOT STARTED.** Batch 1 is now closed, so the desktop may begin in the governed order |
+| **2** | ~~QP2501~~ · ~~QP2502~~ · **QP2503** · QP2504 · QP2507 · QP2406 | **2/6 LIVE.** QP2501 and QP2502 published 2026-08-12 (§7e). QP2503 is the next desktop paper |
 | **3** | QP2407 · QP2408 | held back — two papers, not three |
 
 Board: [`DESKTOP_QP_ALLOCATION_BOARD.md`](DESKTOP_QP_ALLOCATION_BOARD.md). Batch 1's own board,
@@ -479,6 +480,59 @@ against it. `QP2406`-era audit prose in `QP2402-Q6.md` describing what donor `QP
 left verbatim: it is an audit record of another paper, and rewriting it would falsify the trail.
 The remaining "MIW holds no licensed copy" statements about SOLAS, the ESP Code and ISO 484 are
 untouched and unverified — they concern other instruments.
+
+---
+
+## 7e. Batch 2 papers 1 and 2 — QP2501 and QP2502 — **LIVE ON MAIN**
+
+Published 2026-08-12. Desktop authored both on their own branches; the laptop reviewed each as
+**candidate input** and integrated by controlled path extraction from
+`origin/pastpapers/qp250{1,2}-founder-review` rather than by merging the branches, so no stale global
+artefact could ride along. Desktop branches are left untouched.
+
+| | QP2501 | QP2502 |
+|---|---|---|
+| Sitting | January 2025 | February 2025 |
+| Desktop tip | `fb2796f` | `c04b402` |
+| Publish commit | `eb3a1c5` | `a1cc735` |
+| Printed serial | EM - 2501, 3 pages | EM - 2502, 2 pages |
+| text_verbatim vs PDF | 9/9 faithful | 9/9 faithful |
+| validate_spec | 0 errors, 0 blocking | 0 errors, 0 blocking |
+| Understand reconstruction test | 9/9 pass | 9/9 pass |
+
+**Both branched from `333e814`, so both predate the Understand standard** added at `0408d02`
+(`MIW_LEARNING_METHOD_DESIGN.md` §10, `DESKTOP_QP_PRODUCTION_PLAYBOOK.md` §10.1). Audited against it
+anyway, they largely already conformed — the standard codified what the desktop was doing rather than
+correcting it. **QP2503 onwards must be authored against §10.1 directly.**
+
+### Laptop corrections
+
+- **QP2501 Q4 and QP2502 Q4** — Understand reframed off examiner-voice (§10.1 rule 5). Two sentences
+  in each; all substantive explanation preserved verbatim. No Model Answer content altered.
+- **QP2501 Q1 and Q3 study notes** told a paying reader a claim was *"flagged for confirmation before
+  publication"* — on a published page. The disclosure is kept; the internal workflow phrasing is not.
+- **UI fixtures added for both papers** in `ui_behaviour_test.cjs`, which fails by design when a paper
+  has none. Regulation probes were chosen as each paper's sharpest temporal risk: `MEPC.391(81)` for
+  QP2501 (LCA guidelines edition) and `MSC.560(108)` for QP2502 (in force 1 Jan 2026, *after* that
+  sitting).
+
+### Two things worth carrying forward
+
+**A new paper's customer-facing delivery page arrives untracked.** `solvedQP/QP####.html` is generated,
+so it shows as `??` and is missed by explicit staging unless named. On QP2502 it was caught before the
+commit; had it shipped, the paid page would have 404'd while the manifest advertised it. **Name it
+explicitly in every future integration.**
+
+**Two integration steps always fail first, by design.** `REUSE MAP` goes stale the moment a paper
+becomes solved (re-run `build_reuse_map.py`), and `UI BEHAVIOUR` fails until the paper has a fixture.
+Neither is a defect in the paper.
+
+### Verified corpus state after both
+
+**22 available papers · 198 published questions · 54 unsolved across 6 papers**
+(QP2406, QP2407, QP2408, QP2503, QP2504, QP2507). Both papers transitioned Planned soon → Available
+automatically; no manual index edit. QA at publication: toolchain and self-tests green, 121/121
+security, double build byte-identical, clean at 1280 and 375, paid pages gated 302 live.
 
 ---
 

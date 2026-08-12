@@ -4992,3 +4992,27 @@ Nothing was lost or pushed; the fix was to commit from a message file thereafter
 The QP2411 commit missed three derived files because it staged from a hand-written path list rather
 than from what the build actually changed. Landed immediately in `3a19f02`. The final paper staged
 from `git status`.
+
+## 2026-08-12 — Batch 2 papers 1 and 2 integrated and published (laptop)
+
+Desktop had already completed QP2501 (`fb2796f`, 16:18 IST) and QP2502 (`c04b402`, 20:27 IST) while a
+laptop prompt was still describing QP2501 as possibly partial. The laptop's first session on this
+correctly **stopped and authored nothing** — wrong machine, paper already complete, another session
+demonstrably active 25 minutes earlier, and no QP2503/2504/2507/2406 branches on origin. The Founder
+then re-scoped the laptop to review and integrate.
+
+Both papers were integrated by **controlled path extraction**, not branch merge. Independent source
+verification against the PDFs passed 9/9 on each; the apparent mismatches were the host's marketing
+panels and recurrence table interleaved into the PDF text stream, which both specs correctly exclude.
+
+Three laptop corrections in total: examiner-voice Understand openings on QP2501 Q4 and QP2502 Q4, and
+QP2501 Q1/Q3 study notes telling a paying reader a claim was "flagged for confirmation before
+publication" on a page that is published. QP2502 Q6 was checked specifically against the Batch 1
+regulation-21-is-not-EEDI defect and is clean (regulations 22 and 24, primary-verified).
+
+Two integration lessons recorded in CURRENT_STATUS §7e: a new paper's `solvedQP/QP####.html` arrives
+**untracked** and must be named explicitly or the paid page ships as a 404; and REUSE MAP plus UI
+BEHAVIOUR always fail on first build of a new paper, by design.
+
+Published at `eb3a1c5` and `a1cc735`. **22 available papers, 198 published questions, 54 unsolved
+across 6 papers.** Batch 2 is 2/6. QP2503 is next and belongs to the desktop.
