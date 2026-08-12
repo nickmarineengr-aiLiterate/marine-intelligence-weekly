@@ -5090,3 +5090,97 @@ Readiness recomputed on the governed model: **QP2507 converts 0/9 → 8/9**, the
 in the corpus and exactly what the Batch 2 board predicted, with five of its eight donors coming
 from QP2503. QP2504 5/9, QP2406/QP2407/QP2408 1/9 each, reach 0 for all five. Governed order still
 puts QP2504 next. Nothing was started.
+
+
+---
+
+## 41. QP2504 (April 2025) - laptop review and publication, 2026-08-13
+
+Session opened at `main` = `1d14118`, 23 papers / 207 questions. Desktop branch
+`pastpapers/qp2504-founder-review` present at `aa0d8a6`, based on `333e814`, pushed
+2026-08-13 00:14 IST. Tip re-fetched twice at preflight and unchanged, so the desktop was idle
+on QP2504 and the review proceeded. Twelve files, every one paper-owned, **no global artefacts
+in the branch** - the cleanest desktop handover of the batch. Integrated by path extraction onto
+`integration/qp2504-laptop-review` cut from current `origin/main`; the desktop branch was not
+merged and is retained as provenance.
+
+**Source verification.** `APRIL 2025.pdf`, two pages, `Sr. No. EM - 2504`, three hours, total
+marks 100, answer six of nine. All nine `text_verbatim` fields match the printed source exactly,
+including every printed anomaly: Q1's missing sentence break, Q3's unlabelled limb (a), Q4's
+comma splice, Q7's number disagreement, Q8's "What is P&I clubs?" and "filling a claim", and
+Q9's "MSC. FAL.1/Circ.3" and "prone of cyber risks". Sub-part marks 8+8, 4+6+6, 8+8, 16, 8+8,
+16, 8+8, 5+5+6 and an unmarked four-limb list, each summing to 16. No host branding reached any
+shipped surface, and the host's five printed recurrence codes are recorded in the spec but are
+not searchable in the built page - verified by the inverted fixture probe.
+
+**Temporal anchor re-verified against primary sources, not accepted.** `MEPC.397(83)`,
+`MEPC.398(83)` and `MEPC.400(83)` were each opened from the corpus and each prints **11 April
+2025** on its face, fixing the MEPC 83 adoption day independently of any meeting calendar.
+`MEPC.338(76)` Table 1 and the `MEPC.400(83)` replacement table were read verbatim and compared:
+the 2023-2026 rows are identical, so **Z = 9 % governs the 2025 reporting year before and after
+11 April 2025** and the Q6 answer is day-independent, exactly as section 2.2 of the anchor claims.
+`MEPC.328(76)` operative paragraph 3 was read and states **1 November 2022**, confirming the
+`TRUE_SOURCE_CORRECTION_REQUEST` at section 5; three canonical corpus records still carry
+`2023-11-01` and were **not** modified.
+
+**Four anchor-document defects corrected.** Section 2 was headed "THE TWO IN-MONTH BOUNDARIES"
+while section 1 and section 2.4 establish three. Section 2.1 twice claimed "four MEPC 83
+resolutions" where the corpus holds three - the conclusion is unaffected, three independent
+instruments still fix the date. Section 3.1 described 1 May 2025 as "three weeks after this
+sitting month closes" when it is **the day after**. Section 3's MLC and Hong Kong Convention rows
+carried week counts that are day-dependent within April.
+
+**The one material shipped defect.** Q6 stated on **seven** surfaces - Understand, model answer,
+study notes, quick-revision cue, a retrieval card, the question delta and the temporal-review
+record - that the 2024 attained CII "fell due for reporting by 31 March 2025, three weeks before
+this paper". Three weeks after 31 March is 21 April; the source copy prints no day, and the true
+gap runs from one day to four weeks. This breaches the paper's own governing rule at anchor
+section 1. All seven were rewritten to "in the month immediately before...". The four *other*
+occurrences of "three weeks" in Q6 are a hypothetical worked example - a ship at anchor for three
+weeks, showing that AER rewards distance - and were deliberately left untouched; a blind grep
+would have destroyed them.
+
+**Corpus-wide propagation.** Ten papers carry week- or day-granularity sitting-relative claims.
+Adjudicated individually rather than swept: eight are cosmetic, describing events comfortably
+outside their sitting month where the substance is day-independent. **One was material and
+live** - `QP2510-Q6` described the electronic Ballast Water Record Book amendments as taking
+effect "three weeks before this examination" when 1 October 2025 is the first day of QP2510's
+own sitting month, misclassifying an in-month boundary as a settled pre-sitting fact, in a
+shipped Study Guide paragraph. Fixed on all three of its surfaces. Recorded as **known trap 17**
+with an explicit instruction not to grep the phrase bare.
+
+**Understand audit.** 5 PASS (Q2, Q3, Q7, Q8, Q9), 4 MINOR (Q1, Q4, Q5, Q6), 0 FAIL; every
+MINOR corrected. Rule 4 was applied as judgement, not purge: Q1 lost three regulation numbers,
+Q4 one, Q5 two section numbers and four colonial statute years. **Understand now carries zero
+citations across all nine questions** - the first Batch 2 paper to reach that, and the answer to
+the QP2503 finding that section 10.1 had improved quality without moving rule 4. Four dates were
+kept because the concept dies without them: SOLAS **1974** and the **2017** Act are instrument
+names, the CII **2019** reference line is the mechanism, and Q9's **4 April 2025** is the whole
+point of its section.
+
+**Content.** Q1 was re-verified line by line against the held SOLAS 2024 consolidated edition -
+regulation 1.1, 1.3, 2.2, 2.3, 3.1, the three-rung retrofit ladder at 3.2/3.3/3.4 and 3.5 are all
+exact. Q5's section 13 quotation is verbatim against the official India Code PDF, and the answer
+correctly states that the Act **delegates** assessor qualifications to rules rather than
+enumerating them - the obvious place to invent a statutory list, and it does not. Q2 draws the
+IMO/MOU boundary expressly rather than inventing Detention Review Panel procedure the corpus
+cannot support. No defect was found in any of the nine model answers.
+
+**Validation and QA.** `validate_spec` 0 errors, 0 blocking on QP2504 and on QP2510 after its
+fix. Full toolchain **ALL STAGES PASS**. Two failures were fixed on the way, both anticipated:
+the UI fixture had no `QP2504` entry, and the reuse map was stale. UI behaviour 62/62 after the
+fixture was written. Reuse self-test PASS including the synthesised-baseline case, which now
+names `QP2504-Q8`. Security 121 tests across four suites, 0 failures. Corpus consumer 60 checks,
+0 failures. Coverage, search 13/13, health and known-traps all pass. **Double-build
+byte-identical across eleven generated artefacts.**
+
+**Delivery-page gate.** `solvedQP/QP2504.html` was generated **untracked**, the same failure that
+hit QP2501, QP2502 and QP2503. Caught by the Part 15 gate and staged explicitly. It is not
+gitignored - it is simply a new path, and `git add -u` never sees one.
+
+**Desktop coordination.** `pastpapers/qp2507-founder-review` **appeared during this session**, at
+`57b940a`, 02:46 IST, carrying only `QP2507_TEMPORAL_AND_DONOR_ANCHOR.md` and a staging
+checkpoint - no questions built. QP2507 is **ACTIVE, not complete**, and was not touched.
+`QP2406`, `QP2407` and `QP2408` remain absent.
+
+**Published:** 24 available papers, 216 published questions, 36 unsolved across 4 papers.

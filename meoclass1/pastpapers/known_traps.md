@@ -157,3 +157,36 @@ Once a question's status moves on, "Pilot Built" must not survive in generated H
 Generated pages are rebuilt from the spec, so this only appears if someone hand-edited
 output — which is itself the error.
 GREP: Pilot Built
+
+### 17. Week-granularity distances from an undated sitting day
+**No source copy prints an examination day — only a month.** Any statement of the form
+"N weeks before/after this sitting" is therefore a distance measured from a day nobody
+knows, and it silently asserts one. Across a 30-day sitting month the true figure moves by
+more than four weeks, so a week count is only ever the value for one arbitrary day.
+
+Two severities, and only the first is a defect of substance:
+
+- **Material** — the event falls *inside* the sitting month, and the week count disguises
+  an in-month boundary as a settled pre-sitting fact. Found for real twice: QP2504-Q6 said
+  the 2024 attained CII "fell due for reporting by 31 March 2025 — **three weeks before
+  this paper**" across seven surfaces, when the true gap runs from one day to four weeks;
+  and QP2510-Q6 said the electronic Ballast Water Record Book amendments "took effect on
+  1 October 2025, **three weeks before this examination**" when 1 October is the *first day
+  of QP2510's own sitting month*. The second was shipping in the Study Guide.
+- **Cosmetic** — the event lies comfortably outside the sitting month, so the substance is
+  day-independent and only the precision is spurious (QP2402, QP2411, QP2503, QP2508,
+  QP2602, QP2603).
+
+**Rule.** Use month granularity — "in the month immediately before this sitting", "the
+winter before", "two months after this sitting month". A week or day count is admissible
+only where the event lies more than a full month outside the sitting month, and even then
+adds nothing. Where the event falls inside the sitting month it must be classified as an
+in-month boundary under the paper's temporal anchor, never expressed as a distance.
+
+GREP: SKIP
+NOTE: a bare phrase match is wrong here — "three weeks at anchor" is a legitimate
+hypothetical in QP2504-Q6 that shows AER rewards distance, and a mechanical purge would
+destroy it. The test is whether the phrase measures from the examination day, which needs
+the surrounding clause. Detect on the pattern
+`<number> (week|day)s? (before|after|ago) ... (this )?(sitting|paper|examination)`.
+SCOPE: product

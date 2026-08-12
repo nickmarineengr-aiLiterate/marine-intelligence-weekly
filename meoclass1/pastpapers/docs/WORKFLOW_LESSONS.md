@@ -1689,3 +1689,61 @@ OWNER:     NONE — no tool enforces this yet
 REVISIT:   If a spec-rewriting helper is ever factored out into tools/, this becomes its contract
            and this entry should be promoted to PROMOTED_TO_TOOL.
 ```
+
+
+---
+
+## A ZERO-RESULT SWEEP IS A CLAIM; SO IS A PRECISE ONE
+
+The production protocol already requires a zero-result sweep to be controlled. QP2504 shows the
+mirror failure: a sweep that *returns* something, phrased so precisely that the precision itself
+is the defect. "Three weeks before this paper" reads like a verified fact and is actually an
+assertion about which day the candidate sat - a fact no source copy carries. It survived the
+desktop's own 28-candidate temporal adjudication because every detector looks for *dates*, and
+this claim contains none: it is a *distance*.
+
+**Lesson.** Add relative-distance phrasing to the temporal sweep, not just absolute dates. The
+detectable pattern is a number, then week/day, then before/after/ago, then sitting/paper/
+examination. Month granularity is safe within a sitting month; week and day granularity is not.
+
+EVIDENCE:  QP2504-Q6, seven shipped surfaces, found at laptop review 2026-08-13; the same class
+           found live in QP2510-Q6's Study Guide, where it misclassified an in-month boundary.
+SCOPE:     every paper - no source copy prints an examination day.
+SEE ALSO:  known_traps.md 17.
+
+---
+
+## GENERALISING A DEFECT MEANS ADJUDICATING IT, NOT GREPPING IT
+
+The corpus-wide sweep for the QP2504 defect returned about forty hits across ten papers. Eight
+papers were **not** defective: their events sit comfortably outside the sitting month, so the
+substance is day-independent and only the precision is loose. One was genuinely defective. And
+inside the offending question itself, four occurrences of the *identical phrase* were a correct
+teaching hypothetical - a ship at anchor for three weeks - that a mechanical replace would have
+destroyed while fixing the real fault.
+
+**Lesson.** "Search the corpus for the same class" is a discovery step, never a fix step. Every
+hit needs the surrounding clause read before it is touched, and the trap entry should say so
+explicitly rather than leaving a bare GREP string for the next session to run blind.
+
+EVIDENCE:  QP2504 laptop review 2026-08-13 - 40 hits, 10 papers, 1 real propagation, 4
+           false positives inside the defective question itself.
+SCOPE:     any Part-12 generalisation.
+
+---
+
+## THE DELIVERY PAGE HAS NOW BEEN MISSED FOUR TIMES; THE CAUSE IS TRACKED-ONLY STAGING
+
+QP2501, QP2502, QP2503 and now QP2504 each generated `solvedQP/<paper>.html` as an **untracked**
+file. It is not gitignored. It is a *new path*, and a tracked-only stage (`git add -u`) updates
+only paths git already tracks, so a staging step that works perfectly for the other twenty-odd
+regenerated artefacts silently omits the one file the paying customer actually opens. The failure
+mode is the worst available: the manifest flips to `AVAILABLE`, the home count increments, the
+year page links nine anchors, and the delivery URL 404s.
+
+**Lesson.** The gate is worth keeping, but the real fix is at the staging step: after any paper
+integration, stage with an explicit path add for `solvedQP/<paper>.html` - or add over the
+generated directories - never a tracked-only update alone.
+
+EVIDENCE:  four consecutive papers; caught each time only by the explicit pre-commit gate.
+SCOPE:     every paper integration.

@@ -1,10 +1,10 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-13, after **QP2503 (March 2025) was laptop-reviewed and published to
-`main`**, taking Batch 2 to 3/6 and the product to 23 papers / 207 questions.
-See §7f for QP2503, §7e for QP2501 and QP2502, §7a for QP2512, §7b for the derived layer,
-§7c for the desktop batches, §1a for security.
+Last updated: 2026-08-13, after **QP2504 (April 2025) was laptop-reviewed and published to
+`main`**, taking Batch 2 to 4/6 and the product to 24 papers / 216 questions.
+See §7g for QP2504, §7f for QP2503, §7e for QP2501 and QP2502, §7a for QP2512, §7b for the
+derived layer, §7c for the desktop batches, §1a for security.
 
 > # QP2512 IS LIVE. THE SOLVEDQP DERIVED LAYER IS BUILT.
 >
@@ -13,8 +13,8 @@ See §7f for QP2503, §7e for QP2501 and QP2502, §7a for QP2512, §7b for the d
 > extraction onto current `main` rather than by merging its stale branch. All six desktop branches
 > are **retained** as provenance evidence and were not deleted.
 >
-> **Product: 23 available papers · 207 published questions · 252 in the corpus.**
-> 45 unsolved questions remain across 5 unsolved papers.
+> **Product: 24 available papers · 216 published questions · 252 in the corpus.**
+> 36 unsolved questions remain across 4 unsolved papers — `QP2507`, `QP2406`, `QP2407`, `QP2408`.
 >
 > **Three defects were corrected, two of them on already-live papers.** The referred
 > `QP2402-Q3` regulation-21 defect was confirmed against the corpus copy of `MEPC.328(76)` and
@@ -30,10 +30,12 @@ See §7f for QP2503, §7e for QP2501 and QP2502, §7a for QP2512, §7b for the d
 > presence of model answers, so no status was ever edited by hand.
 >
 > **Nothing is authorised for laptop authoring.** Do not start a paper without the Founder.
-> Batch 1 is closed. **Batch 2 is 3/6 LIVE** — QP2501, QP2502 (§7e) and QP2503 (§7f), each
-> authored by the desktop, laptop-reviewed and published one at a time. **QP2504 is next by the
-> governed order and belongs to the desktop; QP2507 is now the strongest by readiness at 8/9.**
-> Neither is authorised here.
+> Batch 1 is closed. **Batch 2 is 4/6 LIVE** — QP2501, QP2502 (§7e), QP2503 (§7f) and QP2504
+> (§7g), each authored by the desktop, laptop-reviewed and published one at a time.
+> **QP2507 is next by the governed order and is ACTIVE on the desktop** — its branch
+> `pastpapers/qp2507-founder-review` appeared at `57b940a` on 2026-08-13 carrying its temporal
+> anchor and a checkpoint only, with no questions built. It is not authorised here, and the
+> laptop must wait for a complete 9/9 push before reviewing it.
 >
 > Corpus consumption remains integrated (§2a) and read-only. **The Founder decisions in §6 are
 > still open and did not block QP2512** — it cites none of the three corpora, so its
@@ -538,6 +540,54 @@ automatically; no manual index edit. QA at publication: toolchain and self-tests
 security, double build byte-identical, clean at 1280 and 375, paid pages gated 302 live.
 
 ---
+
+## 7g. QP2504 (April 2025) — laptop-reviewed and published
+
+Desktop branch `pastpapers/qp2504-founder-review` at `aa0d8a6`, based on `333e814`, pushed
+2026-08-13 00:14 IST. **Twelve files, all paper-owned, no global artefacts** — the cleanest
+handover of Batch 2. Integrated onto current `main` by path extraction on
+`integration/qp2504-laptop-review`; the desktop branch was not merged and is retained.
+
+**The paper is the hardest temporal case in the batch.** Three boundaries fall *inside* the
+sitting month and no examination day is printed: MEPC.400(83) and the Net-Zero Framework
+approval on 11 April 2025, and `MSC-FAL.1/Circ.3/Rev.3` on 4 April 2025. The anchor discharges
+all three rather than hedging — MEPC.400(83) is proved immaterial by a differential on the G3
+table (the 2023–2026 rows are unchanged, so Z = 9 % governs 2025 on every day of April), the
+Net-Zero Framework is prohibited outright, and Q9 is written to be correct under either
+revision by naming the edition it answers on. **All three proofs were re-verified at review
+against the held primary PDFs and hold.**
+
+**One material defect was found and corrected.** Q6 asserted that the 2024 attained CII "fell
+due for reporting by 31 March 2025 — **three weeks before this paper**", on seven shipped
+surfaces. That is a distance measured from the examination *day* and it breaches the paper's
+own governing rule that no answer may depend on which day in April the candidate sat. All
+seven now read "in the month immediately before…". The same class was swept corpus-wide and
+one further **live** instance was found and fixed: `QP2510-Q6` described the electronic Ballast
+Water Record Book amendments as taking effect "three weeks before this examination" when
+1 October 2025 is the *first day of QP2510's own sitting month* — a shipped Study Guide
+statement that misclassified an in-month boundary. Recorded as **known trap 17**.
+
+**Understand rule-4 pass.** Citations were removed from Q1 (three regulation numbers), Q4 (one)
+and Q5 (two section numbers plus four colonial statute years). Understand now carries **zero**
+regulation, section or article numbers across all nine questions — the first paper in Batch 2
+to reach that. Four dates survive as necessary and were kept deliberately: SOLAS **1974** and
+the **2017** Act name their own instruments, the CII **2019** reference line is the mechanism,
+and Q9's **4 April 2025** is the entire point of its section.
+
+**Verdict Q1–Q9:** Understand — 5 PASS, 4 MINOR (all corrected), 0 FAIL. Content completeness —
+every printed limb covered, every definition complete. No answer defect was found in any of the
+nine model answers.
+
+**Corpus defect confirmed and left open.** `MEPC.328(76)` entry into force is `2022-11-01`,
+read from the resolution's own operative paragraph 3 and corroborated by two further held
+resolutions. Three canonical True Source records still say `2023-11-01`. The corpus was not
+modified; the `TRUE_SOURCE_CORRECTION_REQUEST` stands.
+
+**Delivery-page gate held.** `solvedQP/QP2504.html` was generated **untracked** — the same
+failure as the previous three papers — and was caught by the Part 15 gate and staged explicitly
+before commit. Root cause: the toolchain writes a *new* file per paper and `git add -u` only
+updates tracked paths.
+
 
 ## 7f. Batch 2 paper 3 — QP2503 — **LIVE ON MAIN**
 

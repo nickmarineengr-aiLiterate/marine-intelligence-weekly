@@ -105,6 +105,39 @@ const FIXTURES = {
     // that it does. If this probe stops resolving to Q2, the guard has been lost.
     regulation: ['msc.560(108)', 'QP2502-Q2'],
   },
+  QP2504: {
+    probes: [
+      ['industrial personnel', 'QP2504-Q1'],
+      ['clear grounds', 'QP2504-Q2'],
+      ['underwater radiated noise', 'QP2504-Q3'],
+      ['oprc', 'QP2504-Q4'],
+      ['judicial sale', 'QP2504-Q5'],
+      ['carbon intensity indicator', 'QP2504-Q6'],
+      ['sire 2.0', 'QP2504-Q7'],
+      ['letter of undertaking', 'QP2504-Q8'],
+      ['operational technology', 'QP2504-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['walk to work', 'QP2504-Q1', 'Q1 (how personnel actually cross to the turbine)'],
+      ['substandard ship', 'QP2504-Q2', 'Q2 (what a detention is a finding of)'],
+      ['wake equalising duct', 'QP2504-Q3', 'Q3 (an energy-saving device that is also a noise measure)'],
+      ['sister ship arrest', 'QP2504-Q5', 'Q5 (the reach of the arrest power under section 5(2))'],
+      ['three-fourths collision', 'QP2504-Q8', 'Q8 (the hull-policy share that leaves the club the other quarter)'],
+    ],
+    // MEPC.400(83) is the ONE resolution adopted inside this sitting month --
+    // 11 April 2025 -- that touches anything this paper asks about. The anchor
+    // proves it immaterial: it replaced G3 table 1 but left the 2023-2026 rows
+    // untouched, so Z = 9% governs 2025 on every day of April. It is the
+    // regulation probe precisely because that adjudication is the fragile part.
+    // If this probe stops resolving to Q6, the in-month reasoning has been lost
+    // from the built page and the answer has silently become day-dependent.
+    regulation: ['mepc.400(83)', 'QP2504-Q6'],
+    // Host sitting code printed against Q9 on the source copy, for a September
+    // 2022 sitting MIW does not even hold. It must never be searchable.
+    recurrence: ['2022/sep/q3'],
+    narrow: ['aggregate number', 'QP2504-Q1'],
+  },
   QP2503: {
     probes: [
       ['two classification societies', 'QP2503-Q1'],
