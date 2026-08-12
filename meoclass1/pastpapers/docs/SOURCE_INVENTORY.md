@@ -55,7 +55,7 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 
 ### Questions printing NO mark allocation
 
-**17 of 252**, across 5 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
+**19 of 252**, across 6 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
 
 | Question | Sitting | Title |
 |---|---|---|
@@ -76,6 +76,8 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 | QP2511-Q4 | November 2025 Q4 | LNG Bunkering - Gassing Up, Cooldown, Vapour and Release |
 | QP2511-Q5 | November 2025 Q5 | Enhanced Survey Programme versus Condition Assessment Programme |
 | QP2511-Q6 | November 2025 Q6 | Propeller Blade Crack Found in Dry Dock |
+| QP2512-Q1 | December 2025 Q1 | Disease Vector Control and Ship Health Certificates |
+| QP2512-Q2 | December 2025 Q2 | LNG Bunkering Procedures |
 
 Printed marks are **metadata, not examiner wording**. `recurrence_model.normalise_stem` removes a marks token before comparing two stems, so the same task set once with a printed (16) and once without is EXACT rather than "reworded". Three real pairs in this corpus turn on exactly that, and the guard against over-stripping is tested in `recurrence_check.py`.
 
