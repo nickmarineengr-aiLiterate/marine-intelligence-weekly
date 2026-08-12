@@ -484,6 +484,44 @@ const FIXTURES = {
     // full name cannot collide with anything else on the paper.
     narrow: ['cargo ship safety radio certificate', 'QP2509-Q9'],
   },
+  QP2401: {
+    probes: [
+      ['uberrimae fidei', 'QP2401-Q1'],
+      ['single window', 'QP2401-Q2'],
+      ['carbon intensity indicator', 'QP2401-Q3'],
+      ['planned maintenance system', 'QP2401-Q4'],
+      ['unified requirement', 'QP2401-Q5'],
+      ['tribology', 'QP2401-Q6'],
+      ['vetting inspection', 'QP2401-Q7'],
+      ['fault tree analysis', 'QP2401-Q8'],
+      ['flag state performance indicators', 'QP2401-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['uberrima fides', 'QP2401-Q1',
+       'Q1 (the nominative variant; the answer renders uberrimae fidei)'],
+      ['mepc.1/circ.684', 'QP2401-Q3', 'Q3 (the EEOI circular, cited nowhere on the card)'],
+      ['pq index', 'QP2401-Q6', 'Q6 (a particle-quantifier term the answer never names)'],
+      ['inhibit gate', 'QP2401-Q8', 'Q8 (a gate type outside the worked example)'],
+      ['cdi', 'QP2401-Q7', 'Q7 (the chemical/gas parallel scheme, in metadata only)'],
+    ],
+    // FAL.14(46) rather than a SOLAS regulation, because it is this paper's
+    // sharpest temporal anchor: adopted 13 May 2022 but IN FORCE 1 January 2024,
+    // days before the sitting, which is what makes the maritime single window
+    // already mandatory here. Its successor FAL.15(47) did not enter into force
+    // until 1 January 2025. If this probe ever starts resolving to FAL.15(47),
+    // the paper has been re-anchored onto an amendment that had not yet bitten.
+    regulation: ['fal.14(46)', 'QP2401-Q2'],
+    // Leak probe. 2022/OCT/Q2 is a host annotation printed against Q1 on THIS
+    // source copy and appears on no other question of this paper. None of it
+    // may reach the shipped bytes.
+    recurrence: ['2022/oct/q2', 'QP2401-Q1'],
+    // Must resolve to exactly ONE card. January sets inspection regimes twice --
+    // Q4 carries port state control and the RO Code, Q7 carries vetting -- so
+    // 'inspection' and even 'questionnaire' are ambiguous. The compiled
+    // questionnaire's full name is SIRE 2.0 vocabulary and cannot collide.
+    narrow: ['compiled vessel inspection questionnaire', 'QP2401-Q7'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';
