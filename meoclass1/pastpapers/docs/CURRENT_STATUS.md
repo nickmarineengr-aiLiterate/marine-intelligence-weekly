@@ -1,9 +1,10 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-12, after **QP2512 was published to `main` and the SolvedQP derived layer —
-manifest, topic search, latest updates and daily health check — was built**.
-See §7a for QP2512, §7b for the derived layer, §7c for the desktop batches, §1a for security.
+Last updated: 2026-08-13, after **QP2503 (March 2025) was laptop-reviewed and published to
+`main`**, taking Batch 2 to 3/6 and the product to 23 papers / 207 questions.
+See §7f for QP2503, §7e for QP2501 and QP2502, §7a for QP2512, §7b for the derived layer,
+§7c for the desktop batches, §1a for security.
 
 > # QP2512 IS LIVE. THE SOLVEDQP DERIVED LAYER IS BUILT.
 >
@@ -12,8 +13,8 @@ See §7a for QP2512, §7b for the derived layer, §7c for the desktop batches, �
 > extraction onto current `main` rather than by merging its stale branch. All six desktop branches
 > are **retained** as provenance evidence and were not deleted.
 >
-> **Product: 22 available papers · 198 published questions · 252 in the corpus.**
-> 54 unsolved questions remain across 6 unsolved papers.
+> **Product: 23 available papers · 207 published questions · 252 in the corpus.**
+> 45 unsolved questions remain across 5 unsolved papers.
 >
 > **Three defects were corrected, two of them on already-live papers.** The referred
 > `QP2402-Q3` regulation-21 defect was confirmed against the corpus copy of `MEPC.328(76)` and
@@ -29,8 +30,10 @@ See §7a for QP2512, §7b for the derived layer, §7c for the desktop batches, �
 > presence of model answers, so no status was ever edited by hand.
 >
 > **Nothing is authorised for laptop authoring.** Do not start a paper without the Founder.
-> Batch 1 is closed. **Batch 2 is 2/6 LIVE** — QP2501 and QP2502 authored by the desktop,
-> laptop-reviewed and published 2026-08-12 (§7e). QP2503 is next and belongs to the desktop.
+> Batch 1 is closed. **Batch 2 is 3/6 LIVE** — QP2501, QP2502 (§7e) and QP2503 (§7f), each
+> authored by the desktop, laptop-reviewed and published one at a time. **QP2504 is next by the
+> governed order and belongs to the desktop; QP2507 is now the strongest by readiness at 8/9.**
+> Neither is authorised here.
 >
 > Corpus consumption remains integrated (§2a) and read-only. **The Founder decisions in §6 are
 > still open and did not block QP2512** — it cites none of the three corpora, so its
@@ -56,7 +59,7 @@ what is next, what is blocked.*
 | Path | `F:\Marine-Intelligence-Weekly` |
 | Remote | `https://github.com/nickmarineengr-aiLiterate/marine-intelligence-weekly.git` |
 | **Visibility** | **PUBLIC** — anything committed here is published, on any branch, `noindex` or not |
-| **`main`** | **`2f38586` — LIVE IN PRODUCTION.** The Written product, Security V2 and the whole pastpapers line were merged to `main` and deployed 2026-08-12. `main` is no longer a stale pre-product branch; it is what customers are served |
+| **`main`** | **`0816f3d` — LIVE IN PRODUCTION.** The Written product, Security V2 and the whole pastpapers line were merged to `main` and deployed 2026-08-12. `main` is no longer a stale pre-product branch; it is what customers are served |
 | Content head | `a5f2551` on `pastpapers/qp2509-founder-review` — the newest solved-paper state |
 | Tooling head | `850bdde` on `workflow/pil-v1` — content head plus the Production Intelligence Layer |
 | Release branch | `release/written-live-test-v1` — the reconciliation branch the cutover was assembled on. Fast-forwarded into `main`; kept as the release lineage |
@@ -74,7 +77,7 @@ them were discovered during the work, not inherited.
 
 | | |
 |---|---|
-| Production commit | `2f38586` |
+| Production commit | `0816f3d` |
 | Public URL | https://marineintelligenceweekly.com |
 | **Credential exposure** | **CLOSED.** 100 accounts rotated to random 16-character credentials, stored as salted hashes. Audit: 100 legacy plaintext → **0**. 100 notified, 0 failures |
 | **Affected count** | **100, not 28.** 28 was the size of the leaked git blob; the removed `api/check-db.js` disclosed any stored credential to an unauthenticated GET, so the exposure was never limited to it |
@@ -103,11 +106,11 @@ Recomputed from the specs, `build_reuse_map.py` and `solvedqp_check.py` after QP
 
 | | |
 |---|---|
-| **Corpus** | **252 questions / 198 solved / 54 unsolved** — 78.6 per cent solved |
-| **Papers** | 28 — **20 solved**, 8 answerless intake |
+| **Corpus** | **252 questions / 207 solved / 45 unsolved** — 82.1 per cent solved |
+| **Papers** | 28 — **23 solved**, 5 answerless intake |
 | **Years** | 2024 (11 papers), 2025 (11), 2026 (6). May is absent from the source set in all three years |
 | **Tier D (frozen intake field)** | **3** of the 72 unsolved, down from 17. Batch 1 consumed most of the pool. **Do not plan from this number** — it is the frozen intake field, and Batch 1 proved again that it goes stale: `QP2401-Q9` was frozen at tier C and derived to D, and `QP2410`'s board was wrong in both directions. The derived tier from `build_reuse_map.py` governs, and it is what makes the Batch 2 ordering constraint (`QP2507` after `QP2501` and `QP2503`) real |
-| **Delivery** | `solvedQP/` — **20 papers, 180 questions, 3 year sheets, 1 index**, 29 pages |
+| **Delivery** | `solvedQP/` — **23 papers, 207 questions, 3 year sheets, 1 index**, 30 pages |
 | **Toolchain** | ALL STAGES PASS · `--self-test` PASS · double-build **byte-identical across 265 artefacts** |
 | **Security (offline)** | **121/121 pass** — `security.test.mjs` 38, `sessions.test.mjs` 32, `rotation.test.mjs` 22, `reset.test.mjs` 29. Re-run unchanged after all six integrations; no security surface was touched |
 | **Corpus projection (legacy)** | `RulesApp/repository/index/` is a **2026-07-25 snapshot at 788 nodes** of the `RulesApp` repository. **This is NOT the True Source corpus** — see §2a. It remains 218 nodes behind its own master and is no longer the resolver target |
@@ -396,7 +399,7 @@ Built 2026-08-12. Full architecture: [`SOLVEDQP_DERIVED_LAYER.md`](SOLVEDQP_DERI
 
 | Component | Path | State |
 |---|---|---|
-| **Manifest** | `solvedQP/solvedqp_content_index.json` | **ACTIVE** — 28 papers, 22 available, 198 published questions, 6 planned, 3 known-absent |
+| **Manifest** | `solvedQP/solvedqp_content_index.json` | **ACTIVE** — 28 papers, 23 available, 207 published questions, 5 planned, 3 known-absent |
 | Generator | `tools/pastpapers/build_solvedqp_manifest.py` | in the toolchain, `--check` and `--self-test` |
 | **Topic search** | `solvedQP/index.html`, over the manifest | **ACTIVE** — question-level, grouped by sitting, links to the anchor |
 | Search tests | `tools/pastpapers/solvedqp_search_test.py` | 13 / 13 |
@@ -533,6 +536,95 @@ Neither is a defect in the paper.
 (QP2406, QP2407, QP2408, QP2503, QP2504, QP2507). Both papers transitioned Planned soon → Available
 automatically; no manual index edit. QA at publication: toolchain and self-tests green, 121/121
 security, double build byte-identical, clean at 1280 and 375, paid pages gated 302 live.
+
+---
+
+## 7f. Batch 2 paper 3 — QP2503 — **LIVE ON MAIN**
+
+Published 2026-08-13 at `0816f3d` (integration commit `b4f2469`). Desktop authored it at
+`2ca4aa4`; the laptop reviewed it as **candidate input** and integrated by controlled path
+extraction from `origin/main`. The desktop tip is untouched. Desktop was probed three times
+across the session and never moved.
+
+| | QP2503 |
+|---|---|
+| Sitting | March 2025 · printed serial **EM - 2503**, 2 pages |
+| Desktop tip / base | `2ca4aa4`, branched from `333e814` |
+| text_verbatim vs PDF | 9/9 faithful, printed anomalies preserved |
+| validate_spec | 0 errors, 0 blocking |
+| Laptop corrections | 2 (both Understand) |
+| Corpus propagation | 1 (QP2508-Q8) |
+
+**The paper's signature finding, verified independently at source.** MARPOL Annex VI
+regulation 24 Table 1 prints **two** phase timetables split by ship type. Containerships, gas
+carriers ≥15,000 DWT, general cargo ships, LNG carriers and cruise passenger ships entered
+Phase 3 on **1 April 2022**; tankers, bulk carriers, reefers, combination carriers and the
+ro-ro classes on **1 January 2025**. At March 2025 Phase 2 has therefore closed on **both**
+timetables — the second only ten weeks before the paper — so Q7's printed premise, "the
+present EEDI framework under Phase 2", is false. The stem is preserved verbatim and
+adjudicated, not corrected away. Confirmed against the corpus canonical record
+`MARPOLVI_REG24.json`, which names transplanting one timetable onto the other as the unit's
+most transplantable error.
+
+### Understand audit — the first paper authored directly under §10.1
+
+**7 PASS · 2 MINOR · 0 FAIL** on the reconstruction test. Two corrections:
+
+- **Q5** carried `(section 2)` and `(section 3)`, referring to answer-route steps but reading
+  unavoidably as sections of the **Marine Insurance Act, 1963** — on the one question whose
+  verification record deliberately refuses to assert any section beyond 19, 20 and 66. The
+  Understand section was manufacturing exactly the false statutory precision the Answer was
+  built to avoid. Removed. Corpus sweep: **unique to this question**; QP2502-Q5's section
+  numbers are genuine Admiralty Act citations and were left alone.
+- **Q3** addressed the examiner as "he" on the paper's *gender-equality* question, and
+  substituted exam strategy for explanation (§10 rule 5). Rewritten. The same pronoun defect
+  was found in one other live paper, **QP2508-Q8**, and corrected there.
+
+### Did §10.1 actually improve authoring? Partly — and measurably
+
+| | QP2501 | QP2502 | **QP2503** |
+|---|---|---|---|
+| Understand median words | 205 | 272 | **196** |
+| Range | 175–221 | 196–301 | **160–217** |
+| Rule-4 breaches (dates / citations) | 4/9 | 6/9 | **5/9** |
+
+Direct authoring under the standard produced **tighter, more consistent length** — QP2502 ran
+well over the ~120–200 band the standard sets, QP2503 sits inside it with the narrowest spread
+of the three — and a markedly more disciplined single-thesis opening ("one boundary", "one
+sentence generates this entire answer", "four legal events happening at once"). All nine pass
+the reconstruction test.
+
+**What it did not fix is rule 4.** Dates, regulation and article numbers still appear in 5 of 9
+sections, statistically indistinguishable from the two pre-standard papers. Where they are
+load-bearing (Q7's temporal adjudication, Q9's commencement date) they are defensible; the rule's
+own rationale — a number maintained in two places, and an Understand section that should be
+sitting-independent — is nonetheless not being met. **This is the open item for the next paper.**
+
+### Verified corpus state
+
+**23 available papers · 207 published questions · 45 unsolved across 5 papers**
+(QP2406, QP2407, QP2408, QP2504, QP2507). QP2503 transitioned Planned soon → Available
+automatically. QA at publication: toolchain and both self-tests green, solvedqp_check and
+coverage_check green with self-tests, 121/121 security, double build byte-identical across 52
+generated files, no console errors, no overflow at 1280 or 375, live search narrows correctly,
+no host or provider leakage, paid pages gated 302 live with `reason=nosession`, and the live
+public sample is **hash-identical** to the local build.
+
+### Donor readiness after QP2503 — governed model, not Jaccard
+
+| Paper | tier D | Reach |
+|---|---|---|
+| **QP2507** | **8 / 9** | 0 |
+| QP2504 | 5 / 9 | 0 |
+| QP2406 | 1 / 9 | 0 |
+| QP2407 | 1 / 9 | 0 |
+| QP2408 | 1 / 9 | 0 |
+
+**QP2507 has converted 0/9 → 8/9**, the largest readiness conversion in the corpus and exactly
+what the Batch 2 board predicted for solving QP2501 then QP2503. **Five of its eight donors are
+QP2503 questions** (Q5←Q5, Q6←Q3, Q7←Q2, Q8←Q1, Q9←Q9). The earlier crude Jaccard indication of
+3/9 materially understated it. Governed order still puts **QP2504** next; QP2507 is the
+strongest by readiness. That ordering call belongs to the Founder, not to this session.
 
 ---
 

@@ -1605,3 +1605,87 @@ The same discipline applies in reverse: an exact-string replacement script must 
 occurrence count and **write nothing** if any edit misses. That guard fired on the first QP2402 run
 — a generic string had consumed the specific ones — and cost nothing but a re-ordering, because the
 file was never written. Order replacements longest-first when one is a substring of another.
+
+---
+
+### 22. A self-test that HARVESTS its fixture from the live corpus is a wasting asset
+
+`build_reuse_map.py --self-test` case 1 proves that solving a donor promotes a question C→D. It
+found its fixture by scanning for an unsolved question whose recurrence family had **no** built
+member, then adding one. That is a real mutation and a good test.
+
+It is also a fixture mined from production state, and production state was being consumed by the
+very process the test guards. Five such questions remained before this session — `QP2507-Q5`, `Q6`,
+`Q7`, `Q8`, `Q9`. Solving QP2503 gave every one of them a donor, which is precisely what QP2503 was
+scheduled to do and what its own anchor document predicted. Case 1 then reported:
+
+```
+FAIL case 1 C->D on donor arrival  -- no unsolved question with an unsolved family
+```
+
+The corpus had become **more** complete and the suite went red. Worse, it went red in a way that
+reads exactly like a content regression on the paper being integrated, at the QA gate, minutes
+before publication. The failure would have recurred on every future paper, permanently.
+
+The fix is not to relax the assertion. It is to stop harvesting and start **synthesising**: take a
+question that *does* have built donors and un-build them to construct the same starting state. That
+is the identical mutation case 2 already relied on, it touches no spec, and so a classifier reading
+frozen intake metadata still cannot pass it. The guard's strength is unchanged; only its dependence
+on scarce production state is removed.
+
+The general rule: **if a test mines the live corpus for its fixture, ask what happens when the
+corpus runs out of that shape.** Anything the pipeline consumes will eventually be exhausted by the
+pipeline. A fixture built by mutation from whatever exists is stable; a fixture that requires a
+particular residue of unfinished work has a scheduled expiry date nobody wrote down.
+
+```
+EVIDENCE:  QP2503 integration, 2026-08-13. build_reuse_map.py case 1 failed at the QA gate with
+           "no unsolved question with an unsolved family" after QP2503 supplied donors to the last
+           five candidates (QP2507-Q5..Q9). Fixed at build_reuse_map.py by synthesising the
+           baseline; case 1 now reports "[synthesised baseline]" and passes.
+CATEGORY:  BUILD_QA
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     tools/pastpapers/build_reuse_map.py
+REVISIT:   If a future self-test case is written that again scans for a naturally occurring corpus
+           shape rather than constructing one, this entry applies to it before it is committed.
+```
+
+---
+
+### 23. A tool that rewrites a spec must detect that FILE'S formatting, not the corpus convention
+
+Removing one phrase from `study_notes` across eight specs was done by load / modify / `json.dumps`.
+The dump used `indent=1`, which is what the corpus uses — except that `QP2410.json` and
+`QP2501.json` are written with `indent=2`. Those two files came back as **6,493 and 5,858 changed
+lines** for a four-word edit, burying the real change and destroying the reviewability of the diff.
+
+The same trap had already been hit earlier in the same session on `QP2503.json` itself, from the
+opposite direction: a first pass dumped at `indent=2` against an `indent=1` file and rewrote all
+7,084 lines.
+
+There is no single house convention to assume, and asserting one would mean reformatting files that
+are not otherwise being touched. The discipline is:
+
+1. Read the file, parse it, and **re-serialise it unmodified**; assert the result is byte-identical
+   to what was read. That establishes the parameters — indentation, `ensure_ascii`, trailing
+   newline, line endings — from the file itself.
+2. Only then apply the edit and write with those same parameters.
+3. Check `git diff --numstat` before committing. A one-word change that reports thousands of
+   changed lines is a formatting accident, not a content edit.
+
+Where the edit is a plain substring with no structural component, skip the round-trip entirely and
+patch the raw text, asserting the occurrence count first. That is what was finally done on
+`QP2503.json` and `QP2508.json`, and both produced one-line diffs.
+
+```
+EVIDENCE:  QP2503 integration, 2026-08-13. Two separate full-file reformats caught by
+           `git diff --numstat` before commit: QP2503.json (7,084 lines) and QP2410.json /
+           QP2501.json (6,493 / 5,858 lines). Both reverted and redone; final diffs 1-3 lines each.
+CATEGORY:  AUTOMATION
+STATUS:    PROVEN
+SEEN:      2
+OWNER:     NONE — no tool enforces this yet
+REVISIT:   If a spec-rewriting helper is ever factored out into tools/, this becomes its contract
+           and this entry should be promoted to PROMOTED_TO_TOOL.
+```

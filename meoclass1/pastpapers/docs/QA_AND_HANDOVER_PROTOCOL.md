@@ -78,6 +78,13 @@ have produced — no scratch output, no stray render, no leftover temporary file
 
 - **Stage explicit paths. Never `git add .`** — it sweeps in scratch, caches and untracked
   experiments.
+- **MANDATORY PUBLICATION GATE — name `solvedQP/QP####.html` explicitly.** When a paper becomes
+  available its customer-facing delivery page is **generated**, so git reports it as `??`
+  untracked and staging by explicit path silently omits it. Shipping that state publishes a
+  manifest advertising the paper as Available while the paid page 404s. Before every integration
+  commit: run `git status`, confirm the delivery page exists, and confirm it appears in
+  `git diff --cached --name-only`. This has now arisen on **three consecutive papers** — QP2501,
+  QP2502 and QP2503 — and was caught by this check each time. Generated never means tracked.
 - One coherent commit per logical change.
 - Source PDFs are never committed. This repository is public.
 - Push to the paper's own `pastpapers/qp####-founder-review` branch.

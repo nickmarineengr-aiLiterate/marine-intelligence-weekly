@@ -5016,3 +5016,77 @@ BEHAVIOUR always fail on first build of a new paper, by design.
 
 Published at `eb3a1c5` and `a1cc735`. **22 available papers, 198 published questions, 54 unsolved
 across 6 papers.** Batch 2 is 2/6. QP2503 is next and belongs to the desktop.
+
+---
+
+## 2026-08-13 — QP2503 (March 2025) reviewed and published (laptop)
+
+Desktop pushed `pastpapers/qp2503-founder-review` at `2ca4aa4` at 22:42 IST, thirteen minutes
+before this session opened. The recorded coordination rule treats a push inside the last hour as
+evidence the other machine is live, so the branch was **not** taken on trust: it was probed three
+times across the session — at preflight, before commit and before merge — and `2ca4aa4` never
+moved, nor did `origin/main` from `27f46bc`. The branch shape was also complete rather than
+partial: one commit, paper HTML, anchor document, spec and nine verification records, and **no
+global derived artefact**. Integrated by controlled path extraction onto a branch cut from current
+`origin/main`; the desktop tip was left untouched.
+
+**Source.** Both pages extracted and read back. All nine stems, every marks split and every printed
+anomaly are verbatim, including the printed errors `a ship is classes by two classification
+societies`, the lower-case `international Maritime Organization` and the lower-case l in `EEDl`.
+Six answered questions at 16 marks total 96 against a printed `Total Marks - 100`; that is the
+paper's own anomaly and is recorded, not corrected.
+
+**Temporal.** The anchor's load-bearing claim was checked at source rather than accepted. MARPOL
+Annex VI regulation 24 Table 1 prints two phase timetables split by ship type, and the corpus
+canonical record `MARPOLVI_REG24.json` confirms it independently, down to naming the
+transplantation of one onto the other as the unit's most transplantable error. At March 2025 Phase
+2 has closed on both — 1 April 2022 for containerships and the larger gas carriers, 1 January 2025
+for tankers, bulk carriers and the ro-ro classes, ten weeks before the paper. Q7's printed premise
+is therefore false, and the desktop's handling is right: preserve the stem, deliver the
+phase-independent design content in full, and state the position. Q9 was checked against the
+Casualty Investigation Code independently — the very-serious-marine-casualty definition is correct,
+`MSC.255(84)` via SOLAS XI-1/6 is correct, and the QP2512 GISIS trap is not repeated. The
+Merchant Shipping Act, 2025 appears only inside trap warnings and never in a model answer.
+
+**Understand — the first paper authored directly under §10.1.** Seven PASS, two MINOR, no FAIL on
+the reconstruction test. Two corrections. Q5 carried `(section 2)` and `(section 3)`, which point
+at answer-route steps but read as sections of the Marine Insurance Act, 1963 — on the single
+question whose verification record deliberately refuses to assert any section beyond 19, 20 and 66.
+The Understand column was manufacturing exactly the false statutory precision the Answer had been
+built to avoid. A corpus sweep confirmed the pattern is unique to it: QP2502-Q5's section numbers
+are genuine Admiralty Act citations and were left alone. Q3 addressed the examiner as "he" on the
+paper's gender-equality question and substituted exam strategy for explanation; the same pronoun
+defect existed in one other live paper, QP2508-Q8, and was corrected there too.
+
+**Did the standard work?** Measurably on length and shape, not on citations. Understand median
+words: QP2501 205, QP2502 272, QP2503 **196**, with the narrowest spread of the three and
+single-thesis openings throughout. Rule-4 breaches — dates, regulation and article numbers — were
+4/9, 6/9 and **5/9**, so direct authoring under the standard did not move that rule at all. Where
+the numbers are load-bearing they are defensible; the rule's own rationale is still not being met,
+and that is the open item for the next paper rather than a defect in this one.
+
+**Two harness defects, both fixed.** The reuse-map self-test case 1 went red at the QA gate because
+QP2503 supplied donors to the last five questions that satisfied its fixture condition — exactly
+the five the anchor predicted it would unlock. The corpus had become more complete and the suite
+reported it as a regression; it now synthesises the baseline instead of harvesting it. Separately,
+two spec rewrites reformatted whole files because the corpus carries two JSON indent conventions.
+Both are recorded as WORKFLOW_LESSONS §22 and §23.
+
+**Also cleaned.** Nine live delivery pages told paying candidates a point was flagged "before
+publication". The earlier report placed this in QP2508 and QP2602 only; the real reach was twelve
+occurrences across eight specs. Corrected at canonical source by one uniform substitution, in its
+own commit. The generated `Re-verify before publication` heading was left alone — it sits inside
+`build_paper.py`'s `if not publish:` branch and never reaches a delivery page.
+
+`solvedQP/QP2503.html` was untracked when generated, the third consecutive paper, and was named
+explicitly. That gate is now written into `QA_AND_HANDOVER_PROTOCOL.md` §6 rather than left in
+session history.
+
+Integrated at `b4f2469`, cleanup at `0816f3d`, merged fast-forward and pushed. Production deploy
+Ready; the live public sample is hash-identical to the local build. **23 available papers, 207
+published questions, 45 unsolved across 5 papers.** Batch 2 is 3/6.
+
+Readiness recomputed on the governed model: **QP2507 converts 0/9 → 8/9**, the largest conversion
+in the corpus and exactly what the Batch 2 board predicted, with five of its eight donors coming
+from QP2503. QP2504 5/9, QP2406/QP2407/QP2408 1/9 each, reach 0 for all five. Governed order still
+puts QP2504 next. Nothing was started.
