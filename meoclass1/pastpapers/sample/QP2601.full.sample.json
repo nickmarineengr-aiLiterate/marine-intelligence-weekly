@@ -1,0 +1,39 @@
+{
+  "sample_version": "1",
+  "paper_id": "QP2601",
+  "output": "meoclass1/oralnotes/solved-qp-january-2026-full.html",
+  "canonical_note": "PROJECTION CONFIGURATION, not content. Every word this page shows is read from specs/QP2601.json at build time. If the January paper is corrected, rebuild; never edit the generated HTML and never copy answer text into this file.",
+  "audience_note": "This is the SECOND projection of the January paper. The first, QP2601.sample.json, is the PUBLIC storefront sample and shows two questions worked in full. This one shows all nine, and is written into meoclass1/oralnotes/ so the Edge middleware requires ORAL_QB_NOTES to read it. Existing Oral subscribers get the complete paper; the open internet does not.",
+  "full_demo_questions": [
+    "Q1",
+    "Q2",
+    "Q3",
+    "Q4",
+    "Q5",
+    "Q6",
+    "Q7",
+    "Q8",
+    "Q9"
+  ],
+  "gated_behind": "ORAL_QB_NOTES",
+  "allow_family_members": true,
+  "allow_family_members_reason": "FOUNDER DECISION, 2026-08-12, taken with the cost stated in advance. MEASURED COST: publishing all nine January questions in full also publishes 18 questions across 11 other sittings - QP2404-Q7, QP2502-Q2, QP2506-Q7/Q8, QP2508-Q4, QP2509-Q3/Q6, QP2511-Q3, QP2512-Q1, QP2602-Q4, QP2603-Q4, QP2604-Q3/Q4/Q6/Q7/Q8/Q9, QP2607-Q5. QP2604 (April) loses six of its nine questions; QP2607-Q5 sits in the July paper the storefront exists to sell. An earlier estimate of 'February, March, April and July' UNDERSTATED this - the true figure is printed by the build on every run and should be read from there, never from prose. The guard is NOT disabled: it still refuses any public output and any config lacking a reason or a gate. This override is accepted only because the page is gated behind ORAL_QB_NOTES, so the audience is the ~100 customers who already bought the Oral product, as an upgrade incentive toward Solved QP, rather than the open internet. TO REVERSE: delete this file and rebuild; nothing else depends on it.",
+  "preview_pattern": "none",
+  "preview_contract": {
+    "shows": [
+      "not applicable - every question on this page is worked in full"
+    ],
+    "withholds": [
+      "nothing"
+    ],
+    "route_titles_shown": 3
+  },
+  "commercial": {
+    "price_display": "₹1,500",
+    "price_note": "Approved Founder price for MIW Solved Question Papers, matching the storefront and api/_lib/products.js (150000 paise).",
+    "cta_href": "/SQ/index.html#solved-qp",
+    "cta_label": "Get the other 12 solved papers"
+  },
+  "publish": true,
+  "publish_note": "Gated Oral-subscriber projection. PUBLISHED in the sense that it is a real customer-facing page (no review banner, real price); it is still noindex, because build_sample.py forces noindex for any gated_behind output -- a crawler cannot read a page behind the entitlement gate."
+}

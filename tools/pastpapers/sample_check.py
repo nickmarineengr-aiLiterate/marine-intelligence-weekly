@@ -88,13 +88,31 @@ def check(cfg_path, errors, warnings):
                 errors.append('%s: demo %s has no study guide' % (name, q['q_no']))
 
     # ---- 3. a demo must not unlock a paid paper --------------------------
-    for qno in demo:
-        q = next(x for x in spec['questions'] if x['q_no'] == qno)
-        rel = relations[q['question_id']]
-        if rel['family_size'] > 1:
-            errors.append('%s: full demo %s belongs to a recurrence family with %s -- '
-                          'publishing it publishes those paid questions'
-                          % (name, q['question_id'], ', '.join(rel['others'])))
+    #
+    # Mirrors the guard in build_sample.py, including its single exception: a
+    # GATED output whose config names the entitlement and gives a written
+    # reason. The exception must be honoured in both places or the build passes
+    # and the check fails forever, which trains people to ignore the check.
+    #
+    # An override on a public output is still an ERROR here, and so is a config
+    # that claims a gate while writing into SQ/ -- the claim is verified against
+    # the output path rather than believed.
+    gated_demo = cfg.get('gated_behind') and cfg.get('allow_family_members')
+    if gated_demo and not str(cfg.get('output', '')).startswith('SQ/'):
+        fams = [next(x for x in spec['questions'] if x['q_no'] == qno) for qno in demo]
+        others = sorted({o for f in fams for o in relations[f['question_id']]['others']})
+        if others:
+            warnings.append('%s publishes %d question(s) from paid sittings by deliberate '
+                            'configuration, gated behind %s: %s'
+                            % (name, len(others), cfg['gated_behind'], ', '.join(others)))
+    else:
+        for qno in demo:
+            q = next(x for x in spec['questions'] if x['q_no'] == qno)
+            rel = relations[q['question_id']]
+            if rel['family_size'] > 1:
+                errors.append('%s: full demo %s belongs to a recurrence family with %s -- '
+                              'publishing it publishes those paid questions'
+                              % (name, q['question_id'], ', '.join(rel['others'])))
 
     # ---- 4. NEGATIVE: no preview answer content in the shipped bytes -----
     for q in spec['questions']:
@@ -135,17 +153,42 @@ def check(cfg_path, errors, warnings):
                     break
 
     # ---- 5. no other paper's answers, above all not July -----------------
-    for d in specs:
-        if d['paper_id'] == cfg['paper_id']:
-            continue
-        for q in d['questions']:
-            frags = _answer_fragments(q, limit=4)
-            for frag in frags:
-                probe = _norm(frag)[:70]
-                if len(probe) >= 45 and probe in hn:
-                    errors.append('CROSS-PAPER LEAK: %s answer text present in %s'
-                                  % (q['question_id'], name))
-                    break
+    #
+    # This rule exists because the output is PUBLIC. A recurring question worked
+    # in full here is the same answer a later paid sitting sells, so shipping it
+    # gives that sitting away to the open internet.
+    #
+    # A GATED output is a different question. Its reader has already bought the
+    # entitlement that opens the page, so "leaking" to them is a deliberate
+    # commercial choice rather than an accident -- and build_sample.py already
+    # refuses to make that choice unless the config names the gate, gives a
+    # written reason, and is not writing into SQ/. Re-failing it here would
+    # leave the toolchain permanently red with no way to go green except by
+    # deleting something, which is how a real guard gets removed by a future
+    # session that does not know why it was there.
+    #
+    # So the rule is skipped ONLY for a gated output, and the skip is announced
+    # rather than silent.
+    gated = cfg.get('gated_behind')
+    if gated and cfg.get('allow_family_members'):
+        if str(cfg.get('output', '')).startswith('SQ/'):
+            errors.append('GATE CLAIM FALSE: %s claims gated_behind=%s but writes into SQ/, '
+                          'which is public' % (name, gated))
+        else:
+            warnings.append('cross-paper rule SKIPPED for %s: output is gated behind %s by '
+                            'deliberate configuration' % (name, gated))
+    else:
+        for d in specs:
+            if d['paper_id'] == cfg['paper_id']:
+                continue
+            for q in d['questions']:
+                frags = _answer_fragments(q, limit=4)
+                for frag in frags:
+                    probe = _norm(frag)[:70]
+                    if len(probe) >= 45 and probe in hn:
+                        errors.append('CROSS-PAPER LEAK: %s answer text present in %s'
+                                      % (q['question_id'], name))
+                        break
 
     # ---- 6. conversion surface -------------------------------------------
     previews = [q for q in spec['questions'] if q['q_no'] not in demo]

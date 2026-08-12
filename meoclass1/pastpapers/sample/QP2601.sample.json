@@ -3,11 +3,11 @@
   "paper_id": "QP2601",
   "output": "SQ/solved-qp-sample-january-2026.html",
   "canonical_note": "This file is a PROJECTION CONFIGURATION, not content. Every word the sample page shows is read from specs/QP2601.json at build time. If the January paper is corrected, rebuild the sample; never edit the generated HTML and never copy answer text into this file.",
-
-  "full_demo_questions": ["Q1", "Q5"],
-
+  "full_demo_questions": [
+    "Q1",
+    "Q5"
+  ],
   "selection_rule": "A full-demo question must be a SINGLETON in the canonical recurrence model. Six of January's nine questions are the first occurrence of a family that returns in a later 2026 sitting, so publishing one of them in full also publishes its paid twin. Q3 is the worst case: its family reaches QP2607-Q5, the July paper the storefront is trying to sell. build_sample.py enforces this and fails the build if a chosen question has relatives.",
-
   "selection_rationale": {
     "Q1": {
       "title": "Low-Load Two-Stroke Operation",
@@ -32,7 +32,6 @@
       "Q2": "Also a safe singleton with the richest knowledge map in the paper (41 core points) and no currency flags. Held as the reserve if the Founder wants to swap either demo. Not chosen only because 'Human Element & Management' is a softer hook on a first visit than machinery or class survey."
     }
   },
-
   "preview_pattern": "understand_plus_route_titles",
   "preview_contract": {
     "shows": [
@@ -54,11 +53,12 @@
     "why_titles_not_points": "A step title says WHERE TO START AND IN WHAT ORDER, which is the conversion argument the Founder asked for. The points beneath it are the scoring propositions in compressed form - 25 to 41 of them per question - and publishing those for seven questions would hand over most of the paper.",
     "why_understand_first": "understand_first is orientation, not scoring content. The three-layer rule puts scoring material in the model answer and explanation in the study guide, so this is the one authored layer that can be given away in full without giving away marks. It is also the layer that best demonstrates that a human who understands the topic wrote the paper."
   },
-
   "commercial": {
-    "price_display": "PRICE_TBD",
-    "price_note": "No Solved QP price has been approved. The generator refuses to render a currency value while this is PRICE_TBD, so a placeholder cannot be published by accident.",
+    "price_display": "₹1,500",
+    "price_note": "Approved Founder price for MIW Solved Question Papers, matching the storefront and the catalogue in api/_lib/products.js (150000 paise). PRICE_TBD remains the sentinel: the generator refuses to render a currency value while it is set, so a placeholder cannot reach a customer by accident.",
     "cta_href": "/SQ/index.html#solved-qp",
     "cta_label": "Unlock the complete solved papers"
-  }
+  },
+  "publish": true,
+  "publish_note": "Public storefront sample. PUBLISHED: no review banner, index+follow, real price. This flag lives here rather than on the command line because run_toolchain.py rebuilds samples with no arguments, which silently reverted this page to a review copy in production."
 }

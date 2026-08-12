@@ -53,6 +53,23 @@ SAMPLE_CSS = """
 .sq-cta{display:inline-block;background:#0d9488;color:#fff;text-decoration:none;
   padding:10px 20px;border-radius:8px;font-size:13px;font-weight:700}
 .sq-cta:hover{background:#0f766e}
+/* HOW-TO-USE block in the header */
+.sq-how{max-width:900px;margin:20px auto 0;text-align:left;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:16px 18px}
+.sq-how-t{color:#fff;font-size:12.5px;font-weight:800;text-transform:uppercase;
+  letter-spacing:.05em;margin-bottom:6px}
+.sq-how-lead{color:#cbd5e1;font-size:12.5px;line-height:1.6;margin:0 0 12px}
+.sq-how-modes{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:10px}
+.sq-how-modes>div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);
+  border-radius:8px;padding:10px 12px}
+.sq-how-modes b{display:block;color:#5eead4;font-size:12px;font-weight:800;margin-bottom:3px}
+.sq-how-modes span{color:#cbd5e1;font-size:11.5px;line-height:1.5}
+/* mid-page conversion strip */
+.sq-mid{margin:26px 0;padding:18px 20px;border-radius:12px;
+  background:linear-gradient(135deg,#0f2f2b,#134e4a);display:flex;align-items:center;
+  justify-content:space-between;gap:16px;flex-wrap:wrap}
+.sq-mid-t{color:#fff;font-size:14px;font-weight:800;margin:0 0 4px}
+.sq-mid-d{color:#94a3b8;font-size:12.5px;margin:0;line-height:1.55}
 .sq-demo-flag{display:inline-block;background:#16a34a;color:#fff;font-size:11px;
   font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:.03em}
 .sq-preview-flag{display:inline-block;background:#f1f5f9;color:#475569;font-size:11px;
@@ -240,6 +257,18 @@ def _preview_card(q, paper, cfg, nodes, relations, out):
     out.append('</article>')
 
 
+def _price_suffix(cfg):
+    """" &middot; <price>" once a price is approved, otherwise nothing.
+
+    PRICE_TBD is a deliberate sentinel: the generator refuses to render a
+    currency value while it is set, so a placeholder cannot reach a customer by
+    accident. Everything that shows a price goes through here so there is one
+    place that decision is made.
+    """
+    p = str(cfg.get('commercial', {}).get('price_display', 'PRICE_TBD')).strip()
+    return '' if (not p or p == 'PRICE_TBD') else ' &middot; %s' % esc(p)
+
+
 def _lock_block(out, cfg, title, detail):
     c = cfg['commercial']
     out.append('    <div class="sq-lock">')
@@ -339,7 +368,24 @@ def _sample_js():
 """
 
 
-def build_sample(cfg, specs, publish):
+def build_sample(cfg, specs, publish_flag):
+    """Render one projection.
+
+    PUBLISH STATE IS A PROPERTY OF THE ARTEFACT, NOT OF THE INVOCATION.
+
+    It used to come only from --publish. That flag lives in the memory of
+    whoever last typed the command, so any later rebuild silently reverted a
+    published page to a review copy -- and run_toolchain.py calls this script
+    with no flags at all. That is exactly how the live January sample came to
+    tell customers "Founder review copy -- not published, not indexable" with
+    a PRICE_TBD placeholder, on the page the whole funnel pointed at. Nothing
+    failed and nothing warned.
+
+    `"publish": true` in the projection config now carries it, so a routine
+    rebuild cannot un-publish a live page. --publish still works, as an
+    override for a config that has not been switched over yet.
+    """
+    publish = bool(publish_flag or cfg.get('publish'))
     pid = cfg['paper_id']
     spec = next((d for d in specs if d['paper_id'] == pid), None)
     if spec is None:
@@ -352,17 +398,54 @@ def build_sample(cfg, specs, publish):
     by_no = {q['q_no']: q for q in spec['questions']}
 
     # ---- the commercial guard -------------------------------------------
+    #
+    # A full demo normally may NOT belong to a recurrence family, because
+    # publishing one member in full publishes its paid twins in later sittings.
+    #
+    # `allow_family_members` overrides that, and exists for one case only: a
+    # build whose output is itself behind an entitlement gate, where the
+    # audience is customers who have already paid rather than the open
+    # internet. The override must carry a written reason AND name the
+    # entitlement protecting the page, and it still prints every question it
+    # unlocks, so the cost lands in the build log rather than staying buried in
+    # a config file.
+    override = bool(cfg.get('allow_family_members'))
+    unlocked = []
     for qno in demo_ids:
         if qno not in by_no:
             raise SystemExit('ERROR: %s has no %s' % (pid, qno))
         qid = by_no[qno]['question_id']
         rel = relations[qid]
         if rel['family_size'] > 1:
+            if not override:
+                raise SystemExit(
+                    'ERROR: %s (%s) is a full demo but belongs to a recurrence family with %s.\n'
+                    '       Publishing it in full publishes those paid questions too.\n'
+                    '       Choose a family singleton, or change this deliberately in the config.'
+                    % (qid, by_no[qno].get('short_title', ''), ', '.join(rel['others'])))
+            unlocked.extend(rel['others'])
+
+    if override:
+        if not cfg.get('allow_family_members_reason'):
             raise SystemExit(
-                'ERROR: %s (%s) is a full demo but belongs to a recurrence family with %s.\n'
-                '       Publishing it in full publishes those paid questions too.\n'
-                '       Choose a family singleton, or change this deliberately in the config.'
-                % (qid, by_no[qno].get('short_title', ''), ', '.join(rel['others'])))
+                'ERROR: allow_family_members is set without allow_family_members_reason.\n'
+                '       An override that gives away paid content must say why, in the config.')
+        if not cfg.get('gated_behind'):
+            raise SystemExit(
+                'ERROR: allow_family_members is only permitted for a GATED output.\n'
+                '       Set gated_behind to the entitlement that protects this page, or drop\n'
+                '       the override. A public page must never carry it.')
+        if cfg['output'].startswith('SQ/'):
+            raise SystemExit(
+                'ERROR: %s writes into SQ/, which is outside the middleware matcher and\n'
+                '       therefore public. allow_family_members cannot apply to it.'
+                % cfg['output'])
+        if unlocked:
+            print('  !! allow_family_members: this build publishes %d question(s) that also '
+                  'appear in paid sittings:' % len(set(unlocked)))
+            for other in sorted(set(unlocked)):
+                print('       %s' % other)
+        print('  !! output is gated behind %s' % cfg['gated_behind'])
 
     newest = newest_solved(specs)
     solved_papers = sorted(
@@ -371,12 +454,31 @@ def build_sample(cfg, specs, publish):
 
     o = []
     a = o.append
-    title = ('Free solved MEO Class I written paper &mdash; %s | Marine Intelligence Weekly'
-             % spec['month_year'])
-    desc = ('The complete %s MEO Class I Engineering Management written paper, with two questions '
-            'worked in full using the MIW study method.' % spec['month_year'])
+    # Title and description describe THIS projection. A gated page is not a
+    # "free sample", and the demo count is derived rather than hard-coded --
+    # "two questions worked in full" was literal text that would have been
+    # wrong the moment a config changed.
+    n_demo = len(demo_ids)
+    if cfg.get('gated_behind'):
+        title = ('Solved MEO Class I written paper &mdash; %s | Marine Intelligence Weekly'
+                 % spec['month_year'])
+        desc = ('The complete %s MEO Class I Engineering Management written paper, every '
+                'question worked in full using the MIW study method.' % spec['month_year'])
+    else:
+        title = ('Free solved MEO Class I written paper &mdash; %s | Marine Intelligence Weekly'
+                 % spec['month_year'])
+        desc = ('The complete %s MEO Class I Engineering Management written paper, with %s '
+                'worked in full using the MIW study method.'
+                % (spec['month_year'],
+                   'every question' if n_demo == len(spec['questions'])
+                   else '%d questions' % n_demo))
+    # A GATED page is never indexable, whatever --publish says. Middleware
+    # answers a crawler with a redirect, so "index, follow" would only invite
+    # search engines to keep requesting a page they can never read, and to
+    # surface the login bounce as if it were the content.
     o.extend(head_meta(strip_tags(title), strip_tags(desc),
-                       '/%s' % cfg['output'], publish))
+                       '/%s' % cfg['output'],
+                       publish and not cfg.get('gated_behind')))
     a('<style>')
     a(read_css())
     a(SAMPLE_CSS)
@@ -389,21 +491,55 @@ def build_sample(cfg, specs, publish):
     a('  <span class="topbar-sub">Solved Written Papers &middot; free sample</span>')
     a('  <span class="topbar-links">')
     a('    <a href="/SQ/index.html">MEO Class I store</a>')
-    a('    <a href="%s">Get full access</a>' % esc_attr(cfg['commercial']['cta_href']))
+    a('    <a href="%s">Get full access%s</a>'
+      % (esc_attr(cfg['commercial']['cta_href']), _price_suffix(cfg)))
     a('  </span>')
     a('</nav>')
 
+    gated = cfg.get('gated_behind')
+    every = len(demo_ids) == len(spec['questions'])
+
     a('<header class="page-header"><div class="wrap">')
-    a('  <span class="badge">Free sample &middot; %s</span>' % esc(spec['month_year']))
+    # A page behind an entitlement is not a "free sample" to the person reading
+    # it -- they have already paid for the product that opens it. Calling it one
+    # reads as a downgrade of what they bought.
+    a('  <span class="badge">%s &middot; %s</span>'
+      % ('Included with your Oral access' if gated else 'Free sample',
+         esc(spec['month_year'])))
     a('  <h1>%s &mdash; %s</h1>' % (esc(spec['subject']), esc(spec['month_year'])))
-    a('  <p class="sub">This is a complete examination sitting: all %d questions exactly as '
-      'printed. <b>%s and %s are worked in full</b>, so you can see the whole MIW method &mdash; '
-      'Understand, Exam plan, Answer, Study guide, Recall. The remaining questions show how each '
-      'one is structured.</p>'
-      % (len(spec['questions']), demo_ids[0], demo_ids[-1]))
+    if every:
+        a('  <p class="sub">This is a complete examination sitting: all %d questions exactly as '
+          'printed, and <b>every one worked in full</b> &mdash; Understand, Exam plan, Answer, '
+          'Study guide, Recall.</p>' % len(spec['questions']))
+    else:
+        a('  <p class="sub">This is a complete examination sitting: all %d questions exactly as '
+          'printed. <b>%s and %s are worked in full</b>, so you can see the whole MIW method '
+          '&mdash; Understand, Exam plan, Answer, Study guide, Recall. The remaining questions '
+          'show how each one is structured.</p>'
+          % (len(spec['questions']), demo_ids[0], demo_ids[-1]))
     a('  <div class="header-meta"><span>%s</span><span>%s</span><span>%d questions &middot; '
       'answer six</span><span>%d worked in full</span></div>'
       % (esc(spec['class']), esc(spec['time_allowed']), len(spec['questions']), len(demo_ids)))
+
+    # HOW TO USE THIS PAGE. The five modes are the product; a reader who does
+    # not know what they are cannot tell a worked answer from a long one. This
+    # is the same copy as the "How every question is worked" section on
+    # solvedQP/index.html -- if one changes, change both.
+    a('  <div class="sq-how">')
+    a('    <div class="sq-how-t">How every question is worked</div>')
+    a('    <p class="sq-how-lead">The same five modes on every question, in the same order. '
+      'The route through an answer is written once and reused by the plan, the guide and '
+      'the recall.</p>')
+    a('    <div class="sq-how-modes">')
+    for label, blurb in (
+            ('Understand', 'What the examiner is actually asking, and the trap in the wording.'),
+            ('Exam plan', 'How to spend the marks &mdash; the shape of the answer before you write it.'),
+            ('Answer', 'The full model written answer, regulation-referenced.'),
+            ('Study guide', 'The background you need if the topic is not yet solid.'),
+            ('Recall', 'Fifteen-second revision &mdash; route, critical number, major trap.')):
+        a('      <div><b>%s</b><span>%s</span></div>' % (label, blurb))
+    a('    </div>')
+    a('  </div>')
     a('</div></header>')
     if not publish:
         a('<div class="review-banner"><strong>Founder review copy &mdash; not published, not '
@@ -422,12 +558,31 @@ def build_sample(cfg, specs, publish):
     a('  <p class="rec-note">%s</p>' % esc(spec.get('marks_note', '')))
     a('</section>')
 
-    for q in spec['questions']:
+    # A mid-page conversion strip, placed once, roughly a third of the way in.
+    # It goes AFTER a question rather than before one, so a reader always meets
+    # real worked content before an offer; leading with the offer is what makes
+    # a sample feel like an advert. Suppressed for a gated build, where the
+    # reader already holds the entitlement being sold.
+    mid_at = max(1, len(spec['questions']) // 3)
+    for idx, q in enumerate(spec['questions'], start=1):
         if q['q_no'] in demo_ids:
             _demo_card(q, spec, relations, o)
         else:
             _preview_card(q, spec, cfg, nodes, relations, o)
         a('')
+        if idx == mid_at and not cfg.get('gated_behind'):
+            a('<div class="sq-mid">')
+            a('  <div>')
+            a('    <p class="sq-mid-t">Every sitting, worked exactly like this</p>')
+            a('    <p class="sq-mid-d">%d solved papers &middot; %d questions &middot; '
+              'all five modes on every one%s</p>'
+              % (len(solved_papers), sum(len(d['questions']) for d in solved_papers),
+                 _price_suffix(cfg)))
+            a('  </div>')
+            a('  <a class="sq-cta" href="%s">%s &rarr;</a>'
+              % (esc_attr(cfg['commercial']['cta_href']),
+                 esc(cfg['commercial']['cta_label'])))
+            a('</div>')
 
     # ---- paper-level offer ----------------------------------------------
     # The year label is DERIVED, not hard-coded. It read "2026" while every
@@ -454,7 +609,7 @@ def build_sample(cfg, specs, publish):
           % esc(newest['month_year']))
     a('  <p class="rec-note">Questions are reproduced for study. Answers are MIW&rsquo;s own work, '
       'written against primary sources and dated to the sitting.</p>')
-    _lock_block(o, cfg, 'Unlock the complete solved papers',
+    _lock_block(o, cfg, 'Unlock the complete solved papers%s' % _price_suffix(cfg),
                 'Every solved question: <b>model written answer</b>, <b>exam plan</b>, '
                 '<b>knowledge map</b>, <b>study guide</b>, <b>flashcards</b> and <b>recall '
                 'test</b>, plus the recurrence intelligence across the whole year.')
