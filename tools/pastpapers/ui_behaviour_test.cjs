@@ -557,6 +557,39 @@ const FIXTURES = {
     // name belongs to Q6 alone.
     narrow: ['declaration of maritime labour compliance', 'QP2412-Q6'],
   },
+  QP2402: {
+    probes: [
+      ['instrument hierarchy', 'QP2402-Q1'],
+      ['bunker convention', 'QP2402-Q2'],
+      ['bulbous bow', 'QP2402-Q3'],
+      ['cylinder lubricating', 'QP2402-Q4'],
+      ['greenhouse gas', 'QP2402-Q5'],
+      ['inventory control', 'QP2402-Q6'],
+      ['harmonized system of survey', 'QP2402-Q7'],
+      ['grounded', 'QP2402-Q8'],
+      ['human element', 'QP2402-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['clc 92', 'QP2402-Q2', 'Q2 (the compressed form of the 1992 Civil Liability Convention)'],
+      ['scrape down', 'QP2402-Q4', 'Q4 (the cylinder drain-oil analysis technique)'],
+      ['economic order quantity', 'QP2402-Q6', 'Q6 (the stores-control model)'],
+      ['tacit acceptance', 'QP2402-Q1', 'Q1 (the amendment procedure)'],
+    ],
+    // MEPC.377(80) rather than an Annex VI regulation number, because a bare
+    // number is unusable as a probe here: search is an AND of substrings, so
+    // "regulation 24" also matches every card carrying "2024". The 2023 IMO GHG
+    // Strategy is the sharper anchor anyway -- it superseded the 2018 Initial
+    // Strategy in July 2023, and Q5 must not be written against the old one.
+    regulation: ['mepc.377(80)', 'QP2402-Q5'],
+    // Leak probe. 2022/DEC/Q5 is a host annotation printed against Q3 on THIS
+    // source copy. None of it may reach the shipped bytes.
+    recurrence: ['2022/dec/q5', 'QP2402-Q3'],
+    // Must resolve to exactly ONE card. February sets surveys and management
+    // systems more than once -- Q6 and Q9 both reach the SMS -- so 'survey' and
+    // 'certification' are each ambiguous. The HSSC's full printed name is Q7's.
+    narrow: ['harmonised system of survey and certification', 'QP2402-Q7'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';

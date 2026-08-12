@@ -32,7 +32,7 @@ Every token is accounted for. A token that cannot be resolved is **counted here,
 
 | Target | Sitting | Target solved | Named by | Named-by built | MIW adjudicated |
 |---|---|---|---|---|---|
-| `QP2402-Q3` | February 2024 Q3 | **no** | `QP2411-Q3` | &mdash; | **no** |
+| `QP2402-Q3` | February 2024 Q3 | yes | `QP2411-Q3` | &mdash; | **no** |
 | `QP2406-Q8` | June 2024 Q8 | **no** | `QP2601-Q3`, `QP2604-Q3` | `QP2601-Q3`, `QP2604-Q3` | **no** |
 | `QP2408-Q3` | August 2024 Q3 | **no** | `QP2506-Q7`, `QP2601-Q8`, `QP2604-Q8` | `QP2506-Q7`, `QP2601-Q8`, `QP2604-Q8` | **no** |
 | `QP2410-Q1` | October 2024 Q1 | **no** | `QP2506-Q9`, `QP2508-Q5`, `QP2602-Q5` | `QP2506-Q9`, `QP2508-Q5`, `QP2602-Q5` | **no** |
