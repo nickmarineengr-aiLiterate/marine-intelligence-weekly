@@ -590,6 +590,41 @@ const FIXTURES = {
     // 'certification' are each ambiguous. The HSSC's full printed name is Q7's.
     narrow: ['harmonised system of survey and certification', 'QP2402-Q7'],
   },
+  QP2409: {
+    probes: [
+      ['fitness for duty', 'QP2409-Q1'],
+      ['goal based standards', 'QP2409-Q2'],
+      ['midterm', 'QP2409-Q3'],
+      ['iopc', 'QP2409-Q4'],
+      ['social security', 'QP2409-Q5'],
+      ['bunker convention', 'QP2409-Q6'],
+      ['gisis', 'QP2409-Q7'],
+      ['anti-fouling', 'QP2409-Q8'],
+      ['rudder', 'QP2409-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['tbt', 'QP2409-Q8', 'Q8 (the compressed form of tributyltin)'],
+      ['cybutryne', 'QP2409-Q8', 'Q8 (the second controlled substance)'],
+      ['blue card', 'QP2409-Q6', 'Q6 (the insurer letter behind the certificate)'],
+      ['grim vane wheel', 'QP2409-Q9', 'Q9 (one of the named efficiency devices)'],
+      ['costa bulb', 'QP2409-Q9', 'Q9 (the rudder-bulb device)'],
+    ],
+    // MSC.560(108) rather than a regulation, because it is this paper's sharpest
+    // trap in the FORWARD direction. It was adopted in 2024, before the sitting,
+    // but does NOT enter into force until 1 January 2026, so it must never be
+    // written as law here. Q1 names it precisely in order to exclude it. If this
+    // probe stops resolving, the exclusion has been dropped.
+    regulation: ['msc.560(108)', 'QP2409-Q1'],
+    // Leak probe. 2023/OCT/Q8 is a host annotation printed against Q6 on THIS
+    // source copy. None of it may reach the shipped bytes.
+    recurrence: ['2023/oct/q8', 'QP2409-Q6'],
+    // Must resolve to exactly ONE card. September sets pollution funds twice --
+    // Q4 is the IOPC Funds and Q6 the Bunkers/CLC comparison -- so 'fund' and
+    // even '1992 fund convention' resolve to both. The device question's full
+    // printed title cannot collide.
+    narrow: ['rudder efficiency improvement devices', 'QP2409-Q9'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';
