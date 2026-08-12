@@ -44,6 +44,37 @@ function ok(name, cond, extra) {
 // Alias probes deliberately use words that appear ONLY in search metadata and
 // are never rendered on the card, which is the behaviour being guarded.
 const FIXTURES = {
+  QP2501: {
+    probes: [
+      ['wreck hazard', 'QP2501-Q1'],
+      ['limitation fund', 'QP2501-Q2'],
+      ['cap survey', 'QP2501-Q3'],
+      ['cybutryne', 'QP2501-Q4'],
+      ['therp', 'QP2501-Q5'],
+      ['tortious', 'QP2501-Q6'],
+      ['well-to-wake', 'QP2501-Q7'],
+      ['parametric', 'QP2501-Q8'],
+      ['liquefaction', 'QP2501-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['IALA buoyage', 'QP2501-Q1', 'Q1 (how a hazardous wreck is actually marked)'],
+      ['special drawing rights', 'QP2501-Q2',
+       'Q2 (the unit the limitation figures are expressed in)'],
+      ['uberrimae fidei', 'QP2501-Q6', 'Q6 (utmost good faith, behind the insurance limb)'],
+      ['Mathieu instability', 'QP2501-Q8',
+       'Q8 (the mathematical name for the parametric resonance)'],
+      ['Proctor Fagerberg', 'QP2501-Q9', 'Q9 (the test method behind the TML)'],
+    ],
+    // MEPC.391(81) is the 2024 Guidelines on life cycle GHG intensity of marine
+    // fuels -- the CURRENT edition at a January 2025 sitting. It is used here
+    // rather than a convention regulation because the edition is this paper's
+    // sharpest live temporal risk: the guidelines are under active development,
+    // and a later revision must not be back-fitted onto this answer. If this
+    // probe ever resolves to a different resolution number, Q7 has been
+    // re-anchored onto guidelines that did not exist at the sitting.
+    regulation: ['mepc.391(81)', 'QP2501-Q7'],
+  },
   QP2512: {
     probes: [
       ['disease vector', 'QP2512-Q1'],
