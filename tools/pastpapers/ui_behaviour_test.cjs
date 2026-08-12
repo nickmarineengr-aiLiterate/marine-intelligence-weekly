@@ -660,6 +660,43 @@ const FIXTURES = {
     // title is not.
     narrow: ['virtual and augmented reality', 'QP2411-Q1'],
   },
+  QP2410: {
+    probes: [
+      ['unseaworthy', 'QP2410-Q1'],
+      ['charter party', 'QP2410-Q2'],
+      ['directional stability', 'QP2410-Q3'],
+      ['hong kong convention', 'QP2410-Q4'],
+      ['fal convention', 'QP2410-Q5'],
+      ['abandonment', 'QP2410-Q6'],
+      ['kappel', 'QP2410-Q7'],
+      ['eexi', 'QP2410-Q8'],
+      ['general average', 'QP2410-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['york-antwerp', 'QP2410-Q9', 'Q9 (the Rules behind the adjustment)'],
+      ['contra-rotating', 'QP2410-Q7', 'Q7 (one of the named propeller types)'],
+      ['demand curve', 'QP2410-Q3', 'Q3 (the propeller law the answer turns on)'],
+      ['inventory of hazardous materials', 'QP2410-Q4', 'Q4 (the regulation 5 document)'],
+    ],
+    // MEPC.328(76) rather than a guideline resolution, and that choice IS the
+    // point of this paper. The sitting prints OCTOBER 2024 with no day, and
+    // MEPC 82 adopted MEPC.395(82) on 4 October 2024 -- so the paper straddles a
+    // boundary the source cannot resolve. Q8 is therefore anchored on the
+    // REGULATION in Annex VI itself, in force since 1 November 2022 and
+    // edition-independent, so no answer depends on which side of 4 October the
+    // sitting fell. If this probe ever gives way to a guideline resolution, that
+    // deliberate design has been lost.
+    regulation: ['mepc.328(76)', 'QP2410-Q8'],
+    // Leak probe. 2023/FEB/Q3 is a host annotation printed against Q8 on THIS
+    // source copy. None of it may reach the shipped bytes.
+    recurrence: ['2023/feb/q3', 'QP2410-Q8'],
+    // Must resolve to exactly ONE card. October sets propellers three times over
+    // -- Q3 the demand curve, Q7 the high-efficiency types, Q8 the EEXI power
+    // limit -- so 'propeller' and even 'eexi' are ambiguous. Q4's certificate has
+    // no such competition.
+    narrow: ['ready for recycling certificate', 'QP2410-Q4'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';
