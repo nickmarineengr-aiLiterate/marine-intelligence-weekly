@@ -335,6 +335,32 @@ blocking gate:
 
 ---
 
+## 12a. An unplanned finding: Understand is the public shop window
+
+Verifying the deployment surfaced something worth knowing, unrelated to either piece of feedback and
+**pre-existing** — nothing in this session changed it.
+
+On the public sample pages, a *locked* question still renders its **"Understand this question first"**
+section in full. Answer, Exam Plan, Study Guide and Recall stay gated. Confirmed live on
+`/SQ/solved-qp-sample-january-2026.html`: questions 1 and 5 are the two unlocked samples; the other
+seven are shells — and question 7's shell carries the whole rewritten UNCLOS Understand section in
+clear.
+
+That is coherent as a funnel: give away the conceptual explanation, sell the model answer. But it has
+two consequences the Founder should hold deliberately.
+
+1. **Understand quality is commercial, not only pedagogical.** It is the single most-read paid-product
+   text on public surfaces. The candidate's complaint was therefore aimed, without either of us
+   realising it, at the shop window.
+2. **The 13 questions that had no Understand section had no public teaser at all.** Their locked
+   shells showed a question and a paywall. Filling them has a direct funnel benefit alongside the
+   learning one.
+
+No action taken — this is a product decision, not a defect. Flagged for a deliberate ruling on whether
+the full Understand section, or a truncated one, is the right thing to expose.
+
+---
+
 ## 13. Founder-facing candidate feedback summary
 
 **What we reviewed.** Both pieces of feedback in full. 68 discrete propositions extracted from the
