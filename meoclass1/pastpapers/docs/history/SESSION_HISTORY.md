@@ -4902,3 +4902,93 @@ Checking where the manifest could safely live established that the repository is
 `solvedQP/QP2601.html` — 389 KB of paid answers — returns HTTP 200 unauthenticated from
 `raw.githubusercontent.com`. The middleware gates the site, not the source. Pre-existing,
 unchanged by this session, and recorded rather than quietly worked around.
+
+---
+
+# SESSION — 2026-08-12 — DESKTOP BATCH 1 REVIEW, INTEGRATION AND PUBLICATION
+
+Laptop session. **No paper was authored.** Six desktop-authored 2024 papers were independently
+reviewed, corrected where wrong, integrated into current `main` and published, one at a time.
+
+Starting `main` `0d128a8` — 14 papers, 126 questions. Ending `main` `88aa4c7` — **20 papers, 180
+questions**, 72 unsolved across 8 papers.
+
+## 1. Why nothing was merged
+
+All six branches were cut from `9c973596`, which predates main's manifest, search, health checker
+and publish-state fix. Merging any of them would have dragged that stale tree back over newer
+global work. Instead each paper's twelve owned files were extracted by path onto a fresh branch
+from current `origin/main`.
+
+That is only lossless if `main` never touched those paths, so it was checked before the first
+extraction rather than assumed: `git diff 9c973596 origin/main -- <the twelve paths>` was empty for
+all six papers. The two approaches therefore differed *only* in the globals, which is exactly the
+part the laptop owns.
+
+## 2. Order
+
+Default order held — QP2401, QP2412, QP2402, QP2409, QP2411, QP2410 — and it turned out to be
+dependency-correct rather than merely conventional. QP2402 carried the defect QP2411 referred, so
+it had to land first. QP2410's Q8 donor is `QP2401-Q3`, and QP2401 was integrated first, so by the
+time QP2410 was reviewed its donor was live and 9/9.
+
+## 3. Per paper
+
+| Paper | Commit | Outcome |
+|---|---|---|
+| QP2401 January 2024 | `28e419f` | Five declared traps each checked against candidate-facing text, not verification prose. 67 temporal candidates adjudicated. No defect |
+| QP2412 December 2024 | `6eaa21a` | Intake's zero temporal flags disproved — four instruments moved inside 2024. MLC boundary lands *inside* the sitting month and Q6 is authored to survive either side. No defect |
+| QP2402 February 2024 | `484a167` | **The referred regulation-21 defect, confirmed and fixed** — and found in Q5 and Q6 as well |
+| QP2409 September 2024 | `4f622be` | §8 contamination list checked mechanically; every named anachronism present *only* as an express exclusion. No defect |
+| QP2411 November 2024 | `6730727` | The branch that raised the referral. Its own chapter 4 reading is correct; referral closed and annotated as historical. No defect |
+| QP2410 October 2024 | `88aa4c7` | MEPC 82 boundary design preserved, no exam day manufactured. Donor findings confirmed 6/9 tier D. No defect |
+
+Two corrections were committed separately from any Batch 1 paper: `fd9e366` (QP2601-Q1, live) and
+the Hong Kong Convention half of `88aa4c7` (QP2511-Q8 and QP2603-Q9, both live).
+
+## 4. The regulation-21 investigation
+
+`MEPC.328(76)` chapter 4 was read directly from the corpus copy rather than inferred: 21 Functional
+requirements, 22 attained EEDI, 23 attained EEXI, 24 required EEDI, 25 required EEXI, 26 SEEMP,
+27 fuel oil consumption data, 28 operational carbon intensity. Regulation 21 is not EEDI, so the
+referral was correct. Classification: **wrong regulation number**, correct instrument, correct
+temporal position, not donor contamination — `QP2402-Q3` was authored fresh and is itself the
+forward donor `QP2411-Q3` draws from.
+
+Three independent readings of that list now agree — QP2411's, QP2410's and this session's.
+
+Generalising the referral into a corpus-wide scan is what found `QP2402-Q5`, `QP2402-Q6`,
+`QP2601-Q1` and, separately, the Hong Kong Convention records. Applied only to the question named,
+five of the six defects would have survived.
+
+## 5. Hong Kong Convention
+
+QP2410-Q4 read the Convention complete. Verified independently here:
+`official-sources/HONGKONG_CONVENTION.pdf`, 47 pages, ARTICLE 17 verbatim and matching QP2410's
+transcription. `QP2511-Q8` and `QP2603-Q9` both declared MIW held no copy — false — and both stated
+application as "500 GT and above on international voyages". Article 3.3 excludes ships under 500 GT
+*or* ships operating throughout their life only in flag-State waters; the exclusion is purely
+domestic operation, not international voyaging. Both corrected, source state upgraded to PRIMARY.
+
+**No temporal distinction was touched.** Not in force at October 2024; in force at November 2025
+and March 2026. QP2511's contrast between the two is preserved verbatim.
+
+## 6. Verification at each gate
+
+Per paper: `validate_spec` 0 errors and 0 blocking, full toolchain ALL STAGES PASS, temporal sweep
+adjudicated by value rather than by count, leak sweep over the shipped bytes, five-mode and
+Answer-default check, double-build byte-identical, then merge, push, and live confirmation before
+the next paper began.
+
+Final state: toolchain and `--self-test` PASS, `solvedqp_check` 180 questions across 20 papers and
+29 pages, search 13/13, coverage PASS, health PASS, corpus consumer 60/60, **security 121/121**,
+double-build byte-identical across 265 artefacts.
+
+## 7. Two process faults, both caught
+
+A PowerShell here-string broke a commit message and left staged changes on `main` after a checkout.
+Nothing was lost or pushed; the fix was to commit from a message file thereafter.
+
+The QP2411 commit missed three derived files because it staged from a hand-written path list rather
+than from what the build actually changed. Landed immediately in `3a19f02`. The final paper staged
+from `git status`.

@@ -7,22 +7,29 @@ See §7a for QP2512, §7b for the derived layer, §7c for the desktop batches, �
 
 > # QP2512 IS LIVE. THE SOLVEDQP DERIVED LAYER IS BUILT.
 >
-> **QP2512 — December 2025 — is integrated into `main`.** The Founder authorised publication; the
-> branch was **reconciled, not blind-merged**, against the three `main`-only commits that landed
-> while it was being authored. The publish-state fix in `2f38586` is preserved and *proven* by
-> rebuilding with the exact flagless invocation that originally broke it.
+> **DESKTOP BATCH 1 IS 6/6 REVIEWED AND LIVE.** `QP2401`, `QP2412`, `QP2402`, `QP2409`, `QP2411`
+> and `QP2410` were each reviewed, integrated and published **one at a time**, every one by path
+> extraction onto current `main` rather than by merging its stale branch. All six desktop branches
+> are **retained** as provenance evidence and were not deleted.
 >
-> **Product: 14 available papers · 126 published questions · 252 in the corpus.**
-> The corpus is at its **halfway point** — 126 solved, 126 unsolved.
+> **Product: 20 available papers · 180 published questions · 252 in the corpus.**
+> 72 unsolved questions remain across 8 unsolved papers.
+>
+> **Three defects were corrected, two of them on already-live papers.** The referred
+> `QP2402-Q3` regulation-21 defect was confirmed against the corpus copy of `MEPC.328(76)` and
+> fixed — and generalising the referral instead of applying it to the named question alone found
+> the same defect in `QP2402-Q5` and `QP2402-Q6`, a live EEXI mislabel on `QP2601-Q1`, and the
+> false Hong Kong Convention source state on `QP2511-Q8` and `QP2603-Q9`. See §7d.
 >
 > **One generated inventory now serves the whole delivery product.**
 > `solvedQP/solvedqp_content_index.json` is the single source for the home counts, the coverage
 > grid, the topic search, the latest-updates strip and the daily health report. Nobody hand-edits
 > it; nobody keeps a second list. See [`SOLVEDQP_DERIVED_LAYER.md`](SOLVEDQP_DERIVED_LAYER.md).
+> Every one of the six papers was absorbed by it automatically — availability is derived from the
+> presence of model answers, so no status was ever edited by hand.
 >
-> **Nothing else is authorised for laptop authoring.** Do not start a paper without the Founder,
-> and do not touch any desktop-allocated paper — Batch 1 (`QP2401`, `QP2412`, `QP2402`, `QP2409`,
-> `QP2411`, `QP2410`) or Batch 2 (§7c).
+> **Nothing is authorised for laptop authoring.** Do not start a paper without the Founder.
+> Batch 1 is closed. **Batch 2 (§7c) is ALLOCATED — NOT STARTED** and belongs to the desktop.
 >
 > Corpus consumption remains integrated (§2a) and read-only. **The Founder decisions in §6 are
 > still open and did not block QP2512** — it cites none of the three corpora, so its
@@ -95,13 +102,13 @@ Recomputed from the specs, `build_reuse_map.py` and `solvedqp_check.py` after QP
 
 | | |
 |---|---|
-| **Corpus** | **252 questions / 126 solved / 126 unsolved** — the halfway point |
-| **Papers** | 28 — **14 solved**, 14 answerless intake |
+| **Corpus** | **252 questions / 180 solved / 72 unsolved** — past the halfway point |
+| **Papers** | 28 — **20 solved**, 8 answerless intake |
 | **Years** | 2024 (11 papers), 2025 (11), 2026 (6). May is absent from the source set in all three years |
-| **Tier D (derived)** | **17** of the 126 unsolved carry a verified donor, down from 20. QP2512 consumed three of its own (`Q1`, `Q2`, `Q9`) and, unlike QP2511, **unlocked none** — its six tier-C questions produced no new donor edge, because six of the nine were adjudicated as fresh or limb-supported rather than family-linked |
-| **Delivery** | `solvedQP/` — **14 papers, 126 questions, 3 year sheets, 1 index** |
-| **Toolchain** | ALL STAGES PASS · `--self-test` PASS · double-build **byte-identical across 91 artefacts** |
-| **Security (offline)** | **62/62 pass** — `security.test.mjs` 34, `sessions.test.mjs` 28. Architecture recovered and proven offline; **nothing deployed, no secret set** |
+| **Tier D (frozen intake field)** | **3** of the 72 unsolved, down from 17. Batch 1 consumed most of the pool. **Do not plan from this number** — it is the frozen intake field, and Batch 1 proved again that it goes stale: `QP2401-Q9` was frozen at tier C and derived to D, and `QP2410`'s board was wrong in both directions. The derived tier from `build_reuse_map.py` governs, and it is what makes the Batch 2 ordering constraint (`QP2507` after `QP2501` and `QP2503`) real |
+| **Delivery** | `solvedQP/` — **20 papers, 180 questions, 3 year sheets, 1 index**, 29 pages |
+| **Toolchain** | ALL STAGES PASS · `--self-test` PASS · double-build **byte-identical across 265 artefacts** |
+| **Security (offline)** | **121/121 pass** — `security.test.mjs` 38, `sessions.test.mjs` 32, `rotation.test.mjs` 22, `reset.test.mjs` 29. Re-run unchanged after all six integrations; no security surface was touched |
 | **Corpus projection (legacy)** | `RulesApp/repository/index/` is a **2026-07-25 snapshot at 788 nodes** of the `RulesApp` repository. **This is NOT the True Source corpus** — see §2a. It remains 218 nodes behind its own master and is no longer the resolver target |
 
 ---
@@ -388,7 +395,7 @@ Built 2026-08-12. Full architecture: [`SOLVEDQP_DERIVED_LAYER.md`](SOLVEDQP_DERI
 
 | Component | Path | State |
 |---|---|---|
-| **Manifest** | `solvedQP/solvedqp_content_index.json` | **ACTIVE** — 28 papers, 14 available, 126 published questions, 14 planned, 3 known-absent |
+| **Manifest** | `solvedQP/solvedqp_content_index.json` | **ACTIVE** — 28 papers, 20 available, 180 published questions, 8 planned, 3 known-absent |
 | Generator | `tools/pastpapers/build_solvedqp_manifest.py` | in the toolchain, `--check` and `--self-test` |
 | **Topic search** | `solvedQP/index.html`, over the manifest | **ACTIVE** — question-level, grouped by sitting, links to the anchor |
 | Search tests | `tools/pastpapers/solvedqp_search_test.py` | 13 / 13 |
@@ -428,8 +435,8 @@ when the sitting and the boundary share a month.
 
 | Batch | Papers | Status |
 |---|---|---|
-| **1** | QP2401 · QP2412 · QP2402 · QP2409 · QP2411 · QP2410 | **IN FLIGHT** — 5 of 6 branches on `origin`, **none merged**, stop gate not reached |
-| **2** | **QP2501 · QP2502 · QP2503 · QP2504 · QP2507 · QP2406** | **ALLOCATED — NOT STARTED** |
+| **1** | QP2401 · QP2412 · QP2402 · QP2409 · QP2411 · QP2410 | **CLOSED — 6/6 reviewed, integrated and LIVE.** Branches retained as provenance, not deleted |
+| **2** | **QP2501 · QP2502 · QP2503 · QP2504 · QP2507 · QP2406** | **ALLOCATED — NOT STARTED.** Batch 1 is now closed, so the desktop may begin in the governed order |
 | **3** | QP2407 · QP2408 | held back — two papers, not three |
 
 Board: [`DESKTOP_QP_ALLOCATION_BOARD.md`](DESKTOP_QP_ALLOCATION_BOARD.md). Batch 1's own board,
@@ -442,7 +449,36 @@ Batch 2 order is fixed and one constraint is hard: **QP2507 must follow QP2501 a
 supply all eight of its family edges and take it from 0/9 to 8/9. The order yields 18 of 54
 questions donor-ready, the proven maximum over all 720 orderings.
 
-**Do not start Batch 2 while Batch 1 is open.**
+**Batch 1 is closed, so that gate is now open.** The desktop may start Batch 2 in the governed
+order. Batch 2 branches must be cut from current `main`, which is far ahead of `9c97359`.
+
+---
+
+## 7d. Batch 1 corrections — what the laptop changed, and where
+
+Every correction was made at the canonical structured layer (spec plus verification record) and the
+HTML regenerated. No generated page was hand-edited.
+
+| Question | Defect | Evidence | Status |
+|---|---|---|---|
+| `QP2402-Q3` | EEDI mapped to Annex VI **regulation 21**, which is *Functional requirements* | `MEPC.328(76)` chapter 4 headings read directly from the corpus copy | **fixed** — EEDI is regs 22 and 24 |
+| `QP2402-Q5` | same mis-numbering, five claims | as above | **fixed** — *not in the referral* |
+| `QP2402-Q6` | EEXI cited as reg 25 alone | as above | **fixed** — EEXI is regs 23 and 25 |
+| `QP2601-Q1` | reg 25 labelled *Attained EEXI*; reg 25 is *Required EEXI* | as above | **fixed on a LIVE paper**, incl. the public free sample |
+| `QP2511-Q8` | "MIW holds no licensed copy of the Hong Kong Convention"; scope given as *500 GT on international voyages* | `official-sources/HONGKONG_CONVENTION.pdf`, 47 pp, Article 3.3 and Article 17 read verbatim | **fixed on a LIVE paper** |
+| `QP2603-Q9` | identical pair | as above | **fixed on a LIVE paper** |
+
+**The referral was worth more than the question it named.** It named `QP2402-Q3` only. Turning it
+into a corpus-wide scan for the same *class* of claim found five further defects, three of them
+already published. Treat every future referral that way.
+
+**What was deliberately NOT changed.** `QP2412-Q8`'s `regulation 22 SEEMP` search alias is correct
+by design — it catches candidates searching the superseded pre-2021 numbering, and `QP2402-Q5`
+teaches against exactly that. `QP2410-Q4`'s references to the wrong scope are its own warnings
+against it. `QP2406`-era audit prose in `QP2402-Q6.md` describing what donor `QP2606-Q6` cites is
+left verbatim: it is an audit record of another paper, and rewriting it would falsify the trail.
+The remaining "MIW holds no licensed copy" statements about SOLAS, the ESP Code and ISO 484 are
+untouched and unverified — they concern other instruments.
 
 ---
 

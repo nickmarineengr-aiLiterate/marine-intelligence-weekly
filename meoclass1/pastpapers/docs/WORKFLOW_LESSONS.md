@@ -1501,3 +1501,107 @@ because their donors come from other years. There was no block to protect.
 **The rule.** *Plan the next batch against the projected corpus, and record which projection you
 used.* The derived tier already refuses to be read from a stored field because stored tiers plan
 off the past; planning off the present has the same defect one step later.
+
+---
+
+## L-B1-1 — A referral names a question; treat it as naming a CLASS of claim
+
+**Proven:** 2026-08-12, Desktop Batch 1 integration.
+
+The desktop referred one defect: `QP2402-Q3` maps EEDI to MARPOL Annex VI regulation 21, which is
+Functional requirements. Fixing the question named would have been a complete, defensible response
+to the referral.
+
+Instead the referral was turned into a scan of **every solved spec** for the same shape of claim —
+"EEDI cited near regulation 21", "attained EEXI cited near regulation 25". That found the identical
+defect in `QP2402-Q5`, the EEXI half in `QP2402-Q6`, and a live mislabel on `QP2601-Q1` that was
+also on the public free sample. A parallel scan of the Hong Kong Convention source-state claim
+found two more, both live.
+
+**One referral, six defects, three of them already published.** Five would have survived a
+question-scoped fix.
+
+**Do:** when a referral arrives, write the detector before writing the fix, and run it over the
+whole corpus. **Do not** assume the reporting session found every instance — it was looking at one
+paper.
+
+---
+
+## L-B1-2 — Extract paper-owned paths; never merge a branch cut from an old baseline
+
+**Proven:** 2026-08-12, six papers.
+
+Branches built from `9c973596` predate the manifest, search, health checker and publish-state fix.
+Merging one replays its stale global tree over newer work, and the damage is invisible because the
+build still passes — it just passes against the wrong inputs.
+
+**Do:** create an integration branch from current `origin/main`, then
+`git checkout <desktop-branch> -- <the paper-owned paths only>`.
+
+**Prove it is lossless first**, in one command, before the first extraction:
+
+```
+git diff <baseline> origin/main -- <the paper-owned paths>
+```
+
+Empty output means main never touched those paths, so extraction and merge would differ *only* in
+the globals. Non-empty means the paper's own files have moved on main and a real reconciliation is
+needed. Assuming the empty case is how a silent revert happens.
+
+---
+
+## L-B1-3 — Stage from what the build changed, not from a path list you typed
+
+**Cost:** one follow-up commit, 2026-08-12 (`3a19f02`).
+
+Solving a paper re-classifies recurrence on *other* papers — `QP2402-Q3` became "First in set. The
+same task returns at November 2024 Q3" only when `QP2411-Q3` was solved. Those propagated files are
+not predictable from the paper being integrated, so a hand-written `git add` list will miss them
+and the miss is silent: the commit succeeds and the tree is left inconsistent with `main`.
+
+**Do:** after the final build, read `git status` and stage from it, filtering out the known
+unrelated untracked set. Then assert nothing tracked remains unstaged before committing.
+
+---
+
+## L-B1-4 — Adjudicate a temporal sweep by VALUE, not by count
+
+**Proven:** 2026-08-12, ~450 candidates across six papers, zero real defects.
+
+The sweep is detection-only and its raw counts are meaningless — QP2409 alone raised 110. Grouping
+the candidates by their literal value collapses them to a dozen distinct facts that can each be
+adjudicated once: 2030/2040/2050 are the 2023 GHG Strategy's own checkpoints, `26 June 2025` is the
+Hong Kong Convention's known future entry into force, `1 July 2024` is quoted from `A.1187(33)`'s
+own annex currency statement.
+
+Three legitimate classes recur, and none is contamination:
+
+1. a **future date stated by an instrument that is itself in force** at the sitting;
+2. an **express exclusion** — the paper naming an anachronism precisely to warn the candidate off
+   it (`A.1207(34)`, `MSC.560(108)`, FuelEU, the MS Act 2025);
+3. a **boundary marker confined to the study surfaces** and kept out of the model answer.
+
+Class 2 is why a keyword hit is not a finding: QP2409's spec contains every instrument its own
+contamination list forbids, and each one is correct. **Check the framing, not the presence.**
+
+---
+
+## L-B1-5 — Give a zero-result sweep a positive control, in the same command
+
+**Cost:** one false alarm, 2026-08-12.
+
+A provider-leak sweep reported 19 hits of `HATC` in a shipped page. It was matching `hatc` inside
+**hatch cover**. Re-run with `\bHATC\b` it reported zero — and a zero from a pattern that has just
+been shown to be wrong is worth nothing.
+
+**Do:** print the control beside the result, so the evidence that the detector works and the
+evidence that the surface is clean arrive together:
+
+```
+regex \bHATC\b vs 'HATC notes' -> True   vs 'hatch cover' -> False
+```
+
+The same discipline applies in reverse: an exact-string replacement script must assert its expected
+occurrence count and **write nothing** if any edit misses. That guard fired on the first QP2402 run
+— a generic string had consumed the specific ones — and cost nothing but a re-ordering, because the
+file was never written. Order replacements longest-first when one is a substring of another.
