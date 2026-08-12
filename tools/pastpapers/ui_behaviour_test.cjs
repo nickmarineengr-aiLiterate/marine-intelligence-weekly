@@ -625,6 +625,41 @@ const FIXTURES = {
     // printed title cannot collide.
     narrow: ['rudder efficiency improvement devices', 'QP2409-Q9'],
   },
+  QP2411: {
+    probes: [
+      ['augmented reality', 'QP2411-Q1'],
+      ['ammonia', 'QP2411-Q2'],
+      ['hull form', 'QP2411-Q3'],
+      ['sua convention', 'QP2411-Q4'],
+      ['salvage', 'QP2411-Q5'],
+      ['protection and indemnity', 'QP2411-Q6'],
+      ['decarbonisation', 'QP2411-Q7'],
+      ['human error', 'QP2411-Q8'],
+      ['lubricating oil', 'QP2411-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['haptic', 'QP2411-Q1', 'Q1 (the force-feedback training modality)'],
+      ['special compensation', 'QP2411-Q5', 'Q5 (the Article 14 remedy)'],
+      ['ferrography', 'QP2411-Q9', 'Q9 (the wear-particle technique)'],
+      ['toxicity', 'QP2411-Q2', 'Q2 (the ammonia hazard the answer turns on)'],
+    ],
+    // MEPC.395(82) is THE November-2024 fact and the thing that separates this
+    // sitting from September's. Adopted 4 October 2024, its operative paragraph 3
+    // revokes MEPC.346(78) -- so at this sitting the 2024 SEEMP Guidelines are
+    // operative and the 2022 ones are revoked, the exact reverse of QP2409 five
+    // weeks earlier. If this probe stops resolving, Q7 has been re-anchored onto
+    // the revoked guidelines.
+    regulation: ['mepc.395(82)', 'QP2411-Q7'],
+    // Leak probe. 2022/DEC/Q2 is a host annotation printed against Q2 on THIS
+    // source copy. None of it may reach the shipped bytes.
+    recurrence: ['2022/dec/q2', 'QP2411-Q2'],
+    // Must resolve to exactly ONE card. November sets simulation and the human
+    // operator twice -- Q1 is the training technology and Q8 the human-error
+    // taxonomy -- so 'training' and 'simulator' are ambiguous. Q1's full printed
+    // title is not.
+    narrow: ['virtual and augmented reality', 'QP2411-Q1'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';
