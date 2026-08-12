@@ -39,6 +39,23 @@ AVAILABLE = 'AVAILABLE'
 PLANNED_SOON = 'PLANNED_SOON'
 NO_SITTING = 'NO_SITTING'
 
+# How many change records the home shows. The manifest holds them all; the page
+# is a product surface, not a changelog viewer.
+UPDATES_SHOWN = 6
+
+_MONTHS_SHORT = ('Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec')
+
+
+def pretty_date(iso):
+    """'2026-08-12' -> '12 Aug 2026'. Falls back to the raw value unchanged."""
+    try:
+        y, m, d = (int(x) for x in iso.split('-'))
+        return '%d %s %d' % (d, _MONTHS_SHORT[m - 1], y)
+    except Exception:
+        return iso
+
+
 MODES = [
     ('Understand', 'What the examiner is actually asking, and the trap in the wording.'),
     ('Exam Plan', 'How to spend the marks — the shape of the answer before you write it.'),
@@ -86,7 +103,140 @@ HOME_CSS = """
   .sq-mode b{display:block;font-size:.9rem;margin-bottom:.25rem;}
   .sq-mode span{color:var(--grey-text);font-size:.8rem;line-height:1.55;}
   .sq-note{max-width:1080px;margin:1.5rem auto 0;padding:0 1.25rem 2.5rem;color:var(--grey-text);font-size:.82rem;line-height:1.7;}
-  @media(max-width:640px){.sq-hero h1{font-size:1.5rem;}.sq-stats{gap:1rem;}}
+  /* Topic search. Deliberately a single field with no mode switch: the results
+     are grouped by sitting, which is the shape the reader asked the question in
+     ("which papers cover this?"), so a second mode would add a control without
+     adding an answer. */
+  /* The shared stylesheet has .skip but no .sr-only; the search field needs a
+     label that a screen reader reads and a sighted reader does not see. */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+           clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+  .sq-find{max-width:1080px;margin:0 auto;padding:1.4rem 1.25rem 0;}
+  .sq-find-row{display:flex;align-items:center;gap:.6rem;border:1px solid var(--grey-border);
+               border-radius:10px;background:#fff;padding:.6rem .8rem;}
+  .sq-find-row svg{flex:0 0 auto;color:var(--grey-text);}
+  .sq-find input{flex:1 1 auto;min-width:0;border:0;outline:0;font:inherit;font-size:.95rem;
+                 background:transparent;color:inherit;}
+  .sq-find button{flex:0 0 auto;border:0;background:transparent;color:var(--grey-text);
+                  font-size:1rem;cursor:pointer;padding:0 .2rem;display:none;}
+  .sq-find .hint{color:var(--grey-text);font-size:.78rem;margin:.5rem 0 0;line-height:1.6;}
+  .sq-res{margin-top:.9rem;}
+  .sq-res-sum{font-size:.82rem;color:var(--grey-text);margin:0 0 .7rem;}
+  .sq-res-paper{border:1px solid var(--grey-border);border-radius:10px;padding:.75rem .9rem;
+                margin-bottom:.6rem;background:#fff;}
+  .sq-res-paper h4{margin:0 0 .45rem;font-size:.92rem;}
+  .sq-res-paper h4 a{color:inherit;text-decoration:none;}
+  .sq-res-paper h4 a:hover{color:var(--teal);}
+  .sq-res-q{display:block;padding:.35rem 0;border-top:1px dashed var(--grey-border);
+            font-size:.85rem;line-height:1.55;color:inherit;text-decoration:none;}
+  .sq-res-q:hover{color:var(--teal);}
+  .sq-res-q b{color:var(--teal);font-weight:600;margin-right:.4rem;}
+  .sq-res-q span{color:var(--grey-text);}
+  .sq-res-none{font-size:.85rem;color:var(--grey-text);line-height:1.6;}
+  /* Latest updates. Product changes only -- never a branch, a commit or a build
+     state. Rendered server-side so it is readable with no JavaScript. */
+  .sq-upd{list-style:none;margin:0;padding:0;}
+  .sq-upd li{display:flex;gap:.85rem;padding:.5rem 0;border-top:1px solid var(--grey-border);
+             font-size:.85rem;line-height:1.6;}
+  .sq-upd li:first-child{border-top:0;}
+  .sq-upd time{flex:0 0 6.2rem;color:var(--grey-text);font-size:.78rem;padding-top:.1rem;}
+  .sq-upd .what{min-width:0;}
+  .sq-upd .what b{display:block;font-size:.85rem;}
+  .sq-upd .what span{color:var(--grey-text);}
+  @media(max-width:640px){
+    .sq-hero h1{font-size:1.5rem;}.sq-stats{gap:1rem;}
+    .sq-upd li{flex-direction:column;gap:.15rem;}
+    .sq-upd time{flex:none;}
+  }
+"""
+
+# Client-side topic search over the generated manifest.
+#
+# It fetches solvedQP/solvedqp_content_index.json -- the SAME file the year
+# pages, the home counts and the daily health check are derived from -- so there
+# is no second search index to keep in step. Matching runs against the
+# manifest's precomputed `search_text`, which is normalised in Python by
+# build_solvedqp_manifest.norm_search(); normalising again in JavaScript would
+# be a second implementation of one rule and the two would drift.
+#
+# Only AVAILABLE sittings carry questions in the manifest, so an unsolved paper
+# cannot surface here however well its intake stem matches. That is enforced by
+# the data, not by a filter in this script.
+SEARCH_JS = r"""
+<script>
+(function(){
+  var IDX=null, LOADING=false;
+  var box=document.getElementById('sq-q'),
+      out=document.getElementById('sq-results'),
+      clr=document.getElementById('sq-clear');
+  if(!box||!out) return;
+
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  // Same folding as the manifest's search_text, applied to what the reader
+  // typed. Kept to the minimum: case, punctuation, whitespace.
+  function fold(s){
+    return String(s).toLowerCase().replace(/[^a-z0-9'&]+/g,' ').replace(/\s+/g,' ').trim();
+  }
+
+  function load(){
+    if(IDX||LOADING) return Promise.resolve(IDX);
+    LOADING=true;
+    return fetch('/solvedQP/solvedqp_content_index.json',{cache:'no-store'})
+      .then(function(r){return r.json();})
+      .then(function(j){IDX=j;LOADING=false;return j;})
+      .catch(function(){LOADING=false;return null;});
+  }
+
+  function render(q){
+    if(!IDX){out.innerHTML='';return;}
+    var terms=fold(q).split(' ').filter(Boolean);
+    if(!terms.length){out.innerHTML='';return;}
+    var papers=[],nq=0;
+    IDX.papers.forEach(function(p){
+      if(p.status!=='AVAILABLE'||!p.questions.length) return;
+      var hits=p.questions.filter(function(x){
+        var t=x.search_text||'';
+        return terms.every(function(w){return t.indexOf(w)>=0;});
+      });
+      if(hits.length){papers.push({p:p,hits:hits});nq+=hits.length;}
+    });
+    if(!papers.length){
+      out.innerHTML='<p class="sq-res-none">No solved question matches &ldquo;'+esc(q)+
+        '&rdquo;. Search is over the '+IDX.available_questions+
+        ' questions in the '+IDX.available_papers+
+        ' solved sittings &mdash; sittings still in preparation are not searchable.</p>';
+      return;
+    }
+    var h=['<p class="sq-res-sum">'+papers.length+(papers.length===1?' paper':' papers')+
+           ' &middot; '+nq+(nq===1?' question':' questions')+'</p>'];
+    papers.forEach(function(g){
+      h.push('<div class="sq-res-paper">');
+      h.push('<h4><a href="'+esc(g.p.href)+'">'+esc(g.p.sitting)+'</a> '+
+             '<span style="color:var(--grey-text);font-weight:400">'+esc(g.p.sr_no)+'</span></h4>');
+      g.hits.forEach(function(x){
+        h.push('<a class="sq-res-q" href="'+esc(x.href)+'"><b>'+esc(x.question_number)+
+               '</b><span>'+esc(x.short_title||'')+'</span></a>');
+      });
+      h.push('</div>');
+    });
+    out.innerHTML=h.join('');
+  }
+
+  function onInput(){
+    var q=box.value;
+    clr.style.display=q?'block':'none';
+    if(!q.trim()){out.innerHTML='';return;}
+    load().then(function(){render(q);});
+  }
+  box.addEventListener('input',onInput);
+  clr.addEventListener('click',function(){box.value='';out.innerHTML='';
+    clr.style.display='none';box.focus();});
+  // Warm the payload on first focus so the first keystroke feels instant.
+  box.addEventListener('focus',load,{once:true});
+})();
+</script>
 """
 
 
@@ -186,6 +336,49 @@ def build(specs):
 
     a('<main id="sq-main">')
 
+    # ---- topic search ----------------------------------------------
+    # Answers the question a candidate actually arrives with: "which solved
+    # papers cover Port State Control, and which question?" Results are
+    # question-level and link straight to the anchor.
+    a('<section class="sq-find">')
+    a('  <div class="sq-find-row">')
+    a('    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+      'stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/>'
+      '<path d="M21 21l-4.35-4.35"/></svg>')
+    a('    <label class="sr-only" for="sq-q">Search solved questions by topic</label>')
+    a('    <input id="sq-q" type="search" autocomplete="off" '
+      'placeholder="Search a topic &mdash; Port State Control, general average, MARPOL&hellip;">')
+    a('    <button id="sq-clear" type="button" aria-label="Clear search">&#10005;</button>')
+    a('  </div>')
+    a('  <p class="hint">Searches the printed question and its topic labels across all %d '
+      'solved questions in %d sittings. Sittings still in preparation are not searchable, '
+      'because no answer exists to open.</p>' % (total_q, len(sittings)))
+    a('  <div class="sq-res" id="sq-results"></div>')
+    a('</section>')
+
+    # ---- latest updates --------------------------------------------
+    # Generated from the manifest's recently_updated, which is derived from the
+    # specs themselves. Nobody hand-edits this list when a paper lands.
+    #
+    # Imported inside the function on purpose: build_solvedqp_manifest imports
+    # THIS module for the one definition of coverage/solved state, so a module
+    # level import here would be circular.
+    from build_solvedqp_manifest import recently_updated
+    ups = recently_updated(specs, {d['paper_id'] for d in sittings})[:UPDATES_SHOWN]
+    if ups:
+        a('<section class="sq-section">')
+        a('  <h2>Latest updates</h2>')
+        a('  <p class="lead">What has changed in this collection &mdash; new sittings and '
+          'corrections to published answers.</p>')
+        a('  <ul class="sq-upd">')
+        for u in ups:
+            a('    <li><time datetime="%s">%s</time><div class="what">'
+              '<b>%s</b><span>%s</span></div></li>'
+              % (esc(u['date']), esc(pretty_date(u['date'])),
+                 esc(u['paper_id']), u['summary']))
+        a('  </ul>')
+        a('</section>')
+
     # ---- papers ----------------------------------------------------
     a('<section class="sq-section">')
     a('  <h2>Solved papers</h2>')
@@ -280,6 +473,7 @@ def build(specs):
       'sittings added to this collection. Spotted something that needs correcting? '
       '<a href="mailto:%s?subject=Solved%%20QP%%20correction">%s</a>.</p>' % (CONTACT, CONTACT))
     a('</main>')
+    a(SEARCH_JS)
     o.extend(footer(True))
     a('</body>')
     a('</html>')

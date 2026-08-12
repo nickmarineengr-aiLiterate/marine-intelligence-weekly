@@ -4830,3 +4830,75 @@ past 90 words, which the validator rightly calls being read rather than retrieve
 information only, the recomputed best remaining 2025 candidate is **QP2502, February 2025** (tier D
 2/9, family reach 5, two temporal flags) — which confirms rather than overturns the previous
 estimate. It is **not** started.
+
+---
+
+# QP2512 PUBLISHED · SOLVEDQP DERIVED LAYER BUILT · DESKTOP BATCH 2 ALLOCATED
+
+**2026-08-12.** Laptop. Three pieces of work, in the order the Founder set them: allocate the next
+desktop six *before* touching any product file, publish QP2512 safely, then build the manifest,
+search and health system the Solved QP product had been missing.
+
+## 1. Batch 2 was recomputed, not inherited
+
+The carried-forward note recommended QP2502 at "tier D 2/9, family reach 5". Rather than trust it,
+readiness was recomputed through `recurrence_model.py` under a **simulated built set that assumes
+Batch 1 is complete** — 180 answers, not today's 126. QP2502 is now **3/9**: Batch 1's QP2402
+creates a Q1 donor that did not exist when the note was written.
+
+Two findings changed the allocation:
+
+**QP2507's entire reach points at two papers.** It has the highest family reach in the corpus (8)
+and zero donors, which is why Batch 1 correctly refused to start from it. All eight edges land
+inside QP2501 and QP2503. Solved after them it is **8/9** — the largest single readiness conversion
+available anywhere. It went into the batch with a hard ordering constraint rather than being held.
+
+**The mid-2024 trio is not a block.** Batch 1's board expected QP2406/2407/2408 to be "the natural
+second batch". They are not: all three finish at 1/9 with reach 0 in every scenario tested, because
+their donors come from 2025 and 2026 and never from each other. That turned a three-paper Batch 3
+into a two-paper one, and freed the sixth slot for QP2406 — the only zero-temporal-flag paper left.
+
+The order was verified exhaustively: 18 of 54 questions arrive donor-ready, the maximum over all
+720 permutations. It is also, for the first time, the calendar order — a coincidence of this donor
+graph, not a rule.
+
+## 2. QP2512 was reconciled, not merged
+
+`main` had moved three commits ahead of the branch base. Twelve files were main-only; four were
+touched by both sides. The one that mattered was the public sample: the branch's copy carried two
+review markers, `main`'s carried none. The merge kept `main`'s bytes and took the branch's content
+delta (13 → 14 sittings).
+
+**The regression guard was not the merge.** It was rebuilding with `run_toolchain.py` and no
+arguments — the exact invocation that silently un-published the page in the first place — and
+confirming both samples stayed published. The measured unlock cost of the gated Oral full paper is
+unchanged at 18 questions across 11 sittings; QP2512-Q1 was already in that set as an unsolved stem.
+
+## 3. The derived layer, and the three false positives that shaped it
+
+`solvedQP/solvedqp_content_index.json` is now the single generated inventory. The interesting work
+was not building it but stopping it from being wrong every day.
+
+**The paid-text guard convicted the product of leaking its own question paper.** A 60-character
+scan for model-answer prose fired on the first build: QP2403-Q4's answer opens by restating its
+printed stem word for word. The guard now subtracts the surface it is allowed to publish.
+
+**The health check raised 18 leakage errors on an HTML comment.** Every delivered paper carries
+`<!-- GATE SCRIPT STRIPPED FOR REVIEW COPY -->`. Comments are stripped before any prose scan.
+
+**The temporal guard raised seven errors on correct content.** Scanning whole pages for later law
+flags the Study Guide, which is *required* to tell the candidate the law has since changed. The
+guard now reads answer panes only, ignores negated sentences ("had assent but had not commenced"),
+and downgrades same-month collisions to REVIEW. The last false positive standing was QP2602's
+"...in force 15 March 2026 — some five weeks after this paper was sat", which is a model sentence.
+
+The self-test then failed one case, correctly: the future-law fixture was being injected after
+`<body>`, outside any answer pane, so it proved nothing once the scoping landed. Moving it inside
+an answer pane made it fail as intended.
+
+## 4. The exposure that was confirmed and not fixed
+
+Checking where the manifest could safely live established that the repository is public and
+`solvedQP/QP2601.html` — 389 KB of paid answers — returns HTTP 200 unauthenticated from
+`raw.githubusercontent.com`. The middleware gates the site, not the source. Pre-existing,
+unchanged by this session, and recorded rather than quietly worked around.

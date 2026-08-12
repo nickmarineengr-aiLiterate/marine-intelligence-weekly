@@ -1,23 +1,28 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-12, after **QP2512 was completed to 9 / 9 and pushed for Founder review**.
-See §7a for the QP2512 state and §1a for the security and deployment state.
+Last updated: 2026-08-12, after **QP2512 was published to `main` and the SolvedQP derived layer —
+manifest, topic search, latest updates and daily health check — was built**.
+See §7a for QP2512, §7b for the derived layer, §7c for the desktop batches, §1a for security.
 
-> # QP2512 IS COMPLETE — 9 / 9 — AND AWAITS FOUNDER REVIEW.
+> # QP2512 IS LIVE. THE SOLVEDQP DERIVED LAYER IS BUILT.
 >
-> **The Founder lifted the pause on 2026-08-12 and authorised QP2512 — December 2025 — as the sole
-> laptop production object. It is now finished.** All nine questions are authored, verified,
-> assembled into the canonical spec, built on both surfaces and swept. `specs/QP2512.json` reads
-> `build_state: Pilot Review Ready`, `review_state: Awaiting Founder Review - complete paper`,
-> `version 1.0`. `staging/QP2512/` has been **retired**.
+> **QP2512 — December 2025 — is integrated into `main`.** The Founder authorised publication; the
+> branch was **reconciled, not blind-merged**, against the three `main`-only commits that landed
+> while it was being authored. The publish-state fix in `2f38586` is preserved and *proven* by
+> rebuilding with the exact flagless invocation that originally broke it.
 >
-> **The branch `pastpapers/qp2512-founder-review` is pushed and NOT merged.** No merge to `main`
-> and no deployment. QP2512 enters production only on Founder approval.
+> **Product: 14 available papers · 126 published questions · 252 in the corpus.**
+> The corpus is at its **halfway point** — 126 solved, 126 unsolved.
 >
-> **Nothing else is authorised.** Do not start another laptop paper without the Founder, and in
-> particular do not touch the six desktop-allocated 2024 papers (`QP2401`, `QP2412`, `QP2402`,
-> `QP2409`, `QP2411`, `QP2410`).
+> **One generated inventory now serves the whole delivery product.**
+> `solvedQP/solvedqp_content_index.json` is the single source for the home counts, the coverage
+> grid, the topic search, the latest-updates strip and the daily health report. Nobody hand-edits
+> it; nobody keeps a second list. See [`SOLVEDQP_DERIVED_LAYER.md`](SOLVEDQP_DERIVED_LAYER.md).
+>
+> **Nothing else is authorised for laptop authoring.** Do not start a paper without the Founder,
+> and do not touch any desktop-allocated paper — Batch 1 (`QP2401`, `QP2412`, `QP2402`, `QP2409`,
+> `QP2411`, `QP2410`) or Batch 2 (§7c).
 >
 > Corpus consumption remains integrated (§2a) and read-only. **The Founder decisions in §6 are
 > still open and did not block QP2512** — it cites none of the three corpora, so its
@@ -324,9 +329,25 @@ Fixed in `caf5020`.
 
 ---
 
-## 7a. QP2512 — December 2025 — **COMPLETE 9 / 9, READY FOR FOUNDER REVIEW**
+## 7a. QP2512 — December 2025 — **LIVE ON MAIN**
 
-Branch `pastpapers/qp2512-founder-review`, based on `7e51b97`. Completed 2026-08-12.
+Authored on `pastpapers/qp2512-founder-review` from `7e51b97`; **published 2026-08-12**.
+
+**Integration was a reconciliation, not a merge.** `main` had moved three commits ahead of the
+branch base while the paper was being written, and one of them fixed a live defect the branch would
+have reverted:
+
+| Commit | Class | Preserved |
+|---|---|---|
+| `a3a3003` | SECURITY / product leakage — public QB trimmed 94.7% → 50.2% | yes |
+| `2f38586` | **PUBLISH-STATE** — `--publish` moved from a flag into the projection config | yes |
+| `e86d26d` | DOCUMENTATION | yes |
+
+The file that mattered was `SQ/solved-qp-sample-january-2026.html`: the branch's copy carried two
+review/`noindex`/`PRICE_TBD` markers, `main`'s carried none. Integrated, it carries none **and**
+gains QP2512's content delta (13 → 14 sittings). The guard is not the merge — it is that
+`run_toolchain.py` was then run with **no arguments**, the exact invocation that caused the original
+regression, and both sample pages stayed published.
 
 | | |
 |---|---|
@@ -337,7 +358,7 @@ Branch `pastpapers/qp2512-founder-review`, based on `7e51b97`. Completed 2026-08
 | **Determinism** | double-build **byte-identical across 91 generated artefacts** |
 | **Delivery surface** | QP2512 now renders **Available** on `solvedQP/index.html`, transitioned automatically by the generated surface — no manual status edit |
 | **Staging** | **RETIRED.** `staging/QP2512/` removed; its content lives in the canonical spec |
-| **Merge / deploy** | **NOT merged, NOT deployed.** Founder review only |
+| **Merge / deploy** | **MERGED to `main` and deployed.** Founder authorised publication 2026-08-12 |
 | **Read first** | [`QP2512_TEMPORAL_AND_DONOR_ANCHOR.md`](QP2512_TEMPORAL_AND_DONOR_ANCHOR.md) |
 
 **Reuse as built:** tier **D on Q1, Q2, Q9** (donors `QP2511-Q3`, `QP2511-Q4`, `QP2509-Q4`); tier
@@ -361,10 +382,74 @@ anchors and all seven internal cross-links resolve in the built page.
 
 ---
 
-## 7. Production queue — QP2512 complete, nothing else authorised
+## 7b. SolvedQP derived layer — **ACTIVE**
 
-> **QP2512 is finished and awaiting Founder review (§7a). Everything below remains the queue as
-> recorded, not work that is authorised.** Do not nominate another laptop paper without the Founder.
+Built 2026-08-12. Full architecture: [`SOLVEDQP_DERIVED_LAYER.md`](SOLVEDQP_DERIVED_LAYER.md).
+
+| Component | Path | State |
+|---|---|---|
+| **Manifest** | `solvedQP/solvedqp_content_index.json` | **ACTIVE** — 28 papers, 14 available, 126 published questions, 14 planned, 3 known-absent |
+| Generator | `tools/pastpapers/build_solvedqp_manifest.py` | in the toolchain, `--check` and `--self-test` |
+| **Topic search** | `solvedQP/index.html`, over the manifest | **ACTIVE** — question-level, grouped by sitting, links to the anchor |
+| Search tests | `tools/pastpapers/solvedqp_search_test.py` | 13 / 13 |
+| **Latest updates** | `solvedQP/index.html`, from `recently_updated` | **ACTIVE** — generated; never hand-edited |
+| **Daily health** | `tools/pastpapers/solvedqp_health_check.py` | **ACTIVE LOCALLY · CONFIGURED REMOTELY** — see below |
+| Workflow | `.github/workflows/solvedqp-health-check.yml` | daily 03:30 UTC / 09:00 IST + `workflow_dispatch` |
+
+**Daily email is CONFIGURED, not yet CONFIRMED.** The workflow reuses the existing Brevo secrets
+`BREVO_SMTP_LOGIN` and `BREVO_SMTP_KEY`, and takes the recipient from
+`SOLVEDQP_HEALTH_EMAIL_TO`, falling back to `QB_HEALTH_EMAIL_TO`, falling back to
+`contactus@marineintelligenceweekly.com`. **No new secret is required for it to start reporting**,
+but the first scheduled or manual run is what proves delivery. Nothing here holds a credential.
+
+**Inventory authority.** The manifest is the only inventory. The home page, the year sheets, the
+search and the health checker all assert against it; none of them builds a second list.
+
+**Paid-text boundary.** The manifest carries printed question stems, topic labels and sitting
+metadata only. `assert_no_paid_text()` fails the build on any banned key *and* on any 60-character
+run of answer prose beyond the published stems. Unsolved sittings carry **no** question text, so
+topic search cannot make a planned paper look solved.
+
+> **The boundary the manifest does NOT fix.** The repository is public, so `solvedQP/QP2601.html`
+> — 389 KB of paid answers — is readable unauthenticated at `raw.githubusercontent.com`. The
+> middleware gates the site, not the source. This is pre-existing and unchanged by this session;
+> the manifest contains strictly less than the pages already committed beside it. Recorded in
+> `WRITTEN_PRODUCT_LIVE_TEST_STATUS.md`.
+
+**Temporal handling.** The health check applies the **Written** trap ledger only. The Oral ledger
+greps `A.1185(33)` and `Merchant Shipping Act, 1958`, both of which are *correct* on historical
+papers; applying it would produce about a hundred false findings every morning. Forward
+contamination is checked instead — answer panes only, negation-aware, and REVIEW rather than ERROR
+when the sitting and the boundary share a month.
+
+---
+
+## 7c. Desktop batches
+
+| Batch | Papers | Status |
+|---|---|---|
+| **1** | QP2401 · QP2412 · QP2402 · QP2409 · QP2411 · QP2410 | **IN FLIGHT** — 5 of 6 branches on `origin`, **none merged**, stop gate not reached |
+| **2** | **QP2501 · QP2502 · QP2503 · QP2504 · QP2507 · QP2406** | **ALLOCATED — NOT STARTED** |
+| **3** | QP2407 · QP2408 | held back — two papers, not three |
+
+Board: [`DESKTOP_QP_ALLOCATION_BOARD.md`](DESKTOP_QP_ALLOCATION_BOARD.md). Batch 1's own board,
+[`DESKTOP_QP_ALLOCATION_2024.md`](DESKTOP_QP_ALLOCATION_2024.md), is preserved unchanged.
+
+**Batch 2 baseline: `main` at the QP2512 publication commit** — not `9c97359`, which predates the
+publish-state fix and the whole derived layer.
+
+Batch 2 order is fixed and one constraint is hard: **QP2507 must follow QP2501 and QP2503**, which
+supply all eight of its family edges and take it from 0/9 to 8/9. The order yields 18 of 54
+questions donor-ready, the proven maximum over all 720 orderings.
+
+**Do not start Batch 2 while Batch 1 is open.**
+
+---
+
+## 7. Production queue — QP2512 published, nothing else authorised
+
+> **QP2512 is live (§7a). Everything below remains the queue as recorded, not work that is
+> authorised.** Do not nominate another laptop paper without the Founder.
 
 **QP2511 — November 2025 — IS COMPLETE 9/9, BUILT AND DELIVERED.** Awaiting Founder review.
 

@@ -250,7 +250,29 @@ def main():
     rc_total += rc
     warn_total += w
 
+    # The delivery manifest MUST be built before the home page, which renders
+    # its "latest updates" strip from the same derivation, and before the
+    # search and health checks, which read the file. Ordering it here is what
+    # makes the manifest authoritative rather than merely present.
+    argv = [os.path.join(T, 'build_solvedqp_manifest.py')]
+    rc, w = run('SOLVEDQP MFST', argv, args.verbose)
+    rc_total += rc
+    warn_total += w
+
+    if args.self_test:
+        rc, w = run('SOLVEDQP MFST ST',
+                    [os.path.join(T, 'build_solvedqp_manifest.py'), '--self-test'],
+                    args.verbose)
+        rc_total += rc
+        warn_total += w
+
     rc, w = run('SOLVEDQP HOME', [os.path.join(T, 'build_solvedqp_home.py')], args.verbose)
+    rc_total += rc
+    warn_total += w
+
+    # Search is a property of the manifest, so it is tested here rather than in
+    # a browser. See solvedqp_search_test.py.
+    rc, w = run('SOLVEDQP FIND', [os.path.join(T, 'solvedqp_search_test.py')], args.verbose)
     rc_total += rc
     warn_total += w
 
@@ -278,6 +300,22 @@ def main():
     rc, w = run('KNOWN TRAPS', argv, args.verbose)
     rc_total += rc
     warn_total += w
+
+    # The delivery health check, run against THIS tree. In production the same
+    # script runs daily against main's tarball and emails the result; running
+    # it here means a defect it would report tomorrow fails the build today.
+    rc, w = run('SOLVEDQP HLTH',
+                [os.path.join(T, 'solvedqp_health_check.py'), '--local', '--no-email'],
+                args.verbose)
+    rc_total += rc
+    warn_total += w
+
+    if args.self_test:
+        rc, w = run('SOLVEDQP HLTH ST',
+                    [os.path.join(T, 'solvedqp_health_check.py'), '--self-test'],
+                    args.verbose)
+        rc_total += rc
+        warn_total += w
 
     # Production Intelligence Layer. Detection only -- PIL FLAGS, CLAUDE
     # ADJUDICATES -- so the sweep's candidate list never fails the build. What

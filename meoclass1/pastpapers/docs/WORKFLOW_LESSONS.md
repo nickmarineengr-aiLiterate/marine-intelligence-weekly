@@ -1398,3 +1398,106 @@ fixture fails on the wrong resolution number, in CI, without anyone having to re
 
 **The rule.** *A per-paper UI fixture is not boilerplate. Derive its terms from the built artefact,
 and aim its single regulation slot at whatever the paper is most likely to be got wrong about later.*
+
+---
+
+## A GUARD THAT HAS NEVER SUBTRACTED THE ALLOWED SURFACE WILL CONVICT THE PRODUCT OF ITSELF
+
+**Status: PROVEN.** Evidence: `build_solvedqp_manifest.py`, 2026-08-12.
+
+A leak guard scanned the generated manifest for any 60-character run of model-answer prose. It
+fired on the very first build, on `QP2403-Q4` — because that answer opens by restating its own
+printed question, and the printed question is exactly what the manifest is *for*.
+
+The bug was not the threshold. It was that the guard tested "does paid text appear here?" when the
+question it had to answer was "does paid text appear here **beyond what we already publish**?"
+
+**The rule.** *Before a guard can flag an overlap, it must be given the set it is allowed to
+overlap with.* Build the allowed corpus from the artefact's own published fields and subtract it.
+A guard without that subtraction does not measure leakage — it measures similarity, and a product
+is always similar to itself.
+
+---
+
+## AN AUTOMATED SCAN MUST SEE WHAT THE READER SEES, NOT WHAT THE FILE CONTAINS
+
+**Status: PROVEN.** Evidence: `solvedqp_health_check.py`, 2026-08-12.
+
+The first run of the delivery health check reported eighteen errors: every page "contains a
+review-copy marker". Every page carries `<!-- GATE SCRIPT STRIPPED FOR REVIEW COPY -->` — a build
+comment, invisible to any customer.
+
+Eighteen daily errors about something no reader can see is worse than no check, because it teaches
+the reader to skip the report.
+
+**The rule.** *Strip comments, scripts and styles before scanning for anything a human would
+"see".* Keep the markup only where the leak itself is markup — a `localhost` href hides in an
+attribute, not in prose. The scan surface is a decision per rule, not one global setting.
+
+---
+
+## A HISTORICAL DOCUMENT CANNOT BE CHECKED AGAINST CURRENT LAW — AND THE STUDY GUIDE IS THE PROOF
+
+**Status: PROVEN.** Evidence: `solvedqp_health_check.py` temporal design, 2026-08-12.
+
+Two separate versions of this mistake were made and caught in one session.
+
+**First**, the obvious one: the Oral trap ledger greps for `A.1185(33)` and
+`Merchant Shipping Act, 1958`, both wrong as current law. Both are *right* on the papers they
+appear in — `A.1185(33)` is the operative PSC edition for a December 2025 sitting, and the 1958 Act
+governs all twenty-two 2024 and 2025 sittings. Sharing that ledger would produce roughly a hundred
+false findings every morning, for ever.
+
+**Second**, and much less obvious: even a correctly-directional guard — "no instrument may be
+asserted as operative before it existed" — raised seven errors on correct content. It was reading
+whole pages, and **the Study Guide is required to tell the candidate the law has since changed**.
+Forward-looking commentary is the product working, not failing.
+
+The final false positive was `QP2602`'s answer reading *"in force 15 March 2026 — some five weeks
+after this paper was sat"*, which is a model piece of temporal honesty and which a naive
+`[^.]{0,80}(commenced|in force)` window happily flagged.
+
+**The rule, in three parts.**
+1. *Scope the guard to the region where the rule applies* — answer panes, not pages.
+2. *Read the sentence, not the match.* An assertion and its negation share every keyword.
+3. *Where the evidence cannot order two events — a December sitting and a 3 December adoption —
+   emit REVIEW, never ERROR.* A checker that guesses is manufacturing a verdict, and a deterministic
+   job in CI has no business doing that.
+
+---
+
+## A SELF-TEST FIXTURE PLACED OUTSIDE THE RULE'S SCOPE TESTS NOTHING
+
+**Status: PROVEN.** Evidence: `solvedqp_health_check.py --self-test`, 2026-08-12.
+
+The future-law fixture injected its defect immediately after `<body>`. It passed while the guard
+scanned whole pages, and failed the moment the guard was correctly narrowed to answer panes — 12/13.
+
+That failure was the self-test working. A fixture that survives a *tightening* of the rule it
+exercises was never inside the rule to begin with.
+
+**The rule.** *When you narrow a check's scope, re-place every fixture that exercises it.* And read
+a self-test failure after a scope change as a question about the fixture before assuming it is a
+question about the code.
+
+---
+
+## RECOMPUTE ALLOCATION UNDER THE STATE THAT WILL EXIST, NOT THE STATE THAT DOES
+
+**Status: PROVEN.** Evidence: desktop Batch 2 selection, 2026-08-12.
+
+Batch 2 had to be chosen while Batch 1 was still in flight. Ranking the candidates on *today's*
+corpus would have been ranking them on a state that will never be the state they are worked in.
+
+Simulating Batch 1 as complete moved real decisions: QP2502 rose 2/9 → 3/9, QP2504 rose 1/9 → 3/9
+and then to 5/9 in sequence, and QP2507 — 0/9 today, and correctly rejected by Batch 1 for exactly
+that reason — became **8/9**, because all eight of its family edges land inside two other papers in
+the same batch.
+
+It also *demoted* an inherited assumption. The previous board expected the mid-2024 trio to be the
+natural next block; simulation showed all three finish at 1/9 with reach 0 whatever the order,
+because their donors come from other years. There was no block to protect.
+
+**The rule.** *Plan the next batch against the projected corpus, and record which projection you
+used.* The derived tier already refuses to be read from a stored field because stored tiers plan
+off the past; planning off the present has the same defect one step later.

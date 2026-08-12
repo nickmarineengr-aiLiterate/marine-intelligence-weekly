@@ -1,0 +1,36 @@
+name: SolvedQP Health Check
+
+on:
+  schedule:
+    # 03:30 UTC daily = 09:00 IST.
+    # Thirty minutes after the QB health check (03:00 UTC / 08:30 IST) so the
+    # two jobs never contend for the same Brevo relay in the same minute, and
+    # so the two reports arrive as two distinct items rather than one blur.
+    - cron: "30 3 * * *"
+  workflow_dispatch: {}   # Founder can run it on demand from the Actions tab
+
+jobs:
+  solvedqp-health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo (for the script itself)
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      # The script fetches the main tarball itself, so it reports on what is
+      # actually published rather than on the commit this job happens to run
+      # from. The checkout above provides the checker, not the content.
+      - name: Run SolvedQP health check
+        env:
+          BREVO_SMTP_LOGIN: ${{ secrets.BREVO_SMTP_LOGIN }}
+          BREVO_SMTP_KEY: ${{ secrets.BREVO_SMTP_KEY }}
+          # Reuses the QB recipient secret when a SolvedQP-specific one has not
+          # been set, matching the fallback the script itself documents. No new
+          # secret has to be created for this job to start reporting.
+          SOLVEDQP_HEALTH_EMAIL_TO: ${{ secrets.SOLVEDQP_HEALTH_EMAIL_TO }}
+          QB_HEALTH_EMAIL_TO: ${{ secrets.QB_HEALTH_EMAIL_TO }}
+        run: python3 tools/pastpapers/solvedqp_health_check.py
