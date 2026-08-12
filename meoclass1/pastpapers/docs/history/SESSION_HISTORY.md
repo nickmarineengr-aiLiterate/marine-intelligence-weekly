@@ -4635,3 +4635,107 @@ recorded in `staging/QP2512/CHECKPOINT.md` so the resumption does not re-derive 
 
 Two lessons were promoted, both primary-proven this session: the issue-date rule for an ambiguous
 Assembly boundary, and the three-edition warning for re-issued instruments.
+
+---
+
+# QP2512 — December 2025 — RESUMED FROM 3/9 AND COMPLETED 9/9 — 2026-08-12
+
+## Outcome
+
+**COMPLETE. 9 of 9 authored, verified, assembled, built, swept and pushed for Founder review.**
+The paper that the previous session left at a safe 3/9 checkpoint is finished. `staging/QP2512/`
+is retired. No merge to `main`, no deployment.
+
+## Branch / commits
+
+`pastpapers/qp2512-founder-review`, base `7e51b97`, resumed from `d442af2` exactly as the checkpoint
+recorded — local and remote heads both verified before any work began.
+
+- `5835056` — Q8 and Q6 with their verification records
+- `fd89578` — Q5, Q3, Q4 and Q7 with theirs; nine of nine staged
+- `b5ec72c` — canonical assembly, both surface builds, staging retired
+
+## Key findings
+
+**The highest-risk adaptation was avoided by construction rather than by correction.** `QP2606-Q2`
+was the natural support for Q8's port State control limbs and is built **entirely on the 2025
+Procedures**, which had not been issued at this sitting. The intake note predicts an excluded
+instrument spreading across **eight** surfaces of a question object. Rather than clone and then
+hunt it out of eight places, Q8 was authored fresh, so the excluded edition could never enter.
+`A.1185(33)` was re-obtained from the IMO resolutions CDN and read at source; its operative
+paragraph 4 confirmed the revocation chain directly.
+
+**A predicted numbering drift was checked and did not occur.** The anchor warned that chapter
+numbering moves between editions of the Procedures and that equivalents must be located rather than
+assumed. The right of appeal sits at **`2.3.11` in the 2023 edition as well** — so on that provision
+the numbering *did* survive the revision. Established by reading, not inferred, and recorded
+because the warning predicted it might not.
+
+**Section 358(1) of the Merchant Shipping Act 1958 answers Q5's premise, and it is flag-neutral.**
+Three of its five limbs say *"any ship"* and only two say *"Indian ship"*, so India's competence
+over a casualty on a foreign ship in its port is **territorial, not flag-based**. The boundary then
+reappears exactly where it should: `s.369(2)` sends the report to the foreign certificating
+authority and `s.363(1)(b)` reaches a foreign certificate only on an Indian ship. India owns the
+facts; the flag State owns the officer.
+
+**GISIS is not in the Casualty Investigation Code.** The Code says only that the report goes *to the
+Organization*. The GISIS Marine Casualties and Incidents module comes from
+`MSC-MEPC.3/Circ.4/Rev.1`, a separate circular. Attributing it to the Code would have been a
+citation error; the two are cited separately.
+
+**There is no Standard A1.3 and no Guideline B1.3.** Established by searching the MLC text rather
+than inferred from the pattern of the other three Title 1 Regulations. Regulation 1.3 stands alone
+and defers to STCW. This is the point on Q6 most likely to be invented rather than checked.
+
+**Two questions had no regulatory source for their main limbs and say so.** Maslow is attributed as
+management literature by name and date; no instrument governs what a charterer may instruct. In both,
+the genuinely regulatory limb was kept separable and verified, and §2.1's rule against manufacturing
+a rule to satisfy a checkbox was applied deliberately. Q4 also records a limit it could not pass:
+the corpus holds the STCW **amendment resolutions** but not the **Code tables**, so Table A-III/2 is
+named and no competence wording is quoted.
+
+## Corpus delta
+
+| | before | after |
+|---|---|---|
+| Questions solved | 117 | **126** — the halfway point of 252 |
+| Papers solved | 13 | **14** |
+| Tier D over the unsolved set (derived) | 20 | **17** |
+| `REVERSE_HINT_CANDIDATES.md` | 4 open rows | **4 open rows — byte-identical** |
+
+QP2512 consumed three tier-D donors of its own and **unlocked none**. Unlike QP2511, its six
+tier-C questions produced no new donor edge, because six of the nine were adjudicated as fresh or
+limb-supported rather than family-linked. That is a real property of the paper, not a gap in the
+derivation, and it is why the derived tier-D count fell by exactly three.
+
+The reverse-hint queue being byte-identical confirms the anchor's recorded negative: **QP2512
+contributes no new rows**, and the four open rows (`QP2402-Q3`, `QP2406-Q8`, `QP2408-Q3`,
+`QP2410-Q1`) remain unadjudicated.
+
+## QA
+
+`ALL STAGES PASS`, and again with `--self-test`. `validate_spec` **0 errors**; the nine remaining
+warnings are the deferred 450–650 word band, which fires on every question of every paper. **0
+blocking** re-verification flags. `solvedqp_check`, `coverage_check` and both their self-tests pass.
+Double-build **byte-identical across 91 generated artefacts**. Local UI review at 1280 and 375 on
+all four pages: no overflow, no console errors, five modes with Answer default, search narrowing
+correctly, no host-recurrence or provider leakage, review banner present on the review build and
+absent from delivery.
+
+**Two toolchain stages failed on the first run and both were honest consequences of a paper becoming
+a product**: the reuse map was stale, and `ui_behaviour_test.cjs` had no fixture for QP2512 — by
+design, since a page with no fixtures must fail rather than report a clean run having tested
+nothing. The fixture's terms were chosen by probing the built page rather than guessed, and its
+regulation probe is `A.1185(33)` deliberately: if that ever resolves to a different resolution
+number, the paper has been re-anchored onto the wrong Procedures.
+
+**Two validator warning classes were real defects and were fixed rather than accepted:** four
+`freshness_risk` fields did not begin with a parseable risk word, and three flashcard answers ran
+past 90 words, which the validator rightly calls being read rather than retrieved.
+
+## Next action
+
+**Founder review of `pastpapers/qp2512-founder-review`.** Nothing else is authorised. For
+information only, the recomputed best remaining 2025 candidate is **QP2502, February 2025** (tier D
+2/9, family reach 5, two temporal flags) — which confirms rather than overturns the previous
+estimate. It is **not** started.

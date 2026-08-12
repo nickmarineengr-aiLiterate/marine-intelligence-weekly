@@ -1,23 +1,27 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-12, after the **security remediation and live production deployment**
-session. See §1a for the security and deployment state — it is the newest thing here.
+Last updated: 2026-08-12, after **QP2512 was completed to 9 / 9 and pushed for Founder review**.
+See §7a for the QP2512 state and §1a for the security and deployment state.
 
-> # QP PRODUCTION HAS RESUMED. QP2512 IS THE ACTIVE LAPTOP PAPER.
+> # QP2512 IS COMPLETE — 9 / 9 — AND AWAITS FOUNDER REVIEW.
 >
 > **The Founder lifted the pause on 2026-08-12 and authorised QP2512 — December 2025 — as the sole
-> laptop production object.** The pause banner that stood here is superseded.
+> laptop production object. It is now finished.** All nine questions are authored, verified,
+> assembled into the canonical spec, built on both surfaces and swept. `specs/QP2512.json` reads
+> `build_state: Pilot Review Ready`, `review_state: Awaiting Founder Review - complete paper`,
+> `version 1.0`. `staging/QP2512/` has been **retired**.
 >
-> **QP2512 is PARTIAL: 3 of 9 authored and safely checkpointed.** See §7a. The canonical spec is
-> untouched and still reads `Intake Complete`; the finished questions are staged at
-> `staging/QP2512/`. **Resume QP2512 before starting anything else.**
+> **The branch `pastpapers/qp2512-founder-review` is pushed and NOT merged.** No merge to `main`
+> and no deployment. QP2512 enters production only on Founder approval.
 >
-> **Do not start any other paper**, and in particular do not touch the six desktop-allocated 2024
-> papers (`QP2401`, `QP2412`, `QP2402`, `QP2409`, `QP2411`, `QP2410`).
+> **Nothing else is authorised.** Do not start another laptop paper without the Founder, and in
+> particular do not touch the six desktop-allocated 2024 papers (`QP2401`, `QP2412`, `QP2402`,
+> `QP2409`, `QP2411`, `QP2410`).
 >
 > Corpus consumption remains integrated (§2a) and read-only. **The Founder decisions in §6 are
-> still open and still do not block QP authoring** — QP2512 cites none of the three corpora.
+> still open and did not block QP2512** — it cites none of the three corpora, so its
+> `reference_shelf` is empty on all nine questions, which is the correct outcome and not a gap.
 
 This file answers four questions and nothing else: *where are we now, what was completed,
 what is next, what is blocked.*
@@ -83,17 +87,17 @@ All git commands in this repository need `-c safe.directory=*`.
 
 ## 2. Corpus state
 
-Derived from `health_check.py` and `build_reuse_map.py --check` at `850bdde`, not carried forward
-from a previous handover.
+Recomputed from the specs, `build_reuse_map.py` and `solvedqp_check.py` after QP2512 was solved on
+2026-08-12. Not carried forward from a previous handover.
 
 | | |
 |---|---|
-| **Corpus** | **252 questions / 117 solved / 135 unsolved** |
-| **Papers** | 28 — **13 solved**, 15 answerless intake |
+| **Corpus** | **252 questions / 126 solved / 126 unsolved** — the halfway point |
+| **Papers** | 28 — **14 solved**, 14 answerless intake |
 | **Years** | 2024 (11 papers), 2025 (11), 2026 (6). May is absent from the source set in all three years |
-| **Tier D (derived)** | **20** of the 135 unsolved carry a verified donor. Unchanged in total by QP2511: its own six left the unsolved set when it was solved, and solving it unlocked six replacements — most usefully `QP2512-Q1` (from `QP2511-Q3`) and `QP2512-Q2` (from `QP2511-Q4`), the adjacent December 2025 sitting |
-| **Delivery** | `solvedQP/` — **13 papers, 117 questions, 3 year sheets, 1 index** |
-| **Toolchain** | ALL STAGES PASS · `health_check.py` **0 errors, 0 warnings** · reuse map current |
+| **Tier D (derived)** | **17** of the 126 unsolved carry a verified donor, down from 20. QP2512 consumed three of its own (`Q1`, `Q2`, `Q9`) and, unlike QP2511, **unlocked none** — its six tier-C questions produced no new donor edge, because six of the nine were adjudicated as fresh or limb-supported rather than family-linked |
+| **Delivery** | `solvedQP/` — **14 papers, 126 questions, 3 year sheets, 1 index** |
+| **Toolchain** | ALL STAGES PASS · `--self-test` PASS · double-build **byte-identical across 91 artefacts** |
 | **Security (offline)** | **62/62 pass** — `security.test.mjs` 34, `sessions.test.mjs` 28. Architecture recovered and proven offline; **nothing deployed, no secret set** |
 | **Corpus projection (legacy)** | `RulesApp/repository/index/` is a **2026-07-25 snapshot at 788 nodes** of the `RulesApp` repository. **This is NOT the True Source corpus** — see §2a. It remains 218 nodes behind its own master and is no longer the resolver target |
 
@@ -322,40 +326,47 @@ Fixed in `caf5020`.
 
 ---
 
-## 7a. QP2512 — December 2025 — **ACTIVE, PARTIAL, CHECKPOINTED**
+## 7a. QP2512 — December 2025 — **COMPLETE 9 / 9, READY FOR FOUNDER REVIEW**
 
-**3 of 9 authored.** Branch `pastpapers/qp2512-founder-review`, based on `7e51b97`.
+Branch `pastpapers/qp2512-founder-review`, based on `7e51b97`. Completed 2026-08-12.
 
 | | |
 |---|---|
-| **Authored and staged** | **Q1, Q2, Q9** — each with a verification record at `verification/QP2512/` |
-| **Not started** | Q3, Q4, Q5, Q6, Q7, Q8 |
-| **Canonical spec** | **UNTOUCHED.** `specs/QP2512.json` still reads `Intake Complete`. No partial promotion |
-| **Build / delivery / UI** | **NOT RUN**, correctly — the paper is incomplete |
-| **Delivery surface** | QP2512 remains `PLANNED_SOON`. It is **not** advertised as available |
-| **Resume from** | [`staging/QP2512/CHECKPOINT.md`](../staging/QP2512/CHECKPOINT.md) — exact instructions, and the research foundation for all six remaining questions |
+| **Authored** | **All nine**, each with a verification record at `verification/QP2512/` |
+| **Canonical spec** | `specs/QP2512.json` — `Pilot Review Ready`, *"Awaiting Founder Review - complete paper"*, `version 1.0` |
+| **Validation** | **0 errors.** 9 warnings, all the deferred 450–650 word band (§6 item 3). **0 blocking** re-verification flags |
+| **Build** | `meoclass1/pastpapers/QP2512.html` (review, `noindex`) and `solvedQP/QP2512.html` (delivery, no review banner) |
+| **Determinism** | double-build **byte-identical across 91 generated artefacts** |
+| **Delivery surface** | QP2512 now renders **Available** on `solvedQP/index.html`, transitioned automatically by the generated surface — no manual status edit |
+| **Staging** | **RETIRED.** `staging/QP2512/` removed; its content lives in the canonical spec |
+| **Merge / deploy** | **NOT merged, NOT deployed.** Founder review only |
 | **Read first** | [`QP2512_TEMPORAL_AND_DONOR_ANCHOR.md`](QP2512_TEMPORAL_AND_DONOR_ANCHOR.md) |
 
-**Two findings a resuming session must not re-derive:**
+**Reuse as built:** tier **D on Q1, Q2, Q9** (donors `QP2511-Q3`, `QP2511-Q4`, `QP2509-Q4`); tier
+**C on Q3–Q8**, of which Q3, Q5 and Q8 carry adjudicated limb-level support and Q4, Q6 and Q7 are
+fresh. `reference_shelf` is **empty on all nine** — the paper cites none of the three corpora.
 
-1. **The whole `A.12xx(34)` family is excluded from this paper**, and the reason is a *document*
-   date rather than an adoption date. The source copy prints `DECEMBER 2025` with **no day**, but
-   `A 34/Res.1206` was adopted 3 December 2025 and **issued 5 December 2025**, so the exclusion holds
-   without pinning the sitting.
-2. **The Procedures for Port State Control have three editions, not two.** `A.1185(33)` of
-   **6 December 2023** is operative at this sitting — `A.1155(32)` was revoked in 2023 and
-   `A.1206(34)` did not yet exist. This governs Q8, whose natural support `QP2606-Q2` is built
-   entirely on `A.1206(34)`.
+**The two findings that governed the paper, both confirmed at source:**
 
-**Known dependency:** `Q1` cross-links to `QP2512.html#q8`, so `health_check.py` will fail link
-resolution until Q8 is authored. Intended, not a defect.
+1. **The whole `A.12xx(34)` family is excluded**, and the reason is a *document* date rather than an
+   adoption date. The source prints `DECEMBER 2025` with **no day**, but `A 34/Res.1206` was adopted
+   3 December 2025 and **issued 5 December 2025**, so the exclusion holds without pinning the sitting.
+   **No `A.12xx(34)` resolution appears in any candidate-facing field of any question.**
+2. **The Procedures for Port State Control have three editions, not two.** **`A.1185(33)` of
+   6 December 2023 is operative** — `A.1155(32)` was revoked in 2023 and the 2025 edition had not
+   been issued. `A.1185(33)` was re-obtained and read at source for Q8, and its operative paragraph 4
+   confirms the revocation. Its natural support `QP2606-Q2` is built entirely on the 2025 edition and
+   was therefore **not cloned**: Q8 was authored fresh so the excluded edition could not enter.
+
+**The known dependency is closed.** `Q1`'s cross-link to `QP2512.html#q8` now resolves; all nine
+anchors and all seven internal cross-links resolve in the built page.
 
 ---
 
-## 7. Production queue — resumed for QP2512 only
+## 7. Production queue — QP2512 complete, nothing else authorised
 
-> **QP2512 is authorised and active (§7a). Everything else below remains the queue as recorded,
-> not work that is authorised.** Finish QP2512 before nominating another laptop paper.
+> **QP2512 is finished and awaiting Founder review (§7a). Everything below remains the queue as
+> recorded, not work that is authorised.** Do not nominate another laptop paper without the Founder.
 
 **QP2511 — November 2025 — IS COMPLETE 9/9, BUILT AND DELIVERED.** Awaiting Founder review.
 
@@ -363,37 +374,35 @@ Its temporal foundation is recorded in
 [`QP2511_TEMPORAL_AND_DONOR_ANCHOR.md`](QP2511_TEMPORAL_AND_DONOR_ANCHOR.md), and the nine
 verification records are at `verification/QP2511/`. The `staging/` directory has been **retired**.
 
-### Recommended next paper: **QP2512 — December 2025**
+**QP2512 — December 2025 — IS ALSO COMPLETE 9/9, BUILT AND DELIVERED.** Awaiting Founder review;
+see §7a. Its `staging/` directory has been **retired**. Its temporal foundation is recorded in
+[`QP2512_TEMPORAL_AND_DONOR_ANCHOR.md`](QP2512_TEMPORAL_AND_DONOR_ANCHOR.md).
 
-| Paper | Tier D | Family reach | Temporal flags |
-|---|---|---|---|
-| **QP2512** | **3 / 9** | 0 | 2 |
-| QP2401 | 3 / 9 | 3 | 2 |
-| QP2410 | 3 / 9 | 0 | 4 |
-| QP2507 | 0 / 9 | **8** | 2 |
+The December adjustment this section previously flagged as *"sharp"* was worked and is now settled:
+the sitting date is **not printed on the paper**, and the `A.12xx(34)` exclusion was established from
+the resolution's **issue date of 5 December 2025** rather than by pinning the sitting. It also
+surfaced a **third** edition of the Procedures for Port State Control that the note did not
+anticipate — see §7a.
 
-QP2507 still holds the highest *family reach* in the corpus, and on that measure alone it leads. It
-is nevertheless **not** the recommendation, for the same reason it was not the recommendation before
-QP2511: it starts from **zero** verified donors, so every one of its nine questions is fresh research.
+### Best remaining 2025 candidate — **QP2502, February 2025** — INFORMATION ONLY, NOT AUTHORISED
 
-**QP2512 is recommended because the research just completed transfers to it almost whole.** It is the
-sitting immediately after QP2511, so the entire November 2025 line — the 34th Assembly boundary, the
-Merchant Shipping Act 1958 position, the Net-Zero Framework as approved-but-not-adopted, the FAL
-amendment position, the Hong Kong Convention in force — applies with **one** adjustment rather than
-being rebuilt. Two of its questions now have direct donors from QP2511 itself (`QP2512-Q1` from
-`QP2511-Q3`, `QP2512-Q2` from `QP2511-Q4`).
+Recomputed from the derived map after QP2512 was solved, not carried forward as an estimate:
 
-> **The one adjustment, and it is sharp.** The **34th IMO Assembly sat 24 November – 3 December 2025
-> and adopted its resolutions at the close of that session**. A December 2025 sitting may therefore
-> fall on **either side** of that boundary, where a November one cannot. Establishing the December
-> examination date against 3 December 2025 is the **first** task of that session, and if it cannot be
-> established the `A.12xx(34)` family must be treated as excluded rather than assumed available.
+| Paper | Sitting | Tier D | Family reach | Temporal flags |
+|---|---|---|---|---|
+| **QP2502** | February 2025 | **2 / 9** | 5 | 2 |
+| QP2503 | March 2025 | 1 / 9 | 5 | 3 |
+| QP2504 | April 2025 | 1 / 9 | 5 | 4 |
+| QP2501 | January 2025 | 0 / 9 | 3 | 2 |
+| QP2507 | July 2025 | 0 / 9 | **8** | 2 |
 
-**QP2512 was started on 2026-08-12 and is partial — see §7a. Finish it before starting anything
-else.** The one adjustment flagged above was worked and is now settled: the December sitting date is
-**not printed**, and the `A.12xx(34)` exclusion was established from the resolution's **issue date**
-of 5 December 2025 rather than by pinning the sitting. It also surfaced a third edition of the
-Procedures for Port State Control that this note did not anticipate — see §7a.
+**QP2502 leads on verified donors**, which is the measure that has predicted actual session cost
+better than family reach on every paper so far. QP2507 still holds the highest family reach in the
+corpus and is still **not** the recommendation, for the reason it has never been: it starts from
+**zero** verified donors, so all nine questions are fresh research.
+
+> **This is a recomputation for information, not an authorisation.** No laptop paper is authorised.
+> The Founder nominates the next one.
 
 ### Planned work while production is paused
 
