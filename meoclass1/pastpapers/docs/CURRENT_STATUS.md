@@ -1,10 +1,11 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-13, after **QP2504 (April 2025) was laptop-reviewed and published to
-`main`**, taking Batch 2 to 4/6 and the product to 24 papers / 216 questions.
-See §7g for QP2504, §7f for QP2503, §7e for QP2501 and QP2502, §7a for QP2512, §7b for the
-derived layer, §7c for the desktop batches, §1a for security.
+Last updated: 2026-08-13, after **QP2507 (July 2025) was laptop-reviewed and published to
+`main`**, taking Batch 2 to 5/6, the product to 25 papers / 225 questions, and **closing the 2025
+examination year**.
+See §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for QP2501 and QP2502, §7a for QP2512,
+§7b for the derived layer, §7c for the desktop batches, §1a for security.
 
 > # QP2512 IS LIVE. THE SOLVEDQP DERIVED LAYER IS BUILT.
 >
@@ -13,8 +14,12 @@ derived layer, §7c for the desktop batches, §1a for security.
 > extraction onto current `main` rather than by merging its stale branch. All six desktop branches
 > are **retained** as provenance evidence and were not deleted.
 >
-> **Product: 24 available papers · 216 published questions · 252 in the corpus.**
-> 36 unsolved questions remain across 4 unsolved papers — `QP2507`, `QP2406`, `QP2407`, `QP2408`.
+> **Product: 25 available papers · 225 published questions · 252 in the corpus.**
+> 27 unsolved questions remain across 3 unsolved papers — `QP2406`, `QP2407`, `QP2408`.
+>
+> **THE 2025 EXAMINATION YEAR IS COMPLETE.** All eleven 2025 sittings MIW holds are solved and
+> live. May 2025 is recorded as `NO SITTING` on evidence, not absence: the printed serial numbering
+> runs …2504, 2506… with nothing at 2505. Every unsolved paper left in the corpus is a 2024 sitting.
 >
 > **Three defects were corrected, two of them on already-live papers.** The referred
 > `QP2402-Q3` regulation-21 defect was confirmed against the corpus copy of `MEPC.328(76)` and
@@ -30,12 +35,11 @@ derived layer, §7c for the desktop batches, §1a for security.
 > presence of model answers, so no status was ever edited by hand.
 >
 > **Nothing is authorised for laptop authoring.** Do not start a paper without the Founder.
-> Batch 1 is closed. **Batch 2 is 4/6 LIVE** — QP2501, QP2502 (§7e), QP2503 (§7f) and QP2504
-> (§7g), each authored by the desktop, laptop-reviewed and published one at a time.
-> **QP2507 is next by the governed order and is ACTIVE on the desktop** — its branch
-> `pastpapers/qp2507-founder-review` appeared at `57b940a` on 2026-08-13 carrying its temporal
-> anchor and a checkpoint only, with no questions built. It is not authorised here, and the
-> laptop must wait for a complete 9/9 push before reviewing it.
+> Batch 1 is closed. **Batch 2 is 5/6 LIVE** — QP2501, QP2502 (§7e), QP2503 (§7f), QP2504
+> (§7g) and QP2507 (§7h), each authored by the desktop, laptop-reviewed and published one at a
+> time. **QP2406 is the last paper of Batch 2 and has NOT been started** — no
+> `pastpapers/qp2406-founder-review` branch exists on `origin`, nor does one for QP2407 or QP2408.
+> The laptop waits for a complete 9/9 desktop push before reviewing it.
 >
 > Corpus consumption remains integrated (§2a) and read-only. **The Founder decisions in §6 are
 > still open and did not block QP2512** — it cites none of the three corpora, so its
@@ -219,6 +223,7 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 
 | Branch | Head | Holds |
 |---|---|---|
+| `pastpapers/qp2507-founder-review` | `3f37176` | QP2507 — **integrated to `main` by path extraction; retained as provenance, never merged** |
 | `workflow/pil-v1` | `850bdde` | PIL V1 — Founder review |
 | `workflow/state-history-hygiene` | this branch | the state/history split — Founder review |
 | `pastpapers/qp2404-founder-review` | `84fee6f` | QP2404 |
@@ -538,6 +543,103 @@ Neither is a defect in the paper.
 (QP2406, QP2407, QP2408, QP2503, QP2504, QP2507). Both papers transitioned Planned soon → Available
 automatically; no manual index edit. QA at publication: toolchain and self-tests green, 121/121
 security, double build byte-identical, clean at 1280 and 375, paid pages gated 302 live.
+
+---
+
+## 7h. QP2507 (July 2025) — laptop-reviewed and published — **2025 YEAR CLOSED**
+
+Desktop branch `pastpapers/qp2507-founder-review` at `3f37176`, based on `333e814`, pushed
+2026-08-13 03:58 IST. Twelve files, all paper-owned, no global artefacts. Integrated onto current
+`main` by path extraction on `integration/qp2507-laptop-review` at `0a6f685`; the desktop branch
+was not merged and is retained as provenance.
+
+**This is the paper the batch order was built to produce.** QP2507 went from 0/9 to 8/9
+donor-ready once QP2501 and QP2503 were solved, and the anchor confirmed the board's 8/9 exactly.
+Three donors came from QP2501 (Q1 NEAR, Q2 and Q4 EXACT) and five from QP2503 (Q5, Q6, Q7, Q8
+EXACT; Q9 NEAR). Q3 is the only question with no donor and was authored fresh. **Every donor is
+backward** — three at −6 months, five at −4 — so no donor-direction refusal was required, unlike
+QP2504's Q9. Family reach came out at **0, not the board's 8**, for the second time and the same
+reason: the eight papers that emit reach are the eight the board required to be solved first.
+Reach should be computed against the *unbuilt* set at the paper's turn.
+
+**Temporally this is the easy paper, and it is provable rather than assumed.** No boundary the
+paper engages moves inside July 2025. The two nearest sit outside on either side — the Hong Kong
+Convention entered into force 26 June 2025, four days before the month opens, and `MEPC.385(81)`
+enters into force 1 August 2025, one day after it closes. **The Hong Kong Convention is not
+engaged by any of the nine questions**, so the pre-EIF donor contamination that was the flagged
+risk on this paper could not arise; the sweep confirms zero occurrences. One genuine donor
+re-anchoring was made and is confirmed: the January donor's *"FuelEU Maritime began to apply in
+the sitting month itself"* is true of January and false of July, and was re-authored.
+
+**The risk was in the evidence, not the calendar.** Q9's governing statute, the Merchant Shipping
+Act **1958**, is not held by True Source — the corpus holds the **2025** Act instead and its own
+instrument log instructs that 1958 section numbers be re-based to it. That instruction is right
+for the July 2026 orals and wrong for this sitting, which predates even the 2025 Act's assent on
+18 August 2025. The eight-surface reverse sweep was run: all nine shipped surfaces carry 1958, and
+every mention of the 2025 Act is an explicit exclusion.
+
+**Laptop corrections — 14, all to the canonical spec.** Rule 4: Understand now measures **zero**
+regulatory citations on all nine questions, the first Batch 2 paper to do so (QP2501 carried 1,
+QP2502 9, QP2503 5, QP2504 3 — the residue on QP2504 being instrument names). Removed
+`MEPC.391(81)` from Q2, `SOLAS II-1/3-1` from Q8, a bare `2015` from Q1, an entry-into-force date
+from Q6, and — the one that mattered — Q5's `(section 2)` and `(section 3)`, which pointed at
+answer sections but sat in a paragraph about the Marine Insurance Act whose own `regulations` list
+cites sections 19, 20 and 66. **The knowledge map legitimately keeps its citations on every
+paper**; Rule 4 governs the concept-first prose, not the answer skeleton.
+
+Candidate-facing language: *"the production protocol forbids"*, *"before publication"*, *"this
+production line"* and the production term *"donor"* removed from study notes and one `regulations`
+entry. **The provenance sentences that say what the corpus does and does not hold were left
+alone** — that is a corpus-wide class, and rewriting it would change a provenance claim rather
+than a phrasing. Reported, not rewritten. See §7i.
+
+**Two True Source referrals were transcribed into the register they claimed to be in.**
+`TRUE_SOURCE_CORRECTION_REQUESTS.md` held only TSCR-1 and TSCR-2; the `MEPC.328(76)` entry-into-force
+error and the `MEPC.376(80)`-presented-as-current defect existed only in anchors and in this file,
+although both anchors state they were *"raised as a `TRUE_SOURCE_CORRECTION_REQUEST`"*. They are
+now **TSCR-3** and **TSCR-4**, both OPEN. No corpus file was touched.
+
+**Validation.** `validate_spec` 0 errors / 0 blocking; known traps 205 checks 0 failures;
+recurrence 0 failures; `run_toolchain` and `--self-test` both ALL STAGES PASS; double build
+byte-identical across 65 generated artefacts; UI behaviour 66 passed / 0 failed on a new QP2507
+fixture whose nine probes were derived from the built page and re-tested for within-paper
+uniqueness. The delivery surface carries no production metadata, no review banner and no host
+branding, with every detector controlled against the review build.
+
+**`solvedQP/QP2507.html` was untracked for the fifth consecutive paper** and was staged
+explicitly. `git add -u` would have missed it again.
+
+---
+
+## 7i. OPEN — corpus-provenance vocabulary in candidate-facing study notes
+
+**Reported by the QP2507 review. Not fixed. Needs a Founder decision before any corpus-wide pass.**
+
+Every question's final study-notes section is an *Uncertainty / evidence limits* block, and it
+speaks to the candidate in MIW's internal provenance vocabulary. On QP2507 alone there are **30
+instances** across all nine questions, in shipped fields:
+
+> *"The MIW True Source corpus does not hold `MEPC.391(81)` … the corpus defect has been raised as
+> a correction request rather than fixed."*
+> *"The corpus holds no gender material at all."*
+> *"P2 — held by the corpus"* (in a rendered table)
+
+**Why it was not swept with the other 14 corrections.** The clearly internal phrases — *"the
+production protocol forbids"*, *"before publication"*, *"this production line"*, *"donor"* — are
+production jargon a candidate cannot decode, and removing them changes nothing but register. These
+are different: *"the corpus holds no class rulebook"* is a **provenance claim**, and rewriting it
+alters what is being asserted about the evidence, not merely how it reads. The QP2507 work order
+said to report semantic ambiguity rather than rewrite it, and this is the ambiguity.
+
+**It is corpus-wide, not a QP2507 defect.** The same construction runs through the delivery pages
+of every solved paper. QP2501-Q1 and Q3 already had the narrower *"flagged for confirmation before
+publication"* variant fixed (§7e), so the class is known and partly addressed.
+
+**The question for the Founder is whether the disclosure should survive in candidate voice** —
+*"no class rulebook was read for this answer, so no acceptance criterion is quoted"* — or whether
+provenance belongs only in the review build. The disclosure itself is valuable and should not be
+deleted; only its register is in question. **Do not start a corpus-wide rewrite until that is
+decided.**
 
 ---
 

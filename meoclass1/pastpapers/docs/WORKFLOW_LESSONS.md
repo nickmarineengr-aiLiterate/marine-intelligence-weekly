@@ -1732,9 +1732,9 @@ SCOPE:     any Part-12 generalisation.
 
 ---
 
-## THE DELIVERY PAGE HAS NOW BEEN MISSED FOUR TIMES; THE CAUSE IS TRACKED-ONLY STAGING
+## THE DELIVERY PAGE HAS NOW BEEN MISSED FIVE TIMES; THE CAUSE IS TRACKED-ONLY STAGING
 
-QP2501, QP2502, QP2503 and now QP2504 each generated `solvedQP/<paper>.html` as an **untracked**
+QP2501, QP2502, QP2503, QP2504 and now QP2507 each generated `solvedQP/<paper>.html` as an **untracked**
 file. It is not gitignored. It is a *new path*, and a tracked-only stage (`git add -u`) updates
 only paths git already tracks, so a staging step that works perfectly for the other twenty-odd
 regenerated artefacts silently omits the one file the paying customer actually opens. The failure
@@ -1747,3 +1747,86 @@ generated directories - never a tracked-only update alone.
 
 EVIDENCE:  four consecutive papers; caught each time only by the explicit pre-commit gate.
 SCOPE:     every paper integration.
+
+---
+
+## L-B2-1 — Rule 4 governs the Understand PROSE, not the knowledge map beneath it
+
+The Understand view renders two sections: `.layer.uf` from `understand_first`, and `.layer.kmap`
+derived from `answer_route`. A Rule-4 audit run over the whole *view* convicts every paper in the
+corpus, because the knowledge map is the answer skeleton and carries the coordinates on purpose:
+
+```
+                understand_first citations    knowledge-map citations
+QP2501                     1                          34
+QP2502                     9                          81
+QP2503                     5                          41
+QP2504                     3                          85
+QP2507                     0  (after review)          33
+```
+
+The map is not the defect. Stripping it would destroy the one surface that tells a candidate where
+each limb's authority sits. **Audit `understand_first`; leave `answer_route` alone.**
+
+Two detector traps found while measuring this, both the same shape: a regex tuned to `regulation 12`
+matched `reg` inside **registered owner**, **regime** and **region** (three false FAILs), and missed
+`SOLAS II-1/3-1` entirely (one false PASS). A citation detector needs `\b`-bounded words *and* a
+coordinate branch for `II-1/3-1` and `XI-1/6`, and it needs both the positive and negative controls
+printed beside the result.
+
+EVIDENCE:  QP2507 laptop review, 2026-08-13; measured across all five Batch 2 papers.
+CATEGORY:  BUILD_QA
+STATUS:    PROVEN
+SEEN:      1 production event, 5 papers measured
+OWNER:     NONE - the audit is a scratch script, not a toolchain stage
+REVISIT:   if the Understand view ever renders a third section, or if the knowledge map stops
+           being derived from answer_route.
+
+---
+
+## L-B2-2 — A referral recorded only in an anchor was never actually raised
+
+Two corpus defects - the `MEPC.328(76)` entry-into-force error and the corpus presenting the
+**revoked** `MEPC.376(80)` as current LCA guidance - were each written up in their paper's
+`QP####_TEMPORAL_AND_DONOR_ANCHOR.md` and in `CURRENT_STATUS.md`, and each anchor states in terms
+that it was *"raised as a `TRUE_SOURCE_CORRECTION_REQUEST`"*.
+
+`TRUE_SOURCE_CORRECTION_REQUESTS.md` contained TSCR-1 and TSCR-2 and nothing else. Neither defect
+was in it. The producer team reads the register, not twenty-eight per-paper anchors, so two open
+corpus defects had been reported into a place nobody looks - and the sentence claiming otherwise is
+what stopped anyone checking.
+
+**Do:** when an anchor says a referral was raised, write the entry into the register in the same
+session, and make the anchor cite its TSCR number. A referral is raised when it is in the register.
+
+EVIDENCE:  QP2507 laptop review, 2026-08-13; transcribed as TSCR-3 and TSCR-4.
+CATEGORY:  STATE_HANDOVER
+STATUS:    PROVEN
+SEEN:      2 defects, raised across 2 earlier sessions, neither landed
+OWNER:     NONE
+REVISIT:   if the register is ever generated from the anchors rather than hand-kept.
+
+---
+
+## L-B2-3 — Match the spec's existing JSON serialisation or the diff hides the edit
+
+`QP2507.json` round-trips **byte-identically at `indent=1`** and at no other setting. Writing it
+back at the conventional `indent=2` reformats all 596 KB: 13 real edits would have arrived as a
+6,500-line diff, and the Founder review of those edits becomes impossible.
+
+**Do:** before any programmatic spec edit, prove the round-trip first -
+
+```python
+orig = open(p, encoding='utf-8', newline='').read()
+assert json.dumps(json.loads(orig), ensure_ascii=False, indent=1) + '\n' == orig
+```
+
+then patch and write with the setting that proved identical. The 14 QP2507 corrections landed as
+13 changed lines.
+
+EVIDENCE:  QP2507 laptop review, 2026-08-13.
+CATEGORY:  AUTOMATION
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     NONE
+REVISIT:   if a spec is ever reformatted deliberately, or the writer moves into a tool.

@@ -5184,3 +5184,81 @@ checkpoint - no questions built. QP2507 is **ACTIVE, not complete**, and was not
 `QP2406`, `QP2407` and `QP2408` remain absent.
 
 **Published:** 24 available papers, 216 published questions, 36 unsolved across 4 papers.
+
+---
+
+## 42. QP2507 (July 2025) - laptop review and publication, 2026-08-13
+
+**Result: QP2507 REVIEWED AND LIVE. The 2025 examination year is complete.**
+`main` `391e517` -> `0a6f685`. Product 24/216 -> **25 papers / 225 questions**, 3 unsolved papers.
+
+### Ownership
+
+Desktop pushed `pastpapers/qp2507-founder-review` to `3f37176` at 03:58 IST, nineteen minutes
+before this session opened. Because a still-moving branch must not be raced, the tip was probed
+three times over roughly twenty minutes and did not move, and the commit subject - *"author Q1-Q9,
+promote the July 2025 paper to 9/9"* - matches the terminal handover pattern of QP2501, QP2502,
+QP2503 and QP2504 exactly. Footprint was 12 paper-owned files with no global derived artefacts.
+Integration proceeded on that evidence, by path extraction onto current `main`; the branch was
+retained unmerged.
+
+### Source
+
+Independently re-verified against the printed copy: serial `EM - 2507`, 3 pages, Q1-Q9, 16 marks
+each, every limb and mark split confirmed. Six of nine stems match their donor character-for-
+character. Printed errors are preserved rather than corrected - *"is classes by"* in Q8(b),
+lower-case *"international Maritime Organization"* in Q6(b), the colon after Q3(a) - and the
+printed `Total Marks - 100` against six answers of 16 is reproduced with a note.
+
+A mechanical verbatim diff flagged Q3 as a mismatch. It was not: the source copy interrupts Q3
+between limbs (b) and (c) with a marketing panel and a page break, and the spec correctly stitches
+across it while excluding the panel. **The host's `"- - PROVIOUSLY ASKED - - -"` block, which
+reprints the March 2025 wording under Q9, appears in two authoring fields and on no surface.**
+
+### Temporal
+
+No boundary this paper engages moves inside July 2025 - provable rather than assumed, with the two
+nearest boundaries four days before and one day after the month. **The Hong Kong Convention, which
+the work order named as the highest-risk donor contamination on this paper, is not engaged by any
+of the nine questions**, so no pre-EIF donor wording existed to correct; the sweep returns zero
+against a control that fires. One real re-anchoring was made by desktop and confirmed here: the
+January donor's *"FuelEU Maritime began to apply in the sitting month itself"*.
+
+Donors: 8/9 as the board predicted, three from QP2501 and five from QP2503, **every one backward**.
+Family reach came out 0 against a predicted 8, for the same reason as QP2504 - the papers that emit
+reach are the papers the board required solved first.
+
+### Corrections - 14
+
+Rule 4 took Understand to **zero regulatory citations on all nine questions**, the first Batch 2
+paper to measure zero. The audit also established that the citations in the knowledge map are
+correct on every paper and are not in scope - see `WORKFLOW_LESSONS.md` L-B2-1. Q5's `(section 2)`
+and `(section 3)` were the sharpest find: they point at answer sections but sit in a paragraph
+about the Marine Insurance Act whose `regulations` list cites sections 19, 20 and 66.
+
+Internal vocabulary removed from candidate-facing prose; the corpus-provenance sentences were
+**reported, not rewritten**, as a corpus-wide class needing a Founder decision - `CURRENT_STATUS.md`
+§7i.
+
+### Two process faults
+
+**The delivery page was untracked for the fifth consecutive paper** and was staged explicitly.
+
+**Two True Source referrals had never been raised where they said they were.** Both anchors state
+the defect was raised as a `TRUE_SOURCE_CORRECTION_REQUEST`; the register held only TSCR-1 and
+TSCR-2. Transcribed as **TSCR-3** (`MEPC.328(76)` entry into force) and **TSCR-4** (the corpus
+presenting the revoked `MEPC.376(80)` as current). No corpus file was touched.
+
+### Verification
+
+`validate_spec` 0 errors / 0 blocking; known traps 205 checks 0 failures; recurrence 0 failures;
+`run_toolchain` and `--self-test` ALL STAGES PASS; double build byte-identical across 65 artefacts;
+UI behaviour 66 passed / 0 failed on a new fixture whose probes were derived from the built page and
+re-tested for uniqueness; delivery surface clean with every detector controlled against the review
+build; desktop and mobile reviewed at 1280 and 375 with no overflow and no console errors.
+
+### Next
+
+**QP2406 is the last paper of Batch 2 and has not been started.** No branch exists on `origin` for
+QP2406, QP2407 or QP2408. All three remain at **1/9** donor-readiness - QP2507 created no new
+donors, which its own anchor predicted.

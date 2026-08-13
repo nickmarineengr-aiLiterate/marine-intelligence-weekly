@@ -114,3 +114,88 @@ land on an exact section** for any instrument today. This is why every pilot she
 on the provision would destroy the confidence the feature exists to build.
 
 **No corpus change requested.** This is a sequencing fact for the viewer decision.
+
+---
+
+> **Entered 2026-08-13, QP2507 laptop review.** TSCR-3 and TSCR-4 were both *raised* by earlier
+> paper sessions and recorded in their anchors and in `CURRENT_STATUS.md`, but neither was ever
+> written into this register — which is the file the anchors say they were raised in. They are
+> transcribed here so the register is the single place a producer-team reader has to look. Nothing
+> about either defect is new; only its location is.
+
+---
+
+## TSCR-3 — `MEPC.328(76)` entry into force is recorded a year late
+
+**Instrument:** MARPOL Annex VI, revised — `MEPC.328(76)`
+
+**Raised by:** QP2504 (April 2025) session, 2026-08-13. Referenced and left open by QP2507.
+
+### Expected
+
+`MEPC.328(76)` operative paragraph 3 determines the amendments *"shall enter into force on
+1 November 2022"*. Two further held resolutions corroborate that date.
+
+### Observed
+
+Three canonical True Source records give entry into force as `2023-11-01`.
+
+### Why it matters
+
+It is a wrong date inside a frozen register, so nothing downstream flags it: an answer that takes
+the date from the corpus is internally coherent and wrong, which is the failure class
+`TEMPORAL_AND_DONOR_VERIFICATION_PROTOCOL.md` §8 exists to prevent. Any sitting between
+1 November 2022 and 1 November 2023 is decided the wrong way by it.
+
+### Consumer-side handling
+
+The corpus was **not modified**. Papers engaging the date use the resolution's own operative
+paragraph. **No QP2507 question depends on it** — Q2 engages the LCA guideline layer, not the entry
+into force of the revised Annex VI — so QP2507 references this entry without re-verifying it.
+
+**Status: OPEN.** Producer-team action requested: correct the three records, or record why
+`2023-11-01` is right and the resolution's own paragraph 3 is not.
+
+---
+
+## TSCR-4 — the corpus presents a REVOKED instrument as current guidance
+
+**Instrument:** LCA Guidelines — `MEPC.376(80)` (2023) and `MEPC.391(81)` (2024)
+
+**Object:** `true-source/03-imo-instruments/GHG-instruments/INSTRUMENT_LOG.md`
+
+**Raised by:** QP2507 (July 2025) session, 2026-08-13.
+
+### Expected
+
+`MEPC.391(81)`, the *2024 Guidelines on Life Cycle GHG Intensity of Marine Fuels*, adopted
+22 March 2024, operative paragraph 5: *"REVOKES the LCA Guidelines adopted by resolution
+MEPC.376(80)."* Verified at primary source this session — retrieved from the IMO CDN, 69 pp,
+SHA-256 `f7601f21ad7a52404eff7cfc1d2c4a07d4ae03356be1ab57a26a4f23f0634c5f`.
+
+### Observed
+
+The corpus **holds `MEPC.376(80)`, does not hold `MEPC.391(81)`**, and its instrument log lists the
+revoked resolution as `GUIDANCE` with no supersession note — although the same table *does*
+correctly mark `MEPC.346(78)` as `SUPERSEDED — retain for history`. The log then routes LCA demand
+to `MEPC.376(80)` directly.
+
+### Why it matters
+
+**Revoked is not superseded.** A superseded instrument still describes a state of the world; a
+revoked one has been withdrawn by the body that made it. Any sitting after 22 March 2024 that
+follows the log cites an instrument that had been revoked for over a year.
+
+### Consumer-side handling
+
+The corpus was **not modified**. `QP2507-Q2` uses `MEPC.391(81)` at P1 from the resolution's own
+operative paragraphs and departs from the log deliberately. This is a **different record and a
+different defect class** from TSCR-3 — that one is a wrong date in a frozen register, this one is a
+revoked instrument presented as current guidance — so it is not folded into it.
+
+This finding also upgrades the lineage: `QP2501-Q7` had the supersession right but carried
+`MEPC.391(81)` at P2 with the express limitation *"the resolution was NOT read"*. It has now been
+read, and the verbatim revocation wording is on the record for the whole lineage.
+
+**Status: OPEN.** Producer-team action requested: mark `MEPC.376(80)` revoked, record
+`MEPC.391(81)` as the operative LCA framework, and acquire its text.
