@@ -62,16 +62,43 @@ LS_PROGRESS = 'miw:pastpapers:v1:progress'
 # gap where content showed through between the bars on desktop, and on a 375px
 # phone both bars claimed top:0, so the topbar covered the controls bar and the
 # search input became unreachable. Measuring is the only correct answer.
-STICKY_SYNC_JS = """  function syncStickyOffsets() {
+STICKY_SYNC_JS = """  function plausibleBarHeight(px) {
+    // A measurement SANITY GATE, not decoration. These bars are flex rows with
+    // wrap; measured before layout has settled, every child can land on its own
+    // line and the row reports a height many times its real one -- the Solved
+    // QP home read its 46px topbar as 377px, which pushed the sticky search bar
+    // a third of the way down the viewport and stayed wrong until the first
+    // resize event. A "topbar" taller than a third of the viewport is not a
+    // topbar, so the reading is discarded and the CSS fallback stands until a
+    // later pass measures it properly.
+    var h = window.innerHeight || 800;
+    return px >= 16 && px <= h * 0.34;
+  }
+  function syncStickyOffsets() {
     var root = document.documentElement;
     var tb = document.querySelector('.topbar');
     var cb = document.querySelector('.controls-bar');
-    if (tb) root.style.setProperty('--topbar-h', tb.offsetHeight + 'px');
-    if (cb) root.style.setProperty('--controls-h', cb.offsetHeight + 'px');
+    if (tb && plausibleBarHeight(tb.offsetHeight)) {
+      root.style.setProperty('--topbar-h', tb.offsetHeight + 'px');
+    }
+    if (cb && plausibleBarHeight(cb.offsetHeight)) {
+      root.style.setProperty('--controls-h', cb.offsetHeight + 'px');
+    }
   }
   syncStickyOffsets();
+  // Re-measured as the document settles. Timers rather than
+  // requestAnimationFrame on purpose: rAF never fires in a browser that is not
+  // producing frames (a hidden or backgrounded tab), and a sticky offset that
+  // is only correct in a visible tab is the kind of bug that reaches a reader
+  // and never reaches a reviewer.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncStickyOffsets);
+  }
+  window.addEventListener('load', syncStickyOffsets);
   window.addEventListener('resize', syncStickyOffsets);
   window.addEventListener('orientationchange', syncStickyOffsets);
+  setTimeout(syncStickyOffsets, 0);
+  setTimeout(syncStickyOffsets, 250);
   if (window.document.fonts && window.document.fonts.ready &&
       typeof window.document.fonts.ready.then === 'function') {
     // Web fonts land after first paint and change the bars' wrapped height.
@@ -317,6 +344,143 @@ def head_meta(title, description, canonical_path, publish, extra=()):
     o.append('<meta name="geo.region" content="IN-KL">')
     o.extend(extra)
     return o
+
+
+# =====================================================================
+# CORPUS SEARCH -- the one client-side definition, shared by every page
+# =====================================================================
+#
+# WHY THIS EXISTS
+# ---------------
+# Before this, three pages each had their own search and each was correctly
+# scoped to itself: the paper page searched its nine questions, the year sheet
+# searched its year, the home page searched the corpus. Correct in isolation,
+# and together they taught the reader the corpus was empty -- a candidate inside
+# QP2607 typing "port state control" saw "no question matches that search" while
+# 23 questions across 18 sittings existed one page away.
+#
+# The fix is not a fourth search. It is a fallback the scoped searches can call
+# when they come up empty, and an explicit "search all solved papers" the reader
+# can elect at any time. Both must fold and match EXACTLY as the home page does,
+# or the same query would answer differently depending on where it was typed --
+# so the folding lives here once and every page gets this same string.
+#
+# MATCHING CONTRACT (mirrors build_solvedqp_manifest.norm_search)
+#   * lowercase; everything except [a-z0-9'&] collapses to a single space
+#   * all terms must be present (AND), substring, order-independent
+#   * iteration order is manifest order, which is (year, month) then q_no --
+#     so results are deterministic and need no sort
+#
+# PAID-TEXT BOUNDARY
+# ------------------
+# This reads solvedqp_content_index.json and nothing else. That file is built by
+# a generator whose assert_no_paid_text() fails the build rather than emit one
+# sentence of a model answer, so there is no answer text here to leak even if
+# the payload is downloaded directly. Results render stem, short title, sitting
+# and question number -- the discovery surface, never the product.
+CORPUS_SEARCH_JS = r"""  window.MIWCorpus = (function () {
+    var IDX = null, PENDING = null;
+    var SRC = '/solvedQP/solvedqp_content_index.json';
+
+    function fold(s) {
+      return String(s).toLowerCase()
+        .replace(/[^a-z0-9'&]+/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+    function terms(q) { return fold(q).split(' ').filter(Boolean); }
+
+    function load() {
+      if (IDX) return Promise.resolve(IDX);
+      if (PENDING) return PENDING;
+      PENDING = fetch(SRC, { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) { IDX = j; PENDING = null; return j; })
+        .catch(function () { PENDING = null; return null; });
+      return PENDING;
+    }
+
+    // opts.excludePaper -- omit the paper the reader is already in.
+    // opts.excludeYear  -- omit the year sheet the reader is already in.
+    function match(q, opts) {
+      opts = opts || {};
+      var t = terms(q), groups = [], nq = 0;
+      if (!IDX || !t.length) return { groups: groups, questions: 0, papers: 0 };
+      IDX.papers.forEach(function (p) {
+        if (p.status !== 'AVAILABLE' || !p.questions.length) return;
+        if (opts.excludePaper && p.paper_id === opts.excludePaper) return;
+        if (opts.excludeYear && p.year === opts.excludeYear) return;
+        var hits = p.questions.filter(function (x) {
+          var s = x.search_text || '';
+          return t.every(function (w) { return s.indexOf(w) >= 0; });
+        });
+        if (hits.length) { groups.push({ paper: p, hits: hits }); nq += hits.length; }
+      });
+      return { groups: groups, questions: nq, papers: groups.length };
+    }
+
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+      });
+    }
+
+    // Deep links go straight to /solvedQP/QP####.html#qN. The gate is an edge
+    // concern -- a reader without entitlement is redirected by middleware and
+    // arrives back here after login. Degrading the link to a storefront URL
+    // would throw away the anchor the reader actually asked for.
+    function renderGroups(res) {
+      var h = [];
+      res.groups.forEach(function (g) {
+        h.push('<div class="mc-paper">');
+        h.push('<h4><a href="' + esc(g.paper.href) + '">' + esc(g.paper.sitting) +
+               '</a> <span class="mc-sr">' + esc(g.paper.sr_no) + '</span></h4>');
+        g.hits.forEach(function (x) {
+          var topic = (x.topic_tags && x.topic_tags.length) ? x.topic_tags[0]
+                    : (x.primary_category || '');
+          h.push('<a class="mc-q" href="' + esc(x.href) + '">' +
+                 '<b>' + esc(x.question_number) + '</b>' +
+                 '<span class="mc-t">' + esc(x.short_title || '') + '</span>' +
+                 (topic ? '<span class="mc-tag">' + esc(topic) + '</span>' : '') +
+                 '</a>');
+        });
+        h.push('</div>');
+      });
+      return h.join('');
+    }
+
+    function summary(res) {
+      return res.papers + (res.papers === 1 ? ' sitting' : ' sittings') + ' &middot; ' +
+             res.questions + (res.questions === 1 ? ' question' : ' questions');
+    }
+
+    return { load: load, match: match, fold: fold, terms: terms,
+             renderGroups: renderGroups, summary: summary, esc: esc,
+             index: function () { return IDX; } };
+  })();"""
+
+
+# The broaden-scope panel. Rendered empty on the server and filled in by
+# CORPUS_SEARCH_JS, so a reader with JS disabled sees no broken promise.
+def corpus_fallback_block(scope_label):
+    """Server-side shell for the 'search all solved papers' escape hatch.
+
+    ``scope_label`` names what the LOCAL search covered -- "this paper",
+    "2024" -- because a result count means nothing without its scope. The
+    reader is never asked to infer which corpus they just searched.
+    """
+    return [
+        '<div class="mc-wrap" id="mc-wrap" hidden>',
+        '  <div class="mc-head">',
+        '    <span class="mc-scope">Across all solved papers</span>',
+        '    <span class="mc-sum" id="mc-sum" role="status" aria-live="polite"></span>',
+        '  </div>',
+        '  <p class="mc-note" id="mc-note">Nothing in %s &mdash; these are from other '
+        'sittings.</p>' % esc(scope_label),
+        '  <div class="mc-res" id="mc-res"></div>',
+        '</div>',
+        '<div class="mc-offer" id="mc-offer" hidden>',
+        '  <button type="button" id="mc-offer-btn" class="mc-offer-btn"></button>',
+        '</div>',
+    ]
 
 
 def footer(publish):

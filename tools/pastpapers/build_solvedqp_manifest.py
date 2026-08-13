@@ -88,6 +88,37 @@ AUTHORING_FIELDS = (
 )
 BANNED_KEYS = frozenset(PAID_QUESTION_FIELDS + AUTHORING_FIELDS)
 
+# ---------------------------------------------------------------- update kinds
+#
+# The candidate-facing change vocabulary. Five entries, deliberately: each one
+# answers a different question a candidate actually has, and a sixth would be a
+# distinction only the production team can feel.
+#
+#   added                 a sitting you could not study before now exists
+#   corrected             something you may have LEARNED WRONG has changed
+#   enriched              the answer got deeper -- usually against a verified
+#                         primary source -- without the old answer being wrong
+#   regulatory_update     the law moved, and the answer moved with it
+#   learning_improvement  the teaching changed (Understand, Exam Plan, Recall),
+#                         not the legal content
+#
+# `corrected` and `regulatory_update` are the two a candidate must never miss:
+# both mean "what you memorised is no longer what we publish". They are kept
+# separate because the reason differs, and a candidate who studied under the old
+# law is in a different position from one who studied our mistake.
+#
+# This is the ONE definition. The home page imports KIND_LABEL rather than
+# restating the labels, and validate_spec.py rejects any other value at authoring
+# time, so an unrecognised kind cannot reach a page and render as a raw token.
+KIND_LABEL = {
+    'added': 'Added',
+    'corrected': 'Corrected',
+    'enriched': 'Enriched',
+    'regulatory_update': 'Regulatory update',
+    'learning_improvement': 'Learning improvement',
+}
+VALID_KINDS = frozenset(KIND_LABEL)
+
 
 def norm_search(text):
     """Fold a printed stem to a matchable form.
@@ -190,11 +221,19 @@ def recently_updated(specs, avail_ids):
     for d in specs:
         pid = d['paper_id']
         for e in d.get('changelog') or []:
+            kind = e.get('kind', 'corrected')
+            # Fail rather than ship an unknown token into a badge. The default
+            # used to be the string 'correction', which is not in the
+            # vocabulary at all and would have rendered as raw text.
+            if kind not in VALID_KINDS:
+                raise AssertionError(
+                    '%s changelog entry %s has kind %r, which is not one of %s'
+                    % (pid, e.get('date'), kind, sorted(VALID_KINDS)))
             recs.append({
                 'date': e['date'],
                 'paper_id': pid,
                 'sitting': sitting_label(d['month'], d['year']),
-                'kind': e.get('kind', 'correction'),
+                'kind': kind,
                 'summary': e['summary'],
                 'questions': list(e.get('questions') or []),
             })

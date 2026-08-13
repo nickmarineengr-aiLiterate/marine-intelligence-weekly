@@ -479,6 +479,69 @@ def words(blocks):
     return len(text.split())
 
 
+CHANGELOG_KINDS = ('added', 'corrected', 'enriched',
+                   'regulatory_update', 'learning_improvement')
+
+
+def check_changelog(d):
+    """The candidate-facing maintenance ledger, policed at authoring time.
+
+    `changelog` is optional -- a paper that has never been corrected has
+    nothing to say -- but an entry that exists must be usable by the delivery
+    surface without the surface having to guess. Every field checked here is
+    one a candidate reads: the date orders the ledger, the kind picks the
+    badge, the summary IS the sentence, and the questions are what tells a
+    reader whether the change touched something they studied.
+
+    An unknown kind is an ERROR rather than a warning because the home page
+    renders it into a badge class; a typo would ship a blank badge and an
+    untranslated token to a paying candidate.
+
+    This is also where the ledger stays honest about the product boundary: an
+    entry naming a question that is not in this paper is a mistake in the entry,
+    and there is no reason a candidate should ever be shown it.
+    """
+    cl = d.get('changelog')
+    if cl is None:
+        return
+    if not isinstance(cl, list):
+        err('changelog must be a list')
+        return
+    qnos = {str(q.get('q_no')) for q in d.get('questions') or []}
+    seen = set()
+    for i, e in enumerate(cl):
+        where = 'changelog[%d]' % i
+        if not isinstance(e, dict):
+            err('%s must be an object' % where)
+            continue
+        date = e.get('date')
+        if not isinstance(date, str) or not re.fullmatch(r'\d{4}-\d{2}-\d{2}', date or ''):
+            err('%s.date %r must be ISO YYYY-MM-DD -- it is the sort key' % (where, date))
+        kind = e.get('kind')
+        if kind not in CHANGELOG_KINDS:
+            err('%s.kind %r not one of %s' % (where, kind, list(CHANGELOG_KINDS)))
+        summary = e.get('summary')
+        if not isinstance(summary, str) or not summary.strip():
+            err('%s.summary is required and is what the candidate reads' % where)
+        elif len(strip_html(summary)) > 400:
+            # A ledger row is a sentence, not a report. Past 400 characters it
+            # stops being scannable and the reader stops reading the list.
+            warn('%s.summary is %d characters; a change note should be one or two '
+                 'sentences' % (where, len(strip_html(summary))))
+        for qn in e.get('questions') or []:
+            if str(qn) not in qnos:
+                err('%s names question %r, which is not in %s'
+                    % (where, qn, d.get('paper_id')))
+        key = (date, kind, summary)
+        if key in seen:
+            err('%s duplicates an earlier entry' % where)
+        seen.add(key)
+
+
+def strip_html(s):
+    return re.sub(r'<[^>]+>', '', str(s))
+
+
 def main(path):
     raw = open(path, encoding='utf-8').read()
     try:
@@ -499,6 +562,8 @@ def main(path):
 
     if d.get('build_state') not in BUILD_STATES:
         err('build_state %r not one of %s' % (d.get('build_state'), BUILD_STATES))
+
+    check_changelog(d)
 
     # --- provenance honesty -------------------------------------------------
     # Source-copy classification is NEUTRAL: it records what kind of copy this

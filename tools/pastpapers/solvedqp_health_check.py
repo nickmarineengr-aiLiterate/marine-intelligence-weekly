@@ -763,17 +763,32 @@ def self_test(files):
         p['questions'] = [dict(q, paper_id=p['paper_id'])]
     run('unsolved paper publishing question stems', planned_stems)
 
+    def inject_into_body(f, key, snippet):
+        """Put `snippet` inside the page body, whatever the body tag looks like.
+
+        These injections used to do f[k].replace(b'<body>', ...). The moment a
+        builder gave the body an attribute -- data-paper-id, added so corpus
+        search can exclude the paper the reader is already in -- the literal
+        b'<body>' stopped existing, the replace became a NO-OP, and both
+        negative controls started passing by injecting nothing at all. A
+        negative control that cannot inject its defect is not a test; it is a
+        green line. Match the tag rather than one spelling of it.
+        """
+        m2 = re.search(rb'<body[^>]*>', f[key])
+        if not m2:
+            raise AssertionError('no <body> tag in %s -- cannot inject' % key)
+        f[key] = f[key][:m2.end()] + snippet + f[key][m2.end():]
+
     def review_banner(m, f):
         pid = next(p['paper_id'] for p in m['papers'] if p['status'] == 'AVAILABLE')
-        k = 'solvedQP/%s.html' % pid
-        f[k] = f[k].replace(b'<body>', b'<body><div>Founder review copy</div>', 1)
+        inject_into_body(f, 'solvedQP/%s.html' % pid,
+                         b'<div>Founder review copy</div>')
     run('review banner in a paid delivery page', review_banner)
 
     def trap_phrase(m, f):
         pid = next(p['paper_id'] for p in m['papers'] if p['status'] == 'AVAILABLE')
-        k = 'solvedQP/%s.html' % pid
-        f[k] = f[k].replace(
-            b'<body>', b'<body><p>CLC 1992 does not apply to a bunker spill.</p>', 1)
+        inject_into_body(f, 'solvedQP/%s.html' % pid,
+                         b'<p>CLC 1992 does not apply to a bunker spill.</p>')
     run('known written trap phrase on a delivered page', trap_phrase)
 
     def future_law(m, f):
@@ -808,11 +823,12 @@ def self_test(files):
     # And the one that must NOT fire: current law on a historical paper.
     def historical_ok(m, f):
         p = next(p for p in m['papers'] if p['status'] == 'AVAILABLE' and p['year'] <= 2025)
-        k = 'solvedQP/%s.html' % p['paper_id']
-        f[k] = f[k].replace(
-            b'<body>',
-            b'<body><p>PSC procedures follow Resolution A.1185(33), and the Merchant '
-            b'Shipping Act, 1958 governs.</p>', 1)
+        # Same attribute-tolerant injection as the negative controls above. This
+        # one asserts the checker stays SILENT, so a failed injection made it
+        # pass for the wrong reason -- the worst kind of green.
+        inject_into_body(f, 'solvedQP/%s.html' % p['paper_id'],
+                         b'<p>PSC procedures follow Resolution A.1185(33), and the '
+                         b'Merchant Shipping Act, 1958 governs.</p>')
     global findings
     saved = findings
     findings = []

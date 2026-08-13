@@ -35,7 +35,8 @@ sys.path.insert(0, HERE)
 from render_common import (REPO_ROOT, TPL, BASE, CONTACT, LS_BOOKMARKS, LS_PROGRESS,
                            LS_MIGRATE_JS, STICKY_SYNC_JS, GATE, GATE_STUB, esc, esc_attr, strip_tags,
                            read_css, block_text, search_tokens, topbar, head_meta, footer,
-                           is_intake, corpus_relations, delivery_links, load_all_specs)
+                           is_intake, corpus_relations, delivery_links, load_all_specs,
+                           CORPUS_SEARCH_JS, corpus_fallback_block)
 import recurrence_model as RM
 
 CHEV = ('<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
@@ -618,7 +619,9 @@ def build(spec, gated=False, publish=False, deliver=False, promo=False, newest_l
     a('</style>')
     a('</head>')
     a('')
-    a('<body>')
+    # data-paper-id lets the corpus fallback exclude the paper the reader is
+    # already looking at, without parsing it back out of the URL.
+    a('<body data-paper-id="%s">' % esc_attr(pid))
     a(GATE if gated else GATE_STUB)
     a('<a class="skip" href="#paper-main">Skip to questions</a>')
     a('')
@@ -724,6 +727,17 @@ def build(spec, gated=False, publish=False, deliver=False, promo=False, newest_l
     a('<div id="no-results">No question matches that search. Try a topic, a regulation '
       'or a question number &mdash; for example <b>general average</b>, <b>MARPOL Annex VI</b> or <b>Q5</b>.</div>')
 
+    # The corpus escape hatch. A paper search is correctly scoped to its own
+    # nine questions -- and on its own it tells a reader who typed "port state
+    # control" into QP2607 that nothing matches, when 23 questions across 18
+    # sittings do. The fallback answers the question the reader actually asked.
+    #
+    # Delivery only: the manifest it reads lives at /solvedQP/, and a review
+    # copy under /meoclass1/pastpapers/ must not link a reviewer into the paid
+    # delivery surface (nor 404 against a manifest that is not its own).
+    if deliver:
+        o.extend(corpus_fallback_block('this paper'))
+
     # ---- paper-level rapid revision -------------------------------------
     a('<section class="cheat" id="rapid-revision">')
     a('  <h2>%s rapid revision</h2>' % esc(d['month_year']))
@@ -773,6 +787,7 @@ def build(spec, gated=False, publish=False, deliver=False, promo=False, newest_l
     js = (js.replace('__LS_BOOKMARKS__', LS_BOOKMARKS)
             .replace('__LS_PROGRESS__', LS_PROGRESS)
             .replace('__LS_MIGRATE__', LS_MIGRATE_JS)
+            .replace('__CORPUS_SEARCH__', CORPUS_SEARCH_JS)
             .replace('__STICKY_SYNC__', STICKY_SYNC_JS))
     a('<script>')
     a(js.rstrip('\n'))

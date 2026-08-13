@@ -404,6 +404,56 @@
     .sg{border:1px solid #999;}
   }
 
+  /* =================================================================
+     CORPUS SEARCH -- the "across all solved papers" escape hatch.
+     Shared by the paper page, the year sheet and the home page, so it
+     is defined once here rather than three times in three builders.
+
+     Deliberately quiet: this is a fallback the reader did not ask for,
+     shown when their scoped search came up empty. It must read as help,
+     not as a second product surface competing with the page.
+     ================================================================= */
+  .mc-wrap{border:1px solid var(--grey-border);border-radius:10px;background:#fff;
+           padding:14px 16px;margin:14px 0;}
+  .mc-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+           border-bottom:1px solid var(--grey-border);padding-bottom:8px;margin-bottom:10px;}
+  .mc-scope{font-weight:700;font-size:13px;color:var(--teal-dark);}
+  .mc-sum{font-size:12px;color:var(--grey-text);}
+  .mc-note{font-size:12px;color:var(--grey-text);margin:0 0 10px;}
+  .mc-paper{margin:0 0 12px;}
+  .mc-paper:last-child{margin-bottom:0;}
+  .mc-paper h4{margin:0 0 5px;font-size:12px;text-transform:uppercase;
+               letter-spacing:.04em;color:var(--ink);}
+  .mc-paper h4 a{color:var(--teal-dark);text-decoration:none;}
+  .mc-paper h4 a:hover,.mc-paper h4 a:focus-visible{text-decoration:underline;}
+  .mc-sr{color:var(--grey-text);font-weight:400;text-transform:none;letter-spacing:0;}
+  .mc-q{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;padding:6px 8px;
+        border-radius:7px;text-decoration:none;color:var(--ink);font-size:13px;}
+  .mc-q:hover,.mc-q:focus-visible{background:var(--teal-light);}
+  .mc-q b{flex:0 0 2.1rem;color:var(--teal-dark);font-size:12px;}
+  .mc-q .mc-t{flex:1;min-width:0;}
+  .mc-q .mc-tag{font-size:11px;color:var(--grey-text);border:1px solid var(--grey-border);
+                border-radius:10px;padding:1px 8px;white-space:nowrap;}
+  /* The elective broaden control. One line, no chrome -- the reader has
+     results already and is being offered more, not being interrupted. */
+  .mc-offer{margin:10px 0;}
+  .mc-offer-btn{border:1px solid var(--grey-border);background:#fff;border-radius:14px;
+                padding:6px 13px;font:inherit;font-size:12.5px;color:var(--teal-dark);
+                font-weight:700;cursor:pointer;min-height:32px;}
+  .mc-offer-btn:hover,.mc-offer-btn:focus-visible{border-color:var(--teal);
+                background:var(--teal-light);}
+
+  @media (max-width:720px){
+    .mc-wrap{padding:12px;}
+    /* Finger targets, same rule the learning controls follow. */
+    .mc-q{padding:10px 8px;min-height:44px;align-items:center;}
+    .mc-offer-btn{min-height:44px;padding:10px 14px;}
+  }
+
+  @media print{
+    .mc-wrap,.mc-offer{display:none !important;}
+  }
+
   .sq-hero{background:linear-gradient(135deg,#0f172a,#1e293b);color:#e2e8f0;padding:2.5rem 0 2rem;}
   .sq-hero .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem;}
   .sq-hero h1{color:#fff;font-size:1.9rem;line-height:1.25;margin:.35rem 0 .5rem;}
@@ -450,16 +500,56 @@
      label that a screen reader reads and a sighted reader does not see. */
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
            clip:rect(0 0 0 0);white-space:nowrap;border:0;}
-  .sq-find{max-width:1080px;margin:0 auto;padding:1.4rem 1.25rem 0;}
+  /* STICKY. The field used to scroll away the moment the reader reached the
+     28-card grid, which is exactly when they want it. Sticking the whole block
+     (field + hint + results) keeps one search affordance on screen without a
+     floating toolbar, and the results panel scrolls inside itself so a broad
+     query can never push the page out from under the reader. */
+  .sq-find{position:sticky;top:var(--topbar-h,47px);z-index:40;background:var(--bg,#fff);
+           max-width:none;margin:0;padding:.9rem 1.25rem .8rem;
+           border-bottom:1px solid var(--grey-border);}
+  .sq-find>*{max-width:1080px;margin-left:auto;margin-right:auto;}
   .sq-find-row{display:flex;align-items:center;gap:.6rem;border:1px solid var(--grey-border);
                border-radius:10px;background:#fff;padding:.6rem .8rem;}
   .sq-find-row svg{flex:0 0 auto;color:var(--grey-text);}
   .sq-find input{flex:1 1 auto;min-width:0;border:0;outline:0;font:inherit;font-size:.95rem;
                  background:transparent;color:inherit;}
-  .sq-find button{flex:0 0 auto;border:0;background:transparent;color:var(--grey-text);
+  /* Scoped to the field's own row. This was `.sq-find button`, which also
+     matched the topic chips added later and hid every one of them at every
+     width -- invisibly, because a programmatic click still works on a
+     display:none button. Keep this selector tight. */
+  .sq-find-row button{flex:0 0 auto;border:0;background:transparent;color:var(--grey-text);
                   font-size:1rem;cursor:pointer;padding:0 .2rem;display:none;}
   .sq-find .hint{color:var(--grey-text);font-size:.78rem;margin:.5rem 0 0;line-height:1.6;}
-  .sq-res{margin-top:.9rem;}
+  .sq-res{margin-top:.9rem;max-height:56vh;overflow-y:auto;}
+  .sq-res:empty{margin-top:0;}
+  /* Topic chips -- discovery for the reader who does not yet have a word for
+     what they want. They drive the SAME search field rather than a second
+     browse IA, so there is one way to get to a question, not two. */
+  .sq-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:.55rem 0 0;}
+  .sq-chip{display:inline-flex;align-items:center;gap:.35rem;
+           border:1px solid var(--grey-border);background:#fff;border-radius:14px;
+           padding:.25rem .7rem;font:inherit;font-size:.75rem;color:var(--grey-text);
+           cursor:pointer;line-height:1.5;}
+  /* Once the reader is searching, the chips and the explainer have done their
+     job. Collapsing them keeps the sticky block from taking most of a phone
+     screen -- it measured 567px of an 812px viewport before this. */
+  .sq-find.has-q .sq-chips,.sq-find.has-q .hint{display:none;}
+  /* Stuck = the reader has scrolled past the search block and it is now
+     floating over the content. At that point it must earn its space: the
+     chips and the explainer go, leaving the field. On a phone the block was
+     holding 45% of the screen while the reader scrolled the sitting grid,
+     which is a toolbar, not an affordance. */
+  .sq-find.is-stuck .sq-chips,.sq-find.is-stuck .hint{display:none;}
+  .sq-find.is-stuck{padding-top:.6rem;padding-bottom:.6rem;
+                    box-shadow:0 2px 8px rgba(15,23,42,.06);}
+  .sq-chip:hover,.sq-chip:focus-visible{border-color:var(--teal);color:var(--teal-dark);
+           background:var(--teal-light);}
+  .sq-chip[aria-pressed="true"]{border-color:var(--teal);color:var(--teal-dark);
+           background:var(--teal-light);font-weight:700;}
+  .sq-kbd{color:var(--grey-text);font-size:.72rem;white-space:nowrap;}
+  .sq-kbd kbd{border:1px solid var(--grey-border);border-bottom-width:2px;border-radius:4px;
+              padding:0 .3rem;font-family:inherit;font-size:.72rem;background:#f8fafc;}
   .sq-res-sum{font-size:.82rem;color:var(--grey-text);margin:0 0 .7rem;}
   .sq-res-paper{border:1px solid var(--grey-border);border-radius:10px;padding:.75rem .9rem;
                 margin-bottom:.6rem;background:#fff;}
@@ -482,10 +572,44 @@
   .sq-upd .what{min-width:0;}
   .sq-upd .what b{display:block;font-size:.85rem;}
   .sq-upd .what span{color:var(--grey-text);}
+  /* Change kind. A maintenance ledger has to distinguish "we added a sitting"
+     from "we corrected an answer you may have already studied" -- the second is
+     the one a candidate needs to see, and an undifferentiated list buries it. */
+  .sq-kind{display:inline-block;font-size:.65rem;font-weight:700;text-transform:uppercase;
+           letter-spacing:.05em;border-radius:4px;padding:.1rem .38rem;margin-right:.4rem;
+           vertical-align:.08em;border:1px solid transparent;}
+  .sq-k-added{background:#ecfdf5;color:#047857;border-color:#a7f3d0;}
+  .sq-k-corrected{background:#fef2f2;color:#b91c1c;border-color:#fecaca;}
+  .sq-k-enriched{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;}
+  .sq-k-regulatory_update{background:#fffbeb;color:#b45309;border-color:#fde68a;}
+  .sq-k-learning_improvement{background:#f5f3ff;color:#6d28d9;border-color:#ddd6fe;}
+  .sq-upd .what a{color:var(--teal-dark);text-decoration:none;}
+  .sq-upd .what a:hover,.sq-upd .what a:focus-visible{text-decoration:underline;}
+  .sq-upd-more{margin:.9rem 0 0;}
+  .sq-upd-btn{border:1px solid var(--grey-border);background:#fff;border-radius:14px;
+              padding:.4rem .85rem;font:inherit;font-size:.8rem;color:var(--teal-dark);
+              font-weight:700;cursor:pointer;min-height:32px;}
+  .sq-upd-btn:hover,.sq-upd-btn:focus-visible{border-color:var(--teal);background:var(--teal-light);}
+  #sq-upd-all{margin-top:.8rem;max-height:60vh;overflow-y:auto;}
+  /* Search narrows the sitting grid as you type, so the page answers "which
+     papers" at a glance and not only in the results list. */
+  .sq-card[hidden]{display:none;}
   @media(max-width:640px){
     .sq-hero h1{font-size:1.5rem;}.sq-stats{gap:1rem;}
     .sq-upd li{flex-direction:column;gap:.15rem;}
     .sq-upd time{flex:none;}
+    .sq-find{padding:.7rem .9rem .65rem;}
+    /* The topbar wraps to ~110px on a phone, so the sticky block has less room
+       to work with. Cap the panel low enough that the sitting grid stays
+       partly visible underneath it. */
+    .sq-res{max-height:44vh;}
+    .mc-q{min-height:44px;}
+    /* The topic tag costs a whole extra wrapped line per result on a 375px
+       screen and repeats what the reader just searched for. */
+    .sq-res .mc-tag{display:none;}
+    .sq-kbd{display:none;}          /* no physical keyboard to hint at */
+    .sq-chip{min-height:32px;}
+    .sq-upd-btn{min-height:44px;}
   }
 
 </style>
@@ -524,188 +648,202 @@
     <input id="sq-q" type="search" autocomplete="off" placeholder="Search a topic &mdash; Port State Control, general average, MARPOL&hellip;">
     <button id="sq-clear" type="button" aria-label="Clear search">&#10005;</button>
   </div>
-  <p class="hint">Searches the printed question and its topic labels across all 252 solved questions in 28 sittings. Sittings still in preparation are not searchable, because no answer exists to open.</p>
+  <div class="sq-chips" role="group" aria-label="Browse by topic">
+    <button type="button" class="sq-chip" data-topic="Statutory Framework &amp; Class" aria-pressed="false">Statutory Framework &amp; Class <span class="sq-kbd">65</span></button>
+    <button type="button" class="sq-chip" data-topic="Human Element &amp; Management" aria-pressed="false">Human Element &amp; Management <span class="sq-kbd">50</span></button>
+    <button type="button" class="sq-chip" data-topic="Marine Insurance &amp; Commercial Law" aria-pressed="false">Marine Insurance &amp; Commercial Law <span class="sq-kbd">49</span></button>
+    <button type="button" class="sq-chip" data-topic="Alternative Fuels &amp; Decarbonisation" aria-pressed="false">Alternative Fuels &amp; Decarbonisation <span class="sq-kbd">37</span></button>
+    <button type="button" class="sq-chip" data-topic="Pollution Prevention &amp; Response" aria-pressed="false">Pollution Prevention &amp; Response <span class="sq-kbd">25</span></button>
+    <button type="button" class="sq-chip" data-topic="Indian Maritime Legislation" aria-pressed="false">Indian Maritime Legislation <span class="sq-kbd">16</span></button>
+    <button type="button" class="sq-chip" data-topic="Cargo &amp; Bulk Carriage" aria-pressed="false">Cargo &amp; Bulk Carriage <span class="sq-kbd">10</span></button>
+  </div>
+  <p class="hint">Searches the printed question and its topic labels across all 252 solved questions in 28 sittings. Sittings still in preparation are not searchable, because no answer exists to open. <span class="sq-kbd">Press <kbd>/</kbd> to search, <kbd>Esc</kbd> to clear.</span></p>
   <div class="sq-res" id="sq-results"></div>
 </section>
 <section class="sq-section">
   <h2>Latest updates</h2>
-  <p class="lead">What has changed in this collection &mdash; new sittings and corrections to published answers.</p>
+  <p class="lead">What has changed in this collection &mdash; new sittings, corrections to published answers, and answers deepened against verified sources. If you have already studied a question, this is where you find out it moved.</p>
   <ul class="sq-upd">
-    <li><time datetime="2026-08-13">13 Aug 2026</time><div class="what"><b>QP2507</b><span>July 2025 added &mdash; 9 solved questions now available.</span></div></li>
-    <li><time datetime="2026-08-13">13 Aug 2026</time><div class="what"><b>QP2504</b><span>April 2025 added &mdash; 9 solved questions now available.</span></div></li>
-    <li><time datetime="2026-08-13">13 Aug 2026</time><div class="what"><b>QP2408</b><span>August 2024 added &mdash; 9 solved questions now available.</span></div></li>
-    <li><time datetime="2026-08-13">13 Aug 2026</time><div class="what"><b>QP2407</b><span>July 2024 added &mdash; 9 solved questions now available.</span></div></li>
-    <li><time datetime="2026-08-13">13 Aug 2026</time><div class="what"><b>QP2406</b><span>June 2024 added &mdash; 9 solved questions now available.</span></div></li>
-    <li><time datetime="2026-08-12">12 Aug 2026</time><div class="what"><b>QP2512</b><span>December 2025 added &mdash; 9 solved questions now available.</span></div></li>
+    <li><time datetime="2026-08-13">13 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-added">Added</span><a href="/solvedQP/QP2507.html">July 2025</a></b><span>July 2025 added &mdash; 9 solved questions now available.</span></div></li>
+    <li><time datetime="2026-08-13">13 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-added">Added</span><a href="/solvedQP/QP2504.html">April 2025</a></b><span>April 2025 added &mdash; 9 solved questions now available.</span></div></li>
+    <li><time datetime="2026-08-13">13 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-added">Added</span><a href="/solvedQP/QP2408.html">August 2024</a></b><span>August 2024 added &mdash; 9 solved questions now available.</span></div></li>
+    <li><time datetime="2026-08-13">13 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-enriched">Enriched</span><a href="/solvedQP/QP2407.html">July 2024</a></b><span>General average answer deepened against the verified York-Antwerp Rules: <b>Rule D</b> (fault does not affect the right to contribution but does not prejudice remedies or defences &mdash; the residue the New Jason Clause closes), <b>Rule C</b> (direct consequences only), <b>Rule VI</b> (salvage as a particular charge) and <b>Rule XVII</b> (contributory values), plus the general-average versus particular-average distinction. <span class="sq-res-sum" style="display:inline">Q8</span></span></div></li>
+    <li><time datetime="2026-08-12">12 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-learning_improvement">Learning improvement</span><a href="/solvedQP/QP2607.html">July 2026</a></b><span>Understand added on three questions with a counter-intuitive core. <span class="sq-res-sum" style="display:inline">Q2, Q3, Q4</span></span></div></li>
+    <li><time datetime="2026-08-12">12 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-corrected">Corrected</span><a href="/solvedQP/QP2603.html">March 2026</a></b><span>Hong Kong Convention application corrected to the Article 3.3 test &mdash; the exclusion is operating only in the flag State&rsquo;s own waters for the whole of the ship&rsquo;s life, not the absence of international voyages. Corrected in the answer, the answer route, the recall card and the critical numbers, and the Article text is now cited from the Convention itself. <span class="sq-res-sum" style="display:inline">Q9</span></span></div></li>
   </ul>
+  <p class="sq-upd-more">
+    <button type="button" id="sq-upd-btn" class="sq-upd-btn" aria-expanded="false" aria-controls="sq-upd-all">View all updates</button>
+    <span class="sq-kbd"> &middot; 45 recorded changes</span>
+  </p>
+  <div id="sq-upd-all" hidden></div>
 </section>
 <section class="sq-section">
   <h2>Solved papers</h2>
   <p class="lead">Each paper opens as a full interactive sitting &mdash; search across questions, bookmark, and track what you have worked through.</p>
   <div class="sq-grid">
-    <article class="sq-card sq-newest">
+    <article class="sq-card sq-newest" data-paper-id="QP2607">
       <span class="m">Newest sitting</span>
       <h3><a href="/solvedQP/QP2607.html">July 2026</a></h3>
       <p class="meta">Sr. No. QP-2607 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2607.html">Open July &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2606">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2606.html">June 2026</a></h3>
       <p class="meta">Sr. No. QP-2606 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2606.html">Open June &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2604">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2604.html">April 2026</a></h3>
       <p class="meta">Sr. No. QP-2604 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2604.html">Open April &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2603">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2603.html">March 2026</a></h3>
       <p class="meta">Sr. No. QP-2603 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2603.html">Open March &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2602">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2602.html">February 2026</a></h3>
       <p class="meta">Sr. No. QP-2602 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2602.html">Open February &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2601">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2601.html">January 2026</a></h3>
       <p class="meta">Sr. No. QP-2601 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2601.html">Open January &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2512">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2512.html">December 2025</a></h3>
       <p class="meta">Sr. No. QP-2512 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2512.html">Open December &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2511">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2511.html">November 2025</a></h3>
       <p class="meta">Sr. No. QP-2511 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2511.html">Open November &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2510">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2510.html">October 2025</a></h3>
       <p class="meta">Sr. No. QP-2510 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2510.html">Open October &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2509">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2509.html">September 2025</a></h3>
       <p class="meta">Sr. No. QP-2509 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2509.html">Open September &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2508">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2508.html">August 2025</a></h3>
       <p class="meta">Sr. No. QP-2508 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2508.html">Open August &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2507">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2507.html">July 2025</a></h3>
       <p class="meta">Sr. No. QP-2507 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2507.html">Open July &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2506">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2506.html">June 2025</a></h3>
       <p class="meta">Sr. No. QP-2506 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2506.html">Open June &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2504">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2504.html">April 2025</a></h3>
       <p class="meta">Sr. No. QP-2504 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2504.html">Open April &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2503">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2503.html">March 2025</a></h3>
       <p class="meta">Sr. No. QP-2503 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2503.html">Open March &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2502">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2502.html">February 2025</a></h3>
       <p class="meta">Sr. No. QP-2502 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2502.html">Open February &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2501">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2501.html">January 2025</a></h3>
       <p class="meta">Sr. No. QP-2501 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2501.html">Open January &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2412">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2412.html">December 2024</a></h3>
       <p class="meta">Sr. No. QP-2412 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2412.html">Open December &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2411">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2411.html">November 2024</a></h3>
       <p class="meta">Sr. No. QP-2411 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2411.html">Open November &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2410">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2410.html">October 2024</a></h3>
       <p class="meta">Sr. No. QP-2410 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2410.html">Open October &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2409">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2409.html">September 2024</a></h3>
       <p class="meta">Sr. No. QP-2409 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2409.html">Open September &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2408">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2408.html">August 2024</a></h3>
       <p class="meta">Sr. No. QP-2408 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2408.html">Open August &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2407">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2407.html">July 2024</a></h3>
       <p class="meta">Sr. No. QP-2407 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2407.html">Open July &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2406">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2406.html">June 2024</a></h3>
       <p class="meta">Sr. No. QP-2406 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2406.html">Open June &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2404">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2404.html">April 2024</a></h3>
       <p class="meta">Sr. No. QP-2404 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2404.html">Open April &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2403">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2403.html">March 2024</a></h3>
       <p class="meta">Sr. No. QP-2403 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2403.html">Open March &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2402">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2402.html">February 2024</a></h3>
       <p class="meta">Sr. No. QP-2402 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
       <a class="go" href="/solvedQP/QP2402.html">Open February &rarr;</a>
     </article>
-    <article class="sq-card">
+    <article class="sq-card" data-paper-id="QP2401">
       <span class="m">Engineering Management</span>
       <h3><a href="/solvedQP/QP2401.html">January 2024</a></h3>
       <p class="meta">Sr. No. QP-2401 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
@@ -918,85 +1056,344 @@
 </section>
 <p class="sq-note">Your access covers every solved paper here, including all future sittings added to this collection. Spotted something that needs correcting? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Solved%20QP%20correction">contactus@marineintelligenceweekly.com</a>.</p>
 </main>
-
 <script>
-(function(){
-  var IDX=null, LOADING=false;
-  var box=document.getElementById('sq-q'),
-      out=document.getElementById('sq-results'),
-      clr=document.getElementById('sq-clear');
-  if(!box||!out) return;
+  window.MIWCorpus = (function () {
+    var IDX = null, PENDING = null;
+    var SRC = '/solvedQP/solvedqp_content_index.json';
 
-  function esc(s){return String(s).replace(/[&<>"]/g,function(c){
-    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
-
-  // Same folding as the manifest's search_text, applied to what the reader
-  // typed. Kept to the minimum: case, punctuation, whitespace.
-  function fold(s){
-    return String(s).toLowerCase().replace(/[^a-z0-9'&]+/g,' ').replace(/\s+/g,' ').trim();
-  }
-
-  function load(){
-    if(IDX||LOADING) return Promise.resolve(IDX);
-    LOADING=true;
-    return fetch('/solvedQP/solvedqp_content_index.json',{cache:'no-store'})
-      .then(function(r){return r.json();})
-      .then(function(j){IDX=j;LOADING=false;return j;})
-      .catch(function(){LOADING=false;return null;});
-  }
-
-  function render(q){
-    if(!IDX){out.innerHTML='';return;}
-    var terms=fold(q).split(' ').filter(Boolean);
-    if(!terms.length){out.innerHTML='';return;}
-    var papers=[],nq=0;
-    IDX.papers.forEach(function(p){
-      if(p.status!=='AVAILABLE'||!p.questions.length) return;
-      var hits=p.questions.filter(function(x){
-        var t=x.search_text||'';
-        return terms.every(function(w){return t.indexOf(w)>=0;});
-      });
-      if(hits.length){papers.push({p:p,hits:hits});nq+=hits.length;}
-    });
-    if(!papers.length){
-      out.innerHTML='<p class="sq-res-none">No solved question matches &ldquo;'+esc(q)+
-        '&rdquo;. Search is over the '+IDX.available_questions+
-        ' questions in the '+IDX.available_papers+
-        ' solved sittings &mdash; sittings still in preparation are not searchable.</p>';
-      return;
+    function fold(s) {
+      return String(s).toLowerCase()
+        .replace(/[^a-z0-9'&]+/g, ' ').replace(/\s+/g, ' ').trim();
     }
-    var h=['<p class="sq-res-sum">'+papers.length+(papers.length===1?' paper':' papers')+
-           ' &middot; '+nq+(nq===1?' question':' questions')+'</p>'];
-    papers.forEach(function(g){
-      h.push('<div class="sq-res-paper">');
-      h.push('<h4><a href="'+esc(g.p.href)+'">'+esc(g.p.sitting)+'</a> '+
-             '<span style="color:var(--grey-text);font-weight:400">'+esc(g.p.sr_no)+'</span></h4>');
-      g.hits.forEach(function(x){
-        h.push('<a class="sq-res-q" href="'+esc(x.href)+'"><b>'+esc(x.question_number)+
-               '</b><span>'+esc(x.short_title||'')+'</span></a>');
+    function terms(q) { return fold(q).split(' ').filter(Boolean); }
+
+    function load() {
+      if (IDX) return Promise.resolve(IDX);
+      if (PENDING) return PENDING;
+      PENDING = fetch(SRC, { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) { IDX = j; PENDING = null; return j; })
+        .catch(function () { PENDING = null; return null; });
+      return PENDING;
+    }
+
+    // opts.excludePaper -- omit the paper the reader is already in.
+    // opts.excludeYear  -- omit the year sheet the reader is already in.
+    function match(q, opts) {
+      opts = opts || {};
+      var t = terms(q), groups = [], nq = 0;
+      if (!IDX || !t.length) return { groups: groups, questions: 0, papers: 0 };
+      IDX.papers.forEach(function (p) {
+        if (p.status !== 'AVAILABLE' || !p.questions.length) return;
+        if (opts.excludePaper && p.paper_id === opts.excludePaper) return;
+        if (opts.excludeYear && p.year === opts.excludeYear) return;
+        var hits = p.questions.filter(function (x) {
+          var s = x.search_text || '';
+          return t.every(function (w) { return s.indexOf(w) >= 0; });
+        });
+        if (hits.length) { groups.push({ paper: p, hits: hits }); nq += hits.length; }
       });
-      h.push('</div>');
-    });
-    out.innerHTML=h.join('');
-  }
+      return { groups: groups, questions: nq, papers: groups.length };
+    }
 
-  function onInput(){
-    var q=box.value;
-    clr.style.display=q?'block':'none';
-    if(!q.trim()){out.innerHTML='';return;}
-    load().then(function(){render(q);});
-  }
-  box.addEventListener('input',onInput);
-  clr.addEventListener('click',function(){box.value='';out.innerHTML='';
-    clr.style.display='none';box.focus();});
-  // Warm the payload on first focus so the first keystroke feels instant.
-  box.addEventListener('focus',load,{once:true});
-})();
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+      });
+    }
+
+    // Deep links go straight to /solvedQP/QP####.html#qN. The gate is an edge
+    // concern -- a reader without entitlement is redirected by middleware and
+    // arrives back here after login. Degrading the link to a storefront URL
+    // would throw away the anchor the reader actually asked for.
+    function renderGroups(res) {
+      var h = [];
+      res.groups.forEach(function (g) {
+        h.push('<div class="mc-paper">');
+        h.push('<h4><a href="' + esc(g.paper.href) + '">' + esc(g.paper.sitting) +
+               '</a> <span class="mc-sr">' + esc(g.paper.sr_no) + '</span></h4>');
+        g.hits.forEach(function (x) {
+          var topic = (x.topic_tags && x.topic_tags.length) ? x.topic_tags[0]
+                    : (x.primary_category || '');
+          h.push('<a class="mc-q" href="' + esc(x.href) + '">' +
+                 '<b>' + esc(x.question_number) + '</b>' +
+                 '<span class="mc-t">' + esc(x.short_title || '') + '</span>' +
+                 (topic ? '<span class="mc-tag">' + esc(topic) + '</span>' : '') +
+                 '</a>');
+        });
+        h.push('</div>');
+      });
+      return h.join('');
+    }
+
+    function summary(res) {
+      return res.papers + (res.papers === 1 ? ' sitting' : ' sittings') + ' &middot; ' +
+             res.questions + (res.questions === 1 ? ' question' : ' questions');
+    }
+
+    return { load: load, match: match, fold: fold, terms: terms,
+             renderGroups: renderGroups, summary: summary, esc: esc,
+             index: function () { return IDX; } };
+  })();
 </script>
-
 <footer class="page-footer">
   Marine Intelligence Weekly &mdash; MEO Class I Written Questions &amp; Answers &middot; Compiled by Nixon Antony, 2/E, Maersk A/S<br>
   Examination questions are reproduced for study purposes. For personal exam-preparation use. Not for redistribution. Corrections: <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
 </footer>
+
+<script>
+  function plausibleBarHeight(px) {
+    // A measurement SANITY GATE, not decoration. These bars are flex rows with
+    // wrap; measured before layout has settled, every child can land on its own
+    // line and the row reports a height many times its real one -- the Solved
+    // QP home read its 46px topbar as 377px, which pushed the sticky search bar
+    // a third of the way down the viewport and stayed wrong until the first
+    // resize event. A "topbar" taller than a third of the viewport is not a
+    // topbar, so the reading is discarded and the CSS fallback stands until a
+    // later pass measures it properly.
+    var h = window.innerHeight || 800;
+    return px >= 16 && px <= h * 0.34;
+  }
+  function syncStickyOffsets() {
+    var root = document.documentElement;
+    var tb = document.querySelector('.topbar');
+    var cb = document.querySelector('.controls-bar');
+    if (tb && plausibleBarHeight(tb.offsetHeight)) {
+      root.style.setProperty('--topbar-h', tb.offsetHeight + 'px');
+    }
+    if (cb && plausibleBarHeight(cb.offsetHeight)) {
+      root.style.setProperty('--controls-h', cb.offsetHeight + 'px');
+    }
+  }
+  syncStickyOffsets();
+  // Re-measured as the document settles. Timers rather than
+  // requestAnimationFrame on purpose: rAF never fires in a browser that is not
+  // producing frames (a hidden or backgrounded tab), and a sticky offset that
+  // is only correct in a visible tab is the kind of bug that reaches a reader
+  // and never reaches a reviewer.
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncStickyOffsets);
+  }
+  window.addEventListener('load', syncStickyOffsets);
+  window.addEventListener('resize', syncStickyOffsets);
+  window.addEventListener('orientationchange', syncStickyOffsets);
+  setTimeout(syncStickyOffsets, 0);
+  setTimeout(syncStickyOffsets, 250);
+  if (window.document.fonts && window.document.fonts.ready &&
+      typeof window.document.fonts.ready.then === 'function') {
+    // Web fonts land after first paint and change the bars' wrapped height.
+    window.document.fonts.ready.then(syncStickyOffsets);
+  }
+(function(){
+  var box=document.getElementById('sq-q'),
+      out=document.getElementById('sq-results'),
+      clr=document.getElementById('sq-clear');
+  if(!box||!out) return;
+  var esc=MIWCorpus.esc;
+  var cards=Array.prototype.slice.call(document.querySelectorAll('.sq-card[data-paper-id]'));
+  var chips=Array.prototype.slice.call(document.querySelectorAll('.sq-chip[data-topic]'));
+  var lastQ=null;
+
+  // ---- deep link ----------------------------------------------------------
+  // ?q= makes a search shareable and survivable: a candidate can bookmark
+  // "everything on general average", send it to a study partner, and use Back
+  // to get out of a paper and land on the same result list. History is
+  // replaced rather than pushed, so typing a word does not bury the previous
+  // page under twelve entries.
+  function readQ(){
+    try{ return new URLSearchParams(location.search).get('q')||''; }
+    catch(e){ return ''; }
+  }
+  function writeQ(q){
+    if(!window.history||!history.replaceState) return;
+    var u=location.pathname+(q?('?q='+encodeURIComponent(q)):'')+location.hash;
+    try{ history.replaceState(null,'',u); }catch(e){}
+  }
+
+  // ---- sitting grid narrowing --------------------------------------------
+  // The results list answers "which questions". Narrowing the grid answers
+  // "which sittings", which is the shape a lot of candidates actually think
+  // in. Same keystroke, no second control.
+  function narrowGrid(ids){
+    cards.forEach(function(c){
+      c.hidden = ids ? !ids[c.getAttribute('data-paper-id')] : false;
+    });
+  }
+
+  function render(q){
+    var res=MIWCorpus.match(q);
+    var idx=MIWCorpus.index();
+    if(!res.questions){
+      out.innerHTML='<p class="sq-res-none">No solved question matches &ldquo;'+esc(q)+
+        '&rdquo;. Search is over the '+(idx?idx.available_questions:0)+
+        ' questions in the '+(idx?idx.available_papers:0)+
+        ' solved sittings &mdash; sittings still in preparation are not searchable. '+
+        'Try a broader word, an instrument name, or one of the topics above.</p>';
+      narrowGrid({});
+      return;
+    }
+    var h=['<p class="sq-res-sum">'+MIWCorpus.summary(res)+'</p>'];
+    var ids={};
+    res.groups.forEach(function(g){ ids[g.paper.paper_id]=1; });
+    h.push(MIWCorpus.renderGroups(res));
+    out.innerHTML=h.join('');
+    narrowGrid(ids);
+  }
+
+  var findSec=document.querySelector('.sq-find');
+
+  function run(q,opts){
+    q=(q||'').trim();
+    clr.style.display=q?'block':'none';
+    if(findSec) findSec.classList.toggle('has-q',!!q);
+    chips.forEach(function(c){
+      c.setAttribute('aria-pressed', c.getAttribute('data-topic')===q ? 'true':'false');
+    });
+    if(!(opts&&opts.silent)) writeQ(q);
+    if(!q){ out.innerHTML=''; narrowGrid(null); lastQ=''; return; }
+    if(q===lastQ) return;
+    lastQ=q;
+    MIWCorpus.load().then(function(idx){
+      if(box.value.trim()!==q) return;      // reader moved on mid-flight
+      if(!idx){
+        out.innerHTML='<p class="sq-res-none">Search is temporarily unavailable. '+
+          'Every sitting is still listed below.</p>';
+        return;
+      }
+      render(q);
+    });
+  }
+
+  box.addEventListener('input',function(){ run(box.value); });
+  clr.addEventListener('click',function(){ box.value=''; run(''); box.focus(); });
+  chips.forEach(function(c){
+    c.addEventListener('click',function(){
+      var t=c.getAttribute('data-topic');
+      // A pressed chip toggles off, so a chip is a filter and not a trap.
+      if(c.getAttribute('aria-pressed')==='true'){ box.value=''; run(''); return; }
+      box.value=t; run(t);
+      out.scrollTop=0;
+    });
+  });
+
+  // ---- keyboard -----------------------------------------------------------
+  // "/" focuses, Escape clears then blurs, Enter opens the first hit. Nothing
+  // exotic: these are the three a reader tries without being told.
+  document.addEventListener('keydown',function(e){
+    if(e.defaultPrevented) return;
+    var t=e.target, tag=t&&t.tagName;
+    var typing = tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||(t&&t.isContentEditable);
+    if(e.key==='/'&&!typing&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+      e.preventDefault(); box.focus(); box.select(); return;
+    }
+    if(t!==box) return;
+    if(e.key==='Escape'){
+      if(box.value){ e.preventDefault(); box.value=''; run(''); }
+      else box.blur();
+      return;
+    }
+    if(e.key==='Enter'){
+      var first=out.querySelector('.mc-q');
+      if(first){ e.preventDefault(); window.location.href=first.getAttribute('href'); }
+    }
+  });
+
+  // Warm the payload on first focus so the first keystroke feels instant.
+  box.addEventListener('focus',MIWCorpus.load,{once:true});
+
+  // Detect "stuck" from a zero-height sentinel immediately above the block:
+  // once the sentinel has scrolled off the top, the block is floating over
+  // content and should shed the chips and the explainer.
+  //
+  // A passive scroll listener, NOT an IntersectionObserver. IO is the tidier
+  // tool and was the first implementation, but it delivers callbacks through
+  // the compositor, so it is untestable in a headless pane that produces no
+  // frames -- the observer fired zero callbacks, including the initial one.
+  // A behaviour that cannot be exercised in review is a behaviour nobody can
+  // prove still works. The listener is passive and does one rect read.
+  if(findSec){
+    var sentinel=document.createElement('div');
+    sentinel.setAttribute('aria-hidden','true');
+    sentinel.style.cssText='height:1px;margin-bottom:-1px;';
+    findSec.parentNode.insertBefore(sentinel,findSec);
+    var ticking=false;
+    var syncStuck=function(){
+      ticking=false;
+      findSec.classList.toggle('is-stuck',
+        sentinel.getBoundingClientRect().top < 0);
+    };
+    // setTimeout, not requestAnimationFrame. rAF does not fire in a tab that
+    // is not producing frames, which would latch `ticking` true forever and
+    // silently kill the handler for the rest of the session.
+    var onScroll=function(){
+      if(ticking) return;
+      ticking=true;
+      setTimeout(syncStuck,16);
+    };
+    window.addEventListener('scroll',onScroll,{passive:true});
+    window.addEventListener('resize',onScroll,{passive:true});
+    syncStuck();
+    // Exposed so a UI review can drive it without waiting on a frame.
+    window.__miwSyncStuck=syncStuck;
+  }
+
+  // Restore a shared/bookmarked search. silent: the URL already says this.
+  var initial=readQ();
+  if(initial){ box.value=initial; run(initial,{silent:true}); }
+})();
+
+// ---- full update ledger ---------------------------------------------------
+// The page shows the most recent changes server-side so they are readable with
+// no JavaScript. The whole ledger is one click away and loaded on demand from
+// the same manifest -- a candidate who has been studying for three months must
+// be able to find out whether an answer they learned has since been corrected.
+(function(){
+  var btn=document.getElementById('sq-upd-btn'), panel=document.getElementById('sq-upd-all');
+  if(!btn||!panel) return;
+  var KIND={added:'Added',corrected:'Corrected',enriched:'Enriched',
+            regulatory_update:'Regulatory update',
+            learning_improvement:'Learning improvement'};
+  function pretty(iso){
+    var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var p=String(iso).split('-');
+    if(p.length!==3) return iso;
+    return parseInt(p[2],10)+' '+M[parseInt(p[1],10)-1]+' '+p[0];
+  }
+  btn.addEventListener('click',function(){
+    var open=panel.hasAttribute('hidden')===false;
+    if(open){ panel.setAttribute('hidden',''); btn.textContent='View all updates';
+              btn.setAttribute('aria-expanded','false'); return; }
+    panel.removeAttribute('hidden');
+    btn.textContent='Hide full update history';
+    btn.setAttribute('aria-expanded','true');
+    if(panel.getAttribute('data-loaded')) return;
+    MIWCorpus.load().then(function(idx){
+      if(!idx||!idx.recently_updated){
+        panel.innerHTML='<p class="sq-res-none">Could not load the update history.</p>';
+        return;
+      }
+      var rows=idx.recently_updated;
+      if(!rows.length){
+        panel.innerHTML='<p class="sq-res-none">No changes recorded yet.</p>';
+        panel.setAttribute('data-loaded','1');
+        return;
+      }
+      var esc=MIWCorpus.esc;
+      panel.innerHTML='<ul class="sq-upd">'+rows.map(function(u){
+        var k=u.kind||'corrected';
+        var qs=(u.questions||[]).length
+          ? ' <span class="sq-res-sum" style="display:inline">'+esc(u.questions.join(', '))+'</span>'
+          : '';
+        return '<li><time datetime="'+esc(u.date)+'">'+esc(pretty(u.date))+'</time>'+
+               '<div class="what"><b><span class="sq-kind sq-k-'+esc(k)+'">'+
+               esc(KIND[k]||k)+'</span>'+esc(u.sitting)+'</b>'+
+               '<span>'+u.summary+qs+'</span></div></li>';
+      }).join('')+'</ul>';
+      panel.setAttribute('data-loaded','1');
+    });
+  });
+})();
+</script>
+
 </body>
 </html>

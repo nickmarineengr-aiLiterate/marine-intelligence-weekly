@@ -60,6 +60,88 @@ __LS_MIGRATE__
   var filterBtns = Array.prototype.slice.call(document.querySelectorAll('.filter-btn[data-filter]'));
   var activeFilter = 'all';
 
+  // ---- corpus search (the escape hatch out of this one paper) --------------
+__CORPUS_SEARCH__
+
+  var mcWrap = document.getElementById('mc-wrap');
+  var mcSum = document.getElementById('mc-sum');
+  var mcNote = document.getElementById('mc-note');
+  var mcRes = document.getElementById('mc-res');
+  var mcOffer = document.getElementById('mc-offer');
+  var mcOfferBtn = document.getElementById('mc-offer-btn');
+  // This paper's own id, so corpus results never repeat what is already on
+  // screen. Read from the body's data attribute rather than parsed out of the
+  // URL: a renamed file would silently stop excluding itself.
+  var THIS_PAPER = document.body.getAttribute('data-paper-id') || '';
+  var mcShown = '';   // the query whose corpus results are currently rendered
+
+  function mcHide() {
+    if (mcWrap) mcWrap.hidden = true;
+    if (mcOffer) mcOffer.hidden = true;
+    mcShown = '';
+  }
+
+  // Render corpus hits for `q`, excluding this paper. `reason` distinguishes
+  // the two ways a reader gets here, because the wording is not the same:
+  // 'empty'  -- nothing matched locally, we broadened for them
+  // 'chose'  -- they had local results and asked for more anyway
+  function mcRender(q, reason) {
+    if (!mcWrap || !mcRes) return;
+    if (mcShown === q + '|' + reason) return;      // idempotent per keystroke
+    MIWCorpus.load().then(function (idx) {
+      if (!idx) { mcHide(); return; }
+      // The query may have moved on while the payload was in flight.
+      if (input && input.value.trim() !== q) return;
+      var res = MIWCorpus.match(q, { excludePaper: THIS_PAPER });
+      if (!res.questions) {
+        // Genuinely nothing anywhere. Leave the local dead-end message
+        // standing and say nothing more -- an empty broadened panel is worse
+        // than no panel.
+        mcWrap.hidden = true;
+        if (mcOffer) mcOffer.hidden = true;
+        mcShown = q + '|' + reason;
+        return;
+      }
+      // We found the reader an answer, so the local "no question matches that
+      // search" line is now actively wrong -- it sits directly above a panel
+      // listing real matches. Retract it.
+      if (reason === 'empty' && noResults) noResults.style.display = 'none';
+      mcSum.innerHTML = MIWCorpus.summary(res);
+      mcNote.textContent = reason === 'empty'
+        ? 'Nothing in this paper — these are from other sittings.'
+        : 'Also covered in other sittings.';
+      mcRes.innerHTML = MIWCorpus.renderGroups(res);
+      mcWrap.hidden = false;
+      if (mcOffer) mcOffer.hidden = true;
+      mcShown = q + '|' + reason;
+    });
+  }
+
+  // Called after every local filter pass. `vis` is what the reader can see.
+  function mcUpdate(q, vis) {
+    if (!mcWrap) return;                       // review build: no corpus panel
+    if (!q) { mcHide(); if (noResults) noResults.removeAttribute('data-corpus'); return; }
+    if (vis === 0) {
+      // Stuck. Broaden without being asked -- a dead end is not a result.
+      if (mcOffer) mcOffer.hidden = true;
+      mcRender(q, 'empty');
+    } else {
+      // They have results. Offer more rather than pushing a second list at
+      // them, and do not fetch 800KB until they actually want it.
+      mcWrap.hidden = true;
+      mcShown = '';
+      if (mcOffer && mcOfferBtn) {
+        mcOfferBtn.textContent = 'Search all solved papers for “' + q + '”';
+        mcOffer.hidden = false;
+      }
+    }
+  }
+
+  if (mcOfferBtn) mcOfferBtn.addEventListener('click', function () {
+    var q = (input && input.value ? input.value : '').trim();
+    if (q) mcRender(q, 'chose');
+  });
+
   // ---- card open/close -----------------------------------------------------
   function setOpen(card, open) {
     card.classList.toggle('open', open);
@@ -154,6 +236,7 @@ __LS_MIGRATE__
         (saved ? ' · ' + saved + ' bookmarked' : '');
     }
     if (noResults) noResults.style.display = vis === 0 ? 'block' : 'none';
+    mcUpdate(q, vis);
     // keep the side index in step with what is actually visible
     document.querySelectorAll('.toc-link[data-qid]').forEach(function (a) {
       var c = document.querySelector('.q-card[data-qid="' + a.getAttribute('data-qid') + '"]');

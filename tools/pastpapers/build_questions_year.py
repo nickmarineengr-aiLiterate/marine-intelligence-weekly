@@ -39,7 +39,8 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from render_common import (REPO_ROOT, esc, esc_attr, strip_tags, read_css,
-                           topbar, head_meta, footer, GATE_STUB, delivery_links)
+                           topbar, head_meta, footer, GATE_STUB, delivery_links,
+                           CORPUS_SEARCH_JS, corpus_fallback_block)
 import recurrence_model as RM
 
 PP_DIR = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers')
@@ -122,8 +123,13 @@ def question_search_tokens(node, spec_q, status_label):
 
 
 def _page_js():
-    """Filter + search. Plain DOM work over generated attributes."""
-    return """
+    """Filter + search. Plain DOM work over generated attributes.
+
+    The corpus matcher is injected from render_common so this page, the paper
+    page and the home page fold and match a query identically -- the same words
+    must give the same answer wherever they are typed.
+    """
+    return CORPUS_SEARCH_JS + """
   var cards = Array.prototype.slice.call(document.querySelectorAll('[data-qsearch]'));
   var input = document.getElementById('qy-search');
   var clear = document.getElementById('qy-clear');
@@ -151,7 +157,66 @@ def _page_js():
     count.textContent = filtering
       ? shown + ' of ' + cards.length + ' questions'
       : cards.length + ' questions';
+    mcUpdate(state.q, shown);
   }
+
+  // ---- corpus escape hatch ------------------------------------------------
+  // A year sheet is correctly scoped to its year. On its own that means a
+  // reader looking for a topic this year's examiners did not set is told it
+  // does not exist. The same shared matcher the home page and paper pages use
+  // answers "and what about the other years?".
+  var mcWrap = document.getElementById('mc-wrap');
+  var mcSum = document.getElementById('mc-sum');
+  var mcNote = document.getElementById('mc-note');
+  var mcRes = document.getElementById('mc-res');
+  var mcOffer = document.getElementById('mc-offer');
+  var mcOfferBtn = document.getElementById('mc-offer-btn');
+  var THIS_YEAR = parseInt(document.body.getAttribute('data-year') || '0', 10);
+  var mcShown = '';
+
+  function mcRender(q, reason) {
+    if (!mcWrap) return;
+    if (mcShown === q + '|' + reason) return;
+    MIWCorpus.load().then(function (idx) {
+      if (!idx) { mcWrap.hidden = true; return; }
+      if (input && input.value.trim().toLowerCase() !== q) return;
+      var res = MIWCorpus.match(q, { excludeYear: THIS_YEAR });
+      if (!res.questions) {
+        mcWrap.hidden = true;
+        if (mcOffer) mcOffer.hidden = true;
+        mcShown = q + '|' + reason;
+        return;
+      }
+      mcSum.innerHTML = MIWCorpus.summary(res);
+      mcNote.textContent = reason === 'empty'
+        ? 'Nothing in ' + THIS_YEAR + ' — these are from other years.'
+        : 'Also set in other years.';
+      mcRes.innerHTML = MIWCorpus.renderGroups(res);
+      mcWrap.hidden = false;
+      if (mcOffer) mcOffer.hidden = true;
+      mcShown = q + '|' + reason;
+    });
+  }
+
+  function mcUpdate(q, shown) {
+    if (!mcWrap) return;
+    if (!q) { mcWrap.hidden = true; if (mcOffer) mcOffer.hidden = true; mcShown = ''; return; }
+    if (shown === 0) {
+      if (mcOffer) mcOffer.hidden = true;
+      mcRender(q, 'empty');
+    } else {
+      mcWrap.hidden = true; mcShown = '';
+      if (mcOffer && mcOfferBtn) {
+        mcOfferBtn.textContent = 'Search all solved papers for “' + q + '”';
+        mcOffer.hidden = false;
+      }
+    }
+  }
+
+  if (mcOfferBtn) mcOfferBtn.addEventListener('click', function () {
+    var q = (input && input.value ? input.value : '').trim().toLowerCase();
+    if (q) mcRender(q, 'chose');
+  });
 
   if (input) {
     input.addEventListener('input', function () {
@@ -222,7 +287,8 @@ def build_year_page(specs, year, publish, deliver=False):
     a(YEAR_CSS)
     a('</style>')
     a('</head>')
-    a('<body>')
+    # data-year lets the corpus fallback exclude the year already on screen.
+    a('<body data-year="%d">' % year)
     a(GATE_STUB)
     a('<a class="skip" href="#qy-main">Skip to content</a>')
     # A delivered year sheet navigates within /solvedQP/ and links to its
@@ -276,6 +342,11 @@ def build_year_page(specs, year, publish, deliver=False):
     a('</div>')
 
     a('<main id="qy-main" style="max-width:1000px;margin:0 auto;padding:20px;">')
+
+    # Corpus escape hatch. Delivery only -- it reads the /solvedQP/ manifest,
+    # which the review copy under /meoclass1/pastpapers/ must not reach into.
+    if deliver:
+        o.extend(corpus_fallback_block(str(year)))
 
     # Recurrence legend. The vocabulary is candidate-facing and its scope limit
     # is stated on the page rather than assumed -- "set once" means once in what

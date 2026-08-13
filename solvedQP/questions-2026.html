@@ -404,6 +404,56 @@
     .sg{border:1px solid #999;}
   }
 
+  /* =================================================================
+     CORPUS SEARCH -- the "across all solved papers" escape hatch.
+     Shared by the paper page, the year sheet and the home page, so it
+     is defined once here rather than three times in three builders.
+
+     Deliberately quiet: this is a fallback the reader did not ask for,
+     shown when their scoped search came up empty. It must read as help,
+     not as a second product surface competing with the page.
+     ================================================================= */
+  .mc-wrap{border:1px solid var(--grey-border);border-radius:10px;background:#fff;
+           padding:14px 16px;margin:14px 0;}
+  .mc-head{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+           border-bottom:1px solid var(--grey-border);padding-bottom:8px;margin-bottom:10px;}
+  .mc-scope{font-weight:700;font-size:13px;color:var(--teal-dark);}
+  .mc-sum{font-size:12px;color:var(--grey-text);}
+  .mc-note{font-size:12px;color:var(--grey-text);margin:0 0 10px;}
+  .mc-paper{margin:0 0 12px;}
+  .mc-paper:last-child{margin-bottom:0;}
+  .mc-paper h4{margin:0 0 5px;font-size:12px;text-transform:uppercase;
+               letter-spacing:.04em;color:var(--ink);}
+  .mc-paper h4 a{color:var(--teal-dark);text-decoration:none;}
+  .mc-paper h4 a:hover,.mc-paper h4 a:focus-visible{text-decoration:underline;}
+  .mc-sr{color:var(--grey-text);font-weight:400;text-transform:none;letter-spacing:0;}
+  .mc-q{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;padding:6px 8px;
+        border-radius:7px;text-decoration:none;color:var(--ink);font-size:13px;}
+  .mc-q:hover,.mc-q:focus-visible{background:var(--teal-light);}
+  .mc-q b{flex:0 0 2.1rem;color:var(--teal-dark);font-size:12px;}
+  .mc-q .mc-t{flex:1;min-width:0;}
+  .mc-q .mc-tag{font-size:11px;color:var(--grey-text);border:1px solid var(--grey-border);
+                border-radius:10px;padding:1px 8px;white-space:nowrap;}
+  /* The elective broaden control. One line, no chrome -- the reader has
+     results already and is being offered more, not being interrupted. */
+  .mc-offer{margin:10px 0;}
+  .mc-offer-btn{border:1px solid var(--grey-border);background:#fff;border-radius:14px;
+                padding:6px 13px;font:inherit;font-size:12.5px;color:var(--teal-dark);
+                font-weight:700;cursor:pointer;min-height:32px;}
+  .mc-offer-btn:hover,.mc-offer-btn:focus-visible{border-color:var(--teal);
+                background:var(--teal-light);}
+
+  @media (max-width:720px){
+    .mc-wrap{padding:12px;}
+    /* Finger targets, same rule the learning controls follow. */
+    .mc-q{padding:10px 8px;min-height:44px;align-items:center;}
+    .mc-offer-btn{min-height:44px;padding:10px 14px;}
+  }
+
+  @media print{
+    .mc-wrap,.mc-offer{display:none !important;}
+  }
+
 .qy-filters{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
   scrollbar-width:thin;padding-top:0}
 .qy-filters .filter-btn{flex:0 0 auto}
@@ -411,7 +461,7 @@
 
 </style>
 </head>
-<body>
+<body data-year="2026">
 <!-- GATE SCRIPT STRIPPED FOR REVIEW COPY -->
 <a class="skip" href="#qy-main">Skip to content</a>
 <nav class="topbar" aria-label="Primary">
@@ -453,6 +503,17 @@
 </div>
 </div>
 <main id="qy-main" style="max-width:1000px;margin:0 auto;padding:20px;">
+<div class="mc-wrap" id="mc-wrap" hidden>
+  <div class="mc-head">
+    <span class="mc-scope">Across all solved papers</span>
+    <span class="mc-sum" id="mc-sum" role="status" aria-live="polite"></span>
+  </div>
+  <p class="mc-note" id="mc-note">Nothing in 2026 &mdash; these are from other sittings.</p>
+  <div class="mc-res" id="mc-res"></div>
+</div>
+<div class="mc-offer" id="mc-offer" hidden>
+  <button type="button" id="mc-offer-btn" class="mc-offer-btn"></button>
+</div>
 <section class="topic-group qy-legend">
   <h3>How to read the recurrence tags</h3>
   <div class="tg-sub">Worked out by comparing the printed questions MIW has transcribed, not taken from any third party&rsquo;s recurrence table.</div>
@@ -1069,7 +1130,84 @@
 </section>
 </main>
 <script>
+  window.MIWCorpus = (function () {
+    var IDX = null, PENDING = null;
+    var SRC = '/solvedQP/solvedqp_content_index.json';
 
+    function fold(s) {
+      return String(s).toLowerCase()
+        .replace(/[^a-z0-9'&]+/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+    function terms(q) { return fold(q).split(' ').filter(Boolean); }
+
+    function load() {
+      if (IDX) return Promise.resolve(IDX);
+      if (PENDING) return PENDING;
+      PENDING = fetch(SRC, { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (j) { IDX = j; PENDING = null; return j; })
+        .catch(function () { PENDING = null; return null; });
+      return PENDING;
+    }
+
+    // opts.excludePaper -- omit the paper the reader is already in.
+    // opts.excludeYear  -- omit the year sheet the reader is already in.
+    function match(q, opts) {
+      opts = opts || {};
+      var t = terms(q), groups = [], nq = 0;
+      if (!IDX || !t.length) return { groups: groups, questions: 0, papers: 0 };
+      IDX.papers.forEach(function (p) {
+        if (p.status !== 'AVAILABLE' || !p.questions.length) return;
+        if (opts.excludePaper && p.paper_id === opts.excludePaper) return;
+        if (opts.excludeYear && p.year === opts.excludeYear) return;
+        var hits = p.questions.filter(function (x) {
+          var s = x.search_text || '';
+          return t.every(function (w) { return s.indexOf(w) >= 0; });
+        });
+        if (hits.length) { groups.push({ paper: p, hits: hits }); nq += hits.length; }
+      });
+      return { groups: groups, questions: nq, papers: groups.length };
+    }
+
+    function esc(s) {
+      return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+      });
+    }
+
+    // Deep links go straight to /solvedQP/QP####.html#qN. The gate is an edge
+    // concern -- a reader without entitlement is redirected by middleware and
+    // arrives back here after login. Degrading the link to a storefront URL
+    // would throw away the anchor the reader actually asked for.
+    function renderGroups(res) {
+      var h = [];
+      res.groups.forEach(function (g) {
+        h.push('<div class="mc-paper">');
+        h.push('<h4><a href="' + esc(g.paper.href) + '">' + esc(g.paper.sitting) +
+               '</a> <span class="mc-sr">' + esc(g.paper.sr_no) + '</span></h4>');
+        g.hits.forEach(function (x) {
+          var topic = (x.topic_tags && x.topic_tags.length) ? x.topic_tags[0]
+                    : (x.primary_category || '');
+          h.push('<a class="mc-q" href="' + esc(x.href) + '">' +
+                 '<b>' + esc(x.question_number) + '</b>' +
+                 '<span class="mc-t">' + esc(x.short_title || '') + '</span>' +
+                 (topic ? '<span class="mc-tag">' + esc(topic) + '</span>' : '') +
+                 '</a>');
+        });
+        h.push('</div>');
+      });
+      return h.join('');
+    }
+
+    function summary(res) {
+      return res.papers + (res.papers === 1 ? ' sitting' : ' sittings') + ' &middot; ' +
+             res.questions + (res.questions === 1 ? ' question' : ' questions');
+    }
+
+    return { load: load, match: match, fold: fold, terms: terms,
+             renderGroups: renderGroups, summary: summary, esc: esc,
+             index: function () { return IDX; } };
+  })();
   var cards = Array.prototype.slice.call(document.querySelectorAll('[data-qsearch]'));
   var input = document.getElementById('qy-search');
   var clear = document.getElementById('qy-clear');
@@ -1097,7 +1235,66 @@
     count.textContent = filtering
       ? shown + ' of ' + cards.length + ' questions'
       : cards.length + ' questions';
+    mcUpdate(state.q, shown);
   }
+
+  // ---- corpus escape hatch ------------------------------------------------
+  // A year sheet is correctly scoped to its year. On its own that means a
+  // reader looking for a topic this year's examiners did not set is told it
+  // does not exist. The same shared matcher the home page and paper pages use
+  // answers "and what about the other years?".
+  var mcWrap = document.getElementById('mc-wrap');
+  var mcSum = document.getElementById('mc-sum');
+  var mcNote = document.getElementById('mc-note');
+  var mcRes = document.getElementById('mc-res');
+  var mcOffer = document.getElementById('mc-offer');
+  var mcOfferBtn = document.getElementById('mc-offer-btn');
+  var THIS_YEAR = parseInt(document.body.getAttribute('data-year') || '0', 10);
+  var mcShown = '';
+
+  function mcRender(q, reason) {
+    if (!mcWrap) return;
+    if (mcShown === q + '|' + reason) return;
+    MIWCorpus.load().then(function (idx) {
+      if (!idx) { mcWrap.hidden = true; return; }
+      if (input && input.value.trim().toLowerCase() !== q) return;
+      var res = MIWCorpus.match(q, { excludeYear: THIS_YEAR });
+      if (!res.questions) {
+        mcWrap.hidden = true;
+        if (mcOffer) mcOffer.hidden = true;
+        mcShown = q + '|' + reason;
+        return;
+      }
+      mcSum.innerHTML = MIWCorpus.summary(res);
+      mcNote.textContent = reason === 'empty'
+        ? 'Nothing in ' + THIS_YEAR + ' — these are from other years.'
+        : 'Also set in other years.';
+      mcRes.innerHTML = MIWCorpus.renderGroups(res);
+      mcWrap.hidden = false;
+      if (mcOffer) mcOffer.hidden = true;
+      mcShown = q + '|' + reason;
+    });
+  }
+
+  function mcUpdate(q, shown) {
+    if (!mcWrap) return;
+    if (!q) { mcWrap.hidden = true; if (mcOffer) mcOffer.hidden = true; mcShown = ''; return; }
+    if (shown === 0) {
+      if (mcOffer) mcOffer.hidden = true;
+      mcRender(q, 'empty');
+    } else {
+      mcWrap.hidden = true; mcShown = '';
+      if (mcOffer && mcOfferBtn) {
+        mcOfferBtn.textContent = 'Search all solved papers for “' + q + '”';
+        mcOffer.hidden = false;
+      }
+    }
+  }
+
+  if (mcOfferBtn) mcOfferBtn.addEventListener('click', function () {
+    var q = (input && input.value ? input.value : '').trim().toLowerCase();
+    if (q) mcRender(q, 'chose');
+  });
 
   if (input) {
     input.addEventListener('input', function () {

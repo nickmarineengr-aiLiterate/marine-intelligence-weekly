@@ -23,7 +23,8 @@ if __name__ == '__main__':
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 from render_common import (REPO_ROOT, CONTACT, esc, strip_tags, read_css,
-                           topbar, head_meta, footer, GATE_STUB, delivery_links)
+                           topbar, head_meta, footer, GATE_STUB, delivery_links,
+                           CORPUS_SEARCH_JS, STICKY_SYNC_JS)
 import recurrence_model as RM
 # KNOWN_ABSENT is owned by the year-sheet builder, which already distinguishes
 # "no sitting was held" from "not yet in the MIW set". Importing it keeps ONE
@@ -111,16 +112,56 @@ HOME_CSS = """
      label that a screen reader reads and a sighted reader does not see. */
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
            clip:rect(0 0 0 0);white-space:nowrap;border:0;}
-  .sq-find{max-width:1080px;margin:0 auto;padding:1.4rem 1.25rem 0;}
+  /* STICKY. The field used to scroll away the moment the reader reached the
+     28-card grid, which is exactly when they want it. Sticking the whole block
+     (field + hint + results) keeps one search affordance on screen without a
+     floating toolbar, and the results panel scrolls inside itself so a broad
+     query can never push the page out from under the reader. */
+  .sq-find{position:sticky;top:var(--topbar-h,47px);z-index:40;background:var(--bg,#fff);
+           max-width:none;margin:0;padding:.9rem 1.25rem .8rem;
+           border-bottom:1px solid var(--grey-border);}
+  .sq-find>*{max-width:1080px;margin-left:auto;margin-right:auto;}
   .sq-find-row{display:flex;align-items:center;gap:.6rem;border:1px solid var(--grey-border);
                border-radius:10px;background:#fff;padding:.6rem .8rem;}
   .sq-find-row svg{flex:0 0 auto;color:var(--grey-text);}
   .sq-find input{flex:1 1 auto;min-width:0;border:0;outline:0;font:inherit;font-size:.95rem;
                  background:transparent;color:inherit;}
-  .sq-find button{flex:0 0 auto;border:0;background:transparent;color:var(--grey-text);
+  /* Scoped to the field's own row. This was `.sq-find button`, which also
+     matched the topic chips added later and hid every one of them at every
+     width -- invisibly, because a programmatic click still works on a
+     display:none button. Keep this selector tight. */
+  .sq-find-row button{flex:0 0 auto;border:0;background:transparent;color:var(--grey-text);
                   font-size:1rem;cursor:pointer;padding:0 .2rem;display:none;}
   .sq-find .hint{color:var(--grey-text);font-size:.78rem;margin:.5rem 0 0;line-height:1.6;}
-  .sq-res{margin-top:.9rem;}
+  .sq-res{margin-top:.9rem;max-height:56vh;overflow-y:auto;}
+  .sq-res:empty{margin-top:0;}
+  /* Topic chips -- discovery for the reader who does not yet have a word for
+     what they want. They drive the SAME search field rather than a second
+     browse IA, so there is one way to get to a question, not two. */
+  .sq-chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:.55rem 0 0;}
+  .sq-chip{display:inline-flex;align-items:center;gap:.35rem;
+           border:1px solid var(--grey-border);background:#fff;border-radius:14px;
+           padding:.25rem .7rem;font:inherit;font-size:.75rem;color:var(--grey-text);
+           cursor:pointer;line-height:1.5;}
+  /* Once the reader is searching, the chips and the explainer have done their
+     job. Collapsing them keeps the sticky block from taking most of a phone
+     screen -- it measured 567px of an 812px viewport before this. */
+  .sq-find.has-q .sq-chips,.sq-find.has-q .hint{display:none;}
+  /* Stuck = the reader has scrolled past the search block and it is now
+     floating over the content. At that point it must earn its space: the
+     chips and the explainer go, leaving the field. On a phone the block was
+     holding 45% of the screen while the reader scrolled the sitting grid,
+     which is a toolbar, not an affordance. */
+  .sq-find.is-stuck .sq-chips,.sq-find.is-stuck .hint{display:none;}
+  .sq-find.is-stuck{padding-top:.6rem;padding-bottom:.6rem;
+                    box-shadow:0 2px 8px rgba(15,23,42,.06);}
+  .sq-chip:hover,.sq-chip:focus-visible{border-color:var(--teal);color:var(--teal-dark);
+           background:var(--teal-light);}
+  .sq-chip[aria-pressed="true"]{border-color:var(--teal);color:var(--teal-dark);
+           background:var(--teal-light);font-weight:700;}
+  .sq-kbd{color:var(--grey-text);font-size:.72rem;white-space:nowrap;}
+  .sq-kbd kbd{border:1px solid var(--grey-border);border-bottom-width:2px;border-radius:4px;
+              padding:0 .3rem;font-family:inherit;font-size:.72rem;background:#f8fafc;}
   .sq-res-sum{font-size:.82rem;color:var(--grey-text);margin:0 0 .7rem;}
   .sq-res-paper{border:1px solid var(--grey-border);border-radius:10px;padding:.75rem .9rem;
                 margin-bottom:.6rem;background:#fff;}
@@ -143,10 +184,44 @@ HOME_CSS = """
   .sq-upd .what{min-width:0;}
   .sq-upd .what b{display:block;font-size:.85rem;}
   .sq-upd .what span{color:var(--grey-text);}
+  /* Change kind. A maintenance ledger has to distinguish "we added a sitting"
+     from "we corrected an answer you may have already studied" -- the second is
+     the one a candidate needs to see, and an undifferentiated list buries it. */
+  .sq-kind{display:inline-block;font-size:.65rem;font-weight:700;text-transform:uppercase;
+           letter-spacing:.05em;border-radius:4px;padding:.1rem .38rem;margin-right:.4rem;
+           vertical-align:.08em;border:1px solid transparent;}
+  .sq-k-added{background:#ecfdf5;color:#047857;border-color:#a7f3d0;}
+  .sq-k-corrected{background:#fef2f2;color:#b91c1c;border-color:#fecaca;}
+  .sq-k-enriched{background:#eff6ff;color:#1d4ed8;border-color:#bfdbfe;}
+  .sq-k-regulatory_update{background:#fffbeb;color:#b45309;border-color:#fde68a;}
+  .sq-k-learning_improvement{background:#f5f3ff;color:#6d28d9;border-color:#ddd6fe;}
+  .sq-upd .what a{color:var(--teal-dark);text-decoration:none;}
+  .sq-upd .what a:hover,.sq-upd .what a:focus-visible{text-decoration:underline;}
+  .sq-upd-more{margin:.9rem 0 0;}
+  .sq-upd-btn{border:1px solid var(--grey-border);background:#fff;border-radius:14px;
+              padding:.4rem .85rem;font:inherit;font-size:.8rem;color:var(--teal-dark);
+              font-weight:700;cursor:pointer;min-height:32px;}
+  .sq-upd-btn:hover,.sq-upd-btn:focus-visible{border-color:var(--teal);background:var(--teal-light);}
+  #sq-upd-all{margin-top:.8rem;max-height:60vh;overflow-y:auto;}
+  /* Search narrows the sitting grid as you type, so the page answers "which
+     papers" at a glance and not only in the results list. */
+  .sq-card[hidden]{display:none;}
   @media(max-width:640px){
     .sq-hero h1{font-size:1.5rem;}.sq-stats{gap:1rem;}
     .sq-upd li{flex-direction:column;gap:.15rem;}
     .sq-upd time{flex:none;}
+    .sq-find{padding:.7rem .9rem .65rem;}
+    /* The topbar wraps to ~110px on a phone, so the sticky block has less room
+       to work with. Cap the panel low enough that the sitting grid stays
+       partly visible underneath it. */
+    .sq-res{max-height:44vh;}
+    .mc-q{min-height:44px;}
+    /* The topic tag costs a whole extra wrapped line per result on a 375px
+       screen and repeats what the reader just searched for. */
+    .sq-res .mc-tag{display:none;}
+    .sq-kbd{display:none;}          /* no physical keyboard to hint at */
+    .sq-chip{min-height:32px;}
+    .sq-upd-btn{min-height:44px;}
   }
 """
 
@@ -164,77 +239,215 @@ HOME_CSS = """
 # the data, not by a filter in this script.
 SEARCH_JS = r"""
 <script>
+__STICKY_SYNC__
 (function(){
-  var IDX=null, LOADING=false;
   var box=document.getElementById('sq-q'),
       out=document.getElementById('sq-results'),
       clr=document.getElementById('sq-clear');
   if(!box||!out) return;
+  var esc=MIWCorpus.esc;
+  var cards=Array.prototype.slice.call(document.querySelectorAll('.sq-card[data-paper-id]'));
+  var chips=Array.prototype.slice.call(document.querySelectorAll('.sq-chip[data-topic]'));
+  var lastQ=null;
 
-  function esc(s){return String(s).replace(/[&<>"]/g,function(c){
-    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
-
-  // Same folding as the manifest's search_text, applied to what the reader
-  // typed. Kept to the minimum: case, punctuation, whitespace.
-  function fold(s){
-    return String(s).toLowerCase().replace(/[^a-z0-9'&]+/g,' ').replace(/\s+/g,' ').trim();
+  // ---- deep link ----------------------------------------------------------
+  // ?q= makes a search shareable and survivable: a candidate can bookmark
+  // "everything on general average", send it to a study partner, and use Back
+  // to get out of a paper and land on the same result list. History is
+  // replaced rather than pushed, so typing a word does not bury the previous
+  // page under twelve entries.
+  function readQ(){
+    try{ return new URLSearchParams(location.search).get('q')||''; }
+    catch(e){ return ''; }
+  }
+  function writeQ(q){
+    if(!window.history||!history.replaceState) return;
+    var u=location.pathname+(q?('?q='+encodeURIComponent(q)):'')+location.hash;
+    try{ history.replaceState(null,'',u); }catch(e){}
   }
 
-  function load(){
-    if(IDX||LOADING) return Promise.resolve(IDX);
-    LOADING=true;
-    return fetch('/solvedQP/solvedqp_content_index.json',{cache:'no-store'})
-      .then(function(r){return r.json();})
-      .then(function(j){IDX=j;LOADING=false;return j;})
-      .catch(function(){LOADING=false;return null;});
+  // ---- sitting grid narrowing --------------------------------------------
+  // The results list answers "which questions". Narrowing the grid answers
+  // "which sittings", which is the shape a lot of candidates actually think
+  // in. Same keystroke, no second control.
+  function narrowGrid(ids){
+    cards.forEach(function(c){
+      c.hidden = ids ? !ids[c.getAttribute('data-paper-id')] : false;
+    });
   }
 
   function render(q){
-    if(!IDX){out.innerHTML='';return;}
-    var terms=fold(q).split(' ').filter(Boolean);
-    if(!terms.length){out.innerHTML='';return;}
-    var papers=[],nq=0;
-    IDX.papers.forEach(function(p){
-      if(p.status!=='AVAILABLE'||!p.questions.length) return;
-      var hits=p.questions.filter(function(x){
-        var t=x.search_text||'';
-        return terms.every(function(w){return t.indexOf(w)>=0;});
-      });
-      if(hits.length){papers.push({p:p,hits:hits});nq+=hits.length;}
-    });
-    if(!papers.length){
+    var res=MIWCorpus.match(q);
+    var idx=MIWCorpus.index();
+    if(!res.questions){
       out.innerHTML='<p class="sq-res-none">No solved question matches &ldquo;'+esc(q)+
-        '&rdquo;. Search is over the '+IDX.available_questions+
-        ' questions in the '+IDX.available_papers+
-        ' solved sittings &mdash; sittings still in preparation are not searchable.</p>';
+        '&rdquo;. Search is over the '+(idx?idx.available_questions:0)+
+        ' questions in the '+(idx?idx.available_papers:0)+
+        ' solved sittings &mdash; sittings still in preparation are not searchable. '+
+        'Try a broader word, an instrument name, or one of the topics above.</p>';
+      narrowGrid({});
       return;
     }
-    var h=['<p class="sq-res-sum">'+papers.length+(papers.length===1?' paper':' papers')+
-           ' &middot; '+nq+(nq===1?' question':' questions')+'</p>'];
-    papers.forEach(function(g){
-      h.push('<div class="sq-res-paper">');
-      h.push('<h4><a href="'+esc(g.p.href)+'">'+esc(g.p.sitting)+'</a> '+
-             '<span style="color:var(--grey-text);font-weight:400">'+esc(g.p.sr_no)+'</span></h4>');
-      g.hits.forEach(function(x){
-        h.push('<a class="sq-res-q" href="'+esc(x.href)+'"><b>'+esc(x.question_number)+
-               '</b><span>'+esc(x.short_title||'')+'</span></a>');
-      });
-      h.push('</div>');
-    });
+    var h=['<p class="sq-res-sum">'+MIWCorpus.summary(res)+'</p>'];
+    var ids={};
+    res.groups.forEach(function(g){ ids[g.paper.paper_id]=1; });
+    h.push(MIWCorpus.renderGroups(res));
     out.innerHTML=h.join('');
+    narrowGrid(ids);
   }
 
-  function onInput(){
-    var q=box.value;
+  var findSec=document.querySelector('.sq-find');
+
+  function run(q,opts){
+    q=(q||'').trim();
     clr.style.display=q?'block':'none';
-    if(!q.trim()){out.innerHTML='';return;}
-    load().then(function(){render(q);});
+    if(findSec) findSec.classList.toggle('has-q',!!q);
+    chips.forEach(function(c){
+      c.setAttribute('aria-pressed', c.getAttribute('data-topic')===q ? 'true':'false');
+    });
+    if(!(opts&&opts.silent)) writeQ(q);
+    if(!q){ out.innerHTML=''; narrowGrid(null); lastQ=''; return; }
+    if(q===lastQ) return;
+    lastQ=q;
+    MIWCorpus.load().then(function(idx){
+      if(box.value.trim()!==q) return;      // reader moved on mid-flight
+      if(!idx){
+        out.innerHTML='<p class="sq-res-none">Search is temporarily unavailable. '+
+          'Every sitting is still listed below.</p>';
+        return;
+      }
+      render(q);
+    });
   }
-  box.addEventListener('input',onInput);
-  clr.addEventListener('click',function(){box.value='';out.innerHTML='';
-    clr.style.display='none';box.focus();});
+
+  box.addEventListener('input',function(){ run(box.value); });
+  clr.addEventListener('click',function(){ box.value=''; run(''); box.focus(); });
+  chips.forEach(function(c){
+    c.addEventListener('click',function(){
+      var t=c.getAttribute('data-topic');
+      // A pressed chip toggles off, so a chip is a filter and not a trap.
+      if(c.getAttribute('aria-pressed')==='true'){ box.value=''; run(''); return; }
+      box.value=t; run(t);
+      out.scrollTop=0;
+    });
+  });
+
+  // ---- keyboard -----------------------------------------------------------
+  // "/" focuses, Escape clears then blurs, Enter opens the first hit. Nothing
+  // exotic: these are the three a reader tries without being told.
+  document.addEventListener('keydown',function(e){
+    if(e.defaultPrevented) return;
+    var t=e.target, tag=t&&t.tagName;
+    var typing = tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||(t&&t.isContentEditable);
+    if(e.key==='/'&&!typing&&!e.ctrlKey&&!e.metaKey&&!e.altKey){
+      e.preventDefault(); box.focus(); box.select(); return;
+    }
+    if(t!==box) return;
+    if(e.key==='Escape'){
+      if(box.value){ e.preventDefault(); box.value=''; run(''); }
+      else box.blur();
+      return;
+    }
+    if(e.key==='Enter'){
+      var first=out.querySelector('.mc-q');
+      if(first){ e.preventDefault(); window.location.href=first.getAttribute('href'); }
+    }
+  });
+
   // Warm the payload on first focus so the first keystroke feels instant.
-  box.addEventListener('focus',load,{once:true});
+  box.addEventListener('focus',MIWCorpus.load,{once:true});
+
+  // Detect "stuck" from a zero-height sentinel immediately above the block:
+  // once the sentinel has scrolled off the top, the block is floating over
+  // content and should shed the chips and the explainer.
+  //
+  // A passive scroll listener, NOT an IntersectionObserver. IO is the tidier
+  // tool and was the first implementation, but it delivers callbacks through
+  // the compositor, so it is untestable in a headless pane that produces no
+  // frames -- the observer fired zero callbacks, including the initial one.
+  // A behaviour that cannot be exercised in review is a behaviour nobody can
+  // prove still works. The listener is passive and does one rect read.
+  if(findSec){
+    var sentinel=document.createElement('div');
+    sentinel.setAttribute('aria-hidden','true');
+    sentinel.style.cssText='height:1px;margin-bottom:-1px;';
+    findSec.parentNode.insertBefore(sentinel,findSec);
+    var ticking=false;
+    var syncStuck=function(){
+      ticking=false;
+      findSec.classList.toggle('is-stuck',
+        sentinel.getBoundingClientRect().top < 0);
+    };
+    // setTimeout, not requestAnimationFrame. rAF does not fire in a tab that
+    // is not producing frames, which would latch `ticking` true forever and
+    // silently kill the handler for the rest of the session.
+    var onScroll=function(){
+      if(ticking) return;
+      ticking=true;
+      setTimeout(syncStuck,16);
+    };
+    window.addEventListener('scroll',onScroll,{passive:true});
+    window.addEventListener('resize',onScroll,{passive:true});
+    syncStuck();
+    // Exposed so a UI review can drive it without waiting on a frame.
+    window.__miwSyncStuck=syncStuck;
+  }
+
+  // Restore a shared/bookmarked search. silent: the URL already says this.
+  var initial=readQ();
+  if(initial){ box.value=initial; run(initial,{silent:true}); }
+})();
+
+// ---- full update ledger ---------------------------------------------------
+// The page shows the most recent changes server-side so they are readable with
+// no JavaScript. The whole ledger is one click away and loaded on demand from
+// the same manifest -- a candidate who has been studying for three months must
+// be able to find out whether an answer they learned has since been corrected.
+(function(){
+  var btn=document.getElementById('sq-upd-btn'), panel=document.getElementById('sq-upd-all');
+  if(!btn||!panel) return;
+  var KIND={added:'Added',corrected:'Corrected',enriched:'Enriched',
+            regulatory_update:'Regulatory update',
+            learning_improvement:'Learning improvement'};
+  function pretty(iso){
+    var M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var p=String(iso).split('-');
+    if(p.length!==3) return iso;
+    return parseInt(p[2],10)+' '+M[parseInt(p[1],10)-1]+' '+p[0];
+  }
+  btn.addEventListener('click',function(){
+    var open=panel.hasAttribute('hidden')===false;
+    if(open){ panel.setAttribute('hidden',''); btn.textContent='View all updates';
+              btn.setAttribute('aria-expanded','false'); return; }
+    panel.removeAttribute('hidden');
+    btn.textContent='Hide full update history';
+    btn.setAttribute('aria-expanded','true');
+    if(panel.getAttribute('data-loaded')) return;
+    MIWCorpus.load().then(function(idx){
+      if(!idx||!idx.recently_updated){
+        panel.innerHTML='<p class="sq-res-none">Could not load the update history.</p>';
+        return;
+      }
+      var rows=idx.recently_updated;
+      if(!rows.length){
+        panel.innerHTML='<p class="sq-res-none">No changes recorded yet.</p>';
+        panel.setAttribute('data-loaded','1');
+        return;
+      }
+      var esc=MIWCorpus.esc;
+      panel.innerHTML='<ul class="sq-upd">'+rows.map(function(u){
+        var k=u.kind||'corrected';
+        var qs=(u.questions||[]).length
+          ? ' <span class="sq-res-sum" style="display:inline">'+esc(u.questions.join(', '))+'</span>'
+          : '';
+        return '<li><time datetime="'+esc(u.date)+'">'+esc(pretty(u.date))+'</time>'+
+               '<div class="what"><b><span class="sq-kind sq-k-'+esc(k)+'">'+
+               esc(KIND[k]||k)+'</span>'+esc(u.sitting)+'</b>'+
+               '<span>'+u.summary+qs+'</span></div></li>';
+      }).join('')+'</ul>';
+      panel.setAttribute('data-loaded','1');
+    });
+  });
 })();
 </script>
 """
@@ -291,10 +504,75 @@ def newest_sitting(specs):
     return s[-1] if s else None
 
 
+def preview_updates(all_ups, shown=None):
+    """Pick the change records the home page shows, newest first.
+
+    A STRAIGHT DATE SLICE IS THE WRONG ANSWER, and it is worth saying why
+    because it looks right. Papers are integrated in batches, so a run of
+    "sitting added" records shares the newest date and fills every preview
+    slot. The first build of this ledger did exactly that: six rows, all
+    ADDED, with four corrections and nine learning improvements sitting just
+    underneath the fold. That is the "release feed, not a maintenance ledger"
+    failure the ledger exists to end -- and no candidate is served by being
+    told six times that a paper exists.
+
+    So the preview reserves room for MAINTENANCE (corrected / enriched /
+    regulatory_update / learning_improvement) alongside additions, then sorts
+    what it picked back into date order. No date is altered and no record is
+    promoted above a newer one within its own class -- the reader still sees a
+    chronological list, just one that is not monopolised by a single batch.
+
+    Determinism: `all_ups` arrives already sorted on (date, paper_id) and both
+    partitions preserve that order, so the same specs give the same six rows.
+    """
+    shown = UPDATES_SHOWN if shown is None else shown
+    added = [u for u in all_ups if u['kind'] == 'added']
+    maint = [u for u in all_ups if u['kind'] != 'added']
+    # Within maintenance, a CORRECTION outranks an improvement for a preview
+    # slot. Both stay in date order among themselves; the reservation only
+    # decides which ones get shown at all. The distinction is not editorial
+    # taste: "an answer you may have learned is wrong" and "an explanation got
+    # clearer" are different messages, and only one of them is urgent.
+    critical = [u for u in maint
+                if u['kind'] in ('corrected', 'regulatory_update')]
+    other = [u for u in maint
+             if u['kind'] not in ('corrected', 'regulatory_update')]
+    half = shown // 2
+    take_m = min(len(maint), max(half, shown - len(added)))
+    take_a = min(len(added), shown - take_m)
+    take_m = min(len(maint), shown - take_a)
+    # Give corrections at least half of the maintenance slots before the
+    # improvements compete for them.
+    take_c = min(len(critical), max(1, take_m - len(other)) if other else take_m,
+                 max(1, (take_m + 1) // 2))
+    picked = added[:take_a] + critical[:take_c] + other[:take_m - take_c]
+    picked.sort(key=lambda r: (r['date'], r['paper_id']), reverse=True)
+    return picked
+
+
+def topic_counts(sittings):
+    """Primary categories across the solved corpus, commonest first.
+
+    DERIVED, never a hand-kept list. A chip can therefore only ever name a
+    topic that has solved questions behind it -- a curated list would
+    eventually offer a topic the corpus does not cover, which is the one thing
+    a discovery control must not do. Ties break alphabetically so the order is
+    total and the build stays byte-identical.
+    """
+    counts = {}
+    for d in sittings:
+        for q in d['questions']:
+            c = q.get('primary_category')
+            if c:
+                counts[c] = counts.get(c, 0) + 1
+    return sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
+
+
 def build(specs):
     sittings = solved_sittings(specs)
     newest = sittings[-1] if sittings else None
     total_q = sum(len(d['questions']) for d in sittings)
+    topic_chips = topic_counts(sittings)
 
     title = 'MIW Solved Question Papers &mdash; MEO Class I Engineering Management'
     desc = ('Complete solved MEO Class I Engineering Management written papers, every question '
@@ -350,9 +628,24 @@ def build(specs):
       'placeholder="Search a topic &mdash; Port State Control, general average, MARPOL&hellip;">')
     a('    <button id="sq-clear" type="button" aria-label="Clear search">&#10005;</button>')
     a('  </div>')
+    # Topic discovery. These are the manifest's own primary_category values --
+    # derived, never a hand-kept list that could name a topic the corpus does
+    # not cover. They drive the SAME field rather than a second browse tree,
+    # which is the trap the internal topics-*.html pages would have walked into:
+    # those carry recurrence tags and review metadata and are not publishable as
+    # they stand.
+    if topic_chips:
+        a('  <div class="sq-chips" role="group" aria-label="Browse by topic">')
+        for label, count in topic_chips:
+            a('    <button type="button" class="sq-chip" data-topic="%s" '
+              'aria-pressed="false">%s <span class="sq-kbd">%d</span></button>'
+              % (esc(label), esc(label), count))
+        a('  </div>')
     a('  <p class="hint">Searches the printed question and its topic labels across all %d '
       'solved questions in %d sittings. Sittings still in preparation are not searchable, '
-      'because no answer exists to open.</p>' % (total_q, len(sittings)))
+      'because no answer exists to open. '
+      '<span class="sq-kbd">Press <kbd>/</kbd> to search, <kbd>Esc</kbd> to clear.</span></p>'
+      % (total_q, len(sittings)))
     a('  <div class="sq-res" id="sq-results"></div>')
     a('</section>')
 
@@ -363,20 +656,42 @@ def build(specs):
     # Imported inside the function on purpose: build_solvedqp_manifest imports
     # THIS module for the one definition of coverage/solved state, so a module
     # level import here would be circular.
-    from build_solvedqp_manifest import recently_updated
-    ups = recently_updated(specs, {d['paper_id'] for d in sittings})[:UPDATES_SHOWN]
+    from build_solvedqp_manifest import recently_updated, KIND_LABEL
+    all_ups = recently_updated(specs, {d['paper_id'] for d in sittings})
+    ups = preview_updates(all_ups)
     if ups:
         a('<section class="sq-section">')
         a('  <h2>Latest updates</h2>')
-        a('  <p class="lead">What has changed in this collection &mdash; new sittings and '
-          'corrections to published answers.</p>')
+        a('  <p class="lead">What has changed in this collection &mdash; new sittings, '
+          'corrections to published answers, and answers deepened against verified '
+          'sources. If you have already studied a question, this is where you find out '
+          'it moved.</p>')
         a('  <ul class="sq-upd">')
         for u in ups:
+            # The sitting, not the paper id: a candidate thinks in "July 2024",
+            # not "QP2407". The id is still the anchor for the link.
+            link = '/solvedQP/%s.html' % u['paper_id']
+            qs = ''
+            if u.get('questions'):
+                qs = ' <span class="sq-res-sum" style="display:inline">%s</span>' \
+                     % esc(', '.join(u['questions']))
             a('    <li><time datetime="%s">%s</time><div class="what">'
-              '<b>%s</b><span>%s</span></div></li>'
+              '<b><span class="sq-kind sq-k-%s">%s</span>'
+              '<a href="%s">%s</a></b><span>%s%s</span></div></li>'
               % (esc(u['date']), esc(pretty_date(u['date'])),
-                 esc(u['paper_id']), u['summary']))
+                 esc(u['kind']), esc(KIND_LABEL.get(u['kind'], u['kind'])),
+                 link, esc(u['sitting']), u['summary'], qs))
         a('  </ul>')
+        # The whole ledger, on demand. Showing six and stopping meant a
+        # correction older than the last five sittings was unreachable -- which
+        # is precisely the entry a long-running candidate needs.
+        if len(all_ups) > len(ups):
+            a('  <p class="sq-upd-more">')
+            a('    <button type="button" id="sq-upd-btn" class="sq-upd-btn" '
+              'aria-expanded="false" aria-controls="sq-upd-all">View all updates</button>')
+            a('    <span class="sq-kbd"> &middot; %d recorded changes</span>' % len(all_ups))
+            a('  </p>')
+            a('  <div id="sq-upd-all" hidden></div>')
         a('</section>')
 
     # ---- papers ----------------------------------------------------
@@ -388,7 +703,10 @@ def build(specs):
     for d in reversed(sittings):          # newest first for the reader
         pid = d['paper_id']
         is_newest = newest is not None and pid == newest['paper_id']
-        a('    <article class="sq-card%s">' % (' sq-newest' if is_newest else ''))
+        # data-paper-id is what lets search narrow this grid to the sittings
+        # that actually match, rather than leaving 28 cards under a result list.
+        a('    <article class="sq-card%s" data-paper-id="%s">'
+          % (' sq-newest' if is_newest else '', pid))
         a('      <span class="m">%s</span>' % ('Newest sitting' if is_newest else esc(d['subject'])))
         a('      <h3><a href="/solvedQP/%s.html">%s</a></h3>' % (pid, esc(d['month_year'])))
         a('      <p class="meta">Sr. No. %s &middot; %d questions &middot; answer six<br>%s &middot; total marks %s</p>'
@@ -473,8 +791,16 @@ def build(specs):
       'sittings added to this collection. Spotted something that needs correcting? '
       '<a href="mailto:%s?subject=Solved%%20QP%%20correction">%s</a>.</p>' % (CONTACT, CONTACT))
     a('</main>')
-    a(SEARCH_JS)
+    # The shared matcher first: the page script and the update ledger both call
+    # MIWCorpus, and it is the same string the paper pages and year sheets get,
+    # so one query cannot fold three different ways.
+    a('<script>')
+    a(CORPUS_SEARCH_JS)
+    a('</script>')
     o.extend(footer(True))
+    # After the footer, so the sticky offsets are measured against a fully
+    # parsed document -- the paper pages already do this and are correct.
+    a(SEARCH_JS.replace('__STICKY_SYNC__', STICKY_SYNC_JS))
     a('</body>')
     a('</html>')
     return '\n'.join(o) + '\n'
