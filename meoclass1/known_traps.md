@@ -48,6 +48,21 @@ Merchant Shipping Act 2025 (Act No. 24 of 2025) came into force 15 March
 cites "Merchant Shipping Act, 1958" as current law.
 GREP: Merchant Shipping Act, 1958
 
+Scope note (2026-08-13): the narrow grep above only catches content that
+spells out "1958" — it missed QB5_C_B Q5, which cited "Merchant Shipping
+Act (India), Section 358" and "DG Shipping" without the year, both stale.
+Fixed there (v1.2): reg citation updated to "Merchant Shipping Act, 2025
+(India)" with a caveat to verify the exact 2025 section number before
+citing verbatim (not independently confirmed — search did not surface
+the 2025 Act's renumbered casualty-investigation section), and both
+"DG Shipping" mentions updated to "DGMA". A repo-wide content search for
+bare "DG Shipping" (no "1958" nearby) returned ~678 hits across ~68
+meoclass1 files — too broad and context-dependent for a safe auto-GREP
+(many may be legitimate historical references to pre-March-2026
+circulars/orders issued under the old name). This needs a dedicated
+manual audit pass, not a blanket find-replace — flagged for a future
+session, not yet actioned beyond QB5_C_B Q5.
+
 ### 7. ME-GA engine line — discontinued
 MAN Energy Solutions discontinued the ME-GA line in November 2024. Flag if
 described as an active/current product line.
@@ -364,3 +379,4 @@ misattributed to LLMC.
 | 2026-08-05 | Entries 25–30: Bills of Lading Act 2025, COGSA 2025 (India now Hague-Visby), fabricated "BARECON C", inverted air-freight volumetric ratio, ESP Code citation (A.1049(27)), IMO NZF adoption-status currency reminder — all found while building Notes Parts 19–22 and cross-checking against Parts 1–18 (Part 2 T9 and Part 22 T3 both had a stale NZF date, corrected in the same pass) | Claude Chat, building Notes Parts 19–22 (Uday Sankar S. source, pp. 451–550) |
 | 2026-08-07 | Entry 31: QB3_A_CheatSheet.html GZ curve diagram, two-pass — trough-vs-zero-crossing marker error, then negative/positive span proportions and "tender" mislabel, per full redraw against a documented textbook worked example | Nixon Antony (screenshot review, iterative) |
 | 2026-08-08 | Entry 32: LLMC 2012 Amendments wrongly cited as LEG.3(91) (fair treatment of seafarers guidelines) instead of LEG.5(99) — QB1_A.html Q3 (4 instances) and Q5 cross-reference (1 instance) | Candidate correction via Nixon (IMO resolution PDF attached) |
+| 2026-08-13 | Entry 6 scope note: QB5_C_B Q5 (True Confidence 2024 casualty link, "3 Indian crew died" question) — corrected False casualty-nationality implication (True Confidence fatalities were 2 Filipino + 1 Vietnamese, not Indian), updated "DG Shipping"→"DGMA" (×2), updated MS Act 1958 Section 358 citation to MS Act 2025 (exact section not independently verified) → v1.2. Repo-wide "DG Shipping" bare-mention scope (~678 hits/68 files) flagged, not yet actioned. | Candidate correction request via Nixon (screenshot) |
