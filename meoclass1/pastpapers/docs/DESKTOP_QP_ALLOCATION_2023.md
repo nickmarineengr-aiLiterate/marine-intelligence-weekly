@@ -7,7 +7,46 @@ disagree, the playbook wins.
 
 > **Do not start this batch until QP2407 and QP2408 are live.** See
 > `DESKTOP_QP_HANDOVER_BATCH3.md`. Those two close the 2024–2026 corpus and their donors matter
-> to 2023.
+> to 2023. **This gate was released in part by Founder instruction on 2026-08-13 — see §0.2.**
+
+---
+
+## 0. BATCH 4 BASELINE — recorded 2026-08-13
+
+### 0.1 The baseline commit
+
+| | |
+|---|---|
+| **MIW Batch 4 baseline** | **`57b9342c0b6782b6eb8c44fd996bbaef08f250fa`** (`57b9342`, *Review QP2407 against MIW True Source*) — `main` |
+| **How it is proven** | **This commit's PARENT is the baseline.** Same self-verifying pattern as Batch 1 (`9c97359`), Batch 2 (`333e814`) and Batch 3 (`e5843b1` recorded by `1401b13`). No commit asserts its own hash |
+| **Baseline branch** | `pastpapers/batch4-baseline` |
+| **Built state AT the baseline** | **28 papers · 252 questions · 243 built** — 27 papers `Pilot Review Ready`, `QP2408` alone at `Intake Complete` (0/9) |
+| **Tracked tree** | clean, 0 ahead / 0 behind `origin/main`, no git operation in progress |
+
+**Do not reuse an older batch baseline.** `e5843b1` (Batch 3) predates the QP2407 integration, so a
+2023 branch cut from it would compute donor readiness against a corpus one whole paper short.
+
+### 0.2 Two deviations from this file, both by explicit Founder instruction
+
+Recorded because the session prompt overrides governed workflow under
+`PRODUCTION_PROTOCOL_INDEX.md` §1, and an override that is not written down becomes an
+undocumented precedent.
+
+1. **The batch opened before QP2408 was live.** The header gate above requires QP2407 *and* QP2408.
+   At the baseline **QP2407 is live on `main`** (integrated, 9/9) but **QP2408 is not** — it is
+   authored 9/9 on `pastpapers/qp2408-founder-review` at `0f78df1`, pushed and awaiting laptop
+   review. The QP2408 donors are therefore **unavailable to this paper** and none is claimed.
+2. **QP2301 was built first, not third.** §5 recommends `QP2312 · QP2304 · QP2301 · …` and warns
+   *"Do it once the team is warmed up, not first"* because of the §1.3 printed numbering variants.
+   The Founder allocated QP2301 as the opening paper. The numbering variants were handled at
+   transcription and are recorded in the spec and in `QP2301_TEMPORAL_AND_DONOR_ANCHOR.md`.
+
+### 0.3 The readiness figures in §4 are stale — recompute, do not read
+
+§4 was computed against **234 built questions across 26 papers**. The baseline holds **243 across
+27**, because QP2407 has since been integrated. Every "with a donor" count in §4 is therefore a
+*lower* bound taken at a different corpus state. **Recompute readiness for each paper at the moment
+you author it**, exactly as §2 already requires within the batch.
 
 ---
 
