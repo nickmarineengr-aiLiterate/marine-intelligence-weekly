@@ -63,6 +63,52 @@ circulars/orders issued under the old name). This needs a dedicated
 manual audit pass, not a blanket find-replace — flagged for a future
 session, not yet actioned beyond QB5_C_B Q5.
 
+Follow-up (2026-08-13, same day): Nixon requested the full repo-wide
+audit be scoped and actioned. Classified all 508 "DG Shipping" mentions
+(88 files) into three buckets: (a) 266 hits in point-in-time historical
+exam-paper content (pastpapers/, solved-qp/written-sample files) —
+correctly left as-is, since "DG Shipping" was the accurate name during
+those exam sittings; (b) 36 hits that are dated, named historical
+circulars/notices/orders (e.g. "DG Shipping Engineering Circular 02 of
+2021", "DGS Order 06/2020") — correctly left as-is, since that was the
+real issuer name at time of publication and renaming would misquote the
+document title; (c) 175 genuinely stale present-tense/generic-authority
+references across 55 files — fixed to "DGMA". Repo-wide count dropped
+508 -> 317 (remaining 317 = buckets a+b, both intentional).
+Also found and fixed 12 hyperlinks/text references pointing to
+`https://dgshipping.gov.in`, which independent sources confirm was
+**permanently shut down 31 March 2026** (dead domain, returns errors) —
+updated to `https://dgma.gov.in`. Left 4 deep-linked
+`dgshipping.gov.in/WriteReadData/userfiles/...` document URLs in
+simon-notes-p3.html untouched — those specific documents' new location
+on dgma.gov.in was not verified, so no replacement URL was guessed;
+flagged as broken links needing Nixon's attention.
+All 65 touched files (64 in the main batch + QB4_H caught in a follow-up
+pass after a batch-script gap) pass HTML tag-balance validation.
+GREP: SKIP (context-dependent by design; do not blanket-scan)
+
+**Two open questions surfaced, not resolved by Claude — need Nixon's
+call:**
+1. Full-form naming: the overwhelming majority of the repo (and 3
+   independent sources: Manorama Yearbook, Lexology, Vajiram&Ravi, plus
+   dgma.gov.in's own current homepage text) use "Directorate General of
+   **Maritime Administration**". One file,
+   `oralnotes/miw-notes-mgmt-p15.html`, uses "...Maritime **Affairs**"
+   in two places (also echoed by one older dgma.gov.in subpage found in
+   search). Left untouched pending Nixon's confirmation — high
+   confidence "Administration" is correct, but not touching a full-name
+   expansion without being certain.
+2. Rename date precision: known_traps Entry 6 and ~20 files state
+   "DG Shipping renamed DGMA" in the same breath as "15 March 2026" (the
+   MS Act 2025 commencement date). Manorama Yearbook (July 2026) states
+   the actual DGS->DGMA rename specifically took effect **in June 2026**
+   under Section 7 of the Act, with the DG "assuming charge as DGMA on
+   June 23" — a separate, later event from the Act's broader 15 March
+   commencement. Not corrected anywhere this session; would require a
+   dated, per-file review across ~20 files to distinguish "Act in force"
+   claims (correctly 15 March) from "renamed to DGMA" claims (possibly
+   should read June 2026 / 23 June 2026).
+
 ### 7. ME-GA engine line — discontinued
 MAN Energy Solutions discontinued the ME-GA line in November 2024. Flag if
 described as an active/current product line.
@@ -380,3 +426,4 @@ misattributed to LLMC.
 | 2026-08-07 | Entry 31: QB3_A_CheatSheet.html GZ curve diagram, two-pass — trough-vs-zero-crossing marker error, then negative/positive span proportions and "tender" mislabel, per full redraw against a documented textbook worked example | Nixon Antony (screenshot review, iterative) |
 | 2026-08-08 | Entry 32: LLMC 2012 Amendments wrongly cited as LEG.3(91) (fair treatment of seafarers guidelines) instead of LEG.5(99) — QB1_A.html Q3 (4 instances) and Q5 cross-reference (1 instance) | Candidate correction via Nixon (IMO resolution PDF attached) |
 | 2026-08-13 | Entry 6 scope note: QB5_C_B Q5 (True Confidence 2024 casualty link, "3 Indian crew died" question) — corrected False casualty-nationality implication (True Confidence fatalities were 2 Filipino + 1 Vietnamese, not Indian), updated "DG Shipping"→"DGMA" (×2), updated MS Act 1958 Section 358 citation to MS Act 2025 (exact section not independently verified) → v1.2. Repo-wide "DG Shipping" bare-mention scope (~678 hits/68 files) flagged, not yet actioned. | Candidate correction request via Nixon (screenshot) |
+| 2026-08-13 | Entry 6 follow-up: full repo-wide DG Shipping→DGMA audit, 65 files touched, 191 references corrected (175 naming + 16 missed-in-first-pass QB4_H items), 12 dead dgshipping.gov.in links fixed to dgma.gov.in. Two open questions flagged (Affairs vs Administration naming; March vs June rename date) — see Entry 6 for detail. | Nixon-requested follow-up, same session |
