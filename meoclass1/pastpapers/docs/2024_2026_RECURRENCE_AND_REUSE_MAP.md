@@ -9,10 +9,10 @@ Scope honesty: every count below is scoped to the sittings MIW has actually tran
 
 | Year | Papers | Questions | Answers built |
 |---|---|---|---|
-| 2024 | 11 | 99 | 81 |
+| 2024 | 11 | 99 | 90 |
 | 2025 | 11 | 99 | 99 |
 | 2026 | 6 | 54 | 54 |
-| **Total** | **28** | **252** | **234** |
+| **Total** | **28** | **252** | **243** |
 
 Every paper sets nine questions and every question is recorded at 16 marks under printed instruction 2. **May is absent from the available MIW source set in all three years.**
 
@@ -125,8 +125,8 @@ Every pair of questions inside one family, counted by the two sittings it joins.
 |---|---|---|
 | A | 0 | Carried from the adjudicated intake field. An existing canonical object fully covers the demand. |
 | B | 0 | Carried from the adjudicated intake field. An existing canonical object partly covers the demand. |
-| C | 16 | Derived: no family member has a built answer. New research. |
-| D | **2** | Derived: the family contains at least one question whose answer is built and verified. |
+| C | 8 | Derived: no family member has a built answer. New research. |
+| D | **1** | Derived: the family contains at least one question whose answer is built and verified. |
 
 **Why A and B are still zero, and why that is a finding rather than a gap.** Both tiers claim that an existing canonical object covers some or all of the examiner demand. That claim cannot be made without reading the object, and this session authors and verifies nothing. A keyword sweep of the Oral corpus was run for the 2025 intake and deliberately **not** used to assign B: no threshold produced a natural break, so any cut point would be arbitrary, and a manufactured B count is worse than none because it would be planned against. That sweep output survives per question in `reuse_evidence` as named candidate files to read, explicitly labelled discovery. Promotion to A or B belongs to the solving session, which will have read them.
 
@@ -134,11 +134,7 @@ Every pair of questions inside one family, counted by the two sittings it joins.
 
 Every unsolved question whose CURRENT readiness differs from the tier frozen at intake. Each row is a question that acquired a verified donor because some other paper was solved after this question was transcribed. **Nothing in any spec changed to produce this table** &mdash; that is the point of deriving it.
 
-| Question | Sitting | Stored | Derived | Donor that arrived |
-|---|---|---|---|---|
-| QP2407-Q3 | July 2024 Q3 | C | **D** | QP2402-Q1, QP2502-Q1 |
-
-Stored Tier D over the unsolved set counts **1**; derived counts **2**. Planning off the stored field would have under-counted ready work by 1 question(s) and would have sent a solving session to research answers that already have a verified donor.
+None. Every unsolved question's stored tier currently agrees with its derived readiness. This table is expected to repopulate as soon as the next paper is solved.
 
 ### Tier D in full &mdash; every unsolved question with a verified donor
 
@@ -148,7 +144,6 @@ Direction matters and is easy to get backwards: **the unsolved sitting is the ea
 
 | Question | Sitting | Preferred | Wording | Other donors | Temporal |
 |---|---|---|---|---|---|
-| QP2407-Q3 | July 2024 Q3 | QP2402-Q1 | identical | QP2502-Q1 | stable |
 | QP2408-Q9 | August 2024 Q9 | QP2606-Q5 | identical | &mdash; | stable |
 
 ## 6. TEMPORAL REVIEW
@@ -161,19 +156,18 @@ An earlier answer must **not** be corrected to current law. It answers the exami
 
 | Year | Stable | Review required | HIGH | MEDIUM |
 |---|---|---|---|---|
-| 2024 | 15 | **3** | 2 | 1 |
-| **Total** | 15 | **3** | 2 | 1 |
+| 2024 | 7 | **2** | 1 | 1 |
+| **Total** | 7 | **2** | 1 | 1 |
 
 | Risk class | Count |
 |---|---|
-| IMO INSTRUMENT IN FLUX | 2 |
+| IMO INSTRUMENT IN FLUX | 1 |
 | GUIDELINE EDITION | 1 |
 
 ### Flagged questions
 
 | Question | Sitting | Risk | Classes |
 |---|---|---|---|
-| QP2407-Q4 | July 2024 Q4 | HIGH | IMO INSTRUMENT IN FLUX |
 | QP2408-Q4 | August 2024 Q4 | HIGH | IMO INSTRUMENT IN FLUX |
 | QP2408-Q6 | August 2024 Q6 | MEDIUM | GUIDELINE EDITION |
 
@@ -185,7 +179,6 @@ Not calendar order. Calendar order would research the same family several times 
 
 | Paper | Sitting | Tier D | Family reach | Temporal flags |
 |---|---|---|---|---|
-| QP2407 | July 2024 | **1 / 9** | 0 | 1 |
 | QP2408 | August 2024 | **1 / 9** | 0 | 2 |
 
 ## 8. WRITTEN STUDY INTELLIGENCE

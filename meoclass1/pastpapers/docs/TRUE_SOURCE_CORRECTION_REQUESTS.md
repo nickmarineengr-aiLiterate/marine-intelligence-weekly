@@ -199,3 +199,136 @@ read, and the verbatim revocation wording is on the record for the whole lineage
 
 **Status: OPEN.** Producer-team action requested: mark `MEPC.376(80)` revoked, record
 `MEPC.391(81)` as the operative LCA framework, and acquire its text.
+
+---
+
+# NEW REPOSITORY — `miw-true-source`
+
+**Raised by the consumer team. Nothing here was corrected in place.**
+
+The entries above concern the older `true-source/` tree. Everything below concerns the **separate,
+newly published corpus repository**, first consumed in production this session.
+
+| Field | Value |
+|---|---|
+| Raised | 2026-08-13 |
+| Session | `MIW::laptop::qp2407-true-source-review` |
+| MIW branch | `integration/qp2407-laptop-review` |
+| Corpus repository | `https://github.com/nixonvantony/miw-true-source` |
+| Corpus commit inspected | `7f8c9fb743854bdc8d5838184d314a956a110ecd` (`main`, clean) |
+| Packages | `casualty`, `general-average`, `salvage`, `wreck-removal`, `contract-of-carriage` |
+
+---
+
+## TSCR-5 — duplicate `object_id`s make the citation convention ambiguous
+
+**Severity: HIGH.** This one blocks the architecture rather than a single answer.
+
+**Objects:**
+- `contract-of-carriage/COC_DEFINITIONS.json` — `ROT-ART-1` appears **three times**
+  (Rotterdam Art. 1.1 contract of carriage, Art. 1.6 performing party, Art. 1.7 maritime performing party)
+- `salvage/SALVAGE_DEFINITIONS.json` — `SALV-ART1` appears **twice**
+- `wreck-removal/WRC_DEFINITIONS.json` — `WRC-ART1` appears **three times**
+
+### Expected
+
+`object_id` is the traceability primitive. A written answer cites `TRUE_SOURCE: ROT-ART-1` and a
+reviewer resolves that to exactly one proposition.
+
+### Observed
+
+`ROT-ART-1` resolves to three different definitions. The citation cannot be resolved without also
+quoting the article number, which defeats the purpose of having an ID.
+
+### Impact
+
+No QP2407 answer cites an affected object, so nothing shipped is wrong. But **no paper drawing on
+`salvage`, `wreck-removal` or `contract-of-carriage` can be given source traceability until this is
+fixed** — which includes the next recommended paper.
+
+**Status: OPEN.** Suggested form: suffix by article/paragraph, e.g. `ROT-ART-1-1`, `ROT-ART-1-6`,
+`ROT-ART-1-7`.
+
+---
+
+## TSCR-6 — `TRAP-RULE-D-FAULT` states a proposition the package does not support
+
+**Severity: HIGH.** A negative-knowledge object that is itself wrong will propagate errors, because
+its whole purpose is to be trusted over a candidate's instinct.
+
+**Object:** `general-average/CANDIDATE_TRAPS_AND_MISSING_POINTS.md` → `TRAP-RULE-D-FAULT`
+
+### Observed
+
+The object states: *"Rule D: rights to contribution in GA are not affected by fault, BUT party at
+fault cannot claim contribution from others. YAR 2016 Paramount Clause reinforces: GA barred where
+fault of party claiming."* The same proposition is repeated twice in
+`general-average/BOUNDARY_GA_HV_HAM_ROT.md`.
+
+### Why this is doubted
+
+1. The package's own verbatim `YAR-D` text says rights to contribution **shall not be affected** by
+   the fault of a party, *"but this shall not prejudice any remedies or defences which may be open
+   against or to that party in respect of such fault."* Rule D therefore preserves the right and
+   **relocates** the consequence of fault into remedies and defences under the applicable law. It does
+   not itself bar the party at fault from claiming.
+2. The **Rule Paramount** concerns whether sacrifice or expenditure was **reasonably made or
+   incurred** — it is a reasonableness gate, not a fault gate. No definition object in the package
+   states the Rule Paramount at all, so the assertion is unsupported *within the corpus*.
+
+### Impact
+
+Contained. `QP2407-Q8` was written from the verbatim `YAR-D` text and **not** from this gloss,
+precisely because of this finding. Had the gloss been followed, the answer would have told candidates
+that fault bars contribution outright — which is the opposite of what Rule D says, and would have
+destroyed the explanation of why the New Jason Clause is needed at all.
+
+**Status: OPEN — adjudicate before any other paper cites Rule D or the Rule Paramount.**
+Requested: add a verbatim `YAR-PARAMOUNT` definition object, and restate the trap against it.
+
+---
+
+## TSCR-7 — Package 1 directory name does not match its contents
+
+**Severity: MEDIUM.** `PACKAGE_DESCRIPTION_MISMATCH`.
+
+**Object:** the `casualty/` package.
+
+### Observed
+
+The directory is named `casualty`, and every file inside is prefixed `CASUALTY_`. The package's own
+README, instrument register and definitions are **entirely SOLAS Chapter V, COLREGs 1972 and the SAR
+Convention 1979** — safety of navigation. Definition IDs are `SOLAS-V33`, `COLREGS-R5`, `SAR-131`.
+No casualty-investigation instrument (Casualty Investigation Code, MSC.255(84)) appears anywhere.
+
+The **content description is correct**; the **name** is the wrong element.
+
+### Impact
+
+MIW's Knowledge Central holds a separate and genuinely different casualty-investigation corpus. Two
+different bodies of law are now both called "casualty", which is a live mis-selection risk for any
+future session screening packages by name.
+
+**Status: OPEN.** Suggested rename to `navigation-safety`. Not performed by the consumer team —
+renaming a canonical package is a corpus governance act.
+
+---
+
+## TSCR-8 — register and coverage hygiene
+
+**Severity: LOW to MEDIUM.** Grouped; none affected a shipped answer.
+
+| # | Object | Finding |
+|---|---|---|
+| a | root `README.md` | States "Packages 1-4". There are **five** packages; `contract-of-carriage` self-describes as Package 5 |
+| b | `general-average/COVERAGE_MATRIX.md` | Header claims **"24/24 covered"**; the table lists **10** rows |
+| c | `general-average/COVERAGE_MATRIX.md` | Cites Rules **F** and **XVII–XX** and the **Paramount Clause** as covering objects. Only `YAR-A`, `YAR-C`, `YAR-D`, `YAR-VI`, `YAR-XVII` exist. Coverage is asserted through objects that are not in the package |
+| d | `salvage/SALVAGE_DEFINITIONS.json`, `wreck-removal/WRC_DEFINITIONS.json` | Definition objects carry **no `instrument` field**, which the other three packages do carry. Machine consumers cannot group these objects by instrument |
+
+### Impact
+
+(b) and (c) matter most: a coverage matrix is the natural screening layer for "does the corpus cover
+this question", and it currently overstates. This session screened by reading registers and
+definitions directly and did not rely on the matrices.
+
+**Status: OPEN.**

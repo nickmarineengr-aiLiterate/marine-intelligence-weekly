@@ -909,6 +909,50 @@ const FIXTURES = {
     // and 'artificial' is the printed limb that separates them.
     narrow: ['artificial general average', 'QP2406-Q8'],
   },
+
+  QP2407: {
+    // Every probe below was derived from the BUILT page's data-search attributes
+    // and checked for uniqueness across all nine cards before being written here.
+    probes: [
+      ['gender balance', 'QP2407-Q1'],
+      ['fiva', 'QP2407-Q2'],
+      ['main committees', 'QP2407-Q3'],
+      ['indicative checkpoints', 'QP2407-Q4'],
+      ['continuous synopsis record', 'QP2407-Q5'],
+      ['declaration of maritime labour compliance', 'QP2407-Q6'],
+      ['light running margin', 'QP2407-Q7'],
+      ['new jason', 'QP2407-Q8'],
+      ['selective catalytic reduction', 'QP2407-Q9'],
+    ],
+    aliases: [
+      // Never printed in the stem -- these live only in search metadata.
+      ['sdg 5', 'QP2407-Q1', 'Q1 (the goal the stem describes but never numbers)'],
+      ['fuel injection valve activation', 'QP2407-Q2', 'Q2 (what FIVA expands to)'],
+      ['tacit acceptance', 'QP2407-Q3', 'Q3 (the amendment procedure behind the hierarchy)'],
+      ['imo number', 'QP2407-Q5', 'Q5 (the everyday name for the ship identification number)'],
+      ['dmlc', 'QP2407-Q6', 'Q6 (the flag-State declaration Title 5 turns on)'],
+      ['heavy running', 'QP2407-Q7', 'Q7 (the propeller condition the margins are set against)'],
+      ['both to blame', 'QP2407-Q8', 'Q8 (the collision doctrine behind cross-liabilities)'],
+      ['contributory value rule xvii', 'QP2407-Q8',
+       'Q8 (the True Source rule added at review: what cargo actually contributes on)'],
+      ['urea', 'QP2407-Q9', 'Q9 (the reductant an SCR system actually injects)'],
+    ],
+    // Q5 is where this sitting bites hardest. The SOLAS Consolidated Edition 2024
+    // is the operative edition ONLY because MSC.521(106) entered into force on
+    // 1 July 2024 -- the month of the sitting. If this probe stops resolving to
+    // Q5, the edition reasoning has been lost from the built page and the answer
+    // has silently become edition-blind.
+    regulation: ['msc.521(106)', 'QP2407-Q5'],
+    // Host sitting code printed against Q1 on the source copy, for a September
+    // 2023 sitting. It is a third party's annotation, not MIW's recurrence
+    // model, and must never be searchable.
+    recurrence: ['2023/sep/q1'],
+    // Added at True Source review. The general average / particular average
+    // distinction is what the general-average package exists to protect, and it
+    // must reach the shipped bytes on Q8 ALONE -- 'average' unqualified would
+    // otherwise carry it.
+    narrow: ['particular average', 'QP2407-Q8'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';

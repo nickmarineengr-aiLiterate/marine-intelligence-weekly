@@ -127,16 +127,16 @@ source. That is independent of the git-history incident.
 
 ## 2. Corpus state
 
-Recomputed from the specs, `build_reuse_map.py` and `solvedqp_check.py` after QP2512 was solved on
-2026-08-12. Not carried forward from a previous handover.
+Recomputed from the generated manifest `solvedQP/solvedqp_content_index.json` after QP2407 was
+reviewed and published on 2026-08-13. Not carried forward from a previous handover.
 
 | | |
 |---|---|
-| **Corpus** | **252 questions / 207 solved / 45 unsolved** — 82.1 per cent solved |
-| **Papers** | 28 — **23 solved**, 5 answerless intake |
+| **Corpus** | **252 questions / 243 solved / 9 unsolved** — 96.4 per cent solved |
+| **Papers** | 28 — **27 solved**, 1 answerless intake |
 | **Years** | 2024 (11 papers), 2025 (11), 2026 (6). May is absent from the source set in all three years |
 | **Tier D (frozen intake field)** | **3** of the 72 unsolved, down from 17. Batch 1 consumed most of the pool. **Do not plan from this number** — it is the frozen intake field, and Batch 1 proved again that it goes stale: `QP2401-Q9` was frozen at tier C and derived to D, and `QP2410`'s board was wrong in both directions. The derived tier from `build_reuse_map.py` governs, and it is what makes the Batch 2 ordering constraint (`QP2507` after `QP2501` and `QP2503`) real |
-| **Delivery** | `solvedQP/` — **23 papers, 207 questions, 3 year sheets, 1 index**, 30 pages |
+| **Delivery** | `solvedQP/` — **27 papers, 243 questions, 3 year sheets, 1 index** |
 | **Toolchain** | ALL STAGES PASS · `--self-test` PASS · double-build **byte-identical across 265 artefacts** |
 | **Security (offline)** | **121/121 pass** — `security.test.mjs` 38, `sessions.test.mjs` 32, `rotation.test.mjs` 22, `reset.test.mjs` 29. Re-run unchanged after all six integrations; no security surface was touched |
 | **Corpus projection (legacy)** | `RulesApp/repository/index/` is a **2026-07-25 snapshot at 788 nodes** of the `RulesApp` repository. **This is NOT the True Source corpus** — see §2a. It remains 218 nodes behind its own master and is no longer the resolver target |
@@ -364,6 +364,61 @@ Fixed in `caf5020`.
   cannot point forward (819 tokens, zero forward) — and is now inverted into the queue above.
 - **`validate_antipatterns.py` does not exist and never had a hook entry.** No `hooks` key in
   any settings file, no such file on disk. The entry was stale; struck rather than carried.
+
+---
+
+## 7k. QP2407 (July 2024) — laptop-reviewed against the NEW True Source repository — **FIRST CONTROLLED USE**
+
+```text
+TRUE SOURCE REPO:      F:\miw-true-source  (workstation path — cite object IDs, never this path)
+                       https://github.com/nixonvantony/miw-true-source
+TRUE SOURCE HEAD:      7f8c9fb743854bdc8d5838184d314a956a110ecd  (main, clean, 0 local changes)
+WRITTEN REPO:          F:\Marine-Intelligence-Weekly
+WRITTEN BRANCH:        integration/qp2407-laptop-review  (from origin/main e099711)
+QP2407:                PUBLISHED — 9/9 built, desktop build 7e71066 reviewed not rebuilt
+REVIEW:                COMPLETE — 8 accepted as-is, 1 major amendment (Q8)
+VALIDATION:            ALL STAGES PASS · validate_spec 0 errors · UI 66/66 · audit clean
+TRUE SOURCE GAPS:      1 (TS-GAP-1, non-blocking) + 4 corpus defects TSCR-5..TSCR-8
+NEXT ACTION:           Founder review. Do NOT start another True Source paper until
+                       TSCR-5 (duplicate object_ids) and TSCR-6 (TRAP-RULE-D-FAULT) are
+                       adjudicated. Next recommended paper is QP2501, on subject fit.
+```
+
+**The corpus is marine law; QP2407 is a technical/IMO-regulatory paper.** One question of nine
+intersected. That single question was nevertheless the right one: Q8 was the only question on the
+paper carrying **zero `P1_PRIMARY_VERIFIED` claims**, and it is now at five.
+
+| Measure | Before | After |
+|---|---|---|
+| `validate_spec` errors | 0 | 0 |
+| `validate_spec` warnings | 11 | **10** |
+| Q8 primary-verified claims | **0** | **5** |
+
+**Q8 — what was added,** each anchored to a corpus object and folded into existing sections so no
+section was renumbered (`memory_cue`, `answer_route` numbering and retrieval card `C1` stay valid):
+
+1. **`YAR-D` — Rule D.** Absent from the desktop build entirely, and the doctrinal hinge of limb (a):
+   rights to contribution are not affected by fault, **but that does not prejudice remedies or
+   defences**. That residue is exactly what the New Jason Clause was written to close.
+2. `TRAP-GA-PA` — general average vs particular average.
+3. `YAR-C` — only direct consequences; delay and market loss excluded.
+4. `YAR-VI` — salvage, including Art. 14 / SCOPIC, is a particular charge, outside the adjustment.
+5. `YAR-XVII` — contributory values; answers the printed limb "implications for cargo owners".
+
+Plus edition control in the answer body: the York-Antwerp Rules are a **contractual code of the CMI
+with no entry into force of their own**, 2016 current, 1994 still live.
+
+**Declared limitations all stand.** MIW still holds no wording of the New Jason Clause, the 3/4ths
+Collision Clause or any Institute clause set; no section of the Marine Insurance Act, 1963 is cited.
+
+**A corpus trap was itself wrong.** `TRAP-RULE-D-FAULT` asserts the Rule Paramount bars GA on fault.
+The Rule Paramount is a **reasonableness** gate, and no definition object in the package supports the
+claim. Q8 was written from the verbatim `YAR-D` text instead. Had the gloss been followed the answer
+would have said fault bars contribution outright — the opposite of Rule D, and it would have
+destroyed the explanation of why the clause exists. Raised as **TSCR-6**.
+
+Full record: [`QP2407_TRUE_SOURCE_REVIEW.md`](QP2407_TRUE_SOURCE_REVIEW.md).
+Corpus defects: [`TRUE_SOURCE_CORRECTION_REQUESTS.md`](TRUE_SOURCE_CORRECTION_REQUESTS.md) TSCR-5..8.
 
 ---
 
