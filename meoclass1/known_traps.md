@@ -89,15 +89,11 @@ GREP: SKIP (context-dependent by design; do not blanket-scan)
 
 **Two open questions surfaced, not resolved by Claude — need Nixon's
 call:**
-1. Full-form naming: the overwhelming majority of the repo (and 3
-   independent sources: Manorama Yearbook, Lexology, Vajiram&Ravi, plus
-   dgma.gov.in's own current homepage text) use "Directorate General of
-   **Maritime Administration**". One file,
-   `oralnotes/miw-notes-mgmt-p15.html`, uses "...Maritime **Affairs**"
-   in two places (also echoed by one older dgma.gov.in subpage found in
-   search). Left untouched pending Nixon's confirmation — high
-   confidence "Administration" is correct, but not touching a full-name
-   expansion without being certain.
+1. ~~Full-form naming~~ — **RESOLVED 2026-08-13, confirmed by Nixon:
+   "Directorate General of Maritime Administration" is correct.** The
+   two "...Maritime Affairs" instances in
+   `oralnotes/miw-notes-mgmt-p15.html` (both paired with "DGMA" in the
+   same sentence) have been corrected to "...Administration".
 2. Rename date precision: known_traps Entry 6 and ~20 files state
    "DG Shipping renamed DGMA" in the same breath as "15 March 2026" (the
    MS Act 2025 commencement date). Manorama Yearbook (July 2026) states
