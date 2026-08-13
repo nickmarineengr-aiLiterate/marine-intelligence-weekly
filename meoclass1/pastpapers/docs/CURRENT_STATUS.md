@@ -40,6 +40,21 @@ See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for
 > published one at a time, every one by path extraction onto current `main`. All six desktop
 > branches are **retained** as provenance and were never merged.
 >
+> **THE 2023 INTAKE IS ACQUIRED AND AUDITED — it is the FINAL set to be solved.** Eleven MEO
+> Class I Engineering Management papers, all 9 questions, all audited 2026-08-13. **May 2023 does
+> not exist** and the serials prove it (2304 → 2306, nothing at 2305) — May is now absent in
+> **2023, 2024 and 2025**. The 2023 serial convention is **reversed**: `2301 EM`, not
+> `Sr. No. EM – 2406`. Source PDFs are on disk and **git-ignored**; hashes and host filenames are
+> in the git-ignored `verification/LOCAL_SOURCE_PROVENANCE.md`.
+>
+> Two desktop handovers are written and are the authority on what comes next:
+> **[`DESKTOP_QP_HANDOVER_BATCH3.md`](DESKTOP_QP_HANDOVER_BATCH3.md)** — QP2407 then QP2408, in
+> that order on recomputed donor readiness (5/9 against 3/9) — and
+> **[`DESKTOP_QP_ALLOCATION_2023.md`](DESKTOP_QP_ALLOCATION_2023.md)** — six 2023 papers
+> (QP2312 · QP2304 · QP2301 · QP2303 · QP2309 · QP2302), **not to be started until QP2407 and
+> QP2408 are live**. Every 2023 paper pre-dates the whole solved corpus, so **every donor in that
+> batch runs backwards** — the QP2406 situation applied eleven times over.
+>
 > **QP2407 and QP2408 have NOT been started.** No `pastpapers/qp2407-founder-review` or
 > `qp2408-founder-review` branch exists on `origin`, and both specs remain `Intake Complete` at
 > 0/9 built. A session brief asserting that the desktop had completed them was checked against
