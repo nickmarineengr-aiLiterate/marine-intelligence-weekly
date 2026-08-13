@@ -723,13 +723,42 @@ def self_test(files):
         p['questions'][0]['href'] = '/solvedQP/%s.html#q99' % p['paper_id']
     run('broken question anchor / missing search target', broken_anchor)
 
+    def a_planned_paper(m):
+        """Return a PLANNED_SOON paper, synthesising one if the corpus has none.
+
+        These two controls used to harvest a live PLANNED_SOON row. That worked
+        only while some sitting was still unsolved: when the 2024-2026 set was
+        completed the row vanished and both controls died on StopIteration --
+        the checker reporting a clean run having tested nothing. A self-test
+        fixture that harvests live corpus state is a wasting asset, so the
+        fixture is now built rather than found. The synthetic row is a valid
+        PLANNED_SOON card (no href, no questions) so the only defect either
+        control exercises is the one it injects.
+        """
+        for p in m['papers']:
+            if p['status'] == 'PLANNED_SOON':
+                return p
+        src = next(p for p in m['papers'] if p['status'] == 'AVAILABLE')
+        p = dict(src, paper_id='QP9999', sr_no='QP-9999', status='PLANNED_SOON',
+                 questions=[])
+        p.pop('href', None)
+        m['papers'].append(p)
+        # Keep the synthetic row fully consistent with the manifest's own
+        # bookkeeping. Without this the two controls below are caught by the
+        # paper-count check instead of by the href / question-stem check they
+        # exist to prove, which is a pass for the wrong reason.
+        for k in ('total_papers', 'planned_papers'):
+            if k in m:
+                m[k] += 1
+        return p
+
     def planned_live(m, f):
-        p = next(p for p in m['papers'] if p['status'] == 'PLANNED_SOON')
+        p = a_planned_paper(m)
         p['href'] = '/solvedQP/%s.html' % p['paper_id']
     run('PLANNED_SOON card carrying a live link', planned_live)
 
     def planned_stems(m, f):
-        p = next(p for p in m['papers'] if p['status'] == 'PLANNED_SOON')
+        p = a_planned_paper(m)
         q = next(x for x in m['papers'] if x['status'] == 'AVAILABLE')['questions'][0]
         p['questions'] = [dict(q, paper_id=p['paper_id'])]
     run('unsolved paper publishing question stems', planned_stems)

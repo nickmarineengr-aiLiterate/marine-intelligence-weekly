@@ -953,6 +953,49 @@ const FIXTURES = {
     // otherwise carry it.
     narrow: ['particular average', 'QP2407-Q8'],
   },
+
+  QP2408: {
+    // Every probe below was derived from the BUILT page's data-search attributes
+    // and checked for uniqueness across all nine cards before being written here.
+    probes: [
+      ['recognized organization', 'QP2408-Q1'],
+      ['unlawful acts', 'QP2408-Q2'],
+      ['very serious marine casualty', 'QP2408-Q3'],
+      ['market-based measures', 'QP2408-Q4'],
+      ['principal dimensions', 'QP2408-Q5'],
+      ['bunker delivery note', 'QP2408-Q6'],
+      ['lof 2000', 'QP2408-Q7'],
+      ['power turbine', 'QP2408-Q8'],
+      ['safety management system', 'QP2408-Q9'],
+    ],
+    aliases: [
+      // Never printed in the stem -- these live only in search metadata.
+      ['delegation of authority', 'QP2408-Q1', 'Q1 (the RO Code section the approval limb turns on)'],
+      ['fixed platform', 'QP2408-Q2', 'Q2 (the other structure SUA protects besides the ship)'],
+      ['no blame', 'QP2408-Q3', 'Q3 (the defining character of a safety investigation)'],
+      ['basket of measures', 'QP2408-Q4', 'Q4 (what the 2023 Strategy calls the mid-term measures)'],
+      ['block coefficient', 'QP2408-Q5', 'Q5 (the fullness parameter behind the dimensions limb)'],
+      ['cat fines', 'QP2408-Q6', 'Q6 (the contaminant the analysis report exists to catch)'],
+      ['special compensation', 'QP2408-Q7', 'Q7 (Article 14, referred to only so far as the cap requires)'],
+      ['exhaust energy', 'QP2408-Q8', 'Q8 (the surplus all three devices act on)'],
+      ['designated person', 'QP2408-Q9', 'Q9 (the ISM link between ship and shore)'],
+    ],
+    // This paper's sharpest temporal point. MEPC.385(81) was ADOPTED on
+    // 22 March 2024 and entered into force only on 1 August 2025 -- at this
+    // sitting it is adopted and NOT in force, and Q6 is written from the
+    // pre-amendment regulation 18 and the ten-item appendix V. If this probe
+    // stops resolving to Q6, the adopted-not-in-force reasoning has been lost
+    // from the built page and the answer has silently become present-day law.
+    regulation: ['mepc.385(81) delivery note', 'QP2408-Q6'],
+    // Host sitting code printed against Q5 on the source copy, for a November
+    // 2022 sitting. It is a third party's annotation, not MIW's recurrence
+    // model, and must never be searchable.
+    recurrence: ['2022/nov/q5'],
+    // 'salvage' alone is ambiguous -- Q7 is the salvage question but Q3 carries
+    // salvage within the casualty boundary. The LOF edition the stem itself
+    // supplies is what separates them.
+    narrow: ['lof 2000', 'QP2408-Q7'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';

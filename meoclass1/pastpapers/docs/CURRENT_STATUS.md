@@ -13,13 +13,23 @@ See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for
 > extraction onto current `main` rather than by merging its stale branch. All six desktop branches
 > are **retained** as provenance evidence and were not deleted.
 >
-> **Product: 26 available papers · 234 published questions · 252 in the corpus.**
-> 18 unsolved questions remain across 2 unsolved papers — `QP2407` and `QP2408`, both July and
-> August 2024, and **both still at 0/9 with no branch on `origin`**.
+> **DESKTOP BATCH 3 IS 2/2 REVIEWED AND LIVE.** `QP2407` and `QP2408` were reviewed, integrated
+> and published on 2026-08-13, both by path extraction onto current `main`. QP2408's desktop branch
+> was based on `e5843b1`, which pre-dates the 2023 intake commit `e099711` — merging it would have
+> silently reverted `DESKTOP_QP_ALLOCATION_2023.md`, `DESKTOP_QP_HANDOVER_BATCH3.md` and 15 lines of
+> this file. Both desktop branches are **retained** as provenance evidence.
 >
-> **THE 2025 EXAMINATION YEAR IS COMPLETE.** All eleven 2025 sittings MIW holds are solved and
-> live. May 2025 is recorded as `NO SITTING` on evidence, not absence: the printed serial numbering
-> runs …2504, 2506… with nothing at 2505. Every unsolved paper left in the corpus is a 2024 sitting.
+> **Product: 28 available papers · 252 published questions · 252 in the corpus.**
+> **THE CORPUS HAS NO UNSOLVED QUESTION LEFT.**
+>
+> **THE 2024 EXAMINATION YEAR IS COMPLETE**, and so is 2025, and so is every 2026 sitting MIW
+> holds. All eleven 2024 sittings are solved and live. May is recorded as `NO SITTING` on evidence
+> in all three years, not absence: the printed serial numbering runs …2504, 2506… with nothing at
+> 2505.
+>
+> **Completion broke three gates that harvested a live example rather than building one** — the
+> last `PLANNED_SOON` row and the last unsolved question both vanished. All three are fixed to
+> synthesise their fixtures. See `WORKFLOW_LESSONS.md` L-B3-1.
 >
 > **Three defects were corrected, two of them on already-live papers.** The referred
 > `QP2402-Q3` regulation-21 defect was confirmed against the corpus copy of `MEPC.328(76)` and
@@ -127,16 +137,16 @@ source. That is independent of the git-history incident.
 
 ## 2. Corpus state
 
-Recomputed from the generated manifest `solvedQP/solvedqp_content_index.json` after QP2407 was
-reviewed and published on 2026-08-13. Not carried forward from a previous handover.
+Recomputed from the generated manifest `solvedQP/solvedqp_content_index.json` after QP2407 and
+QP2408 were reviewed and published on 2026-08-13. Not carried forward from a previous handover.
 
 | | |
 |---|---|
-| **Corpus** | **252 questions / 243 solved / 9 unsolved** — 96.4 per cent solved |
-| **Papers** | 28 — **27 solved**, 1 answerless intake |
+| **Corpus** | **252 questions / 252 solved / 0 unsolved** — **100 per cent solved** |
+| **Papers** | 28 — **28 solved**, 0 answerless intake |
 | **Years** | 2024 (11 papers), 2025 (11), 2026 (6). May is absent from the source set in all three years |
 | **Tier D (frozen intake field)** | **3** of the 72 unsolved, down from 17. Batch 1 consumed most of the pool. **Do not plan from this number** — it is the frozen intake field, and Batch 1 proved again that it goes stale: `QP2401-Q9` was frozen at tier C and derived to D, and `QP2410`'s board was wrong in both directions. The derived tier from `build_reuse_map.py` governs, and it is what makes the Batch 2 ordering constraint (`QP2507` after `QP2501` and `QP2503`) real |
-| **Delivery** | `solvedQP/` — **27 papers, 243 questions, 3 year sheets, 1 index** |
+| **Delivery** | `solvedQP/` — **28 papers, 252 questions, 3 year sheets, 1 index** |
 | **Toolchain** | ALL STAGES PASS · `--self-test` PASS · double-build **byte-identical across 265 artefacts** |
 | **Security (offline)** | **121/121 pass** — `security.test.mjs` 38, `sessions.test.mjs` 32, `rotation.test.mjs` 22, `reset.test.mjs` 29. Re-run unchanged after all six integrations; no security surface was touched |
 | **Corpus projection (legacy)** | `RulesApp/repository/index/` is a **2026-07-25 snapshot at 788 nodes** of the `RulesApp` repository. **This is NOT the True Source corpus** — see §2a. It remains 218 nodes behind its own master and is no longer the resolver target |

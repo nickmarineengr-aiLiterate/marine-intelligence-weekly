@@ -1885,3 +1885,98 @@ STATUS:    PROVEN
 SEEN:      1 (QP2404's checkpoint correction is the same class seen from the other side)
 OWNER:     NONE
 REVISIT:   never - this is a standing preflight.
+
+---
+
+## L-B3-1 — A self-test that HARVESTS a live example dies when the corpus becomes complete
+
+QP2408 was the last unsolved paper in the 2024-2026 set. The moment it was integrated, three
+separate gates failed **because the corpus had become complete**, and every one of them reported
+the completion as a content regression:
+
+- `solvedqp_health_check --self-test` raised `StopIteration` on
+  `next(p for p in m['papers'] if p['status'] == 'PLANNED_SOON')`. No planned paper was left to
+  mutate, so two positive controls died outright.
+- `build_reuse_map --self-test` failed cases 1 and 2 with *"no unsolved question has a family at
+  all"*. Both cases select an **unsolved** question to move between tiers; the list was empty.
+- `coverage_check` failed *"the two unavailable states are not distinctly labelled"*, because it
+  asserted unconditionally that both `No sitting` and `Planned soon` render. With nothing planned,
+  `Planned soon` legitimately no longer appears anywhere.
+
+The reuse-map case is the sharpest, because that file **already carried a comment predicting this
+exact failure** and had added one fallback layer at QP2503 — which still required an unsolved
+question, so it expired too. Predicting the class is not the same as removing the dependency.
+
+**Do:** build the fixture, never find it. A control must synthesise the state it exercises — a
+`QP9999` PLANNED_SOON row, a held-out built question standing in for an unsolved one — so that it
+keeps testing the transition after the live example is gone. **And check what the control actually
+fires on:** the synthetic PLANNED_SOON row initially tripped the paper-count check instead of the
+href check, which is a pass for the wrong reason and would have hidden a real regression.
+
+**Do:** make a "both labels present" assertion conditional on both states existing. An assertion
+that can only hold while work is incomplete will fail on success.
+
+EVIDENCE:  QP2408 laptop review, 2026-08-13. Three gates, one root cause, all fixed by
+           synthesising rather than harvesting.
+CATEGORY:  HARNESS_INTEGRITY
+STATUS:    PROVEN
+SEEN:      2 (QP2503 saw the first instance and patched only the symptom)
+OWNER:     NONE
+REVISIT:   whenever a new self-test selects its fixture with next(... if <live condition>).
+
+---
+
+## L-B3-2 — Internal production vocabulary is leaking onto the PAID delivery surface
+
+The Part 16 sweep on QP2408 found `production protocol`, `intake` and `Batch 3` in the built page.
+Scoping the sweep across the corpus showed the delivery layer already strips the authoring fields
+(`verification_status`, `reuse_evidence`, `reuse_tier`) — but **`study_notes` is delivered**, and
+three live papers were shipping internal vocabulary inside it:
+
+- `QP2401` — three occurrences (*"the production protocol forbids"*, *"the production protocol
+  requires"*, *"the production protocol's rule"*)
+- `QP2404` — *"under production protocol section 2.1"*, which cites an internal document by
+  **section number**, and *"The intake flag for this question said STABLE / LOW"*
+- `QP2408` — two occurrences, corrected before publication
+
+All were rewritten to name MIW rather than its internal machinery. The reasoning was kept; only the
+reference to the production apparatus was removed.
+
+**Do:** scope a vocabulary sweep by **field**, not by page. `grep` on the review page conflates the
+authoring layer (where this vocabulary is legitimate audit trail) with `study_notes`, `model_answer`
+and `understand_first` (where it faces a paying candidate). The authoring layer must NOT be
+sanitised — a provenance record that has been cleaned up is no longer a provenance record.
+
+**Do not** trust a term-count comparison against live papers as an all-clear. `intake` looked like
+house norm at QP2507 (2 hits) until the occurrences were read: both were **"water intakes"**.
+
+EVIDENCE:  QP2408 laptop review, 2026-08-13. 9 corrections across 3 papers.
+CATEGORY:  CUSTOMER_SURFACE
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     NONE
+REVISIT:   if a field-scoped vocabulary sweep is ever added to validate_spec.
+
+---
+
+## L-B3-3 — QP2408's retrieval cards are the corpus's longest by a wide margin
+
+Measured across the corpus, QP2408 averages **100 words per retrieval card (max 190)** against a
+corpus norm of ~57 (max 131). `validate_spec` raised 46 `being read, not retrieved` warnings and 9
+`chunking range` warnings; every other paper sampled raised **zero** of both. QP2408's Understand
+sections are likewise the longest in the corpus (mean 329 words against a corpus mean of 163).
+
+This did **not** block publication: the warnings are non-failing, the Understand sections pass both
+hard gates (Rule 4 scored **zero** citation hits, and the restatement overlap with the Answer is
+1.99% against a corpus mean of 1.71%, so the length is genuine explanation and not the Answer
+paraphrased), and QP2406, QP2411 and QP2407 already sit on the same gradient. But a 190-word
+flashcard is not a flashcard, and this is the paper to start from.
+
+**Do:** treat the flashcard word count as the first item of the next derived-layer pass.
+
+EVIDENCE:  QP2408 laptop review, 2026-08-13.
+CATEGORY:  LEARNING_QUALITY
+STATUS:    OPEN
+SEEN:      1 (worst instance of a gradient visible since QP2406)
+OWNER:     NONE
+REVISIT:   next derived-layer maintenance session.

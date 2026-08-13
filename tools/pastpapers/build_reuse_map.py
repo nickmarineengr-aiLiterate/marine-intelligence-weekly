@@ -666,6 +666,23 @@ def self_test():
 
     unsolved = [n['question_id'] for n in nodes.values() if n['question_id'] not in built]
 
+    # The corpus can run OUT of unsolved questions. When the 2024-2026 set was
+    # completed at QP2408 this list went empty and both cases below failed with
+    # "no unsolved question has a family at all" -- the harness reporting a
+    # CONTENT regression on a corpus that had become entirely complete, which is
+    # exactly backwards. The subject question does not have to be genuinely
+    # unsolved for these cases to mean anything: what they assert is that
+    # tier_of() moves C->D as a donor arrives and D->C as donors leave, and what
+    # makes them proof against a stored-field classifier is that no spec is
+    # touched. So when nothing is genuinely unsolved, hold one built question with
+    # a family out of the baseline built set and use it as the subject.
+    if not unsolved:
+        held_out = next((qid for qid in sorted(n['question_id'] for n in nodes.values())
+                         if qid in built and rel[qid]['others']), None)
+        if held_out is not None:
+            unsolved = [held_out]
+            built = built - {held_out}
+
     # ---- case 1: solving a donor must CREATE a tier D (C -> D)
     # A stored-field classifier cannot move here, because no spec is touched.
     cand = next((q for q in sorted(unsolved)

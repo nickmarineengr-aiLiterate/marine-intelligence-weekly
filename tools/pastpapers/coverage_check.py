@@ -81,7 +81,19 @@ def check(specs, html):
     else:
         fail('NO_SITTING set disagrees with KNOWN_ABSENT: %s'
              % sorted(got ^ set(H.KNOWN_ABSENT)))
-    if 'No sitting' in html and 'Planned soon' in html:
+    # Distinctness can only be asserted where both states actually exist. Every
+    # sitting in the set was solved at QP2408, so there is no PLANNED_SOON row
+    # left to render and "Planned soon" legitimately disappears from the page.
+    # Asserting it unconditionally turned a COMPLETE corpus into a coverage
+    # failure. Assert the label that must be there, and assert the other only
+    # while something is still unsolved.
+    planned = by_state.get(H.PLANNED_SOON, [])
+    if 'No sitting' not in html:
+        fail('known-absent months are not labelled "No sitting" on the page')
+    elif not planned:
+        ok('"No sitting" renders; no "Planned soon" state exists (every '
+           'evidenced sitting is solved)')
+    elif 'Planned soon' in html:
         ok('"No sitting" and "Planned soon" are distinct labels on the page')
     else:
         fail('the two unavailable states are not distinctly labelled')
