@@ -6,6 +6,7 @@
 
 | Year | Papers held | Months absent from the available source set |
 |---|---|---|
+| 2023 | 1 | February, March, April, May, June, July, August, September, October, November, December |
 | 2024 | 11 | May |
 | 2025 | 11 | May |
 | 2026 | 6 | May, August, September, October, November, December |
@@ -14,6 +15,7 @@
 
 | Paper | Sitting | Source file | Printed serial | Pages | Questions | Pages read back |
 |---|---|---|---|---|---|---|
+| QP2301 | January 2023 | `JANUARY 2023.pdf` | 2301 EM | 2 | 9 | ? of 2 |
 | QP2401 | January 2024 | `JANUARY 2024.pdf` | EM - 24117-1 | 2 | 9 | 2 of 2 |
 | QP2402 | February 2024 | `FEBRUARY 2024.pdf` | EM - 19224-1 | 2 | 9 | 2 of 2 |
 | QP2403 | March 2024 | `MARCH 2024.pdf` | EM - 18324-1 | 3 | 9 | 3 of 3 |
@@ -55,10 +57,19 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 
 ### Questions printing NO mark allocation
 
-**19 of 252**, across 6 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
+**28 of 261**, across 7 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
 
 | Question | Sitting | Title |
 |---|---|---|
+| QP2301-Q1 | January 2023 Q1 | Rudder Efficiency Improvement Devices |
+| QP2301-Q2 | January 2023 Q2 | Anti-Fouling Convention and Alternatives to Tin-Based Paints |
+| QP2301-Q3 | January 2023 Q3 | Types of Marine Insurance Policy, Liabilities and Indian Agencies |
+| QP2301-Q4 | January 2023 Q4 | SCOPIC and Jurisdiction after a High-Seas Collision |
+| QP2301-Q5 | January 2023 Q5 | LLMC - Purpose, Heads of Claim and Legal Terms |
+| QP2301-Q6 | January 2023 Q6 | General Average - Essential Features and a Refloating Claim |
+| QP2301-Q7 | January 2023 Q7 | Casualty Investigation - Obligation, Code and Very Serious Marine Casualty |
+| QP2301-Q8 | January 2023 Q8 | Human Element in STCW and IMO Fatigue Guidance |
+| QP2301-Q9 | January 2023 Q9 | GISIS - Aim, Function and the Fuel Oil Reporting Module |
 | QP2402-Q8 | February 2024 Q8 | Grounded and Abandoned Indian Flag Vessel - Action under the Merchant Shipping Act |
 | QP2403-Q4 | March 2024 Q4 | High-Efficiency Propellers |
 | QP2403-Q5 | March 2024 Q5 | Maritime Cyber Risk Management Guidelines |
@@ -87,6 +98,15 @@ Examiner wording is reproduced exactly, errors included. Each is recorded in a n
 
 | Question | Note |
 |---|---|
+| QP2301-Q1 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. Prints "improvements devices/ techniques" with a space after the solidus and a number disagreement on "improvements". Reproduced as printed. |
+| QP2301-Q2 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. TWO PRINTED ANOMALIES ARE PRESERVED. (1) The limbs run "a)" then "c)" - there is no limb b) anywhere on the question, and no text is missing between them; the printed lettering simply skips. (2) The third paint type is enumerated "(Ill)" - a capital I followed by two lower-case L characters - where "(iii)" is meant. The April 2024 sitting prints the same "(Ill)" corruption and the September 2024 sitting prints a correct "(iii)". Also prints "Anti fouling" as two words, and a space before the semicolon in "paint ;". |
+| QP2301-Q3 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. The question prints as continuous prose with no lettered limbs, but sets three distinct tasks. Prints "related with each case" where "related to" is meant. Reproduced as printed. |
+| QP2301-Q4 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. Prints "How does It solve" with a mid-sentence capital I on "It". Limb b) ends in a full stop where a question mark is meant, and limb iii) opens lower-case where i) and ii) open upper-case. Reproduced as printed. |
+| QP2301-Q5 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. Prints "this Convention" with a capital C in limb a) and "this convention" lower-case in the sentence that follows. Reproduced as printed. |
+| QP2301-Q6 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. Prints an opening quotation mark immediately after "a)" with no space, and a hyphen against "-Discuss" where a dash and space are meant. Prints "Can this damage be Included" with a mid-sentence capital I on "Included". Reproduced as printed. |
+| QP2301-Q7 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. The limbs are lettered "A.", "B.", "C." where every other multi-limb question on this paper uses lower-case "a)", "b)". Limbs A and B end in semicolons. Reproduced as printed. |
+| QP2301-Q8 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. The question number is printed "Q8)." - a closing parenthesis where Q1 to Q7 print "Qn." - and its limbs are lettered "A)." and "B).". Limb A ends in a full stop where a question mark is meant and limb B ends with no terminator at all. Reproduced as printed. |
+| QP2301-Q9 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. The question number is printed as a bare "9." with no "Q" prefix, where Q1 to Q7 print "Qn." and Q8 prints "Q8).". The question prints as continuous prose with no lettered limbs but sets two tasks, and ends with no terminator. Reproduced as printed. |
 | QP2401-Q5 | Prints a double space before the (8) closing limb (a). Whitespace is normalised to a single space in text_verbatim; no word is added or removed. |
 | QP2402-Q2 | The printed (16) is a total for the whole question; the four defined terms are printed as an unmarked list, so sub-part marks are null. |
 | QP2402-Q3 | The printed (16) is a total; the three limbs carry no separate allocation. Prints "energy efficiency of ship :(i)" with a space before the colon and no space after it, and spells "Aftbody" as one word where the November sitting prints "Aft body". Reproduced as printed. |

@@ -1980,3 +1980,114 @@ STATUS:    OPEN
 SEEN:      1 (worst instance of a gradient visible since QP2406)
 OWNER:     NONE
 REVISIT:   next derived-layer maintenance session.
+
+---
+
+## L-B4-1 — Before building a "missing" package, search the WHOLE machine, including ignored trees
+
+The True Source backlog ranked **Casualty Investigation Core** as the number-one micro-package to
+build, on the evidence that `miw-true-source/casualty/` does not contain it — which is true, that
+package is SOLAS Chapter V, COLREGs and SAR.
+
+It exists anyway. `Knowledge Central/casualty-investigation/` is a complete, validated package —
+FOUNDER_REVIEW, 15 sources, 22 definitions, 28/28 Part II standards, 40 relationships, 106 verified
+citations with 0 failures, and three acceptance tests, one written specifically against the SOLAS
+I/21 gap the backlog asks for. It is **git-ignored**, so every repository-wide triage is blind to it.
+
+The cost of the miss is not wasted construction — nothing was built — but a misordered queue. A
+migration costing nothing sat below two genuine builds for a whole planning cycle.
+
+**Do:** when a triage concludes a package is missing, check the ignored trees before ranking it.
+`git status` and any tool built on it cannot see a git-ignored corpus, and this project deliberately
+git-ignores its largest one.
+
+EVIDENCE:  QP2301 laptop review, 2026-08-14. Second instance of "built but never applied" after the
+           four-of-five finding on 2026-08-13.
+CATEGORY:  CORPUS
+STATUS:    PROVEN
+SEEN:      2
+OWNER:     NONE
+REVISIT:   next True Source planning session.
+
+---
+
+## L-B4-2 — A corpus register that carries identity but no text can neither confirm nor catch
+
+`salvage/SALVAGE_INSTRUMENT_REGISTER.md` records SCOPIC as *"1999; SCOPIC 2020 current series"* — a
+correct identity, with no effective date and no clause text. Consulting it left three assertions in
+QP2301-Q4 neither confirmed nor refuted.
+
+Reading the published clause itself settled all of them at once. It **confirmed** the 25 per cent
+tariff bonus, the two-working-day security limit, the 25 per cent Article 13 discount and the
+1 January 2020 effective date (the clause prints its own revision list, ending `1.1.2020`). It also
+**falsified** a defined term the register could never have caught: the answer said *"Shipowner's
+Casualty Representative"*; clause 12 defines the *"**Special** Casualty Representative"*, and says the
+owners *"may at their sole option appoint"* one rather than one attending automatically.
+
+This is the same shape as the `MARPOL Annex VI citation-ready but not quotation-ready` position, and
+it has the same consequence: **an identity-level corpus is a routing table, not evidence.** It tells
+you which document to open. It is not a substitute for opening it.
+
+**Do:** when a corpus entry carries identity without text and the answer asserts a number, a date or
+a defined term, read the instrument. Record which of the two the claim rests on.
+
+EVIDENCE:  QP2301-Q4, 2026-08-14.
+CATEGORY:  SOURCE_AUTHORITY
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     NONE
+REVISIT:   —
+
+---
+
+## L-B4-3 — A donor can be RIGHT and the re-authored answer WRONG; sweep the donor, not just the corpus
+
+QP2301-Q4 named the SCOPIC on-scene appointee incorrectly in five places. The instinct is to treat
+that as inherited and sweep the corpus for propagation. The sweep found the wrong expansion in
+**QP2301 alone** — and found the donor, `QP2506`, carrying the term **correctly**.
+
+So the defect was introduced *during re-authoring from a correct source*. Nothing had propagated and
+no other paper needed touching, but that conclusion is only available because the donor was checked
+as a **control** rather than assumed to be the origin.
+
+The corpus-wide sweep habit (L-B1-1) is right and stays. This adds one step to it: a sweep that finds
+a defect in exactly one paper has not finished until the donor has been read. Either the donor is
+wrong too, and the class is real, or the donor is right, and the finding is that re-authoring
+degraded a correct source — which is a different defect with a different fix.
+
+**Do:** in any single-paper defect sweep, check the donor explicitly and record which way it came out.
+
+EVIDENCE:  QP2301-Q4 versus QP2506-Q4, 2026-08-14.
+CATEGORY:  DONOR_REUSE
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     NONE
+REVISIT:   —
+
+---
+
+## L-B4-4 — The delivery page has now been missed SEVEN times; the guard is holding, the cause is not fixed
+
+`solvedQP/QP2301.html` was generated **untracked** and would have been missed by `git add -u`, for the
+seventh consecutive paper. The Part-15/24 gate caught it again and it was staged by explicit path.
+
+**And on this paper it was four files, not one.** QP2301 is the first paper of a new examination
+*year*, so the build also created `meoclass1/pastpapers/questions-2023.html`,
+`meoclass1/pastpapers/topics-2023.html` and `solvedQP/questions-2023.html`, all untracked. A reviewer
+answering the question the gate literally asks - *is the delivery page staged?* - would have staged
+one of four and shipped a year sheet that 404s from its own navigation. **The gate as written is
+paper-shaped; the failure is build-shaped.**
+
+The gate works, and there is no argument for removing it. But seven consecutive fires is a statement
+about the build, not about the reviewers: the toolchain writes a *new* file per paper and nothing in
+the build stages it. Every paper since QP2502 has depended on a human remembering.
+
+**Do:** keep the gate. **Consider:** having `build_paper.py --deliver` report the paths it created so
+staging can be derived from the build rather than from memory — the same shape as L-B1-3.
+
+EVIDENCE:  QP2502, QP2503, QP2504, QP2507, QP2406, QP2408, QP2301.
+CATEGORY:  GIT
+STATUS:    OPEN
+SEEN:      7
+OWNER:     NONE
+REVISIT:   next toolchain maintenance session.

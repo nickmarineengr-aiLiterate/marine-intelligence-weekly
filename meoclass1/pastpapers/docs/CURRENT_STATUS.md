@@ -19,8 +19,13 @@ See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for
 > silently reverted `DESKTOP_QP_ALLOCATION_2023.md`, `DESKTOP_QP_HANDOVER_BATCH3.md` and 15 lines of
 > this file. Both desktop branches are **retained** as provenance evidence.
 >
-> **Product: 28 available papers · 252 published questions · 252 in the corpus.**
+> **Product: 29 available papers · 261 published questions · 261 in the corpus.**
 > **THE CORPUS HAS NO UNSOLVED QUESTION LEFT.**
+>
+> **BATCH 4 IS OPEN AND QP2301 IS ITS FIRST PAPER — laptop-reviewed 2026-08-14, awaiting the
+> Founder's publication authorisation (§7l).** It is the **first 2023 paper MIW has solved** and the
+> first paper of any year to go through the Search + Updates architecture as a new arrival. The
+> **2023 year surface now exists** across the product and populated itself from the manifest.
 >
 > **THE 2024 EXAMINATION YEAR IS COMPLETE**, and so is 2025, and so is every 2026 sitting MIW
 > holds. All eleven 2024 sittings are solved and live. May is recorded as `NO SITTING` on evidence
@@ -374,6 +379,95 @@ Fixed in `caf5020`.
   cannot point forward (819 tokens, zero forward) — and is now inverted into the queue above.
 - **`validate_antipatterns.py` does not exist and never had a hook entry.** No `hooks` key in
   any settings file, no such file on disk. The entry was stale; struck rather than carried.
+
+---
+
+## 7l. QP2301 (January 2023) — laptop-reviewed — **BATCH 4 OPENS · FIRST 2023 PAPER**
+
+Desktop branch `pastpapers/qp2301-founder-review` @ `6e811d7`, based on `57b9342`, pushed
+2026-08-13 21:05 IST. Twelve files, all paper-owned, no global artefacts. Integrated onto current
+`main` (`dcd7826`) by path extraction on `integration/qp2301-laptop-review`; the desktop branch was
+not merged and is **retained as provenance**.
+
+**Path extraction was load-bearing, not ceremonial.** The branch base `57b9342` is the QP2407
+integration commit, which predates the QP2408 publication, the DGMA naming sweep **and the entire
+Search + Updates architecture at `161c2b1`**. A merge would have reverted live production
+infrastructure.
+
+**Product: 29 available papers · 261 published questions.** January 2023 transitioned to Available
+automatically and the **2023 year sheet, topic sheet and nav entry were generated, not authored** —
+the first time a whole new examination *year* has been absorbed by the derived layer.
+
+### The session brief was wrong on two premises, and both were checked rather than assumed
+
+1. **"All nine questions currently have zero P1" is false.** The paper carries **100** P1 claims as
+   received, 2 to 17 per question. The zero figure was true of the *intake* spec before the answer
+   layer existed. **No P1 was manufactured to improve the metric** — exactly one claim was promoted,
+   Q7's, and only because MSC.255(84) was read at source. Total is now 101.
+2. **The Casualty Investigation Core package does not need building — it already exists.** A
+   complete, validated package sits at `Knowledge Central/casualty-investigation/`:
+   FOUNDER_REVIEW, 15 sources, 22 definitions, 28/28 Part II standards, 106 verified citations,
+   0 failures, and three acceptance tests including one written against the SOLAS I/21 gap. It is
+   git-ignored, which is why a repository-wide triage did not see it. **Reclassify from build to
+   migration** — it is not in `F:\miw-true-source`, so no consumer seam can address it.
+
+### Three corrections, all at the canonical spec
+
+**Q7 (MAJOR)** — *"serious marine casualty"* was presented as a Code-defined term. MSC.255(84)
+chapter 2 defines twenty-two terms, 2.1 to 2.22, and it is not among them; the phrase's only
+appearance in the resolution is a preambular recital about the ILO MLC. Re-attributed to the
+harmonized reporting procedures. This landed on the one limb where definitional precision is the
+mark scheme.
+
+**Q4 (MINOR ×2)** — the SCOPIC on-scene appointee was named *"Shipowner's* Casualty Representative"
+in five places and described as attending automatically. Clause 12 defines the ***Special*** Casualty
+Representative, whom the owners *"may at their sole option appoint"*. **A regression, not an
+inheritance**: a corpus-wide sweep found the wrong expansion in QP2301 alone — the donor QP2506 has
+it right — so nothing propagated.
+
+**Q6 (MINOR)** — Rule D carried only *"without prejudice to any remedies"*; the Rule says *"remedies
+**or defences** … open **against or to** that party"*. The defences half is the residue the New Jason
+Clause closes, the same point QP2407-Q8 turned on.
+
+**The two named corpus warnings did not bite.** `TSCR-6`'s defective `TRAP-RULE-D-FAULT` gloss was
+not followed — Q6 independently reached the same conclusion QP2407 did, which should move **TSCR-6
+from raised to confirmed**. `TSCR-5` did not arise: no object ID was consumed. **No new TSCR raised.**
+
+### Temporal result — the cleanest paper in the corpus on these measures
+
+Every donor is **later** than this sitting, by 15 to 42 months, so the usual protection that an
+earlier donor cannot drag later law backwards does not exist anywhere on the paper. Against that:
+**0 future-contamination hits** across 13 instrument classes in candidate-facing fields, and
+**0 Rule 4 breaches** in `understand_first` on all nine questions.
+
+### Validation
+
+`validate_spec` **0 errors / 0 blocking**, 9 warnings — all the Founder-deferred 450–650 word band.
+`run_toolchain` and `--self-test` both **ALL STAGES PASS**. Double build **byte-identical across 145
+generated artefacts**. Search tests **49/49**, coverage PASS, recurrence 0 failures, corpus consumer
+**60/60**, security **121/121** unchanged. New UI fixture: **60 passed / 0 failed**, its regulation
+probe deliberately `MEPC.331(76)` because cybutryne entering force on 1 January 2023 is this paper's
+sharpest live edge.
+
+**Search / Updates regression — QP2301 was its first real production test, and it passed.** Indexed
+automatically; deep links resolve to `#q1`…`#q7`; the alias-only term `vsmc`, which is never rendered
+on any card, retrieves Q7; the negative control returns a proper no-match citing 261 questions across
+29 sittings. Two ledger rows generated: `added` and an `enriched` note naming Q4, Q6 and Q7. **Zero
+host recurrence tokens anywhere in any built artefact, attributes included.**
+
+**`solvedQP/QP2301.html` was untracked for the SEVENTH consecutive paper** and was staged by explicit
+path. `git add -u` would again have shipped a manifest entry pointing at a page that does not exist.
+
+### Reported, not fixed
+
+`PASTPAPER_PRODUCTION_PROTOCOL.md` §2.1 cites `QP2506-Q1` as its worked precedent for an answer with
+no regulatory source, calling it a question where *"no instrument prescribes a propeller type"* whose
+answer *"quotes no efficiency percentage anywhere"*. `QP2506-Q1` is the **rudder-device** question and
+it quotes four percentages. The rule is sound; only its illustration is false. A protocol file is
+governed, so this is raised rather than edited.
+
+Full record: [`QP2301_TEMPORAL_AND_DONOR_ANCHOR.md`](QP2301_TEMPORAL_AND_DONOR_ANCHOR.md) §9 and
+[`QP2301_TRUE_SOURCE_GAPS.md`](QP2301_TRUE_SOURCE_GAPS.md).
 
 ---
 

@@ -44,6 +44,36 @@ function ok(name, cond, extra) {
 // Alias probes deliberately use words that appear ONLY in search metadata and
 // are never rendered on the card, which is the behaviour being guarded.
 const FIXTURES = {
+  QP2301: {
+    probes: [
+      ['grim vane', 'QP2301-Q1'],
+      ['cybutryne', 'QP2301-Q2'],
+      ['inchmaree', 'QP2301-Q3'],
+      ['scopic', 'QP2301-Q4'],
+      ['privity', 'QP2301-Q5'],
+      ['rule vii', 'QP2301-Q6'],
+      ['near miss', 'QP2301-Q7'],
+      ['manila amendments', 'QP2301-Q8'],
+      ['fonar', 'QP2301-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['costa bulb', 'QP2301-Q1', 'Q1 (the other trade name for a rudder bulb)'],
+      ['self polishing copolymer', 'QP2301-Q2',
+       'Q2 (SPC spelled out, where the card prints the hyphenated form)'],
+      ['coc cancellation', 'QP2301-Q4', 'Q4 (limb b(ii), in the words a candidate would search)'],
+      ['vsmc', 'QP2301-Q7', 'Q7 (the abbreviation for very serious marine casualty)'],
+      ['fuel oil non availability', 'QP2301-Q9', 'Q9 (FONAR unabbreviated and unpunctuated)'],
+    ],
+    // MEPC.331(76) added cybutryne to AFS Annex 1 and entered into force on
+    // 1 JANUARY 2023 -- the first day of this paper's own sitting month. It is
+    // used here rather than a settled convention regulation because it is this
+    // paper's sharpest live temporal edge: the controls are days old at the
+    // sitting, and the answer's whole framing depends on saying so. If this
+    // probe stops resolving to Q2, the cybutryne anchor has been moved or the
+    // resolution has been silently replaced by a later amendment.
+    regulation: ['mepc.331(76)', 'QP2301-Q2'],
+  },
   QP2501: {
     probes: [
       ['wreck hazard', 'QP2501-Q1'],
