@@ -870,6 +870,45 @@ const FIXTURES = {
     // no such competition.
     narrow: ['ready for recycling certificate', 'QP2410-Q4'],
   },
+
+  QP2406: {
+    probes: [
+      ['harmonization', 'QP2406-Q1'],
+      ['dualist', 'QP2406-Q2'],
+      ['more detailed inspection', 'QP2406-Q3'],
+      ['cold corrosion', 'QP2406-Q4'],
+      ['functional requirements', 'QP2406-Q5'],
+      ['dmlc', 'QP2406-Q6'],
+      ['pooling', 'QP2406-Q7'],
+      ['contestation', 'QP2406-Q8'],
+      ['ftir', 'QP2406-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['period of grace', 'QP2406-Q1', 'Q1 (the extension a just-expired certificate attracts)'],
+      ['stare decisis', 'QP2406-Q2', 'Q2 (the formal name for the doctrine of precedent)'],
+      ['quick closing valve', 'QP2406-Q3', 'Q3 (one of the detainable engine-room items)'],
+      ['clover leafing', 'QP2406-Q4', 'Q4 (the wear pattern cold corrosion produces)'],
+      ['pay to be paid', 'QP2406-Q7', 'Q7 (the mutual-insurance rule behind the claims limb)'],
+      ['ferrography', 'QP2406-Q9', 'Q9 (the physical confirmation the answer directs you to)'],
+    ],
+    // June 2024 is the EARLIEST sitting in the set, so every whole-question donor
+    // is LATER and could only import law backwards. Q1 is anchored on regulation
+    // I/14, harmonized since the 1988 Protocol took effect in 2000 and unamended
+    // across the boundary -- so the answer does not depend on the SOLAS
+    // consolidated edition the corpus holds, which took effect the month AFTER
+    // this sitting. If this probe ever gives way to an edition-dated citation,
+    // that deliberate insulation has been lost.
+    regulation: ['regulation i/14', 'QP2406-Q1'],
+    // Leak probe. 2021/JULY/Q2 is a host annotation printed against Q1 on THIS
+    // source copy -- this paper carries the densest host recurrence table in the
+    // set, Q8 alone printing thirteen sittings. None of it may reach the bytes.
+    recurrence: ['2021/july/q2', 'QP2406-Q1'],
+    // Must resolve to exactly ONE card. 'general average' alone is ambiguous --
+    // Q7 carries it as a P&I cover and Q8 is the general average question --
+    // and 'artificial' is the printed limb that separates them.
+    narrow: ['artificial general average', 'QP2406-Q8'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';

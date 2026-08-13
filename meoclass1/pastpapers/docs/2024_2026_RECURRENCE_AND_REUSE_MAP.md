@@ -9,10 +9,10 @@ Scope honesty: every count below is scoped to the sittings MIW has actually tran
 
 | Year | Papers | Questions | Answers built |
 |---|---|---|---|
-| 2024 | 11 | 99 | 72 |
+| 2024 | 11 | 99 | 81 |
 | 2025 | 11 | 99 | 99 |
 | 2026 | 6 | 54 | 54 |
-| **Total** | **28** | **252** | **225** |
+| **Total** | **28** | **252** | **234** |
 
 Every paper sets nine questions and every question is recorded at 16 marks under printed instruction 2. **May is absent from the available MIW source set in all three years.**
 
@@ -22,9 +22,9 @@ Computed in `recurrence_model.py` from `(year, month)` and nothing else. The sou
 
 | Year | First in set | Repeated, same wording | Repeated, reworded | Once in this set |
 |---|---|---|---|---|
-| 2024 | 30 | 7 | 4 | 58 |
-| 2025 | 24 | 33 | 12 | 30 |
-| 2026 | 2 | 21 | 14 | 17 |
+| 2024 | 32 | 7 | 5 | 55 |
+| 2025 | 23 | 33 | 13 | 30 |
+| 2026 | 2 | 20 | 15 | 17 |
 
 An earliest year cannot contain a "repeated, reworded" question that looks backwards, so 2024's repeats are all internal to itself.
 
@@ -34,10 +34,10 @@ A family is a connected component over two undirected edge kinds: an adjudicated
 
 | | |
 |---|---|
-| Families total | 161 |
-| Multi-sitting families | **56** |
+| Families total | 159 |
+| Multi-sitting families | **57** |
 | Spanning more than one year | 41 |
-| Spanning all 3 years | **5** |
+| Spanning all 3 years | **6** |
 
 ### Multi-sitting families, largest first
 
@@ -45,12 +45,12 @@ A family is a connected component over two undirected edge kinds: an adjudicated
 |---|---|---|---|
 | 7 | 2024&ndash;2026 | Human Element in STCW and IMO Fatigue Guidance | April 2024 Q7 &rarr; February 2025 Q2 &rarr; June 2025 Q8 &rarr; August 2025 Q4 &rarr; January 2026 Q9 &rarr; February 2026 Q4 &rarr; April 2026 Q9 |
 | 5 | 2024&ndash;2026 | General Average - Essential Features and a Refloating Scenario | April 2024 Q6 &rarr; October 2024 Q9 &rarr; June 2025 Q6 &rarr; August 2025 Q6 &rarr; February 2026 Q6 |
+| 5 | 2024&ndash;2026 | Salvage Law and General Average | June 2024 Q8 &rarr; September 2025 Q3 &rarr; January 2026 Q3 &rarr; April 2026 Q3 &rarr; July 2026 Q5 |
 | 5 | 2025&ndash;2026 | Entry into Force of an IMO Convention | June 2025 Q2 &rarr; August 2025 Q7 &rarr; November 2025 Q9 &rarr; February 2026 Q7 &rarr; March 2026 Q1 |
 | 5 | 2025&ndash;2026 | WHO, Disease Vectors and Ship Health Certificates | November 2025 Q3 &rarr; December 2025 Q1 &rarr; January 2026 Q6 &rarr; March 2026 Q4 &rarr; April 2026 Q6 |
 | 4 | 2024&ndash;2025 | IMO Instruments Implementation Code - Objectives and Flag State Performance | January 2024 Q9 &rarr; March 2024 Q7 &rarr; December 2024 Q9 &rarr; October 2025 Q7 |
 | 4 | 2024&ndash;2026 | Unseaworthy and Unsafe Ships under the Merchant Shipping Act, 1958 | October 2024 Q1 &rarr; June 2025 Q9 &rarr; August 2025 Q5 &rarr; February 2026 Q5 |
 | 4 | 2025&ndash;2026 | Formal Safety Assessment for Lithium Batteries in RORO Carriage | August 2025 Q3 &rarr; February 2026 Q3 &rarr; March 2026 Q8 &rarr; April 2026 Q2 |
-| 4 | 2025&ndash;2026 | Particular and General Average, and Average Adjusters | September 2025 Q3 &rarr; January 2026 Q3 &rarr; April 2026 Q3 &rarr; July 2026 Q5 |
 | 3 | 2024&ndash;2025 | CII Rating, AER and EEOI | January 2024 Q3 &rarr; October 2024 Q8 &rarr; April 2025 Q6 |
 | 3 | 2024&ndash;2025 | IMO Structure and the Instrument Hierarchy | February 2024 Q1 &rarr; July 2024 Q3 &rarr; February 2025 Q1 |
 | 3 | 2024&ndash;2025 | Bunker Convention 2001 - Definitions and Comparison with CLC 92 | February 2024 Q2 &rarr; September 2024 Q6 &rarr; September 2025 Q7 |
@@ -78,6 +78,7 @@ A family is a connected component over two undirected edge kinds: an adjudicated
 | 2 | 2024&ndash;2025 | MLC 2006 - Key Provisions and Enforcement Challenges | March 2024 Q9 &rarr; October 2025 Q9 |
 | 2 | 2024 | Ammonia as a Marine Fuel | April 2024 Q2 &rarr; November 2024 Q2 |
 | 2 | 2024 | Anti-Fouling Convention and Alternatives to Tin-Based Paints | April 2024 Q5 &rarr; September 2024 Q8 |
+| 2 | 2024 | Lubricating Oil Condition Analysis Techniques | June 2024 Q9 &rarr; November 2024 Q9 |
 | 2 | 2024&ndash;2026 | Safety Management System and the Evolution of the ISM Code | August 2024 Q9 &rarr; June 2026 Q5 |
 | 2 | 2024&ndash;2025 | The FAL Convention - Objectives, Recent Amendments and Impact | October 2024 Q5 &rarr; November 2025 Q7 |
 | 2 | 2025 | Wreck Removal Convention - Definition, Categories and Liability | January 2025 Q1 &rarr; July 2025 Q1 |
@@ -108,13 +109,13 @@ Every pair of questions inside one family, counted by the two sittings it joins.
 
 | Year pair | EXACT | NEAR | Total edges |
 |---|---|---|---|
-| 2024 internal | 8 | 4 | 12 |
-| 2024 &harr; 2025 | 27 | 12 | 39 |
-| 2024 &harr; 2026 | 8 | 4 | 12 |
+| 2024 internal | 8 | 5 | 13 |
+| 2024 &harr; 2025 | 27 | 13 | 40 |
+| 2024 &harr; 2026 | 8 | 7 | 15 |
 | 2025 internal | 17 | 7 | 24 |
 | 2025 &harr; 2026 | 23 | 23 | 46 |
 | 2026 internal | 5 | 11 | 16 |
-| **All pairs** | **88** | **61** | **149** |
+| **All pairs** | **88** | **66** | **154** |
 
 ## 5. REUSE MAP
 
@@ -124,8 +125,8 @@ Every pair of questions inside one family, counted by the two sittings it joins.
 |---|---|---|
 | A | 0 | Carried from the adjudicated intake field. An existing canonical object fully covers the demand. |
 | B | 0 | Carried from the adjudicated intake field. An existing canonical object partly covers the demand. |
-| C | 24 | Derived: no family member has a built answer. New research. |
-| D | **3** | Derived: the family contains at least one question whose answer is built and verified. |
+| C | 16 | Derived: no family member has a built answer. New research. |
+| D | **2** | Derived: the family contains at least one question whose answer is built and verified. |
 
 **Why A and B are still zero, and why that is a finding rather than a gap.** Both tiers claim that an existing canonical object covers some or all of the examiner demand. That claim cannot be made without reading the object, and this session authors and verifies nothing. A keyword sweep of the Oral corpus was run for the 2025 intake and deliberately **not** used to assign B: no threshold produced a natural break, so any cut point would be arbitrary, and a manufactured B count is worse than none because it would be planned against. That sweep output survives per question in `reuse_evidence` as named candidate files to read, explicitly labelled discovery. Promotion to A or B belongs to the solving session, which will have read them.
 
@@ -135,10 +136,9 @@ Every unsolved question whose CURRENT readiness differs from the tier frozen at 
 
 | Question | Sitting | Stored | Derived | Donor that arrived |
 |---|---|---|---|---|
-| QP2406-Q7 | June 2024 Q7 | C | **D** | QP2502-Q7, QP2504-Q8 |
 | QP2407-Q3 | July 2024 Q3 | C | **D** | QP2402-Q1, QP2502-Q1 |
 
-Stored Tier D over the unsolved set counts **1**; derived counts **3**. Planning off the stored field would have under-counted ready work by 2 question(s) and would have sent a solving session to research answers that already have a verified donor.
+Stored Tier D over the unsolved set counts **1**; derived counts **2**. Planning off the stored field would have under-counted ready work by 1 question(s) and would have sent a solving session to research answers that already have a verified donor.
 
 ### Tier D in full &mdash; every unsolved question with a verified donor
 
@@ -148,7 +148,6 @@ Direction matters and is easy to get backwards: **the unsolved sitting is the ea
 
 | Question | Sitting | Preferred | Wording | Other donors | Temporal |
 |---|---|---|---|---|---|
-| QP2406-Q7 | June 2024 Q7 | QP2504-Q8 | identical | QP2502-Q7 | stable |
 | QP2407-Q3 | July 2024 Q3 | QP2402-Q1 | identical | QP2502-Q1 | stable |
 | QP2408-Q9 | August 2024 Q9 | QP2606-Q5 | identical | &mdash; | stable |
 
@@ -162,8 +161,8 @@ An earlier answer must **not** be corrected to current law. It answers the exami
 
 | Year | Stable | Review required | HIGH | MEDIUM |
 |---|---|---|---|---|
-| 2024 | 24 | **3** | 2 | 1 |
-| **Total** | 24 | **3** | 2 | 1 |
+| 2024 | 15 | **3** | 2 | 1 |
+| **Total** | 15 | **3** | 2 | 1 |
 
 | Risk class | Count |
 |---|---|
@@ -186,7 +185,6 @@ Not calendar order. Calendar order would research the same family several times 
 
 | Paper | Sitting | Tier D | Family reach | Temporal flags |
 |---|---|---|---|---|
-| QP2406 | June 2024 | **1 / 9** | 0 | 0 |
 | QP2407 | July 2024 | **1 / 9** | 0 | 1 |
 | QP2408 | August 2024 | **1 / 9** | 0 | 2 |
 
@@ -199,11 +197,11 @@ Evidence for a future Written study product. **No prediction of future examinati
 | Sittings | Families |
 |---|---|
 | 7 | 1 |
-| 5 | 3 |
-| 4 | 4 |
+| 5 | 4 |
+| 4 | 3 |
 | 3 | 13 |
-| 2 | 35 |
-| 1 | 105 |
+| 2 | 36 |
+| 1 | 102 |
 
 ### Families appearing in every available year
 
@@ -211,6 +209,7 @@ Evidence for a future Written study product. **No prediction of future examinati
 |---|---|
 | Human Element in STCW and IMO Fatigue Guidance | April 2024 Q7, February 2025 Q2, June 2025 Q8, August 2025 Q4, January 2026 Q9, February 2026 Q4, April 2026 Q9 |
 | General Average - Essential Features and a Refloating Scenario | April 2024 Q6, October 2024 Q9, June 2025 Q6, August 2025 Q6, February 2026 Q6 |
+| Salvage Law and General Average | June 2024 Q8, September 2025 Q3, January 2026 Q3, April 2026 Q3, July 2026 Q5 |
 | Unseaworthy and Unsafe Ships under the Merchant Shipping Act, 1958 | October 2024 Q1, June 2025 Q9, August 2025 Q5, February 2026 Q5 |
 | The Hong Kong Convention and India's Ship Recycling Industry | October 2024 Q4, November 2025 Q8, March 2026 Q9 |
 | Classification Societies in Rule Formation, and Survey Types | December 2024 Q4, September 2025 Q9, June 2026 Q8 |
@@ -219,9 +218,9 @@ Evidence for a future Written study product. **No prediction of future examinati
 
 | Category | Questions | Distinct families |
 |---|---|---|
-| Statutory Framework & Class | 65 | 43 |
+| Statutory Framework & Class | 65 | 42 |
 | Human Element & Management | 50 | 32 |
-| Marine Insurance & Commercial Law | 49 | 31 |
+| Marine Insurance & Commercial Law | 49 | 30 |
 | Alternative Fuels & Decarbonisation | 37 | 23 |
 | Pollution Prevention & Response | 25 | 17 |
 | Indian Maritime Legislation | 16 | 9 |

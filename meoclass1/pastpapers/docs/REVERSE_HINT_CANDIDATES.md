@@ -23,8 +23,8 @@ Every token is accounted for. A token that cannot be resolved is **counted here,
 | Names a sitting, not a question | 225 | bare-month form such as `2018/APR` |
 | Outside the transcribed corpus | 199 | resolves to a sitting MIW does not hold |
 | Points at itself | 251 | the host lists the current sitting in its own table |
-| Already adjudicated by MIW | 123 | the pair is a recurrence family already |
-| **Surfaced below** | **5** | **host-linked, MIW has not ruled** |
+| Already adjudicated by MIW | 125 | the pair is a recurrence family already |
+| **Surfaced below** | **3** | **host-linked, MIW has not ruled** |
 
 ## The queue
 
@@ -32,15 +32,13 @@ Every token is accounted for. A token that cannot be resolved is **counted here,
 
 | Target | Sitting | Target solved | Named by | Named-by built | MIW adjudicated |
 |---|---|---|---|---|---|
-| `QP2406-Q8` | June 2024 Q8 | **no** | `QP2601-Q3`, `QP2604-Q3` | `QP2601-Q3`, `QP2604-Q3` | **no** |
 | `QP2408-Q3` | August 2024 Q3 | **no** | `QP2506-Q7`, `QP2601-Q8`, `QP2604-Q8` | `QP2506-Q7`, `QP2601-Q8`, `QP2604-Q8` | **no** |
 
 ### Highest value to adjudicate first
 
-**2** of the 2 rows pair an **unsolved** target with an **already-built** counterpart. Those are the ones where adjudication could convert research into reuse, and they are the exact shape of the QP2509-Q6 miss.
+**1** of the 1 rows pair an **unsolved** target with an **already-built** counterpart. Those are the ones where adjudication could convert research into reuse, and they are the exact shape of the QP2509-Q6 miss.
 
 | Question | Sitting | Paper | Built counterpart(s) |
 |---|---|---|---|
-| `QP2406-Q8` | June 2024 Q8 | QP2406 | `QP2601-Q3`, `QP2604-Q3` |
 | `QP2408-Q3` | August 2024 Q3 | QP2408 | `QP2506-Q7`, `QP2601-Q8`, `QP2604-Q8` |
 
