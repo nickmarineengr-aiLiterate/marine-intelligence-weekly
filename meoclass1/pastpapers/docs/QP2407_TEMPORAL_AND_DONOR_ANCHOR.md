@@ -216,9 +216,57 @@ post-sitting import and must be justified from the July 2024 position or dropped
 | `QP2407-Q4` revised GHG strategy | `QP2409-Q3` at 0.56 — topical only | **rejected**; different examiner task. Fresh research at P1 from MEPC.377(80) |
 | `QP2407-Q5` ship ID, CSR, ESP | nothing above threshold | fresh research at P1 from SOLAS 2024 |
 | `QP2407-Q6` MLC flag/port State | nothing above threshold | fresh research at P1 from MLC 2006 |
-| `QP2407-Q7` propeller curves and margins | `QP2410-Q3` at 0.68 — **related, not the same task** | **rejected**; QP2410-Q3 is hull-form and appendage design. Limb-level reading only, `reused_from` deliberately null |
+| `QP2407-Q7` propeller curves and margins | `QP2410-Q3` at 0.68 — related, not the same task; **and see §5.5** | **rejected**; QP2410-Q3 is hull-form and appendage design. But it is **not** the nearest thing — see §5.5. `reused_from` remains deliberately null |
 | `QP2407-Q8` New Jason / 3-4ths collision clause | nothing above threshold | fresh research |
 | `QP2407-Q9` NOx Tier II/III, emulsion, SCR, NOx file | nothing above threshold | fresh research at P1 from Annex VI reg 13 |
+
+### 5.5 CORRECTIONS MADE DURING AUTHORING — this anchor was amended, not merely applied
+
+Three findings arose while the nine answers were authored. Each corrects or qualifies something written above
+before the answers existed, and each is recorded here rather than left only in a question record.
+
+**(1) Q7 — a nearer relation than the one at §5.4, and the method finding behind it.**
+`QP2511-Q2` (November 2025) — *"Referring to propeller Curve, briefly discuss: a) What is torque rich
+condition? …"* — is **closer to `QP2407-Q7` on the underlying material than `QP2410-Q3` is**. Its first three
+sections cover the propeller curve, the load diagram, and the derivation and purpose of the light running
+margin: the same material as Q7 limb A and part of limb B.
+
+It was **not surfaced by the stem sweep**, and the reason generalises: the two stems share almost no word
+tokens — *"torque rich"* against *"safety margins"* and *"maximum rated output"*. **A sweep on token sequence
+ratio and Jaccard overlap cannot see a relation expressed in different vocabulary.** It was found by a
+targeted topical search of every built stem for propeller-curve terms, run before authoring.
+
+> **A lexical sweep is not a topical sweep, and a nil from the first does not license skipping the second.**
+> A targeted topical search was consequently run for **Q2** and **Q8** as well. Q2 returned nothing; **Q8
+> returned the whole general average family**, recorded at limb level in its own record.
+
+`QP2511-Q2` is adjudicated at **limb level** and is **not** recorded as `reused_from`: two thirds of it
+answers a question this paper does not ask, and Q7 limb B is not answered there at all. Its direction is
+**backward** — sixteen months after this sitting — and the backward check was run. Nothing regulatory was
+taken. `QP2410-Q3` remains rejected on its own terms.
+
+**(2) Q7 — the §6 prohibition on margin figures is departed from, deliberately and openly.**
+§6 below directs that **no margin figure** be quoted on Q7. That direction was written before the donor search
+surfaced `QP2511-Q2`, and it treated the margins as unverifiable quantities. They are not invented quantities:
+they are **attributable engine-builder project guidance already published in the MIW built set at house
+standard**, in `QP2511-Q2`, with that attribution. Since the printed stem expressly says *"enumerate the
+safety margins"*, omitting them would have produced a **wrong** answer rather than a cautious one.
+
+The figures are therefore given, **attributed, qualified as typical ranges rather than requirements, and
+flagged `C_ACCEPTED_LIMITATION`**. The departure is declared in four places — the answer's own uncertainty
+section, the question's `unresolved` list, `verification/QP2407/Q7.md` §5.1, and here. **Founder review should
+confirm the departure is accepted.** The prohibition stands unchanged everywhere else on the paper, and Q2 —
+where nothing is held internally and the stem asks for mechanisms rather than values — applies it absolutely.
+
+**(3) Q1 — the printed anomaly at §1.3.4 of the checkpoint was mis-described.**
+The session checkpoint recorded a *"character-encoding artefact"* producing a replacement character at
+*"sustainable development's goals"*. **That is not what the source carries.** The text layer carries a normal
+right single quotation mark; the anomaly is the **placement of the possessive**, together with a **double
+space in "government of  India"**, exactly as the intake's own `subpart_marks_note` states. The intake note is
+the authority, and it was verified against `text_verbatim` this session. Whitespace only is normalised; the
+possessive is preserved as printed.
+
+---
 
 **Host recurrence annotations were not used as donors.** The printed copy carries
 `2023/SEP/Q1`, `2022/MAR/Q3`, `2022/MAR/Q1`, `2022/OCT/Q1` and `2023/SEP/Q4`. MIW holds no
@@ -244,9 +292,21 @@ Established by testing each corpus file for an extractable text layer, not by as
 | IMO / DG Shipping gender-equality instruments | **no licensed instrument text held** | **Q1** states the programme level and **asserts no resolution number** unless one is verified at source. Nothing is invented to give the answer false authority |
 
 **No unverifiable quantity is quoted anywhere on this paper** — no percentage efficiency
-gain on Q7, no wear or margin figure, no inspection-score figure, no NOx reduction
+gain on Q7, no wear figure, no inspection-score figure, no NOx reduction
 percentage. `PASTPAPER_PRODUCTION_PROTOCOL.md` §2.1 requires an unverifiable quantity to be
 omitted rather than given false precision.
+
+> **AMENDED DURING AUTHORING — the safety-margin figures on Q7 only.** The prohibition above originally
+> extended to Q7's margin figures. It is departed from **for those figures only**, because they proved to be
+> **attributable engine-builder project guidance already published in the MIW built set** (`QP2511-Q2`), and
+> because the printed stem expressly requires an *enumeration* of the margins. They are given attributed,
+> qualified as typical ranges rather than requirements, and flagged `C_ACCEPTED_LIMITATION`. See §5.5(2).
+>
+> **The prohibition stands unchanged for every other quantity on the paper.** Q2 in particular applies it
+> absolutely — no hydraulic pressure, injection pressure, filtration rating, consumption gain or minimum
+> stable load appears anywhere on that question, because nothing is held internally and the stem asks for
+> mechanisms rather than values. Q9 likewise asserts no NOx reduction percentage, and Q1 no
+> workforce-participation figure.
 
 ---
 
