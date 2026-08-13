@@ -1732,9 +1732,9 @@ SCOPE:     any Part-12 generalisation.
 
 ---
 
-## THE DELIVERY PAGE HAS NOW BEEN MISSED FIVE TIMES; THE CAUSE IS TRACKED-ONLY STAGING
+## THE DELIVERY PAGE HAS NOW BEEN MISSED SIX TIMES; THE CAUSE IS TRACKED-ONLY STAGING
 
-QP2501, QP2502, QP2503, QP2504 and now QP2507 each generated `solvedQP/<paper>.html` as an **untracked**
+QP2501, QP2502, QP2503, QP2504, QP2507 and now QP2406 each generated `solvedQP/<paper>.html` as an **untracked**
 file. It is not gitignored. It is a *new path*, and a tracked-only stage (`git add -u`) updates
 only paths git already tracks, so a staging step that works perfectly for the other twenty-odd
 regenerated artefacts silently omits the one file the paying customer actually opens. The failure
@@ -1745,7 +1745,7 @@ year page links nine anchors, and the delivery URL 404s.
 integration, stage with an explicit path add for `solvedQP/<paper>.html` - or add over the
 generated directories - never a tracked-only update alone.
 
-EVIDENCE:  four consecutive papers; caught each time only by the explicit pre-commit gate.
+EVIDENCE:  six consecutive papers; caught each time only by the explicit pre-commit gate.
 SCOPE:     every paper integration.
 
 ---
@@ -1830,3 +1830,58 @@ STATUS:    PROVEN
 SEEN:      1
 OWNER:     NONE
 REVISIT:   if a spec is ever reformatted deliberately, or the writer moves into a tool.
+
+---
+
+## L-B2-4 — When a spec DECLARES a handling rule, check the prose records obey it
+
+`QP2406.json` carries `source_copy_provenance.host_identity_record`: *"Recorded locally only,
+outside this public repository."* All nine of the paper's verification records then named the host
+by brand, in that same public repository, nine times. **No other paper in twenty-five does this.**
+
+The declaration is a structured field, so it looked authoritative and it was the thing every
+validator could see. The obligation it creates lives in free prose, which nothing checks. The two
+drifted apart inside a single object and the object still validated cleanly.
+
+**Do:** treat a declarative provenance field as a **testable assertion about the rest of the paper**,
+not as a label. Where a spec says a thing is excluded, grep the paper's own artefacts for it. This
+one is cheap and exact:
+
+```bash
+grep -rniE "<host brand>|<host app>" specs/<PAPER>.json verification/<PAPER>/ <PAPER>.html
+```
+
+The general shape is worth more than the instance: **any field of the form "X is handled by doing Y"
+is a check that nobody has written yet.**
+
+EVIDENCE:  QP2406 laptop review, 2026-08-13. Corpus sweep confirmed zero propagation.
+CATEGORY:  EVIDENCE_INTEGRITY
+STATUS:    PROVEN
+SEEN:      1
+OWNER:     NONE
+REVISIT:   if a declared-handling assertion is ever machine-checked in validate_spec.
+
+---
+
+## L-B2-5 — Derive the remote from git, not from the session brief
+
+The QP2406 brief stated that the desktop had completed QP2406, QP2407 and QP2408, and gave the
+product state as 25 papers / 225 questions / 3 unsolved papers. `git ls-remote` showed **one**
+branch: QP2406. QP2407 and QP2408 had no branch and both specs were still `Intake Complete` at 0/9.
+Had the brief been believed, this session would have gone looking for two branches that do not
+exist, or worse, reported two papers as reviewable.
+
+The brief was not careless — it said *"VERIFY ACTUAL GIT TRUTH"* and *"do not assume QP2407/QP2408
+are safe to touch."* The lesson is that the instruction worked **because it was executed first**,
+before any file was opened.
+
+**Do:** `git fetch --prune` and `git ls-remote` before reading a single artefact, and reconcile
+every count in the brief against a derivation. Report the discrepancy rather than quietly adopting
+either number.
+
+EVIDENCE:  QP2406 laptop review, 2026-08-13.
+CATEGORY:  STATE_HANDOVER
+STATUS:    PROVEN
+SEEN:      1 (QP2404's checkpoint correction is the same class seen from the other side)
+OWNER:     NONE
+REVISIT:   never - this is a standing preflight.

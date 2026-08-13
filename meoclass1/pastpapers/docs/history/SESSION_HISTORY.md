@@ -5262,3 +5262,65 @@ build; desktop and mobile reviewed at 1280 and 375 with no overflow and no conso
 **QP2406 is the last paper of Batch 2 and has not been started.** No branch exists on `origin` for
 QP2406, QP2407 or QP2408. All three remain at **1/9** donor-readiness - QP2507 created no new
 donors, which its own anchor predicted.
+
+---
+
+# §37 — QP2406 (June 2024) laptop review and publication — 2026-08-13
+
+## Outcome
+
+**QP2406 REVIEWED AND LIVE. Batch 2 closed at 6/6.** Product moved from 25 papers / 225 questions
+to **26 papers / 234 questions**. Eighteen unsolved questions remain across two unsolved papers,
+QP2407 and QP2408, both 2024 sittings.
+
+## Branch / commits
+
+Starting `main` `2d9435d`. Desktop branch `pastpapers/qp2406-founder-review` at `49e31e2`, based on
+`333e814`, pushed 07:38 IST, stable across two fetches before any work began. Twelve files, all
+paper-owned. Integrated by path extraction on `integration/qp2406-laptop-review` cut from current
+`main`; the desktop branch was never merged and is retained. Published at `c368d5d`.
+
+## Key findings
+
+**The brief's account of the remote was wrong and preflight caught it.** It stated the desktop had
+completed QP2406, QP2407 and QP2408. Only the QP2406 branch exists; QP2407 and QP2408 are still
+`Intake Complete` at 0/9 with no branch on `origin`.
+
+**Five corrections.** (1) The source host was named by brand in all nine verification records while
+the same spec declares host identity is recorded outside this public repository — a prose record
+contradicting a structured declaration inside one object, unique to this paper in twenty-five.
+(2) The anchor header claimed eight of nine donor relations where its own table lists seven.
+(3) Production jargon in six candidate-facing study-note blocks — the register-only subset of §7i,
+fixed; the provenance-claim subset left untouched and still Founder-blocked. (4) Rule 4: `Article
+14` and `the 2014 amendments` removed from `understand_first`; `Merchant Shipping Act, 1958` kept,
+because the year is part of the statute's name. (5) Trap 17, second occurrence — a "two weeks"
+distance from a sitting printed with no day.
+
+**The donor claims were accurate.** All three tier D relations were re-derived rather than trusted:
+`Q7 ← QP2504-Q8` exact nil delta, `Q8 ← QP2601-Q3` presentational delta only, `Q9 ← QP2411-Q9`
+substantive enlarging delta. Six of the seven relations travel backward; only `QP2403-Q9` pre-dates
+the sitting. Adding the earliest paper in the set re-anchored `QP2601`'s recurrence note to June
+2024 Q8 — a derived change on a live page, produced by the toolchain.
+
+**Source verification.** Three pages, serial `EM – 2406`, nine questions, every limb, 16 marks each.
+Printed errors preserved. The printed 96-versus-100 marks anomaly recorded, not corrected.
+
+## Corpus delta
+
+252 in corpus · 234 solved · 18 unsolved. `QP2406` Planned soon → Available. `2024_2026_RECURRENCE_
+AND_REUSE_MAP.md`, `REVERSE_HINT_CANDIDATES.md`, `SOURCE_INVENTORY.md`, both content indexes, the
+year and topic sheets, the solvedQP home and five sibling papers all regenerated. A QP2406 fixture
+was added to `ui_behaviour_test.cjs`, including the inverted host-recurrence leak probe.
+
+## QA
+
+`validate_spec` 0 errors / 0 blocking · `known_traps_check` 205 checks / 0 failures · all toolchain
+stages pass with the five positive-control stages firing · **120 generated files byte-identical
+across a double build** · UI clean at 1280 and 375 · live verified against a public control, the
+paywall being path-agnostic. `solvedQP/QP2406.html` untracked for the sixth consecutive paper and
+staged by explicit path.
+
+## Next action
+
+**Do not start QP2407 or QP2408 on the laptop.** Both are desktop-authored papers and neither has
+been started. Recommended desktop order is **QP2407 then QP2408**. See the Batch 3 handover.

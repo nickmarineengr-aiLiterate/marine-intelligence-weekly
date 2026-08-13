@@ -1,11 +1,10 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-13, after **QP2507 (July 2025) was laptop-reviewed and published to
-`main`**, taking Batch 2 to 5/6, the product to 25 papers / 225 questions, and **closing the 2025
-examination year**.
-See §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for QP2501 and QP2502, §7a for QP2512,
-§7b for the derived layer, §7c for the desktop batches, §1a for security.
+Last updated: 2026-08-13, after **QP2406 (June 2024) was laptop-reviewed and published to
+`main`**, taking the product to 26 papers / 234 questions and **closing Batch 2 at 6/6**.
+See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for QP2501 and QP2502,
+§7a for QP2512, §7b for the derived layer, §7c for the desktop batches, §1a for security.
 
 > # QP2512 IS LIVE. THE SOLVEDQP DERIVED LAYER IS BUILT.
 >
@@ -14,8 +13,9 @@ See §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for QP2501 and QP250
 > extraction onto current `main` rather than by merging its stale branch. All six desktop branches
 > are **retained** as provenance evidence and were not deleted.
 >
-> **Product: 25 available papers · 225 published questions · 252 in the corpus.**
-> 27 unsolved questions remain across 3 unsolved papers — `QP2406`, `QP2407`, `QP2408`.
+> **Product: 26 available papers · 234 published questions · 252 in the corpus.**
+> 18 unsolved questions remain across 2 unsolved papers — `QP2407` and `QP2408`, both July and
+> August 2024, and **both still at 0/9 with no branch on `origin`**.
 >
 > **THE 2025 EXAMINATION YEAR IS COMPLETE.** All eleven 2025 sittings MIW holds are solved and
 > live. May 2025 is recorded as `NO SITTING` on evidence, not absence: the printed serial numbering
@@ -35,11 +35,16 @@ See §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for QP2501 and QP250
 > presence of model answers, so no status was ever edited by hand.
 >
 > **Nothing is authorised for laptop authoring.** Do not start a paper without the Founder.
-> Batch 1 is closed. **Batch 2 is 5/6 LIVE** — QP2501, QP2502 (§7e), QP2503 (§7f), QP2504
-> (§7g) and QP2507 (§7h), each authored by the desktop, laptop-reviewed and published one at a
-> time. **QP2406 is the last paper of Batch 2 and has NOT been started** — no
-> `pastpapers/qp2406-founder-review` branch exists on `origin`, nor does one for QP2407 or QP2408.
-> The laptop waits for a complete 9/9 desktop push before reviewing it.
+> Batch 1 is closed. **BATCH 2 IS 6/6 LIVE AND CLOSED** — QP2501, QP2502 (§7e), QP2503 (§7f),
+> QP2504 (§7g), QP2507 (§7h) and QP2406 (§7j), each authored by the desktop, laptop-reviewed and
+> published one at a time, every one by path extraction onto current `main`. All six desktop
+> branches are **retained** as provenance and were never merged.
+>
+> **QP2407 and QP2408 have NOT been started.** No `pastpapers/qp2407-founder-review` or
+> `qp2408-founder-review` branch exists on `origin`, and both specs remain `Intake Complete` at
+> 0/9 built. A session brief asserting that the desktop had completed them was checked against
+> `git ls-remote` and was **not correct** — see §7j. The laptop waits for a complete 9/9 desktop
+> push before reviewing either.
 >
 > Corpus consumption remains integrated (§2a) and read-only. **The Founder decisions in §6 are
 > still open and did not block QP2512** — it cites none of the three corpora, so its
@@ -543,6 +548,77 @@ Neither is a defect in the paper.
 (QP2406, QP2407, QP2408, QP2503, QP2504, QP2507). Both papers transitioned Planned soon → Available
 automatically; no manual index edit. QA at publication: toolchain and self-tests green, 121/121
 security, double build byte-identical, clean at 1280 and 375, paid pages gated 302 live.
+
+---
+
+## 7j. QP2406 (June 2024) — laptop-reviewed and published — **BATCH 2 CLOSED 6/6**
+
+Desktop branch `pastpapers/qp2406-founder-review` at `49e31e2`, based on `333e814`, pushed
+2026-08-13 07:38 IST. Twelve files, all paper-owned, no global artefacts. Integrated onto current
+`main` (`2d9435d`) by path extraction on `integration/qp2406-laptop-review`; the desktop branch was
+never merged and is retained as provenance. Published at `c368d5d`.
+
+**Product: 26 available papers · 234 published questions.** June 2024 transitioned
+Planned soon → Available; July and August 2024 are the only Planned soon cards left.
+
+**The session brief was wrong about the remote and the check caught it.** It stated the desktop had
+completed QP2406, QP2407 and QP2408. `git ls-remote` showed only the QP2406 branch; QP2407 and
+QP2408 have no branch and remain `Intake Complete` at 0/9. The brief also gave a stale product
+count. **Fetch and derive; do not author from the brief's numbers.**
+
+**This is the earliest sitting in the solved set**, so six of its seven donor relations travel
+backward into the paper and only `QP2403-Q9` (March 2024) pre-dates it. Every whole-question donor
+is later. All three tier D claims were re-verified against the corpus rather than taken on trust
+and each was accurate: `Q7 ← QP2504-Q8` exact with nil delta, `Q8 ← QP2601-Q3` presentational delta
+only, `Q9 ← QP2411-Q9` a substantive enlarging delta. Adding the paper made it the earliest member
+of the salvage/general-average family, so `QP2601`'s recurrence note correctly re-anchored to
+June 2024 Q8 — a derived change on a live page, produced by the toolchain, not by hand.
+
+### Five corrections applied
+
+1. **The source host was named by brand in all nine verification records** — in a public
+   repository, while the same spec's `source_copy_provenance` declares host identity *"recorded
+   locally only, outside this public repository"*. **No other paper in 25 does this.** A prose
+   record contradicted a machine-readable declaration in the same object, and only the declaration
+   was validated. Neutralised to "the host"; corpus-wide sweep found no propagation.
+2. **Anchor arithmetic.** The header claimed *"8 of 9 relations travel BACKWARD"*; its own donor
+   table lists seven (six later, one earlier). Corrected to 6 of 7. Same class as the four
+   arithmetic defects found on QP2504 — a summary figure written before the detail was settled.
+3. **Production jargon in six candidate-facing study-note blocks** ("donor", "before publication",
+   "reverify"). Rewritten in candidate language. **This is the register-only subset of §7i and is
+   safe to fix; the provenance-claim subset was left untouched and remains Founder-blocked.**
+4. **Rule 4.** `Article 14` (Q8) and `the 2014 amendments` (Q6) removed from `understand_first`.
+   `Merchant Shipping Act, 1958` (Q2) was **kept** — the year is part of the statute's name, not a
+   citation. The `2014` still visible in Q6's Understand pane is in the **knowledge map**, which is
+   derived from `answer_route` and is not governed by Rule 4.
+5. **Trap 17, second occurrence.** A `two weeks` distance from the sitting to the SOLAS 2024
+   consolidated edition, in four places. The paper prints `JUNE 2024` with no day, so the true
+   distance is anywhere from one to thirty days. Restated as "the month after".
+
+### Verification
+
+Source verified against the printed copy independently of the desktop: 3 pages, serial `EM – 2406`,
+nine questions, every limb, 16 marks each, `text_verbatim` faithful with printed errors preserved
+(*"What is P&I clubs?"*, *"filling a claim"*, *"What is General Average,"*). The printed
+**96-versus-100 marks anomaly** — six answered questions at 16 marks against a printed *Total Marks
+100* — is recorded, not corrected. Host branding, the `dsguides` promotion, both purchase panels and
+the host recurrence annotation are excluded from the transcription; the recurrence leak probes
+(`2021/JULY/Q2`, `2010/NOV`, `2022/FEB/Q4`, `2023/MAR/Q9`) all return nothing from the shipped bytes.
+
+`validate_spec` 0 errors / 0 blocking, `known_traps_check` 205/0, all toolchain stages pass with the
+five positive-control stages (`REUSE SELFTEST`, `SOLVEDQP MFST ST`, `SOLVEDQP HLTH ST`,
+`TEMPORAL ST`, `SURFACE ST`) firing. **120 generated files byte-identical across a double build.**
+UI reviewed at 1280 and 375: nine cards, five modes, Answer pre-selected via `aria-selected`, mode
+switching and anchors working, no overflow, no console errors, no review banner and no host or
+provider leakage on the delivery surface. Live verified on a **public control** — the paywall is
+path-agnostic, so a 302 proves nothing; `SQ/solved-qp-sample-january-2026.html` returns 200 and
+reads *"26 solved papers · 234 questions"*.
+
+**`solvedQP/QP2406.html` was untracked for the SIXTH consecutive paper** and was staged by explicit
+path. `git add -u` would have shipped a manifest entry pointing at a page that does not exist.
+
+Neither open referral is engaged: **TSCR-3 and TSCR-4 are both MARPOL Annex VI**, and no question on
+this paper depends on that Annex. No new referral raised.
 
 ---
 
