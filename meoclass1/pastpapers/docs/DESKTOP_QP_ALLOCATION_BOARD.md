@@ -42,12 +42,16 @@ May is absent from the MIW source set in all three years. There is no `QP2405`,
 
 | Batch | Papers | Owner | Status |
 |---|---|---|---|
-| **1** | QP2401 · QP2412 · QP2402 · QP2409 · QP2411 · QP2410 | DESKTOP | **IN FLIGHT** — five of six branches pushed to `origin`, none merged. See §6 |
-| **2** | QP2501 · QP2502 · QP2503 · QP2504 · QP2507 · QP2406 | DESKTOP | **ALLOCATED — NOT STARTED** |
-| **3** | QP2407 · QP2408 | *unallocated* | held back — see §5 |
+| **1** | QP2401 · QP2412 · QP2402 · QP2409 · QP2411 · QP2410 | DESKTOP | **CLOSED — 6/6 reviewed, integrated and live on `main`.** All six branches retained on `origin` as provenance |
+| **2** | QP2501 · QP2502 · QP2503 · QP2504 · QP2507 · QP2406 | DESKTOP | **CLOSED — 6/6 reviewed, integrated and live on `main`.** All six branches retained on `origin` |
+| **3** | QP2407 · QP2408 | DESKTOP | **ALLOCATED AND OPEN** — see §10 |
 
 Batch 3 is **two papers, not three.** That is a result of the Batch 2
 selection, not a leftover.
+
+§6 below is the Batch 1 state **as read on 2026-08-12** and is kept unedited
+as the record of that moment. It is superseded by the row above; read the table
+here, not §6, for current state.
 
 ---
 
@@ -263,3 +267,118 @@ Do not select a seventh. Do not merge to `main` or any integration branch. The
 six pushed Founder-review branches are handed back to the laptop team.
 
 **Do not start any Batch 2 paper while Batch 1 is open.**
+
+---
+
+## 10. BATCH 3 — ALLOCATION AND BASELINE
+
+Allocated 2026-08-13, in the session that opened `pastpapers/qp2407-founder-review`.
+Batch 3 is the **last** batch: it takes the only two unsolved papers left in the corpus.
+
+### 10.1 Baseline
+
+| | |
+|---|---|
+| **Batch 3 baseline** | `main` at **`e5843b1104592ac54bcaba822eab15ac4530cc23`** (`e5843b1`) — *"Record QP2406 as live, close Batch 2 at 6/6, and correct the remote's state"* |
+| Baseline contents | 26 papers · 234 published questions · 252 in the corpus · both desktop batches reviewed, integrated and live · the delivery manifest and daily health system |
+| **Corpus commit consumed** | `319524c24d11b2f89f33672c384b56e9ae1ab7db` (`RulesApp-Local-Input` `origin/main`, 0 ahead / 0 behind, tracked tree clean) |
+
+**Not `9c97359` and not `333e814`.** Both are now badly stale: `main` has since absorbed all
+twelve reviewed papers, three corrections to already-live questions, and the whole
+`solvedqp_content_index.json` delivery layer. A Batch 3 paper branched from either would
+rebuild product surfaces from an inventory that is twelve papers short.
+
+### 10.2 How the baseline hash was recorded
+
+The baseline is a commit that already exists on `origin/main`, so its hash needs no
+inference — but the self-verifying pattern is kept anyway, because it is what the previous
+two batches used and it survives a rewritten board:
+
+```bash
+git -c safe.directory=* cat-file -p pastpapers/batch3-baseline^{commit} | head -2
+# its 'parent' line must read e5843b1104592ac54bcaba822eab15ac4530cc23
+```
+
+Branch each Batch 3 paper from **`e5843b1`** — not from this metadata commit, and not from
+`main`, which moves.
+
+### 10.3 The two papers
+
+| # | Paper | Sitting | Branch | Tier D — **recomputed** | Preferred donor | Flags |
+|---|---|---|---|---|---|---|
+| **1** | **QP2407** | July 2024 | `pastpapers/qp2407-founder-review` | **1 / 9** | `QP2402-Q1` — EXACT, and **earlier** | 2 decisive |
+| **2** | **QP2408** | August 2024 | `pastpapers/qp2408-founder-review` | **1 / 9 stored, 2 / 9 on adjudication** | `QP2606-Q5` — EXACT; plus `QP2408-Q3` — see §10.5 | 1 decisive |
+
+**Order: QP2407 first, strictly.** QP2408 does not begin until QP2407 is complete, pushed and
+proven from remote git objects. The two papers share no donor, so the order is not a donor
+dependency — it is the one-paper-at-a-time rule in §5 of the playbook.
+
+### 10.4 What the recomputation changed
+
+§5 held these two back on figures that were **stale in both directions**, and neither figure
+was carried forward. Readiness was recomputed against the actual built set at the baseline —
+**234 of 252 built across 26 solved papers** — through `recurrence_model.donor_readiness`,
+then re-adjudicated by reading both printed stems.
+
+- **QP2407 is better than the board said.** §5 recorded it as *"strictly worse temporally"*
+  than QP2406 with *"reach fully consumed by QP2502"*. In fact its donor is **`QP2402-Q1`,
+  February 2024** — byte-identical stem, nil question delta, nil marks delta, and **earlier
+  than the sitting**. It is the only 2024 paper in the whole programme whose donor travels
+  *forward*, which inverts the systemic backward-pull risk in `DESKTOP_QP_ALLOCATION_2024.md`
+  §6.3 rather than compounding it. `QP2502-Q1` is an equally exact but *later* alternate and
+  was rejected for that reason.
+- **QP2408 is better than the board said too.** §5 called it *"the weakest paper in the
+  corpus"* at reach 0, *"it neither receives from nor gives to anything"*. The reverse-hint
+  queue surfaced three candidates for `QP2408-Q3` and, on reading the printed stems, two of
+  them (`QP2506-Q7` June 2025, `QP2601-Q8` January 2026) are **word-for-word identical except
+  for a word-order inversion in limb (b) and an explicit per-limb mark split**. The derivation
+  classed the pair as tier C only because normalised-stem equality fails on
+  *"Write briefly"* / *"Briefly write"*. That is a wording delta, not a different task.
+
+**Neither correction changes the batch order or the paper count.** They are recorded because
+a stale board that under-reports readiness causes fresh research to be commissioned where a
+verified donor already exists.
+
+### 10.5 Standing warnings for Batch 3
+
+**1 — `QP2408-Q3`'s donors are a reverse-hint discovery, and a hint is not a donor.**
+Three candidates were surfaced and all three were read at the printed stem before anything was
+written. `QP2604-Q8` (April 2026) is genuinely *near* and not exact — it reprints limb (a) as
+*"any incidence of maritime casualty"*, replaces *"write"* with *"Illustrate"* in limb (b),
+and splits 5 + 7 + 4 against this paper's 4 + 8 + 4. It must not be treated as the same
+wording. Only an author who has read both stems may write `reused_from`.
+
+**2 — every QP2408 donor travels BACKWARD, and one travels 22 months.** `QP2408-Q9`'s donor
+`QP2606-Q5` is a **June 2026** answer pulled back to an August 2024 sitting, on a stem that
+expressly asks about *"emerging challenges … technological advancements, cyber risks, and
+environmental sustainability"*. That is the single most likely place in this batch for
+post-sitting law to be inherited silently. The same applies to the `QP2408-Q3` donors
+(June 2025, January 2026, April 2026). QP2407-Q3 is the **only** relation in the batch that
+travels forward.
+
+**3 — the mid-2024 SOLAS boundary is real and it is verified at source.** SOLAS amendments
+**`MSC.521(106)` entered into force 1 July 2024**, and the Consolidated Edition 2024 states on
+its own title page that it incorporates all amendments in effect on that date. **QP2406 (June)
+sits before that boundary; both Batch 3 papers sit after it.** No day-level assumption is
+needed, because 1 July precedes every possible July or August sitting date. Full record in
+[`QP2407_TEMPORAL_AND_DONOR_ANCHOR.md`](QP2407_TEMPORAL_AND_DONOR_ANCHOR.md) §3.
+
+**4 — two corpus objects are image-only and one of them is decisive.** `RO_code.pdf` carries
+**zero extractable characters over 61 pages**, and `QP2408-Q1` is a pure RO Code question worth
+all 16 marks. The RO Code is therefore **evidence-only, never quotation-ready**, and the
+mandatory-application chain must be cited from SOLAS XI-1/1, which *is* readable at P1. The
+Annex VI / NOx Technical Code 5th-edition scan is likewise image-only.
+
+**5 — the standing 2024 anchors still apply.** The 33rd Assembly adopted on 6 December 2023,
+so `A.11xx(33)` is operative for both papers; the 34th Assembly (3 December 2025) must not
+appear. The **Merchant Shipping Act, 1958** governs throughout — the 2025 Act commenced
+15 March 2026.
+
+### 10.6 The stop gate, for the last time
+
+When QP2407 and QP2408 are both complete and pushed:
+
+> # STOP DESKTOP PRODUCTION.
+
+There is no Batch 4 — the corpus has no unsolved paper left. Do not merge either branch. Hand
+both back to the laptop team for review and integration, one paper at a time.
