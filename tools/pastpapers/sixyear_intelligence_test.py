@@ -70,7 +70,7 @@ ABSOLUTE_PATH_RX = re.compile(r"""['"](?:[A-Za-z]:[\\/]|/(?:tmp|home|Users|var)/
 
 WATCHED_SOURCES = ('build_sixyear_intelligence.py',
                    'sixyear_temporal_and_topics.py',
-                   'extract_historical_qp.py')
+                   'extract_historical_questions.py')
 
 
 def build(out_dir, spec_glob=None, intel_path=None):

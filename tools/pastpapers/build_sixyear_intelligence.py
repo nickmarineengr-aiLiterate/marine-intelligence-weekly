@@ -13,7 +13,7 @@ INPUTS, BOTH COMMITTED
         historical_qp_intelligence.json                      the question-only shelf
 
 A clean checkout regenerates this layer with no source PDF and no local state.
-The historical store is refreshed from PDFs by extract_historical_qp.py, which is
+The historical store is refreshed from PDFs by extract_historical_questions.py, which is
 a separate step because the PDFs are third-party material kept out of git.
 
 This script previously read its historical input from a hard-coded path inside

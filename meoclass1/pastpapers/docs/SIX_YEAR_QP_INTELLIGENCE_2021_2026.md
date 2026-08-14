@@ -18,7 +18,7 @@ exactly what a family means on a paid page.
 
 ```
 python tools/pastpapers/build_sixyear_intelligence.py    # from the two committed inputs
-python tools/pastpapers/extract_historical_qp.py         # refresh the shelf record from local PDFs
+python tools/pastpapers/extract_historical_questions.py   # refresh the shelf record from local PDFs
 ```
 
 The layer is derived and **gitignored**; the two inputs above are the truth. A clean checkout
