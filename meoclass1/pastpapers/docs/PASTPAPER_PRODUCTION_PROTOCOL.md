@@ -65,9 +65,17 @@ Three rules bound this, and none is negotiable:
 
 A technical answer is verified when its mechanism is sound, its provenance class is **stated
 rather than disguised**, and the boundary of what could not be verified is written down.
-`QP2506-Q1` is the worked precedent: no instrument prescribes a propeller type, so the answer
-declares engineering judgement as its dominant provenance class, explains the hydrodynamics
-mechanistically, and quotes no efficiency percentage anywhere.
+`QP2506-Q1` is the worked precedent. It asks for the common **rudder-efficiency improvement
+devices** — thrust fins, asymmetric rudders, rudder bulbs and Grim vane wheels. No instrument
+prescribes any of them, so the answer declares engineering judgement as its dominant provenance
+class and explains the hydrodynamics mechanistically. On quantities it does the thing rule three
+requires: it **refuses to quote a saving as a hard number for any hull**, gives only the
+conditioned ranges attributed to industry literature, names the variables the range depends on
+(hull form, block coefficient, propeller loading, draught, service speed), states that
+model-scale results need a scale-effect correction, and carries those ranges in
+`reverify_before_publication` rather than presenting them as settled. Note what this precedent
+does *not* license: a range is admissible because it is attributed, conditioned and declared —
+not because a percentage is harmless.
 
 ---
 

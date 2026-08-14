@@ -22,6 +22,17 @@ Runs, in dependency order:
                                         reported as CANDIDATES for adjudication
     HEALTH        health_check.py       product coherence, links, safety, review state
     AUDIT         audit_paper.py        each page faithful to its spec
+    HOME CONTRACT solvedqp_home_contract_test.py
+                                        /solvedQP/index.html owns layout and owns
+                                        no product truth: counts, chips, cards,
+                                        year links and update rows are recomputed
+                                        from the specs and must match the bytes
+    DELIVERY      delivery_gate.py      every artefact the specs imply exists AND
+                                        is tracked by Git. Runs last, and is the
+                                        only stage that consults the index rather
+                                        than the working tree -- an untracked
+                                        generated page keeps every other stage
+                                        green while never reaching the deploy.
 
     SURFACE       surface_impact.py     only when --base <ref> is given: which
                                         public / paid / commercial surfaces this
@@ -76,6 +87,10 @@ def main():
     ap.add_argument('--gated', action='store_true', help='add the access gate')
     ap.add_argument('--self-test', action='store_true',
                     help='positive-control the health, trap and PIL checks')
+    ap.add_argument('--strict', action='store_true',
+                    help='publication gate: a generated artefact that is '
+                         'unstaged also fails DELIVERY, not just an untracked '
+                         'or absent one')
     ap.add_argument('--base', help='base git ref: adds the SURFACE IMPACT '
                                    'finalisation report. No default -- omitted, '
                                    'the stage does not run.')
@@ -276,6 +291,18 @@ def main():
     rc_total += rc
     warn_total += w
 
+    # The home page owns layout and owns no product truth. Every count, chip,
+    # card, year link and update row on the shipped bytes is recomputed here
+    # from the specs and cross-checked against the manifest, so a hand-edit to
+    # the generated HTML fails the build instead of surviving until the next
+    # rebuild silently reverts it.
+    argv = [os.path.join(T, 'solvedqp_home_contract_test.py')]
+    if args.self_test:
+        argv.append('--self-test')
+    rc, w = run('SOLVEDQP HOME CT', argv, args.verbose)
+    rc_total += rc
+    warn_total += w
+
     # The complete January paper shown to existing ORAL subscribers. Built
     # from the same canonical spec as the paid product, so it cannot drift
     # from what it is advertising.
@@ -362,6 +389,37 @@ def main():
         rc, w = run('AUDIT', argv, args.verbose)
         rc_total += rc
         warn_total += w
+
+    # ---- delivery artefact completeness --------------------------------
+    # LAST, because it asks whether everything the earlier stages BUILT has
+    # actually reached Git. Every check above reads the working tree, so all of
+    # them stay green while a generated public page sits untracked and never
+    # deploys. This is the only stage that consults the index rather than the
+    # filesystem, and it is the reason a paper can no longer go live on every
+    # surface except the one a reader opens.
+    #
+    # --strict (with --publish) is the pre-commit gate: there, an artefact that
+    # is tracked but unstaged is also a failure, because the bytes about to be
+    # committed are not the bytes just built. Without --strict an unstaged
+    # artefact is a warning, since that is the normal state mid-session.
+    if args.self_test:
+        rc, w = run('DELIVERY ST', [os.path.join(T, 'delivery_gate.py'), '--self-test'],
+                    args.verbose)
+        rc_total += rc
+        warn_total += w
+        rc, w = run('DELIVERY DERIV',
+                    [os.path.join(T, 'delivery_gate.py'), '--verify-derivation'],
+                    args.verbose, echo=lambda l: l.startswith(('  UNEXPECTED', '  NOT BUILT')))
+        rc_total += rc
+        warn_total += w
+
+    argv = [os.path.join(T, 'delivery_gate.py')]
+    if args.strict:
+        argv.append('--strict')
+    rc, w = run('DELIVERY', argv, args.verbose,
+                echo=lambda l: l.lstrip().startswith(('ABSENT', 'UNTRACKED', 'UNSTAGED')))
+    rc_total += rc
+    warn_total += w
 
     # Finalisation only, and only against a ref the caller supplied. Its whole
     # report is the point, so it always echoes rather than only on --verbose.
