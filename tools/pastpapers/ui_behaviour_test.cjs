@@ -44,6 +44,59 @@ function ok(name, cond, extra) {
 // Alias probes deliberately use words that appear ONLY in search metadata and
 // are never rendered on the card, which is the behaviour being guarded.
 const FIXTURES = {
+  QP2309: {
+    // AUTHORED at laptop review against what each question is about, never
+    // harvested from the built page. A fixture generated from live corpus
+    // state asserts only that the page still says what it said, which is the
+    // one thing that cannot regress.
+    //
+    // This paper's trap is that Q2 and Q7 BOTH turn on recognized
+    // organizations -- Q2 on the RO Code itself, Q7 on an RO acting on ISM
+    // certificates -- and Q2, Q7 and Q9 all use "audit" and "survey". Every
+    // obvious term here matches two or three cards, so 'recognized
+    // organization', 'audit', 'survey' and 'no more favourable treatment'
+    // (which reaches Q3 as well as Q9) are deliberately NOT used.
+    probes: [
+      ['gender balance', 'QP2309-Q1'],
+      ['vertical contract audit', 'QP2309-Q2'],
+      ['well-to-wake', 'QP2309-Q3'],
+      ['sub-committee', 'QP2309-Q4'],
+      ['angle of repose', 'QP2309-Q5'],
+      ['conditions of assignment', 'QP2309-Q6'],
+      ['major non conformity', 'QP2309-Q7'],
+      ['contiguous zone', 'QP2309-Q8'],
+      ['below convention size', 'QP2309-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['SDG 5', 'QP2309-Q1', 'Q1 (the goal the stem quotes without naming)'],
+      ['0.075 metre radians', 'QP2309-Q5',
+       'Q5 (the residual-area criterion, written the way a candidate types it)'],
+      ['position 1 position 2', 'QP2309-Q6',
+       'Q6 (the Load Line positions that decide closing-appliance strength)'],
+      ['SMC extension', 'QP2309-Q7', 'Q7 (limb (b)(iii), the power that does not exist)'],
+      ['NMFT', 'QP2309-Q9', 'Q9 (the principle abbreviated as candidates abbreviate it)'],
+    ],
+    // The paper's defining temporal edge, and the one that separates it from
+    // every other 2023 sitting MIW holds. MEPC.377(80) -- the 2023 IMO GHG
+    // Strategy -- was adopted at MEPC 80 on 7 JULY 2023, two months BEFORE
+    // this sitting, and revoked the 2018 Initial Strategy. January and April
+    // 2023 sit under the Initial Strategy; September does not. If this stops
+    // resolving to Q3 the answer has fallen back onto the 2018 Strategy,
+    // which is the single most examinable temporal fact on this paper.
+    //
+    // The obvious alternative, A.1155(32), is NOT used: it reaches Q4 as well
+    // as Q9 and so cannot say which card broke.
+    regulation: ['mepc.377(80)', 'QP2309-Q3'],
+    // The source copy prints the host's own backward annotations under every
+    // question -- Q6 carries eight sittings from 2011 to 2017, Q7 carries
+    // three from 2011 and Q9 one from 2010. None of it may reach the shipped
+    // bytes.
+    recurrence: ['2011/sr03', '2011/jul', '2010/sr4'],
+    // 'angle' alone reaches Q5 and Q6 (the angle of heel and the angle of the
+    // deck edge). The repose/flooding pair is what separates them.
+    narrow: ['angle of flooding', 'QP2309-Q5'],
+  },
   QP2304: {
     // Authored at laptop review, not harvested. Every probe below was checked
     // to match EXACTLY ONE card on this paper, because a probe that matches

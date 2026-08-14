@@ -76,11 +76,23 @@ def check(specs, html):
 
     # -- known-absent months are distinct from planned soon -------------------
     got = {(r[0], r[1]) for r in by_state.get(H.NO_SITTING, [])}
-    if got == set(H.KNOWN_ABSENT):
-        ok('%d known-absent month(s) marked NO_SITTING' % len(got))
+    # Compare against KNOWN_ABSENT RESTRICTED TO THE YEARS THE GRID RENDERS.
+    # The coverage section is the route into a solved paper, so build_solvedqp_home
+    # deliberately draws only years that hold a paper in the spec set (see the
+    # comment on `years` in its coverage_rows). Extending KNOWN_ABSENT back to 2021
+    # to describe the question-only intelligence years therefore added months that
+    # the grid must NOT draw -- 2021 would otherwise be a row of nothing but two
+    # "No sitting" chips, and 2022 a row of one. Those years belong to the
+    # examination-history matrix below the grid, not to coverage. Comparing against
+    # the unrestricted set asserted that the builder should render a year it is
+    # correct to omit.
+    solved_years = {d['year'] for d in specs}
+    expect = {k for k in H.KNOWN_ABSENT if k[0] in solved_years}
+    if got == expect:
+        ok('%d known-absent month(s) marked NO_SITTING across %d rendered year(s)'
+           % (len(got), len(solved_years)))
     else:
-        fail('NO_SITTING set disagrees with KNOWN_ABSENT: %s'
-             % sorted(got ^ set(H.KNOWN_ABSENT)))
+        fail('NO_SITTING set disagrees with KNOWN_ABSENT: %s' % sorted(got ^ expect))
     # Distinctness can only be asserted where both states actually exist. Every
     # sitting in the set was solved at QP2408, so there is no PLANNED_SOON row
     # left to render and "Planned soon" legitimately disappears from the page.

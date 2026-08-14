@@ -19,8 +19,15 @@ See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for
 > silently reverted `DESKTOP_QP_ALLOCATION_2023.md`, `DESKTOP_QP_HANDOVER_BATCH3.md` and 15 lines of
 > this file. Both desktop branches are **retained** as provenance evidence.
 >
-> **Product: 29 available papers · 261 published questions · 261 in the corpus.**
+> **Product: 32 available papers · 288 published questions · 288 in the corpus.**
 > **THE CORPUS HAS NO UNSOLVED QUESTION LEFT.**
+>
+> **QP2309 (September 2023) IS LIVE — laptop-reviewed and published 2026-08-14 (§7m).** Four 2023
+> sittings are now solved: January, April, September and December. The **six-year intelligence
+> window** (2021–2026, 61 papers / 549 questions) was used to re-derive ancestry for the first time.
+> It corrected the earliest known appearance of two questions — one of which runs **backward** past
+> the sitting — and **confirmed** the paper's two "fresh research" findings against 549 questions
+> rather than 279.
 >
 > **BATCH 4 IS OPEN AND QP2301 IS ITS FIRST PAPER — laptop-reviewed 2026-08-14, awaiting the
 > Founder's publication authorisation (§7l).** It is the **first 2023 paper MIW has solved** and the
@@ -379,6 +386,103 @@ Fixed in `caf5020`.
   cannot point forward (819 tokens, zero forward) — and is now inverted into the queue above.
 - **`validate_antipatterns.py` does not exist and never had a hook entry.** No `hooks` key in
   any settings file, no such file on disk. The entry was stale; struck rather than carried.
+
+---
+
+## 7m. QP2309 (September 2023) — laptop-reviewed and published — **FIRST PAPER JUDGED AGAINST SIX YEARS**
+
+Desktop branch `pastpapers/qp2309-founder-review` @ `9631b2e`, based on `bf5b533`, pushed
+2026-08-14 07:25 IST. Twelve files, all paper-owned, no global artefacts. Integrated onto current
+`main` (`a633e97`) by path extraction on `integration/qp2309-laptop-review`; the desktop branch was
+never merged and is **retained as provenance**. The branch tip did not move during the review.
+
+**Product: 32 available papers · 288 published questions.** September 2023 transitioned to Available
+automatically.
+
+**The desktop build was strong and most of it was accepted.** `model_answer` carries **zero**
+post-sitting citations on all nine questions, Rule 4 is clean on all nine `understand_first`, and
+every post-sitting resolution on the paper sits in a `major_trap` field that warns the candidate
+*away* from it. The two sharpest temporal calls — `A.1155(32)` operative for Q9 and `A.1118(30)` for
+Q7, both revoked by the 33rd Assembly three months *after* the sitting — were verified and are right.
+
+### The six-year window was applied to a paper for the first time
+
+The intelligence layer was generated at 12:01 IST; this branch was pushed at 07:25. The donor map was
+therefore derived against 279 questions and has been re-derived against **549**.
+
+| Q | Earliest appearance as authored | Corrected | Note |
+|---|---|---|---|
+| **Q2** | QP2401-Q5(b), Jan 2024 | **QP2207-Q7, July 2022** | `QP2303-Q8(b)` (March 2023) prints the whole stem **six months BEFORE** the sitting |
+| **Q4** | QP2402-Q1, Feb 2024 | **QP2102-Q2, February 2021** | repeated `QP2109-Q2`, September 2021 — same month, exactly two years earlier |
+| Q1 | QP2407-Q1, July 2024 | **this sitting** | nothing earlier in six years; September 2023 *originates* the family |
+
+**Q2 is the first question on any paper whose wording ancestry runs backward.** The anchor's
+*"every donor is later"* is true of **answer donors** and is **not** true of lineage. No
+`reused_from` changed: the intelligence layer holds printed wording and no answers, so it can correct
+where a question was first asked and can never supply what the answer is.
+
+**Both "fresh research" findings survived the wider test**, which was the result most likely to
+break. Q5's only six-year hits match *"fine grain"* in an ICCP question; Q6 has none.
+
+### Corrections applied
+
+**Q5 (MAJOR)** — the spec declared *"the corpus SOLAS holding covers chapters II-1, II-2 and III
+only"* in three places, and that was the stated reason the question carried **zero
+`P1_PRIMARY_VERIFIED` claims**. The corpus holds the **full SOLAS 2024 consolidated edition** with a
+working text layer (and the structured corpus also holds chapter V). **SOLAS VI/8 and VI/9 were read
+at source**, primary-verifying the Grain Code's identity as `MSC.23(59)`, the statutory definition of
+grain, the mandatory hook and the Document of Authorization. Q5 goes **0 → 4 P1**, and the only
+non-word-band validator warning on the paper is cleared. Same defect class as `QP2511-Q8`'s "MIW
+holds no licensed copy of the Hong Kong Convention"; a corpus-wide sweep found it **contained to
+QP2309** — a regression, not an inheritance.
+
+**Q8 (MINOR)** — the continental shelf limb stopped at the 200-mile entitlement. **UNCLOS article 76
+was read at source** and paragraph 5's outer cap added: 350 nautical miles from the baselines, or 100
+from the 2,500 metre isobath. The omission had been *deliberately* recorded on the ground that
+paragraphs 4–6 were unread; reading them removed the ground.
+
+**Q5 study guide (MINOR, candidate-facing)** — told a paying reader a claim was *"flagged for
+verification … before publication"*, on a published page. Same class as `QP2501-Q1`. Rewritten to
+keep the disclosure and drop the internal register, and pointed at the ship's approved grain loading
+manual instead.
+
+**Paper-level (MINOR)** — `marks_note` claimed Q1, **Q6** and Q9 carry limbs with no individual mark.
+Q6 prints `A.(5) B.(5) C.(6)` and the spec's own `subparts` record 5/5/6. Corrected to Q1 and Q9.
+`printed_marks_absent` was set on two questions and absent on seven; normalised to `false` on all
+nine (the paper prints (16) throughout). No derived output changed.
+
+**Donor status** — ten references called `QP2312`/`QP2304` `FOUNDER-REVIEW-PENDING`. Both were
+published earlier the same day; corrected across the spec, the anchor and the Q9 record.
+
+### Two failures fixed that QP2309 did not cause
+
+- **`coverage_check.py`** compared the rendered `NO_SITTING` set against the **whole** of
+  `KNOWN_ABSENT`. When `KNOWN_ABSENT` was extended back to 2021 for the intelligence years,
+  `build_solvedqp_home` was correctly restricted to years holding a paper, and the checker was not.
+  It now compares against the years the grid actually renders.
+- **`SQ/index.html`** still advertised 31 papers / 279 answers. Data only; the historical commentary
+  lines describing the *earlier* count drift were deliberately left verbatim.
+
+### Validation
+
+`validate_spec` **0 errors / 0 blocking**, 9 warnings — all the Founder-deferred word band, down from
+10. `run_toolchain` **ALL STAGES PASS**. `delivery_gate.py --verify-derivation --strict` **PASS**.
+Double build **byte-identical across 80 generated artefacts**. UI **62/62** on a new authored fixture
+(probes chosen against the Q2/Q7 recognized-organization collision, which defeats every obvious
+term). Search **49/49**, home contract PASS, coverage PASS, recurrence 0 failures, corpus consumer
+**60/60**, security and access **198/198** across six suites. **Zero host recurrence tokens and zero
+provider branding in any built artefact.** No paid answer text in the public manifest.
+
+`solvedQP/QP2309.html` was untracked for the **EIGHTH** consecutive paper and was staged by explicit
+path.
+
+### Reported, not fixed
+
+`tools/pastpapers/build_sixyear_intelligence.py` reads `hist_raw.json` from **another session's
+scratchpad directory**, hard-coded. It is a one-shot analysis script, not a reproducible builder, so
+the intelligence layer cannot currently be regenerated. QP2309's own record was removed from it by
+hand when the paper became solved (30→29 papers, 270→261 questions; the six-year total holds at
+61/549). Rebuilding that script properly is a governed change and is raised rather than done.
 
 ---
 
