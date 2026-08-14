@@ -101,6 +101,82 @@ const FIXTURES = {
     // them.
     narrow: ['preventive action', 'QP2303-Q7'],
   },
+  QP2310: {
+    // AUTHORED at laptop review against what each question is about, never
+    // harvested from the built page.
+    //
+    // EVERY PROBE BELOW WAS PROVED UNIQUE UNDER THE SEARCH'S OWN SEMANTICS,
+    // which are token-AND and not substring. That distinction rejected two
+    // probes that looked obviously safe. 'bunker oil' is Q8's own subject
+    // and matches Q8 by substring -- but Q6 is the compliant-FUEL-OIL module
+    // and carries 'bunker' in 'bunker delivery note', so both tokens live on
+    // Q6 too and the probe cannot say which card broke. 'Merchant Shipping
+    // Act 1958 Part XA' collided with Q8 the same way. A probe that matches
+    // two cards still passes the assertion and still reports a green run,
+    // which is why uniqueness is proved rather than assumed.
+    //
+    // This paper's other collisions: 'LLMC' reaches Q7 AND Q8 (the Bunker
+    // Convention preserves the right to limit under LLMC); 'emission control
+    // area' reaches Q5 and Q6; 'NOx technical file' reaches Q4 and Q5. None
+    // is used.
+    probes: [
+      ['twin skeg', 'QP2310-Q1'],
+      ['condition of class', 'QP2310-Q2'],
+      ['regional cooperation', 'QP2310-Q3'],
+      ['pulse converter', 'QP2310-Q4'],
+      // The paper's own printed spelling. 'Moisturizing' is a source typo for
+      // the industry's 'moistening', and both must find the card -- see the
+      // alias below.
+      ['scavenge air moisturizing', 'QP2310-Q5'],
+      ['gisis', 'QP2310-Q6'],
+      ['privity', 'QP2310-Q7'],
+      // NOT 'bunker oil' -- see above.
+      ['bareboat charterer', 'QP2310-Q8'],
+      ['latent failures', 'QP2310-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['wave making resistance', 'QP2310-Q1',
+       'Q1 (the resistance component forebody optimisation actually attacks)'],
+      ['harmonized survey', 'QP2310-Q2',
+       'Q2 (the HSSC scheme the annual survey sits inside)'],
+      ['US Coast Guard PSC', 'QP2310-Q3',
+       'Q3 (the regime that deliberately joined no memorandum)'],
+      ['turbocharger cut out', 'QP2310-Q4',
+       'Q4 (sequential turbocharging, under what it does rather than its name)'],
+      // The correct industry term for the thing the paper misspells. A
+      // candidate who knows the subject types this and must still land on Q5.
+      ['scavenge air moistening', 'QP2310-Q5',
+       'Q5 (SAM spelled as the industry spells it, not as the paper prints it)'],
+      ['fuel oil non availability', 'QP2310-Q6',
+       'Q6 (FONAR written out, as a candidate would search it)'],
+      ['conduct barring limitation', 'QP2310-Q7',
+       'Q7 (article 4, under the phrase practitioners use)'],
+      ['channelling of liability', 'QP2310-Q8',
+       'Q8 (the CLC feature the Bunker Convention pointedly does NOT copy)'],
+      ['fishbone diagram', 'QP2310-Q9',
+       'Q9 (cause-and-effect analysis under its common name)'],
+    ],
+    // DELIBERATE REGRESSION SENTINEL, and the sharpest one on this paper.
+    // October 2023 sits TWO MONTHS BEFORE the 33rd Assembly of 6 December
+    // 2023. The applicable PSC procedures resolution is A.1155(32) of
+    // December 2021; A.1185(33) is future at this sitting and must never
+    // appear. If this probe stops resolving to Q3, the most likely cause is
+    // that someone has "updated" the answer to the newer resolution and
+    // walked the paper across its own temporal boundary.
+    //
+    // MEPC.328(76) was considered and REJECTED as the sentinel: it reaches
+    // Q1, Q4, Q5 and Q6, so it cannot localise a break.
+    regulation: ['A.1155(32)', 'QP2310-Q3'],
+    // Leak probe, not a search probe. The source copy prints the host's own
+    // backward-looking sitting rows under every question -- Q3 alone carries
+    // thirteen running back to 2010, and Q5 fourteen. '2023/OCT' is the
+    // paper's self-reference, printed on all nine. None may reach the bytes.
+    recurrence: ['2023/oct', '2022/dec', '2013/feb'],
+    // 'oil' alone reaches Q5, Q6 and Q8. The two-token narrowing separates
+    // the civil-liability card from the two Annex VI cards.
+    narrow: ['persistent oil', 'QP2310-Q8'],
+  },
   QP2309: {
     // AUTHORED at laptop review against what each question is about, never
     // harvested from the built page. A fixture generated from live corpus

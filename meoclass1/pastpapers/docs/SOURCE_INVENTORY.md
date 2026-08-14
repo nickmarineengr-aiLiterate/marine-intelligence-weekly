@@ -6,7 +6,7 @@
 
 | Year | Papers held | Months absent from the available source set |
 |---|---|---|
-| 2023 | 5 | February, May, June, July, August, October, November |
+| 2023 | 6 | February, May, June, July, August, November |
 | 2024 | 11 | May |
 | 2025 | 11 | May |
 | 2026 | 6 | May, August, September, October, November, December |
@@ -19,6 +19,7 @@
 | QP2303 | March 2023 | `MARCH 2023.pdf` | 2303 EM | 2 | 9 | ? of 2 |
 | QP2304 | April 2023 | `APRIL 2023.pdf` | 2304 EM | 2 | 9 | 2 of 2 |
 | QP2309 | September 2023 | `SEPTEMBER 2023.pdf` | 2309 EM | 2 | 9 | ? of 2 |
+| QP2310 | October 2023 | `OCTOBER 2023.pdf` | 2310 EM | 2 | 9 | ? of 2 |
 | QP2312 | December 2023 | `DECEMBER 2023.pdf` | 2312 EM | 2 | 9 | ? of 2 |
 | QP2401 | January 2024 | `JANUARY 2024.pdf` | EM - 24117-1 | 2 | 9 | 2 of 2 |
 | QP2402 | February 2024 | `FEBRUARY 2024.pdf` | EM - 19224-1 | 2 | 9 | 2 of 2 |
@@ -61,7 +62,7 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 
 ### Questions printing NO mark allocation
 
-**34 of 297**, across 8 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
+**35 of 306**, across 9 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
 
 | Question | Sitting | Title |
 |---|---|---|
@@ -80,6 +81,7 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 | QP2304-Q5 | April 2023 Q5 | Maritime Lien, In Rem and In Personam |
 | QP2304-Q8 | April 2023 Q8 | IMO and ILO Human Element Regimes, and Fatigue Guidance |
 | QP2304-Q9 | April 2023 Q9 | Classification Societies in Rule Formation, SOLAS II-1, and Annual versus Periodical Surveys |
+| QP2310-Q9 | October 2023 Q9 | Root Cause Analysis, Active Failures and Latent Failures |
 | QP2402-Q8 | February 2024 Q8 | Grounded and Abandoned Indian Flag Vessel - Action under the Merchant Shipping Act |
 | QP2403-Q4 | March 2024 Q4 | High-Efficiency Propellers |
 | QP2403-Q5 | March 2024 Q5 | Maritime Cyber Risk Management Guidelines |
@@ -133,6 +135,15 @@ Examiner wording is reproduced exactly, errors included. Each is recorded in a n
 | QP2304-Q9 | ANOMALY, AND IT RUNS IN AN UNUSUAL DIRECTION. This source copy prints NO mark allocation against either limb, where the same question at every other sitting MIW holds prints a split - (8) and (8) in December 2023, and (10) and (6) in December 2024, September 2025 and June 2026. Neither split is imported: the question is recorded at 16 marks under instruction 2 with marks null on both limbs, and the two limbs are treated as of comparable weight. Two printed features are preserved exactly: 'SOLAS ch.ll-1', written with two lowercase letter L characters rather than the Roman numeral II and read as chapter II-1; and 'above-referred' hyphenated with 'toward' rather than 'towards', which is the orthography that places this paper in the same family branch as the December 2023 sitting. |
 | QP2309-Q1 | The source copy prints (16) against the stem and no mark against any of the three limbs. The limbs are therefore recorded with marks null. Nothing is inferred about an internal split: the printed form is a single 16-mark question with three parts, and the answer is balanced by the work each limb demands rather than by an invented allocation. |
 | QP2309-Q9 | The source copy prints (16) against the stem and runs the three parts inline within the sentence, with no mark against any of them. The limbs are therefore recorded with marks null. No internal split is inferred: the three are of comparable weight and the answer treats them so, with the third given slightly more space because it is the principle the other two depend on. |
+| QP2310-Q1 | The question prints a single mark figure, (16), at the end of the stem. The three named items (i), (ii) and (iii) carry no individual marks, so sub-part marks are null. Nothing is inferred about how the examiner would split the sixteen between them. |
+| QP2310-Q2 | Printed marks are complete and consistent: A (4), B (6) and C (6), summing to the sixteen the rubric implies. No anomaly. |
+| QP2310-Q3 | The question prints a single mark figure, (16), after the third item. The three named items carry no individual marks, so sub-part marks are null. |
+| QP2310-Q4 | PRINTED STRUCTURE ANOMALY, PRESERVED. The question opens 'A.' and never prints a 'B.'. The single lettered part A contains four roman-numbered items i to iv, each printed at (4), summing to sixteen. The sub-parts are therefore recorded at the roman level, which is where the examiner put the marks; the orphan 'A.' is preserved in text_verbatim and is not tidied away. |
+| QP2310-Q5 | PRINTED MARK ANOMALY, PRESERVED AND NOT RECONCILED. Limb A is printed '(8)' and limb B is printed '(16)'. Those sum to twenty-four against a rubric under which every question carries equal marks and the paper totals 100. The printed allocation is therefore internally inconsistent and cannot be recorded as an arithmetic split, so sub-part marks are left null rather than being silently repaired to 8+8 or the total inflated to 24. Both printed figures are preserved verbatim inside text_verbatim. total_marks 16 is derived from the rubric - see the paper-level marks_note - and not from the print. |
+| QP2310-Q6 | The question prints a single mark figure, (16), at the end. It prints no lettered limbs but sets two tasks, so subparts is empty and the two tasks are carried in the decomposition rather than being invented as limbs the examiner did not print. |
+| QP2310-Q7 | Printed marks are complete and consistent: a) (8) and b) (8), summing to sixteen. No anomaly. |
+| QP2310-Q8 | The question prints a single mark figure, (16), before the four defined items. Items (a) to (d) carry no individual marks, so sub-part marks are null. |
+| QP2310-Q9 | ANOMALY: the question prints NO mark allocation at all, neither a total nor any limb figure, and it is the only question on this paper that prints none. Recorded at 16 marks under printed instruction 2 ('All questions carry equal marks'); the absence is the printed copy's and not a transcription loss. A further printed anomaly is preserved in limb b): the opening quotation mark before 'latent failures' has no closing mark, where 'active failures' is correctly closed. |
 | QP2312-Q2 | Limb (b) prints "What are the right to appeal available to you" - singular 'right' against a plural verb. Reproduced exactly as printed and not corrected. |
 | QP2312-Q3 | Limb (a) prints "York Antwerp Rules 1994" without a comma before the year and asks three separate things in one limb. Reproduced exactly as printed. The 1994 edition is named by the examiner and governs the answer; the 2016 edition is treated as a comparison, not as a substitution. |
 | QP2312-Q4 | Limb (a) prints "decarbonization" with a z and limb (b) prints "present-day" hyphenated. Both reproduced exactly as printed. Limb (a) ends page 1 of the source copy and limb (b) opens page 2. |
