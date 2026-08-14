@@ -28,9 +28,7 @@ jobs:
         env:
           BREVO_SMTP_LOGIN: ${{ secrets.BREVO_SMTP_LOGIN }}
           BREVO_SMTP_KEY: ${{ secrets.BREVO_SMTP_KEY }}
-          # Reuses the QB recipient secret when a SolvedQP-specific one has not
-          # been set, matching the fallback the script itself documents. No new
-          # secret has to be created for this job to start reporting.
-          SOLVEDQP_HEALTH_EMAIL_TO: ${{ secrets.SOLVEDQP_HEALTH_EMAIL_TO }}
-          QB_HEALTH_EMAIL_TO: ${{ secrets.QB_HEALTH_EMAIL_TO }}
+          # Public recipient address. Keeping it explicit avoids an empty
+          # repository secret overriding the script's built-in fallback.
+          SOLVEDQP_HEALTH_EMAIL_TO: contactus@marineintelligenceweekly.com
         run: python3 tools/pastpapers/solvedqp_health_check.py
