@@ -5,9 +5,9 @@
 **Corpus commit consumed:** `319524c24d11b2f89f33672c384b56e9ae1ab7db`
 **Source SHA-256:** `5e16dca72cb492f70db244a61600f521d2d2fc4a997f6ba0d459da71752187a1`
 
-> **This paper is NOT finished. 4 of 9 questions are authored.**
+> **This paper is NOT finished. 5 of 9 questions are authored.**
 > Governed by `DESKTOP_QP_PRODUCTION_PLAYBOOK.md` §12. There is no valid half-authored state in a
-> canonical spec, so **`specs/QP2302.json` has deliberately NOT been created.** The four completed
+> canonical spec, so **`specs/QP2302.json` has deliberately NOT been created.** The five completed
 > question objects live here in staging. The next session resumes **on this same branch**.
 
 ---
@@ -17,8 +17,8 @@
 | Artefact | State |
 |---|---|
 | `docs/QP2302_TEMPORAL_AND_DONOR_ANCHOR.md` | **COMPLETE** through §6. §7 (finalised-at-authoring) is a stub and is written last |
-| `staging/QP2302/Q1.json` … `Q4.json` | **COMPLETE** — full MIW house depth, 41/41 house fields each, schema-identical to QP2303 |
-| `staging/QP2302/Q5.json` … `Q9.json` | **NOT WRITTEN** |
+| `staging/QP2302/Q1.json` … `Q5.json` | **COMPLETE** — full MIW house depth, 41/41 house fields each, schema-identical to QP2303 |
+| `staging/QP2302/Q6.json` … `Q9.json` | **NOT WRITTEN** |
 | `specs/QP2302.json` | **NOT CREATED — deliberately.** Create only at 9/9, by guarded mechanical assembly |
 | `QP2302.html` | **NOT BUILT** — deterministic from the solved spec, so it follows assembly |
 | `verification/QP2302/Q1.md` … `Q9.md` | **NOT WRITTEN** — derived from the spec objects, written after assembly |
@@ -31,12 +31,12 @@
 | Q2 | III Code — objectives, flag State strategy, KPIs, three State roles | A | `QP2510-Q7` | +32 mo | 62 KB |
 | Q3 | EEXI design compliance, and the CII rating with AER and EEOI | A | `QP2410-Q8` | +20 mo | 75 KB |
 | Q4 | Maritime against contractual salvage, liability for the award, LOF | C | `QP2408-Q7` | +18 mo | 67 KB |
+| Q5 | ISM effective communication, Engine Resource Management, two worked examples | C | `QP2312-Q4` | +10 mo | 71 KB |
 
 ### Remaining questions — donor adjudication already done, see anchor §3.1
 
 | Q | Subject | Tier | Preferred donor | Distance | Note for the resuming session |
 |---|---|---|---|---|---|
-| Q5 | ISM "Effective communication" + Engine Resource Management + two near-miss examples | C | `QP2312-Q4` | +10 mo | **Prints a lone `a)` with no `b)`** — one limb, three instructions. **No casualty report is held**: the two examples must be constructed, clearly-labelled illustrative scenarios, and the answer must say so — see anchor §5.2 item 5 |
 | Q6 | Bill of Lading — main function, why *to order*, when it becomes the contract | C | `QP2403-Q2` | +13 mo | Donor limbs differ (*define / distinguish types / obligations*). **No Hague-Visby article may be asserted by number** — anchor §5.2 item 4. Printed `(a) (b)` bracketed, unique on this paper |
 | Q7 | High-efficiency propellers — ducted, Kappel, contra-rotating, azimuth | A | `QP2510-Q4` | +32 mo | Exact stem. `QP2403-Q4` is a tied second instance. Hydrodynamics is undated; **only the regulatory framing needs re-deriving** to EEXI/CII + Initial GHG Strategy 2018. Printed **`Cortra`** = contra-rotating |
 | Q8 | MLC 2006 — flag/port State, complaint procedures, detainable deficiencies, Indian grievance redressal | C | `QP2407-Q6` | +17 mo | **No exact donor exists.** `QP2407-Q6` is two limbs only; `QP2406-Q6` is four *different* limbs. **Printed `Compliant` is a misprint for `Complaint`** — anchor §4 Q8. MLC 2022 amendments **adopted, NOT in force** (+22 mo). Limb (d) has **no donor and no held Indian source** — architecture only, no circular number |
@@ -56,7 +56,7 @@ git -c safe.directory=* log --oneline -1
 1. **Read first, in this order:** `docs/QP2302_TEMPORAL_AND_DONOR_ANCHOR.md` (complete — do not
    re-derive the donor map or the temporal line), then this file, then `Q1.json` as the depth and
    register reference. **Do not re-run the donor recomputation**; §3 of the anchor is settled.
-2. **Author `Q5.json` … `Q9.json`** into `staging/QP2302/`, one at a time, to the same house depth.
+2. **Author `Q6.json` … `Q9.json`** into `staging/QP2302/`, one at a time, to the same house depth.
    Every question object carries all **41** house fields. Validate each against the QP2303 schema
    before moving on — the helper is reproduced at §4 below.
 3. **Only when 9/9 exist**, assemble `specs/QP2302.json` by guarded mechanical assembly: the header
