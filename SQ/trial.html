@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<title>Free trial — Marine Intelligence Weekly</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0f172a;
+     font-family:'Segoe UI',system-ui,sans-serif;padding:1rem}
+.card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:2.25rem 1.75rem;
+      width:100%;max-width:480px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+.logo{color:#0d9488;font-weight:700;font-size:1.1rem;margin-bottom:4px}
+.subtitle{color:#64748b;font-size:13px;margin-bottom:1.75rem}
+h2{color:#f1f5f9;font-size:1.2rem;margin-bottom:.4rem}
+.desc{color:#94a3b8;font-size:13px;margin-bottom:1.25rem;line-height:1.7}
+.field{margin-bottom:1rem}
+label{display:block;color:#94a3b8;font-size:13px;margin-bottom:6px}
+input{width:100%;padding:12px 14px;background:#0f172a;border:1px solid #334155;border-radius:8px;
+      color:#f1f5f9;font-size:15px;outline:none;transition:border .2s;min-height:44px}
+input:focus{border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.15)}
+.btn{width:100%;margin-top:.5rem;padding:13px;background:#0d9488;color:#fff;border:none;border-radius:8px;
+     font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;text-align:center;
+     text-decoration:none;display:block;min-height:44px}
+.btn:hover{background:#0f766e}
+.btn:disabled{background:#334155;cursor:not-allowed;color:#64748b}
+.btn.ghost{background:transparent;border:1px solid #334155;color:#cbd5e1}
+.btn.ghost:hover{background:#0f172a;border-color:#0d9488;color:#fff}
+.note{color:#f87171;font-size:13px;margin-top:10px;padding:10px 12px;background:rgba(248,113,113,.1);
+      border-radius:6px;display:none;line-height:1.6}
+.note.info{color:#fbbf24;background:rgba(251,191,36,.1)}
+.divider{border:none;border-top:1px solid #334155;margin:1.5rem 0}
+.help{color:#64748b;font-size:12px;text-align:center;line-height:1.9}
+.help a{color:#0d9488;text-decoration:none}
+.hidden{display:none}
+.spinner{color:#64748b;font-size:13px;text-align:center;padding:1.5rem 0}
+.who{color:#64748b;font-size:12.5px;margin-bottom:1.25rem;word-break:break-all}
+/* ---- offer ---- */
+.offer{border:1px solid #334155;border-radius:10px;padding:1.1rem 1.15rem;margin-bottom:1rem;background:#0f172a}
+.offer.live{border-color:#0d9488}
+.offer h3{color:#f1f5f9;font-size:1rem;margin:0 0 .5rem}
+.offer p{color:#94a3b8;font-size:12.5px;line-height:1.7;margin:0 0 .6rem}
+.offer ul{margin:0 0 .6rem 1.1rem;padding:0}
+.offer li{color:#94a3b8;font-size:12.5px;line-height:1.8}
+.state{font-size:13px;line-height:1.6;color:#34d399;margin:0 0 .8rem}
+.state.ended{color:#94a3b8}
+.iday{background:linear-gradient(180deg,rgba(13,148,136,.14),rgba(13,148,136,.05));
+      border:1px solid rgba(13,148,136,.45);border-radius:10px;padding:.9rem 1.05rem;margin-bottom:1rem}
+.iday .t{color:#5eead4;font-size:13.5px;font-weight:700;margin-bottom:.3rem}
+.iday .s{color:#94a3b8;font-size:12.5px;line-height:1.7}
+.price-note{color:#64748b;font-size:12px;line-height:1.8;margin-top:.6rem}
+.price-note strong{color:#fbbf24}
+@media(max-width:420px){.card{padding:1.75rem 1.25rem}}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">Marine Intelligence Weekly</div>
+  <div class="subtitle">MEO Class I — free trial</div>
+
+  <div id="panel-loading"><div class="spinner">Checking your access…</div></div>
+
+  <!-- ============ NOT SIGNED IN ============ -->
+  <div id="panel-anon" class="hidden">
+    <div id="anon-iday"></div>
+    <h2 id="anon-title">Try it free</h2>
+    <p class="desc" id="anon-desc"></p>
+    <p class="desc">
+      A trial is attached to your MIW account, so it stays yours across devices
+      and browsers. Enter your email and we will send you a password.
+    </p>
+    <div class="field">
+      <label for="anon-email">Email address</label>
+      <input type="email" id="anon-email" placeholder="your@email.com" autocomplete="email">
+    </div>
+    <div class="note" id="anon-msg"></div>
+    <button class="btn" id="anon-btn">Email me a password</button>
+    <hr class="divider">
+    <div class="help">
+      Already have an MIW account? <a href="/SQ/pay.html">Sign in →</a><br>
+      <a href="/SQ/">Back to products</a>
+    </div>
+  </div>
+
+  <!-- ============ SIGNED IN ============ -->
+  <div id="panel-offer" class="hidden">
+    <h2>Free trial</h2>
+    <div class="who" id="offer-who"></div>
+    <div id="offer-body"></div>
+    <hr class="divider">
+    <div class="help">
+      <a href="/SQ/pay.html">Your MIW access</a> ·
+      <a href="#" id="logout">Sign out</a> ·
+      <a href="mailto:contactus@marineintelligenceweekly.com">Support</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// -------------------------------------------------------------
+// AUTHORITY NOTE
+//
+// This page decides NOTHING. It asks /api/trial what the server says
+// and renders that. Every number shown here — whether a trial is
+// available, how many hours it runs for, when it expires — is computed
+// on the server from the server's clock and simply displayed.
+//
+// In particular, the trial CLOCK STARTS on the POST below and nowhere
+// else. Loading this page does not start it. Signing in does not start
+// it. Being bounced here by middleware does not start it. Only the
+// button does.
+//
+// Expiry is enforced by Edge middleware on every request to the paid
+// routes, not by anything on this page. Changing the device clock,
+// editing this script, or replaying the POST does not extend access by
+// one second.
+// -------------------------------------------------------------
+
+const PRODUCTS = {
+  ORAL_QB_NOTES: {
+    name: "Oral QB + Notes",
+    open: "/meoclass1/",
+    buy: "/SQ/#pricing",
+    price: "₹1,499",
+    includes: [
+      "417+ solved MEO Class I oral questions",
+      "The examiner index and the full notes series",
+      "Every topic, unrestricted, for the length of the trial",
+    ],
+  },
+  SOLVED_QP: {
+    name: "Solved Question Papers",
+    open: "/solvedQP/",
+    buy: "/SQ/#solved-qp",
+    price: "₹1,500",
+    includes: [
+      "Every solved Written paper in the library",
+      "All five modes — Understand, Exam Plan, Answer, Study Guide, Recall",
+      "Topic search and the year-by-year QP intelligence",
+    ],
+    priceNote:
+      "₹500 per completed year × 3 years = ₹1,500. The 2026 papers solved so far " +
+      "are included free. <strong>Lifetime access: ₹1,500.</strong>",
+  },
+};
+
+const $ = (id) => document.getElementById(id);
+const params = new URLSearchParams(location.search);
+
+// The campaign product is the default, so a bare /SQ/trial.html link in
+// a post or a message lands on the right offer.
+const KEY = PRODUCTS[params.get("product")] ? params.get("product") : "SOLVED_QP";
+const P = PRODUCTS[KEY];
+
+function show(panel) {
+  for (const p of ["loading", "anon", "offer"]) {
+    $("panel-" + p).classList.toggle("hidden", p !== panel);
+  }
+}
+
+function msg(id, text, kind) {
+  const el = $(id);
+  el.innerHTML = text;
+  el.className = "note" + (kind === "info" ? " info" : "");
+  el.style.display = text ? "block" : "none";
+}
+
+/**
+ * "23h 41m left". Computed once from the server's expiry timestamp and
+ * rendered as static text — not a ticking countdown. The candidate
+ * asked how long they have; they are not being hurried.
+ */
+function remainingText(seconds) {
+  if (!(seconds > 0)) return "";
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  if (h > 0) return h + "h " + m + "m left";
+  if (m > 0) return m + "m left";
+  return "under a minute left";
+}
+
+/** Local rendering of a server-supplied expiry, labelled as local. */
+function expiryText(epochSeconds) {
+  if (!epochSeconds) return "";
+  try {
+    return new Date(epochSeconds * 1000)
+      .toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+  } catch (_) { return ""; }
+}
+
+function independenceBanner(hours) {
+  return '<div class="iday">' +
+    '<div class="t">🇮🇳 Independence Day Open Access</div>' +
+    '<div class="s">Start the Solved QP trial today and you get <strong>' + hours +
+    " hours</strong> of the full product, counted from the moment you start it. " +
+    "The normal trial is 12 hours.</div></div>";
+}
+
+function includesList() {
+  return "<ul>" + P.includes.map((i) => "<li>" + i + "</li>").join("") + "</ul>";
+}
+
+function priceNote() {
+  return P.priceNote ? '<p class="price-note">' + P.priceNote + "</p>" : "";
+}
+
+// -------------------------------------------------------------
+// Signed-in rendering — one branch per Founder state.
+// -------------------------------------------------------------
+function renderOffer(session) {
+  $("offer-who").textContent = "Signed in as " + session.email;
+  const offer = (session.offers || {})[KEY] || {};
+  const box = $("offer-body");
+  const hours = offer.offerHours || 12;
+  let html = "";
+
+  if (offer.status === "owned") {
+    // STATE A — already owned. No trial is offered, and none is spent.
+    html =
+      '<div class="offer live"><h3>' + P.name + "</h3>" +
+      '<p class="state">✓ You have full access to this product.</p>' +
+      '<a class="btn" href="' + P.open + '">Open ' + P.name + " →</a></div>";
+
+  } else if (offer.status === "active") {
+    // STATE D — running.
+    html =
+      '<div class="offer live"><h3>' + P.name + "</h3>" +
+      '<p class="state">Trial active — ' + remainingText(offer.secondsRemaining) +
+      (expiryText(offer.expires) ? "<br>Access ends " + expiryText(offer.expires) : "") +
+      "</p>" +
+      '<a class="btn" href="' + P.open + '">Open ' + P.name + " →</a>" +
+      '<a class="btn ghost" href="' + P.buy + '">Get lifetime access ' + P.price + " →</a>" +
+      priceNote() + "</div>";
+
+  } else if (offer.status === "expired") {
+    // STATE E / F — spent. One trial per account, and it is over.
+    html =
+      '<div class="offer"><h3>' + P.name + "</h3>" +
+      '<p class="state ended">Your free trial has ended.' +
+      (expiryText(offer.expires) ? " It ran until " + expiryText(offer.expires) + "." : "") +
+      "</p>" +
+      "<p>Trials are one per account. Everything you saw during the trial is " +
+      "part of the full product.</p>" +
+      '<a class="btn" href="' + P.buy + '">Get lifetime access ' + P.price + " →</a>" +
+      priceNote() + "</div>";
+
+  } else {
+    // STATE B / C — available. C is B plus the campaign banner.
+    if (offer.independenceDay) html += independenceBanner(hours);
+    html +=
+      '<div class="offer"><h3>' + P.name + "</h3>" +
+      "<p>The full product for " + hours + " hours — not a sample, not a demo:</p>" +
+      includesList() +
+      '<button class="btn" id="start-btn">Start ' + hours + "-hour free trial</button>" +
+      '<div class="note" id="start-msg"></div>' +
+      '<p class="price-note">The ' + hours + " hours start when you press the button, " +
+      "not now. One trial per account.</p>" +
+      priceNote() + "</div>";
+  }
+
+  box.innerHTML = html;
+  const btn = $("start-btn");
+  if (btn) btn.addEventListener("click", startTrial);
+}
+
+async function loadState() {
+  try {
+    const r = await fetch("/api/trial", { credentials: "same-origin" });
+    const s = await r.json();
+    return s && s.authenticated ? s : null;
+  } catch (_) {
+    return null;
+  }
+}
+
+/**
+ * THE ONLY PLACE THE CLOCK STARTS.
+ *
+ * The server ignores everything about this request except the session
+ * cookie and the product name — the duration, the expiry and the
+ * Independence Day eligibility are all decided there.
+ */
+async function startTrial() {
+  const btn = $("start-btn");
+  btn.disabled = true;
+  btn.textContent = "Starting…";
+  try {
+    const r = await fetch("/api/trial", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ product: KEY }),
+    });
+    const d = await r.json();
+
+    // Re-read from the server rather than trusting the POST body to
+    // paint the new state. Same reason the endpoint re-reads after
+    // HSETNX: the store is the truth, not what we hoped we wrote.
+    const s = await loadState();
+    if (s) { renderOffer(s); return; }
+
+    msg("start-msg", d && d.reason === "already_used"
+      ? "That trial has already been used on this account."
+      : "Could not confirm the trial. Please refresh.");
+    btn.disabled = false;
+    btn.textContent = "Start free trial";
+  } catch (_) {
+    msg("start-msg", "Connection error. Please try again.");
+    btn.disabled = false;
+    btn.textContent = "Start free trial";
+  }
+}
+
+// -------------------------------------------------------------
+// Not signed in — obtain a credential. This does NOT start a trial:
+// if it did, anyone could burn a stranger's one trial by typing their
+// address into this box.
+// -------------------------------------------------------------
+async function requestAccess() {
+  const email = $("anon-email").value.trim().toLowerCase();
+  const btn = $("anon-btn");
+  msg("anon-msg", "");
+  if (!email) return msg("anon-msg", "Please enter your email address.");
+
+  btn.disabled = true;
+  btn.textContent = "Sending…";
+  try {
+    const r = await fetch("/api/request-access", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    const d = await r.json();
+    msg("anon-msg", (d && d.message) ||
+      "Check your email. If that address is new to MIW, a password is on its way.", "info");
+  } catch (_) {
+    // The server answers identically whether or not the address is
+    // known, so a network failure must not become the one response
+    // that distinguishes them.
+    msg("anon-msg",
+      "Check your email. If that address is new to MIW, a password is on its way.", "info");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Email me a password";
+  }
+}
+
+$("anon-btn").addEventListener("click", requestAccess);
+$("anon-email").addEventListener("keydown", (e) => { if (e.key === "Enter") requestAccess(); });
+
+$("logout").addEventListener("click", async (e) => {
+  e.preventDefault();
+  try {
+    await fetch("/api/session", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "logout" }),
+    });
+  } catch (_) { /* clearing the cookie is the server's job */ }
+  location.replace("/SQ/trial.html?product=" + encodeURIComponent(KEY));
+});
+
+// ---- boot ----
+(async () => {
+  const s = await loadState();
+  if (s) {
+    renderOffer(s);
+    show("offer");
+    return;
+  }
+
+  // Anonymous, so there is no session to ask the server about. The
+  // campaign banner here is ADVERTISING computed from the visitor's own
+  // clock, and is deliberately not load-bearing: eligibility is decided
+  // on the server at the moment of activation. A candidate who signs up
+  // now and starts the trial after midnight IST gets 12 hours, and the
+  // signed-in panel — which does read server truth — will say 12 before
+  // they press anything. The worst this can do is show a banner to
+  // someone whose device clock is wrong; it cannot grant an hour.
+  const istToday = new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10);
+  if (KEY === "SOLVED_QP" && istToday === "2026-08-15") {
+    $("anon-iday").innerHTML = independenceBanner(24);
+  }
+
+  $("anon-title").textContent = "Try " + P.name + " free";
+  $("anon-desc").innerHTML =
+    "The complete product, unrestricted, for the length of the trial. " +
+    "No card, no subscription.";
+  show("anon");
+  $("anon-email").focus();
+})();
+</script>
+</body>
+</html>

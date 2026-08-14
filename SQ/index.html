@@ -354,6 +354,9 @@ footer a{color:#64748b;text-decoration:none}
         Get Standard Access — ₹1,499
       </button>
       <p style="font-size:11.5px;color:#64748b;text-align:center;margin-top:.5rem;line-height:1.5">📱 Have your UPI app ready before you tap — you'll get ~90 seconds to approve the payment there.</p>
+      <p style="font-size:11.5px;color:#64748b;text-align:center;margin-top:.5rem;line-height:1.5">
+        <a href="/SQ/trial.html?product=ORAL_QB_NOTES" style="color:#0d9488;font-weight:600">Try it free first →</a>
+      </p>
     </div>
   </div>
 
@@ -390,12 +393,38 @@ footer a{color:#64748b;text-decoration:none}
         This is the <strong>Written</strong> product. It is sold separately from the
         Oral QB + Notes above and does not include it.
       </p>
+      <p style="font-size:12px;color:#64748b;line-height:1.7;margin:.25rem 0 .9rem">
+        ₹500 per completed year × 3 years = ₹1,500. The 2026 papers solved so far
+        are included free. <strong style="color:#0f766e">Lifetime access: ₹1,500.</strong>
+        Not a subscription.
+      </p>
       <button class="pay-btn pay-btn-standard" id="btn-solvedqp" onclick="startCheckout('SOLVED_QP','standard')">
         Get Solved QP Access — ₹1,500
       </button>
-      <p style="font-size:11.5px;color:#64748b;text-align:center;margin-top:.5rem;line-height:1.5">
-        Not sure yet? <a href="/SQ/solved-qp-sample-january-2026.html" style="color:#0d9488;font-weight:600">Read the free January 2026 paper first →</a>
+      <!-- Trial CTA only. The trial page owns every piece of trial state —
+           the offer, the clock, the expiry. Nothing about it lives here. -->
+      <p id="solvedqp-iday" style="display:none;font-size:12.5px;text-align:center;margin-top:.75rem;
+         line-height:1.6;color:#0f766e;font-weight:600">
+        🇮🇳 Independence Day Open Access — start today for 24 hours of full access.
       </p>
+      <p style="font-size:11.5px;color:#64748b;text-align:center;margin-top:.5rem;line-height:1.7">
+        <a href="/SQ/trial.html?product=SOLVED_QP" style="color:#0d9488;font-weight:600">Try it free first →</a><br>
+        Or <a href="/SQ/solved-qp-sample-january-2026.html" style="color:#0d9488;font-weight:600">read the free January 2026 paper →</a>
+      </p>
+      <script>
+      // Campaign line, shown on 15 August India time. This is a POSTER,
+      // not the rule: the 24 hours are granted by the server, which
+      // decides eligibility from its own clock at the moment the
+      // candidate presses Start. A wrong device clock can reveal this
+      // sentence early; it cannot buy anybody an extra hour.
+      // IST is UTC+05:30, fixed — shift the instant, read the date.
+      (function () {
+        var ist = new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10);
+        if (ist === "2026-08-15") {
+          document.getElementById("solvedqp-iday").style.display = "block";
+        }
+      })();
+      </script>
     </div>
   </div>
 </div>

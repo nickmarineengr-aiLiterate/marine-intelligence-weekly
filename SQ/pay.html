@@ -43,6 +43,12 @@ input:focus{border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.15)}
 .prod .tick{color:#34d399;font-weight:700;margin-right:5px}
 .prod p{color:#94a3b8;font-size:12.5px;line-height:1.6;margin:0 0 .8rem}
 .prod .price{color:#fbbf24;font-size:.95rem;font-weight:700;white-space:nowrap}
+.prod.wanted{border-color:#0d9488;box-shadow:0 0 0 3px rgba(13,148,136,.12)}
+.prod .flag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.03em;
+     text-transform:uppercase;color:#0d9488;margin-bottom:.35rem}
+.prod .state{font-size:12.5px;line-height:1.6;margin:0 0 .8rem;color:#34d399}
+.prod .state.ended{color:#94a3b8}
+.prod .btn+.btn{margin-top:.5rem}
 .spinner{color:#64748b;font-size:13px;text-align:center;padding:1.5rem 0}
 @media(max-width:420px){.card{padding:1.75rem 1.25rem}}
 </style>
@@ -117,6 +123,7 @@ const PRODUCTS = {
     blurb: "417+ solved oral questions, examiner index and the full notes series.",
     open: "/meoclass1/",
     buy: "/SQ/#pricing",
+    trial: "/SQ/trial.html?product=ORAL_QB_NOTES",
     price: "₹1,499",
     cta: "View Oral product",
   },
@@ -125,6 +132,7 @@ const PRODUCTS = {
     blurb: "Complete solved Written papers — Understand, Exam Plan, Answer, Study Guide, Recall.",
     open: "/solvedQP/",
     buy: "/SQ/#solved-qp",
+    trial: "/SQ/trial.html?product=SOLVED_QP",
     price: "₹1,500",
     cta: "View Written product",
   },
@@ -162,9 +170,33 @@ const REASONS = {
   nosession: "Please sign in to open that page.",
   evicted: "You were signed out because this account signed in on another device.",
   noentitlement: "Your account doesn't include that product yet.",
+  trialexpired: "Your free trial of that product has ended.",
   misconfigured: "Access is temporarily unavailable. Please contact support.",
   authstore: "Access is temporarily unavailable. Please try again shortly.",
 };
+
+/** Which product does a bounced path belong to? */
+function productForPath(path) {
+  if (!path) return null;
+  if (/^\/solvedQP\//.test(path) || /^\/meoclass1\/pastpapers\//.test(path)) return "SOLVED_QP";
+  if (/^\/meoclass1\//.test(path)) return "ORAL_QB_NOTES";
+  return null;
+}
+
+/**
+ * "11h 58m left" — computed once from the SERVER's expiry timestamp and
+ * rendered as plain text. Deliberately not a ticking countdown: the
+ * remaining time is information the candidate asked for, not pressure
+ * to act, and the browser's clock has no authority over access anyway.
+ */
+function remainingText(seconds) {
+  if (!(seconds > 0)) return "";
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  if (h > 0) return h + "h " + m + "m left";
+  if (m > 0) return m + "m left";
+  return "under a minute left";
+}
 
 /**
  * Name the product they were reaching for, so the notice says what they
@@ -173,65 +205,123 @@ const REASONS = {
  * point, not to sell.
  */
 function wantedSuffix(path) {
-  if (!path) return "";
-  const key = /^\/solvedQP\//.test(path) || /^\/meoclass1\/pastpapers\//.test(path)
-    ? "SOLVED_QP"
-    : /^\/meoclass1\//.test(path) ? "ORAL_QB_NOTES" : null;
+  const key = productForPath(path);
   return key ? " That page is part of " + PRODUCTS[key].name + " — see below." : "";
 }
 
+/**
+ * Render the access hub.
+ *
+ * WHAT THIS PAGE WILL NOT DO: choose a product for the candidate.
+ *
+ * It used to. If a signed-in customer was bounced from a page they
+ * were in fact entitled to, boot() called location.replace(next) and
+ * threw them straight into it. With a saved password in Chrome the
+ * whole gate could flash past in well under a second, so a candidate
+ * who came here to look at the OTHER product, or to check what their
+ * account holds, found themselves inside a product they had not asked
+ * to open and had to navigate back out of.
+ *
+ * Signing in proves WHO you are. It does not decide WHERE you go.
+ * `next` is now used only to highlight the card the candidate was
+ * reaching for; opening it is always an explicit click.
+ */
 function renderHub(session) {
   $("hub-who").textContent = "Signed in as " + session.email;
   const owned = session.entitlements || {};
+  const offers = session.offers || {};
+  const wanted = productForPath(nextPath);
   const box = $("hub-products");
   box.innerHTML = "";
 
-  // Owned first, then the cross-sell. Owning one product must never
-  // imply the other — they are separate purchases and separate grants.
-  const order = Object.keys(PRODUCTS).sort((a, b) => (owned[b] ? 1 : 0) - (owned[a] ? 1 : 0));
+  // The product they were reaching for comes first, then owned ones,
+  // then the cross-sell. Owning one product must never imply the other —
+  // they are separate purchases and separate grants.
+  const rank = (k) => (k === wanted ? 2 : 0) + (owned[k] ? 1 : 0);
+  const order = Object.keys(PRODUCTS).sort((a, b) => rank(b) - rank(a));
 
   for (const key of order) {
     const p = PRODUCTS[key];
     const has = owned[key] === true;
+    const offer = offers[key] || {};
+    const onTrial = !has && offer.status === "active";
+
     const el = document.createElement("div");
-    el.className = "prod" + (has ? " owned" : "");
-    el.innerHTML =
-      '<div class="row"><h3>' + (has ? '<span class="tick">✓</span>' : "") + p.name + "</h3>" +
-      (has ? "" : '<span class="price">' + p.price + "</span>") + "</div>" +
-      "<p>" + p.blurb + "</p>" +
-      '<a class="btn' + (has ? "" : " ghost") + '" href="' + (has ? p.open : p.buy) + '">' +
-      (has ? "Open" : p.cta) + " →</a>";
+    el.className = "prod" + (has || onTrial ? " owned" : "") + (key === wanted ? " wanted" : "");
+
+    let html = "";
+    if (key === wanted) html += '<span class="flag">You were opening this</span>';
+    html += '<div class="row"><h3>' + (has || onTrial ? '<span class="tick">✓</span>' : "") +
+            p.name + "</h3>" +
+            (has || onTrial ? "" : '<span class="price">' + p.price + "</span>") + "</div>";
+    html += "<p>" + p.blurb + "</p>";
+
+    if (has) {
+      // STATE A — owned outright.
+      html += '<a class="btn" href="' + p.open + '">Open →</a>';
+    } else if (onTrial) {
+      // STATE D — trial running. Access is real, so the primary action
+      // is to use it; buying is offered second, not pushed.
+      html += '<p class="state">Free trial active — ' +
+              remainingText(offer.secondsRemaining) + "</p>" +
+              '<a class="btn" href="' + p.open + '">Open →</a>' +
+              '<a class="btn ghost" href="' + p.buy + '">Get lifetime access ' + p.price + " →</a>";
+    } else if (offer.status === "expired") {
+      // STATE E/F — trial spent. Say so plainly and move on.
+      html += '<p class="state ended">Your free trial has ended.</p>' +
+              '<a class="btn" href="' + p.buy + '">' + p.cta + " →</a>";
+    } else if (offer.status === "available") {
+      // STATE B/C — trial still there for the taking. The trial page
+      // owns the offer copy and the Independence Day banner; this is a
+      // link to it, not a second place the clock could start.
+      html += '<a class="btn ghost" href="' + p.buy + '">' + p.cta + " →</a>" +
+              '<a class="btn ghost" href="' + p.trial + '">Try free' +
+              (offer.offerHours ? " for " + offer.offerHours + " hours" : "") + " →</a>";
+    } else {
+      // Trial state unavailable (e.g. /api/trial unreachable). Degrade
+      // to the plain buy path rather than guess at an offer.
+      html += '<a class="btn ghost" href="' + p.buy + '">' + p.cta + " →</a>";
+    }
+
+    el.innerHTML = html;
     box.appendChild(el);
   }
 
+  // Owning nothing is a legitimate state — a trial candidate is here
+  // too — so this explains the just-purchased case without implying
+  // the account is broken.
   if (!Object.values(owned).some(Boolean)) {
     const el = document.createElement("p");
     el.className = "desc";
-    el.textContent = "No products are attached to this account yet. " +
-      "If you have just purchased, give it a minute and refresh.";
-    box.prepend(el);
+    el.textContent = "If you have just purchased, give it a minute and refresh.";
+    box.appendChild(el);
   }
 }
 
-async function loadSession({ redirectIfAllowed } = {}) {
+/**
+ * Ask the server who this is and what they hold.
+ *
+ * /api/trial answers identity, entitlements AND trial state in one
+ * round trip, all from the same authoritative store /api/session reads.
+ * If it cannot be reached we fall back to /api/session so the hub still
+ * renders owned products — a trial outage must not lock a paying
+ * customer out of their own access page.
+ *
+ * This function NAVIGATES NOWHERE. That is the point.
+ */
+async function loadAccess() {
+  try {
+    const r = await fetch("/api/trial", { credentials: "same-origin" });
+    const s = await r.json();
+    if (s && s.authenticated) return s;
+    if (s && s.authenticated === false) return null;
+  } catch (_) { /* fall through to the identity-only endpoint */ }
+
   try {
     const r = await fetch("/api/session", { credentials: "same-origin" });
     const s = await r.json();
-    if (!s.authenticated) return null;
-
-    // If middleware bounced them from a specific page and they are now
-    // entitled to it, send them straight back rather than making them
-    // navigate again.
-    if (redirectIfAllowed && nextPath && /^\/(meoclass1|solvedQP)\//.test(nextPath)) {
-      const need = nextPath.startsWith("/solvedQP/") ? "SOLVED_QP"
-        : nextPath.startsWith("/meoclass1/pastpapers/") ? "SOLVED_QP" : "ORAL_QB_NOTES";
-      if (s.entitlements && s.entitlements[need]) {
-        location.replace(nextPath);
-        return s;
-      }
-    }
-    return s;
-  } catch (e) {
+    return s && s.authenticated ? s : null;
+  } catch (_) {
     return null;
   }
 }
@@ -263,7 +353,10 @@ async function doLogin() {
     }
 
     // The session cookie is set by the server. Nothing is stored here.
-    const s = await loadSession({ redirectIfAllowed: true });
+    //
+    // Signing in lands on the hub — ALWAYS. Even when `next` names a
+    // page this account can open, the candidate chooses to open it.
+    const s = await loadAccess();
     if (s && s.authenticated) {
       renderHub(s);
       show("hub");
@@ -345,7 +438,7 @@ $("logout").addEventListener("click", async (e) => {
   // Clear the old cleartext-password record if this browser still has one.
   try { localStorage.removeItem("miw_auth"); } catch (_) {}
 
-  const s = await loadSession({ redirectIfAllowed: true });
+  const s = await loadAccess();
   const reason = params.get("reason");
 
   if (s && s.authenticated) {
