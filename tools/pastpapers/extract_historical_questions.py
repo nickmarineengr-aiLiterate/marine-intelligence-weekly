@@ -93,14 +93,30 @@ MONTHS = ('January', 'February', 'March', 'April', 'May', 'June',
 #   2. Leakage. The annotation names a third party's product. It is DISCOVERY
 #      ONLY (CURRENT_STATUS section 20) and must never reach a built artefact.
 HOST_HINT_RX = re.compile(
-    r'\b(?:19|20)\d{2}\s*/\s*[A-Z]{3}(?:\s*/\s*Q\d+)?\b'
+    # The question number after the month is written BOTH ways -- "2019/JUL/Q3"
+    # and "2023/MAR/4". Requiring the Q matched the first form, stripped
+    # "2023/MAR" out of the second, and left a bare "/4" sitting in the stem,
+    # which is how QP2303-Q4 came to differ from its own source copy.
+    r'\b(?:19|20)\d{2}\s*/\s*[A-Z]{3}(?:\s*/\s*Q?\d+)?\b'
     r'|\b(?:19|20)\d{2}/SR\d+\b'
 )
 
 # The host's marketing and watermark lines. Never transcribed.
 HOST_BRANDING_RX = re.compile(
     r'DIESELSHIP|WWW\.|dsguides|please click here|purchase our original|'
-    r'maritime publishing|CAD DRAWING|15 YEARS', re.I)
+    r'maritime publishing|CAD DRAWING|15 YEARS|'
+    # The host's imprint, printed alone on one bare word. Anchored to the whole
+    # line so a question genuinely about publishing is untouched.
+    r'^PUBLISHING$', re.I)
+
+# The host's "works on all your devices" blurb. It sits INSIDE a question's span,
+# so it was transcribed into the printed stem of 13 questions across 9 papers.
+# It is matched on the ASSEMBLED stem rather than line by line because it wraps
+# unpredictably: on QP2303 it occupies one line, on QP2310 and QP2311 it breaks
+# after "phones," and a line filter removed only the first half, leaving
+# "computers, mobiles, tablets etc." sitting in the question.
+HOST_BLURB_RX = re.compile(
+    r'\s*(?:that runs on\s*)?windows\s*\|\s*iOS.*?tablets\s*etc\.?', re.I | re.S)
 
 
 def page_text(path):
@@ -179,6 +195,7 @@ def parse(path):
         # stem inherits a stray '.' from "Q7)." or the whole "Q9 " from "Q9 A.".
         body = re.sub(r'^Q?\s?\.?\s?\d\s*[\.\):]*\s*', '', body).strip()
 
+        body = HOST_BLURB_RX.sub(' ', body)
         hints = HOST_HINT_RX.findall(body)
         body = HOST_HINT_RX.sub('', body)
         body = re.sub(r'\s+', ' ', body).strip()
