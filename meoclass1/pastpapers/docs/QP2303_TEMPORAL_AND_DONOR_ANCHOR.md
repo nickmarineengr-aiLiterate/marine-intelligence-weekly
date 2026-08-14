@@ -491,3 +491,73 @@ Corpus commit **`319524c`**, read-only. **No corpus modification was made from t
 | Same-year donors | **8 relations across 5 questions**, including one **verbatim** (`QP2309-Q2` → Q8 b) and one that runs **backwards** (`QP2301-Q3` → Q3) |
 | Corpus commit | `319524c` — read-only, unmodified |
 | Corrections raised | **1** — `MEPC.328(76)` entry-into-force year in `amendment-register.json` (§2.3) |
+
+---
+
+## 7. FINALISED AT AUTHORING — what changed when the nine answers were written
+
+**Written after Q1–Q9 were authored and promoted.** Nothing above was rewritten; this section records what
+authoring found, so that the difference between the pre-authoring adjudication and the finished paper is
+visible rather than silently absorbed.
+
+### 7.1 The adjudication held. Four things were corrected.
+
+| # | Finding | Where it is recorded |
+|---|---|---|
+| 1 | **§3.1 misdescribes the Q3 divergence.** It records the difference from `QP2503-Q5` as lying in the printed quotation marks around *"due diligence"*. A word-by-word re-diff of both `text_verbatim` fields at authoring time shows **the quotation marks are identical in both papers**, and that the **sole** divergence is the donor's printed `(16)`, which this paper does not carry. | `Q3.question_delta`, `Q3.unresolved`, `Q3.reverify_before_publication`, `verification/QP2303/Q3.md` |
+| 2 | **The spec's `source_copy_provenance` omitted `pages` and `printed_serial`.** Every other spec in the corpus carries both, and `build_reuse_map.py` fails without `pages`. The values — **2 pages** and **`2303 EM`** — were established at intake and are recorded at §1 of this anchor; they were **restored, not changed**. | `specs/QP2303.json`, `source_copy_provenance.printed_serial_note` |
+| 3 | **The `A.1157(32)` reversal is required on TWO questions, not one.** §2.2 records it as the operative PSC procedures resolution for Q7. Authoring found that **Q8's monitoring limb needs the identical reversal**, because its January 2024 donor closes on the obligations list at `A.1187(33)` — adopted 6 December 2023, nine months after this sitting. The correction was made on both questions **independently from the adoption dates**, not inherited from either. | `Q7.temporal_review`, `Q8.temporal_review`, `Q8.question_delta` |
+| 4 | **A second IACS forward trap was closed on Q8.** The Safe Digital Transformation Panel was constituted in **January 2024**, ten months after this sitting. No panel constituted after March 2023 is named and **no panel count and no membership count is asserted**. | `Q8.unresolved`, `Q8.temporal_review` |
+
+### 7.2 The two findings §2.3 and §2.4 turned on both held
+
+- **The `MEPC.328(76)` correction is load-bearing on two questions and it held.** Entry into force is
+  **1 November 2022**, from the resolution's own operative paragraph 3. Q2 and Q4 are both authored on it. Had
+  the register's `2023-11-01` been consumed, Q4's regulatory frame would have been inapplicable and **Q2 would
+  have been unanswerable**. The corpus was **not edited from this branch** and the
+  `TRUE_SOURCE_CORRECTION_REQUEST` stands.
+- **The §2.4 primary anchor for Q2 held and is the best evidence on the paper.** `MEPC.328(76)`'s preamble
+  *RECALLS FURTHER* the adoption of `MEPC.304(72)`, so the instrument that created EEXI and CII names the
+  Initial Strategy as the frame it sits under. `MEPC.304(72)` is still **not held as a document**: its identity
+  is primary-verified from that preamble and its **levels of ambition remain graded P2** and flagged.
+
+### 7.3 The donor shape was confirmed unchanged
+
+**3 EXACT · 2 NEAR · 2 LIMB-LEVEL · 1 TOPICAL-ONLY · 1 FRESH = 8 of 9.** No question moved class at authoring.
+
+- **Q5 is genuinely fresh.** Neither limb has any relative in the corpus; the 0.189 best score is noise from
+  `QP2401-Q6`, which recurs as a false positive against Q1, Q5, Q7 and Q9 alike.
+- **Q7 is half fresh in practice.** Limb a matches `QP2406-Q3` at limb level; **limb b has no donor anywhere**,
+  and corrective versus preventive action was authored from first principles.
+- **Q1 limb B has no donor and the rejection is the finding.** `QP2304-Q7`, `QP2509-Q7`, `QP2402-Q2` and
+  `QP2409-Q6` were each read in full and rejected: they compare Bunkers 2001 with CLC 92, which is a different
+  question from the three-tier structure this limb asks for.
+- **A same-year donor is not automatically a safe donor.** `QP2309-Q3` (September 2023) sits **after 7 July
+  2023**, so it is written on the 2023 Strategy and needed the full reversal itself. Nothing substantive was
+  carried from it.
+
+### 7.4 Two new evidence limitations, recorded rather than resolved
+
+1. **The EEXI guideline resolution numbers were not established.** §5 established the CII set `G1`–`G5` by
+   number; it did not establish the EEXI set. Those guidelines are therefore cited **by function only** and
+   **no resolution number is asserted for any of them**. A number was deliberately not invented to match the
+   symmetry of the CII table, and the gap is stated in Q2's own answer.
+2. **Q5 has no corpus dependency and cites three IMO instruments by identity only** — the manoeuvrability
+   standards, the manoeuvring-information requirement and the steering gear trial. **None was read at source**,
+   and **no criterion value is asserted anywhere**.
+
+### 7.5 Production-term leak found and closed
+
+A candidate-facing sweep of `model_answer`, `study_notes`, `quick_revision`, `retrieval_cards`,
+`answer_route`, `memory_cue` and `understand_first` found the production term **"donor"** in the closing
+uncertainty note of **Q5 and Q8**. Both were rewritten in candidate vocabulary. The delivery surface now
+carries **zero** occurrences of `donor`, `founder-review`, `staging`, `RulesApp`, `true-source` or
+`reuse_evidence`. The review copy retains them **only** in its own review banner and provenance block, which is
+the established behaviour of every review page and is stripped from the delivery build.
+
+### 7.6 One presentational fix from the mobile review
+
+Q8's `UR / UI / PR` table was authored with **four** columns and was the only element on the paper wider than a
+375 px viewport. It was folded to **three**, with *how it reaches a ship* carried inside the *what it is* cell.
+No content was removed. At 375 px and at 1280 px, with all nine cards open, **zero elements exceed the
+viewport** and the document does not scroll horizontally.
