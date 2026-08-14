@@ -212,6 +212,97 @@ def check_oral_promo(specs):
     print('[ OK  ] oral promo complete and correctly scoped')
 
 
+from recurrence_model import MONTHS, MONTH_NUM
+
+# "September" -> "Sep". The card abbreviates; the specs do not.
+MONTH_ABBR = {m[:3]: m for m in MONTHS}
+
+
+def expected_coverage_months(solved, year):
+    """The months a year's coverage entry must name, in sitting order.
+
+    Derived from the specs and nothing else. The storefront is hand-written,
+    so the moment this list is typed anywhere but here it is a second copy
+    of the truth and will drift from the first.
+    """
+    return [d['month'] for d in
+            sorted((d for d in solved if d['year'] == year),
+                   key=lambda d: MONTH_NUM[d['month']])]
+
+
+def coverage_entry(coverage, year):
+    """The visible text of one year's entry, and nothing after it.
+
+    Slicing only up to the next `<strong>20dd:</strong>` is not enough for
+    the LAST year in the block: everything that follows the list -- the
+    closing span, the line break, and the "newest solved sitting: July 2026"
+    sentence -- would still be inside it. A month regex over that text
+    harvests July as though 2026 advertised a July sitting it might not
+    have. Cut at the first structural tag instead.
+    """
+    m = re.search(r'<strong>%d:</strong>(.*?)(?=<strong>20\d\d:</strong>|$)' % year,
+                  coverage, re.S)
+    if not m:
+        return None
+    return re.split(r'</span>|<br\s*/?>', m.group(1))[0]
+
+
+def check_coverage_months(coverage, solved):
+    """Every solved year's entry must name EXACTLY the months delivered.
+
+    THIS IS THE HOLE THE YEAR-SET CHECK LEFT OPEN. On 2026-08-14 the card
+    read "2023: Jan, Apr, Dec" while the manifest held five solved 2023
+    papers -- January, March, April, September and December. Every guard
+    passed: the newest sitting was right, the price was right, the paper
+    and question totals were right, and the coverage block did name 2023.
+    Only the months inside that entry were stale, and nothing looked at
+    them. A customer comparing the card against the product would have
+    found two sittings they were never told they had bought.
+
+    The months are read out of the specs, never typed here. Hard-coding
+    "Jan, Mar, Apr, Sep, Dec" to make this pass would recreate the defect
+    one layer down -- the storefront and the checker would then agree with
+    each other and both be wrong the next time a paper lands.
+
+    A year advertised as a complete year states no month list by design;
+    the completeness claim itself is checked against the calendar below,
+    which is the stronger test.
+    """
+    for year in sorted({d['year'] for d in solved}):
+        entry = coverage_entry(coverage, year)
+        if entry is None:
+            continue                    # the year-set check above owns this
+        if 'complete year' in entry:
+            continue
+
+        want = expected_coverage_months(solved, year)
+        got = [MONTH_ABBR[a] for a in re.findall(r'\b(%s)\b' % '|'.join(MONTH_ABBR), entry)]
+
+        if not got:
+            fail('SQ/index.html',
+                 '%d names no sittings and makes no complete-year claim, but the '
+                 'corpus delivers %s' % (year, ', '.join(want)))
+            continue
+
+        missing = [m for m in want if m not in got]
+        extra = [m for m in got if m not in want]
+        if missing:
+            fail('SQ/index.html',
+                 '%d coverage omits %s -- solved and delivered, but the customer '
+                 'is not told they get it' % (year, ', '.join(missing)))
+        if extra:
+            fail('SQ/index.html',
+                 '%d coverage advertises %s, which the corpus does not deliver'
+                 % (year, ', '.join(extra)))
+        if not missing and not extra and got != want:
+            fail('SQ/index.html',
+                 '%d coverage lists the right sittings out of order: %s, expected %s'
+                 % (year, ' · '.join(got), ' · '.join(want)))
+        if not missing and not extra and got == want:
+            print('[ OK  ] %d coverage names exactly its %d solved sitting(s): %s'
+                  % (year, len(want), ' · '.join(m[:3] for m in want)))
+
+
 def check_storefront(specs):
     """The storefront is hand-written HTML. Guard the facts in it that are
     really derived from elsewhere, so they cannot drift silently:
@@ -315,6 +406,10 @@ def check_storefront(specs):
             fail('SQ/index.html',
                  'coverage block advertises %d, which the corpus does not deliver' % claimed)
 
+        # ---- per-year MONTH LIST ----
+        # Naming the year is not enough. See check_coverage_months.
+        check_coverage_months(coverage, solved)
+
         # A "complete year" claim must be true: every sitting that took
         # place that year is solved.
         #
@@ -348,8 +443,17 @@ def check_storefront(specs):
                      'card calls %d a complete year, but only %d of its %d sittings '
                      'are solved' % (y, got, sittings))
             else:
-                print('[ OK  ] %d really is a complete year (%d of %d sittings, '
-                      'May never sits)' % (y, got, sittings))
+                # "all 11 sittings" is a second, retyped copy of the same
+                # number. Guard the digits a candidate reads, not only the
+                # claim behind them.
+                m_n = re.search(r'all\s+(\d+)\s+sittings', entry.group(1))
+                if m_n and int(m_n.group(1)) != sittings:
+                    fail('SQ/index.html',
+                         '%d is advertised as "all %s sittings" but the year holds %d'
+                         % (y, m_n.group(1), sittings))
+                else:
+                    print('[ OK  ] %d really is a complete year (%d of %d sittings, '
+                          'May never sits)' % (y, got, sittings))
 
         print('[ OK  ] storefront advertises %d papers / %d questions, matching the corpus'
               % (n_papers, n_questions))
@@ -516,6 +620,63 @@ def self_test():
               '2024 paper offering only the 2026 sheet')
         return False
     print('   year-navigation guard fired on the stale-2026 regression')
+
+    # ---- coverage month list, proved by mutation ----
+    # Driven with synthetic coverage HTML rather than the shipped card, so
+    # the control keeps proving the guard bites after the real storefront
+    # changes. A fixture harvested from live state stops being a test the
+    # day the thing it harvested moves.
+    fake_solved = [
+        {'year': 2023, 'month': 'January'}, {'year': 2023, 'month': 'March'},
+        {'year': 2023, 'month': 'April'}, {'year': 2023, 'month': 'September'},
+        {'year': 2023, 'month': 'December'},
+        {'year': 2024, 'month': 'March'}, {'year': 2024, 'month': 'June'},
+    ]
+    GOOD = ('<strong>2023:</strong> Jan · Mar · Apr · Sep · Dec &nbsp;—&nbsp;'
+            '<strong>2024:</strong> Mar · Jun</span><br>'
+            'newest solved sitting: <strong>July 2026</strong>')
+
+    # Negative control FIRST: the correct card must be accepted. A guard
+    # that rejects the truth is worse than no guard -- the next person will
+    # edit the check until it passes, and the real defect walks through.
+    before = len(FAILS)
+    check_coverage_months(GOOD, fake_solved)
+    if FAILS[before:]:
+        print('SELF-TEST FAILED — the month-list guard rejected a CORRECT '
+              'coverage block: %s' % '; '.join(FAILS[before:]))
+        del FAILS[before:]
+        return False
+    print('   month-list guard accepts a correct coverage block')
+
+    # Positive controls: one mutation per failure mode this guard exists for.
+    mutations = [
+        ('omitted month  (the 2026-08-14 live defect)',
+         GOOD.replace('Jan · Mar · Apr · Sep · Dec', 'Jan · Apr · Dec'), 'omits'),
+        ('invented month (sold a sitting that is not solved)',
+         GOOD.replace('Jan · Mar · Apr', 'Jan · Feb · Mar · Apr'), 'advertises'),
+        ('wrong month    (Sep silently became Oct)',
+         GOOD.replace('Sep', 'Oct'), 'omits'),
+        ('out of order   (right sittings, misleading sequence)',
+         GOOD.replace('Jan · Mar · Apr · Sep · Dec', 'Dec · Jan · Mar · Apr · Sep'),
+         'out of order'),
+        ('new paper published, card never updated',
+         GOOD, 'omits'),
+    ]
+    for label, mutated, wanted in mutations:
+        solved_for = fake_solved
+        if wanted == 'omits' and mutated == GOOD:
+            # The commonest real failure: the corpus grows, the hand-written
+            # card does not. Mutate the CORPUS, not the HTML.
+            solved_for = fake_solved + [{'year': 2023, 'month': 'October'}]
+        before = len(FAILS)
+        check_coverage_months(mutated, solved_for)
+        fired = FAILS[before:]
+        del FAILS[before:]
+        if not any(wanted in f for f in fired):
+            print('SELF-TEST FAILED — the month-list guard did not fire on: %s' % label)
+            return False
+        print('   month-list guard fired on %s' % label)
+
     return True
 
 
