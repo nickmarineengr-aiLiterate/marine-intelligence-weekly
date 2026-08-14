@@ -6,7 +6,7 @@
 
 | Year | Papers held | Months absent from the available source set |
 |---|---|---|
-| 2023 | 2 | February, March, April, May, June, July, August, September, October, November |
+| 2023 | 3 | February, March, May, June, July, August, September, October, November |
 | 2024 | 11 | May |
 | 2025 | 11 | May |
 | 2026 | 6 | May, August, September, October, November, December |
@@ -16,6 +16,7 @@
 | Paper | Sitting | Source file | Printed serial | Pages | Questions | Pages read back |
 |---|---|---|---|---|---|---|
 | QP2301 | January 2023 | `JANUARY 2023.pdf` | 2301 EM | 2 | 9 | ? of 2 |
+| QP2304 | April 2023 | `APRIL 2023.pdf` | 2304 EM | 2 | 9 | 2 of 2 |
 | QP2312 | December 2023 | `DECEMBER 2023.pdf` | 2312 EM | 2 | 9 | ? of 2 |
 | QP2401 | January 2024 | `JANUARY 2024.pdf` | EM - 24117-1 | 2 | 9 | 2 of 2 |
 | QP2402 | February 2024 | `FEBRUARY 2024.pdf` | EM - 19224-1 | 2 | 9 | 2 of 2 |
@@ -58,7 +59,7 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 
 ### Questions printing NO mark allocation
 
-**28 of 270**, across 7 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
+**34 of 279**, across 8 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
 
 | Question | Sitting | Title |
 |---|---|---|
@@ -71,6 +72,12 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 | QP2301-Q7 | January 2023 Q7 | Casualty Investigation - Obligation, Code and Very Serious Marine Casualty |
 | QP2301-Q8 | January 2023 Q8 | Human Element in STCW and IMO Fatigue Guidance |
 | QP2301-Q9 | January 2023 Q9 | GISIS - Aim, Function and the Fuel Oil Reporting Module |
+| QP2304-Q1 | April 2023 Q1 | Bauxite Casualties and Safe Carriage in Bulk |
+| QP2304-Q2 | April 2023 Q2 | HNS Convention - Scope, Damage and Certification |
+| QP2304-Q4 | April 2023 Q4 | Collision off the Indian Coast - Action under the Merchant Shipping Act |
+| QP2304-Q5 | April 2023 Q5 | Maritime Lien, In Rem and In Personam |
+| QP2304-Q8 | April 2023 Q8 | IMO and ILO Human Element Regimes, and Fatigue Guidance |
+| QP2304-Q9 | April 2023 Q9 | Classification Societies in Rule Formation, SOLAS II-1, and Annual versus Periodical Surveys |
 | QP2402-Q8 | February 2024 Q8 | Grounded and Abandoned Indian Flag Vessel - Action under the Merchant Shipping Act |
 | QP2403-Q4 | March 2024 Q4 | High-Efficiency Propellers |
 | QP2403-Q5 | March 2024 Q5 | Maritime Cyber Risk Management Guidelines |
@@ -108,6 +115,15 @@ Examiner wording is reproduced exactly, errors included. Each is recorded in a n
 | QP2301-Q7 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. The limbs are lettered "A.", "B.", "C." where every other multi-limb question on this paper uses lower-case "a)", "b)". Limbs A and B end in semicolons. Reproduced as printed. |
 | QP2301-Q8 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. The question number is printed "Q8)." - a closing parenthesis where Q1 to Q7 print "Qn." - and its limbs are lettered "A)." and "B).". Limb A ends in a full stop where a question mark is meant and limb B ends with no terminator at all. Reproduced as printed. |
 | QP2301-Q9 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. The question number is printed as a bare "9." with no "Q" prefix, where Q1 to Q7 print "Qn." and Q8 prints "Q8).". The question prints as continuous prose with no lettered limbs but sets two tasks, and ends with no terminator. Reproduced as printed. |
+| QP2304-Q1 | ANOMALY: the source copy prints NO mark allocation for this question and no subparts. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. The stem also prints "the specific care and action be taken", where a word appears to be missing. Preserved as printed. |
+| QP2304-Q2 | ANOMALY: this source copy prints the three limbs (a), (b) and (c) with NO marks against any of them, and no total. Later sittings of the same question print (6), (5) and (5). The printed April 2023 position governs here: marks are recorded as null on every limb and the question is recorded at 16 under instruction 2 ("all questions carry equal marks"). The later 6/5/5 split is NOT imported. Two printed misspellings are preserved exactly: "which can com under this convention" for "come", and "require to haVE certificates" for "have". |
+| QP2304-Q3 | The source copy prints "(16)" at the end of the stem and no subparts. This is one of only three questions on this paper that print any marks at all - Q3, Q6 and Q7 - which is itself worth noting, since six of the nine print none. The printed 16 agrees with instruction 2 ("all questions carry equal marks") and is recorded as the total with no limb split. |
+| QP2304-Q4 | ANOMALY: the source copy prints NO mark allocation for this question and no subparts, where later sittings of the same question print (16). Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. The stem's grammar is also loose as printed - "as a result few lives were also lost and vessel damaged" - and is preserved exactly. |
+| QP2304-Q5 | ANOMALY: the source copy prints NO mark allocation for this question and no subparts, where the three later sittings of the same question all print (16). Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. The printed capitalisation is inconsistent - "In Rem" with a capital R against "In personam" with a lower-case p - and is preserved exactly. The stem also prints "debtor's claims" where the claims to be settled are the creditors' claims against the debtor's vessel; preserved, not corrected. |
+| QP2304-Q6 | The source copy prints all four limbs with (4) against each, totalling 16 and agreeing with instruction 2. This is one of only three questions on this paper that print any marks at all - Q3, Q6 and Q7 - and the only one that prints a limb-by-limb split. The stem also prints "Q6.Recent" with NO SPACE after the question number, which is preserved; that run-on is the reason an automated marker regex requiring a following space failed to see this question at intake. |
+| QP2304-Q7 | The source copy prints all four limbs with (4) against each, totalling 16 and agreeing with instruction 2. This is one of only three questions on this paper that print any marks - Q3, Q6 and Q7. The stem prints an ampersand in three of the four limb headings where later sittings print 'and', and prints CLC with a curly apostrophe as "CLC’92". Both preserved exactly as printed. |
+| QP2304-Q8 | ANOMALY: the source copy prints NO mark allocation against either limb, and prints the two limb labels inconsistently - a lower-case "a)" followed by an upper-case "B)." with a full stop after the bracket. It also prints no full stop at the end of limb B. All three features are preserved exactly and recur identically in the later sitting of the same question. Recorded at 16 marks under instruction 2 ("all questions carry equal marks") with marks null on both limbs; the unequal division of the answer between the limbs is an authoring judgement recorded in unresolved, not a printed instruction. |
+| QP2304-Q9 | ANOMALY, AND IT RUNS IN AN UNUSUAL DIRECTION. This source copy prints NO mark allocation against either limb, where the same question at every other sitting MIW holds prints a split - (8) and (8) in December 2023, and (10) and (6) in December 2024, September 2025 and June 2026. Neither split is imported: the question is recorded at 16 marks under instruction 2 with marks null on both limbs, and the two limbs are treated as of comparable weight. Two printed features are preserved exactly: 'SOLAS ch.ll-1', written with two lowercase letter L characters rather than the Roman numeral II and read as chapter II-1; and 'above-referred' hyphenated with 'toward' rather than 'towards', which is the orthography that places this paper in the same family branch as the December 2023 sitting. |
 | QP2312-Q2 | Limb (b) prints "What are the right to appeal available to you" - singular 'right' against a plural verb. Reproduced exactly as printed and not corrected. |
 | QP2312-Q3 | Limb (a) prints "York Antwerp Rules 1994" without a comma before the year and asks three separate things in one limb. Reproduced exactly as printed. The 1994 edition is named by the examiner and governs the answer; the 2016 edition is treated as a comparison, not as a substitution. |
 | QP2312-Q4 | Limb (a) prints "decarbonization" with a z and limb (b) prints "present-day" hyphenated. Both reproduced exactly as printed. Limb (a) ends page 1 of the source copy and limb (b) opens page 2. |

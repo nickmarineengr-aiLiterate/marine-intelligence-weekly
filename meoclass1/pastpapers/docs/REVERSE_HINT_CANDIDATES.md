@@ -10,7 +10,7 @@ A row becomes real only when an author **reads both questions** and writes `reus
 
 ## Why the queue is needed at all
 
-The host prints a CUMULATIVE table: each token names the current sitting or an earlier one. Over this corpus that is not a convention but a structural fact &mdash; **671 resolved tokens, and not one of them points forward.** MIW solves newest-paper-first, so the annotation is only ever legible in the direction production is not travelling. When `QP2509-Q6` (September 2025) was authored, `QP2601-Q2` (January 2026) was already built and set the same examiner task; the only machine-readable trace of the link sat on `QP2601`'s record pointing backwards, so `QP2509-Q6` derived as tier C with no donor and a human found it by hand.
+The host prints a CUMULATIVE table: each token names the current sitting or an earlier one. Over this corpus that is not a convention but a structural fact &mdash; **695 resolved tokens, and not one of them points forward.** MIW solves newest-paper-first, so the annotation is only ever legible in the direction production is not travelling. When `QP2509-Q6` (September 2025) was authored, `QP2601-Q2` (January 2026) was already built and set the same examiner task; the only machine-readable trace of the link sat on `QP2601`'s record pointing backwards, so `QP2509-Q6` derived as tier C with no donor and a human found it by hand.
 
 ## Token accounting
 
@@ -18,12 +18,12 @@ Every token is accounted for. A token that cannot be resolved is **counted here,
 
 | | Tokens | Meaning |
 |---|---|---|
-| Host tokens read | 864 | across every spec |
-| Ambiguous form | 17 | `SR09`, `JAN2`, `JULY(M)` &mdash; no single resolvable sitting |
+| Host tokens read | 881 | across every spec |
+| Ambiguous form | 21 | `SR09`, `JAN2`, `JULY(M)` &mdash; no single resolvable sitting |
 | Names a sitting, not a question | 250 | bare-month form such as `2018/APR` |
-| Outside the transcribed corpus | 176 | resolves to a sitting MIW does not hold |
-| Points at itself | 260 | the host lists the current sitting in its own table |
-| Already adjudicated by MIW | 161 | the pair is a recurrence family already |
+| Outside the transcribed corpus | 165 | resolves to a sitting MIW does not hold |
+| Points at itself | 269 | the host lists the current sitting in its own table |
+| Already adjudicated by MIW | 176 | the pair is a recurrence family already |
 | **Surfaced below** | **0** | **host-linked, MIW has not ruled** |
 
 ## The queue

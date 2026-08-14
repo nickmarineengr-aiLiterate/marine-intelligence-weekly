@@ -44,6 +44,57 @@ function ok(name, cond, extra) {
 // Alias probes deliberately use words that appear ONLY in search metadata and
 // are never rendered on the card, which is the behaviour being guarded.
 const FIXTURES = {
+  QP2304: {
+    // Authored at laptop review, not harvested. Every probe below was checked
+    // to match EXACTLY ONE card on this paper, because a probe that matches
+    // several cannot tell you which one broke.
+    //
+    // This paper is unusually hard to write discriminating probes for: it is
+    // the ancestor of QP2509, and internally Q2 and Q7 both range over CLC,
+    // Bunkers and HNS, while Q4 and Q5 both reach into the Admiralty Act. The
+    // obvious words -- 'maritime lien', 'compulsory insurance', 'strict
+    // liability', 'place of refuge', 'in rem' -- are all ambiguous here and
+    // are deliberately NOT used.
+    probes: [
+      ['dynamic separation', 'QP2304-Q1'],
+      ['packaged hns', 'QP2304-Q2'],
+      ['average adjuster', 'QP2304-Q3'],
+      ['preliminary inquiry', 'QP2304-Q4'],
+      ['inverse order', 'QP2304-Q5'],
+      ['wake equalizing', 'QP2304-Q6'],
+      // Q7 shares CLC/Bunkers vocabulary with Q2 almost entirely. The IOPC
+      // Funds are the CLC-side second tier that Q7 contrasts against the
+      // Bunkers regime, and Q2 does not reach them -- so this is the one
+      // central term that separates the two.
+      ['iopc', 'QP2304-Q7'],
+      ['sleep debt', 'QP2304-Q8'],
+      ['harmonized survey', 'QP2304-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['2010 HNS Protocol', 'QP2304-Q2', 'Q2 (the Protocol that fixed the substantive text)'],
+      ['YAR 1994', 'QP2304-Q3', 'Q3 (the edition edge -- the Rules are contractual, not law)'],
+      ['section 356J', 'QP2304-Q4',
+       'Q4 (the Part XA power to direct, which reaches a THREATENED discharge)'],
+      ['Maritime Liens and Mortgages Convention 1993', 'QP2304-Q5',
+       'Q5 (the convention the stem actually asks to be named)'],
+      ['PBCF', 'QP2304-Q6', 'Q6 (a post-swirl device not named on the card)'],
+    ],
+    // The paper's sharpest temporal edge. MSC.500(105) is amendment 06-21:
+    // ADOPTED 28 April 2022, in force 1 December 2023 -- eight months AFTER
+    // this sitting -- and voluntarily applicable from 1 January 2023. The
+    // mandatory edition here is 05-19. If this stops resolving to Q1, the
+    // adopted-versus-in-force boundary has been dropped from the answer,
+    // which is the single most examinable temporal fact on this paper.
+    regulation: ['msc.500(105)', 'QP2304-Q1'],
+    // The source copy prints the host's own backward annotations -- this
+    // paper's Q1 carries '2022/SEP/Q2'. None of it may reach the shipped
+    // bytes.
+    recurrence: ['2022/sep/q2'],
+    // 'group c' matches Q1 and Q4 (the latter through the casualty's cargo
+    // boundary). The schedule name is what separates them.
+    narrow: ['bauxite fines', 'QP2304-Q1'],
+  },
   QP2312: {
     // Probes are AUTHORED against what each question is actually about, not
     // harvested from the built page. A fixture generated from live corpus
