@@ -467,6 +467,15 @@ the same substitution would have damaged. `SOLAS XI-1/6` untouched.
 > **`QP2412` IS LIVE AND STILL CARRIES THIS DEFECT.** Referred, not fixed — one paper per session.
 > Any fix there must repeat the scoping proof, because QP2412's affected questions may contain
 > Annex VI references that QP2310's did not.
+>
+> **CLOSED 14 August 2026 at `594fdcf`.** The scoping proof was repeated: QP2412-Q5 carries no
+> MARPOL or Annex VI regulation reference, and all 11 `SOLAS regulation XI-1/6` citations are
+> untouched. Scope was **23 tokens, not the 13 referred** — the referral counted only the
+> `ISM Code regulation N` form, and Q5 also carried seven **bare** references with the ISM Code as
+> the antecedent and two **abbreviated** as `reg`. The correction above was itself incomplete for
+> the same reason: `QP2310-Q9`'s recall card still read *"ISM reg 9 ... reg 1.2.2 ... reg 12"* in
+> front of customers and is fixed in the same commit. The class is now held by `known_traps.md`
+> **trap 18** in both the grep and the structural layer, with positive **and** negative controls.
 
 **C2 — Q7, production vocabulary on a rendered flashcard.** *"The standing statute trap for the
 whole 2023 **batch**"*. The desktop's own sweep (§6.1 of the paper anchor) caught eleven uses of
