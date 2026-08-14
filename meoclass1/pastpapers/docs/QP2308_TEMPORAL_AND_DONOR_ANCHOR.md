@@ -392,7 +392,82 @@ real resolvable corpus object exists.
 
 ---
 
-## 6. SUMMARY
+## 6. QA FINDINGS — defects found and fixed, and failures that are not this paper's
+
+### 6.1 Two real candidate-facing defects, found only by the HTTP review
+
+Both were invisible to `validate_spec`, to `audit_paper` and to the whole toolchain, and both were
+found by measuring the rendered page at **375 px**. They are recorded because they are content
+defects of a kind this paper introduced.
+
+| # | Defect | Evidence | Fix |
+|---|---|---|---|
+| D1 | **Q4's condition monitoring chart was clipped and unreachable on mobile.** As first authored it had **ten columns** and rendered **908 px** inside a **315 px** card. `.q-card` sets `overflow:hidden`, so there is no scroll container: columns 4 to 10 could not be reached at all | Every table in the integrated corpus is 2–4 columns and **none clips** — QP2304's 4-column table renders 301 px inside 315 px. So this was not platform behaviour | Rebuilt as **3 columns**, grouping the ten fields three to a column so the text wraps. Now **287 px**, no clipping. All ten fields retained, and the answer says so |
+| D2 | **Q5's statutory-services table overhung by 10 px** — 325 px inside 315 px — clipping the right edge of the third column | Same measurement | Longest cell texts and longest single tokens shortened. Now **283 px**. No instrument, service or certificate removed |
+
+**Neither defect was detectable from the spec.** The lesson for the batch is that a wide table is a
+content decision with a rendering consequence, and that **the house table width is three columns**.
+
+### 6.2 A defect of mine in the intake, corrected at assembly
+
+The intake carried `gated: true`. All thirty-three sibling specs carry `false`, and the review build
+strips the gate unconditionally, so `audit_paper` check 10 failed against the page it had just
+built. Corrected mechanically at promotion; it is a build-state field, not question content.
+
+### 6.3 Internal production vocabulary — new debt refused
+
+The candidate-facing layers initially carried `TSCR-3`, `RQ-25`, "pushed review branch and is NOT
+integrated", "the MIW corpus" and filing-system citations of the form "the MIW verification records
+for QP2408 Q1". `INTERNAL_VOCABULARY_REMEDIATION_PLAN.md` measures this as an existing corpus-wide
+debt of 311 occurrences and directs that it be cleared in **one dedicated session, not
+opportunistically**. That direction governs the *existing* pages; it is not a licence for a new
+paper to add to the total.
+
+The disclosure itself is a product feature and was kept in substance word for word — **only the
+noun changed**, exactly as §3 of that plan recommends. Rewrites were confined to
+`model_answer`, `study_notes`, `understand_first`, `memory_cue`, `quick_revision` and
+`retrieval_cards`. The production surfaces — `verification_status`, `unresolved`, `sources`,
+`reverify_before_publication`, `decomposition_gate`, `temporal_review`, `reuse_evidence` — keep the
+precise internal identifiers, because the reviewer needs them and they are stripped from delivery.
+
+**Candidate-facing sweep after the fix: zero occurrences.**
+
+### 6.4 Three toolchain FAILures that belong to laptop integration, reproduced against baseline
+
+`run_toolchain.py` reports three failures. **All three are the global layer that §13.2 of the
+playbook forbids this branch from owning**, and each was proved to be caused by adding a paper
+rather than by a defect.
+
+| Check | What it says | Why it is not this paper's |
+|---|---|---|
+| `REUSE MAP` | `2024_2026_RECURRENCE_AND_REUSE_MAP.md`, `SOURCE_INVENTORY.md` and `REVERSE_HINT_CANDIDATES.md` are stale | The global reuse map and reverse-hint queue are named in §13.2 as laptop-owned |
+| `SOLVEDQP CHK` | storefront claims 32 papers / 288 questions, corpus has 33 / 297 | `solvedQP/index.html` and the shared product counts are named in §13.2 |
+| `DELIVERY` | 412 derived artefacts unstaged or untracked | The direct consequence of the two above, plus the globals deliberately not committed |
+
+**The baseline control.** With `QP2308.json` and `QP2308.html` moved aside and every global restored
+to `HEAD`, all three pass: *"reuse map and source inventory are current"*, *"288 questions delivered
+across 32 papers · solvedQP delivery clean across 40 page(s)"*, *"DELIVERY GATE PASS 400 artefact(s)
+derived from 32 spec(s)"*. They fail **only** because a thirty-third paper exists whose global layer
+has not been regenerated — which is precisely the hand-off.
+
+**Validated with the globals present, then reverted.** With the global layer regenerated:
+`health_check` **0 errors**, `coverage_check` **PASS**, `audit_paper` **0 errors, 0 warnings**
+including manifest check 12. The globals were then restored to `HEAD` and are not in this commit.
+
+### 6.5 What passed
+
+`validate_spec` **0 errors** · deterministic double build **byte-identical**
+(`sha256 990b5b638524092d…`) · `audit_paper` **0 errors, 0 warnings** with globals present ·
+`known_traps_check` **240 checks, 0 failures** · `health_check` **0 errors** · `recurrence_check`
+**0 failures** · `temporal_sweep` — every QP2308 candidate adjudicated and correct by design (each
+is a forward-trap warning, a reversal note, or the `2023-11-01` register defect being named as
+wrong) · HTTP review at **1280** and **375**: 9 cards, 5 modes on every card, **Answer** default,
+search filters correctly, deep links resolve, no horizontal overflow, **no console messages**, no
+host branding and no recurrence-chip leakage.
+
+---
+
+## 7. SUMMARY
 
 - **Source:** verified — `2308 EM`, August 2023, two pages, nine questions, **no printed marks
   anywhere**, eleven printed anomalies preserved.
