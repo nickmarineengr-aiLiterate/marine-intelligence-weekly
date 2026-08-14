@@ -177,6 +177,80 @@ const FIXTURES = {
     // the civil-liability card from the two Annex VI cards.
     narrow: ['persistent oil', 'QP2310-Q8'],
   },
+  QP2302: {
+    // AUTHORED at laptop review against what each question is about, never
+    // harvested from the built page. Every probe below was PROVED unique
+    // against the real card payloads under the search's own token-AND
+    // semantics before it was written down.
+    //
+    // This paper's collision is the decarbonisation trio. Q1 (big data), Q3
+    // (EEXI and CII) and Q7 (propellers) all carry the Annex VI chapter 4
+    // vocabulary, so 'EEXI', 'CII rating' and 'MEPC.346(78)' each reach three
+    // cards and none can say which one broke. 'AER' reaches Q3 and Q7.
+    // 'no more favourable treatment' reaches Q2 and Q8, because the III Code
+    // and MLC both carry it. 'charter party' reaches Q1, Q6 and Q9. 'near
+    // miss' reaches Q1 and Q5. 'to order' reaches Q5 and Q6. None is used.
+    probes: [
+      // One of the four commercial uses limb (b) names by print.
+      ['vetting', 'QP2302-Q1'],
+      ['instruments implementation', 'QP2302-Q2'],
+      // Safe where 'AER' is not: EEOI is the other printed metric and is
+      // unique to Q3.
+      ['eeoi', 'QP2302-Q3'],
+      ['scopic', 'QP2302-Q4'],
+      ['engine resource management', 'QP2302-Q5'],
+      ['bill of lading', 'QP2302-Q6'],
+      ['kappel', 'QP2302-Q7'],
+      ['detainable', 'QP2302-Q8'],
+      ['bunker convention', 'QP2302-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the page -- these live only in search_aliases, and
+      // each was checked against the visible text with tag boundaries treated
+      // as hard breaks, because collapsing them joins adjacent elements and
+      // manufactures false matches.
+      ['noon report versus continuous data', 'QP2302-Q1',
+       'Q1 (the pivot the whole question turns on, as a candidate would type it)'],
+      ['port state control officer independence', 'QP2302-Q2',
+       'Q2 (the port State limb the Code addresses expressly)'],
+      ['speed reduction cube law', 'QP2302-Q3',
+       'Q3 (the operational lever, under the physics candidates remember)'],
+      ['who pays salvage award', 'QP2302-Q4',
+       'Q4 (the printed demand, written as a search)'],
+      ['closed loop communication', 'QP2302-Q5',
+       'Q5 (the ERM technique the answer describes without naming)'],
+      ['why to order instead of named consignee', 'QP2302-Q6',
+       'Q6 (limb (a) second demand, as printed and as searched)'],
+      ['tip winglet propeller', 'QP2302-Q7',
+       'Q7 (the Kappel blade under its descriptive name)'],
+      // The paper misprints Complaint as Compliant. A candidate who types the
+      // paper's own spelling must still find the question.
+      ['compliant procedures MLC', 'QP2302-Q8',
+       "Q8 (the stem's own misprint, so the paper finds itself)"],
+      ['combination carrier CLC', 'QP2302-Q9',
+       'Q9 (the one ship class the actually-carrying proviso still governs)'],
+    ],
+    // DELIBERATE REGRESSION SENTINEL. February 2023 sits TEN MONTHS BEFORE the
+    // 33rd Assembly of 6 December 2023. The operative non-exhaustive list of
+    // obligations is A.1157(32), adopted by the 32nd Assembly in December
+    // 2021; A.1187(33) revokes it but is future here and must never appear.
+    // The strongest donor for this question, QP2510-Q7, cites A.1187(33),
+    // so the pull towards the wrong citation is real. If this probe stops
+    // resolving to Q2, someone has carried the donor's citation across and
+    // walked the paper over its own Assembly boundary.
+    //
+    // MEPC.328(76) was considered and REJECTED as the sentinel: it reaches
+    // Q1, Q3 and Q7, so it cannot localise a break.
+    regulation: ['A.1157(32)', 'QP2302-Q2'],
+    // Leak probe, not a search probe. The source copy prints the host's own
+    // backward-looking sitting rows under every question -- Q8 alone carries
+    // eight, running back to 2017. '2023/FEB' is the paper's self-reference,
+    // printed on all nine. None may reach the shipped bytes.
+    recurrence: ['2023/feb', '2022/aug', '2017/aug'],
+    // 'no more favourable treatment' reaches Q2 (the III Code port State
+    // part) and Q8 (MLC article V(7)). The second token separates them.
+    narrow: ['no more favourable treatment detainable', 'QP2302-Q8'],
+  },
   QP2309: {
     // AUTHORED at laptop review against what each question is about, never
     // harvested from the built page. A fixture generated from live corpus

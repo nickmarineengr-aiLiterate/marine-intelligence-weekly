@@ -10,7 +10,7 @@ A row becomes real only when an author **reads both questions** and writes `reus
 
 ## Why the queue is needed at all
 
-The host prints a CUMULATIVE table: each token names the current sitting or an earlier one. Over this corpus that is not a convention but a structural fact &mdash; **805 resolved tokens, and not one of them points forward.** MIW solves newest-paper-first, so the annotation is only ever legible in the direction production is not travelling. When `QP2509-Q6` (September 2025) was authored, `QP2601-Q2` (January 2026) was already built and set the same examiner task; the only machine-readable trace of the link sat on `QP2601`'s record pointing backwards, so `QP2509-Q6` derived as tier C with no donor and a human found it by hand.
+The host prints a CUMULATIVE table: each token names the current sitting or an earlier one. Over this corpus that is not a convention but a structural fact &mdash; **828 resolved tokens, and not one of them points forward.** MIW solves newest-paper-first, so the annotation is only ever legible in the direction production is not travelling. When `QP2509-Q6` (September 2025) was authored, `QP2601-Q2` (January 2026) was already built and set the same examiner task; the only machine-readable trace of the link sat on `QP2601`'s record pointing backwards, so `QP2509-Q6` derived as tier C with no donor and a human found it by hand.
 
 ## Token accounting
 
@@ -18,15 +18,23 @@ Every token is accounted for. A token that cannot be resolved is **counted here,
 
 | | Tokens | Meaning |
 |---|---|---|
-| Host tokens read | 986 | across every spec |
+| Host tokens read | 1006 | across every spec |
 | Ambiguous form | 25 | `SR09`, `JAN2`, `JULY(M)` &mdash; no single resolvable sitting |
-| Names a sitting, not a question | 321 | bare-month form such as `2018/APR` |
-| Outside the transcribed corpus | 156 | resolves to a sitting MIW does not hold |
-| Points at itself | 287 | the host lists the current sitting in its own table |
-| Already adjudicated by MIW | 197 | the pair is a recurrence family already |
-| **Surfaced below** | **0** | **host-linked, MIW has not ruled** |
+| Names a sitting, not a question | 327 | bare-month form such as `2018/APR` |
+| Outside the transcribed corpus | 153 | resolves to a sitting MIW does not hold |
+| Points at itself | 296 | the host lists the current sitting in its own table |
+| Already adjudicated by MIW | 204 | the pair is a recurrence family already |
+| **Surfaced below** | **1** | **host-linked, MIW has not ruled** |
 
 ## The queue
 
-Empty. Every in-corpus host link is either already an adjudicated MIW family or resolves to a sitting outside the transcribed set.
+`Target` is the earlier question &mdash; the one the annotation is invisible to. `Named by` is the later question whose printed table names the target's sitting. **Built** on a named-by question means its answer exists, so IF an author adjudicates the pair as the same task it would become a donor &mdash; that adjudication has not happened.
+
+| Target | Sitting | Target solved | Named by | Named-by built | MIW adjudicated |
+|---|---|---|---|---|---|
+| `QP2302-Q2` | February 2023 Q2 | yes | `QP2303-Q2` | `QP2303-Q2` | **no** |
+
+### Highest value to adjudicate first
+
+**0** of the 1 rows pair an **unsolved** target with an **already-built** counterpart. Those are the ones where adjudication could convert research into reuse, and they are the exact shape of the QP2509-Q6 miss.
 
