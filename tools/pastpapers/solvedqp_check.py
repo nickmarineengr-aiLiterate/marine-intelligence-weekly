@@ -198,11 +198,27 @@ def check_oral_promo(specs):
 
 
 def check_storefront(specs):
-    """The storefront is hand-written HTML. Guard the two facts in it that
-    are really derived from elsewhere, so they cannot drift silently:
+    """The storefront is hand-written HTML. Guard the facts in it that are
+    really derived from elsewhere, so they cannot drift silently:
 
       * the newest solved sitting  -- derived from the specs
       * the Solved QP price        -- owned by api/_lib/products.js
+      * the paper and question COUNTS -- derived from the specs
+      * the per-year coverage list -- derived from the specs
+
+    THE COUNTS ARE HERE BECAUSE THEY ALREADY DRIFTED ONCE.
+
+    On 2026-08-14 the card was still advertising "Twelve complete solved
+    sittings -- 108 questions" and a coverage line reading "2024: Mar,
+    Apr". The corpus had reached 31 papers and 279 worked answers, with
+    2024 and 2025 complete. The storefront was selling roughly a third
+    of the product, and had been for weeks, because the only facts under
+    guard were the newest sitting and the price -- both of which happened
+    to stay correct while everything around them went stale.
+
+    A number that a human retypes after every paper is a number that
+    will eventually be forgotten. The fix is not to try harder; it is to
+    make the omission fail the build.
     """
     CHECKS[0] += 1
     idx = os.path.join(REPO_ROOT, 'SQ', 'index.html')
@@ -224,6 +240,106 @@ def check_storefront(specs):
             fail('SQ/index.html',
                  'newest sitting claims %r but the specs say %r'
                  % (m.group(1), newest['month_year']))
+
+    # ---- paper and question counts ----
+    # Every element carrying data-solvedqp-papers / -questions must agree
+    # with the corpus, and the same number must appear in the element's
+    # visible text -- otherwise the attribute could be updated while the
+    # sentence a candidate actually reads stays wrong.
+    if solved:
+        n_papers = len(solved)
+        n_questions = sum(
+            len([q for q in d['questions'] if q.get('model_answer')]) for d in solved
+        )
+
+        for attr, expected in (('data-solvedqp-papers', n_papers),
+                               ('data-solvedqp-questions', n_questions)):
+            found = re.findall(attr + r'="(\d+)"', html)
+            if not found:
+                fail('SQ/index.html',
+                     'no element carries %s -- the storefront counts are unguarded, '
+                     'which is exactly how "12 papers / 108 questions" survived to '
+                     '31 papers / 279 questions' % attr)
+                continue
+            for claimed in found:
+                if int(claimed) != expected:
+                    fail('SQ/index.html',
+                         '%s claims %s but the corpus has %d' % (attr, claimed, expected))
+
+        # The visible sentence, not just the machine-readable attribute.
+        for expected, what in ((n_papers, 'paper count'), (n_questions, 'question count')):
+            if not re.search(r'\b%d\b' % expected, html):
+                fail('SQ/index.html',
+                     'the %s %d appears in no visible text on the storefront'
+                     % (what, expected))
+
+        # ---- per-year coverage ----
+        # Each year the corpus delivers must be named on the card, and no
+        # year may be advertised that the corpus does not have.
+        years = sorted({d['year'] for d in solved})
+        # Anchored on its own marker. Keying off data-solvedqp-papers
+        # instead would match the STATS tile first -- same attribute,
+        # different element -- and silently check the wrong text.
+        m_cov = re.search(r'data-solvedqp-coverage[^>]*>(.*?)</div>', html, re.S)
+        if not m_cov:
+            fail('SQ/index.html', 'no element marked data-solvedqp-coverage')
+        coverage = m_cov.group(1) if m_cov else ''
+
+        # Look for the year LABEL, not the bare digits. The block also
+        # contains prose like "January 2023 to July 2026", so a substring
+        # test for "2023" passes even after the 2023 entry is deleted --
+        # which is exactly how this check first shipped, and it did not
+        # fire when the entry was removed.
+        labelled = set(int(y) for y in re.findall(r'<strong>(20\d\d):</strong>', coverage))
+        for y in years:
+            if y not in labelled:
+                fail('SQ/index.html',
+                     'coverage block has no "%d:" entry, but the corpus delivers '
+                     '%d paper(s) for it' % (y, len([d for d in solved if d['year'] == y])))
+        for claimed in labelled - set(years):
+            fail('SQ/index.html',
+                 'coverage block advertises %d, which the corpus does not deliver' % claimed)
+
+        # A "complete year" claim must be true: every sitting that took
+        # place that year is solved.
+        #
+        # THE DENOMINATOR IS THE WHOLE POINT. Counting specs is useless --
+        # every spec in the repo is a solved paper, so specs-for-year
+        # always equals solved-for-year and the claim is true by
+        # construction. The first version of this check did exactly that
+        # and would have certified 2023 (3 sittings of 11) and 2026 (a
+        # year still in progress) as complete years.
+        #
+        # The real denominator is the calendar: twelve months, less the
+        # sittings the manifest records as KNOWN_ABSENT. No May sitting
+        # occurs in any year MIW holds, which is why a complete year is
+        # eleven papers and not twelve.
+        absent_by_year = {}
+        mpath = os.path.join(REPO_ROOT, 'solvedQP', 'solvedqp_content_index.json')
+        if os.path.exists(mpath):
+            with open(mpath, encoding='utf-8') as fh:
+                for a in json.load(fh).get('known_absent', []):
+                    absent_by_year[a['year']] = absent_by_year.get(a['year'], 0) + 1
+
+        for y in sorted(labelled):
+            entry = re.search(r'<strong>%d:</strong>(.*?)(?=<strong>20\d\d:|$)' % y,
+                              coverage, re.S)
+            if not entry or 'complete year' not in entry.group(1):
+                continue
+            got = len([d for d in solved if d['year'] == y])
+            sittings = 12 - absent_by_year.get(y, 0)
+            if got != sittings:
+                fail('SQ/index.html',
+                     'card calls %d a complete year, but only %d of its %d sittings '
+                     'are solved' % (y, got, sittings))
+            else:
+                print('[ OK  ] %d really is a complete year (%d of %d sittings, '
+                      'May never sits)' % (y, got, sittings))
+
+        print('[ OK  ] storefront advertises %d papers / %d questions, matching the corpus'
+              % (n_papers, n_questions))
+        print('[ OK  ] coverage block names exactly the years delivered: %s'
+              % ', '.join(str(y) for y in years))
 
     # price agreement with the server catalogue
     cat = os.path.join(REPO_ROOT, 'api', '_lib', 'products.js')
