@@ -177,6 +177,89 @@ const FIXTURES = {
     // the civil-liability card from the two Annex VI cards.
     narrow: ['persistent oil', 'QP2310-Q8'],
   },
+  QP2307: {
+    // AUTHORED at laptop review against what each question is about, never
+    // harvested from the built page. Every probe below was PROVED unique
+    // against the real card payloads under the search's own token-AND
+    // semantics before it was written down -- the assertion uses includes(),
+    // so a probe reaching two cards still reports green.
+    //
+    // This paper's collisions are unusually strong, because it prints TWO
+    // collision questions and TWO Merchant Shipping Act questions. 'collision'
+    // reaches Q5 and Q8; 'merchant shipping act' reaches SIX cards (Q1, Q2,
+    // Q4, Q5, Q8, Q9); 'detention' reaches Q4, Q8 and Q9; 'duty to stand by'
+    // reaches Q5 and Q8; 'regulation 13' reaches Q1, Q3 and Q4. None is used.
+    probes: [
+      // The contractual supplement to the LOF -- named on Q1 alone.
+      ['scopic', 'QP2307-Q1'],
+      // The passenger-ship-only five-yearly check, and the limb (i) point
+      // candidates miss. 'damage control' reaches Q2 and Q8.
+      ['lightweight survey', 'QP2307-Q2'],
+      // The safety-critical item on a SAM plant. 'egr' alone is safe too, but
+      // this localises limb (d) rather than the whole question.
+      ['water mist catcher', 'QP2307-Q3'],
+      ['detainable', 'QP2307-Q4'],
+      ['both-to-blame', 'QP2307-Q5'],
+      // Step 2's defining picture -- causes, accident, consequences. 'fault
+      // tree' and 'event tree' are also unique, but the tree pair is the
+      // thing a break would most likely damage.
+      ['risk contribution tree', 'QP2307-Q6'],
+      ['propeller polishing', 'QP2307-Q7'],
+      // The office the statutory casualty report actually goes through.
+      ['mercantile marine department', 'QP2307-Q8'],
+      // 'unseaworthy' is unique in the payload but renders on Q2 and Q5 as
+      // well; the detention power's own adjective localises Q9 cleanly.
+      ['provisional detention', 'QP2307-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the page. Each term's TOKENS are scattered through
+      // the search payload and the phrase appears contiguously nowhere in the
+      // visible text -- checked with tag boundaries treated as hard breaks,
+      // because collapsing whitespace joins adjacent elements and manufactures
+      // false matches.
+      ['special compensation scopic', 'QP2307-Q1',
+       'Q1 (the two things outside Article 13 that a salvor reaches for)'],
+      ['takeover stability booklet', 'QP2307-Q2',
+       'Q2 (the handover, named by the document it turns on)'],
+      ['moisturizing egr tier', 'QP2307-Q3',
+       "Q3 (limb (d) typed with the paper's own misspelling)"],
+      ['grievance redressal dmlc', 'QP2307-Q4',
+       'Q4 (limb (d) and limb (a) in one search, as a candidate would type it)'],
+      ['pennsylvania rule apportionment', 'QP2307-Q5',
+       'Q5 (the US contrast that limb (D) turns on)'],
+      ['gcaf ncaf alarp', 'QP2307-Q6',
+       'Q6 (the three acronyms steps 2 and 4 are actually about)'],
+      ['foul release polishing', 'QP2307-Q7',
+       'Q7 (limb (c) coating chemistry and the operation it postpones)'],
+      ['refuge preliminary inquiry', 'QP2307-Q8',
+       'Q8 (the coastal-State decision and the statutory first step)'],
+      ['implied warranty proper provisions', 'QP2307-Q9',
+       'Q9 (the owner-to-crew obligation under the name candidates know)'],
+    ],
+    // DELIBERATE REGRESSION SENTINEL, and it guards this paper's single
+    // highest temporal risk. The True Source corpus holds TWO consolidated
+    // texts of the MLC in one folder -- the 2018-amended text and the 2022
+    // set -- and the second is present, readable and INAPPLICABLE at a July
+    // 2023 sitting. 23 December 2024 is the date on which the 2022 amendments
+    // entered into force, seventeen months AFTER this paper, and Q4 states it
+    // only as an exclusion. If this stops resolving to Q4, the 2022 set has
+    // been walked into the answer as operative law.
+    //
+    // MEPC.328(76) was considered and REJECTED: it is genuinely unique to Q3
+    // here, but it is operative rather than excluded, so a break in it would
+    // signal nothing about the boundary that can actually be crossed.
+    regulation: ['23 december 2024', 'QP2307-Q4'],
+    // Leak probe, not a search probe. The source copy prints the host's own
+    // backward-looking sitting rows under every question -- Q4 alone carries
+    // nine, running back to 2017, the longest annotation on this paper.
+    // '2023/JUL' is the paper's self-reference, printed on all nine. None may
+    // reach the shipped bytes.
+    recurrence: ['2023/jul', '2017/aug', '2023/apr'],
+    // 'unseaworthy' reaches only Q9 in the payload, but 'detention' reaches
+    // Q4, Q8 and Q9. The pair separates the statutory detention power from the
+    // MLC one and from the casualty one.
+    narrow: ['detention unseaworthy', 'QP2307-Q9'],
+  },
   QP2302: {
     // AUTHORED at laptop review against what each question is about, never
     // harvested from the built page. Every probe below was PROVED unique

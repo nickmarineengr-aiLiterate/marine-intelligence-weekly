@@ -6,7 +6,7 @@
 
 | Year | Papers held | Months absent from the available source set |
 |---|---|---|
-| 2023 | 7 | May, June, July, August, November |
+| 2023 | 8 | May, June, August, November |
 | 2024 | 11 | May |
 | 2025 | 11 | May |
 | 2026 | 6 | May, August, September, October, November, December |
@@ -19,6 +19,7 @@
 | QP2302 | February 2023 | `FEBRUARY 2023.pdf` | 2302 EM | 2 | 9 | ? of 2 |
 | QP2303 | March 2023 | `MARCH 2023.pdf` | 2303 EM | 2 | 9 | ? of 2 |
 | QP2304 | April 2023 | `APRIL 2023.pdf` | 2304 EM | 2 | 9 | 2 of 2 |
+| QP2307 | July 2023 | `JULY 2023.pdf` | 2307 EM | 2 | 9 | ? of 2 |
 | QP2309 | September 2023 | `SEPTEMBER 2023.pdf` | 2309 EM | 2 | 9 | ? of 2 |
 | QP2310 | October 2023 | `OCTOBER 2023.pdf` | 2310 EM | 2 | 9 | ? of 2 |
 | QP2312 | December 2023 | `DECEMBER 2023.pdf` | 2312 EM | 2 | 9 | ? of 2 |
@@ -63,7 +64,7 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 
 ### Questions printing NO mark allocation
 
-**35 of 315**, across 9 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
+**39 of 324**, across 10 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
 
 | Question | Sitting | Title |
 |---|---|---|
@@ -82,6 +83,10 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 | QP2304-Q5 | April 2023 Q5 | Maritime Lien, In Rem and In Personam |
 | QP2304-Q8 | April 2023 Q8 | IMO and ILO Human Element Regimes, and Fatigue Guidance |
 | QP2304-Q9 | April 2023 Q9 | Classification Societies in Rule Formation, SOLAS II-1, and Annual versus Periodical Surveys |
+| QP2307-Q6 | July 2023 Q6 | Formal Safety Assessment - Objectives, Characteristics and Process |
+| QP2307-Q7 | July 2023 Q7 | Hull and Propeller Maintenance for Energy Efficiency |
+| QP2307-Q8 | July 2023 Q8 | Collision off the Indian Coast - Action under the Merchant Shipping Act |
+| QP2307-Q9 | July 2023 Q9 | Unseaworthy and Unsafe Ships under the Merchant Shipping Act, 1958 |
 | QP2310-Q9 | October 2023 Q9 | Root Cause Analysis, Active Failures and Latent Failures |
 | QP2402-Q8 | February 2024 Q8 | Grounded and Abandoned Indian Flag Vessel - Action under the Merchant Shipping Act |
 | QP2403-Q4 | March 2024 Q4 | High-Efficiency Propellers |
@@ -143,6 +148,8 @@ Examiner wording is reproduced exactly, errors included. Each is recorded in a n
 | QP2304-Q7 | The source copy prints all four limbs with (4) against each, totalling 16 and agreeing with instruction 2. This is one of only three questions on this paper that print any marks - Q3, Q6 and Q7. The stem prints an ampersand in three of the four limb headings where later sittings print 'and', and prints CLC with a curly apostrophe as "CLC’92". Both preserved exactly as printed. |
 | QP2304-Q8 | ANOMALY: the source copy prints NO mark allocation against either limb, and prints the two limb labels inconsistently - a lower-case "a)" followed by an upper-case "B)." with a full stop after the bracket. It also prints no full stop at the end of limb B. All three features are preserved exactly and recur identically in the later sitting of the same question. Recorded at 16 marks under instruction 2 ("all questions carry equal marks") with marks null on both limbs; the unequal division of the answer between the limbs is an authoring judgement recorded in unresolved, not a printed instruction. |
 | QP2304-Q9 | ANOMALY, AND IT RUNS IN AN UNUSUAL DIRECTION. This source copy prints NO mark allocation against either limb, where the same question at every other sitting MIW holds prints a split - (8) and (8) in December 2023, and (10) and (6) in December 2024, September 2025 and June 2026. Neither split is imported: the question is recorded at 16 marks under instruction 2 with marks null on both limbs, and the two limbs are treated as of comparable weight. Two printed features are preserved exactly: 'SOLAS ch.ll-1', written with two lowercase letter L characters rather than the Roman numeral II and read as chapter II-1; and 'above-referred' hyphenated with 'toward' rather than 'towards', which is the orthography that places this paper in the same family branch as the December 2023 sitting. |
+| QP2307-Q2 | The question prints a single total of (16) and no limb marks; the four heads (i) to (iv) are printed inline within the stem rather than as separately marked limbs. Limb marks are recorded as null rather than inferred as 4+4+4+4. The answer nonetheless plans four roughly equal blocks, because four named heads under one equal-marks total is the only reading the rubric supports. |
+| QP2307-Q7 | The question prints NO mark figure at all - neither a total nor any limb allocation. The three limbs are therefore recorded with null marks and the question at 16 on the printed equal-marks rubric. THE MARCH 2025 SITTING OF THE CHARACTER-IDENTICAL STEM PRINTS (6), (5), (5); THOSE FIGURES ARE DELIBERATELY NOT IMPORTED, because importing them would manufacture a printed fact this examiner did not print. The answer is planned in three roughly equal blocks instead of the donor's 6/5/5 weighting. |
 | QP2309-Q1 | The source copy prints (16) against the stem and no mark against any of the three limbs. The limbs are therefore recorded with marks null. Nothing is inferred about an internal split: the printed form is a single 16-mark question with three parts, and the answer is balanced by the work each limb demands rather than by an invented allocation. |
 | QP2309-Q9 | The source copy prints (16) against the stem and runs the three parts inline within the sentence, with no mark against any of them. The limbs are therefore recorded with marks null. No internal split is inferred: the three are of comparable weight and the answer treats them so, with the third given slightly more space because it is the principle the other two depend on. |
 | QP2310-Q1 | The question prints a single mark figure, (16), at the end of the stem. The three named items (i), (ii) and (iii) carry no individual marks, so sub-part marks are null. Nothing is inferred about how the examiner would split the sixteen between them. |

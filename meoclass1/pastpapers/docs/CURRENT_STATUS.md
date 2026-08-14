@@ -1,9 +1,10 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-14, after **QP2310 (October 2023) was laptop-reviewed and published to `main`** (see §7o).
-Previous entry: 2026-08-14, after **QP2303 (March 2023) was laptop-reviewed and published to
-`main`** (see §7n).
+Last updated: 2026-08-15, after **QP2307 (July 2023) was laptop-reviewed and published to `main`** (see §7p).
+Previous entries: QP2302 (February 2023) at `734c03f` and the Annex VI dating correction at
+`85fb58e`, both 2026-08-15; **QP2310** (October 2023) at §7o and **QP2303** (March 2023) at §7n,
+both 2026-08-14.
 See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for QP2501 and QP2502,
 §7a for QP2512, §7b for the derived layer, §7c for the desktop batches, §1a for security.
 
@@ -20,7 +21,11 @@ See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for
 > silently reverted `DESKTOP_QP_ALLOCATION_2023.md`, `DESKTOP_QP_HANDOVER_BATCH3.md` and 15 lines of
 > this file. Both desktop branches are **retained** as provenance evidence.
 >
-> **Product: 34 available papers · 306 published questions · 306 in the corpus.**
+> **Product: 36 available papers · 324 published questions · 324 in the corpus.**
+>
+> **QP2307 (July 2023) IS LIVE — laptop-reviewed and published 2026-08-15 (§7p).** Eight 2023
+> sittings are now solved: January, February, March, April, **July**, September, October and
+> December. Three remain: June, August and November.
 >
 > **QP2310 (October 2023) IS LIVE — laptop-reviewed and published 2026-08-14 (§7o).** Six 2023
 > sittings are now solved: January, March, April, September, **October** and December. Seven
@@ -429,6 +434,161 @@ Fixed in `caf5020`.
   cannot point forward (819 tokens, zero forward) — and is now inverted into the queue above.
 - **`validate_antipatterns.py` does not exist and never had a hook entry.** No `hooks` key in
   any settings file, no such file on disk. The entry was stale; struck rather than carried.
+
+---
+
+## 7p. QP2307 (July 2023) — laptop-reviewed and published — **A PRESERVED MISPRINT, AND THE EDGE THAT BEATS IT**
+
+Desktop branch `pastpapers/qp2307-founder-review` @ `9f8bf0c`, based on `a633e97`, pushed
+2026-08-14 17:19 IST. Twelve files, all paper-owned, one commit. Integrated by **path extraction**
+onto `main`; the branch was never merged and is retained as provenance. Its tip did not move during
+the review. **`main` DID move** — `85fb58e` landed mid-review and is reconciled below.
+
+**Product: 36 available papers · 324 published questions.** July 2023 transitioned to Available
+automatically.
+
+### Source — verified independently from the printed copy
+
+`2307 EM`, July 2023, `(India 2023)`, 2 pages, **9 questions counted by reading**, `Total Marks –
+100`, `Answer SIX questions only`. **Q3 alone prints `Q3):`** — the closing parenthesis is why an
+extractor anchored on a `Q<n>.` pattern under-reads this paper by one. **Four questions print no
+mark figure at all** (Q6, Q7, Q8, Q9), the highest count in the 2023 intake; each is recorded at 16
+on the equal-marks rubric and **no limb split is inferred** — in particular Q7's `(6)(5)(5)` from
+its March 2025 recurrence is deliberately not imported. The printed defects survive in
+`text_verbatim`: `vis-a-vis`, `Scavenge Air Moisturizing`, `with respect seaworthiness`, and Q9's
+opening curly quotation mark closed by a straight one.
+
+### Q1–Q9 — seven PASS, two CORRECTED
+
+**C1 — Q4, the burden of proof on an undue detention is on the COMPLAINANT.** The answer said it
+"rests on the shipowner". **Standard A5.2.1 paragraph 8** was read in the held MLC text: *"If a ship
+is found to be unduly detained or delayed, compensation shall be paid for any loss or damage
+suffered. The burden of proof in each case shall be on the complainant."* **Standard A5.1.4
+paragraph 16** says the same for the wrongful exercise of an inspector's powers. In an answer whose
+whole subject is the seafarer's *complaint*, naming the shipowner as the burden-bearer is both
+non-textual and confusing.
+
+**C2 — Q4, the Code amendment procedure is Article XV, not Article XIII.** Read at source:
+**Article XIII** establishes the committee that keeps the Convention under review — the Special
+Tripartite Committee; **Article XIV** is amendment of the Convention; **Article XV** is *"The Code
+may be amended either by the procedure set out in Article XIV or … in accordance with the procedure
+set out in the present Article."* The substance was right and the article number was wrong — the
+"correct citation carrying the wrong content" failure mode. The delivery page now renders
+`Article XV`, and no `Article XIII` reaches a candidate surface.
+
+**C3 — Q9 asserted an unverifiable universal negative, across ten sites.** *"The Act that eventually
+replaced it did not exist in any form at this date"*, supported by *"the Merchant Shipping Bill,
+2024 was not introduced in the Lok Sabha until 10 December 2024"*. **Nothing MIW holds supports
+either claim.** The corpus's own instrument log for the 2025 Act records assent **18 August 2025**,
+commencement **15 March 2026** — and says nothing about a Bill. All ten sites now state the held
+chronology instead: roughly thirty-two months after this sitting. The operative conclusion — the
+1958 Act governs — never moved.
+
+### Three internal leaks, found by sweeping the RENDERED BYTES
+
+- **The private corpus commit hash reached sixteen candidate-facing fields.** `319524c` is a git
+  identifier of a **private** repository and means nothing to a paying candidate. **No live paper
+  carries one**, so this paper would have introduced the class. The disclosure is kept; the hash is
+  gone.
+- **"the 2023 batch"** — scheduling vocabulary, the same class as the `QP2310-Q7` flashcard. One
+  further live instance on another paper is **referred, not fixed**.
+- **"not repaired from this branch"** — production vocabulary, twice.
+
+**The nil is a searched nil.** Seeding all three back into the built page makes the sweep fire; the
+clean page reports zero on both surfaces.
+
+### The Q4 lineage defect — it resolves itself, and no classifier was touched
+
+The six-year layer classified `QP2307-Q4` **UNIQUE, singleton**, despite nine host-annotated prior
+sittings. The mechanism was located, and it is not a classifier fault:
+
+> An **INTELLIGENCE_ONLY** ghost carries no `reused_from` edge, so it can join a family **only** by
+> exact normalised-stem equality. This sitting prints `Complaint`; February 2023 preserves the
+> misprint `Compliant`. **One letter**, similarity 0.991, and the equality fails.
+
+Once the paper is solved, graduation drops the ghost and the **adjudicated** `reused_from` edge to
+`QP2302-Q8` does the work the stem cannot. Proved by building the layer twice:
+
+| | class | size | members |
+|---|---|---|---|
+| before | `UNIQUE` | 1 | `QP2307-Q4` |
+| after | `NEAR_REPEAT` | **4** | `QP2211-Q3` (Nov 2022) · `QP2302-Q8` · `QP2307-Q4` · `QP2407-Q6` |
+
+**No narrow fix was made and none was needed** — which is the right outcome, because any
+normalisation loose enough to equate `Complaint` with `Compliant` would risk collapsing genuinely
+different families.
+
+> **OPEN, REPORTED NOT FIXED — `QP2201-Q4` (January 2022) is a false `UNIQUE` that does NOT resolve
+> itself.** Its stored stem reads *"Detainable deficiencies. **2** d) Grievance Redressal…"* — a
+> bare page number swept in **mid-stem** across the page break. The span rules added during the
+> QP2303 repair catch that artefact at the **end** of a stem, not in the middle. It will stay a
+> singleton until January 2022 is solved. It is intelligence-only, so **no customer sees it**; and
+> correcting a historical `text_verbatim` to make classification pass is what the source-fidelity
+> rule forbids. The fix belongs in the extractor, as a mid-stem span rule.
+
+### July 2023 and the 7 July GHG boundary — assessed, and it does not bite
+
+**MEPC 80 sat 3–7 July 2023** and adopted the 2023 IMO GHG Strategy on 7 July. The paper prints
+`JULY 2023` and **no day**, so the sitting cannot be placed on either side — and it does not need
+to be. No stem concerns GHG ambition. The two places the window could have reached were checked:
+**Q3**, where any claim about "the most recent MEPC session" would be day-dependent — the answer
+makes none, resting on `MEPC.328(76)`, in force 1 November 2022; and **Q7**, where MEPC 80 revised
+the biofouling guidance inside the window — the answer names **no edition, no year and no resolution
+number** for it, so every statement is true on either side of 7 July. **No hedge was written and no
+7 July problem was manufactured.**
+
+### `main` moved mid-review, and it closed a claim this paper was making
+
+`85fb58e` landed during the review and dated the revised Annex VI from `MEPC.328(76)`'s own
+operative paragraph, recording that **TSCR-3 was corrected in the corpus** at corpus commit
+`7441cc0`. QP2307-Q3 was telling a candidate that the corpus register defect was **live**. The
+desktop's own `reverify_before_publication` entry said, in terms, *"BEFORE PUBLICATION, confirm the
+register has been corrected or that the declared discrepancy still stands"* — and this is
+publication. Seven sites now cite **the resolution** as the authority for 1 November 2022, which is
+where the date should have come from, and record the register value as corrected at source. The
+substantive date never moved. Rebased onto `85fb58e`; the only conflict was a **generated** file and
+it was resolved by regenerating, never by hand-merging.
+
+### UI fixture — authored, eighteen probes proved
+
+QP2307 had none, which failed the suite on both surfaces. Every probe was proved unique against the
+real card payloads under the search's **token-AND** semantics before it was written down — the
+assertion uses `includes()`, so a probe reaching two cards still reports green. The paper's
+collisions are unusually strong: it prints **two** collision questions and **two** Merchant Shipping
+Act questions, so `collision` reaches two cards, `detention` three and `merchant shipping act`
+**six**. None is used. Aliases were checked against the visible text with **tag boundaries treated
+as hard breaks** — an earlier pass reported false positives because the segment began mid-tag and
+swept the `data-search` payload back in. `23 december 2024` is the regression sentinel: it guards
+the one boundary that can actually be crossed here, because the corpus holds **both** MLC editions
+in one folder and the 2022 set is inapplicable at this sitting. **66/66 on both surfaces.**
+
+### The storefront month-list guard fired for the second time
+
+> `2023 coverage omits July -- solved and delivered, but the customer is not told they get it`
+
+The storefront also still advertised **35 papers / 315 answers**, and its `<meta>` description was
+staler still at **33 / 297**. All corrected; months are derived from the specs and never typed into
+the checker.
+
+### Intelligence graduation — proved, not asserted
+
+| | solved | intelligence-only | combined |
+|---|---|---|---|
+| before | 35 papers / 315 q | 26 papers / 234 q | **61 / 549** |
+| after | **36 / 324** | **25 / 225** | **61 / 549** |
+
+Solved **+1**, intelligence-only **−1**, combined **unchanged**. **No record was hand-deleted.**
+
+### Verification
+
+`validate_spec` **0 errors**, 13 warnings (9 the Founder-deferred word band, 4 `no P1`).
+`run_toolchain --publish --strict` **ALL STAGES PASS**. `delivery_gate --verify-derivation --strict`
+**PASS**. `health_check --publish` **0 errors, 0 warnings**. Determinism **byte-identical across 94
+artefacts** over two full builds, product **and** six-year, re-proved after the rebase. Security
+**198/198** across six suites, unchanged. UI **66/66** on both surfaces. Visual at **1280 and 375**:
+9 anchors · 5 modes · no horizontal overflow · **no console output** · all four corrections rendered
+· zero internal vocabulary in visible text. `solvedQP/QP2307.html` was untracked and was staged by
+explicit path.
 
 ---
 

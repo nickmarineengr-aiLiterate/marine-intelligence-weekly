@@ -5324,3 +5324,84 @@ staged by explicit path.
 
 **Do not start QP2407 or QP2408 on the laptop.** Both are desktop-authored papers and neither has
 been started. Recommended desktop order is **QP2407 then QP2408**. See the Batch 3 handover.
+
+---
+
+# §39 — QP2307 JULY 2023 — LAPTOP REVIEW AND PUBLICATION — 2026-08-15
+
+## Outcome
+
+QP2307 integrated onto `main` by path extraction and published. **Seven of nine questions PASS, two
+CORRECTED.** The corpus goes to **36 papers / 324 questions**, and 2023 to eight of eleven sittings.
+
+## Branch / commits
+
+Desktop `pastpapers/qp2307-founder-review` @ `9f8bf0c`, based on `a633e97`. Twelve paper-owned
+files, all previously absent. Branch **never merged**, retained as provenance. Integration branch
+`integration/qp2307-laptop-review`, cut from `b370169`, **rebased onto `85fb58e`** when `main` moved
+mid-review.
+
+## Key findings
+
+**The Q4 lineage defect diagnosed, and deliberately not "fixed".** The prompt carried it as an open
+classifier defect. It is not one. An `INTELLIGENCE_ONLY` ghost carries no `reused_from` edge and can
+therefore join a family only by exact stem equality; July prints `Complaint` where February
+preserves the misprint `Compliant`, so the equality fails on one letter (similarity 0.991). Solving
+the paper drops the ghost by the graduation rule and lets the adjudicated edge to `QP2302-Q8` do the
+work — family size 1 → 4, back to November 2022. Building the layer with the spec moved aside and
+again in place proves it. **Loosening normalisation to equate the two words would have been the
+wrong repair**, and would have risked collapsing unrelated families.
+
+**A second, different false `UNIQUE` was found and left alone.** `QP2201-Q4` carries a bare page
+number swept in **mid-stem** across a page break. The QP2303 span rules catch that at the end of a
+stem, not the middle. Reported; not repaired, because it is internal, invisible to customers, and
+editing a historical `text_verbatim` to make classification pass is precisely what the
+source-fidelity rule forbids.
+
+**Two MLC corrections, both read at source.** The burden of proof on an undue detention is on the
+**complainant** (Standard A5.2.1 ¶8, and A5.1.4 ¶16 for inspectors' powers), not the shipowner. And
+the Code amendment procedure is **Article XV**, not Article XIII — XIII establishes the Special
+Tripartite Committee, XIV amends the Convention, XV amends the Code. The second is the
+"correct-citation-wrong-content" mode the protocol names.
+
+**An unverifiable universal negative, derived coherently across ten sites.** Q9 said the replacing
+statute *"did not exist in any form"* at July 2023 and dated a Bill to 10 December 2024. Nothing MIW
+holds supports either. The corpus's own instrument log gives assent 18 August 2025 and commencement
+15 March 2026 — and no Bill date at all. Replaced with the held chronology throughout.
+
+**A new leak class was stopped at the boundary.** The private corpus **commit hash** had reached
+sixteen candidate-facing fields. No live paper carries one, so this paper would have introduced it.
+Found by sweeping rendered bytes, not the field list — the same method that caught `batch` on
+QP2310, and it caught `batch` again here.
+
+**`main` moved mid-review and closed a claim the paper was making.** `85fb58e` recorded TSCR-3 as
+corrected in the corpus. QP2307-Q3 was declaring that register defect **live** to a candidate, and
+the desktop's own pre-publication note asked for exactly this confirmation. Seven sites now cite the
+resolution's operative provisions as the authority for 1 November 2022.
+
+**The July 2023 boundary was assessed in full and does not bite.** MEPC 80 sat 3–7 July; the paper
+prints no day. No stem concerns GHG ambition, Q3 makes no most-recent-session claim, and Q7 names no
+edition, year or number for the biofouling guidance. No hedge was written.
+
+## Corpus delta
+
+Solved **35 → 36** papers, **315 → 324** questions. Intelligence-only **26 → 25** papers,
+**234 → 225** questions. Combined six-year universe **61 / 549, unchanged**. Nothing hand-deleted.
+
+Storefront corrected: 35 → 36 papers, 315 → 324 answers, `<meta>` description from a staler 33 / 297,
+and the 2023 month list gained July — the month-list guard's **second** real catch.
+
+## QA
+
+`run_toolchain --publish --strict` ALL STAGES PASS · delivery gate strict PASS ·
+`health_check --publish` 0/0 · determinism byte-identical across 94 artefacts over two full builds,
+product and six-year, re-proved after the rebase · security 198/198 · UI 66/66 on both surfaces from
+a **newly authored fixture** whose eighteen probes were each proved unique under token-AND · visual
+at 1280 and 375 with no overflow and no console output · leak sweep zero on both surfaces, with a
+positive control proving the sweep fires.
+
+## Next action
+
+**QP2306, QP2308 and QP2311 remain.** Recomputed donor readiness recommends **one** next paper —
+see `CURRENT_STATUS.md` §7p and the session report. The `QP2201-Q4` mid-stem extractor artefact is
+carried as an open, reported item.
