@@ -71,6 +71,21 @@ export async function redisSetNX(key, value, ttlSeconds = 86400) {
 }
 
 /**
+ * Atomic create — SET key val NX, with NO expiry.
+ *
+ * Deliberately separate from redisSetNX above, which defaults to a
+ * 24-hour TTL because every caller it was written for is an
+ * idempotency lock. Reaching for that function to create a durable
+ * record — an account credential, say — would quietly delete it a day
+ * later. Two names, two lifetimes, no way to pick the wrong one by
+ * omitting an argument.
+ */
+export async function redisCreateNX(key, value) {
+  const data = await redisCmd(["SET", key, value, "NX"]);
+  return data.result === "OK";
+}
+
+/**
  * Multi-command pipeline via Upstash's /pipeline endpoint.
  * Returns an array of {result} objects, one per command, in order.
  *

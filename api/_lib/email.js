@@ -253,6 +253,46 @@ export function buildResetEmail(email, password, { name = "", issuedAt = new Dat
   };
 }
 
+/**
+ * A brand-new account created for a free trial, before any purchase.
+ *
+ * Distinct from buildResetEmail because nothing is being replaced —
+ * there is no "your previous password no longer works" to say, and
+ * saying it would confuse someone who has never had one. It also must
+ * NOT read as a purchase confirmation: no money has changed hands, and
+ * the trial clock has not started yet either. The password is the only
+ * thing being delivered here; starting the trial is a separate,
+ * deliberate act back on the site.
+ */
+export function buildTrialAccountEmail(email, password, { issuedAt = new Date() } = {}) {
+  const body = `
+    <p style="font-size:16px;color:#0f172a;margin:0 0 12px">Hi there,</p>
+    <p style="color:#334155;line-height:1.6;margin:0 0 16px">
+      Here is the password for your new Marine Intelligence Weekly account.
+      Sign in with it to start your free trial.
+    </p>
+    ${credentialsBlock(email, password, issuedAt)}
+    ${cta("Sign in and start your trial")}
+    <div style="background:#f0fdfa;border-left:3px solid #0d9488;padding:12px 16px;margin:0 0 8px">
+      <p style="margin:0;font-size:14px;color:#134e4a">
+        <strong>Your trial has not started yet.</strong> The clock begins only when
+        you choose to start it on the site — not when you receive this email.
+      </p>
+    </div>
+    <p style="color:#64748b;line-height:1.6;font-size:13px;margin:0">
+      If you did not ask for this, you can ignore this email. The account has no
+      access to anything until a trial is started or a purchase is made.
+    </p>
+    ${support}`;
+
+  return {
+    from: FROM,
+    to: email,
+    subject: "Your MIW password",
+    html: shell(body, "Your MIW account"),
+  };
+}
+
 export function buildRotationEmail(email, password, { name = "", issuedAt = new Date() } = {}) {
   const greeting = name.trim() || "there";
   const body = `

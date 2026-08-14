@@ -150,9 +150,16 @@ export default async function middleware(request) {
       // ZSCORE returns non-null only if this session id is one of the
       // account's live sessions (up to two — mobile + laptop). Same
       // single-command cost as the old single-session GET.
+      //
+      // The third command reads the free-trial expiry for this exact
+      // product. It is fetched in the SAME pipeline rather than as a
+      // conditional second round trip: one network hop either way, and
+      // a trial must be enforced at the edge on every request, not
+      // trusted from anything the browser carries.
       body: JSON.stringify([
         ["ZSCORE", `miw:sessions:${email}`, payload.s],
         ["HGET", `miw:ent:${email}`, required],
+        ["HGET", `miw:trial:${email}`, required],
       ]),
     });
     if (!r.ok) return deny(request, "authstore");
@@ -166,12 +173,18 @@ export default async function middleware(request) {
   // sessions per account: a token stays valid while its id is still a
   // member of the set; a THIRD login retires the oldest, and that
   // retired token fails the ZSCORE lookup here.
+  //
+  // Trial expiry is compared against THIS server's clock, read here at
+  // the edge. The browser never supplies a time and never gets to
+  // decide that a trial is still running.
   const decision = authorizeRequest({
     pathname: url.pathname,
     configured,
     payload,
     sessionScore: results?.[0]?.result ?? null,
     entitled: results?.[1]?.result,
+    trialExpiry: results?.[2]?.result ?? null,
+    now: Math.floor(Date.now() / 1000),
   });
 
   if (!decision.allow) return deny(request, decision.reason);

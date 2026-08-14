@@ -23,6 +23,8 @@
 //    Founder decision, is exactly what should open that.
 // =============================================================
 
+import { trialGrantsAccess } from "./trial.js";
+
 export const ROUTE_RULES = [
   // --- Written product, customer delivery surface ---
   { prefix: "/solvedQP/", requires: "SOLVED_QP" },
@@ -77,9 +79,17 @@ export function requiredEntitlementForPath(pathname) {
  * @param {object|null} i.payload  verified token payload, or null
  * @param {*}       i.sessionScore ZSCORE result (null ⇒ not a live session)
  * @param {*}       i.entitled     HGET result ("1" ⇒ owns the product)
+ * @param {*}       i.trialExpiry  HGET on miw:trial:<email> — epoch seconds,
+ *                                 or null/undefined if no trial was ever taken
+ * @param {number}  [i.now]        server time in epoch SECONDS. Injectable so
+ *                                 the expiry boundary can be tested exactly;
+ *                                 never supplied by the client.
  * @returns {{allow: boolean, reason: string, required: string|null}}
  */
-export function authorizeRequest({ pathname, configured, payload, sessionScore, entitled }) {
+export function authorizeRequest({
+  pathname, configured, payload, sessionScore, entitled,
+  trialExpiry = null, now = Math.floor(Date.now() / 1000),
+}) {
   const required = requiredEntitlementForPath(pathname);
 
   // Public surface — storefront, samples, login, API.
@@ -99,11 +109,33 @@ export function authorizeRequest({ pathname, configured, payload, sessionScore, 
   }
 
   // Authenticated, live session — but does the account own THIS product?
-  if (!(entitled === "1" || entitled === 1)) {
-    return { allow: false, reason: "noentitlement", required };
+  //
+  // PAID IS CHECKED FIRST, AND THAT ORDER IS THE POLICY.
+  // A purchase must never be weakened by anything a trial did or
+  // failed to do, so a customer who owns the product is allowed here
+  // without the trial row being read at all. It follows that a
+  // candidate who buys DURING a trial simply becomes a customer — the
+  // trial's expiry stops mattering the moment the entitlement lands,
+  // with no conversion step and nothing to unwind.
+  if (entitled === "1" || entitled === 1) {
+    return { allow: true, reason: "ok", required };
   }
 
-  return { allow: true, reason: "ok", required };
+  // Not owned. A running trial is a real, server-side grant of the
+  // full product — same routes, same bytes, no crippled copy.
+  if (trialGrantsAccess(trialExpiry, now)) {
+    return { allow: true, reason: "trial", required };
+  }
+
+  // Denied. Distinguish "your trial is over" from "you never had
+  // access", because those are different sentences to the candidate
+  // and different next actions. Any non-empty row means a trial was
+  // taken and is not currently running.
+  if (trialExpiry !== null && trialExpiry !== undefined && trialExpiry !== "") {
+    return { allow: false, reason: "trialexpired", required };
+  }
+
+  return { allow: false, reason: "noentitlement", required };
 }
 
 function normalise(pathname) {
