@@ -29,7 +29,9 @@ const {
   isTrialProduct, TRIAL_AVAILABLE, TRIAL_ACTIVE, TRIAL_EXPIRED,
 } = await import("../../api/_lib/trial.js");
 
-const { authorizeRequest } = await import("../../api/_lib/routes.js");
+const { authorizeRequest, requiredEntitlementForPath } =
+  await import("../../api/_lib/routes.js");
+const { sessionCookies, UI_FLAG_COOKIE } = await import("../../api/_lib/session.js");
 const {
   requestTrialAccount, SIGNUP_RESPONSE, signupThrottleKey, GENERIC_RESPONSE,
 } = await import("../../api/_lib/reset.js");
@@ -462,7 +464,68 @@ describe("requestTrialAccount", () => {
 });
 
 // -------------------------------------------------------------
-// 6. COVERAGE NOTE — rows of the matrix NOT provable here
+// 6. THE miw_auth COUPLING
+//
+// 164 pages under /meoclass1/ still open with a legacy client-side
+// gate: read document.cookie, and if miw_auth is not "1", redirect to
+// /SQ/pay.html. It is the pre-Security-V2 mechanism, and it is NOT
+// security -- middleware.js refuses to read that cookie, every one of
+// those paths is behind the /meoclass1/:path* matcher, and the gate is
+// one line of JavaScript to forge. It protects nothing and, because
+// the bytes are never served to an unauthorised request in the first
+// place, it exposes nothing either.
+//
+// What it IS is a tripwire. The cookie is a UI hint set by
+// sessionCookies(). If a future change stops setting it -- tightening
+// SameSite, dropping the "redundant" second cookie, moving login --
+// then middleware will correctly ALLOW a paying customer or a trial
+// candidate, the page will be served, and the page will then throw
+// them out from the client. 164 pages would break at once, for
+// legitimate users only, with the gate that caused it invisible to
+// every server-side test we have.
+//
+// So the coupling is pinned here rather than left implicit. Deleting
+// the 164 gates is the cleaner end state and is worth doing on its own
+// terms; until then this test is what makes the dependency loud.
+// -------------------------------------------------------------
+describe("legacy miw_auth UI hint", () => {
+
+  test("a fresh login still sets the cookie 164 Oral pages read", () => {
+    const cookies = sessionCookies("v1.payload.signature");
+    const hint = cookies.find((c) => c.startsWith(UI_FLAG_COOKIE + "="));
+    assert.ok(hint, `login must keep setting ${UI_FLAG_COOKIE} or 164 pages under ` +
+      "/meoclass1/ will bounce signed-in customers and trial users client-side");
+    assert.match(hint, /^miw_auth=1;/, "the pages compare it to exactly \"1\"");
+    assert.match(hint, /Path=\//, "it must be readable on /meoclass1/, not just /SQ/");
+    assert.ok(!/HttpOnly/.test(hint),
+      "those gates read it from document.cookie, so it cannot be HttpOnly");
+  });
+
+  test("the session cookie, unlike the hint, IS HttpOnly", () => {
+    const cookies = sessionCookies("v1.payload.signature");
+    const session = cookies.find((c) => c.startsWith("miw_session="));
+    assert.match(session, /HttpOnly/, "the real credential must stay unreadable");
+  });
+
+  test("the hint carries no authority: every gated path is middleware-protected", () => {
+    // The reason the forgeable cookie is harmless. If any of these ever
+    // resolved to null, that path would be served to anyone and the
+    // client-side gate would become the only thing standing there.
+    for (const p of ["/meoclass1/", "/meoclass1/QB10_B.html",
+                     "/meoclass1/oralnotes/x.html", "/meoclass1/pastpapers/QP2601.html"]) {
+      assert.ok(requiredEntitlementForPath(p),
+        `${p} must require an entitlement at the edge`);
+    }
+  });
+
+  test("POSITIVE CONTROL: the cookie name the pages read has not drifted", () => {
+    assert.equal(UI_FLAG_COOKIE, "miw_auth",
+      "renaming this constant silently breaks 164 pages that hardcode the old name");
+  });
+});
+
+// -------------------------------------------------------------
+// 7. COVERAGE NOTE — rows of the matrix NOT provable here
 //
 // Stating them is the point. A suite that quietly omits them reads as
 // though it covered everything.
