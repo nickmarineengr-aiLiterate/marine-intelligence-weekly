@@ -5,8 +5,15 @@
 // SCHEMA
 // ------
 //   miw:ent:<email>          Redis HASH
-//       field ORAL_QB_NOTES = "1"
-//       field SOLVED_QP     = "1"
+//       field ORAL_QB_NOTES = "1" | "<expiry epoch seconds>"
+//       field SOLVED_QP     = "1" | "<expiry epoch seconds>"
+//
+//   "1" means PERPETUAL and is what every customer who bought before
+//   August 2026 holds. Purchases from then on carry a term and store an
+//   expiry instead. api/_lib/grants.js owns the reading of that value,
+//   and its trap note is required reading: Number("1") is 1970, so an
+//   arithmetic-first comparison would expire the entire grandfathered
+//   population in one deploy.
 //
 // A HASH (not a JSON blob) is deliberate:
 //   * additive     — HSET one field never disturbs the others, so a
@@ -29,27 +36,58 @@
 
 import { redisCmd } from "./redis.js";
 import { ALL_ENTITLEMENTS } from "./products.js";
+import { grantAllowsAccess, grantState, extendedGrantValue } from "./grants.js";
 
 export const entKey = (email) => `miw:ent:${String(email).toLowerCase().trim()}`;
 export const userKey = (email) => `miw:user:${String(email).toLowerCase().trim()}`;
 
 /**
- * Grant one or more entitlements. Additive and idempotent —
- * existing grants are never touched, never removed.
+ * Grant one or more entitlements. Additive — an existing grant is
+ * EXTENDED, never shortened and never replaced by a shorter one.
+ *
+ * @param {string} email
+ * @param {string|string[]} entitlements
+ * @param {object} [opts]
+ * @param {number|null} [opts.termDays] null ⇒ perpetual ("1")
+ *
+ * WHY THIS READS BEFORE IT WRITES
+ * A blind HSET of a dated value would DOWNGRADE a grandfathered
+ * customer the moment they bought anything — their perpetual "1"
+ * overwritten by a one-year stamp, by their own payment. It would also
+ * make an accidental double purchase shorten the second one to a single
+ * year from today. extendedGrantValue() encodes both rules: perpetual
+ * stays perpetual, and a renewal is added to whatever is already there.
+ *
+ * The read-modify-write window is acceptable here in a way it is not
+ * for the trial: the worst interleaving of two concurrent grants for
+ * the SAME product is that one term is added instead of two, which
+ * under-grants rather than over-grants and is visible to support. A
+ * grant for a DIFFERENT product cannot collide at all, because HSET
+ * touches one field.
  */
-export async function grantEntitlements(email, entitlements) {
+export async function grantEntitlements(email, entitlements, opts = {}) {
   const list = (Array.isArray(entitlements) ? entitlements : [entitlements])
     .filter((e) => ALL_ENTITLEMENTS.includes(e));
   if (list.length === 0) return {};
 
+  const termDays = opts.termDays === undefined ? null : opts.termDays;
+  const now = Date.now();
+
+  const existing = await getRawEntitlements(email);
+
   const args = ["HSET", entKey(email)];
-  for (const e of list) args.push(e, "1");
+  const out = {};
+  for (const e of list) {
+    const value = extendedGrantValue(existing[e], termDays, now);
+    args.push(e, value);
+    out[e] = value;
+  }
   await redisCmd(args);
-  return Object.fromEntries(list.map((e) => [e, true]));
+  return out;
 }
 
-/** Read the full entitlement map. Always returns every known key. */
-export async function getEntitlements(email) {
+/** The stored strings, exactly as Redis holds them. */
+export async function getRawEntitlements(email) {
   const data = await redisCmd(["HGETALL", entKey(email)]);
   const raw = data.result;
 
@@ -60,16 +98,37 @@ export async function getEntitlements(email) {
   } else if (raw && typeof raw === "object") {
     Object.assign(held, raw);
   }
+  return held;
+}
 
+/**
+ * Read the full entitlement map. Always returns every known key.
+ *
+ * Stays BOOLEAN for every existing caller — true means "may read the
+ * product right now", which is the only question /api/session and the
+ * hub ever asked. Callers that need the date use getEntitlementDetail().
+ */
+export async function getEntitlements(email) {
+  const held = await getRawEntitlements(email);
+  const nowSeconds = Math.floor(Date.now() / 1000);
   const out = {};
-  for (const e of ALL_ENTITLEMENTS) out[e] = held[e] === "1" || held[e] === 1;
+  for (const e of ALL_ENTITLEMENTS) out[e] = grantAllowsAccess(held[e], nowSeconds);
+  return out;
+}
+
+/** Per-product {status, expires, perpetual} — for the access hub. */
+export async function getEntitlementDetail(email) {
+  const held = await getRawEntitlements(email);
+  const nowSeconds = Math.floor(Date.now() / 1000);
+  const out = {};
+  for (const e of ALL_ENTITLEMENTS) out[e] = grantState(held[e], nowSeconds);
   return out;
 }
 
 /** Single-field check — the hot path used when authorizing a request. */
 export async function hasEntitlement(email, entitlement) {
   const data = await redisCmd(["HGET", entKey(email), entitlement]);
-  return data.result === "1" || data.result === 1;
+  return grantAllowsAccess(data.result, Math.floor(Date.now() / 1000));
 }
 
 /**

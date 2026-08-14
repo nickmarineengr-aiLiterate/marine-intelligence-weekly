@@ -171,6 +171,7 @@ const REASONS = {
   evicted: "You were signed out because this account signed in on another device.",
   noentitlement: "Your account doesn't include that product yet.",
   trialexpired: "Your free trial of that product has ended.",
+  expired: "Your access to that product has ended. You can renew it below.",
   misconfigured: "Access is temporarily unavailable. Please contact support.",
   authstore: "Access is temporarily unavailable. Please try again shortly.",
 };
@@ -189,6 +190,20 @@ function productForPath(path) {
  * remaining time is information the candidate asked for, not pressure
  * to act, and the browser's clock has no authority over access anyway.
  */
+/** A server expiry rendered in the reader's own locale. */
+function accessDate(epochSeconds) {
+  if (!epochSeconds) return "";
+  try {
+    return new Date(epochSeconds * 1000).toLocaleDateString(undefined,
+      { day: "numeric", month: "long", year: "numeric" });
+  } catch (_) { return ""; }
+}
+
+/** Bought once, term run out. Distinct from never having bought. */
+function accessLapsed(session, key) {
+  return (((session.access || {})[key] || {}).status === "expired");
+}
+
 function remainingText(seconds) {
   if (!(seconds > 0)) return "";
   const h = Math.floor(seconds / 3600);
@@ -257,8 +272,22 @@ function renderHub(session) {
     html += "<p>" + p.blurb + "</p>";
 
     if (has) {
-      // STATE A — owned outright.
+      // STATE A — owned. Say WHICH kind of access they hold, because
+      // there are now two and the difference matters to them: a
+      // grandfathered lifetime grant, or a dated term with a renewal
+      // date. Both are read from the server; neither is inferred here.
+      const a = (session.access || {})[key] || {};
+      if (a.perpetual) {
+        html += '<p class="state">Lifetime access — yours from the original purchase.</p>';
+      } else if (a.expires) {
+        html += '<p class="state">Access until ' + accessDate(a.expires) + "</p>";
+      }
       html += '<a class="btn" href="' + p.open + '">Open →</a>';
+    } else if (accessLapsed(session, key)) {
+      // Paid once, term run out. A renewal, not a first-time pitch.
+      html += '<p class="state ended">Your access ended on ' +
+              accessDate(((session.access || {})[key] || {}).expires) + ".</p>" +
+              '<a class="btn" href="' + p.buy + '">Renew access ' + p.price + " →</a>";
     } else if (onTrial) {
       // STATE D — trial running. Access is real, so the primary action
       // is to use it; buying is offered second, not pushed.

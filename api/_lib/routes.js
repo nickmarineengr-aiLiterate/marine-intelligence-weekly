@@ -24,6 +24,7 @@
 // =============================================================
 
 import { trialGrantsAccess } from "./trial.js";
+import { grantAllowsAccess, grantHasLapsed } from "./grants.js";
 
 export const ROUTE_RULES = [
   // --- Written product, customer delivery surface ---
@@ -117,14 +118,37 @@ export function authorizeRequest({
   // candidate who buys DURING a trial simply becomes a customer — the
   // trial's expiry stops mattering the moment the entitlement lands,
   // with no conversion step and nothing to unwind.
-  if (entitled === "1" || entitled === 1) {
+  //
+  // "Owns" now means "1" (grandfathered, never expires) OR a future
+  // expiry stamp. grantAllowsAccess() compares the "1" as a STRING
+  // before any arithmetic — see the trap note in grants.js, because the
+  // arithmetic reading of "1" is 1970 and would lock out every
+  // pre-August-2026 customer at once.
+  if (grantAllowsAccess(entitled, now)) {
     return { allow: true, reason: "ok", required };
   }
 
-  // Not owned. A running trial is a real, server-side grant of the
-  // full product — same routes, same bytes, no crippled copy.
+  // Not owned, or owned and lapsed. A running trial is a real,
+  // server-side grant of the full product — same routes, same bytes, no
+  // crippled copy.
+  //
+  // EVERY LIVE GRANT IS CHECKED BEFORE ANY DENIAL IS CHOSEN.
+  // This branch sits above the lapsed-customer branch on purpose. A
+  // candidate whose paid year has run out but who never spent their
+  // free trial can still start it, and when they do it must let them
+  // in — the alternative is denying someone who is holding a valid,
+  // unexpired grant, because of a DIFFERENT grant that ran out. The
+  // ordering below is therefore: live paid, live trial, then the most
+  // useful thing to say to someone with neither.
   if (trialGrantsAccess(trialExpiry, now)) {
     return { allow: true, reason: "trial", required };
+  }
+
+  // Paid once, term run out. Distinguished from "never bought" and from
+  // "trial ended": this is a lapsed CUSTOMER, and the right thing to
+  // show them is a renewal, not a first-time sales pitch.
+  if (grantHasLapsed(entitled, now)) {
+    return { allow: false, reason: "expired", required };
   }
 
   // Denied. Distinguish "your trial is over" from "you never had

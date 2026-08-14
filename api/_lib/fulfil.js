@@ -25,7 +25,7 @@
 // decision logic offline with no network and no secrets.
 // =============================================================
 
-import { PRODUCTS } from "./products.js";
+import { PRODUCTS, DEFAULT_TERM_DAYS } from "./products.js";
 import { redisGet, redisSet, redisIncr, redisSetNX, redisDel } from "./redis.js";
 import { grantEntitlements, userKey } from "./entitlements.js";
 import { hashPassword } from "./session.js";
@@ -156,8 +156,17 @@ export async function fulfilPayment({ orderId, paymentId, source, deps = {} }) {
       password = await assignNewPassword(buyerEmail, store, deps.passwordPool);
     }
 
-    // ---- 7. Grant. Additive — never removes an existing entitlement. ----
-    await store.grant(buyerEmail, product.grants);
+    // ---- 7. Grant. Additive — never removes or shortens an existing
+    //         entitlement, and never downgrades a perpetual one. ----
+    //
+    // The term comes from the catalogue, not from the order and not
+    // from the browser, for exactly the reason the AMOUNT does: the
+    // buyer must not be able to choose how long they get any more than
+    // they can choose what they pay. A tier may override it, so a
+    // perpetual SKU stays a data change.
+    await store.grant(buyerEmail, product.grants, { termDays: tierDef.termDays !== undefined
+      ? tierDef.termDays
+      : (product.termDays !== undefined ? product.termDays : DEFAULT_TERM_DAYS) });
 
     // ---- 8. Email ----
     await sendMail(buildAccessEmail({

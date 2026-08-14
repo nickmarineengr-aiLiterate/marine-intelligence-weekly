@@ -25,6 +25,25 @@ export const ALL_ENTITLEMENTS = [
   ENTITLEMENTS.SOLVED_QP,
 ];
 
+// -------------------------------------------------------------
+// ACCESS TERM
+//
+// Founder decision, 14 August 2026: purchases made from now on carry a
+// ONE-YEAR term. Candidates who pass in three to six months should not
+// leave a live credential behind them indefinitely, and the price is
+// now tied to a growing library rather than to a single payment.
+//
+// This is NOT retroactive and cannot be made retroactive by changing
+// this number. Every existing customer holds the literal "1" in
+// miw:ent:<email>, which api/_lib/grants.js reads as perpetual before
+// it looks at any date. Nothing in this file can reach those records.
+//
+// null would mean perpetual, and is deliberately left reachable so a
+// future Founder decision (a genuine lifetime SKU, a comped account)
+// has an obvious lever rather than needing new code.
+// -------------------------------------------------------------
+export const DEFAULT_TERM_DAYS = 365;
+
 export const PRODUCTS = {
   // -----------------------------------------------------------
   // Existing paid Oral product. Amounts below are the ALREADY
@@ -49,6 +68,22 @@ export const PRODUCTS = {
   // -----------------------------------------------------------
   // NEW paid Written product. Founder-approved price: ₹1,500.
   // -----------------------------------------------------------
+  // -----------------------------------------------------------
+  // Written product. Founder-approved price: ₹1,500.
+  //
+  // PRICE LADDER (Founder decision, 14 August 2026): the price is
+  // ₹500 per exam year in the library. It steps to ₹2,000 when 2026
+  // reaches its eleventh paper and becomes a complete year.
+  //
+  // That step is a FOUNDER DECISION and nothing computes it. What is
+  // automated is the reminder: tools/pastpapers/solvedqp_check.py warns
+  // when a year completes and the amount here has not been revisited,
+  // so the ladder cannot silently stall — but no script may ever change
+  // what a candidate is charged.
+  //
+  // A price rise never touches an existing customer: their grant is
+  // already in miw:ent:<email> and is not re-read from here.
+  // -----------------------------------------------------------
   SOLVED_QP: {
     id: "SOLVED_QP",
     label: "MIW Solved Question Papers — Written",
@@ -59,6 +94,7 @@ export const PRODUCTS = {
       standard: { amount: 150000, label: "Solved QP Access", display: "₹1,500" },
     },
     defaultTier: "standard",
+    priceLadder: { perExamYear: 50000, nextAmount: 200000, stepsWhenYearCompletes: 2026 },
   },
 
   // -----------------------------------------------------------
@@ -124,6 +160,13 @@ export function resolvePurchase(input = {}) {
     label: `${product.label} — ${tierDef.label}`,
     display: tierDef.display,
     grants: product.grants,
+    // How long the purchase lasts. Server truth, exactly like the
+    // amount: the browser may display a term but never chooses one.
+    // A per-tier override wins, so a future perpetual SKU is a data
+    // change rather than a code change.
+    termDays: tierDef.termDays !== undefined
+      ? tierDef.termDays
+      : (product.termDays !== undefined ? product.termDays : DEFAULT_TERM_DAYS),
   };
 }
 

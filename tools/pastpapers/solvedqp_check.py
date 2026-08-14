@@ -57,6 +57,21 @@ def fail(where, msg):
     FAILS.append('%s: %s' % (where, msg))
 
 
+WARNS = []
+
+
+def warn(where, msg):
+    """Something a human should decide, not a defect.
+
+    Kept out of FAILS on purpose: a warning must never block a delivery,
+    or the next person to meet one will be tempted to silence it. The
+    price ladder is the case this exists for -- the check can see that a
+    step has become due, but only the Founder may move a price.
+    """
+    WARNS.append('%s: %s' % (where, msg))
+    print('[WARN ] %s: %s' % (where, msg))
+
+
 def check_page(path, text, is_paper):
     name = os.path.basename(path)
     CHECKS[0] += 1
@@ -340,6 +355,36 @@ def check_storefront(specs):
               % (n_papers, n_questions))
         print('[ OK  ] coverage block names exactly the years delivered: %s'
               % ', '.join(str(y) for y in years))
+
+    # ---- price ladder ----
+    # Founder decision: SolvedQP is priced at roughly 500 rupees per exam
+    # year, stepping when a year completes. NOTHING HERE CHANGES A PRICE.
+    # A script that silently re-prices a product is a script that can
+    # overcharge a candidate; the amount stays a Founder decision in
+    # products.js. What is automated is only the REMINDER, because the
+    # step is easy to miss on the day it becomes due -- the same way the
+    # paper counts were missed for weeks.
+    if solved:
+        cat_path = os.path.join(REPO_ROOT, 'api', '_lib', 'products.js')
+        if os.path.exists(cat_path):
+            with open(cat_path, encoding='utf-8', newline='') as fh:
+                cat_src = fh.read()
+            m_l = re.search(r'priceLadder:\s*\{[^}]*stepsWhenYearCompletes:\s*(\d+)', cat_src)
+            m_n = re.search(r'priceLadder:\s*\{[^}]*nextAmount:\s*(\d+)', cat_src)
+            m_a = re.search(r'SOLVED_QP\s*:\s*\{.*?amount:\s*(\d+)', cat_src, re.S)
+            if m_l and m_n and m_a:
+                step_year, next_amount, current = int(m_l.group(1)), int(m_n.group(1)), int(m_a.group(1))
+                got = len([d for d in solved if d['year'] == step_year])
+                sittings = 12 - absent_by_year.get(step_year, 0)
+                if got >= sittings and current < next_amount:
+                    warn('products.js',
+                         '%d is now a complete year (%d of %d sittings). The approved price '
+                         'ladder steps to %d paise at this point and the catalogue still says '
+                         '%d. This is a FOUNDER DECISION -- nothing has been changed.'
+                         % (step_year, got, sittings, next_amount, current))
+                else:
+                    print('[ OK  ] price ladder: %d is at %d of %d sittings, no step due'
+                          % (step_year, got, sittings))
 
     # price agreement with the server catalogue
     cat = os.path.join(REPO_ROOT, 'api', '_lib', 'products.js')

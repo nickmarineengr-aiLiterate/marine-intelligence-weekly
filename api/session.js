@@ -12,7 +12,7 @@
 import { parseCookies, verifySessionToken, clearCookies, SESSION_COOKIE } from "./_lib/session.js";
 import {
   isActiveSession, removeActiveSession, clearAllSessions,
-  getEntitlements, MAX_ACTIVE_SESSIONS,
+  getEntitlements, getEntitlementDetail, MAX_ACTIVE_SESSIONS,
 } from "./_lib/entitlements.js";
 
 export default async function handler(req, res) {
@@ -62,12 +62,20 @@ export default async function handler(req, res) {
     });
   }
 
-  const entitlements = await getEntitlements(payload.e);
+  // `entitlements` stays BOOLEAN — "may they read it right now" — because
+  // that is the only question every existing caller asks, and changing
+  // its shape would silently alter what those callers decide.
+  // `access` carries the term alongside it, for surfaces that want to
+  // say "until 14 August 2027" or "lifetime".
+  const [entitlements, access] = await Promise.all([
+    getEntitlements(payload.e), getEntitlementDetail(payload.e),
+  ]);
   return res.status(200).json({
     authenticated: true,
     email: payload.e,
     expires: payload.x,
     entitlements,
+    access,
     maxSessions: MAX_ACTIVE_SESSIONS,
   });
 }

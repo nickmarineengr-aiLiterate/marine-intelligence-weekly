@@ -27,7 +27,7 @@
 // =============================================================
 
 import { parseCookies, verifySessionToken, SESSION_COOKIE } from "./_lib/session.js";
-import { isActiveSession, getEntitlements } from "./_lib/entitlements.js";
+import { isActiveSession, getEntitlements, getEntitlementDetail } from "./_lib/entitlements.js";
 import { redisCmd } from "./_lib/redis.js";
 import { ALL_ENTITLEMENTS } from "./_lib/products.js";
 import {
@@ -107,13 +107,14 @@ export default async function handler(req, res) {
   // ---------------------------------------------------------
   if (req.method === "GET") {
     const nowMs = Date.now();
-    const [entitlements, trials] = await Promise.all([
-      getEntitlements(email), readTrials(email),
+    const [entitlements, access, trials] = await Promise.all([
+      getEntitlements(email), getEntitlementDetail(email), readTrials(email),
     ]);
     return res.status(200).json({
       authenticated: true,
       email,
       entitlements,
+      access,
       offers: buildOffers({ entitlements, trials, nowMs }),
       serverTime: Math.floor(nowMs / 1000),
     });
