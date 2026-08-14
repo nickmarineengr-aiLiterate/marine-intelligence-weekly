@@ -6,7 +6,7 @@
 
 | Year | Papers held | Months absent from the available source set |
 |---|---|---|
-| 2023 | 1 | February, March, April, May, June, July, August, September, October, November, December |
+| 2023 | 2 | February, March, April, May, June, July, August, September, October, November |
 | 2024 | 11 | May |
 | 2025 | 11 | May |
 | 2026 | 6 | May, August, September, October, November, December |
@@ -16,6 +16,7 @@
 | Paper | Sitting | Source file | Printed serial | Pages | Questions | Pages read back |
 |---|---|---|---|---|---|---|
 | QP2301 | January 2023 | `JANUARY 2023.pdf` | 2301 EM | 2 | 9 | ? of 2 |
+| QP2312 | December 2023 | `DECEMBER 2023.pdf` | 2312 EM | 2 | 9 | ? of 2 |
 | QP2401 | January 2024 | `JANUARY 2024.pdf` | EM - 24117-1 | 2 | 9 | 2 of 2 |
 | QP2402 | February 2024 | `FEBRUARY 2024.pdf` | EM - 19224-1 | 2 | 9 | 2 of 2 |
 | QP2403 | March 2024 | `MARCH 2024.pdf` | EM - 18324-1 | 3 | 9 | 3 of 3 |
@@ -57,7 +58,7 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 
 ### Questions printing NO mark allocation
 
-**28 of 261**, across 7 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
+**28 of 270**, across 7 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
 
 | Question | Sitting | Title |
 |---|---|---|
@@ -107,6 +108,11 @@ Examiner wording is reproduced exactly, errors included. Each is recorded in a n
 | QP2301-Q7 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. The limbs are lettered "A.", "B.", "C." where every other multi-limb question on this paper uses lower-case "a)", "b)". Limbs A and B end in semicolons. Reproduced as printed. |
 | QP2301-Q8 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. The question number is printed "Q8)." - a closing parenthesis where Q1 to Q7 print "Qn." - and its limbs are lettered "A)." and "B).". Limb A ends in a full stop where a question mark is meant and limb B ends with no terminator at all. Reproduced as printed. |
 | QP2301-Q9 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. The question number is printed as a bare "9." with no "Q" prefix, where Q1 to Q7 print "Qn." and Q8 prints "Q8).". The question prints as continuous prose with no lettered limbs but sets two tasks, and ends with no terminator. Reproduced as printed. |
+| QP2312-Q2 | Limb (b) prints "What are the right to appeal available to you" - singular 'right' against a plural verb. Reproduced exactly as printed and not corrected. |
+| QP2312-Q3 | Limb (a) prints "York Antwerp Rules 1994" without a comma before the year and asks three separate things in one limb. Reproduced exactly as printed. The 1994 edition is named by the examiner and governs the answer; the 2016 edition is treated as a comparison, not as a substitution. |
+| QP2312-Q4 | Limb (a) prints "decarbonization" with a z and limb (b) prints "present-day" hyphenated. Both reproduced exactly as printed. Limb (a) ends page 1 of the source copy and limb (b) opens page 2. |
+| QP2312-Q7 | PRINTED ANOMALY PRESERVED: limb (a) opens the second island name with a double quotation mark and closes it with a single apostrophe - "Andaman and Nicobar Islands' - and both island names are set in straight quotation marks. Reproduced exactly as printed and not corrected. Limb (a) also capitalises "Marine pollution" mid-sentence. NOTE ALSO that this sitting prints "Explain briefly the term" where every later sitting of the same question prints "Briefly explain the term"; the December 2023 wording governs this paper. |
+| QP2312-Q8 | TWO PRINTED FEATURES PRESERVED. First, the source prints "SOLAS ch.ll-1" with two lowercase letter L characters rather than the Roman numeral II; reproduced exactly as printed and read as chapter II-1. Second, this sitting prints "above-referred" hyphenated and allocates 8 and 8, where every later sitting of the same question prints "above referred" unhyphenated and allocates 10 and 6. THE DECEMBER 2023 SPLIT OF 8 AND 8 GOVERNS THIS PAPER and the answer is built to it; the later 10/6 weighting is not carried. |
 | QP2401-Q5 | Prints a double space before the (8) closing limb (a). Whitespace is normalised to a single space in text_verbatim; no word is added or removed. |
 | QP2402-Q2 | The printed (16) is a total for the whole question; the four defined terms are printed as an unmarked list, so sub-part marks are null. |
 | QP2402-Q3 | The printed (16) is a total; the three limbs carry no separate allocation. Prints "energy efficiency of ship :(i)" with a space before the colon and no space after it, and spells "Aftbody" as one word where the November sitting prints "Aft body". Reproduced as printed. |

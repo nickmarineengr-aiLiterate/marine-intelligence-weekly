@@ -44,6 +44,44 @@ function ok(name, cond, extra) {
 // Alias probes deliberately use words that appear ONLY in search metadata and
 // are never rendered on the card, which is the behaviour being guarded.
 const FIXTURES = {
+  QP2312: {
+    // Probes are AUTHORED against what each question is actually about, not
+    // harvested from the built page. A fixture generated from live corpus
+    // state asserts only that the page still says what it said, which is the
+    // one thing that cannot regress.
+    //
+    // Each term below was chosen to be discriminating: "safety management
+    // system" and "goal-based" both match several cards on this paper and are
+    // deliberately NOT used, because a probe that matches five questions
+    // cannot tell you which one broke.
+    probes: [
+      ['ship construction file', 'QP2312-Q1'],
+      ['clear grounds', 'QP2312-Q2'],
+      ['york antwerp', 'QP2312-Q3'],
+      ['upskill', 'QP2312-Q4'],
+      ['continuous improvement', 'QP2312-Q5'],
+      ['voyage costs', 'QP2312-Q6'],
+      ['lakshadweep', 'QP2312-Q7'],
+      ['harmonized survey', 'QP2312-Q8'],
+      ['formal safety assessment', 'QP2312-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['MSC.287(87)', 'QP2312-Q1', 'Q1 (the resolution adopting the GBS standards)'],
+      ['A.741(18)', 'QP2312-Q5', 'Q5 (the ISM Code resolution itself)'],
+      ['A.982(24)', 'QP2312-Q7', 'Q7 (the PSSA identification and designation guidelines)'],
+      ['associated protective measure', 'QP2312-Q7',
+       'Q7 (what actually gives a PSSA legal effect, spelled out)'],
+      ['MSC-MEPC.2/Circ.12', 'QP2312-Q9', 'Q9 (the FSA guidelines circular)'],
+    ],
+    // The Rule Paramount is a YORK-ANTWERP RULES 1994 provision, and the
+    // printed question names the 1994 edition. It is used as this paper's
+    // regulation probe because Q3 is the paper's sharpest EDITION edge: if
+    // this stops resolving to Q3, the answer has drifted onto the 2016 text,
+    // which is the exact substitution the question forbids. The 1994 Rules
+    // were read at laptop review and this provision confirmed in them.
+    regulation: ['rule paramount', 'QP2312-Q3'],
+  },
   QP2301: {
     probes: [
       ['grim vane', 'QP2301-Q1'],

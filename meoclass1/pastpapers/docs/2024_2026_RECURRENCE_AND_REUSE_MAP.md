@@ -9,11 +9,11 @@ Scope honesty: every count below is scoped to the sittings MIW has actually tran
 
 | Year | Papers | Questions | Answers built |
 |---|---|---|---|
-| 2023 | 1 | 9 | 9 |
+| 2023 | 2 | 18 | 18 |
 | 2024 | 11 | 99 | 99 |
 | 2025 | 11 | 99 | 99 |
 | 2026 | 6 | 54 | 54 |
-| **Total** | **29** | **261** | **261** |
+| **Total** | **30** | **270** | **270** |
 
 Every paper sets nine questions and every question is recorded at 16 marks under printed instruction 2. **May is absent from the available MIW source set in all three years.**
 
@@ -23,10 +23,10 @@ Computed in `recurrence_model.py` from `(year, month)` and nothing else. The sou
 
 | Year | First in set | Repeated, same wording | Repeated, reworded | Once in this set |
 |---|---|---|---|---|
-| 2023 | 8 | 0 | 0 | 1 |
-| 2024 | 30 | 11 | 9 | 49 |
-| 2025 | 22 | 35 | 14 | 28 |
-| 2026 | 2 | 19 | 16 | 17 |
+| 2023 | 17 | 0 | 0 | 1 |
+| 2024 | 27 | 13 | 10 | 49 |
+| 2025 | 21 | 34 | 16 | 28 |
+| 2026 | 2 | 22 | 18 | 12 |
 
 An earliest year cannot contain a "repeated, reworded" question that looks backwards, so 2023's repeats are all internal to itself.
 
@@ -37,9 +37,9 @@ A family is a connected component over two undirected edge kinds: an adjudicated
 | | |
 |---|---|
 | Families total | 157 |
-| Multi-sitting families | **62** |
-| Spanning more than one year | 45 |
-| Spanning all 4 years | **3** |
+| Multi-sitting families | **67** |
+| Spanning more than one year | 50 |
+| Spanning all 4 years | **4** |
 
 ### Multi-sitting families, largest first
 
@@ -52,10 +52,14 @@ A family is a connected component over two undirected edge kinds: an adjudicated
 | 5 | 2025&ndash;2026 | Entry into Force of an IMO Convention | June 2025 Q2 &rarr; August 2025 Q7 &rarr; November 2025 Q9 &rarr; February 2026 Q7 &rarr; March 2026 Q1 |
 | 5 | 2025&ndash;2026 | WHO, Disease Vectors and Ship Health Certificates | November 2025 Q3 &rarr; December 2025 Q1 &rarr; January 2026 Q6 &rarr; March 2026 Q4 &rarr; April 2026 Q6 |
 | 4 | 2023&ndash;2025 | Rudder Efficiency Improvement Devices | January 2023 Q1 &rarr; April 2024 Q4 &rarr; September 2024 Q9 &rarr; June 2025 Q1 |
+| 4 | 2023&ndash;2026 | Classification Societies in Rule Formation, SOLAS Chapter II-1, and Annual versus Periodical Surveys | December 2023 Q8 &rarr; December 2024 Q4 &rarr; September 2025 Q9 &rarr; June 2026 Q8 |
 | 4 | 2024&ndash;2025 | IMO Instruments Implementation Code - Objectives and Flag State Performance | January 2024 Q9 &rarr; March 2024 Q7 &rarr; December 2024 Q9 &rarr; October 2025 Q7 |
 | 4 | 2024&ndash;2026 | Unseaworthy and Unsafe Ships under the Merchant Shipping Act, 1958 | October 2024 Q1 &rarr; June 2025 Q9 &rarr; August 2025 Q5 &rarr; February 2026 Q5 |
 | 4 | 2025&ndash;2026 | Formal Safety Assessment for Lithium Batteries in RORO Carriage | August 2025 Q3 &rarr; February 2026 Q3 &rarr; March 2026 Q8 &rarr; April 2026 Q2 |
 | 3 | 2023&ndash;2024 | Anti-Fouling Convention and Alternatives to Tin-Based Paints | January 2023 Q2 &rarr; April 2024 Q5 &rarr; September 2024 Q8 |
+| 3 | 2023&ndash;2026 | The Safety Management System in ISM Code Implementation, and the Evolution of the Code | December 2023 Q5 &rarr; August 2024 Q9 &rarr; June 2026 Q5 |
+| 3 | 2023&ndash;2026 | Capital, Voyage and Operating Costs, and Modern Inventory Control | December 2023 Q6 &rarr; February 2024 Q6 &rarr; June 2026 Q6 |
+| 3 | 2023&ndash;2026 | Protecting the Lakshadweep and Andaman and Nicobar Habitats, and PSSA Designation | December 2023 Q7 &rarr; February 2025 Q9 &rarr; June 2026 Q7 |
 | 3 | 2024&ndash;2025 | CII Rating, AER and EEOI | January 2024 Q3 &rarr; October 2024 Q8 &rarr; April 2025 Q6 |
 | 3 | 2024&ndash;2025 | IMO Structure and the Instrument Hierarchy | February 2024 Q1 &rarr; July 2024 Q3 &rarr; February 2025 Q1 |
 | 3 | 2024&ndash;2025 | Bunker Convention 2001 - Definitions and Comparison with CLC 92 | February 2024 Q2 &rarr; September 2024 Q6 &rarr; September 2025 Q7 |
@@ -64,17 +68,20 @@ A family is a connected component over two undirected edge kinds: an adjudicated
 | 3 | 2024&ndash;2025 | Maritime Lien, In Rem and In Personam | April 2024 Q3 &rarr; September 2025 Q4 &rarr; December 2025 Q9 |
 | 3 | 2024&ndash;2025 | P&I Clubs - Funding, Cover and Claims Handling | June 2024 Q7 &rarr; February 2025 Q7 &rarr; April 2025 Q8 |
 | 3 | 2024&ndash;2026 | The Hong Kong Convention and India's Ship Recycling Industry | October 2024 Q4 &rarr; November 2025 Q8 &rarr; March 2026 Q9 |
-| 3 | 2024&ndash;2026 | Classification Societies in Rule Formation, and Survey Types | December 2024 Q4 &rarr; September 2025 Q9 &rarr; June 2026 Q8 |
 | 3 | 2025&ndash;2026 | CII - Concept, Commercial Impact and Shortcomings | August 2025 Q2 &rarr; September 2025 Q2 &rarr; February 2026 Q2 |
 | 3 | 2025&ndash;2026 | LNG Bunkering - Gassing Up, Cooldown, Vapour and Release | November 2025 Q4 &rarr; December 2025 Q2 &rarr; March 2026 Q5 |
 | 2 | 2023&ndash;2025 | SCOPIC and Jurisdiction after a High-Seas Collision | January 2023 Q4 &rarr; June 2025 Q4 |
 | 2 | 2023&ndash;2025 | LLMC - Purpose, Heads of Claim and Legal Terms | January 2023 Q5 &rarr; June 2025 Q5 |
 | 2 | 2023&ndash;2024 | GISIS - Aim, Function and the Fuel Oil Reporting Module | January 2023 Q9 &rarr; September 2024 Q7 |
+| 2 | 2023&ndash;2026 | Goal-Based Ship Construction Standards for Bulk Carriers and Oil Tankers | December 2023 Q1 &rarr; June 2026 Q1 |
+| 2 | 2023&ndash;2026 | Port State Control - the Legal Framework, and the Right of Appeal against Detention | December 2023 Q2 &rarr; June 2026 Q2 |
+| 2 | 2023&ndash;2026 | Types of Loss in Marine Insurance, the General Average Act under York Antwerp Rules 1994, and Warranties | December 2023 Q3 &rarr; June 2026 Q3 |
+| 2 | 2023&ndash;2026 | Upskilling Seafarers for Decarbonization, and Communication as a Causal Factor in Accidents | December 2023 Q4 &rarr; June 2026 Q4 |
+| 2 | 2023&ndash;2026 | Formal Safety Assessment - Objectives, Characteristics and Process | December 2023 Q9 &rarr; June 2026 Q9 |
 | 2 | 2024&ndash;2026 | Uberrimae Fidei and Disclosure in Marine Insurance | January 2024 Q1 &rarr; July 2026 Q9 |
 | 2 | 2024&ndash;2026 | IACS Structure and the RO Code | January 2024 Q5 &rarr; July 2026 Q3 |
 | 2 | 2024&ndash;2025 | Vetting Inspections in the Oil Tanker Sector | January 2024 Q7 &rarr; April 2025 Q7 |
 | 2 | 2024 | Hull Form Optimisation for Energy Efficiency | February 2024 Q3 &rarr; November 2024 Q3 |
-| 2 | 2024&ndash;2026 | Capital, Voyage and Operating Costs, and Inventory Control | February 2024 Q6 &rarr; June 2026 Q6 |
 | 2 | 2024&ndash;2025 | IMO and ILO Human Element Regimes, and the ISM Code | February 2024 Q9 &rarr; September 2025 Q8 |
 | 2 | 2024&ndash;2025 | Big Data in the Maritime Sector | March 2024 Q1 &rarr; October 2025 Q1 |
 | 2 | 2024&ndash;2025 | Bill of Lading - Definition, Types and Obligations | March 2024 Q2 &rarr; October 2025 Q2 |
@@ -86,13 +93,11 @@ A family is a connected component over two undirected edge kinds: an adjudicated
 | 2 | 2024 | Lubricating Oil Condition Analysis Techniques | June 2024 Q9 &rarr; November 2024 Q9 |
 | 2 | 2024 | SUA Convention - Objectives, Obligations and Enforcement | August 2024 Q2 &rarr; November 2024 Q4 |
 | 2 | 2024 | Salvage Convention - Award Criteria, Duties and LOF 2000 | August 2024 Q7 &rarr; November 2024 Q5 |
-| 2 | 2024&ndash;2026 | Safety Management System and the Evolution of the ISM Code | August 2024 Q9 &rarr; June 2026 Q5 |
 | 2 | 2024&ndash;2025 | The FAL Convention - Objectives, Recent Amendments and Impact | October 2024 Q5 &rarr; November 2025 Q7 |
 | 2 | 2025 | Wreck Removal Convention - Definition, Categories and Liability | January 2025 Q1 &rarr; July 2025 Q1 |
 | 2 | 2025 | Life Cycle Analysis of Marine Fuels - WtW and WtT | January 2025 Q7 &rarr; July 2025 Q2 |
 | 2 | 2025 | Liquefaction of Solid Bulk Cargo | January 2025 Q9 &rarr; July 2025 Q4 |
 | 2 | 2025 | Indian Admiralty Law and Assessors | February 2025 Q5 &rarr; April 2025 Q5 |
-| 2 | 2025&ndash;2026 | Protecting Indian Island Habitats and PSSA Designation | February 2025 Q9 &rarr; June 2026 Q7 |
 | 2 | 2025 | Classification Requirements and Dual Class | March 2025 Q1 &rarr; July 2025 Q8 |
 | 2 | 2025 | Substantial Corrosion and Renewal Survey | March 2025 Q2 &rarr; July 2025 Q7 |
 | 2 | 2025 | Gender Equality and Diversity in the Maritime Industry | March 2025 Q3 &rarr; July 2025 Q6 |
@@ -116,16 +121,16 @@ Every pair of questions inside one family, counted by the two sittings it joins.
 
 | Year pair | EXACT | NEAR | Total edges |
 |---|---|---|---|
-| 2023 &harr; 2024 | 6 | 3 | 9 |
-| 2023 &harr; 2025 | 5 | 4 | 9 |
-| 2023 &harr; 2026 | 2 | 4 | 6 |
+| 2023 &harr; 2024 | 8 | 4 | 12 |
+| 2023 &harr; 2025 | 5 | 6 | 11 |
+| 2023 &harr; 2026 | 9 | 6 | 15 |
 | 2024 internal | 8 | 7 | 15 |
 | 2024 &harr; 2025 | 27 | 14 | 41 |
 | 2024 &harr; 2026 | 8 | 9 | 17 |
 | 2025 internal | 17 | 7 | 24 |
 | 2025 &harr; 2026 | 23 | 23 | 46 |
 | 2026 internal | 5 | 11 | 16 |
-| **All pairs** | **101** | **82** | **183** |
+| **All pairs** | **110** | **87** | **197** |
 
 ## 5. REUSE MAP
 
@@ -195,10 +200,10 @@ Evidence for a future Written study product. **No prediction of future examinati
 | 8 | 1 |
 | 6 | 1 |
 | 5 | 4 |
-| 4 | 4 |
-| 3 | 12 |
-| 2 | 40 |
-| 1 | 95 |
+| 4 | 5 |
+| 3 | 14 |
+| 2 | 42 |
+| 1 | 90 |
 
 ### Families appearing in every available year
 
@@ -207,16 +212,17 @@ Evidence for a future Written study product. **No prediction of future examinati
 | Human Element in STCW and IMO Fatigue Guidance | January 2023 Q8, April 2024 Q7, February 2025 Q2, June 2025 Q8, August 2025 Q4, January 2026 Q9, February 2026 Q4, April 2026 Q9 |
 | General Average - Essential Features and a Refloating Claim | January 2023 Q6, April 2024 Q6, October 2024 Q9, June 2025 Q6, August 2025 Q6, February 2026 Q6 |
 | Casualty Investigation - Obligation, Code and Very Serious Marine Casualty | January 2023 Q7, August 2024 Q3, June 2025 Q7, January 2026 Q8, April 2026 Q8 |
+| Classification Societies in Rule Formation, SOLAS Chapter II-1, and Annual versus Periodical Surveys | December 2023 Q8, December 2024 Q4, September 2025 Q9, June 2026 Q8 |
 
 ### Category weight across the corpus
 
 | Category | Questions | Distinct families |
 |---|---|---|
-| Statutory Framework & Class | 66 | 41 |
-| Marine Insurance & Commercial Law | 53 | 30 |
-| Human Element & Management | 51 | 32 |
+| Statutory Framework & Class | 70 | 41 |
+| Marine Insurance & Commercial Law | 54 | 30 |
+| Human Element & Management | 54 | 32 |
 | Alternative Fuels & Decarbonisation | 38 | 23 |
-| Pollution Prevention & Response | 27 | 16 |
+| Pollution Prevention & Response | 28 | 16 |
 | Indian Maritime Legislation | 16 | 9 |
 | Cargo & Bulk Carriage | 10 | 6 |
 
