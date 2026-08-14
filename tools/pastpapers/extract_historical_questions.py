@@ -97,7 +97,19 @@ HOST_HINT_RX = re.compile(
     # and "2023/MAR/4". Requiring the Q matched the first form, stripped
     # "2023/MAR" out of the second, and left a bare "/4" sitting in the stem,
     # which is how QP2303-Q4 came to differ from its own source copy.
-    r'\b(?:19|20)\d{2}\s*/\s*[A-Z]{3}(?:\s*/\s*Q?\d+)?\b'
+    #
+    # The MONTH IS WRITTEN BOTH ABBREVIATED AND IN FULL -- "2023/MAR/4" but also
+    # "2021/JULY/Q1" and "2023/JUNE/Q1". Fixing the month at exactly three letters
+    # matched neither full form: after "JUL" the next character is "Y", so the
+    # trailing \b failed and the WHOLE annotation survived into the stem. That
+    # left 28 stems across 12 papers carrying the host's code, and because
+    # recurrence_model.normalise_stem compares printed stems for equality, it
+    # silently demoted real EXACT_REPEATs -- QP2306-Q1 carries "2023/JUNE/Q1" and
+    # so compared UNEQUAL to the verbatim-identical QP2303-Q1.
+    #
+    # The number is also written ATTACHED to the month, "2016/JAN2", with no
+    # separator at all, so the question-number group accepts that form too.
+    r'\b(?:19|20)\d{2}\s*/\s*[A-Z]{3,9}(?:\s*/\s*Q?\d+|\d+)?\b'
     r'|\b(?:19|20)\d{2}/SR\d+\b'
 )
 
@@ -117,6 +129,23 @@ HOST_BRANDING_RX = re.compile(
 # "computers, mobiles, tablets etc." sitting in the question.
 HOST_BLURB_RX = re.compile(
     r'\s*(?:that runs on\s*)?windows\s*\|\s*iOS.*?tablets\s*etc\.?', re.I | re.S)
+
+# The host's sales footer, printed after the LAST question on the paper and so
+# transcribed onto the tail of 19 stems. It is matched on the ASSEMBLED stem for
+# the same reason as the blurb above: it wraps after "organized manner with", and
+# a line filter keyed on "CLICKING HERE" dropped only the closing line and left
+# "Note : If you are looking for answers prepared in organized manner with"
+# sitting in the question. It always runs to the end of the stem, so it is
+# anchored there rather than being cut out of the middle of a sentence.
+HOST_FOOTER_RX = re.compile(
+    r'\s*Note\s*:?\s*If you are looking for answers\b.*$', re.I | re.S)
+
+# The source copies are two-page scans and the page number is transcribed as a
+# bare digit at the end of whichever question spans the break -- 17 stems ended
+# in a full stop, a space and a lone "2". Only a bare 1 or 2 is stripped, and
+# only at the very end after sentence-terminating punctuation, so a printed mark
+# such as "(16)" and any figure inside the question are untouched.
+HOST_PAGE_RX = re.compile(r'(?<=[.?!)])\s+[12]\s*$')
 
 
 def page_text(path):
@@ -196,9 +225,13 @@ def parse(path):
         body = re.sub(r'^Q?\s?\.?\s?\d\s*[\.\):]*\s*', '', body).strip()
 
         body = HOST_BLURB_RX.sub(' ', body)
+        body = HOST_FOOTER_RX.sub('', body)
         hints = HOST_HINT_RX.findall(body)
         body = HOST_HINT_RX.sub('', body)
         body = re.sub(r'\s+', ' ', body).strip()
+        # Last, because removing an annotation can expose the page number that
+        # was sitting behind it -- "period. 2021/JULY/Q1 2" becomes "period. 2".
+        body = HOST_PAGE_RX.sub('', body).strip()
 
         questions.append({
             'question_id': f'{paper_id}-Q{n}',

@@ -1,7 +1,8 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-13, after **QP2406 (June 2024) was laptop-reviewed and published to
+Last updated: 2026-08-14, after **QP2303 (March 2023) was laptop-reviewed and published to `main`** (see §7n).
+Previous entry: 2026-08-13, after **QP2406 (June 2024) was laptop-reviewed and published to
 `main`**, taking the product to 26 papers / 234 questions and **closing Batch 2 at 6/6**.
 See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for QP2501 and QP2502,
 §7a for QP2512, §7b for the derived layer, §7c for the desktop batches, §1a for security.
@@ -19,7 +20,20 @@ See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for
 > silently reverted `DESKTOP_QP_ALLOCATION_2023.md`, `DESKTOP_QP_HANDOVER_BATCH3.md` and 15 lines of
 > this file. Both desktop branches are **retained** as provenance evidence.
 >
-> **Product: 32 available papers · 288 published questions · 288 in the corpus.**
+> **Product: 33 available papers · 297 published questions · 297 in the corpus.**
+>
+> **QP2303 (March 2023) IS LIVE — laptop-reviewed and published 2026-08-14 (§7n).** Five 2023 sittings
+> are now solved: January, March, April, September and December. The paper was judged against the
+> six-year window, which found that **four of its nine questions were first printed BEFORE this
+> sitting** — Q1 in April 2021, Q2 and Q3 in August 2022, Q9 in July 2021. Two questions were
+> corrected: a **misdescribed CII guideline G5** on Q2 and a **misattributed UNCLOS article** on Q1.
+>
+> **A live defect in the historical extractor was found through this paper and fixed.** 58 stems
+> across 24 papers still carried the host's own code; `HOST_HINT_RX` fixed the month at exactly
+> three letters and so matched `2023/MAR/4` but neither `2021/JULY/Q1` nor `2023/JUNE/Q1`. Because
+> `normalise_stem` compares printed stems for equality, `QP2306-Q1` — the verbatim reprint of this
+> paper's Q1 — compared **UNEQUAL** and the April 2021 root was invisible. 71 stems are now clean,
+> **0 gained any text**, and all 270 ids are preserved. See §7n.
 > **THE CORPUS HAS NO UNSOLVED QUESTION LEFT.**
 >
 > **QP2309 (September 2023) IS LIVE — laptop-reviewed and published 2026-08-14 (§7m).** Four 2023
@@ -386,6 +400,128 @@ Fixed in `caf5020`.
   cannot point forward (819 tokens, zero forward) — and is now inverted into the queue above.
 - **`validate_antipatterns.py` does not exist and never had a hook entry.** No `hooks` key in
   any settings file, no such file on disk. The entry was stale; struck rather than carried.
+
+---
+
+## 7n. QP2303 (March 2023) — laptop-reviewed and published — **THE SIX-YEAR WINDOW CORRECTED THE PAPER'S OWN ANCESTRY**
+
+Desktop branch `pastpapers/qp2303-founder-review` @ `2eed92e`, based on `d6d95e8`, pushed 2026-08-14
+11:52 IST. Twelve files, all paper-owned. Integrated onto current `main` (`e41772e`) by path
+extraction on `integration/qp2303-laptop-review`; the desktop branch was **never merged** and is
+retained as provenance. Its tip did not move during the review — the desktop had gone on to QP2302,
+QP2310, QP2307 and QP2308.
+
+**Merging would have been worse than usual.** The branch base predates the trial system, the
+storefront counts, QP2304, QP2309 *and* the six-year repair, so its diff carries
+`D api/_lib/trial.js`, `D api/_lib/grants.js`, `D solvedQP/QP2309.html` and
+`D tools/pastpapers/sixyear_intelligence_test.py`.
+
+**Product: 33 available papers · 297 published questions.** March 2023 transitioned to Available
+automatically.
+
+### Seven of nine accepted. Two corrected, both against a source read in this session
+
+**Q2 (MAJOR) — guideline G5 was misdescribed on every surface it appeared.** The answer gave
+`MEPC.355(78)` as *"corrective action for a poor rating, and incentives for good performance"*. Its
+title page reads **2022 INTERIM GUIDELINES ON CORRECTION FACTORS AND VOYAGE ADJUSTMENTS FOR CII
+CALCULATIONS (CII GUIDELINES, G5)**. The number was right and the subject was wrong. Corrective
+action for a D-or-E rated ship is not a guideline at all — it is MARPOL Annex VI **regulation 28**
+and the SEEMP guidelines `MEPC.346(78)`, both of which the answer already stated correctly
+elsewhere. The error had propagated to **seven candidate-facing surfaces**. This is a **regression
+against MIW's own verified record** — `QP2411`'s anchor already carried G5 correctly, P1, read at
+source. The correction also repairs the answer's own argument: section 6 criticises the CII for
+penalising a laden ship waiting at anchor, and **G5 is precisely the instrument that answers that
+criticism**.
+
+**Q1 (MINOR, precise) — the transfer-of-damage duty is UNCLOS article 195, not article 194.**
+Article 194(2) carries the damage-to-other-States duty; **article 195** is a separate article with
+its own heading. On a limb whose mark scheme is article-level precision, a reader sent to 194 would
+not find it.
+
+### Understated holdings — the FOURTH occurrence of this defect class
+
+| Claim as authored | Reality | Action |
+|---|---|---|
+| Q1: Part XII safeguards *"their individual articles were not examined"* | **UNCLOS is held**; section 7 is articles 223–233 | **Read at source.** Articles 224, 225, 226, 227, 230, 231, 232 named with substance; graded P1 |
+| Q2: CII guideline set graded **P2**, *"established by the corpus review"* | **All five are held** as official IMO resolution texts | **All five title pages read at source**; G1–G5 and the SEEMP guidelines promoted to **P1** |
+
+**Claims checked and found accurate, left alone:** `MEPC.304(72)` is genuinely not held; the EEXI
+guideline set is genuinely not held and citing it by function rather than inventing a number is
+correct; `A.1155(32)` is genuinely not held — MIW holds only `A.1185(33)`, nine months future for
+this sitting; MIW holds no IACS procedural document and no quality-management standard.
+
+### The six-year window moved four of the nine questions' ancestry BACKWARD
+
+The desktop derived its donor map against the **solved set**, which holds no 2021 or 2022 sitting.
+Re-derived against **61 sittings / 549 questions**:
+
+| Q | Earliest printing | Direction |
+|---|---|---|
+| **Q1** | **QP2104-Q2, April 2021** (also QP2210-Q9 Oct 2022; QP2306-Q1 Jun 2023) | **backward 23 months** |
+| **Q2** | **QP2208-Q4, August 2022** | **backward 7 months** |
+| **Q3** | **QP2208-Q2, August 2022** | **backward 7 months** |
+| **Q9** | **QP2107-S2-Q1, July 2021** (also QP2108-Q2, QP2203-Q2) | **backward 20 months** |
+| Q4 · Q5 · Q6 · Q8 | **this sitting originates the family** | forward |
+| Q7 | **UNIQUE** — nothing above the noise floor in six years | — |
+
+**No `reused_from` changed.** The intelligence layer holds printed wording and no answers, so it can
+correct *where a question was first asked* and can never supply *what the answer is*. The host's own
+annotations independently name the same sittings, which is a genuine cross-check.
+
+**`QP2303-Q8` to `QP2309-Q2` confirmed by measurement:** limb (b) and the whole of QP2309-Q2
+normalise to the **identical string**, differing only by QP2309's printed `(16)`. **`QP2207-Q7` is
+NOT a wording ancestor** — similarity **0.053** to QP2303-Q8. The July 2022 premise stays rejected.
+
+### A live extractor defect, found through this paper and fixed
+
+`HOST_HINT_RX` fixed the month at **exactly three letters**, matching `2023/MAR/4` but neither
+`2021/JULY/Q1` nor `2023/JUNE/Q1` — after `JUL` the next character is `Y`, the trailing word
+boundary failed, and the whole annotation survived. **58 stems across 24 papers** still carried host
+code. Because `recurrence_model.normalise_stem` compares printed stems for equality, `QP2306-Q1` —
+the verbatim reprint of this paper's Q1 — compared **UNEQUAL**, which is failure mode 1 in the
+extractor's own comment block, and it was suppressing QP2303's own Q1 ancestry.
+
+Widened to `[A-Z]{3,9}` with the attached-digit form `2016/JAN2`; two further **span-based** rules
+added for the sales footer that wraps after *"organized manner with"* and for the bare page number
+left at the end of a stem spanning the page break. A line filter was tried first and reproduced the
+exact wrap bug the previous session had already hit — span-based is the rule.
+
+**Proof: 71 stems changed, 0 stems gained any text, all 270 ids preserved, 0 residual host
+artefacts of any form.**
+
+### Candidate-facing production vocabulary — 11 rewrites
+
+A sweep of the seven candidate-facing fields found internal machinery reaching a paying reader:
+*"flagged for verification … before publication"* (Q1, Q2 — the same class as `QP2501-Q1` and
+`QP2309-Q5`), *"MIW's own reference corpus … the corpus amendment register is wrong by one year"*
+(Q2, Q4, including `quick_revision`), *"review-queue item RQ-25"* (Q8), *"the corpus records a
+modelling defect"* (Q7), and the evidence grades *"primary-verified"* / *"authoritative secondary"*
+(Q2). All rewritten in candidate vocabulary, keeping the disclosure and dropping the register.
+**The delivery build now carries zero internal-vocabulary terms.**
+
+### Validation
+
+`validate_spec` **0 errors / 0 blocking**, 11 warnings — 9 the Founder-deferred word band, 2 the
+`no P1` notes on Q5 and Q9 (both engineering questions where MIW holds no test-method standard).
+`run_toolchain` **ALL STAGES PASS**. `delivery_gate.py --verify-derivation --strict` **PASS**.
+**Double build byte-identical across 206 artefacts**, product and six-year both. New authored UI
+fixture **63/63** — its regulation probe is deliberately `mepc.355(78)`, a regression sentinel for
+the G5 correction, because `MEPC.328(76)` reaches Q4 as well and cannot localise a break. Search
+**49/49**, home contract **PASS 6 rules**, coverage **PASS**, recurrence **0 failures**, corpus
+consumer **PASS**, six-year **PASS 8 rules**, security **198/198** across six suites.
+**Zero host or provider tokens in any built artefact** across delivery, public and review surfaces.
+
+### Intelligence graduation — automatic, and proved by removing the spec
+
+| | Before | After |
+|---|---|---|
+| SOLVED | 32 papers / 288 questions | **33 / 297** |
+| INTELLIGENCE-ONLY | 29 sittings / 261 questions | **28 / 252** |
+| **Combined six-year universe** | **61 / 549** | **61 / 549 — unchanged** |
+
+Established by building the layer with `QP2303.json` moved aside and again with it in place.
+**Nothing was hand-deleted from `historical_qp_intelligence.json`** — it still carries all 30 raw
+2021–2023 sittings, and graduation is applied at the derived layer by rule.
 
 ---
 

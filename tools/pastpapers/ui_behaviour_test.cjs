@@ -44,6 +44,63 @@ function ok(name, cond, extra) {
 // Alias probes deliberately use words that appear ONLY in search metadata and
 // are never rendered on the card, which is the behaviour being guarded.
 const FIXTURES = {
+  QP2303: {
+    // AUTHORED at laptop review against what each question is about, never
+    // harvested from the built page.
+    //
+    // This paper's collision is 'clear grounds'. It is Q7's central term, but
+    // UNCLOS article 220 gives the coastal State its power on "clear grounds
+    // for believing" a violation occurred, so it reaches Q1 as well and cannot
+    // say which card broke. 'violation' reaches Q1, Q6 and Q7; 'corrective
+    // action' reaches Q2, Q7 and Q9; 'wear' reaches five cards. None is used.
+    probes: [
+      // The fourth deleterious effect in the UNCLOS definition -- economic and
+      // aesthetic rather than ecological, and the part candidates drop.
+      ['reduction of amenities', 'QP2303-Q1'],
+      ['overridable power reserve', 'QP2303-Q2'],
+      ['barratry', 'QP2303-Q3'],
+      ['scavenge air moisturizing', 'QP2303-Q4'],
+      ['thrust deduction', 'QP2303-Q5'],
+      ['rule-based mistake', 'QP2303-Q6'],
+      // Safe where 'corrective action' is not: preventive action is limb (b)'s
+      // own half of the distinction and appears on no other card.
+      ['preventive action', 'QP2303-Q7'],
+      ['unified interpretation', 'QP2303-Q8'],
+      ['nitration', 'QP2303-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases.
+      ['coastal state enforcement', 'QP2303-Q1',
+       'Q1 (the article 220 limb, as a candidate would type it)'],
+      ['market based measures', 'QP2303-Q2',
+       'Q2 (the mid-term measure still unresolved at this sitting)'],
+      ['engine parameter record book', 'QP2303-Q4',
+       'Q4 (the NOx compliance record, never named in the answer)'],
+      ['Kempf', 'QP2303-Q5',
+       'Q5 (the zig-zag manoeuvre under the name its originator gave it)'],
+      ['ergonomics', 'QP2303-Q6',
+       'Q6 (human factors under the word candidates actually reach for)'],
+      ['sodium boron coolant', 'QP2303-Q9',
+       'Q9 (the coolant-leak element pair, written as a search)'],
+    ],
+    // DELIBERATE REGRESSION SENTINEL. G5 was authored as "corrective action and
+    // incentives" and was corrected at laptop review against the resolution's
+    // own title page: MEPC.355(78) is the 2022 INTERIM GUIDELINES ON CORRECTION
+    // FACTORS AND VOYAGE ADJUSTMENTS FOR CII CALCULATIONS. It is unique to Q2 on
+    // this paper, where MEPC.328(76) is NOT -- that reaches Q4 as well and so
+    // cannot localise a break. If this stops resolving to Q2, the CII guideline
+    // set has moved.
+    regulation: ['mepc.355(78)', 'QP2303-Q2'],
+    // The source copy prints the host's own backward annotations under every
+    // question -- Q4 alone carries seventeen sittings running back to 2010, and
+    // Q9 nine. None of it may reach the shipped bytes. '2023/mar' is this
+    // paper's own self-reference, which the host prints on all nine.
+    recurrence: ['2023/mar', '2021/apr', '2013/feb'],
+    // 'corrective action' reaches Q2 (the CII plan of corrective actions), Q7
+    // and Q9 (corrective measures on an oil result). Its partner term separates
+    // them.
+    narrow: ['preventive action', 'QP2303-Q7'],
+  },
   QP2309: {
     // AUTHORED at laptop review against what each question is about, never
     // harvested from the built page. A fixture generated from live corpus
