@@ -379,8 +379,12 @@ $("logout").addEventListener("click", async (e) => {
   // signed-in panel — which does read server truth — will say 12 before
   // they press anything. The worst this can do is show a banner to
   // someone whose device clock is wrong; it cannot grant an hour.
+  // Mirrors INDEPENDENCE_DAY.istDates in api/_lib/trial.js. If the two
+  // ever drift, the server wins and a signed-in candidate sees the
+  // truth before pressing anything -- this list only decides whether an
+  // anonymous visitor is shown the poster.
   const istToday = new Date(Date.now() + 330 * 60000).toISOString().slice(0, 10);
-  if (KEY === "SOLVED_QP" && istToday === "2026-08-15") {
+  if (KEY === "SOLVED_QP" && ["2026-08-15", "2026-08-16"].includes(istToday)) {
     $("anon-iday").innerHTML = independenceBanner(24);
   }
 

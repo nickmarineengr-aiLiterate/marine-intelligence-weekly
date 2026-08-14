@@ -94,13 +94,25 @@ export const TRIAL_HOURS = {
  * calendar date of the shifted instant — that is the IST wall-clock
  * date, computed deterministically from a server timestamp.
  *
- * The window is a single named date rather than a start/end pair so
- * there is nothing to forget to switch off: on 16 August the comparison
- * simply stops matching and SolvedQP returns to 12 hours by itself.
+ * The window is an EXPLICIT LIST OF DATES rather than a start/end pair
+ * so there is nothing to forget to switch off: once the last date is
+ * past, the comparison simply stops matching and SolvedQP returns to 12
+ * hours by itself. No cron, no flag, no deploy on the closing day.
+ *
+ * Founder decision, 14 Aug 2026: the window is 15 AND 16 August. The
+ * 15th is a Saturday, so a single-day window would have closed at
+ * midnight on the busiest study night of the campaign; running it
+ * across the weekend also means a candidate who only hears about it on
+ * Saturday evening can still act. It reverts on Monday the 17th.
+ *
+ * Note what the window does and does not govern: it decides who may
+ * START a 24-hour trial, not when access ends. Someone who starts at
+ * 23:00 on the 16th keeps access until 23:00 on the 17th, which is
+ * correct — the offer is 24 hours from activation.
  */
 export const INDEPENDENCE_DAY = {
   product: "SOLVED_QP",
-  istDate: "2026-08-15",
+  istDates: ["2026-08-15", "2026-08-16"],
   hours: 24,
   label: "Independence Day Open Access",
 };
@@ -119,7 +131,7 @@ export function istDateString(nowMs) {
 /** Is this product, activated now, inside the Independence Day window? */
 export function isIndependenceDayActivation(product, nowMs) {
   return product === INDEPENDENCE_DAY.product &&
-         istDateString(nowMs) === INDEPENDENCE_DAY.istDate;
+         INDEPENDENCE_DAY.istDates.includes(istDateString(nowMs));
 }
 
 /**

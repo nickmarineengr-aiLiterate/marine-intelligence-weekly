@@ -90,8 +90,26 @@ describe("trial durations", () => {
     assert.equal(trialDurationHours("SOLVED_QP", now), 24);
   });
 
-  test("the campaign switches itself off — 16 August is 12 hours again", () => {
-    assert.equal(trialDurationHours("SOLVED_QP", ist("2026-08-16T00:01:00")), 12);
+  test("the window covers BOTH weekend days — Sat 15 and Sun 16", () => {
+    // Founder decision 14 Aug 2026. The 15th is a Saturday; a one-day
+    // window would have shut at midnight on the busiest study night.
+    assert.deepEqual(INDEPENDENCE_DAY.istDates, ["2026-08-15", "2026-08-16"]);
+    for (const t of ["2026-08-15T00:01:00", "2026-08-15T23:59:00",
+                     "2026-08-16T00:01:00", "2026-08-16T23:59:00"]) {
+      assert.equal(trialDurationHours("SOLVED_QP", ist(t)), 24, `${t} must be eligible`);
+    }
+  });
+
+  test("a trial started at the very end of the window still runs its full 24h", () => {
+    // The window decides who may START, not when access ends.
+    const now = ist("2026-08-16T23:59:00");
+    assert.equal(trialExpiryFor("SOLVED_QP", now),
+      Math.floor(ist("2026-08-17T23:59:00") / 1000),
+      "access must run into Monday rather than being clipped at the window edge");
+  });
+
+  test("the campaign switches itself off — Monday the 17th is 12 hours again", () => {
+    assert.equal(trialDurationHours("SOLVED_QP", ist("2026-08-17T00:01:00")), 12);
     assert.equal(trialDurationHours("SOLVED_QP", ist("2026-08-14T23:59:00")), 12);
   });
 
@@ -108,6 +126,15 @@ describe("trial durations", () => {
       "a permanently-24h SolvedQP trial would be undetectable to the other tests");
     assert.equal(INDEPENDENCE_DAY.hours, 24);
     assert.equal(TRIAL_HOURS.SOLVED_QP, 12, "the NORMAL trial must stay 12 hours");
+  });
+
+  test("POSITIVE CONTROL: the window has a closing edge on BOTH sides", () => {
+    // Widening the list to the whole month would still pass every
+    // "is 24h" test above. These are the two that would break.
+    assert.equal(trialDurationHours("SOLVED_QP", ist("2026-08-14T23:59:59")), 12,
+      "the day BEFORE the window must be 12 hours");
+    assert.equal(trialDurationHours("SOLVED_QP", ist("2026-08-17T00:00:01")), 12,
+      "the day AFTER the window must be 12 hours");
   });
 
   test("unknown products are offered no trial at all", () => {
