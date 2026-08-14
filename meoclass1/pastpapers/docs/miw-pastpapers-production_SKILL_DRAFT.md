@@ -14,6 +14,20 @@ status: DRAFT — pending Nixon's review/approval of the open questions in Secti
 
 # MIW MEO Class 1 Past Written Papers — Production Skill (DRAFT v0.1)
 
+> **SUPERSEDED — HISTORICAL DRAFT. DO NOT FOLLOW.**
+>
+> This v0.1 draft was written before the series existed. It still *proposes* the folder layout,
+> naming scheme and toolchain that were subsequently built, and its open questions have long since
+> been answered by the work itself. It was never installed as a live skill.
+>
+> The governed method now lives in the protocol set indexed by **`PRODUCTION_PROTOCOL_INDEX.md`** —
+> `PASTPAPER_PRODUCTION_PROTOCOL.md` (desktop authoring),
+> `LAPTOP_REVIEW_AND_INTEGRATION_PROTOCOL.md` (laptop review and integration),
+> `TEMPORAL_AND_DONOR_VERIFICATION_PROTOCOL.md`, `QA_AND_HANDOVER_PROTOCOL.md` and
+> `EXECUTION_EFFICIENCY_POLICY.md`. Those files bind; this one does not.
+>
+> Retained only as evidence of how the series was originally conceived.
+
 ## 0. Open questions — confirm before/during the first build
 
 These are judgment calls made while planning this series. Flag/confirm rather than silently lock in:

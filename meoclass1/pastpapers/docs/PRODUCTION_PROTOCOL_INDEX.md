@@ -44,9 +44,12 @@ Two consequences that are easy to get wrong:
 | `TEMPORAL_AND_DONOR_VERIFICATION_PROTOCOL.md` | sitting-date truth, donor reuse, recurrence, contamination sweeps | **always**, for any paper production |
 | `EXECUTION_EFFICIENCY_POLICY.md` | how Claude should execute work on this project | **always** — it is short |
 | `QA_AND_HANDOVER_PROTOCOL.md` | validation, determinism, UI check, Git, report schema | **before finalisation** — not needed while authoring |
+| `LAPTOP_REVIEW_AND_INTEGRATION_PROTOCOL.md` | the **laptop** role: independent adjudication of a founder-review branch, extraction onto `main`, public/storefront derivation, intelligence graduation, publication and live proof, one-paper stop | **always**, for any review/integration session — and **not** during desktop authoring |
 | `CURRENT_STATUS.md` | **current state only**: what exists now, what is next, what is blocked, restart instructions | **always** — it is small on purpose |
 
-**Mandatory for a normal solved-paper production session:**
+There are **two kinds of paper session** and they read different sets.
+
+**Mandatory for a normal solved-paper PRODUCTION session (desktop role):**
 
 1. `PRODUCTION_PROTOCOL_INDEX.md`
 2. `PASTPAPER_PRODUCTION_PROTOCOL.md`
@@ -56,6 +59,19 @@ Two consequences that are easy to get wrong:
 
 `QA_AND_HANDOVER_PROTOCOL.md` is read **later**, before finalising. Loading it during
 authoring wastes context.
+
+**Mandatory for a REVIEW / INTEGRATION session (laptop role):**
+
+1. `PRODUCTION_PROTOCOL_INDEX.md`
+2. `LAPTOP_REVIEW_AND_INTEGRATION_PROTOCOL.md`
+3. `TEMPORAL_AND_DONOR_VERIFICATION_PROTOCOL.md`
+4. `QA_AND_HANDOVER_PROTOCOL.md` — needed **throughout** a review, not only at the end
+5. `EXECUTION_EFFICIENCY_POLICY.md`
+6. `CURRENT_STATUS.md`
+
+`PASTPAPER_PRODUCTION_PROTOCOL.md` is read by a reviewer **on demand** — it owns the source
+authority ladder, the learning architecture and the candidate-facing boundary, which a reviewer
+adjudicates against but does not need loaded to begin.
 
 ---
 
