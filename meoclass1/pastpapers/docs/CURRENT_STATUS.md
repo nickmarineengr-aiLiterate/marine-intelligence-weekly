@@ -1197,7 +1197,11 @@ section was renumbered (`memory_cue`, `answer_route` numbering and retrieval car
    defences**. That residue is exactly what the New Jason Clause was written to close.
 2. `TRAP-GA-PA` — general average vs particular average.
 3. `YAR-C` — only direct consequences; delay and market loss excluded.
-4. `YAR-VI` — salvage, including Art. 14 / SCOPIC, is a particular charge, outside the adjustment.
+4. `YAR-VI` — ~~salvage, including Art. 14 / SCOPIC, is a particular charge, outside the adjustment.~~
+   **CORRECTED 2026-08-15 (TSCR-9)** — that was the **YAR 2004** rule under a **2016** label. YAR 2016
+   **Rule VI(a) allows** salvage expenditure incurred to preserve the property from peril, subject to
+   VI(b)–(d); only **VI(d)** (Art. 14 special compensation and SCOPIC) is excluded. "Particular charge"
+   is in neither edition.
 5. `YAR-XVII` — contributory values; answers the printed limb "implications for cargo owners".
 
 Plus edition control in the answer body: the York-Antwerp Rules are a **contractual code of the CMI

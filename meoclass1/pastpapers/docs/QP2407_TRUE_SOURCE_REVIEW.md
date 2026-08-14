@@ -68,8 +68,14 @@ All five additions are independent scoring points, each anchored to a corpus obj
    historical problem; with it, the answer states the rule that creates the problem.
 2. **General average vs particular average** (`TRAP-GA-PA`) — the distinction was nowhere in the answer.
 3. **Rule C** (`YAR-C`) — only direct consequences allowed; delay and market loss excluded.
-4. **Rule VI** (`YAR-VI`) — salvage, including Article 14 / SCOPIC special compensation, is a
-   *particular charge* and falls outside the adjustment.
+4. **Rule VI** (`YAR-VI`) — ~~salvage, including Article 14 / SCOPIC special compensation, is a
+   *particular charge* and falls outside the adjustment.~~ **THIS WAS WRONG AND WAS CORRECTED ON
+   2026-08-15 (TSCR-9).** The proposition added on 2026-08-13 was the **YAR 2004** rule carried under a
+   **YAR 2016** label — an inversion, not a wording defect. Under the 2016 edition **Rule VI(a) allows**
+   salvage expenditure incurred to preserve the property from peril, **subject to VI(b), (c) and (d)**;
+   the exclusion is confined to **VI(d)** (Article 14 special compensation and SCOPIC), which was right
+   for the wrong reason. The phrase *"particular charge"* appears in **neither edition** of the Rule.
+   The corrected answer states the 1994 → 2004 → 2016 movement explicitly and carries a trap card on it.
 5. **Rule XVII** (`YAR-XVII`) — contributory values. Directly answers the printed limb "implications for
    cargo owners": it is what the cargo owner actually pays on.
 
