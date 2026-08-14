@@ -1,9 +1,9 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-14, after **QP2303 (March 2023) was laptop-reviewed and published to `main`** (see §7n).
-Previous entry: 2026-08-13, after **QP2406 (June 2024) was laptop-reviewed and published to
-`main`**, taking the product to 26 papers / 234 questions and **closing Batch 2 at 6/6**.
+Last updated: 2026-08-14, after **QP2310 (October 2023) was laptop-reviewed and published to `main`** (see §7o).
+Previous entry: 2026-08-14, after **QP2303 (March 2023) was laptop-reviewed and published to
+`main`** (see §7n).
 See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for QP2501 and QP2502,
 §7a for QP2512, §7b for the derived layer, §7c for the desktop batches, §1a for security.
 
@@ -20,7 +20,36 @@ See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for
 > silently reverted `DESKTOP_QP_ALLOCATION_2023.md`, `DESKTOP_QP_HANDOVER_BATCH3.md` and 15 lines of
 > this file. Both desktop branches are **retained** as provenance evidence.
 >
-> **Product: 33 available papers · 297 published questions · 297 in the corpus.**
+> **Product: 34 available papers · 306 published questions · 306 in the corpus.**
+>
+> **QP2310 (October 2023) IS LIVE — laptop-reviewed and published 2026-08-14 (§7o).** Six 2023
+> sittings are now solved: January, March, April, September, **October** and December. Seven
+> questions passed and **two were corrected**. Neither correction was temporal: the paper's
+> handling of the **33rd Assembly boundary** — October sits two months *before* the 6 December 2023
+> adoption, so Q3 rests on `A.1155(32)` and not `A.1185(33)` — was independently confirmed rather
+> than repaired, and every future instrument on the paper appears only inside an exclusion warning.
+>
+> **The two corrections were a wrong citation UNIT and a production word.** Q9 cited the ISM Code
+> as *"regulation 9"*; the ISM Code has **elements and paragraphs**, and *regulation* is SOLAS's
+> unit — which the same answer uses correctly for `SOLAS XI-1/6` twelve times. Across the corpus the
+> house forms outnumber it 209 to 29, **and all 29 wrong uses are in this paper (16) and `QP2412`
+> (13), which is this question's own donor.** The defect was inherited with the answer. **`QP2412`
+> is LIVE and still carries it** — referred, not fixed, because this session is one paper. Q7 called
+> 1958 *"the standing statute trap for the whole 2023 batch"* on a rendered flashcard; **"batch" is
+> a production word**, found by sweeping the rendered bytes rather than the field list.
+>
+> **Three claims were checked and HELD rather than corrected**, which is worth as much as the
+> corrections: the **interleaved Annex VI chapter 4 numbering** (attained EEDI/EEXI at 22/23,
+> required at 24/25, CII at 28) is counter-intuitive and **right**, confirmed against the corpus's
+> own `mepc-328-76` nodes; the **corpus-holdings claim is accurate, not understated** — all 56
+> Annex VI nodes carry controlled paraphrase and none carries `exact_text_excerpt`, so
+> "citation-ready but not quotation-ready" is true, **breaking a four-review run of understatement**;
+> and Q5's declared dependency on an unreviewed branch was **discharged** when QP2303 went live
+> earlier the same day.
+>
+> **The storefront month-list guard added this session caught its first real defect on its first
+> real publication** — October solved while the 2023 coverage line still advertised five sittings.
+> See §7o.
 >
 > **QP2303 (March 2023) IS LIVE — laptop-reviewed and published 2026-08-14 (§7n).** Five 2023 sittings
 > are now solved: January, March, April, September and December. The paper was judged against the
@@ -400,6 +429,117 @@ Fixed in `caf5020`.
   cannot point forward (819 tokens, zero forward) — and is now inverted into the queue above.
 - **`validate_antipatterns.py` does not exist and never had a hook entry.** No `hooks` key in
   any settings file, no such file on disk. The entry was stale; struck rather than carried.
+
+---
+
+## 7o. QP2310 (October 2023) — laptop-reviewed and published — **A DEFECT INHERITED FROM A LIVE DONOR**
+
+Desktop branch `pastpapers/qp2310-founder-review` @ `ccef3d7`, based on `149a10f`, pushed
+2026-08-14 15:48 IST. Twelve files, all paper-owned, one commit. Integrated onto current `main`
+(`6dec08a`) by **path extraction**; the branch was never merged and is retained as provenance. Its
+tip did not move during the review — the desktop had gone on to QP2307, QP2308 and then QP2306.
+
+**Merging would have been destructive, and measurably so.** The branch diff against `main` showed
+**56,047 deletions** — it would have reverted the six-year extractor repair, the QP2303 publication
+and the storefront coverage fix, none of which existed when it was cut.
+
+### Source — verified independently from the printed copy
+
+`2310 EM`, October 2023, `(India 2023)`, 2 pages, **9 questions counted by reading**, printed
+`Total Marks – 100`. Two printed anomalies are load-bearing and both are **preserved, not repaired**:
+**Q5 prints (8) on limb A and (16) on limb B**, which sum to 24 against an equal-marks rubric, so its
+sub-part marks are left null; and **Q9 prints no mark figure at all**. The unclosed quotation mark
+before `latent failures`, `hull Forms`, `vis-a-vis`, `Scavenge Air Moisturizing` and the singular
+`other similar Convention` all survive in `text_verbatim`.
+
+### Q1–Q9 — seven PASS, two CORRECTED
+
+**C1 — Q9, the ISM Code is not divided into regulations (21 strings).** The answer cited the
+Company's investigation duties as `ISM Code regulation 9`, `regulation 1.2.2` and `regulation 12`.
+Part A of the ISM Code has numbered **elements**, divided into **paragraphs**. *Regulation* belongs
+to SOLAS and MARPOL — and this same answer uses `SOLAS regulation XI-1/6` correctly twelve times,
+which is what makes it a slip rather than a house style. Corpus-wide the house forms run **element
+(142), paragraph (34), section (33) against regulation (29)** — and **all 29 are in this paper (16)
+and `QP2412` (13), which is this question's answer donor.** Corrected to *paragraph 1.2.2* and
+*elements 9 and 12*, after proving Q9 contains **no MARPOL or Annex VI regulation reference** that
+the same substitution would have damaged. `SOLAS XI-1/6` untouched.
+
+> **`QP2412` IS LIVE AND STILL CARRIES THIS DEFECT.** Referred, not fixed — one paper per session.
+> Any fix there must repeat the scoping proof, because QP2412's affected questions may contain
+> Annex VI references that QP2310's did not.
+
+**C2 — Q7, production vocabulary on a rendered flashcard.** *"The standing statute trap for the
+whole 2023 **batch**"*. The desktop's own sweep (§6.1 of the paper anchor) caught eleven uses of
+*donor* and one of *laptop-reviewed* but missed this, because it searched the **authoring**
+vocabulary and not the **scheduling** vocabulary. Eight further uses of "batch" were found and
+**deliberately left**, all in `reuse_evidence`, `question_delta` and `temporal_review` — confirmed
+non-rendered by sweeping **the bytes of both built pages**, not by trusting a field list.
+
+### What was checked and HELD
+
+- **Annex VI chapter 4 is interleaved, and the paper has it right.** Attained EEDI **22**, attained
+  EEXI **23**, required EEDI **24**, required EEXI **25**, CII **28**. Confirmed against the
+  corpus's `mepc-328-76` nodes, which also give regulation **21** as *Functional requirements* —
+  consistent with the standing note that **reg 21 is never EEDI**.
+- **The corpus-holdings claim is accurate.** "Annex VI is citation-ready but not quotation-ready"
+  was tested: all **56** Annex VI nodes carry `text` (controlled paraphrase) and **none** carries
+  `exact_text_excerpt`, which the casualty package's nodes do. **Four consecutive reviews found
+  understated holdings; this paper does not.**
+- **Q9 uses "very serious marine casualty"**, which `MSC.255(84)` para 2.22 defines, and avoids
+  "serious marine casualty", which it does not.
+- **`MEPC.328(76)` in force 1 November 2022** (TSCR-3 carried, register still wrong at 2023-11-01).
+
+### Q5's donor dependency — discharged, not waived
+
+The anchor declared Q5's donor `QP2303-Q4` as sitting on an **unreviewed branch**. That was true
+when written and is **now stale**: QP2303 went live at `604ca40` earlier the same day. Q5 was
+re-read against the published version. Both papers state `MEPC.328(76)` in force 1 November 2022
+and both exclude `MEPC.385(81)`; the stems are identical, so the EXACT classification holds.
+
+### Intelligence graduation — proved, not asserted
+
+| | 2023 solved | 2023 intel-only | combined |
+|---|---|---|---|
+| before | 5 | 6 | **61 papers / 549 questions** |
+| after | **6** | **5** | **61 papers / 549 questions** |
+
+Solved **+1**, intelligence-only **−1**, combined **unchanged**. Computed by the builder; **no
+record was hand-deleted.**
+
+### UI fixture — authored, and two probes rejected on proof
+
+QP2310 had none, which failed the UI suite on both surfaces (43/45, then 66/66). The search is
+**token-AND, not substring**, and that rejected two probes that looked obviously safe: `bunker oil`
+also matches Q6 (*bunker* delivery note, compliant *fuel oil*), and `Merchant Shipping Act 1958
+Part XA` also matches Q8. **A probe matching two cards still passes the assertion and still reports
+green**, so uniqueness was proved for all nine. `A.1155(32)` is the sentinel — a break there most
+likely means the 33rd-Assembly resolution has been walked back into a paper that predates it.
+`MEPC.328(76)` was considered and **rejected**: it reaches four cards and cannot localise.
+
+### The storefront guard caught its first live defect
+
+Phase 0 of this session closed the gap that let *"2023: Jan · Apr · Dec"* ship while five sittings
+were solved. On this paper's very first build it fired:
+
+> `2023 coverage omits October -- solved and delivered, but the customer is not told they get it`
+
+The months are **derived from the specs**, never typed into the checker. A negative control asserts
+a correct block is **accepted** before any mutation is tested, because a guard that rejects the
+truth gets edited until it passes.
+
+### Verification
+
+Full `run_toolchain --publish --strict`: **ALL STAGES PASS**. Delivery gate
+`--verify-derivation --strict`: **PASS**. Determinism: **85 artefacts byte-identical across two
+full builds** (product and six-year). Security suites: **198/198**, 0 failures. UI: **66/66 on both
+the review and delivery pages**. Visual: 1280 and 375, **9 anchors · 5 modes · no overflow · no
+console errors · zero internal vocabulary in visible text**.
+
+Published as `3486547`. Live storefront verified at **34 papers / 306 questions** with 2023 reading
+**Jan · Mar · Apr · Sep · Oct · Dec**. Existence was **not** proved from the paid route's 302: that
+redirect is path-agnostic and `QP9999.html` returns it identically. The evidence used is the
+**generated** free-sample page, which enumerates *October 2023* in its month list and states
+*34 solved papers · 306 questions*.
 
 ---
 
