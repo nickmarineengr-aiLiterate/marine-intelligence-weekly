@@ -85,9 +85,30 @@ WANTED_PREFIXES = (DELIVERY_PREFIX, 'meoclass1/pastpapers/known_traps.md')
 
 # Brevo, exactly as the QB checker uses it. No second mail provider, and no
 # credential is ever written down here.
-EMAIL_TO = os.environ.get('SOLVEDQP_HEALTH_EMAIL_TO',
-                          os.environ.get('QB_HEALTH_EMAIL_TO',
-                                         'contactus@marineintelligenceweekly.com'))
+DEFAULT_EMAIL_TO = 'contactus@marineintelligenceweekly.com'
+
+
+def _env(name):
+    """
+    An environment variable that is SET BUT EMPTY must not win.
+
+    This is the bug that took the scheduled run down. os.environ.get(name,
+    default) returns the default only when the name is ABSENT -- a
+    repository secret that exists with an empty value yields '', and ''
+    is what reached the SMTP conversation:
+
+        SMTPRecipientsRefused: 501 expecting RCPT TO:<address>
+
+    which surfaced as a failed health check when the product was in fact
+    healthy. Reading through a stripper makes empty and absent the same
+    thing, which is what every caller here already assumed.
+    """
+    return (os.environ.get(name) or '').strip()
+
+
+EMAIL_TO = (_env('SOLVEDQP_HEALTH_EMAIL_TO')
+            or _env('QB_HEALTH_EMAIL_TO')
+            or DEFAULT_EMAIL_TO)
 SMTP_LOGIN = os.environ.get('BREVO_SMTP_LOGIN', '')
 EMAIL_FROM = os.environ.get('BREVO_SENDER_EMAIL', 'contactus@marineintelligenceweekly.com')
 SMTP_HOST = 'smtp-relay.brevo.com'
@@ -880,22 +901,53 @@ def build_report(source_label):
 
 
 def send_email(subject, body):
+    """
+    Deliver the report.
+
+    Returns one of 'SENT' | 'SKIPPED' | 'CONFIG_ERROR' | 'FAILED'.
+
+    Notification is reported SEPARATELY from product health and never
+    decides it. Conflating the two is what made the last failure so
+    misleading: the mail relay rejected an empty recipient, the
+    traceback took the job down, and the run read as "SolvedQP is
+    broken" when SolvedQP was fine. A mail problem is a mail problem.
+    """
     key = os.environ.get('BREVO_SMTP_KEY')
+
+    # Checked BEFORE the relay is contacted, because an unusable
+    # recipient is a configuration fault we can name precisely -- not an
+    # SMTP error to be decoded from a 501 after the fact.
+    if not EMAIL_TO or '@' not in EMAIL_TO:
+        print('NOTIFICATION: recipient is missing or malformed (%r).' % EMAIL_TO)
+        print(body)
+        return 'CONFIG_ERROR'
+
     if not SMTP_LOGIN or not key:
         print('BREVO_SMTP_LOGIN / BREVO_SMTP_KEY not set -- printing the report instead.')
         print(body)
-        return False
+        return 'SKIPPED'
+
     msg = MIMEText(body, 'plain', 'utf-8')
     msg['Subject'] = subject
     msg['From'] = EMAIL_FROM
     msg['To'] = EMAIL_TO
     ctx = ssl.create_default_context()
-    with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as s:
-        s.starttls(context=ctx)
-        s.login(SMTP_LOGIN, key)
-        s.sendmail(EMAIL_FROM, [EMAIL_TO], msg.as_string())
+    try:
+        with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as s:
+            s.starttls(context=ctx)
+            s.login(SMTP_LOGIN, key)
+            s.sendmail(EMAIL_FROM, [EMAIL_TO], msg.as_string())
+    except Exception as exc:
+        # Swallowed on purpose. An unhandled exception here would exit
+        # non-zero from inside the mail path and be indistinguishable
+        # from a health failure in the Actions UI.
+        print('NOTIFICATION: delivery to %s failed -- %s: %s'
+              % (EMAIL_TO, type(exc).__name__, exc))
+        print(body)
+        return 'FAILED'
+
     print('Report emailed to %s' % EMAIL_TO)
-    return True
+    return 'SENT'
 
 
 def main():
@@ -930,12 +982,30 @@ def main():
         check_freshness(m)
 
     subject, body = build_report(label)
+
+    healthy = not any(f[0] == 'ERROR' for f in findings)
+
     if args.no_email:
         print(body)
+        notification = 'SKIPPED'
     else:
-        if not send_email('[MIW] %s' % subject, body):
-            pass
-    return 1 if any(f[0] == 'ERROR' for f in findings) else 0
+        notification = send_email('[MIW] %s' % subject, body)
+
+    # Two independent verdicts, both stated plainly, so a reader of the
+    # Actions log never has to infer one from the other.
+    print('')
+    print('HEALTH RESULT: %s' % ('PASS' if healthy else 'FAIL'))
+    print('NOTIFICATION RESULT: %s (recipient: %s)' % (notification, EMAIL_TO or '<unset>'))
+
+    # Exit codes are distinct for the same reason:
+    #   0  product healthy, report delivered or deliberately skipped
+    #   1  PRODUCT problem -- this is the one that matters
+    #   2  product healthy, but the report could not be delivered
+    if not healthy:
+        return 1
+    if notification in ('FAILED', 'CONFIG_ERROR'):
+        return 2
+    return 0
 
 
 if __name__ == '__main__':

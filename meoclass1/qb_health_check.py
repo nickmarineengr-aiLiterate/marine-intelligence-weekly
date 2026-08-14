@@ -47,7 +47,17 @@ VOID_ELEMENTS = {"br", "img", "meta", "link", "hr", "input", "area", "base",
 
 MANDATORY_CLASSES = ["q-card", "reg-box", "ce-tip", "q-footer"]
 
-EMAIL_TO = os.environ.get("QB_HEALTH_EMAIL_TO", "contactus@marineintelligenceweekly.com")
+# An env var that is SET BUT EMPTY must not beat the fallback. The
+# workflow passes QB_HEALTH_EMAIL_TO: ${{ secrets.QB_HEALTH_EMAIL_TO }},
+# and an undefined secret interpolates to "" -- so the name is ALWAYS
+# present in that job and os.environ.get's default could never fire.
+# An empty recipient reaches the relay as `RCPT TO:<>` and comes back
+# as SMTPRecipientsRefused 501, which reads in the Actions UI as a
+# failed health check rather than as an unset address. This is the same
+# defect that took the SolvedQP checker down; see
+# tools/pastpapers/solvedqp_health_check.py.
+EMAIL_TO = (os.environ.get("QB_HEALTH_EMAIL_TO") or "").strip() \
+    or "contactus@marineintelligenceweekly.com"
 SMTP_LOGIN = os.environ.get("BREVO_SMTP_LOGIN", "")  # auth credential only — NOT a valid From address
 EMAIL_FROM = os.environ.get("BREVO_SENDER_EMAIL", "contactus@marineintelligenceweekly.com")  # verified sender in Brevo
 SMTP_HOST = "smtp-relay.brevo.com"
