@@ -496,6 +496,176 @@ The divergence is recorded rather than silently taken.
 
 ## 7. FINALISED AT AUTHORING
 
-*This section is completed after the nine answers were written and QA had run.*
+*Completed after the nine answers were written, the canonical spec was assembled and the full governed QA
+suite had run. Sections 0 to 6 are unchanged: nothing in them was contradicted by authoring. What follows is
+what authoring added, and it is deliberately confined to genuinely new findings.*
+
+### 7.1 The donor map held. Nothing in §3 was revised
+
+All nine relations stood as adjudicated. **9 of 9 donor-connected: 3 exact, 2 near, 4 family**, unchanged. No
+donor was demoted, no new donor was found, and the rejected candidates at §3.4 stayed rejected. The one thing
+worth recording is that the two questions with the weakest donor support — Q8, where no exact donor exists, and
+Q6, whose whole limb (b) has no donor at all — produced the two largest objects on the paper, which is the
+expected shape and is recorded rather than treated as an anomaly.
+
+### 7.2 Q7's donor audit ran the OPPOSITE way from every other audit in the batch
+
+This is the finding of most general value and it was not predicted at §3.
+
+Both exact instances of the propeller stem — `QP2510-Q4` and `QP2403-Q4` — carry an **empty `regulations` list**,
+and each records expressly that MARPOL Annex VI was not read in a licensed consolidated edition, so that **no
+regulation number and no date for EEXI or CII is asserted anywhere in either record**. The standing assumption
+behind a temporal audit is that a later donor *over*-claims and must be stripped back. Here both donors
+**under**-claim.
+
+That restraint was correct on the evidence those sessions held. **It does not bind this paper**, because this
+paper holds the primary material for a *different* question: Q3 reads `MEPC.328(76)` at source for its operative
+paragraphs and the paper consumes the corpus's canonical Annex VI regulation records for regulations 22 to 28
+(§5.1). Q7's regulatory framing is therefore **stated at P1 provenance** where the donors stated nothing.
+
+> **The reusable rule: an audit must ask whether the donor says too little as well as whether it says too much,
+> and a donor's evidence limitation is a fact about that session, not a property of the question.**
+
+### 7.3 Q6 — the Indian statute book itself moved, and the contamination risk was not in the preferred donor
+
+Anticipated in outline at §4 but sharper in fact. The **preferred** donor `QP2403-Q2` (March 2024) stands under
+the *same* statute book as this sitting and transfers without reversal. The danger is the *second* family
+instance `QP2510-Q2` (October 2025), which answers **entirely** on the **Bills of Lading Act 2025** and the
+**Carriage of Goods by Sea Act 2025**, both in force 10 September 2025 — **thirty-one months future here**. Its
+whole statutory layer is excluded.
+
+**This is the only question in the 2023 batch to date on which the Indian statute book itself was replaced
+between the sitting and a corpus donor**, and it is the reason §5.2 item 4's prohibition is substantive rather
+than formal: the two donors cite the same provisions under **two different numbering schemes**, because the 2025
+re-enactment renumbers. No held source fixes the numbering a February 2023 candidate would have found, so no
+Hague-Visby article or rule is asserted by number anywhere in Q6.
+
+### 7.4 Q8 — the `Compliant` reading was confirmed from outside this paper
+
+§4 read the misprint as `Complaint` from the structure of MLC 2006. Authoring confirmed it independently: the
+printed stem of **`QP2307-Q4` (July 2023, +5 months) prints the same question with the word spelled correctly**.
+That stem was read for the confirmation only; nothing else was taken from it, and QP2307 remains unsolved.
+
+Two smaller Q8 findings:
+
+- The **margin** to the MLC 2022 amendments is the delta from the donor, and it changes the *confidence* rather
+  than the conclusion. `QP2407-Q6` excludes them at five months and `QP2410` at two; **here the margin is
+  twenty-two months**, before the amendments had completed their acceptance period, so the question whether an
+  early-adopting flag might have anticipated them does not arise.
+- **`known_traps.md` Entry 6 was applied INVERTED**, exactly as for QP2304: the administration at this sitting is
+  the **Directorate General of Shipping**, and the renamed body appears only as the excluded future position.
+  §5.2 item 3's prohibition on naming an office was applied as barring **named cells, offices and forums**, while
+  the administration and the shipping master — the architecture §4 itself names — are named. That reading is
+  recorded here so the next MLC question applies the same one.
+
+### 7.5 Q9 — the exclusion of the CLC figures is an EVIDENCE decision, not a temporal one
+
+§5.2 item 1 is honoured in full: no SDR figure, no tonnage band, no limitation amount, no fund ceiling and no
+currency conversion appears anywhere in Q9, notwithstanding that the printed stem names *limits of liability* as
+a required head. The head is answered to the **structure** of limitation.
+
+The distinction that authoring adds, and that a later reader could easily get wrong: **the donor's CLC figures
+are temporally perfectly safe.** They derive from the 2000 amendments, in force since 2003 — twenty years before
+this sitting. They are excluded because **neither treaty text is held**, not because they are out of date. The
+classification is recorded in Q9's `reverify_before_publication` as `B_CURRENCY_CHECK`, and the question whether
+figures may be restored if the treaties are ever acquired is left to the Founder rather than decided here.
+
+Q9 also returned **zero temporal-sweep candidates**, the only question on the paper to do so, which is consistent
+with its LOW risk rather than with an omission.
+
+### 7.6 A paper-wide defect was found by the governed validator and repaired across all nine questions
+
+**This is the most important process finding of the session and it is recorded in full because it is not
+flattering.**
+
+The five questions completed in the previous session were validated against the **QP2303 field-name schema**, per
+the helper reproduced at CHECKPOINT §4. That helper compares **key names only**. When `validate_spec.py` — the
+governed validator — was first run on the assembled paper it returned **363 errors**, and they were distributed
+across **all nine questions**, 30 to 38 on each of Q1 to Q5 and 43 to 53 on each of Q6 to Q9. The defect was
+therefore **not** introduced by the resuming session; it was latent in the completed work and was inherited.
+
+What was wrong, and what was done:
+
+| Defect | Scope | Repair |
+|---|---|---|
+| `primary_category` outside the seven topic-tree categories | all 9 | mapped to the tree, each against a donor precedent |
+| `answer_route.archetype` outside the closed set | Q1, Q3, Q5 | `technology`, `technical_regulatory`, `management` → `explain` |
+| `retrieval_cards[].type` outside the closed set | 101 cards | mapped to the seven permitted types |
+| `reverify_before_publication[].class` outside the closed set | 24 flags | `A_TEMPORAL_ANCHOR`, `A_REGULATORY_CORRECTION`, `B_DATE_CHECK` → `B_CURRENCY_CHECK`; `C_EVIDENCE_GAP`, `D_PRESENTATION` → `C_ACCEPTED_LIMITATION` |
+| model-answer principal headings not identical to the route steps | 96 headings, 48 steps | route titles adopted **from** the answer headings, so no wording was lost; 44 sub-headings demoted out of the principal sequence; one closing route step added to each of Q8 and Q9 |
+| `memory_cue` enumerating anchors without mapping them to route step numbers | 5 questions | a numbered route line prepended |
+| the six canonical study-guide sections and the `Uncertainty` section absent | all 9 | **63 sections authored**, preserving every existing question-specific section |
+| `verification_file` missing on disk | all 9 | the nine records written |
+
+**No answer content was weakened, thinned or deleted to satisfy the validator.** The heading repair adopted the
+richer model-answer wording as the route title rather than truncating the answer to the route, and the study-guide
+repair added sections alongside the existing analysis rather than replacing it.
+
+> **The reusable rule: the CHECKPOINT §4 helper proves the field NAMES, not the governed contract.
+> `validate_spec.py` must be run before a paper is called complete, and a resuming session must run it against
+> the inherited questions and not only its own.**
+
+An **`A_` reverify class was deliberately not used anywhere on this paper.** `A_BLOCKING` means the claim blocks
+publication. `TSCR-3` is carried, not re-raised, and the paper ships as Founder-Review Ready, so the temporal
+anchors are currency checks and are classed `B_CURRENCY_CHECK`.
+
+### 7.7 One health-check gate failure, and the phrasing gap behind it
+
+`solvedqp_health_check.py` failed once, on Q6, reporting that the answer asserted the **Merchant Shipping Act,
+2025** as operative. The assertion was not being made — the cell reads `DOES NOT EXIST - commenced 15 March
+2026` — but the checker's `NEGATION_CUES` list contains `is not`, `was not`, `did not` and `has not` and **does
+not contain `does not`**, and its sentence window straddles a table row. The exclusion was rephrased to carry the
+recognised cue *after this sitting*, which is also the plainer wording. **The checker was not weakened**; the
+answer was made unambiguous to it. The cue-list gap is recorded here as an observation for the producer team, not
+raised as a correction request.
+
+### 7.8 QA outcome
+
+`validate_spec` **0 errors** on all 32 specs · deterministic **byte-identical double build**
+(`6d7548f57d725cd2`) · `audit_paper` **pass** on all 32 · `known_traps_check`, `recurrence_check`,
+`temporal_sweep`, `health_check`, `solvedqp_health_check` **pass** · positive controls **pass** ·
+`surface_impact` **no non-target public, paid or commercial surface moved**.
+
+**Those results were measured with the global derived artefacts regenerated, and every one of them was then
+reverted before staging** (playbook §13.2). With the globals reverted to their committed state,
+`audit_paper` reports exactly one residual error on this branch — *manifest has no entry for QP2302* — which is
+the expected founder-review-branch condition and is the same state `QP2303` and `QP2309` shipped in: neither
+appears in the manifest either. It closes at integration, with §7.10 item 1.
+
+The **temporal sweep returned 118 candidates**, every one of which was adjudicated: each is either a date this
+paper deliberately **excludes** (the 2025 Indian Acts, the MS Act 2025, the MLC 2022 amendments, the 2023 GHG
+Strategy, the EU ETS, the 33rd Assembly, the Net-Zero Framework), the corpus register value **being corrected**
+(`2023-11-01`), or a donor sitting named in authoring metadata. **None asserts post-sitting law as operative.**
+`PIL FLAGS; CLAUDE ADJUDICATES` was applied per candidate.
+
+UI reviewed over HTTP at **1280 and 375** with explicit server teardown, Node being absent: nine question
+anchors resolve, **Answer is the default pane**, all **five modes** (`understand`, `plan`, `answer`, `guide`,
+`recall`) render for all nine questions, search isolates correctly (`Compliant` → Q8 only, `contra-rotating` →
+Q7 only), **24 cross-links and 20 internal links all resolve**, **no horizontal overflow at either width**, **no
+console output**, and **all eight printed anomalies render exactly as printed**. **No host recurrence annotation
+reaches either surface**, and the delivery page carries **zero** production-metadata, host-branding or path
+tokens.
+
+### 7.9 What this paper now donates — unchanged from §3.3, and confirmed at authoring
+
+- **`QP2302-Q2`** → **`QP2308-Q9`** (August 2023, +6 months), character-identical stem.
+- **`QP2302-Q8`** → **`QP2307-Q4`** (July 2023, +5 months), identical but for the `Compliant`/`Complaint`
+  misprint, which QP2307 prints correctly — now confirmed by reading QP2307's printed stem.
+
+**That future reuse influenced no wording here. Printed QP2302 truth remains the authority for these objects.**
+
+### 7.10 Open for the Founder
+
+1. **The delivery page and the manifest entry are deliberately NOT committed on this branch**, following the
+   `QP2303` and `QP2309` precedent: neither appears in the manifest and neither committed `solvedQP/QP####.html`.
+   The paper is therefore **not advertised as Available** and nothing 404s. The QA protocol §6 publication gate
+   applies at **integration**, and the integration session must generate and explicitly stage
+   `solvedQP/QP2302.html` together with the manifest entry.
+2. **`TSCR-3` remains OPEN and the producer-team action is unchanged.** QP2302 is the first paper whose answer
+   *depends* on the correction; the corpus was not modified.
+3. **Whether the CLC and Bunkers figures may be restored to Q9** if either treaty text is ever acquired — see
+   §7.5.
+4. **Whether Hague-Visby article numbering may be restored to Q6** if the 1925 Act's Schedule is ever acquired —
+   see §7.3.
 </content>
 </invoke>
