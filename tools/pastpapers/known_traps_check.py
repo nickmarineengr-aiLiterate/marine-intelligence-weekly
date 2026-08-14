@@ -48,6 +48,27 @@ EXEMPT_PATHS = ('known_traps.md', 'WORKFLOW_LESSONS.md')
 EXEMPT_DIRS = ('verification',)
 
 
+# trap 18. `ISM` as a whole uppercase token, an optional `Code`, then a numbered
+# reg in any spelling. Case-sensitive on ISM by design: lowercasing would let
+# "mechanism regulates 3 valves" through the same gate.
+ISM_WRONG_UNIT = re.compile(
+    r'\bISM\b(?:\s+Code)?\s*,?\s*\b[Rr]eg(?:ulations?|s)?\b\.?\s*[0-9]')
+
+
+def _strings(obj, path=''):
+    """Yield (json path, string) for every string anywhere under obj."""
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            for r in _strings(v, '%s.%s' % (path, k)):
+                yield r
+    elif isinstance(obj, list):
+        for i, v in enumerate(obj):
+            for r in _strings(v, '%s[%d]' % (path, i)):
+                yield r
+    elif isinstance(obj, str):
+        yield path.lstrip('.'), obj
+
+
 def parse_traps(path):
     """Return [(number, title, grep_or_None)] from the markdown."""
     text = io.open(path, encoding='utf-8').read()
@@ -207,6 +228,28 @@ def structural_layer(specs):
         if d.get('official_source_verified') is True and not d.get('official_source_verification_note'):
             fails.append('%s: official_source_verified true with no note (trap 13)' % pid)
 
+        # T18: the ISM Code is cited in elements and paragraphs, never regulations.
+        #
+        # The grep layer already owns the `ISM Code reg...` prefix, which is safe
+        # as a literal because no English word ends in "ISM Code". This covers the
+        # form a literal cannot: the un-prefixed `ISM reg 9`, where a bare
+        # `ism reg` substring would fire on "mechanism regulates". QP2310-Q9 shipped
+        # exactly that abbreviation for a week after its prefixed occurrences were
+        # purged, so the abbreviation is the form that actually survives a fix.
+        #
+        # ISM must be a whole UPPERCASE token, followed only by an optional "Code"
+        # and then a numbered reg. No other instrument's citation can satisfy that,
+        # and `SOLAS regulation XI-1/6` cannot -- it carries no ISM and its number
+        # is not a digit.
+        checked += 1
+        for q in d['questions']:
+            for path, s in _strings(q):
+                m = ISM_WRONG_UNIT.search(s)
+                if m:
+                    fails.append('%s %s: %r at %s -- the ISM Code has elements and '
+                                 'paragraphs, not regulations (trap 18)'
+                                 % (pid, q['q_no'], m.group(0), path))
+
     return fails, checked
 
 
@@ -234,6 +277,22 @@ def self_test(traps, specs):
         f, _ = structural_layer(s2)
         if not any('trap 11' in x for x in f):
             bad.append('structural trap 11 did NOT fire when the reverify list was emptied')
+
+    # structural positive control for trap 18: inject the abbreviated form the
+    # grep layer cannot see, and the legitimate SOLAS citation beside it. The
+    # first must fire; the second must not, or the trap would purge correct law.
+    s3 = copy.deepcopy(specs)
+    s3[0]['questions'][0]['short_title'] = 'ISM reg 9 and SOLAS regulation XI-1/6'
+    f, _ = structural_layer(s3)
+    if not any('trap 18' in x for x in f):
+        bad.append('structural trap 18 did NOT fire on an injected "ISM reg 9"')
+    s4 = copy.deepcopy(specs)
+    s4[0]['questions'][0]['short_title'] = (
+        'SOLAS regulation XI-1/6, MARPOL Annex VI regulation 22, and the '
+        'mechanism regulating 3 valves')
+    f, _ = structural_layer(s4)
+    if any('trap 18' in x for x in f):
+        bad.append('structural trap 18 fired on legitimate SOLAS/MARPOL regulation text')
     for b in bad:
         print('  [SELFTEST FAIL] %s' % b)
     print('  self-test: %s' % ('FAILED' if bad else 'all injected traps fired'))

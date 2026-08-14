@@ -190,3 +190,40 @@ destroy it. The test is whether the phrase measures from the examination day, wh
 the surrounding clause. Detect on the pattern
 `<number> (week|day)s? (before|after|ago) ... (this )?(sitting|paper|examination)`.
 SCOPE: product
+
+### 18. The ISM Code has no regulations
+The ISM Code is **not divided into regulations**. Part A is divided into numbered
+**elements** (1 General ... 9 Reports and analysis of non-conformities, accidents and
+hazardous occurrences ... 12 Company verification, review and evaluation), and those are
+divided into **paragraphs** (1.2 Objectives, 1.2.2, 1.2.2.1). *Regulation* is the unit of
+SOLAS and MARPOL. The Code's own text confirms it: it uses "regulation" only for SOLAS
+chapter IX (`regulation IX/1`, `regulation IX/6.2`) and for generic "rules and
+regulations", and calls its own components **elements** ("a safety management system
+element", "key elements of this Code").
+
+Cite an ISM top-level number as an **element**, a dotted number as a **paragraph**. The
+corpus house forms agree: element, paragraph, section.
+
+Found for real in exactly two papers, and the second inherited it from the first:
+`QP2412-Q5` (December 2024) carried 21 wrong tokens and is `QP2310-Q9`'s Tier D donor, so
+the same wrong unit shipped again in October 2023. Both are corrected. Note that the
+QP2310 correction was itself incomplete for a week: it purged `ISM Code regulation N` but
+left the **abbreviated** `ISM reg 9`, `reg 1.2.2`, `reg 12` alive on the recall card,
+which is why this trap needs the structural layer below and not only a phrase match.
+
+`SOLAS regulation XI-1/6` sits beside these citations and is **correct** — never purge the
+word "regulation" mechanically from a question that carries both.
+GREP: ISM Code regulation
+SCOPE: product
+NOTE: the phrase match stops at the full word `regulation` on purpose. Truncating the
+needle to `ISM Code reg` looks like it catches more -- the abbreviated `ISM Code reg 9`
+as well -- but it fires on **`the ISM Code regulates a system`**, which is correct English
+and appears three times across QP2402, QP2408 and QP2412. That was tried and rejected here
+rather than discovered in production.
+
+Two forms therefore fall to the structural layer instead, both requiring a DIGIT after the
+unit so that no verb can satisfy them: the abbreviated `ISM Code reg 9`, and the
+un-prefixed `ISM reg 9` -- the latter can never be a safe literal, because a bare
+`ism reg` substring fires on "mechanism regulates". The structural form matches `ISM` as a
+whole uppercase token, an optional `Code`, then a numbered reg, which no other
+instrument's citation can satisfy and which `SOLAS regulation XI-1/6` cannot reach.

@@ -365,6 +365,13 @@ regulation reference that the same substitution would have damaged.
 **`QP2412` is live with the same defect and is NOT corrected here** — this session is one paper.
 Referred separately.
 
+**CLOSED 14 August 2026.** `QP2412-Q5` corrected on the same authority; see
+`QP2412_TEMPORAL_AND_DONOR_ANCHOR.md` section 9. That session also found **this**
+correction incomplete: the recall card here still read *"ISM reg 9 ... reg 1.2.2 ...
+reg 12"*, because the purge above was anchored on the prefixed `ISM Code regulation N`
+form and the **abbreviation** survives it. Corrected, and the defect class is now held by
+`known_traps.md` trap 18 in both the grep and the structural layer.
+
 ### 8.2 Q7 — production vocabulary on a rendered card (CORRECTED, 1 string)
 
 A flashcard rationale read *"the standing statute trap for the whole 2023 **batch**"*. "Batch" is

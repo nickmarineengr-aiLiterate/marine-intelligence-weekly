@@ -275,3 +275,65 @@ stale; that staleness is **expected and must not be committed from this branch**
 6. **Q3 must not present the recast-EU-Directive Ship Risk Profile as operative.**
 7. **Q7 must not describe the Rotterdam Rules as in force**, and must not cite the 2025 Indian statutes.
 8. **Q1 must not describe the IMO mid-term GHG measures as adopted.**
+
+---
+
+## 9. POST-PUBLICATION CORRECTION — 14 August 2026
+
+### 9.1 Q5 — `ISM Code regulation N` is the wrong citation unit (CORRECTED, 23 tokens)
+
+Found by the independent `QP2310` review, which inherited the defect from this paper and
+corrected its own copy first. This paper stayed live with it for a further sitting.
+
+**The error.** Q5 cited the Company's internal investigation duties as *"ISM Code
+regulation 9"*, *"regulation 1.2.2"* and *"regulation 12"*. The ISM Code has no
+regulations. Part A is divided into numbered **elements**, themselves divided into
+**paragraphs**. *Regulation* is SOLAS's and MARPOL's unit, and Q5 uses it correctly for
+`SOLAS regulation XI-1/6` in the same breath — which is what makes the ISM usage a slip
+rather than a house style.
+
+**Authority.** Verified against the ISM Code's own text, which uses "regulation" only for
+SOLAS chapter IX (`regulation IX/1`, `regulation IX/6.2`) and for generic "rules and
+regulations", and calls its own components **elements**. Section 1 is *General* with 1.2
+*Objectives* and 1.2.2 *Safety management objectives of the Company*; 9 is *Reports and
+analysis of non-conformities, accidents and hazardous occurrences*; 12 is *Company
+verification, review and evaluation*. The corpus's own `ISM-9` and `ISM-1213` nodes carry
+the identical headings.
+
+**Corrected** to `element 9`, `paragraph 1.2.2`, `element 12`. `SOLAS regulation XI-1/6`
+was left untouched at all 11 occurrences, and the edit was scoped to Q5 after proving Q5
+carries no MARPOL or Annex VI regulation reference the same substitution would damage.
+
+**Scope was larger than the referral stated.** The referral recorded 13 strings, being the
+`ISM Code regulation N` form alone. Q5 in fact carried **23** wrong tokens across 12
+surfaces: the 14 prefixed occurrences, **7 bare** ones where the ISM Code was the
+antecedent (`verification_status`, `sources`, `temporal_review`, `study_notes`), and **2
+abbreviated** ones (`ISM Code reg 9`, `ISM reg 9`) that a scan anchored on the whole word
+*regulation* cannot see. Rendered, this was 10 strings per built page.
+
+### 9.2 The QP2310 correction was itself incomplete (CORRECTED)
+
+`QP2310-Q9`'s recall card still read *"ISM reg 9 ... reg 1.2.2 ... reg 12"* after that
+paper was declared corrected and published, because the purge was anchored on the
+prefixed form. The abbreviation is the form that survives a fix. Corrected here on the
+same authority, and it is why trap 18 carries a structural check and not only a phrase
+match.
+
+### 9.3 Guard
+
+`known_traps.md` **trap 18**, with both layers of the checker:
+
+- grep layer, `GREP: ISM Code regulation`, `SCOPE: product`;
+- structural layer, `ISM` as a whole uppercase token followed by an optional `Code` and
+  then a **numbered** reg in any spelling — the form a literal cannot express, because a
+  bare `ism reg` substring fires on *"mechanism regulates"*.
+
+Both carry positive controls in `--self-test`, and the structural check carries a
+**negative** control asserting it does not fire on `SOLAS regulation XI-1/6` or
+`MARPOL Annex VI regulation 22`. A truncated `ISM Code reg` needle was tried first and
+rejected: it fires on *"the ISM Code regulates a system"*, which is correct English and
+appears in QP2402, QP2408 and QP2412. That rejection is recorded in the trap.
+
+**Nothing else in this paper was reopened.** No temporal, donor, answer-architecture or
+commercial matter was touched; counts, coverage, price, entitlement and trial are unmoved
+at 34 papers / 306 questions.
