@@ -1,7 +1,20 @@
-"""Temporal-repeat watchlist + topic persistence ranking over the six-year map."""
+"""Temporal-repeat watchlist + topic persistence ranking over the six-year map.
+
+Reads the derived layer that build_sixyear_intelligence.py writes, and builds it
+first if it is absent. So this tool has no ordering requirement on the operator
+and no dependency on where a previous run happened to leave its files.
+"""
 import json, re, sys, os, collections
 
-S = r'C:/Users/User/AppData/Local/Temp/claude/F--RulesApp/8fd949e3-b943-42c3-a2cf-25535f0b6e97/scratchpad'
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+import build_sixyear_intelligence as SY
+
+S = SY.OUT_DIR
+if not (os.path.exists(os.path.join(S, 'sixyear_families.json'))
+        and os.path.exists(os.path.join(S, 'sixyear_nodes.json'))):
+    SY.main()
+
 fams = json.load(open(S + '/sixyear_families.json', encoding='utf-8'))
 nodes = json.load(open(S + '/sixyear_nodes.json', encoding='utf-8'))
 
@@ -99,10 +112,7 @@ for r in sorted(rows, key=lambda x: (-x[3], -x[1])):
     print(f'  {r[0]:54s} {r[1]:>4d} {r[2]:>4d} {r[3]:>4d} {r[5]:>4d} {r[6]:>4d}')
 print('\n  Qs=questions matching  sit=distinct sittings  yrs=distinct years')
 print('  fam=families touched   rep=families that repeat')
-json.dump([{'topic': r[0], 'questions': r[1], 'sittings': r[2], 'years': r[3],
-            'year_list': r[4], 'families': r[5], 'repeating_families': r[6]} for r in rows],
-          open(S + '/sixyear_topics.json', 'w', encoding='utf-8', newline='
-'), indent=1, ensure_ascii=False)
-json.dump(watch, open(S + '/sixyear_temporal_watch.json', 'w', encoding='utf-8', newline='
-'),
-          indent=1, ensure_ascii=False)
+SY.write_json(os.path.join(S, 'sixyear_topics.json'),
+              [{'topic': r[0], 'questions': r[1], 'sittings': r[2], 'years': r[3],
+                'year_list': r[4], 'families': r[5], 'repeating_families': r[6]} for r in rows])
+SY.write_json(os.path.join(S, 'sixyear_temporal_watch.json'), watch)

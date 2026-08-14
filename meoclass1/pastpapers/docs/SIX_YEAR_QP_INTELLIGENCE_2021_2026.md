@@ -4,15 +4,36 @@
 Built 2026-08-14, after QP2304 was published. Question wording and lineage only — no answer
 content was read or produced for any unsolved sitting.
 
-Derived from:
+Derived from two **committed** inputs:
 
-- `meoclass1/pastpapers/specs/QP####.json` — the 31 **solved** papers
-- `meoclass1/pastpapers/intelligence/historical_qp_intelligence.json` — the 30 **intelligence-only**
-  papers acquired or extracted this session
+- `meoclass1/pastpapers/specs/QP####.json` — the **solved** papers
+- `meoclass1/pastpapers/intelligence/historical_qp_intelligence.json` — the question-only shelf
+  record of every held 2021–2023 sitting
 
 Both are fed through the **governed** `tools/pastpapers/recurrence_model.py`
 (`normalise_stem` / `build_families`) rather than a second equality rule, so a "family" here means
 exactly what a family means on a paid page.
+
+### Regeneration
+
+```
+python tools/pastpapers/build_sixyear_intelligence.py    # from the two committed inputs
+python tools/pastpapers/extract_historical_qp.py         # refresh the shelf record from local PDFs
+```
+
+The layer is derived and **gitignored**; the two inputs above are the truth. A clean checkout
+rebuilds it with no source PDF and no local state, and a double build is byte-identical.
+
+The shelf record deliberately keeps **every** held sitting, including any that has since been
+solved. **Graduation is applied by the builder**: a paper that gains a canonical solved spec is
+excluded from the intelligence-only set by rule, so the same sitting is never counted twice and no
+one has to remember to delete it. `tools/pastpapers/sixyear_intelligence_test.py` holds that
+property, and its `--self-test` shows the totals double-counting once the rule is removed.
+
+**The per-year table below is a snapshot taken when QP2304 was the newest paper.** The solved and
+intelligence-only columns move every time a paper graduates; the **61 papers / 549 questions**
+total does not, because graduation moves a sitting between columns rather than into or out of the
+window. Run the builder for current figures rather than reading them from here.
 
 ---
 

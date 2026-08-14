@@ -5,29 +5,76 @@ INTERNAL ONLY. Question wording and lineage; no answer content is read or writte
 Reuses the governed recurrence model (normalise_stem / build_families) rather than
 inventing a second equality rule, so a family computed here means the same thing as
 a family rendered on a paid page.
+
+INPUTS, BOTH COMMITTED
+----------------------
+    meoclass1/pastpapers/specs/QP*.json                      the solved papers
+    meoclass1/pastpapers/intelligence/
+        historical_qp_intelligence.json                      the question-only shelf
+
+A clean checkout regenerates this layer with no source PDF and no local state.
+The historical store is refreshed from PDFs by extract_historical_qp.py, which is
+a separate step because the PDFs are third-party material kept out of git.
+
+This script previously read its historical input from a hard-coded path inside
+one Claude session's scratchpad directory, which meant the layer could not be
+rebuilt at all once that directory was cleaned, and that the scratchpad copy and
+the committed copy drifted without anything detecting it. Output is derived and
+gitignored: the two committed inputs above are the truth.
 """
 import json, glob, os, re, sys, difflib, collections
 
-sys.path.insert(0, os.path.abspath('tools/pastpapers'))
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
 import recurrence_model as RM
 
+REPO_ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 MONTHS = RM.MONTHS
-S = r'C:/Users/User/AppData/Local/Temp/claude/F--RulesApp/8fd949e3-b943-42c3-a2cf-25535f0b6e97/scratchpad'
+
+SPEC_GLOB = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers', 'specs', 'QP*.json')
+INTEL_PATH = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers', 'intelligence',
+                          'historical_qp_intelligence.json')
+OUT_DIR = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers', 'intelligence', 'derived')
 
 
-def solved_specs():
+def write_json(path, payload):
+    """LF newlines and no clock read, so a rebuild is byte-identical."""
+    with open(path, 'w', encoding='utf-8', newline='\n') as fh:
+        json.dump(payload, fh, indent=1, ensure_ascii=False)
+        fh.write('\n')
+
+
+def solved_specs(spec_glob=SPEC_GLOB):
     out = []
-    for f in sorted(glob.glob('meoclass1/pastpapers/specs/QP*.json')):
+    for f in sorted(glob.glob(spec_glob)):
         d = json.load(open(f, encoding='utf-8'))
         d['_status'] = 'SOLVED'
         out.append(d)
     return out
 
 
-def historical_specs():
-    """Shape the intelligence-only papers like a spec so the governed model can read them."""
+def historical_specs(solved_ids, intel_path=INTEL_PATH):
+    """Shape the intelligence-only papers like a spec so the governed model can read them.
+
+    GRADUATION IS APPLIED HERE, BY RULE
+    -----------------------------------
+    The store deliberately keeps a complete shelf record, including sittings that
+    have since been solved. A paper that now has a canonical solved spec is
+    dropped here, so the same sitting cannot appear twice in the six-year
+    universe -- once as a solved question and once as its own intelligence-only
+    ghost.
+
+    This replaces a manual step. When September 2023 was solved, its record was
+    deleted from the store BY HAND to stop the totals double-counting; the next
+    paper would have needed the same surgery, and a forgotten deletion would
+    have silently inflated the corpus. Doing it by rule means the totals hold
+    across every future paper without anyone remembering anything.
+    """
+    doc = json.load(open(intel_path, encoding='utf-8'))
     out = []
-    for p in json.load(open(S + '/hist_raw.json', encoding='utf-8')):
+    for p in doc['papers']:
+        if p['paper_id'] in solved_ids:
+            continue
         qs = []
         for q in p['questions']:
             limbs = q['printed_limbs']
@@ -47,15 +94,17 @@ def historical_specs():
                 # NO model_answer: these are INTELLIGENCE_ONLY by construction.
             })
         out.append({
-            'paper_id': p['paper_id'], 'year': p['year'], 'month': p['month_name'],
+            'paper_id': p['paper_id'], 'year': p['year'], 'month': p['month'],
             'month_year': p['sitting'], 'questions': qs, '_status': 'INTELLIGENCE_ONLY',
             'printed_serial': p['printed_serial'], 'second_sitting': p['second_sitting'],
         })
     return out
 
 
-def main():
-    specs = solved_specs() + historical_specs()
+def main(out_dir=OUT_DIR, spec_glob=SPEC_GLOB, intel_path=INTEL_PATH):
+    solved = solved_specs(spec_glob)
+    specs = solved + historical_specs({d['paper_id'] for d in solved}, intel_path)
+    os.makedirs(out_dir, exist_ok=True)
     status = {d['paper_id']: d['_status'] for d in specs}
     nodes = RM.load_nodes(specs)
     for qid, n in nodes.items():
@@ -100,15 +149,12 @@ def main():
             'statuses': sorted({nodes[q]['status'] for q in members}),
             'stem': nodes[first]['text_verbatim'][:220],
         })
-    json.dump(records, open(S + '/sixyear_families.json', 'w', encoding='utf-8', newline='
-'),
-              indent=1, ensure_ascii=False)
-    json.dump({q: {'status': nodes[q]['status'], 'year': nodes[q]['year'],
-                   'month': nodes[q]['month_num'], 'paper': nodes[q]['paper_id'],
-                   'q_no': nodes[q]['q_no'], 'stem': nodes[q]['text_verbatim']}
-               for q in order},
-              open(S + '/sixyear_nodes.json', 'w', encoding='utf-8', newline='
-'), indent=1, ensure_ascii=False)
+    write_json(os.path.join(out_dir, 'sixyear_families.json'), records)
+    write_json(os.path.join(out_dir, 'sixyear_nodes.json'),
+               {q: {'status': nodes[q]['status'], 'year': nodes[q]['year'],
+                    'month': nodes[q]['month_num'], 'paper': nodes[q]['paper_id'],
+                    'q_no': nodes[q]['q_no'], 'stem': nodes[q]['text_verbatim']}
+                for q in order})
 
     # ---- report ---------------------------------------------------------------
     print('=' * 78)

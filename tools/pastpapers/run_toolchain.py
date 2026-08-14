@@ -303,6 +303,19 @@ def main():
     rc_total += rc
     warn_total += w
 
+    # The six-year lineage layer is INTERNAL and its output is gitignored, so
+    # nothing else in this toolchain would notice it rotting. It is checked
+    # here because its two inputs ARE committed, and because it once read its
+    # historical input from a session scratchpad, which made it unbuildable.
+    # The rule with teeth is graduation: a sitting that gains a solved spec
+    # must leave the intelligence-only set by rule, not by hand.
+    argv = [os.path.join(T, 'sixyear_intelligence_test.py')]
+    if args.self_test:
+        argv.append('--self-test')
+    rc, w = run('SIXYEAR INTEL', argv, args.verbose)
+    rc_total += rc
+    warn_total += w
+
     # The complete January paper shown to existing ORAL subscribers. Built
     # from the same canonical spec as the paid product, so it cannot drift
     # from what it is advertising.

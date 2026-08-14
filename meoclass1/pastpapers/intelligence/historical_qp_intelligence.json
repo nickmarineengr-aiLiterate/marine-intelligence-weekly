@@ -1,15 +1,17 @@
 {
- "schema": "miw.pastpapers.historical_qp_intelligence.v1",
- "generated": "2026-08-14",
+ "schema": "miw.pastpapers.historical_qp_intelligence.v2",
  "status_enum": "INTELLIGENCE_ONLY",
- "what_this_is": "Question-only records for sittings MIW holds a source copy of but has NOT solved. These papers carry printed question wording and nothing else. No model answer, Understand, Exam Plan, Study Guide or Recall content exists for them, and none may be authored without a separate Founder decision.",
- "what_this_is_not": "This file is NOT the solved-product manifest. solvedQP/solvedqp_content_index.json remains the single source for solved counts, paid inventory and availability. Nothing here counts as solved, renders a paid page, appears as AVAILABLE, or creates a customer-facing Added update. These records participate in recurrence and lineage intelligence only.",
+ "what_this_is": "Question-only records for sittings MIW holds a source copy of. These papers carry printed question wording and printed rubric metadata and nothing else. No model answer, Understand, Exam Plan, Study Guide or Recall content exists for them here, and none may be authored without a separate Founder decision.",
+ "what_this_is_not": "This file is NOT the solved-product manifest. solvedQP/solvedqp_content_index.json remains the single source for solved counts, paid inventory and availability. Nothing here counts as solved, renders a paid page, appears as AVAILABLE, or creates a customer-facing Added update. These records participate in recurrence and lineage intelligence only. A sitting listed here MAY also have a canonical solved spec: consumers exclude it by rule rather than this file dropping it, so that the exclusion can be tested.",
+ "regenerate_with": "python tools/pastpapers/extract_historical_qp.py",
+ "source_window": "QP2[123]* -- the 2021-2023 sittings MIW holds a source copy of",
  "papers": [
   {
    "paper_id": "QP2101",
    "status": "INTELLIGENCE_ONLY",
    "year": 2021,
    "month": "January",
+   "month_num": 1,
    "sitting": "January 2021",
    "second_sitting": false,
    "printed_serial": "2101 EM",
@@ -21,37 +23,70 @@
     {
      "question_id": "QP2101-Q1",
      "q_no": "Q1",
-     "text_verbatim": "Stress is one of the factors affecting the performance of an individual. What are the primary strategies that may be employed for coping with stress affected personnel? How these elements can be best implemented in ships personnel motivating them for better team work? 2018/AUG 2018/OCT 2018/NOV",
+     "text_verbatim": "Stress is one of the factors affecting the performance of an individual. What are the primary strategies that may be employed for coping with stress affected personnel? How these elements can be best implemented in ships personnel motivating them for better team work?",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2011/SR2",
+      "2010/SR11",
+      "2010/SR10",
+      "2010/SR01",
+      "2018/AUG",
+      "2018/OCT",
+      "2018/NOV",
+      "2021/JAN/Q1"
+     ]
     },
     {
      "question_id": "QP2101-Q2",
      "q_no": "Q2",
      "text_verbatim": "UNCLOS requires the member states to exercise administrative, technical and social control on ships to ensure safety operations and control of marine pollution. In recent times the intervention of port states has increased in supplementing the work of flag states. Discuss objective and responsibilities of flag and port state administrations towards achieving their objectives of eliminating substandard ships.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/JAN/Q2"
+     ]
     },
     {
      "question_id": "QP2101-Q3",
      "q_no": "Q3",
-     "text_verbatim": "Write short notes on any THREE: A. Lloyd's Open Form; B. General Average and Particular Average. C. Bill of Lading. D. Treaty, Convention and Protocol. 2018/AUG 2018/NOV",
+     "text_verbatim": "Write short notes on any THREE: A. Lloyd's Open Form; B. General Average and Particular Average. C. Bill of Lading. D. Treaty, Convention and Protocol.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2011/SR06",
+      "2013/SR01",
+      "2018/AUG",
+      "2018/NOV",
+      "2021/JAN/Q3"
+     ]
     },
     {
      "question_id": "QP2101-Q4",
      "q_no": "Q4",
-     "text_verbatim": "The vessel in which you are the Chief Engineer is about to be laid up for 3 months for commercial reasons. All equipment and machinery on board require to be preserved during the lay-up period for re- commissioning when required. Describe the actions you will take as Chief Engineer to prepare the Main Propulsion diesel engine for preserving during the lay-up period. 2018/OCT 2018/DEC 2019/JAN 2019/FEB 2019/AUG",
+     "text_verbatim": "The vessel in which you are the Chief Engineer is about to be laid up for 3 months for commercial reasons. All equipment and machinery on board require to be preserved during the lay-up period for re- commissioning when required. Describe the actions you will take as Chief Engineer to prepare the Main Propulsion diesel engine for preserving during the lay-up period.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2018/SR09",
+      "2018/OCT",
+      "2018/DEC",
+      "2019/JAN",
+      "2019/FEB",
+      "2019/AUG",
+      "2020/OCT/Q9",
+      "2021/JAN/Q4"
+     ]
     },
     {
      "question_id": "QP2101-Q5",
      "q_no": "Q5",
      "text_verbatim": "Discuss the additional risks of bulk carriers and tankers which have necessitated the enhanced survey programme for these ship types. State the major requirements of inspections under this programme. 2",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/JAN/Q5"
+     ]
     },
     {
      "question_id": "QP2101-Q6",
@@ -61,43 +96,75 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/JAN/Q6"
+     ]
     },
     {
      "question_id": "QP2101-Q7",
      "q_no": "Q7",
-     "text_verbatim": "Describe the general structure of a Ballast Water Treatment (BWT) System, highlighting the following methods of treatment: - a) UV Treatment method b) Gas Treatment method c) Electrolysis method d) Magnetic Separation method. 2019/JAN 2019/FEB 2019/APR",
+     "text_verbatim": "Describe the general structure of a Ballast Water Treatment (BWT) System, highlighting the following methods of treatment: - a) UV Treatment method b) Gas Treatment method c) Electrolysis method d) Magnetic Separation method.",
      "printed_limbs": [
       "a",
       "b",
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2019/JAN",
+      "2019/FEB",
+      "2019/APR",
+      "2021/JAN/Q6",
+      "2021/JAN/Q7"
+     ]
     },
     {
      "question_id": "QP2101-Q8",
      "q_no": "Q8",
-     "text_verbatim": "With reference to surveying of large starting air receivers: (a) Explain where corrosion is likely to occur and state why it occurs in these regions; (b) State how the incidence of corrosion in air receivers might be minimized: (c) If serious corrosion is detected in a starting air receiver and that receiver must be used explain how you, as Chief Engineer, would determine the maximum pressure to which the receiver should he subjected; (d) State the further action a Chief Engineer must take upon discovering such air receiver corrosion. 2018/AUG 2018/NOV",
+     "text_verbatim": "With reference to surveying of large starting air receivers: (a) Explain where corrosion is likely to occur and state why it occurs in these regions; (b) State how the incidence of corrosion in air receivers might be minimized: (c) If serious corrosion is detected in a starting air receiver and that receiver must be used explain how you, as Chief Engineer, would determine the maximum pressure to which the receiver should he subjected; (d) State the further action a Chief Engineer must take upon discovering such air receiver corrosion.",
      "printed_limbs": [
       "a",
       "b",
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2018/AUG",
+      "2018/NOV",
+      "2021/JAN/Q8"
+     ]
     },
     {
      "question_id": "QP2101-Q9",
      "q_no": "Q9",
-     "text_verbatim": "Describe the background and relevance of the International Convention on Civil Liability for Bunker Oil Pollution Damage, 2001. Define the following under Bunker Convention and explain how they differ from other similar Convention such as CLC’92. (a) Pollution damage; (b) Bunker oil; (c) Time limits for claims; (d) Exclusions. 2016/FEB 2016/APR 2016/SEP 2017/JAN 2017/APR 2017/JUN 2017/JUN 2018/APR 2018/JULY 2019/JAN 2019/APR 2019/JUN 2019/JULY 2019/SEP 2020/JAN Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
+     "text_verbatim": "Describe the background and relevance of the International Convention on Civil Liability for Bunker Oil Pollution Damage, 2001. Define the following under Bunker Convention and explain how they differ from other similar Convention such as CLC’92. (a) Pollution damage; (b) Bunker oil; (c) Time limits for claims; (d) Exclusions. 2018/JULY 2019/JULY Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
      "printed_limbs": [
       "a",
       "b",
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/FEB",
+      "2016/APR",
+      "2016/SEP",
+      "2017/JAN",
+      "2017/APR",
+      "2017/JUN",
+      "2017/JUN",
+      "2018/APR",
+      "2019/JAN",
+      "2019/APR",
+      "2019/JUN",
+      "2019/SEP",
+      "2020/JAN",
+      "2020/OCT/Q3",
+      "2021/JAN/Q9"
+     ]
     }
    ]
   },
@@ -106,6 +173,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2021,
    "month": "February",
+   "month_num": 2,
    "sitting": "February 2021",
    "second_sitting": false,
    "printed_serial": "2102 EM",
@@ -117,9 +185,25 @@
     {
      "question_id": "QP2102-Q1",
      "q_no": "Q1",
-     "text_verbatim": "Discuss the capital, voyage and operating costs of ship operation and explain Chief Engineer’s role in optimizing them. What are the modern management principles used in Inventory control? 2015/FEB 2016/AUG 2016/SEP 2016/NOV 2017/JAN 2017/JAN 2017/SEP 2018/OCT 2018/OCT 2018/DEC 2019/FEB 2019/APR",
+     "text_verbatim": "Discuss the capital, voyage and operating costs of ship operation and explain Chief Engineer’s role in optimizing them. What are the modern management principles used in Inventory control?",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2015/FEB",
+      "2016/AUG",
+      "2016/SEP",
+      "2016/NOV",
+      "2017/JAN",
+      "2017/JAN",
+      "2017/SEP",
+      "2018/SR09",
+      "2018/OCT",
+      "2018/OCT",
+      "2018/DEC",
+      "2019/FEB",
+      "2019/APR",
+      "2021/FEB/Q1"
+     ]
     },
     {
      "question_id": "QP2102-Q2",
@@ -129,56 +213,104 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/FEB/Q2"
+     ]
     },
     {
      "question_id": "QP2102-Q3",
      "q_no": "Q3",
      "text_verbatim": "Assume a collision occurs between an oil tanker and a bulk carrier in an Indian port. (a)Discuss the convention under which the ship owners can be liable for shore clean-up and compensation costs assuming oil is spilt from both ships. (b)Explain whether the liability is \"strict\" and also exemptions available to both ship owners.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/FEB/Q3"
+     ]
     },
     {
      "question_id": "QP2102-Q4",
      "q_no": "Q4",
      "text_verbatim": "India, one of the world's five major ship recycling countries, has acceded to the IMO Hong Kong Convention, the treaty that will set global standards for safe and environmentally sound hip recycling. Discuss the key features of \"The Hong Kong International convention for the safe and environmentally sound Recycling of Ships''.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/FEB/Q4"
+     ]
     },
     {
      "question_id": "QP2102-Q5",
      "q_no": "Q5",
-     "text_verbatim": "Differentiate between annual, intermediate, renewal, damage and repair surveys. What are the purposes of each survey onboard? Also, enlist all statutory certificates carried onboard, their issuing authority, and the IMO Convention under which they are issued. 2019/DEC 2",
+     "text_verbatim": "Differentiate between annual, intermediate, renewal, damage and repair surveys. What are the purposes of each survey onboard? Also, enlist all statutory certificates carried onboard, their issuing authority, and the IMO Convention under which they are issued. 2",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/SR02",
+      "2010/SR08",
+      "2011/SR12",
+      "2012/SR02",
+      "2013/SR02",
+      "2019/DEC",
+      "2021/FEB/Q5"
+     ]
     },
     {
      "question_id": "QP2102-Q6",
      "q_no": "Q6",
-     "text_verbatim": "A. What are the principles of modern salvage law? B. What is General Average, C. Explain with context to General Average, i. Entitlement; ii. Artificial; iii. Adjustment; iv. Contestation 2012/MAR 2016/APR 2017/FEB 2017/DEC 2018/APR 2018/JULY 2019/JUN 2019/SEP 2019/NOV",
+     "text_verbatim": "A. What are the principles of modern salvage law? B. What is General Average, C. Explain with context to General Average, i. Entitlement; ii. Artificial; iii. Adjustment; iv. Contestation 2018/JULY",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2012/MAR",
+      "2016/APR",
+      "2017/FEB",
+      "2017/DEC",
+      "2018/APR",
+      "2019/JUN",
+      "2019/SEP",
+      "2019/NOV",
+      "2021/FEB/Q6"
+     ]
     },
     {
      "question_id": "QP2102-Q7",
      "q_no": "Q7",
-     "text_verbatim": "Socio cultural differences have been an accepted fact in major merchant ships around the globe. Explain how such differences generate inter personnel conflicts and effective safety management, how they can be resolved on board. 2019/DEC",
+     "text_verbatim": "Socio cultural differences have been an accepted fact in major merchant ships around the globe. Explain how such differences generate inter personnel conflicts and effective safety management, how they can be resolved on board.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/SR01",
+      "2010/SR09",
+      "2011/SR10",
+      "2019/DEC",
+      "2021/FEB/Q7"
+     ]
     },
     {
      "question_id": "QP2102-Q8",
      "q_no": "Q8",
-     "text_verbatim": "How many types of warranties are there in Marine Insurance? Give an example of each type with reference to a hull and machinery policy of insurance. 2018/JUN 2018/DEC",
+     "text_verbatim": "How many types of warranties are there in Marine Insurance? Give an example of each type with reference to a hull and machinery policy of insurance.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2012/SR02",
+      "2013/SR11",
+      "2018/JUN",
+      "2018/DEC",
+      "2021/FEB/Q8"
+     ]
     },
     {
      "question_id": "QP2102-Q9",
      "q_no": "Q9",
-     "text_verbatim": "Referring generally to a general Ballast Water Treatment (BWT) System, explain; a. Requirements related to construction and technical performance. b. Requirements related to onboard installation of the system. c. Special requirements for tankers and ships carrying dangerous chemicals. 2019/MAR 2019/NOV Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
+     "text_verbatim": "Referring generally to a general Ballast Water Treatment (BWT) System, explain; a. Requirements related to construction and technical performance. b. Requirements related to onboard installation of the system. c. Special requirements for tankers and ships carrying dangerous chemicals. Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2019/MAR",
+      "2019/NOV",
+      "2021/FEB/Q9"
+     ]
     }
    ]
   },
@@ -187,6 +319,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2021,
    "month": "March",
+   "month_num": 3,
    "sitting": "March 2021",
    "second_sitting": false,
    "printed_serial": "2103 EM",
@@ -203,7 +336,8 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2103-Q2",
@@ -213,58 +347,125 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2103-Q3",
      "q_no": "Q3",
-     "text_verbatim": "With respect to Energy Efficiency Design Index(EEDI) explain in detail the following; A. Required Energy Efficiency Design Index; B. Attained Energy Efficiency Design Index; 2013/OCT 2015/FEB 2017/JUL 2017/SEP",
+     "text_verbatim": "With respect to Energy Efficiency Design Index(EEDI) explain in detail the following; A. Required Energy Efficiency Design Index; B. Attained Energy Efficiency Design Index;",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2013/OCT",
+      "2015/FEB",
+      "2017/JUL",
+      "2017/SEP",
+      "2020/NOV/Q2",
+      "2020/DEC/Q3",
+      "2021/MAR/Q3"
+     ]
     },
     {
      "question_id": "QP2103-Q4",
      "q_no": "Q4",
-     "text_verbatim": "Explain the following maritime terms: - A. Charter Party; B. Freight; C. Bare Boat charter; D. Bill of Lading; E. Lay time; F. Demurrage and Off-hire. 2015/AUG 2017/OCT 2019/AUG",
+     "text_verbatim": "Explain the following maritime terms: - A. Charter Party; B. Freight; C. Bare Boat charter; D. Bill of Lading; E. Lay time; F. Demurrage and Off-hire.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2015/AUG",
+      "2017/OCT",
+      "2019/AUG",
+      "2020/NOV/Q7",
+      "2021/MAR/Q4"
+     ]
     },
     {
      "question_id": "QP2103-Q5",
      "q_no": "Q5",
-     "text_verbatim": "Illustrate the salient factors for “onboard training’ and standard of competence as laid out in STCW 95 Chapter III. Underline the specific roles a Chief Engineer needs to perform towards satisfactory training of engine room personnel under the existing and new Regulation. What will be the criteria for evaluating competence for onboard training by a Chief Engineer? 2011/FEB 2010/OCT 2010/AUG 2011/AUG 2015/AUG 2016/JUN 2017/OCT 2018/NOV 2019/FEB 2",
+     "text_verbatim": "Illustrate the salient factors for “onboard training’ and standard of competence as laid out in STCW 95 Chapter III. Underline the specific roles a Chief Engineer needs to perform towards satisfactory training of engine room personnel under the existing and new Regulation. What will be the criteria for evaluating competence for onboard training by a Chief Engineer? 2",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2011/FEB",
+      "2010/OCT",
+      "2010/AUG",
+      "2011/AUG",
+      "2015/AUG",
+      "2016/JUN",
+      "2017/OCT",
+      "2018/SR09",
+      "2018/NOV",
+      "2019/FEB",
+      "2021/MAR/Q5",
+      "2021/MAR/Q1",
+      "2021/MAR/Q1"
+     ]
     },
     {
      "question_id": "QP2103-Q6",
      "q_no": "Q6",
-     "text_verbatim": "Discuss the principles of Marine Insurance. Explain each of the principle with suitable examples. 2018/MAR 2019/MAR 2019/JUN 2019/JULY",
+     "text_verbatim": "Discuss the principles of Marine Insurance. Explain each of the principle with suitable examples. 2019/JULY",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2018/MAR",
+      "2019/MAR",
+      "2019/JUN",
+      "2021/MAR/Q6"
+     ]
     },
     {
      "question_id": "QP2103-Q7",
      "q_no": "Q7",
-     "text_verbatim": "Explain Abraham Maslow's theory of motivation. As chief engineer onboard, stress the issues you will address for lack of motivation, differences in attitude and to increase sense of competitiveness for better management and effective control? 2018/MAR 2019/MAR 2019/SEP 2019/NOV 2020/JAN",
+     "text_verbatim": "Explain Abraham Maslow's theory of motivation. As chief engineer onboard, stress the issues you will address for lack of motivation, differences in attitude and to increase sense of competitiveness for better management and effective control?",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2018/MAR",
+      "2019/MAR",
+      "2019/SEP",
+      "2019/NOV",
+      "2020/JAN",
+      "2021/MAR/Q7"
+     ]
     },
     {
      "question_id": "QP2103-Q8",
      "q_no": "Q8",
      "text_verbatim": "Discuss the additional risks of bulk carriers and tankers which have necessitated the enhanced survey programme (ESP) for these ship types. State the major requirements of inspections under the enhanced survey programme.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/JAN/Q5",
+      "2021/MAR/Q8"
+     ]
     },
     {
      "question_id": "QP2103-Q9",
      "q_no": "Q9",
-     "text_verbatim": "(a) Describe the background and relevance of the International Convention on Civil Liability for Bunker Oil Pollution Damage, 2001. (b)Define the following under Bunker Convention and explain how they differ from other similar Convention such as CLC’92. (i) Pollution damage (ii) Bunker oil (iii) Time limits for claims (iv) Exclusions. 2016/FEB 2016/APR 2016/SEP 2017/JAN 2017/APR 2017/JUN 2017/JUN 2018/APR 2018/JULY 2019/JAN 2019/APR 2019/JUN 2019/JULY 2019/SEP 2020/JAN Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
+     "text_verbatim": "(a) Describe the background and relevance of the International Convention on Civil Liability for Bunker Oil Pollution Damage, 2001. (b)Define the following under Bunker Convention and explain how they differ from other similar Convention such as CLC’92. (i) Pollution damage (ii) Bunker oil (iii) Time limits for claims (iv) Exclusions. 2018/JULY 2019/JULY Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/FEB",
+      "2016/APR",
+      "2016/SEP",
+      "2017/JAN",
+      "2017/APR",
+      "2017/JUN",
+      "2017/JUN",
+      "2018/APR",
+      "2019/JAN",
+      "2019/APR",
+      "2019/JUN",
+      "2019/SEP",
+      "2020/JAN",
+      "2020/OCT/Q3",
+      "2021/JAN/Q9"
+     ]
     }
    ]
   },
@@ -273,6 +474,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2021,
    "month": "April",
+   "month_num": 4,
    "sitting": "April 2021",
    "second_sitting": false,
    "printed_serial": "2104 EM",
@@ -284,48 +486,111 @@
     {
      "question_id": "QP2104-Q1",
      "q_no": "Q1",
-     "text_verbatim": "On a ship where you are employed as Chief Engineer, the vessel has UMS system for controlling engine room and a central scanning and data logging system for monitoring. Explain the special attention you will pay to the specific data and formulate a chart for condition monitoring. Highlight the tools in computer application you will use for making graphical representation of the salient points, which will enable trend analysis. 2010/DEC 2011/JAN 2010/NOV 2011/AUG 2014/JAN 2014/DEC 2015/MAR 2016/JUN 2018/FEB",
+     "text_verbatim": "On a ship where you are employed as Chief Engineer, the vessel has UMS system for controlling engine room and a central scanning and data logging system for monitoring. Explain the special attention you will pay to the specific data and formulate a chart for condition monitoring. Highlight the tools in computer application you will use for making graphical representation of the salient points, which will enable trend analysis.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/DEC",
+      "2011/JAN",
+      "2010/NOV",
+      "2011/AUG",
+      "2014/JAN",
+      "2014/DEC",
+      "2015/MAR",
+      "2016/JUN",
+      "2018/FEB",
+      "2021/APR/Q1"
+     ]
     },
     {
      "question_id": "QP2104-Q2",
      "q_no": "Q2",
-     "text_verbatim": "A. One of the objectives of UNCLOS is protection of marine environment and prevention of pollution. Define pollution as per UNCLOS and discuss the key features of obligations of coastal states in this regard. B. State the 3 main tiers of the oil pollution damage compensation conventions of the IMO. In each case elaborate one who is responsible for payment of compensation. Also, state the source of funds as well as certification required by ship under each tier. 2015/AUG 2015/NOV 2017/OCT",
+     "text_verbatim": "A. One of the objectives of UNCLOS is protection of marine environment and prevention of pollution. Define pollution as per UNCLOS and discuss the key features of obligations of coastal states in this regard. B. State the 3 main tiers of the oil pollution damage compensation conventions of the IMO. In each case elaborate one who is responsible for payment of compensation. Also, state the source of funds as well as certification required by ship under each tier.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2015/AUG",
+      "2015/NOV",
+      "2017/OCT",
+      "2021/APR/Q2"
+     ]
     },
     {
      "question_id": "QP2104-Q3",
      "q_no": "Q3",
-     "text_verbatim": "Explain the significance of propeller curves. Enumerate the safety margins in relation to the propeller operations. 2012/APR 2012/AUG 2013/APR 2013/OCT 2013/NOV 2014/MAR 2015/FEB 2015/JUN 2015/OCT 2017/APR 2017/SEP",
+     "text_verbatim": "Explain the significance of propeller curves. Enumerate the safety margins in relation to the propeller operations.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2012/APR",
+      "2012/AUG",
+      "2013/APR",
+      "2013/OCT",
+      "2013/NOV",
+      "2014/MAR",
+      "2015/FEB",
+      "2015/JUN",
+      "2015/OCT",
+      "2017/APR",
+      "2017/SEP",
+      "2021/APR/Q3"
+     ]
     },
     {
      "question_id": "QP2104-Q4",
      "q_no": "Q4",
-     "text_verbatim": "The initial IMO strategy for GHG reduction adopted at MEPC 72 is the first milestone set out in the roadmap for developing a comprehensive IMO strategy on reduction of GHG emissions from ships: (a) Define the objectives of this Initial Strategy. (b) State the levels of ambition identified in the Initial Strategy. (c) List out the small term, mid-term and long term candidate measures with possible timelines as discussed in the IMO Strategy for reduction of GHG emissions. 2019/APR 2019/JULY 2019/AUG 2019/OCT 2",
+     "text_verbatim": "The initial IMO strategy for GHG reduction adopted at MEPC 72 is the first milestone set out in the roadmap for developing a comprehensive IMO strategy on reduction of GHG emissions from ships: (a) Define the objectives of this Initial Strategy. (b) State the levels of ambition identified in the Initial Strategy. (c) List out the small term, mid-term and long term candidate measures with possible timelines as discussed in the IMO Strategy for reduction of GHG emissions. 2019/JULY 2",
      "printed_limbs": [
       "a",
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2019/APR",
+      "2019/AUG",
+      "2019/OCT",
+      "2020/MAR/Q6",
+      "2020/OCT/Q5",
+      "2020/NOV/Q6",
+      "2021/APR/Q4"
+     ]
     },
     {
      "question_id": "QP2104-Q5",
      "q_no": "Q5",
-     "text_verbatim": "A. What are P&I clubs? Describe how P&I clubs collect fund from ship-owners; B. What are the risks that are covered under the term “protection” and “indemnity?” C. State briefly what are the advantages of the formation of a P&I club in India? 2010/JUN 2010/JUL 2010/FEB 2011/APR 2011/APR 2012/JUN 2014/OCT 2016/APR 2018/APR 2018/JUL 2019/JUN",
+     "text_verbatim": "A. What are P&I clubs? Describe how P&I clubs collect fund from ship-owners; B. What are the risks that are covered under the term “protection” and “indemnity?” C. State briefly what are the advantages of the formation of a P&I club in India?",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/JUN",
+      "2010/JUL",
+      "2010/FEB",
+      "2011/APR",
+      "2011/APR",
+      "2012/JUN",
+      "2014/OCT",
+      "2016/APR",
+      "2018/APR",
+      "2018/JUL",
+      "2019/JUN",
+      "2021/APR/Q5"
+     ]
     },
     {
      "question_id": "QP2104-Q6",
      "q_no": "Q6",
-     "text_verbatim": "During inspection of propeller in the dry dock, a surface crack has been noticed on one of the blades. State the steps taking by you as chief engineer for successful handling of the situation. Also, if some surface cracks are noticed on the keyway of a tail-end shaft, state the steps taken by you for tackling the problem. Explain the effects in case the cracks, as stated, are not dealt with at the proper time. 2011/MAR 2014/DEC 2015/MAR 2015/JUL 2018/FEB",
+     "text_verbatim": "During inspection of propeller in the dry dock, a surface crack has been noticed on one of the blades. State the steps taking by you as chief engineer for successful handling of the situation. Also, if some surface cracks are noticed on the keyway of a tail-end shaft, state the steps taken by you for tackling the problem. Explain the effects in case the cracks, as stated, are not dealt with at the proper time.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2011/MAR",
+      "2014/DEC",
+      "2015/MAR",
+      "2015/JUL",
+      "2018/FEB",
+      "2021/APR/Q6"
+     ]
     },
     {
      "question_id": "QP2104-Q7",
@@ -334,115 +599,39 @@
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/APR/Q7"
+     ]
     },
     {
      "question_id": "QP2104-Q8",
      "q_no": "Q8",
-     "text_verbatim": "To operate engines in compliance with the new IMO 2020 Sulphur limits and to prepare the engine and auxiliaries for the changes in fuel characteristics, is a challenge for owners, operators and crews. From the Chief engineer’s perspective, explain the following briefly: (a) Cylinder lubrication strategies; (b) Compatibility issues between fuel bunkered at differed ports. (c) Procedures employed for preparing fuel oil tanks onboard. 2019/SEP 2019/OCT 2020/JAN",
+     "text_verbatim": "To operate engines in compliance with the new IMO 2020 Sulphur limits and to prepare the engine and auxiliaries for the changes in fuel characteristics, is a challenge for owners, operators and crews. From the Chief engineer’s perspective, explain the following briefly: (a) Cylinder lubrication strategies; (b) Compatibility issues between fuel bunkered at differed ports. (c) Procedures employed for preparing fuel oil tanks onboard.",
      "printed_limbs": [
       "a",
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2019/SEP",
+      "2019/OCT",
+      "2020/JAN",
+      "2020/MAR/Q3",
+      "2020/NOV/Q5",
+      "2021/APR/Q8"
+     ]
     },
     {
      "question_id": "QP2104-Q9",
      "q_no": "Q9",
      "text_verbatim": "An Indian flag ship has grounded off the coast of India and the owners have abandoned the property. In accordance with the provisions under the merchant Shipping Act, what steps should be initiated and who should initiate such steps for the safety of the marine property and environment. Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
      "printed_limbs": [],
-     "printed_marks": []
-    }
-   ]
-  },
-  {
-   "paper_id": "QP2107",
-   "status": "INTELLIGENCE_ONLY",
-   "year": 2021,
-   "month": "July",
-   "sitting": "July 2021",
-   "second_sitting": false,
-   "printed_serial": "2107 EM",
-   "source_pages": 2,
-   "total_marks": 100,
-   "time_allowed": "3 HOURS",
-   "question_count": 9,
-   "questions": [
-    {
-     "question_id": "QP2107-Q1",
-     "q_no": "Q1",
-     "text_verbatim": "The vessel in which you are the Chief Engineer is about to be laid up for 3 months for commercial reasons. All equipment and machinery on board require to be preserved during the lay-up period for re- commissioning when required. Describe the actions you will take as Chief Engineer to prepare the Main Propulsion diesel engine for preserving during the lay-up period. 2018/OCT 2018/DEC 2019/JAN 2019/FEB 2019/AUG 2021/JULY/Q1",
-     "printed_limbs": [],
-     "printed_marks": []
-    },
-    {
-     "question_id": "QP2107-Q2",
-     "q_no": "Q2",
-     "text_verbatim": "A. What are the various statutory Certificates carried on board oil tanker, and their validity? Mention the Conventions, under which they are issued, giving the reference of their Conventions. B. Explain Harmonization of Statutory Certificates under the SOLAS 74/88 Convention. If a period of a statutory Certificate has just expired and a port is having inadequate survey facility, state the actions you will take in compliance with the provisions of SOLAS. 2021/JULY/Q2",
-     "printed_limbs": [],
-     "printed_marks": []
-    },
-    {
-     "question_id": "QP2107-Q3",
-     "q_no": "Q3",
-     "text_verbatim": "What are the principal reasons responsible for compounding of machinery vibration in connection with operation of a long stroke diesel engines and associated machinery arrangements? What are the key factors for excitations generated by the engines? 2010/JUN 2010/NOV 2011/JAN 2012/JUN 2012/NOV 2014/MAR 2014/JUN 2014/JUL 2015/JAN 2015/MAR 2015/JUN 2015/JUL 2015/SEP 2016/JUN 2016/JAN2 2014/OCT 2017/JUL 2018/FEB 2021/JULY/Q3",
-     "printed_limbs": [],
-     "printed_marks": []
-    },
-    {
-     "question_id": "QP2107-Q4",
-     "q_no": "Q4",
-     "text_verbatim": "The initial IMO strategy for GHG reduction adopted at MEPC 72 is the first milestone set out in the roadmap for developing a comprehensive IMO strategy on reduction of GHG emissions from ships: (a) Define the objectives of this Initial Strategy. (b) State the levels of ambition identified in the Initial Strategy. (c) List out the small term, mid-term and long term candidate measures with possible timelines as discussed in the IMO Strategy for reduction of GHG emissions. 2019/APR 2019/JULY 2019/AUG 2019/OCT 2021/JULY/Q4 2",
-     "printed_limbs": [
-      "a",
-      "b",
-      "c"
-     ],
-     "printed_marks": []
-    },
-    {
-     "question_id": "QP2107-Q5",
-     "q_no": "Q5",
-     "text_verbatim": "(a) Discuss, in detail. the main function of a Bill or Lading and explain the reasons for a Bill of lading being made out 'to order' instead of to a named consignee. (b) A Bill of Lading is said to be evidence of the contract of carriage of goods. Discuss any circumstances when a Bill of Lading may become the actual contract of carriage. 2016/MAR 2021/JULY/Q5",
-     "printed_limbs": [
-      "a",
-      "b"
-     ],
-     "printed_marks": []
-    },
-    {
-     "question_id": "QP2107-Q6",
-     "q_no": "Q6",
-     "text_verbatim": "Name the present ISO standards for Marine Fuel and explain the silent feathers of it. With reference to fuel oil analysis report, explain the relevant corrective action which can be initiated against various adverse observations in it. 2016/MAR 2021/JULY/Q6",
-     "printed_limbs": [],
-     "printed_marks": []
-    },
-    {
-     "question_id": "QP2107-Q7",
-     "q_no": "Q7",
-     "text_verbatim": "Elaborate the influence of a charter on operation of propulsion and other ship board machineries during a voyage. After taking over ship as C/E you have been informed that ship is on time charter and has a history of unforeseen auxiliary machinery breakdown at sea. State the different options you have and actions you would take as C/E prior to the commencement of voyage. 2010/JUL 2011/SEP 2011/AUG 2011/OCT 2012/JUL 2012/OCT 2012/DEC 2015/JAN 2016/JAN 2016/JUL 2018/JAN 2018/MAR 2018/AUG 2018/NOV 2021/JULY/Q7",
-     "printed_limbs": [],
-     "printed_marks": []
-    },
-    {
-     "question_id": "QP2107-Q8",
-     "q_no": "Q8",
-     "text_verbatim": "Discuss a generic model of Formal Safety Assessment (FSA) promulgated by the IMO, with brief explanation on the following terms: (a) Cost effective indices (b) Human Reliability Analysis (HRA) (c) Extended Task Analysis (XTA) (d) Technique for Human Error rate Prediction (THERP) (e) Fault & Event Tree Analysis (f) Failure Mode and Effect Analysis (FMEA). 2016/MAR 2021/JULY/Q8",
-     "printed_limbs": [
-      "a",
-      "b",
-      "c",
-      "d"
-     ],
-     "printed_marks": []
-    },
-    {
-     "question_id": "QP2107-Q9",
-     "q_no": "Q9",
-     "text_verbatim": "List the objectives of an ISM code. How an internal audit helps in External Audit of a vessel? You have been asked to carry out an internal audit of the deck department on board your vessel, explain how you will proceed in carrying out effective internal audit. 2018/AUG 2018/NOV 2021/JULY/Q9 Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
-     "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/APR/Q9"
+     ]
     }
    ]
   },
@@ -451,6 +640,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2021,
    "month": "July",
+   "month_num": 7,
    "sitting": "July 2021",
    "second_sitting": true,
    "printed_serial": null,
@@ -462,11 +652,19 @@
     {
      "question_id": "QP2107-S2-Q1",
      "q_no": "Q1",
-     "text_verbatim": "Periodical Lubricating Oil Analysis, its correct interpretation and corrective measures are of critical significance for the maintenance of marine machineries. With reference to the modern analysis techniques employed for the condition of L.O, discuss the following: A). Elemental (Spectrometric) Analysis B). Fourier Transform Infrared (FTIR) Spectroscopy C). Particle Count D). Base Number Vs Acid Number 2016/FEB 2016/SEP 2017/JAN 2017/FEB 2017/DEC (M)",
+     "text_verbatim": "Periodical Lubricating Oil Analysis, its correct interpretation and corrective measures are of critical significance for the maintenance of marine machineries. With reference to the modern analysis techniques employed for the condition of L.O, discuss the following: A). Elemental (Spectrometric) Analysis B). Fourier Transform Infrared (FTIR) Spectroscopy C). Particle Count D). Base Number Vs Acid Number (M)",
      "printed_limbs": [
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/FEB",
+      "2016/SEP",
+      "2017/JAN",
+      "2017/FEB",
+      "2017/DEC",
+      "2021/JUL/Q1"
+     ]
     },
     {
      "question_id": "QP2107-S2-Q2",
@@ -475,62 +673,296 @@
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2012/SR07",
+      "2015/SR11",
+      "2021/JUL/Q2"
+     ]
     },
     {
      "question_id": "QP2107-S2-Q3",
      "q_no": "Q3",
-     "text_verbatim": "With reference to port State control inspection; (A) What are \"clear grounds\" and \"ISM related deficiencies\" for a Port State Control Officer to conduct a more detailed inspection of the ship? (B) List out five deficiencies, which may lead to detention of the vessel. Also, enumerate the cause of such deficiency and preventive action you, as Chief Engineer, will take to avoid re-occurrence of such detainable deficiencies. 2017/FEB 2017/FEB 2017/JUN 2017/DEC 2018/JULY 2019/JUN (M)",
+     "text_verbatim": "With reference to port State control inspection; (A) What are \"clear grounds\" and \"ISM related deficiencies\" for a Port State Control Officer to conduct a more detailed inspection of the ship? (B) List out five deficiencies, which may lead to detention of the vessel. Also, enumerate the cause of such deficiency and preventive action you, as Chief Engineer, will take to avoid re-occurrence of such detainable deficiencies. 2018/JULY (M)",
      "printed_limbs": [
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2017/FEB",
+      "2017/FEB",
+      "2017/JUN",
+      "2017/DEC",
+      "2018/SR04",
+      "2019/JUN",
+      "2021/JUL/Q3"
+     ]
     },
     {
      "question_id": "QP2107-S2-Q4",
      "q_no": "Q4",
-     "text_verbatim": "(A) Discuss what you understand by directional stability and manoeuvring. How are these attributes provided in a ship? 2 (B) Using typical engine power versus engine speed diagram and propeller demand curves, discuss the relation between the maximum rated output of the propulsion plant and the power for which the propeller is designed. 2017/FEB 2017/DEC",
+     "text_verbatim": "(A) Discuss what you understand by directional stability and manoeuvring. How are these attributes provided in a ship? 2 (B) Using typical engine power versus engine speed diagram and propeller demand curves, discuss the relation between the maximum rated output of the propulsion plant and the power for which the propeller is designed.",
      "printed_limbs": [
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2017/FEB",
+      "2017/DEC",
+      "2021/JUL/Q4"
+     ]
     },
     {
      "question_id": "QP2107-S2-Q5",
      "q_no": "Q5",
-     "text_verbatim": "A. What are P&I clubs? Describe how P&I clubs collect fund from ship-owners; B. What are the risks that are covered under the term “protection” and “indemnity?” 2010/JUN 2010/JUL 2010/FEB 2011/APR 2011/APR 2012/JUN 2014/OCT 2016/APR 2018/APR 2018/JUL 2019/JUN (M)",
+     "text_verbatim": "A. What are P&I clubs? Describe how P&I clubs collect fund from ship-owners; B. What are the risks that are covered under the term “protection” and “indemnity?” (M)",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/JUN",
+      "2010/JUL",
+      "2010/FEB",
+      "2011/APR",
+      "2011/APR",
+      "2012/JUN",
+      "2014/OCT",
+      "2016/APR",
+      "2018/APR",
+      "2018/JUL",
+      "2019/JUN",
+      "2021/APR/Q5",
+      "2021/JUL/Q5"
+     ]
     },
     {
      "question_id": "QP2107-S2-Q6",
      "q_no": "Q6",
-     "text_verbatim": "Elaborate the influence of a charter on operation of propulsion and other ship board machineries during a voyage. After taking over ship as Chief Engineer you have been informed that ship is on time charter and has a history of unforeseen auxiliary machinery breakdown at sea. State the different options you have and actions you would take as Chief Engineer prior to the commencement of voyage. 2010/JUL 2011/SEP 2011/AUG 2011/OCT 2012/JUL 2012/OCT 2012/DEC 2015/JAN 2016/JAN 2016/JUL 2018/JAN 2018/MAR 2018/AUG 2018/NOV 2021/JULY/Q7 2021/JULY/Q6(M)",
+     "text_verbatim": "Elaborate the influence of a charter on operation of propulsion and other ship board machineries during a voyage. After taking over ship as Chief Engineer you have been informed that ship is on time charter and has a history of unforeseen auxiliary machinery breakdown at sea. State the different options you have and actions you would take as Chief Engineer prior to the commencement of voyage. 2021/JULY/Q7 2021/JULY/Q6(M)",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/JUL",
+      "2011/SEP",
+      "2011/AUG",
+      "2011/OCT",
+      "2012/JUL",
+      "2012/OCT",
+      "2012/DEC",
+      "2015/JAN",
+      "2016/JAN",
+      "2016/JUL",
+      "2018/JAN",
+      "2018/MAR",
+      "2018/AUG",
+      "2018/NOV",
+      "2020/DEC/Q2"
+     ]
     },
     {
      "question_id": "QP2107-S2-Q7",
      "q_no": "Q7",
-     "text_verbatim": "With the introduction of new generation of super-long stroke engines and changed process parameters triggered by environmental compliance rules, “Cold Corrosion” of cylinder liners has grown to become a major issue for the latest generation of two-stroke engines. Discuss the causes and mitigation measures, stressing on the following: A. Increased Jacket Cooling Water Temperatures Systems; B. New Cylinder Liner designs; C. New Cylinder Lubricators. 2016/APR 2017/JUN 2021/JULY/Q7(M)",
+     "text_verbatim": "With the introduction of new generation of super-long stroke engines and changed process parameters triggered by environmental compliance rules, “Cold Corrosion” of cylinder liners has grown to become a major issue for the latest generation of two-stroke engines. Discuss the causes and mitigation measures, stressing on the following: A. Increased Jacket Cooling Water Temperatures Systems; B. New Cylinder Liner designs; C. New Cylinder Lubricators. 2021/JULY/Q7(M)",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/APR",
+      "2017/JUN"
+     ]
     },
     {
      "question_id": "QP2107-S2-Q8",
      "q_no": "Q8",
      "text_verbatim": "Elaborate the influence of a charter on operation of propulsion and other ship board machineries during a voyage. After taking over ship as Chief Engineer you have been informed that ship is on time charter and has a history of unforeseen auxiliary machinery breakdown at sea. State the different options you have and actions you would take as Chief Engineer prior to the commencement of voyage. Q6 & Q8 are same",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2107-S2-Q9",
      "q_no": "Q9",
-     "text_verbatim": "A. What are the principles of modern salvage law? B. What is General Average, C. Explain with context to General Average, i. Entitlement; ii. Artificial; iii. Adjustment; iv. Contestation 2012/MAR 2016/APR 2017/FEB 2017/DEC 2018/APR 2018/JULY 2019/JUN 2019/SEP 2019/NOV (M) Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
+     "text_verbatim": "A. What are the principles of modern salvage law? B. What is General Average, C. Explain with context to General Average, i. Entitlement; ii. Artificial; iii. Adjustment; iv. Contestation 2018/JULY (M) Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2012/MAR",
+      "2016/APR",
+      "2017/FEB",
+      "2017/DEC",
+      "2018/APR",
+      "2019/JUN",
+      "2019/SEP",
+      "2019/NOV",
+      "2021/FEB/Q6",
+      "2021/JUL/Q9"
+     ]
+    }
+   ]
+  },
+  {
+   "paper_id": "QP2107",
+   "status": "INTELLIGENCE_ONLY",
+   "year": 2021,
+   "month": "July",
+   "month_num": 7,
+   "sitting": "July 2021",
+   "second_sitting": false,
+   "printed_serial": "2107 EM",
+   "source_pages": 2,
+   "total_marks": 100,
+   "time_allowed": "3 HOURS",
+   "question_count": 9,
+   "questions": [
+    {
+     "question_id": "QP2107-Q1",
+     "q_no": "Q1",
+     "text_verbatim": "The vessel in which you are the Chief Engineer is about to be laid up for 3 months for commercial reasons. All equipment and machinery on board require to be preserved during the lay-up period for re- commissioning when required. Describe the actions you will take as Chief Engineer to prepare the Main Propulsion diesel engine for preserving during the lay-up period. 2021/JULY/Q1",
+     "printed_limbs": [],
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2018/SR09",
+      "2018/OCT",
+      "2018/DEC",
+      "2019/JAN",
+      "2019/FEB",
+      "2019/AUG",
+      "2020/OCT/Q9",
+      "2021/JAN/Q4"
+     ]
+    },
+    {
+     "question_id": "QP2107-Q2",
+     "q_no": "Q2",
+     "text_verbatim": "A. What are the various statutory Certificates carried on board oil tanker, and their validity? Mention the Conventions, under which they are issued, giving the reference of their Conventions. B. Explain Harmonization of Statutory Certificates under the SOLAS 74/88 Convention. If a period of a statutory Certificate has just expired and a port is having inadequate survey facility, state the actions you will take in compliance with the provisions of SOLAS. 2021/JULY/Q2",
+     "printed_limbs": [],
+     "printed_marks": [],
+     "host_recurrence_hint": []
+    },
+    {
+     "question_id": "QP2107-Q3",
+     "q_no": "Q3",
+     "text_verbatim": "What are the principal reasons responsible for compounding of machinery vibration in connection with operation of a long stroke diesel engines and associated machinery arrangements? What are the key factors for excitations generated by the engines? 2016/JAN2 2021/JULY/Q3",
+     "printed_limbs": [],
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/JUN",
+      "2010/NOV",
+      "2011/JAN",
+      "2012/JUN",
+      "2012/NOV",
+      "2014/MAR",
+      "2014/JUN",
+      "2014/JUL",
+      "2015/JAN",
+      "2015/MAR",
+      "2015/JUN",
+      "2015/JUL",
+      "2015/SEP",
+      "2016/JUN",
+      "2014/OCT",
+      "2017/JUL",
+      "2018/FEB"
+     ]
+    },
+    {
+     "question_id": "QP2107-Q4",
+     "q_no": "Q4",
+     "text_verbatim": "The initial IMO strategy for GHG reduction adopted at MEPC 72 is the first milestone set out in the roadmap for developing a comprehensive IMO strategy on reduction of GHG emissions from ships: (a) Define the objectives of this Initial Strategy. (b) State the levels of ambition identified in the Initial Strategy. (c) List out the small term, mid-term and long term candidate measures with possible timelines as discussed in the IMO Strategy for reduction of GHG emissions. 2019/JULY 2021/JULY/Q4 2",
+     "printed_limbs": [
+      "a",
+      "b",
+      "c"
+     ],
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2019/APR",
+      "2019/AUG",
+      "2019/OCT",
+      "2020/MAR/Q6",
+      "2020/OCT/Q5",
+      "2020/NOV/Q6",
+      "2021/APR/Q4"
+     ]
+    },
+    {
+     "question_id": "QP2107-Q5",
+     "q_no": "Q5",
+     "text_verbatim": "(a) Discuss, in detail. the main function of a Bill or Lading and explain the reasons for a Bill of lading being made out 'to order' instead of to a named consignee. (b) A Bill of Lading is said to be evidence of the contract of carriage of goods. Discuss any circumstances when a Bill of Lading may become the actual contract of carriage. 2021/JULY/Q5",
+     "printed_limbs": [
+      "a",
+      "b"
+     ],
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/MAR"
+     ]
+    },
+    {
+     "question_id": "QP2107-Q6",
+     "q_no": "Q6",
+     "text_verbatim": "Name the present ISO standards for Marine Fuel and explain the silent feathers of it. With reference to fuel oil analysis report, explain the relevant corrective action which can be initiated against various adverse observations in it. 2021/JULY/Q6",
+     "printed_limbs": [],
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/MAR",
+      "2018/SR09",
+      "2020/OCT/Q8"
+     ]
+    },
+    {
+     "question_id": "QP2107-Q7",
+     "q_no": "Q7",
+     "text_verbatim": "Elaborate the influence of a charter on operation of propulsion and other ship board machineries during a voyage. After taking over ship as C/E you have been informed that ship is on time charter and has a history of unforeseen auxiliary machinery breakdown at sea. State the different options you have and actions you would take as C/E prior to the commencement of voyage. 2021/JULY/Q7",
+     "printed_limbs": [],
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/JUL",
+      "2011/SEP",
+      "2011/AUG",
+      "2011/OCT",
+      "2012/JUL",
+      "2012/OCT",
+      "2012/DEC",
+      "2015/JAN",
+      "2016/JAN",
+      "2016/JUL",
+      "2018/JAN",
+      "2018/MAR",
+      "2018/AUG",
+      "2018/NOV",
+      "2020/DEC/Q2"
+     ]
+    },
+    {
+     "question_id": "QP2107-Q8",
+     "q_no": "Q8",
+     "text_verbatim": "Discuss a generic model of Formal Safety Assessment (FSA) promulgated by the IMO, with brief explanation on the following terms: (a) Cost effective indices (b) Human Reliability Analysis (HRA) (c) Extended Task Analysis (XTA) (d) Technique for Human Error rate Prediction (THERP) (e) Fault & Event Tree Analysis (f) Failure Mode and Effect Analysis (FMEA). 2021/JULY/Q8",
+     "printed_limbs": [
+      "a",
+      "b",
+      "c",
+      "d"
+     ],
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/MAR"
+     ]
+    },
+    {
+     "question_id": "QP2107-Q9",
+     "q_no": "Q9",
+     "text_verbatim": "List the objectives of an ISM code. How an internal audit helps in External Audit of a vessel? You have been asked to carry out an internal audit of the deck department on board your vessel, explain how you will proceed in carrying out effective internal audit. 2021/JULY/Q9 Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
+     "printed_limbs": [],
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/SR02",
+      "2010/SR03",
+      "2011/SR06",
+      "2012/SR09",
+      "2018/AUG",
+      "2018/NOV"
+     ]
     }
    ]
   },
@@ -539,6 +971,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2021,
    "month": "August",
+   "month_num": 8,
    "sitting": "August 2021",
    "second_sitting": false,
    "printed_serial": "2108 EM",
@@ -552,72 +985,155 @@
      "q_no": "Q1",
      "text_verbatim": "Write short notes on Casualty Investigation Code and IMO Member state audit scheme.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2020/DEC/Q1",
+      "2021/AUG/Q1"
+     ]
     },
     {
      "question_id": "QP2108-Q2",
      "q_no": "Q2",
-     "text_verbatim": "Periodical Lubricating Oil Analysis, its correct interpretation and corrective measures are of critical significance for the maintenance of marine machineries. With reference to the modern analysis techniques employed for the condition of L.O, discuss the following: A). Elemental (Spectrometric) Analysis B). Fourier Transform Infrared (FTIR) Spectroscopy C). Particle Count D). Base Number Vs Acid Number 2016/FEB 2016/SEP 2017/JAN 2017/FEB 2017/DEC",
+     "text_verbatim": "Periodical Lubricating Oil Analysis, its correct interpretation and corrective measures are of critical significance for the maintenance of marine machineries. With reference to the modern analysis techniques employed for the condition of L.O, discuss the following: A). Elemental (Spectrometric) Analysis B). Fourier Transform Infrared (FTIR) Spectroscopy C). Particle Count D). Base Number Vs Acid Number",
      "printed_limbs": [
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/FEB",
+      "2016/SEP",
+      "2017/JAN",
+      "2017/FEB",
+      "2017/DEC",
+      "2021/JUL/Q1",
+      "2021/AUG/Q2"
+     ]
     },
     {
      "question_id": "QP2108-Q3",
      "q_no": "Q3",
      "text_verbatim": "India, one of the world's five major ship recycling countries, has acceded to the IMO Hong Kong Convention, the treaty that will set global standards for safe and environmentally sound hip recycling. Discuss the key features of \"The Hong Kong International convention for the safe and environmentally sound Recycling of Ships''.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/FEB/Q4",
+      "2021/AUG/Q3"
+     ]
     },
     {
      "question_id": "QP2108-Q4",
      "q_no": "Q4",
-     "text_verbatim": "(A) Discuss what you understand by directional stability and manoeuvring. How are these attributes provided in a ship? (B) Using typical engine power versus engine speed diagram and propeller demand curves, discuss the relation between the maximum rated output of the propulsion plant and the power for which the propeller is designed. 2017/FEB 2017/DEC",
+     "text_verbatim": "(A) Discuss what you understand by directional stability and manoeuvring. How are these attributes provided in a ship? (B) Using typical engine power versus engine speed diagram and propeller demand curves, discuss the relation between the maximum rated output of the propulsion plant and the power for which the propeller is designed.",
      "printed_limbs": [
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2017/FEB",
+      "2017/DEC",
+      "2021/JUL/Q4",
+      "2021/AUG/Q4"
+     ]
     },
     {
      "question_id": "QP2108-Q5",
      "q_no": "Q5",
-     "text_verbatim": "A. What are P&I clubs? Describe how P&I clubs collect fund from ship-owners; B. What are the risks that are covered under the term “protection” and “indemnity?” 2010/JUN 2010/JUL 2010/FEB 2011/APR 2011/APR 2012/JUN 2014/OCT 2016/APR 2018/APR 2018/JUL 2019/JUN 2",
+     "text_verbatim": "A. What are P&I clubs? Describe how P&I clubs collect fund from ship-owners; B. What are the risks that are covered under the term “protection” and “indemnity?” 2",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/JUN",
+      "2010/JUL",
+      "2010/FEB",
+      "2011/APR",
+      "2011/APR",
+      "2012/JUN",
+      "2014/OCT",
+      "2016/APR",
+      "2018/APR",
+      "2018/JUL",
+      "2019/JUN",
+      "2021/APR/Q5",
+      "2021/JUL/Q5",
+      "2021/AUG/Q5"
+     ]
     },
     {
      "question_id": "QP2108-Q6",
      "q_no": "Q6",
-     "text_verbatim": "(a) Describe the background and relevance of the International Convention on Civil Liability for Bunker Oil Pollution Damage, 2001. (b)Define the following under Bunker Convention and explain how they differ from other similar Convention such as CLC’92. (i) Pollution damage (ii) Bunker oil (iii) Time limits for claims (iv) Exclusions. 2016/FEB 2016/APR 2016/SEP 2017/JAN 2017/APR 2017/JUN 2017/JUN 2018/APR 2018/JULY 2019/JAN 2019/APR 2019/JUN 2019/JULY 2019/SEP 2020/JAN",
+     "text_verbatim": "(a) Describe the background and relevance of the International Convention on Civil Liability for Bunker Oil Pollution Damage, 2001. (b)Define the following under Bunker Convention and explain how they differ from other similar Convention such as CLC’92. (i) Pollution damage (ii) Bunker oil (iii) Time limits for claims (iv) Exclusions. 2018/JULY 2019/JULY",
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/FEB",
+      "2016/APR",
+      "2016/SEP",
+      "2017/JAN",
+      "2017/APR",
+      "2017/JUN",
+      "2017/JUN",
+      "2018/APR",
+      "2019/JAN",
+      "2019/APR",
+      "2019/JUN",
+      "2019/SEP",
+      "2020/JAN",
+      "2020/OCT/Q3",
+      "2021/JAN/Q9",
+      "2021/AUG/Q6"
+     ]
     },
     {
      "question_id": "QP2108-Q7",
      "q_no": "Q7",
      "text_verbatim": "A ship sustained damages on hull while berthing. As a chief engineer officer of this ship, write a dry dock specification for the repair of the following damage that has occurred, stating what factors has to be considered when casting the repairs. Your inspection revealed that on port side there is a damage to shell plating. You observed a deep dent on shell plating of 20 mm thick for approximately 2 square meter. This shell plating has to be removed and replacing along with the relevant damaged stiffeners which have been setup.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/AUG/Q7"
+     ]
     },
     {
      "question_id": "QP2108-Q8",
      "q_no": "Q8",
-     "text_verbatim": "Elaborate the influence of a charter on operation of propulsion and other ship board machineries during a voyage. After taking over ship as Chief Engineer you have been informed that ship is on time charter and has a history of unforeseen auxiliary machinery breakdown at sea. State the different options you have and actions you would take as Chief Engineer prior to the commencement of voyage. 2010/JUL 2011/SEP 2011/AUG 2011/OCT 2012/JUL 2012/OCT 2012/DEC 2015/JAN 2016/JAN 2016/JUL 2018/JAN 2018/MAR 2018/AUG 2018/NOV 2021/JULY/Q7 2021/JULY/Q6(M)",
+     "text_verbatim": "Elaborate the influence of a charter on operation of propulsion and other ship board machineries during a voyage. After taking over ship as Chief Engineer you have been informed that ship is on time charter and has a history of unforeseen auxiliary machinery breakdown at sea. State the different options you have and actions you would take as Chief Engineer prior to the commencement of voyage. 2021/JULY/Q7 2021/JULY/Q6(M)",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/JUL",
+      "2011/SEP",
+      "2011/AUG",
+      "2011/OCT",
+      "2012/JUL",
+      "2012/OCT",
+      "2012/DEC",
+      "2015/JAN",
+      "2016/JAN",
+      "2016/JUL",
+      "2018/JAN",
+      "2018/MAR",
+      "2018/AUG",
+      "2018/NOV",
+      "2020/DEC/Q2",
+      "2021/AUG/Q8"
+     ]
     },
     {
      "question_id": "QP2108-Q9",
      "q_no": "Q9",
-     "text_verbatim": "A) What is meant by Strategic Management? Explain the significance of strategic management in working of an organization. B). Define strategy and tactics. Differentiate between strategy and tactic giving examples 2016/JUL Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
+     "text_verbatim": "A) What is meant by Strategic Management? Explain the significance of strategic management in working of an organization. B). Define strategy and tactics. Differentiate between strategy and tactic giving examples Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/JUL",
+      "2020/DEC/Q5",
+      "2021/AUG/Q9"
+     ]
     }
    ]
   },
@@ -626,6 +1142,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2021,
    "month": "September",
+   "month_num": 9,
    "sitting": "September 2021",
    "second_sitting": false,
    "printed_serial": "2109 EM",
@@ -637,9 +1154,20 @@
     {
      "question_id": "QP2109-Q1",
      "q_no": "Q1",
-     "text_verbatim": "The vessel in which you are the Chief Engineer is about to be laid up for 3 months for commercial reasons. All equipment and machinery on board require to be preserved during the lay-up period for re- commissioning when required. Describe the actions you will take as Chief Engineer to prepare the Main Propulsion diesel engine for preserving during the lay-up period. 2018/OCT 2018/DEC 2019/JAN 2019/FEB 2019/AUG 2021/JULY/Q1",
+     "text_verbatim": "The vessel in which you are the Chief Engineer is about to be laid up for 3 months for commercial reasons. All equipment and machinery on board require to be preserved during the lay-up period for re- commissioning when required. Describe the actions you will take as Chief Engineer to prepare the Main Propulsion diesel engine for preserving during the lay-up period. 2021/JULY/Q1",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2018/SR09",
+      "2018/OCT",
+      "2018/DEC",
+      "2019/JAN",
+      "2019/FEB",
+      "2019/AUG",
+      "2020/OCT/Q9",
+      "2021/JAN/Q4",
+      "2021/SEP/Q1"
+     ]
     },
     {
      "question_id": "QP2109-Q2",
@@ -649,7 +1177,11 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/FEB/Q2",
+      "2021/SEP/Q2"
+     ]
     },
     {
      "question_id": "QP2109-Q3",
@@ -659,27 +1191,46 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/SEP/Q3"
+     ]
     },
     {
      "question_id": "QP2109-Q4",
      "q_no": "Q4",
-     "text_verbatim": "Name the present ISO standards for Marine Fuel and explain the salient features of it. With reference to fuel oil analysis report, explain the relevant corrective action which can be initiated against various adverse observations in it. (b) explain the salient features and importance of Bunker Delivery Note. 2016/MAR 2021/JULY/Q6",
+     "text_verbatim": "Name the present ISO standards for Marine Fuel and explain the salient features of it. With reference to fuel oil analysis report, explain the relevant corrective action which can be initiated against various adverse observations in it. (b) explain the salient features and importance of Bunker Delivery Note. 2021/JULY/Q6",
      "printed_limbs": [
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/MAR",
+      "2018/SR09",
+      "2020/OCT/Q8",
+      "2021/SEP/Q4"
+     ]
     },
     {
      "question_id": "QP2109-Q5",
      "q_no": "Q5",
-     "text_verbatim": "The initial IMO strategy for GHG reduction adopted at MEPC 72 is the first milestone set out in the roadmap for developing a comprehensive IMO strategy on reduction of GHG emissions from ships: 2 (a) Define the objectives of this Initial Strategy. (b) State the levels of ambition identified in the Initial Strategy. (c) List out the small term, mid-term and long term candidate measures with possible timelines as discussed in the IMO Strategy for reduction of GHG emissions. 2019/APR 2019/JULY 2019/AUG 2019/OCT 2021/JULY/Q4",
+     "text_verbatim": "The initial IMO strategy for GHG reduction adopted at MEPC 72 is the first milestone set out in the roadmap for developing a comprehensive IMO strategy on reduction of GHG emissions from ships: 2 (a) Define the objectives of this Initial Strategy. (b) State the levels of ambition identified in the Initial Strategy. (c) List out the small term, mid-term and long term candidate measures with possible timelines as discussed in the IMO Strategy for reduction of GHG emissions. 2019/JULY 2021/JULY/Q4",
      "printed_limbs": [
       "a",
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2019/APR",
+      "2019/AUG",
+      "2019/OCT",
+      "2020/MAR/Q6",
+      "2020/OCT/Q5",
+      "2020/NOV/Q6",
+      "2021/APR/Q4",
+      "2021/SEP/Q5"
+     ]
     },
     {
      "question_id": "QP2109-Q6",
@@ -689,25 +1240,36 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/SEP/Q6"
+     ]
     },
     {
      "question_id": "QP2109-Q7",
      "q_no": "Q7",
-     "text_verbatim": "With reference to Marine Insurance, write short notes on following: (a) Port of Refuge (b) Particular Average and General Average (c) Total Loss and Constructive Loss. 2019/AUG 2019/OCT",
+     "text_verbatim": "With reference to Marine Insurance, write short notes on following: (a) Port of Refuge (b) Particular Average and General Average (c) Total Loss and Constructive Loss.",
      "printed_limbs": [
       "a",
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2019/AUG",
+      "2019/OCT",
+      "2020/MAR/Q8",
+      "2020/OCT/Q7",
+      "2021/SEP/Q7"
+     ]
     },
     {
      "question_id": "QP2109-Q8",
      "q_no": "Q8",
      "text_verbatim": "An Indian flag ship has grounded off the coast of India and the owners have abandoned the property. In accordance with the provisions under the merchant Shipping Act, what steps should be initiated and who should initiate such steps for the safety of the marine property and environment.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2109-Q9",
@@ -716,7 +1278,15 @@
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2012/SR07",
+      "2015/SR11",
+      "2021/JUL/Q2",
+      "2021/SEP/Q9",
+      "2021/APR/Q9",
+      "2021/SEP/Q8"
+     ]
     }
    ]
   },
@@ -725,6 +1295,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2021,
    "month": "October",
+   "month_num": 10,
    "sitting": "October 2021",
    "second_sitting": false,
    "printed_serial": "2110 EM",
@@ -743,7 +1314,10 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/OCT/Q1"
+     ]
     },
     {
      "question_id": "QP2110-Q2",
@@ -754,7 +1328,10 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/OCT/Q2"
+     ]
     },
     {
      "question_id": "QP2110-Q3",
@@ -764,21 +1341,39 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/OCT/Q3"
+     ]
     },
     {
      "question_id": "QP2110-Q4",
      "q_no": "Q4",
      "text_verbatim": "Elaborate the objectives and requirements of Hong Kong international convention for the safe and environmentally Sound Recycling of ships.2009 2",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/OCT/Q4"
+     ]
     },
     {
      "question_id": "QP2110-Q5",
      "q_no": "Q5",
-     "text_verbatim": "The vessel in which you are the Chief Engineer is about to be laid up for 3 months for commercial reasons. All equipment and machinery on board require to be preserved during the lay-up period for re- commissioning when required. Describe the actions you will take as Chief Engineer to prepare the Main Propulsion diesel engine for preserving during the lay-up period. 2018/OCT 2018/DEC 2019/JAN 2019/FEB 2019/AUG 2021/JULY/Q1",
+     "text_verbatim": "The vessel in which you are the Chief Engineer is about to be laid up for 3 months for commercial reasons. All equipment and machinery on board require to be preserved during the lay-up period for re- commissioning when required. Describe the actions you will take as Chief Engineer to prepare the Main Propulsion diesel engine for preserving during the lay-up period. 2021/JULY/Q1",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2018/SR09",
+      "2018/OCT",
+      "2018/DEC",
+      "2019/JAN",
+      "2019/FEB",
+      "2019/AUG",
+      "2020/OCT/Q9",
+      "2021/JAN/Q4",
+      "2021/SEP/Q1",
+      "2021/OCT/Q5"
+     ]
     },
     {
      "question_id": "QP2110-Q6",
@@ -790,14 +1385,25 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/OCT/Q6"
+     ]
     },
     {
      "question_id": "QP2110-Q7",
      "q_no": "Q7",
-     "text_verbatim": "Explain the following maritime terms: - A. Charter Party; B. Freight; C. Bare Boat charter; D. Bill of Lading; E. Lay time; F. Demurrage and Off-hire. 2015/AUG 2017/OCT 2019/AUG",
+     "text_verbatim": "Explain the following maritime terms: - A. Charter Party; B. Freight; C. Bare Boat charter; D. Bill of Lading; E. Lay time; F. Demurrage and Off-hire.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2015/AUG",
+      "2017/OCT",
+      "2019/AUG",
+      "2020/NOV/Q7",
+      "2021/MAR/Q4",
+      "2021/OCT/Q7"
+     ]
     },
     {
      "question_id": "QP2110-Q8",
@@ -807,7 +1413,10 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/OCT/Q8"
+     ]
     },
     {
      "question_id": "QP2110-Q9",
@@ -817,7 +1426,11 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/SEP/Q3",
+      "2021/OCT/Q9"
+     ]
     }
    ]
   },
@@ -826,6 +1439,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2021,
    "month": "November",
+   "month_num": 11,
    "sitting": "November 2021",
    "second_sitting": false,
    "printed_serial": "2111 EM",
@@ -839,7 +1453,12 @@
      "q_no": "Q1",
      "text_verbatim": "Discuss the additional risks of bulk carriers and tankers which have necessitated the enhanced survey programme (ESP) for these ship types. State the major requirements of inspections under this programme.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/JAN/Q5",
+      "2021/MAR/Q8",
+      "2021/NOV/Q1"
+     ]
     },
     {
      "question_id": "QP2111-Q2",
@@ -849,28 +1468,55 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/NOV/Q2"
+     ]
     },
     {
      "question_id": "QP2111-Q3",
      "q_no": "Q3",
      "text_verbatim": "Discuss on some of the latest innovations incorporated by the engine manufacturers to enhance the performance monitoring, diagnostic sensors to increases the Time between overhauls.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/NOV/Q3"
+     ]
     },
     {
      "question_id": "QP2111-Q4",
      "q_no": "Q4",
-     "text_verbatim": "Write short notes on any THREE: A. Lloyd's Open Form; B. General Average and Particular Average. C. Bill of Lading. D. Treaty, Convention and Protocol. 2018/AUG 2018/NOV",
+     "text_verbatim": "Write short notes on any THREE: A. Lloyd's Open Form; B. General Average and Particular Average. C. Bill of Lading. D. Treaty, Convention and Protocol.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2011/SR06",
+      "2013/SR01",
+      "2018/AUG",
+      "2018/NOV",
+      "2021/JAN/Q3",
+      "2021/NOV/Q4"
+     ]
     },
     {
      "question_id": "QP2111-Q5",
      "q_no": "Q5",
-     "text_verbatim": "The vessel in which you are the Chief Engineer is about to be laid up for 3 months for commercial reasons. All equipment and machinery on board require to be preserved during the lay-up period for re- commissioning when required. Describe the actions you will take as Chief Engineer to prepare the Main Propulsion diesel engine for preserving during the lay-up period. 2018/OCT 2018/DEC 2019/JAN 2019/FEB 2019/AUG 2021/JULY/Q1 2",
+     "text_verbatim": "The vessel in which you are the Chief Engineer is about to be laid up for 3 months for commercial reasons. All equipment and machinery on board require to be preserved during the lay-up period for re- commissioning when required. Describe the actions you will take as Chief Engineer to prepare the Main Propulsion diesel engine for preserving during the lay-up period. 2021/JULY/Q1 2",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2018/SR09",
+      "2018/OCT",
+      "2018/DEC",
+      "2019/JAN",
+      "2019/FEB",
+      "2019/AUG",
+      "2020/OCT/Q9",
+      "2021/JAN/Q4",
+      "2021/SEP/Q1",
+      "2021/OCT/Q5",
+      "2021/NOV/Q5"
+     ]
     },
     {
      "question_id": "QP2111-Q6",
@@ -880,7 +1526,10 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/NOV/Q6"
+     ]
     },
     {
      "question_id": "QP2111-Q7",
@@ -890,7 +1539,11 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/JAN/Q6",
+      "2021/NOV/Q7"
+     ]
     },
     {
      "question_id": "QP2111-Q8",
@@ -902,19 +1555,29 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/OCT/Q6",
+      "2021/NOV/Q8"
+     ]
     },
     {
      "question_id": "QP2111-Q9",
      "q_no": "Q9",
-     "text_verbatim": "With reference to surveying of large starting air receivers: (a) Explain where corrosion is likely to occur and state why it occurs in these regions; (b) State how the incidence of corrosion in air receivers might be minimized: (c) If serious corrosion is detected in a starting air receiver and that receiver must be used explain how you, as Chief Engineer, would determine the maximum pressure to which the receiver should he subjected; (d) State the further action a Chief Engineer must take upon discovering such air receiver corrosion. 2018/AUG 2018/NOV Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
+     "text_verbatim": "With reference to surveying of large starting air receivers: (a) Explain where corrosion is likely to occur and state why it occurs in these regions; (b) State how the incidence of corrosion in air receivers might be minimized: (c) If serious corrosion is detected in a starting air receiver and that receiver must be used explain how you, as Chief Engineer, would determine the maximum pressure to which the receiver should he subjected; (d) State the further action a Chief Engineer must take upon discovering such air receiver corrosion. Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
      "printed_limbs": [
       "a",
       "b",
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2018/AUG",
+      "2018/NOV",
+      "2021/JAN/Q8",
+      "2021/NOV/Q9"
+     ]
     }
    ]
   },
@@ -923,6 +1586,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2021,
    "month": "December",
+   "month_num": 12,
    "sitting": "December 2021",
    "second_sitting": false,
    "printed_serial": "2112 EM",
@@ -939,24 +1603,39 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/NOV/Q6",
+      "2021/DEC/Q1"
+     ]
     },
     {
      "question_id": "QP2112-Q2",
      "q_no": "Q2",
-     "text_verbatim": "With reference to PSC inspections, explain various codes used to represent 'action to be taken' by the vessel against the deficiencies reported. Your IOPP equipment is not operational for want of spares awaited in the next port of call. How will you present your case to a PSCO for voyage permission till next port? 2015/NOV 2016/DEC",
+     "text_verbatim": "With reference to PSC inspections, explain various codes used to represent 'action to be taken' by the vessel against the deficiencies reported. Your IOPP equipment is not operational for want of spares awaited in the next port of call. How will you present your case to a PSCO for voyage permission till next port?",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2015/NOV",
+      "2016/DEC",
+      "2018/SR09",
+      "2020/NOV/Q1",
+      "2021/DEC/Q2"
+     ]
     },
     {
      "question_id": "QP2112-Q3",
      "q_no": "Q3",
-     "text_verbatim": "(a) Elaborate some of the technological innovations adopted / developed to improve plant efficiency of ships propulsion engine? (b) Describe fuel injection system in the cam shaft less engines of any one of the two major slow speed engine makers. Highlight the improvements possible when compared with the traditional systems. 2016/MAR",
+     "text_verbatim": "(a) Elaborate some of the technological innovations adopted / developed to improve plant efficiency of ships propulsion engine? (b) Describe fuel injection system in the cam shaft less engines of any one of the two major slow speed engine makers. Highlight the improvements possible when compared with the traditional systems.",
      "printed_limbs": [
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/MAR",
+      "2021/DEC/Q3"
+     ]
     },
     {
      "question_id": "QP2112-Q4",
@@ -969,14 +1648,26 @@
      ],
      "printed_marks": [
       98
+     ],
+     "host_recurrence_hint": [
+      "2021/DEC/Q4"
      ]
     },
     {
      "question_id": "QP2112-Q5",
      "q_no": "Q5",
-     "text_verbatim": "Explain the following maritime terms: - A. Charter Party; B. Freight; 2 C. Bare Boat charter; D. Bill of Lading; E. Lay time, Demurrage and Off-hire. 2015/AUG 2017/OCT 2019/AUG",
+     "text_verbatim": "Explain the following maritime terms: - A. Charter Party; B. Freight; 2 C. Bare Boat charter; D. Bill of Lading; E. Lay time, Demurrage and Off-hire.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2015/AUG",
+      "2017/OCT",
+      "2019/AUG",
+      "2020/NOV/Q7",
+      "2021/MAR/Q4",
+      "2021/OCT/Q7",
+      "2021/DEC/Q5"
+     ]
     },
     {
      "question_id": "QP2112-Q6",
@@ -986,7 +1677,10 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/DEC/Q6"
+     ]
     },
     {
      "question_id": "QP2112-Q7",
@@ -996,21 +1690,47 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/DEC/Q7"
+     ]
     },
     {
      "question_id": "QP2112-Q8",
      "q_no": "Q8",
      "text_verbatim": "Discuss the additional risks of bulk carriers and tankers which have necessitated the enhanced survey programme (ESP) for these ship types. State the major requirements of inspections under this programme.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/JAN/Q5",
+      "2021/MAR/Q8",
+      "2021/NOV/Q1",
+      "2021/DEC/Q8"
+     ]
     },
     {
      "question_id": "QP2112-Q9",
      "q_no": "Q9",
-     "text_verbatim": "A. What are P&I clubs? Describe how P&I clubs collect fund from ship-owners; B. What are the risks that are covered under the term “protection” and “indemnity?” 2010/JUN 2010/JUL 2010/FEB 2011/APR 2011/APR 2012/JUN 2014/OCT 2016/APR 2018/APR 2018/JUL 2019/JUN Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
+     "text_verbatim": "A. What are P&I clubs? Describe how P&I clubs collect fund from ship-owners; B. What are the risks that are covered under the term “protection” and “indemnity?” Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/JUN",
+      "2010/JUL",
+      "2010/FEB",
+      "2011/APR",
+      "2011/APR",
+      "2012/JUN",
+      "2014/OCT",
+      "2016/APR",
+      "2018/APR",
+      "2018/JUL",
+      "2019/JUN",
+      "2021/APR/Q5",
+      "2021/JUL/Q5",
+      "2021/AUG/Q5",
+      "2021/DEC/Q9"
+     ]
     }
    ]
   },
@@ -1019,6 +1739,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2022,
    "month": "January",
+   "month_num": 1,
    "sitting": "January 2022",
    "second_sitting": false,
    "printed_serial": "2201 EM",
@@ -1030,20 +1751,48 @@
     {
      "question_id": "QP2201-Q1",
      "q_no": "Q1",
-     "text_verbatim": "Elaborate the influence of a charter on operation of propulsion and other ship board machineries during a voyage. After taking over ship as Chief Engineer you have been informed that ship is on time charter and has a history of unforeseen auxiliary machinery breakdown at sea. State the different options you have and actions you would take as Chief Engineer prior to the commencement of voyage. 2010/JUL 2011/SEP 2011/AUG 2011/OCT 2012/JUL 2012/OCT 2012/DEC 2015/JAN 2016/JAN 2016/JUL 2018/JAN 2018/MAR 2018/AUG 2018/NOV 2021/JULY/Q7 2021/JULY/Q6(M)",
+     "text_verbatim": "Elaborate the influence of a charter on operation of propulsion and other ship board machineries during a voyage. After taking over ship as Chief Engineer you have been informed that ship is on time charter and has a history of unforeseen auxiliary machinery breakdown at sea. State the different options you have and actions you would take as Chief Engineer prior to the commencement of voyage. 2021/JULY/Q7 2021/JULY/Q6(M)",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/JUL",
+      "2011/SEP",
+      "2011/AUG",
+      "2011/OCT",
+      "2012/JUL",
+      "2012/OCT",
+      "2012/DEC",
+      "2015/JAN",
+      "2016/JAN",
+      "2016/JUL",
+      "2018/JAN",
+      "2018/MAR",
+      "2018/AUG",
+      "2018/NOV",
+      "2020/DEC/Q2",
+      "2021/AUG/Q8",
+      "2022/JAN/Q1"
+     ]
     },
     {
      "question_id": "QP2201-Q2",
      "q_no": "Q2",
-     "text_verbatim": "To operate engines in compliance with the new IMO 2020 Sulphur limits and to prepare the engine and auxiliaries for the changes in fuel characteristics, is a challenge for owners, operators and crews. From the Chief engineer’s perspective, explain the following briefly: (a) Cylinder lubrication strategies; (b) Compatibility issues between fuel bunkered at differed ports. (c) Procedures employed for preparing fuel oil tanks onboard. 2019/SEP 2019/OCT 2020/JAN",
+     "text_verbatim": "To operate engines in compliance with the new IMO 2020 Sulphur limits and to prepare the engine and auxiliaries for the changes in fuel characteristics, is a challenge for owners, operators and crews. From the Chief engineer’s perspective, explain the following briefly: (a) Cylinder lubrication strategies; (b) Compatibility issues between fuel bunkered at differed ports. (c) Procedures employed for preparing fuel oil tanks onboard.",
      "printed_limbs": [
       "a",
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2019/SEP",
+      "2019/OCT",
+      "2020/JAN",
+      "2020/MAR/Q3",
+      "2020/NOV/Q5",
+      "2021/APR/Q8",
+      "2022/JAN/Q2"
+     ]
     },
     {
      "question_id": "QP2201-Q3",
@@ -1056,25 +1805,48 @@
      ],
      "printed_marks": [
       98
+     ],
+     "host_recurrence_hint": [
+      "2021/DEC/Q4",
+      "2022/JAN/Q3"
      ]
     },
     {
      "question_id": "QP2201-Q4",
      "q_no": "Q4",
-     "text_verbatim": "Referring to the Maritime Labour Convention (MLC) 2006, discuss: a) Flag State & Port State responsibilities. b)On-board & On-shore Compliant Procedures. c) Detainable deficiencies. 2 d) Grievance Redressal Mechanisms for Indian seafarers. 2017/AUG 2019/JAN 2019/APR 2019/JULY 2019/OCT",
+     "text_verbatim": "Referring to the Maritime Labour Convention (MLC) 2006, discuss: a) Flag State & Port State responsibilities. b)On-board & On-shore Compliant Procedures. c) Detainable deficiencies. 2 d) Grievance Redressal Mechanisms for Indian seafarers. 2019/JULY",
      "printed_limbs": [
       "a",
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2017/AUG",
+      "2019/JAN",
+      "2019/APR",
+      "2019/OCT",
+      "2020/MAR/Q4",
+      "2022/JAN/Q4"
+     ]
     },
     {
      "question_id": "QP2201-Q5",
      "q_no": "Q5",
-     "text_verbatim": "Define communication. Enumerate and discuss the different types of communications. Discuss the various barriers to effective communication. You are doing a main engine decarbonisation and the work is carried out in two groups, one working on the cylinder head platform and the other group working in the bottom platform. Identify the areas in this operation where there can be a hazard due to failure of communication. Also suggest risk mitigation measures to mitigate the hazard of failure of communication. 2018/APR 2018/JULY 2018/DEC 2019/FEB 2019/APR 2019/JUN 2019/JULY 2019/OCT",
+     "text_verbatim": "Define communication. Enumerate and discuss the different types of communications. Discuss the various barriers to effective communication. You are doing a main engine decarbonisation and the work is carried out in two groups, one working on the cylinder head platform and the other group working in the bottom platform. Identify the areas in this operation where there can be a hazard due to failure of communication. Also suggest risk mitigation measures to mitigate the hazard of failure of communication. 2018/JULY 2019/JULY",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2018/APR",
+      "2018/SR09",
+      "2018/DEC",
+      "2019/FEB",
+      "2019/APR",
+      "2019/JUN",
+      "2019/OCT",
+      "2020/MAR/Q5",
+      "2022/JAN/Q5"
+     ]
     },
     {
      "question_id": "QP2201-Q6",
@@ -1084,7 +1856,10 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/JAN/Q6"
+     ]
     },
     {
      "question_id": "QP2201-Q7",
@@ -1096,18 +1871,29 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/JAN/Q7"
+     ]
     },
     {
      "question_id": "QP2201-Q8",
      "q_no": "Q8",
-     "text_verbatim": "With reference to Marine Insurance, write short notes on following: (a) Port of Refuge (b) Particular Average and General Average (c) Total Loss and Constructive Loss. 2019/AUG 2019/OCT",
+     "text_verbatim": "With reference to Marine Insurance, write short notes on following: (a) Port of Refuge (b) Particular Average and General Average (c) Total Loss and Constructive Loss.",
      "printed_limbs": [
       "a",
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2019/AUG",
+      "2019/OCT",
+      "2020/MAR/Q8",
+      "2020/OCT/Q7",
+      "2021/SEP/Q7",
+      "2022/JAN/Q8"
+     ]
     },
     {
      "question_id": "QP2201-Q9",
@@ -1119,7 +1905,12 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/OCT/Q6",
+      "2021/NOV/Q8",
+      "2022/JAN/Q9"
+     ]
     }
    ]
   },
@@ -1128,6 +1919,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2022,
    "month": "February",
+   "month_num": 2,
    "sitting": "February 2022",
    "second_sitting": false,
    "printed_serial": "2202 EM",
@@ -1144,28 +1936,66 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/JAN/Q6",
+      "2022/FEB/Q1"
+     ]
     },
     {
      "question_id": "QP2202-Q2",
      "q_no": "Q2",
-     "text_verbatim": "Discuss the capital, voyage and operating costs of ship operation and explain Chief Engineer’s role in optimizing them. What are the modern management principles used in Inventory control? 2015/FEB 2016/AUG 2016/SEP 2016/NOV 2017/JAN 2017/JAN 2017/SEP 2018/OCT 2018/OCT 2018/DEC 2019/FEB 2019/APR",
+     "text_verbatim": "Discuss the capital, voyage and operating costs of ship operation and explain Chief Engineer’s role in optimizing them. What are the modern management principles used in Inventory control?",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2015/FEB",
+      "2016/AUG",
+      "2016/SEP",
+      "2016/NOV",
+      "2017/JAN",
+      "2017/JAN",
+      "2017/SEP",
+      "2018/SR09",
+      "2018/OCT",
+      "2018/OCT",
+      "2018/DEC",
+      "2019/FEB",
+      "2019/APR",
+      "2021/FEB/Q1",
+      "2022/FEB/Q2"
+     ]
     },
     {
      "question_id": "QP2202-Q3",
      "q_no": "Q3",
      "text_verbatim": "Assume a collision occurs between an oil tanker and a bulk carrier in an Indian port. (a)Discuss the convention under which the ship owners can be liable for shore clean-up and compensation costs assuming oil is spilt from both ships. (b)Explain whether the liability is \"strict\" and also exemptions available to both ship owners.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/FEB/Q3",
+      "2022/FEB/Q3"
+     ]
     },
     {
      "question_id": "QP2202-Q4",
      "q_no": "Q4",
-     "text_verbatim": "A. What are the principles of modern salvage law? B. What is General Average, C. Explain with context to General Average, i. Entitlement; ii. Artificial; iii. Adjustment; iv. Contestation 2012/MAR 2016/APR 2017/FEB 2017/DEC 2018/APR 2018/JULY 2019/JUN 2019/SEP 2019/NOV",
+     "text_verbatim": "A. What are the principles of modern salvage law? B. What is General Average, C. Explain with context to General Average, i. Entitlement; ii. Artificial; iii. Adjustment; iv. Contestation 2018/JULY",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2012/MAR",
+      "2016/APR",
+      "2017/FEB",
+      "2017/DEC",
+      "2018/APR",
+      "2019/JUN",
+      "2019/SEP",
+      "2019/NOV",
+      "2021/FEB/Q6",
+      "2021/JUL/Q9",
+      "2022/FEB/Q4"
+     ]
     },
     {
      "question_id": "QP2202-Q5",
@@ -1177,7 +2007,10 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/FEB/Q5"
+     ]
     },
     {
      "question_id": "QP2202-Q6",
@@ -1188,28 +2021,53 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/FEB/Q6"
+     ]
     },
     {
      "question_id": "QP2202-Q7",
      "q_no": "Q7",
-     "text_verbatim": "Socio cultural differences have been an accepted fact in major merchant ships around the globe. Explain how such differences generate inter personnel conflicts and effective safety management, how they can be resolved on board. 2019/DEC",
+     "text_verbatim": "Socio cultural differences have been an accepted fact in major merchant ships around the globe. Explain how such differences generate inter personnel conflicts and effective safety management, how they can be resolved on board.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/SR01",
+      "2010/SR09",
+      "2011/SR10",
+      "2019/DEC",
+      "2021/FEB/Q7",
+      "2022/FEB/Q7"
+     ]
     },
     {
      "question_id": "QP2202-Q8",
      "q_no": "Q8",
-     "text_verbatim": "How many types of warranties are there in Marine Insurance? Give an example of each type with reference to a hull and machinery policy of insurance. 2018/JUN 2018/DEC",
+     "text_verbatim": "How many types of warranties are there in Marine Insurance? Give an example of each type with reference to a hull and machinery policy of insurance.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2012/SR02",
+      "2013/SR11",
+      "2018/JUN",
+      "2018/DEC",
+      "2021/FEB/Q8",
+      "2022/FEB/Q8"
+     ]
     },
     {
      "question_id": "QP2202-Q9",
      "q_no": "Q9",
-     "text_verbatim": "Referring generally to a general Ballast Water Treatment (BWT) System, explain; a. Requirements related to construction and technical performance. b. Requirements related to onboard installation of the system. c. Special requirements for tankers and ships carrying dangerous chemicals. 2019/MAR 2019/NOV Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
+     "text_verbatim": "Referring generally to a general Ballast Water Treatment (BWT) System, explain; a. Requirements related to construction and technical performance. b. Requirements related to onboard installation of the system. c. Special requirements for tankers and ships carrying dangerous chemicals. Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2019/MAR",
+      "2019/NOV",
+      "2021/FEB/Q9",
+      "2022/FEB/Q9"
+     ]
     }
    ]
   },
@@ -1218,6 +2076,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2022,
    "month": "March",
+   "month_num": 3,
    "sitting": "March 2022",
    "second_sitting": false,
    "printed_serial": "2203 EM",
@@ -1234,16 +2093,29 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/MAR/Q1"
+     ]
     },
     {
      "question_id": "QP2203-Q2",
      "q_no": "Q2",
-     "text_verbatim": "Periodical Lubricating Oil Analysis, its correct interpretation and corrective measures are of critical significance for the maintenance of marine machineries. With reference to the modern analysis techniques employed for the condition of L.O, discuss the following: A). Elemental (Spectrometric) Analysis B). Fourier Transform Infrared (FTIR) Spectroscopy C). Particle Count D). Base Number Vs Acid Number 2016/FEB 2016/SEP 2017/JAN 2017/FEB 2017/DEC",
+     "text_verbatim": "Periodical Lubricating Oil Analysis, its correct interpretation and corrective measures are of critical significance for the maintenance of marine machineries. With reference to the modern analysis techniques employed for the condition of L.O, discuss the following: A). Elemental (Spectrometric) Analysis B). Fourier Transform Infrared (FTIR) Spectroscopy C). Particle Count D). Base Number Vs Acid Number",
      "printed_limbs": [
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/FEB",
+      "2016/SEP",
+      "2017/JAN",
+      "2017/FEB",
+      "2017/DEC",
+      "2021/JUL/Q1",
+      "2021/AUG/Q2",
+      "2022/MAR/Q2"
+     ]
     },
     {
      "question_id": "QP2203-Q3",
@@ -1255,7 +2127,10 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/MAR/Q3"
+     ]
     },
     {
      "question_id": "QP2203-Q4",
@@ -1264,30 +2139,82 @@
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2012/SR07",
+      "2015/SR11",
+      "2021/JUL/Q2",
+      "2021/SEP/Q9",
+      "2022/MAR/Q4"
+     ]
     },
     {
      "question_id": "QP2203-Q5",
      "q_no": "Q5",
-     "text_verbatim": "(A). Explain Fault Tree Analysis (FTA) with relevant examples. (B). Construct the Fault tree for “Engine Starting Failure” i.e., the engine speed goes down and finally stops. 2016/AUG 2017/APR 2017/JUN",
+     "text_verbatim": "(A). Explain Fault Tree Analysis (FTA) with relevant examples. (B). Construct the Fault tree for “Engine Starting Failure” i.e., the engine speed goes down and finally stops.",
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/AUG",
+      "2017/APR",
+      "2017/JUN",
+      "2021/APR/Q7",
+      "2022/MAR/Q5"
+     ]
     },
     {
      "question_id": "QP2203-Q6",
      "q_no": "Q6",
-     "text_verbatim": "A. What are P&I clubs? Describe how P&I clubs collect fund from ship-owners; B. What are the risks that are covered under the term “protection” and “indemnity?” 2010/JUN 2010/JUL 2010/FEB 2011/APR 2011/APR 2012/JUN 2014/OCT 2016/APR 2018/APR 2018/JUL 2019/JUN",
+     "text_verbatim": "A. What are P&I clubs? Describe how P&I clubs collect fund from ship-owners; B. What are the risks that are covered under the term “protection” and “indemnity?”",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/JUN",
+      "2010/JUL",
+      "2010/FEB",
+      "2011/APR",
+      "2011/APR",
+      "2012/JUN",
+      "2014/OCT",
+      "2016/APR",
+      "2018/APR",
+      "2018/JUL",
+      "2019/JUN",
+      "2021/APR/Q5",
+      "2021/JUL/Q5",
+      "2021/AUG/Q5",
+      "2021/DEC/Q9",
+      "2022/MAR/Q6"
+     ]
     },
     {
      "question_id": "QP2203-Q7",
      "q_no": "Q7",
-     "text_verbatim": "Elaborate the influence of a charter on operation of propulsion and other ship board machineries during a voyage. After taking over ship as Chief Engineer you have been informed that ship is on time charter and has a history of unforeseen auxiliary machinery breakdown at sea. State the different options you have and actions you would take as Chief Engineer prior to the commencement of voyage. 2010/JUL 2011/SEP 2011/AUG 2011/OCT 2012/JUL 2012/OCT 2012/DEC 2015/JAN 2016/JAN 2016/JUL 2018/JAN 2018/MAR 2018/AUG 2018/NOV 2021/JULY/Q7 2021/JULY/Q6(M)",
+     "text_verbatim": "Elaborate the influence of a charter on operation of propulsion and other ship board machineries during a voyage. After taking over ship as Chief Engineer you have been informed that ship is on time charter and has a history of unforeseen auxiliary machinery breakdown at sea. State the different options you have and actions you would take as Chief Engineer prior to the commencement of voyage. 2021/JULY/Q7 2021/JULY/Q6(M)",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/JUL",
+      "2011/SEP",
+      "2011/AUG",
+      "2011/OCT",
+      "2012/JUL",
+      "2012/OCT",
+      "2012/DEC",
+      "2015/JAN",
+      "2016/JAN",
+      "2016/JUL",
+      "2018/JAN",
+      "2018/MAR",
+      "2018/AUG",
+      "2018/NOV",
+      "2020/DEC/Q2",
+      "2021/AUG/Q8",
+      "2022/JAN/Q1",
+      "2022/MAR/Q7"
+     ]
     },
     {
      "question_id": "QP2203-Q8",
@@ -1297,14 +2224,25 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/DEC/Q6",
+      "2022/MAR/Q8"
+     ]
     },
     {
      "question_id": "QP2203-Q9",
      "q_no": "Q9",
-     "text_verbatim": "With specific to reference to any make, sketch and describe the Cylinder Lubricating System used in new generation marine diesel engines. How will you effect the optimum cylinder oil feed with varying sulphur content of fuel oil. 2015/FEB 2015/NOV 2016/AUG 2017/SEP Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
+     "text_verbatim": "With specific to reference to any make, sketch and describe the Cylinder Lubricating System used in new generation marine diesel engines. How will you effect the optimum cylinder oil feed with varying sulphur content of fuel oil. Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2015/FEB",
+      "2015/NOV",
+      "2016/AUG",
+      "2017/SEP",
+      "2022/MAR/Q9"
+     ]
     }
    ]
   },
@@ -1313,6 +2251,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2022,
    "month": "April",
+   "month_num": 4,
    "sitting": "April 2022",
    "second_sitting": false,
    "printed_serial": "2204 EM",
@@ -1324,34 +2263,65 @@
     {
      "question_id": "QP2204-Q1",
      "q_no": "Q1",
-     "text_verbatim": "State the UNCLOS requirements for member States, (a) to register ships flagged with them and (b) to control safety, pollution and civil /social aspects of ships. (c) What mechanism is used in India to comply with these requirements? 2017/FEB 2017/DEC 2018/APR 2018/JUL 2019/JUN 2019/SEP 2019/NOV 2020/JAN 2022/MAR/1",
+     "text_verbatim": "State the UNCLOS requirements for member States, (a) to register ships flagged with them and (b) to control safety, pollution and civil /social aspects of ships. (c) What mechanism is used in India to comply with these requirements? /1",
      "printed_limbs": [
       "a",
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2017/FEB",
+      "2017/DEC",
+      "2018/APR",
+      "2018/JUL",
+      "2019/JUN",
+      "2019/SEP",
+      "2019/NOV",
+      "2020/JAN",
+      "2022/MAR"
+     ]
     },
     {
      "question_id": "QP2204-Q2",
      "q_no": "Q2",
      "text_verbatim": "A ship sustained damages on hull while berthing. As a chief engineer officer of this ship, write a dry dock specification for the repair of the following damage that has occurred, stating what factors has to be considered when casting the repairs. Your inspection revealed that on port side there is a damage to shell plating. You observed a deep dent on shell plating of 20 mm thick for approximately 2 square meter. This shell plating has to be removed and replacing along with the relevant damaged stiffeners which have been setup.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/AUG/Q7",
+      "2022/APR/Q2"
+     ]
     },
     {
      "question_id": "QP2204-Q3",
      "q_no": "Q3",
-     "text_verbatim": "What are the engine developments & retrofitting which were adopted by engine manufacturers to enable hassle free slow steaming & ultra-slow steaming of ships? 2017/FEB 2017/DEC 2019/SEP 2020/JAN 2022/APR/3",
+     "text_verbatim": "What are the engine developments & retrofitting which were adopted by engine manufacturers to enable hassle free slow steaming & ultra-slow steaming of ships? /3",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2017/FEB",
+      "2017/DEC",
+      "2019/SEP",
+      "2020/JAN",
+      "2022/APR"
+     ]
     },
     {
      "question_id": "QP2204-Q4",
      "q_no": "Q4",
-     "text_verbatim": "Explain Abraham Maslow's theory of motivation. As chief engineer onboard, stress the issues you will address for lack of motivation, differences in attitude and to increase sense of competitiveness for better management and effective control? 2018/MAR 2019/MAR 2019/SEP 2019/NOV 2020/JAN 2022/APR/4",
+     "text_verbatim": "Explain Abraham Maslow's theory of motivation. As chief engineer onboard, stress the issues you will address for lack of motivation, differences in attitude and to increase sense of competitiveness for better management and effective control? /4",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2018/MAR",
+      "2019/MAR",
+      "2019/SEP",
+      "2019/NOV",
+      "2020/JAN",
+      "2021/MAR/Q7",
+      "2022/APR"
+     ]
     },
     {
      "question_id": "QP2204-Q5",
@@ -1362,7 +2332,10 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/APR/Q5"
+     ]
     },
     {
      "question_id": "QP2204-Q6",
@@ -1374,7 +2347,10 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/APR/Q6"
+     ]
     },
     {
      "question_id": "QP2204-Q7",
@@ -1383,21 +2359,30 @@
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/APR/Q7"
+     ]
     },
     {
      "question_id": "QP2204-Q8",
      "q_no": "Q8",
      "text_verbatim": "The power and RPM relationships of the diesel engine and the propeller attached to it are different. Explain with the help of proper sketches how both are matched by choosing the design point for the propeller. What happens when the ship goes into service and the resistance increases?",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/APR/Q8"
+     ]
     },
     {
      "question_id": "QP2204-Q9",
      "q_no": "Q9",
      "text_verbatim": "Trace the development of crude oil tankers from single hull to double hull configuration. Discuss the features of a modern double hull crude oil carrier with regard to speed, freeboard and pollution control. Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/APR/Q9"
+     ]
     }
    ]
   },
@@ -1406,6 +2391,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2022,
    "month": "June",
+   "month_num": 6,
    "sitting": "June 2022",
    "second_sitting": false,
    "printed_serial": "2206 EM",
@@ -1417,13 +2403,24 @@
     {
      "question_id": "QP2206-Q1",
      "q_no": "Q1",
-     "text_verbatim": "Stress is one of the factors affecting the performance of an individual. What are the primary strategies that may be employed for coping with stress affected personnel? How these elements can be best implemented in ships personnel motivating them for better team work? (b) Discuss fatigue and its various causes and relation with stress. (c) What are the ill effects of fatigue- HOW you as a chief engineer deal with that on-board ship for the personnel working under your direct supervision. (d) State the rules and regulations that can protect seafarers from fatigue. 2018/AUG 2018/OCT 2018/NOV",
+     "text_verbatim": "Stress is one of the factors affecting the performance of an individual. What are the primary strategies that may be employed for coping with stress affected personnel? How these elements can be best implemented in ships personnel motivating them for better team work? (b) Discuss fatigue and its various causes and relation with stress. (c) What are the ill effects of fatigue- HOW you as a chief engineer deal with that on-board ship for the personnel working under your direct supervision. (d) State the rules and regulations that can protect seafarers from fatigue.",
      "printed_limbs": [
       "b",
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2011/SR2",
+      "2010/SR11",
+      "2010/SR10",
+      "2010/SR01",
+      "2018/AUG",
+      "2018/OCT",
+      "2018/NOV",
+      "2021/JAN/Q1",
+      "2022/JUN/Q1"
+     ]
     },
     {
      "question_id": "QP2206-Q2",
@@ -1435,28 +2432,61 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/JUN/Q2"
+     ]
     },
     {
      "question_id": "QP2206-Q3",
      "q_no": "Q3",
-     "text_verbatim": "Write short notes on any THREE: A. Lloyd's Open Form; B. General Average and Particular Average. C. Bill of Lading. D. Treaty, Convention and Protocol. 2018/AUG 2018/NOV",
+     "text_verbatim": "Write short notes on any THREE: A. Lloyd's Open Form; B. General Average and Particular Average. C. Bill of Lading. D. Treaty, Convention and Protocol.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2011/SR06",
+      "2013/SR01",
+      "2018/AUG",
+      "2018/NOV",
+      "2021/JAN/Q3",
+      "2021/NOV/Q4",
+      "2022/JUN/Q3"
+     ]
     },
     {
      "question_id": "QP2206-Q4",
      "q_no": "Q4",
      "text_verbatim": "Discuss the additional risks of bulk carriers and tankers which have necessitated the enhanced survey programme (ESP) for these ship types. State the major requirements of inspections under this programme. 2",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/JAN/Q5",
+      "2021/MAR/Q8",
+      "2021/NOV/Q1",
+      "2021/DEC/Q8",
+      "2022/JUN/Q4"
+     ]
     },
     {
      "question_id": "QP2206-Q5",
      "q_no": "Q5",
-     "text_verbatim": "The vessel in which you are the Chief Engineer is about to be laid up for 3 months for commercial reasons. All equipment and machinery on board require to be preserved during the lay-up period for re- commissioning when required. Describe the actions you will take as Chief Engineer to prepare the Main Propulsion diesel engine for preserving during the lay-up period. 2018/OCT 2018/DEC 2019/JAN 2019/FEB 2019/AUG 2021/JULY/Q1",
+     "text_verbatim": "The vessel in which you are the Chief Engineer is about to be laid up for 3 months for commercial reasons. All equipment and machinery on board require to be preserved during the lay-up period for re- commissioning when required. Describe the actions you will take as Chief Engineer to prepare the Main Propulsion diesel engine for preserving during the lay-up period. 2021/JULY/Q1",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2018/SR09",
+      "2018/OCT",
+      "2018/DEC",
+      "2019/JAN",
+      "2019/FEB",
+      "2019/AUG",
+      "2020/OCT/Q9",
+      "2021/JAN/Q4",
+      "2021/SEP/Q1",
+      "2021/OCT/Q5",
+      "2021/NOV/Q5",
+      "2022/JUN/Q5"
+     ]
     },
     {
      "question_id": "QP2206-Q6",
@@ -1466,7 +2496,12 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2021/JAN/Q6",
+      "2021/NOV/Q7",
+      "2022/JUN/Q6"
+     ]
     },
     {
      "question_id": "QP2206-Q7",
@@ -1475,28 +2510,57 @@
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/JUN/Q7"
+     ]
     },
     {
      "question_id": "QP2206-Q8",
      "q_no": "Q8",
-     "text_verbatim": "With reference to surveying of large starting air receivers: (a) Explain where corrosion is likely to occur and state why it occurs in these regions; (b) State how the incidence of corrosion in air receivers might be minimized: (c) If serious corrosion is detected in a starting air receiver and that receiver must be used explain how you, as Chief Engineer, would determine the maximum pressure to which the receiver should he subjected; (d) State the further action a Chief Engineer must take upon discovering such air receiver corrosion 2018/AUG 2018/NOV",
+     "text_verbatim": "With reference to surveying of large starting air receivers: (a) Explain where corrosion is likely to occur and state why it occurs in these regions; (b) State how the incidence of corrosion in air receivers might be minimized: (c) If serious corrosion is detected in a starting air receiver and that receiver must be used explain how you, as Chief Engineer, would determine the maximum pressure to which the receiver should he subjected; (d) State the further action a Chief Engineer must take upon discovering such air receiver corrosion",
      "printed_limbs": [
       "a",
       "b",
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2018/AUG",
+      "2018/NOV",
+      "2021/JAN/Q8",
+      "2021/NOV/Q9",
+      "2022/JUN/Q8"
+     ]
     },
     {
      "question_id": "QP2206-Q9",
      "q_no": "Q9",
-     "text_verbatim": "(a) Describe the background and relevance of the International Convention on Civil Liability for Bunker Oil Pollution Damage, 2001. (b)Define the following under Bunker Convention and explain how they differ from other similar Convention such as CLC’92. (i) Pollution damage (ii) Bunker oil (iii) Time limits for claims (iv) Exclusions. 2016/FEB 2016/APR 2016/SEP 2017/JAN 2017/APR 2017/JUN 2017/JUN 2018/APR 2018/JULY 2019/JAN 2019/APR 2019/JUN 2019/JULY 2019/SEP 2020/JAN Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE 3",
+     "text_verbatim": "(a) Describe the background and relevance of the International Convention on Civil Liability for Bunker Oil Pollution Damage, 2001. (b)Define the following under Bunker Convention and explain how they differ from other similar Convention such as CLC’92. (i) Pollution damage (ii) Bunker oil (iii) Time limits for claims (iv) Exclusions. 2018/JULY 2019/JULY Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE 3",
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/FEB",
+      "2016/APR",
+      "2016/SEP",
+      "2017/JAN",
+      "2017/APR",
+      "2017/JUN",
+      "2017/JUN",
+      "2018/APR",
+      "2019/JAN",
+      "2019/APR",
+      "2019/JUN",
+      "2019/SEP",
+      "2020/JAN",
+      "2020/OCT/Q3",
+      "2021/JAN/Q9",
+      "2021/AUG/Q6",
+      "2022/JUN/Q9"
+     ]
     }
    ]
   },
@@ -1505,6 +2569,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2022,
    "month": "July",
+   "month_num": 7,
    "sitting": "July 2022",
    "second_sitting": false,
    "printed_serial": "2207 EM",
@@ -1522,21 +2587,26 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/JUL/Q1"
+     ]
     },
     {
      "question_id": "QP2207-Q2",
      "q_no": "Q2",
      "text_verbatim": "Explain the principle of \"Causa Proxima\" in Marine Insurance? An auxiliary generator engine on your vessel has suffered damage due to engine running on low lubricating oil pressure due to contamination of the lubricating Oil by water. What all actions you will take as a Chief engineer and what all reports and documents you will keep ready to submit for the marine insurance surveyor visiting your vessel to process the insurance claim?",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2207-Q3",
      "q_no": "Q3",
      "text_verbatim": "An Indian flag ship has grounded off the coast of India and the owners have abandoned the property. In accordance with the provisions under the merchant Shipping Act, what steps should be initiated and who should initiate such steps for the safety of the marine property and environment.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2207-Q4",
@@ -1546,7 +2616,8 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2207-Q5",
@@ -1555,35 +2626,52 @@
      "printed_limbs": [
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/JUL/Q2",
+      "2021/APR/Q9",
+      "2021/SEP/Q8",
+      "2022/JUL/Q3",
+      "2022/JUL/Q4",
+      "2022/JUL/Q5"
+     ]
     },
     {
      "question_id": "QP2207-Q6",
      "q_no": "Q6",
      "text_verbatim": "Hydrogen is widely discussed as a sustainable fuel for future maritime applications- Discuss with specific references to technical, operational, safety and commercial viability of hydrogen as a marine fuel.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2207-Q7",
      "q_no": "Q7",
      "text_verbatim": "Classification societies as Recognized Organisations (RO) play an important role in implementation of national and international regulations. State the limitations of the RO highlighting them with reasons. Draw out the salient responsibilities of classification society authorized as RO for a flag State as enumerated in RO Code adopted by the IMO.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2207-Q8",
      "q_no": "Q8",
      "text_verbatim": "IMO has introduced the EEXI requirements under MARPOL Annex VI Chapter IV for existing vessels from 2023 as a measure towards reduction of C02 emissions from shipping. Explain the various design features adopted in the existing vessels to comply with the present EEXI which meets the EEDI framework under Phase 2 or Phase 3 as applicable.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2207-Q9",
      "q_no": "Q9",
      "text_verbatim": "State the obligations of a port State to exercise control on shipping in addition to control by flag states. Comment, if the Risk-based approach or Concentrated inspection campaigns by some PSC MOUS has further helped eliminate sub-standard ships. Note : If you are looking for answers prepared in organized manner with clear drawings please visit our website by CLICKING HERE",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/JUL/Q6",
+      "2022/JUL/Q7",
+      "2022/JUL/Q8",
+      "2022/JUL/Q9"
+     ]
     }
    ]
   },
@@ -1592,6 +2680,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2022,
    "month": "August",
+   "month_num": 8,
    "sitting": "August 2022",
    "second_sitting": false,
    "printed_serial": "2208 EM",
@@ -1609,14 +2698,20 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q1"
+     ]
     },
     {
      "question_id": "QP2208-Q2",
      "q_no": "Q2",
      "text_verbatim": "What are the perils of the sea which are covered in a Marine Insurance contract? What can an insured do to cover a peril other than an insured peril of the sea? Explain with examples. Also enumerate the perils which are covered under a marine insurance contract but the onus of proof is upon the insurers to prove the assured's want of \"due diligence\" to avoid the claim.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q2"
+     ]
     },
     {
      "question_id": "QP2208-Q3",
@@ -1627,21 +2722,30 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q3"
+     ]
     },
     {
      "question_id": "QP2208-Q4",
      "q_no": "Q4",
      "text_verbatim": "What is Decarbonisation in shipping? Briefly discuss the IMO decarbonisation ambitions and pathways with focus on the short term, mid-term and long tern goals. Explain the two short-term measures approved by the IMO for implementation with their guidelines 2",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q4"
+     ]
     },
     {
      "question_id": "QP2208-Q5",
      "q_no": "Q5",
      "text_verbatim": "Explain the role of Classification society acting as Recognized Organization (RO) in carrying out statutory surveys. What is the criteria for approval of a R.O. by the Administration? Can the statutory surveys and classification surveys be done simultaneously by one classification society? How do Administrations monitor R.O.s.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q5"
+     ]
     },
     {
      "question_id": "QP2208-Q6",
@@ -1651,7 +2755,10 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q6"
+     ]
     },
     {
      "question_id": "QP2208-Q7",
@@ -1663,7 +2770,10 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q7"
+     ]
     },
     {
      "question_id": "QP2208-Q8",
@@ -1673,7 +2783,10 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q8"
+     ]
     },
     {
      "question_id": "QP2208-Q9",
@@ -1682,7 +2795,11 @@
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/APR/Q7",
+      "2022/AUG/Q9"
+     ]
     }
    ]
   },
@@ -1691,6 +2808,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2022,
    "month": "September",
+   "month_num": 9,
    "sitting": "September 2022",
    "second_sitting": false,
    "printed_serial": "2209 EM",
@@ -1708,14 +2826,20 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/SEP/Q1"
+     ]
     },
     {
      "question_id": "QP2209-Q2",
      "q_no": "Q2",
      "text_verbatim": "Several casualties have been reported involving ships carrying Bauxite as cargo. Discuss the causes of such casualties and the specific care and action be taken, taking into account the provisions of relevant IMO instruments, when handling and carrying bauxite in bulk.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/SEP/Q2"
+     ]
     },
     {
      "question_id": "QP2209-Q3",
@@ -1727,7 +2851,10 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/SEP/Q3"
+     ]
     },
     {
      "question_id": "QP2209-Q4",
@@ -1738,7 +2865,10 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/SEP/Q4"
+     ]
     },
     {
      "question_id": "QP2209-Q5",
@@ -1749,7 +2879,10 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/SEP/Q5"
+     ]
     },
     {
      "question_id": "QP2209-Q6",
@@ -1761,7 +2894,10 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/SEP/Q6"
+     ]
     },
     {
      "question_id": "QP2209-Q7",
@@ -1773,7 +2909,11 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/JAN/Q7",
+      "2022/SEP/Q7"
+     ]
     },
     {
      "question_id": "QP2209-Q8",
@@ -1784,7 +2924,10 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q8"
+     ]
     },
     {
      "question_id": "QP2209-Q9",
@@ -1794,7 +2937,10 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q8"
+     ]
     }
    ]
   },
@@ -1803,6 +2949,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2022,
    "month": "October",
+   "month_num": 10,
    "sitting": "October 2022",
    "second_sitting": false,
    "printed_serial": "2210 EM",
@@ -1819,14 +2966,21 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/MAR/Q1",
+      "2022/OCT/Q1"
+     ]
     },
     {
      "question_id": "QP2210-Q2",
      "q_no": "Q2",
      "text_verbatim": "Explain the principle of \"Uberrimae Fidei\" in Marine Insurance. What are the different disclosures which must be made by the insured to the insurer in Marine Insurance? List the circumstances which need not be disclosed to the insurer. What happens to the Marine Insurance contract if the disclosures are not made to the insurer at the time of the conclusion of the contract?",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/OCT/Q2"
+     ]
     },
     {
      "question_id": "QP2210-Q3",
@@ -1839,6 +2993,9 @@
      ],
      "printed_marks": [
       74
+     ],
+     "host_recurrence_hint": [
+      "2022/OCT/Q3"
      ]
     },
     {
@@ -1851,7 +3008,11 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/APR/Q6",
+      "2022/OCT/Q4"
+     ]
     },
     {
      "question_id": "QP2210-Q5",
@@ -1861,7 +3022,10 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/OCT/Q5"
+     ]
     },
     {
      "question_id": "QP2210-Q6",
@@ -1871,7 +3035,10 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/OCT/Q6"
+     ]
     },
     {
      "question_id": "QP2210-Q7",
@@ -1882,21 +3049,34 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/OCT/Q7"
+     ]
     },
     {
      "question_id": "QP2210-Q8",
      "q_no": "Q8",
      "text_verbatim": "IMO introduced the EEDl requirements under MARPOL Annex VI Chapter IV for new builds in 2013 as a measure toward the reduction of CO2 emissions from shipping. Explain the various design features adopted in the new build vessels to comply with the present EEDI framework under Phase 2 (of 20% -30% reduction).",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/OCT/Q8"
+     ]
     },
     {
      "question_id": "QP2210-Q9",
      "q_no": "Q9",
-     "text_verbatim": "A. One of the objectives of UNCLOS is protection of marine environment and prevention of pollution. Define pollution as per UNCLOS and discuss the key features of obligations of coastal states in this regard. B. State the 3 main tiers of the oil pollution damage compensation conventions of the IMO. In each case elaborate one who is responsible for payment of compensation. Also, state the source of funds as well as certification required by ship under each tier. 2015/AUG 2015/NOV 2017/OCT PUBLISHING",
+     "text_verbatim": "A. One of the objectives of UNCLOS is protection of marine environment and prevention of pollution. Define pollution as per UNCLOS and discuss the key features of obligations of coastal states in this regard. B. State the 3 main tiers of the oil pollution damage compensation conventions of the IMO. In each case elaborate one who is responsible for payment of compensation. Also, state the source of funds as well as certification required by ship under each tier. PUBLISHING",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2015/AUG",
+      "2015/NOV",
+      "2017/OCT",
+      "2021/APR/Q2",
+      "2022/OCT/Q9"
+     ]
     }
    ]
   },
@@ -1905,6 +3085,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2022,
    "month": "November",
+   "month_num": 11,
    "sitting": "November 2022",
    "second_sitting": false,
    "printed_serial": "2211 EM",
@@ -1921,68 +3102,100 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2211-Q2",
      "q_no": "Q2",
      "text_verbatim": "Briefly discuss the development of flag of convenience A. Give merits and demerits of FOC. B. Give comment on the below statement. C. The move toward open registries as an effective tool for reducing cost is driven by a style of maritime management D. Critically explain the contemporaneous changes you would suggest to the rules and procedure of Indian ship registration regime in India.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2211-Q3",
      "q_no": "Q3",
-     "text_verbatim": "Referring to the Maritime Labour Convention (MLC) 2006, discuss: a) Flag State & Port State responsibilities. b) On-board & On-shore Compliant Procedures. c) Detainable deficiencies. d) Grievance Redressal Mechanisms for Indian seafarers. 2017/AUG 2019/JAN 2019/APR 2019/JULY 2019/OCT windows | iOS | mac OS | android OS| Devices such as phones, computers, mobiles, tablets etc. 2",
+     "text_verbatim": "Referring to the Maritime Labour Convention (MLC) 2006, discuss: a) Flag State & Port State responsibilities. b) On-board & On-shore Compliant Procedures. c) Detainable deficiencies. d) Grievance Redressal Mechanisms for Indian seafarers. 2019/JULY windows | iOS | mac OS | android OS| Devices such as phones, computers, mobiles, tablets etc. 2",
      "printed_limbs": [
       "a",
       "b",
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2017/AUG",
+      "2019/JAN",
+      "2019/APR",
+      "2019/OCT",
+      "2020/MAR/Q4",
+      "2022/JAN/Q4",
+      "2022/NOV/Q3",
+      "2022/JUL/Q4",
+      "2022/NOV/Q1",
+      "2022/NOV/Q2"
+     ]
     },
     {
      "question_id": "QP2211-Q4",
      "q_no": "Q4",
      "text_verbatim": "IMO has adopted amendments to MARPOL annex 6 in MEPC 76 as part of its short term measures under GHG reduction. New regulation have been introduced on EEXI and operational CII to achieve the goals. Discuss in detail the IMO guidelines for calculation, survey and certification of EEXI and calculation of CII.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/NOV/Q4"
+     ]
     },
     {
      "question_id": "QP2211-Q5",
      "q_no": "Q5",
      "text_verbatim": "Optimization of ship dimensions is recognized as means to improve energy efficiency of ships. Discuss scope and impact of optimization of the following in improving energy efficiency of ships. Ships size and capacity. Service speed. Principle dimensions.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/NOV/Q5"
+     ]
     },
     {
      "question_id": "QP2211-Q6",
      "q_no": "Q6",
      "text_verbatim": "Explain the term liability. Explain with examples, differences between contractual and tortuous liabilities of a ship owner. A. What is vicarious liability. B. What is the significance of the Himalaya clause and where is it used.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/NOV/Q6"
+     ]
     },
     {
      "question_id": "QP2211-Q7",
      "q_no": "Q7",
      "text_verbatim": "GIVE the particulars and main provisions of the Nairobi convention. A. Describe the problems faced by costal states in respect of wrecks which are now expected to be solved by the convention.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/NOV/Q7"
+     ]
     },
     {
      "question_id": "QP2211-Q8",
      "q_no": "Q8",
      "text_verbatim": "Briefly explain the role of IACS its function and list the scope of classification As per IACS explain unified requirement and procedural requirement with suitable examples in each case. Explain assignment of class maintenance of class suspension of class and withdrawal of class.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/NOV/Q8"
+     ]
     },
     {
      "question_id": "QP2211-Q9",
      "q_no": "Q9",
      "text_verbatim": "State the UNCLOS requirement for member state. To register ships flagged with them. To control safety pollution and civil / society aspects of ships. What mechanism is used in India to comply with these requirement. PUBLISHING",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/NOV/Q9"
+     ]
     }
    ]
   },
@@ -1991,6 +3204,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2022,
    "month": "December",
+   "month_num": 12,
    "sitting": "December 2022",
    "second_sitting": false,
    "printed_serial": "2212 EM",
@@ -2008,26 +3222,40 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/DEC/Q1"
+     ]
     },
     {
      "question_id": "QP2212-Q2",
      "q_no": "Q2",
      "text_verbatim": "Ammonia is widely discussed as a sustainable fuel for future maritime applications Discuss with specific references to technical, operational, safety and commercial viability of Ammonia as a marine fuel.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/DEC/Q2"
+     ]
     },
     {
      "question_id": "QP2212-Q3",
      "q_no": "Q3",
-     "text_verbatim": "Describe the general structure of a Ballast Water Treatment (BWT) System, highlighting the following methods of treatment: - a) UV Treatment method b) Gas Treatment method c) Electrolysis method d) Magnetic Separation method. 2019/JAN 2019/FEB 2019/APR windows | iOS | mac OS | android OS| Devices such as phones, computers, mobiles, tablets etc. 2",
+     "text_verbatim": "Describe the general structure of a Ballast Water Treatment (BWT) System, highlighting the following methods of treatment: - a) UV Treatment method b) Gas Treatment method c) Electrolysis method d) Magnetic Separation method. windows | iOS | mac OS | android OS| Devices such as phones, computers, mobiles, tablets etc. 2",
      "printed_limbs": [
       "a",
       "b",
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2019/JAN",
+      "2019/FEB",
+      "2019/APR",
+      "2021/JAN/Q6",
+      "2021/JAN/Q7",
+      "2022/DEC/Q3"
+     ]
     },
     {
      "question_id": "QP2212-Q4",
@@ -2038,49 +3266,92 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q3",
+      "2022/DEC/Q4"
+     ]
     },
     {
      "question_id": "QP2212-Q5",
      "q_no": "Q5",
      "text_verbatim": "Optimization of hull Forms is recognized as means to improve energy efficiency of ships. Discuss scope and impact of optimization of the following in improving energy efficiency of ship :(i) Forebody optimization (ii) Aftbody Optimization (iii) Twin Skeg Design.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/DEC/Q5"
+     ]
     },
     {
      "question_id": "QP2212-Q6",
      "q_no": "Q6",
-     "text_verbatim": "Why does a ship require Marine Insurance cover? Explain Hull Claims and Cargo Claims related with Marine Insurance. State the related documents and information required from the ship in this regard highlighting their validity. 2010/NOV 2012/NOV 2015/DEC 2016/JUN",
+     "text_verbatim": "Why does a ship require Marine Insurance cover? Explain Hull Claims and Cargo Claims related with Marine Insurance. State the related documents and information required from the ship in this regard highlighting their validity.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/NOV",
+      "2012/NOV",
+      "2015/DEC",
+      "2016/JUN",
+      "2019/DEC/Q9",
+      "2022/DEC/Q6"
+     ]
     },
     {
      "question_id": "QP2212-Q7",
      "q_no": "Q7",
-     "text_verbatim": "(a) Describe the background and relevance of the International Convention on Civil Liability for Bunker Oil Pollution Damage, 2001. (b)Define the following under Bunker Convention and explain how they differ from other similar Convention such as CLC’92. (i) Pollution damage (ii) Bunker oil (iii) Time limits for claims (iv) Exclusions. 2016/FEB 2016/APR 2016/SEP 2017/JAN 2017/APR 2017/JUN 2017/JUN 2018/APR 2018/JULY 2019/JAN 2019/APR 2019/JUN 2019/JULY 2019/SEP 2020/JAN",
+     "text_verbatim": "(a) Describe the background and relevance of the International Convention on Civil Liability for Bunker Oil Pollution Damage, 2001. (b)Define the following under Bunker Convention and explain how they differ from other similar Convention such as CLC’92. (i) Pollution damage (ii) Bunker oil (iii) Time limits for claims (iv) Exclusions. 2018/JULY 2019/JULY",
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/FEB",
+      "2016/APR",
+      "2016/SEP",
+      "2017/JAN",
+      "2017/APR",
+      "2017/JUN",
+      "2017/JUN",
+      "2018/APR",
+      "2019/JAN",
+      "2019/APR",
+      "2019/JUN",
+      "2019/SEP",
+      "2020/JAN",
+      "2020/OCT/Q3",
+      "2021/JAN/Q9",
+      "2021/AUG/Q6",
+      "2022/JUN/Q9",
+      "2022/DEC/Q7"
+     ]
     },
     {
      "question_id": "QP2212-Q8",
      "q_no": "Q8",
-     "text_verbatim": "Referring to the latest IMO “Code on noise level onboard Ships”. Define and explain the following terms a) A-weighted equivalent sound level; b) C-weighted equivalent sound level; c) Sound Pressure Levels; d) Weight sound Reduction Index. 2016/FEB",
+     "text_verbatim": "Referring to the latest IMO “Code on noise level onboard Ships”. Define and explain the following terms a) A-weighted equivalent sound level; b) C-weighted equivalent sound level; c) Sound Pressure Levels; d) Weight sound Reduction Index.",
      "printed_limbs": [
       "a",
       "b",
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/FEB",
+      "2017/APR/Q8",
+      "2022/DEC/Q8"
+     ]
     },
     {
      "question_id": "QP2212-Q9",
      "q_no": "Q9",
      "text_verbatim": "What is Maritime Lien? How does this lien travel with property? Explain the associated terms \"In Rem\" and \"In personam\". Which convention deals with maritime lien? Give the order of settlement of various debtor's claims after legal action as per this convention. PUBLISHING",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/DEC/Q9"
+     ]
     }
    ]
   },
@@ -2089,6 +3360,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2023,
    "month": "February",
+   "month_num": 2,
    "sitting": "February 2023",
    "second_sitting": false,
    "printed_serial": "2302 EM",
@@ -2105,7 +3377,10 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2023/FEB/Q1"
+     ]
     },
     {
      "question_id": "QP2302-Q2",
@@ -2116,7 +3391,10 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2023/FEB/Q2"
+     ]
     },
     {
      "question_id": "QP2302-Q3",
@@ -2126,14 +3404,20 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2023/FEB/Q3"
+     ]
     },
     {
      "question_id": "QP2302-Q4",
      "q_no": "Q4",
      "text_verbatim": "State the difference between Maritime salvage and contractual salvage. Give simple examples. Who is responsible for payment of award to the salvor, for salvage of maritime property, as per the salvage convention? Which form popularly used in case of contractual salvage? How is the amount of award calculated .JS per this form?",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2023/FEB/Q4"
+     ]
     },
     {
      "question_id": "QP2302-Q5",
@@ -2142,17 +3426,24 @@
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2023/FEB/Q5"
+     ]
     },
     {
      "question_id": "QP2302-Q6",
      "q_no": "Q6",
-     "text_verbatim": "(a) Discuss, in detail the main function of a Bill of Lading and explain the reasons for a Bill of lading being made out 'to order' instead of to a named consignee. (b) A Bill of Lading is said to be evidence of the contract of carriage of goods. Discuss any circumstances when a Bill of Lading may become the actual contract of carriage. 2016/MAR 2021/JULY/Q5",
+     "text_verbatim": "(a) Discuss, in detail the main function of a Bill of Lading and explain the reasons for a Bill of lading being made out 'to order' instead of to a named consignee. (b) A Bill of Lading is said to be evidence of the contract of carriage of goods. Discuss any circumstances when a Bill of Lading may become the actual contract of carriage. 2021/JULY/Q5",
      "printed_limbs": [
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/MAR",
+      "2023/FEB/Q6"
+     ]
     },
     {
      "question_id": "QP2302-Q7",
@@ -2164,26 +3455,43 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q7",
+      "2023/FEB/Q7"
+     ]
     },
     {
      "question_id": "QP2302-Q8",
      "q_no": "Q8",
-     "text_verbatim": "Referring to the Maritime Labour Convention (MLC) 2006, discuss: a) Flag State & Port State responsibilities. b) On-board & On-shore Compliant Procedures. c) Detainable deficiencies. d) Grievance Redressal Mechanisms for Indian seafarers. 2017/AUG 2019/JAN 2019/APR 2019/JULY 2019/OCT",
+     "text_verbatim": "Referring to the Maritime Labour Convention (MLC) 2006, discuss: a) Flag State & Port State responsibilities. b) On-board & On-shore Compliant Procedures. c) Detainable deficiencies. d) Grievance Redressal Mechanisms for Indian seafarers. 2019/JULY",
      "printed_limbs": [
       "a",
       "b",
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2017/AUG",
+      "2019/JAN",
+      "2019/APR",
+      "2019/OCT",
+      "2020/MAR/Q4",
+      "2022/JAN/Q4",
+      "2022/NOV/Q3",
+      "2023/FEB/Q8"
+     ]
     },
     {
      "question_id": "QP2302-Q9",
      "q_no": "Q9",
      "text_verbatim": "Compare and discuss the basic features of CLC’92 and Bunker Convention2001, with specific reference to the type of ships, 0il & nature of pollution damages covered, limits of liability and geographical coverage. PUBLISHING",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2023/FEB/Q9"
+     ]
     }
    ]
   },
@@ -2192,6 +3500,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2023,
    "month": "March",
+   "month_num": 3,
    "sitting": "March 2023",
    "second_sitting": false,
    "printed_serial": "2303 EM",
@@ -2203,39 +3512,76 @@
     {
      "question_id": "QP2303-Q1",
      "q_no": "Q1",
-     "text_verbatim": "A. One of the objectives of UNCLOS is protection of marine environment and prevention of pollution. Define pollution as per UNCLOS and discuss the key features of obligations of coastal states in this regard. B. State the 3 main tiers of the oil pollution damage compensation conventions of the IMO. In each case elaborate one who is responsible for payment of compensation. Also, state the source of funds as well as certification required by ship under each tier. 2015/AUG 2015/NOV 2017/OCT",
+     "text_verbatim": "A. One of the objectives of UNCLOS is protection of marine environment and prevention of pollution. Define pollution as per UNCLOS and discuss the key features of obligations of coastal states in this regard. B. State the 3 main tiers of the oil pollution damage compensation conventions of the IMO. In each case elaborate one who is responsible for payment of compensation. Also, state the source of funds as well as certification required by ship under each tier.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2015/AUG",
+      "2015/NOV",
+      "2017/OCT",
+      "2021/APR/Q2",
+      "2022/OCT/Q9",
+      "2023/MAR/Q1"
+     ]
     },
     {
      "question_id": "QP2303-Q2",
      "q_no": "Q2",
      "text_verbatim": "What is Decarbonisation in shipping? Briefly discuss the IMO decarbonisation ambitions and pathways with focus on the short term, mid-term and long tern goals. Explain the two short-term measures approved by the IMO for implementation with their guidelines.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q4",
+      "2023/FEB/Q2",
+      "2023/MAR/Q2"
+     ]
     },
     {
      "question_id": "QP2303-Q3",
      "q_no": "Q3",
      "text_verbatim": "What are the perils of the sea which are covered in a Marine Insurance contract? What can an insured do to cover a peril other than an insured peril of the sea? Explain with examples. Also enumerate the perils which are covered under a marine insurance contract, but the onus of proof is upon the insurers to prove the assured's want of \"due diligence\" to avoid the claim. windows | iOS | mac OS | android OS| Devices such as phones, computers, mobiles, tablets etc. 2",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/AUG/Q2",
+      "2023/MAR/Q3"
+     ]
     },
     {
      "question_id": "QP2303-Q4",
      "q_no": "Q4",
-     "text_verbatim": "Exhaust emission control is a major global issue and under serious consideration by world shipping. In this context, comment on the following: - A. Primary NOx reduction vis-a-vis secondary NOx reduction measures; (8) B. Scavenge Air Moisturizing & Exhaust Gas Recirculation for main engine 2013/FEB 2013/AUG 2010/AUG 2012/OCT 2013/OCT 2013/DEC 2014/APR 2014/NOV 2015/APR 2015/OCT 2015/FEB 2016/MAR 2017/NOV 2023/MAR/4",
+     "text_verbatim": "Exhaust emission control is a major global issue and under serious consideration by world shipping. In this context, comment on the following: - A. Primary NOx reduction vis-a-vis secondary NOx reduction measures; (8) B. Scavenge Air Moisturizing & Exhaust Gas Recirculation for main engine /4",
      "printed_limbs": [],
      "printed_marks": [
       8
+     ],
+     "host_recurrence_hint": [
+      "2013/FEB",
+      "2013/AUG",
+      "2010/AUG",
+      "2012/OCT",
+      "2013/OCT",
+      "2013/DEC",
+      "2014/APR",
+      "2014/NOV",
+      "2015/APR",
+      "2015/OCT",
+      "2015/FEB",
+      "2016/MAR",
+      "2017/NOV",
+      "2023/MAR"
      ]
     },
     {
      "question_id": "QP2303-Q5",
      "q_no": "Q5",
-     "text_verbatim": "A. Describe the stages during which the power produced by the main engine of the ship transformed into the effective power. B). Discuss the essential sea trial maneuvers (navigation trials) conducted and typical objectives of each test. 2016/JUL",
+     "text_verbatim": "A. Describe the stages during which the power produced by the main engine of the ship transformed into the effective power. B). Discuss the essential sea trial maneuvers (navigation trials) conducted and typical objectives of each test.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/JUL",
+      "2023/MAR/Q5"
+     ]
     },
     {
      "question_id": "QP2303-Q6",
@@ -2248,6 +3594,9 @@
      "printed_marks": [
       8,
       8
+     ],
+     "host_recurrence_hint": [
+      "2023/MAR/Q6"
      ]
     },
     {
@@ -2261,6 +3610,9 @@
      "printed_marks": [
       8,
       8
+     ],
+     "host_recurrence_hint": [
+      "2023/MAR/Q7"
      ]
     },
     {
@@ -2271,19 +3623,33 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2023/MAR/Q8"
+     ]
     },
     {
      "question_id": "QP2303-Q9",
      "q_no": "Q9",
-     "text_verbatim": "Periodical Lubricating Oil Analysis, its correct interpretation and corrective measures are of critical significance for the maintenance of marine machineries. With reference to the modern analysis techniques employed for the condition of L.O, discuss the following: A) Elemental (Spectrometric) Analysis B) Fourier Transform Infrared (FTIR) Spectroscopy C) Particle Count D) Base Number Vs Acid Number 2016/FEB 2016/SEP 2017/JAN 2017/FEB 2017/DEC PUBLISHING",
+     "text_verbatim": "Periodical Lubricating Oil Analysis, its correct interpretation and corrective measures are of critical significance for the maintenance of marine machineries. With reference to the modern analysis techniques employed for the condition of L.O, discuss the following: A) Elemental (Spectrometric) Analysis B) Fourier Transform Infrared (FTIR) Spectroscopy C) Particle Count D) Base Number Vs Acid Number PUBLISHING",
      "printed_limbs": [
       "a",
       "b",
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/FEB",
+      "2016/SEP",
+      "2017/JAN",
+      "2017/FEB",
+      "2017/DEC",
+      "2021/JUL/Q1",
+      "2021/AUG/Q2",
+      "2022/MAR/Q2",
+      "2023/MAR/Q9"
+     ]
     }
    ]
   },
@@ -2292,6 +3658,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2023,
    "month": "June",
+   "month_num": 6,
    "sitting": "June 2023",
    "second_sitting": false,
    "printed_serial": "2306 EM",
@@ -2303,9 +3670,17 @@
     {
      "question_id": "QP2306-Q1",
      "q_no": "Q1",
-     "text_verbatim": "A. One of the objectives of UNCLOS is protection of marine environment and prevention of pollution. Define pollution as per UNCLOS and discuss the key features of obligations of coastal states in this regard. B. State the 3 main tiers of the oil pollution damage compensation conventions of the IMO. In each case elaborate one who is responsible for payment of compensation. Also, state the source of funds as well as certification required by ship under each tier. 2015/AUG 2015/NOV 2017/OCT 2023/JUNE/Q1",
+     "text_verbatim": "A. One of the objectives of UNCLOS is protection of marine environment and prevention of pollution. Define pollution as per UNCLOS and discuss the key features of obligations of coastal states in this regard. B. State the 3 main tiers of the oil pollution damage compensation conventions of the IMO. In each case elaborate one who is responsible for payment of compensation. Also, state the source of funds as well as certification required by ship under each tier. 2023/JUNE/Q1",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2015/AUG",
+      "2015/NOV",
+      "2017/OCT",
+      "2021/APR/Q2",
+      "2022/OCT/Q9",
+      "2023/MAR/Q1"
+     ]
     },
     {
      "question_id": "QP2306-Q2",
@@ -2314,7 +3689,8 @@
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2306-Q3",
@@ -2327,7 +3703,8 @@
      "printed_marks": [
       8,
       8
-     ]
+     ],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2306-Q4",
@@ -2336,7 +3713,8 @@
      "printed_limbs": [],
      "printed_marks": [
       16
-     ]
+     ],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2306-Q5",
@@ -2345,14 +3723,23 @@
      "printed_limbs": [
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2023/JAN/Q2"
+     ]
     },
     {
      "question_id": "QP2306-Q6",
      "q_no": "Q6",
      "text_verbatim": "With respect to key issue in ship repair contracts, illustrate: A. payment terms; B. ambit of the specification and additional work; C. contract period, liquidated damages and force majeure; D. guarantees and insurance; E. Termination events",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2013/SR02",
+      "2013/SR08",
+      "2014/SR11",
+      "2023/JUN/Q6"
+     ]
     },
     {
      "question_id": "QP2306-Q7",
@@ -2361,7 +3748,8 @@
      "printed_limbs": [],
      "printed_marks": [
       16
-     ]
+     ],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2306-Q8",
@@ -2374,7 +3762,8 @@
      "printed_marks": [
       8,
       8
-     ]
+     ],
+     "host_recurrence_hint": []
     },
     {
      "question_id": "QP2306-Q9",
@@ -2385,7 +3774,11 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/OCT/Q7",
+      "2023/JUN/Q9"
+     ]
     }
    ]
   },
@@ -2394,6 +3787,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2023,
    "month": "July",
+   "month_num": 7,
    "sitting": "July 2023",
    "second_sitting": false,
    "printed_serial": "2307 EM",
@@ -2415,15 +3809,27 @@
       5,
       5,
       6
+     ],
+     "host_recurrence_hint": [
+      "2022/AUG/Q3",
+      "2022/DEC/Q4",
+      "2023/JUL/Q1"
      ]
     },
     {
      "question_id": "QP2307-Q2",
      "q_no": "Q2",
-     "text_verbatim": "Detail the inspection that you as the new Chief Engineer of a passenger ship, would make on joining the ship with regard to (i) Ship Stability (ii) Damage control (iii) Firefighting (iv) Critical Machinery and equipment installed. (16) 2011/SEP/06 2011/FEB/02 2010/OCT/03 2012/SEP/09",
+     "text_verbatim": "Detail the inspection that you as the new Chief Engineer of a passenger ship, would make on joining the ship with regard to (i) Ship Stability (ii) Damage control (iii) Firefighting (iv) Critical Machinery and equipment installed. (16) /06 /02 /03 /09",
      "printed_limbs": [],
      "printed_marks": [
       16
+     ],
+     "host_recurrence_hint": [
+      "2011/SEP",
+      "2011/FEB",
+      "2010/OCT",
+      "2012/SEP",
+      "2023/JUL/Q2"
      ]
     },
     {
@@ -2441,12 +3847,15 @@
       4,
       4,
       4
+     ],
+     "host_recurrence_hint": [
+      "2023/JUL/Q3"
      ]
     },
     {
      "question_id": "QP2307-Q4",
      "q_no": "Q4",
-     "text_verbatim": "Referring to the Maritime Labour Convention (MLC) 2006, discuss a) Flag State & Port State responsibilities. (4) b) On-board & On-shore Complaint Procedures. (4) c) Detainable deficiencies. (4) d) Grievance Redressal Mechanisms for Indian seafarers. (4) 2017/AUG 2019/JAN 2019/APR 2019/JULY 2019/OCT",
+     "text_verbatim": "Referring to the Maritime Labour Convention (MLC) 2006, discuss a) Flag State & Port State responsibilities. (4) b) On-board & On-shore Complaint Procedures. (4) c) Detainable deficiencies. (4) d) Grievance Redressal Mechanisms for Indian seafarers. (4) 2019/JULY",
      "printed_limbs": [
       "a",
       "b",
@@ -2458,6 +3867,16 @@
       4,
       4,
       4
+     ],
+     "host_recurrence_hint": [
+      "2017/AUG",
+      "2019/JAN",
+      "2019/APR",
+      "2019/OCT",
+      "2020/MAR/Q4",
+      "2022/JAN/Q4",
+      "2022/NOV/Q3",
+      "2023/JUL/Q4"
      ]
     },
     {
@@ -2475,6 +3894,10 @@
       4,
       4,
       4
+     ],
+     "host_recurrence_hint": [
+      "2022/SEP/Q6",
+      "2023/JUL/Q5"
      ]
     },
     {
@@ -2484,7 +3907,12 @@
      "printed_limbs": [
       "a"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/APR/Q7",
+      "2022/AUG/Q9",
+      "2023/JUL/Q6"
+     ]
     },
     {
      "question_id": "QP2307-Q7",
@@ -2495,21 +3923,38 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/FEB/Q6",
+      "2023/JUL/Q7"
+     ]
     },
     {
      "question_id": "QP2307-Q8",
      "q_no": "Q8",
      "text_verbatim": "An Indian flag vessel collided with another vessel off the coast of India, as a result few lives were also lost and vessel damaged. In accordance with the provisions under the Merchant Shipping Act, what steps should be initiated and who should initiate such steps for the safety of the ships and the marine environment.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2014/SR03",
+      "2013/SR11",
+      "2015/SR01",
+      "2015/SR09",
+      "2023/APR/Q4",
+      "2023/JUL/Q8"
+     ]
     },
     {
      "question_id": "QP2307-Q9",
      "q_no": "Q9",
-     "text_verbatim": "What do you understand by \"Unseaworthy vessels\" within the meaning of the Merchant Shipping Act, 1958, as amended? What according to you is the difference between “Unseaworthy ships\" & \"Unsafe ships\". What are the obligations of owners to crew with respect seaworthiness? 2019/OCT PUBLISHING",
+     "text_verbatim": "What do you understand by \"Unseaworthy vessels\" within the meaning of the Merchant Shipping Act, 1958, as amended? What according to you is the difference between “Unseaworthy ships\" & \"Unsafe ships\". What are the obligations of owners to crew with respect seaworthiness? PUBLISHING",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2019/OCT",
+      "2020/MAR/Q9",
+      "2023/JUL/Q9"
+     ]
     }
    ]
   },
@@ -2518,6 +3963,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2023,
    "month": "August",
+   "month_num": 8,
    "sitting": "August 2023",
    "second_sitting": false,
    "printed_serial": "2308 EM",
@@ -2535,14 +3981,23 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/DEC/Q1",
+      "2023/AUG/Q1"
+     ]
     },
     {
      "question_id": "QP2308-Q2",
      "q_no": "Q2",
      "text_verbatim": "What is Maritime Lien? How does this lien travel with property? Explain the associated terms \"In Rem\" and \"In personam\". Which convention deals with maritime lien? Give the order of settlement of various debtor's claims after legal action as per this convention.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/DEC/Q9",
+      "2023/APR/Q5",
+      "2023/AUG/Q2"
+     ]
     },
     {
      "question_id": "QP2308-Q3",
@@ -2554,42 +4009,82 @@
       "c",
       "d"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2022/JAN/Q7",
+      "2022/SEP/Q7",
+      "2023/JAN/Q1",
+      "2023/AUG/Q3"
+     ]
     },
     {
      "question_id": "QP2308-Q4",
      "q_no": "Q4",
-     "text_verbatim": "On a ship where you are employed as Chief Engineer, the vessel has UMS system for controlling engine room and a central scanning and data logging system for monitoring. Explain the special attention you will pay to the specific data and formulate a chart for condition monitoring. Highlight the tools in computer application you will use for making graphical representation of the salient points and trend analysis. 2010/DEC 2011/JAN 2010/NOV 2011/AUG 2014/JAN 2014/DEC 2015/MAR 2016/JUN 2018/FEB",
+     "text_verbatim": "On a ship where you are employed as Chief Engineer, the vessel has UMS system for controlling engine room and a central scanning and data logging system for monitoring. Explain the special attention you will pay to the specific data and formulate a chart for condition monitoring. Highlight the tools in computer application you will use for making graphical representation of the salient points and trend analysis.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/DEC",
+      "2011/JAN",
+      "2010/NOV",
+      "2011/AUG",
+      "2014/JAN",
+      "2014/DEC",
+      "2015/MAR",
+      "2016/JUN",
+      "2018/FEB",
+      "2021/APR/Q1",
+      "2023/AUG/Q4"
+     ]
     },
     {
      "question_id": "QP2308-Q5",
      "q_no": "Q5",
      "text_verbatim": "Classification societies as Recognized Organisations (RO) and play an important role in implementation of national and international regulations. State the limitations of the RO highlighting them with reasons. List the statutory services undertaken by a classification body on behalf of Administration.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2023/AUG/Q5"
+     ]
     },
     {
      "question_id": "QP2308-Q6",
      "q_no": "Q6",
-     "text_verbatim": "A. Describe the stages during which the power produced by the main engine of the ship is transformed into the effective power. B). Discuss the essential sea trial manoeuvres (navigation trials) conducted and typical objectives of each test. 2016/JUL",
+     "text_verbatim": "A. Describe the stages during which the power produced by the main engine of the ship is transformed into the effective power. B). Discuss the essential sea trial manoeuvres (navigation trials) conducted and typical objectives of each test.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2016/JUL",
+      "2023/MAR/Q5",
+      "2023/AUG/Q6"
+     ]
     },
     {
      "question_id": "QP2308-Q7",
      "q_no": "Q7",
      "text_verbatim": "List and explain the four main stages of an IMO convention. With examples, explain the delay that occurs between the adoption date and coming into force date of a convention. What can be done to reduce this delay.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2023/AUG/Q7"
+     ]
     },
     {
      "question_id": "QP2308-Q8",
      "q_no": "Q8",
-     "text_verbatim": "Differentiate between annual, intermediate, renewal, damage and repair surveys. What are the purposes of each survey onboard? Also, enlist all statutory certificates carried onboard, their issuing authority, and the IMO Convention under which they are issued. 2019/DEC",
+     "text_verbatim": "Differentiate between annual, intermediate, renewal, damage and repair surveys. What are the purposes of each survey onboard? Also, enlist all statutory certificates carried onboard, their issuing authority, and the IMO Convention under which they are issued.",
      "printed_limbs": [],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2010/SR02",
+      "2010/SR08",
+      "2011/SR12",
+      "2012/SR02",
+      "2013/SR02",
+      "2019/DEC",
+      "2021/FEB/Q5",
+      "2023/AUG/Q8"
+     ]
     },
     {
      "question_id": "QP2308-Q9",
@@ -2600,7 +4095,172 @@
       "b",
       "c"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2023/FEB/Q2",
+      "2023/AUG/Q9"
+     ]
+    }
+   ]
+  },
+  {
+   "paper_id": "QP2309",
+   "status": "INTELLIGENCE_ONLY",
+   "year": 2023,
+   "month": "September",
+   "month_num": 9,
+   "sitting": "September 2023",
+   "second_sitting": false,
+   "printed_serial": "2309 EM",
+   "source_pages": 2,
+   "total_marks": 100,
+   "time_allowed": "3 HOURS",
+   "question_count": 9,
+   "questions": [
+    {
+     "question_id": "QP2309-Q1",
+     "q_no": "Q1",
+     "text_verbatim": "Achieve gender equality and empower all women and girls is one of the sustainable development’s goals of the U.N. With brief introduction on gender equality, discuss the following. (16) a. Why gender balance is required? b. Discuss various initiatives taken by the government of India and the international maritime organisation towards gender equality in shipping. c. How would you as the Chief engineer of a ship which has women seafarers ensure that these initiatives have the desired impact?",
+     "printed_limbs": [],
+     "printed_marks": [
+      16
+     ],
+     "host_recurrence_hint": [
+      "2023/SEP/Q1"
+     ]
+    },
+    {
+     "question_id": "QP2309-Q2",
+     "q_no": "Q2",
+     "text_verbatim": "What is a Recognized organization? What are the salient features of the R.O. Code? How do Administrations monitor R.O.s? (16)",
+     "printed_limbs": [],
+     "printed_marks": [
+      16
+     ],
+     "host_recurrence_hint": [
+      "2023/SEP/Q2"
+     ]
+    },
+    {
+     "question_id": "QP2309-Q3",
+     "q_no": "Q3",
+     "text_verbatim": "What are the ongoing developments at IMO with respect to the technical and operational and market-based measures to be invoked on board ships for combating greenhouse gas emissions from ships? (16)",
+     "printed_limbs": [],
+     "printed_marks": [
+      16
+     ],
+     "host_recurrence_hint": [
+      "2023/SEP/Q3"
+     ]
+    },
+    {
+     "question_id": "QP2309-Q4",
+     "q_no": "Q4",
+     "text_verbatim": "(a) Describe the structure of IMO. Specify the responsibilities and work done by the Assembly, the Council and various main committees. What role do the sub committees perform in supporting the main committees? (8) that runs on windows | iOS | mac OS | android OS| Devices such as phones, computers, mobiles, tablets etc. 2 (b) Define a convention. Explain the differences in international instruments such as Convention, Protocol, Code and Resolution. Give at least one example of each. (8)",
+     "printed_limbs": [
+      "a",
+      "b"
+     ],
+     "printed_marks": [
+      8,
+      8
+     ],
+     "host_recurrence_hint": [
+      "2023/SEP/Q4"
+     ]
+    },
+    {
+     "question_id": "QP2309-Q5",
+     "q_no": "Q5",
+     "text_verbatim": "In a grain carrier, how the shifting of grain affects the curve of statical stability, with a neat diagram explain the existing minimum criteria for stability of grain carrying ships. (16)",
+     "printed_limbs": [],
+     "printed_marks": [
+      16
+     ],
+     "host_recurrence_hint": [
+      "2023/SEP/Q5"
+     ]
+    },
+    {
+     "question_id": "QP2309-Q6",
+     "q_no": "Q6",
+     "text_verbatim": "A. Define the meaning of the term \"conditions of assignment\" as applied to ships; (5) B. State how conditions of assignment contribute towards the watertight integrity of ships; (5) C. Give reasons why conditions of assignment need periodic inspection, giving specific instances where they can be found to be less than fully effective. (6)",
+     "printed_limbs": [],
+     "printed_marks": [
+      5,
+      5,
+      6
+     ],
+     "host_recurrence_hint": [
+      "2011/JUL",
+      "2012/JUN",
+      "2013/MAR",
+      "2014/AUG",
+      "2015/APR",
+      "2016/MAR",
+      "2017/JUL",
+      "2017/NOV",
+      "2023/SEP/Q6"
+     ]
+    },
+    {
+     "question_id": "QP2309-Q7",
+     "q_no": "Q7",
+     "text_verbatim": "(a) State the difference between an audit and survey. (4) (b) State the action taken by a recognized organization carrying out ISM certification on behalf of the Administration towards handling of an ISM certificate in case: (i) When there is evidence of a major non conformity (2) (ii) When nonconformities are found (2) (iii) When an extension of the Safety Management Certificate is requested for (2) (iv) When revision of an entry for a certificate is requested for (2) (c) Under What circumstances SMC and DOC may be invalidated? (4)",
+     "printed_limbs": [
+      "a",
+      "b",
+      "c"
+     ],
+     "printed_marks": [
+      4,
+      2,
+      2,
+      2,
+      2,
+      4
+     ],
+     "host_recurrence_hint": [
+      "2011/SR03",
+      "2011/SR04",
+      "2011/SR11",
+      "2023/SEP/Q7"
+     ]
+    },
+    {
+     "question_id": "QP2309-Q8",
+     "q_no": "Q8",
+     "text_verbatim": "(a) What are the important highlights of UNCLOS with respect to protection and preservation of the marine environment? (6) (b) Briefly explain following: (i) Territorial sea; (2) (ii) Contiguous Zone, (2) (iii) Exclusive Economic Zone (2) (iv) Continental Shelf (2) (v) High Seas. (2)",
+     "printed_limbs": [
+      "a",
+      "b"
+     ],
+     "printed_marks": [
+      6,
+      2,
+      2,
+      2,
+      2,
+      2
+     ],
+     "host_recurrence_hint": [
+      "2023/SEP/Q8"
+     ]
+    },
+    {
+     "question_id": "QP2309-Q9",
+     "q_no": "Q9",
+     "text_verbatim": "What provisions are made under Port State Control (PSC) towards (i) Certificates issued by non- party states to their ships (ii) Inspection of ships below convention size and (iii) No more favorable treatment. (16) PUBLISHING",
+     "printed_limbs": [
+      "c"
+     ],
+     "printed_marks": [
+      16
+     ],
+     "host_recurrence_hint": [
+      "2010/SR4",
+      "2023/SEP/Q9"
+     ]
     }
    ]
   },
@@ -2609,6 +4269,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2023,
    "month": "October",
+   "month_num": 10,
    "sitting": "October 2023",
    "second_sitting": false,
    "printed_serial": "2310 EM",
@@ -2624,48 +4285,106 @@
      "printed_limbs": [],
      "printed_marks": [
       16
+     ],
+     "host_recurrence_hint": [
+      "2022/DEC/Q5",
+      "2023/OCT/Q1"
      ]
     },
     {
      "question_id": "QP2310-Q2",
      "q_no": "Q2",
-     "text_verbatim": "A. What is the purpose of annual surveys? (4) B. Give a list of items that would be examined by a surveyor during annual survey. (6) C. Also, explain condition of class. What impact condition of class has on a ship's commercial vs. technical aspects? (6) 2013/FEB 2013/AUG 2014/NOV 2015/APR 2016/MAR 2017/NOV",
+     "text_verbatim": "A. What is the purpose of annual surveys? (4) B. Give a list of items that would be examined by a surveyor during annual survey. (6) C. Also, explain condition of class. What impact condition of class has on a ship's commercial vs. technical aspects? (6)",
      "printed_limbs": [],
      "printed_marks": [
       4,
       6,
       6
+     ],
+     "host_recurrence_hint": [
+      "2013/FEB",
+      "2013/AUG",
+      "2014/NOV",
+      "2015/APR",
+      "2016/MAR",
+      "2017/NOV",
+      "2023/OCT/Q2"
      ]
     },
     {
      "question_id": "QP2310-Q3",
      "q_no": "Q3",
-     "text_verbatim": "With reference to Port State control enumerate on the following (i) Regional cooperation / agreements. (ii) Future of port State control. (iii) Is port State control an effective tool for ship safety? (16) 2010/MAR 2012/JAN 2013/FEB 2013/JUL 2014/MAR 2015/MAR 2015/DEC 2016/FEB 2016/AUG 2017/APR 2018/FEB 2018/AUG 2018/NOV",
+     "text_verbatim": "With reference to Port State control enumerate on the following (i) Regional cooperation / agreements. (ii) Future of port State control. (iii) Is port State control an effective tool for ship safety? (16)",
      "printed_limbs": [],
      "printed_marks": [
       16
+     ],
+     "host_recurrence_hint": [
+      "2010/MAR",
+      "2012/JAN",
+      "2013/FEB",
+      "2013/JUL",
+      "2014/MAR",
+      "2015/MAR",
+      "2015/DEC",
+      "2016/FEB",
+      "2016/AUG",
+      "2017/APR",
+      "2018/FEB",
+      "2018/AUG",
+      "2018/NOV",
+      "2023/OCT/Q3"
      ]
     },
     {
      "question_id": "QP2310-Q4",
      "q_no": "Q4",
-     "text_verbatim": "A. Explain the following modern methods of turbo charging – i. Pulse converter system; (4) ii. Sequential turbo charging; (4) that runs on windows | iOS | mac OS | android OS| Devices such as phones, computers, mobiles, tablets etc. 2 iii. 2 stage turbo charging; (4) iv. Variable geometry turbo charger. (4) 2012/DEC 2014/FEB 2014/JUN 2014/SEP 2014/DEC 2015/FEB 2017/JAN 2017/JUL 2017/SEP",
+     "text_verbatim": "A. Explain the following modern methods of turbo charging – i. Pulse converter system; (4) ii. Sequential turbo charging; (4) that runs on windows | iOS | mac OS | android OS| Devices such as phones, computers, mobiles, tablets etc. 2 iii. 2 stage turbo charging; (4) iv. Variable geometry turbo charger. (4)",
      "printed_limbs": [],
      "printed_marks": [
       4,
       4,
       4,
       4
+     ],
+     "host_recurrence_hint": [
+      "2012/DEC",
+      "2014/FEB",
+      "2014/JUN",
+      "2014/SEP",
+      "2014/DEC",
+      "2015/FEB",
+      "2017/JAN",
+      "2017/JUL",
+      "2017/SEP",
+      "2023/OCT/Q4"
      ]
     },
     {
      "question_id": "QP2310-Q5",
      "q_no": "Q5",
-     "text_verbatim": "Exhaust emission control is a major global issue and under serious consideration by world shipping. In this context, comment on the following: - A. Primary NOx reduction vis-a-vis secondary NOx reduction measures; (8) B. Scavenge Air Moisturizing & Exhaust Gas Recirculation for main engine. (16) 2013/FEB 2013/AUG 2010/AUG 2012/OCT 2013/OCT 2013/DEC 2014/APR 2014/NOV 2015/APR 2015/OCT 2015/FEB 2016/MAR 2017/NOV 2023/MAR/4",
+     "text_verbatim": "Exhaust emission control is a major global issue and under serious consideration by world shipping. In this context, comment on the following: - A. Primary NOx reduction vis-a-vis secondary NOx reduction measures; (8) B. Scavenge Air Moisturizing & Exhaust Gas Recirculation for main engine. (16) /4",
      "printed_limbs": [],
      "printed_marks": [
       8,
       16
+     ],
+     "host_recurrence_hint": [
+      "2013/FEB",
+      "2013/AUG",
+      "2010/AUG",
+      "2012/OCT",
+      "2013/OCT",
+      "2013/DEC",
+      "2014/APR",
+      "2014/NOV",
+      "2015/APR",
+      "2015/OCT",
+      "2015/FEB",
+      "2016/MAR",
+      "2017/NOV",
+      "2023/MAR",
+      "2023/OCT/Q5"
      ]
     },
     {
@@ -2675,6 +4394,10 @@
      "printed_limbs": [],
      "printed_marks": [
       16
+     ],
+     "host_recurrence_hint": [
+      "2023/JAN/Q9",
+      "2023/OCT/Q6"
      ]
     },
     {
@@ -2688,6 +4411,10 @@
      "printed_marks": [
       8,
       8
+     ],
+     "host_recurrence_hint": [
+      "2023/JAN/Q5",
+      "2023/OCT/Q7"
      ]
     },
     {
@@ -2702,6 +4429,9 @@
      ],
      "printed_marks": [
       16
+     ],
+     "host_recurrence_hint": [
+      "2023/OCT/Q8"
      ]
     },
     {
@@ -2712,7 +4442,10 @@
       "a",
       "b"
      ],
-     "printed_marks": []
+     "printed_marks": [],
+     "host_recurrence_hint": [
+      "2023/OCT/Q9"
+     ]
     }
    ]
   },
@@ -2721,6 +4454,7 @@
    "status": "INTELLIGENCE_ONLY",
    "year": 2023,
    "month": "November",
+   "month_num": 11,
    "sitting": "November 2023",
    "second_sitting": false,
    "printed_serial": "2311 EM",
@@ -2740,6 +4474,9 @@
      "printed_marks": [
       8,
       8
+     ],
+     "host_recurrence_hint": [
+      "2023/NOV/Q1"
      ]
     },
     {
@@ -2755,6 +4492,14 @@
       5,
       5,
       6
+     ],
+     "host_recurrence_hint": [
+      "2013/SR02",
+      "2013/SR07",
+      "2011/SR02",
+      "2014/SR04",
+      "2014/SR11",
+      "2023/NOV/Q2"
      ]
     },
     {
@@ -2772,6 +4517,16 @@
       4,
       4,
       4
+     ],
+     "host_recurrence_hint": [
+      "2010/SR01",
+      "2010/SR04",
+      "2010/SR09",
+      "2011/SR10",
+      "2011/SR11",
+      "2012/SR11",
+      "2012/SR12",
+      "2023/NOV/Q3"
      ]
     },
     {
@@ -2787,6 +4542,9 @@
       6,
       6,
       4
+     ],
+     "host_recurrence_hint": [
+      "2023/NOV/Q4"
      ]
     },
     {
@@ -2802,12 +4560,16 @@
       6,
       6,
       4
+     ],
+     "host_recurrence_hint": [
+      "2022/SEP/Q5",
+      "2023/NOV/Q5"
      ]
     },
     {
      "question_id": "QP2311-Q6",
      "q_no": "Q6",
-     "text_verbatim": "Explain the associated key factors and activities to ensure PMS onboard ships and ISM code with the following terms, a) Corrective action process; (4) b) Developing and improving maintenance records; (4) c) Systematic approach of maintenance; (4) d) Maintenance intervals & periodicity of Inspections. (4) 2010/JAN 2012/NOV 2016/JUN 2017/JUL",
+     "text_verbatim": "Explain the associated key factors and activities to ensure PMS onboard ships and ISM code with the following terms, a) Corrective action process; (4) b) Developing and improving maintenance records; (4) c) Systematic approach of maintenance; (4) d) Maintenance intervals & periodicity of Inspections. (4)",
      "printed_limbs": [
       "a",
       "b",
@@ -2819,6 +4581,13 @@
       4,
       4,
       4
+     ],
+     "host_recurrence_hint": [
+      "2010/JAN",
+      "2012/NOV",
+      "2016/JUN",
+      "2017/JUL",
+      "2023/NOV/Q6"
      ]
     },
     {
@@ -2828,6 +4597,9 @@
      "printed_limbs": [],
      "printed_marks": [
       16
+     ],
+     "host_recurrence_hint": [
+      "2023/NOV/Q7"
      ]
     },
     {
@@ -2837,6 +4609,9 @@
      "printed_limbs": [],
      "printed_marks": [
       16
+     ],
+     "host_recurrence_hint": [
+      "2023/NOV/Q8"
      ]
     },
     {
@@ -2852,11 +4627,14 @@
       5,
       5,
       6
+     ],
+     "host_recurrence_hint": [
+      "2023/NOV/Q9"
      ]
     }
    ]
   }
  ],
- "paper_count": 29,
- "question_count": 261
+ "paper_count": 30,
+ "question_count": 270
 }
