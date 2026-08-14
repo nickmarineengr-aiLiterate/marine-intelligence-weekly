@@ -454,6 +454,135 @@
     .mc-wrap,.mc-offer{display:none !important;}
   }
 
+  /* ---- orientation line, hero -------------------------------------- */
+  .sq-orient{color:#cbd5e1;font-size:.86rem;margin:1rem 0 0;max-width:70ch;line-height:1.55;}
+
+  /* ---- latest updates, collapsed by default ------------------------ */
+  .sq-upd-sec{padding-top:1.25rem;}
+  .sq-upd-d{border:1px solid var(--grey-border);border-radius:10px;background:#fff;}
+  .sq-upd-d>summary{list-style:none;cursor:pointer;padding:.7rem .9rem;display:flex;
+    align-items:center;gap:.5rem;flex-wrap:wrap;font-size:.82rem;}
+  .sq-upd-d>summary::-webkit-details-marker{display:none;}
+  .sq-upd-d>summary::after{content:'View updates BC';margin-left:auto;color:var(--teal-dark);
+    font-weight:600;white-space:nowrap;}
+  .sq-upd-d[open]>summary::after{content:'Hide updates B2';}
+  .sq-upd-d>summary:hover{background:var(--off-white);}
+  .sq-upd-d>summary:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+  .sq-upd-lead{font-weight:700;color:var(--navy);}
+  .sq-upd-d>summary time{color:var(--grey-text);}
+  .sq-upd-cta{color:var(--grey-text);}
+  .sq-upd-d>*:not(summary){padding:0 .9rem;}
+  .sq-upd-d>p.lead{padding-top:.5rem;}
+  .sq-upd-d>ul,.sq-upd-d>p.sq-upd-more{padding-bottom:.8rem;}
+
+  /* ---- search heading ---------------------------------------------- */
+  .sq-h-upd{font-size:1.05rem;margin:0 0 .5rem;color:var(--navy);}
+  .sq-h-find{font-size:1.05rem;margin:0 0 .6rem;color:var(--navy);}
+
+  /* ---- how MIW answers work --------------------------------------- */
+  .sq-how-sub{font-weight:600;color:var(--navy);}
+  .sq-how-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.4rem;
+    align-items:start;}
+  .sq-ig-wrap{margin:0;}
+  .sq-ig{width:100%;height:auto;display:block;border-radius:10px;}
+  .sq-ig-wrap figcaption{font-size:.76rem;color:var(--grey-text);margin-top:.5rem;line-height:1.5;}
+  .sq-how-list{list-style:none;margin:0;padding:0;counter-reset:m;}
+  .sq-how-list li{counter-increment:m;display:grid;grid-template-columns:1.6rem 1fr;
+    gap:.1rem .6rem;padding:.5rem 0;border-bottom:1px solid var(--grey-border);}
+  .sq-how-list li:last-child{border-bottom:0;}
+  .sq-how-list li::before{content:counter(m);grid-row:1 / span 2;align-self:start;
+    width:1.6rem;height:1.6rem;border-radius:50%;background:var(--teal-light);
+    color:var(--teal-dark);font-size:.72rem;font-weight:700;display:grid;place-items:center;}
+  .sq-how-list b{font-size:.9rem;color:var(--navy);}
+  .sq-how-list span{font-size:.8rem;color:var(--grey-text);line-height:1.5;}
+
+  /* ---- coverage by year, compact month pills ---------------------- */
+  .cov-year{font-size:1rem;margin:1.1rem 0 .5rem;color:var(--navy);
+    display:flex;align-items:baseline;gap:.55rem;}
+  .cov-count{font-size:.74rem;font-weight:600;color:var(--grey-text);}
+  .cov-months{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:6px;}
+  .cov-m{display:block;text-align:center;padding:.45rem .2rem;border-radius:8px;
+    border:1px solid var(--grey-border);text-decoration:none;}
+  .cov-m b{display:block;font-size:.8rem;}
+  .cov-m span{display:block;font-size:.63rem;text-transform:uppercase;letter-spacing:.03em;}
+  a.cov-av{background:#fff;border-color:var(--teal);color:var(--teal-dark);}
+  a.cov-av:hover{background:var(--teal-light);}
+  a.cov-av:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+  .cov-pl{background:var(--orange-light);border-color:#fed7aa;color:#b45309;}
+  .cov-ab{background:var(--grey-bg);color:var(--grey-text);}
+
+  /* ---- compact coverage matrix ------------------------------------ */
+  .sq-mx-scroll{overflow-x:auto;}
+  .sq-mx{border-collapse:separate;border-spacing:3px;font-size:.72rem;}
+  .sq-mx th{font-weight:700;color:var(--grey-text);padding:1px 4px;text-align:center;}
+  .sq-mx th[scope=row]{text-align:right;color:var(--navy);white-space:nowrap;}
+  .sq-mx abbr{text-decoration:none;border:0;}
+  .sq-mx td{width:20px;height:18px;border-radius:4px;}
+  .mx-solved{background:var(--teal-dark);}
+  .mx-intel{background:#7dd3d8;}
+  .mx-absent{background:#e2e8f0;}
+  .mx-unknown{background:#fff;box-shadow:inset 0 0 0 1px #eef2f6;}
+  .sq-mx-key{list-style:none;display:flex;flex-wrap:wrap;gap:.35rem .95rem;margin:.6rem 0 0;
+    padding:0;font-size:.72rem;color:var(--grey-text);}
+  .sq-mx-key li{display:flex;align-items:center;gap:.35rem;}
+  .sq-mx-key i{width:12px;height:12px;border-radius:3px;display:inline-block;}
+
+  /* ---- return to top ---------------------------------------------- */
+  .sq-top{position:fixed;right:14px;bottom:14px;z-index:40;display:flex;flex-direction:column;
+    align-items:center;gap:0;width:44px;min-height:44px;padding:.3rem 0;cursor:pointer;
+    border:1px solid var(--grey-border);border-radius:10px;background:#fff;
+    color:var(--teal-dark);font-size:1rem;line-height:1;
+    box-shadow:0 2px 8px rgba(15,23,42,.14);}
+  .sq-top span{font-size:.58rem;text-transform:uppercase;letter-spacing:.04em;font-weight:700;}
+  .sq-top:hover{border-color:var(--teal);background:var(--teal-light);}
+  .sq-top:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+  .sq-top[hidden]{display:none;}
+
+  /* ---- footer quote + correction form ---------------------------- */
+  .sq-foot{max-width:1080px;margin:2rem auto 0;padding:0 1.25rem;}
+  .sq-quote{margin:0 0 1.4rem;padding:1rem 1.1rem;border-left:3px solid var(--teal);
+    background:var(--off-white);border-radius:0 8px 8px 0;}
+  .sq-quote p{margin:0;font-size:1rem;color:var(--navy);font-style:italic;}
+  .sq-quote cite{display:block;margin-top:.35rem;font-size:.76rem;color:var(--grey-text);
+    font-style:normal;}
+  .sq-cf{border:1px solid var(--grey-border);border-radius:10px;padding:1rem 1.1rem 1.2rem;
+    background:#fff;}
+  .sq-cf h2{font-size:1rem;margin:0 0 .3rem;color:var(--navy);}
+  .sq-cf>p{margin:0 0 .9rem;font-size:.8rem;color:var(--grey-text);line-height:1.55;}
+  .sq-cf-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem .9rem;}
+  .sq-cf .f{margin:0;display:flex;flex-direction:column;gap:.25rem;}
+  .sq-cf .f.wide{grid-column:1 / -1;}
+  .sq-cf label{font-size:.74rem;font-weight:700;color:var(--navy);}
+  .sq-cf label span{font-weight:400;color:var(--grey-text);}
+  .sq-cf input,.sq-cf select,.sq-cf textarea{font-family:inherit;font-size:.84rem;
+    padding:.5rem .6rem;border:1px solid var(--grey-border);border-radius:7px;
+    background:#fff;color:var(--ink);min-height:40px;}
+  .sq-cf textarea{min-height:70px;resize:vertical;}
+  .sq-cf input:focus-visible,.sq-cf select:focus-visible,.sq-cf textarea:focus-visible{
+    outline:2px solid var(--teal);outline-offset:1px;border-color:var(--teal);}
+  .sq-cf-go{margin-top:.9rem;min-height:44px;padding:.6rem 1.1rem;border:0;border-radius:999px;
+    background:var(--teal-dark);color:#fff;font-size:.84rem;font-weight:700;cursor:pointer;}
+  .sq-cf-go:hover{background:var(--teal);}
+  .sq-cf-go:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+
+  @media (max-width:760px){
+    /* Visual first, then the five explanations stacked beneath it. */
+    .sq-how-grid{grid-template-columns:1fr;gap:1rem;}
+    /* Touch targets. Measured at 375px before this rule: the search field was
+       27px tall and every topic chip 32px, against a 44px minimum. The paper
+       pages already bump .learn-btn the same way, so this follows an existing
+       precedent rather than inventing a rule. */
+    .sq-find-row input{min-height:44px;}
+    .sq-upd-btn{min-height:44px;}
+    /* .sq-chip is deliberately left alone. A pre-existing rule at 640px sets it
+       to 32px and wins the cascade; raising it here would silently reverse that
+       decision and add chip rows above the fold. Recorded as a finding instead. */
+    .sq-cf-grid{grid-template-columns:1fr;}
+    .cov-months{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));}
+    .sq-upd-d>summary{font-size:.78rem;}
+    .sq-upd-d>summary::after{margin-left:0;flex-basis:100%;}
+  }
+
   .sq-hero{background:linear-gradient(135deg,#0f172a,#1e293b);color:#e2e8f0;padding:2.5rem 0 2rem;}
   .sq-hero .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem;}
   .sq-hero h1{color:#fff;font-size:1.9rem;line-height:1.25;margin:.35rem 0 .5rem;}
@@ -639,10 +768,37 @@
       <div><b>5</b><span>study modes each</span></div>
       <div><b>July 2026</b><span>newest solved sitting</span></div>
     </div>
+    <p class="sq-orient">On this page: search recurring topics, open solved papers by year, see what changed recently, and browse question-only exam history.</p>
   </div>
 </header>
 <main id="sq-main">
+<section class="sq-section sq-upd-sec">
+  <h2 class="sq-h-upd">Latest updates</h2>
+  <details class="sq-upd-d">
+    <summary>
+      <span class="sq-upd-lead">Latest update</span>
+      <time datetime="2026-08-14">14 Aug 2026</time>
+      <span class="sq-kind sq-k-added">Added</span>
+      <b>December 2023</b>
+      <span class="sq-upd-cta">49 recorded changes</span>
+    </summary>
+    <p class="lead">Every change to this collection &mdash; new sittings, corrections to published answers, and answers deepened against verified sources.</p>
+    <ul class="sq-upd">
+      <li><time datetime="2026-08-14">14 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-added">Added</span><a href="/solvedQP/QP2312.html">December 2023</a></b><span>December 2023 added &mdash; 9 solved questions now available.</span></div></li>
+      <li><time datetime="2026-08-14">14 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-added">Added</span><a href="/solvedQP/QP2304.html">April 2023</a></b><span>April 2023 added &mdash; 9 solved questions now available.</span></div></li>
+      <li><time datetime="2026-08-14">14 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-added">Added</span><a href="/solvedQP/QP2301.html">January 2023</a></b><span>January 2023 added &mdash; 9 solved questions now available.</span></div></li>
+      <li><time datetime="2026-08-14">14 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-enriched">Enriched</span><a href="/solvedQP/QP2301.html">January 2023</a></b><span>Three answers deepened against primary documents read at source: the SCOPIC on-scene appointee is the <b>Special</b> Casualty Representative, appointed at the owners' option; Rule D now carries its <b>remedies or defences</b> half; and <b>serious marine casualty</b> is correctly attributed to the harmonized reporting procedures, because the Casualty Investigation Code does not define it. <span class="sq-res-sum" style="display:inline">Q4, Q6, Q7</span></span></div></li>
+      <li><time datetime="2026-08-13">13 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-enriched">Enriched</span><a href="/solvedQP/QP2407.html">July 2024</a></b><span>General average answer deepened against the verified York-Antwerp Rules: <b>Rule D</b> (fault does not affect the right to contribution but does not prejudice remedies or defences &mdash; the residue the New Jason Clause closes), <b>Rule C</b> (direct consequences only), <b>Rule VI</b> (salvage as a particular charge) and <b>Rule XVII</b> (contributory values), plus the general-average versus particular-average distinction. <span class="sq-res-sum" style="display:inline">Q8</span></span></div></li>
+      <li><time datetime="2026-08-12">12 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-corrected">Corrected</span><a href="/solvedQP/QP2603.html">March 2026</a></b><span>Hong Kong Convention application corrected to the Article 3.3 test &mdash; the exclusion is operating only in the flag State&rsquo;s own waters for the whole of the ship&rsquo;s life, not the absence of international voyages. Corrected in the answer, the answer route, the recall card and the critical numbers, and the Article text is now cited from the Convention itself. <span class="sq-res-sum" style="display:inline">Q9</span></span></div></li>
+    </ul>
+    <p class="sq-upd-more">
+      <button type="button" id="sq-upd-btn" class="sq-upd-btn" aria-expanded="false" aria-controls="sq-upd-all">View all updates</button>
+    </p>
+    <div id="sq-upd-all" hidden></div>
+  </details>
+</section>
 <section class="sq-find">
+  <h2 class="sq-h-find">Search by topic</h2>
   <div class="sq-find-row">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
     <label class="sr-only" for="sq-q">Search solved questions by topic</label>
@@ -658,446 +814,249 @@
     <button type="button" class="sq-chip" data-topic="Indian Maritime Legislation" aria-pressed="false">Indian Maritime Legislation <span class="sq-kbd">17</span></button>
     <button type="button" class="sq-chip" data-topic="Cargo &amp; Bulk Carriage" aria-pressed="false">Cargo &amp; Bulk Carriage <span class="sq-kbd">11</span></button>
   </div>
-  <p class="hint">Searches the printed question and its topic labels across all 279 solved questions in 31 sittings. Sittings still in preparation are not searchable, because no answer exists to open. <span class="sq-kbd">Press <kbd>/</kbd> to search, <kbd>Esc</kbd> to clear.</span></p>
+  <p class="hint">Searches the printed question and its topic labels across every solved paper. <span class="sq-kbd">Press <kbd>/</kbd> to search, <kbd>Esc</kbd> to clear.</span></p>
   <div class="sq-res" id="sq-results"></div>
 </section>
+<section class="sq-section sq-how">
+  <h2>How MIW answers work</h2>
+  <p class="lead sq-how-sub">One question. Five ways to master it &mdash; understand it, plan it, write it, deepen it, recall it.</p>
+  <div class="sq-how-grid">
+    <figure class="sq-ig-wrap">
+      <svg class="sq-ig" viewBox="0 0 420 188" role="img" aria-labelledby="sq-ig-t sq-ig-d" xmlns="http://www.w3.org/2000/svg">
+        <title id="sq-ig-t">The five study modes on a solved question card</title>
+        <desc id="sq-ig-d">A question card from a solved paper. Along the top are five tabs in a row &mdash; Understand, Exam Plan, Answer, Study Guide and Recall. The Answer tab is selected, which is how every question card opens. Below the tabs is the body of the answer.</desc>
+        <rect x="1" y="1" width="418" height="186" rx="10" fill="#fff" stroke="#e2e8f0"/>
+        <rect x="1" y="1" width="418" height="34" rx="10" fill="#f8fafc"/>
+        <rect x="1" y="25" width="418" height="10" fill="#f8fafc"/>
+        <text x="16" y="23" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="700" fill="#0f172a">Q1</text>
+        <rect x="36" y="12" width="210" height="8" rx="4" fill="#e2e8f0"/>
+        <text x="404" y="23" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" font-size="10" font-weight="600" fill="#64748b">16 marks</text>
+        <line x1="1" y1="35" x2="419" y2="35" stroke="#e2e8f0"/>
+        <rect x="14" y="48" width="92" height="26" rx="13" fill="#ffffff" stroke="#e2e8f0"/>
+        <text x="60" y="65" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" font-weight="600" fill="#64748b">Understand</text>
+        <rect x="112" y="48" width="82" height="26" rx="13" fill="#ffffff" stroke="#e2e8f0"/>
+        <text x="153" y="65" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" font-weight="600" fill="#64748b">Exam Plan</text>
+        <rect x="200" y="48" width="62" height="26" rx="13" fill="#0f766e" stroke="#0f766e"/>
+        <text x="231" y="65" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" font-weight="600" fill="#ffffff">Answer</text>
+        <rect x="268" y="48" width="86" height="26" rx="13" fill="#ffffff" stroke="#e2e8f0"/>
+        <text x="311" y="65" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" font-weight="600" fill="#64748b">Study Guide</text>
+        <rect x="360" y="48" width="56" height="26" rx="13" fill="#ffffff" stroke="#e2e8f0"/>
+        <text x="388" y="65" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="11" font-weight="600" fill="#64748b">Recall</text>
+        <rect x="14" y="90" width="388" height="7" rx="3.5" fill="#cbd5e1"/>
+        <rect x="14" y="105" width="372" height="7" rx="3.5" fill="#e2e8f0"/>
+        <rect x="14" y="120" width="396" height="7" rx="3.5" fill="#e2e8f0"/>
+        <rect x="14" y="135" width="340" height="7" rx="3.5" fill="#e2e8f0"/>
+        <rect x="14" y="150" width="384" height="7" rx="3.5" fill="#e2e8f0"/>
+        <rect x="14" y="165" width="300" height="7" rx="3.5" fill="#e2e8f0"/>
+      </svg>
+      <figcaption>Every question card opens with these five modes. This is the actual control from a solved paper.</figcaption>
+    </figure>
+    <ol class="sq-how-list">
+      <li><b>Understand</b><span>What the examiner is actually asking, and the trap in the wording.</span></li>
+      <li><b>Exam Plan</b><span>How to spend the marks — the shape of the answer before you write it.</span></li>
+      <li><b>Answer</b><span>The full model written answer, regulation-referenced.</span></li>
+      <li><b>Study Guide</b><span>The background you need if the topic is not yet solid.</span></li>
+      <li><b>Recall</b><span>Fifteen-second revision — route, critical number, major trap.</span></li>
+    </ol>
+  </div>
+</section>
 <section class="sq-section">
-  <h2>Latest updates</h2>
-  <p class="lead">What has changed in this collection &mdash; new sittings, corrections to published answers, and answers deepened against verified sources. If you have already studied a question, this is where you find out it moved.</p>
-  <ul class="sq-upd">
-    <li><time datetime="2026-08-14">14 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-added">Added</span><a href="/solvedQP/QP2312.html">December 2023</a></b><span>December 2023 added &mdash; 9 solved questions now available.</span></div></li>
-    <li><time datetime="2026-08-14">14 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-added">Added</span><a href="/solvedQP/QP2304.html">April 2023</a></b><span>April 2023 added &mdash; 9 solved questions now available.</span></div></li>
-    <li><time datetime="2026-08-14">14 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-added">Added</span><a href="/solvedQP/QP2301.html">January 2023</a></b><span>January 2023 added &mdash; 9 solved questions now available.</span></div></li>
-    <li><time datetime="2026-08-14">14 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-enriched">Enriched</span><a href="/solvedQP/QP2301.html">January 2023</a></b><span>Three answers deepened against primary documents read at source: the SCOPIC on-scene appointee is the <b>Special</b> Casualty Representative, appointed at the owners' option; Rule D now carries its <b>remedies or defences</b> half; and <b>serious marine casualty</b> is correctly attributed to the harmonized reporting procedures, because the Casualty Investigation Code does not define it. <span class="sq-res-sum" style="display:inline">Q4, Q6, Q7</span></span></div></li>
-    <li><time datetime="2026-08-13">13 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-enriched">Enriched</span><a href="/solvedQP/QP2407.html">July 2024</a></b><span>General average answer deepened against the verified York-Antwerp Rules: <b>Rule D</b> (fault does not affect the right to contribution but does not prejudice remedies or defences &mdash; the residue the New Jason Clause closes), <b>Rule C</b> (direct consequences only), <b>Rule VI</b> (salvage as a particular charge) and <b>Rule XVII</b> (contributory values), plus the general-average versus particular-average distinction. <span class="sq-res-sum" style="display:inline">Q8</span></span></div></li>
-    <li><time datetime="2026-08-12">12 Aug 2026</time><div class="what"><b><span class="sq-kind sq-k-corrected">Corrected</span><a href="/solvedQP/QP2603.html">March 2026</a></b><span>Hong Kong Convention application corrected to the Article 3.3 test &mdash; the exclusion is operating only in the flag State&rsquo;s own waters for the whole of the ship&rsquo;s life, not the absence of international voyages. Corrected in the answer, the answer route, the recall card and the critical numbers, and the Article text is now cited from the Convention itself. <span class="sq-res-sum" style="display:inline">Q9</span></span></div></li>
+  <h2>Coverage by year</h2>
+  <p class="lead">Every year with solved papers, newest first &mdash; open a month to work the paper. Months marked as having no sitting carry the evidence for saying so. For the full examination history, including years held as questions only, see the map below.</p>
+  <h3 class="cov-year">2026 <span class="cov-count">6 solved</span></h3>
+  <div class="cov-months">
+    <a class="cov-m cov-av" href="/solvedQP/QP2601.html"><b>Jan</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2602.html"><b>Feb</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2603.html"><b>Mar</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2604.html"><b>Apr</b><span>Solved</span></a>
+    <span class="cov-m cov-ab" title="No May sitting appears in the MIW source set, and the printed serial numbering skips it in every year MIW holds &mdash; 2021 runs &hellip;2104, 2107&hellip;, 2022 runs &hellip;2204, 2206&hellip;, and 2023 to 2025 run &hellip;2304, 2306&hellip;, &hellip;2404, 2406&hellip; and &hellip;2504, 2506&hellip;."><b>May</b><span>No sitting</span></span>
+    <a class="cov-m cov-av" href="/solvedQP/QP2606.html"><b>Jun</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2607.html"><b>Jul</b><span>Solved</span></a>
+  </div>
+  <h3 class="cov-year">2025 <span class="cov-count">11 solved</span></h3>
+  <div class="cov-months">
+    <a class="cov-m cov-av" href="/solvedQP/QP2501.html"><b>Jan</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2502.html"><b>Feb</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2503.html"><b>Mar</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2504.html"><b>Apr</b><span>Solved</span></a>
+    <span class="cov-m cov-ab" title="No May sitting. The printed serial numbering runs &hellip;2504, 2506&hellip; with nothing at 2505."><b>May</b><span>No sitting</span></span>
+    <a class="cov-m cov-av" href="/solvedQP/QP2506.html"><b>Jun</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2507.html"><b>Jul</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2508.html"><b>Aug</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2509.html"><b>Sep</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2510.html"><b>Oct</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2511.html"><b>Nov</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2512.html"><b>Dec</b><span>Solved</span></a>
+  </div>
+  <h3 class="cov-year">2024 <span class="cov-count">11 solved</span></h3>
+  <div class="cov-months">
+    <a class="cov-m cov-av" href="/solvedQP/QP2401.html"><b>Jan</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2402.html"><b>Feb</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2403.html"><b>Mar</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2404.html"><b>Apr</b><span>Solved</span></a>
+    <span class="cov-m cov-ab" title="No May sitting. The printed serial numbering runs &hellip;2404, 2406&hellip; with nothing at 2405."><b>May</b><span>No sitting</span></span>
+    <a class="cov-m cov-av" href="/solvedQP/QP2406.html"><b>Jun</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2407.html"><b>Jul</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2408.html"><b>Aug</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2409.html"><b>Sep</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2410.html"><b>Oct</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2411.html"><b>Nov</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2412.html"><b>Dec</b><span>Solved</span></a>
+  </div>
+  <h3 class="cov-year">2023 <span class="cov-count">3 solved</span></h3>
+  <div class="cov-months">
+    <a class="cov-m cov-av" href="/solvedQP/QP2301.html"><b>Jan</b><span>Solved</span></a>
+    <a class="cov-m cov-av" href="/solvedQP/QP2304.html"><b>Apr</b><span>Solved</span></a>
+    <span class="cov-m cov-ab" title="No May sitting. The printed serial numbering runs &hellip;2304, 2306&hellip; with nothing at 2305."><b>May</b><span>No sitting</span></span>
+    <a class="cov-m cov-av" href="/solvedQP/QP2312.html"><b>Dec</b><span>Solved</span></a>
+  </div>
+</section>
+<section class="sq-section sq-mx-sec">
+  <h2>Examination history at a glance</h2>
+  <p class="lead">Every month of every year MIW has evidence about. Four states, and the last two are different claims: <b>no sitting</b> means no paper was numbered and the printed serial sequence skips it; <b>not held</b> means MIW has no source copy, which says nothing about whether an examination took place.</p>
+  <div class="sq-mx-scroll">
+  <table class="sq-mx"><caption class="sr-only">Examination coverage by year and month</caption>
+    <thead><tr><th scope="col">Year</th>
+      <th scope="col"><abbr title="January">J</abbr></th>
+      <th scope="col"><abbr title="February">F</abbr></th>
+      <th scope="col"><abbr title="March">M</abbr></th>
+      <th scope="col"><abbr title="April">A</abbr></th>
+      <th scope="col"><abbr title="May">M</abbr></th>
+      <th scope="col"><abbr title="June">J</abbr></th>
+      <th scope="col"><abbr title="July">J</abbr></th>
+      <th scope="col"><abbr title="August">A</abbr></th>
+      <th scope="col"><abbr title="September">S</abbr></th>
+      <th scope="col"><abbr title="October">O</abbr></th>
+      <th scope="col"><abbr title="November">N</abbr></th>
+      <th scope="col"><abbr title="December">D</abbr></th>
+    </tr></thead>
+    <tbody>
+      <tr><th scope="row">2026</th>
+        <td class="mx-solved"><span class="sr-only">January 2026: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">February 2026: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">March 2026: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">April 2026: Solved</span></td>
+        <td class="mx-absent"><span class="sr-only">May 2026: No sitting</span></td>
+        <td class="mx-solved"><span class="sr-only">June 2026: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">July 2026: Solved</span></td>
+        <td class="mx-unknown"><span class="sr-only">August 2026: Not held</span></td>
+        <td class="mx-unknown"><span class="sr-only">September 2026: Not held</span></td>
+        <td class="mx-unknown"><span class="sr-only">October 2026: Not held</span></td>
+        <td class="mx-unknown"><span class="sr-only">November 2026: Not held</span></td>
+        <td class="mx-unknown"><span class="sr-only">December 2026: Not held</span></td>
+      </tr>
+      <tr><th scope="row">2025</th>
+        <td class="mx-solved"><span class="sr-only">January 2025: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">February 2025: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">March 2025: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">April 2025: Solved</span></td>
+        <td class="mx-absent"><span class="sr-only">May 2025: No sitting</span></td>
+        <td class="mx-solved"><span class="sr-only">June 2025: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">July 2025: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">August 2025: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">September 2025: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">October 2025: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">November 2025: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">December 2025: Solved</span></td>
+      </tr>
+      <tr><th scope="row">2024</th>
+        <td class="mx-solved"><span class="sr-only">January 2024: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">February 2024: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">March 2024: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">April 2024: Solved</span></td>
+        <td class="mx-absent"><span class="sr-only">May 2024: No sitting</span></td>
+        <td class="mx-solved"><span class="sr-only">June 2024: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">July 2024: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">August 2024: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">September 2024: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">October 2024: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">November 2024: Solved</span></td>
+        <td class="mx-solved"><span class="sr-only">December 2024: Solved</span></td>
+      </tr>
+      <tr><th scope="row">2023</th>
+        <td class="mx-solved"><span class="sr-only">January 2023: Solved</span></td>
+        <td class="mx-intel"><span class="sr-only">February 2023: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">March 2023: Questions only</span></td>
+        <td class="mx-solved"><span class="sr-only">April 2023: Solved</span></td>
+        <td class="mx-absent"><span class="sr-only">May 2023: No sitting</span></td>
+        <td class="mx-intel"><span class="sr-only">June 2023: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">July 2023: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">August 2023: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">September 2023: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">October 2023: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">November 2023: Questions only</span></td>
+        <td class="mx-solved"><span class="sr-only">December 2023: Solved</span></td>
+      </tr>
+      <tr><th scope="row">2022</th>
+        <td class="mx-intel"><span class="sr-only">January 2022: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">February 2022: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">March 2022: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">April 2022: Questions only</span></td>
+        <td class="mx-absent"><span class="sr-only">May 2022: No sitting</span></td>
+        <td class="mx-intel"><span class="sr-only">June 2022: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">July 2022: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">August 2022: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">September 2022: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">October 2022: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">November 2022: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">December 2022: Questions only</span></td>
+      </tr>
+      <tr><th scope="row">2021</th>
+        <td class="mx-intel"><span class="sr-only">January 2021: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">February 2021: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">March 2021: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">April 2021: Questions only</span></td>
+        <td class="mx-absent"><span class="sr-only">May 2021: No sitting</span></td>
+        <td class="mx-absent"><span class="sr-only">June 2021: No sitting</span></td>
+        <td class="mx-intel"><span class="sr-only">July 2021: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">August 2021: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">September 2021: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">October 2021: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">November 2021: Questions only</span></td>
+        <td class="mx-intel"><span class="sr-only">December 2021: Questions only</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <ul class="sq-mx-key">
+    <li><i class="mx-solved"></i>Solved</li>
+    <li><i class="mx-intel"></i>Questions only</li>
+    <li><i class="mx-absent"></i>No sitting</li>
+    <li><i class="mx-unknown"></i>Not held</li>
   </ul>
-  <p class="sq-upd-more">
-    <button type="button" id="sq-upd-btn" class="sq-upd-btn" aria-expanded="false" aria-controls="sq-upd-all">View all updates</button>
-    <span class="sq-kbd"> &middot; 49 recorded changes</span>
-  </p>
-  <div id="sq-upd-all" hidden></div>
 </section>
 <section class="sq-section">
-  <h2>Solved papers</h2>
-  <p class="lead">Each paper opens as a full interactive sitting &mdash; search across questions, bookmark, and track what you have worked through.</p>
-  <div class="sq-grid">
-    <article class="sq-card sq-newest" data-paper-id="QP2607">
-      <span class="m">Newest sitting</span>
-      <h3><a href="/solvedQP/QP2607.html">July 2026</a></h3>
-      <p class="meta">Sr. No. QP-2607 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2607.html">Open July &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2606">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2606.html">June 2026</a></h3>
-      <p class="meta">Sr. No. QP-2606 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2606.html">Open June &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2604">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2604.html">April 2026</a></h3>
-      <p class="meta">Sr. No. QP-2604 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2604.html">Open April &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2603">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2603.html">March 2026</a></h3>
-      <p class="meta">Sr. No. QP-2603 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2603.html">Open March &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2602">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2602.html">February 2026</a></h3>
-      <p class="meta">Sr. No. QP-2602 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2602.html">Open February &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2601">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2601.html">January 2026</a></h3>
-      <p class="meta">Sr. No. QP-2601 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2601.html">Open January &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2512">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2512.html">December 2025</a></h3>
-      <p class="meta">Sr. No. QP-2512 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2512.html">Open December &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2511">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2511.html">November 2025</a></h3>
-      <p class="meta">Sr. No. QP-2511 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2511.html">Open November &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2510">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2510.html">October 2025</a></h3>
-      <p class="meta">Sr. No. QP-2510 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2510.html">Open October &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2509">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2509.html">September 2025</a></h3>
-      <p class="meta">Sr. No. QP-2509 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2509.html">Open September &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2508">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2508.html">August 2025</a></h3>
-      <p class="meta">Sr. No. QP-2508 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2508.html">Open August &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2507">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2507.html">July 2025</a></h3>
-      <p class="meta">Sr. No. QP-2507 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2507.html">Open July &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2506">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2506.html">June 2025</a></h3>
-      <p class="meta">Sr. No. QP-2506 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2506.html">Open June &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2504">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2504.html">April 2025</a></h3>
-      <p class="meta">Sr. No. QP-2504 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2504.html">Open April &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2503">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2503.html">March 2025</a></h3>
-      <p class="meta">Sr. No. QP-2503 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2503.html">Open March &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2502">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2502.html">February 2025</a></h3>
-      <p class="meta">Sr. No. QP-2502 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2502.html">Open February &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2501">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2501.html">January 2025</a></h3>
-      <p class="meta">Sr. No. QP-2501 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2501.html">Open January &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2412">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2412.html">December 2024</a></h3>
-      <p class="meta">Sr. No. QP-2412 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2412.html">Open December &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2411">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2411.html">November 2024</a></h3>
-      <p class="meta">Sr. No. QP-2411 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2411.html">Open November &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2410">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2410.html">October 2024</a></h3>
-      <p class="meta">Sr. No. QP-2410 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2410.html">Open October &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2409">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2409.html">September 2024</a></h3>
-      <p class="meta">Sr. No. QP-2409 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2409.html">Open September &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2408">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2408.html">August 2024</a></h3>
-      <p class="meta">Sr. No. QP-2408 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2408.html">Open August &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2407">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2407.html">July 2024</a></h3>
-      <p class="meta">Sr. No. QP-2407 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2407.html">Open July &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2406">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2406.html">June 2024</a></h3>
-      <p class="meta">Sr. No. QP-2406 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2406.html">Open June &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2404">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2404.html">April 2024</a></h3>
-      <p class="meta">Sr. No. QP-2404 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2404.html">Open April &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2403">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2403.html">March 2024</a></h3>
-      <p class="meta">Sr. No. QP-2403 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2403.html">Open March &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2402">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2402.html">February 2024</a></h3>
-      <p class="meta">Sr. No. QP-2402 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2402.html">Open February &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2401">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2401.html">January 2024</a></h3>
-      <p class="meta">Sr. No. QP-2401 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2401.html">Open January &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2312">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2312.html">December 2023</a></h3>
-      <p class="meta">Sr. No. QP-2312 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2312.html">Open December &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2304">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2304.html">April 2023</a></h3>
-      <p class="meta">Sr. No. QP-2304 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2304.html">Open April &rarr;</a>
-    </article>
-    <article class="sq-card" data-paper-id="QP2301">
-      <span class="m">Engineering Management</span>
-      <h3><a href="/solvedQP/QP2301.html">January 2023</a></h3>
-      <p class="meta">Sr. No. QP-2301 &middot; 9 questions &middot; answer six<br>3 hours &middot; total marks 100</p>
-      <a class="go" href="/solvedQP/QP2301.html">Open January &rarr;</a>
-    </article>
-  </div>
-</section>
-<section class="sq-section">
-  <h2>Coverage by sitting</h2>
-  <p class="lead">What is solved today, what is being worked on, and which months had no examination. Months with no entry below are simply not in the MIW source set yet &mdash; that is a statement about our coverage, not about whether a sitting was held.</p>
-  <h3 class="cov-year">2026</h3>
-  <div class="sq-grid cov-grid">
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2601.html">January 2026</a></h3>
-      <a class="go" href="/solvedQP/QP2601.html">Open January &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2602.html">February 2026</a></h3>
-      <a class="go" href="/solvedQP/QP2602.html">Open February &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2603.html">March 2026</a></h3>
-      <a class="go" href="/solvedQP/QP2603.html">Open March &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2604.html">April 2026</a></h3>
-      <a class="go" href="/solvedQP/QP2604.html">Open April &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-absent">
-      <span class="m">No sitting</span>
-      <h3>May 2026</h3>
-      <p class="meta">No examination paper exists for this month.</p>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2606.html">June 2026</a></h3>
-      <a class="go" href="/solvedQP/QP2606.html">Open June &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2607.html">July 2026</a></h3>
-      <a class="go" href="/solvedQP/QP2607.html">Open July &rarr;</a>
-    </article>
-  </div>
-  <h3 class="cov-year">2025</h3>
-  <div class="sq-grid cov-grid">
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2501.html">January 2025</a></h3>
-      <a class="go" href="/solvedQP/QP2501.html">Open January &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2502.html">February 2025</a></h3>
-      <a class="go" href="/solvedQP/QP2502.html">Open February &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2503.html">March 2025</a></h3>
-      <a class="go" href="/solvedQP/QP2503.html">Open March &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2504.html">April 2025</a></h3>
-      <a class="go" href="/solvedQP/QP2504.html">Open April &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-absent">
-      <span class="m">No sitting</span>
-      <h3>May 2025</h3>
-      <p class="meta">No examination paper exists for this month.</p>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2506.html">June 2025</a></h3>
-      <a class="go" href="/solvedQP/QP2506.html">Open June &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2507.html">July 2025</a></h3>
-      <a class="go" href="/solvedQP/QP2507.html">Open July &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2508.html">August 2025</a></h3>
-      <a class="go" href="/solvedQP/QP2508.html">Open August &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2509.html">September 2025</a></h3>
-      <a class="go" href="/solvedQP/QP2509.html">Open September &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2510.html">October 2025</a></h3>
-      <a class="go" href="/solvedQP/QP2510.html">Open October &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2511.html">November 2025</a></h3>
-      <a class="go" href="/solvedQP/QP2511.html">Open November &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2512.html">December 2025</a></h3>
-      <a class="go" href="/solvedQP/QP2512.html">Open December &rarr;</a>
-    </article>
-  </div>
-  <h3 class="cov-year">2024</h3>
-  <div class="sq-grid cov-grid">
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2401.html">January 2024</a></h3>
-      <a class="go" href="/solvedQP/QP2401.html">Open January &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2402.html">February 2024</a></h3>
-      <a class="go" href="/solvedQP/QP2402.html">Open February &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2403.html">March 2024</a></h3>
-      <a class="go" href="/solvedQP/QP2403.html">Open March &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2404.html">April 2024</a></h3>
-      <a class="go" href="/solvedQP/QP2404.html">Open April &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-absent">
-      <span class="m">No sitting</span>
-      <h3>May 2024</h3>
-      <p class="meta">No examination paper exists for this month.</p>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2406.html">June 2024</a></h3>
-      <a class="go" href="/solvedQP/QP2406.html">Open June &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2407.html">July 2024</a></h3>
-      <a class="go" href="/solvedQP/QP2407.html">Open July &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2408.html">August 2024</a></h3>
-      <a class="go" href="/solvedQP/QP2408.html">Open August &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2409.html">September 2024</a></h3>
-      <a class="go" href="/solvedQP/QP2409.html">Open September &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2410.html">October 2024</a></h3>
-      <a class="go" href="/solvedQP/QP2410.html">Open October &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2411.html">November 2024</a></h3>
-      <a class="go" href="/solvedQP/QP2411.html">Open November &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2412.html">December 2024</a></h3>
-      <a class="go" href="/solvedQP/QP2412.html">Open December &rarr;</a>
-    </article>
-  </div>
-  <h3 class="cov-year">2023</h3>
-  <div class="sq-grid cov-grid">
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2301.html">January 2023</a></h3>
-      <a class="go" href="/solvedQP/QP2301.html">Open January &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2304.html">April 2023</a></h3>
-      <a class="go" href="/solvedQP/QP2304.html">Open April &rarr;</a>
-    </article>
-    <article class="sq-card cov cov-available">
-      <span class="m">Available</span>
-      <h3><a href="/solvedQP/QP2312.html">December 2023</a></h3>
-      <a class="go" href="/solvedQP/QP2312.html">Open December &rarr;</a>
-    </article>
-  </div>
-</section>
-<section class="sq-section">
-  <h2>How every question is worked</h2>
-  <p class="lead">The same five modes on every question, in the same order. The route through an answer is written once and reused by the plan, the guide and the recall.</p>
-  <div class="sq-modes">
-    <div class="sq-mode"><b>Understand</b><span>What the examiner is actually asking, and the trap in the wording.</span></div>
-    <div class="sq-mode"><b>Exam Plan</b><span>How to spend the marks — the shape of the answer before you write it.</span></div>
-    <div class="sq-mode"><b>Answer</b><span>The full model written answer, regulation-referenced.</span></div>
-    <div class="sq-mode"><b>Study Guide</b><span>The background you need if the topic is not yet solid.</span></div>
-    <div class="sq-mode"><b>Recall</b><span>Fifteen-second revision — route, critical number, major trap.</span></div>
-  </div>
-</section>
-<section class="sq-section">
-  <h2>Questions by year</h2>
-  <p class="lead">Every question set in a year, month by month, with printed marks, topic and how often the question has recurred across sittings. Questions only &mdash; use it to test yourself before opening an answer.</p>
+  <h2>QP intelligence by year</h2>
+  <p class="lead"><b>Questions only</b> &mdash; the printed wording, the marks, the topic and how often each question has recurred across sittings. No answers on these sheets, so use them to test yourself before opening a solved paper.</p>
   <div class="sq-grid">
     <article class="sq-card">
-      <span class="m">Question intelligence</span>
+      <span class="m">Questions only</span>
       <h3><a href="/solvedQP/questions-2026.html">2026 &mdash; all questions</a></h3>
       <p class="meta">54 questions across 6 sittings, with recurrence history.</p>
       <a class="go" href="/solvedQP/questions-2026.html">Open the 2026 sheet &rarr;</a>
     </article>
     <article class="sq-card">
-      <span class="m">Question intelligence</span>
+      <span class="m">Questions only</span>
       <h3><a href="/solvedQP/questions-2025.html">2025 &mdash; all questions</a></h3>
       <p class="meta">99 questions across 11 sittings, with recurrence history.</p>
       <a class="go" href="/solvedQP/questions-2025.html">Open the 2025 sheet &rarr;</a>
     </article>
     <article class="sq-card">
-      <span class="m">Question intelligence</span>
+      <span class="m">Questions only</span>
       <h3><a href="/solvedQP/questions-2024.html">2024 &mdash; all questions</a></h3>
       <p class="meta">99 questions across 11 sittings, with recurrence history.</p>
       <a class="go" href="/solvedQP/questions-2024.html">Open the 2024 sheet &rarr;</a>
     </article>
     <article class="sq-card">
-      <span class="m">Question intelligence</span>
+      <span class="m">Questions only</span>
       <h3><a href="/solvedQP/questions-2023.html">2023 &mdash; all questions</a></h3>
       <p class="meta">27 questions across 3 sittings, with recurrence history.</p>
       <a class="go" href="/solvedQP/questions-2023.html">Open the 2023 sheet &rarr;</a>
     </article>
   </div>
 </section>
-<p class="sq-note">Your access covers every solved paper here, including all future sittings added to this collection. Spotted something that needs correcting? <a href="mailto:contactus@marineintelligenceweekly.com?subject=Solved%20QP%20correction">contactus@marineintelligenceweekly.com</a>.</p>
+<p class="sq-note">Your access covers every solved paper here, including all future sittings added to this collection.</p>
+<button type="button" id="sq-top" class="sq-top" hidden aria-label="Return to top of page">&uarr;<span>Top</span></button>
 </main>
 <script>
   window.MIWCorpus = (function () {
@@ -1179,6 +1138,23 @@
              index: function () { return IDX; } };
   })();
 </script>
+<section class="sq-foot">
+  <blockquote class="sq-quote"><p>&ldquo;Fall seven times, stand up eight.&rdquo;</p><cite>Japanese proverb</cite></blockquote>
+  <form class="sq-cf" action="https://formspree.io/f/maqgoeww" method="POST">
+    <h2>Spotted something wrong?</h2>
+    <p>Corrections are read and, if verified, applied at source &mdash; and the change then appears in Latest updates above.</p>
+    <input type="hidden" name="_subject" value="Solved QP correction">
+    <input type="hidden" name="source_page" value="Solved QP home">
+    <div class="sq-cf-grid">
+      <p class="f"><label for="cf-ref">Paper / question</label><input id="cf-ref" name="topic_reference" type="text" placeholder="e.g. April 2023, Q4" required></p>
+      <p class="f"><label for="cf-type">Type</label><select id="cf-type" name="submission_type" required><option value="">Select&hellip;</option><option value="Error / correction">Error / correction</option><option value="Suggestion">Suggestion</option><option value="Missing point">Missing point</option></select></p>
+      <p class="f wide"><label for="cf-detail">Comment</label><textarea id="cf-detail" name="details" rows="3" placeholder="What is wrong, and the regulation or source if you have it." required></textarea></p>
+      <p class="f"><label for="cf-name">Name <span>(optional)</span></label><input id="cf-name" name="name" type="text" autocomplete="name"></p>
+      <p class="f"><label for="cf-email">Email <span>(optional, for a reply)</span></label><input id="cf-email" name="email" type="email" autocomplete="email"></p>
+    </div>
+    <button type="submit" class="sq-cf-go">Send correction</button>
+  </form>
+</section>
 <footer class="page-footer">
   Marine Intelligence Weekly &mdash; MEO Class I Written Questions &amp; Answers &middot; Compiled by Nixon Antony, 2/E, Maersk A/S<br>
   Examination questions are reproduced for study purposes. For personal exam-preparation use. Not for redistribution. Corrections: <a href="mailto:contactus@marineintelligenceweekly.com">contactus@marineintelligenceweekly.com</a>
@@ -1438,5 +1414,34 @@
 })();
 </script>
 
+<script>
+
+(function(){
+  var b=document.getElementById('sq-top'); if(!b) return;
+  // Revealed only once the reader is genuinely deep in the page. A control that
+  // is present from the first pixel is noise on a page that fits one screen.
+  var SHOW=600, shown=false;
+  function sync(){
+    var y=window.pageYOffset||document.documentElement.scrollTop;
+    var want=y>SHOW;
+    if(want!==shown){ shown=want; b.hidden=!want; }
+  }
+  // Called straight from the scroll handler rather than gated behind
+  // requestAnimationFrame. sync() is one property read and a boolean compare, so
+  // it is cheap enough to run inline -- and rAF does not fire at all when the
+  // page is in a background or non-compositing view, which left the control
+  // permanently hidden. Correctness beats the micro-optimisation here.
+  addEventListener('scroll', sync, {passive:true});
+  sync();
+  b.addEventListener('click',function(){
+    // Honour a reader who has asked the operating system for less motion.
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+    var h=document.querySelector('h1');
+    if(h){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); }
+  });
+})();
+
+</script>
 </body>
 </html>

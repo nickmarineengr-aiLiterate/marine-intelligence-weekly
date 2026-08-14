@@ -1,0 +1,801 @@
+# Build Token-Efficient Production Agents for QB and MIW Notes
+
+You are working inside the existing Marine Intelligence Weekly project and already understand its repository structure, production workflow, quality standards, and available production skills.
+
+I want you to design and implement two separate Claude Code agents:
+
+1. **QB Production Agent**
+2. **MIW Notes Production Agent**
+
+These agents are part of the **Marine Intelligence Weekly project only**. They are not part of RulesApp and must not introduce RulesApp architecture, schemas, governance, terminology, or dependencies into this work.
+
+## Primary Objective
+
+The purpose of these agents is to reduce repeated Claude token consumption by moving routine, deterministic, and repeatable production work into the Python programs and local tooling already built in the MIW project.
+
+Claude must remain in the workflow, but primarily as:
+
+* workflow engineer;
+* task planner;
+* exception handler;
+* engineering judgement layer;
+* regulatory verification layer;
+* amendment and correction reviewer;
+* final quality-control reviewer before Founder review.
+
+Claude should not repeatedly regenerate entire documents when the same work can be performed deterministically by Python.
+
+The intended operating model is:
+
+```text
+Source material
+      ↓
+Deterministic local extraction and preprocessing
+      ↓
+Python-based document construction
+      ↓
+Targeted AI intervention only where judgement is required
+      ↓
+Deterministic validation and quality checks
+      ↓
+Claude final engineering and editorial review
+      ↓
+Founder review
+```
+
+The local repository and generated files remain the authoritative working state. Chat history must not become the only place where production state, decisions, or corrections exist.
+
+---
+
+# Part A — First Inspect the Existing MIW Production System
+
+Before designing anything, inspect the current MIW repository and identify:
+
+* existing Python production programs;
+* current production skills;
+* templates;
+* prompt files;
+* schemas;
+* validation scripts;
+* source, staging, generated, reviewed, and published directories;
+* QB production workflow;
+* MIW Notes production workflow;
+* verification and correction procedures;
+* amendment tracking;
+* provenance handling;
+* file-naming rules;
+* state or queue files;
+* any existing agent definitions;
+* any partially implemented automation relevant to this task.
+
+Do not assume that a new framework must be built from scratch.
+
+Reuse and extend the existing system wherever it is technically sound.
+
+Do not create duplicate tools when an existing script can be adapted safely.
+
+Before implementation, report:
+
+1. What already exists.
+2. What can be reused unchanged.
+3. What requires modification.
+4. What genuinely needs to be added.
+5. Which steps currently consume unnecessary Claude tokens.
+6. Which steps must remain under AI or human judgement.
+7. The proposed architecture for the two agents.
+8. The implementation packages required.
+
+Do not begin large-scale implementation until this inspection and architecture assessment are complete.
+
+---
+
+# Part B — Core Design Principle
+
+The agents must use the lowest-cost reliable method for each operation.
+
+Use the following execution hierarchy:
+
+## Level 1 — Deterministic Python
+
+Use Python without AI for work such as:
+
+* file discovery;
+* page and file sequencing;
+* text extraction from machine-readable PDFs;
+* OCR-result ingestion where OCR has already been performed;
+* Markdown scaffolding;
+* heading normalization;
+* template population;
+* question numbering;
+* metadata generation;
+* filename generation;
+* source manifest creation;
+* checksum generation;
+* chapter assembly;
+* duplicate detection;
+* known-format conversion;
+* callout formatting;
+* table formatting;
+* standard section insertion;
+* validation against schemas;
+* missing-section checks;
+* broken-link checks;
+* forbidden-placeholder checks;
+* terminology checks;
+* consistency checks;
+* report generation;
+* queue and status updates;
+* packaging outputs for review.
+
+## Level 2 — Small, Bounded AI Tasks
+
+Use AI only for isolated tasks that genuinely require interpretation, such as:
+
+* interpreting unclear handwritten text;
+* resolving ambiguous engineering wording;
+* identifying probable transcription errors;
+* classifying content into an existing chapter structure;
+* detecting whether two technically similar questions are materially different;
+* drafting a missing explanation from verified source material;
+* reconciling conflicting technical statements;
+* proposing corrections that require engineering judgement;
+* identifying likely regulatory references for subsequent verification.
+
+Each AI call should receive only the minimum relevant source block, surrounding context, task instructions, and required output schema.
+
+Do not send the entire corpus or entire chapter unless necessary.
+
+## Level 3 — Claude Engineering Review
+
+Claude should review:
+
+* unresolved ambiguities;
+* technical correctness;
+* engineering logic;
+* operational realism;
+* regulatory accuracy;
+* amendment status;
+* internal contradictions;
+* examination suitability;
+* unsupported claims;
+* whether deterministic tools altered technical meaning;
+* whether the final document meets MIW publication standards.
+
+## Level 4 — Founder Review
+
+No output becomes final or published merely because an agent completed it.
+
+The final state before publication must be:
+
+```text
+READY_FOR_FOUNDER_REVIEW
+```
+
+Only I can approve publication or canonical acceptance.
+
+---
+
+# Part C — QB Production Agent
+
+Build a dedicated QB Production Agent for producing and maintaining MEO Class I question-bank material.
+
+## Required Functions
+
+The QB agent should be able to:
+
+1. Accept the next source batch of questions from supported inputs.
+2. Register every source file and preserve provenance.
+3. Extract or ingest the question text.
+4. Normalize formatting without silently changing meaning.
+5. Separate questions accurately.
+6. Detect:
+
+   * exact duplicates;
+   * formatting duplicates;
+   * probable near-duplicates;
+   * related but distinct questions;
+   * examiner-specific variants;
+   * multi-part questions;
+   * incomplete questions;
+   * questions requiring Founder judgement.
+7. Compare new questions against the existing QB corpus.
+8. Assign each question to the appropriate:
+
+   * subject;
+   * topic;
+   * subtopic;
+   * examiner;
+   * source;
+   * date or batch;
+   * answer-production status.
+9. Generate or update deterministic production records.
+10. Prepare bounded packets for AI-assisted review only where needed.
+11. Run all available validation checks.
+12. Present Claude with only the questions requiring engineering or editorial judgement.
+13. Generate a final review report.
+14. Stop at `READY_FOR_FOUNDER_REVIEW`.
+
+## Answer Production
+
+Where answer production is included, reuse the established MIW or MEO Class I answer framework already present in the repository.
+
+Do not invent a new answer template without first checking the canonical template.
+
+The agent should distinguish between:
+
+* raw question intake;
+* question normalization;
+* duplicate classification;
+* answer drafting;
+* answer verification;
+* regulatory verification;
+* final editorial review.
+
+These stages must have separate statuses so that failed or incomplete work cannot appear finished.
+
+## QB Quality Rules
+
+The QB agent must not:
+
+* merge technically distinct questions merely because wording is similar;
+* delete source wording;
+* silently correct a question without recording the correction;
+* fabricate examiner names, dates, regulations, figures, or shipboard details;
+* generate unsupported answers;
+* treat AI confidence as proof;
+* overwrite canonical records without a reviewable change record.
+
+For every correction, preserve:
+
+```text
+original_text
+normalized_text
+correction_reason
+correction_method
+source_reference
+review_status
+```
+
+---
+
+# Part D — MIW Notes Production Agent
+
+Build a separate MIW Notes Production Agent for converting source notes into publication-grade MIW Engineering Management Handbook chapters.
+
+The immediate priority is the remaining **Uday handwritten notes PDF pages**.
+
+These pages need to be:
+
+1. transcribed;
+2. structured;
+3. technically interpreted;
+4. verified;
+5. corrected;
+6. updated for current requirements;
+7. amended where applicable;
+8. expanded into the established MIW Notes format;
+9. reviewed by Claude;
+10. submitted for Founder review.
+
+This MIW Notes work is a priority before I resume major RulesApp work.
+
+## Important Workflow Change
+
+The previous workflow was:
+
+```text
+Uday handwritten notes
+      ↓
+Google Gemini performs full transcription and chapter generation
+      ↓
+Gemini output manually copied into a text file
+      ↓
+Text file uploaded to Claude
+      ↓
+Claude verifies, validates, corrects, amends, and converts it into MIW format
+```
+
+This consumes unnecessary AI tokens, duplicates work, introduces manual copying, and makes provenance and correction tracking weak.
+
+Replace it with a repository-based pipeline.
+
+The preferred future workflow is:
+
+```text
+Uday source PDF pages
+      ↓
+Local source registration and page manifest
+      ↓
+Deterministic page extraction / image preparation
+      ↓
+Transcription stage
+      ↓
+Local transcription files stored page-by-page
+      ↓
+Deterministic normalization and chapter grouping
+      ↓
+Python builds chapter scaffold from MIW template
+      ↓
+Targeted AI tasks for interpretation and expansion
+      ↓
+Regulatory and technical verification
+      ↓
+Deterministic validation
+      ↓
+Claude final review
+      ↓
+Founder review
+```
+
+## Transcription Policy
+
+Do not make full-document visual transcription by Claude the default method.
+
+Evaluate the available source PDFs and determine:
+
+* whether they contain a usable text layer;
+* whether local OCR already exists;
+* whether existing extraction tools can be reused;
+* whether page images need to be generated;
+* whether an external transcription model remains necessary;
+* which pages require human or Claude intervention because handwriting is unclear.
+
+Store transcription locally as a separate source layer.
+
+The transcription must not be mixed immediately with corrected or expanded content.
+
+Maintain at least these distinguishable layers:
+
+```text
+1. source_page
+2. raw_transcription
+3. normalized_transcription
+4. corrected_source_notes
+5. expanded_chapter_draft
+6. verified_chapter
+7. founder_review_version
+```
+
+Every correction must be traceable back to the original page.
+
+## Required MIW Notes Agent Functions
+
+The MIW Notes agent should:
+
+1. Discover and register the next source files or page batch.
+2. Generate a page-level manifest.
+3. Record page number, file, checksum, source type, and processing status.
+4. Ingest page-by-page transcription.
+5. Flag uncertain words or unreadable passages explicitly.
+6. Prevent guessed text from being treated as confirmed text.
+7. Normalize transcription deterministically.
+8. Identify likely chapter boundaries.
+9. Propose how many chapters are required.
+10. Produce a chapter plan before drafting.
+11. Map source pages to planned chapters.
+12. Build the chapter structure using the existing MIW Notes template.
+13. Insert source-derived content into the relevant sections.
+14. Identify gaps requiring authoritative research.
+15. Use AI only for bounded technical expansion.
+16. Verify regulatory references against authoritative sources.
+17. Record amendment status and applicable dates.
+18. Correct outdated or technically incorrect source notes without erasing the original.
+19. Generate tables, examination questions, memory boxes, and operational examples using structured templates.
+20. Run deterministic completeness and consistency checks.
+21. Submit the assembled chapter to Claude for final technical and editorial review.
+22. Produce a review report and Founder decision packet.
+23. Stop at `READY_FOR_FOUNDER_REVIEW`.
+
+---
+
+# Part E — Preserve the Existing MIW Chapter Standard
+
+The MIW Notes agent must preserve the established MIW Engineering Management Handbook standard.
+
+First inspect the repository for the current canonical template. Where the following legacy Gemini prompt conflicts with the current canonical MIW production standard, the repository standard takes precedence.
+
+The former Gemini instructions were:
+
+## Writing Style
+
+* Formal, authoritative engineering textbook style.
+* Active voice.
+* Concise paragraphs.
+* Clear procedural lists.
+* Preserve all technically relevant source details.
+* Expand only using verified engineering and regulatory information.
+* Use correct Markdown heading hierarchy.
+
+## Expected Chapter Coverage
+
+Each chapter may include, where applicable:
+
+1. Definition and Purpose
+2. Importance to International Shipping
+3. Historical Background and Origins
+4. IMO and International Regulatory References
+5. Engineering Explanation and Core Technical Mechanisms
+6. Chief Engineer and Flag State Responsibilities
+7. Practical Shipboard Application and Incident Procedures
+8. Operational Case Study
+9. HSSC Survey Requirements
+10. Port State Control Focus
+11. Comparison Tables
+12. System Diagrams or Flowcharts
+13. Oral Examination Questions and Model Answers
+14. Written Examination Questions
+15. Summary and Memory Aids
+
+## Existing Callout Types
+
+The existing production system may use callouts such as:
+
+```text
+[EXAM FOCUS]
+[CHIEF ENGINEER TIP]
+[PSC ALERT]
+[LATEST UPDATE]
+[MEMORY BOX]
+```
+
+Do not blindly add every section or callout to every chapter.
+
+The agent must apply only technically relevant sections and must avoid filler, repetition, or artificial expansion.
+
+## Regulatory Accuracy
+
+Never invent:
+
+* IMO regulation numbers;
+* convention references;
+* circular numbers;
+* resolution numbers;
+* amendment dates;
+* entry-into-force dates;
+* survey intervals;
+* statutory limits;
+* detention criteria;
+* technical parameters.
+
+Where a reference cannot be verified, mark it clearly as unresolved and send it to the review queue.
+
+Authoritative sources should be prioritized in this order where applicable:
+
+1. IMO conventions, codes, resolutions, circulars, and official amendment records;
+2. SOLAS;
+3. MARPOL;
+4. STCW;
+5. Load Line Convention;
+6. COLREG;
+7. MLC;
+8. HSSC Survey Guidelines;
+9. IACS Unified Requirements and Unified Interpretations;
+10. flag-state or recognized-organization guidance;
+11. manufacturer technical documentation;
+12. established marine engineering textbooks.
+
+Third-party notes are source material, not final authority.
+
+---
+
+# Part F — Agent Separation
+
+The two agents must remain operationally separate.
+
+## QB Production Agent
+
+Primary object:
+
+```text
+question and answer intelligence
+```
+
+Primary concerns:
+
+* intake;
+* question identity;
+* duplication;
+* classification;
+* answer status;
+* examination relevance;
+* examiner variants;
+* answer verification.
+
+## MIW Notes Production Agent
+
+Primary object:
+
+```text
+source-note-to-chapter production
+```
+
+Primary concerns:
+
+* page-level transcription;
+* source fidelity;
+* chapter planning;
+* engineering expansion;
+* regulatory amendment;
+* textbook structure;
+* technical and editorial verification.
+
+Shared utilities may be reused, but agent-specific workflows, prompts, states, reports, and acceptance rules must remain distinct.
+
+Do not create one oversized generic agent that becomes difficult to inspect or maintain.
+
+---
+
+# Part G — State Machine and Production Queue
+
+Both agents must use explicit file-based workflow states.
+
+Suggested states include:
+
+```text
+DISCOVERED
+REGISTERED
+EXTRACTED
+TRANSCRIPTION_PENDING
+TRANSCRIBED
+NORMALIZED
+CLASSIFICATION_PENDING
+STRUCTURED
+AI_REVIEW_REQUIRED
+TECHNICAL_REVIEW_PENDING
+REGULATORY_VERIFICATION_PENDING
+CORRECTION_REQUIRED
+VALIDATION_FAILED
+VALIDATED
+CLAUDE_REVIEW_PENDING
+READY_FOR_FOUNDER_REVIEW
+FOUNDER_CHANGES_REQUIRED
+APPROVED
+PUBLISHED
+```
+
+Use only the states actually needed for each workflow, but ensure incomplete work cannot be mistaken for approved work.
+
+The agents must be resumable.
+
+A new Claude session should be able to determine:
+
+* what batch is active;
+* what has been completed;
+* what failed;
+* what needs AI judgement;
+* what needs Founder review;
+* which files are authoritative;
+* what command should run next.
+
+Do not rely on chat memory for resumption.
+
+---
+
+# Part H — Token-Efficiency Requirements
+
+The implementation must actively minimize Claude token use.
+
+## Required Techniques
+
+* Chunk work at the page, question, section, or issue level.
+* Send only relevant source excerpts to Claude.
+* Use structured JSON or compact Markdown packets for AI tasks.
+* Avoid resending unchanged chapter content.
+* Use patch-based revision rather than full-document regeneration.
+* Generate diffs between versions.
+* Cache completed AI decisions where safe.
+* Reuse verified regulatory references.
+* Maintain a local terminology and standard-reference catalogue.
+* Use deterministic validators before Claude review.
+* Present Claude only with failed checks, uncertainty flags, diffs, and high-risk sections.
+* Separate mechanical formatting from engineering review.
+* Prevent repeated review of unchanged sections.
+* Record why an AI call was required.
+
+For each proposed AI step, explain why Python alone is insufficient.
+
+---
+
+# Part I — Human and AI Control Boundaries
+
+Claude may:
+
+* propose;
+* classify;
+* review;
+* correct;
+* expand;
+* verify;
+* flag uncertainty;
+* recommend amendments;
+* prepare a Founder review packet.
+
+Claude may not:
+
+* silently approve its own work;
+* publish automatically;
+* overwrite source evidence;
+* conceal uncertainty;
+* treat unverified model knowledge as authoritative;
+* make irreversible corpus changes without a logged change;
+* mark an output Founder-approved.
+
+Python may automate production, but must not make engineering judgements merely because a confidence threshold was met.
+
+When confidence is inadequate, route the item to review.
+
+---
+
+# Part J — Required Deliverables
+
+After repository inspection, propose and then implement the work in small, auditable packages.
+
+Expected deliverables may include:
+
+1. Architecture document for both agents.
+2. QB Production Agent specification.
+3. MIW Notes Production Agent specification.
+4. Shared deterministic production utilities.
+5. Agent-specific workflow definitions.
+6. Queue and state schemas.
+7. Source manifest schema.
+8. Transcription record schema.
+9. Correction and amendment record schema.
+10. AI task packet schema.
+11. Claude review packet format.
+12. Founder review report format.
+13. Command-line entry points.
+14. Configuration files.
+15. Prompt templates for bounded AI tasks.
+16. Deterministic validators.
+17. Resume and recovery procedure.
+18. Operating manual.
+19. Test fixtures.
+20. Automated tests.
+21. One pilot QB batch.
+22. One pilot Uday Notes page batch.
+23. Token-use comparison against the former workflow.
+24. Final implementation and verification report.
+
+Do not create documentation that is disconnected from executable tooling.
+
+Every documented command must exist and be tested.
+
+---
+
+# Part K — Pilot Requirement
+
+Before processing the full backlog, run controlled pilots.
+
+## QB Pilot
+
+Use a small representative batch containing, where available:
+
+* exact duplicates;
+* near-duplicates;
+* multi-part questions;
+* ambiguous wording;
+* an examiner-specific variant;
+* a question requiring answer verification.
+
+Demonstrate which work is handled by Python and which work is escalated to Claude.
+
+## Uday Notes Pilot
+
+Use a small group of consecutive PDF pages.
+
+Demonstrate:
+
+* page registration;
+* transcription storage;
+* uncertainty marking;
+* normalization;
+* chapter-boundary assessment;
+* chapter scaffold generation;
+* correction tracking;
+* bounded AI expansion;
+* regulatory verification;
+* deterministic checks;
+* Claude final review packet;
+* Founder review output.
+
+Do not process all remaining Uday Notes pages until the pilot proves that:
+
+* source traceability is preserved;
+* technical meaning is not lost;
+* unclear handwriting is not silently guessed;
+* amendments are verified;
+* the process is resumable;
+* token usage is materially reduced;
+* output quality is equal to or better than the previous Gemini-to-Claude workflow.
+
+---
+
+# Part L — Premortem
+
+Before implementation, conduct a premortem covering at least:
+
+* transcription errors becoming authoritative text;
+* AI hallucinated regulation numbers;
+* outdated amendments being presented as current;
+* source and corrected text being mixed;
+* Python altering technical meaning;
+* near-duplicate questions being wrongly merged;
+* full documents repeatedly being sent to Claude;
+* unclear workflow states;
+* loss of page-level provenance;
+* accidental overwriting of approved material;
+* agent outputs diverging from MIW templates;
+* a generic agent becoming too complex;
+* poor resumability across Claude sessions;
+* manual copy-and-paste remaining in the workflow;
+* validation scripts reporting false success;
+* token savings being claimed without measurement.
+
+For each failure mode, define:
+
+```text
+cause
+impact
+detection method
+preventive control
+recovery method
+test
+```
+
+---
+
+# Part M — Implementation Discipline
+
+Use the existing MIW local-first and repository-first workflow.
+
+For each implementation package:
+
+1. Inspect the relevant existing files.
+2. State the exact package scope.
+3. Identify files to create or modify.
+4. Conduct the package premortem.
+5. Implement only the scoped changes.
+6. Run tests.
+7. Run existing repository validation.
+8. Inspect the generated outputs.
+9. Confirm no unrelated files changed.
+10. Commit with a clear scoped commit message.
+11. Report the commit hash and test results.
+12. Update the agent state and next-action file.
+13. Stop and report before beginning the next major package unless the current MIW workflow explicitly authorizes continuous execution.
+
+Do not claim success based only on code generation.
+
+Success requires tested execution using representative input.
+
+---
+
+# Part N — Immediate First Task
+
+Begin by inspecting the current MIW repository, production skills, Python programs, templates, and workflow state.
+
+Then provide:
+
+1. **Current-state assessment**
+2. **Existing components that can be reused**
+3. **Token-heavy steps in the present QB workflow**
+4. **Token-heavy steps in the present MIW Notes workflow**
+5. **Proposed QB Production Agent architecture**
+6. **Proposed MIW Notes Production Agent architecture**
+7. **Shared utilities architecture**
+8. **AI-versus-Python responsibility matrix**
+9. **State and queue design**
+10. **Implementation package sequence**
+11. **Premortem**
+12. **Recommended pilot**
+13. **Expected token-reduction mechanism**
+14. **Any genuine blockers**
+
+Do not yet regenerate any Uday Notes chapters.
+
+Do not process the entire QB backlog.
+
+Do not create a speculative framework without first examining what the MIW project already contains.
+
+The immediate goal is to establish a maintainable, tested, token-efficient agent workflow that can subsequently process each new QB batch and each new MIW Notes batch with Python performing routine production, Claude providing engineering judgement and final review, and me retaining final approval.

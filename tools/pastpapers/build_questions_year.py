@@ -50,14 +50,33 @@ SPEC_GLOB = os.path.join(PP_DIR, 'specs', '*.json')
 # a much stronger statement than "we have not built it yet", and the two must
 # never render the same way: one is a fact about the examination, the other is a
 # fact about MIW's backlog. Keyed (year, month_number).
+# May now reads the same way in SIX consecutive years. That is strong evidence, but it
+# remains an inference from the source set: a DGMA / DG Shipping examination calendar
+# stating that no May sitting is held was searched for on 2026-08-14 and could NOT be
+# located. The wording below therefore states the evidence rather than asserting a rule.
+#
+# June 2021 is deliberately NOT filed with May, because it is a different thing.
 KNOWN_ABSENT = {
     (2026, 5): 'No May sitting appears in the MIW source set, and the printed serial numbering '
-               'skips it in 2024 and 2025 as well &mdash; those serials run &hellip;2404, '
-               '2406&hellip; and &hellip;2504, 2506&hellip;, with nothing at 2405 or 2505.',
+               'skips it in every year MIW holds &mdash; 2021 runs &hellip;2104, 2107&hellip;, '
+               '2022 runs &hellip;2204, 2206&hellip;, and 2023 to 2025 run &hellip;2304, '
+               '2306&hellip;, &hellip;2404, 2406&hellip; and &hellip;2504, 2506&hellip;.',
     (2025, 5): 'No May sitting. The printed serial numbering runs &hellip;2504, 2506&hellip; '
                'with nothing at 2505.',
     (2024, 5): 'No May sitting. The printed serial numbering runs &hellip;2404, 2406&hellip; '
                'with nothing at 2405.',
+    (2023, 5): 'No May sitting. The printed serial numbering runs &hellip;2304, 2306&hellip; '
+               'with nothing at 2305.',
+    (2022, 5): 'No May sitting. The printed serial numbering runs &hellip;2204, 2206&hellip; '
+               'with nothing at 2205.',
+    (2021, 5): 'No May sitting. The printed serial numbering runs &hellip;2104, 2107&hellip; '
+               'with nothing at 2105.',
+    # A one-off, and the reason is visible in the source set rather than assumed.
+    (2021, 6): 'No June paper was numbered &mdash; the printed serials run &hellip;2104, '
+               '2107&hellip;. This is not the standing May pattern. 2020 holds only six papers, '
+               'with April to September absent, and July 2021 carries TWO papers of which the '
+               'second prints no serial at all &mdash; the only paper in 2021 or 2022 that does '
+               'not. The reading that fits all three is a June sitting deferred into July.',
 }
 
 

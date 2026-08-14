@@ -96,12 +96,16 @@ def rule_counts(html, specs, man, fail):
         fail('manifest available_questions %d != specs %d'
              % (man['available_questions'], n_q))
 
-    # The search hint restates both numbers in prose. It is a third place the
-    # same fact appears, so it is checked rather than trusted.
-    m = re.search(r'across all (\d+) solved questions in (\d+) sittings', html)
-    if not m or (int(m.group(1)), int(m.group(2))) != (n_q, n_sit):
-        fail('search hint says %s, specs say (%d, %d)'
-             % (m.groups() if m else 'ABSENT', n_q, n_sit))
+    # The hero stat block is the ONE place these two numbers are stated in
+    # prose. The search hint used to restate them, which made it a third copy of
+    # the same fact for a reader who had just read it two sections above; the
+    # redesign removed that duplication. The rule follows: it now pins the hero,
+    # so the numbers are still derived and still checked, just not repeated.
+    m = re.search(r'<div><b>(\d+)</b><span>solved sittings</span></div>\s*'
+                  r'<div><b>(\d+)</b><span>questions</span></div>', html)
+    if not m or (int(m.group(1)), int(m.group(2))) != (n_sit, n_q):
+        fail('hero stats say %s, specs say (%d sittings, %d questions)'
+             % (m.groups() if m else 'ABSENT', n_sit, n_q))
 
 
 def rule_topics(html, specs, fail):
@@ -127,14 +131,22 @@ def rule_topics(html, specs, fail):
 
 
 def rule_inventory(html, specs, fail):
-    """3. The paper grid is exactly the set of solved sittings -- no invented
-    card, no omitted one."""
+    """3. The solved inventory reachable from the home page is exactly the set of
+    solved sittings -- no invented link, no omitted one.
+
+    UPDATED for the redesigned hierarchy. The old rule matched a flat "Solved
+    papers" card grid, which has been removed because it listed every sitting a
+    second time with no year structure. Coverage by Year is now the primary and
+    only route in, so the rule follows the route: it counts the per-month links
+    that grid emits. The GUARANTEE is unchanged -- every solved paper must be
+    reachable from a server-rendered link, and nothing unsolved may be.
+    """
     want = {d['paper_id'] for d in HOME.solved_sittings(specs)}
-    got = set(re.findall(r'<article class="sq-card[^"]*" data-paper-id="([^"]+)">', html))
+    got = set(re.findall(r'<a class="cov-m cov-av" href="/solvedQP/([A-Za-z0-9-]+)\.html"', html))
     for pid in sorted(got - want):
-        fail('paper card %s is not a solved spec' % pid)
+        fail('coverage links %s, which is not a solved spec' % pid)
     for pid in sorted(want - got):
-        fail('solved spec %s has no paper card' % pid)
+        fail('solved spec %s is not reachable from Coverage by year' % pid)
 
 
 def rule_years(html, specs, fail):
@@ -204,9 +216,10 @@ def rule_resilience(html, man, fail):
             fail('missing graceful %s' % what)
 
     # Server-rendered inventory: the cards are in the bytes, not injected.
-    if html.count('data-paper-id=') < man['available_papers']:
-        fail('paper inventory is not fully server-rendered (%d cards, %d papers)'
-             % (html.count('data-paper-id='), man['available_papers']))
+    n_links = html.count('class="cov-m cov-av"')
+    if n_links < man['available_papers']:
+        fail('paper inventory is not fully server-rendered (%d coverage links, %d papers)'
+             % (n_links, man['available_papers']))
 
     # No inline copy of the manifest. A fallback array of papers or updates
     # embedded in the script would recreate the duplication.
@@ -269,8 +282,8 @@ def self_test():
                        '<div class="sq-chips" role="group" aria-label="Browse by topic">\n'
                        '    <button type="button" class="sq-chip" data-topic="Ballast Water" '
                        'aria-pressed="false">Ballast Water <span class="sq-kbd">7</span></button>'))
-    probe('deleted paper card is caught',
-          re.sub(r'<article class="sq-card[^"]*" data-paper-id="QP2301">', '<article>',
+    probe('deleted coverage link is caught',
+          re.sub(r'<a class="cov-m cov-av" href="/solvedQP/QP2301\.html"', '<a class="x"',
                  html, count=1))
     probe('invented year-sheet link is caught',
           html.replace('/solvedQP/questions-2023.html',

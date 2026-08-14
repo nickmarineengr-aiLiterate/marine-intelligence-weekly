@@ -65,7 +65,164 @@ MODES = [
     ('Recall', 'Fifteen-second revision — route, critical number, major trap.'),
 ]
 
+TOP_JS = """
+(function(){
+  var b=document.getElementById('sq-top'); if(!b) return;
+  // Revealed only once the reader is genuinely deep in the page. A control that
+  // is present from the first pixel is noise on a page that fits one screen.
+  var SHOW=600, shown=false;
+  function sync(){
+    var y=window.pageYOffset||document.documentElement.scrollTop;
+    var want=y>SHOW;
+    if(want!==shown){ shown=want; b.hidden=!want; }
+  }
+  // Called straight from the scroll handler rather than gated behind
+  // requestAnimationFrame. sync() is one property read and a boolean compare, so
+  // it is cheap enough to run inline -- and rAF does not fire at all when the
+  // page is in a background or non-compositing view, which left the control
+  // permanently hidden. Correctness beats the micro-optimisation here.
+  addEventListener('scroll', sync, {passive:true});
+  sync();
+  b.addEventListener('click',function(){
+    // Honour a reader who has asked the operating system for less motion.
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+    var h=document.querySelector('h1');
+    if(h){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}); }
+  });
+})();
+"""
+
 HOME_CSS = """
+  /* ---- orientation line, hero -------------------------------------- */
+  .sq-orient{color:#cbd5e1;font-size:.86rem;margin:1rem 0 0;max-width:70ch;line-height:1.55;}
+
+  /* ---- latest updates, collapsed by default ------------------------ */
+  .sq-upd-sec{padding-top:1.25rem;}
+  .sq-upd-d{border:1px solid var(--grey-border);border-radius:10px;background:#fff;}
+  .sq-upd-d>summary{list-style:none;cursor:pointer;padding:.7rem .9rem;display:flex;
+    align-items:center;gap:.5rem;flex-wrap:wrap;font-size:.82rem;}
+  .sq-upd-d>summary::-webkit-details-marker{display:none;}
+  .sq-upd-d>summary::after{content:'View updates BC';margin-left:auto;color:var(--teal-dark);
+    font-weight:600;white-space:nowrap;}
+  .sq-upd-d[open]>summary::after{content:'Hide updates B2';}
+  .sq-upd-d>summary:hover{background:var(--off-white);}
+  .sq-upd-d>summary:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+  .sq-upd-lead{font-weight:700;color:var(--navy);}
+  .sq-upd-d>summary time{color:var(--grey-text);}
+  .sq-upd-cta{color:var(--grey-text);}
+  .sq-upd-d>*:not(summary){padding:0 .9rem;}
+  .sq-upd-d>p.lead{padding-top:.5rem;}
+  .sq-upd-d>ul,.sq-upd-d>p.sq-upd-more{padding-bottom:.8rem;}
+
+  /* ---- search heading ---------------------------------------------- */
+  .sq-h-upd{font-size:1.05rem;margin:0 0 .5rem;color:var(--navy);}
+  .sq-h-find{font-size:1.05rem;margin:0 0 .6rem;color:var(--navy);}
+
+  /* ---- how MIW answers work --------------------------------------- */
+  .sq-how-sub{font-weight:600;color:var(--navy);}
+  .sq-how-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.4rem;
+    align-items:start;}
+  .sq-ig-wrap{margin:0;}
+  .sq-ig{width:100%;height:auto;display:block;border-radius:10px;}
+  .sq-ig-wrap figcaption{font-size:.76rem;color:var(--grey-text);margin-top:.5rem;line-height:1.5;}
+  .sq-how-list{list-style:none;margin:0;padding:0;counter-reset:m;}
+  .sq-how-list li{counter-increment:m;display:grid;grid-template-columns:1.6rem 1fr;
+    gap:.1rem .6rem;padding:.5rem 0;border-bottom:1px solid var(--grey-border);}
+  .sq-how-list li:last-child{border-bottom:0;}
+  .sq-how-list li::before{content:counter(m);grid-row:1 / span 2;align-self:start;
+    width:1.6rem;height:1.6rem;border-radius:50%;background:var(--teal-light);
+    color:var(--teal-dark);font-size:.72rem;font-weight:700;display:grid;place-items:center;}
+  .sq-how-list b{font-size:.9rem;color:var(--navy);}
+  .sq-how-list span{font-size:.8rem;color:var(--grey-text);line-height:1.5;}
+
+  /* ---- coverage by year, compact month pills ---------------------- */
+  .cov-year{font-size:1rem;margin:1.1rem 0 .5rem;color:var(--navy);
+    display:flex;align-items:baseline;gap:.55rem;}
+  .cov-count{font-size:.74rem;font-weight:600;color:var(--grey-text);}
+  .cov-months{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:6px;}
+  .cov-m{display:block;text-align:center;padding:.45rem .2rem;border-radius:8px;
+    border:1px solid var(--grey-border);text-decoration:none;}
+  .cov-m b{display:block;font-size:.8rem;}
+  .cov-m span{display:block;font-size:.63rem;text-transform:uppercase;letter-spacing:.03em;}
+  a.cov-av{background:#fff;border-color:var(--teal);color:var(--teal-dark);}
+  a.cov-av:hover{background:var(--teal-light);}
+  a.cov-av:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+  .cov-pl{background:var(--orange-light);border-color:#fed7aa;color:#b45309;}
+  .cov-ab{background:var(--grey-bg);color:var(--grey-text);}
+
+  /* ---- compact coverage matrix ------------------------------------ */
+  .sq-mx-scroll{overflow-x:auto;}
+  .sq-mx{border-collapse:separate;border-spacing:3px;font-size:.72rem;}
+  .sq-mx th{font-weight:700;color:var(--grey-text);padding:1px 4px;text-align:center;}
+  .sq-mx th[scope=row]{text-align:right;color:var(--navy);white-space:nowrap;}
+  .sq-mx abbr{text-decoration:none;border:0;}
+  .sq-mx td{width:20px;height:18px;border-radius:4px;}
+  .mx-solved{background:var(--teal-dark);}
+  .mx-intel{background:#7dd3d8;}
+  .mx-absent{background:#e2e8f0;}
+  .mx-unknown{background:#fff;box-shadow:inset 0 0 0 1px #eef2f6;}
+  .sq-mx-key{list-style:none;display:flex;flex-wrap:wrap;gap:.35rem .95rem;margin:.6rem 0 0;
+    padding:0;font-size:.72rem;color:var(--grey-text);}
+  .sq-mx-key li{display:flex;align-items:center;gap:.35rem;}
+  .sq-mx-key i{width:12px;height:12px;border-radius:3px;display:inline-block;}
+
+  /* ---- return to top ---------------------------------------------- */
+  .sq-top{position:fixed;right:14px;bottom:14px;z-index:40;display:flex;flex-direction:column;
+    align-items:center;gap:0;width:44px;min-height:44px;padding:.3rem 0;cursor:pointer;
+    border:1px solid var(--grey-border);border-radius:10px;background:#fff;
+    color:var(--teal-dark);font-size:1rem;line-height:1;
+    box-shadow:0 2px 8px rgba(15,23,42,.14);}
+  .sq-top span{font-size:.58rem;text-transform:uppercase;letter-spacing:.04em;font-weight:700;}
+  .sq-top:hover{border-color:var(--teal);background:var(--teal-light);}
+  .sq-top:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+  .sq-top[hidden]{display:none;}
+
+  /* ---- footer quote + correction form ---------------------------- */
+  .sq-foot{max-width:1080px;margin:2rem auto 0;padding:0 1.25rem;}
+  .sq-quote{margin:0 0 1.4rem;padding:1rem 1.1rem;border-left:3px solid var(--teal);
+    background:var(--off-white);border-radius:0 8px 8px 0;}
+  .sq-quote p{margin:0;font-size:1rem;color:var(--navy);font-style:italic;}
+  .sq-quote cite{display:block;margin-top:.35rem;font-size:.76rem;color:var(--grey-text);
+    font-style:normal;}
+  .sq-cf{border:1px solid var(--grey-border);border-radius:10px;padding:1rem 1.1rem 1.2rem;
+    background:#fff;}
+  .sq-cf h2{font-size:1rem;margin:0 0 .3rem;color:var(--navy);}
+  .sq-cf>p{margin:0 0 .9rem;font-size:.8rem;color:var(--grey-text);line-height:1.55;}
+  .sq-cf-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem .9rem;}
+  .sq-cf .f{margin:0;display:flex;flex-direction:column;gap:.25rem;}
+  .sq-cf .f.wide{grid-column:1 / -1;}
+  .sq-cf label{font-size:.74rem;font-weight:700;color:var(--navy);}
+  .sq-cf label span{font-weight:400;color:var(--grey-text);}
+  .sq-cf input,.sq-cf select,.sq-cf textarea{font-family:inherit;font-size:.84rem;
+    padding:.5rem .6rem;border:1px solid var(--grey-border);border-radius:7px;
+    background:#fff;color:var(--ink);min-height:40px;}
+  .sq-cf textarea{min-height:70px;resize:vertical;}
+  .sq-cf input:focus-visible,.sq-cf select:focus-visible,.sq-cf textarea:focus-visible{
+    outline:2px solid var(--teal);outline-offset:1px;border-color:var(--teal);}
+  .sq-cf-go{margin-top:.9rem;min-height:44px;padding:.6rem 1.1rem;border:0;border-radius:999px;
+    background:var(--teal-dark);color:#fff;font-size:.84rem;font-weight:700;cursor:pointer;}
+  .sq-cf-go:hover{background:var(--teal);}
+  .sq-cf-go:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
+
+  @media (max-width:760px){
+    /* Visual first, then the five explanations stacked beneath it. */
+    .sq-how-grid{grid-template-columns:1fr;gap:1rem;}
+    /* Touch targets. Measured at 375px before this rule: the search field was
+       27px tall and every topic chip 32px, against a 44px minimum. The paper
+       pages already bump .learn-btn the same way, so this follows an existing
+       precedent rather than inventing a rule. */
+    .sq-find-row input{min-height:44px;}
+    .sq-upd-btn{min-height:44px;}
+    /* .sq-chip is deliberately left alone. A pre-existing rule at 640px sets it
+       to 32px and wins the cascade; raising it here would silently reverse that
+       decision and add chip rows above the fold. Recorded as a finding instead. */
+    .sq-cf-grid{grid-template-columns:1fr;}
+    .cov-months{grid-template-columns:repeat(auto-fill,minmax(64px,1fr));}
+    .sq-upd-d>summary{font-size:.78rem;}
+    .sq-upd-d>summary::after{margin-left:0;flex-basis:100%;}
+  }
+
   .sq-hero{background:linear-gradient(135deg,#0f172a,#1e293b);color:#e2e8f0;padding:2.5rem 0 2rem;}
   .sq-hero .wrap{max-width:1080px;margin:0 auto;padding:0 1.25rem;}
   .sq-hero h1{color:#fff;font-size:1.9rem;line-height:1.25;margin:.35rem 0 .5rem;}
@@ -484,7 +641,13 @@ def coverage(specs):
     them. Coverage is asserted from evidence, never from the calendar.
     """
     by_key = {(d['year'], RM.MONTH_NUM[d['month']]): d for d in specs}
-    years = sorted({y for y, _ in by_key} | {y for y, _ in KNOWN_ABSENT})
+    # ONLY years that actually have a paper in the spec set. Extending
+    # KNOWN_ABSENT back to 2021 made this grid sprout a 2021 row containing
+    # nothing but two "No sitting" chips and a 2022 row containing one -- years
+    # with no solved paper at all, rendered as though they were coverage. This
+    # section is the route INTO a solved paper; the full examination history,
+    # including question-only years, belongs to the matrix below it.
+    years = sorted({y for y, _ in by_key})
     rows = []
     for y in years:
         for mn in range(1, 13):
@@ -568,8 +731,144 @@ def topic_counts(sittings):
     return sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))
 
 
+# --------------------------------------------------------------------------- #
+# Examination-history matrix
+# --------------------------------------------------------------------------- #
+
+INTEL_PATH = os.path.join(REPO_ROOT, 'meoclass1', 'pastpapers', 'intelligence',
+                          'historical_qp_intelligence.json')
+
+M_SOLVED = 'solved'          # a full MIW answer product exists
+M_INTEL = 'intel'            # question wording held, no answers
+M_ABSENT = 'absent'          # no paper was numbered -- KNOWN_ABSENT carries the evidence
+M_UNKNOWN = 'unknown'        # MIW holds no source copy; says nothing about the examination
+
+MX_LABEL = {
+    M_SOLVED: 'Solved',
+    M_INTEL: 'Questions only',
+    M_ABSENT: 'No sitting',
+    M_UNKNOWN: 'Not held',
+}
+
+
+def load_intelligence():
+    """Question-only sittings. Absent file is not an error -- it degrades to {}.
+
+    The layer is a SEPARATE store from the solved manifest on purpose. Nothing
+    read here may ever be counted as solved, priced, or linked to an answer page.
+    """
+    try:
+        with open(INTEL_PATH, encoding='utf-8') as fh:
+            doc = json.load(fh)
+    except FileNotFoundError:
+        return {}
+    return {(p['year'], RM.MONTH_NUM[p['month']]): p for p in doc.get('papers', [])}
+
+
+def matrix(specs, intel):
+    """{(year, month_num): state} across every year either store knows about.
+
+    FOUR states, and the distinction between the last two is the whole point of
+    the grid. "No paper was numbered" is a claim about the EXAMINATION and is
+    only ever made where KNOWN_ABSENT carries the serial evidence for it.
+    "MIW holds no source copy" is a claim about MIW'S SHELF. Collapsing them
+    would tell a candidate an examination did not happen because we have not
+    bought the paper.
+    """
+    solved = {(d['year'], RM.MONTH_NUM[d['month']]) for d in solved_sittings(specs)}
+    years = sorted({y for y, _ in solved} | {y for y, _ in intel}
+                   | {y for y, _ in KNOWN_ABSENT})
+    out = {}
+    for y in years:
+        for mn in range(1, 13):
+            k = (y, mn)
+            if k in solved:
+                out[k] = M_SOLVED
+            elif k in intel:
+                out[k] = M_INTEL
+            elif k in KNOWN_ABSENT:
+                out[k] = M_ABSENT
+            else:
+                out[k] = M_UNKNOWN
+    return out, years
+
+
+# --------------------------------------------------------------------------- #
+# The five-mode infographic
+# --------------------------------------------------------------------------- #
+#
+# DERIVED FROM THE REAL INTERFACE, not drawn freehand and not a pasted raster.
+#
+# The five pills below are the actual `.learn-bar` control from a delivered paper
+# page: same five labels in the same order, the same pill geometry (radius 999px,
+# 1px border), and the same brand tokens the stylesheet uses -- #0f766e filled for
+# the selected tab, #fff on #e2e8f0 for the rest, #64748b label text. "Answer" is
+# drawn selected because that is the mode a question card opens on.
+#
+# It is inline SVG rather than a PNG screenshot for three reasons that all matter
+# here: it stays crisp at any width, it costs about 2 KB against ~150 KB for a
+# legible capture, and it carries no accidental page furniture -- the Founder's
+# instruction was explicitly not to paste a cluttered full-page screenshot.
+#
+# If the real control ever changes, this must be re-derived from it. It is a
+# faithful reproduction, not an illustration, and it must not drift.
+
+def infographic():
+    pills = [('Understand', False), ('Exam Plan', False), ('Answer', True),
+             ('Study Guide', False), ('Recall', False)]
+    # 12px 600-weight Segoe UI, padding 13px each side -- measured from .learn-btn
+    W = {'Understand': 92, 'Exam Plan': 82, 'Answer': 62, 'Study Guide': 86, 'Recall': 56}
+    o = ['<svg class="sq-ig" viewBox="0 0 420 188" role="img" '
+         'aria-labelledby="sq-ig-t sq-ig-d" xmlns="http://www.w3.org/2000/svg">',
+         '  <title id="sq-ig-t">The five study modes on a solved question card</title>',
+         '  <desc id="sq-ig-d">A question card from a solved paper. Along the top are five '
+         'tabs in a row &mdash; Understand, Exam Plan, Answer, Study Guide and Recall. The '
+         'Answer tab is selected, which is how every question card opens. Below the tabs is '
+         'the body of the answer.</desc>',
+         '  <rect x="1" y="1" width="418" height="186" rx="10" fill="#fff" stroke="#e2e8f0"/>',
+         # question header strip, as the real card has
+         '  <rect x="1" y="1" width="418" height="34" rx="10" fill="#f8fafc"/>',
+         '  <rect x="1" y="25" width="418" height="10" fill="#f8fafc"/>',
+         '  <text x="16" y="23" font-family="Segoe UI,system-ui,sans-serif" font-size="12" '
+         'font-weight="700" fill="#0f172a">Q1</text>',
+         '  <rect x="36" y="12" width="210" height="8" rx="4" fill="#e2e8f0"/>',
+         '  <text x="404" y="23" text-anchor="end" font-family="Segoe UI,system-ui,sans-serif" '
+         'font-size="10" font-weight="600" fill="#64748b">16 marks</text>',
+         '  <line x1="1" y1="35" x2="419" y2="35" stroke="#e2e8f0"/>']
+    x = 14
+    for label, sel in pills:
+        w = W[label]
+        fill, stroke, colour = ('#0f766e', '#0f766e', '#ffffff') if sel else ('#ffffff', '#e2e8f0', '#64748b')
+        o.append('  <rect x="%d" y="48" width="%d" height="26" rx="13" fill="%s" stroke="%s"/>'
+                 % (x, w, fill, stroke))
+        o.append('  <text x="%d" y="65" text-anchor="middle" '
+                 'font-family="Segoe UI,system-ui,sans-serif" font-size="11" font-weight="600" '
+                 'fill="%s">%s</text>' % (x + w // 2, colour, label))
+        x += w + 6
+    # answer body, suggested rather than rendered -- no unreadable paragraph
+    for i, w in enumerate((388, 372, 396, 340, 384, 300)):
+        o.append('  <rect x="14" y="%d" width="%d" height="7" rx="3.5" fill="%s"/>'
+                 % (90 + i * 15, w, '#e2e8f0' if i else '#cbd5e1'))
+    o.append('</svg>')
+    return o
+
+
+# A short line, and one whose attribution can actually be stood behind.
+#
+# "Energy and persistence conquer all things" was the first candidate and was
+# REJECTED: it is attributed to Franklin all over the web but the attribution
+# traces only to quote-aggregator sites, never to a letter, almanack or speech.
+# The Founder's instruction was to verify attribution before publication, and an
+# unverifiable one on a paying customer's page is exactly the failure to avoid.
+# A proverb has no individual to misattribute, which is why this one is safe.
+QUOTE = ('Fall seven times, stand up eight.', 'Japanese proverb')
+
+
 def build(specs):
     sittings = solved_sittings(specs)
+    # Question-only sittings, read from their own store. Degrades to {} if the
+    # file is absent, so the home page never depends on the intelligence layer.
+    intel = load_intelligence()
     newest = sittings[-1] if sittings else None
     total_q = sum(len(d['questions']) for d in sittings)
     topic_chips = topic_counts(sittings)
@@ -609,16 +908,77 @@ def build(specs):
     if newest:
         a('      <div><b>%s</b><span>newest solved sitting</span></div>' % esc(newest['month_year']))
     a('    </div>')
+    # One orientation line, so a candidate knows within about ten seconds what
+    # this page lets them DO -- not a second description of the product.
+    a('    <p class="sq-orient">On this page: search recurring topics, open solved '
+      'papers by year, see what changed recently, and browse question-only exam '
+      'history.</p>')
     a('  </div>')
     a('</header>')
 
     a('<main id="sq-main">')
 
-    # ---- topic search ----------------------------------------------
+    # ---- 2. LATEST UPDATES -----------------------------------------
+    # Ahead of search on purpose: the one thing a returning candidate needs to
+    # know before studying anything is whether something they already learned
+    # moved. Collapsed by default so it cannot push the rest of the page down.
+    #
+    # Imported inside the function: build_solvedqp_manifest imports THIS module
+    # for the one definition of coverage/solved state, so a module-level import
+    # here would be circular.
+    from build_solvedqp_manifest import recently_updated, KIND_LABEL
+    all_ups = recently_updated(specs, {d['paper_id'] for d in sittings})
+    ups = preview_updates(all_ups)
+    if ups:
+        top = ups[0]
+        a('<section class="sq-section sq-upd-sec">')
+        # A real heading, so the section appears in the document outline and to a
+        # screen reader's heading list even though its body is collapsed.
+        a('  <h2 class="sq-h-upd">Latest updates</h2>')
+        a('  <details class="sq-upd-d">')
+        a('    <summary>')
+        a('      <span class="sq-upd-lead">Latest update</span>')
+        a('      <time datetime="%s">%s</time>' % (esc(top['date']), esc(pretty_date(top['date']))))
+        a('      <span class="sq-kind sq-k-%s">%s</span>'
+          % (esc(top['kind']), esc(KIND_LABEL.get(top['kind'], top['kind']))))
+        a('      <b>%s</b>' % esc(top['sitting']))
+        a('      <span class="sq-upd-cta">%d recorded changes</span>' % len(all_ups))
+        a('    </summary>')
+        a('    <p class="lead">Every change to this collection &mdash; new sittings, corrections '
+          'to published answers, and answers deepened against verified sources.</p>')
+        a('    <ul class="sq-upd">')
+        for u in ups:
+            # The sitting, not the paper id: a candidate thinks in "July 2024",
+            # not "QP2407". The id is still the anchor for the link.
+            link = '/solvedQP/%s.html' % u['paper_id']
+            qs = ''
+            if u.get('questions'):
+                qs = ' <span class="sq-res-sum" style="display:inline">%s</span>' \
+                     % esc(', '.join(u['questions']))
+            a('      <li><time datetime="%s">%s</time><div class="what">'
+              '<b><span class="sq-kind sq-k-%s">%s</span>'
+              '<a href="%s">%s</a></b><span>%s%s</span></div></li>'
+              % (esc(u['date']), esc(pretty_date(u['date'])),
+                 esc(u['kind']), esc(KIND_LABEL.get(u['kind'], u['kind'])),
+                 link, esc(u['sitting']), u['summary'], qs))
+        a('    </ul>')
+        # The whole ledger, on demand. Showing six and stopping meant a
+        # correction older than the last five sittings was unreachable.
+        if len(all_ups) > len(ups):
+            a('    <p class="sq-upd-more">')
+            a('      <button type="button" id="sq-upd-btn" class="sq-upd-btn" '
+              'aria-expanded="false" aria-controls="sq-upd-all">View all updates</button>')
+            a('    </p>')
+            a('    <div id="sq-upd-all" hidden></div>')
+        a('  </details>')
+        a('</section>')
+
+    # ---- 3. SEARCH BY TOPIC ----------------------------------------
     # Answers the question a candidate actually arrives with: "which solved
     # papers cover Port State Control, and which question?" Results are
     # question-level and link straight to the anchor.
     a('<section class="sq-find">')
+    a('  <h2 class="sq-h-find">Search by topic</h2>')
     a('  <div class="sq-find-row">')
     a('    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
       'stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/>'
@@ -630,10 +990,7 @@ def build(specs):
     a('  </div>')
     # Topic discovery. These are the manifest's own primary_category values --
     # derived, never a hand-kept list that could name a topic the corpus does
-    # not cover. They drive the SAME field rather than a second browse tree,
-    # which is the trap the internal topics-*.html pages would have walked into:
-    # those carry recurrence tags and review metadata and are not publishable as
-    # they stand.
+    # not cover.
     if topic_chips:
         a('  <div class="sq-chips" role="group" aria-label="Browse by topic">')
         for label, count in topic_chips:
@@ -641,155 +998,136 @@ def build(specs):
               'aria-pressed="false">%s <span class="sq-kbd">%d</span></button>'
               % (esc(label), esc(label), count))
         a('  </div>')
-    a('  <p class="hint">Searches the printed question and its topic labels across all %d '
-      'solved questions in %d sittings. Sittings still in preparation are not searchable, '
-      'because no answer exists to open. '
-      '<span class="sq-kbd">Press <kbd>/</kbd> to search, <kbd>Esc</kbd> to clear.</span></p>'
-      % (total_q, len(sittings)))
+    # The counts a candidate needs are already in the hero. Repeating them here
+    # was the redundancy this line used to carry.
+    a('  <p class="hint">Searches the printed question and its topic labels across every '
+      'solved paper. <span class="sq-kbd">Press <kbd>/</kbd> to search, <kbd>Esc</kbd> '
+      'to clear.</span></p>')
     a('  <div class="sq-res" id="sq-results"></div>')
     a('</section>')
 
-    # ---- latest updates --------------------------------------------
-    # Generated from the manifest's recently_updated, which is derived from the
-    # specs themselves. Nobody hand-edits this list when a paper lands.
-    #
-    # Imported inside the function on purpose: build_solvedqp_manifest imports
-    # THIS module for the one definition of coverage/solved state, so a module
-    # level import here would be circular.
-    from build_solvedqp_manifest import recently_updated, KIND_LABEL
-    all_ups = recently_updated(specs, {d['paper_id'] for d in sittings})
-    ups = preview_updates(all_ups)
-    if ups:
-        a('<section class="sq-section">')
-        a('  <h2>Latest updates</h2>')
-        a('  <p class="lead">What has changed in this collection &mdash; new sittings, '
-          'corrections to published answers, and answers deepened against verified '
-          'sources. If you have already studied a question, this is where you find out '
-          'it moved.</p>')
-        a('  <ul class="sq-upd">')
-        for u in ups:
-            # The sitting, not the paper id: a candidate thinks in "July 2024",
-            # not "QP2407". The id is still the anchor for the link.
-            link = '/solvedQP/%s.html' % u['paper_id']
-            qs = ''
-            if u.get('questions'):
-                qs = ' <span class="sq-res-sum" style="display:inline">%s</span>' \
-                     % esc(', '.join(u['questions']))
-            a('    <li><time datetime="%s">%s</time><div class="what">'
-              '<b><span class="sq-kind sq-k-%s">%s</span>'
-              '<a href="%s">%s</a></b><span>%s%s</span></div></li>'
-              % (esc(u['date']), esc(pretty_date(u['date'])),
-                 esc(u['kind']), esc(KIND_LABEL.get(u['kind'], u['kind'])),
-                 link, esc(u['sitting']), u['summary'], qs))
-        a('  </ul>')
-        # The whole ledger, on demand. Showing six and stopping meant a
-        # correction older than the last five sittings was unreachable -- which
-        # is precisely the entry a long-running candidate needs.
-        if len(all_ups) > len(ups):
-            a('  <p class="sq-upd-more">')
-            a('    <button type="button" id="sq-upd-btn" class="sq-upd-btn" '
-              'aria-expanded="false" aria-controls="sq-upd-all">View all updates</button>')
-            a('    <span class="sq-kbd"> &middot; %d recorded changes</span>' % len(all_ups))
-            a('  </p>')
-            a('  <div id="sq-upd-all" hidden></div>')
-        a('</section>')
-
-    # ---- papers ----------------------------------------------------
-    a('<section class="sq-section">')
-    a('  <h2>Solved papers</h2>')
-    a('  <p class="lead">Each paper opens as a full interactive sitting &mdash; search across '
-      'questions, bookmark, and track what you have worked through.</p>')
-    a('  <div class="sq-grid">')
-    for d in reversed(sittings):          # newest first for the reader
-        pid = d['paper_id']
-        is_newest = newest is not None and pid == newest['paper_id']
-        # data-paper-id is what lets search narrow this grid to the sittings
-        # that actually match, rather than leaving 28 cards under a result list.
-        a('    <article class="sq-card%s" data-paper-id="%s">'
-          % (' sq-newest' if is_newest else '', pid))
-        a('      <span class="m">%s</span>' % ('Newest sitting' if is_newest else esc(d['subject'])))
-        a('      <h3><a href="/solvedQP/%s.html">%s</a></h3>' % (pid, esc(d['month_year'])))
-        a('      <p class="meta">Sr. No. %s &middot; %d questions &middot; answer six<br>%s &middot; total marks %s</p>'
-          % (esc(d['sr_no']), len(d['questions']), esc(d['time_allowed']), esc(d['total_marks'])))
-        a('      <a class="go" href="/solvedQP/%s.html">Open %s &rarr;</a>'
-          % (pid, esc(d['month_year'].split()[0])))
-        a('    </article>')
+    # ---- 4. HOW MIW ANSWERS WORK -----------------------------------
+    # The product differentiator, so it is given a real visual and is placed
+    # ABOVE the navigation rather than buried under it.
+    a('<section class="sq-section sq-how">')
+    a('  <h2>How MIW answers work</h2>')
+    a('  <p class="lead sq-how-sub">One question. Five ways to master it &mdash; '
+      'understand it, plan it, write it, deepen it, recall it.</p>')
+    a('  <div class="sq-how-grid">')
+    a('    <figure class="sq-ig-wrap">')
+    o.extend('      ' + s for s in infographic())
+    a('      <figcaption>Every question card opens with these five modes. '
+      'This is the actual control from a solved paper.</figcaption>')
+    a('    </figure>')
+    a('    <ol class="sq-how-list">')
+    for name, blurb in MODES:
+        a('      <li><b>%s</b><span>%s</span></li>' % (esc(name), esc(blurb)))
+    a('    </ol>')
     a('  </div>')
     a('</section>')
 
-    # ---- coverage, stated honestly ---------------------------------
-    # The product is deliberately partial during controlled testing. A candidate
-    # is owed a straight answer about what exists, what is coming and what was
-    # never set -- not a grid that quietly omits the difference.
+    # ---- 5. COVERAGE BY YEAR ---------------------------------------
+    # This is now the PRIMARY way into a solved paper. The large duplicate
+    # "Solved papers" card grid that used to sit above it was removed: it listed
+    # every sitting a second time, in a flat list, with no year structure.
     rows = coverage(specs)
     if rows:
         a('<section class="sq-section">')
-        a('  <h2>Coverage by sitting</h2>')
-        a('  <p class="lead">What is solved today, what is being worked on, and which months '
-          'had no examination. Months with no entry below are simply not in the MIW source '
-          'set yet &mdash; that is a statement about our coverage, not about whether a '
-          'sitting was held.</p>')
+        a('  <h2>Coverage by year</h2>')
+        a('  <p class="lead">Every year with solved papers, newest first &mdash; open a month '
+          'to work the paper. Months marked as having no sitting carry the evidence for saying '
+          'so. For the full examination history, including years held as questions only, see '
+          'the map below.</p>')
         for y in sorted({r[0] for r in rows}, reverse=True):
-            a('  <h3 class="cov-year">%d</h3>' % y)
-            a('  <div class="sq-grid cov-grid">')
-            for (_yr, _mn, month, state, pid) in [r for r in rows if r[0] == y]:
+            yr_rows = [r for r in rows if r[0] == y]
+            n_av = sum(1 for r in yr_rows if r[3] == AVAILABLE)
+            a('  <h3 class="cov-year">%d <span class="cov-count">%d solved</span></h3>'
+              % (y, n_av))
+            a('  <div class="cov-months">')
+            for (_yr, _mn, month, state, pid) in yr_rows:
+                short = month[:3]
                 if state == AVAILABLE:
-                    a('    <article class="sq-card cov cov-available">')
-                    a('      <span class="m">Available</span>')
-                    a('      <h3><a href="/solvedQP/%s.html">%s %d</a></h3>' % (pid, esc(month), y))
-                    a('      <a class="go" href="/solvedQP/%s.html">Open %s &rarr;</a>'
-                      % (pid, esc(month)))
+                    a('    <a class="cov-m cov-av" href="/solvedQP/%s.html">'
+                      '<b>%s</b><span>Solved</span></a>' % (pid, esc(short)))
                 elif state == PLANNED_SOON:
                     # No anchor at all. A disabled-looking link that does nothing
                     # reads as a broken product; absence of a control is honest.
-                    a('    <article class="sq-card cov cov-planned">')
-                    a('      <span class="m">Planned soon</span>')
-                    a('      <h3>%s %d</h3>' % (esc(month), y))
-                    a('      <p class="meta">Questions transcribed from the printed paper. '
-                      'Worked answers are in preparation.</p>')
+                    a('    <span class="cov-m cov-pl"><b>%s</b><span>Soon</span></span>'
+                      % esc(short))
                 else:
-                    a('    <article class="sq-card cov cov-absent">')
-                    a('      <span class="m">No sitting</span>')
-                    a('      <h3>%s %d</h3>' % (esc(month), y))
-                    a('      <p class="meta">No examination paper exists for this month.</p>')
-                a('    </article>')
+                    a('    <span class="cov-m cov-ab" title="%s"><b>%s</b>'
+                      '<span>No sitting</span></span>'
+                      % (esc(strip_tags(KNOWN_ABSENT.get((y, _mn), ''))), esc(short)))
             a('  </div>')
         a('</section>')
 
-    # ---- how each question is worked -------------------------------
-    a('<section class="sq-section">')
-    a('  <h2>How every question is worked</h2>')
-    a('  <p class="lead">The same five modes on every question, in the same order. '
-      'The route through an answer is written once and reused by the plan, the guide and the recall.</p>')
-    a('  <div class="sq-modes">')
-    for name, blurb in MODES:
-        a('    <div class="sq-mode"><b>%s</b><span>%s</span></div>' % (esc(name), esc(blurb)))
-    a('  </div>')
-    a('</section>')
+    # ---- 6. COMPACT COVERAGE MATRIX --------------------------------
+    # An examination-history map, not a second paper list. Deliberately small.
+    mat, myears = matrix(specs, intel)
+    if mat:
+        a('<section class="sq-section sq-mx-sec">')
+        a('  <h2>Examination history at a glance</h2>')
+        a('  <p class="lead">Every month of every year MIW has evidence about. Four states, and '
+          'the last two are different claims: <b>no sitting</b> means no paper was numbered and '
+          'the printed serial sequence skips it; <b>not held</b> means MIW has no source copy, '
+          'which says nothing about whether an examination took place.</p>')
+        a('  <div class="sq-mx-scroll">')
+        a('  <table class="sq-mx"><caption class="sr-only">Examination coverage by year and '
+          'month</caption>')
+        a('    <thead><tr><th scope="col">Year</th>')
+        for mn in range(1, 13):
+            a('      <th scope="col"><abbr title="%s">%s</abbr></th>'
+              % (RM.MONTHS[mn - 1], RM.MONTHS[mn - 1][:1]))
+        a('    </tr></thead>')
+        a('    <tbody>')
+        for y in reversed(myears):
+            a('      <tr><th scope="row">%d</th>' % y)
+            for mn in range(1, 13):
+                st = mat.get((y, mn), M_UNKNOWN)
+                a('        <td class="mx-%s"><span class="sr-only">%s %d: %s</span></td>'
+                  % (st, RM.MONTHS[mn - 1], y, MX_LABEL[st]))
+            a('      </tr>')
+        a('    </tbody>')
+        a('  </table>')
+        a('  </div>')
+        a('  <ul class="sq-mx-key">')
+        for st in (M_SOLVED, M_INTEL, M_ABSENT, M_UNKNOWN):
+            a('    <li><i class="mx-%s"></i>%s</li>' % (st, MX_LABEL[st]))
+        a('  </ul>')
+        a('</section>')
 
-    # ---- questions by year ----------------------------------------
+    # ---- 7. QP INTELLIGENCE BY YEAR --------------------------------
+    # A separate candidate choice from "open a solved paper": questions only,
+    # for testing yourself and for seeing what recurs.
     years = sorted({d['year'] for d in sittings})
     a('<section class="sq-section">')
-    a('  <h2>Questions by year</h2>')
-    a('  <p class="lead">Every question set in a year, month by month, with printed marks, topic '
-      'and how often the question has recurred across sittings. Questions only &mdash; use it to '
-      'test yourself before opening an answer.</p>')
+    a('  <h2>QP intelligence by year</h2>')
+    a('  <p class="lead"><b>Questions only</b> &mdash; the printed wording, the marks, the topic '
+      'and how often each question has recurred across sittings. No answers on these sheets, so '
+      'use them to test yourself before opening a solved paper.</p>')
     a('  <div class="sq-grid">')
     for y in reversed(years):
         n = sum(len(d['questions']) for d in sittings if d['year'] == y)
         a('    <article class="sq-card">')
-        a('      <span class="m">Question intelligence</span>')
-        a('      <h3><a href="/solvedQP/questions-%d.html">%d &mdash; all questions</a></h3>' % (y, y))
+        a('      <span class="m">Questions only</span>')
+        a('      <h3><a href="/solvedQP/questions-%d.html">%d &mdash; all questions</a></h3>'
+          % (y, y))
         a('      <p class="meta">%d questions across %d sittings, with recurrence history.</p>'
           % (n, sum(1 for d in sittings if d['year'] == y)))
-        a('      <a class="go" href="/solvedQP/questions-%d.html">Open the %d sheet &rarr;</a>' % (y, y))
+        a('      <a class="go" href="/solvedQP/questions-%d.html">Open the %d sheet &rarr;</a>'
+          % (y, y))
         a('    </article>')
     a('  </div>')
     a('</section>')
 
     a('<p class="sq-note">Your access covers every solved paper here, including all future '
-      'sittings added to this collection. Spotted something that needs correcting? '
-      '<a href="mailto:%s?subject=Solved%%20QP%%20correction">%s</a>.</p>' % (CONTACT, CONTACT))
+      'sittings added to this collection.</p>')
+
+    # ---- 8. RETURN TO TOP ------------------------------------------
+    # Hidden until the reader is actually deep in the page; the script that
+    # reveals it lives with the other page behaviour at the end of the document.
+    a('<button type="button" id="sq-top" class="sq-top" hidden '
+      'aria-label="Return to top of page">&uarr;<span>Top</span></button>')
     a('</main>')
     # The shared matcher first: the page script and the update ledger both call
     # MIWCorpus, and it is the same string the paper pages and year sheets get,
@@ -797,10 +1135,52 @@ def build(specs):
     a('<script>')
     a(CORPUS_SEARCH_JS)
     a('</script>')
+
+    # ---- 9. FOOTER: quote, then the correction route ----------------
+    a('<section class="sq-foot">')
+    a('  <blockquote class="sq-quote"><p>&ldquo;%s&rdquo;</p><cite>%s</cite></blockquote>'
+      % (esc(QUOTE[0]), esc(QUOTE[1])))
+    # Reuses the MIW Formspree endpoint and field names already in service on the
+    # notes pages, so submissions land in the same place and nothing new has to be
+    # configured. Compact on purpose: paper/question, type, comment, and a name
+    # the sender may leave blank.
+    a('  <form class="sq-cf" action="https://formspree.io/f/maqgoeww" method="POST">')
+    a('    <h2>Spotted something wrong?</h2>')
+    a('    <p>Corrections are read and, if verified, applied at source &mdash; and the change '
+      'then appears in Latest updates above.</p>')
+    a('    <input type="hidden" name="_subject" value="Solved QP correction">')
+    a('    <input type="hidden" name="source_page" value="Solved QP home">')
+    a('    <div class="sq-cf-grid">')
+    a('      <p class="f"><label for="cf-ref">Paper / question</label>'
+      '<input id="cf-ref" name="topic_reference" type="text" '
+      'placeholder="e.g. April 2023, Q4" required></p>')
+    a('      <p class="f"><label for="cf-type">Type</label>'
+      '<select id="cf-type" name="submission_type" required>'
+      '<option value="">Select&hellip;</option>'
+      '<option value="Error / correction">Error / correction</option>'
+      '<option value="Suggestion">Suggestion</option>'
+      '<option value="Missing point">Missing point</option>'
+      '</select></p>')
+    a('      <p class="f wide"><label for="cf-detail">Comment</label>'
+      '<textarea id="cf-detail" name="details" rows="3" '
+      'placeholder="What is wrong, and the regulation or source if you have it." '
+      'required></textarea></p>')
+    a('      <p class="f"><label for="cf-name">Name <span>(optional)</span></label>'
+      '<input id="cf-name" name="name" type="text" autocomplete="name"></p>')
+    a('      <p class="f"><label for="cf-email">Email <span>(optional, for a reply)</span>'
+      '</label><input id="cf-email" name="email" type="email" autocomplete="email"></p>')
+    a('    </div>')
+    a('    <button type="submit" class="sq-cf-go">Send correction</button>')
+    a('  </form>')
+    a('</section>')
+
     o.extend(footer(True))
     # After the footer, so the sticky offsets are measured against a fully
     # parsed document -- the paper pages already do this and are correct.
     a(SEARCH_JS.replace('__STICKY_SYNC__', STICKY_SYNC_JS))
+    a('<script>')
+    a(TOP_JS)
+    a('</script>')
     a('</body>')
     a('</html>')
     return '\n'.join(o) + '\n'
