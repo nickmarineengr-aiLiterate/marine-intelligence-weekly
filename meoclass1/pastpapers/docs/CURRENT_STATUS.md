@@ -1,7 +1,8 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-15, after **QP2307 (July 2023) was laptop-reviewed and published to `main`** (see §7p).
+Last updated: 2026-08-15, after **QP2308 (August 2023) was laptop-reviewed and published to `main`** (see §7q).
+Previous entry: **QP2307** (July 2023) at `569d2d2`, also 2026-08-15 (§7p).
 Previous entries: QP2302 (February 2023) at `734c03f` and the Annex VI dating correction at
 `85fb58e`, both 2026-08-15; **QP2310** (October 2023) at §7o and **QP2303** (March 2023) at §7n,
 both 2026-08-14.
@@ -21,7 +22,42 @@ See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for
 > silently reverted `DESKTOP_QP_ALLOCATION_2023.md`, `DESKTOP_QP_HANDOVER_BATCH3.md` and 15 lines of
 > this file. Both desktop branches are **retained** as provenance evidence.
 >
-> **Product: 36 available papers · 324 published questions · 324 in the corpus.**
+> **Product: 37 available papers · 333 published questions · 333 in the corpus.**
+>
+> **QP2308 (August 2023) IS LIVE — laptop-reviewed and published 2026-08-15 (§7q).** Nine 2023
+> sittings are now solved: January, February, March, April, July, **August**, September, October and
+> December. **Two remain: June and November.**
+>
+> **THE CORRECTION WAS THE PAPER'S ACCOUNT OF WHAT MIW HOLDS, NOT ITS LAW.** Five host recurrence
+> chips were recorded as "cannot be checked, MIW holds no paper for that sitting". MIW holds every
+> one of them: the six-year layer carries the complete 2021 and 2022 sittings as intelligence-only.
+> `QP2212-Q1` and `QP2212-Q9` print Q1 and Q2 word for word from **December 2022**; `QP2201-Q7` and
+> `QP2209-Q7` print Q3 from **January 2022**; `QP2102-Q5` prints Q8 word for word from **February
+> 2021**; `QP2104-Q1` sets Q4's task in **April 2021**. Q1's earliest appearance is December 2022,
+> not April 2024, and Q8 is an **exact recurrence**, not a family member.
+>
+> **No answer content and no tier moved**, because all of it is *wording ancestry* and none of it is
+> an *answer donor* — an intelligence-only paper carries no answer. The derived six-year layer had
+> already computed every edge correctly; only the authored prose was behind, which is the argument
+> for computing lineage rather than asserting it. `recurrence_class` was deliberately **not** touched
+> and Q4 stays `UNIQUE`: its closing words genuinely differ from `QP2104-Q1`, and normalisation is
+> never loosened to force a family.
+>
+> **Three candidate-facing defects, all found in the RENDERED BYTES and none visible to the spec.**
+> Q1 told candidates the corpus register carried `MEPC.328(76)` entry into force as `2023-11-01`
+> "which is wrong" — a **`TSCR-3` disclosure that went stale mid-review** when the corpus closed the
+> defect at `7441cc0`, hours after the branch was pushed. `TSCR-4` closed in the same commit. Q1 also
+> carried *"re-check before publication"* and Q8 *"no MIW donor at all"* — review vocabulary
+> addressed to a paying candidate. **Trap 18 fired for the third paper running**: `ISM Code
+> regulation 10` at three sites; the Code has **elements and paragraphs**.
+>
+> **The III Code content was HELD, not corrected** — and this is the finding worth keeping. Q9 was
+> authored from the **unreviewed** `QP2302-Q2` branch, before that paper's own laptop review, and
+> still states the **four parts** and the correct *develop · monitor · review* strategy cycle. It
+> matches the corrected live donor on every marker and the pre-review version on none.
+>
+> **The storefront month-list guard fired for the second time** — August solved while the 2023
+> coverage line still advertised eight sittings. See §7q.
 >
 > **QP2307 (July 2023) IS LIVE — laptop-reviewed and published 2026-08-15 (§7p).** Eight 2023
 > sittings are now solved: January, February, March, April, **July**, September, October and
@@ -313,6 +349,9 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 
 | Branch | Head | Holds |
 |---|---|---|
+| `pastpapers/qp2308-founder-review` | `7bad669` | QP2308 — **integrated to `main` by path extraction 2026-08-15; retained as provenance, never merged** |
+| `pastpapers/qp2306-founder-review` | `4811f3d` | **QP2306 (June 2023) — NEXT IN THE QUEUE**, unreviewed |
+| `pastpapers/qp2311-founder-review` | `9e2019a` | QP2311 (November 2023) — unreviewed; the last 2023 sitting |
 | `pastpapers/qp2507-founder-review` | `3f37176` | QP2507 — **integrated to `main` by path extraction; retained as provenance, never merged** |
 | `workflow/pil-v1` | `850bdde` | PIL V1 — Founder review |
 | `workflow/state-history-hygiene` | this branch | the state/history split — Founder review |
@@ -434,6 +473,109 @@ Fixed in `caf5020`.
   cannot point forward (819 tokens, zero forward) — and is now inverted into the queue above.
 - **`validate_antipatterns.py` does not exist and never had a hook entry.** No `hooks` key in
   any settings file, no such file on disk. The entry was stale; struck rather than carried.
+
+---
+
+## 7q. QP2308 (August 2023) — laptop-reviewed and published — **THE ANCESTRY THE CORPUS COULD SEE ALL ALONG**
+
+Published to `main` at `1d55812`, 2026-08-15. **37 papers · 333 questions.** Integrated by path
+extraction of 12 paper-owned files onto current `main`; the branch was cut from `bc1be86` and
+predates four integrated papers, so a merge would have presented them as deletions.
+
+**Source.** `2308 EM`, August 2023, two pages, nine questions, SHA-256 `9082fed7…` re-verified.
+**No printed marks anywhere** — like January and February 2023, unlike September. Eleven printed
+anomalies preserved, including the lowercase-L `loT` glyph, Q5's first clause with no main verb, and
+three different limb conventions on one paper.
+
+**Q1–Q9: nine PASS, three corrected in candidate-facing text.** No question's law changed.
+
+### The under-read, and why it matters more than a wrong citation would
+
+Five times the branch recorded a host recurrence chip as *"cannot be checked — MIW holds no paper for
+that sitting"*. **MIW holds every one of them.** The six-year layer carries the complete 2021 and
+2022 sittings as `INTELLIGENCE_ONLY`:
+
+| Q | Chip dismissed | Actually held | Result |
+|---|---|---|---|
+| Q1 | `2022/DEC/Q1` | `QP2212-Q1` | word for word — earliest is **December 2022**, not April 2024 |
+| Q2 | `2022/DEC/Q9` | `QP2212-Q9` | word for word — earliest is December 2022 |
+| Q3 | `2022/JAN/Q7`, `2022/SEP/Q7` | `QP2201-Q7`, `QP2209-Q7` | word for word — earliest **January 2022** |
+| Q4 | `2021/APR/Q1` | `QP2104-Q1` | same task, closing words differ — **not new** |
+| Q8 | `2021/FEB/Q5` | `QP2102-Q5` | word for word — **EXACT recurrence** from February 2021 |
+
+**Nothing downstream moved, and that is the point.** Every edge is *wording ancestry*; none is an
+*answer donor*, because an intelligence-only paper carries no answer. Q4 stays tier A, Q8 tier C.
+**The derived layer had already computed all of it** — `EXACT_REPEAT` first seen February 2021 for
+Q8, December 2022 for Q1 and Q2, `NEAR_REPEAT` January 2022 for Q3. Only the prose was behind.
+
+`recurrence_class` was deliberately **not** changed: it records authoring-time corpus state, is never
+rendered, and rewriting it would misstate what was true when the question was built. **Q4 remains
+`UNIQUE` in the six-year layer and that is correct** — it ends *"the salient points and trend
+analysis"* against `QP2104-Q1`'s *"the salient points, which will enable trend analysis"*. A genuine
+examiner rewrite. Normalisation was not loosened to force a family.
+
+### Three candidate-facing corrections, all found in the rendered bytes
+
+1. **A disclosure that went stale mid-review.** Q1 told candidates the corpus register recorded
+   `MEPC.328(76)` entry into force as `2023-11-01` *"which is wrong (a defect we have raised against
+   our own source register)"*. The corpus **closed that defect at `7441cc0`** on 2026-08-15, hours
+   after this branch was pushed — 251 occurrences across 60 files, including the resolver layer QP
+   tooling consumes. Rewritten to the settled position: **in force 1 November 2022**, deemed accepted
+   1 May 2022, from operative paragraph 3. **The date used in the answer never changed.** `TSCR-4`
+   closed in the same commit and does not bite an August 2023 sitting, where `MEPC.376(80)` genuinely
+   *is* current. **A referral is a perishable claim: it must be re-checked at integration, not
+   carried.**
+2. **Review vocabulary addressed to a paying candidate.** *"re-check before publication"* (Q1) and
+   *"no MIW donor at all … the least internal corroboration"* (Q8). Substance kept word for word;
+   only the nouns moved. The branch's own sweep reported *"zero occurrences"* — it swept the field
+   list, not the rendered page.
+3. **Trap 18, for the third paper running.** `ISM Code regulation 10` at three sites. The ISM Code
+   has **elements and paragraphs**; *regulation* is SOLAS's unit. Corrected in the spec, the
+   verification record and the anchor.
+
+### Held rather than corrected — worth as much as the corrections
+
+- **The III Code content is right, and it was derived independently.** Q9 was authored from the
+  **unreviewed** `QP2302-Q2` branch, *before* that paper's laptop review corrected it, and
+  nonetheless states the **four parts** and the correct **develop · monitor · review** strategy
+  cycle with promulgation kept separate. It matches the corrected live donor on every marker and the
+  pre-review version on none. **A donor's status is evidence, not authority — and here the producer
+  beat its own donor.**
+- **The 33rd Assembly reversal is intact.** `A.1185(33)`, `A.1186(33)`, `A.1187(33)` and
+  `A.1188(33)` appear **only** inside exclusion or trap frames; `A.1155(32)`, `A.1156(32)`,
+  `A.1157(32)` and `A.1118(30)` are used throughout.
+- **Q7 keeps the Hong Kong Convention live and unresolved** — conditions satisfied June 2023, the
+  twenty-four-month clock running, *"It is not in force today."* Donors 22 months later did not leak.
+- **Q6's delta from `QP2303-Q5` was settled at source.** March 2023 genuinely prints *"the ship
+  transformed"* without *is*, so `NEAR` is right.
+- **The producer's own mobile fixes were confirmed by measurement**, not accepted: Q4's chart 287px
+  and Q5's table 283px inside a 347px card at 375px, zero clipping.
+
+### Gates
+
+Toolchain **ALL STAGES PASS in publish mode** · delivery gate `--verify-derivation --strict` **PASS**
+· `health_check --publish` **0 errors** · double build **byte-identical across 94 artefacts** ·
+UI fixture authored, nine probes **proved unique** against the real card payloads under the search's
+own token-AND semantics, **64 assertions pass** · zero internal-vocabulary leaks in the shipped bytes
+· paid route bounces anonymous access to `/SQ/pay.html` with no paid prose served.
+
+**A checker with a mode flag can report green in the wrong mode.** `health_check.py` asserts *review*
+state bare and *publish* state with `--publish`, so whichever build the tree holds, one invocation
+always returns 0 errors. A review-mode toolchain run left 37 pages carrying `noindex` and production
+metadata while the bare checker reported clean. Only comparing against what `main` actually commits
+exposed it. **`run_toolchain.py --publish` is the pre-commit gate; the bare run is not.**
+
+**Graduation:** solved 36 → **37**, intelligence-only 25 → **24**, combined universe **61 papers /
+549 questions unchanged**. The thirteen other paper pages that moved are **exactly** the members of
+the families QP2308 joined — no collateral drift.
+
+**Storefront:** the month-list guard fired for the second time — August was solved and delivered
+while the 2023 coverage line still advertised eight sittings. The page was updated, never the checker.
+
+**Referred, not fixed.** `QP2303-Q5` is **live** and its `subparts` silently repair the printed
+grammar twice — *"the ship **is** transformed"* and *"and **the** typical objectives"* — where the
+March 2023 copy prints neither. `text_verbatim` is faithful on both sides, so QP2308's lineage is
+unaffected. Printed defects are preserved, never silently repaired.
 
 ---
 
