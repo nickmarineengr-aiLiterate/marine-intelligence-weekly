@@ -200,9 +200,20 @@ def normalise_layer(mutate=None):
 #   * a token resolving to the question's OWN paper is ignored. Every source copy
 #     prints a self-referential pointer.
 #
-# Where a question points at several sittings and only some are held, the guard
-# still fires. That is intended: a blanket denial is unsafe once any pointed-at
-# sitting is held, and the fix is to make the sentence specific.
+# Where a BLANKET denial points at several sittings and only some are held, the
+# guard still fires. That is intended: a blanket denial is unsafe once any
+# pointed-at sitting is held, and the fix is to make the sentence specific.
+#
+# SENTENCE SCOPING. A denial that has ALREADY been made specific is read on its
+# own terms: if the sentence carrying the denial names sitting tokens itself,
+# the denial is adjudicated against THOSE tokens and not against every token on
+# the question. This is what "make the sentence specific" was asking for, so
+# the guard has to recognise the fix when it sees it -- otherwise a question
+# that correctly says "2017/FEB and 2017/DEC are sittings MIW does not hold"
+# would flag forever merely because a DIFFERENT, correctly-described token on
+# the same question is held. A denial naming no token is still blanket and is
+# still checked against everything. The rule is purely positional -- which
+# tokens appear inside the sentence -- and involves no reading of meaning.
 #
 # THIS LAYER DETECTS; IT DOES NOT GATE -- and that is a deliberate choice, not a
 # softened guard. Run for the first time it reported 22 hits across six already
@@ -248,23 +259,42 @@ def resolve_token(tok):
     return None if mon is None else 'QP%s%02d' % (m.group(1)[2:], mon)
 
 
+SENTENCE = re.compile(r'(?<=[.;:])\s+')
+
+
+def denial_scopes(adj, hints):
+    """Every (denial phrase, tokens it is made about) pair in an adjudication.
+
+    A denial sentence that names sitting tokens is scoped to those tokens; one
+    that names none is blanket and is scoped to every hint on the question.
+    """
+    scopes = []
+    for sentence in SENTENCE.split(adj):
+        hit = [w for w in DENIALS if w in sentence.lower()]
+        if not hit:
+            continue
+        named = [m.group(0).rstrip('.,;:') for m in TOKEN_MONTH.finditer(sentence)]
+        scopes.append((hit[0], named or list(hints)))
+    return scopes
+
+
 def holdings_layer(specs, intel_path=None):
     fails = []
     held = held_papers(specs, intel_path)
     for d in specs:
         for q in d.get('questions', []):
             adj = q.get('recurrence_adjudication') or ''
-            hit = [w for w in DENIALS if w in adj.lower()]
-            if not hit:
-                continue
-            for tok in q.get('host_recurrence_hint') or []:
-                pid = resolve_token(tok)
-                if pid and pid != d['paper_id'] and pid in held:
+            hints = q.get('host_recurrence_hint') or []
+            for phrase, toks in denial_scopes(adj, hints):
+                for tok in toks:
+                    pid = resolve_token(tok)
+                    if not pid or pid == d['paper_id'] or pid not in held:
+                        continue
                     fails.append(
                         'FALSE HOLDINGS DENIAL: %s-%s says %r in recurrence_adjudication, '
                         'but its host pointer %r resolves to %s, which MIW HOLDS and can '
                         'read. Adjudicate the pointer against the stem instead of denying '
-                        'it.' % (d['paper_id'], q['q_no'], hit[0], tok, pid))
+                        'it.' % (d['paper_id'], q['q_no'], phrase, tok, pid))
     return fails
 
 
@@ -327,6 +357,27 @@ def main():
         if holdings_layer([quiet]):
             bad.append('holdings guard FIRED on a correct denial -- it must stay silent '
                        'on unresolvable tokens and on out-of-window sittings')
+
+        # Sentence scoping. The rule only earns its place if it still fires when
+        # the NAMED token is the held one, so both directions are controlled.
+        scoped_bad = {'paper_id': 'QP9902', 'questions': [{
+            'q_no': 'Q1', 'host_recurrence_hint': ['1998/APR', '2022/SEP/Q5'],
+            'recurrence_adjudication':
+                'The host points at 2022/SEP/Q5, a sitting MIW does not hold. '
+                'Nothing else is claimed.'}]}
+        if not [f for f in holdings_layer([scoped_bad]) if 'QP9902' in f]:
+            bad.append('holdings guard did NOT fire on a denial that NAMES a sitting '
+                       'MIW holds -- sentence scoping must not excuse a specific '
+                       'denial, only a correctly-specific one')
+        scoped_ok = {'paper_id': 'QP9903', 'questions': [{
+            'q_no': 'Q1', 'host_recurrence_hint': ['1998/APR', '2022/SEP/Q5'],
+            'recurrence_adjudication':
+                '1998/APR is a sitting MIW does not hold. 2022/SEP/Q5 resolves to '
+                'QP2209, which MIW holds and which was read.'}]}
+        if holdings_layer([scoped_ok]):
+            bad.append('holdings guard FIRED on a denial scoped to the one token it '
+                       'actually denies, while a DIFFERENT token on the same question '
+                       'is held and correctly described as held')
         for b in bad:
             print('  [SELFTEST FAIL] %s' % b)
         print('  self-test: %s' % ('FAILED' if bad else 'every guard fired when broken'))
