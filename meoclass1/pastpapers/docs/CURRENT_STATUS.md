@@ -1,8 +1,9 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-15, after **QP2308 (August 2023) was laptop-reviewed and published to `main`** (see §7q).
-Previous entry: **QP2307** (July 2023) at `569d2d2`, also 2026-08-15 (§7p).
+Last updated: 2026-08-15, after **QP2306 (June 2023) was laptop-reviewed and published to `main`** (see §7r).
+Previous entries: **QP2308** (August 2023) at `1d55812` (§7q) and **QP2307** (July 2023) at
+`569d2d2` (§7p), both 2026-08-15.
 Previous entries: QP2302 (February 2023) at `734c03f` and the Annex VI dating correction at
 `85fb58e`, both 2026-08-15; **QP2310** (October 2023) at §7o and **QP2303** (March 2023) at §7n,
 both 2026-08-14.
@@ -22,11 +23,12 @@ See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for
 > silently reverted `DESKTOP_QP_ALLOCATION_2023.md`, `DESKTOP_QP_HANDOVER_BATCH3.md` and 15 lines of
 > this file. Both desktop branches are **retained** as provenance evidence.
 >
-> **Product: 37 available papers · 333 published questions · 333 in the corpus.**
+> **Product: 38 available papers · 342 published questions · 342 in the corpus.**
 >
-> **QP2308 (August 2023) IS LIVE — laptop-reviewed and published 2026-08-15 (§7q).** Nine 2023
-> sittings are now solved: January, February, March, April, July, **August**, September, October and
-> December. **Two remain: June and November.**
+> **QP2306 (June 2023) IS LIVE — laptop-reviewed and published 2026-08-15 (§7r).** Ten 2023
+> sittings are now solved: January, February, March, April, **June**, July, August, September,
+> October and December. **ONE REMAINS: NOVEMBER.** May is `NO SITTING` on serial-gap evidence
+> (`2304 → 2306`, nothing at `2305`), so November closes the year and the six-year corpus.
 >
 > **THE CORRECTION WAS THE PAPER'S ACCOUNT OF WHAT MIW HOLDS, NOT ITS LAW.** Five host recurrence
 > chips were recorded as "cannot be checked, MIW holds no paper for that sitting". MIW holds every
@@ -473,6 +475,126 @@ Fixed in `caf5020`.
   cannot point forward (819 tokens, zero forward) — and is now inverted into the queue above.
 - **`validate_antipatterns.py` does not exist and never had a hook entry.** No `hooks` key in
   any settings file, no such file on disk. The entry was stale; struck rather than carried.
+
+---
+
+## 7r. QP2306 (June 2023) — laptop-reviewed and published — **THE SAME DEFECT, THE SECOND PAPER RUNNING**
+
+**Published 2026-08-15 at `3962292`, on top of the QP2407 Rule VI correction at `1230f43`.**
+Printed serial `2306 EM` · `(India 2023)` · 2 pages · 9 questions · marks printed on Q3, Q4, Q7 and
+Q8 only, so six answered questions total **96 against the printed 100**, recorded and not repaired.
+**Q2, Q3, Q5, Q6 and Q8 PASS. Q1, Q4, Q7 and Q9 CORRECTED.**
+
+**Product: 38 papers / 342 questions. Graduation proved: solved 37 → 38, intelligence-only 24 → 23,
+combined universe 61 papers / 549 questions UNCHANGED.** 2023 reaches ten sittings of eleven;
+**only November remains.**
+
+### The source work needed nothing
+
+The `(Ill)` misprint in Q5 limb (iii) — capital I, two lower-case L's — is preserved in
+`text_verbatim` *and* named in the subpart. Q4's stem is correctly rejoined across the page break
+with the host's intervening marketing block excluded. Both halves were traced to the source text
+layer independently. **This is the QP2303-Q5 lesson applied before it was asked for.**
+
+### Three of the four corrections are ONE defect, and it is now a two-paper streak
+
+§7q recorded five host chips wrongly marked *"MIW holds no paper for that sitting"*. **QP2306
+carried three more of the same class.**
+
+| Q | Asserted | Truth |
+|---|---|---|
+| **Q9** | host hint `2022/OCT/Q7` points at "a paper MIW **DOES NOT HOLD AND HAS NEVER TRANSCRIBED**" | `QP2210-Q7` is held, transcribed, and **verbatim identical**. The governed classifier independently returns **`EXACT_REPEAT`**, `first_seen` **October 2022**. `recurrence_class` was `topical_family`; it is now `exact_recurrence` |
+| **Q1** | "**only** the March 2023 entry corresponds to a question MIW has transcribed" | **Three do.** `QP2104-Q2` (April 2021) and `QP2210-Q9` (October 2022) are both held and verbatim identical. The family is **six members rooted at April 2021**, not one at March 2023 |
+| **Q4** | "MIW holds no licensed SOLAS text" — at **7 sites, live in candidate-facing `study_notes`** | **SOLAS 2024 is held**: three official PDFs, **555 of 556 pages with an extractable text layer**. The authoring choice was right; the reason was false. Corrected to the real limitation — **the held edition post-dates a June 2023 sitting** |
+
+**No answer content moved on any of them, and no tier moved.** `reused_from` stays `null` on Q9
+because `QP2210` is unsolved and carries no answer to inherit. That makes QP2306 the corpus's
+sharpest illustration of the distinction: **an exact printed recurrence whose answer had to be
+authored from nothing.**
+
+### Both misses were mechanical, so both root causes are on the record
+
+**Q9 — a search-scope error, and the more general one.** Five targeted searches were run on
+*air cavity*, *microbubble*, *micro bubble*, *skin friction* and *texturing*, and all five came back
+empty. They were run over the **solved answer corpus** and not the **six-year intelligence layer**.
+**An empty result there means the subject has no built ANSWER. It never means the subject has no
+PRECEDENT.**
+
+**Q1 — a transcription artefact that hid the evidence.** `host_recurrence_hint` had been recorded
+across the source's line breaks with the tokens shifted by one — `"2015"`, `"AUG 2015"`, `"NOV 2017"`,
+`"OCT 2021/APR/Q2"` — so two held ancestors were buried inside a token no reader could resolve.
+Re-parsed to the printed tokens.
+
+### Q7 was the hardest question and its law was already right
+
+Stem **verbatim identical** to `QP2412-Q8` (December 2024), across eighteen months, and four
+statements reverse: guidelines edition, GHG strategy, CII rating experience, and the state of the
+short-term-measure review. All four are correctly reversed. `MEPC.377(80)` (7 July 2023, **one month
+future**) appears **only as an exclusion**; the SEEMP sits at **regulation 26** from **1 November
+2022**; the guidelines are **`MEPC.346(78)`**; **no ship has been rated**. Q8, from the *same*
+December 2024 paper, needed **no** reversal at all — the pair is the argument for computing a
+temporal delta rather than inferring it from how settled a subject feels.
+
+### A True Source referral is perishable — verify it at review time, not authoring time
+
+**`TSCR-3` and `TSCR-4` are both CLOSED**, corrected upstream at corpus commit **`7441cc0`** on
+2026-08-15. The register now reads **`2022-11-01`**. QP2306 shipped *"TSCR-3 remains OPEN and is
+re-reported, not repaired"* — accurate when the branch was pushed, stale when it was reviewed.
+**Second consecutive paper on which a referral went stale mid-flight.** The substance never moved:
+the date came from `MEPC.328(76)` operative paragraph 3, not from the register. Both are now marked
+closed in `TRUE_SOURCE_CORRECTION_REQUESTS.md`, with two facts kept: the wrong value had been
+**denormalised across 60 files and 251 occurrences** including the resolver layer QP tooling
+consumes, and `2023-11-01` is the legitimate *deemed-acceptance* date of `MEPC.361(79)` and
+`MEPC.362(79)`, which **must never be swept into a find-and-replace on that date**. `TSCR-4`'s log
+entry is fixed but **`MEPC.391(81)` is still not held**, so LCA is citation-ready and not
+quotation-ready.
+
+**"Held" is not one fact.** Q7's Annex VI limitation survives with better words: the **MARPOL
+consolidated 2022 edition and Annex VI 5th ed. 2023 ARE held**, but both are **image-only with zero
+text layer**, so held is not quotation-ready. Measured, not assumed.
+
+### A defect the builders caught and `validate_spec` does not
+
+QP2306's `source_copy_provenance` was missing `pages` and `printed_serial`, which **crashed
+`build_reuse_map.py`** with `KeyError: 'pages'`. It is the **same intake omission previously recorded
+on QP2303**, and `validate_spec` requires neither field. Restored from the source: 2 pages,
+`2306 EM`.
+
+### Main moved mid-review, and the donor was wrong while the recipient was right
+
+`main` advanced `d17fcca → 1230f43` during the review — the **York-Antwerp Rules 2016 Rule VI**
+salvage correction on `QP2407-Q8`, which is one of QP2306-Q3's two donors. That commit's sweep could
+not have covered QP2306, so Q3 was re-checked against it: it carries **no** "particular charge", no
+SCOPIC misplacement, treats **salvage as allowable in general average**, and names all three YAR
+editions while insisting the contract selects. **Q3 had not inherited the donor's defect and
+independently corroborates the correction.** Rebased and every generated artefact regenerated;
+generated conflicts were resolved by **regeneration, never hand-merging**.
+
+### Gates
+
+Publish-mode toolchain **ALL STAGES PASS** · `delivery_gate --verify-derivation --strict` **PASS** ·
+`known_traps` **314 checks, 0 failures**, no ISM "regulation" defect in any form · `health_check
+--publish` **0 errors** while the bare invocation reports **81**, which is the **proof of build
+mode** and not a regression · double publish build **byte-identical across 111 artefacts** ·
+UI fixture authored, **66 assertions pass** · storefront guard caught the counts **and** the 2023
+month list, page updated not checker, **pricing unchanged** · delivery bytes swept clean (the 87
+`branch` hits are the knowledge-map CSS classes `kmap-branch`/`branches-hidden`) · paid route 302s
+anonymously with **zero paid prose**, and because that 302 is path-agnostic the deploy was proved
+from the **public** surfaces instead: `data-solvedqp-papers="38"`, `342`, June in the live 2023 list.
+
+**Untouched papers are byte-identical to `main`.** Exactly six moved — `QP2301`, `QP2303`, `QP2309`,
+`QP2404`, `QP2409`, `QP2412` — and every one shares a family QP2306 joined. `QP2412-Q7` moved from
+*"Once in this set"* to *"Repeated — reworded"*, the model independently confirming the Q8 recurrence.
+
+### Reported, not rebuilt — and now worth building
+
+`recurrence_check.py` guards the **host-token provenance boundary** and passes cleanly. It does
+**not** reconcile a spec's authored `recurrence_class` against the class the governed model computes,
+which is exactly why Q9 could ship as `topical_family` while the model said `EXACT_REPEAT`. With the
+false-not-held claim now on **two consecutive papers**, a narrow deterministic guard is warranted:
+**assert that no spec asserts non-holding of a paper present in the intelligence layer, and that an
+authored `recurrence_class` does not contradict the derived family class.** Not built here, per
+invariant 7 — the paper is fixed and the checker belongs to the session that owns it.
 
 ---
 
