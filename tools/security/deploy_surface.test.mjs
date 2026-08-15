@@ -218,7 +218,7 @@ describe("runtime allowlist — product and public surfaces still deploy", () =>
     "api/session.js", "api/trial.js", "api/verify-payment.js", "api/_lib/routes.js",
     "SQ/index.html", "SQ/pay.html", "SQ/QB1_A.html",
     "solvedQP/index.html", "solvedQP/QP2301.html", "solvedQP/questions-2023.html",
-    "solvedQP/solvedqp_content_index.json",
+    "solvedQP/solvedqp_content_index.json", "solvedQP/topics.html",
     "meoclass1/index.html", "meoclass1/QB2_E.html", "meoclass1/examiner-index.html",
     "meoclass1/qb_content_index.json",
     "meoclass1/oralnotes/notes_content_index.json",

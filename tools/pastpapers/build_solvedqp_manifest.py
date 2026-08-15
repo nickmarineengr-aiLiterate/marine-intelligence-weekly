@@ -66,6 +66,11 @@ import recurrence_model as RM  # noqa: E402
 from build_solvedqp_home import (coverage, solved_sittings, load_specs,
                                  AVAILABLE, PLANNED_SOON, NO_SITTING)
 from build_questions_year import KNOWN_ABSENT  # noqa: E402
+# The Study Topic Map's normalisation, imported rather than restated: the
+# `study_topics` stamped on every question record below is the SAME projection
+# /solvedQP/topics.html is built from, so the runtime `?topic=` filter (an
+# equality match on this field) returns exactly the set a Topic Map leaf shows.
+import topic_taxonomy as TT  # noqa: E402
 
 MANIFEST_VERSION = '1.0'
 OUT_REL = os.path.join('solvedQP', 'solvedqp_content_index.json')
@@ -157,9 +162,10 @@ def _paper_topics(d):
     return sorted(cats), sorted(subs)
 
 
-def question_records(d, rel, nodes):
+def question_records(d, rel, nodes, normalise=None):
     """Candidate-facing question rows for one AVAILABLE paper."""
     out = []
+    normalise = normalise or TT.make_normaliser([d])
     for q in d['questions']:
         qid = q['question_id']
         stem = q.get('text_verbatim') or ''
@@ -185,6 +191,9 @@ def question_records(d, rel, nodes):
                           q.get('primary_category') or ''])),
             'primary_category': q.get('primary_category'),
             'subject_tags': list(q.get('subject_tags') or []),
+            # Normalised study-topic labels (topic_taxonomy). The structured
+            # `?topic=` filter matches these by equality; `?q=` never reads them.
+            'study_topics': TT.study_topics_for(q, normalise),
             'topic_tags': list(q.get('topic_tags') or []),
             'search_aliases': list(q.get('search_aliases') or []),
             'intent_tags': list(q.get('intent_tags') or []),
@@ -300,6 +309,7 @@ def assert_no_paid_text(manifest, specs):
             allowed.append(strip_tags(q.get('stem') or ''))
             allowed.append(q.get('short_title') or '')
             allowed.extend(q.get('topic_tags') or [])
+            allowed.extend(q.get('study_topics') or [])
             allowed.extend(q.get('search_aliases') or [])
     allowed_blob = ' | '.join(allowed)
 
@@ -321,6 +331,9 @@ def build(specs):
     by_id = {d['paper_id']: d for d in specs}
     solved = solved_sittings(specs)
     avail_ids = {d['paper_id'] for d in solved}
+    # One normaliser over the whole solved corpus, so a case variant's display
+    # form is decided corpus-wide, not per paper.
+    normalise = TT.make_normaliser(solved)
 
     papers, absent = [], []
     for (y, mn, month, state, pid) in coverage(specs):
@@ -352,7 +365,7 @@ def build(specs):
         }
         if state == AVAILABLE:
             rec['href'] = '/solvedQP/%s.html' % pid
-            rec['questions'] = question_records(d, rel, nodes)
+            rec['questions'] = question_records(d, rel, nodes, normalise)
         else:
             # No href and no questions. A planned sitting has nothing to open
             # and nothing published to search; saying so structurally is what

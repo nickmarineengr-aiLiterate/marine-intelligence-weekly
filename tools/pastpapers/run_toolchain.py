@@ -285,6 +285,14 @@ def main():
     rc_total += rc
     warn_total += w
 
+    # The Study Topic Map -- "what should I study?" -- a static projection of
+    # the same specs through topic_taxonomy. Built after the manifest because
+    # its contract test proves every leaf equals the manifest's structured
+    # `?topic=&domain=` filter set exactly.
+    rc, w = run('TOPIC MAP', [os.path.join(T, 'build_topic_map.py')], args.verbose)
+    rc_total += rc
+    warn_total += w
+
     # Search is a property of the manifest, so it is tested here rather than in
     # a browser. See solvedqp_search_test.py.
     rc, w = run('SOLVEDQP FIND', [os.path.join(T, 'solvedqp_search_test.py')], args.verbose)
@@ -300,6 +308,13 @@ def main():
     if args.self_test:
         argv.append('--self-test')
     rc, w = run('SOLVEDQP HOME CT', argv, args.verbose)
+    rc_total += rc
+    warn_total += w
+
+    argv = [os.path.join(T, 'topic_map_test.py')]
+    if args.self_test:
+        argv.append('--self-test')
+    rc, w = run('TOPIC MAP CT', argv, args.verbose)
     rc_total += rc
     warn_total += w
 

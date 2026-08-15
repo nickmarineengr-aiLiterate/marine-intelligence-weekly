@@ -116,6 +116,8 @@ def expected_artefacts(specs):
     # build_solvedqp_manifest.py / build_solvedqp_home.py
     add(os.path.join(sq, 'solvedqp_content_index.json'), 'delivery manifest')
     add(os.path.join(sq, 'index.html'), 'delivery home')
+    # build_topic_map.py -- the Study Topic Map, inside the same entitlement.
+    add(os.path.join(sq, 'topics.html'), 'delivery topic map')
 
     # The canonical inputs themselves. A paper whose spec or verification
     # record is untracked is unreproducible: the pages would rebuild from
