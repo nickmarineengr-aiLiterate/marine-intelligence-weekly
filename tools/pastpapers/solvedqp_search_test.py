@@ -364,6 +364,41 @@ def wiring_tests():
           'data-paper-id="QP2607"' in paper)
     check('year sheet declares its own year', 'data-year="2026"' in year)
     check('home search is sticky', '.sq-find{position:sticky' in home)
+
+    # ---- sticky geometry must not depend on scroll position ----------------
+    # The sticky block used to hide its chips and hint and cut its padding once
+    # a sentinel crossed the top of the viewport. Because a sticky element
+    # keeps its flow box, that shrank the document by 105px, Chrome's scroll
+    # anchoring gave the 105px back by moving scrollTop, and the move pushed
+    # the sentinel back across the threshold -- so the page oscillated between
+    # two scroll positions (measured: 520 -> 415 -> 520) for as long as the
+    # reader rested in that band.
+    #
+    # These four assertions are the shape of the fix, not the symptom: the
+    # sticky element must contain only the field and its results, the browse
+    # affordances must live outside it, and nothing may recompute a class from
+    # a scroll position. Any one of them failing re-opens the feedback loop.
+    check('the browse affordances are OUTSIDE the sticky element',
+          '<section class="sq-findfoot">' in home
+          and home.index('<div class="sq-find">')
+              < home.index('<section class="sq-findfoot">'))
+    check('the chips and hint sit in the foot, not the sticky block',
+          '.sq-findfoot.has-q .sq-chips' in home
+          and '.sq-find.has-q' not in home)
+    check('no scroll-position class changes the sticky block',
+          '.sq-find.is-stuck{' not in home
+          and '.sq-find.is-stuck .sq-chips' not in home)
+    check('the stuck detector and its sentinel are gone',
+          '__miwSyncStuck' not in home and "'is-stuck'" not in home)
+    # Exactly one scroll listener may exist: the back-to-top control, which is
+    # position:fixed and therefore out of document flow, so nothing it does can
+    # move the page under the reader. The count is pinned rather than the
+    # behaviour because the danger is not this handler -- it is the NEXT one.
+    # A second scroll listener has to be added deliberately, past this line.
+    check('the only scroll listener is the out-of-flow back-to-top control',
+          home.count("addEventListener('scroll'") == 1
+          and 'addEventListener("scroll"' not in home
+          and '.sq-top{position:fixed' in home)
     check('home reads a ?q= deep link', "URLSearchParams" in home)
     check('home offers the full update log', 'id="sq-upd-btn"' in home)
     check('home offers topic discovery', 'class="sq-chip"' in home)

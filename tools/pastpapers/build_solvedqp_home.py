@@ -269,14 +269,44 @@ HOME_CSS = """
      label that a screen reader reads and a sighted reader does not see. */
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
            clip:rect(0 0 0 0);white-space:nowrap;border:0;}
-  /* STICKY. The field used to scroll away the moment the reader reached the
-     28-card grid, which is exactly when they want it. Sticking the whole block
-     (field + hint + results) keeps one search affordance on screen without a
-     floating toolbar, and the results panel scrolls inside itself so a broad
-     query can never push the page out from under the reader. */
+  /* STICKY -- and deliberately only the FIELD is sticky.
+     The field used to scroll away the moment the reader reached the 28-card
+     grid, which is exactly when they want it, so the block was made sticky.
+     But the block was field + chips + hint + results, and it then shed the
+     chips and the hint on crossing the sticky threshold -- which made the
+     sticky element change its own height at exactly the scroll position where
+     height matters. See the note on .sq-findfoot for what that cost.
+
+     The three parts are now separate siblings of the page, not one box:
+       .sq-findhead   heading            -- normal flow, scrolls away
+       .sq-find       field + results    -- STICKY, constant height
+       .sq-findfoot   chips + hint       -- normal flow, scrolls away
+     They must be siblings rather than nested, because a sticky element is
+     confined to its containing block: wrap these three in a shared parent and
+     the field un-sticks the moment that parent's bottom edge passes, which is
+     the one thing it exists not to do.
+
+     Height here is invariant with SCROLL. It still changes when the reader
+     types, because the results panel opens -- that is their own action, at the
+     field, and it cannot feed back into a scroll threshold. The results panel
+     scrolls inside itself so a broad query can never push the page out from
+     under the reader. */
+  .sq-findhead,.sq-findfoot{background:var(--bg,#fff);max-width:none;margin:0;
+           padding:0 1.25rem;}
+  .sq-findhead{padding-top:.9rem;padding-bottom:.55rem;}
+  .sq-findfoot{padding-top:.55rem;padding-bottom:.8rem;
+               border-bottom:1px solid var(--grey-border);}
+  .sq-findhead>*,.sq-findfoot>*{max-width:1080px;margin-left:auto;margin-right:auto;}
+  /* The band is three white boxes on a #f8fafc page, so a child's vertical
+     margin collapsing out of its section does not merely move something -- it
+     opens a grey stripe across the search band. It was one box before, where
+     the same margins collapsed harmlessly inside it. Spacing between the three
+     is owned by their padding; the adjoining child margins are zeroed. */
+  .sq-findhead>*:last-child{margin-bottom:0;}
+  .sq-findfoot>*:first-child{margin-top:0;}
   .sq-find{position:sticky;top:var(--topbar-h,47px);z-index:40;background:var(--bg,#fff);
-           max-width:none;margin:0;padding:.9rem 1.25rem .8rem;
-           border-bottom:1px solid var(--grey-border);}
+           max-width:none;margin:0;padding:.6rem 1.25rem;
+           box-shadow:0 2px 8px rgba(15,23,42,.06);}
   .sq-find>*{max-width:1080px;margin-left:auto;margin-right:auto;}
   .sq-find-row{display:flex;align-items:center;gap:.6rem;border:1px solid var(--grey-border);
                border-radius:10px;background:#fff;padding:.6rem .8rem;}
@@ -289,7 +319,7 @@ HOME_CSS = """
      display:none button. Keep this selector tight. */
   .sq-find-row button{flex:0 0 auto;border:0;background:transparent;color:var(--grey-text);
                   font-size:1rem;cursor:pointer;padding:0 .2rem;display:none;}
-  .sq-find .hint{color:var(--grey-text);font-size:.78rem;margin:.5rem 0 0;line-height:1.6;}
+  .sq-findfoot .hint{color:var(--grey-text);font-size:.78rem;margin:.5rem 0 0;line-height:1.6;}
   .sq-res{margin-top:.9rem;max-height:56vh;overflow-y:auto;}
   .sq-res:empty{margin-top:0;}
   /* Topic chips -- discovery for the reader who does not yet have a word for
@@ -303,15 +333,27 @@ HOME_CSS = """
   /* Once the reader is searching, the chips and the explainer have done their
      job. Collapsing them keeps the sticky block from taking most of a phone
      screen -- it measured 567px of an 812px viewport before this. */
-  .sq-find.has-q .sq-chips,.sq-find.has-q .hint{display:none;}
-  /* Stuck = the reader has scrolled past the search block and it is now
-     floating over the content. At that point it must earn its space: the
-     chips and the explainer go, leaving the field. On a phone the block was
-     holding 45% of the screen while the reader scrolled the sitting grid,
-     which is a toolbar, not an affordance. */
-  .sq-find.is-stuck .sq-chips,.sq-find.is-stuck .hint{display:none;}
-  .sq-find.is-stuck{padding-top:.6rem;padding-bottom:.6rem;
-                    box-shadow:0 2px 8px rgba(15,23,42,.06);}
+  /* Reader-triggered, NOT scroll-triggered, and that distinction is the whole
+     point of this section. Typing collapses the browse affordances because the
+     reader has stopped browsing; nothing here reacts to a scroll position.
+
+     What used to sit here was `.sq-find.is-stuck`, which hid the same two
+     elements and cut the padding when a sentinel crossed the top of the
+     viewport. Because .sq-find was sticky, it still occupied its flow box, so
+     shrinking it by 105px moved every following element up by 105px -- and
+     Chrome's scroll anchoring (overflow-anchor:auto, the default) corrected
+     for that by cutting scrollTop by the same 105px. That put the sentinel
+     back below the threshold, which removed .is-stuck, which restored the
+     105px, which anchoring undid again. Measured on the shipped page: a reader
+     who stopped anywhere in the 105px band past the threshold oscillated
+     520 -> 415 -> 520 -> 415 indefinitely.
+
+     The class detector was not the bug and neither was scroll anchoring. The
+     bug was a sticky element that changed its own height as a function of
+     scroll position, which makes the two of them each other's input. Splitting
+     the block removed the feedback path, so the detector, its sentinel and its
+     scroll listener are all gone rather than tuned. */
+  .sq-findfoot.has-q .sq-chips,.sq-findfoot.has-q .hint{display:none;}
   .sq-chip:hover,.sq-chip:focus-visible{border-color:var(--teal);color:var(--teal-dark);
            background:var(--teal-light);}
   .sq-chip[aria-pressed="true"]{border-color:var(--teal);color:var(--teal-dark);
@@ -367,7 +409,10 @@ HOME_CSS = """
     .sq-hero h1{font-size:1.5rem;}.sq-stats{gap:1rem;}
     .sq-upd li{flex-direction:column;gap:.15rem;}
     .sq-upd time{flex:none;}
-    .sq-find{padding:.7rem .9rem .65rem;}
+    .sq-find{padding:.55rem .9rem;}
+    .sq-findhead,.sq-findfoot{padding-left:.9rem;padding-right:.9rem;}
+    .sq-findhead{padding-top:.7rem;}
+    .sq-findfoot{padding-bottom:.65rem;}
     /* The topbar wraps to ~110px on a phone, so the sticky block has less room
        to work with. Cap the panel low enough that the sitting grid stays
        partly visible underneath it. */
@@ -453,7 +498,10 @@ __STICKY_SYNC__
     narrowGrid(ids);
   }
 
-  var findSec=document.querySelector('.sq-find');
+  // The browse affordances, which collapse while a query is active. This is
+  // the foot section, not the sticky field: nothing may change the sticky
+  // element's height, or scroll anchoring and the change fight each other.
+  var findSec=document.querySelector('.sq-findfoot');
 
   function run(q,opts){
     q=(q||'').trim();
@@ -514,41 +562,22 @@ __STICKY_SYNC__
   // Warm the payload on first focus so the first keystroke feels instant.
   box.addEventListener('focus',MIWCorpus.load,{once:true});
 
-  // Detect "stuck" from a zero-height sentinel immediately above the block:
-  // once the sentinel has scrolled off the top, the block is floating over
-  // content and should shed the chips and the explainer.
+  // NO SCROLL LISTENER, and nothing that reacts to scroll position at all.
   //
-  // A passive scroll listener, NOT an IntersectionObserver. IO is the tidier
-  // tool and was the first implementation, but it delivers callbacks through
-  // the compositor, so it is untestable in a headless pane that produces no
-  // frames -- the observer fired zero callbacks, including the initial one.
-  // A behaviour that cannot be exercised in review is a behaviour nobody can
-  // prove still works. The listener is passive and does one rect read.
-  if(findSec){
-    var sentinel=document.createElement('div');
-    sentinel.setAttribute('aria-hidden','true');
-    sentinel.style.cssText='height:1px;margin-bottom:-1px;';
-    findSec.parentNode.insertBefore(sentinel,findSec);
-    var ticking=false;
-    var syncStuck=function(){
-      ticking=false;
-      findSec.classList.toggle('is-stuck',
-        sentinel.getBoundingClientRect().top < 0);
-    };
-    // setTimeout, not requestAnimationFrame. rAF does not fire in a tab that
-    // is not producing frames, which would latch `ticking` true forever and
-    // silently kill the handler for the rest of the session.
-    var onScroll=function(){
-      if(ticking) return;
-      ticking=true;
-      setTimeout(syncStuck,16);
-    };
-    window.addEventListener('scroll',onScroll,{passive:true});
-    window.addEventListener('resize',onScroll,{passive:true});
-    syncStuck();
-    // Exposed so a UI review can drive it without waiting on a frame.
-    window.__miwSyncStuck=syncStuck;
-  }
+  // What stood here was a sentinel + passive scroll listener that toggled
+  // `.is-stuck` on the sticky block so it could shed its chips and explainer
+  // once it began floating over the sitting grid. The detector worked exactly
+  // as written; the architecture underneath it did not. A sticky element keeps
+  // its flow box, so shrinking it by 105px lifted the rest of the document by
+  // 105px, and scroll anchoring compensated by cutting scrollTop by 105px --
+  // which moved the sentinel back across the threshold and un-stuck it. The
+  // page then oscillated between two scroll positions for as long as the
+  // reader rested inside that band.
+  //
+  // The chips and the hint now sit outside the sticky element and scroll away
+  // on their own, so there is nothing left to detect. This is deliberately an
+  // absence: re-adding any scroll-position-driven class to .sq-find re-opens
+  // the same loop, whatever the class is called.
 
   // Restore a shared/bookmarked search. silent: the URL already says this.
   var initial=readQ();
@@ -977,8 +1006,12 @@ def build(specs):
     # Answers the question a candidate actually arrives with: "which solved
     # papers cover Port State Control, and which question?" Results are
     # question-level and link straight to the anchor.
-    a('<section class="sq-find">')
+    # Three siblings, not one section. The middle one is the only sticky
+    # element and its height does not depend on scroll position; see the CSS.
+    a('<section class="sq-findhead">')
     a('  <h2 class="sq-h-find">Search by topic</h2>')
+    a('</section>')
+    a('<div class="sq-find">')
     a('  <div class="sq-find-row">')
     a('    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
       'stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/>'
@@ -991,6 +1024,16 @@ def build(specs):
     # Topic discovery. These are the manifest's own primary_category values --
     # derived, never a hand-kept list that could name a topic the corpus does
     # not cover.
+    # The results panel belongs to the sticky element: a broad query must not
+    # be able to push the page out from under the reader, and .sq-res scrolls
+    # inside itself so it never can.
+    a('  <div class="sq-res" id="sq-results"></div>')
+    a('</div>')
+    # Browse affordances, in normal document flow BELOW the sticky field, so
+    # they scroll away on their own instead of being hidden by a scroll
+    # threshold. The reading order -- heading, field, chips, hint -- is
+    # unchanged from when all four shared one box.
+    a('<section class="sq-findfoot">')
     if topic_chips:
         a('  <div class="sq-chips" role="group" aria-label="Browse by topic">')
         for label, count in topic_chips:
@@ -1003,7 +1046,6 @@ def build(specs):
     a('  <p class="hint">Searches the printed question and its topic labels across every '
       'solved paper. <span class="sq-kbd">Press <kbd>/</kbd> to search, <kbd>Esc</kbd> '
       'to clear.</span></p>')
-    a('  <div class="sq-res" id="sq-results"></div>')
     a('</section>')
 
     # ---- 4. HOW MIW ANSWERS WORK -----------------------------------
