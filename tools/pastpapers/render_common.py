@@ -348,13 +348,30 @@ def topbar(active='', links=None):
     return out
 
 
+# The one GA4 property for the whole estate. Base page-view instrumentation
+# only -- the same compact house snippet the Oral Notes template and
+# meoclass1/ pages carry. No custom events, no user identifiers, no
+# page_location override (a paper page must never forward its query string
+# or entitlement state). tools/security/ga_coverage.test.mjs enforces exactly
+# one installation of exactly this ID on every deployed HTML page, and fails
+# if this block is ever removed from head_meta().
+GA4_MEASUREMENT_ID = 'G-0YEE2CBNP5'
+GA4_SNIPPET = [
+    '<script async src="https://www.googletagmanager.com/gtag/js?id=%s"></script>' % GA4_MEASUREMENT_ID,
+    "<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}"
+    "gtag('js',new Date());gtag('config','%s');</script>" % GA4_MEASUREMENT_ID,
+]
+
+
 def head_meta(title, description, canonical_path, publish, extra=()):
-    """Head block. Review mode is noindex; publish mode carries full SEO."""
+    """Head block. Review mode is noindex; publish mode carries full SEO.
+    Every mode carries the canonical GA4 snippet (see GA4_SNIPPET)."""
     o = ['<!DOCTYPE html>', '<html lang="en">', '<head>',
          '<meta charset="UTF-8">',
          '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
          '<title>%s</title>' % esc_attr(plain_text(title)),
          '<meta name="description" content="%s">' % esc_attr(plain_text(description))]
+    o.extend(GA4_SNIPPET)
     if publish:
         o.append('<meta name="robots" content="index, follow, max-image-preview:large">')
         o.append('<link rel="canonical" href="%s%s">' % (BASE, canonical_path))
