@@ -5571,3 +5571,63 @@ task: **the 22 holdings-denial flags** — the understated-holdings defect class
 largest remaining factual-correctness item. Carried open: `TSCR-9` (corpus uncorrected), the
 QP2201-Q4 mid-stem extractor artefact, the QP2303-Q5 source-fidelity referral, and the
 internal-vocabulary remediation plan.
+
+## §35. Pre-launch consolidation — deploy surface, H1, P1, access matrix — 2026-08-15 (laptop)
+
+Not a paper review. Starting HEAD `62145f3` (= `origin/main`), clean; `origin/main` unmoved
+throughout; the desktop's newer branch `analysis/written-qp-true-source-priority` (`e217dcb`) is
+docs-only and touched nothing in scope. Both prelaunch branches were cut from `359cf58`, one commit
+behind main, and neither overlapped `62145f3` — so H1 was taken by file, P1 by patch, and every
+generated artefact was regenerated from current specs rather than taken from either branch.
+
+**Deploy surface (`419cf18`).** Re-verified before acting: root is the web root, `package.json`
+build is `echo`, no `.vercelignore`, and every candidate page fetches only
+`/solvedQP/solvedqp_content_index.json` — nothing fetches specs, verification, the review manifest,
+`known_traps.md` or `tools/`. Read the bundled CLI (`getVercelIgnore`, 58.11.0): it reads
+`.vercelignore` + a fixed default list and **never `.gitignore`**, so the "trap" runs the other way —
+without a mirror, a workstation `vercel deploy` already uploads `Knowledge Central/`, the source
+scans and the provenance record. `.vercelignore` therefore carries every `.gitignore` pattern
+verbatim (section A), then the authoring classes (B) and governance/toolchain (C).
+`tools/security/deploy_surface.test.mjs` evaluates the file with a gitignore-subset matcher that
+refuses syntax it cannot evaluate, checks the mirror is verbatim-complete, plants a synthetic
+sentinel per ignored class, and asserts every product/public surface still deploys. Cross-checked
+once against the real `ignore` 7.0.6 over all 1,051 tracked paths + 20 sentinels: 0 disagreements.
+Reduction: 1,051 → 455 files, 143.42 → 109.52 MB. Live before-state recorded: `/tools/...`,
+`/README.md`, `/docs/...`, `/reports/...` all `200`.
+
+**H1 (`9ed82d2`).** Builder files taken as authored (no drift on main since the branch point);
+manifest regenerated. Sentinel hits 3,749 → 25; bytes 3,722,925 → 2,471,373; `--self-test`
+10/10 including the `founder_review_note_2027` / `tscr_adjudication_note` /
+`internal_corpus_state` negative control. Residual 8 spec-authored strings in `regulations[]`
+recorded and then cleaned under P1.
+
+**P1 (`dac9261`).** 40 authored files applied cleanly; 26 generated pages regenerated. Completed
+the branch's own classes where it stopped short: five internal filenames still rendering on
+delivery pages (`known_traps.md` on QP2303/QP2502/QP2503, `PASTPAPER_PRODUCTION_PROTOCOL.md` on
+QP2511) and three QP2302 `regulations[]` entries naming TSCR-3 in the candidate manifest — only
+strings that render or project were edited; 29 occurrences in internal record fields left as
+records. Oral `qb_health_check` counts identical before/after.
+
+**One self-inflicted race, recorded.** A `git stash`/`stash pop` used to baseline the Oral health
+check ran while a background toolchain build was in flight; that build reported a failure that no
+later clean build reproduced. It was discarded and the two determinism builds were run alone.
+
+**QA.** Publish toolchain ALL STAGES PASS ×2, **149 artefacts byte-identical**; strict delivery
+gate PASS; security 284/284; explicit access matrix through the real `authorizeRequest` (11
+fixtures × 12 paths) with the §26 critical route test asserted; live probes: case-variant paths
+404, traversal normalised and gated; random paid-prose probes 48/48 clean except the governed
+QP2601 public sample by design; visual pass on a P1 Written page, a P1 Oral page, storefront and
+sample at desktop and 375 px, no console errors, no content overflow.
+
+**Product state unmoved and proved unmoved.** 39 / 351, 2023 11/11, prices, Terms, trials and the
+entitlement code byte-identical.
+
+**Carried.** H2/H3 review-copy badges (launch decision, desktop measurement pending); TSCR-9; the
+22 holdings-denial flags; QP2201-Q4 extractor artefact; QP2303-Q5 source-fidelity referral;
+`surface_impact.py` classifier debt; three P3 comment-level internal strings.
+
+## Next action
+
+**Recommended next laptop task: the 22 holdings-denial flags** (unchanged from §34) — the largest
+remaining factual-correctness item. Do NOT start marketing, Dual-Time, Study Compass or the
+review-tree retirement until the desktop's H2 measurement lands.

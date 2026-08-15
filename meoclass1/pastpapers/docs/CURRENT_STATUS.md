@@ -1,8 +1,9 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-15, after **QP2311 (November 2023) was laptop-reviewed and published to `main`,
-CLOSING THE 2023 YEAR** (see `history/SESSION_HISTORY.md` §40).
+Last updated: 2026-08-15, after the **pre-launch consolidation** — deploy-surface minimisation,
+H1 and P1 hygiene integrated, full access-matrix regression (see §1b and `history/SESSION_HISTORY.md`
+§35) — on top of **QP2311 (November 2023) closing the 2023 year** (§40).
 Previous entries: **QP2306** (June 2023) (§7r), **QP2308** (August 2023) at `1d55812` (§7q) and
 **QP2307** (July 2023) at `569d2d2` (§7p), all 2026-08-15.
 Previous entries: QP2302 (February 2023) at `734c03f` and the Annex VI dating correction at
@@ -276,6 +277,31 @@ historical git exposure, is in
 **Outstanding and NOT closed by that session:** the Upstash REST token, the Brevo SMTP key and a
 Brevo account password were pasted into a chat transcript during the work and must be rotated at
 source. That is independent of the git-history incident.
+
+---
+
+## 1b. Pre-launch consolidation — deploy surface, H1, P1, access matrix — 2026-08-15
+
+Not a paper review: a product-boundary hardening session on top of the A.1184 patch. Full record in
+`history/SESSION_HISTORY.md` §35.
+
+| | |
+|---|---|
+| **Deploy surface** | **CLOSED.** `.vercelignore` added. Repository root is the web root and the build is a no-op, so every tracked file was a URL. Now excluded: `specs/`, `verification/`, `docs/`, `intelligence/`, `sample/`, `known_traps.md`, the review manifest, `meoclass1/known_traps.md`, `qb_health_check.py`, `tools/`, root `docs/`, `reports/`, `engineering-reports/`, `production-system/`, `corrections/`, `.github/`, `.claude/`, `Claude skill/`, root `*.md`. **1,051 → 455 files, 143.4 → 109.5 MB.** The review tree `meoclass1/pastpapers/*.html` is still shipped on purpose (H2 pending) |
+| **CLI safety** | The Vercel CLI (`getVercelIgnore`, v58.11.0) reads `.vercelignore` + fixed defaults and **never `.gitignore`** — so a workstation deploy was already uploading git-ignored classes. `.vercelignore` now carries every `.gitignore` pattern verbatim; `tools/security/deploy_surface.test.mjs` fails if the two drift and plants a synthetic sentinel in each ignored class. 86/86; cross-checked once against the real `ignore` library over 1,071 paths, 0 disagreements |
+| **H1** | Consumed desktop `prelaunch/pastpapers-index-hygiene` (`9ae7075`) — three builder files as authored, manifest regenerated from current specs. Served manifest is now an **allowlisted projection**; internal-field hits 3,749 → 25 (policy prose + "foundering"); 3.72 → 2.47 MB. Self-test 10/10 incl. future-field negative control |
+| **P1** | Consumed desktop `prelaunch/p1-hygiene-remediation` (`d5f0dc8`) — 40 authored files applied cleanly, 26 generated pages regenerated. Completed the same classes where the branch stopped: 5 rendered `known_traps.md` / protocol filenames and 3 `regulations[]` TSCR-3 entries. Delivery output now **0** for `known_traps.md`, TSCR, `.md`/spec-`.json` filenames, verification paths, commit hashes |
+| **Access matrix** | 284/284 (198 + 86). Oral-only **denied** on `/meoclass1/pastpapers/` and `/solvedQP/`; Written-only denied on Oral; lapsed → `expired`; live trial allows, expired trial denies, paid beats expired trial; evicted, forged `miw_auth`, store-down all deny. Live probes: case-variant paths 404, traversal normalised and gated |
+| **Invariants** | 39 papers / 351 questions, 2023 11/11, prices ₹1,499 / ₹899 / ₹1,500, Terms, trials, entitlement code **byte-identical** (`routes.js`, `middleware.js`, `products.js`, `entitlements.js`, `trial.js`, `session.js`) |
+| **Determinism** | 149 artefacts byte-identical across two full publish builds; toolchain ALL STAGES PASS; `delivery_gate --strict --verify-derivation` PASS |
+
+**Open, recorded, not fixed here:** H2 (39 review pages render `UNGATED REVIEW COPY` to
+SOLVED_QP holders) and H3 (the Oral-gated Written sample renders the same tag) — desktop's
+review-tree measurement had not landed, so no retirement; the 44 delivery pages carry an invisible
+`<!-- GATE SCRIPT STRIPPED FOR REVIEW COPY -->` comment (template, P3); two HTML/JS comments on
+`SQ/index.html` and `SQ/trial.html` say "Founder" (P3); `surface_impact.py` route classifier
+disagrees with route policy on some surfaces (P3 governance debt); the Oral `qb_health_check`
+reports 66 files with pre-existing errors, unchanged by P1.
 
 ---
 
