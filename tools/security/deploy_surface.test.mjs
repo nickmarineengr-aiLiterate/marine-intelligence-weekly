@@ -173,6 +173,15 @@ describe("deployment intent — authoring-only classes are excluded", () => {
     "meoclass1/pastpapers/sample/QP2601.sample.json",
     "meoclass1/pastpapers/known_traps.md",
     "meoclass1/pastpapers/pastpapers_content_index.json",
+    // The review HTML tree itself, retired from the deploy. Real files, so
+    // these fail loudly if the directory rule is ever narrowed back.
+    "meoclass1/pastpapers/QP2301.html",
+    "meoclass1/pastpapers/index.html",
+    "meoclass1/pastpapers/topics-2026.html",
+    // Synthetic: a review page that does not exist yet. A future paper build
+    // must land outside the deploy by the DIRECTORY rule, without anyone
+    // remembering to add its filename here.
+    "meoclass1/pastpapers/SENTINEL.html",
     "meoclass1/known_traps.md",
     "meoclass1/qb_health_check.py",
     "tools/pastpapers/build_index.py",
@@ -199,7 +208,7 @@ describe("deployment intent — authoring-only classes are excluded", () => {
     const classes = [
       "meoclass1/pastpapers/specs/", "meoclass1/pastpapers/verification/",
       "meoclass1/pastpapers/docs/", "meoclass1/pastpapers/intelligence/",
-      "meoclass1/pastpapers/sample/", "tools/", "docs/", "reports/",
+      "meoclass1/pastpapers/", "tools/", "docs/", "reports/",
     ];
     const leaks = TRACKED.filter((f) => classes.some((c) => f.startsWith(c)))
       .filter((f) => !isIgnored(f, PATTERNS));
@@ -289,9 +298,6 @@ describe("runtime allowlist — product and public surfaces still deploy", () =>
     "meoclass1/qb_content_index.json",
     "meoclass1/oralnotes/notes_content_index.json",
     "meoclass1/oralnotes/written-sample-january-2026.html",
-    // Review tree: still shipped by decision (H2 pending), so it must not
-    // silently disappear through a careless pattern.
-    "meoclass1/pastpapers/QP2301.html", "meoclass1/pastpapers/index.html",
     "assets/logo.webp", "RulesApp/app/index.html", "archive/index.html",
     "GHGDecarb/timeline.html", "ecosystem.html", "timeline.html",
   ];
@@ -306,10 +312,9 @@ describe("runtime allowlist — product and public surfaces still deploy", () =>
     const roots = ["solvedQP/", "SQ/", "api/", "assets/", "meoclass1/", "RulesApp/",
       "articles/", "archive/", "GHGDecarb/"];
     const internals = [
-      "meoclass1/pastpapers/specs/", "meoclass1/pastpapers/verification/",
-      "meoclass1/pastpapers/docs/", "meoclass1/pastpapers/intelligence/",
-      "meoclass1/pastpapers/sample/", "meoclass1/pastpapers/known_traps.md",
-      "meoclass1/pastpapers/pastpapers_content_index.json",
+      // The whole review tree, not its sub-classes: the 48 generated review
+      // pages were retired from the deploy alongside the authoring layer.
+      "meoclass1/pastpapers/",
       "meoclass1/known_traps.md", "meoclass1/qb_health_check.py",
     ];
     const wrongly = TRACKED.filter((f) => roots.some((r) => f.startsWith(r)))
