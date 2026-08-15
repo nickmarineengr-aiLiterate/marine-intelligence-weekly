@@ -116,6 +116,86 @@ const FIXTURES = {
     // Only the conjunction lands on the composite survey-and-certificate stem.
     narrow: ['survey certificate damage', 'QP2308-Q8'],
   },
+  QP2306: {
+    // AUTHORED at laptop review against what each question is about, then every
+    // probe PROVED against the real card payloads under the search's own
+    // token-AND semantics -- never harvested from the built page. Uniqueness was
+    // computed, not assumed, because a probe reaching two cards still passes its
+    // assertion and still reports green.
+    //
+    // This paper's collisions, all measured and all rejected as probes:
+    // 'resistance' and 'friction' each reach Q5 and Q9 (antifouling coatings are
+    // sold on frictional resistance, which is also the whole of Q9); 'air' reaches
+    // Q1, Q3, Q6 and Q9; 'next of kin' reaches Q4 and Q5; 'ffo' reaches Q3 and Q7
+    // (the clause abbreviation, and 'ffo' inside 'ship fuel oil consumption');
+    // 'regulation 22' reaches FOUR cards, because the bare digits also match
+    // article and rule numbers elsewhere. None can say which card broke.
+    probes: [
+      // The UNCLOS art 1(1)(4) term of art, and the half of Q1 that is definitional.
+      ['pollution of the marine environment', 'QP2306-Q1'],
+      ['casualty investigation', 'QP2306-Q2'],
+      // The clause the stem names, in the stem's own words.
+      ['running down clause', 'QP2306-Q3'],
+      // ISM Code element 8, which is what Q4's printed stem is quoting.
+      ['emergency preparedness', 'QP2306-Q4'],
+      ['self-polishing', 'QP2306-Q5'],
+      // The remedy for late redelivery, and the limb C the stem asks for.
+      ['liquidated damages', 'QP2306-Q6'],
+      // The fourth SEEMP step, named only in this question.
+      ['self-evaluation', 'QP2306-Q7'],
+      ['tackle-to-tackle', 'QP2306-Q8'],
+      // Printed as TWO WORDS on the source and preserved that way.
+      ['micro bubbles', 'QP2306-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases, and each
+      // was checked against the visible text with tag boundaries treated as HARD
+      // BREAKS, because collapsing whitespace joins adjacent elements and
+      // manufactures a false match.
+      ['channelling', 'QP2306-Q1',
+       'Q1 (the CLC mechanism by its technical name, which the answer explains without labelling)'],
+      ['technical cooperation committee', 'QP2306-Q2',
+       'Q2 (an IMO organ the answer lists structurally rather than by full title)'],
+      ['cross liabilities', 'QP2306-Q3',
+       'Q3 (the basis on which a both-to-blame collision claim is settled)'],
+      ['24 hour contact', 'QP2306-Q4',
+       'Q4 (how a candidate would search the ship-to-office contact requirement)'],
+      ['silyl acrylate', 'QP2306-Q5',
+       'Q5 (the SPC binder chemistry, as a coating datasheet names it)'],
+      ['long stop date', 'QP2306-Q6',
+       'Q6 (the contractual backstop beyond which termination arises)'],
+      ['just in time arrival', 'QP2306-Q7',
+       'Q7 (the operational measure a SEEMP Part I would list)'],
+      ['hatch cover test', 'QP2306-Q8',
+       'Q8 (the evidence a shipowner needs for the grain-damage defence)'],
+      ['shark skin', 'QP2306-Q9',
+       'Q9 (hull surface texturing under the name the biomimicry is known by)'],
+    ],
+    // DELIBERATE REGRESSION SENTINEL, guarding this paper's sharpest reversal.
+    // MEPC.346(78) -- the 2022 SEEMP Guidelines -- is the OPERATIVE edition at a
+    // June 2023 sitting. Q7's stem is VERBATIM identical to QP2412-Q8 (December
+    // 2024), whose answer correctly carries MEPC.395(82) of 4 October 2024. If
+    // this probe stops resolving to Q7, the later edition has been walked back
+    // into a sitting that pre-dates it by sixteen months.
+    //
+    // An EXCLUDED-term sentinel would be stronger, as it is on QP2307. None is
+    // available here, and that is correct rather than a gap: MEPC.377(80) and
+    // MEPC.395(82) live in study_notes traps, which are not part of the search
+    // payload, so both are unsearchable by construction. Measured: each returns
+    // ZERO cards, which is itself the proof that no future instrument reached the
+    // searchable layer.
+    regulation: ['mepc.346(78)', 'QP2306-Q7'],
+    // Leak probe, not a search probe. The source copy prints the host's own
+    // backward-looking sitting annotation under every stem -- Q1 carries seven
+    // rows reaching back to 2015, Q6 three from 2013 and 2014. '2023/jun' is the
+    // paper's self-reference, printed on all nine. None may reach shipped bytes.
+    recurrence: ['2015/aug', '2021/apr', '2022/oct', '2013/sr02', '2023/jun'],
+    // Three terms, none unique alone: 'resistance' and 'friction' each reach Q5
+    // and Q9; 'air' reaches Q1, Q3, Q6 and Q9. Only the conjunction lands on the
+    // skin-friction stem, and it is invisible as a phrase, so it can only match
+    // through the search payload.
+    narrow: ['resistance friction air', 'QP2306-Q9'],
+  },
   QP2303: {
     // AUTHORED at laptop review against what each question is about, never
     // harvested from the built page.

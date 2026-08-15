@@ -153,8 +153,20 @@ The corpus was **not modified**. Papers engaging the date use the resolution's o
 paragraph. **No QP2507 question depends on it** — Q2 engages the LCA guideline layer, not the entry
 into force of the revised Annex VI — so QP2507 references this entry without re-verifying it.
 
-**Status: OPEN.** Producer-team action requested: correct the three records, or record why
-`2023-11-01` is right and the resolution's own paragraph 3 is not.
+**Status: CLOSED — corrected upstream 2026-08-15 at corpus commit `7441cc0`.** Verified at the
+QP2306 laptop review by reading the corrected register at the corpus `origin/main`:
+`baseline.entryIntoForce` now reads **`2022-11-01`**, with `deemedAccepted` `2022-05-01`, and an
+`eifProvenance` field citing operative paragraphs 2 and 3 of the held `MEPC.328(76)` PDF.
+
+Two facts from the closure are worth keeping. **The wrong value had been denormalised across 60
+files and 251 occurrences of the frozen build, including `12-search-index/QP_REFERENCE_RESOLVER.json`
+— the layer QP tooling consumes.** And the likely origin of the error is the adjacent correct value:
+`2023-11-01` is the *deemed-acceptance* date of `MEPC.361(79)` and `MEPC.362(79)`, whose
+`deemedAccepted` fields are legitimately `2023-11-01` and **must never be swept into a
+find-and-replace on this date**.
+
+No paper's answer moved: every paper that engaged the date had taken it from the resolution's own
+operative paragraph rather than the register.
 
 ---
 
@@ -197,8 +209,15 @@ This finding also upgrades the lineage: `QP2501-Q7` had the supersession right b
 `MEPC.391(81)` at P2 with the express limitation *"the resolution was NOT read"*. It has now been
 read, and the verbatim revocation wording is on the record for the whole lineage.
 
-**Status: OPEN.** Producer-team action requested: mark `MEPC.376(80)` revoked, record
-`MEPC.391(81)` as the operative LCA framework, and acquire its text.
+**Status: CLOSED — corrected upstream 2026-08-15 at corpus commit `7441cc0`, the same commit that
+closed TSCR-3.** Verified at the QP2306 laptop review by reading `GHG-instruments/INSTRUMENT_LOG.md`
+at the corpus `origin/main`: `MEPC.376(80)` is now marked **REVOKED** by `MEPC.391(81)` op. para 5,
+22 March 2024, *"retain for history; do not cite as current"*, and `MEPC.391(81)` is recorded as
+**GUIDANCE — CURRENT**. The log now carries the standing note that **revoked is not superseded**.
+
+**One part of the request remains outstanding and is not closed by the log fix:** `MEPC.391(81)`
+is still **NOT HELD** — the log itself flags acquisition as required. So the LCA framework is
+**citation-ready but not quotation-ready**, and a paper needing its wording still cannot quote it.
 
 ---
 

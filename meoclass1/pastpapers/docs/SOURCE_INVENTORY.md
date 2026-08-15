@@ -6,7 +6,7 @@
 
 | Year | Papers held | Months absent from the available source set |
 |---|---|---|
-| 2023 | 9 | May, June, November |
+| 2023 | 10 | May, November |
 | 2024 | 11 | May |
 | 2025 | 11 | May |
 | 2026 | 6 | May, August, September, October, November, December |
@@ -19,6 +19,7 @@
 | QP2302 | February 2023 | `FEBRUARY 2023.pdf` | 2302 EM | 2 | 9 | ? of 2 |
 | QP2303 | March 2023 | `MARCH 2023.pdf` | 2303 EM | 2 | 9 | ? of 2 |
 | QP2304 | April 2023 | `APRIL 2023.pdf` | 2304 EM | 2 | 9 | 2 of 2 |
+| QP2306 | June 2023 | `JUNE 2023.pdf` | 2306 EM | 2 | 9 | 2 of 2 |
 | QP2307 | July 2023 | `JULY 2023.pdf` | 2307 EM | 2 | 9 | ? of 2 |
 | QP2308 | August 2023 | `AUGUST 2023.pdf` | 2308 EM | 2 | 9 | ? of 2 |
 | QP2309 | September 2023 | `SEPTEMBER 2023.pdf` | 2309 EM | 2 | 9 | ? of 2 |
@@ -65,7 +66,7 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 
 ### Questions printing NO mark allocation
 
-**48 of 333**, across 11 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
+**53 of 342**, across 12 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
 
 | Question | Sitting | Title |
 |---|---|---|
@@ -84,6 +85,11 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 | QP2304-Q5 | April 2023 Q5 | Maritime Lien, In Rem and In Personam |
 | QP2304-Q8 | April 2023 Q8 | IMO and ILO Human Element Regimes, and Fatigue Guidance |
 | QP2304-Q9 | April 2023 Q9 | Classification Societies in Rule Formation, SOLAS II-1, and Annual versus Periodical Surveys |
+| QP2306-Q1 | June 2023 Q1 | UNCLOS Pollution Definition, Coastal State Obligations, and the Three Compensation Tiers |
+| QP2306-Q2 | June 2023 Q2 | The Origin and Authority of IMO, Ratification, and Two Oversight Instruments |
+| QP2306-Q5 | June 2023 Q5 | Alternatives to Tin-Based Antifouling Paints |
+| QP2306-Q6 | June 2023 Q6 | Key Issues in Ship Repair Contracts |
+| QP2306-Q9 | June 2023 Q9 | Skin Friction Reduction - Air Cavities, Surface Texturing and Microbubbles |
 | QP2307-Q6 | July 2023 Q6 | Formal Safety Assessment - Objectives, Characteristics and Process |
 | QP2307-Q7 | July 2023 Q7 | Hull and Propeller Maintenance for Energy Efficiency |
 | QP2307-Q8 | July 2023 Q8 | Collision off the Indian Coast - Action under the Merchant Shipping Act |
@@ -158,6 +164,12 @@ Examiner wording is reproduced exactly, errors included. Each is recorded in a n
 | QP2304-Q7 | The source copy prints all four limbs with (4) against each, totalling 16 and agreeing with instruction 2. This is one of only three questions on this paper that print any marks - Q3, Q6 and Q7. The stem prints an ampersand in three of the four limb headings where later sittings print 'and', and prints CLC with a curly apostrophe as "CLC’92". Both preserved exactly as printed. |
 | QP2304-Q8 | ANOMALY: the source copy prints NO mark allocation against either limb, and prints the two limb labels inconsistently - a lower-case "a)" followed by an upper-case "B)." with a full stop after the bracket. It also prints no full stop at the end of limb B. All three features are preserved exactly and recur identically in the later sitting of the same question. Recorded at 16 marks under instruction 2 ("all questions carry equal marks") with marks null on both limbs; the unequal division of the answer between the limbs is an authoring judgement recorded in unresolved, not a printed instruction. |
 | QP2304-Q9 | ANOMALY, AND IT RUNS IN AN UNUSUAL DIRECTION. This source copy prints NO mark allocation against either limb, where the same question at every other sitting MIW holds prints a split - (8) and (8) in December 2023, and (10) and (6) in December 2024, September 2025 and June 2026. Neither split is imported: the question is recorded at 16 marks under instruction 2 with marks null on both limbs, and the two limbs are treated as of comparable weight. Two printed features are preserved exactly: 'SOLAS ch.ll-1', written with two lowercase letter L characters rather than the Roman numeral II and read as chapter II-1; and 'above-referred' hyphenated with 'toward' rather than 'towards', which is the orthography that places this paper in the same family branch as the December 2023 sitting. |
+| QP2306-Q1 | Printed with limb letters A. and B. and NO printed marks on either limb or on the question. Sixteen marks are recorded from instruction 2 ('All questions carry equal marks') read with the printed 'Total Marks - 100' and 'Answer SIX questions only'. The limb split is not printed and is not invented; the answer treats the two limbs as of broadly equal weight. |
+| QP2306-Q2 | Printed with a lower-case 'a)' for the first limb and an upper-case 'B.' for the second - a numbering inconsistency inside one question, preserved as printed. No marks are printed. Sixteen marks are recorded from instruction 2. Limb a) carries three separate demands and limb B two short notes, so the answer weights limb a) slightly the heavier. |
+| QP2306-Q4 | Sixteen marks are printed on the question as a whole. The four numbered items (i) to (iv) carry NO printed marks individually, and no split is invented. The stem asks two things - the importance of communication in emergency preparedness, and the measures required for each of the four items - so the answer gives the general argument once and then four measure sets. |
+| QP2306-Q5 | No marks are printed. Sixteen marks are recorded from instruction 2. The four named paint types carry no individual split; the answer treats them as of equal weight and reserves space for the regulatory frame the stem implies by the words 'alternatives to tin-based'. |
+| QP2306-Q6 | Five limbs, A. to E., with NO printed marks on any of them and none on the question. Sixteen marks are recorded from instruction 2. Five limbs into sixteen marks does not divide evenly and the paper does not divide it; the answer gives each limb comparable weight and does not invent a split. |
+| QP2306-Q9 | No marks are printed. Sixteen marks are recorded from instruction 2. The stem asks for skin friction reduction methods generally AND for special mention of three named technologies, so the answer must do both; the three named limbs carry no individual split and none is invented. |
 | QP2307-Q2 | The question prints a single total of (16) and no limb marks; the four heads (i) to (iv) are printed inline within the stem rather than as separately marked limbs. Limb marks are recorded as null rather than inferred as 4+4+4+4. The answer nonetheless plans four roughly equal blocks, because four named heads under one equal-marks total is the only reading the rubric supports. |
 | QP2307-Q7 | The question prints NO mark figure at all - neither a total nor any limb allocation. The three limbs are therefore recorded with null marks and the question at 16 on the printed equal-marks rubric. THE MARCH 2025 SITTING OF THE CHARACTER-IDENTICAL STEM PRINTS (6), (5), (5); THOSE FIGURES ARE DELIBERATELY NOT IMPORTED, because importing them would manufacture a printed fact this examiner did not print. The answer is planned in three roughly equal blocks instead of the donor's 6/5/5 weighting. |
 | QP2308-Q1 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. The April 2024 sitting of this identical stem prints (6), (5), (5) against the three limbs; those marks are DELIBERATELY NOT IMPORTED. Prints "loT" with a lowercase L at every occurrence, "predictive Maintenance" with a mid-sentence capital, and no terminal full stop after "explain the following". All reproduced as printed. |
