@@ -334,6 +334,30 @@ is no detector for them; the sweep used here was a crude regex that does not dis
 
 ---
 
+## 1d. P2 link / anchor closure — candidate and public navigation clean — 2026-08-15
+
+Not a paper review and not new product: the existing surfaces were made navigationally clean
+before the Study Topic Map is started. Baseline `7a765f0`; the resolver that produced the numbers
+is now a repository contract, `tools/security/link_integrity.mjs` + `link_integrity.test.mjs`.
+
+| | |
+|---|---|
+| **Baseline (recomputed, not inherited)** | The brief carried 71 + 25 = 96. Re-scanning the DEPLOYED set (266 pages / 6,774 runtime refs) with same-host absolute URLs folded to root-absolute found **193 broken local refs + 33 dead fragments = 226**. The 130 extra were hiding behind `https://marineintelligenceweekly.com/...` long-form links (the retired `/meoclass1/notes/`, the moved `/timeline-article.html`, 30 more `/contact.html`) and `<link rel=canonical>` / `og:url` tags naming retired paths |
+| **Ledger by class** | QB aggregate 101 (+1 renamed file) · Contact 44 · dead fragment 33 · retired path 17 · public article/archive 11 · Simon abs-path 7 · split page 6 · public sample 6 · false positive 0 · deferred 0 |
+| **QB aggregate → hub group** | `../QB1/3/4/7.html` from Notes Parts 1-15 (hand-authored, pre-spec) and the SQ Part-1 sample now go to `meoclass1/index.html#qbN`. Rationale: the labels are group-level ("QB3 — MARPOL & PSC"), the hub renders a group section per QB with `id=qbN` from `QB_GROUPS`, and its own floating nav deep-links `#qbN`. Mapping ~100 legacy links to specific sectional files would be topical authoring (`match_qb.py`), not link repair, and Parts 19-22 already use that method for their own links. Cheat sheets: `QB1.html`→`QB1_A.html`, `QB3.html#q1-18`→`QB3_A.html` (q1-q18 present, Q1 title matches), `QB2_CargoShipTypes_MIW_v1_1.html`→`QB2_A.html` — per the hub's cheatsheet map |
+| **Contact** | 44 navbar controls (`/contact.html`, `/SQ/contact.html`, long form) → `mailto:contactus@marineintelligenceweekly.com`. No contact page has ever existed; 226 sibling controls already used the mailto. 0 remain |
+| **Split / renumbered** | `examiner-index`: `QB5_C.html#q1-6` → `QB5_C_A.html#q1-6` (QB5_C_B numbers itself Q11-18); `QB5_B.html#q21-36` → `#q1-16` with labels renumbered, each row's text matched to the target question before edit. Uday crossref ×9 + Part 13 ×2: `#topic-p12-N` → `#topic-(49+N)`, matched by TOC title; no alias ids added |
+| **Retired paths** | `/meoclass1/notes/` (9) and `/meoclass1/written/` (6, incl. canonical/og:url) → `/meoclass1/oralnotes/`; SQ sample "Notes Index" → `/SQ/` (sample convention). Simon p5-p8 page-nav `/meoclass1/simon-notes-pN` → `/meoclass1/oralnotes/…` |
+| **Public samples** | `SQ/QB1_A` cross-refs made absolute paid paths (PUBLIC→paid, storefront receives `next=`); `SQ/miw-notes-mgmt-p1` "Part 2 →" REMOVED (Part 2 is not public; page carries 4 explicit CTAs); `SQ/simon-notes-p2` sidebar now matches the paid page (`#n14`→`#n11`, phantom "Fuel Flash Point" row dropped) |
+| **Public article/archive** | `/timeline-article.html` ×5 → `/articles/timeline-article.html`; hero `assets/timeline-cover.png` (never committed) → `/assets/aitimeline-cover.webp` (the home page's cover for the same feature); Intelligence Gap A↔B `_embedded` names → real files; archive thematic-map canonical/og:url → real filename; articles index logo `/new logo MIW.webp` → `assets/logo.webp`; `index25` RSS `<link>` → the same "add when feed.xml is live" note index24 carries. **No page, feed or asset created to satisfy a link** |
+| **RulesApp** | landing `#search/#engineering/#crossref` → `#tab=…` (nav.js reads `tab=`); study app `#/` is a hash route and passes by rule |
+| **Contract** | `deploy_set.mjs` (matcher + KEEP) shared by `deploy_surface.test.mjs` and `link_integrity.test.mjs`. Detects: missing file, missing srcset candidate, same-host miss, escaping relative path, KEEP→EXCLUDED, case mismatch, dead in-page/cross-page fragment, ORAL↔WRITTEN cross-entitlement. Passes: query strings, `dir/`, extensionless, hash routes, `#`. Ignores: mailto/tel/javascript/external, comments, `<pre>/<code>/<script>/<style>/<template>`. Hub `#qbN` credited only via a cited `RUNTIME_ANCHOR_PROVIDERS` entry that parses `QB_GROUPS`. 12 in-memory negative/positive controls |
+| **Final scan** | **266 pages · 6,727 refs · 0 broken · 0 dead fragments · 0 KEEP→EXCLUDED · 0 cross-entitlement · 0 case mismatch** |
+| **Invariants / QA** | 39 / 351; six-year 61 / 549 (39 solved / 22 intelligence-only); 2023 11/11. `node --test tools/security/*.test.mjs` **306/306** (286 + 20; the bare directory form no longer runs under Node 24 — use the glob). `run_toolchain.py --publish` ALL STAGES PASS twice, tree byte-identical; `delivery_gate --verify-derivation --strict` PASS; `qb_health_check` 229 pre-existing review flags before and after (no regression); local HTTP QA at 1280/375 on 12 pages: every local link 200, no console errors, nav visible |
+| **Seen, not fixed (out of scope)** | (a) `SQ/QB1_A.html` public sample still cites **LEG.3(91)** for the 2012 LLMC amendments where the paid `QB1_A` was corrected to LEG.5(99) on 8 Aug — public content drift, P2; (b) pre-existing mobile (375) horizontal overflow from `<table>`/`<em>` content and topbars on `miw-notes-mgmt-p1/p5` and `SQ/QB1_A` — layout, P3; (c) 29 other examiner-index rows with empty question text (QB4_G, QB5_G, QB6_E, QB7_F) — authoring, P3 |
+
+---
+
 ## 2. Corpus state
 
 Recomputed from the generated manifest `solvedQP/solvedqp_content_index.json` after QP2407 and
