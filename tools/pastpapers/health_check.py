@@ -96,9 +96,14 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
     errs_before = len(errs)
     specs = {}
     for p in man['papers']:
-        sp = os.path.join(REPO_ROOT, p['spec'])
+        # Derived, not read from the manifest. The path to a production input
+        # is not candidate data, so it no longer ships in the served file --
+        # and the convention that names it is already fixed and already
+        # asserted further down, so deriving it costs nothing.
+        rel = 'meoclass1/pastpapers/specs/%s.json' % p['paper_id']
+        sp = os.path.join(REPO_ROOT, rel)
         if not os.path.exists(sp):
-            err('spec missing for %s: %s' % (p['paper_id'], p['spec']))
+            err('spec missing for %s: %s' % (p['paper_id'], rel))
             continue
         specs[p['paper_id']] = json.loads(rd(sp))
         page_exists = os.path.exists(os.path.join(REPO_ROOT, p['file']))
@@ -279,7 +284,11 @@ def check(publish_mode=False, inject=None, strip_from_pages=None):
             if rebuilt.replace('\r\n', '\n') != disk.replace('\r\n', '\n'):
                 err('%s: page on disk does not match a fresh render of its spec '
                     '(was it hand-edited?)' % p['paper_id'])
-        m2 = build_index.build_manifest(list(specs.values()))
+        # The file on disk is the CANDIDATE PROJECTION of the review view, so
+        # it is compared against that projection. Comparing it against the rich
+        # object would report a correctly minimised manifest as unreproducible.
+        m2 = build_index.candidate_manifest(
+            build_index.build_manifest(list(specs.values())))
         if json.dumps(m2, sort_keys=True) != json.dumps(man, sort_keys=True):
             err('manifest on disk does not match a fresh build from the specs')
         if not any('does not match' in e for e in errs):
