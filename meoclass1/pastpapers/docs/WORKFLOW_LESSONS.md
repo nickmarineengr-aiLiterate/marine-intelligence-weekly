@@ -2091,3 +2091,64 @@ STATUS:    OPEN
 SEEN:      7
 OWNER:     NONE
 REVISIT:   next toolchain maintenance session.
+
+## L-B4-5 — A guard whose FIRST run indicts the existing corpus must ship as a detector, not a gate
+
+The new `holdings_layer` in `recurrence_check.py` catches an exact contradiction: a paper's
+`recurrence_adjudication` says MIW cannot check a sitting, while that question's own
+`host_recurrence_hint` names a sitting MIW demonstrably holds. It caught the live QP2311-Q5 defect,
+where the denied September 2022 sitting turned out to print the SAME QUESTION WORD FOR WORD.
+
+Its first run also reported **22 hits across six already published papers**. That left three moves,
+and only one of them is legitimate:
+
+- make it blocking and rewrite six papers inside a one-paper review — forbidden by the one-paper rule;
+- weaken the rule until the corpus passes — forbidden outright, and the worse of the two, because it
+  converts a true guard into a false reassurance;
+- **ship it as a REPORT**, adjudicate the paper in hand, and carry the rest as named evidence.
+
+The third is right, and not merely as a compromise. What the layer can prove alone is that a denial
+*collides* with the holdings record. Whether the sentence is actually wrong needs the two printed
+stems read side by side — which is judgement, not string comparison. That is exactly the existing
+Production Intelligence Layer contract used by `temporal_sweep` and `surface_impact`:
+**IT FLAGS; CLAUDE ADJUDICATES.**
+
+**The generalisable test:** when a new guard's first run fails work that is already published, the
+guard has discovered a defect CLASS, not a defect. A class is reported with evidence; only the
+instance in the paper under review is fixed. A guard retro-fitted as a gate either blocks unrelated
+work or gets quietly softened, and the softened version is worse than never having written it.
+
+**Do:** give every new detector a positive control AND a negative control, each scoped to its own
+probe. The negative control matters more here than usual — asserting on the whole run silently
+inherits the corpus's own open hits and can never pass, which is how the first version of this
+layer reported a false self-test failure.
+
+EVIDENCE:  QP2311-Q5 (caught, corrected); 22 open hits across QP2302, QP2304, QP2407, QP2408,
+           QP2410, QP2411.
+CATEGORY:  GUARDS
+STATUS:    PROVEN
+
+## L-B4-6 — Do NOT reconcile authored `recurrence_class` with the derived family class
+
+A session brief asked for a guard making authored `recurrence_class` agree with the derived six-year
+family class where they disagree. **It was deliberately not built, and the disagreement is not a
+defect.**
+
+`recurrence_class` records what was true of the MIW corpus **at the moment the question was
+authored**, in *production* order. The derived family computes *sitting* order across the whole
+corpus. Production order is not sitting order — for three questions in the 2026 set the authored
+field states the exact opposite of the chronological truth, which is precisely why the field is
+never rendered. They are two different measurements that happen to share a vocabulary.
+
+A guard forcing them to agree would delete the authoring record in favour of the derived one and
+lose the information that made the field worth keeping.
+
+**Do:** keep them separate and keep `recurrence_class` unrendered. **Where they disagree, adjudicate
+in prose** — which is what `recurrence_adjudication` is for.
+
+EVIDENCE:  QP2311 Q5 (authored `topic_recurrence`, derived `EXACT_REPEAT` after graduation) and Q8
+           (authored `new`, derived `UNIQUE`, with a real near-verbatim 2022 ancestor recorded in
+           prose because no answer edge exists).
+CATEGORY:  RECURRENCE
+STATUS:    REJECTED — with the condition for reopening: only if `recurrence_class` ever becomes a
+           rendered or exported field, at which point it would need to state sitting truth.

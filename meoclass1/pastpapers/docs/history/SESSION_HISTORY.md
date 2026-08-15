@@ -5405,3 +5405,132 @@ positive control proving the sweep fires.
 **QP2306, QP2308 and QP2311 remain.** Recomputed donor readiness recommends **one** next paper —
 see `CURRENT_STATUS.md` §7p and the session report. The `QP2201-Q4` mid-stem extractor artefact is
 carried as an open, reported item.
+
+---
+
+# §40 — QP2311 NOVEMBER 2023 — LAPTOP REVIEW AND PUBLICATION — 2026-08-15
+
+## Outcome
+
+**November 2023 is LIVE, and the 2023 year is CLOSED at eleven of eleven observed sittings.**
+Four questions were corrected, five passed. The paper's law and engineering were sound throughout —
+every correction was to what the paper said about *itself*: which resolution an instrument is, and
+what MIW can see.
+
+## Branch / commits
+
+Starting `origin/main` **`e23a3f5`**. Desktop branch `pastpapers/qp2311-founder-review` at
+**`9e2019a`**, stable across the whole session and never merged — extracted by path. The branch was
+provably **12 pure additions** against its merge base, so the extraction list was a closed set
+rather than a judgement.
+
+## Key findings
+
+**The paper had NO live answer donor, and the safety net still held.** Q1–Q9 were adjudicated from
+printed source and primary instruments. OPRC's article architecture, UNCLOS 199, MARPOL Annex I
+reg 37 (the 150/400 GT split, the four "at least" items, the SMPEP combination, the 5,000 dwt
+access rule), ISO 8217:2017 as the **sixth** edition with ISO 4259 and ISO/PAS 23263:2019,
+Annex VI reg 14 and reg 18's three-year and twelve-month retentions, the AFS chain (in force
+17 September 2008, organotin 2003/2008, MEPC.331(76) cybutryne applying 1 January 2023 with the
+sixty-month rule), SOLAS I/6, I/10 and I/11 with CSM as a class *distribution* of a statutory
+interval, cm = 2LN, and the EEXI/CII verification point were all checked and all held.
+
+**A.1184(33) IS NOT THE ISM GUIDANCE — AND THE ERROR CAME FROM THE CORPUS.** The paper cited it
+ten times as the Administrations' implementation guidance. A.1184(33) is **Guidelines on places
+of refuge for ships in need of assistance**; the ISM instrument is **A.1188(33)**, adopted
+6 December 2023, revoking **A.1118(30)** of 6 December 2017. All three read from the Organization's
+own published resolutions. `AMENDMENT_REGISTER.md` line 69 carries the wrong number, so the defect
+was **inherited, not authored** — raised as `TS-REFERRAL-QP2311-3`, corpus untouched. The temporal
+conclusion never moved: both resolutions are 6 December 2023, so the instrument stayed one month
+future either way. **A pure citation defect that changed no legal outcome.**
+
+**A blind fix would have broken five correct papers.** A.1184(33) appears in eleven specs.
+Corpus-wide it is used **correctly** for places of refuge in 63 places across QP2304, QP2402,
+QP2503, QP2506 and QP2507, and **incorrectly** as ISM guidance in 35 places across QP2306, QP2309,
+QP2312, QP2406, QP2502 and this paper. Only this paper was corrected; the other five are referred.
+
+**Q6 was UNDERSTATING what could be established**, saying the operative predecessor's "identity
+could not be established from a held source" while the paper's own anchor document named
+A.1118(30). It is now named, at identity level, from the Organization's published resolution.
+
+**THE FALSE-HOLDINGS CLASS RECURRED, AND THIS TIME IT HID AN EXACT REPEAT.** Q5's adjudication said
+the host pointed at "a September 2022 sitting MIW does not hold and cannot read". MIW holds it.
+QP2209-Q5 prints Q5 **word for word — preamble and all three limbs** — and normalises IDENTICAL
+under the governed marks-safe rule. The host pointer was not unverifiable; it was exactly right.
+
+**Q8 was worse, because nothing pointed at it.** The host printed no hint, and the paper stated that
+no transcribed MIW paper sets slow steaming. QP2204-Q3 (April 2022) prints *"engine developments &
+retrofitting ... to enable hassle free slow steaming & ultra-slow steaming of ships"* — the same
+examiner task nineteen months earlier, sharing the printed phrase. **Only the six-year layer could
+see it.** Both are wording ancestry: QP2204 and QP2209 are intelligence-only and carry no answer, so
+`reused_from` stays null on both.
+
+**A UNIQUE classification that self-resolved on graduation.** Before integration the derived layer
+called Q5 UNIQUE. The cause was not the classifier: `normalise_stem` strips a printed `(6)` only
+when the value matches a **declared** mark, and an intelligence-only node declares none — so the
+marked 2023 print and the unmarked 2022 print compared unequal. Graduation supplied the metadata and
+QP2209-Q5 + QP2311-Q5 formed as **EXACT_REPEAT**. **Normalisation must never be loosened for this
+symptom**; the input was asymmetric, not the rule.
+
+**Source fidelity was exemplary and needed no correction.** Every `text_verbatim` traced to the text
+layer. Q2b's printed *"means piston speed"*, Q3d's *"three Survey"*, Q6's comma-for-colon, Q8's
+question mark after an imperative and Q9's *"averages"* are all preserved and named. The QP2303-Q5
+silent-repair class does **not** recur here. *vis-à-vis* is stored as U+00E0 and renders correctly —
+the anchor's note that the text layer "mangles" it describes a console, not the data.
+
+**One candidate-facing leak, and it was a repeat offender.** Q9's study guide called the MS Act 1958
+*"the standing statute trap for the whole 2023 batch"* — the identical sentence corrected on
+QP2310-Q7. Rewritten. The rendered paid bytes are otherwise clean: "branch" is `kmap-branch` and
+"Hide branches", "batch" is *batch items into one attendance*, "production" is *delivery without
+production of an original*, and "desktop" appears only in CSS breakpoint comments.
+
+## A guard was added — as a DETECTOR, not a gate
+
+`recurrence_check.py` gains a fourth layer, `holdings_layer`. It fires only on an exact,
+machine-provable contradiction: a `recurrence_adjudication` containing a closed-list denial while
+that question's own `host_recurrence_hint` carries a token resolving to a paper MIW holds.
+Unresolvable SR tokens, out-of-window years and self-referential pointers are ignored. Both a
+positive and a **negative** control ship, each scoped to its own probe.
+
+Its first run reported **22 hits across six already published papers**. It is therefore **REPORT,
+not FAIL** — making it blocking would have forced either a six-paper rewrite inside a one-paper
+review or a loosened rule, both forbidden. It follows the PIL contract: *it flags; Claude
+adjudicates*. Proved against the uncorrected desktop spec: **1 hit, exactly QP2311-Q5**; against the
+corrected spec, **0**.
+
+**The authored/derived recurrence reconciliation asked for was deliberately NOT built.**
+`recurrence_class` records what was true of the corpus **at authoring time, in production order**;
+the derived family computes **sitting order**. They are different measurements by design, and a
+guard forcing them to agree would destroy information. Recorded as a rejection, not an omission.
+
+## Corpus delta
+
+Solved **38 → 39** papers, **342 → 351** questions. Intelligence-only **23 → 22** papers.
+Combined six-year universe **61 papers / 549 questions, UNCHANGED**. Nothing hand-deleted —
+graduation is the builder rule.
+
+**2023 CLOSED: 11 of 11 observed sittings, 99 questions.** May is NO SITTING on serial evidence —
+the printed serials run `2304 EM` to `2306 EM` with nothing at `2305`. No May sitting was invented
+to round the calendar. 2023, 2024 and 2025 are now all complete years; 2026 stands at 6 of 11.
+
+Storefront corrected: 38 to 39 papers, 342 to 351 answers, the meta description, and the 2023
+coverage line from a ten-month list to **complete year, all 11 sittings** — the month-list guard's
+**third** real catch.
+
+## QA
+
+`run_toolchain.py --publish` ALL STAGES PASS (484 artefacts from 39 specs) · delivery gate
+`--verify-derivation --strict` PASS · storefront guard PASS · known traps 322 checks / 0 failures ·
+recurrence self-test every guard fired when broken · determinism **195/195 artefacts byte-identical
+across two full publish builds**, product and six-year · UI 39 pages PASS including a newly authored
+QP2311 fixture whose **eighteen probes were each proved unique against the real card payloads under
+the live token-AND semantics**, with three measured collisions rejected · visual at desktop and
+375 px, zero overflow, no console output, five modes and no sixth, and the "antifouling" probe
+resolving to exactly one card in the real DOM.
+
+## Next action
+
+**2023 production is CLOSED.** No paper remains in the 2023 queue. Recommended next project is the
+A.1184(33) corpus-wide citation correction — see the session report. Carried open: the QP2201-Q4
+mid-stem extractor artefact, the QP2303-Q5 source-fidelity referral, the 22 holdings-denial flags,
+and the internal-vocabulary remediation plan.

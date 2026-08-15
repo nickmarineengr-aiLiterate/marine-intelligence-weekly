@@ -178,6 +178,96 @@ def normalise_layer(mutate=None):
     return fails
 
 
+# ---------------------------------------------------------------------------
+# Layer 4: HOLDINGS. A denial that the governed record can disprove.
+#
+# Three consecutive reviews (QP2308, QP2306, QP2311) shipped an adjudication
+# saying MIW could not check a sitting the host pointed at, when MIW held that
+# sitting all along in the six-year historical intelligence layer. On QP2311 the
+# denied sitting turned out to carry the SAME QUESTION WORD FOR WORD.
+#
+# This layer fires only on an EXACT, MACHINE-PROVABLE contradiction and is kept
+# deliberately narrow, because a guard that guesses is worse than no guard:
+#
+#   * only `recurrence_adjudication` is read. That field exists to adjudicate the
+#     host's printed pointer, so a denial in it is unambiguously about a SITTING.
+#     Denials elsewhere are usually about an INSTRUMENT the True Source corpus
+#     does not hold ("the corpus does not hold the unified requirements"), which
+#     is a different and usually true claim;
+#   * only tokens carrying a resolvable month are considered. Bare `SR` tokens
+#     (2011/SR02) and out-of-window years resolve to nothing and are ignored --
+#     a denial about those is correct and must stay silent;
+#   * a token resolving to the question's OWN paper is ignored. Every source copy
+#     prints a self-referential pointer.
+#
+# Where a question points at several sittings and only some are held, the guard
+# still fires. That is intended: a blanket denial is unsafe once any pointed-at
+# sitting is held, and the fix is to make the sentence specific.
+#
+# THIS LAYER DETECTS; IT DOES NOT GATE -- and that is a deliberate choice, not a
+# softened guard. Run for the first time it reported 22 hits across six already
+# published papers. Making it blocking would have forced one of two bad moves:
+# rewriting six papers inside a one-paper review, or loosening the rule until the
+# corpus passed. Both are forbidden. What the layer can prove on its own is that
+# a denial COLLIDES with the holdings record; whether the sentence is wrong needs
+# the two printed stems read side by side, which is Claude's job and not a
+# checker's. So it follows the Production Intelligence Layer contract already
+# used by temporal_sweep and surface_impact: IT FLAGS; CLAUDE ADJUDICATES.
+MONTHS = {'JAN': 1, 'FEB': 2, 'MAR': 3, 'APR': 4, 'MAY': 5, 'JUN': 6, 'JUNE': 6,
+          'JUL': 7, 'JULY': 7, 'AUG': 8, 'SEP': 9, 'SEPT': 9, 'OCT': 10,
+          'NOV': 11, 'DEC': 12}
+
+# Closed list. Each says "MIW cannot check this", which the holdings record can
+# contradict outright. Phrases asserting novelty ("no donor", "first set here")
+# are deliberately NOT here -- they are claims about the SOLVED set and can be
+# true while the sitting is held.
+DENIALS = ('does not hold', 'do not hold', 'not held', 'cannot read',
+           'cannot be read', 'never transcribed', 'no paper for that sitting',
+           'holds no paper', 'cannot be checked', 'does not have')
+
+TOKEN_MONTH = re.compile(r'\b((?:19|20)\d{2})/([A-Z]{3,5})(?:\(M\))?(?:/\S+)?')
+
+
+def held_papers(specs, intel_path=None):
+    """Every paper id MIW can read a printed stem for: solved specs plus the
+    six-year historical intelligence store."""
+    ids = {d['paper_id'] for d in specs}
+    p = intel_path or os.path.join(PP, 'intelligence', 'historical_qp_intelligence.json')
+    if os.path.exists(p):
+        ids |= {q['paper_id'] for q in json.load(io.open(p, encoding='utf-8'))['papers']}
+    return ids
+
+
+def resolve_token(tok):
+    """'2022/SEP/Q5' -> 'QP2209'. Returns None when the token carries no month
+    this project can resolve, which is the common case for bare SR tokens."""
+    m = TOKEN_MONTH.match(tok)
+    if not m:
+        return None
+    mon = MONTHS.get(m.group(2).upper())
+    return None if mon is None else 'QP%s%02d' % (m.group(1)[2:], mon)
+
+
+def holdings_layer(specs, intel_path=None):
+    fails = []
+    held = held_papers(specs, intel_path)
+    for d in specs:
+        for q in d.get('questions', []):
+            adj = q.get('recurrence_adjudication') or ''
+            hit = [w for w in DENIALS if w in adj.lower()]
+            if not hit:
+                continue
+            for tok in q.get('host_recurrence_hint') or []:
+                pid = resolve_token(tok)
+                if pid and pid != d['paper_id'] and pid in held:
+                    fails.append(
+                        'FALSE HOLDINGS DENIAL: %s-%s says %r in recurrence_adjudication, '
+                        'but its host pointer %r resolves to %s, which MIW HOLDS and can '
+                        'read. Adjudicate the pointer against the stem instead of denying '
+                        'it.' % (d['paper_id'], q['q_no'], hit[0], tok, pid))
+    return fails
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--self-test', action='store_true')
@@ -187,6 +277,7 @@ def main():
              for p in sorted(glob.glob(os.path.join(PP, 'specs', '*.json')))]
 
     fails = schema_layer(specs) + leak_layer() + normalise_layer()
+    holdings = holdings_layer(specs)
 
     nodes = RM.load_nodes(specs)
     rel = RM.build_families(nodes)
@@ -198,6 +289,7 @@ def main():
     print('  swept %d generated artefact(s) for host sitting tokens'
           % len(candidate_facing()))
     print('  %d deterministic normalisation case(s)' % len(NORM_CASES))
+    print('  %d paper(s) readable for a holdings denial check' % len(held_papers(specs)))
 
     if args.self_test:
         bad = []
@@ -215,12 +307,37 @@ def main():
         if not normalise_layer(mutate='strip_all'):
             bad.append('normalisation guard did NOT fire against an over-broad normaliser '
                        'that strips every numeric parenthetical')
+
+        # Holdings layer. Two controls, because this guard has to stay SILENT on
+        # a correct denial as reliably as it fires on a false one -- a guard that
+        # fires on everything would push authors to delete true sentences.
+        # Both controls are scoped to the probe itself. Asserting on the whole
+        # run would silently inherit the corpus's own 22 open hits and the
+        # negative control could never pass.
+        probe = {'paper_id': 'QP9901', 'questions': [{
+            'q_no': 'Q1', 'host_recurrence_hint': ['2022/SEP/Q5'],
+            'recurrence_adjudication': 'A September 2022 sitting MIW does not hold.'}]}
+        if not [f for f in holdings_layer([probe]) if 'QP9901' in f]:
+            bad.append('holdings guard did NOT fire on a denial of a sitting MIW holds')
+        # Unresolvable SR token, an out-of-window sitting, and a self-referential
+        # pointer -- all three must be ignored.
+        quiet = {'paper_id': 'QP2311', 'questions': [{
+            'q_no': 'Q1', 'host_recurrence_hint': ['2011/SR02', '1998/APR', '2023/NOV/Q1'],
+            'recurrence_adjudication': 'Tokens pointing at sittings MIW does not hold.'}]}
+        if holdings_layer([quiet]):
+            bad.append('holdings guard FIRED on a correct denial -- it must stay silent '
+                       'on unresolvable tokens and on out-of-window sittings')
         for b in bad:
             print('  [SELFTEST FAIL] %s' % b)
         print('  self-test: %s' % ('FAILED' if bad else 'every guard fired when broken'))
         fails += bad
 
     print()
+    for h in holdings:
+        print('  [HOLD ] %s' % h)
+    if holdings:
+        print('  holdings denials colliding with the record: %d -- REPORT, not a gate. '
+              'Read the two printed stems and adjudicate each.' % len(holdings))
     for f in fails:
         print('  [FAIL ] %s' % f)
     print('recurrence boundary: %d failure(s)' % len(fails))

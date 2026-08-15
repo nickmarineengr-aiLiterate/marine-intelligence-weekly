@@ -1,9 +1,10 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-15, after **QP2306 (June 2023) was laptop-reviewed and published to `main`** (see §7r).
-Previous entries: **QP2308** (August 2023) at `1d55812` (§7q) and **QP2307** (July 2023) at
-`569d2d2` (§7p), both 2026-08-15.
+Last updated: 2026-08-15, after **QP2311 (November 2023) was laptop-reviewed and published to `main`,
+CLOSING THE 2023 YEAR** (see `history/SESSION_HISTORY.md` §40).
+Previous entries: **QP2306** (June 2023) (§7r), **QP2308** (August 2023) at `1d55812` (§7q) and
+**QP2307** (July 2023) at `569d2d2` (§7p), all 2026-08-15.
 Previous entries: QP2302 (February 2023) at `734c03f` and the Annex VI dating correction at
 `85fb58e`, both 2026-08-15; **QP2310** (October 2023) at §7o and **QP2303** (March 2023) at §7n,
 both 2026-08-14.
@@ -23,12 +24,57 @@ See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for
 > silently reverted `DESKTOP_QP_ALLOCATION_2023.md`, `DESKTOP_QP_HANDOVER_BATCH3.md` and 15 lines of
 > this file. Both desktop branches are **retained** as provenance evidence.
 >
-> **Product: 38 available papers · 342 published questions · 342 in the corpus.**
+> **Product: 39 available papers · 351 published questions · 351 in the corpus.**
 >
-> **QP2306 (June 2023) IS LIVE — laptop-reviewed and published 2026-08-15 (§7r).** Ten 2023
-> sittings are now solved: January, February, March, April, **June**, July, August, September,
-> October and December. **ONE REMAINS: NOVEMBER.** May is `NO SITTING` on serial-gap evidence
-> (`2304 → 2306`, nothing at `2305`), so November closes the year and the six-year corpus.
+> # THE 2023 YEAR IS CLOSED. QP2311 (NOVEMBER 2023) IS LIVE.
+>
+> **QP2311 was laptop-reviewed and published 2026-08-15 (§40).** All **eleven** observed 2023
+> sittings are solved — January, February, March, April, June, July, August, September, October,
+> **November** and December — **99 questions**. May is `NO SITTING` on serial-gap evidence
+> (printed serials run `2304 EM` → `2306 EM`, nothing at `2305`); no May sitting was invented to
+> round the calendar. **2023, 2024 and 2025 are now all complete years at 11 of 11. 2026 stands at
+> 6 of 11.** There is no paper left in the 2023 queue.
+>
+> **THE PAPER HAD NO LIVE ANSWER DONOR — 0 of 9 — AND ITS LAW AND ENGINEERING STILL HELD.** Five
+> questions passed and four were corrected, and **not one correction was to the substance of an
+> answer**. Every one was to what the paper said about *itself*.
+>
+> **`A.1184(33)` IS NOT THE ISM GUIDANCE, AND THE ERROR CAME FROM THE CORPUS.** The paper cited it
+> ten times as the Administrations' implementation guidance. It is **Guidelines on places of refuge
+> for ships in need of assistance**. The ISM instrument is **`A.1188(33)`** (6 December 2023),
+> revoking **`A.1118(30)`** (6 December 2017) — all three read from the Organization's own published
+> resolutions. `AMENDMENT_REGISTER.md` line 69 carries the wrong number, so the defect was
+> **inherited**: raised as `TS-REFERRAL-QP2311-3`, corpus untouched. Because both resolutions are
+> 6 December 2023, the instrument stayed one month future either way and **no legal outcome moved**.
+> **A blind find-and-replace would have broken five correct papers** — corpus-wide the number is
+> used *correctly* for places of refuge in 63 places (QP2304, QP2402, QP2503, QP2506, QP2507) and
+> *incorrectly* as ISM guidance in 35 places (QP2306, QP2309, QP2312, QP2406, QP2502 and this
+> paper). **Only this paper was corrected. The other five are OPEN — see `NEXT PROJECT` below.**
+>
+> **THE FALSE-HOLDINGS CLASS RECURRED FOR THE THIRD TIME, AND THIS TIME IT HID AN EXACT REPEAT.**
+> Q5 said the host pointed at "a September 2022 sitting MIW does not hold and cannot read".
+> **MIW holds it**: `QP2209-Q5` prints Q5 word for word, preamble and all three limbs, and
+> normalises IDENTICAL. Q8 was worse — the host printed *no* hint at all, the paper said no
+> transcribed MIW paper sets slow steaming, and `QP2204-Q3` (April 2022) sets the same task
+> nineteen months earlier in near-identical printed words. **Only the six-year layer could see it.**
+> Both are wording ancestry only; `reused_from` stays null on both because an intelligence-only
+> paper carries no answer.
+>
+> **A `UNIQUE` misclassification that SELF-RESOLVED on graduation.** `normalise_stem` strips a
+> printed `(6)` only when it matches a **declared** mark, and an intelligence-only node declares
+> none — so the marked 2023 print and the unmarked 2022 print compared unequal. Graduation supplied
+> the metadata and the `QP2209-Q5 + QP2311-Q5` family formed as `EXACT_REPEAT`. **Never loosen
+> normalisation for this symptom**: the input was asymmetric, not the rule.
+>
+> **A new guard ships as a DETECTOR, not a gate.** `recurrence_check.py` gains `holdings_layer`,
+> which fires only where a denial in `recurrence_adjudication` collides with a host token resolving
+> to a paper MIW holds. It reported **22 hits across six already published papers** on its first
+> run, so it REPORTS rather than fails — blocking would have forced a six-paper rewrite inside a
+> one-paper review, or a weakened rule. It follows the PIL contract: *it flags; Claude adjudicates*.
+> Proved at 1 hit against the uncorrected spec and 0 against the corrected one.
+>
+> **The storefront month-list guard caught its THIRD real defect**, and the 2023 line now reads
+> *complete year, all 11 sittings*.
 >
 > **THE CORRECTION WAS THE PAPER'S ACCOUNT OF WHAT MIW HOLDS, NOT ITS LAW.** Five host recurrence
 > chips were recorded as "cannot be checked, MIW holds no paper for that sitting". MIW holds every

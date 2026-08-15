@@ -6,7 +6,7 @@
 
 | Year | Papers held | Months absent from the available source set |
 |---|---|---|
-| 2023 | 10 | May, November |
+| 2023 | 11 | May |
 | 2024 | 11 | May |
 | 2025 | 11 | May |
 | 2026 | 6 | May, August, September, October, November, December |
@@ -24,6 +24,7 @@
 | QP2308 | August 2023 | `AUGUST 2023.pdf` | 2308 EM | 2 | 9 | ? of 2 |
 | QP2309 | September 2023 | `SEPTEMBER 2023.pdf` | 2309 EM | 2 | 9 | ? of 2 |
 | QP2310 | October 2023 | `OCTOBER 2023.pdf` | 2310 EM | 2 | 9 | ? of 2 |
+| QP2311 | November 2023 | `NOVEMBER 2023.pdf` | 2311 EM | 2 | 9 | ? of 2 |
 | QP2312 | December 2023 | `DECEMBER 2023.pdf` | 2312 EM | 2 | 9 | ? of 2 |
 | QP2401 | January 2024 | `JANUARY 2024.pdf` | EM - 24117-1 | 2 | 9 | 2 of 2 |
 | QP2402 | February 2024 | `FEBRUARY 2024.pdf` | EM - 19224-1 | 2 | 9 | 2 of 2 |
@@ -66,7 +67,7 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 
 ### Questions printing NO mark allocation
 
-**53 of 342**, across 12 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
+**53 of 351**, across 12 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
 
 | Question | Sitting | Title |
 |---|---|---|
@@ -192,6 +193,15 @@ Examiner wording is reproduced exactly, errors included. Each is recorded in a n
 | QP2310-Q7 | Printed marks are complete and consistent: a) (8) and b) (8), summing to sixteen. No anomaly. |
 | QP2310-Q8 | The question prints a single mark figure, (16), before the four defined items. Items (a) to (d) carry no individual marks, so sub-part marks are null. |
 | QP2310-Q9 | ANOMALY: the question prints NO mark allocation at all, neither a total nor any limb figure, and it is the only question on this paper that prints none. Recorded at 16 marks under printed instruction 2 ('All questions carry equal marks'); the absence is the printed copy's and not a transcription loss. A further printed anomaly is preserved in limb b): the opening quotation mark before 'latent failures' has no closing mark, where 'active failures' is correctly closed. |
+| QP2311-Q1 | Both limbs print their own mark figure. Limb a) sets four tasks behind one verb - significance, objectives, methodologies and the impact of advanced technology - and limb b) sets two, challenges and solutions. Eight marks against four tasks is the tightest ratio on the paper. |
+| QP2311-Q2 | All three limbs print their own mark figure. Limb b) prints "means piston speed" - a printed slip for "mean", with the correct form appearing two lines above in limb a). Limb c) prints "After Joining" with a capitalised J mid-sentence, and "vis-a-vis" with a grave-accented a that the raw text layer mangles. All three are preserved as printed. |
+| QP2311-Q3 | Four limbs of four marks each, all printed. The question number is printed as "Q3)" with a round bracket, unlike the full stop used on seven of the nine questions. Limb c) prints "on-hire Survey" with a capitalised S mid-sentence, and limb d) prints "which of the above three Survey is the most demanding" - a SINGULAR noun after a plural numeral. Both are preserved exactly as printed and neither is corrected; the answer reads limb d) as the examiner plainly meant and says so once in the study guide. |
+| QP2311-Q4 | All three limbs print their own mark figure. Limb a) prints "responding to and preventing oil pollution incidents" - OPRC is a preparedness, response and co-operation instrument and is expressly NOT a prevention convention, prevention being MARPOL's work. The stem is preserved exactly as printed; the answer gives the limb what it asks and states the boundary once, explaining the sense in which preparedness does reduce the consequences of an incident. |
+| QP2311-Q5 | All three limbs print their own mark figure and the limb letters are printed in parentheses, unlike the bare letters used elsewhere on this paper. The printed preamble - "Referring to various alternatives to tin-based Antifouling paints" - governs limbs (a) and (b) fully, but limb (c) is about occupational exposure to the whole coating system and is only contextually governed by it. The answer treats it that way and says so in the exam plan. "Antifouling" is printed with a capital A mid-sentence and is preserved. |
+| QP2311-Q6 | Four limbs of four marks each, all printed. The stem prints a COMMA where a colon is required to introduce the four lettered terms - "...and ISM code with the following terms," - so the sentence reads as though the terms were a continuation rather than a list. It also prints "ISM code" with a lower-case c, terminates limbs a) to c) with SEMICOLONS and limb d) with a full stop, and capitalises "Inspections" mid-phrase. All are preserved exactly as printed. The answer supplies the structure the punctuation does not. |
+| QP2311-Q7 | Printed as a single unlimbed block of 16 marks, but it sets THREE distinct tasks in two sentences: name the standards and give their salient features; state the content of a fuel oil analysis report; and give the corrective action for each adverse observation. The last of the three is the largest and the paper gives it no separate mark, so the candidate must allocate the page himself. |
+| QP2311-Q8 | Printed as a single unlimbed block of 16 marks. The stem opens with the imperative "Discuss" and CLOSES WITH A QUESTION MARK - preserved exactly as printed. "ultraslow" is printed as one word and "hassle free" without a hyphen; both are preserved. The word "including" makes the retrofit material the larger of the two tasks, and the paper apportions no marks between them. |
+| QP2311-Q9 | All three limbs print their own mark figure. The question number is printed "Q9)" with a round bracket, as Q3 is and the other seven questions are not. Limb b) prints the SINGULAR "the term" governing two quoted words, and uses curly quotation marks. Limb c) prints "to get averages under P&I club" - 'averages' used loosely and with no article before 'P&I club'. All are preserved exactly as printed; the terminological point in limb c) is adjudicated once in the study guide and the limb is then answered as the examiner plainly meant it. |
 | QP2312-Q2 | Limb (b) prints "What are the right to appeal available to you" - singular 'right' against a plural verb. Reproduced exactly as printed and not corrected. |
 | QP2312-Q3 | Limb (a) prints "York Antwerp Rules 1994" without a comma before the year and asks three separate things in one limb. Reproduced exactly as printed. The 1994 edition is named by the examiner and governs the answer; the 2016 edition is treated as a comparison, not as a substitution. |
 | QP2312-Q4 | Limb (a) prints "decarbonization" with a z and limb (b) prints "present-day" hyphenated. Both reproduced exactly as printed. Limb (a) ends page 1 of the source copy and limb (b) opens page 2. |

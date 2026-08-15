@@ -1610,6 +1610,67 @@ const FIXTURES = {
     // supplies is what separates them.
     narrow: ['lof 2000', 'QP2408-Q7'],
   },
+
+  QP2311: {
+    // AUTHORED at laptop review, then every probe below PROVED unique against
+    // the nine real data-search payloads under the search's own semantics --
+    // lower-cased, split on whitespace, token-AND by substring. Nothing here was
+    // harvested from the built page and nothing was assumed.
+    //
+    // This paper's measured collisions, all rejected as probes:
+    //   'continuous survey' reaches Q1 AND Q6 -- Q6's systematic-maintenance
+    //     limb discusses the survey link, so the qualifier 'of machinery' is
+    //     what makes Q1 addressable;
+    //   'corrective action' reaches Q6 AND Q7 -- it is Q6's printed limb (a) and
+    //     also the whole second half of Q7's fuel-report task;
+    //   'slow steaming' reaches Q2 AND Q8 -- Q2's optimum-consumption limb is
+    //     the same subject seen from the fuel side.
+    // None of the three can say which card broke, so none is used.
+    probes: [
+      ['continuous survey of machinery', 'QP2311-Q1'],
+      ['mean piston speed', 'QP2311-Q2'],
+      ['bill of lading', 'QP2311-Q3'],
+      ['oprc', 'QP2311-Q4'],
+      ['antifouling', 'QP2311-Q5'],
+      ['periodicity', 'QP2311-Q6'],
+      ['iso 8217', 'QP2311-Q7'],
+      ['turbocharger cut-out', 'QP2311-Q8'],
+      ['p&i', 'QP2311-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases, and
+      // each was checked against the visible text with tag boundaries treated as
+      // HARD BREAKS, because collapsing whitespace joins adjacent elements and
+      // manufactures a false match.
+      ['drone survey', 'QP2311-Q1',
+       'Q1 (the remote-inspection technique the technology limb describes without naming)'],
+      ['performance monitoring', 'QP2311-Q2',
+       'Q2 (what limb c) actually asks for, in the words a superintendent would use)'],
+      ['demise charter', 'QP2311-Q3',
+       'Q3 (the other name for the bare-boat charter the stem prints)'],
+      ['5000 tons deadweight', 'QP2311-Q4',
+       'Q4 (regulation 37.4 threshold -- the page prints it as 5,000, so the unpunctuated form is search-only)'],
+      ['irgarol', 'QP2311-Q5',
+       'Q5 (the trade name for cybutryne, which the answer only ever calls by its chemical name)'],
+      ['fishbone', 'QP2311-Q6',
+       'Q6 (the root-cause tool the answer calls cause-and-effect analysis)'],
+      ['biofuel blend', 'QP2311-Q7',
+       'Q7 (how a candidate types the FAME-bearing grades the 2017 edition introduced)'],
+      ['shapoli', 'QP2311-Q8',
+       'Q8 (the industry contraction of shaft power limitation)'],
+      ['running down clause', 'QP2311-Q9',
+       'Q9 (the collision-liability head, which sits in hull cover and not with the club)'],
+    ],
+    // The host printed this token against Q5 on the source copy. It points at a
+    // September 2022 sitting MIW GENUINELY HOLDS, and QP2209-Q5 turned out to
+    // print this question word for word -- which is why the paper's adjudication
+    // of it was corrected at review. The pointer is nonetheless a third party's
+    // annotation and not MIW's recurrence model, so it must never be searchable.
+    recurrence: ['2022/sep/q5'],
+    // 'survey' alone reaches five cards on this paper. The Chief Engineer's own
+    // approval is what separates the continuous-survey question from the rest.
+    narrow: ["chief engineer's survey", 'QP2311-Q1'],
+  },
 };
 
 const PAPER_ID = (cards[0] && /^(QP\d{4})-/.exec(cards[0].qid) || [])[1] || '';
