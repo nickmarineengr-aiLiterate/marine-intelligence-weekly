@@ -85,6 +85,73 @@ def load_specs():
     return specs
 
 
+# ------------------------------------------------- candidate output contract
+#
+# build_manifest() produces the REVIEW view: every field the authoring surface
+# needs, production state included. That object is right for the pages this
+# builder renders -- the Production state table is built from it -- and wrong
+# for the file it WRITES, because the file is served.
+#
+# recurrence_check.candidate_facing() already classes
+# pastpapers_content_index.json as an artefact a candidate can fetch, and
+# build_solvedqp_manifest.py names these same fields -- verification_status,
+# reuse_tier, answer_status, the dedup plan and red-team review paths -- as
+# ones "a candidate must never see". The publish boundary the PAGES respect
+# (--publish drops the Production state table and the review banner) never
+# reached the manifest: it was written unconditionally, identically in both
+# modes. So the one artefact classed candidate-facing was the one artefact the
+# boundary skipped.
+#
+# The projection below closes that, and it closes it UNCONDITIONALLY. The file
+# sits on the same served route in both build modes, so mode-dependent bytes
+# would only decide which build happened to leak. Nothing reads the dropped
+# fields back out of the manifest -- they are read from the specs, which stay
+# authoritative and stay rich.
+#
+# This is an ALLOWLIST, not a denylist. A field added to build_manifest() in
+# future does NOT reach the served file until it is named here, so the next
+# piece of internal metadata fails closed instead of silently shipping.
+CANDIDATE_TOP_FIELDS = (
+    'manifest_version', 'generated_from', 'generated', 'scope',
+    'naming_convention', 'source_of_truth_policy', 'recurrence_statuses',
+    'recurrence_rule', 'topic_tree', 'series_years', 'months',
+    'paper_status_model', 'total_papers', 'total_questions',
+    'papers', 'questions',
+)
+CANDIDATE_PAPER_FIELDS = (
+    'paper_id', 'sr_no', 'year', 'month', 'month_num', 'month_year',
+    'subject', 'class', 'function', 'total_marks', 'marks_note',
+    'file', 'paper_status', 'question_count', 'answers_built',
+    'subject_tags', 'gated',
+)
+CANDIDATE_QUESTION_FIELDS = (
+    'paper_id', 'question_id', 'paper_status', 'year', 'month', 'month_year',
+    'question_number', 'marks', 'question_text', 'short_title',
+    'primary_category', 'subject_tags', 'topic_tags', 'intent_tags',
+    'search_aliases', 'regulations',
+    'recurrence_status', 'recurrence_label', 'family_id', 'family_size',
+    'family_members', 'first_occurrence', 'family_summary',
+    'url', 'anchor', 'deep_link',
+    'study_guide_available', 'cheat_sheet_available',
+    'search_blob',
+)
+
+
+def candidate_manifest(man):
+    """The served projection of the review manifest. Allowlist, fails closed.
+
+    Everything the index page's search, the topic pages and the navigator need
+    is retained; production state, verification prose, provenance summaries and
+    internal document paths are not carried across.
+    """
+    out = {k: man[k] for k in CANDIDATE_TOP_FIELDS if k in man}
+    out['papers'] = [{k: p[k] for k in CANDIDATE_PAPER_FIELDS if k in p}
+                     for p in man['papers']]
+    out['questions'] = [{k: q[k] for k in CANDIDATE_QUESTION_FIELDS if k in q}
+                        for q in man['questions']]
+    return out
+
+
 # ------------------------------------------------------------------ manifest
 
 def build_manifest(specs):
@@ -491,10 +558,128 @@ def write(path, text):
     return 'IDENTICAL' if prev == text else ('CHANGED' if prev is not None else 'NEW')
 
 
+# ------------------------------------------------------------------ self-test
+
+# Field families that must never reach the served manifest. Named as CLASSES,
+# not as today's phrases: a test that only greps for the prose currently in the
+# specs passes the moment someone writes new prose.
+INTERNAL_SENTINELS = (
+    'verification_status', 'verification_file', 'provenance_summary',
+    'reverify_before_publication', 'reuse_tier', 'answer_status',
+    'unresolved_count', 'last_verified',
+    'build_state', 'review_state', 'transcription_verified',
+    'official_source_verified', 'source_copy_provenance', 'source_copy_type',
+    'source_authority', 'dedup_plan', 'red_team_review',
+    'version', 'created', 'updated',
+    'total_reverify_before_publication',
+    'temporal_review', 'recurrence_adjudication',
+    'host_recurrence_hint', 'recurrence_class', 'source_copy_path',
+)
+# Candidate function that must survive the projection.
+REQUIRED_CANDIDATE = (
+    'question_id', 'question_text', 'short_title', 'subject_tags',
+    'topic_tags', 'search_aliases', 'regulations', 'search_blob',
+    'deep_link', 'anchor', 'url', 'paper_status', 'month_year', 'marks',
+)
+
+
+def self_test():
+    checks = []
+
+    def expect(name, ok_, detail=''):
+        checks.append((name, ok_, detail))
+
+    specs = load_specs()
+    man = build_manifest(specs)
+    cand = candidate_manifest(man)
+    blob = json.dumps(cand, ensure_ascii=False)
+
+    # A. required candidate fields survive, on every question
+    missing = sorted({f for q in cand['questions'] for f in REQUIRED_CANDIDATE
+                      if f not in q})
+    expect('required candidate fields retained', not missing,
+           'missing: %s' % ', '.join(missing))
+
+    # B. search and navigation payloads are intact and non-empty
+    expect('every question keeps a non-empty search blob',
+           all(q['search_blob'] for q in cand['questions']))
+    expect('question and paper counts unchanged by the projection',
+           len(cand['questions']) == len(man['questions'])
+           and len(cand['papers']) == len(man['papers']))
+    expect('solved questions keep a resolvable deep link',
+           all(q['deep_link'] for q in cand['questions']
+               if q['paper_status'] == 'available'))
+    expect('topic pages keep their grouping key',
+           all('primary_category' in q for q in cand['questions']))
+
+    # C. known internal field families are absent -- as KEYS anywhere in the
+    #    object, not merely at the top level
+    def keys_everywhere(o):
+        if isinstance(o, dict):
+            for k, v in o.items():
+                yield k
+                for x in keys_everywhere(v):
+                    yield x
+        elif isinstance(o, list):
+            for v in o:
+                for x in keys_everywhere(v):
+                    yield x
+    present = sorted(set(keys_everywhere(cand)) & set(INTERNAL_SENTINELS))
+    expect('no internal field family present as a key', not present,
+           'present: %s' % ', '.join(present))
+
+    # The paths to the internal verification record must be gone as VALUES too:
+    # dropping the key while leaving the string somewhere else would read as
+    # fixed and ship the same information.
+    leaked = [s for s in ('DEDUP_AND_SOURCE_PLAN', 'PILOT_RED_TEAM_REVIEW',
+                          'P1_PRIMARY_VERIFIED', 'pastpapers/verification/')
+              if s in blob]
+    expect('no internal verification path or marker in any value', not leaked,
+           'found: %s' % ', '.join(leaked))
+
+    # D. NEGATIVE CONTROL. A field invented after this test was written must
+    #    not reach the served file just because someone added it upstream.
+    #    This is what makes the contract an allowlist rather than a list of
+    #    today's mistakes.
+    poisoned = json.loads(json.dumps(man))
+    for p in poisoned['papers']:
+        p['founder_review_note_2027'] = 'INTERNAL: do not ship'
+    for q in poisoned['questions']:
+        q['tscr_adjudication_note'] = 'INTERNAL: do not ship'
+    poisoned['internal_corpus_state'] = 'INTERNAL: do not ship'
+    pblob = json.dumps(candidate_manifest(poisoned), ensure_ascii=False)
+    expect('a future internal field does not reach the manifest',
+           'INTERNAL: do not ship' not in pblob
+           and 'founder_review_note_2027' not in pblob
+           and 'tscr_adjudication_note' not in pblob
+           and 'internal_corpus_state' not in pblob)
+    # ...and the same poisoned input still projects a working product, so the
+    # allowlist is dropping the new field rather than failing the build.
+    expect('the projection still succeeds on unknown input',
+           len(json.loads(pblob)['questions']) == len(man['questions']))
+
+    # E. determinism: two projections of two builds are byte-identical
+    again = candidate_manifest(build_manifest(load_specs()))
+    expect('projection is deterministic',
+           json.dumps(again, indent=2, ensure_ascii=False)
+           == json.dumps(cand, indent=2, ensure_ascii=False))
+
+    bad = [c for c in checks if not c[1]]
+    for name, ok_, detail in checks:
+        print('  %s  %s%s' % ('PASS' if ok_ else 'FAIL', name,
+                              ('  -- %s' % detail) if detail and not ok_ else ''))
+    print('%s: %d/%d' % ('FAIL' if bad else 'PASS', len(checks) - len(bad), len(checks)))
+    return 1 if bad else 0
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--publish', action='store_true')
+    ap.add_argument('--self-test', action='store_true')
     args = ap.parse_args()
+
+    if args.self_test:
+        sys.exit(self_test())
 
     specs = load_specs()
     if not specs:
@@ -503,7 +688,9 @@ def main():
 
     man = build_manifest(specs)
     mpath = os.path.join(PP_DIR, 'pastpapers_content_index.json')
-    s1 = write(mpath, json.dumps(man, indent=2, ensure_ascii=False) + '\n')
+    # Pages are rendered from the review view; the FILE carries the projection.
+    s1 = write(mpath, json.dumps(candidate_manifest(man), indent=2,
+                                 ensure_ascii=False) + '\n')
     print('manifest        %-9s %d paper(s), %d question(s), %d re-verify flag(s)'
           % (s1, man['total_papers'], man['total_questions'],
              man['total_reverify_before_publication']))

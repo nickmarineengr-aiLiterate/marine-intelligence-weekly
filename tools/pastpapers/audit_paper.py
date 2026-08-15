@@ -274,15 +274,40 @@ def main():
         except json.JSONDecodeError as e:
             err('12 manifest is not valid JSON: %s' % e)
             man = None
+        # Production state is no longer carried by the manifest FILE: that file
+        # is served, so build_index.py projects it through a candidate
+        # allowlist. The state still has to project faithfully from the spec,
+        # so it is checked against the REVIEW view, rebuilt here from the same
+        # specs. Reading it back from the served file would either check
+        # nothing or demand the leak be put back.
+        review_papers, review_qs = {}, {}
+        try:
+            sys.path.insert(0, HERE)
+            import build_index as _bi
+            _rv = _bi.build_manifest(_bi.load_specs())
+            review_papers = {x['paper_id']: x for x in _rv['papers']}
+            review_qs = {q['question_id']: q for q in _rv['questions']
+                         if q.get('paper_id') == pid}
+        except Exception as e:
+            warn('12 review view could not be rebuilt, production state '
+                 'unchecked: %s' % e)
+
         if man:
             papers = {x['paper_id']: x for x in man.get('papers', [])}
             if pid not in papers:
                 err('12 manifest has no entry for %s' % pid)
             else:
                 mp = papers[pid]
-                if mp.get('build_state') != d.get('build_state'):
-                    err('12 build_state differs: spec %r, manifest %r'
-                        % (d.get('build_state'), mp.get('build_state')))
+                rp = review_papers.get(pid)
+                if rp and rp.get('build_state') != d.get('build_state'):
+                    err('12 build_state differs: spec %r, review view %r'
+                        % (d.get('build_state'), rp.get('build_state')))
+                # The served file must NOT carry it. Check 12 is where the two
+                # statements belong together: faithful upstream, absent
+                # downstream.
+                if 'build_state' in mp:
+                    err('12 build_state is present in the SERVED manifest; the '
+                        'candidate projection in build_index.py must drop it')
                 if mp.get('question_count') != len(qs):
                     err('12 question_count differs: spec %d, manifest %r'
                         % (len(qs), mp.get('question_count')))
@@ -300,12 +325,18 @@ def main():
                     e = mq.get(q['question_id'])
                     if not e:
                         continue
-                    if e.get('answer_status') != q.get('answer_status'):
-                        err('12 %s answer_status differs: spec %r, manifest %r'
-                            % (q['q_no'], q.get('answer_status'), e.get('answer_status')))
-                    if e.get('reuse_tier') != q.get('reuse_tier'):
-                        err('12 %s reuse_tier differs: spec %r, manifest %r'
-                            % (q['q_no'], q.get('reuse_tier'), e.get('reuse_tier')))
+                    rq = review_qs.get(q['question_id'])
+                    if rq and rq.get('answer_status') != q.get('answer_status'):
+                        err('12 %s answer_status differs: spec %r, review view %r'
+                            % (q['q_no'], q.get('answer_status'), rq.get('answer_status')))
+                    if rq and rq.get('reuse_tier') != q.get('reuse_tier'):
+                        err('12 %s reuse_tier differs: spec %r, review view %r'
+                            % (q['q_no'], q.get('reuse_tier'), rq.get('reuse_tier')))
+                    for internal in ('answer_status', 'reuse_tier',
+                                     'verification_status', 'provenance_summary'):
+                        if internal in e:
+                            err('12 %s: %s is present in the SERVED manifest'
+                                % (q['q_no'], internal))
                     if e.get('anchor') != q.get('anchor'):
                         err('12 %s anchor differs: spec %r, manifest %r'
                             % (q['q_no'], q.get('anchor'), e.get('anchor')))
