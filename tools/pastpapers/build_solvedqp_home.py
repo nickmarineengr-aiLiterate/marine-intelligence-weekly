@@ -362,6 +362,24 @@ HOME_CSS = """
   .sq-kbd kbd{border:1px solid var(--grey-border);border-bottom-width:2px;border-radius:4px;
               padding:0 .3rem;font-family:inherit;font-size:.72rem;background:#f8fafc;}
   .sq-res-sum{font-size:.82rem;color:var(--grey-text);margin:0 0 .7rem;}
+  /* Active structured filter (Topic Map link or domain chip). Inline in the
+     results summary so it cannot alter the sticky element's height. */
+  .sq-filt{color:var(--navy);}
+  .sq-filt b{color:var(--teal-dark);font-weight:700;}
+  .sq-filt-clear{border:1px solid var(--grey-border);background:#fff;color:var(--teal-dark);
+    border-radius:999px;padding:.15rem .6rem;font:inherit;font-size:.74rem;cursor:pointer;
+    margin-left:.35rem;min-height:28px;}
+  .sq-filt-clear:hover,.sq-filt-clear:focus-visible{border-color:var(--teal);background:var(--teal-light);}
+  /* Study roadmap entry: one restrained card, same grammar as the rest. */
+  .sq-map{border:1px solid var(--grey-border);border-radius:12px;padding:1rem 1.15rem;background:#fff;
+    display:flex;flex-wrap:wrap;align-items:center;gap:.6rem 1.2rem;}
+  .sq-map .t{flex:1 1 22rem;min-width:0;}
+  .sq-map h2{margin:0 0 .25rem;font-size:1.05rem;}
+  .sq-map p{margin:0;font-size:.84rem;color:var(--grey-text);line-height:1.55;}
+  .sq-map a.go{flex:0 0 auto;display:inline-flex;align-items:center;min-height:44px;padding:.5rem 1rem;
+    border-radius:999px;background:var(--teal-dark);color:#fff;font-weight:700;font-size:.86rem;
+    text-decoration:none;}
+  .sq-map a.go:hover,.sq-map a.go:focus-visible{background:var(--teal);}
   .sq-res-paper{border:1px solid var(--grey-border);border-radius:10px;padding:.75rem .9rem;
                 margin-bottom:.6rem;background:#fff;}
   .sq-res-paper h4{margin:0 0 .45rem;font-size:.92rem;}
@@ -449,7 +467,7 @@ __STICKY_SYNC__
   if(!box||!out) return;
   var esc=MIWCorpus.esc;
   var cards=Array.prototype.slice.call(document.querySelectorAll('.sq-card[data-paper-id]'));
-  var chips=Array.prototype.slice.call(document.querySelectorAll('.sq-chip[data-topic]'));
+  var chips=Array.prototype.slice.call(document.querySelectorAll('.sq-chip[data-domain]'));
   var lastQ=null;
 
   // ---- deep link ----------------------------------------------------------
@@ -458,13 +476,27 @@ __STICKY_SYNC__
   // to get out of a paper and land on the same result list. History is
   // replaced rather than pushed, so typing a word does not bury the previous
   // page under twelve entries.
-  function readQ(){
-    try{ return new URLSearchParams(location.search).get('q')||''; }
-    catch(e){ return ''; }
+  //
+  // ?topic= and ?domain= are the STRUCTURED filters the Study Topic Map links
+  // with. They are exact matches on the manifest's normalised labels, so a
+  // leaf that says "13 questions" opens exactly those 13; free text would
+  // return a superset. Both given => intersection. They never touch ?q=, and
+  // typing into the box replaces them with an ordinary search.
+  function readState(){
+    try{
+      var u=new URLSearchParams(location.search);
+      return { q:u.get('q')||'', topic:u.get('topic')||'', domain:u.get('domain')||'' };
+    }catch(e){ return {q:'',topic:'',domain:''}; }
   }
-  function writeQ(q){
+  function writeState(st){
     if(!window.history||!history.replaceState) return;
-    var u=location.pathname+(q?('?q='+encodeURIComponent(q)):'')+location.hash;
+    var parts=[];
+    if(st.q) parts.push('q='+encodeURIComponent(st.q));
+    else{
+      if(st.topic) parts.push('topic='+encodeURIComponent(st.topic));
+      if(st.domain) parts.push('domain='+encodeURIComponent(st.domain));
+    }
+    var u=location.pathname+(parts.length?('?'+parts.join('&')):'')+location.hash;
     try{ history.replaceState(null,'',u); }catch(e){}
   }
 
@@ -476,6 +508,15 @@ __STICKY_SYNC__
     cards.forEach(function(c){
       c.hidden = ids ? !ids[c.getAttribute('data-paper-id')] : false;
     });
+  }
+
+  function paint(res, head){
+    var h=['<p class="sq-res-sum">'+head+'</p>'];
+    var ids={};
+    res.groups.forEach(function(g){ ids[g.paper.paper_id]=1; });
+    h.push(MIWCorpus.renderGroups(res));
+    out.innerHTML=h.join('');
+    narrowGrid(ids);
   }
 
   function render(q){
@@ -490,27 +531,52 @@ __STICKY_SYNC__
       narrowGrid({});
       return;
     }
-    var h=['<p class="sq-res-sum">'+MIWCorpus.summary(res)+'</p>'];
-    var ids={};
-    res.groups.forEach(function(g){ ids[g.paper.paper_id]=1; });
-    h.push(MIWCorpus.renderGroups(res));
-    out.innerHTML=h.join('');
-    narrowGrid(ids);
+    paint(res, MIWCorpus.summary(res));
+  }
+
+  // The active-filter line. A structured link must never leave a blank box
+  // over an unexplained result list, so the filter is named where the results
+  // are, with its own clear control. Lives inside the results panel: nothing
+  // may change the sticky element's own height.
+  function filterLabel(f){
+    var bits=[];
+    if(f.topic) bits.push('<b>Topic:</b> '+esc(f.topic));
+    if(f.domain) bits.push('<b>Domain:</b> '+esc(f.domain));
+    return '<span class="sq-filt">'+bits.join(' <span aria-hidden="true">&middot;</span> ')+
+      '</span> <button type="button" class="sq-filt-clear" id="sq-filt-clear">Clear filter</button>';
+  }
+  function renderFilter(f){
+    var res=MIWCorpus.matchStructured(f);
+    if(!res.questions){
+      out.innerHTML='<p class="sq-res-none">'+filterLabel(f)+'<br>No solved question carries '+
+        'this study topic'+(f.domain?' in this domain':'')+'.</p>';
+      narrowGrid({});
+    }else{
+      paint(res, filterLabel(f)+' <span aria-hidden="true">&middot;</span> '+MIWCorpus.summary(res));
+    }
+    var cb=document.getElementById('sq-filt-clear');
+    if(cb) cb.addEventListener('click',function(){ box.value=''; run(''); box.focus(); });
   }
 
   // The browse affordances, which collapse while a query is active. This is
   // the foot section, not the sticky field: nothing may change the sticky
   // element's height, or scroll anchoring and the change fight each other.
   var findSec=document.querySelector('.sq-findfoot');
+  var filt={topic:'',domain:''};
+
+  function setChips(activeDomain){
+    chips.forEach(function(c){
+      c.setAttribute('aria-pressed', (activeDomain && c.getAttribute('data-domain')===activeDomain) ? 'true':'false');
+    });
+  }
 
   function run(q,opts){
     q=(q||'').trim();
+    filt={topic:'',domain:''};
     clr.style.display=q?'block':'none';
     if(findSec) findSec.classList.toggle('has-q',!!q);
-    chips.forEach(function(c){
-      c.setAttribute('aria-pressed', c.getAttribute('data-topic')===q ? 'true':'false');
-    });
-    if(!(opts&&opts.silent)) writeQ(q);
+    setChips('');
+    if(!(opts&&opts.silent)) writeState({q:q});
     if(!q){ out.innerHTML=''; narrowGrid(null); lastQ=''; return; }
     if(q===lastQ) return;
     lastQ=q;
@@ -525,14 +591,38 @@ __STICKY_SYNC__
     });
   }
 
+  function runFilter(f,opts){
+    f={topic:(f.topic||'').trim(),domain:(f.domain||'').trim()};
+    if(!f.topic&&!f.domain){ run(''); return; }
+    filt=f; lastQ='';
+    box.value='';
+    clr.style.display='block';
+    if(findSec) findSec.classList.toggle('has-q',true);
+    setChips(f.topic?'':f.domain);
+    if(!(opts&&opts.silent)) writeState({q:'',topic:f.topic,domain:f.domain});
+    MIWCorpus.load().then(function(idx){
+      if(box.value.trim()) return;           // reader started typing meanwhile
+      if(filt.topic!==f.topic||filt.domain!==f.domain) return;
+      if(!idx){
+        out.innerHTML='<p class="sq-res-none">Search is temporarily unavailable. '+
+          'Every sitting is still listed below.</p>';
+        return;
+      }
+      renderFilter(f);
+    });
+  }
+
   box.addEventListener('input',function(){ run(box.value); });
   clr.addEventListener('click',function(){ box.value=''; run(''); box.focus(); });
   chips.forEach(function(c){
     c.addEventListener('click',function(){
-      var t=c.getAttribute('data-topic');
+      var d=c.getAttribute('data-domain');
       // A pressed chip toggles off, so a chip is a filter and not a trap.
       if(c.getAttribute('aria-pressed')==='true'){ box.value=''; run(''); return; }
-      box.value=t; run(t);
+      // Exact category match, not free text: the count on the chip is the
+      // count of questions in that category, and the click must open exactly
+      // those questions and no more.
+      runFilter({domain:d});
       out.scrollTop=0;
     });
   });
@@ -579,9 +669,11 @@ __STICKY_SYNC__
   // absence: re-adding any scroll-position-driven class to .sq-find re-opens
   // the same loop, whatever the class is called.
 
-  // Restore a shared/bookmarked search. silent: the URL already says this.
-  var initial=readQ();
-  if(initial){ box.value=initial; run(initial,{silent:true}); }
+  // Restore a shared/bookmarked search or a Topic Map link. silent: the URL
+  // already says this. ?q= wins if both are somehow present.
+  var initial=readState();
+  if(initial.q){ box.value=initial.q; run(initial.q,{silent:true}); }
+  else if(initial.topic||initial.domain){ runFilter(initial,{silent:true}); }
 })();
 
 // ---- full update ledger ---------------------------------------------------
@@ -1037,7 +1129,7 @@ def build(specs):
     if topic_chips:
         a('  <div class="sq-chips" role="group" aria-label="Browse by topic">')
         for label, count in topic_chips:
-            a('    <button type="button" class="sq-chip" data-topic="%s" '
+            a('    <button type="button" class="sq-chip" data-domain="%s" '
               'aria-pressed="false">%s <span class="sq-kbd">%d</span></button>'
               % (esc(label), esc(label), count))
         a('  </div>')
@@ -1046,6 +1138,22 @@ def build(specs):
     a('  <p class="hint">Searches the printed question and its topic labels across every '
       'solved paper. <span class="sq-kbd">Press <kbd>/</kbd> to search, <kbd>Esc</kbd> '
       'to clear.</span></p>')
+    a('</section>')
+
+    # ---- 3b. STUDY ROADMAP ENTRY -----------------------------------
+    # One restrained card into the Study Topic Map. The map is navigation into
+    # the same solved questions; its counts are generated there, not repeated
+    # here, so this card carries no number that could drift.
+    a('<section class="sq-section">')
+    a('  <div class="sq-map">')
+    a('    <div class="t">')
+    a('      <h2>What should I study?</h2>')
+    a('      <p>The study roadmap: every domain, the study topics inside it, and the '
+      'solved questions behind each one &mdash; built from the %d sittings MIW has solved.</p>'
+      % len(sittings))
+    a('    </div>')
+    a('    <a class="go" href="/solvedQP/topics.html">Open the study roadmap &rarr;</a>')
+    a('  </div>')
     a('</section>')
 
     # ---- 4. HOW MIW ANSWERS WORK -----------------------------------

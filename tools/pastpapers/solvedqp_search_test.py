@@ -163,9 +163,111 @@ def main():
     corpus_fallback_tests(m)
     updates_tests(m)
     wiring_tests()
+    structured_tests(m)
 
     print('%d passed, %d failed' % (PASSED[0], len(fails)))
     return 1 if fails else 0
+
+
+def structured(m, topic=None, domain=None):
+    """MIWCorpus.matchStructured(), reimplemented exactly: EQUALITY on the
+    manifest's normalised study_topics and primary_category. Both => intersection.
+    Neither => nothing (a filter with no name lists nothing)."""
+    out = set()
+    if not topic and not domain:
+        return out
+    for p in m['papers']:
+        if p['status'] != 'AVAILABLE':
+            continue
+        for x in p['questions']:
+            if domain and x.get('primary_category') != domain:
+                continue
+            if topic and topic not in (x.get('study_topics') or []):
+                continue
+            out.add(x['question_id'])
+    return out
+
+
+def structured_tests(m):
+    """The Study Topic Map's `?topic=` / `?domain=` filters.
+
+    Free-text `?q=` returns SUPERSETS of a study topic (its terms appear in
+    stems that are not about the topic), which is why the map does not link
+    with it. These prove the structured filter is exact, that intersection
+    semantics hold, that the domain chips' counts equal their filter, and that
+    ordinary `?q=` is unchanged by any of it.
+    """
+    import topic_taxonomy as TT
+    from build_solvedqp_home import load_specs, solved_sittings, topic_counts
+    sittings = solved_sittings(load_specs())
+    tmap = TT.build_topic_map(sittings)
+    print('STRUCTURED FILTER TESTS')
+
+    # every question record carries study_topics
+    allq = [x for p in m['papers'] if p['status'] == 'AVAILABLE' for x in p['questions']]
+    check('every published question carries study_topics',
+          all(isinstance(x.get('study_topics'), list) for x in allq))
+
+    # exact-set equality for EVERY emitted topic (domain-scoped)
+    bad = []
+    n = 0
+    for d in tmap['domains']:
+        for t in d['topics']:
+            n += 1
+            if structured(m, t['label'], d['label']) != set(t['question_ids']):
+                bad.append('%s/%s' % (d['label'], t['label']))
+    check('?topic=&domain= equals the map set for all %d topics (exact set)' % n,
+          not bad and n > 0, '; '.join(bad[:3]))
+
+    # named examples from the brief
+    for topic, dom in (('ISM Code', 'Human Element & Management'),
+                       ('Port State Control', 'Statutory Framework & Class'),
+                       ('General Average', 'Marine Insurance & Commercial Law'),
+                       ('Indian Legislation', 'Statutory Framework & Class')):
+        want = None
+        for d in tmap['domains']:
+            if d['label'] == dom:
+                for t in d['topics']:
+                    if t['label'] == topic:
+                        want = set(t['question_ids'])
+        got = structured(m, topic, dom)
+        check('%s in %s: filter == map (%d)' % (topic, dom, len(got)),
+              want is not None and got == want)
+
+    # intersection: topic-only is a superset across domains; both narrows
+    il_all = structured(m, 'Indian Legislation')
+    il_stat = structured(m, 'Indian Legislation', 'Statutory Framework & Class')
+    check('intersection: topic+domain is a strict subset of topic-only',
+          il_stat < il_all, '%d < %d' % (len(il_stat), len(il_all)))
+
+    # ?domain= is exact primary_category equality and equals the chip counts
+    bad = []
+    for label, count in topic_counts(sittings):
+        if len(structured(m, None, label)) != count:
+            bad.append('%s chip %d filter %d' % (label, count, len(structured(m, None, label))))
+    check('?domain= equals every domain chip count', not bad, '; '.join(bad))
+
+    # the defect the structured filter exists to end: free text is a superset
+    ft = {q['question_id'] for p in m['papers'] if p['status'] == 'AVAILABLE'
+          for q in p['questions'] if all(w in (q.get('search_text') or '')
+                                         for w in fold('Indian Maritime Legislation').split())}
+    dm = structured(m, None, 'Indian Maritime Legislation')
+    check('free-text "Indian Maritime Legislation" is a superset of the domain filter',
+          dm <= ft and len(ft) > len(dm), 'free %d vs structured %d' % (len(ft), len(dm)))
+
+    # no filter name => nothing, never the whole corpus
+    check('an empty structured filter returns nothing', structured(m) == set())
+    # substring is NOT a match
+    check('structured match is equality, not substring',
+          structured(m, 'ISM') == set() and structured(m, 'ism code') == set())
+
+    # ordinary ?q= is unchanged: search_text does not include study_topics
+    check('free-text search_text is built without study_topics',
+          all(all(w in (x.get('search_text') or '') for w in fold(' '.join(
+              x.get('subject_tags') or [])).split()) for x in allq)
+          and not any('survey & certification' in (x.get('search_text') or '') and
+                      not any(fold(s) == 'survey & certification' for s in x.get('subject_tags') or [])
+                      for x in allq))
 
 
 # =====================================================================

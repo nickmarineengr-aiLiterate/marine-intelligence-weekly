@@ -466,6 +466,7 @@
   <span class="topbar-links">
     <a href="/solvedQP/" aria-current="page">Solved QP</a>
     <a href="/solvedQP/questions-2023.html">Questions by year</a>
+    <a href="/solvedQP/topics.html">What should I study?</a>
   </span>
 </nav>
 
@@ -5073,6 +5074,30 @@ But one difference runs through everything. Behind the tanker scheme sit further
       return { groups: groups, questions: nq, papers: groups.length };
     }
 
+    // Structured navigation filter, used by the Study Topic Map's links.
+    // EQUALITY on the manifest's normalised `study_topics` and on
+    // `primary_category` -- never a substring, never the folded search_text --
+    // so a Topic Map leaf that says "13 questions" opens exactly those 13.
+    // Both keys given => intersection. Neither => empty result, by design:
+    // this is a filter with a name, not a way to list the whole corpus.
+    function matchStructured(f, opts) {
+      opts = opts || {}; f = f || {};
+      var topic = f.topic ? String(f.topic) : '', dom = f.domain ? String(f.domain) : '';
+      var groups = [], nq = 0;
+      if (!IDX || (!topic && !dom)) return { groups: groups, questions: 0, papers: 0 };
+      IDX.papers.forEach(function (p) {
+        if (p.status !== 'AVAILABLE' || !p.questions.length) return;
+        if (opts.excludePaper && p.paper_id === opts.excludePaper) return;
+        var hits = p.questions.filter(function (x) {
+          if (dom && x.primary_category !== dom) return false;
+          if (topic && (x.study_topics || []).indexOf(topic) < 0) return false;
+          return true;
+        });
+        if (hits.length) { groups.push({ paper: p, hits: hits }); nq += hits.length; }
+      });
+      return { groups: groups, questions: nq, papers: groups.length };
+    }
+
     function esc(s) {
       return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
         return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
@@ -5108,7 +5133,8 @@ But one difference runs through everything. Behind the tanker scheme sit further
              res.questions + (res.questions === 1 ? ' question' : ' questions');
     }
 
-    return { load: load, match: match, fold: fold, terms: terms,
+    return { load: load, match: match, matchStructured: matchStructured,
+             fold: fold, terms: terms,
              renderGroups: renderGroups, summary: summary, esc: esc,
              index: function () { return IDX; } };
   })();

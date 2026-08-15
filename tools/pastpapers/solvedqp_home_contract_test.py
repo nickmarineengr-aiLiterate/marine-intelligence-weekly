@@ -115,7 +115,7 @@ def rule_topics(html, specs, fail):
     want = dict(HOME.topic_counts(HOME.solved_sittings(specs)))
     got = {}
     for label, count in re.findall(
-            r'<button type="button" class="sq-chip" data-topic="([^"]+)" '
+            r'<button type="button" class="sq-chip" data-domain="([^"]+)" '
             r'aria-pressed="false">[^<]*<span class="sq-kbd">(\d+)</span></button>', html):
         got[unesc(label)] = int(count)
     if not got:
@@ -280,7 +280,7 @@ def self_test():
     probe('hand-added topic chip is caught',
           html.replace('<div class="sq-chips" role="group" aria-label="Browse by topic">',
                        '<div class="sq-chips" role="group" aria-label="Browse by topic">\n'
-                       '    <button type="button" class="sq-chip" data-topic="Ballast Water" '
+                       '    <button type="button" class="sq-chip" data-domain="Ballast Water" '
                        'aria-pressed="false">Ballast Water <span class="sq-kbd">7</span></button>'))
     probe('deleted coverage link is caught',
           re.sub(r'<a class="cov-m cov-av" href="/solvedQP/QP2301\.html"', '<a class="x"',
