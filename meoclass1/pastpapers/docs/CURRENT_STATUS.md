@@ -358,6 +358,28 @@ is now a repository contract, `tools/security/link_integrity.mjs` + `link_integr
 
 ---
 
+## 1e. Study Topic Map V1 — the last approved Written V1 feature — 2026-08-15
+
+"What do I have to study?" answered from data already owned: `primary_category` → DOMAIN, normalised
+`subject_tags` → STUDY TOPIC, solved questions → the five learning modes. Solved-only by design.
+Baseline `ae760a3`. **MIW WRITTEN V1 FEATURE COMPLETE — FEATURE FREEZE RECOMMENDED.**
+
+| | |
+|---|---|
+| **Taxonomy (recomputed)** | 7 domains (a partition of 351) · **73 explicit study topics** (≥3 distinct questions in the domain) · **4 "Other topics in this domain" buckets** (Statutory 3 q, Human Element 4, Pollution 3, Cargo 1) · 84 nodes · alias map 32 keys → 12 canonical labels, all keys re-verified as real corpus labels; other spellings case-fold to the most frequent printed form. Founder decisions applied as approved: Safety Management → ISM Code; broad domain-restating topics kept and rendered quietly; Indian Legislation is a root domain AND a study topic in 4 other domains. Nothing speculative merged (Decarbonisation ≠ Alternative Fuels; Statutory Framework ≠ Survey & Certification) |
+| **Per domain (q / sittings of 39 / topics)** | Statutory Framework & Class 95 / 38 / 19 · Marine Insurance & Commercial Law 68 / 37 / 12 · Human Element & Management 65 / 37 / 11 · Alternative Fuels & Decarbonisation 50 / 35 / 12 · Pollution Prevention & Response 41 / 27 / 9 · Indian Maritime Legislation 19 / 15 / 5 · Cargo & Bulk Carriage 13 / 11 / 5. Topic counts overlap inside a domain (`subject_tags` is multi-valued) and the page says so |
+| **Files** | `tools/pastpapers/topic_taxonomy.py` (the ONE normalisation — transformation logic, no second syllabus DB) · `build_topic_map.py` → `solvedQP/topics.html` (static, native `details/summary`, no fetch, ~260 KB / 27 KB gzip, generated date = newest spec `updated`) · manifest question records now carry `study_topics` from the same normaliser · `topic_map_test.py` 14 rules + `--self-test` 8 mutation controls (wrong count, orphan, stale alias, intelligence-only row, missing anchor, filter superset, internal token, scope wording) all bite; registered as `TOPIC MAP` / `TOPIC MAP CT` in the toolchain, in `delivery_gate` derivation and the deploy-surface fixture |
+| **Structured filter** | `MIWCorpus.matchStructured()` — EQUALITY on `study_topics` / `primary_category`, both ⇒ intersection, neither ⇒ nothing. `?topic=&domain=` on the SolvedQP home; every leaf link is domain-scoped. **Exact-set equality proven for all 73 topics** (page rows ⇔ manifest filter), not count equality — the first run of that rule caught the test's own `&amp;` decoding dropping the domain (Classification 46 vs 42). Active filter shown inside the results panel ("Topic: X · Domain: Y · Clear filter"); typing replaces it with ordinary `?q=`, which is unchanged |
+| **Domain-chip defect (§17)** | FIXED as part of the same architecture: chips now filter by exact `primary_category`. Indian Maritime Legislation label 19 → 19 (free text 26); Alternative Fuels 50 → 50 (free text 52); ISM Code map leaf 20 (free text 43) |
+| **Entry points** | "What should I study?" appended to `delivery_links()` (every Written page's nav) + one restrained home card. No new route, entitlement, API or security rule: `/solvedQP/topics.html` is SOLVED_QP by the existing prefix rule (anonymous/Oral-only denied) |
+| **Public sample** | `SQ/QB1_A.html` LEG.3(91) drift CONFIRMED (5 sites + v1.1 footer) and synchronised to the paid `QB1_A` v1.2 truth of 08 Aug — LEG.5(99). No reinterpretation; no wider sample audit |
+| **Gates** | `run_toolchain.py --publish --self-test` ALL STAGES PASS ×2, **103 generated files byte-identical between builds**; `delivery_gate --verify-derivation --strict` PASS; `node --test tools/security/*.test.mjs` **307/307** (306 + `topics.html` deploy fixture); link integrity **267 pages · 7,541 refs · 0 broken · 0 dead fragments · 0 KEEP→EXCLUDED · 0 cross-entitlement · 0 case mismatch**; local HTTP QA 1280/375: 7 domains, 77 disclosures, no horizontal overflow with everything open, all touch targets ≥ 44 px, no console errors; four `?topic=` cases (ISM Code 20, PSC 13, General Average 11, Indian Legislation scoped 6 vs 35 unscoped) match the map exactly |
+| **Invariants** | 39 / 351 · six-year 61 / 549 (39 solved / 22 intelligence-only) · 2023 11/11 · Understand/Exam Plan/Answer/Study Guide/Recall 351/351 each — untouched |
+| **Not built, by decision** | graph/mind-map, planner, SRS, progress, new API/entitlement, historical (2021–22) classification, semantic taxonomy, recurrence-family navigation |
+| **Launch debt carried** | P2: ~19 authoring-only stale "unsolved intake" claims; TSCR-9 (corpus A.1184/A.1188); QP2201-Q4 mid-stem page-number artefact; no `/reference/` viewer. P3: pre-existing 375 px overflow on `miw-notes-mgmt-p1/p5` and `SQ/QB1_A`; 29 examiner-index empty rows; Written topbar wraps to 3 lines at 375 px with the sixth nav link |
+
+---
+
 ## 2. Corpus state
 
 Recomputed from the generated manifest `solvedQP/solvedqp_content_index.json` after QP2407 and
