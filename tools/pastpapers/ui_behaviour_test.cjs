@@ -44,6 +44,78 @@ function ok(name, cond, extra) {
 // Alias probes deliberately use words that appear ONLY in search metadata and
 // are never rendered on the card, which is the behaviour being guarded.
 const FIXTURES = {
+  QP2308: {
+    // AUTHORED at laptop review against what each question is about, then each
+    // probe PROVED unique against the real card payloads under the search's own
+    // token-AND semantics -- never harvested from the built page, and never
+    // assumed. Every probe below is also VISIBLE on its card, so a break means
+    // the content moved, not that the metadata did.
+    //
+    // This paper's collisions, all measured and all rejected as probes:
+    // 'trend analysis' reaches Q1 and Q4 (the IoT limb and the UMS chart);
+    // 'condition of class' reaches Q4, Q5 and Q8; 'instrument of authorization'
+    // reaches Q5 and Q8; 'nairobi' reaches Q7 and Q8; 'recognized' reaches Q5,
+    // Q8 and Q9. None can say which card broke, so none is used.
+    probes: [
+      ['predictive maintenance', 'QP2308-Q1'],
+      // The printed stem's own pair of terms, and the half candidates drop.
+      ['in personam', 'QP2308-Q2'],
+      ['grim vane', 'QP2308-Q3'],
+      // The stem's own apparatus, and the thing Q4 is actually about.
+      ['central scanning', 'QP2308-Q4'],
+      // RO Code appendix 2 divides survey and certification work by elementary
+      // module; nothing else on the paper uses the term.
+      ['elementary module', 'QP2308-Q5'],
+      ['turning circle', 'QP2308-Q6'],
+      // Why States wait: the benefit accrues before ratification does.
+      ['free rider', 'QP2308-Q7'],
+      // The survey type that is NOT in the HSSC cycle, which is the
+      // discrimination the examiner is testing.
+      ['damage survey', 'QP2308-Q8'],
+      ['reception facilities', 'QP2308-Q9'],
+    ],
+    aliases: [
+      // Never rendered on the card -- these live only in search_aliases, and
+      // each was checked against the visible text with tag boundaries treated
+      // as HARD BREAKS, because collapsing whitespace joins adjacent elements
+      // and manufactures a false match.
+      ['smart ship', 'QP2308-Q1',
+       'Q1 (the industry word for the whole subject, which the answer never uses)'],
+      ['crew wages lien', 'QP2308-Q2',
+       'Q2 (the first-ranking claim, as a candidate would type it)'],
+      ['costa bulb', 'QP2308-Q3',
+       'Q3 (the rudder bulb under the name its maker gave it)'],
+      ['E0 notation', 'QP2308-Q4',
+       'Q4 (the class notation for the unattended machinery space)'],
+      ['delegation of statutory work', 'QP2308-Q5',
+       'Q5 (the plain-language name for what an RO is given)'],
+      ['ballast water convention delay', 'QP2308-Q7',
+       'Q7 (the thirteen-year worked example, as a candidate would search it)'],
+      ['IMSAS', 'QP2308-Q9',
+       'Q9 (the audit scheme by its acronym, which the answer spells out)'],
+    ],
+    // DELIBERATE REGRESSION SENTINEL, guarding this paper's sharpest reversal.
+    // A.1156(32) -- Survey Guidelines under the HSSC, 2021 -- is the OPERATIVE
+    // edition at an August 2023 sitting. A.1186(33) replaced it on 6 December
+    // 2023, four months AFTER this paper, and every solved donor for Q8 sits
+    // after that date and carries the later number. If this stops resolving to
+    // Q8, the 33rd Assembly has been walked into the answer as operative law.
+    //
+    // An EXCLUDED term would ordinarily be the better sentinel, as it is on
+    // QP2307. None is available here and that is correct rather than a gap:
+    // the 33rd-Assembly numbers live in study_notes traps, which are not part
+    // of the search payload, so A.1186(33) is unsearchable by construction.
+    regulation: ['a.1156(32)', 'QP2308-Q8'],
+    // Leak probe, not a search probe. The source copy prints the host's own
+    // backward-looking sitting rows under every stem -- Q4 carries ten and Q8
+    // eight. '2023/AUG' is the paper's self-reference, printed on all nine.
+    // None may reach the shipped bytes.
+    recurrence: ['2022/dec', '2021/feb', '2023/aug'],
+    // Three terms, none of them unique alone: 'survey' reaches Q1, Q4, Q5 and
+    // Q8; 'certificate' reaches Q5 and Q8; 'damage' reaches Q7, Q8 and Q9.
+    // Only the conjunction lands on the composite survey-and-certificate stem.
+    narrow: ['survey certificate damage', 'QP2308-Q8'],
+  },
   QP2303: {
     // AUTHORED at laptop review against what each question is about, never
     // harvested from the built page.

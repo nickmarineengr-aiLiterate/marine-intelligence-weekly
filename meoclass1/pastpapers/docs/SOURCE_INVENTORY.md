@@ -6,7 +6,7 @@
 
 | Year | Papers held | Months absent from the available source set |
 |---|---|---|
-| 2023 | 8 | May, June, August, November |
+| 2023 | 9 | May, June, November |
 | 2024 | 11 | May |
 | 2025 | 11 | May |
 | 2026 | 6 | May, August, September, October, November, December |
@@ -20,6 +20,7 @@
 | QP2303 | March 2023 | `MARCH 2023.pdf` | 2303 EM | 2 | 9 | ? of 2 |
 | QP2304 | April 2023 | `APRIL 2023.pdf` | 2304 EM | 2 | 9 | 2 of 2 |
 | QP2307 | July 2023 | `JULY 2023.pdf` | 2307 EM | 2 | 9 | ? of 2 |
+| QP2308 | August 2023 | `AUGUST 2023.pdf` | 2308 EM | 2 | 9 | ? of 2 |
 | QP2309 | September 2023 | `SEPTEMBER 2023.pdf` | 2309 EM | 2 | 9 | ? of 2 |
 | QP2310 | October 2023 | `OCTOBER 2023.pdf` | 2310 EM | 2 | 9 | ? of 2 |
 | QP2312 | December 2023 | `DECEMBER 2023.pdf` | 2312 EM | 2 | 9 | ? of 2 |
@@ -64,7 +65,7 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 
 ### Questions printing NO mark allocation
 
-**39 of 324**, across 10 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
+**48 of 333**, across 11 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
 
 | Question | Sitting | Title |
 |---|---|---|
@@ -87,6 +88,15 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 | QP2307-Q7 | July 2023 Q7 | Hull and Propeller Maintenance for Energy Efficiency |
 | QP2307-Q8 | July 2023 Q8 | Collision off the Indian Coast - Action under the Merchant Shipping Act |
 | QP2307-Q9 | July 2023 Q9 | Unseaworthy and Unsafe Ships under the Merchant Shipping Act, 1958 |
+| QP2308-Q1 | August 2023 Q1 | Internet of Things in the Maritime Industry |
+| QP2308-Q2 | August 2023 Q2 | Maritime Lien, In Rem and In Personam |
+| QP2308-Q3 | August 2023 Q3 | Rudder Efficiency Improvement Devices |
+| QP2308-Q4 | August 2023 Q4 | UMS Data, a Condition Monitoring Chart, and Trend Analysis |
+| QP2308-Q5 | August 2023 Q5 | Limitations of Recognized Organizations, and the Statutory Services Delegated |
+| QP2308-Q6 | August 2023 Q6 | Power Transformation to Effective Power, and Sea Trial Manoeuvres |
+| QP2308-Q7 | August 2023 Q7 | The Four Stages of an IMO Convention, and the Entry-into-Force Delay |
+| QP2308-Q8 | August 2023 Q8 | Survey Types Differentiated, and the Statutory Certificate Register |
+| QP2308-Q9 | August 2023 Q9 | IMO Instruments Implementation Code - Objectives, Flag State Strategy, KPIs and the Three State Roles |
 | QP2310-Q9 | October 2023 Q9 | Root Cause Analysis, Active Failures and Latent Failures |
 | QP2402-Q8 | February 2024 Q8 | Grounded and Abandoned Indian Flag Vessel - Action under the Merchant Shipping Act |
 | QP2403-Q4 | March 2024 Q4 | High-Efficiency Propellers |
@@ -150,6 +160,15 @@ Examiner wording is reproduced exactly, errors included. Each is recorded in a n
 | QP2304-Q9 | ANOMALY, AND IT RUNS IN AN UNUSUAL DIRECTION. This source copy prints NO mark allocation against either limb, where the same question at every other sitting MIW holds prints a split - (8) and (8) in December 2023, and (10) and (6) in December 2024, September 2025 and June 2026. Neither split is imported: the question is recorded at 16 marks under instruction 2 with marks null on both limbs, and the two limbs are treated as of comparable weight. Two printed features are preserved exactly: 'SOLAS ch.ll-1', written with two lowercase letter L characters rather than the Roman numeral II and read as chapter II-1; and 'above-referred' hyphenated with 'toward' rather than 'towards', which is the orthography that places this paper in the same family branch as the December 2023 sitting. |
 | QP2307-Q2 | The question prints a single total of (16) and no limb marks; the four heads (i) to (iv) are printed inline within the stem rather than as separately marked limbs. Limb marks are recorded as null rather than inferred as 4+4+4+4. The answer nonetheless plans four roughly equal blocks, because four named heads under one equal-marks total is the only reading the rubric supports. |
 | QP2307-Q7 | The question prints NO mark figure at all - neither a total nor any limb allocation. The three limbs are therefore recorded with null marks and the question at 16 on the printed equal-marks rubric. THE MARCH 2025 SITTING OF THE CHARACTER-IDENTICAL STEM PRINTS (6), (5), (5); THOSE FIGURES ARE DELIBERATELY NOT IMPORTED, because importing them would manufacture a printed fact this examiner did not print. The answer is planned in three roughly equal blocks instead of the donor's 6/5/5 weighting. |
+| QP2308-Q1 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"); the absence is the printed copy's, not a transcription loss. Sub-part marks are therefore null. The April 2024 sitting of this identical stem prints (6), (5), (5) against the three limbs; those marks are DELIBERATELY NOT IMPORTED. Prints "loT" with a lowercase L at every occurrence, "predictive Maintenance" with a mid-sentence capital, and no terminal full stop after "explain the following". All reproduced as printed. |
+| QP2308-Q2 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"). The April 2024, September 2025 and December 2025 sittings of this identical stem print (16); that mark is DELIBERATELY NOT IMPORTED as printed truth for this copy. Prints "In Rem" with a capital R and "In personam" with a lowercase p inside the same sentence. Reproduced as printed. |
+| QP2308-Q3 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"). Sub-part marks are therefore null. Prints "improvements devices/ techniques" with a space after the solidus and a number disagreement on "improvements". Reproduced as printed, and character-identical to the January 2023 sitting of the same stem. |
+| QP2308-Q4 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"). The stem prints no limb labels at all, but sets three distinct tasks in one paragraph - the data to attend to, the chart to formulate, and the computer tools for graphical representation and trend analysis. The absence of limb labels is the printed copy's and is not repaired. |
+| QP2308-Q5 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"). GRAMMATICAL ANOMALY PRESERVED: the opening sentence has no main verb for its first clause - "Classification societies as Recognized Organisations (RO) and play an important role" does not parse. The intended sense is "act as Recognized Organisations and play an important role". The printed form is reproduced and is NOT repaired. The stem also prints "Organisations" with an s against "Recognized" with a z in the same phrase. |
+| QP2308-Q6 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"). Sub-part marks are therefore null. TWO PRINTED ANOMALIES PRESERVED: the limb labels are "A." and "B)." - an unmatched bracket on the second, and a third limb convention on a paper that also uses "a)" and "(a)". Recorded exactly as printed. The March 2023 sitting of this stem prints "transformed" where this copy prints "is transformed", and "maneuvers" where this copy prints "manoeuvres"; the two-word delta is why this is classified NEAR and not EXACT. |
+| QP2308-Q7 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"). The stem prints no limb labels but sets three tasks - the four stages, the delay with examples, and the remedies. The final sentence is printed as a statement with a full stop ("What can be done to reduce this delay.") rather than as a question; reproduced as printed. |
+| QP2308-Q8 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"). The stem prints no limb labels but sets three tasks - differentiate five survey types, give the purpose of each, and list every statutory certificate with issuing authority and convention. Prints "enlist" for "list"; reproduced as printed. |
+| QP2308-Q9 | ANOMALY: the source copy prints NO mark allocation for this question, and none for any question on the paper. Recorded at 16 marks under instruction 2 ("all questions carry equal marks"). Sub-part marks are therefore null. The January 2024, March 2024 and December 2024 sittings of this identical stem print (6), (4), (6) against the three limbs; those marks are DELIBERATELY NOT IMPORTED. Prints "Briefly Discuss" with a mid-sentence capital in limb a) and "Briefly discuss" in limb c); prints "Which all IMO instruments covered in the code." as a statement with a full stop rather than as a question. All reproduced as printed. |
 | QP2309-Q1 | The source copy prints (16) against the stem and no mark against any of the three limbs. The limbs are therefore recorded with marks null. Nothing is inferred about an internal split: the printed form is a single 16-mark question with three parts, and the answer is balanced by the work each limb demands rather than by an invented allocation. |
 | QP2309-Q9 | The source copy prints (16) against the stem and runs the three parts inline within the sentence, with no mark against any of them. The limbs are therefore recorded with marks null. No internal split is inferred: the three are of comparable weight and the answer treats them so, with the third given slightly more space because it is the principle the other two depend on. |
 | QP2310-Q1 | The question prints a single mark figure, (16), at the end of the stem. The three named items (i), (ii) and (iii) carry no individual marks, so sub-part marks are null. Nothing is inferred about how the examiner would split the sixteen between them. |
