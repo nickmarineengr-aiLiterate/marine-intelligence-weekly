@@ -296,6 +296,26 @@ def delivery_links(year=None, years=None):
     return links
 
 
+def promo_links():
+    """Navigation for the Written promo served inside the ORAL product.
+
+    Its reader owns ORAL_QB_NOTES and, by definition, does NOT own SOLVED_QP --
+    the page exists to sell them that. So the default Written navigation is
+    exactly wrong here: 'Written Questions', '2026 Topics' and the review tree
+    it points at are all behind the entitlement the reader has not bought, and
+    every one of them would bounce them to a login page from inside a page they
+    are legitimately reading. A funnel that logs its prospect out is not a
+    funnel.
+
+    These are the storefront links already proven on the public sample at
+    SQ/solved-qp-sample-january-2026.html. Reused verbatim rather than invented:
+    the promo and the sample are the same product moment reached by two
+    audiences, and they should not teach two different routes to the same shop.
+    """
+    return [('MEO Class I store', '/SQ/index.html'),
+            ('Get full access &middot; &#8377;1,500', '/SQ/index.html#solved-qp')]
+
+
 def topbar(active='', links=None):
     """Consistent navigation across every Past Papers page. Kept compact.
 
@@ -307,7 +327,11 @@ def topbar(active='', links=None):
             ('MEO Class I', '/meoclass1/'),
             ('Written Questions', '/meoclass1/pastpapers/'),
             ('2026 Topics', '/meoclass1/pastpapers/topics-2026.html'),
-            ('Question Bank', '/meoclass1/#question-banks'),
+            # No '#question-banks' anchor has ever existed on that page. The
+            # fragment was inert -- the browser lands at the top of the hub,
+            # which IS the Question Bank -- so it promised a jump it could not
+            # make. Dropping it is the whole fix; the hub needs no new anchor.
+            ('Question Bank', '/meoclass1/'),
         ]
     out = ['<nav class="topbar" aria-label="Primary">',
            '  <span class="logo">&#9875; MIW</span>',

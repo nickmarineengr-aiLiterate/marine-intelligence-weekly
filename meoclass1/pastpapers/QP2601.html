@@ -643,7 +643,7 @@
     <a href="/meoclass1/">MEO Class I</a>
     <a href="/meoclass1/pastpapers/" aria-current="page">Written Questions</a>
     <a href="/meoclass1/pastpapers/topics-2026.html">2026 Topics</a>
-    <a href="/meoclass1/#question-banks">Question Bank</a>
+    <a href="/meoclass1/">Question Bank</a>
   </span>
 </nav>
 
@@ -3605,84 +3605,7 @@
   var activeFilter = 'all';
 
   // ---- corpus search (the escape hatch out of this one paper) --------------
-  window.MIWCorpus = (function () {
-    var IDX = null, PENDING = null;
-    var SRC = '/solvedQP/solvedqp_content_index.json';
-
-    function fold(s) {
-      return String(s).toLowerCase()
-        .replace(/[^a-z0-9'&]+/g, ' ').replace(/\s+/g, ' ').trim();
-    }
-    function terms(q) { return fold(q).split(' ').filter(Boolean); }
-
-    function load() {
-      if (IDX) return Promise.resolve(IDX);
-      if (PENDING) return PENDING;
-      PENDING = fetch(SRC, { cache: 'no-store' })
-        .then(function (r) { return r.ok ? r.json() : null; })
-        .then(function (j) { IDX = j; PENDING = null; return j; })
-        .catch(function () { PENDING = null; return null; });
-      return PENDING;
-    }
-
-    // opts.excludePaper -- omit the paper the reader is already in.
-    // opts.excludeYear  -- omit the year sheet the reader is already in.
-    function match(q, opts) {
-      opts = opts || {};
-      var t = terms(q), groups = [], nq = 0;
-      if (!IDX || !t.length) return { groups: groups, questions: 0, papers: 0 };
-      IDX.papers.forEach(function (p) {
-        if (p.status !== 'AVAILABLE' || !p.questions.length) return;
-        if (opts.excludePaper && p.paper_id === opts.excludePaper) return;
-        if (opts.excludeYear && p.year === opts.excludeYear) return;
-        var hits = p.questions.filter(function (x) {
-          var s = x.search_text || '';
-          return t.every(function (w) { return s.indexOf(w) >= 0; });
-        });
-        if (hits.length) { groups.push({ paper: p, hits: hits }); nq += hits.length; }
-      });
-      return { groups: groups, questions: nq, papers: groups.length };
-    }
-
-    function esc(s) {
-      return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
-      });
-    }
-
-    // Deep links go straight to /solvedQP/QP####.html#qN. The gate is an edge
-    // concern -- a reader without entitlement is redirected by middleware and
-    // arrives back here after login. Degrading the link to a storefront URL
-    // would throw away the anchor the reader actually asked for.
-    function renderGroups(res) {
-      var h = [];
-      res.groups.forEach(function (g) {
-        h.push('<div class="mc-paper">');
-        h.push('<h4><a href="' + esc(g.paper.href) + '">' + esc(g.paper.sitting) +
-               '</a> <span class="mc-sr">' + esc(g.paper.sr_no) + '</span></h4>');
-        g.hits.forEach(function (x) {
-          var topic = (x.topic_tags && x.topic_tags.length) ? x.topic_tags[0]
-                    : (x.primary_category || '');
-          h.push('<a class="mc-q" href="' + esc(x.href) + '">' +
-                 '<b>' + esc(x.question_number) + '</b>' +
-                 '<span class="mc-t">' + esc(x.short_title || '') + '</span>' +
-                 (topic ? '<span class="mc-tag">' + esc(topic) + '</span>' : '') +
-                 '</a>');
-        });
-        h.push('</div>');
-      });
-      return h.join('');
-    }
-
-    function summary(res) {
-      return res.papers + (res.papers === 1 ? ' sitting' : ' sittings') + ' &middot; ' +
-             res.questions + (res.questions === 1 ? ' question' : ' questions');
-    }
-
-    return { load: load, match: match, fold: fold, terms: terms,
-             renderGroups: renderGroups, summary: summary, esc: esc,
-             index: function () { return IDX; } };
-  })();
+  // No corpus panel on this build, so no cross-paper search payload is inlined.
 
   var mcWrap = document.getElementById('mc-wrap');
   var mcSum = document.getElementById('mc-sum');

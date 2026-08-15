@@ -35,8 +35,8 @@ sys.path.insert(0, HERE)
 from render_common import (REPO_ROOT, TPL, BASE, CONTACT, LS_BOOKMARKS, LS_PROGRESS,
                            LS_MIGRATE_JS, STICKY_SYNC_JS, GATE, GATE_STUB, esc, esc_attr, strip_tags,
                            read_css, block_text, search_tokens, topbar, head_meta, footer,
-                           is_intake, corpus_relations, delivery_links, load_all_specs,
-                           CORPUS_SEARCH_JS, corpus_fallback_block)
+                           is_intake, corpus_relations, delivery_links, promo_links,
+                           load_all_specs, CORPUS_SEARCH_JS, corpus_fallback_block)
 import recurrence_model as RM
 
 CHEV = ('<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
@@ -282,8 +282,18 @@ def reference_shelf(q, out, publish):
         if avail:
             # The resolver owns document, edition, bookmark and page. This link
             # carries the OBJECT id only, so re-pagination cannot break it.
-            out.append('      <a class="nav-btn rs-open" href="%s">Verify source</a>'
-                       % esc_attr(reference_href(r['object_id'])))
+            #
+            # FAIL CLOSED. reference_href() returns None while no governed
+            # viewer route exists, and then no control is emitted at all. The
+            # citation above -- relationship, label, scope -- is the evidence
+            # and stands on its own; a button to a route that 404s is worse
+            # than no button. Availability of the SOURCE and availability of a
+            # PUBLIC VIEWER are different facts, and only the first is claimed
+            # here.
+            href = reference_href(r['object_id'])
+            if href:
+                out.append('      <a class="nav-btn rs-open" href="%s">Verify source</a>'
+                           % esc_attr(href))
         elif not publish:
             out.append('      <span class="rs-state">%s</span>'
                        % esc(r.get('state', '').replace('_', ' ').lower()))
@@ -297,13 +307,35 @@ def reference_href(object_id):
     Deliberately the ONLY coupling point between the paper builder and the
     reference viewer. When the resolver and viewer land, this function changes
     and nothing else does. It never emits a document or page.
+
+    Returns None while no viewer route is governed. Callers must treat None as
+    "render the citation, emit no control" -- never as "the source is missing".
     """
+    if not REFERENCE_ROUTE_BASE:
+        return None
     return '%s/%s' % (REFERENCE_ROUTE_BASE, object_id)
 
 
-# Provisional. Not a committed public URL: no viewer exists yet, and nothing
-# renders this until a question carries a REFERENCE_AVAILABLE object.
-REFERENCE_ROUTE_BASE = '/reference'
+# Stands in for CORPUS_SEARCH_JS on every build that renders no corpus panel.
+# paper.js guards its one entry point with `if (!mcWrap || !mcRes) return;`
+# before it touches MIWCorpus, so the symbol is never reached on these pages.
+CORPUS_SEARCH_ABSENT = ('  // No corpus panel on this build, so no cross-paper '
+                        'search payload is inlined.')
+
+
+# No public reference viewer exists. `None` is that fact stated once, in the
+# one place the builder consults, so no paper can regenerate a route that 404s.
+#
+# This was '/reference', written while the shelf rendered nothing anywhere --
+# a provisional value that became live the moment QP2307 became the first paper
+# to carry REFERENCE_AVAILABLE objects, and shipped 19 dead buttons per copy.
+# A provisional constant is only safe while nothing renders it, and nothing
+# announces the day that stops being true.
+#
+# To turn the shelf's links on: build the resolver route, then set this to its
+# base path. Nothing else changes, and the negative control in
+# reference_route_test.py must be updated in the same commit.
+REFERENCE_ROUTE_BASE = None
 
 
 def recall_view(q, out):
@@ -351,7 +383,8 @@ def recall_view(q, out):
         out.append('  </section>')
 
 
-def build_card(q, paper, out, publish, corpus=None, deliver=False, delivered_ids=None):
+def build_card(q, paper, out, publish, corpus=None, deliver=False, delivered_ids=None,
+               promo=False):
     qid = q['question_id']
     subjects = ' '.join((q.get('subject_tags') or [])).lower()
     # Canonical, chronological recurrence -- computed over the whole corpus, not
@@ -450,6 +483,20 @@ def build_card(q, paper, out, publish, corpus=None, deliver=False, delivered_ids
               if re.match(r'^QP\d+\.html(?:#|$)', str(x.get('href', '')))
               and (delivered_ids is None
                    or str(x['href']).split('.')[0] in delivered_ids)]
+    elif promo:
+        # The mirror image of the delivery case, and it fails the other way.
+        # From /meoclass1/oralnotes/, the '../' links into the Oral product
+        # resolve correctly AND are inside this reader's own entitlement, so
+        # they stay. The bare sibling links do not: 'QP2607.html#q5' resolves
+        # to /meoclass1/oralnotes/QP2607.html, which has never existed.
+        #
+        # Rewriting them to /solvedQP/QP2607.html would make them resolve and
+        # would still be wrong -- an unlabelled link out of a free sample into
+        # a product this reader has not bought is an entitlement bounce wearing
+        # a cross-reference's clothes. The page already asks for the sale twice,
+        # in words, above and below. Drop them.
+        xl = [x for x in xl
+              if not re.match(r'^QP\d+\.html(?:#|$)', str(x.get('href', '')))]
     if xl:
         out.append('  <p class="rec-note">Also on the platform: %s</p>'
                    % ' &middot; '.join('<a href="%s">%s</a>'
@@ -627,8 +674,17 @@ def build(spec, gated=False, publish=False, deliver=False, promo=False, newest_l
     a('')
     # A delivered paper navigates within /solvedQP/ only, and its year link
     # points at its OWN year's sheet.
-    o.extend(topbar('Solved QP' if deliver else 'Written Questions',
-                    links=delivery_links(year=d['year']) if deliver else None))
+    # Navigation follows the ENTITLEMENT that opens the page, never the product
+    # the content belongs to. The promo is Written content opened by ORAL, so it
+    # takes storefront links; the default Written set would bounce its reader
+    # into SOLVED_QP, which is the very thing the page is asking them to buy.
+    if deliver:
+        nav_active, nav_links = 'Solved QP', delivery_links(year=d['year'])
+    elif promo:
+        nav_active, nav_links = '', promo_links()
+    else:
+        nav_active, nav_links = 'Written Questions', None
+    o.extend(topbar(nav_active, links=nav_links))
     a('')
     a('<header class="page-header">')
     a('  <div class="wrap">')
@@ -721,7 +777,7 @@ def build(spec, gated=False, publish=False, deliver=False, promo=False, newest_l
         delivered_ids = {s['paper_id'] for s in load_all_specs() if not is_intake(s)}
     for q in qs:
         build_card(q, d, o, content_publish, corpus,
-                   deliver=deliver, delivered_ids=delivered_ids)
+                   deliver=deliver, delivered_ids=delivered_ids, promo=promo)
         a('')
 
     a('<div id="no-results">No question matches that search. Try a topic, a regulation '
@@ -774,9 +830,20 @@ def build(spec, gated=False, publish=False, deliver=False, promo=False, newest_l
     a('<div class="q-footer">')
     a('  <span class="correction-link">Correction? <a href="mailto:%s?subject=Past%%20Paper%%20%s%%2C%%20Correction%%20Required">%s</a></span>'
       % (CONTACT, pid, CONTACT))
+    # 'UNGATED REVIEW COPY' is production's own word for a build nobody has paid
+    # for. On the promo it faced a paying Oral subscriber and told them the
+    # complete paper they were reading was an internal draft -- the opposite of
+    # what the page is for. Every customer-facing build now names the PRODUCT.
+    if deliver:
+        build_label = 'SOLVED QP'
+    elif promo:
+        build_label = 'WRITTEN SAMPLE'
+    elif gated:
+        build_label = 'GATED'
+    else:
+        build_label = 'UNGATED REVIEW COPY'
     a('  <span class="q-version">Written Questions &middot; %s &middot; v%s &middot; %s</span>'
-      % (pid, esc(d['version']),
-         'SOLVED QP' if deliver else ('GATED' if gated else 'UNGATED REVIEW COPY')))
+      % (pid, esc(d['version']), build_label))
     a('</div>')
     a('</main>')
     a('</div>')
@@ -787,7 +854,16 @@ def build(spec, gated=False, publish=False, deliver=False, promo=False, newest_l
     js = (js.replace('__LS_BOOKMARKS__', LS_BOOKMARKS)
             .replace('__LS_PROGRESS__', LS_PROGRESS)
             .replace('__LS_MIGRATE__', LS_MIGRATE_JS)
-            .replace('__CORPUS_SEARCH__', CORPUS_SEARCH_JS)
+            # Only the delivered copy renders the corpus panel (see the
+            # `if deliver:` above), and paper.js reads the corpus solely from
+            # inside that panel's code path. Inlining the reader everywhere
+            # else shipped a /solvedQP/ manifest URL into pages whose readers
+            # do not own SOLVED_QP -- inert, because nothing ever called it,
+            # but a cross-product dependency that LOOKS live is one refactor
+            # away from becoming live. The panel and its reader now appear and
+            # disappear together, so they cannot drift apart.
+            .replace('__CORPUS_SEARCH__',
+                     CORPUS_SEARCH_JS if deliver else CORPUS_SEARCH_ABSENT)
             .replace('__STICKY_SYNC__', STICKY_SYNC_JS))
     a('<script>')
     a(js.rstrip('\n'))
@@ -861,7 +937,9 @@ def main():
           % (len(html.encode('utf-8')), len(spec['questions']), n))
     print('  mode: %s, gate: %s'
           % ('PUBLISH' if args.publish
-             else ('SOLVED QP delivery (noindex)' if args.deliver else 'review (noindex)'),
+             else ('SOLVED QP delivery (noindex)' if args.deliver
+                   else ('Oral Written sample (noindex)' if args.oral_promo
+                         else 'review (noindex)')),
              'PRESENT' if args.gated else 'stripped'))
     if prev is not None:
         print('  rebuild: %s' % ('IDENTICAL to previous output' if prev == html else 'CHANGED'))
