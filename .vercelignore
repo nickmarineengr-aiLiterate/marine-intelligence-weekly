@@ -1,0 +1,117 @@
+# =============================================================================
+# Marine Intelligence Weekly -- deployment exclusion list (.vercelignore)
+#
+# WHY THIS FILE EXISTS
+# The repository root is the static web root and `package.json` performs no
+# build, so every file Vercel receives becomes a URL. Before this file, every
+# tracked file shipped: authoring specs, verification records, governance docs
+# and the toolchain were all served. The repository is public, so this is not
+# a confidentiality control -- it is data minimisation: fewer accidental web
+# surfaces, fewer deployed bytes, and no future tracked internal file becoming
+# a site URL by default.
+#
+# HOW VERCEL READS IT (verified against the bundled CLI, `getVercelIgnore`)
+#   * The CLI reads ONLY this file (or `.nowignore`) plus a fixed default list
+#     (.git, .vercel, node_modules, .env.local, .env.*.local, __pycache__ ...).
+#     It NEVER reads .gitignore. So without this file, a workstation
+#     `vercel deploy` uploads every git-ignored local file too. Section A below
+#     therefore mirrors .gitignore explicitly -- keep the two in step.
+#   * The Git integration only ever sees tracked files, then applies this file.
+#   * Semantics are gitignore-style (the `ignore` package): a trailing `/`
+#     matches a directory, a leading `/` anchors to the repository root.
+#
+# CHECKED BY tools/security/deploy_surface.test.mjs, which evaluates these
+# patterns with the same library semantics against (1) representative
+# authoring-only paths that must be excluded, (2) synthetic sentinels in every
+# git-ignored class that must stay excluded, and (3) every candidate runtime
+# path that must remain deployable. Change this file and that test together.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# A. MIRROR OF .gitignore -- local material that must never leave the machine
+#    on a CLI deployment. Derived from .gitignore on 2026-08-15; every entry
+#    there is repeated here.
+# -----------------------------------------------------------------------------
+.env
+.env*
+.env.local
+.env.*.local
+.env.production.local
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+dist/
+build/
+.next/
+out/
+__pycache__/
+*.pyc
+.git/
+.vercel/
+
+# Third-party source scans of examination papers -- never redistributed.
+meoclass1/pastpapers/docs/*.pdf
+# Local-only provenance record naming the third-party host of each source copy.
+meoclass1/pastpapers/verification/LOCAL_SOURCE_PROVENANCE.md
+# Coaching handouts -- never a verification source, never redistributed.
+Notes-for-written-answers/
+# Scratch output from the notes tooling.
+tools/notes/_*.txt
+# Founder's master question-bank spreadsheets -- unreleased bank.
+docs/MIW-master-Question-bank/*.xlsx
+# A named candidate's private study material.
+meoclass1/pastpapers/docs/notes from candidate/
+# True Source corpora -- verbatim IMO instrument text, private authoring layer.
+Knowledge Central/
+# Six-year QP intelligence, derived; carries unsolved-sitting wording and the
+# third-party host's recurrence annotations.
+meoclass1/pastpapers/intelligence/derived/
+
+# -----------------------------------------------------------------------------
+# B. WRITTEN-PRODUCT AUTHORING LAYER -- rich canonical inputs and internal
+#    records. Proven not to be fetched by any candidate page: the runtime
+#    reads /solvedQP/solvedqp_content_index.json only.
+# -----------------------------------------------------------------------------
+meoclass1/pastpapers/specs/
+meoclass1/pastpapers/verification/
+meoclass1/pastpapers/docs/
+meoclass1/pastpapers/intelligence/
+meoclass1/pastpapers/sample/
+meoclass1/pastpapers/known_traps.md
+meoclass1/pastpapers/pastpapers_content_index.json
+# Oral-product authoring records living beside the product pages.
+meoclass1/known_traps.md
+meoclass1/qb_health_check.py
+
+# -----------------------------------------------------------------------------
+# C. TOOLCHAIN AND REPOSITORY GOVERNANCE -- scripts, protocols, reports and
+#    session records. Nothing on the site links to any of these.
+# -----------------------------------------------------------------------------
+tools/
+docs/
+reports/
+engineering-reports/
+production-system/
+corrections/
+.github/
+.claude/
+Claude skill/
+# Root-level governance and session documents (README, AI_SESSION_*,
+# ENGINEERING_PRINCIPLES_*, REPOSITORY_STATUS). Anchored: only the root.
+/*.md
+
+# -----------------------------------------------------------------------------
+# NOT excluded, on purpose: middleware.js, api/, vercel.json, package.json,
+# SQ/, solvedQP/, meoclass1/ product pages and their content indexes,
+# assets/, articles/, archive/, RulesApp/, GHGDecarb/, robots.txt, CNAME and
+# the root HTML issues. /meoclass1/pastpapers/*.html (the review tree) is
+# deliberately still shipped -- its retirement is a separate, pending decision.
+# -----------------------------------------------------------------------------
