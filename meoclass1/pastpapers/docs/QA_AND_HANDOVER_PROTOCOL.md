@@ -34,11 +34,18 @@ security-sensitive surface that was *not* the target of the session must be repo
 Founder even when every gate passes — regeneration is allowed to move those surfaces, but not
 silently. See `WORKFLOW_LESSONS.md` lesson 7.
 
-`health_check.py` must end **0 errors, 0 warnings**. Among other things it verifies id
-uniqueness, spec/page correspondence, that every built question carries a study guide, quick
-revision, answer route and retrieval cards, that all links and anchors resolve, that review
-state is `noindex` and ungated, that there is no path leakage or third-party branding, and
-that **every generated file reproduces exactly from its source**.
+`health_check.py` must end **0 errors, 0 warnings** — *in the mode the tree is actually built in*.
+Among other things it verifies id uniqueness, spec/page correspondence, that every built question
+carries a study guide, quick revision, answer route and retrieval cards, that all links and anchors
+resolve, that build state matches the requested mode, that there is no path leakage or third-party
+branding, and that **every generated file reproduces exactly from its source**.
+
+**The build-state assertion is mode-symmetric**: bare, it requires every page to be `noindex` and
+ungated; under `--publish` it requires the opposite. The two are exact complements, so one of the
+two invocations returns 0 errors for *any* tree, and a green result on its own proves only that the
+tree matches the mode you asked about. Pass the flag that matches the build the tree holds — and at
+finalisation, that is the build `main` commits, reached via `run_toolchain.py --publish`. See
+`LAPTOP_REVIEW_AND_INTEGRATION_PROTOCOL.md` §3.M.
 
 ## 2. DETERMINISM
 

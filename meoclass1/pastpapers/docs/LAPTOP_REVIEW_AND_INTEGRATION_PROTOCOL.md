@@ -170,11 +170,27 @@ contract · coverage · storefront · corpus consumer · security/access · leak
 Stage generated artefacts **explicitly** — `git add -u` misses new files, and a generated delivery
 page is untracked on the paper's first integration. See `QA_AND_HANDOVER_PROTOCOL.md` §6.
 
-**Run a checker in the mode the tree is actually in.** An integrated tree holds the **publish**
-build, so `health_check.py` must be given `--publish`; invoked bare it asserts the *review* state
-and reports the whole corpus as not-`noindex`. The toolchain passes the flag through, so a bare
-run disagreeing with a green toolchain run means the invocation is wrong, not the tree. Before
-treating any alarming standalone result as a regression, **prove it against the previous
+**Build the tree in the mode `main` commits, then check it in that mode.** `main` commits the
+**publish** build. `run_toolchain.py --publish` is therefore the pre-commit gate; the bare run is
+not. The final integration gate must establish **explicitly that the tree is in the same build
+mode `main` commits** — not merely that some checker returned zero errors.
+
+**A mode-flagged checker is mode-symmetric, so green proves only that the tree matches the mode
+you asked about.** `health_check.py` faults a review tree that is not `noindex` and equally faults
+a publish tree that still carries `noindex`. The two assertions are exact complements, so
+whichever build the tree holds, one of the two invocations always returns 0 errors. **Never choose
+the mode because it comes back green** — choose the mode `main` commits, and make the tree satisfy
+it. A review-mode toolchain run once left 37 pages carrying `noindex` and production metadata while
+the bare checker agreed the tree was clean; only comparing against what `main` actually commits
+exposed it. Where the build state is genuinely ambiguous, resolve it against the current
+`origin/main` convention, never against a checker's exit code.
+
+**Generated pages this paper does not own must stay byte-identical to their `main` baseline**,
+unless a legitimate global derivation change explains the drift — graduation, family recomputation,
+or shared derived data. When the generated diff is wider than the paper, compare representative
+untouched pages byte-for-byte against `origin/main`.
+
+Before treating any alarming standalone result as a regression, **prove it against the previous
 commit** — if the prior state reports identically, it is pre-existing and it is not yours.
 
 ### N. Determinism
@@ -209,8 +225,9 @@ Recompute queue readiness from actual current branches and recommend **one** nex
 Stop and report rather than proceed if: the target branch is moving · the source is ambiguous · a
 donor relationship is not as reported · an authoritative claim cannot be verified · a temporal
 question cannot be resolved · graduation breaks or the combined universe changes unexpectedly ·
-storefront derivation breaks · a trap regresses · the build is non-deterministic · the delivery gate
-fails · a security regression appears · a cross-machine collision occurs.
+storefront derivation breaks · a trap regresses · the build is non-deterministic · **the tree's
+build mode cannot be established against what `main` commits** · the delivery gate fails · a
+security regression appears · a cross-machine collision occurs.
 
 ---
 
