@@ -227,3 +227,37 @@ un-prefixed `ISM reg 9` -- the latter can never be a safe literal, because a bar
 `ism reg` substring fires on "mechanism regulates". The structural form matches `ISM` as a
 whole uppercase token, an optional `Code`, then a numbered reg, which no other
 instrument's citation can satisfy and which `SOLAS regulation XI-1/6` cannot reach.
+
+---
+
+### 19. `A.1184(33)` is places of refuge — the ISM implementation guidance is `A.1188(33)`
+The 33rd Assembly adopted both on **6 December 2023**, four digits apart:
+
+| Resolution | Subject | Adopted | Revokes |
+|---|---|---|---|
+| `A.1184(33)` | Guidelines on places of refuge for ships in need of assistance | 6 Dec 2023 | `A.949(23)` (op. para 4) |
+| `A.1188(33)` | 2023 Guidelines on implementation of the ISM Code by Administrations | 6 Dec 2023 | `A.1118(30)` (op. para 5) |
+| `A.1118(30)` | Revised Guidelines on the implementation of the ISM Code by Administrations | 6 Dec 2017 | `A.1071(28)` (op. para 5) |
+
+All three read at source in the Organization's own published resolutions.
+
+The defect is **corpus-inherited, not authored**: `10-amendment-register/AMENDMENT_REGISTER.md`
+records `A.1184(33)` as ISM implementation guidance and the ISM-Code folder holds the
+places-of-refuge PDF under that filename. Raised as `TS-REFERRAL-QP2311-3`; the corpus is not
+edited from a paper branch. Four papers detected it and refused to consume it (`QP2309`,
+`QP2311`, `QP2312`, and `QP2306` partially); two consumed it and shipped —
+`QP2406-Q5` and `QP2502-Q1/Q3`, corrected 15 August 2026.
+
+**Temporal note before correcting anything.** `A.1188(33)` is only operative from 6 December
+2023. For a sitting before that date the operative ISM guidance is `A.1118(30)` of 2017 and
+`A.1188(33)` may appear only as a future development or a trap — which is exactly how
+`QP2308`, `QP2309` and `QP2311` already carry it. A blind number swap would forward-contaminate
+every 2023 paper.
+
+GREP: SKIP
+NOTE: no phrase match is safe in either direction. `A.1184(33)` is **correct** in `QP2304`,
+`QP2402`, `QP2503`, `QP2506` and `QP2507`, and the sentences that correct the defect must name
+the ISM Code in order to deny it. The structural layer therefore reads context: an ISM marker
+within 300 characters of the citation, with no places-of-refuge marker to disarm it. Its
+positive control is `QP2502-Q3`'s shipped model answer; its negative control is `QP2507-Q9`'s
+correct citation and a correcting sentence, both of which must pass.

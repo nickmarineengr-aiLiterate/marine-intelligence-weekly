@@ -5528,9 +5528,46 @@ the live token-AND semantics**, with three measured collisions rejected · visua
 375 px, zero overflow, no console output, five modes and no sixth, and the "antifouling" probe
 resolving to exactly one card in the real DOM.
 
+## §34. A.1184(33) ISM-guidance correction — 2026-08-15 (laptop)
+
+A bounded live-correctness patch, not a paper review. Starting HEAD `359cf58`, clean, `origin/main`
+unmoved throughout; no desktop branch touched any of the five papers.
+
+**Primary sources read this session.** `A.1184(33)` from the corpus PDF; `A.1188(33)` and
+`A.1118(30)` fetched from the IMO CDN, neither being held by the corpus. Titles, adoption dates and
+operative revocation paragraphs read in each: `A.1184(33)` para 4 revokes `A.949(23)`; `A.1188(33)`
+para 5 revokes `A.1118(30)`; `A.1118(30)` para 5 revokes `A.1071(28)`. The corpus's title for
+`A.1184(33)` is in fact `A.1118(30)`'s title, so the correction is of the number **and** the title.
+
+**Scope re-derived, and it differed from the brief.** 115 canonical occurrences classified by
+context: 84 correct and preserved, 27 wrong across two papers, 4 stale framing, 1 wrong by
+implication. `QP2312` — named as affected — was correct throughout and left untouched. 32 field
+edits; 26 rendered sites plus one search token.
+
+**Negative control.** All ten places-of-refuge pages (`QP2304`, `QP2402`, `QP2503`, `QP2506`,
+`QP2507`, review and delivery) byte-identical to `origin/main`; 76 correct canonical uses and 43
+rendered uses preserved. Corpus-wide sweep of all 78 rendered pages: **zero** ISM-context
+`A.1184(33)`.
+
+**QA.** Publish-mode toolchain ALL STAGES PASS twice (508 pre-existing SPEC advisories, unchanged),
+including known traps with the new trap 19, temporal, recurrence, six-year, storefront, corpus
+consumer, health and `delivery_gate --verify-derivation --strict`. Security 38/38. UI 39/39 pages.
+**Determinism: 96 artefacts byte-identical across two full publish builds.** Visual at 1280 and
+375 px on one pre-boundary paper (`QP2309`, September 2023) and one post (`QP2502`, February 2025):
+corrected citations rendered, the historical/later distinction visible, five modes switching, zero
+overflow, no console output, and the stale production framing gone from the paid bytes.
+
+**Product state unmoved and proved unmoved.** 39 papers / 351 questions; 2023 complete at 11/11;
+combined universe 61/549; six-year build, reuse map and solvedQP home byte-identical.
+
+**Carried.** `TSCR-9` OPEN — the corpus is uncorrected at `7441cc0` on two surfaces plus a misfiled
+PDF. Detail in `CURRENT_STATUS.md` §7s.
+
 ## Next action
 
-**2023 production is CLOSED.** No paper remains in the 2023 queue. Recommended next project is the
-A.1184(33) corpus-wide citation correction — see the session report. Carried open: the QP2201-Q4
-mid-stem extractor artefact, the QP2303-Q5 source-fidelity referral, the 22 holdings-denial flags,
-and the internal-vocabulary remediation plan.
+**2023 production is CLOSED and the A.1184(33) patch is DONE.** Recommended next launch-closeout
+task: **the 22 holdings-denial flags** — the understated-holdings defect class is now a four-peat and
+`QP2502`-Q3 has just added an *over*-stated instance, so the class runs in both directions and is the
+largest remaining factual-correctness item. Carried open: `TSCR-9` (corpus uncorrected), the
+QP2201-Q4 mid-stem extractor artefact, the QP2303-Q5 source-fidelity referral, and the
+internal-vocabulary remediation plan.

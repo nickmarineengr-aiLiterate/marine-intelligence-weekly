@@ -351,3 +351,52 @@ this question", and it currently overstates. This session screened by reading re
 definitions directly and did not rely on the matrices.
 
 **Status: OPEN.**
+
+---
+
+## TSCR-9 — `A.1184(33)` is filed and labelled as ISM implementation guidance; it is the places-of-refuge Guidelines
+
+**Severity: HIGH.** `INSTRUMENT_MISIDENTIFICATION`. Raised in the older `true-source` corpus as
+`TS-REFERRAL-QP2311-3` (QP2311 anchor, 14 August 2026) and promoted here on 15 August 2026 because
+it reached customers. **Corpus commit inspected: `7441cc0` (`origin/main`) — still present.**
+
+**Objects — two surfaces, not one. The referral as raised named only the first.**
+
+| # | Object | Line | Records |
+|---|---|---|---|
+| a | `true-source/10-amendment-register/AMENDMENT_REGISTER.md` | 69 | `A.1184(33) \| 2023-12 \| — \| GUIDANCE (Administrations' implementation)` |
+| b | `true-source/03-imo-instruments/ISM-Code/INSTRUMENT_LOG.md` | 19 | `A.1184(33) \| Revised guidelines on implementation of the ISM Code by Administrations \| 2023-12 \| guidance (non-mandatory) \| supporting guidance, not part of Code text` |
+| c | `true-source/03-imo-instruments/ISM-Code/_base-and-amendments/A.1184(33).pdf` | — | the places-of-refuge resolution, filed inside the ISM-Code folder |
+
+(b) is the surface that caused the live defect: `QP2502-Q3` cited the instrument log by name and
+inherited both the wrong number and the wrong title. (a) alone was referred.
+
+### Expected
+
+Read at source from the Organization's own published resolutions this session:
+
+| Resolution | Subject | Adopted | Revokes |
+|---|---|---|---|
+| `A.1184(33)` | Guidelines on places of refuge for ships in need of assistance | 6 Dec 2023 | `A.949(23)` (op. para 4) |
+| `A.1188(33)` | 2023 Guidelines on implementation of the ISM Code by Administrations | 6 Dec 2023 | `A.1118(30)` (op. para 5) |
+| `A.1118(30)` | Revised Guidelines on the implementation of the ISM Code by Administrations | 6 Dec 2017 | `A.1071(28)` (op. para 5) |
+
+Note that the title the corpus attaches to `A.1184(33)` — *Revised guidelines on implementation of
+the ISM Code by Administrations* — is `A.1118(30)`'s title, not `A.1188(33)`'s. `A.1188(33)` is the
+**2023** Guidelines. A correction that changes only the number leaves the title wrong.
+
+### Impact
+
+**Live, and not contained.** Four papers detected the defect and refused to consume it — `QP2309`,
+`QP2311`, `QP2312`, and `QP2306` partially. Two consumed it and shipped: `QP2406-Q5` (June 2024)
+and `QP2502-Q1` and `-Q3` (February 2025), 27 canonical sites, corrected 15 August 2026 against
+primary source. The corpus itself is not edited from a paper branch.
+
+Consumer-side protection is now deterministic: `known_traps.md` trap 19 with a structural guard in
+`known_traps_check.py`, whose positive control is `QP2502-Q3`'s shipped wording and whose negative
+control is `QP2507-Q9`'s correct places-of-refuge citation.
+
+**Status: OPEN.** Requested: correct (a) and (b) to `A.1188(33)` with the *2023 Guidelines* title
+and the `A.1118(30)` revocation; acquire `A.1188(33)` and `A.1118(30)`, neither of which the corpus
+holds; and either move or rename (c), because a places-of-refuge resolution sitting in the ISM-Code
+folder will be re-consumed by name whatever the registers say.

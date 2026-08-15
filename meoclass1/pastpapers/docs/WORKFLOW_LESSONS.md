@@ -2152,3 +2152,46 @@ EVIDENCE:  QP2311 Q5 (authored `topic_recurrence`, derived `EXACT_REPEAT` after 
 CATEGORY:  RECURRENCE
 STATUS:    REJECTED — with the condition for reopening: only if `recurrence_class` ever becomes a
            rendered or exported field, at which point it would need to state sitting truth.
+
+---
+
+## A referral covers the surface it names, and the surface it does not name is the one that ships
+
+`TS-REFERRAL-QP2311-3` recorded that the corpus amendment register misidentifies `A.1184(33)` as ISM
+implementation guidance. It was accurate, it was raised properly, and it did not protect anyone —
+because the same wrong attribution also sits in `ISM-Code/INSTRUMENT_LOG.md`, and the instrument log
+is what `QP2502`-Q3 cited by name. Four papers detected the defect independently and refused it; the
+two that consumed it had reached the corpus through the unnamed surface.
+
+**Do:** when raising a corpus referral, grep the corpus for every surface carrying the same claim and
+name them all. A register, an instrument log, a manifest and a filename are four consumption points,
+not one fact.
+
+EVIDENCE:  `TS-REFERRAL-QP2311-3` (register only) → `TSCR-9` (register, instrument log, misfiled
+           PDF). `QP2406`-Q5 and `QP2502`-Q1/Q3 shipped the wrong citation; `QP2309`, `QP2311`,
+           `QP2312` refused it.
+CATEGORY:  TRUE SOURCE
+STATUS:    PROVEN
+
+---
+
+## A reported defect scope is a hypothesis; classify every occurrence before touching one
+
+The brief for this patch reported 35 wrong uses across five named papers and 63 correct uses
+elsewhere. Both numbers and the membership were wrong. Classifying all 115 canonical occurrences by
+context gave 27 wrong across **two** papers, 84 correct, 4 stale-but-accurate and 1 wrong only by
+implication — and `QP2312`, named as affected, needed **no change at all**, because every statement
+in it already matched primary source.
+
+Had the reported list been worked as given, three papers that had already adjudicated the defect
+correctly would have been rewritten, and the two that actually shipped it would still have been
+fixed — the right outcome reached by damaging the record that proved the team caught it.
+
+**Do:** re-derive scope from the repository, classify each occurrence semantically, and report the
+delta against what was reported. A paper that already states the truth is evidence, not work.
+
+EVIDENCE:  A.1184(33) patch, 2026-08-15. Reported 35/63 across five papers; measured 27 wrong across
+           two, with 84 correct uses preserved byte-identical.
+CATEGORY:  REVIEW METHOD
+STATUS:    PROVEN
+

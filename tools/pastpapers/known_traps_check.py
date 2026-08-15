@@ -55,6 +55,28 @@ ISM_WRONG_UNIT = re.compile(
     r'\bISM\b(?:\s+Code)?\s*,?\s*\b[Rr]eg(?:ulations?|s)?\b\.?\s*[0-9]')
 
 
+# trap 19. A.1184(33) attributed to the ISM Code.
+#
+# A.1184(33) is the Guidelines on places of refuge for ships in need of
+# assistance. The 33rd Assembly's ISM implementation guidance is A.1188(33),
+# which revoked A.1118(30). Both were adopted on 6 December 2023, four digits
+# apart, and the corpus amendment register files the places-of-refuge PDF under
+# the ISM Code -- which is how the wrong attribution reached two papers.
+#
+# This cannot be a phrase match in either direction: A.1184(33) is CORRECT in
+# five other papers, and the sentences that correct the defect have to name the
+# ISM Code in order to deny it. The discriminator is therefore contextual --
+# an ISM marker near the citation, with no places-of-refuge marker to disarm it.
+A1184 = re.compile(r'A\.1184\(33\)')
+A1184_ISM_MARKER = re.compile(r'\bISM\b|safety management', re.I)
+# Hyphenated because the house forms are both "places of refuge" and the
+# adjectival "places-of-refuge guidelines".
+A1184_POR_MARKER = re.compile(r'places?[-\s]of[-\s]refuge', re.I)
+# Wide enough that a correcting passage may put the denial and the true subject
+# in separate sentences, which every corrected occurrence in the corpus does.
+A1184_WINDOW = 300
+
+
 def _strings(obj, path=''):
     """Yield (json path, string) for every string anywhere under obj."""
     if isinstance(obj, dict):
@@ -250,6 +272,19 @@ def structural_layer(specs):
                                  'paragraphs, not regulations (trap 18)'
                                  % (pid, q['q_no'], m.group(0), path))
 
+        # T19: A.1184(33) is places of refuge, never ISM guidance.
+        checked += 1
+        for q in d['questions']:
+            for path, s in _strings(q):
+                for m in A1184.finditer(s):
+                    w = s[max(0, m.start() - A1184_WINDOW):m.end() + A1184_WINDOW]
+                    if A1184_ISM_MARKER.search(w) and not A1184_POR_MARKER.search(w):
+                        fails.append('%s %s: A.1184(33) in an ISM context at %s -- '
+                                     'A.1184(33) is the Guidelines on places of refuge; '
+                                     'the ISM implementation guidance is A.1188(33), '
+                                     'which revoked A.1118(30) (trap 19)'
+                                     % (pid, q['q_no'], path))
+
     return fails, checked
 
 
@@ -293,6 +328,34 @@ def self_test(traps, specs):
     f, _ = structural_layer(s4)
     if any('trap 18' in x for x in f):
         bad.append('structural trap 18 fired on legitimate SOLAS/MARPOL regulation text')
+
+    # Trap 19 controls, both taken verbatim from real corpus text rather than
+    # invented, so the guard is proved against the wording that actually shipped
+    # and against the wording that must survive it.
+    #
+    # POSITIVE: QP2502-Q3's shipped model answer, live for weeks.
+    s5 = copy.deepcopy(specs)
+    s5[0]['questions'][0]['short_title'] = (
+        'the flag Administration verifies and certifies, following the Revised '
+        'Guidelines on implementation of the ISM Code by Administrations, '
+        'resolution A.1184(33)')
+    f, _ = structural_layer(s5)
+    if not any('trap 19' in x for x in f):
+        bad.append('structural trap 19 did NOT fire on the shipped ISM attribution '
+                   'of A.1184(33)')
+    # NEGATIVE: QP2507-Q9's correct places-of-refuge citation, which must not be
+    # disturbed, and a correcting sentence that has to name the ISM Code to deny it.
+    s6 = copy.deepcopy(specs)
+    s6[0]['questions'][0]['short_title'] = (
+        'decide refuge under A.1184(33), Guidelines on places of refuge for ships '
+        'in need of assistance, adopted 6 December 2023 and revoking A.949(23)')
+    s6[0]['questions'][1]['short_title'] = (
+        'A.1184(33), which the corpus register files against the ISM Code, is in '
+        'fact the Guidelines on places of refuge and is not cited here')
+    f, _ = structural_layer(s6)
+    if any('trap 19' in x for x in f):
+        bad.append('structural trap 19 fired on a legitimate places-of-refuge '
+                   'citation or on a sentence correcting the defect')
     for b in bad:
         print('  [SELFTEST FAIL] %s' % b)
     print('  self-test: %s' % ('FAILED' if bad else 'all injected traps fired'))

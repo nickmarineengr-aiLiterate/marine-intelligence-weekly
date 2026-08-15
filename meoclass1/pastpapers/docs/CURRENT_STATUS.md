@@ -524,6 +524,89 @@ Fixed in `caf5020`.
 
 ---
 
+## 7s. A.1184(33) ISM-guidance correction — **A LIVE CORRECTNESS PATCH ACROSS FIVE PAPERS, NOT A PAPER REVIEW**
+
+**Published 2026-08-15. No paper, question, coverage, price, Terms or trial state moved: 39 papers /
+351 questions, 2023 complete at 11/11, combined universe 61 papers / 549 questions — all unchanged
+and proved unchanged, the six-year build, the reuse map and the solvedQP home all byte-identical to
+`origin/main`.**
+
+### The three resolutions, read at source
+
+| Resolution | Subject | Adopted | Revokes |
+|---|---|---|---|
+| `A.1184(33)` | Guidelines on places of refuge for ships in need of assistance | 6 Dec 2023 | `A.949(23)` (op. para 4) |
+| `A.1188(33)` | **2023** Guidelines on implementation of the ISM Code by Administrations | 6 Dec 2023 | `A.1118(30)` (op. para 5) |
+| `A.1118(30)` | **Revised** Guidelines on the implementation of the ISM Code by Administrations | 6 Dec 2017 | `A.1071(28)` (op. para 5) |
+
+The title the corpus attaches to `A.1184(33)` — *Revised guidelines on implementation of the ISM
+Code by Administrations* — is **`A.1118(30)`'s title**. A correction that changes only the number
+leaves the title wrong, which is why every corrected site was re-authored rather than swapped.
+
+### The reported scope was wrong in composition, and re-deriving it was the whole job
+
+The brief reported 35 incorrect uses across `QP2306`, `QP2309`, `QP2312`, `QP2406` and `QP2502`, and
+63 correct uses elsewhere. Classifying all **115 canonical occurrences** by context gave a different
+picture:
+
+| Class | Sites | Papers |
+|---|---|---|
+| **Correct** — places of refuge, untouched | 76 | `QP2304` `QP2402` `QP2503` `QP2506` `QP2507` |
+| **Correct** — naming the corpus defect, untouched | 8 | `QP2311` (3) `QP2312` (4) and one in `QP2309` |
+| **Wrong** — consumed as ISM guidance | 27 | `QP2406`-Q5 (5) · `QP2502`-Q1 (8) and -Q3 (14) |
+| **Stale** — a settled question still framed as unresolved | 4 | `QP2309`-Q7 |
+| **Wrong by implication** — "an ISM-related 33rd Assembly resolution" | 1 | `QP2306`-Q4 |
+
+**`QP2312` needed no change at all** — every statement in it already matched primary source, and it
+is left alone. `QP2309` had the law right and only the framing stale. **Only two papers ever shipped
+the wrong citation to a customer.**
+
+### Temporal correctness came before the citation
+
+`A.1188(33)` is operative only from 6 December 2023, so a blind number swap would have
+forward-contaminated every 2023 paper. Per sitting:
+
+| Paper | Sitting | Was | Correct as at sitting | Later instrument | Sites |
+|---|---|---|---|---|---|
+| `QP2306`-Q4 | June 2023 | "an ISM-related 33rd Assembly resolution" = `A.1184(33)` | **`A.1118(30)`** (6 Dec 2017) | `A.1188(33)`, six months future | 1 |
+| `QP2309`-Q7 | Sept 2023 | law right, framing stale | **`A.1118(30)`** | `A.1188(33)`, three months future | 4 |
+| `QP2312`-Q5 | Dec 2023 | already correct | n/a — not cited | n/a | 0 |
+| `QP2406`-Q5 | June 2024 | `A.1184(33)` as ISM guidance | **`A.1188(33)`** (operative 6 months) | — | 5 |
+| `QP2502`-Q1/Q3 | Feb 2025 | `A.1184(33)` as ISM guidance | **`A.1188(33)`** (operative 14 months) | — | 22 |
+
+**32 canonical field edits. Rendered: 26 sites on the paid pages, plus one search-payload token.**
+`QP2306` and `QP2312` render nothing — their occurrences are in `temporal_review` and
+`verification_status`, which are review-facing by design.
+
+### `QP2502`-Q3 was also over-claiming its holdings
+
+Its `sources` recorded a **P1 PRIMARY VERIFIED (corpus holding)** citing the corpus path
+`03-imo-instruments/ISM-Code/_base-and-amendments/A.1184(33).pdf`. That PDF is the places-of-refuge
+resolution, so the claim was wrong twice over, and the path was internal vocabulary on a paid page.
+The corpus holds **neither** `A.1188(33)` nor `A.1118(30)`; the answer now says so.
+
+### The corpus is not corrected, and the referral named the wrong surface
+
+Inspected at corpus `origin/main` `7441cc0`: both `AMENDMENT_REGISTER.md` line 69 **and**
+`ISM-Code/INSTRUMENT_LOG.md` line 19 still carry the wrong attribution.
+**`TS-REFERRAL-QP2311-3` named only the register.** The instrument log is the surface `QP2502`-Q3
+actually consumed. Promoted to **`TSCR-9`** in `TRUE_SOURCE_CORRECTION_REQUESTS.md` naming all three
+objects, including the misfiled PDF. **Status OPEN.**
+
+### Trap 19, and two probes that could never fail
+
+`known_traps.md` trap 19 is `GREP: SKIP` because no phrase match is safe in either direction — the
+citation is correct in five papers and the sentences correcting it must name the ISM Code to deny
+it. The structural guard in `known_traps_check.py` reads context: an ISM marker within 300
+characters, with no places-of-refuge marker to disarm it. **Positive control: `QP2502`-Q3's shipped
+wording. Negative control: `QP2507`-Q9's correct citation and a correcting sentence.** Both hold.
+
+Correcting `QP2502`-Q3's search alias made the `QP2404` fixture probe `a.1188(33)` non-unique, and
+checking that exposed `a.1184(33)` → `QP2506-Q3` as **never** having been unique — four cards carry
+it. Both re-scoped to unique token-AND pairs and proved against the real payloads.
+
+---
+
 ## 7r. QP2306 (June 2023) — laptop-reviewed and published — **THE SAME DEFECT, THE SECOND PAPER RUNNING**
 
 **Published 2026-08-15 at `3962292`, on top of the QP2407 Rule VI correction at `1230f43`.**
