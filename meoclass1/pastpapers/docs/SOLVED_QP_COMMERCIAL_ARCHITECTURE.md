@@ -357,7 +357,7 @@ The storefront must not blur them.
 | Exam | Kochi MMD **oral** | The **written** examination |
 | Content | 417+ real oral questions, Simon notes, MIW Engineering Management notes | Solved past written papers, month by month |
 | Distinctive | organised **by examiner** — Nair, Simon, Rajappan, Srivastava, Senthil, Paul | model written answer · exam plan · knowledge map · study guide · recall · recurrence intelligence · yearly question sheet |
-| Price | ₹1,499 one-time / ₹899 monthly — **unchanged, do not touch** | **`PRICE_TBD`** |
+| Price | ₹1,499 for one year — **unchanged, do not touch** | ₹1,500 for one year |
 
 > **There is no examiner-personality dimension in the written product and it must never be implied.**
 > The written paper is nationally set; "know your examiner" is an oral-exam proposition. Borrowing it

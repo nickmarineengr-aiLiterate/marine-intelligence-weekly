@@ -276,15 +276,17 @@ function renderHub(session) {
     if (has) {
       // STATE A — owned. Say WHICH kind of access they hold, because
       // there are now two and the difference matters to them: a
-      // grandfathered lifetime grant, or a dated term with a renewal
-      // date. Both are read from the server; neither is inferred here.
+      // Candidate-Lifecycle access from an earlier purchase, or a dated
+      // term with a renewal date. Both are read from the server; neither
+      // is inferred here.
       const a = (session.access || {})[key] || {};
-      // The word "lifetime" is correct HERE and nowhere else on a selling
-      // surface: this branch is reached only when the server reports
-      // perpetual === true, i.e. the account holds the grandfathered "1".
-      // A dated one-year customer takes the branch below instead.
+      // `perpetual` is the TECHNICAL shape — no clock-based expiry — and
+      // the customer-facing name for what it buys is Candidate-Lifecycle
+      // Access. The two are not the same claim, and the internal word
+      // must not be the one the member reads: "lifetime" over-promises
+      // and "perpetual" is jargon. Terms §3 carries the full definition.
       if (a.perpetual) {
-        html += '<p class="state">Lifetime access — yours from the original purchase.</p>';
+        html += '<p class="state">Candidate-Lifecycle Access — your original access remains active.</p>';
       } else if (a.expires) {
         html += '<p class="state">Access until ' + accessDate(a.expires) + "</p>";
       }
