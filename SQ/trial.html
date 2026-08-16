@@ -143,7 +143,7 @@ const PRODUCTS = {
     ],
     priceNote:
       "₹500 per completed year × 3 years = ₹1,500. The 2026 papers solved so far " +
-      "are included free. <strong>Lifetime access: ₹1,500.</strong>",
+      "are included free. <strong>One year of access: ₹1,500.</strong>",
   },
 };
 
@@ -232,7 +232,7 @@ function renderOffer(session) {
       (expiryText(offer.expires) ? "<br>Access ends " + expiryText(offer.expires) : "") +
       "</p>" +
       '<a class="btn" href="' + P.open + '">Open ' + P.name + " →</a>" +
-      '<a class="btn ghost" href="' + P.buy + '">Get lifetime access ' + P.price + " →</a>" +
+      '<a class="btn ghost" href="' + P.buy + '">Get one-year access ' + P.price + " →</a>" +
       priceNote() + "</div>";
 
   } else if (offer.status === "expired") {
@@ -244,7 +244,7 @@ function renderOffer(session) {
       "</p>" +
       "<p>Trials are one per account. Everything you saw during the trial is " +
       "part of the full product.</p>" +
-      '<a class="btn" href="' + P.buy + '">Get lifetime access ' + P.price + " →</a>" +
+      '<a class="btn" href="' + P.buy + '">Get one-year access ' + P.price + " →</a>" +
       priceNote() + "</div>";
 
   } else {

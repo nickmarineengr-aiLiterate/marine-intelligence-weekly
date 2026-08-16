@@ -279,6 +279,10 @@ function renderHub(session) {
       // grandfathered lifetime grant, or a dated term with a renewal
       // date. Both are read from the server; neither is inferred here.
       const a = (session.access || {})[key] || {};
+      // The word "lifetime" is correct HERE and nowhere else on a selling
+      // surface: this branch is reached only when the server reports
+      // perpetual === true, i.e. the account holds the grandfathered "1".
+      // A dated one-year customer takes the branch below instead.
       if (a.perpetual) {
         html += '<p class="state">Lifetime access — yours from the original purchase.</p>';
       } else if (a.expires) {
@@ -296,7 +300,7 @@ function renderHub(session) {
       html += '<p class="state">Free trial active — ' +
               remainingText(offer.secondsRemaining) + "</p>" +
               '<a class="btn" href="' + p.open + '">Open →</a>' +
-              '<a class="btn ghost" href="' + p.buy + '">Get lifetime access ' + p.price + " →</a>";
+              '<a class="btn ghost" href="' + p.buy + '">Get one-year access ' + p.price + " →</a>";
     } else if (offer.status === "expired") {
       // STATE E/F — trial spent. Say so plainly and move on.
       html += '<p class="state ended">Your free trial has ended.</p>' +
