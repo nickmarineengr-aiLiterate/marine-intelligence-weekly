@@ -28,6 +28,10 @@
 
 import { test, describe } from "node:test";
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 
 import {
   describeGrant,
@@ -50,10 +54,13 @@ describe("show: what an operator is told", () => {
     assert.equal(describeGrant("", NOW), "none");
   });
 
-  test("a grandfathered lifetime customer reads as PERPETUAL", () => {
+  test("a Candidate-Lifecycle customer reads as such, not as 'lifetime'", () => {
     const out = describeGrant(PERPETUAL, NOW);
-    assert.match(out, /PERPETUAL/);
-    assert.match(out, /never expires/);
+    assert.match(out, /Candidate-Lifecycle \/ ACTIVE/);
+    assert.match(out, /no expiry date/);
+    // The operator is told how to close it, because the whole point of
+    // naming the state is that there is now an action attached to it.
+    assert.match(out, /mark-passed/);
   });
 
   test("THE DEFECT: an active dated customer must NEVER read as 'no'", () => {
@@ -193,7 +200,7 @@ describe("grant: which value is written", () => {
     const value = grantValueToWrite(undefined, { perpetual: true }, NOW_MS);
     assert.equal(value, PERPETUAL);
     assert.equal(value, "1");
-    assert.match(describeGrant(value, NOW), /PERPETUAL/);
+    assert.match(describeGrant(value, NOW), /Candidate-Lifecycle \/ ACTIVE/);
     assert.equal(grantAllowsAccess(value, NOW + 100 * 365 * DAY), true);
   });
 
@@ -210,6 +217,94 @@ describe("grant: which value is written", () => {
         // Whatever was granted, the account holds access immediately after.
         assert.equal(grantAllowsAccess(value, NOW), true);
       }
+    }
+  });
+});
+
+// -------------------------------------------------------------
+// CLI SAFETY
+//
+// The decisions above are proven as pure functions. What is left is the
+// behaviour of the command itself: does it refuse when it should, and is
+// there any way to mutate more than one named account at a time.
+//
+// These spawn the real script. They deliberately do NOT reach Redis —
+// every case here is one the tool must reject before it opens a socket,
+// which is precisely what makes them safe to run in CI.
+// -------------------------------------------------------------
+describe("CLI: the tool refuses before it can do harm", () => {
+  const SCRIPT = join(dirname(fileURLToPath(import.meta.url)), "entitlement_admin.mjs");
+
+  /** Run the CLI with a clean environment. Never touches a live store. */
+  function run(args, env = {}) {
+    const r = spawnSync(process.execPath, [SCRIPT, ...args], {
+      encoding: "utf8",
+      env: { ...process.env, KV_REST_API_URL: "", KV_REST_API_TOKEN: "", ...env },
+    });
+    return { code: r.status, out: r.stdout || "", err: r.stderr || "" };
+  }
+
+  test("without credentials nothing runs at all", () => {
+    const r = run(["mark-passed", "someone@example.com", "--confirm"]);
+    assert.equal(r.code, 2);
+    assert.match(r.err, /KV_REST_API_URL and KV_REST_API_TOKEN must be set/);
+  });
+
+  test("mark-passed with no email prints usage and exits non-zero", () => {
+    const r = run(["mark-passed"], { KV_REST_API_URL: "http://127.0.0.1:1", KV_REST_API_TOKEN: "x" });
+    assert.equal(r.code, 2);
+    assert.match(r.err, /usage:/);
+  });
+
+  test("an unknown action is rejected, not guessed at", () => {
+    const r = run(["mark-past", "a@b.com"], { KV_REST_API_URL: "http://127.0.0.1:1", KV_REST_API_TOKEN: "x" });
+    assert.notEqual(r.code, 0);
+    assert.match(r.err, /unknown action|usage:/);
+  });
+
+  test("an unknown entitlement is rejected before any read", () => {
+    const r = run(["mark-passed", "a@b.com", "NOT_A_PRODUCT", "--confirm"],
+      { KV_REST_API_URL: "http://127.0.0.1:1", KV_REST_API_TOKEN: "x" });
+    assert.equal(r.code, 2);
+    assert.match(r.err, /unknown entitlement/);
+  });
+
+  test("the usage text documents that --confirm is required for both commands", () => {
+    const src = readFileSync(SCRIPT, "utf8");
+    assert.match(src, /mark-passed\s+<email> \[entitlement\|BOTH\] --confirm/);
+    assert.match(src, /reopen-candidate <email> \[entitlement\|BOTH\] --confirm/);
+  });
+
+  test("neither command can write without --confirm", () => {
+    // Structural: the single write in lifecycleCommand sits after an
+    // unconditional `if (!CONFIRM) ... process.exit(2)`. Asserted on the
+    // source because the alternative is a live Redis round trip.
+    const src = readFileSync(SCRIPT, "utf8");
+    const body = src.slice(src.indexOf("async function lifecycleCommand"),
+                           src.indexOf("async function summary"));
+    const gate = body.indexOf("if (!CONFIRM)");
+    const write = body.indexOf('const args = ["HSET"');
+    assert.notEqual(gate, -1, "the confirmation gate is gone");
+    assert.notEqual(write, -1, "the write moved");
+    assert.equal(gate < write, true, "a write can happen before confirmation");
+  });
+
+  test("THERE IS NO BULK MODE", () => {
+    // V1 policy: pass closure is decided account by account by a human.
+    // A flag that accepts a list, a file or a pattern would turn one
+    // mistake into every customer's mistake.
+    const src = readFileSync(SCRIPT, "utf8");
+    for (const flag of ["--all", "--bulk", "--file", "--everyone", "--pattern"]) {
+      assert.equal(src.includes(flag), false, `${flag} exists — bulk closure is forbidden`);
+    }
+  });
+
+  test("summary is READ-ONLY — it is the only command that needs no email", () => {
+    const src = readFileSync(SCRIPT, "utf8");
+    const body = src.slice(src.indexOf("async function summary"),
+                           src.indexOf("async function main"));
+    for (const write of ["HSET", "HDEL", "DEL ", '"DEL"']) {
+      assert.equal(body.includes(write), false, `summary() can write (${write})`);
     }
   });
 });

@@ -7,23 +7,30 @@
 // THE POINT OF THIS FILE
 // ----------------------
 // From 15 August 2026 a new purchase buys ONE YEAR. Customers who bought
-// before that hold a genuinely perpetual grant and are being honoured.
+// before that hold Candidate-Lifecycle Access: no expiry date, running
+// for their MEO Class I preparation, closable by the Founder once MIW
+// has reliable confirmation that they passed.
 //
-// Both statements are true at once, and that is exactly what makes the
-// copy hard: the word "lifetime" is a lie on a page inviting a purchase
-// today, and the plain truth on a page describing what an existing
-// customer already holds. For a week after the term shipped, the trial
-// page, the pay page and the homepage all still said "lifetime access"
-// beside a ₹1,500 buy button.
+// Both statements are true at once, and that is what makes the copy
+// hard: "lifetime" is a lie on a page inviting a purchase today, AND an
+// over-promise even to the earlier cohort, whose access was never sold
+// as until-death. For a week after the term shipped, the trial page, the
+// pay page and the homepage all still said "lifetime access" beside a
+// ₹1,500 buy button.
 //
 // SO THIS IS NOT A BANNED-WORD TEST.
 //
-// A blanket ban on "lifetime" would delete the one honest use of it and
-// would fire on the engineering corpus, where "the catalyst's lifetime"
-// is ordinary technical prose. Instead every occurrence on a commercial
-// surface must be JUSTIFIED by something near it — a perpetual gate, or
-// an explicit statement of who it applies to. An unjustified occurrence
-// is a defect and fails.
+// A blanket ban on "lifetime" would fire on the engineering corpus,
+// where "the catalyst's lifetime" is ordinary technical prose, and on
+// the Terms clause that has to NAME the old wording in order to define
+// it. Instead every occurrence on a commercial surface must be
+// JUSTIFIED by something near it. An unjustified occurrence is a defect
+// and fails.
+//
+// It also guards the ₹899/month plan that was cancelled on 16 August
+// 2026 before going live. Removing an announcement is easy; keeping it
+// removed is what a test is for, because a disabled card, a hidden div
+// and a "coming soon" comment all still ship the promise.
 // =============================================================
 
 import { test, describe } from "node:test";
@@ -142,42 +149,106 @@ describe("the current offer is stated, not merely implied", () => {
   });
 });
 
-describe("legacy customers keep what they bought", () => {
-  test("the pay page's lifetime wording is gated on server-reported perpetual", () => {
+describe("the cancelled ₹899/month plan is gone from every current surface", () => {
+  // Not just absent from the rendered page — absent from the FILE. A
+  // display:none card, a disabled button and an HTML comment reading
+  // "₹899/month planned" are all still shipped to anyone who reads the
+  // source, and all three were plausible ways to "remove" this card.
+  const KILLED = [
+    "₹899 <span>/ month</span>",
+    "899 / month",
+    "899/month",
+    "Moving to a bigger platform",
+    "From 1 September",
+    "Details coming 1 September",
+    "monthly subscription",
+    "new signups from September",
+  ];
+  const CURRENT_SURFACES = [
+    "SQ/index.html", "SQ/pay.html", "SQ/trial.html", "index.html", "terms.html",
+  ];
+
+  for (const path of CURRENT_SURFACES) {
+    test(`${path} carries no trace of the abandoned monthly plan`, () => {
+      const html = read(path);
+      const found = KILLED.filter((k) => occurrences(html, k).length > 0);
+      assert.deepEqual(found, [], `${path} still ships: ${found.join(", ")}`);
+    });
+  }
+
+  test("the storefront advertises no recurring charge at all", () => {
+    const html = read("SQ/index.html");
+    assert.doesNotMatch(html, /\/\s*month/i);
+    assert.doesNotMatch(html, /per month/i);
+  });
+
+  test("POSITIVE CONTROL: the monthly-plan detector can be seen to fire", () => {
+    const fake = '<div class="tier-price">₹899 <span>/ month</span></div>';
+    assert.equal(KILLED.some((k) => occurrences(fake, k).length > 0), true);
+  });
+});
+
+describe("legacy members hold Candidate-Lifecycle Access, not until-death access", () => {
+  test("the pay page's legacy wording is gated on server-reported perpetual", () => {
     const html = read("SQ/pay.html");
-    const hits = occurrences(html, "Lifetime access — yours from the original purchase");
+    const hits = occurrences(html, "Candidate-Lifecycle Access — your original access remains active.");
     assert.equal(hits.length, 1, "the legacy line should exist exactly once");
 
     // Prove the gate, not just the proximity: the branch condition must
     // be the perpetual flag, and it must sit between the `if` and the text.
-    const before = html.slice(Math.max(0, hits[0] - 400), hits[0]);
+    const before = html.slice(Math.max(0, hits[0] - 600), hits[0]);
     assert.match(before, /if\s*\(a\.perpetual\)/);
   });
 
-  test("a dated customer is shown a date, never a lifetime promise", () => {
+  test("the internal word PERPETUAL never reaches a customer's eyes", () => {
+    // It is the stored SHAPE, not the commercial term. Rendering it would
+    // both confuse and over-promise. Comments are stripped before the
+    // check because the file must be free to explain itself.
+    const rendered = read("SQ/pay.html")
+      .replace(/\/\*[\s\S]*?\*\//g, "")
+      .replace(/^\s*\/\/.*$/gm, "");
+    for (const word of ["Perpetual access", "PERPETUAL access", "Lifetime access"]) {
+      assert.equal(occurrences(rendered, word).length, 0, `pay.html renders "${word}"`);
+    }
+  });
+
+  test("a dated customer is shown a date, never an unbounded promise", () => {
     const html = read("SQ/pay.html");
     assert.match(html, /a\.expires[\s\S]{0,200}Access until/);
   });
 
-  test("the storefront's grandfathering line names who it applies to", () => {
-    const html = read("SQ/index.html");
-    // The promise itself must survive — it is real and must not be
-    // deleted for the sake of removing a word.
-    assert.match(html, /keep their original lifetime access — unaffected/);
-    assert.match(html, /bought before 15 August 2026 keep their original lifetime access/);
+  test("Terms define Candidate-Lifecycle Access and name the old wording once", () => {
+    const terms = read("terms.html");
+    assert.match(terms, /Candidate-Lifecycle Access/);
+    // The old phrase must appear, in quotes, to connect the definition to
+    // what these members were actually told — but only where it is being
+    // defined, never as a live claim.
+    assert.match(terms, /previously described as "lifetime access", is\s+Candidate-Lifecycle Access/);
+    assert.match(terms, /until you pass the MEO Class I examination/);
+    assert.match(terms, /does not mean access for the\s+natural lifetime of the purchaser/);
   });
 
-  test("Terms honour the earlier lifetime offer without redefining it", () => {
+  test("Terms state that closure needs reliable confirmation, not detection", () => {
     const terms = read("terms.html");
-    assert.match(terms, /hold "lifetime access", and we are\s+honouring it/);
-    assert.match(terms, /Those earlier purchases carry no end date/);
+    assert.match(terms, /We do not monitor examination results/);
+    assert.match(terms, /reliable confirmation that a member has passed/);
+    // No claim of continuous monitoring — the system genuinely has none.
+    assert.doesNotMatch(terms, /automatically detect|monitor your progress|track your result/i);
+  });
 
-    // The retroactive reinterpretation is gone. It was published after
-    // those customers bought, contradicted the code (which grants true
-    // perpetuity), and rested on a pass-status mechanism that has never
-    // existed.
-    assert.doesNotMatch(terms, /until you pass the examination/i);
-    assert.doesNotMatch(terms, /not access in perpetuity/i);
+  test("Terms keep inactivity and credential reset out of the entitlement question", () => {
+    const terms = read("terms.html");
+    assert.match(terms, /Not logging in is not passing/);
+    assert.match(terms, /We do not close, suspend or expire accounts\s+for inactivity/);
+    assert.match(terms, /A password reset is a security step,\s+not a decision about your access/);
+  });
+
+  test("Terms no longer promise the earlier cohort an unending grant", () => {
+    const terms = read("terms.html");
+    // "carry no end date" was true of the STORED VALUE and false of the
+    // commercial term. It read as until-death and had to go.
+    assert.doesNotMatch(terms, /carry no end date/i);
+    assert.doesNotMatch(terms, /access does not stop when you pass/i);
   });
 });
 
@@ -200,7 +271,8 @@ describe("Terms describe only mechanisms that exist", () => {
 
   test("the one-year term and its start date are stated", () => {
     const terms = read("terms.html");
-    assert.match(terms, /on or after 15 August 2026 provide one year of access/);
+    assert.match(terms, /Purchases made on or after 15 August 2026 — one year/);
+    assert.match(terms, /These provide one year of access<\/strong>, running\s+from the date of purchase/);
   });
 
   test("no dormancy mechanism was built to match the removed clause", () => {
