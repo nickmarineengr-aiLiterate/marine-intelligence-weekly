@@ -188,6 +188,81 @@ describe("the cancelled ₹899/month plan is gone from every current surface", (
   });
 });
 
+// -------------------------------------------------------------
+// THE RETIRED ₹899 FOUNDERS SKU
+//
+// This is a different ₹899 from the one above. That one was a cancelled
+// MONTHLY plan that never went live; this was the real ONE-TIME launch
+// tier, sold to real customers, withdrawn from the storefront when the
+// window closed — and left in the server catalogue, where it stayed
+// purchasable by anyone who named it directly.
+//
+// Which is why the checks below are aimed at the CATALOGUE first and the
+// HTML second. The card had already been deleted from the storefront on
+// 16 August 2026 and the SKU was still sellable; a test that only read
+// the HTML would have passed throughout, and that is exactly the false
+// assurance this block exists to prevent.
+//
+// NOTE: there is deliberately no blanket ban on the number 899. It is a
+// legitimate value in the editorial archive (issue pages, articles) and
+// in the historical catalogue entry itself. Only SELLABILITY and a
+// CURRENT OFFER are defects.
+// -------------------------------------------------------------
+describe("the retired one-time ₹899 Founders SKU cannot be sold", () => {
+  const RETIRED_TIER = { product: "ORAL_QB_NOTES", tier: "founders" };
+
+  test("the catalogue marks the Founders tier non-sellable", async () => {
+    const { PRODUCTS } = await import("../../api/_lib/products.js");
+    const founders = PRODUCTS.ORAL_QB_NOTES.tiers.founders;
+    assert.ok(founders, "historical metadata must be retained for fulfilment");
+    assert.equal(founders.sellable, false, "the Founders tier is sellable again");
+  });
+
+  test("no sellable tier is priced at the retired ₹899", async () => {
+    const { PRODUCTS } = await import("../../api/_lib/products.js");
+    const offenders = [];
+    for (const [productId, product] of Object.entries(PRODUCTS)) {
+      for (const [tierName, tierDef] of Object.entries(product.tiers || {})) {
+        if (tierDef.sellable !== false && tierDef.amount === 89900) {
+          offenders.push(`${productId}/${tierName}`);
+        }
+      }
+    }
+    assert.deepEqual(offenders, [], `₹899 is sellable via: ${offenders.join(", ")}`);
+  });
+
+  test("order creation refuses the retired tier", async () => {
+    const { resolvePurchase, PurchaseError } = await import("../../api/_lib/products.js");
+    assert.throws(() => resolvePurchase(RETIRED_TIER), PurchaseError);
+    assert.throws(() => resolvePurchase({ tier: "founders" }), PurchaseError);
+  });
+
+  test("the storefront advertises no Founders offer", () => {
+    // Context-aware: an offer is the PRICE next to the NAME, or a control
+    // that would start a Founders checkout. The Terms clause naming the
+    // tier as a historical cohort is not an offer and is not matched.
+    const OFFERS = [
+      "Get Founders Access",
+      "Founders Access — ₹899",
+      "₹899",
+      "btn-founders",
+      "pay-btn-founders",
+    ];
+    for (const path of ["SQ/index.html", "SQ/pay.html", "SQ/trial.html", "index.html"]) {
+      const html = read(path);
+      const found = OFFERS.filter((o) => occurrences(html, o).length > 0);
+      assert.deepEqual(found, [], `${path} still offers the retired SKU: ${found.join(", ")}`);
+    }
+  });
+
+  test("POSITIVE CONTROL: the storefront detector can be seen to fire", () => {
+    const fake = '<button id="btn-founders">Get Founders Access — ₹899</button>';
+    const hits = ["Get Founders Access", "₹899", "btn-founders"]
+      .filter((o) => occurrences(fake, o).length > 0);
+    assert.equal(hits.length, 3, "the detector is inert");
+  });
+});
+
 describe("legacy members hold Candidate-Lifecycle Access, not until-death access", () => {
   test("the pay page's legacy wording is gated on server-reported perpetual", () => {
     const html = read("SQ/pay.html");

@@ -39,7 +39,6 @@ describe("price authority — the server owns the amount", () => {
 
   test("existing Oral prices are preserved verbatim", () => {
     assert.equal(resolvePurchase({ product: "ORAL_QB_NOTES", tier: "standard" }).amount, 149900);
-    assert.equal(resolvePurchase({ product: "ORAL_QB_NOTES", tier: "founders" }).amount, 89900);
   });
 
   test("a client-supplied amount cannot influence the price", () => {
@@ -52,7 +51,6 @@ describe("price authority — the server owns the amount", () => {
 
   test("legacy storefront tiers still map to the Oral product", () => {
     assert.equal(resolvePurchase({ tier: "standard" }).productId, "ORAL_QB_NOTES");
-    assert.equal(resolvePurchase({ tier: "founders" }).productId, "ORAL_QB_NOTES");
   });
 
   test("unknown products and tiers are refused", () => {
@@ -69,6 +67,106 @@ describe("price authority — the server owns the amount", () => {
     const p = resolvePurchase({ product: "SOLVED_QP" });
     assert.notEqual(p.amount, 149900, "guard would be blind to a ₹1,499 substitution");
     assert.notEqual(p.amount, 1500, "₹1,500 must be expressed in paise, not rupees");
+  });
+});
+
+// -------------------------------------------------------------
+// 1b. RETIRED TIERS
+//
+// The ₹899 Founders tier left the storefront when the launch window
+// closed, but it stayed in the catalogue — and the catalogue, not the
+// storefront, is what create-order asks. So the SKU remained BUYABLE by
+// anyone who sent the tier name directly, at ₹600 below the real price.
+//
+// The frontend removal was never a control. There is no version of
+// "the button is gone" that stops a POST.
+// -------------------------------------------------------------
+describe("retired tiers cannot be purchased", () => {
+
+  // Every shape a client can reach the retired SKU by. The last two
+  // matter most: casing and whitespace are the first thing tried once a
+  // plain name is refused, and resolvePurchase normalises both, so they
+  // must land on the same refusal rather than sliding past it.
+  const CRAFTED = [
+    { product: "ORAL_QB_NOTES", tier: "founders" },
+    { tier: "founders" },                                  // legacy shape, no product
+    { product: "ORAL_QB_NOTES", tier: "FOUNDERS" },
+    { product: "ORAL_QB_NOTES", tier: "  Founders  " },
+    { product: "ORAL_QB_NOTES", tier: "founders", amount: 89900 },
+    { product: "ORAL_QB_NOTES", tier: "founders", amount: 1 },
+  ];
+
+  for (const body of CRAFTED) {
+    test(`crafted request is refused: ${JSON.stringify(body)}`, () => {
+      assert.throws(
+        () => resolvePurchase(body),
+        (e) => e instanceof PurchaseError && e.status === 400,
+        "a retired tier must never resolve to a purchase"
+      );
+    });
+  }
+
+  test("the retired tier is never SUBSTITUTED for the standard one", () => {
+    // The failure this exists to catch: deleting the tier instead of
+    // marking it would make the lookup fall through to defaultTier, and
+    // the request would quietly SUCCEED at ₹1,499. A caller asking for a
+    // withdrawn product must be told no, not handed a different one.
+    let resolved = null;
+    try { resolved = resolvePurchase({ tier: "founders" }); } catch { /* expected */ }
+    assert.equal(resolved, null, "founders resolved to a sellable purchase");
+  });
+
+  test("no sellable tier anywhere in the catalogue costs ₹899", () => {
+    // Catches reintroduction under a new name — "launch", "early", etc.
+    for (const [productId, product] of Object.entries(PRODUCTS)) {
+      for (const [tierName, tierDef] of Object.entries(product.tiers || {})) {
+        if (tierDef.sellable === false) continue;
+        assert.notEqual(
+          tierDef.amount, 89900,
+          `${productId}/${tierName} is sellable at the retired ₹899 price`
+        );
+      }
+    }
+  });
+
+  test("the Founders tier is retained as NON-SELLABLE, not deleted", () => {
+    // Deliberately asserts presence. fulfil.js validates a historical
+    // order's Razorpay notes against this entry; if it vanishes, a
+    // replayed webhook for a real ₹899 customer fails unknown_tier.
+    const founders = PRODUCTS.ORAL_QB_NOTES.tiers.founders;
+    assert.ok(founders, "historical Founders metadata must survive retirement");
+    assert.equal(founders.sellable, false);
+    assert.equal(founders.amount, 89900, "the historical amount must stay truthful");
+  });
+
+  test("POSITIVE CONTROL: the guard fires on a re-opened tier", () => {
+    // Prove the refusal is doing work, by removing the flag and showing
+    // the purchase comes straight back at ₹899.
+    const tiers = PRODUCTS.ORAL_QB_NOTES.tiers;
+    const saved = tiers.founders;
+    tiers.founders = { amount: 89900, label: "Founders Access", display: "₹899" };
+    try {
+      const p = resolvePurchase({ product: "ORAL_QB_NOTES", tier: "founders" });
+      assert.equal(p.amount, 89900, "without the flag this test proves nothing");
+    } finally {
+      tiers.founders = saved;
+    }
+    // ...and is refused again the moment it is restored.
+    assert.throws(
+      () => resolvePurchase({ product: "ORAL_QB_NOTES", tier: "founders" }), PurchaseError
+    );
+  });
+
+  test("currently sellable products are UNAFFECTED", () => {
+    const oral = resolvePurchase({ product: "ORAL_QB_NOTES" });
+    assert.equal(oral.amount, 149900);
+    assert.equal(oral.tier, "standard");
+    assert.equal(oral.termDays, 365);
+
+    const written = resolvePurchase({ product: "SOLVED_QP", tier: "standard" });
+    assert.equal(written.amount, 150000);
+    assert.equal(written.tier, "standard");
+    assert.equal(written.termDays, 365);
   });
 });
 
@@ -330,6 +428,35 @@ describe("payment fulfilment — the signature is not the authority", () => {
       () => fulfilPayment({ orderId: "order_TEST1", paymentId: "pay_TEST1", source: "test", deps: h.deps }),
       (e) => e.code === "unknown_product"
     );
+  });
+
+  // -----------------------------------------------------------
+  // RETIREMENT MUST NOT REACH BACKWARDS.
+  //
+  // Retiring the Founders SKU withdraws it from SALE. It does not
+  // withdraw it from HISTORY. This is the test that would have caught
+  // the tempting version of the fix — deleting the tier outright —
+  // because fulfilment resolves a historical order's Razorpay notes
+  // through the same catalogue, and a deleted tier fails unknown_tier
+  // on a real customer's real ₹899 payment.
+  // -----------------------------------------------------------
+  test("a HISTORICAL ₹899 Founders order still fulfils after retirement", async () => {
+    const h = harness({
+      order: goodOrder({
+        amount: 89900,
+        notes: {
+          product: "ORAL_QB_NOTES", tier: "founders",
+          buyer_email: "buyer@example.com", buyer_name: "Test",
+        },
+      }),
+      payment: goodPayment({ amount: 89900 }),
+    });
+    const r = await fulfilPayment({
+      orderId: "order_TEST1", paymentId: "pay_TEST1", source: "webhook", deps: h.deps,
+    });
+    assert.equal(r.status, "granted", "a paid Founders customer must still be served");
+    assert.equal(r.tier, "founders");
+    assert.deepEqual(h.granted[0].ents, ["ORAL_QB_NOTES"]);
   });
 
   test("replay is idempotent — one grant, one email", async () => {
