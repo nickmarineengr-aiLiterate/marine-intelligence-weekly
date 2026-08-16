@@ -60,7 +60,39 @@ export const PRODUCTS = {
     protectedRoots: ["/meoclass1/"],
     tiers: {
       standard: { amount: 149900, label: "Standard Access", display: "₹1,499" },
-      founders: { amount: 89900, label: "Founders Access", display: "₹899" },
+
+      // RETIRED for new purchases, 16 August 2026 (Founder decision).
+      //
+      // The launch tier. It left the storefront when the Founders window
+      // closed, but it stayed HERE — and the storefront is not the gate.
+      // A request naming tier:"founders" reached resolvePurchase, matched
+      // this entry, and bought the ₹1,499 Oral product for ₹899. Editing
+      // one line of browser JavaScript was enough.
+      //
+      // WHY IT IS MARKED RATHER THAN DELETED. Two reasons, both of which
+      // make deletion the more dangerous edit:
+      //
+      //   THE FALLBACK. resolvePurchase treats a tier it cannot find as
+      //     "unspecified" and falls back to defaultTier. Delete this and
+      //     tier:"founders" is not rejected — it is silently SOLD as
+      //     standard. The hole would become an invisible substitution.
+      //
+      //   FULFILMENT READS THIS TOO. fulfil.js looks the tier up here to
+      //     check what Razorpay recorded against what the catalogue says.
+      //     A historical Founders order replayed by a webhook needs this
+      //     entry to exist or it fails closed as unknown_tier, and the
+      //     ₹899 the customer paid is the amount that must still match.
+      //
+      // sellable:false says the one thing that actually needed saying —
+      // this may be honoured, it may not be offered — and the amount is
+      // kept truthful so the historical record stays checkable.
+      founders: {
+        amount: 89900,
+        label: "Founders Access",
+        display: "₹899",
+        sellable: false,
+        retiredOn: "2026-08-16",
+      },
     },
     defaultTier: "standard",
   },
@@ -120,6 +152,13 @@ export const PRODUCTS = {
 // Legacy compatibility: the live storefront posts {tier:"standard"|
 // "founders"} with no product field. Those tiers only ever meant the
 // Oral product, so map them rather than break checkout mid-flight.
+//
+// "founders" is KEPT in this map even though it can no longer be bought.
+// Removing it would make a bare {tier:"founders"} fail as "Unknown
+// product", which is the wrong answer to the wrong question: the product
+// is perfectly well known, it is the TIER that is withdrawn. Leaving the
+// mapping in place routes the request to the retirement check below, so
+// there is exactly one place that refuses a retired tier.
 const LEGACY_TIER_PRODUCT = {
   standard: "ORAL_QB_NOTES",
   founders: "ORAL_QB_NOTES",
@@ -151,6 +190,21 @@ export function resolvePurchase(input = {}) {
   const tier = rawTier && product.tiers[rawTier] ? rawTier : product.defaultTier;
   const tierDef = tier && product.tiers[tier];
   if (!tierDef) throw new PurchaseError("Unsupported tier for product", 400);
+
+  // A retired tier is REFUSED, never quietly swapped for the default.
+  //
+  // This check has to sit after the lookup above rather than replace it.
+  // If a retired tier were simply absent from `tiers`, the line above
+  // would read it as "no tier given" and fall through to defaultTier —
+  // so the request would succeed at the standard price instead of being
+  // rejected, and the caller would never learn the tier is gone.
+  //
+  // The message deliberately says nothing about what the tier was, what
+  // it cost, or when it was withdrawn. A probe should not be able to map
+  // the catalogue by watching which names produce which error.
+  if (tierDef.sellable === false) {
+    throw new PurchaseError("This tier is no longer available", 400);
+  }
 
   return {
     productId: product.id,
