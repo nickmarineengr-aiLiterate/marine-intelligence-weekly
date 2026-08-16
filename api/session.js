@@ -66,7 +66,7 @@ export default async function handler(req, res) {
   // that is the only question every existing caller asks, and changing
   // its shape would silently alter what those callers decide.
   // `access` carries the term alongside it, for surfaces that want to
-  // say "until 14 August 2027" or "lifetime".
+  // say "until 14 August 2027", or name Candidate-Lifecycle Access.
   const [entitlements, access] = await Promise.all([
     getEntitlements(payload.e), getEntitlementDetail(payload.e),
   ]);

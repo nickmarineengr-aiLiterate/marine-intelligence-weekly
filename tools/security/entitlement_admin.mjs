@@ -19,10 +19,38 @@
 //   node tools/security/entitlement_admin.mjs grant  <email> SOLVED_QP --perpetual
 //   node tools/security/entitlement_admin.mjs revoke <email> SOLVED_QP --confirm
 //   node tools/security/entitlement_admin.mjs logout <email>
+//   node tools/security/entitlement_admin.mjs mark-passed      <email> [product] --confirm
+//   node tools/security/entitlement_admin.mjs reopen-candidate <email> [product] --confirm
+//   node tools/security/entitlement_admin.mjs summary
 //
 // revoke touches exactly one field and requires --confirm, because it takes
 // away access somebody may have paid for. logout drops the active session so
 // the next request re-authenticates.
+//
+// ─────────────────────────────────────────────────────────────
+// CANDIDATE-LIFECYCLE CLOSURE (Founder decision, 16 August 2026)
+//
+// Access sold before the one-year term is Candidate-Lifecycle Access:
+// it runs for the member's MEO Class I preparation and the Founder may
+// close it once MIW has RELIABLE CONFIRMATION that they passed.
+//
+// Nothing in this repo detects a pass. There is no cron, no inactivity
+// rule, no results scraping, and no bulk mode — the entire mechanism is
+// one operator naming one account, because the input is a fact only a
+// human can establish. Inactivity is not passing; a member still
+// preparing keeps their access however long they are away.
+//
+// mark-passed can ONLY move a lifecycle grant to closed. A dated
+// one-year grant, an absent grant and an already-closed grant are left
+// untouched and reported as such. That is what stops closing somebody's
+// legacy Oral access from destroying the Written year they paid for
+// separately — the two are different fields holding different shapes,
+// and only one shape is eligible.
+//
+// The closure keeps the prior value, so reopen-candidate restores what
+// was actually held rather than minting a fresh perpetual grant, and a
+// closed member stays distinguishable from someone who never bought.
+// ─────────────────────────────────────────────────────────────
 //
 // ─────────────────────────────────────────────────────────────
 // WHY THIS TOOL NO LONGER WRITES "1" BY DEFAULT
@@ -59,10 +87,14 @@ import {
   PERPETUAL,
   grantState,
   extendedGrantValue,
+  markPassedValue,
+  reopenedGrantValue,
+  grantAllowsAccess,
   GRANT_NONE,
   GRANT_PERPETUAL,
   GRANT_ACTIVE,
   GRANT_EXPIRED,
+  GRANT_PASSED_CLOSED,
 } from "../../api/_lib/grants.js";
 import { DEFAULT_TERM_DAYS } from "../../api/_lib/products.js";
 import { pathToFileURL } from "node:url";
@@ -75,6 +107,22 @@ const USAGE = [
   "  entitlement_admin.mjs grant  <email> <ORAL_QB_NOTES|SOLVED_QP|BOTH> [term]",
   "  entitlement_admin.mjs revoke <email> <entitlement> --confirm",
   "  entitlement_admin.mjs logout <email>",
+  "  entitlement_admin.mjs mark-passed      <email> [entitlement|BOTH] --confirm",
+  "  entitlement_admin.mjs reopen-candidate <email> [entitlement|BOTH] --confirm",
+  "  entitlement_admin.mjs summary",
+  "",
+  "mark-passed records that the member passed MEO Class I and closes their",
+  "Candidate-Lifecycle access. With no entitlement named it applies to EVERY",
+  "lifecycle grant on the account. It never touches a dated one-year grant,",
+  "so a separately-bought Written year survives closing a legacy Oral one.",
+  "Use it only on reliable confirmation — the member told you, or sent",
+  "evidence. Never infer it from silence or inactivity.",
+  "  --remove-credential  also delete the password, so the account cannot be",
+  "                       signed into at all. REFUSED while any other valid",
+  "                       entitlement remains on the same email.",
+  "",
+  "reopen-candidate undoes a closure, restoring the exact grant that was held",
+  "before it. Use it when somebody was marked passed in error.",
   "",
   "grant term (choose one; default is the catalogue term, " + DEFAULT_TERM_DAYS + " days):",
   "  --days <n>          n days of access, counted from NOW",
@@ -107,7 +155,13 @@ export function describeGrant(raw, nowSeconds) {
     case GRANT_NONE:
       return "none";
     case GRANT_PERPETUAL:
-      return "PERPETUAL (grandfathered — never expires)";
+      return "Candidate-Lifecycle / ACTIVE (no expiry date; close with mark-passed)";
+    case GRANT_PASSED_CLOSED: {
+      const when = s.closedAt
+        ? new Date(s.closedAt * 1000).toISOString().slice(0, 10)
+        : "date unrecorded";
+      return `Candidate-Lifecycle / PASSED_CLOSED (closed ${when}; reopen-candidate restores it)`;
+    }
     case GRANT_ACTIVE: {
       const days = Math.floor((s.expires - nowSeconds) / 86400);
       return `ACTIVE until ${new Date(s.expires * 1000).toISOString().slice(0, 10)}` +
@@ -174,8 +228,90 @@ export function grantValueToWrite(existing, term, nowMs) {
   return extendedGrantValue(existing, term.termDays, nowMs);
 }
 
+/**
+ * What mark-passed would do to each named entitlement, decided BEFORE
+ * anything is written.
+ *
+ * Every entry carries an explicit action, including the ones left alone,
+ * so the operator sees the whole account rather than only the part that
+ * changed. Silence about a skipped product is how somebody concludes
+ * their Written year was closed too.
+ *
+ * @param {object} held   stored values, keyed by entitlement
+ * @param {string[]} list entitlements to consider
+ * @returns {Array<{entitlement, action, reason, value}>}
+ */
+export function planMarkPassed(held, list, nowMs) {
+  return list.map((e) => {
+    const raw = held[e];
+    const value = markPassedValue(raw, nowMs);
+    if (value) {
+      return { entitlement: e, action: "close", reason: "Candidate-Lifecycle access closed", value };
+    }
+    const status = grantState(raw, Math.floor(nowMs / 1000)).status;
+    const reason =
+      status === GRANT_PASSED_CLOSED ? "already closed — no change" :
+      status === GRANT_ACTIVE        ? "dated one-year access — UNTOUCHED, it was paid for separately" :
+      status === GRANT_EXPIRED       ? "dated access already ended — nothing to close" :
+                                       "no grant on this account — nothing to close";
+    return { entitlement: e, action: "skip", reason, value: null };
+  });
+}
+
+/** The mirror of planMarkPassed: what reopen-candidate would restore. */
+export function planReopen(held, list) {
+  return list.map((e) => {
+    const raw = held[e];
+    const value = reopenedGrantValue(raw);
+    if (value) {
+      return { entitlement: e, action: "reopen", reason: "restored to the grant held before closure", value };
+    }
+    return {
+      entitlement: e,
+      action: "skip",
+      reason: "not closed — reopen-candidate only undoes a mark-passed",
+      value: null,
+    };
+  });
+}
+
+/**
+ * Roll a set of stored account records into the four counts the Founder
+ * asked for. Pure, so the arithmetic is provable without Redis.
+ *
+ * Counts ENTITLEMENTS, not people: one email holding a closed legacy
+ * Oral grant and a live Written year is one of each, which is the honest
+ * answer. An account is named in `accounts` once regardless.
+ *
+ * @param {Array<{email, held}>} records
+ */
+export function summariseCounts(records, nowSeconds, known) {
+  const counts = {
+    accounts: records.length,
+    lifecycleActive: 0,
+    lifecyclePassedClosed: 0,
+    fixedTermActive: 0,
+    fixedTermExpired: 0,
+    corrupt: 0,
+  };
+  for (const { held } of records) {
+    for (const e of known) {
+      const s = grantState(held[e], nowSeconds);
+      if (s.status === GRANT_PERPETUAL) counts.lifecycleActive++;
+      else if (s.status === GRANT_PASSED_CLOSED) counts.lifecyclePassedClosed++;
+      else if (s.status === GRANT_ACTIVE) counts.fixedTermActive++;
+      else if (s.status === GRANT_EXPIRED) {
+        if (s.expires) counts.fixedTermExpired++;
+        else if (held[e] !== undefined && held[e] !== null) counts.corrupt++;
+      }
+    }
+  }
+  return counts;
+}
+
 const [, , action, emailArg, entArg] = process.argv;
 const CONFIRM = process.argv.includes("--confirm");
+const REMOVE_CREDENTIAL = process.argv.includes("--remove-credential");
 
 const URL_BASE = process.env.KV_REST_API_URL;
 const TOKEN = process.env.KV_REST_API_TOKEN;
@@ -192,18 +328,44 @@ async function cmd(args) {
   return r.json();
 }
 
+/**
+ * Refuse to act, with a non-zero exit status.
+ *
+ * process.exitCode, NOT process.exit(). Calling process.exit() here
+ * aborts the process while the HTTP connection pool from the reads
+ * above is still tearing down, and on Windows that trips a libuv
+ * assertion: the operator sees a crash and a nonsense exit status
+ * (0xC0000409) instead of a clean "2". Anything wrapping this tool in a
+ * script would read that as an unrecognised failure rather than "not
+ * confirmed". Setting the code and returning lets the runtime close its
+ * handles and exit properly — measured at ~300ms, no hang.
+ *
+ * Refusals that happen BEFORE any network call are still process.exit(),
+ * because there is nothing outstanding for them to race.
+ */
+function refuse(message) {
+  console.error(message);
+  process.exitCode = 2;
+}
+
 function mask(e) {
   const [u, d] = String(e).split("@");
   return d ? `${u.slice(0, 2)}***@${d}` : "***";
 }
 
-async function show() {
-  const res = await cmd(["HGETALL", `miw:ent:${email}`]);
+/** The stored entitlement values for one account, Upstash shape absorbed. */
+async function readHeld(addr) {
+  const res = await cmd(["HGETALL", `miw:ent:${addr}`]);
   const raw = res.result;
   const held = {};
   if (Array.isArray(raw)) {
     for (let i = 0; i + 1 < raw.length; i += 2) held[raw[i]] = raw[i + 1];
   } else if (raw && typeof raw === "object") Object.assign(held, raw);
+  return held;
+}
+
+async function show() {
+  const held = await readHeld(email);
 
   const acct = await cmd(["EXISTS", `miw:user:${email}`]);
   // Up to TWO live sessions per account (mobile + laptop).
@@ -217,6 +379,161 @@ async function show() {
   for (const k of KNOWN) {
     console.log(`  ${k.padEnd(15)} ${describeGrant(held[k], now)}`);
   }
+
+  // One line naming the member's standing, because the per-product lines
+  // answer "what may they read" and the Founder also needs "who is this
+  // on my books" — an account with a closed lifecycle grant is a former
+  // customer, not a stranger, and the two must not look alike.
+  const states = KNOWN.map((k) => grantState(held[k], now).status);
+  const lifecycle =
+    states.includes(GRANT_PERPETUAL)     ? "ACTIVE_CANDIDATE (Candidate-Lifecycle access running)" :
+    states.includes(GRANT_PASSED_CLOSED) ? "PASSED_CLOSED (recorded as passed; access closed)" :
+    states.some((s) => s !== GRANT_NONE) ? "fixed-term customer — no Candidate-Lifecycle grant" :
+                                           "no entitlement on record";
+  console.log(`lifecycle : ${lifecycle}`);
+  return held;
+}
+
+/**
+ * mark-passed / reopen-candidate.
+ *
+ * Both follow the same shape on purpose: read, PLAN, show the operator
+ * the whole account, and write only on --confirm. The plan is printed
+ * even when refusing, so the confirmation step is where the operator
+ * discovers they named the wrong person — not afterwards.
+ */
+async function lifecycleCommand(action) {
+  const passing = action === "mark-passed";
+
+  // The entitlement argument is optional here, unlike grant/revoke. With
+  // none given the command applies to every lifecycle grant on the
+  // account, which is the ordinary case: a member who passed has passed,
+  // whatever they bought. A leading "--" is a flag, not a product.
+  const named = entArg && !entArg.startsWith("--") ? entArg : "BOTH";
+  const list = named === "BOTH" ? KNOWN : [named];
+  for (const e of list) {
+    if (!KNOWN.includes(e)) {
+      console.error(`unknown entitlement: ${e}. Known: ${KNOWN.join(", ")}, BOTH`);
+      process.exit(2);
+    }
+  }
+
+  const held = await readHeld(email);
+  const now = Date.now();
+  const nowSeconds = Math.floor(now / 1000);
+
+  // An account with no credential and no grant is almost always a typo.
+  // Refusing outright beats writing a closure onto an address nobody
+  // holds, where it would sit unnoticed until the real member complained.
+  const acct = await cmd(["EXISTS", `miw:user:${email}`]);
+  const anyGrant = KNOWN.some((k) => held[k] !== undefined && held[k] !== null);
+  if (!acct.result && !anyGrant) {
+    return refuse(
+      `no account and no entitlement exist for ${mask(email)}.\n` +
+      "Nothing was changed. Check the address against the original purchase."
+    );
+  }
+
+  const plan = passing ? planMarkPassed(held, list, now) : planReopen(held, list);
+
+  console.log(`account   : ${mask(email)}`);
+  for (const k of KNOWN) console.log(`  ${k.padEnd(15)} ${describeGrant(held[k], nowSeconds)}`);
+  console.log(action === "mark-passed" ? "\nmark-passed would:" : "\nreopen-candidate would:");
+  for (const p of plan) {
+    console.log(`  ${p.entitlement.padEnd(15)} ${p.action === "skip" ? "no change" : p.action.toUpperCase()} — ${p.reason}`);
+  }
+
+  const changes = plan.filter((p) => p.action !== "skip");
+  if (changes.length === 0) {
+    console.log(
+      `\nnothing to do — no ${passing ? "Candidate-Lifecycle grant to close" : "closed grant to restore"} here.`
+    );
+    return;
+  }
+
+  if (!CONFIRM) {
+    return refuse("\nNothing was changed. Re-run with --confirm to apply.");
+  }
+
+  const args = ["HSET", `miw:ent:${email}`];
+  for (const p of changes) args.push(p.entitlement, p.value);
+  await cmd(args);
+
+  if (passing) {
+    // Sign every device out. The edge gate re-reads the entitlement on
+    // each request so a live session would lose access anyway, but a
+    // closure the member can still see a signed-in page behind is a
+    // support call waiting to happen. This costs a login to anyone who
+    // still holds a valid dated product, and costs them nothing else.
+    await cmd(["DEL", `miw:sessions:${email}`]);
+    await cmd(["DEL", `miw:active_session:${email}`]);
+    console.log("\nsessions cleared.");
+
+    if (REMOVE_CREDENTIAL) {
+      // The password is ACCOUNT identity; entitlements are per product.
+      // Deleting it while another product is still valid would lock a
+      // paying customer out of something this command never touched.
+      const after = await readHeld(email);
+      const stillValid = KNOWN.filter((k) => grantAllowsAccess(after[k], Math.floor(Date.now() / 1000)));
+      if (stillValid.length) {
+        console.error(
+          `credential NOT removed: ${mask(email)} still holds valid access to ` +
+          `${stillValid.join(" + ")}.\nThe lifecycle closure above stands. Re-run ` +
+          "--remove-credential only once nothing valid remains."
+        );
+      } else {
+        await cmd(["DEL", `miw:user:${email}`]);
+        console.log("credential removed — this account can no longer sign in.");
+      }
+    }
+  }
+
+  console.log("");
+  await show();
+}
+
+/**
+ * Deterministic counts across every account on record.
+ *
+ * SCAN, not KEYS: KEYS blocks the server for the whole sweep, and even
+ * at ~100 accounts that is a habit worth not having. The cursor loop is
+ * bounded so a runaway cannot spin forever, and if the bound is reached
+ * the output SAYS the figures are partial rather than quietly under-
+ * reporting — a count the Founder cannot trust is worse than none.
+ */
+async function summary() {
+  const PATTERN = "miw:ent:*";
+  const MAX_PAGES = 500;
+
+  let cursor = "0";
+  let pages = 0;
+  const keys = new Set();
+  do {
+    const res = await cmd(["SCAN", cursor, "MATCH", PATTERN, "COUNT", "200"]);
+    const out = res.result;
+    if (!Array.isArray(out) || out.length < 2) break;
+    cursor = String(out[0]);
+    for (const k of out[1] || []) keys.add(String(k));
+    pages++;
+  } while (cursor !== "0" && pages < MAX_PAGES);
+
+  const records = [];
+  for (const key of keys) {
+    records.push({ email: key.slice("miw:ent:".length), held: await readHeld(key.slice("miw:ent:".length)) });
+  }
+
+  const c = summariseCounts(records, Math.floor(Date.now() / 1000), KNOWN);
+  console.log(`accounts with an entitlement record : ${c.accounts}`);
+  console.log("");
+  console.log("counted per product, so one account may appear in two rows:");
+  console.log(`  Candidate-Lifecycle ACTIVE        : ${c.lifecycleActive}`);
+  console.log(`  Candidate-Lifecycle PASSED_CLOSED : ${c.lifecyclePassedClosed}`);
+  console.log(`  Fixed-term ACTIVE                 : ${c.fixedTermActive}`);
+  console.log(`  Fixed-term EXPIRED                : ${c.fixedTermExpired}`);
+  if (c.corrupt) console.log(`  UNREADABLE (denied — investigate)  : ${c.corrupt}`);
+  if (cursor !== "0") {
+    console.log("\nWARNING: the scan hit its page limit. These figures are PARTIAL.");
+  }
 }
 
 async function main() {
@@ -224,12 +541,21 @@ async function main() {
     console.error("KV_REST_API_URL and KV_REST_API_TOKEN must be set.");
     process.exit(2);
   }
+  if (action === "summary") return summary();
+
   if (!action || !emailArg) {
     console.error(USAGE);
     process.exit(2);
   }
 
-  if (action === "show") return show();
+  if (action === "show") {
+    await show();
+    return;
+  }
+
+  if (action === "mark-passed" || action === "reopen-candidate") {
+    return lifecycleCommand(action);
+  }
 
   if (action === "logout") {
     // Signs out EVERY device for this account. The legacy single-session

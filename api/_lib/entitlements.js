@@ -8,9 +8,13 @@
 //       field ORAL_QB_NOTES = "1" | "<expiry epoch seconds>"
 //       field SOLVED_QP     = "1" | "<expiry epoch seconds>"
 //
-//   "1" means PERPETUAL and is what every customer who bought before
-//   August 2026 holds. Purchases from then on carry a term and store an
-//   expiry instead. api/_lib/grants.js owns the reading of that value,
+//       field may also hold "passed:<closedAt>:<prior>" once the Founder
+//       records that the member passed MEO Class I.
+//
+//   "1" means NO CLOCK-BASED EXPIRY and is what every customer who bought
+//   before August 2026 holds; commercially that is Candidate-Lifecycle
+//   Access. Purchases from then on carry a term and store an expiry
+//   instead. api/_lib/grants.js owns the reading of that value,
 //   and its trap note is required reading: Number("1") is 1970, so an
 //   arithmetic-first comparison would expire the entire grandfathered
 //   population in one deploy.
