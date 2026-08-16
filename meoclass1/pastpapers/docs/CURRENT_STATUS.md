@@ -1,7 +1,12 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-15, after the **22 holdings-denial flags were adjudicated and closed** (§1c) —
+Last updated: 2026-08-16, after the **Disney candidate-notes correction and enrichment cycle was
+closed** (`history/SESSION_HISTORY.md` §36) — the reusable decision workflow captured as
+`tools/pastpapers/SKILL.md`, remaining holdings items registered at §7t, and the true-source items
+at `docs/TRUE_SOURCE_PRIORITY_BACKLOG.md` §8. **No canonical answer changed in that closure step;
+the product stands unmoved at 39 papers / 351 questions.**
+Previously: 2026-08-15, after the **22 holdings-denial flags were adjudicated and closed** (§1c) —
 on top of the **pre-launch consolidation** — deploy-surface minimisation, H1 and P1 hygiene
 integrated, full access-matrix regression (see §1b and `history/SESSION_HISTORY.md` §35) — itself on
 top of **QP2311 (November 2023) closing the 2023 year** (§40).
@@ -1905,6 +1910,41 @@ branding, with every detector controlled against the review build.
 
 **`solvedQP/QP2507.html` was untracked for the fifth consecutive paper** and was staged
 explicitly. `git add -u` would have missed it again.
+
+---
+
+## 7t. OPEN — source-holdings statements not yet audited under the holdings discipline
+
+**Registered 2026-08-16 at the close of the Disney candidate-notes cycle (`history/SESSION_HISTORY.md`
+§36). Not fixed. Neither item is known to be wrong.**
+
+The QP2606-Q3 correction established a discipline that had not previously been applied
+consistently: **possession, readability, verification and reproduction rights are four different
+claims** and must not be collapsed into one phrase. *"MIW holds no licensed copy"* was being used
+where the accurate statement was *"the primary text has not been verified"* — and in that instance
+the statement had also gone **stale**, because the CMI's published 2016 text was in fact read and
+verified word for word on 2026-08-15/16, after the statement was written on 2026-08-09.
+
+Two populations remain unexamined.
+
+**A — `docs/QP2606_TRUE_SOURCE_DEMAND_MAP.md`, around line 61.** A materially equivalent older
+statement, *"MIW holds no licensed copy of either edition"*, survives in the Q3 row of this planning
+document. The canonical spec and its verification companion were corrected; this hand-authored
+planning artefact was deliberately **not** swept with them, because it is a point-in-time authoring
+record rather than a generated copy governed by the canonical target. Classification: **LOW-RISK
+DOCUMENTATION CONSISTENCY** — it reaches no candidate-facing surface. Future action: compare against
+current holdings and correct only if it is still asserted as present-tense fact.
+
+**B — house "no licensed copy" statements on other instruments.** The same construction appears for
+the **Hong Kong Convention**, **ISO 8217** and the **IMSBC Code**, recorded as a standing house
+position. **These were not audited and are not assumed to be wrong** — for ISO 8217 in particular a
+licensing limitation is entirely plausible and may be exactly right. Classification:
+**SOURCE-PROVENANCE REVIEW**. Future task: restate each using the four-way distinction —
+`SOURCE_HELD` / `PRIMARY_TEXT_VERIFIED` / `SECONDARY_REPRODUCTION_VERIFIED` /
+`REPRODUCTION_RIGHTS_ESTABLISHED` — so each says exactly what is known.
+
+The discipline itself is now written down in `tools/pastpapers/SKILL.md` §5.6, so new work will not
+reintroduce the conflation while these two populations wait.
 
 ---
 

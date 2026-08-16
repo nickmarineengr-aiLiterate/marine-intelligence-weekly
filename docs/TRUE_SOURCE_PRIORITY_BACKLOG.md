@@ -290,6 +290,53 @@ the corpus, and it pairs with P1.
 
 ---
 
+## 8. Package integrity and rights — registered 2026-08-16
+
+Two items that are **not build work**. Both came out of the York-Antwerp Rule XXI
+repair (`nixonvantony/miw-true-source` @ `44e6975`) and were deliberately left
+outside its scope. Neither blocks any Tier A or Tier B package above.
+
+### C — unsupported relationship-object metrics in other packages
+
+`general-average/CURRENT_STATUS.md` was recomputed from its own files on
+2026-08-16, after it was found claiming *"Rule objects: 24"*, *"Relationship
+objects: 8"*, *"Total structured objects: 33"* and *"Verified: all"* — none of
+which the tree ever held.
+
+The same pattern is visible elsewhere and was **not** corrected, being out of
+scope: `casualty/CURRENT_STATUS.md` claims **10** relationship objects and
+`contract-of-carriage/CURRENT_STATUS.md` claims **12**, while **no
+relationship-object file exists in any package**. The remaining packages were not
+checked at all.
+
+**Classification:** TRUE_SOURCE PACKAGE HONESTY AUDIT.
+**Priority:** below active written-QP work — *unless* a metric is being relied on
+as a completeness or validation claim, in which case it becomes a correctness
+issue rather than a tidiness one. The general-average precedent is the model:
+recount from the files, state what is actually held, and record what is missing
+rather than quietly deleting the claim.
+
+### D — verbatim source wording in earlier public Git history
+
+`miw-true-source` is a **public** repository. The public-derived / private-evidence
+migration (2026-08-15) closed forward exposure — the current tree holds
+MIW-authored propositions and no substantial source wording — but commits made
+before it remain publicly reachable and still contain verbatim CMI text.
+`PRIVATE_EVIDENCE_BOUNDARY.md` records this explicitly as a known limitation and
+expressly leaves it open.
+
+**Classification:** FOUNDER / GOVERNANCE / RIGHTS DECISION. Not a content
+correction, and not an agent decision.
+
+**Constraints for whoever picks this up:** do not rewrite Git history, do not
+force-push, do not delete evidence. The prior local implementation is preserved on
+the local branch `archive/yar-rule-xxi-pre-private-boundary` (`ec23862`), which was
+never pushed and is **not** in `main`'s ancestry. The decision to be taken is
+whether any remediation is legally or operationally necessary at all — leaving it
+is a legitimate outcome.
+
+---
+
 ## 7. 2023 reuse signal — QP2301 (read-only)
 
 QP2301 was inspected via `git show` on `origin/pastpapers/qp2301-founder-review`

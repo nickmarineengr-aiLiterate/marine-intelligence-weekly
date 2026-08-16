@@ -5631,3 +5631,57 @@ entitlement code byte-identical.
 **Recommended next laptop task: the 22 holdings-denial flags** (unchanged from §34) — the largest
 remaining factual-correctness item. Do NOT start marketing, Dual-Time, Study Compass or the
 review-tree retirement until the desktop's H2 measurement lands.
+
+## §36. Disney candidate-notes correction and enrichment cycle — CLOSED — 2026-08-16 (laptop)
+
+Not a paper review. A cycle that began with a candidate's handwritten notes and ended three
+repositories deep, in the true-source layer that sits above the answers.
+
+**Original input.** A set of handwritten MEO Class I notes supplied by a candidate (Disney), offered
+as study material rather than as authority.
+
+**What the cycle produced.** A corrected structured study edition of those notes with its
+corrections log; an enrichment audit comparing them against solvedQP; a Founder closure audit of
+that comparison; the approved solvedQP corrections and enrichments arising from it — including the
+York-Antwerp **Rule XXI** interest correction and the constitutional limb widened by the April
+sitting, with their cross-links; the **true-source Rule XXI repair** in
+`nixonvantony/miw-true-source`; the **QP2606-Q3 source-holdings correction**; and validation and
+push of all of it.
+
+**The chain that mattered.** The candidate notes were never authority — they were a discovery lead.
+Following one of those leads produced a verified regulatory correction downstream, which then
+exposed that the source layer above it did not hold Rule XXI at all. Repairing that exposed, in
+turn, that the package's own status block had been claiming object counts the tree never held. Each
+step was evidenced before the next was taken, and none of the three layers was allowed to stay more
+authoritative than the one above it.
+
+**Four lessons were kept, not just applied.** They are now written into
+`tools/pastpapers/SKILL.md` rather than living in a session record nobody re-reads:
+
+- **A recurrence hit is not proof two questions ask the same thing.** Two same-numbered questions
+  looked equivalent until the recurrence metadata showed one sitting had deliberately widened a
+  limb. Metadata is now read *before* prose.
+- **A gap and an error produce the same wrong answer.** Rule XXI was not wrong in the corpus; it was
+  *absent*, and the silence was filled from general literature that predates the amendment.
+- **Possession, readability, verification and reproduction rights are four different claims.**
+  Conflating them is how *"no licensed copy"* came to mean *"not verified"*.
+- **Accuracy governs, not a word-count.** An intermediate draft degraded `first banking day` to
+  reduce textual overlap — a date basis an adjustment turns on, weakened for no rights benefit. The
+  overlap metric is a review trigger; it is not the definition of correctness.
+
+**Carried, registered, not fixed.** §7t (source-holdings statements not yet audited — the QP2606
+demand map, and the Hong Kong / ISO 8217 / IMSBC house statements); `docs/TRUE_SOURCE_PRIORITY_BACKLOG.md`
+§8C (unsupported relationship-object metrics in `casualty` and `contract-of-carriage`) and §8D
+(verbatim source wording in earlier public Git history — a Founder rights decision, no history
+rewrite).
+
+**Product state unmoved.** No canonical answer changed in this closure step: 39 papers / 351
+questions, unchanged. The only content correction in the cycle's final phase was a provenance
+statement that reaches no candidate-facing surface, proved by a full `--publish` build regenerating
+every artefact byte-identically.
+
+## Next action
+
+**The Founder starts the next task in a fresh session.** Nothing here is queued for automatic
+pickup, and no backlog item registered above should be started without explicit authorisation —
+§8D in particular is a governance decision, not engineering work.
