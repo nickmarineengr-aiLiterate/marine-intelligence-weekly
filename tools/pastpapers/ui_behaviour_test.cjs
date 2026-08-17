@@ -1956,11 +1956,66 @@ ok('every question has a knowledge map',
 ok('every question has a blank-skeleton recall test',
    (html.match(/class="layer recall"/g) || []).length === cards.length);
 ok('every question has an exam plan',
-   // Matches a modifier class too (`layer plan plan-b`, the bullet-plan pilot).
-   // The claim is that every card HAS an exam plan, not that the section carries
-   // one exact class string: an exact-string guard fails on a presentation
-   // change that did not remove a single plan.
+   // Deliberately tolerant of a modifier class. The claim is that every card HAS
+   // an exam plan, not that the section carries one exact class string: an
+   // exact-string guard fails on a presentation change that did not remove a
+   // single plan. It caught nothing and broke twice.
    (html.match(/class="layer plan[ "]/g) || []).length === cards.length);
+
+// ---- bullet exam plan -------------------------------------------------------
+// The plan is the ONLY place a candidate is told what to write, so two things
+// have to hold: every route heading carries its points with it, and the marks
+// beside a limb are the ones the source paper actually stated.
+{
+  const SPECS = path.join(__dirname, '..', '..', 'meoclass1', 'pastpapers', 'specs');
+  const specFile = path.join(SPECS, PAPER_ID + '.json');
+  const spec = fs.existsSync(specFile)
+    ? JSON.parse(fs.readFileSync(specFile, 'utf8')) : null;
+
+  ok('the superseded duplicate plan view is gone',
+     !/plan-points|pp-step/.test(html),
+     'the collapsed <details> reprinted every heading the plan list already showed');
+
+  // Scoped to the plan list on purpose: the recall view also emits
+  // `<li value="N">`, so counting those corpus-wide compares two different
+  // things and passes or fails for the wrong reason.
+  const planItems = (html.match(/<ol class="plan-list">[\s\S]*?<\/ol>/g) || [])
+    .join('').match(/<li value="\d+"/g) || [];
+  ok('every plan heading carries its own points',
+     planItems.length > 0 &&
+     planItems.length === (html.match(/<li value="\d+"><span class="pl-t">/g) || []).length,
+     planItems.length + ' plan items, ' +
+     (html.match(/<li value="\d+"><span class="pl-t">/g) || []).length + ' with points');
+
+  if (spec) {
+    // Marks are NEVER inferred. Rebuild the permitted set from the spec and
+    // require every rendered figure to be in it -- a divided total, an equal
+    // split across limbs, or a mark carried over from a neighbouring limb all
+    // fail here.
+    const norm = s => (s || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+    const allowed = new Map();      // normalised limb -> marks stated in source
+    for (const q of spec.questions || []) {
+      for (const sp of q.subparts || []) {
+        const key = sp.label != null ? sp.label : sp.ref;
+        if (norm(key) && sp.marks != null) allowed.set(q.q_no + '|' + norm(key), sp.marks);
+      }
+    }
+    const rendered = [...html.matchAll(
+      /<div class="plan-limb">(.*?)(?:\s*<span class="pl-mk">&middot; (\d+) marks<\/span>)?<\/div>/g)]
+      .map(m2 => ({ limb: norm(m2[1].replace(/<[^>]*>/g, '')), marks: m2[2] ? +m2[2] : null }));
+
+    const invented = rendered.filter(r =>
+      r.marks !== null && ![...allowed].some(([k, v]) => k.endsWith('|' + r.limb) && v === r.marks));
+    ok('no limb shows marks the source paper never stated',
+       invented.length === 0, JSON.stringify(invented.slice(0, 5)));
+
+    // The other direction: silence must be preserved, not filled in.
+    const fabricated = rendered.filter(r =>
+      r.marks !== null && ![...allowed.keys()].some(k => k.endsWith('|' + r.limb)));
+    ok('scaffold limbs and unmarked subparts stay label-only',
+       fabricated.length === 0, JSON.stringify(fabricated.slice(0, 5)));
+  }
+}
 
 // Flashcards: keyboard-operable buttons carrying ARIA, answers hidden until asked.
 const nCardQ = (html.match(/class="card-q"/g) || []).length;
