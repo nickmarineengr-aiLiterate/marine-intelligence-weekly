@@ -1,122 +1,184 @@
-# Similarity model — Phase 1
+# Similarity model — QI-v2
 
-**Research only.** `current_as_of: 2026-08-17`
+**RESEARCH ONLY.** `current_as_of: 2026-08-17`
+Class baseline locked by the Laptop review. Phase 2 changes the *measurement*, not
+the classes.
 
-## Classes (one primary class per comparison)
+---
+
+## 1. The five classes (locked)
 
 | Class | Definition | Candidate-facing? |
 |---|---|---|
-| `EXACT_REPEAT` | Identical stem but for punctuation/formatting/trivial wording | yes, at HIGH |
-| `NEAR_VERBATIM` | Same question; small wording, scenario or marks changes | yes, at HIGH |
+| `EXACT_REPEAT` | Identical stem but for the normalisation in §2 | yes, at HIGH |
+| `NEAR_VERBATIM` | Same question; small wording or presentation changes | yes, at HIGH |
 | `SAME_CORE_ASK` | Wording materially changed; substantially the same answer required | yes, at HIGH |
 | `TOPIC_ONLY` | Same subject area, different examination task | **never as "repeated"** |
 | `NO_MEANINGFUL_MATCH` | No defensible recurrence | n/a |
 
-`TOPIC_ONLY` is not a repeat and must never be surfaced as one. It is the class
-that inflates recurrence statistics if allowed to drift.
+`TOPIC_ONLY` is not a repeat and must never be surfaced as one. It is the class that
+inflates recurrence statistics if allowed to drift.
 
-## Confidence
+The classifier **proposes**. Human or Claude adjudication **confirms**. Semantic or
+vector similarity may never publish a family on its own.
+
+---
+
+## 2. Normalisation — what may be discarded
+
+The Laptop accepted `QP2608-Q8(b)` as `EXACT_REPEAT` despite *on board* / *onboard*
+and punctuation differences, so the rule is now stated explicitly rather than left
+to judgement.
+
+**Safe to normalise away** — presentation only:
+
+- case
+- runs of whitespace
+- punctuation variance, including a trailing `?` on a non-question
+- hyphenation and spacing variance where semantic identity is obvious
+  (`lay-up` / `layup`, `on board` / `onboard`, `co-operation` / `cooperation`)
+- curly versus straight quotes
+- regular plurals
+
+**Never normalise away** — these are the question changing:
+
+- a different command verb — `differentiate` → `write short notes` is a real change
+- a different legal qualifier
+- a different scenario condition, **including one that is merely added**
+- different numbers
+- different marks
+- an added or removed substantive limb
+
+The second list is why `QP2608-Q4(b)` is `SAME_CORE_ASK` and not `EXACT_REPEAT`
+(the command weakened from *differentiate … with an example* at 8 marks to
+*write short notes* at 4), and why `QP2608-Q8(a)` is `SAME_CORE_ASK` even though
+its ancestor sits inside it whole.
+
+---
+
+## 3. What Phase 2 changed — measure containment in **both** directions
+
+Phase 1 measured how much of the modern question appears in the historical one.
+That is one-directional, and it **missed real ancestors**.
+
+For a candidate pair, over content tokens after normalisation:
+
+```
+fwd = |modern ∩ historical| / |modern|        how much of the modern text is old
+rev = |modern ∩ historical| / |historical|    how much of the old text survives
+```
+
+| `fwd` | `rev` | Proposed class |
+|---|---|---|
+| ≥ 0.85 | ≥ 0.85 | `EXACT_REPEAT` / `NEAR_VERBATIM` |
+| < 0.85 | ≥ 0.85 | **`ANCESTOR_ABSORBED_AND_EXTENDED`** → adjudicates to `SAME_CORE_ASK` |
+| ≥ 0.85 | < 0.85 | **`ANCESTOR_NARROWED`** → adjudicates to `SAME_CORE_ASK` |
+| max ≥ 0.65 | | `SAME_CORE_ASK` candidate |
+| max ≥ 0.45 | | `TOPIC_ONLY` candidate |
+| otherwise | | `NO_MEANINGFUL_MATCH` |
+
+The two named middle cases are the Phase-2 addition, and they are not cosmetic:
+
+> **`QP2608-Q8(a)` scores `fwd 0.48`** — a one-directional test discards it —
+> **and `rev 0.96`.** Its ancestor `BANK-105` sits inside it almost entirely;
+> August 2026 then wraps it in a PSC-failure scenario, an initial-meeting setting
+> and a demand for examples. Phase 1 recorded this limb as having no ancestor.
+> It has one, and it is 10 of the paper's 144 marks.
+
+`ANCESTOR_NARROWED` is the mirror case: the modern question asks a strict subset of
+the older one.
+
+Both middle cases adjudicate to `SAME_CORE_ASK`, never to `EXACT_REPEAT` — because
+in both, something substantive was added or removed, and §2 forbids discarding that.
+
+---
+
+## 4. The short-stem guard
+
+A stem of one or two words scores `fwd = 1.00` against almost anything that mentions
+it. `QP2608-Q4(b)` is the single word **“Warranties”**.
+
+**Rule.** A stem with fewer than **three distinct content tokens** after
+normalisation is classed `UNSCOREABLE_SHORT_STEM`. It may not carry a similarity
+class of its own. It **inherits** its parent question's class, and the inheritance
+is recorded on the occurrence.
+
+Without this guard the four one-word limbs of `QP2608-Q4` would each have reported
+containment 1.00 and manufactured four spurious exact repeats.
+
+---
+
+## 5. Confidence — three fields, never one
+
+Phase 1 carried a single `confidence`. It conflated three independent things and has
+been split. A family may now correctly read **HIGH / NONE / HIGH**.
+
+| Field | Answers |
+|---|---|
+| `text_similarity_confidence` | how sure are we the two stems are the same question? |
+| `date_confidence` | how sure are we *when* the earlier one was set? |
+| `source_confidence` | how good is the source the earlier text came from? |
+
+`FAMILY-EM-0001` is the worked example: `HIGH` text (containment 1.00/1.00 against
+an official bank item), `NONE` date (the bank is undated and no sitting is proven),
+`HIGH` source (the Directorate's own publication). All three at once, and none of
+them contradicting the others.
 
 | Label | Requires |
 |---|---|
-| `HIGH` | Both stems read as text, from sources of known identity and date |
-| `MEDIUM` | Stems compared but one side's date or source authority is soft |
-| `LOW` | Assertion only — a recurrence table, a recollection, a topic argument |
+| `HIGH` | both stems read as text, from sources of known identity |
+| `MEDIUM` | stems compared but one side's authority is soft |
+| `LOW` | assertion only — a recurrence table, a recollection, a topic argument |
+| `NONE` | no evidence of this kind at all |
+| `UNSCOREABLE_SHORT_STEM` | §4 applies; the class is inherited |
 
-Candidate-facing recurrence eventually requires `HIGH`. Phase 1 retains `MEDIUM`
-for review. `LOW` stays research-only.
+---
 
-## Provenance tier — kept separate from confidence
+## 6. Provenance tier — kept separate from confidence
 
 | Tier | Meaning |
 |---|---|
-| `MIW_TEXT_VERIFIED_RECURRENCE` | Both stems held by MIW, compared as text |
-| `EXTERNAL_TEXT_VERIFIED_RECURRENCE` | Historical stem read as text from an external source |
-| `DIESELSHIP_ASSERTED_RECURRENCE` | Host metadata only. Never published. |
-| `CANDIDATE_ASSERTED_RECURRENCE` | Group/candidate recollection. Never published alone. |
+| `OFFICIAL_BANK_ANCESTOR` | the wording is fixed by the Directorate's own published question bank |
+| `MIW_TEXT_VERIFIED_OCCURRENCE` | both stems read from MIW's own verified holdings |
+| `EXTERNAL_TEXT_VERIFIED_RECURRENCE` | one stem read from a third-party text source |
+| `DIESELSHIP_ASSERTED_OCCURRENCE` | provider metadata asserts a sitting; no text was seen |
 
-A recurrence table is **not** equivalent to a text comparison. The existing
-`host_recurrence_hint` field is tier 3 by construction and the repo already
-declines to publish it; v2 keeps that and adds tier 4 for the present feedback.
-
----
-
-## The main Phase 1 modelling finding: recurrence is often **limb-level**
-
-Question-level classification is the wrong granularity for this paper. Three of
-the strongest recurrences in QP2608 are recurrences of a **limb**, not a question:
-
-1. **QP2608-Q8(b)** reproduces one sentence of QP2512-Q4 **word for word** — but
-   QP2512-Q4's Maslow limb is absent and the marks fall 16 → 6. Question-level,
-   this is not a repeat. Limb-level, it is an `EXACT_REPEAT`.
-2. **QP2608-Q2** opens with a near-verbatim reproduction of the July 2012
-   dry-dock stem, then adds two limbs (delegation, undocking) that have no
-   ancestor. Question-level it looks new; limb-level its first third is old.
-3. **QP2608-Q4(b)** (warranties) recurs against QP2312-Q3(b) and QP2606-Q3(b)
-   while limbs (a), (c), (d) have no ancestor anywhere in MIW's holdings.
-
-**Recommendation for Phase 2:** the occurrence object must key on
-`(question_id, limb_label)`, not `question_id`. A question-level-only model will
-simultaneously *under*-report (missing Q8(b), Q4(b)) and *over*-report (calling
-Q2 a repeat when two thirds of it is new). Both failures are candidate-visible
-and both are avoidable.
-
-A consequence for marks: a limb recurrence carries only its own marks. Q8(b) is
-6 marks of a 16-mark question. Telling a candidate "Q8 is a repeat" would be
-false in the way that matters — most of Q8 is not.
+`OFFICIAL_BANK_ANCESTOR` is new in Phase 2 and is the highest tier. It is also the
+tier that most needs its date column read: it is the strongest evidence of
+*ancestry* in the whole layer and it carries **no date at all**.
 
 ---
 
-## Matching method
+## 7. Negative controls
 
-Deterministic normalization → token overlap → key-phrase match → adjudication.
-Embedding similarity is **not** permitted to decide a class on its own.
+`tools/negative_controls.py` — **6 of 6 hold**:
 
-Normalization for fingerprinting only (never overwrites `raw_stem`):
-lowercase; collapse whitespace; strip punctuation; British/American spelling
-folded (`co-ordination`→`coordination`, `enlist`→`list`); honorifics and role
-titles folded (`chief engineer officer`→`chief engineer`); marks annotations
-stripped.
+| Control | Pair | Required | Result |
+|---|---|---|---|
+| NC-1 | motivation family, true positive | `EXACT_OR_NEAR_VERBATIM` | 0.94 / 0.94 — pass |
+| NC-2 | cargo abandonment vs abandonment of ship / wreck | `NO_MEANINGFUL_MATCH` | 0.00 / 0.00 — pass |
+| NC-3 | motivation-as-a-topic vs the motivation family | not a match | 0.35 / 0.23 — pass |
+| NC-4 | dry dock coordination vs dry dock project planning | not a match | 0.12 / 0.15 — pass |
+| NC-5 | one-word “Warranties” vs the differentiate form | narrowed, not exact | 1.00 / 0.08 — pass |
+| NC-6 | lay-up reactivation vs lay-up preservation (inverse ask) | not a match | 0.13 / 0.27 — pass |
 
-**Command verbs are load-bearing and are compared separately.** `state`,
-`explain`, `discuss`, `compare`, `evaluate`, `draw`, `prepare`, `analyse` and
-`draft` set different tasks. Same topic + different verb is the canonical
-`TOPIC_ONLY` signature, and `draft` in particular (QP2608-Q9) demands a
-constructed document that `explain` does not.
+NC-2 is the standing semantic false positive the Laptop required be kept.
+**NC-3, NC-4 and NC-6 are new in Phase 2**, and each guards a trap the official bank
+introduced by bringing near-neighbours of our families into the same corpus:
+`BANK-061` discusses *attitude and motivation development* but is not the motivation
+family; `BANK-164` is about dry-docking but is not the coordination question.
 
----
-
-## Negative controls
-
-Required by §45 — for each strong match, a same-topic question that must **not**
-classify as a repeat. All three behave correctly.
-
-| # | Modern question | Same-topic distractor | Correct class | Model result |
-|---|---|---|---|---|
-| NC-1 | QP2608-Q5 — main propulsion stops at sea, full ahead; causes + calm/heavy weather response | QP2403-Q8 / QP2510-Q8 — engines fail to respond to bridge control approaching dock gates | `TOPIC_ONLY` | `TOPIC_ONLY` ✓ |
-| NC-2 | QP2608-Q3(b) — when is **cargo** abandoned, and who is liable | QP2104-Q9 / QP2109-Q8 / QP2207-Q3 — abandonment of the **ship** as wreck | `TOPIC_ONLY` | `TOPIC_ONLY` ✓ |
-| NC-3 | QP2608-Q9 — **draft** the corrective action plan under MARPOL VI reg. 28.8 | QP2401-Q3 / QP2504-Q6 — explain CII rating and measures to improve it | `TOPIC_ONLY` | `TOPIC_ONLY` ✓ |
-
-NC-1 separates two engine-failure questions by **scenario and demanded limbs**
-(control failure under pilotage vs. stopped engine at sea). NC-2 separates two
-abandonment questions by **legal object** — cargo under carriage law vs. ship
-under the Merchant Shipping Act; a bag-of-words matcher fails this one, which is
-why token overlap alone is insufficient. NC-3 separates by **command verb**
-alone: identical regulation, identical topic, and `draft` vs `explain` is the
-whole difference.
-
-NC-2 and NC-3 are the two that a naive embedding model would most likely get
-wrong, and they are the reason adjudication remains mandatory.
+NC-5 shows the model reporting an honest `ANCESTOR_NARROWED` on a stem that the
+short-stem guard then refuses to let stand alone.
 
 ---
 
-## Revival score — recommendation
+## 8. Limits
 
-**Do not build a numeric revival score.** A score combining similarity,
-frequency, dormancy and return would manufacture false precision on a corpus
-whose pre-2021 evidence is almost entirely absent. Any denominator would be
-wrong, because "number of known sittings" currently means "number of sittings
-MIW happens to hold", which is 2021+.
-
-Use the categorical dormancy classes instead (see `QUESTION_FAMILIES.json`), and
-revisit only if the pre-2021 window is ever genuinely acquired.
+- Containment is **lexical**. It will miss a genuine recurrence that has been fully
+  reworded, and it has no notion of meaning. It proposes; it does not decide.
+- The stop-list and the crude singulariser are tuned to this corpus and are not
+  general.
+- A high score against the official bank says the *question* recurs. It says
+  nothing about whether the *answer* still holds — that is
+  `TEMPORAL_DELTA_SCHEMA.json`, and it is a separate question by design.

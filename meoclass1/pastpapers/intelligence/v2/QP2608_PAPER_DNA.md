@@ -1,85 +1,143 @@
-# QP2608 paper DNA — August 2026 Engineering Management
+# QP2608 Paper DNA — recomputed in Phase 2
 
-**RESEARCH ONLY — these counts are NOT verified and must NOT be published.**
-`current_as_of: 2026-08-17` · base `origin/main` @ `3451558`
+**RESEARCH ONLY — these counts must NOT be published.**
+`current_as_of: 2026-08-17`
+August 2026, Engineering Management, MEO Class I. Printed serial `EM-17826-1`.
 
-Classification is against **everything located**: MIW's own holdings (2021–2026
-solved, 2021–2023 intelligence-only) plus the two externally text-verified
-July 2012 stems. It is *not* against 2010–2012, because 2010–2012 is not
-readable (see `HISTORICAL_COVERAGE_MATRIX.md`).
+> **Phase 2 changed this materially.** Phase 1 estimated roughly **25 of 144 marks
+> (~17%)**, with the `Q2` component inferred from a third-party source. Measured
+> against the Directorate's own published question bank, the verified figure is
+> **48 of 144 marks (33.3%)** — nearly double, and no longer inferred. Two Phase-1
+> findings were overturned in the process.
+
+Classification is now against the **official DG Shipping question bank**
+(`SRC-DGS-QBANK-ARCHIVED`, 185 items) plus MIW's own holdings — 2021–2026 solved and
+2021–2023 intelligence-only. It is still *not* against the 2010–2012 sittings,
+because those remain unreadable (see `HISTORICAL_COVERAGE_MATRIX.md`).
 
 ---
 
-## Question by question
+## 1. The mark base
 
-| Q | Marks | Core ask | Class | Family | Confidence |
+The paper offers **9 questions × 16 = 144 marks**. Candidates *answer six*, so a
+script totals **96**. Both denominators are reported, because they answer different
+questions: coverage of the paper *as set* is measured against 144, and what a
+candidate actually needs is measured against 96.
+
+Every mark below is **`KNOWN`** — printed on the paper. Nothing is estimated. The
+`UNAVAILABLE` figures in these families sit in the historical layer, where MIW holds
+question text without printed marks; those stay `UNAVAILABLE` and are never
+inferred.
+
+---
+
+## 2. Count view — whole questions
+
+| | Questions | of 9 |
+|---|---|---|
+| Whole question has an official ancestor | **2** (`Q2`, `Q4`) | 22.2% |
+| Partly ancestored, at limb level | **2** (`Q1`, `Q8`) | 22.2% |
+| No ancestor located | **5** (`Q3`, `Q5`, `Q6`, `Q7`, `Q9`) | 55.6% |
+
+**The count view is the misleading one and is never published alone.** “4 of 9
+questions have an ancestor” is true, and would lead a candidate to over-prepare `Q1`
+and `Q8`, where only part of the marks recur.
+
+---
+
+## 3. Mark-weighted view
+
+| Q | Limb | Marks | Ancestor | Class | text / date conf. |
 |---|---|---|---|---|---|
-| **Q1** | 16 | Lay-up reactivation: preparations and trials before survey; effect of laid-up notation | **NEAR_VERBATIM** (limb a) | FAMILY-EM-0001 | MEDIUM |
-| **Q2** | 16 | Dry dock: Master coordination, delegation, undocking | **SAME_CORE_ASK** (limb 1 near-verbatim) | FAMILY-EM-0002 | MEDIUM |
-| **Q3** | 16 | Hague/Hague-Visby objective; cargo abandonment and liability | TOPIC_ONLY | — | — |
-| **Q4** | 16 | Marine Insurance Act short notes ×4 | **SAME_CORE_ASK** (limb b only) | FAMILY-EM-0004 | HIGH |
-| **Q5** | 16 | Main propulsion stops at sea; causes; calm vs heavy weather | TOPIC_ONLY | — | — |
-| **Q6** | 16 | Scrubbers: regulatory driver; zero-discharge port zone; VLSFO economics | TOPIC_ONLY | — | — |
-| **Q7** | 16 | Dead main switchboard: briefing, permit to work, restoration | **NO_KNOWN_MATCH** | — | — |
-| **Q8** | 16 | (a) PSC failure/communication [10] · (b) motivation limb [6] | **EXACT_REPEAT** (limb b) | FAMILY-EM-0003 | HIGH |
-| **Q9** | 16 | Draft a CII corrective action plan, MARPOL VI reg. 28.8 | TOPIC_ONLY | — | — |
+| `Q1` | (a) | **10** | `BANK-015` | `EXACT_REPEAT` | HIGH / **NONE** |
+| `Q1` | (b) | 6 | — | none located | — |
+| `Q2` | whole | **16** | `BANK-018` | `EXACT_REPEAT` | HIGH / **NONE** |
+| `Q3` | (a)(b) | 16 | — | none located | — |
+| `Q4` | whole | **16** | `BANK-072` | `NEAR_VERBATIM` | HIGH / **NONE** |
+| `Q5` | — | 16 | — | none located | — |
+| `Q6` | — | 16 | — | none located | — |
+| `Q7` | — | 16 | — | none located | — |
+| `Q8` | (a) | *10* | `BANK-105` | `SAME_CORE_ASK` | MEDIUM / **NONE** |
+| `Q8` | (b) | **6** | `BANK-054` | `EXACT_REPEAT` | HIGH / HIGH |
+| `Q9` | — | 16 | — | none located | — |
 
-## Paper-level summary — provisional
+| Measure | Marks | of 144 |
+|---|---|---|
+| `EXACT_REPEAT` + `NEAR_VERBATIM` | **48** | **33.3%** |
+| plus `SAME_CORE_ASK` (`Q8(a)`) | **58** | **40.3%** |
+| No ancestor located | 86 | 59.7% |
 
-| Measure | Count |
-|---|---|
-| Exact or near-verbatim recurrence | **2 / 9** (Q1, Q8) |
-| Same core ask | **2 / 9** (Q2, Q4) |
-| Topic only — **not repeats** | **4 / 9** (Q3, Q5, Q6, Q9) |
-| No known match anywhere | **1 / 9** (Q7) |
-| Long-dormant revival (evidenced) | **2 / 9** (Q1, Q2 — both to July 2012) |
-| Recent recurrence (≤24 months) | **2 / 9** (Q4, Q8) |
-| Apparently novel to MIW's corpus | **1 / 9** (Q7) |
-
-**Strong historical families: 4 of 9.** But see the correction below — that
-number is misleading if read as "4 questions are repeats".
+Against the 96 marks a script actually carries, the four questions holding an
+ancestor (`Q1`, `Q2`, `Q4`, `Q8`) are **64 of those 96** — but only **48 of the 64**
+are themselves ancestored. **That gap is the entire reason the mark-weighted view
+exists**, and it is exactly what a count-based statistic conceals.
 
 ---
 
-## The mark-weighted correction
+## 4. What Phase 2 overturned
 
-Every recurrence in this paper except Q1's is a **limb**. Counting questions
-overstates how much of the paper is old:
+**`Q2` — the largest single correction.** Phase 1 held that *“roughly two thirds of
+the 16 marks have no ancestor”*, because the only source then available carried the
+Master-coordination sentence alone. `BANK-018` carries **all three limbs** —
+coordination with the Master, preparations and delegation to the engineers, and
+inspections and co-operation for undocking — and matches the whole question at
+containment **1.00 / 1.00**. All 16 marks have an official ancestor. The Phase-1
+error was caused by the unpreserved third-party excerpt, not by the method.
 
-| Q | Marks recurring | Marks new | Recurring share |
-|---|---|---|---|
-| Q1 | 10 (limb a) | 6 (limb b) | 63% |
-| Q2 | ~5 (limb 1) | ~11 | ~31% |
-| Q4 | 4 (limb b) | 12 | 25% |
-| Q8 | 6 (limb b) | 10 (limb a) | 38% |
-| Q3, Q5, Q6, Q7, Q9 | 0 | 80 | 0% |
+**`Q4` — three limbs recovered.** Phase 1 recorded limbs (a) Deviation, (c) War Risk
+Clause and (d) Charterers Contribution Clause as having *“NO ancestor anywhere in
+MIW's holdings”*, and called (d) *“the least-supported limb in the whole paper”*.
+`BANK-072` is `Q4` in full — all four limbs, in that order, essentially verbatim.
+All 16 marks have an official ancestor.
 
-**Recurring marks: ~25 of 144 — about 17% of the paper.**
+**`Q8(a)` — an ancestor found by measuring backwards.** Phase 1 recorded no
+ancestor. Forward containment is 0.48, so a one-directional test discards it;
+**reverse containment is 0.96**. `BANK-105` sits inside the modern limb almost
+entirely, and August 2026 then wraps it in a PSC-failure scenario. 10 marks.
 
-Read question-wise, "4 of 9 questions carry a historical family" (44%) sounds
-like a paper substantially rebuilt from old material. Read mark-wise, **roughly
-a sixth** of the paper is old. The second number is the one a candidate can act
-on, and the two must never be reported without each other.
+---
 
-## What this says about the "old paper revived" perception
+## 5. Verified versus provisional
 
-The perception is **partly founded**. Two genuine long-dormant stems (Q1, Q2)
-returned after 14 years of MIW-visible absence, and Q1 in particular returned
-almost word for word. A candidate who had seen the July 2012 paper would
-recognise the opening of two questions immediately, and that recognition is
-enough to generate the report the Founder received.
+**Verified** — official ancestor, `PRESERVED_RAW` artefact, sha256 pinned:
+`Q1(a)`, `Q2`, `Q4` (all four limbs), `Q8(a)`, `Q8(b)` — 58 marks.
 
-But the paper is **not** a 2010–2012 paper re-run. Five of nine questions have no
-recurrence at all, Q7 is new to the entire corpus, and Q6 and Q9 are built on
-regulatory material (scrubber discharge zones, CII ratings) that **did not exist**
-in 2010–2012 and could not have been asked then.
+**Provisional / research-only:**
 
-## Not yet publishable
+- `Q8(a)`'s class is `MEDIUM`. The ancestor is certain; the added scenario is
+  substantial enough that adjudication could yet move it to `TOPIC_ONLY`.
+- **Every date is provisional.** The bank is undated. `Q8(b)` is the only limb whose
+  earlier *sittings* are dated, and only back to MIW's March 2021 evidence floor.
 
-These counts stay research-only until Laptop independently verifies:
+**Withdrawn since Phase 1:** the asserted **July 2012** sitting behind `Q1` and `Q2`.
+The recurrence survived and strengthened; only the date fell. See
+`SRC-SCRIBD-106245627` in `SOURCE_MANIFEST.json`.
 
-1. the July 2012 attestation, from a better source than a user upload;
-2. the limb-level mark splits for Q2 (the ~5/~5/~6 division is inferred, since
-   the paper prints a single 16 for the whole question);
-3. every `TOPIC_ONLY` call, since those are the calls that inflate a recurrence
-   statistic if wrong.
+---
+
+## 6. What this paper does and does not support
+
+Supported, internally:
+
+- 48 of 144 offered marks reproduce an item of the Directorate's own question bank
+- `Q2` and `Q4` reproduce a bank item **in full**
+- `Q8` is **not** a repeat: limb (b) is, limb (a) is a different and weaker family,
+  and they carry 6 and 10 marks respectively
+
+Not supported by anything:
+
+- that any of these was asked in June 2010, December 2011, October 2012, April 2010,
+  March 2010 or July 2012
+- that any question was “dormant” for any period
+- any numerical revival score
+
+---
+
+## 7. Corpus context — do not generalise from this paper
+
+`QP2608` has **7 strong bank matches, the most of any paper in the corpus**. Across
+all 40 solved papers there are **63**, spread over **21** papers; the median matched
+paper has 2.
+
+`QP2608` is unusually bank-derived. A candidate-facing framing built on this paper
+alone would overstate how much of a normal Engineering Management paper recurs.
