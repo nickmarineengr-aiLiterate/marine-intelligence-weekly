@@ -449,7 +449,7 @@
   .plan-lead{margin:0 0 8px;font-size:13.5px;}
   .plan-limb{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;margin-top:8px;}
   .plan-list{margin:4px 0 0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;}
-  .plan-list li{margin:4px 0;}
+  .plan-list li{margin:9px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
   .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
@@ -457,11 +457,11 @@
   .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
   .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
-  .plan-points{margin-top:9px;font-size:12.5px;}
-  .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
-  .plan-points:focus-within > summary{outline:2px solid var(--orange);outline-offset:2px;}
-  .pp-step{margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;}
-  .pp-step ul{margin:3px 0 0;padding-left:20px;color:var(--grey-text);}
+  .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
+  .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}
+  .pl-t{display:block;}
+  .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;color:var(--grey-text);}
+  .pl-pts li{margin:2px 0;}
 
   /* Recall: blanks first, reveal on demand. */
   .recall{background:#fff;border:1.5px solid var(--teal-dark);padding:0 16px 13px;}
@@ -819,18 +819,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">What IMO is, and the organs that do the work</li>
-      <li value="2">The Assembly - the governing body</li>
-      <li value="3">The Council - the executive organ</li>
-      <li value="4">The five main committees and what each owns</li>
-      <li value="5">The seven sub-committees, and the role they perform</li>
+      <li value="1"><span class="pl-t">What IMO is, and the organs that do the work</span><ul class="pl-pts"><li>UN specialised agency for safety, security and pollution prevention</li><li>Assembly and Council govern; committees produce the technical output</li><li>A Secretariat serves all of them</li></ul></li>
+      <li value="2"><span class="pl-t">The Assembly - the governing body</span><ul class="pl-pts"><li>All Member States</li><li>Regular session once every two years</li><li>Approves work programme and budget, elects the Council</li><li>Adopts Assembly resolutions</li></ul></li>
+      <li value="3"><span class="pl-t">The Council - the executive organ</span><ul class="pl-pts"><li>40 members in three categories, elected for two years</li><li>Performs Assembly functions between sessions, with one reserved exception</li><li>Supervises the work of the Organization; appoints the Secretary-General subject to Assembly approval</li></ul></li>
+      <li value="4"><span class="pl-t">The five main committees and what each owns</span><ul class="pl-pts"><li>MSC and MEPC are the technical engines</li><li>Legal, Technical Cooperation and Facilitation complete the set</li><li>Committees are open to all Member States</li></ul></li>
+      <li value="5"><span class="pl-t">The seven sub-committees, and the role they perform</span><ul class="pl-pts"><li>They do the detailed technical development the parent committee has no time for</li><li>They report to MSC, MEPC or both</li><li>They have no adoption power - they prepare, the committee approves, the committee or Assembly adopts</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="6">What a convention is</li>
-      <li value="7">Protocol, Code and Resolution - how each differs, with examples</li>
+      <li value="6"><span class="pl-t">What a convention is</span><ul class="pl-pts"><li>A binding treaty between States</li><li>Enters into force only on its own stated conditions</li><li>Binds only those States that become party to it</li></ul></li>
+      <li value="7"><span class="pl-t">Protocol, Code and Resolution - how each differs, with examples</span><ul class="pl-pts"><li>Protocol - a separate treaty that amends or supplements a parent convention</li><li>Code - detailed technical content; mandatory only when a convention makes it so</li><li>Resolution - the formal decision of a body; the vehicle, not necessarily the obligation</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Top down for limb (a): Assembly (2), Council (3), Committees (4), Sub-committees (5). Then limb (b) in one line at step 7.</p>
     <div class="plan-cov">
@@ -838,15 +839,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>22</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 22 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What IMO is, and the organs that do the work</b><ul><li>UN specialised agency for safety, security and pollution prevention</li><li>Assembly and Council govern; committees produce the technical output</li><li>A Secretariat serves all of them</li></ul></div>
-      <div class="pp-step"><b>2. The Assembly - the governing body</b><ul><li>All Member States</li><li>Regular session once every two years</li><li>Approves work programme and budget, elects the Council</li><li>Adopts Assembly resolutions</li></ul></div>
-      <div class="pp-step"><b>3. The Council - the executive organ</b><ul><li>40 members in three categories, elected for two years</li><li>Performs Assembly functions between sessions, with one reserved exception</li><li>Supervises the work of the Organization; appoints the Secretary-General subject to Assembly approval</li></ul></div>
-      <div class="pp-step"><b>4. The five main committees and what each owns</b><ul><li>MSC and MEPC are the technical engines</li><li>Legal, Technical Cooperation and Facilitation complete the set</li><li>Committees are open to all Member States</li></ul></div>
-      <div class="pp-step"><b>5. The seven sub-committees, and the role they perform</b><ul><li>They do the detailed technical development the parent committee has no time for</li><li>They report to MSC, MEPC or both</li><li>They have no adoption power - they prepare, the committee approves, the committee or Assembly adopts</li></ul></div>
-      <div class="pp-step"><b>6. What a convention is</b><ul><li>A binding treaty between States</li><li>Enters into force only on its own stated conditions</li><li>Binds only those States that become party to it</li></ul></div>
-      <div class="pp-step"><b>7. Protocol, Code and Resolution - how each differs, with examples</b><ul><li>Protocol - a separate treaty that amends or supplements a parent convention</li><li>Code - detailed technical content; mandatory only when a convention makes it so</li><li>Resolution - the formal decision of a body; the vehicle, not necessarily the obligation</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1120,28 +1112,29 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The background - the gap the Convention was written to close</li>
-      <li value="2">Its relevance - where it sits in the liability architecture</li>
+      <li value="1"><span class="pl-t">The background - the gap the Convention was written to close</span><ul class="pl-pts"><li>CLC covered only persistent oil carried as cargo by tankers</li><li>A non-tanker's own bunkers could spill hundreds of tonnes with no dedicated regime</li><li>Adopted 23 March 2001, in force 21 November 2008</li></ul></li>
+      <li value="2"><span class="pl-t">Its relevance - where it sits in the liability architecture</span><ul class="pl-pts"><li>Completes the pollution-liability map for the world fleet</li><li>Strict liability plus compulsory insurance plus direct action</li><li>But it borrows its limit from the LLMC and has no fund behind it</li></ul></li>
     </ol>
     <div class="plan-limb">(a)</div>
     <ol class="plan-list">
-      <li value="3">(a) Pollution damage</li>
+      <li value="3"><span class="pl-t">(a) Pollution damage</span><ul class="pl-pts"><li>Loss or damage outside the ship by contamination</li><li>Environmental impairment limited to reasonable reinstatement measures actually undertaken</li><li>Includes the cost of preventive measures</li></ul></li>
     </ol>
     <div class="plan-limb">(b)</div>
     <ol class="plan-list">
-      <li value="4">(b) Bunker oil</li>
+      <li value="4"><span class="pl-t">(b) Bunker oil</span><ul class="pl-pts"><li>Any hydrocarbon mineral oil used or intended for operation or propulsion</li><li>Expressly includes lubricating oil</li><li>Includes residues - and is not confined to persistent oil</li></ul></li>
     </ol>
     <div class="plan-limb">(c)</div>
     <ol class="plan-list">
-      <li value="5">(c) Time limits for claims</li>
+      <li value="5"><span class="pl-t">(c) Time limits for claims</span><ul class="pl-pts"><li>Three years from the date the damage occurred</li><li>Six-year long stop from the date of the incident</li><li>Series of occurrences - the long stop runs from the first</li></ul></li>
     </ol>
     <div class="plan-limb">(d)</div>
     <ol class="plan-list">
-      <li value="6">(d) Exclusions</li>
+      <li value="6"><span class="pl-t">(d) Exclusions</span><ul class="pl-pts"><li>CLC damage is excluded, so the two regimes cannot overlap</li><li>Warships and State ships on non-commercial service</li><li>The shipowner's defences are a different thing again</li></ul></li>
     </ol>
     <ol class="plan-list">
-      <li value="7">How the Bunker Convention differs from CLC 92, taken together</li>
+      <li value="7"><span class="pl-t">How the Bunker Convention differs from CLC 92, taken together</span><ul class="pl-pts"><li>Who is liable - a wide shipowner definition against exclusive channelling</li><li>No free-standing limit and no fund</li><li>Different insurance threshold</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Two openers, four printed definitions, one comparison table - 2-4-1. The definitions run in the printed order P-B-T-E at steps 3 to 6.</p>
     <div class="plan-cov">
@@ -1149,15 +1142,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>21</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 21 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The background - the gap the Convention was written to close</b><ul><li>CLC covered only persistent oil carried as cargo by tankers</li><li>A non-tanker's own bunkers could spill hundreds of tonnes with no dedicated regime</li><li>Adopted 23 March 2001, in force 21 November 2008</li></ul></div>
-      <div class="pp-step"><b>2. Its relevance - where it sits in the liability architecture</b><ul><li>Completes the pollution-liability map for the world fleet</li><li>Strict liability plus compulsory insurance plus direct action</li><li>But it borrows its limit from the LLMC and has no fund behind it</li></ul></div>
-      <div class="pp-step"><b>3. (a) Pollution damage</b><ul><li>Loss or damage outside the ship by contamination</li><li>Environmental impairment limited to reasonable reinstatement measures actually undertaken</li><li>Includes the cost of preventive measures</li></ul></div>
-      <div class="pp-step"><b>4. (b) Bunker oil</b><ul><li>Any hydrocarbon mineral oil used or intended for operation or propulsion</li><li>Expressly includes lubricating oil</li><li>Includes residues - and is not confined to persistent oil</li></ul></div>
-      <div class="pp-step"><b>5. (c) Time limits for claims</b><ul><li>Three years from the date the damage occurred</li><li>Six-year long stop from the date of the incident</li><li>Series of occurrences - the long stop runs from the first</li></ul></div>
-      <div class="pp-step"><b>6. (d) Exclusions</b><ul><li>CLC damage is excluded, so the two regimes cannot overlap</li><li>Warships and State ships on non-commercial service</li><li>The shipowner's defences are a different thing again</li></ul></div>
-      <div class="pp-step"><b>7. How the Bunker Convention differs from CLC 92, taken together</b><ul><li>Who is liable - a wide shipowner definition against exclusive channelling</li><li>No free-standing limit and no fund</li><li>Different insurance threshold</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1419,24 +1403,25 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Why the hull form governs the power the ship needs</li>
-      <li value="2">How hull form optimisation is done, and what changed</li>
+      <li value="1"><span class="pl-t">Why the hull form governs the power the ship needs</span><ul class="pl-pts"><li>Resistance splits into frictional, wave-making and viscous pressure components</li><li>Hull form controls the wave and form components directly, and the wake field indirectly</li><li>Propulsive power is resistance times speed divided by the propulsive coefficient - the hull sets both terms</li></ul></li>
+      <li value="2"><span class="pl-t">How hull form optimisation is done, and what changed</span><ul class="pl-pts"><li>Parametric hull modelling driven by CFD and verified in the tank</li><li>The decisive change is optimising over an operating PROFILE, not a single design point</li><li>Slow steaming and part-load trading made the old single-point optimum wrong</li></ul></li>
     </ol>
     <div class="plan-limb">(i)</div>
     <ol class="plan-list">
-      <li value="3">(i) Forebody optimisation</li>
+      <li value="3"><span class="pl-t">(i) Forebody optimisation</span><ul class="pl-pts"><li>Bulbous bow, entrance angle, forward shoulder and stem</li><li>Targets wave-making resistance and added resistance in waves</li><li>Largest gains where the operating profile has moved away from the design point</li></ul></li>
     </ol>
     <div class="plan-limb">(ii)</div>
     <ol class="plan-list">
-      <li value="4">(ii) Aftbody optimisation</li>
+      <li value="4"><span class="pl-t">(ii) Aftbody optimisation</span><ul class="pl-pts"><li>The aftbody's job is the quality of water delivered to the propeller</li><li>Wake uniformity governs cavitation, pressure pulses and hull efficiency</li><li>Distinguish hull shape from bolt-on energy saving devices</li></ul></li>
     </ol>
     <div class="plan-limb">(iii)</div>
     <ol class="plan-list">
-      <li value="5">(iii) Twin skeg design</li>
+      <li value="5"><span class="pl-t">(iii) Twin skeg design</span><ul class="pl-pts"><li>Two skegs, two shafts, two propellers in place of a single centreline screw</li><li>Suits high block coefficient and restricted draught</li><li>Buys propeller diameter and clean inflow; costs wetted surface and machinery</li></ul></li>
     </ol>
     <ol class="plan-list">
-      <li value="6">What limits the gains, and where they are measured</li>
+      <li value="6"><span class="pl-t">What limits the gains, and where they are measured</span><ul class="pl-pts"><li>Gains are design-specific and do not simply add up</li><li>Hull form is one of the few genuine levers on attained EEDI and EEXI</li><li>In service the benefit shows in the operational carbon intensity indicator</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Two framing steps (1, 2), then the three printed items in printed order (3, 4, 5), then limits (6). Under each of 3, 4 and 5 write Scope then Impact.</p>
     <div class="plan-cov">
@@ -1444,14 +1429,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>18</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 18 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Why the hull form governs the power the ship needs</b><ul><li>Resistance splits into frictional, wave-making and viscous pressure components</li><li>Hull form controls the wave and form components directly, and the wake field indirectly</li><li>Propulsive power is resistance times speed divided by the propulsive coefficient - the hull sets both terms</li></ul></div>
-      <div class="pp-step"><b>2. How hull form optimisation is done, and what changed</b><ul><li>Parametric hull modelling driven by CFD and verified in the tank</li><li>The decisive change is optimising over an operating PROFILE, not a single design point</li><li>Slow steaming and part-load trading made the old single-point optimum wrong</li></ul></div>
-      <div class="pp-step"><b>3. (i) Forebody optimisation</b><ul><li>Bulbous bow, entrance angle, forward shoulder and stem</li><li>Targets wave-making resistance and added resistance in waves</li><li>Largest gains where the operating profile has moved away from the design point</li></ul></div>
-      <div class="pp-step"><b>4. (ii) Aftbody optimisation</b><ul><li>The aftbody's job is the quality of water delivered to the propeller</li><li>Wake uniformity governs cavitation, pressure pulses and hull efficiency</li><li>Distinguish hull shape from bolt-on energy saving devices</li></ul></div>
-      <div class="pp-step"><b>5. (iii) Twin skeg design</b><ul><li>Two skegs, two shafts, two propellers in place of a single centreline screw</li><li>Suits high block coefficient and restricted draught</li><li>Buys propeller diameter and clean inflow; costs wetted surface and machinery</li></ul></div>
-      <div class="pp-step"><b>6. What limits the gains, and where they are measured</b><ul><li>Gains are design-specific and do not simply add up</li><li>Hull form is one of the few genuine levers on attained EEDI and EEXI</li><li>In service the benefit shows in the operational carbon intensity indicator</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1683,14 +1660,15 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">What the cylinder oil must do, and why it is once-through</li>
-      <li value="2">The system layout - what the sketch must show</li>
-      <li value="3">How the dose is timed and controlled</li>
-      <li value="4">Why sulphur content drives both the base number and the quantity</li>
-      <li value="5">Setting the optimum feed rate in service</li>
-      <li value="6">How the engineer verifies the feed rate is right</li>
-      <li value="7">The traps - changeover, over-lubrication and the minimum</li>
+      <li value="1"><span class="pl-t">What the cylinder oil must do, and why it is once-through</span><ul class="pl-pts"><li>Separate ring and liner, neutralise acid, clean, seal and carry away debris</li><li>Total-loss system - the oil is burnt or scraped down, never returned</li><li>Therefore quantity is a running cost and a wear variable at the same time</li></ul></li>
+      <li value="2"><span class="pl-t">The system layout - what the sketch must show</span><ul class="pl-pts"><li>Storage tank, service tank, heater and filter</li><li>Lubricator pump unit per cylinder with its own accumulator</li><li>Quills around the liner circumference with non-return valves</li></ul></li>
+      <li value="3"><span class="pl-t">How the dose is timed and controlled</span><ul class="pl-pts"><li>Electronically timed injection referenced to crank angle</li><li>Delivered as a metered slug while the ring pack passes the quills</li><li>Rate set by the control system from load and fuel sulphur</li></ul></li>
+      <li value="4"><span class="pl-t">Why sulphur content drives both the base number and the quantity</span><ul class="pl-pts"><li>Sulphur burns to SO2 and SO3; below the acid dew point sulphuric acid forms on the liner</li><li>The oil's alkaline reserve neutralises it - that reserve is the base number</li><li>Acid produced is proportional to sulphur burnt, so the alkali delivered must track it</li></ul></li>
+      <li value="5"><span class="pl-t">Setting the optimum feed rate in service</span><ul class="pl-pts"><li>Choose the base number grade to suit the fuel, then set the quantity</li><li>Feed proportioned to engine load and to fuel sulphur, above a maker minimum</li><li>Reduce in small steps and hold, never in one jump</li></ul></li>
+      <li value="6"><span class="pl-t">How the engineer verifies the feed rate is right</span><ul class="pl-pts"><li>Scrape-down oil analysis for residual base number and iron</li><li>Scavenge port inspection of liner and ring condition</li><li>Periodic liner wear measurement to close the loop</li></ul></li>
+      <li value="7"><span class="pl-t">The traps - changeover, over-lubrication and the minimum</span><ul class="pl-pts"><li>Changing fuel sulphur without changing grade or rate</li><li>Over-lubrication is not a safe error - it causes deposits and bore polishing</li><li>Never go below the maker's minimum feed rate</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> System half is the oil's own path, steps 1 to 3. Optimisation half is Acid, Alkali, Amount, Assess at steps 4 to 6, then the traps at 7.</p>
     <div class="plan-cov">
@@ -1698,15 +1676,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>21</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 21 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What the cylinder oil must do, and why it is once-through</b><ul><li>Separate ring and liner, neutralise acid, clean, seal and carry away debris</li><li>Total-loss system - the oil is burnt or scraped down, never returned</li><li>Therefore quantity is a running cost and a wear variable at the same time</li></ul></div>
-      <div class="pp-step"><b>2. The system layout - what the sketch must show</b><ul><li>Storage tank, service tank, heater and filter</li><li>Lubricator pump unit per cylinder with its own accumulator</li><li>Quills around the liner circumference with non-return valves</li></ul></div>
-      <div class="pp-step"><b>3. How the dose is timed and controlled</b><ul><li>Electronically timed injection referenced to crank angle</li><li>Delivered as a metered slug while the ring pack passes the quills</li><li>Rate set by the control system from load and fuel sulphur</li></ul></div>
-      <div class="pp-step"><b>4. Why sulphur content drives both the base number and the quantity</b><ul><li>Sulphur burns to SO2 and SO3; below the acid dew point sulphuric acid forms on the liner</li><li>The oil's alkaline reserve neutralises it - that reserve is the base number</li><li>Acid produced is proportional to sulphur burnt, so the alkali delivered must track it</li></ul></div>
-      <div class="pp-step"><b>5. Setting the optimum feed rate in service</b><ul><li>Choose the base number grade to suit the fuel, then set the quantity</li><li>Feed proportioned to engine load and to fuel sulphur, above a maker minimum</li><li>Reduce in small steps and hold, never in one jump</li></ul></div>
-      <div class="pp-step"><b>6. How the engineer verifies the feed rate is right</b><ul><li>Scrape-down oil analysis for residual base number and iron</li><li>Scavenge port inspection of liner and ring condition</li><li>Periodic liner wear measurement to close the loop</li></ul></div>
-      <div class="pp-step"><b>7. The traps - changeover, over-lubrication and the minimum</b><ul><li>Changing fuel sulphur without changing grade or rate</li><li>Over-lubrication is not a safe error - it causes deposits and bore polishing</li><li>Never go below the maker's minimum feed rate</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1963,14 +1932,15 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The 2023 IMO GHG Strategy - the frame everything else serves</li>
-      <li value="2">The technical measures in force - EEDI and EEXI</li>
-      <li value="3">The operational measures in force - enhanced SEEMP and the CII</li>
-      <li value="4">The data foundation - the fuel oil consumption data collection system</li>
-      <li value="5">What is under development - the basket of mid-term measures</li>
-      <li value="6">The mandated review, and the work running alongside</li>
-      <li value="7">What has not yet happened at this sitting</li>
+      <li value="1"><span class="pl-t">The 2023 IMO GHG Strategy - the frame everything else serves</span><ul class="pl-pts"><li>Adopted 7 July 2023 by resolution MEPC.377(80), revoking the 2018 Initial Strategy</li><li>Four levels of ambition and two indicative checkpoints</li><li>Net-zero by or around, i.e. close to, 2050</li></ul></li>
+      <li value="2"><span class="pl-t">The technical measures in force - EEDI and EEXI</span><ul class="pl-pts"><li>EEDI applies to new ships in tightening phases</li><li>EEXI extends a design-type index to the existing fleet</li><li>Both are one-off design compliance, not operating limits</li></ul></li>
+      <li value="3"><span class="pl-t">The operational measures in force - enhanced SEEMP and the CII</span><ul class="pl-pts"><li>SEEMP Part III carries the plan to meet the required CII</li><li>Attained annual CII against required CII gives a rating A to E</li><li>Consequences attach to a D-for-three-years or a single E</li></ul></li>
+      <li value="4"><span class="pl-t">The data foundation - the fuel oil consumption data collection system</span><ul class="pl-pts"><li>Mandatory reporting since calendar year 2019</li><li>Verified by the Administration and fed to the IMO database</li><li>Every carbon-intensity calculation depends on it</li></ul></li>
+      <li value="5"><span class="pl-t">What is under development - the basket of mid-term measures</span><ul class="pl-pts"><li>A technical element - a goal-based marine fuel standard</li><li>An economic element - a GHG emissions pricing mechanism</li><li>To be finalised and agreed by 2025, with a comprehensive impact assessment</li></ul></li>
+      <li value="6"><span class="pl-t">The mandated review, and the work running alongside</span><ul class="pl-pts"><li>Review of the short-term measures to be completed by 1 January 2026</li><li>Life cycle GHG intensity guidelines adopted alongside the Strategy</li><li>Safety framework for alternative fuels initiated at MSC</li></ul></li>
+      <li value="7"><span class="pl-t">What has not yet happened at this sitting</span><ul class="pl-pts"><li>No mid-term measure has been adopted</li><li>No carbon price applies at IMO level</li><li>The next MEPC session is still five weeks away</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Strategy at step 1, then the regulation numbers in order at steps 2 to 4, then the basket at step 5, then review and safety at 6, then what has NOT happened at 7.</p>
     <div class="plan-cov">
@@ -1978,15 +1948,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>21</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 21 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The 2023 IMO GHG Strategy - the frame everything else serves</b><ul><li>Adopted 7 July 2023 by resolution MEPC.377(80), revoking the 2018 Initial Strategy</li><li>Four levels of ambition and two indicative checkpoints</li><li>Net-zero by or around, i.e. close to, 2050</li></ul></div>
-      <div class="pp-step"><b>2. The technical measures in force - EEDI and EEXI</b><ul><li>EEDI applies to new ships in tightening phases</li><li>EEXI extends a design-type index to the existing fleet</li><li>Both are one-off design compliance, not operating limits</li></ul></div>
-      <div class="pp-step"><b>3. The operational measures in force - enhanced SEEMP and the CII</b><ul><li>SEEMP Part III carries the plan to meet the required CII</li><li>Attained annual CII against required CII gives a rating A to E</li><li>Consequences attach to a D-for-three-years or a single E</li></ul></div>
-      <div class="pp-step"><b>4. The data foundation - the fuel oil consumption data collection system</b><ul><li>Mandatory reporting since calendar year 2019</li><li>Verified by the Administration and fed to the IMO database</li><li>Every carbon-intensity calculation depends on it</li></ul></div>
-      <div class="pp-step"><b>5. What is under development - the basket of mid-term measures</b><ul><li>A technical element - a goal-based marine fuel standard</li><li>An economic element - a GHG emissions pricing mechanism</li><li>To be finalised and agreed by 2025, with a comprehensive impact assessment</li></ul></div>
-      <div class="pp-step"><b>6. The mandated review, and the work running alongside</b><ul><li>Review of the short-term measures to be completed by 1 January 2026</li><li>Life cycle GHG intensity guidelines adopted alongside the Strategy</li><li>Safety framework for alternative fuels initiated at MSC</li></ul></div>
-      <div class="pp-step"><b>7. What has not yet happened at this sitting</b><ul><li>No mid-term measure has been adopted</li><li>No carbon price applies at IMO level</li><li>The next MEPC session is still five weeks away</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2246,14 +2207,15 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The three cost families, and what distinguishes them</li>
-      <li value="2">What falls into each family</li>
-      <li value="3">Where the Chief Engineer has leverage, and where he has none</li>
-      <li value="4">Optimising voyage cost</li>
-      <li value="5">Optimising operating cost</li>
-      <li value="6">Inventory control - classifying the stock</li>
-      <li value="7">Inventory control - ordering, and the limits of just-in-time at sea</li>
+      <li value="1"><span class="pl-t">The three cost families, and what distinguishes them</span><ul class="pl-pts"><li>Separated by what makes the money go out, not by size</li><li>Capital - owning the ship; operating - keeping her fit to trade; voyage - performing the voyage</li><li>The trigger test is what shows where leverage exists</li></ul></li>
+      <li value="2"><span class="pl-t">What falls into each family</span><ul class="pl-pts"><li>Capital - purchase price, debt service, depreciation, required return</li><li>Operating - crew, stores, spares, maintenance, insurance, administration</li><li>Bunkers, port dues, canal dues, pilotage and towage are VOYAGE costs</li></ul></li>
+      <li value="3"><span class="pl-t">Where the Chief Engineer has leverage, and where he has none</span><ul class="pl-pts"><li>Capital - effectively no short-run influence</li><li>Voyage - the largest lever, because fuel dominates and fuel follows condition</li><li>Operating - shared with the office</li></ul></li>
+      <li value="4"><span class="pl-t">Optimising voyage cost</span><ul class="pl-pts"><li>Hull and propeller condition is usually the largest recoverable loss</li><li>Machinery condition, correct operation for the load, fuel management, auxiliary load</li><li>Efficiency is now a compliance outcome as well as a cost</li></ul></li>
+      <li value="5"><span class="pl-t">Optimising operating cost</span><ul class="pl-pts"><li>Choose the right maintenance strategy per item rather than one for all</li><li>Off-hire avoidance usually dominates the arithmetic</li><li>The drydock specification is the largest single event he controls</li></ul></li>
+      <li value="6"><span class="pl-t">Inventory control - classifying the stock</span><ul class="pl-pts"><li>Not every item deserves the same control</li><li>ABC by value, VED by criticality, FSN by movement</li><li>The practical shipboard method combines them</li></ul></li>
+      <li value="7"><span class="pl-t">Inventory control - ordering, and the limits of just-in-time at sea</span><ul class="pl-pts"><li>Economic order quantity, reorder level and safety stock</li><li>Lead time is the hard variable because the ship moves</li><li>Just-in-time is wrong for critical spares</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> C-O-V for the families (1, 2), leverage (3), then optimise voyage (4) and operating (5), then inventory in two moves - classify (6) then order (7).</p>
     <div class="plan-cov">
@@ -2261,15 +2223,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>21</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 21 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The three cost families, and what distinguishes them</b><ul><li>Separated by what makes the money go out, not by size</li><li>Capital - owning the ship; operating - keeping her fit to trade; voyage - performing the voyage</li><li>The trigger test is what shows where leverage exists</li></ul></div>
-      <div class="pp-step"><b>2. What falls into each family</b><ul><li>Capital - purchase price, debt service, depreciation, required return</li><li>Operating - crew, stores, spares, maintenance, insurance, administration</li><li>Bunkers, port dues, canal dues, pilotage and towage are VOYAGE costs</li></ul></div>
-      <div class="pp-step"><b>3. Where the Chief Engineer has leverage, and where he has none</b><ul><li>Capital - effectively no short-run influence</li><li>Voyage - the largest lever, because fuel dominates and fuel follows condition</li><li>Operating - shared with the office</li></ul></div>
-      <div class="pp-step"><b>4. Optimising voyage cost</b><ul><li>Hull and propeller condition is usually the largest recoverable loss</li><li>Machinery condition, correct operation for the load, fuel management, auxiliary load</li><li>Efficiency is now a compliance outcome as well as a cost</li></ul></div>
-      <div class="pp-step"><b>5. Optimising operating cost</b><ul><li>Choose the right maintenance strategy per item rather than one for all</li><li>Off-hire avoidance usually dominates the arithmetic</li><li>The drydock specification is the largest single event he controls</li></ul></div>
-      <div class="pp-step"><b>6. Inventory control - classifying the stock</b><ul><li>Not every item deserves the same control</li><li>ABC by value, VED by criticality, FSN by movement</li><li>The practical shipboard method combines them</li></ul></div>
-      <div class="pp-step"><b>7. Inventory control - ordering, and the limits of just-in-time at sea</b><ul><li>Economic order quantity, reorder level and safety stock</li><li>Lead time is the hard variable because the ship moves</li><li>Just-in-time is wrong for critical spares</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2554,21 +2507,22 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">What the HSSC is, and the problem it solved</li>
-      <li value="2">The instruments that carry it, and the edition in force</li>
-      <li value="3">The key objectives behind its establishment</li>
-      <li value="4">How the system works - survey types, cycle and time window</li>
+      <li value="1"><span class="pl-t">What the HSSC is, and the problem it solved</span><ul class="pl-pts"><li>Separate conventions each imposed their own surveys and certificate periods</li><li>Ships were surveyed repeatedly and certificates expired on different dates</li><li>The HSSC aligns survey dates and certificate validity into one cycle</li></ul></li>
+      <li value="2"><span class="pl-t">The instruments that carry it, and the edition in force</span><ul class="pl-pts"><li>Introduced by the 1988 SOLAS and Load Lines Protocols and by MARPOL amendments</li><li>Now extends across eight instruments including the Polar Code</li><li>The operative guidelines at this sitting are A.1186(33)</li></ul></li>
+      <li value="3"><span class="pl-t">The key objectives behind its establishment</span><ul class="pl-pts"><li>One survey occasion instead of many; one common anniversary</li><li>Minimise out-of-service time and administrative burden</li><li>Provide flexibility without lowering the standard</li></ul></li>
+      <li value="4"><span class="pl-t">How the system works - survey types, cycle and time window</span><ul class="pl-pts"><li>Seven survey types on a one-year standard interval</li><li>Five-year certificate cycle on a common anniversary date</li><li>A six-month window, and renewal completable three months before expiry</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="5">(b) How the HSSC helps port State control</li>
+      <li value="5"><span class="pl-t">(b) How the HSSC helps port State control</span><ul class="pl-pts"><li>Efficiency - one coherent certificate set on one date</li><li>Effectiveness - overdue surveys become visible, giving clear grounds</li><li>Harmonised forms and endorsements make verification consistent worldwide</li></ul></li>
     </ol>
-    <div class="plan-limb">(c)</div>
+    <div class="plan-limb">(c) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="6">(c) The challenges and complexities of implementation</li>
-      <li value="7">(c) How those challenges are addressed</li>
+      <li value="6"><span class="pl-t">(c) The challenges and complexities of implementation</span><ul class="pl-pts"><li>Aligning an existing ship onto a single anniversary date</li><li>Windows that do not match the trading pattern or surveyor availability</li><li>Keeping the guidelines current across eight amending instruments</li></ul></li>
+      <li value="7"><span class="pl-t">(c) How those challenges are addressed</span><ul class="pl-pts"><li>The flexibility provisions - the window and the extension rules</li><li>Regular reissue of the Guidelines, and RO standardisation</li><li>Continuous survey and planned maintenance schemes bridging the gaps</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) is What (1), Where (2), Why (3), How (4). Limb (b) is efficiency and effectiveness (5). Limb (c) is hard (6) then fixed (7).</p>
     <div class="plan-cov">
@@ -2576,15 +2530,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>21</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 21 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What the HSSC is, and the problem it solved</b><ul><li>Separate conventions each imposed their own surveys and certificate periods</li><li>Ships were surveyed repeatedly and certificates expired on different dates</li><li>The HSSC aligns survey dates and certificate validity into one cycle</li></ul></div>
-      <div class="pp-step"><b>2. The instruments that carry it, and the edition in force</b><ul><li>Introduced by the 1988 SOLAS and Load Lines Protocols and by MARPOL amendments</li><li>Now extends across eight instruments including the Polar Code</li><li>The operative guidelines at this sitting are A.1186(33)</li></ul></div>
-      <div class="pp-step"><b>3. The key objectives behind its establishment</b><ul><li>One survey occasion instead of many; one common anniversary</li><li>Minimise out-of-service time and administrative burden</li><li>Provide flexibility without lowering the standard</li></ul></div>
-      <div class="pp-step"><b>4. How the system works - survey types, cycle and time window</b><ul><li>Seven survey types on a one-year standard interval</li><li>Five-year certificate cycle on a common anniversary date</li><li>A six-month window, and renewal completable three months before expiry</li></ul></div>
-      <div class="pp-step"><b>5. (b) How the HSSC helps port State control</b><ul><li>Efficiency - one coherent certificate set on one date</li><li>Effectiveness - overdue surveys become visible, giving clear grounds</li><li>Harmonised forms and endorsements make verification consistent worldwide</li></ul></div>
-      <div class="pp-step"><b>6. (c) The challenges and complexities of implementation</b><ul><li>Aligning an existing ship onto a single anniversary date</li><li>Windows that do not match the trading pattern or surveyor availability</li><li>Keeping the guidelines current across eight amending instruments</li></ul></div>
-      <div class="pp-step"><b>7. (c) How those challenges are addressed</b><ul><li>The flexibility provisions - the window and the extension rules</li><li>Regular reissue of the Guidelines, and RO standardisation</li><li>Continuous survey and planned maintenance schemes bridging the gaps</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2848,14 +2793,15 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The statutory framework, and what abandonment changes</li>
-      <li value="2">Immediate action - life first, then report</li>
-      <li value="3">The pollution powers - Part XA</li>
-      <li value="4">The wreck regime - the Receiver of Wreck under Part XIII</li>
-      <li value="5">Salvage, and the place-of-refuge decision</li>
-      <li value="6">Who initiates what</li>
-      <li value="7">Investigation, and recovery of the cost</li>
+      <li value="1"><span class="pl-t">The statutory framework, and what abandonment changes</span><ul class="pl-pts"><li>The Merchant Shipping Act, 1958 is the governing statute</li><li>Three Parts engage - safety and detention, pollution, and wreck and salvage</li><li>Abandonment transfers the initiative to the State but does not end liability</li></ul></li>
+      <li value="2"><span class="pl-t">Immediate action - life first, then report</span><ul class="pl-pts"><li>Safety of life takes precedence over ship and cargo</li><li>The casualty is reported to the Administration and the local authorities</li><li>Search and rescue coordination through the Indian Coast Guard</li></ul></li>
+      <li value="3"><span class="pl-t">The pollution powers - Part XA</span><ul class="pl-pts"><li>Notice to the owner requiring specified measures</li><li>Power to take the measures directly where the notice is not complied with</li><li>Power to direct other ships to render services</li></ul></li>
+      <li value="4"><span class="pl-t">The wreck regime - the Receiver of Wreck under Part XIII</span><ul class="pl-pts"><li>Receivers of wreck are appointed by the Central Government</li><li>The receiver's duty where a vessel is in distress on the coast</li><li>Custody, notice, sale and the owner's one-year right to claim</li></ul></li>
+      <li value="5"><span class="pl-t">Salvage, and the place-of-refuge decision</span><ul class="pl-pts"><li>Salvage of life, cargo and wreck is provided for by the Act</li><li>Where the owner has abandoned, salvage may have to be procured by the State</li><li>Any request for a place of refuge is assessed under the current IMO guidelines</li></ul></li>
+      <li value="6"><span class="pl-t">Who initiates what</span><ul class="pl-pts"><li>Master and crew, then the owner - who has stepped away</li><li>Director General of Shipping, Receiver of Wreck, Indian Coast Guard</li><li>Port and State authorities, and the insurer in practice</li></ul></li>
+      <li value="7"><span class="pl-t">Investigation, and recovery of the cost</span><ul class="pl-pts"><li>Statutory investigation into the circumstances of the wreck</li><li>Safety investigation separate from blame or liability</li><li>Costs recovered from the owner and from the proceeds of the wreck</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Three Parts at step 1, then the sequence Life (2), Pollution (3), Wreck (4), Salvage (5), then WHO (6), then investigation and cost (7).</p>
     <div class="plan-cov">
@@ -2863,15 +2809,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>21</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 21 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The statutory framework, and what abandonment changes</b><ul><li>The Merchant Shipping Act, 1958 is the governing statute</li><li>Three Parts engage - safety and detention, pollution, and wreck and salvage</li><li>Abandonment transfers the initiative to the State but does not end liability</li></ul></div>
-      <div class="pp-step"><b>2. Immediate action - life first, then report</b><ul><li>Safety of life takes precedence over ship and cargo</li><li>The casualty is reported to the Administration and the local authorities</li><li>Search and rescue coordination through the Indian Coast Guard</li></ul></div>
-      <div class="pp-step"><b>3. The pollution powers - Part XA</b><ul><li>Notice to the owner requiring specified measures</li><li>Power to take the measures directly where the notice is not complied with</li><li>Power to direct other ships to render services</li></ul></div>
-      <div class="pp-step"><b>4. The wreck regime - the Receiver of Wreck under Part XIII</b><ul><li>Receivers of wreck are appointed by the Central Government</li><li>The receiver's duty where a vessel is in distress on the coast</li><li>Custody, notice, sale and the owner's one-year right to claim</li></ul></div>
-      <div class="pp-step"><b>5. Salvage, and the place-of-refuge decision</b><ul><li>Salvage of life, cargo and wreck is provided for by the Act</li><li>Where the owner has abandoned, salvage may have to be procured by the State</li><li>Any request for a place of refuge is assessed under the current IMO guidelines</li></ul></div>
-      <div class="pp-step"><b>6. Who initiates what</b><ul><li>Master and crew, then the owner - who has stepped away</li><li>Director General of Shipping, Receiver of Wreck, Indian Coast Guard</li><li>Port and State authorities, and the insurer in practice</li></ul></div>
-      <div class="pp-step"><b>7. Investigation, and recovery of the cost</b><ul><li>Statutory investigation into the circumstances of the wreck</li><li>Safety investigation separate from blame or liability</li><li>Costs recovered from the owner and from the proceeds of the wreck</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -3170,18 +3107,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">(a) The human element, and how IMO and ILO divide the work</li>
-      <li value="2">The IMO regime - competence, safe operation and fitness for duty</li>
-      <li value="3">The ILO regime - MLC 2006, the fourth pillar</li>
-      <li value="4">Where the two organisations act together</li>
+      <li value="1"><span class="pl-t">(a) The human element, and how IMO and ILO divide the work</span><ul class="pl-pts"><li>The human element reaches beyond the crew to management, regulators and builders</li><li>IMO owns competence and safe operation of the ship</li><li>ILO owns employment, living and working conditions</li></ul></li>
+      <li value="2"><span class="pl-t">The IMO regime - competence, safe operation and fitness for duty</span><ul class="pl-pts"><li>STCW for training, certification and watchkeeping</li><li>The ISM Code for safety management</li><li>Minimum safe manning, fatigue guidance and the human element principles</li></ul></li>
+      <li value="3"><span class="pl-t">The ILO regime - MLC 2006, the fourth pillar</span><ul class="pl-pts"><li>Articles, Regulations, and a Code in mandatory Part A and guidance Part B</li><li>Five Titles covering the seafarer's whole working life</li><li>Title 5 is what makes it enforceable</li></ul></li>
+      <li value="4"><span class="pl-t">Where the two organisations act together</span><ul class="pl-pts"><li>Joint work on medical fitness and fair treatment</li><li>Abandonment of seafarers addressed jointly</li><li>The two regimes overlap at fitness for duty and hours of rest</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">(b) The ISM Code - what it is actually trying to do</li>
-      <li value="6">Where the human factor decides whether the Code works</li>
-      <li value="7">Why implementation fails, and what makes it succeed</li>
+      <li value="5"><span class="pl-t">(b) The ISM Code - what it is actually trying to do</span><ul class="pl-pts"><li>Written after casualties whose cause was management, not equipment</li><li>It regulates a SYSTEM rather than a piece of hardware</li><li>Its objectives are safeguards against identified risks and continuous improvement</li></ul></li>
+      <li value="6"><span class="pl-t">Where the human factor decides whether the Code works</span><ul class="pl-pts"><li>The designated person and the master's overriding authority</li><li>Resources, familiarisation and a common working language</li><li>Reporting of non-conformities, accidents and hazardous occurrences</li></ul></li>
+      <li value="7"><span class="pl-t">Why implementation fails, and what makes it succeed</span><ul class="pl-pts"><li>Paper compliance, consultant-written systems and documentation overload</li><li>Blame culture suppressing the reports the Code depends on</li><li>Ownership, proportionate documentation and a closed feedback loop</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) is Operator (2) and Worker (3), framed at 1 and joined at 4. Limb (b) is purpose (5), the human elements (6), then fails and succeeds (7).</p>
     <div class="plan-cov">
@@ -3189,15 +3127,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>21</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 21 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. (a) The human element, and how IMO and ILO divide the work</b><ul><li>The human element reaches beyond the crew to management, regulators and builders</li><li>IMO owns competence and safe operation of the ship</li><li>ILO owns employment, living and working conditions</li></ul></div>
-      <div class="pp-step"><b>2. The IMO regime - competence, safe operation and fitness for duty</b><ul><li>STCW for training, certification and watchkeeping</li><li>The ISM Code for safety management</li><li>Minimum safe manning, fatigue guidance and the human element principles</li></ul></div>
-      <div class="pp-step"><b>3. The ILO regime - MLC 2006, the fourth pillar</b><ul><li>Articles, Regulations, and a Code in mandatory Part A and guidance Part B</li><li>Five Titles covering the seafarer's whole working life</li><li>Title 5 is what makes it enforceable</li></ul></div>
-      <div class="pp-step"><b>4. Where the two organisations act together</b><ul><li>Joint work on medical fitness and fair treatment</li><li>Abandonment of seafarers addressed jointly</li><li>The two regimes overlap at fitness for duty and hours of rest</li></ul></div>
-      <div class="pp-step"><b>5. (b) The ISM Code - what it is actually trying to do</b><ul><li>Written after casualties whose cause was management, not equipment</li><li>It regulates a SYSTEM rather than a piece of hardware</li><li>Its objectives are safeguards against identified risks and continuous improvement</li></ul></div>
-      <div class="pp-step"><b>6. Where the human factor decides whether the Code works</b><ul><li>The designated person and the master's overriding authority</li><li>Resources, familiarisation and a common working language</li><li>Reporting of non-conformities, accidents and hazardous occurrences</li></ul></div>
-      <div class="pp-step"><b>7. Why implementation fails, and what makes it succeed</b><ul><li>Paper compliance, consultant-written systems and documentation overload</li><li>Blame culture suppressing the reports the Code depends on</li><li>Ownership, proportionate documentation and a closed feedback loop</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">

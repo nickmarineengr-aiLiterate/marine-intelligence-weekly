@@ -267,7 +267,7 @@
   .plan-lead{margin:0 0 8px;font-size:13.5px;}
   .plan-limb{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;margin-top:8px;}
   .plan-list{margin:4px 0 0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;}
-  .plan-list li{margin:4px 0;}
+  .plan-list li{margin:9px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
   .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
@@ -275,11 +275,11 @@
   .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
   .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
-  .plan-points{margin-top:9px;font-size:12.5px;}
-  .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
-  .plan-points:focus-within > summary{outline:2px solid var(--orange);outline-offset:2px;}
-  .pp-step{margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;}
-  .pp-step ul{margin:3px 0 0;padding-left:20px;color:var(--grey-text);}
+  .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
+  .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}
+  .pl-t{display:block;}
+  .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;color:var(--grey-text);}
+  .pl-pts li{margin:2px 0;}
 
   /* Recall: blanks first, reveal on demand. */
   .recall{background:#fff;border:1.5px solid var(--teal-dark);padding:0 16px 13px;}
@@ -639,25 +639,26 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">What the RO Code is, and how it binds</li>
-      <li value="2">The power to delegate, and the limit on it</li>
-      <li value="3">Approval step one - the general requirements the organization must satisfy</li>
-      <li value="4">Approval step two - the organizational, resource and process assessment</li>
-      <li value="5">Approval step three - certification of the quality management system</li>
-      <li value="6">Approval step four - the act of authorization, and what the flag State must specify</li>
-      <li value="7">Approval step five - the written agreement and the notification to IMO</li>
+      <li value="1"><span class="pl-t">What the RO Code is, and how it binds</span><ul class="pl-pts"><li>Adopted by MSC.349(92) and MEPC.237(65); took effect 1 January 2015</li><li>Made mandatory through SOLAS chapter XI-1 and the Load Lines Protocol</li><li>Three parts: Part 1 general, Part 2 mandatory, Part 3 recommendatory oversight guidance</li></ul></li>
+      <li value="2"><span class="pl-t">The power to delegate, and the limit on it</span><ul class="pl-pts"><li>Part 1 section 4: a flag State MAY delegate to an organization recognized as complying with the Code</li><li>4.2 - the flag State SHALL NOT authorize functions beyond the RO's capabilities</li><li>8.1 - the conventional bases: SOLAS I/6, LL 66 article 13, MARPOL Annexes I and II, TONNAGE 69</li></ul></li>
+      <li value="3"><span class="pl-t">Approval step one - the general requirements the organization must satisfy</span><ul class="pl-pts"><li>Part 2 section 2: rules and regulations, independence, impartiality, integrity, competence, responsibility, transparency</li><li>2.1 - delegation is subject to confirmation of the organization's capability</li><li>Independence and revenue dependence are the two that fail organizations in practice</li></ul></li>
+      <li value="4"><span class="pl-t">Approval step two - the organizational, resource and process assessment</span><ul class="pl-pts"><li>Part 2 section 3 management and organization; section 4 resources; section 5 certification processes</li><li>Section 6 performance measurement, analysis and improvement, including internal and vertical contract audit</li><li>Appendices 1 and 2 - technical staff qualification and the survey and certification functions</li></ul></li>
+      <li value="5"><span class="pl-t">Approval step three - certification of the quality management system</span><ul class="pl-pts"><li>Part 2 section 7.1 - an effective internal QMS no less effective than the ISO 9000 series</li><li>7.2 - periodic assessment and certification by a qualified accredited body recognized by the flag State</li><li>7.3 - IMO monitors the certification and audit process</li></ul></li>
+      <li value="6"><span class="pl-t">Approval step four - the act of authorization, and what the flag State must specify</span><ul class="pl-pts"><li>8.2 legal basis; 8.3 the nine specifications of scope; 8.4 resources</li><li>8.5 instruments and 8.6 instructions, including what to do when a ship is not fit to proceed to sea</li><li>8.7 records</li></ul></li>
+      <li value="7"><span class="pl-t">Approval step five - the written agreement and the notification to IMO</span><ul class="pl-pts"><li>Appendix 3 - the eight minimum headings of the formal written agreement</li><li>Part 1 section 5 - the flag State communicates and deposits with the Secretary-General a list of ROs</li><li>and notifies the specific responsibilities and conditions of the authority delegated</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="8">What oversight is, and the status of Part 3</li>
-      <li value="9">Mechanism one - supervision of the delegated duties</li>
-      <li value="10">Mechanism two - verification and monitoring, and the RO's reporting duties</li>
-      <li value="11">Mechanism three - auditing</li>
-      <li value="12">Mechanism four - managing the oversight programme</li>
-      <li value="13">Mechanism five - the performance indicators</li>
-      <li value="14">What follows a finding, and why the scheme exists at all</li>
+      <li value="8"><span class="pl-t">What oversight is, and the status of Part 3</span><ul class="pl-pts"><li>Part 3 sections 1 and 2 - guidance on flag State oversight; expressly NON-MANDATORY</li><li>Oversight may include ship inspection, auditing and monitoring activities</li><li>The adopting resolution recommends Part 3 as a basis unless national requirements are at least equivalent</li></ul></li>
+      <li value="9"><span class="pl-t">Mechanism one - supervision of the delegated duties</span><ul class="pl-pts"><li>Part 3 section 5.2 - five items the flag State should consider</li><li>QMS documentation, internal instructions, RO documentation on the flag's fleet</li><li>cooperation with flag State inspection work, and provision of damage and casualty information</li></ul></li>
+      <li value="10"><span class="pl-t">Mechanism two - verification and monitoring, and the RO's reporting duties</span><ul class="pl-pts"><li>Part 3 section 5.3 - a system to ensure the adequacy of statutory certification and services</li><li>Immediate notification of a detainable deficiency and of a major non-conformity</li><li>Removal from class reported in writing within 30 days</li></ul></li>
+      <li value="11"><span class="pl-t">Mechanism three - auditing</span><ul class="pl-pts"><li>Part 3 section 6.1 - the flag State may rely on audits by an accredited certification body</li><li>6.2 - ethical conduct, fair presentation, due professional care</li><li>Part 3 section 4 defines audit, audit criteria, audit evidence and audit findings</li></ul></li>
+      <li value="12"><span class="pl-t">Mechanism four - managing the oversight programme</span><ul class="pl-pts"><li>Part 3 section 7 - objectives and extent, responsibilities, resources, procedures, implementation, records</li><li>7.4 - the programme is itself monitored and reviewed</li><li>Additional flag State ship inspections sit inside the programme, not outside it</li></ul></li>
+      <li value="13"><span class="pl-t">Mechanism five - the performance indicators</span><ul class="pl-pts"><li>Part 3 section 7.4.3 - five indicators for evaluating RO performance</li><li>Port State performance of ROs; RO internal audit results; third-party QMS audit results</li><li>Previous performance monitoring; condition and compliance of the ships the RO certifies</li></ul></li>
+      <li value="14"><span class="pl-t">What follows a finding, and why the scheme exists at all</span><ul class="pl-pts"><li>Corrective action, narrowing or withdrawal of the authorization</li><li>The flag State remains responsible in international law however much it delegates</li><li>Continued compliance is a condition of authorization, not a courtesy</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) is a PROCEDURE: WHAT (1), MAY (2), then three tests - WHO they are (3), HOW they run (4), WHO CHECKS THEM (5) - then AUTHORIZE (6) and SIGN AND TELL IMO (7). Limb (b) is FIVE MECHANISMS: SUPERVISE (9), VERIFY AND REPORT (10), AUDIT (11), MANAGE (12), MEASURE (13) - bracketed by STATUS (8) and CONSEQUENCE (14).</p>
     <div class="plan-cov">
@@ -665,22 +666,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>42</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>14 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 42 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What the RO Code is, and how it binds</b><ul><li>Adopted by MSC.349(92) and MEPC.237(65); took effect 1 January 2015</li><li>Made mandatory through SOLAS chapter XI-1 and the Load Lines Protocol</li><li>Three parts: Part 1 general, Part 2 mandatory, Part 3 recommendatory oversight guidance</li></ul></div>
-      <div class="pp-step"><b>2. The power to delegate, and the limit on it</b><ul><li>Part 1 section 4: a flag State MAY delegate to an organization recognized as complying with the Code</li><li>4.2 - the flag State SHALL NOT authorize functions beyond the RO's capabilities</li><li>8.1 - the conventional bases: SOLAS I/6, LL 66 article 13, MARPOL Annexes I and II, TONNAGE 69</li></ul></div>
-      <div class="pp-step"><b>3. Approval step one - the general requirements the organization must satisfy</b><ul><li>Part 2 section 2: rules and regulations, independence, impartiality, integrity, competence, responsibility, transparency</li><li>2.1 - delegation is subject to confirmation of the organization's capability</li><li>Independence and revenue dependence are the two that fail organizations in practice</li></ul></div>
-      <div class="pp-step"><b>4. Approval step two - the organizational, resource and process assessment</b><ul><li>Part 2 section 3 management and organization; section 4 resources; section 5 certification processes</li><li>Section 6 performance measurement, analysis and improvement, including internal and vertical contract audit</li><li>Appendices 1 and 2 - technical staff qualification and the survey and certification functions</li></ul></div>
-      <div class="pp-step"><b>5. Approval step three - certification of the quality management system</b><ul><li>Part 2 section 7.1 - an effective internal QMS no less effective than the ISO 9000 series</li><li>7.2 - periodic assessment and certification by a qualified accredited body recognized by the flag State</li><li>7.3 - IMO monitors the certification and audit process</li></ul></div>
-      <div class="pp-step"><b>6. Approval step four - the act of authorization, and what the flag State must specify</b><ul><li>8.2 legal basis; 8.3 the nine specifications of scope; 8.4 resources</li><li>8.5 instruments and 8.6 instructions, including what to do when a ship is not fit to proceed to sea</li><li>8.7 records</li></ul></div>
-      <div class="pp-step"><b>7. Approval step five - the written agreement and the notification to IMO</b><ul><li>Appendix 3 - the eight minimum headings of the formal written agreement</li><li>Part 1 section 5 - the flag State communicates and deposits with the Secretary-General a list of ROs</li><li>and notifies the specific responsibilities and conditions of the authority delegated</li></ul></div>
-      <div class="pp-step"><b>8. What oversight is, and the status of Part 3</b><ul><li>Part 3 sections 1 and 2 - guidance on flag State oversight; expressly NON-MANDATORY</li><li>Oversight may include ship inspection, auditing and monitoring activities</li><li>The adopting resolution recommends Part 3 as a basis unless national requirements are at least equivalent</li></ul></div>
-      <div class="pp-step"><b>9. Mechanism one - supervision of the delegated duties</b><ul><li>Part 3 section 5.2 - five items the flag State should consider</li><li>QMS documentation, internal instructions, RO documentation on the flag's fleet</li><li>cooperation with flag State inspection work, and provision of damage and casualty information</li></ul></div>
-      <div class="pp-step"><b>10. Mechanism two - verification and monitoring, and the RO's reporting duties</b><ul><li>Part 3 section 5.3 - a system to ensure the adequacy of statutory certification and services</li><li>Immediate notification of a detainable deficiency and of a major non-conformity</li><li>Removal from class reported in writing within 30 days</li></ul></div>
-      <div class="pp-step"><b>11. Mechanism three - auditing</b><ul><li>Part 3 section 6.1 - the flag State may rely on audits by an accredited certification body</li><li>6.2 - ethical conduct, fair presentation, due professional care</li><li>Part 3 section 4 defines audit, audit criteria, audit evidence and audit findings</li></ul></div>
-      <div class="pp-step"><b>12. Mechanism four - managing the oversight programme</b><ul><li>Part 3 section 7 - objectives and extent, responsibilities, resources, procedures, implementation, records</li><li>7.4 - the programme is itself monitored and reviewed</li><li>Additional flag State ship inspections sit inside the programme, not outside it</li></ul></div>
-      <div class="pp-step"><b>13. Mechanism five - the performance indicators</b><ul><li>Part 3 section 7.4.3 - five indicators for evaluating RO performance</li><li>Port State performance of ROs; RO internal audit results; third-party QMS audit results</li><li>Previous performance monitoring; condition and compliance of the ships the RO certifies</li></ul></div>
-      <div class="pp-step"><b>14. What follows a finding, and why the scheme exists at all</b><ul><li>Corrective action, narrowing or withdrawal of the authorization</li><li>The flag State remains responsible in international law however much it delegates</li><li>Continued compliance is a condition of authorization, not a courtesy</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1149,25 +1134,26 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">The gap in the law that the Convention was written to close</li>
-      <li value="2">The instruments and their dates</li>
-      <li value="3">The primary objectives</li>
-      <li value="4">Where the Convention applies</li>
-      <li value="5">Key provisions one - the offences created in 1988</li>
-      <li value="6">Key provisions two - what the 2005 Protocol added</li>
-      <li value="7">How the scheme aims to enhance maritime security</li>
+      <li value="1"><span class="pl-t">The gap in the law that the Convention was written to close</span><ul class="pl-pts"><li>Piracy is defined too narrowly to cover a politically motivated seizure from within</li><li>The Achille Lauro, 1985 - the hijackers were passengers, not a second ship</li><li>No treaty then obliged a State to prosecute or extradite them</li></ul></li>
+      <li value="2"><span class="pl-t">The instruments and their dates</span><ul class="pl-pts"><li>SUA 1988, adopted at Rome, in force 1992; Fixed Platforms Protocol 1988</li><li>2005 Protocols, in force 2010</li><li>Note there are TWO 2005 Protocols - the stem's singular is the Convention Protocol</li></ul></li>
+      <li value="3"><span class="pl-t">The primary objectives</span><ul class="pl-pts"><li>Make specified unlawful acts crimes in every Party's law</li><li>Ensure no safe haven - prosecute or extradite</li><li>Provide a cooperative framework: jurisdiction, evidence, extradition, information</li></ul></li>
+      <li value="4"><span class="pl-t">Where the Convention applies</span><ul class="pl-pts"><li>Article 4 - keyed to the ship's navigation beyond the outer limit of one State's territorial sea</li><li>It is a criminal-jurisdiction treaty, not a construction or equipment standard</li></ul></li>
+      <li value="5"><span class="pl-t">Key provisions one - the offences created in 1988</span><ul class="pl-pts"><li>Article 3 - seizure by force; violence endangering safe navigation; destruction or damage; devices likely to destroy</li><li>Interference with navigational facilities; communicating false information; injury or killing connected with these</li><li>Article 3.2 - attempt, abetting and threat</li></ul></li>
+      <li value="6"><span class="pl-t">Key provisions two - what the 2005 Protocol added</span><ul class="pl-pts"><li>Article 3bis - the ship as weapon, and transport of WMD-related material</li><li>Article 3ter - transporting a person who has committed a listed offence</li><li>Article 3quater - attempt, participation and threat for the new offences</li></ul></li>
+      <li value="7"><span class="pl-t">How the scheme aims to enhance maritime security</span><ul class="pl-pts"><li>SUA is criminal law and jurisdiction; ISPS is prevention, access control and security levels</li><li>SUA operates after the act and across borders; ISPS operates before it and on board</li><li>They are complementary and neither substitutes for the other</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="8">Obligation one - criminalize and penalize (article 5)</li>
-      <li value="9">Obligation two - establish jurisdiction (article 6)</li>
-      <li value="10">Obligation three - custody, preliminary inquiry and notification (article 7)</li>
-      <li value="11">Obligation four - extradite or prosecute (article 10)</li>
-      <li value="12">Obligation five - extradition and mutual legal assistance (articles 11, 12 and 8)</li>
-      <li value="13">Obligation six - prevention, cooperation and reporting (articles 13 and 14)</li>
-      <li value="14">The enforcement mechanism at sea - boarding under article 8bis</li>
+      <li value="8"><span class="pl-t">Obligation one - criminalize and penalize (article 5)</span><ul class="pl-pts"><li>Article 5 - each Party shall make the offences punishable by appropriate penalties</li><li>Penalties must take into account the grave nature of the offences</li><li>Without domestic criminalization the rest of the treaty cannot operate</li></ul></li>
+      <li value="9"><span class="pl-t">Obligation two - establish jurisdiction (article 6)</span><ul class="pl-pts"><li>Article 6 - mandatory bases: flag, territory, nationality of the offender</li><li>Optional bases: nationality of victims, stateless residents, compulsion of a State, and others</li><li>Plus jurisdiction where the alleged offender is present and is not extradited</li></ul></li>
+      <li value="10"><span class="pl-t">Obligation three - custody, preliminary inquiry and notification (article 7)</span><ul class="pl-pts"><li>Article 7 - take the person into custody or secure their presence, on being satisfied circumstances warrant it</li><li>Conduct a preliminary inquiry into the facts</li><li>Notify the States with jurisdiction and indicate whether it intends to exercise it</li></ul></li>
+      <li value="11"><span class="pl-t">Obligation four - extradite or prosecute (article 10)</span><ul class="pl-pts"><li>Article 10 - if it does not extradite, the State must submit the case to its competent authorities for prosecution</li><li>Without exception whatsoever and whether or not the offence was committed in its territory</li><li>This is the provision that removes the safe haven</li></ul></li>
+      <li value="12"><span class="pl-t">Obligation five - extradition and mutual legal assistance (articles 11, 12 and 8)</span><ul class="pl-pts"><li>Article 11 - the offences are deemed extraditable offences in existing treaties, and the Convention may serve as the legal basis</li><li>Article 12 - the greatest measure of assistance in criminal proceedings, including evidence</li><li>Article 8 - the master may deliver an alleged offender to the authorities of another Party</li></ul></li>
+      <li value="13"><span class="pl-t">Obligation six - prevention, cooperation and reporting (articles 13 and 14)</span><ul class="pl-pts"><li>Article 13 - cooperate in preventing the offences, including by administrative and other measures</li><li>Article 14 - report to the Secretary-General of IMO information on the offence and on proceedings</li><li>This is what turns individual prosecutions into shared intelligence</li></ul></li>
+      <li value="14"><span class="pl-t">The enforcement mechanism at sea - boarding under article 8bis</span><ul class="pl-pts"><li>Boarding a ship of another Party requires the FLAG STATE'S CONSENT</li><li>Standing authorizations may be notified, and safeguards apply to the use of force and to those on board</li><li>This is the clearest evidence of the shift from investigating an act to interdicting one</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) is GAP (1), DATES (2), OBJECTIVES (3), WHERE (4), OFFENCES 88 (5), OFFENCES 05 (6), SO WHAT (7). Limb (b) is SIX DUTIES plus BOARDING: CRIMINALIZE (8), JURISDICTION (9), CUSTODY (10), TRY-OR-SEND (11), EXTRADITE AND ASSIST (12), PREVENT AND REPORT (13), BOARD WITH CONSENT (14).</p>
     <div class="plan-cov">
@@ -1175,22 +1161,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>41</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>14 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 41 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The gap in the law that the Convention was written to close</b><ul><li>Piracy is defined too narrowly to cover a politically motivated seizure from within</li><li>The Achille Lauro, 1985 - the hijackers were passengers, not a second ship</li><li>No treaty then obliged a State to prosecute or extradite them</li></ul></div>
-      <div class="pp-step"><b>2. The instruments and their dates</b><ul><li>SUA 1988, adopted at Rome, in force 1992; Fixed Platforms Protocol 1988</li><li>2005 Protocols, in force 2010</li><li>Note there are TWO 2005 Protocols - the stem's singular is the Convention Protocol</li></ul></div>
-      <div class="pp-step"><b>3. The primary objectives</b><ul><li>Make specified unlawful acts crimes in every Party's law</li><li>Ensure no safe haven - prosecute or extradite</li><li>Provide a cooperative framework: jurisdiction, evidence, extradition, information</li></ul></div>
-      <div class="pp-step"><b>4. Where the Convention applies</b><ul><li>Article 4 - keyed to the ship's navigation beyond the outer limit of one State's territorial sea</li><li>It is a criminal-jurisdiction treaty, not a construction or equipment standard</li></ul></div>
-      <div class="pp-step"><b>5. Key provisions one - the offences created in 1988</b><ul><li>Article 3 - seizure by force; violence endangering safe navigation; destruction or damage; devices likely to destroy</li><li>Interference with navigational facilities; communicating false information; injury or killing connected with these</li><li>Article 3.2 - attempt, abetting and threat</li></ul></div>
-      <div class="pp-step"><b>6. Key provisions two - what the 2005 Protocol added</b><ul><li>Article 3bis - the ship as weapon, and transport of WMD-related material</li><li>Article 3ter - transporting a person who has committed a listed offence</li><li>Article 3quater - attempt, participation and threat for the new offences</li></ul></div>
-      <div class="pp-step"><b>7. How the scheme aims to enhance maritime security</b><ul><li>SUA is criminal law and jurisdiction; ISPS is prevention, access control and security levels</li><li>SUA operates after the act and across borders; ISPS operates before it and on board</li><li>They are complementary and neither substitutes for the other</li></ul></div>
-      <div class="pp-step"><b>8. Obligation one - criminalize and penalize (article 5)</b><ul><li>Article 5 - each Party shall make the offences punishable by appropriate penalties</li><li>Penalties must take into account the grave nature of the offences</li><li>Without domestic criminalization the rest of the treaty cannot operate</li></ul></div>
-      <div class="pp-step"><b>9. Obligation two - establish jurisdiction (article 6)</b><ul><li>Article 6 - mandatory bases: flag, territory, nationality of the offender</li><li>Optional bases: nationality of victims, stateless residents, compulsion of a State, and others</li><li>Plus jurisdiction where the alleged offender is present and is not extradited</li></ul></div>
-      <div class="pp-step"><b>10. Obligation three - custody, preliminary inquiry and notification (article 7)</b><ul><li>Article 7 - take the person into custody or secure their presence, on being satisfied circumstances warrant it</li><li>Conduct a preliminary inquiry into the facts</li><li>Notify the States with jurisdiction and indicate whether it intends to exercise it</li></ul></div>
-      <div class="pp-step"><b>11. Obligation four - extradite or prosecute (article 10)</b><ul><li>Article 10 - if it does not extradite, the State must submit the case to its competent authorities for prosecution</li><li>Without exception whatsoever and whether or not the offence was committed in its territory</li><li>This is the provision that removes the safe haven</li></ul></div>
-      <div class="pp-step"><b>12. Obligation five - extradition and mutual legal assistance (articles 11, 12 and 8)</b><ul><li>Article 11 - the offences are deemed extraditable offences in existing treaties, and the Convention may serve as the legal basis</li><li>Article 12 - the greatest measure of assistance in criminal proceedings, including evidence</li><li>Article 8 - the master may deliver an alleged offender to the authorities of another Party</li></ul></div>
-      <div class="pp-step"><b>13. Obligation six - prevention, cooperation and reporting (articles 13 and 14)</b><ul><li>Article 13 - cooperate in preventing the offences, including by administrative and other measures</li><li>Article 14 - report to the Secretary-General of IMO information on the offence and on proceedings</li><li>This is what turns individual prosecutions into shared intelligence</li></ul></div>
-      <div class="pp-step"><b>14. The enforcement mechanism at sea - boarding under article 8bis</b><ul><li>Boarding a ship of another Party requires the FLAG STATE'S CONSENT</li><li>Standing authorizations may be notified, and safeguards apply to the use of force and to those on board</li><li>This is the clearest evidence of the shift from investigating an act to interdicting one</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1669,28 +1639,29 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="1">SOLAS regulation I/21 - Casualties</li>
-      <li value="2">SOLAS regulation XI-1/6 - Additional requirements for the investigation of marine casualties and incidents</li>
-      <li value="3">MARPOL article 12</li>
+      <li value="1"><span class="pl-t">SOLAS regulation I/21 - Casualties</span><ul class="pl-pts"><li>Each Administration undertakes to investigate any casualty to its ships</li><li>Where it judges the investigation may assist in determining desirable changes to the regulations</li><li>And to supply IMO with pertinent information on the findings</li></ul></li>
+      <li value="2"><span class="pl-t">SOLAS regulation XI-1/6 - Additional requirements for the investigation of marine casualties and incidents</span><ul class="pl-pts"><li>Additional requirements for the investigation of marine casualties and incidents</li><li>Taking into account regulation I/21, investigations shall be conducted in accordance with the Casualty Investigation Code</li><li>Parts I and II shall be fully complied with; Part III should be taken into account to the greatest possible extent</li></ul></li>
+      <li value="3"><span class="pl-t">MARPOL article 12</span><ul class="pl-pts"><li>The corresponding duty to investigate casualties and report findings to the Organization</li><li>Load Lines 1966 article 23 carries the same duty for load line casualties</li><li>Together these are the conventional sources the Code recites</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="4">What the Code is, and how it is built</li>
-      <li value="5">The purpose - and what a marine safety investigation is not</li>
-      <li value="6">Mandatory standards - the Authority, and notification</li>
-      <li value="7">Mandatory standards - the duty to investigate, and agreement between States</li>
-      <li value="8">Mandatory standards - powers, parallel investigations, cooperation, independence</li>
-      <li value="9">Mandatory standards - obtaining evidence from seafarers</li>
-      <li value="10">Mandatory standards - draft and final reports</li>
-      <li value="11">Part III - the recommended practices</li>
+      <li value="4"><span class="pl-t">What the Code is, and how it is built</span><ul class="pl-pts"><li>MSC.255(84), adopted 16 May 2008, took effect 1 January 2010</li><li>Three parts: I general provisions, II mandatory standards, III recommended practices</li><li>Replaces the practice established by A.849(20) as amended by A.884(21)</li></ul></li>
+      <li value="5"><span class="pl-t">The purpose - and what a marine safety investigation is not</span><ul class="pl-pts"><li>A common approach, to prevent future casualties and incidents</li><li>It does NOT seek to apportion blame or determine liability</li><li>Separate from and independent of any other form of investigation</li></ul></li>
+      <li value="6"><span class="pl-t">Mandatory standards - the Authority, and notification</span><ul class="pl-pts"><li>High seas or EEZ: the flag State notifies other substantially interested States</li><li>In territorial waters: flag and coastal State notify each other and then the others</li><li>Not delayed for want of complete information; eight-item content list</li></ul></li>
+      <li value="7"><span class="pl-t">Mandatory standards - the duty to investigate, and agreement between States</span><ul class="pl-pts"><li>A marine safety investigation SHALL be conducted into every very serious marine casualty</li><li>The flag State is responsible, subject to agreement under chapter 7</li><li>States consult to agree which will be the investigating State</li></ul></li>
+      <li value="8"><span class="pl-t">Mandatory standards - powers, parallel investigations, cooperation, independence</span><ul class="pl-pts"><li>National law must let investigators board, interview and acquire evidence</li><li>Another substantially interested State may investigate in parallel; timing to be coordinated</li><li>Investigators shall be impartial and objective and free from external direction</li></ul></li>
+      <li value="9"><span class="pl-t">Mandatory standards - obtaining evidence from seafarers</span><ul class="pl-pts"><li>Taken at the earliest practical opportunity; the seafarer returned or repatriated as soon as possible</li><li>Human rights upheld at all times</li><li>Informed of self-incrimination risk, the right to silence and available protections, with access to legal advice</li></ul></li>
+      <li value="10"><span class="pl-t">Mandatory standards - draft and final reports</span><ul class="pl-pts"><li>Draft sent to substantially interested States on request, on a confidentiality guarantee</li><li>30 days or another agreed period for comments; comments considered before finalising</li><li>Final report on every VSMC submitted to IMO, and made available to the public</li></ul></li>
+      <li value="11"><span class="pl-t">Part III - the recommended practices</span><ul class="pl-pts"><li>Resources and qualified personnel; investigators appointed on the A.996(25) skills</li><li>Principles of investigation, coordination, evidence collection, confidentiality, witness protection</li><li>Investigation of casualties other than VSMC, and re-opening an investigation</li></ul></li>
     </ol>
-    <div class="plan-limb">(c)</div>
+    <div class="plan-limb">(c) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="12">The definition</li>
-      <li value="13">Reading the definition against its neighbours</li>
-      <li value="14">Why the classification matters</li>
+      <li value="12"><span class="pl-t">The definition</span><ul class="pl-pts"><li>A marine casualty involving the total loss of the ship</li><li>or a death</li><li>or severe damage to the environment</li></ul></li>
+      <li value="13"><span class="pl-t">Reading the definition against its neighbours</span><ul class="pl-pts"><li>Marine casualty - seven limbs, deliberate acts excluded</li><li>Marine incident - endangered, or would endanger if not corrected</li><li>Severe damage to the environment - a major deleterious effect, as evaluated by the State affected or the flag State</li></ul></li>
+      <li value="14"><span class="pl-t">Why the classification matters</span><ul class="pl-pts"><li>VSMC triggers the only MANDATORY duty to investigate, at chapter 6</li><li>and the mandatory submission of the report to IMO, at chapter 14.1</li><li>Below that threshold investigation is judgement, and reporting is conditional</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) is TWO SOLAS PLUS ONE MARPOL: I/21 general (1), XI-1/6 the Code (2), MARPOL art 12 (3). Limb (b) is WHAT (4), WHY-NOT-BLAME (5), then the Code's own order - TELL (6), MUST INVESTIGATE (7), POWERS AND INDEPENDENCE (8), SEAFARERS (9), REPORTS (10), PART III (11). Limb (c) is DEFINE (12), COMPARE (13), CONSEQUENCE (14).</p>
     <div class="plan-cov">
@@ -1698,22 +1669,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>42</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>14 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 42 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. SOLAS regulation I/21 - Casualties</b><ul><li>Each Administration undertakes to investigate any casualty to its ships</li><li>Where it judges the investigation may assist in determining desirable changes to the regulations</li><li>And to supply IMO with pertinent information on the findings</li></ul></div>
-      <div class="pp-step"><b>2. SOLAS regulation XI-1/6 - Additional requirements for the investigation of marine casualties and incidents</b><ul><li>Additional requirements for the investigation of marine casualties and incidents</li><li>Taking into account regulation I/21, investigations shall be conducted in accordance with the Casualty Investigation Code</li><li>Parts I and II shall be fully complied with; Part III should be taken into account to the greatest possible extent</li></ul></div>
-      <div class="pp-step"><b>3. MARPOL article 12</b><ul><li>The corresponding duty to investigate casualties and report findings to the Organization</li><li>Load Lines 1966 article 23 carries the same duty for load line casualties</li><li>Together these are the conventional sources the Code recites</li></ul></div>
-      <div class="pp-step"><b>4. What the Code is, and how it is built</b><ul><li>MSC.255(84), adopted 16 May 2008, took effect 1 January 2010</li><li>Three parts: I general provisions, II mandatory standards, III recommended practices</li><li>Replaces the practice established by A.849(20) as amended by A.884(21)</li></ul></div>
-      <div class="pp-step"><b>5. The purpose - and what a marine safety investigation is not</b><ul><li>A common approach, to prevent future casualties and incidents</li><li>It does NOT seek to apportion blame or determine liability</li><li>Separate from and independent of any other form of investigation</li></ul></div>
-      <div class="pp-step"><b>6. Mandatory standards - the Authority, and notification</b><ul><li>High seas or EEZ: the flag State notifies other substantially interested States</li><li>In territorial waters: flag and coastal State notify each other and then the others</li><li>Not delayed for want of complete information; eight-item content list</li></ul></div>
-      <div class="pp-step"><b>7. Mandatory standards - the duty to investigate, and agreement between States</b><ul><li>A marine safety investigation SHALL be conducted into every very serious marine casualty</li><li>The flag State is responsible, subject to agreement under chapter 7</li><li>States consult to agree which will be the investigating State</li></ul></div>
-      <div class="pp-step"><b>8. Mandatory standards - powers, parallel investigations, cooperation, independence</b><ul><li>National law must let investigators board, interview and acquire evidence</li><li>Another substantially interested State may investigate in parallel; timing to be coordinated</li><li>Investigators shall be impartial and objective and free from external direction</li></ul></div>
-      <div class="pp-step"><b>9. Mandatory standards - obtaining evidence from seafarers</b><ul><li>Taken at the earliest practical opportunity; the seafarer returned or repatriated as soon as possible</li><li>Human rights upheld at all times</li><li>Informed of self-incrimination risk, the right to silence and available protections, with access to legal advice</li></ul></div>
-      <div class="pp-step"><b>10. Mandatory standards - draft and final reports</b><ul><li>Draft sent to substantially interested States on request, on a confidentiality guarantee</li><li>30 days or another agreed period for comments; comments considered before finalising</li><li>Final report on every VSMC submitted to IMO, and made available to the public</li></ul></div>
-      <div class="pp-step"><b>11. Part III - the recommended practices</b><ul><li>Resources and qualified personnel; investigators appointed on the A.996(25) skills</li><li>Principles of investigation, coordination, evidence collection, confidentiality, witness protection</li><li>Investigation of casualties other than VSMC, and re-opening an investigation</li></ul></div>
-      <div class="pp-step"><b>12. The definition</b><ul><li>A marine casualty involving the total loss of the ship</li><li>or a death</li><li>or severe damage to the environment</li></ul></div>
-      <div class="pp-step"><b>13. Reading the definition against its neighbours</b><ul><li>Marine casualty - seven limbs, deliberate acts excluded</li><li>Marine incident - endangered, or would endanger if not corrected</li><li>Severe damage to the environment - a major deleterious effect, as evaluated by the State affected or the flag State</li></ul></div>
-      <div class="pp-step"><b>14. Why the classification matters</b><ul><li>VSMC triggers the only MANDATORY duty to investigate, at chapter 6</li><li>and the mandatory submission of the report to IMO, at chapter 14.1</li><li>Below that threshold investigation is judgement, and reporting is conditional</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2198,25 +2153,26 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">What a market-based measure is</li>
-      <li value="2">Where the authority comes from</li>
-      <li value="3">The targets the measures have to deliver</li>
-      <li value="4">The main objectives of a market-based measure</li>
-      <li value="5">The shape the Strategy fixed - a basket of two elements</li>
-      <li value="6">The types of economic measure under discussion</li>
-      <li value="7">Why the technical and economic elements are coupled</li>
-      <li value="8">Where the process had actually reached at this sitting</li>
-      <li value="9">How the measures contribute to reducing GHG emissions</li>
+      <li value="1"><span class="pl-t">What a market-based measure is</span><ul class="pl-pts"><li>An instrument that puts a price on the emission rather than prescribing the equipment</li><li>Contrast with technical measures (design) and operational measures (how she is run)</li><li>The purpose is to make the low-carbon choice the commercially rational one</li></ul></li>
+      <li value="2"><span class="pl-t">Where the authority comes from</span><ul class="pl-pts"><li>The 2023 IMO GHG Strategy, resolution MEPC.377(80), adopted 7 July 2023</li><li>It revoked the 2018 Initial Strategy and set the current levels of ambition</li><li>Everything discussed at MEPC 81 is being developed under its work plan</li></ul></li>
+      <li value="3"><span class="pl-t">The targets the measures have to deliver</span><ul class="pl-pts"><li>Net-zero GHG emissions from international shipping by or around 2050</li><li>At least 20%, striving for 30%, reduction by 2030 against 2008</li><li>At least 70%, striving for 80%, by 2040 against 2008</li></ul></li>
+      <li value="4"><span class="pl-t">The main objectives of a market-based measure</span><ul class="pl-pts"><li>Close the price gap between conventional and zero or near-zero fuels</li><li>Raise revenue for the transition and for impacts on States</li><li>Reward the first mover and penalise the laggard, without prescribing technology</li></ul></li>
+      <li value="5"><span class="pl-t">The shape the Strategy fixed - a basket of two elements</span><ul class="pl-pts"><li>A technical element: a goal-based marine fuel standard on GHG intensity</li><li>An economic element: a maritime GHG emissions pricing mechanism</li><li>To be finalized and agreed by the Committee by 2025</li></ul></li>
+      <li value="6"><span class="pl-t">The types of economic measure under discussion</span><ul class="pl-pts"><li>A levy or contribution per tonne of GHG emitted</li><li>A cap-and-trade emissions trading system</li><li>A feebate - a fee on high-intensity fuel funding a rebate on low-intensity fuel</li></ul></li>
+      <li value="7"><span class="pl-t">Why the technical and economic elements are coupled</span><ul class="pl-pts"><li>The fuel standard sets the trajectory; the pricing element pays for it</li><li>Well-to-wake accounting, to prevent a shift of emissions to other sectors</li><li>Synergies with the existing CII to be considered</li></ul></li>
+      <li value="8"><span class="pl-t">Where the process had actually reached at this sitting</span><ul class="pl-pts"><li>MEPC 81 concluded 22 March 2024, five months before the sitting</li><li>The mid-term measures were PROPOSALS UNDER DEVELOPMENT, not an agreed instrument</li><li>MEPC 81 did adopt MEPC.384(81) and MEPC.385(81), which are not MBMs</li></ul></li>
+      <li value="9"><span class="pl-t">How the measures contribute to reducing GHG emissions</span><ul class="pl-pts"><li>Price signal, revenue, and a guaranteed demand for compliant fuel</li><li>Global and flag-neutral, unlike a regional scheme</li><li>Technology-neutral, so it does not bet on one fuel</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="10">Challenge one - agreeing the mechanism and the price</li>
-      <li value="11">Challenge two - impacts on States, and the equity question</li>
-      <li value="12">Challenge three - fuel, safety and the ship</li>
-      <li value="13">Potential impacts on the shipping industry</li>
-      <li value="14">Alignment with global climate goals</li>
+      <li value="10"><span class="pl-t">Challenge one - agreeing the mechanism and the price</span><ul class="pl-pts"><li>Levy, ETS or feebate are structurally different and produce different winners</li><li>The price level is the whole argument, and it had not been settled</li><li>Consensus practice at IMO means the least acceptable option constrains the outcome</li></ul></li>
+      <li value="11"><span class="pl-t">Challenge two - impacts on States, and the equity question</span><ul class="pl-pts"><li>The Strategy requires impacts to be assessed before adoption</li><li>Particular attention to developing countries, LDCs and SIDS</li><li>The clash between no more favourable treatment and common but differentiated responsibilities</li></ul></li>
+      <li value="12"><span class="pl-t">Challenge three - fuel, safety and the ship</span><ul class="pl-pts"><li>A price signal cannot create fuel that is not produced or bunkered</li><li>Safety and crew competence for alternative fuels</li><li>Verification, data quality and enforcement across the world fleet</li></ul></li>
+      <li value="13"><span class="pl-t">Potential impacts on the shipping industry</span><ul class="pl-pts"><li>Cost, and who bears it - the charterparty allocation problem</li><li>Asset values, newbuilding decisions and the risk of stranded tonnage</li><li>Competitiveness, trade routes and the risk of regional fragmentation</li></ul></li>
+      <li value="14"><span class="pl-t">Alignment with global climate goals</span><ul class="pl-pts"><li>Explicit reference to the Paris Agreement temperature goal in the Strategy</li><li>Well-to-wake accounting aligns shipping with life-cycle climate accounting</li><li>But shipping sits outside national inventories, which is why an IMO measure is needed</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a): WHAT (1), WHERE FROM (2), TARGETS (3), WHY (4), THE BASKET (5), THE TYPES (6), HOW THEY PAIR (7), WHERE WE ARE - AUG 2024 (8), HOW THEY BITE (9). Limb (b): THREE CHALLENGES - AGREE (10), EQUITY (11), FUEL (12) - then INDUSTRY (13), then PARIS (14).</p>
     <div class="plan-cov">
@@ -2224,22 +2180,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>42</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>14 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 42 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What a market-based measure is</b><ul><li>An instrument that puts a price on the emission rather than prescribing the equipment</li><li>Contrast with technical measures (design) and operational measures (how she is run)</li><li>The purpose is to make the low-carbon choice the commercially rational one</li></ul></div>
-      <div class="pp-step"><b>2. Where the authority comes from</b><ul><li>The 2023 IMO GHG Strategy, resolution MEPC.377(80), adopted 7 July 2023</li><li>It revoked the 2018 Initial Strategy and set the current levels of ambition</li><li>Everything discussed at MEPC 81 is being developed under its work plan</li></ul></div>
-      <div class="pp-step"><b>3. The targets the measures have to deliver</b><ul><li>Net-zero GHG emissions from international shipping by or around 2050</li><li>At least 20%, striving for 30%, reduction by 2030 against 2008</li><li>At least 70%, striving for 80%, by 2040 against 2008</li></ul></div>
-      <div class="pp-step"><b>4. The main objectives of a market-based measure</b><ul><li>Close the price gap between conventional and zero or near-zero fuels</li><li>Raise revenue for the transition and for impacts on States</li><li>Reward the first mover and penalise the laggard, without prescribing technology</li></ul></div>
-      <div class="pp-step"><b>5. The shape the Strategy fixed - a basket of two elements</b><ul><li>A technical element: a goal-based marine fuel standard on GHG intensity</li><li>An economic element: a maritime GHG emissions pricing mechanism</li><li>To be finalized and agreed by the Committee by 2025</li></ul></div>
-      <div class="pp-step"><b>6. The types of economic measure under discussion</b><ul><li>A levy or contribution per tonne of GHG emitted</li><li>A cap-and-trade emissions trading system</li><li>A feebate - a fee on high-intensity fuel funding a rebate on low-intensity fuel</li></ul></div>
-      <div class="pp-step"><b>7. Why the technical and economic elements are coupled</b><ul><li>The fuel standard sets the trajectory; the pricing element pays for it</li><li>Well-to-wake accounting, to prevent a shift of emissions to other sectors</li><li>Synergies with the existing CII to be considered</li></ul></div>
-      <div class="pp-step"><b>8. Where the process had actually reached at this sitting</b><ul><li>MEPC 81 concluded 22 March 2024, five months before the sitting</li><li>The mid-term measures were PROPOSALS UNDER DEVELOPMENT, not an agreed instrument</li><li>MEPC 81 did adopt MEPC.384(81) and MEPC.385(81), which are not MBMs</li></ul></div>
-      <div class="pp-step"><b>9. How the measures contribute to reducing GHG emissions</b><ul><li>Price signal, revenue, and a guaranteed demand for compliant fuel</li><li>Global and flag-neutral, unlike a regional scheme</li><li>Technology-neutral, so it does not bet on one fuel</li></ul></div>
-      <div class="pp-step"><b>10. Challenge one - agreeing the mechanism and the price</b><ul><li>Levy, ETS or feebate are structurally different and produce different winners</li><li>The price level is the whole argument, and it had not been settled</li><li>Consensus practice at IMO means the least acceptable option constrains the outcome</li></ul></div>
-      <div class="pp-step"><b>11. Challenge two - impacts on States, and the equity question</b><ul><li>The Strategy requires impacts to be assessed before adoption</li><li>Particular attention to developing countries, LDCs and SIDS</li><li>The clash between no more favourable treatment and common but differentiated responsibilities</li></ul></div>
-      <div class="pp-step"><b>12. Challenge three - fuel, safety and the ship</b><ul><li>A price signal cannot create fuel that is not produced or bunkered</li><li>Safety and crew competence for alternative fuels</li><li>Verification, data quality and enforcement across the world fleet</li></ul></div>
-      <div class="pp-step"><b>13. Potential impacts on the shipping industry</b><ul><li>Cost, and who bears it - the charterparty allocation problem</li><li>Asset values, newbuilding decisions and the risk of stranded tonnage</li><li>Competitiveness, trade routes and the risk of regional fragmentation</li></ul></div>
-      <div class="pp-step"><b>14. Alignment with global climate goals</b><ul><li>Explicit reference to the Paris Agreement temperature goal in the Strategy</li><li>Well-to-wake accounting aligns shipping with life-cycle climate accounting</li><li>But shipping sits outside national inventories, which is why an IMO measure is needed</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2730,34 +2670,35 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">intro</div>
     <ol class="plan-list">
-      <li value="1">The unit the question is really about</li>
-      <li value="2">Why dimensions are the largest lever, and when it can be pulled</li>
+      <li value="1"><span class="pl-t">The unit the question is really about</span><ul class="pl-pts"><li>The unit is energy per unit of transport work - per tonne-mile - not per hour</li><li>This is why a bigger, slower ship can be efficient while being a large consumer</li><li>EEDI and CII both measure in this form</li></ul></li>
+      <li value="2"><span class="pl-t">Why dimensions are the largest lever, and when it can be pulled</span><ul class="pl-pts"><li>They fix resistance, installed power and transport work for the whole life of the ship</li><li>They can only be chosen once, at design; everything later is mitigation</li><li>Hence the regulatory focus on new-ship design</li></ul></li>
     </ol>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 6 marks</span></div>
     <ol class="plan-list">
-      <li value="3">Where the economy of scale comes from</li>
-      <li value="4">The limits, and the condition the whole saving depends on</li>
-      <li value="5">The regulatory consequence of scale</li>
+      <li value="3"><span class="pl-t">Where the economy of scale comes from</span><ul class="pl-pts"><li>Displacement grows with volume, wetted surface with area</li><li>Machinery, hotel and auxiliary loads do not scale with cargo</li><li>Crew, stores and overheads are near-constant per ship</li></ul></li>
+      <li value="4"><span class="pl-t">The limits, and the condition the whole saving depends on</span><ul class="pl-pts"><li>Canal, port, berth, draught and terminal constraints</li><li>Cargo availability, utilisation and ballast legs</li><li>A large ship part-loaded is worse per tonne-mile than a smaller full one</li></ul></li>
+      <li value="5"><span class="pl-t">The regulatory consequence of scale</span><ul class="pl-pts"><li>EEDI's capacity term rewards larger ships on the same reference line</li><li>Larger ships also carry more absolute emissions, which is what the CII rating exposes</li><li>Scale improves the index; it does not by itself reduce total emissions</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 5 marks</span></div>
     <ol class="plan-list">
-      <li value="6">The power-speed relationship and what follows from it</li>
-      <li value="7">What the design service speed fixes permanently</li>
-      <li value="8">The operational and commercial trade-off</li>
+      <li value="6"><span class="pl-t">The power-speed relationship and what follows from it</span><ul class="pl-pts"><li>Resistance rises steeply with speed and power rises faster still</li><li>Approximately with the cube of speed over the normal range</li><li>Fuel per mile therefore rises approximately with the square of speed</li></ul></li>
+      <li value="7"><span class="pl-t">What the design service speed fixes permanently</span><ul class="pl-pts"><li>Installed power, engine selection, propeller design and the hull lines</li><li>The bulbous bow and lines are tuned to a design speed and draught</li><li>Off-design operation carries a penalty the ship cannot design away</li></ul></li>
+      <li value="8"><span class="pl-t">The operational and commercial trade-off</span><ul class="pl-pts"><li>Slower means less fuel per mile but longer voyages and more ships for the same annual capacity</li><li>Cargo value, freight rate and fuel price set the economic speed</li><li>Slow steaming has real machinery consequences</li></ul></li>
     </ol>
-    <div class="plan-limb">(c)</div>
+    <div class="plan-limb">(c) <span class="pl-mk">&middot; 5 marks</span></div>
     <ol class="plan-list">
-      <li value="9">The resistance components the dimensions act on</li>
-      <li value="10">Length</li>
-      <li value="11">Beam, draught and fullness</li>
-      <li value="12">The afterbody, the aperture and the propeller</li>
+      <li value="9"><span class="pl-t">The resistance components the dimensions act on</span><ul class="pl-pts"><li>Frictional resistance follows wetted surface</li><li>Residuary resistance follows form and speed-length ratio</li><li>Air and appendage resistance are smaller but not negligible</li></ul></li>
+      <li value="10"><span class="pl-t">Length</span><ul class="pl-pts"><li>Greater length for a given displacement lowers the speed-length ratio and wave-making</li><li>But increases wetted surface, structural weight and cost</li><li>Longer parallel middle body is cheap to build and carries cargo well</li></ul></li>
+      <li value="11"><span class="pl-t">Beam, draught and fullness</span><ul class="pl-pts"><li>Beam gives stability and deck area but adds wave-making and demands power</li><li>Draught is limited by ports and by the load line; deeper is generally more efficient</li><li>Fullness carries cargo but adds residuary resistance and complicates the wake</li></ul></li>
+      <li value="12"><span class="pl-t">The afterbody, the aperture and the propeller</span><ul class="pl-pts"><li>Afterbody form governs wake quality and hull efficiency</li><li>The aperture must allow the largest, slowest-turning propeller that will fit and stay immersed</li><li>Rudder, bilge keels, bossings and openings all cost something</li></ul></li>
     </ol>
     <div class="plan-limb">all</div>
     <ol class="plan-list">
-      <li value="13">What stops optimisation being a free gain</li>
-      <li value="14">How the three interact, and the order in which they are decided</li>
+      <li value="13"><span class="pl-t">What stops optimisation being a free gain</span><ul class="pl-pts"><li>Stability, subdivision and damage stability; strength and structural weight</li><li>Seakeeping, added resistance in waves, and manoeuvrability</li><li>Tonnage measurement, port dues and canal tolls; building cost and yard capability</li></ul></li>
+      <li value="14"><span class="pl-t">How the three interact, and the order in which they are decided</span><ul class="pl-pts"><li>Speed is decided first because it sizes the powering problem</li><li>Capacity is decided by the trade and the route constraints</li><li>Dimensions are then optimised within those two, which is why the order matters</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> PREAMBLE: per tonne-mile (1), chosen once (2). (a) SIZE: WHY IT WORKS (3), WHAT LIMITS IT (4), WHAT THE RULES DO (5). (b) SPEED: THE CUBE (6), FIXED FOR LIFE (7), THE TRADE (8). (c) DIMENSIONS: RESISTANCE (9), LENGTH (10), BEAM-DRAUGHT-FULLNESS (11), STERN AND PROPELLER (12). CLOSE: PUSHBACK (13), ORDER (14).</p>
     <div class="plan-cov">
@@ -2765,22 +2706,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>42</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>14 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 42 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The unit the question is really about</b><ul><li>The unit is energy per unit of transport work - per tonne-mile - not per hour</li><li>This is why a bigger, slower ship can be efficient while being a large consumer</li><li>EEDI and CII both measure in this form</li></ul></div>
-      <div class="pp-step"><b>2. Why dimensions are the largest lever, and when it can be pulled</b><ul><li>They fix resistance, installed power and transport work for the whole life of the ship</li><li>They can only be chosen once, at design; everything later is mitigation</li><li>Hence the regulatory focus on new-ship design</li></ul></div>
-      <div class="pp-step"><b>3. Where the economy of scale comes from</b><ul><li>Displacement grows with volume, wetted surface with area</li><li>Machinery, hotel and auxiliary loads do not scale with cargo</li><li>Crew, stores and overheads are near-constant per ship</li></ul></div>
-      <div class="pp-step"><b>4. The limits, and the condition the whole saving depends on</b><ul><li>Canal, port, berth, draught and terminal constraints</li><li>Cargo availability, utilisation and ballast legs</li><li>A large ship part-loaded is worse per tonne-mile than a smaller full one</li></ul></div>
-      <div class="pp-step"><b>5. The regulatory consequence of scale</b><ul><li>EEDI's capacity term rewards larger ships on the same reference line</li><li>Larger ships also carry more absolute emissions, which is what the CII rating exposes</li><li>Scale improves the index; it does not by itself reduce total emissions</li></ul></div>
-      <div class="pp-step"><b>6. The power-speed relationship and what follows from it</b><ul><li>Resistance rises steeply with speed and power rises faster still</li><li>Approximately with the cube of speed over the normal range</li><li>Fuel per mile therefore rises approximately with the square of speed</li></ul></div>
-      <div class="pp-step"><b>7. What the design service speed fixes permanently</b><ul><li>Installed power, engine selection, propeller design and the hull lines</li><li>The bulbous bow and lines are tuned to a design speed and draught</li><li>Off-design operation carries a penalty the ship cannot design away</li></ul></div>
-      <div class="pp-step"><b>8. The operational and commercial trade-off</b><ul><li>Slower means less fuel per mile but longer voyages and more ships for the same annual capacity</li><li>Cargo value, freight rate and fuel price set the economic speed</li><li>Slow steaming has real machinery consequences</li></ul></div>
-      <div class="pp-step"><b>9. The resistance components the dimensions act on</b><ul><li>Frictional resistance follows wetted surface</li><li>Residuary resistance follows form and speed-length ratio</li><li>Air and appendage resistance are smaller but not negligible</li></ul></div>
-      <div class="pp-step"><b>10. Length</b><ul><li>Greater length for a given displacement lowers the speed-length ratio and wave-making</li><li>But increases wetted surface, structural weight and cost</li><li>Longer parallel middle body is cheap to build and carries cargo well</li></ul></div>
-      <div class="pp-step"><b>11. Beam, draught and fullness</b><ul><li>Beam gives stability and deck area but adds wave-making and demands power</li><li>Draught is limited by ports and by the load line; deeper is generally more efficient</li><li>Fullness carries cargo but adds residuary resistance and complicates the wake</li></ul></div>
-      <div class="pp-step"><b>12. The afterbody, the aperture and the propeller</b><ul><li>Afterbody form governs wake quality and hull efficiency</li><li>The aperture must allow the largest, slowest-turning propeller that will fit and stay immersed</li><li>Rudder, bilge keels, bossings and openings all cost something</li></ul></div>
-      <div class="pp-step"><b>13. What stops optimisation being a free gain</b><ul><li>Stability, subdivision and damage stability; strength and structural weight</li><li>Seakeeping, added resistance in waves, and manoeuvrability</li><li>Tonnage measurement, port dues and canal tolls; building cost and yard capability</li></ul></div>
-      <div class="pp-step"><b>14. How the three interact, and the order in which they are decided</b><ul><li>Speed is decided first because it sizes the powering problem</li><li>Capacity is decided by the trade and the route constraints</li><li>Dimensions are then optimised within those two, which is why the order matters</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -3214,25 +3139,26 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 12 marks</span></div>
     <ol class="plan-list">
-      <li value="1">The standard, named and placed</li>
-      <li value="2">How the specification is organised</li>
-      <li value="3">The salient features of the specification</li>
-      <li value="4">The mandatory floor beneath the specification - MARPOL Annex VI regulation 18.3</li>
-      <li value="5">How a fuel oil analysis report is read</li>
-      <li value="6">Corrective action - density, viscosity and ignition quality</li>
-      <li value="7">Corrective action - catalytic fines</li>
-      <li value="8">Corrective action - water, sediment, stability and compatibility</li>
-      <li value="9">Corrective action - sulphur and flashpoint</li>
-      <li value="10">Corrective action - ash, metals and micro-carbon residue</li>
-      <li value="11">The decision that sits above all the corrective actions</li>
+      <li value="1"><span class="pl-t">The standard, named and placed</span><ul class="pl-pts"><li>ISO 8217 is the international specification for marine fuels</li><li>It is a commercial specification, not a regulation</li><li>MARPOL Annex VI regulation 18.3 is the mandatory floor beneath it</li></ul></li>
+      <li value="2"><span class="pl-t">How the specification is organised</span><ul class="pl-pts"><li>Residual grades - the RM family</li><li>Distillate grades - the DM family</li><li>Grades distinguished by viscosity and by the parameter set applied</li></ul></li>
+      <li value="3"><span class="pl-t">The salient features of the specification</span><ul class="pl-pts"><li>A table of characteristics with limits, each tied to a test method</li><li>Parameters split into those affecting handling, combustion, machinery wear and safety</li><li>General requirements: free of used lubricating oil and of material that harms the ship, the crew or the air</li></ul></li>
+      <li value="4"><span class="pl-t">The mandatory floor beneath the specification - MARPOL Annex VI regulation 18.3</span><ul class="pl-pts"><li>Blends of hydrocarbons from petroleum refining; small amounts of performance additives permitted</li><li>Free from inorganic acid</li><li>No added substance or chemical waste jeopardizing safety, harming machinery or personnel, or adding to air pollution</li></ul></li>
+      <li value="5"><span class="pl-t">How a fuel oil analysis report is read</span><ul class="pl-pts"><li>Sample first, then test, then decide - before the fuel is used if possible</li><li>Compare against the ordered grade and against the ship's plant capability</li><li>Group the observations - handling, combustion, wear, safety, statutory</li></ul></li>
+      <li value="6"><span class="pl-t">Corrective action - density, viscosity and ignition quality</span><ul class="pl-pts"><li>Density outside the separator's capability - check the plant type and settings</li><li>Viscosity - correct the preheating to reach injection viscosity, not a temperature</li><li>Poor calculated ignition quality - protect combustion timing and load changes</li></ul></li>
+      <li value="7"><span class="pl-t">Corrective action - catalytic fines</span><ul class="pl-pts"><li>Aluminium plus silicon - abrasive, and they survive combustion</li><li>Optimise settling, heating and separation; slow the throughput</li><li>Sample after the separator, not only on delivery</li></ul></li>
+      <li value="8"><span class="pl-t">Corrective action - water, sediment, stability and compatibility</span><ul class="pl-pts"><li>Water - drain, settle, purify; suspect the tank and the bunkering if it is high</li><li>Total sediment - a stability warning, not just dirt</li><li>Never blend incompatible fuels; segregate first, test compatibility before mixing</li></ul></li>
+      <li value="9"><span class="pl-t">Corrective action - sulphur and flashpoint</span><ul class="pl-pts"><li>Sulphur is a statutory parameter, not merely a commercial one</li><li>Off-spec sulphur triggers reporting and record obligations</li><li>Low flashpoint is a safety matter and may require the fuel to be rejected outright</li></ul></li>
+      <li value="10"><span class="pl-t">Corrective action - ash, metals and micro-carbon residue</span><ul class="pl-pts"><li>Vanadium and sodium - hot corrosion of exhaust valves and turbine components</li><li>Used lubricating oil markers - calcium, zinc, phosphorus - a ground for rejection</li><li>High carbon residue - deposits, fouling and poorer combustion</li></ul></li>
+      <li value="11"><span class="pl-t">The decision that sits above all the corrective actions</span><ul class="pl-pts"><li>Use with precautions, use with restrictions, segregate, or reject and debunker</li><li>Notify owners, charterers, supplier and P&amp;I early, in writing</li><li>The MARPOL sample is the evidence on which any claim will turn</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="12">What it is, and where it comes from</li>
-      <li value="13">Its contents, retention and inspection</li>
-      <li value="14">The representative sample, and why the BDN matters</li>
+      <li value="12"><span class="pl-t">What it is, and where it comes from</span><ul class="pl-pts"><li>Required by MARPOL Annex VI regulation 18.5 for ships subject to regulations 5 and 6</li><li>It must contain at least the information in appendix V</li><li>It is a statutory document, not a commercial receipt</li></ul></li>
+      <li value="13"><span class="pl-t">Its contents, retention and inspection</span><ul class="pl-pts"><li>The ten appendix V items, including the signed and certified supplier's declaration</li><li>Kept readily available for inspection and retained three years</li><li>Port State may inspect, copy and require the master to certify the copy</li></ul></li>
+      <li value="14"><span class="pl-t">The representative sample, and why the BDN matters</span><ul class="pl-pts"><li>Sealed and signed by the supplier's representative and the master or officer in charge</li><li>Retained under the ship's control until the fuel is substantially consumed</li><li>It is the evidence for both statutory defence and commercial claim</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> (a) is FOUR then FIVE then ONE: NAME (1), GRADES (2), FEATURES (3), THE LEGAL FLOOR (4) - then read the report (5) - then FIVE GROUPS: DENSITY-VISCOSITY-IGNITION (6), CAT FINES (7), WATER-SEDIMENT-STABILITY (8), SULPHUR-FLASHPOINT (9), ASH-METALS-MCR (10) - then THE BIG DECISION (11). (b) is WHAT (12), CONTENTS (13), SAMPLE (14).</p>
     <div class="plan-cov">
@@ -3240,22 +3166,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>42</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>14 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 42 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The standard, named and placed</b><ul><li>ISO 8217 is the international specification for marine fuels</li><li>It is a commercial specification, not a regulation</li><li>MARPOL Annex VI regulation 18.3 is the mandatory floor beneath it</li></ul></div>
-      <div class="pp-step"><b>2. How the specification is organised</b><ul><li>Residual grades - the RM family</li><li>Distillate grades - the DM family</li><li>Grades distinguished by viscosity and by the parameter set applied</li></ul></div>
-      <div class="pp-step"><b>3. The salient features of the specification</b><ul><li>A table of characteristics with limits, each tied to a test method</li><li>Parameters split into those affecting handling, combustion, machinery wear and safety</li><li>General requirements: free of used lubricating oil and of material that harms the ship, the crew or the air</li></ul></div>
-      <div class="pp-step"><b>4. The mandatory floor beneath the specification - MARPOL Annex VI regulation 18.3</b><ul><li>Blends of hydrocarbons from petroleum refining; small amounts of performance additives permitted</li><li>Free from inorganic acid</li><li>No added substance or chemical waste jeopardizing safety, harming machinery or personnel, or adding to air pollution</li></ul></div>
-      <div class="pp-step"><b>5. How a fuel oil analysis report is read</b><ul><li>Sample first, then test, then decide - before the fuel is used if possible</li><li>Compare against the ordered grade and against the ship's plant capability</li><li>Group the observations - handling, combustion, wear, safety, statutory</li></ul></div>
-      <div class="pp-step"><b>6. Corrective action - density, viscosity and ignition quality</b><ul><li>Density outside the separator's capability - check the plant type and settings</li><li>Viscosity - correct the preheating to reach injection viscosity, not a temperature</li><li>Poor calculated ignition quality - protect combustion timing and load changes</li></ul></div>
-      <div class="pp-step"><b>7. Corrective action - catalytic fines</b><ul><li>Aluminium plus silicon - abrasive, and they survive combustion</li><li>Optimise settling, heating and separation; slow the throughput</li><li>Sample after the separator, not only on delivery</li></ul></div>
-      <div class="pp-step"><b>8. Corrective action - water, sediment, stability and compatibility</b><ul><li>Water - drain, settle, purify; suspect the tank and the bunkering if it is high</li><li>Total sediment - a stability warning, not just dirt</li><li>Never blend incompatible fuels; segregate first, test compatibility before mixing</li></ul></div>
-      <div class="pp-step"><b>9. Corrective action - sulphur and flashpoint</b><ul><li>Sulphur is a statutory parameter, not merely a commercial one</li><li>Off-spec sulphur triggers reporting and record obligations</li><li>Low flashpoint is a safety matter and may require the fuel to be rejected outright</li></ul></div>
-      <div class="pp-step"><b>10. Corrective action - ash, metals and micro-carbon residue</b><ul><li>Vanadium and sodium - hot corrosion of exhaust valves and turbine components</li><li>Used lubricating oil markers - calcium, zinc, phosphorus - a ground for rejection</li><li>High carbon residue - deposits, fouling and poorer combustion</li></ul></div>
-      <div class="pp-step"><b>11. The decision that sits above all the corrective actions</b><ul><li>Use with precautions, use with restrictions, segregate, or reject and debunker</li><li>Notify owners, charterers, supplier and P&amp;I early, in writing</li><li>The MARPOL sample is the evidence on which any claim will turn</li></ul></div>
-      <div class="pp-step"><b>12. What it is, and where it comes from</b><ul><li>Required by MARPOL Annex VI regulation 18.5 for ships subject to regulations 5 and 6</li><li>It must contain at least the information in appendix V</li><li>It is a statutory document, not a commercial receipt</li></ul></div>
-      <div class="pp-step"><b>13. Its contents, retention and inspection</b><ul><li>The ten appendix V items, including the signed and certified supplier's declaration</li><li>Kept readily available for inspection and retained three years</li><li>Port State may inspect, copy and require the master to certify the copy</li></ul></div>
-      <div class="pp-step"><b>14. The representative sample, and why the BDN matters</b><ul><li>Sealed and signed by the supplier's representative and the master or officer in charge</li><li>Retained under the ship's control until the fuel is substantially consumed</li><li>It is the evidence for both statutory defence and commercial claim</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -3737,34 +3647,35 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">intro</div>
     <ol class="plan-list">
-      <li value="1">The Convention, and where the stem's facts have got to</li>
+      <li value="1"><span class="pl-t">The Convention, and where the stem's facts have got to</span><ul class="pl-pts"><li>International Convention on Salvage, 1989, in force 1996, replacing the 1910 Convention</li><li>The stem's facts - grounded, refloated, towed to a place of safety by a professional salvor</li><li>A useful result has been achieved, so the right to a reward has accrued</li></ul></li>
     </ol>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 6 marks</span></div>
     <ol class="plan-list">
-      <li value="2">The scheme Article 13 sits inside</li>
-      <li value="3">The Article 13 criteria</li>
-      <li value="4">How the criteria are applied</li>
-      <li value="5">Who pays, and what can reduce or extinguish the award</li>
+      <li value="2"><span class="pl-t">The scheme Article 13 sits inside</span><ul class="pl-pts"><li>Article 12 - no payment without a useful result. No cure, no pay is retained</li><li>Article 13 - the reward, fixed with a view to encouraging salvage operations</li><li>The reward is what Article 13 quantifies; the entitlement comes from Article 12</li></ul></li>
+      <li value="3"><span class="pl-t">The Article 13 criteria</span><ul class="pl-pts"><li>Salved value; skill and efforts in preventing or minimising environmental damage</li><li>Measure of success; nature and degree of danger; skill and efforts in salving the property and life</li><li>Time, expenses and losses; risk of liability; promptness; availability and use of vessels; state of readiness and efficiency of equipment and its value</li></ul></li>
+      <li value="4"><span class="pl-t">How the criteria are applied</span><ul class="pl-pts"><li>They are NOT listed in order of importance - all are taken together</li><li>The reward shall not exceed the salved value of the vessel and other property</li><li>Payable by the interests in proportion to their respective salved values</li></ul></li>
+      <li value="5"><span class="pl-t">Who pays, and what can reduce or extinguish the award</span><ul class="pl-pts"><li>Ship and cargo interests, each in proportion to its salved value</li><li>Article 18 - misconduct, fault or neglect by the salvor may deprive him of all or part</li><li>Article 19 - services against express and reasonable prohibition are not payable</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 5 marks</span></div>
     <ol class="plan-list">
-      <li value="6">The salvor's duties</li>
-      <li value="7">The duties of the owner and the master</li>
-      <li value="8">The mutual character of the duties, the master's authority, and breach</li>
+      <li value="6"><span class="pl-t">The salvor's duties</span><ul class="pl-pts"><li>Carry out the operations with due care</li><li>In performing that duty, exercise due care to prevent or minimise damage to the environment</li><li>Seek help from other salvors when circumstances reasonably require, and accept their intervention when reasonably requested by the owner or master</li></ul></li>
+      <li value="7"><span class="pl-t">The duties of the owner and the master</span><ul class="pl-pts"><li>Co-operate fully with the salvor</li><li>In doing so, exercise due care to prevent or minimise damage to the environment</li><li>Accept redelivery when the vessel is brought to a place of safety and reasonably requested to do so</li></ul></li>
+      <li value="8"><span class="pl-t">The mutual character of the duties, the master's authority, and breach</span><ul class="pl-pts"><li>The environmental duty is imposed on BOTH sides - this is the Convention's innovation</li><li>The master may conclude a salvage contract on behalf of the ship's owner</li><li>Breach bears on the award and on liability; misconduct engages Article 18</li></ul></li>
     </ol>
-    <div class="plan-limb">(c)</div>
+    <div class="plan-limb">(c) <span class="pl-mk">&middot; 5 marks</span></div>
     <ol class="plan-list">
-      <li value="9">What LOF 2000 is, and what it is not</li>
-      <li value="10">When the Convention applies</li>
-      <li value="11">When the LOF applies</li>
-      <li value="12">How a dispute is actually resolved under an LOF</li>
-      <li value="13">The relationship, stated as a rule</li>
+      <li value="9"><span class="pl-t">What LOF 2000 is, and what it is not</span><ul class="pl-pts"><li>Lloyd's Open Form - a standard-form salvage CONTRACT, not an instrument</li><li>No cure no pay; the remuneration is not fixed at the time of agreement</li><li>Signed quickly, often by the master, so that work can begin at once</li></ul></li>
+      <li value="10"><span class="pl-t">When the Convention applies</span><ul class="pl-pts"><li>It applies as the general law where a State has given it force, and its rules govern by default</li><li>Article 6 - the Convention applies to any salvage operation save as otherwise provided in a contract</li><li>But its core duties cannot be contracted out of</li></ul></li>
+      <li value="11"><span class="pl-t">When the LOF applies</span><ul class="pl-pts"><li>Where the parties have agreed it, its terms govern the relationship between them</li><li>It fixes the forum, the law, the security and the machinery for fixing the sum</li><li>It does not create the entitlement - the Convention's principles do</li></ul></li>
+      <li value="12"><span class="pl-t">How a dispute is actually resolved under an LOF</span><ul class="pl-pts"><li>Arbitration in London under the terms of the form, not litigation in the casualty's jurisdiction</li><li>The arbitrator fixes the amount applying the Convention's criteria</li><li>Appeal within the form's own structure; security provided before release</li></ul></li>
+      <li value="13"><span class="pl-t">The relationship, stated as a rule</span><ul class="pl-pts"><li>The contract governs procedure and terms; the Convention governs the substance</li><li>Where the contract is silent, the Convention fills the gap</li><li>Where the contract would defeat the Convention's protective provisions, the Convention prevails</li></ul></li>
     </ol>
     <div class="plan-limb">all</div>
     <ol class="plan-list">
-      <li value="14">Why the arrangement exists at all</li>
+      <li value="14"><span class="pl-t">Why the arrangement exists at all</span><ul class="pl-pts"><li>A casualty needs a decision in minutes and a valuation that takes months</li><li>The form lets work start; the Convention ensures the sum is fixed on principled criteria</li><li>Together they are why a professional salvor sails towards a ship nobody has yet agreed to pay for</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> SCENE (1). (a) FOUR: THE SCHEME (2), THE LIST (3), HOW APPLIED (4), WHO PAYS (5). (b) THREE: SALVOR (6), OWNER AND MASTER (7), MUTUAL AND BREACH (8). (c) FIVE: WHAT LOF IS (9), CONVENTION WHEN (10), LOF WHEN (11), THE DISPUTE (12), THE RULE (13). CLOSE: WHY (14).</p>
     <div class="plan-cov">
@@ -3772,22 +3683,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>42</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>14 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 42 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The Convention, and where the stem's facts have got to</b><ul><li>International Convention on Salvage, 1989, in force 1996, replacing the 1910 Convention</li><li>The stem's facts - grounded, refloated, towed to a place of safety by a professional salvor</li><li>A useful result has been achieved, so the right to a reward has accrued</li></ul></div>
-      <div class="pp-step"><b>2. The scheme Article 13 sits inside</b><ul><li>Article 12 - no payment without a useful result. No cure, no pay is retained</li><li>Article 13 - the reward, fixed with a view to encouraging salvage operations</li><li>The reward is what Article 13 quantifies; the entitlement comes from Article 12</li></ul></div>
-      <div class="pp-step"><b>3. The Article 13 criteria</b><ul><li>Salved value; skill and efforts in preventing or minimising environmental damage</li><li>Measure of success; nature and degree of danger; skill and efforts in salving the property and life</li><li>Time, expenses and losses; risk of liability; promptness; availability and use of vessels; state of readiness and efficiency of equipment and its value</li></ul></div>
-      <div class="pp-step"><b>4. How the criteria are applied</b><ul><li>They are NOT listed in order of importance - all are taken together</li><li>The reward shall not exceed the salved value of the vessel and other property</li><li>Payable by the interests in proportion to their respective salved values</li></ul></div>
-      <div class="pp-step"><b>5. Who pays, and what can reduce or extinguish the award</b><ul><li>Ship and cargo interests, each in proportion to its salved value</li><li>Article 18 - misconduct, fault or neglect by the salvor may deprive him of all or part</li><li>Article 19 - services against express and reasonable prohibition are not payable</li></ul></div>
-      <div class="pp-step"><b>6. The salvor's duties</b><ul><li>Carry out the operations with due care</li><li>In performing that duty, exercise due care to prevent or minimise damage to the environment</li><li>Seek help from other salvors when circumstances reasonably require, and accept their intervention when reasonably requested by the owner or master</li></ul></div>
-      <div class="pp-step"><b>7. The duties of the owner and the master</b><ul><li>Co-operate fully with the salvor</li><li>In doing so, exercise due care to prevent or minimise damage to the environment</li><li>Accept redelivery when the vessel is brought to a place of safety and reasonably requested to do so</li></ul></div>
-      <div class="pp-step"><b>8. The mutual character of the duties, the master's authority, and breach</b><ul><li>The environmental duty is imposed on BOTH sides - this is the Convention's innovation</li><li>The master may conclude a salvage contract on behalf of the ship's owner</li><li>Breach bears on the award and on liability; misconduct engages Article 18</li></ul></div>
-      <div class="pp-step"><b>9. What LOF 2000 is, and what it is not</b><ul><li>Lloyd's Open Form - a standard-form salvage CONTRACT, not an instrument</li><li>No cure no pay; the remuneration is not fixed at the time of agreement</li><li>Signed quickly, often by the master, so that work can begin at once</li></ul></div>
-      <div class="pp-step"><b>10. When the Convention applies</b><ul><li>It applies as the general law where a State has given it force, and its rules govern by default</li><li>Article 6 - the Convention applies to any salvage operation save as otherwise provided in a contract</li><li>But its core duties cannot be contracted out of</li></ul></div>
-      <div class="pp-step"><b>11. When the LOF applies</b><ul><li>Where the parties have agreed it, its terms govern the relationship between them</li><li>It fixes the forum, the law, the security and the machinery for fixing the sum</li><li>It does not create the entitlement - the Convention's principles do</li></ul></div>
-      <div class="pp-step"><b>12. How a dispute is actually resolved under an LOF</b><ul><li>Arbitration in London under the terms of the form, not litigation in the casualty's jurisdiction</li><li>The arbitrator fixes the amount applying the Convention's criteria</li><li>Appeal within the form's own structure; security provided before release</li></ul></div>
-      <div class="pp-step"><b>13. The relationship, stated as a rule</b><ul><li>The contract governs procedure and terms; the Convention governs the substance</li><li>Where the contract is silent, the Convention fills the gap</li><li>Where the contract would defeat the Convention's protective provisions, the Convention prevails</li></ul></div>
-      <div class="pp-step"><b>14. Why the arrangement exists at all</b><ul><li>A casualty needs a decision in minutes and a valuation that takes months</li><li>The form lets work start; the Convention ensures the sum is fixed on principled criteria</li><li>Together they are why a professional salvor sails towards a ship nobody has yet agreed to pay for</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -4255,34 +4150,35 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">intro</div>
     <ol class="plan-list">
-      <li value="1">Why the turbocharger is where the gains now are</li>
-      <li value="2">The common thread, and the division that organises the answer</li>
+      <li value="1"><span class="pl-t">Why the turbocharger is where the gains now are</span><ul class="pl-pts"><li>The largest single loss from a diesel engine leaves through the exhaust</li><li>Modern high-efficiency turbochargers need less of that energy than is available</li><li>The surplus is what all three devices exploit</li></ul></li>
+      <li value="2"><span class="pl-t">The common thread, and the division that organises the answer</span><ul class="pl-pts"><li>All three put an electrical machine in the exhaust energy path</li><li>Two of them harvest surplus energy; one of them adds energy where there is a deficit</li><li>Recognising that division is the key to the whole answer</li></ul></li>
     </ol>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 6 marks</span></div>
     <ol class="plan-list">
-      <li value="3">What it is</li>
-      <li value="4">How it is arranged and controlled</li>
-      <li value="5">What it buys, and what it costs</li>
+      <li value="3"><span class="pl-t">What it is</span><ul class="pl-pts"><li>A separate exhaust gas turbine fed by gas bypassed around the turbocharger</li><li>It drives a generator, usually through reduction gearing</li><li>It is an additional machine, not a modification of the turbocharger</li></ul></li>
+      <li value="4"><span class="pl-t">How it is arranged and controlled</span><ul class="pl-pts"><li>Bypass valve, power turbine, gearbox, generator, and the electrical interface</li><li>Engaged only above the load at which surplus energy exists</li><li>May be combined with an exhaust gas boiler and steam turbine in a combined plant</li></ul></li>
+      <li value="5"><span class="pl-t">What it buys, and what it costs</span><ul class="pl-pts"><li>Electrical power produced with no additional fuel, so auxiliary engines can be stopped</li><li>Improves the ship's overall energy efficiency and her design and operational indices</li><li>Cost, weight, space, complexity, and no benefit at low load</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 5 marks</span></div>
     <ol class="plan-list">
-      <li value="6">What it is</li>
-      <li value="7">How it works in both directions</li>
-      <li value="8">What it buys, and what it costs</li>
+      <li value="6"><span class="pl-t">What it is</span><ul class="pl-pts"><li>A turbocharger with an electrical machine integrated on its own shaft</li><li>No separate turbine and no gas bypass to a second machine</li><li>One machine doing two jobs</li></ul></li>
+      <li value="7"><span class="pl-t">How it works in both directions</span><ul class="pl-pts"><li>As a generator, absorbing surplus turbine power at high load</li><li>As a motor, driving the compressor when there is not enough exhaust energy</li><li>Control decides which, according to load and transient demand</li></ul></li>
+      <li value="8"><span class="pl-t">What it buys, and what it costs</span><ul class="pl-pts"><li>Electrical power without fuel, plus low-load and transient support in one installation</li><li>Compact, with no gearbox and no separate turbine casing</li><li>The electrical machine runs at turbocharger speed in a hot, dirty environment</li></ul></li>
     </ol>
-    <div class="plan-limb">(c)</div>
+    <div class="plan-limb">(c) <span class="pl-mk">&middot; 5 marks</span></div>
     <ol class="plan-list">
-      <li value="9">What it is</li>
-      <li value="10">The problem it solves</li>
-      <li value="11">What it buys, and what it costs</li>
+      <li value="9"><span class="pl-t">What it is</span><ul class="pl-pts"><li>A turbocharger with an electric motor assisting the compressor</li><li>Primarily a motoring device rather than a generating one</li><li>Draws power from the ship rather than producing it</li></ul></li>
+      <li value="10"><span class="pl-t">The problem it solves</span><ul class="pl-pts"><li>At low load and during acceleration there is not enough exhaust energy</li><li>The result is low scavenge pressure, poor combustion, smoke and thermal loading</li><li>Auxiliary blowers do part of this job; the electric motor does it better</li></ul></li>
+      <li value="11"><span class="pl-t">What it buys, and what it costs</span><ul class="pl-pts"><li>Cleaner low-load running, faster response, and better slow steaming behaviour</li><li>Supports the derating and low-load operation that speed reduction demands</li><li>It consumes electrical power; the benefit is combustion quality, not direct generation</li></ul></li>
     </ol>
     <div class="plan-limb">all</div>
     <ol class="plan-list">
-      <li value="12">Choosing between them</li>
-      <li value="13">What these developments mean for the operating engineer</li>
-      <li value="14">Where this fits in the wider picture</li>
+      <li value="12"><span class="pl-t">Choosing between them</span><ul class="pl-pts"><li>Harvest surplus energy - power turbine and hybrid in generating mode</li><li>Supply a deficit - electro-assist and hybrid in motoring mode</li><li>Choose by the ship's operating profile, not by the technology</li></ul></li>
+      <li value="13"><span class="pl-t">What these developments mean for the operating engineer</span><ul class="pl-pts"><li>Exhaust-side cleanliness matters more, not less, because energy is being harvested</li><li>New failure modes: bypass valves, gearing, high-speed electrical machines, power electronics</li><li>Control interaction with the electrical plant and with the engine's certified configuration</li></ul></li>
+      <li value="14"><span class="pl-t">Where this fits in the wider picture</span><ul class="pl-pts"><li>Efficiency measured per unit of transport work, and now priced</li><li>These recover part of the largest loss without touching the combustion process</li><li>The gains are real but incremental, and they are load-profile dependent</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> PREMISE: surplus at high load (1), harvest vs supply (2). Then THREE DEVICES, SAME THREE HEADINGS EACH: PT what/arrangement/gains (3,4,5); HYBRID what/both ways/gains (6,7,8); ELECTRO-ASSIST what/problem/gains (9,10,11). CLOSE: COMPARE (12), THE ENGINEER (13), PLACEMENT (14).</p>
     <div class="plan-cov">
@@ -4290,22 +4186,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>42</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>14 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 42 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Why the turbocharger is where the gains now are</b><ul><li>The largest single loss from a diesel engine leaves through the exhaust</li><li>Modern high-efficiency turbochargers need less of that energy than is available</li><li>The surplus is what all three devices exploit</li></ul></div>
-      <div class="pp-step"><b>2. The common thread, and the division that organises the answer</b><ul><li>All three put an electrical machine in the exhaust energy path</li><li>Two of them harvest surplus energy; one of them adds energy where there is a deficit</li><li>Recognising that division is the key to the whole answer</li></ul></div>
-      <div class="pp-step"><b>3. What it is</b><ul><li>A separate exhaust gas turbine fed by gas bypassed around the turbocharger</li><li>It drives a generator, usually through reduction gearing</li><li>It is an additional machine, not a modification of the turbocharger</li></ul></div>
-      <div class="pp-step"><b>4. How it is arranged and controlled</b><ul><li>Bypass valve, power turbine, gearbox, generator, and the electrical interface</li><li>Engaged only above the load at which surplus energy exists</li><li>May be combined with an exhaust gas boiler and steam turbine in a combined plant</li></ul></div>
-      <div class="pp-step"><b>5. What it buys, and what it costs</b><ul><li>Electrical power produced with no additional fuel, so auxiliary engines can be stopped</li><li>Improves the ship's overall energy efficiency and her design and operational indices</li><li>Cost, weight, space, complexity, and no benefit at low load</li></ul></div>
-      <div class="pp-step"><b>6. What it is</b><ul><li>A turbocharger with an electrical machine integrated on its own shaft</li><li>No separate turbine and no gas bypass to a second machine</li><li>One machine doing two jobs</li></ul></div>
-      <div class="pp-step"><b>7. How it works in both directions</b><ul><li>As a generator, absorbing surplus turbine power at high load</li><li>As a motor, driving the compressor when there is not enough exhaust energy</li><li>Control decides which, according to load and transient demand</li></ul></div>
-      <div class="pp-step"><b>8. What it buys, and what it costs</b><ul><li>Electrical power without fuel, plus low-load and transient support in one installation</li><li>Compact, with no gearbox and no separate turbine casing</li><li>The electrical machine runs at turbocharger speed in a hot, dirty environment</li></ul></div>
-      <div class="pp-step"><b>9. What it is</b><ul><li>A turbocharger with an electric motor assisting the compressor</li><li>Primarily a motoring device rather than a generating one</li><li>Draws power from the ship rather than producing it</li></ul></div>
-      <div class="pp-step"><b>10. The problem it solves</b><ul><li>At low load and during acceleration there is not enough exhaust energy</li><li>The result is low scavenge pressure, poor combustion, smoke and thermal loading</li><li>Auxiliary blowers do part of this job; the electric motor does it better</li></ul></div>
-      <div class="pp-step"><b>11. What it buys, and what it costs</b><ul><li>Cleaner low-load running, faster response, and better slow steaming behaviour</li><li>Supports the derating and low-load operation that speed reduction demands</li><li>It consumes electrical power; the benefit is combustion quality, not direct generation</li></ul></div>
-      <div class="pp-step"><b>12. Choosing between them</b><ul><li>Harvest surplus energy - power turbine and hybrid in generating mode</li><li>Supply a deficit - electro-assist and hybrid in motoring mode</li><li>Choose by the ship's operating profile, not by the technology</li></ul></div>
-      <div class="pp-step"><b>13. What these developments mean for the operating engineer</b><ul><li>Exhaust-side cleanliness matters more, not less, because energy is being harvested</li><li>New failure modes: bypass valves, gearing, high-speed electrical machines, power electronics</li><li>Control interaction with the electrical plant and with the engine's certified configuration</li></ul></div>
-      <div class="pp-step"><b>14. Where this fits in the wider picture</b><ul><li>Efficiency measured per unit of transport work, and now priced</li><li>These recover part of the largest loss without touching the combustion process</li><li>The gains are real but incremental, and they are load-profile dependent</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -4725,25 +4605,26 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">What the Code is, and how it binds</li>
-      <li value="2">What a Safety Management System is, and why the Code works through one</li>
-      <li value="3">The six functional requirements - what every SMS must contain</li>
-      <li value="4">The components - Part A, elements 1 to 12</li>
-      <li value="5">The certification layer - Part B</li>
-      <li value="6">The role the SMS plays in implementing the Code</li>
-      <li value="7">Continuous improvement - the mechanism</li>
-      <li value="8">Continuous improvement - why it is the significant part</li>
+      <li value="1"><span class="pl-t">What the Code is, and how it binds</span><ul class="pl-pts"><li>Adopted by A.741(18); mandatory through SOLAS chapter IX</li><li>Amended through MSC.353(92), in force 1 January 2015</li><li>It regulates MANAGEMENT, not construction or equipment</li></ul></li>
+      <li value="2"><span class="pl-t">What a Safety Management System is, and why the Code works through one</span><ul class="pl-pts"><li>A structured and documented system enabling Company personnel to implement the policy effectively</li><li>The Code sets objectives and requires a system; it does not prescribe the procedures</li><li>The system is the instrument through which the Code operates</li></ul></li>
+      <li value="3"><span class="pl-t">The six functional requirements - what every SMS must contain</span><ul class="pl-pts"><li>Policy; instructions and procedures; defined authority and lines of communication</li><li>Reporting of accidents and non-conformities; emergency preparedness</li><li>Procedures for internal audits and management reviews</li></ul></li>
+      <li value="4"><span class="pl-t">The components - Part A, elements 1 to 12</span><ul class="pl-pts"><li>Policy, company responsibility, designated person, master's authority</li><li>Resources and personnel, shipboard operations, emergency preparedness</li><li>Reports and analysis, maintenance, documentation, company verification</li></ul></li>
+      <li value="5"><span class="pl-t">The certification layer - Part B</span><ul class="pl-pts"><li>Document of Compliance to the Company, up to five years, annually verified</li><li>Safety Management Certificate to the ship</li><li>Interim certification, and the consequence of a major non-conformity</li></ul></li>
+      <li value="6"><span class="pl-t">The role the SMS plays in implementing the Code</span><ul class="pl-pts"><li>It converts objectives into procedures that a named person performs</li><li>It creates the shore-to-ship link through the Designated Person</li><li>It generates the evidence on which compliance is verified</li></ul></li>
+      <li value="7"><span class="pl-t">Continuous improvement - the mechanism</span><ul class="pl-pts"><li>Element 9 - report, investigate and analyse; corrective action to prevent recurrence</li><li>Element 12 - internal audit at intervals not exceeding twelve months</li><li>Periodic evaluation of effectiveness, and timely corrective action by those responsible</li></ul></li>
+      <li value="8"><span class="pl-t">Continuous improvement - why it is the significant part</span><ul class="pl-pts"><li>Without it the SMS becomes a static manual that describes a ship nobody operates</li><li>It is what makes the system self-correcting rather than merely documented</li><li>It is the difference between a certified company and a safe one</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="9">Why the Code exists, and the shift it represents</li>
-      <li value="10">Evolution one - from recommendation to mandatory instrument</li>
-      <li value="11">Evolution two - the amendment chain</li>
-      <li value="12">Evolution three - technological advancement</li>
-      <li value="13">Evolution four - cyber risk</li>
-      <li value="14">Evolution five - environmental sustainability, and the honest limit</li>
+      <li value="9"><span class="pl-t">Why the Code exists, and the shift it represents</span><ul class="pl-pts"><li>A major ro-ro passenger casualty and an inquiry that found the fault ashore, not only aboard</li><li>The move from regulating hardware to regulating management</li><li>From compliance by inspection to compliance by demonstrated system</li></ul></li>
+      <li value="10"><span class="pl-t">Evolution one - from recommendation to mandatory instrument</span><ul class="pl-pts"><li>Adopted as an Assembly resolution, A.741(18)</li><li>Made mandatory through SOLAS chapter IX, phased by ship type</li><li>The single largest change in its history</li></ul></li>
+      <li value="11"><span class="pl-t">Evolution two - the amendment chain</span><ul class="pl-pts"><li>MSC.104(73), MSC.179(79), MSC.195(80), MSC.273(85), MSC.353(92)</li><li>Successive tightening of company responsibility, non-conformity handling and audit</li><li>The current text has been in force since 1 January 2015</li></ul></li>
+      <li value="12"><span class="pl-t">Evolution three - technological advancement</span><ul class="pl-pts"><li>Integrated bridge and engine control, remote monitoring, condition-based maintenance</li><li>The Code accommodates them through elements 6, 7 and 10 rather than by amendment</li><li>Familiarisation and competence become the binding constraint</li></ul></li>
+      <li value="13"><span class="pl-t">Evolution four - cyber risk</span><ul class="pl-pts"><li>MSC.428(98), adopted 16 June 2017 - cyber risk to be addressed in the SMS</li><li>Bearing in mind MSC-FAL.1/Circ.3 guidelines</li><li>No new element was added; the existing risk-assessment machinery was used</li></ul></li>
+      <li value="14"><span class="pl-t">Evolution five - environmental sustainability, and the honest limit</span><ul class="pl-pts"><li>Environmental protection is in the Code's title and objectives from the start</li><li>But decarbonisation instruments sit OUTSIDE the ISM Code, in MARPOL Annex VI</li><li>The Code adapts by generality - which is a strength and a weakness</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> (a) EIGHT: WHAT IT IS (1), WHAT AN SMS IS (2), SIX FUNCTIONALS (3), TWELVE ELEMENTS (4), CERTIFICATES (5), THE ROLE (6), THE LOOP - HOW (7), THE LOOP - WHY (8). (b) SIX: WHY IT EXISTS (9), BECAME MANDATORY (10), AMENDED (11), then the THREE PRINTED CHALLENGES - TECH (12), CYBER (13), ENVIRONMENT (14).</p>
     <div class="plan-cov">
@@ -4751,22 +4632,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>42</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>14 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 42 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What the Code is, and how it binds</b><ul><li>Adopted by A.741(18); mandatory through SOLAS chapter IX</li><li>Amended through MSC.353(92), in force 1 January 2015</li><li>It regulates MANAGEMENT, not construction or equipment</li></ul></div>
-      <div class="pp-step"><b>2. What a Safety Management System is, and why the Code works through one</b><ul><li>A structured and documented system enabling Company personnel to implement the policy effectively</li><li>The Code sets objectives and requires a system; it does not prescribe the procedures</li><li>The system is the instrument through which the Code operates</li></ul></div>
-      <div class="pp-step"><b>3. The six functional requirements - what every SMS must contain</b><ul><li>Policy; instructions and procedures; defined authority and lines of communication</li><li>Reporting of accidents and non-conformities; emergency preparedness</li><li>Procedures for internal audits and management reviews</li></ul></div>
-      <div class="pp-step"><b>4. The components - Part A, elements 1 to 12</b><ul><li>Policy, company responsibility, designated person, master's authority</li><li>Resources and personnel, shipboard operations, emergency preparedness</li><li>Reports and analysis, maintenance, documentation, company verification</li></ul></div>
-      <div class="pp-step"><b>5. The certification layer - Part B</b><ul><li>Document of Compliance to the Company, up to five years, annually verified</li><li>Safety Management Certificate to the ship</li><li>Interim certification, and the consequence of a major non-conformity</li></ul></div>
-      <div class="pp-step"><b>6. The role the SMS plays in implementing the Code</b><ul><li>It converts objectives into procedures that a named person performs</li><li>It creates the shore-to-ship link through the Designated Person</li><li>It generates the evidence on which compliance is verified</li></ul></div>
-      <div class="pp-step"><b>7. Continuous improvement - the mechanism</b><ul><li>Element 9 - report, investigate and analyse; corrective action to prevent recurrence</li><li>Element 12 - internal audit at intervals not exceeding twelve months</li><li>Periodic evaluation of effectiveness, and timely corrective action by those responsible</li></ul></div>
-      <div class="pp-step"><b>8. Continuous improvement - why it is the significant part</b><ul><li>Without it the SMS becomes a static manual that describes a ship nobody operates</li><li>It is what makes the system self-correcting rather than merely documented</li><li>It is the difference between a certified company and a safe one</li></ul></div>
-      <div class="pp-step"><b>9. Why the Code exists, and the shift it represents</b><ul><li>A major ro-ro passenger casualty and an inquiry that found the fault ashore, not only aboard</li><li>The move from regulating hardware to regulating management</li><li>From compliance by inspection to compliance by demonstrated system</li></ul></div>
-      <div class="pp-step"><b>10. Evolution one - from recommendation to mandatory instrument</b><ul><li>Adopted as an Assembly resolution, A.741(18)</li><li>Made mandatory through SOLAS chapter IX, phased by ship type</li><li>The single largest change in its history</li></ul></div>
-      <div class="pp-step"><b>11. Evolution two - the amendment chain</b><ul><li>MSC.104(73), MSC.179(79), MSC.195(80), MSC.273(85), MSC.353(92)</li><li>Successive tightening of company responsibility, non-conformity handling and audit</li><li>The current text has been in force since 1 January 2015</li></ul></div>
-      <div class="pp-step"><b>12. Evolution three - technological advancement</b><ul><li>Integrated bridge and engine control, remote monitoring, condition-based maintenance</li><li>The Code accommodates them through elements 6, 7 and 10 rather than by amendment</li><li>Familiarisation and competence become the binding constraint</li></ul></div>
-      <div class="pp-step"><b>13. Evolution four - cyber risk</b><ul><li>MSC.428(98), adopted 16 June 2017 - cyber risk to be addressed in the SMS</li><li>Bearing in mind MSC-FAL.1/Circ.3 guidelines</li><li>No new element was added; the existing risk-assessment machinery was used</li></ul></div>
-      <div class="pp-step"><b>14. Evolution five - environmental sustainability, and the honest limit</b><ul><li>Environmental protection is in the Code's title and objectives from the start</li><li>But decarbonisation instruments sit OUTSIDE the ISM Code, in MARPOL Annex VI</li><li>The Code adapts by generality - which is a strength and a weakness</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">

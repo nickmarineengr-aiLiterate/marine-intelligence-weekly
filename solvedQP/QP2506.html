@@ -267,7 +267,7 @@
   .plan-lead{margin:0 0 8px;font-size:13.5px;}
   .plan-limb{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;margin-top:8px;}
   .plan-list{margin:4px 0 0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;}
-  .plan-list li{margin:4px 0;}
+  .plan-list li{margin:9px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
   .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
@@ -275,11 +275,11 @@
   .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
   .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
-  .plan-points{margin-top:9px;font-size:12.5px;}
-  .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
-  .plan-points:focus-within > summary{outline:2px solid var(--orange);outline-offset:2px;}
-  .pp-step{margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;}
-  .pp-step ul{margin:3px 0 0;padding-left:20px;color:var(--grey-text);}
+  .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
+  .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}
+  .pl-t{display:block;}
+  .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;color:var(--grey-text);}
+  .pl-pts li{margin:2px 0;}
 
   /* Recall: blanks first, reveal on demand. */
   .recall{background:#fff;border:1.5px solid var(--teal-dark);padding:0 16px 13px;}
@@ -636,29 +636,30 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">intro</div>
     <ol class="plan-list">
-      <li value="1">Where the energy to be recovered is</li>
+      <li value="1"><span class="pl-t">Where the energy to be recovered is</span><ul class="pl-pts"><li>propeller converts only about 65 to 72 per cent of delivered power to thrust</li><li>losses are axial, rotational and vortex</li><li>rotational loss of the order of 8 to 12 per cent</li><li>the rudder is the only large body standing in that race</li><li>so it is both an opportunity and a source of loss</li></ul></li>
     </ol>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="2">(a) Rudder thrust fins</li>
+      <li value="2"><span class="pl-t">(a) Rudder thrust fins</span><ul class="pl-pts"><li>horizontal foils on the rudder at shaft level, in the race</li><li>swirl gives them an angle of attack for nothing</li><li>inclined flow tilts the lift vector forward - horizontal component is thrust</li><li>set in mirror image because swirl reverses across the shaft</li><li>about 2 to 5 per cent quoted; sensitive to span, chord, angle</li><li>fixed angle, so optimised for one draught and speed</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="3">(b) Asymmetric and twisted rudders</li>
+      <li value="3"><span class="pl-t">(b) Asymmetric and twisted rudders</span><ul class="pl-pts"><li>race strikes upper and lower halves from opposite sides</li><li>a symmetrical rudder therefore runs at the wrong incidence over half its span</li><li>section made asymmetric, leading edge twisted oppositely above and below</li><li>each half aligned with the swirl it actually meets</li><li>recovers side force as forward force; cuts drag, cavitation and vibration</li><li>handed to the direction of rotation; no added appendage</li></ul></li>
     </ol>
-    <div class="plan-limb">(c)</div>
+    <div class="plan-limb">(c) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="4">(c) Rudder bulbs</li>
+      <li value="4"><span class="pl-t">(c) Rudder bulbs</span><ul class="pl-pts"><li>bare boss sheds a hub vortex and the flow separates behind it</li><li>streamlined body on the rudder leading edge, coaxial with the shaft</li><li>closes the gap to the hub cap to form a near-continuous body</li><li>suppresses the vortex and restores pressure behind the boss</li><li>reduces loss rather than recovering energy</li><li>diameter and axial gap are critical; usually designed with fins as one installation</li></ul></li>
     </ol>
-    <div class="plan-limb">(d)</div>
+    <div class="plan-limb">(d) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="5">(d) Grim vane wheels</li>
+      <li value="5"><span class="pl-t">(d) Grim vane wheels</span><ul class="pl-pts"><li>Grim, 1966; free-running, no mechanical connection to the shaft</li><li>mounted aft of and coaxial with the propeller, larger in diameter</li><li>inner portion inside the race acts as a turbine and drives the wheel</li><li>outer portion outside the race acts as a propeller and adds thrust</li><li>energy taken from a small fast disturbed stream, returned in a large slow clean one</li><li>blade fatigue, loss in a seaway and off-design behaviour limited it in service</li></ul></li>
     </ol>
     <div class="plan-limb">judgement</div>
     <ol class="plan-list">
-      <li value="6">Whether a claimed gain is real on this ship</li>
+      <li value="6"><span class="pl-t">Whether a claimed gain is real on this ship</span><ul class="pl-pts"><li>gain depends on wake field, block coefficient, propeller loading, draught, speed</li><li>a percentage without its measured condition is meaningless</li><li>model-scale results need a scale-effect correction</li><li>devices interact - savings are not additive</li><li>test the claim against the real operating profile, not the design point</li><li>class approval of the attachment, and the effect on manoeuvring</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> LOSSES (1) - FIN (2) - FORM (3) - BULB (4) - WHEEL (5) - JUDGEMENT (6). The four devices sit in that order working outward from the shaft centreline: bulb at the hub, fins just clear of it, the rudder body around them, the vane wheel beyond the disc. Attach the verb to each: bulb fills, fin lifts, rudder twists, wheel turns.</p>
     <div class="plan-cov">
@@ -666,14 +667,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>35</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 35 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Where the energy to be recovered is</b><ul><li>propeller converts only about 65 to 72 per cent of delivered power to thrust</li><li>losses are axial, rotational and vortex</li><li>rotational loss of the order of 8 to 12 per cent</li><li>the rudder is the only large body standing in that race</li><li>so it is both an opportunity and a source of loss</li></ul></div>
-      <div class="pp-step"><b>2. (a) Rudder thrust fins</b><ul><li>horizontal foils on the rudder at shaft level, in the race</li><li>swirl gives them an angle of attack for nothing</li><li>inclined flow tilts the lift vector forward - horizontal component is thrust</li><li>set in mirror image because swirl reverses across the shaft</li><li>about 2 to 5 per cent quoted; sensitive to span, chord, angle</li><li>fixed angle, so optimised for one draught and speed</li></ul></div>
-      <div class="pp-step"><b>3. (b) Asymmetric and twisted rudders</b><ul><li>race strikes upper and lower halves from opposite sides</li><li>a symmetrical rudder therefore runs at the wrong incidence over half its span</li><li>section made asymmetric, leading edge twisted oppositely above and below</li><li>each half aligned with the swirl it actually meets</li><li>recovers side force as forward force; cuts drag, cavitation and vibration</li><li>handed to the direction of rotation; no added appendage</li></ul></div>
-      <div class="pp-step"><b>4. (c) Rudder bulbs</b><ul><li>bare boss sheds a hub vortex and the flow separates behind it</li><li>streamlined body on the rudder leading edge, coaxial with the shaft</li><li>closes the gap to the hub cap to form a near-continuous body</li><li>suppresses the vortex and restores pressure behind the boss</li><li>reduces loss rather than recovering energy</li><li>diameter and axial gap are critical; usually designed with fins as one installation</li></ul></div>
-      <div class="pp-step"><b>5. (d) Grim vane wheels</b><ul><li>Grim, 1966; free-running, no mechanical connection to the shaft</li><li>mounted aft of and coaxial with the propeller, larger in diameter</li><li>inner portion inside the race acts as a turbine and drives the wheel</li><li>outer portion outside the race acts as a propeller and adds thrust</li><li>energy taken from a small fast disturbed stream, returned in a large slow clean one</li><li>blade fatigue, loss in a seaway and off-design behaviour limited it in service</li></ul></div>
-      <div class="pp-step"><b>6. Whether a claimed gain is real on this ship</b><ul><li>gain depends on wake field, block coefficient, propeller loading, draught, speed</li><li>a percentage without its measured condition is meaningless</li><li>model-scale results need a scale-effect correction</li><li>devices interact - savings are not additive</li><li>test the claim against the real operating profile, not the design point</li><li>class approval of the attachment, and the effect on manoeuvring</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -930,13 +923,14 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Adoption is not entry into force</li>
-      <li value="2">How a State expresses consent to be bound</li>
-      <li value="3">The two terms the question names</li>
-      <li value="4">The entry into force provision, and why it matters</li>
-      <li value="5">Conventions of an important technical nature</li>
-      <li value="6">Keeping the convention current once in force</li>
+      <li value="1"><span class="pl-t">Adoption is not entry into force</span><ul class="pl-pts"><li>adopted by an IMO organ or a diplomatic conference</li><li>adoption settles the text and nothing more</li><li>no State is bound by adoption alone</li><li>the text is opened for signature and deposited</li><li>the Secretary-General of IMO is the depositary</li></ul></li>
+      <li value="2"><span class="pl-t">How a State expresses consent to be bound</span><ul class="pl-pts"><li>signature alone, where the treaty so provides</li><li>signature subject to ratification, acceptance or approval</li><li>accession, after the signature period closes</li><li>binding only on deposit of a formal instrument</li><li>the depositary records, counts and notifies</li></ul></li>
+      <li value="3"><span class="pl-t">The two terms the question names</span><ul class="pl-pts"><li>(ii) signature subject to ratification - signature does not bind</li><li>two steps; time to legislate and satisfy the constitution</li><li>acceptance and approval are the same act - VCLT Art 14(2)</li><li>(i) accession - one step, no prior signature - VCLT Art 15</li><li>identical legal effect once the instrument is deposited</li></ul></li>
+      <li value="4"><span class="pl-t">The entry into force provision, and why it matters</span><ul class="pl-pts"><li>every convention carries its own final clause</li><li>a threshold of acceptances plus a waiting period</li><li>prevents an instrument binding a few States and distorting competition</li><li>gives a certain date for obligations, surveys and certificates</li><li>allows domestic law, class rules and shipbuilding to be ready</li><li>underpins port State control and no more favourable treatment</li></ul></li>
+      <li value="5"><span class="pl-t">Conventions of an important technical nature</span><ul class="pl-pts"><li>a double condition - number of States and world tonnage</li><li>SOLAS 1974 - 25 States and 50% of world gross tonnage</li><li>1978 MARPOL Protocol - 15 States and 50%, plus twelve months</li><li>tonnage ensures the major fleets are inside</li><li>older conventions commonly required two-thirds of contracting States</li></ul></li>
+      <li value="6"><span class="pl-t">Keeping the convention current once in force</span><ul class="pl-pts"><li>explicit acceptance proved unworkable - SOLAS 1960 amendments</li><li>tacit acceptance - deemed accepted unless objected to</li><li>SOLAS - two years, one-third of Governments or 50% tonnage</li><li>amendments now in force in about 18 to 24 months</li><li>MARPOL art 16(2)(a) circulation, 16(2)(b)-(d) adoption - circulated 11 April 2025, not yet adopted</li><li>flag States must then give the instrument domestic effect</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> The spine is five words in order: <b>ADOPT (1) - CONSENT (2) - THE TWO TERMS (3) - IN FORCE (4) - TONNAGE TEST (5) - AMEND (6)</b>. Numbers: SOLAS 25 and 50; MARPOL 78 fifteen and 50; tacit acceptance two years, one-third or 50 per cent.</p>
     <div class="plan-cov">
@@ -944,14 +938,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>32</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 32 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Adoption is not entry into force</b><ul><li>adopted by an IMO organ or a diplomatic conference</li><li>adoption settles the text and nothing more</li><li>no State is bound by adoption alone</li><li>the text is opened for signature and deposited</li><li>the Secretary-General of IMO is the depositary</li></ul></div>
-      <div class="pp-step"><b>2. How a State expresses consent to be bound</b><ul><li>signature alone, where the treaty so provides</li><li>signature subject to ratification, acceptance or approval</li><li>accession, after the signature period closes</li><li>binding only on deposit of a formal instrument</li><li>the depositary records, counts and notifies</li></ul></div>
-      <div class="pp-step"><b>3. The two terms the question names</b><ul><li>(ii) signature subject to ratification - signature does not bind</li><li>two steps; time to legislate and satisfy the constitution</li><li>acceptance and approval are the same act - VCLT Art 14(2)</li><li>(i) accession - one step, no prior signature - VCLT Art 15</li><li>identical legal effect once the instrument is deposited</li></ul></div>
-      <div class="pp-step"><b>4. The entry into force provision, and why it matters</b><ul><li>every convention carries its own final clause</li><li>a threshold of acceptances plus a waiting period</li><li>prevents an instrument binding a few States and distorting competition</li><li>gives a certain date for obligations, surveys and certificates</li><li>allows domestic law, class rules and shipbuilding to be ready</li><li>underpins port State control and no more favourable treatment</li></ul></div>
-      <div class="pp-step"><b>5. Conventions of an important technical nature</b><ul><li>a double condition - number of States and world tonnage</li><li>SOLAS 1974 - 25 States and 50% of world gross tonnage</li><li>1978 MARPOL Protocol - 15 States and 50%, plus twelve months</li><li>tonnage ensures the major fleets are inside</li><li>older conventions commonly required two-thirds of contracting States</li></ul></div>
-      <div class="pp-step"><b>6. Keeping the convention current once in force</b><ul><li>explicit acceptance proved unworkable - SOLAS 1960 amendments</li><li>tacit acceptance - deemed accepted unless objected to</li><li>SOLAS - two years, one-third of Governments or 50% tonnage</li><li>amendments now in force in about 18 to 24 months</li><li>MARPOL art 16(2)(a) circulation, 16(2)(b)-(d) adoption - circulated 11 April 2025, not yet adopted</li><li>flag States must then give the instrument domestic effect</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1206,20 +1192,21 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">(a)</div>
     <ol class="plan-list">
-      <li value="1">(a) Port of refuge - what it is and why a ship puts in</li>
-      <li value="2">(a) Port of refuge - who pays</li>
+      <li value="1"><span class="pl-t">(a) Port of refuge - what it is and why a ship puts in</span><ul class="pl-pts"><li>a port other than the destination, entered because the voyage cannot safely continue</li><li>weather, grounding, collision, fire, cargo shift, machinery failure, medical emergency</li><li>it is a deviation - unjustified deviation discharges the insurer</li><li>excused where reasonably made for the safety of ship or life, or to save life</li><li>IMO Guidelines: resolution A.1184(33), 6 December 2023, revoking A.949(23)</li><li>recommendatory; the coastal State is under no obligation to grant a place of refuge</li></ul></li>
+      <li value="2"><span class="pl-t">(a) Port of refuge - who pays</span><ul class="pl-pts"><li>entry for the common safety is a general average act under Rule A</li><li>Rule X - port charges in and out, and handling, discharging, storing and reloading cargo</li><li>Rule XI - wages and maintenance of crew, and stores, during the prolongation</li><li>costs of the ship's own accidental damage are particular average and fall on her owner</li><li>one call generates both; separating them is the adjuster's task</li><li>entitlement to contribution survives fault; collect average bond and guarantee before releasing cargo</li></ul></li>
     </ol>
     <div class="plan-limb">(b)</div>
     <ol class="plan-list">
-      <li value="3">(b) Particular average</li>
-      <li value="4">(b) General average, and the contrast</li>
+      <li value="3"><span class="pl-t">(b) Particular average</span><ul class="pl-pts"><li>a partial loss of the subject-matter insured by an insured peril, which is not general average</li><li>accidental, not deliberate</li><li>affects a particular interest only</li><li>lies where it falls - no contribution from anyone else</li><li>recovered on the assured's own policy, subject to deductible or franchise</li></ul></li>
+      <li value="4"><span class="pl-t">(b) General average, and the contrast</span><ul class="pl-pts"><li>Rule A - extraordinary sacrifice or expenditure, intentionally and reasonably made, for the common safety</li><li>to preserve from peril the property in a common maritime adventure</li><li>shared rateably on contributory values, adjusted by an average adjuster</li><li>accident against intention; no purpose against common safety</li><li>borne alone against contributed by all saved</li><li>ordinary use of the ship, however hard, is not extraordinary</li></ul></li>
     </ol>
     <div class="plan-limb">(c)</div>
     <ol class="plan-list">
-      <li value="5">(c) Actual total loss</li>
-      <li value="6">(c) Constructive total loss and notice of abandonment</li>
+      <li value="5"><span class="pl-t">(c) Actual total loss</span><ul class="pl-pts"><li>subject-matter destroyed</li><li>or so damaged that it ceases to be a thing of the kind insured</li><li>or the assured irretrievably deprived of it</li><li>missing ship presumed an actual total loss after a reasonable time</li><li>no notice of abandonment required</li></ul></li>
+      <li value="6"><span class="pl-t">(c) Constructive total loss and notice of abandonment</span><ul class="pl-pts"><li>the term of art is constructive TOTAL loss</li><li>reasonably abandoned because actual total loss appears unavoidable</li><li>or could not be preserved without expenditure exceeding its value</li><li>in practice: repair cost exceeds repaired value; deprived of possession; cargo not worth forwarding</li><li>notice of abandonment with reasonable diligence, or the claim is for a partial loss only</li><li>acceptance is irrevocable; the underwriter takes the residue and proprietary rights</li><li>the market adds the compromised or arranged total loss</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> WHY (1) - WHO PAYS (2) - ACCIDENT (3) - SACRIFICE (4) - GONE (5) - NOT WORTH SAVING (6). Two steps per printed limb: (a) is 1 and 2, (b) is 3 and 4, (c) is 5 and 6. Within each pair the second step is always the money.</p>
     <div class="plan-cov">
@@ -1227,14 +1214,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>35</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 35 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. (a) Port of refuge - what it is and why a ship puts in</b><ul><li>a port other than the destination, entered because the voyage cannot safely continue</li><li>weather, grounding, collision, fire, cargo shift, machinery failure, medical emergency</li><li>it is a deviation - unjustified deviation discharges the insurer</li><li>excused where reasonably made for the safety of ship or life, or to save life</li><li>IMO Guidelines: resolution A.1184(33), 6 December 2023, revoking A.949(23)</li><li>recommendatory; the coastal State is under no obligation to grant a place of refuge</li></ul></div>
-      <div class="pp-step"><b>2. (a) Port of refuge - who pays</b><ul><li>entry for the common safety is a general average act under Rule A</li><li>Rule X - port charges in and out, and handling, discharging, storing and reloading cargo</li><li>Rule XI - wages and maintenance of crew, and stores, during the prolongation</li><li>costs of the ship's own accidental damage are particular average and fall on her owner</li><li>one call generates both; separating them is the adjuster's task</li><li>entitlement to contribution survives fault; collect average bond and guarantee before releasing cargo</li></ul></div>
-      <div class="pp-step"><b>3. (b) Particular average</b><ul><li>a partial loss of the subject-matter insured by an insured peril, which is not general average</li><li>accidental, not deliberate</li><li>affects a particular interest only</li><li>lies where it falls - no contribution from anyone else</li><li>recovered on the assured's own policy, subject to deductible or franchise</li></ul></div>
-      <div class="pp-step"><b>4. (b) General average, and the contrast</b><ul><li>Rule A - extraordinary sacrifice or expenditure, intentionally and reasonably made, for the common safety</li><li>to preserve from peril the property in a common maritime adventure</li><li>shared rateably on contributory values, adjusted by an average adjuster</li><li>accident against intention; no purpose against common safety</li><li>borne alone against contributed by all saved</li><li>ordinary use of the ship, however hard, is not extraordinary</li></ul></div>
-      <div class="pp-step"><b>5. (c) Actual total loss</b><ul><li>subject-matter destroyed</li><li>or so damaged that it ceases to be a thing of the kind insured</li><li>or the assured irretrievably deprived of it</li><li>missing ship presumed an actual total loss after a reasonable time</li><li>no notice of abandonment required</li></ul></div>
-      <div class="pp-step"><b>6. (c) Constructive total loss and notice of abandonment</b><ul><li>the term of art is constructive TOTAL loss</li><li>reasonably abandoned because actual total loss appears unavoidable</li><li>or could not be preserved without expenditure exceeding its value</li><li>in practice: repair cost exceeds repaired value; deprived of possession; cargo not worth forwarding</li><li>notice of abandonment with reasonable diligence, or the claim is for a partial loss only</li><li>acceptance is irrevocable; the underwriter takes the residue and proprietary rights</li><li>the market adds the compromised or arranged total loss</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1492,23 +1471,24 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">a)</div>
     <ol class="plan-list">
-      <li value="1">The problem SCOPIC was written to cure</li>
-      <li value="2">What SCOPIC is</li>
-      <li value="3">How it answers each of the salvor's difficulties</li>
+      <li value="1"><span class="pl-t">The problem SCOPIC was written to cure</span><ul class="pl-pts"><li>salvage is no cure - no pay; Article 13 pays out of salved value only</li><li>Article 14 - expenses, up to +30%, up to 100% of expenses if fair and just</li><li>but it required a proven threat of damage to the environment</li><li>"expenses" was confined to cost with no profit element</li><li>assessed long after the event, and with no security mechanism</li></ul></li>
+      <li value="2"><span class="pl-t">What SCOPIC is</span><ul class="pl-pts"><li>Special Compensation P&amp;I Clause, first effective 1 August 1999; SCOPIC 2020 current</li><li>agreed by the International Salvage Union, the International Group of P&amp;I Clubs and property underwriters</li><li>supplementary to a Lloyd's Form salvage agreement</li><li>once invoked it substitutes its own assessment for Article 14(1) to (4)</li><li>contractual, not part of the Convention and not law</li></ul></li>
+      <li value="3"><span class="pl-t">How it answers each of the salvor's difficulties</span><ul class="pl-pts"><li>cl.2 - invoke by written notice at any time, regardless of any threat of environmental damage</li><li>cl.5 - Appendix A tariff on time and materials, plus a standard 25% bonus as the profit element</li><li>cl.3 - Initial Security US$3 million within 2 working days; cl.4 - withdraw if not given</li><li>cl.12 - Special Casualty Representative records the facts on site</li><li>cl.8 - 75% of the excess paid within 1 month at US prime + 1%</li><li>cl.6 - Article 13 continues; SCOPIC payable by owners only and only so far as it exceeds the award</li><li>cl.7 - if the Article 13 award is greater it is discounted by 25% of the difference</li></ul></li>
     </ol>
     <div class="plan-limb">b)(i)</div>
     <ol class="plan-list">
-      <li value="4">(i) Disciplinary action against the master or crew</li>
+      <li value="4"><span class="pl-t">(i) Disciplinary action against the master or crew</span><ul class="pl-pts"><li>flag State, or the State of the person's nationality - and no other</li><li>UNCLOS Article 97(1)</li><li>justified by exclusive flag State jurisdiction on the high seas, Articles 92 and 94</li><li>reverses the Lotus decision; first in treaty form in Brussels 1952</li><li>Article 97(3) - no arrest or detention even to investigate, except by the flag State</li></ul></li>
     </ol>
     <div class="plan-limb">b)(ii)</div>
     <ol class="plan-list">
-      <li value="5">(ii) Cancellation of certificates of competency</li>
+      <li value="5"><span class="pl-t">(ii) Cancellation of certificates of competency</span><ul class="pl-pts"><li>only the State which issued the certificate</li><li>UNCLOS Article 97(2), after due legal process</li><li>expressly so even if the holder is not a national of that State</li><li>narrower than limb (i) - two States there, one State here</li><li>a flag State may withdraw its own endorsement, and a port State may act against the ship; neither cancels the certificate</li></ul></li>
     </ol>
     <div class="plan-limb">b)(iii)</div>
     <ol class="plan-list">
-      <li value="6">(iii) Payment of compensation</li>
+      <li value="6"><span class="pl-t">(iii) Payment of compensation</span><ul class="pl-pts"><li>a civil claim between the parties - not a question of a State's right; UNCLOS Article 97 does not apply</li><li>Collision Convention 1910 governs apportionment</li><li>accident, force majeure or doubt - each bears his own loss; no presumption of fault</li><li>both at fault - liability in proportion to degree of fault; equally only if degrees cannot be established</li><li>death and injury joint and several, property damage proportionate</li><li>forum under Brussels 1952, usually settled by arrest; total then capped by LLMC</li><li>in India, the Merchant Shipping Act 1958 at this sitting</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> PROBLEM (1) - CLAUSE (2) - CURE (3) - PUNISH (4) - CERTIFICATE (5) - PAY (6). Steps 1 to 3 are limb (a); steps 4 to 6 are the three printed sub-limbs of (b) in the order the examiner prints them. For limb (b) hold two numbers: <b>97 for punishment, 1910 for money</b>.</p>
     <div class="plan-cov">
@@ -1516,14 +1496,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>34</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 34 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The problem SCOPIC was written to cure</b><ul><li>salvage is no cure - no pay; Article 13 pays out of salved value only</li><li>Article 14 - expenses, up to +30%, up to 100% of expenses if fair and just</li><li>but it required a proven threat of damage to the environment</li><li>"expenses" was confined to cost with no profit element</li><li>assessed long after the event, and with no security mechanism</li></ul></div>
-      <div class="pp-step"><b>2. What SCOPIC is</b><ul><li>Special Compensation P&amp;I Clause, first effective 1 August 1999; SCOPIC 2020 current</li><li>agreed by the International Salvage Union, the International Group of P&amp;I Clubs and property underwriters</li><li>supplementary to a Lloyd's Form salvage agreement</li><li>once invoked it substitutes its own assessment for Article 14(1) to (4)</li><li>contractual, not part of the Convention and not law</li></ul></div>
-      <div class="pp-step"><b>3. How it answers each of the salvor's difficulties</b><ul><li>cl.2 - invoke by written notice at any time, regardless of any threat of environmental damage</li><li>cl.5 - Appendix A tariff on time and materials, plus a standard 25% bonus as the profit element</li><li>cl.3 - Initial Security US$3 million within 2 working days; cl.4 - withdraw if not given</li><li>cl.12 - Special Casualty Representative records the facts on site</li><li>cl.8 - 75% of the excess paid within 1 month at US prime + 1%</li><li>cl.6 - Article 13 continues; SCOPIC payable by owners only and only so far as it exceeds the award</li><li>cl.7 - if the Article 13 award is greater it is discounted by 25% of the difference</li></ul></div>
-      <div class="pp-step"><b>4. (i) Disciplinary action against the master or crew</b><ul><li>flag State, or the State of the person's nationality - and no other</li><li>UNCLOS Article 97(1)</li><li>justified by exclusive flag State jurisdiction on the high seas, Articles 92 and 94</li><li>reverses the Lotus decision; first in treaty form in Brussels 1952</li><li>Article 97(3) - no arrest or detention even to investigate, except by the flag State</li></ul></div>
-      <div class="pp-step"><b>5. (ii) Cancellation of certificates of competency</b><ul><li>only the State which issued the certificate</li><li>UNCLOS Article 97(2), after due legal process</li><li>expressly so even if the holder is not a national of that State</li><li>narrower than limb (i) - two States there, one State here</li><li>a flag State may withdraw its own endorsement, and a port State may act against the ship; neither cancels the certificate</li></ul></div>
-      <div class="pp-step"><b>6. (iii) Payment of compensation</b><ul><li>a civil claim between the parties - not a question of a State's right; UNCLOS Article 97 does not apply</li><li>Collision Convention 1910 governs apportionment</li><li>accident, force majeure or doubt - each bears his own loss; no presumption of fault</li><li>both at fault - liability in proportion to degree of fault; equally only if degrees cannot be established</li><li>death and injury joint and several, property damage proportionate</li><li>forum under Brussels 1952, usually settled by arrest; total then capped by LLMC</li><li>in India, the Merchant Shipping Act 1958 at this sitting</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1783,17 +1755,18 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">What the Convention is, and the bargain it strikes</li>
-      <li value="2">The two heads of claim under Article 6</li>
-      <li value="3">Who may limit - and what cannot be limited at all</li>
+      <li value="1"><span class="pl-t">What the Convention is, and the bargain it strikes</span><ul class="pl-pts"><li>LLMC 1976, in force 1 December 1986; 1996 Protocol in force 13 May 2004; limits raised 8 June 2015</li><li>India through Part XA of the Merchant Shipping Act 1958 at this sitting</li><li>caps total liability for one occurrence by reference to tonnage, irrespective of actual loss</li><li>purpose is insurability and commercial certainty, not moral exoneration</li><li>Article 2 - applies whatever the basis of liability may be</li></ul></li>
+      <li value="2"><span class="pl-t">The two heads of claim under Article 6</span><ul class="pl-pts"><li>head one - claims for loss of life or personal injury</li><li>head two - any other claims, the residual property head</li><li>two separate funds, not interchangeable</li><li>life ranks higher; unsatisfied life claims rank rateably against the property fund</li><li>passengers are separate, under Article 7, on certified numbers not tonnage</li></ul></li>
+      <li value="3"><span class="pl-t">Who may limit - and what cannot be limited at all</span><ul class="pl-pts"><li>Article 1 - shipowners and salvors</li><li>shipowner means owner, charterer, manager and operator</li><li>salvor means any person rendering services in direct connexion with salvage</li><li>servants and agents, and the liability insurer to the same extent as the assured</li><li>Article 3 excepts salvage, general average contribution, CLC oil pollution, nuclear, certain servants' claims</li><li>a salvor may limit, but a claim for salvage may not be limited against</li></ul></li>
     </ol>
-    <div class="plan-limb">b)</div>
+    <div class="plan-limb">b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="4">Plaintiff and Defendant</li>
-      <li value="5">Privity - and why it is the old test</li>
-      <li value="6">Unlimited liability</li>
+      <li value="4"><span class="pl-t">Plaintiff and Defendant</span><ul class="pl-pts"><li>plaintiff commences the action and bears the burden of proof</li><li>claimant in modern English usage; the party filing the plaint in Indian procedure</li><li>defendant is the party sued, who answers and may counterclaim</li><li>limitation is relied on by the defendant, not applied by the court of its own motion</li><li>usually pursued by constituting a limitation fund</li></ul></li>
+      <li value="5"><span class="pl-t">Privity - and why it is the old test</span><ul class="pl-pts"><li>knowledge of and concurrence in the act or condition</li><li>more than negligence, less than intention, and personal to the owner</li><li>the pre-LLMC test was the owner's actual fault or privity, and it was comparatively easy to satisfy</li><li>Article 4 replaced it - personal act or omission, with intent, or recklessly and with knowledge that such loss would probably result</li><li>burden on the claimant; conduct must be personal, the alter ego and not the master</li><li>hence the modern limit is almost unbreakable</li></ul></li>
+      <li value="6"><span class="pl-t">Unlimited liability</span><ul class="pl-pts"><li>liability not capped by any limitation regime - full proven loss recoverable</li><li>route one - the Article 4 conduct test is met and the right is lost</li><li>route two - the claim is excepted by Article 3 and the right never applied</li><li>route three - no Convention governs the forum or the liability</li><li>practical consequence - what the office knew and authorised is what puts the limit at risk</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> WHAT (1) - HEADS (2) - WHO (3) - PARTIES (4) - PRIVITY (5) - UNLIMITED (6). Limb (a) is steps 1 to 3 and limb (b) is steps 4 to 6, so the 8 + 8 split maps onto three steps each. Inside limb (b) the order is deliberate: the two parties first, then the old test, then the consequence.</p>
     <div class="plan-cov">
@@ -1801,14 +1774,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>32</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 32 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What the Convention is, and the bargain it strikes</b><ul><li>LLMC 1976, in force 1 December 1986; 1996 Protocol in force 13 May 2004; limits raised 8 June 2015</li><li>India through Part XA of the Merchant Shipping Act 1958 at this sitting</li><li>caps total liability for one occurrence by reference to tonnage, irrespective of actual loss</li><li>purpose is insurability and commercial certainty, not moral exoneration</li><li>Article 2 - applies whatever the basis of liability may be</li></ul></div>
-      <div class="pp-step"><b>2. The two heads of claim under Article 6</b><ul><li>head one - claims for loss of life or personal injury</li><li>head two - any other claims, the residual property head</li><li>two separate funds, not interchangeable</li><li>life ranks higher; unsatisfied life claims rank rateably against the property fund</li><li>passengers are separate, under Article 7, on certified numbers not tonnage</li></ul></div>
-      <div class="pp-step"><b>3. Who may limit - and what cannot be limited at all</b><ul><li>Article 1 - shipowners and salvors</li><li>shipowner means owner, charterer, manager and operator</li><li>salvor means any person rendering services in direct connexion with salvage</li><li>servants and agents, and the liability insurer to the same extent as the assured</li><li>Article 3 excepts salvage, general average contribution, CLC oil pollution, nuclear, certain servants' claims</li><li>a salvor may limit, but a claim for salvage may not be limited against</li></ul></div>
-      <div class="pp-step"><b>4. Plaintiff and Defendant</b><ul><li>plaintiff commences the action and bears the burden of proof</li><li>claimant in modern English usage; the party filing the plaint in Indian procedure</li><li>defendant is the party sued, who answers and may counterclaim</li><li>limitation is relied on by the defendant, not applied by the court of its own motion</li><li>usually pursued by constituting a limitation fund</li></ul></div>
-      <div class="pp-step"><b>5. Privity - and why it is the old test</b><ul><li>knowledge of and concurrence in the act or condition</li><li>more than negligence, less than intention, and personal to the owner</li><li>the pre-LLMC test was the owner's actual fault or privity, and it was comparatively easy to satisfy</li><li>Article 4 replaced it - personal act or omission, with intent, or recklessly and with knowledge that such loss would probably result</li><li>burden on the claimant; conduct must be personal, the alter ego and not the master</li><li>hence the modern limit is almost unbreakable</li></ul></div>
-      <div class="pp-step"><b>6. Unlimited liability</b><ul><li>liability not capped by any limitation regime - full proven loss recoverable</li><li>route one - the Article 4 conduct test is met and the right is lost</li><li>route two - the claim is excepted by Article 3 and the right never applied</li><li>route three - no Convention governs the forum or the liability</li><li>practical consequence - what the office knew and authorised is what puts the limit at risk</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2069,17 +2034,18 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">a) What a general average act is</li>
-      <li value="2">The essential features</li>
-      <li value="3">The lettered rules that qualify the definition</li>
-      <li value="4">How the loss is shared, and what general average is not</li>
+      <li value="1"><span class="pl-t">a) What a general average act is</span><ul class="pl-pts"><li>Rule A - 'when, and only when' the definition is satisfied</li><li>extraordinary sacrifice or expenditure</li><li>intentionally and reasonably made for the common safety</li><li>preserving from peril property in a common maritime adventure</li><li>the Rules apply by contractual incorporation, not as law</li><li>recognised in India by the Marine Insurance Act 1963</li></ul></li>
+      <li value="2"><span class="pl-t">The essential features</span><ul class="pl-pts"><li>extraordinary - outside ordinary performance of the contract</li><li>intentional and voluntary - a sacrifice, not an accident</li><li>reasonable - reinforced by the Rule Paramount</li><li>real and substantial peril, more than the ordinary risk of the sea</li><li>for the common safety of a common adventure - more than one interest</li><li>preservation of property, so something must be saved to contribute</li></ul></li>
+      <li value="3"><span class="pl-t">The lettered rules that qualify the definition</span><ul class="pl-pts"><li>Rule C - only the direct consequence is allowed</li><li>delay, demurrage, loss of market and indirect loss excluded</li><li>environmental damage and pollutant escape excluded</li><li>Rule D - fault of a party does not affect contribution</li><li>Rule E - onus of proof on the claimant; notice to the adjuster</li></ul></li>
+      <li value="4"><span class="pl-t">How the loss is shared, and what general average is not</span><ul class="pl-pts"><li>borne rateably by ship, cargo and freight on contributory values</li><li>adjusted by an average adjuster at the end of the adventure</li><li>average bond and average guarantee taken before cargo is released</li><li>not particular average, which is accidental and lies where it falls</li><li>not insurance - a rule of contribution between the adventurers</li></ul></li>
     </ol>
-    <div class="plan-limb">b)</div>
+    <div class="plan-limb">b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">b) The refloating scenario - the rule that governs it</li>
-      <li value="6">Applying it - when the damage is allowed, and when it is not</li>
+      <li value="5"><span class="pl-t">b) The refloating scenario - the rule that governs it</span><ul class="pl-pts"><li>Rule VII, Damage to Machinery and Boilers, is directly in point</li><li>allowed where the ship is ashore and in a position of peril</li><li>damage incurred in endeavouring to refloat</li><li>an actual intention to float her for the common safety</li><li>at the risk of such damage</li><li>but never where the ship is afloat</li></ul></li>
+      <li value="6"><span class="pl-t">Applying it - when the damage is allowed, and when it is not</span><ul class="pl-pts"><li>she was ashore - the first condition is met on the facts</li><li>peril must be established, not assumed - the contested condition</li><li>working ahead and astern to shake her loose shows the intention</li><li>the master accepted the risk of damaging the engine</li><li>so the bearings are an allowable general average sacrifice</li><li>had she been afloat, the same damage would be particular average</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) reads the definition clause by clause: <b>EXTRAORDINARY - INTENTIONAL - REASONABLE - PERIL - COMMON - PRESERVING</b> (2), then the qualifiers <b>C, D, E</b> (3) and how it is shared (4). Limb (b) is Rule VII as <b>four conditions and one prohibition</b> (5-6): ashore, in peril, intending to refloat, accepting the risk - but never afloat.</p>
     <div class="plan-cov">
@@ -2087,14 +2053,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>34</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 34 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. a) What a general average act is</b><ul><li>Rule A - 'when, and only when' the definition is satisfied</li><li>extraordinary sacrifice or expenditure</li><li>intentionally and reasonably made for the common safety</li><li>preserving from peril property in a common maritime adventure</li><li>the Rules apply by contractual incorporation, not as law</li><li>recognised in India by the Marine Insurance Act 1963</li></ul></div>
-      <div class="pp-step"><b>2. The essential features</b><ul><li>extraordinary - outside ordinary performance of the contract</li><li>intentional and voluntary - a sacrifice, not an accident</li><li>reasonable - reinforced by the Rule Paramount</li><li>real and substantial peril, more than the ordinary risk of the sea</li><li>for the common safety of a common adventure - more than one interest</li><li>preservation of property, so something must be saved to contribute</li></ul></div>
-      <div class="pp-step"><b>3. The lettered rules that qualify the definition</b><ul><li>Rule C - only the direct consequence is allowed</li><li>delay, demurrage, loss of market and indirect loss excluded</li><li>environmental damage and pollutant escape excluded</li><li>Rule D - fault of a party does not affect contribution</li><li>Rule E - onus of proof on the claimant; notice to the adjuster</li></ul></div>
-      <div class="pp-step"><b>4. How the loss is shared, and what general average is not</b><ul><li>borne rateably by ship, cargo and freight on contributory values</li><li>adjusted by an average adjuster at the end of the adventure</li><li>average bond and average guarantee taken before cargo is released</li><li>not particular average, which is accidental and lies where it falls</li><li>not insurance - a rule of contribution between the adventurers</li></ul></div>
-      <div class="pp-step"><b>5. b) The refloating scenario - the rule that governs it</b><ul><li>Rule VII, Damage to Machinery and Boilers, is directly in point</li><li>allowed where the ship is ashore and in a position of peril</li><li>damage incurred in endeavouring to refloat</li><li>an actual intention to float her for the common safety</li><li>at the risk of such damage</li><li>but never where the ship is afloat</li></ul></div>
-      <div class="pp-step"><b>6. Applying it - when the damage is allowed, and when it is not</b><ul><li>she was ashore - the first condition is met on the facts</li><li>peril must be established, not assumed - the contested condition</li><li>working ahead and astern to shake her loose shows the intention</li><li>the master accepted the risk of damaging the engine</li><li>so the bearings are an allowable general average sacrifice</li><li>had she been afloat, the same damage would be particular average</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2367,19 +2325,20 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">a)</div>
     <ol class="plan-list">
-      <li value="1">(a) The mandatory basis in SOLAS and MARPOL</li>
+      <li value="1"><span class="pl-t">(a) The mandatory basis in SOLAS and MARPOL</span><ul class="pl-pts"><li>SOLAS XI-1/6 makes Parts I and II of the Code mandatory</li><li>adopted by MSC.257(84), effective 1 January 2010</li><li>SOLAS I/21 - the older, broader undertaking</li><li>MARPOL Article 12 - major deleterious effect on the environment</li><li>UNCLOS Art 94(7) behind both</li></ul></li>
     </ol>
     <div class="plan-limb">b)</div>
     <ol class="plan-list">
-      <li value="2">(b) The purpose and structure of the Code</li>
-      <li value="3">Salient mandatory standards - Part II</li>
-      <li value="4">Salient recommended practices - Part III</li>
+      <li value="2"><span class="pl-t">(b) The purpose and structure of the Code</span><ul class="pl-pts"><li>MSC.255(84)</li><li>prevention of future casualties, NOT blame or liability</li><li>separate from criminal, disciplinary and civil proceedings</li><li>Part I general, Part II mandatory, Part III recommended</li></ul></li>
+      <li value="3"><span class="pl-t">Salient mandatory standards - Part II</span><ul class="pl-pts"><li>impartial Marine Safety Investigation Authority</li><li>notification content</li><li>investigate every very serious marine casualty</li><li>agreement with substantially interested States</li><li>powers, parallel investigations, co-operation</li><li>no external direction</li><li>evidence from seafarers, with representation</li><li>draft reports circulated for comment</li><li>final report to the Organization</li></ul></li>
+      <li value="4"><span class="pl-t">Salient recommended practices - Part III</span><ul class="pl-pts"><li>administrative responsibilities and principles of investigation</li><li>confidentiality of marine safety records including VDR data</li><li>protection for witnesses and involved parties</li><li>re-opening on significant new evidence</li></ul></li>
     </ol>
     <div class="plan-limb">c)</div>
     <ol class="plan-list">
-      <li value="5">(c) Very serious marine casualty</li>
+      <li value="5"><span class="pl-t">(c) Very serious marine casualty</span><ul class="pl-pts"><li>2.22 - total loss of the ship, or a death, or severe damage to the environment</li><li>any one limb suffices</li><li>marine casualty, serious injury and severe environmental damage defined in support</li><li>triggers a mandatory investigation and a report to IMO</li><li>the Code does not define 'serious marine casualty'</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> WHY prevention not blame (step 2) - WHO the Authority and the flag State (3) - WHAT notify, investigate, report (3-4) - WHEN every VSMC: SHIP, LIFE, SEA (5).</p>
     <div class="plan-cov">
@@ -2387,13 +2346,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>27</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 27 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. (a) The mandatory basis in SOLAS and MARPOL</b><ul><li>SOLAS XI-1/6 makes Parts I and II of the Code mandatory</li><li>adopted by MSC.257(84), effective 1 January 2010</li><li>SOLAS I/21 - the older, broader undertaking</li><li>MARPOL Article 12 - major deleterious effect on the environment</li><li>UNCLOS Art 94(7) behind both</li></ul></div>
-      <div class="pp-step"><b>2. (b) The purpose and structure of the Code</b><ul><li>MSC.255(84)</li><li>prevention of future casualties, NOT blame or liability</li><li>separate from criminal, disciplinary and civil proceedings</li><li>Part I general, Part II mandatory, Part III recommended</li></ul></div>
-      <div class="pp-step"><b>3. Salient mandatory standards - Part II</b><ul><li>impartial Marine Safety Investigation Authority</li><li>notification content</li><li>investigate every very serious marine casualty</li><li>agreement with substantially interested States</li><li>powers, parallel investigations, co-operation</li><li>no external direction</li><li>evidence from seafarers, with representation</li><li>draft reports circulated for comment</li><li>final report to the Organization</li></ul></div>
-      <div class="pp-step"><b>4. Salient recommended practices - Part III</b><ul><li>administrative responsibilities and principles of investigation</li><li>confidentiality of marine safety records including VDR data</li><li>protection for witnesses and involved parties</li><li>re-opening on significant new evidence</li></ul></div>
-      <div class="pp-step"><b>5. (c) Very serious marine casualty</b><ul><li>2.22 - total loss of the ship, or a death, or severe damage to the environment</li><li>any one limb suffices</li><li>marine casualty, serious injury and severe environmental damage defined in support</li><li>triggers a mandatory investigation and a report to IMO</li><li>the Code does not define 'serious marine casualty'</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2664,17 +2616,18 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">A)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">A) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">A) What the human element means in STCW</li>
-      <li value="2">Competence-based standards</li>
-      <li value="3">Fitness for duty - the physical human being</li>
-      <li value="4">Responsibility placed on companies and Administrations</li>
+      <li value="1"><span class="pl-t">A) What the human element means in STCW</span><ul class="pl-pts"><li>competence demonstrated, not time served</li><li>then the conditions under which competence can be exercised</li><li>STCW Convention and Code 1978, as amended</li><li>Manila amendments of 2010, in force 1 January 2012</li></ul></li>
+      <li value="2"><span class="pl-t">Competence-based standards</span><ul class="pl-pts"><li>Part A tables - competence, KUP, methods, criteria</li><li>Part A mandatory, Part B guidance</li><li>Manila added leadership and teamworking; ERM and BRM</li><li>reg I/6 training and assessment; reg I/8 quality standards</li><li>reg I/11 revalidation; chapter VI familiarisation</li></ul></li>
+      <li value="3"><span class="pl-t">Fitness for duty - the physical human being</span><ul class="pl-pts"><li>reg VIII/1 - establish and enforce rest periods per A-VIII/1</li><li>10 hours in any 24 and 77 hours in any 7 days</li><li>two periods, one of at least 6 hours; 14-hour maximum interval</li><li>exceptions not below 70 hours, not over two consecutive weeks</li><li>alcohol limits; reg I/9 medical standards</li><li>reg VIII/2 watchkeeping arrangements and principles</li></ul></li>
+      <li value="4"><span class="pl-t">Responsibility placed on companies and Administrations</span><ul class="pl-pts"><li>reg I/14 - valid certificates, familiarisation, documentation</li><li>quality standards systems operated by Administrations</li><li>independent evaluation and reporting to IMO</li></ul></li>
     </ol>
-    <div class="plan-limb">B)</div>
+    <div class="plan-limb">B) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">B) The IMO guidance on fatigue</li>
-      <li value="6">How the guidance and the rules fit together</li>
+      <li value="5"><span class="pl-t">B) The IMO guidance on fatigue</span><ul class="pl-pts"><li>MSC.1/Circ.1598, 24 January 2019, approved at MSC 100</li><li>supersedes MSC/Circ.1014 of 2001</li><li>recommendatory, not mandatory</li><li>Module 1 fatigue and its causes; sleep debt defined</li><li>Module 2 the Company; Module 3 the Seafarer</li><li>Module 4 awareness and training; Module 5 ship design</li><li>Module 6 the Administration and port State authorities</li></ul></li>
+      <li value="6"><span class="pl-t">How the guidance and the rules fit together</span><ul class="pl-pts"><li>hours of rest are a prescriptive formula in STCW chapter VIII</li><li>compliance with the formula is not the same as being rested</li><li>circadian rhythm and sleep debt affect the quality of rest</li><li>rest means rest, not a different form of work</li><li>MLC 2006 Regulations 2.3, 2.4 and 2.7 run the same way</li><li>treat an always-exactly-compliant record as a warning</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb A on three questions plus the Manila addition: <b>CAN THEY DO IT (2) - ARE THEY FIT (3) - WHO IS RESPONSIBLE (4)</b>, with teamwork threaded through. Limb B: <b>NAME THE CIRCULAR AND ITS SIX MODULES (5) - THEN FLOOR VERSUS RESTED (6)</b>. Numbers: 10, 77, 2, 6, 14, 70.</p>
     <div class="plan-cov">
@@ -2682,14 +2635,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>31</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 31 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. A) What the human element means in STCW</b><ul><li>competence demonstrated, not time served</li><li>then the conditions under which competence can be exercised</li><li>STCW Convention and Code 1978, as amended</li><li>Manila amendments of 2010, in force 1 January 2012</li></ul></div>
-      <div class="pp-step"><b>2. Competence-based standards</b><ul><li>Part A tables - competence, KUP, methods, criteria</li><li>Part A mandatory, Part B guidance</li><li>Manila added leadership and teamworking; ERM and BRM</li><li>reg I/6 training and assessment; reg I/8 quality standards</li><li>reg I/11 revalidation; chapter VI familiarisation</li></ul></div>
-      <div class="pp-step"><b>3. Fitness for duty - the physical human being</b><ul><li>reg VIII/1 - establish and enforce rest periods per A-VIII/1</li><li>10 hours in any 24 and 77 hours in any 7 days</li><li>two periods, one of at least 6 hours; 14-hour maximum interval</li><li>exceptions not below 70 hours, not over two consecutive weeks</li><li>alcohol limits; reg I/9 medical standards</li><li>reg VIII/2 watchkeeping arrangements and principles</li></ul></div>
-      <div class="pp-step"><b>4. Responsibility placed on companies and Administrations</b><ul><li>reg I/14 - valid certificates, familiarisation, documentation</li><li>quality standards systems operated by Administrations</li><li>independent evaluation and reporting to IMO</li></ul></div>
-      <div class="pp-step"><b>5. B) The IMO guidance on fatigue</b><ul><li>MSC.1/Circ.1598, 24 January 2019, approved at MSC 100</li><li>supersedes MSC/Circ.1014 of 2001</li><li>recommendatory, not mandatory</li><li>Module 1 fatigue and its causes; sleep debt defined</li><li>Module 2 the Company; Module 3 the Seafarer</li><li>Module 4 awareness and training; Module 5 ship design</li><li>Module 6 the Administration and port State authorities</li></ul></div>
-      <div class="pp-step"><b>6. How the guidance and the rules fit together</b><ul><li>hours of rest are a prescriptive formula in STCW chapter VIII</li><li>compliance with the formula is not the same as being rested</li><li>circadian rhythm and sleep debt affect the quality of rest</li><li>rest means rest, not a different form of work</li><li>MLC 2006 Regulations 2.3, 2.4 and 2.7 run the same way</li><li>treat an always-exactly-compliant record as a warning</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2944,13 +2889,14 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">What the Act means by an unseaworthy ship</li>
-      <li value="2">The offence, and the defences the Act allows</li>
-      <li value="3">What an unsafe ship is, and the power to detain her</li>
-      <li value="4">The real difference between the two</li>
-      <li value="5">The owner's obligation to the crew</li>
-      <li value="6">How the obligation is policed, and the statute in force at this sitting</li>
+      <li value="1"><span class="pl-t">What the Act means by an unseaworthy ship</span><ul class="pl-pts"><li>section 334 - no separate definitions entry</li><li>materials, construction, master's qualifications</li><li>number, description and qualifications of the crew</li><li>weight, description and stowage of cargo and ballast</li><li>condition of hull, equipment, boilers and machinery</li><li>fit in every respect for the proposed voyage or service</li></ul></li>
+      <li value="2"><span class="pl-t">The offence, and the defences the Act allows</span><ul class="pl-pts"><li>s.334(1) - sending or attempting to send her to sea</li><li>s.334(2) - a master who knowingly takes her to sea</li><li>threshold - life of any person likely to be endangered</li><li>defence - all reasonable means used</li><li>defence - reasonable and justifiable in the circumstances</li><li>s.334(4) - prosecution only by or with Central Government consent</li></ul></li>
+      <li value="3"><span class="pl-t">What an unsafe ship is, and the power to detain her</span><ul class="pl-pts"><li>s.336 - defective hull, equipment or machinery</li><li>or overloading or improper loading</li><li>unfit to proceed without serious danger to human life</li><li>having regard to the nature of the intended service</li><li>provisional detention, survey, then release or final detention</li><li>written grounds served forthwith on the master</li></ul></li>
+      <li value="4"><span class="pl-t">The real difference between the two</span><ul class="pl-pts"><li>unseaworthy is a state; unsafe triggers a power</li><li>one punishes after the fact, the other intervenes before</li><li>unseaworthiness is wider - includes crew and stowage</li><li>unsafe is narrower and lists its causes</li><li>every unsafe ship is unseaworthy; not the converse</li></ul></li>
+      <li value="5"><span class="pl-t">The owner's obligation to the crew</span><ul class="pl-pts"><li>s.335 - implied into every contract of service</li><li>and every contract of apprenticeship</li><li>notwithstanding any agreement to the contrary</li><li>binds owner, master and the loading or despatching agent</li><li>all reasonable means at the commencement of the voyage</li><li>and to keep her seaworthy during the voyage</li></ul></li>
+      <li value="6"><span class="pl-t">How the obligation is policed, and the statute in force at this sitting</span><ul class="pl-pts"><li>s.335(2) - Central Government may arrange a survey</li><li>class, flag State survey, ISM audit and port State control</li><li>the 1958 Act was the operative law on the day</li><li>the 2025 Act was still only a Bill before Parliament</li><li>it was passed in August 2025 and commenced only 15 March 2026, s.324(1) repealing 1958</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> STATE (1-2) - POWER (3) - COMPARE (4) - DUTY (5) - POLICE (6). The section trio is consecutive and in that order: 334 unseaworthy, 335 the owner's duty, 336 unsafe and detention.</p>
     <div class="plan-cov">
@@ -2958,14 +2904,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>34</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 34 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What the Act means by an unseaworthy ship</b><ul><li>section 334 - no separate definitions entry</li><li>materials, construction, master's qualifications</li><li>number, description and qualifications of the crew</li><li>weight, description and stowage of cargo and ballast</li><li>condition of hull, equipment, boilers and machinery</li><li>fit in every respect for the proposed voyage or service</li></ul></div>
-      <div class="pp-step"><b>2. The offence, and the defences the Act allows</b><ul><li>s.334(1) - sending or attempting to send her to sea</li><li>s.334(2) - a master who knowingly takes her to sea</li><li>threshold - life of any person likely to be endangered</li><li>defence - all reasonable means used</li><li>defence - reasonable and justifiable in the circumstances</li><li>s.334(4) - prosecution only by or with Central Government consent</li></ul></div>
-      <div class="pp-step"><b>3. What an unsafe ship is, and the power to detain her</b><ul><li>s.336 - defective hull, equipment or machinery</li><li>or overloading or improper loading</li><li>unfit to proceed without serious danger to human life</li><li>having regard to the nature of the intended service</li><li>provisional detention, survey, then release or final detention</li><li>written grounds served forthwith on the master</li></ul></div>
-      <div class="pp-step"><b>4. The real difference between the two</b><ul><li>unseaworthy is a state; unsafe triggers a power</li><li>one punishes after the fact, the other intervenes before</li><li>unseaworthiness is wider - includes crew and stowage</li><li>unsafe is narrower and lists its causes</li><li>every unsafe ship is unseaworthy; not the converse</li></ul></div>
-      <div class="pp-step"><b>5. The owner's obligation to the crew</b><ul><li>s.335 - implied into every contract of service</li><li>and every contract of apprenticeship</li><li>notwithstanding any agreement to the contrary</li><li>binds owner, master and the loading or despatching agent</li><li>all reasonable means at the commencement of the voyage</li><li>and to keep her seaworthy during the voyage</li></ul></div>
-      <div class="pp-step"><b>6. How the obligation is policed, and the statute in force at this sitting</b><ul><li>s.335(2) - Central Government may arrange a survey</li><li>class, flag State survey, ISM audit and port State control</li><li>the 1958 Act was the operative law on the day</li><li>the 2025 Act was still only a Bill before Parliament</li><li>it was passed in August 2025 and commenced only 15 March 2026, s.324(1) repealing 1958</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">

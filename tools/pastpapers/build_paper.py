@@ -111,22 +111,6 @@ def quick_revision(qr, out):
 MODES = [('understand', 'Understand'), ('plan', 'Exam Plan'), ('answer', 'Answer'),
          ('guide', 'Study Guide'), ('recall', 'Recall')]
 
-# Injected ONLY when a spec opts into `plan_bullets`. The stylesheet is inlined
-# into every page, so adding these rules to template/pastpapers.css would move
-# the bytes of all 40 papers on the next rebuild. Gating the injection keeps
-# every unpiloted page byte-identical to its main baseline.
-PLAN_BULLETS_CSS = (
-    "  .plan-b .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;"
-    "font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;"
-    "color:#7c2d12;}\n"
-    "  .plan-b .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}\n"
-    "  .plan-b .plan-list li{margin:9px 0;}\n"
-    "  .plan-b .pl-t{display:block;}\n"
-    "  .plan-b .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;"
-    "color:var(--grey-text);}\n"
-    "  .plan-b .pl-pts li{margin:2px 0;}"
-)
-
 
 def route_steps(q):
     return ((q.get('answer_route') or {}).get('steps')) or []
@@ -234,37 +218,36 @@ def knowledge_map(q, out):
     out.append('  </section>')
 
 
-def plan_view(q, out, bullets=False):
-    """Start here: the headings to write first, then the coverage checklist.
+def plan_view(q, out):
+    """Start here: the headings to write first, with their points beneath them.
 
     This is the fix for "I could not finish in time". Writing the framework
     first means an interrupted answer still shows the examiner the whole shape.
 
-    `bullets` renders the piloted view, opted into per paper by `plan_bullets`
-    in the spec. The legacy view prints every route heading TWICE -- once as the
-    plan list and again inside the collapsed <details> -- and that duplication is
-    the reason the core points had to be hidden in the first place. Merging the
-    two into one list is what makes the points affordable on screen, so a
-    candidate asking for "a bullet version of the answer" is given it on arrival
-    instead of having to discover that a collapsed control holds it.
+    The superseded view printed every route heading TWICE -- once as the plan
+    list and again inside a collapsed <details> -- and that duplication is the
+    reason the core points had to be hidden at all. Merging the two into one
+    list is what makes the points affordable on screen, so a candidate asking
+    for "a bullet version of the answer" is given it on arrival instead of
+    having to discover that a collapsed control holds it.
 
-    Both views render the SAME answer_route.steps[].points. No second corpus, no
-    new field, nothing authored twice -- so the two cannot drift apart.
+    There is one renderer and no opt-in. The points are the SAME
+    answer_route.steps[].points the model answer, knowledge map and recall test
+    derive from -- no second corpus, no new field, nothing authored twice, so
+    nothing can drift.
     """
     steps = route_steps(q)
     if not steps:
         return
     n_pts = sum(len(s.get('points') or []) for s in steps)
-    out.append('  <section class="layer plan%s" aria-label="Exam plan">'
-               % (' plan-b' if bullets else ''))
+    out.append('  <section class="layer plan" aria-label="Exam plan">')
     out.append('    <div class="layer-title">Start here '
                '<span class="plan-marks">%s marks</span></div>' % q['total_marks'])
     out.append('    <p class="plan-lead">Write these headings first, then expand them '
                'in order. If time is short, get every heading down before you expand '
                'any of them.</p>')
-    if bullets:
-        out.append('    <div class="plan-cap">Bullet answer &mdash; points to write</div>')
-    marks = limb_marks(q) if bullets else {}
+    out.append('    <div class="plan-cap">Bullet answer &mdash; points to write</div>')
+    marks = limb_marks(q)
     for limb, group in limb_groups(q):
         if limb:
             # The candidate is being told what to write; what each limb is worth
@@ -278,14 +261,11 @@ def plan_view(q, out, bullets=False):
                           ' <span class="pl-mk">&middot; %d marks</span>' % m))
         out.append('    <ol class="plan-list">')
         for s in group:
-            if bullets:
-                pts = s.get('points') or []
-                out.append('      <li value="%d"><span class="pl-t">%s</span>%s</li>'
-                           % (s['n'], esc(s['title']),
-                              ('<ul class="pl-pts">%s</ul>'
-                               % ''.join('<li>%s</li>' % esc(p) for p in pts)) if pts else ''))
-            else:
-                out.append('      <li value="%d">%s</li>' % (s['n'], esc(s['title'])))
+            pts = s.get('points') or []
+            out.append('      <li value="%d"><span class="pl-t">%s</span>%s</li>'
+                       % (s['n'], esc(s['title']),
+                          ('<ul class="pl-pts">%s</ul>'
+                           % ''.join('<li>%s</li>' % esc(p) for p in pts)) if pts else ''))
         out.append('    </ol>')
     if q.get('memory_cue'):
         out.append('    <p class="plan-cue"><b>Memory cue.</b> %s</p>'
@@ -303,17 +283,6 @@ def plan_view(q, out, bullets=False):
                'are there to help you check whether an answer is too thin &mdash; they are '
                'not a mark scheme, and they are not %d separate facts to learn '
                'individually.</p>' % (len(steps), n_pts))
-    # Suppressed under the pilot: the points are already on screen above, and
-    # reprinting them here is the duplication the pilot exists to remove.
-    if not bullets:
-        out.append('    <details class="plan-points">'
-                   '<summary>Show the core points to cover</summary>')
-        for limb, group in limb_groups(q):
-            for s in group:
-                out.append('      <div class="pp-step"><b>%d. %s</b><ul>%s</ul></div>'
-                           % (s['n'], esc(s['title']),
-                              ''.join('<li>%s</li>' % esc(p) for p in (s.get('points') or []))))
-        out.append('    </details>')
     out.append('  </section>')
 
 
@@ -512,7 +481,7 @@ def build_card(q, paper, out, publish, corpus=None, deliver=False, delivered_ids
     out.append('  </div>')
 
     out.append('  <div class="mode" data-mode="plan">')
-    plan_view(q, out, bool((paper or {}).get('plan_bullets')))
+    plan_view(q, out)
     out.append('  </div>')
 
     out.append('  <div class="mode" data-mode="answer">')
@@ -736,8 +705,6 @@ def build(spec, gated=False, publish=False, deliver=False, promo=False, newest_l
     o.extend(head_meta(strip_tags(title), strip_tags(desc), canonical, publish, extra))
     a('<style>')
     a(read_css())
-    if d.get('plan_bullets'):
-        a(PLAN_BULLETS_CSS)
     a('</style>')
     a('</head>')
     a('')

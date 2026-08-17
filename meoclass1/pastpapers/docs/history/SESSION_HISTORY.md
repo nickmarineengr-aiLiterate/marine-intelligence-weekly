@@ -36,6 +36,68 @@ they stand as written.
 ## QA
 ---
 
+## §38 — The Bullet Exam Plan becomes the standard rendering; subpart marks land
+
+**2026-08-17, laptop.** Started clean at `13b5a47` (local `main` == `origin/main`). Three changes,
+in order, each gated before the next.
+
+**1. Subpart marks on the limb divider.** The brief specified matching marks from
+`subparts[].label`. That would have worked on 22 of the corpus's 688 limb dividers. **Two subpart
+key conventions coexist under one `schema_version: 1.3`** — 669 subparts write `ref` (`"a)"`) and
+29 write `label` (`"(a)"`) — and route `limb` values vary the same way (`a`, `a)`, `(a)`, `A.`).
+Normalising both sides to alphanumerics lifted the match to **393**, with **zero collisions** across
+all 360 questions. The remaining 296 dividers keep the bare label. **Marks are never inferred**: a
+limb whose subpart states no marks (189) and a scaffold limb that is not a subpart at all (106)
+both fall back exactly as before.
+
+**2. Inertness proved before propagation, not asserted.** With only QP2608 opted in, a **full
+publish build of all 40 papers moved only QP2608's two surfaces**. That is a stronger claim than
+rebuilding the three papers the brief named, and it is what the per-paper CSS injection existed to
+make provable.
+
+**3. QP2608-Q1(b) restructured.** 6 of 16 marks carried a single route heading against limb (a)'s
+seven, so the plan made the limb look trivial. Split into three — what the notation does while she
+is idle, what falls due on reactivation and how it is credited, and the fact that none of it
+touches statutory certification. **No new technical content**: every point already appeared in the
+model answer's survey-cycle table or its "three consequences" paragraph, which was re-sequenced
+under the new headings because `validate_spec` requires each step to own a matching heading. Takes
+Q1 to 10 steps and a chunking warning — accepted, and 11 questions already sat outside that range.
+
+**4. Propagation architecture: the flag was removed, not spread.** Option A over Option B. The
+alternative was 40 identical `plan_bullets: true` lines, a permanently branching renderer and a
+legacy `<details>` path nothing selects. Instead: the CSS moved into `template/pastpapers.css`, the
+`bullets` parameter, the `.plan-b` modifier, the `PLAN_BULLETS_CSS` injection and the duplicate
+`<details class="plan-points">` block are all **gone**. One renderer, no selector, nothing to drift.
+The per-paper injection had been correct while it was a pilot — the stylesheet is inlined into
+every page, so a rule in the shared file moves all 40 papers — and that same fact is why it belongs
+there now.
+
+**What the migration is allowed to have changed, proved rather than claimed.** A checker stripped
+the inlined stylesheet and the exam-plan region from both the baseline and the rebuild and required
+the remainder to be byte-identical: **98 of 98 pages, zero drift**. The checker was then mutation-
+tested — planted changes to the recall blanks, knowledge map, understand-first block, model-answer
+headings, study-guide body and regulation tables were **6/6 caught**. Two earlier "misses" were the
+mutations landing inside the stripped stylesheet, not a weak guard.
+
+**Gates.** `run_toolchain --publish` **ALL STAGES PASS, rc=0**, UI behaviour **40/40 pages**;
+`delivery_gate --verify-derivation --strict` **PASS**; determinism **101/101 artefacts byte-identical
+across two consecutive publish builds**; `node --test tools/security/*.test.mjs` **607 pass, 0 fail,
+1 pre-existing skip**. Mobile at 375px: no horizontal overflow, limb dividers on one line.
+**Screenshots were unavailable — the Browser pane was not compositing — so the mobile finding rests
+on measured geometry, not on a picture anyone looked at.**
+
+**Commercial, magazine and QI-v2 untouched.** No file under the payment, entitlement, storefront or
+magazine surfaces changed; `SQ/index.html` is unmoved and pricing stands at ₹1,499 / ₹1,500. QI-v2
+Phase 2 was not started.
+
+**Raised and deliberately not acted on** — recorded at `CURRENT_STATUS.md` §6 D–G: authoring
+scaffolds (`framing`, `closing`, `intro`, `main`) printing as candidate-facing limb labels; the
+10-step chunking warning; 20 missing memory cues, all in 2026; and fewer than ten genuinely
+temporal route points out of 14,979, which is the evidence that the Exam Plan has **not** become a
+regulatory-history layer.
+
+---
+
 ## §37 — QP2608 (August 2026) reviewed and published, and the Bullet Exam Plan pilot
 
 **2026-08-17, laptop.** Reviewed desktop branch `pastpapers/qp2608-founder-review` (`d3ce3e3`) and

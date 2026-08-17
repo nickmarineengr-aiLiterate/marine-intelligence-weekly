@@ -267,7 +267,7 @@
   .plan-lead{margin:0 0 8px;font-size:13.5px;}
   .plan-limb{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;margin-top:8px;}
   .plan-list{margin:4px 0 0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;}
-  .plan-list li{margin:4px 0;}
+  .plan-list li{margin:9px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
   .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
@@ -275,11 +275,11 @@
   .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
   .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
-  .plan-points{margin-top:9px;font-size:12.5px;}
-  .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
-  .plan-points:focus-within > summary{outline:2px solid var(--orange);outline-offset:2px;}
-  .pp-step{margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;}
-  .pp-step ul{margin:3px 0 0;padding-left:20px;color:var(--grey-text);}
+  .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
+  .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}
+  .pl-t{display:block;}
+  .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;color:var(--grey-text);}
+  .pl-pts li{margin:2px 0;}
 
   /* Recall: blanks first, reveal on demand. */
   .recall{background:#fff;border:1.5px solid var(--teal-dark);padding:0 16px 13px;}
@@ -626,26 +626,27 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">What gender equality means at sea, and what the goal actually says</li>
+      <li value="1"><span class="pl-t">What gender equality means at sea, and what the goal actually says</span><ul class="pl-pts"><li>The UN 2030 Agenda goal the stem quotes</li><li>Access to job, training, promotion and a safe environment independent of sex; the ship is also a home</li><li>Equality of opportunity is not equality of outcome</li><li>Balance is an aspiration; non-discrimination is already law under MLC Article III(d)</li></ul></li>
     </ol>
     <div class="plan-limb">a.</div>
     <ol class="plan-list">
-      <li value="2">Why gender balance is required</li>
+      <li value="2"><span class="pl-t">Why gender balance is required</span><ul class="pl-pts"><li>A matter of right, not favour</li><li>The industry needs the people; a wider pool raises quality</li><li>Diversity of perspective in a team that manages risk</li><li>Retention, commercial expectation, and better standards for everyone</li><li>Do not exaggerate the case with an unsourced statistic</li></ul></li>
     </ol>
     <div class="plan-limb">b.</div>
     <ol class="plan-list">
-      <li value="3">What the International Maritime Organization does</li>
-      <li value="4">What the Government of India does</li>
+      <li value="3"><span class="pl-t">What the International Maritime Organization does</span><ul class="pl-pts"><li>Programme work, not regulation - no convention, no certificate</li><li>Women in maritime programme; regional associations; fellowships and reserved places</li><li>A World Maritime Day theme</li><li>Parity written into ordinary technical programmes - the GHG-SMART scholarship example</li><li>No resolution number asserted, and why</li></ul></li>
+      <li value="4"><span class="pl-t">What the Government of India does</span><ul class="pl-pts"><li>The Directorate General of Shipping under the Merchant Shipping Act, 1958</li><li>Admission to training and certification on the same terms; service in all departments and ranks</li><li>Institute approval conditions as the practical lever; training berths</li><li>MLC implementation through national law</li><li>No circular or rule number asserted, and why</li></ul></li>
     </ol>
     <ol class="plan-list">
-      <li value="5">The obligations that already bind the ship</li>
+      <li value="5"><span class="pl-t">The obligations that already bind the ship</span><ul class="pl-pts"><li>MLC Article III(d) and Article IV</li><li>Standard A3.1 individual sleeping room</li><li>Guideline B4.3.1 - harassment as an OSH matter, and the industry guidance</li><li>Standard A5.1.5 - complaint procedure, impartial adviser, no victimization</li></ul></li>
     </ol>
     <div class="plan-limb">c.</div>
     <ol class="plan-list">
-      <li value="6">As Chief Engineer - the physical ship</li>
-      <li value="7">As Chief Engineer - work, watches and training</li>
-      <li value="8">As Chief Engineer - behaviour, complaints and accountability</li>
+      <li value="6"><span class="pl-t">As Chief Engineer - the physical ship</span><ul class="pl-pts"><li>Cabin and private sanitary facilities confirmed before joining</li><li>PPE stocked in the full range of sizes</li><li>Lifting aids and correct tooling as routine</li><li>Medical provision and confidentiality; safety equipment sizing checked in drills</li></ul></li>
+      <li value="7"><span class="pl-t">As Chief Engineer - work, watches and training</span><ul class="pl-pts"><li>Allocate by rank and competence and nothing else - protective allocation is exclusion</li><li>Same watch and project responsibility, same standard</li><li>Appraise honestly; mentor deliberately</li><li>Include her in departmental decisions; watch the workload in the rest-hour records</li></ul></li>
+      <li value="8"><span class="pl-t">As Chief Engineer - behaviour, complaints and accountability</span><ul class="pl-pts"><li>Set the standard on day one; deal with the first incident</li><li>Make the complaint route real and protect the complainant from victimization</li><li>Treat harassment as an OSH matter and record it through the SMS</li><li>Brief the reliefs; avoid singling out</li><li>Initiatives recruit; conditions retain</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> WHY (2), WHO - IMO (3) and India (4), WHAT BINDS (5), WHAT I DO - ship (6), work (7), behaviour (8).</p>
     <div class="plan-cov">
@@ -653,16 +654,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>36</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 36 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What gender equality means at sea, and what the goal actually says</b><ul><li>The UN 2030 Agenda goal the stem quotes</li><li>Access to job, training, promotion and a safe environment independent of sex; the ship is also a home</li><li>Equality of opportunity is not equality of outcome</li><li>Balance is an aspiration; non-discrimination is already law under MLC Article III(d)</li></ul></div>
-      <div class="pp-step"><b>2. Why gender balance is required</b><ul><li>A matter of right, not favour</li><li>The industry needs the people; a wider pool raises quality</li><li>Diversity of perspective in a team that manages risk</li><li>Retention, commercial expectation, and better standards for everyone</li><li>Do not exaggerate the case with an unsourced statistic</li></ul></div>
-      <div class="pp-step"><b>3. What the International Maritime Organization does</b><ul><li>Programme work, not regulation - no convention, no certificate</li><li>Women in maritime programme; regional associations; fellowships and reserved places</li><li>A World Maritime Day theme</li><li>Parity written into ordinary technical programmes - the GHG-SMART scholarship example</li><li>No resolution number asserted, and why</li></ul></div>
-      <div class="pp-step"><b>4. What the Government of India does</b><ul><li>The Directorate General of Shipping under the Merchant Shipping Act, 1958</li><li>Admission to training and certification on the same terms; service in all departments and ranks</li><li>Institute approval conditions as the practical lever; training berths</li><li>MLC implementation through national law</li><li>No circular or rule number asserted, and why</li></ul></div>
-      <div class="pp-step"><b>5. The obligations that already bind the ship</b><ul><li>MLC Article III(d) and Article IV</li><li>Standard A3.1 individual sleeping room</li><li>Guideline B4.3.1 - harassment as an OSH matter, and the industry guidance</li><li>Standard A5.1.5 - complaint procedure, impartial adviser, no victimization</li></ul></div>
-      <div class="pp-step"><b>6. As Chief Engineer - the physical ship</b><ul><li>Cabin and private sanitary facilities confirmed before joining</li><li>PPE stocked in the full range of sizes</li><li>Lifting aids and correct tooling as routine</li><li>Medical provision and confidentiality; safety equipment sizing checked in drills</li></ul></div>
-      <div class="pp-step"><b>7. As Chief Engineer - work, watches and training</b><ul><li>Allocate by rank and competence and nothing else - protective allocation is exclusion</li><li>Same watch and project responsibility, same standard</li><li>Appraise honestly; mentor deliberately</li><li>Include her in departmental decisions; watch the workload in the rest-hour records</li></ul></div>
-      <div class="pp-step"><b>8. As Chief Engineer - behaviour, complaints and accountability</b><ul><li>Set the standard on day one; deal with the first incident</li><li>Make the complaint route real and protect the complainant from victimization</li><li>Treat harassment as an OSH matter and record it through the SMS</li><li>Brief the reliefs; avoid singling out</li><li>Initiatives recruit; conditions retain</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -973,25 +964,26 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The essential difference - what was removed, and what replaced it</li>
+      <li value="1"><span class="pl-t">The essential difference - what was removed, and what replaced it</span><ul class="pl-pts"><li>The MC camshaft drove fuel pump, exhaust valve actuator and starting air distributor</li><li>Timing was written into cam geometry and fixed at the drawing board</li><li>The ME engine replaces the camshaft with high-pressure hydraulic oil plus a control system</li><li>Timing is no longer geometry; it is a set of values in software</li></ul></li>
     </ol>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="2">The differences in detail</li>
+      <li value="2"><span class="pl-t">The differences in detail</span><ul class="pl-pts"><li>Camshaft eliminated; control system in its place</li><li>Hydraulic actuation of injection and exhaust valve</li><li>Fully variable timing, software reversing, electronic lubrication and starting air</li><li>Selectable running modes; injection pressure independent of engine speed</li><li>Fewer moving parts, but oil cleanliness and electronics become the maintenance burden</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="3">The Hydraulic Power Supply - what it is for</li>
-      <li value="4">The Hydraulic Cylinder Unit, and what it contains</li>
+      <li value="3"><span class="pl-t">The Hydraulic Power Supply - what it is for</span><ul class="pl-pts"><li>Produces and maintains the high-pressure servo oil that is the engine's working medium</li><li>Engine-driven main pumps plus electrically driven start-up and standby pumps</li><li>Fine automatic filtration, safety and non-return valves, accumulators, rail and instrumentation</li><li>The medium is normally the engine's own system oil - an advantage and an obligation</li></ul></li>
+      <li value="4"><span class="pl-t">The Hydraulic Cylinder Unit, and what it contains</span><ul class="pl-pts"><li>One per cylinder - the local distribution and actuation block that makes per-cylinder control possible</li><li>Block with internal galleries; fuel pressure booster; ELFI or FIVA; exhaust valve actuator</li><li>Accumulators for injection and for the exhaust valve; local filters, non-return and safety valves</li><li>Position and pressure sensors closing the loop back to the cylinder control unit</li></ul></li>
     </ol>
-    <div class="plan-limb">(c)</div>
+    <div class="plan-limb">(c) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="5">The ELFI and the FIVA valve</li>
+      <li value="5"><span class="pl-t">The ELFI and the FIVA valve</span><ul class="pl-pts"><li>Fast-acting proportional servo valves driven by the cylinder control unit - the true replacement for the cam</li><li>ELFI controls fuel only; FIVA controls fuel and the exhaust valve in one valve</li><li>Position feedback makes the timing repeatable, not merely commanded</li><li>Timing, rate shaping, cylinder balancing and unit cut-out become available</li><li>The settings are NOx-critical and constrained by the NOx Technical File; contamination is the practical vulnerability</li></ul></li>
     </ol>
-    <div class="plan-limb">(d)</div>
+    <div class="plan-limb">(d) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="6">The fuel pressure booster compared with the conventional fuel pump</li>
+      <li value="6"><span class="pl-t">The fuel pressure booster compared with the conventional fuel pump</span><ul class="pl-pts"><li>Jerk pump: cam-driven plunger, pressure from mechanical thrust, quantity by helix, timing by cam</li><li>Its pressure falls with engine speed - smoke and poor combustion at low load</li><li>Booster: servo oil on a large piston acting on a small fuel plunger - pressure by area ratio</li><li>Timing and profile set electronically; injection ended by venting the servo oil</li><li>Buys clean slow steaming and part-load tuning; costs oil cleanliness, electrical dependence and new competencies</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> One chain, and each link is a route step: HPS (3) - rail - HCU (4) - ELFI or FIVA (5) - booster (6) - injector. Limb (a) at step (2) is what the chain replaced, and step (1) is why it was replaced.</p>
     <div class="plan-cov">
@@ -999,14 +991,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>27</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 27 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The essential difference - what was removed, and what replaced it</b><ul><li>The MC camshaft drove fuel pump, exhaust valve actuator and starting air distributor</li><li>Timing was written into cam geometry and fixed at the drawing board</li><li>The ME engine replaces the camshaft with high-pressure hydraulic oil plus a control system</li><li>Timing is no longer geometry; it is a set of values in software</li></ul></div>
-      <div class="pp-step"><b>2. The differences in detail</b><ul><li>Camshaft eliminated; control system in its place</li><li>Hydraulic actuation of injection and exhaust valve</li><li>Fully variable timing, software reversing, electronic lubrication and starting air</li><li>Selectable running modes; injection pressure independent of engine speed</li><li>Fewer moving parts, but oil cleanliness and electronics become the maintenance burden</li></ul></div>
-      <div class="pp-step"><b>3. The Hydraulic Power Supply - what it is for</b><ul><li>Produces and maintains the high-pressure servo oil that is the engine's working medium</li><li>Engine-driven main pumps plus electrically driven start-up and standby pumps</li><li>Fine automatic filtration, safety and non-return valves, accumulators, rail and instrumentation</li><li>The medium is normally the engine's own system oil - an advantage and an obligation</li></ul></div>
-      <div class="pp-step"><b>4. The Hydraulic Cylinder Unit, and what it contains</b><ul><li>One per cylinder - the local distribution and actuation block that makes per-cylinder control possible</li><li>Block with internal galleries; fuel pressure booster; ELFI or FIVA; exhaust valve actuator</li><li>Accumulators for injection and for the exhaust valve; local filters, non-return and safety valves</li><li>Position and pressure sensors closing the loop back to the cylinder control unit</li></ul></div>
-      <div class="pp-step"><b>5. The ELFI and the FIVA valve</b><ul><li>Fast-acting proportional servo valves driven by the cylinder control unit - the true replacement for the cam</li><li>ELFI controls fuel only; FIVA controls fuel and the exhaust valve in one valve</li><li>Position feedback makes the timing repeatable, not merely commanded</li><li>Timing, rate shaping, cylinder balancing and unit cut-out become available</li><li>The settings are NOx-critical and constrained by the NOx Technical File; contamination is the practical vulnerability</li></ul></div>
-      <div class="pp-step"><b>6. The fuel pressure booster compared with the conventional fuel pump</b><ul><li>Jerk pump: cam-driven plunger, pressure from mechanical thrust, quantity by helix, timing by cam</li><li>Its pressure falls with engine speed - smoke and poor combustion at low load</li><li>Booster: servo oil on a large piston acting on a small fuel plunger - pressure by area ratio</li><li>Timing and profile set electronically; injection ended by venting the servo oil</li><li>Buys clean slow steaming and part-load tuning; costs oil cleanliness, electrical dependence and new competencies</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1320,18 +1304,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">What IMO is, and the organs that do the work</li>
-      <li value="2">The Assembly - the governing body</li>
-      <li value="3">The Council - the executive organ</li>
-      <li value="4">The five main committees and what each owns</li>
-      <li value="5">The seven sub-committees and the role they perform</li>
+      <li value="1"><span class="pl-t">What IMO is, and the organs that do the work</span><ul class="pl-pts"><li>UN specialised agency for safety, security and pollution prevention</li><li>Assembly and Council govern; committees produce the technical output</li><li>A Secretariat serves all of them</li></ul></li>
+      <li value="2"><span class="pl-t">The Assembly - the governing body</span><ul class="pl-pts"><li>All Member States</li><li>Regular session once every two years</li><li>Approves work programme and budget, elects the Council</li><li>Adopts Assembly resolutions under Article 15(j)</li></ul></li>
+      <li value="3"><span class="pl-t">The Council - the executive organ</span><ul class="pl-pts"><li>40 members in three categories, elected for two years</li><li>Performs Assembly functions between sessions, with one reserved exception</li><li>Supervises the work of the Organization; appoints the Secretary-General subject to Assembly approval</li></ul></li>
+      <li value="4"><span class="pl-t">The five main committees and what each owns</span><ul class="pl-pts"><li>MSC and MEPC are the technical engines</li><li>Legal, Technical Cooperation and Facilitation complete the set</li><li>Committees are open to all Member States</li></ul></li>
+      <li value="5"><span class="pl-t">The seven sub-committees and the role they perform</span><ul class="pl-pts"><li>They do the detailed technical development the parent committee has no time for</li><li>They report to MSC, MEPC or both</li><li>They have no adoption power - they prepare, the committee approves, the committee or Assembly adopts</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="6">What a convention is</li>
-      <li value="7">Protocol, Code and Resolution - how each differs, with examples</li>
+      <li value="6"><span class="pl-t">What a convention is</span><ul class="pl-pts"><li>A binding treaty between States</li><li>Enters into force only on its own stated conditions</li><li>Binds only those States that become party to it</li></ul></li>
+      <li value="7"><span class="pl-t">Protocol, Code and Resolution - how each differs, with examples</span><ul class="pl-pts"><li>Protocol - a separate treaty that amends or supplements a parent convention</li><li>Code - detailed technical content, mandatory only when a convention makes it so</li><li>Resolution - the formal decision of a body; the vehicle, not necessarily the obligation</li><li>Close on adoption versus entry into force</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Top down for limb (a): Assembly (2), Council (3), Committees (4), Sub-committees (5). Then limb (b) opens at step 6 and closes in one table at step 7.</p>
     <div class="plan-cov">
@@ -1339,15 +1324,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>23</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 23 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What IMO is, and the organs that do the work</b><ul><li>UN specialised agency for safety, security and pollution prevention</li><li>Assembly and Council govern; committees produce the technical output</li><li>A Secretariat serves all of them</li></ul></div>
-      <div class="pp-step"><b>2. The Assembly - the governing body</b><ul><li>All Member States</li><li>Regular session once every two years</li><li>Approves work programme and budget, elects the Council</li><li>Adopts Assembly resolutions under Article 15(j)</li></ul></div>
-      <div class="pp-step"><b>3. The Council - the executive organ</b><ul><li>40 members in three categories, elected for two years</li><li>Performs Assembly functions between sessions, with one reserved exception</li><li>Supervises the work of the Organization; appoints the Secretary-General subject to Assembly approval</li></ul></div>
-      <div class="pp-step"><b>4. The five main committees and what each owns</b><ul><li>MSC and MEPC are the technical engines</li><li>Legal, Technical Cooperation and Facilitation complete the set</li><li>Committees are open to all Member States</li></ul></div>
-      <div class="pp-step"><b>5. The seven sub-committees and the role they perform</b><ul><li>They do the detailed technical development the parent committee has no time for</li><li>They report to MSC, MEPC or both</li><li>They have no adoption power - they prepare, the committee approves, the committee or Assembly adopts</li></ul></div>
-      <div class="pp-step"><b>6. What a convention is</b><ul><li>A binding treaty between States</li><li>Enters into force only on its own stated conditions</li><li>Binds only those States that become party to it</li></ul></div>
-      <div class="pp-step"><b>7. Protocol, Code and Resolution - how each differs, with examples</b><ul><li>Protocol - a separate treaty that amends or supplements a parent convention</li><li>Code - detailed technical content, mandatory only when a convention makes it so</li><li>Resolution - the formal decision of a body; the vehicle, not necessarily the obligation</li><li>Close on adoption versus entry into force</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1629,16 +1605,17 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Which instrument is 'the revised strategy', and what it replaced</li>
-      <li value="2">The vision and the objectives</li>
-      <li value="3">The levels of ambition</li>
-      <li value="4">The indicative checkpoints</li>
-      <li value="5">The guiding principles</li>
-      <li value="6">Short-term measures - and where they stand at this sitting</li>
-      <li value="7">The basket of candidate mid-term measures</li>
-      <li value="8">Long-term measures, the timetable and the review</li>
-      <li value="9">The potential impact on the maritime industry</li>
+      <li value="1"><span class="pl-t">Which instrument is 'the revised strategy', and what it replaced</span><ul class="pl-pts"><li>MEPC.377(80), adopted 7 July 2023 at MEPC 80</li><li>Revokes the 2018 Initial Strategy MEPC.304(72) as from that date</li><li>A policy instrument, not a regulation - obligation comes through MARPOL Annex VI</li><li>The Strategy's own emission-share figures</li></ul></li>
+      <li value="2"><span class="pl-t">The vision and the objectives</span><ul class="pl-pts"><li>Phase out GHG emissions as soon as possible, with a just and equitable transition</li><li>Enhance IMO's contribution, linked to the Paris Agreement and SDG 13</li><li>Identify actions for the sector while addressing impacts on States</li><li>Identify measures, including R&amp;D incentives and monitoring</li></ul></li>
+      <li value="3"><span class="pl-t">The levels of ambition</span><ul class="pl-pts"><li>New-ship energy efficiency requirements to be strengthened</li><li>Carbon intensity down at least 40% by 2030 against 2008</li><li>Zero or near-zero energy at least 5%, striving for 10%, by 2030</li><li>Net-zero GHG by or around 2050, well-to-wake</li></ul></li>
+      <li value="4"><span class="pl-t">The indicative checkpoints</span><ul class="pl-pts"><li>Total annual GHG down at least 20%, striving for 30%, by 2030</li><li>Total annual GHG down at least 70%, striving for 80%, by 2040</li><li>Absolute, not intensity - the distinction that makes the 2023 Strategy a step change</li></ul></li>
+      <li value="5"><span class="pl-t">The guiding principles</span><ul class="pl-pts"><li>Non-discrimination and no more favourable treatment</li><li>Common but differentiated responsibilities and respective capabilities</li><li>All ships to give full effect regardless of flag</li><li>Impacts on States; evidence-based decision-making with the precautionary approach</li></ul></li>
+      <li value="6"><span class="pl-t">Short-term measures - and where they stand at this sitting</span><ul class="pl-pts"><li>Measures finalized and agreed between 2018 and 2023, already in MARPOL Annex VI</li><li>EEDI and SEEMP; the IMO DCS; EEXI, CII and the enhanced SEEMP under MEPC.328(76)</li><li>Their review must be completed by 1 January 2026 and is running</li></ul></li>
+      <li value="7"><span class="pl-t">The basket of candidate mid-term measures</span><ul class="pl-pts"><li>To be finalized and agreed by the Committee by 2025</li><li>Technical element - a goal-based marine fuel standard on GHG intensity</li><li>Economic element - a maritime GHG emissions pricing mechanism</li><li>Other candidate measures; synergies with the CII</li><li>At this sitting: neither approved nor adopted, and nothing in force</li></ul></li>
+      <li value="8"><span class="pl-t">Long-term measures, the timetable and the review</span><ul class="pl-pts"><li>Long-term measures are those agreed beyond 2030, via the 2028 review</li><li>The follow-up timetable through MEPC 83, an extraordinary session, and entry into force sixteen months after adoption</li><li>Impact assessment against eight criteria before adoption</li><li>Five-yearly review, first due 2028</li></ul></li>
+      <li value="9"><span class="pl-t">The potential impact on the maritime industry</span><ul class="pl-pts"><li>Fuels judged well-to-wake; newbuilding and retrofit decisions</li><li>EEXI and CII already biting on existing tonnage</li><li>A second cost line, and the contractual allocation of it</li><li>Safety and training for low-flashpoint and toxic fuels</li><li>Developing States, and the EU regional measure already running</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> WHAT (1), HOW MUCH (3 and 4), BY WHEN (6, 7 and 8), SO WHAT (9). Objectives and principles fill 2 and 5.</p>
     <div class="plan-cov">
@@ -1646,17 +1623,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>36</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>9 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 36 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Which instrument is 'the revised strategy', and what it replaced</b><ul><li>MEPC.377(80), adopted 7 July 2023 at MEPC 80</li><li>Revokes the 2018 Initial Strategy MEPC.304(72) as from that date</li><li>A policy instrument, not a regulation - obligation comes through MARPOL Annex VI</li><li>The Strategy's own emission-share figures</li></ul></div>
-      <div class="pp-step"><b>2. The vision and the objectives</b><ul><li>Phase out GHG emissions as soon as possible, with a just and equitable transition</li><li>Enhance IMO's contribution, linked to the Paris Agreement and SDG 13</li><li>Identify actions for the sector while addressing impacts on States</li><li>Identify measures, including R&amp;D incentives and monitoring</li></ul></div>
-      <div class="pp-step"><b>3. The levels of ambition</b><ul><li>New-ship energy efficiency requirements to be strengthened</li><li>Carbon intensity down at least 40% by 2030 against 2008</li><li>Zero or near-zero energy at least 5%, striving for 10%, by 2030</li><li>Net-zero GHG by or around 2050, well-to-wake</li></ul></div>
-      <div class="pp-step"><b>4. The indicative checkpoints</b><ul><li>Total annual GHG down at least 20%, striving for 30%, by 2030</li><li>Total annual GHG down at least 70%, striving for 80%, by 2040</li><li>Absolute, not intensity - the distinction that makes the 2023 Strategy a step change</li></ul></div>
-      <div class="pp-step"><b>5. The guiding principles</b><ul><li>Non-discrimination and no more favourable treatment</li><li>Common but differentiated responsibilities and respective capabilities</li><li>All ships to give full effect regardless of flag</li><li>Impacts on States; evidence-based decision-making with the precautionary approach</li></ul></div>
-      <div class="pp-step"><b>6. Short-term measures - and where they stand at this sitting</b><ul><li>Measures finalized and agreed between 2018 and 2023, already in MARPOL Annex VI</li><li>EEDI and SEEMP; the IMO DCS; EEXI, CII and the enhanced SEEMP under MEPC.328(76)</li><li>Their review must be completed by 1 January 2026 and is running</li></ul></div>
-      <div class="pp-step"><b>7. The basket of candidate mid-term measures</b><ul><li>To be finalized and agreed by the Committee by 2025</li><li>Technical element - a goal-based marine fuel standard on GHG intensity</li><li>Economic element - a maritime GHG emissions pricing mechanism</li><li>Other candidate measures; synergies with the CII</li><li>At this sitting: neither approved nor adopted, and nothing in force</li></ul></div>
-      <div class="pp-step"><b>8. Long-term measures, the timetable and the review</b><ul><li>Long-term measures are those agreed beyond 2030, via the 2028 review</li><li>The follow-up timetable through MEPC 83, an extraordinary session, and entry into force sixteen months after adoption</li><li>Impact assessment against eight criteria before adoption</li><li>Five-yearly review, first due 2028</li></ul></div>
-      <div class="pp-step"><b>9. The potential impact on the maritime industry</b><ul><li>Fuels judged well-to-wake; newbuilding and retrofit decisions</li><li>EEXI and CII already biting on existing tonnage</li><li>A second cost line, and the contractual allocation of it</li><li>Safety and training for low-flashpoint and toxic fuels</li><li>Developing States, and the EU regional measure already running</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1979,19 +1945,20 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">Where these requirements sit, and what they were written to solve</li>
-      <li value="2">The ship identification number - regulation XI-1/3</li>
-      <li value="3">The Continuous Synopsis Record - regulation XI-1/5</li>
-      <li value="4">Keeping the CSR - the rules that give it its value</li>
-      <li value="5">Why the two together enhance maritime safety</li>
+      <li value="1"><span class="pl-t">Where these requirements sit, and what they were written to solve</span><ul class="pl-pts"><li>SOLAS chapter XI-1, special measures to enhance maritime safety</li><li>The problem is a ship that can change its identity</li><li>Operative text at this sitting is the Consolidated Edition 2024</li></ul></li>
+      <li value="2"><span class="pl-t">The ship identification number - regulation XI-1/3</span><ul class="pl-pts"><li>Passenger ships 100 GT and up, cargo ships 300 GT and up</li><li>Two permanent markings - externally visible at 200 mm, internally accessible at 100 mm</li><li>Contrasting colour, not easily expunged</li><li>Regulation 3-1 adds the Company and registered owner numbers</li></ul></li>
+      <li value="3"><span class="pl-t">The Continuous Synopsis Record - regulation XI-1/5</span><ul class="pl-pts"><li>Issued by the Administration to every ship to which chapter I applies</li><li>An on-board record of the history of the ship</li><li>Fifteen minimum content items from flag and registry through owner, Company, class, DOC, SMC and ISSC</li></ul></li>
+      <li value="4"><span class="pl-t">Keeping the CSR - the rules that give it its value</span><ul class="pl-pts"><li>Changes recorded with their history; revised CSR within three months</li><li>English, French or Spanish; previous entries never erased</li><li>Left on board on sale or transfer; previous records appended by the new flag</li><li>Kept on board and available for inspection at all times</li></ul></li>
+      <li value="5"><span class="pl-t">Why the two together enhance maritime safety</span><ul class="pl-pts"><li>They defeat identity laundering</li><li>They give the PSCO a targeting picture before he inspects</li><li>They make flag- and class-hopping visible</li><li>They tie the ship to a traceable Company and owner</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="6">What the ESP is, and which ships are subject to it</li>
-      <li value="7">The key components of an enhanced survey</li>
-      <li value="8">The objectives of the ESP</li>
+      <li value="6"><span class="pl-t">What the ESP is, and which ships are subject to it</span><ul class="pl-pts"><li>A prescribed depth of hull inspection, not an extra survey</li><li>SOLAS XI-1/2 catches bulk carriers (IX/1.6) and oil tankers (II-1/2.22)</li><li>Mandatory through the 2011 ESP Code, A.1049(27)</li><li>Annex A bulk carriers single- and double-side skin; Annex B oil tankers</li></ul></li>
+      <li value="7"><span class="pl-t">The key components of an enhanced survey</span><ul class="pl-pts"><li>Survey programme, planning meeting, survey report file and supporting documents</li><li>Conditions for survey and safe access</li><li>Overall survey, then close-up survey within reach of hand</li><li>Thickness measurement by a certified company, tank testing, Condition Evaluation Report</li><li>Substantial corrosion at 75% of allowable margins; coating GOOD / FAIR / POOR</li></ul></li>
+      <li value="8"><span class="pl-t">The objectives of the ESP</span><ul class="pl-pts"><li>Find wastage and cracking before it becomes a casualty</li><li>Make surveys uniform and condition measurable</li><li>Escalate automatically where defects are found</li><li>Build a structural history that survives the change of owner</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) is NUMBER (2), RECORD (3), KEEPING (4), WHY (5). Limb (b) is WHO (6), COMPONENTS (7), OBJECTIVES (8).</p>
     <div class="plan-cov">
@@ -1999,16 +1966,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>31</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 31 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Where these requirements sit, and what they were written to solve</b><ul><li>SOLAS chapter XI-1, special measures to enhance maritime safety</li><li>The problem is a ship that can change its identity</li><li>Operative text at this sitting is the Consolidated Edition 2024</li></ul></div>
-      <div class="pp-step"><b>2. The ship identification number - regulation XI-1/3</b><ul><li>Passenger ships 100 GT and up, cargo ships 300 GT and up</li><li>Two permanent markings - externally visible at 200 mm, internally accessible at 100 mm</li><li>Contrasting colour, not easily expunged</li><li>Regulation 3-1 adds the Company and registered owner numbers</li></ul></div>
-      <div class="pp-step"><b>3. The Continuous Synopsis Record - regulation XI-1/5</b><ul><li>Issued by the Administration to every ship to which chapter I applies</li><li>An on-board record of the history of the ship</li><li>Fifteen minimum content items from flag and registry through owner, Company, class, DOC, SMC and ISSC</li></ul></div>
-      <div class="pp-step"><b>4. Keeping the CSR - the rules that give it its value</b><ul><li>Changes recorded with their history; revised CSR within three months</li><li>English, French or Spanish; previous entries never erased</li><li>Left on board on sale or transfer; previous records appended by the new flag</li><li>Kept on board and available for inspection at all times</li></ul></div>
-      <div class="pp-step"><b>5. Why the two together enhance maritime safety</b><ul><li>They defeat identity laundering</li><li>They give the PSCO a targeting picture before he inspects</li><li>They make flag- and class-hopping visible</li><li>They tie the ship to a traceable Company and owner</li></ul></div>
-      <div class="pp-step"><b>6. What the ESP is, and which ships are subject to it</b><ul><li>A prescribed depth of hull inspection, not an extra survey</li><li>SOLAS XI-1/2 catches bulk carriers (IX/1.6) and oil tankers (II-1/2.22)</li><li>Mandatory through the 2011 ESP Code, A.1049(27)</li><li>Annex A bulk carriers single- and double-side skin; Annex B oil tankers</li></ul></div>
-      <div class="pp-step"><b>7. The key components of an enhanced survey</b><ul><li>Survey programme, planning meeting, survey report file and supporting documents</li><li>Conditions for survey and safe access</li><li>Overall survey, then close-up survey within reach of hand</li><li>Thickness measurement by a certified company, tank testing, Condition Evaluation Report</li><li>Substantial corrosion at 75% of allowable margins; coating GOOD / FAIR / POOR</li></ul></div>
-      <div class="pp-step"><b>8. The objectives of the ESP</b><ul><li>Find wastage and cracking before it becomes a casualty</li><li>Make surveys uniform and condition measurable</li><li>Escalate automatically where defects are found</li><li>Build a structural history that survives the change of owner</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2346,22 +2303,23 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Where these obligations live, and the one rule that makes Title 5 different</li>
+      <li value="1"><span class="pl-t">Where these obligations live, and the one rule that makes Title 5 different</span><ul class="pl-pts"><li>Articles, Regulations, Code Part A mandatory and Part B guidance</li><li>Title 5 divides into flag State, port State and labour-supplying responsibilities</li><li>Substantial equivalence under Article VI(3) and (4) does NOT apply to Part A of the Code in Title 5</li></ul></li>
     </ol>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="2">Flag State - the general responsibility and the system it must build</li>
-      <li value="3">Recognized organizations - what may be delegated, and what may not</li>
-      <li value="4">The Maritime Labour Certificate and the DMLC</li>
-      <li value="5">Inspection and enforcement</li>
-      <li value="6">On-board complaint procedures and marine casualties</li>
+      <li value="2"><span class="pl-t">Flag State - the general responsibility and the system it must build</span><ul class="pl-pts"><li>Responsible for implementation on ships that fly its flag</li><li>An effective system of inspection and certification so conditions meet and continue to meet the standards</li><li>Clear objectives and standards; a copy of the Convention on board; report to the ILO under article 22</li></ul></li>
+      <li value="3"><span class="pl-t">Recognized organizations - what may be delegated, and what may not</span><ul class="pl-pts"><li>May authorize; remains FULLY responsible</li><li>Competency and independence reviewed against four capability tests</li><li>Authorization must at minimum empower rectification and inspection at a port State's request</li><li>Current list provided to the ILO and made public</li></ul></li>
+      <li value="4"><span class="pl-t">The Maritime Labour Certificate and the DMLC</span><ul class="pl-pts"><li>500 GT and over on international voyages, or operating from or between foreign ports; others on request</li><li>Five years, intermediate inspection between the second and third anniversary dates, interim six months</li><li>DMLC Part I by the competent authority, Part II by the shipowner</li><li>Cessation and withdrawal grounds; Appendix A5-I lists what is inspected</li></ul></li>
+      <li value="5"><span class="pl-t">Inspection and enforcement</span><ul class="pl-pts"><li>Regular inspections; interval shall in no case exceed three years</li><li>Qualified, independent inspectors with powers to board, examine and prohibit sailing</li><li>Right of appeal, confidentiality of complaint source, no conflict of interest</li><li>Reports to the authority, master and notice board; annual report within six months; penalties</li></ul></li>
+      <li value="6"><span class="pl-t">On-board complaint procedures and marine casualties</span><ul class="pl-pts"><li>Fair, effective and expeditious handling; victimization prohibited and penalized</li><li>Resolution at the lowest level, but direct access to the master and to external authorities</li><li>Copy of procedures to every seafarer with contacts and an impartial adviser on board</li><li>Official inquiry into any serious casualty causing injury or loss of life</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="7">Port State - the starting position</li>
-      <li value="8">The more detailed inspection, and detention</li>
-      <li value="9">Onshore complaint handling, and the third leg of Title 5</li>
+      <li value="7"><span class="pl-t">Port State - the starting position</span><ul class="pl-pts"><li>Any foreign ship calling may be inspected under Article V(4)</li><li>The certificate and DMLC must be ACCEPTED as prima facie evidence, so inspection is limited to reviewing them</li><li>Any inspection is limited to the Articles, the Regulations and Part A only of the Code</li></ul></li>
+      <li value="8"><span class="pl-t">The more detailed inspection, and detention</span><ul class="pl-pts"><li>Four triggers: documents defective, clear grounds, flag changed to avoid compliance, or a complaint</li><li>Mandatory where conditions could be a clear hazard or a serious breach; scope from Appendix A5-III</li><li>Two detention grounds: clearly hazardous conditions, or a serious or repeated breach</li><li>Rectification or an accepted plan of action; flag State notified forthwith; compensation for undue detention</li></ul></li>
+      <li value="9"><span class="pl-t">Onshore complaint handling, and the third leg of Title 5</span><ul class="pl-pts"><li>Complaint to an authorized officer in port; initial investigation; resolution sought on board</li><li>Unresolved - notify the flag State for advice and a corrective plan of action</li><li>Still unresolved - report to the Director-General of the ILO; confidentiality safeguarded</li><li>Regulation 5.3 labour-supplying responsibilities complete the scheme</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) is SYSTEM (2), DELEGATE (3), CERTIFY (4), INSPECT (5), COMPLAIN (6). Limb (b) is ACCEPT (7), DIG and DETAIN (8), ESCALATE (9).</p>
     <div class="plan-cov">
@@ -2369,17 +2327,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>33</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>9 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 33 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Where these obligations live, and the one rule that makes Title 5 different</b><ul><li>Articles, Regulations, Code Part A mandatory and Part B guidance</li><li>Title 5 divides into flag State, port State and labour-supplying responsibilities</li><li>Substantial equivalence under Article VI(3) and (4) does NOT apply to Part A of the Code in Title 5</li></ul></div>
-      <div class="pp-step"><b>2. Flag State - the general responsibility and the system it must build</b><ul><li>Responsible for implementation on ships that fly its flag</li><li>An effective system of inspection and certification so conditions meet and continue to meet the standards</li><li>Clear objectives and standards; a copy of the Convention on board; report to the ILO under article 22</li></ul></div>
-      <div class="pp-step"><b>3. Recognized organizations - what may be delegated, and what may not</b><ul><li>May authorize; remains FULLY responsible</li><li>Competency and independence reviewed against four capability tests</li><li>Authorization must at minimum empower rectification and inspection at a port State's request</li><li>Current list provided to the ILO and made public</li></ul></div>
-      <div class="pp-step"><b>4. The Maritime Labour Certificate and the DMLC</b><ul><li>500 GT and over on international voyages, or operating from or between foreign ports; others on request</li><li>Five years, intermediate inspection between the second and third anniversary dates, interim six months</li><li>DMLC Part I by the competent authority, Part II by the shipowner</li><li>Cessation and withdrawal grounds; Appendix A5-I lists what is inspected</li></ul></div>
-      <div class="pp-step"><b>5. Inspection and enforcement</b><ul><li>Regular inspections; interval shall in no case exceed three years</li><li>Qualified, independent inspectors with powers to board, examine and prohibit sailing</li><li>Right of appeal, confidentiality of complaint source, no conflict of interest</li><li>Reports to the authority, master and notice board; annual report within six months; penalties</li></ul></div>
-      <div class="pp-step"><b>6. On-board complaint procedures and marine casualties</b><ul><li>Fair, effective and expeditious handling; victimization prohibited and penalized</li><li>Resolution at the lowest level, but direct access to the master and to external authorities</li><li>Copy of procedures to every seafarer with contacts and an impartial adviser on board</li><li>Official inquiry into any serious casualty causing injury or loss of life</li></ul></div>
-      <div class="pp-step"><b>7. Port State - the starting position</b><ul><li>Any foreign ship calling may be inspected under Article V(4)</li><li>The certificate and DMLC must be ACCEPTED as prima facie evidence, so inspection is limited to reviewing them</li><li>Any inspection is limited to the Articles, the Regulations and Part A only of the Code</li></ul></div>
-      <div class="pp-step"><b>8. The more detailed inspection, and detention</b><ul><li>Four triggers: documents defective, clear grounds, flag changed to avoid compliance, or a complaint</li><li>Mandatory where conditions could be a clear hazard or a serious breach; scope from Appendix A5-III</li><li>Two detention grounds: clearly hazardous conditions, or a serious or repeated breach</li><li>Rectification or an accepted plan of action; flag State notified forthwith; compensation for undue detention</li></ul></div>
-      <div class="pp-step"><b>9. Onshore complaint handling, and the third leg of Title 5</b><ul><li>Complaint to an authorized officer in port; initial investigation; resolution sought on board</li><li>Unresolved - notify the flag State for advice and a corrective plan of action</li><li>Still unresolved - report to the Director-General of the ILO; confidentiality safeguarded</li><li>Regulation 5.3 labour-supplying responsibilities complete the scheme</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2697,18 +2644,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">The propeller law, and what a propeller demand curve is</li>
-      <li value="2">The significance of the propeller curve</li>
-      <li value="3">The engine layout and load diagram - the limits the curve must live inside</li>
-      <li value="4">The safety margins, enumerated</li>
+      <li value="1"><span class="pl-t">The propeller law, and what a propeller demand curve is</span><ul class="pl-pts"><li>Power as the cube and torque as the square of revolutions, for a given hull condition</li><li>Not one curve but a family, one per hull and weather condition</li><li>The light propeller curve is the reference - clean hull, calm water, trial condition</li><li>Every deterioration moves the curve to the left</li></ul></li>
+      <li value="2"><span class="pl-t">The significance of the propeller curve</span><ul class="pl-pts"><li>The matching tool between two dissimilar machines</li><li>It defines the engine's actual working line - power and revolutions are not independent</li><li>It shows whether the operating point is safe against the engine's limits</li><li>It is the diagnostic instrument for hull and propeller condition</li><li>It is the basis of the margins, and of performance monitoring</li></ul></li>
+      <li value="3"><span class="pl-t">The engine layout and load diagram - the limits the curve must live inside</span><ul class="pl-pts"><li>Layout diagram bounds the choice of rating; load diagram bounds operation</li><li>Speed limit, torque/speed limit, mep limit, overload limit, minimum speed</li><li>The torque/speed limit binds at reduced speed and protects against thermal overload</li><li>A heavy-running ship moves up and to the left, towards that limit</li></ul></li>
+      <li value="4"><span class="pl-t">The safety margins, enumerated</span><ul class="pl-pts"><li>Light running margin - revolutions - 4 to 7 per cent, up to about 10 in special cases</li><li>Sea margin - power - typically 10 to 30 per cent, historically about 15</li><li>Engine margin - headroom below the rating - historically about 10 per cent</li><li>Torque limit and overload limit as boundaries rather than margins</li><li>Typical ranges from builder guidance, not requirements; 20 per cent power to 1 per cent heavy running</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">The four points on the diagram</li>
-      <li value="6">The relation itself</li>
-      <li value="7">When the relation breaks down - and what the Chief Engineer does</li>
+      <li value="5"><span class="pl-t">The four points on the diagram</span><ul class="pl-pts"><li>Propeller design point on the light curve - design speed, trial condition</li><li>Service propulsion point - PD plus the sea margin</li><li>Specified MCR - SP plus the engine margin</li><li>The layout curve displaced right of the light curve by the light running margin</li></ul></li>
+      <li value="6"><span class="pl-t">The relation itself</span><ul class="pl-pts"><li>Rated output exceeds propeller design power, and sits at higher revolutions too</li><li>Vertically by sea margin then engine margin; horizontally by the light running margin</li><li>The propeller is matched to a condition the ship rarely occupies - deliberate, not a defect</li><li>New ship light running; fouling consumes the margin; then heavy running and thermal limit</li><li>The over-generous case; the CPP case; the overload and power-limitation ceilings</li></ul></li>
+      <li value="7"><span class="pl-t">When the relation breaks down - and what the Chief Engineer does</span><ul class="pl-pts"><li>Recognise from the diagram and the performance data, not the fuel bill</li><li>Confirm instrumentation, then exclude draught, trim, shallow water, current and weather</li><li>Separate hull from propeller - gradual against step change; underwater inspection</li><li>Protect the engine: reduce power, stay inside the load diagram, do not use overload for schedule</li><li>Remedy, report through the SMS, and know where the Chief Engineer's authority stops</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb A is LAW (1), WHY IT MATTERS (2), THE BOX (3), THE MARGINS (4). Limb B is FOUR POINTS (5), THE RELATION (6), WHAT YOU DO (7).</p>
     <div class="plan-cov">
@@ -2716,15 +2664,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>32</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 32 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The propeller law, and what a propeller demand curve is</b><ul><li>Power as the cube and torque as the square of revolutions, for a given hull condition</li><li>Not one curve but a family, one per hull and weather condition</li><li>The light propeller curve is the reference - clean hull, calm water, trial condition</li><li>Every deterioration moves the curve to the left</li></ul></div>
-      <div class="pp-step"><b>2. The significance of the propeller curve</b><ul><li>The matching tool between two dissimilar machines</li><li>It defines the engine's actual working line - power and revolutions are not independent</li><li>It shows whether the operating point is safe against the engine's limits</li><li>It is the diagnostic instrument for hull and propeller condition</li><li>It is the basis of the margins, and of performance monitoring</li></ul></div>
-      <div class="pp-step"><b>3. The engine layout and load diagram - the limits the curve must live inside</b><ul><li>Layout diagram bounds the choice of rating; load diagram bounds operation</li><li>Speed limit, torque/speed limit, mep limit, overload limit, minimum speed</li><li>The torque/speed limit binds at reduced speed and protects against thermal overload</li><li>A heavy-running ship moves up and to the left, towards that limit</li></ul></div>
-      <div class="pp-step"><b>4. The safety margins, enumerated</b><ul><li>Light running margin - revolutions - 4 to 7 per cent, up to about 10 in special cases</li><li>Sea margin - power - typically 10 to 30 per cent, historically about 15</li><li>Engine margin - headroom below the rating - historically about 10 per cent</li><li>Torque limit and overload limit as boundaries rather than margins</li><li>Typical ranges from builder guidance, not requirements; 20 per cent power to 1 per cent heavy running</li></ul></div>
-      <div class="pp-step"><b>5. The four points on the diagram</b><ul><li>Propeller design point on the light curve - design speed, trial condition</li><li>Service propulsion point - PD plus the sea margin</li><li>Specified MCR - SP plus the engine margin</li><li>The layout curve displaced right of the light curve by the light running margin</li></ul></div>
-      <div class="pp-step"><b>6. The relation itself</b><ul><li>Rated output exceeds propeller design power, and sits at higher revolutions too</li><li>Vertically by sea margin then engine margin; horizontally by the light running margin</li><li>The propeller is matched to a condition the ship rarely occupies - deliberate, not a defect</li><li>New ship light running; fouling consumes the margin; then heavy running and thermal limit</li><li>The over-generous case; the CPP case; the overload and power-limitation ceilings</li></ul></div>
-      <div class="pp-step"><b>7. When the relation breaks down - and what the Chief Engineer does</b><ul><li>Recognise from the diagram and the performance data, not the fuel bill</li><li>Confirm instrumentation, then exclude draught, trim, shallow water, current and weather</li><li>Separate hull from propeller - gradual against step change; underwater inspection</li><li>Protect the engine: reduce power, stay inside the load diagram, do not use overload for schedule</li><li>Remedy, report through the SMS, and know where the Chief Engineer's authority stops</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -3027,21 +2966,22 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Where these two clauses live, and why that matters</li>
-      <li value="2">General average, in outline</li>
+      <li value="1"><span class="pl-t">Where these two clauses live, and why that matters</span><ul class="pl-pts"><li>New Jason Clause - a clause of the contract of carriage</li><li>3/4ths Collision Clause - a clause of the hull and machinery policy</li><li>Marine Insurance Act, 1963 in this jurisdiction; York-Antwerp Rules as a contractual code</li></ul></li>
+      <li value="2"><span class="pl-t">General average, in outline</span><ul class="pl-pts"><li>Rule A - extraordinary sacrifice or expenditure, intentionally and reasonably made, for the common safety</li><li>Shared rateably between the interests saved</li><li>The elements: peril, extraordinary, intentional, reasonable, common safety, saving of property</li><li>Distinguish general average (shared) from particular average (borne by the owner alone)</li><li>Rule C - only direct consequences; delay and market loss are not allowed</li><li>Rule VI(a) - salvage expenditure IS allowed in general average under the 2016 edition, where carried out to preserve the property from peril, subject to VI(b), (c) and (d)</li><li>Rule VI(b) gateways where the parties are separately liable to salvors; VI(d) excludes Article 14/SCOPIC special compensation</li><li>Edition control: the blanket 'salvage is not allowed' is the 2004 rule, not the 2016 one - the contract's edition decides</li><li>Rule D - fault does not affect the right to contribution, but does not prejudice remedies or defences: the hinge for limb (a)</li></ul></li>
     </ol>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="3">The problem the New Jason Clause was written to solve</li>
-      <li value="4">What the clause does - and what it demands in return</li>
-      <li value="5">Implications in a maritime emergency</li>
+      <li value="3"><span class="pl-t">The problem the New Jason Clause was written to solve</span><ul class="pl-pts"><li>The carriage regime exempts the carrier from liability for negligent navigation, given due diligence to make the vessel seaworthy</li><li>But a party cannot claim contribution for a peril its own side caused</li><li>The absurd result: not liable, yet unable to recover</li><li>The clause takes its name from the litigation that upheld its first form</li></ul></li>
+      <li value="4"><span class="pl-t">What the clause does - and what it demands in return</span><ul class="pl-pts"><li>Cargo contributes where the carrier is NOT responsible for the cause, negligent or not</li><li>The condition is not the absence of negligence but the absence of responsibility for it</li><li>It rides on the exemption, so it fails if due diligence to make the vessel seaworthy fails</li><li>It also secures salvage and special charges; it is contractual and must be in the contract</li></ul></li>
+      <li value="5"><span class="pl-t">Implications in a maritime emergency</span><ul class="pl-pts"><li>Shipowner: contribution preserved; salvage economics workable; provable due diligence becomes essential</li><li>Cargo owner: may contribute despite the crew's fault; assessed on saved value; security before release; delay</li><li>The system allocates risk to insurance markets and only works if everyone is insured</li><li>Rule XVII - contributory values: cargo at invoice value on discharge, ship at market or insured value, freight at risk</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="6">The 3/4ths Collision Clause - what the hull policy covers</li>
-      <li value="7">What it excludes, and where the rest goes</li>
-      <li value="8">Implications, and the influence on behaviour</li>
+      <li value="6"><span class="pl-t">The 3/4ths Collision Clause - what the hull policy covers</span><ul class="pl-pts"><li>Three-fourths of collision liability to another vessel, limited to three-fourths of the sum insured per collision</li><li>Damage to the other vessel and property on her; delay and loss of use; her general average and salvage</li><li>Legal costs on the same basis, normally with prior consent</li><li>Collision with a vessel only - not fixed and floating objects</li><li>Cross-liabilities where both are to blame</li></ul></li>
+      <li value="7"><span class="pl-t">What it excludes, and where the rest goes</span><ul class="pl-pts"><li>Wreck and obstruction removal; property other than the other vessel; own cargo and engagements; personal injury; pollution</li><li>The excluded heads and the remaining quarter go to P&amp;I</li><li>One collision, two claims, two notifications</li><li>Why three-fourths: moral hazard - and some modern forms give four-fourths</li></ul></li>
+      <li value="8"><span class="pl-t">Implications, and the influence on behaviour</span><ul class="pl-pts"><li>Insurer: defined exposure, shared moral hazard, control of the defence, rating on the record</li><li>Shipowner: the gap, two insurers, evidence as an asset, premium and renewal terms</li><li>Behaviour: navigation, manning, passage planning, evidence preservation</li><li>And the engineering share - critical equipment, emergency power, steering gear tests, blackout and astern drills</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) is GAP (3), CLAUSE AND CONDITION (4), CONSEQUENCES (5). Limb (b) is COVERED (6), EXCLUDED (7), SO WHAT (8). Sections 1 and 2 set the frame.</p>
     <div class="plan-cov">
@@ -3049,16 +2989,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>37</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 37 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Where these two clauses live, and why that matters</b><ul><li>New Jason Clause - a clause of the contract of carriage</li><li>3/4ths Collision Clause - a clause of the hull and machinery policy</li><li>Marine Insurance Act, 1963 in this jurisdiction; York-Antwerp Rules as a contractual code</li></ul></div>
-      <div class="pp-step"><b>2. General average, in outline</b><ul><li>Rule A - extraordinary sacrifice or expenditure, intentionally and reasonably made, for the common safety</li><li>Shared rateably between the interests saved</li><li>The elements: peril, extraordinary, intentional, reasonable, common safety, saving of property</li><li>Distinguish general average (shared) from particular average (borne by the owner alone)</li><li>Rule C - only direct consequences; delay and market loss are not allowed</li><li>Rule VI(a) - salvage expenditure IS allowed in general average under the 2016 edition, where carried out to preserve the property from peril, subject to VI(b), (c) and (d)</li><li>Rule VI(b) gateways where the parties are separately liable to salvors; VI(d) excludes Article 14/SCOPIC special compensation</li><li>Edition control: the blanket 'salvage is not allowed' is the 2004 rule, not the 2016 one - the contract's edition decides</li><li>Rule D - fault does not affect the right to contribution, but does not prejudice remedies or defences: the hinge for limb (a)</li></ul></div>
-      <div class="pp-step"><b>3. The problem the New Jason Clause was written to solve</b><ul><li>The carriage regime exempts the carrier from liability for negligent navigation, given due diligence to make the vessel seaworthy</li><li>But a party cannot claim contribution for a peril its own side caused</li><li>The absurd result: not liable, yet unable to recover</li><li>The clause takes its name from the litigation that upheld its first form</li></ul></div>
-      <div class="pp-step"><b>4. What the clause does - and what it demands in return</b><ul><li>Cargo contributes where the carrier is NOT responsible for the cause, negligent or not</li><li>The condition is not the absence of negligence but the absence of responsibility for it</li><li>It rides on the exemption, so it fails if due diligence to make the vessel seaworthy fails</li><li>It also secures salvage and special charges; it is contractual and must be in the contract</li></ul></div>
-      <div class="pp-step"><b>5. Implications in a maritime emergency</b><ul><li>Shipowner: contribution preserved; salvage economics workable; provable due diligence becomes essential</li><li>Cargo owner: may contribute despite the crew's fault; assessed on saved value; security before release; delay</li><li>The system allocates risk to insurance markets and only works if everyone is insured</li><li>Rule XVII - contributory values: cargo at invoice value on discharge, ship at market or insured value, freight at risk</li></ul></div>
-      <div class="pp-step"><b>6. The 3/4ths Collision Clause - what the hull policy covers</b><ul><li>Three-fourths of collision liability to another vessel, limited to three-fourths of the sum insured per collision</li><li>Damage to the other vessel and property on her; delay and loss of use; her general average and salvage</li><li>Legal costs on the same basis, normally with prior consent</li><li>Collision with a vessel only - not fixed and floating objects</li><li>Cross-liabilities where both are to blame</li></ul></div>
-      <div class="pp-step"><b>7. What it excludes, and where the rest goes</b><ul><li>Wreck and obstruction removal; property other than the other vessel; own cargo and engagements; personal injury; pollution</li><li>The excluded heads and the remaining quarter go to P&amp;I</li><li>One collision, two claims, two notifications</li><li>Why three-fourths: moral hazard - and some modern forms give four-fourths</li></ul></div>
-      <div class="pp-step"><b>8. Implications, and the influence on behaviour</b><ul><li>Insurer: defined exposure, shared moral hazard, control of the defence, rating on the record</li><li>Shipowner: the gap, two insurers, evidence as an asset, premium and renewal terms</li><li>Behaviour: navigation, manning, passage planning, evidence preservation</li><li>And the engineering share - critical equipment, emergency power, steering gear tests, blackout and astern drills</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -3388,23 +3318,24 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">A</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">A <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="1">Regulation 13 - which engines are caught, and which are not</li>
-      <li value="2">Tier I, Tier II and Tier III - the limits, and what fixes which one applies</li>
-      <li value="3">Where Tier III applies - the areas, and the logbook</li>
+      <li value="1"><span class="pl-t">Regulation 13 - which engines are caught, and which are not</span><ul class="pl-pts"><li>Marine diesel engines of more than 130 kW installed on a ship</li><li>Major conversion on or after 1 January 2000, including an MCR increase of more than 10%</li><li>Emergency and lifeboat engines excluded; domestic-trading ships under an alternative measure excluded</li></ul></li>
+      <li value="2"><span class="pl-t">Tier I, Tier II and Tier III - the limits, and what fixes which one applies</span><ul class="pl-pts"><li>Limits are total weighted NO2 in g/kWh as a function of rated speed n</li><li>The SHIP's construction date fixes the tier</li><li>Tier II is the global standard and is met by engine design</li><li>Tier III needs SCR, EGR or a low-NOx gas process</li></ul></li>
+      <li value="3"><span class="pl-t">Where Tier III applies - the areas, and the logbook</span><ul class="pl-pts"><li>Four NOx Tier III emission control areas; 2016 for the American areas, 2021 for the European ones</li><li>Outside them the ship reverts to Tier II, which is why the engine is certified to both</li><li>Tier and on/off status recorded on entry, exit and change, with date, time and position</li><li>Narrow exceptions and the temporary shipyard exemption</li></ul></li>
     </ol>
-    <div class="plan-limb">B</div>
+    <div class="plan-limb">B <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="4">Homogenizers for water emulsion</li>
+      <li value="4"><span class="pl-t">Homogenizers for water emulsion</span><ul class="pl-pts"><li>High-shear device producing a stable water-in-oil emulsion</li><li>Water absorbs latent and sensible heat, lowering peak flame temperature and thermal NO</li><li>Micro-explosion improves atomisation</li><li>Costs: calorific value, corrosion, ignition delay, cannot be stored, must be bypassable</li></ul></li>
     </ol>
-    <div class="plan-limb">C</div>
+    <div class="plan-limb">C <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="5">Selective Catalytic Reduction</li>
+      <li value="5"><span class="pl-t">Selective Catalytic Reduction</span><ul class="pl-pts"><li>Urea or ammonia over a catalyst reduces NOx to nitrogen and water vapour</li><li>Before the turbine on a two-stroke, after it on a four-stroke</li><li>Temperature window, ammonium bisulphate and sulphur</li><li>Ammonia slip, urea storage, catalyst fouling and replacement</li><li>Compared with EGR</li></ul></li>
     </ol>
-    <div class="plan-limb">D</div>
+    <div class="plan-limb">D <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="6">The NOx Technical File</li>
+      <li value="6"><span class="pl-t">The NOx Technical File</span><ul class="pl-pts"><li>Required by the NOx Technical Code, which regulation 13.8 applies to certification and testing</li><li>Approved at engine certification and accompanies the engine for its life</li><li>Defines the certified condition: NOx-critical components and their permitted adjustment ranges</li><li>Parameter check at survey; defeat devices prohibited; the evidence limit declared</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> LIMIT (1, 2, 3), LOWER IT (4), CLEAN IT (5), PROVE IT (6).</p>
     <div class="plan-cov">
@@ -3412,14 +3343,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>24</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 24 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Regulation 13 - which engines are caught, and which are not</b><ul><li>Marine diesel engines of more than 130 kW installed on a ship</li><li>Major conversion on or after 1 January 2000, including an MCR increase of more than 10%</li><li>Emergency and lifeboat engines excluded; domestic-trading ships under an alternative measure excluded</li></ul></div>
-      <div class="pp-step"><b>2. Tier I, Tier II and Tier III - the limits, and what fixes which one applies</b><ul><li>Limits are total weighted NO2 in g/kWh as a function of rated speed n</li><li>The SHIP's construction date fixes the tier</li><li>Tier II is the global standard and is met by engine design</li><li>Tier III needs SCR, EGR or a low-NOx gas process</li></ul></div>
-      <div class="pp-step"><b>3. Where Tier III applies - the areas, and the logbook</b><ul><li>Four NOx Tier III emission control areas; 2016 for the American areas, 2021 for the European ones</li><li>Outside them the ship reverts to Tier II, which is why the engine is certified to both</li><li>Tier and on/off status recorded on entry, exit and change, with date, time and position</li><li>Narrow exceptions and the temporary shipyard exemption</li></ul></div>
-      <div class="pp-step"><b>4. Homogenizers for water emulsion</b><ul><li>High-shear device producing a stable water-in-oil emulsion</li><li>Water absorbs latent and sensible heat, lowering peak flame temperature and thermal NO</li><li>Micro-explosion improves atomisation</li><li>Costs: calorific value, corrosion, ignition delay, cannot be stored, must be bypassable</li></ul></div>
-      <div class="pp-step"><b>5. Selective Catalytic Reduction</b><ul><li>Urea or ammonia over a catalyst reduces NOx to nitrogen and water vapour</li><li>Before the turbine on a two-stroke, after it on a four-stroke</li><li>Temperature window, ammonium bisulphate and sulphur</li><li>Ammonia slip, urea storage, catalyst fouling and replacement</li><li>Compared with EGR</li></ul></div>
-      <div class="pp-step"><b>6. The NOx Technical File</b><ul><li>Required by the NOx Technical Code, which regulation 13.8 applies to certification and testing</li><li>Approved at engine certification and accompanies the engine for its life</li><li>Defines the certified condition: NOx-critical components and their permitted adjustment ranges</li><li>Parameter check at survey; defeat devices prohibited; the evidence limit declared</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">

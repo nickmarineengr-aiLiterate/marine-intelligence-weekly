@@ -435,7 +435,7 @@
   .plan-lead{margin:0 0 8px;font-size:13.5px;}
   .plan-limb{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;margin-top:8px;}
   .plan-list{margin:4px 0 0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;}
-  .plan-list li{margin:4px 0;}
+  .plan-list li{margin:9px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
   .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
@@ -443,11 +443,11 @@
   .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
   .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
-  .plan-points{margin-top:9px;font-size:12.5px;}
-  .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
-  .plan-points:focus-within > summary{outline:2px solid var(--orange);outline-offset:2px;}
-  .pp-step{margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;}
-  .pp-step ul{margin:3px 0 0;padding-left:20px;color:var(--grey-text);}
+  .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
+  .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}
+  .pl-t{display:block;}
+  .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;color:var(--grey-text);}
+  .pl-pts li{margin:2px 0;}
 
   /* Recall: blanks first, reveal on demand. */
   .recall{background:#fff;border:1.5px solid var(--teal-dark);padding:0 16px 13px;}
@@ -784,15 +784,16 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">What bauxite is, and why it was treated as safe</li>
-      <li value="2">The casualty that forced the reassessment</li>
-      <li value="3">The mechanism - dynamic separation</li>
-      <li value="4">The regulatory response, in sequence</li>
-      <li value="5">What governs at this sitting, and which schedule applies</li>
-      <li value="6">Care and action before loading</li>
-      <li value="7">Care and action during loading</li>
-      <li value="8">Care and action on passage, and if instability develops</li>
+      <li value="1"><span class="pl-t">What bauxite is, and why it was treated as safe</span><ul class="pl-pts"><li>principal ore of aluminium, carried in very large volumes</li><li>long listed in the IMSBC Code as a Group C cargo</li><li>Group C means neither liable to liquefy nor a chemical hazard</li><li>so no TML and no moisture limit applied to it</li></ul></li>
+      <li value="2"><span class="pl-t">The casualty that forced the reassessment</span><ul class="pl-pts"><li>Bulk Jupiter, 2 January 2015, 18 of 19 crew lost</li><li>10-year-old Bahamas-flag Supramax</li><li>cargo declared Group C</li><li>loss may have been caused by liquefaction of the cargo</li><li>rapid loss with almost no warning</li></ul></li>
+      <li value="3"><span class="pl-t">The mechanism - dynamic separation</span><ul class="pl-pts"><li>moisture migrates upward as the cargo compacts under vibration and motion</li><li>a liquid slurry forms ABOVE the solid cargo</li><li>a free surface where none was expected</li><li>loss of stability and risk of capsize</li><li>distinguish classic liquefaction, where the mass itself flows</li><li>the slurry moves out of phase with the roll - the wobble</li></ul></li>
+      <li value="4"><span class="pl-t">The regulatory response, in sequence</span><ul class="pl-pts"><li>CCC.1/Circ.2, 20 October 2015 - interim awareness measure</li><li>Global Bauxite Working Group research</li><li>CCC.1/Circ.2/Rev.1, 20 September 2017 - supersedes the original</li><li>CCC 4 finalized the test procedure and both schedules</li><li>amendment 05-19, resolution MSC.462(101), mandatory 1 January 2021</li></ul></li>
+      <li value="5"><span class="pl-t">What governs at this sitting, and which schedule applies</span><ul class="pl-pts"><li>IMSBC Code amendment 07-23, mandatory since 1 January 2025</li><li>mandatory under SOLAS chapters VI and VII</li><li>two schedules - BAUXITE Group C and BAUXITE FINES Group A</li><li>separated by particle size distribution</li><li>more than 30% finer than 1 mm AND more than 40% finer than 2.5 mm</li><li>the declared BCSN and its individual schedule govern</li></ul></li>
+      <li value="6"><span class="pl-t">Care and action before loading</span><ul class="pl-pts"><li>shipper's declaration under SOLAS VI/2 and IMSBC section 4</li><li>for Group A, TML and moisture content certificates</li><li>TML test within six months of loading</li><li>moisture sampled and tested within seven days of loading</li><li>TML by the Modified Proctor/Fagerberg procedure for bauxite</li><li>holds clean, dry, bilges working and strainers covered</li><li>check the loading port's weather and stockpile exposure</li></ul></li>
+      <li value="7"><span class="pl-t">Care and action during loading</span><ul class="pl-pts"><li>moisture content must be below the TML</li><li>reject visibly wet cargo, splattering or free water</li><li>the can test is a screening indication, never a substitute for TML</li><li>check tests after significant rain or snow</li><li>stop loading and require verification where the declaration is doubted</li><li>trim level; avoid loading in rain and close hatches</li></ul></li>
+      <li value="8"><span class="pl-t">Care and action on passage, and if instability develops</span><ul class="pl-pts"><li>daily visual inspection of the cargo surface where safe</li><li>look for free water, slurry, flattening or a shifted surface</li><li>sound and pump bilges regularly and record</li><li>atypical motion or wobbling indicates cargo instability</li><li>reduce speed, alter course to ease motion, avoid heavy weather</li><li>consider a port of refuge; report to owners, charterers and flag</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Causes first, care second. Causes: <b>C-M-M</b> - <b>C</b>lassification was wrong (1-2), <b>M</b>oisture uncontrolled because Group C has no TML (1), <b>M</b>echanism is dynamic separation not liquefaction (3). Then the response in order (4) and what governs now (5). Care in voyage order: <b>D-T-R-W</b> - <b>D</b>eclaration and documents before loading (6), <b>T</b>est and refuse what is wet during loading (7), <b>R</b>ecord bilges and inspect the surface on passage (8), <b>W</b>obble means act (8).</p>
     <div class="plan-cov">
@@ -800,16 +801,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>45</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 45 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What bauxite is, and why it was treated as safe</b><ul><li>principal ore of aluminium, carried in very large volumes</li><li>long listed in the IMSBC Code as a Group C cargo</li><li>Group C means neither liable to liquefy nor a chemical hazard</li><li>so no TML and no moisture limit applied to it</li></ul></div>
-      <div class="pp-step"><b>2. The casualty that forced the reassessment</b><ul><li>Bulk Jupiter, 2 January 2015, 18 of 19 crew lost</li><li>10-year-old Bahamas-flag Supramax</li><li>cargo declared Group C</li><li>loss may have been caused by liquefaction of the cargo</li><li>rapid loss with almost no warning</li></ul></div>
-      <div class="pp-step"><b>3. The mechanism - dynamic separation</b><ul><li>moisture migrates upward as the cargo compacts under vibration and motion</li><li>a liquid slurry forms ABOVE the solid cargo</li><li>a free surface where none was expected</li><li>loss of stability and risk of capsize</li><li>distinguish classic liquefaction, where the mass itself flows</li><li>the slurry moves out of phase with the roll - the wobble</li></ul></div>
-      <div class="pp-step"><b>4. The regulatory response, in sequence</b><ul><li>CCC.1/Circ.2, 20 October 2015 - interim awareness measure</li><li>Global Bauxite Working Group research</li><li>CCC.1/Circ.2/Rev.1, 20 September 2017 - supersedes the original</li><li>CCC 4 finalized the test procedure and both schedules</li><li>amendment 05-19, resolution MSC.462(101), mandatory 1 January 2021</li></ul></div>
-      <div class="pp-step"><b>5. What governs at this sitting, and which schedule applies</b><ul><li>IMSBC Code amendment 07-23, mandatory since 1 January 2025</li><li>mandatory under SOLAS chapters VI and VII</li><li>two schedules - BAUXITE Group C and BAUXITE FINES Group A</li><li>separated by particle size distribution</li><li>more than 30% finer than 1 mm AND more than 40% finer than 2.5 mm</li><li>the declared BCSN and its individual schedule govern</li></ul></div>
-      <div class="pp-step"><b>6. Care and action before loading</b><ul><li>shipper's declaration under SOLAS VI/2 and IMSBC section 4</li><li>for Group A, TML and moisture content certificates</li><li>TML test within six months of loading</li><li>moisture sampled and tested within seven days of loading</li><li>TML by the Modified Proctor/Fagerberg procedure for bauxite</li><li>holds clean, dry, bilges working and strainers covered</li><li>check the loading port's weather and stockpile exposure</li></ul></div>
-      <div class="pp-step"><b>7. Care and action during loading</b><ul><li>moisture content must be below the TML</li><li>reject visibly wet cargo, splattering or free water</li><li>the can test is a screening indication, never a substitute for TML</li><li>check tests after significant rain or snow</li><li>stop loading and require verification where the declaration is doubted</li><li>trim level; avoid loading in rain and close hatches</li></ul></div>
-      <div class="pp-step"><b>8. Care and action on passage, and if instability develops</b><ul><li>daily visual inspection of the cargo surface where safe</li><li>look for free water, slurry, flattening or a shifted surface</li><li>sound and pump bilges regularly and record</li><li>atypical motion or wobbling indicates cargo instability</li><li>reduce speed, alter course to ease motion, avoid heavy weather</li><li>consider a port of refuge; report to owners, charterers and flag</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1134,17 +1125,18 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">a) <span class="pl-mk">&middot; 10 marks</span></div>
     <ol class="plan-list">
-      <li value="1">a) What CII is, and where it sits in MARPOL</li>
-      <li value="2">How attained and required CII are set, and how a ship is rated</li>
-      <li value="3">What follows from a poor rating</li>
-      <li value="4">The commercial impact on the shipping business</li>
+      <li value="1"><span class="pl-t">a) What CII is, and where it sits in MARPOL</span><ul class="pl-pts"><li>MARPOL Annex VI regulation 28, operational carbon intensity</li><li>ships of 5,000 GT and above</li><li>operational, not design - unlike EEXI from 400 gt</li><li>built on the IMO DCS fuel data under regulation 27</li></ul></li>
+      <li value="2"><span class="pl-t">How attained and required CII are set, and how a ship is rated</span><ul class="pl-pts"><li>attained CII - CO2 per transport work, usually the AER</li><li>required CII = 2019 reference line x (1 - Z/100)</li><li>Z rises 5, 7, 9, 11 per cent for 2023 to 2026</li><li>extended to 13.625 to 21.500 per cent for 2027-2030 by MEPC.400(83)</li><li>verified annually and rated A to E, C the required standard</li><li>rating recorded with the DCS Statement of Compliance</li></ul></li>
+      <li value="3"><span class="pl-t">What follows from a poor rating</span><ul class="pl-pts"><li>D for three consecutive years, or E for one year</li><li>corrective action plan incorporated in SEEMP Part III</li><li>plan agreed before the Statement of Compliance is issued</li><li>no direct fine or detention, but the documentation stops</li></ul></li>
+      <li value="4"><span class="pl-t">The commercial impact on the shipping business</span><ul class="pl-pts"><li>charterers screen on rating; CII clauses now standard</li><li>speed and route control becomes a contractual allocation</li><li>banks and Poseidon Principles signatories price it into debt</li><li>second-hand value, remaining life and scrapping decisions</li><li>cargo owners' own scope 3 reporting pulls the same way</li></ul></li>
     </ol>
-    <div class="plan-limb">b)</div>
+    <div class="plan-limb">b) <span class="pl-mk">&middot; 6 marks</span></div>
     <ol class="plan-list">
-      <li value="5">b) The shortcomings the industry has identified</li>
-      <li value="6">The remedial measures adopted, and how far the review had got</li>
+      <li value="5"><span class="pl-t">b) The shortcomings the industry has identified</span><ul class="pl-pts"><li>measures capacity, not cargo actually carried</li><li>a long ballast leg can improve the rating</li><li>idling at anchor and port congestion penalise the ship</li><li>short-sea, chemical, offshore and ice-class trades hit hardest</li><li>the rating attaches to a ship the charterer actually operates</li><li>an efficiency ratio does not guarantee lower total emissions</li></ul></li>
+      <li value="6"><span class="pl-t">The remedial measures adopted, and how far the review had got</span><ul class="pl-pts"><li>regulation 28.11 review to be completed by 1 January 2026</li><li>Phase 1 completed at MEPC 83, April 2025</li><li>MEPC.400(83) of 11 April 2025 set the 2027-2030 factors</li><li>SEEMP Guidelines amended to allow other CII metrics later</li><li>regulation 20, 25 and 28 amendments approved, adoption due October 2025</li><li>industry response - BIMCO CII clause, just-in-time arrival</li><li>the metric itself unchanged; the review still to be completed</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Ladder up in limb (a): <b>INSTRUMENT (1) - CALCULATION (2) - CONSEQUENCE (3) - COMMERCE (4)</b>. Then limb (b): <b>WHY IT MISFIRES (5) - WHAT WAS ACTUALLY DONE (6)</b>. Numbers: 5,000 and 400; 2019 line; Z 5, 7, 9, 11 then 13.625 to 21.500; D three times or E once. Date guard: April 2025 is behind you, October 2025 is ahead of you.</p>
     <div class="plan-cov">
@@ -1152,14 +1144,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>32</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 32 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. a) What CII is, and where it sits in MARPOL</b><ul><li>MARPOL Annex VI regulation 28, operational carbon intensity</li><li>ships of 5,000 GT and above</li><li>operational, not design - unlike EEXI from 400 gt</li><li>built on the IMO DCS fuel data under regulation 27</li></ul></div>
-      <div class="pp-step"><b>2. How attained and required CII are set, and how a ship is rated</b><ul><li>attained CII - CO2 per transport work, usually the AER</li><li>required CII = 2019 reference line x (1 - Z/100)</li><li>Z rises 5, 7, 9, 11 per cent for 2023 to 2026</li><li>extended to 13.625 to 21.500 per cent for 2027-2030 by MEPC.400(83)</li><li>verified annually and rated A to E, C the required standard</li><li>rating recorded with the DCS Statement of Compliance</li></ul></div>
-      <div class="pp-step"><b>3. What follows from a poor rating</b><ul><li>D for three consecutive years, or E for one year</li><li>corrective action plan incorporated in SEEMP Part III</li><li>plan agreed before the Statement of Compliance is issued</li><li>no direct fine or detention, but the documentation stops</li></ul></div>
-      <div class="pp-step"><b>4. The commercial impact on the shipping business</b><ul><li>charterers screen on rating; CII clauses now standard</li><li>speed and route control becomes a contractual allocation</li><li>banks and Poseidon Principles signatories price it into debt</li><li>second-hand value, remaining life and scrapping decisions</li><li>cargo owners' own scope 3 reporting pulls the same way</li></ul></div>
-      <div class="pp-step"><b>5. b) The shortcomings the industry has identified</b><ul><li>measures capacity, not cargo actually carried</li><li>a long ballast leg can improve the rating</li><li>idling at anchor and port congestion penalise the ship</li><li>short-sea, chemical, offshore and ice-class trades hit hardest</li><li>the rating attaches to a ship the charterer actually operates</li><li>an efficiency ratio does not guarantee lower total emissions</li></ul></div>
-      <div class="pp-step"><b>6. The remedial measures adopted, and how far the review had got</b><ul><li>regulation 28.11 review to be completed by 1 January 2026</li><li>Phase 1 completed at MEPC 83, April 2025</li><li>MEPC.400(83) of 11 April 2025 set the 2027-2030 factors</li><li>SEEMP Guidelines amended to allow other CII metrics later</li><li>regulation 20, 25 and 28 amendments approved, adoption due October 2025</li><li>industry response - BIMCO CII clause, just-in-time arrival</li><li>the metric itself unchanged; the review still to be completed</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1426,12 +1410,13 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Particular Average</li>
-      <li value="2">General Average, and how it differs</li>
-      <li value="3">When General Average may be declared</li>
-      <li value="4">Average adjusters and their role</li>
-      <li value="5">Which rules actually apply</li>
+      <li value="1"><span class="pl-t">Particular Average</span><ul class="pl-pts"><li>a partial loss</li><li>accidental, by a peril insured against</li><li>not a general average loss</li><li>falls solely on the interest damaged</li></ul></li>
+      <li value="2"><span class="pl-t">General Average, and how it differs</span><ul class="pl-pts"><li>extraordinary sacrifice or expenditure</li><li>intentional and reasonable</li><li>in time of peril, for the common safety</li><li>shared rateably by all interests</li><li>Marine Insurance Act 1963 s.66</li></ul></li>
+      <li value="3"><span class="pl-t">When General Average may be declared</span><ul class="pl-pts"><li>York-Antwerp Rule A elements must all be present</li><li>peril must be real, not merely feared</li><li>the act must be deliberate</li><li>the sacrifice must be extraordinary</li><li>the adventure must be preserved</li></ul></li>
+      <li value="4"><span class="pl-t">Average adjusters and their role</span><ul class="pl-pts"><li>secure the general average bond and guarantee</li><li>allow or disallow claimed sacrifices</li><li>apportion contribution across the interests</li><li>independent and impartial</li><li>the adjuster does NOT declare GA - the shipowner does</li></ul></li>
+      <li value="5"><span class="pl-t">Which rules actually apply</span><ul class="pl-pts"><li>York-Antwerp Rules are not law</li><li>contractual only, when incorporated</li><li>the bill of lading or charterparty names the edition</li><li>YAR 2016 adopted by the CMI</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Two definitions then two roles. <b>PA (1)</b> is accidental and borne alone; <b>GA (2)</b> is deliberate and shared. Test GA at step <b>3</b> with <b>E-I-R-C-S</b>: <b>E</b>xtraordinary, <b>I</b>ntentional, <b>R</b>easonable, <b>C</b>ommon safety, <b>S</b>aved - miss one and it is not general average. The adjuster at step <b>4</b> is three verbs: <b>secure, allow, apportion</b> - and he does not declare. Close at step <b>5</b> with <b>contract, not convention</b>.</p>
     <div class="plan-cov">
@@ -1439,13 +1424,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>23</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 23 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Particular Average</b><ul><li>a partial loss</li><li>accidental, by a peril insured against</li><li>not a general average loss</li><li>falls solely on the interest damaged</li></ul></div>
-      <div class="pp-step"><b>2. General Average, and how it differs</b><ul><li>extraordinary sacrifice or expenditure</li><li>intentional and reasonable</li><li>in time of peril, for the common safety</li><li>shared rateably by all interests</li><li>Marine Insurance Act 1963 s.66</li></ul></div>
-      <div class="pp-step"><b>3. When General Average may be declared</b><ul><li>York-Antwerp Rule A elements must all be present</li><li>peril must be real, not merely feared</li><li>the act must be deliberate</li><li>the sacrifice must be extraordinary</li><li>the adventure must be preserved</li></ul></div>
-      <div class="pp-step"><b>4. Average adjusters and their role</b><ul><li>secure the general average bond and guarantee</li><li>allow or disallow claimed sacrifices</li><li>apportion contribution across the interests</li><li>independent and impartial</li><li>the adjuster does NOT declare GA - the shipowner does</li></ul></div>
-      <div class="pp-step"><b>5. Which rules actually apply</b><ul><li>York-Antwerp Rules are not law</li><li>contractual only, when incorporated</li><li>the bill of lading or charterparty names the edition</li><li>YAR 2016 adopted by the CMI</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1695,15 +1673,16 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">What a maritime lien is</li>
-      <li value="2">How the lien travels with the property</li>
-      <li value="3">In rem and in personam</li>
-      <li value="4">Which convention deals with maritime liens</li>
-      <li value="5">What the convention secures - article 4</li>
-      <li value="6">How the liens rank among themselves - article 5</li>
-      <li value="7">The order of settlement after forced sale - article 12</li>
-      <li value="8">The Indian statutory position, kept separate</li>
+      <li value="1"><span class="pl-t">What a maritime lien is</span><ul class="pl-pts"><li>a privileged claim against the vessel herself, not against a person</li><li>attaches to the res by operation of law, not by agreement</li><li>arises the moment the claim arises - no registration, no notice</li><li>inchoate until enforced, then crystallised by arrest and forced sale</li><li>ranks ahead of registered mortgages</li></ul></li>
+      <li value="2"><span class="pl-t">How the lien travels with the property</span><ul class="pl-pts"><li>article 8 - it follows the vessel</li><li>notwithstanding change of ownership, registration or flag</li><li>binds even a bona fide purchaser without notice</li><li>hence the description a secret lien</li><li>it is defeated only by forced sale, or by lapse of time under article 9</li></ul></li>
+      <li value="3"><span class="pl-t">In rem and in personam</span><ul class="pl-pts"><li>in personam - against a person, limited by that person's means</li><li>in rem - against the ship as defendant</li><li>the maritime lien is what gives a right in rem against the ship</li><li>arrest compels security or produces a fund by forced sale</li><li>the two may be pursued together</li></ul></li>
+      <li value="4"><span class="pl-t">Which convention deals with maritime liens</span><ul class="pl-pts"><li>the International Convention on Maritime Liens and Mortgages, 1993</li><li>adopted at Geneva on 6 May 1993</li><li>in force 5 September 2004</li><li>successor to the Brussels Conventions of 1926 and 1967</li></ul></li>
+      <li value="5"><span class="pl-t">What the convention secures - article 4</span><ul class="pl-pts"><li>(a) crew wages, repatriation costs and social insurance contributions</li><li>(b) loss of life or personal injury connected with operation of the vessel</li><li>(c) reward for salvage of the vessel</li><li>(d) port, canal and other waterway dues and pilotage dues</li><li>(e) tort claims for physical loss or damage, excluding cargo and containers</li><li>article 4(2) excludes oil and HNS damage compensable elsewhere, and nuclear</li></ul></li>
+      <li value="6"><span class="pl-t">How the liens rank among themselves - article 5</span><ul class="pl-pts"><li>maritime liens take priority over registered mortgages and charges</li><li>they rank in the order listed in article 4</li><li>salvage liens jump ahead of all liens attached before the salvage</li><li>(a), (b), (d) and (e) rank pari passu among themselves</li><li>salvage liens rank in inverse order of time</li></ul></li>
+      <li value="7"><span class="pl-t">The order of settlement after forced sale - article 12</span><ul class="pl-pts"><li>first, costs and expenses of arrest, seizure and sale</li><li>including upkeep of vessel and crew and post-arrest wages</li><li>optionally, wreck-removal costs where national law so provides</li><li>then the article 4 maritime liens in their article 5 order</li><li>then a shipbuilder's or shiprepairer's right of retention</li><li>then registered mortgages, hypotheques and charges</li><li>then other national liens under article 6</li><li>residue to the owner</li></ul></li>
+      <li value="8"><span class="pl-t">The Indian statutory position, kept separate</span><ul class="pl-pts"><li>the Admiralty (Jurisdiction and Settlement of Maritime Claims) Act, 2017</li><li>section 9(1) lists the same five liens in the same order</li><li>section 9(2) - follows the vessel; one year, but TWO years for wages</li><li>section 10 - liens, then registered mortgages, then all other claims</li><li>equal ranking within a category; salvage in inverse order of time</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Define it (1), then the one sentence that carries the second demand - <b>it follows the vessel through ownership, registration and flag (2)</b>. Link the halves: <b>the lien is what gives the right in rem (3)</b>. Name the convention (4). The five liens (5) are <b>W-P-S-D-T</b>: <b>W</b>ages, <b>P</b>ersonal injury, <b>S</b>alvage, <b>D</b>ues, <b>T</b>ort. Ranking (6): <b>salvage jumps forward, and later salvage beats earlier</b>. Settlement (7) works outward from the court: <b>COSTS - LIENS - YARD - BANK - REST - OWNER</b>. Then India separately (8).</p>
     <div class="plan-cov">
@@ -1711,16 +1690,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>43</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 43 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What a maritime lien is</b><ul><li>a privileged claim against the vessel herself, not against a person</li><li>attaches to the res by operation of law, not by agreement</li><li>arises the moment the claim arises - no registration, no notice</li><li>inchoate until enforced, then crystallised by arrest and forced sale</li><li>ranks ahead of registered mortgages</li></ul></div>
-      <div class="pp-step"><b>2. How the lien travels with the property</b><ul><li>article 8 - it follows the vessel</li><li>notwithstanding change of ownership, registration or flag</li><li>binds even a bona fide purchaser without notice</li><li>hence the description a secret lien</li><li>it is defeated only by forced sale, or by lapse of time under article 9</li></ul></div>
-      <div class="pp-step"><b>3. In rem and in personam</b><ul><li>in personam - against a person, limited by that person's means</li><li>in rem - against the ship as defendant</li><li>the maritime lien is what gives a right in rem against the ship</li><li>arrest compels security or produces a fund by forced sale</li><li>the two may be pursued together</li></ul></div>
-      <div class="pp-step"><b>4. Which convention deals with maritime liens</b><ul><li>the International Convention on Maritime Liens and Mortgages, 1993</li><li>adopted at Geneva on 6 May 1993</li><li>in force 5 September 2004</li><li>successor to the Brussels Conventions of 1926 and 1967</li></ul></div>
-      <div class="pp-step"><b>5. What the convention secures - article 4</b><ul><li>(a) crew wages, repatriation costs and social insurance contributions</li><li>(b) loss of life or personal injury connected with operation of the vessel</li><li>(c) reward for salvage of the vessel</li><li>(d) port, canal and other waterway dues and pilotage dues</li><li>(e) tort claims for physical loss or damage, excluding cargo and containers</li><li>article 4(2) excludes oil and HNS damage compensable elsewhere, and nuclear</li></ul></div>
-      <div class="pp-step"><b>6. How the liens rank among themselves - article 5</b><ul><li>maritime liens take priority over registered mortgages and charges</li><li>they rank in the order listed in article 4</li><li>salvage liens jump ahead of all liens attached before the salvage</li><li>(a), (b), (d) and (e) rank pari passu among themselves</li><li>salvage liens rank in inverse order of time</li></ul></div>
-      <div class="pp-step"><b>7. The order of settlement after forced sale - article 12</b><ul><li>first, costs and expenses of arrest, seizure and sale</li><li>including upkeep of vessel and crew and post-arrest wages</li><li>optionally, wreck-removal costs where national law so provides</li><li>then the article 4 maritime liens in their article 5 order</li><li>then a shipbuilder's or shiprepairer's right of retention</li><li>then registered mortgages, hypotheques and charges</li><li>then other national liens under article 6</li><li>residue to the owner</li></ul></div>
-      <div class="pp-step"><b>8. The Indian statutory position, kept separate</b><ul><li>the Admiralty (Jurisdiction and Settlement of Maritime Claims) Act, 2017</li><li>section 9(1) lists the same five liens in the same order</li><li>section 9(2) - follows the vessel; one year, but TWO years for wages</li><li>section 10 - liens, then registered mortgages, then all other claims</li><li>equal ranking within a category; salvage in inverse order of time</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2043,23 +2012,24 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The Convention, and its status at this sitting</li>
+      <li value="1"><span class="pl-t">The Convention, and its status at this sitting</span><ul class="pl-pts"><li>1996 Convention as amended by the 2010 Protocol, read as one instrument</li><li>does for HNS cargoes what CLC and Fund do for persistent oil</li><li>strict liability, compulsory insurance, second tier from cargo interests</li><li>not yet in force at this sitting - the stem's own premise</li></ul></li>
     </ol>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 6 marks</span></div>
     <ol class="plan-list">
-      <li value="2">a) The substances covered - the seven categories of article 1.5</li>
-      <li value="3">a) Bulk HNS and packaged HNS - why the split matters</li>
+      <li value="2"><span class="pl-t">a) The substances covered - the seven categories of article 1.5</span><ul class="pl-pts"><li>defined by reference to other IMO instruments, not by a commodity list</li><li>covers only substances carried AS CARGO</li><li>(i) oils in bulk - MARPOL Annex I reg 1</li><li>(ii) noxious liquid substances in bulk - MARPOL Annex II reg 1.10, plus provisional X, Y, Z</li><li>(iii) dangerous liquids in bulk - IBC Code chapter 17</li><li>(iv) packaged dangerous goods - IMDG Code</li><li>(v) liquefied gases - IGC Code chapter 19</li><li>(vi) liquids in bulk with flashpoint not exceeding 60 degrees C</li><li>(vii) solid bulk materials with chemical hazards - IMSBC Code</li><li>article 1.5(b) - residues of previous bulk carriage</li></ul></li>
+      <li value="3"><span class="pl-t">a) Bulk HNS and packaged HNS - why the split matters</span><ul class="pl-pts"><li>article 1.5bis bulk - (i) to (iii), (v) to (vii) and residues</li><li>article 1.5ter packaged - category (iv) alone</li><li>the split sets the article 9 limit and the Fund contribution</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 5 marks</span></div>
     <ol class="plan-list">
-      <li value="4">b) The heads of damage - article 1.6</li>
-      <li value="5">b) What is excluded, and the mechanism that excludes it</li>
+      <li value="4"><span class="pl-t">b) The heads of damage - article 1.6</span><ul class="pl-pts"><li>(a) loss of life or personal injury, on board or outside the ship</li><li>(b) loss of or damage to property outside the ship</li><li>(c) contamination of the environment - reinstatement costs only</li><li>(d) costs of preventive measures and damage caused by them</li><li>heads (a) and (b) are NOT limited to contamination - fire, explosion, toxicity</li><li>consequential economic loss to fishing, mariculture and tourism</li></ul></li>
+      <li value="5"><span class="pl-t">b) What is excluded, and the mechanism that excludes it</span><ul class="pl-pts"><li>article 4.3(a) CLC pollution damage, whether or not compensation is payable</li><li>article 4.3(b) radioactive material of class 7</li><li>article 4.1 claims under a contract of carriage of goods or passengers</li><li>article 4.2 workers' compensation; article 4.4 warships</li><li>bunkers are NOT excluded by an article - they are simply not cargo</li></ul></li>
     </ol>
-    <div class="plan-limb">(c)</div>
+    <div class="plan-limb">(c) <span class="pl-mk">&middot; 5 marks</span></div>
     <ol class="plan-list">
-      <li value="6">c) Why an oil products tanker needs certificates under all three conventions</li>
-      <li value="7">c) The certificate itself, and the two tiers behind it</li>
+      <li value="6"><span class="pl-t">c) Why an oil products tanker needs certificates under all three conventions</span><ul class="pl-pts"><li>the applicable regime changes with the parcel carried</li><li>CLC - persistent oil only, contamination only, cargo and her own bunkers</li><li>Bunkers 2001 - her fuel, but disapplied where CLC pollution damage applies</li><li>HNS - non-persistent products, and fire and explosion from any oil cargo</li><li>no single certificate follows her through the trading cycle</li></ul></li>
+      <li value="7"><span class="pl-t">c) The certificate itself, and the two tiers behind it</span><ul class="pl-pts"><li>article 12.1 - insurance in the sums fixed by the article 9.1 limits</li><li>article 12.2 - certificate in the Annex I model form, issued by the flag State</li><li>carried on board, mutually recognised, direct action against the insurer</li><li>tier 1 - owner strict liability, capped 100 million bulk / 115 million packaged</li><li>tier 2 - HNS Fund from receivers of contributing cargo</li><li>overall cap 250 million units of account; time bar 3 years / 10 years</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Set the frame first: <b>NOT YET IN FORCE (1)</b>. Then three questions, each mapped to its own steps. <b>WHAT IS IT</b> - seven categories in article 1.5, all defined by reference and all <b>as cargo</b> <b>(2)</b>, then bulk or packaged <b>(3)</b>. <b>WHAT HARM</b> - four heads in article 1.6 and only one of them says contamination <b>(4)</b>, then the two real exclusions <b>(5)</b>. <b>WHY THREE CERTIFICATES</b> - persistent plus contamination is CLC, her own fuel is Bunkers, everything else including fire is HNS <b>(6)</b>, then the certificate and the two tiers <b>(7)</b>. Numbers: <b>100 / 115 / 250</b> million, <b>3 and 10</b> years.</p>
     <div class="plan-cov">
@@ -2067,15 +2037,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>39</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 39 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The Convention, and its status at this sitting</b><ul><li>1996 Convention as amended by the 2010 Protocol, read as one instrument</li><li>does for HNS cargoes what CLC and Fund do for persistent oil</li><li>strict liability, compulsory insurance, second tier from cargo interests</li><li>not yet in force at this sitting - the stem's own premise</li></ul></div>
-      <div class="pp-step"><b>2. a) The substances covered - the seven categories of article 1.5</b><ul><li>defined by reference to other IMO instruments, not by a commodity list</li><li>covers only substances carried AS CARGO</li><li>(i) oils in bulk - MARPOL Annex I reg 1</li><li>(ii) noxious liquid substances in bulk - MARPOL Annex II reg 1.10, plus provisional X, Y, Z</li><li>(iii) dangerous liquids in bulk - IBC Code chapter 17</li><li>(iv) packaged dangerous goods - IMDG Code</li><li>(v) liquefied gases - IGC Code chapter 19</li><li>(vi) liquids in bulk with flashpoint not exceeding 60 degrees C</li><li>(vii) solid bulk materials with chemical hazards - IMSBC Code</li><li>article 1.5(b) - residues of previous bulk carriage</li></ul></div>
-      <div class="pp-step"><b>3. a) Bulk HNS and packaged HNS - why the split matters</b><ul><li>article 1.5bis bulk - (i) to (iii), (v) to (vii) and residues</li><li>article 1.5ter packaged - category (iv) alone</li><li>the split sets the article 9 limit and the Fund contribution</li></ul></div>
-      <div class="pp-step"><b>4. b) The heads of damage - article 1.6</b><ul><li>(a) loss of life or personal injury, on board or outside the ship</li><li>(b) loss of or damage to property outside the ship</li><li>(c) contamination of the environment - reinstatement costs only</li><li>(d) costs of preventive measures and damage caused by them</li><li>heads (a) and (b) are NOT limited to contamination - fire, explosion, toxicity</li><li>consequential economic loss to fishing, mariculture and tourism</li></ul></div>
-      <div class="pp-step"><b>5. b) What is excluded, and the mechanism that excludes it</b><ul><li>article 4.3(a) CLC pollution damage, whether or not compensation is payable</li><li>article 4.3(b) radioactive material of class 7</li><li>article 4.1 claims under a contract of carriage of goods or passengers</li><li>article 4.2 workers' compensation; article 4.4 warships</li><li>bunkers are NOT excluded by an article - they are simply not cargo</li></ul></div>
-      <div class="pp-step"><b>6. c) Why an oil products tanker needs certificates under all three conventions</b><ul><li>the applicable regime changes with the parcel carried</li><li>CLC - persistent oil only, contamination only, cargo and her own bunkers</li><li>Bunkers 2001 - her fuel, but disapplied where CLC pollution damage applies</li><li>HNS - non-persistent products, and fire and explosion from any oil cargo</li><li>no single certificate follows her through the trading cycle</li></ul></div>
-      <div class="pp-step"><b>7. c) The certificate itself, and the two tiers behind it</b><ul><li>article 12.1 - insurance in the sums fixed by the article 9.1 limits</li><li>article 12.2 - certificate in the Annex I model form, issued by the flag State</li><li>carried on board, mutually recognised, direct action against the insurer</li><li>tier 1 - owner strict liability, capped 100 million bulk / 115 million packaged</li><li>tier 2 - HNS Fund from receivers of contributing cargo</li><li>overall cap 250 million units of account; time bar 3 years / 10 years</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2363,15 +2324,16 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Definition</li>
-      <li value="2">Types of communication</li>
-      <li value="3">Barriers to effective communication</li>
-      <li value="4">Where communication failure becomes a hazard in this job</li>
-      <li value="5">Risk mitigation - organise the job before it starts</li>
-      <li value="6">Risk mitigation - the communication plan itself</li>
-      <li value="7">Risk mitigation - physical and record controls</li>
-      <li value="8">Conclusion</li>
+      <li value="1"><span class="pl-t">Definition</span><ul class="pl-pts"><li>sender, channel, receiver</li><li>understood as intended</li><li>feedback completes it</li><li>silence is not confirmation</li></ul></li>
+      <li value="2"><span class="pl-t">Types of communication</span><ul class="pl-pts"><li>verbal - fast, no record</li><li>written - auditable, the SMS relies on it</li><li>non-verbal and alarms</li><li>formal and informal</li><li>vertical and horizontal; upward fails first</li><li>internal and external</li><li>electronic</li></ul></li>
+      <li value="3"><span class="pl-t">Barriers to effective communication</span><ul class="pl-pts"><li>physical - noise, PPE, distance, dead spots</li><li>language and semantic; working language</li><li>hierarchical and cultural</li><li>fatigue and stress</li><li>organisational and handover</li><li>assumption of understanding</li></ul></li>
+      <li value="4"><span class="pl-t">Where communication failure becomes a hazard in this job</span><ul class="pl-pts"><li>turning gear operated with a person inside</li><li>starting air not isolated</li><li>dropped objects from the platform above</li><li>uncoordinated lifting through the space</li><li>hydraulic tools pressurised</li><li>third party restores a system</li><li>enclosed space entry unknown to the other group</li><li>shift handover gaps</li></ul></li>
+      <li value="5"><span class="pl-t">Risk mitigation - organise the job before it starts</span><ul class="pl-pts"><li>risk assessment and permit to work</li><li>one named person in overall charge</li><li>joint toolbox talk</li><li>lock-out/tag-out with controlled key</li></ul></li>
+      <li value="6"><span class="pl-t">Risk mitigation - the communication plan itself</span><ul class="pl-pts"><li>dedicated radio channel and tested sets</li><li>closed-loop communication as standing rule</li><li>agreed phrases and hand signals</li><li>confirm by stating back, not "do you understand"</li><li>explicit stop-work authority for everyone</li></ul></li>
+      <li value="7"><span class="pl-t">Risk mitigation - physical and record controls</span><ul class="pl-pts"><li>avoid work directly above and below; exclusion zone</li><li>tethered tools, gratings and covers</li><li>written handover and job log</li><li>personnel tally before removing isolations</li></ul></li>
+      <li value="8"><span class="pl-t">Conclusion</span><ul class="pl-pts"><li>the machine is the message path</li><li>isolation survives a communication failure</li><li>the consequences here are fatal, not inconvenient</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Theory <b>D-T-B</b>: <b>D</b>efine (1), <b>T</b>ypes (2), <b>B</b>arriers (3). Application <b>H-O-C-P</b>: <b>H</b>azards (4), <b>O</b>rganise the job (5), <b>C</b>ommunication plan (6), <b>P</b>hysical and paper controls (7). Close on the machine as the message path (8). Within the hazards, work top to bottom - what falls, what turns, what is pressurised, who else can restore a system.</p>
     <div class="plan-cov">
@@ -2379,16 +2341,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>41</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 41 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Definition</b><ul><li>sender, channel, receiver</li><li>understood as intended</li><li>feedback completes it</li><li>silence is not confirmation</li></ul></div>
-      <div class="pp-step"><b>2. Types of communication</b><ul><li>verbal - fast, no record</li><li>written - auditable, the SMS relies on it</li><li>non-verbal and alarms</li><li>formal and informal</li><li>vertical and horizontal; upward fails first</li><li>internal and external</li><li>electronic</li></ul></div>
-      <div class="pp-step"><b>3. Barriers to effective communication</b><ul><li>physical - noise, PPE, distance, dead spots</li><li>language and semantic; working language</li><li>hierarchical and cultural</li><li>fatigue and stress</li><li>organisational and handover</li><li>assumption of understanding</li></ul></div>
-      <div class="pp-step"><b>4. Where communication failure becomes a hazard in this job</b><ul><li>turning gear operated with a person inside</li><li>starting air not isolated</li><li>dropped objects from the platform above</li><li>uncoordinated lifting through the space</li><li>hydraulic tools pressurised</li><li>third party restores a system</li><li>enclosed space entry unknown to the other group</li><li>shift handover gaps</li></ul></div>
-      <div class="pp-step"><b>5. Risk mitigation - organise the job before it starts</b><ul><li>risk assessment and permit to work</li><li>one named person in overall charge</li><li>joint toolbox talk</li><li>lock-out/tag-out with controlled key</li></ul></div>
-      <div class="pp-step"><b>6. Risk mitigation - the communication plan itself</b><ul><li>dedicated radio channel and tested sets</li><li>closed-loop communication as standing rule</li><li>agreed phrases and hand signals</li><li>confirm by stating back, not "do you understand"</li><li>explicit stop-work authority for everyone</li></ul></div>
-      <div class="pp-step"><b>7. Risk mitigation - physical and record controls</b><ul><li>avoid work directly above and below; exclusion zone</li><li>tethered tools, gratings and covers</li><li>written handover and job log</li><li>personnel tally before removing isolations</li></ul></div>
-      <div class="pp-step"><b>8. Conclusion</b><ul><li>the machine is the message path</li><li>isolation survives a communication failure</li><li>the consequences here are fatal, not inconvenient</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2694,26 +2646,27 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The background - the gap the Convention was written to close</li>
-      <li value="2">Its relevance - where it sits in the liability architecture</li>
+      <li value="1"><span class="pl-t">The background - the gap the Convention was written to close</span><ul class="pl-pts"><li>CLC reaches only tankers carrying persistent oil in bulk as cargo</li><li>non-tankers carry thousands of tonnes of fuel and fell outside it</li><li>no strict liability, no compulsory insurance, no certificate before 2001</li><li>adopted 23 March 2001, in force 21 November 2008</li></ul></li>
+      <li value="2"><span class="pl-t">Its relevance - where it sits in the liability architecture</span><ul class="pl-pts"><li>completes CLC (tanker cargo oil) - Bunkers (every ship's fuel) - HNS (other cargoes)</li><li>borrows CLC's architecture so existing P&amp;I machinery could be extended</li><li>no cargo-financed second tier - there is no bunker IOPC Fund</li></ul></li>
     </ol>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="3">a) Pollution damage and exclusions</li>
+      <li value="3"><span class="pl-t">a) Pollution damage and exclusions</span><ul class="pl-pts"><li>both defined as damage outside the ship BY CONTAMINATION</li><li>environmental impairment limited to reasonable reinstatement costs</li><li>preventive measures covered in both</li><li>CLC persistent oil only; bunker oil is any oil for operation or propulsion</li><li>article 4.1 - not to CLC pollution damage, whether or not compensation is payable</li><li>warships excluded; scope covers territorial sea and EEZ</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="4">b) Time limits for claims</li>
+      <li value="4"><span class="pl-t">b) Time limits for claims</span><ul class="pl-pts"><li>identical in both - three years from when the damage occurred</li><li>six years absolute from the date of the incident</li><li>series of occurrences - six years run from the first</li><li>extinction of the right, not procedural limitation</li><li>contrast HNS - three years from KNOWLEDGE, ten years absolute</li></ul></li>
     </ol>
-    <div class="plan-limb">(c)</div>
+    <div class="plan-limb">(c) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="5">c) Liability of the shipowner</li>
-      <li value="6">c) Limitation of liability - the structural difference</li>
+      <li value="5"><span class="pl-t">c) Liability of the shipowner</span><ul class="pl-pts"><li>strict liability in both, subject to the same three defences</li><li>war or exceptional natural phenomenon; wholly third-party intent; navigational-aid authority</li><li>CLC channels INWARD to the registered owner alone - article III.4</li><li>Bunkers spreads OUTWARD - owner, bareboat charterer, manager and operator</li><li>Bunkers article 3.2 makes them jointly and severally liable</li></ul></li>
+      <li value="6"><span class="pl-t">c) Limitation of liability - the structural difference</span><ul class="pl-pts"><li>CLC has its own limits - 4,510,000 units of account, plus 631 per ton</li><li>CLC overall ceiling 89,770,000 units of account; fund constituted with the court</li><li>right to limit lost on personal intent or recklessness with knowledge</li><li>Bunkers sets NO figure - article 6 refers out to the LLMC 1976 as amended</li><li>so the claim shares a general limitation fund with all other claims</li><li>no second tier and no dedicated pollution fund</li></ul></li>
     </ol>
-    <div class="plan-limb">(d)</div>
+    <div class="plan-limb">(d) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="7">d) Compulsory insurance and financial security</li>
+      <li value="7"><span class="pl-t">d) Compulsory insurance and financial security</span><ul class="pl-pts"><li>Bunkers threshold is SHIP SIZE - registered owner, over 1,000 gross tonnage</li><li>CLC threshold is CARGO - more than 2,000 tons of oil in bulk as cargo</li><li>liability is wide but the insurance duty falls on the registered owner alone</li><li>certificate in the annexed model form, carried on board, three months' notice</li><li>blue card from the P&amp;I club; issue may be delegated to a recognised organisation</li><li>direct action against the insurer, who may limit even if the owner cannot</li><li>article 7.12 - port States enforce it on ships of any flag</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> <b>SAME MACHINE, DIFFERENT MOUNTING (1, 2)</b>. Then four limbs, each a contrast. <b>CONTAMINATION BOTH, BUT PERSISTENT ONLY IN CLC (3)</b>. <b>TIME LIMITS IDENTICAL - THREE AND SIX (4)</b>. <b>CLC CHANNELS IN, BUNKERS SPREADS OUT (5)</b>. <b>CLC HAS ITS OWN LIMITS, BUNKERS BORROWS THE LLMC (6)</b>. <b>CARGO TONNES VERSUS GROSS TONNES (7)</b>.</p>
     <div class="plan-cov">
@@ -2721,15 +2674,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>36</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 36 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The background - the gap the Convention was written to close</b><ul><li>CLC reaches only tankers carrying persistent oil in bulk as cargo</li><li>non-tankers carry thousands of tonnes of fuel and fell outside it</li><li>no strict liability, no compulsory insurance, no certificate before 2001</li><li>adopted 23 March 2001, in force 21 November 2008</li></ul></div>
-      <div class="pp-step"><b>2. Its relevance - where it sits in the liability architecture</b><ul><li>completes CLC (tanker cargo oil) - Bunkers (every ship's fuel) - HNS (other cargoes)</li><li>borrows CLC's architecture so existing P&amp;I machinery could be extended</li><li>no cargo-financed second tier - there is no bunker IOPC Fund</li></ul></div>
-      <div class="pp-step"><b>3. a) Pollution damage and exclusions</b><ul><li>both defined as damage outside the ship BY CONTAMINATION</li><li>environmental impairment limited to reasonable reinstatement costs</li><li>preventive measures covered in both</li><li>CLC persistent oil only; bunker oil is any oil for operation or propulsion</li><li>article 4.1 - not to CLC pollution damage, whether or not compensation is payable</li><li>warships excluded; scope covers territorial sea and EEZ</li></ul></div>
-      <div class="pp-step"><b>4. b) Time limits for claims</b><ul><li>identical in both - three years from when the damage occurred</li><li>six years absolute from the date of the incident</li><li>series of occurrences - six years run from the first</li><li>extinction of the right, not procedural limitation</li><li>contrast HNS - three years from KNOWLEDGE, ten years absolute</li></ul></div>
-      <div class="pp-step"><b>5. c) Liability of the shipowner</b><ul><li>strict liability in both, subject to the same three defences</li><li>war or exceptional natural phenomenon; wholly third-party intent; navigational-aid authority</li><li>CLC channels INWARD to the registered owner alone - article III.4</li><li>Bunkers spreads OUTWARD - owner, bareboat charterer, manager and operator</li><li>Bunkers article 3.2 makes them jointly and severally liable</li></ul></div>
-      <div class="pp-step"><b>6. c) Limitation of liability - the structural difference</b><ul><li>CLC has its own limits - 4,510,000 units of account, plus 631 per ton</li><li>CLC overall ceiling 89,770,000 units of account; fund constituted with the court</li><li>right to limit lost on personal intent or recklessness with knowledge</li><li>Bunkers sets NO figure - article 6 refers out to the LLMC 1976 as amended</li><li>so the claim shares a general limitation fund with all other claims</li><li>no second tier and no dedicated pollution fund</li></ul></div>
-      <div class="pp-step"><b>7. d) Compulsory insurance and financial security</b><ul><li>Bunkers threshold is SHIP SIZE - registered owner, over 1,000 gross tonnage</li><li>CLC threshold is CARGO - more than 2,000 tons of oil in bulk as cargo</li><li>liability is wide but the insurance duty falls on the registered owner alone</li><li>certificate in the annexed model form, carried on board, three months' notice</li><li>blue card from the P&amp;I club; issue may be delegated to a recognised organisation</li><li>direct action against the insurer, who may limit even if the owner cannot</li><li>article 7.12 - port States enforce it on ships of any flag</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -3014,19 +2958,20 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">a)</div>
     <ol class="plan-list">
-      <li value="1">a) The human element, and how IMO and ILO divide the work</li>
-      <li value="2">The IMO regime - competence, safe operation and fitness for duty</li>
-      <li value="3">The ILO regime - MLC 2006, the fourth pillar</li>
-      <li value="4">What the maritime labour and welfare regime actually requires</li>
-      <li value="5">Title 5 - what makes the labour regime enforceable</li>
-      <li value="6">Where the two organisations act jointly, and the state of the regime at this sitting</li>
+      <li value="1"><span class="pl-t">a) The human element, and how IMO and ILO divide the work</span><ul class="pl-pts"><li>most casualties originate in human performance, not equipment failure</li><li>IMO frames it through resolution A.947(23), adopted 27 November 2003</li><li>IMO regulates the seafarer as the operator of a ship</li><li>ILO regulates the seafarer as a worker</li><li>the regimes interlock where working conditions become safety conditions</li></ul></li>
+      <li value="2"><span class="pl-t">The IMO regime - competence, safe operation and fitness for duty</span><ul class="pl-pts"><li>STCW 1978 as amended, Manila amendments in force 1 January 2012</li><li>competence tables; Part A mandatory, Part B guidance</li><li>leadership and teamworking, engine-room and bridge resource management</li><li>reg I/9 medical fitness, reg I/14 company responsibility</li><li>reg VIII/1 rest periods for the purpose of preventing fatigue</li><li>ISM Code elements 6, 8 and 9 - resources, drills, reporting and analysis</li><li>SOLAS reg V/14 safe manning, with resolution A.1047(27) of 30 November 2011</li></ul></li>
+      <li value="3"><span class="pl-t">The ILO regime - MLC 2006, the fourth pillar</span><ul class="pl-pts"><li>adopted at the 94th (Maritime) Session, consolidating some sixty-eight instruments</li><li>the fourth pillar beside SOLAS, MARPOL and STCW</li><li>three parts - Articles, Regulations and the Code</li><li>Article VI - Part A Standards mandatory, Part B Guidelines due consideration</li><li>Article VI.3 substantial equivalence</li><li>Article IV rights; five Titles</li></ul></li>
+      <li value="4"><span class="pl-t">What the maritime labour and welfare regime actually requires</span><ul class="pl-pts"><li>Title 1 - minimum age, medical fitness, training, regulated recruitment with no fee to the seafarer</li><li>Title 2 - employment agreement, wages, hours of work or rest, leave, repatriation, manning</li><li>the 14/72 or 10/77 election under Standard A2.3.5</li><li>Title 3 - accommodation, recreation including social connectivity, food and catering free of charge</li><li>Title 4 - medical care comparable to that ashore, shipowner liability and financial security, health and safety, welfare, social security</li><li>the 2022 additions are in force and are simply the law at this sitting</li></ul></li>
+      <li value="5"><span class="pl-t">Title 5 - what makes the labour regime enforceable</span><ul class="pl-pts"><li>maritime labour certificate for not more than five years, intermediate inspection</li><li>DMLC Part I by the authority, Part II by the shipowner</li><li>Appendix A5-I lists sixteen items</li><li>port State control - certificate and DMLC are prima facie evidence</li><li>four triggers for a more detailed inspection; detention where hazardous or repeated</li><li>Article V.7 no more favourable treatment</li><li>Reg 5.2.2 onshore complaint handling, Reg 5.3 labour-supplying States</li></ul></li>
+      <li value="6"><span class="pl-t">Where the two organisations act jointly, and the state of the regime at this sitting</span><ul class="pl-pts"><li>joint ILO/IMO Guidelines on the fair treatment of seafarers</li><li>abandonment - financial security under MLC, joint ILO/IMO database</li><li>ILO Convention No. 185 on seafarers' identity documents</li><li>MLC 2022 amendments in force since 23 December 2024</li><li>MLC 2025 amendments adopted 6 June 2025 - three months before this sitting - and NOT in force</li></ul></li>
     </ol>
     <div class="plan-limb">B)</div>
     <ol class="plan-list">
-      <li value="7">B) The IMO guidance on fatigue</li>
-      <li value="8">How the guidance and the mandatory rules fit together</li>
+      <li value="7"><span class="pl-t">B) The IMO guidance on fatigue</span><ul class="pl-pts"><li>MSC.1/Circ.1598, 24 January 2019, approved at MSC 100</li><li>supersedes MSC/Circ.1014 of 2001</li><li>recommendatory, not mandatory</li><li>Module 1 fatigue and its causes; sleep debt defined</li><li>Module 2 the Company; Module 3 the Seafarer</li><li>Module 4 awareness and training; Module 5 ship design</li><li>Module 6 the Administration and port State authorities</li></ul></li>
+      <li value="8"><span class="pl-t">How the guidance and the mandatory rules fit together</span><ul class="pl-pts"><li>hours of rest are a prescriptive formula in STCW chapter VIII</li><li>10 hours in any 24 and 77 hours in any 7 days</li><li>two periods, one of at least 6 hours; 14-hour maximum interval</li><li>MLC 2006 Regs 2.3, 2.4 and 2.7 run the same way</li><li>compliance with the formula is not the same as being rested</li><li>treat an always-exactly-compliant rest record as a warning</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) runs <b>OPERATOR - WORKER - TOGETHER</b>, opened by the division of responsibility at step <b>1</b> and closed by enforcement at step <b>5</b>. <b>OPERATOR (2)</b> = <b>S-I-M</b>: STCW, ISM, Manning. <b>WORKER (3-4)</b> = the five Titles, <b>W-H-A-H-E</b>: Who may sail, How employed, Accommodation and food, Health and welfare, Enforcement. <b>TOGETHER (6)</b> = <b>F-A-I-R</b>: Fair-treatment guidelines, Abandonment database, Identity documents C185, and what Remains adopted but not in force. Limb B) is <b>1598 and its six modules (7)</b>, then <b>floor not ceiling (8)</b>.</p>
     <div class="plan-cov">
@@ -3034,16 +2979,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>49</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 49 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. a) The human element, and how IMO and ILO divide the work</b><ul><li>most casualties originate in human performance, not equipment failure</li><li>IMO frames it through resolution A.947(23), adopted 27 November 2003</li><li>IMO regulates the seafarer as the operator of a ship</li><li>ILO regulates the seafarer as a worker</li><li>the regimes interlock where working conditions become safety conditions</li></ul></div>
-      <div class="pp-step"><b>2. The IMO regime - competence, safe operation and fitness for duty</b><ul><li>STCW 1978 as amended, Manila amendments in force 1 January 2012</li><li>competence tables; Part A mandatory, Part B guidance</li><li>leadership and teamworking, engine-room and bridge resource management</li><li>reg I/9 medical fitness, reg I/14 company responsibility</li><li>reg VIII/1 rest periods for the purpose of preventing fatigue</li><li>ISM Code elements 6, 8 and 9 - resources, drills, reporting and analysis</li><li>SOLAS reg V/14 safe manning, with resolution A.1047(27) of 30 November 2011</li></ul></div>
-      <div class="pp-step"><b>3. The ILO regime - MLC 2006, the fourth pillar</b><ul><li>adopted at the 94th (Maritime) Session, consolidating some sixty-eight instruments</li><li>the fourth pillar beside SOLAS, MARPOL and STCW</li><li>three parts - Articles, Regulations and the Code</li><li>Article VI - Part A Standards mandatory, Part B Guidelines due consideration</li><li>Article VI.3 substantial equivalence</li><li>Article IV rights; five Titles</li></ul></div>
-      <div class="pp-step"><b>4. What the maritime labour and welfare regime actually requires</b><ul><li>Title 1 - minimum age, medical fitness, training, regulated recruitment with no fee to the seafarer</li><li>Title 2 - employment agreement, wages, hours of work or rest, leave, repatriation, manning</li><li>the 14/72 or 10/77 election under Standard A2.3.5</li><li>Title 3 - accommodation, recreation including social connectivity, food and catering free of charge</li><li>Title 4 - medical care comparable to that ashore, shipowner liability and financial security, health and safety, welfare, social security</li><li>the 2022 additions are in force and are simply the law at this sitting</li></ul></div>
-      <div class="pp-step"><b>5. Title 5 - what makes the labour regime enforceable</b><ul><li>maritime labour certificate for not more than five years, intermediate inspection</li><li>DMLC Part I by the authority, Part II by the shipowner</li><li>Appendix A5-I lists sixteen items</li><li>port State control - certificate and DMLC are prima facie evidence</li><li>four triggers for a more detailed inspection; detention where hazardous or repeated</li><li>Article V.7 no more favourable treatment</li><li>Reg 5.2.2 onshore complaint handling, Reg 5.3 labour-supplying States</li></ul></div>
-      <div class="pp-step"><b>6. Where the two organisations act jointly, and the state of the regime at this sitting</b><ul><li>joint ILO/IMO Guidelines on the fair treatment of seafarers</li><li>abandonment - financial security under MLC, joint ILO/IMO database</li><li>ILO Convention No. 185 on seafarers' identity documents</li><li>MLC 2022 amendments in force since 23 December 2024</li><li>MLC 2025 amendments adopted 6 June 2025 - three months before this sitting - and NOT in force</li></ul></div>
-      <div class="pp-step"><b>7. B) The IMO guidance on fatigue</b><ul><li>MSC.1/Circ.1598, 24 January 2019, approved at MSC 100</li><li>supersedes MSC/Circ.1014 of 2001</li><li>recommendatory, not mandatory</li><li>Module 1 fatigue and its causes; sleep debt defined</li><li>Module 2 the Company; Module 3 the Seafarer</li><li>Module 4 awareness and training; Module 5 ship design</li><li>Module 6 the Administration and port State authorities</li></ul></div>
-      <div class="pp-step"><b>8. How the guidance and the mandatory rules fit together</b><ul><li>hours of rest are a prescriptive formula in STCW chapter VIII</li><li>10 hours in any 24 and 77 hours in any 7 days</li><li>two periods, one of at least 6 hours; 14-hour maximum interval</li><li>MLC 2006 Regs 2.3, 2.4 and 2.7 run the same way</li><li>compliance with the formula is not the same as being rested</li><li>treat an always-exactly-compliant rest record as a warning</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -3370,18 +3305,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">a) <span class="pl-mk">&middot; 10 marks</span></div>
     <ol class="plan-list">
-      <li value="1">What a classification society is, and its two distinct roles</li>
-      <li value="2">How class rules are made</li>
-      <li value="3">What the structural, mechanical and electrical rules cover</li>
-      <li value="4">Implementation through the ship's life</li>
-      <li value="5">Why compliance with class rules is now mentioned in SOLAS chapter II-1</li>
+      <li value="1"><span class="pl-t">What a classification society is, and its two distinct roles</span><ul class="pl-pts"><li>publishes rules, assigns and maintains class</li><li>origin in underwriters' need for independent judgement</li><li>classification is private and contractual</li><li>statutory work is delegated under SOLAS XI-1/1</li><li>governed by the RO Code</li><li>the Administration retains responsibility</li></ul></li>
+      <li value="2"><span class="pl-t">How class rules are made</span><ul class="pl-pts"><li>service experience and defect returns</li><li>casualty investigation feedback</li><li>research and direct calculation</li><li>technical committees</li><li>IACS Unified Requirements and Interpretations</li><li>Common Structural Rules</li></ul></li>
+      <li value="3"><span class="pl-t">What the structural, mechanical and electrical rules cover</span><ul class="pl-pts"><li>scantlings, fatigue, corrosion additions</li><li>hull girder strength and loading conditions</li><li>propulsion, shafting, boilers, piping, steering gear</li><li>generation, distribution and protection</li><li>essential and emergency services</li><li>hazardous area equipment</li></ul></li>
+      <li value="4"><span class="pl-t">Implementation through the ship's life</span><ul class="pl-pts"><li>plan approval and type approval at design</li><li>material and welder qualification at construction</li><li>NDT and tank testing witnessed</li><li>survey during construction and trials</li><li>annual, intermediate, renewal and docking surveys</li><li>continuous survey and approved planned maintenance</li><li>condition of class, suspension and withdrawal</li></ul></li>
+      <li value="5"><span class="pl-t">Why compliance with class rules is now mentioned in SOLAS chapter II-1</span><ul class="pl-pts"><li>regulation II-1/3-1</li><li>SOLAS never contained scantling rules</li><li>class was commercially vital but legally optional</li><li>now designed, constructed AND maintained</li><li>loss of class is a SOLAS non-compliance</li><li>enforceable by flag and port State</li><li>national standards of equivalent safety permitted</li><li>links to goal-based standards under II-1/3-10</li></ul></li>
     </ol>
-    <div class="plan-limb">b)</div>
+    <div class="plan-limb">b) <span class="pl-mk">&middot; 6 marks</span></div>
     <ol class="plan-list">
-      <li value="6">The harmonized system, and where these surveys sit</li>
-      <li value="7">Annual versus periodical - the difference and the relevance</li>
+      <li value="6"><span class="pl-t">The harmonized system, and where these surveys sit</span><ul class="pl-pts"><li>1988 SOLAS and Load Lines Protocols</li><li>common five-year cycle and anniversary dates</li><li>three months either side window</li><li>surveys combined into one attendance</li><li>guidelines at this sitting - A.1186(33), revoking A.1156(32)</li></ul></li>
+      <li value="7"><span class="pl-t">Annual versus periodical - the difference and the relevance</span><ul class="pl-pts"><li>annual - each anniversary, visual, no unapproved modification</li><li>periodical - only Safety Equipment and Safety Radio</li><li>Equipment at second or third anniversary, replacing an annual</li><li>Radio at every anniversary</li><li>periodical is inspection with tests</li><li>a five-year certificate needs mid-cycle checkpoints</li><li>equipment is consumed in a way structure is not</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Two hats first (1), then rules made from evidence (2) and what they cover (3). Lifecycle verbs: <b>APPROVE at design, WITNESS at construction, SURVEY in service (4)</b>. The SOLAS reason is one sentence: <b>SOLAS never had scantlings, so it borrowed class's (5)</b>. Then <b>alignment, not survey names (6)</b>. Limb (b) closes on <b>annual is a LOOK, periodical is a TEST - and periodical belongs to only two certificates (7)</b>.</p>
     <div class="plan-cov">
@@ -3389,15 +3325,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>45</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 45 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What a classification society is, and its two distinct roles</b><ul><li>publishes rules, assigns and maintains class</li><li>origin in underwriters' need for independent judgement</li><li>classification is private and contractual</li><li>statutory work is delegated under SOLAS XI-1/1</li><li>governed by the RO Code</li><li>the Administration retains responsibility</li></ul></div>
-      <div class="pp-step"><b>2. How class rules are made</b><ul><li>service experience and defect returns</li><li>casualty investigation feedback</li><li>research and direct calculation</li><li>technical committees</li><li>IACS Unified Requirements and Interpretations</li><li>Common Structural Rules</li></ul></div>
-      <div class="pp-step"><b>3. What the structural, mechanical and electrical rules cover</b><ul><li>scantlings, fatigue, corrosion additions</li><li>hull girder strength and loading conditions</li><li>propulsion, shafting, boilers, piping, steering gear</li><li>generation, distribution and protection</li><li>essential and emergency services</li><li>hazardous area equipment</li></ul></div>
-      <div class="pp-step"><b>4. Implementation through the ship's life</b><ul><li>plan approval and type approval at design</li><li>material and welder qualification at construction</li><li>NDT and tank testing witnessed</li><li>survey during construction and trials</li><li>annual, intermediate, renewal and docking surveys</li><li>continuous survey and approved planned maintenance</li><li>condition of class, suspension and withdrawal</li></ul></div>
-      <div class="pp-step"><b>5. Why compliance with class rules is now mentioned in SOLAS chapter II-1</b><ul><li>regulation II-1/3-1</li><li>SOLAS never contained scantling rules</li><li>class was commercially vital but legally optional</li><li>now designed, constructed AND maintained</li><li>loss of class is a SOLAS non-compliance</li><li>enforceable by flag and port State</li><li>national standards of equivalent safety permitted</li><li>links to goal-based standards under II-1/3-10</li></ul></div>
-      <div class="pp-step"><b>6. The harmonized system, and where these surveys sit</b><ul><li>1988 SOLAS and Load Lines Protocols</li><li>common five-year cycle and anniversary dates</li><li>three months either side window</li><li>surveys combined into one attendance</li><li>guidelines at this sitting - A.1186(33), revoking A.1156(32)</li></ul></div>
-      <div class="pp-step"><b>7. Annual versus periodical - the difference and the relevance</b><ul><li>annual - each anniversary, visual, no unapproved modification</li><li>periodical - only Safety Equipment and Safety Radio</li><li>Equipment at second or third anniversary, replacing an annual</li><li>Radio at every anniversary</li><li>periodical is inspection with tests</li><li>a five-year certificate needs mid-cycle checkpoints</li><li>equipment is consumed in a way structure is not</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">

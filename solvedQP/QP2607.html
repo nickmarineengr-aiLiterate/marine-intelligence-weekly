@@ -267,7 +267,7 @@
   .plan-lead{margin:0 0 8px;font-size:13.5px;}
   .plan-limb{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;margin-top:8px;}
   .plan-list{margin:4px 0 0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;}
-  .plan-list li{margin:4px 0;}
+  .plan-list li{margin:9px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
   .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
@@ -275,11 +275,11 @@
   .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
   .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
-  .plan-points{margin-top:9px;font-size:12.5px;}
-  .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
-  .plan-points:focus-within > summary{outline:2px solid var(--orange);outline-offset:2px;}
-  .pp-step{margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;}
-  .pp-step ul{margin:3px 0 0;padding-left:20px;color:var(--grey-text);}
+  .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
+  .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}
+  .pl-t{display:block;}
+  .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;color:var(--grey-text);}
+  .pl-pts li{margin:2px 0;}
 
   /* Recall: blanks first, reveal on demand. */
   .recall{background:#fff;border:1.5px solid var(--teal-dark);padding:0 16px 13px;}
@@ -621,17 +621,18 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">Define FSA and cite the governing instrument</li>
-      <li value="2">The five FSA steps applied to the cargo</li>
-      <li value="3">Where FSA applies, and the shipboard analogue</li>
+      <li value="1"><span class="pl-t">Define FSA and cite the governing instrument</span><ul class="pl-pts"><li>structured, systematic methodology</li><li>MSC-MEPC.2/Circ.12/Rev.2</li><li>enhances safety including the environment</li><li>uses risk analysis and cost-benefit</li></ul></li>
+      <li value="2"><span class="pl-t">The five FSA steps applied to the cargo</span><ul class="pl-pts"><li>hazard identification</li><li>risk analysis</li><li>risk control options</li><li>cost-benefit assessment</li><li>recommendations for decision-making</li></ul></li>
+      <li value="3"><span class="pl-t">Where FSA applies, and the shipboard analogue</span><ul class="pl-pts"><li>a rule-development tool, not a ship tool</li><li>applied by States and IMO committees (para 1.3.1)</li><li>IMO used it for bulk carrier safety</li><li>shipboard analogue is ISM 1.2.2.2</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="4">Before loading</li>
-      <li value="5">During loading</li>
-      <li value="6">Voyage monitoring</li>
+      <li value="4"><span class="pl-t">Before loading</span><ul class="pl-pts"><li>shipper's declaration, SOLAS VI/2 and IMSBC 4.2</li><li>declared BCSN and its current schedule govern, never the commodity name</li><li>IRON ORE, FINES, PELLETS and DRI (B) are separate schedules</li><li>holds clean and dry, bilges proved</li><li>hatch covers weathertight</li></ul></li>
+      <li value="5"><span class="pl-t">During loading</span><ul class="pl-pts"><li>approved loading sequence</li><li>shear force and bending moment on the loading instrument</li><li>tank-top strength limit</li><li>BLU Code and trimming</li><li>watch for excessive GM and a stiff ship</li></ul></li>
+      <li value="6"><span class="pl-t">Voyage monitoring</span><ul class="pl-pts"><li>hold bilge soundings at SMS frequency</li><li>SOLAS XII/12 water ingress alarms</li><li>weather routeing, avoid slamming</li><li>enclosed space entry precautions</li><li>record everything</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Part (b) is simply before, during, after: BEFORE LOADING (4) - DURING LOADING (5) - VOYAGE (6).</p>
     <div class="plan-cov">
@@ -639,14 +640,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>28</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 28 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Define FSA and cite the governing instrument</b><ul><li>structured, systematic methodology</li><li>MSC-MEPC.2/Circ.12/Rev.2</li><li>enhances safety including the environment</li><li>uses risk analysis and cost-benefit</li></ul></div>
-      <div class="pp-step"><b>2. The five FSA steps applied to the cargo</b><ul><li>hazard identification</li><li>risk analysis</li><li>risk control options</li><li>cost-benefit assessment</li><li>recommendations for decision-making</li></ul></div>
-      <div class="pp-step"><b>3. Where FSA applies, and the shipboard analogue</b><ul><li>a rule-development tool, not a ship tool</li><li>applied by States and IMO committees (para 1.3.1)</li><li>IMO used it for bulk carrier safety</li><li>shipboard analogue is ISM 1.2.2.2</li></ul></div>
-      <div class="pp-step"><b>4. Before loading</b><ul><li>shipper's declaration, SOLAS VI/2 and IMSBC 4.2</li><li>declared BCSN and its current schedule govern, never the commodity name</li><li>IRON ORE, FINES, PELLETS and DRI (B) are separate schedules</li><li>holds clean and dry, bilges proved</li><li>hatch covers weathertight</li></ul></div>
-      <div class="pp-step"><b>5. During loading</b><ul><li>approved loading sequence</li><li>shear force and bending moment on the loading instrument</li><li>tank-top strength limit</li><li>BLU Code and trimming</li><li>watch for excessive GM and a stiff ship</li></ul></div>
-      <div class="pp-step"><b>6. Voyage monitoring</b><ul><li>hold bilge soundings at SMS frequency</li><li>SOLAS XII/12 water ingress alarms</li><li>weather routeing, avoid slamming</li><li>enclosed space entry precautions</li><li>record everything</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -885,13 +878,14 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Immediate action and containment</li>
-      <li value="2">Critical documentation</li>
-      <li value="3">Mandatory reporting</li>
-      <li value="4">Cooperation with investigators</li>
-      <li value="5">Liabilities to guard against</li>
-      <li value="6">Post-incident corrective action</li>
+      <li value="1"><span class="pl-t">Immediate action and containment</span><ul class="pl-pts"><li>stop the transfer</li><li>raise the alarm and muster</li><li>close valves and isolate</li><li>deploy SOPEP containment</li><li>find and stop the cause</li></ul></li>
+      <li value="2"><span class="pl-t">Critical documentation</span><ul class="pl-pts"><li>Oil Record Book parts (G) and (H)</li><li>bunker delivery note and samples</li><li>tank soundings before and after</li><li>alarm and monitoring logs</li><li>never overwrite or backdate</li></ul></li>
+      <li value="3"><span class="pl-t">Mandatory reporting</span><ul class="pl-pts"><li>coastal State by its designated system</li><li>MARPOL art. 8 and Protocol I</li><li>Res. A.851(20) reporting format</li><li>SOPEP under reg 37</li><li>notify company, flag, class and P&amp;I</li></ul></li>
+      <li value="4"><span class="pl-t">Cooperation with investigators</span><ul class="pl-pts"><li>Casualty Investigation Code threshold applies</li><li>facts only, no speculation</li><li>no admission of liability</li><li>fair treatment of seafarers, LEG.3(91)</li></ul></li>
+      <li value="5"><span class="pl-t">Liabilities to guard against</span><ul class="pl-pts"><li>Bunkers Convention: shipowner widely defined</li><li>compulsory insurance on the registered owner</li><li>CLC applies only if CLC ship and persistent oil</li><li>administrative and criminal exposure</li></ul></li>
+      <li value="6"><span class="pl-t">Post-incident corrective action</span><ul class="pl-pts"><li>ISM element 9 report and analyse</li><li>root cause, not just the immediate cause</li><li>corrective action and close-out</li><li>amend procedures and re-brief</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Follow the incident in real time: STOP and CONTAIN (1) - RECORD (2) - REPORT (3) - COOPERATE (4) - LIABILITY (5) - PREVENT (6). Six anchors for six sections; stopping and containing are both section 1.</p>
     <div class="plan-cov">
@@ -899,14 +893,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>27</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 27 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Immediate action and containment</b><ul><li>stop the transfer</li><li>raise the alarm and muster</li><li>close valves and isolate</li><li>deploy SOPEP containment</li><li>find and stop the cause</li></ul></div>
-      <div class="pp-step"><b>2. Critical documentation</b><ul><li>Oil Record Book parts (G) and (H)</li><li>bunker delivery note and samples</li><li>tank soundings before and after</li><li>alarm and monitoring logs</li><li>never overwrite or backdate</li></ul></div>
-      <div class="pp-step"><b>3. Mandatory reporting</b><ul><li>coastal State by its designated system</li><li>MARPOL art. 8 and Protocol I</li><li>Res. A.851(20) reporting format</li><li>SOPEP under reg 37</li><li>notify company, flag, class and P&amp;I</li></ul></div>
-      <div class="pp-step"><b>4. Cooperation with investigators</b><ul><li>Casualty Investigation Code threshold applies</li><li>facts only, no speculation</li><li>no admission of liability</li><li>fair treatment of seafarers, LEG.3(91)</li></ul></div>
-      <div class="pp-step"><b>5. Liabilities to guard against</b><ul><li>Bunkers Convention: shipowner widely defined</li><li>compulsory insurance on the registered owner</li><li>CLC applies only if CLC ship and persistent oil</li><li>administrative and criminal exposure</li></ul></div>
-      <div class="pp-step"><b>6. Post-incident corrective action</b><ul><li>ISM element 9 report and analyse</li><li>root cause, not just the immediate cause</li><li>corrective action and close-out</li><li>amend procedures and re-brief</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1159,31 +1145,24 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">What IACS is and how it is structured</li>
-      <li value="2">UR, UI and PR - what each is and its effect</li>
-      <li value="3">Significance to owners and operators</li>
+      <li value="1"><span class="pl-t">What IACS is and how it is structured</span><ul class="pl-pts"><li>non-governmental association of class societies</li><li>IMO consultative status</li><li>Council, GPG, Panels, Secretariat</li><li>members must meet the Quality System Certification Scheme</li></ul></li>
+      <li value="2"><span class="pl-t">UR, UI and PR - what each is and its effect</span><ul class="pl-pts"><li>UR: minimum technical requirement, a floor</li><li>UI: common interpretation of an IMO instrument</li><li>PR: procedural requirement for how members work</li><li>members implement in their own rules by a set date</li></ul></li>
+      <li value="3"><span class="pl-t">Significance to owners and operators</span><ul class="pl-pts"><li>a predictable technical floor whoever classes the ship</li><li>no shopping for materially softer rules</li><li>consistency at port State control</li><li>orderly transfer of class</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="4">What a Recognized Organization is</li>
-      <li value="5">The RO Code and its salient features</li>
-      <li value="6">How Administrations monitor ROs</li>
+      <li value="4"><span class="pl-t">What a Recognized Organization is</span><ul class="pl-pts"><li>acts for a flag Administration</li><li>statutory certification and survey</li><li>delegation of function, never of responsibility</li><li>class society and RO are not synonyms</li></ul></li>
+      <li value="5"><span class="pl-t">The RO Code and its salient features</span><ul class="pl-pts"><li>MSC.349(92) and MEPC.237(65)</li><li>Part 1 general, Part 2 recognition and authorization, Part 3 oversight</li><li>mandatory under SOLAS, MARPOL and Load Lines</li></ul></li>
+      <li value="6"><span class="pl-t">How Administrations monitor ROs</span><ul class="pl-pts"><li>written authorization agreement defining scope</li><li>initial assessment and periodic audit</li><li>surveyor qualification verified</li><li>PSC detention performance monitored</li><li>authority can be limited or withdrawn</li><li>IMSAS audits the Administration</li></ul></li>
     </ol>
     <div class="plan-cov">
       <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>6</b> route headings</span></div>
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>25</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 25 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What IACS is and how it is structured</b><ul><li>non-governmental association of class societies</li><li>IMO consultative status</li><li>Council, GPG, Panels, Secretariat</li><li>members must meet the Quality System Certification Scheme</li></ul></div>
-      <div class="pp-step"><b>2. UR, UI and PR - what each is and its effect</b><ul><li>UR: minimum technical requirement, a floor</li><li>UI: common interpretation of an IMO instrument</li><li>PR: procedural requirement for how members work</li><li>members implement in their own rules by a set date</li></ul></div>
-      <div class="pp-step"><b>3. Significance to owners and operators</b><ul><li>a predictable technical floor whoever classes the ship</li><li>no shopping for materially softer rules</li><li>consistency at port State control</li><li>orderly transfer of class</li></ul></div>
-      <div class="pp-step"><b>4. What a Recognized Organization is</b><ul><li>acts for a flag Administration</li><li>statutory certification and survey</li><li>delegation of function, never of responsibility</li><li>class society and RO are not synonyms</li></ul></div>
-      <div class="pp-step"><b>5. The RO Code and its salient features</b><ul><li>MSC.349(92) and MEPC.237(65)</li><li>Part 1 general, Part 2 recognition and authorization, Part 3 oversight</li><li>mandatory under SOLAS, MARPOL and Load Lines</li></ul></div>
-      <div class="pp-step"><b>6. How Administrations monitor ROs</b><ul><li>written authorization agreement defining scope</li><li>initial assessment and periodic audit</li><li>surveyor qualification verified</li><li>PSC detention performance monitored</li><li>authority can be limited or withdrawn</li><li>IMSAS audits the Administration</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1411,15 +1390,16 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Establish the entry point and the applicable limit</li>
-      <li value="2">Calculate the changeover and start early enough</li>
-      <li value="3">Tank segregation and compatibility</li>
-      <li value="4">Engines</li>
-      <li value="5">Boilers</li>
-      <li value="6">Records</li>
-      <li value="7">Contingency</li>
-      <li value="8">Statutes and instruments involved</li>
+      <li value="1"><span class="pl-t">Establish the entry point and the applicable limit</span><ul class="pl-pts"><li>identify the ECA and its boundary</li><li>ECA limit 0.10% m/m sulphur</li><li>global limit 0.50% outside</li><li>plan from the passage plan, not on sight of land</li></ul></li>
+      <li value="2"><span class="pl-t">Calculate the changeover and start early enough</span><ul class="pl-pts"><li>flushing volume of the whole system</li><li>consumption rate at sea speed</li><li>begin well before the boundary</li><li>complete before entering</li></ul></li>
+      <li value="3"><span class="pl-t">Tank segregation and compatibility</span><ul class="pl-pts"><li>separate tanks and lines for each grade</li><li>compatibility test before commingling</li><li>avoid sludge and asphaltene precipitation</li><li>plan quantities so neither grade runs short</li></ul></li>
+      <li value="4"><span class="pl-t">Engines</span><ul class="pl-pts"><li>gradual temperature ramp, maker limits</li><li>viscosity within injector range</li><li>avoid thermal shock to pumps and injectors</li><li>watch fuel pump index and leak-off</li></ul></li>
+      <li value="5"><span class="pl-t">Boilers</span><ul class="pl-pts"><li>atomising pressure and temperature reset</li><li>burner tip size and condition</li><li>watch for flame instability</li></ul></li>
+      <li value="6"><span class="pl-t">Records</span><ul class="pl-pts"><li>reg 14.6 logbook entry: date, time, position, tank quantities</li><li>bunker delivery notes retained</li><li>MARPOL sample retained</li></ul></li>
+      <li value="7"><span class="pl-t">Contingency</span><ul class="pl-pts"><li>FONAR if compliant fuel unavailable</li><li>equivalent arrangements under reg 4</li><li>report to flag and port State</li></ul></li>
+      <li value="8"><span class="pl-t">Statutes and instruments involved</span><ul class="pl-pts"><li>MARPOL Annex VI reg 14</li><li>reg 14.6 record requirement</li><li>reg 4 equivalents</li><li>SEEMP and the SMS procedure</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Follow the fuel: WHERE (1) - WHEN (2) - TANKS (3) - ENGINES (4) - BOILERS (5) - RECORDS (6) - WHAT IF (7), then cite the instruments (8).</p>
     <div class="plan-cov">
@@ -1427,16 +1407,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>29</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 29 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Establish the entry point and the applicable limit</b><ul><li>identify the ECA and its boundary</li><li>ECA limit 0.10% m/m sulphur</li><li>global limit 0.50% outside</li><li>plan from the passage plan, not on sight of land</li></ul></div>
-      <div class="pp-step"><b>2. Calculate the changeover and start early enough</b><ul><li>flushing volume of the whole system</li><li>consumption rate at sea speed</li><li>begin well before the boundary</li><li>complete before entering</li></ul></div>
-      <div class="pp-step"><b>3. Tank segregation and compatibility</b><ul><li>separate tanks and lines for each grade</li><li>compatibility test before commingling</li><li>avoid sludge and asphaltene precipitation</li><li>plan quantities so neither grade runs short</li></ul></div>
-      <div class="pp-step"><b>4. Engines</b><ul><li>gradual temperature ramp, maker limits</li><li>viscosity within injector range</li><li>avoid thermal shock to pumps and injectors</li><li>watch fuel pump index and leak-off</li></ul></div>
-      <div class="pp-step"><b>5. Boilers</b><ul><li>atomising pressure and temperature reset</li><li>burner tip size and condition</li><li>watch for flame instability</li></ul></div>
-      <div class="pp-step"><b>6. Records</b><ul><li>reg 14.6 logbook entry: date, time, position, tank quantities</li><li>bunker delivery notes retained</li><li>MARPOL sample retained</li></ul></div>
-      <div class="pp-step"><b>7. Contingency</b><ul><li>FONAR if compliant fuel unavailable</li><li>equivalent arrangements under reg 4</li><li>report to flag and port State</li></ul></div>
-      <div class="pp-step"><b>8. Statutes and instruments involved</b><ul><li>MARPOL Annex VI reg 14</li><li>reg 14.6 record requirement</li><li>reg 4 equivalents</li><li>SEEMP and the SMS procedure</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1671,25 +1641,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Particular Average</li>
-      <li value="2">General Average, and how it differs</li>
-      <li value="3">When General Average may be declared</li>
-      <li value="4">Average adjusters and their role</li>
-      <li value="5">Which rules actually apply</li>
+      <li value="1"><span class="pl-t">Particular Average</span><ul class="pl-pts"><li>a partial loss</li><li>accidental, by a peril insured against</li><li>not a general average loss</li><li>falls solely on the interest damaged</li></ul></li>
+      <li value="2"><span class="pl-t">General Average, and how it differs</span><ul class="pl-pts"><li>extraordinary sacrifice or expenditure</li><li>intentional and reasonable</li><li>in time of peril, for the common safety</li><li>shared rateably by all interests</li><li>Marine Insurance Act 1963 s.66</li></ul></li>
+      <li value="3"><span class="pl-t">When General Average may be declared</span><ul class="pl-pts"><li>York-Antwerp Rule A elements must all be present</li><li>peril must be real, not merely feared</li><li>the act must be deliberate</li><li>the sacrifice must be extraordinary</li><li>the adventure must be preserved</li></ul></li>
+      <li value="4"><span class="pl-t">Average adjusters and their role</span><ul class="pl-pts"><li>secure the general average bond and guarantee</li><li>allow or disallow claimed sacrifices</li><li>apportion contribution across the interests</li><li>independent and impartial</li><li>the adjuster does NOT declare GA - the shipowner does</li></ul></li>
+      <li value="5"><span class="pl-t">Which rules actually apply</span><ul class="pl-pts"><li>York-Antwerp Rules are not law</li><li>contractual only, when incorporated</li><li>the bill of lading or charterparty names the edition</li><li>YAR 2016 adopted by the CMI</li></ul></li>
     </ol>
     <div class="plan-cov">
       <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>5</b> route headings</span></div>
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>23</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 23 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Particular Average</b><ul><li>a partial loss</li><li>accidental, by a peril insured against</li><li>not a general average loss</li><li>falls solely on the interest damaged</li></ul></div>
-      <div class="pp-step"><b>2. General Average, and how it differs</b><ul><li>extraordinary sacrifice or expenditure</li><li>intentional and reasonable</li><li>in time of peril, for the common safety</li><li>shared rateably by all interests</li><li>Marine Insurance Act 1963 s.66</li></ul></div>
-      <div class="pp-step"><b>3. When General Average may be declared</b><ul><li>York-Antwerp Rule A elements must all be present</li><li>peril must be real, not merely feared</li><li>the act must be deliberate</li><li>the sacrifice must be extraordinary</li><li>the adventure must be preserved</li></ul></div>
-      <div class="pp-step"><b>4. Average adjusters and their role</b><ul><li>secure the general average bond and guarantee</li><li>allow or disallow claimed sacrifices</li><li>apportion contribution across the interests</li><li>independent and impartial</li><li>the adjuster does NOT declare GA - the shipowner does</li></ul></div>
-      <div class="pp-step"><b>5. Which rules actually apply</b><ul><li>York-Antwerp Rules are not law</li><li>contractual only, when incorporated</li><li>the bill of lading or charterparty names the edition</li><li>YAR 2016 adopted by the CMI</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1910,25 +1874,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Qualify "zero-carbon" before evaluating</li>
-      <li value="2">Evaluation - the case for and against</li>
-      <li value="3">Safety, toxicity and storage</li>
-      <li value="4">Combustion: IC engines versus fuel cells</li>
-      <li value="5">Regulatory status - state it carefully</li>
+      <li value="1"><span class="pl-t">Qualify "zero-carbon" before evaluating</span><ul class="pl-pts"><li>no carbon in the molecule, so no CO2 from combustion</li><li>lifecycle depends on the production pathway</li><li>green only if renewable hydrogen is used</li><li>N2O and ammonia slip are still emissions</li></ul></li>
+      <li value="2"><span class="pl-t">Evaluation - the case for and against</span><ul class="pl-pts"><li>high hydrogen density by volume, no carbon</li><li>established production and handling industry</li><li>low energy density per unit volume vs fuel oil</li><li>large bunker tanks displace cargo</li></ul></li>
+      <li value="3"><span class="pl-t">Safety, toxicity and storage</span><ul class="pl-pts"><li>toxicity dominates the risk case, not flammability</li><li>refrigerated or pressurised containment</li><li>material compatibility, copper alloys attacked</li><li>gas detection, water spray, citadel and escape sets</li></ul></li>
+      <li value="4"><span class="pl-t">Combustion: IC engines versus fuel cells</span><ul class="pl-pts"><li>ammonia burns poorly, needs a pilot fuel</li><li>unburnt ammonia slip and N2O in the engine case</li><li>fuel cells give higher efficiency and no flame</li><li>fuel cell power and marine maturity remain limited</li></ul></li>
+      <li value="5"><span class="pl-t">Regulatory status - state it carefully</span><ul class="pl-pts"><li>MSC.1/Circ.1687 interim guidelines are NON-mandatory</li><li>IGF Code prescriptive text written for natural gas</li><li>approval via SOLAS II-1/55 alternative design</li><li>do not describe the interim guidelines as IGF Code text</li></ul></li>
     </ol>
     <div class="plan-cov">
       <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>5</b> route headings</span></div>
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>20</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 20 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Qualify "zero-carbon" before evaluating</b><ul><li>no carbon in the molecule, so no CO2 from combustion</li><li>lifecycle depends on the production pathway</li><li>green only if renewable hydrogen is used</li><li>N2O and ammonia slip are still emissions</li></ul></div>
-      <div class="pp-step"><b>2. Evaluation - the case for and against</b><ul><li>high hydrogen density by volume, no carbon</li><li>established production and handling industry</li><li>low energy density per unit volume vs fuel oil</li><li>large bunker tanks displace cargo</li></ul></div>
-      <div class="pp-step"><b>3. Safety, toxicity and storage</b><ul><li>toxicity dominates the risk case, not flammability</li><li>refrigerated or pressurised containment</li><li>material compatibility, copper alloys attacked</li><li>gas detection, water spray, citadel and escape sets</li></ul></div>
-      <div class="pp-step"><b>4. Combustion: IC engines versus fuel cells</b><ul><li>ammonia burns poorly, needs a pilot fuel</li><li>unburnt ammonia slip and N2O in the engine case</li><li>fuel cells give higher efficiency and no flame</li><li>fuel cell power and marine maturity remain limited</li></ul></div>
-      <div class="pp-step"><b>5. Regulatory status - state it carefully</b><ul><li>MSC.1/Circ.1687 interim guidelines are NON-mandatory</li><li>IGF Code prescriptive text written for natural gas</li><li>approval via SOLAS II-1/55 alternative design</li><li>do not describe the interim guidelines as IGF Code text</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2151,25 +2109,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">What the Act is</li>
-      <li value="2">Trade and tonnage expansion</li>
-      <li value="3">Attracting foreign investment</li>
-      <li value="4">Alignment with global practice</li>
-      <li value="5">Assessment - law versus expectation</li>
+      <li value="1"><span class="pl-t">What the Act is</span><ul class="pl-pts"><li>Act No. 24 of 2025, assent 18 August 2025</li><li>whole Act in force 15 March 2026 by S.O. 1244(E)</li><li>325 sections in 16 Parts</li><li>s.324(1) repeals the 1958 Act and the 1838 Act</li></ul></li>
+      <li value="2"><span class="pl-t">Trade and tonnage expansion</span><ul class="pl-pts"><li>s.15(1) ownership widened to NRIs and OCIs</li><li>s.16 bareboat charter-cum-demise registration</li><li>s.17 temporary registration for recycling</li><li>broader vessel coverage</li></ul></li>
+      <li value="3"><span class="pl-t">Attracting foreign investment</span><ul class="pl-pts"><li>wider ownership base</li><li>recognition of chartered-in tonnage</li><li>provisional and temporary registration routes</li><li>detail moved to rules, so the regime can be updated administratively</li></ul></li>
+      <li value="4"><span class="pl-t">Alignment with global practice</span><ul class="pl-pts"><li>long title: compliance with treaties India is party to</li><li>MLC 2006 referred to in the Act</li><li>s.59 minimum age sixteen</li><li>safety, security and pollution provisions modernised</li></ul></li>
+      <li value="5"><span class="pl-t">Assessment - law versus expectation</span><ul class="pl-pts"><li>what the Act legally does</li><li>what Government expects it to achieve</li><li>tonnage and investment are objectives, not guarantees</li><li>a necessary condition, not a sufficient one</li></ul></li>
     </ol>
     <div class="plan-cov">
       <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>5</b> route headings</span></div>
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>20</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 20 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What the Act is</b><ul><li>Act No. 24 of 2025, assent 18 August 2025</li><li>whole Act in force 15 March 2026 by S.O. 1244(E)</li><li>325 sections in 16 Parts</li><li>s.324(1) repeals the 1958 Act and the 1838 Act</li></ul></div>
-      <div class="pp-step"><b>2. Trade and tonnage expansion</b><ul><li>s.15(1) ownership widened to NRIs and OCIs</li><li>s.16 bareboat charter-cum-demise registration</li><li>s.17 temporary registration for recycling</li><li>broader vessel coverage</li></ul></div>
-      <div class="pp-step"><b>3. Attracting foreign investment</b><ul><li>wider ownership base</li><li>recognition of chartered-in tonnage</li><li>provisional and temporary registration routes</li><li>detail moved to rules, so the regime can be updated administratively</li></ul></div>
-      <div class="pp-step"><b>4. Alignment with global practice</b><ul><li>long title: compliance with treaties India is party to</li><li>MLC 2006 referred to in the Act</li><li>s.59 minimum age sixteen</li><li>safety, security and pollution provisions modernised</li></ul></div>
-      <div class="pp-step"><b>5. Assessment - law versus expectation</b><ul><li>what the Act legally does</li><li>what Government expects it to achieve</li><li>tonnage and investment are objectives, not guarantees</li><li>a necessary condition, not a sufficient one</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2399,31 +2351,24 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">Competence defined</li>
-      <li value="2">Performance defined</li>
-      <li value="3">Why competence does not guarantee performance</li>
-      <li value="4">What ongoing training and drills do</li>
+      <li value="1"><span class="pl-t">Competence defined</span><ul class="pl-pts"><li>demonstrated ability to a defined standard</li><li>assessed against stated criteria</li><li>STCW Code part A competence tables</li></ul></li>
+      <li value="2"><span class="pl-t">Performance defined</span><ul class="pl-pts"><li>what the seafarer actually does in the real situation</li><li>at 0300, fatigued, incomplete alarm picture</li><li>in a team that may not have worked together</li></ul></li>
+      <li value="3"><span class="pl-t">Why competence does not guarantee performance</span><ul class="pl-pts"><li>fatigue and hours of rest</li><li>workload and manning level</li><li>leadership and command climate</li><li>communication and language</li><li>stress and time pressure</li></ul></li>
+      <li value="4"><span class="pl-t">What ongoing training and drills do</span><ul class="pl-pts"><li>ISM element 8 requires drill programmes</li><li>builds near-automatic response under stress</li><li>surfaces latent defects in equipment and procedure</li><li>maintains rarely used skills</li><li>ISM element 9 closes the loop</li><li>a drill recorded but not conducted proves nothing</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">Automation - positive and negative effects</li>
-      <li value="6">The IMO human-element framework</li>
+      <li value="5"><span class="pl-t">Automation - positive and negative effects</span><ul class="pl-pts"><li>reduces workload and routine error</li><li>improves monitoring and data capture</li><li>skill fade and over-reliance</li><li>automation surprise and mode confusion</li><li>degraded situational awareness</li></ul></li>
+      <li value="6"><span class="pl-t">The IMO human-element framework</span><ul class="pl-pts"><li>resolution A.947(23)</li><li>human-centred design</li><li>training matched to the equipment fitted</li><li>honest reporting culture</li></ul></li>
     </ol>
     <div class="plan-cov">
       <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>6</b> route headings</span></div>
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>26</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 26 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Competence defined</b><ul><li>demonstrated ability to a defined standard</li><li>assessed against stated criteria</li><li>STCW Code part A competence tables</li></ul></div>
-      <div class="pp-step"><b>2. Performance defined</b><ul><li>what the seafarer actually does in the real situation</li><li>at 0300, fatigued, incomplete alarm picture</li><li>in a team that may not have worked together</li></ul></div>
-      <div class="pp-step"><b>3. Why competence does not guarantee performance</b><ul><li>fatigue and hours of rest</li><li>workload and manning level</li><li>leadership and command climate</li><li>communication and language</li><li>stress and time pressure</li></ul></div>
-      <div class="pp-step"><b>4. What ongoing training and drills do</b><ul><li>ISM element 8 requires drill programmes</li><li>builds near-automatic response under stress</li><li>surfaces latent defects in equipment and procedure</li><li>maintains rarely used skills</li><li>ISM element 9 closes the loop</li><li>a drill recorded but not conducted proves nothing</li></ul></div>
-      <div class="pp-step"><b>5. Automation - positive and negative effects</b><ul><li>reduces workload and routine error</li><li>improves monitoring and data capture</li><li>skill fade and over-reliance</li><li>automation surprise and mode confusion</li><li>degraded situational awareness</li></ul></div>
-      <div class="pp-step"><b>6. The IMO human-element framework</b><ul><li>resolution A.947(23)</li><li>human-centred design</li><li>training matched to the equipment fitted</li><li>honest reporting culture</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2639,25 +2584,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The governing statute</li>
-      <li value="2">The principle of Uberrimae Fidei</li>
-      <li value="3">Disclosures the assured must make</li>
-      <li value="4">Circumstances which need NOT be disclosed</li>
-      <li value="5">Effect of non-disclosure</li>
+      <li value="1"><span class="pl-t">The governing statute</span><ul class="pl-pts"><li>Indian examination, so the Marine Insurance Act 1963</li><li>follows the English 1906 Act but is the one to cite</li><li>the UK Insurance Act 2015 reform does not apply</li></ul></li>
+      <li value="2"><span class="pl-t">The principle of Uberrimae Fidei</span><ul class="pl-pts"><li>s.19 - utmost good faith</li><li>mutual, binding on both parties</li><li>applies before the contract is concluded</li><li>remedy is avoidance by the other party</li></ul></li>
+      <li value="3"><span class="pl-t">Disclosures the assured must make</span><ul class="pl-pts"><li>s.20 - every material circumstance known</li><li>material = would influence a prudent insurer</li><li>deemed knowledge in the ordinary course of business</li><li>s.21 agent, s.22 representations</li></ul></li>
+      <li value="4"><span class="pl-t">Circumstances which need NOT be disclosed</span><ul class="pl-pts"><li>s.20(3), in the absence of enquiry</li><li>circumstances diminishing the risk</li><li>matters known or presumed known to the insurer</li><li>matters waived by the insurer</li><li>matters covered by an express or implied warranty</li></ul></li>
+      <li value="5"><span class="pl-t">Effect of non-disclosure</span><ul class="pl-pts"><li>insurer may avoid the contract</li><li>avoidance is ab initio</li><li>the contract is voidable, not void</li><li>premium normally returnable</li><li>need not be fraudulent to found avoidance</li></ul></li>
     </ol>
     <div class="plan-cov">
       <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>5</b> route headings</span></div>
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>21</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 21 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The governing statute</b><ul><li>Indian examination, so the Marine Insurance Act 1963</li><li>follows the English 1906 Act but is the one to cite</li><li>the UK Insurance Act 2015 reform does not apply</li></ul></div>
-      <div class="pp-step"><b>2. The principle of Uberrimae Fidei</b><ul><li>s.19 - utmost good faith</li><li>mutual, binding on both parties</li><li>applies before the contract is concluded</li><li>remedy is avoidance by the other party</li></ul></div>
-      <div class="pp-step"><b>3. Disclosures the assured must make</b><ul><li>s.20 - every material circumstance known</li><li>material = would influence a prudent insurer</li><li>deemed knowledge in the ordinary course of business</li><li>s.21 agent, s.22 representations</li></ul></div>
-      <div class="pp-step"><b>4. Circumstances which need NOT be disclosed</b><ul><li>s.20(3), in the absence of enquiry</li><li>circumstances diminishing the risk</li><li>matters known or presumed known to the insurer</li><li>matters waived by the insurer</li><li>matters covered by an express or implied warranty</li></ul></div>
-      <div class="pp-step"><b>5. Effect of non-disclosure</b><ul><li>insurer may avoid the contract</li><li>avoidance is ab initio</li><li>the contract is voidable, not void</li><li>premium normally returnable</li><li>need not be fraudulent to found avoidance</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">

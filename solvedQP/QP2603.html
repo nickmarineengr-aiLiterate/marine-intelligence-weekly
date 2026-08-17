@@ -267,7 +267,7 @@
   .plan-lead{margin:0 0 8px;font-size:13.5px;}
   .plan-limb{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;margin-top:8px;}
   .plan-list{margin:4px 0 0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;}
-  .plan-list li{margin:4px 0;}
+  .plan-list li{margin:9px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
   .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
@@ -275,11 +275,11 @@
   .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
   .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
-  .plan-points{margin-top:9px;font-size:12.5px;}
-  .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
-  .plan-points:focus-within > summary{outline:2px solid var(--orange);outline-offset:2px;}
-  .pp-step{margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;}
-  .pp-step ul{margin:3px 0 0;padding-left:20px;color:var(--grey-text);}
+  .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
+  .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}
+  .pl-t{display:block;}
+  .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;color:var(--grey-text);}
+  .pl-pts li{margin:2px 0;}
 
   /* Recall: blanks first, reveal on demand. */
   .recall{background:#fff;border:1.5px solid var(--teal-dark);padding:0 16px 13px;}
@@ -621,13 +621,14 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Adoption is not entry into force</li>
-      <li value="2">How a State expresses consent to be bound</li>
-      <li value="3">The two terms the question names</li>
-      <li value="4">The entry into force provision, and why it matters</li>
-      <li value="5">Conventions of an important technical nature</li>
-      <li value="6">Keeping the convention current once in force</li>
+      <li value="1"><span class="pl-t">Adoption is not entry into force</span><ul class="pl-pts"><li>adopted by an IMO organ or a diplomatic conference</li><li>adoption settles the text, nothing more</li><li>no State is bound by adoption alone</li><li>the text is opened for signature and deposited</li></ul></li>
+      <li value="2"><span class="pl-t">How a State expresses consent to be bound</span><ul class="pl-pts"><li>signature alone, where the treaty so provides</li><li>signature subject to ratification, acceptance or approval</li><li>accession, after the signature period closes</li><li>a formal instrument deposited with the Secretary-General</li><li>the depositary counts and notifies</li></ul></li>
+      <li value="3"><span class="pl-t">The two terms the question names</span><ul class="pl-pts"><li>(ii) signature subject to ratification - signature does not bind</li><li>time to legislate and satisfy constitutional requirements</li><li>acceptance and approval - same effect, less formal, VCLT Art 14(2)</li><li>(i) accession - one step, no prior signature, VCLT Art 15</li><li>identical legal effect once deposited</li></ul></li>
+      <li value="4"><span class="pl-t">The entry into force provision, and why it matters</span><ul class="pl-pts"><li>every convention carries its own final clause</li><li>a threshold of acceptances plus a waiting period</li><li>prevents an instrument binding a few States only</li><li>gives certainty of the date obligations begin</li><li>allows domestic law and survey regimes to be ready</li></ul></li>
+      <li value="5"><span class="pl-t">Conventions of an important technical nature</span><ul class="pl-pts"><li>a double condition - number of States and tonnage</li><li>SOLAS 1974 - 25 States and 50% of world gross tonnage</li><li>1978 MARPOL Protocol - 15 States and 50%</li><li>tonnage ensures the major fleets are inside</li><li>then a further period, commonly twelve months</li></ul></li>
+      <li value="6"><span class="pl-t">Keeping the convention current once in force</span><ul class="pl-pts"><li>explicit amendment proved unworkable - 1960 SOLAS</li><li>tacit acceptance - deemed accepted unless objected to</li><li>SOLAS - two years, one-third of Governments or 50% tonnage</li><li>amendments now in force in about 18 to 24 months</li><li>flag States must then give domestic effect</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Follow one instrument through its life: <b>ADOPT (1) - CONSENT (2) - the two TERMS (3) - THRESHOLD (4) - TONNAGE (5) - AMEND (6)</b>. Two number pairs only: SOLAS 25 and 50%, MARPOL 15 and 50%; then SOLAS amendments at two years, one-third or 50%.</p>
     <div class="plan-cov">
@@ -635,14 +636,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>29</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 29 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Adoption is not entry into force</b><ul><li>adopted by an IMO organ or a diplomatic conference</li><li>adoption settles the text, nothing more</li><li>no State is bound by adoption alone</li><li>the text is opened for signature and deposited</li></ul></div>
-      <div class="pp-step"><b>2. How a State expresses consent to be bound</b><ul><li>signature alone, where the treaty so provides</li><li>signature subject to ratification, acceptance or approval</li><li>accession, after the signature period closes</li><li>a formal instrument deposited with the Secretary-General</li><li>the depositary counts and notifies</li></ul></div>
-      <div class="pp-step"><b>3. The two terms the question names</b><ul><li>(ii) signature subject to ratification - signature does not bind</li><li>time to legislate and satisfy constitutional requirements</li><li>acceptance and approval - same effect, less formal, VCLT Art 14(2)</li><li>(i) accession - one step, no prior signature, VCLT Art 15</li><li>identical legal effect once deposited</li></ul></div>
-      <div class="pp-step"><b>4. The entry into force provision, and why it matters</b><ul><li>every convention carries its own final clause</li><li>a threshold of acceptances plus a waiting period</li><li>prevents an instrument binding a few States only</li><li>gives certainty of the date obligations begin</li><li>allows domestic law and survey regimes to be ready</li></ul></div>
-      <div class="pp-step"><b>5. Conventions of an important technical nature</b><ul><li>a double condition - number of States and tonnage</li><li>SOLAS 1974 - 25 States and 50% of world gross tonnage</li><li>1978 MARPOL Protocol - 15 States and 50%</li><li>tonnage ensures the major fleets are inside</li><li>then a further period, commonly twelve months</li></ul></div>
-      <div class="pp-step"><b>6. Keeping the convention current once in force</b><ul><li>explicit amendment proved unworkable - 1960 SOLAS</li><li>tacit acceptance - deemed accepted unless objected to</li><li>SOLAS - two years, one-third of Governments or 50% tonnage</li><li>amendments now in force in about 18 to 24 months</li><li>flag States must then give domestic effect</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -903,18 +896,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">i)</div>
     <ol class="plan-list">
-      <li value="1">Why roll governs container securing</li>
-      <li value="2">The dynamic failure modes the software assesses</li>
-      <li value="3">What the software does with them</li>
-      <li value="4">How it is used on board</li>
+      <li value="1"><span class="pl-t">Why roll governs container securing</span><ul class="pl-pts"><li>lashings resist transverse acceleration, not the sea directly</li><li>racking, tipping, rod tension and twistlock loads scale with roll</li><li>a stack safe at 15 degrees can fail before 30</li><li>keeping the ship out of excessive roll is itself a securing measure</li></ul></li>
+      <li value="2"><span class="pl-t">The dynamic failure modes the software assesses</span><ul class="pl-pts"><li>parametric rolling - bow flare and wide flat stern vary GM crest to trough</li><li>roll period about twice the encounter period, in head or following seas</li><li>synchronous rolling in beam and quartering seas</li><li>excessive acceleration on a stiff, high-GM ship</li><li>pure loss of stability; surf-riding and broaching</li><li>the five modes of MSC.1/Circ.1627 - interim, not mandatory</li></ul></li>
+      <li value="3"><span class="pl-t">What the software does with them</span><ul class="pl-pts"><li>levels 1 and 2 screen by empirical and simplified criteria</li><li>level 3 direct stability assessment - time-domain simulation</li><li>run across loading conditions, headings, speeds and sea states</li><li>output is operational limitations - GM range, limiting sea state</li><li>and operational guidance - speed against heading polar diagram</li></ul></li>
+      <li value="4"><span class="pl-t">How it is used on board</span><ul class="pl-pts"><li>lashing computer checks forces against CSM permissible values</li><li>stack weight, stack height and GM adjusted until within limits</li><li>decision support drives speed or heading change, MSC.1/Circ.1228</li><li>inputs depend on verified gross mass under SOLAS VI/2</li></ul></li>
     </ol>
     <div class="plan-limb">ii)</div>
     <ol class="plan-list">
-      <li value="5">Status, purpose and approval of the CSM</li>
-      <li value="6">Content of the manual</li>
-      <li value="7">Regulations and codes associated</li>
+      <li value="5"><span class="pl-t">Status, purpose and approval of the CSM</span><ul class="pl-pts"><li>required by SOLAS VI/5 and VII/5</li><li>approved by the Administration, or an RO acting for it</li><li>ship-specific and a mandatory carriage document</li><li>laid out to MSC.1/Circ.1353/Rev.2 so the format is common</li></ul></li>
+      <li value="6"><span class="pl-t">Content of the manual</span><ul class="pl-pts"><li>general - purpose, definitions, application</li><li>fixed and portable securing devices with maximum securing load</li><li>container stowage - lashing patterns, stack weights and heights</li><li>non-standardised and semi-standardised cargo</li><li>evaluation annex harmonised with CSS Code Annex 13</li><li>Cargo Safe Access Plan for container ships</li></ul></li>
+      <li value="7"><span class="pl-t">Regulations and codes associated</span><ul class="pl-pts"><li>SOLAS VI/5, VII/5 and VI/2</li><li>CSS Code A.714(17) with Annexes 13 and 14</li><li>MSC.1/Circ.1353/Rev.2 and MSC.1/Circ.1352/Rev.1</li><li>CSC 1972 for the container's own approval</li><li>IMDG Code, CTU Code, class rules and the ISM Code</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> MOTION (steps 1-4) then MANUAL (5-7). Inside the manual: what gear, where, how much load, and who walks out there.</p>
     <div class="plan-cov">
@@ -922,15 +916,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>34</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 34 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Why roll governs container securing</b><ul><li>lashings resist transverse acceleration, not the sea directly</li><li>racking, tipping, rod tension and twistlock loads scale with roll</li><li>a stack safe at 15 degrees can fail before 30</li><li>keeping the ship out of excessive roll is itself a securing measure</li></ul></div>
-      <div class="pp-step"><b>2. The dynamic failure modes the software assesses</b><ul><li>parametric rolling - bow flare and wide flat stern vary GM crest to trough</li><li>roll period about twice the encounter period, in head or following seas</li><li>synchronous rolling in beam and quartering seas</li><li>excessive acceleration on a stiff, high-GM ship</li><li>pure loss of stability; surf-riding and broaching</li><li>the five modes of MSC.1/Circ.1627 - interim, not mandatory</li></ul></div>
-      <div class="pp-step"><b>3. What the software does with them</b><ul><li>levels 1 and 2 screen by empirical and simplified criteria</li><li>level 3 direct stability assessment - time-domain simulation</li><li>run across loading conditions, headings, speeds and sea states</li><li>output is operational limitations - GM range, limiting sea state</li><li>and operational guidance - speed against heading polar diagram</li></ul></div>
-      <div class="pp-step"><b>4. How it is used on board</b><ul><li>lashing computer checks forces against CSM permissible values</li><li>stack weight, stack height and GM adjusted until within limits</li><li>decision support drives speed or heading change, MSC.1/Circ.1228</li><li>inputs depend on verified gross mass under SOLAS VI/2</li></ul></div>
-      <div class="pp-step"><b>5. Status, purpose and approval of the CSM</b><ul><li>required by SOLAS VI/5 and VII/5</li><li>approved by the Administration, or an RO acting for it</li><li>ship-specific and a mandatory carriage document</li><li>laid out to MSC.1/Circ.1353/Rev.2 so the format is common</li></ul></div>
-      <div class="pp-step"><b>6. Content of the manual</b><ul><li>general - purpose, definitions, application</li><li>fixed and portable securing devices with maximum securing load</li><li>container stowage - lashing patterns, stack weights and heights</li><li>non-standardised and semi-standardised cargo</li><li>evaluation annex harmonised with CSS Code Annex 13</li><li>Cargo Safe Access Plan for container ships</li></ul></div>
-      <div class="pp-step"><b>7. Regulations and codes associated</b><ul><li>SOLAS VI/5, VII/5 and VI/2</li><li>CSS Code A.714(17) with Annexes 13 and 14</li><li>MSC.1/Circ.1353/Rev.2 and MSC.1/Circ.1352/Rev.1</li><li>CSC 1972 for the container's own approval</li><li>IMDG Code, CTU Code, class rules and the ISM Code</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1194,17 +1179,18 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">a)</div>
     <ol class="plan-list">
-      <li value="1">Why war risk is a separate cover</li>
-      <li value="2">Where the cover is written</li>
-      <li value="3">What the cover includes</li>
-      <li value="4">What war cover itself excludes</li>
+      <li value="1"><span class="pl-t">Why war risk is a separate cover</span><ul class="pl-pts"><li>war perils are maritime perils - MIA 1963 s.2(e)</li><li>the ordinary policy excludes them by wording, not by statute</li><li>historically the free of capture and seizure clause</li><li>cover is bought back separately, different market and price</li></ul></li>
+      <li value="2"><span class="pl-t">Where the cover is written</span><ul class="pl-pts"><li>hull war - Institute War and Strikes Clauses (Hulls-Time)</li><li>P&amp;I war - Clubs exclude it; separate excess cover instead</li><li>cargo war - Institute War Clauses (Cargo), while waterborne</li><li>extensions: war loss of hire, crew war bonus, kidnap and ransom</li></ul></li>
+      <li value="3"><span class="pl-t">What the cover includes</span><ul class="pl-pts"><li>war, civil war, revolution, rebellion, insurrection</li><li>capture, seizure, arrest, restraint, detainment</li><li>derelict mines, torpedoes and bombs</li><li>strikes, riots, civil commotions and labour disturbance</li><li>terrorism and malicious or politically motivated acts</li><li>confiscation and expropriation</li><li>blocking and trapping - detention founds a constructive total loss</li></ul></li>
+      <li value="4"><span class="pl-t">What war cover itself excludes</span><ul class="pl-pts"><li>hostile detonation of a nuclear weapon</li><li>war between the major powers - automatic termination</li><li>requisition or pre-emption by the flag State</li><li>ordinary judicial process and financial default</li><li>cyber loss and sanctioned trades</li></ul></li>
     </ol>
     <div class="plan-limb">b)</div>
     <ol class="plan-list">
-      <li value="5">Containing the exposure - area, notice and price</li>
-      <li value="6">Limits, conditions and the Club position</li>
+      <li value="5"><span class="pl-t">Containing the exposure - area, notice and price</span><ul class="pl-pts"><li>Joint War Committee Listed Areas identify the zone</li><li>prior notification and additional war risk premium per transit</li><li>trading warranties - entering without notice is a breach</li><li>cancellation on seven days' notice; automatic termination triggers</li></ul></li>
+      <li value="6"><span class="pl-t">Limits, conditions and the Club position</span><ul class="pl-pts"><li>limits and deductibles per vessel, per event, in aggregate</li><li>routeing, transit windows, convoy, hardening, armed guards</li><li>reinsurance and retrocession to a specialist war market</li><li>sanctions screening and a sanctions clause</li><li>monitoring, shorter periods, re-rating and Club circulars</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> DELETE (step 1) - BUY BACK (2-4) - FENCE OFF (5-6). For limb (b): where, when, how much, how long.</p>
     <div class="plan-cov">
@@ -1212,14 +1198,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>29</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 29 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Why war risk is a separate cover</b><ul><li>war perils are maritime perils - MIA 1963 s.2(e)</li><li>the ordinary policy excludes them by wording, not by statute</li><li>historically the free of capture and seizure clause</li><li>cover is bought back separately, different market and price</li></ul></div>
-      <div class="pp-step"><b>2. Where the cover is written</b><ul><li>hull war - Institute War and Strikes Clauses (Hulls-Time)</li><li>P&amp;I war - Clubs exclude it; separate excess cover instead</li><li>cargo war - Institute War Clauses (Cargo), while waterborne</li><li>extensions: war loss of hire, crew war bonus, kidnap and ransom</li></ul></div>
-      <div class="pp-step"><b>3. What the cover includes</b><ul><li>war, civil war, revolution, rebellion, insurrection</li><li>capture, seizure, arrest, restraint, detainment</li><li>derelict mines, torpedoes and bombs</li><li>strikes, riots, civil commotions and labour disturbance</li><li>terrorism and malicious or politically motivated acts</li><li>confiscation and expropriation</li><li>blocking and trapping - detention founds a constructive total loss</li></ul></div>
-      <div class="pp-step"><b>4. What war cover itself excludes</b><ul><li>hostile detonation of a nuclear weapon</li><li>war between the major powers - automatic termination</li><li>requisition or pre-emption by the flag State</li><li>ordinary judicial process and financial default</li><li>cyber loss and sanctioned trades</li></ul></div>
-      <div class="pp-step"><b>5. Containing the exposure - area, notice and price</b><ul><li>Joint War Committee Listed Areas identify the zone</li><li>prior notification and additional war risk premium per transit</li><li>trading warranties - entering without notice is a breach</li><li>cancellation on seven days' notice; automatic termination triggers</li></ul></div>
-      <div class="pp-step"><b>6. Limits, conditions and the Club position</b><ul><li>limits and deductibles per vessel, per event, in aggregate</li><li>routeing, transit windows, convoy, hardening, armed guards</li><li>reinsurance and retrocession to a specialist war market</li><li>sanctions screening and a sanctions clause</li><li>monitoring, shorter periods, re-rating and Club circulars</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1473,12 +1451,13 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The governing instrument</li>
-      <li value="2">The role of WHO</li>
-      <li value="3">National agencies in India</li>
-      <li value="4">Certificates issued to a vessel</li>
-      <li value="5">Issue in India, validity and extension</li>
+      <li value="1"><span class="pl-t">The governing instrument</span><ul class="pl-pts"><li>IHR 2005 as amended 2014, 2022 and 2024</li><li>2024 amendments in force 19 September 2025</li><li>points of entry and competent authorities</li><li>a small set of ship documents</li></ul></li>
+      <li value="2"><span class="pl-t">The role of WHO</span><ul class="pl-pts"><li>adopts the IHR; prescribes Annex 3 and Annex 8 models</li><li>Annex 5 list of areas where vector control is recommended</li><li>advises methods and materials; Art 27</li><li>certifies ports on request, Art 20(4); publishes authorized-port lists, Art 20(3)</li><li>Handbook and technical guidance; declares PHEIC</li></ul></li>
+      <li value="3"><span class="pl-t">National agencies in India</span><ul class="pl-pts"><li>Ministry of Health and Family Welfare; National IHR Focal Point</li><li>DGHS and the Port Health Organisation</li><li>Port Health Officer as competent authority at the point of entry</li><li>Indian Port Health Rules 1955 with the IHR</li><li>DG Shipping for seafarer medical fitness</li></ul></li>
+      <li value="4"><span class="pl-t">Certificates issued to a vessel</span><ul class="pl-pts"><li>SSCEC where free of infection and contamination, Art 39(6)</li><li>SSCC where measures required and completed, Art 39(5)</li><li>vectors and measures recorded on the SSCC, Annex 5</li><li>both to the Annex 3 model; replaced the Deratting certificates</li><li>Ship Declaration of Health under Art 37, Annex 8 - a declaration, not a certificate</li><li>crew medical fitness is a separate system</li></ul></li>
+      <li value="5"><span class="pl-t">Issue in India, validity and extension</span><ul class="pl-pts"><li>issued by the Port Health Officer at an authorized port</li><li>Art 20(3) - ports notified for issue, exemption only, or extension</li><li>valid a maximum of six months</li><li>extendable by one month where measures cannot be accomplished at the port</li><li>no valid certificate or risk found - Art 27(1) applies</li><li>measures when ship and holds empty; in ballast before loading</li><li>Statement of Compliance route for Indian coastal trade</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> RULE (steps 1-2) - AGENCY (3) - PAPER (4) - CLOCK (5): six months plus one.</p>
     <div class="plan-cov">
@@ -1486,13 +1465,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>27</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 27 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The governing instrument</b><ul><li>IHR 2005 as amended 2014, 2022 and 2024</li><li>2024 amendments in force 19 September 2025</li><li>points of entry and competent authorities</li><li>a small set of ship documents</li></ul></div>
-      <div class="pp-step"><b>2. The role of WHO</b><ul><li>adopts the IHR; prescribes Annex 3 and Annex 8 models</li><li>Annex 5 list of areas where vector control is recommended</li><li>advises methods and materials; Art 27</li><li>certifies ports on request, Art 20(4); publishes authorized-port lists, Art 20(3)</li><li>Handbook and technical guidance; declares PHEIC</li></ul></div>
-      <div class="pp-step"><b>3. National agencies in India</b><ul><li>Ministry of Health and Family Welfare; National IHR Focal Point</li><li>DGHS and the Port Health Organisation</li><li>Port Health Officer as competent authority at the point of entry</li><li>Indian Port Health Rules 1955 with the IHR</li><li>DG Shipping for seafarer medical fitness</li></ul></div>
-      <div class="pp-step"><b>4. Certificates issued to a vessel</b><ul><li>SSCEC where free of infection and contamination, Art 39(6)</li><li>SSCC where measures required and completed, Art 39(5)</li><li>vectors and measures recorded on the SSCC, Annex 5</li><li>both to the Annex 3 model; replaced the Deratting certificates</li><li>Ship Declaration of Health under Art 37, Annex 8 - a declaration, not a certificate</li><li>crew medical fitness is a separate system</li></ul></div>
-      <div class="pp-step"><b>5. Issue in India, validity and extension</b><ul><li>issued by the Port Health Officer at an authorized port</li><li>Art 20(3) - ports notified for issue, exemption only, or extension</li><li>valid a maximum of six months</li><li>extendable by one month where measures cannot be accomplished at the port</li><li>no valid certificate or risk found - Art 27(1) applies</li><li>measures when ship and holds empty; in ballast before loading</li><li>Statement of Compliance route for Indian coastal trade</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1771,24 +1743,25 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The framework these processes sit inside</li>
+      <li value="1"><span class="pl-t">The framework these processes sit inside</span><ul class="pl-pts"><li>SOLAS II-1 part G and the IGF Code for the ship</li><li>ISO 20519 for the bunkering operation and documentation</li><li>two-stage ESD, with an ESD link joining both sides</li><li>safety zone, compatibility, checklist and bunkering plan first</li></ul></li>
     </ol>
     <div class="plan-limb">a.</div>
     <ol class="plan-list">
-      <li value="2">Gassing up</li>
+      <li value="2"><span class="pl-t">Gassing up</span><ul class="pl-pts"><li>before any liquid enters the tank</li><li>carbon dioxide in inert gas freezes at LNG temperature</li><li>nitrogen is non-condensable - builds pressure, thins the gas</li><li>LNG through a vaporiser; warm vapour in at the top</li><li>heavier inert gas displaced from the bottom to the vent mast</li><li>stop on the hydrocarbon and carbon dioxide values in the ship's manual</li></ul></li>
     </ol>
     <div class="plan-limb">b.</div>
     <ol class="plan-list">
-      <li value="3">Cooling down</li>
+      <li value="3"><span class="pl-t">Cooling down</span><ul class="pl-pts"><li>brings tank, lines and manifold towards minus 162 degrees</li><li>prevents thermal shock and structural thermal stress</li><li>prevents flash-off swamping the vapour handling capacity</li><li>spray nozzles at the top, small controlled quantities</li><li>rate of temperature fall limited by designer and class</li><li>bulk transfer starts at a low rate once sensors are stable</li></ul></li>
     </ol>
     <div class="plan-limb">c.</div>
     <ol class="plan-list">
-      <li value="4">Vapour management</li>
+      <li value="4"><span class="pl-t">Vapour management</span><ul class="pl-pts"><li>vapour return line to the bunker source is the primary route</li><li>consumption in engines, boilers and generators</li><li>reliquefaction where fitted; gas combustion unit for surplus</li><li>controlled venting only as a last resort - methane is potent</li><li>pressure against the relief setting; level alarms and ESD trips</li><li>stratification and rollover when loading onto a different heel</li></ul></li>
     </ol>
     <div class="plan-limb">d.</div>
     <ol class="plan-list">
-      <li value="5">The emergency release coupling procedure</li>
+      <li value="5"><span class="pl-t">The emergency release coupling procedure</span><ul class="pl-pts"><li>parts the connection quickly without spilling</li><li>ESD-1 stops pumps and closes manifold valves both sides</li><li>drain and reduce line inventory as time allows</li><li>ESD-2 - isolating valves close, then the coupling parts</li><li>purge with nitrogen, secure the parted end, keep clear</li><li>ESD link connected and function-tested before transfer</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> CLEAN (step 2) - CHILL (3) - CONTROL (4) - CUT (5), inside the framework at step 1.</p>
     <div class="plan-cov">
@@ -1796,13 +1769,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>28</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 28 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The framework these processes sit inside</b><ul><li>SOLAS II-1 part G and the IGF Code for the ship</li><li>ISO 20519 for the bunkering operation and documentation</li><li>two-stage ESD, with an ESD link joining both sides</li><li>safety zone, compatibility, checklist and bunkering plan first</li></ul></div>
-      <div class="pp-step"><b>2. Gassing up</b><ul><li>before any liquid enters the tank</li><li>carbon dioxide in inert gas freezes at LNG temperature</li><li>nitrogen is non-condensable - builds pressure, thins the gas</li><li>LNG through a vaporiser; warm vapour in at the top</li><li>heavier inert gas displaced from the bottom to the vent mast</li><li>stop on the hydrocarbon and carbon dioxide values in the ship's manual</li></ul></div>
-      <div class="pp-step"><b>3. Cooling down</b><ul><li>brings tank, lines and manifold towards minus 162 degrees</li><li>prevents thermal shock and structural thermal stress</li><li>prevents flash-off swamping the vapour handling capacity</li><li>spray nozzles at the top, small controlled quantities</li><li>rate of temperature fall limited by designer and class</li><li>bulk transfer starts at a low rate once sensors are stable</li></ul></div>
-      <div class="pp-step"><b>4. Vapour management</b><ul><li>vapour return line to the bunker source is the primary route</li><li>consumption in engines, boilers and generators</li><li>reliquefaction where fitted; gas combustion unit for surplus</li><li>controlled venting only as a last resort - methane is potent</li><li>pressure against the relief setting; level alarms and ESD trips</li><li>stratification and rollover when loading onto a different heel</li></ul></div>
-      <div class="pp-step"><b>5. The emergency release coupling procedure</b><ul><li>parts the connection quickly without spilling</li><li>ESD-1 stops pumps and closes manifold valves both sides</li><li>drain and reduce line inventory as time allows</li><li>ESD-2 - isolating valves close, then the coupling parts</li><li>purge with nitrogen, secure the parted end, keep clear</li><li>ESD link connected and function-tested before transfer</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2075,20 +2041,21 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">a)</div>
     <ol class="plan-list">
-      <li value="1">What the Enhanced Survey Programme is</li>
-      <li value="2">What a Condition Assessment Programme survey is</li>
-      <li value="3">The differences that matter</li>
+      <li value="1"><span class="pl-t">What the Enhanced Survey Programme is</span><ul class="pl-pts"><li>mandatory - SOLAS XI-1/2 and the 2011 ESP Code</li><li>resolution A.1049(27), adopted 30 November 2011</li><li>Annex A bulk carriers, Annex B oil tankers</li><li>aligned with IACS UR Z10</li><li>close-up survey, thickness measurement, tank testing</li><li>Survey Programme agreed before the renewal survey</li></ul></li>
+      <li value="2"><span class="pl-t">What a Condition Assessment Programme survey is</span><ul class="pl-pts"><li>voluntary class service at the owner's request</li><li>no statutory basis in SOLAS or MARPOL</li><li>numerical rating against a new-build standard</li><li>scope selectable - hull, machinery, cargo systems</li><li>driven by charterers, vetting, sale and purchase, finance</li></ul></li>
+      <li value="3"><span class="pl-t">The differences that matter</span><ul class="pl-pts"><li>mandatory versus voluntary</li><li>flag State versus owner and commercial parties</li><li>minimum standard versus new-build comparison</li><li>certificate consequence versus commercial consequence</li><li>ESP is a floor, CAP is a grade</li><li>CAP replaces no statutory or class survey</li></ul></li>
     </ol>
     <div class="plan-limb">b)</div>
     <ol class="plan-list">
-      <li value="4">Documents required to plan the survey</li>
-      <li value="5">Records of history and condition</li>
+      <li value="4"><span class="pl-t">Documents required to plan the survey</span><ul class="pl-pts"><li>Survey Programme and survey planning questionnaire</li><li>scantling drawings, with high-tensile steel identified</li><li>means of access and the safe access plan</li><li>approval of the thickness measurement firm</li><li>the survey planning meeting record</li></ul></li>
+      <li value="5"><span class="pl-t">Records of history and condition</span><ul class="pl-pts"><li>Survey Report File - surveys, condition evaluation, gaugings</li><li>previous repair history; cargo and ballast history</li><li>corrosion prevention system and Coating Technical File</li><li>inert gas use and tank cleaning procedures on tankers</li><li>crew inspection reports on deterioration and leakage</li><li>port State control findings and safety management records</li><li>information identifying suspect and critical structural areas</li></ul></li>
     </ol>
     <div class="plan-limb">c)</div>
     <ol class="plan-list">
-      <li value="6">The safe access plan</li>
+      <li value="6"><span class="pl-t">The safe access plan</span><ul class="pl-pts"><li>means of access for each space and close-up survey area</li><li>staging, rafts, ladders, hydraulic arms, remote techniques</li><li>must bring the surveyor within arm's reach</li><li>rafting conditions - clearance, water level, coating in good condition</li><li>enclosed space entry, atmosphere testing, permit and rescue</li><li>lighting, communication, cleaning and de-scaling</li><li>owner provides the facilities; surveyor may decline to proceed</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> FLOOR versus GRADE (steps 1-3), then PLAN (4) - HISTORY (5) - ACCESS (6).</p>
     <div class="plan-cov">
@@ -2096,14 +2063,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>36</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 36 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What the Enhanced Survey Programme is</b><ul><li>mandatory - SOLAS XI-1/2 and the 2011 ESP Code</li><li>resolution A.1049(27), adopted 30 November 2011</li><li>Annex A bulk carriers, Annex B oil tankers</li><li>aligned with IACS UR Z10</li><li>close-up survey, thickness measurement, tank testing</li><li>Survey Programme agreed before the renewal survey</li></ul></div>
-      <div class="pp-step"><b>2. What a Condition Assessment Programme survey is</b><ul><li>voluntary class service at the owner's request</li><li>no statutory basis in SOLAS or MARPOL</li><li>numerical rating against a new-build standard</li><li>scope selectable - hull, machinery, cargo systems</li><li>driven by charterers, vetting, sale and purchase, finance</li></ul></div>
-      <div class="pp-step"><b>3. The differences that matter</b><ul><li>mandatory versus voluntary</li><li>flag State versus owner and commercial parties</li><li>minimum standard versus new-build comparison</li><li>certificate consequence versus commercial consequence</li><li>ESP is a floor, CAP is a grade</li><li>CAP replaces no statutory or class survey</li></ul></div>
-      <div class="pp-step"><b>4. Documents required to plan the survey</b><ul><li>Survey Programme and survey planning questionnaire</li><li>scantling drawings, with high-tensile steel identified</li><li>means of access and the safe access plan</li><li>approval of the thickness measurement firm</li><li>the survey planning meeting record</li></ul></div>
-      <div class="pp-step"><b>5. Records of history and condition</b><ul><li>Survey Report File - surveys, condition evaluation, gaugings</li><li>previous repair history; cargo and ballast history</li><li>corrosion prevention system and Coating Technical File</li><li>inert gas use and tank cleaning procedures on tankers</li><li>crew inspection reports on deterioration and leakage</li><li>port State control findings and safety management records</li><li>information identifying suspect and critical structural areas</li></ul></div>
-      <div class="pp-step"><b>6. The safe access plan</b><ul><li>means of access for each space and close-up survey area</li><li>staging, rafts, ladders, hydraulic arms, remote techniques</li><li>must bring the surveyor within arm's reach</li><li>rafting conditions - clearance, water level, coating in good condition</li><li>enclosed space entry, atmosphere testing, permit and rescue</li><li>lighting, communication, cleaning and de-scaling</li><li>owner provides the facilities; surveyor may decline to proceed</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2377,13 +2336,14 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Secure the evidence and establish the facts</li>
-      <li value="2">Establish the nature and extent</li>
-      <li value="3">Report to the Company</li>
-      <li value="4">Involve classification and settle the repair</li>
-      <li value="5">Insurance and preservation of the claim</li>
-      <li value="6">Root cause, prevention and close-out</li>
+      <li value="1"><span class="pl-t">Secure the evidence and establish the facts</span><ul class="pl-pts"><li>do not dress, grind or blend before assessment</li><li>photographs, video with scale, dimensioned sketch</li><li>blade number, face, radial position, distance from edge</li><li>examine all blades, boss, keyway and cone</li><li>check rudder, stern frame and hull for contact damage</li><li>assemble vibration, grounding and maintenance history</li></ul></li>
+      <li value="2"><span class="pl-t">Establish the nature and extent</span><ul class="pl-pts"><li>dye penetrant - alloys are non-ferromagnetic, MPI unusable</li><li>eddy current or ultrasonic where depth is needed</li><li>qualified operator, approved firm, written report</li><li>distinguish fatigue crack, casting defect and cavitation pitting</li></ul></li>
+      <li value="3"><span class="pl-t">Report to the Company</span><ul class="pl-pts"><li>Master first, then Company and the DPA under the ISM Code</li><li>raise as a hazardous occurrence or non-conformity in the SMS</li><li>factual report - location, dimensions, NDT, particulars, history</li><li>state options and a recommendation with cost and time effect</li><li>the CE recommends; the Company decides and instructs</li></ul></li>
+      <li value="4"><span class="pl-t">Involve classification and settle the repair</span><ul class="pl-pts"><li>duty to report damage affecting or which may affect class</li><li>surveyor attends and assesses against the society's rules</li><li>position on the blade governs - the stressed region is restricted</li><li>accept, blend, approved weld repair, crop, or replace</li><li>approved repairer and approved procedure; re-test and balance</li><li>endorsement, or a condition of class if deferred</li><li>flag State reporting only if cause and seaworthiness engage it</li></ul></li>
+      <li value="5"><span class="pl-t">Insurance and preservation of the claim</span><ul class="pl-pts"><li>notify H&amp;M underwriters through the Company</li><li>underwriter's surveyor to attend before repairs begin</li><li>cause decides recoverability; wear and cavitation are not perils</li><li>do not commit to method or cost without agreement</li><li>retain removed material for metallurgical examination</li></ul></li>
+      <li value="6"><span class="pl-t">Root cause, prevention and close-out</span><ul class="pl-pts"><li>cavitation, fatigue, impact, dezincification, galvanic, overload</li><li>review roughness, fouling, polishing intervals and cathodic protection</li><li>monitor vibration; review astern working and heavy running</li><li>file NDT, survey, repair and balancing records</li><li>update machinery history, PMS and underwater inspection schedule</li><li>feed lessons through the SMS and hand over fully</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> STOP (step 1) - TEST (2) - TELL (3) - CLASS (4) - CLAIM (5) - CAUSE (6).</p>
     <div class="plan-cov">
@@ -2391,14 +2351,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>33</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 33 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Secure the evidence and establish the facts</b><ul><li>do not dress, grind or blend before assessment</li><li>photographs, video with scale, dimensioned sketch</li><li>blade number, face, radial position, distance from edge</li><li>examine all blades, boss, keyway and cone</li><li>check rudder, stern frame and hull for contact damage</li><li>assemble vibration, grounding and maintenance history</li></ul></div>
-      <div class="pp-step"><b>2. Establish the nature and extent</b><ul><li>dye penetrant - alloys are non-ferromagnetic, MPI unusable</li><li>eddy current or ultrasonic where depth is needed</li><li>qualified operator, approved firm, written report</li><li>distinguish fatigue crack, casting defect and cavitation pitting</li></ul></div>
-      <div class="pp-step"><b>3. Report to the Company</b><ul><li>Master first, then Company and the DPA under the ISM Code</li><li>raise as a hazardous occurrence or non-conformity in the SMS</li><li>factual report - location, dimensions, NDT, particulars, history</li><li>state options and a recommendation with cost and time effect</li><li>the CE recommends; the Company decides and instructs</li></ul></div>
-      <div class="pp-step"><b>4. Involve classification and settle the repair</b><ul><li>duty to report damage affecting or which may affect class</li><li>surveyor attends and assesses against the society's rules</li><li>position on the blade governs - the stressed region is restricted</li><li>accept, blend, approved weld repair, crop, or replace</li><li>approved repairer and approved procedure; re-test and balance</li><li>endorsement, or a condition of class if deferred</li><li>flag State reporting only if cause and seaworthiness engage it</li></ul></div>
-      <div class="pp-step"><b>5. Insurance and preservation of the claim</b><ul><li>notify H&amp;M underwriters through the Company</li><li>underwriter's surveyor to attend before repairs begin</li><li>cause decides recoverability; wear and cavitation are not perils</li><li>do not commit to method or cost without agreement</li><li>retain removed material for metallurgical examination</li></ul></div>
-      <div class="pp-step"><b>6. Root cause, prevention and close-out</b><ul><li>cavitation, fatigue, impact, dezincification, galvanic, overload</li><li>review roughness, fouling, polishing intervals and cathodic protection</li><li>monitor vibration; review astern working and heavy running</li><li>file NDT, survey, repair and balancing records</li><li>update machinery history, PMS and underwater inspection schedule</li><li>feed lessons through the SMS and hand over fully</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2673,17 +2625,18 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">a) <span class="pl-mk">&middot; 10 marks</span></div>
     <ol class="plan-list">
-      <li value="1">a) What FSA is, and who it is for</li>
-      <li value="2">Step 1 - identifying the hazards of this cargo</li>
-      <li value="3">Step 2 - assessing the risk on a ro-ro deck</li>
-      <li value="4">Steps 3 and 4 - risk control options and whether they pay</li>
-      <li value="5">Step 5 - what the recommendations actually became</li>
+      <li value="1"><span class="pl-t">a) What FSA is, and who it is for</span><ul class="pl-pts"><li>MSC-MEPC.2/Circ.12/Rev.2, revised 9 April 2018</li><li>a tool for the IMO rule-making process</li><li>structured, auditable, risk and cost-benefit based</li><li>not a shipboard risk assessment</li></ul></li>
+      <li value="2"><span class="pl-t">Step 1 - identifying the hazards of this cargo</span><ul class="pl-pts"><li>thermal runaway - self-sustaining, needs no external oxygen</li><li>damaged, defective or mis-declared cells</li><li>high state of charge and charging on board</li><li>flammable and toxic vent gas; explosion risk</li><li>re-ignition hours or days later</li><li>concealment - a vehicle is not a labelled package</li></ul></li>
+      <li value="3"><span class="pl-t">Step 2 - assessing the risk on a ro-ro deck</span><ul class="pl-pts"><li>frequency from casualty and near-miss data</li><li>consequence escalation - close stow, no fire divisions</li><li>large open deck, ramps and ventilation spread fire</li><li>risk to life on ro-pax; risk to the ship on PCTC</li><li>uncertainty must be reported, not hidden</li></ul></li>
+      <li value="4"><span class="pl-t">Steps 3 and 4 - risk control options and whether they pay</span><ul class="pl-pts"><li>detection - individually identifiable, combined smoke and heat</li><li>suppression - drencher coverage and boundary cooling</li><li>containment - A-60 boundaries, ventilation control</li><li>operational - state of charge limits, segregation, patrols</li><li>cost-benefit tested against cost per averted fatality</li></ul></li>
+      <li value="5"><span class="pl-t">Step 5 - what the recommendations actually became</span><ul class="pl-pts"><li>FIRESAFE I and II fed MSC.1/Circ.1615</li><li>MSC.550(108) amended SOLAS II-2 regs 7 and 20</li><li>MSC.555(108) amended FSS Code chapters 7 and 9</li><li>in force 1 January 2026, earlier the same year</li><li>further new-energy-vehicle amendments still in development</li></ul></li>
     </ol>
-    <div class="plan-limb">b)</div>
+    <div class="plan-limb">b) <span class="pl-mk">&middot; 6 marks</span></div>
     <ol class="plan-list">
-      <li value="6">b) Measures by stakeholder</li>
+      <li value="6"><span class="pl-t">b) Measures by stakeholder</span><ul class="pl-pts"><li>IMO - close the regulatory gap for new energy vehicles</li><li>flag and class - approval, survey, guidance</li><li>shipper and packer - correct declaration and IMDG classification</li><li>terminal - screening, state of charge, refusal of damaged units</li><li>operator - stowage policy, training, response plans</li><li>ship - detection watch, drills, early boundary cooling</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> The five steps as HAZARD (2) - RISK (3) - OPTIONS and COST (4) - RECOMMEND (5), with step 1 saying who it is for. Then limb (b) walks the chain: REGULATOR, CLASS, SHIPPER, TERMINAL, OPERATOR, SHIP (6).</p>
     <div class="plan-cov">
@@ -2691,14 +2644,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>31</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 31 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. a) What FSA is, and who it is for</b><ul><li>MSC-MEPC.2/Circ.12/Rev.2, revised 9 April 2018</li><li>a tool for the IMO rule-making process</li><li>structured, auditable, risk and cost-benefit based</li><li>not a shipboard risk assessment</li></ul></div>
-      <div class="pp-step"><b>2. Step 1 - identifying the hazards of this cargo</b><ul><li>thermal runaway - self-sustaining, needs no external oxygen</li><li>damaged, defective or mis-declared cells</li><li>high state of charge and charging on board</li><li>flammable and toxic vent gas; explosion risk</li><li>re-ignition hours or days later</li><li>concealment - a vehicle is not a labelled package</li></ul></div>
-      <div class="pp-step"><b>3. Step 2 - assessing the risk on a ro-ro deck</b><ul><li>frequency from casualty and near-miss data</li><li>consequence escalation - close stow, no fire divisions</li><li>large open deck, ramps and ventilation spread fire</li><li>risk to life on ro-pax; risk to the ship on PCTC</li><li>uncertainty must be reported, not hidden</li></ul></div>
-      <div class="pp-step"><b>4. Steps 3 and 4 - risk control options and whether they pay</b><ul><li>detection - individually identifiable, combined smoke and heat</li><li>suppression - drencher coverage and boundary cooling</li><li>containment - A-60 boundaries, ventilation control</li><li>operational - state of charge limits, segregation, patrols</li><li>cost-benefit tested against cost per averted fatality</li></ul></div>
-      <div class="pp-step"><b>5. Step 5 - what the recommendations actually became</b><ul><li>FIRESAFE I and II fed MSC.1/Circ.1615</li><li>MSC.550(108) amended SOLAS II-2 regs 7 and 20</li><li>MSC.555(108) amended FSS Code chapters 7 and 9</li><li>in force 1 January 2026, earlier the same year</li><li>further new-energy-vehicle amendments still in development</li></ul></div>
-      <div class="pp-step"><b>6. b) Measures by stakeholder</b><ul><li>IMO - close the regulatory gap for new energy vehicles</li><li>flag and class - approval, survey, guidance</li><li>shipper and packer - correct declaration and IMDG classification</li><li>terminal - screening, state of charge, refusal of damaged units</li><li>operator - stowage policy, training, response plans</li><li>ship - detection watch, drills, early boundary cooling</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2963,13 +2908,14 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The Convention and when it bit</li>
-      <li value="2">What it requires of ships</li>
-      <li value="3">What it requires of recycling facilities</li>
-      <li value="4">India's position and domestic implementation</li>
-      <li value="5">How India stands to benefit</li>
-      <li value="6">How it stands to be impacted, and the balance</li>
+      <li value="1"><span class="pl-t">The Convention and when it bit</span><ul class="pl-pts"><li>adopted Hong Kong, China, May 2009</li><li>entered into force 26 June 2025</li><li>Article 17 - 15 States, 40 per cent tonnage, 3 per cent recycling volume</li><li>the volume condition needed the recycling States themselves</li><li>24 Parties at about 57 per cent of world tonnage at entry into force</li></ul></li>
+      <li value="2"><span class="pl-t">What it requires of ships</span><ul class="pl-pts"><li>Inventory of Hazardous Materials in three parts</li><li>ICIHM, then final survey and the Ready for Recycling Certificate</li><li>500 GT and above, excluding purely domestic ships (Article 3.3)</li><li>existing ships by 26 June 2030 or before recycling</li><li>asbestos, PCBs, ODS, organotin and cybutryne controlled</li><li>recycling only at an authorised facility in a Party State</li></ul></li>
+      <li value="3"><span class="pl-t">What it requires of recycling facilities</span><ul class="pl-pts"><li>an IMO convention that reaches ashore and regulates the yard</li><li>Document of Authorisation to conduct Ship Recycling</li><li>Ship Recycling Facility Plan - safety, training, emergency, waste</li><li>safe-for-entry and safe-for-hot-work conditions</li><li>controlled downstream management of removed wastes</li></ul></li>
+      <li value="4"><span class="pl-t">India's position and domestic implementation</span><ul class="pl-pts"><li>a principal recycling State, centred on Alang-Sosiya</li><li>acceded 28 November 2019 - took the count to fifteen States</li><li>Recycling of Ships Act 2019 and Rules 2019 implement it</li><li>the administration is the competent authority</li><li>unaffected by the Merchant Shipping Act 2025 - s.324(1) repeal is closed</li></ul></li>
+      <li value="5"><span class="pl-t">How India stands to benefit</span><ul class="pl-pts"><li>legitimacy and access to better quality tonnage</li><li>a level playing field against competing recycling States</li><li>worker safety and environmental improvement</li><li>downstream industry, investment and financeability</li></ul></li>
+      <li value="6"><span class="pl-t">How it stands to be impacted, and the balance</span><ul class="pl-pts"><li>capital cost of compliance and consolidation of small yards</li><li>downstream waste treatment capacity is the binding constraint</li><li>lower price per light displacement tonne; leakage to non-Party flags</li><li>the Convention does not ban beaching - EU acceptance is separate</li><li>enforcement, not certification, is the credibility test</li><li>net positive, but conditional on infrastructure and enforcement</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> SHIP (steps 1-2) - SHORE (3) - INDIA (4) - SCALES (5-6). Dates a decade apart: adopted 2009, India acceded 2019, in force 2025, existing ships by 2030.</p>
     <div class="plan-cov">
@@ -2977,14 +2923,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>31</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 31 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The Convention and when it bit</b><ul><li>adopted Hong Kong, China, May 2009</li><li>entered into force 26 June 2025</li><li>Article 17 - 15 States, 40 per cent tonnage, 3 per cent recycling volume</li><li>the volume condition needed the recycling States themselves</li><li>24 Parties at about 57 per cent of world tonnage at entry into force</li></ul></div>
-      <div class="pp-step"><b>2. What it requires of ships</b><ul><li>Inventory of Hazardous Materials in three parts</li><li>ICIHM, then final survey and the Ready for Recycling Certificate</li><li>500 GT and above, excluding purely domestic ships (Article 3.3)</li><li>existing ships by 26 June 2030 or before recycling</li><li>asbestos, PCBs, ODS, organotin and cybutryne controlled</li><li>recycling only at an authorised facility in a Party State</li></ul></div>
-      <div class="pp-step"><b>3. What it requires of recycling facilities</b><ul><li>an IMO convention that reaches ashore and regulates the yard</li><li>Document of Authorisation to conduct Ship Recycling</li><li>Ship Recycling Facility Plan - safety, training, emergency, waste</li><li>safe-for-entry and safe-for-hot-work conditions</li><li>controlled downstream management of removed wastes</li></ul></div>
-      <div class="pp-step"><b>4. India's position and domestic implementation</b><ul><li>a principal recycling State, centred on Alang-Sosiya</li><li>acceded 28 November 2019 - took the count to fifteen States</li><li>Recycling of Ships Act 2019 and Rules 2019 implement it</li><li>the administration is the competent authority</li><li>unaffected by the Merchant Shipping Act 2025 - s.324(1) repeal is closed</li></ul></div>
-      <div class="pp-step"><b>5. How India stands to benefit</b><ul><li>legitimacy and access to better quality tonnage</li><li>a level playing field against competing recycling States</li><li>worker safety and environmental improvement</li><li>downstream industry, investment and financeability</li></ul></div>
-      <div class="pp-step"><b>6. How it stands to be impacted, and the balance</b><ul><li>capital cost of compliance and consolidation of small yards</li><li>downstream waste treatment capacity is the binding constraint</li><li>lower price per light displacement tonne; leakage to non-Party flags</li><li>the Convention does not ban beaching - EU acceptance is separate</li><li>enforcement, not certification, is the credibility test</li><li>net positive, but conditional on infrastructure and enforcement</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">

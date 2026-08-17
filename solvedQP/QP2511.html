@@ -267,7 +267,7 @@
   .plan-lead{margin:0 0 8px;font-size:13.5px;}
   .plan-limb{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;margin-top:8px;}
   .plan-list{margin:4px 0 0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;}
-  .plan-list li{margin:4px 0;}
+  .plan-list li{margin:9px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
   .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
@@ -275,11 +275,11 @@
   .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
   .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
-  .plan-points{margin-top:9px;font-size:12.5px;}
-  .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
-  .plan-points:focus-within > summary{outline:2px solid var(--orange);outline-offset:2px;}
-  .pp-step{margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;}
-  .pp-step ul{margin:3px 0 0;padding-left:20px;color:var(--grey-text);}
+  .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
+  .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}
+  .pl-t{display:block;}
+  .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;color:var(--grey-text);}
+  .pl-pts li{margin:2px 0;}
 
   /* Recall: blanks first, reveal on demand. */
   .recall{background:#fff;border:1.5px solid var(--teal-dark);padding:0 16px 13px;}
@@ -628,15 +628,16 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">What was happening</li>
-      <li value="2">The primary mechanism - side shell to flooded hold</li>
-      <li value="3">The secondary mechanism - hatch covers and progressive flooding</li>
-      <li value="4">Why it was happening then</li>
-      <li value="5">IMO's response - what chapter XII is</li>
-      <li value="6">The structural and stability provisions</li>
-      <li value="7">Detection, operational and survey provisions</li>
-      <li value="8">The contribution argued, and its limits</li>
+      <li value="1"><span class="pl-t">What was happening</span><ul class="pl-pts"><li>a spate of losses of bulk carriers in the early 1990s</li><li>sudden loss, often without a distress message</li><li>frequently with the entire crew</li><li>in weather similar ships had survived for years</li><li>no casualty figure asserted - IMO's own material does not quantify it</li></ul></li>
+      <li value="2"><span class="pl-t">The primary mechanism - side shell to flooded hold</span><ul class="pl-pts"><li>single-side-skin ships expose side shell frames in the hold</li><li>frames and end brackets corrode and fatigue fastest</li><li>alternately wet and dry; grab and bulldozer abrasion</li><li>the foremost hold is worst - slamming, stress, poorest access</li><li>frame fails, side shell opens, No.1 hold floods</li><li>the transverse watertight bulkhead then sees an unintended head</li><li>bulkhead fails, two holds flood, the bow goes down in minutes</li></ul></li>
+      <li value="3"><span class="pl-t">The secondary mechanism - hatch covers and progressive flooding</span><ul class="pl-pts"><li>water ingress through hatch covers and other openings</li><li>inadequate cover strength, worn securings, damaged coamings</li><li>alternate-hold loading concentrates weight and local stress</li><li>sloshing cargo and water attacks boundaries and spreads flooding</li></ul></li>
+      <li value="4"><span class="pl-t">Why it was happening then</span><ul class="pl-pts"><li>an ageing fleet built in the earlier boom</li><li>high-tensile steel - thinner plate, smaller absolute corrosion margin</li><li>dense cargoes and mechanical discharge damaging the frames</li><li>hold coatings unmaintained; no duty to inspect frames closely</li><li>commercial pressure on turnaround and on old tonnage</li></ul></li>
+      <li value="5"><span class="pl-t">IMO's response - what chapter XII is</span><ul class="pl-pts"><li>SOLAS chapter XII - Additional safety measures for bulk carriers</li><li>adopted November 1997; in force 1 July 1999; amended 2004</li><li>an early and consequential product of Formal Safety Assessment</li><li>FSA studies followed the re-opened Derbyshire investigation</li><li>MSC 76, December 2002, approved the resulting package</li></ul></li>
+      <li value="6"><span class="pl-t">The structural and stability provisions</span><ul class="pl-pts"><li>survive flooding of any one cargo hold, with dynamic effects</li><li>new ships of 150 m and above, cargo density 1,000 kg/m3 and above</li><li>bulkhead and double bottom strength in the flooded condition</li><li>XII/6 - protective coatings, MSC.215(82)</li><li>double-side skin offered as an alternative (2004)</li><li>restrictions on sailing with any hold empty (2004)</li></ul></li>
+      <li value="7"><span class="pl-t">Detection, operational and survey provisions</span><ul class="pl-pts"><li>XII/12 water level alarms, effective 1 July 2004</li><li>0.5 m above inner bottom; 15 per cent of hold depth, max 2.0 m</li><li>XII/13 - draining and pumping operable from an enclosed space</li><li>XII/11 - loading instrument at 150 m and upwards</li><li>cargo density declaration; survey, maintenance and compliance information</li><li>with SOLAS XI-1/2 and the ESP Code - close-up survey within arm's reach</li></ul></li>
+      <li value="8"><span class="pl-t">The contribution argued, and its limits</span><ul class="pl-pts"><li>prevent, contain, detect, respond, verify - defence in depth</li><li>the chain must now break in several places at once</li><li>the strongest provisions are prospective and threshold-limited</li><li>it cannot compel good maintenance, only inspect for its absence</li><li>it does not reach the commercial pressure behind the condition</li><li>it removed the possibility of loss because nobody was required to look</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> CHAIN: frame - shell - hold - bulkhead - bow (steps 2-3). Then FIVE VERBS: PREVENT (6) - CONTAIN (6) - DETECT (7) - RESPOND (7) - VERIFY (7), and the LIMITS (8). Dates 1997 / 1 July 1999 / 1 July 2004.</p>
     <div class="plan-cov">
@@ -644,16 +645,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>44</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 44 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What was happening</b><ul><li>a spate of losses of bulk carriers in the early 1990s</li><li>sudden loss, often without a distress message</li><li>frequently with the entire crew</li><li>in weather similar ships had survived for years</li><li>no casualty figure asserted - IMO's own material does not quantify it</li></ul></div>
-      <div class="pp-step"><b>2. The primary mechanism - side shell to flooded hold</b><ul><li>single-side-skin ships expose side shell frames in the hold</li><li>frames and end brackets corrode and fatigue fastest</li><li>alternately wet and dry; grab and bulldozer abrasion</li><li>the foremost hold is worst - slamming, stress, poorest access</li><li>frame fails, side shell opens, No.1 hold floods</li><li>the transverse watertight bulkhead then sees an unintended head</li><li>bulkhead fails, two holds flood, the bow goes down in minutes</li></ul></div>
-      <div class="pp-step"><b>3. The secondary mechanism - hatch covers and progressive flooding</b><ul><li>water ingress through hatch covers and other openings</li><li>inadequate cover strength, worn securings, damaged coamings</li><li>alternate-hold loading concentrates weight and local stress</li><li>sloshing cargo and water attacks boundaries and spreads flooding</li></ul></div>
-      <div class="pp-step"><b>4. Why it was happening then</b><ul><li>an ageing fleet built in the earlier boom</li><li>high-tensile steel - thinner plate, smaller absolute corrosion margin</li><li>dense cargoes and mechanical discharge damaging the frames</li><li>hold coatings unmaintained; no duty to inspect frames closely</li><li>commercial pressure on turnaround and on old tonnage</li></ul></div>
-      <div class="pp-step"><b>5. IMO's response - what chapter XII is</b><ul><li>SOLAS chapter XII - Additional safety measures for bulk carriers</li><li>adopted November 1997; in force 1 July 1999; amended 2004</li><li>an early and consequential product of Formal Safety Assessment</li><li>FSA studies followed the re-opened Derbyshire investigation</li><li>MSC 76, December 2002, approved the resulting package</li></ul></div>
-      <div class="pp-step"><b>6. The structural and stability provisions</b><ul><li>survive flooding of any one cargo hold, with dynamic effects</li><li>new ships of 150 m and above, cargo density 1,000 kg/m3 and above</li><li>bulkhead and double bottom strength in the flooded condition</li><li>XII/6 - protective coatings, MSC.215(82)</li><li>double-side skin offered as an alternative (2004)</li><li>restrictions on sailing with any hold empty (2004)</li></ul></div>
-      <div class="pp-step"><b>7. Detection, operational and survey provisions</b><ul><li>XII/12 water level alarms, effective 1 July 2004</li><li>0.5 m above inner bottom; 15 per cent of hold depth, max 2.0 m</li><li>XII/13 - draining and pumping operable from an enclosed space</li><li>XII/11 - loading instrument at 150 m and upwards</li><li>cargo density declaration; survey, maintenance and compliance information</li><li>with SOLAS XI-1/2 and the ESP Code - close-up survey within arm's reach</li></ul></div>
-      <div class="pp-step"><b>8. The contribution argued, and its limits</b><ul><li>prevent, contain, detect, respond, verify - defence in depth</li><li>the chain must now break in several places at once</li><li>the strongest provisions are prospective and threshold-limited</li><li>it cannot compel good maintenance, only inspect for its absence</li><li>it does not reach the commercial pressure behind the condition</li><li>it removed the possibility of loss because nobody was required to look</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -973,26 +964,27 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">a)</div>
     <ol class="plan-list">
-      <li value="1">The propeller curve and the load diagram</li>
-      <li value="2">What torque rich means</li>
-      <li value="3">Why the light running margin exists</li>
+      <li value="1"><span class="pl-t">The propeller curve and the load diagram</span><ul class="pl-pts"><li>propeller law - power as the cube of rpm, torque as the square</li><li>the propeller curve plotted against the engine's own limits</li><li>line 6 is the light propeller curve - clean hull, calm weather</li><li>the engine is deliberately not laid out on that curve</li></ul></li>
+      <li value="2"><span class="pl-t">What torque rich means</span><ul class="pl-pts"><li>torque rich is the maker's heavy running</li><li>more torque absorbed at a given rpm than the light curve predicts</li><li>same power at lower rpm; same rpm needs more torque and fuel</li><li>the operating point moves up and left toward the torque limit</li><li>line 4 is the torque/speed limit, set mainly by THERMAL load</li><li>at lower speeds line 4 is stricter than the mep limit</li></ul></li>
+      <li value="3"><span class="pl-t">Why the light running margin exists</span><ul class="pl-pts"><li>LRM = (nL - nH) / nH x 100 per cent</li><li>MAN recommends 4 to 7 per cent, up to 10 in special cases</li><li>alongside sea margin and engine margin</li><li>a new ship on trials runs light by design</li><li>20 per cent more power corresponds to about 1 per cent heavy running</li></ul></li>
     </ol>
     <div class="plan-limb">b)</div>
     <ol class="plan-list">
-      <li value="4">The reasons</li>
+      <li value="4"><span class="pl-t">The reasons</span><ul class="pl-pts"><li>hull fouling - algae, sea grass and barnacles</li><li>propeller fouling, roughness, erosion or blade damage</li><li>heavy weather, wind, waves and swell</li><li>shallow water - no influence above ten times the draught</li><li>adverse current, restricted and confined water</li><li>deep draught, excess displacement, adverse trim</li><li>towing, pushing, ice; bollard pull as the extreme case</li><li>over-pitched or wrongly repaired propeller; CPP pitch and combinator faults</li></ul></li>
     </ol>
     <div class="plan-limb">c)</div>
     <ol class="plan-list">
-      <li value="5">Indications from the engine</li>
-      <li value="6">Indications from the ship</li>
+      <li value="5"><span class="pl-t">Indications from the engine</span><ul class="pl-pts"><li>fuel index higher than reference at the same rpm - the defining one</li><li>rated rpm unreachable at full load</li><li>higher exhaust gas temperatures and thermal load</li><li>scavenge air pressure low for the fuel burnt; air-fuel ratio falls</li><li>black smoke; higher mep; shifted indicator diagram</li><li>turbocharger surging in severe cases</li><li>governor and limiters at their stops</li></ul></li>
+      <li value="6"><span class="pl-t">Indications from the ship</span><ul class="pl-pts"><li>speed loss for the same power once weather and current are allowed for</li><li>fuel consumption per mile rising on the same passage</li><li>performance trend drifting steadily left over weeks</li><li>operating point plotted above the light propeller curve</li></ul></li>
     </ol>
     <div class="plan-limb">d)</div>
     <ol class="plan-list">
-      <li value="7">Confirm and exclude, before acting</li>
-      <li value="8">Protect the engine now</li>
-      <li value="9">Remedy, report, and where authority stops</li>
+      <li value="7"><span class="pl-t">Confirm and exclude, before acting</span><ul class="pl-pts"><li>full performance set compared against shop and sea trial data</li><li>verify tachometer, torsionmeter, thermocouples and gauges</li><li>correct for draught, trim, weather, current and water depth</li><li>exclude turbocharger and air cooler fouling, timing and VIT</li><li>exclude leaking exhaust valves and poor fuel quality</li></ul></li>
+      <li value="8"><span class="pl-t">Protect the engine now</span><ul class="pl-pts"><li>reduce fuel index and accept lower rpm; never chase rpm with fuel</li><li>overload only as permitted - one hour per twelve, or emergency</li><li>confirm limiters and load programme are functioning</li></ul></li>
+      <li value="9"><span class="pl-t">Remedy, report, and where authority stops</span><ul class="pl-pts"><li>propeller polishing first, then hull cleaning subject to port rules</li><li>inspect propeller, rudder and appendages; calibrate CPP pitch</li><li>log, trend and report to the Chief Engineer, who informs the Company</li><li>persistent heavy running with a clean hull is a matching problem for the owner, propeller designer, engine builder and class</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> CURVE (steps 1-3) - CAUSE (4) - CLUE (5-6) - CURE (7-8). One number: 20 per cent more power for 1 per cent fewer revolutions. One warning: line 4 is thermal.</p>
     <div class="plan-cov">
@@ -1000,17 +992,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>46</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>9 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 46 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The propeller curve and the load diagram</b><ul><li>propeller law - power as the cube of rpm, torque as the square</li><li>the propeller curve plotted against the engine's own limits</li><li>line 6 is the light propeller curve - clean hull, calm weather</li><li>the engine is deliberately not laid out on that curve</li></ul></div>
-      <div class="pp-step"><b>2. What torque rich means</b><ul><li>torque rich is the maker's heavy running</li><li>more torque absorbed at a given rpm than the light curve predicts</li><li>same power at lower rpm; same rpm needs more torque and fuel</li><li>the operating point moves up and left toward the torque limit</li><li>line 4 is the torque/speed limit, set mainly by THERMAL load</li><li>at lower speeds line 4 is stricter than the mep limit</li></ul></div>
-      <div class="pp-step"><b>3. Why the light running margin exists</b><ul><li>LRM = (nL - nH) / nH x 100 per cent</li><li>MAN recommends 4 to 7 per cent, up to 10 in special cases</li><li>alongside sea margin and engine margin</li><li>a new ship on trials runs light by design</li><li>20 per cent more power corresponds to about 1 per cent heavy running</li></ul></div>
-      <div class="pp-step"><b>4. The reasons</b><ul><li>hull fouling - algae, sea grass and barnacles</li><li>propeller fouling, roughness, erosion or blade damage</li><li>heavy weather, wind, waves and swell</li><li>shallow water - no influence above ten times the draught</li><li>adverse current, restricted and confined water</li><li>deep draught, excess displacement, adverse trim</li><li>towing, pushing, ice; bollard pull as the extreme case</li><li>over-pitched or wrongly repaired propeller; CPP pitch and combinator faults</li></ul></div>
-      <div class="pp-step"><b>5. Indications from the engine</b><ul><li>fuel index higher than reference at the same rpm - the defining one</li><li>rated rpm unreachable at full load</li><li>higher exhaust gas temperatures and thermal load</li><li>scavenge air pressure low for the fuel burnt; air-fuel ratio falls</li><li>black smoke; higher mep; shifted indicator diagram</li><li>turbocharger surging in severe cases</li><li>governor and limiters at their stops</li></ul></div>
-      <div class="pp-step"><b>6. Indications from the ship</b><ul><li>speed loss for the same power once weather and current are allowed for</li><li>fuel consumption per mile rising on the same passage</li><li>performance trend drifting steadily left over weeks</li><li>operating point plotted above the light propeller curve</li></ul></div>
-      <div class="pp-step"><b>7. Confirm and exclude, before acting</b><ul><li>full performance set compared against shop and sea trial data</li><li>verify tachometer, torsionmeter, thermocouples and gauges</li><li>correct for draught, trim, weather, current and water depth</li><li>exclude turbocharger and air cooler fouling, timing and VIT</li><li>exclude leaking exhaust valves and poor fuel quality</li></ul></div>
-      <div class="pp-step"><b>8. Protect the engine now</b><ul><li>reduce fuel index and accept lower rpm; never chase rpm with fuel</li><li>overload only as permitted - one hour per twelve, or emergency</li><li>confirm limiters and load programme are functioning</li></ul></div>
-      <div class="pp-step"><b>9. Remedy, report, and where authority stops</b><ul><li>propeller polishing first, then hull cleaning subject to port rules</li><li>inspect propeller, rudder and appendages; calibrate CPP pitch</li><li>log, trend and report to the Chief Engineer, who informs the Company</li><li>persistent heavy running with a clean hull is a matching problem for the owner, propeller designer, engine builder and class</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1329,13 +1310,14 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The governing instrument</li>
-      <li value="2">The role of WHO</li>
-      <li value="3">National agencies in India</li>
-      <li value="4">The ship's certificates</li>
-      <li value="5">Issue in India, validity and extension - the ship</li>
-      <li value="6">The crew's medical certificate, validity and extension</li>
+      <li value="1"><span class="pl-t">The governing instrument</span><ul class="pl-pts"><li>IHR 2005 as amended 2014, 2022 and 2024</li><li>2024 amendments in force 19 September 2025</li><li>points of entry and competent authorities</li><li>a small set of ship documents</li></ul></li>
+      <li value="2"><span class="pl-t">The role of WHO</span><ul class="pl-pts"><li>adopts the IHR; prescribes Annex 3 and Annex 8 models</li><li>Annex 5 list of areas where vector control is recommended</li><li>advises methods and materials; Art 27</li><li>certifies ports on request, Art 20(4); publishes authorized-port lists, Art 20(3)</li><li>Handbook and technical guidance; declares PHEIC</li></ul></li>
+      <li value="3"><span class="pl-t">National agencies in India</span><ul class="pl-pts"><li>Ministry of Health and Family Welfare; National IHR Focal Point</li><li>DGHS and the Port Health Organisation</li><li>Port Health Officer as competent authority at the point of entry</li><li>Indian Port Health Rules 1955 with the IHR</li><li>DG Shipping for seafarer medical fitness</li></ul></li>
+      <li value="4"><span class="pl-t">The ship's certificates</span><ul class="pl-pts"><li>SSCEC where free of infection and contamination, Art 39(6)</li><li>SSCC where measures required and completed, Art 39(5)</li><li>vectors and measures recorded on the SSCC, Annex 5</li><li>both to the Annex 3 model; replaced the Deratting certificates</li><li>Ship Declaration of Health under Art 37, Annex 8 - a declaration, not a certificate</li><li>crew medical fitness is a separate system</li></ul></li>
+      <li value="5"><span class="pl-t">Issue in India, validity and extension - the ship</span><ul class="pl-pts"><li>issued by the Port Health Officer at an authorized port</li><li>Art 20(3) - ports notified for issue, exemption only, or extension</li><li>valid a maximum of six months</li><li>extendable by one month where measures cannot be accomplished at the port</li><li>no valid certificate or risk found - Art 27(1) applies</li><li>measures when ship and holds empty; in ballast before loading</li><li>Statement of Compliance route for Indian coastal trade</li></ul></li>
+      <li value="6"><span class="pl-t">The crew's medical certificate, validity and extension</span><ul class="pl-pts"><li>MLC 2006 Reg 1.2 and Standard A1.2; STCW certificate accepted, A1.2(3)</li><li>issued by a duly qualified practitioner; eyesight alone by a recognized person, A1.2(4)</li><li>in India, a DG Shipping approved medical examiner under the Merchant Shipping Act 1958</li><li>valid a maximum of two years; one year if under 18; colour vision six years, A1.2(7)</li><li>expiring during a voyage - continues to the next port, not exceeding three months, A1.2(9)</li><li>urgent cases - limited-period permission under A1.2(8)</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> RULE (steps 1-2) - AGENCY (3) - PAPER (4) - TWO CLOCKS: the ship six months plus one (5), the crew two years plus three months (6).</p>
     <div class="plan-cov">
@@ -1343,14 +1325,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>33</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 33 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The governing instrument</b><ul><li>IHR 2005 as amended 2014, 2022 and 2024</li><li>2024 amendments in force 19 September 2025</li><li>points of entry and competent authorities</li><li>a small set of ship documents</li></ul></div>
-      <div class="pp-step"><b>2. The role of WHO</b><ul><li>adopts the IHR; prescribes Annex 3 and Annex 8 models</li><li>Annex 5 list of areas where vector control is recommended</li><li>advises methods and materials; Art 27</li><li>certifies ports on request, Art 20(4); publishes authorized-port lists, Art 20(3)</li><li>Handbook and technical guidance; declares PHEIC</li></ul></div>
-      <div class="pp-step"><b>3. National agencies in India</b><ul><li>Ministry of Health and Family Welfare; National IHR Focal Point</li><li>DGHS and the Port Health Organisation</li><li>Port Health Officer as competent authority at the point of entry</li><li>Indian Port Health Rules 1955 with the IHR</li><li>DG Shipping for seafarer medical fitness</li></ul></div>
-      <div class="pp-step"><b>4. The ship's certificates</b><ul><li>SSCEC where free of infection and contamination, Art 39(6)</li><li>SSCC where measures required and completed, Art 39(5)</li><li>vectors and measures recorded on the SSCC, Annex 5</li><li>both to the Annex 3 model; replaced the Deratting certificates</li><li>Ship Declaration of Health under Art 37, Annex 8 - a declaration, not a certificate</li><li>crew medical fitness is a separate system</li></ul></div>
-      <div class="pp-step"><b>5. Issue in India, validity and extension - the ship</b><ul><li>issued by the Port Health Officer at an authorized port</li><li>Art 20(3) - ports notified for issue, exemption only, or extension</li><li>valid a maximum of six months</li><li>extendable by one month where measures cannot be accomplished at the port</li><li>no valid certificate or risk found - Art 27(1) applies</li><li>measures when ship and holds empty; in ballast before loading</li><li>Statement of Compliance route for Indian coastal trade</li></ul></div>
-      <div class="pp-step"><b>6. The crew's medical certificate, validity and extension</b><ul><li>MLC 2006 Reg 1.2 and Standard A1.2; STCW certificate accepted, A1.2(3)</li><li>issued by a duly qualified practitioner; eyesight alone by a recognized person, A1.2(4)</li><li>in India, a DG Shipping approved medical examiner under the Merchant Shipping Act 1958</li><li>valid a maximum of two years; one year if under 18; colour vision six years, A1.2(7)</li><li>expiring during a voyage - continues to the next port, not exceeding three months, A1.2(9)</li><li>urgent cases - limited-period permission under A1.2(8)</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1653,24 +1627,25 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The framework these processes sit inside</li>
+      <li value="1"><span class="pl-t">The framework these processes sit inside</span><ul class="pl-pts"><li>SOLAS II-1 part G and the IGF Code for the ship</li><li>ISO 20519 for the bunkering operation and documentation</li><li>two-stage ESD, with an ESD link joining both sides</li><li>safety zone, compatibility, checklist and bunkering plan first</li></ul></li>
     </ol>
     <div class="plan-limb">a.</div>
     <ol class="plan-list">
-      <li value="2">Gassing up</li>
+      <li value="2"><span class="pl-t">Gassing up</span><ul class="pl-pts"><li>before any liquid enters the tank</li><li>carbon dioxide in inert gas freezes at LNG temperature</li><li>nitrogen is non-condensable - builds pressure, thins the gas</li><li>LNG through a vaporiser; warm vapour in at the top</li><li>heavier inert gas displaced from the bottom to the vent mast</li><li>stop on the hydrocarbon and carbon dioxide values in the ship's manual</li></ul></li>
     </ol>
     <div class="plan-limb">b.</div>
     <ol class="plan-list">
-      <li value="3">Cooling down</li>
+      <li value="3"><span class="pl-t">Cooling down</span><ul class="pl-pts"><li>brings tank, lines and manifold towards minus 162 degrees</li><li>prevents thermal shock and structural thermal stress</li><li>prevents flash-off swamping the vapour handling capacity</li><li>spray nozzles at the top, small controlled quantities</li><li>rate of temperature fall limited by designer and class</li><li>bulk transfer starts at a low rate once sensors are stable</li></ul></li>
     </ol>
     <div class="plan-limb">c.</div>
     <ol class="plan-list">
-      <li value="4">Vapour management</li>
+      <li value="4"><span class="pl-t">Vapour management</span><ul class="pl-pts"><li>vapour return line to the bunker source is the primary route</li><li>consumption in engines, boilers and generators</li><li>reliquefaction where fitted; gas combustion unit for surplus</li><li>controlled venting only as a last resort - methane is potent</li><li>pressure against the relief setting; level alarms and ESD trips</li><li>stratification and rollover when loading onto a different heel</li></ul></li>
     </ol>
     <div class="plan-limb">d.</div>
     <ol class="plan-list">
-      <li value="5">The emergency release coupling procedure</li>
+      <li value="5"><span class="pl-t">The emergency release coupling procedure</span><ul class="pl-pts"><li>parts the connection quickly without spilling</li><li>ESD-1 stops pumps and closes manifold valves both sides</li><li>drain and reduce line inventory as time allows</li><li>ESD-2 - isolating valves close, then the coupling parts</li><li>purge with nitrogen, secure the parted end, keep clear</li><li>ESD link connected and function-tested before transfer</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> CLEAN (step 2) - CHILL (3) - CONTROL (4) - CUT (5), inside the framework at step 1.</p>
     <div class="plan-cov">
@@ -1678,13 +1653,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>28</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 28 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The framework these processes sit inside</b><ul><li>SOLAS II-1 part G and the IGF Code for the ship</li><li>ISO 20519 for the bunkering operation and documentation</li><li>two-stage ESD, with an ESD link joining both sides</li><li>safety zone, compatibility, checklist and bunkering plan first</li></ul></div>
-      <div class="pp-step"><b>2. Gassing up</b><ul><li>before any liquid enters the tank</li><li>carbon dioxide in inert gas freezes at LNG temperature</li><li>nitrogen is non-condensable - builds pressure, thins the gas</li><li>LNG through a vaporiser; warm vapour in at the top</li><li>heavier inert gas displaced from the bottom to the vent mast</li><li>stop on the hydrocarbon and carbon dioxide values in the ship's manual</li></ul></div>
-      <div class="pp-step"><b>3. Cooling down</b><ul><li>brings tank, lines and manifold towards minus 162 degrees</li><li>prevents thermal shock and structural thermal stress</li><li>prevents flash-off swamping the vapour handling capacity</li><li>spray nozzles at the top, small controlled quantities</li><li>rate of temperature fall limited by designer and class</li><li>bulk transfer starts at a low rate once sensors are stable</li></ul></div>
-      <div class="pp-step"><b>4. Vapour management</b><ul><li>vapour return line to the bunker source is the primary route</li><li>consumption in engines, boilers and generators</li><li>reliquefaction where fitted; gas combustion unit for surplus</li><li>controlled venting only as a last resort - methane is potent</li><li>pressure against the relief setting; level alarms and ESD trips</li><li>stratification and rollover when loading onto a different heel</li></ul></div>
-      <div class="pp-step"><b>5. The emergency release coupling procedure</b><ul><li>parts the connection quickly without spilling</li><li>ESD-1 stops pumps and closes manifold valves both sides</li><li>drain and reduce line inventory as time allows</li><li>ESD-2 - isolating valves close, then the coupling parts</li><li>purge with nitrogen, secure the parted end, keep clear</li><li>ESD link connected and function-tested before transfer</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1957,20 +1925,21 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">a)</div>
     <ol class="plan-list">
-      <li value="1">What the Enhanced Survey Programme is</li>
-      <li value="2">What a Condition Assessment Programme survey is</li>
-      <li value="3">The differences that matter</li>
+      <li value="1"><span class="pl-t">What the Enhanced Survey Programme is</span><ul class="pl-pts"><li>mandatory - SOLAS XI-1/2 and the 2011 ESP Code</li><li>resolution A.1049(27), adopted 30 November 2011</li><li>Annex A bulk carriers, Annex B oil tankers</li><li>aligned with IACS UR Z10</li><li>close-up survey, thickness measurement, tank testing</li><li>Survey Programme agreed before the renewal survey</li></ul></li>
+      <li value="2"><span class="pl-t">What a Condition Assessment Programme survey is</span><ul class="pl-pts"><li>voluntary class service at the owner's request</li><li>no statutory basis in SOLAS or MARPOL</li><li>numerical rating against a new-build standard</li><li>scope selectable - hull, machinery, cargo systems</li><li>driven by charterers, vetting, sale and purchase, finance</li></ul></li>
+      <li value="3"><span class="pl-t">The differences that matter</span><ul class="pl-pts"><li>mandatory versus voluntary</li><li>flag State versus owner and commercial parties</li><li>minimum standard versus new-build comparison</li><li>certificate consequence versus commercial consequence</li><li>ESP is a floor, CAP is a grade</li><li>CAP replaces no statutory or class survey</li></ul></li>
     </ol>
     <div class="plan-limb">b)</div>
     <ol class="plan-list">
-      <li value="4">Documents required to plan the survey</li>
-      <li value="5">Records of history and condition</li>
+      <li value="4"><span class="pl-t">Documents required to plan the survey</span><ul class="pl-pts"><li>Survey Programme and survey planning questionnaire</li><li>scantling drawings, with high-tensile steel identified</li><li>means of access and the safe access plan</li><li>approval of the thickness measurement firm</li><li>the survey planning meeting record</li></ul></li>
+      <li value="5"><span class="pl-t">Records of history and condition</span><ul class="pl-pts"><li>Survey Report File - surveys, condition evaluation, gaugings</li><li>previous repair history; cargo and ballast history</li><li>corrosion prevention system and Coating Technical File</li><li>inert gas use and tank cleaning procedures on tankers</li><li>crew inspection reports on deterioration and leakage</li><li>port State control findings and safety management records</li><li>information identifying suspect and critical structural areas</li></ul></li>
     </ol>
     <div class="plan-limb">c)</div>
     <ol class="plan-list">
-      <li value="6">The safe access plan</li>
+      <li value="6"><span class="pl-t">The safe access plan</span><ul class="pl-pts"><li>means of access for each space and close-up survey area</li><li>staging, rafts, ladders, hydraulic arms, remote techniques</li><li>must bring the surveyor within arm's reach</li><li>rafting conditions - clearance, water level, coating in good condition</li><li>enclosed space entry, atmosphere testing, permit and rescue</li><li>lighting, communication, cleaning and de-scaling</li><li>owner provides the facilities; surveyor may decline to proceed</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> FLOOR versus GRADE (steps 1-3), then PLAN (4) - HISTORY (5) - ACCESS (6).</p>
     <div class="plan-cov">
@@ -1978,14 +1947,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>36</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 36 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What the Enhanced Survey Programme is</b><ul><li>mandatory - SOLAS XI-1/2 and the 2011 ESP Code</li><li>resolution A.1049(27), adopted 30 November 2011</li><li>Annex A bulk carriers, Annex B oil tankers</li><li>aligned with IACS UR Z10</li><li>close-up survey, thickness measurement, tank testing</li><li>Survey Programme agreed before the renewal survey</li></ul></div>
-      <div class="pp-step"><b>2. What a Condition Assessment Programme survey is</b><ul><li>voluntary class service at the owner's request</li><li>no statutory basis in SOLAS or MARPOL</li><li>numerical rating against a new-build standard</li><li>scope selectable - hull, machinery, cargo systems</li><li>driven by charterers, vetting, sale and purchase, finance</li></ul></div>
-      <div class="pp-step"><b>3. The differences that matter</b><ul><li>mandatory versus voluntary</li><li>flag State versus owner and commercial parties</li><li>minimum standard versus new-build comparison</li><li>certificate consequence versus commercial consequence</li><li>ESP is a floor, CAP is a grade</li><li>CAP replaces no statutory or class survey</li></ul></div>
-      <div class="pp-step"><b>4. Documents required to plan the survey</b><ul><li>Survey Programme and survey planning questionnaire</li><li>scantling drawings, with high-tensile steel identified</li><li>means of access and the safe access plan</li><li>approval of the thickness measurement firm</li><li>the survey planning meeting record</li></ul></div>
-      <div class="pp-step"><b>5. Records of history and condition</b><ul><li>Survey Report File - surveys, condition evaluation, gaugings</li><li>previous repair history; cargo and ballast history</li><li>corrosion prevention system and Coating Technical File</li><li>inert gas use and tank cleaning procedures on tankers</li><li>crew inspection reports on deterioration and leakage</li><li>port State control findings and safety management records</li><li>information identifying suspect and critical structural areas</li></ul></div>
-      <div class="pp-step"><b>6. The safe access plan</b><ul><li>means of access for each space and close-up survey area</li><li>staging, rafts, ladders, hydraulic arms, remote techniques</li><li>must bring the surveyor within arm's reach</li><li>rafting conditions - clearance, water level, coating in good condition</li><li>enclosed space entry, atmosphere testing, permit and rescue</li><li>lighting, communication, cleaning and de-scaling</li><li>owner provides the facilities; surveyor may decline to proceed</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2263,13 +2224,14 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Secure the evidence and establish the facts</li>
-      <li value="2">Establish the nature and extent</li>
-      <li value="3">Report to the Company</li>
-      <li value="4">Involve classification and settle the repair</li>
-      <li value="5">Insurance and preservation of the claim</li>
-      <li value="6">Root cause, prevention and close-out</li>
+      <li value="1"><span class="pl-t">Secure the evidence and establish the facts</span><ul class="pl-pts"><li>do not dress, grind or blend before assessment</li><li>photographs, video with scale, dimensioned sketch</li><li>blade number, face, radial position, distance from edge</li><li>examine all blades, boss, keyway and cone</li><li>check rudder, stern frame and hull for contact damage</li><li>assemble vibration, grounding and maintenance history</li></ul></li>
+      <li value="2"><span class="pl-t">Establish the nature and extent</span><ul class="pl-pts"><li>dye penetrant - alloys are non-ferromagnetic, MPI unusable</li><li>eddy current or ultrasonic where depth is needed</li><li>qualified operator, approved firm, written report</li><li>distinguish fatigue crack, casting defect and cavitation pitting</li></ul></li>
+      <li value="3"><span class="pl-t">Report to the Company</span><ul class="pl-pts"><li>Master first, then Company and the DPA under the ISM Code</li><li>raise as a hazardous occurrence or non-conformity in the SMS</li><li>factual report - location, dimensions, NDT, particulars, history</li><li>state options and a recommendation with cost and time effect</li><li>the CE recommends; the Company decides and instructs</li></ul></li>
+      <li value="4"><span class="pl-t">Involve classification and settle the repair</span><ul class="pl-pts"><li>duty to report damage affecting or which may affect class</li><li>surveyor attends and assesses against the society's rules</li><li>position on the blade governs - the stressed region is restricted</li><li>accept, blend, approved weld repair, crop, or replace</li><li>approved repairer and approved procedure; re-test and balance</li><li>endorsement, or a condition of class if deferred</li><li>flag State reporting only if cause and seaworthiness engage it</li></ul></li>
+      <li value="5"><span class="pl-t">Insurance and preservation of the claim</span><ul class="pl-pts"><li>notify H&amp;M underwriters through the Company</li><li>underwriter's surveyor to attend before repairs begin</li><li>cause decides recoverability; wear and cavitation are not perils</li><li>do not commit to method or cost without agreement</li><li>retain removed material for metallurgical examination</li></ul></li>
+      <li value="6"><span class="pl-t">Root cause, prevention and close-out</span><ul class="pl-pts"><li>cavitation, fatigue, impact, dezincification, galvanic, overload</li><li>review roughness, fouling, polishing intervals and cathodic protection</li><li>monitor vibration; review astern working and heavy running</li><li>file NDT, survey, repair and balancing records</li><li>update machinery history, PMS and underwater inspection schedule</li><li>feed lessons through the SMS and hand over fully</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> STOP (step 1) - TEST (2) - TELL (3) - CLASS (4) - CLAIM (5) - CAUSE (6).</p>
     <div class="plan-cov">
@@ -2277,14 +2239,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>33</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 33 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Secure the evidence and establish the facts</b><ul><li>do not dress, grind or blend before assessment</li><li>photographs, video with scale, dimensioned sketch</li><li>blade number, face, radial position, distance from edge</li><li>examine all blades, boss, keyway and cone</li><li>check rudder, stern frame and hull for contact damage</li><li>assemble vibration, grounding and maintenance history</li></ul></div>
-      <div class="pp-step"><b>2. Establish the nature and extent</b><ul><li>dye penetrant - alloys are non-ferromagnetic, MPI unusable</li><li>eddy current or ultrasonic where depth is needed</li><li>qualified operator, approved firm, written report</li><li>distinguish fatigue crack, casting defect and cavitation pitting</li></ul></div>
-      <div class="pp-step"><b>3. Report to the Company</b><ul><li>Master first, then Company and the DPA under the ISM Code</li><li>raise as a hazardous occurrence or non-conformity in the SMS</li><li>factual report - location, dimensions, NDT, particulars, history</li><li>state options and a recommendation with cost and time effect</li><li>the CE recommends; the Company decides and instructs</li></ul></div>
-      <div class="pp-step"><b>4. Involve classification and settle the repair</b><ul><li>duty to report damage affecting or which may affect class</li><li>surveyor attends and assesses against the society's rules</li><li>position on the blade governs - the stressed region is restricted</li><li>accept, blend, approved weld repair, crop, or replace</li><li>approved repairer and approved procedure; re-test and balance</li><li>endorsement, or a condition of class if deferred</li><li>flag State reporting only if cause and seaworthiness engage it</li></ul></div>
-      <div class="pp-step"><b>5. Insurance and preservation of the claim</b><ul><li>notify H&amp;M underwriters through the Company</li><li>underwriter's surveyor to attend before repairs begin</li><li>cause decides recoverability; wear and cavitation are not perils</li><li>do not commit to method or cost without agreement</li><li>retain removed material for metallurgical examination</li></ul></div>
-      <div class="pp-step"><b>6. Root cause, prevention and close-out</b><ul><li>cavitation, fatigue, impact, dezincification, galvanic, overload</li><li>review roughness, fouling, polishing intervals and cathodic protection</li><li>monitor vibration; review astern working and heavy running</li><li>file NDT, survey, repair and balancing records</li><li>update machinery history, PMS and underwater inspection schedule</li><li>feed lessons through the SMS and hand over fully</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2559,15 +2513,16 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">What the Convention is, and what it exists to do</li>
-      <li value="2">How it works</li>
-      <li value="3">Why it matters</li>
-      <li value="4">The recent amendments - what is actually in force</li>
-      <li value="5">What is NOT yet an annex requirement</li>
-      <li value="6">Impact - digitalization</li>
-      <li value="7">Impact - sustainability</li>
-      <li value="8">The limits - and what the Convention does not do</li>
+      <li value="1"><span class="pl-t">What the Convention is, and what it exists to do</span><ul class="pl-pts"><li>adopted 9 April 1965; in force 5 March 1967</li><li>IMO's trade facilitation instrument</li><li>regulates formalities and public authorities, not the ship</li><li>prevent unnecessary delays; aid co-operation between Governments</li><li>secure the highest practicable uniformity in formalities and procedures</li></ul></li>
+      <li value="2"><span class="pl-t">How it works</span><ul class="pl-pts"><li>annex of Standards - necessary and practicable</li><li>and Recommended Practices - desirable</li><li>article VIII - a difference from a Standard must be notified</li><li>Standard 2.1bis - a ceiling on what may be required</li><li>FAL Forms 1 to 7, plus Declaration of Health and UPU documents</li><li>annex amended by tacit acceptance, art VII(2)(a) and VII(2)(b)</li></ul></li>
+      <li value="3"><span class="pl-t">Why it matters</span><ul class="pl-pts"><li>port time is the least productive time a ship has</li><li>uniformity is what makes a ship tradeable worldwide</li><li>the information ceiling protects the ship from the port</li><li>it is the foundation the digital layer was built on</li></ul></li>
+      <li value="4"><span class="pl-t">The recent amendments - what is actually in force</span><ul class="pl-pts"><li>FAL.14(46), adopted 13 May 2022, in force 1 January 2024</li><li>Standard 1.3quin - the single window made mandatory</li><li>single window defined - one entry point, standardized and harmonized</li><li>FAL.15(47), adopted 17 March 2023, in force 1 January 2025</li><li>Recommended Practice 7.11 - national facilitation programmes</li><li>electronic exchange already mandatory from 9 April 2019</li></ul></li>
+      <li value="5"><span class="pl-t">What is NOT yet an annex requirement</span><ul class="pl-pts"><li>FAL 49 (10-14 March 2025) items were APPROVED ONLY</li><li>RP 6.24, revised MSW Guidelines and the new Compendium edition</li><li>FAL.18(49) and FAL.17(48) are guidelines, not annex amendments</li><li>approved is not adopted; adopted is not in force</li><li>no annex amendment adopted and awaiting entry into force</li></ul></li>
+      <li value="6"><span class="pl-t">Impact - digitalization</span><ul class="pl-pts"><li>one harmonised submission instead of many</li><li>IMO Compendium reference data model - WCO, UN/CEFACT, ISO</li><li>pre-arrival submission takes clearance off the critical path</li><li>concentrated data raises cyber exposure</li><li>the duty is on the authority; the ship's benefit is derivative</li></ul></li>
+      <li value="7"><span class="pl-t">Impact - sustainability</span><ul class="pl-pts"><li>the gain runs through time, not through paper</li><li>reliable pre-arrival data enables just-in-time arrival</li><li>slow on passage instead of steaming hard and idling at anchor</li><li>fuel burn falls steeply with speed</li><li>less congestion means less machinery running for no transport work</li><li>it removes an obstacle; it sets no emissions standard</li></ul></li>
+      <li value="8"><span class="pl-t">The limits - and what the Convention does not do</span><ul class="pl-pts"><li>benefits are conditional on real implementation, not a web form</li><li>just-in-time needs the charterparty to permit it</li><li>no construction, equipment, manning or emission requirement</li><li>it does not override customs, immigration or quarantine law</li><li>a Recommended Practice is not binding</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> WHAT (1) - HOW (2) - WHY (3), then TWO RESOLUTIONS: FAL.14(46) 1 Jan 2024 single window, FAL.15(47) 1 Jan 2025 RP 7.11 (4-5), then TWO LENSES: digital (6), sustainable (7), then the LIMIT (8).</p>
     <div class="plan-cov">
@@ -2575,16 +2530,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>42</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 42 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What the Convention is, and what it exists to do</b><ul><li>adopted 9 April 1965; in force 5 March 1967</li><li>IMO's trade facilitation instrument</li><li>regulates formalities and public authorities, not the ship</li><li>prevent unnecessary delays; aid co-operation between Governments</li><li>secure the highest practicable uniformity in formalities and procedures</li></ul></div>
-      <div class="pp-step"><b>2. How it works</b><ul><li>annex of Standards - necessary and practicable</li><li>and Recommended Practices - desirable</li><li>article VIII - a difference from a Standard must be notified</li><li>Standard 2.1bis - a ceiling on what may be required</li><li>FAL Forms 1 to 7, plus Declaration of Health and UPU documents</li><li>annex amended by tacit acceptance, art VII(2)(a) and VII(2)(b)</li></ul></div>
-      <div class="pp-step"><b>3. Why it matters</b><ul><li>port time is the least productive time a ship has</li><li>uniformity is what makes a ship tradeable worldwide</li><li>the information ceiling protects the ship from the port</li><li>it is the foundation the digital layer was built on</li></ul></div>
-      <div class="pp-step"><b>4. The recent amendments - what is actually in force</b><ul><li>FAL.14(46), adopted 13 May 2022, in force 1 January 2024</li><li>Standard 1.3quin - the single window made mandatory</li><li>single window defined - one entry point, standardized and harmonized</li><li>FAL.15(47), adopted 17 March 2023, in force 1 January 2025</li><li>Recommended Practice 7.11 - national facilitation programmes</li><li>electronic exchange already mandatory from 9 April 2019</li></ul></div>
-      <div class="pp-step"><b>5. What is NOT yet an annex requirement</b><ul><li>FAL 49 (10-14 March 2025) items were APPROVED ONLY</li><li>RP 6.24, revised MSW Guidelines and the new Compendium edition</li><li>FAL.18(49) and FAL.17(48) are guidelines, not annex amendments</li><li>approved is not adopted; adopted is not in force</li><li>no annex amendment adopted and awaiting entry into force</li></ul></div>
-      <div class="pp-step"><b>6. Impact - digitalization</b><ul><li>one harmonised submission instead of many</li><li>IMO Compendium reference data model - WCO, UN/CEFACT, ISO</li><li>pre-arrival submission takes clearance off the critical path</li><li>concentrated data raises cyber exposure</li><li>the duty is on the authority; the ship's benefit is derivative</li></ul></div>
-      <div class="pp-step"><b>7. Impact - sustainability</b><ul><li>the gain runs through time, not through paper</li><li>reliable pre-arrival data enables just-in-time arrival</li><li>slow on passage instead of steaming hard and idling at anchor</li><li>fuel burn falls steeply with speed</li><li>less congestion means less machinery running for no transport work</li><li>it removes an obstacle; it sets no emissions standard</li></ul></div>
-      <div class="pp-step"><b>8. The limits - and what the Convention does not do</b><ul><li>benefits are conditional on real implementation, not a web form</li><li>just-in-time needs the charterparty to permit it</li><li>no construction, equipment, manning or emission requirement</li><li>it does not override customs, immigration or quarantine law</li><li>a Recommended Practice is not binding</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2878,13 +2823,14 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The Convention and when it bit</li>
-      <li value="2">What it requires of ships</li>
-      <li value="3">What it requires of recycling facilities</li>
-      <li value="4">India's position and domestic implementation</li>
-      <li value="5">How India stands to benefit</li>
-      <li value="6">How it stands to be impacted, and the balance</li>
+      <li value="1"><span class="pl-t">The Convention and when it bit</span><ul class="pl-pts"><li>adopted Hong Kong, China, May 2009</li><li>entered into force 26 June 2025</li><li>Article 17 - 15 States, 40 per cent tonnage, 3 per cent recycling volume</li><li>the volume condition needed the recycling States themselves</li><li>24 Parties at about 57 per cent of world tonnage at entry into force</li></ul></li>
+      <li value="2"><span class="pl-t">What it requires of ships</span><ul class="pl-pts"><li>Inventory of Hazardous Materials in three parts</li><li>ICIHM, then final survey and the Ready for Recycling Certificate</li><li>500 GT and above, excluding purely domestic ships (Article 3.3)</li><li>existing ships by 26 June 2030 or before recycling</li><li>asbestos, PCBs, ODS, organotin and cybutryne controlled</li><li>recycling only at an authorised facility in a Party State</li></ul></li>
+      <li value="3"><span class="pl-t">What it requires of recycling facilities</span><ul class="pl-pts"><li>an IMO convention that reaches ashore and regulates the yard</li><li>Document of Authorisation to conduct Ship Recycling</li><li>Ship Recycling Facility Plan - safety, training, emergency, waste</li><li>safe-for-entry and safe-for-hot-work conditions</li><li>controlled downstream management of removed wastes</li></ul></li>
+      <li value="4"><span class="pl-t">India's position and domestic implementation</span><ul class="pl-pts"><li>a principal recycling State, centred on Alang-Sosiya</li><li>acceded 28 November 2019 - took the count to fifteen States</li><li>Recycling of Ships Act 2019 and Rules 2019 implement it</li><li>the administration is the competent authority</li><li>its own statute - the general Act alongside it is the 1958 Act</li></ul></li>
+      <li value="5"><span class="pl-t">How India stands to benefit</span><ul class="pl-pts"><li>legitimacy and access to better quality tonnage</li><li>a level playing field against competing recycling States</li><li>worker safety and environmental improvement</li><li>downstream industry, investment and financeability</li></ul></li>
+      <li value="6"><span class="pl-t">How it stands to be impacted, and the balance</span><ul class="pl-pts"><li>capital cost of compliance and consolidation of small yards</li><li>downstream waste treatment capacity is the binding constraint</li><li>lower price per light displacement tonne; leakage to non-Party flags</li><li>the Convention does not ban beaching - EU acceptance is separate</li><li>enforcement, not certification, is the credibility test</li><li>net positive, but conditional on infrastructure and enforcement</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> SHIP (steps 1-2) - SHORE (3) - INDIA (4) - SCALES (5-6). Dates a decade apart: adopted 2009, India acceded 2019, in force 2025, existing ships by 2030.</p>
     <div class="plan-cov">
@@ -2892,14 +2838,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>31</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 31 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The Convention and when it bit</b><ul><li>adopted Hong Kong, China, May 2009</li><li>entered into force 26 June 2025</li><li>Article 17 - 15 States, 40 per cent tonnage, 3 per cent recycling volume</li><li>the volume condition needed the recycling States themselves</li><li>24 Parties at about 57 per cent of world tonnage at entry into force</li></ul></div>
-      <div class="pp-step"><b>2. What it requires of ships</b><ul><li>Inventory of Hazardous Materials in three parts</li><li>ICIHM, then final survey and the Ready for Recycling Certificate</li><li>500 GT and above, excluding purely domestic ships (Article 3.3)</li><li>existing ships by 26 June 2030 or before recycling</li><li>asbestos, PCBs, ODS, organotin and cybutryne controlled</li><li>recycling only at an authorised facility in a Party State</li></ul></div>
-      <div class="pp-step"><b>3. What it requires of recycling facilities</b><ul><li>an IMO convention that reaches ashore and regulates the yard</li><li>Document of Authorisation to conduct Ship Recycling</li><li>Ship Recycling Facility Plan - safety, training, emergency, waste</li><li>safe-for-entry and safe-for-hot-work conditions</li><li>controlled downstream management of removed wastes</li></ul></div>
-      <div class="pp-step"><b>4. India's position and domestic implementation</b><ul><li>a principal recycling State, centred on Alang-Sosiya</li><li>acceded 28 November 2019 - took the count to fifteen States</li><li>Recycling of Ships Act 2019 and Rules 2019 implement it</li><li>the administration is the competent authority</li><li>its own statute - the general Act alongside it is the 1958 Act</li></ul></div>
-      <div class="pp-step"><b>5. How India stands to benefit</b><ul><li>legitimacy and access to better quality tonnage</li><li>a level playing field against competing recycling States</li><li>worker safety and environmental improvement</li><li>downstream industry, investment and financeability</li></ul></div>
-      <div class="pp-step"><b>6. How it stands to be impacted, and the balance</b><ul><li>capital cost of compliance and consolidation of small yards</li><li>downstream waste treatment capacity is the binding constraint</li><li>lower price per light displacement tonne; leakage to non-Party flags</li><li>the Convention does not ban beaching - EU acceptance is separate</li><li>enforcement, not certification, is the credibility test</li><li>net positive, but conditional on infrastructure and enforcement</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -3173,14 +3111,15 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Adoption is not entry into force</li>
-      <li value="2">How a State expresses consent to be bound</li>
-      <li value="3">The two terms the question names</li>
-      <li value="4">The entry into force provision, and why it matters</li>
-      <li value="5">Conventions of an important technical nature</li>
-      <li value="6">Keeping the convention current once in force</li>
-      <li value="7">Adoption is not automatic either</li>
+      <li value="1"><span class="pl-t">Adoption is not entry into force</span><ul class="pl-pts"><li>adopted by an IMO organ or a diplomatic conference</li><li>adoption settles the text and nothing more</li><li>no State is bound by adoption alone</li><li>the text is opened for signature and deposited</li><li>the Secretary-General of IMO is the depositary</li></ul></li>
+      <li value="2"><span class="pl-t">How a State expresses consent to be bound</span><ul class="pl-pts"><li>signature alone, where the treaty so provides</li><li>signature subject to ratification, acceptance or approval</li><li>accession, after the signature period closes</li><li>binding only on deposit of a formal instrument</li><li>the depositary records, counts and notifies</li></ul></li>
+      <li value="3"><span class="pl-t">The two terms the question names</span><ul class="pl-pts"><li>(ii) signature subject to ratification - signature does not bind</li><li>two steps; time to legislate and satisfy the constitution</li><li>acceptance and approval are the same act - VCLT Art 14(2)</li><li>(i) accession - one step, no prior signature - VCLT Art 15</li><li>identical legal effect once the instrument is deposited</li></ul></li>
+      <li value="4"><span class="pl-t">The entry into force provision, and why it matters</span><ul class="pl-pts"><li>every convention carries its own final clause</li><li>a threshold of acceptances plus a waiting period</li><li>prevents an instrument binding a few States and distorting competition</li><li>gives a certain date for obligations, surveys and certificates</li><li>allows domestic law, class rules and shipbuilding to be ready</li><li>underpins port State control and no more favourable treatment</li></ul></li>
+      <li value="5"><span class="pl-t">Conventions of an important technical nature</span><ul class="pl-pts"><li>a double condition - number of States and world tonnage</li><li>SOLAS 1974 - 25 States and 50% of world gross tonnage</li><li>1978 MARPOL Protocol - 15 States and 50%, plus twelve months</li><li>Hong Kong Convention - a triple condition adding 3% recycling volume</li><li>tonnage ensures the major fleets are inside</li><li>older conventions commonly required two-thirds of contracting States</li></ul></li>
+      <li value="6"><span class="pl-t">Keeping the convention current once in force</span><ul class="pl-pts"><li>explicit acceptance proved unworkable - SOLAS 1960 amendments</li><li>tacit acceptance - deemed accepted unless objected to</li><li>SOLAS - two years, one-third of Governments or 50% tonnage</li><li>FAL.15(47) - in force 1 January 2025 unless one third objected by 1 October 2024</li><li>amendments now in force in about 18 to 24 months</li></ul></li>
+      <li value="7"><span class="pl-t">Adoption is not automatic either</span><ul class="pl-pts"><li>MARPOL art 16(2)(a) circulation, 16(2)(b)-(d) adoption</li><li>the Net-Zero Framework circulated 11 April 2025</li><li>MEPC/ES.2 met 14 to 17 October 2025 and adjourned for twelve months</li><li>circulated but not adopted, so binding nobody at this sitting</li><li>flag States must then give an instrument domestic effect</li><li>in India at this sitting, the Merchant Shipping Act 1958</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> The spine is in order: <b>ADOPT (1) - CONSENT (2) - THE TWO TERMS (3) - IN FORCE (4) - TONNAGE TEST (5) - AMEND (6) - NOT ADOPTED (7)</b>. Numbers: SOLAS 25 and 50; MARPOL 78 fifteen and 50; Hong Kong 15, 40 and 3; tacit acceptance two years, one-third or 50 per cent.</p>
     <div class="plan-cov">
@@ -3188,15 +3127,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>38</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 38 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Adoption is not entry into force</b><ul><li>adopted by an IMO organ or a diplomatic conference</li><li>adoption settles the text and nothing more</li><li>no State is bound by adoption alone</li><li>the text is opened for signature and deposited</li><li>the Secretary-General of IMO is the depositary</li></ul></div>
-      <div class="pp-step"><b>2. How a State expresses consent to be bound</b><ul><li>signature alone, where the treaty so provides</li><li>signature subject to ratification, acceptance or approval</li><li>accession, after the signature period closes</li><li>binding only on deposit of a formal instrument</li><li>the depositary records, counts and notifies</li></ul></div>
-      <div class="pp-step"><b>3. The two terms the question names</b><ul><li>(ii) signature subject to ratification - signature does not bind</li><li>two steps; time to legislate and satisfy the constitution</li><li>acceptance and approval are the same act - VCLT Art 14(2)</li><li>(i) accession - one step, no prior signature - VCLT Art 15</li><li>identical legal effect once the instrument is deposited</li></ul></div>
-      <div class="pp-step"><b>4. The entry into force provision, and why it matters</b><ul><li>every convention carries its own final clause</li><li>a threshold of acceptances plus a waiting period</li><li>prevents an instrument binding a few States and distorting competition</li><li>gives a certain date for obligations, surveys and certificates</li><li>allows domestic law, class rules and shipbuilding to be ready</li><li>underpins port State control and no more favourable treatment</li></ul></div>
-      <div class="pp-step"><b>5. Conventions of an important technical nature</b><ul><li>a double condition - number of States and world tonnage</li><li>SOLAS 1974 - 25 States and 50% of world gross tonnage</li><li>1978 MARPOL Protocol - 15 States and 50%, plus twelve months</li><li>Hong Kong Convention - a triple condition adding 3% recycling volume</li><li>tonnage ensures the major fleets are inside</li><li>older conventions commonly required two-thirds of contracting States</li></ul></div>
-      <div class="pp-step"><b>6. Keeping the convention current once in force</b><ul><li>explicit acceptance proved unworkable - SOLAS 1960 amendments</li><li>tacit acceptance - deemed accepted unless objected to</li><li>SOLAS - two years, one-third of Governments or 50% tonnage</li><li>FAL.15(47) - in force 1 January 2025 unless one third objected by 1 October 2024</li><li>amendments now in force in about 18 to 24 months</li></ul></div>
-      <div class="pp-step"><b>7. Adoption is not automatic either</b><ul><li>MARPOL art 16(2)(a) circulation, 16(2)(b)-(d) adoption</li><li>the Net-Zero Framework circulated 11 April 2025</li><li>MEPC/ES.2 met 14 to 17 October 2025 and adjourned for twelve months</li><li>circulated but not adopted, so binding nobody at this sitting</li><li>flag States must then give an instrument domestic effect</li><li>in India at this sitting, the Merchant Shipping Act 1958</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">

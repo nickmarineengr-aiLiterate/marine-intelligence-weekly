@@ -267,7 +267,7 @@
   .plan-lead{margin:0 0 8px;font-size:13.5px;}
   .plan-limb{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;margin-top:8px;}
   .plan-list{margin:4px 0 0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;}
-  .plan-list li{margin:4px 0;}
+  .plan-list li{margin:9px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
   .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
@@ -275,11 +275,11 @@
   .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
   .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
-  .plan-points{margin-top:9px;font-size:12.5px;}
-  .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
-  .plan-points:focus-within > summary{outline:2px solid var(--orange);outline-offset:2px;}
-  .pp-step{margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;}
-  .pp-step ul{margin:3px 0 0;padding-left:20px;color:var(--grey-text);}
+  .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
+  .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}
+  .pl-t{display:block;}
+  .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;color:var(--grey-text);}
+  .pl-pts li{margin:2px 0;}
 
   /* Recall: blanks first, reveal on demand. */
   .recall{background:#fff;border:1.5px solid var(--teal-dark);padding:0 16px 13px;}
@@ -627,18 +627,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">What goal-based standards are, and why they exist</li>
-      <li value="2">The tier structure - and how many tiers the instrument actually contains</li>
-      <li value="3">Tier I and Tier II - the goal and the functional requirements</li>
-      <li value="4">Why this enhances safety and environmental protection</li>
+      <li value="1"><span class="pl-t">What goal-based standards are, and why they exist</span><ul class="pl-pts"><li>outcome, not method</li><li>MSC.287(87), 20 May 2010</li><li>mandatory via SOLAS II-1/3-10</li><li>bulk carriers and oil tankers 150 m and above</li><li>contract on or after 1 July 2016</li></ul></li>
+      <li value="2"><span class="pl-t">The tier structure - and how many tiers the instrument actually contains</span><ul class="pl-pts"><li>framework agreed as five tiers</li><li>the Standards themselves contain three</li><li>Tier IV = class and national rules</li><li>Tier V = industry practice</li></ul></li>
+      <li value="3"><span class="pl-t">Tier I and Tier II - the goal and the functional requirements</span><ul class="pl-pts"><li>safe and environmentally friendly</li><li>specified design life, throughout life</li><li>fifteen functional requirements</li><li>four lifecycle groups</li><li>design life not less than 25 years</li><li>North Atlantic conditions</li></ul></li>
+      <li value="4"><span class="pl-t">Why this enhances safety and environmental protection</span><ul class="pl-pts"><li>whole-life goal, not delivery-day</li><li>fatigue, residual strength, redundancy</li><li>accessibility and transparency</li><li>recycling written into the goal</li><li>corrosion control is pollution control</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">How conformity is verified</li>
-      <li value="6">Who does what - the stakeholders</li>
-      <li value="7">The Ship Construction File</li>
+      <li value="5"><span class="pl-t">How conformity is verified</span><ul class="pl-pts"><li>Tier III section 6.1</li><li>RO recognized under SOLAS XI-1/1</li><li>IMO audit team, not self-certification</li><li>reports to MSC for approval</li><li>current guidelines MSC.454(100)</li></ul></li>
+      <li value="6"><span class="pl-t">Who does what - the stakeholders</span><ul class="pl-pts"><li>IMO owns Tiers I to III</li><li>Administration recognizes the RO</li><li>class writes and submits Tier IV rules</li><li>designers deliver life and transparency</li><li>builders deliver quality and the file</li><li>owners maintain the assumptions</li></ul></li>
+      <li value="7"><span class="pl-t">The Ship Construction File</span><ul class="pl-pts"><li>SOLAS II-1/3-10.2.1</li><li>MSC.1/Circ.1343 content guidance</li><li>kept on board and/or ashore</li><li>updated through the ship's life</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Tiers G-F-V-R-P (2): Goals, Functional requirements, Verification, Rules, Practices - and the Standards stop after V. Tier II groups follow the ship's life: design, build, sail, scrap (3).</p>
     <div class="plan-cov">
@@ -646,15 +647,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>35</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 35 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What goal-based standards are, and why they exist</b><ul><li>outcome, not method</li><li>MSC.287(87), 20 May 2010</li><li>mandatory via SOLAS II-1/3-10</li><li>bulk carriers and oil tankers 150 m and above</li><li>contract on or after 1 July 2016</li></ul></div>
-      <div class="pp-step"><b>2. The tier structure - and how many tiers the instrument actually contains</b><ul><li>framework agreed as five tiers</li><li>the Standards themselves contain three</li><li>Tier IV = class and national rules</li><li>Tier V = industry practice</li></ul></div>
-      <div class="pp-step"><b>3. Tier I and Tier II - the goal and the functional requirements</b><ul><li>safe and environmentally friendly</li><li>specified design life, throughout life</li><li>fifteen functional requirements</li><li>four lifecycle groups</li><li>design life not less than 25 years</li><li>North Atlantic conditions</li></ul></div>
-      <div class="pp-step"><b>4. Why this enhances safety and environmental protection</b><ul><li>whole-life goal, not delivery-day</li><li>fatigue, residual strength, redundancy</li><li>accessibility and transparency</li><li>recycling written into the goal</li><li>corrosion control is pollution control</li></ul></div>
-      <div class="pp-step"><b>5. How conformity is verified</b><ul><li>Tier III section 6.1</li><li>RO recognized under SOLAS XI-1/1</li><li>IMO audit team, not self-certification</li><li>reports to MSC for approval</li><li>current guidelines MSC.454(100)</li></ul></div>
-      <div class="pp-step"><b>6. Who does what - the stakeholders</b><ul><li>IMO owns Tiers I to III</li><li>Administration recognizes the RO</li><li>class writes and submits Tier IV rules</li><li>designers deliver life and transparency</li><li>builders deliver quality and the file</li><li>owners maintain the assumptions</li></ul></div>
-      <div class="pp-step"><b>7. The Ship Construction File</b><ul><li>SOLAS II-1/3-10.2.1</li><li>MSC.1/Circ.1343 content guidance</li><li>kept on board and/or ashore</li><li>updated through the ship's life</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -924,33 +916,25 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">What port State control is</li>
-      <li value="2">The legal framework</li>
-      <li value="3">No more favourable treatment</li>
-      <li value="4">How an inspection becomes a detention</li>
+      <li value="1"><span class="pl-t">What port State control is</span><ul class="pl-pts"><li>inspection of foreign ships in national ports</li><li>verifies condition, equipment, crew, operation</li><li>a safety net beneath the flag State</li><li>does not transfer flag State duty</li><li>operated through regional MoUs</li></ul></li>
+      <li value="2"><span class="pl-t">The legal framework</span><ul class="pl-pts"><li>power conferred by the conventions themselves</li><li>A.1206(34) is the current procedures</li><li>SOLAS I/19, IX/6.2, XI-1/4, XI-2/9</li><li>Load Lines article 21</li><li>MARPOL articles 5 and 6 and the Annexes</li><li>STCW article X, TONNAGE 12, AFS 11, BWM 9</li></ul></li>
+      <li value="3"><span class="pl-t">No more favourable treatment</span><ul class="pl-pts"><li>non-Party ships get no advantage</li><li>below-size ships get no advantage</li><li>SOLAS PROT I(3), MARPOL 5(4), STCW X(5)</li><li>stops non-ratification paying</li></ul></li>
+      <li value="4"><span class="pl-t">How an inspection becomes a detention</span><ul class="pl-pts"><li>certificates and general impression first</li><li>clear grounds trigger a detailed inspection</li><li>clearly hazardous deficiencies justify detention</li><li>reported to the flag State</li><li>may proceed to a repair port</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">The right of appeal - what the instrument actually says</li>
-      <li value="6">What the Chief Engineer should actually do</li>
-      <li value="7">Undue delay and compensation, and one trap</li>
+      <li value="5"><span class="pl-t">The right of appeal - what the instrument actually says</span><ul class="pl-pts"><li>section 2.3.11</li><li>the company or its representative holds it</li><li>not the Chief Engineer personally</li><li>the appeal does NOT suspend the detention</li><li>the PSCO must inform the master</li></ul></li>
+      <li value="6"><span class="pl-t">What the Chief Engineer should actually do</span><ul class="pl-pts"><li>record the evidence before sailing</li><li>ask which requirement each deficiency rests on</li><li>notify company, flag State and the RO</li><li>rectify and seek release in parallel</li><li>the company lodges the appeal</li></ul></li>
+      <li value="7"><span class="pl-t">Undue delay and compensation, and one trap</span><ul class="pl-pts"><li>MARPOL article 7(2), SOLAS I/19</li><li>compensation is a claim, not a release</li><li>a different remedy from appeal</li><li>the Review Procedures chapter is NOT the appeal route</li></ul></li>
     </ol>
     <div class="plan-cov">
       <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>7</b> route headings</span></div>
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>34</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 34 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What port State control is</b><ul><li>inspection of foreign ships in national ports</li><li>verifies condition, equipment, crew, operation</li><li>a safety net beneath the flag State</li><li>does not transfer flag State duty</li><li>operated through regional MoUs</li></ul></div>
-      <div class="pp-step"><b>2. The legal framework</b><ul><li>power conferred by the conventions themselves</li><li>A.1206(34) is the current procedures</li><li>SOLAS I/19, IX/6.2, XI-1/4, XI-2/9</li><li>Load Lines article 21</li><li>MARPOL articles 5 and 6 and the Annexes</li><li>STCW article X, TONNAGE 12, AFS 11, BWM 9</li></ul></div>
-      <div class="pp-step"><b>3. No more favourable treatment</b><ul><li>non-Party ships get no advantage</li><li>below-size ships get no advantage</li><li>SOLAS PROT I(3), MARPOL 5(4), STCW X(5)</li><li>stops non-ratification paying</li></ul></div>
-      <div class="pp-step"><b>4. How an inspection becomes a detention</b><ul><li>certificates and general impression first</li><li>clear grounds trigger a detailed inspection</li><li>clearly hazardous deficiencies justify detention</li><li>reported to the flag State</li><li>may proceed to a repair port</li></ul></div>
-      <div class="pp-step"><b>5. The right of appeal - what the instrument actually says</b><ul><li>section 2.3.11</li><li>the company or its representative holds it</li><li>not the Chief Engineer personally</li><li>the appeal does NOT suspend the detention</li><li>the PSCO must inform the master</li></ul></div>
-      <div class="pp-step"><b>6. What the Chief Engineer should actually do</b><ul><li>record the evidence before sailing</li><li>ask which requirement each deficiency rests on</li><li>notify company, flag State and the RO</li><li>rectify and seek release in parallel</li><li>the company lodges the appeal</li></ul></div>
-      <div class="pp-step"><b>7. Undue delay and compensation, and one trap</b><ul><li>MARPOL article 7(2), SOLAS I/19</li><li>compensation is a claim, not a release</li><li>a different remedy from appeal</li><li>the Review Procedures chapter is NOT the appeal route</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1225,18 +1209,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">The types of loss in marine insurance</li>
-      <li value="2">The general average act, as the York Antwerp Rules 1994 define it</li>
-      <li value="3">When general average may be declared</li>
-      <li value="4">What the 1994 Rules say that the current Rules do not</li>
+      <li value="1"><span class="pl-t">The types of loss in marine insurance</span><ul class="pl-pts"><li>total: actual and constructive</li><li>constructive needs notice of abandonment</li><li>partial: particular average</li><li>partial: general average</li><li>salvage charges</li><li>particular charges - sue and labour</li></ul></li>
+      <li value="2"><span class="pl-t">The general average act, as the York Antwerp Rules 1994 define it</span><ul class="pl-pts"><li>Rule A quoted</li><li>extraordinary sacrifice or expenditure</li><li>intentionally and reasonably made</li><li>for the common safety</li><li>borne rateably by contributing interests</li><li>wording unchanged in 2016</li></ul></li>
+      <li value="3"><span class="pl-t">When general average may be declared</span><ul class="pl-pts"><li>real peril, not apprehension</li><li>extraordinary, not a contractual duty</li><li>intentional and voluntary</li><li>reasonable - the Rule Paramount</li><li>common safety, not one interest</li><li>property must be saved</li><li>the shipowner declares, through the Master</li></ul></li>
+      <li value="4"><span class="pl-t">What the 1994 Rules say that the current Rules do not</span><ul class="pl-pts"><li>the Rules are contractual, not law</li><li>the edition is named in the contract</li><li>2 per cent commission under Rule XX</li><li>interest fixed at 7 per cent</li><li>no time bar - 1994 ends at Rule XXII</li><li>YAR 2016 is the current edition</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">Warranties in marine insurance, and what breach does</li>
-      <li value="6">Express warranties, with a hull and machinery example</li>
-      <li value="7">Implied warranties, and the hull and machinery twist</li>
+      <li value="5"><span class="pl-t">Warranties in marine insurance, and what breach does</span><ul class="pl-pts"><li>a promissory warranty</li><li>exact compliance, material or not</li><li>breach discharges from the date of breach</li><li>excused only in narrow cases</li><li>the English Insurance Act 2015 is NOT the Indian rule</li></ul></li>
+      <li value="6"><span class="pl-t">Express warranties, with a hull and machinery example</span><ul class="pl-pts"><li>written into or upon the policy</li><li>or in a document incorporated by reference</li><li>no particular form of words</li><li>classification warranty</li><li>navigation and trading limits</li><li>lay-up warranty</li></ul></li>
+      <li value="7"><span class="pl-t">Implied warranties, and the hull and machinery twist</span><ul class="pl-pts"><li>imposed by the Act, unwritten</li><li>legality of the adventure - cannot be excluded</li><li>seaworthiness implied in a voyage policy</li><li>NO implied seaworthiness in a time policy</li><li>privity defeats a loss attributable to unseaworthiness</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Losses: TWO total, FOUR partial (1). Rule A elements E-I-R-C-S: Extraordinary, Intentional, Reasonable, Common safety, Saved (3).</p>
     <div class="plan-cov">
@@ -1244,15 +1229,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>41</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 41 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The types of loss in marine insurance</b><ul><li>total: actual and constructive</li><li>constructive needs notice of abandonment</li><li>partial: particular average</li><li>partial: general average</li><li>salvage charges</li><li>particular charges - sue and labour</li></ul></div>
-      <div class="pp-step"><b>2. The general average act, as the York Antwerp Rules 1994 define it</b><ul><li>Rule A quoted</li><li>extraordinary sacrifice or expenditure</li><li>intentionally and reasonably made</li><li>for the common safety</li><li>borne rateably by contributing interests</li><li>wording unchanged in 2016</li></ul></div>
-      <div class="pp-step"><b>3. When general average may be declared</b><ul><li>real peril, not apprehension</li><li>extraordinary, not a contractual duty</li><li>intentional and voluntary</li><li>reasonable - the Rule Paramount</li><li>common safety, not one interest</li><li>property must be saved</li><li>the shipowner declares, through the Master</li></ul></div>
-      <div class="pp-step"><b>4. What the 1994 Rules say that the current Rules do not</b><ul><li>the Rules are contractual, not law</li><li>the edition is named in the contract</li><li>2 per cent commission under Rule XX</li><li>interest fixed at 7 per cent</li><li>no time bar - 1994 ends at Rule XXII</li><li>YAR 2016 is the current edition</li></ul></div>
-      <div class="pp-step"><b>5. Warranties in marine insurance, and what breach does</b><ul><li>a promissory warranty</li><li>exact compliance, material or not</li><li>breach discharges from the date of breach</li><li>excused only in narrow cases</li><li>the English Insurance Act 2015 is NOT the Indian rule</li></ul></div>
-      <div class="pp-step"><b>6. Express warranties, with a hull and machinery example</b><ul><li>written into or upon the policy</li><li>or in a document incorporated by reference</li><li>no particular form of words</li><li>classification warranty</li><li>navigation and trading limits</li><li>lay-up warranty</li></ul></div>
-      <div class="pp-step"><b>7. Implied warranties, and the hull and machinery twist</b><ul><li>imposed by the Act, unwritten</li><li>legality of the adventure - cannot be excluded</li><li>seaworthiness implied in a voyage policy</li><li>NO implied seaworthiness in a time policy</li><li>privity defeats a loss attributable to unseaworthiness</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1553,18 +1529,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">Why decarbonisation changes what a marine engineer must be competent at</li>
-      <li value="2">Where the mandatory training framework reaches - and where it does not</li>
-      <li value="3">The anticipated areas of concern</li>
-      <li value="4">The competences the transition demands that are not about fuel</li>
+      <li value="1"><span class="pl-t">Why decarbonisation changes what a marine engineer must be competent at</span><ul class="pl-pts"><li>the hazard model changed, not just intensified</li><li>toxicity replaces fire as the governing hazard</li><li>2023 IMO GHG Strategy sets the trajectory</li><li>EEXI and CII already in force</li><li>Net-Zero Framework approved but NOT adopted at this sitting</li></ul></li>
+      <li value="2"><span class="pl-t">Where the mandatory training framework reaches - and where it does not</span><ul class="pl-pts"><li>STCW V/3 and A-V/3 cover IGF Code ships</li><li>ammonia and methanol fall outside it</li><li>ships arrive faster than the Convention</li><li>interim guidelines agreed in draft at HTW 12</li><li>comprehensive STCW review is the long route</li></ul></li>
+      <li value="3"><span class="pl-t">The anticipated areas of concern</span><ul class="pl-pts"><li>ammonia - acute toxicity, detection, escape sets</li><li>ammonia is NOT zero-emission - N2O and slip</li><li>methanol - invisible flame, alcohol-resistant foam</li><li>hydrogen - wide flammability, leakage, embrittlement</li><li>batteries - stored energy, thermal runaway, high voltage</li><li>LNG - cryogenic, boil-off, rollover</li><li>wind assist and shore power</li></ul></li>
+      <li value="4"><span class="pl-t">The competences the transition demands that are not about fuel</span><ul class="pl-pts"><li>efficiency and data integrity</li><li>dual-fuel changeover at sea</li><li>risk assessment for a novel plant</li><li>leadership and change management</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">Why communication is a causal factor, not a contributory nicety</li>
-      <li value="6">What the instruments actually require</li>
-      <li value="7">Why present-day crewing makes this harder</li>
+      <li value="5"><span class="pl-t">Why communication is a causal factor, not a contributory nicety</span><ul class="pl-pts"><li>the information existed and did not arrive</li><li>a link in the causal chain</li><li>vertical failure - not challenging</li><li>horizontal failure - between departments</li><li>handover failure</li><li>ship-to-shore divergence</li></ul></li>
+      <li value="6"><span class="pl-t">What the instruments actually require</span><ul class="pl-pts"><li>ISM 1.4.2 - lines of authority and communication</li><li>ISM 6.6 - working language understood</li><li>ISM 6.7 - able to communicate effectively</li><li>SOLAS V/14 - recorded working language, English on the bridge</li><li>STCW A-VIII/2 - resource management</li><li>Standard Marine Communication Phrases</li></ul></li>
+      <li value="7"><span class="pl-t">Why present-day crewing makes this harder</span><ul class="pl-pts"><li>multinational crews - declared is not shared</li><li>turnover erodes informal knowledge</li><li>power distance suppresses the challenge</li><li>shore intensity and picture divergence</li><li>fatigue degrades read-back first</li><li>novel fuels raise the cost of ambiguity</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) - what each new fuel defeats: ammonia your lungs, methanol your eyes, hydrogen your joints, batteries your isolation (3). Limb (b) - four directions of failure: up, across, along, ashore (5).</p>
     <div class="plan-cov">
@@ -1572,15 +1549,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>39</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 39 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Why decarbonisation changes what a marine engineer must be competent at</b><ul><li>the hazard model changed, not just intensified</li><li>toxicity replaces fire as the governing hazard</li><li>2023 IMO GHG Strategy sets the trajectory</li><li>EEXI and CII already in force</li><li>Net-Zero Framework approved but NOT adopted at this sitting</li></ul></div>
-      <div class="pp-step"><b>2. Where the mandatory training framework reaches - and where it does not</b><ul><li>STCW V/3 and A-V/3 cover IGF Code ships</li><li>ammonia and methanol fall outside it</li><li>ships arrive faster than the Convention</li><li>interim guidelines agreed in draft at HTW 12</li><li>comprehensive STCW review is the long route</li></ul></div>
-      <div class="pp-step"><b>3. The anticipated areas of concern</b><ul><li>ammonia - acute toxicity, detection, escape sets</li><li>ammonia is NOT zero-emission - N2O and slip</li><li>methanol - invisible flame, alcohol-resistant foam</li><li>hydrogen - wide flammability, leakage, embrittlement</li><li>batteries - stored energy, thermal runaway, high voltage</li><li>LNG - cryogenic, boil-off, rollover</li><li>wind assist and shore power</li></ul></div>
-      <div class="pp-step"><b>4. The competences the transition demands that are not about fuel</b><ul><li>efficiency and data integrity</li><li>dual-fuel changeover at sea</li><li>risk assessment for a novel plant</li><li>leadership and change management</li></ul></div>
-      <div class="pp-step"><b>5. Why communication is a causal factor, not a contributory nicety</b><ul><li>the information existed and did not arrive</li><li>a link in the causal chain</li><li>vertical failure - not challenging</li><li>horizontal failure - between departments</li><li>handover failure</li><li>ship-to-shore divergence</li></ul></div>
-      <div class="pp-step"><b>6. What the instruments actually require</b><ul><li>ISM 1.4.2 - lines of authority and communication</li><li>ISM 6.6 - working language understood</li><li>ISM 6.7 - able to communicate effectively</li><li>SOLAS V/14 - recorded working language, English on the bridge</li><li>STCW A-VIII/2 - resource management</li><li>Standard Marine Communication Phrases</li></ul></div>
-      <div class="pp-step"><b>7. Why present-day crewing makes this harder</b><ul><li>multinational crews - declared is not shared</li><li>turnover erodes informal knowledge</li><li>power distance suppresses the challenge</li><li>shore intensity and picture divergence</li><li>fatigue degrades read-back first</li><li>novel fuels raise the cost of ambiguity</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1874,18 +1842,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">The Code, and the system that implements it</li>
-      <li value="2">The components - the functional requirements of an SMS</li>
-      <li value="3">How the Code is given effect</li>
-      <li value="4">Continuous improvement - where it actually lives in the Code</li>
+      <li value="1"><span class="pl-t">The Code, and the system that implements it</span><ul class="pl-pts"><li>A.741(18), mandatory through SOLAS IX</li><li>the Code prescribes a system, not equipment</li><li>objectives at 1.2.1 - safety, life, environment, property</li><li>1.2.2.2 assess all identified risks</li><li>1.2.2.3 continuously improve skills</li></ul></li>
+      <li value="2"><span class="pl-t">The components - the functional requirements of an SMS</span><ul class="pl-pts"><li>safety and environmental protection policy</li><li>instructions and procedures for compliance</li><li>levels of authority and lines of communication</li><li>reporting accidents and non-conformities</li><li>emergency preparedness and response</li><li>internal audits and management review</li><li>Designated Person and the Master's overriding authority</li></ul></li>
+      <li value="3"><span class="pl-t">How the Code is given effect</span><ul class="pl-pts"><li>Document of Compliance to the Company</li><li>Safety Management Certificate to the ship</li><li>five years each</li><li>annual verification of the DOC</li><li>at least one intermediate verification of the SMC</li></ul></li>
+      <li value="4"><span class="pl-t">Continuous improvement - where it actually lives in the Code</span><ul class="pl-pts"><li>1.2.2.3 improvement of skills</li><li>section 9 report and analyse</li><li>corrective action required</li><li>section 12 audit, evaluate, review</li><li>a learning system, not a filing system</li><li>a nil non-conformity return is a finding</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">How the Code has evolved - and mostly without amendment</li>
-      <li value="6">Cyber risk</li>
-      <li value="7">Technological advancement and environmental sustainability</li>
+      <li value="5"><span class="pl-t">How the Code has evolved - and mostly without amendment</span><ul class="pl-pts"><li>last substantive amendment in force 2015</li><li>1.2.2.2 is open-ended - all identified risks</li><li>1.4.2 tracks relevant legislation</li><li>the Code is a container</li><li>evolution by absorption</li></ul></li>
+      <li value="6"><span class="pl-t">Cyber risk</span><ul class="pl-pts"><li>MSC.428(98) applied, not amended, the Code</li><li>first annual DOC verification after 1 January 2021</li><li>guidance in MSC-FAL.1/Circ.3/Rev.3, 4 April 2025</li><li>IT versus OT, and OT segmentation</li><li>SIX functional elements</li><li>Govern was added, and they are not sequential</li></ul></li>
+      <li value="7"><span class="pl-t">Technological advancement and environmental sustainability</span><ul class="pl-pts"><li>critical equipment under 10.3 is now software too</li><li>autonomy challenges the Master's overriding authority</li><li>environment was in 1.2.1 from the start</li><li>ballast water, biofouling, garbage</li><li>MARPOL Annex VI, EEXI and CII as SMS procedures</li><li>GHG measures approved but not adopted at this sitting</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Functional requirements P-I-A-R-E-A: Policy, Instructions, Authority, Reporting, Emergency, Audit (2). Cyber elements G-I-P-D-R-R: Govern, Identify, Protect, Detect, Respond, Recover (6).</p>
     <div class="plan-cov">
@@ -1893,15 +1862,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>40</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 40 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The Code, and the system that implements it</b><ul><li>A.741(18), mandatory through SOLAS IX</li><li>the Code prescribes a system, not equipment</li><li>objectives at 1.2.1 - safety, life, environment, property</li><li>1.2.2.2 assess all identified risks</li><li>1.2.2.3 continuously improve skills</li></ul></div>
-      <div class="pp-step"><b>2. The components - the functional requirements of an SMS</b><ul><li>safety and environmental protection policy</li><li>instructions and procedures for compliance</li><li>levels of authority and lines of communication</li><li>reporting accidents and non-conformities</li><li>emergency preparedness and response</li><li>internal audits and management review</li><li>Designated Person and the Master's overriding authority</li></ul></div>
-      <div class="pp-step"><b>3. How the Code is given effect</b><ul><li>Document of Compliance to the Company</li><li>Safety Management Certificate to the ship</li><li>five years each</li><li>annual verification of the DOC</li><li>at least one intermediate verification of the SMC</li></ul></div>
-      <div class="pp-step"><b>4. Continuous improvement - where it actually lives in the Code</b><ul><li>1.2.2.3 improvement of skills</li><li>section 9 report and analyse</li><li>corrective action required</li><li>section 12 audit, evaluate, review</li><li>a learning system, not a filing system</li><li>a nil non-conformity return is a finding</li></ul></div>
-      <div class="pp-step"><b>5. How the Code has evolved - and mostly without amendment</b><ul><li>last substantive amendment in force 2015</li><li>1.2.2.2 is open-ended - all identified risks</li><li>1.4.2 tracks relevant legislation</li><li>the Code is a container</li><li>evolution by absorption</li></ul></div>
-      <div class="pp-step"><b>6. Cyber risk</b><ul><li>MSC.428(98) applied, not amended, the Code</li><li>first annual DOC verification after 1 January 2021</li><li>guidance in MSC-FAL.1/Circ.3/Rev.3, 4 April 2025</li><li>IT versus OT, and OT segmentation</li><li>SIX functional elements</li><li>Govern was added, and they are not sequential</li></ul></div>
-      <div class="pp-step"><b>7. Technological advancement and environmental sustainability</b><ul><li>critical equipment under 10.3 is now software too</li><li>autonomy challenges the Master's overriding authority</li><li>environment was in 1.2.1 from the start</li><li>ballast water, biofouling, garbage</li><li>MARPOL Annex VI, EEXI and CII as SMS procedures</li><li>GHG measures approved but not adopted at this sitting</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2174,29 +2134,21 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The three cost families, and what actually distinguishes them</li>
-      <li value="2">What falls into each</li>
-      <li value="3">The Chief Engineer's leverage - and where he has none</li>
-      <li value="4">Optimising voyage cost</li>
-      <li value="5">Optimising operating cost</li>
-      <li value="6">Modern principles of inventory control - classifying the stock</li>
-      <li value="7">Modern principles - ordering, and the limits of just-in-time at sea</li>
+      <li value="1"><span class="pl-t">The three cost families, and what actually distinguishes them</span><ul class="pl-pts"><li>capital - triggered by owning</li><li>operating - triggered by keeping fit to trade</li><li>voyage - triggered by sailing</li><li>fixed, semi-fixed, variable</li></ul></li>
+      <li value="2"><span class="pl-t">What falls into each</span><ul class="pl-pts"><li>capital - price, finance, depreciation, retrofit</li><li>operating - crew, stores, spares, repairs, insurance, class and flag fees</li><li>drydocking as periodic maintenance</li><li>voyage - bunkers, port dues, canal dues, pilotage and towage</li><li>cargo handling depends on the charterparty</li></ul></li>
+      <li value="3"><span class="pl-t">The Chief Engineer's leverage - and where he has none</span><ul class="pl-pts"><li>no short-run capital influence</li><li>long-run effect on residual value</li><li>the technical business case wins retrofits</li><li>voyage cost is the largest lever</li><li>operating cost is shared with the office</li></ul></li>
+      <li value="4"><span class="pl-t">Optimising voyage cost</span><ul class="pl-pts"><li>hull and propeller condition</li><li>corrected performance monitoring</li><li>machinery condition and SFOC</li><li>low-load operation done correctly</li><li>bunker survey, sampling and compatibility</li><li>auxiliary and hotel load</li><li>EEXI and CII make efficiency compliance</li></ul></li>
+      <li value="5"><span class="pl-t">Optimising operating cost</span><ul class="pl-pts"><li>right maintenance strategy per item</li><li>off-hire costs more than the repair</li><li>lubricating oil feed rate and base number</li><li>drydock specification from real condition data</li><li>spares and stores control</li></ul></li>
+      <li value="6"><span class="pl-t">Modern principles of inventory control - classifying the stock</span><ul class="pl-pts"><li>ABC by consumption value</li><li>VED by criticality</li><li>FSN by movement</li><li>SDE by procurement difficulty</li><li>HML by unit price</li><li>combine ABC with VED</li><li>the Vital list is the ISM 10.3 list</li></ul></li>
+      <li value="7"><span class="pl-t">Modern principles - ordering, and the limits of just-in-time at sea</span><ul class="pl-pts"><li>economic order quantity and why it is unreliable afloat</li><li>reorder level and safety stock</li><li>lead time is to where the ship will be</li><li>standardisation and fleet pooling</li><li>vendor-managed inventory</li><li>inventory integrated with the maintenance system</li><li>obsolescence and shelf life</li><li>JIT for consumables, safety stock for critical</li></ul></li>
     </ol>
     <div class="plan-cov">
       <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>7</b> route headings</span></div>
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>41</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 41 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The three cost families, and what actually distinguishes them</b><ul><li>capital - triggered by owning</li><li>operating - triggered by keeping fit to trade</li><li>voyage - triggered by sailing</li><li>fixed, semi-fixed, variable</li></ul></div>
-      <div class="pp-step"><b>2. What falls into each</b><ul><li>capital - price, finance, depreciation, retrofit</li><li>operating - crew, stores, spares, repairs, insurance, class and flag fees</li><li>drydocking as periodic maintenance</li><li>voyage - bunkers, port dues, canal dues, pilotage and towage</li><li>cargo handling depends on the charterparty</li></ul></div>
-      <div class="pp-step"><b>3. The Chief Engineer's leverage - and where he has none</b><ul><li>no short-run capital influence</li><li>long-run effect on residual value</li><li>the technical business case wins retrofits</li><li>voyage cost is the largest lever</li><li>operating cost is shared with the office</li></ul></div>
-      <div class="pp-step"><b>4. Optimising voyage cost</b><ul><li>hull and propeller condition</li><li>corrected performance monitoring</li><li>machinery condition and SFOC</li><li>low-load operation done correctly</li><li>bunker survey, sampling and compatibility</li><li>auxiliary and hotel load</li><li>EEXI and CII make efficiency compliance</li></ul></div>
-      <div class="pp-step"><b>5. Optimising operating cost</b><ul><li>right maintenance strategy per item</li><li>off-hire costs more than the repair</li><li>lubricating oil feed rate and base number</li><li>drydock specification from real condition data</li><li>spares and stores control</li></ul></div>
-      <div class="pp-step"><b>6. Modern principles of inventory control - classifying the stock</b><ul><li>ABC by consumption value</li><li>VED by criticality</li><li>FSN by movement</li><li>SDE by procurement difficulty</li><li>HML by unit price</li><li>combine ABC with VED</li><li>the Vital list is the ISM 10.3 list</li></ul></div>
-      <div class="pp-step"><b>7. Modern principles - ordering, and the limits of just-in-time at sea</b><ul><li>economic order quantity and why it is unreliable afloat</li><li>reorder level and safety stock</li><li>lead time is to where the ship will be</li><li>standardisation and fleet pooling</li><li>vendor-managed inventory</li><li>inventory integrated with the maintenance system</li><li>obsolescence and shelf life</li><li>JIT for consumables, safety stock for critical</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2503,18 +2455,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">What protects these islands now - and what does not</li>
-      <li value="2">The Indian statutory and administrative layer</li>
-      <li value="3">The international layer India could seek</li>
-      <li value="4">What a coherent programme would look like</li>
+      <li value="1"><span class="pl-t">What protects these islands now - and what does not</span><ul class="pl-pts"><li>genuinely critical habitat</li><li>NOT a designated PSSA</li><li>nineteen PSSAs, none in India</li><li>no MARPOL Special Area or ECA either</li><li>sensitive is not the same as designated</li><li>the question is conditional for a reason</li></ul></li>
+      <li value="2"><span class="pl-t">The Indian statutory and administrative layer</span><ul class="pl-pts"><li>ICRZ Notification 2019 under EP Act 1986 s.3</li><li>superseded the Island Protection Zone 2011</li><li>Integrated Island Management Plans</li><li>marine national parks under the Wild Life Act 1972</li><li>Merchant Shipping Act 2025 for ship-source pollution</li><li>Coast Guard Act 1978 and the NOS-DCP</li><li>reception facilities and port State control</li></ul></li>
+      <li value="3"><span class="pl-t">The international layer India could seek</span><ul class="pl-pts"><li>PSSA proposal to MEPC</li><li>area to be avoided under SOLAS V/10</li><li>mandatory reporting under SOLAS V/11</li><li>MARPOL Special Area or ECA</li><li>UNCLOS article 211(6) special measures</li><li>compulsory pilotage</li></ul></li>
+      <li value="4"><span class="pl-t">What a coherent programme would look like</span><ul class="pl-pts"><li>establish the science and traffic study</li><li>apply the domestic controls already available</li><li>seek the international designation</li><li>build response capability</li><li>enforcement is the weak point in remote islands</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">What a Particularly Sensitive Sea Area is</li>
-      <li value="6">The criteria for identification</li>
-      <li value="7">Designation, and the Associated Protective Measure</li>
+      <li value="5"><span class="pl-t">What a Particularly Sensitive Sea Area is</span><ul class="pl-pts"><li>needs special protection through IMO action</li><li>ecological, socio-economic or scientific significance</li><li>vulnerable to damage by international shipping</li><li>A.982(24) as amended by MEPC.267(68)</li><li>designated by IMO, not by the coastal State</li><li>no legal effect of its own</li></ul></li>
+      <li value="6"><span class="pl-t">The criteria for identification</span><ul class="pl-pts"><li>ecological group</li><li>social, cultural and economic group</li><li>scientific and educational group</li><li>at least ONE must be met</li><li>vulnerability must also be shown</li><li>vessel traffic characteristics</li><li>natural factors</li></ul></li>
+      <li value="7"><span class="pl-t">Designation, and the Associated Protective Measure</span><ul class="pl-pts"><li>only a Member Government may propose</li><li>application to MEPC</li><li>at least one APM with an identified legal basis</li><li>designation in principle</li><li>APM adopted by the appropriate IMO body</li><li>final designation and charting</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (b) in three questions: why special (criteria), how exposed (vulnerability), what measure (APM) - (5 to 7). Criteria groups E-S-S: Ecological, Socio-economic and cultural, Scientific and educational (6).</p>
     <div class="plan-cov">
@@ -2522,15 +2475,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>43</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 43 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What protects these islands now - and what does not</b><ul><li>genuinely critical habitat</li><li>NOT a designated PSSA</li><li>nineteen PSSAs, none in India</li><li>no MARPOL Special Area or ECA either</li><li>sensitive is not the same as designated</li><li>the question is conditional for a reason</li></ul></div>
-      <div class="pp-step"><b>2. The Indian statutory and administrative layer</b><ul><li>ICRZ Notification 2019 under EP Act 1986 s.3</li><li>superseded the Island Protection Zone 2011</li><li>Integrated Island Management Plans</li><li>marine national parks under the Wild Life Act 1972</li><li>Merchant Shipping Act 2025 for ship-source pollution</li><li>Coast Guard Act 1978 and the NOS-DCP</li><li>reception facilities and port State control</li></ul></div>
-      <div class="pp-step"><b>3. The international layer India could seek</b><ul><li>PSSA proposal to MEPC</li><li>area to be avoided under SOLAS V/10</li><li>mandatory reporting under SOLAS V/11</li><li>MARPOL Special Area or ECA</li><li>UNCLOS article 211(6) special measures</li><li>compulsory pilotage</li></ul></div>
-      <div class="pp-step"><b>4. What a coherent programme would look like</b><ul><li>establish the science and traffic study</li><li>apply the domestic controls already available</li><li>seek the international designation</li><li>build response capability</li><li>enforcement is the weak point in remote islands</li></ul></div>
-      <div class="pp-step"><b>5. What a Particularly Sensitive Sea Area is</b><ul><li>needs special protection through IMO action</li><li>ecological, socio-economic or scientific significance</li><li>vulnerable to damage by international shipping</li><li>A.982(24) as amended by MEPC.267(68)</li><li>designated by IMO, not by the coastal State</li><li>no legal effect of its own</li></ul></div>
-      <div class="pp-step"><b>6. The criteria for identification</b><ul><li>ecological group</li><li>social, cultural and economic group</li><li>scientific and educational group</li><li>at least ONE must be met</li><li>vulnerability must also be shown</li><li>vessel traffic characteristics</li><li>natural factors</li></ul></div>
-      <div class="pp-step"><b>7. Designation, and the Associated Protective Measure</b><ul><li>only a Member Government may propose</li><li>application to MEPC</li><li>at least one APM with an identified legal basis</li><li>designation in principle</li><li>APM adopted by the appropriate IMO body</li><li>final designation and charting</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2824,18 +2768,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 10 marks</span></div>
     <ol class="plan-list">
-      <li value="1">What a classification society is, and its two distinct roles</li>
-      <li value="2">How class rules are made</li>
-      <li value="3">What the structural, mechanical and electrical rules cover</li>
-      <li value="4">Implementation through the ship's life</li>
-      <li value="5">Why compliance with class rules is now mentioned in SOLAS chapter II-1</li>
+      <li value="1"><span class="pl-t">What a classification society is, and its two distinct roles</span><ul class="pl-pts"><li>publishes rules, assigns and maintains class</li><li>origin in underwriters' need for independent judgement</li><li>classification is private and contractual</li><li>statutory work is delegated under SOLAS XI-1/1</li><li>governed by the RO Code</li><li>the Administration retains responsibility</li></ul></li>
+      <li value="2"><span class="pl-t">How class rules are made</span><ul class="pl-pts"><li>service experience and defect returns</li><li>casualty investigation feedback</li><li>research and direct calculation</li><li>technical committees</li><li>IACS Unified Requirements and Interpretations</li><li>Common Structural Rules</li></ul></li>
+      <li value="3"><span class="pl-t">What the structural, mechanical and electrical rules cover</span><ul class="pl-pts"><li>scantlings, fatigue, corrosion additions</li><li>hull girder strength and loading conditions</li><li>propulsion, shafting, boilers, piping, steering gear</li><li>generation, distribution and protection</li><li>essential and emergency services</li><li>hazardous area equipment</li></ul></li>
+      <li value="4"><span class="pl-t">Implementation through the ship's life</span><ul class="pl-pts"><li>plan approval and type approval at design</li><li>material and welder qualification at construction</li><li>NDT and tank testing witnessed</li><li>survey during construction and trials</li><li>annual, intermediate, renewal and docking surveys</li><li>continuous survey and approved planned maintenance</li><li>condition of class, suspension and withdrawal</li></ul></li>
+      <li value="5"><span class="pl-t">Why compliance with class rules is now mentioned in SOLAS chapter II-1</span><ul class="pl-pts"><li>regulation II-1/3-1</li><li>SOLAS never contained scantling rules</li><li>class was commercially vital but legally optional</li><li>now designed, constructed AND maintained</li><li>loss of class is a SOLAS non-compliance</li><li>enforceable by flag and port State</li><li>national standards of equivalent safety permitted</li><li>links to goal-based standards under II-1/3-10</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 6 marks</span></div>
     <ol class="plan-list">
-      <li value="6">The harmonized system, and where these surveys sit</li>
-      <li value="7">Annual versus periodical - the difference and the relevance</li>
+      <li value="6"><span class="pl-t">The harmonized system, and where these surveys sit</span><ul class="pl-pts"><li>1988 SOLAS and Load Lines Protocols</li><li>common five-year cycle and anniversary dates</li><li>three months either side window</li><li>surveys combined into one attendance</li><li>current guidelines A.1207(34), revoking A.1186(33)</li></ul></li>
+      <li value="7"><span class="pl-t">Annual versus periodical - the difference and the relevance</span><ul class="pl-pts"><li>annual - each anniversary, visual, no unapproved modification</li><li>periodical - only Safety Equipment and Safety Radio</li><li>Equipment at second or third anniversary, replacing an annual</li><li>Radio at every anniversary</li><li>periodical is inspection with tests</li><li>a five-year certificate needs mid-cycle checkpoints</li><li>equipment is consumed in a way structure is not</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Lifecycle verbs: APPROVE at design, WITNESS at construction, SURVEY in service (4). Limb (b): annual is a LOOK, periodical is a TEST - and periodical belongs to only two certificates (7).</p>
     <div class="plan-cov">
@@ -2843,15 +2788,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>45</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 45 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What a classification society is, and its two distinct roles</b><ul><li>publishes rules, assigns and maintains class</li><li>origin in underwriters' need for independent judgement</li><li>classification is private and contractual</li><li>statutory work is delegated under SOLAS XI-1/1</li><li>governed by the RO Code</li><li>the Administration retains responsibility</li></ul></div>
-      <div class="pp-step"><b>2. How class rules are made</b><ul><li>service experience and defect returns</li><li>casualty investigation feedback</li><li>research and direct calculation</li><li>technical committees</li><li>IACS Unified Requirements and Interpretations</li><li>Common Structural Rules</li></ul></div>
-      <div class="pp-step"><b>3. What the structural, mechanical and electrical rules cover</b><ul><li>scantlings, fatigue, corrosion additions</li><li>hull girder strength and loading conditions</li><li>propulsion, shafting, boilers, piping, steering gear</li><li>generation, distribution and protection</li><li>essential and emergency services</li><li>hazardous area equipment</li></ul></div>
-      <div class="pp-step"><b>4. Implementation through the ship's life</b><ul><li>plan approval and type approval at design</li><li>material and welder qualification at construction</li><li>NDT and tank testing witnessed</li><li>survey during construction and trials</li><li>annual, intermediate, renewal and docking surveys</li><li>continuous survey and approved planned maintenance</li><li>condition of class, suspension and withdrawal</li></ul></div>
-      <div class="pp-step"><b>5. Why compliance with class rules is now mentioned in SOLAS chapter II-1</b><ul><li>regulation II-1/3-1</li><li>SOLAS never contained scantling rules</li><li>class was commercially vital but legally optional</li><li>now designed, constructed AND maintained</li><li>loss of class is a SOLAS non-compliance</li><li>enforceable by flag and port State</li><li>national standards of equivalent safety permitted</li><li>links to goal-based standards under II-1/3-10</li></ul></div>
-      <div class="pp-step"><b>6. The harmonized system, and where these surveys sit</b><ul><li>1988 SOLAS and Load Lines Protocols</li><li>common five-year cycle and anniversary dates</li><li>three months either side window</li><li>surveys combined into one attendance</li><li>current guidelines A.1207(34), revoking A.1186(33)</li></ul></div>
-      <div class="pp-step"><b>7. Annual versus periodical - the difference and the relevance</b><ul><li>annual - each anniversary, visual, no unapproved modification</li><li>periodical - only Safety Equipment and Safety Radio</li><li>Equipment at second or third anniversary, replacing an annual</li><li>Radio at every anniversary</li><li>periodical is inspection with tests</li><li>a five-year certificate needs mid-cycle checkpoints</li><li>equipment is consumed in a way structure is not</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -3137,15 +3073,16 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">What FSA is, and its objectives</li>
-      <li value="2">The characteristics that define it</li>
-      <li value="3">The process</li>
-      <li value="4">Step 1 - Hazard Identification</li>
-      <li value="5">Step 2 - Risk Analysis</li>
-      <li value="6">Step 3 - Risk Control Options</li>
-      <li value="7">Step 4 - Cost Benefit Assessment</li>
-      <li value="8">Step 5 - Recommendations, and what FSA does not settle</li>
+      <li value="1"><span class="pl-t">What FSA is, and its objectives</span><ul class="pl-pts"><li>MSC-MEPC.2/Circ.12/Rev.2, 9 April 2018</li><li>structured and systematic methodology</li><li>life, health, marine environment, property</li><li>risk analysis plus cost-benefit assessment</li><li>evaluate new or compare existing regulations</li><li>show decision makers benefits against costs</li><li>equitable change, aiding consensus</li><li>not applied in all circumstances</li></ul></li>
+      <li value="2"><span class="pl-t">The characteristics that define it</span><ul class="pl-pts"><li>proactive, not reactive</li><li>structured, systematic, comparable</li><li>transparent, documented, auditable</li><li>generic model, not one ship</li><li>proportionate depth, screened</li><li>iterative - step 5 touches all</li><li>explicitly cost-aware</li></ul></li>
+      <li value="3"><span class="pl-t">The process</span><ul class="pl-pts"><li>decision makers define the problem first</li><li>problem definition is NOT one of the five</li><li>five numbered steps</li><li>hazard is a potential to threaten</li><li>risk is frequency combined with severity</li></ul></li>
+      <li value="4"><span class="pl-t">Step 1 - Hazard Identification</span><ul class="pl-pts"><li>a list of hazards and scenarios, prioritized</li><li>creative element - structured group review</li><li>analytical element - data and experience</li><li>coarse analysis of causes and outcomes</li><li>ranking on a risk matrix</li><li>output includes initiating events</li></ul></li>
+      <li value="5"><span class="pl-t">Step 2 - Risk Analysis</span><ul class="pl-pts"><li>detailed investigation of the important scenarios</li><li>causes, initiating events, consequences</li><li>fault trees, event trees, risk contribution tree</li><li>risks to people, environment, property</li><li>expert judgement where data are absent</li><li>sensitivity and uncertainty must be reported</li><li>output - high-risk areas and the models</li></ul></li>
+      <li value="6"><span class="pl-t">Step 3 - Risk Control Options</span><ul class="pl-pts"><li>a measure controls one element of risk</li><li>an option combines measures</li><li>act on frequency or on consequence</li><li>engineering, operational or managerial</li></ul></li>
+      <li value="7"><span class="pl-t">Step 4 - Cost Benefit Assessment</span><ul class="pl-pts"><li>define the base case from step 2</li><li>estimate costs and benefits of each option</li><li>cost per unit risk reduction</li><li>rank and screen the options</li><li>life-cycle costs</li><li>interested entities</li><li>GCAF gross, NCAF net</li><li>consider GCAF first</li><li>no mandatory monetary criterion</li></ul></li>
+      <li value="8"><span class="pl-t">Step 5 - Recommendations, and what FSA does not settle</span><ul class="pl-pts"><li>auditable and traceable</li><li>understandable by non-specialists</li><li>options keeping risk as low as reasonably practicable</li><li>submitted in SMART terms</li><li>no universally accepted acceptance criteria</li><li>criteria used must be explicit</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> The five steps as one sentence: FIND them, SIZE them, FIX them, COST them, RECOMMEND them (3). The two indices: GROSS ignores the benefits, NET counts them (7).</p>
     <div class="plan-cov">
@@ -3153,16 +3090,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>52</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 52 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What FSA is, and its objectives</b><ul><li>MSC-MEPC.2/Circ.12/Rev.2, 9 April 2018</li><li>structured and systematic methodology</li><li>life, health, marine environment, property</li><li>risk analysis plus cost-benefit assessment</li><li>evaluate new or compare existing regulations</li><li>show decision makers benefits against costs</li><li>equitable change, aiding consensus</li><li>not applied in all circumstances</li></ul></div>
-      <div class="pp-step"><b>2. The characteristics that define it</b><ul><li>proactive, not reactive</li><li>structured, systematic, comparable</li><li>transparent, documented, auditable</li><li>generic model, not one ship</li><li>proportionate depth, screened</li><li>iterative - step 5 touches all</li><li>explicitly cost-aware</li></ul></div>
-      <div class="pp-step"><b>3. The process</b><ul><li>decision makers define the problem first</li><li>problem definition is NOT one of the five</li><li>five numbered steps</li><li>hazard is a potential to threaten</li><li>risk is frequency combined with severity</li></ul></div>
-      <div class="pp-step"><b>4. Step 1 - Hazard Identification</b><ul><li>a list of hazards and scenarios, prioritized</li><li>creative element - structured group review</li><li>analytical element - data and experience</li><li>coarse analysis of causes and outcomes</li><li>ranking on a risk matrix</li><li>output includes initiating events</li></ul></div>
-      <div class="pp-step"><b>5. Step 2 - Risk Analysis</b><ul><li>detailed investigation of the important scenarios</li><li>causes, initiating events, consequences</li><li>fault trees, event trees, risk contribution tree</li><li>risks to people, environment, property</li><li>expert judgement where data are absent</li><li>sensitivity and uncertainty must be reported</li><li>output - high-risk areas and the models</li></ul></div>
-      <div class="pp-step"><b>6. Step 3 - Risk Control Options</b><ul><li>a measure controls one element of risk</li><li>an option combines measures</li><li>act on frequency or on consequence</li><li>engineering, operational or managerial</li></ul></div>
-      <div class="pp-step"><b>7. Step 4 - Cost Benefit Assessment</b><ul><li>define the base case from step 2</li><li>estimate costs and benefits of each option</li><li>cost per unit risk reduction</li><li>rank and screen the options</li><li>life-cycle costs</li><li>interested entities</li><li>GCAF gross, NCAF net</li><li>consider GCAF first</li><li>no mandatory monetary criterion</li></ul></div>
-      <div class="pp-step"><b>8. Step 5 - Recommendations, and what FSA does not settle</b><ul><li>auditable and traceable</li><li>understandable by non-specialists</li><li>options keeping risk as low as reasonably practicable</li><li>submitted in SMART terms</li><li>no universally accepted acceptance criteria</li><li>criteria used must be explicit</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">

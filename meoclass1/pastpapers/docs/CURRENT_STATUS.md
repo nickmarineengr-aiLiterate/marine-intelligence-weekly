@@ -1,14 +1,20 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-17, after **QP2608 (August 2026) was laptop-reviewed and published**
+Last updated: 2026-08-17, after the **Bullet Exam Plan became the standard rendering across the
+whole solved corpus** (`history/SESSION_HISTORY.md` §38). The pilot flag `plan_bullets` is
+**removed** — there is one exam-plan renderer, no per-paper opt-in and no legacy branch. Limb
+dividers now carry the subpart marks **where the source paper stated them** (393 of 689 dividers);
+the remaining 296 keep the bare label, and marks are never inferred. QP2608-Q1(b) was restructured
+from one route heading into three. **No answer prose, study guide, recall, knowledge map, flashcard
+or quick-revision content changed anywhere in the corpus** — 98 pages are byte-identical once the
+inlined stylesheet and the exam-plan region are subtracted.
+Previously: 2026-08-17, after **QP2608 (August 2026) was laptop-reviewed and published**
 (`history/SESSION_HISTORY.md` §37). The desktop branch `pastpapers/qp2608-founder-review` was
 path-extracted onto current `main`; **all nine questions passed independent adjudication with no
 correction to substance**, which is a first for this corpus. The product stands at
 **40 papers / 360 questions**, and **2026 moves to 7 of 11**.
-This paper also carries the **Bullet Exam Plan pilot** — the Exam Plan's existing core points
-promoted from a collapsed control to the default view, opted into by `plan_bullets` in the spec and
-live on QP2608 ONLY, pending Founder review before any propagation.
+That paper carried the **Bullet Exam Plan pilot**, since generalised to the whole corpus (above).
 Previously: 2026-08-16, after the **Disney candidate-notes correction and enrichment cycle was
 closed** (`history/SESSION_HISTORY.md` §36) — the reusable decision workflow captured as
 `tools/pastpapers/SKILL.md`, remaining holdings items registered at §7t, and the true-source items
@@ -535,6 +541,34 @@ Nothing is merged to `main`. All pages are `noindex` and ungated.
 ---
 
 ## 6. Current blockers / Founder decisions
+
+### Raised by the Bullet Exam Plan corpus migration (2026-08-17) — deferred, nothing acted on
+
+**D. Authoring scaffolds are candidate-facing on the limb divider.** `answer_route.steps[].limb`
+is used for two different jobs: real question limbs (`(a)`, `a)`, `A.`) and authoring scaffolds
+that are not subparts at all — **`framing` 29, `closing` 13, `intro` 11, `main` 4, `all` 4**, plus
+`d1`–`d5`, `head 1`–`head 4` and `qualification`. These have printed on the exam plan since long
+before this migration and are unchanged by it, but the new marks now sit beside them, so a
+scaffold reads as a limb that merely lost its marks. This is the same class as §7i (internal
+production vocabulary on candidate surfaces). **Fixing it means editing canonical spec data, which
+this session was not authorised to do.**
+
+**E. Q1 of QP2608 now runs to 10 route steps**, one past the 4–9 chunking range, so `validate_spec`
+warns. Accepted deliberately (see `history/SESSION_HISTORY.md` §38); **11 questions already sat
+outside that range** before this session — QP2408 Q1–Q9 at 14 steps each and QP2412 Q3/Q7 at 10.
+Whether the range is still the right guidance is a separate question from this migration.
+
+**F. Memory cues — 20 of 360 questions carry none**, all in 2026: QP2608 0/9, QP2607 3/9, QP2601
+7/9, QP2606 7/9, QP2604 8/9. Deliberately **not** backfilled: this migration had to stay
+mechanically bounded, and a cue is authored content.
+
+**G. Temporal context inside exam-plan points — measured, and smaller than feared.** A sweep of all
+**14,979** route points found **fewer than ten** that are genuinely state-of-law framing rather than
+points to write: QP2304-Q8 (*"the 2022 amendments are ADOPTED BUT NOT YET IN FORCE"*), QP2403-Q9
+and QP2510-Q9 (*"at this sitting the operative text is the Convention as amended in …"*), and
+QP2501-Q4 (CYBUTRYNE). The pattern scan's other ~45 hits are ordinary prose (*"where they will be
+read"*, *"used to be an air gap"*) and are **not** defects. **The Exam Plan has not become a
+regulatory-history layer.** Material for QI-v2 Phase 2; none of it is harmful enough to move now.
 
 ### Blocking the candidate-facing provision view
 

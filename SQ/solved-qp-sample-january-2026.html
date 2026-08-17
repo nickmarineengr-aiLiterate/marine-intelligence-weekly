@@ -273,7 +273,7 @@
   .plan-lead{margin:0 0 8px;font-size:13.5px;}
   .plan-limb{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;margin-top:8px;}
   .plan-list{margin:4px 0 0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;}
-  .plan-list li{margin:4px 0;}
+  .plan-list li{margin:9px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
   .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
@@ -281,11 +281,11 @@
   .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
   .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
-  .plan-points{margin-top:9px;font-size:12.5px;}
-  .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
-  .plan-points:focus-within > summary{outline:2px solid var(--orange);outline-offset:2px;}
-  .pp-step{margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;}
-  .pp-step ul{margin:3px 0 0;padding-left:20px;color:var(--grey-text);}
+  .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
+  .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}
+  .pl-t{display:block;}
+  .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;color:var(--grey-text);}
+  .pl-pts li{margin:2px 0;}
 
   /* Recall: blanks first, reveal on demand. */
   .recall{background:#fff;border:1.5px solid var(--teal-dark);padding:0 16px 13px;}
@@ -607,15 +607,16 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Why speed reduction is attractive, and what "low load" costs</li>
-      <li value="2">Combustion and thermal consequences</li>
-      <li value="3">Turbocharger and scavenge-side dangers</li>
-      <li value="4">Cylinder condition - cold corrosion and lubrication</li>
-      <li value="5">Consequences beyond the main engine</li>
-      <li value="6">Engineering measures to resolve the problems</li>
-      <li value="7">Operational and maintenance measures</li>
-      <li value="8">Conclusion</li>
+      <li value="1"><span class="pl-t">Why speed reduction is attractive, and what "low load" costs</span><ul class="pl-pts"><li>power varies roughly with speed cubed</li><li>no capital cost, so it is the default short-term lever</li><li>EEXI reg 25 and CII reg 28 in force since 1 Jan 2023</li><li>engine optimised near 70-80% MCR</li></ul></li>
+      <li value="2"><span class="pl-t">Combustion and thermal consequences</span><ul class="pl-pts"><li>reduced scavenge air pressure, air-fuel ratio falls</li><li>low compression and maximum pressure</li><li>poorer atomisation, afterburning</li><li>soot through the whole gas path</li></ul></li>
+      <li value="3"><span class="pl-t">Turbocharger and scavenge-side dangers</span><ul class="pl-pts"><li>operation near the compressor surge line</li><li>auxiliary blowers running continuously</li><li>scavenge space fouling and scavenge fire</li><li>fouled nozzle ring reduces air further</li></ul></li>
+      <li value="4"><span class="pl-t">Cylinder condition - cold corrosion and lubrication</span><ul class="pl-pts"><li>liner wall below the acid dew point</li><li>corrosive wear at top ring reversal</li><li>BN and feed rate must match the duty</li><li>over-lubrication gives deposits and bore polish</li></ul></li>
+      <li value="5"><span class="pl-t">Consequences beyond the main engine</span><ul class="pl-pts"><li>economiser sooting and soot-fire risk on load-up</li><li>auxiliary boiler firing erodes the saving</li><li>exhaust valves running cool</li><li>manoeuvrability, barred speed range, hull fouling</li></ul></li>
+      <li value="6"><span class="pl-t">Engineering measures to resolve the problems</span><ul class="pl-pts"><li>low-load or part-load tuning</li><li>turbocharger cut-out, VTA or bypass</li><li>cylinder oil BN and feed rate from drain analysis</li><li>raise liner temperature where design allows</li><li>approved EPL or ShaPoLi with controlled override</li></ul></li>
+      <li value="7"><span class="pl-t">Operational and maintenance measures</span><ul class="pl-pts"><li>planned periodic load-up runs</li><li>more frequent scavenge and economiser cleaning</li><li>condition monitoring and shorter wear intervals</li><li>update SEEMP and the maintenance plan</li></ul></li>
+      <li value="8"><span class="pl-t">Conclusion</span><ul class="pl-pts"><li>cheapest short-term carbon measure</li><li>transfers cost from fuel to wear and fire risk</li><li>controllable if actively managed</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> AIR (2, 3), WALL (4), REST (5), then fix the machine (6) and fix the operation (7).</p>
     <div class="plan-cov">
@@ -623,16 +624,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>32</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 32 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Why speed reduction is attractive, and what "low load" costs</b><ul><li>power varies roughly with speed cubed</li><li>no capital cost, so it is the default short-term lever</li><li>EEXI reg 25 and CII reg 28 in force since 1 Jan 2023</li><li>engine optimised near 70-80% MCR</li></ul></div>
-      <div class="pp-step"><b>2. Combustion and thermal consequences</b><ul><li>reduced scavenge air pressure, air-fuel ratio falls</li><li>low compression and maximum pressure</li><li>poorer atomisation, afterburning</li><li>soot through the whole gas path</li></ul></div>
-      <div class="pp-step"><b>3. Turbocharger and scavenge-side dangers</b><ul><li>operation near the compressor surge line</li><li>auxiliary blowers running continuously</li><li>scavenge space fouling and scavenge fire</li><li>fouled nozzle ring reduces air further</li></ul></div>
-      <div class="pp-step"><b>4. Cylinder condition - cold corrosion and lubrication</b><ul><li>liner wall below the acid dew point</li><li>corrosive wear at top ring reversal</li><li>BN and feed rate must match the duty</li><li>over-lubrication gives deposits and bore polish</li></ul></div>
-      <div class="pp-step"><b>5. Consequences beyond the main engine</b><ul><li>economiser sooting and soot-fire risk on load-up</li><li>auxiliary boiler firing erodes the saving</li><li>exhaust valves running cool</li><li>manoeuvrability, barred speed range, hull fouling</li></ul></div>
-      <div class="pp-step"><b>6. Engineering measures to resolve the problems</b><ul><li>low-load or part-load tuning</li><li>turbocharger cut-out, VTA or bypass</li><li>cylinder oil BN and feed rate from drain analysis</li><li>raise liner temperature where design allows</li><li>approved EPL or ShaPoLi with controlled override</li></ul></div>
-      <div class="pp-step"><b>7. Operational and maintenance measures</b><ul><li>planned periodic load-up runs</li><li>more frequent scavenge and economiser cleaning</li><li>condition monitoring and shorter wear intervals</li><li>update SEEMP and the maintenance plan</li></ul></div>
-      <div class="pp-step"><b>8. Conclusion</b><ul><li>cheapest short-term carbon measure</li><li>transfers cost from fuel to wear and fire risk</li><li>controllable if actively managed</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1035,37 +1026,31 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Why tank coatings are a statutory matter</li>
+      <li value="1"><span class="pl-t">Why tank coatings are a statutory matter</span><ul class="pl-pts"><li>SOLAS II-1/3-2 and XII/6</li><li>PSPC - MSC.215(82)</li><li>target useful life 15 years in GOOD condition</li><li>the coating is what is managed, not the steel</li></ul></li>
     </ol>
     <div class="plan-limb">i</div>
     <ol class="plan-list">
-      <li value="2">Influence of temperature on corrosion rate</li>
+      <li value="2"><span class="pl-t">Influence of temperature on corrosion rate</span><ul class="pl-pts"><li>electrochemical rate rises with temperature - roughly doubling per 10 C, approximately</li><li>dissolved oxygen solubility falls, so a vented tank peaks</li><li>heated boundaries corrode faster</li><li>cycling beats steady heat - condensation and wet-dry</li><li>cargo tanks: inert gas acids, underdeck corrosion, bottom pitting</li></ul></li>
     </ol>
     <div class="plan-limb">ii</div>
     <ol class="plan-list">
-      <li value="3">Causes of coating deterioration</li>
+      <li value="3"><span class="pl-t">Causes of coating deterioration</span><ul class="pl-pts"><li>defective surface preparation - the largest cause</li><li>application faults, missed stripe coats, wrong DFT</li><li>edges, welds and cut-outs</li><li>mechanical damage in service</li><li>ageing, blistering, cathodic disbondment, chemical attack</li><li>poor design, drainage and access</li><li>deferred maintenance is self-accelerating</li></ul></li>
     </ol>
     <div class="plan-limb">iii</div>
     <ol class="plan-list">
-      <li value="4">How coating condition assessment reveals corrosion status</li>
+      <li value="4"><span class="pl-t">How coating condition assessment reveals corrosion status</span><ul class="pl-pts"><li>GOOD, FAIR and POOR grades</li><li>leading indicator versus thickness measurement as lagging</li><li>drives the survey regime and annual re-examination</li><li>targets close-up survey, re-coating or steel renewal</li><li>judged together with anode condition</li></ul></li>
     </ol>
     <div class="plan-limb">iv</div>
     <ol class="plan-list">
-      <li value="5">Information obtained from the Coating Technical File</li>
+      <li value="5"><span class="pl-t">Information obtained from the Coating Technical File</span><ul class="pl-pts"><li>required by PSPC 3.4, reviewed by the Administration</li><li>Statement of Compliance or Type Approval Certificate</li><li>Technical Data Sheet - DFT, application, surface condition, environmental limits</li><li>shipyard work records - area, system, layers, ambient conditions, preparation</li><li>inspection and repair procedures during construction</li><li>coating log and non-conformity reports</li><li>verified inspection report</li><li>in-service maintenance and repair procedures</li><li>kept on board for the life of the ship</li></ul></li>
     </ol>
     <div class="plan-cov">
       <div class="cov-row"><span class="cov-k">Remember</span><span class="cov-v"><b>5</b> route headings</span></div>
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>30</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>5 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 30 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Why tank coatings are a statutory matter</b><ul><li>SOLAS II-1/3-2 and XII/6</li><li>PSPC - MSC.215(82)</li><li>target useful life 15 years in GOOD condition</li><li>the coating is what is managed, not the steel</li></ul></div>
-      <div class="pp-step"><b>2. Influence of temperature on corrosion rate</b><ul><li>electrochemical rate rises with temperature - roughly doubling per 10 C, approximately</li><li>dissolved oxygen solubility falls, so a vented tank peaks</li><li>heated boundaries corrode faster</li><li>cycling beats steady heat - condensation and wet-dry</li><li>cargo tanks: inert gas acids, underdeck corrosion, bottom pitting</li></ul></div>
-      <div class="pp-step"><b>3. Causes of coating deterioration</b><ul><li>defective surface preparation - the largest cause</li><li>application faults, missed stripe coats, wrong DFT</li><li>edges, welds and cut-outs</li><li>mechanical damage in service</li><li>ageing, blistering, cathodic disbondment, chemical attack</li><li>poor design, drainage and access</li><li>deferred maintenance is self-accelerating</li></ul></div>
-      <div class="pp-step"><b>4. How coating condition assessment reveals corrosion status</b><ul><li>GOOD, FAIR and POOR grades</li><li>leading indicator versus thickness measurement as lagging</li><li>drives the survey regime and annual re-examination</li><li>targets close-up survey, re-coating or steel renewal</li><li>judged together with anode condition</li></ul></div>
-      <div class="pp-step"><b>5. Information obtained from the Coating Technical File</b><ul><li>required by PSPC 3.4, reviewed by the Administration</li><li>Statement of Compliance or Type Approval Certificate</li><li>Technical Data Sheet - DFT, application, surface condition, environmental limits</li><li>shipyard work records - area, system, layers, ambient conditions, preparation</li><li>inspection and repair procedures during construction</li><li>coating log and non-conformity reports</li><li>verified inspection report</li><li>in-service maintenance and repair procedures</li><li>kept on board for the life of the ship</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">

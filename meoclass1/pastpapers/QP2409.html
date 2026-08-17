@@ -438,7 +438,7 @@
   .plan-lead{margin:0 0 8px;font-size:13.5px;}
   .plan-limb{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;margin-top:8px;}
   .plan-list{margin:4px 0 0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;}
-  .plan-list li{margin:4px 0;}
+  .plan-list li{margin:9px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
   .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
@@ -446,11 +446,11 @@
   .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
   .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
-  .plan-points{margin-top:9px;font-size:12.5px;}
-  .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
-  .plan-points:focus-within > summary{outline:2px solid var(--orange);outline-offset:2px;}
-  .pp-step{margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;}
-  .pp-step ul{margin:3px 0 0;padding-left:20px;color:var(--grey-text);}
+  .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
+  .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}
+  .pl-t{display:block;}
+  .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;color:var(--grey-text);}
+  .pl-pts li{margin:2px 0;}
 
   /* Recall: blanks first, reveal on demand. */
   .recall{background:#fff;border:1.5px solid var(--teal-dark);padding:0 16px 13px;}
@@ -787,14 +787,15 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">What Chapter VIII requires, and where the criteria are written</li>
-      <li value="2">Criterion one - the minimum hours of rest</li>
-      <li value="3">Criterion two - how that rest may be broken up</li>
-      <li value="4">Criterion three - drugs and alcohol</li>
-      <li value="5">Criterion four - the administrative criteria that make the rest rules real</li>
-      <li value="6">The master's overriding authority, and what follows it</li>
-      <li value="7">How these criteria produce a safe and effective watch</li>
+      <li value="1"><span class="pl-t">What Chapter VIII requires, and where the criteria are written</span><ul class="pl-pts"><li>Chapter VIII is Watchkeeping; regulation VIII/1 is Fitness for duty</li><li>it is a duty on the Administration, for the purpose of preventing fatigue</li><li>establish and enforce rest periods in accordance with section A-VIII/1</li><li>arrange watch systems so efficiency is not impaired by fatigue</li><li>the measurable criteria are in the mandatory Code, section A-VIII/1</li><li>coverage extends beyond watchkeepers to designated safety, pollution and security duties</li></ul></li>
+      <li value="2"><span class="pl-t">Criterion one - the minimum hours of rest</span><ul class="pl-pts"><li>not less than 10 hours of rest in any 24-hour period</li><li>77 hours of rest in any 7-day period</li><li>expressed as rest, not as hours of work</li><li>a rolling measure - any 24 hours, any 7 days</li></ul></li>
+      <li value="3"><span class="pl-t">Criterion two - how that rest may be broken up</span><ul class="pl-pts"><li>no more than two periods, one of which at least 6 hours</li><li>interval between consecutive rest periods not exceeding 14 hours</li><li>exceptions permitted but floored at 70 hours in any 7-day period</li><li>under exception, up to three periods, one of 6 hours, neither other under one hour</li><li>not beyond two 24-hour periods in any 7-day period, not more than two consecutive weeks</li><li>interval between exceptions at least twice the duration of the exception</li></ul></li>
+      <li value="4"><span class="pl-t">Criterion three - drugs and alcohol</span><ul class="pl-pts"><li>a limit of not greater than 0.05% blood alcohol level</li><li>or 0.25 mg/l alcohol in the breath</li><li>applies while performing designated safety, security and marine environmental duties</li><li>enforced through company policy, testing and port State inspection</li></ul></li>
+      <li value="5"><span class="pl-t">Criterion four - the administrative criteria that make the rest rules real</span><ul class="pl-pts"><li>watch schedules posted, standardized format, working language and English</li><li>records of daily hours of rest kept in the same format and languages</li><li>the seafarer receives an endorsed copy of the records</li><li>adequate compensatory rest where an on-call seafarer is called out</li><li>drills to be conducted so as not to induce fatigue</li></ul></li>
+      <li value="6"><span class="pl-t">The master's overriding authority, and what follows it</span><ul class="pl-pts"><li>rest need not be maintained in an emergency or overriding operational conditions</li><li>the master may require work for the immediate safety of ship, persons or cargo</li><li>or to assist others in distress at sea</li><li>the schedule may be suspended until the normal situation is restored</li><li>afterwards the master must ensure an adequate period of rest is given</li></ul></li>
+      <li value="7"><span class="pl-t">How these criteria produce a safe and effective watch</span><ul class="pl-pts"><li>fatigue degrades vigilance, reaction time and judgement, and is not self-detectable</li><li>so the control must be scheduled and recorded, not self-assessed</li><li>quantity sets a floor; the division rule makes it usable sleep</li><li>the alcohol limit removes a compounding impairment</li><li>posted schedules force manning to be planned in advance</li><li>records make compliance auditable by flag, port State and ISM</li><li>the bounded override keeps the regime credible instead of inviting falsification</li><li>regulation VIII/1.1.2 makes the rested relieving watch the test of the system</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Six criteria in writing order: HOW MUCH (2), WHAT SHAPE (3), HOW SOBER (4), ON PAPER (5), WHO MAY BREAK IT (6), WHY IT WORKS (7). Numbers: 10 and 77 normally, 70 as the exception floor - the exception figure is lower, which is the direction that makes sense.</p>
     <div class="plan-cov">
@@ -802,15 +803,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>38</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 38 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What Chapter VIII requires, and where the criteria are written</b><ul><li>Chapter VIII is Watchkeeping; regulation VIII/1 is Fitness for duty</li><li>it is a duty on the Administration, for the purpose of preventing fatigue</li><li>establish and enforce rest periods in accordance with section A-VIII/1</li><li>arrange watch systems so efficiency is not impaired by fatigue</li><li>the measurable criteria are in the mandatory Code, section A-VIII/1</li><li>coverage extends beyond watchkeepers to designated safety, pollution and security duties</li></ul></div>
-      <div class="pp-step"><b>2. Criterion one - the minimum hours of rest</b><ul><li>not less than 10 hours of rest in any 24-hour period</li><li>77 hours of rest in any 7-day period</li><li>expressed as rest, not as hours of work</li><li>a rolling measure - any 24 hours, any 7 days</li></ul></div>
-      <div class="pp-step"><b>3. Criterion two - how that rest may be broken up</b><ul><li>no more than two periods, one of which at least 6 hours</li><li>interval between consecutive rest periods not exceeding 14 hours</li><li>exceptions permitted but floored at 70 hours in any 7-day period</li><li>under exception, up to three periods, one of 6 hours, neither other under one hour</li><li>not beyond two 24-hour periods in any 7-day period, not more than two consecutive weeks</li><li>interval between exceptions at least twice the duration of the exception</li></ul></div>
-      <div class="pp-step"><b>4. Criterion three - drugs and alcohol</b><ul><li>a limit of not greater than 0.05% blood alcohol level</li><li>or 0.25 mg/l alcohol in the breath</li><li>applies while performing designated safety, security and marine environmental duties</li><li>enforced through company policy, testing and port State inspection</li></ul></div>
-      <div class="pp-step"><b>5. Criterion four - the administrative criteria that make the rest rules real</b><ul><li>watch schedules posted, standardized format, working language and English</li><li>records of daily hours of rest kept in the same format and languages</li><li>the seafarer receives an endorsed copy of the records</li><li>adequate compensatory rest where an on-call seafarer is called out</li><li>drills to be conducted so as not to induce fatigue</li></ul></div>
-      <div class="pp-step"><b>6. The master's overriding authority, and what follows it</b><ul><li>rest need not be maintained in an emergency or overriding operational conditions</li><li>the master may require work for the immediate safety of ship, persons or cargo</li><li>or to assist others in distress at sea</li><li>the schedule may be suspended until the normal situation is restored</li><li>afterwards the master must ensure an adequate period of rest is given</li></ul></div>
-      <div class="pp-step"><b>7. How these criteria produce a safe and effective watch</b><ul><li>fatigue degrades vigilance, reaction time and judgement, and is not self-detectable</li><li>so the control must be scheduled and recorded, not self-assessed</li><li>quantity sets a floor; the division rule makes it usable sleep</li><li>the alcohol limit removes a compounding impairment</li><li>posted schedules force manning to be planned in advance</li><li>records make compliance auditable by flag, port State and ISM</li><li>the bounded override keeps the regime credible instead of inviting falsification</li><li>regulation VIII/1.1.2 makes the rested relieving watch the test of the system</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1086,19 +1078,20 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">a) What the Goal-Based Standards are, and the gap they close</li>
-      <li value="2">a) The five-tier framework</li>
-      <li value="3">a) The goal, and the functional requirements</li>
-      <li value="4">a) Application, and the Ship Construction File</li>
+      <li value="1"><span class="pl-t">a) What the Goal-Based Standards are, and the gap they close</span><ul class="pl-pts"><li>prescriptive rules do not state the safety level being bought</li><li>and they freeze technology against demonstrably equivalent designs</li><li>detailed scantlings had migrated to class rules outside IMO oversight</li><li>GBS states the goal and functional requirements and audits the rules against them</li><li>mandatory through SOLAS regulation II-1/3-10, in force 1 January 2012</li><li>standards in MSC.287(87), verification guidelines in MSC.296(87)</li></ul></li>
+      <li value="2"><span class="pl-t">a) The five-tier framework</span><ul class="pl-pts"><li>Tier I goals, Tier II functional requirements, Tier III verification of conformity</li><li>Tier IV rules and regulations - class rules and national requirements</li><li>Tier V industry practices and standards</li><li>Tiers I to III are IMO's; Tiers IV and V are where the numbers live</li></ul></li>
+      <li value="3"><span class="pl-t">a) The goal, and the functional requirements</span><ul class="pl-pts"><li>designed and constructed to be safe and environmentally friendly</li><li>for a specified design life of not less than 25 years</li><li>in intact and specified damage conditions, throughout the ship's life</li><li>design group - design life, North Atlantic conditions, strength, fatigue, residual strength, corrosion protection</li><li>construction group - redundancy, watertight integrity, human element, design transparency, quality procedures</li><li>in-service group - survey, maintenance, structural accessibility, recycling</li></ul></li>
+      <li value="4"><span class="pl-t">a) Application, and the Ship Construction File</span><ul class="pl-pts"><li>oil tankers and bulk carriers of 150 m in length and above</li><li>contracted for construction on or after 1 July 2016</li><li>the Ship Construction File delivers the design-transparency requirement</li><li>information to operate, maintain, repair and respond to an emergency</li><li>kept on board and ashore, and maintained through the ship's life</li></ul></li>
     </ol>
-    <div class="plan-limb">b)</div>
+    <div class="plan-limb">b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">b) How the framework delivers safety and environmental protection</li>
-      <li value="6">b) Verification - IMO audits the rules, not the ship</li>
-      <li value="7">b) Validation - the ship-level chain</li>
-      <li value="8">b) What GBS actually changed</li>
+      <li value="5"><span class="pl-t">b) How the framework delivers safety and environmental protection</span><ul class="pl-pts"><li>it works on the hull as the primary barrier</li><li>bulk carriers and tankers were chosen for their failure modes</li><li>design life, fatigue, corrosion protection and residual strength attack those modes</li><li>a hull with residual strength gives time and does not break up</li><li>environmental protection follows from structural integrity, not from discharge control</li><li>recycling considerations extend the goal to end of life</li><li>structural accessibility keeps the design margin auditable in service</li></ul></li>
+      <li value="6"><span class="pl-t">b) Verification - IMO audits the rules, not the ship</span><ul class="pl-pts"><li>an Administration or recognized organization submits its construction rules to IMO</li><li>an audit team appointed by the Secretary-General assesses them against Tiers I and II</li><li>the Maritime Safety Committee determines conformity</li><li>the IACS Common Structural Rules were the principal submission and were confirmed</li><li>maintenance of verification requires amendments to be reassessed</li></ul></li>
+      <li value="7"><span class="pl-t">b) Validation - the ship-level chain</span><ul class="pl-pts"><li>verification asks whether the rules are right; validation asks whether this ship was built to them</li><li>plan approval against verified rules, then survey during construction</li><li>class certification and statutory certification by or for the flag State</li><li>the Ship Construction File as the documentary evidence</li><li>port State control as the independent check in service</li></ul></li>
+      <li value="8"><span class="pl-t">b) What GBS actually changed</span><ul class="pl-pts"><li>class rules were brought inside IMO oversight without IMO writing scantlings</li><li>the safety level became explicit and auditable rather than traditional</li><li>which is the precondition for the Safety Level Approach and for wider application</li><li>for the Chief Engineer the practical residue is the Ship Construction File</li><li>it must be kept current after structural repair, and it records design intent</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) runs WHY (1), TIERS (2), GOAL (3), PAPER (4). Limb (b) runs PROTECT (5), RULES (6), SHIP (7), SO WHAT (8). The tiers count downwards from IMO to industry - the further down, the more detailed and the less IMO's.</p>
     <div class="plan-cov">
@@ -1106,16 +1099,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>43</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 43 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. a) What the Goal-Based Standards are, and the gap they close</b><ul><li>prescriptive rules do not state the safety level being bought</li><li>and they freeze technology against demonstrably equivalent designs</li><li>detailed scantlings had migrated to class rules outside IMO oversight</li><li>GBS states the goal and functional requirements and audits the rules against them</li><li>mandatory through SOLAS regulation II-1/3-10, in force 1 January 2012</li><li>standards in MSC.287(87), verification guidelines in MSC.296(87)</li></ul></div>
-      <div class="pp-step"><b>2. a) The five-tier framework</b><ul><li>Tier I goals, Tier II functional requirements, Tier III verification of conformity</li><li>Tier IV rules and regulations - class rules and national requirements</li><li>Tier V industry practices and standards</li><li>Tiers I to III are IMO's; Tiers IV and V are where the numbers live</li></ul></div>
-      <div class="pp-step"><b>3. a) The goal, and the functional requirements</b><ul><li>designed and constructed to be safe and environmentally friendly</li><li>for a specified design life of not less than 25 years</li><li>in intact and specified damage conditions, throughout the ship's life</li><li>design group - design life, North Atlantic conditions, strength, fatigue, residual strength, corrosion protection</li><li>construction group - redundancy, watertight integrity, human element, design transparency, quality procedures</li><li>in-service group - survey, maintenance, structural accessibility, recycling</li></ul></div>
-      <div class="pp-step"><b>4. a) Application, and the Ship Construction File</b><ul><li>oil tankers and bulk carriers of 150 m in length and above</li><li>contracted for construction on or after 1 July 2016</li><li>the Ship Construction File delivers the design-transparency requirement</li><li>information to operate, maintain, repair and respond to an emergency</li><li>kept on board and ashore, and maintained through the ship's life</li></ul></div>
-      <div class="pp-step"><b>5. b) How the framework delivers safety and environmental protection</b><ul><li>it works on the hull as the primary barrier</li><li>bulk carriers and tankers were chosen for their failure modes</li><li>design life, fatigue, corrosion protection and residual strength attack those modes</li><li>a hull with residual strength gives time and does not break up</li><li>environmental protection follows from structural integrity, not from discharge control</li><li>recycling considerations extend the goal to end of life</li><li>structural accessibility keeps the design margin auditable in service</li></ul></div>
-      <div class="pp-step"><b>6. b) Verification - IMO audits the rules, not the ship</b><ul><li>an Administration or recognized organization submits its construction rules to IMO</li><li>an audit team appointed by the Secretary-General assesses them against Tiers I and II</li><li>the Maritime Safety Committee determines conformity</li><li>the IACS Common Structural Rules were the principal submission and were confirmed</li><li>maintenance of verification requires amendments to be reassessed</li></ul></div>
-      <div class="pp-step"><b>7. b) Validation - the ship-level chain</b><ul><li>verification asks whether the rules are right; validation asks whether this ship was built to them</li><li>plan approval against verified rules, then survey during construction</li><li>class certification and statutory certification by or for the flag State</li><li>the Ship Construction File as the documentary evidence</li><li>port State control as the independent check in service</li></ul></div>
-      <div class="pp-step"><b>8. b) What GBS actually changed</b><ul><li>class rules were brought inside IMO oversight without IMO writing scantlings</li><li>the safety level became explicit and auditable rather than traditional</li><li>which is the precondition for the Safety Level Approach and for wider application</li><li>for the Chief Engineer the practical residue is the Ship Construction File</li><li>it must be kept current after structural repair, and it records design intent</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1391,16 +1374,17 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">What the 2023 Strategy is, and what it replaced</li>
-      <li value="2">The vision and the levels of ambition</li>
-      <li value="3">The indicative checkpoints</li>
-      <li value="4">The guiding principles</li>
-      <li value="5">The short-term measures - already in force</li>
-      <li value="6">The mid-term measures - the basket</li>
-      <li value="7">Long-term measures and the 2028 review</li>
-      <li value="8">Where the process stood at this examination</li>
-      <li value="9">The potential impact on the shipping industry</li>
+      <li value="1"><span class="pl-t">What the 2023 Strategy is, and what it replaced</span><ul class="pl-pts"><li>resolution MEPC.377(80), adopted 7 July 2023</li><li>expressly revokes the 2018 Initial Strategy from that date</li><li>a policy instrument, not law - the law is MARPOL Annex VI</li><li>to be kept under review with a view to a 2028 Strategy</li></ul></li>
+      <li value="2"><span class="pl-t">The vision and the levels of ambition</span><ul class="pl-pts"><li>phase out GHG emissions as soon as possible; a just and equitable transition</li><li>ship carbon intensity to decline through stronger design requirements</li><li>fleet carbon intensity - CO2 per transport work down at least 40% by 2030 against 2008</li><li>zero or near-zero fuels at least 5%, striving for 10%, of energy used by 2030</li><li>net-zero GHG emissions by or around, i.e. close to, 2050</li><li>targets are GHG not CO2, and are measured well-to-wake</li></ul></li>
+      <li value="3"><span class="pl-t">The indicative checkpoints</span><ul class="pl-pts"><li>total annual GHG emissions, against 2008</li><li>at least 20%, striving for 30%, by 2030</li><li>at least 70%, striving for 80%, by 2040</li><li>indicative, not binding limits - they mark the path to net zero</li></ul></li>
+      <li value="4"><span class="pl-t">The guiding principles</span><ul class="pl-pts"><li>non-discrimination and no more favourable treatment, from MARPOL</li><li>common but differentiated responsibilities and respective capabilities</li><li>all ships to give full and complete effect regardless of flag</li><li>impacts on States, in particular LDCs and SIDS, to be considered</li><li>evidence-based decision-making balanced with the precautionary approach</li><li>the first two principles pull against each other and shape the whole negotiation</li></ul></li>
+      <li value="5"><span class="pl-t">The short-term measures - already in force</span><ul class="pl-pts"><li>measures finalized and agreed between 2018 and 2023</li><li>EEDI for new ships and EEXI for existing ships</li><li>SEEMP and the fuel oil consumption data collection system</li><li>the operational carbon intensity rating</li><li>the Strategy requires their review and synergy with what follows</li></ul></li>
+      <li value="6"><span class="pl-t">The mid-term measures - the basket</span><ul class="pl-pts"><li>a basket comprising both elements, to be finalized and agreed by 2025</li><li>technical element - a goal-based marine fuel standard on GHG intensity</li><li>economic element - a maritime GHG emissions pricing mechanism</li><li>the standard compels the transition, the price funds and accelerates it</li><li>both subject to a comprehensive impact assessment on States</li><li>synergies with the Carbon Intensity Indicator expressly required</li></ul></li>
+      <li value="7"><span class="pl-t">Long-term measures and the 2028 review</span><ul class="pl-pts"><li>the Strategy deliberately does not specify them</li><li>defined only as measures finalized and agreed beyond 2030</li><li>to be developed as part of the 2028 review</li><li>an evidence-based deferral, not a gap in the Strategy</li></ul></li>
+      <li value="8"><span class="pl-t">Where the process stood at this examination</span><ul class="pl-pts"><li>MEPC 81 in spring 2024 has happened - interim report, basket finalized</li><li>MEPC 82 in autumn 2024 has not - the finalized impact assessment is due there</li><li>approval scheduled for MEPC 83 in spring 2025</li><li>adoption at an extraordinary session about six months later</li><li>entry into force 16 months after adoption, in 2027</li><li>so the architecture is agreed and nothing is adopted</li></ul></li>
+      <li value="9"><span class="pl-t">The potential impact on the shipping industry</span><ul class="pl-pts"><li>fuel cost becomes the dominant operating variable</li><li>newbuilding choice becomes a risk decision against asset stranding</li><li>well-to-wake accounting sharpens the methane-slip problem for LNG</li><li>the cost must be allocated between owner and charterer in the charterparty</li><li>crew competence and safety for ammonia and hydrogen become the limiting factor</li><li>regional fragmentation - the EU ETS already applied to shipping from 1 January 2024</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Three blocks of three. WHAT IT IS - instrument (1), ambitions (2), checkpoints (3), principles (4). WHAT IT DOES - short term in force (5), mid-term basket (6), long term deferred (7). WHERE AND WHAT IT COSTS - the sitting position (8) and the industry impact (9). Numbers: 40 intensity and 20 absolute by 2030, 70 by 2040, net zero by or around 2050.</p>
     <div class="plan-cov">
@@ -1408,17 +1392,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>47</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>9 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 47 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What the 2023 Strategy is, and what it replaced</b><ul><li>resolution MEPC.377(80), adopted 7 July 2023</li><li>expressly revokes the 2018 Initial Strategy from that date</li><li>a policy instrument, not law - the law is MARPOL Annex VI</li><li>to be kept under review with a view to a 2028 Strategy</li></ul></div>
-      <div class="pp-step"><b>2. The vision and the levels of ambition</b><ul><li>phase out GHG emissions as soon as possible; a just and equitable transition</li><li>ship carbon intensity to decline through stronger design requirements</li><li>fleet carbon intensity - CO2 per transport work down at least 40% by 2030 against 2008</li><li>zero or near-zero fuels at least 5%, striving for 10%, of energy used by 2030</li><li>net-zero GHG emissions by or around, i.e. close to, 2050</li><li>targets are GHG not CO2, and are measured well-to-wake</li></ul></div>
-      <div class="pp-step"><b>3. The indicative checkpoints</b><ul><li>total annual GHG emissions, against 2008</li><li>at least 20%, striving for 30%, by 2030</li><li>at least 70%, striving for 80%, by 2040</li><li>indicative, not binding limits - they mark the path to net zero</li></ul></div>
-      <div class="pp-step"><b>4. The guiding principles</b><ul><li>non-discrimination and no more favourable treatment, from MARPOL</li><li>common but differentiated responsibilities and respective capabilities</li><li>all ships to give full and complete effect regardless of flag</li><li>impacts on States, in particular LDCs and SIDS, to be considered</li><li>evidence-based decision-making balanced with the precautionary approach</li><li>the first two principles pull against each other and shape the whole negotiation</li></ul></div>
-      <div class="pp-step"><b>5. The short-term measures - already in force</b><ul><li>measures finalized and agreed between 2018 and 2023</li><li>EEDI for new ships and EEXI for existing ships</li><li>SEEMP and the fuel oil consumption data collection system</li><li>the operational carbon intensity rating</li><li>the Strategy requires their review and synergy with what follows</li></ul></div>
-      <div class="pp-step"><b>6. The mid-term measures - the basket</b><ul><li>a basket comprising both elements, to be finalized and agreed by 2025</li><li>technical element - a goal-based marine fuel standard on GHG intensity</li><li>economic element - a maritime GHG emissions pricing mechanism</li><li>the standard compels the transition, the price funds and accelerates it</li><li>both subject to a comprehensive impact assessment on States</li><li>synergies with the Carbon Intensity Indicator expressly required</li></ul></div>
-      <div class="pp-step"><b>7. Long-term measures and the 2028 review</b><ul><li>the Strategy deliberately does not specify them</li><li>defined only as measures finalized and agreed beyond 2030</li><li>to be developed as part of the 2028 review</li><li>an evidence-based deferral, not a gap in the Strategy</li></ul></div>
-      <div class="pp-step"><b>8. Where the process stood at this examination</b><ul><li>MEPC 81 in spring 2024 has happened - interim report, basket finalized</li><li>MEPC 82 in autumn 2024 has not - the finalized impact assessment is due there</li><li>approval scheduled for MEPC 83 in spring 2025</li><li>adoption at an extraordinary session about six months later</li><li>entry into force 16 months after adoption, in 2027</li><li>so the architecture is agreed and nothing is adopted</li></ul></div>
-      <div class="pp-step"><b>9. The potential impact on the shipping industry</b><ul><li>fuel cost becomes the dominant operating variable</li><li>newbuilding choice becomes a risk decision against asset stranding</li><li>well-to-wake accounting sharpens the methane-slip problem for LNG</li><li>the cost must be allocated between owner and charterer in the charterparty</li><li>crew competence and safety for ammonia and hydrogen become the limiting factor</li><li>regional fragmentation - the EU ETS already applied to shipping from 1 January 2024</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1715,15 +1688,16 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Where the Funds sit - a three-tier system</li>
-      <li value="2">The role and functions of the Funds</li>
-      <li value="3">The funding mechanism</li>
-      <li value="4">Eligibility - which incidents and which damage</li>
-      <li value="5">The admissibility criteria</li>
-      <li value="6">The limits, and what happens at the ceiling</li>
-      <li value="7">Effectiveness - what the system does well</li>
-      <li value="8">Effectiveness - where it is weak</li>
+      <li value="1"><span class="pl-t">Where the Funds sit - a three-tier system</span><ul class="pl-pts"><li>the Funds are the second and third tiers, not a stand-alone regime</li><li>tier 1 CLC 92 - strict liability channelled to the registered owner, with compulsory insurance</li><li>tier 2 the 1992 Fund, financed by oil receivers</li><li>tier 3 the Supplementary Fund, optional for States</li><li>the design principle is that ship pays first, then cargo</li><li>the 1971 Fund has been wound up</li></ul></li>
+      <li value="2"><span class="pl-t">The role and functions of the Funds</span><ul class="pl-pts"><li>to pay where the shipowner is exempt from liability under CLC</li><li>where the shipowner is financially incapable and insurance is insufficient</li><li>or where the damage exceeds the CLC limit</li><li>assessing and settling claims, often jointly with the P&amp;I club</li><li>publishing the Claims Manual so admissibility is known in advance</li><li>attending casualties, taking part in proceedings, feeding experience back to IMO</li></ul></li>
+      <li value="3"><span class="pl-t">The funding mechanism</span><ul class="pl-pts"><li>not governments and not shipowners - receivers of contributing oil</li><li>more than 150,000 tonnes received in a calendar year</li><li>contributing oil is crude oil and heavy fuel oil</li><li>the threshold applies to the receiver, not to the State</li><li>States report receipts and the Assembly levies annually according to need</li><li>a deemed minimum aggregate quantity applies for the Supplementary Fund</li><li>STOPIA and TOPIA voluntarily push burden back towards shipowners</li></ul></li>
+      <li value="4"><span class="pl-t">Eligibility - which incidents and which damage</span><ul class="pl-pts"><li>persistent oil carried as cargo in bulk by a tanker</li><li>damage in the territory, territorial sea or EEZ of a Member State</li><li>preventive measures compensable wherever taken</li><li>property damage, clean-up, consequential loss and closely linked pure economic loss</li><li>reasonable measures of reinstatement of the environment</li><li>three years from the damage and six years from the incident</li></ul></li>
+      <li value="5"><span class="pl-t">The admissibility criteria</span><ul class="pl-pts"><li>the expense or loss must have been actually incurred</li><li>the measures must be reasonable and justifiable</li><li>the loss must be quantifiable and supported by documentary evidence</li><li>there must be a reasonable degree of proximity - a close link of causation</li><li>environmental impairment recoverable only as reinstatement costs</li><li>so there is no compensation for ecological harm as such</li></ul></li>
+      <li value="6"><span class="pl-t">The limits, and what happens at the ceiling</span><ul class="pl-pts"><li>203 million SDR from the 1992 Fund, including what CLC has paid</li><li>300,740,000 SDR where three States received 600 million tonnes or more</li><li>750 million SDR in total where the Supplementary Fund applies</li><li>each ceiling is inclusive of the tier below it, not additional to it</li><li>claims above the ceiling are paid pro rata, not first come first served</li><li>hence interim payments at a reduced percentage until exposure is known</li></ul></li>
+      <li value="7"><span class="pl-t">Effectiveness - what the system does well</span><ul class="pl-pts"><li>strict liability removes the need to prove fault</li><li>compulsory insurance and direct action guarantee a solvent defendant</li><li>the tiers mean recovery does not stop at the shipowner's limit</li><li>most claims settle without litigation because admissibility is published in advance</li><li>joint assessment with the P&amp;I club gives the claimant one process</li><li>burden is shared between ship and cargo, which is what made a fund possible</li></ul></li>
+      <li value="8"><span class="pl-t">Effectiveness - where it is weak</span><ul class="pl-pts"><li>the ceiling can be exhausted in a major spill, forcing pro-rata payment and delay</li><li>pure economic loss is restricted by the proximity test</li><li>ecological harm itself is never compensated - only reinstatement costs</li><li>the third tier is optional, so protection depends on which treaties the State joined</li><li>scope reaches only persistent oil from tankers</li><li>verdict - highly effective within a deliberately narrow design</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> WHERE (1), WHAT (2), WHO PAYS (3), WHO CAN CLAIM (4), WHAT PASSES (5), HOW MUCH (6), GOOD (7), BAD (8). The three tiers are SHIP, CARGO, MORE CARGO. Three numbers: 150,000 tonnes to become a contributor, 203m SDR, 750m SDR - and each ceiling includes the tier beneath it.</p>
     <div class="plan-cov">
@@ -1731,16 +1705,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>49</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 49 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Where the Funds sit - a three-tier system</b><ul><li>the Funds are the second and third tiers, not a stand-alone regime</li><li>tier 1 CLC 92 - strict liability channelled to the registered owner, with compulsory insurance</li><li>tier 2 the 1992 Fund, financed by oil receivers</li><li>tier 3 the Supplementary Fund, optional for States</li><li>the design principle is that ship pays first, then cargo</li><li>the 1971 Fund has been wound up</li></ul></div>
-      <div class="pp-step"><b>2. The role and functions of the Funds</b><ul><li>to pay where the shipowner is exempt from liability under CLC</li><li>where the shipowner is financially incapable and insurance is insufficient</li><li>or where the damage exceeds the CLC limit</li><li>assessing and settling claims, often jointly with the P&amp;I club</li><li>publishing the Claims Manual so admissibility is known in advance</li><li>attending casualties, taking part in proceedings, feeding experience back to IMO</li></ul></div>
-      <div class="pp-step"><b>3. The funding mechanism</b><ul><li>not governments and not shipowners - receivers of contributing oil</li><li>more than 150,000 tonnes received in a calendar year</li><li>contributing oil is crude oil and heavy fuel oil</li><li>the threshold applies to the receiver, not to the State</li><li>States report receipts and the Assembly levies annually according to need</li><li>a deemed minimum aggregate quantity applies for the Supplementary Fund</li><li>STOPIA and TOPIA voluntarily push burden back towards shipowners</li></ul></div>
-      <div class="pp-step"><b>4. Eligibility - which incidents and which damage</b><ul><li>persistent oil carried as cargo in bulk by a tanker</li><li>damage in the territory, territorial sea or EEZ of a Member State</li><li>preventive measures compensable wherever taken</li><li>property damage, clean-up, consequential loss and closely linked pure economic loss</li><li>reasonable measures of reinstatement of the environment</li><li>three years from the damage and six years from the incident</li></ul></div>
-      <div class="pp-step"><b>5. The admissibility criteria</b><ul><li>the expense or loss must have been actually incurred</li><li>the measures must be reasonable and justifiable</li><li>the loss must be quantifiable and supported by documentary evidence</li><li>there must be a reasonable degree of proximity - a close link of causation</li><li>environmental impairment recoverable only as reinstatement costs</li><li>so there is no compensation for ecological harm as such</li></ul></div>
-      <div class="pp-step"><b>6. The limits, and what happens at the ceiling</b><ul><li>203 million SDR from the 1992 Fund, including what CLC has paid</li><li>300,740,000 SDR where three States received 600 million tonnes or more</li><li>750 million SDR in total where the Supplementary Fund applies</li><li>each ceiling is inclusive of the tier below it, not additional to it</li><li>claims above the ceiling are paid pro rata, not first come first served</li><li>hence interim payments at a reduced percentage until exposure is known</li></ul></div>
-      <div class="pp-step"><b>7. Effectiveness - what the system does well</b><ul><li>strict liability removes the need to prove fault</li><li>compulsory insurance and direct action guarantee a solvent defendant</li><li>the tiers mean recovery does not stop at the shipowner's limit</li><li>most claims settle without litigation because admissibility is published in advance</li><li>joint assessment with the P&amp;I club gives the claimant one process</li><li>burden is shared between ship and cargo, which is what made a fund possible</li></ul></div>
-      <div class="pp-step"><b>8. Effectiveness - where it is weak</b><ul><li>the ceiling can be exhausted in a major spill, forcing pro-rata payment and delay</li><li>pure economic loss is restricted by the proximity test</li><li>ecological harm itself is never compensated - only reinstatement costs</li><li>the third tier is optional, so protection depends on which treaties the State joined</li><li>scope reaches only persistent oil from tankers</li><li>verdict - highly effective within a deliberately narrow design</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2024,18 +1988,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">a) Where social security sits in the MLC</li>
-      <li value="2">a) Regulation 4.5 - the obligation</li>
-      <li value="3">a) Standard A4.5 - the nine branches and the minimum</li>
-      <li value="4">a) How the protection is delivered</li>
+      <li value="1"><span class="pl-t">a) Where social security sits in the MLC</span><ul class="pl-pts"><li>Title 4 is health protection, medical care, welfare and social security protection</li><li>Regulation 4.1 medical care, 4.2 shipowners' liability, 4.3 health and safety, 4.4 shore welfare, 4.5 social security</li><li>4.1 to 4.4 are what the shipowner provides during the engagement</li><li>4.5 is what the State provides, and it reaches beyond the voyage</li></ul></li>
+      <li value="2"><span class="pl-t">a) Regulation 4.5 - the obligation</span><ul class="pl-pts"><li>access to social security for all seafarers and, per national law, their dependants</li><li>steps to achieve progressively comprehensive protection</li><li>protection no less favourable than that enjoyed by shoreworkers</li><li>the obligation is progressive, and the benchmark is parity with shore employment</li></ul></li>
+      <li value="3"><span class="pl-t">a) Standard A4.5 - the nine branches and the minimum</span><ul class="pl-pts"><li>medical care, sickness benefit, unemployment benefit</li><li>old-age benefit, employment injury benefit, family benefit</li><li>maternity benefit, invalidity benefit, survivors' benefit</li><li>they complement Regulations 4.1 and 4.2 rather than replacing them</li><li>at least three of the nine at the time of ratification</li><li>Guideline B4.5 recommends medical care, sickness benefit and employment injury benefit</li><li>branches specified at ratification and entered in the Director-General's register</li></ul></li>
+      <li value="4"><span class="pl-t">a) How the protection is delivered</span><ul class="pl-pts"><li>laws or regulations, private schemes, collective agreements, or a combination</li><li>comparable benefits to be considered where coverage is inadequate</li><li>cooperation to maintain rights acquired or in course of acquisition regardless of residence</li><li>fair and effective dispute settlement procedures</li><li>complementary protection owed to seafarers ORDINARILY RESIDENT in the territory</li><li>2014 abandonment financial security and 2018 captivity wages, both in force at this sitting</li></ul></li>
     </ol>
-    <div class="plan-limb">b)</div>
+    <div class="plan-limb">b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">b) India's position and framework</li>
-      <li value="6">b) The Indian initiatives</li>
-      <li value="7">b) How they align with the MLC - and where they do not</li>
+      <li value="5"><span class="pl-t">b) India's position and framework</span><ul class="pl-pts"><li>a major labour-supplying State, so ordinary residence is the operative connecting factor</li><li>many Indian seafarers serve on foreign flags, outside India's flag State chain</li><li>the Convention takes effect through the Merchant Shipping Act 1958 and rules under it</li><li>the Directorate General of Shipping is the competent authority</li><li>it certifies Indian ships and exercises port State control over foreign ships</li></ul></li>
+      <li value="6"><span class="pl-t">b) The Indian initiatives</span><ul class="pl-pts"><li>welfare board and welfare fund machinery - hostels, medical and recreational facilities</li><li>the Seamen's Provident Fund as a contributory old-age benefit</li><li>licensing and regulation of recruitment and placement services, with no fees to seafarers</li><li>the national database of seafarers and the seafarer identity document scheme</li><li>medical examination standards and an approved-doctor system</li><li>online grievance redressal and e-governance channels</li><li>regulation of training capacity, which secures the income the benefits rest on</li></ul></li>
+      <li value="7"><span class="pl-t">b) How they align with the MLC - and where they do not</span><ul class="pl-pts"><li>welfare boards answer Regulation 4.4; the provident fund answers the old-age branch</li><li>recruitment regulation answers Regulation 1.4; identity records enable portability</li><li>a mixed system is within the Convention - three branches suffice, by any means</li><li>gap one - unemployment benefit is hard for a voyage-by-voyage workforce</li><li>gap two - the foreign-flag seafarer is covered by residence but the machinery sits abroad</li><li>gap three - portability depends on bilateral and multilateral agreements</li><li>verdict - the architecture is satisfied; the progressive obligation is unfinished</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) runs WHERE (1), WHAT THE STATE OWES (2), THE NINE (3), HOW DELIVERED (4). Limb (b) runs POSITION (5), INITIATIVES (6), ALIGNMENT AND GAPS (7). Recall the nine branches in the order of a working life: ill, hurt at work, out of work, family, disabled, retired, dead.</p>
     <div class="plan-cov">
@@ -2043,15 +2008,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>40</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 40 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. a) Where social security sits in the MLC</b><ul><li>Title 4 is health protection, medical care, welfare and social security protection</li><li>Regulation 4.1 medical care, 4.2 shipowners' liability, 4.3 health and safety, 4.4 shore welfare, 4.5 social security</li><li>4.1 to 4.4 are what the shipowner provides during the engagement</li><li>4.5 is what the State provides, and it reaches beyond the voyage</li></ul></div>
-      <div class="pp-step"><b>2. a) Regulation 4.5 - the obligation</b><ul><li>access to social security for all seafarers and, per national law, their dependants</li><li>steps to achieve progressively comprehensive protection</li><li>protection no less favourable than that enjoyed by shoreworkers</li><li>the obligation is progressive, and the benchmark is parity with shore employment</li></ul></div>
-      <div class="pp-step"><b>3. a) Standard A4.5 - the nine branches and the minimum</b><ul><li>medical care, sickness benefit, unemployment benefit</li><li>old-age benefit, employment injury benefit, family benefit</li><li>maternity benefit, invalidity benefit, survivors' benefit</li><li>they complement Regulations 4.1 and 4.2 rather than replacing them</li><li>at least three of the nine at the time of ratification</li><li>Guideline B4.5 recommends medical care, sickness benefit and employment injury benefit</li><li>branches specified at ratification and entered in the Director-General's register</li></ul></div>
-      <div class="pp-step"><b>4. a) How the protection is delivered</b><ul><li>laws or regulations, private schemes, collective agreements, or a combination</li><li>comparable benefits to be considered where coverage is inadequate</li><li>cooperation to maintain rights acquired or in course of acquisition regardless of residence</li><li>fair and effective dispute settlement procedures</li><li>complementary protection owed to seafarers ORDINARILY RESIDENT in the territory</li><li>2014 abandonment financial security and 2018 captivity wages, both in force at this sitting</li></ul></div>
-      <div class="pp-step"><b>5. b) India's position and framework</b><ul><li>a major labour-supplying State, so ordinary residence is the operative connecting factor</li><li>many Indian seafarers serve on foreign flags, outside India's flag State chain</li><li>the Convention takes effect through the Merchant Shipping Act 1958 and rules under it</li><li>the Directorate General of Shipping is the competent authority</li><li>it certifies Indian ships and exercises port State control over foreign ships</li></ul></div>
-      <div class="pp-step"><b>6. b) The Indian initiatives</b><ul><li>welfare board and welfare fund machinery - hostels, medical and recreational facilities</li><li>the Seamen's Provident Fund as a contributory old-age benefit</li><li>licensing and regulation of recruitment and placement services, with no fees to seafarers</li><li>the national database of seafarers and the seafarer identity document scheme</li><li>medical examination standards and an approved-doctor system</li><li>online grievance redressal and e-governance channels</li><li>regulation of training capacity, which secures the income the benefits rest on</li></ul></div>
-      <div class="pp-step"><b>7. b) How they align with the MLC - and where they do not</b><ul><li>welfare boards answer Regulation 4.4; the provident fund answers the old-age branch</li><li>recruitment regulation answers Regulation 1.4; identity records enable portability</li><li>a mixed system is within the Convention - three branches suffice, by any means</li><li>gap one - unemployment benefit is hard for a voyage-by-voyage workforce</li><li>gap two - the foreign-flag seafarer is covered by residence but the machinery sits abroad</li><li>gap three - portability depends on bilateral and multilateral agreements</li><li>verdict - the architecture is satisfied; the progressive obligation is unfinished</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2354,28 +2310,29 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">The background - the gap the Convention was written to close</li>
-      <li value="2">Its relevance - where it sits in the liability architecture</li>
+      <li value="1"><span class="pl-t">The background - the gap the Convention was written to close</span><ul class="pl-pts"><li>CLC covered only persistent oil carried as cargo by tankers</li><li>A non-tanker's own bunkers could spill hundreds of tonnes with no dedicated regime</li><li>Adopted 23 March 2001, in force 21 November 2008</li></ul></li>
+      <li value="2"><span class="pl-t">Its relevance - where it sits in the liability architecture</span><ul class="pl-pts"><li>Completes the pollution-liability map for the world fleet</li><li>Strict liability plus compulsory insurance plus direct action</li><li>But it borrows its limit from the LLMC and has no fund behind it</li></ul></li>
     </ol>
     <div class="plan-limb">(a)</div>
     <ol class="plan-list">
-      <li value="3">(a) Pollution damage</li>
+      <li value="3"><span class="pl-t">(a) Pollution damage</span><ul class="pl-pts"><li>Loss or damage outside the ship by contamination</li><li>Environmental impairment limited to reasonable reinstatement measures actually undertaken</li><li>Includes the cost of preventive measures</li></ul></li>
     </ol>
     <div class="plan-limb">(b)</div>
     <ol class="plan-list">
-      <li value="4">(b) Bunker oil</li>
+      <li value="4"><span class="pl-t">(b) Bunker oil</span><ul class="pl-pts"><li>Any hydrocarbon mineral oil used or intended for operation or propulsion</li><li>Expressly includes lubricating oil</li><li>Includes residues - and is not confined to persistent oil</li></ul></li>
     </ol>
     <div class="plan-limb">(c)</div>
     <ol class="plan-list">
-      <li value="5">(c) Time limits for claims</li>
+      <li value="5"><span class="pl-t">(c) Time limits for claims</span><ul class="pl-pts"><li>Three years from the date the damage occurred</li><li>Six-year long stop from the date of the incident</li><li>Series of occurrences - the long stop runs from the first</li></ul></li>
     </ol>
     <div class="plan-limb">(d)</div>
     <ol class="plan-list">
-      <li value="6">(d) Exclusions</li>
+      <li value="6"><span class="pl-t">(d) Exclusions</span><ul class="pl-pts"><li>CLC damage is excluded, so the two regimes cannot overlap</li><li>Warships and State ships on non-commercial service</li><li>The shipowner's defences are a different thing again</li></ul></li>
     </ol>
     <ol class="plan-list">
-      <li value="7">How the Bunker Convention differs from CLC 92, taken together</li>
+      <li value="7"><span class="pl-t">How the Bunker Convention differs from CLC 92, taken together</span><ul class="pl-pts"><li>Who is liable - a wide shipowner definition against exclusive channelling</li><li>No free-standing limit and no fund</li><li>Different insurance threshold</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Two openers, four printed definitions, one comparison table - 2-4-1. The definitions run in the printed order P-B-T-E at steps 3 to 6.</p>
     <div class="plan-cov">
@@ -2383,15 +2340,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>21</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 21 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. The background - the gap the Convention was written to close</b><ul><li>CLC covered only persistent oil carried as cargo by tankers</li><li>A non-tanker's own bunkers could spill hundreds of tonnes with no dedicated regime</li><li>Adopted 23 March 2001, in force 21 November 2008</li></ul></div>
-      <div class="pp-step"><b>2. Its relevance - where it sits in the liability architecture</b><ul><li>Completes the pollution-liability map for the world fleet</li><li>Strict liability plus compulsory insurance plus direct action</li><li>But it borrows its limit from the LLMC and has no fund behind it</li></ul></div>
-      <div class="pp-step"><b>3. (a) Pollution damage</b><ul><li>Loss or damage outside the ship by contamination</li><li>Environmental impairment limited to reasonable reinstatement measures actually undertaken</li><li>Includes the cost of preventive measures</li></ul></div>
-      <div class="pp-step"><b>4. (b) Bunker oil</b><ul><li>Any hydrocarbon mineral oil used or intended for operation or propulsion</li><li>Expressly includes lubricating oil</li><li>Includes residues - and is not confined to persistent oil</li></ul></div>
-      <div class="pp-step"><b>5. (c) Time limits for claims</b><ul><li>Three years from the date the damage occurred</li><li>Six-year long stop from the date of the incident</li><li>Series of occurrences - the long stop runs from the first</li></ul></div>
-      <div class="pp-step"><b>6. (d) Exclusions</b><ul><li>CLC damage is excluded, so the two regimes cannot overlap</li><li>Warships and State ships on non-commercial service</li><li>The shipowner's defences are a different thing again</li></ul></div>
-      <div class="pp-step"><b>7. How the Bunker Convention differs from CLC 92, taken together</b><ul><li>Who is liable - a wide shipowner definition against exclusive channelling</li><li>No free-standing limit and no fund</li><li>Different insurance threshold</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2651,18 +2599,19 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">a) What GISIS is, and the problem it solves</li>
-      <li value="2">a) The components - the module structure</li>
-      <li value="3">a) Access, and how the data gets in</li>
-      <li value="4">a) How it facilitates data sharing among Member States</li>
+      <li value="1"><span class="pl-t">a) What GISIS is, and the problem it solves</span><ul class="pl-pts"><li>the IMO Secretariat's web-based platform for information Member States report</li><li>replaces paper circulars and bilateral correspondence</li><li>three purposes - collect, disseminate, and make analysable</li><li>conventions imposed reporting duties with nowhere useful for the reports to go</li></ul></li>
+      <li value="2"><span class="pl-t">a) The components - the module structure</span><ul class="pl-pts"><li>marine casualties and incidents; piracy and armed robbery</li><li>port reception facilities; contact points and national focal points</li><li>ship and company particulars; recognized organizations</li><li>status of multilateral conventions; port State control; survey and certification</li><li>marine environment and MARPOL reporting, including fuel oil availability</li><li>the list is not exhaustive and the module set changes administratively</li></ul></li>
+      <li value="3"><span class="pl-t">a) Access, and how the data gets in</span><ul class="pl-pts"><li>content divided between public and restricted</li><li>much is open after free registration; sensitive material is Member State only</li><li>data entered by each State's designated focal points</li><li>the Secretariat administers the platform rather than authoring content</li><li>authoritative because the reporting State owns it - and incomplete where a State does not report</li></ul></li>
+      <li value="4"><span class="pl-t">a) How it facilitates data sharing among Member States</span><ul class="pl-pts"><li>one repository, one format, reported once</li><li>immediate visibility instead of a publication cycle</li><li>searchable, aggregable and exportable, so patterns can be seen</li><li>feeds casualty analysis, port State control targeting and convention status checks</li><li>makes a failure to report visible, which is itself a compliance mechanism</li><li>shows the Organization where technical cooperation is actually needed</li></ul></li>
     </ol>
-    <div class="plan-limb">b)</div>
+    <div class="plan-limb">b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">b) Reporting on compliant fuel oil</li>
-      <li value="6">b) Reporting inadequacy of port reception facilities</li>
-      <li value="7">b) What the reported data is actually useful for</li>
+      <li value="5"><span class="pl-t">b) Reporting on compliant fuel oil</span><ul class="pl-pts"><li>MARPOL Annex VI regulation 18 - fuel oil availability and quality</li><li>behind the 0.50% global and 0.10% ECA sulphur limits</li><li>Parties must promote availability and inform the Organization</li><li>a ship unable to obtain compliant fuel after best efforts files a non-availability report</li><li>to its Administration and the port of destination, reaching the Organization</li><li>one report is an excuse; many naming one port is evidence of a supply failure</li></ul></li>
+      <li value="6"><span class="pl-t">b) Reporting inadequacy of port reception facilities</span><ul class="pl-pts"><li>MARPOL Annex VI regulation 17 and its counterparts in the other Annexes</li><li>the module holds a database of facilities, waste types and capacities</li><li>so a ship can plan discharges before arrival</li><li>and carries the alleged-inadequacy reporting mechanism</li><li>master reports, flag Administration forwards to port State and the Organization</li><li>the port State is expected to investigate and respond</li><li>the system records a claim and a response, not a finding</li></ul></li>
+      <li value="7"><span class="pl-t">b) What the reported data is actually useful for</span><ul class="pl-pts"><li>a prohibition on the ship is enforceable only if the shore side delivers</li><li>compliant fuel must be buyable; waste must have somewhere to go</li><li>for the ship - operational planning of bunkers and discharges</li><li>for the company - documented evidence against a deficiency</li><li>for States - an obligation that can be seen to be met or not</li><li>for the Organization - aggregation turns complaints into evidence of systemic failure</li><li>the limitation - GISIS reflects only what is reported, so silence reads as compliance</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) runs WHAT (1), PARTS (2), WHO PUTS IT IN (3), WHY IT HELPS (4). Limb (b) runs FUEL (5), WASTE (6), SO WHAT (7). Hold the pairing: 18 is FUEL, 17 is FACILITIES, both MARPOL Annex VI chapter 3.</p>
     <div class="plan-cov">
@@ -2670,15 +2619,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>41</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>7 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 41 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. a) What GISIS is, and the problem it solves</b><ul><li>the IMO Secretariat's web-based platform for information Member States report</li><li>replaces paper circulars and bilateral correspondence</li><li>three purposes - collect, disseminate, and make analysable</li><li>conventions imposed reporting duties with nowhere useful for the reports to go</li></ul></div>
-      <div class="pp-step"><b>2. a) The components - the module structure</b><ul><li>marine casualties and incidents; piracy and armed robbery</li><li>port reception facilities; contact points and national focal points</li><li>ship and company particulars; recognized organizations</li><li>status of multilateral conventions; port State control; survey and certification</li><li>marine environment and MARPOL reporting, including fuel oil availability</li><li>the list is not exhaustive and the module set changes administratively</li></ul></div>
-      <div class="pp-step"><b>3. a) Access, and how the data gets in</b><ul><li>content divided between public and restricted</li><li>much is open after free registration; sensitive material is Member State only</li><li>data entered by each State's designated focal points</li><li>the Secretariat administers the platform rather than authoring content</li><li>authoritative because the reporting State owns it - and incomplete where a State does not report</li></ul></div>
-      <div class="pp-step"><b>4. a) How it facilitates data sharing among Member States</b><ul><li>one repository, one format, reported once</li><li>immediate visibility instead of a publication cycle</li><li>searchable, aggregable and exportable, so patterns can be seen</li><li>feeds casualty analysis, port State control targeting and convention status checks</li><li>makes a failure to report visible, which is itself a compliance mechanism</li><li>shows the Organization where technical cooperation is actually needed</li></ul></div>
-      <div class="pp-step"><b>5. b) Reporting on compliant fuel oil</b><ul><li>MARPOL Annex VI regulation 18 - fuel oil availability and quality</li><li>behind the 0.50% global and 0.10% ECA sulphur limits</li><li>Parties must promote availability and inform the Organization</li><li>a ship unable to obtain compliant fuel after best efforts files a non-availability report</li><li>to its Administration and the port of destination, reaching the Organization</li><li>one report is an excuse; many naming one port is evidence of a supply failure</li></ul></div>
-      <div class="pp-step"><b>6. b) Reporting inadequacy of port reception facilities</b><ul><li>MARPOL Annex VI regulation 17 and its counterparts in the other Annexes</li><li>the module holds a database of facilities, waste types and capacities</li><li>so a ship can plan discharges before arrival</li><li>and carries the alleged-inadequacy reporting mechanism</li><li>master reports, flag Administration forwards to port State and the Organization</li><li>the port State is expected to investigate and respond</li><li>the system records a claim and a response, not a finding</li></ul></div>
-      <div class="pp-step"><b>7. b) What the reported data is actually useful for</b><ul><li>a prohibition on the ship is enforceable only if the shore side delivers</li><li>compliant fuel must be buyable; waste must have somewhere to go</li><li>for the ship - operational planning of bunkers and discharges</li><li>for the company - documented evidence against a deficiency</li><li>for States - an obligation that can be seen to be met or not</li><li>for the Organization - aggregation turns complaints into evidence of systemic failure</li><li>the limitation - GISIS reflects only what is reported, so silence reads as compliance</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2974,19 +2914,20 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">a) The Convention - what it does and why</li>
-      <li value="2">The controls - organotins and cybutryne</li>
-      <li value="3">a) Documents and records to demonstrate compliance</li>
+      <li value="1"><span class="pl-t">a) The Convention - what it does and why</span><ul class="pl-pts"><li>the AFS Convention 2001, in force 17 September 2008</li><li>controls harmful anti-fouling systems used on ships</li><li>organotin compounds acting as biocides caused severe harm at minute concentrations</li><li>applies to ships flying a Party flag and to ships operating under its authority</li><li>controlled substances are listed in Annex 1 and the list can be added to</li><li>enforced by survey and certification, and by port State inspection</li></ul></li>
+      <li value="2"><span class="pl-t">The controls - organotins and cybutryne</span><ul class="pl-pts"><li>organotins acting as biocides: not to be applied from 1 January 2003</li><li>from 1 January 2008 ships must not bear them, or must have a sealer coat over them</li><li>CYBUTRYNE was added by amendment in force 1 January 2023 - before this sitting</li><li>no application or re-application of cybutryne by any ship from that date</li><li>ships already bearing it must remove it or apply a barrier coating</li><li>at the next scheduled renewal, and no later than 60 months after the last application</li><li>so tin-free does not mean unregulated</li></ul></li>
+      <li value="3"><span class="pl-t">a) Documents and records to demonstrate compliance</span><ul class="pl-pts"><li>International Anti-Fouling System Certificate for ships of 400 GT and above on international voyages</li><li>the Record of Anti-Fouling Systems, attached to and forming part of that certificate</li><li>a Declaration on Anti-Fouling System for ships 24 m or more but under 400 GT</li><li>the Declaration must be accompanied by supporting documentation</li><li>paint receipts, contractor invoices and manufacturer technical data or product declarations</li><li>survey records - the initial survey and any survey on change or replacement of the system</li><li>record of any sealer or barrier coat, with the facility and the date</li><li>since 1 January 2023 the certificate must be in the amended form covering cybutryne</li></ul></li>
     </ol>
-    <div class="plan-limb">b)</div>
+    <div class="plan-limb">b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="4">b) Controlled depletion polymer (CDP)</li>
-      <li value="5">Self-polishing copolymer (SPC)</li>
-      <li value="6">Hybrid TBT-free paints</li>
-      <li value="7">Fouling release coatings</li>
-      <li value="8">Choosing between them</li>
+      <li value="4"><span class="pl-t">b) Controlled depletion polymer (CDP)</span><ul class="pl-pts"><li>a soluble rosin-based matrix that dissolves slowly in seawater</li><li>dissolution releases the biocide held in the binder</li><li>the release rate is not well controlled and falls away with time</li><li>a thick, uneven leached layer builds up, so roughness and drag increase</li><li>cheapest of the four, and simple to apply and overcoat</li><li>typically suited to shorter drydock intervals and lower-activity ships</li></ul></li>
+      <li value="5"><span class="pl-t">Self-polishing copolymer (SPC)</span><ul class="pl-pts"><li>the biocide is chemically bound into an acrylic copolymer backbone</li><li>seawater hydrolyses the surface layer, releasing biocide at a controlled rate</li><li>the spent binder then erodes, so the surface polishes smooth as it works</li><li>a thin, stable leached layer and a near-linear, predictable release</li><li>polishing rate can be engineered to the ship's speed and activity</li><li>longer service life and better sustained drag performance; higher cost</li></ul></li>
+      <li value="6"><span class="pl-t">Hybrid TBT-free paints</span><ul class="pl-pts"><li>a blend of rosin and copolymer technologies in one binder</li><li>more predictable than pure CDP, less precisely controlled than pure SPC</li><li>intermediate cost and intermediate service life</li><li>a practical compromise for moderate trading patterns</li><li>the label is commercial rather than defined, so formulations vary</li></ul></li>
+      <li value="7"><span class="pl-t">Fouling release coatings</span><ul class="pl-pts"><li>BIOCIDE-FREE - it works by physics, not by poisoning</li><li>a silicone or fluoropolymer elastomer with very low surface energy</li><li>an extremely smooth, non-stick surface that fouling cannot grip</li><li>growth is sheared off by water flow once the ship is moving</li><li>needs regular activity and speed; poor during long idle periods</li><li>mechanically soft and easily damaged; expensive; needs a tie-coat system</li><li>lowest drag and no biocide released - the strongest environmental position</li></ul></li>
+      <li value="8"><span class="pl-t">Choosing between them</span><ul class="pl-pts"><li>match the coating to the trading pattern, speed and idle time</li><li>match it to the intended drydock interval</li><li>fouling release rewards fast, regularly operating ships</li><li>biocidal systems remain the practical choice for slow or irregular service</li><li>whatever is chosen must be free of controlled substances and documented</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) is <b>WHY - WHAT - PROVE IT</b>: why the Convention exists (1), what it actually controls including cybutryne (2), and the paperwork that proves it (3). Limb (b) is four words in order - <b>DISSOLVE (4), POLISH (5), BLEND (6), SLIP (7)</b> - then choose (8).</p>
     <div class="plan-cov">
@@ -2994,16 +2935,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>50</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>8 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 50 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. a) The Convention - what it does and why</b><ul><li>the AFS Convention 2001, in force 17 September 2008</li><li>controls harmful anti-fouling systems used on ships</li><li>organotin compounds acting as biocides caused severe harm at minute concentrations</li><li>applies to ships flying a Party flag and to ships operating under its authority</li><li>controlled substances are listed in Annex 1 and the list can be added to</li><li>enforced by survey and certification, and by port State inspection</li></ul></div>
-      <div class="pp-step"><b>2. The controls - organotins and cybutryne</b><ul><li>organotins acting as biocides: not to be applied from 1 January 2003</li><li>from 1 January 2008 ships must not bear them, or must have a sealer coat over them</li><li>CYBUTRYNE was added by amendment in force 1 January 2023 - before this sitting</li><li>no application or re-application of cybutryne by any ship from that date</li><li>ships already bearing it must remove it or apply a barrier coating</li><li>at the next scheduled renewal, and no later than 60 months after the last application</li><li>so tin-free does not mean unregulated</li></ul></div>
-      <div class="pp-step"><b>3. a) Documents and records to demonstrate compliance</b><ul><li>International Anti-Fouling System Certificate for ships of 400 GT and above on international voyages</li><li>the Record of Anti-Fouling Systems, attached to and forming part of that certificate</li><li>a Declaration on Anti-Fouling System for ships 24 m or more but under 400 GT</li><li>the Declaration must be accompanied by supporting documentation</li><li>paint receipts, contractor invoices and manufacturer technical data or product declarations</li><li>survey records - the initial survey and any survey on change or replacement of the system</li><li>record of any sealer or barrier coat, with the facility and the date</li><li>since 1 January 2023 the certificate must be in the amended form covering cybutryne</li></ul></div>
-      <div class="pp-step"><b>4. b) Controlled depletion polymer (CDP)</b><ul><li>a soluble rosin-based matrix that dissolves slowly in seawater</li><li>dissolution releases the biocide held in the binder</li><li>the release rate is not well controlled and falls away with time</li><li>a thick, uneven leached layer builds up, so roughness and drag increase</li><li>cheapest of the four, and simple to apply and overcoat</li><li>typically suited to shorter drydock intervals and lower-activity ships</li></ul></div>
-      <div class="pp-step"><b>5. Self-polishing copolymer (SPC)</b><ul><li>the biocide is chemically bound into an acrylic copolymer backbone</li><li>seawater hydrolyses the surface layer, releasing biocide at a controlled rate</li><li>the spent binder then erodes, so the surface polishes smooth as it works</li><li>a thin, stable leached layer and a near-linear, predictable release</li><li>polishing rate can be engineered to the ship's speed and activity</li><li>longer service life and better sustained drag performance; higher cost</li></ul></div>
-      <div class="pp-step"><b>6. Hybrid TBT-free paints</b><ul><li>a blend of rosin and copolymer technologies in one binder</li><li>more predictable than pure CDP, less precisely controlled than pure SPC</li><li>intermediate cost and intermediate service life</li><li>a practical compromise for moderate trading patterns</li><li>the label is commercial rather than defined, so formulations vary</li></ul></div>
-      <div class="pp-step"><b>7. Fouling release coatings</b><ul><li>BIOCIDE-FREE - it works by physics, not by poisoning</li><li>a silicone or fluoropolymer elastomer with very low surface energy</li><li>an extremely smooth, non-stick surface that fouling cannot grip</li><li>growth is sheared off by water flow once the ship is moving</li><li>needs regular activity and speed; poor during long idle periods</li><li>mechanically soft and easily damaged; expensive; needs a tie-coat system</li><li>lowest drag and no biocide released - the strongest environmental position</li></ul></div>
-      <div class="pp-step"><b>8. Choosing between them</b><ul><li>match the coating to the trading pattern, speed and idle time</li><li>match it to the intended drydock interval</li><li>fouling release rewards fast, regularly operating ships</li><li>biocidal systems remain the practical choice for slow or irregular service</li><li>whatever is chosen must be free of controlled substances and documented</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -3304,29 +3235,30 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <div class="plan-limb">intro</div>
     <ol class="plan-list">
-      <li value="1">Where the energy to be recovered is</li>
+      <li value="1"><span class="pl-t">Where the energy to be recovered is</span><ul class="pl-pts"><li>propeller converts only about 65 to 72 per cent of delivered power to thrust</li><li>losses are axial, rotational and vortex</li><li>rotational loss of the order of 8 to 12 per cent</li><li>the rudder is the only large body standing in that race</li><li>so it is both an opportunity and a source of loss</li></ul></li>
     </ol>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="2">(a) Rudder thrust fins</li>
+      <li value="2"><span class="pl-t">(a) Rudder thrust fins</span><ul class="pl-pts"><li>horizontal foils on the rudder at shaft level, in the race</li><li>swirl gives them an angle of attack for nothing</li><li>inclined flow tilts the lift vector forward - horizontal component is thrust</li><li>set in mirror image because swirl reverses across the shaft</li><li>about 2 to 5 per cent quoted; sensitive to span, chord, angle</li><li>fixed angle, so optimised for one draught and speed</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="3">(b) Asymmetric and twisted rudders</li>
+      <li value="3"><span class="pl-t">(b) Asymmetric and twisted rudders</span><ul class="pl-pts"><li>race strikes upper and lower halves from opposite sides</li><li>a symmetrical rudder therefore runs at the wrong incidence over half its span</li><li>section made asymmetric, leading edge twisted oppositely above and below</li><li>each half aligned with the swirl it actually meets</li><li>recovers side force as forward force; cuts drag, cavitation and vibration</li><li>handed to the direction of rotation; no added appendage</li></ul></li>
     </ol>
-    <div class="plan-limb">(c)</div>
+    <div class="plan-limb">(c) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="4">(c) Rudder bulbs</li>
+      <li value="4"><span class="pl-t">(c) Rudder bulbs</span><ul class="pl-pts"><li>bare boss sheds a hub vortex and the flow separates behind it</li><li>streamlined body on the rudder leading edge, coaxial with the shaft</li><li>closes the gap to the hub cap to form a near-continuous body</li><li>suppresses the vortex and restores pressure behind the boss</li><li>reduces loss rather than recovering energy</li><li>diameter and axial gap are critical; usually designed with fins as one installation</li></ul></li>
     </ol>
-    <div class="plan-limb">(d)</div>
+    <div class="plan-limb">(d) <span class="pl-mk">&middot; 4 marks</span></div>
     <ol class="plan-list">
-      <li value="5">(d) Grim vane wheels</li>
+      <li value="5"><span class="pl-t">(d) Grim vane wheels</span><ul class="pl-pts"><li>Grim, 1966; free-running, no mechanical connection to the shaft</li><li>mounted aft of and coaxial with the propeller, larger in diameter</li><li>inner portion inside the race acts as a turbine and drives the wheel</li><li>outer portion outside the race acts as a propeller and adds thrust</li><li>energy taken from a small fast disturbed stream, returned in a large slow clean one</li><li>blade fatigue, loss in a seaway and off-design behaviour limited it in service</li></ul></li>
     </ol>
     <div class="plan-limb">judgement</div>
     <ol class="plan-list">
-      <li value="6">Whether a claimed gain is real on this ship</li>
+      <li value="6"><span class="pl-t">Whether a claimed gain is real on this ship</span><ul class="pl-pts"><li>gain depends on wake field, block coefficient, propeller loading, draught, speed</li><li>a percentage without its measured condition is meaningless</li><li>model-scale results need a scale-effect correction</li><li>devices interact - savings are not additive</li><li>test the claim against the real operating profile, not the design point</li><li>class approval of the attachment, and the effect on manoeuvring</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> LOSSES (1) - FIN (2) - FORM (3) - BULB (4) - WHEEL (5) - JUDGEMENT (6). The four devices sit in that order working outward from the shaft centreline: bulb at the hub, fins just clear of it, the rudder body around them, the vane wheel beyond the disc. Attach the verb to each: bulb fills, fin lifts, rudder twists, wheel turns.</p>
     <div class="plan-cov">
@@ -3334,14 +3266,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>35</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 35 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Where the energy to be recovered is</b><ul><li>propeller converts only about 65 to 72 per cent of delivered power to thrust</li><li>losses are axial, rotational and vortex</li><li>rotational loss of the order of 8 to 12 per cent</li><li>the rudder is the only large body standing in that race</li><li>so it is both an opportunity and a source of loss</li></ul></div>
-      <div class="pp-step"><b>2. (a) Rudder thrust fins</b><ul><li>horizontal foils on the rudder at shaft level, in the race</li><li>swirl gives them an angle of attack for nothing</li><li>inclined flow tilts the lift vector forward - horizontal component is thrust</li><li>set in mirror image because swirl reverses across the shaft</li><li>about 2 to 5 per cent quoted; sensitive to span, chord, angle</li><li>fixed angle, so optimised for one draught and speed</li></ul></div>
-      <div class="pp-step"><b>3. (b) Asymmetric and twisted rudders</b><ul><li>race strikes upper and lower halves from opposite sides</li><li>a symmetrical rudder therefore runs at the wrong incidence over half its span</li><li>section made asymmetric, leading edge twisted oppositely above and below</li><li>each half aligned with the swirl it actually meets</li><li>recovers side force as forward force; cuts drag, cavitation and vibration</li><li>handed to the direction of rotation; no added appendage</li></ul></div>
-      <div class="pp-step"><b>4. (c) Rudder bulbs</b><ul><li>bare boss sheds a hub vortex and the flow separates behind it</li><li>streamlined body on the rudder leading edge, coaxial with the shaft</li><li>closes the gap to the hub cap to form a near-continuous body</li><li>suppresses the vortex and restores pressure behind the boss</li><li>reduces loss rather than recovering energy</li><li>diameter and axial gap are critical; usually designed with fins as one installation</li></ul></div>
-      <div class="pp-step"><b>5. (d) Grim vane wheels</b><ul><li>Grim, 1966; free-running, no mechanical connection to the shaft</li><li>mounted aft of and coaxial with the propeller, larger in diameter</li><li>inner portion inside the race acts as a turbine and drives the wheel</li><li>outer portion outside the race acts as a propeller and adds thrust</li><li>energy taken from a small fast disturbed stream, returned in a large slow clean one</li><li>blade fatigue, loss in a seaway and off-design behaviour limited it in service</li></ul></div>
-      <div class="pp-step"><b>6. Whether a claimed gain is real on this ship</b><ul><li>gain depends on wake field, block coefficient, propeller loading, draught, speed</li><li>a percentage without its measured condition is meaningless</li><li>model-scale results need a scale-effect correction</li><li>devices interact - savings are not additive</li><li>test the claim against the real operating profile, not the design point</li><li>class approval of the attachment, and the effect on manoeuvring</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">

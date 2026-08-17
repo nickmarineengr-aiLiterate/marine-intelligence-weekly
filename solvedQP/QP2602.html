@@ -267,7 +267,7 @@
   .plan-lead{margin:0 0 8px;font-size:13.5px;}
   .plan-limb{font-family:'Segoe UI',system-ui,sans-serif;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;margin-top:8px;}
   .plan-list{margin:4px 0 0;padding-left:22px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13.5px;font-weight:600;}
-  .plan-list li{margin:4px 0;}
+  .plan-list li{margin:9px 0;}
   .plan-cue{margin:10px 0 0;font-size:13px;background:#fff;border:1px dashed var(--orange);border-radius:8px;padding:8px 11px;}
   .plan-cov{margin-top:11px;font-family:'Segoe UI',system-ui,sans-serif;font-size:13px;background:#fff;border:1px solid var(--orange);border-radius:8px;padding:8px 11px;}
   .cov-row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
@@ -275,11 +275,11 @@
   .cov-k{flex:0 0 74px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#7c2d12;}
   .cov-v{color:var(--ink);}
   .plan-note{margin:6px 0 0;font-size:11.5px;color:var(--grey-text);}
-  .plan-points{margin-top:9px;font-size:12.5px;}
-  .plan-points > summary{cursor:pointer;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
-  .plan-points:focus-within > summary{outline:2px solid var(--orange);outline-offset:2px;}
-  .pp-step{margin:8px 0;font-family:'Segoe UI',system-ui,sans-serif;}
-  .pp-step ul{margin:3px 0 0;padding-left:20px;color:var(--grey-text);}
+  .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#7c2d12;}
+  .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}
+  .pl-t{display:block;}
+  .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;color:var(--grey-text);}
+  .pl-pts li{margin:2px 0;}
 
   /* Recall: blanks first, reveal on demand. */
   .recall{background:#fff;border:1.5px solid var(--teal-dark);padding:0 16px 13px;}
@@ -634,20 +634,21 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">(a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">(a) <span class="pl-mk">&middot; 5 marks</span></div>
     <ol class="plan-list">
-      <li value="1">(a) The three principles the LLMC regime is built on</li>
-      <li value="2">How LLMC links to the other liability conventions</li>
+      <li value="1"><span class="pl-t">(a) The three principles the LLMC regime is built on</span><ul class="pl-pts"><li>a near-unbreakable right to limit</li><li>limit set by tonnage, not by fault or by loss</li><li>one fund per occurrence, shared rateably</li><li>Articles 1, 4, 6, 11-13</li></ul></li>
+      <li value="2"><span class="pl-t">How LLMC links to the other liability conventions</span><ul class="pl-pts"><li>CLC 1992 has its own limits - excluded by Article 3</li><li>Bunkers 2001 Article 6 preserves LLMC limitation</li><li>Nairobi WRC 2007 Article 10(2) does the same</li><li>LLMC is the residual general regime</li></ul></li>
     </ol>
-    <div class="plan-limb">(b)</div>
+    <div class="plan-limb">(b) <span class="pl-mk">&middot; 5 marks</span></div>
     <ol class="plan-list">
-      <li value="3">(b) The liabilities that are subject to limitation</li>
-      <li value="4">The claims left outside, and the conduct that breaks the limit</li>
+      <li value="3"><span class="pl-t">(b) The liabilities that are subject to limitation</span><ul class="pl-pts"><li>loss of life, personal injury, loss of or damage to property</li><li>delay in carriage of cargo, passengers or luggage</li><li>infringement of non-contractual rights</li><li>wreck and cargo removal, where not reserved</li><li>measures to avert or minimise loss</li><li>limitable whatever the basis of liability</li></ul></li>
+      <li value="4"><span class="pl-t">The claims left outside, and the conduct that breaks the limit</span><ul class="pl-pts"><li>salvage and general average contribution excepted</li><li>CLC oil pollution and nuclear damage excepted</li><li>servants of the shipowner or salvor excepted</li><li>Article 4 - personal act or omission, intent or recklessness with knowledge</li></ul></li>
     </ol>
-    <div class="plan-limb">(c)</div>
+    <div class="plan-limb">(c) <span class="pl-mk">&middot; 6 marks</span></div>
     <ol class="plan-list">
-      <li value="5">(c) The principles of the Salvage Convention 1989</li>
-      <li value="6">Why salvors may limit, and the limit that applies</li>
+      <li value="5"><span class="pl-t">(c) The principles of the Salvage Convention 1989</span><ul class="pl-pts"><li>voluntary service to property in danger</li><li>no cure, no pay as the base rule</li><li>Article 13 criteria fix the reward</li><li>Article 14 special compensation for environmental effort</li><li>duties of care to the environment on both sides</li><li>reward never exceeds the salved value</li></ul></li>
+      <li value="6"><span class="pl-t">Why salvors may limit, and the limit that applies</span><ul class="pl-pts"><li>The Tojo Maru exposed the gap in the 1957 regime</li><li>salvor working off the tug could not limit</li><li>LLMC 1976 brought salvors inside the regime</li><li>Article 6(4) deems a tonnage of 1,500</li><li>3.02m SDR life and injury, 1.51m SDR property</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Two headings per printed limb: who may limit and how the conventions fit (1, 2); claims in and claims out (3, 4); earn the salvage award then limit the salvor (5, 6). One number chain to hold: 1,500 deemed tons, so 3.02 and 1.51 million SDR.</p>
     <div class="plan-cov">
@@ -655,14 +656,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>29</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 29 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. (a) The three principles the LLMC regime is built on</b><ul><li>a near-unbreakable right to limit</li><li>limit set by tonnage, not by fault or by loss</li><li>one fund per occurrence, shared rateably</li><li>Articles 1, 4, 6, 11-13</li></ul></div>
-      <div class="pp-step"><b>2. How LLMC links to the other liability conventions</b><ul><li>CLC 1992 has its own limits - excluded by Article 3</li><li>Bunkers 2001 Article 6 preserves LLMC limitation</li><li>Nairobi WRC 2007 Article 10(2) does the same</li><li>LLMC is the residual general regime</li></ul></div>
-      <div class="pp-step"><b>3. (b) The liabilities that are subject to limitation</b><ul><li>loss of life, personal injury, loss of or damage to property</li><li>delay in carriage of cargo, passengers or luggage</li><li>infringement of non-contractual rights</li><li>wreck and cargo removal, where not reserved</li><li>measures to avert or minimise loss</li><li>limitable whatever the basis of liability</li></ul></div>
-      <div class="pp-step"><b>4. The claims left outside, and the conduct that breaks the limit</b><ul><li>salvage and general average contribution excepted</li><li>CLC oil pollution and nuclear damage excepted</li><li>servants of the shipowner or salvor excepted</li><li>Article 4 - personal act or omission, intent or recklessness with knowledge</li></ul></div>
-      <div class="pp-step"><b>5. (c) The principles of the Salvage Convention 1989</b><ul><li>voluntary service to property in danger</li><li>no cure, no pay as the base rule</li><li>Article 13 criteria fix the reward</li><li>Article 14 special compensation for environmental effort</li><li>duties of care to the environment on both sides</li><li>reward never exceeds the salved value</li></ul></div>
-      <div class="pp-step"><b>6. Why salvors may limit, and the limit that applies</b><ul><li>The Tojo Maru exposed the gap in the 1957 regime</li><li>salvor working off the tug could not limit</li><li>LLMC 1976 brought salvors inside the regime</li><li>Article 6(4) deems a tonnage of 1,500</li><li>3.02m SDR life and injury, 1.51m SDR property</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -921,17 +914,18 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">a) <span class="pl-mk">&middot; 10 marks</span></div>
     <ol class="plan-list">
-      <li value="1">a) What CII is, and where it sits in MARPOL</li>
-      <li value="2">How attained and required CII are set, and how a ship is rated</li>
-      <li value="3">What follows from a poor rating</li>
-      <li value="4">The commercial impact on the shipping business</li>
+      <li value="1"><span class="pl-t">a) What CII is, and where it sits in MARPOL</span><ul class="pl-pts"><li>MARPOL Annex VI regulation 28, operational carbon intensity</li><li>ships of 5,000 GT and above</li><li>operational, not design - unlike EEXI</li><li>built on the IMO DCS fuel data under regulation 27</li></ul></li>
+      <li value="2"><span class="pl-t">How attained and required CII are set, and how a ship is rated</span><ul class="pl-pts"><li>attained CII - CO2 per transport work, usually AER</li><li>required CII = 2019 reference line x (1 - Z/100)</li><li>Z rises 5, 7, 9, 11% for 2023 to 2026</li><li>verified annually and rated A to E</li><li>rating recorded on the Statement of Compliance</li></ul></li>
+      <li value="3"><span class="pl-t">What follows from a poor rating</span><ul class="pl-pts"><li>D for three consecutive years or E for one year</li><li>corrective action plan in SEEMP Part III</li><li>plan agreed before the SoC is issued</li><li>no direct fine, but the ship cannot ignore it</li></ul></li>
+      <li value="4"><span class="pl-t">The commercial impact on the shipping business</span><ul class="pl-pts"><li>charterers screen on rating; CII clauses in time charters</li><li>speed and route control moves between owner and charterer</li><li>banks and Poseidon Principles signatories price on it</li><li>second-hand value and scrapping decisions</li><li>cargo owners' own scope 3 reporting</li></ul></li>
     </ol>
-    <div class="plan-limb">b)</div>
+    <div class="plan-limb">b) <span class="pl-mk">&middot; 6 marks</span></div>
     <ol class="plan-list">
-      <li value="5">b) The shortcomings the industry has identified</li>
-      <li value="6">The remedial measures actually adopted</li>
+      <li value="5"><span class="pl-t">b) The shortcomings the industry has identified</span><ul class="pl-pts"><li>measures capacity, not cargo actually carried</li><li>a long ballast leg can improve the rating</li><li>idling at anchor and port congestion penalise the ship</li><li>short-sea, chemical and offshore trades hit hardest</li><li>rating attaches to a ship the charterer operates</li></ul></li>
+      <li value="6"><span class="pl-t">The remedial measures actually adopted</span><ul class="pl-pts"><li>regulation 28.11 review due by 1 January 2026</li><li>Phase 1 completed at MEPC 83, April 2025</li><li>MEPC.400(83) set the 2027-2030 factors</li><li>Phase 2 opened 1 January 2026, metrics and SEEMP</li><li>industry response - BIMCO CII clause 2022</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) climbs: INSTRUMENT (1) - MEASURE (2) - CONSEQUENCE (3) - MONEY (4). Limb (b) is FAULTS (5) then FIXES (6). Numbers: 5,000 GT, Z of 11% in 2026 rising to 21.5% by 2030, D three years or E once.</p>
     <div class="plan-cov">
@@ -939,14 +933,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>28</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 28 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. a) What CII is, and where it sits in MARPOL</b><ul><li>MARPOL Annex VI regulation 28, operational carbon intensity</li><li>ships of 5,000 GT and above</li><li>operational, not design - unlike EEXI</li><li>built on the IMO DCS fuel data under regulation 27</li></ul></div>
-      <div class="pp-step"><b>2. How attained and required CII are set, and how a ship is rated</b><ul><li>attained CII - CO2 per transport work, usually AER</li><li>required CII = 2019 reference line x (1 - Z/100)</li><li>Z rises 5, 7, 9, 11% for 2023 to 2026</li><li>verified annually and rated A to E</li><li>rating recorded on the Statement of Compliance</li></ul></div>
-      <div class="pp-step"><b>3. What follows from a poor rating</b><ul><li>D for three consecutive years or E for one year</li><li>corrective action plan in SEEMP Part III</li><li>plan agreed before the SoC is issued</li><li>no direct fine, but the ship cannot ignore it</li></ul></div>
-      <div class="pp-step"><b>4. The commercial impact on the shipping business</b><ul><li>charterers screen on rating; CII clauses in time charters</li><li>speed and route control moves between owner and charterer</li><li>banks and Poseidon Principles signatories price on it</li><li>second-hand value and scrapping decisions</li><li>cargo owners' own scope 3 reporting</li></ul></div>
-      <div class="pp-step"><b>5. b) The shortcomings the industry has identified</b><ul><li>measures capacity, not cargo actually carried</li><li>a long ballast leg can improve the rating</li><li>idling at anchor and port congestion penalise the ship</li><li>short-sea, chemical and offshore trades hit hardest</li><li>rating attaches to a ship the charterer operates</li></ul></div>
-      <div class="pp-step"><b>6. The remedial measures actually adopted</b><ul><li>regulation 28.11 review due by 1 January 2026</li><li>Phase 1 completed at MEPC 83, April 2025</li><li>MEPC.400(83) set the 2027-2030 factors</li><li>Phase 2 opened 1 January 2026, metrics and SEEMP</li><li>industry response - BIMCO CII clause 2022</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1207,17 +1193,18 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">a) <span class="pl-mk">&middot; 10 marks</span></div>
     <ol class="plan-list">
-      <li value="1">a) What FSA is, and who it is for</li>
-      <li value="2">Step 1 - identifying the hazards of this cargo</li>
-      <li value="3">Step 2 - assessing the risk on a ro-ro deck</li>
-      <li value="4">Steps 3 and 4 - risk control options and whether they pay</li>
-      <li value="5">Step 5 - what the recommendations actually became</li>
+      <li value="1"><span class="pl-t">a) What FSA is, and who it is for</span><ul class="pl-pts"><li>MSC-MEPC.2/Circ.12/Rev.2, revised 9 April 2018</li><li>a tool for the IMO rule-making process</li><li>structured, auditable, risk and cost-benefit based</li><li>not a shipboard risk assessment</li></ul></li>
+      <li value="2"><span class="pl-t">Step 1 - identifying the hazards of this cargo</span><ul class="pl-pts"><li>thermal runaway - self-sustaining, needs no external oxygen</li><li>damaged, defective or mis-declared cells</li><li>high state of charge and charging on board</li><li>flammable and toxic vent gas; explosion risk</li><li>re-ignition hours or days later</li><li>concealment - a vehicle is not a labelled package</li></ul></li>
+      <li value="3"><span class="pl-t">Step 2 - assessing the risk on a ro-ro deck</span><ul class="pl-pts"><li>frequency from casualty and near-miss data</li><li>consequence escalation - close stow, no fire divisions</li><li>large open deck, ramps and ventilation spread fire</li><li>risk to life on ro-pax; risk to the ship on PCTC</li><li>uncertainty must be reported, not hidden</li></ul></li>
+      <li value="4"><span class="pl-t">Steps 3 and 4 - risk control options and whether they pay</span><ul class="pl-pts"><li>detection - individually identifiable, combined smoke and heat</li><li>suppression - drencher coverage and boundary cooling</li><li>containment - A-60 boundaries, ventilation control</li><li>operational - state of charge limits, segregation, patrols</li><li>cost-benefit tested against cost per averted fatality</li></ul></li>
+      <li value="5"><span class="pl-t">Step 5 - what the recommendations actually became</span><ul class="pl-pts"><li>FIRESAFE I and II fed MSC.1/Circ.1615</li><li>MSC.550(108) amended SOLAS II-2 regs 7 and 20</li><li>MSC.555(108) amended FSS Code chapters 7 and 9</li><li>in force 1 January 2026, weeks before this sitting</li><li>further new-energy-vehicle amendments still in development</li></ul></li>
     </ol>
-    <div class="plan-limb">b)</div>
+    <div class="plan-limb">b) <span class="pl-mk">&middot; 6 marks</span></div>
     <ol class="plan-list">
-      <li value="6">b) Measures by stakeholder</li>
+      <li value="6"><span class="pl-t">b) Measures by stakeholder</span><ul class="pl-pts"><li>IMO - close the regulatory gap for new energy vehicles</li><li>flag and class - approval, survey, guidance</li><li>shipper and packer - correct declaration and IMDG classification</li><li>terminal - screening, state of charge, refusal of damaged units</li><li>operator - stowage policy, training, response plans</li><li>ship - detection watch, drills, early boundary cooling</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> The five steps as HAZARD (2) - RISK (3) - OPTIONS and COST (4) - RECOMMEND (5), with step 1 saying who it is for. Then limb (b) walks the chain: REGULATOR, CLASS, SHIPPER, TERMINAL, OPERATOR, SHIP (6).</p>
     <div class="plan-cov">
@@ -1225,14 +1212,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>31</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 31 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. a) What FSA is, and who it is for</b><ul><li>MSC-MEPC.2/Circ.12/Rev.2, revised 9 April 2018</li><li>a tool for the IMO rule-making process</li><li>structured, auditable, risk and cost-benefit based</li><li>not a shipboard risk assessment</li></ul></div>
-      <div class="pp-step"><b>2. Step 1 - identifying the hazards of this cargo</b><ul><li>thermal runaway - self-sustaining, needs no external oxygen</li><li>damaged, defective or mis-declared cells</li><li>high state of charge and charging on board</li><li>flammable and toxic vent gas; explosion risk</li><li>re-ignition hours or days later</li><li>concealment - a vehicle is not a labelled package</li></ul></div>
-      <div class="pp-step"><b>3. Step 2 - assessing the risk on a ro-ro deck</b><ul><li>frequency from casualty and near-miss data</li><li>consequence escalation - close stow, no fire divisions</li><li>large open deck, ramps and ventilation spread fire</li><li>risk to life on ro-pax; risk to the ship on PCTC</li><li>uncertainty must be reported, not hidden</li></ul></div>
-      <div class="pp-step"><b>4. Steps 3 and 4 - risk control options and whether they pay</b><ul><li>detection - individually identifiable, combined smoke and heat</li><li>suppression - drencher coverage and boundary cooling</li><li>containment - A-60 boundaries, ventilation control</li><li>operational - state of charge limits, segregation, patrols</li><li>cost-benefit tested against cost per averted fatality</li></ul></div>
-      <div class="pp-step"><b>5. Step 5 - what the recommendations actually became</b><ul><li>FIRESAFE I and II fed MSC.1/Circ.1615</li><li>MSC.550(108) amended SOLAS II-2 regs 7 and 20</li><li>MSC.555(108) amended FSS Code chapters 7 and 9</li><li>in force 1 January 2026, weeks before this sitting</li><li>further new-energy-vehicle amendments still in development</li></ul></div>
-      <div class="pp-step"><b>6. b) Measures by stakeholder</b><ul><li>IMO - close the regulatory gap for new energy vehicles</li><li>flag and class - approval, survey, guidance</li><li>shipper and packer - correct declaration and IMDG classification</li><li>terminal - screening, state of charge, refusal of damaged units</li><li>operator - stowage policy, training, response plans</li><li>ship - detection watch, drills, early boundary cooling</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1503,17 +1482,18 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">A)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">A) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">(A) What the human element means in STCW</li>
-      <li value="2">Competence-based standards</li>
-      <li value="3">Fitness for duty - the physical human being</li>
-      <li value="4">Responsibility placed on companies and Administrations</li>
+      <li value="1"><span class="pl-t">(A) What the human element means in STCW</span><ul class="pl-pts"><li>competence demonstrated, not time served</li><li>conditions under which competence can be exercised</li><li>STCW 1978 as amended</li><li>Manila amendments in force 1 January 2012</li></ul></li>
+      <li value="2"><span class="pl-t">Competence-based standards</span><ul class="pl-pts"><li>Part A tables - competence, KUP, methods, criteria</li><li>Part A mandatory, Part B guidance</li><li>Manila added leadership and teamworking; ERM and BRM</li><li>reg I/6 training and assessment; I/8 quality standards</li><li>reg I/11 revalidation; chapter VI familiarisation</li></ul></li>
+      <li value="3"><span class="pl-t">Fitness for duty - the physical human being</span><ul class="pl-pts"><li>reg VIII/1 - establish and enforce rest periods per A-VIII/1</li><li>10 hours in any 24 and 77 in any 7 days</li><li>two periods, one of at least 6 hours; 14-hour maximum interval</li><li>exceptions not below 70 hours, not over two consecutive weeks</li><li>alcohol limits; reg I/9 medical standards</li><li>reg VIII/2 watchkeeping arrangements</li></ul></li>
+      <li value="4"><span class="pl-t">Responsibility placed on companies and Administrations</span><ul class="pl-pts"><li>reg I/14 - valid certificates, familiarisation, documentation</li><li>quality standards operated by Administrations</li><li>independent evaluation and reporting to IMO</li></ul></li>
     </ol>
-    <div class="plan-limb">B)</div>
+    <div class="plan-limb">B) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="5">(B) The IMO guidance on fatigue</li>
-      <li value="6">How the guidance and the rules fit together</li>
+      <li value="5"><span class="pl-t">(B) The IMO guidance on fatigue</span><ul class="pl-pts"><li>MSC.1/Circ.1598, 24 January 2019, approved MSC 100</li><li>supersedes MSC/Circ.1014 of 2001</li><li>recommendatory, not mandatory</li><li>Module 1 fatigue and its causes; sleep debt defined</li><li>Module 2 the Company; Module 3 the Seafarer</li><li>Module 4 awareness and training; Module 5 ship design</li><li>Module 6 Administration and port State authorities</li></ul></li>
+      <li value="6"><span class="pl-t">How the guidance and the rules fit together</span><ul class="pl-pts"><li>hours of rest are a prescriptive formula in STCW chapter VIII</li><li>compliance is not the same as being rested</li><li>circadian rhythm and sleep debt affect rest quality</li><li>rest means rest, not a different form of work</li><li>MLC 2006 Regs 2.3, 2.4 and 2.7</li><li>treat always-exactly-compliant records as a warning</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb A: CAN THEY (step 2) - FIT (3) - RESPONSIBLE (4). Limb B: six modules by audience (5), then formula versus reality (6). Numbers 10 / 77 / 2 / 6 / 14, floor 70.</p>
     <div class="plan-cov">
@@ -1521,14 +1501,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>31</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 31 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. (A) What the human element means in STCW</b><ul><li>competence demonstrated, not time served</li><li>conditions under which competence can be exercised</li><li>STCW 1978 as amended</li><li>Manila amendments in force 1 January 2012</li></ul></div>
-      <div class="pp-step"><b>2. Competence-based standards</b><ul><li>Part A tables - competence, KUP, methods, criteria</li><li>Part A mandatory, Part B guidance</li><li>Manila added leadership and teamworking; ERM and BRM</li><li>reg I/6 training and assessment; I/8 quality standards</li><li>reg I/11 revalidation; chapter VI familiarisation</li></ul></div>
-      <div class="pp-step"><b>3. Fitness for duty - the physical human being</b><ul><li>reg VIII/1 - establish and enforce rest periods per A-VIII/1</li><li>10 hours in any 24 and 77 in any 7 days</li><li>two periods, one of at least 6 hours; 14-hour maximum interval</li><li>exceptions not below 70 hours, not over two consecutive weeks</li><li>alcohol limits; reg I/9 medical standards</li><li>reg VIII/2 watchkeeping arrangements</li></ul></div>
-      <div class="pp-step"><b>4. Responsibility placed on companies and Administrations</b><ul><li>reg I/14 - valid certificates, familiarisation, documentation</li><li>quality standards operated by Administrations</li><li>independent evaluation and reporting to IMO</li></ul></div>
-      <div class="pp-step"><b>5. (B) The IMO guidance on fatigue</b><ul><li>MSC.1/Circ.1598, 24 January 2019, approved MSC 100</li><li>supersedes MSC/Circ.1014 of 2001</li><li>recommendatory, not mandatory</li><li>Module 1 fatigue and its causes; sleep debt defined</li><li>Module 2 the Company; Module 3 the Seafarer</li><li>Module 4 awareness and training; Module 5 ship design</li><li>Module 6 Administration and port State authorities</li></ul></div>
-      <div class="pp-step"><b>6. How the guidance and the rules fit together</b><ul><li>hours of rest are a prescriptive formula in STCW chapter VIII</li><li>compliance is not the same as being rested</li><li>circadian rhythm and sleep debt affect rest quality</li><li>rest means rest, not a different form of work</li><li>MLC 2006 Regs 2.3, 2.4 and 2.7</li><li>treat always-exactly-compliant records as a warning</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -1793,13 +1765,14 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">What the Act means by an unseaworthy ship</li>
-      <li value="2">The offence, and the defences the Act allows</li>
-      <li value="3">What an unsafe ship is, and the power to detain her</li>
-      <li value="4">The real difference between the two</li>
-      <li value="5">The owner's obligation to the crew</li>
-      <li value="6">How the obligation is policed, and what changed afterwards</li>
+      <li value="1"><span class="pl-t">What the Act means by an unseaworthy ship</span><ul class="pl-pts"><li>section 334 - no separate definitions entry</li><li>materials, construction, master's qualifications</li><li>number, description and qualifications of crew</li><li>weight, description and stowage of cargo and ballast</li><li>condition of hull, equipment, boilers and machinery</li><li>fit in every respect for the proposed voyage or service</li></ul></li>
+      <li value="2"><span class="pl-t">The offence, and the defences the Act allows</span><ul class="pl-pts"><li>s.334(1) - sending or attempting to send to sea</li><li>s.334(2) - master who knowingly takes her to sea</li><li>life of any person likely to be endangered</li><li>defence - all reasonable means used</li><li>defence - reasonable and justifiable in the circumstances</li><li>s.334(4) - prosecution only by or with Central Government consent</li></ul></li>
+      <li value="3"><span class="pl-t">What an unsafe ship is, and the power to detain her</span><ul class="pl-pts"><li>s.336 - defective hull, equipment or machinery</li><li>or overloading or improper loading</li><li>unfit to proceed without serious danger to human life</li><li>having regard to the nature of the intended service</li><li>provisional detention, then survey, then release or final detention</li><li>written grounds served forthwith on the master</li></ul></li>
+      <li value="4"><span class="pl-t">The real difference between the two</span><ul class="pl-pts"><li>unseaworthy is a state; unsafe triggers a power</li><li>one punishes after the fact, the other intervenes before</li><li>unseaworthiness is wider - includes crew and stowage</li><li>unsafe is narrower and lists its causes</li><li>every unsafe ship is unseaworthy; not the converse</li></ul></li>
+      <li value="5"><span class="pl-t">The owner's obligation to the crew</span><ul class="pl-pts"><li>s.335 - implied into every contract of service</li><li>and every contract of apprenticeship</li><li>notwithstanding any agreement to the contrary</li><li>owner, master and loading or despatching agent</li><li>all reasonable means at commencement of the voyage</li><li>and to keep her seaworthy during the voyage</li></ul></li>
+      <li value="6"><span class="pl-t">How the obligation is policed, and what changed afterwards</span><ul class="pl-pts"><li>s.335(2) - Central Government may arrange a survey</li><li>class, flag survey and port State control in practice</li><li>MSA 1958 was the law at this sitting</li><li>repealed by the 2025 Act from 15 March 2026</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> STATE (1-2) - POWER (3) - COMPARE (4) - DUTY (5) - POLICE (6). The section trio: 334 unseaworthy, 335 owner's duty, 336 unsafe and detention - consecutive, and in that order.</p>
     <div class="plan-cov">
@@ -1807,14 +1780,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>33</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 33 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What the Act means by an unseaworthy ship</b><ul><li>section 334 - no separate definitions entry</li><li>materials, construction, master's qualifications</li><li>number, description and qualifications of crew</li><li>weight, description and stowage of cargo and ballast</li><li>condition of hull, equipment, boilers and machinery</li><li>fit in every respect for the proposed voyage or service</li></ul></div>
-      <div class="pp-step"><b>2. The offence, and the defences the Act allows</b><ul><li>s.334(1) - sending or attempting to send to sea</li><li>s.334(2) - master who knowingly takes her to sea</li><li>life of any person likely to be endangered</li><li>defence - all reasonable means used</li><li>defence - reasonable and justifiable in the circumstances</li><li>s.334(4) - prosecution only by or with Central Government consent</li></ul></div>
-      <div class="pp-step"><b>3. What an unsafe ship is, and the power to detain her</b><ul><li>s.336 - defective hull, equipment or machinery</li><li>or overloading or improper loading</li><li>unfit to proceed without serious danger to human life</li><li>having regard to the nature of the intended service</li><li>provisional detention, then survey, then release or final detention</li><li>written grounds served forthwith on the master</li></ul></div>
-      <div class="pp-step"><b>4. The real difference between the two</b><ul><li>unseaworthy is a state; unsafe triggers a power</li><li>one punishes after the fact, the other intervenes before</li><li>unseaworthiness is wider - includes crew and stowage</li><li>unsafe is narrower and lists its causes</li><li>every unsafe ship is unseaworthy; not the converse</li></ul></div>
-      <div class="pp-step"><b>5. The owner's obligation to the crew</b><ul><li>s.335 - implied into every contract of service</li><li>and every contract of apprenticeship</li><li>notwithstanding any agreement to the contrary</li><li>owner, master and loading or despatching agent</li><li>all reasonable means at commencement of the voyage</li><li>and to keep her seaworthy during the voyage</li></ul></div>
-      <div class="pp-step"><b>6. How the obligation is policed, and what changed afterwards</b><ul><li>s.335(2) - Central Government may arrange a survey</li><li>class, flag survey and port State control in practice</li><li>MSA 1958 was the law at this sitting</li><li>repealed by the 2025 Act from 15 March 2026</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2075,17 +2040,18 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">a) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="1">a) What a general average act is</li>
-      <li value="2">The essential features, all of which must be present</li>
-      <li value="3">What is excluded, and who must prove it</li>
+      <li value="1"><span class="pl-t">a) What a general average act is</span><ul class="pl-pts"><li>York-Antwerp Rules, Rule A</li><li>contractual, incorporated by the carriage contract</li><li>loss shared by all who benefited</li><li>Indian statutory definition, Marine Insurance Act 1963 s.66</li></ul></li>
+      <li value="2"><span class="pl-t">The essential features, all of which must be present</span><ul class="pl-pts"><li>extraordinary - beyond the ordinary incidents of the voyage</li><li>intentional - a deliberate act, not an accident</li><li>reasonable - Rule Paramount reinforces it</li><li>for the common safety of the whole adventure</li><li>real peril, and more than one interest at risk</li><li>a useful result - property must be preserved</li></ul></li>
+      <li value="3"><span class="pl-t">What is excluded, and who must prove it</span><ul class="pl-pts"><li>Rule C - direct consequence only</li><li>no allowance for delay, demurrage or loss of market</li><li>no allowance for environmental damage or pollutant escape</li><li>Rule D - fault does not defeat the right to contribute</li><li>Rule E - onus on the party claiming</li></ul></li>
     </ol>
-    <div class="plan-limb">b)</div>
+    <div class="plan-limb">b) <span class="pl-mk">&middot; 8 marks</span></div>
     <ol class="plan-list">
-      <li value="4">b) Testing the casualty against the rules</li>
-      <li value="5">Rule VII, which decides the point</li>
-      <li value="6">Conclusion, and what must be done to sustain it</li>
+      <li value="4"><span class="pl-t">b) Testing the casualty against the rules</span><ul class="pl-pts"><li>the vessel was ashore, so a real common peril is arguable</li><li>working the engine to refloat is a deliberate act</li><li>the damage was the direct consequence of that act</li><li>burnt bearings are extraordinary, not wear and tear</li></ul></li>
+      <li value="5"><span class="pl-t">Rule VII, which decides the point</span><ul class="pl-pts"><li>damage to machinery and boilers of a ship ashore</li><li>and in a position of peril, endeavouring to refloat</li><li>allowed when shown to arise from an actual intention to float</li><li>for the common safety, at the risk of such damage</li><li>but never where the ship is afloat</li></ul></li>
+      <li value="6"><span class="pl-t">Conclusion, and what must be done to sustain it</span><ul class="pl-pts"><li>yes - allowable, subject to the conditions being proved</li><li>peril and intention are questions of evidence</li><li>log entries, engine records, master's decision recorded</li><li>declare GA, appoint adjuster, take bonds and guarantees</li><li>fault does not bar contribution, but may be answered separately</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> The features are a gate every claim must pass - extraordinary, intentional, reasonable, common, peril, result (step 2). Then in limb (b) one rule decides it: ashore, in peril, intending to float, accepting the risk (step 5) - and never if afloat.</p>
     <div class="plan-cov">
@@ -2093,14 +2059,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>29</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 29 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. a) What a general average act is</b><ul><li>York-Antwerp Rules, Rule A</li><li>contractual, incorporated by the carriage contract</li><li>loss shared by all who benefited</li><li>Indian statutory definition, Marine Insurance Act 1963 s.66</li></ul></div>
-      <div class="pp-step"><b>2. The essential features, all of which must be present</b><ul><li>extraordinary - beyond the ordinary incidents of the voyage</li><li>intentional - a deliberate act, not an accident</li><li>reasonable - Rule Paramount reinforces it</li><li>for the common safety of the whole adventure</li><li>real peril, and more than one interest at risk</li><li>a useful result - property must be preserved</li></ul></div>
-      <div class="pp-step"><b>3. What is excluded, and who must prove it</b><ul><li>Rule C - direct consequence only</li><li>no allowance for delay, demurrage or loss of market</li><li>no allowance for environmental damage or pollutant escape</li><li>Rule D - fault does not defeat the right to contribute</li><li>Rule E - onus on the party claiming</li></ul></div>
-      <div class="pp-step"><b>4. b) Testing the casualty against the rules</b><ul><li>the vessel was ashore, so a real common peril is arguable</li><li>working the engine to refloat is a deliberate act</li><li>the damage was the direct consequence of that act</li><li>burnt bearings are extraordinary, not wear and tear</li></ul></div>
-      <div class="pp-step"><b>5. Rule VII, which decides the point</b><ul><li>damage to machinery and boilers of a ship ashore</li><li>and in a position of peril, endeavouring to refloat</li><li>allowed when shown to arise from an actual intention to float</li><li>for the common safety, at the risk of such damage</li><li>but never where the ship is afloat</li></ul></div>
-      <div class="pp-step"><b>6. Conclusion, and what must be done to sustain it</b><ul><li>yes - allowable, subject to the conditions being proved</li><li>peril and intention are questions of evidence</li><li>log entries, engine records, master's decision recorded</li><li>declare GA, appoint adjuster, take bonds and guarantees</li><li>fault does not bar contribution, but may be answered separately</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2353,13 +2311,14 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">Adoption is not entry into force</li>
-      <li value="2">How a State expresses consent to be bound</li>
-      <li value="3">The two terms the question names</li>
-      <li value="4">The entry into force provision, and why it matters</li>
-      <li value="5">Conventions of an important technical nature</li>
-      <li value="6">Keeping the convention current once in force</li>
+      <li value="1"><span class="pl-t">Adoption is not entry into force</span><ul class="pl-pts"><li>adopted by an IMO organ or a diplomatic conference</li><li>adoption settles the text, nothing more</li><li>no State is bound by adoption alone</li><li>the text is opened for signature and deposited</li></ul></li>
+      <li value="2"><span class="pl-t">How a State expresses consent to be bound</span><ul class="pl-pts"><li>signature alone, where the treaty so provides</li><li>signature subject to ratification, acceptance or approval</li><li>accession, after the signature period closes</li><li>a formal instrument deposited with the Secretary-General</li><li>the depositary counts and notifies</li></ul></li>
+      <li value="3"><span class="pl-t">The two terms the question names</span><ul class="pl-pts"><li>(ii) signature subject to ratification - signature does not bind</li><li>time to legislate and satisfy constitutional requirements</li><li>acceptance and approval - same effect, less formal, VCLT Art 14(2)</li><li>(i) accession - one step, no prior signature, VCLT Art 15</li><li>identical legal effect once deposited</li></ul></li>
+      <li value="4"><span class="pl-t">The entry into force provision, and why it matters</span><ul class="pl-pts"><li>every convention carries its own final clause</li><li>a threshold of acceptances plus a waiting period</li><li>prevents an instrument binding a few States only</li><li>gives certainty of the date obligations begin</li><li>allows domestic law and survey regimes to be ready</li></ul></li>
+      <li value="5"><span class="pl-t">Conventions of an important technical nature</span><ul class="pl-pts"><li>a double condition - number of States and tonnage</li><li>SOLAS 1974 - 25 States and 50% of world gross tonnage</li><li>1978 MARPOL Protocol - 15 States and 50%</li><li>tonnage ensures the major fleets are inside</li><li>then a further period, commonly twelve months</li></ul></li>
+      <li value="6"><span class="pl-t">Keeping the convention current once in force</span><ul class="pl-pts"><li>explicit amendment proved unworkable - 1960 SOLAS</li><li>tacit acceptance - deemed accepted unless objected to</li><li>SOLAS - two years, one-third of Governments or 50% tonnage</li><li>amendments now in force in about 18 to 24 months</li><li>flag States must then give domestic effect</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Follow one instrument through its life: <b>ADOPT (1) - CONSENT (2) - the two TERMS (3) - THRESHOLD (4) - TONNAGE (5) - AMEND (6)</b>. Two number pairs only: SOLAS 25 and 50%, MARPOL 15 and 50%; then SOLAS amendments at two years, one-third or 50%.</p>
     <div class="plan-cov">
@@ -2367,14 +2326,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>29</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 29 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. Adoption is not entry into force</b><ul><li>adopted by an IMO organ or a diplomatic conference</li><li>adoption settles the text, nothing more</li><li>no State is bound by adoption alone</li><li>the text is opened for signature and deposited</li></ul></div>
-      <div class="pp-step"><b>2. How a State expresses consent to be bound</b><ul><li>signature alone, where the treaty so provides</li><li>signature subject to ratification, acceptance or approval</li><li>accession, after the signature period closes</li><li>a formal instrument deposited with the Secretary-General</li><li>the depositary counts and notifies</li></ul></div>
-      <div class="pp-step"><b>3. The two terms the question names</b><ul><li>(ii) signature subject to ratification - signature does not bind</li><li>time to legislate and satisfy constitutional requirements</li><li>acceptance and approval - same effect, less formal, VCLT Art 14(2)</li><li>(i) accession - one step, no prior signature, VCLT Art 15</li><li>identical legal effect once deposited</li></ul></div>
-      <div class="pp-step"><b>4. The entry into force provision, and why it matters</b><ul><li>every convention carries its own final clause</li><li>a threshold of acceptances plus a waiting period</li><li>prevents an instrument binding a few States only</li><li>gives certainty of the date obligations begin</li><li>allows domestic law and survey regimes to be ready</li></ul></div>
-      <div class="pp-step"><b>5. Conventions of an important technical nature</b><ul><li>a double condition - number of States and tonnage</li><li>SOLAS 1974 - 25 States and 50% of world gross tonnage</li><li>1978 MARPOL Protocol - 15 States and 50%</li><li>tonnage ensures the major fleets are inside</li><li>then a further period, commonly twelve months</li></ul></div>
-      <div class="pp-step"><b>6. Keeping the convention current once in force</b><ul><li>explicit amendment proved unworkable - 1960 SOLAS</li><li>tacit acceptance - deemed accepted unless objected to</li><li>SOLAS - two years, one-third of Governments or 50% tonnage</li><li>amendments now in force in about 18 to 24 months</li><li>flag States must then give domestic effect</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2622,13 +2573,14 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
     <ol class="plan-list">
-      <li value="1">What the revised strategy is, and what it is not</li>
-      <li value="2">The four levels of ambition</li>
-      <li value="3">The indicative checkpoints and the guiding principles</li>
-      <li value="4">The basket of measures - technical and economic</li>
-      <li value="5">The proposed new Chapter 5 - the Net-Zero Framework</li>
-      <li value="6">Where the amendments actually stood at this sitting</li>
+      <li value="1"><span class="pl-t">What the revised strategy is, and what it is not</span><ul class="pl-pts"><li>resolution MEPC.377(80), adopted 7 July 2023 at MEPC 80</li><li>replaced the Initial Strategy of 2018</li><li>a policy framework, not mandatory law</li><li>vision - phase out GHG as soon as possible, just and equitable transition</li></ul></li>
+      <li value="2"><span class="pl-t">The four levels of ambition</span><ul class="pl-pts"><li>strengthen energy efficiency design requirements for new ships</li><li>carbon intensity down at least 40% by 2030 against 2008</li><li>zero or near-zero fuels at least 5%, striving for 10%, by 2030</li><li>peak as soon as possible; net zero by or around 2050</li><li>measured well-to-wake under the LCA guidelines</li></ul></li>
+      <li value="3"><span class="pl-t">The indicative checkpoints and the guiding principles</span><ul class="pl-pts"><li>total annual GHG down at least 20%, striving for 30%, by 2030</li><li>at least 70%, striving for 80%, by 2040, against 2008</li><li>no more favourable treatment; all ships regardless of flag</li><li>common but differentiated responsibilities</li><li>impacts on States, especially LDCs and SIDS</li></ul></li>
+      <li value="4"><span class="pl-t">The basket of measures - technical and economic</span><ul class="pl-pts"><li>short-term measures already in force - EEXI, CII, SEEMP</li><li>mid-term basket has two elements</li><li>technical - a goal-based marine fuel standard</li><li>economic - a GHG emissions pricing mechanism</li><li>the two together became the Net-Zero Framework</li></ul></li>
+      <li value="5"><span class="pl-t">The proposed new Chapter 5 - the Net-Zero Framework</span><ul class="pl-pts"><li>approved at MEPC 83, April 2025, for ships over 5,000 GT</li><li>GHG Fuel Intensity in gCO2eq per MJ, well-to-wake</li><li>2008 reference 93.3; zero or near-zero at 19.0 or less</li><li>two tiers - Base Target and Direct Compliance Target</li><li>remedial units at USD 100 and USD 380 per tonne CO2eq</li><li>surplus units tradeable and bankable; IMO Net-Zero Fund</li></ul></li>
+      <li value="6"><span class="pl-t">Where the amendments actually stood at this sitting</span><ul class="pl-pts"><li>an extraordinary session met 14 to 17 October 2025 to adopt</li><li>consensus failed - acceptance procedure and regional overlap</li><li>the session was ADJOURNED for twelve months</li><li>so Chapter 5 was approved but NOT adopted and NOT in force</li><li>if adopted by tacit acceptance, in force 16 months later</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Strategy in three: <b>AMBITIONS (2) - CHECKPOINTS (3) - PRINCIPLES (3)</b>, with ambitions about intensity and fuel uptake and checkpoints about total emissions. Then <b>BASKET (4) - CHAPTER 5 (5) - STATUS (6)</b>. Numbers: 40 / 5 striving 10 / net zero 2050; 20 striving 30 by 2030, 70 striving 80 by 2040.</p>
     <div class="plan-cov">
@@ -2636,14 +2588,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>30</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 30 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. What the revised strategy is, and what it is not</b><ul><li>resolution MEPC.377(80), adopted 7 July 2023 at MEPC 80</li><li>replaced the Initial Strategy of 2018</li><li>a policy framework, not mandatory law</li><li>vision - phase out GHG as soon as possible, just and equitable transition</li></ul></div>
-      <div class="pp-step"><b>2. The four levels of ambition</b><ul><li>strengthen energy efficiency design requirements for new ships</li><li>carbon intensity down at least 40% by 2030 against 2008</li><li>zero or near-zero fuels at least 5%, striving for 10%, by 2030</li><li>peak as soon as possible; net zero by or around 2050</li><li>measured well-to-wake under the LCA guidelines</li></ul></div>
-      <div class="pp-step"><b>3. The indicative checkpoints and the guiding principles</b><ul><li>total annual GHG down at least 20%, striving for 30%, by 2030</li><li>at least 70%, striving for 80%, by 2040, against 2008</li><li>no more favourable treatment; all ships regardless of flag</li><li>common but differentiated responsibilities</li><li>impacts on States, especially LDCs and SIDS</li></ul></div>
-      <div class="pp-step"><b>4. The basket of measures - technical and economic</b><ul><li>short-term measures already in force - EEXI, CII, SEEMP</li><li>mid-term basket has two elements</li><li>technical - a goal-based marine fuel standard</li><li>economic - a GHG emissions pricing mechanism</li><li>the two together became the Net-Zero Framework</li></ul></div>
-      <div class="pp-step"><b>5. The proposed new Chapter 5 - the Net-Zero Framework</b><ul><li>approved at MEPC 83, April 2025, for ships over 5,000 GT</li><li>GHG Fuel Intensity in gCO2eq per MJ, well-to-wake</li><li>2008 reference 93.3; zero or near-zero at 19.0 or less</li><li>two tiers - Base Target and Direct Compliance Target</li><li>remedial units at USD 100 and USD 380 per tonne CO2eq</li><li>surplus units tradeable and bankable; IMO Net-Zero Fund</li></ul></div>
-      <div class="pp-step"><b>6. Where the amendments actually stood at this sitting</b><ul><li>an extraordinary session met 14 to 17 October 2025 to adopt</li><li>consensus failed - acceptance procedure and regional overlap</li><li>the session was ADJOURNED for twelve months</li><li>so Chapter 5 was approved but NOT adopted and NOT in force</li><li>if adopted by tacit acceptance, in force 16 months later</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
@@ -2908,17 +2852,18 @@
   <section class="layer plan" aria-label="Exam plan">
     <div class="layer-title">Start here <span class="plan-marks">16 marks</span></div>
     <p class="plan-lead">Write these headings first, then expand them in order. If time is short, get every heading down before you expand any of them.</p>
-    <div class="plan-limb">a)</div>
+    <div class="plan-cap">Bullet answer &mdash; points to write</div>
+    <div class="plan-limb">a) <span class="pl-mk">&middot; 10 marks</span></div>
     <ol class="plan-list">
-      <li value="1">a) The zones, and what the coastal State holds in each</li>
-      <li value="2">What the coastal State may actually do</li>
-      <li value="3">The flag State - nationality, freedoms and exclusive jurisdiction</li>
-      <li value="4">How the two are reconciled - due regard</li>
+      <li value="1"><span class="pl-t">a) The zones, and what the coastal State holds in each</span><ul class="pl-pts"><li>internal waters - full sovereignty</li><li>territorial sea up to 12 n.m. - sovereignty, subject to innocent passage</li><li>contiguous zone to 24 n.m. - control, not sovereignty</li><li>EEZ to 200 n.m. - sovereign rights over resources only</li><li>continental shelf - sovereign rights over seabed and subsoil</li><li>high seas - no State may claim sovereignty</li></ul></li>
+      <li value="2"><span class="pl-t">What the coastal State may actually do</span><ul class="pl-pts"><li>territorial sea - full prescriptive and enforcement jurisdiction</li><li>but must not hamper innocent passage</li><li>contiguous zone - customs, fiscal, immigration, sanitary</li><li>EEZ - exploring, exploiting, conserving, managing resources</li><li>plus artificial islands, marine scientific research, environment</li><li>Article 73 enforcement over fisheries</li></ul></li>
+      <li value="3"><span class="pl-t">The flag State - nationality, freedoms and exclusive jurisdiction</span><ul class="pl-pts"><li>Article 91 - grant of nationality, genuine link</li><li>Article 92 - exclusive jurisdiction on the high seas</li><li>Article 94 - duties on administrative, technical and social matters</li><li>Article 58 - freedom of navigation continues in the EEZ</li><li>Articles 88 to 115 apply in the EEZ so far as compatible</li></ul></li>
+      <li value="4"><span class="pl-t">How the two are reconciled - due regard</span><ul class="pl-pts"><li>coastal State exercises rights with due regard to others</li><li>other States act with due regard to coastal State rights</li><li>residual rights resolved on equity and all circumstances</li><li>Article 98 duty to render assistance binds every master</li></ul></li>
     </ol>
-    <div class="plan-limb">b)</div>
+    <div class="plan-limb">b) <span class="pl-mk">&middot; 6 marks</span></div>
     <ol class="plan-list">
-      <li value="5">b) The missing cadet - which law applies</li>
-      <li value="6">The actions to be taken</li>
+      <li value="5"><span class="pl-t">b) The missing cadet - which law applies</span><ul class="pl-pts"><li>the EEZ is not Indian territory</li><li>internal shipboard matters follow the FLAG State</li><li>Indian flag - MSA 1958 and Indian criminal law apply fully</li><li>foreign flag - flag State law governs; India assists</li><li>India retains SAR responsibility in its SRR</li><li>coastal State resource jurisdiction is not engaged</li></ul></li>
+      <li value="6"><span class="pl-t">The actions to be taken</span><ul class="pl-pts"><li>immediate - man overboard, muster, search, MAYDAY to MRCC</li><li>preserve the scene, secure records, CCTV and log entries</li><li>notify owner, DPA, flag State, P&amp;I and next of kin</li><li>report as a shipping casualty and as a very serious casualty</li><li>official log entry and inquiry into cause of death</li><li>MLC obligations - repatriation of remains, compensation</li></ul></li>
     </ol>
     <p class="plan-cue"><b>Memory cue.</b> Limb (a) sails outward: <b>INTERNAL - TERRITORIAL - CONTIGUOUS - EEZ - SHELF - HIGH SEAS</b> (1), with rights thinning as you go (2), then the flag State's constant authority (3) and due regard where they meet (4). Limb (b): <b>WHOSE FLAG</b> (5), then <b>SEARCH - SECURE - REPORT - INQUIRE</b> (6). Limits 12, 24, 200.</p>
     <div class="plan-cov">
@@ -2926,14 +2871,6 @@
       <div class="cov-row"><span class="cov-k">Cover</span><span class="cov-v"><b>33</b> core points beneath them</span></div>
     </div>
     <p class="plan-note">Memorise the <b>6 headings</b>. The core points are there to help you check whether an answer is too thin &mdash; they are not a mark scheme, and they are not 33 separate facts to learn individually.</p>
-    <details class="plan-points"><summary>Show the core points to cover</summary>
-      <div class="pp-step"><b>1. a) The zones, and what the coastal State holds in each</b><ul><li>internal waters - full sovereignty</li><li>territorial sea up to 12 n.m. - sovereignty, subject to innocent passage</li><li>contiguous zone to 24 n.m. - control, not sovereignty</li><li>EEZ to 200 n.m. - sovereign rights over resources only</li><li>continental shelf - sovereign rights over seabed and subsoil</li><li>high seas - no State may claim sovereignty</li></ul></div>
-      <div class="pp-step"><b>2. What the coastal State may actually do</b><ul><li>territorial sea - full prescriptive and enforcement jurisdiction</li><li>but must not hamper innocent passage</li><li>contiguous zone - customs, fiscal, immigration, sanitary</li><li>EEZ - exploring, exploiting, conserving, managing resources</li><li>plus artificial islands, marine scientific research, environment</li><li>Article 73 enforcement over fisheries</li></ul></div>
-      <div class="pp-step"><b>3. The flag State - nationality, freedoms and exclusive jurisdiction</b><ul><li>Article 91 - grant of nationality, genuine link</li><li>Article 92 - exclusive jurisdiction on the high seas</li><li>Article 94 - duties on administrative, technical and social matters</li><li>Article 58 - freedom of navigation continues in the EEZ</li><li>Articles 88 to 115 apply in the EEZ so far as compatible</li></ul></div>
-      <div class="pp-step"><b>4. How the two are reconciled - due regard</b><ul><li>coastal State exercises rights with due regard to others</li><li>other States act with due regard to coastal State rights</li><li>residual rights resolved on equity and all circumstances</li><li>Article 98 duty to render assistance binds every master</li></ul></div>
-      <div class="pp-step"><b>5. b) The missing cadet - which law applies</b><ul><li>the EEZ is not Indian territory</li><li>internal shipboard matters follow the FLAG State</li><li>Indian flag - MSA 1958 and Indian criminal law apply fully</li><li>foreign flag - flag State law governs; India assists</li><li>India retains SAR responsibility in its SRR</li><li>coastal State resource jurisdiction is not engaged</li></ul></div>
-      <div class="pp-step"><b>6. The actions to be taken</b><ul><li>immediate - man overboard, muster, search, MAYDAY to MRCC</li><li>preserve the scene, secure records, CCTV and log entries</li><li>notify owner, DPA, flag State, P&amp;I and next of kin</li><li>report as a shipping casualty and as a very serious casualty</li><li>official log entry and inquiry into cause of death</li><li>MLC obligations - repatriation of remains, compensation</li></ul></div>
-    </details>
   </section>
   </div>
   <div class="mode" data-mode="answer">
