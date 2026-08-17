@@ -29,6 +29,8 @@ snapshot of the official PDF taken 10 January 2026.
 | sha256 | `0E0D6BC7A7B738335687B57D6F33364D728D2DAD99BC22ED0E2A5D371438CB51` |
 | Preservation | `PRESERVED_RAW` in the raw intake directory |
 | Extraction | 185 of 185 items, verified by contiguous numbering 1–185 with no gaps |
+| Extraction repair | Item 182 was scrambled in Phase 2. Body lines were ordered by `(page, -y)` alone, so three fragments sharing baseline `y=145.5` on page 16 kept pdfminer's container order rather than reading left to right. `x0` is now part of the sort key; re-extraction changes item 182 and nothing else. |
+| Source defect preserved | Item 181 letters its limbs `a, b, d, c`. That is the Directorate's own mislettering, printed in that order, and is kept verbatim. |
 | Access | No paywall, no login, no restriction. A public archive of a public official document. |
 
 One retrieval detail matters for reproducibility: the plain Wayback URL returns the
@@ -60,7 +62,11 @@ fixed official wording. When a sitting paper reproduces it, that is recurrence, 
 the evidence is first-rate.
 
 **It proves no dates at all.** The bank is undated throughout. Exactly one item
-(`BANK-4`) carries an inline `(Oct-05)`. The DGS upload prefix dates *publication*
+(`BANK-3`, the dry-docking welding-fire question) carries an inline `(Oct-05)`,
+at the very end of its text. Phase 2's prose attached that annotation to
+`BANK-4`; the extractor had it right and only the write-up was wrong. Check
+`C29` now reads the annotation back out of the extracted bank, so the claim is
+derived rather than remembered. The DGS upload prefix dates *publication*
 to 12 February 2018, and item `BANK-144` cites the Manila amendments of 25 June
 2010 — so the **document** sits between 2010 and February 2018. That bounds the
 document. It dates **no sitting**.
