@@ -1,0 +1,120 @@
+{
+  "schema": "miw.pastpapers.qi_v2.temporal_delta.v2",
+  "status": "RESEARCH_ONLY",
+  "current_as_of": "2026-08-17",
+  "exam_target": "AUGUST 2026 SITTING",
+  "retrieval_window": "2026-08-17 into 2026-08-18 local time. The exam target is unchanged.",
+
+  "governing_principle": "A repeated question is not necessarily a repeated answer. This layer never stores a historical ANSWER. MIW keeps ONE canonical current answer per question; the temporal layer stores only what a candidate must stop writing, start writing, and may keep writing.",
+
+  "hard_rules": [
+    "No answer_2010 / answer_2012 / answer_2026 forks. There is one canonical current answer.",
+    "Every delta entry carries a source. An uncited regulation number, limit or date is a defect, not a delta.",
+    "Where the current position could not be established from a held or primary source, the entry is UNCERTAIN_NEEDS_PRIMARY and says so plainly rather than guessing.",
+    "A third-party model answer is NEVER authority for the current position.",
+    "Historical discussion never enters Exam Plan.",
+    "Bullets are never generated from an old answer.",
+    "UNCHANGED_CORE with ANSWER IMPACT NONE is a respectable outcome, not a failure of the engine."
+  ],
+
+  "the_two_questions_kept_apart": {
+    "has_it_been_asked_before": "answered by QUESTION_FAMILIES.json and QUESTION_OCCURRENCES.jsonl",
+    "what_must_be_written_differently_now": "answered by this schema"
+  },
+
+  "product_placement": {
+    "EXAM_PLAN": "current points to write, and nothing else",
+    "STUDY_GUIDE": "recurrence history plus what changed for today",
+    "hard_rule": "A temporal delta MODIFIES or QUALIFIES the current answer state. It does not supply a parallel one."
+  },
+
+  "delta_categories": [
+    "UNCHANGED_CORE",
+    "UPDATED_REGULATION",
+    "UPDATED_STATUTE",
+    "UPDATED_NUMERIC_REQUIREMENT",
+    "UPDATED_TERMINOLOGY",
+    "UPDATED_REGULATORY_STATUS",
+    "UPDATED_TECHNOLOGY",
+    "UPDATED_OPERATIONAL_PRACTICE",
+    "REMOVED_OBSOLETE_POINT",
+    "NEW_REQUIRED_POINT",
+    "UNCERTAIN_NEEDS_PRIMARY"
+  ],
+  "delta_category_rule": "A family may carry several categories. Nothing is labelled changed merely because it is old.",
+
+  "answer_impact": {
+    "NONE": "the old answer remains valid in substance",
+    "MINOR": "reference, date or terminology refresh only",
+    "MODERATE": "important compliance or scoring additions, or changed operational treatment, but the same broad answer architecture",
+    "MAJOR": "using the historical answer today risks a materially wrong answer"
+  },
+  "answer_impact_rule": "Impact means EXAM CONSEQUENCE, not legal significance. A change in the law that the stem does not reach is not MAJOR. It may be NONE.",
+
+  "exam_relevance": {
+    "ESSENTIAL_CURRENT_POINT": "the candidate loses marks without it",
+    "USEFUL_CURRENT_ENRICHMENT": "strengthens the answer; not required to score",
+    "OPTIONAL_CURRENT_DETAIL": "adds colour; safe to omit",
+    "NOT_REQUIRED_BY_STEM": "true, current, and outside what this question asks"
+  },
+  "exam_relevance_rule": "This field exists to stop the engine bloating answers. The Laptop adjudicated the AFS/cybutryne development as USEFUL_ENRICHMENT on QP2608-Q2 and OPTIONAL_DETAIL on QP2608-Q1, NOT as corrections. 'CURRENT LAW CHANGED' and 'THIS CHANGE IS REQUIRED TO SCORE THIS QUESTION' are different findings and must never be merged. Route points already run to a median of 41 and a p90 of 61 across the corpus; Temporal Intelligence must not add to them.",
+
+  "do_not_write_today_rule": "Populate ONLY where an actually obsolete or superseded claim can be demonstrated and NAMED - a repealed statute, a superseded numerical requirement, a withdrawn term, a stale regulatory status. Vague warnings such as 'check the latest amendments' are forbidden: they tell the candidate nothing and cost nothing to ignore. If nothing is demonstrably unsafe, the field is EMPTY.",
+
+  "current_source_hierarchy": [
+    "MIW True Source / verified corpus",
+    "IMO primary instruments",
+    "Government of India / Gazette / DG Shipping",
+    "IACS / Class primary material",
+    "other primary authority",
+    "authoritative secondary source where unavoidable"
+  ],
+  "source_asymmetry": "A historical paper proves what was ASKED. It never proves what the answer is TODAY. Current-state claims cite the hierarchy above and nothing else.",
+
+  "record": {
+    "delta_id": "string",
+    "family_id": "string - resolves to QUESTION_FAMILIES.json",
+    "historical_occurrence_ids": ["string - resolve to QUESTION_OCCURRENCES.jsonl"],
+    "official_bank_ancestor": "string or null - resolves to OFFICIAL_BANK_ITEMS.json",
+    "current_question_id": "string or null",
+    "current_as_of": "date",
+    "asked_before": "human-readable, STRICTLY bounded by date_confidence. Where the date is not verified this states what is known and no more, and never names a year.",
+    "what_still_stands": ["string"],
+    "what_changed": [
+      {
+        "claim": "string",
+        "delta_category": "one of delta_categories",
+        "authority": "string - from the current hierarchy",
+        "exam_relevance": "one of exam_relevance",
+        "verified_against": "string"
+      }
+    ],
+    "do_not_write_today": [
+      {
+        "obsolete_claim": "string - the specific thing that is now wrong",
+        "why": "string",
+        "superseded_by": "string",
+        "authority": "string"
+      }
+    ],
+    "state_today": ["string"],
+    "answer_impact": "one of answer_impact",
+    "answer_impact_reasoning": "string - why this impact and not the next one up or down",
+    "text_similarity_confidence": "HIGH|MEDIUM|LOW|NONE",
+    "date_confidence": "HIGH|MEDIUM|LOW|NONE",
+    "source_confidence": "HIGH|MEDIUM|LOW|NONE",
+    "publication_status": "see PUBLICATION_STATUS_MODEL.md",
+    "current_answer_correction_candidate": "boolean - true ONLY where the CURRENT MIW answer is itself wrong or missing an essential current point"
+  },
+
+  "required_human_readable_output": [
+    "ASKED BEFORE",
+    "WHAT STILL STANDS",
+    "WHAT CHANGED",
+    "DO NOT WRITE TODAY",
+    "STATE TODAY",
+    "ANSWER IMPACT"
+  ],
+
+  "schema_change_from_v1": "v2 adds official_bank_ancestor, exam_relevance on every changed claim, answer_impact_reasoning, the three separated confidences, publication_status and current_answer_correction_candidate. It also tightens do_not_write_today from free text to a structured record that must NAME the superseded claim and its replacement."
+}
