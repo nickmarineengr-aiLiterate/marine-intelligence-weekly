@@ -385,9 +385,8 @@ answering the wrong scenario, and refusing to answer at all, are both failures.
 
 ### 11.2 Lineage classification — use the existing vocabulary
 
-Adjudicate lineage by **reading historical stems**, never by score alone, into the five classes
-the repository already uses (`LAPTOP_REVIEW_AND_INTEGRATION_PROTOCOL.md` §3.F; `recurrence_model.py`
-carries the machine-side `repeat_exact` / `repeat_near`):
+Adjudicate lineage by **reading historical stems**, never by score alone, into the five
+**production** classes (`LAPTOP_REVIEW_AND_INTEGRATION_PROTOCOL.md` §3.F):
 
 | Class | Means |
 |---|---|
@@ -397,8 +396,31 @@ carries the machine-side `repeat_exact` / `repeat_near`):
 | `RELATED` | same topic only |
 | `UNIQUE` | no meaningful match |
 
-**Do not introduce a parallel set of names for these.** Same topic is **not** automatically
-recurrence.
+This is the vocabulary a **human adjudicates in and a paper records**. Same topic is **not**
+automatically recurrence.
+
+#### Three layers, three vocabularies — do not "harmonise" them
+
+Two sibling vocabularies exist by design. They are **not** competing names for the production
+classes, and neither is a defect to be cleaned up:
+
+| Layer | Vocabulary | Who assigns it |
+|---|---|---|
+| **Production adjudication** (this section) | `EXACT` `NEAR` `FAMILY` `RELATED` `UNIQUE` | a human, by reading stems |
+| Six-year intelligence classifier (`build_sixyear_intelligence.py`) | `EXACT_REPEAT` `NEAR_REPEAT` `UNIQUE` | computed over historical stems |
+| Recurrence display status (`recurrence_model.py`) | `repeat_exact` `repeat_near` | derived, for rendering |
+
+The machine classes are **coarser on purpose** — a classifier cannot separate `FAMILY` from
+`RELATED` without reading for intent, which is the adjudicator's job. So a computed
+`EXACT_REPEAT` is **evidence for**, not a substitute for, an adjudicated `EXACT`; QP2306-Q1 is
+the worked precedent, where the classifier's `EXACT_REPEAT` established wording ancestry to an
+unsolved October 2022 root while `reused_from` correctly stayed null.
+
+**Do not add a fourth vocabulary, and do not rename an existing one.** Question Intelligence v2
+may use richer research terminology internally, but any future integration must **explicitly map
+its research classes onto the five production classes above** rather than silently creating
+competing meanings. Renaming or collapsing any of these three is a Founder decision, not
+tidying.
 
 **Recurrence can occur at limb level.** Never write *"this entire question repeated"* when only
 one 4- or 6-mark limb repeated. Never invent a historic sitting date from group feedback or
