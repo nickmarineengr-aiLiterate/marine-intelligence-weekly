@@ -127,7 +127,7 @@ was established in Phase 2, and no number has been supplied for either.
 | ID | Item | Why |
 |---|---|---|
 | **P3-001** | **Serialise `FAMILY-EM-0008`** — unseaworthy vessels / MS Act | Five verified sittings, an official ancestor, and the only demonstrable `DO NOT WRITE TODAY` found. Documented in `QP2608_TEMPORAL_DELTAS.md` but deliberately not serialised — building five occurrence records at speed is how the Phase-1 defect happened. **Highest value item on this register.** |
-| **P3-002** | **Work the 830 archived MEO URLs** | Phase 2 enumerated them and sampled a handful. Each recovered dated official paper directly attacks the date problem that blocks H1–H5. |
+| **P3-002** | **Work the 832 archived MEO URLs** | ~~Each recovered dated official paper directly attacks the date problem that blocks H1–H5.~~ **Corrected in Phase 3A — see the reframe below. It does not attack H1–H5.** The set is still high value, for a different reason: it can build verified dated history from 2013 forward. |
 | **P3-003** | Build families for the other **62 strong bank matches** | 21 papers have a bank ancestor. Only QP2608's were modelled. |
 | **P3-004** | Decide canonical storage for the bank PDF | Official, public, load-bearing — and currently in one place on one machine, outside version control. |
 | **P3-005** | Re-run the leak sweep at **step** level | The point-level probe produces two standing false positives. Method note in `CURRENT_ANSWER_CORRECTION_CANDIDATES.md`. |
@@ -145,3 +145,58 @@ was established in Phase 2, and no number has been supplied for either.
   H4 was `SOURCE NOT FOUND` in Phase 1 and its full ancestor was found in Phase 2.
   Phase 1 was right to phrase it as a limit on the search; had it been written as
   “this question is new”, Phase 2 would have had to retract a published claim.
+
+---
+
+## Phase 3A corrections
+
+### The 2010–2012 route is closed
+
+Laptop enumerated the DGS Wayback holdings independently: **11,917 archived DGS
+URLs, 832 mentioning MEO, but only 12 MEO Class I files, all falling roughly
+October 2013 – September 2015. Zero from 2010–2012.**
+
+The archive lead was recorded as attacking the alleged 2010–2012 dates behind
+H1–H5. **It does not, and Phase 3A stops claiming it does.** There is nothing in
+that archive from those years to find.
+
+**H1–H5 dates remain unsupported**, exactly as Phase 2 left them. Nothing in
+Phase 3A strengthened or weakened them; the route that was supposed to settle
+them turned out not to lead there. Chasing 2010–2012 through this archive is
+not a plan, and no further Phase-3A time was spent on it.
+
+### The archive is still high value — for a different job
+
+Its role is now **build verified dated history from 2013 forward**, not *prove
+the old 2010–2012 rumours*. Twelve official dated MEO Class I files is twelve
+more dated sittings than the layer has outside MIW's own holdings, and each one
+can carry a Type A block. That is Phase 3B (`P3-002`), and it is not started.
+
+### NTA — closed
+
+Recommendation: **`CLOSED_NO_EVIDENCE`**. Extensive official and archive
+searching across Phases 2 and 3A found the DGS question bank, the DGS archived
+MEO materials, and a dated 2005 official paper — and **no NTA reference of any
+kind**. Reopen only on a primary signal. No candidate publication either way.
+
+### DieselShip — unchanged
+
+**DO NOT PURCHASE. Do not log in.** The official DGS evidence has further reduced
+its marginal value: the bank supersedes it for wording at a strictly higher
+provenance tier. Revisit only if future evidence shows uniquely useful *dated*
+material available nowhere else. The 37 `SRC-DS-*` manifest entries stay as
+provenance records, and remain untyped precisely because they assert sittings
+whose text was never seen.
+
+### The 2005 dated paper
+
+Retained as a provenance and acquisition-method control only. Checked in Phase 3A:
+**no date claim from it has leaked into any unrelated recurrence family.** It is
+cited by `SRC-DGS-2005-MGMT` alone and keys no occurrence record.
+
+### Standing caution added in Phase 3A
+
+- **A classifier that cannot tell `describe` from `criticise` must not be pointed
+  at history.** It could not, until Phase 3A. If a future change makes the
+  adversarial suite pass with a guard switched off, that guard has stopped
+  working — run `adversarial_controls.py --mutate`, not just the controls.
