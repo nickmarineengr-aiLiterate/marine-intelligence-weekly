@@ -949,6 +949,61 @@ const FIXTURES = {
     recurrence: ['2023/apr/q3', 'QP2607-Q5'],
     narrow: ['ammonia fuel cell', 'QP2607-Q6'],
   },
+  QP2608: {
+    // Every probe below was proved UNIQUE against the nine real data-search
+    // payloads under the search's own token-AND semantics before being written
+    // down -- not read off the visible text. Two candidates were rejected by
+    // that proof and are recorded here so they are not tried again:
+    // 'corrective action plan' reaches Q8 as well as Q9 (Q8 is the PSC
+    // non-conformity question, which uses the same phrase for a different
+    // instrument), and 'd rating' reaches Q6, whose economics limb discusses
+    // ratings too. A probe matching two cards still passes its own assertion,
+    // which is why uniqueness is proved rather than assumed.
+    probes: [
+      ['reactivation', 'QP2608-Q1'],
+      ['undocking', 'QP2608-Q2'],
+      ['hague-visby', 'QP2608-Q3'],
+      ['war risk', 'QP2608-Q4'],
+      ['not under command', 'QP2608-Q5'],
+      ['scrubber', 'QP2608-Q6'],
+      ['switchboard', 'QP2608-Q7'],
+      ['multinational', 'QP2608-Q8'],
+      ['carbon intensity', 'QP2608-Q9'],
+    ],
+    aliases: [
+      // Search-only: each was checked against the visible text with tag
+      // boundaries treated as HARD BREAKS, because collapsing whitespace joins
+      // adjacent elements and manufactures a false match. 'read back' was
+      // rejected as an alias -- it is search-only, but it reaches Q6 too.
+      ['recommissioning', 'QP2608-Q1',
+       'Q1 (what the trade calls bringing a laid-up ship back, a word the answer never prints)'],
+      ['jumping bar', 'QP2608-Q2',
+       'Q2 (the docking fitting the block-layout limb describes without naming)'],
+      ['uncollected cargo', 'QP2608-Q3',
+       'Q3 (how a liner operator says "abandoned" before anyone calls it that)'],
+      ['promissory warranty', 'QP2608-Q4',
+       'Q4 (the doctrinal name for the exact-compliance warranty the Act creates)'],
+      ['seca', 'QP2608-Q6',
+       'Q6 (the older name for the ECA, never rendered on the card)'],
+      ['megger', 'QP2608-Q7',
+       'Q7 (what an engineer calls the insulation-resistance test by instrument)'],
+      ['bullying and harassment', 'QP2608-Q8',
+       'Q8 (the MLC head behind the motivation and attitude limb)'],
+      ['just in time arrival', 'QP2608-Q9',
+       'Q9 (the operational measure the plan describes as cutting waiting time)'],
+    ],
+    // MEPC.385(81) is new to the corpus on this paper, so its searchability is
+    // worth asserting rather than assuming.
+    regulation: ['mepc.385(81)', 'QP2608-Q9'],
+    // Leak probe. This copy carried NO host annotation at all, so nothing should
+    // be searchable by a host sitting code. The code below points at QP2504-Q6,
+    // the genuine Q9 answer donor -- exactly the pointer that must stay out of
+    // the shipped payload.
+    recurrence: ['2025/apr/q6'],
+    // 'survey' alone reaches Q1 and Q2 on this paper; the reactivation scope is
+    // what separates them.
+    narrow: ['reactivation survey', 'QP2608-Q1'],
+  },
   QP2601: {
     probes: [
       ['cold corrosion', 'QP2601-Q1'],
@@ -1901,7 +1956,11 @@ ok('every question has a knowledge map',
 ok('every question has a blank-skeleton recall test',
    (html.match(/class="layer recall"/g) || []).length === cards.length);
 ok('every question has an exam plan',
-   (html.match(/class="layer plan"/g) || []).length === cards.length);
+   // Matches a modifier class too (`layer plan plan-b`, the bullet-plan pilot).
+   // The claim is that every card HAS an exam plan, not that the section carries
+   // one exact class string: an exact-string guard fails on a presentation
+   // change that did not remove a single plan.
+   (html.match(/class="layer plan[ "]/g) || []).length === cards.length);
 
 // Flashcards: keyboard-operable buttons carrying ARIA, answers hidden until asked.
 const nCardQ = (html.match(/class="card-q"/g) || []).length;
