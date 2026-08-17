@@ -1,11 +1,19 @@
 # CURRENT STATUS — MEO Class I Written Questions
 
 **Canonical restart document for the Past Written Papers product. State only.**
-Last updated: 2026-08-16, after the **Disney candidate-notes correction and enrichment cycle was
+Last updated: 2026-08-17, after **QP2608 (August 2026) was laptop-reviewed and published**
+(`history/SESSION_HISTORY.md` §37). The desktop branch `pastpapers/qp2608-founder-review` was
+path-extracted onto current `main`; **all nine questions passed independent adjudication with no
+correction to substance**, which is a first for this corpus. The product stands at
+**40 papers / 360 questions**, and **2026 moves to 7 of 11**.
+This paper also carries the **Bullet Exam Plan pilot** — the Exam Plan's existing core points
+promoted from a collapsed control to the default view, opted into by `plan_bullets` in the spec and
+live on QP2608 ONLY, pending Founder review before any propagation.
+Previously: 2026-08-16, after the **Disney candidate-notes correction and enrichment cycle was
 closed** (`history/SESSION_HISTORY.md` §36) — the reusable decision workflow captured as
 `tools/pastpapers/SKILL.md`, remaining holdings items registered at §7t, and the true-source items
 at `docs/TRUE_SOURCE_PRIORITY_BACKLOG.md` §8. **No canonical answer changed in that closure step;
-the product stands unmoved at 39 papers / 351 questions.**
+the product stood unmoved at 39 papers / 351 questions at that point.**
 Previously: 2026-08-15, after the **22 holdings-denial flags were adjudicated and closed** (§1c) —
 on top of the **pre-launch consolidation** — deploy-surface minimisation, H1 and P1 hygiene
 integrated, full access-matrix regression (see §1b and `history/SESSION_HISTORY.md` §35) — itself on
@@ -40,7 +48,7 @@ See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for
 > **November** and December — **99 questions**. May is `NO SITTING` on serial-gap evidence
 > (printed serials run `2304 EM` → `2306 EM`, nothing at `2305`); no May sitting was invented to
 > round the calendar. **2023, 2024 and 2025 are now all complete years at 11 of 11. 2026 stands at
-> 6 of 11.** There is no paper left in the 2023 queue.
+> 7 of 11** (August added 2026-08-17, §37). There is no paper left in the 2023 queue.
 >
 > **THE PAPER HAD NO LIVE ANSWER DONOR — 0 of 9 — AND ITS LAW AND ENGINEERING STILL HELD.** Five
 > questions passed and four were corrected, and **not one correction was to the substance of an

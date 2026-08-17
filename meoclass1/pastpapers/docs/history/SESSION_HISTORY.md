@@ -34,6 +34,79 @@ they stand as written.
 ## Key findings
 ## Corpus delta
 ## QA
+---
+
+## §37 — QP2608 (August 2026) reviewed and published, and the Bullet Exam Plan pilot
+
+**2026-08-17, laptop.** Reviewed desktop branch `pastpapers/qp2608-founder-review` (`d3ce3e3`) and
+published August 2026. **40 papers / 360 questions; 2026 at 7 of 11.**
+
+**Q1-Q9 all PASS, no correction to substance.** The first paper in this corpus to survive
+independent adjudication unchanged. Desktop's two load-bearing findings were re-verified rather
+than accepted: the **regulation 28.7 trigger** (D for THREE consecutive years, or E in one) was
+confirmed against five independently-built corpus records, and the **QP2512-Q4 donor** was
+confirmed verbatim at limb (b) with the Maslow limb correctly absent.
+
+**A correction to the session brief, not to the paper.** The brief stated that the printed Q9 cites
+`Reg. 28.7`. It does not — the paper prints **`Reg. 28.8`**, and 28.8 is an *apt* citation, because
+it is the paragraph that folds the plan into the SEEMP and fixes the one-month submission timeline
+the examiner asks for. The **only** defect in the printed premise is "two consecutive years".
+Desktop had already handled this correctly; the brief was the imprecise document.
+
+**Three defects this session found and fixed, all invisible to the desktop:**
+
+1. **No UI fixture for QP2608.** Node is absent on the desktop, so `ui_behaviour_test.cjs` had never
+   run against this paper. It correctly refused to pass a page with no fixture. A fixture was
+   authored with **every probe proved unique against the real `data-search` payloads** under the
+   search's own token-AND semantics before being written down. **Three candidates were rejected by
+   that proof** — `corrective action plan` reaches Q8 as well as Q9, `d rating` reaches Q6, and
+   `read back` reaches Q6 as well as Q8. Each would have passed its own assertion while testing
+   nothing.
+2. **The storefront month-list guard fired for the fifth time**, on `SQ/index.html`. The page was
+   updated, never the checker: 39/351 -> 40/360, newest sitting to August 2026, and **`Aug` added to
+   the 2026 coverage line**. Price held at Rs 1,500; the ladder is at 7 of 11, no step due.
+3. **An exact-string guard failed on a presentation change.** `every question has an exam plan`
+   matched `class="layer plan"` literally, so the pilot's modifier class broke it. The guard was
+   relaxed to `class="layer plan[ "]` — it states the truth (every card HAS a plan) rather than one
+   class string — and **mutation-tested**: a page with one plan section removed still fails it.
+
+**The Bullet Exam Plan pilot.** The candidate request for "a bullet version of the answers" was a
+**discoverability** problem, not a missing-content one: `answer_route.steps[].points` already holds
+32-59 authored, sequenced, regulation-aware bullets per question. The legacy `plan_view` printed
+every route heading **twice** — once as the plan list, once inside the collapsed
+`<details>Show the core points to cover` — and that duplication is *why* the points had to be
+hidden. The pilot **merges the two lists into one**: each heading now carries its own points nested
+beneath it, always visible, captioned **"Bullet answer — points to write"**. No new mode, no new
+schema field, no second corpus — both views render the same data, so they cannot drift.
+
+**Why a spec flag rather than a straight edit.** `plan_view` is shared by all 40 papers and the CSS
+is **inlined into every page**, so an unconditional change would have moved the bytes of the whole
+estate on the next build. Building QP2608 with a modified builder and then reverting the builder was
+rejected outright: it would break `audit_paper` check 11 byte-reproducibility, because the committed
+HTML would no longer regenerate from the committed builder. A per-paper opt-in (`plan_bullets`) is
+the only method compatible with the determinism invariant. **Proof it is inert:** QP2607 and QP2301
+rebuild **byte-identical to their committed versions** through the modified builder.
+
+**Build-mode safety.** `main` commits the `--publish` build — established against repo truth by
+rebuilding two untouched papers and comparing bytes, **not** by trusting a mode-symmetric checker's
+exit code. No review-mode rebuild was committed.
+
+**Five other papers changed, all legitimate family recomputation:** QP2302/QP2401/QP2410/QP2504 gain
+QP2608-Q9 in the CII family ("4 sittings" -> "5"), and QP2512 gains QP2608-Q8 ("Once in this set" ->
+"First in set"). The three sample/promo surfaces moved to 40/360 and newest August 2026.
+
+**Gates.** All toolchain stages PASS at `--publish`, exit 0. `ui_behaviour_test.cjs` **65 passed /
+0 failed** on QP2608 (QP2607 unchanged at 60/0). Determinism proved over **144 artefacts,
+byte-identical across two consecutive full builds**. Mobile 375px: zero horizontal overflow, all 55
+Q9 bullets visible, console clean.
+
+**Deliberately not done.** No propagation of the pilot to the other 39 papers. No Question
+Intelligence v2 work. The 2010-2012 recurrence hypothesis was **not** applied — MIW holds no paper
+before 2021, so it cannot be tested now, let alone asserted to a candidate. No magazine file touched.
+
+**Next action.** Founder reviews the live Bullet Exam Plan on QP2608 before any propagation.
+
+
 ## Next action
 ```
 

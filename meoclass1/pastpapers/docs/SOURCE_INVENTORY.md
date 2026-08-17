@@ -9,7 +9,7 @@
 | 2023 | 11 | May |
 | 2024 | 11 | May |
 | 2025 | 11 | May |
-| 2026 | 6 | May, August, September, October, November, December |
+| 2026 | 7 | May, September, October, November, December |
 
 **May is absent in all three years.** The printed serials support that as a fact about the source set rather than merely about MIW's backlog: the 2024 serials run &hellip;2404, 2406&hellip; and the 2025 serials run &hellip;2504, 2506&hellip;, with nothing at 2405 or 2505. It is still recorded as source metadata, not as a finding about the examination calendar: MIW holds no official confirmation that no May sitting took place.
 
@@ -54,6 +54,7 @@
 | QP2604 | April 2026 | `04 - APRIL - 2026.pdf` | &mdash; | 3 | 9 | ? of 3 |
 | QP2606 | June 2026 | `06- JUNE - 2026.pdf` | &mdash; | 2 | 9 | ? of 2 |
 | QP2607 | July 2026 | `07 - JULY - 2026.pdf` | &mdash; | 2 | 9 | ? of 2 |
+| QP2608 | August 2026 | `August 2026.pdf` | &mdash; | 2 | 9 | ? of 2 |
 
 Source copies are **third-party, unverified**. No independently authoritative DG Shipping or MMD copy has been located or compared, so no paper may be described as an officially verified source. Host identity is recorded locally only, outside this public repository. The PDFs themselves are git-ignored by `.gitignore:42` and must be neither committed nor deleted.
 
@@ -67,7 +68,7 @@ Every question is recorded at 16 marks under printed instruction 2 ("All questio
 
 ### Questions printing NO mark allocation
 
-**53 of 351**, across 12 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
+**53 of 360**, across 12 papers. Each is recorded at 16 with `printed_marks_absent` set. The omission is the printed copy's, not a transcription loss, and the corpus proves it twice over: `QP2506-Q9` prints no marks where the identical question printed (16) in August, and `QP2511-Q4` prints none where the identical question printed (16) in December.
 
 | Question | Sitting | Title |
 |---|---|---|
