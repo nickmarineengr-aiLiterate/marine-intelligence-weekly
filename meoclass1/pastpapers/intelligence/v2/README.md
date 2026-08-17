@@ -1,102 +1,125 @@
-# Question Intelligence v2 — Phase 1 (RESEARCH ONLY)
+# Question Intelligence v2 — research layer
 
-**Status:** RESEARCH — NOT CANDIDATE-FACING. Nothing in this directory renders,
-gates, prices, or reaches a candidate. Laptop reviews before any integration.
+**RESEARCH ONLY. NOTHING HERE IS CANDIDATE-FACING.**
+`current_as_of: 2026-08-17` · exam target **AUGUST 2026 SITTING**
+Phase 2 (Desktop) · retrieval window 2026-08-17 into 2026-08-18
 
-**Built:** 2026-08-17 (Desktop)
-**Base:** `origin/main` @ `3451558`
-**Branch:** `research/question-intelligence-v2-phase1`
-**Comparison target date (`current_as_of`):** 2026-08-17
-
----
-
-## Why this exists
-
-Candidate/group feedback claimed several August 2026 Engineering Management
-questions revive 2010–2012 questions. Phase 1 tests those claims and, separately,
-builds the engine that answers the harder question behind them:
-
-> A repeated question is not necessarily a repeated answer.
-> If this old question is asked today, what must be written differently?
-
-Two linked layers:
-
-1. **Recurrence intelligence** — has this been asked before, and how similar?
-2. **Temporal answer intelligence** — what in the answer has changed since?
+Nothing in this directory renders on a candidate page, gates, prices, feeds an Exam
+Plan bullet, appears in a Study Guide, or counts toward solved inventory. The Bullet
+Exam Plan architecture is final and was not touched. The Laptop reviews before any
+integration.
 
 ---
 
-## Relationship to the intelligence that already exists
+## What this layer answers
 
-This directory is **additive**. It does not replace and must not contradict:
+Two questions, deliberately kept apart:
 
-| Existing artefact | What it owns | Untouched by v2 |
-|---|---|---|
-| `intelligence/historical_qp_intelligence.json` | Question-only records, 2021–2023 sittings, schema `...historical_qp_intelligence.v2` | yes |
-| `tools/pastpapers/recurrence_model.py` | Canonical recurrence computed chronologically over MIW's **own** corpus | yes |
-| `tools/pastpapers/recurrence_check.py` | What may and may not be published about recurrence | yes |
-| `specs/*.json` → `recurrence_adjudication` | Per-question human adjudication written at authoring time | yes |
+1. **Has this question or limb been asked before?**
+   → `QUESTION_FAMILIES.json`, `QUESTION_OCCURRENCES.jsonl`, `OFFICIAL_BANK_ITEMS.json`
+2. **If it is asked now, what must the candidate write differently?**
+   → `TEMPORAL_DELTA_SCHEMA.json`, `QP2608_TEMPORAL_DELTAS.md`
 
-Two conventions inherited from that layer and honoured here:
-
-- `host_recurrence_hint` is **third-party assertion and is never published.**
-  v2 keeps that rule and adds an explicit provenance tier so the distinction is
-  testable rather than remembered.
-- Canonical recurrence is computed from the calendar over MIW's own holdings.
-  v2 does **not** write into that model; it records external occurrences
-  separately so canonical recurrence stays derivable from MIW-held sources only.
+A repeated question is not necessarily a repeated answer. Product placement follows:
+**Exam Plan** carries what to write now; **Study Guide** carries what was asked
+before and what changed for today.
 
 ---
 
-## The evidence floor (the single most important fact in Phase 1)
+## Phase 2 headline
 
-**MIW holds no source copy of any sitting earlier than January 2021.**
+**The Directorate General of Shipping publishes its own question bank**, and it is
+the source a large part of this corpus is drawn from.
 
-- Solved specs: QP2301 → QP2608
-- Intelligence-only: QP2101 → QP2311
+`Question Bank MEO CL-I` — 185 items — was recovered from the Internet Archive after
+the DGS domain refused connections for a second phase running. **63 questions across
+the 40-paper solved corpus match a bank item strongly**, spread over 21 papers.
 
-There is therefore **no MIW-internal route** to text-verify any 2010–2012 claim.
-Every such claim depends on external acquisition, and external acquisition in
-this session was almost entirely blocked (see `SOURCE_MANIFEST.json`).
+It overturned two Phase-1 findings and roughly doubled QP2608's verified recurrence,
+from ~25/144 marks estimated to **48/144 verified**. It dates nothing at all — the
+bank is undated — which is why every date claim in H1–H5 still fails.
 
-## The second most important fact
-
-**The August 2026 source copy carries no recurrence annotation at all.**
-Every QP2608 question has an empty `host_recurrence_hint`. The Founder's
-2010–2012 dates did not come from the paper, and could not have.
-
-Further, DieselShip's own recurrence vocabulary for 2010–2015 is **month-level
-only** (`2010/JUN`, `2011/SR2`) and carries **no question number**; question
-numbers only appear from 2020 onward (`2021/JAN/Q1`). So a claim shaped
-"QP2608-Q2 ≈ December 2011 Q-something" cannot have come from DieselShip's
-question-level data either, because DieselShip does not publish question-level
-data for those years. The hypotheses are candidate recollection. That does not
-make them false — H1 in fact survives — but it fixes their evidential weight.
+See `OFFICIAL_QUESTION_BANK.md`.
 
 ---
 
 ## Files
 
-| File | What it is |
+### Evidence
+| File | Holds |
 |---|---|
-| `SOURCE_MANIFEST.json` | Every source touched, its access type, what it yielded, SHA256 |
-| `HISTORICAL_COVERAGE_MATRIX.md` | 2010–2022 coverage, classified per §8 |
-| `SIMILARITY_MODEL.md` | Classes, confidence, the limb-level finding, negative controls |
-| `QUESTION_OCCURRENCES.jsonl` | Normalized historical question occurrences |
-| `QUESTION_FAMILIES.json` | Recurrence families with dormancy/revival |
-| `QP2608_PAPER_DNA.md` | Q1–Q9 classified; paper-level summary |
-| `TEMPORAL_DELTA_SCHEMA.json` | Schema for the temporal answer layer |
-| `QP2608_TEMPORAL_DELTAS.md` | Temporal pilots, incl. the unchanged/changed pair |
-| `SETTER_HYPOTHESIS.md` | NTA rumour, bounded evidence search |
-| `WATCH_REGISTER.md` | What Phase 2 must chase |
-| `verification/H*.md` | One record per Founder hypothesis |
+| `SOURCE_MANIFEST.json` | 42 sources, with preservation state, text availability and separated confidences |
+| `OFFICIAL_BANK_ITEMS.json` | the cited items of the official bank — **ancestors, not sittings** |
+| `QUESTION_OCCURRENCES.jsonl` | one record per occurrence **at a sitting** |
+| `QUESTION_FAMILIES.json` | 7 families; `frequency_known` always equals `known_occurrences.length` |
+| `HISTORICAL_COVERAGE_MATRIX.md` | what MIW can read and reproduce, per sitting |
 
-## Rules honoured
+### Models
+| File | Defines |
+|---|---|
+| `SIMILARITY_MODEL.md` | the five classes, normalisation, bidirectional containment, the short-stem guard, six negative controls |
+| `LIMB_MODEL.md` | source limb vs analytical segment vs authoring scaffold |
+| `PUBLICATION_STATUS_MODEL.md` | the lifecycle, and why a claim can be certain and unpublishable |
+| `TEMPORAL_DELTA_SCHEMA.json` | delta categories, answer impact, exam relevance |
+| `TEMPORAL_CONTEXT_BOUNDARY.md` | the Exam Plan / Study Guide rule |
 
-- No DieselShip answer content acquired, quoted, or stored. Questions only.
-- No paywall, login, CAPTCHA or app restriction bypassed. Blocked routes were
-  abandoned, not worked around, and are recorded as blocked.
-- Raw third-party material stays outside git at `D:\MIW-Historical-QP-Intake\`.
-- No candidate-facing file modified. No QP2608 artefact modified.
-- Historical wording stays historical; normalization is a separate field.
-- One canonical current answer. No `answer_2010` / `answer_2026` forks.
+### Findings
+| File | Holds |
+|---|---|
+| `OFFICIAL_QUESTION_BANK.md` | the Phase-2 headline finding |
+| `QP2608_PAPER_DNA.md` | recomputed — count view and mark-weighted view |
+| `QP2608_TEMPORAL_DELTAS.md` | four pilots — `NONE`, `MINOR`, `MODERATE`, blocked |
+| `H1_H5_ADJUDICATION.md` | supersedes the Phase-1 verdicts in `verification/` |
+| `CANDIDATE_BLOCK_PROTOTYPES.md` | drafts of the Study Guide block — **not implemented** |
+| `CURRENT_ANSWER_CORRECTION_CANDIDATES.md` | **NONE**, with the sweep that established it |
+| `SETTER_HYPOTHESIS.md` | NTA — `NO OFFICIAL EVIDENCE FOUND`, re-checked in Phase 2 |
+| `WATCH_REGISTER.md` | what to re-check, and when |
+| `BULLET_CONNECTION_PILOT.md` | Phase 1 — how a family reaches the current answer |
+| `verification/H1…H5` | Phase 1 files, retained unedited as the record of what was known then |
+
+### Tools
+| Tool | Does |
+|---|---|
+| `tools/validate_families.py` | **105 checks**; `--mutate` runs 21 corruptions and proves each is caught |
+| `tools/parse_dgs_question_bank.py` | extracts the official bank PDF — 185/185 items |
+| `tools/match_bank_to_corpus.py` | sweeps the bank against all 40 specs, both containment directions |
+| `tools/negative_controls.py` | 6 controls the classifier must not fail |
+
+```bash
+python meoclass1/pastpapers/intelligence/v2/tools/validate_families.py --mutate
+```
+
+---
+
+## The rules this layer holds itself to
+
+- **`frequency_known` counts SITTINGS.** Bank items are ancestors, stored apart so
+  they cannot inflate it (`C28`).
+- **Three confidences, never one** — text, date, source. `FAMILY-EM-0001` is
+  legitimately `HIGH / NONE / HIGH`.
+- **No date reaches a candidate unless `date_confidence` is HIGH** (`C21`). No
+  hedged year either — the field is absent, because a hedge is still a claim.
+- **Authoring scaffolds never key a recurrence** (`C4`, `C5`).
+- **Marks are never inferred** (`C8`). Unknown stays unknown.
+- **`DO NOT WRITE TODAY` must name the obsolete thing.** “Check the latest
+  amendments” is forbidden.
+- **A gap in MIW's holdings is not dormancy.** `LONG_GAP_RETURN` needs proven
+  sittings at both ends (`C24`).
+- **No numerical revival score.** Categorical status only.
+- **Nothing is `CANDIDATE_PUBLISHED`** (`C23`, unconditional in Phase 2).
+
+---
+
+## Phase-1 conditions
+
+| Condition | State |
+|---|---|
+| `FAMILY-EM-0004` counts inconsistent with its records | **REPAIRED.** The four declared ancestors were re-verified and serialised. The declared counts were *correct* and the records were missing, so records were created rather than counts reduced. `C14`–`C17` now enforce the derivation. |
+| `SRC-SCRIBD-106245627` overstated | **RESOLVED.** Marked `UNVERIFIABLE_FROM_REPOSITORY`, with an explicit note that its sha256 hashes a 3 KB stub and not the text it was cited for. Superseded for recurrence by the official bank; the July 2012 **date** remains unevidenced and is counted nowhere. |
+
+---
+
+## Status
+
+Nothing is candidate-published. Nothing is even `DATE_VERIFIED`. Every family sits at
+`RESEARCH_HYPOTHESIS` or `TEXT_VERIFIED`, awaiting independent Laptop verification.

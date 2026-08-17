@@ -95,3 +95,53 @@ GAP-005 is the largest single hole: a whole question with no corpus ancestor.
   the window MIW can see". Never publish it as an examining fact.
 - **`TOPIC_ONLY` is not a repeat.** It is the class that inflates statistics.
 - **DieselShip is a historical source, never MIW's answer authority.**
+
+---
+
+# Phase 2 — dispositions and the Phase 3 queue
+
+`current_as_of: 2026-08-17`
+
+## Sections A–E, closed out
+
+| Item | Disposition |
+|---|---|
+| **CAC-001** — QP2608 Q1/Q2 carry no AFS/cybutryne content | **CLOSED, NOT A CORRECTION.** The Laptop adjudicated this `USEFUL_ENRICHMENT` on Q2 and `OPTIONAL_DETAIL` on Q1. Phase 2 confirms the omission is real and confirms it is **not a defect**: the stem asks about coordination, delegation and undocking inspections, not environmental compliance. Carried instead as Temporal Delta pilot B at `MINOR`. See `CURRENT_ANSWER_CORRECTION_CANDIDATES.md`. |
+| **ACQ-001** — DG Shipping question bank | **ACHIEVED.** Origin host still `ECONNREFUSED`; obtained from the Internet Archive. `SRC-DGS-QBANK-ARCHIVED`, 185/185 items, `PRESERVED_RAW`. This was the highest-value item on the register and it is the Phase-2 headline. |
+| **ACQ-002** — re-source the July 2012 attestation | **CLOSED BY SUPERSESSION, NOT BY RE-SOURCING.** The stems are now evidenced officially. The July 2012 **date** was not re-sourced and is counted nowhere. |
+| **ACQ-003** — DG Shipping live notice archive | **PARTIALLY ACHIEVED.** Live host unreachable; 12,130 archived DGS URLs enumerated via the Wayback CDX index, 830 mentioning MEO, and the exam module document index recovered. **No NTA reference found.** |
+| **ACQ-004** — 2010 papers | **UNCHANGED, advisory stands.** No 2010–2012 paper was recovered. |
+| **E-1** — re-key occurrences on `(question_id, limb_label)` | **DONE**, with `limb_kind` added so a scaffold cannot key a recurrence. |
+| **E-2** — always report mark-weighted | **DONE.** `QP2608_PAPER_DNA.md` reports both, and the mark-weighted figure moved from ~17% estimated to 33.3% verified. |
+| **E-3** — no numeric revival score | **HELD.** None built. |
+| **E-4** — keep the provenance tiers | **HELD**, with `OFFICIAL_BANK_ANCESTOR` added above them. |
+| **E-5** — decide temporal block placement | **DONE.** Study Guide. Rule in `TEMPORAL_CONTEXT_BOUNDARY.md`. |
+
+`INS-001` and `INS-002` remain **open and unchanged**. Neither instrument identity
+was established in Phase 2, and no number has been supplied for either.
+
+---
+
+## Phase 3 queue
+
+| ID | Item | Why |
+|---|---|---|
+| **P3-001** | **Serialise `FAMILY-EM-0008`** — unseaworthy vessels / MS Act | Five verified sittings, an official ancestor, and the only demonstrable `DO NOT WRITE TODAY` found. Documented in `QP2608_TEMPORAL_DELTAS.md` but deliberately not serialised — building five occurrence records at speed is how the Phase-1 defect happened. **Highest value item on this register.** |
+| **P3-002** | **Work the 830 archived MEO URLs** | Phase 2 enumerated them and sampled a handful. Each recovered dated official paper directly attacks the date problem that blocks H1–H5. |
+| **P3-003** | Build families for the other **62 strong bank matches** | 21 papers have a bank ancestor. Only QP2608's were modelled. |
+| **P3-004** | Decide canonical storage for the bank PDF | Official, public, load-bearing — and currently in one place on one machine, outside version control. |
+| **P3-005** | Re-run the leak sweep at **step** level | The point-level probe produces two standing false positives. Method note in `CURRENT_ANSWER_CORRECTION_CANDIDATES.md`. |
+| **P3-006** | Re-check whether the DGS domain is reachable | Every remaining official route runs through it. |
+
+---
+
+## Standing cautions — Phase 2 additions
+
+- **The official bank dates nothing.** It is the strongest evidence of ancestry in
+  the layer and carries `date_confidence: NONE`. Read the date column every time.
+- **QP2608 is not a typical paper.** It has 7 strong bank matches, the most in the
+  corpus, where the median matched paper has 2. Do not generalise its DNA.
+- **`SOURCE NOT FOUND` is a statement about our sources, not about the question.**
+  H4 was `SOURCE NOT FOUND` in Phase 1 and its full ancestor was found in Phase 2.
+  Phase 1 was right to phrase it as a limit on the search; had it been written as
+  “this question is new”, Phase 2 would have had to retract a published claim.
