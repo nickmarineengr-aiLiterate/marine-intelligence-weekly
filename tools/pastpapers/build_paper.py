@@ -119,6 +119,7 @@ PLAN_BULLETS_CSS = (
     "  .plan-b .plan-cap{margin:10px 0 3px;font-family:'Segoe UI',system-ui,sans-serif;"
     "font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;"
     "color:#7c2d12;}\n"
+    "  .plan-b .plan-limb .pl-mk{font-weight:400;color:var(--grey-text);}\n"
     "  .plan-b .plan-list li{margin:9px 0;}\n"
     "  .plan-b .pl-t{display:block;}\n"
     "  .plan-b .pl-pts{margin:4px 0 0;padding-left:18px;font-weight:400;font-size:12.5px;"
@@ -140,6 +141,30 @@ def limb_groups(q):
             groups.append(cur)
         cur[1].append(s)
     return groups
+
+
+def limb_marks(q):
+    """Normalised map of subpart label -> marks, for the exam-plan limb dividers.
+
+    Two subpart key conventions coexist under schema_version 1.3: most of the
+    corpus writes `ref` ("a)"), the newest papers write `label` ("(a)"). Route
+    `limb` values vary the same way ("a", "a)", "(a)", "A."), so both sides are
+    reduced to alphanumerics before matching. Anything that fails to match --
+    a scaffold limb such as "framing" or "main", or a subpart whose `marks` the
+    source paper never stated -- is simply absent from this map, and the caller
+    falls back to the bare label.
+
+    Marks are NEVER inferred. A 16-mark question with two unmarked limbs stays
+    unmarked: preserving the source paper's silence is the point, because a
+    guessed 8+8 would teach the candidate a split the examiner never published.
+    """
+    marks = {}
+    for s in (q.get('subparts') or []):
+        key = s.get('label') if s.get('label') is not None else s.get('ref')
+        key = re.sub(r'[^a-z0-9]', '', (key or '').lower())
+        if key and s.get('marks') is not None:
+            marks[key] = s['marks']
+    return marks
 
 
 def learn_bar(q, out):
@@ -239,9 +264,18 @@ def plan_view(q, out, bullets=False):
                'any of them.</p>')
     if bullets:
         out.append('    <div class="plan-cap">Bullet answer &mdash; points to write</div>')
+    marks = limb_marks(q) if bullets else {}
     for limb, group in limb_groups(q):
         if limb:
-            out.append('    <div class="plan-limb">%s</div>' % esc(limb))
+            # The candidate is being told what to write; what each limb is worth
+            # decides how much of the time budget it deserves. Shown only where
+            # the source paper actually stated the split -- never derived from
+            # the total, and never divided equally across limbs.
+            m = marks.get(re.sub(r'[^a-z0-9]', '', limb.lower()))
+            out.append('    <div class="plan-limb">%s%s</div>'
+                       % (esc(limb),
+                          '' if m is None else
+                          ' <span class="pl-mk">&middot; %d marks</span>' % m))
         out.append('    <ol class="plan-list">')
         for s in group:
             if bullets:
