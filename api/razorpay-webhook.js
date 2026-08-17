@@ -15,6 +15,24 @@
 
 import crypto from "crypto";
 import { fulfilPayment, FulfilError } from "./_lib/fulfil.js";
+import { revokeForRefund, RefundError } from "./_lib/refund.js";
+
+// Refund events that END paid access.
+//
+// BOTH, not just refund.processed. `created` is the moment the merchant
+// decided to give the money back; `processed` can be days later once the
+// bank settles. Waiting for settlement would leave a customer the Founder
+// has already refunded holding full access for most of a week. Acting on
+// `created` and again on `processed` is safe because the revocation is
+// idempotent — the second event finds the grant already marked and writes
+// nothing.
+//
+// refund.failed is NOT here. A failed refund means the money did not go
+// back, so access arguably should return — but "arguably" is not a policy,
+// and auto-restoring paid access from a payment-provider event is a far
+// more dangerous default than leaving it revoked for a human to reopen.
+// It is logged loudly instead. FOUNDER DECISION.
+const REFUND_REVOKING_EVENTS = new Set(["refund.created", "refund.processed"]);
 
 // Vercel parses JSON bodies by default, which would alter the exact
 // bytes and break HMAC verification. Read the RAW body first.
@@ -88,9 +106,59 @@ export default async function handler(req, res) {
       );
     }
 
+    if (REFUND_REVOKING_EVENTS.has(event)) {
+      const refund = payload.payload?.refund?.entity || {};
+      const paymentId = refund.payment_id;
+      if (!paymentId) {
+        console.error(`[webhook] ${event} carried no payment_id — nothing to revoke`);
+        return res.status(200).json({ received: true, refused: "no_payment_id" });
+      }
+      const result = await revokeForRefund({
+        paymentId,
+        refundId: refund.id,
+        refundAmount: refund.amount,
+        source: event,
+      });
+      console.log(
+        `[webhook] ${event} → ${result.status}` +
+        (result.productId ? ` | ${result.productId}` : "") +
+        (result.entitlements ? ` | revoked ${result.entitlements.join("+")}` : "")
+      );
+      if (result.status === "partial_refund_no_change") {
+        // Loud on purpose. Access is intact and a human has to decide
+        // whether it should be — see isFullRefund() in _lib/refund.js.
+        console.warn(
+          `[webhook] PARTIAL REFUND on payment ${paymentId} ` +
+          `(${result.refunded} of ${result.paid} paise). Access UNCHANGED — ` +
+          "no partial-refund policy exists. FOUNDER DECISION."
+        );
+      }
+      return res.status(200).json({ received: true, refund: result.status });
+    }
+
+    if (event === "refund.failed") {
+      const refund = payload.payload?.refund?.entity || {};
+      console.warn(
+        `[webhook] refund.failed for payment ${refund.payment_id || "unknown"} — ` +
+        "any revocation already applied STANDS. Reopen by hand if the money " +
+        "genuinely stayed with MIW. FOUNDER DECISION."
+      );
+    }
+
     return res.status(200).json({ received: true });
 
   } catch (error) {
+    if (error instanceof RefundError) {
+      // Same reasoning as FulfilError: a refund we cannot resolve to a
+      // product is a permanent refusal, not a transient fault. 200 stops
+      // the retry storm; the log is what gets acted on. This leaves paid
+      // access LIVE after a refund, so it must be impossible to miss.
+      console.error(
+        `[webhook] REFUND NOT APPLIED (${error.code}): ${error.message} — ` +
+        "PAID ACCESS MAY STILL BE ACTIVE. Check entitlement_admin show."
+      );
+      return res.status(200).json({ received: true, refused: error.code });
+    }
     if (error instanceof FulfilError) {
       // A payment that does not match an approved product/amount is a
       // permanent refusal, not a transient fault — return 200 so

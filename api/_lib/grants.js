@@ -16,6 +16,8 @@
 //   field === "<epoch>" -> ACTIVE until that second, then EXPIRED
 //   field === "passed:<closedAt>:<prior>"
 //                       -> PASSED_CLOSED  lifecycle closed by the Founder
+//   field === "refunded:<refundedAt>:<prior>"
+//                       -> REFUNDED   the money went back; access ended
 //
 // ─────────────────────────────────────────────────────────────
 // THE TRAP. READ THIS BEFORE CHANGING ANYTHING BELOW.
@@ -93,12 +95,34 @@ export const GRANT_PERPETUAL = "perpetual";
 export const GRANT_ACTIVE = "active";
 export const GRANT_EXPIRED = "expired";
 export const GRANT_PASSED_CLOSED = "passed_closed";
+export const GRANT_REFUNDED = "refunded";
 
 /** The literal stored for a grant with no clock-based expiry. */
 export const PERPETUAL = "1";
 
 /** Marks a Candidate-Lifecycle grant the Founder has closed. */
 export const PASSED_PREFIX = "passed:";
+
+/**
+ * Marks a grant whose purchase money has been returned.
+ *
+ * WHY THIS IS NOT "passed:", AND NOT A DELETION
+ * ---------------------------------------------
+ * A refund and a pass both end access, and both were previously
+ * expressible only as "delete the field" — which erases the difference
+ * between them AND the difference from someone who never bought at all.
+ * The Founder needs those three apart: a passed candidate is a success
+ * story, a refunded one is a commercial event with a payment behind it,
+ * and a stranger is neither. Overloading EXPIRED would be worse still —
+ * an expiry is a clock running out, and a refund has no end date to show
+ * the customer or to renew from.
+ *
+ * Same shape as PASSED_PREFIX for the same three reasons (one reader,
+ * one hop, fails closed on a stale deploy), and it carries the prior
+ * value for the same reason too: a refund reversed by the payment
+ * provider must restore what was actually held, not a guess.
+ */
+export const REFUNDED_PREFIX = "refunded:";
 
 /** True for the stored shape of a Candidate-Lifecycle grant. */
 export function isLifecycleValue(raw) {
@@ -110,23 +134,43 @@ export function isPassedValue(raw) {
   return typeof raw === "string" && raw.startsWith(PASSED_PREFIX);
 }
 
+/** True for a value recording a refunded purchase. */
+export function isRefundedValue(raw) {
+  return typeof raw === "string" && raw.startsWith(REFUNDED_PREFIX);
+}
+
 /**
- * Split "passed:<closedAt>:<prior>" apart.
+ * Split "<prefix><stampedAt>:<prior>" apart.
  *
- * `prior` may itself contain nothing surprising — it is either "1" or a
- * digit string — but it is recovered with the REST of the string rather
- * than the second segment, so a future value carrying a colon still
- * round-trips through mark-passed → reopen-candidate unchanged.
+ * `prior` is recovered with the REST of the string rather than as the
+ * second segment, so a value that itself carries a colon still
+ * round-trips through close → reopen unchanged. That matters more now
+ * than it did with one prefix: a refund applied to an already-closed
+ * lifecycle grant stores "refunded:<t>:passed:<t2>:1", and reversing the
+ * refund has to give back the closure rather than a bare "passed".
  */
-export function parsePassedValue(raw) {
-  if (!isPassedValue(raw)) return null;
-  const rest = raw.slice(PASSED_PREFIX.length);
+function parseStamped(raw, prefix) {
+  const rest = raw.slice(prefix.length);
   const cut = rest.indexOf(":");
   if (cut === -1) return null;
-  const closedAt = Number(rest.slice(0, cut));
+  const at = Number(rest.slice(0, cut));
   const prior = rest.slice(cut + 1);
-  if (!Number.isFinite(closedAt) || closedAt <= 0 || prior === "") return null;
-  return { closedAt, prior };
+  if (!Number.isFinite(at) || at <= 0 || prior === "") return null;
+  return { at, prior };
+}
+
+/** Split "passed:<closedAt>:<prior>" apart. */
+export function parsePassedValue(raw) {
+  if (!isPassedValue(raw)) return null;
+  const p = parseStamped(raw, PASSED_PREFIX);
+  return p ? { closedAt: p.at, prior: p.prior } : null;
+}
+
+/** Split "refunded:<refundedAt>:<prior>" apart. */
+export function parseRefundedValue(raw) {
+  if (!isRefundedValue(raw)) return null;
+  const p = parseStamped(raw, REFUNDED_PREFIX);
+  return p ? { refundedAt: p.at, prior: p.prior } : null;
 }
 
 /**
@@ -144,6 +188,22 @@ export function grantState(raw, nowSeconds) {
   // FIRST, and as a string. See the trap note above.
   if (isLifecycleValue(raw)) {
     return { status: GRANT_PERPETUAL, expires: null, perpetual: true };
+  }
+
+  // Before the arithmetic, and before the passed check, because a refund
+  // is the OUTER wrapper: refunding an already-closed lifecycle grant
+  // stores "refunded:<t>:passed:<t2>:1", and the refund is the thing that
+  // happened last. Testing passed first would read that value as a
+  // closure and lose the refund entirely.
+  if (isRefundedValue(raw)) {
+    const parsed = parseRefundedValue(raw);
+    return {
+      status: GRANT_REFUNDED,
+      expires: null,
+      perpetual: false,
+      refundedAt: parsed ? parsed.refundedAt : null,
+      prior: parsed ? parsed.prior : null,
+    };
   }
 
   // Before the arithmetic, because "passed:..." is not a number and the
@@ -227,6 +287,46 @@ export function reopenedGrantValue(existing) {
 }
 
 /**
+ * The value to store when a purchase has been refunded.
+ *
+ * Returns null when there is NOTHING TO REVOKE — an absent grant, or one
+ * already marked refunded. Both nulls matter:
+ *
+ *   ABSENT   a refund for a payment that never produced a grant (a failed
+ *            fulfilment, a hand-corrected account) must not CREATE a
+ *            record. Writing "refunded:<t>:" onto an empty field would
+ *            invent a purchase that this account never held.
+ *
+ *   ALREADY  Razorpay retries webhooks, and refund.created is followed by
+ *            refund.processed for the same refund. Re-wrapping would give
+ *            "refunded:<t2>:refunded:<t1>:1" and push the real prior value
+ *            one layer further out of reach every time.
+ *
+ * A PASSED_CLOSED or EXPIRED grant IS wrapped rather than skipped. The
+ * money still went back, and the audit answer to "why did this end" must
+ * be the refund; the closure or expiry it wrapped is preserved inside and
+ * comes back intact if the refund is ever reversed.
+ */
+export function refundedGrantValue(existing, nowMs) {
+  if (existing === null || existing === undefined || existing === "") return null;
+  if (isRefundedValue(existing)) return null;
+  return `${REFUNDED_PREFIX}${Math.floor(nowMs / 1000)}:${existing}`;
+}
+
+/**
+ * The value to restore when a refund is reversed or was applied in error.
+ *
+ * Returns the exact value held before the refund — recovered from the
+ * record, never reconstructed — or null if this grant was not refunded.
+ * Reconstruction would mint access for anyone an operator named, which is
+ * precisely what carrying the prior value inside the string prevents.
+ */
+export function unrefundedGrantValue(existing) {
+  const parsed = parseRefundedValue(existing);
+  return parsed ? parsed.prior : null;
+}
+
+/**
  * The value to store for a purchase.
  *
  * @param {number|null} termDays  null ⇒ perpetual (the grandfathered shape)
@@ -254,7 +354,15 @@ export function extendedGrantValue(existing, termDays, nowMs) {
   // the base below already falls through to "now" — this is stated
   // rather than left to the arithmetic, because a closure silently
   // extending into a fresh perpetual grant would undo the closure.
-  if (isPassedValue(existing)) {
+  //
+  // A REFUNDED customer who buys again is the same case and matters
+  // more: their stored value may be "refunded:<t>:1", and the perpetual
+  // check at the top of this function does not see it because the
+  // string is wrapped. Without this branch the arithmetic would still
+  // reach the right answer by way of NaN — but the day somebody
+  // "simplifies" the wrapper away, a refunded legacy holder would buy
+  // one year and silently get their perpetual grant back.
+  if (isPassedValue(existing) || isRefundedValue(existing)) {
     return String(Math.floor(nowMs / 1000) + Math.round(termDays * 86400));
   }
 

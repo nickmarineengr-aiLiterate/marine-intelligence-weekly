@@ -191,6 +191,53 @@ Any mismatch throws and grants nothing. Then: claim `miw:send_lock:<paymentId>`
 genuinely re-attempt. The old code left it claimed, which silently blocked
 retries until someone cleared the key by hand.
 
+### Refunds — `api/_lib/refund.js`
+
+**Before 17 August 2026 a refund revoked nothing.** The webhook handled
+`payment.captured` and `payment.failed` and returned a bare 200 for every
+other event, so a refunded customer — including one refunded by hand from
+the Razorpay dashboard, which is how the Founder actually issues them —
+kept full paid access indefinitely, with nothing recording that a refund
+had happened. Found while auditing the ₹1,499/₹1,500 product confusion
+that caused the refund in the first place.
+
+`revokeForRefund()` mirrors fulfilment exactly, and for the same reason:
+the signature proves the event is Razorpay's, but only the **order notes**
+say what was bought. So it re-reads the payment and the order, and takes
+the product identity from `notes.product`.
+
+| Event | Behaviour |
+|---|---|
+| `refund.created` | Full refund → revoke. Partial → log, change nothing. |
+| `refund.processed` | Same. Idempotent, so handling the pair is safe. |
+| `refund.failed` | Logged loudly. Any revocation already applied **stands**. |
+| dispute / chargeback | **Not handled.** See below. |
+
+What it writes: the `miw:ent:<email>` field for the refunded product only,
+set to `refunded:<epoch>:<prior>`. `grants.js` reads that as
+`GRANT_REFUNDED` — denied at the gate, distinct from `EXPIRED` and
+`PASSED_CLOSED`, and it fails closed on a stale deploy because the value
+is not numeric. The prior value is carried inside, so a reversal restores
+what was actually held rather than a reconstruction.
+
+What it never does: touch the credential, touch the other product's
+entitlement, act on a partial refund, or clear sessions.
+
+Audit: `miw:refund:<refundId>` — product, entitlements, order/payment/refund
+ids, amounts, timestamp. No card, bank or instrument detail.
+
+**FOUNDER ACTION REQUIRED — this cannot be done in code.** The handler only
+runs if Razorpay is configured to *send* those events. In the Razorpay
+dashboard → Settings → Webhooks, the MIW endpoint must have
+**`refund.created` and `refund.processed`** ticked. Until it does, this
+code is inert and a dashboard refund still leaves access live.
+
+**OPEN — FOUNDER DECISIONS.** (1) No partial-refund policy exists, so a
+partial refund deliberately changes nothing. (2) `refund.failed` does not
+restore access automatically. (3) Disputes and chargebacks
+(`payment.dispute.*`) are not handled at all — a lost chargeback currently
+leaves access active.
+
 ---
 
 ## 5. One answer truth

@@ -95,6 +95,7 @@ import {
   GRANT_ACTIVE,
   GRANT_EXPIRED,
   GRANT_PASSED_CLOSED,
+  GRANT_REFUNDED,
 } from "../../api/_lib/grants.js";
 import { DEFAULT_TERM_DAYS } from "../../api/_lib/products.js";
 import { pathToFileURL } from "node:url";
@@ -161,6 +162,15 @@ export function describeGrant(raw, nowSeconds) {
         ? new Date(s.closedAt * 1000).toISOString().slice(0, 10)
         : "date unrecorded";
       return `Candidate-Lifecycle / PASSED_CLOSED (closed ${when}; reopen-candidate restores it)`;
+    }
+    // Kept distinct from EXPIRED and from PASSED_CLOSED on purpose. All
+    // three deny, but they are three different answers to "why did this
+    // person lose access", and only one of them has money behind it.
+    case GRANT_REFUNDED: {
+      const when = s.refundedAt
+        ? new Date(s.refundedAt * 1000).toISOString().slice(0, 10)
+        : "date unrecorded";
+      return `REFUNDED (money returned ${when}; see miw:refund:* for the payment)`;
     }
     case GRANT_ACTIVE: {
       const days = Math.floor((s.expires - nowSeconds) / 86400);
@@ -292,6 +302,7 @@ export function summariseCounts(records, nowSeconds, known) {
     lifecyclePassedClosed: 0,
     fixedTermActive: 0,
     fixedTermExpired: 0,
+    refunded: 0,
     corrupt: 0,
   };
   for (const { held } of records) {
@@ -299,6 +310,7 @@ export function summariseCounts(records, nowSeconds, known) {
       const s = grantState(held[e], nowSeconds);
       if (s.status === GRANT_PERPETUAL) counts.lifecycleActive++;
       else if (s.status === GRANT_PASSED_CLOSED) counts.lifecyclePassedClosed++;
+      else if (s.status === GRANT_REFUNDED) counts.refunded++;
       else if (s.status === GRANT_ACTIVE) counts.fixedTermActive++;
       else if (s.status === GRANT_EXPIRED) {
         if (s.expires) counts.fixedTermExpired++;
@@ -388,6 +400,7 @@ async function show() {
   const lifecycle =
     states.includes(GRANT_PERPETUAL)     ? "ACTIVE_CANDIDATE (Candidate-Lifecycle access running)" :
     states.includes(GRANT_PASSED_CLOSED) ? "PASSED_CLOSED (recorded as passed; access closed)" :
+    states.includes(GRANT_REFUNDED)      ? "REFUNDED (purchase money returned; access ended)" :
     states.some((s) => s !== GRANT_NONE) ? "fixed-term customer — no Candidate-Lifecycle grant" :
                                            "no entitlement on record";
   console.log(`lifecycle : ${lifecycle}`);
@@ -530,6 +543,7 @@ async function summary() {
   console.log(`  Candidate-Lifecycle PASSED_CLOSED : ${c.lifecyclePassedClosed}`);
   console.log(`  Fixed-term ACTIVE                 : ${c.fixedTermActive}`);
   console.log(`  Fixed-term EXPIRED                : ${c.fixedTermExpired}`);
+  console.log(`  REFUNDED (money returned)         : ${c.refunded}`);
   if (c.corrupt) console.log(`  UNREADABLE (denied — investigate)  : ${c.corrupt}`);
   if (cursor !== "0") {
     console.log("\nWARNING: the scan hit its page limit. These figures are PARTIAL.");
