@@ -84,3 +84,62 @@ clustering — account for what was observed without invoking NTA.
 found asserting NTA involvement, and nothing was found denying it either.
 
 **Do not communicate this rumour to candidates in any form.**
+
+---
+
+# Phase 2 — bounded re-check
+
+**Verdict unchanged: `NO OFFICIAL EVIDENCE FOUND`.**
+`current_as_of: 2026-08-17`
+
+One bounded re-check was run, as permitted. No substantial session time was spent.
+
+## What was re-run
+
+A fresh search for any DG Shipping, Ministry or NTA instrument connecting the
+National Testing Agency to MEO Class I paper-setting for 2026. **Nothing was found.**
+The result set returned only coaching sites, DieselShip shop pages, and DG Shipping's
+own examination material.
+
+Phase 1's caveat — that `dgshipping.gov.in` was unreachable, so its notice archive
+could not be read directly — **stands, and Phase 2 partly retired it**. The domain
+refused connections again from every route tried, including a beta host
+(`betadgs.dgshipping.gov.in`) Phase 1 did not know about. But the Directorate's
+archived footprint *was* read: **12,130 archived URLs enumerated through the Wayback
+CDX index, 830 of them mentioning MEO.** The DGS exam module page was recovered and
+its full document index listed.
+
+**Nothing in that material mentions NTA.** That is a materially wider check than
+Phase 1 could perform, and it came back empty.
+
+## The structural point, now with a positive explanation
+
+Phase 1 listed *“a long-lived question bank”* among the ordinary explanations that
+account for the observed recurrence without invoking NTA.
+
+**Phase 2 found that question bank.** It is the Directorate's own published
+`Question Bank MEO CL-I` — 185 items, published on DG Shipping's own domain.
+Sixty-three questions across MIW's 40-paper corpus match an item in it strongly,
+including four of QP2608's nine. An officially published paper from 2005 prints the
+same rubric QP2608 prints twenty-one years later.
+
+So the phenomenon the rumour was invoked to explain — *why do such old questions keep
+coming back?* — now has a **documented, official and entirely mundane mechanism**:
+the Directorate maintains a standing bank and sets from it.
+
+This **strengthens** the negative verdict. It proves nothing about who sets the
+paper. A bank explains recurrence, and recurrence was never evidence of authorship
+in either direction — that reasoning is not being reintroduced here in reverse.
+
+Phase 1's structural argument stands untouched: NTA sits under the Ministry of
+Education, MEO certification under the Directorate General of Shipping in the
+Ministry of Ports, Shipping and Waterways. A transfer across that boundary would
+require a visible administrative instrument, and none exists.
+
+## Phase 2 result
+
+- `NO OFFICIAL EVIDENCE FOUND` — retained
+- Search reach materially widened; still empty
+- A positive, official explanation for the recurrence now exists
+- Recurrence still **not** used as causal evidence, in either direction
+- **Not candidate-published. Not to be communicated to candidates in any form.**

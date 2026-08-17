@@ -1,101 +1,113 @@
-# Historical coverage matrix, 2010–2022
+# Historical coverage matrix
 
-**Research only.** `current_as_of: 2026-08-17`
+**RESEARCH ONLY.** `current_as_of: 2026-08-17`
+Retrieval window 2026-08-17 into 2026-08-18. Exam target: **August 2026 sitting**.
 
-Classification per the Phase 1 brief §8:
+Coverage is stated as what MIW can **read and reproduce**, not what MIW has once
+seen. Nothing here is inflated.
+
+---
+
+## Classification
 
 | Class | Meaning |
 |---|---|
-| `FULL_PAPER` | MIW holds a source copy of the whole sitting |
-| `PARTIAL_PAPER` | Some questions of the sitting held as text |
-| `QUESTION_SET` | A third-party set exists and its **contents** are obtainable |
-| `QUESTION_PAGE_ONLY` | A page exists showing question text, but not a whole paper |
-| `RECURRENCE_METADATA_ONLY` | Only counts/identity are public; no stems obtainable |
-| `MISSING` | Nothing located |
+| `OFFICIAL_FULL_PAPER` | a complete official sitting paper, preserved |
+| `FULL_PAPER_THIRD_PARTY` | a complete paper from a non-official source, preserved |
+| `PARTIAL_PAPER` | some questions of a sitting |
+| `QUESTION_TEXT_ONLY` | question wording held, no rubric or marks |
+| `RECURRENCE_METADATA_ONLY` | a provider asserts a sitting exists; no text seen |
+| `SOURCE_REFERENCED_BUT_NOT_PRESERVED` | a reading was taken; nothing MIW holds reproduces it |
+| `OFFICIAL_QUESTION_BANK` | official question wording, **no sitting, no date** — new in Phase 2 |
+| `MISSING` | nothing at all |
 
 ---
 
-## Headline
+## Priority A — 2010, 2011, 2012 Engineering Management
 
-**Every sitting from 2010 to 2020 is `RECURRENCE_METADATA_ONLY` or `MISSING`.**
+**This is the window Phase 2 was sent to attack, and it did not fall.**
 
-MIW's own evidence floor is **January 2021**. Everything below that line in the
-table depends on external acquisition, and external acquisition was blocked.
+| Year | Sittings | Class | Evidence |
+|---|---|---|---|
+| 2010 | Jan–Dec | `RECURRENCE_METADATA_ONLY` | DieselShip set index confirms month-level sets exist and gives per-set question counts. **No stem is publicly rendered.** |
+| 2011 | Jan–Dec | `RECURRENCE_METADATA_ONLY` | as 2010 |
+| 2012 | Jan–Dec | `RECURRENCE_METADATA_ONLY` | as 2010 |
+| 2012 | July | `SOURCE_REFERENCED_BUT_NOT_PRESERVED` | `SRC-SCRIBD-106245627` — two stems read in Phase 1; only a 3,043-byte stub preserved, and the recorded sha256 hashes that stub |
 
-Two sittings are the sole exception: **July 2012** and **August 2012** reach
-`QUESTION_PAGE_ONLY` through a single third-party upload (`SRC-SCRIBD-106245627`).
-That one source carries the entire text-verified weight of H1, H2 and H3.
+**Readable full papers for 2010–2012: zero. Unchanged from Phase 1.**
 
----
-
-## 2010–2012 — the years the Founder hypotheses depend on
-
-DieselShip set metadata is public; set **contents** are not. Counts are the
-whole yield. `Qs` = questions in the set **across all seven categories**, of
-which MEO Class I Engineering Management is only a fraction.
-
-| Sitting | DieselShip set | Qs (all categories) | Class 1 category | MIW class |
-|---|---|---|---|---|
-| 2010 JAN | yes | 21 | yes | RECURRENCE_METADATA_ONLY |
-| 2010 FEB | yes | 24 | yes | RECURRENCE_METADATA_ONLY |
-| 2010 MAR | yes | 25 | yes | RECURRENCE_METADATA_ONLY |
-| 2010 APR | yes | 24 | yes | RECURRENCE_METADATA_ONLY |
-| 2010 JUN | yes | 21 | yes | RECURRENCE_METADATA_ONLY |
-| 2010 JUL | yes | 17 | yes | RECURRENCE_METADATA_ONLY |
-| 2010 AUG | yes | 15 | yes | RECURRENCE_METADATA_ONLY |
-| 2010 SEP | yes | 10 | **no** | RECURRENCE_METADATA_ONLY |
-| 2010 OCT | yes | 23 | yes | RECURRENCE_METADATA_ONLY |
-| 2010 NOV | yes | 15 | yes | RECURRENCE_METADATA_ONLY |
-| 2010 DEC | yes | 15 | yes | RECURRENCE_METADATA_ONLY |
-| 2011 JAN–DEC | yes (11 sets) | 52–66 each | yes | RECURRENCE_METADATA_ONLY |
-| 2012 JAN–JUN, SEP–DEC | yes | 55–66 each | yes | RECURRENCE_METADATA_ONLY |
-| **2012 JUL** | yes (66) | 66 | yes | **QUESTION_PAGE_ONLY** |
-| **2012 AUG** | yes (64) | 64 | yes | **QUESTION_PAGE_ONLY** |
-
-No sitting exists in **May** in any year, 2010–2012.
-
-### The 2010 thinness finding
-
-2010 sets hold **10–25** questions. 2011 and 2012 sets hold **52–66**.
-
-DieselShip's 2010 coverage is roughly **a third** of its 2011–2012 coverage,
-spread across seven exam categories. A June 2010 set of 21 questions across
-7 categories cannot plausibly contain a complete 9-question MEO Class I
-Engineering Management paper.
-
-This matters directly to H1, H4 and H5: even the paid source that the group's
-recollection most likely traces back to **may not hold the 2010 papers being
-cited**. Phase 2 should not assume that buying access resolves 2010.
+The 33 preserved DieselShip set pages give counts and set identity only. They can
+corroborate that a sitting happened. They cannot evidence a single question.
 
 ---
 
-## 2013–2022
+## What Phase 2 *did* recover
 
-| Window | Class | Note |
+Neither entry falls in the priority window. Both are official, and one reshaped the
+whole layer.
+
+| Source | Class | Notes |
 |---|---|---|
-| 2013–2020 | `RECURRENCE_METADATA_ONLY` | DieselShip sets exist; contents gated. MIW holds nothing. |
-| 2021 JAN – 2022 DEC | `FULL_PAPER` (MIW-held, intelligence-only) | 22 papers, 198 questions, in `historical_qp_intelligence.json` |
+| **Question Bank MEO CL-I** — `SRC-DGS-QBANK-ARCHIVED` | **`OFFICIAL_QUESTION_BANK`** | 185 items, 100% extracted, `PRESERVED_RAW`, sha256 pinned. **Undated.** Not a sitting, and never counted as one. |
+| **India (2005) Morning Paper, Management Level** — `SRC-DGS-2005-MGMT` | **`OFFICIAL_FULL_PAPER`** | The only official dated sitting paper either phase has obtained. Nine stems plus the printed rubric. Year 2005 HIGH (printed on the paper); month February MEDIUM (DGS filename token `0205` and the OLE creation date agree — neither is printed). |
 
-MIW-held papers in the 2021–2022 window:
-QP2101, QP2102, QP2103, QP2104, QP2107, QP2107-S2, QP2108, QP2109, QP2110,
-QP2111, QP2112, QP2201, QP2202, QP2203, QP2204, QP2206, QP2207, QP2208,
-QP2209, QP2210, QP2211, QP2212.
-
-These are **intelligence-only**: question text and printed rubric, no answers.
+The bank is by far the more valuable — it supplied official ancestors for five of
+QP2608's limbs and matched 63 questions across the corpus — but it is worth being
+exact about what it does to *coverage*: **nothing.** It adds no sitting. Coverage of
+2010–2012 is precisely what it was.
 
 ---
 
-## Acquisition totals
+## MIW's own holdings, for contrast
 
-| Metric | Count |
+| Window | Class | Holdings |
+|---|---|---|
+| 2021-01 → 2023-12 | `QUESTION_TEXT_ONLY` | 30 papers, 270 questions, intelligence-only |
+| 2023 → 2026 | `OFFICIAL_FULL_PAPER` + solved | 40 papers, 360 questions |
+
+MIW's sitting evidence floor is **January 2021**. Every dormancy statement in this
+layer is bounded by it.
+
+---
+
+## Routes attempted in Phase 2
+
+| Route | Outcome |
 |---|---|
-| Sittings with a public third-party set identity, 2010–2012 | 33 |
-| Sittings whose **contents** were lawfully obtainable, 2010–2020 | **2** (Jul 2012, Aug 2012) |
-| Historical question **stems** newly text-verified this session | **2** |
-| Papers downloaded | 0 |
-| Question pages captured | 34 (33 set pages + 1 upload) |
-| Recurrence records produced | 5 hypothesis records + 4 families |
-| Third-party **answers** acquired | **0** |
+| `dgshipping.gov.in` question bank PDF (direct) | **ECONNREFUSED** `164.100.60.201:443` — retried, still blocked |
+| `www.dgshipping.gov.in` root | **ECONNREFUSED** — whole domain unreachable |
+| `betadgs.dgshipping.gov.in` model question papers — **new host, found in Phase 2** | **ECONNREFUSED** |
+| `dgshipping.gov.in` exam module page (direct) | **ECONNREFUSED** |
+| Internet Archive — question bank PDF | **SUCCESS** — official PDF, 314,710 bytes |
+| Internet Archive — exam module page | **SUCCESS** — full document index recovered |
+| Internet Archive — `meomemI_0205_I.doc` | **SUCCESS** — official 2005 Management paper |
+| Wayback CDX index for `dgshipping.gov.in` | **SUCCESS** — 12,130 archived URLs enumerated, 830 mentioning MEO |
+| DG Shipping MEO result lists, 2013–2014 | Located, **not pursued** — pass lists, no question text |
+| `marinenotes.blogspot.com` MMD papers | Fetched. Class I subjects listed; **no Engineering Management, no 2010–2012** |
+| `meoexamz.co.in` | Fetched. One Engineering Management page; **no dated 2010–2012 papers** |
+| `marineengineeringonline.com` | **Not retried.** Phase 1 recorded HTTP 403; re-attempting an explicit refusal with nothing changed would be pressing a block |
+| DieselShip set **contents** | **Not attempted** — subscription-gated. No login; the site warns a wrong login bans the IP |
 
-The gap between "33 sittings located" and "2 sittings readable" is the central
-Phase 1 result on acquisition.
+No paywall bypassed, no authentication attempted, no CAPTCHA encountered, no
+user-agent substitution, no paid answers acquired.
+
+One retrieval detail worth keeping: the plain Wayback URL returns the archive's HTML
+toolbar wrapper; only the raw `id_` variant returns the underlying file. Phase 2
+first downloaded 12,882 bytes of `<!DOCTYPE html>` named `.pdf`, and had to notice.
+
+---
+
+## Honest summary
+
+**The 2010–2012 gap is unchanged.** Phase 2 recovered a lot of official material and
+none of it dates a sitting in the priority window.
+
+What changed is that the *recurrence* claims no longer need that window — they rest
+on the Directorate's own published question bank. What still needs it, and remains
+blocked, is every **date** claim: H1 through H5, and any candidate-facing
+“asked before in …” line.
+
+The most promising remaining route is the DG Shipping domain becoming reachable. The
+CDX index shows the Directorate has published a great deal of examination material
+over the years; Phase 2 enumerated 830 archived MEO URLs and sampled a handful.
+**That enumeration is itself an asset for Phase 3.**
