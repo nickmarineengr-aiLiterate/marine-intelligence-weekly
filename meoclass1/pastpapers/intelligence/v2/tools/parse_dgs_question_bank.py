@@ -3,6 +3,23 @@
 The PDF is a two-column table: Sr.No | Question. pdfminer's flat text extraction
 interleaves the two columns whenever a question spans several lines, so the
 numbers must be recovered from x/y geometry rather than reading order.
+
+Reading order within a row
+--------------------------
+A cell may hold several text fragments that share one baseline. Item 182 is the
+case in this document: three fragments sit at y=145.5 with x0 = 53.0 / 359.8 /
+456.8, because the source lays the charter limbs out as inline columns. Ordering
+body lines by (page, -y) alone leaves those three in pdfminer's container order,
+which is not left-to-right, and the item reads as scrambled prose.
+
+x0 is therefore part of the sort key. A whole-document scan finds exactly one
+row where container order differs from left-to-right order among body text
+(page 16, y=145.5 — item 182); the other same-baseline groups are a Sr.No cell
+beside its first body line, which this parser separates before sorting.
+
+Not every oddity is ours to fix. Item 181 prints its limbs lettered a, b, d, c
+at descending y: that is the Directorate's own mislettering, the parser reads it
+in the order printed, and it is preserved verbatim.
 """
 import json, re, sys
 from pdfminer.high_level import extract_pages
@@ -35,7 +52,7 @@ print('num column x=%s  first body x=%s  (all x starts: %s)' % (num_x, body_x, x
 
 # a "number cell" is a line in the left column that is purely an integer
 num_cells = []   # (page, y, n)
-body_lines = []  # (page, y, text)
+body_lines = []  # (page, y, x, text)
 for pno, y, x, txt in lines:
     s = txt.strip()
     if x <= num_x + 4 and re.fullmatch(r'\d{1,3}', s):
@@ -45,31 +62,32 @@ for pno, y, x, txt in lines:
         m = re.match(r'^\s*(\d{1,3})\s+(?=[A-Z\u201c(])', txt)
         if x <= num_x + 4 and m:
             num_cells.append((pno, y, int(m.group(1))))
-            body_lines.append((pno, y, txt[m.end():]))
+            body_lines.append((pno, y, x, txt[m.end():]))
         else:
-            body_lines.append((pno, y, txt))
+            body_lines.append((pno, y, x, txt))
 
 # Some rows have the Sr.No glued to the first body line ("1 During bunkering...").
 # Recover those by scanning body lines in reading order and accepting a leading
 # integer only when it continues the ascending item sequence.
 num_cells.sort(key=lambda t: (t[0], -t[1]))
-body_lines.sort(key=lambda t: (t[0], -t[1]))
+# x0 is load-bearing: fragments sharing a baseline must read left-to-right.
+body_lines.sort(key=lambda t: (t[0], -t[1], t[2]))
 
 known = sorted({n for _, _, n in num_cells})
 seen = set(known)
 recovered, kept = [], []
 last = 0
-for pno, y, txt in body_lines:
+for pno, y, x, txt in body_lines:
     m = re.match(r'^\s*(\d{1,3})\s+(?=[A-Z“(])', txt)
     if m:
         n = int(m.group(1))
         if n not in seen and last < n <= last + 3:
             recovered.append((pno, y, n))
             seen.add(n)
-            kept.append((pno, y, txt[m.end():]))
+            kept.append((pno, y, x, txt[m.end():]))
             last = n
             continue
-    kept.append((pno, y, txt))
+    kept.append((pno, y, x, txt))
     # track sequence position from the geometric number cells too
     while True:
         nxt = [n for n in known if n > last]
@@ -93,7 +111,7 @@ print('number cells found: %d  (min %d max %d)' % (
 items = {}
 cur = None
 ni = 0
-for pno, y, txt in body_lines:
+for pno, y, x, txt in body_lines:
     while ni < len(num_cells) and (num_cells[ni][0], -num_cells[ni][1]) <= (pno, -y):
         cur = num_cells[ni][2]
         ni += 1
