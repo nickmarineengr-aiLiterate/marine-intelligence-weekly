@@ -40,7 +40,7 @@ Two consequences that are easy to get wrong:
 | File | Owns | Read when |
 |---|---|---|
 | `PRODUCTION_PROTOCOL_INDEX.md` | precedence, routing | **always, first** |
-| `PASTPAPER_PRODUCTION_PROTOCOL.md` | how a solved paper is produced: sources, spec→build, learning architecture, branch/review rules | **always**, for any paper production |
+| `PASTPAPER_PRODUCTION_PROTOCOL.md` | how a solved paper is produced: sources, **build mode**, spec→build, the **five-mode learning architecture and Exam Plan**, branch/review rules, the **production sequence**, global side effects, publication proof | **always**, for any paper production |
 | `TEMPORAL_AND_DONOR_VERIFICATION_PROTOCOL.md` | sitting-date truth, donor reuse, recurrence, contamination sweeps | **always**, for any paper production |
 | `EXECUTION_EFFICIENCY_POLICY.md` | how Claude should execute work on this project | **always** — it is short |
 | `QA_AND_HANDOVER_PROTOCOL.md` | validation, determinism, UI check, Git, report schema | **before finalisation** — not needed while authoring |
@@ -84,7 +84,7 @@ adjudicates against but does not need loaded to begin.
 | `2024_2026_RECURRENCE_AND_REUSE_MAP.md` | you need the donor map for the specific paper in hand |
 | `QP####_TRUE_SOURCE_DEMAND_MAP.md` | producing that specific paper |
 | `MIW_TRUE_SOURCE_CONTRACT.md` | touching corpus object references |
-| `MIW_LEARNING_METHOD_DESIGN.md` | changing the learning architecture (normally frozen) |
+| `MIW_LEARNING_METHOD_DESIGN.md` | you need the **rationale** behind the frozen learning architecture — the evidence base, why there are five modes and no sixth, why `Answer` is the default. It does **not** bind: the rules live in `PASTPAPER_PRODUCTION_PROTOCOL.md` §6 |
 | `SOLVED_QP_COMMERCIAL_ARCHITECTURE.md` | commercial/gating questions only |
 | `2026_PATTERN_REGISTER.md`, `SOURCE_INVENTORY.md` | intelligence questions, not production |
 

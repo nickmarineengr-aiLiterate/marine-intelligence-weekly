@@ -7,9 +7,9 @@ description: >
   Load whenever the task is to fix a solved answer, add material to one, compare candidate or
   coaching notes against the corpus, act on a defect found during unrelated work, or decide
   whether something learned from a later paper belongs in an earlier one.
-  This skill decides WHETHER and WHAT to change before anything is edited. It does not author
-  new papers — new-paper production is governed by meoclass1/pastpapers/docs/CURRENT_STATUS.md
-  and QA_AND_HANDOVER_PROTOCOL.md.
+  This skill decides WHETHER and WHAT to change before anything is edited. It does NOT author
+  new papers. New-paper written-QP production is governed by the protocol set indexed at
+  meoclass1/pastpapers/docs/PRODUCTION_PROTOCOL_INDEX.md — start there, not here.
 ---
 
 # SolvedQP Correction & Enrichment Review — Skill v1
@@ -48,6 +48,8 @@ This skill does not restate governance. Read the owner document when its subject
 
 | Subject | Authority |
 |---|---|
+| **Producing a NEW written paper** (not this skill) | `meoclass1/pastpapers/docs/PRODUCTION_PROTOCOL_INDEX.md` and the protocol set it indexes |
+| Learning architecture — five modes, Exam Plan, `answer_route`, subpart marks | `meoclass1/pastpapers/docs/PASTPAPER_PRODUCTION_PROTOCOL.md` §6 |
 | What a correction is, how it moves, Founder gates, commit policy | `docs/CORRECTION_WORKFLOW.md` |
 | Engineering principles (esp. P4 Verify Before Trust) | `docs/ENGINEERING_PRINCIPLES.md` |
 | Product state, open items, restart instructions | `meoclass1/pastpapers/docs/CURRENT_STATUS.md` |

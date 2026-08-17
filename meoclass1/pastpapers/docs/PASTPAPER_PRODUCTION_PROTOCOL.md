@@ -105,6 +105,33 @@ Toolchain (do not reinvent): `run_toolchain.py`, `validate_spec.py`, `build_pape
 `audit_paper.py`, `recurrence_check.py`, `known_traps_check.py`, `questions_year_check.py`,
 `sample_check.py`, `health_check.py`, `ui_behaviour_test.cjs`.
 
+### 4.1 BUILD MODE IS A DECISION, NOT A DEFAULT
+
+**Establish the build mode before you build, and state which one you used.**
+
+- A **bare** toolchain run produces the **review** build — `noindex`, ungated, carrying
+  production metadata. That is correct for a paper under Founder review (§9).
+- `run_toolchain.py --publish` produces the build **`main` commits**. That is the pre-commit
+  gate for integration.
+
+Three rules, each paid for by a real incident:
+
+1. **Never pick the mode because a checker came back green.** `health_check.py` is
+   **mode-symmetric** — it faults a review tree that is not `noindex`, and equally faults a
+   publish tree that still carries `noindex`. One of the two invocations returns 0 errors for
+   *any* tree. Green proves only that the tree matches the mode you asked about. A bare
+   toolchain run once left 37 pages carrying `noindex` and production metadata while the bare
+   checker agreed the tree was clean.
+2. **Rebuild intentionally, then inspect the generated diff and classify every changed file** —
+   canonical / generated / report, and paper-owned / global. Never commit review-banner or
+   `noindex` contamination into a published tree.
+3. **Prove deterministic regeneration**: build twice from an unchanged spec and require
+   byte-identical output, product build **and** intelligence build.
+
+A bare run rewrote the whole review tree once without any gate failing. Mode is therefore
+established explicitly against what `main` actually commits — never inferred, never defaulted.
+See `LAPTOP_REVIEW_AND_INTEGRATION_PROTOCOL.md` §3.M for the integration-side rule.
+
 ---
 
 ## 5. IDENTITY AND NAMING
@@ -115,33 +142,159 @@ resolve; deep links must resolve; ids must be unique across papers and questions
 
 ---
 
-## 6. THE LEARNING ARCHITECTURE — SINGLE SPINE
+## 6. THE LEARNING ARCHITECTURE — FIVE MODES, ONE SPINE
 
-**`answer_route` is the one canonical sequence for a question. It is authored once.**
+**Frozen. Do not redesign it while producing a paper.** Rationale lives in
+`MIW_LEARNING_METHOD_DESIGN.md`; this section states what binds.
 
-Every other learning surface is *derived* from it:
+### 6.1 Five modes — there is no sixth
 
-- the study guide / Understand view
-- the Map
-- Recall (blanks)
-- Rapid Revision / cheat-sheet
-- retrieval flashcards
+```
+[ Understand ]  [ Exam Plan ]  [ Answer ]  [ Study Guide ]  [ Recall ]
+```
+
+Defined once in `build_paper.py` (`MODES`). **`Answer` is the default open view** — expertise
+reversal: a candidate who already knows the topic must reach the model answer without being
+walked through scaffolding.
+
+Do not propose a Bullet Answer tab, Summary tab, Cheat Sheet tab, Timeline tab or any other
+learning mode. Adding, removing or renaming a mode is a **Founder decision** (§10). Verification
+is a *capability*, not a mode: the Reference Shelf sits outside the selector.
+
+Each mode has one job, and they do not borrow each other's:
+
+| Mode | Owns |
+|---|---|
+| **Understand** | the plain-language mental model, *before* examination phrasing. Conditional — present only where the topic has a genuinely counter-intuitive core. Not a second answer, not a regulation dump, not a mini Study Guide. Must pass the reconstruction test |
+| **Exam Plan** | **what the candidate should write in the exam now** — see §6.2 |
+| **Answer** | the full verified model answer. Do **not** shorten it because Exam Plan exists |
+| **Study Guide** | why the structure scores · distinctions · common mistakes · examiner traps · deeper reasoning · regulatory nuance · currency and temporal context |
+| **Recall** | the retrieval / self-test layer — the route with titles blanked, plus flashcards |
+
+### 6.2 EXAM PLAN — the bullet plan is the corpus standard
+
+> **What changed.** Bullet Exam Plan shipped as a QP2608-only pilot behind a `plan_bullets`
+> spec flag. It was propagated to the whole solved corpus on 2026-08-17 and **the flag was
+> removed deliberately** — it did not disappear by accident. There is now one renderer, no
+> opt-in, and no per-paper variation. Do not reintroduce a flag.
+
+**EXAM PLAN = WHAT TO WRITE IN THE EXAM NOW.** The rendering carries:
+
+- source-backed **subpart marks where known** (§6.3);
+- **route headings** — the things to write down first;
+- the caption `Bullet answer — points to write`;
+- **supporting points beneath each heading**;
+- the memory cue, where one exists;
+- the explicit *Remember N headings · Cover M core points* split.
+
+**Single canonical data source: `answer_route.steps[].points`.**
+
+Never create `bullet_answer`, `short_answer`, `exam_answer`, `bullet_points_v2` or any other
+parallel answer corpus. The points the Exam Plan prints are the same points the model answer,
+knowledge map and recall test derive from — which is precisely why nothing can drift.
+
+### 6.3 SUBPART MARKS — show them, never guess them
+
+- **If the source paper or spec states subpart marks: show them.**
+- **If it does not: do not guess.** Never infer `8+8`, `10+6` or `4+4+4+4` from a total.
+
+A guessed split teaches the candidate a weighting the examiner never published. `limb_marks()`
+in `build_paper.py` therefore omits any limb it cannot match, and the caller falls back to the
+bare label; `ui_behaviour_test.cjs` guards this ("scaffold limbs and unmarked subparts stay
+label-only"). Preserving the source paper's silence is the point.
+
+**Two subpart key conventions coexist** under one `schema_version`: most of the corpus writes
+`ref` (`"a)"`), the newest papers write `label` (`"(a)"`). Route `limb` values vary the same way
+(`a`, `a)`, `(a)`, `A.`). The renderer reduces both sides to alphanumerics before matching, so
+historical records stay compatible. **New authoring should follow the convention the current
+schema and neighbouring recent specs use** — but never "normalise" an existing paper as a side
+effect of unrelated work.
+
+Where marks are genuinely absent from the print, record the derivation in
+`subpart_marks_note` rather than concealing it (`validate_spec.py` warns on its absence).
+
+### 6.4 SOURCE LIMBS ARE NOT AUTHORING SCAFFOLDS
+
+`answer_route.steps[].limb` currently does two different jobs. Real question limbs (`(a)`,
+`a)`, `A.`) are examination subparts. Values such as **`framing`, `closing`, `intro`, `main`,
+`all`, `d1…d5`, `head 1…head 4`, `qualification`** are **authoring scaffolds** — they are not
+subparts and must never be assigned invented marks.
+
+For new production:
+
+- Prefer a clean route structure that expresses the shape **without** a scaffold label.
+- Use a scaffold only where authoring genuinely needs it, and never in a way that reads to a
+  candidate as a limb that merely lost its marks.
+- Never treat an existing scaffold label as evidence that the source paper had that subpart.
+
+Scaffold limbs are candidate-facing today and are a **registered open item** (`CURRENT_STATUS.md`
+§6.D). Do not fix them opportunistically inside a paper session — it means editing canonical
+spec data corpus-wide.
+
+### 6.5 THE EXAM-PLAN / STUDY-GUIDE BOUNDARY
+
+```
+EXAM PLAN    →  what to write NOW
+STUDY GUIDE  →  why · traps · nuance · historical and temporal context ·
+                "asked before — what changed for today?"
+```
+
+**Do not let regulatory history accumulate inside Exam Plan.** A current-law fact belongs in the
+Exam Plan only when it is a useful point for the candidate's present answer. Framing such as
+*"at this sitting the operative text is …"* is Study Guide material.
+
+This boundary is measured, not assumed: a sweep of all route points found fewer than ten
+genuine state-of-law framings corpus-wide (`CURRENT_STATUS.md` §6.G). Keep it that way.
+
+### 6.6 `answer_route` IS LOAD-BEARING — author it deliberately
+
+**`answer_route` is the one canonical sequence for a question. It is authored once**, and every
+other surface is *derived* from it: Understand's knowledge map, the model answer's principal
+headings, the Exam Plan, Recall's blanks, quick revision, and the structure flashcard.
+
+For every route step:
+
+- **`title`** — a **writable examination heading**. The candidate should be able to put it
+  straight on the page.
+- **`points`** — the actual scoring and supporting points, authored as short retrieval cues
+  (3–8 words), not a second copy of the prose.
+
+Avoid: vague headings · duplicated steps · explanatory essay paragraphs disguised as bullets ·
+points that belong only in Study Guide · historical narrative that is not writable in the exam.
 
 Binding consequences:
 
-- **Never author a route twice.** If two surfaces disagree, the route is right and the
-  derived surface is a defect.
+- **Never author a route twice.** If two surfaces disagree, the route is right and the derived
+  surface is a defect.
 - **A derived surface must never be more categorical than the verified answer.** If the answer
-  is qualified ("generally", "where the administration permits"), the flashcard may not
-  flatten it into an absolute. This has already caught a real regression.
-- Answers render **unhidden**; the learning layer must remain coherent across map, recall and
-  flashcards. `health_check.py` verifies this.
+  is qualified ("generally", "where the administration permits"), the flashcard may not flatten
+  it into an absolute. This has already caught a real regression.
+- A route is **specific to its question**. Do not reuse a generic route because two questions
+  share a topic. The route carries the **core points the examiner is actually testing**.
+- A memory cue may point *at* the canonical route; it may never introduce a second sequence of a
+  different length.
+- Answers render **unhidden**; `health_check.py` verifies learning-layer coherence.
 
-### Question-specific routes and the core-point principle
+### 6.7 ROUTE SIZE — a warning threshold, not a correctness rule
 
-A route is specific to its question. Do not reuse a generic route because two questions share
-a topic. The route carries the **core points the examiner is actually testing** — the marks
-live there, not in surrounding narrative.
+**There is no bullet cap, and no arbitrary target.** Do not truncate a complex answer to hit a
+number, and do not pad a simple one.
+
+Measured across the solved corpus (360 questions, 40 papers, 2026-08-17) — **recompute rather
+than trust these figures; they move as the corpus grows**:
+
+| | min | median | p90 | max |
+|---|---|---|---|---|
+| route headings | 5 | 7 | 9 | 14 |
+| core points | 12 | 41 | 61 | 80 |
+
+39 questions carry more than 60 points. `validate_spec.py` warns outside the 4–9 chunking range;
+that is a **prompt to look**, not a defect. Eleven questions already sat outside it before the
+range was questioned (`CURRENT_STATUS.md` §6.E).
+
+If a new question produces an unusually high heading or point count, **review it for duplication
+or poor structure before accepting it** — then accept it deliberately and say so. Route structure
+must stay navigable; it must not be trimmed to flatter a statistic.
 
 ---
 
@@ -191,3 +344,156 @@ side effect of production work.
 
 When in doubt, produce the work and stop at the boundary with a clear question. Do not cross
 it and report afterwards.
+
+---
+
+## 11. THE PRODUCTION SEQUENCE
+
+Nine phases. Desktop owns 1–8; the laptop owns 9 under
+`LAPTOP_REVIEW_AND_INTEGRATION_PROTOCOL.md`.
+
+| # | Phase | What it produces |
+|---|---|---|
+| 1 | **Source intake** | the verified paper: id, month/year, subject, serial, duration, total marks, question count, answer instruction, per-question marks, subpart marks. Stems transcribed **verbatim**. Printed inconsistencies **preserved**, never silently normalised (§11.1) |
+| 2 | **Recurrence / donor discovery** | lineage classified against the corpus (§11.2); donors identified cautiously and separately from recurrence (§11.3) |
+| 3 | **Current-law research** | every high-risk legal or regulatory claim verified against primary sources for the **sitting date**; temporal changes resolved |
+| 4 | **Author** | `understand_first` (where it earns its place) · `answer_route` · full Answer · Study Guide · Recall and flashcards |
+| 5 | **Self-review** | marks · limbs · citations · temporal sweeps · donor contamination · currentness |
+| 6 | **Build** | in the mode the machine role requires (§4.1) |
+| 7 | **Validate** | the governed gate set (§11.4) — 0 failures |
+| 8 | **Handoff** | desktop stops; branch pushed; anchor document written |
+| 9 | **Laptop integration** | extract paper-owned paths onto **current `main`**, re-review independently, publish build, global gates, deploy if green |
+
+### 11.1 Source truth — preserve the paper, including its errors
+
+**Transcribe the stem verbatim. Preserve printed inconsistencies; never normalise them silently.**
+
+Worked precedent (QP2608): six questions printed at 16 marks each sum to **96**, while the paper's
+printed total is **100**. That discrepancy is recorded, not corrected — a spec that quietly makes
+the arithmetic work has replaced the source paper with a tidier one that never existed.
+
+**Where the printed premise is wrong, do not rewrite the question.** The answer:
+
+1. states the correct position;
+2. briefly corrects the premise;
+3. **still performs the task the examiner asked for.**
+
+Worked precedent (QP2608-Q9): the paper posits *two consecutive D ratings*, where the rule is
+**three consecutive D, or one E**. The answer names the correction, notes the ship is one year
+short of the threshold, and then delivers the requested corrective-action plan. Silently
+answering the wrong scenario, and refusing to answer at all, are both failures.
+
+### 11.2 Lineage classification — use the existing vocabulary
+
+Adjudicate lineage by **reading historical stems**, never by score alone, into the five classes
+the repository already uses (`LAPTOP_REVIEW_AND_INTEGRATION_PROTOCOL.md` §3.F; `recurrence_model.py`
+carries the machine-side `repeat_exact` / `repeat_near`):
+
+| Class | Means |
+|---|---|
+| `EXACT` | the same printed task, same wording |
+| `NEAR` | materially reworded, same task |
+| `FAMILY` | the same core ask, differently framed |
+| `RELATED` | same topic only |
+| `UNIQUE` | no meaningful match |
+
+**Do not introduce a parallel set of names for these.** Same topic is **not** automatically
+recurrence.
+
+**Recurrence can occur at limb level.** Never write *"this entire question repeated"* when only
+one 4- or 6-mark limb repeated. Never invent a historic sitting date from group feedback or
+coaching material — an unverified date is a fabricated citation.
+
+### 11.3 Donor use — starting point, never copy authority
+
+For every donor: verify the exact question relationship · check current-law currency · remove
+donor-only limbs · adjust marks and scope · re-anchor evidence · run the temporal sweep. Record
+the three deltas (`TEMPORAL_AND_DONOR_VERIFICATION_PROTOCOL.md` §4).
+
+**Never copy a 16-mark donor into a 6-mark repeated limb.** And never copy an old current-law
+claim forward: check for repealed statutes, replacement Acts, IMO amendments, changed
+entry-into-force status, new limits, changed terminology, new class/IACS positions and new
+practice.
+
+> **An old question does not mean an old answer.**
+> Historical sources establish **what was asked**. Current primary and verified authority
+> establishes **what should be written now**. The current canonical answer always controls the
+> Exam Plan.
+
+### 11.4 Validation baseline
+
+Run the governed checks in the sequence at `QA_AND_HANDOVER_PROTOCOL.md` §1, covering: spec
+validation · publish/review build · UI behaviour · question-year · sample · reuse · recurrence ·
+known traps · temporal · health · audit · home contract · solvedQP checker · delivery gate ·
+strict derivation · determinism.
+
+**Require 0 failures.** Do not hardcode an expected test count into a report — suites grow, and a
+frozen number becomes a false assertion.
+
+Every new paper needs its own **UI behaviour fixture**. A missing fixture must fail, not quietly
+produce fewer assertions and pass. Prove every search probe **unique under the search's own
+semantics** before writing it down; reject ambiguous probes. Mutation-test a relaxed or new guard
+where practical.
+
+### 11.5 Exam Plan acceptance — test this explicitly on every new paper
+
+- Can a candidate open **Exam Plan alone** and reconstruct a credible answer without reading the
+  full Answer?
+- Do subpart marks show **where known**, and are they absent where the source is silent?
+- Are the headings **writable** as they stand?
+- Are the bullets current for the sitting?
+- Do bullet weights roughly respect the marks?
+- Are legal and regulatory distinctions preserved, not flattened?
+- Are procedural questions sequenced correctly?
+- Does it remain usable on mobile (375 px, no horizontal overflow)?
+
+No bullet-count target. Do **not** add a headings-only toggle to Exam Plan — that duplicates
+Recall.
+
+### 11.6 Memory cues
+
+Prefer authoring a useful memory cue during production rather than leaving new debt. A cue is
+**not** a hard blocker for a new paper unless governance says so elsewhere, and **historical
+backfill is out of scope for a paper session** — 20 of 360 questions currently carry none
+(`CURRENT_STATUS.md` §6.F).
+
+---
+
+## 12. GLOBAL SIDE EFFECTS — explain every changed file
+
+A new paper legitimately changes existing generated surfaces: recurrence families, reuse maps,
+year indexes, counts, storefront counts, latest-sitting metadata.
+
+**Do not assume "a new paper should only add new files."** But **every changed old file must be
+explained.** Classify each; where the generated diff is wider than the paper, compare
+representative untouched pages byte-for-byte against `origin/main`.
+
+A newly published paper may move paper count, question count, newest sitting and month
+availability. Storefront guards must stay green — when a guard reports a mismatch, update the
+**page**, never the checker.
+
+**Never change pricing or commercial product scope during ordinary QP production.** Do not touch
+Razorpay, refund logic, entitlements or access product definitions unless explicitly tasked.
+Written access remains a separate product from Oral. See `SOLVED_QP_COMMERCIAL_ARCHITECTURE.md`.
+
+---
+
+## 13. PUBLICATION PROOF
+
+**HTTP 200 or 302 is not deployment proof.** The access gate is path-agnostic: a redirect that
+302s every path also 302s a path that does not exist. Prove deployment from a public surface
+whose **content actually moved**, or from the exact deployed commit SHA. Then confirm the paid
+route is still protected and that no paid text is served anonymously.
+
+---
+
+## 14. QUESTION INTELLIGENCE v2 — NOT CANDIDATE-FACING
+
+QI-v2 is under separate research governance and is **not** part of paper production.
+
+Historical recurrence intelligence may later surface in **Study Guide**, at whole-question or
+limb level. Author `answer_route` and lineage records so they stay compatible with that — but
+**do not depend on unfinished research**, and **do not candidate-publish** old sitting dates,
+Paper DNA, temporal blocks or setter hypotheses until QI-v2 governance approves them.
+
+Do not start QI-v2 work inside a paper session.

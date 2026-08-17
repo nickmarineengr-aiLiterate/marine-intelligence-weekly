@@ -1,12 +1,19 @@
 # MIW WRITTEN ANSWER METHOD — design rationale
 
-**Status: PILOT. Not final until the Founder has reviewed QP2607.**
-Written 2026-08-08. Applies to the Past Written Papers (QP) series.
+**Status: ADOPTED.** Written 2026-08-08 as the QP2607 pilot rationale; carried by the whole
+solved corpus since. Applies to the Past Written Papers (QP) series.
 
 > **Structurally frozen as the V1 template on 2026-08-08** — five modes, one canonical
-> `answer_route`, everything else derived. See `CURRENT_STATUS.md` §2a. The structure is settled;
-> whether the *method* works remains open until the Founder has reviewed QP2607 and until QP2601
-> provides cross-paper validation. **Do not add a sixth mode.**
+> `answer_route`, everything else derived. See `CURRENT_STATUS.md` §2a. **Do not add a sixth
+> mode.**
+>
+> The pilot question this file once carried — *"does the method work?"* — was closed by QP2607
+> Founder review and by cross-paper validation from QP2601 onward. The architecture has since
+> been applied across the full solved corpus.
+>
+> **This document is the design *rationale*. It does not bind on its own.** What binds a
+> production session is `PASTPAPER_PRODUCTION_PROTOCOL.md` §6, which states the current rules;
+> read that first and come here for *why*. Where the two differ, the protocol wins.
 
 This document explains *why* the QP question object has the shape it has. It is the design
 rationale a future paper-production session should read before authoring QP2601–QP2612.
@@ -263,8 +270,22 @@ Because rule 4 keeps dates and citations out, an Understand section is normally
 **sitting-independent** and transfers unchanged across an exact-recurrence family — unlike answer
 prose, which must be re-anchored on every Tier D reuse.
 
-**Start here** — the route headings, and the instruction to write all headings first and then
-expand in order. Must be usable in seconds. This is the F1 fix.
+**Start here / Exam Plan** — the route headings, and the instruction to write all headings first
+and then expand in order. Must be usable in seconds. This is the F1 fix.
+
+*Superseded rendering, recorded so the change is not mistaken for drift.* The original view
+printed every route heading **twice** — once as the plan list, and again inside a collapsed
+`<details>` — and that duplication is the only reason the core points had to be hidden at all.
+The two were merged into **one list with the points shown beneath each heading**, captioned
+*Bullet answer — points to write*. A candidate asking for "a bullet version of the answer" is now
+given it on arrival instead of having to discover a collapsed control.
+
+This shipped as a QP2608 pilot behind a `plan_bullets` spec flag, was propagated to the whole
+corpus on 2026-08-17, and **the flag was then removed deliberately**. There is one renderer and
+no opt-in. The points are the same `answer_route.steps[].points` every other view derives from —
+no second corpus, nothing authored twice, so nothing can drift. Subpart marks print beside a limb
+**only where the source paper stated them**; they are never inferred from a total. See
+`PASTPAPER_PRODUCTION_PROTOCOL.md` §6.2–§6.4.
 
 **Knowledge map** — root = topic; first level = route steps (5–9); second level = only
 critical children. No paragraphs, no third level. Rendered as a **semantic HTML/CSS tree**
