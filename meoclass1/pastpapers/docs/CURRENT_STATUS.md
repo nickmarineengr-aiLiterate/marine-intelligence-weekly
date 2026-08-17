@@ -45,7 +45,8 @@ See §7j for QP2406, §7h for QP2507, §7g for QP2504, §7f for QP2503, §7e for
 > silently reverted `DESKTOP_QP_ALLOCATION_2023.md`, `DESKTOP_QP_HANDOVER_BATCH3.md` and 15 lines of
 > this file. Both desktop branches are **retained** as provenance evidence.
 >
-> **Product: 39 available papers · 351 published questions · 351 in the corpus.**
+> **Product at that point: 39 available papers · 351 published questions.** Current product state
+> is **40 papers · 360 questions** — see §0.
 >
 > # THE 2023 YEAR IS CLOSED. QP2311 (NOVEMBER 2023) IS LIVE.
 >
@@ -253,6 +254,22 @@ what is next, what is blocked.*
 
 ---
 
+## 0. AT A GLANCE — read this before anything else
+
+*Verified against repo truth 2026-08-18. Counts are generated; re-derive rather than trust.*
+
+| Question | Answer |
+|---|---|
+| **What is LIVE?** | The Solved QP written product. **40 papers · 360 questions**, newest sitting **August 2026 (QP2608)**. Published and **gated**: `/solvedQP/` and `/meoclass1/pastpapers/` both require the `SOLVED_QP` entitlement (`api/_lib/routes.js`, enforced by `middleware.js`) |
+| **What is CANONICAL?** | `meoclass1/pastpapers/specs/QP####.json`. Everything else — review pages, delivery pages, indexes, manifests — is **generated**. Never hand-edit a generated file |
+| **What is FROZEN?** | The **five-mode** learning architecture — Understand · Exam Plan · Answer · Study Guide · Recall. **`Answer` is the default view. There is no sixth mode.** **Bullet Exam Plan is the standard rendering** across the whole corpus; the `plan_bullets` pilot flag is **removed**, one renderer, no opt-in |
+| **What is IN RESEARCH?** | **Question Intelligence v2** — research only, not candidate-facing, not part of paper production. Nothing from it (old sitting dates, Paper DNA, temporal blocks, setter hypotheses) may be published to candidates until QI-v2 governance approves it |
+| **How do I produce a paper?** | **Start at [`PRODUCTION_PROTOCOL_INDEX.md`](PRODUCTION_PROTOCOL_INDEX.md)** — it routes you to the right protocol for your machine role. Do **not** start here: this file is **state, not policy**, and where it restates a rule the protocol file wins |
+| **Who publishes?** | **Laptop.** It owns integration onto current `main`, cross-product checks, publication and deployment. **Desktop** does bounded authoring/research on a branch and stops. Desktop never publishes to `main`; laptop never merges a stale desktop branch — it **extracts paper-owned paths** onto current `main` |
+| **Which build?** | **`main` commits the PUBLISH build** (`run_toolchain.py --publish`). A bare run produces the *review* build. `health_check.py` is **mode-symmetric**, so a green result proves only that the tree matches the mode you asked about — never pick the mode because it came back green |
+
+---
+
 ## 1. Repository / branch state
 
 | | |
@@ -260,9 +277,9 @@ what is next, what is blocked.*
 | Path | `F:\Marine-Intelligence-Weekly` |
 | Remote | `https://github.com/nickmarineengr-aiLiterate/marine-intelligence-weekly.git` |
 | **Visibility** | **PUBLIC** — anything committed here is published, on any branch, `noindex` or not |
-| **`main`** | **`0816f3d` — LIVE IN PRODUCTION.** The Written product, Security V2 and the whole pastpapers line were merged to `main` and deployed 2026-08-12. `main` is no longer a stale pre-product branch; it is what customers are served |
-| Content head | `a5f2551` on `pastpapers/qp2509-founder-review` — the newest solved-paper state |
-| Tooling head | `850bdde` on `workflow/pil-v1` — content head plus the Production Intelligence Layer |
+| **`main`** | **LIVE IN PRODUCTION, and it is the content head.** The Written product, Security V2 and the whole pastpapers line were merged and deployed from 2026-08-12 onward. **`main` carries the PUBLISH build** — it is what customers are served. **Never quote a `main` SHA from this file; read `git rev-parse origin/main`.** A SHA written here is stale by the next paper |
+| Content head | **`main`.** Every solved paper is integrated onto `main` by path extraction. A `pastpapers/qp####-founder-review` branch is *provenance*, never the newest state |
+| Tooling head | **`main`.** The Production Intelligence Layer (`temporal_sweep.py`, `surface_impact.py`) is merged and wired into `run_toolchain.py` |
 | Release branch | `release/written-live-test-v1` — the reconciliation branch the cutover was assembled on. Fast-forwarded into `main`; kept as the release lineage |
 | **Desktop baseline** | **`9c97359` — UNCHANGED and immutable.** The six 2024 paper branches were allocated from it and are unaffected by everything below. Do NOT tell the desktop team to rebase because `main` moved |
 | **Consumer branch** | `workflow/corpus-consumer-integration` @ `d2e09a4` — now fully contained in `main` |
@@ -501,8 +518,9 @@ Settled. Do not redesign without test evidence of a defect — see §7 below and
 `meoclass1/pastpapers/` is the **review** build of the specs; `solvedQP/` is the **delivery**
 build of the same specs. Two views, one source. Both are gated by `SOLVED_QP`.
 
-**Production Intelligence Layer (PIL) V1** exists on `workflow/pil-v1` and is **Founder-review
-only** — not merged, not on the content branch. It is two detectors wired into `run_toolchain.py`:
+**Production Intelligence Layer (PIL) V1** is **merged and live on `main`**, wired into
+`run_toolchain.py` (it was Founder-review-only on `workflow/pil-v1` until that branch landed). It
+is two detectors:
 `temporal_sweep.py` (post-sitting dates and inherited donor Q-references) and `surface_impact.py`
 (which public / free / paid / commercial / security surfaces a session moved). Both **detect and
 report; they do not gate** — `PIL FLAGS; CLAUDE ADJUDICATES`. For what each owns and why, read
@@ -513,7 +531,17 @@ report; they do not gate** — `PIL FLAGS; CLAUDE ADJUDICATES`. For what each ow
 
 ## 5. Open review branches
 
-Nothing is merged to `main`. All pages are `noindex` and ungated.
+> **Superseded framing, corrected 2026-08-18.** This section once opened *"Nothing is merged to
+> `main`. All pages are `noindex` and ungated."* That described the pre-launch corpus and has been
+> **false since the 2026-08-12 cutover**. Current truth: **all 40 papers are integrated onto
+> `main`, built in publish mode (not `noindex`), and gated behind the `SOLVED_QP` entitlement** —
+> see §0. The delivery pages under `solvedQP/` do carry `noindex`, which is correct: paid content
+> is deliberately not indexed. That is the *only* sense in which `noindex` still applies.
+>
+> The table below is a **provenance register**, not a queue of unpublished work. A
+> `pastpapers/qp####-founder-review` branch is retained as evidence of how a paper was authored;
+> it is never the newest state, and it must never be merged (it was cut from an older `main`).
+> Branch tips listed here go stale — read `git branch -vv` for truth.
 
 | Branch | Head | Holds |
 |---|---|---|
@@ -2236,8 +2264,16 @@ self-tests pass on seeded positives, and a full toolchain run left the tracked t
 ```bash
 cd F:\Marine-Intelligence-Weekly
 git -c safe.directory=* status
-python tools/pastpapers/run_toolchain.py
+python tools/pastpapers/run_toolchain.py --publish
 ```
+
+> **Corrected 2026-08-18 — this block used to say a bare `run_toolchain.py`.** That is the
+> **review**-mode build. `main` carries the **publish** build, and a bare run **rewrites the whole
+> tree into review mode** — `noindex` plus production metadata on every page — without any gate
+> failing, because `health_check.py` is mode-symmetric and would agree the review tree is clean.
+> It has done exactly that once before. Run `--publish` on `main`; run bare only when you
+> deliberately want a review tree, and revert it afterwards. See
+> [`PASTPAPER_PRODUCTION_PROTOCOL.md`](PASTPAPER_PRODUCTION_PROTOCOL.md) §4.1.
 
 Then, in order:
 
