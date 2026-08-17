@@ -1,0 +1,62 @@
+{
+  "schema": "miw.pastpapers.qi_v2.temporal_delta.v1",
+  "status": "RESEARCH_ONLY",
+  "current_as_of": "2026-08-17",
+  "governing_principle": "A repeated question is not necessarily a repeated answer. This layer never stores a historical ANSWER. MIW keeps ONE canonical current answer per question; the temporal layer stores only what a candidate must stop writing, start writing, and may keep writing.",
+  "hard_rules": [
+    "No answer_2010 / answer_2012 / answer_2026 forks. There is one canonical current answer.",
+    "Every delta entry carries a source. An uncited regulation number, limit or date is a defect, not a delta.",
+    "Where the current position could not be established from a held or primary source, the entry is UNCERTAIN_NEEDS_PRIMARY and says so plainly rather than guessing.",
+    "A third-party model answer is NEVER authority for the current position.",
+    "MIW's existing discipline is inherited: where MIW has deliberately chosen to refer to an instrument descriptively because its identity could not be established from a held source, the temporal layer must do the same and must not supply a number to fill the gap."
+  ],
+  "delta_types": [
+    "UNCHANGED_CORE",
+    "UPDATED_REGULATION",
+    "UPDATED_STATUTE",
+    "UPDATED_NUMERIC_REQUIREMENT",
+    "UPDATED_TERMINOLOGY",
+    "UPDATED_REGULATORY_STATUS",
+    "UPDATED_TECHNOLOGY",
+    "UPDATED_OPERATIONAL_PRACTICE",
+    "REMOVED_OBSOLETE_POINT",
+    "NEW_REQUIRED_POINT",
+    "UNCERTAIN_NEEDS_PRIMARY"
+  ],
+  "answer_impact": {
+    "NONE": "the old answer remains essentially valid",
+    "MINOR": "small terminology, reference or date update",
+    "MODERATE": "several regulatory or procedural changes, same answer structure",
+    "MAJOR": "a candidate relying on the historical answer risks materially wrong marks because law, regulation, status or technology has changed"
+  },
+  "sourcing_hierarchy": [
+    "1. MIW True Source / verified corpus",
+    "2. official IMO instruments, circulars, resolutions",
+    "3. official Government of India / DG Shipping / Gazette",
+    "4. official IACS / Class material",
+    "5. other authoritative primary sources",
+    "6. authoritative secondary explanation, only where primary is unavailable"
+  ],
+  "object": {
+    "family_id": "string, FK to QUESTION_FAMILIES.json",
+    "historical_question_date": "YYYY-MM of the historical occurrence being compared FROM",
+    "current_answer_date": "YYYY-MM-DD, the position the delta is stated AS OF",
+    "unchanged_core": ["points that stand in both periods"],
+    "deltas": [
+      {
+        "delta_type": "one of delta_types",
+        "was": "the historical position",
+        "is_now": "the current position",
+        "in_force_from": "date the change took effect, where established",
+        "source": "citation, per sourcing_hierarchy",
+        "source_tier": "1-6",
+        "confidence": "HIGH | MEDIUM | LOW"
+      }
+    ],
+    "do_not_write_today": ["obsolete points a candidate must NOT reproduce"],
+    "state_today": ["the current verified position to write instead"],
+    "uncertainties": ["anything the session could not establish"],
+    "answer_impact": "NONE | MINOR | MODERATE | MAJOR",
+    "candidate_safe_summary": "one paragraph fit to show a candidate once verified"
+  }
+}
