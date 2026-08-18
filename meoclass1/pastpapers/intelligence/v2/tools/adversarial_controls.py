@@ -219,6 +219,151 @@ CONTROLS = [
      'List the items examined by a surveyor during an annual survey.',
      'EXACT_REPEAT|NEAR_VERBATIM',
      'the compatibility rules must not over-penalise: STATE and LIST are close'),
+    # -- Phase 3A.1: examiner demand, section 8 -----------------------------
+    # The Laptop review found that a shared SECONDARY demand marker
+    # (RESPONSIBILITY, PROCEDURAL_ACTION) floated demand_compatibility to 1.00
+    # over an opposite PRIMARY command. Every control here pairs stems that
+    # carry two demands, which is precisely what the original 21 never did.
+
+    ('P31-D1', 'describe vs criticise, shared RESPONSIBILITY marker',
+     'Describe the responsibilities of the Chief Engineer for planned '
+     'maintenance of machinery on board a motor vessel.',
+     'Criticise the responsibilities of the Chief Engineer for planned '
+     'maintenance of machinery on board a motor vessel.',
+     'TOPIC_ONLY|NO_MEANINGFUL_MATCH',
+     'the governing command must survive a matching secondary task type'),
+
+    ('P31-D2', 'explain vs list, shared RESPONSIBILITY marker',
+     'Explain the responsibilities of the Company under the ISM Code for the '
+     'safe operation of ships and pollution prevention.',
+     'List the responsibilities of the Company under the ISM Code for the '
+     'safe operation of ships and pollution prevention.',
+     'SAME_CORE_ASK|TOPIC_ONLY',
+     'an exposition is not an enumeration; adjudicated below exact/near'),
+
+    ('P31-D3', 'describe vs critically evaluate a procedure',
+     'Describe the procedure for carrying out a main engine crankcase '
+     'inspection following an oil mist detector alarm.',
+     'Critically evaluate the procedure for carrying out a main engine '
+     'crankcase inspection following an oil mist detector alarm.',
+     'TOPIC_ONLY|NO_MEANINGFUL_MATCH',
+     'critical demand against expository demand is a different question'),
+
+    ('P31-D4', 'state advantages vs discuss disadvantages',
+     'State the advantages of a controllable pitch propeller for a twin screw '
+     'vessel in coastal service.',
+     'Discuss the disadvantages of a controllable pitch propeller for a twin '
+     'screw vessel in coastal service.',
+     'TOPIC_ONLY|NO_MEANINGFUL_MATCH',
+     'strongly incompatible: opposite object and incompatible command'),
+
+    ('P31-D5', 'identical outline of CE responsibilities',
+     'Outline the responsibilities of the Chief Engineer during a bunkering '
+     'operation alongside in port.',
+     'Outline the responsibilities of the Chief Engineer during a bunkering '
+     'operation alongside in port.',
+     'EXACT_REPEAT|NEAR_VERBATIM',
+     'command differences must not be fatal in general: this is a true repeat'),
+
+    ('P31-D6', 'state of readiness is a condition, not the command STATE',
+     'Describe how lifeboat launching appliances are maintained in a state of '
+     'readiness on board a passenger ship.',
+     'Criticise how lifeboat launching appliances are maintained in a state '
+     'of readiness on board a passenger ship.',
+     'TOPIC_ONLY|NO_MEANINGFUL_MATCH',
+     'the regime mask must generalise beyond the enumerated phrases'),
+
+    # -- Phase 3A.1: negation and requirement polarity, section 10 ----------
+
+    ('P31-N1', 'required vs not required',
+     'State the equipment required to be carried on board for oil pollution '
+     'prevention under MARPOL Annex I.',
+     'State the equipment not required to be carried on board for oil '
+     'pollution prevention under MARPOL Annex I.',
+     'TOPIC_ONLY|NO_MEANINGFUL_MATCH',
+     'a candidate answering the affirmative of a negative stem fails outright'),
+
+    ('P31-N2', 'permitted vs prohibited',
+     'Explain the conditions under which discharge of oily bilge water is '
+     'permitted in a special area under MARPOL Annex I.',
+     'Explain the conditions under which discharge of oily bilge water is '
+     'prohibited in a special area under MARPOL Annex I.',
+     'TOPIC_ONLY|NO_MEANINGFUL_MATCH',
+     'opposite poles of one permission'),
+
+    ('P31-N3', 'with approval vs without approval',
+     'Describe a modification to the fuel oil system carried out with the '
+     'approval of the Administration during a voyage.',
+     'Describe a modification to the fuel oil system carried out without the '
+     'approval of the Administration during a voyage.',
+     'TOPIC_ONLY|NO_MEANINGFUL_MATCH',
+     'the legal condition is inverted, not merely qualified'),
+
+    ('P31-N4', 'shall vs shall not',
+     'State the circumstances in which the Master shall report a marine '
+     'casualty to the Administration.',
+     'State the circumstances in which the Master shall not report a marine '
+     'casualty to the Administration.',
+     'TOPIC_ONLY|NO_MEANINGFUL_MATCH',
+     'modal negation follows the modal, so the anchor must look forward'),
+
+    ('P31-N5', 'must vs may - legal force differs',
+     'The Chief Engineer must record the bunker delivery note details in the '
+     'oil record book on completion of bunkering.',
+     'The Chief Engineer may record the bunker delivery note details in the '
+     'oil record book on completion of bunkering.',
+     'SAME_CORE_ASK|TOPIC_ONLY',
+     'obligation against discretion: not exact, but not a contradiction'),
+
+    ('P31-N6', 'an incidental not must NOT destroy a same-core relationship',
+     'Describe the action to be taken by the duty engineer when the main '
+     'engine will not start on air.',
+     'Describe the action to be taken by the duty engineer when the main '
+     'engine fails to start on air.',
+     'EXACT_REPEAT|NEAR_VERBATIM',
+     'negation anchored to `start` is not a rule polarity; nothing may fire'),
+
+    # -- Phase 3A.1: technical magnitudes, section 13 -----------------------
+
+    ('P31-M1', 'sulphur 0.50 percent vs 0.10 percent',
+     'Explain the survey requirements for a vessel operating on fuel oil of '
+     '0.50 percent sulphur content in an emission control area.',
+     'Explain the survey requirements for a vessel operating on fuel oil of '
+     '0.10 percent sulphur content in an emission control area.',
+     'SAME_CORE_ASK|TOPIC_ONLY',
+     'the decimal Phase 3A could not see at all'),
+
+    ('P31-M2', 'detained two vs three consecutive years',
+     'Describe the consequences for a ship detained for two consecutive '
+     'years under the Paris MOU banning criteria.',
+     'Describe the consequences for a ship detained for three consecutive '
+     'years under the Paris MOU banning criteria.',
+     'SAME_CORE_ASK|TOPIC_ONLY',
+     'a time period is a magnitude, not a count of things to produce'),
+
+    ('P31-M3', '440 V vs 1000 V switchboard',
+     'Describe the maintenance and testing procedure for a 440 volt main '
+     'switchboard on board a motor vessel.',
+     'Describe the maintenance and testing procedure for a 1000 volt main '
+     'switchboard on board a motor vessel.',
+     'SAME_CORE_ASK|TOPIC_ONLY',
+     'both magnitudes sat outside the Phase-3A 1-20 window'),
+
+    ('P31-M4', '15 ppm vs 5 ppm oily water separator',
+     'State the alarm and stopping arrangements provided for a 15 ppm oily '
+     'water separator discharging overboard.',
+     'State the alarm and stopping arrangements provided for a 5 ppm oily '
+     'water separator discharging overboard.',
+     'SAME_CORE_ASK|TOPIC_ONLY',
+     'a statutory limit is load-bearing'),
+
+    ('P31-M5', 'mark allocation is annotation, not a technical quantity',
+     'Describe the procedure for testing the emergency generator on board a '
+     'motor vessel under load conditions. (4)',
+     'Describe the procedure for testing the emergency generator on board a '
+     'motor vessel under load conditions. [6]',
+     'EXACT_REPEAT|NEAR_VERBATIM',
+     'the Phase-3A marks exclusion must NOT regress: the bank prints no marks'),
 ]
 
 
@@ -226,15 +371,30 @@ CONTROLS = [
 # stop holding — if they all still pass, the guard is not load-bearing.
 MUTATIONS = [
     ('examiner demand removed from the classifier',
-     dict(use_demand=False), ['AD-1', 'AD-3', 'AD-13', 'AD-14']),
+     dict(use_demand=False),
+     ['AD-1', 'AD-3', 'AD-13', 'AD-14', 'P31-D1', 'P31-D3', 'P31-D4']),
     ('actor mismatch ignored',
      dict(use_actor=False), ['AD-2', 'AD-5']),
     ('short-stem floor removed',
      dict(use_short_stem=False), ['NC-5', 'AD-9']),
     ('critical numbers ignored',
-     dict(use_numbers=False), ['AD-6']),
+     dict(use_numbers=False),
+     ['AD-6', 'P31-M1', 'P31-M2', 'P31-M3', 'P31-M4']),
     ('opposite conditions ignored',
      dict(use_polarity=False), ['NC-6', 'AD-4', 'AD-12']),
+
+    # -- Phase 3A.1: the repairs must be load-bearing, not merely present ----
+    # Each of these restores the exact defect the Laptop review measured. If a
+    # mutation escapes, the repair is decoration.
+    ('P3A-1 restored: demand aggregated with max() again',
+     dict(demand_aggregate_max=True), ['P31-D1']),
+    ('P3A-2 restored: regime masking removed',
+     dict(use_regime_mask=False), ['P31-D6']),
+    ('P3A-3 restored: requirement polarity / negation removed',
+     dict(use_negation=False),
+     ['P31-N1', 'P31-N2', 'P31-N3', 'P31-N4', 'P31-N5']),
+    ('P3A-4 restored: numbers narrowed back to integers 1-20',
+     dict(numbers_small_int_only=True), ['P31-M1', 'P31-M3']),
 ]
 
 

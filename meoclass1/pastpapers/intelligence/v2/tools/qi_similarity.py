@@ -98,10 +98,15 @@ _DEMAND_LOOKUP.sort(key=lambda t: -len(t[0]))
 # it gave every PSC question a spurious STATE demand, which is how
 # `Describe ... PSC deficiency` and `Criticise ... PSC deficiency` came out
 # demand-compatible at 1.00 — the exact confusion Phase 3A exists to remove.
+# `state of readiness`, `state of repair`, `state of preservation` are all
+# nouns, and the Laptop review found the enumerated list too narrow: only
+# `state of the art` was covered, so `maintained in a state of readiness` still
+# yielded a spurious STATE demand, which then fed the demand defect below.
+# Any `state of <something>` is a condition being described, never a command.
 _REGIME_PHRASES = re.compile(
     r'\b(port state control|port state|flag state|coastal state|'
     r'member state|state part(?:y|ies)|states parties|nation state|'
-    r'state of the art)\b', re.I)
+    r'state of (?:the |a |an )?[a-z]+)\b', re.I)
 
 
 def _mask_regimes(low):
@@ -146,6 +151,68 @@ _DEMAND_PAIRS = {
 }
 
 
+# A stem carries at most two kinds of demand, and they are not interchangeable.
+#
+#   PRIMARY    the governing examiner command — DESCRIBE, CRITICISE, COMPARE.
+#              What work the candidate must actually do.
+#   SECONDARY  the task shape the work takes — RESPONSIBILITY (who is
+#              answerable), PROCEDURAL_ACTION (what steps follow).
+#
+# Phase 3A aggregated both with one max() over the whole set, so any shared
+# secondary marker floated the score to 1.00 and erased an opposite primary:
+#
+#     {DESCRIBE, RESPONSIBILITY} vs {CRITICISE, RESPONSIBILITY} -> 1.00
+#     {DESCRIBE}                 vs {CRITICISE}                 -> 0.25
+#
+# `responsibilities of` and `what action would you take` are among the
+# commonest constructions in MEO Class I stems, so this was L-4 re-entering
+# through a side door across a large fraction of the corpus. It never showed up
+# in the 21 controls because every one of them pairs single-demand stems.
+#
+# The two dimensions are now scored separately and combined with min(): a
+# matching secondary can never lift a primary conflict, and a differing
+# secondary can still demote a matching primary. max() survives only *within* a
+# dimension, where it belongs — "describe and illustrate" marks DESCRIBE twice,
+# and the charitable reading of two surface forms of one command is correct.
+#
+# This is a general rule over the taxonomy, not a special case for
+# DESCRIBE/CRITICISE: no verb pair is named anywhere in it.
+PRIMARY_COMMANDS = frozenset([
+    'STATE', 'LIST', 'DEFINE', 'DESCRIBE', 'EXPLAIN', 'DISCUSS', 'COMPARE',
+    'EVALUATE', 'CRITICISE', 'JUSTIFY', 'OUTLINE', 'CALCULATE', 'SKETCH',
+])
+SECONDARY_TASKS = frozenset(['PROCEDURAL_ACTION', 'RESPONSIBILITY'])
+
+assert PRIMARY_COMMANDS | SECONDARY_TASKS == set(DEMANDS), \
+    'every demand must be classified as primary or secondary'
+
+
+def _split_demands(d):
+    return ({x for x in d if x in PRIMARY_COMMANDS},
+            {x for x in d if x in SECONDARY_TASKS})
+
+
+def _dimension_compat(mine, theirs, cross_mine, cross_theirs):
+    """Compatibility within one demand dimension.
+
+    Silence is not evidence: two stems that both leave the dimension unmarked
+    are not thereby asking different things. When only one side marks the
+    dimension, a named cross-dimension pair is consulted before falling back to
+    the cautious 0.75, so `what action would you take` against `describe` keeps
+    scoring the 0.60 the taxonomy gives it rather than drifting upward.
+    """
+    if not mine and not theirs:
+        return 1.0                      # symmetric silence
+    if mine and theirs:
+        return max(_pair_compat(x, y) for x in mine for y in theirs)
+    have = mine or theirs
+    across = cross_theirs if mine else cross_mine
+    named = [v for h in have for c in across
+             for v in (_DEMAND_PAIRS.get((h, c)), _DEMAND_PAIRS.get((c, h)))
+             if v is not None]
+    return max(named) if named else 0.75  # one side unmarked: cautious
+
+
 def demand_compatibility(a, b):
     """Score in [0, 1] for how far two demand sets ask for the same work.
 
@@ -153,16 +220,30 @@ def demand_compatibility(a, b):
     both leave the demand implicit ("stress the issues you will address") are
     not evidence of anything, and must not be penalised — that would have
     demoted the one true positive in the control set.
+
+    The primary command governs. A shared secondary task type cannot rescue a
+    pair whose governing commands conflict.
     """
     if not a and not b:
         return 1.0           # symmetric silence: no evidence of difference
+    pa, sa = _split_demands(a)
+    pb, sb = _split_demands(b)
+    return min(_dimension_compat(pa, pb, sa, sb),
+               _dimension_compat(sa, sb, pa, pb))
+
+
+def _demand_compat_max(a, b):
+    """The Phase-3A aggregator, kept ONLY so a mutation can restore it.
+
+    This is the defect: one max() over the union of both demand dimensions, so
+    a shared RESPONSIBILITY scores {DESCRIBE, RESPONSIBILITY} against
+    {CRITICISE, RESPONSIBILITY} at 1.00. Never call it from a run.
+    """
+    if not a and not b:
+        return 1.0
     if not a or not b:
-        return 0.75          # one side unmarked: cautious, not condemning
-    best = 0.0
-    for x in a:
-        for y in b:
-            best = max(best, _pair_compat(x, y))
-    return best
+        return 0.75
+    return max(_pair_compat(x, y) for x in a for y in b)
 
 
 def _pair_compat(x, y):
@@ -318,6 +399,118 @@ def polarity_opposed(a, b):
     return False
 
 
+
+# ---------------------------------------------------------------------------
+# 3b. Requirement polarity — negation
+# ---------------------------------------------------------------------------
+# `_POLARITIES` above models opposite *situations* — lay-up against
+# reactivation, loading against discharging. It does not model the opposite of
+# a *rule*, and the Laptop review proved the cost: "the equipment required to
+# be carried" and "the equipment NOT required to be carried" scored
+# NEAR_VERBATIM. A candidate who answers the affirmative of a negative stem
+# fails outright — exactly as badly as answering for the wrong actor, which
+# Phase 3A already treats as an inversion.
+#
+# Polarity is read from anchors, not from stopword removal. `toks()` deletes
+# `not` along with the other function words, so the polarity feature must be
+# extracted from the raw text BEFORE the lexis is built — which is what
+# `Stem.__init__` does.
+#
+# Anchoring is also what keeps an incidental `not` harmless. In "the action to
+# be taken when the main engine will not start", the negation attaches to
+# `start`, which is not an anchor, so nothing fires and the pair keeps its
+# same-core relationship. Only a negated *rule word* changes the examiner's ask.
+
+_STRONG_NEG = frozenset(['not', 'never', 'without', 'cannot', 'non', 'no',
+                         'neither', 'nor'])
+# Subordinating conjunctions scope a noun far more often than the rule word
+# ("all ships EXCEPT passenger ships shall comply" does not negate `shall`),
+# so these count only when they sit immediately before the anchor.
+_WEAK_NEG = frozenset(['except', 'unless'])
+
+_NEG_LOOKBACK = 3
+
+# word -> list of (concept, pole, look_forward)
+_POLARITY_ANCHORS = {}
+
+
+def _register_anchor(words, concept, pole, look_forward=False):
+    for w in words:
+        _POLARITY_ANCHORS.setdefault(w, []).append((concept, pole,
+                                                    look_forward))
+
+
+_register_anchor(['required', 'require', 'requires', 'requirement',
+                  'requirements', 'mandatory', 'compulsory', 'obligatory'],
+                 'REQUIREMENT', 'POS')
+_register_anchor(['optional', 'voluntary', 'recommendatory', 'discretionary'],
+                 'REQUIREMENT', 'NEG')
+_register_anchor(['permitted', 'permissible', 'allowed', 'allowable',
+                  'permit', 'permits'], 'PERMISSION', 'POS')
+_register_anchor(['prohibited', 'prohibition', 'forbidden', 'banned',
+                  'barred'], 'PERMISSION', 'NEG')
+_register_anchor(['approval', 'approved', 'consent', 'authorisation',
+                  'authorization', 'sanction'], 'APPROVAL', 'POS')
+_register_anchor(['compliance', 'comply', 'complies', 'compliant',
+                  'complying'], 'COMPLIANCE', 'POS')
+_register_anchor(['acceptance', 'accepted', 'acceptable'],
+                 'ACCEPTANCE', 'POS')
+
+# Modals carry their negation *after* them — `shall not`, `may not` — so they
+# look forward as well as back. `shall` is an obligation and `may` a
+# discretion; the difference is legally material, and the FORCE concept records
+# it separately so it can demote below exactness without being treated as a
+# flat contradiction.
+_register_anchor(['shall', 'must'], 'REQUIREMENT', 'POS', look_forward=True)
+_register_anchor(['shall', 'must'], 'FORCE', 'MANDATORY', look_forward=False)
+_register_anchor(['may'], 'PERMISSION', 'POS', look_forward=True)
+_register_anchor(['may'], 'FORCE', 'DISCRETIONARY', look_forward=False)
+
+
+def _is_negated(words, i, look_forward):
+    lo = max(0, i - _NEG_LOOKBACK)
+    if any(w in _STRONG_NEG for w in words[lo:i]):
+        return True
+    if i > 0 and words[i - 1] in _WEAK_NEG:
+        return True
+    if look_forward and any(w in _STRONG_NEG for w in words[i + 1:i + 3]):
+        return True
+    return False
+
+
+_FLIP = {'POS': 'NEG', 'NEG': 'POS'}
+
+
+def requirement_polarity(text):
+    """The (concept, pole) rules a stem asserts, with negation applied."""
+    words = re.sub(r'[^a-z0-9\s]', ' ', (text or '').lower()).split()
+    found = set()
+    for i, w in enumerate(words):
+        for concept, pole, look_forward in _POLARITY_ANCHORS.get(w, ()):
+            if concept == 'FORCE':
+                found.add((concept, pole))
+                continue
+            neg = _is_negated(words, i, look_forward)
+            found.add((concept, _FLIP[pole] if neg else pole))
+    return found
+
+
+def requirement_conflict(a, b):
+    """True when the two stems assert opposite poles of the same rule."""
+    for concept, pole in a:
+        if concept == 'FORCE':
+            continue
+        if (concept, _FLIP[pole]) in b and (concept, pole) not in b:
+            return True
+    return False
+
+
+def modal_force_differs(a, b):
+    """`shall` against `may`: same subject, different legal force."""
+    fa = {p for c, p in a if c == 'FORCE'}
+    fb = {p for c, p in b if c == 'FORCE'}
+    return bool(fa and fb and not (fa & fb))
+
 # ---------------------------------------------------------------------------
 # 4. Numbers
 # ---------------------------------------------------------------------------
@@ -340,16 +533,126 @@ _MARKS = re.compile(r'\(\s*\d{1,3}\s*\)|\[\s*\d{1,3}\s*\]|\b\d{1,3}\s*marks?\b',
                     re.I)
 
 
+# Unit -> the dimension it measures. A magnitude only conflicts with another
+# magnitude of the SAME dimension: "440 V" and "16 marks" are not rival
+# readings of one quantity, and comparing raw integers across dimensions was
+# never meaningful. Single-letter units that collide with ordinary words
+# (`a`, `g`, `c`, `m`) are deliberately excluded — the cost of missing "3 m" is
+# far lower than the cost of reading "Annex a" as a quantity.
+_UNIT_OF = {}
+for _cls, _forms in [
+    ('PERCENT', ['percent', 'pct', 'percentage']),
+    ('PPM', ['ppm']),
+    ('VOLT', ['v', 'volt', 'volts', 'kv', 'kilovolt', 'kilovolts']),
+    ('POWER', ['kw', 'mw', 'hp', 'bhp', 'shp', 'kilowatt', 'kilowatts']),
+    ('PRESSURE', ['bar', 'bars', 'psi', 'kpa', 'mpa']),
+    ('TEMPERATURE', ['deg', 'degc', 'celsius', 'centigrade', 'degrees']),
+    ('MASS', ['kg', 'tonne', 'tonnes', 'mt']),
+    ('VOLUME', ['litre', 'litres', 'liter', 'liters', 'm3']),
+    ('LENGTH', ['mm', 'cm', 'km', 'metre', 'metres', 'meter', 'meters']),
+    ('TIME_SECOND', ['second', 'seconds', 'sec', 'secs']),
+    ('TIME_MINUTE', ['minute', 'minutes', 'min', 'mins']),
+    ('TIME_HOUR', ['hour', 'hours', 'hr', 'hrs']),
+    ('TIME_DAY', ['day', 'days']),
+    ('TIME_WEEK', ['week', 'weeks']),
+    ('TIME_MONTH', ['month', 'months', 'monthly']),
+    ('TIME_YEAR', ['year', 'years', 'yearly', 'annual', 'annually']),
+    ('SPEED', ['knot', 'knots', 'rpm']),
+    ('FREQUENCY', ['hz', 'hertz']),
+]:
+    for _f in _forms:
+        _UNIT_OF[_f] = _cls
+
+_UNIT_LOOKAHEAD = 2       # words between the magnitude and its unit
+
+
+def _norm_value(v):
+    """0.50 and 0.5 are one value; 440 and 440.0 are one value."""
+    return ('%.6f' % v).rstrip('0').rstrip('.') or '0'
+
+
+def _unit_after(t, pos):
+    for w in t[pos:].split()[:_UNIT_LOOKAHEAD]:
+        w = w.strip('.,;:()[]')
+        if w in _UNIT_OF:
+            return _UNIT_OF[w]
+    return None
+
+
 def numbers(text):
-    """Load-bearing cardinals: 'FIVE main problems', not 'SOLAS 74', not '(4)'."""
-    t = _MARKS.sub(' ', text.lower())
+    """Load-bearing technical magnitudes, as (dimension, value) pairs.
+
+    Phase 3A read only bare integers 1-20, so whether a load-bearing quantity
+    was caught at all was decided by which digits happened to land in that
+    window. The Laptop review measured the consequence:
+
+        '0.50 percent' -> []        # 0 and 50 both out of range
+        '0.10 percent' -> [10]      # 10 happens to be in range
+        '440 volt'     -> []        '1000 volt' -> []
+
+    and because the conflict test requires BOTH sides to be non-empty, sulphur
+    0.50% against 0.10% read as an exact repeat. Those are the numbers an MEO
+    Class I answer actually turns on.
+
+    Magnitudes are now typed by dimension and compared within a dimension. Two
+    Phase-3A exclusions are preserved deliberately:
+
+      * MARK ALLOCATIONS. `(4)`, `[6]`, `4 marks` are MIW's annotation of the
+        paper, not the examiner's question — the bank prints none, so every
+        marked modern stem would conflict with its own ancestor. Stripped
+        first, before anything else is read.
+      * INSTRUMENT NUMBERS. `SOLAS 74`, `Annex I`, `regulation 13` name a
+        document, not a quantity.
+    """
+    t = _MARKS.sub(' ', (text or '').lower()).replace('%', ' percent ')
+    out = set()
+    for m in re.finditer(r'(?<![\w.])(\d{1,4}(?:\.\d+)?)', t):
+        if _INSTRUMENT_NUM.search(t[:m.start()]):
+            continue
+        raw = m.group(1)
+        val = float(raw)
+        unit = _unit_after(t, m.end())
+        if unit:
+            out.add((unit, _norm_value(val)))
+        elif '.' in raw:
+            # A decimal is a measurement whatever it measures: nobody writes
+            # "0.50" to count things.
+            out.add(('DECIMAL', _norm_value(val)))
+        elif 1900 <= val <= 2099:
+            out.add(('YEAR_AD', _norm_value(val)))
+        elif 1 <= val <= 20:
+            out.add(('COUNT', _norm_value(val)))
+    for w, v in _WORD_NUM.items():
+        for m in re.finditer(r'\b%s\b(?=\s+\w)' % w, t):
+            out.add((_unit_after(t, m.end()) or 'COUNT', _norm_value(v)))
+    return out
+
+
+def number_conflict(a, b):
+    """True when both stems measure the same dimension and disagree.
+
+    Cross-dimension comparison is meaningless — one stem's 440 VOLT is not a
+    rival reading of the other's 3 COUNT — so only shared dimensions are
+    compared, and a dimension present on one side only is silence, not
+    evidence.
+    """
+    da, db = {}, {}
+    for u, v in a:
+        da.setdefault(u, set()).add(v)
+    for u, v in b:
+        db.setdefault(u, set()).add(v)
+    return any(da[u] != db[u] for u in set(da) & set(db))
+
+
+def _numbers_phase3a(text):
+    """The Phase-3A extractor, kept ONLY so a mutation can restore it."""
+    t = _MARKS.sub(' ', (text or '').lower())
     out = set()
     for m in re.finditer(r'\b(\d{1,3})\b', t):
-        head = t[:m.start()]
-        if _INSTRUMENT_NUM.search(head):
+        if _INSTRUMENT_NUM.search(t[:m.start()]):
             continue
         v = int(m.group(1))
-        if 1 <= v <= 20:                 # a quantity of things to produce
+        if 1 <= v <= 20:
             out.add(v)
     for w, v in _WORD_NUM.items():
         if re.search(r'\b%s\b\s+\w' % w, t):
@@ -420,14 +723,18 @@ def cont(sub, sup):
 class Stem(object):
     """The deterministic command-demand representation of one stem."""
 
-    __slots__ = ('raw', 'demands', 'actors', 'polarity', 'numbers',
-                 'lexis', 'limbs', 'distinct', 'poses_task')
+    __slots__ = ('raw', 'demands', 'actors', 'polarity', 'req_polarity',
+                 'numbers', 'numbers_phase3a', 'lexis', 'limbs', 'distinct',
+                 'poses_task')
 
-    def __init__(self, text):
+    def __init__(self, text, mask_regimes=True):
         self.raw = text or ''
         low = ' %s ' % re.sub(r'\s+', ' ', self.raw.lower())
 
-        masked = _mask_regimes(low)
+        # `mask_regimes=False` exists only so a mutation can prove the mask is
+        # load-bearing: without it `state of readiness` yields a spurious STATE
+        # on both sides, which floats the primary dimension back to 1.00.
+        masked = _mask_regimes(low) if mask_regimes else low
         self.demands = set()
         for form, dem in _DEMAND_LOOKUP:
             if re.search(r'(?<![a-z])%s(?![a-z])' % re.escape(form), masked):
@@ -450,7 +757,10 @@ class Stem(object):
             or re.search(r'\b(?:what|which|how|why|when|who|whom)\b', masked))
 
         self.polarity = polarity(self.raw)
+        # Read from the raw text: toks() deletes `not` with the stopwords.
+        self.req_polarity = requirement_polarity(self.raw)
         self.numbers = numbers(self.raw)
+        self.numbers_phase3a = _numbers_phase3a(self.raw)
         self.lexis = toks(self.raw)
         self.distinct = len(set(self.lexis))
         self.limbs = re.findall(r'\(\s*(?:[a-z]|[ivx]{1,4})\s*\)', low)
@@ -481,12 +791,21 @@ class Options(object):
     """Feature switches. Off is only for mutation testing, never for a run."""
 
     def __init__(self, use_demand=True, use_actor=True, use_short_stem=True,
-                 use_numbers=True, use_polarity=True):
+                 use_numbers=True, use_polarity=True, use_negation=True,
+                 use_regime_mask=True, demand_aggregate_max=False,
+                 numbers_small_int_only=False):
         self.use_demand = use_demand
         self.use_actor = use_actor
         self.use_short_stem = use_short_stem
         self.use_numbers = use_numbers
         self.use_polarity = use_polarity
+        self.use_negation = use_negation
+        self.use_regime_mask = use_regime_mask
+        # The last two restore the exact Phase-3A defects the Laptop review
+        # found, so the suite can prove the repairs are load-bearing rather
+        # than merely present.
+        self.demand_aggregate_max = demand_aggregate_max
+        self.numbers_small_int_only = numbers_small_int_only
 
 
 DEFAULT = Options()
@@ -495,7 +814,7 @@ DEFAULT = Options()
 class Result(object):
     __slots__ = ('cls', 'fwd', 'rev', 'containment_class', 'demand_compat',
                  'actor_rel', 'polarity_opposed', 'number_conflict',
-                 'reasons', 'a', 'b')
+                 'requirement_conflict', 'force_differs', 'reasons', 'a', 'b')
 
     def __init__(self, **kw):
         for k in self.__slots__:
@@ -533,8 +852,9 @@ def classify(a, b, opts=DEFAULT):
     is one of CLASSES. Lexical containment proposes a ceiling; every other
     feature can only lower it.
     """
-    A = a if isinstance(a, Stem) else Stem(a)
-    B = b if isinstance(b, Stem) else Stem(b)
+    mask = getattr(opts, 'use_regime_mask', True)
+    A = a if isinstance(a, Stem) else Stem(a, mask_regimes=mask)
+    B = b if isinstance(b, Stem) else Stem(b, mask_regimes=mask)
 
     fwd, rev = cont(A.lexis, B.lexis), cont(B.lexis, A.lexis)
     cc = _containment_class(fwd, rev)
@@ -548,7 +868,8 @@ def classify(a, b, opts=DEFAULT):
         return Result(
             cls='UNSCOREABLE_SHORT_STEM', fwd=fwd, rev=rev,
             containment_class=cc, demand_compat=0.0, actor_rel='UNMARKED',
-            polarity_opposed=False, number_conflict=False, a=A, b=B,
+            polarity_opposed=False, number_conflict=False,
+            requirement_conflict=False, force_differs=False, a=A, b=B,
             reasons=['stem has %d distinct content tokens, floor is %d; '
                      'a label is not a question'
                      % (short.distinct, SHORT_STEM_MIN_TOKENS)])
@@ -571,7 +892,12 @@ def classify(a, b, opts=DEFAULT):
     cap = _RANK[ceiling]
 
     # -- examiner demand ------------------------------------------------------
-    dc = demand_compatibility(A.demands, B.demands) if opts.use_demand else 1.0
+    if not opts.use_demand:
+        dc = 1.0
+    elif opts.demand_aggregate_max:
+        dc = _demand_compat_max(A.demands, B.demands)   # mutation only
+    else:
+        dc = demand_compatibility(A.demands, B.demands)
     if opts.use_demand:
         if dc < CORE_DEMAND_FLOOR:
             cap = min(cap, _RANK['TOPIC_ONLY'])
@@ -611,9 +937,27 @@ def classify(a, b, opts=DEFAULT):
         cap = min(cap, _RANK['TOPIC_ONLY'])
         reasons.append('opposite condition')
 
+    # -- requirement polarity / negation ---------------------------------------
+    rc = requirement_conflict(A.req_polarity, B.req_polarity) \
+        if opts.use_negation else False
+    if rc:
+        cap = min(cap, _RANK['TOPIC_ONLY'])
+        reasons.append('opposite requirement polarity: %s vs %s'
+                       % (sorted(A.req_polarity), sorted(B.req_polarity)))
+    fd = modal_force_differs(A.req_polarity, B.req_polarity) \
+        if opts.use_negation else False
+    if fd:
+        cap = min(cap, _RANK['SAME_CORE_ASK'])
+        reasons.append('legal force differs (shall/must vs may)')
+
     # -- numbers ---------------------------------------------------------------
-    nc = bool(A.numbers and B.numbers and A.numbers != B.numbers) \
-        if opts.use_numbers else False
+    if not opts.use_numbers:
+        nc = False
+    elif opts.numbers_small_int_only:                       # mutation only
+        nc = bool(A.numbers_phase3a and B.numbers_phase3a
+                  and A.numbers_phase3a != B.numbers_phase3a)
+    else:
+        nc = number_conflict(A.numbers, B.numbers)
     if nc:
         cap = min(cap, _RANK['SAME_CORE_ASK'])
         reasons.append('critical number changed: %s vs %s'
@@ -621,7 +965,8 @@ def classify(a, b, opts=DEFAULT):
 
     return Result(cls=_UNRANK[cap], fwd=fwd, rev=rev, containment_class=cc,
                   demand_compat=dc, actor_rel=ar, polarity_opposed=po,
-                  number_conflict=nc, reasons=reasons, a=A, b=B)
+                  number_conflict=nc, requirement_conflict=rc,
+                  force_differs=fd, reasons=reasons, a=A, b=B)
 
 
 STRONG = ('EXACT_REPEAT', 'NEAR_VERBATIM')
