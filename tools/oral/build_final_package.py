@@ -586,41 +586,88 @@ def build_human_review(d):
     return payload
 
 
+# What each research tier implies the published index should render. The map is
+# stated rather than inferred so a tier can never quietly gain a display form.
+RESEARCH_TO_DISPLAY = {
+    "PRIMARY_CONFIRMED": "confirmed",
+    "MULTI_SOURCE_CONFIRMED": "confirmed",
+    "CE_TIP": "ce_tip",
+    "INFERRED_ONLY": "inferred",
+    "HEADER": "header",
+}
+
+
 def build_retiering(d):
     """Research-only proposed tiers. Nothing is published.
 
-    The one rule that matters: a tier may never outrun its own provenance. The
-    published index, the July sheets, a topic inference and a weak note mention
-    are each evidence of something and none of them is the tracker.
+    Two distinct things are reported separately, because conflating them is how
+    "197 pairs would change tier" turns into a claim nobody can check:
+
+      a *repair*   - the published tier is not a valid literal at all, so the
+                     row silently vanishes the first time a filter is used;
+      a *proposal* - the tier is valid but is not what the evidence supports.
+
+    The one rule that governs both: a tier may never outrun its own provenance.
+    The published index, the July sheets, a topic inference and a weak note
+    mention are each evidence of something, and none of them is the tracker.
     """
-    proposals = []
+    repairs, proposals = [], []
     for r in d["rel"]:
         cur, rep = r.get("current_tier"), r.get("repaired_tier")
         best = r.get("research_best_tier")
-        if not r.get("tier_changed") and cur == rep:
-            continue
-        proposals.append({
-            "relationship_id": r["relationship_id"],
-            "examiner": r["examiner"],
-            "canonical_question_id": r["question_id"],
-            "old_tier": cur,
-            "new_tier": rep,
-            "strongest_valid_provenance": best or r.get("source_layer"),
-            "primary_evidence_count": r.get("primary_evidence_count", 0),
-            "reason": ("tier realigned to the strongest provenance the "
-                       "evidence ledger actually holds for this pair"),
-        })
-    proposals.sort(key=lambda p: p["relationship_id"])
-    t = {}
-    for p in proposals:
-        k = "%s -> %s" % (p["old_tier"], p["new_tier"])
-        t[k] = t.get(k, 0) + 1
+        implied = RESEARCH_TO_DISPLAY.get(best)
+        if cur != rep:
+            repairs.append({
+                "relationship_id": r["relationship_id"],
+                "examiner": r["examiner"],
+                "canonical_question_id": r["question_id"],
+                "old_tier": cur,
+                "new_tier": rep,
+                "reason": ("published tier is not a valid literal, so the row "
+                           "has no filter toggle and disappears on first use"),
+                "strongest_valid_provenance": best,
+            })
+        if implied and implied != cur and cur == rep:
+            proposals.append({
+                "relationship_id": r["relationship_id"],
+                "examiner": r["examiner"],
+                "canonical_question_id": r["question_id"],
+                "old_tier": cur,
+                "new_tier": implied,
+                "strongest_valid_provenance": best,
+                "primary_evidence_count": r.get("primary_evidence_count", 0),
+                "derived_sibling_evidence_count":
+                    r.get("derived_sibling_evidence_count", 0),
+                "reason": ("published tier does not match the strongest "
+                           "provenance the evidence ledger holds for this pair"),
+            })
+    repairs.sort(key=lambda x: x["relationship_id"])
+    proposals.sort(key=lambda x: x["relationship_id"])
+
+    def trans(rows):
+        t = {}
+        for x in rows:
+            k = "%s -> %s" % (x["old_tier"], x["new_tier"])
+            t[k] = t.get(k, 0) + 1
+        return dict(sorted(t.items(), key=lambda kv: (-kv[1], kv[0])))
+
+    # A promotion to confirmed that no primary evidence supports is exactly the
+    # escape mutation M5 proved was possible, so it is counted, not assumed absent.
+    unsupported = [x["relationship_id"] for x in proposals
+                   if x["new_tier"] == "confirmed"
+                   and not x["primary_evidence_count"]]
+
     payload = {
         "note": ("RESEARCH ONLY - not published. CURRENT_INDEX_RECOVERY, "
                  "JULY_DERIVED_SIBLING, TOPIC_INFERRED and NOTE_WEAK_MENTION "
                  "can never become PRIMARY_TRACKER."),
+        "invalid_literal_repairs": len(repairs),
+        "repair_transitions": trans(repairs),
         "proposed_changes": len(proposals),
-        "transitions": dict(sorted(t.items(), key=lambda kv: (-kv[1], kv[0]))),
+        "proposal_transitions": trans(proposals),
+        "proposed_confirmed_without_primary_evidence": len(unsupported),
+        "proposed_confirmed_without_primary_evidence_ids": unsupported[:20],
+        "repairs": repairs,
         "proposals": proposals,
     }
     dump(payload, "FINAL_RETIERING_PROPOSAL.json")
