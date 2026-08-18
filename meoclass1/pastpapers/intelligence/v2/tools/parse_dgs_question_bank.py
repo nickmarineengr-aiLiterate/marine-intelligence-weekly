@@ -21,12 +21,25 @@ Not every oddity is ours to fix. Item 181 prints its limbs lettered a, b, d, c
 at descending y: that is the Directorate's own mislettering, the parser reads it
 in the order printed, and it is preserved verbatim.
 """
-import json, re, sys
+import argparse, json, os, re, sys
 from pdfminer.high_level import extract_pages
 from pdfminer.layout import LTTextContainer, LAParams
 
-PDF = r'D:\MIW-Historical-QP-Intake\dgshipping\dgs_meo_cl1_written_questions.pdf'
-OUT = r'D:\MIW-Historical-QP-Intake\dgshipping\dgs_meo_cl1_bank_items.json'
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import qi_paths
+
+# The PDF binary is deliberately NOT committed: SOURCE_MANIFEST.json carries the
+# retrieval recipe and sha256 that re-obtain and re-verify it on demand. Give
+# --pdf the path to a re-obtained copy. The default output is the committed
+# extract, so re-running this tool regenerates exactly what the repo carries.
+_ap = argparse.ArgumentParser(description=__doc__)
+_ap.add_argument('--pdf', required=True,
+                 help='path to a re-obtained dgs_meo_cl1_written_questions.pdf')
+_ap.add_argument('--out', default=qi_paths.EXTRACTED_BANK,
+                 help='where to write the extract (default: the committed one)')
+_args = _ap.parse_args()
+PDF = _args.pdf
+OUT = _args.out
 
 lines = []  # (page, y_top, x0, text)
 for pno, page in enumerate(extract_pages(PDF, laparams=LAParams(line_margin=0.3))):

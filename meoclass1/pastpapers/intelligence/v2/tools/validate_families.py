@@ -22,23 +22,30 @@ import os
 import re
 import sys
 
-HERE = os.path.dirname(os.path.abspath(__file__))
-V2 = os.path.dirname(HERE)
-PASTPAPERS = os.path.dirname(os.path.dirname(V2))
-SPECS = os.path.join(PASTPAPERS, 'specs')
-HIST = os.path.join(PASTPAPERS, 'intelligence', 'historical_qp_intelligence.json')
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import qi_paths                                                   # noqa: E402
 
-FAMILIES = os.path.join(V2, 'QUESTION_FAMILIES.json')
-OCCURRENCES = os.path.join(V2, 'QUESTION_OCCURRENCES.jsonl')
-MANIFEST = os.path.join(V2, 'SOURCE_MANIFEST.json')
-BANK = os.path.join(V2, 'OFFICIAL_BANK_ITEMS.json')
+HERE = qi_paths.TOOLS
+V2 = qi_paths.V2
+PASTPAPERS = qi_paths.PASTPAPERS
+SPECS = qi_paths.SPECS
+HIST = qi_paths.HIST
+
+FAMILIES = qi_paths.FAMILIES
+OCCURRENCES = qi_paths.OCCURRENCES
+MANIFEST = qi_paths.MANIFEST
+BANK = qi_paths.BANK
+VERIFICATION = qi_paths.VERIFICATION
 
 MONTHS = {'JAN': 1, 'FEB': 2, 'MAR': 3, 'APR': 4, 'MAY': 5, 'JUN': 6,
           'JUL': 7, 'AUG': 8, 'SEP': 9, 'OCT': 10, 'NOV': 11, 'DEC': 12}
 
-# The full extracted bank, outside git in the raw intake directory. The curated
-# subset in OFFICIAL_BANK_ITEMS.json is checked back against it.
-EXTRACTED_BANK = r'D:\MIW-Historical-QP-Intake\dgshipping\dgs_meo_cl1_bank_items.json'
+# The full extracted bank, committed under pastpapers/sources/official so that
+# referential integrity is executable on every machine. Phase 3A resolved this
+# to the Desktop intake directory, which made C32/C33 skip silently on the
+# integration authority's machine and let a tampered-bank-text mutation escape.
+# The curated subset in OFFICIAL_BANK_ITEMS.json is checked back against it.
+EXTRACTED_BANK = qi_paths.EXTRACTED_BANK
 
 # Which source classes can carry a DATE. A question bank cannot: it is undated
 # by construction, and that is the whole point of keeping ancestry and dating

@@ -65,7 +65,7 @@ the evidence is first-rate.
 (`BANK-3`, the dry-docking welding-fire question) carries an inline `(Oct-05)`,
 at the very end of its text. Phase 2's prose attached that annotation to
 `BANK-4`; the extractor had it right and only the write-up was wrong. Check
-`C29` now reads the annotation back out of the extracted bank, so the claim is
+`C33` now reads the annotation back out of the extracted bank, so the claim is
 derived rather than remembered. The DGS upload prefix dates *publication*
 to 12 February 2018, and item `BANK-144` cites the Manila amendments of 25 June
 2010 — so the **document** sits between 2010 and February 2018. That bounds the

@@ -24,9 +24,13 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import qi_similarity as qs                                        # noqa: E402
+import qi_paths                                                   # noqa: E402
 
-BANK = r'D:\MIW-Historical-QP-Intake\dgshipping\dgs_meo_cl1_bank_items.json'
-SPECS = r'D:\Marine-Intelligence-Weekly\meoclass1\pastpapers\specs'
+# Phase 3A pointed both of these at an absolute Desktop drive. SPECS is
+# committed repository content sitting two directories above this tool, so the
+# sweep and the QP2608 Paper DNA were not reproducible from a clean checkout.
+BANK = qi_paths.EXTRACTED_BANK
+SPECS = qi_paths.SPECS
 
 # Classes the layer treats as a strong recurrence signal.
 STRONG = ('EXACT_REPEAT', 'NEAR_VERBATIM')
