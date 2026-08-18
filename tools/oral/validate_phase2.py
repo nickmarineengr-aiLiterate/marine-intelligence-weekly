@@ -34,6 +34,16 @@ RESEARCH_TIERS = {"MULTI_SOURCE_CONFIRMED", "PRIMARY_CONFIRMED",
 # The evidence tier vocabulary lives with the provenance model, so a tier can
 # never be added without a statement of what provenance may carry it.
 EVIDENCE_TIERS = P.EVIDENCE_TIERS
+# Stated here rather than imported from the builder: the gate must fail if the
+# builder invents a seventh production action, which it cannot do if it is the
+# builder that defines the vocabulary the gate checks against.
+PRODUCTION_ACTIONS = {"NO_ACTION_ALREADY_COVERED", "CONNECT_EXISTING",
+                      "CONNECT_AND_ENRICH", "NOTES_TO_QB_PROMOTION",
+                      "NEW_ANSWER_REQUIRED", "MERGE_WITH_EXISTING_GAP",
+                      "HUMAN_REVIEW"}
+P0_ACTIONS = {"P0_NEW_ANSWER", "P0_ENRICH_EXISTING_QB",
+              "P0_NOTES_TO_QB_PROMOTION", "P0_MERGE_WITH_OTHER",
+              "P0_HUMAN_REVIEW"}
 
 results = []
 
@@ -49,6 +59,13 @@ def jsonl(name):
     if not p.exists():
         return None
     return [json.loads(l) for l in p.open(encoding="utf-8")]
+
+
+def jsonobj(name):
+    p = OUT / name
+    if not p.exists():
+        return None
+    return json.loads(p.read_text(encoding="utf-8"))
 
 
 def main():
@@ -345,6 +362,163 @@ def main():
         bad = [c["source_id"] for c in n_cov for u in
                c["notes_units_naming_this_examiner"] if u not in by_unit]
         check("every examiner-cued unit reference resolves", not bad,
+              str(bad[:5]))
+
+    # --- Phase 2A-iii final package ------------------------------------------
+    # The final datasets are what a production session and the index generator
+    # will read. An error here is not a reporting error, it is a wrong answer
+    # or a wrong connection in front of a candidate.
+    final = jsonl("FINAL_788_PRODUCTION_DISPOSITION.jsonl")
+    if final is None:
+        check("final 788 production dataset present", False,
+              "FINAL_788_PRODUCTION_DISPOSITION.jsonl missing")
+    else:
+        src_ids = {r["source_id"] for r in src}
+        fin_ids = [r["source_id"] for r in final]
+        check("every source occurrence reaches the final dataset",
+              set(fin_ids) == src_ids and len(fin_ids) == len(src_ids),
+              "final %d vs source %d" % (len(fin_ids), len(src_ids)))
+        check("no duplicate source occurrence in the final dataset",
+              len(fin_ids) == len(set(fin_ids)),
+              str([k for k, v in Counter(fin_ids).items() if v > 1][:5]))
+
+        bad = [r["source_id"] for r in final
+               if r["content_disposition"] not in CONTENT_DISPOSITIONS]
+        check("every final row carries exactly one known content disposition",
+              not bad, str(bad[:5]))
+
+        bad = [r["source_id"] for r in final
+               if r["notes_support"] not in C.SUPPORT_TIERS]
+        check("every final row carries exactly one known Notes support tier",
+              not bad, str(bad[:5]))
+
+        bad = [r["source_id"] for r in final
+               if r["examiner_mapping_status"] not in MAPPING_STATUSES]
+        check("every final row carries a valid examiner mapping status",
+              not bad, str(bad[:5]))
+
+        bad = [r["source_id"] for r in final
+               if r["production_action"] not in PRODUCTION_ACTIONS]
+        check("every final row carries exactly one production action",
+              not bad, str(bad[:5]))
+
+        # A MISSING ask over complete Notes is a promotion. Calling it a new
+        # answer would have a production session research from zero material
+        # MIW already holds, which is the specific waste this layer exists to
+        # prevent.
+        bad = [r["source_id"] for r in final
+               if r["content_disposition"] == "MISSING"
+               and r["notes_support"] in ("NOTES_COMPLETE_SUPPORT",
+                                          "NOTES_STRONG_SUPPORT")
+               and r["production_action"] != "NOTES_TO_QB_PROMOTION"]
+        check("a MISSING ask over strong Notes is a promotion, not a new answer",
+              not bad, str(bad[:5]))
+
+        bad = [r["source_id"] for r in final
+               if r["matched_question_id"] and r["matched_question_id"] not in inv]
+        check("every final canonical target resolves to a live question",
+              not bad, str(bad[:5]))
+
+    rel = jsonobj("RELEASE_A_CONNECTIONS.json")
+    if rel is None:
+        check("Release-A dataset present", False,
+              "RELEASE_A_CONNECTIONS.json missing")
+    else:
+        conns = rel["connections"]
+        keys = [(c["examiner"], c["canonical_question_id"]) for c in conns]
+        check("no duplicate Release-A relationship",
+              len(keys) == len(set(keys)),
+              str([k for k, v in Counter(keys).items() if v > 1][:5]))
+        check("Release-A pair count matches its own records",
+              rel["unique_pairs"] == len(conns),
+              "%s vs %d" % (rel["unique_pairs"], len(conns)))
+
+        bad = [c["relation_id"] for c in conns
+               if c["canonical_question_id"] not in inv]
+        check("every Release-A target resolves to a live question", not bad,
+              str(bad[:5]))
+        bad = [c["relation_id"] for c in conns
+               if c["anchor"] not in anchors.get(c["file"], set())]
+        check("every Release-A target anchor exists on its page", not bad,
+              str(bad[:5]))
+        bad = [c["relation_id"] for c in conns if not c["examiner"]
+               or c["examiner"] not in known]
+        check("every Release-A examiner resolves in the alias register",
+              not bad, str(bad[:5]))
+
+        # The two exclusions the review made conditions of authorising a
+        # release at all.
+        bad = [c["relation_id"] for c in conns
+               if c["strongest_evidence_tier"] in ("TOPIC_INFERRED",
+                                                   "NOTE_WEAK_MENTION")]
+        check("no Release-A relationship rests on inference alone", not bad,
+              str(bad[:5]))
+        bad = [c["relation_id"] for c in conns
+               if c["strongest_evidence_tier"] in ("CURRENT_INDEX_RECOVERY",
+                                                   "JULY_DERIVED_SIBLING",
+                                                   "CE_TIP")]
+        check("no Release-A relationship rests on a derived or page-declared "
+              "source alone", not bad, str(bad[:5]))
+
+        ev_ids = {e["evidence_id"] for e in ev} | {e["evidence_id"] for e in
+                                                   (jsonl("ORAL_NOTES_EXAMINER_EVIDENCE.jsonl") or [])}
+        bad = [c["relation_id"] for c in conns
+               for e in c["evidence_ids"] if e not in ev_ids]
+        check("every Release-A evidence id resolves to an evidence record",
+              not bad, str(bad[:5]))
+
+        if final is not None:
+            fin_ids = {r["source_id"] for r in final}
+            bad = [c["relation_id"] for c in conns
+                   for sid in c["source_occurrence_ids"] if sid not in fin_ids]
+            check("every Release-A source occurrence resolves", not bad,
+                  str(bad[:5]))
+            # A pair carried by the compilation must actually hold an EXACT or
+            # NEAR row; a SAME_CORE row may not carry one on its own.
+            by_sid = {r["source_id"]: r for r in final}
+            bad = []
+            for c in conns:
+                if c["strongest_evidence_tier"] != "EXTERNAL_SOURCE_CONFIRMED":
+                    continue
+                d = [by_sid[s]["content_disposition"]
+                     for s in c["source_occurrence_ids"] if s in by_sid]
+                if not any(x in ("EXACT_MATCH", "NEAR_MATCH") for x in d):
+                    bad.append(c["relation_id"])
+            check("no Release-A pair rests on a SAME_CORE-only external row",
+                  not bad, str(bad[:5]))
+
+    p0 = jsonobj("FINAL_P0_PRODUCTION_BATCH.json")
+    if p0 is None:
+        check("final P0 batch present", False,
+              "FINAL_P0_PRODUCTION_BATCH.json missing")
+    else:
+        items = p0["items"]
+        ids = [i["production_id"] for i in items]
+        check("every P0 production id is unique", len(ids) == len(set(ids)),
+              str([k for k, v in Counter(ids).items() if v > 1][:5]))
+        fams = [i["gap_id"] for i in items]
+        check("no duplicate P0 production family",
+              len(fams) == len(set(fams)),
+              str([k for k, v in Counter(fams).items() if v > 1][:5]))
+        check("P0 count matches its own records", p0["p0_count"] == len(items),
+              "%s vs %d" % (p0["p0_count"], len(items)))
+        bad = [i["production_id"] for i in items
+               if i["production_action"] not in P0_ACTIONS]
+        check("every P0 item carries exactly one production action", not bad,
+              str(bad[:5]))
+        if final is not None:
+            fin_ids = {r["source_id"] for r in final}
+            bad = [i["production_id"] for i in items
+                   for s in i["source_occurrence_ids"] if s not in fin_ids]
+            check("every P0 source occurrence resolves", not bad, str(bad[:5]))
+        bad = [i["production_id"] for i in items
+               if i["current_closest_qb"] and i["current_closest_qb"] not in inv]
+        check("every P0 reuse target resolves to a live question", not bad,
+              str(bad[:5]))
+        # A merged family may not also stand as its own P0 item.
+        merged = set(p0["merged_families"])
+        bad = [i["production_id"] for i in items if i["gap_id"] in merged]
+        check("no merged family also ships as its own P0 item", not bad,
               str(bad[:5]))
 
     # --- boundary: this phase writes no live candidate page ------------------

@@ -28,28 +28,59 @@ OUT = L.OUT
 TOOLS = Path(__file__).resolve().parent
 
 # One entry per generator, so a new artefact cannot be added without stating
-# which script produces it.
-GENERATORS = {
-    "reconcile_788.py": [
+# which script produces it. This is an ordered sequence rather than a mapping
+# because the Phase 2A-iii package reads what the earlier generators write -
+# the Notes coverage carries each occurrence's canonical disposition, and the
+# final package reads both - so alphabetical order would run the consumers
+# before the producers.
+GENERATORS = (
+    ("reconcile_788.py", [
         "ORAL_788_RECONCILIATION.jsonl",
         "ORAL_GAP_CANDIDATES.json",
         "HUMAN_REVIEW_QUEUE.json",
         "ORAL_788_RECONCILIATION_SUMMARY.json",
-    ],
+    ]),
     # Phase 2A-ii. The Notes layer walks a directory, groups by set membership
     # and sorts note units, examiner cues and coverage hits - every one of
     # which is a place where iteration order could reach the emitted bytes.
-    "ingest_oral_notes.py": [
+    ("ingest_oral_notes.py", [
         "ORAL_NOTES_INVENTORY.json",
         "ORAL_NOTES_UNITS.jsonl",
         "ORAL_NOTES_EXAMINER_EVIDENCE.jsonl",
         "ORAL_NOTES_CUE_AUDIT.json",
         "ORAL_NOTES_COVERAGE.jsonl",
         "ORAL_NOTES_COVERAGE_SUMMARY.json",
-    ],
-}
+    ]),
+    # Phase 2A-ii impact layer: reads the reconciliation, so it follows it.
+    ("report_notes_impact.py", [
+        "ORAL_NOTES_P0_IMPACT.json",
+        "ORAL_NOTES_REVERSE_CONNECTIONS.json",
+    ]),
+    # Phase 2A-iii final package: Release A, P0, movement and review residue.
+    # Every one of these is read by a production session or by the index
+    # generator, so an artefact whose bytes move under a hash seed is an
+    # artefact nobody can review or diff.
+    ("build_final_package.py", [
+        "FINAL_788_PRODUCTION_DISPOSITION.jsonl",
+        "RECONCILIATION_MOVEMENT_REPORT.json",
+        "RELEASE_A_CONNECTIONS.json",
+        "RELEASE_A_EXCLUSIONS.json",
+        "FINAL_ORAL_GAP_CANDIDATES.json",
+        "FINAL_P0_PRODUCTION_BATCH.json",
+        "FINAL_HUMAN_REVIEW_QUEUE.json",
+        "FINAL_RETIERING_PROPOSAL.json",
+        "DISPLAY_TEXT_CORRECTION_CANDIDATES.json",
+    ]),
+    ("report_final_recompute.py", [
+        "PHASE2A_III_FINAL_RECOMPUTE_SUMMARY.json",
+        "RELEASE_A_CONNECTIONS.md",
+        "FINAL_P0_PRODUCTION_BATCH.md",
+        "RECONCILIATION_MOVEMENT_REPORT.md",
+        "DISPLAY_TEXT_CORRECTION_CANDIDATES.md",
+    ]),
+)
 
-GENERATED = [n for names in GENERATORS.values() for n in names]
+GENERATED = [n for _, names in GENERATORS for n in names]
 
 # Two seeds, deliberately different, so any residual dependence on set or dict
 # iteration order shows up as a byte difference rather than hiding behind a
@@ -60,7 +91,7 @@ SEEDS = ("0", "1", "524287")
 def run(seed):
     env = dict(os.environ, PYTHONHASHSEED=seed, PYTHONIOENCODING="utf-8")
     _rewind()
-    for script in sorted(GENERATORS):
+    for script, _ in GENERATORS:
         p = subprocess.run([sys.executable, str(TOOLS / script)],
                            capture_output=True, text=True,
                            cwd=str(L.REPO), env=env)

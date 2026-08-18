@@ -55,6 +55,16 @@ def _write_jsonl(name, rows):
             fh.write(json.dumps(r, ensure_ascii=False) + "\n")
 
 
+def _json(name):
+    return json.loads((OUT / name).read_text(encoding="utf-8"))
+
+
+def _write_json(name, obj):
+    (OUT / name).write_text(
+        json.dumps(obj, indent=2, ensure_ascii=False) + "\n",
+        encoding="utf-8", newline="\n")
+
+
 REL = "CURRENT_EXAMINER_RELATIONSHIPS.jsonl"
 EV = "EXAMINER_EVIDENCE_LEDGER_V2.jsonl"
 SRC = "ALL_SURVEYORS_SOURCE_RECORDS.jsonl"
@@ -63,6 +73,91 @@ RESULTS = "PHASE2_VALIDATION_RESULTS.json"
 NUNITS = "ORAL_NOTES_UNITS.jsonl"
 NEV = "ORAL_NOTES_EXAMINER_EVIDENCE.jsonl"
 NCOV = "ORAL_NOTES_COVERAGE.jsonl"
+FIN = "FINAL_788_PRODUCTION_DISPOSITION.jsonl"
+RELA = "RELEASE_A_CONNECTIONS.json"
+P0B = "FINAL_P0_PRODUCTION_BATCH.json"
+
+
+# Phase 2A-iii final package. These break the datasets a production session
+# and the index generator will actually read, which is where a defect stops
+# being a reporting error and becomes a wrong answer in front of a candidate.
+def m_final_source_dropped():
+    """A source occurrence vanishes from the final dataset."""
+    rows = _jsonl(FIN)
+    _write_jsonl(FIN, rows[1:])
+
+
+def m_final_two_dispositions():
+    """One occurrence carries two content dispositions."""
+    rows = _jsonl(FIN)
+    dup = dict(rows[0])
+    dup["content_disposition"] = ("MISSING"
+                                  if rows[0]["content_disposition"] != "MISSING"
+                                  else "EXACT_MATCH")
+    rows.append(dup)
+    _write_jsonl(FIN, rows)
+
+
+def m_release_inferred_only():
+    """Release A admits a pair carried only by a topic inference."""
+    o = _json(RELA)
+    o["connections"][0]["strongest_evidence_tier"] = "TOPIC_INFERRED"
+    o["connections"][0]["evidence_tiers"] = ["TOPIC_INFERRED"]
+    _write_json(RELA, o)
+
+
+def m_release_same_core_only():
+    """An external Release-A pair whose only source row is SAME_CORE.
+
+    The pair keeps a healthy-looking tier and a resolving target; the only
+    thing wrong with it is that nothing behind it is an EXACT or NEAR row.
+    """
+    fin = {r["source_id"]: r for r in _jsonl(FIN)}
+    same_core = sorted(sid for sid, r in fin.items()
+                       if r["content_disposition"] == "SAME_CORE_ASK")
+    o = _json(RELA)
+    for c in o["connections"]:
+        if c["strongest_evidence_tier"] == "EXTERNAL_SOURCE_CONFIRMED":
+            c["source_occurrence_ids"] = [same_core[0]]
+            break
+    _write_json(RELA, o)
+
+
+def m_release_broken_anchor():
+    """A Release-A target anchor that does not exist on its page."""
+    o = _json(RELA)
+    c = o["connections"][0]
+    c["anchor"] = "q99999"
+    c["canonical_question_id"] = c["canonical_question_id"].rsplit("#", 1)[0] \
+        + "#q99999"
+    _write_json(RELA, o)
+
+
+def m_p0_duplicate_family():
+    """Two P0 items claiming the same production family."""
+    o = _json(P0B)
+    dup = dict(o["items"][0])
+    dup["production_id"] = dup["production_id"] + "-DUP"
+    o["items"].append(dup)
+    o["p0_count"] = len(o["items"])
+    _write_json(P0B, o)
+
+
+def m_promotion_relabelled_new_answer():
+    """A MISSING ask over complete Notes relabelled as a new answer.
+
+    The GIRDING fixture is the deterministic case: MIW holds a dedicated Notes
+    section for it, so calling it research-from-zero would send a production
+    session to write material it already has.
+    """
+    rows = _jsonl(FIN)
+    for r in rows:
+        if (r["content_disposition"] == "MISSING"
+                and r["notes_support"] in ("NOTES_COMPLETE_SUPPORT",
+                                           "NOTES_STRONG_SUPPORT")):
+            r["production_action"] = "NEW_ANSWER_REQUIRED"
+            break
+    _write_jsonl(FIN, rows)
 
 
 def m_wrong_anchor():
@@ -238,6 +333,18 @@ DATA_MUTATIONS = [
      m_note_support_without_unit),
     ("M14c Notes support relabelled as a canonical disposition", [NCOV],
      m_note_support_uses_canonical_word),
+    ("M20 final dataset drops a source occurrence", [FIN],
+     m_final_source_dropped),
+    ("M21 final dataset gives one occurrence two dispositions", [FIN],
+     m_final_two_dispositions),
+    ("M22 Release A admits an inferred-only pair", [RELA],
+     m_release_inferred_only),
+    ("M23 Release A admits a SAME_CORE-only external pair", [RELA],
+     m_release_same_core_only),
+    ("M24 Release A target anchor broken", [RELA], m_release_broken_anchor),
+    ("M25 duplicate P0 production family", [P0B], m_p0_duplicate_family),
+    ("M26 Notes promotion relabelled as a new answer", [FIN],
+     m_promotion_relabelled_new_answer),
 ]
 
 
