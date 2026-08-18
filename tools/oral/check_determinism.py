@@ -59,6 +59,7 @@ SEEDS = ("0", "1", "524287")
 
 def run(seed):
     env = dict(os.environ, PYTHONHASHSEED=seed, PYTHONIOENCODING="utf-8")
+    _rewind()
     for script in sorted(GENERATORS):
         p = subprocess.run([sys.executable, str(TOOLS / script)],
                            capture_output=True, text=True,
@@ -83,16 +84,33 @@ def _save(before):
         (SNAPSHOT / n).write_bytes(b)
 
 
-def _restore_from_disk():
+def _rewind():
+    """Put every snapshotted artefact back, WITHOUT consuming the snapshot.
+
+    One generator reads an artefact another generator writes: the Notes
+    coverage carries each occurrence's canonical disposition, which comes from
+    ORAL_788_RECONCILIATION.jsonl. Running the seeds back to back therefore fed
+    the second seed a reconciliation the first seed had just rewritten, and the
+    coverage differed for that reason rather than for a seed-dependent one.
+    Reproducibility means the same INPUTS under a different seed, so each seed
+    starts from the same state.
+    """
     if not SNAPSHOT.is_dir():
         return []
-    restored = []
+    names = []
     for p in sorted(SNAPSHOT.iterdir()):
         (OUT / p.name).write_bytes(p.read_bytes())
-        restored.append(p.name)
-        p.unlink()
-    SNAPSHOT.rmdir()
-    return restored
+        names.append(p.name)
+    return names
+
+
+def _restore_from_disk():
+    names = _rewind()
+    if SNAPSHOT.is_dir():
+        for p in sorted(SNAPSHOT.iterdir()):
+            p.unlink()
+        SNAPSHOT.rmdir()
+    return names
 
 
 def main():
