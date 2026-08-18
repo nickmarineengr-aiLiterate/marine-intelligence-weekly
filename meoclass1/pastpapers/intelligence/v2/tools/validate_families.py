@@ -16,6 +16,7 @@ from __future__ import unicode_literals
 
 import argparse
 import copy
+import hashlib
 import io
 import json
 import os
@@ -47,6 +48,13 @@ MONTHS = {'JAN': 1, 'FEB': 2, 'MAR': 3, 'APR': 4, 'MAY': 5, 'JUN': 6,
 # integration authority's machine and let a tampered-bank-text mutation escape.
 # The curated subset in OFFICIAL_BANK_ITEMS.json is checked back against it.
 EXTRACTED_BANK = qi_paths.EXTRACTED_BANK
+
+# The manifest entry that declares the extract's bytes and sha256.
+BANK_SOURCE_ID = 'SRC-DGS-QBANK-ARCHIVED'
+
+# Every check downstream of the extract says exactly this and nothing else, so
+# one missing file produces one explanation rather than six rival ones.
+UNAVAILABLE = 'unavailable - C46 REQUIRED_SOURCE_MISSING'
 
 # Which source classes can carry a DATE. A question bank cannot: it is undated
 # by construction, and that is the whole point of keeping ancestry and dating
@@ -130,14 +138,74 @@ class Report(object):
 
 
 def load_extracted_bank():
-    """The 185-item extract, or None when the raw intake tree is absent."""
+    """The 185-item extract, and the reason it is unusable if it is.
+
+    Returns ``(items, problem)``. ``problem`` is None when the extract loaded;
+    otherwise it is a one-line statement of what is wrong with the file, and
+    ``items`` is None.
+
+    Phase 3A returned a bare None here and every caller read it as "this
+    machine has no intake directory", which was true then: the extract lived
+    outside the repository. Phase 3A.1 committed it, and that inverted the
+    meaning of absence without anyone revisiting this function. The Laptop
+    review measured the consequence - deleting one tracked file switched off
+    C32, C33 and the whole C40-C42 ancestor guard, dropped the check count from
+    200 to 170, and the validator reported success. Absence is now a checkout
+    or tampering failure, and the distinction is the caller's to enforce.
+    """
     if not os.path.exists(EXTRACTED_BANK):
-        return None
+        return None, 'file does not exist'
     try:
-        return {int(k): v for k, v
-                in load_json(EXTRACTED_BANK)['items'].items()}
-    except (ValueError, KeyError):
+        raw = load_json(EXTRACTED_BANK)
+    except Exception as exc:                                      # noqa: BLE001
+        return None, 'file is not readable as JSON (%s)' % exc
+    if not isinstance(raw, dict) or not isinstance(raw.get('items'), dict):
+        return None, 'file has no "items" object'
+    try:
+        items = {int(k): v for k, v in raw['items'].items()}
+    except (TypeError, ValueError) as exc:
+        return None, 'item numbers are not integers (%s)' % exc
+    if any(not isinstance(v, type(u'')) or not v.strip()
+           for v in items.values()):
+        return None, 'one or more items carry no text'
+    return items, None
+
+
+def extract_integrity(manifest, rep):
+    """C46/C47: the required source is present, and it is the required bytes.
+
+    C46 is the ROOT check. Everything C32-C34 and C40-C42 assert is downstream
+    of it, so when C46 fails those report as unavailable rather than each
+    inventing its own explanation of the same single fact.
+
+    C47 verifies the manifest's recorded sha256 against the bytes actually
+    checked out, not against a remembered value. The manifest has carried
+    `extracted_json_sha256` since Phase 3A.1 and nothing read it, so the
+    extract could be edited freely as long as the edit kept 185 well-formed
+    items. Hashing the raw bytes also holds the line on the CRLF trap:
+    `.gitattributes` pins *.json to LF, and if that pin were ever lost this
+    check is what notices.
+    """
+    items, problem = load_extracted_bank()
+    ok = rep.check('C46 the required DGS bank extract is present and loadable',
+                   problem is None,
+                   'REQUIRED_SOURCE_MISSING: %s - %s'
+                   % (EXTRACTED_BANK, problem))
+    if not ok:
         return None
+
+    blob = io.open(EXTRACTED_BANK, 'rb').read()
+    got = hashlib.sha256(blob).hexdigest().upper()
+    want, want_bytes = None, None
+    for src in manifest.get('sources', []):
+        if src.get('source_id') == BANK_SOURCE_ID:
+            want = (src.get('extracted_json_sha256') or '').upper()
+            want_bytes = src.get('extracted_json_bytes')
+    detail = ('extract is %d bytes sha256 %s; the manifest declares %s bytes '
+              'sha256 %s' % (len(blob), got, want_bytes, want))
+    rep.check('C47 the bank extract is the bytes the manifest declares',
+              bool(want) and got == want and len(blob) == want_bytes, detail)
+    return items
 
 
 def date_evidence(occ, src_by_id):
@@ -285,10 +353,10 @@ def validate(fam_doc, occ_rows, manifest, bank, specs, hist_ids, rep,
               'empty: %s' % empty)
 
     if extracted is None:
-        rep.skip('C32 curated bank text matches the 185-item extract',
-                 'raw intake tree not present at %s' % EXTRACTED_BANK)
-        rep.skip('C33 the (Oct-05) annotation is derived, not remembered',
-                 'raw intake tree not present')
+        for name in ('C32 curated bank text matches the 185-item extract',
+                     'C33 the (Oct-05) annotation is derived, not remembered',
+                     'C34 the extract still holds all 185 items'):
+            rep.check(name, False, UNAVAILABLE)
     else:
         mismatch = []
         for b in items:
@@ -681,12 +749,10 @@ def bank_ancestor_semantics(fam_doc, occ_by_id, specs, extracted, rep):
     — the EM-0008/EM-0009 mislabel was live in the write-ups at the same time.
     """
     if extracted is None:
-        rep.skip('C40 occurrence ancestors lie within the family declaration',
-                 'extract absent')
-        rep.skip('C41 the family representative fits its declared ancestor',
-                 'extract absent')
-        rep.skip('C42 no undeclared bank item fits the family better',
-                 'extract absent')
+        for name in ('C40 occurrence ancestors lie within the family declaration',
+                     'C41 the family representative fits its declared ancestor',
+                     'C42 no undeclared bank item fits the family better'):
+            rep.check(name, False, UNAVAILABLE)
         return
 
     bank_stems = {}
@@ -1001,6 +1067,108 @@ def _strip_prior_sources(fam_doc, occ_rows):
         r['source_ids'] = []
 
 
+# Required-source mutations. These corrupt the extract FILE rather than the
+# in-memory documents, because the defect the Laptop review found was in how
+# the file's absence was interpreted, and no in-memory mutation can reach that.
+# Each returns the bytes to write in place of the real extract (None = delete
+# the file), plus an optional edit to the manifest entry that declares its hash.
+def _drop_item(blob):
+    d = json.loads(blob.decode('utf-8'))
+    d['items'].pop(sorted(d['items'], key=int)[0])
+    return json.dumps(d, ensure_ascii=False, indent=2).encode('utf-8')
+
+
+def _tamper_item(blob):
+    d = json.loads(blob.decode('utf-8'))
+    k = sorted(d['items'], key=int)[0]
+    d['items'][k] = d['items'][k] + ' and state the penalty.'
+    return json.dumps(d, ensure_ascii=False, indent=2).encode('utf-8')
+
+
+def _to_crlf(blob):
+    return blob.replace(b'\r\n', b'\n').replace(b'\n', b'\r\n')
+
+
+EXTRACT_MUTATIONS = [
+    ('delete the required bank extract',
+     lambda blob: (None, None), 'C46'),
+    ('leave the extract unparseable as JSON',
+     lambda blob: (b'{"items": {1: broken', None), 'C46'),
+    ('strip the items object out of the extract',
+     lambda blob: (b'{"note": "no items here"}', None), 'C46'),
+    ('blank the text of one extract item',
+     lambda blob: (json.dumps(
+         dict(json.loads(blob.decode('utf-8')),
+              items=dict(json.loads(blob.decode('utf-8'))['items'],
+                         **{'1': '   '})),
+         ensure_ascii=False).encode('utf-8'), None), 'C46'),
+    ('remove one of the 185 items',
+     lambda blob: (_drop_item(blob), None), 'C34|C47'),
+    ('alter the canonical text of one item',
+     lambda blob: (_tamper_item(blob), None), 'C32|C47'),
+    ('re-encode the extract with CRLF line endings',
+     lambda blob: (_to_crlf(blob), None), 'C47'),
+    ('change the declared sha256 without touching the file',
+     lambda blob: (blob, {'extracted_json_sha256': '0' * 64}), 'C47'),
+    ('change the declared byte count without touching the file',
+     lambda blob: (blob, {'extracted_json_bytes': 1}), 'C47'),
+]
+
+
+def run_extract_mutations(fam, occ, manifest, bank, specs, hist_ids,
+                          documents, filenames):
+    """Prove the required source cannot go missing quietly.
+
+    The real extract is never modified: each mutation writes its variant into a
+    temporary directory and repoints the module's EXTRACTED_BANK at it, so a
+    crash mid-table cannot leave the repository holding a corrupted file.
+    """
+    import shutil
+    import tempfile
+
+    global EXTRACTED_BANK
+    real = EXTRACTED_BANK
+    blob = io.open(real, 'rb').read()
+    tmp = tempfile.mkdtemp(prefix='qi-extract-mut-')
+    held = 0
+    print('\nrequired-source mutations - the extract may not go missing quietly')
+    print('%-64s %-12s %s' % ('MUTATION', 'EXPECT', 'RESULT'))
+    print('-' * 104)
+    try:
+        for name, mutate, expect in EXTRACT_MUTATIONS:
+            new_blob, man_edit = mutate(blob)
+            path = os.path.join(tmp, 'dgs_meo_cl1_bank_items.json')
+            if os.path.exists(path):
+                os.remove(path)
+            if new_blob is not None:
+                io.open(path, 'wb').write(new_blob)
+            EXTRACTED_BANK = path
+
+            m2 = copy.deepcopy(manifest)
+            if man_edit:
+                for src in m2.get('sources', []):
+                    if src.get('source_id') == BANK_SOURCE_ID:
+                        src.update(man_edit)
+
+            r2 = Report()
+            ext2 = extract_integrity(m2, r2)
+            validate(copy.deepcopy(fam), copy.deepcopy(occ), manifest,
+                     copy.deepcopy(bank), specs, hist_ids, r2, ext2,
+                     dict(documents), list(filenames))
+            fired = {fl.split(' ')[0] for fl in r2.failures}
+            ok = bool(fired & set(expect.split('|')))
+            held += 0 if ok else 1
+            print('%-64s %-12s %s'
+                  % (name[:64], expect,
+                     'caught' if ok else 'ESCAPED (fired: %s)' % sorted(fired)))
+    finally:
+        EXTRACTED_BANK = real
+        shutil.rmtree(tmp, ignore_errors=True)
+    print('-' * 104)
+    print('required-source: %d   escaped: %d' % (len(EXTRACT_MUTATIONS), held))
+    return held
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--mutate', action='store_true',
@@ -1013,18 +1181,20 @@ def main():
     bank = load_json(BANK)
     specs, hist_ids = build_spec_index()
 
-    extracted = load_extracted_bank()
+    rep0 = Report()
+    extracted = extract_integrity(manifest, rep0)
     documents = load_documents()
     filenames = verification_filenames()
 
-    rep = validate(fam, occ, manifest, bank, specs, hist_ids, Report(),
+    rep = validate(fam, occ, manifest, bank, specs, hist_ids, rep0,
                    extracted, documents, filenames)
     print('QI-v2 family validator')
     print('  families    : %d' % len(fam['families']))
     print('  occurrences : %d' % len(occ))
     print('  bank items  : %d' % len(bank['items']))
-    print('  extract     : %s' % ('%d items' % len(extracted) if extracted
-                                  else 'ABSENT - two checks skipped'))
+    print('  extract     : %s'
+          % ('%d items' % len(extracted) if extracted
+             else 'UNUSABLE - required source; see C46'))
     print('  checks run  : %d' % len(rep.checks))
     if rep.skipped:
         print('  SKIPPED     : %d' % len(rep.skipped))
@@ -1083,9 +1253,11 @@ def main():
                      'only the evidence is missing', DATE_MUTATIONS, 'family')
     bad += run_table('document mutations - the family a write-up NAMES must be '
                      'the family it DESCRIBES', DOC_MUTATIONS, 'doc')
+    bad += run_extract_mutations(fam, occ, manifest, bank, specs, hist_ids,
+                                 documents, filenames)
 
     total = (len(MUTATIONS) + len(BANK_MUTATIONS) + len(DATE_MUTATIONS)
-             + len(DOC_MUTATIONS))
+             + len(DOC_MUTATIONS) + len(EXTRACT_MUTATIONS))
     print('\nmutations: %d   escaped: %d' % (total, bad))
     return 1 if (rep.failures or bad) else 0
 
