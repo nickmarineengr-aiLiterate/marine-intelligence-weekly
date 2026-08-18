@@ -519,9 +519,27 @@ _WORD_NUM = {
     'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'twelve': 12,
 }
 # Numbers that name an instrument are not a quantity the answer must match.
+#
+# Every alternative is a whole lexical token, anchored on BOTH sides. Without
+# the trailing boundary `reg` matches inside "regular", "regulating" and
+# "registration"; without the leading one `ism` matches inside "mechanism"
+# and `no` inside "not" and "nozzle". Either way the number that follows is
+# discarded as a document designator BEFORE its unit is ever read, and since
+# `number_conflict` compares only the dimensions the two sides share, an
+# emptied set is silence rather than disagreement - so a filter changed from
+# "not coarser than 25 microns" to "not coarser than 10 microns" read as an
+# EXACT_REPEAT. Four characters sitting inside an ordinary word must never
+# erase a technical magnitude.
+#
+# `no` is the one token that must carry its period. Anchoring alone would
+# still let the negation in "no more than 25 microns" suppress the value,
+# whereas the designator is always written "No. 4". The other tokens take an
+# optional period so that "Reg. 14" and "reg 14" are both read as the
+# regulation reference they are.
 _INSTRUMENT_NUM = re.compile(
-    r'(solas|marpol|stcw|colreg|load\s*line|tonnage|ilo|mlc|isps|ism|annex|'
-    r'chapter|regulation|reg|convention|protocol|amendment|no\.?)\s*[^.;]{0,24}$',
+    r'(?:\b(?:solas|marpol|stcw|colreg|load\s*line|tonnage|ilo|mlc|isps|ism|'
+    r'annex|chapter|regulation|reg|convention|protocol|amendment)\b\.?'
+    r'|\bno\.)\s*[^.;]{0,24}$',
     re.I)
 
 
