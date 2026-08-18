@@ -1,0 +1,95 @@
+{
+  "note": "Human adjudications applied on top of the derived gap set. Every entry states what was read to reach it, so the Laptop can check the judgement rather than the arithmetic. The builder applies these; no count and no gap record is hand-edited. A gap absent from this file keeps the disposition the data gave it.",
+  "governing_principle": "P0 is what a candidate sitting on 24 August still cannot answer from the existing QB answer plus the relevant Oral Notes. Coverage the matcher missed is still coverage.",
+  "adjudications": [
+    {
+      "gap_id": "GAP-0009",
+      "decision": "HUMAN_REVIEW",
+      "reason": "Terse designator fragments, not asks. The two source wordings are 'STCW 7, 8' and 'STCW 5, 6' with no chapter, part or subject, so the regulation intended cannot be determined from the source. Phase 2A-i withdrew the speculative repair that previously rewrote stcw5 to stcw15 and manufactured a target; inventing one here would repeat exactly that defect. Forcing a terse acronym is the failure mode the review named.",
+      "evidence": [
+        "ORAL_788_RECONCILIATION.jsonl source wordings for GAP-0009",
+        "PHASE2A_I_CORRECTNESS_FLOOR.md section A - stcw5 -> stcw15 listed as a destroyed designator"
+      ]
+    },
+    {
+      "gap_id": "GAP-0016",
+      "decision": "P0_NEW_ANSWER",
+      "reason": "Genuine gap, confirmed against the corpus rather than assumed. John asks for the BWM Convention's present status and the content of guidelines G7, G8 and G9. An independent scan of all 681 canonical questions returns no question mentioning BWM, G8, G9 or the D-2 standard, and the Notes reach only PARTIAL. The Laptop review proposed reusing QB1_supplementary#q20; that anchor is 'Tail Shaft Survey - what is it, when is it due, and what is the complete procedure?' and is not a usable home. Recorded so the wrong pointer is not carried into production.",
+      "evidence": [
+        "corpus scan of 681 canonical questions for ballast|BWM|BWTS|G8|G9|D-2 - no match",
+        "QB1_supplementary#q20 live text is Tail Shaft Survey",
+        "LAPTOP_PHASE2_INDEPENDENT_REVIEW.md section AC"
+      ]
+    },
+    {
+      "gap_id": "GAP-0043",
+      "decision": "P0_ENRICH_EXISTING_QB",
+      "reuse_target": "QB5_B#q4",
+      "reason": "The derived nearest question is QB4_B#q18, which is crew motivation during a Strait of Hormuz conflict transit and is not the right home for 'qualities of a CE, explain assertiveness and empathy'. QB5_B#q4 'CE as Leader - Leadership Theories and Applying Them' is the correct home and needs the two named limbs added rather than a duplicate q-card.",
+      "evidence": [
+        "QB4_B#q18 and QB5_B#q4 live question text read directly",
+        "LAPTOP_PHASE2_INDEPENDENT_REVIEW.md section AC - P0_ENRICH_EXISTING against QB5_B#q4"
+      ]
+    },
+    {
+      "gap_id": "GAP-0069",
+      "decision": "DEMOTE_P1",
+      "reason": "'TIO2 APPLICATION' is a two-word prompt with one occurrence and one examiner. It is a label, not an ask, and the Phase 2A-i floor routes prompts of this shape to review rather than awarding them a target. It is also not part of the BWTS cluster despite sharing a best note unit.",
+      "evidence": [
+        "single source wording 'TIO2 APPLICATION', occurrence_count 1",
+        "LAPTOP_PHASE2_INDEPENDENT_REVIEW.md section AC - DEMOTE_P1"
+      ]
+    },
+    {
+      "gap_id": "GAP-0093",
+      "decision": "DEMOTE_P1",
+      "reason": "Single occurrence, single examiner, and the Notes reach only topic level. Real but not among the smallest high-value set buildable before 24 August.",
+      "evidence": [
+        "occurrence_count 1",
+        "LAPTOP_PHASE2_INDEPENDENT_REVIEW.md section AC - DEMOTE_P1"
+      ]
+    },
+    {
+      "gap_id": "GAP-0409",
+      "decision": "P0_ENRICH_EXISTING_QB",
+      "reuse_target": "QB7_I#q2",
+      "reason": "The adjudication the designator repair was required to unblock. Before Phase 2A-i this ask scored 0.00 against a corpus holding 27 ME-GI, 46 ME-GA and 43 ME-LGI mentions, and the review correctly called that a tokeniser artefact rather than evidence of absence. Re-derived, the four ME-Gx occurrences reach QB7_I at 0.43-0.47, and QB7_I#q2 is 'the evolution of the MAN B&W ME-GI and ME-GA engine families', with QB7_I#q3 comparing ME-GA methane slip. MIW already holds this material, so it is an enrichment of an existing home, not a new answer from zero. The Phase 2A-iii conflict repair is what makes this safe: an ME-GI ask can no longer be awarded an ME-GA answer at EXACT.",
+      "evidence": [
+        "QB7_I#q1/#q2/#q3 live question text read directly",
+        "ASC-0079, ASC-0087, ASC-0422, ASC-0466 recomputed coverage",
+        "PHASE2A_III_DESIGNATOR_REPAIR.md sections A and D"
+      ]
+    },
+    {
+      "gap_id": "GAP-0454",
+      "decision": "MERGE_INTO",
+      "merge_into": "GAP-0410",
+      "reason": "Same Nair ask in two formulations: how a ship knows onboard that treated discharge meets the D-2 standard, one phrased through UV type approval and one through BWTS generally. One canonical answer with a follow-up limb, not two production units.",
+      "evidence": [
+        "source wordings of GAP-0410 and GAP-0454 read side by side",
+        "LAPTOP_PHASE2_INDEPENDENT_REVIEW.md section AA - same ask, should be one family"
+      ]
+    },
+    {
+      "gap_id": "GAP-0410",
+      "decision": "P0_NEW_ANSWER",
+      "absorbs": ["GAP-0454"],
+      "reason": "Promoted to P0 on absorbing GAP-0454: two examiner formulations of one ask, and no canonical question anywhere in the 681 covers verifying D-2 compliance onboard. The Notes reach only topic level. This is the BWTS adjudication the Notes phase flagged, and it resolves as two distinct asks rather than one three-way merge - John's GAP-0016 is about the convention's status and its guidelines, Nair's is about onboard verification, and GAP-0069 is not BWTS at all.",
+      "evidence": [
+        "corpus scan for D-2 across 681 canonical questions - no match",
+        "PHASE2A_II_NOTES_COVERAGE.md section E - GAP-0016/0069/0410 share a best note unit"
+      ]
+    },
+    {
+      "gap_id": "GAP-0494",
+      "decision": "DEMOTE_P1",
+      "reuse_target": "QB3_C#q3",
+      "reason": "Not a P0 gap, and the matcher is wrong about it in both universes. QB3_C#q3 is literally 'Hong Kong Convention - IHM three parts and CE role?' and its answer sets out the IHM regime, while oralnotes/WA1-HKC1.html carries 'The IHM Framework - Three-Part Engineering Logbook' with Parts I, II and III. The derived record scores it 0.298 canonical and NO_NOTES_SUPPORT because the candidate wrote 'HKG' where MIW writes 'HKC' and 'Hong Kong'. The residual limb worth adding is who performs the initial survey; that is an enrichment, not a new answer.",
+      "evidence": [
+        "QB3_C#q3 live question and answer body read directly",
+        "meoclass1/oralnotes/WA1-HKC1.html IHM Part I/II/III block read directly",
+        "LAPTOP_PHASE2_INDEPENDENT_REVIEW.md section I - NOT_A_GAP"
+      ]
+    }
+  ]
+}
