@@ -376,6 +376,57 @@ misattributed to LLMC.
 
 ---
 
+### 33. CSR scope quoted without contract date — and CSR/GBS applicability conflated
+Two linked failures, both examiner-grade.
+
+**(a) Scope stated as ship type + length only.** IACS Common Structural Rules
+applicability has **three** components that must always be given together:
+ship type, length threshold, **and the applicable construction-contract date**.
+Quoting "bulk carriers 90 m+, double-hull oil tankers 150 m+" without a date is
+incomplete and collapses against the standard follow-up ("my 200 m bulker was
+built 2003 — was it CSR?" — answer: **no**).
+
+- **Harmonised CSR BC & OT** — bulk carriers of unrestricted service, single or
+  double side skin, **90 m and above**; **double-hull** oil tankers of
+  unrestricted service, **150 m and above**; contracted for construction **on or
+  after 1 July 2015**.
+- **Earlier separate CSR-BC / CSR-OT** — adopted by IACS Council December 2005,
+  applicable to ships contracted for construction **on or after 1 April 2006**.
+- The Rules point to **IACS PR No. 29** for the meaning of "contracted for
+  construction".
+- CSR excludes ore carriers and combination carriers from its bulk-carrier
+  definition; oil tanker scope is **double hull only**.
+
+**(b) Do not equate CSR applicability with SOLAS II-1 Reg. 3-10 (GBS)
+applicability.** They are two separate tests with different thresholds,
+carve-outs and trigger dates. GBS (Res. MSC.290(87), in force 1 Jan 2012)
+applies to oil tankers **150 m and above** and bulk carriers **150 m and above**
+constructed with single deck, top-side tanks and hopper side tanks in cargo
+spaces, **excluding ore carriers and combination carriers**, for which the
+building contract is placed on or after **1 July 2016**; or absent a contract,
+keel laid or similar stage on or after **1 July 2017**; or delivery on or after
+**1 July 2020**. Consequence: a **120 m bulk carrier can be a CSR ship but not a
+Reg. 3-10 ship**.
+
+Related standing errors to watch in the same breath: "IACS made CSR mandatory"
+and "SOLAS makes CSR mandatory" are both wrong — SOLAS II-1/3-10 operates on the
+structural rules of a Recognized Organization or the Administration and does not
+name CSR; IACS's claim that CSR are the only Rules complying with GBS must be
+attributed to IACS, not stated as a SOLAS requirement.
+
+Verified against the CSR for Bulk Carriers (January 2006) rule-text application
+clause, ClassNK's CSR page, IACS's CSR page, Res. MSC.290(87)/MSC.287(87) and
+MSC 96. Reference implementation: QB1_K.html Q8.
+GREP: SKIP — the defect is an *omission* (missing contract date) and a *conflation*
+of two applicability tests; neither is a fixed wrong phrase, and "Common Structural
+Rules" is a correct term appearing 105 times across 25 live files (including the
+reference answer itself), so a bare-phrase auto-scan would false-positive on every
+correct usage. Manual verification-pass only: wherever CSR scope is asserted, check
+ship type + length + contract date are all present, and that CSR scope has not been
+equated with SOLAS II-1/3-10 GBS scope.
+
+---
+
 ## Meta-corrections to `qb_health_check.py` itself (non-content fixes, logged here for continuity)
 
 - 2026-08-01: Fixed a Windows-console `UnicodeEncodeError` crash in the Brevo-fallback print path when SMTP credentials aren't set locally (was crashing on ⚠/✅ glyphs; also fixed a related bug where the fallback path's temporary `TextIOWrapper` around `sys.stdout.buffer` closed the underlying buffer on garbage collection, breaking all later prints in the same run).
@@ -423,3 +474,4 @@ misattributed to LLMC.
 | 2026-08-08 | Entry 32: LLMC 2012 Amendments wrongly cited as LEG.3(91) (fair treatment of seafarers guidelines) instead of LEG.5(99) — QB1_A.html Q3 (4 instances) and Q5 cross-reference (1 instance) | Candidate correction via Nixon (IMO resolution PDF attached) |
 | 2026-08-13 | Entry 6 scope note: QB5_C_B Q5 (True Confidence 2024 casualty link, "3 Indian crew died" question) — corrected False casualty-nationality implication (True Confidence fatalities were 2 Filipino + 1 Vietnamese, not Indian), updated "DG Shipping"→"DGMA" (×2), updated MS Act 1958 Section 358 citation to MS Act 2025 (exact section not independently verified) → v1.2. Repo-wide "DG Shipping" bare-mention scope (~678 hits/68 files) flagged, not yet actioned. | Candidate correction request via Nixon (screenshot) |
 | 2026-08-13 | Entry 6 follow-up: full repo-wide DG Shipping→DGMA audit, 65 files touched, 191 references corrected (175 naming + 16 missed-in-first-pass QB4_H items), 12 dead dgshipping.gov.in links fixed to dgma.gov.in. Two open questions flagged (Affairs vs Administration naming; March vs June rename date) — see Entry 6 for detail. | Nixon-requested follow-up, same session |
+| 2026-08-18 | Entry 33: CSR scope quoted without contract date (ship type + length + contract date must be given together; harmonised CSR BC & OT 1 Jul 2015 vs original CSR-BC/CSR-OT 1 Apr 2006), and CSR applicability wrongly equated with SOLAS II-1/3-10 GBS applicability (GBS is 150 m+ both types, contract 1 Jul 2016 / keel 1 Jul 2017 / delivery 1 Jul 2020, ore and combination carriers excluded) | Candidate report via Nixon (Vivek, WhatsApp); verified against IACS/ClassNK rule text and IMO resolutions while building QB1_K Q8 |
