@@ -140,16 +140,35 @@ def designator_conflict(a_tokens, b_tokens):
     value - Annex I against Annex VI, D-1 against D-2, ME-GI against ME-GA.
 
     Silence is not conflict: a side that names no designator never conflicts.
+
+    Naming the family is also silence. A shared BROAD family must never erase a
+    conflict between different SPECIFIC members of it: ME-GI is not ME-GA even
+    though both are ME engines, and III/1 is not III/2 even though both are
+    chapter III. Equivalent spellings of one member still meet, so Annex VI is
+    Annex 6.
     """
     def by_family(toks):
+        """family key -> the SPECIFIC values named in it.
+
+        A designator token names a member only when it carries a value distinct
+        from its own family key. In mixed-case prose the acronym pass emits the
+        bare family head beside the full designator - "ME-GI" yields `dsg:me`
+        as well as `dsg:me-gi` - and admitting that bare head as a member gave
+        both sides the pseudo-value `me`, which intersected and cancelled the
+        real GI/GA disagreement. A family named without a member contributes no
+        member at all, so it can neither create a conflict nor cancel one.
+        """
         fam = {}
         for t in toks:
             if not str(t).startswith(_DESIG_PREFIX):
                 continue
             body = str(t)[len(_DESIG_PREFIX):]
             key, sep, val = body.partition("-")
-            fam.setdefault(key if sep else _family_of(body), set()).add(
-                val if sep else body)
+            if not sep:
+                key, val = _family_of(body), body
+            if val == key:
+                continue          # the family named, no member named
+            fam.setdefault(key, set()).add(val)
         return fam
 
     fa, fb = by_family(a_tokens), by_family(b_tokens)
