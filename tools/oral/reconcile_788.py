@@ -27,7 +27,6 @@ Outputs (meoclass1/oral-intelligence/examiner-audit/):
 """
 from __future__ import annotations
 
-import difflib
 import json
 import math
 import re
@@ -37,6 +36,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import oral_lib as L  # noqa: E402
+import oral_text as T  # noqa: E402
 
 OUT = L.OUT
 
@@ -75,32 +75,39 @@ def card_bodies():
     return out
 
 
-# Marine regulatory wording is full of alphanumeric designators - A-60, D-1/D-2,
-# Tier III, Annex 6, Chapter II-1, ISO 8217. The audit's general-purpose
-# tokeniser drops them (a bare "60" is under its length floor, and "A-60" splits
-# into two dead tokens), so an ask about A-60 bulkheads cannot match a question
-# about A-60 bulkheads. This tokeniser keeps them joined.
-_DESIGNATOR = re.compile(r"\b([a-z]{1,4})[\s\-/]?(\d{1,4})\b")
-_ROMAN = {"i": "1", "ii": "2", "iii": "3", "iv": "4", "v": "5", "vi": "6"}
+# Tokenisation, the load-bearing-token guard and the curated source-typo map
+# all live in oral_text, so the matcher, the controls and Phase 2A-ii share one
+# definition of what a designator is and what may be rewritten.
+mtokens = T.mtokens
+designator_conflict = T.designator_conflict
+
+# The SAME_CORE_ASK admission floor. EXACT and NEAR each carry a similarity
+# floor; SAME_CORE carried none, so a one-word prompt whose tokens all happen to
+# appear somewhere in a long question stem reached full coverage and was awarded
+# the same substantive relationship as a genuine restatement. Same subject area
+# is not the same ask.
+SAME_CORE_MIN_TOKENS = 3       # a one- or two-token prompt is a label, not an ask
+SAME_CORE_MIN_SIM = 0.30       # stems genuinely resemble each other, or:
+SAME_CORE_SIM_WITH_REVERSE = 0.20
+SAME_CORE_MIN_REVERSE = 0.35   # the target ask is substantially contained in the source
 
 
-def mtokens(s):
-    n = L.norm(s)
-    n = _DESIGNATOR.sub(lambda m: m.group(1) + m.group(2), n)
-    out = set()
-    for t in n.split():
-        if t in L.STOP:
-            continue
-        if t.isdigit():
-            out.add(t)
-        elif t.isalpha():
-            if len(t) > 2:
-                out.add(t)
-            elif t in _ROMAN:
-                out.add(t)
-        else:
-            out.add(t)
-    return out
+def same_core_admissible(n_src_tokens, sim, rev, conflict):
+    """Minimum evidence that the examiner is asking essentially the same thing.
+
+    Requires substantive mass, bidirectional textual evidence, and the absence
+    of a contradictory load-bearing designator. Failing the floor is not a gap:
+    the row falls through to PARTIAL_COVERAGE, which is the conservative sink.
+    """
+    if conflict:
+        return False, "contradictory technical designator"
+    if n_src_tokens < SAME_CORE_MIN_TOKENS:
+        return False, "source prompt too terse to establish the same ask"
+    if sim >= SAME_CORE_MIN_SIM:
+        return True, ""
+    if sim >= SAME_CORE_SIM_WITH_REVERSE and rev >= SAME_CORE_MIN_REVERSE:
+        return True, ""
+    return False, "shared vocabulary without a shared ask"
 
 
 def idf_table(docs):
@@ -116,13 +123,17 @@ def weighted_coverage(src_tokens, hay_tokens, idf, default):
     """IDF-weighted fraction of the source's demand present in the target."""
     if not src_tokens:
         return 0.0
-    tot = sum(idf.get(t, default) for t in src_tokens)
-    hit = sum(idf.get(t, default) for t in src_tokens if t in hay_tokens)
+    # sorted: float addition is not associative, so summing in set-iteration
+    # order would make the score itself depend on hash randomisation
+    toks = sorted(src_tokens)
+    tot = sum(idf.get(t, default) for t in toks)
+    hit = sum(idf.get(t, default) for t in toks if t in hay_tokens)
     return hit / tot if tot else 0.0
 
 
 # --------------------------------------------------------------------------
-def classify(qcov, sim, target_acov, best_acov, union_acov, n_union):
+def classify(qcov, sim, target_acov, best_acov, union_acov, n_union,
+             n_src_tokens=99, rev=1.0, conflict=False):
     """Content coverage of the source ask by the live corpus.
 
     Question-text coverage decides whether MIW *asks* the same thing. Answer
@@ -133,14 +144,17 @@ def classify(qcov, sim, target_acov, best_acov, union_acov, n_union):
     Tags are recorded but never decide: a topic tag makes every question in a
     group look like a perfect match for a one-word prompt.
     """
-    if qcov >= 0.95 and sim >= 0.55:
+    ok, floor_reason = same_core_admissible(n_src_tokens, sim, rev, conflict)
+    if qcov >= 0.95 and sim >= 0.55 and not conflict:
         return EXACT, "question text asks the same thing"
-    if qcov >= 0.85 and sim >= 0.30:
+    if qcov >= 0.85 and sim >= 0.30 and not conflict:
         return NEAR, "question text asks the same thing in different words"
-    if qcov >= 0.75:
+    if qcov >= 0.75 and ok:
         return SAME_CORE, "different formulation, same substantive demand"
-    if qcov >= 0.5 and target_acov >= 0.85:
+    if qcov >= 0.5 and target_acov >= 0.85 and ok:
         return SAME_CORE, "question overlaps and its answer completes the ask"
+    if qcov >= 0.75 and not ok:
+        return PARTIAL, "below the same-core floor: " + floor_reason
     if qcov >= 0.5:
         return PARTIAL, "question overlaps but the answer may not reach every limb"
     if best_acov >= 0.9:
@@ -182,39 +196,25 @@ def main():
         (OUT / "ALL_SURVEYORS_SOURCE_FAMILIES.json").read_text(encoding="utf-8"))}
 
     # The source is candidate-typed, so it misspells domain words the live
-    # corpus spells correctly ("JOHRI WINDOW" for Johari Window). A rare source
-    # token absent from the corpus is repaired to its nearest corpus spelling,
-    # and the repair is recorded on the record rather than applied silently.
-    vocab = set()
-    for t in a_tok.values():
-        vocab |= t
-    spell_cache = {}
-
-    def repair(tok):
-        if tok in vocab or len(tok) < 5:
-            return tok, None
-        if tok not in spell_cache:
-            near = difflib.get_close_matches(tok, vocab, n=1, cutoff=0.86)
-            spell_cache[tok] = near[0] if near else None
-        fixed = spell_cache[tok]
-        return (fixed, "%s->%s" % (tok, fixed)) if fixed else (tok, None)
+    # corpus spells correctly ("JOHRI WINDOW" for Johari Window). Repair is
+    # limited to an explicit curated map of verified source misspellings
+    # (oral_text.SOURCE_TYPO_MAP) and never touches a load-bearing token. The
+    # speculative nearest-corpus-token repairer this replaces treated the QB
+    # vocabulary as a dictionary and so rewrote correct English and live
+    # designators: attended->unattended, convinced->convicted,
+    # provident->provide, and92->and9, stcw5->stcw15, iii16->iii6.
 
     results = []
     for s in src:
         raw_stoks = mtokens(s["question_core_text"])
         if not raw_stoks:
             raw_stoks = mtokens(s["raw_question_text"])
-        stoks, spell_repairs = set(), []
-        for t in raw_stoks:
-            fixed, note = repair(t)
-            stoks.add(fixed)
-            if note:
-                spell_repairs.append(note)
+        stoks, spell_repairs = T.repair_tokens(raw_stoks)
 
         # whole-corpus comparison: every source occurrence against all 681 live
         # questions. Topic never narrows the field.
         scored, by_answer = [], []
-        for qid in q_tok:
+        for qid in sorted(q_tok):
             qcov = weighted_coverage(stoks, q_tok[qid], q_idf, q_default)
             acov = weighted_coverage(stoks, a_tok[qid], a_idf, a_default)
             if acov >= 0.4:
@@ -225,8 +225,10 @@ def main():
             scored.append((qcov, sim, acov, qid))
         # answer depth breaks ties between equal-coverage targets, so the card
         # that actually treats the ask wins rather than the first one seen
-        scored.sort(key=lambda x: (-x[0], -x[1], -x[2]))
-        by_answer.sort(reverse=True)
+        # explicit, total sort keys: equal scores are broken by canonical id so
+        # ordering never depends on set or dict iteration order
+        scored.sort(key=lambda x: (-x[0], -x[1], -x[2], x[3]))
+        by_answer.sort(key=lambda x: (-x[0], x[1]))
 
         best_ans_cov, best_ans_qid = by_answer[0] if by_answer else (0.0, None)
 
@@ -261,8 +263,11 @@ def main():
             target_ans_cov = best_ans_cov
         rev = weighted_coverage(q_txt_tok[qid], stoks, q_idf, q_default) if qid else 0.0
 
+        conflict = bool(qid) and designator_conflict(stoks, q_tok[qid])
         disp, disp_reason = classify(cov, sim, target_ans_cov, best_ans_cov,
-                                     union_cov, len(contributors))
+                                     union_cov, len(contributors),
+                                     n_src_tokens=len(stoks), rev=rev,
+                                     conflict=conflict)
 
         answer_rescue = qid if (disp in (PARTIAL, SAME_CORE) and cov < 0.5) else None
         tag_hit = bool(qid and (stoks & tag_tok.get(qid, set())))
@@ -278,7 +283,11 @@ def main():
                 alternative_target = runner[3]
             elif cov >= 0.5:
                 ambiguous_reason = "TWO_PLAUSIBLE_TARGETS_NEITHER_COMPLETE"
-        if not ambiguous_reason and len(stoks) <= 2 and 0.5 <= cov < 0.95:
+        # A terse prompt is quarantined at any coverage - the old ceiling of
+        # cov < 0.95 let a one-word prompt through precisely when its tokens all
+        # happened to appear in a long stem. But a terse prompt that already
+        # reads as EXACT or NEAR on its own similarity is not ambiguous.
+        if not ambiguous_reason and disp not in (EXACT, NEAR)                 and len(stoks) < SAME_CORE_MIN_TOKENS and cov >= 0.5:
             ambiguous_reason = "SOURCE_PROMPT_TOO_TERSE"
         if ambiguous_reason:
             disp = AMBIG
@@ -339,8 +348,7 @@ def main():
             "compound_cover_question_ids": contributors,
             "compound_cover_coverage": round(union_cov, 3),
             "source_spelling_repairs": spell_repairs,
-            "alternative_target_question_id": alternative_target,
-            "matched_on_topic_tag": tag_hit,
+            "designator_conflict": conflict,
             "runner_up_question_id": runner[3] if runner else None,
             "runner_up_coverage": round(runner[0], 3) if runner else None,
             "content_disposition": disp,
@@ -356,7 +364,8 @@ def main():
         fam_rows[r["source_family_id"]].append(r)
 
     gaps = []
-    for fid, rows in fam_rows.items():
+    for fid in sorted(fam_rows):
+        rows = fam_rows[fid]
         n_missing = sum(1 for r in rows if r["content_disposition"] == MISSING)
         # a PARTIAL is only a gap candidate when the existing answer leaves a
         # material limb of the ask uncovered; a well-covered PARTIAL is an
@@ -465,7 +474,7 @@ def main():
         for r in results:
             fh.write(json.dumps(r, ensure_ascii=False) + "\n")
     L.jdump(sorted(gaps, key=lambda g: (g["priority"], -g["examiner_count"],
-                                        -g["occurrence_count"])),
+                                        -g["occurrence_count"], g["gap_id"])),
             "ORAL_GAP_CANDIDATES.json")
     L.jdump(review, "HUMAN_REVIEW_QUEUE.json")
 
