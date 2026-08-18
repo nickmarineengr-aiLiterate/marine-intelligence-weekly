@@ -202,7 +202,10 @@ def main():
     # --- boundary: this phase writes no live candidate page ------------------
     check("research outputs stay inside the audit folder",
           OUT.name == "examiner-audit" and OUT.parent.name == "oral-intelligence",
-          str(OUT))
+          # repo-relative, with forward slashes: the absolute form wrote the
+          # producer's own drive and user name into a committed artefact, so the
+          # same run on another machine produced a different file
+          OUT.relative_to(L.REPO).as_posix())
     stray = [p.name for p in OUT.glob("*")
              if p.suffix.lower() in (".html", ".htm")]
     check("no HTML page written into the research folder", not stray, str(stray[:5]))
