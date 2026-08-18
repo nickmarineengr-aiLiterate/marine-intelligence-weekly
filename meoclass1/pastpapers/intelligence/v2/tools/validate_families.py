@@ -24,6 +24,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import qi_paths                                                   # noqa: E402
+import qi_similarity as qs                                        # noqa: E402
 
 HERE = qi_paths.TOOLS
 V2 = qi_paths.V2
@@ -313,6 +314,9 @@ def validate(fam_doc, occ_rows, manifest, bank, specs, hist_ids, rep,
                   len(extracted) == 185 and set(extracted) == set(range(1, 186)),
                   'extract holds %d items' % len(extracted))
 
+    bank_ancestor_semantics(fam_doc, occ_by_id, specs, extracted, rep)
+    occurrence_stem_fidelity(occ_rows, specs, rep)
+
     src_by_id = {s['source_id']: s for s in manifest.get('sources', [])}
 
     bad_bank_src = [b.get('bank_item_id') for b in items
@@ -451,6 +455,191 @@ def validate(fam_doc, occ_rows, manifest, bank, specs, hist_ids, rep,
     return rep
 
 
+# Classes that count as a family genuinely descending from a bank item.
+ANCESTOR_FIT = ('EXACT_REPEAT', 'NEAR_VERBATIM', 'SAME_CORE_ASK')
+
+
+def _declared_ancestors(fam):
+    """A family may declare a primary and a secondary bank ancestor.
+
+    FAMILY-EM-0004 is the live case and it is deliberate: the warranties limb
+    recurs against BANK-085 in 2021 and 2022, while its CURRENT recurrence is
+    limb (b) of QP2608-Q4, whose parent is BANK-072. Both are real ancestry and
+    the schema records both, so an integrity check that knew only about the
+    primary would report a defect where there is none.
+    """
+    return [fam[k] for k in ('official_bank_ancestor', 'secondary_bank_ancestor')
+            if fam.get(k)]
+
+
+def _ancestor_number(anc):
+    try:
+        return int(str(anc).split('-')[-1])
+    except (ValueError, TypeError):
+        return None
+
+
+def _family_fit(fam, bank_stem, occ_by_id, specs, stem_cache):
+    """Best class any of the family's own occurrences reaches against a stem.
+
+    A one-word limb such as `Warranties` is UNSCOREABLE_SHORT_STEM on its own
+    and inherits from its parent question, which is the rule LIMB_MODEL.md
+    already states. Max over occurrences is right: a family legitimately holds
+    narrowed and absorbed variants alongside its representative.
+    """
+    best = -1
+    for oid in fam.get('known_occurrences') or []:
+        o = occ_by_id.get(oid)
+        if not o:
+            continue
+        key = ('occ', oid)
+        if key not in stem_cache:
+            stem_cache[key] = qs.Stem(o.get('raw_stem') or '')
+        r = qs.classify(stem_cache[key], bank_stem)
+        if r.cls == 'UNSCOREABLE_SHORT_STEM':
+            parent = (specs.get(o.get('question_id')) or {}).get('text') or ''
+            if parent:
+                pkey = ('q', o.get('question_id'))
+                if pkey not in stem_cache:
+                    stem_cache[pkey] = qs.Stem(parent)
+                r = qs.classify(stem_cache[pkey], bank_stem)
+        best = max(best, qs._RANK.get(r.cls, -1))
+    return best
+
+
+def bank_ancestor_semantics(fam_doc, occ_by_id, specs, extracted, rep):
+    """C40-C42: the RIGHT bank ancestor, not merely a valid one.
+
+    The Laptop review's independent corruption LC-3 escaped every Phase-3A
+    check: swap two families' ancestors and every id is still real, unique,
+    present in the curated file and byte-identical to the official extract.
+    Nothing asked whether the item a family points at is the item its own
+    questions actually descend from. That is not a hypothetical class of error
+    — the EM-0008/EM-0009 mislabel was live in the write-ups at the same time.
+    """
+    if extracted is None:
+        rep.skip('C40 occurrence ancestors lie within the family declaration',
+                 'extract absent')
+        rep.skip('C41 the family representative fits its declared ancestor',
+                 'extract absent')
+        rep.skip('C42 no undeclared bank item fits the family better',
+                 'extract absent')
+        return
+
+    bank_stems = {}
+    for num, text in extracted.items():
+        bank_stems[num] = qs.Stem(text)
+    stem_cache = {}
+
+    for fam in fam_doc['families']:
+        fid = fam['family_id']
+        declared = _declared_ancestors(fam)
+        if not declared:
+            continue
+        nums = set()
+        bad_num = []
+        for a in declared:
+            n = _ancestor_number(a)
+            if n is None or n not in extracted:
+                bad_num.append(a)
+            else:
+                nums.add(n)
+
+        # C40 -- every ancestor an occurrence declares must be one the family
+        # declares. This is the cheapest possible guard on the exact defect
+        # class and it is exact, not heuristic.
+        seen = set()
+        for oid in fam.get('known_occurrences') or []:
+            o = occ_by_id.get(oid)
+            if o and o.get('official_bank_ancestor'):
+                seen.add(o['official_bank_ancestor'])
+        undeclared = sorted(seen - set(declared))
+        rep.check('C40 %s occurrence ancestors lie within the family declaration'
+                  % fid, not undeclared,
+                  'occurrences cite %s, family declares %s'
+                  % (undeclared, sorted(declared)))
+
+        if bad_num or not nums:
+            rep.check('C41 %s the family representative fits its declared '
+                      'ancestor' % fid, False,
+                      'ancestor(s) %s do not resolve in the extract' % bad_num)
+            continue
+
+        # C41 -- the PRIMARY ancestor must actually fit.
+        primary = _ancestor_number(fam.get('official_bank_ancestor'))
+        pf = _family_fit(fam, bank_stems[primary], occ_by_id, specs, stem_cache)
+        rep.check('C41 %s the family representative fits its declared ancestor'
+                  % fid, pf >= qs._RANK['SAME_CORE_ASK'],
+                  'best occurrence reaches %s against BANK-%03d, which is below '
+                  'SAME_CORE_ASK' % (qs._UNRANK.get(pf, pf), primary))
+
+        # C42 -- and no item the family has NOT declared may fit it better.
+        # This is what makes a wrong-but-valid substitution fail: the swapped-in
+        # item cannot outrank the one the family really descends from.
+        best_declared = max(_family_fit(fam, bank_stems[n], occ_by_id, specs,
+                                        stem_cache) for n in nums)
+        rivals = []
+        for num, bs in bank_stems.items():
+            if num in nums:
+                continue
+            if _family_fit(fam, bs, occ_by_id, specs, stem_cache) > best_declared:
+                rivals.append('BANK-%03d' % num)
+        rep.check('C42 %s no undeclared bank item fits the family better' % fid,
+                  not rivals,
+                  'undeclared %s outrank the declared ancestor(s) %s at %s'
+                  % (rivals, sorted(declared), qs._UNRANK.get(best_declared)))
+
+
+def occurrence_stem_fidelity(occ_rows, specs, rep):
+    """C43: the preserved historical stem must be the stem the paper prints.
+
+    P3A-6. Actor is load-bearing in the classifier now, so an unverified actor
+    inside a raw_stem is a real hole: C7/C8 validate the limb label and the
+    marks against the spec, but nothing validated the text. Occurrences whose
+    paper is not in the solved corpus cannot be checked against it; they are
+    listed by name rather than passed over, so the unverifiable set cannot grow
+    silently.
+    """
+    def norm(x):
+        return re.sub(r'[^a-z0-9]', '', (x or '').lower())
+
+    mismatched, unverifiable = [], []
+    for o in occ_rows:
+        oid = o.get('occurrence_id')
+        if not oid:
+            continue
+        spec = specs.get(o.get('question_id'))
+        if not spec:
+            unverifiable.append('%s (%s not in the solved corpus)'
+                                % (oid, o.get('question_id')))
+            continue
+        stem = norm(o.get('raw_stem'))
+        if not stem:
+            mismatched.append('%s: empty raw_stem' % oid)
+            continue
+        candidates = [spec.get('text') or '']
+        lab = o.get('limb_label')
+        if lab:
+            candidates.append((spec.get('subpart_text') or {}).get(lab, ''))
+        if not any(stem in norm(c) or (norm(c) and norm(c) in stem)
+                   for c in candidates):
+            mismatched.append('%s: raw_stem is not the text %s prints'
+                              % (oid, o.get('question_id')))
+
+    rep.check('C43 every raw_stem matches the text its own spec prints',
+              not mismatched, '; '.join(mismatched))
+    rep.check('C43b the unverifiable-stem set is exactly the papers outside '
+              'the corpus', len(unverifiable) == UNVERIFIABLE_STEM_BUDGET,
+              'expected %d unverifiable, got %d: %s'
+              % (UNVERIFIABLE_STEM_BUDGET, len(unverifiable), unverifiable))
+
+
+# Occurrences whose source paper predates the solved corpus, so their stems
+# cannot be checked against a spec. Held as an explicit number so that a new
+# unverifiable stem is a FAILURE rather than a silent addition to the set.
+UNVERIFIABLE_STEM_BUDGET = 4
+
+
 def build_spec_index():
     specs, hist_ids = {}, set()
     for fn in os.listdir(SPECS):
@@ -461,13 +650,16 @@ def build_spec_index():
         except ValueError:
             continue
         for q in d.get('questions', []):
-            labels, marks = set(), {}
+            labels, marks, texts = set(), {}, {}
             for sp in (q.get('subparts') or []):
                 if sp.get('label'):
                     labels.add(sp['label'])
                     marks[sp['label']] = sp.get('marks')
+                    texts[sp['label']] = sp.get('text') or ''
             specs[q['question_id']] = {'labels': labels, 'marks': marks,
-                                       'total_marks': q.get('total_marks')}
+                                       'total_marks': q.get('total_marks'),
+                                       'text': q.get('text_verbatim') or '',
+                                       'subpart_text': texts}
     if os.path.exists(HIST):
         h = load_json(HIST)
         for p in h.get('papers', []):
@@ -525,7 +717,26 @@ MUTATIONS = [
     ('point a family at a bank item that does not exist (BANK-15 -> BANK-150)',
      lambda f, o: f['families'][0].update({'official_bank_ancestor': 'BANK-150'}),
      'C39'),
+
+    # -- Phase 3A.1: the Laptop review's LC-3, which escaped Phase 3A --------
+    # Every id below stays real, unique, curated and byte-identical to the
+    # official extract. Only the ATTACHMENT is wrong.
+    ('swap the ancestors of two families (every id stays real)',
+     lambda f, o: _swap_ancestors(f), 'C40|C41|C42'),
+    ('replace a correct ancestor with a different VALID curated bank item',
+     lambda f, o: f['families'][0].update(
+         {'official_bank_ancestor': 'BANK-160'}), 'C40|C41|C42'),
+    ('corrupt a preserved historical stem (invert the actor)',
+     lambda f, o: o[0].update(
+         {'raw_stem': (o[0]['raw_stem'] or '').replace(
+             'Chief Engineer', 'Port State Control officer')}), 'C43'),
 ]
+
+
+def _swap_ancestors(fam_doc):
+    a, b = fam_doc['families'][0], fam_doc['families'][1]
+    a['official_bank_ancestor'], b['official_bank_ancestor'] = (
+        b['official_bank_ancestor'], a['official_bank_ancestor'])
 
 # Bank mutations need the bank document, which the family mutations do not
 # take. Kept as a separate table rather than widening every lambda above.
