@@ -15,6 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import oral_lib as L  # noqa: E402
+import oral_provenance as P  # noqa: E402
 
 OUT = L.OUT
 
@@ -27,9 +28,9 @@ RELATIONSHIP_TYPES = {"PRIMARY_ASK", "CROSS_QUESTION", "FOLLOW_UP",
 RESEARCH_TIERS = {"MULTI_SOURCE_CONFIRMED", "PRIMARY_CONFIRMED",
                   "EXTERNAL_SOURCE_CONFIRMED", "CE_TIP", "HEADER",
                   "INFERRED_ONLY", "CONFLICTED"}
-EVIDENCE_TIERS = {"PRIMARY_TRACKER", "EXTERNAL_SURVEYOR_COMPILATION",
-                  "EXPLICIT_QCARD", "CE_TIP", "HEADER_METADATA",
-                  "CURRENT_INDEX_RECOVERY", "TOPIC_INFERRED"}
+# The evidence tier vocabulary lives with the provenance model, so a tier can
+# never be added without a statement of what provenance may carry it.
+EVIDENCE_TIERS = P.EVIDENCE_TIERS
 
 results = []
 
@@ -111,6 +112,23 @@ def main():
 
     bad = sorted({r["evidence_tier"] for r in recon} - EVIDENCE_TIERS)
     check("788 evidence tier vocabulary is closed", not bad, str(bad))
+
+    # --- evidence provenance -------------------------------------------------
+    # A tier is a claim about strength; source_type is where the record came
+    # from. Validating the tier vocabulary alone lets a derived record be
+    # relabelled PRIMARY_TRACKER and pass - the escape the Laptop found.
+    bad = [e["evidence_id"] for e in ev if "source_type" not in e]
+    check("every evidence record states its provenance", not bad, str(bad[:5]))
+
+    bad = P.violations(ev)
+    check("no evidence tier outruns its own provenance", not bad,
+          "; ".join("%s: %s" % v for v in bad[:5]))
+
+    derived = [e["evidence_id"] for e in ev
+               if e.get("source_type") in P.DERIVED_SOURCE_TYPES
+               and e.get("evidence_tier") in P.PRIMARY_TIERS]
+    check("no derived or inferred record carries a primary evidence tier",
+          not derived, str(derived[:5]))
 
     bad = sorted({r["relationship_type"] for r in recon} - RELATIONSHIP_TYPES)
     check("relationship type vocabulary is closed (788)", not bad, str(bad))
