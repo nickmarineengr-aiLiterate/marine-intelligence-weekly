@@ -133,6 +133,115 @@ ok("unrelated prose never conflicts",
 
 
 # ==========================================================================
+# 2a. Full-sentence designator conflict — mixed-case prose
+#
+# The controls above compare BARE designators, where the string is wholly
+# uppercase and the acronym pass is skipped. Production never sees a bare
+# designator: it sees a sentence. In mixed-case prose the acronym pass also
+# emits the bare family head — "ME-GI" yields `dsg:me` beside `dsg:me-gi` —
+# and admitting that head as a member gave both sides the pseudo-value "me",
+# which intersected and cancelled the GI/GA disagreement. An ME-GI ask was
+# then awarded an ME-GA question at EXACT_MATCH.
+#
+# The governing rule: a shared BROAD family must never erase a conflict
+# between different SPECIFIC members of it, and equivalent spellings of one
+# member must still meet. ME-GI is not ME-GA; Annex VI is Annex 6.
+#
+# Every case below is asserted on a full sentence through mtokens(), and the
+# consequence is asserted through classify(), which is what actually decides.
+# ==========================================================================
+SENTENCE_CASES = [
+    ("ME-GI vs ME-GA",
+     "Explain the working of the ME-GI engine.",
+     "Explain the working of the ME-GA engine.", True),
+    ("ME-GI vs ME-GI",
+     "Explain the working of the ME-GI engine.",
+     "Explain the working of the ME-GI engine.", False),
+    ("ME-GI vs ME-LGI",
+     "Explain the working of the ME-GI engine.",
+     "Explain the working of the ME-LGI engine.", True),
+    ("Form A vs Form B",
+     "Which entries are made in Form A of the certificate?",
+     "Which entries are made in Form B of the certificate?", True),
+    ("D-1 vs D-2",
+     "Explain the D-1 standard for ballast water management.",
+     "Explain the D-2 standard for ballast water management.", True),
+    ("G8 vs G9",
+     "State the requirements of the G8 guidelines.",
+     "State the requirements of the G9 guidelines.", True),
+    ("III/1 vs III/2 with a keyword slot",
+     "State the requirements of regulation III/1 of STCW.",
+     "State the requirements of regulation III/2 of STCW.", True),
+    ("III/1 vs III/2 with no keyword slot",
+     "The candidate holds a III/1 certificate of competency.",
+     "The candidate holds a III/2 certificate of competency.", True),
+    ("Annex VI vs Annex 6",
+     "What does Annex VI of MARPOL require?",
+     "What does Annex 6 of MARPOL require?", False),
+    ("Tier II vs Tier III",
+     "State the Tier II NOx limits that apply to this engine.",
+     "State the Tier III NOx limits that apply to this engine.", True),
+    ("A-60 vs A-0",
+     "Where is an A-60 class division required on this vessel?",
+     "Where is an A-0 class division required on this vessel?", True),
+    ("same topic, no differing designator",
+     "Explain the working of the main engine turbocharger.",
+     "Describe how the turbocharger on the main engine works.", False),
+    ("same designator, different words",
+     "Explain the working of the ME-GI engine.",
+     "Describe the ME-GI dual fuel engine and its gas admission.", False),
+]
+
+for label, a, b, want in SENTENCE_CASES:
+    got = T.designator_conflict(toks(a), toks(b))
+    ok("full sentence: %s -> %s" % (label, "conflict" if want else "no conflict"),
+       got is want, "got %s" % got)
+
+# The conflict must survive into the disposition. Scores are held at the top of
+# the range deliberately: a conflicting designator has to block promotion even
+# when the prose is otherwise a perfect match, which is exactly the case that
+# awarded an ME-GI ask an ME-GA question.
+def _disposition(a, b):
+    return R.classify(qcov=1.0, sim=0.95, target_acov=1.0, best_acov=1.0,
+                      union_acov=1.0, n_union=1, n_src_tokens=8, rev=0.9,
+                      conflict=T.designator_conflict(toks(a), toks(b)))[0]
+
+ok("an ME-GI ask is not awarded an ME-GA question at EXACT_MATCH",
+   _disposition("Explain the working of the ME-GI engine.",
+                "Explain the working of the ME-GA engine.") == R.PARTIAL)
+ok("a D-1 ask is not awarded a D-2 question at EXACT_MATCH",
+   _disposition("Explain the D-1 standard for ballast water management.",
+                "Explain the D-2 standard for ballast water management.") == R.PARTIAL)
+ok("an Annex VI ask still reaches EXACT_MATCH against Annex 6",
+   _disposition("What does Annex VI of MARPOL require?",
+                "What does Annex 6 of MARPOL require?") == R.EXACT)
+ok("an ME-GI ask still reaches EXACT_MATCH against ME-GI",
+   _disposition("Explain the working of the ME-GI engine.",
+                "Explain the working of the ME-GI engine.") == R.EXACT)
+
+# Naming only the broad family is silence, not disagreement. "the ME engine"
+# says nothing about which member, so it must neither conflict with ME-GI nor
+# be treated as an equal of it.
+ok("a broad family mention does not conflict with a specific member",
+   not T.designator_conflict(toks("Explain the working of the ME engine."),
+                             toks("Explain the working of the ME-GI engine.")))
+ok("a broad family mention does not conflict with another broad mention",
+   not T.designator_conflict(toks("Explain the working of the ME engine."),
+                             toks("Describe the ME engine control system.")))
+
+# The repair is in the conflict layer only. Phase 2A-i tokenisation is frozen:
+# every designator token the tokeniser emitted before must still be emitted.
+for d, expected in (("ME-GI", "dsg:me-gi"), ("ME-GA", "dsg:me-ga"),
+                    ("ME-LGI", "dsg:me-lgi"), ("Annex VI", "dsg:annex-6"),
+                    ("Annex 6", "dsg:annex-6"), ("Form A", "dsg:form-a"),
+                    ("G8", "dsg:g-8"), ("D-1", "dsg:d-1")):
+    ok("tokenisation is unchanged: %s still emits %s" % (d, expected),
+       expected in T.designators(d), str(sorted(T.designators(d))))
+ok("the unhyphenated spelling still meets the hyphenated one",
+   bool(toks("ME-GI") & toks("MEGI and MEGA engines")))
+
+
+# ==========================================================================
 # 3. SAME_CORE_ASK admission floor
 #
 # classify() applied a similarity floor to EXACT (0.55) and NEAR (0.30) and

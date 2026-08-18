@@ -332,8 +332,25 @@ def c_page_level_notes_matching(files):
     p.write_text(s, encoding="utf-8", newline="\n")
 
 
+def c_family_head_cancels_conflict(files):
+    """M19 - restore the defective conflict cancellation: re-admit the bare
+    family head as though it were a member. In mixed-case prose "ME-GI" emits
+    `dsg:me` beside `dsg:me-gi`, so both sides regain the pseudo-value "me",
+    it intersects, and the real GI/GA disagreement cancels. The full-sentence
+    controls must fail; the bare-designator ones will not notice, which is
+    precisely why the sentence controls exist."""
+    p = files / "oral_text.py"
+    s = p.read_text(encoding="utf-8")
+    s = s.replace("            if val == key:\n"
+                  "                continue          "
+                  "# the family named, no member named\n", "")
+    p.write_text(s, encoding="utf-8", newline="\n")
+
+
 CODE_MUTATIONS = [
     ("M10 remove the SAME_CORE admission floor", c_remove_same_core_floor),
+    ("M19 a shared family head cancels a specific conflict",
+     c_family_head_cancels_conflict),
     ("M11 collapse ME-GI / ME-GA tokenisation", c_collapse_me_gi_me_ga),
     ("M12 re-enable speculative spell repair", c_reenable_speculative_repair),
     ("M14 drop the Notes coverage layer", c_drop_notes_coverage),

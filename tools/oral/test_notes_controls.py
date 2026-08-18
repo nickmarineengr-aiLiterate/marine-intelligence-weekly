@@ -252,28 +252,20 @@ for a, b in (("D-1", "D-2"), ("ME-GI", "ME-GA"), ("Annex I", "Annex VI")):
     ok("a designator conflict caps Notes support at topic (%s/%s)" % (a, b),
        tier == C.TOPIC_SUPPORT, tier)
 
-# KNOWN LIMITATION, pinned rather than hidden, and reported to Phase 2A-iii.
-#
-# `designator_conflict` is exercised in production on mixed-case SENTENCES, not
-# on bare designators. In a mixed-case sentence the acronym pass additionally
-# emits `dsg:me` and `dsg:gi` for "ME-GI", so both sides share the family "me"
-# with the value "me" and the conflict cancels:
-#
-#     designator_conflict(mtokens("explain the ME-GI standard"),
-#                         mtokens("explain the ME-GA standard")) is False
-#
-# The Phase 2A-i controls compare bare designators, where the string is wholly
-# uppercase, the acronym pass is skipped and the conflict is correctly found.
-# This is NOT reopened here: the tokeniser is Phase 2A-i's, and `ME-GI`, `ME-GA`
-# and `ME-LGI` occur 27, 46 and 43 times in the QB and ZERO times in the Oral
-# Notes, so no Note text exercises it. The control below states the present
-# behaviour so it cannot regress silently in either direction.
+# The Phase 2A-ii limitation, REPAIRED in Phase 2A-iii and pinned the right way
+# round. `designator_conflict` is exercised in production on mixed-case
+# SENTENCES, not on bare designators, and in a sentence the acronym pass also
+# emits the bare family head `dsg:me` beside `dsg:me-gi`. That head was admitted
+# as a member, so both sides carried the pseudo-value "me", it intersected, and
+# the real GI/GA disagreement cancelled. A family named without a member now
+# contributes no member, so the shared "ME" no longer erases the conflict.
+# The full-sentence controls live in test_oral_controls.py section 3a.
 _sentence_conflict = T.designator_conflict(
     T.mtokens("explain the ME-GI standard"),
     T.mtokens("explain the ME-GA standard"))
-ok("known limitation is pinned: the mixed-case sentence conflict does not fire",
-   _sentence_conflict is False,
-   "behaviour changed - re-evaluate the Phase 2A-iii finding")
+ok("the mixed-case sentence conflict fires: ME-GI is not ME-GA in prose",
+   _sentence_conflict is True,
+   "the Phase 2A-iii designator repair has regressed")
 ok("no Oral Note text exercises the ME-GI / ME-GA family",
    not any(d in u["text"] for u in UNITS
            for d in ("ME-GI", "ME-GA", "ME-LGI")))
