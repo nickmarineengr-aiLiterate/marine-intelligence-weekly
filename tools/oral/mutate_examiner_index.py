@@ -17,6 +17,8 @@ Mutations (brief s42):
   I  tamper the snapshot's own totals                 -> index gate
   J  relabel a CE-tip row as Confirmed in the HTML    -> index gate
   K  storefront (SQ/index.html) card count differs    -> index gate
+  L  storefront stats ribbon drifts from the corpus   -> index gate
+  M  ribbon attribute right but prose sentence stale  -> index gate
 
     PYTHONIOENCODING=utf-8 python tools/oral/mutate_examiner_index.py
 """
@@ -168,6 +170,21 @@ def m_K():
     wtext(SQ_HOME, h.replace(m.group(0), m.group(0).replace(str(n), str(n - 1)), 1))
 
 
+def m_L():
+    h = rtext(SQ_HOME)
+    mm = re.search(r'data-oral-questions="(\d+)"', h)
+    n = int(mm.group(1))
+    wtext(SQ_HOME, h.replace(mm.group(0), 'data-oral-questions="%d"' % (n - 5), 1))
+
+
+def m_M():
+    # attribute stays right, the sentence a candidate reads goes wrong
+    h = rtext(SQ_HOME)
+    mm = re.search(r"(\d+) solved oral Q&amp;As with examiner-focused notes", h)
+    wtext(SQ_HOME, h.replace(mm.group(0),
+                             mm.group(0).replace(mm.group(1), "417"), 1))
+
+
 def m_J():
     h = rtext(INDEX)
     h2 = h.replace('class="q-row tier-ce_tip" data-tier="ce_tip"',
@@ -188,6 +205,8 @@ MUTATIONS = [
     ("I", "tamper snapshot totals", m_I, ("validate_examiner_index.py",)),
     ("J", "relabel a CE-tip row Confirmed in the HTML", m_J, ("validate_examiner_index.py",)),
     ("K", "storefront card count differs from snapshot", m_K, ("validate_examiner_index.py",)),
+    ("L", "storefront stats ribbon drifts from the corpus", m_L, ("validate_examiner_index.py",)),
+    ("M", "ribbon attribute right, prose sentence stale", m_M, ("validate_examiner_index.py",)),
 ]
 
 

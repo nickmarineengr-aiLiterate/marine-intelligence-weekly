@@ -300,6 +300,50 @@ def main(argv):
     check("SQ home carries no hand-typed legacy examiner numbers",
           not re.search(r"10-question set|Simon Sir's 212|791\+", home))
 
+    # ------------------------------- 8c. storefront stats ribbon == corpus
+    # Same discipline tools/pastpapers/solvedqp_check.py applies to the two
+    # Written figures: the attribute AND the number a candidate actually
+    # reads must both equal the derived count, so neither can be corrected
+    # while the other stays wrong. These two advertised 417+ and 5 against a
+    # real 682 and 7.
+    n_answered = sum(1 for q in inv.values() if q["has_answer"])
+    for attr, expected, what in (("data-oral-questions", n_answered,
+                                  "answered canonical questions"),
+                                 ("data-oral-examiners", tot["examiners"],
+                                  "examiners covered")):
+        found = re.findall(attr + r'="(\d+)"', home)
+        check("SQ home carries a guarded %s figure" % what, bool(found),
+              "no element carries %s -- the storefront count is unguarded, "
+              "which is how 417+ survived to %d" % (attr, expected))
+        check("SQ home %s attribute equals the corpus" % attr,
+              all(int(v) == expected for v in found),
+              "%s vs %d" % (found, expected))
+        for m in re.finditer(attr + r'="\d+"[^>]*>(.*?)</div>\s*</div>', home, re.S):
+            nums = re.findall(r"\d+", unesc(m.group(1)))
+            check("SQ home %s visible text equals its attribute" % attr,
+                  nums and int(nums[0]) == expected,
+                  "visible %s vs %d" % (nums, expected))
+
+    # The free sample advertised on the storefront is the SQ teaser's free
+    # examiner section; it said 10 while the teaser published 33.
+    free_sec = secs[G.CONFIG["sq"]["free_examiner"]]
+    found = re.findall(r'data-oral-free-sample="(\d+)"[^>]*>(\d+)<', home)
+    check("SQ home free-sample count is guarded and equals the teaser",
+          found and all(int(a) == int(b) == free_sec["count"] for a, b in found),
+          "%s vs %d" % (found, free_sec["count"]))
+
+    # Every prose claim of the oral question count, wherever it is phrased.
+    # The stale figure may survive inside an HTML comment -- that comment is
+    # the record of what drifted -- but never in candidate-visible text.
+    visible = re.sub(r"<!--.*?-->", "", home, flags=re.S)
+    claims = re.findall(r"(\d+)\+?\s+solved oral", visible)
+    check("SQ home states the oral question count in prose", bool(claims))
+    check("every SQ home prose oral-question claim equals the corpus",
+          all(int(c) == n_answered for c in claims),
+          "%s vs %d" % (sorted(set(claims)), n_answered))
+    check("no stale oral figure survives in candidate-visible SQ home text",
+          "417" not in visible)
+
     # ---------------------------------------------- 9. git safety gate (H)
     try:
         ls = subprocess.run(["git", "ls-files", "--", "docs/MIW-master-Question-bank"],
