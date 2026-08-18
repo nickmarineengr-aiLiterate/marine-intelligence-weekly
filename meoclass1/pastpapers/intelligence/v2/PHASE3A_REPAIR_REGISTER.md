@@ -107,7 +107,11 @@ validator reports those checks as **skipped**, loudly, on any machine lacking `D
 Stated plainly so the reviewer does not have to infer it:
 
 - The **Laptop review document** was never read (§0). The register may be wrong.
+  *(Closed in Phase 3A.1: the review is on origin at `286c0c5` and was read in
+  full. See `PHASE3A1_REPAIR_REGISTER.md`.)*
 - **Section-by-section mapping** of the 1958 Act's Part XII duties onto the 2025 Act
-  is not done. `FAMILY-EM-0008` must not advance toward candidate use until it is.
+  is not done. `FAMILY-EM-0009` — the casualty family — must not advance toward
+  candidate use until it is. *(Phase 3A attached this gate to `FAMILY-EM-0008` in
+  error; corrected in Phase 3A.1.)*
 - The **832 archived MEO URLs** were not classified or mined. Phase 3B.
 - No **candidate-facing publication** of anything.

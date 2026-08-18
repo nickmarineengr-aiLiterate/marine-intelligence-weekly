@@ -117,7 +117,17 @@ because the 2025 Act re-enacts that power itself immediately before s.324.
 
 ---
 
-## 5. Temporal delta for FAMILY-EM-0008
+## 5. Temporal delta for FAMILY-EM-0009
+
+> **Corrected in Phase 3A.1.** This section was headed `FAMILY-EM-0008` while
+> describing `FAMILY-EM-0009`'s data throughout — five casualty sittings, the
+> QP2402 grounding variant, ancestor BANK-039. The Laptop review found it, and
+> it is the same class of error as the Oct-05 attribution: the data was right
+> and the write-up named the wrong family. `FAMILY-EM-0008` is the
+> unseaworthy-vessels family (ancestor BANK-160, five sittings July 2023 to
+> February 2026) and is **not** what this section is about. The consequence
+> mattered: the gate below was attached to the wrong family, leaving EM-0009
+> ungated and EM-0008 gated for a reason that was never its own.
 
 The family asks, across five sittings from March 2023 to July 2025: after a casualty
 to an Indian flag vessel off the coast of India, what steps must be initiated under
@@ -133,8 +143,10 @@ and the marine board machinery; with wreck and abandonment under Part XIII for t
 QP2402 grounding variant.
 
 **CURRENT POSITION** — from 15 March 2026 the governing statute is the Merchant
-Shipping Act, 2025 (24 of 2025). The 1958 Act survives only as Part XIV
-(coasting-trade licensing), which is not what this question asks about.
+Shipping Act, 2025 (24 of 2025). The 1958 Act survives, so far as the MS Act 2025
+alone is concerned, only as its **Part XIV — Control of Indian Ships and Ships
+Engaged in Coasting Trade**, which is not what this question asks about. See §5A:
+a second statute is dismantling that Part as well.
 
 **DO NOT WRITE TODAY** — a bare citation of "section 358 of the Merchant Shipping
 Act, 1958" or "the Merchant Shipping Act, 1958, as amended" as the current source of
@@ -149,10 +161,68 @@ must be dated: "under the 1958 Act, which governed until 15 March 2026".
 The structure of the answer survives; the statutory authority under it does not.
 
 **The specific section mapping from the 1958 Part XII duties into the 2025 Act has
-NOT been done and is not asserted here.** Doing it needs a section-by-section read
+NOT been done and is not asserted here.** The gate belongs to **FAMILY-EM-0009**,
+the casualty family — not to FAMILY-EM-0008. Doing it needs a section-by-section read
 of the 2025 Act's casualty and inquiry Part, and that is Phase 3B work. Until it is
 done this family must not advance toward candidate use, however well its
 commencement date is pinned.
+
+---
+
+## 5A. The Coastal Shipping Act, 2025 — the second repeal
+
+The MS Act 2025 is **not** the only statute acting on Part XIV of the 1958 Act, and
+a document titled *primary authority* on what survives repeal is incomplete without
+the other one. The Laptop review verified this independently in Phase 3A and
+Desktop's Phase-3A note omitted it.
+
+| | Merchant Shipping Act, 2025 | Coastal Shipping Act, 2025 |
+|---|---|---|
+| Act number | **24 of 2025** | **20 of 2025** |
+| Assent | 18 August 2025 | 9 August 2025 |
+| Commencement | **15 March 2026**, by S.O. 1244(E) of 10 March 2026 | **not confirmed here** |
+| Effect on 1958 Part XIV | saves Part XIV, **except** s.411A, which it repeals | repeals Part XIV, **except** s.411A |
+
+The two interlock precisely. The MS Act 2025 saves Part XIV minus s.411A and repeals
+s.411A; the Coastal Shipping Act repeals Part XIV except s.411A and re-enacts
+coasting-trade licensing as a standalone statute. Between them **Part XIV is
+comprehensively dismantled** — a fact the MS Act 2025 cannot tell on its own.
+
+> **Do not write** that "the 1958 Act survives as Part XIV" without naming the
+> Coastal Shipping Act, 2025. The sentence is true only of the MS Act 2025 read
+> alone, and it becomes wrong the moment the CSA's commencement is notified.
+
+**Commencement of the Coastal Shipping Act is NOT asserted.** No notification was
+located, so this document does not claim Part XIV is already gone. That is a
+separate dated-source question, and it is held open in `WATCH_REGISTER.md`.
+
+MIW's own live corpus already knows the CSA exists — `QB10_A.html` and
+`oralnotes/simon-notes-p2.html` both name it as replacing 1958 ss.406–407. On this
+point the live product was ahead of the research branch.
+
+---
+
+## 5B. "Part XIV" means two different things — always qualify it
+
+This is an exam trap and a corpus-clarity problem, and it is why every reference in
+this document names the Act.
+
+| Statute | Part XIV is |
+|---|---|
+| **Merchant Shipping Act, 1958** | **Control of Indian Ships and Ships Engaged in Coasting Trade** |
+| **Merchant Shipping Act, 2025** | **Offences and Penalties** |
+
+A reader who meets "the 1958 Act stands repealed except Part XIV" on one page and
+"MS Act 2025, Part XIV (Offences and Penalties)" on another has no way to know these
+are different statutes.
+
+**Rule for every research artefact in this layer:** write *Merchant Shipping Act,
+1958 — Part XIV* or *Merchant Shipping Act, 2025 — Part XIV*. Never bare *Part XIV*
+while both Acts are in scope.
+
+For the avoidance of the doubt Phase 3A specifically guarded against: in the
+**1958** Act, Part XII is Investigations and Inquiries and Part XIII is Wreck and
+Salvage. **Wreck and salvage is Part XIII, not Part XIV**, and both are repealed.
 
 ---
 

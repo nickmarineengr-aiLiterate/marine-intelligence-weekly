@@ -94,3 +94,51 @@ older material — not as a defect finder against MIW's own answers.
 
 Record: question · claim · current text · problem · authority · severity ·
 recommended correction. Then stop. Desktop does not patch candidate-facing answers.
+
+---
+
+# Phase 3A.1 — two candidates raised, and independently re-verified
+
+The Laptop review ran its own bounded sweep of the current corpus and found the
+class Phase 3A had guarded against to be **absent**, which stands: no page says
+the 1958 Act was wholly repealed without qualification, none calls Part XIV
+wreck and salvage, none claims wreck, salvage or investigations survived
+repeal. Every hit it found was an authoring `why` note that dates itself.
+
+It did find two of a different kind. Both were re-checked here against the live
+files rather than accepted from the review, and both hold.
+
+**Nothing below was edited. Desktop does not patch candidate-facing answers.**
+
+---
+
+## `CURRENT_ANSWER_CORRECTION_CANDIDATE` W-1 — Part XIV described as a savings provision
+
+| | |
+|---|---|
+| **File** | `meoclass1/oralnotes/miw-notes-mgmt-p15.html`, line 432 |
+| **Claim as written** | the MS Act 2025 "repeals the 1958 Act (retaining only limited savings under Part XIV)" |
+| **Problem** | Part XIV is not a savings provision. It is the substantive Part — *Control of Indian Ships and Ships Engaged in Coasting Trade* — and the sentence reads as though it were a transitional clause. A candidate who carried that reading into an oral would mis-describe what survives. |
+| **Authority** | MS Act 2025 s.324(1) repeals the 1958 Act "except Part XIV but not including section 411A therein"; the Directorate's own page titles Part XIV *Control Or Indian Ships And Ships Engaged In Coasting Trade*. |
+| **Severity** | MINOR — the surrounding note is careful, correctly dates the cutover to 15 March 2026, and correctly warns that renumbered clause references are not yet citable. The defect is one parenthesis. |
+| **Recommended correction** | Replace the parenthesis with a statement of what Part XIV actually is, and name the Coastal Shipping Act, 2025 as separately repealing it except s.411A. |
+
+## `CROSS_PRODUCT_TERMINOLOGY_REVIEW` W-2 — "Part XIV" carries two meanings
+
+| | |
+|---|---|
+| **Problem** | Part XIV of the **1958** Act is coasting-trade control; Part XIV of the **2025** Act is Offences and Penalties. Both are live in the corpus, and a reader meeting one then the other has no way to know they are different statutes. |
+| **Correct and complete already** | `QB9_F.html:373-391` — names the 1958 Part XIV as cabotage, the s.324 saving, s.411A's exclusion, and the Coastal Shipping Act 2025 by number and assent date. `QB10_A.html:196` and `oralnotes/simon-notes-p2.html:1116` likewise. |
+| **Correct but bare** | `QB9_E.html:642` — "Merchant Shipping Act, 2025, Part XIV (Offences and Penalties)". Right on its own page; ambiguous beside the 1958 usage. |
+| **Severity** | LOW individually, MODERATE as a class — this is the same shape as the MEPC ES.2 finding, where some pages were right while others were not. |
+| **Recommended correction** | A naming convention rather than a content fix: always write *Merchant Shipping Act, 1958 — Part XIV* or *Merchant Shipping Act, 2025 — Part XIV* while both Acts are in scope. Adopted for this research layer in `MERCHANT_SHIPPING_ACT_AUTHORITY.md` §5B. |
+
+## Not a defect — recorded so it is not re-raised
+
+The live corpus is **ahead of the research branch** on the Coastal Shipping
+Act, 2025. `QB9_F.html`, `QB10_A.html` and `simon-notes-p2.html` all carry it
+with its Act number and assent date, while the Phase-3A authority note omitted
+it entirely. That omission was the research document's, not the product's, and
+it is repaired in Phase 3A.1 §5A.
+
+**Laptop decides candidate repair separately. Nothing here is scheduled.**

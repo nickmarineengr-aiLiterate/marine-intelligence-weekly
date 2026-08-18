@@ -164,7 +164,7 @@ def date_evidence(occ, src_by_id):
 
 
 def validate(fam_doc, occ_rows, manifest, bank, specs, hist_ids, rep,
-             extracted=None):
+             extracted=None, documents=None):
     occ_by_id = {}
     # --- C1 no duplicate occurrence ids -------------------------------------
     dupes = []
@@ -316,6 +316,9 @@ def validate(fam_doc, occ_rows, manifest, bank, specs, hist_ids, rep,
 
     bank_ancestor_semantics(fam_doc, occ_by_id, specs, extracted, rep)
     occurrence_stem_fidelity(occ_rows, specs, rep)
+    family_month_fidelity(fam_doc, occ_by_id,
+                          load_documents() if documents is None else documents,
+                          rep)
 
     src_by_id = {s['source_id']: s for s in manifest.get('sources', [])}
 
@@ -505,6 +508,104 @@ def _family_fit(fam, bank_stem, occ_by_id, specs, stem_cache):
                 r = qs.classify(stem_cache[pkey], bank_stem)
         best = max(best, qs._RANK.get(r.cls, -1))
     return best
+
+
+MONTH_NAMES = {'january': 1, 'february': 2, 'march': 3, 'april': 4, 'may': 5,
+               'june': 6, 'july': 7, 'august': 8, 'september': 9,
+               'october': 10, 'november': 11, 'december': 12}
+
+# `15 March 2026` is a commencement date, not a sitting: a day number in front
+# of the month means the text is dating an event, not naming a paper.
+_MONTH_YEAR = re.compile(
+    r'(?<!\d\s)\b(%s)\s+(\d{4})\b' % '|'.join(MONTH_NAMES), re.I)
+_FAMILY_ID = re.compile(r'FAMILY-EM-\d{4}')
+
+
+def load_documents():
+    """Every markdown file in the layer, read once."""
+    out = {}
+    for fn in sorted(os.listdir(V2)):
+        if fn.endswith('.md'):
+            out[fn] = io.open(os.path.join(V2, fn), encoding='utf-8').read()
+    return out
+
+
+def _blocks(text):
+    """Split a markdown document into blank-line separated blocks."""
+    out, cur = [], []
+    for line in text.split('\n'):
+        if line.strip():
+            cur.append(line)
+        elif cur:
+            out.append(cur)
+            cur = []
+    if cur:
+        out.append(cur)
+    return out
+
+
+def family_month_fidelity(fam_doc, occ_by_id, documents, rep):
+    """C44: a prose section headed by one family may not cite another's months.
+
+    This is the guard for the defect the Laptop review found live in two
+    write-ups. `MERCHANT_SHIPPING_ACT_AUTHORITY.md` was headed *Temporal delta
+    for FAMILY-EM-0008* and then described five casualty sittings from March
+    2023 to July 2025 — FAMILY-EM-0009's data exactly — and
+    `PROTOTYPE_EVIDENCE_CLASSES.md` repeated the mistake in its worked example.
+    Both are prose, so no schema check could have caught them, and the
+    consequence was real: the Part XII mapping gate ended up attached to the
+    wrong family, leaving the casualty family ungated.
+
+    A heading naming exactly one family binds the section that follows. Every
+    sitting month the section then names must be one that family actually sat.
+    A line that names some other family releases the binding for that line,
+    because cross-references are legitimate and common.
+    """
+    months = {}
+    for fam in fam_doc['families']:
+        got = set()
+        for oid in fam.get('known_occurrences') or []:
+            o = occ_by_id.get(oid)
+            if not o:
+                continue
+            y, m = o.get('source_year'), o.get('source_month')
+            if y and m and str(m).upper()[:3] in MONTHS:
+                got.add((int(y), MONTHS[str(m).upper()[:3]]))
+        # A month the family itself records as ASSERTED BUT NOT COUNTED is a
+        # legitimate thing for its own write-up to discuss — that is the whole
+        # point of keeping the assertion visible rather than deleting it.
+        for u in fam.get('unverified_asserted_occurrences') or []:
+            for name, year in _MONTH_YEAR.findall(json.dumps(u)):
+                got.add((int(year), MONTH_NAMES[name.lower()]))
+        months[fam['family_id']] = got
+
+    problems = []
+    for fn in sorted(documents):
+        bound, header = None, None
+        # A blank line ends a block. The binding is released for a whole block
+        # that names another family, not merely for the line that names it:
+        # a correction note explaining that EM-0009's data was once filed under
+        # EM-0008 must be free to give EM-0008's months in its own sentences.
+        for block in _blocks(documents[fn]):
+            head = [l for l in block if l.startswith('#')]
+            if head:
+                ids = set(_FAMILY_ID.findall(head[-1]))
+                bound = sorted(ids)[0] if len(ids) == 1 else None
+                header = head[-1].strip()[:60]
+            if not bound or not months.get(bound):
+                continue
+            body = '\n'.join(l for l in block if not l.startswith('#'))
+            if set(_FAMILY_ID.findall(body)) - {bound}:
+                continue
+            for name, year in _MONTH_YEAR.findall(body):
+                pair = (int(year), MONTH_NAMES[name.lower()])
+                if pair not in months[bound]:
+                    problems.append(
+                        '%s: section %r cites %s %s, which %s never sat'
+                        % (fn, header, name, year, bound))
+
+    rep.check('C44 a section headed by a family cites only its own sittings',
+              not problems, '; '.join(sorted(set(problems))))
 
 
 def bank_ancestor_semantics(fam_doc, occ_by_id, specs, extracted, rep):
@@ -738,6 +839,33 @@ def _swap_ancestors(fam_doc):
     a['official_bank_ancestor'], b['official_bank_ancestor'] = (
         b['official_bank_ancestor'], a['official_bank_ancestor'])
 
+# Document mutations corrupt an in-memory copy of the markdown tree. A
+# validator self-test must never write to the tree it is validating, so these
+# take the loaded documents rather than touching disk.
+DOC_MUTATIONS = [
+    ('re-label a family section with another family id (the live defect)',
+     lambda d: d.__setitem__(
+         'MERCHANT_SHIPPING_ACT_AUTHORITY.md',
+         _require_replace(d['MERCHANT_SHIPPING_ACT_AUTHORITY.md'],
+                          '## 5. Temporal delta for FAMILY-EM-0009',
+                          '## 5. Temporal delta for FAMILY-EM-0008')),
+     'C44'),
+    ('give a worked example another family\'s sitting months',
+     lambda d: d.__setitem__(
+         'PROTOTYPE_EVIDENCE_CLASSES.md',
+         _require_replace(d['PROTOTYPE_EVIDENCE_CLASSES.md'],
+                          '  March 2023 · July 2023',
+                          '  October 2024 · July 2023')),
+     'C44'),
+]
+
+
+def _require_replace(text, old, new):
+    if old not in text:
+        raise AssertionError('mutation target %r not present' % old)
+    return text.replace(old, new, 1)
+
+
 # Bank mutations need the bank document, which the family mutations do not
 # take. Kept as a separate table rather than widening every lambda above.
 BANK_MUTATIONS = [
@@ -819,9 +947,10 @@ def main():
     specs, hist_ids = build_spec_index()
 
     extracted = load_extracted_bank()
+    documents = load_documents()
 
     rep = validate(fam, occ, manifest, bank, specs, hist_ids, Report(),
-                   extracted)
+                   extracted, documents)
     print('QI-v2 family validator')
     print('  families    : %d' % len(fam['families']))
     print('  occurrences : %d' % len(occ))
@@ -853,9 +982,12 @@ def main():
         for name, mutate, expect in table:
             f2, o2, b2 = (copy.deepcopy(fam), copy.deepcopy(occ),
                           copy.deepcopy(bank))
+            d2 = dict(documents)
             try:
                 if kind == 'bank':
                     mutate(b2)
+                elif kind == 'doc':
+                    mutate(d2)
                 else:
                     mutate(f2, o2)
             except Exception as exc:                              # noqa: BLE001
@@ -863,7 +995,7 @@ def main():
                 held += 1
                 continue
             r2 = validate(f2, o2, manifest, b2, specs, hist_ids, Report(),
-                          extracted)
+                          extracted, d2)
             fired = {fl.split(' ')[0] for fl in r2.failures}
             ok = bool(fired & set(expect.split('|')))
             held += 0 if ok else 1
@@ -879,8 +1011,11 @@ def main():
     bad += run_table('bank referential mutations', BANK_MUTATIONS, 'bank')
     bad += run_table('date-derivation mutations - fields stay consistent, '
                      'only the evidence is missing', DATE_MUTATIONS, 'family')
+    bad += run_table('document mutations - the family a write-up NAMES must be '
+                     'the family it DESCRIBES', DOC_MUTATIONS, 'doc')
 
-    total = len(MUTATIONS) + len(BANK_MUTATIONS) + len(DATE_MUTATIONS)
+    total = (len(MUTATIONS) + len(BANK_MUTATIONS) + len(DATE_MUTATIONS)
+             + len(DOC_MUTATIONS))
     print('\nmutations: %d   escaped: %d' % (total, bad))
     return 1 if (rep.failures or bad) else 0
 

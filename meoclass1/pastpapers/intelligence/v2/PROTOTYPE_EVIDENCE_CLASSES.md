@@ -75,7 +75,7 @@ The saying-nothing-about-timing is the feature.
 ## Both together
 
 When a family has **both** a dated sitting and a bank ancestor — as
-`FAMILY-EM-0008` does — show Type A and add one line of Type B beneath it. Do
+`FAMILY-EM-0009` does — show Type A and add one line of Type B beneath it. Do
 not merge them into a single count. Five sittings plus one bank item is not
 six of anything.
 
@@ -98,7 +98,14 @@ which bucket the classifier chose.
 
 ---
 
-## Worked example — FAMILY-EM-0008, not for publication
+## Worked example — FAMILY-EM-0009, not for publication
+
+> **Corrected in Phase 3A.1.** This example was captioned `FAMILY-EM-0008`
+> while listing `FAMILY-EM-0009`'s five casualty sittings. EM-0008 is the
+> unseaworthy-vessels family — ancestor BANK-160, sittings July 2023, October
+> 2024, June 2025, August 2025, February 2026 — and its months are not these.
+> Validator check `C44` now refuses a section that cites months its own named
+> family never sat.
 
 ```
 ASKED BEFORE

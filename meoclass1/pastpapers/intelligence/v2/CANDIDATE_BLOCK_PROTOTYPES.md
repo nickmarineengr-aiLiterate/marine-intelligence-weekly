@@ -1,5 +1,14 @@
 # Candidate Study-Guide block — prototypes
 
+> **SUPERSEDED IN PART — read `PROTOTYPE_EVIDENCE_CLASSES.md` first.**
+> Prototype 3 below is the Phase-2 draft. It is headed *ASKED BEFORE* and uses
+> the words *exact repeat*, both of which `PROTOTYPE_EVIDENCE_CLASSES.md`
+> forbids for a family with no dated evidence. That document replaces it and
+> carries the forbidden-vocabulary table. Prototype 3 is retained here only as
+> the record of what was rejected and why; it is not a specification, and
+> nothing in it may be built. The Laptop review flagged the missing
+> cross-reference (§Z).
+
 **RESEARCH ONLY. NOTHING HERE IS IMPLEMENTED, AND NOTHING HERE IS PUBLISHED.**
 `current_as_of: 2026-08-17`
 
