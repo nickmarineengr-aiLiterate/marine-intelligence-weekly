@@ -475,8 +475,17 @@ def main():
         check("no Release-A relationship rests on a derived or page-declared "
               "source alone", not bad, str(bad[:5]))
 
-        ev_ids = {e["evidence_id"] for e in ev} | {e["evidence_id"] for e in
-                                                   (jsonl("ORAL_NOTES_EXAMINER_EVIDENCE.jsonl") or [])}
+        # The evidence universe a Release-A id may point into. The final review
+        # found this check vacuous because the research rows carried no ids;
+        # it was ALSO wrong-by-construction, because it never admitted the
+        # V1 ledger (MASTER-AQ / JULY-*) or the 788 source records (ASC-*),
+        # which is where the primary and external evidence actually lives.
+        ev_ids = ({e["evidence_id"] for e in ev}
+                  | {e["evidence_id"] for e in
+                     (jsonl("ORAL_NOTES_EXAMINER_EVIDENCE.jsonl") or [])}
+                  | {e["evidence_id"] for e in
+                     (jsonl("EXAMINER_EVIDENCE_LEDGER.jsonl") or [])}
+                  | {r["source_id"] for r in src})
         bad = [c["relation_id"] for c in conns
                for e in c["evidence_ids"] if e not in ev_ids]
         check("every Release-A evidence id resolves to an evidence record",
@@ -501,6 +510,140 @@ def main():
                     bad.append(c["relation_id"])
             check("no Release-A pair rests on a SAME_CORE-only external row",
                   not bad, str(bad[:5]))
+
+    # ------------------------------------------------------------ Release A
+    # publication set (finalize_release_a.py). These are the checks the final
+    # review asked for: real evidence ids, each resolving to a record that
+    # names THIS examiner and THIS question, a tier derivable from those
+    # records, and the two review-held pairs absent.
+    pub = jsonobj("RELEASE_A_PUBLICATION.json")
+    dec = jsonobj("RELEASE_A_REVIEW_DECISIONS.json")
+    if pub is None or dec is None:
+        check("Release-A publication set present", False,
+              "RELEASE_A_PUBLICATION.json / RELEASE_A_REVIEW_DECISIONS.json missing")
+    else:
+        pconns = pub["connections"]
+        held_ids = {h["relation_id"] for h in dec["held"]}
+        pub_ids = [c["relation_id"] for c in pconns]
+        check("no review-held Release-A pair is published",
+              not (held_ids & set(pub_ids)), str(sorted(held_ids & set(pub_ids))))
+        check("every review-held pair is recorded in RELEASE_A_HELD",
+              held_ids <= {h["relation_id"] for h in
+                           (jsonobj("RELEASE_A_HELD.json") or {"held": []})["held"]})
+        pkeys = [(c["examiner"], c["canonical_question_id"]) for c in pconns]
+        check("no duplicate published Release-A relationship",
+              len(pkeys) == len(set(pkeys)),
+              str([k for k, v in Counter(pkeys).items() if v > 1][:5]))
+        check("published Release-A count matches its own records",
+              pub["published_pairs"] == len(pconns)
+              and pub["new_relationships"] == sum(
+                  1 for c in pconns if c["disposition"] == "NEW_RELATIONSHIP")
+              and pub["evidence_for_existing"] == sum(
+                  1 for c in pconns if c["disposition"] == "EVIDENCE_FOR_EXISTING"),
+              "%s/%s/%s vs %d" % (pub["published_pairs"], pub["new_relationships"],
+                                  pub["evidence_for_existing"], len(pconns)))
+        check("published Release-A composition matches its own records",
+              pub["composition_published"] == dict(sorted(Counter(
+                  c["strongest_evidence_tier"] for c in pconns).items())))
+
+        bad = [c["relation_id"] for c in pconns
+               if c["canonical_question_id"] not in inv]
+        check("every published Release-A target resolves to a live question",
+              not bad, str(bad[:5]))
+        bad = [c["relation_id"] for c in pconns
+               if c["anchor"] not in anchors.get(c["file"], set())]
+        check("every published Release-A anchor exists on its page",
+              not bad, str(bad[:5]))
+
+        bad = [c["relation_id"] for c in pconns if not c["evidence_ids"]]
+        check("every published Release-A relationship carries evidence ids",
+              not bad, str(bad[:5]))
+        bad = [c["relation_id"] for c in pconns
+               if c["evidence_ids"] != sorted(set(c["evidence_ids"]))]
+        check("published Release-A evidence ids are unique and stably ordered",
+              not bad, str(bad[:5]))
+
+        # Resolution AND back-reference: an id must exist and its record must
+        # name this examiner and this question with the strength its bucket
+        # claims. Anything less is a pointer, not evidence.
+        v1 = {e["evidence_id"]: e for e in
+              (jsonl("EXAMINER_EVIDENCE_LEDGER.jsonl") or [])}
+        fin = {r["source_id"]: r for r in (final or [])}
+        nev = {e["evidence_id"]: e for e in
+               (jsonl("ORAL_NOTES_EXAMINER_EVIDENCE.jsonl") or [])}
+        rev_pairs = set()
+        rev = jsonobj("ORAL_NOTES_REVERSE_CONNECTIONS.json")
+        for r in (rev or {"rows": []})["rows"]:
+            for u in r.get("note_units", []):
+                rev_pairs.add((r["examiner"], r.get("canonical_question_id"), u))
+        unresolved, misattributed = [], []
+        for c in pconns:
+            ex, qid = c["examiner"], c["canonical_question_id"]
+            for eid in c["evidence_ids"]:
+                if eid in v1:
+                    r = v1[eid]
+                    if not (r["examiner_normalized"] == ex
+                            and r.get("canonical_question_id") == qid
+                            and r.get("legacy_mapping") in ("VERIFIED_MATCH",
+                                                            "VERIFIED_SAME_CORE")):
+                        misattributed.append((c["relation_id"], eid))
+                elif eid in fin:
+                    r = fin[eid]
+                    if not (r["examiner"] == ex
+                            and r.get("matched_question_id") == qid
+                            and r["content_disposition"] in ("EXACT_MATCH",
+                                                             "NEAR_MATCH")):
+                        misattributed.append((c["relation_id"], eid))
+                elif eid in nev:
+                    r = nev[eid]
+                    if not (r["examiner"] == ex
+                            and (ex, qid, r["note_unit_id"]) in rev_pairs):
+                        misattributed.append((c["relation_id"], eid))
+                else:
+                    unresolved.append((c["relation_id"], eid))
+        check("every published Release-A evidence id resolves to a record",
+              not unresolved, str(unresolved[:5]))
+        check("every published Release-A evidence record names its own "
+              "examiner and question", not misattributed, str(misattributed[:5]))
+
+        # Tier is derivable from the evidence, not carried as a string.
+        rank = {"NOTE_EXPLICIT": 3, "EXTERNAL_SOURCE_CONFIRMED": 4,
+                "PRIMARY_TRACKER": 5}
+        bad = []
+        for c in pconns:
+            tiers = []
+            if any(e in v1 and v1[e]["evidence_class"] == "PRIMARY_CANDIDATE_RECORD"
+                   for e in c["evidence_ids"]):
+                tiers.append("PRIMARY_TRACKER")
+            if any(e in fin for e in c["evidence_ids"]):
+                tiers.append("EXTERNAL_SOURCE_CONFIRMED")
+            if any(e in nev for e in c["evidence_ids"]):
+                tiers.append("NOTE_EXPLICIT")
+            derived = max(tiers, key=rank.get) if tiers else None
+            if derived != c["strongest_evidence_tier"]:
+                bad.append((c["relation_id"], c["strongest_evidence_tier"], derived))
+        check("every published Release-A tier is derivable from its evidence ids",
+              not bad, str(bad[:5]))
+        bad = [c["relation_id"] for c in pconns
+               if rank.get(c["strongest_evidence_tier"], -1) < 3]
+        check("every published Release-A relationship sits at or above the "
+              "release floor", not bad, str(bad[:5]))
+
+        cur_by_id = {r["relationship_id"]: r for r in rels}
+        cur_keys = {(r["examiner"], r["question_id"]) for r in rels}
+        bad = [c["relation_id"] for c in pconns
+               if c["disposition"] == "NEW_RELATIONSHIP"
+               and (c["examiner"], c["canonical_question_id"]) in cur_keys]
+        check("no published NEW Release-A relationship duplicates a current "
+              "index relationship", not bad, str(bad[:5]))
+        bad = [c["relation_id"] for c in pconns
+               if c["disposition"] == "EVIDENCE_FOR_EXISTING"
+               and (c["existing_relationship_id"] not in cur_by_id
+                    or (cur_by_id[c["existing_relationship_id"]]["examiner"],
+                        cur_by_id[c["existing_relationship_id"]]["question_id"])
+                    != (c["examiner"], c["canonical_question_id"]))]
+        check("every EVIDENCE_FOR_EXISTING Release-A row points at the matching "
+              "current relationship", not bad, str(bad[:5]))
 
     p0 = jsonobj("FINAL_P0_PRODUCTION_BATCH.json")
     if p0 is None:
