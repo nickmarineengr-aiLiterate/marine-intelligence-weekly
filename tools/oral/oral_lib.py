@@ -228,5 +228,9 @@ def split_href(href):
 def jdump(obj, name):
     OUT.mkdir(parents=True, exist_ok=True)
     p = OUT / name
-    p.write_text(json.dumps(obj, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    # newline="\n" explicitly: the default translates to CRLF on Windows, so a
+    # committed generated artefact came back dirty after every run, and the same
+    # artefact differed byte-for-byte between platforms
+    p.write_text(json.dumps(obj, indent=2, ensure_ascii=False) + "\n",
+                 encoding="utf-8", newline="\n")
     return p

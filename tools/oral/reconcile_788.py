@@ -470,7 +470,8 @@ def main():
         for r in results if r["content_disposition"] == AMBIG
     ]
 
-    with (OUT / "ORAL_788_RECONCILIATION.jsonl").open("w", encoding="utf-8") as fh:
+    with (OUT / "ORAL_788_RECONCILIATION.jsonl").open(
+            "w", encoding="utf-8", newline="\n") as fh:
         for r in results:
             fh.write(json.dumps(r, ensure_ascii=False) + "\n")
     L.jdump(sorted(gaps, key=lambda g: (g["priority"], -g["examiner_count"],
