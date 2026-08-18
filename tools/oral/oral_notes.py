@@ -101,7 +101,15 @@ def classify_files():
     rows = []
     for p in sorted(NOTES_DIR.glob("*.html")):
         n = p.name
-        size = p.stat().st_size
+        # Measured on LF-normalised bytes, not on stat().st_size. These pages
+        # are text with `* text=auto` and `*.html text eol=lf`, so a working
+        # tree checked out on Windows can hold CRLF while the committed blob
+        # holds LF. Recording the on-disk size therefore wrote a number that
+        # differed between two checkouts of the same commit - the same class of
+        # defect as the absolute path Phase 2A-i removed from a committed
+        # artefact, and found the same way, by running the gate from a fresh
+        # worktree on another drive.
+        size = len(p.read_bytes().replace(b"\r\n", b"\n"))
         if n in NAVIGATION_PAGES:
             row = (None, ROLE_NAVIGATION, NAVIGATION_PAGES[n])
         elif n in OUT_OF_SCOPE_PAGES:
