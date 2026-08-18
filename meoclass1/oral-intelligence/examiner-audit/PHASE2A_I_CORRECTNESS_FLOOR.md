@@ -162,6 +162,15 @@ order; gap families are built and emitted in a stable order. `weighted_coverage`
 a sorted token list, because float addition is not associative and the score itself would
 otherwise depend on the seed.
 
+Two further sources of machine-dependent output were found while running the gate from a fresh
+worktree on another drive, and closed. Generated artefacts were written through Python's default
+text mode, which translates to CRLF on Windows, so a committed artefact came back modified after
+a run that changed nothing and would differ byte-for-byte between a Windows and a POSIX
+producer; `jdump` and the reconciliation JSONL now write `\n` explicitly. And the validator
+recorded the audit folder as an **absolute** path, so `PHASE2_VALIDATION_RESULTS.json` carried
+the producer's drive letter and user name — it is now repo-relative. A validator run leaves the
+tree clean.
+
 `check_determinism.py` runs the generation three times under deliberately different seeds and
 requires the four generated artefacts to be byte-identical. It restores whatever was on disk
 before it ran, so it can never become a way of silently re-baselining.
