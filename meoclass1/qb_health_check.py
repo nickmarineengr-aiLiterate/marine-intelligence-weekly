@@ -12,6 +12,7 @@ Run in GitHub Actions: see .github/workflows/qb-health-check.yml
 
 import os
 import re
+import collections
 import json
 import smtplib
 import ssl
@@ -27,6 +28,7 @@ GITHUB_REPO = "nickmarineengr-aiLiterate/marine-intelligence-weekly"
 GITHUB_BRANCH = "main"
 QB_FOLDER_PREFIX = "meoclass1/"          # folder inside repo where QB html + manifest live
 MANIFEST_NAME = "qb_content_index.json"
+INDEX_NAME = "index.html"   # relative to QB_FOLDER_PREFIX, e.g. meoclass1/index.html
 # Manifest filenames are defined canonically in tools/notes/miw_paths.py. This checker
 # scans the GitHub tree rather than local disk, so it keeps its own repo-relative copies
 # instead of importing. If a manifest is ever renamed, change BOTH places.
@@ -673,6 +675,102 @@ def check_file(filename, content_bytes, all_files=None, known_traps=None):
     return {"file": filename, "errors": errors, "question_count": q_count}
 
 
+def check_index_linkage(files, manifest_files):
+    """Cross-check meoclass1/index.html against the manifest.
+
+    A QB file can be built, gated, manifested and pushed and still be
+    unreachable, because index.html carries its own two data structures:
+      QB_GROUPS - the card list that renders the links
+      Q_INDEX   - the question-text search index
+    Neither is generated from qb_content_index.json, so a batch that updates
+    the manifest but not index.html ships files no subscriber can navigate to
+    and questions the on-page search cannot find. That is exactly what
+    happened to the 4 Aug 2026 July batch (commit 78caad4): eight QB files
+    landed manifested and gated, with no card and no search records.
+
+    Checks, in order:
+      1. index.html present and both structures parseable
+      2. every non-cheat-sheet manifest file has a card in QB_GROUPS
+      3. every card's qcount matches the manifest question_count
+      4. every card's Q_INDEX record count matches that same number
+      5. the hero counters agree with the structures they summarise
+    """
+    errors = []
+    raw = files.get(INDEX_NAME)
+    if raw is None:
+        return [f"{INDEX_NAME} not found in repo"]
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError:
+        return [f"{INDEX_NAME} is not valid UTF-8"]
+
+    def _block(name):
+        m = re.search(r"const %s = (\[.*?\]);" % name, text, re.S)
+        if not m:
+            return None
+        try:
+            return json.loads(m.group(1))
+        except json.JSONDecodeError:
+            return False
+
+    groups = _block("QB_GROUPS")
+    q_index = _block("Q_INDEX")
+    for label, val in (("QB_GROUPS", groups), ("Q_INDEX", q_index)):
+        if val is None:
+            errors.append(f"{INDEX_NAME}: {label} array not found")
+        elif val is False:
+            errors.append(f"{INDEX_NAME}: {label} is present but not valid JSON")
+    if not groups or not q_index:
+        return errors
+
+    cards = {c.get("file"): c for g in groups for c in g.get("cards", [])}
+    cheatsheets = {m.get("cheatsheet") for m in manifest_files.values() if m.get("cheatsheet")}
+    qb_files = {f for f in manifest_files if f not in cheatsheets}
+
+    unlinked = sorted(qb_files - set(cards))
+    if unlinked:
+        errors.append(
+            f"{INDEX_NAME}: manifest QB file(s) have no card in QB_GROUPS and are "
+            f"unreachable from the index: {unlinked}"
+        )
+
+    stray = sorted(set(cards) - set(manifest_files))
+    if stray:
+        errors.append(f"{INDEX_NAME}: QB_GROUPS cards reference file(s) absent from the manifest: {stray}")
+
+    counts = collections.Counter(e.get("file") for e in q_index)
+    for fname, card in sorted(cards.items()):
+        meta = manifest_files.get(fname)
+        if not meta:
+            continue
+        expected = meta.get("question_count")
+        if expected is None:
+            continue
+        if card.get("qcount") != expected:
+            errors.append(
+                f"{INDEX_NAME}: card qcount for {fname} is {card.get('qcount')} "
+                f"but the manifest says {expected}"
+            )
+        if counts.get(fname, 0) != expected:
+            errors.append(
+                f"{INDEX_NAME}: Q_INDEX holds {counts.get(fname, 0)} search record(s) for "
+                f"{fname} but the manifest says {expected} question(s) — on-page search "
+                f"will not find the missing one(s)"
+            )
+
+    stats = re.findall(r'<span class="stat-val"[^>]*>([^<]+)</span>', text)
+    if len(stats) >= 2:
+        for pos, actual, label in ((0, len(q_index), "Questions Live"),
+                                   (1, len(cards), "QB Files")):
+            shown = stats[pos].strip()
+            if shown.isdigit() and int(shown) != actual:
+                errors.append(
+                    f"{INDEX_NAME}: hero counter '{label}' shows {shown} but the page "
+                    f"actually carries {actual}"
+                )
+    return errors
+
+
 def check_manifest(files, file_results=None):
     """Validate qb_content_index.json is parseable and cross-check it against
     disk reality in both directions:
@@ -929,6 +1027,8 @@ def main():
 
     # manifest check runs after file results so it can cross-check question counts
     manifest_errors, manifest_files = check_manifest(files, file_results=results)
+    # index.html linkage: a file can be manifested and gated yet unreachable
+    manifest_errors.extend(check_index_linkage(files, manifest_files))
     if known_traps == [] and KNOWN_TRAPS_PATH not in files:
         manifest_errors.append(
             f"{KNOWN_TRAPS_PATH} not found in repo — known-traps check skipped this run"
