@@ -527,7 +527,87 @@ def validate(fam_doc, occ_rows, manifest, bank, specs, hist_ids, rep,
     rep.check('C28 no official bank item is recorded as a sitting occurrence',
               not bank_as_occ, 'found: %s' % bank_as_occ)
 
+    phase3b_inventory(occ_rows, rep)
+
     return rep
+
+
+# Phase 3B ---------------------------------------------------------------------
+
+INVENTORY = os.path.join(V2, 'PHASE3B_SOURCE_INVENTORY.json')
+
+ORIGIN_CONFIDENCE = ('AUTHENTIC_OFFICIAL_ARCHIVE',
+                     'OFFICIAL_ORIGIN_HIGH_CONFIDENCE',
+                     'LIKELY_OFFICIAL', 'UNVERIFIED')
+DATE_STATUS = ('MONTH_AND_YEAR_PRINTED', 'YEAR_PRINTED_MONTH_UNKNOWN',
+               'NO_DATE_PRINTED', 'SAMPLE_PAPER_NOT_A_SITTING',
+               'NOT_A_QUESTION_PAPER')
+DOC_TYPE = ('QUESTION_PAPER', 'SAMPLE_QUESTION_PAPER', 'EXAM_RESULT_LIST')
+
+
+def phase3b_inventory(occ_rows, rep):
+    """C48-C52: the archived-source inventory may not assert a date it cannot
+    print, and nothing that is not a dated question paper may become history.
+
+    Phase 3B acquisition found two traps that these checks freeze shut. The
+    first is a whole population of official DGS files that look like Class I
+    papers by name and by path and are actually candidate result lists carrying
+    no question text at all. The second is an official Management-level paper
+    that prints "SAMPLE PAPER" and was nevertheless carried as a dated sitting.
+    Both would have become dated history on the strength of a filename.
+    """
+    if not os.path.exists(INVENTORY):
+        rep.check('C48 the Phase-3B source inventory is present and loadable',
+                  False, 'missing: %s' % INVENTORY)
+        return
+    try:
+        with io.open(INVENTORY, encoding='utf-8-sig') as fh:
+            inv = json.load(fh)
+        srcs = inv['sources']
+    except Exception as exc:                                      # noqa: BLE001
+        rep.check('C48 the Phase-3B source inventory is present and loadable',
+                  False, 'unreadable: %s' % exc)
+        return
+    rep.check('C48 the Phase-3B source inventory is present and loadable',
+              bool(srcs), 'sources: %d' % len(srcs))
+
+    bad = [s.get('source_id') for s in srcs
+           if s.get('document_type') not in DOC_TYPE
+           or s.get('paper_date_status') not in DATE_STATUS
+           or s.get('official_origin_confidence') not in ORIGIN_CONFIDENCE]
+    rep.check('C49 every archived source uses the governed enums',
+              not bad, 'off-enum: %s' % bad[:8])
+
+    # A month may exist ONLY where the paper printed a month.
+    month_no_evidence = [
+        s.get('source_id') for s in srcs
+        if s.get('sitting_month') is not None
+        and s.get('paper_date_status') != 'MONTH_AND_YEAR_PRINTED']
+    rep.check('C50 no archived source carries a month it did not print',
+              not month_no_evidence, 'asserted: %s' % month_no_evidence[:8])
+
+    # A sample paper and a result list are not sittings, ever.
+    not_sittings = [
+        s.get('source_id') for s in srcs
+        if s.get('document_type') in ('SAMPLE_QUESTION_PAPER', 'EXAM_RESULT_LIST')
+        and (s.get('sitting_month') is not None
+             or s.get('paper_date_status') == 'MONTH_AND_YEAR_PRINTED')]
+    rep.check('C51 no sample paper or result list is dated as a sitting',
+              not not_sittings, 'dated: %s' % not_sittings[:8])
+
+    # Forward guard: if an occurrence ever cites an archived source, that source
+    # must be a question paper that printed its own month.
+    ok_ids = set(s.get('source_id') for s in srcs
+                 if s.get('document_type') == 'QUESTION_PAPER'
+                 and s.get('paper_date_status') == 'MONTH_AND_YEAR_PRINTED')
+    all_ids = set(s.get('source_id') for s in srcs)
+    illegal = []
+    for o in occ_rows:
+        for sid in (o.get('source_ids') or []):
+            if sid in all_ids and sid not in ok_ids:
+                illegal.append((o.get('occurrence_id'), sid))
+    rep.check('C52 no occurrence rests on an undated or non-paper archived source',
+              not illegal, 'illegal: %s' % illegal[:8])
 
 
 # Classes that count as a family genuinely descending from a bank item.
@@ -1115,6 +1195,86 @@ EXTRACT_MUTATIONS = [
 ]
 
 
+INVENTORY_MUTATIONS = [
+    ('give a year-only paper a month it never printed',
+     lambda d: _inv_set(d, 'YEAR_PRINTED_MONTH_UNKNOWN', {'sitting_month': 6}),
+     'C50'),
+    ('date the SAMPLE paper as a February sitting',
+     lambda d: _inv_set(d, 'SAMPLE_PAPER_NOT_A_SITTING',
+                        {'sitting_month': 2,
+                         'paper_date_status': 'MONTH_AND_YEAR_PRINTED'}),
+     'C50|C51'),
+    ('promote a candidate result list to a dated question paper',
+     lambda d: _inv_set(d, 'NOT_A_QUESTION_PAPER',
+                        {'paper_date_status': 'MONTH_AND_YEAR_PRINTED',
+                         'sitting_month': 10}),
+     'C50|C51'),
+    ('invent an off-enum provenance class',
+     lambda d: _inv_set(d, None, {'official_origin_confidence': 'PROBABLY_FINE'}),
+     'C49'),
+    ('delete the inventory entirely',
+     lambda d: None,
+     'C48'),
+]
+
+
+def _inv_set(doc, date_status, patch):
+    """Patch the first source matching `date_status` (or the first source)."""
+    for src in doc['sources']:
+        if date_status is None or src.get('paper_date_status') == date_status:
+            src.update(patch)
+            return doc
+    raise AssertionError('no inventory source with status %s' % date_status)
+
+
+def run_inventory_mutations(fam, occ, manifest, bank, specs, hist_ids,
+                            extracted, documents, filenames):
+    """Prove the Phase-3B date guards are load-bearing.
+
+    The real inventory is never modified: each variant is written to a
+    temporary directory and the module's INVENTORY pointer is moved onto it.
+    """
+    import shutil
+    import tempfile
+
+    global INVENTORY
+    real = INVENTORY
+    base = json.load(io.open(real, encoding='utf-8-sig'))
+    tmp = tempfile.mkdtemp(prefix='qi-inv-mut-')
+    held = 0
+    print('')
+    print('archived-source mutations - a date may not appear without evidence')
+    print('%-64s %-12s %s' % ('MUTATION', 'EXPECT', 'RESULT'))
+    print('-' * 104)
+    try:
+        for name, mutate, expect in INVENTORY_MUTATIONS:
+            path = os.path.join(tmp, 'PHASE3B_SOURCE_INVENTORY.json')
+            if os.path.exists(path):
+                os.remove(path)
+            doc = mutate(copy.deepcopy(base))
+            if doc is not None:
+                io.open(path, 'w', encoding='utf-8').write(
+                    json.dumps(doc, indent=1, ensure_ascii=False))
+            INVENTORY = path
+
+            r2 = Report()
+            validate(copy.deepcopy(fam), copy.deepcopy(occ), manifest,
+                     copy.deepcopy(bank), specs, hist_ids, r2, extracted,
+                     dict(documents), list(filenames))
+            fired = set(fl.split(' ')[0] for fl in r2.failures)
+            ok = bool(fired & set(expect.split('|')))
+            held += 0 if ok else 1
+            print('%-64s %-12s %s'
+                  % (name[:64], expect,
+                     'caught' if ok else 'ESCAPED (fired: %s)' % sorted(fired)))
+    finally:
+        INVENTORY = real
+        shutil.rmtree(tmp, ignore_errors=True)
+    print('-' * 104)
+    print('archived-source: %d   escaped: %d' % (len(INVENTORY_MUTATIONS), held))
+    return held
+
+
 def run_extract_mutations(fam, occ, manifest, bank, specs, hist_ids,
                           documents, filenames):
     """Prove the required source cannot go missing quietly.
@@ -1255,9 +1415,12 @@ def main():
                      'the family it DESCRIBES', DOC_MUTATIONS, 'doc')
     bad += run_extract_mutations(fam, occ, manifest, bank, specs, hist_ids,
                                  documents, filenames)
+    bad += run_inventory_mutations(fam, occ, manifest, bank, specs, hist_ids,
+                                   extracted, documents, filenames)
 
     total = (len(MUTATIONS) + len(BANK_MUTATIONS) + len(DATE_MUTATIONS)
-             + len(DOC_MUTATIONS) + len(EXTRACT_MUTATIONS))
+             + len(DOC_MUTATIONS) + len(EXTRACT_MUTATIONS)
+             + len(INVENTORY_MUTATIONS))
     print('\nmutations: %d   escaped: %d' % (total, bad))
     return 1 if (rep.failures or bad) else 0
 
