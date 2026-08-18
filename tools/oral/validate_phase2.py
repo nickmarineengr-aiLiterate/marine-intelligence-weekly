@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import csv
 import json
+import re
 import sys
 from collections import Counter
 from pathlib import Path
@@ -16,6 +17,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import oral_lib as L  # noqa: E402
 import oral_provenance as P  # noqa: E402
+import oral_notes as N  # noqa: E402
+import notes_coverage as C  # noqa: E402
 
 OUT = L.OUT
 
@@ -198,6 +201,151 @@ def main():
     check("matrix reports the ingested total",
           "| Raw source occurrences ingested | 788 |" in matrix,
           "matrix headline total")
+
+    # --- Phase 2A-ii: the Oral Notes secondary layer -------------------------
+    # The Notes are a SECOND dimension, never a substitute for the canonical
+    # one. These checks enforce that separation structurally: a note unit
+    # cannot become a canonical question, a note cue cannot become tracker
+    # evidence, and every Notes claim must resolve to a section that exists.
+    n_units = jsonl("ORAL_NOTES_UNITS.jsonl")
+    n_ev = jsonl("ORAL_NOTES_EXAMINER_EVIDENCE.jsonl")
+    n_cov = jsonl("ORAL_NOTES_COVERAGE.jsonl")
+    for name, obj in (("ORAL_NOTES_UNITS.jsonl", n_units),
+                      ("ORAL_NOTES_EXAMINER_EVIDENCE.jsonl", n_ev),
+                      ("ORAL_NOTES_COVERAGE.jsonl", n_cov)):
+        check("input available: " + name, obj is not None,
+              "missing" if obj is None else "%d records" % len(obj))
+
+    if n_units is not None and n_ev is not None and n_cov is not None:
+        inv_notes = json.loads((OUT / "ORAL_NOTES_INVENTORY.json").read_text(
+            encoding="utf-8"))
+        unit_ids = [u["note_unit_id"] for u in n_units]
+        by_unit = {u["note_unit_id"]: u for u in n_units}
+
+        dup = [k for k, v in Counter(unit_ids).items() if v > 1]
+        check("no duplicate note unit ids", not dup, str(dup[:5]))
+
+        bad = [u for u in unit_ids if N.is_canonical_shaped(u)]
+        check("no note unit id is shaped like a canonical question id",
+              not bad, str(bad[:5]))
+
+        clash = sorted(set(unit_ids) & set(inv))
+        check("no note unit id collides with a canonical question id",
+              not clash, str(clash[:5]))
+
+        # A Notes unit must never enter the canonical universe. The canonical
+        # count is recomputed from the live HTML, never carried.
+        check("the canonical QB universe is unchanged by the Notes layer",
+              len(inv) == 681, "%d canonical questions" % len(inv))
+
+        bad = [u["note_unit_id"] for u in n_units
+               if not (N.NOTES_DIR / u["file"]).exists()]
+        check("every note unit resolves to an existing notes file", not bad,
+              str(bad[:5]))
+
+        note_anchors = {}
+        for u in n_units:
+            if u["file"] not in note_anchors:
+                h = (N.NOTES_DIR / u["file"]).read_text(
+                    encoding="utf-8", errors="replace")
+                note_anchors[u["file"]] = set(
+                    re.findall(r'\sid="([^"]+)"', h))
+        bad = [u["note_unit_id"] for u in n_units
+               if u["anchor_authored"]
+               and u["anchor"] not in note_anchors[u["file"]]]
+        check("every authored note anchor exists on its page", not bad,
+              str(bad[:5]))
+
+        bad = [u["note_unit_id"] for u in n_units
+               if u["parent_unit_id"] and u["parent_unit_id"] not in by_unit]
+        check("every note child unit resolves to its parent", not bad,
+              str(bad[:5]))
+
+        bad = sorted({u["unit_level"] for u in n_units} - N.UNIT_LEVELS)
+        check("note unit level vocabulary is closed", not bad, str(bad))
+
+        excluded = {r["file"] for r in inv_notes["files"]
+                    if r["role"] != N.ROLE_SUBSTANTIVE}
+        bad = sorted({u["file"] for u in n_units} & excluded)
+        check("no navigation or out-of-scope page contributes a note unit",
+              not bad, str(bad))
+        check("every notes page is classified",
+              inv_notes["unclassified_pages"] == 0,
+              "%d unclassified" % inv_notes["unclassified_pages"])
+
+        # --- note examiner evidence ---------------------------------------
+        dup = [k for k, v in Counter(e["evidence_id"] for e in n_ev).items()
+               if v > 1]
+        check("no duplicate note evidence ids", not dup, str(dup[:5]))
+
+        bad = [e["evidence_id"] for e in n_ev
+               if e["note_unit_id"] not in by_unit]
+        check("every note evidence record resolves to a note unit", not bad,
+              str(bad[:5]))
+
+        bad = [e["evidence_id"] for e in n_ev if e["examiner"] not in known]
+        check("every note evidence examiner resolves in the alias register",
+              not bad, str(bad[:5]))
+
+        bad = [e["evidence_id"] for e in n_ev
+               if e["cue_disposition"] not in N.EXPLICIT_CUES]
+        check("only explicit cues become note evidence", not bad, str(bad[:5]))
+
+        bad = [e["evidence_id"] for e in n_ev
+               if e.get("evidence_tier") != N.NOTE_EVIDENCE_TIER
+               or e.get("source_type") != N.NOTE_SOURCE_TYPE]
+        check("every note evidence record carries NOTE_EXPLICIT on note "
+              "provenance", not bad, str(bad[:5]))
+
+        bad = P.violations(n_ev)
+        check("no note evidence tier outruns its own provenance", not bad,
+              "; ".join("%s: %s" % v for v in bad[:5]))
+
+        bad = [e["evidence_id"] for e in n_ev
+               if e.get("evidence_tier") in P.PRIMARY_TIERS]
+        check("no note evidence record carries a primary evidence tier",
+              not bad, str(bad[:5]))
+
+        bad = [e["evidence_id"] for e in n_ev
+               if not str(e.get("evidence_excerpt") or "").strip()]
+        check("every note evidence record carries a source excerpt", not bad,
+              str(bad[:5]))
+
+        # --- note coverage --------------------------------------------------
+        cov_ids = [c["source_id"] for c in n_cov]
+        check("every source occurrence has exactly one Notes coverage record",
+              sorted(cov_ids) == sorted(s["source_id"] for s in src),
+              "%d coverage / %d source" % (len(cov_ids), len(src)))
+
+        bad = sorted({c["notes_support"] for c in n_cov}
+                     - set(C.SUPPORT_TIERS))
+        check("Notes support vocabulary is closed", not bad, str(bad))
+
+        bad = sorted({c["notes_support"] for c in n_cov}
+                     & C.CANONICAL_DISPOSITIONS)
+        check("no Notes support tier reuses a canonical disposition", not bad,
+              str(bad))
+
+        bad = [c["source_id"] for c in n_cov for h in c["notes_units"]
+               if h["note_unit_id"] not in by_unit]
+        check("every Notes coverage claim resolves to a note unit", not bad,
+              str(bad[:5]))
+
+        bad = [c["source_id"] for c in n_cov for h in c["notes_units"]
+               if not str(h.get("section_title") or "").strip()
+               and not str(h.get("anchor") or "").strip()]
+        check("every Notes coverage claim names a section or anchor", not bad,
+              str(bad[:5]))
+
+        bad = [c["source_id"] for c in n_cov
+               if c["notes_support"] != C.NO_SUPPORT and not c["notes_units"]]
+        check("no Notes support without a supporting unit", not bad,
+              str(bad[:5]))
+
+        bad = [c["source_id"] for c in n_cov for u in
+               c["notes_units_naming_this_examiner"] if u not in by_unit]
+        check("every examiner-cued unit reference resolves", not bad,
+              str(bad[:5]))
 
     # --- boundary: this phase writes no live candidate page ------------------
     check("research outputs stay inside the audit folder",

@@ -27,12 +27,29 @@ import oral_lib as L  # noqa: E402
 OUT = L.OUT
 TOOLS = Path(__file__).resolve().parent
 
-GENERATED = [
-    "ORAL_788_RECONCILIATION.jsonl",
-    "ORAL_GAP_CANDIDATES.json",
-    "HUMAN_REVIEW_QUEUE.json",
-    "ORAL_788_RECONCILIATION_SUMMARY.json",
-]
+# One entry per generator, so a new artefact cannot be added without stating
+# which script produces it.
+GENERATORS = {
+    "reconcile_788.py": [
+        "ORAL_788_RECONCILIATION.jsonl",
+        "ORAL_GAP_CANDIDATES.json",
+        "HUMAN_REVIEW_QUEUE.json",
+        "ORAL_788_RECONCILIATION_SUMMARY.json",
+    ],
+    # Phase 2A-ii. The Notes layer walks a directory, groups by set membership
+    # and sorts note units, examiner cues and coverage hits - every one of
+    # which is a place where iteration order could reach the emitted bytes.
+    "ingest_oral_notes.py": [
+        "ORAL_NOTES_INVENTORY.json",
+        "ORAL_NOTES_UNITS.jsonl",
+        "ORAL_NOTES_EXAMINER_EVIDENCE.jsonl",
+        "ORAL_NOTES_CUE_AUDIT.json",
+        "ORAL_NOTES_COVERAGE.jsonl",
+        "ORAL_NOTES_COVERAGE_SUMMARY.json",
+    ],
+}
+
+GENERATED = [n for names in GENERATORS.values() for n in names]
 
 # Two seeds, deliberately different, so any residual dependence on set or dict
 # iteration order shows up as a byte difference rather than hiding behind a
@@ -42,21 +59,54 @@ SEEDS = ("0", "1", "524287")
 
 def run(seed):
     env = dict(os.environ, PYTHONHASHSEED=seed, PYTHONIOENCODING="utf-8")
-    p = subprocess.run([sys.executable, str(TOOLS / "reconcile_788.py")],
-                       capture_output=True, text=True, cwd=str(L.REPO), env=env)
-    if p.returncode != 0:
-        raise SystemExit("reconcile_788.py failed under PYTHONHASHSEED=%s:\n%s"
-                         % (seed, p.stderr))
+    for script in sorted(GENERATORS):
+        p = subprocess.run([sys.executable, str(TOOLS / script)],
+                           capture_output=True, text=True,
+                           cwd=str(L.REPO), env=env)
+        if p.returncode != 0:
+            raise SystemExit("%s failed under PYTHONHASHSEED=%s:\n%s"
+                             % (script, seed, p.stderr))
     return {n: (OUT / n).read_bytes() for n in GENERATED}
 
 
+# The pre-run state is written to disk BEFORE anything is regenerated.
+# Holding it only in memory meant that a run killed part-way - and this gate is
+# slow enough to be killed by a timeout - left the regenerated artefacts in
+# place with no way back, which is exactly the silent re-baselining the gate
+# exists to prevent. A stale snapshot is restored on the next run.
+SNAPSHOT = OUT / ".determinism-snapshot"
+
+
+def _save(before):
+    SNAPSHOT.mkdir(parents=True, exist_ok=True)
+    for n, b in before.items():
+        (SNAPSHOT / n).write_bytes(b)
+
+
+def _restore_from_disk():
+    if not SNAPSHOT.is_dir():
+        return []
+    restored = []
+    for p in sorted(SNAPSHOT.iterdir()):
+        (OUT / p.name).write_bytes(p.read_bytes())
+        restored.append(p.name)
+        p.unlink()
+    SNAPSHOT.rmdir()
+    return restored
+
+
 def main():
+    stale = _restore_from_disk()
+    if stale:
+        print("restored %d artefact(s) left behind by an interrupted run"
+              % len(stale))
+
     before = {n: (OUT / n).read_bytes() for n in GENERATED if (OUT / n).exists()}
+    _save(before)
     try:
         runs = [run(s) for s in SEEDS]
     finally:
-        for n, b in before.items():
-            (OUT / n).write_bytes(b)
+        _restore_from_disk()
 
     bad = []
     for name in GENERATED:

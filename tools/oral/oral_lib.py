@@ -2,16 +2,24 @@
 
 Portability: the repo root is derived from this file's location, never a
 drive letter. External workbook / document paths arrive as CLI arguments.
+
+ORAL_REPO_ROOT overrides that derivation. It exists for the mutation harness,
+which copies tools/oral to a scratch directory: without it the copied modules
+derive a repo root inside the temp directory, find no data, and every code
+mutation "fails" on a missing file rather than on the regression it injected -
+which looks like a caught mutation while proving nothing.
 """
 from __future__ import annotations
 
 import html as _html
 import json
+import os
 import re
 import unicodedata
 from pathlib import Path
 
-REPO = Path(__file__).resolve().parents[2]
+REPO = Path(os.environ.get("ORAL_REPO_ROOT")
+            or Path(__file__).resolve().parents[2])
 MEO = REPO / "meoclass1"
 OUT = MEO / "oral-intelligence" / "examiner-audit"
 

@@ -1,5 +1,5 @@
 {
-  "passed": 38,
+  "passed": 66,
   "failed": 0,
   "checks": [
     {
@@ -181,6 +181,146 @@
       "check": "matrix reports the ingested total",
       "status": "PASS",
       "detail": "matrix headline total"
+    },
+    {
+      "check": "input available: ORAL_NOTES_UNITS.jsonl",
+      "status": "PASS",
+      "detail": "992 records"
+    },
+    {
+      "check": "input available: ORAL_NOTES_EXAMINER_EVIDENCE.jsonl",
+      "status": "PASS",
+      "detail": "500 records"
+    },
+    {
+      "check": "input available: ORAL_NOTES_COVERAGE.jsonl",
+      "status": "PASS",
+      "detail": "788 records"
+    },
+    {
+      "check": "no duplicate note unit ids",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "no note unit id is shaped like a canonical question id",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "no note unit id collides with a canonical question id",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "the canonical QB universe is unchanged by the Notes layer",
+      "status": "PASS",
+      "detail": "681 canonical questions"
+    },
+    {
+      "check": "every note unit resolves to an existing notes file",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "every authored note anchor exists on its page",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "every note child unit resolves to its parent",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "note unit level vocabulary is closed",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "no navigation or out-of-scope page contributes a note unit",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "every notes page is classified",
+      "status": "PASS",
+      "detail": "0 unclassified"
+    },
+    {
+      "check": "no duplicate note evidence ids",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "every note evidence record resolves to a note unit",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "every note evidence examiner resolves in the alias register",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "only explicit cues become note evidence",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "every note evidence record carries NOTE_EXPLICIT on note provenance",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "no note evidence tier outruns its own provenance",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "no note evidence record carries a primary evidence tier",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "every note evidence record carries a source excerpt",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "every source occurrence has exactly one Notes coverage record",
+      "status": "PASS",
+      "detail": "788 coverage / 788 source"
+    },
+    {
+      "check": "Notes support vocabulary is closed",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "no Notes support tier reuses a canonical disposition",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "every Notes coverage claim resolves to a note unit",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "every Notes coverage claim names a section or anchor",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "no Notes support without a supporting unit",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "every examiner-cued unit reference resolves",
+      "status": "PASS",
+      "detail": "[]"
     },
     {
       "check": "research outputs stay inside the audit folder",

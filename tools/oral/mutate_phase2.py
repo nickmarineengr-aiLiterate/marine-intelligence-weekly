@@ -17,6 +17,7 @@ temp directory obtained at run time, never a hardcoded path.
 from __future__ import annotations
 
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -59,6 +60,9 @@ EV = "EXAMINER_EVIDENCE_LEDGER_V2.jsonl"
 SRC = "ALL_SURVEYORS_SOURCE_RECORDS.jsonl"
 RECON = "ORAL_788_RECONCILIATION.jsonl"
 RESULTS = "PHASE2_VALIDATION_RESULTS.json"
+NUNITS = "ORAL_NOTES_UNITS.jsonl"
+NEV = "ORAL_NOTES_EXAMINER_EVIDENCE.jsonl"
+NCOV = "ORAL_NOTES_COVERAGE.jsonl"
 
 
 def m_wrong_anchor():
@@ -150,6 +154,64 @@ def m_invalid_tier():
     _write_jsonl(RECON, rows)
 
 
+
+def m_note_evidence_promoted():
+    """M15 - an explicit examiner cue found in an Oral Note relabelled as the
+    primary tracker. A Note is a Note: it is real evidence of what a note says,
+    and it is never the tracker."""
+    rows = _jsonl(NEV)
+    rows[0]["evidence_tier"] = "PRIMARY_TRACKER"
+    _write_jsonl(NEV, rows)
+
+
+def m_note_unit_missing_file():
+    """M17 - a note unit that points at a page or an anchor which does not
+    exist. An unresolvable citation is worse than no citation."""
+    rows = _jsonl(NUNITS)
+    rows[0]["file"] = "simon-notes-p99.html"
+    _write_jsonl(NUNITS, rows)
+
+
+def m_note_unit_missing_anchor():
+    """M17b - the file exists but the section the parser claims does not."""
+    rows = _jsonl(NUNITS)
+    for r in rows:
+        if r.get("anchor_authored"):
+            r["anchor"] = "does-not-exist-9999"
+            break
+    _write_jsonl(NUNITS, rows)
+
+
+def m_note_unit_as_canonical_question():
+    """M18 - a note unit injected into the canonical namespace. The Notes are a
+    secondary layer; they may never create a canonical QB question id."""
+    rows = _jsonl(NUNITS)
+    recon = _jsonl(RECON)
+    victim = next(r["matched_question_id"] for r in recon
+                  if r.get("matched_question_id"))
+    rows[0]["note_unit_id"] = victim
+    _write_jsonl(NUNITS, rows)
+
+
+def m_note_support_without_unit():
+    """M14b - a Notes support claim with nothing under it. The data-side twin
+    of M14: support asserted with no section to trace it to."""
+    rows = _jsonl(NCOV)
+    for r in rows:
+        if r["notes_support"] != "NO_NOTES_SUPPORT":
+            r["notes_units"] = []
+            break
+    _write_jsonl(NCOV, rows)
+
+
+def m_note_support_uses_canonical_word():
+    """M14c - Notes support relabelled with a canonical disposition, collapsing
+    the two dimensions the phase exists to keep apart."""
+    rows = _jsonl(NCOV)
+    rows[0]["notes_support"] = "EXACT_MATCH"
+    _write_jsonl(NCOV, rows)
+
+
 DATA_MUTATIONS = [
     ("M1  wrong question anchor", [REL], m_wrong_anchor),
     ("M2  duplicate relationship", [REL], m_duplicate_relation),
@@ -165,6 +227,17 @@ DATA_MUTATIONS = [
     ("M5b TOPIC_INFERRED -> PRIMARY_TRACKER", [EV], m_topic_inferred_promoted),
     ("M5c CE_TIP -> PRIMARY_TRACKER", [EV], m_ce_tip_promoted),
     ("M13 NOTE_EXPLICIT -> PRIMARY_TRACKER", [EV], m_note_explicit_promoted),
+    ("M15 note cue -> PRIMARY_TRACKER", [NEV], m_note_evidence_promoted),
+    ("M17 note unit points at a missing page", [NUNITS],
+     m_note_unit_missing_file),
+    ("M17b note unit points at a missing section", [NUNITS],
+     m_note_unit_missing_anchor),
+    ("M18 note unit injected as a canonical question", [NUNITS],
+     m_note_unit_as_canonical_question),
+    ("M14b Notes support with no supporting unit", [NCOV],
+     m_note_support_without_unit),
+    ("M14c Notes support relabelled as a canonical disposition", [NCOV],
+     m_note_support_uses_canonical_word),
 ]
 
 
@@ -222,16 +295,62 @@ def repair(tok):
     p.write_text(s, encoding="utf-8", newline="\n")
 
 
+
+def c_drop_notes_coverage(files):
+    """M14 - delete the Notes coverage layer. The load-bearing Notes fixtures
+    (GIRDING above all) must break immediately: if they do not, the layer is
+    not actually carrying the result it claims to carry."""
+    p = files / "notes_coverage.py"
+    s = p.read_text(encoding="utf-8")
+    s = re.sub(r"^def best_support\(src_toks, idx, idf, default, limit=5\):",
+               "def best_support(src_toks, idx, idf, default, limit=5):\n"
+               "    return []", s, count=1, flags=re.M)
+    p.write_text(s, encoding="utf-8", newline="\n")
+
+
+def c_disable_non_examiner_controls(files):
+    """M16 - turn off the non-examiner name controls, so John the legal
+    example, John the author and John the ship all become John the examiner."""
+    p = files / "oral_notes.py"
+    s = p.read_text(encoding="utf-8")
+    s = re.sub(r"^def _non_examiner\(text, start, end, name\):",
+               "def _non_examiner(text, start, end, name):\n    return None",
+               s, count=1, flags=re.M)
+    p.write_text(s, encoding="utf-8", newline="\n")
+
+
+def c_page_level_notes_matching(files):
+    """M14d - score the whole PAGE instead of the section. This is the failure
+    mode the section-level model exists to prevent: a 116 KB page mentions
+    everything, so every ask put to it finds support."""
+    p = files / "oral_notes.py"
+    s = p.read_text(encoding="utf-8")
+    s = s.replace('                    "text": u.get("body", ""),',
+                  '                    "text": page_text('
+                  '(NOTES_DIR / fname).read_text('
+                  'encoding="utf-8", errors="replace")),')
+    p.write_text(s, encoding="utf-8", newline="\n")
+
+
 CODE_MUTATIONS = [
     ("M10 remove the SAME_CORE admission floor", c_remove_same_core_floor),
     ("M11 collapse ME-GI / ME-GA tokenisation", c_collapse_me_gi_me_ga),
     ("M12 re-enable speculative spell repair", c_reenable_speculative_repair),
+    ("M14 drop the Notes coverage layer", c_drop_notes_coverage),
+    ("M14d match Notes at page level, not section level",
+     c_page_level_notes_matching),
+    ("M16 disable the non-examiner name controls",
+     c_disable_non_examiner_controls),
 ]
 
 
 def run_controls(tools_dir):
+    # The scratch copy holds mutated CODE and must read the repository's real
+    # DATA, so the controls fail on the regression rather than on a missing
+    # file. ORAL_REPO_ROOT states the root explicitly; nothing is hardcoded.
+    env = dict(os.environ, ORAL_REPO_ROOT=str(L.REPO), PYTHONIOENCODING="utf-8")
     p = subprocess.run([sys.executable, str(tools_dir / "test_oral_controls.py")],
-                       capture_output=True, text=True)
+                       capture_output=True, text=True, env=env)
     return p.returncode, (p.stdout or "") + (p.stderr or "")
 
 

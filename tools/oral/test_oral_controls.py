@@ -253,6 +253,19 @@ ok("NOTE_EXPLICIT is not TOPIC_INFERRED",
 
 
 # ==========================================================================
+# Phase 2A-ii - the Oral Notes secondary layer.
+#
+# Imported rather than run separately so that ONE gate owns every control and
+# the mutation harness, which runs this file, exercises the Notes controls too.
+# Every Phase 2A-i control above is preserved unchanged.
+# ==========================================================================
+import test_notes_controls as NC   # noqa: E402
+
+CHECKS[0] += NC.CHECKS[0]
+FAILURES.extend(NC.FAILURES)
+
+
+# ==========================================================================
 if __name__ == "__main__":
     for f in FAILURES:
         print("FAIL  " + f)
