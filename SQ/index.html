@@ -38,6 +38,10 @@ nav a.home-link:hover{color:#cbd5e1}
 .stat-label{font-size:12px;color:#64748b;margin-top:2px}
 
 /* ---- EMAIL CAPTURE FORM ---- */
+.step-head{max-width:780px;margin:2.25rem auto .75rem;padding:0 1.25rem;display:flex;align-items:flex-start;gap:.7rem}
+.step-num{flex:none;width:30px;height:30px;border-radius:50%;background:#0d9488;color:#fff;font-size:15px;font-weight:800;display:flex;align-items:center;justify-content:center;line-height:1}
+.step-title{font-size:16px;font-weight:800;color:#0f172a;line-height:1.35}
+.step-sub{font-size:13px;color:#64748b;margin-top:2px}
 .email-capture{max-width:780px;margin:2rem auto;padding:0 1.25rem}
 .capture-box{background:#f0fdfa;border:1px solid #0d9488;border-radius:12px;padding:1.5rem}
 .capture-box p{font-size:14px;color:#0f172a;font-weight:600;margin-bottom:1rem}
@@ -355,11 +359,28 @@ footer a{color:#64748b;text-decoration:none}
 
 </div>
 
-<!-- EMAIL CAPTURE FORM -->
+<!-- EMAIL CAPTURE FORM
+     Ordered as STEP 1 / STEP 2 because a candidate asked which to do
+     first. The old heading here read "Enter your details to get instant
+     access after payment", which describes the order backwards: the
+     details are needed BEFORE Razorpay opens. startCheckout() refuses to
+     create an order without an email and focuses this field, so a
+     candidate who went to the cards first was bounced back with an error.
+     One capture box serves both products -- there is not a separate form
+     per product -- so the step numbers, not the card, own the sequence. -->
 <div id="pricing-section"></div>
+
+<div class="step-head">
+  <span class="step-num">1</span>
+  <div>
+    <div class="step-title">Enter your details</div>
+    <div class="step-sub">Do this first — it is the same form for both products.</div>
+  </div>
+</div>
+
 <div class="email-capture">
   <div class="capture-box">
-    <p>📧 Enter your details to get instant access after payment</p>
+    <p>📧 Enter your details here to get instant access before proceeding for payment — required for both Oral exam / Written exam answers.</p>
     <div class="error-alert" id="error-alert"></div>
     <div class="capture-inputs">
       <input 
@@ -375,6 +396,14 @@ footer a{color:#64748b;text-decoration:none}
       />
     </div>
     <p class="capture-help">Your email will receive the QB access link immediately after payment. See our <a href="/privacy.html" style="color:#0d9488">Privacy Policy</a> for details.</p>
+  </div>
+</div>
+
+<div class="step-head">
+  <span class="step-num">2</span>
+  <div>
+    <div class="step-title">Choose what you need, then pay</div>
+    <div class="step-sub">Oral and Written are sold separately — pick either, or buy the second one later. Your access link is emailed the moment payment clears.</div>
   </div>
 </div>
 
