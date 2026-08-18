@@ -18,6 +18,7 @@ from __future__ import unicode_literals
 import argparse
 import io
 import os
+import re
 import sys
 
 
@@ -470,6 +471,105 @@ CONTROLS = [
      'the mark-allocation exclusion strips PARENTHESISED digits only: a '
      'spelled technical quantity in the examiner\'s own words is semantic and '
      'must survive'),
+
+    # -- Phase 3A.3: an ordinary word must not erase a technical magnitude ---
+    # `_INSTRUMENT_NUM` suppresses the number after a reference token, and it
+    # used to match those tokens as bare substrings: `no` inside "not" and
+    # "nozzle", `reg` inside "regular", `ism` inside "mechanism". The number
+    # was then dropped BEFORE its unit was read, and because `number_conflict`
+    # compares only shared dimensions, an emptied set is silence rather than
+    # disagreement - so two stems differing ONLY in a load-bearing quantity
+    # came back EXACT_REPEAT.
+    #
+    # These run in pairs on purpose. The `-1` case proves the magnitude
+    # survives preprocessing and still separates the two questions; the `-2`
+    # case holds every word constant and repeats the value, proving the
+    # separation came from the quantity and not from the sentence around it.
+    # A one-sided test could be passed by a parser that had simply stopped
+    # suppressing anything at all.
+    ('P33-A1', 'NOT: filter not coarser than 25 vs 10 microns',
+     'A lubricating oil filter is not coarser than 25 microns. Describe the maintenance the Chief Engineer carries out on it.',
+     'A lubricating oil filter is not coarser than 10 microns. Describe the maintenance the Chief Engineer carries out on it.',
+     'SAME_CORE_ASK',
+     'the Laptop decisive case: "not" contains "no", and the fineness IS the '
+     'answer'),
+    ('P33-A2', 'NOT: filter not coarser than 25 vs 25 microns',
+     'A lubricating oil filter is not coarser than 25 microns. Describe the maintenance the Chief Engineer carries out on it.',
+     'A lubricating oil filter is not coarser than 25 microns. Describe the maintenance the Chief Engineer carries out on it.',
+     'EXACT_REPEAT',
+     'paired control: identical wording AND identical value must stay a repeat'),
+
+    ('P33-B1', 'NOZZLE: injector opens at 250 vs 180 bar',
+     'A fuel injector nozzle opens at 250 bar. Explain how it is tested and reconditioned on board.',
+     'A fuel injector nozzle opens at 180 bar. Explain how it is tested and reconditioned on board.',
+     'SAME_CORE_ASK',
+     '"nozzle" contains "no"; the opening pressure is the setting being asked '
+     'about'),
+    ('P33-B2', 'NOZZLE: injector opens at 250 vs 250 bar',
+     'A fuel injector nozzle opens at 250 bar. Explain how it is tested and reconditioned on board.',
+     'A fuel injector nozzle opens at 250 bar. Explain how it is tested and reconditioned on board.',
+     'EXACT_REPEAT',
+     'paired control for the nozzle stem'),
+
+    ('P33-C1', 'MECHANISM: release mechanism at 60 vs 100 N',
+     'The locking mechanism of a lifeboat release gear withstands 60 N. State the tests and the records kept.',
+     'The locking mechanism of a lifeboat release gear withstands 100 N. State the tests and the records kept.',
+     'SAME_CORE_ASK',
+     '"mechanism" contains "ism"; the test load is the quantity in issue'),
+    ('P33-C2', 'MECHANISM: release mechanism at 60 vs 60 N',
+     'The locking mechanism of a lifeboat release gear withstands 60 N. State the tests and the records kept.',
+     'The locking mechanism of a lifeboat release gear withstands 60 N. State the tests and the records kept.',
+     'EXACT_REPEAT',
+     'paired control for the mechanism stem'),
+
+    ('P33-D1', 'REGULAR: regular testing at 440 vs 690 V',
+     'A main switchboard under regular testing at 440 V is to be maintained. Describe the insulation tests and the safety precautions.',
+     'A main switchboard under regular testing at 690 V is to be maintained. Describe the insulation tests and the safety precautions.',
+     'SAME_CORE_ASK',
+     '"regular" contains "reg"; the voltage decides the precautions'),
+    ('P33-D2', 'REGULAR: regular testing at 440 vs 440 V',
+     'A main switchboard under regular testing at 440 V is to be maintained. Describe the insulation tests and the safety precautions.',
+     'A main switchboard under regular testing at 440 V is to be maintained. Describe the insulation tests and the safety precautions.',
+     'EXACT_REPEAT',
+     'paired control for the regular-testing stem'),
+
+    # -- four further realistic stems carrying the dangerous substrings ------
+    ('P33-E1', 'NORMAL: normal running speed 750 vs 900 rpm',
+     'The normal running speed of the main engine is 750 rpm. Explain the effect on the turbocharger and the fuel system.',
+     'The normal running speed of the main engine is 900 rpm. Explain the effect on the turbocharger and the fuel system.',
+     'SAME_CORE_ASK',
+     '"normal" contains "no"'),
+    ('P33-F1', 'REGULATING: regulating valve lifts at 7 vs 12 bar',
+     'The regulating valve of the boiler lifts at 7 bar. Describe the setting procedure and the log entries required.',
+     'The regulating valve of the boiler lifts at 12 bar. Describe the setting procedure and the log entries required.',
+     'SAME_CORE_ASK',
+     '"regulating" contains "reg"'),
+    ('P33-G1', 'REGISTRATION: registration survey covers 12 vs 30 months',
+     'The registration survey of the vessel covers 12 months of machinery records. State what the Chief Engineer prepares for it.',
+     'The registration survey of the vessel covers 30 months of machinery records. State what the Chief Engineer prepares for it.',
+     'SAME_CORE_ASK',
+     '"registration" contains "reg"'),
+    ('P33-H1', 'ISOLATING MECHANISM: trips at 30 vs 60 A',
+     'The isolating mechanism of the emergency switchboard trips at 30 A. Explain the discrimination arrangement and its testing.',
+     'The isolating mechanism of the emergency switchboard trips at 60 A. Explain the discrimination arrangement and its testing.',
+     'SAME_CORE_ASK',
+     '"isolating" and "mechanism" both carry the substrings'),
+
+    # -- the bare negation, which anchoring alone would not have saved -------
+    # `\bno\b` would still match the "no" of "no more than". The designator is
+    # always written "No. 4", so `no` is required to carry its period.
+    ('P33-I1', 'NO MORE THAN: 15 vs 5 ppm oil content',
+     'The oily water separator discharges no more than 15 ppm. Describe the alarm arrangement and the record entries.',
+     'The oily water separator discharges no more than 5 ppm. Describe the alarm arrangement and the record entries.',
+     'SAME_CORE_ASK',
+     'a leading word boundary alone leaves "no more than" suppressing the '
+     'limit; the period on "no." is what separates the negation from the '
+     'designator'),
+    ('P33-I2', 'NO MORE THAN: 15 vs 15 ppm oil content',
+     'The oily water separator discharges no more than 15 ppm. Describe the alarm arrangement and the record entries.',
+     'The oily water separator discharges no more than 15 ppm. Describe the alarm arrangement and the record entries.',
+     'EXACT_REPEAT',
+     'paired control for the bare-negation stem'),
 ]
 
 
@@ -522,6 +622,28 @@ MUTATIONS = [
      ['P32-N1', 'P32-N2']),
     ('P32-6 restored: decimals ignored',
      dict(numbers_ignore_decimals=True), ['P32-F2', 'P31-M1']),
+]
+
+
+# The mutations above switch off a classifier option. The boundary in
+# `_INSTRUMENT_NUM` is not an option - it is the expression itself - so it is
+# mutated by substitution instead. Each entry restores a WEAKER form of the
+# reference-suppression rule and must break at least one control or parser
+# case; if a weaker expression passes everything, the boundary is decoration
+# and the Phase 3A.2 defect could return unnoticed.
+REGEX_MUTATIONS = [
+    ('P33-1 restored: reference tokens unanchored (the 3A.2 defect)',
+     r'(solas|marpol|stcw|colreg|load\s*line|tonnage|ilo|mlc|isps|ism|annex|'
+     r'chapter|regulation|reg|convention|protocol|amendment|no\.?)'
+     r'\s*[^.;]{0,24}$'),
+    ('P33-2 leading boundary only: "regular" and "registration" still match',
+     r'\b(solas|marpol|stcw|colreg|load\s*line|tonnage|ilo|mlc|isps|ism|annex|'
+     r'chapter|regulation|reg|convention|protocol|amendment|no\.)'
+     r'\s*[^.;]{0,24}$'),
+    ('P33-3 period dropped from "no.": the bare negation suppresses again',
+     r'(?:\b(?:solas|marpol|stcw|colreg|load\s*line|tonnage|ilo|mlc|isps|ism|'
+     r'annex|chapter|regulation|reg|convention|protocol|amendment|no)\b\.?)'
+     r'\s*[^.;]{0,24}$'),
 ]
 
 
@@ -583,6 +705,53 @@ NUMERIC_PARSER_CASES = [
      'but a spelled quantity in the examiner\'s own words is semantic'),
     ('operate within 30 seconds', 'TIME_SECOND', '30',
      'and so is an unparenthesised one'),
+
+    # -- Phase 3A.3: the reference tokens are whole words, both ends --------
+    # Asserted at the parser because that is where the magnitude was lost. The
+    # classifier controls above prove the product consequence; these prove the
+    # cause, one substring at a time.
+    ('a filter not coarser than 25 microns', 'MICRON', '25',
+     '"not" is not "no."'),
+    ('the nozzle opens at 250 bar', 'PRESSURE_BAR', '250',
+     '"nozzle" is not "no."'),
+    ('the locking mechanism withstands 60 N', 'FORCE_N', '60',
+     '"mechanism" is not "ism"'),
+    ('under regular testing at 440 V', 'VOLT_V', '440',
+     '"regular" is not "reg"'),
+    ('normal running speed is 750 rpm', 'SPEED_RPM', '750',
+     '"normal" is not "no."'),
+    ('the regulating valve lifts at 7 bar', 'PRESSURE_BAR', '7',
+     '"regulating" is not "reg"'),
+    ('the registration survey covers 12 months', 'TIME_MONTH', '12',
+     '"registration" is not "reg"'),
+    ('the isolating mechanism trips at 30 A', 'CURRENT_A', '30',
+     '"isolating mechanism" carries both substrings'),
+    ('numbered equipment tested at 180 cSt', 'VISCOSITY_CST', '180',
+     '"numbered" is not "no."'),
+    ('an isometric sketch drawn to 5 mm', 'LENGTH_MM', '5',
+     '"isometric" is not "ism"'),
+    ('sulphur content not above 0.50 percent mass', 'PERCENT', '0.5',
+     'the decimal limit survives the negation'),
+    ('not less than 4 pumps are fitted', 'COUNT', '4',
+     'and so does a bare count'),
+    ('discharging no more than 25 microns', 'MICRON', '25',
+     'the bare negation is not a designator'),
+
+    # -- and the genuine references are still suppressed --------------------
+    ('under regulation 13 of Annex I', 'COUNT', None,
+     'a spelled regulation reference names a document'),
+    ('under Reg. 14 of the Annex', 'COUNT', None,
+     'and so does the abbreviated form, which the old expression MISSED '
+     'because [^.;] could not cross the period'),
+    ('under reg 14 of the Annex', 'COUNT', None,
+     'with or without the period'),
+    ('as required by No. 4 of the code', 'COUNT', None,
+     'the designator carries its period'),
+    ('the ISM 9 requirement applies', 'COUNT', None,
+     'a bare instrument acronym is still a reference'),
+    ('see chapter 9 of the code', 'COUNT', None, 'chapter references too'),
+    ('MARPOL Annex VI regulation 14 applies', 'COUNT', None,
+     'the full citation form the corpus actually uses'),
 ]
 
 
@@ -687,6 +856,33 @@ def main():
             else 'ESCAPED - guard is decoration'))
     print('-' * 108)
     print('mutations: %d   escaped: %d' % (len(MUTATIONS), escapes))
+
+    print()
+    print('reference-suppression boundary - each weaker expression must break '
+          'something')
+    print('%-62s %s' % ('MUTATION', 'RESULT'))
+    print('-' * 108)
+    intact = qs._INSTRUMENT_NUM
+    rx_escapes = 0
+    try:
+        for name, pattern in REGEX_MUTATIONS:
+            qs._INSTRUMENT_NUM = re.compile(pattern, re.I)
+            broke = ((run(qs.DEFAULT, verbose=False) - failed)
+                     | (run_numeric_parser(verbose=False) - failed))
+            ok = bool(broke)
+            rx_escapes += 0 if ok else 1
+            print('%-62s %s' % (
+                name[:62],
+                'load-bearing (broke %d: %s)'
+                % (len(broke), ', '.join(sorted(broke)[:3])) if ok
+                else 'ESCAPED - the boundary is decoration'))
+    finally:
+        qs._INSTRUMENT_NUM = intact
+    print('-' * 108)
+    print('regex mutations: %d   escaped: %d'
+          % (len(REGEX_MUTATIONS), rx_escapes))
+    escapes += rx_escapes
+
     return 1 if (failed or escapes) else 0
 
 
