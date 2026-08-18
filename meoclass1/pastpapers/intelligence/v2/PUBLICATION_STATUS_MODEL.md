@@ -77,10 +77,16 @@ understating the recurrence. It no longer does.
 | `FAMILY-EM-0006` | IMO GHG developments | HIGH | HIGH | HIGH | `TEXT_VERIFIED` |
 | `FAMILY-EM-0007` | marine insurance, four-limb short notes | HIGH | **NONE** | HIGH | `TEXT_VERIFIED` |
 
-**Nothing is `CANDIDATE_PUBLISHED`. Nothing is even `DATE_VERIFIED`** — because
-`DATE_VERIFIED` means the *earlier* sitting is dated, and for `EM-0003`, `EM-0004`
-and `EM-0006` the earlier sittings are MIW-held papers whose dates are anchored,
-while the *deeper* history behind them is not.
+**Nothing is `CANDIDATE_PUBLISHED`.** For the seven families above, nothing reaches
+`DATE_VERIFIED` either — because `DATE_VERIFIED` means the *earlier* sitting is
+dated, and for `EM-0003`, `EM-0004` and `EM-0006` the earlier sittings are MIW-held
+papers whose dates are anchored, while the *deeper* history behind them is not.
+
+Two families added after this table was written, `FAMILY-EM-0008` and
+`FAMILY-EM-0009`, **do** reach `DATE_VERIFIED`: each rests on five MIW-held sittings
+whose dates are anchored, and `C21` passes on both. Reaching `DATE_VERIFIED` clears
+the date gate alone; it is not a candidate-publication threshold, which §5 below
+still governs.
 
 ---
 

@@ -49,7 +49,7 @@ whole layer.
 | Source | Class | Notes |
 |---|---|---|
 | **Question Bank MEO CL-I** — `SRC-DGS-QBANK-ARCHIVED` | **`OFFICIAL_QUESTION_BANK`** | 185 items, 100% extracted, `PRESERVED_RAW`, sha256 pinned. **Undated.** Not a sitting, and never counted as one. |
-| **India (2005) Morning Paper, Management Level** — `SRC-DGS-2005-MGMT` | **`OFFICIAL_FULL_PAPER`** | The only official dated sitting paper either phase has obtained. Nine stems plus the printed rubric. Year 2005 HIGH (printed on the paper); month February MEDIUM (DGS filename token `0205` and the OLE creation date agree — neither is printed). |
+| **India (2005) Morning Paper, Management Level** — `SRC-DGS-2005-MGMT` | **`OFFICIAL_SAMPLE_PAPER`** | **Reclassified in Phase 3B.** Clean re-extraction shows the document is headed **`SAMPLE PAPER`**. It is an official DGS specimen, not a sitting, so it dates nothing and the February month is withdrawn — that month rested only on the filename token `0205` and the OLE creation date, neither of which is printed. Its nine stems are bank items **57–64** (contiguous) plus 126, so the bank already holds the paper verbatim. See `PHASE3B_REPORT.md` §4. |
 
 The bank is by far the more valuable — it supplied official ancestors for five of
 QP2608's limbs and matched 63 questions across the corpus — but it is worth being
@@ -111,3 +111,62 @@ The most promising remaining route is the DG Shipping domain becoming reachable.
 CDX index shows the Directorate has published a great deal of examination material
 over the years; Phase 2 enumerated 830 archived MEO URLs and sampled a handful.
 **That enumeration is itself an asset for Phase 3.**
+
+---
+
+# Phase 3B — the archive route, worked and closed
+
+`current_as_of: 2026-08-18`
+
+Phase 3B worked the archived MEO enumeration to its end. Full evidence in
+`PHASE3B_REPORT.md`; inventory in `PHASE3B_SOURCE_INVENTORY.json`.
+
+## The 2013–2015 Class I files are result lists
+
+The 12 files Phase 3A identified as the Phase-3B acquisition target — re-derived
+here as **15** distinct filenames — all sit under `/writereaddata/ExamResult/`.
+Two were rendered and read: they are scanned candidate pass/fail tables
+(application no., name, Written result, Orals result, certificate yes/no) with
+**no question text of any kind**.
+
+| Window | Class | Evidence |
+|---|---|---|
+| 2013-08 → 2015-09, MEO Class I | **`METADATA_ONLY`** | 15 official dated result lists. They evidence that sittings happened and who passed. They cannot evidence one question. |
+
+**This route yields no question text and is closed.**
+
+## The 1999–2005 Class I papers are real, and are a different exam
+
+`/WriteReadData/userfiles/file/` holds 686 official DGS `.doc` files, of which
+**81 are Class I**. All 81 were retrieved, verified official by DGS's own Word
+authoring metadata, and extracted — 727 questions, 1,784 comparable units.
+
+| Year | Sittings | Class | Evidence |
+|---|---|---|---|
+| 1999-06 | EKG, EKM | **`OFFICIAL_FULL_PAPER`** | month and year printed on the paper |
+| 1999-07 | EKG, ET | **`OFFICIAL_FULL_PAPER`** | month and year printed |
+| 1999-07 | NA | **`OFFICIAL_PARTIAL`** | month printed; questions render inside Word tables and only 2 parse |
+| 2001 (12 serial sets) | AM, EKG, EKM, EKS, ET, HE, HT, NA | **`QUESTION_TEXT_ONLY`** | 58 papers printing `INDIA (2001)` and a **serial number**, never a month. A year is not a sitting. |
+| 2000 and undated | EKG, EKM, ET, NA | **`QUESTION_TEXT_ONLY`** | 17 papers printing no date at all |
+| 2005-??  Engineering Management | **`OFFICIAL_SAMPLE_PAPER`** | one specimen paper, undated, already inside the bank |
+
+**Subject, not volume, is the limit.** These are Applied Mechanics, Naval
+Architecture, Electrotechnology, Heat Engines and Engineering Knowledge papers —
+the pre-2010 Class I structure. MIW's corpus and the official bank are both
+**Engineering Management**. Swept with the unmodified Phase-3A.3 classifier,
+1,784 archived units produce **27** reportable rows, **9** strong — and 8 of
+those 9 are the 2005 sample paper matching the bank it is already part of.
+Strong matches against MIW's own corpus: **zero**.
+
+## Dated coverage of Engineering Management — unchanged
+
+| Window | Class |
+|---|---|
+| 1999–2000 | `MISSING` for Engineering Management (the subject did not exist in this form) |
+| 2001–2012 | `MISSING` |
+| 2013–2015 | `METADATA_ONLY` — result lists only |
+| 2016–2020 | `MISSING` |
+| 2021-01 → 2026-08 | `QUESTION_TEXT_ONLY` / `OFFICIAL_FULL_PAPER` — MIW's own 70 papers |
+
+**MIW's dated evidence floor remains January 2021.** The official bank still
+supplies undated ancestry and is not counted as coverage.

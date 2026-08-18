@@ -53,6 +53,7 @@ See `OFFICIAL_QUESTION_BANK.md`.
 | `QUESTION_OCCURRENCES.jsonl` | one record per occurrence **at a sitting** |
 | `QUESTION_FAMILIES.json` | 7 families; `frequency_known` always equals `known_occurrences.length` |
 | `HISTORICAL_COVERAGE_MATRIX.md` | what MIW can read and reproduce, per sitting |
+| `PHASE3B_SOURCE_INVENTORY.json` | every archived DGS Class I object Phase 3B identified, and what each turned out to be |
 
 ### Models
 | File | Defines |
@@ -69,6 +70,7 @@ See `OFFICIAL_QUESTION_BANK.md`.
 | `OFFICIAL_QUESTION_BANK.md` | the Phase-2 headline finding |
 | `QP2608_PAPER_DNA.md` | recomputed — count view and mark-weighted view |
 | `QP2608_TEMPORAL_DELTAS.md` | four pilots — `NONE`, `MINOR`, `MODERATE`, blocked |
+| `PHASE3B_REPORT.md` | Phase 3B — why the archived route yields no dated Engineering Management history |
 | `PHASE3A1_REPAIR_REGISTER.md` | the Phase-3A.1 register, built from the actual Laptop review at `286c0c5` |
 | `H1_H5_ADJUDICATION.md` | supersedes the Phase-1 verdicts in `verification/` |
 | `CANDIDATE_BLOCK_PROTOTYPES.md` | drafts of the Study Guide block — **not implemented** |
@@ -81,8 +83,10 @@ See `OFFICIAL_QUESTION_BANK.md`.
 ### Tools
 | Tool | Does |
 |---|---|
-| `tools/validate_families.py` | **202 checks**, 0 skipped; `--mutate` runs 48 corruptions and proves each is caught, 9 of them against the required-source file itself |
+| `tools/validate_families.py` | **207 checks**, 0 skipped; `--mutate` runs 53 corruptions and proves each is caught, 9 of them against the required-source file itself |
 | `tools/adversarial_controls.py` | **66 classification controls** and **41 magnitude-parser assertions**; `--mutate` switches off one guard at a time and requires a named control to break, then substitutes 3 weaker forms of the reference-suppression expression and requires each to break something |
+| `tools/extract_dgs_class1_papers.py` | extracts the 81 archived Class I Word papers — 727 questions |
+| `tools/sweep_historical_papers.py` | sweeps archived papers against the bank and MIW's corpus |
 | `tools/parse_dgs_question_bank.py` | extracts the official bank PDF — 185/185 items |
 | `tools/match_bank_to_corpus.py` | sweeps the bank against all 40 specs, both containment directions |
 | `tools/negative_controls.py` | 6 controls the classifier must not fail |
@@ -128,5 +132,8 @@ python meoclass1/pastpapers/intelligence/v2/tools/validate_families.py --mutate
 
 ## Status
 
-Nothing is candidate-published. Nothing is even `DATE_VERIFIED`. Every family sits at
-`RESEARCH_HYPOTHESIS` or `TEXT_VERIFIED`, awaiting independent Laptop verification.
+Nothing is candidate-published. Two families — `FAMILY-EM-0008` and
+`FAMILY-EM-0009` — have since reached `DATE_VERIFIED`; the other seven sit at
+`RESEARCH_HYPOTHESIS` or `TEXT_VERIFIED`. All nine await independent Laptop
+verification, and `DATE_VERIFIED` is a statement about dated *evidence*, not a
+clearance to publish.
