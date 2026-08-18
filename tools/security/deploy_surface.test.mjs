@@ -109,6 +109,9 @@ describe("deployment intent — authoring-only classes are excluded", () => {
     "meoclass1/pastpapers/SENTINEL.html",
     "meoclass1/known_traps.md",
     "meoclass1/qb_health_check.py",
+    "meoclass1/oral-intelligence/examiner-audit/ALL_SURVEYORS_SOURCE_RECORDS.jsonl",
+    "meoclass1/oral-intelligence/examiner-audit/EXAMINER_INDEX_SNAPSHOT.json",
+    "meoclass1/oral-intelligence/SENTINEL.json",
     "tools/pastpapers/build_index.py",
     "tools/security/security.test.mjs",
     "docs/ARCHITECTURE.md",
@@ -133,7 +136,7 @@ describe("deployment intent — authoring-only classes are excluded", () => {
     const classes = [
       "meoclass1/pastpapers/specs/", "meoclass1/pastpapers/verification/",
       "meoclass1/pastpapers/docs/", "meoclass1/pastpapers/intelligence/",
-      "meoclass1/pastpapers/", "tools/", "docs/", "reports/",
+      "meoclass1/pastpapers/", "meoclass1/oral-intelligence/", "tools/", "docs/", "reports/",
     ];
     const leaks = TRACKED.filter((f) => classes.some((c) => f.startsWith(c)))
       .filter((f) => !isIgnored(f, PATTERNS));
@@ -241,6 +244,9 @@ describe("runtime allowlist — product and public surfaces still deploy", () =>
       // pages were retired from the deploy alongside the authoring layer.
       "meoclass1/pastpapers/",
       "meoclass1/known_traps.md", "meoclass1/qb_health_check.py",
+      // Oral examiner-intelligence research tree: generator inputs and the
+      // canonical snapshot, never fetched by a page.
+      "meoclass1/oral-intelligence/",
     ];
     const wrongly = TRACKED.filter((f) => roots.some((r) => f.startsWith(r)))
       .filter((f) => !internals.some((i) => f.startsWith(i)))
