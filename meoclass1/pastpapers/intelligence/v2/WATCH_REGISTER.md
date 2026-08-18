@@ -200,3 +200,74 @@ cited by `SRC-DGS-2005-MGMT` alone and keys no occurrence record.
   at history.** It could not, until Phase 3A. If a future change makes the
   adversarial suite pass with a guard switched off, that guard has stopped
   working — run `adversarial_controls.py --mutate`, not just the controls.
+
+---
+
+# Phase 3B additions
+
+`current_as_of: 2026-08-18`
+
+## L3A3-1 — plural `Regs` leaks as `COUNT` — **WATCHED, NOT TRIGGERED**
+
+**Status: OPEN on the register. No repair made. No repair warranted.**
+
+The Laptop's Phase-3A.3 finding: `"Regs 14 and 15 apply"` yields `COUNT 14,
+COUNT 15` because the designator expression does not recognise the plural. The
+error direction is the safe one — a leaked designator manufactures a false
+conflict and *demotes* a true repeat — and measured incidence in
+classifier-visible text was zero.
+
+Phase 3B was the scale test the Laptop asked for. **1,784 units of genuine
+historical examination text** — 81 official DGS Class I papers, 1999–2005, nine
+subjects, wording produced by a different generation of examiners and never seen
+by this classifier — were searched for `Regs N and M`, `regulations N and M` and
+bare plural `Regs`.
+
+**Zero hits.** No unit reached magnitude logic through this path.
+
+Per §27, no `REAL_PHASE3B_TRIGGER` is recorded and nothing was redesigned. The
+finding stays on the register: zero incidence across 1,784 unseen historical
+units is stronger evidence than zero across the bank alone, but it is still
+evidence about the text MIW happens to hold. **Re-test on the next ingestion of
+text from a new source.**
+
+## P3B-001 — the archived MEO route is worked out
+
+`P3-002` ("work the 832 archived MEO URLs") is **CLOSED**. See
+`PHASE3B_REPORT.md`.
+
+- the 2013–2015 Class I files are candidate **result lists**, not papers;
+- the 81 Class I **question** papers found instead are 1999–2005 and are a
+  different examination from Engineering Management;
+- the one Management-level document is a **sample paper** already contained in
+  the official bank as items 57–64.
+
+Do not re-run this acquisition expecting dated Engineering Management history.
+It is not there. Re-open only if `dgshipping.gov.in` itself becomes reachable
+and serves material the archive never captured.
+
+## P3B-002 — the 58 year-only 2001 papers
+
+They print `INDIA (2001)` and a serial set number, never a month. They are
+preserved and extracted, and they are **not** dated sittings. If a future source
+(a gazette, a timetable, an examiner notice) ever maps serial set N to a month
+in 2001, these become 58 dated sittings at a stroke. **Do not guess the mapping
+from the filename token** — `meoekgI_2001.doc` is serial set 2, not February.
+`C50` fails the build if a month appears without printed evidence.
+
+## P3B-003 — 5 papers render questions inside Word tables
+
+`meoekgI_800.doc` (0 questions parsed), `ameonaI_799.doc`, `meonaI_101(2).doc`,
+`meonaI_7001(2).doc`, `ameoetI_7001.doc`. The extractor reports these as
+`PARTIAL`/`UNREADABLE` rather than silently under-counting. Only worth repairing
+if the subject relevance problem is ever solved — recovering more questions from
+the wrong examination buys nothing.
+
+## Standing caution added in Phase 3B
+
+- **A filename is not a date, and a path is not a document type.** Phase 3B
+  found a phantom `July 1986` sitting (a regulation's application date, read out
+  of a question's own body text by an over-wide header window) and a `February
+  2005` sitting that was a specimen paper. Both were reached from tokens that
+  looked authoritative. `C50` and `C51` now fail the build on either. The rule:
+  **a sitting month must be printed on the paper, by the paper.**
