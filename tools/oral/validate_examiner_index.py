@@ -287,6 +287,19 @@ def main(argv):
     check("no hand-entered legacy total survives on the SQ teaser",
           not re.search(r"\b791\b|\b212\b|62\+", sq_html))
 
+    # ------------------------------------- 8b. storefront card == snapshot
+    home = G.SQ_HOME_PATH.read_bytes()
+    check("SQ home is LF-only", b"\r\n" not in home)
+    home = home.decode("utf-8")
+    m = G.CARD_RE.search(home)
+    want_title, want_desc, want_tags = G.render_sq_home_card(snap)
+    check("SQ home examiner-index card title, description and tags derive from the snapshot",
+          bool(m) and m.group(2) == want_title and m.group(4) == want_desc
+          and m.group(6) == want_tags,
+          "card=%r" % (m.group(4)[:120] if m else None))
+    check("SQ home carries no hand-typed legacy examiner numbers",
+          not re.search(r"10-question set|Simon Sir's 212|791\+", home))
+
     # ---------------------------------------------- 9. git safety gate (H)
     try:
         ls = subprocess.run(["git", "ls-files", "--", "docs/MIW-master-Question-bank"],

@@ -16,6 +16,7 @@ Mutations (brief s42):
   H  raw .docx tracked by git                         -> index gate
   I  tamper the snapshot's own totals                 -> index gate
   J  relabel a CE-tip row as Confirmed in the HTML    -> index gate
+  K  storefront (SQ/index.html) card count differs    -> index gate
 
     PYTHONIOENCODING=utf-8 python tools/oral/mutate_examiner_index.py
 """
@@ -35,6 +36,7 @@ TOOLS = Path(__file__).resolve().parent
 OUT = L.OUT
 INDEX = L.MEO / "examiner-index.html"
 SQ = L.REPO / "SQ" / "examiner-index.html"
+SQ_HOME = L.REPO / "SQ" / "index.html"
 SNAP = OUT / "EXAMINER_INDEX_SNAPSHOT.json"
 PUB = OUT / "RELEASE_A_PUBLICATION.json"
 P2RES = OUT / "PHASE2_VALIDATION_RESULTS.json"   # validate_phase2.py writes this
@@ -159,6 +161,13 @@ def m_I():
     wtext(SNAP, json.dumps(snap, ensure_ascii=False, indent=1) + "\n")
 
 
+def m_K():
+    h = rtext(SQ_HOME)
+    m = re.search(r"Sir's complete (\d+)-question set", h)
+    n = int(m.group(1))
+    wtext(SQ_HOME, h.replace(m.group(0), m.group(0).replace(str(n), str(n - 1)), 1))
+
+
 def m_J():
     h = rtext(INDEX)
     h2 = h.replace('class="q-row tier-ce_tip" data-tier="ce_tip"',
@@ -178,6 +187,7 @@ MUTATIONS = [
     ("H", "raw .docx tracked by git", m_H, ("validate_examiner_index.py",)),
     ("I", "tamper snapshot totals", m_I, ("validate_examiner_index.py",)),
     ("J", "relabel a CE-tip row Confirmed in the HTML", m_J, ("validate_examiner_index.py",)),
+    ("K", "storefront card count differs from snapshot", m_K, ("validate_examiner_index.py",)),
 ]
 
 
@@ -191,7 +201,7 @@ def main():
     print("baseline green")
     escapes = 0
     for code, label, mut, validators in MUTATIONS:
-        with Guard(PUB, INDEX, SQ, SNAP, P2RES):
+        with Guard(PUB, INDEX, SQ, SQ_HOME, SNAP, P2RES):
             try:
                 mut()
                 for v in validators:

@@ -6,6 +6,8 @@ candidate surfaces:
 
     meoclass1/examiner-index.html   the full, gated candidate index
     SQ/examiner-index.html          the public storefront teaser
+    SQ/index.html                   ONE card only: the examiner-index sample
+                                    card's description and examiner tags
 
 and is itself written as EXAMINER_INDEX_SNAPSHOT.json so a validator can
 prove the two pages and the data agree.
@@ -58,6 +60,7 @@ TPL = HERE / "templates"
 OUT = L.OUT
 INDEX_PATH = L.MEO / "examiner-index.html"
 SQ_PATH = L.REPO / "SQ" / "examiner-index.html"
+SQ_HOME_PATH = L.REPO / "SQ" / "index.html"
 SNAPSHOT_NAME = "EXAMINER_INDEX_SNAPSHOT.json"
 
 CONFIG = json.loads((HERE / "examiner_index_config.json").read_text(encoding="utf-8"))
@@ -494,6 +497,46 @@ def render_sq(snap):
     )
 
 
+# ------------------------------------------- storefront card on SQ/index.html
+# The QB overview page carries one card that describes the examiner index
+# teaser. Its numbers were typed by hand ("Paul Sir's complete 10-question
+# set", "Simon Sir's 212") and drifted with the page they describe. The
+# generator owns exactly that card's description and examiner tags - anchored
+# on the card title, and a build failure if the anchor is not found once -
+# and leaves every other byte of the page alone.
+CARD_RE = re.compile(
+    r'(<div class="sample-card-title">Examiner Index — )([^<]*)(</div>\s*'
+    r'<div class="sample-card-desc">)(.*?)(</div>\s*<div class="sample-tags">)(.*?)(</div>)',
+    re.S)
+
+
+def render_sq_home_card(snap):
+    sq = CONFIG["sq"]
+    secs = {s["slug"]: s for s in snap["sections"]}
+    free, promo = secs[sq["free_examiner"]], secs[sq["promo_examiner"]]
+    title = "%s Sir, Full Sample" % free["name"]
+    desc = ("Every QB question bundled by Kochi MMD examiner. %s Sir's complete "
+            "%d-question set is fully open here, plus a preview of %s Sir's %d "
+            "machinery/2-stroke questions — see exactly what your panel tends to "
+            "ask before you walk in." % (free["name"], free["count"],
+                                          promo["name"], promo["count"]))
+    tags = "\n" + "".join('        <span class="sample-tag">%s</span>\n' % esc(s["name"])
+                          for s in snap["sections"]) + "      "
+    # text-node context: keep the apostrophe in "Sir's" as typed
+    return html.escape(title, quote=False), html.escape(desc, quote=False), tags
+
+
+def patch_sq_home(snap):
+    """Return the SQ/index.html text with the examiner-index card derived."""
+    text = SQ_HOME_PATH.read_bytes().decode("utf-8").replace("\r\n", "\n")
+    hits = CARD_RE.findall(text)
+    if len(hits) != 1:
+        fail("SQ/index.html examiner-index card anchor found %d times, expected 1" % len(hits))
+    title, desc, tags = render_sq_home_card(snap)
+    return CARD_RE.sub(lambda m: m.group(1) + title + m.group(3) + desc + m.group(5)
+                       + tags + m.group(7), text, count=1)
+
+
 # ------------------------------------------------------------------- main
 
 def write_lf(path, text):
@@ -506,6 +549,7 @@ def main(argv):
         snap = resolve_snapshot()
         index_html = render_index(snap)
         sq_html = render_sq(snap)
+        sq_home_html = patch_sq_home(snap)
     except BuildFailure as e:
         print("BUILD FAILURE: %s" % e)
         return 2
@@ -532,7 +576,9 @@ def main(argv):
              json.dumps(snap, ensure_ascii=False, indent=1) + "\n")
     write_lf(INDEX_PATH, index_html)
     write_lf(SQ_PATH, sq_html)
-    print("wrote %s, %s, %s" % (SNAPSHOT_NAME, INDEX_PATH.name, "SQ/" + SQ_PATH.name))
+    write_lf(SQ_HOME_PATH, sq_home_html)
+    print("wrote %s, %s, %s, %s (card only)" % (
+        SNAPSHOT_NAME, INDEX_PATH.name, "SQ/" + SQ_PATH.name, "SQ/" + SQ_HOME_PATH.name))
     return 0
 
 
