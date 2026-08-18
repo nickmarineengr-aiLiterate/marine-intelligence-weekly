@@ -292,8 +292,11 @@ def main(argv):
         ls = subprocess.run(["git", "ls-files", "--", "docs/MIW-master-Question-bank"],
                             cwd=str(L.REPO), capture_output=True, text=True, timeout=60)
         tracked = [x for x in ls.stdout.splitlines() if x.strip()]
+        # fail closed: if git cannot answer, that is not the same as "none"
         check("no raw question-bank source file is tracked by git",
-              ls.returncode == 0 and not tracked, str(tracked[:5]))
+              ls.returncode == 0 and not tracked,
+              (str(tracked[:5]) if ls.returncode == 0
+               else "git ls-files exit %d: %s" % (ls.returncode, ls.stderr.strip()[:160])))
     except Exception as e:  # git absent: name it, do not pass silently
         check("no raw question-bank source file is tracked by git", False, repr(e))
 
