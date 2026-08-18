@@ -81,10 +81,16 @@ See `OFFICIAL_QUESTION_BANK.md`.
 ### Tools
 | Tool | Does |
 |---|---|
-| `tools/validate_families.py` | **105 checks**; `--mutate` runs 21 corruptions and proves each is caught |
+| `tools/validate_families.py` | **202 checks**, 0 skipped; `--mutate` runs 48 corruptions and proves each is caught, 9 of them against the required-source file itself |
+| `tools/adversarial_controls.py` | **52 classification controls** and **21 magnitude-parser assertions**; `--mutate` switches off one guard at a time and requires a named control to break |
 | `tools/parse_dgs_question_bank.py` | extracts the official bank PDF — 185/185 items |
 | `tools/match_bank_to_corpus.py` | sweeps the bank against all 40 specs, both containment directions |
 | `tools/negative_controls.py` | 6 controls the classifier must not fail |
+
+The DGS bank extract at `pastpapers/sources/official/dgshipping/` is REQUIRED
+repository evidence, not optional intake. If it is missing, unreadable,
+malformed or not the bytes the manifest declares, validation fails and exits
+non-zero. It does not skip.
 
 ```bash
 python meoclass1/pastpapers/intelligence/v2/tools/validate_families.py --mutate
