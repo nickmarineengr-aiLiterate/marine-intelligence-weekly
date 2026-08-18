@@ -69,6 +69,7 @@ See `OFFICIAL_QUESTION_BANK.md`.
 | `OFFICIAL_QUESTION_BANK.md` | the Phase-2 headline finding |
 | `QP2608_PAPER_DNA.md` | recomputed — count view and mark-weighted view |
 | `QP2608_TEMPORAL_DELTAS.md` | four pilots — `NONE`, `MINOR`, `MODERATE`, blocked |
+| `PHASE3A1_REPAIR_REGISTER.md` | the Phase-3A.1 register, built from the actual Laptop review at `286c0c5` |
 | `H1_H5_ADJUDICATION.md` | supersedes the Phase-1 verdicts in `verification/` |
 | `CANDIDATE_BLOCK_PROTOTYPES.md` | drafts of the Study Guide block — **not implemented** |
 | `CURRENT_ANSWER_CORRECTION_CANDIDATES.md` | **NONE**, with the sweep that established it |
