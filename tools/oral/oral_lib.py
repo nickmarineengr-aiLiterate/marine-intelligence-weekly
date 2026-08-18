@@ -158,7 +158,7 @@ ROW = re.compile(
     r'<div class="q-row[^"]*"\s+data-tier="([^"]*)">\s*'
     r'<a class="q-link" href="([^"]*)">(.*?)</a>\s*'
     r'<div class="q-txt"[^>]*>(.*?)</div>\s*'
-    r'<span class="tier-badge">(.*?)</span>',
+    r'<span class="tier-badge"[^>]*>(.*?)</span>',
     re.S,
 )
 BATCH = re.compile(r'id="batch-([^"-]+)-(\d+)"')

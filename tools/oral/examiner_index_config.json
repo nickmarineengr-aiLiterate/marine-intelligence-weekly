@@ -1,0 +1,44 @@
+{
+  "note": "Prose and policy for the generated Examiner Index V2. No number in this file reaches a page: every count is len() of the records the generator writes. Examiner order is presentation order; membership comes from EXAMINER_ALIAS_REGISTER.json (an examiner without a slug is not rendered, an examiner in the data but not in the register is a build failure).",
+  "examiner_order": ["nair", "simon", "rajappan", "srivastava", "senthil", "paul", "john"],
+  "examiner_blurbs": {
+    "nair": "Conventions / MARPOL / PSC — expects verbatim regulation numbers",
+    "simon": "Machinery / 2-stroke — diagrams and principles",
+    "rajappan": "Stability / cargo — GZ curve, IS Code numbers",
+    "srivastava": "Electrotechnology — UMS logic, circuit diagrams",
+    "senthil": "Safety / LSA — procedure sequences with SOLAS references",
+    "paul": "Cross-cutting / general oral panel questions",
+    "john": "MARPOL / SOLAS / PSC / management — questions reported by candidates in an external surveyor compilation"
+  },
+  "external_only_note": "Reported from an external surveyor compilation only. MIW has not yet confirmed these against its own tracker, so every row here carries the Reported badge, never Confirmed.",
+  "tiers": {
+    "confirmed": {"label": "Confirmed", "badge": "✅ Confirmed", "filter_label": "Confirmed", "rank": 5,
+                  "meaning": "one or more primary tracker records name this examiner and this question"},
+    "reported":  {"label": "Reported", "badge": "🗂 Reported", "filter_label": "Reported", "rank": 4,
+                  "meaning": "an external surveyor compilation reports this examiner asking this question; not tracker-confirmed"},
+    "ce_tip":    {"label": "CE Tip", "badge": "📝 CE Tip", "filter_label": "CE Tip", "rank": 2,
+                  "meaning": "the QB card itself declares the attribution; not tracker-confirmed"},
+    "header":    {"label": "Header", "badge": "📄 Header", "filter_label": "Header", "rank": 1,
+                  "meaning": "attribution from the QB page header only"},
+    "inferred":  {"label": "Inferred", "badge": "🔹 Inferred", "filter_label": "Inferred-only", "rank": 0,
+                  "meaning": "topic inference; no primary record and no page assertion"}
+  },
+  "research_tier_to_literal": {
+    "MULTI_SOURCE_CONFIRMED": "confirmed",
+    "PRIMARY_CONFIRMED": "confirmed",
+    "PRIMARY_TRACKER": "confirmed",
+    "EXTERNAL_SOURCE_CONFIRMED": "reported",
+    "CE_TIP": "ce_tip",
+    "EXPLICIT_QCARD": "ce_tip",
+    "HEADER": "header",
+    "INFERRED_ONLY": "inferred"
+  },
+  "batch_size": 50,
+  "sq": {
+    "free_examiner": "paul",
+    "promo_examiner": "simon",
+    "promo_preview_rows": 5,
+    "promo_title_suffix": "Machinery & 2-Stroke",
+    "promo_badge": "MOST TESTED"
+  }
+}
