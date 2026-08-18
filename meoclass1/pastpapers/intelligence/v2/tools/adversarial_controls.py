@@ -16,8 +16,48 @@ demand is not load-bearing, whatever the prose says.
 from __future__ import unicode_literals
 
 import argparse
+import io
 import os
 import sys
+
+
+def _make_stdout_printable():
+    """Let this harness report on a stock Windows console.
+
+    Control data carries the characters the examiner actually writes -
+    `25 um` is also spelled `25 \u00b5m`, and the two must stay distinct in
+    the corpus. A default Windows console is cp1252, which cannot encode
+    either that or a degree sign, so printing the results table raised
+    UnicodeEncodeError halfway down and the suite exited 1 without a
+    verdict. It failed closed, so it could never manufacture a false
+    green - but a control suite that is red on an unconfigured machine is
+    not a portable control suite, and requiring PYTHONIOENCODING=utf-8 to
+    be set by hand is exactly the environment dependence the rest of this
+    model was cleaned of.
+
+    This is display only. No test datum is altered: the strings compared
+    by the classifier are the unmodified source strings, so the semantic
+    result is identical whichever branch below is taken.
+    """
+    for name in ('stdout', 'stderr'):
+        stream = getattr(sys, name, None)
+        if stream is None:
+            continue
+        reconfigure = getattr(stream, 'reconfigure', None)
+        if reconfigure is not None:          # CPython >= 3.7
+            try:
+                reconfigure(encoding='utf-8', errors='backslashreplace')
+                continue
+            except (ValueError, OSError):
+                pass
+        buf = getattr(stream, 'buffer', None)
+        if buf is not None:
+            setattr(sys, name, io.TextIOWrapper(
+                buf, encoding='utf-8', errors='backslashreplace',
+                line_buffering=True))
+
+
+_make_stdout_printable()
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import qi_similarity as qs                                        # noqa: E402
