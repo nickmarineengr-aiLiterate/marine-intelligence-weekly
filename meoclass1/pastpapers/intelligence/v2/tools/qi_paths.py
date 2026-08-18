@@ -12,8 +12,14 @@ Every path the layer needs is derived here from this file's own location, so
 the same branch resolves identically on any machine and from any working
 directory. Nothing in the layer may name a drive letter.
 
-`--repo-root` is accepted by the tools for the case of running against a
-different checkout; it defaults to the checkout this file lives in.
+No tool accepts a `--repo-root` override, and none needs one: every path is
+derived from this file, so pointing a tool at another checkout is done by
+running that checkout's own copy of the tool. An earlier draft of this module
+promised the flag and shipped a `for_root()` helper to serve it; neither the
+flag nor a single caller was ever written. A portability layer may not document
+a portability escape hatch that does not exist, so the claim and the dead
+helper are both gone rather than left to be discovered by someone relying on
+them.
 """
 from __future__ import unicode_literals
 
@@ -47,23 +53,3 @@ VERIFICATION = os.path.join(V2, 'verification')
 OFFICIAL_SOURCES = os.path.join(PASTPAPERS, 'sources', 'official', 'dgshipping')
 EXTRACTED_BANK = os.path.join(OFFICIAL_SOURCES, 'dgs_meo_cl1_bank_items.json')
 
-
-def for_root(root):
-    """Re-derive every path against a different checkout root."""
-    pp = os.path.join(root, 'meoclass1', 'pastpapers')
-    v2 = os.path.join(pp, 'intelligence', 'v2')
-    return {
-        'REPO_ROOT': root,
-        'PASTPAPERS': pp,
-        'V2': v2,
-        'SPECS': os.path.join(pp, 'specs'),
-        'HIST': os.path.join(pp, 'intelligence',
-                             'historical_qp_intelligence.json'),
-        'FAMILIES': os.path.join(v2, 'QUESTION_FAMILIES.json'),
-        'OCCURRENCES': os.path.join(v2, 'QUESTION_OCCURRENCES.jsonl'),
-        'MANIFEST': os.path.join(v2, 'SOURCE_MANIFEST.json'),
-        'BANK': os.path.join(v2, 'OFFICIAL_BANK_ITEMS.json'),
-        'VERIFICATION': os.path.join(v2, 'verification'),
-        'EXTRACTED_BANK': os.path.join(pp, 'sources', 'official', 'dgshipping',
-                                       'dgs_meo_cl1_bank_items.json'),
-    }

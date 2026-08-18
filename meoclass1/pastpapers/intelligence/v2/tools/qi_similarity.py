@@ -536,34 +536,146 @@ _MARKS = re.compile(r'\(\s*\d{1,3}\s*\)|\[\s*\d{1,3}\s*\]|\b\d{1,3}\s*marks?\b',
 # Unit -> the dimension it measures. A magnitude only conflicts with another
 # magnitude of the SAME dimension: "440 V" and "16 marks" are not rival
 # readings of one quantity, and comparing raw integers across dimensions was
-# never meaningful. Single-letter units that collide with ordinary words
-# (`a`, `g`, `c`, `m`) are deliberately excluded — the cost of missing "3 m" is
-# far lower than the cost of reading "Annex a" as a quantity.
+# never meaningful.
+#
+# A dimension is a QUANTITY AT A SCALE, not a quantity: kilonewtons and newtons
+# are separate keys, as are millimetres and kilometres. The layer does no unit
+# conversion and will not guess at one, so the only honest treatment of "70 N"
+# against "0.07 kN" is silence - they share no dimension, so neither a conflict
+# nor an equality is asserted. Lumping a quantity's scales into one key would
+# claim both wrongly: it would read "440 V" and "440 kV" as the same magnitude
+# and "5 mm" and "3 km" as a disagreement. Equivalent SPELLINGS of one scale
+# (micron / um / µm) do share a key, because that is normalisation, not
+# conversion.
+#
+# Phase 3A.1 carried PERCENT, PPM, VOLT, POWER, PRESSURE, TEMPERATURE, MASS,
+# VOLUME, LENGTH, the TIME family, SPEED and FREQUENCY. The Laptop review of
+# Phase 3A.1 found the marine dimensions missing entirely - force, viscosity,
+# tonnage, nautical distance and particle size - which is how "25 microns" and
+# "10 microns" reached each other unchallenged.
+
+# Units whose meaning depends on their case. Reading these from lowercased text
+# is what makes NM (nautical mile) indistinguishable from nm (nanometre), so
+# they are matched against the original casing before anything is folded.
+_UNIT_CASED = {
+    'N': 'FORCE_N', 'kN': 'FORCE_KN', 'MN': 'FORCE_MN',
+    'NM': 'NAUTICAL_MILE',
+    'V': 'VOLT_V', 'kV': 'VOLT_KV', 'KV': 'VOLT_KV',
+    'A': 'CURRENT_A', 'mA': 'CURRENT_MA', 'kA': 'CURRENT_KA',
+    'W': 'POWER_W', 'kW': 'POWER_KW', 'KW': 'POWER_KW', 'MW': 'POWER_MW',
+    'K': 'TEMPERATURE_K',
+}
+
+# Tokens that two different units both claim, where casing does not settle it.
+# Conservative reading beats a clever one: these are dropped, not guessed.
+#   nm  - nautical mile or nanometre
+#   KN  - kN (force) shouted, or kn (knots) shouted
+#   C   - Celsius, or a class/category letter. Only °C and the spelled forms
+#         are read as temperature.
+_UNIT_AMBIGUOUS = set(['nm', 'KN', 'C', 'c'])
+
 _UNIT_OF = {}
 for _cls, _forms in [
     ('PERCENT', ['percent', 'pct', 'percentage']),
     ('PPM', ['ppm']),
-    ('VOLT', ['v', 'volt', 'volts', 'kv', 'kilovolt', 'kilovolts']),
-    ('POWER', ['kw', 'mw', 'hp', 'bhp', 'shp', 'kilowatt', 'kilowatts']),
-    ('PRESSURE', ['bar', 'bars', 'psi', 'kpa', 'mpa']),
-    ('TEMPERATURE', ['deg', 'degc', 'celsius', 'centigrade', 'degrees']),
-    ('MASS', ['kg', 'tonne', 'tonnes', 'mt']),
-    ('VOLUME', ['litre', 'litres', 'liter', 'liters', 'm3']),
-    ('LENGTH', ['mm', 'cm', 'km', 'metre', 'metres', 'meter', 'meters']),
+    ('PPB', ['ppb']),
+
+    # -- force ---------------------------------------------------------------
+    ('FORCE_N', ['newton', 'newtons']),
+    ('FORCE_KN', ['kilonewton', 'kilonewtons']),
+
+    # -- viscosity -----------------------------------------------------------
+    # Fuel grades are quoted in cSt and the number IS the grade: 180 and 380
+    # are different fuels, not a rounding of one another.
+    ('VISCOSITY_CST', ['cst', 'centistoke', 'centistokes']),
+    ('VISCOSITY_MM2S', ['mm2/s', 'mm²/s', 'mm^2/s']),
+    ('VISCOSITY_MPAS', ['mpa.s', 'mpa·s', 'mpa-s']),
+    ('VISCOSITY_PAS', ['pa.s', 'pa·s', 'pa-s']),
+
+    # -- electrical ----------------------------------------------------------
+    ('VOLT_V', ['volt', 'volts']),
+    ('VOLT_KV', ['kilovolt', 'kilovolts']),
+    ('CURRENT_A', ['amp', 'amps', 'ampere', 'amperes']),
+    ('POWER_KW', ['kilowatt', 'kilowatts']),
+    ('POWER_MW', ['megawatt', 'megawatts']),
+    ('POWER_HP', ['hp', 'bhp', 'shp', 'ihp', 'horsepower']),
+    ('ENERGY_WH', ['wh']),
+    ('ENERGY_KWH', ['kwh']),
+    ('ENERGY_MWH', ['mwh']),
+    ('ENERGY_MJ', ['mj']),
+    ('FREQUENCY', ['hz', 'hertz']),
+
+    # -- pressure ------------------------------------------------------------
+    ('PRESSURE_BAR', ['bar', 'bars']),
+    ('PRESSURE_MBAR', ['mbar', 'millibar', 'millibars']),
+    ('PRESSURE_PSI', ['psi']),
+    ('PRESSURE_PA', ['pascal', 'pascals']),
+    ('PRESSURE_KPA', ['kpa']),
+    ('PRESSURE_MPA', ['mpa']),
+
+    # -- temperature ---------------------------------------------------------
+    ('TEMPERATURE_C', ['deg', 'degc', 'degrees', 'celsius', 'centigrade']),
+    ('TEMPERATURE_K', ['kelvin']),
+
+    # -- mass and tonnage ----------------------------------------------------
+    # Tonnage is a measure of the SHIP and dwt/gt/nt are three different
+    # measures of it, so they do not share a key with each other or with cargo
+    # mass in tonnes.
+    ('MASS_KG', ['kg', 'kilogram', 'kilograms', 'kilogramme', 'kilogrammes']),
+    ('MASS_T', ['t', 'mt', 'ton', 'tons', 'tonne', 'tonnes']),
+    ('TONNAGE_DWT', ['dwt', 'deadweight']),
+    ('TONNAGE_GT', ['gt', 'grt']),
+    ('TONNAGE_NT', ['nt', 'nrt']),
+
+    # -- volume --------------------------------------------------------------
+    ('VOLUME_L', ['litre', 'litres', 'liter', 'liters']),
+    ('VOLUME_M3', ['m3', 'm³', 'cum']),
+
+    # -- length, and particle size -------------------------------------------
+    # MICRON is deliberately NOT folded into a millimetre key: filtration
+    # fineness is quoted in microns and 25 µm against 25 mm is not a
+    # disagreement about one number, it is two different measurements.
+    ('LENGTH_MM', ['mm', 'millimetre', 'millimetres', 'millimeter',
+                   'millimeters']),
+    ('LENGTH_CM', ['cm', 'centimetre', 'centimetres', 'centimeter',
+                   'centimeters']),
+    ('LENGTH_M', ['metre', 'metres', 'meter', 'meters']),
+    ('LENGTH_KM', ['km', 'kilometre', 'kilometres', 'kilometer',
+                   'kilometers']),
+    ('MICRON', ['micron', 'microns', 'µm', 'μm', 'um',
+                'micrometre', 'micrometres', 'micrometer', 'micrometers']),
+
+    # -- distance at sea -----------------------------------------------------
+    # "nautical" carries the dimension so that the whole phrase "3 nautical
+    # miles" is read from its first word; bare NM is handled by casing above.
+    ('NAUTICAL_MILE', ['nautical']),
+
+    # -- time ----------------------------------------------------------------
     ('TIME_SECOND', ['second', 'seconds', 'sec', 'secs']),
     ('TIME_MINUTE', ['minute', 'minutes', 'min', 'mins']),
     ('TIME_HOUR', ['hour', 'hours', 'hr', 'hrs']),
     ('TIME_DAY', ['day', 'days']),
     ('TIME_WEEK', ['week', 'weeks']),
     ('TIME_MONTH', ['month', 'months', 'monthly']),
-    ('TIME_YEAR', ['year', 'years', 'yearly', 'annual', 'annually']),
-    ('SPEED', ['knot', 'knots', 'rpm']),
-    ('FREQUENCY', ['hz', 'hertz']),
+    ('TIME_YEAR', ['year', 'years', 'yearly', 'annual', 'annually', 'annum']),
+
+    # -- speed ---------------------------------------------------------------
+    # Knots and revolutions are not one dimension. Phase 3A.1 kept both under
+    # SPEED, which read "100 rpm" and "100 knots" as the same magnitude.
+    ('SPEED_KNOT', ['knot', 'knots', 'kt', 'kts']),
+    ('SPEED_RPM', ['rpm', 'rev/min']),
+    ('SPEED_MS', ['m/s']),
 ]:
     for _f in _forms:
         _UNIT_OF[_f] = _cls
 
+# Single-letter lowercase units that collide with ordinary words (`a`, `g`,
+# `c`, `m`) stay excluded: the cost of missing "3 m" is far lower than the cost
+# of reading "Annex a" as a quantity. Their cased forms are read where the
+# casing disambiguates - `A` is amperes, `a` is an article.
+
 _UNIT_LOOKAHEAD = 2       # words between the magnitude and its unit
+_UNIT_STRIP = '.,;:()[]\'"'
 
 
 def _norm_value(v):
@@ -571,12 +683,42 @@ def _norm_value(v):
     return ('%.6f' % v).rstrip('0').rstrip('.') or '0'
 
 
-def _unit_after(t, pos):
-    for w in t[pos:].split()[:_UNIT_LOOKAHEAD]:
-        w = w.strip('.,;:()[]')
-        if w in _UNIT_OF:
-            return _UNIT_OF[w]
+def _unit_after(raw, low, pos):
+    """The dimension named within two words of `pos`, or None.
+
+    `raw` and `low` are the same normalised text at the same offsets, differing
+    only in case, so a unit can be tested against its real casing first and
+    folded only when casing carries no meaning.
+    """
+    raw_words = raw[pos:].split()[:_UNIT_LOOKAHEAD]
+    low_words = low[pos:].split()[:_UNIT_LOOKAHEAD]
+    for rw, lw in zip(raw_words, low_words):
+        rw = rw.strip(_UNIT_STRIP)
+        lw = lw.strip(_UNIT_STRIP)
+        if not rw:
+            continue
+        # Casing is consulted before ambiguity is declared: NM is settled,
+        # nm is not.
+        if rw in _UNIT_CASED:
+            return _UNIT_CASED[rw]
+        if rw in _UNIT_AMBIGUOUS or lw in _UNIT_AMBIGUOUS:
+            continue
+        if lw in _UNIT_OF:
+            return _UNIT_OF[lw]
     return None
+
+
+# Magnitudes are written with the unit joined to the number as often as spaced:
+# "70N", "0.50%", "380cSt", "25\u00b5m". Splitting the two apart is done once,
+# before any reading, so the spaced and unspaced forms are the same magnitude.
+_JOINED = re.compile(r'(?<=\d)(?=[A-Za-z\u00b5\u03bc\u00b0])')
+
+# Grouped thousands are one number, not two: "50,000 dwt".
+_GROUPED = re.compile(r'(?<=\d),(?=\d{3}\b)')
+
+_NUM = re.compile(r'(?<![\w.])(\d{1,9}(?:\.\d+)?)')
+
+COUNT_MAX = 999          # a bare integer above this is a designator, not a count
 
 
 def numbers(text):
@@ -588,43 +730,90 @@ def numbers(text):
 
         '0.50 percent' -> []        # 0 and 50 both out of range
         '0.10 percent' -> [10]      # 10 happens to be in range
-        '440 volt'     -> []        '1000 volt' -> []
 
-    and because the conflict test requires BOTH sides to be non-empty, sulphur
-    0.50% against 0.10% read as an exact repeat. Those are the numbers an MEO
-    Class I answer actually turns on.
+    Phase 3A.1 typed magnitudes by dimension and fixed that for the dimensions
+    it knew. The Laptop review of Phase 3A.1 found the window still open
+    wherever the dimension was missing, in the same shape and for the same
+    reason:
 
-    Magnitudes are now typed by dimension and compared within a dimension. Two
-    Phase-3A exclusions are preserved deliberately:
+        '25 microns'  -> []              # micron was not a unit, 25 not a count
+        '10 microns'  -> [('COUNT', 10)] # 10 happens to be in range
+        '70 N'  -> []   '100 N' -> []    '180 cSt' -> []
+
+    and because the conflict test requires BOTH sides non-empty, a filter
+    changed from 25 microns to 10 read as an exact repeat. A unit-bearing value
+    is now read at any magnitude - 1, 25, 70, 1000, 0.50, 2.2 alike. No numeric
+    range gates a technical quantity; the range that remains applies only to
+    BARE integers, which are not quantities at all until something names what
+    they measure.
+
+    Three exclusions are preserved deliberately:
 
       * MARK ALLOCATIONS. `(4)`, `[6]`, `4 marks` are MIW's annotation of the
-        paper, not the examiner's question — the bank prints none, so every
+        paper, not the examiner's question - the bank prints none, so every
         marked modern stem would conflict with its own ancestor. Stripped
-        first, before anything else is read.
+        first, before anything else is read. Note that this strips the
+        PARENTHESISED digit only: "minimum four pumps" and "within 30 seconds"
+        are the examiner's words and survive untouched.
       * INSTRUMENT NUMBERS. `SOLAS 74`, `Annex I`, `regulation 13` name a
         document, not a quantity.
+      * AMBIGUOUS UNITS. `nm`, `KN` and bare `C` are dropped rather than
+        guessed at.
     """
-    t = _MARKS.sub(' ', (text or '').lower()).replace('%', ' percent ')
+    raw = _MARKS.sub(' ', text or '')
+    raw = raw.replace('%', ' percent ')
+    raw = raw.replace('\u00b0C', ' degc ').replace('\u00b0c', ' degc ')
+    raw = raw.replace('\u2103', ' degc ').replace('\u00b0', ' deg ')
+    raw = _GROUPED.sub('', raw)
+    raw = _JOINED.sub(' ', raw)
+    low = raw.lower()
+
     out = set()
-    for m in re.finditer(r'(?<![\w.])(\d{1,4}(?:\.\d+)?)', t):
-        if _INSTRUMENT_NUM.search(t[:m.start()]):
+    for m in _NUM.finditer(raw):
+        if _INSTRUMENT_NUM.search(low[:m.start()]):
             continue
-        raw = m.group(1)
-        val = float(raw)
-        unit = _unit_after(t, m.end())
+        val = float(m.group(1))
+        unit = _unit_after(raw, low, m.end())
         if unit:
             out.add((unit, _norm_value(val)))
-        elif '.' in raw:
+        elif '.' in m.group(1):
             # A decimal is a measurement whatever it measures: nobody writes
             # "0.50" to count things.
             out.add(('DECIMAL', _norm_value(val)))
         elif 1900 <= val <= 2099:
             out.add(('YEAR_AD', _norm_value(val)))
-        elif 1 <= val <= 20:
+        elif 1 <= val <= COUNT_MAX:
             out.add(('COUNT', _norm_value(val)))
     for w, v in _WORD_NUM.items():
-        for m in re.finditer(r'\b%s\b(?=\s+\w)' % w, t):
-            out.add((_unit_after(t, m.end()) or 'COUNT', _norm_value(v)))
+        for m in re.finditer(r'\b%s\b(?=\s+\w)' % w, low):
+            out.add((_unit_after(raw, low, m.end()) or 'COUNT',
+                     _norm_value(v)))
+    return out
+
+
+# Dimensions a mutation may delete, to prove each family of units is
+# load-bearing rather than merely listed.
+NUMERIC_MUTATION_SETS = {
+    'force': ('FORCE_N', 'FORCE_KN', 'FORCE_MN'),
+    'micron': ('MICRON',),
+    'viscosity': ('VISCOSITY_CST', 'VISCOSITY_MM2S', 'VISCOSITY_MPAS',
+                  'VISCOSITY_PAS'),
+    'tonnage': ('MASS_T', 'MASS_KG', 'TONNAGE_DWT', 'TONNAGE_GT',
+                'TONNAGE_NT'),
+    'nautical': ('NAUTICAL_MILE',),
+}
+
+
+def degrade_numbers(mags, drop=(), ignore_decimals=False):
+    """Re-read a magnitude set as a weaker parser would have. Mutation only."""
+    drop = set(drop)
+    out = set()
+    for dim, val in mags:
+        if dim in drop:
+            continue
+        if ignore_decimals and '.' in val:
+            continue
+        out.add((dim, val))
     return out
 
 
@@ -793,7 +982,8 @@ class Options(object):
     def __init__(self, use_demand=True, use_actor=True, use_short_stem=True,
                  use_numbers=True, use_polarity=True, use_negation=True,
                  use_regime_mask=True, demand_aggregate_max=False,
-                 numbers_small_int_only=False):
+                 numbers_small_int_only=False, numbers_drop=(),
+                 numbers_ignore_decimals=False):
         self.use_demand = use_demand
         self.use_actor = use_actor
         self.use_short_stem = use_short_stem
@@ -806,6 +996,10 @@ class Options(object):
         # than merely present.
         self.demand_aggregate_max = demand_aggregate_max
         self.numbers_small_int_only = numbers_small_int_only
+        # Delete a family of units, or the ability to read a decimal, so the
+        # suite can prove each is load-bearing rather than merely present.
+        self.numbers_drop = tuple(numbers_drop)
+        self.numbers_ignore_decimals = numbers_ignore_decimals
 
 
 DEFAULT = Options()
@@ -956,6 +1150,12 @@ def classify(a, b, opts=DEFAULT):
     elif opts.numbers_small_int_only:                       # mutation only
         nc = bool(A.numbers_phase3a and B.numbers_phase3a
                   and A.numbers_phase3a != B.numbers_phase3a)
+    elif opts.numbers_drop or opts.numbers_ignore_decimals:  # mutation only
+        na = degrade_numbers(A.numbers, opts.numbers_drop,
+                             opts.numbers_ignore_decimals)
+        nb = degrade_numbers(B.numbers, opts.numbers_drop,
+                             opts.numbers_ignore_decimals)
+        nc = number_conflict(na, nb)
     else:
         nc = number_conflict(A.numbers, B.numbers)
     if nc:

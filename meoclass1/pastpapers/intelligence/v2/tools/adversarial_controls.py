@@ -364,6 +364,72 @@ CONTROLS = [
      'motor vessel under load conditions. [6]',
      'EXACT_REPEAT|NEAR_VERBATIM',
      'the Phase-3A marks exclusion must NOT regress: the bank prints no marks'),
+
+    # -- Phase 3A.2: marine technical magnitudes ----------------------------
+    # The Laptop review of Phase 3A.1 found the numeric model had no FORCE,
+    # VISCOSITY, TONNAGE, NAUTICAL-DISTANCE or MICRON dimension, so a stem
+    # could change the quantity the answer turns on and still read as an exact
+    # repeat. Each control below is a magnitude an MEO Class I answer is marked
+    # on. Reaching SAME_CORE_ASK is the point: the ask survives, the claim of
+    # verbatim recurrence does not.
+    ('P32-F1', 'lifeboat release gear tested at 70 N vs 100 N',
+     'Explain the procedure for testing the lifeboat on-load release gear and state the test value of %s that the manufacturer specifies.' % '70 N', 'Explain the procedure for testing the lifeboat on-load release gear and state the test value of %s that the manufacturer specifies.' % '100 N', 'SAME_CORE_ASK',
+     'FORCE was absent from the model, so both sides extracted nothing'),
+    ('P32-F2', 'release gear tested at 2.2 kN vs 4.4 kN',
+     'Explain the procedure for testing the lifeboat on-load release gear and state the test value of %s that the manufacturer specifies.' % '2.2 kN', 'Explain the procedure for testing the lifeboat on-load release gear and state the test value of %s that the manufacturer specifies.' % '4.4 kN', 'SAME_CORE_ASK',
+     'Phase 3A.1 caught this only because they are decimals, not because kN '
+     'was understood'),
+    ('P32-F3', '70 N vs 0.07 kN - equal, but not provably so',
+     'Explain the procedure for testing the lifeboat on-load release gear and state the test value of %s that the manufacturer specifies.' % '70 N', 'Explain the procedure for testing the lifeboat on-load release gear and state the test value of %s that the manufacturer specifies.' % '0.07 kN', 'EXACT_REPEAT|NEAR_VERBATIM',
+     'the layer does no unit conversion and will not guess one; newtons and '
+     'kilonewtons share no dimension, so no conflict may be claimed. A '
+     'DOCUMENTED LIMITATION, not a repair'),
+
+    ('P32-P1', 'filter fineness 25 microns vs 10 microns',
+     'State the arrangement of the lubricating oil filter of %s fitted to the main engine and explain how it is cleaned.' % '25 microns', 'State the arrangement of the lubricating oil filter of %s fitted to the main engine and explain how it is cleaned.' % '10 microns', 'SAME_CORE_ASK',
+     'the 1-20 window in its purest form: 25 extracted nothing, 10 extracted '
+     'a COUNT, and the conflict test needs both sides'),
+    ('P32-P2', '25 microns vs 25 um - one magnitude, two spellings',
+     'State the arrangement of the lubricating oil filter of %s fitted to the main engine and explain how it is cleaned.' % '25 microns', 'State the arrangement of the lubricating oil filter of %s fitted to the main engine and explain how it is cleaned.' % '25 um',
+     'EXACT_REPEAT|NEAR_VERBATIM',
+     'normalising a spelling is not converting a unit'),
+    ('P32-P3', '10 \u03bcm vs 10 \u00b5m - Greek mu and micro sign',
+     'State the arrangement of the lubricating oil filter of %s fitted to the main engine and explain how it is cleaned.' % '10 \u03bcm', 'State the arrangement of the lubricating oil filter of %s fitted to the main engine and explain how it is cleaned.' % '10 \u00b5m',
+     'EXACT_REPEAT|NEAR_VERBATIM',
+     'two distinct code points that name the same unit'),
+
+    ('P32-V1', 'bunker viscosity 180 cSt vs 380 cSt',
+     'Describe the treatment of heavy fuel oil of %s in the purifier before it is admitted to the main engine.' % '180 cSt', 'Describe the treatment of heavy fuel oil of %s in the purifier before it is admitted to the main engine.' % '380 cSt', 'SAME_CORE_ASK',
+     'the number IS the fuel grade; 180 and 380 are different fuels and a '
+     'different purifier answer'),
+    ('P32-V2', 'bunker viscosity 15 cSt vs 15 cSt',
+     'Describe the treatment of heavy fuel oil of %s in the purifier before it is admitted to the main engine.' % '15 cSt', 'Describe the treatment of heavy fuel oil of %s in the purifier before it is admitted to the main engine.' % '15 cSt', 'EXACT_REPEAT',
+     'the same value must not be manufactured into a conflict'),
+
+    ('P32-T1', 'cargo of 5000 tonnes vs 10000 tonnes',
+     'Explain the stability calculation for a vessel carrying a cargo of %s and state the precautions the Chief Engineer takes.' % '5000 tonnes', 'Explain the stability calculation for a vessel carrying a cargo of %s and state the precautions the Chief Engineer takes.' % '10000 tonnes', 'SAME_CORE_ASK',
+     'four and five digit magnitudes were beyond the parser entirely'),
+    ('P32-T2', 'cargo of 50 kg vs 100 kg',
+     'Explain the stability calculation for a vessel carrying a cargo of %s and state the precautions the Chief Engineer takes.' % '50 kg', 'Explain the stability calculation for a vessel carrying a cargo of %s and state the precautions the Chief Engineer takes.' % '100 kg', 'SAME_CORE_ASK',
+     'MASS existed in Phase 3A.1 but nothing above 20 reached it unless a '
+     'unit was recognised'),
+    ('P32-T3', 'vessel of 50,000 dwt vs 70,000 dwt',
+     'Explain the stability calculation for a vessel carrying a cargo of %s and state the precautions the Chief Engineer takes.' % '50,000 dwt', 'Explain the stability calculation for a vessel carrying a cargo of %s and state the precautions the Chief Engineer takes.' % '70,000 dwt', 'SAME_CORE_ASK',
+     'grouped thousands are one number, and tonnage is a dimension'),
+
+    ('P32-N1', 'discharge within 3 nautical miles vs 12 nautical miles',
+     'State the discharge requirements that apply to a vessel operating within %s of the nearest land and explain the record entries.' % '3 nautical miles', 'State the discharge requirements that apply to a vessel operating within %s of the nearest land and explain the record entries.' % '12 nautical miles',
+     'SAME_CORE_ASK',
+     'the special-area boundary is the answer; 3 and 12 are different regimes'),
+    ('P32-N2', 'discharge within 3 NM vs 12 NM',
+     'State the discharge requirements that apply to a vessel operating within %s of the nearest land and explain the record entries.' % '3 NM', 'State the discharge requirements that apply to a vessel operating within %s of the nearest land and explain the record entries.' % '12 NM', 'SAME_CORE_ASK',
+     'the abbreviated form must be read as the spelled form is'),
+
+    ('P32-X1', 'minimum four pumps vs minimum six pumps',
+     'Explain the bilge pumping arrangement of a motor vessel fitted with a minimum of %s pumps and state how each is tested.' % 'four', 'Explain the bilge pumping arrangement of a motor vessel fitted with a minimum of %s pumps and state how each is tested.' % 'six', 'SAME_CORE_ASK',
+     'the mark-allocation exclusion strips PARENTHESISED digits only: a '
+     'spelled technical quantity in the examiner\'s own words is semantic and '
+     'must survive'),
 ]
 
 
@@ -394,8 +460,109 @@ MUTATIONS = [
      dict(use_negation=False),
      ['P31-N1', 'P31-N2', 'P31-N3', 'P31-N4', 'P31-N5']),
     ('P3A-4 restored: numbers narrowed back to integers 1-20',
-     dict(numbers_small_int_only=True), ['P31-M1', 'P31-M3']),
+     dict(numbers_small_int_only=True),
+     ['P31-M1', 'P31-M3', 'P32-F1', 'P32-P1', 'P32-V1', 'P32-T1', 'P32-T2',
+      'P32-T3']),
+
+    # -- Phase 3A.2: each dimension must be load-bearing, not merely listed --
+    # A unit table is easy to extend and easy to extend uselessly. These delete
+    # one family of units at a time and require a control to stop holding.
+    ('P32-1 restored: force units unknown',
+     dict(numbers_drop=qs.NUMERIC_MUTATION_SETS['force']),
+     ['P32-F1', 'P32-F2']),
+    ('P32-2 restored: micron / particle size unknown',
+     dict(numbers_drop=qs.NUMERIC_MUTATION_SETS['micron']), ['P32-P1']),
+    ('P32-3 restored: viscosity unknown',
+     dict(numbers_drop=qs.NUMERIC_MUTATION_SETS['viscosity']), ['P32-V1']),
+    ('P32-4 restored: tonnage and mass unknown',
+     dict(numbers_drop=qs.NUMERIC_MUTATION_SETS['tonnage']),
+     ['P32-T1', 'P32-T2', 'P32-T3']),
+    ('P32-5 restored: nautical distance unknown',
+     dict(numbers_drop=qs.NUMERIC_MUTATION_SETS['nautical']),
+     ['P32-N1', 'P32-N2']),
+    ('P32-6 restored: decimals ignored',
+     dict(numbers_ignore_decimals=True), ['P32-F2', 'P31-M1']),
 ]
+
+
+
+
+# Magnitude parsing, asserted directly rather than through a classification.
+# The class-level controls above cannot isolate a parser defect whose two stems
+# differ lexically anyway, and two of the defects below are of that kind: they
+# are OVER-claims, where Phase 3A.1 read two different quantities as one
+# magnitude because a dimension key lumped several scales together. Nothing in
+# the Laptop review reached them, because every case it raised was an
+# under-claim.
+NUMERIC_PARSER_CASES = [
+    # (text, dimension, value, note) - value None means "no such dimension"
+    ('a test load of 70 N', 'FORCE_N', '70',
+     'the headline R-2 gap: force did not exist'),
+    ('a test load of 100 N', 'FORCE_N', '100', 'and not only below 20'),
+    ('a fineness of 25 microns', 'MICRON', '25',
+     'the 1-20 window, reproduced with a different unit'),
+    ('a fineness of 25 \u00b5m', 'MICRON', '25', 'micro sign normalises'),
+    ('a fineness of 25 \u03bcm', 'MICRON', '25', 'Greek mu normalises'),
+    ('a fineness of 25um', 'MICRON', '25', 'unspaced form is the same value'),
+    ('a grade of 380 cSt', 'VISCOSITY_CST', '380', 'viscosity did not exist'),
+    ('a vessel of 50,000 dwt', 'TONNAGE_DWT', '50000',
+     'grouped thousands are one number'),
+    ('within 12 NM of land', 'NAUTICAL_MILE', '12',
+     'the abbreviation, resolved by its casing'),
+    ('within 12 nautical miles of land', 'NAUTICAL_MILE', '12',
+     'and the spelled phrase, read from its first word'),
+
+    # -- conservative refusals: silence beats a guess ----------------------
+    ('a wavelength of 12 nm', 'NAUTICAL_MILE', None,
+     'lowercase nm is nanometres or nautical miles and casing cannot settle '
+     'it, so no distance is claimed'),
+    ('a load of 2.2 KN', 'FORCE_KN', None,
+     'shouted KN is kN or kn; it is dropped rather than guessed'),
+    ('a temperature of 40 C', 'TEMPERATURE_C', None,
+     'bare C is Celsius or a category letter; only \u00b0C and the spelled '
+     'forms are read as temperature'),
+    ('a temperature of 40 \u00b0C', 'TEMPERATURE_C', '40',
+     'the degree sign settles it'),
+
+    # -- OVER-claims found in this pass, not raised by the review ----------
+    ('rated at 440 kV', 'VOLT_V', None,
+     'Phase 3A.1 held one VOLT key, so 440 V and 440 kV read as the same '
+     'magnitude. A scale is part of the dimension'),
+    ('running at 100 knots', 'SPEED_RPM', None,
+     'Phase 3A.1 held one SPEED key covering knots AND rpm, so 100 rpm and '
+     '100 knots read as the same magnitude'),
+    ('running at 100 knots', 'SPEED_KNOT', '100', 'and knots are still read'),
+
+    # -- exclusions that must not regress ----------------------------------
+    ('the emergency generator test (4)', 'COUNT', None,
+     'a parenthesised digit is MIW mark annotation, which the bank never '
+     'prints'),
+    ('under SOLAS 74 as amended', 'COUNT', None,
+     'an instrument number names a document, not a quantity'),
+    ('a minimum of four pumps is fitted', 'COUNT', '4',
+     'but a spelled quantity in the examiner\'s own words is semantic'),
+    ('operate within 30 seconds', 'TIME_SECOND', '30',
+     'and so is an unparenthesised one'),
+]
+
+
+def run_numeric_parser(verbose=True):
+    """Return the set of parser cases that FAILED."""
+    failed = set()
+    if verbose:
+        print('%-40s %-16s %-10s %s'
+              % ('TEXT', 'DIMENSION', 'EXPECT', 'RESULT'))
+        print('-' * 108)
+    for text, dim, want, note in NUMERIC_PARSER_CASES:
+        got = dict(qs.numbers(text)).get(dim)
+        ok = (got == want)
+        if not ok:
+            failed.add(text)
+        if verbose:
+            print('%-40s %-16s %-10s %s'
+                  % (text[:40], dim, want if want else '(absent)',
+                     'pass' if ok else 'FAIL (got %r)' % got))
+    return failed
 
 
 def run(opts, verbose=True):
@@ -449,6 +616,17 @@ def main():
     print('controls: %d   failures: %d' % (len(CONTROLS), len(failed)))
     if failed:
         print('failing: %s' % sorted(failed))
+
+    print()
+    print('magnitude parsing - asserted directly, not through a class')
+    print()
+    num_failed = run_numeric_parser()
+    print()
+    print('parser cases: %d   failures: %d'
+          % (len(NUMERIC_PARSER_CASES), len(num_failed)))
+    if num_failed:
+        print('failing: %s' % sorted(num_failed))
+    failed = failed | num_failed
 
     if not args.mutate:
         return 1 if failed else 0
