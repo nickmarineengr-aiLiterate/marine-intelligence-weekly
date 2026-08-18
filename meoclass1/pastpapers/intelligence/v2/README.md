@@ -75,7 +75,7 @@ See `OFFICIAL_QUESTION_BANK.md`.
 | `SETTER_HYPOTHESIS.md` | NTA — `NO OFFICIAL EVIDENCE FOUND`, re-checked in Phase 2 |
 | `WATCH_REGISTER.md` | what to re-check, and when |
 | `BULLET_CONNECTION_PILOT.md` | Phase 1 — how a family reaches the current answer |
-| `verification/H1…H5` | Phase 1 files, retained unedited as the record of what was known then |
+| `verification/H1…H5` | Phase 1 files, retained as the record of what was known then. Renamed in Phase 3A.1: the filenames asserted dates (`JUN2010`, `DEC2011`, `OCT2012`, `APR2010`, `MAR2010`) that the model refuses to assert, and a filename is the part that gets indexed, linked and quoted out of context. The dates are unchanged — still unsupported — and are now stated inside the files as the claim under adjudication. See `C45`. |
 
 ### Tools
 | Tool | Does |

@@ -1,4 +1,6 @@
-# H2 — QP2608-Q2 ↔ December 2011
+# H2 — QP2608-Q2, dry-dock coordination: the claimed December 2011 sitting
+
+> **DATE UNSUPPORTED.** The December 2011 date is the *claim under adjudication*, not a finding.
 
 **Decision: PARTIALLY CONFIRMED** (recurrence yes; December 2011 not located)
 **Similarity class: `SAME_CORE_ASK` at question level, `NEAR_VERBATIM` at limb 1 · Confidence: `MEDIUM`**

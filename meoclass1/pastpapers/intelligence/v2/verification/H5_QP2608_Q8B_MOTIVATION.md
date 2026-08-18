@@ -1,4 +1,6 @@
-# H5 — QP2608-Q8(b) ↔ March 2010
+# H5 — QP2608-Q8(b), motivation and man management: the claimed March 2010 sitting
+
+> **DATE UNSUPPORTED.** The recurrence is proven and the March 2010 date is not. The two claims are separate and stay separate.
 
 **Decision: PARTIALLY CONFIRMED** (recurrence proven; March 2010 not located)
 **Similarity class: `EXACT_REPEAT` (limb) · Confidence: `HIGH` for the recurrence, `LOW` for the 2010 date**

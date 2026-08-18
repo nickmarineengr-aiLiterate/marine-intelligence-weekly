@@ -1,4 +1,6 @@
-# H4 — QP2608-Q4 ↔ April 2010
+# H4 — QP2608-Q4, Marine Insurance Act short notes: the claimed April 2010 sitting
+
+> **DATE UNSUPPORTED.** The April 2010 date is the *claim under adjudication*, and the source was never found at all.
 
 **Decision: SOURCE NOT FOUND**
 **Similarity class: not assignable against a 2010 source · Confidence: `LOW`**

@@ -1,4 +1,6 @@
-# H1 — QP2608-Q1 ↔ June 2010
+# H1 — QP2608-Q1, lay-up reactivation: the claimed June 2010 sitting
+
+> **DATE UNSUPPORTED.** The June 2010 date is the *claim under adjudication*, not a finding. It is not evidenced anywhere, and this file no longer encodes it in its name.
 
 **Decision: PARTIALLY CONFIRMED**
 **Similarity class: `NEAR_VERBATIM` (limb (a) only) · Confidence: `MEDIUM`**

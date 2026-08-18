@@ -6,7 +6,17 @@ Each hypothesis pairs a **recurrence** claim with a **date** claim. Phase 2 keep
 them apart, and the two moved in opposite directions: **recurrence got much
 stronger, every date stayed unsupported.**
 
-The individual Phase-1 files under `verification/` are retained unedited as the
+> **Phase 3A.1 — L-3 closed.** The five files under `verification/` were named
+> `H1_QP2608_Q1_JUN2010.md` … `H5_QP2608_Q8B_MAR2010.md`. Their bodies were
+> honest — each framed its date as the claim being adjudicated — but the
+> filename is what gets indexed, linked and quoted out of context, and these
+> filenames asserted five sittings the model has never been able to evidence.
+> They are renamed to their subject matter. **The dates are not promoted and
+> not withdrawn: they remain exactly as unsupported as they were.** Validator
+> check `C45` now refuses an unevidenced date in an evidence filename.
+
+The individual Phase-1 files under `verification/` are retained, save for the
+renaming and the date-status note added to each heading, as the
 record of what was known then. This file supersedes their verdicts.
 
 ---

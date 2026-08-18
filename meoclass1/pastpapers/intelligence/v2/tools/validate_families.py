@@ -164,7 +164,7 @@ def date_evidence(occ, src_by_id):
 
 
 def validate(fam_doc, occ_rows, manifest, bank, specs, hist_ids, rep,
-             extracted=None, documents=None):
+             extracted=None, documents=None, filenames=None):
     occ_by_id = {}
     # --- C1 no duplicate occurrence ids -------------------------------------
     dupes = []
@@ -321,6 +321,10 @@ def validate(fam_doc, occ_rows, manifest, bank, specs, hist_ids, rep,
                           rep)
 
     src_by_id = {s['source_id']: s for s in manifest.get('sources', [])}
+
+    evidence_filename_dates(
+        occ_rows, src_by_id,
+        verification_filenames() if filenames is None else filenames, rep)
 
     bad_bank_src = [b.get('bank_item_id') for b in items
                     if bank.get('source_id') not in src_by_id]
@@ -530,6 +534,64 @@ def load_documents():
     return out
 
 
+# A date token inside a filename: `JUN2010`, `2010-06`, or a bare year.
+# `QP2608` is a paper id in MIW's own YYMM form, not a year, and does not match.
+_FILENAME_DATE = re.compile(
+    r'(?:(%s)[_-]?((?:19|20)\d{2}))|(?<![0-9A-Za-z])((?:19|20)\d{2})(?![0-9])'
+    % '|'.join(MONTHS), re.I)
+
+
+def evidence_filename_dates(occ_rows, src_by_id, filenames, rep):
+    """C45: a canonical evidence filename may not claim a date it cannot prove.
+
+    Laptop's original Phase-2 defect L-3, unrepaired through Phase 3A. The five
+    files under verification/ were named H1_QP2608_Q1_JUN2010.md through
+    H5_QP2608_Q8B_MAR2010.md. Their bodies were careful — each framed its date
+    as the claim under adjudication — but a filename is the part that gets
+    indexed, linked and quoted out of context, and these asserted five sittings
+    the layer has never evidenced.
+
+    The rule is not "no dates in filenames". It is the same rule the rest of
+    the layer runs on: a date must come from a dated source. A filename may
+    carry a date the occurrence records can actually derive, and no other.
+    """
+    supported = set()
+    for o in occ_rows:
+        if not date_evidence(o, src_by_id):
+            continue
+        y, m = o.get('source_year'), o.get('source_month')
+        if y and m and str(m).upper()[:3] in MONTHS:
+            supported.add((int(y), MONTHS[str(m).upper()[:3]]))
+
+    problems = []
+    for path in sorted(filenames):
+        base = os.path.basename(path)
+        for mon, yr1, yr2 in _FILENAME_DATE.findall(base):
+            if mon:
+                pair = (int(yr1), MONTHS[mon.upper()[:3]])
+                shown = '%s%s' % (mon, yr1)
+            else:
+                # A bare year cannot be evidenced by a month-precise record,
+                # so it is refused outright in an evidence filename.
+                problems.append('%s encodes the year %s, which no dated source '
+                                'supports' % (base, yr2))
+                continue
+            if pair not in supported:
+                problems.append('%s encodes %s, which no dated source supports'
+                                % (base, shown))
+
+    rep.check('C45 no evidence filename encodes an unevidenced date',
+              not problems, '; '.join(problems))
+
+
+def verification_filenames():
+    d = os.path.join(V2, 'verification')
+    if not os.path.isdir(d):
+        return []
+    return [os.path.join(d, f) for f in sorted(os.listdir(d))
+            if f.endswith('.md')]
+
+
 def _blocks(text):
     """Split a markdown document into blank-line separated blocks."""
     out, cur = [], []
@@ -580,7 +642,7 @@ def family_month_fidelity(fam_doc, occ_by_id, documents, rep):
         months[fam['family_id']] = got
 
     problems = []
-    for fn in sorted(documents):
+    for fn in sorted(k for k in documents if not k.startswith('__')):
         bound, header = None, None
         # A blank line ends a block. The binding is released for a whole block
         # that names another family, not merely for the line that names it:
@@ -850,6 +912,11 @@ DOC_MUTATIONS = [
                           '## 5. Temporal delta for FAMILY-EM-0009',
                           '## 5. Temporal delta for FAMILY-EM-0008')),
      'C44'),
+    ('re-date an evidence filename with an unsupported sitting',
+     lambda d: d.__setitem__(
+         '__filenames__',
+         list(d.get('__filenames__') or [])
+         + ['verification/H1_QP2608_Q1_JUN2010.md']), 'C45'),
     ('give a worked example another family\'s sitting months',
      lambda d: d.__setitem__(
          'PROTOTYPE_EVIDENCE_CLASSES.md',
@@ -948,9 +1015,10 @@ def main():
 
     extracted = load_extracted_bank()
     documents = load_documents()
+    filenames = verification_filenames()
 
     rep = validate(fam, occ, manifest, bank, specs, hist_ids, Report(),
-                   extracted, documents)
+                   extracted, documents, filenames)
     print('QI-v2 family validator')
     print('  families    : %d' % len(fam['families']))
     print('  occurrences : %d' % len(occ))
@@ -983,6 +1051,7 @@ def main():
             f2, o2, b2 = (copy.deepcopy(fam), copy.deepcopy(occ),
                           copy.deepcopy(bank))
             d2 = dict(documents)
+            d2['__filenames__'] = list(filenames)
             try:
                 if kind == 'bank':
                     mutate(b2)
@@ -994,8 +1063,9 @@ def main():
                 print('%-64s %-12s SETUP ERROR %s' % (name[:64], expect, exc))
                 held += 1
                 continue
+            fn2 = d2.pop('__filenames__', list(filenames))
             r2 = validate(f2, o2, manifest, b2, specs, hist_ids, Report(),
-                          extracted, d2)
+                          extracted, d2, fn2)
             fired = {fl.split(' ')[0] for fl in r2.failures}
             ok = bool(fired & set(expect.split('|')))
             held += 0 if ok else 1
