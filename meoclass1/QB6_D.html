@@ -381,7 +381,7 @@ document.addEventListener('selectstart', function(e){e.preventDefault();});
 <div class="page-header">
   <span class="qb-badge">QB6_D · MEO Class 1 Question Bank</span>
   <h1>Electrical, Automation &amp; Control Systems — Companion D</h1>
-  <p class="sub-desc">3 questions from the 30 Jun 2026 candidate reports: SCR working principle, Azimuth propulsion, EGR vs SCR commercial comparison. Examiners: Simon, Nair. Companion file — standalone Q1–Q3 numbering, own TOC. Includes embedded cheat sheet.</p>
+  <p class="sub-desc">4 questions from the 30 Jun 2026 candidate reports: SCR working principle, Azimuth propulsion, EGR vs SCR commercial comparison, and demonstrating NOx compliance on board. Examiners: Simon, Nair. Companion file — standalone Q1–Q4 numbering, own TOC. Includes embedded cheat sheet.</p>
   <div class="header-meta">
     <span><strong>Compiled by:</strong> Nixon Antony, 2/E, Maersk A/S</span>
     <span><strong>Examiners referenced:</strong> Simon, Nair</span>
@@ -403,6 +403,7 @@ document.addEventListener('selectstart', function(e){e.preventDefault();});
     <a class="toc-link" href="#q1">Q1. SCR (Selective Catalytic Reduction) working p</a>
     <a class="toc-link" href="#q2">Q2. Azimuth propeller — working principle.</a>
     <a class="toc-link" href="#q3">Q3. NOx reduction methods — EGR vs SCR for NOx re</a>
+<a class="toc-link" href="#q4">Q4. NOx formation and onboard compliance verification</a>
     <div class="divider"></div>
     <div class="upcoming-note">Companion file — own Q1…Qn numbering. Part of the MIW MEO Class 1 QB6_D series.</div>
   </div>
@@ -421,7 +422,7 @@ document.addEventListener('selectstart', function(e){e.preventDefault();});
 </table>
 </div></div></div>
 
-<div class="section-head"><h2>⚡ Electrical, Automation &amp; Control Systems — Companion D</h2><span class="sec-count">3 questions</span></div>
+<div class="section-head"><h2>⚡ Electrical, Automation &amp; Control Systems — Companion D</h2><span class="sec-count">4 questions</span></div>
     <div class="q-card" id="q1" data-tags="machinery">
       <div class="q-header" onclick="toggleCard(this)">
         <div class="q-num-badge">1</div>
@@ -579,7 +580,83 @@ document.addEventListener('selectstart', function(e){e.preventDefault();});
       </div>
     </div>
 
-  </div>
+  
+    <div class="q-card" id="q4" data-tags="machinery ghg">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">4</div>
+        <div class="q-text-wrap">
+          <div class="q-text">How is NOx produced in a marine diesel engine, and how do you demonstrate on board that the engine still complies with the NOx limit when you have no gas analyser fitted?</div>
+          <div class="q-tags"><span class="q-tag tag-machinery">MACHINERY</span><span class="q-tag tag-ghg">GHG / EMISSIONS</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>NOx is overwhelmingly <strong>thermal NOx</strong>, governed by peak flame temperature, oxygen and residence time. Compliance is normally shown without measuring it, by the <strong>Engine Parameter Check method</strong>: components and settings verified against the <strong>NOx Technical File</strong>, every change entered in the <strong>Record Book of Engine Parameters</strong>.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>Thermal NOx forms when flame temperature is high enough to break the nitrogen bond, so every control measure is really a peak-temperature or oxygen measure. For demonstrating compliance, regulation 13 of MARPOL Annex VI applies to engines of over 130 kW, and each carries its own EIAPP Certificate with a NOx Technical File behind it. Chapter 6 of the NOx Technical Code sets three ways to verify that certificate at renewal, annual and intermediate surveys or after a substantial modification: the Engine Parameter Check method, the Simplified Measurement method, and the Direct Measurement and Monitoring method. The Code states that it is not always necessary to measure emissions to know an engine without after-treatment is likely to comply. So with nothing on board you do not calculate NOx — you prove the engine is still the engine that was certified.</div>
+        <div class="answer-body">
+          <h4>1. How NO<sub>x</sub> Is Actually Produced</h4>
+          <p>Three routes exist, but only one matters in a large marine diesel:</p>
+          <ul>
+            <li><strong>Thermal NO<sub>x</sub> — dominant.</strong> Atmospheric nitrogen in the scavenge air oxidises in the high-temperature post-flame zone. Formation rises steeply and non-linearly with peak flame temperature, and also depends on the local oxygen concentration and on how long the gas dwells at that temperature.</li>
+            <li><strong>Fuel NO<sub>x</sub> — minor.</strong> From organically bound nitrogen in the residual fuel.</li>
+            <li><strong>Prompt NO<sub>x</sub> — negligible.</strong> Formed in the flame front itself.</li>
+          </ul>
+          <p>Everything the designer or the engineer can do therefore reduces to <strong>three levers: peak temperature, oxygen concentration, residence time</strong>. That is why late injection, Miller timing, water-in-fuel emulsion and exhaust gas recirculation all work, and why they all cost something in specific fuel consumption — you are deliberately degrading the thermodynamic cycle that NO<sub>x</sub> formation depends on.</p>
+
+          <h4>2. What &quot;Complying&quot; Means in Certificate Terms</h4>
+          <p>Regulation 13 of MARPOL Annex VI applies to marine diesel engines of over <strong>130 kW</strong> output power, other than emergency engines, and sets a total weighted cycle limit by tier and by rated engine speed <em>n</em>:</p>
+          <p class="formula"><strong>TIER I (ships built on/after 1 Jan 2000) — 17.0 g/kWh (n &lt; 130) · 45 · n<sup>−0.2</sup> (130 ≤ n &lt; 2000) · 9.8 g/kWh (n ≥ 2000)</strong></p>
+          <p class="formula"><strong>TIER II (on/after 1 Jan 2011) — 14.4 · 44 · n<sup>−0.23</sup> · 7.7 g/kWh</strong></p>
+          <p class="formula"><strong>TIER III (on/after 1 Jan 2016, inside a NO<sub>x</sub> ECA) — 3.4 · 9 · n<sup>−0.2</sup> · 2.0 g/kWh</strong></p>
+          <p>Tier I and Tier II are global limits; <strong>Tier III applies only while operating inside an emission control area designated for Tier III NO<sub>x</sub> control</strong>. The engine's compliance is evidenced by its <strong>EIAPP Certificate</strong>, and behind that certificate sits the <strong>NO<sub>x</sub> Technical File</strong> — the record of all parameters, components and settings that may influence the engine's NO<sub>x</sub> emission.</p>
+
+          <h4>3. The Three Onboard Verification Methods</h4>
+          <p>Chapter 6 of the NO<sub>x</sub> Technical Code — &quot;Procedures for demonstrating compliance with NO<sub>x</sub> emission limits on board&quot; — requires verification at onboard surveys by <em>one</em> of the following:</p>
+          <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+          <table class="comp-table" style="width:100%;border-collapse:collapse;min-width:520px;">
+            <tr><th>Method</th><th>What is actually done</th><th>Equipment needed on board</th></tr>
+            <tr><td><strong>6.2 Engine Parameter Check</strong></td><td>Verify that the engine's designated components, settings and operating values have not deviated from the specifications in the Technical File. Electronic engine management systems are evaluated against their original &quot;as-built&quot; settings.</td><td><strong>None beyond normal instrumentation.</strong> This is the method for a ship with no analyser.</td></tr>
+            <tr><td><strong>6.3 Simplified Measurement</strong></td><td>Measure the gaseous concentrations of NO<sub>x</sub> and CO<sub>2</sub> over the applicable test cycle, with engine torque and speed, then weight the modes and correct for ambient air temperature and humidity. Instrument tolerances are relaxed compared with the test bed.</td><td>Portable analyser set and a means of establishing torque and speed.</td></tr>
+            <tr><td><strong>6.4 Direct Measurement and Monitoring</strong></td><td>Continuous measurement and monitoring of the emissions in service.</td><td>Permanently installed monitoring system.</td></tr>
+          </table>
+          </div>
+
+          <h4>4. Doing the Engine Parameter Check in Practice</h4>
+          <p>This is what the surveyor will actually walk through with you, and what you must be able to describe:</p>
+          <ol>
+            <li><strong>Open the Technical File</strong> and take the list of <em>designated components and settings</em> — typically fuel injection equipment (nozzle type and hole geometry, pump plunger and barrel, cam profile and injection timing), turbocharger type and matching, charge air cooler, scavenge air pressure and temperature, valve timing, and compression ratio.</li>
+            <li><strong>Check the fitted components against that list</strong> by identification number and marking. This is a components-and-settings audit, not a performance test.</li>
+            <li><strong>Check the operating values</strong> where the File specifies load-dependent operating values. Where those measurements are needed, the instruments used must be calibrated to the Code's requirements.</li>
+            <li><strong>Produce the Record Book of Engine Parameters</strong>, which records all changes — <em>including like-for-like replacements</em> and adjustments within the approved ranges — made to the engine's components and settings.</li>
+            <li><strong>Produce the supporting documentation</strong> required alongside it: the engine parameter list of designated components and settings approved by the Administration, and the technical documentation of any component modification.</li>
+          </ol>
+          <p>If an adjustment or modification has taken the engine outside its approved ranges, the Parameter Check fails and the engine must be re-verified — that is precisely the risk the Code is guarding against, since a certified engine can be pushed out of compliance by adjustment alone.</p>
+
+          <h4>5. Why No Calculation Is Required</h4>
+          <p>The Code says this in terms: for the purpose of assessing compliance with regulation 13, it is <strong>not always necessary to measure the NO<sub>x</sub> emissions</strong> to know that an engine not fitted with an after-treatment device is likely to comply — it may be sufficient to know that the present state of the engine corresponds to the specified components, calibration and parameters. So the correct answer to &quot;how do you calculate it with nothing on board&quot; is that you do not calculate it: you audit the engine back to its certified condition. The arithmetic was done once, on the test bed, and the Technical File is the record of the condition under which that result holds.</p>
+
+          <h4>6. When Compliance Must Be Demonstrated</h4>
+          <p>At <strong>renewal, annual and intermediate surveys</strong>, and following a <strong>substantial modification</strong> of the engine.</p>
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Reg. 13</span><span class="reg-desc">Nitrogen oxides — applies to marine diesel engines of over 130 kW; Tier I / II / III limits by ship construction date and rated engine speed; Tier III applies within designated NO<sub>x</sub> emission control areas</span></div>
+            <div class="reg-item"><span class="reg-code">MEPC.177(58)</span><span class="reg-desc">Adoption of the NO<sub>x</sub> Technical Code 2008 — the mandatory code governing certification, the Technical File and onboard verification</span></div>
+            <div class="reg-item"><span class="reg-code">NO<sub>x</sub> Technical Code, Ch. 6 (6.1)</span><span class="reg-desc">Procedures for demonstrating compliance on board — verification by one of the Engine Parameter Check, Simplified Measurement or Direct Measurement and Monitoring methods</span></div>
+            <div class="reg-item"><span class="reg-code">NO<sub>x</sub> Technical Code, 6.2</span><span class="reg-desc">Engine Parameter Check method — components, settings and operating values verified against the Technical File; electronic engine management evaluated against original settings</span></div>
+            <div class="reg-item"><span class="reg-code">NO<sub>x</sub> Technical Code, 6.2.2.7</span><span class="reg-desc">Documentation to be maintained on board — Record Book of Engine Parameters, the approved engine parameter list, and technical documentation of any component modification</span></div>
+            <div class="reg-item"><span class="reg-code">NO<sub>x</sub> Technical Code, 6.3</span><span class="reg-desc">Simplified measurement method — NO<sub>x</sub> and CO<sub>2</sub> concentrations over the applicable test cycle, with ambient temperature and humidity corrections</span></div>
+            <div class="reg-item"><span class="reg-code">NO<sub>x</sub> Technical Code, 6.4</span><span class="reg-desc">Direct measurement and monitoring method — continuous in-service measurement</span></div>
+          </div>
+          <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Simon lets you run through PEMS, gas analysers and parameter checks, and then closes the door: <em>&quot;There is nothing on board — now how do you know?&quot;</em> He is not asking for arithmetic. Answer with the name of the method and the two documents: <em>&quot;Sir, by the Engine Parameter Check method under chapter 6.2 of the NO<sub>x</sub> Technical Code — I verify the designated components and settings against the NO<sub>x</sub> Technical File, and every change is entered in the Record Book of Engine Parameters.&quot;</em> Then name three designated components off the top of your head — injector nozzle, fuel pump plunger and injection timing — because that is the follow-up. The candidate who tries to derive a g/kWh figure from scavenge temperature at the examiner's table has already lost the question.</div>
+        </div>
+        <details class="deep-dive"><summary>Deep Dive — CE Relevance · Traps · Failures · Numbers · Examiner Chain · On My Vessel</summary><div class="deep-dive-body"><h5>CE Relevance</h5><p>The Chief Engineer personally owns the linkage between the engine and its certificate. The EIAPP does not stay valid because it is in the folder — it stays valid because the fitted components still match the Technical File and because the Record Book has been kept honestly. That makes routine overhaul decisions regulatory decisions: fitting a nozzle of a different specification, changing a cam, re-matching a turbocharger or adjusting injection timing outside the approved range are all NO<sub>x</sub>-relevant events, and each needs a Record Book entry and, where the change is outside the approved range, re-verification.</p><h5>Trap Questions</h5><p><strong>Q:</strong> You replaced an injector with an identical spare — does that need recording? <strong>A:</strong> Yes. The Record Book of Engine Parameters records all changes <em>including like-for-like replacements</em> and adjustments within the approved ranges.</p><p><strong>Q:</strong> Your engine is Tier III certified but you are on the high seas — which limit applies? <strong>A:</strong> Tier II. Tier III applies only while operating within an emission control area designated for Tier III NO<sub>x</sub> control.</p><p><strong>Q:</strong> Does the NO<sub>x</sub> limit depend on the fuel you burn? <strong>A:</strong> No. Regulation 13 is an engine limit expressed in g/kWh on a weighted test cycle; fuel sulphur is regulation 14, a separate control.</p><p><strong>Q:</strong> Which method must you use? <strong>A:</strong> It is a choice of one of the three, not a sequence. For a conventional engine without after-treatment, the Engine Parameter Check is the normal route.</p><h5>Common CE Failures</h5><p>Candidates confuse <em>reducing</em> NO<sub>x</sub> with <em>verifying</em> NO<sub>x</sub> and answer with SCR and EGR — which is the wrong question. They name the Technical File but not the Record Book of Engine Parameters, which is the document the surveyor actually opens. And they quote a Tier III value as though it were a global limit.</p><h5>Numbers &amp; Regs</h5><p>Engine threshold <strong>over 130 kW</strong>. Tier I <strong>17.0 / 45·n<sup>−0.2</sup> / 9.8</strong>; Tier II <strong>14.4 / 44·n<sup>−0.23</sup> / 7.7</strong>; Tier III <strong>3.4 / 9·n<sup>−0.2</sup> / 2.0</strong> g/kWh, with speed bands n &lt; 130, 130 ≤ n &lt; 2000, n ≥ 2000 rpm. Verification at <strong>renewal, annual and intermediate surveys</strong> or after a substantial modification. Thermal NO<sub>x</sub> is the dominant route and scales steeply with peak flame temperature.</p><h5>Examiner Chain</h5><p><em>Simon.</em> How is NO<sub>x</sub> produced &rarr; which of the three routes dominates &rarr; what governs thermal NO<sub>x</sub> &rarr; how do you know your engine complies &rarr; what onboard methods exist &rarr; you have no analyser, now what &rarr; what is in the NO<sub>x</sub> Technical File &rarr; name designated components &rarr; what is the Record Book of Engine Parameters &rarr; you changed an injector, what do you do &rarr; when must compliance be demonstrated.</p><h5>On My Vessel</h5><p>On a Maersk container vessel the two-stroke main engine and each applicable auxiliary carries its own EIAPP Certificate and Technical File, held with the IAPP Certificate. In practice the discipline is at the overhaul bench: spare injectors and fuel pump elements are drawn only against the part numbers listed as designated components, the Record Book entry is made at the time of the change rather than reconstructed before a survey, and any proposal to alter injection timing for consumption reasons is checked against the approved range before it is executed rather than after.</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_D, Q4, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB6_D · Q4 · v1.0</span>
+        </div>
+      </div>
+    </div>
+</div>
 </div>
 
 <div id="no-results">

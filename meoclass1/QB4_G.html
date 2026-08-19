@@ -102,7 +102,7 @@ details.dd .dd-body{padding:0 14px 12px;font-size:13px;color:var(--ink);}
 <button class="filter-btn active" onclick="filterTag('all',this)">All</button>
 <button class="filter-btn" onclick="filterTag('ism',this)">ISM</button>
 <button class="filter-btn" onclick="filterTag('management',this)">Management</button>
-<span id="q-count-label">Showing 9 of 9</span>
+<span id="q-count-label">Showing 10 of 10</span>
 </div>
 <div class="main-layout">
 <div class="sidebar"><h3>Contents</h3><a class="toc-link" href="#q1">Q1. flag state vs ro diffrence</a>
@@ -113,9 +113,10 @@ details.dd .dd-body{padding:0 14px 12px;font-size:13px;color:var(--ink);}
 <a class="toc-link" href="#q6">Q6. Casualty investigation — who inves</a>
 <a class="toc-link" href="#q7">Q7. Hull damage or oil pollution incid</a>
 <a class="toc-link" href="#q8">Q8. Which statutory certificate does n</a>
-<a class="toc-link" href="#q9">Q9. OCIMF — what is it, tools of OCIMF</a></div>
+<a class="toc-link" href="#q9">Q9. OCIMF — what is it, tools of OCIMF</a>
+<a class="toc-link" href="#q10">Q10. SAR — COSPAS-SARSAT &amp; INDSAR</a></div>
 <div id="q-feed">
-<div class="section-head"><h2>📋 ISM, ISPS, MLC & STCW — Additional Questions</h2><span class="sec-count">9 questions</span></div>
+<div class="section-head"><h2>📋 ISM, ISPS, MLC & STCW — Additional Questions</h2><span class="sec-count">10 questions</span></div>
 
 <div class="q-card" id="q1" data-tags="survey">
   <div class="q-header" onclick="toggleCard(this)">
@@ -764,6 +765,68 @@ details.dd .dd-body{padding:0 14px 12px;font-size:13px;color:var(--ink);}
   </div>
 </div>
 
+
+<div class="q-card" id="q10" data-tags="management">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">10</div>
+    <div class="q-text-wrap">
+      <div class="q-text" itemprop="name">Search and rescue — in the case of a rescue at sea, how will you inform the authorities? Explain COSPAS-SARSAT and INDSAR.</div>
+      <div class="q-tags"><span class="q-tag">SAR</span><span class="q-tag">GMDSS</span><span class="q-tag">India</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <div class="snap-box"><b>15-Second Answer:</b> <p>SOLAS V/33 and the 1979 SAR Convention oblige a master to proceed with all speed, regardless of the nationality or status of the persons. Alerting is by GMDSS and the <strong>406 MHz EPIRB</strong>, running satellite → <strong>Local User Terminal</strong> → <strong>Mission Control Centre</strong> → <strong>MRCC</strong>. India's MCC is <strong>INMCC Bengaluru</strong>; the MRCCs are Mumbai, Chennai and Port Blair.</p></div>
+      <div class="snap-box"><b>60-Second Answer:</b> <p>The duty is absolute: under SOLAS V/33 and the SAR Convention a master who receives a distress signal must proceed with all speed, and since the 2004 amendments that applies regardless of the nationality or status of those persons. I inform the authorities through the GMDSS fit — a DSC alert, an Inmarsat distress alert, and the 406 MHz EPIRB. The satellite path is COSPAS-SARSAT: beacon, satellite, Local User Terminal, Mission Control Centre, then the responsible Rescue Co-ordination Centre. India's Mission Control Centre is INMCC at Bengaluru, operated by ISRO. The Director General of the Indian Coast Guard is the National Maritime SAR Coordinating Authority, with MRCCs at Mumbai, Chennai and Port Blair. INDSAR is the Coast Guard's voluntary ship reporting system for the Indian SRR.</p></div>
+
+      <h4>1. The Alerting Chain, in the Order It Actually Happens</h4>
+      <p>Whether we are the ship in distress or the ship responding, the same architecture applies:</p>
+      <ol>
+        <li><strong>Alert raised</strong> — DSC alert on VHF, MF or HF; Inmarsat distress alert; or automatic activation of the <strong>406 MHz EPIRB</strong> on float-free release.</li>
+        <li><strong>Satellite detection</strong> — the COSPAS-SARSAT constellation, comprising low-earth-orbit, geostationary and medium-earth-orbit payloads.</li>
+        <li><strong>Local User Terminal (LUT)</strong> — the ground station that receives the satellite downlink and computes the beacon's position.</li>
+        <li><strong>Mission Control Centre (MCC)</strong> — the part of the COSPAS-SARSAT system that accepts alert messages from the local user terminals and from other mission control centres, and distributes them to the appropriate Rescue Co-ordination Centres or other SAR points of contact.</li>
+        <li><strong>MRCC or SPOC</strong> — a <em>SAR Point of Contact</em> is a rescue co-ordination centre or other recognised national point of contact that can accept responsibility to receive COSPAS-SARSAT alert data. The MRCC then appoints a <strong>SAR Mission Co-ordinator</strong>, and among the ships on scene an <strong>On-Scene Co-ordinator</strong>.</li>
+      </ol>
+      <p>The registration of the EPIRB is what makes this chain useful — the beacon's coded identity is what tells the MCC which ship it is and who to telephone. An unregistered or wrongly registered beacon turns a positive alert into a search for an unknown vessel.</p>
+
+      <h4>2. India's Segment of COSPAS-SARSAT</h4>
+      <p>ISRO provides India's space and ground segment. The <strong>Indian Mission Control Centre (INMCC) is at Bengaluru</strong>, supported by <strong>LEOLUTs at Bengaluru and Lucknow and a GEOLUT at Bengaluru</strong>, and has been operational since 1989–90. INMCC distributes alert and location data to Indian SAR agencies and to the SAR points of contact of neighbouring countries, and exchanges data with other Mission Control Centres internationally.</p>
+
+      <h4>3. Who Actually Runs SAR in India</h4>
+      <ul>
+        <li>The <strong>Director General of the Indian Coast Guard</strong> is the <strong>National Maritime Search and Rescue Coordinating Authority</strong> and chairs the <strong>National Maritime Search and Rescue Board</strong>, which is the patron of the National Maritime SAR Plan.</li>
+        <li>The <strong>Indian Search and Rescue Region</strong> is divided into three areas, each with a <strong>Maritime Rescue Coordination Centre — Mumbai, Chennai and Port Blair</strong> — co-located with Coast Guard Regional Headquarters and supported by a network of <strong>Maritime Rescue Sub-Centres</strong> around the coast.</li>
+        <li>A toll-free maritime SAR line, <strong>1554</strong>, is published for distress reporting.</li>
+      </ul>
+
+      <h4>4. INDSAR — What It Is and What It Is Not</h4>
+      <p>INDSAR is the <strong>Indian Coast Guard's computerised ship reporting system, operated and maintained exclusively for maritime search and rescue</strong>. Its features, and the points examiners test, are:</p>
+      <ul>
+        <li>It is <strong>voluntary</strong> for ships transiting the Indian search and rescue region, and free of cost, including for foreign-flag vessels.</li>
+        <li>Ships send their data <strong>via Inmarsat on entering the region, every 24 hours thereafter, and prior to exiting</strong> it.</li>
+        <li>Its purpose is to let the MRCC identify the most suitable ship near a distress position and divert it quickly, and to keep track of a ship that becomes overdue or needs assistance.</li>
+        <li>The information is treated as <strong>commercially proprietary and is used only for SAR</strong> — it is not a surveillance or reporting-compliance regime.</li>
+      </ul>
+      <p><em>INDSAR is a reporting system, not a rescue organisation and not a plan. Calling it &quot;India's SAR plan&quot; is the standard error.</em></p>
+
+      <h4>5. After the Rescue — Where the Survivors Go</h4>
+      <p>Recovering people is not the end of the obligation. Under the IMO guidelines on the treatment of persons rescued at sea, an assisting ship serves as a <strong>temporary place of safety</strong> and should be relieved of that responsibility as soon as alternative arrangements can be made. A <em>place of safety</em> is a location where rescue operations are considered to terminate, where the survivors' safety of life is no longer threatened, where basic human needs such as food, shelter and medical care can be met, and from which onward transport can be arranged. The <strong>responsibility to provide a place of safety rests with the Government responsible for the search and rescue region in which the survivors were recovered</strong> — not with the master who picked them up.</p>
+
+      <div class="ce-relevance"><h4>Chief Engineer Relevance</h4><p>The alerting is the bridge's, but the response capability is mine. On receipt of a distress diversion I expect to be asked for maximum available power at short notice, so the standby generator goes on load, the auxiliary boiler and steering gear second power unit are started, and the main engine is taken off economy mode and prepared for prolonged manoeuvring and repeated stopping. Deck floodlights, searchlights and the rescue boat davit power become safety-critical circuits. If survivors are recovered, the ship's hospital, heating, fresh water and provisions become an engineering load, and casualties may require the medical locker and oxygen set. I also confirm the EPIRB's hydrostatic release and battery expiry dates and the SART and portable VHF charge state during the LSA rounds — those are the items that must work on the day, and they are checked at the Safety Equipment survey.</p></div>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">SAR Convention, 1979</span><span class="reg-desc">International Convention on Maritime Search and Rescue — establishes the international SAR plan, search and rescue regions, and rescue co-ordination centres.</span></div><div class="reg-item"><span class="reg-code">SOLAS Ch. V, Reg. 33</span><span class="reg-desc">Duty to proceed with all speed to the assistance of persons in distress; the obligation applies regardless of the nationality or status of such persons or the circumstances in which they are found.</span></div><div class="reg-item"><span class="reg-code">SOLAS Ch. IV — GMDSS</span><span class="reg-desc">Radiocommunications — DSC and satellite distress alerting, and the 406 MHz EPIRB carriage requirement.</span></div><div class="reg-item"><span class="reg-code">Resolution MSC.167(78)</span><span class="reg-desc">Guidelines on the treatment of persons rescued at sea — definition of a place of safety and the responsibility of the Government of the SAR region to provide one.</span></div><div class="reg-item"><span class="reg-code">IAMSAR Manual, Volume III</span><span class="reg-desc">Mobile Facilities — the volume carried on board, giving the ship's on-scene search patterns and co-ordination procedures.</span></div><div class="reg-item"><span class="reg-code">National Maritime SAR Plan (India)</span><span class="reg-desc">Director General, Indian Coast Guard as National Maritime SAR Coordinating Authority and Chairman of the National Maritime SAR Board; MRCCs at Mumbai, Chennai and Port Blair with supporting MRSCs.</span></div><div class="reg-item"><span class="reg-code">INDSAR</span><span class="reg-desc">Indian Coast Guard ship reporting system for maritime SAR — voluntary, reports via Inmarsat on entering the Indian SRR, every 24 hours thereafter and before exiting.</span></div></div>
+    <div class="ce-tip"><strong>CE Oral Tip:</strong> <p>Nair goes deep here and the depth is always in the same two places — the <strong>COSPAS-SARSAT chain</strong> and <strong>INDSAR</strong>. Recite the chain as a sequence and name each link: <em>&quot;406 megahertz beacon, satellite, Local User Terminal, Mission Control Centre, MRCC.&quot;</em> Then place India on it in one line: <em>&quot;Our Mission Control Centre is INMCC Bengaluru, operated by ISRO, and the MRCCs are Mumbai, Chennai and Port Blair under the Director General Coast Guard as National Maritime SAR Coordinating Authority.&quot;</em> For INDSAR, the marks are in three words — <strong>voluntary, Inmarsat, every 24 hours</strong> — and in knowing that it is a <em>ship reporting system</em>, not a plan or an agency. Do not let him leave without hearing that the duty under SOLAS V/33 applies regardless of the nationality or status of the persons in distress; that clause is the one he is listening for.</p></div>
+    <details class="dd"><summary>Deep-Dive: Traps, Failures, Numbers, Casualty Link, On My Vessel</summary>
+      <div class="dd-body"><div class="dd-item" style="margin-bottom:8px;"><strong style="color:var(--teal-dark);">Trap Questions:</strong> <em>&quot;Is INDSAR compulsory for an Indian-flag ship?&quot;</em> <b>Answer:</b> No. INDSAR is voluntary and free of cost for ships transiting the Indian search and rescue region, including foreign-flag vessels. Its value is that it lets the MRCC find the nearest suitable ship quickly, so participation is strongly in the shipowner's own interest.</div><div class="dd-item" style="margin-bottom:8px;"><strong style="color:var(--teal-dark);">Trap Questions:</strong> <em>&quot;You have recovered twelve survivors. Must you carry them to their intended destination?&quot;</em> <b>Answer:</b> No. The assisting ship is a temporary place of safety and should be relieved as soon as alternative arrangements can be made. The responsibility for providing a place of safety lies with the Government responsible for the SAR region in which the survivors were recovered.</div><div class="dd-item" style="margin-bottom:8px;"><strong style="color:var(--teal-dark);">Trap Questions:</strong> <em>&quot;What is the difference between an MCC and an MRCC?&quot;</em> <b>Answer:</b> The Mission Control Centre is part of the COSPAS-SARSAT system — it receives alert data from Local User Terminals and from other MCCs and distributes it. The Maritime Rescue Co-ordination Centre is the SAR authority that actually co-ordinates the rescue in its region and appoints the SAR Mission Co-ordinator.</div><div class="dd-item" style="margin-bottom:8px;"><strong style="color:var(--teal-dark);">Common CE Failures:</strong> Describing INDSAR as India's search and rescue plan or as an agency; confusing the Mission Control Centre with the Rescue Co-ordination Centre; naming the wrong beacon frequency — it is <strong>406 MHz</strong> for the satellite alert, with the 121.5 MHz component used only for local homing; and omitting the 2004 amendment wording that the duty to assist applies irrespective of the nationality or status of the persons in distress, which is the point of the whole regulation.</div><div class="dd-item" style="margin-bottom:8px;"><strong style="color:var(--teal-dark);">Numbers &amp; Names:</strong> EPIRB <strong>406 MHz</strong> &middot; INDSAR reports on entry, <strong>every 24 hours</strong>, and before exit &middot; three Indian MRCCs — <strong>Mumbai, Chennai, Port Blair</strong> &middot; INMCC at <strong>Bengaluru</strong>, LEOLUTs Bengaluru and Lucknow, GEOLUT Bengaluru, operational since <strong>1989–90</strong> &middot; Indian maritime SAR toll-free line <strong>1554</strong> &middot; SAR Convention <strong>1979</strong>.</div><div class="dd-item" style="margin-bottom:8px;"><strong style="color:var(--teal-dark);">On My Vessel:</strong> On a Maersk container vessel a SAR diversion is a bridge-initiated event that arrives in the engine room as a sudden demand for full manoeuvring readiness and deck power. The engine-room actions are rehearsed in the emergency drill matrix: standby generator on load, steering gear both power units, main engine out of economy tuning and prepared for repeated stopping, deck and overside lighting energised, and the rescue boat's davit and engine confirmed ready. The commercial consequences — deviation cost, schedule loss, and the port of disembarkation — are the master's and the operator's to settle with the MRCC, but the fuel, the readiness and the accommodation load are mine.</div></div>
+    </details>
+  </div>
+  <div class="q-footer">
+    <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB4_G, Q10, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+    <span class="q-version">QB4_G · Q10 · v1.0</span>
+  </div>
+</div>
 </div>
 </div>
 <div id="no-results">No questions match your search.</div>
