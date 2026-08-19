@@ -45,14 +45,21 @@ Rules the spec makes non-negotiable and this file enforces
 
 Portability: repo-relative through oral_lib (ORAL_REPO_ROOT overrides).
     PYTHONIOENCODING=utf-8 python tools/oral/build_examiner_index.py [--check]
---check resolves and validates the snapshot but writes nothing.
+--check builds every governed artefact in memory, compares the bytes with
+what is on disk, runs the semantic validator, and writes NOTHING. It exits
+0 only when every artefact is byte-current AND validation passes
+(3 = stale/missing output, 1 = semantic failure, 2 = build failure).
 """
 from __future__ import annotations
 
+import hashlib
 import html
 import json
+import os
 import re
+import subprocess
 import sys
+import tempfile
 from collections import defaultdict
 from pathlib import Path
 
@@ -596,6 +603,9 @@ def render_sq_home_card(snap):
 
 def patch_sq_home(snap):
     """Return the SQ/index.html text with the examiner-index card derived."""
+    if not SQ_HOME_PATH.exists():
+        fail("SQ/index.html is absent; the generator patches one card of it and "
+             "cannot build without the page")
     text = SQ_HOME_PATH.read_bytes().decode("utf-8").replace("\r\n", "\n")
     hits = CARD_RE.findall(text)
     if len(hits) != 1:
@@ -605,22 +615,37 @@ def patch_sq_home(snap):
                        + tags + m.group(7), text, count=1)
 
 
-# ------------------------------------------------------------------- main
+# ------------------------------------------------ the generated artefact set
+# The ONE canonical list of files this generator owns. Normal mode writes
+# exactly these; --check compares exactly these. Nothing else defines the set.
+SNAPSHOT_PATH = OUT / SNAPSHOT_NAME
+GENERATED_OUTPUTS = (SNAPSHOT_PATH, INDEX_PATH, SQ_PATH, SQ_HOME_PATH)
 
-def write_lf(path, text):
-    path.write_bytes(text.replace("\r\n", "\n").encode("utf-8"))
 
-
-def main(argv):
-    check_only = "--check" in argv
+def rel(path):
     try:
-        snap = resolve_snapshot()
-        index_html = render_index(snap)
-        sq_html = render_sq(snap)
-        sq_home_html = patch_sq_home(snap)
-    except BuildFailure as e:
-        print("BUILD FAILURE: %s" % e)
-        return 2
+        return path.resolve().relative_to(L.REPO.resolve()).as_posix()
+    except ValueError:
+        return str(path)
+
+
+def lf_bytes(text):
+    return text.replace("\r\n", "\n").encode("utf-8")
+
+
+def build_outputs():
+    """Resolve, render and self-check everything once.
+
+    Returns (snapshot, {Path: bytes}) where the dict has exactly the
+    GENERATED_OUTPUTS keys in that order and every value is the LF/UTF-8 byte
+    string normal mode would write. Raises BuildFailure. Writes nothing.
+    Both normal mode and --check are built from this one function, so the
+    bytes that are checked can never diverge from the bytes that are written.
+    """
+    snap = resolve_snapshot()
+    index_html = render_index(snap)
+    sq_html = render_sq(snap)
+    sq_home_html = patch_sq_home(snap)
     # every literal emitted must have a filter toggle in its own section
     for sec in snap["sections"]:
         blob = re.search(r'<section class="ex-section" id="ex-%s">(.*?)</section>'
@@ -628,26 +653,150 @@ def main(argv):
         toggles = set(re.findall(r'data-tier-toggle="([^"]+)"', blob))
         literals = set(re.findall(r'data-tier="([^"]+)"', blob))
         if not literals <= toggles:
-            print("BUILD FAILURE: tier literal without a toggle in %s: %s"
-                  % (sec["slug"], sorted(literals - toggles)))
-            return 2
+            fail("tier literal without a toggle in %s: %s"
+                 % (sec["slug"], sorted(literals - toggles)))
+    outputs = {
+        SNAPSHOT_PATH: lf_bytes(json.dumps(snap, ensure_ascii=False, indent=1) + "\n"),
+        INDEX_PATH: lf_bytes(index_html),
+        SQ_PATH: lf_bytes(sq_html),
+        SQ_HOME_PATH: lf_bytes(sq_home_html),
+    }
+    if tuple(outputs) != GENERATED_OUTPUTS:
+        fail("build_outputs() and GENERATED_OUTPUTS disagree on the artefact set")
+    return snap, outputs
+
+
+def write_atomic(path, data):
+    """Stage next to the target, fsync, then os.replace(): an interrupted run
+    never leaves a half-written governed artefact on disk."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(prefix=path.name + ".", suffix=".staging", dir=str(path.parent))
+    try:
+        with os.fdopen(fd, "wb") as fh:
+            fh.write(data)
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(tmp, path)
+    finally:
+        if os.path.exists(tmp):
+            os.unlink(tmp)
+
+
+def write_outputs(outputs):
+    for path, data in outputs.items():
+        write_atomic(path, data)
+
+
+def _sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def _first_diff_line(expected, actual):
+    """1-based number of the first differing line plus both lines, clipped:
+    enough to locate a hand edit without dumping the file."""
+    e_lines, a_lines = expected.split(b"\n"), actual.split(b"\n")
+    for i, (e, a) in enumerate(zip(e_lines, a_lines), 1):
+        if e != a:
+            return i, e[:120], a[:120]
+    i = min(len(e_lines), len(a_lines)) + 1
+    e = e_lines[i - 1][:120] if i - 1 < len(e_lines) else b"<end of expected>"
+    a = a_lines[i - 1][:120] if i - 1 < len(a_lines) else b"<end of actual>"
+    return i, e, a
+
+
+def check_outputs(outputs):
+    """Compare every generated artefact's expected bytes with what is on disk.
+
+    Returns a list of finding strings; empty means every artefact is byte-
+    current. Reads only. Byte-exact on purpose: the generator promises LF,
+    UTF-8, timestamp-free, hash-seed-independent bytes, so any difference is
+    a hand edit, a forgotten regeneration, or a determinism defect - all of
+    which must fail."""
+    findings = []
+    for path, expected in outputs.items():
+        # the one orphan the generator can own with certainty: its own
+        # staging residue beside a target (an interrupted or crashed run).
+        # Anything else on disk is not this generator's to judge, so --check
+        # guarantees expected-output freshness, not orphan cleanup.
+        for junk in sorted(path.parent.glob(path.name + ".*.staging")):
+            findings.append("EXTRA OUTPUT: %s (staging residue)" % rel(junk))
+        if not path.exists():
+            findings.append("MISSING OUTPUT: %s\n  expected sha256 %s (%d bytes)"
+                            % (rel(path), _sha(expected), len(expected)))
+            continue
+        actual = path.read_bytes()
+        if actual == expected:
+            continue
+        line, e_l, a_l = _first_diff_line(expected, actual)
+        findings.append(
+            "STALE OUTPUT: %s\n  expected sha256 %s (%d bytes)\n  actual   sha256 %s (%d bytes)"
+            "\n  first difference at line %d\n    expected: %s\n    actual:   %s"
+            % (rel(path), _sha(expected), len(expected), _sha(actual), len(actual),
+               line, e_l.decode("utf-8", "replace"), a_l.decode("utf-8", "replace")))
+    return findings
+
+
+def run_semantic_validation():
+    """validate_examiner_index.py as a subprocess (it imports this module, so an
+    in-process import would be circular). It reads the on-disk artefacts and
+    writes nothing. Returns (exit_code, [FAIL lines])."""
+    r = subprocess.run([sys.executable, str(HERE / "validate_examiner_index.py")],
+                       capture_output=True, text=True, encoding="utf-8", errors="replace",
+                       env=dict(os.environ, PYTHONIOENCODING="utf-8"), cwd=str(L.REPO))
+    fails = [ln for ln in r.stdout.splitlines() if ln.startswith("FAIL")]
+    if r.returncode != 0 and not fails:
+        tail = (r.stderr or r.stdout).strip().splitlines()[-1:] or ["no output"]
+        fails = ["FAIL  validator did not run cleanly (exit %d): %s" % (r.returncode, tail[0])]
+    return r.returncode, fails
+
+
+def print_summary(snap):
     tot = snap["totals"]
     print("relationships %d  examiners %d  tiers %s" % (
         tot["relationships"], tot["examiners"], tot["by_tier"]))
     for s in snap["sections"]:
         print("  %-11s %4d  %s" % (s["name"], s["count"],
                                   {t: n for t, n in s["by_tier"].items() if n}))
-    if check_only:
-        print("--check: nothing written")
+
+
+# ------------------------------------------------------------------- main
+# Exit codes: 0 current + valid; 1 semantic validation failed; 2 build
+# failure; 3 stale/missing generated output. --check writes nothing, ever.
+
+def main(argv):
+    check_only = "--check" in argv
+    try:
+        snap, outputs = build_outputs()
+    except BuildFailure as e:
+        print("BUILD FAILURE: %s" % e)
+        if check_only:
+            print("EXAMINER INDEX CHECK: FAIL (generation failed)")
+        return 2
+    print_summary(snap)
+    if not check_only:
+        write_outputs(outputs)
+        print("wrote %s" % ", ".join(rel(p) for p in outputs))
         return 0
-    write_lf(OUT / SNAPSHOT_NAME,
-             json.dumps(snap, ensure_ascii=False, indent=1) + "\n")
-    write_lf(INDEX_PATH, index_html)
-    write_lf(SQ_PATH, sq_html)
-    write_lf(SQ_HOME_PATH, sq_home_html)
-    print("wrote %s, %s, %s, %s (card only)" % (
-        SNAPSHOT_NAME, INDEX_PATH.name, "SQ/" + SQ_PATH.name, "SQ/" + SQ_HOME_PATH.name))
-    return 0
+
+    stale = check_outputs(outputs)
+    v_rc, v_fails = run_semantic_validation()
+    n = len(outputs)
+    if not stale and v_rc == 0 and not v_fails:
+        print("EXAMINER INDEX CHECK: PASS")
+        print("%d/%d generated artefacts current" % (n, n))
+        print("semantic validation PASS")
+        return 0
+    print("EXAMINER INDEX CHECK: FAIL")
+    for f in stale:
+        print(f)
+    print("%d/%d generated artefacts current" % (n - len(stale), n))
+    if v_rc == 0 and not v_fails:
+        print("semantic validation PASS")
+    else:
+        print("semantic validation FAIL (%d)" % len(v_fails))
+        for f in v_fails[:10]:
+            print("  " + f[:160])
+    return 3 if stale else 1
 
 
 if __name__ == "__main__":
