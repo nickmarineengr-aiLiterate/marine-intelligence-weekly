@@ -2,9 +2,23 @@
  "manifest_version": "1.1",
  "generated_by": "tools/oral/build_qb_content_index.py - derived from the live QB HTML (identity = file + anchor); governed fields from tools/oral/qb_content_index_governed.json",
  "source": "live QB HTML under meoclass1/ - identity is file + anchor; qnum is read from the anchor id, order is document position",
- "total_questions": 688,
+ "total_questions": 696,
  "total_files": 86,
  "recently_updated": [
+  {
+   "date": "2026-08-19",
+   "note": "Eight new oral questions added, each answering an examiner ask that no existing card owned. QB1_C Q8 - verifying the welding after a side shell plate renewal: qualified welder and approved procedure first, then visual inspection, non-destructive testing and a tightness test, with the vacuum box parameters. QB2_E Q2 - why the liferaft stowed right forward differs from the others and may legitimately carry no hydrostatic release unit. QB6_D Q4 - how NOx is formed and how compliance is demonstrated on board when no analyser is fitted, through the Engine Parameter Check method. QB3_B Q20 - the SOLAS II-1/29 steering gear capability requirements for the main and auxiliary gear, scoped deliberately to capability and redundancy because the pre-departure test and the emergency steering drill are already covered in QB1_K Q9 and QB4_C Q9, which the new card cross-links. QB10_B Q9 - the current regulatory position on autonomous ships, the four degrees of autonomy and the status of the MASS Code. QB3_F Q7 - ordering bunkers for quantity and quality, handling a bunker dispute, and the sample set with its retention periods, cross-linked to QB4_I Q2. QB4_G Q10 - informing the authorities after a rescue at sea, the COSPAS-SARSAT alerting chain and INDSAR. QB9_B Q8 - a medical evacuation requiring diversion: the actions taken, the hospital arrangements ashore and who bears the cost. Regulatory references in all eight were checked against current primary sources.",
+   "files": [
+    "QB1_C.html",
+    "QB2_E.html",
+    "QB6_D.html",
+    "QB3_B.html",
+    "QB10_B.html",
+    "QB3_F.html",
+    "QB4_G.html",
+    "QB9_B.html"
+   ]
+  },
   {
    "date": "2026-08-19",
    "note": "Page-header version badges removed from the five files that carried one (QB1_I, QB2_H, QB3_H, QB4_I, QB7_H). Each read v1.0 while the file's own questions had already moved past that — to v1.2, v1.1, v1.2, v1.3 and v1.1 respectively — because the header badge was fixed at build time and never bumped by a correction. The per-question version footer, which names what changed and when, is now the only version marker on a page. Header badges read 'QB3_H · Backlog', matching the majority of the series.",
@@ -800,7 +814,7 @@
     "survey"
    ],
    "cheatsheet": "QB1_C_CheatSheet.html",
-   "question_count": 7,
+   "question_count": 8,
    "questions": [
     {
      "qnum": 1,
@@ -850,6 +864,13 @@
      "id": "QB1_C#q7",
      "order": 7,
      "text": "Structural damage — assessment and reporting?"
+    },
+    {
+     "qnum": 8,
+     "anchor": "q8",
+     "id": "QB1_C#q8",
+     "order": 8,
+     "text": "After a side shell plate renewal, how will you as Chief Engineer satisfy yourself that the welding is acceptable?"
     }
    ]
   },
@@ -2210,12 +2231,13 @@
    "version": "1.0",
    "version_source": "governed",
    "tags": [
-    "lsa"
+    "lsa",
+    "solas"
    ],
    "corrections_applied": [
     "2026-07-17: Fixed missing toggleCard()/filterTag() JavaScript (answer panel was not expanding — only the auth-gate script was present, core UI functions absent). Also corrected regulatory citations: rescue boat carriage requirement corrected from SOLAS III/21 (passenger-ship provision) to III/31 (cargo-ship provision); readiness citation corrected to III/14; embarkation/launching/recovery citation corrected to III/17; launching-appliance trim/list capability citation corrected from LSA Code §5.1.1.1 to §6.1.1.11. Verified against IMO SOLAS Ch. III and IMORules.com. Note: same underlying question also appears as Q2 in QB2_G with the same citation errors — QB2_G fix drafted but not yet pushed to repo as of this manifest update."
    ],
-   "question_count": 1,
+   "question_count": 2,
    "questions": [
     {
      "qnum": 1,
@@ -2223,6 +2245,13 @@
      "id": "QB2_E#q1",
      "order": 1,
      "text": "Lifeboat and rescue boat — location, and why is the rescue boat often positioned on the starboard side?"
+    },
+    {
+     "qnum": 2,
+     "anchor": "q2",
+     "id": "QB2_E#q2",
+     "order": 2,
+     "text": "A liferaft is stowed right forward, away from the others — how does it differ from the main liferafts, and why may it be fitted without a hydrostatic release unit?"
     }
    ]
   },
@@ -2612,7 +2641,7 @@
     "2026-07-29: 7 cards (Q1 supplemented, Q2, Q3, Q4, Q5, Q8, Q9, Q11) — added the DGMA RO Authorization Agreement as the consistent legal mechanism underlying class-notation/survey questions on Indian-flag ships (Indian MMD examiner-readiness pass).",
     "2026-07-29: Q1 (hull survey/drydock planning) — added the mandatory annual close-up survey extension for bulk carriers/oil tankers (25% of cargo hold side shell frames, forward hold + one other selected hold), previously missing. v1.0 -> v1.1."
    ],
-   "question_count": 19,
+   "question_count": 20,
    "questions": [
     {
      "qnum": 1,
@@ -2746,6 +2775,13 @@
      "id": "QB3_B#q19",
      "order": 19,
      "text": "What does GESAMP stand for, and what is its role in the maritime context?"
+    },
+    {
+     "qnum": 20,
+     "anchor": "q20",
+     "id": "QB3_B#q20",
+     "order": 20,
+     "text": "What does SOLAS require of a ship's steering gear — the capability of the main and auxiliary gear, and when may the auxiliary steering gear be dispensed with?"
     }
    ]
   },
@@ -2875,7 +2911,7 @@
     "ism",
     "marpol"
    ],
-   "question_count": 6,
+   "question_count": 7,
    "questions": [
     {
      "qnum": 1,
@@ -2918,6 +2954,13 @@
      "id": "QB3_F#q6",
      "order": 6,
      "text": "What is a ship-breaking credit note and how does it work?"
+    },
+    {
+     "qnum": 7,
+     "anchor": "q7",
+     "id": "QB3_F#q7",
+     "order": 7,
+     "text": "How will you order bunkers for your vessel for both quantity and quality, how do you deal with a bunker dispute, and how many samples are drawn during bunkering — their purpose and retention?"
     }
    ]
   },
@@ -3901,7 +3944,7 @@
    "corrections_applied": [
     "2026-07-17: Q8 — added IEEC (International Energy Efficiency Certificate, MARPOL Annex VI Reg 6.4, issued once, no expiry) and COR (Certificate of Registry — flag-dependent; open registries treat as permanent, DGS/Indian-flag practice requires renewal, commonly every 5 years — caveat noted) to the list of certificates with indefinite validity/no renewal requirement."
    ],
-   "question_count": 9,
+   "question_count": 10,
    "questions": [
     {
      "qnum": 1,
@@ -3965,6 +4008,13 @@
      "id": "QB4_G#q9",
      "order": 9,
      "text": "OCIMF — what is it, tools of OCIMF and brief explanation of each."
+    },
+    {
+     "qnum": 10,
+     "anchor": "q10",
+     "id": "QB4_G#q10",
+     "order": 10,
+     "text": "Search and rescue — in the case of a rescue at sea, how will you inform the authorities? Explain COSPAS-SARSAT and INDSAR."
     }
    ]
   },
@@ -5170,10 +5220,11 @@
    "version": "1.0",
    "version_source": "page",
    "tags": [
+    "ghg",
     "machinery"
    ],
    "cheatsheet_inline": true,
-   "question_count": 3,
+   "question_count": 4,
    "questions": [
     {
      "qnum": 1,
@@ -5195,6 +5246,13 @@
      "id": "QB6_D#q3",
      "order": 3,
      "text": "NOx reduction methods — EGR vs SCR for NOx reduction; which is commercially better?"
+    },
+    {
+     "qnum": 4,
+     "anchor": "q4",
+     "id": "QB6_D#q4",
+     "order": 4,
+     "text": "How is NOx produced in a marine diesel engine, and how do you demonstrate on board that the engine still complies with the NOx limit when you have no gas analyser fitted?"
     }
    ]
   },
@@ -6193,7 +6251,7 @@
   "QB9_B.html": {
    "qb_group": "QB9",
    "letter": "B",
-   "title": "Commercial Law & Maritime Liability — Part B (Q1–Q7)",
+   "title": "Commercial Law & Maritime Liability — Part B (Q1–Q8)",
    "version": "1.0",
    "version_source": "page",
    "tags": [
@@ -6203,7 +6261,7 @@
     "survey"
    ],
    "cheatsheet": "QB9_B_CheatSheet.html",
-   "question_count": 7,
+   "question_count": 8,
    "questions": [
     {
      "qnum": 1,
@@ -6253,6 +6311,13 @@
      "id": "QB9_B#q7",
      "order": 7,
      "text": "CAS and CAP — detailed comparison and application for senior engineers."
+    },
+    {
+     "qnum": 8,
+     "anchor": "q8",
+     "id": "QB9_B#q8",
+     "order": 8,
+     "text": "A crew member needs medical evacuation and the vessel must divert — what actions do you take, what hospital arrangements apply, and what are the commercial implications?"
     }
    ]
   },
@@ -6986,7 +7051,7 @@
     "solas",
     "stcw"
    ],
-   "question_count": 8,
+   "question_count": 9,
    "questions": [
     {
      "qnum": 1,
@@ -7043,6 +7108,13 @@
      "id": "QB10_B#q8",
      "order": 8,
      "text": "What recent DG Shipping/DGMA (India) circulars should an Indian MEO Class 1 candidate know?"
+    },
+    {
+     "qnum": 9,
+     "anchor": "q9",
+     "id": "QB10_B#q9",
+     "order": 9,
+     "text": "What is the current regulatory position on autonomous ships, and what are the main challenges of a fully autonomous ship?"
     }
    ]
   }

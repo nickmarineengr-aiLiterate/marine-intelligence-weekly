@@ -1,751 +1,765 @@
 {
- "_purpose": "Governed, hand-maintained data merged into meoclass1/qb_content_index.json by tools/oral/build_qb_content_index.py. Everything else in that file is derived from the live QB HTML. Never put question text here. files[].version is a FALLBACK used only when the page carries no 'Version:' line; files[].corrections_applied is the per-file audit trail read by qb_health_check.py; recently_updated is the changelog rendered by meoclass1/index.html; cheatsheet_overrides names the one cheat sheet whose file name does not follow <stem>_CheatSheet.html.",
- "cheatsheet_overrides": {
-  "QB1_F.html": "QB1_FG_CheatSheet.html",
-  "QB1_G.html": "QB1_FG_CheatSheet.html"
- },
- "files": {
-  "QB10_A.html": {
-   "version": "1.1"
-  },
-  "QB10_B.html": {
-   "version": "1.0"
-  },
-  "QB1_A.html": {
-   "version": "1.9",
-   "corrections_applied": [
-    "Q2 (Fund Convention): corrected stale 135m SDR combined CLC+Fund cap to current 203m SDR (post-1 Nov 2003), added the 300.74m SDR (300,740,000 SDR) step-up tier triggered when top-3 Fund-contributing States combined receive >=600 million tonnes of contributing oil in the preceding calendar year (verified vs IOPC Funds consolidated convention text). Also fixed CE Oral Tip which had incorrectly called 203m 'a common wrong answer'.",
-    "Q5 (CLC): numbers-box also carried the stale 'Combined CLC+Fund cap = 135 million SDR' reference; updated to 203m/300.74m to match Q2.",
-    "2026-07-18: Q1 (P&I Club) — International Group of P&I Clubs member count corrected 13->12, reflecting the North of England P&I / Standard Club merger into NorthStandard (effective 20 Feb 2023).",
-    "2026-07-18: Q29 (Reinsurance) — IG reinsurance programme figures updated for the 2026/27 policy year: market GXL layer raised to USD 2.35bn, Collective Overspill adds a further USD 1bn, total USD 3.35bn (previously stated as USD 3.1bn). Also reflects the 12-club (not 13) IG roster."
-   ]
-  },
-  "QB1_B.html": {
-   "version": "1.3",
-   "corrections_applied": [
-    "Q12 (CLC + Fund Convention): 203m SDR base figure was already correct but the 300.74m SDR step-up tier (top-3 contributing States >=600 million tonnes/yr) was missing entirely from diagram, prose, and numbers-box; added throughout."
-   ]
-  },
-  "QB1_C.html": {
-   "version": "1.0"
-  },
-  "QB1_D.html": {
-   "version": "1.0",
-   "corrections_applied": [
-    "2026-07-29: Q2/Q3 (lifting appliance amendments/survey) corrected proof-load-test description from a flat '1.25x SWL' to the actual basis (MSC.1/Circ.1663 Table 1, para 3.2.1.5); added DGMA Merchant Shipping Notice No. 02 of 2026 (Indian flag implementation of SOLAS II-1/3-13) and the mandatory rigging plan/block list requirement. v1.0 -> v1.1.",
-    "2026-07-29: Embedded cheat sheet quick-reference table and SVG flow diagram updated to match the Q2/Q3 correction above (were still showing the flat 1.25x SWL figure); added a new DGMA MS Notice 02/2026 quick-recall row."
-   ]
-  },
-  "QB1_E.html": {
-   "version": "1.0",
-   "corrections_applied": [
-    "2026-07-29: Embedded cheat sheet quick-reference table updated — was still citing the stale IMO Res. A.1156(32) HSSC guideline; corrected to A.1207(34) to match the main Q1 answer (corrected in an earlier SEQ survey depth-expansion round)."
-   ]
-  },
-  "QB1_F.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-07-29: Q8 (hull survey/drydock planning) — added the mandatory annual close-up survey extension for bulk carriers/oil tankers (25% of cargo hold side shell frames, forward hold + one other selected hold), previously missing. Also cleaned up a pre-existing content-duplication defect (cascading repeated text across trap/failure/numbers/casualty blocks) caught during the same review. v1.0 -> v1.1.",
-    "2026-07-29: 7 comparative tables converted from raw markdown-style pipe-delimited rows inside <p> tags to real HTML <table> markup (candidate screenshot feedback via Nixon) — formatting only, no content/regulatory change. .answer-body table/th/td CSS added (file previously had no table styling). See known_traps.md Entry 16."
-   ]
-  },
-  "QB1_G.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-07-29: 10 comparative tables converted from raw markdown-style pipe-delimited rows inside <p> tags to real HTML <table> markup (candidate screenshot feedback via Nixon) — formatting only, no content/regulatory change. .answer-body table/th/td CSS added (file previously had no table styling). See known_traps.md Entry 16."
-   ]
-  },
-  "QB1_H.html": {
-   "version": "1.0",
-   "corrections_applied": [
-    "2026-07-29: Q4 (windlass/mooring winch brake rendering test) — corrected an inaccurate mooring-winch render figure that conflated two distinct standards: mooring winch brakes render at 60% of Ship Design MBL (SDMBL) per OCIMF MEG4, windlass anchor brakes at 80%/45% of chain MBS per IACS UR A3 — now stated separately with sources, plus retest-trigger conditions (lining renewal, vessel takeover, annual interval, drydock relining). v1.0 -> v1.1.",
-    "2026-07-29: Embedded cheat sheet quick-recall row for the brake rendering test updated to match the Q4 correction above (was still stating the pre-correction combined formula)."
-   ]
-  },
-  "QB1_I.html": {
-   "version": "1.3",
-   "corrections_applied": [
-    "2026-08-04: HSSC Survey Guidelines citation corrected from superseded A.1140(31)/2019 to current A.1207(34)/2025 (see known_traps.md Entry 22)."
-   ]
-  },
-  "QB1_J.html": {
-   "version": "1.0"
-  },
-  "QB1_K.html": {
-   "version": "1.0"
-  },
-  "QB1_supplementary.html": {
-   "version": "1.1"
-  },
-  "QB2_A.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-07-29: Q15 (ICOF) — corrected DGS-to-DGMA naming; added RO Authorization Agreement detail explaining the RO issues on DGMA's behalf, not its own class authority (Indian MMD examiner-readiness pass).",
-    "2026-07-29: 6 comparative tables (container thicknesses, tanker types, tonnage fees, watertight vs weathertight boundaries, inclinometer types, bulk cargo failure modes) converted from raw markdown-style pipe-delimited rows to real HTML <table> markup (candidate screenshot feedback via Nixon) — formatting only. See known_traps.md Entry 16."
-   ]
-  },
-  "QB2_B.html": {
-   "version": "1.0"
-  },
-  "QB2_C.html": {
-   "version": "1.0"
-  },
-  "QB2_D.html": {
-   "version": "1.0"
-  },
-  "QB2_E.html": {
-   "version": "1.0",
-   "corrections_applied": [
-    "2026-07-17: Fixed missing toggleCard()/filterTag() JavaScript (answer panel was not expanding — only the auth-gate script was present, core UI functions absent). Also corrected regulatory citations: rescue boat carriage requirement corrected from SOLAS III/21 (passenger-ship provision) to III/31 (cargo-ship provision); readiness citation corrected to III/14; embarkation/launching/recovery citation corrected to III/17; launching-appliance trim/list capability citation corrected from LSA Code §5.1.1.1 to §6.1.1.11. Verified against IMO SOLAS Ch. III and IMORules.com. Note: same underlying question also appears as Q2 in QB2_G with the same citation errors — QB2_G fix drafted but not yet pushed to repo as of this manifest update."
-   ]
-  },
-  "QB2_F.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "Q6 (Totally enclosed lifeboat ventilation): full rebuild. Previous content was pre-amendment generic LSA 4.6/4.7/4.8 text with a fabricated 10-minute air-support figure. Corrected to IMO Res. MSC.535(107) (adopted 8 June 2023) - new LSA Code paras 4.6.6/4.6.7, ventilation rate 5 m3/h per person for 24h, powered-or-passive rule, fuel-source restriction, MOL Comfort (2013) casualty link, force date 1 Jan 2026, application date 1 Jan 2029 (new-build only)."
-   ]
-  },
-  "QB2_G.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-07-17: Q2 corrected — same rescue-boat citation error as QB2_E: readiness citation corrected to SOLAS III/14, launching-appliance trim/list capability corrected from LSA Code §5.1.1.1 to §6.1.1.11 throughout (reg-box, deep-dive text, and comparison table — two leftover instances missed in first pass, caught and fixed on review). III/31 (cargo-ship carriage) and III/21 (passenger-ship contrast, correctly retained) unaffected."
-   ]
-  },
-  "QB2_H.html": {
-   "version": "1.1"
-  },
-  "QB2_I.html": {
-   "version": "1.0"
-  },
-  "QB3_A.html": {
-   "version": "1.0",
-   "corrections_applied": [
-    "2026-07-29: 7 cards (Q4, Q6, Q7, Q9, Q11, Q13, Q17) — added the DGMA RO Authorization Agreement as the consistent legal mechanism underlying class-notation, ESP, hull survey, steel renewal, ballast tank inspection, drydock, and AFS certificate questions on Indian-flag ships (Indian MMD examiner-readiness pass).",
-    "2026-07-29: Q5 (hull survey/drydock planning) — added the mandatory annual close-up survey extension for bulk carriers/oil tankers (25% of cargo hold side shell frames, forward hold + one other selected hold), previously missing. v1.0 -> v1.1.",
-    "2026-07-30: Q15 — Form E / fire-fighting equipment conflation correction (Nixon-flagged, SEQ Q15 review). Form E has three SOLAS Appendix sections (LSA, Equivalent Arrangements, Navigational Systems/Equipment) with NO fire-fighting section; corrected full answer, reg-box, CE Oral Tip, and full deep-dive. v1.0 -> v1.1. See known_traps.md Entry 17."
-   ]
-  },
-  "QB3_B.html": {
-   "version": "1.0",
-   "corrections_applied": [
-    "2026-07-29: 7 cards (Q1 supplemented, Q2, Q3, Q4, Q5, Q8, Q9, Q11) — added the DGMA RO Authorization Agreement as the consistent legal mechanism underlying class-notation/survey questions on Indian-flag ships (Indian MMD examiner-readiness pass).",
-    "2026-07-29: Q1 (hull survey/drydock planning) — added the mandatory annual close-up survey extension for bulk carriers/oil tankers (25% of cargo hold side shell frames, forward hold + one other selected hold), previously missing. v1.0 -> v1.1."
-   ]
-  },
-  "QB3_C.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-07-17: Corrected superseded IMO Resolution A.1185(33) citation to current A.1206(34) with correct effective dates (part of repo-wide health-check remediation pass also touching WA3-LIEN2, simon-notes-p3, simon-notes-p4 in oralnotes)."
-   ]
-  },
-  "QB3_D.html": {
-   "version": "1.0"
-  },
-  "QB3_E.html": {
-   "version": "1.0"
-  },
-  "QB3_F.html": {
-   "version": "1.0"
-  },
-  "QB3_G.html": {
-   "version": "1.0"
-  },
-  "QB3_H.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-07-29: 1 embedded table (NLS cargo categorization) converted from raw markdown-style pipe-delimited rows to real HTML <table> markup (candidate screenshot feedback via Nixon) — formatting only, matched to file's existing rem-based CSS convention. See known_traps.md Entry 16."
-   ]
-  },
-  "QB3_I.html": {
-   "version": "1.0",
-   "corrections_applied": [
-    "2026-07-29: Q1 — added the DGMA RO Authorization Agreement as the legal mechanism underlying the AFS Convention/class-notation question on Indian-flag ships (Indian MMD examiner-readiness pass)."
-   ]
-  },
-  "QB3_J.html": {
-   "version": "1.0"
-  },
-  "QB4_A.html": {
-   "version": "1.3",
-   "corrections_applied": [
-    "Q6 (PSC detention appeal procedure): Stage 3 deadline corrected from '120 days of release' (Paris MOU figure, wrongly presented as universal) to the correct IOMOU figure of 90 days from the date of detention — IOMOU governs Indian ports and is the relevant regime for Kochi. IOMOU panel size corrected to 3 member authorities (was stated as 4, the Paris MOU figure). Cross-linked to QB4_E Q8 (full IOMOU vs Paris MOU comparison) and QB4_C Q11 (action-taken code table, correct governing resolution)."
-   ]
-  },
-  "QB4_B.html": {
-   "version": "1.0"
-  },
-  "QB4_C.html": {
-   "version": "1.2",
-   "corrections_applied": [
-    "Q3 (SOLAS Chapter XI): corrected multiple wrong regulation numbers - SSAS is XI-2 Reg 6 (was mislabeled Reg 3, which actually covers Contracting Govt security-level obligations); removed fabricated 'AIS Security Links' (Reg 4) and 'ISSC Certification' (Reg 5) entries; ESP is XI-1 Reg 2 (was mislabeled Reg 6); removed fabricated 'Ship Construction File' from XI-1 (it is a SOLAS II-1 Reg 3-10 item, not XI-1) per Nixon's direct correction; removed stray Gemini '[cite: 1]' draft artifacts from this card.",
-    "Q11 (PSC deficiency action codes): full rebuild. Nearly all action codes were wrong - Code 30 is grounds for detention (file said Code 15/Investigation); Code 17 is rectify-before-departure/non-detainable (file said Flag/Class notified); Code 70 (RO/Class informed) was missing entirely. Verified against current Paris MOU published action-taken code list. Added distinction between 2-digit action-taken codes and 5-digit deficiency item/category codes.",
-    "Q11 (PSC deficiency action codes): governing resolution updated throughout from the superseded IMO Res. A.1185(33) to the current A.1206(34) (Procedures for Port State Control, 2025, in force 1 January 2026). Action-taken code content (30/70/17/etc.) was already correct and unchanged. Cross-linked to QB4 Q6 and QB4_E Q8 for the appeal escalation chain."
-   ]
-  },
-  "QB4_D.html": {
-   "version": "1.0"
-  },
-  "QB4_E.html": {
-   "version": "1.2",
-   "corrections_applied": [
-    "Q8 (PSC appeal process): corrected conflation of action-taken codes with deficiency item/category codes, and wrong category numbers - fire safety is category 07 (file said '15-series'), ISM is category 15, MLC 2006 is category 18 (file said '18-series = Stability and Structure', which is fabricated). Verified against current Paris MOU deficiency code categories.",
-    "Q8 (PSC appeal process): Stage 3 deadline corrected from '120 days of the ship's release' (Paris MOU figure, wrongly presented as flowing from A.1206(34) itself) to the correct IOMOU figure of 90 days from the date of detention — IOMOU governs Indian ports and is the relevant regime for Kochi. Clarified that A.1206(34) itself grants only a bare right of appeal; the staged escalation mechanism (national appeal -> Flag State/RO reconsideration -> Detention Review Panel) is regional MOU procedure, not IMO text. IOMOU panel composition specified as 3 member authorities. Cross-linked to QB4 Q6 and QB4_C Q11."
-   ]
-  },
-  "QB4_F.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-08-04: HSSC Survey Guidelines citation corrected from superseded A.1140(31)/2019 to current A.1207(34)/2025 (see known_traps.md Entry 22)."
-   ]
-  },
-  "QB4_G.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-07-17: Q8 — added IEEC (International Energy Efficiency Certificate, MARPOL Annex VI Reg 6.4, issued once, no expiry) and COR (Certificate of Registry — flag-dependent; open registries treat as permanent, DGS/Indian-flag practice requires renewal, commonly every 5 years — caveat noted) to the list of certificates with indefinite validity/no renewal requirement."
-   ]
-  },
-  "QB4_H.html": {
-   "version": "1.4",
-   "corrections_applied": [
-    "2026-08-01: Q2 (BMP5/Hormuz) — added the BMP5 Section 5 safe-muster-point vs. citadel distinction (candidate Rathesh via Nixon queried whether BMP5 addresses weapon-of-war threats at all; verified it does, via the safe-muster-point provision). Updated answer-body, reg-box, CE Oral Tip, deep-dive trap/failure/casualty items, source-confidence note. v1.1 -> v1.2. See known_traps.md Entry 18.",
-    "2026-08-01: Q2 (BMP5/Hormuz) — follow-up expansion after five further candidate questions (Rathesh via Nixon): added a new 'Route Selection & the Coastal-State Routing Dispute' subsection covering Iran's April 2026 TSS redraw and IRGC-designated corridor, Oman's rejected alternate route, and the IMO's UNCLOS Part III transit-passage position; reinforced the AIS 'not coastal-state-mandated' framing; split vessel hardening into anti-boarding vs. anti-blast/kinetic purposes (ISPS Level 3, sandbagging, ballistic PPE per May 2026 Industry Guidance); added a new UNCLOS Part III reg-box entry, a new trap question, and updated failures/numbers/casualty/on-my-vessel items. v1.2 -> v1.3. See known_traps.md Entry 19.",
-    "2026-08-04: HSSC Survey Guidelines citation corrected from superseded A.1140(31)/2019 to current A.1207(34)/2025 (see known_traps.md Entry 22)."
-   ]
-  },
-  "QB4_I.html": {
-   "version": "1.2",
-   "corrections_applied": [
-    "2026-07-18: Q1 — Continuous Synopsis Record (CSR) citation corrected from 'SOLAS Ch I' to the correct SOLAS Chapter XI-1, Regulation 5 (Special Measures to Enhance Maritime Safety)."
-   ]
-  },
-  "QB4_J.html": {
-   "version": "1.0"
-  },
-  "QB5_A.html": {
-   "version": "1.1"
-  },
-  "QB5_B.html": {
-   "version": "1.1"
-  },
-  "QB5_C_A.html": {
-   "version": "1.0"
-  },
-  "QB5_C_B.html": {
-   "version": "1.0"
-  },
-  "QB5_D.html": {
-   "version": "1.0"
-  },
-  "QB5_E.html": {
-   "version": "1.0"
-  },
-  "QB5_F.html": {
-   "version": "1.0"
-  },
-  "QB5_G.html": {
-   "version": "1.1"
-  },
-  "QB5_H.html": {
-   "version": "1.0"
-  },
-  "QB5_I.html": {
-   "version": "1.0"
-  },
-  "QB5_J.html": {
-   "version": "1.0"
-  },
-  "QB6.html": {
-   "version": "1.3"
-  },
-  "QB6_C.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-07-18: Q3 — answer was mismatched to the question (previous answer described a disc-stack overhaul instead); replaced with the correct purifier manual desludging procedure. Candidate-sourced correction submitted by Nixon."
-   ]
-  },
-  "QB6_D.html": {
-   "version": "1.0"
-  },
-  "QB6_E.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-07-18: Q2 — GFI/FuelEU Maritime GHG-intensity conflation fixed. GFI (Greenhouse Gas Fuel Intensity, IMO Net-Zero Framework) uses 93.3 gCO2eq/MJ 2008 baseline (MEPC 83 / new MARPOL Annex VI Chapter 5); FuelEU Maritime's GHG Intensity metric uses 91.16 gCO2eq/MJ 2020 baseline (EU Regulation 2023/1805). Both tracks now correctly separated with right baselines, reference years, and reduction schedules. Verified against IMO MEPC 83 official summaries and Global Maritime Forum guidance."
-   ]
-  },
-  "QB6_F.html": {
-   "version": "1.1"
-  },
-  "QB6_G.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-07-17: Added new Q3 covering latest main engine tech developments excluding fuel-type/GHG changes, including WinGD (aSTC, WiDE, derating) and MAN/Everllence PrimeServ (turbocharger swap, ME-conversion, PrimeServ Assist) OEM retrofit options. Explicit trap-point callout excludes dual-fuel/iCER-VCR methane-slip topics (belongs to GHG track)."
-   ]
-  },
-  "QB6_H.html": {
-   "version": "1.0"
-  },
-  "QB7_A.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-07-18: Q3 — same GFI/FuelEU Maritime conflation corrected as QB6_E Q2 (93.3 gCO2eq/MJ 2008 baseline for IMO GFI vs 91.16 gCO2eq/MJ 2020 baseline for FuelEU Maritime). QB7_A_CheatSheet received the same fix but is not tracked in this manifest."
-   ]
-  },
-  "QB7_B.html": {
-   "version": "1.0"
-  },
-  "QB7_C.html": {
-   "version": "1.0"
-  },
-  "QB7_D.html": {
-   "version": "1.0"
-  },
-  "QB7_E.html": {
-   "version": "1.2",
-   "corrections_applied": [
-    "2026-07-17: Q1 corrected — removed false claim that Fuel Lifecycle Label (FLL)/well-to-wake (WTW) data 'directly feeds' or is 'required to calculate' CII. CII (MARPOL Annex VI Reg 28, MEPC.354(78)) is tank-to-wake-only using fixed Cf factors on IMO DCS fuel consumption; FLL/WTW feeds FuelEU Maritime and the IMO Net-Zero Framework GFI rating — separate regulatory tracks. Fixed across 15s answer, 60s answer, Practical Application, CE Oral Tip, Reg-Box. Flagged via candidate feedback."
-   ]
-  },
-  "QB7_F.html": {
-   "version": "1.0"
-  },
-  "QB7_G.html": {
-   "version": "1.0"
-  },
-  "QB7_H.html": {
-   "version": "1.1"
-  },
-  "QB7_I.html": {
-   "version": "1.1"
-  },
-  "QB8_A.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-07-30: Certificate/Form E labeling precision correction (Nixon-flagged, SEQ Q15 review, part of the same conflation fix as QB3_A). See known_traps.md Entry 17."
-   ]
-  },
-  "QB8_B.html": {
-   "version": "1.0",
-   "corrections_applied": [
-    "2026-07-30: MSC.520(106) portable water monitor/mist lance record-location correction — routed to the Fire Control Plan/PMS rather than Form E (Nixon-flagged, SEQ Q15 review, part of the same conflation fix as QB3_A). See known_traps.md Entry 17."
-   ]
-  },
-  "QB8_C.html": {
-   "version": "1.0"
-  },
-  "QB8_D.html": {
-   "version": "1.0"
-  },
-  "QB8_E.html": {
-   "version": "1.0"
-  },
-  "QB8_F.html": {
-   "version": "1.0"
-  },
-  "QB8_G.html": {
-   "version": "1.0"
-  },
-  "QB8_H.html": {
-   "version": "1.0"
-  },
-  "QB9_A.html": {
-   "version": "1.2",
-   "corrections_applied": [
-    "Q3 (Fund/HNS/LLMC): 203m SDR base figure was correct but missing the 300.74m SDR step-up tier (top-3 contributing States >=600 million tonnes/yr); added to Key Numbers list."
-   ]
-  },
-  "QB9_B.html": {
-   "version": "1.0"
-  },
-  "QB9_C.html": {
-   "version": "1.1",
-   "corrections_applied": [
-    "2026-07-18: Q3, Q6 — International Group of P&I Clubs member count corrected 13->12, reflecting the North of England P&I / Standard Club merger into NorthStandard (effective 20 Feb 2023)."
-   ]
-  },
-  "QB9_D.html": {
-   "version": "1.2",
-   "corrections_applied": [
-    "2026-07-18: Q1, Q2 — International Group of P&I Clubs member count corrected 13->12 (NorthStandard merger); also fixed a duplicate-entry bug in the club roster list. QB9_D_CheatSheet received the same fix but is not tracked in this manifest."
-   ]
-  },
-  "QB9_E.html": {
-   "version": "1.2"
-  },
-  "QB9_F.html": {
-   "version": "1.2"
-  },
-  "QB9_G.html": {
-   "version": "1.1"
-  },
-  "QB9_H.html": {
-   "version": "1.0"
-  }
- },
- "recently_updated": [
-{
- "date": "2026-08-19",
- "note": "Page-header version badges removed from the five files that carried one (QB1_I, QB2_H, QB3_H, QB4_I, QB7_H). Each read v1.0 while the file's own questions had already moved past that — to v1.2, v1.1, v1.2, v1.3 and v1.1 respectively — because the header badge was fixed at build time and never bumped by a correction. The per-question version footer, which names what changed and when, is now the only version marker on a page. Header badges read 'QB3_H · Backlog', matching the majority of the series.",
- "files": [
-  "meoclass1/QB1_I.html",
-  "meoclass1/QB2_H.html",
-  "meoclass1/QB3_H.html",
-  "meoclass1/QB4_I.html",
-  "meoclass1/QB7_H.html"
- ]
-},
-{
- "date": "2026-08-19",
- "note": "PSSA citation-currency and count pass, following the QB3_H Q1 rewrite. Resolution A.982(24) is now cited in its amended form — as amended by resolution MEPC.267(68) (2015) — everywhere it appears as the governing PSSA instrument: QB1_B (3 citations, plus a vague 'as amended' now naming the amending resolution), QB3_E (4), QB3_F (7) and QB1_B_CheatSheet (3). Separately, the number of designated PSSAs was stated as 17, which is stale: the most recent designation is Nusa Penida / Gili Matra in the Lombok Strait (resolution MEPC.396(82), October 2024), bringing the total to around 19. Published counts vary between 18 and 19 depending on whether Great Barrier Reef and Torres Strait are counted as one PSSA or two, so the figure is now given as approximate with a direction to verify the live list on imo.org rather than as a hard number — corrected in QB1_B (2 places) and QB1_B_CheatSheet (1). QB3_E's citation of MEPC.1/Circ.778/Rev.5 was checked and is current (9 May 2025). A retrieval card contrasting MPA, PSSA and MARPOL Special Area was added to the QB3_H cheat sheet.",
- "files": [
-  "meoclass1/QB1_B.html",
-  "meoclass1/QB3_E.html",
-  "meoclass1/QB3_F.html",
-  "meoclass1/QB1_B_CheatSheet.html",
-  "meoclass1/QB3_H.html"
- ]
-},
-{
- "date": "2026-08-19",
- "note": "QB3_H Q1 rewritten. The question asks for \"a PSA and a PSSA\"; the answer previously treated \"PSA\" as meaningless and covered only the PSSA half. It now answers both, identifying the intended counterpart as the MPA (Marine Protected Area). MPA legal basis stated correctly: UNCLOS neither defines nor mentions MPAs — Art. 194(5) is only the general obligation to protect rare or fragile ecosystems; CBD Art. 2 and Art. 8(a) supply the working definition; BBNJ Agreement Art. 1(9) gives the first treaty definition of an MPA and the mechanism for high-seas MPAs, in force 17 January 2026. PSSA is corrected away from a MARPOL framing: it is IMO Assembly resolution A.982(24) as amended by resolution MEPC.267(68), with submission guidance MEPC.1/Circ.510, and its legal force comes only from the attached Associated Protective Measure. A three-way distinction between MPA, PSSA and MARPOL Special Area is added, with Papahānaumokuākea as the example of an area that is both an MPA and a PSSA. Tag 'unclos' added.",
- "files": [
-  "meoclass1/QB3_H.html"
- ]
-},
-  {
-   "date": "2026-08-18",
-   "note": "New question QB1_K Q8 on the IACS Common Structural Rules (CSR). Scope now stated with the construction-contract applicability: the original CSR for bulk carriers (90 m and above) and double-hull oil tankers (150 m and above) apply to ships contracted for construction on or after 1 April 2006; the harmonised CSR BC & OT (in force 1 July 2015) apply to contracts dated on or after 1 July 2015; IACS PR No. 29 defines 'contracted for construction'. Clarified that CSR scope is not the same as SOLAS II-1 Reg. 3-10 (GBS) scope: GBS applies at 150 m and above for both ship types (Res. MSC.290(87), in force 1 Jan 2012; contract 1 Jul 2016 / keel 1 Jul 2017 / delivery 1 Jul 2020) and excludes ore carriers and combination carriers, so a 120 m bulk carrier can be a CSR ship but not a Reg. 3-10 ship. Corrected the 'why is CSR mandatory' explanation away from both 'IACS made it mandatory' and 'SOLAS makes CSR mandatory' to the four-step chain (class rules; flag/RO statutory and commercial framework; Reg. 3-10 requires conforming RO/Administration structural rules; IACS CSR verified through the IMO GBS process, MSC 96 confirming the 12 IACS Members' rules conform). IACS's statement that CSR are the only rules complying with GBS is retained but attributed to IACS, not presented as a SOLAS requirement. Added the five-tier GBS framework (MSC.287(87) / MSC.1/Circ.1394/Rev.2) and a Ship Construction File section from MSC.1/Circ.1343 (four content groups, on-board vs shore archive, update-on-major-event rule). Time-sensitive 'CSR review underway' material kept in a separate 'Current status - not exam-essential' deep-dive. Cheat sheet updated with a Q8 flip card, two confusable-pair boxes (CSR vs GBS scope; Common Structural Rules vs Continuous Synopsis Record vs CSM) and a rapid-recall row.",
-   "files": [
-    "QB1_K.html",
-    "QB1_K_CheatSheet.html"
-   ]
-  },
-  {
-   "date": "2026-08-13",
-   "note": "Follow-up to the QB5_C_B Q5 correction: audited every 'DG Shipping' mention across the question bank, oral notes and rules pages. Historical and dated content (point-in-time exam-paper material and named circulars/orders) was left as written; stale present-tense references were updated to 'DGMA', including 16 further QB4_H items missed in the first pass. Hyperlinks to the retired dgshipping.gov.in domain (shut down 31 March 2026) were repointed to dgma.gov.in; four deep-linked document URLs in simon-notes-p3.html were left unchanged because no verified replacement path exists and are flagged as broken links. Two points remain under review: one file's differing expansion of 'DGMA', and the exact date on which the DGS-to-DGMA rename (as distinct from the MS Act 2025's broader commencement) took effect.",
-   "files": [
-    "meoclass1/ question-bank pages and cheat sheets",
-    "meoclass1/oralnotes/",
-    "meoclass1/rulesapp/"
-   ]
-  },
-  {
-   "date": "2026-08-13",
-   "note": "QB5_C_B Q5 (Q15, war-zone casualty investigation with Indian crew fatalities): the Casualty Link's True Confidence (2024) reference did not match the question's 'Indian crew' premise. True Confidence's three fatalities were two Filipino and one Vietnamese national; the vessel's sole Indian crew member (of 20) survived. An explicit clarification was added so the case is not misattributed. Also updated 'DG Shipping' to 'DGMA' (2 instances) and the Numbers/Regs citation from 'Merchant Shipping Act (India), Section 358' (repealed 1958 Act) to 'Merchant Shipping Act, 2025 (India)', with a caveat that the exact renumbered section was not independently verified. Q5 v1.1 to v1.2.",
-   "files": [
-    "QB5_C_B.html"
-   ]
-  },
-  {
-   "date": "2026-08-08",
-   "note": "QB1_A: the LLMC 2012 Amendments were misattributed to Resolution LEG.3(91), which is actually the 'Guidelines on fair treatment of seafarers in the event of a maritime accident' (adopted 27 Apr 2006, unrelated to LLMC). Corrected to Resolution LEG.5(99) (2012 Amendments to the Protocol of 1996 to amend LLMC 1976, in force 8 June 2015): four instances in the Q3 LLMC card (intro paragraph, limits subheading, Indian-context paragraph, reg-box) and one cross-reference in the Q5 CLC card. Q3 v1.1 to v1.2, Q5 v1.1 to v1.2.",
-   "files": [
-    "QB1_A.html"
-   ]
-  },
-  {
-   "date": "2026-08-07",
-   "note": "QB3_A cheat sheet, GZ-curve diagram, second pass: after the first pass fixed the angle-of-loll marker, the negative-GM curve's shape was still wrong - the negative-stability span (0 deg to the angle of loll) was drawn wider than the positive-stability span (loll to the angle of vanishing stability), backwards from reality. Rebuilt on the textbook worked example (Ship Stability for Masters and Mates, Fig 17.5: loll 18 deg, range of stability 18-90 deg, AVS 90 deg). The negative-GM curve is now split red (0-18 deg, GZ negative, capsizing) / green (18-90 deg, GZ positive, restoring toward the loll angle, not upright). The 'Zero GM / Tender' curve was relabelled 'Zero GM - Neutral Equilibrium' with a note that a 'tender' ship has a small positive GM (Ch. 40), not zero GM (Fig 6.4) - distinct concepts that had been conflated. The 'Positive GM - Stable' comparison curve was removed; the section is retitled 'Zero GM vs Negative GM' and a range-of-stability bracket added. v1.1 to v1.2.",
-   "files": [
-    "QB3_A_CheatSheet.html"
-   ]
-  },
-  {
-   "date": "2026-08-07",
-   "note": "QB3_A cheat sheet, GZ-curve diagram, first pass: in the 'GZ Curve & Angle of Loll - The Three GM States' diagram, the angle-of-loll marker and label were plotted at the negative-GM curve's trough (most negative GZ) instead of at the point where the curve crosses GZ = 0. Marker and drop-line moved to the actual zero-crossing point. v1.0 to v1.1. Superseded the same day by the second pass above.",
-   "files": [
-    "QB3_A_CheatSheet.html"
-   ]
-  },
-  {
-   "date": "2026-08-05",
-   "note": "Places-of-refuge citation: IMO Resolution A.949(23) (2003) was superseded by A.1184(33), adopted 6 Dec 2023, which revokes and updates the 2003 guidelines. Corrected in QB9_F Q2 (2 instances), simon-notes-p5 (1 instance) and miw-notes-mgmt-p12 Topic 4 (4 instances, including a verify-note that had wrongly asserted A.949(23) was current); versions bumped. A.950(23) (Maritime Assistance Services, a separate resolution) left unchanged.",
-   "files": [
-    "QB9_F.html",
-    "oralnotes/simon-notes-p5.html",
-    "oralnotes/miw-notes-mgmt-p12.html"
-   ]
-  },
-  {
-   "date": "2026-08-04",
-   "note": "HSSC Survey Guidelines citation: the stale A.1140(31) (2019) reference was updated to the current A.1207(34) (2025) - 9 instances across QB4_F, QB4_H, QB1_I and miw-notes-mgmt-p3, matching the correction already applied to QB2_I and QB3_J. Note the sibling-resolution confusion this fixes: the HSSC Survey Guidelines and the PSC Procedures are different resolution chains.",
-   "files": [
-    "QB4_F.html",
-    "QB4_H.html",
-    "QB1_I.html",
-    "oralnotes/miw-notes-mgmt-p3.html"
-   ]
-  },
-  {
-   "date": "2026-08-04",
-   "note": "July 2026 additions: 8 new question groups (54 questions) - QB1_K, QB2_I, QB3_J, QB4_J, QB5_J, QB6_H, QB8_H, QB9_H - de-duplicated against the existing 629-question bank and verified against primary sources. Cheat sheets: separate files for the five groups with more than six questions, inline for QB3_J, QB5_J and QB6_H. Corrections applied during review: HSSC Survey Guidelines citation updated from the superseded A.1140(31) to the current A.1207(34) in QB2_I Q5 and QB3_J Q3; QB2_I page title corrected. Standalone cheat sheets now carry the site header/footer and a link back to the /meoclass1/ index; the correction-report box on these pages is now a form with a per-card reference instead of an email link.",
-   "files": [
-    "QB1_K.html",
-    "QB2_I.html",
-    "QB3_J.html",
-    "QB4_J.html",
-    "QB5_J.html",
-    "QB6_H.html",
-    "QB8_H.html",
-    "QB9_H.html",
-    "QB1_K_CheatSheet.html",
-    "QB2_I_CheatSheet.html",
-    "QB4_J_CheatSheet.html",
-    "QB8_H_CheatSheet.html",
-    "QB9_H_CheatSheet.html"
-   ]
-  },
-  {
-   "date": "2026-08-03",
-   "note": "Merchant Shipping Act 2025 re-basing, residual corrections: 24 corrections in 15 files. Headline: the QB9_F cabotage card had s.411A inverted - it claimed the section was saved, whereas Act s.324 excludes it from the Part XIV saving (repealed, with the substance re-enacted as s.323). QB9_D glossary re-based; RO-authorisation citations re-based to the 2025 Act with s.324(2)(a) savings continuity (QB1_A, QB2_A, QB3_A, QB3_B, QB3_I, QB4_A); QB1_I reg-box rows; QB5_B ORB liability; cheat-sheet labels; oral-notes historical markers. Some exact 2025 section numbers (RO delegation, CoC, takeover, registration, and the 1958 s.159 equivalent) remain under review pending authoritative evidence and are marked as such in the answers.",
-   "files": [
-    "QB9_D.html",
-    "QB9_F.html",
-    "QB9_G.html",
-    "QB1_A.html",
-    "QB1_I.html",
-    "QB2_A.html",
-    "QB3_A.html",
-    "QB3_B.html",
-    "QB3_I.html",
-    "QB4_A.html",
-    "QB5_A_CheatSheet.html",
-    "QB5_B.html",
-    "QB5_B_CheatSheet.html",
-    "oralnotes/simon-notes-p6.html",
-    "oralnotes/uday-index-crossref.html"
-   ]
-  },
-  {
-   "date": "2026-08-02",
-   "note": "Admiralty Act 2017 Section 9 maritime-lien priority order (verified against the Act text): the inter se order is (1) wages and sums due to master, officers and crew, (2) loss of life or personal injury, (3) salvage reward, (4) port, canal, waterway and pilotage dues, (5) tort damage. Affected content had wages and salvage swapped (salvage listed first, wages described as 'second-highest'), contradicting the MLM Convention 1993 Article 4 order (wages first) already stated correctly elsewhere in the same files. Fixed QB1_A Q7 (CE Oral Tip, Numbers to Memorise, mental map) and Q8 (ordered priority list, CE Oral Tip, Numbers to Memorise, mental map) - v1.1 to v1.2 and v1.4 to v1.5 - and WA3-LIEN1 (same list; also removed an incorrect claim that Indian law diverges from Article 4 by ranking salvage first, which it does not, and now explains Article 5(2)'s salvage queue-jump rule instead; v1.0 to v1.1). Other pages that mention the Act without asserting a specific order (QB9_A/D/F/G, miw-notes-mgmt-p15, simon-notes-p7) needed no change.",
-   "files": [
-    "QB1_A.html",
-    "WA3-LIEN1.html"
-   ]
-  },
-  {
-   "date": "2026-08-01",
-   "note": "QB4_H Q2 (Strait of Hormuz transit) expanded on five follow-up points: citadel vs safe-muster-point rationale, hardening necessity, authorities to inform, AIS/coastal-state framing, and coastal-state re-routing. The AIS framing was confirmed correct (reinforced with an explicit 'not coastal-state-mandated' note). A content gap on routing was filled: since April 2026 Iran has redrawn the Strait of Hormuz TSS and directs vessels to IRGC-designated corridors only ('Tehran Toll Booth' near Qeshm/Larak); Oman's separate IMO-coordinated alternate route was rejected by Iran and a vessel was reportedly struck shortly after using it; IMO's March 2026 position is that transit passage under UNCLOS Part III cannot be unilaterally redirected by a coastal state, which Iran (not an UNCLOS party) disputes. Added a 'Route Selection & the Coastal-State Routing Dispute' subsection, a routing-dispute live-update item (replacing outdated framing), a UNCLOS Part III reg-box entry, the hardening purpose split (anti-boarding vs anti-blast/kinetic: ISPS Level 3, sandbagging, ballistic PPE per the May 2026 Industry Guidance), a new trap question, and updated failures/numbers/casualty/vessel items and source-confidence note. v1.2 to v1.3.",
-   "files": [
-    "QB4_H.html"
-   ]
-  },
-  {
-   "date": "2026-08-01",
-   "note": "BMP5 weapon-of-war coverage: the suggestion that BMP5 addresses piracy only (Gulf of Aden/Red Sea/Arabian Sea/West Africa) and not state-actor missile/torpedo/warhead threats is inaccurate. BMP5 Section 5 already requires a safe muster point above the waterline, chosen with the likely blast path in mind, for hull-breach threats (missile/WBIED/mine) - a provision distinct from and complementary to the citadel (boarding/hijack response) - and this is carried forward into BMP-MS (2025). QB4_H Q2's hardening section covered the citadel only; the safe-muster-point vs citadel distinction was added to the answer body, reg-box, CE Oral Tip trap line, deep-dive trap/failure/casualty items and source-confidence note (v1.1 to v1.2). QB4_H cheat sheet rows 2 and 11 updated.",
-   "files": [
-    "QB4_H.html",
-    "QB4_H_cheatsheet.html"
-   ]
-  },
-  {
-   "date": "2026-07-30",
-   "note": "Form E / fire-fighting equipment conflation: Form E (Record of Equipment supplement to the Cargo Ship Safety Equipment Certificate) has three SOLAS Appendix sections - LSA, Equivalent Arrangements, Navigational Systems/Equipment - with no fire-fighting section. Corrected QB3_A Q15 (full answer, cheat sheet, reg-box, CE Oral Tip and the full deep dive: trap Q&A, CE Relevance, Common CE Failures, Numbers to Memorise, Casualty Link, Examiner Chain, On My Vessel; v1.0 to v1.1), the QB3_A cheat sheet (diagram label and Quick-Fire 15s index), QB8_B (MSC.520(106) portable water monitor/mist lance record location) and QB8_A (certificate/Form E labelling). All four now route FFA compliance to the certificate's own attestation and the ship's Fire Control Plan/PMS rather than to Form E.",
-   "files": [
-    "QB3_A.html",
-    "QB3_A_CheatSheet.html",
-    "QB8_A.html",
-    "QB8_B.html"
-   ]
-  },
-  {
-   "date": "2026-07-29",
-   "note": "Cheat-sheet consistency pass over the pages corrected earlier the same day, since quick-reference material can silently drift from a corrected main answer. Fixed: (1) QB1_H embedded cheat sheet - the brake rendering test row still gave the generic pre-correction formula; now states 60% SDMBL (mooring winch, OCIMF MEG4) vs 80%/45% chain MBS (windlass, IACS UR A3) in both the cue card and the recall table. (2) QB1_D embedded cheat sheet table and flow diagram still showed the flat '1.25 x SWL' proof-load figure; now the MSC.1/Circ.1663 Table 1 basis, plus a new DGMA MS Notice 02/2026 quick-recall row. (3) QB1_E embedded cheat sheet still cited the stale HSSC guideline A.1156(32); now A.1207(34), matching the main Q1 answer. (4) QB4_A cheat sheet PSC trap row 'DGS India' corrected to 'MMD offices under DGMA' (v1.1 to v1.2). (5) QB4_H cheat sheet WHO-certificate recall row enriched with the DGMA Maritime Health Branch / DGS Order 10/2018 reference from the main Q9 answer. QB3_I and QB4_I cheat sections were checked and found consistent.",
-   "files": [
-    "QB1_H.html",
-    "QB1_D.html",
-    "QB1_E.html",
-    "QB4_A_CheatSheet.html",
-    "QB4_H_cheatsheet.html"
-   ]
-  },
-  {
-   "date": "2026-07-29",
-   "note": "Indian MMD examiner-readiness pass: added or corrected DGMA (formerly DG Shipping) / IRS / MMD regulatory scope across 28 question cards, so that answers carry the Indian flag-state execution layer and not only generic IMO/SOLAS text. QB4_A (Q3, Q4, Q5, Q7, Q9, Q10, Q16, Q18): stale 'DGS India' naming corrected to DGMA/MMD; the DGMA RO Authorization Agreement framework (MS Act 1958 s.7(3)/9(1-A)) added to the Condition of Class, statutory-certificate and ISM-audit answers; IOMOU founding-member detail and PSC Form B added to the PSC card; Q18 (STCW Manila/CE benchmark) gained the Indian CoC issuance pathway (Chief Examiner of Masters and Mates, MMD Kochi as an exam centre, INDoS number, e-Samudra portal, IMO STCW White List status, 5-year revalidation cycle). QB4_I Q1 (ISPS certificates): DGMA/Registrar of Shipping ISSC delegation detail. QB4_H Q9 (WHO-linked certificates): DGMA Maritime Health Branch as IHR 2005 Competent Authority, DGS Order 10/2018 (SSCC/SSCEC) and DGS Order 2/2017 (Medical Examiner approval). QB1_A Q22 (flag/port/coastal-state duties): stale citation IMO Res. A.1138(31) corrected to the current A.1206(34), plus India's role in each capacity (DGMA as flag state, MMD/IOMOU as port state, Territorial Waters Act 1976 as coastal-state legislation). QB2_A Q15 (ICOF): DGS-to-DGMA naming and RO Authorization Agreement detail (the RO issues on DGMA's behalf, not on its own class authority). QB3_A (Q4, Q6, Q7, Q9, Q11, Q13, Q17), QB3_B (Q1 supplemented, Q2, Q3, Q4, Q5, Q8, Q9, Q11) and QB3_I Q1: the DGMA RO Authorization Agreement added as the consistent legal mechanism behind class-notation, ESP, hull survey, steel renewal, ballast-tank inspection, drydock and AFS certificate questions on Indian-flag ships; QB3_A Q7's stale HSSC citation A.997(25) corrected to A.1207(34). QB4_E Q8 (PSC appeal) reviewed and found already complete.",
-   "files": [
-    "QB4_A.html",
-    "QB4_I.html",
-    "QB4_H.html",
-    "QB1_A.html",
-    "QB2_A.html",
-    "QB3_A.html",
-    "QB3_B.html",
-    "QB3_I.html"
-   ]
-  },
-  {
-   "date": "2026-07-29",
-   "note": "Checklist-verification pass on five statutory-survey questions, cross-checked against official DGMA/MMD/IACS/IMO checklists. (1) QB1_H Q4 (windlass/mooring-winch brake rendering test): the answer conflated two distinct standards - mooring-winch brakes render at 60% of Ship Design MBL (SDMBL) per OCIMF MEG4, while windlass anchor brakes are sized to 80%/45% of chain MBS per IACS UR A3; now stated separately with sources, plus retest triggers (lining renewal, vessel takeover, annual interval, drydock relining). (2) QB1_D Q2 and Q3 (lifting-appliance amendments/survey): added DGMA Merchant Shipping Notice No. 02 of 2026 (Indian flag implementation of SOLAS II-1/3-13) and the mandatory rigging plan/block list requirement; the proof-load test corrected from a flat '1.25 x SWL' to the actual basis (MSC.1/Circ.1663 Table 1, para 3.2.1.5). (3) QB1_F Q8, QB3_A Q5 and QB3_B Q1 (hull survey / drydock planning): added the mandatory annual close-up survey extension for bulk carriers and oil tankers (25% of cargo-hold side-shell frames, forward hold plus one other selected hold), previously missing from all three. QB1_F Q8's deep dive also had duplicated text across its trap/failure/numbers/casualty blocks, cleaned up in the same pass. Reg-boxes now carry direct source links rather than bare citations. v1.0 to v1.1 on all six cards.",
-   "files": [
-    "QB1_H.html",
-    "QB1_D.html",
-    "QB1_F.html",
-    "QB3_A.html",
-    "QB3_B.html"
-   ]
-  },
-  {
-   "date": "2026-07-29",
-   "note": "Formatting: 19 comparative tables across five pages were rendered as pipe-delimited text rows instead of real HTML tables, causing unpredictable wrapping and loss of column alignment on mobile. Converted to proper tables in QB2_A (6: container thicknesses, tanker types, tonnage fees, watertight vs weathertight boundaries, inclinometer types, bulk-cargo failure modes), QB1_B (1), QB1_F (7), QB1_G (10) and QB3_H (1, NLS cargo categorisation). No content or regulatory change - question text and answers unchanged; table styling added to QB1_F and QB1_G, which had none.",
-   "files": [
-    "QB2_A.html",
-    "QB1_B.html",
-    "QB1_F.html",
-    "QB1_G.html",
-    "QB3_H.html"
-   ]
-  },
-  {
-   "date": "2026-07-18",
-   "note": "Second correction pass the same day: (1) QB6_C Q3 - the answer did not match the question; replaced with the correct purifier manual desludging procedure (the previous text described a disc-stack overhaul). (2) GFI/FuelEU conflation fixed across QB6_E Q2, QB7_A Q3 and the QB7_A cheat sheet: GFI (Greenhouse Gas Fuel Intensity) is the IMO's own Net-Zero Framework metric (93.3 gCO2eq/MJ, 2008 baseline, MEPC 83 / new MARPOL Annex VI Chapter 5) and is a separate regulatory track from FuelEU Maritime's Greenhouse Gas Intensity metric (91.16 gCO2eq/MJ, 2020 baseline, EU Regulation 2023/1805). Earlier text applied the 'GFI' label and/or the IMO 93.3 baseline to FuelEU Maritime, or vice versa; both tracks now carry the correct baselines, reference years and reduction schedules, verified against IMO MEPC 83 summaries and Global Maritime Forum guidance.",
-   "files": [
-    "QB6_C.html",
-    "QB6_E.html",
-    "QB7_A.html",
-    "QB7_A_CheatSheet.html"
-   ]
-  },
-  {
-   "date": "2026-07-18",
-   "note": "(1) International Group of P&I Clubs member count corrected 13 to 12, reflecting the North of England / Standard Club merger into NorthStandard (effective 20 Feb 2023) - QB1_A (Q1, Q29), QB9_C (Q3, Q6), QB9_D (Q1, Q2, plus a duplicated club in the roster list) and the QB9_D cheat sheet. (2) IG reinsurance programme figures updated for the 2026/27 policy year: market GXL layer USD 2.35bn, Collective Overspill a further USD 1bn, total USD 3.35bn (previously stated as USD 3.1bn) - same pages. (3) Continuous Synopsis Record (CSR) SOLAS citation: QB1_B Q5 cited Chapter XI-2 (the security chapter) instead of the correct Chapter XI-1, Regulation 5 (Special Measures to Enhance Maritime Safety); QB4_I Q1 cited 'SOLAS Ch I' instead of Chapter XI-1, Reg 5. Both fixed, with dated version notes.",
-   "files": [
-    "QB1_A.html",
-    "QB1_B.html",
-    "QB4_I.html",
-    "QB9_C.html",
-    "QB9_D.html",
-    "QB9_D_CheatSheet.html"
-   ]
-  },
-  {
-   "date": "2026-07-17",
-   "note": "QB6_G new Q3 (engine-technology retrofit options); QB7_E Q1 CII/WTW causal-error fix; QB4_G Q8 IEEC/COR addition; QB3_C IMO Resolution A.1185(33) to A.1206(34) citation fix; QB2_E section-toggle bug and SOLAS III rescue-boat citation fix; QB2_G the same rescue-boat citation fix (III/14, LSA Code section 6.1.1.11).",
-   "files": [
-    "QB6_G.html",
-    "QB7_E.html",
-    "QB4_G.html",
-    "QB3_C.html",
-    "QB2_E.html",
-    "QB2_G.html"
-   ]
-  },
-  {
-   "date": "2026-07-16",
-   "note": "PSC appeal-chain correction. The Stage 3 review deadline had been stated across the bank as '120 days from the ship's release from detention' and presented as flowing from IMO Resolution A.1206(34) itself. The resolution grants only a general, one-line right of appeal (para 2.3.11) with no numeric deadline or staged mechanism; the 3-stage chain and day-count are regional MOU procedure. The 120-day figure (measured from release) is correct only for Paris MOU; IOMOU - the regime governing Indian ports - specifies 90 days from the date of detention (Detention Review Panel procedure, Section 3.13) with a 3-member review panel (Paris MOU: 4). Corrected QB4_A Q6 (deadline and panel size), QB4_E Q8 (deadline, panel size, resolution-vs-MOU attribution) and QB4_C Q11 (still citing the superseded A.1185(33) instead of A.1206(34); the action-taken code content was already correct). The three questions now cross-link (appeal chain, action codes, IOMOU/Paris MOU comparison). This supersedes the other 16 July entry, where QB4_A Q6 and QB4_E Q8 still carried the 120-day figure. Remaining mentions of A.1185(33) in these pages are intentional, explaining the superseded resolution for exam-trap awareness.",
-   "files": [
-    "QB4_A",
-    "QB4_C",
-    "QB4_E"
-   ]
-  },
-  {
-   "date": "2026-07-16",
-   "note": "(1) HNS Convention entry into force updated from 'not yet in force' to the confirmed 29 November 2027 (all conditions met 29 May 2026), with Tier 1/Tier 2 liability limits (100M/115M SDR shipowner; 250M SDR combined Fund cap) - QB1_A Q6 (and both mental-map diagrams), QB1_B Q1 and QB9_A Q3. (2) MEPC.398(83) NOx Technical Code amendment (certification of engines subject to substantial modification, in force 1 Sep 2026) added to QB1_supplementary Q7. (3) QB4_A Q13: PDSD (STCW A-VI/6-2) and STSDSS clarified as the same requirement, not separate certificates. (4) QB4_A Q6: PSC detention appeal expanded from a single step to the 3-stage chain - national appeal to the Port State, then Flag State/RO reconsideration request, then MoU Secretariat Review Panel (Flag State/RO request only; the 120-day window stated here was refined the same day, see the entry above). (5) QB4_E Q8: superseded IMO Resolution A.1185(33) corrected to the current A.1206(34) (Procedures for PSC, 2025, in force 1 Jan 2026), with the same 3-stage appeal chain. (6) QB9_F Q7: an incorrect 'Ship-to-Shore Data Security System' expansion of STSDSS replaced with the correct STCW A-VI/6-2 (PDSD) meaning - Security Training for Seafarers with Designated Security Duties. Each corrected question carries a dated version note.",
-   "files": [
-    "QB1_A",
-    "QB1_B",
-    "QB1_supplementary",
-    "QB4_A",
-    "QB4_E",
-    "QB9_A",
-    "QB9_F"
-   ]
-  },
-  {
-   "date": "2026-07-15",
-   "note": "QB4_D new Q4 - interdepartmental ISM audit substitution (Master/Chief Engineer cross-swap) during COVID force majeure. Verified against ISM Code sections 12.1/12.5 (exact wording quoted), the MSC.273(85) 15-month interval ceiling, MSC-MEPC.7/Circ.8 and flag-specific COVID interim policies (Vanuatu, RMI, Liberia, Bahamas). Distinguished from DG Shipping India's actual COVID response, which used the timeline-extension route (DGS Orders 06/2020, 13/2020) rather than interdepartmental substitution - a distinction not commonly known among Kochi candidates.",
-   "files": [
-    "QB4_D.html"
-   ]
-  },
-  {
-   "date": "2026-07-15",
-   "note": "MS Act 2025 correction pass: 30+ questions across 14 pages still cited the repealed Merchant Shipping Act, 1958 (or treated the 2025 Act as a draft bill). Key fixes: seafarer welfare (Part VII to Part V), CoC/STCW certification (old Part VI ss.78/79/87 to Part IV ss.45/46/48/53), cabotage/coasting trade (old ss.406/407 to the standalone Coastal Shipping Act 2025), vessel registration (old ss.21/24-46 to Part III ss.14-44), official log book (old Part VII to s.112, Part V), class-suspension penalties (old s.334 to Part VI ss.125/127), LLMC/CLC/Bunker/Nairobi domestic implementation (old Part XB/XIII to Part IX/XII), and DG Shipping renamed DGMA throughout. QB9_E Q2 and QB9_F Q6 fully rewritten (they previously described the Act as pending and cabotage as still under the MS Act).",
-   "files": [
-    "QB1_F.html",
-    "QB1_A.html",
-    "QB1_G.html",
-    "QB1_I.html",
-    "QB4_C.html",
-    "QB5_A.html",
-    "QB5_B.html",
-    "QB5_G.html",
-    "QB9_A.html",
-    "QB9_D.html",
-    "QB9_E.html",
-    "QB9_F.html",
-    "QB9_G.html",
-    "QB10_A.html"
-   ]
-  },
-  {
-   "date": "2026-07-14",
-   "note": "New page QB10_B (8 questions): SOLAS/MARPOL amendment cycle 2024-2028, STCW amendments, MLC 2006 amendments, ship-type-specific amendments (container/tanker/bulk), IMO Net-Zero Framework status, and DG Shipping/DGMA 2026 circulars. All resolution numbers verified against primary IMO/class sources across multiple review passes (corrected the MSC.532(107) inclinometer citation, the MSC.520(106) flashpoint citation, the MSC.549(108) ETA citation, and the DGMA naming transition).",
-   "files": [
-    "QB10_B"
-   ]
-  },
-  {
-   "date": "2026-07-13",
-   "note": "New page QB7_I (9 questions): latest onboard technology, alternative fuels and decarbonisation. Verified and corrected against current sources (VTT MOC study citation, FuelEU penalty escalation figures, MAN ME-GA discontinuation of November 2024, EGRBP January 2024 nuance).",
-   "files": [
-    "QB7_I"
-   ]
-  },
-  {
-   "date": "2026-07-13",
-   "note": "QB4_C re-verified: question texts (17), order, tags and the Q3/Q11 corrections (SOLAS XI regulation numbers, PSC action codes) all confirmed correct - no content change. The page's version indicator corrected to v1.1 to match the highest individual card version (Q3 and Q11 footers), since a page-level version should track its highest card.",
-   "files": [
-    "QB4_C"
-   ]
-  },
-  {
-   "date": "2026-07-13",
-   "note": "New pages: QB3_I - AFS Convention (scope, MEPC.331(76) cybutryne ban, paint-type comparison, hydrogel technology, biocide-free class-approved paints, TBT hazard/imposex, certificate validity). QB1_J - hull paint coating inspection and propeller securing/locking inspection, split from one combined question into two cards.",
-   "files": [
-    "QB3_I",
-    "QB1_J"
-   ]
-  },
-  {
-   "date": "2026-07-05",
-   "note": "20 new questions across QB1_H, QB3_G and QB4_H (with the QB4_H cheat sheet), from the 5 July 2026 batch, verified against IMO/IACS/DG Shipping sources. Corrections within the batch: the AECS course definition (QB4_H Q1/Q5) and the GBS scope limited to bulk carriers/tankers of 150 m and above (QB1_H Q5).",
-   "files": [
-    "QB1_H",
-    "QB3_G",
-    "QB4_H",
-    "QB4_H_CheatSheet"
-   ]
-  },
-  {
-   "date": "2026-07-06",
-   "note": "QB2_G, QB5_H, QB7_G and QB8_F published as live pages (previously listed as backlog). The QB4_H cheat sheet is now listed under QB4_H rather than as a separate question-bank entry.",
-   "files": [
-    "QB2_G",
-    "QB5_H",
-    "QB7_G",
-    "QB8_F"
-   ]
-  },
-  {
-   "date": "2026-07-11",
-   "note": "(1) The IOPC 1992 Fund compensation limit was stale at 135m SDR across the bank, missing the 300.74m SDR step-up tier (Article 4(4)(b) trigger: top three contributing States at 600 million tonnes/yr or more) - fixed in QB1_A Q2/Q5, QB1_B Q12 and QB9_A Q3. (2) SOLAS Ch. XI regulation numbers were wrong in QB4_C Q3 (SSAS is Reg 6, not Reg 3; an incorrect Ship Construction File entry under XI-1 removed - it belongs to SOLAS II-1). (3) PSC deficiency action codes were wrong across the bank: all six pages mentioning PSC/deficiency/detention were audited; QB4_A and QB1_B were already correct (QB4_A fixed 5 Jul 2026), QB4_C Q11 was rebuilt and QB4_E Q8 fixed against the current Paris MOU action-taken and deficiency-category code lists. QB2_F Q6 (lifeboat ventilation) fully rebuilt per IMO Res. MSC.535(107).",
-   "files": [
-    "QB1_A",
-    "QB1_B",
-    "QB2_F",
-    "QB4_C",
-    "QB4_E",
-    "QB9_A"
-   ]
-  },
-  {
-   "date": "2026-07-11",
-   "note": "New examiner cross-reference page bundling all 585 live question-bank questions by Kochi MMD examiner (Nair, Simon, Rajappan, Srivastava, Senthil, Paul), with the attribution confidence shown on each question. A public teaser at /SQ/ opens Paul Sir's full 10-question set free and previews 5 of Simon Sir's 212, with the rest locked.",
-   "files": [
-    "examiner-index.html",
-    "SQ/examiner-index.html"
-   ]
-  }
- ]
+  "_purpose": "Governed, hand-maintained data merged into meoclass1/qb_content_index.json by tools/oral/build_qb_content_index.py. Everything else in that file is derived from the live QB HTML. Never put question text here. files[].version is a FALLBACK used only when the page carries no 'Version:' line; files[].corrections_applied is the per-file audit trail read by qb_health_check.py; recently_updated is the changelog rendered by meoclass1/index.html; cheatsheet_overrides names the one cheat sheet whose file name does not follow <stem>_CheatSheet.html.",
+  "cheatsheet_overrides": {
+    "QB1_F.html": "QB1_FG_CheatSheet.html",
+    "QB1_G.html": "QB1_FG_CheatSheet.html"
+  },
+  "files": {
+    "QB10_A.html": {
+      "version": "1.1"
+    },
+    "QB10_B.html": {
+      "version": "1.0"
+    },
+    "QB1_A.html": {
+      "version": "1.9",
+      "corrections_applied": [
+        "Q2 (Fund Convention): corrected stale 135m SDR combined CLC+Fund cap to current 203m SDR (post-1 Nov 2003), added the 300.74m SDR (300,740,000 SDR) step-up tier triggered when top-3 Fund-contributing States combined receive >=600 million tonnes of contributing oil in the preceding calendar year (verified vs IOPC Funds consolidated convention text). Also fixed CE Oral Tip which had incorrectly called 203m 'a common wrong answer'.",
+        "Q5 (CLC): numbers-box also carried the stale 'Combined CLC+Fund cap = 135 million SDR' reference; updated to 203m/300.74m to match Q2.",
+        "2026-07-18: Q1 (P&I Club) — International Group of P&I Clubs member count corrected 13->12, reflecting the North of England P&I / Standard Club merger into NorthStandard (effective 20 Feb 2023).",
+        "2026-07-18: Q29 (Reinsurance) — IG reinsurance programme figures updated for the 2026/27 policy year: market GXL layer raised to USD 2.35bn, Collective Overspill adds a further USD 1bn, total USD 3.35bn (previously stated as USD 3.1bn). Also reflects the 12-club (not 13) IG roster."
+      ]
+    },
+    "QB1_B.html": {
+      "version": "1.3",
+      "corrections_applied": [
+        "Q12 (CLC + Fund Convention): 203m SDR base figure was already correct but the 300.74m SDR step-up tier (top-3 contributing States >=600 million tonnes/yr) was missing entirely from diagram, prose, and numbers-box; added throughout."
+      ]
+    },
+    "QB1_C.html": {
+      "version": "1.0"
+    },
+    "QB1_D.html": {
+      "version": "1.0",
+      "corrections_applied": [
+        "2026-07-29: Q2/Q3 (lifting appliance amendments/survey) corrected proof-load-test description from a flat '1.25x SWL' to the actual basis (MSC.1/Circ.1663 Table 1, para 3.2.1.5); added DGMA Merchant Shipping Notice No. 02 of 2026 (Indian flag implementation of SOLAS II-1/3-13) and the mandatory rigging plan/block list requirement. v1.0 -> v1.1.",
+        "2026-07-29: Embedded cheat sheet quick-reference table and SVG flow diagram updated to match the Q2/Q3 correction above (were still showing the flat 1.25x SWL figure); added a new DGMA MS Notice 02/2026 quick-recall row."
+      ]
+    },
+    "QB1_E.html": {
+      "version": "1.0",
+      "corrections_applied": [
+        "2026-07-29: Embedded cheat sheet quick-reference table updated — was still citing the stale IMO Res. A.1156(32) HSSC guideline; corrected to A.1207(34) to match the main Q1 answer (corrected in an earlier SEQ survey depth-expansion round)."
+      ]
+    },
+    "QB1_F.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-07-29: Q8 (hull survey/drydock planning) — added the mandatory annual close-up survey extension for bulk carriers/oil tankers (25% of cargo hold side shell frames, forward hold + one other selected hold), previously missing. Also cleaned up a pre-existing content-duplication defect (cascading repeated text across trap/failure/numbers/casualty blocks) caught during the same review. v1.0 -> v1.1.",
+        "2026-07-29: 7 comparative tables converted from raw markdown-style pipe-delimited rows inside <p> tags to real HTML <table> markup (candidate screenshot feedback via Nixon) — formatting only, no content/regulatory change. .answer-body table/th/td CSS added (file previously had no table styling). See known_traps.md Entry 16."
+      ]
+    },
+    "QB1_G.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-07-29: 10 comparative tables converted from raw markdown-style pipe-delimited rows inside <p> tags to real HTML <table> markup (candidate screenshot feedback via Nixon) — formatting only, no content/regulatory change. .answer-body table/th/td CSS added (file previously had no table styling). See known_traps.md Entry 16."
+      ]
+    },
+    "QB1_H.html": {
+      "version": "1.0",
+      "corrections_applied": [
+        "2026-07-29: Q4 (windlass/mooring winch brake rendering test) — corrected an inaccurate mooring-winch render figure that conflated two distinct standards: mooring winch brakes render at 60% of Ship Design MBL (SDMBL) per OCIMF MEG4, windlass anchor brakes at 80%/45% of chain MBS per IACS UR A3 — now stated separately with sources, plus retest-trigger conditions (lining renewal, vessel takeover, annual interval, drydock relining). v1.0 -> v1.1.",
+        "2026-07-29: Embedded cheat sheet quick-recall row for the brake rendering test updated to match the Q4 correction above (was still stating the pre-correction combined formula)."
+      ]
+    },
+    "QB1_I.html": {
+      "version": "1.3",
+      "corrections_applied": [
+        "2026-08-04: HSSC Survey Guidelines citation corrected from superseded A.1140(31)/2019 to current A.1207(34)/2025 (see known_traps.md Entry 22)."
+      ]
+    },
+    "QB1_J.html": {
+      "version": "1.0"
+    },
+    "QB1_K.html": {
+      "version": "1.0"
+    },
+    "QB1_supplementary.html": {
+      "version": "1.1"
+    },
+    "QB2_A.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-07-29: Q15 (ICOF) — corrected DGS-to-DGMA naming; added RO Authorization Agreement detail explaining the RO issues on DGMA's behalf, not its own class authority (Indian MMD examiner-readiness pass).",
+        "2026-07-29: 6 comparative tables (container thicknesses, tanker types, tonnage fees, watertight vs weathertight boundaries, inclinometer types, bulk cargo failure modes) converted from raw markdown-style pipe-delimited rows to real HTML <table> markup (candidate screenshot feedback via Nixon) — formatting only. See known_traps.md Entry 16."
+      ]
+    },
+    "QB2_B.html": {
+      "version": "1.0"
+    },
+    "QB2_C.html": {
+      "version": "1.0"
+    },
+    "QB2_D.html": {
+      "version": "1.0"
+    },
+    "QB2_E.html": {
+      "version": "1.0",
+      "corrections_applied": [
+        "2026-07-17: Fixed missing toggleCard()/filterTag() JavaScript (answer panel was not expanding — only the auth-gate script was present, core UI functions absent). Also corrected regulatory citations: rescue boat carriage requirement corrected from SOLAS III/21 (passenger-ship provision) to III/31 (cargo-ship provision); readiness citation corrected to III/14; embarkation/launching/recovery citation corrected to III/17; launching-appliance trim/list capability citation corrected from LSA Code §5.1.1.1 to §6.1.1.11. Verified against IMO SOLAS Ch. III and IMORules.com. Note: same underlying question also appears as Q2 in QB2_G with the same citation errors — QB2_G fix drafted but not yet pushed to repo as of this manifest update."
+      ]
+    },
+    "QB2_F.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "Q6 (Totally enclosed lifeboat ventilation): full rebuild. Previous content was pre-amendment generic LSA 4.6/4.7/4.8 text with a fabricated 10-minute air-support figure. Corrected to IMO Res. MSC.535(107) (adopted 8 June 2023) - new LSA Code paras 4.6.6/4.6.7, ventilation rate 5 m3/h per person for 24h, powered-or-passive rule, fuel-source restriction, MOL Comfort (2013) casualty link, force date 1 Jan 2026, application date 1 Jan 2029 (new-build only)."
+      ]
+    },
+    "QB2_G.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-07-17: Q2 corrected — same rescue-boat citation error as QB2_E: readiness citation corrected to SOLAS III/14, launching-appliance trim/list capability corrected from LSA Code §5.1.1.1 to §6.1.1.11 throughout (reg-box, deep-dive text, and comparison table — two leftover instances missed in first pass, caught and fixed on review). III/31 (cargo-ship carriage) and III/21 (passenger-ship contrast, correctly retained) unaffected."
+      ]
+    },
+    "QB2_H.html": {
+      "version": "1.1"
+    },
+    "QB2_I.html": {
+      "version": "1.0"
+    },
+    "QB3_A.html": {
+      "version": "1.0",
+      "corrections_applied": [
+        "2026-07-29: 7 cards (Q4, Q6, Q7, Q9, Q11, Q13, Q17) — added the DGMA RO Authorization Agreement as the consistent legal mechanism underlying class-notation, ESP, hull survey, steel renewal, ballast tank inspection, drydock, and AFS certificate questions on Indian-flag ships (Indian MMD examiner-readiness pass).",
+        "2026-07-29: Q5 (hull survey/drydock planning) — added the mandatory annual close-up survey extension for bulk carriers/oil tankers (25% of cargo hold side shell frames, forward hold + one other selected hold), previously missing. v1.0 -> v1.1.",
+        "2026-07-30: Q15 — Form E / fire-fighting equipment conflation correction (Nixon-flagged, SEQ Q15 review). Form E has three SOLAS Appendix sections (LSA, Equivalent Arrangements, Navigational Systems/Equipment) with NO fire-fighting section; corrected full answer, reg-box, CE Oral Tip, and full deep-dive. v1.0 -> v1.1. See known_traps.md Entry 17."
+      ]
+    },
+    "QB3_B.html": {
+      "version": "1.0",
+      "corrections_applied": [
+        "2026-07-29: 7 cards (Q1 supplemented, Q2, Q3, Q4, Q5, Q8, Q9, Q11) — added the DGMA RO Authorization Agreement as the consistent legal mechanism underlying class-notation/survey questions on Indian-flag ships (Indian MMD examiner-readiness pass).",
+        "2026-07-29: Q1 (hull survey/drydock planning) — added the mandatory annual close-up survey extension for bulk carriers/oil tankers (25% of cargo hold side shell frames, forward hold + one other selected hold), previously missing. v1.0 -> v1.1."
+      ]
+    },
+    "QB3_C.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-07-17: Corrected superseded IMO Resolution A.1185(33) citation to current A.1206(34) with correct effective dates (part of repo-wide health-check remediation pass also touching WA3-LIEN2, simon-notes-p3, simon-notes-p4 in oralnotes)."
+      ]
+    },
+    "QB3_D.html": {
+      "version": "1.0"
+    },
+    "QB3_E.html": {
+      "version": "1.0"
+    },
+    "QB3_F.html": {
+      "version": "1.0"
+    },
+    "QB3_G.html": {
+      "version": "1.0"
+    },
+    "QB3_H.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-07-29: 1 embedded table (NLS cargo categorization) converted from raw markdown-style pipe-delimited rows to real HTML <table> markup (candidate screenshot feedback via Nixon) — formatting only, matched to file's existing rem-based CSS convention. See known_traps.md Entry 16."
+      ]
+    },
+    "QB3_I.html": {
+      "version": "1.0",
+      "corrections_applied": [
+        "2026-07-29: Q1 — added the DGMA RO Authorization Agreement as the legal mechanism underlying the AFS Convention/class-notation question on Indian-flag ships (Indian MMD examiner-readiness pass)."
+      ]
+    },
+    "QB3_J.html": {
+      "version": "1.0"
+    },
+    "QB4_A.html": {
+      "version": "1.3",
+      "corrections_applied": [
+        "Q6 (PSC detention appeal procedure): Stage 3 deadline corrected from '120 days of release' (Paris MOU figure, wrongly presented as universal) to the correct IOMOU figure of 90 days from the date of detention — IOMOU governs Indian ports and is the relevant regime for Kochi. IOMOU panel size corrected to 3 member authorities (was stated as 4, the Paris MOU figure). Cross-linked to QB4_E Q8 (full IOMOU vs Paris MOU comparison) and QB4_C Q11 (action-taken code table, correct governing resolution)."
+      ]
+    },
+    "QB4_B.html": {
+      "version": "1.0"
+    },
+    "QB4_C.html": {
+      "version": "1.2",
+      "corrections_applied": [
+        "Q3 (SOLAS Chapter XI): corrected multiple wrong regulation numbers - SSAS is XI-2 Reg 6 (was mislabeled Reg 3, which actually covers Contracting Govt security-level obligations); removed fabricated 'AIS Security Links' (Reg 4) and 'ISSC Certification' (Reg 5) entries; ESP is XI-1 Reg 2 (was mislabeled Reg 6); removed fabricated 'Ship Construction File' from XI-1 (it is a SOLAS II-1 Reg 3-10 item, not XI-1) per Nixon's direct correction; removed stray Gemini '[cite: 1]' draft artifacts from this card.",
+        "Q11 (PSC deficiency action codes): full rebuild. Nearly all action codes were wrong - Code 30 is grounds for detention (file said Code 15/Investigation); Code 17 is rectify-before-departure/non-detainable (file said Flag/Class notified); Code 70 (RO/Class informed) was missing entirely. Verified against current Paris MOU published action-taken code list. Added distinction between 2-digit action-taken codes and 5-digit deficiency item/category codes.",
+        "Q11 (PSC deficiency action codes): governing resolution updated throughout from the superseded IMO Res. A.1185(33) to the current A.1206(34) (Procedures for Port State Control, 2025, in force 1 January 2026). Action-taken code content (30/70/17/etc.) was already correct and unchanged. Cross-linked to QB4 Q6 and QB4_E Q8 for the appeal escalation chain."
+      ]
+    },
+    "QB4_D.html": {
+      "version": "1.0"
+    },
+    "QB4_E.html": {
+      "version": "1.2",
+      "corrections_applied": [
+        "Q8 (PSC appeal process): corrected conflation of action-taken codes with deficiency item/category codes, and wrong category numbers - fire safety is category 07 (file said '15-series'), ISM is category 15, MLC 2006 is category 18 (file said '18-series = Stability and Structure', which is fabricated). Verified against current Paris MOU deficiency code categories.",
+        "Q8 (PSC appeal process): Stage 3 deadline corrected from '120 days of the ship's release' (Paris MOU figure, wrongly presented as flowing from A.1206(34) itself) to the correct IOMOU figure of 90 days from the date of detention — IOMOU governs Indian ports and is the relevant regime for Kochi. Clarified that A.1206(34) itself grants only a bare right of appeal; the staged escalation mechanism (national appeal -> Flag State/RO reconsideration -> Detention Review Panel) is regional MOU procedure, not IMO text. IOMOU panel composition specified as 3 member authorities. Cross-linked to QB4 Q6 and QB4_C Q11."
+      ]
+    },
+    "QB4_F.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-08-04: HSSC Survey Guidelines citation corrected from superseded A.1140(31)/2019 to current A.1207(34)/2025 (see known_traps.md Entry 22)."
+      ]
+    },
+    "QB4_G.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-07-17: Q8 — added IEEC (International Energy Efficiency Certificate, MARPOL Annex VI Reg 6.4, issued once, no expiry) and COR (Certificate of Registry — flag-dependent; open registries treat as permanent, DGS/Indian-flag practice requires renewal, commonly every 5 years — caveat noted) to the list of certificates with indefinite validity/no renewal requirement."
+      ]
+    },
+    "QB4_H.html": {
+      "version": "1.4",
+      "corrections_applied": [
+        "2026-08-01: Q2 (BMP5/Hormuz) — added the BMP5 Section 5 safe-muster-point vs. citadel distinction (candidate Rathesh via Nixon queried whether BMP5 addresses weapon-of-war threats at all; verified it does, via the safe-muster-point provision). Updated answer-body, reg-box, CE Oral Tip, deep-dive trap/failure/casualty items, source-confidence note. v1.1 -> v1.2. See known_traps.md Entry 18.",
+        "2026-08-01: Q2 (BMP5/Hormuz) — follow-up expansion after five further candidate questions (Rathesh via Nixon): added a new 'Route Selection & the Coastal-State Routing Dispute' subsection covering Iran's April 2026 TSS redraw and IRGC-designated corridor, Oman's rejected alternate route, and the IMO's UNCLOS Part III transit-passage position; reinforced the AIS 'not coastal-state-mandated' framing; split vessel hardening into anti-boarding vs. anti-blast/kinetic purposes (ISPS Level 3, sandbagging, ballistic PPE per May 2026 Industry Guidance); added a new UNCLOS Part III reg-box entry, a new trap question, and updated failures/numbers/casualty/on-my-vessel items. v1.2 -> v1.3. See known_traps.md Entry 19.",
+        "2026-08-04: HSSC Survey Guidelines citation corrected from superseded A.1140(31)/2019 to current A.1207(34)/2025 (see known_traps.md Entry 22)."
+      ]
+    },
+    "QB4_I.html": {
+      "version": "1.2",
+      "corrections_applied": [
+        "2026-07-18: Q1 — Continuous Synopsis Record (CSR) citation corrected from 'SOLAS Ch I' to the correct SOLAS Chapter XI-1, Regulation 5 (Special Measures to Enhance Maritime Safety)."
+      ]
+    },
+    "QB4_J.html": {
+      "version": "1.0"
+    },
+    "QB5_A.html": {
+      "version": "1.1"
+    },
+    "QB5_B.html": {
+      "version": "1.1"
+    },
+    "QB5_C_A.html": {
+      "version": "1.0"
+    },
+    "QB5_C_B.html": {
+      "version": "1.0"
+    },
+    "QB5_D.html": {
+      "version": "1.0"
+    },
+    "QB5_E.html": {
+      "version": "1.0"
+    },
+    "QB5_F.html": {
+      "version": "1.0"
+    },
+    "QB5_G.html": {
+      "version": "1.1"
+    },
+    "QB5_H.html": {
+      "version": "1.0"
+    },
+    "QB5_I.html": {
+      "version": "1.0"
+    },
+    "QB5_J.html": {
+      "version": "1.0"
+    },
+    "QB6.html": {
+      "version": "1.3"
+    },
+    "QB6_C.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-07-18: Q3 — answer was mismatched to the question (previous answer described a disc-stack overhaul instead); replaced with the correct purifier manual desludging procedure. Candidate-sourced correction submitted by Nixon."
+      ]
+    },
+    "QB6_D.html": {
+      "version": "1.0"
+    },
+    "QB6_E.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-07-18: Q2 — GFI/FuelEU Maritime GHG-intensity conflation fixed. GFI (Greenhouse Gas Fuel Intensity, IMO Net-Zero Framework) uses 93.3 gCO2eq/MJ 2008 baseline (MEPC 83 / new MARPOL Annex VI Chapter 5); FuelEU Maritime's GHG Intensity metric uses 91.16 gCO2eq/MJ 2020 baseline (EU Regulation 2023/1805). Both tracks now correctly separated with right baselines, reference years, and reduction schedules. Verified against IMO MEPC 83 official summaries and Global Maritime Forum guidance."
+      ]
+    },
+    "QB6_F.html": {
+      "version": "1.1"
+    },
+    "QB6_G.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-07-17: Added new Q3 covering latest main engine tech developments excluding fuel-type/GHG changes, including WinGD (aSTC, WiDE, derating) and MAN/Everllence PrimeServ (turbocharger swap, ME-conversion, PrimeServ Assist) OEM retrofit options. Explicit trap-point callout excludes dual-fuel/iCER-VCR methane-slip topics (belongs to GHG track)."
+      ]
+    },
+    "QB6_H.html": {
+      "version": "1.0"
+    },
+    "QB7_A.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-07-18: Q3 — same GFI/FuelEU Maritime conflation corrected as QB6_E Q2 (93.3 gCO2eq/MJ 2008 baseline for IMO GFI vs 91.16 gCO2eq/MJ 2020 baseline for FuelEU Maritime). QB7_A_CheatSheet received the same fix but is not tracked in this manifest."
+      ]
+    },
+    "QB7_B.html": {
+      "version": "1.0"
+    },
+    "QB7_C.html": {
+      "version": "1.0"
+    },
+    "QB7_D.html": {
+      "version": "1.0"
+    },
+    "QB7_E.html": {
+      "version": "1.2",
+      "corrections_applied": [
+        "2026-07-17: Q1 corrected — removed false claim that Fuel Lifecycle Label (FLL)/well-to-wake (WTW) data 'directly feeds' or is 'required to calculate' CII. CII (MARPOL Annex VI Reg 28, MEPC.354(78)) is tank-to-wake-only using fixed Cf factors on IMO DCS fuel consumption; FLL/WTW feeds FuelEU Maritime and the IMO Net-Zero Framework GFI rating — separate regulatory tracks. Fixed across 15s answer, 60s answer, Practical Application, CE Oral Tip, Reg-Box. Flagged via candidate feedback."
+      ]
+    },
+    "QB7_F.html": {
+      "version": "1.0"
+    },
+    "QB7_G.html": {
+      "version": "1.0"
+    },
+    "QB7_H.html": {
+      "version": "1.1"
+    },
+    "QB7_I.html": {
+      "version": "1.1"
+    },
+    "QB8_A.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-07-30: Certificate/Form E labeling precision correction (Nixon-flagged, SEQ Q15 review, part of the same conflation fix as QB3_A). See known_traps.md Entry 17."
+      ]
+    },
+    "QB8_B.html": {
+      "version": "1.0",
+      "corrections_applied": [
+        "2026-07-30: MSC.520(106) portable water monitor/mist lance record-location correction — routed to the Fire Control Plan/PMS rather than Form E (Nixon-flagged, SEQ Q15 review, part of the same conflation fix as QB3_A). See known_traps.md Entry 17."
+      ]
+    },
+    "QB8_C.html": {
+      "version": "1.0"
+    },
+    "QB8_D.html": {
+      "version": "1.0"
+    },
+    "QB8_E.html": {
+      "version": "1.0"
+    },
+    "QB8_F.html": {
+      "version": "1.0"
+    },
+    "QB8_G.html": {
+      "version": "1.0"
+    },
+    "QB8_H.html": {
+      "version": "1.0"
+    },
+    "QB9_A.html": {
+      "version": "1.2",
+      "corrections_applied": [
+        "Q3 (Fund/HNS/LLMC): 203m SDR base figure was correct but missing the 300.74m SDR step-up tier (top-3 contributing States >=600 million tonnes/yr); added to Key Numbers list."
+      ]
+    },
+    "QB9_B.html": {
+      "version": "1.0"
+    },
+    "QB9_C.html": {
+      "version": "1.1",
+      "corrections_applied": [
+        "2026-07-18: Q3, Q6 — International Group of P&I Clubs member count corrected 13->12, reflecting the North of England P&I / Standard Club merger into NorthStandard (effective 20 Feb 2023)."
+      ]
+    },
+    "QB9_D.html": {
+      "version": "1.2",
+      "corrections_applied": [
+        "2026-07-18: Q1, Q2 — International Group of P&I Clubs member count corrected 13->12 (NorthStandard merger); also fixed a duplicate-entry bug in the club roster list. QB9_D_CheatSheet received the same fix but is not tracked in this manifest."
+      ]
+    },
+    "QB9_E.html": {
+      "version": "1.2"
+    },
+    "QB9_F.html": {
+      "version": "1.2"
+    },
+    "QB9_G.html": {
+      "version": "1.1"
+    },
+    "QB9_H.html": {
+      "version": "1.0"
+    }
+  },
+  "recently_updated": [
+    {
+      "date": "2026-08-19",
+      "note": "Eight new oral questions added, each answering an examiner ask that no existing card owned. QB1_C Q8 - verifying the welding after a side shell plate renewal: qualified welder and approved procedure first, then visual inspection, non-destructive testing and a tightness test, with the vacuum box parameters. QB2_E Q2 - why the liferaft stowed right forward differs from the others and may legitimately carry no hydrostatic release unit. QB6_D Q4 - how NOx is formed and how compliance is demonstrated on board when no analyser is fitted, through the Engine Parameter Check method. QB3_B Q20 - the SOLAS II-1/29 steering gear capability requirements for the main and auxiliary gear, scoped deliberately to capability and redundancy because the pre-departure test and the emergency steering drill are already covered in QB1_K Q9 and QB4_C Q9, which the new card cross-links. QB10_B Q9 - the current regulatory position on autonomous ships, the four degrees of autonomy and the status of the MASS Code. QB3_F Q7 - ordering bunkers for quantity and quality, handling a bunker dispute, and the sample set with its retention periods, cross-linked to QB4_I Q2. QB4_G Q10 - informing the authorities after a rescue at sea, the COSPAS-SARSAT alerting chain and INDSAR. QB9_B Q8 - a medical evacuation requiring diversion: the actions taken, the hospital arrangements ashore and who bears the cost. Regulatory references in all eight were checked against current primary sources.",
+      "files": [
+        "QB1_C.html",
+        "QB2_E.html",
+        "QB6_D.html",
+        "QB3_B.html",
+        "QB10_B.html",
+        "QB3_F.html",
+        "QB4_G.html",
+        "QB9_B.html"
+      ]
+    },
+    {
+      "date": "2026-08-19",
+      "note": "Page-header version badges removed from the five files that carried one (QB1_I, QB2_H, QB3_H, QB4_I, QB7_H). Each read v1.0 while the file's own questions had already moved past that — to v1.2, v1.1, v1.2, v1.3 and v1.1 respectively — because the header badge was fixed at build time and never bumped by a correction. The per-question version footer, which names what changed and when, is now the only version marker on a page. Header badges read 'QB3_H · Backlog', matching the majority of the series.",
+      "files": [
+        "meoclass1/QB1_I.html",
+        "meoclass1/QB2_H.html",
+        "meoclass1/QB3_H.html",
+        "meoclass1/QB4_I.html",
+        "meoclass1/QB7_H.html"
+      ]
+    },
+    {
+      "date": "2026-08-19",
+      "note": "PSSA citation-currency and count pass, following the QB3_H Q1 rewrite. Resolution A.982(24) is now cited in its amended form — as amended by resolution MEPC.267(68) (2015) — everywhere it appears as the governing PSSA instrument: QB1_B (3 citations, plus a vague 'as amended' now naming the amending resolution), QB3_E (4), QB3_F (7) and QB1_B_CheatSheet (3). Separately, the number of designated PSSAs was stated as 17, which is stale: the most recent designation is Nusa Penida / Gili Matra in the Lombok Strait (resolution MEPC.396(82), October 2024), bringing the total to around 19. Published counts vary between 18 and 19 depending on whether Great Barrier Reef and Torres Strait are counted as one PSSA or two, so the figure is now given as approximate with a direction to verify the live list on imo.org rather than as a hard number — corrected in QB1_B (2 places) and QB1_B_CheatSheet (1). QB3_E's citation of MEPC.1/Circ.778/Rev.5 was checked and is current (9 May 2025). A retrieval card contrasting MPA, PSSA and MARPOL Special Area was added to the QB3_H cheat sheet.",
+      "files": [
+        "meoclass1/QB1_B.html",
+        "meoclass1/QB3_E.html",
+        "meoclass1/QB3_F.html",
+        "meoclass1/QB1_B_CheatSheet.html",
+        "meoclass1/QB3_H.html"
+      ]
+    },
+    {
+      "date": "2026-08-19",
+      "note": "QB3_H Q1 rewritten. The question asks for \"a PSA and a PSSA\"; the answer previously treated \"PSA\" as meaningless and covered only the PSSA half. It now answers both, identifying the intended counterpart as the MPA (Marine Protected Area). MPA legal basis stated correctly: UNCLOS neither defines nor mentions MPAs — Art. 194(5) is only the general obligation to protect rare or fragile ecosystems; CBD Art. 2 and Art. 8(a) supply the working definition; BBNJ Agreement Art. 1(9) gives the first treaty definition of an MPA and the mechanism for high-seas MPAs, in force 17 January 2026. PSSA is corrected away from a MARPOL framing: it is IMO Assembly resolution A.982(24) as amended by resolution MEPC.267(68), with submission guidance MEPC.1/Circ.510, and its legal force comes only from the attached Associated Protective Measure. A three-way distinction between MPA, PSSA and MARPOL Special Area is added, with Papahānaumokuākea as the example of an area that is both an MPA and a PSSA. Tag 'unclos' added.",
+      "files": [
+        "meoclass1/QB3_H.html"
+      ]
+    },
+    {
+      "date": "2026-08-18",
+      "note": "New question QB1_K Q8 on the IACS Common Structural Rules (CSR). Scope now stated with the construction-contract applicability: the original CSR for bulk carriers (90 m and above) and double-hull oil tankers (150 m and above) apply to ships contracted for construction on or after 1 April 2006; the harmonised CSR BC & OT (in force 1 July 2015) apply to contracts dated on or after 1 July 2015; IACS PR No. 29 defines 'contracted for construction'. Clarified that CSR scope is not the same as SOLAS II-1 Reg. 3-10 (GBS) scope: GBS applies at 150 m and above for both ship types (Res. MSC.290(87), in force 1 Jan 2012; contract 1 Jul 2016 / keel 1 Jul 2017 / delivery 1 Jul 2020) and excludes ore carriers and combination carriers, so a 120 m bulk carrier can be a CSR ship but not a Reg. 3-10 ship. Corrected the 'why is CSR mandatory' explanation away from both 'IACS made it mandatory' and 'SOLAS makes CSR mandatory' to the four-step chain (class rules; flag/RO statutory and commercial framework; Reg. 3-10 requires conforming RO/Administration structural rules; IACS CSR verified through the IMO GBS process, MSC 96 confirming the 12 IACS Members' rules conform). IACS's statement that CSR are the only rules complying with GBS is retained but attributed to IACS, not presented as a SOLAS requirement. Added the five-tier GBS framework (MSC.287(87) / MSC.1/Circ.1394/Rev.2) and a Ship Construction File section from MSC.1/Circ.1343 (four content groups, on-board vs shore archive, update-on-major-event rule). Time-sensitive 'CSR review underway' material kept in a separate 'Current status - not exam-essential' deep-dive. Cheat sheet updated with a Q8 flip card, two confusable-pair boxes (CSR vs GBS scope; Common Structural Rules vs Continuous Synopsis Record vs CSM) and a rapid-recall row.",
+      "files": [
+        "QB1_K.html",
+        "QB1_K_CheatSheet.html"
+      ]
+    },
+    {
+      "date": "2026-08-13",
+      "note": "Follow-up to the QB5_C_B Q5 correction: audited every 'DG Shipping' mention across the question bank, oral notes and rules pages. Historical and dated content (point-in-time exam-paper material and named circulars/orders) was left as written; stale present-tense references were updated to 'DGMA', including 16 further QB4_H items missed in the first pass. Hyperlinks to the retired dgshipping.gov.in domain (shut down 31 March 2026) were repointed to dgma.gov.in; four deep-linked document URLs in simon-notes-p3.html were left unchanged because no verified replacement path exists and are flagged as broken links. Two points remain under review: one file's differing expansion of 'DGMA', and the exact date on which the DGS-to-DGMA rename (as distinct from the MS Act 2025's broader commencement) took effect.",
+      "files": [
+        "meoclass1/ question-bank pages and cheat sheets",
+        "meoclass1/oralnotes/",
+        "meoclass1/rulesapp/"
+      ]
+    },
+    {
+      "date": "2026-08-13",
+      "note": "QB5_C_B Q5 (Q15, war-zone casualty investigation with Indian crew fatalities): the Casualty Link's True Confidence (2024) reference did not match the question's 'Indian crew' premise. True Confidence's three fatalities were two Filipino and one Vietnamese national; the vessel's sole Indian crew member (of 20) survived. An explicit clarification was added so the case is not misattributed. Also updated 'DG Shipping' to 'DGMA' (2 instances) and the Numbers/Regs citation from 'Merchant Shipping Act (India), Section 358' (repealed 1958 Act) to 'Merchant Shipping Act, 2025 (India)', with a caveat that the exact renumbered section was not independently verified. Q5 v1.1 to v1.2.",
+      "files": [
+        "QB5_C_B.html"
+      ]
+    },
+    {
+      "date": "2026-08-08",
+      "note": "QB1_A: the LLMC 2012 Amendments were misattributed to Resolution LEG.3(91), which is actually the 'Guidelines on fair treatment of seafarers in the event of a maritime accident' (adopted 27 Apr 2006, unrelated to LLMC). Corrected to Resolution LEG.5(99) (2012 Amendments to the Protocol of 1996 to amend LLMC 1976, in force 8 June 2015): four instances in the Q3 LLMC card (intro paragraph, limits subheading, Indian-context paragraph, reg-box) and one cross-reference in the Q5 CLC card. Q3 v1.1 to v1.2, Q5 v1.1 to v1.2.",
+      "files": [
+        "QB1_A.html"
+      ]
+    },
+    {
+      "date": "2026-08-07",
+      "note": "QB3_A cheat sheet, GZ-curve diagram, second pass: after the first pass fixed the angle-of-loll marker, the negative-GM curve's shape was still wrong - the negative-stability span (0 deg to the angle of loll) was drawn wider than the positive-stability span (loll to the angle of vanishing stability), backwards from reality. Rebuilt on the textbook worked example (Ship Stability for Masters and Mates, Fig 17.5: loll 18 deg, range of stability 18-90 deg, AVS 90 deg). The negative-GM curve is now split red (0-18 deg, GZ negative, capsizing) / green (18-90 deg, GZ positive, restoring toward the loll angle, not upright). The 'Zero GM / Tender' curve was relabelled 'Zero GM - Neutral Equilibrium' with a note that a 'tender' ship has a small positive GM (Ch. 40), not zero GM (Fig 6.4) - distinct concepts that had been conflated. The 'Positive GM - Stable' comparison curve was removed; the section is retitled 'Zero GM vs Negative GM' and a range-of-stability bracket added. v1.1 to v1.2.",
+      "files": [
+        "QB3_A_CheatSheet.html"
+      ]
+    },
+    {
+      "date": "2026-08-07",
+      "note": "QB3_A cheat sheet, GZ-curve diagram, first pass: in the 'GZ Curve & Angle of Loll - The Three GM States' diagram, the angle-of-loll marker and label were plotted at the negative-GM curve's trough (most negative GZ) instead of at the point where the curve crosses GZ = 0. Marker and drop-line moved to the actual zero-crossing point. v1.0 to v1.1. Superseded the same day by the second pass above.",
+      "files": [
+        "QB3_A_CheatSheet.html"
+      ]
+    },
+    {
+      "date": "2026-08-05",
+      "note": "Places-of-refuge citation: IMO Resolution A.949(23) (2003) was superseded by A.1184(33), adopted 6 Dec 2023, which revokes and updates the 2003 guidelines. Corrected in QB9_F Q2 (2 instances), simon-notes-p5 (1 instance) and miw-notes-mgmt-p12 Topic 4 (4 instances, including a verify-note that had wrongly asserted A.949(23) was current); versions bumped. A.950(23) (Maritime Assistance Services, a separate resolution) left unchanged.",
+      "files": [
+        "QB9_F.html",
+        "oralnotes/simon-notes-p5.html",
+        "oralnotes/miw-notes-mgmt-p12.html"
+      ]
+    },
+    {
+      "date": "2026-08-04",
+      "note": "HSSC Survey Guidelines citation: the stale A.1140(31) (2019) reference was updated to the current A.1207(34) (2025) - 9 instances across QB4_F, QB4_H, QB1_I and miw-notes-mgmt-p3, matching the correction already applied to QB2_I and QB3_J. Note the sibling-resolution confusion this fixes: the HSSC Survey Guidelines and the PSC Procedures are different resolution chains.",
+      "files": [
+        "QB4_F.html",
+        "QB4_H.html",
+        "QB1_I.html",
+        "oralnotes/miw-notes-mgmt-p3.html"
+      ]
+    },
+    {
+      "date": "2026-08-04",
+      "note": "July 2026 additions: 8 new question groups (54 questions) - QB1_K, QB2_I, QB3_J, QB4_J, QB5_J, QB6_H, QB8_H, QB9_H - de-duplicated against the existing 629-question bank and verified against primary sources. Cheat sheets: separate files for the five groups with more than six questions, inline for QB3_J, QB5_J and QB6_H. Corrections applied during review: HSSC Survey Guidelines citation updated from the superseded A.1140(31) to the current A.1207(34) in QB2_I Q5 and QB3_J Q3; QB2_I page title corrected. Standalone cheat sheets now carry the site header/footer and a link back to the /meoclass1/ index; the correction-report box on these pages is now a form with a per-card reference instead of an email link.",
+      "files": [
+        "QB1_K.html",
+        "QB2_I.html",
+        "QB3_J.html",
+        "QB4_J.html",
+        "QB5_J.html",
+        "QB6_H.html",
+        "QB8_H.html",
+        "QB9_H.html",
+        "QB1_K_CheatSheet.html",
+        "QB2_I_CheatSheet.html",
+        "QB4_J_CheatSheet.html",
+        "QB8_H_CheatSheet.html",
+        "QB9_H_CheatSheet.html"
+      ]
+    },
+    {
+      "date": "2026-08-03",
+      "note": "Merchant Shipping Act 2025 re-basing, residual corrections: 24 corrections in 15 files. Headline: the QB9_F cabotage card had s.411A inverted - it claimed the section was saved, whereas Act s.324 excludes it from the Part XIV saving (repealed, with the substance re-enacted as s.323). QB9_D glossary re-based; RO-authorisation citations re-based to the 2025 Act with s.324(2)(a) savings continuity (QB1_A, QB2_A, QB3_A, QB3_B, QB3_I, QB4_A); QB1_I reg-box rows; QB5_B ORB liability; cheat-sheet labels; oral-notes historical markers. Some exact 2025 section numbers (RO delegation, CoC, takeover, registration, and the 1958 s.159 equivalent) remain under review pending authoritative evidence and are marked as such in the answers.",
+      "files": [
+        "QB9_D.html",
+        "QB9_F.html",
+        "QB9_G.html",
+        "QB1_A.html",
+        "QB1_I.html",
+        "QB2_A.html",
+        "QB3_A.html",
+        "QB3_B.html",
+        "QB3_I.html",
+        "QB4_A.html",
+        "QB5_A_CheatSheet.html",
+        "QB5_B.html",
+        "QB5_B_CheatSheet.html",
+        "oralnotes/simon-notes-p6.html",
+        "oralnotes/uday-index-crossref.html"
+      ]
+    },
+    {
+      "date": "2026-08-02",
+      "note": "Admiralty Act 2017 Section 9 maritime-lien priority order (verified against the Act text): the inter se order is (1) wages and sums due to master, officers and crew, (2) loss of life or personal injury, (3) salvage reward, (4) port, canal, waterway and pilotage dues, (5) tort damage. Affected content had wages and salvage swapped (salvage listed first, wages described as 'second-highest'), contradicting the MLM Convention 1993 Article 4 order (wages first) already stated correctly elsewhere in the same files. Fixed QB1_A Q7 (CE Oral Tip, Numbers to Memorise, mental map) and Q8 (ordered priority list, CE Oral Tip, Numbers to Memorise, mental map) - v1.1 to v1.2 and v1.4 to v1.5 - and WA3-LIEN1 (same list; also removed an incorrect claim that Indian law diverges from Article 4 by ranking salvage first, which it does not, and now explains Article 5(2)'s salvage queue-jump rule instead; v1.0 to v1.1). Other pages that mention the Act without asserting a specific order (QB9_A/D/F/G, miw-notes-mgmt-p15, simon-notes-p7) needed no change.",
+      "files": [
+        "QB1_A.html",
+        "WA3-LIEN1.html"
+      ]
+    },
+    {
+      "date": "2026-08-01",
+      "note": "QB4_H Q2 (Strait of Hormuz transit) expanded on five follow-up points: citadel vs safe-muster-point rationale, hardening necessity, authorities to inform, AIS/coastal-state framing, and coastal-state re-routing. The AIS framing was confirmed correct (reinforced with an explicit 'not coastal-state-mandated' note). A content gap on routing was filled: since April 2026 Iran has redrawn the Strait of Hormuz TSS and directs vessels to IRGC-designated corridors only ('Tehran Toll Booth' near Qeshm/Larak); Oman's separate IMO-coordinated alternate route was rejected by Iran and a vessel was reportedly struck shortly after using it; IMO's March 2026 position is that transit passage under UNCLOS Part III cannot be unilaterally redirected by a coastal state, which Iran (not an UNCLOS party) disputes. Added a 'Route Selection & the Coastal-State Routing Dispute' subsection, a routing-dispute live-update item (replacing outdated framing), a UNCLOS Part III reg-box entry, the hardening purpose split (anti-boarding vs anti-blast/kinetic: ISPS Level 3, sandbagging, ballistic PPE per the May 2026 Industry Guidance), a new trap question, and updated failures/numbers/casualty/vessel items and source-confidence note. v1.2 to v1.3.",
+      "files": [
+        "QB4_H.html"
+      ]
+    },
+    {
+      "date": "2026-08-01",
+      "note": "BMP5 weapon-of-war coverage: the suggestion that BMP5 addresses piracy only (Gulf of Aden/Red Sea/Arabian Sea/West Africa) and not state-actor missile/torpedo/warhead threats is inaccurate. BMP5 Section 5 already requires a safe muster point above the waterline, chosen with the likely blast path in mind, for hull-breach threats (missile/WBIED/mine) - a provision distinct from and complementary to the citadel (boarding/hijack response) - and this is carried forward into BMP-MS (2025). QB4_H Q2's hardening section covered the citadel only; the safe-muster-point vs citadel distinction was added to the answer body, reg-box, CE Oral Tip trap line, deep-dive trap/failure/casualty items and source-confidence note (v1.1 to v1.2). QB4_H cheat sheet rows 2 and 11 updated.",
+      "files": [
+        "QB4_H.html",
+        "QB4_H_cheatsheet.html"
+      ]
+    },
+    {
+      "date": "2026-07-30",
+      "note": "Form E / fire-fighting equipment conflation: Form E (Record of Equipment supplement to the Cargo Ship Safety Equipment Certificate) has three SOLAS Appendix sections - LSA, Equivalent Arrangements, Navigational Systems/Equipment - with no fire-fighting section. Corrected QB3_A Q15 (full answer, cheat sheet, reg-box, CE Oral Tip and the full deep dive: trap Q&A, CE Relevance, Common CE Failures, Numbers to Memorise, Casualty Link, Examiner Chain, On My Vessel; v1.0 to v1.1), the QB3_A cheat sheet (diagram label and Quick-Fire 15s index), QB8_B (MSC.520(106) portable water monitor/mist lance record location) and QB8_A (certificate/Form E labelling). All four now route FFA compliance to the certificate's own attestation and the ship's Fire Control Plan/PMS rather than to Form E.",
+      "files": [
+        "QB3_A.html",
+        "QB3_A_CheatSheet.html",
+        "QB8_A.html",
+        "QB8_B.html"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "note": "Cheat-sheet consistency pass over the pages corrected earlier the same day, since quick-reference material can silently drift from a corrected main answer. Fixed: (1) QB1_H embedded cheat sheet - the brake rendering test row still gave the generic pre-correction formula; now states 60% SDMBL (mooring winch, OCIMF MEG4) vs 80%/45% chain MBS (windlass, IACS UR A3) in both the cue card and the recall table. (2) QB1_D embedded cheat sheet table and flow diagram still showed the flat '1.25 x SWL' proof-load figure; now the MSC.1/Circ.1663 Table 1 basis, plus a new DGMA MS Notice 02/2026 quick-recall row. (3) QB1_E embedded cheat sheet still cited the stale HSSC guideline A.1156(32); now A.1207(34), matching the main Q1 answer. (4) QB4_A cheat sheet PSC trap row 'DGS India' corrected to 'MMD offices under DGMA' (v1.1 to v1.2). (5) QB4_H cheat sheet WHO-certificate recall row enriched with the DGMA Maritime Health Branch / DGS Order 10/2018 reference from the main Q9 answer. QB3_I and QB4_I cheat sections were checked and found consistent.",
+      "files": [
+        "QB1_H.html",
+        "QB1_D.html",
+        "QB1_E.html",
+        "QB4_A_CheatSheet.html",
+        "QB4_H_cheatsheet.html"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "note": "Indian MMD examiner-readiness pass: added or corrected DGMA (formerly DG Shipping) / IRS / MMD regulatory scope across 28 question cards, so that answers carry the Indian flag-state execution layer and not only generic IMO/SOLAS text. QB4_A (Q3, Q4, Q5, Q7, Q9, Q10, Q16, Q18): stale 'DGS India' naming corrected to DGMA/MMD; the DGMA RO Authorization Agreement framework (MS Act 1958 s.7(3)/9(1-A)) added to the Condition of Class, statutory-certificate and ISM-audit answers; IOMOU founding-member detail and PSC Form B added to the PSC card; Q18 (STCW Manila/CE benchmark) gained the Indian CoC issuance pathway (Chief Examiner of Masters and Mates, MMD Kochi as an exam centre, INDoS number, e-Samudra portal, IMO STCW White List status, 5-year revalidation cycle). QB4_I Q1 (ISPS certificates): DGMA/Registrar of Shipping ISSC delegation detail. QB4_H Q9 (WHO-linked certificates): DGMA Maritime Health Branch as IHR 2005 Competent Authority, DGS Order 10/2018 (SSCC/SSCEC) and DGS Order 2/2017 (Medical Examiner approval). QB1_A Q22 (flag/port/coastal-state duties): stale citation IMO Res. A.1138(31) corrected to the current A.1206(34), plus India's role in each capacity (DGMA as flag state, MMD/IOMOU as port state, Territorial Waters Act 1976 as coastal-state legislation). QB2_A Q15 (ICOF): DGS-to-DGMA naming and RO Authorization Agreement detail (the RO issues on DGMA's behalf, not on its own class authority). QB3_A (Q4, Q6, Q7, Q9, Q11, Q13, Q17), QB3_B (Q1 supplemented, Q2, Q3, Q4, Q5, Q8, Q9, Q11) and QB3_I Q1: the DGMA RO Authorization Agreement added as the consistent legal mechanism behind class-notation, ESP, hull survey, steel renewal, ballast-tank inspection, drydock and AFS certificate questions on Indian-flag ships; QB3_A Q7's stale HSSC citation A.997(25) corrected to A.1207(34). QB4_E Q8 (PSC appeal) reviewed and found already complete.",
+      "files": [
+        "QB4_A.html",
+        "QB4_I.html",
+        "QB4_H.html",
+        "QB1_A.html",
+        "QB2_A.html",
+        "QB3_A.html",
+        "QB3_B.html",
+        "QB3_I.html"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "note": "Checklist-verification pass on five statutory-survey questions, cross-checked against official DGMA/MMD/IACS/IMO checklists. (1) QB1_H Q4 (windlass/mooring-winch brake rendering test): the answer conflated two distinct standards - mooring-winch brakes render at 60% of Ship Design MBL (SDMBL) per OCIMF MEG4, while windlass anchor brakes are sized to 80%/45% of chain MBS per IACS UR A3; now stated separately with sources, plus retest triggers (lining renewal, vessel takeover, annual interval, drydock relining). (2) QB1_D Q2 and Q3 (lifting-appliance amendments/survey): added DGMA Merchant Shipping Notice No. 02 of 2026 (Indian flag implementation of SOLAS II-1/3-13) and the mandatory rigging plan/block list requirement; the proof-load test corrected from a flat '1.25 x SWL' to the actual basis (MSC.1/Circ.1663 Table 1, para 3.2.1.5). (3) QB1_F Q8, QB3_A Q5 and QB3_B Q1 (hull survey / drydock planning): added the mandatory annual close-up survey extension for bulk carriers and oil tankers (25% of cargo-hold side-shell frames, forward hold plus one other selected hold), previously missing from all three. QB1_F Q8's deep dive also had duplicated text across its trap/failure/numbers/casualty blocks, cleaned up in the same pass. Reg-boxes now carry direct source links rather than bare citations. v1.0 to v1.1 on all six cards.",
+      "files": [
+        "QB1_H.html",
+        "QB1_D.html",
+        "QB1_F.html",
+        "QB3_A.html",
+        "QB3_B.html"
+      ]
+    },
+    {
+      "date": "2026-07-29",
+      "note": "Formatting: 19 comparative tables across five pages were rendered as pipe-delimited text rows instead of real HTML tables, causing unpredictable wrapping and loss of column alignment on mobile. Converted to proper tables in QB2_A (6: container thicknesses, tanker types, tonnage fees, watertight vs weathertight boundaries, inclinometer types, bulk-cargo failure modes), QB1_B (1), QB1_F (7), QB1_G (10) and QB3_H (1, NLS cargo categorisation). No content or regulatory change - question text and answers unchanged; table styling added to QB1_F and QB1_G, which had none.",
+      "files": [
+        "QB2_A.html",
+        "QB1_B.html",
+        "QB1_F.html",
+        "QB1_G.html",
+        "QB3_H.html"
+      ]
+    },
+    {
+      "date": "2026-07-18",
+      "note": "Second correction pass the same day: (1) QB6_C Q3 - the answer did not match the question; replaced with the correct purifier manual desludging procedure (the previous text described a disc-stack overhaul). (2) GFI/FuelEU conflation fixed across QB6_E Q2, QB7_A Q3 and the QB7_A cheat sheet: GFI (Greenhouse Gas Fuel Intensity) is the IMO's own Net-Zero Framework metric (93.3 gCO2eq/MJ, 2008 baseline, MEPC 83 / new MARPOL Annex VI Chapter 5) and is a separate regulatory track from FuelEU Maritime's Greenhouse Gas Intensity metric (91.16 gCO2eq/MJ, 2020 baseline, EU Regulation 2023/1805). Earlier text applied the 'GFI' label and/or the IMO 93.3 baseline to FuelEU Maritime, or vice versa; both tracks now carry the correct baselines, reference years and reduction schedules, verified against IMO MEPC 83 summaries and Global Maritime Forum guidance.",
+      "files": [
+        "QB6_C.html",
+        "QB6_E.html",
+        "QB7_A.html",
+        "QB7_A_CheatSheet.html"
+      ]
+    },
+    {
+      "date": "2026-07-18",
+      "note": "(1) International Group of P&I Clubs member count corrected 13 to 12, reflecting the North of England / Standard Club merger into NorthStandard (effective 20 Feb 2023) - QB1_A (Q1, Q29), QB9_C (Q3, Q6), QB9_D (Q1, Q2, plus a duplicated club in the roster list) and the QB9_D cheat sheet. (2) IG reinsurance programme figures updated for the 2026/27 policy year: market GXL layer USD 2.35bn, Collective Overspill a further USD 1bn, total USD 3.35bn (previously stated as USD 3.1bn) - same pages. (3) Continuous Synopsis Record (CSR) SOLAS citation: QB1_B Q5 cited Chapter XI-2 (the security chapter) instead of the correct Chapter XI-1, Regulation 5 (Special Measures to Enhance Maritime Safety); QB4_I Q1 cited 'SOLAS Ch I' instead of Chapter XI-1, Reg 5. Both fixed, with dated version notes.",
+      "files": [
+        "QB1_A.html",
+        "QB1_B.html",
+        "QB4_I.html",
+        "QB9_C.html",
+        "QB9_D.html",
+        "QB9_D_CheatSheet.html"
+      ]
+    },
+    {
+      "date": "2026-07-17",
+      "note": "QB6_G new Q3 (engine-technology retrofit options); QB7_E Q1 CII/WTW causal-error fix; QB4_G Q8 IEEC/COR addition; QB3_C IMO Resolution A.1185(33) to A.1206(34) citation fix; QB2_E section-toggle bug and SOLAS III rescue-boat citation fix; QB2_G the same rescue-boat citation fix (III/14, LSA Code section 6.1.1.11).",
+      "files": [
+        "QB6_G.html",
+        "QB7_E.html",
+        "QB4_G.html",
+        "QB3_C.html",
+        "QB2_E.html",
+        "QB2_G.html"
+      ]
+    },
+    {
+      "date": "2026-07-16",
+      "note": "PSC appeal-chain correction. The Stage 3 review deadline had been stated across the bank as '120 days from the ship's release from detention' and presented as flowing from IMO Resolution A.1206(34) itself. The resolution grants only a general, one-line right of appeal (para 2.3.11) with no numeric deadline or staged mechanism; the 3-stage chain and day-count are regional MOU procedure. The 120-day figure (measured from release) is correct only for Paris MOU; IOMOU - the regime governing Indian ports - specifies 90 days from the date of detention (Detention Review Panel procedure, Section 3.13) with a 3-member review panel (Paris MOU: 4). Corrected QB4_A Q6 (deadline and panel size), QB4_E Q8 (deadline, panel size, resolution-vs-MOU attribution) and QB4_C Q11 (still citing the superseded A.1185(33) instead of A.1206(34); the action-taken code content was already correct). The three questions now cross-link (appeal chain, action codes, IOMOU/Paris MOU comparison). This supersedes the other 16 July entry, where QB4_A Q6 and QB4_E Q8 still carried the 120-day figure. Remaining mentions of A.1185(33) in these pages are intentional, explaining the superseded resolution for exam-trap awareness.",
+      "files": [
+        "QB4_A",
+        "QB4_C",
+        "QB4_E"
+      ]
+    },
+    {
+      "date": "2026-07-16",
+      "note": "(1) HNS Convention entry into force updated from 'not yet in force' to the confirmed 29 November 2027 (all conditions met 29 May 2026), with Tier 1/Tier 2 liability limits (100M/115M SDR shipowner; 250M SDR combined Fund cap) - QB1_A Q6 (and both mental-map diagrams), QB1_B Q1 and QB9_A Q3. (2) MEPC.398(83) NOx Technical Code amendment (certification of engines subject to substantial modification, in force 1 Sep 2026) added to QB1_supplementary Q7. (3) QB4_A Q13: PDSD (STCW A-VI/6-2) and STSDSS clarified as the same requirement, not separate certificates. (4) QB4_A Q6: PSC detention appeal expanded from a single step to the 3-stage chain - national appeal to the Port State, then Flag State/RO reconsideration request, then MoU Secretariat Review Panel (Flag State/RO request only; the 120-day window stated here was refined the same day, see the entry above). (5) QB4_E Q8: superseded IMO Resolution A.1185(33) corrected to the current A.1206(34) (Procedures for PSC, 2025, in force 1 Jan 2026), with the same 3-stage appeal chain. (6) QB9_F Q7: an incorrect 'Ship-to-Shore Data Security System' expansion of STSDSS replaced with the correct STCW A-VI/6-2 (PDSD) meaning - Security Training for Seafarers with Designated Security Duties. Each corrected question carries a dated version note.",
+      "files": [
+        "QB1_A",
+        "QB1_B",
+        "QB1_supplementary",
+        "QB4_A",
+        "QB4_E",
+        "QB9_A",
+        "QB9_F"
+      ]
+    },
+    {
+      "date": "2026-07-15",
+      "note": "QB4_D new Q4 - interdepartmental ISM audit substitution (Master/Chief Engineer cross-swap) during COVID force majeure. Verified against ISM Code sections 12.1/12.5 (exact wording quoted), the MSC.273(85) 15-month interval ceiling, MSC-MEPC.7/Circ.8 and flag-specific COVID interim policies (Vanuatu, RMI, Liberia, Bahamas). Distinguished from DG Shipping India's actual COVID response, which used the timeline-extension route (DGS Orders 06/2020, 13/2020) rather than interdepartmental substitution - a distinction not commonly known among Kochi candidates.",
+      "files": [
+        "QB4_D.html"
+      ]
+    },
+    {
+      "date": "2026-07-15",
+      "note": "MS Act 2025 correction pass: 30+ questions across 14 pages still cited the repealed Merchant Shipping Act, 1958 (or treated the 2025 Act as a draft bill). Key fixes: seafarer welfare (Part VII to Part V), CoC/STCW certification (old Part VI ss.78/79/87 to Part IV ss.45/46/48/53), cabotage/coasting trade (old ss.406/407 to the standalone Coastal Shipping Act 2025), vessel registration (old ss.21/24-46 to Part III ss.14-44), official log book (old Part VII to s.112, Part V), class-suspension penalties (old s.334 to Part VI ss.125/127), LLMC/CLC/Bunker/Nairobi domestic implementation (old Part XB/XIII to Part IX/XII), and DG Shipping renamed DGMA throughout. QB9_E Q2 and QB9_F Q6 fully rewritten (they previously described the Act as pending and cabotage as still under the MS Act).",
+      "files": [
+        "QB1_F.html",
+        "QB1_A.html",
+        "QB1_G.html",
+        "QB1_I.html",
+        "QB4_C.html",
+        "QB5_A.html",
+        "QB5_B.html",
+        "QB5_G.html",
+        "QB9_A.html",
+        "QB9_D.html",
+        "QB9_E.html",
+        "QB9_F.html",
+        "QB9_G.html",
+        "QB10_A.html"
+      ]
+    },
+    {
+      "date": "2026-07-14",
+      "note": "New page QB10_B (8 questions): SOLAS/MARPOL amendment cycle 2024-2028, STCW amendments, MLC 2006 amendments, ship-type-specific amendments (container/tanker/bulk), IMO Net-Zero Framework status, and DG Shipping/DGMA 2026 circulars. All resolution numbers verified against primary IMO/class sources across multiple review passes (corrected the MSC.532(107) inclinometer citation, the MSC.520(106) flashpoint citation, the MSC.549(108) ETA citation, and the DGMA naming transition).",
+      "files": [
+        "QB10_B"
+      ]
+    },
+    {
+      "date": "2026-07-13",
+      "note": "New page QB7_I (9 questions): latest onboard technology, alternative fuels and decarbonisation. Verified and corrected against current sources (VTT MOC study citation, FuelEU penalty escalation figures, MAN ME-GA discontinuation of November 2024, EGRBP January 2024 nuance).",
+      "files": [
+        "QB7_I"
+      ]
+    },
+    {
+      "date": "2026-07-13",
+      "note": "QB4_C re-verified: question texts (17), order, tags and the Q3/Q11 corrections (SOLAS XI regulation numbers, PSC action codes) all confirmed correct - no content change. The page's version indicator corrected to v1.1 to match the highest individual card version (Q3 and Q11 footers), since a page-level version should track its highest card.",
+      "files": [
+        "QB4_C"
+      ]
+    },
+    {
+      "date": "2026-07-13",
+      "note": "New pages: QB3_I - AFS Convention (scope, MEPC.331(76) cybutryne ban, paint-type comparison, hydrogel technology, biocide-free class-approved paints, TBT hazard/imposex, certificate validity). QB1_J - hull paint coating inspection and propeller securing/locking inspection, split from one combined question into two cards.",
+      "files": [
+        "QB3_I",
+        "QB1_J"
+      ]
+    },
+    {
+      "date": "2026-07-05",
+      "note": "20 new questions across QB1_H, QB3_G and QB4_H (with the QB4_H cheat sheet), from the 5 July 2026 batch, verified against IMO/IACS/DG Shipping sources. Corrections within the batch: the AECS course definition (QB4_H Q1/Q5) and the GBS scope limited to bulk carriers/tankers of 150 m and above (QB1_H Q5).",
+      "files": [
+        "QB1_H",
+        "QB3_G",
+        "QB4_H",
+        "QB4_H_CheatSheet"
+      ]
+    },
+    {
+      "date": "2026-07-06",
+      "note": "QB2_G, QB5_H, QB7_G and QB8_F published as live pages (previously listed as backlog). The QB4_H cheat sheet is now listed under QB4_H rather than as a separate question-bank entry.",
+      "files": [
+        "QB2_G",
+        "QB5_H",
+        "QB7_G",
+        "QB8_F"
+      ]
+    },
+    {
+      "date": "2026-07-11",
+      "note": "(1) The IOPC 1992 Fund compensation limit was stale at 135m SDR across the bank, missing the 300.74m SDR step-up tier (Article 4(4)(b) trigger: top three contributing States at 600 million tonnes/yr or more) - fixed in QB1_A Q2/Q5, QB1_B Q12 and QB9_A Q3. (2) SOLAS Ch. XI regulation numbers were wrong in QB4_C Q3 (SSAS is Reg 6, not Reg 3; an incorrect Ship Construction File entry under XI-1 removed - it belongs to SOLAS II-1). (3) PSC deficiency action codes were wrong across the bank: all six pages mentioning PSC/deficiency/detention were audited; QB4_A and QB1_B were already correct (QB4_A fixed 5 Jul 2026), QB4_C Q11 was rebuilt and QB4_E Q8 fixed against the current Paris MOU action-taken and deficiency-category code lists. QB2_F Q6 (lifeboat ventilation) fully rebuilt per IMO Res. MSC.535(107).",
+      "files": [
+        "QB1_A",
+        "QB1_B",
+        "QB2_F",
+        "QB4_C",
+        "QB4_E",
+        "QB9_A"
+      ]
+    },
+    {
+      "date": "2026-07-11",
+      "note": "New examiner cross-reference page bundling all 585 live question-bank questions by Kochi MMD examiner (Nair, Simon, Rajappan, Srivastava, Senthil, Paul), with the attribution confidence shown on each question. A public teaser at /SQ/ opens Paul Sir's full 10-question set free and previews 5 of Simon Sir's 212, with the rest locked.",
+      "files": [
+        "examiner-index.html",
+        "SQ/examiner-index.html"
+      ]
+    }
+  ]
 }
