@@ -32,7 +32,8 @@ def digest(p: Path) -> str:
 
 def write(payload) -> None:
     DATA.write_text(json.dumps(payload, indent=1, sort_keys=False,
-                               ensure_ascii=False) + "\n", encoding="utf-8")
+                               ensure_ascii=False) + "\n",
+                    encoding="utf-8", newline="\n")
 
 
 def run_validator():

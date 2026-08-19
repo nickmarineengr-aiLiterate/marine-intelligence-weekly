@@ -232,8 +232,11 @@ def main():
         "families": rows,
     }
 
+    # newline is pinned: platform translation would make "byte-identical"
+    # a Windows-only claim, and the committed blob is LF either way.
     OUT_JSON.write_text(json.dumps(payload, indent=1, sort_keys=False,
-                                   ensure_ascii=False) + "\n", encoding="utf-8")
+                                   ensure_ascii=False) + "\n",
+                        encoding="utf-8", newline="\n")
     write_md(payload)
     print("wrote %s (%d actions, %d families)"
           % (OUT_JSON.name, len(actions), len(rows)))
@@ -296,7 +299,7 @@ def write_md(p):
         L.append("- **%s** (%d): %s" % (k, len(p["batches"][k]),
                                         ", ".join(p["batches"][k])))
     L.append("")
-    OUT_MD.write_text("\n".join(L), encoding="utf-8")
+    OUT_MD.write_text("\n".join(L), encoding="utf-8", newline="\n")
 
 
 if __name__ == "__main__":
