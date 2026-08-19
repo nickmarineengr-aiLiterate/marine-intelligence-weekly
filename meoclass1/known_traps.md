@@ -425,6 +425,62 @@ correct usage. Manual verification-pass only: wherever CSR scope is asserted, ch
 ship type + length + contract date are all present, and that CSR scope has not been
 equated with SOLAS II-1/3-10 GBS scope.
 
+### 34. "PSA" left undefined, and PSSA mis-filed under MARPOL
+
+QB3_H.html Q1 ("What are a PSA and a PSSA? Give an example of each." — Simon)
+originally declared that "'PSA' is not a formal IMO term", told the candidate not
+to invent a definition, and then answered only the PSSA half. That is a half
+answer to a two-part question.
+
+**Correct position.** The intended counterpart is the **MPA — Marine Protected
+Area** (candidates also write MPA/MPSA). It is a real, answerable concept:
+
+- **UNCLOS neither defines nor mentions MPAs.** Art. 194(5) is only the general
+  obligation to protect rare or fragile ecosystems and the habitat of depleted,
+  threatened or endangered species. Do not say "MPA is defined under UNCLOS".
+- **CBD** Art. 2 (protected area definition) and Art. 8(a) (obligation to
+  establish them) supply the working definition.
+- **BBNJ Agreement Art. 1(9)** gives the first treaty definition of an MPA and
+  the route to high-seas MPAs. **In force 17 January 2026** (60th ratification
+  19 September 2025) — a current-affairs follow-up an examiner may reach for.
+- Designated by coastal States, regional bodies (CCAMLR, OSPAR), and now the
+  BBNJ COP. Regulates **all activities**, not just shipping.
+
+**Second error in the same answer.** The answer framed PSSA within a MARPOL
+context. **PSSA is not a MARPOL instrument.** It is an IMO Assembly resolution
+— **A.982(24), as amended by resolution MEPC.267(68)** (2015); submission
+guidance MEPC.1/Circ.510. The original answer cited A.982(24) without the
+amendment.
+
+**Three-way distinction to hold separate:** MPA (conservation, all activities,
+UNCLOS/CBD/BBNJ + national law) / PSSA (shipping impact, IMO, legal force comes
+only from the attached APM) / MARPOL Special Area (discharge and emission
+criteria, MARPOL Annexes I, II, IV, V, VI). They may overlap geographically
+without merging legal effects — Papahānaumokuākea is both an MPA and a PSSA.
+
+Flagged by a candidate via Nixon (WhatsApp screenshot, 19 August 2026). The
+candidate's own note needed two corrections in the reply: the expansion is
+"Marine Protected **Area**", not "Marine Protected Sea Area"; and PSSA is not
+MARPOL.
+
+Fixed in: QB3_H.html Q1 → v1.2 (both halves answered, three-way distinction
+added, citation completed, `unclos` tag added).
+
+**Open scope, not yet actioned:** `A.982(24)` is cited **without** the
+MEPC.267(68) amendment in QB1_B.html, QB3_E.html, QB3_F.html,
+QB1_B_CheatSheet.html, oralnotes/miw-notes-mgmt-p10.html and
+oralnotes/simon-notes-p1.html. Incomplete rather than wrong; the pastpapers /
+solvedQP files already carry the amended form. Separate cleanup pass.
+
+GREP: SKIP — the corrected text necessarily contains both "PSA" (inside "PSSA")
+and "MPA", and "A.982(24)" is a correct citation in ~10 files. Manual
+verification-pass only: wherever PSSA is defined, check (a) it is attributed to
+an IMO Assembly resolution and not to MARPOL, (b) A.982(24) carries "as amended
+by MEPC.267(68)", and (c) any "PSA" wording is resolved to MPA rather than
+refused.
+
+---
+
 ---
 
 ## Meta-corrections to `qb_health_check.py` itself (non-content fixes, logged here for continuity)
@@ -475,3 +531,4 @@ equated with SOLAS II-1/3-10 GBS scope.
 | 2026-08-13 | Entry 6 scope note: QB5_C_B Q5 (True Confidence 2024 casualty link, "3 Indian crew died" question) — corrected False casualty-nationality implication (True Confidence fatalities were 2 Filipino + 1 Vietnamese, not Indian), updated "DG Shipping"→"DGMA" (×2), updated MS Act 1958 Section 358 citation to MS Act 2025 (exact section not independently verified) → v1.2. Repo-wide "DG Shipping" bare-mention scope (~678 hits/68 files) flagged, not yet actioned. | Candidate correction request via Nixon (screenshot) |
 | 2026-08-13 | Entry 6 follow-up: full repo-wide DG Shipping→DGMA audit, 65 files touched, 191 references corrected (175 naming + 16 missed-in-first-pass QB4_H items), 12 dead dgshipping.gov.in links fixed to dgma.gov.in. Two open questions flagged (Affairs vs Administration naming; March vs June rename date) — see Entry 6 for detail. | Nixon-requested follow-up, same session |
 | 2026-08-18 | Entry 33: CSR scope quoted without contract date (ship type + length + contract date must be given together; harmonised CSR BC & OT 1 Jul 2015 vs original CSR-BC/CSR-OT 1 Apr 2006), and CSR applicability wrongly equated with SOLAS II-1/3-10 GBS applicability (GBS is 150 m+ both types, contract 1 Jul 2016 / keel 1 Jul 2017 / delivery 1 Jul 2020, ore and combination carriers excluded) | Candidate report via Nixon (Vivek, WhatsApp); verified against IACS/ClassNK rule text and IMO resolutions while building QB1_K Q8 |
+| 2026-08-19 | Entry 34: QB3_H Q1 — "PSA" resolved to MPA (Marine Protected Area) and the MPA half of the answer written; UNCLOS Art. 194(5) / CBD Art. 8(a) / BBNJ Art. 1(9), in force 17 Jan 2026, legal basis stated; PSSA corrected from a MARPOL framing to IMO Assembly res. A.982(24) as amended by MEPC.267(68); MPA vs PSSA vs MARPOL Special Area three-way distinction added → v1.2. Six further files cite A.982(24) without the amendment — logged, not actioned. | Candidate report via Nixon (WhatsApp screenshot) |
