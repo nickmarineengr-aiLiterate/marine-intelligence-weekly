@@ -23,6 +23,7 @@ touched.
   O  duplicate a correction record          -> corrections
   P  renderer reads e.summary again         -> renderer
   Q  generator drops corrections            -> corrections_preserved / governed
+  R  restore QB2_C q2 scaffolding text      -> leak / text  (repaired 2026-08-19)
 
   PYTHONIOENCODING=utf-8 python tools/oral/mutate_qb_content_index.py [--keep]
 Exit 0 only when every mutation is caught by its named check.
@@ -199,6 +200,17 @@ def mut_Q(work):
     save(work, m)
 
 
+def mut_R(work):
+    m, h = load(work)
+    new = "How would you, as Chief Engineer, approach a fire in a container carrying undeclared dangerous goods?"
+    old = "15-Second Answer (Elevator Pitch)**"
+    for q in qs(m, "QB2_C.html"):
+        if q["anchor"] == "q2":
+            q["text"] = old
+    h = h.replace(json.dumps(new, ensure_ascii=False), json.dumps(old, ensure_ascii=False))
+    save(work, m, h)
+
+
 MUTATIONS = [
     ("A drop real record", mut_A, {"count", "complete"}),
     ("B add revision card", mut_B, {"no_nonquestion", "no_extras"}),
@@ -217,6 +229,7 @@ MUTATIONS = [
     ("O duplicate correction", mut_O, {"corrections"}),
     ("P renderer reads e.summary", mut_P, {"renderer"}),
     ("Q generator drops corrections", mut_Q, {"corrections_preserved", "governed"}),
+    ("R restore QB2_C scaffolding text", mut_R, {"leak", "text"}),
 ]
 
 

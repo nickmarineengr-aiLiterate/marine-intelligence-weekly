@@ -83,7 +83,13 @@ LEAK = re.compile(
     r"|\bASC-\d"
     r"|\bP0\b"
     r"|Examiner context:"
-    r"|\bTODO\b|\bFIXME\b|\[\[|\]\]",
+    r"|\bTODO\b|\bFIXME\b|\[\[|\]\]"
+    # answer scaffolding / production notes that reached the q-text slot on
+    # QB2_C q1-q4 (repaired 2026-08-19); a q-text is a question, never a
+    # practice-block label, an editorial note, or a markdown heading
+    r"|\b\d+-Second Answer\b|Elevator Pitch|EDITORIAL CORRECTION"
+    r"|\bFull Answer\b|\bCE Tip\b|REG-BOX|Why this matters|On my vessel"
+    r"|\bP0-\d|\*\*",
 )
 
 Q_INDEX_RE = re.compile(r"^const Q_INDEX = (\[.*\]);$", re.M)
