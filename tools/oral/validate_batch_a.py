@@ -130,6 +130,16 @@ def main():
     manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
     cards = manifest["cards"]
 
+    # Batch-A destinations are shared with later batches, so "unauthorised"
+    # means "authorised by no batch manifest" - not "not in Batch A". Pinning
+    # this guard to Batch A alone made it fail on every authorised later card.
+    authorised_elsewhere = {}
+    for sib in sorted(MANIFEST.parent.glob("batch_*_manifest.json")):
+        if sib == MANIFEST:
+            continue
+        for c in json.loads(sib.read_text(encoding="utf-8")).get("cards", []):
+            authorised_elsewhere.setdefault(c["file"], set()).add(c["anchor"])
+
     by_file = {}
     for c in cards:
         by_file.setdefault(c["file"], []).append(c)
@@ -170,9 +180,10 @@ def main():
 
         # a ninth, unauthorised new card in a Batch-A destination
         expected_here = {c["anchor"] for c in wanted}
+        allowed_here = expected_here | authorised_elsewhere.get(fname, set())
         baseline_max = min(int(a[1:]) for a in expected_here)
         extra = [q for q in anchors
-                 if int(q[1:]) > baseline_max and q not in expected_here]
+                 if int(q[1:]) > baseline_max and q not in allowed_here]
         ninth += ["%s#%s" % (fname, q) for q in extra]
 
         for c in wanted:
@@ -206,8 +217,13 @@ def main():
     # -- derived index agrees with the live pages
     idx = json.loads(CONTENT_INDEX.read_text(encoding="utf-8"))
     total = idx.get("total_questions")
-    report("canonical_total", total == manifest["expected_canonical_questions"],
-           "content index %s vs expected %s" % (total, manifest["expected_canonical_questions"]))
+    # The corpus grows with each authorised batch, so an equality pin here
+    # expires the moment the next batch lands. What Batch A can legitimately
+    # assert is that its own contribution has never been lost.
+    report("canonical_total_not_regressed",
+           isinstance(total, int) and total >= manifest["expected_canonical_questions"],
+           "content index %s vs Batch-A milestone %s"
+           % (total, manifest["expected_canonical_questions"]))
     indexed = []
     for c in cards:
         entry = idx.get("files", {}).get(c["file"], {})
