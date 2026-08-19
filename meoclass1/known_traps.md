@@ -481,6 +481,50 @@ refused.
 
 ---
 
+### 35. PSSA count stated as a hard "17", and A.982(24) cited without its amendment
+
+Two currency defects found while fixing Entry 34, both repo-wide rather than
+confined to the flagged file.
+
+**(a) "There are currently 17 designated PSSAs globally."** Stale. The most
+recent designation is **Nusa Penida / Gili Matra, Lombok Strait**
+(**resolution MEPC.396(82)**, October 2024), preceded by the **North-Western
+Mediterranean** (**resolution MEPC.380(80)**, 2023). That puts the total at
+roughly **19**.
+
+Do not quote a hard number. Published counts genuinely disagree — 18 or 19
+depending on whether Great Barrier Reef and Torres Strait are counted as one
+PSSA or two — so an examiner who has a different figure in mind is not
+necessarily wrong. Correct oral form: "around nineteen, sir; the most recent is
+the Lombok Strait designation in October 2024." Then move on. The count is not
+the answerable part of a PSSA question; the three-element test and the APM are.
+
+Corrected in QB1_B.html (2 places) and QB1_B_CheatSheet.html (1 place), now
+phrased as approximate with a direction to verify the live list on imo.org.
+
+**(b) `A.982(24)` cited bare.** The Revised PSSA Guidelines were **amended by
+resolution MEPC.267(68)** in 2015. Citing the 2005 resolution number alone is
+incomplete, and IMO's own circulars always give the amended form. Completed in
+QB1_B.html (3), QB3_E.html (4), QB3_F.html (7), QB1_B_CheatSheet.html (3),
+oralnotes/miw-notes-mgmt-p10.html (3) and oralnotes/simon-notes-p1.html (2),
+plus the public teaser copy at SQ/simon-notes-p1.html (1). This closes the open
+scope logged in Entry 34.
+
+The p10 historical timeline was also split into separate 2005 (adoption) and
+2015 (amendment) rows and extended with the 2023 and 2024 designations, so the
+amendment no longer appears anachronistically on the 2005 row.
+
+**Checked and found correct, no change:** QB3_E cites
+**MEPC.1/Circ.778/Rev.5** for the Special Areas / ECA list — Rev.5 (9 May 2025)
+is the current revision.
+
+GREP: SKIP — "17" is far too generic to auto-scan, and "A.982(24)" is a correct
+citation wherever the amendment now follows it. Manual verification-pass only:
+any new PSSA content must give A.982(24) with the MEPC.267(68) amendment, and
+must not quote a hard PSSA count.
+
+---
+
 ---
 
 ## Meta-corrections to `qb_health_check.py` itself (non-content fixes, logged here for continuity)
@@ -532,3 +576,4 @@ refused.
 | 2026-08-13 | Entry 6 follow-up: full repo-wide DG Shipping→DGMA audit, 65 files touched, 191 references corrected (175 naming + 16 missed-in-first-pass QB4_H items), 12 dead dgshipping.gov.in links fixed to dgma.gov.in. Two open questions flagged (Affairs vs Administration naming; March vs June rename date) — see Entry 6 for detail. | Nixon-requested follow-up, same session |
 | 2026-08-18 | Entry 33: CSR scope quoted without contract date (ship type + length + contract date must be given together; harmonised CSR BC & OT 1 Jul 2015 vs original CSR-BC/CSR-OT 1 Apr 2006), and CSR applicability wrongly equated with SOLAS II-1/3-10 GBS applicability (GBS is 150 m+ both types, contract 1 Jul 2016 / keel 1 Jul 2017 / delivery 1 Jul 2020, ore and combination carriers excluded) | Candidate report via Nixon (Vivek, WhatsApp); verified against IACS/ClassNK rule text and IMO resolutions while building QB1_K Q8 |
 | 2026-08-19 | Entry 34: QB3_H Q1 — "PSA" resolved to MPA (Marine Protected Area) and the MPA half of the answer written; UNCLOS Art. 194(5) / CBD Art. 8(a) / BBNJ Art. 1(9), in force 17 Jan 2026, legal basis stated; PSSA corrected from a MARPOL framing to IMO Assembly res. A.982(24) as amended by MEPC.267(68); MPA vs PSSA vs MARPOL Special Area three-way distinction added → v1.2. Six further files cite A.982(24) without the amendment — logged, not actioned. | Candidate report via Nixon (WhatsApp screenshot) |
+| 2026-08-19 | Entry 35: PSSA count stated as a hard "17" — stale, now ~19 following the NW Mediterranean (MEPC.380(80), 2023) and Nusa Penida / Gili Matra Lombok Strait (MEPC.396(82), 2024) designations, and rephrased as approximate because published counts vary 18–19; A.982(24) completed with its MEPC.267(68) amendment across 7 files (23 citations), closing the open scope from Entry 34. MEPC.1/Circ.778/Rev.5 checked and current. | Found during the Entry 34 correction pass |
