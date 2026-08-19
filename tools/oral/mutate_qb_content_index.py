@@ -35,9 +35,17 @@ touched.
 
   PYTHONIOENCODING=utf-8 python tools/oral/mutate_qb_content_index.py [--keep]
 Exit 0 only when every mutation is caught by its named check.
+
+Mutation quality (2026-08-19 hardening): a mutation must actually change the
+scratch artefacts - one that leaves them byte-identical is reported as
+"NOT APPLIED" and counts as an escape, never as a validator catch. Hygiene
+mutations (S T U V W Y) additionally assert the CORRECTION_FORBIDDEN label
+that fired. Regression strings are pinned in this file; nothing is fetched
+from git history. Live artefacts are hashed before and after the run.
 """
 from __future__ import annotations
 
+import hashlib
 import io
 import json
 import re
@@ -225,22 +233,33 @@ def _note(work, idx, text):
     save(work, m)
 
 
-def mut_S(work):                                     # reintroduce "via Nixon"
+def _append_note(work, idx, suffix):
+    """Append a pinned regression fragment to row `idx`. Rows are addressed by
+    position only for variety; the fragment never depends on the row's current
+    wording, so a governed-log prepend (which shifted every index by 3 on
+    2026-08-19 and silently no-op'd the old str.replace-on-anchor S/U) can
+    never turn the mutation into a no-op again."""
     m, _ = load(work)
-    e = m["recently_updated"][3]
-    _note(work, 3, e["note"].replace("QB1_A:", "QB1_A (candidate-flagged, via Nixon):", 1))
+    _note(work, idx, m["recently_updated"][idx]["note"] + suffix)
+
+
+# Pinned regression strings (§16): the two dataset regressions the editorial
+# cleanup removed. Kept literal in test code - never fetched from git history.
+REGRESSION_VIA_NIXON = " Re-evaluation request received via Nixon."
+REGRESSION_SHA = " Applied under a1b2c3d and 30fb6f5."   # hex letters + digits, no "commit" word:
+                                                          # the SHA regex itself must be load-bearing
+
+
+def mut_S(work):                                     # reintroduce "via Nixon"
+    _append_note(work, 3, REGRESSION_VIA_NIXON)
 
 
 def mut_T(work):                                     # WhatsApp reference
-    m, _ = load(work)
-    e = m["recently_updated"][0]
-    _note(work, 0, e["note"] + " Sourced from a WhatsApp report.")
+    _append_note(work, 0, " Sourced from a WhatsApp report.")
 
 
-def mut_U(work):                                     # commit SHA
-    m, _ = load(work)
-    e = m["recently_updated"][9]
-    _note(work, 9, e["note"].replace("24 corrections", "24 corrections (commits 7044e4b, 30fb6f5)", 1))
+def mut_U(work):                                     # commit SHA (bare, no "commit" word)
+    _append_note(work, 9, REGRESSION_SHA)
 
 
 def mut_V(work):                                     # known_traps.md Entry 6
@@ -293,13 +312,14 @@ MUTATIONS = [
     ("P renderer reads e.summary", mut_P, {"renderer"}),
     ("Q generator drops corrections", mut_Q, {"corrections_preserved", "governed"}),
     ("R restore QB2_C scaffolding text", mut_R, {"leak", "text"}),
-    ("S reintroduce 'via Nixon'", mut_S, {"hygiene"}),
-    ("T add WhatsApp reference", mut_T, {"hygiene"}),
-    ("U add commit SHAs", mut_U, {"hygiene"}),
-    ("V add known_traps.md Entry 6", mut_V, {"hygiene"}),
-    ("W add GAP-/P0- ids", mut_W, {"hygiene"}),
+    # hygiene mutations also name the CORRECTION_FORBIDDEN label that must fire
+    ("S reintroduce 'via Nixon'", mut_S, {"hygiene"}, {"workflow: via <person>", "person: Nixon"}),
+    ("T add WhatsApp reference", mut_T, {"hygiene"}, {"chat: WhatsApp/Telegram"}),
+    ("U add commit SHAs", mut_U, {"hygiene"}, {"repo: commit/SHA"}),
+    ("V add known_traps.md Entry 6", mut_V, {"hygiene"}, {"repo: known_traps", "repo: Entry n"}),
+    ("W add GAP-/P0- ids", mut_W, {"hygiene"}, {"ticket: GAP-/P0-/HOLD-"}),
     ("X blank a note", mut_X, {"corrections", "note_quality"}),
-    ("Y restore pre-cleanup unsafe note", mut_Y, {"hygiene"}),
+    ("Y restore pre-cleanup unsafe note", mut_Y, {"hygiene"}, {"workflow: via <person>", "repo: known_traps"}),
     ("Z hygienic but empty 'Content updated.'", mut_Z, {"note_quality"}),
 ]
 
@@ -314,8 +334,27 @@ def run_validator(work):
     return rc, set(V.FAILS)
 
 
+def _digest(work):
+    """SHA-256 of both scratch artefacts - proves a mutation actually landed."""
+    h = hashlib.sha256()
+    for f in ("qb_content_index.json", "index.html"):
+        h.update((work / f).read_bytes())
+    return h.hexdigest()
+
+
+def _hygiene_labels(work):
+    m, _ = load(work)
+    return {lab for _, _, lab, _ in B.correction_hygiene_violations(m.get("recently_updated"))}
+
+
+def _live_hashes():
+    return {p: hashlib.sha256(p.read_bytes()).hexdigest()
+            for p in (B.MANIFEST_PATH, B.INDEX_HTML_PATH, B.GOVERNED_PATH)}
+
+
 def main(argv):
     keep = "--keep" in argv
+    live_before = _live_hashes()
     root = Path(tempfile.mkdtemp(prefix="qbidx-mut-"))
     # baseline: the committed artefacts must be green before mutating them
     base = root / "base"
@@ -326,27 +365,59 @@ def main(argv):
     if rc != 0:
         print("BASELINE NOT GREEN: %s - mutations are meaningless" % sorted(fails))
         return 2
-    escapes = 0
-    for name, fn, expected in MUTATIONS:
+    base_digest = _digest(base)
+    escapes = crashes = 0
+    for row in MUTATIONS:
+        name, fn, expected = row[0], row[1], row[2]
+        exp_labels = row[3] if len(row) > 3 else set()
         work = root / name.split()[0]
         work.mkdir()
         shutil.copy(B.MANIFEST_PATH, work / "qb_content_index.json")
         shutil.copy(B.INDEX_HTML_PATH, work / "index.html")
+        crashed, applied, labels = False, False, set()
         try:
             fn(work)
+            applied = _digest(work) != base_digest
             rc, fails = run_validator(work)
-            crashed = False
+            if exp_labels:
+                labels = _hygiene_labels(work)
         except Exception as e:           # a crash is an escape, not a catch
             rc, fails, crashed = 1, {"<crash: %s>" % e}, True
-        caught = (rc != 0) and bool(fails & expected) and not crashed
-        print("%-32s %s  named=%s  observed=%s" % (
-            name, "CAUGHT " if caught else "ESCAPE ", sorted(expected), sorted(fails)))
+        # A mutation that leaves the artefacts byte-identical never reached the
+        # validator: name it NOT APPLIED rather than letting `observed=[]` pass
+        # for a validator blind spot (the S/U escape class of 2026-08-19).
+        semantic = (rc != 0) and bool(fails & expected) and not crashed and applied
+        label_ok = (not exp_labels) or bool(labels & exp_labels)
+        caught = semantic and label_ok
+        if crashed:
+            verdict = "ESCAPE (crash)"
+        elif not applied:
+            verdict = "ESCAPE (NOT APPLIED - mutation is a no-op)"
+        elif not semantic:
+            verdict = "ESCAPE (unnamed / no failure)"
+        elif not label_ok:
+            verdict = "ESCAPE (wrong hygiene label)"
+        else:
+            verdict = "CAUGHT (semantic)"
+        print("%-40s %s" % (name, verdict))
+        print("    target=%s  applied=%s  expected=%s  observed=%s%s" % (
+            "scratch copy of meoclass1/qb_content_index.json + index.html",
+            applied, sorted(expected), sorted(fails),
+            ("  hygiene_labels=%s" % sorted(labels & exp_labels) if exp_labels else "")))
         if not caught:
             escapes += 1
-    print("mutations: %d run, %d escape(s)" % (len(MUTATIONS), escapes))
+        if crashed:
+            crashes += 1
     if not keep:
         shutil.rmtree(root, ignore_errors=True)
-    return 1 if escapes else 0
+    live_after = _live_hashes()
+    restored = live_before == live_after
+    print("mutations: %d run, %d escape(s), %d crash(es); live artefacts byte-identical: %s"
+          % (len(MUTATIONS), escapes, crashes, restored))
+    if not restored:
+        print("RESIDUE: live artefacts changed during the run - %s" %
+              [str(p) for p in live_before if live_before[p] != live_after[p]])
+    return 1 if (escapes or not restored) else 0
 
 
 if __name__ == "__main__":
