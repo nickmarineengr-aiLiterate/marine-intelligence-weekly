@@ -40,6 +40,7 @@ import shutil
 import sys
 import tempfile
 from contextlib import redirect_stdout
+from html import unescape as html_unescape
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -75,12 +76,25 @@ QB2C_OLD = (
 )
 # sha256 of the normalised answer region of each QB2_C card at the repair.
 # Update ONLY with a deliberate answer edit, and say so in the commit.
+# q1 re-pinned 2026-08-19: the four candidate-visible "⚠CORRECTED:" production
+# markers were removed; the corrected number MSC.532(107) itself was kept.
 QB2C_ANSWER_SHA = {
-    "q1": "5740f51f26f0b38214e84b36938bc5cd4146575afd20b42f8b4fce3ae325ff67",
+    "q1": "44003998eba22268b24712029f32de0e8d67405868ca7f09edbca0f1028a2f3f",
     "q2": "79db29e41b6e094a81b7b10a2b61363fbb79d6d3107b90c51bf7af7814eaf6a3",
     "q3": "4071ee0fb4ce771f7e87b0fd901a4dedfcf2cf57d57f43f187250dd231e019e3",
     "q4": "53a9ea1a96ba0443dd57846441411916195829c03652c6bc74194fdf30acf083",
 }
+
+# Candidate-visible production / editorial markers.  Checked over the QB2_C
+# answer regions (bounded scope of the 2026-08-19 cleanup); other pages still
+# carry their own "corrected" banners and are recorded as follow-up debt.
+MARKER = re.compile(
+    r"⚠\s*CORRECTED|EDITORIAL CORRECTION|PRODUCTION NOTE"
+    r"|\bFIXED IN\b|\bUPDATED BY\b|\bCORRECTED:", re.I)
+# The technical position q1 must keep after the markers went (semantic, not
+# byte): the two resolutions, the date, the substance, the BDN threshold.
+QB2C_Q1_REQUIRED = ("MSC.520(106)", "MSC.532(107)", "1 January 2026",
+                    "PFOS", "70°C", "60°C")
 
 FAILURES = []
 CHECKS = [0]
@@ -193,7 +207,7 @@ def has_descendant(node, klass):
     return False
 
 
-def qb2c_answer_hashes(text):
+def qb2c_answer_regions(text):
     starts = [m.start() for m in re.finditer(r'<div class="q-card"', text)]
     end = text.find("<!-- /#q-feed -->")
     starts.append(end if end >= 0 else len(text))
@@ -204,8 +218,17 @@ def qb2c_answer_hashes(text):
         s = card.find('<div class="q-answer">')
         e = card.find('<div class="q-footer">')
         if a and s >= 0 and e > s:
-            out[a.group(1)] = hashlib.sha256(card[s:e].encode("utf-8")).hexdigest()
+            out[a.group(1)] = card[s:e]
     return out
+
+
+def qb2c_answer_hashes(text):
+    return {a: hashlib.sha256(r.encode("utf-8")).hexdigest()
+            for a, r in qb2c_answer_regions(text).items()}
+
+
+def visible_text(fragment):
+    return norm(html_unescape(re.sub(r"<[^>]+>", " ", fragment)))
 
 
 # --------------------------------------------------------------------------
@@ -255,11 +278,22 @@ def check_page(path, is_qb2c):
                "got %r" % got[:100])
         ok("QB2_C has exactly the four repaired anchors",
            ids == ["q1", "q2", "q3", "q4"], str(ids))
-        hashes = qb2c_answer_hashes(path.read_text(encoding="utf-8"))
+        regions = qb2c_answer_regions(path.read_text(encoding="utf-8"))
+        hashes = {a: hashlib.sha256(r.encode("utf-8")).hexdigest()
+                  for a, r in regions.items()}
         for a, want in QB2C_ANSWER_SHA.items():
             ok("QB2_C#%s answer region unchanged since the repair" % a,
                hashes.get(a) == want,
                "have %s" % (hashes.get(a) or "<none>")[:16])
+        for a, region in regions.items():
+            vis = visible_text(region)
+            m = MARKER.search(vis)
+            ok("QB2_C#%s answer shows no production/editorial marker" % a,
+               not m, "found %r" % (m.group(0) if m else ""))
+        q1 = visible_text(regions.get("q1", ""))
+        for kw in QB2C_Q1_REQUIRED:
+            ok("QB2_C#q1 answer keeps the corrected position: %s" % kw,
+               kw in q1)
 
 
 def run(files):
@@ -305,6 +339,23 @@ def _m_editorial(t):
                      QB2C_APPROVED["q1"], 1)
 
 
+def _m_marker_back(t):
+    return t.replace("Resolution MSC.532(107))", "Resolution ⚠CORRECTED: MSC.532(107))", 1)
+
+
+def _m_editorial_in_answer(t):
+    return t.replace("<h5>Core Technical Changes", "<h5>EDITORIAL CORRECTION: Core Technical Changes", 1)
+
+
+def _m_drop_corrected_statement(t):
+    # delete the corrected technical statement, not just its label
+    return t.replace("MSC.532(107)", "")
+
+
+def _m_modify_q2(t):
+    return t.replace("assume a worst-case scenario", "assume a best-case scenario", 1)
+
+
 MUTATIONS = [
     ("A restore old scaffolding q-text", _m_restore_old,
      ("old QB2_C scaffolding must not return", "approved wording")),
@@ -320,6 +371,14 @@ MUTATIONS = [
      ("direct child of #q-feed",)),
     ("G editorial-note prefix",          _m_editorial,
      ("no scaffolding", "approved wording")),
+    ("H reintroduce ⚠CORRECTED marker",  _m_marker_back,
+     ("no production/editorial marker",)),
+    ("I EDITORIAL CORRECTION in answer",  _m_editorial_in_answer,
+     ("no production/editorial marker",)),
+    ("J delete corrected statement",     _m_drop_corrected_statement,
+     ("keeps the corrected position",)),
+    ("K modify q2 answer",               _m_modify_q2,
+     ("QB2_C#q2 answer region unchanged",)),
 ]
 
 
