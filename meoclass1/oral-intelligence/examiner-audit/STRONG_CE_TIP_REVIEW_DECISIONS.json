@@ -1,0 +1,287 @@
+{
+ "note": "Human/evidence review of the ten Release-A pairs held at HOLD_EVIDENCE_BELOW_FLOOR whose page-prose strength was STRONG_CE_TIP_ASSERTION (RELEASE_A_HELD.json x READY_CONNECTIONS_V2.json). Decisions layer on top of the evidence ledgers, which are not altered. Approved rows enter the Examiner Index through build_examiner_index.py as source CE_TIP_REVIEW at the candidate tier stated here; held rows publish nothing. PROSE:<examiner>:<qid> ids resolve to PROSE_EXAMINER_EVIDENCE.csv rows (in_ce_tip_block) and are pinned by reviewed_ce_tip_wording, which must remain on the live card.",
+ "review_ref": "review/oral-strong-ce-tip-held-relationships",
+ "reviewed_from_main": "689c0d6",
+ "held_set_definition": {
+  "held_artefact": "RELEASE_A_HELD.json",
+  "held_decision": "HOLD_EVIDENCE_BELOW_FLOOR",
+  "prose_artefact": "READY_CONNECTIONS_V2.json",
+  "prose_strength": "STRONG_CE_TIP_ASSERTION"
+ },
+ "policy": {
+  "APPROVE_CE_TIP_RELATIONSHIP": "ce_tip",
+  "APPROVE_REPORTED_RELATIONSHIP": "reported",
+  "APPROVE_CONFIRMED_RELATIONSHIP": "confirmed",
+  "HOLD_WEAK_ASSERTION": null,
+  "HOLD_TARGET_AMBIGUOUS": null,
+  "REJECT_WRONG_MATCH": null
+ },
+ "reviewed": 10,
+ "decisions_by_outcome": {
+  "APPROVE_CE_TIP_RELATIONSHIP": 6,
+  "HOLD_TARGET_AMBIGUOUS": 1,
+  "HOLD_WEAK_ASSERTION": 3
+ },
+ "decisions": [
+  {
+   "relation_id": "RELA-NAIR-QB10_B-q7",
+   "examiner": "Nair",
+   "canonical_question_id": "QB10_B#q7",
+   "reviewed_target": {
+    "file": "QB10_B.html",
+    "anchor": "q7",
+    "url": "/meoclass1/QB10_B.html#q7"
+   },
+   "reviewed_question_text": "What is the current status of the IMO Net-Zero Framework, and what happened with the North-East Atlantic ECA?",
+   "reviewed_ce_tip_wording": "If Nair asks \"when does the Net-Zero Framework come into force,\" the honest, correct answer is that it hasn't been adopted yet",
+   "ce_provenance_class": "CE_STRONG_BUT_NONEXPLICIT",
+   "relationship_type": "PRIMARY_ASK",
+   "target_verdict": "CORRECT",
+   "corroboration": "NONE_ON_DEMAND",
+   "decision": "HOLD_WEAK_ASSERTION",
+   "candidate_tier": null,
+   "evidence_ids": [],
+   "corroboration_ids": [
+    "ASC-0672"
+   ],
+   "reason": "The tip is a conditional anticipation ('If Nair asks ...'), not a declaration that Nair asks this question. The only same-examiner record on this target, ASC-0672 ('How will you come to know your vessel is compliant with SOx, NOx and GHG emission', PARTIAL_COVERAGE), is a compliance-verification demand, not the NZF status/EIF ask, so it does not answer the 'whether'. Governed Notes name Simon, not Nair, as the GHG-currency examiner (NOTEV-0223/0224). Held: association is plausible but not question-explicit and not independently corroborated.",
+   "next_action": null
+  },
+  {
+   "relation_id": "RELA-NAIR-QB2_A-q25",
+   "examiner": "Nair",
+   "canonical_question_id": "QB2_A#q25",
+   "reviewed_target": {
+    "file": "QB2_A.html",
+    "anchor": "q25",
+    "url": "/meoclass1/QB2_A.html#q25"
+   },
+   "reviewed_question_text": "Persistent floater — definition, GESAMP criteria, MARPOL significance.",
+   "reviewed_ce_tip_wording": "If Examiner Nair asks you: \"Does a standard shipment of palm oil carried on a Type 2 chemical tanker require a mandatory pre-wash if you are discharging in Kochi port?\"",
+   "ce_provenance_class": "CE_STRONG_BUT_NONEXPLICIT",
+   "relationship_type": "PRIMARY_ASK",
+   "target_verdict": "CORRECT",
+   "corroboration": "EXTERNAL_PARTIAL_ON_DEMAND",
+   "decision": "APPROVE_CE_TIP_RELATIONSHIP",
+   "candidate_tier": "ce_tip",
+   "evidence_ids": [
+    "ASC-0400",
+    "PROSE:Nair:QB2_A#q25"
+   ],
+   "corroboration_ids": [
+    "NOTEV-0237"
+   ],
+   "reason": "The tip is conditional in form but names a specific persistent-floater pre-wash ask, and the same examiner has an independent external occurrence on this very target - ASC-0400, Nair, 'Persistent floaters, prewash criteria', governed target QB2_A#q25 - which answers the 'whether'. The card is the corpus's persistent-floater card and covers pre-wash mandates in its 15-second answer, tip and trap questions. PARTIAL_COVERAGE never raises a tier under governed policy, so the honest label is CE Tip, not Reported. Not circular: the tip's scenario (palm oil / Type 2 / Kochi) is more specific than the compilation line and neither derives from a July sheet.",
+   "next_action": null
+  },
+  {
+   "relation_id": "RELA-SIMON-QB10_B-q1",
+   "examiner": "Simon",
+   "canonical_question_id": "QB10_B#q1",
+   "reviewed_target": {
+    "file": "QB10_B.html",
+    "anchor": "q1",
+    "url": "/meoclass1/QB10_B.html#q1"
+   },
+   "reviewed_question_text": "Give a consolidated overview of SOLAS and MARPOL amendments entering into force from 2024 through 2028.",
+   "reviewed_ce_tip_wording": "Simon will pivot straight to what applies to YOUR ship: as a container vessel",
+   "ce_provenance_class": "CE_EXPLICIT_FOLLOWUP",
+   "relationship_type": "FOLLOW_UP",
+   "target_verdict": "CORRECT",
+   "corroboration": "EXTERNAL_PARTIAL_ON_TARGET",
+   "decision": "APPROVE_CE_TIP_RELATIONSHIP",
+   "candidate_tier": "ce_tip",
+   "evidence_ids": [
+    "ASC-0192",
+    "ASC-0316",
+    "PROSE:Simon:QB10_B#q1"
+   ],
+   "corroboration_ids": [
+    "MASTER-AQ-0178",
+    "MASTER-AQ-0455"
+   ],
+   "reason": "Declarative card statement: on this amendments-overview question Simon pivots to which amendments apply to the candidate's own ship; the card's CE Relevance section answers exactly that (inclinometer, flashpoint declaration, PFOS for a containership). Two independent Simon occurrences on this target - ASC-0192/ASC-0316 'Container fire fighting latest amendment' (PARTIAL_COVERAGE) - and Simon's Confirmed rows on the sibling 'latest amendments' cards (MASTER-AQ-0178 -> QB1_F#q20, MASTER-AQ-0455 -> QB4_E#q4) corroborate that Simon does ask latest-amendments questions. The relationship is a follow-up, not the primary ask (the card assigns the primary ask to Nair), so it is recorded as FOLLOW_UP at CE Tip.",
+   "next_action": null
+  },
+  {
+   "relation_id": "RELA-SIMON-QB1_F-q3",
+   "examiner": "Simon",
+   "canonical_question_id": "QB1_F#q3",
+   "reviewed_target": {
+    "file": "QB1_F.html",
+    "anchor": "q3",
+    "url": "/meoclass1/QB1_F.html#q3"
+   },
+   "reviewed_question_text": "VGM (Verified Gross Mass) — who issues, who verifies, where it is mentioned, and the two methods of determination",
+   "reviewed_ce_tip_wording": "Examiner Simon expects you to state clearly that the shipper — not the carrier — carries the VGM obligation",
+   "ce_provenance_class": "CE_EXPLICIT_EXPECTED_DETAIL",
+   "relationship_type": "PRIMARY_ASK",
+   "target_verdict": "CORRECT",
+   "corroboration": "NOTE_EXPLICIT_SAME_ASK_AND_PRIMARY_ON_SIBLING",
+   "decision": "APPROVE_CE_TIP_RELATIONSHIP",
+   "candidate_tier": "ce_tip",
+   "evidence_ids": [
+    "PROSE:Simon:QB1_F#q3"
+   ],
+   "corroboration_ids": [
+    "MASTER-AQ-0228",
+    "NOTEV-0475"
+   ],
+   "reason": "The tip is labelled 'CE Oral Tip (Simon)' and declares what Simon expects on this exact question (who issues / who verifies VGM). Independent corroboration on the same ask: Simon Notes NOTEV-0475 'Simon Sir / Rajappan typically ask: What is VGM and what are the two methods?' (NOTE_EXPLICIT_PRIMARY_ASK) and primary record MASTER-AQ-0228 Simon 'VGM, who decide the weight of the container' (VERIFIED_MATCH, governed target the sibling VGM card QB2_B#q11 where Simon is already Confirmed). Neither is governed-mapped to QB1_F#q3, so both are corroboration, not tier-bearing evidence: CE Tip. Not a duplicate: no Simon relationship exists on QB1_F#q3; the corpus holds four distinct VGM cards.",
+   "next_action": null
+  },
+  {
+   "relation_id": "RELA-SIMON-QB2_A-q4",
+   "examiner": "Simon",
+   "canonical_question_id": "QB2_A#q4",
+   "reviewed_target": {
+    "file": "QB2_A.html",
+    "anchor": "q4",
+    "url": "/meoclass1/QB2_A.html#q4"
+   },
+   "reviewed_question_text": "Container tracking — who tracks them, for what purpose, and what technology is used including ISO 6346.",
+   "reviewed_ce_tip_wording": "If Examiner Simon asks you: \"What is the practical purpose of the Check Digit, and how does it affect you as Chief Engineer?\"",
+   "ce_provenance_class": "CE_STRONG_BUT_NONEXPLICIT",
+   "relationship_type": "FOLLOW_UP",
+   "target_verdict": "CORRECT",
+   "corroboration": "EXTERNAL_PARTIAL_OFF_DEMAND",
+   "decision": "HOLD_WEAK_ASSERTION",
+   "candidate_tier": null,
+   "evidence_ids": [],
+   "corroboration_ids": [
+    "ASC-0191",
+    "ASC-0369"
+   ],
+   "reason": "Conditional anticipation of a check-digit sub-question; the card's own Examiner Chain assigns this question to Nair/Senthil, and Nair is primary-Confirmed here (MASTER-AQ-0012). The Simon occurrences parked on this target - ASC-0191/ASC-0369 'How will you prevent loading of undeclared cargo onboard' (PARTIAL_COVERAGE) - are a different procedural demand and do not establish that Simon asks container tracking / ISO 6346. Held.",
+   "next_action": null
+  },
+  {
+   "relation_id": "RELA-SIMON-QB3_B-q1",
+   "examiner": "Simon",
+   "canonical_question_id": "QB3_B#q1",
+   "reviewed_target": {
+    "file": "QB3_B.html",
+    "anchor": "q1",
+    "url": "/meoclass1/QB3_B.html#q1"
+   },
+   "reviewed_question_text": "What is a hull survey — what does it cover and what are the requirements?",
+   "reviewed_ce_tip_wording": "If asked by Simon, lead with watertight integrity and load line compliance",
+   "ce_provenance_class": "CE_STRONG_BUT_NONEXPLICIT",
+   "relationship_type": "EXPECTED_DETAIL",
+   "target_verdict": "CORRECT",
+   "corroboration": "NONE",
+   "decision": "HOLD_WEAK_ASSERTION",
+   "candidate_tier": null,
+   "evidence_ids": [],
+   "corroboration_ids": [],
+   "reason": "Conditional ('If asked by Simon ...') expected-detail with no same-examiner record anywhere in the governed evidence for hull survey (the tracker's hull/class-survey asks on this and the sibling card are Nair's: MASTER-AQ-0049, MASTER-AQ-0279). The card names Simon and Senthil symmetrically as hypothetical askers. Held.",
+   "next_action": null
+  },
+  {
+   "relation_id": "RELA-SIMON-QB6_E-q2",
+   "examiner": "Simon",
+   "canonical_question_id": "QB6_E#q2",
+   "reviewed_target": {
+    "file": "QB6_E.html",
+    "anchor": "q2",
+    "url": "/meoclass1/QB6_E.html#q2"
+   },
+   "reviewed_question_text": "Greenhouse Gas Fuel Intensity (GFI) Calculation & Unit",
+   "reviewed_ce_tip_wording": "If he asks for the \"GFI calculation unit,\" give the unit immediately",
+   "ce_provenance_class": "CE_STRONG_BUT_NONEXPLICIT",
+   "relationship_type": "PRIMARY_ASK",
+   "target_verdict": "AMBIGUOUS_DUPLICATE_SIBLING",
+   "corroboration": "PRIMARY_ON_DUPLICATE_SIBLING",
+   "decision": "HOLD_TARGET_AMBIGUOUS",
+   "candidate_tier": null,
+   "evidence_ids": [],
+   "corroboration_ids": [
+    "MASTER-AQ-0180",
+    "MASTER-AQ-0202"
+   ],
+   "reason": "The card ties Simon to this ask only conditionally plus a style remark ('focuses heavily on precise technical definitions'). Simon asking 'GFI calculation unit' is primary-attested (MASTER-AQ-0180 'Gfi calculation unit', MASTER-AQ-0202 'GFI calculation and Unit', both VERIFIED_SAME_CORE) but the governed mapping places both on the sibling QB6_E#q3, whose live title is literally 'GFI Calculation and Unit (Duplicate/Deepened Focus)' and where Simon is already Confirmed. Publishing q2 as well would render the same examiner-ask twice across a card the corpus itself labels a duplicate. Held as target-ambiguous; the q2/q3 duplication is QB content debt, not an index matter.",
+   "next_action": "content: adjudicate QB6_E#q2 vs #q3 duplication; if q2 is kept as the parent card, remap MASTER-AQ-0180/0202 there under governed mapping review"
+  },
+  {
+   "relation_id": "RELA-SIMON-QB6_F-q4",
+   "examiner": "Simon",
+   "canonical_question_id": "QB6_F#q4",
+   "reviewed_target": {
+    "file": "QB6_F.html",
+    "anchor": "q4",
+    "url": "/meoclass1/QB6_F.html#q4"
+   },
+   "reviewed_question_text": "What is MMSI, how is it structured, and where is it used onboard?",
+   "reviewed_ce_tip_wording": "Simon opens with the structure/definition, then a reflagging scenario, then checks whether you know MMSI changes require technician-level access",
+   "ce_provenance_class": "CE_EXPLICIT_PRIMARY_ASK",
+   "relationship_type": "PRIMARY_ASK",
+   "target_verdict": "CORRECT",
+   "corroboration": "NOTE_EXPLICIT_ON_TARGET_PLUS_EXTERNAL_TERSE_PLUS_PRIMARY_UNRESOLVED",
+   "decision": "APPROVE_CE_TIP_RELATIONSHIP",
+   "candidate_tier": "ce_tip",
+   "evidence_ids": [
+    "ASC-0338",
+    "NOTEV-0367",
+    "PROSE:Simon:QB6_F#q4"
+   ],
+   "corroboration_ids": [
+    "MASTER-AQ-0240"
+   ],
+   "reason": "The card's Examiner Chain declares Simon opens with the MMSI structure/definition - this question - and its CE Oral Tip gives the reflag detail he wants. Independent corroboration on the same target: Simon Notes NOTEV-0367 'Simon Sir typically asks What is MMSI and when must it change?' (NOTE_EXPLICIT_PRIMARY_ASK, reverse-connected to QB6_F#q4), external ASC-0338 Simon 'MMSI' (governed target QB6_F#q4, held AMBIGUOUS only because the prompt is terse - single candidate, coverage 1.0), and primary MASTER-AQ-0240 Simon 'mmsi' left UNRESOLVED by legacy mapping. QB6_F#q4 is the corpus's only MMSI card. Terse-fragment rule satisfied by the note's own context. Not tier-raising under governed policy (no EXACT/NEAR, no VERIFIED mapping): CE Tip.",
+   "next_action": "governed mapping review: MASTER-AQ-0240 (Simon, 'mmsi') is UNRESOLVED and ASC-0338 sits in the terse human-review queue; both point at the only MMSI card"
+  },
+  {
+   "relation_id": "RELA-SIMON-QB9_F-q11",
+   "examiner": "Simon",
+   "canonical_question_id": "QB9_F#q11",
+   "reviewed_target": {
+    "file": "QB9_F.html",
+    "anchor": "q11",
+    "url": "/meoclass1/QB9_F.html#q11"
+   },
+   "reviewed_question_text": "Official Number",
+   "reviewed_ce_tip_wording": "Examiner Simon wants a precise differentiation between the Official Number and the IMO number",
+   "ce_provenance_class": "CE_EXPLICIT_EXPECTED_DETAIL",
+   "relationship_type": "PRIMARY_ASK",
+   "target_verdict": "CORRECT",
+   "corroboration": "PRIMARY_UNRESOLVED_SAME_ASK",
+   "decision": "APPROVE_CE_TIP_RELATIONSHIP",
+   "candidate_tier": "ce_tip",
+   "evidence_ids": [
+    "PROSE:Simon:QB9_F#q11"
+   ],
+   "corroboration_ids": [
+    "MASTER-AQ-0242"
+   ],
+   "reason": "Declarative, question-specific expected detail (Official Number vs IMO number) plus a declarative Examiner Chain ('Simon typically opens this topic with the core definition'). Primary record MASTER-AQ-0242 Simon 'official number' exists but its legacy mapping is UNRESOLVED (parked on QB4_H#q1, an AECS-course card - plainly wrong); QB9_F#q11 is the corpus's only Official Number card. The 'Kochi MMD Focus (Examiner Simon)' heading recurs on 7 of 11 QB9_F cards, but the examiner named inside it varies per card and two siblings with the same formula (q6, q10) are tracker-Confirmed for Simon, so this is per-card authoring, not page-level attribution. Not tier-raising: CE Tip.",
+   "next_action": "governed mapping review: MASTER-AQ-0242 (Simon, 'official number') -> QB9_F#q11 would lift this to Confirmed"
+  },
+  {
+   "relation_id": "RELA-SIMON-QB9_F-q8",
+   "examiner": "Simon",
+   "canonical_question_id": "QB9_F#q8",
+   "reviewed_target": {
+    "file": "QB9_F.html",
+    "anchor": "q8",
+    "url": "/meoclass1/QB9_F.html#q8"
+   },
+   "reviewed_question_text": "Flag of Convenience (FOC) / Open Registry",
+   "reviewed_ce_tip_wording": "Examiner Simon wants a direct answer on India’s status",
+   "ce_provenance_class": "CE_EXPLICIT_EXPECTED_DETAIL",
+   "relationship_type": "PRIMARY_ASK",
+   "target_verdict": "CORRECT",
+   "corroboration": "PRIMARY_ON_TARGET_PARTIAL_MAPPING",
+   "decision": "APPROVE_CE_TIP_RELATIONSHIP",
+   "candidate_tier": "ce_tip",
+   "evidence_ids": [
+    "MASTER-AQ-0080",
+    "PROSE:Simon:QB9_F#q8"
+   ],
+   "corroboration_ids": [
+    "MASTER-AQ-0491"
+   ],
+   "reason": "Declarative, question-specific expected detail (India's open-registry status). Primary record MASTER-AQ-0080 Simon 'foc.open registry.does india have open registry.' names this examiner and this exact question (canonical QB9_F#q8) but its legacy mapping is PARTIAL_MATCH (token score 0.429 against a terse title), so it is not governed-admissible for Confirmed. The distinct FOC-vs-open-registry ask (MASTER-AQ-0491) is separately Confirmed on QB9_D#q3; not a duplicate. CE Tip now, with the primary corroboration recorded.",
+   "next_action": "governed mapping review: MASTER-AQ-0080 PARTIAL_MATCH -> VERIFIED_MATCH on QB9_F#q8 would lift this to Confirmed"
+  }
+ ]
+}
