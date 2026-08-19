@@ -26,6 +26,10 @@ Inputs (records, never a rendered page)
   RELEASE_A_PUBLICATION.json           the finalised Release A: new
                                        relationships, and evidence that
                                        merges into existing ones
+  STRONG_CE_TIP_REVIEW_DECISIONS.json  human/evidence review of the ten
+                                       Release-A pairs held below the floor
+                                       on CE-tip prose; APPROVE_* rows only,
+                                       at their decided candidate tier
   examiner_index_config.json           prose and tier policy; no numbers
 
 Rules the spec makes non-negotiable and this file enforces
@@ -114,6 +118,60 @@ def card_attributions():
     return out
 
 
+REVIEW_NAME = "STRONG_CE_TIP_REVIEW_DECISIONS.json"
+# outcome -> the only candidate tier literal that outcome may publish at
+REVIEW_OUTCOME_TIER = {
+    "APPROVE_CE_TIP_RELATIONSHIP": "ce_tip",
+    "APPROVE_REPORTED_RELATIONSHIP": "reported",
+    "APPROVE_CONFIRMED_RELATIONSHIP": "confirmed",
+}
+REVIEW_HOLD_OUTCOMES = {"HOLD_WEAK_ASSERTION", "HOLD_TARGET_AMBIGUOUS",
+                        "REJECT_WRONG_MATCH"}
+
+
+def review_approved_ce_tip():
+    """APPROVE_* rows of the strong CE-tip review, structurally checked.
+
+    The generator refuses (BuildFailure) rather than skips: a decision with an
+    unknown outcome, an approved row without evidence ids, a candidate tier
+    that is not the one its outcome permits, or a target that does not name
+    its own relation. Evidence resolution and wording pinning are proven by
+    validate_ce_tip_review.py; here the build only refuses to publish what is
+    malformed on its face."""
+    p = OUT / REVIEW_NAME
+    if not p.exists():
+        return []
+    dec = json.loads(p.read_text(encoding="utf-8"))
+    out, seen = [], set()
+    for d in dec["decisions"]:
+        rid = d["relation_id"]
+        if rid in seen:
+            fail("duplicate relation in %s: %s" % (REVIEW_NAME, rid))
+        seen.add(rid)
+        outcome = d["decision"]
+        if outcome in REVIEW_HOLD_OUTCOMES:
+            if d.get("candidate_tier"):
+                fail("held/rejected review row %s carries a candidate tier" % rid)
+            continue
+        if outcome not in REVIEW_OUTCOME_TIER:
+            fail("unknown review outcome %r on %s" % (outcome, rid))
+        allowed = REVIEW_OUTCOME_TIER[outcome]
+        if d.get("candidate_tier") != allowed:
+            fail("review row %s: outcome %s may only publish at %r, got %r"
+                 % (rid, outcome, allowed, d.get("candidate_tier")))
+        if allowed not in TIERS:
+            fail("review tier literal %r has no policy entry (%s)" % (allowed, rid))
+        if not d.get("evidence_ids"):
+            fail("approved review row %s carries no evidence ids" % rid)
+        qid = d["canonical_question_id"]
+        tgt = d.get("reviewed_target") or {}
+        if (qid != "%s#%s" % (Path(tgt.get("file", "")).stem, tgt.get("anchor"))
+                or rid != "RELA-%s-%s" % (d["examiner"].upper(), qid.replace("#", "-"))):
+            fail("review row %s: target/relation id mismatch (%s, %s)" % (rid, qid, tgt))
+        out.append(d)
+    return out
+
+
 # ---------------------------------------------------------------- resolve
 
 def resolve_snapshot():
@@ -164,7 +222,17 @@ def resolve_snapshot():
                literal_of(c["strongest_evidence_tier"], c["relation_id"]),
                "RELEASE_A", c["relation_id"], len(c["evidence_ids"]))
 
-    # 4. resolve every relationship against the live QB, or fail the build
+    # 4. review-approved CE-tip relationships. STRONG_CE_TIP_REVIEW_DECISIONS.json
+    #    is the human/evidence adjudication of the Release-A pairs that were held
+    #    below the release floor on page-prose evidence alone. Only APPROVE_*
+    #    decisions publish, at exactly the candidate tier the decision policy
+    #    allows for that outcome, and only with evidence ids attached. Held and
+    #    rejected rows publish nothing. Anything malformed is a build failure.
+    for c in review_approved_ce_tip():
+        upsert(c["examiner"], c["canonical_question_id"], c["candidate_tier"],
+               "CE_TIP_REVIEW", c["relation_id"], len(c["evidence_ids"]))
+
+    # 5. resolve every relationship against the live QB, or fail the build
     rows = []
     for (ex, qid), r in rels.items():
         e = examiners.get(ex)
