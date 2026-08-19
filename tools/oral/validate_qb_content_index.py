@@ -27,6 +27,13 @@ Checks (each is a named PASS/FAIL line; exit 1 on any FAIL):
                   same order; per-file counts == manifest; hero counter agrees
   cards           each QB_GROUPS card qcount == manifest question_count
   governed        recently_updated present and non-empty (hub correction log)
+  corrections     every correction entry is {date, note, files?}: non-empty
+                  note, files a list of str, no summary/files_touched, no dupes
+  renderer        index.html correction-log renderer binds to e.date/e.note/
+                  e.files only (the key it reads is the key the data carries)
+  corrections_preserved
+                  manifest recently_updated == governed (verbatim, same order);
+                  per-file corrections_applied carried through unchanged
   determinism     a fresh in-memory derivation is byte-identical to disk
 
   PYTHONIOENCODING=utf-8 python tools/oral/validate_qb_content_index.py \
@@ -278,6 +285,56 @@ def run(manifest_path, index_html_path):
            and len(manifest["recently_updated"]) > 0
            and all("date" in e for e in manifest["recently_updated"]),
            "%d changelog entries" % len(manifest.get("recently_updated") or []))
+
+    # correction-log contract: every entry the hub renders is {date, note,
+    # files?} with a non-empty note; obsolete summary/files_touched refused;
+    # no duplicates. Independent of B.check_corrections (own walk, own rules).
+    ru = manifest.get("recently_updated") or []
+    corr_bad = []
+    corr_seen = set()
+    for i, e in enumerate(ru):
+        if not isinstance(e, dict):
+            corr_bad.append("[%d] not an object" % i)
+            continue
+        if any(k in e for k in ("summary", "files_touched")):
+            corr_bad.append("[%d] obsolete key" % i)
+        if set(e) - {"date", "note", "files"}:
+            corr_bad.append("[%d] unknown key %s" % (i, sorted(set(e) - {"date", "note", "files"})))
+        if not (isinstance(e.get("note"), str) and e["note"].strip()):
+            corr_bad.append("[%d] blank note" % i)
+        if "files" in e and not (isinstance(e["files"], list)
+                                 and all(isinstance(f, str) and f.strip() for f in e["files"])):
+            corr_bad.append("[%d] files not list[str]" % i)
+        k = (e.get("date"), (e.get("note") or "").strip())
+        if k in corr_seen:
+            corr_bad.append("[%d] duplicate" % i)
+        corr_seen.add(k)
+    report("corrections", not corr_bad, "; ".join(corr_bad[:6]))
+
+    # the hub renderer must bind to the canonical keys and nothing else
+    log_js = re.search(r"async function toggleCorrectionLog\(\)\{.*?\n\}\n", index_text, re.S)
+    if not log_js:
+        report("renderer", False, "toggleCorrectionLog not found in index.html")
+    else:
+        js = log_js.group(0)
+        ok = ("e.note" in js and "e.files" in js and "e.date" in js
+              and "e.summary" not in js and "files_touched" not in js
+              and "data.recently_updated" in js)
+        report("renderer", ok, "renders e.date/e.note/e.files only" if ok
+               else "renderer binds to a non-canonical key")
+
+    # generator preserves the governed correction records verbatim and in order
+    try:
+        gov = B.load_governed()
+        gov_files = gov.get("files", {})
+        ca_ok = all((manifest["files"].get(f, {}).get("corrections_applied") or None)
+                    == (m.get("corrections_applied") or None)
+                    for f, m in gov_files.items() if f in manifest.get("files", {}))
+        report("corrections_preserved", ru == gov.get("recently_updated") and ca_ok,
+               "recently_updated %s governed; corrections_applied %s"
+               % ("==" if ru == gov.get("recently_updated") else "!=", "ok" if ca_ok else "drift"))
+    except B.BuildFailure as e:
+        report("corrections_preserved", False, "governed file violates contract: %s" % e)
 
     # determinism / freshness: a fresh derivation equals the artefact under test
     try:

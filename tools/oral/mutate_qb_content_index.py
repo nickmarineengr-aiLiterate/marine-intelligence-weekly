@@ -17,6 +17,12 @@ touched.
   I  drift Q_INDEX from the manifest        -> q_index
   J  drift a QB_GROUPS card qcount          -> cards
   K  point one anchor at a missing card     -> no_extras
+  L  blank one correction note              -> corrections
+  M  restore obsolete "summary" on one row  -> corrections
+  N  files_touched / scalar files           -> corrections
+  O  duplicate a correction record          -> corrections
+  P  renderer reads e.summary again         -> renderer
+  Q  generator drops corrections            -> corrections_preserved / governed
 
   PYTHONIOENCODING=utf-8 python tools/oral/mutate_qb_content_index.py [--keep]
 Exit 0 only when every mutation is caught by its named check.
@@ -151,6 +157,48 @@ def mut_K(work):
     save(work, m)
 
 
+def mut_L(work):
+    m, _ = load(work)
+    m["recently_updated"][3]["note"] = "   "
+    save(work, m)
+
+
+def mut_M(work):
+    m, _ = load(work)
+    e = m["recently_updated"][5]
+    e["summary"] = e.pop("note")                     # the old split, one row
+    save(work, m)
+
+
+def mut_N(work):
+    m, _ = load(work)
+    e = m["recently_updated"][0]
+    e["files"] = ", ".join(e["files"])               # scalar where a list belongs
+    e2 = m["recently_updated"][1]
+    e2["files_touched"] = e2.pop("files")            # the other old key
+    save(work, m)
+
+
+def mut_O(work):
+    m, _ = load(work)
+    m["recently_updated"].append(dict(m["recently_updated"][2]))
+    save(work, m)
+
+
+def mut_P(work):
+    m, h = load(work)
+    h = h.replace("${(e.note||'').replace(/</g,'&lt;')}", "${(e.summary||'').replace(/</g,'&lt;')}")
+    save(work, None, h)
+
+
+def mut_Q(work):
+    m, _ = load(work)
+    m.pop("recently_updated")                        # generator "forgot" the governed log
+    for f in m["files"].values():
+        f.pop("corrections_applied", None)
+    save(work, m)
+
+
 MUTATIONS = [
     ("A drop real record", mut_A, {"count", "complete"}),
     ("B add revision card", mut_B, {"no_nonquestion", "no_extras"}),
@@ -163,6 +211,12 @@ MUTATIONS = [
     ("I Q_INDEX drift", mut_I, {"q_index"}),
     ("J card qcount drift", mut_J, {"cards"}),
     ("K anchor to missing card", mut_K, {"no_extras"}),
+    ("L blank correction note", mut_L, {"corrections"}),
+    ("M obsolete summary key", mut_M, {"corrections"}),
+    ("N files not a list / files_touched", mut_N, {"corrections"}),
+    ("O duplicate correction", mut_O, {"corrections"}),
+    ("P renderer reads e.summary", mut_P, {"renderer"}),
+    ("Q generator drops corrections", mut_Q, {"corrections_preserved", "governed"}),
 ]
 
 
