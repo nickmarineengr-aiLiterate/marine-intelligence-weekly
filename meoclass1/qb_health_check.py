@@ -586,6 +586,69 @@ def check_notes_manifest(files, notes_results):
     return errors
 
 
+def extract_citations(html_text):
+    """Pull regulatory citation tokens out of an HTML page for drift comparison.
+
+    Catches the citation shapes this repo actually uses: IMO Assembly and
+    committee resolutions (A.982(24), MEPC.267(68), MSC.290(87)), MEPC/MSC
+    circulars including revisions (MEPC.1/Circ.510, MEPC.1/Circ.778/Rev.5),
+    and SOLAS/MARPOL regulation references. Returns a set, so ordering and
+    repetition are ignored — only presence matters.
+
+    This exists because file-length comparison cannot see a one-line citation
+    correction. Fixing a resolution number in the gated copy and forgetting the
+    SQ teaser copy changes the byte count by a few dozen characters, which is
+    invisible to a 15% size check but is exactly the drift that matters: the
+    free sample is the copy prospective subscribers read first.
+    """
+    text = re.sub(r"<[^>]+>", " ", html_text)
+    text = text.replace("&amp;", "&")
+    pats = [
+        r"\b(?:A|MEPC|MSC|LEG|FAL)\.\d+\(\d+\)",                 # A.982(24), MEPC.267(68)
+        r"\b(?:MEPC|MSC|COLREG)\.\d+/Circ\.\d+(?:/Rev\.\d+)?",    # MEPC.1/Circ.778/Rev.5
+        r"\bMSC-MEPC\.\d+/Circ\.\d+",
+        r"\bUNCLOS\s+Art(?:icle)?\.?\s*\d+(?:\(\d+\))?",
+        r"\bSOLAS\s+(?:Ch\.?\s*)?[IVX]+-?\d*/(?:Reg\.?\s*)?[\d.\-]+",
+        r"\bMARPOL\s+Annex\s+[IVX]+",
+    ]
+    found = set()
+    for p in pats:
+        for m in re.finditer(p, text, re.I):
+            found.add(re.sub(r"\s+", " ", m.group(0)).strip().upper())
+    return found
+
+
+def citation_bases(html_text):
+    """Map instrument -> set of revision/session numbers cited for it.
+
+    Used for contradiction detection between a gated file and its SQ teaser
+    copy. Keying on the base instrument (MSC.1/Circ.1405, A.982) rather than
+    the full citation string means a disagreement about WHICH revision is
+    current becomes visible, while a copy that simply omits the instrument
+    entirely is ignored.
+
+    Real example this was built from: the gated notes page cited
+    MSC.1/Circ.1405/Rev.2 (correct - Rev.2 of 25 May 2012 is the final
+    revision) while the public teaser still cited a non-existent
+    "MSC.1/Circ.1405/Rev.3", conflating it with the companion flag-State
+    circular MSC.1/Circ.1406/Rev.3. The size-based drift check could not see
+    a one-character difference.
+    """
+    text = re.sub(r"<[^>]+>", " ", html_text)
+    bases = {}
+    for m in re.finditer(
+            r"\b((?:MEPC|MSC|COLREG|MSC-MEPC|MSC-FAL)\.\d+/Circ\.\d+)(?:/Rev\.(\d+))?",
+            text, re.I):
+        if m.group(2):
+            # Only explicit revisions are recorded. A bare "MSC.1/Circ.1206"
+            # asserts nothing about which revision is current, so it can never
+            # contradict anything and must not be treated as a claim.
+            bases.setdefault(m.group(1).upper(), set()).add("Rev." + m.group(2))
+    for m in re.finditer(r"\b((?:A|MEPC|MSC|LEG|FAL)\.\d+)\((\d+)\)", text, re.I):
+        bases.setdefault(m.group(1).upper(), set()).add("(" + m.group(2) + ")")
+    return bases
+
+
 def check_sq_file(filename, content_bytes, all_files=None, known_traps=None, main_copy_bytes=None):
     """Files under SQ/ are intentionally free/ungated sample teasers — the
     miw_auth gate check and manifest cross-check do not apply here by design.
@@ -633,6 +696,45 @@ def check_sq_file(filename, content_bytes, all_files=None, known_traps=None, mai
                     f"SQ copy size differs from meoclass1/{filename} by >15% — "
                     f"likely diverged/stale duplicate, check both copies are in sync"
                 )
+
+            # Citation drift, in two tiers.
+            #
+            # Tier 1 - CONTRADICTION. Same instrument cited at different
+            # revisions/sessions in the two copies. This is truncation-proof:
+            # it only compares instruments that appear in BOTH files, so a
+            # short teaser that simply omits most of the gated content never
+            # trips it. This is the high-signal case - one of the two copies
+            # is factually wrong, and if it is the teaser then the error is
+            # sitting in the free sample a prospective subscriber reads first.
+            main_bases = citation_bases(main_text)
+            sq_bases = citation_bases(html_text)
+            for base in sorted(set(main_bases) & set(sq_bases)):
+                # Disjoint, not merely unequal. If one copy cites Rev.1 and
+                # Rev.2 of the same circular while the other cites only Rev.2,
+                # that is a subset, not a disagreement - the shared revision
+                # means both copies agree on what is current.
+                if main_bases[base].isdisjoint(sq_bases[base]):
+                    errors.append(
+                        f"SQ copy cites {base} at "
+                        f"{'/'.join(sorted(sq_bases[base])) or '(no revision)'} but "
+                        f"meoclass1/{filename} cites it at "
+                        f"{'/'.join(sorted(main_bases[base])) or '(no revision)'} - "
+                        f"one of the two copies is wrong, verify against the IMO text"
+                    )
+
+            # Tier 2 - OMISSION. Only meaningful when the SQ copy is a full
+            # mirror rather than a deliberately truncated teaser, so it is
+            # gated on relative size. Without this gate every short teaser
+            # would report dozens of false "missing citation" errors.
+            if len(html_text) >= 0.85 * len(main_text):
+                missing = sorted(extract_citations(main_text) - extract_citations(html_text))
+                if missing:
+                    errors.append(
+                        f"SQ copy is a full mirror of meoclass1/{filename} but is missing "
+                        f"citation(s): {', '.join(missing[:8])}"
+                        + (f" (+{len(missing) - 8} more)" if len(missing) > 8 else "")
+                        + " - the gated copy was likely corrected without updating this teaser"
+                    )
         except UnicodeDecodeError:
             pass
 

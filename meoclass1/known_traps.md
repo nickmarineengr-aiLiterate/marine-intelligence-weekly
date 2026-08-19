@@ -525,6 +525,61 @@ must not quote a hard PSSA count.
 
 ---
 
+### 36. Public teaser copy carried a non-existent circular revision
+
+`SQ/simon-notes-p1.html` cited **MSC.1/Circ.1405/Rev.3**. There is no Rev.3 of
+that circular. **MSC.1/Circ.1405/Rev.2** (25 May 2012) is the final revision —
+Revised interim guidance to shipowners, ship operators and shipmasters on the
+use of privately contracted armed security personnel (PCASP) in the High Risk
+Area. Confirmed against IMO's Private Armed Security page and MSC.1/Circ.1443,
+which reads Rev.2 as the operative guidance.
+
+**The conflation:** Rev.3 belongs to the *companion flag-State* circular,
+**MSC.1/Circ.1406/Rev.3** (June 2015). The pair runs 1405 (shipowners, Rev.2) /
+1406 (flag States, Rev.3) / 1408 (port and coastal States, Rev.1) / 1443 (PMSC).
+Different final revision numbers on adjacent circulars is exactly the shape that
+invites a wrong citation.
+
+**Why it survived:** the *gated* copy at `oralnotes/simon-notes-p1.html` was
+corrected in an earlier session and carries an inline note saying so. The public
+SQ teaser copy was not updated in the same pass. SQ files are hand-duplicated
+with no automated sync, so the error stayed live in the free sample — the copy a
+prospective subscriber reads *first* — for as long as it took someone to compare
+the two by hand. Nobody did.
+
+**Standing rule:** any correction to a file that has an SQ teaser counterpart
+must be applied to **both copies in the same session**, before commit. Check for
+a counterpart before considering any notes/QB correction complete.
+
+GREP: SKIP — now covered by automation instead. See the meta-corrections section
+below: `check_sq_file()` gained a citation-contradiction check that compares the
+revision/session numbers cited by each copy and fails on genuine disagreement.
+
+---
+
+### 37. File-header version badge was decorative and always stale
+
+Five QB files carried a version segment in the page-header badge
+(`QB3_H · Backlog · v1.0`). In **every one of the five** the badge disagreed with
+the file's own content: QB1_I (highest question v1.2), QB2_H (v1.1), QB3_H
+(v1.2), QB4_I (v1.3), QB7_H (v1.1). The badge was frozen at v1.0 at build time
+and never bumped by any correction pass. The other ~120 QB files never had one.
+
+**Resolution: the version segment is removed, not maintained.** A second version
+number that nobody updates is worse than none — it looks authoritative and is
+always wrong. The badge now reads `QB3_H · Backlog`, matching the majority
+convention already present in QB1_H, QB3_G and QB4_H.
+
+**The per-question `q-version` footer is the single source of version truth.**
+It is bumped on every correction, it names what changed and when, and it sits
+next to the content it describes. Do not reintroduce a file-level version badge.
+
+GREP: SKIP — a bare version string is far too generic to auto-scan. Manual rule:
+when building a new QB file, the header badge is `<code>ID · Backlog</code>` or
+`<code>ID</code>` only; no version segment.
+
+---
+
 ---
 
 ## Meta-corrections to `qb_health_check.py` itself (non-content fixes, logged here for continuity)
@@ -532,6 +587,20 @@ must not quote a hard PSSA count.
 - 2026-08-01: Fixed a Windows-console `UnicodeEncodeError` crash in the Brevo-fallback print path when SMTP credentials aren't set locally (was crashing on ⚠/✅ glyphs; also fixed a related bug where the fallback path's temporary `TextIOWrapper` around `sys.stdout.buffer` closed the underlying buffer on garbage collection, breaking all later prints in the same run).
 - 2026-08-01: Fixed the "QB file(s) on disk but missing from manifest" orphan check to exclude `SQ/` — those are public teaser copies intentionally outside the gated `meoclass1/` manifest scope, not orphaned builds.
 - 2026-08-01: Broadened `NEGATION_MARKERS` per Entry 20 above.
+- 2026-08-19: Added `extract_citations()` and `citation_bases()`, and rebuilt the
+  SQ-teaser drift check in `check_sq_file()`. The previous check compared file
+  sizes with a 15% tolerance, which cannot see a one-character revision-number
+  correction — the failure that let Entry 36 stay live. The new check works in
+  two tiers: (1) **contradiction** — the same instrument cited at *disjoint*
+  revision/session numbers in the gated and teaser copies, which is
+  truncation-proof because it only compares instruments appearing in both files,
+  and subset-tolerant so citing both Rev.1 and Rev.2 in one copy and only Rev.2
+  in the other is not flagged; (2) **omission** — citations present in the gated
+  copy but absent from the teaser, gated on the teaser being ≥85% the size of
+  the original, so deliberately truncated samples like `SQ/QB1_A.html` do not
+  generate dozens of false positives. Regression-tested against the Entry 36
+  defect: the pre-fix text trips the contradiction check, the corrected text
+  passes.
 
 ---
 
@@ -577,3 +646,4 @@ must not quote a hard PSSA count.
 | 2026-08-18 | Entry 33: CSR scope quoted without contract date (ship type + length + contract date must be given together; harmonised CSR BC & OT 1 Jul 2015 vs original CSR-BC/CSR-OT 1 Apr 2006), and CSR applicability wrongly equated with SOLAS II-1/3-10 GBS applicability (GBS is 150 m+ both types, contract 1 Jul 2016 / keel 1 Jul 2017 / delivery 1 Jul 2020, ore and combination carriers excluded) | Candidate report via Nixon (Vivek, WhatsApp); verified against IACS/ClassNK rule text and IMO resolutions while building QB1_K Q8 |
 | 2026-08-19 | Entry 34: QB3_H Q1 — "PSA" resolved to MPA (Marine Protected Area) and the MPA half of the answer written; UNCLOS Art. 194(5) / CBD Art. 8(a) / BBNJ Art. 1(9), in force 17 Jan 2026, legal basis stated; PSSA corrected from a MARPOL framing to IMO Assembly res. A.982(24) as amended by MEPC.267(68); MPA vs PSSA vs MARPOL Special Area three-way distinction added → v1.2. Six further files cite A.982(24) without the amendment — logged, not actioned. | Candidate report via Nixon (WhatsApp screenshot) |
 | 2026-08-19 | Entry 35: PSSA count stated as a hard "17" — stale, now ~19 following the NW Mediterranean (MEPC.380(80), 2023) and Nusa Penida / Gili Matra Lombok Strait (MEPC.396(82), 2024) designations, and rephrased as approximate because published counts vary 18–19; A.982(24) completed with its MEPC.267(68) amendment across 7 files (23 citations), closing the open scope from Entry 34. MEPC.1/Circ.778/Rev.5 checked and current. | Found during the Entry 34 correction pass |
+| 2026-08-19 | Entries 36–37: SQ teaser cited a non-existent MSC.1/Circ.1405/Rev.3 (correct is Rev.2, 25 May 2012; Rev.3 belongs to the companion flag-State circular MSC.1/Circ.1406) while the gated copy had already been corrected — teaser-drift class of error, now covered by a new citation-contradiction check in the health script; and the decorative file-header version badge, stale in all 5 files carrying it, removed in favour of the per-question q-version footer as sole version truth. | Found by a repo-wide teaser/gated citation comparison |
