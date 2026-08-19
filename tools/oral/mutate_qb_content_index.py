@@ -24,6 +24,14 @@ touched.
   P  renderer reads e.summary again         -> renderer
   Q  generator drops corrections            -> corrections_preserved / governed
   R  restore QB2_C q2 scaffolding text      -> leak / text  (repaired 2026-08-19)
+  S  reintroduce "via Nixon" in a note      -> hygiene      (editorial pass 2026-08-19)
+  T  add a WhatsApp reference               -> hygiene
+  U  add commit SHAs                        -> hygiene
+  V  add "known_traps.md Entry 6"           -> hygiene
+  W  add GAP-/P0- ticket ids                -> hygiene
+  X  blank a note                           -> corrections / note_quality
+  Y  restore a pre-cleanup unsafe note      -> hygiene
+  Z  hygienic but empty "Content updated."  -> note_quality
 
   PYTHONIOENCODING=utf-8 python tools/oral/mutate_qb_content_index.py [--keep]
 Exit 0 only when every mutation is caught by its named check.
@@ -211,6 +219,61 @@ def mut_R(work):
     save(work, m, h)
 
 
+def _note(work, idx, text):
+    m, _ = load(work)
+    m["recently_updated"][idx]["note"] = text
+    save(work, m)
+
+
+def mut_S(work):                                     # reintroduce "via Nixon"
+    m, _ = load(work)
+    e = m["recently_updated"][3]
+    _note(work, 3, e["note"].replace("QB1_A:", "QB1_A (candidate-flagged, via Nixon):", 1))
+
+
+def mut_T(work):                                     # WhatsApp reference
+    m, _ = load(work)
+    e = m["recently_updated"][0]
+    _note(work, 0, e["note"] + " Sourced from a WhatsApp report.")
+
+
+def mut_U(work):                                     # commit SHA
+    m, _ = load(work)
+    e = m["recently_updated"][9]
+    _note(work, 9, e["note"].replace("24 corrections", "24 corrections (commits 7044e4b, 30fb6f5)", 1))
+
+
+def mut_V(work):                                     # known_traps.md Entry 6
+    m, _ = load(work)
+    e = m["recently_updated"][1]
+    _note(work, 1, e["note"] + " See known_traps.md Entry 6.")
+
+
+def mut_W(work):                                     # GAP-/P0- ticket ids
+    m, _ = load(work)
+    e = m["recently_updated"][11]
+    _note(work, 11, e["note"] + " Closes GAP-04 and P0-02.")
+
+
+def mut_X(work):                                     # blank a note (also a "clean" note by regex)
+    _note(work, 7, "")
+
+
+PRE_CLEANUP_NOTE_2 = (   # verbatim opening of governed row 2 as it stood at ca881c4
+    "Candidate-flagged re-evaluation request (via Nixon, screenshot) on Q5 (Q15: Rajappan, "
+    "war-zone/3 Indian crew died investigation). Verification against primary sources found "
+    "the Casualty Link's True Confidence (2024) reference implicitly mismatched the question's "
+    "'Indian crew' premise ... q-version Q5 v1.1->v1.2. See known_traps.md Entry 6 scope note.")
+
+
+def mut_Y(work):                                     # generator restores the stale unsafe note
+    _note(work, 2, PRE_CLEANUP_NOTE_2)
+
+
+def mut_Z(work):                                     # a note that passes hygiene but says nothing
+    _note(work, 20, "Content updated.")
+
+
 MUTATIONS = [
     ("A drop real record", mut_A, {"count", "complete"}),
     ("B add revision card", mut_B, {"no_nonquestion", "no_extras"}),
@@ -230,6 +293,14 @@ MUTATIONS = [
     ("P renderer reads e.summary", mut_P, {"renderer"}),
     ("Q generator drops corrections", mut_Q, {"corrections_preserved", "governed"}),
     ("R restore QB2_C scaffolding text", mut_R, {"leak", "text"}),
+    ("S reintroduce 'via Nixon'", mut_S, {"hygiene"}),
+    ("T add WhatsApp reference", mut_T, {"hygiene"}),
+    ("U add commit SHAs", mut_U, {"hygiene"}),
+    ("V add known_traps.md Entry 6", mut_V, {"hygiene"}),
+    ("W add GAP-/P0- ids", mut_W, {"hygiene"}),
+    ("X blank a note", mut_X, {"corrections", "note_quality"}),
+    ("Y restore pre-cleanup unsafe note", mut_Y, {"hygiene"}),
+    ("Z hygienic but empty 'Content updated.'", mut_Z, {"note_quality"}),
 ]
 
 

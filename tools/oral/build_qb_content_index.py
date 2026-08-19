@@ -127,6 +127,65 @@ CORRECTION_KEYS = ("date", "note", "files")
 CORRECTION_OBSOLETE_KEYS = ("summary", "files_touched")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
+# Candidate-facing hygiene for the correction log (2026-08-19 editorial pass).
+# The hub renders `note` and `files` verbatim to paying candidates, so neither
+# may carry internal workflow, person, chat, repository or AI-tooling detail.
+# The public log says WHAT changed - not who told us, which chat, which commit,
+# which internal file, which AI. Every pattern below was present in at least one
+# of the 33 governed rows before the pass (or is the obvious next leak) and is
+# an explicit regression control, not a generic NER attempt. Patterns are kept
+# narrow so ordinary maritime vocabulary is never banned ("branch" is legitimate
+# - DGMA Maritime Health Branch; "manifest" is a cargo term; examiner surnames
+# are public product context and are allowed).
+CORRECTION_FORBIDDEN = [
+    # (label, compiled regex) - label is what the failure message names
+    ("person: Nixon",          re.compile(r"\bNixon\b")),
+    ("person: candidate name", re.compile(r"\b(?:Vivek|Rathesh)\b")),
+    ("chat: WhatsApp/Telegram", re.compile(r"\b(?:WhatsApp|Telegram)\b", re.I)),
+    ("chat: screenshot",       re.compile(r"\bscreenshots?\b", re.I)),
+    ("repo: known_traps",      re.compile(r"known_traps", re.I)),
+    ("repo: Entry n",          re.compile(r"\bEntry\s+\d+")),
+    ("repo: commit/SHA",       re.compile(r"\b(?=[0-9a-f]*[a-f])(?=[0-9a-f]*\d)[0-9a-f]{7,40}\b")),
+    ("repo: commit word",      re.compile(r"\bcommits?\b", re.I)),
+    ("repo: GitHub",           re.compile(r"\bGitHub\b", re.I)),
+    ("repo: local path",       re.compile(r"\b[A-Za-z]:\\")),
+    ("repo: source file",      re.compile(r"\b[\w-]+\.(?:md|py|json|xlsx)\b", re.I)),
+    ("ticket: GAP-/P0-/HOLD-", re.compile(r"\b(?:GAP|P0|P1|P2|HOLD)-\d+")),
+    ("ai: Claude",             re.compile(r"\bClaude\b")),
+    ("ai: Desktop/Laptop",     re.compile(r"\b(?:Desktop|Laptop)\b")),
+    ("workflow: founder",      re.compile(r"\bfounder\b", re.I)),
+    ("workflow: TODO/FIXME",   re.compile(r"\b(?:TODO|FIXME)\b")),
+    ("workflow: node --check", re.compile(r"node --check")),
+    ("workflow: auth gate",    re.compile(r"\bauth[- ]?gate|\bgated\b|\bgating\b", re.I)),
+    ("workflow: health-check", re.compile(r"health[- ]?check", re.I)),
+    ("workflow: Formspree",    re.compile(r"\bFormspree\b|\bf/[a-z0-9]{8}\b")),
+    ("workflow: GREP/SKIP tag", re.compile(r"\bGREP\b|\bSKIP-tagged\b")),
+    ("workflow: ledger",       re.compile(r"\bledger\b", re.I)),
+    ("workflow: manifest entry", re.compile(r"\bthis manifest\b|\bmanifest (?:entry|update|version|files)\b", re.I)),
+    ("workflow: via <person>", re.compile(r"\bvia [A-Z][a-z]+\b")),
+    ("workflow: reporter attribution", re.compile(r"\b(?:submitted|reported|flagged) by\b", re.I)),
+]
+
+
+def correction_hygiene_violations(entries):
+    """Return [(index, date, label, matched_text)] for every forbidden pattern
+    hit in a correction row's `note` or `files`. Pure function - used by the
+    generator (fail-closed on the governed source) and by the validator (on the
+    rendered manifest)."""
+    hits = []
+    for i, e in enumerate(entries or []):
+        if not isinstance(e, dict):
+            continue
+        texts = [str(e.get("note") or "")]
+        if isinstance(e.get("files"), list):
+            texts += [str(f) for f in e["files"]]
+        for text in texts:
+            for label, rx in CORRECTION_FORBIDDEN:
+                m = rx.search(text)
+                if m:
+                    hits.append((i, e.get("date"), label, m.group(0)))
+    return hits
+
 
 def check_corrections(entries):
     """Validate the governed recently_updated array; raise BuildFailure on
@@ -157,6 +216,12 @@ def check_corrections(entries):
         if key in seen:
             fail("recently_updated[%d] (%s): duplicate correction entry" % (i, e["date"]))
         seen.add(key)
+    hits = correction_hygiene_violations(entries)
+    if hits:
+        i, d, label, txt = hits[0]
+        fail("recently_updated[%d] (%s): candidate-facing hygiene violation - %s: %r "
+             "(%d hit(s) total; the public log says what changed, not who/which chat/"
+             "which commit/which internal file)" % (i, d, label, txt, len(hits)))
     return entries
 
 

@@ -311,6 +311,22 @@ def run(manifest_path, index_html_path):
         corr_seen.add(k)
     report("corrections", not corr_bad, "; ".join(corr_bad[:6]))
 
+    # candidate-facing hygiene: the rendered log must carry no internal
+    # workflow / person / chat / repository / AI-tooling vocabulary. Runs on the
+    # MANIFEST (what the hub actually fetches), so a generator that re-admits a
+    # stale unsafe note is caught here even if the governed source is clean.
+    hyg = B.correction_hygiene_violations(ru)
+    report("hygiene", not hyg,
+           "%d hit(s): %s" % (len(hyg), ["[%d] %s %r" % (i, lab, t) for i, _, lab, t in hyg[:5]]))
+    # blank/short notes are not "clean" - every row must still tell the
+    # candidate what changed (min 40 chars, at least one QB/notes/page ref
+    # or a regulation-shaped token).
+    thin = [i for i, e in enumerate(ru)
+            if isinstance(e, dict) and (len((e.get("note") or "").strip()) < 40
+            or not re.search(r"\bQB\d+_[A-Z]|notes|page|Resolution|Act|Code|SOLAS|MARPOL|citation|corrected|updated|added|fixed",
+                             e.get("note") or "", re.I))]
+    report("note_quality", not thin, "thin/unspecific rows %s" % thin[:10])
+
     # the hub renderer must bind to the canonical keys and nothing else
     log_js = re.search(r"async function toggleCorrectionLog\(\)\{.*?\n\}\n", index_text, re.S)
     if not log_js:
