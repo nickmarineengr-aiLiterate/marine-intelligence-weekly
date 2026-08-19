@@ -156,6 +156,7 @@ a{color:var(--teal-dark);text-decoration:none;}a:hover{text-decoration:underline
 <a class="toc-link" href="#q8">Q8. Dali incident — what went wrong and what is the CE liability?</a>
 <a class="toc-link" href="#q9">Q9. CE decision framework — how does a CE decide under pressure?</a>
 <a class="toc-link" href="#q10">Q10. Risk assessment — L×S matrix, steps and documentation?</a>
+<a class="toc-link" href="#q11">Q11. Great circle voyage — route, limits and fuel</a>
     <div class="divider"></div>
     <div class="upcoming-note">Next: <strong>QB5_C_B — Part B</strong></div>
   </div>
@@ -774,6 +775,63 @@ Here are the drafted answers for Questions 11 and 12, formatted exactly to your 
         <span class="q-version">QB5_C_A · Q10 · v1.0</span>
       </div>
     </div>
+    <div class="q-card" id="q11" data-tags="management stcw">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">11</div>
+        <div class="q-text-wrap">
+          <div class="q-text">What is a great circle voyage? How does it differ from a rhumb line, when would you not use it, and what does it mean for the engine room?</div>
+          <div class="q-tags"><span class="q-tag tag-management">MANAGEMENT</span><span class="q-tag tag-stcw">STCW</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>A great circle is the shortest path between two points on the globe — its plane passes through the Earth&#x27;s centre. On a Mercator chart it appears as a curve, while the rhumb line of constant course plots as a straight line and is longer. The saving is real on long, high-latitude, east-west passages and negligible near the equator.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>Sailing a great circle means following the shortest track over the surface of the sphere, but the price is that the course is <strong>continuously changing</strong>. In practice it is sailed as a series of rhumb-line legs between waypoints taken off the great circle, each leg steered on a constant course. On a Mercator projection the great circle curves towards the nearer pole, which is the visual giveaway. You would not use it where the saving is negligible — short passages, or tracks near the equator and along a meridian, where the rhumb line and the great circle coincide or nearly so. You would also not use it where it carries you into ice, heavy weather or shallow water; there the answer is <strong>composite great circle sailing</strong>, which caps the highest latitude reached.</div>
+        <div class="answer-body">
+<h4>1. The geometry, stated cleanly</h4>
+<ul>
+<li><strong>Great circle:</strong> any circle on the sphere whose plane passes through the centre of the Earth. The shorter arc between two points on it is the shortest distance over the surface.</li>
+<li><strong>Rhumb line (loxodrome):</strong> a track crossing every meridian at the same angle — a constant course. It is longer, except in the special cases below.</li>
+<li><strong>On a Mercator chart:</strong> the rhumb line is a <em>straight</em> line; the great circle is a <em>curve</em>, concave toward the nearer pole. On a gnomonic chart the relationship reverses — the great circle plots straight, which is why gnomonic charts were used to lift great-circle waypoints.</li>
+</ul>
+<p>Two cases where the two coincide and there is nothing to gain: along the <strong>equator</strong>, and along any <strong>meridian</strong>. Both are themselves great circles.</p>
+
+<h4>2. How it is actually sailed</h4>
+<p>No ship steers a continuously changing heading. The track is broken into legs — commonly at fixed intervals of longitude — and each leg is sailed as a rhumb line between successive waypoints lying on the great circle. The vertex, the point of highest latitude on the track, is calculated because it determines how far poleward the route takes you.</p>
+
+<h4>3. Composite great circle sailing</h4>
+<p>Where the great circle would carry the ship above a latitude that is unacceptable — ice, known heavy weather, or simply outside the ship&#x27;s trading limits — the route is flown as a <strong>composite</strong>: a great-circle arc from the departure point running tangential to a chosen <strong>limiting parallel</strong>, then a run along that parallel, then a second great-circle arc tangential to it down to the destination. It is longer than the pure great circle and shorter than the rhumb line, and it is the standard answer when the examiner introduces ice.</p>
+
+<h4>4. When the saving is not worth having</h4>
+<ul>
+<li><strong>Short passages</strong> — the difference is inside the noise of weather and steering.</li>
+<li><strong>Low latitudes</strong> — the two tracks converge as you approach the equator.</li>
+<li><strong>Predominantly north–south passages</strong> — a meridian is already a great circle.</li>
+<li><strong>Where the shortest track is not the cheapest track</strong> — adverse current, head seas or an ice margin can make the longer route the faster and less costly one. Weather routeing exists precisely to make that trade.</li>
+</ul>
+
+<h4>5. What it means in the engine room</h4>
+<p>Distance is the input to every fuel calculation the Chief Engineer owns. A shorter track at the same speed means fewer steaming hours, less fuel burnt and a lower voyage cost — and because the carbon intensity metrics are distance-based, route choice feeds directly into the ship&#x27;s operational carbon intensity as well. The practical engine-room consequence is planning: the main engine RPM and consumption schedule, the bunker plan and the ROB margin are all built against the planned distance, so when the bridge changes from a great circle to a composite route for ice, the fuel plan has to be rebuilt rather than adjusted. Under <strong>SOLAS V/34</strong> the voyage plan is a statutory document covering berth to berth, and the route type is one of the choices it records.</p>
+          <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div><div class="reg-item"><span class="reg-code">SOLAS V / Reg 34</span><span class="reg-desc">Safe navigation and avoidance of dangerous situations — the voyage plan must be prepared berth to berth before proceeding to sea, taking account of the intended route.</span></div><div class="reg-item"><span class="reg-code">IMO Res. A.893(21)</span><span class="reg-desc">Guidelines for Voyage Planning — the four phases of appraisal, planning, execution and monitoring that give effect to SOLAS V/34.</span></div><div class="reg-item"><span class="reg-code">SOLAS V / Reg 27</span><span class="reg-desc">Nautical charts and publications — adequate and up-to-date for the intended voyage, including any alternative route.</span></div><div class="reg-item"><span class="reg-code">SOLAS V / Reg 19</span><span class="reg-desc">Carriage requirements for shipborne navigational systems, including ECDIS, on which the route is now constructed and monitored.</span></div><div class="reg-item"><span class="reg-code">MARPOL Annex VI / Reg 28</span><span class="reg-desc">Operational carbon intensity — a distance-based metric, so route selection is a direct lever on the ship&#x27;s rating.</span></div></div>
+          <div class="ce-tip"><strong>CE Oral Tip (Kochi MMD):</strong> The examiner is testing whether you understand <em>why</em>, not whether you can recite a definition. Lead with the plane through the Earth&#x27;s centre, then immediately give the Mercator contrast — <em>&quot;Sir, on a Mercator chart the rhumb line is straight and the great circle is curved.&quot;</em> The two follow-ups that come almost every time are <strong>&quot;when would you not use it?&quot;</strong> and <strong>&quot;what if there is ice?&quot;</strong>. The first answer is short passages and low latitudes; the second is <strong>composite great circle sailing</strong> with a limiting parallel — name it, because most candidates cannot. As a Chief Engineer, close by tying distance to bunkers and to the carbon intensity rating; that is your ground, not the navigator&#x27;s.</div>
+        </div>
+        <details class="deep-dive"><summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary><div class="deep-dive-body"><h5>CE Relevance</h5><p>The engine department does not choose the route, but it owns the consequences of it. The bunker plan, the ROB margin on arrival, the cylinder oil consumption and the main engine load profile are all built on planned distance and planned speed. A route change for ice or weather changes the distance and often the speed profile too, and that is the moment to recalculate rather than to assume the margin absorbs it. Charter-party speed and consumption warranties are also stated against a route, so a route change with commercial implications is one the Chief Engineer should be in the room for.</p>
+<h5>Traps and Common Failures</h5><ul>
+<li><strong>Saying the great circle is a straight line on the chart.</strong> On Mercator it is a curve; on gnomonic it is straight. Naming the projection is what makes the answer correct.</li>
+<li><strong>Claiming it is always shorter.</strong> Along the equator or a meridian the rhumb line <em>is</em> the great circle.</li>
+<li><strong>Not knowing composite sailing.</strong> This is the ice follow-up and it is where most candidates stop.</li>
+<li><strong>Confusing shortest with cheapest.</strong> Weather routeing frequently chooses a longer track for a lower cost.</li>
+<li><strong>Forgetting the course changes.</strong> A great circle is sailed as a chain of rhumb-line legs, not as one heading.</li>
+</ul>
+<h5>Examiner Chain</h5><p>What is a great circle → why is it the shortest distance → how does it look on a Mercator chart → what is a rhumb line → when are they the same → how do you actually steer it → what is the vertex → what if the track goes too far north → what is composite sailing → how does the route affect your bunkers → and your carbon intensity rating.</p>
+<h5>Related Cards</h5><p>Q3 covers voyage performance checks and the one most often missed — read it alongside this card, because the performance check is where a planned distance meets the distance actually run.</p></div></details>
+      </div>
+      <div class="q-footer">
+        <span>Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB5_C_A, Q11, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB5_C_A · Q11 · v1.0</span>
+      </div>
+    </div>
+
   </div><!-- /#q-feed -->
 </div><!-- /.main-layout -->
 <div id="no-results"><p>No questions match your search/filter.</p></div>

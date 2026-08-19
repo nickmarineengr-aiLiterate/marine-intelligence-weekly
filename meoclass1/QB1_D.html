@@ -327,7 +327,7 @@ a{color:inherit;}
   <button class="filter-btn" onclick="filterTag('survey', this)">Surveys</button>
   <button class="filter-btn" onclick="filterTag('load-line', this)">Load Lines</button>
   <button class="filter-btn" onclick="filterTag('machinery', this)">Machinery</button>
-  <span id="q-count-label">Showing 4 of 4</span>
+  <span id="q-count-label">Showing 7 of 7</span>
 </div>
 
 <div class="main-layout">
@@ -337,6 +337,9 @@ a{color:inherit;}
     <a class="toc-link" href="#q2">Q2 · Lifting Appliance Amendments</a>
     <a class="toc-link" href="#q3">Q3 · Lifting Appliance Survey</a>
     <a class="toc-link" href="#q4">Q4 · Load Line Survey Documents</a>
+    <a class="toc-link" href="#q5">Q5 &#183; Fresh Water Allowance</a>
+    <a class="toc-link" href="#q6">Q6 &#183; Type B-60 and B-100</a>
+    <a class="toc-link" href="#q7">Q7 &#183; Bonjean Curves</a>
     <div class="toc-divider"></div>
     <div class="upcoming-note">More companion files (QB2_D–QB9_D) are being prepared. Check back for updates.</div>
   </aside>
@@ -344,7 +347,7 @@ a{color:inherit;}
   <main id="q-feed">
     <div class="section-head">
       <h2>🔍 Surveys &amp; Vessel Particulars</h2>
-      <span class="sec-count">4 questions</span>
+      <span class="sec-count">7 questions</span>
     </div>
 
     <!-- Q1 -->
@@ -1080,6 +1083,74 @@ a{color:inherit;}
         <span class="q-version">QB1_D · Q6 · v1.0</span>
       </div>
     </div>
+      <div class="q-card" id="q7" data-tags="survey solas machinery">
+        <div class="q-header" onclick="toggleCard(this)">
+          <div class="q-num-badge">7</div>
+          <div class="q-text-wrap">
+            <div class="q-text">What is a Bonjean curve, and where would you actually use one?</div>
+            <div class="q-tags"><span class="q-tag">Stability</span><span class="q-tag">SOLAS Ref</span></div>
+          </div>
+          <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="q-answer">
+
+          <div class="practice-block practice-15">
+            <span class="practice-label">⏱ 15-Second Answer</span>
+            "A Bonjean curve plots the area of the ship's immersed transverse section against draught, one curve for every station. Draw the actual waterline on the profile, read off each section area and integrate, and you have displacement and LCB for any waterline — including a trimmed one, where the even-keel hydrostatic tables cannot help you."
+          </div>
+
+          <div class="practice-block practice-60">
+            <span class="practice-label">🎯 60-Second Answer</span>
+            "Sir, the hydrostatic tables are calculated for the ship upright and on even keel. The moment the waterline is not parallel to the baseline — a large trim, a stranding, a flooded compartment, a ship on the ways — those tables stop being valid. Bonjean curves solve that. Each station has its own curve of immersed sectional area against draught, drawn on the ship's profile. You superimpose the actual inclined waterline, take the draught at every station, read the immersed area off that station's curve, then apply Simpson's Rules along the length. Integrating the areas gives the volume of displacement; taking their first moments about a reference gives the longitudinal centre of buoyancy. That is how buoyancy distribution is obtained for longitudinal strength, launching and grounding calculations."
+          </div>
+
+          <div class="answer-body">
+            <h4>What the curve actually is</h4>
+            <p>For each transverse station along the length, a Bonjean curve gives the <strong>area of the immersed part of that section</strong> as a function of the draught at that station. A full set is drawn on a profile of the ship, one curve at each ordinate, to a stated area scale. It is a purely geometric property of the hull form — no assumption about attitude is built into it, and that is precisely why it survives conditions the hydrostatic tables do not.</p>
+
+            <h4>Why the hydrostatic tables are not enough</h4>
+            <p>Hydrostatic particulars are tabulated against a single draught, for the ship <strong>upright and on even keel</strong>. They answer &quot;what is the displacement at 9.2 m?&quot; They cannot answer &quot;what is the displacement and LCB with 3 m of trim by the stern and the forefoot aground?&quot;, because the waterline is no longer parallel to the baseline and every station is at a different draught. Bonjean curves let you work station by station and rebuild the answer from first principles.</p>
+
+            <h4>How you use them — the method</h4>
+            <ul>
+              <li>Draw the <strong>actual waterline</strong> across the profile, at its true angle.</li>
+              <li>At each station, read the draught where that waterline cuts, and take the <strong>immersed sectional area</strong> from that station's Bonjean curve.</li>
+              <li>Apply <strong>Simpson's Rules</strong> to the set of areas along the length to obtain the <strong>volume of displacement</strong>; multiply by density for displacement.</li>
+              <li>Take the <strong>first moment</strong> of those areas about a chosen reference and divide by the volume to obtain the <strong>longitudinal centre of buoyancy</strong>.</li>
+            </ul>
+
+            <h4>Where it matters in practice</h4>
+            <ul>
+              <li><strong>Longitudinal strength.</strong> The buoyancy curve along the length comes from the Bonjean areas. Subtract it from the weight curve to get the load curve, integrate once for <strong>shear force</strong> and again for <strong>bending moment</strong>. This is the calculation the loading instrument performs continuously.</li>
+              <li><strong>Launching.</strong> As the ship travels down the ways the waterline sweeps aft-to-forward and buoyancy builds only over the immersed length. Bonjean areas give the buoyancy distribution at each instant, which is how the stern-lift moment and the pivoting-pressure at the fore poppet are checked.</li>
+              <li><strong>Grounding and stranding.</strong> With part of the hull supported by the ground, displacement no longer equals weight. Bonjean curves give the actual buoyancy for the observed drafts, and the difference is the ground reaction.</li>
+              <li><strong>Damage and flooding.</strong> Where a compartment is open to the sea and the ship lies at a large trim, sectional areas are the practical route to the flooded condition.</li>
+            </ul>
+
+            <h4>What a Bonjean curve will <em>not</em> give you</h4>
+            <p>It gives immersed <strong>sectional areas</strong>, so it yields volume-derived quantities — displacement, LCB, and from those the block coefficient. It does <strong>not</strong> give waterplane properties. The <strong>longitudinal centre of flotation</strong>, the waterplane area and TPC come from the curve of <strong>half-breadths at the waterline</strong>, not from sectional areas. Offering LCF as a use of Bonjean curves is a common and avoidable error.</p>
+          </div>
+
+          <div class="trap-box">
+            <strong class="trap-label">⚠ Exam Trap</strong>
+            A Bonjean curve is not a curve of displacement, and it is not one curve for the ship. It is one curve <em>per station</em>, of immersed sectional area against draught. The examiner's follow-up is usually &quot;so why not just use the hydrostatic tables?&quot; — the answer is that the tables assume even keel, and every situation where Bonjean curves earn their keep is a situation where that assumption has failed.
+          </div>
+
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">IACS UR S11</span><span class="reg-desc">Longitudinal Strength Standard — the still-water and wave bending moment and shear force envelope that the Bonjean-derived buoyancy distribution feeds.</span></div>
+            <div class="reg-item"><span class="reg-code">IACS UR S1</span><span class="reg-desc">Requirements for loading conditions, loading manuals and loading instruments — the still-water loading data against which the calculation is performed on board.</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS II-1 / Reg 5 &amp; 5-1</span><span class="reg-desc">Inclining test and the stability information to be supplied to the master — the hydrostatic and cross-curve data set of which the Bonjean curves form part.</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS XII / Reg 11</span><span class="reg-desc">Loading instrument required on bulk carriers of 150 m and upwards — the shipboard implementation of the shear force and bending moment calculation.</span></div>
+            <div class="reg-item"><span class="reg-code">IS Code 2008 (MSC.267(85))</span><span class="reg-desc">Intact stability criteria that the hydrostatic data, however derived, must be shown to satisfy.</span></div>
+          </div>
+        </div>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_D, Q7, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB1_D · Q7 · v1.0</span>
+        </div>
+      </div>
+
 
     <div id="no-results">No questions match your search/filter.</div>
   </main>
