@@ -832,7 +832,7 @@ def check_manifest(files, file_results=None):
                     f"disk has {actual_qcount} numeric q-cards — manifest likely stale after an edit"
                 )
 
-    # Changelog completeness: a file mentioned in a recently_updated summary
+    # Changelog completeness: a file mentioned in a recently_updated note
     # should have a corrections_applied entry to match — otherwise the fix
     # landed in the file but the audit trail was never appended (the exact
     # gap found in the 2026-07-26 manifest audit: QB6_C, QB6_E, QB7_A, QB9_C,
@@ -841,10 +841,13 @@ def check_manifest(files, file_results=None):
     recently_updated = manifest.get("recently_updated", [])
     filename_pattern = re.compile(r'\bQB\d+(?:_[A-Za-z]+)*(?:\.html)?\b')
     for entry in recently_updated:
-        summary = entry.get("summary", "")
+        # canonical correction-log contract: {date, note, files}; "note" is the
+        # human description (the hub renders it), "files" is metadata. This
+        # check reads the description only, as it always has.
+        note = entry.get("note", "")
         date = entry.get("date", "unknown date")
         mentioned = set()
-        for m in filename_pattern.findall(summary):
+        for m in filename_pattern.findall(note):
             base = m if m.lower().endswith(".html") else m + ".html"
             mentioned.add(base)
         for fname in mentioned:
@@ -854,7 +857,7 @@ def check_manifest(files, file_results=None):
             corrections = meta.get("corrections_applied", [])
             if len(corrections) == 0:
                 errors.append(
-                    f"Changelog gap: {fname} is named in the {date} recently_updated summary "
+                    f"Changelog gap: {fname} is named in the {date} recently_updated note "
                     f"but has an empty corrections_applied array — fix likely landed without a logged entry"
                 )
 

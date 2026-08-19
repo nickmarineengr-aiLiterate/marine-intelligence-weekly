@@ -27,7 +27,9 @@ Inputs
   meoclass1/index.html QB_GROUPS                 group membership ("qb" field)
   tools/oral/qb_content_index_governed.json      the hand-maintained parts that
                                                  cannot be derived from a page:
-                                                 recently_updated changelog,
+                                                 recently_updated changelog
+                                                 ({date, note, files} only -
+                                                 see check_corrections),
                                                  per-file corrections_applied,
                                                  version fallback where the page
                                                  carries no Version line, and
@@ -107,8 +109,55 @@ def natural_file_key(fname):
 
 # ------------------------------------------------------------------ inputs
 
+# Correction-log contract (recently_updated). ONE schema, rendered by the hub
+# correction log and read by qb_health_check's changelog-gap check:
+#   date   YYYY-MM-DD                        required
+#   note   human-readable description        required, non-empty string
+#   files  list of str, structured metadata  optional, never the description
+# "summary" and "files_touched" were a July-2026 authoring drift that left 21
+# of 33 entries blank on the live hub; the generator refuses them so a
+# regeneration can never re-admit the split.
+CORRECTION_KEYS = ("date", "note", "files")
+CORRECTION_OBSOLETE_KEYS = ("summary", "files_touched")
+DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+
+
+def check_corrections(entries):
+    """Validate the governed recently_updated array; raise BuildFailure on
+    the first contract violation. Order is the governed order (untouched)."""
+    if not isinstance(entries, list) or not entries:
+        fail("governed recently_updated: missing or empty")
+    seen = set()
+    for i, e in enumerate(entries):
+        if not isinstance(e, dict):
+            fail("recently_updated[%d]: not an object" % i)
+        bad = [k for k in e if k in CORRECTION_OBSOLETE_KEYS]
+        if bad:
+            fail("recently_updated[%d]: obsolete key(s) %s - use %s"
+                 % (i, bad, list(CORRECTION_KEYS)))
+        extra = [k for k in e if k not in CORRECTION_KEYS]
+        if extra:
+            fail("recently_updated[%d]: unknown key(s) %s" % (i, extra))
+        if not isinstance(e.get("date"), str) or not DATE_RE.match(e["date"]):
+            fail("recently_updated[%d]: date must be YYYY-MM-DD" % i)
+        note = e.get("note")
+        if not isinstance(note, str) or not note.strip():
+            fail("recently_updated[%d] (%s): note missing or blank" % (i, e["date"]))
+        if "files" in e and (not isinstance(e["files"], list)
+                             or not all(isinstance(f, str) and f.strip() for f in e["files"])):
+            fail("recently_updated[%d] (%s): files must be a list of non-empty strings"
+                 % (i, e["date"]))
+        key = (e["date"], note.strip())
+        if key in seen:
+            fail("recently_updated[%d] (%s): duplicate correction entry" % (i, e["date"]))
+        seen.add(key)
+    return entries
+
+
 def load_governed():
-    return json.loads(GOVERNED_PATH.read_text(encoding="utf-8"))
+    governed = json.loads(GOVERNED_PATH.read_text(encoding="utf-8"))
+    check_corrections(governed.get("recently_updated"))
+    return governed
 
 
 def read_index_html():
