@@ -527,6 +527,244 @@ body{user-select:none;-webkit-user-select:none;-moz-user-select:none;}
         <span class="q-version">QB7_C · Q1 · v1.0</span>
       </div>
     </div>
+    <div class="q-card" id="q2" data-tags="ghg marpol">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">2</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Miller cycle — explain it, and how does it differ from the Otto and Diesel cycles?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-ghg">GHG / CII</span>
+            <span class="q-tag tag-marpol">MARPOL</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>Otto and Diesel differ in how heat is added — constant volume against constant pressure. Miller is not a third heat-addition law at all: it is a valve-timing modification that makes the effective compression ratio smaller than the expansion ratio. That cools the charge, cuts peak temperature and so cuts NOx, while the longer expansion recovers efficiency.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>Sir, in the ideal Otto cycle heat is added at constant volume, which suits a spark-ignition engine. In the ideal Diesel cycle heat is added at constant pressure; a real marine diesel is closer to the dual or mixed cycle, part at constant volume and part at constant pressure. The Miller cycle is different in kind. It keeps compression ignition but closes the inlet valve early, before bottom dead centre, so the trapped charge expands and cools before compression proper begins. The effective compression ratio therefore falls below the geometric expansion ratio. The result is a lower temperature throughout compression and a lower peak combustion temperature, which suppresses thermal NOx formation, while the expansion stroke remains full length so more work is recovered from each unit of heat. Because less air is trapped, the lost mass is restored by a higher-efficiency turbocharger running greater boost pressure.</div>
+        <div class="answer-body">
+          <h4>1. The Three Cycles Side by Side</h4>
+          <ul>
+            <li><strong>Otto (constant volume):</strong> heat added at constant volume at top dead centre. Sharp pressure rise, high peak pressure and temperature. The basis of spark-ignition and of the modern lean-burn gas engine.</li>
+          </ul>
+          <ul>
+            <li><strong>Diesel (constant pressure):</strong> heat added at constant pressure as the piston begins to descend. Lower peak pressure for the same compression ratio, and the classic slow-speed marine model.</li>
+          </ul>
+          <ul>
+            <li><strong>Dual / mixed:</strong> what a real marine diesel actually does — a constant-volume portion during rapid premixed burning, then a constant-pressure portion during diffusion burning.</li>
+          </ul>
+          <ul>
+            <li><strong>Miller:</strong> not a heat-addition law but a <em>breathing</em> modification applied on top of a diesel or gas cycle, decoupling compression from expansion.</li>
+          </ul>
+
+          <h4>2. How the Miller Cycle Works</h4>
+          <p>The defining move is <strong>early inlet valve closing (EIVC)</strong>, before bottom dead centre:</p>
+          <ul>
+            <li>The inlet valve shuts while the piston is still descending, so the trapped charge <strong>expands and cools</strong> for the remainder of the down-stroke.</li>
+          </ul>
+          <ul>
+            <li>Compression then starts from a lower pressure and temperature. The <strong>effective compression ratio</strong> is less than the geometric one.</li>
+          </ul>
+          <ul>
+            <li>Expansion, however, still uses the full stroke. So <strong>expansion ratio &gt; effective compression ratio</strong> — the source of the efficiency gain, because more of the combustion energy is turned into work instead of being thrown away at exhaust.</li>
+          </ul>
+          <p class="formula"><strong>Effective compression ratio &lt; Geometric expansion ratio</strong></p>
+          <p>Some engines instead use <strong>late inlet valve closing (LIVC)</strong>, pushing part of the charge back into the manifold. The thermodynamic effect is the same: a reduced effective compression ratio.</p>
+
+          <h4>3. Why It Reduces NOx</h4>
+          <p>Thermal NOx formation is governed by the extended Zeldovich mechanism and is extremely sensitive to peak flame temperature and residence time. Cooling the charge before compression lowers the temperature at every subsequent point in the cycle, including the peak. A modest reduction in peak temperature therefore produces a disproportionate reduction in NOx. Miller timing is one of the principal <strong>in-cylinder</strong> measures used to reach <strong>Tier II</strong> under <strong>MARPOL Annex VI Regulation 13</strong>, and it is routinely combined with EGR or SCR to reach <strong>Tier III</strong> in an emission control area.</p>
+
+          <h4>4. The Penalty and How It Is Paid</h4>
+          <ul>
+            <li>Closing the inlet early traps <strong>less air</strong>, so less fuel can be burned and power falls.</li>
+          </ul>
+          <ul>
+            <li>The compensation is <strong>higher charge air pressure</strong> from a high-efficiency turbocharger — which is precisely why Miller timing became practical only as turbocharger efficiency improved.</li>
+          </ul>
+          <ul>
+            <li>Effective charge air cooling matters more, not less, because the whole benefit is a temperature benefit.</li>
+          </ul>
+
+          <h4>5. The Two-Stroke Distinction — the Point Examiners Probe</h4>
+          <p>A slow-speed two-stroke has <strong>no inlet valves</strong>. Scavenge air enters through ports in the liner uncovered by the piston, so their timing is fixed by geometry and cannot be advanced. Miller timing is therefore realised on a two-stroke through the <strong>electronically controlled exhaust valve</strong>: altering exhaust valve closing changes the point at which effective compression begins, achieving the same decoupling of effective compression from expansion. On four-stroke medium-speed engines the classical EIVC applies directly.</p>
+
+          <h4>Key Numbers / Memorisation Targets</h4>
+          <ul>
+            <li><strong>Otto</strong> — constant volume heat addition. <strong>Diesel</strong> — constant pressure. <strong>Dual</strong> — both, and what a real engine does.</li>
+          </ul>
+          <ul>
+            <li><strong>Miller</strong> — effective compression ratio reduced below expansion ratio.</li>
+          </ul>
+          <ul>
+            <li><strong>MARPOL Annex VI Reg 13</strong> — the NOx limits Miller timing helps meet; Tier III applies in designated emission control areas.</li>
+          </ul>
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Regulation 13</span><span class="reg-desc">Nitrogen oxides (NOx) — the Tier I/II/III limit structure</span></div>
+            <div class="reg-item"><span class="reg-code">NOx Technical Code 2008</span><span class="reg-desc">Certification, test cycles and onboard verification of NOx compliance</span></div>
+            <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Regulation 26</span><span class="reg-desc">SEEMP — where engine efficiency measures are recorded</span></div>
+            <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Regulation 28</span><span class="reg-desc">Operational carbon intensity — the efficiency gain feeds the CII rating</span></div>
+            <div class="reg-item"><span class="reg-code">Engine Technical File / EIAPP</span><span class="reg-desc">Valve timing is a rated parameter; changes must stay inside the approved envelope</span></div>
+          </div>
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Draw the P-V diagram and mark <em>one</em> thing clearly — that the expansion line runs further than the compression line. That single feature is the Miller cycle. Say up front that Otto and Diesel are distinguished by heat addition while Miller is distinguished by valve timing, because candidates who treat all three as parallel cycles get taken apart. Then volunteer the two-stroke point: no inlet valves, so it is done on the exhaust valve. If he pushes on the downside, answer "less trapped air, so I need more boost" — that is the answer he is waiting for.</div>
+        </div>
+        <details class="deep-dive">
+          <summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary>
+          <div class="deep-dive-body">
+            <h5>CE Relevance</h5>
+            <p>Miller timing ties the CE's two daily concerns together. Emissions compliance depends on the engine staying inside its certified NOx envelope, and valve timing is a parameter recorded in the Technical File — it is not something to adjust to chase a performance number. Efficiency matters because the same timing choice shows up in specific fuel oil consumption and therefore in the ship's carbon intensity. A turbocharger in poor condition undermines Miller timing directly: if boost falls, the trapped mass falls with it and the engine loses both power and the margin the timing was designed around.</p>
+
+            <h5>Trap Questions</h5>
+            <p class="trap-q">Q: "Is the Miller cycle more efficient than the Diesel cycle?"</p>
+            <p class="trap-a">A: For a given peak temperature, yes in principle — expansion is longer than effective compression, so more work is recovered per unit of heat. But the gain is only realised if the lost trapped mass is restored by efficient turbocharging. With a poor turbocharger the arrangement simply loses power.</p>
+            <p class="trap-q">Q: "Can you apply the Miller cycle to a slow-speed two-stroke engine by closing the inlet valve early?"</p>
+            <p class="trap-a">A: No, sir. A two-stroke has no inlet valves — scavenge air enters through liner ports opened and closed by the piston, at a timing fixed by geometry. The equivalent effect is obtained through the electronically controlled exhaust valve timing.</p>
+            <p class="trap-q">Q: "Why does cooling the charge a little reduce NOx a lot?"</p>
+            <p class="trap-a">A: Because thermal NOx follows the extended Zeldovich mechanism, which is exponentially sensitive to peak flame temperature. A small temperature reduction gives a much larger proportional reduction in NOx.</p>
+
+            <h5>Common CE Failures</h5>
+            <p>The most common failure is presenting Miller as a third member of the Otto/Diesel family, defined by its own heat-addition law. It is not — it is a valve-timing strategy layered on a compression-ignition or gas cycle. The second failure is claiming the efficiency benefit without acknowledging the trapped-mass penalty and the turbocharging that pays for it. The third is forgetting that valve timing is a certified parameter and speaking as though the CE may retune it freely.</p>
+
+            <h5>Examiner Chain</h5>
+            <p>Draw and explain the Miller cycle → how does it differ from Otto and Diesel → why does it reduce NOx → what is the penalty → how is it compensated → can you do it on a two-stroke → which regulation drives it.</p>
+
+            <h5>On My Vessel</h5>
+            <p>On an electronically controlled two-stroke the exhaust valve timing is set by the engine control system against load, and the CE's practical involvement is protecting the conditions the timing assumes: turbocharger cleanliness and efficiency, charge air cooler performance and air-side pressure drop, scavenge air temperature control above the dew point, and cylinder pressure balance verified by the pressure measuring system. Any deviation is investigated against the Technical File rather than tuned out.</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_C, Q2, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7_C, Q2, Correction Required</span>
+        <span class="q-version">QB7_C · Q2 · v1.0</span>
+      </div>
+    </div>
+    <div class="q-card" id="q3" data-tags="marpol">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">3</div>
+        <div class="q-text-wrap">
+          <div class="q-text">ME cylinder lubrication — how do you achieve optimum oil injection as fuel sulphur varies? Explain adaptive cylinder oil control.</div>
+          <div class="q-tags">
+            <span class="q-tag tag-marpol">MARPOL</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>Cylinder oil has two jobs — neutralising sulphuric acid and maintaining the oil film. Adaptive control doses it proportional to engine load and to fuel sulphur, so feed rate equals an ACC factor times sulphur percentage, subject to an absolute minimum feed rate that covers the film and detergency duties when sulphur is low.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>Sir, sulphur in the fuel burns to sulphur oxides which combine with the water of combustion to form sulphuric acid on the liner wall. The alkaline reserve in the cylinder oil, its base number, neutralises that acid; too little and you get cold corrosion, too much and the surplus calcium builds deposits and polishes the bore. Adaptive cylinder oil control makes the dose track the acid actually being produced: it is proportional to engine load, because that sets the fuel mass entering the cylinder, and proportional to the sulphur percentage in that fuel. So feed rate equals the ACC factor multiplied by sulphur percentage. Below a certain sulphur level that calculation would give too little oil for the film, wear-particle flushing and detergency duties, so an absolute minimum feed rate takes over. Since the 0.50 per cent global sulphur cap, it is that minimum which governs most of the time.</div>
+        <div class="answer-body">
+          <h4>1. The Two Duties of Cylinder Oil</h4>
+          <ul>
+            <li><strong>Neutralisation:</strong> sulphur burns to SO₂ and SO₃; with the water of combustion this forms sulphuric acid, which attacks the liner running surface. The oil's <strong>base number (BN)</strong> is its alkaline reserve.</li>
+          </ul>
+          <ul>
+            <li><strong>Tribology:</strong> maintaining the oil film between ring pack and liner, carrying away wear particles and combustion residues, and keeping ring grooves clean.</li>
+          </ul>
+          <p>The first duty scales with sulphur; the second does not. That single fact is the whole reason a minimum feed rate exists.</p>
+
+          <h4>2. The Adaptive Principle</h4>
+          <p>Dosage is made proportional to the amount of sulphur actually entering the cylinder — which means proportional to both engine load and fuel sulphur content:</p>
+          <p class="formula"><strong>Feed rate (g/kWh) = ACC factor × Sulphur %</strong></p>
+          <p>subject to an <strong>absolute minimum feed rate</strong>. On MAN B&amp;W engines this is implemented by the Alpha Lubricator or ME Lube system in ACC mode, with the oil injected in timed pulses as the ring pack passes the quills rather than continuously.</p>
+
+          <h4>3. Worked Figures — MAN B&amp;W Service Letter SL2009-507</h4>
+          <p>The ACC factor rises as the oil's base number falls, because a less alkaline oil needs more volume to deliver the same base:</p>
+          <ul>
+            <li><strong>BN 70</strong> — factor <strong>0.20</strong> g/kWh per %S; the minimum governs at or below <strong>3.0 %</strong> sulphur.</li>
+          </ul>
+          <ul>
+            <li><strong>BN 60</strong> — factor <strong>0.23</strong>; minimum governs at or below <strong>2.6 %</strong> sulphur.</li>
+          </ul>
+          <ul>
+            <li><strong>BN 50</strong> — factor <strong>0.28</strong>; minimum governs at or below <strong>2.1 %</strong> sulphur.</li>
+          </ul>
+          <ul>
+            <li><strong>BN 40</strong> — factor <strong>0.35</strong>; minimum governs at or below <strong>1.7 %</strong> sulphur.</li>
+          </ul>
+          <ul>
+            <li><strong>Absolute minimum: 0.60 g/kWh</strong> in every case. Note that each breakpoint above is simply the sulphur level at which factor × S reaches 0.60.</li>
+          </ul>
+          <ul>
+            <li><strong>Running-in</strong> with BN 70: about <strong>1.70 g/kWh</strong> for the first 5 hours and <strong>1.50 g/kWh</strong> from 5 to 100 hours, to flush wear particles while surfaces bed in.</li>
+          </ul>
+          <p><em>These factors are engine- and service-letter-specific. The current service letter for the particular engine type governs, and it is the document to quote if the examiner asks where the number comes from.</em></p>
+
+          <h4>4. Matching BN to the Fuel — Post-2020 Reality</h4>
+          <p><strong>MARPOL Annex VI Regulation 14</strong> caps fuel sulphur at <strong>0.50 %</strong> globally and <strong>0.10 %</strong> in an emission control area. At those levels the acid load is small, so:</p>
+          <ul>
+            <li>Low-BN oils are used with very-low-sulphur fuel; a high-BN oil on 0.10 % sulphur leaves unreacted calcium that forms hard deposits, causing <strong>bore polishing</strong> and loss of oil retention.</li>
+          </ul>
+          <ul>
+            <li>The <strong>minimum feed rate governs almost all of the time</strong>, because the calculated neutralisation requirement falls far below it.</li>
+          </ul>
+          <ul>
+            <li>Fuel changeover between ECA and non-ECA operation must be accompanied by the correct oil and feed-rate setting, not just a fuel valve change.</li>
+          </ul>
+
+          <h4>5. How You Prove the Setting Is Right</h4>
+          <p>The feed rate is not set once and forgotten — it is confirmed by evidence:</p>
+          <ul>
+            <li><strong>Drain oil (scrape-down) analysis:</strong> residual BN and iron content. A target residual BN of roughly <strong>15 to 20</strong> indicates the alkalinity is adequate but not grossly excessive.</li>
+          </ul>
+          <ul>
+            <li><strong>Iron trend:</strong> rising Fe indicates corrosive or abrasive wear and calls for review before the feed rate is cut further.</li>
+          </ul>
+          <ul>
+            <li><strong>Scavenge port inspection:</strong> liner surface condition, ring free movement, deposits, and any sign of bore polish or micro-seizure.</li>
+          </ul>
+          <p>The correct sequence is to change one variable, run, sample and inspect — never to chase consumption savings by stepping the feed rate down repeatedly without evidence.</p>
+
+          <h4>Key Numbers / Memorisation Targets</h4>
+          <ul>
+            <li><strong>Feed rate = ACC factor × S%</strong>, absolute minimum <strong>0.60 g/kWh</strong>.</li>
+          </ul>
+          <ul>
+            <li><strong>0.50 % / 0.10 %</strong> — global and ECA sulphur limits under Annex VI Reg 14.</li>
+          </ul>
+          <ul>
+            <li><strong>BN 15–20</strong> — typical residual base number target in drain oil.</li>
+          </ul>
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Regulation 14</span><span class="reg-desc">Sulphur oxides and particulate matter — 0.50% global and 0.10% ECA limits</span></div>
+            <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Regulation 13</span><span class="reg-desc">NOx — the certified envelope the engine must stay within</span></div>
+            <div class="reg-item"><span class="reg-code">MAN B&amp;W SL2009-507</span><span class="reg-desc">Guiding ACC feed rates for Alpha Lubricator and ME Lube; factors and minimum feed rate</span></div>
+            <div class="reg-item"><span class="reg-code">Engine Technical File</span><span class="reg-desc">Cylinder lubrication settings recorded as part of the approved engine condition</span></div>
+            <div class="reg-item"><span class="reg-code">ISM Code, section 10</span><span class="reg-desc">Maintenance of ship and equipment; the planned maintenance and sampling regime</span></div>
+            <div class="reg-item"><span class="reg-code">MARPOL Annex VI, Regulation 26</span><span class="reg-desc">SEEMP — lubricating oil consumption as an efficiency measure</span></div>
+          </div>
+          <div class="ce-tip"><strong>CE Oral Tip:</strong> Lead with the two duties of cylinder oil, because the minimum feed rate only makes sense once you have said that the film duty does not scale with sulphur. Then give the formula and immediately add "subject to an absolute minimum". If asked for numbers, quote the factor and the 0.60 g/kWh minimum and name the maker's service letter — that is what separates a memoriser from an engineer. Expect the follow-up "you are on 0.10 per cent sulphur in the ECA, why not cut the oil right down?" — answer with bore polish, film failure and iron in the drain oil.</div>
+        </div>
+        <details class="deep-dive">
+          <summary>CE Relevance, Traps, Failures &amp; Exam Strategy</summary>
+          <div class="deep-dive-body">
+            <h5>CE Relevance</h5>
+            <p>Cylinder oil is one of the largest controllable consumables on the ship and simultaneously the one whose mis-setting is most expensive. Under-dosing produces cold corrosion and liner wear measured in millimetres over a docking cycle; over-dosing produces deposits, bore polish and higher consumption. The CE owns the whole loop: selecting the oil grade against the bunker sulphur, setting the feed rate from the maker's guidance, sampling the drain oil, inspecting the scavenge ports and adjusting on evidence.</p>
+
+            <h5>Trap Questions</h5>
+            <p class="trap-q">Q: "You have changed over to 0.10 per cent sulphur fuel entering the ECA. Do you reduce the cylinder oil feed rate in proportion?"</p>
+            <p class="trap-a">A: No, sir. In proportion the calculation would give a very small figure, but the absolute minimum feed rate takes over because the oil still has to maintain the film, flush wear particles and keep the ring grooves clean. I would also confirm the oil grade is appropriate, since a high-BN oil on very low sulphur fuel leaves unreacted calcium and causes deposits and bore polishing.</p>
+            <p class="trap-q">Q: "Why does the ACC factor go up as the base number goes down?"</p>
+            <p class="trap-a">A: Because the factor delivers a quantity of base, not a quantity of oil. A less alkaline oil carries less base per gram, so more grams are needed to neutralise the same acid.</p>
+            <p class="trap-q">Q: "How do you know your feed rate is correct?"</p>
+            <p class="trap-a">A: By evidence rather than by setting — residual BN and iron in the scrape-down sample, and the liner and ring condition at scavenge port inspection. I change one variable at a time and confirm before changing again.</p>
+
+            <h5>Common CE Failures</h5>
+            <p>The classic failure is treating cylinder oil dosing as a pure acid-neutralisation problem, which makes the minimum feed rate inexplicable and leads candidates to say they would cut the feed proportionally on low-sulphur fuel. The second failure is quoting a feed-rate number with no source; the factors differ by engine and by service letter, and the right answer names the document. The third is confusing base number with viscosity grade when asked which oil to use.</p>
+
+            <h5>Examiner Chain</h5>
+            <p>What does cylinder oil do → what is base number → how does sulphur produce acid → how does adaptive control decide the dose → give me the formula → why is there a minimum → what oil do you use on 0.10 per cent sulphur → how do you confirm the setting is right.</p>
+
+            <h5>On My Vessel</h5>
+            <p>The bunker delivery note sulphur figure is entered against the lubrication setting at every changeover, and the oil grade is selected to match the trade rather than left at one grade year-round. Scrape-down samples are drawn per cylinder on a fixed interval and trended for base number and iron, and the results are read alongside scavenge port inspection findings before any feed-rate change is made. Feed rate changes are recorded so that a wear trend can later be read against the setting that produced it.</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB7_C, Q3, Correction Required">contactus@marineintelligenceweekly.com</a> — Subject: QB7_C, Q3, Correction Required</span>
+        <span class="q-version">QB7_C · Q3 · v1.0</span>
+      </div>
+    </div>
 
   </div>
 </div>

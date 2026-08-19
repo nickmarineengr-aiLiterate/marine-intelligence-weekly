@@ -795,6 +795,291 @@ a{color:inherit;}
         <span class="q-version">QB1_D · Q4 · v1.0</span>
       </div>
     </div>
+    <div class="q-card" id="q5" data-tags="load-line survey">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">5</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Load line — what is Fresh Water Allowance, how is it derived, and how do you apply it when loading in dock water?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-load-line">Load Line</span>
+            <span class="q-tag">Stability</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+
+        <div class="practice-block practice-15">
+          <span class="practice-label">⏱ 15-Second Answer</span>
+          "Fresh Water Allowance is the number of millimetres by which a ship's mean draught increases when she passes from salt water into fresh water at her summer load displacement. It is displacement divided by four times TPC. It is what sets the Fresh and Tropical Fresh marks above the corresponding salt-water marks."
+        </div>
+
+        <div class="practice-block practice-60">
+          <span class="practice-label">🎯 60-Second Answer</span>
+          "Sir, a ship floating in fresh water sinks deeper than in salt water for the same displacement, because fresh water is less dense. The Load Line Convention allows for this in Regulation 40: the minimum freeboard in fresh water is obtained by deducting displacement divided by forty times TPC, in centimetres, from the salt-water freeboard. Expressed in millimetres that is FWA equals displacement divided by four times TPC, where displacement is the salt-water displacement in tonnes at the summer load waterline and TPC is tonnes per centimetre in salt water at that same waterline. That allowance is the vertical distance between the Summer mark and the Fresh mark, and between Tropical and Tropical Fresh. In dock water of intermediate density I do not use the full FWA — I use the Dock Water Allowance, scaled in proportion to how far the dock water density falls between fresh and salt."
+        </div>
+
+        <div class="answer-body">
+          <h4>1. What the Allowance Actually Is</h4>
+          <p>A ship displaces her own weight. In fresh water, of relative density <strong>1.000</strong>, that same weight needs a greater volume than in salt water, of relative density <strong>1.025</strong> — so she floats deeper. <strong>Fresh Water Allowance (FWA)</strong> is that increase in mean draught, expressed in millimetres, measured at the ship's <em>summer load displacement</em>. It is a fixed number for the ship, stated on the load line plan and in the stability booklet, not something recalculated every voyage.</p>
+
+          <h4>2. The Formula and Where It Comes From</h4>
+          <p class="formula"><strong>FWA (mm) = Displacement / (4 × TPC)</strong></p>
+          <ul>
+            <li><strong>Displacement</strong> — the salt-water displacement in tonnes at the summer load waterline.</li>
+            <li><strong>TPC</strong> — tonnes per centimetre immersion in salt water at the summer load waterline.</li>
+          </ul>
+          <p>The regulatory home is <strong>ICLL Annex I, Regulation 40 (Minimum freeboards)</strong>, which states the deduction in centimetres as displacement divided by <strong>40 × TPC</strong>. The familiar 4 and the regulation's 40 are the same quantity — one gives millimetres, the other centimetres.</p>
+
+          <h4>3. Why It Exists — the F and TF Marks</h4>
+          <ul>
+            <li>The <strong>Fresh (F)</strong> mark sits <strong>FWA above the Summer (S)</strong> mark.</li>
+            <li>The <strong>Tropical Fresh (TF)</strong> mark sits <strong>FWA above the Tropical (T)</strong> mark.</li>
+            <li>The logic is commercial as well as statutory: a ship loading in a fresh-water river may legitimately submerge her salt-water marks, because on reaching the sea she will rise to exactly her permitted salt-water draught.</li>
+          </ul>
+
+          <h4>4. Dock Water Allowance — the Practical Case</h4>
+          <p>Real ports are rarely 1.000 or 1.025; they are brackish. The allowance is therefore scaled:</p>
+          <p class="formula"><strong>DWA (mm) = FWA × (1025 − Dock Water Density) / 25</strong></p>
+          <p>with density in kg/m³. The divisor <strong>25</strong> is simply 1025 minus 1000 — the full span between salt and fresh. If the dock water is fresh, DWA equals FWA; if it is fully saline, DWA is zero.</p>
+
+          <h4>5. Worked Example</h4>
+          <ul>
+            <li>Summer displacement <strong>20,000 t</strong>, TPC <strong>30 t/cm</strong>.</li>
+            <li>FWA = 20,000 / (4 × 30) = <strong>166.7 mm</strong>.</li>
+            <li>Dock water density <strong>1012 kg/m³</strong>: DWA = 166.7 × (1025 − 1012) / 25 = 166.7 × 13 / 25 = <strong>86.7 mm</strong>.</li>
+            <li>So the ship may load until her Summer mark is <strong>86.7 mm</strong> below the dock water surface, and she will rise to her Summer marks on reaching the sea.</li>
+          </ul>
+
+          <h4>Key Numbers / Memorisation Targets</h4>
+          <ul>
+            <li><strong>1.025 / 1.000</strong> — relative density of salt and fresh water.</li>
+            <li><strong>4</strong> — the divisor giving FWA in millimetres; <strong>40</strong> gives it in centimetres, as Regulation 40 states it.</li>
+            <li><strong>25</strong> — the density span, in kg/m³, used as the DWA divisor.</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <strong class="trap-label">⚠ Exam Trap</strong>
+          FWA is calculated at the <em>summer load displacement</em> and is a single fixed figure for the ship. Candidates lose marks by offering to recompute FWA for the actual sailing draught. What varies with the port is the Dock Water Allowance, not the FWA.
+        </div>
+
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">ICLL Annex I Reg 40</span><span class="reg-desc">Minimum freeboards; fresh-water deduction of displacement / (40 × TPC) cm.</span></div>
+          <div class="reg-item"><span class="reg-code">ICLL Annex I Reg 6</span><span class="reg-desc">The load line marks and the seasonal and fresh-water lines.</span></div>
+          <div class="reg-item"><span class="reg-code">ICLL 1966 / 1988 Protocol</span><span class="reg-desc">The instrument under which freeboard is assigned and the ILLC issued.</span></div>
+          <div class="reg-item"><span class="reg-code">Record of Conditions of Assignment</span><span class="reg-desc">Carries the assigned freeboards and the ship's FWA.</span></div>
+          <div class="reg-item"><span class="reg-code">SOLAS Ch.VI / Loading Manual</span><span class="reg-desc">Approved stability and loading documentation holding TPC and displacement data.</span></div>
+        </div>
+
+        <div class="ce-tip">
+          <strong>CE Oral Tip (Kochi MMD):</strong> Give the definition and the formula in one breath, then say where the number lives on board — the load line plan and stability booklet — because that is the follow-up. Be ready for "your dock water is 1012, how much can you go down by?" and do the arithmetic out loud; the examiner wants to see you divide by 25, not recite a rule. State clearly that FWA is fixed at summer displacement and only the DWA changes with the port.
+        </div>
+
+        <div class="deep-dive" id="dd-q5">
+          <button class="deep-dive-toggle" onclick="toggleDD('dd-q5')">▶ Deep Dive</button>
+          <div class="deep-dive-body" style="display:none">
+            <div class="dd-block dd-relevance">
+              <strong class="dd-label">🔧 CE Relevance</strong>
+              <p>The Chief Engineer's stake is the ballast and bunker plan. Sailing from a brackish berth to sea, the ship rises as density increases, and any deballasting or bunker transfer planned across that transition changes the mean draught at the same time. If the DWA has been used to its limit, a late bunker delivery can put the ship over her marks alongside — a detainable load line deficiency, and the CE is the one who knows what weight is going into which tank and when.</p>
+            </div>
+            <div class="dd-block dd-trap">
+              <strong class="dd-label">⚠ Trap Questions</strong>
+              <p><strong>"If FWA is 180 mm and you are in water of 1025, how much extra can you load?"</strong> — Nothing. The water is already fully saline, so DWA is zero and the Summer mark governs directly.</p>
+              <p><strong>"Why divide by 25?"</strong> — Because 1025 minus 1000 is the full density span between salt and fresh water; DWA is simply FWA pro-rated across that span.</p>
+            </div>
+            <div class="dd-block dd-fail">
+              <strong class="dd-label">✗ Common CE Failures</strong>
+              <ul>
+                <li>Quoting FWA = displacement / (4 × TPC) without being able to say that displacement and TPC are both taken in salt water at the summer load waterline.</li>
+                <li>Confusing FWA with DWA and applying the full fresh-water allowance in brackish dock water — which overloads the ship.</li>
+                <li>Not knowing that Regulation 40 expresses the same deduction in centimetres with a divisor of 40.</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-numbers">
+              <strong class="dd-label">🔢 Numbers &amp; Regulations to Memorise</strong>
+              <ul>
+                <li>FWA (mm) = Displacement / (4 × TPC).</li>
+                <li>DWA (mm) = FWA × (1025 − dock density) / 25.</li>
+                <li>Salt water 1.025, fresh water 1.000.</li>
+                <li>ICLL Annex I Regulation 40 — the fresh-water deduction.</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-casualty">
+              <strong class="dd-label">⚓ Casualty Link</strong>
+              <p>Load line overloading rarely appears as a dramatic casualty; it appears as Port State Control detentions and as reduced reserve buoyancy in heavy weather. An overloaded ship has less freeboard, ships green water sooner, and reaches deck-edge immersion at a smaller angle of heel — which is why the freeboard regime is treated as a survivability requirement rather than a commercial formality.</p>
+            </div>
+            <div class="dd-block dd-chain">
+              <strong class="dd-label">🔗 Examiner Chain (Kochi MMD)</strong>
+              <ol>
+                <li>What is Fresh Water Allowance?</li>
+                <li>Give me the formula, and tell me where displacement and TPC are taken.</li>
+                <li>Which regulation gives it, and in what units?</li>
+                <li>Your dock water is 1012 — how much can you immerse the Summer mark?</li>
+                <li>Where on board do you find the ship's FWA?</li>
+              </ol>
+            </div>
+            <div class="dd-block dd-vessel">
+              <strong class="dd-label">🚢 On My Vessel (Maersk Container)</strong>
+              <p>Dock water density is taken with a hydrometer at the berth before final loading and recorded, and the resulting allowance is applied to the sailing draught calculation. The engine room contribution is the declared weight of bunkers, fresh water and slops on board at the sailing condition, so that the draught survey and the load line check are working from the same figures.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="related-q">🔗 Related: <a href="#q4">Q4 Loadline survey documents</a> · <a href="#q6">Q6 Type B-60 and B-100 ships</a></div>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_D, Q5, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB1_D · Q5 · v1.0</span>
+      </div>
+    </div>
+    <div class="q-card" id="q6" data-tags="load-line survey">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">6</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Type B-60 and B-100 ships — what are they, and what must a ship satisfy to earn the reduced freeboard?</div>
+          <div class="q-tags">
+            <span class="q-tag tag-load-line">Load Line</span>
+            <span class="q-tag">Stability</span>
+          </div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+
+        <div class="practice-block practice-15">
+          <span class="practice-label">⏱ 15-Second Answer</span>
+          "A B-60 is a Type B ship allowed to give back up to sixty per cent of the freeboard difference between the Type B and Type A tables; a B-100 gives back the whole difference, so she floats at effectively a Type A freeboard. The reduction is earned by damage survival, not granted for the ship type."
+        </div>
+
+        <div class="practice-block practice-60">
+          <span class="practice-label">🎯 60-Second Answer</span>
+          "Sir, Load Line Regulation 27 divides ships into Type A and Type B. Type A carries liquid cargo in bulk and gets the lower tabular freeboard; Type B, the dry cargo ship, gets the higher one. A Type B ship that can demonstrate Type A standards of integrity may claim part of that difference back. For B-60 the ship must be over 100 metres long, meet the enhanced hatch cover, crew protection and freeing port conditions, and survive flooding of any one compartment at 0.95 permeability, machinery space excluded — the reduction is then not more than sixty per cent. For B-100 the standard is harder: she must survive flooding of any two adjacent fore-and-aft compartments, and in ships over 225 metres the machinery space itself must be treated as floodable at 0.85 permeability. In return she gets the full reduction."
+        </div>
+
+        <div class="answer-body">
+          <h4>1. The Starting Point — Type A and Type B</h4>
+          <p><strong>ICLL Annex I, Regulation 27</strong> sets the ship types. A <strong>Type A</strong> ship is designed to carry only liquid cargoes in bulk, with high deck integrity, small access openings closed by watertight gasketed steel covers, and low permeability of loaded compartments. She is assigned the <em>lower</em> tabular freeboard. Every other ship is <strong>Type B</strong>, assigned the <em>higher</em> tabular freeboard. The difference between the two tables is the prize that B-60 and B-100 recover.</p>
+
+          <h4>2. What "B-60" and "B-100" Actually Mean</h4>
+          <ul>
+            <li><strong>B-60:</strong> the assigned freeboard is reduced by <strong>not more than 60%</strong> of the difference between the tabular Type B and Type A values for that length.</li>
+            <li><strong>B-100:</strong> the reduction is the <strong>full 100%</strong> of that difference — the ship effectively floats to a Type A freeboard while remaining a dry cargo ship.</li>
+          </ul>
+          <p>The names are simply the percentage of the difference recovered. Neither is a separate ship type; both are Type B ships with a conditional reduction.</p>
+
+          <h4>3. Conditions for B-60</h4>
+          <ul>
+            <li>Length <strong>over 100 m</strong>.</li>
+            <li>Hatchway covers in positions 1 and 2 must meet the enhanced strength and weathertightness conditions, and the ship must satisfy the requirements for <strong>protection of the crew</strong> and <strong>freeing arrangements</strong>.</li>
+            <li>Loaded to her summer load waterline, she must remain afloat in a satisfactory condition of equilibrium after flooding of <strong>any one compartment</strong>, at an assumed permeability of <strong>0.95</strong>, <strong>excluding the machinery space</strong>.</li>
+          </ul>
+
+          <h4>4. Conditions for B-100</h4>
+          <ul>
+            <li>She must satisfy the special conditions of assignment applicable to Type A ships under <strong>Regulation 26</strong> — machinery casings, gangway and access, hatchways and ventilator protection.</li>
+            <li>She must survive flooding of <strong>any two adjacent fore-and-aft compartments</strong>, again at <strong>0.95</strong> permeability.</li>
+            <li>In ships <strong>over 225 m</strong> in length the <strong>machinery space</strong> must itself be treated as a floodable compartment, at a permeability of <strong>0.85</strong>.</li>
+          </ul>
+          <p>The single step from "any one compartment" to "any two adjacent compartments" is the whole difference between the two regimes. If you remember one thing, remember that.</p>
+
+          <h4>5. The Equilibrium the Ship Must Reach</h4>
+          <p>"Remain afloat in a satisfactory condition of equilibrium" is defined, not left to judgement. After flooding:</p>
+          <ul>
+            <li>Angle of heel from unsymmetrical flooding <strong>not more than 15°</strong>; up to <strong>17°</strong> may be accepted if no part of the deck is immersed.</li>
+            <li><strong>Positive metacentric height</strong> in the upright damaged condition.</li>
+            <li>Residual righting lever curve positive through a range of at least <strong>20°</strong> beyond equilibrium.</li>
+            <li>Maximum residual righting lever at least <strong>0.1 m</strong>, and area under that curve within the 20° range at least <strong>0.0175 m·rad</strong>.</li>
+            <li>The final waterline must stay below any opening through which progressive flooding could occur.</li>
+          </ul>
+
+          <h4>Key Numbers / Memorisation Targets</h4>
+          <ul>
+            <li><strong>60% / 100%</strong> — the share of the Type B to Type A tabular difference recovered.</li>
+            <li><strong>100 m</strong> — minimum length for a B-60 reduction.</li>
+            <li><strong>225 m</strong> — length above which the machinery space becomes a floodable compartment.</li>
+            <li><strong>0.95 / 0.85</strong> — assumed permeability generally, and for the machinery space.</li>
+            <li><strong>15° / 17° / 20° / 0.1 m / 0.0175 m·rad</strong> — the equilibrium criteria.</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <strong class="trap-label">⚠ Exam Trap</strong>
+          B-60 and B-100 are not ship types and they are not about the cargo carried. They are conditional freeboard reductions earned by a Type B ship through damage survivability and enhanced closing appliances. A tanker's low freeboard is a different matter entirely — that comes from being Type A in the first place.
+        </div>
+
+        <div class="reg-box">
+          <div class="reg-box-title">⚖ Regulatory References</div>
+          <div class="reg-item"><span class="reg-code">ICLL Annex I Reg 27</span><span class="reg-desc">Types of ships; the B-60 and B-100 freeboard reductions and their flooding standards.</span></div>
+          <div class="reg-item"><span class="reg-code">ICLL Annex I Reg 26</span><span class="reg-desc">Special conditions of assignment for Type A ships, applied to B-100.</span></div>
+          <div class="reg-item"><span class="reg-code">ICLL Annex I Reg 16</span><span class="reg-desc">Hatchway covers — the enhanced closing appliance condition.</span></div>
+          <div class="reg-item"><span class="reg-code">ICLL Annex I Reg 25 / 24</span><span class="reg-desc">Protection of the crew and freeing arrangements.</span></div>
+          <div class="reg-item"><span class="reg-code">IACS UI LL72</span><span class="reg-desc">Interpretation to ICLL Regulation 27, applied to ships built on or after 1 January 2006.</span></div>
+          <div class="reg-item"><span class="reg-code">ICLL 1966 / 1988 Protocol</span><span class="reg-desc">The instrument assigning freeboard and issuing the ILLC.</span></div>
+        </div>
+
+        <div class="ce-tip">
+          <strong>CE Oral Tip (Kochi MMD):</strong> Open by saying B-60 and B-100 are <em>reductions earned by damage survival</em>, not ship types — that single sentence separates a prepared candidate from one who thinks B-60 is a kind of bulk carrier. Then give the one-compartment versus two-adjacent-compartment distinction, because that is the discriminator the examiner is listening for. Have 100 m, 225 m, 0.95 and 0.85 ready. If pushed on why a dry cargo ship should ever get a tanker's freeboard, answer in terms of reserve buoyancy and subdivision, not commerce.
+        </div>
+
+        <div class="deep-dive" id="dd-q6">
+          <button class="deep-dive-toggle" onclick="toggleDD('dd-q6')">▶ Deep Dive</button>
+          <div class="deep-dive-body" style="display:none">
+            <div class="dd-block dd-relevance">
+              <strong class="dd-label">🔧 CE Relevance</strong>
+              <p>A reduced freeboard is granted against a set of physical conditions that must stay true for the life of the assignment. Several of them are engine-side: watertight and weathertight closing appliances on the freeboard deck, air pipe heads with functioning floats, engine room ventilator coamings and closing devices, freeing port flaps, and non-return arrangements on overboard discharges. If those degrade, the basis of the reduction has gone even though the marks are still painted on the side. That is why the Record of Conditions of Assignment is the working document at every load line survey.</p>
+            </div>
+            <div class="dd-block dd-trap">
+              <strong class="dd-label">⚠ Trap Questions</strong>
+              <p><strong>"Is a B-60 ship a tanker?"</strong> — No. She is a Type B ship, normally a dry cargo ship or bulk carrier, that has earned part of the Type A freeboard by meeting a one-compartment damage standard and enhanced closing conditions.</p>
+              <p><strong>"What is the difference between B-60 and B-100 in one sentence?"</strong> — B-60 survives any one compartment flooded; B-100 survives any two adjacent fore-and-aft compartments, and above 225 m must include the machinery space at 0.85 permeability.</p>
+            </div>
+            <div class="dd-block dd-fail">
+              <strong class="dd-label">✗ Common CE Failures</strong>
+              <ul>
+                <li>Describing why tankers have less freeboard and thinking that answers the question — that is Type A assignment, a different regulation limb.</li>
+                <li>Giving the percentages but not the damage standard that earns them.</li>
+                <li>Quoting 0.95 permeability without saying that the machinery space is excluded, or attaching 225 m to the wrong case.</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-numbers">
+              <strong class="dd-label">🔢 Numbers &amp; Regulations to Memorise</strong>
+              <ul>
+                <li>B-60: over 100 m, one compartment, 0.95, machinery space excluded, reduction ≤ 60%.</li>
+                <li>B-100: two adjacent fore-and-aft compartments, 0.95, machinery space floodable at 0.85 above 225 m, reduction 100%.</li>
+                <li>Equilibrium: 15° (17° if deck not immersed), positive GM, 20° range, 0.1 m maximum lever, 0.0175 m·rad area.</li>
+              </ul>
+            </div>
+            <div class="dd-block dd-casualty">
+              <strong class="dd-label">⚓ Casualty Link</strong>
+              <p>The freeboard reduction regime exists because reserve buoyancy is what keeps a damaged ship afloat long enough to matter. Bulk carrier losses following hold flooding are the standing argument for tying any reduction in freeboard to a demonstrated single- or two-compartment survival standard rather than to the ship's trade or her owner's economics.</p>
+            </div>
+            <div class="dd-block dd-chain">
+              <strong class="dd-label">🔗 Examiner Chain (Kochi MMD)</strong>
+              <ol>
+                <li>What is a Type B-60 ship?</li>
+                <li>How much freeboard does she get back, and relative to what?</li>
+                <li>What damage must she survive to earn it?</li>
+                <li>How does B-100 differ?</li>
+                <li>What permeability do you assume, and when does the machinery space come into it?</li>
+                <li>What does "satisfactory condition of equilibrium" mean in numbers?</li>
+              </ol>
+            </div>
+            <div class="dd-block dd-vessel">
+              <strong class="dd-label">🚢 On My Vessel (Maersk Container)</strong>
+              <p>The assigned freeboards and any reduction are recorded in the Record of Conditions of Assignment and reflected in the load line marks. Engine-side, the items that keep that assignment valid are surveyed on the same cycle as the ILLC: ventilator and air pipe closing appliances, engine room skylights and fiddley closures, freeing port flap freedom, and the condition of overboard discharge non-return valves.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="related-q">🔗 Related: <a href="#q5">Q5 Fresh Water Allowance</a> · <a href="#q4">Q4 Loadline survey documents</a> · <a href="QB1_G.html#q37">QB1_G Q37 Why tankers have less freeboard</a></div>
+      </div>
+      <div class="q-footer">
+        <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB1_D, Q6, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+        <span class="q-version">QB1_D · Q6 · v1.0</span>
+      </div>
+    </div>
 
     <div id="no-results">No questions match your search/filter.</div>
   </main>

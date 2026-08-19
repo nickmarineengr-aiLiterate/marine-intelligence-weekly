@@ -230,6 +230,107 @@ body{-webkit-user-select:none;user-select:none}
     <span class="q-version">QB6_H · Q2 · v1.0</span>
   </div>
 </div>
+    <div class="q-card" id="q3" data-tags="machinery ism">
+  <div class="q-header" onclick="toggleCard(this)">
+    <div class="q-num-badge">3</div>
+    <div class="q-text-wrap">
+      <div class="q-text">How does a person receive an electric shock? Explain from V = IR, and the effect of current on the human body.</div>
+      <div class="q-tags"><span class="q-tag">MACHINERY</span><span class="q-tag">SAFETY</span></div>
+    </div>
+    <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+  <div class="q-answer">
+    <div class="answer-body">
+      <h4>15-Second Answer</h4>
+      <p class="formula">A shock is caused by <strong>current through the body</strong>, not by voltage alone. Voltage is only the driver; from <strong>I = V/R</strong> the current that flows is set by the body's resistance, which collapses when the skin is wet. It is milliamps that matter — a few tens of milliamps across the chest can cause ventricular fibrillation.</p>
+
+      <h4>60-Second Answer</h4>
+      <p class="formula">Sir, a person becomes part of a circuit when they touch a live conductor while also in contact with earth or a second conductor. Ohm's law then decides the outcome: I equals V over R. Voltage is fixed by the system, so the variable is body resistance — mostly skin resistance, high when dry and collapsing when wet, leaving little more than the body's internal resistance. That is why the same 230 volts is survivable in one case and lethal in another. What injures is current: about half a milliamp is perception, around ten milliamps and the muscles contract so a person cannot let go, and roughly thirty to fifty milliamps through the chest for more than a second or two can cause ventricular fibrillation. Beyond that come burns and cardiac arrest. Path, duration and frequency matter as much as magnitude.</p>
+
+      <h4>1. Why a Person Gets a Shock At All</h4>
+      <p>A shock requires a <strong>complete circuit through the body</strong>. Touching a single live conductor while insulated from earth does not, by itself, drive current. The dangerous cases are:</p>
+      <ul>
+        <li><strong>Live to earth</strong> — hand on a live part, feet or body on the steel deck or structure.</li>
+        <li><strong>Live to live</strong> — hand to hand across two phases or across a phase and neutral.</li>
+        <li><strong>Contact with a normally dead part made live</strong> by an insulation failure, which is why earthing and earth-fault monitoring exist.</li>
+      </ul>
+
+      <h4>2. Ohm's Law Applied to the Human Body</h4>
+      <p class="formula"><strong>I = V / R</strong> &nbsp;— the current that flows is the applied voltage divided by the total resistance of the path.</p>
+      <p>Body resistance has two parts:</p>
+      <ul>
+        <li><strong>Skin resistance</strong> — by far the larger, and by far the more variable. It depends on moisture, contact area, contact pressure and how broken the skin is. Dry, intact skin can be several thousand ohms; wet or sweating skin falls to a few hundred.</li>
+        <li><strong>Internal resistance</strong> — the body's tissues and fluids, of the order of a few hundred ohms and largely fixed, since the body is essentially salt water.</li>
+      </ul>
+      <p>The consequence is decisive. At <strong>230 V</strong>, a dry-skin path of several thousand ohms may pass only a few tens of milliamps; the same 230 V across a wet path of around a thousand ohms drives roughly <strong>230 mA</strong> — far above the fibrillation threshold. <em>The voltage did not change. The resistance did.</em> This is why work in a hot, humid engine room, or with sweating hands, is treated as a higher-risk case than the same job ashore.</p>
+
+      <h4>3. Effect of Current on the Body</h4>
+      <p><strong>IEC 60479-1</strong> is the reference standard for the effects of current on human beings. For alternating current in the <strong>15 to 100 Hz</strong> band it maps effects into four zones by current magnitude and duration:</p>
+      <ul>
+        <li><strong>Perception</strong> — about <strong>0.5 mA</strong>; felt as a tingle, no harmful effect.</li>
+        <li><strong>Muscular reaction and let-go limit</strong> — the let-go threshold is time-dependent, from about <strong>5 mA</strong> for durations over 6 seconds up to about <strong>200 mA</strong> for 10 milliseconds. Beyond it the flexor muscles contract involuntarily and the casualty cannot release their grip. This is why a victim often stays attached to the conductor.</li>
+        <li><strong>Ventricular fibrillation</strong> — the heart loses coordinated contraction and pumps no blood. It becomes possible at roughly <strong>30 to 50 mA</strong> of 50/60 Hz alternating current passing through the chest for more than one to two seconds. Death follows within minutes without defibrillation.</li>
+        <li><strong>Higher currents</strong> — sustained cardiac arrest, respiratory arrest, and deep burns at the entry and exit points, which are often far worse than the surface appearance suggests.</li>
+      </ul>
+
+      <h4>4. The Three Factors Besides Magnitude</h4>
+      <ul>
+        <li><strong>Path.</strong> What matters is how much current crosses the heart. Hand to hand, or hand to both feet, are the dangerous paths. Hand to hand on the same side of the body, or foot to foot, are much less so — hence the old habit of working with one hand and keeping the other clear.</li>
+        <li><strong>Duration.</strong> Risk rises sharply with time, both because energy accumulates and because a longer shock is more likely to catch the vulnerable phase of the cardiac cycle.</li>
+        <li><strong>Frequency.</strong> Mains frequencies of 50 and 60 Hz sit in the worst region for fibrillation. Direct current requires a substantially higher current for the same effect — the DC let-go value is of the order of <strong>75 mA</strong> for an adult male — though DC brings its own hazards, including a stronger sustained muscular hold and electrolytic burns.</li>
+      </ul>
+
+      <h4>5. How the Ship Protects Against It</h4>
+      <ul>
+        <li><strong>Insulated (IT) distribution.</strong> Most ship systems are unearthed, so a <em>single</em> earth fault does not create a shock path or trip the supply. That is a safety feature for continuity of propulsion — but it means the earth-fault indication must be monitored and the first fault found and cleared, because a <em>second</em> fault on another phase creates a fault current and a real hazard.</li>
+        <li><strong>Isolation discipline.</strong> Permit to work, isolate, lock off, prove the tester, prove dead, prove the tester again, and earth where required. Earths stay on for the whole job.</li>
+        <li><strong>Protective devices.</strong> Residual current devices on portable and shore-supply circuits, correct fusing and discrimination, and protective earthing and bonding of enclosures.</li>
+        <li><strong>Personal and equipment measures.</strong> Insulated tools, rubber matting at switchboards, appropriate gloves, dry working position, and regular insulation resistance testing of portable equipment and motors.</li>
+        <li><strong>SOLAS Chapter II-1, Part D</strong> requires precautions against shock, fire and other hazards of electrical origin.</li>
+      </ul>
+
+      <h4>6. If Someone Is Being Shocked</h4>
+      <ol>
+        <li><strong>Do not touch the casualty.</strong> You will become the second casualty.</li>
+        <li><strong>Isolate the supply</strong> at the breaker or switch. If that is impossible, use a dry insulating material to separate the casualty from the conductor.</li>
+        <li>Raise the alarm, begin CPR if there is no breathing or pulse, and use the AED if available — fibrillation is treated by defibrillation, not by waiting.</li>
+        <li>Obtain radio medical advice. Anyone who has taken a significant shock is referred, even if they appear well, because arrhythmias and deep burns can develop later.</li>
+        <li>Record it, investigate it and raise a non-conformity — the isolation or the equipment failed, and the cause must be found.</li>
+      </ol>
+
+      <h4>Key Numbers / Memorisation Targets</h4>
+      <ul>
+        <li><strong>I = V / R</strong> — current injures, voltage merely drives it.</li>
+        <li><strong>0.5 mA</strong> perception; <strong>about 10 mA</strong> typical let-go region; <strong>30 to 50 mA</strong> ventricular fibrillation through the chest for more than 1 to 2 seconds.</li>
+        <li><strong>5 mA</strong> (over 6 s) to <strong>200 mA</strong> (10 ms) — the time-dependent let-go range in IEC 60479-1.</li>
+        <li><strong>15 to 100 Hz</strong> — the frequency band of the standard's AC zones; 50/60 Hz is the most dangerous.</li>
+        <li><strong>1,000 V AC</strong> — the threshold above which a marine system is treated as high voltage.</li>
+      </ul>
+    </div>
+    <div class="reg-box"><div class="reg-box-title">⚖ Regulatory References</div>
+      <div class="reg-item"><span class="reg-code">SOLAS II-1, Part D</span><span class="reg-desc">Electrical installations — precautions against electric shock, fire and other hazards of electrical origin</span></div>
+      <div class="reg-item"><span class="reg-code">IEC 60479-1</span><span class="reg-desc">Effects of current on human beings and livestock — perception, let-go, fibrillation zones</span></div>
+      <div class="reg-item"><span class="reg-code">IEC 60092 series</span><span class="reg-desc">Electrical installations in ships — system design, earthing and protection</span></div>
+      <div class="reg-item"><span class="reg-code">STCW Table A-III/2</span><span class="reg-desc">Management-level competence in operating electrical and electronic control equipment, including high voltage</span></div>
+      <div class="reg-item"><span class="reg-code">ISM Code, sections 7 and 10</span><span class="reg-desc">Shipboard operations and permit-to-work; maintenance of ship and equipment</span></div>
+      <div class="reg-item"><span class="reg-code">Code of Safe Working Practices</span><span class="reg-desc">Safe working on electrical equipment, isolation and rescue from live apparatus</span></div>
+    </div>
+    <div class="ce-tip"><strong>CE Oral Tip (Nair):</strong> Nair wants you to arrive at the answer <em>through the formula</em>, so say the sentence he is waiting for early: "Sir, it is the current that injures — voltage only drives it, and from I equals V over R the body's resistance decides how much flows." Then make the wet-versus-dry skin point with a number, because that is what shows you understand why the same 230 volts kills one man and not another. Have the milliamp ladder ready in order — perception, let-go, fibrillation — and finish with path, duration and frequency. If he moves to rescue, lead with "I would not touch him; I would isolate first."</div>
+    <details class="dd"><summary>Deep-Dive: CE Relevance</summary><p>The Chief Engineer's exposure here is not theoretical. The engine room is hot, humid and steel — the two conditions that most reduce body resistance and most reliably provide an earth return. The CE controls the three things that actually prevent shock: the permit-to-work and isolation regime and whether it is genuinely followed, the condition of portable equipment and its insulation resistance testing, and the response to earth-fault alarms on the insulated distribution system. An earth fault left unfound because the ship kept running is a decision to accept that the next fault will be the dangerous one.</p></details>
+    <details class="dd"><summary>Deep-Dive: Trap Questions</summary><p><strong>"Which kills — voltage or current?"</strong> Current. Voltage drives it, and with the body's resistance it determines how much flows.</p>
+<p><strong>"Then why do we speak of high voltage as more dangerous?"</strong> Because for a given body resistance a higher voltage drives a proportionally higher current, and at high voltage the risk extends to arc flash and flashover without any contact at all.</p>
+<p><strong>"Your ship has an insulated neutral. Can you get a shock from a single earth fault?"</strong> Not normally — that is the point of the insulated system, and the supply is not tripped. But the fault must be found and cleared, because a second earth fault on another phase produces a fault current and a genuine shock and fire hazard.</p>
+<p><strong>"Why is a man often unable to let go?"</strong> Above the let-go threshold the flexor muscles contract involuntarily and the grip tightens on the conductor, so the exposure continues and the duration factor works against him.</p>
+<p><strong>"Is DC safer?"</strong> A higher current is required for the same physiological effect, so in that narrow sense yes. But DC produces a strong sustained contraction and electrolytic burns, and it does not extinguish an arc at a natural zero crossing, so it is not to be treated as safe.</p></details>
+    <details class="dd"><summary>Deep-Dive: Common CE Failures</summary><p>Answering that voltage kills, or being unable to move from V = IR to a physiological effect. Quoting amperes instead of milliamps, which shows the ladder has not been learnt. Not knowing why a ship uses an insulated distribution system, and therefore not knowing why the earth-fault lamps matter. And, in the rescue question, saying they would pull the man clear before saying they would isolate.</p></details>
+    <details class="dd"><summary>Deep-Dive: Examiner Chain</summary><p>How does a man get a shock → derive it from V = IR → what is body resistance and what changes it → what current is dangerous → what happens at each level → does the path matter → does frequency matter → how does the ship protect against it → what do you do if you find a man on a live conductor.</p></details>
+    <details class="dd"><summary>Deep-Dive: On My Vessel</summary><p>Portable electrical equipment is subject to periodic insulation resistance testing with the results recorded, and rubber matting is maintained in front of the main and emergency switchboards. Earth-fault indication on the insulated 440 V and 230 V systems is checked each watch and any indicated fault is traced by systematic feeder isolation under the permit system rather than left to the next port. Isolation for any electrical work follows the full sequence, with the voltage tester proved before and after use, and the key retained by the person doing the job.</p></details>
+  </div>
+  <div class="q-footer">
+    <button class="correction-btn" onclick="openComment('QB6_H','Q3 · v1.0')">💬 Report a correction</button>
+    <span class="q-version">QB6_H · Q3 · v1.0</span>
+  </div>
+</div>
   </div>
 </div>
 <div id="no-results" style="display:none;text-align:center;color:#64748b;padding:30px">No questions match your search/filter.</div>

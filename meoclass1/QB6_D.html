@@ -656,6 +656,129 @@ document.addEventListener('selectstart', function(e){e.preventDefault();});
         </div>
       </div>
     </div>
+    <div class="q-card" id="q5" data-tags="machinery">
+      <div class="q-header" onclick="toggleCard(this)">
+        <div class="q-num-badge">5</div>
+        <div class="q-text-wrap">
+          <div class="q-text">Cavitation — explain it in a centrifugal pump and on a propeller, and how do you prevent it in each case?</div>
+          <div class="q-tags"><span class="q-tag tag-machinery">MACHINERY</span></div>
+        </div>
+        <svg class="q-chevron" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="q-answer">
+        <div class="practice-block"><span class="pb-label">15-Second Answer</span>Cavitation is the formation of vapour cavities where local pressure falls to the liquid's vapour pressure, and their violent collapse when they reach higher pressure. In a centrifugal pump it is controlled by keeping <strong>NPSH available above NPSH required</strong>. On a propeller it is controlled by blade design, blade surface condition, wake uniformity and not overloading the propeller.</div>
+        <div class="practice-block"><span class="pb-label">60-Second Answer</span>Sir, the mechanism is the same in both cases. Wherever the local static pressure drops to the vapour pressure of the liquid at its temperature, vapour cavities form; when the flow carries them into a higher-pressure region they collapse almost instantaneously, and the collapse drives a microjet against any nearby surface. Repeated, that removes metal. In a centrifugal pump the low-pressure point is the impeller eye, and the governing quantity is net positive suction head: the head available at the suction, after friction losses and after subtracting vapour pressure, must exceed the head the pump itself requires, with a margin. On a propeller the low-pressure region is the back of the blade, and the pattern depends on blade loading and on how uniform the wake is behind the hull. The consequences differ in name only — erosion, noise, vibration, and loss of performance.</div>
+        <div class="answer-body">
+          <h4>1. The Common Mechanism</h4>
+          <ul>
+            <li>Local static pressure falls to the <strong>vapour pressure</strong> of the liquid at the prevailing temperature.</li>
+          </ul>
+          <ul>
+            <li>Vapour cavities form. This is boiling caused by falling pressure, not by rising temperature.</li>
+          </ul>
+          <ul>
+            <li>The flow carries the cavities to a higher-pressure region where they <strong>collapse implosively</strong>. The collapse is asymmetric near a surface and drives a high-velocity <strong>microjet</strong> against it.</li>
+          </ul>
+          <ul>
+            <li>Repeated collapse produces the characteristic pitted, spongy <strong>erosion</strong>, together with noise, vibration and loss of performance.</li>
+          </ul>
+
+          <h4>2. Centrifugal Pump — Net Positive Suction Head</h4>
+          <p>The lowest pressure in a centrifugal pump is at the <strong>impeller eye</strong>, just before the blades do work on the liquid. Two quantities govern it:</p>
+          <ul>
+            <li><strong>NPSH available (NPSHa)</strong> — a property of the <em>system</em>: absolute pressure on the suction liquid surface, plus static head, minus friction and entry losses in the suction line, minus the vapour pressure of the liquid, all expressed as a head of that liquid.</li>
+          </ul>
+          <ul>
+            <li><strong>NPSH required (NPSHr)</strong> — a property of the <em>pump</em>, taken from the maker's curve. It increases with flow, so a pump run far out to the right of its curve demands more than it does at duty point.</li>
+          </ul>
+          <p class="formula"><strong>NPSH available &gt; NPSH required, with the maker's margin</strong></p>
+          <p><strong>Shipboard causes of a loss of NPSHa:</strong></p>
+          <ul>
+            <li>Choked or partly blocked suction strainer, or a closing suction valve — friction loss rises.</li>
+          </ul>
+          <ul>
+            <li>Low tank or bilge well level, or a tank running down during transfer — static head falls.</li>
+          </ul>
+          <ul>
+            <li><strong>High liquid temperature</strong> — vapour pressure rises steeply, which is why hot condensate, hot fuel and boiler feed duties cavitate most readily.</li>
+          </ul>
+          <ul>
+            <li>Throttling on the <em>suction</em> side, air leaks into the suction line, or an excessive suction lift.</li>
+          </ul>
+          <p><strong>Symptoms:</strong> a crackling noise as though gravel were passing through the pump, fluctuating discharge pressure and flow, vibration, and eventual erosion of the impeller eye and the back of the vanes.</p>
+          <p><strong>Remedies:</strong> clean the strainer and open the suction fully; raise the suction level or pressurise the source; cool the liquid; reduce flow and <strong>throttle on the discharge, never on the suction</strong>; vent trapped air; and check the suction line and gland for air ingress.</p>
+
+          <h4>3. Propeller Cavitation</h4>
+          <p>On a propeller blade the pressure on the <strong>back</strong>, the suction side, falls as the blade generates thrust. When it reaches vapour pressure, cavitation begins. Because the propeller works in the non-uniform wake behind the hull, blade loading changes through every revolution, so cavitation is usually cyclic. The recognised patterns:</p>
+          <ul>
+            <li><strong>Sheet cavitation</strong> — a stable attached sheet near the leading edge on the blade back. Common and often tolerable in itself.</li>
+          </ul>
+          <ul>
+            <li><strong>Cloud cavitation</strong> — the collapsing downstream end of a sheet, breaking into a cloud of small cavities. This is the most erosive pattern.</li>
+          </ul>
+          <ul>
+            <li><strong>Bubble cavitation</strong> — discrete bubbles around mid-chord where the blade is thick and heavily loaded.</li>
+          </ul>
+          <ul>
+            <li><strong>Tip vortex cavitation</strong> — in the low-pressure core of the vortex shed from the blade tip. Usually the first to appear and a principal source of underwater radiated noise.</li>
+          </ul>
+          <ul>
+            <li><strong>Hub vortex cavitation</strong> — in the vortex behind the boss; associated with rudder erosion downstream.</li>
+          </ul>
+          <ul>
+            <li><strong>Face cavitation</strong> — on the pressure side, indicating the blade is working at a negative angle of attack: too little pitch for the condition, or heavy manoeuvring and off-design operation.</li>
+          </ul>
+
+          <h4>4. Consequences and Control on the Propeller</h4>
+          <ul>
+            <li><strong>Consequences:</strong> blade erosion, particularly at the leading edge and tip; thrust breakdown and loss of efficiency; hull pressure pulses causing aft-end vibration; rudder erosion; and noise.</li>
+          </ul>
+          <ul>
+            <li><strong>Causes to look for:</strong> a non-uniform wake, a rough or damaged blade surface, leading-edge nicks, an overloaded propeller from hull fouling or heavy weather, insufficient immersion in ballast, and excessive shaft speed for the condition.</li>
+          </ul>
+          <ul>
+            <li><strong>Control:</strong> maintain blade surface finish and dress out leading-edge damage at every opportunity; keep the hull clean so the propeller is not overloaded; ensure adequate propeller immersion; avoid sustained operation at off-design pitch on a controllable pitch propeller; and improve wake uniformity — which is exactly what a wake-equalising duct or pre-swirl device is fitted to do.</li>
+          </ul>
+
+          <h4>Key Numbers / Memorisation Targets</h4>
+          <ul>
+            <li><strong>NPSHa &gt; NPSHr</strong> — the single governing statement for pump cavitation.</li>
+          </ul>
+          <ul>
+            <li>Vapour pressure rises with temperature — the reason hot duties cavitate first.</li>
+          </ul>
+          <ul>
+            <li>Throttle on the <strong>discharge</strong>, never the suction.</li>
+          </ul>
+          <ul>
+            <li>Six propeller patterns: sheet, cloud, bubble, tip vortex, hub vortex, face.</li>
+          </ul>
+          <div class="reg-box">
+            <div class="reg-box-title">⚖ Regulatory References</div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch.II-1 Part C</span><span class="reg-desc">Machinery installations — essential pumps and their reliable operation</span></div>
+            <div class="reg-item"><span class="reg-code">SOLAS Ch.II-1 Reg.26</span><span class="reg-desc">General requirements for machinery installations — designed for the service intended</span></div>
+            <div class="reg-item"><span class="reg-code">Classification society rules</span><span class="reg-desc">Propeller design, blade thickness and tailshaft survey requirements</span></div>
+            <div class="reg-item"><span class="reg-code">IACS UR M / Z</span><span class="reg-desc">Machinery requirements and survey of shafting and propellers</span></div>
+            <div class="reg-item"><span class="reg-code">Pump maker NPSH curve</span><span class="reg-desc">The NPSH required figure against which the system margin is checked</span></div>
+            <div class="reg-item"><span class="reg-code">ISM Code, section 10</span><span class="reg-desc">Maintenance of ship and equipment; strainer, sampling and inspection routines</span></div>
+          </div>
+          <div class="ce-tip"><strong>CE Oral Tip (Simon):</strong> Define cavitation by the <em>pressure</em> falling to vapour pressure, not by "bubbles forming" — that one phrase decides how the rest of the question goes. Then split the answer cleanly: pump equals NPSH, propeller equals blade loading and wake. Have the pump remedies ready as actions rather than theory, and be certain on throttling the discharge and not the suction, because that is the most common trap. If asked to name propeller types, give tip vortex first and say it is usually the earliest to appear, then name cloud cavitation as the most erosive.</div>
+        </div>
+        <details class="deep-dive"><summary>Deep Dive — CE Relevance · Traps · Failures · Numbers · Examiner Chain · On My Vessel</summary><div class="deep-dive-body"><h5>CE Relevance</h5><p>Cavitation is a maintenance signal as much as a phenomenon. A ballast or bilge pump that starts to sound like gravel is telling the Chief Engineer that something in the suction system has changed — a strainer, a valve, a level, or a temperature — and the correct response is to find which, not to accept a lower output. On the propulsion side, cavitation erosion found at drydock is read alongside hull condition and the ship's operating profile, because an overloaded propeller is often a fouled hull rather than a propeller defect.</p>
+<h5>Trap Questions</h5><p><strong>"Your ballast pump is cavitating. Why not throttle the suction valve to steady it?"</strong> — Throttling the suction reduces NPSH available and makes the cavitation worse. Flow is reduced on the discharge side; the suction is opened fully and the strainer checked.</p>
+<p><strong>"Which liquid cavitates most readily on board and why?"</strong> — Hot liquids: boiler feed and hot fuel or condensate. Vapour pressure rises steeply with temperature, so NPSH available falls even though nothing in the pipework has changed.</p>
+<p><strong>"Is cavitation the same as air in the system?"</strong> — No. Cavitation is vapour of the pumped liquid formed by low pressure, and it condenses again on collapse. Air ingress is a non-condensable gas drawn in through a leak. Both cause noise and loss of delivery, but only cavitation erodes metal by implosion, and the remedies differ.</p>
+<p><strong>"You find erosion on the pressure side of a propeller blade. What does that tell you?"</strong> — Face cavitation, which indicates a negative angle of attack: too little pitch for the condition, or sustained off-design running on a controllable pitch propeller.</p>
+<h5>Common CE Failures</h5><p>Defining cavitation as boiling due to heat, or as air bubbles; confusing NPSH available with NPSH required, or not knowing that NPSHr comes from the pump maker and rises with flow; and describing propeller cavitation only as erosion without mentioning hull pressure pulses, vibration and thrust breakdown.</p>
+<h5>Numbers</h5><p>The governing inequality is NPSHa greater than NPSHr plus margin. Note that vapour pressure, not absolute pressure alone, is what sets the threshold, and that it is a function of the liquid and its temperature.</p>
+<h5>Examiner Chain</h5><p>What is cavitation → where does it occur in a centrifugal pump → what is NPSH → what reduces NPSH available on board → how do you correct it → now the propeller: where does it start → name the types → which is most erosive → what damage results → how do you reduce it.</p>
+<h5>On My Vessel</h5><p>Suction strainers on ballast, bilge and fuel transfer pumps are opened at a set interval and after any operation that disturbs tank sediment. Pump suction and discharge pressures are trended so that a developing restriction shows before it becomes audible. Propeller blade condition, particularly leading-edge and tip erosion, is recorded at each drydock and read together with hull roughness and the vessel's speed and power record, and any dressing of the blades is carried out to the maker's and class limits.</p></div></details>
+        <div class="q-footer">
+          <span class="correction-link">Correction? <a href="mailto:contactus@marineintelligenceweekly.com?subject=QB6_D, Q5, Correction Required">contactus@marineintelligenceweekly.com</a></span>
+          <span class="q-version">QB6_D · Q5 · v1.0</span>
+        </div>
+      </div>
+    </div>
 </div>
 </div>
 
