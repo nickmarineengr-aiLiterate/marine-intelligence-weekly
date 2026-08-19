@@ -1,0 +1,264 @@
+{
+  "batch": "D",
+  "authorisation": "meoclass1/oral-intelligence/examiner-audit/FINAL_ORAL_PRODUCTION_AUTHORIZATION.json",
+  "authorisation_selector": "families[].laptop_decision == NOTES_TO_QB_PROMOTION",
+  "authorisation_count_key": "authorised.AUTHORISED_NEW_CARD_NOTES_PROMOTIONS",
+  "authorisation_ref": "review/oral-final-gap-decision-laptop",
+  "action_kind": "NEW_CARD_FROM_NOTES",
+  "baseline_canonical_questions": 711,
+  "expected_canonical_questions": 720,
+  "initial_authorised_count": 9,
+  "actual_new_card_count": 9,
+  "examiner_relationship_delta": 0,
+  "note": "Homes for the nine laptop-authorised NOTES_TO_QB_PROMOTION new cards. Family ids and Notes source paths are production references and must never appear in candidate-visible page text; validate_batch_d.py enforces both halves. The authorisation record carries no batches.* array for this set - the nine are selected by laptop_decision == NOTES_TO_QB_PROMOTION, which is the authorisation field, whereas laptop_review_status is an audit field. GAP-0065 is adjudicated NOTES_TO_QB_PROMOTION but was downgraded by the laptop review to ALREADY_COVERED, which is why the adjudicated total is 10 and the authorised total is 9 (authorised.AUTHORISED_NEW_CARD_NOTES_PROMOTIONS). The corpus keeps growing, so this guard pins its own nine cards and asserts the total has not regressed below its milestone - it must never pin an equality that a later authorised batch would break. Each card's recorded notes_source is the section actually used, which for three families is NOT the authorisation's target field: that field held a page the matcher scored highly, and GAP-0334's target pointed at the Polar Code topic rather than any great-circle material.",
+  "cards": [
+    {
+      "family_id": "GAP-0151",
+      "production_action_id": "PROMNEW-001",
+      "file": "QB9_A.html",
+      "anchor": "q10",
+      "topic": "COFR against the P&I Blue Card - two regimes, two issuers",
+      "notes_source": "meoclass1/oralnotes/miw-notes-mgmt-p21.html#topic-p21-1",
+      "notes_source_secondary": "meoclass1/oralnotes/miw-notes-mgmt-p8.html#topic-36",
+      "authority_tokens": [
+        "OPA 90",
+        "33 CFR Part 138",
+        "National Pollution Funds Center",
+        "CLC 1992",
+        "Bunkers Convention 2001"
+      ]
+    },
+    {
+      "family_id": "GAP-0180",
+      "production_action_id": "PROMNEW-002",
+      "file": "QB9_B.html",
+      "anchor": "q9",
+      "topic": "Intervention Convention 1969 - conditions, overreach and dispute settlement",
+      "notes_source": "meoclass1/oralnotes/miw-notes-mgmt-p9.html#topic-40",
+      "authority_tokens": [
+        "INTERVENTION 1969",
+        "Art. VIII",
+        "1973",
+        "UNCLOS 1982"
+      ]
+    },
+    {
+      "family_id": "GAP-0218",
+      "production_action_id": "PROMNEW-003",
+      "file": "QB2_I.html",
+      "anchor": "q8",
+      "topic": "free-fall lifeboat - certificate, height, seating, launching and liferafts",
+      "notes_source": "meoclass1/oralnotes/simon-notes-p1.html#n22",
+      "authority_tokens": [
+        "LSA Code 1.1.4",
+        "LSA Code 4.7.7",
+        "MSC.218(82)",
+        "SOLAS III/31"
+      ]
+    },
+    {
+      "family_id": "GAP-0231",
+      "production_action_id": "PROMNEW-004",
+      "file": "QB1_D.html",
+      "anchor": "q7",
+      "topic": "Bonjean curves - sectional area against draught and where it is used",
+      "notes_source": "meoclass1/oralnotes/simon-notes-p5.html#n1",
+      "notes_source_secondary": "meoclass1/oralnotes/miw-notes-mgmt-p16.html#topic-p16-5",
+      "authority_tokens": [
+        "IACS UR S11",
+        "SOLAS II-1",
+        "IS Code 2008"
+      ]
+    },
+    {
+      "family_id": "GAP-0334",
+      "production_action_id": "PROMNEW-005",
+      "file": "QB5_C_A.html",
+      "anchor": "q11",
+      "topic": "great circle voyage - rhumb line, composite sailing and fuel",
+      "notes_source": "meoclass1/oralnotes/simon-notes-p4.html#n3",
+      "notes_source_secondary": "meoclass1/oralnotes/miw-notes-mgmt-p16.html#topic-p16-2",
+      "authority_tokens": [
+        "SOLAS V / Reg 34",
+        "A.893(21)",
+        "MARPOL Annex VI / Reg 28"
+      ]
+    },
+    {
+      "family_id": "GAP-0342",
+      "production_action_id": "PROMNEW-006",
+      "file": "QB3_B.html",
+      "anchor": "q21",
+      "topic": "galvanic corrosion, the galvanic series, anode selection and the seawater pump",
+      "notes_source": "meoclass1/oralnotes/miw-notes-mgmt-p10.html#topic-44",
+      "authority_tokens": [
+        "DNV-RP-B401",
+        "MSC.215(82)",
+        "SOLAS II-1 / Reg 3-2"
+      ]
+    },
+    {
+      "family_id": "GAP-0355",
+      "production_action_id": "PROMNEW-007",
+      "file": "QB5_B.html",
+      "anchor": "q17",
+      "topic": "embrittlement generally, and caustic embrittlement in boilers",
+      "notes_source": "meoclass1/oralnotes/simon-notes-p2.html#n10",
+      "authority_tokens": [
+        "SOLAS II-1 / Reg 32",
+        "ISM Code, section 10",
+        "coordinated phosphate"
+      ]
+    },
+    {
+      "family_id": "GAP-0534",
+      "production_action_id": "PROMNEW-008",
+      "file": "QB4_H.html",
+      "anchor": "q12",
+      "topic": "Seafarer's Identity Document against the CDC",
+      "notes_source": "meoclass1/oralnotes/simon-notes-p4.html#n22",
+      "authority_tokens": [
+        "ILO C185",
+        "ILO C108",
+        "MLC 2006, Reg. 2.4",
+        "ICAO"
+      ]
+    },
+    {
+      "family_id": "GAP-0621",
+      "production_action_id": "PROMNEW-009",
+      "file": "QB9_H.html",
+      "anchor": "q16",
+      "topic": "Incoterms 2020 - the eleven rules, the maritime four and their limits",
+      "notes_source": "meoclass1/oralnotes/miw-notes-mgmt-p19.html#topic-p19-4",
+      "authority_tokens": [
+        "Incoterms",
+        "DPU",
+        "Institute Cargo Clauses",
+        "Hague-Visby"
+      ]
+    }
+  ],
+  "baseline_card_digests": {
+    "QB1_D.html": {
+      "q1": "5537d113eb1488dae9968a62a12b5cf26ce6053afad1ef1d535d4a13370cdcfb",
+      "q2": "56946e11634c39c6d0922ac1fa33b8a07bb7b369f7abe90840f5d7d265d83c44",
+      "q3": "fbd167ecd77860cdb622caf353e00dca50fcadbd01a8a5681bae7490db5cf3ec",
+      "q4": "5b2a48688d07d9fbfba23062a64e17468aa9fce8e5567013ebee199b8ec503ef",
+      "q5": "6b3a9baa26fe1a999c8c58f621c43dd697716ed52e57f5572f178b0f2049adac",
+      "q6": "fa133f7d85ef59ee83ba5cbf7c2bf1b925877ddda227011c78e2e7c36b74223b"
+    },
+    "QB2_I.html": {
+      "q1": "2887ca875468ce354f90caa869de0a84cfb70032d6a178106a686b607e80e1f4",
+      "q2": "aab6a3ddabfadf34420a40d05466c70030d9ec334071e1d86678e334a967322e",
+      "q3": "785eb7d8a42c10d1422e55f81c74245979bb5d41aacdd74941287a3aca3ea7f5",
+      "q4": "b1b7bef56abf011bf080452bd13f03b335be3c6a7dee185a5253db470ab8f5b7",
+      "q5": "8ac2e93644614006d773db58d892d957d5a3e10fba29fa0ca883efca733280d5",
+      "q6": "22086899df3fe1d02173e7cd8f5f2786c731c8c67df5208383b9f80eb73b60a4",
+      "q7": "42257fcd3a7efcec2e74339c6ddaab9a957f2a4be15adef2eff564ab97b8e413"
+    },
+    "QB3_B.html": {
+      "q1": "34e75cf1c9dd91e0c70dd3aa67451fd76de307a895f1a18e7e737028caa5e964",
+      "q2": "9aaa72bd841acdad9f4a752259162ad7cd25f197eec9c75b84ce173a67f20f07",
+      "q3": "6182f67bdbb21e5fb94be957c76a5235c17d7ffef7ba10f672ab7afac97ddfa5",
+      "q4": "47fc5d7541a00f111ba4af360b14f52e175826d9d1b699a21943d44abf8dbb24",
+      "q5": "f3f2a7164cf008fc834af84900574072ae1b5863f52f292db6aacc36d669e182",
+      "q6": "8699bdc2ade9a1d5242e1ce7c52bd3cd8e4a37860b83c296b1925f7eef5cf50b",
+      "q7": "6ab18651a48e9fad0eb81bb1b1bba3cc1a17f91bbad55739cd6bf54ab2bc9144",
+      "q8": "af52f83e7963032a30cc3aed4f8d9a6f9e96579f3cd0406d37757980253143d9",
+      "q9": "73b6cde72e56d4b4652747e984fdccef0022281ba0ecba8cebcd4bf04fac4e1a",
+      "q10": "c3e7a7fbeef7f90e7d47a0b935aff3e9cb098bcb85763edf29acf10b6a49642b",
+      "q11": "23caabc7fd4ea8eaeda3b6a5bcd121517914a3086b997b07be3dc18b2e5b66e0",
+      "q12": "234985c68ab721f81888eef8b1f61d52a0cab855ff91b0aa93963be4ecac1c62",
+      "q13": "a1d74f5008b37bbf60e9899629e85319a649c6b5f8d7ccbb7b56d90a437df087",
+      "q14": "2fd2c8f4be64cee8016c150ea8e5202947533d5baf3a3175f3050bc5acb70522",
+      "q15": "98fde3921b3bbd90ae64e33b0bd835eae3b45eef51ebbb4b2da5b98082929258",
+      "q16": "67f3b7328b79ef149339017d87049b5b5fe7e668dc241b15c9e4556c3978d76b",
+      "q17": "7999d9b8bc2481d7adef4e06d9b1b9a583091f1553e557e65a6d18ab1126b9f4",
+      "q18": "e5d57b77990fc19f9cce59d075c0b5e0f3da2d9021343df92399fd150bda24b0",
+      "q19": "182a681e094d4a93718802fd5f52c70b929f0382b94b63fc596c1ff80760be62",
+      "q20": "48e28cb658aa986341b037bbea2a0191e3432a3df5d17673325fc80d7f503503"
+    },
+    "QB4_H.html": {
+      "q1": "4956e8de3e8012e72f6518621ee80aa2718eba32132645d8dac92c8c208e26d9",
+      "q2": "692fa5b7ddfcf3df6808be45422b96a0d589689df00148c2ee7146762263869a",
+      "q3": "80047b9b708194ea1572d59202142cbbc8cdab01f7884e217dec981acff07593",
+      "q4": "5f3680eb9b347f668f685772bbfba3c633c92130f1031b101e7b5a13b5ea286d",
+      "q5": "923eb18cec202fc3ac20be25a3174b9523167977431c95d93b6e3661c1ac1f58",
+      "q6": "8fc2e0562749832c7fdbff97de964acae4068d2f69c8a55984c424a9746adba8",
+      "q7": "e4e852c448f2b634a33c362d0269f986bbf93fcb7f5aed06865beb5b7473c724",
+      "q8": "7be71a7e0cb83c81bc69799d31a36294783472d1280052951b63eab6ccb1329a",
+      "q9": "cac320d531777cc6916e12f54d86e72e256913abed8a6d4a0d53b58d9232c747",
+      "q10": "83a150beb65226b7454b4ccf49e11074d26744d8f94688f08dde68a93e755ae8",
+      "q11": "77db33be64285d86fbecfef21b8cc22a736e232345f852cae26c2e7696cf0c44"
+    },
+    "QB5_B.html": {
+      "q1": "6daea86d95143324c2ad2f9cbd2b387befa086d7b7b6a104e572cf953dbf2d20",
+      "q2": "8a15798748e38d53cc753dd5d718cba4ba33feb7bbaf1d75f1689142ed42b1fd",
+      "q3": "fcc6235dd8d3f17d7b83d5b3e850c95bf7fa5a984ad42af28f34743d9645b610",
+      "q4": "54a04d571ab560430f48e6b61e729fbc294292fc8d380f9920826f3a3bf86df6",
+      "q5": "13397f703c76432c5e94f021028cc62f020dff4fbf991ad41fa7c15693527106",
+      "q6": "0160b70d66cc092e8087bf526bd5f3206a07da912c2b58522e17748ff4f5613b",
+      "q7": "9fbca97737f43b47de890527f0a1d629b88dae7e8ba2e1391150226d33356ed2",
+      "q8": "d989d847c0c75d140b3182b291def13da3bb08e128e49e55d50d82e234371403",
+      "q9": "d7818ac964ecdd07f946b49253f1b5961b5216e96f016f530001f79cf4c07bec",
+      "q10": "18af2c733b63c95762acaa01d8aec161529ee8955cdd4c9e23e02c4efd14f0f2",
+      "q11": "bfffc125f12ee2c8c806357bf8e2d6484579693b4e22f98abb567736fe54a697",
+      "q12": "872ff93e6a797934e17e2da43c11e131bd9a6134c906d8472a601d93c488485e",
+      "q13": "64b2a537b1b9fac9f8d4c05311a2ed9c28532967ebb7cea16169ee25bc8c2fef",
+      "q14": "c73a647c9312dd91f6a4554d2d547c0eb53c1f44e71517e03a3beace728e56e9",
+      "q15": "0fa3c444a079507899e5d7b93934850839af2f8247a26967238bad57206affa1",
+      "q16": "0f282b7c88fea53d75b0baa274779c345c5e1d4138346aa9a260e126dbe374a0"
+    },
+    "QB5_C_A.html": {
+      "q1": "dde663052929db79047728a3016aeb454848fd00c77e223cfd03f725f91248f8",
+      "q2": "8629cda0d6d17a4c14a9788d6edc4b1e63b5c16b3e8743bdf3064fd4a192f04e",
+      "q3": "4fb089d0521e04f61fdbf0605227025be29500d01216d40b03be598ecde0c18d",
+      "q4": "3fb4b5b2e6193377c451027be5157621b77ed5d0c51e8cca5a5657355330e07c",
+      "q5": "083e49cd9ace152549b00cc32250420f1f674e0b86b26affb81861e6d4d4d67f",
+      "q6": "35a986b836f4c2afd5e1ec6431b76067bf9fa9a9688ab4db8bd91c7f9bf53729",
+      "q7": "0aa2781a578da9b466514e08585e56ff06ac25abb755bbfc41c4245aa351e18e",
+      "q8": "c4dabda8b9b51992c8e85f0ffd26d82e722071dd0ff9319ea6252c7ecfebae78",
+      "q9": "cf213189dbf78598b01074d04e4dbd92afb4162335f9624086cfd2358a5ffbfd",
+      "q10": "0f9a57355e277c4e91269a4ee3bde0ae2a5e77a1476891af480c2d6750ec582d"
+    },
+    "QB9_A.html": {
+      "q1": "12355e25ecb5c64f068be20dcbf0dc7802b3c33b24997852df9e061d6749d4ea",
+      "q2": "b19d5787c52e195e73adc2d03e9bd69191f0e714276007ff477395346a7ffd30",
+      "q3": "740c7cfd5573a518cdd79e1bf9a1ee1ad0b9e1ea8be9fa376ec87c196ec0a62b",
+      "q4": "8c029654f7a75f7a64067fb8373aee3e373e557bedd98e17a27b3334e9905b54",
+      "q5": "b5d1f6cf055480d83e18bac73ea7ef861004aa8b6f271aa210d69300e3a7a7a6",
+      "q6": "341bff5f6e99fa8454dac1c837179023c2d30b9499dac66cca18f597ee465755",
+      "q7": "76972e697e829c7545970da114ea10bfc8698eb16a4e5798feadf8ddd05e5927",
+      "q8": "f7b91dfb12afc35aee125405919329ae4c2c16af7257873e0032f90f4d758b45",
+      "q9": "422c92002a987341521df1ee3cece3818355a9f0a5256326c1711efc687ce73e"
+    },
+    "QB9_B.html": {
+      "q1": "444d5ba8118a176618a709ac8305d82d6c4e17e0a99f8cd6fb1ccab91b55cddf",
+      "q2": "d3dec77ff50be52de7df52b80e604e7cf5fd813505800f8556e7c8bab08569ff",
+      "q3": "3022482172239986ce77bfb099f8caec40d8db76a1f456f252414e5a857e1ced",
+      "q4": "772dae08541f96d670392e5a9e7283adbf6e82912279244ce5d970231c651672",
+      "q5": "1188f39372fe182374b327bd61ba5f17331aa74b53cf71b0d4d350c88d229e84",
+      "q6": "ce030887d06c0101550a908f95f3f4461a316a97424aace507e3102031d940a0",
+      "q7": "6f7067f05ceafe8ddf867761638b0446d1063f455d5e9edf4553404498f99773",
+      "q8": "96fa57c8cd791063dd512e32a9d678975e3fe1eb131b6610c6a5c01ce2b8e11f"
+    },
+    "QB9_H.html": {
+      "q1": "fb98b7c1797191b467fb860838c148e01f2da99bc845e78997074cae8d44bd96",
+      "q2": "b6cbc4d44d21544dd015cf73288ef5efc3995abe041a6da0b9f7ef40f5221927",
+      "q3": "e472c47e16ef956df5380766bb328ea96f1ea3bcaaa9daaccb96e4275e5de706",
+      "q4": "a7d7b45e1b2186242d09e4aeb75e7bb4a3f544ef9f83e3f671eb1a2b73a02bef",
+      "q5": "5c97156c178917a26a08f6b233a9733900da94a35efc237b54f6225cec9b5d26",
+      "q6": "21c810724c76894426338beb8a579e4c5536fcda2927f93d98f25f2e2d14b6fe",
+      "q7": "c4fc930f81b5a660881bc5ecd9c0cfd8380cc8ae9f6f07b1e4ce1878f484682d",
+      "q8": "5d2a2e28d768ea62bfc6c7b44842ef8dc432c2f566436a07d3fce9436aea7e03",
+      "q9": "1e23ad83999a337da4d6783125528cd9da8434561620e4abcffb6692c77cf358",
+      "q10": "63df258cd94128b26192727fff37580bd400279b7a196e966d5398a5b6c08845",
+      "q11": "c35ddb8dc4da4ce6cc9e2c388e85671a6edb3e4b22441d3aa0fb7198d836a8dd",
+      "q12": "d060552d99e7f3ba973341f90cfcc6eb013324c9da941e698ff4a889cc881190",
+      "q13": "046d8ef23396e0b1cd5f32173593cd32d6aa4b2bf3362bcf85dac2689bf336f4",
+      "q14": "2652d540326200d05687b6295a931d29ea723652721a311553ee794e7b77ea63",
+      "q15": "bfb2761a634d2144728352dd01f7fb8f60c358589d3500f57af945ab96cc8904"
+    }
+  }
+}
