@@ -1,0 +1,375 @@
+{
+  "batch_id": "E2",
+  "title": "Class, survey, structure and statutory certification - existing-answer enrichment",
+  "kind": "ENRICHMENT",
+  "note": "Enrichment batch: every action edits an EXISTING canonical card. No card is created, removed, renamed or re-anchored. Canonical total is unchanged at 721. Every edit is purely additive - proven by character-level diff opcodes carrying insert operations only, zero delete and zero replace.",
+  "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/FINAL_ORAL_ENRICHMENT_CONSOLIDATION.json",
+  "authorisation_batch_key": "batches.E2",
+  "authorisation_commit": "eb586ed",
+  "baseline_commit": "3696019",
+  "expected_canonical_questions": 721,
+  "expected_examiner_relationships": 960,
+  "expected_examiners": 7,
+  "creates_new_cards": false,
+  "followup_overlap": "two of ten targets appear in the consolidation's 9 followup_colocation records: QB1_E.html#q1 (GAP-0172, GAP-0282) and QB3_H.html#q6 (GAP-0385). In both cases the follow-up ask is a DIFFERENT limb from the authorised enrichment, so neither was implemented here; both remain open follow-up work.",
+  "sibling_pin_delegation": [
+    "No earlier manifest pins any of the ten E2 targets - checked against batch_a/b/c/d, batch_e_gap0609, batch_e3 and batch_e4 manifests. E2 therefore needs no digest-pin exemption of its own.",
+    "The reverse direction does apply: the earlier guards each discover sibling manifests by the glob \"batch_*_manifest.json\", so this file must exist before they are run or they would report the ten E2 cards as drift. That contract was built pre-emptively during E3 and is exercised here for the first time by a batch it did not know about."
+  ],
+  "cards": [
+    {
+      "action_id": "ENRICH-A011",
+      "family_id": "GAP-0004",
+      "file": "QB1_F.html",
+      "anchor": "q7",
+      "priority": "E-P1",
+      "verification_scope": "CLASS_RULE_VERIFY_REQUIRED",
+      "q_text": "Documents related to survey (for CE)",
+      "missing_limb": "The card defines Conditions of Class and Memoranda but never mentions suspension of class, and mentions withdrawal only in passing in the CE-relevance prose. Neither the automatic/procedural distinction nor the consequence chain is stated.",
+      "limb_sentence": "The current answer lacks the class-status ladder - suspension against withdrawal, what triggers each, whether it is automatic, and the consequence chain to statutory certificates, insurance cover and trading.",
+      "changed_sections": [
+        "answer-body: new h4 '4. Class Status Ladder - Suspension Against Withdrawal' + lead paragraph + one 4-item list + consequence paragraph + closing note",
+        "reg-box: two new reg-items (IACS PR 1C Rev.7; Institute Time Clauses - Hulls 1/11/95 cl.4 and 5.1)"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "IACS Procedural Requirement PR 1C, \"Procedure for Suspension and Reinstatement or Withdrawal of Class in Case of Surveys or Conditions of Class Going Overdue\", Rev.7 Nov 2024, applying from 1 January 2026 - extracted verbatim from the IACS PDF: A.1.1 (Special Survey, automatic), A.1.2/A.1.3 (Annual/Intermediate, automatic at 3 months), A.2.1 (conditions of class, suspension PROCEDURE), A.4.1 (withdrawal after 6 months), B.1.3 (statutory certificates implicitly invalidated), Definitions (\"Disclassed\")",
+        "Institute Time Clauses - Hulls 1/11/95, clause 4.1.1/4.1.2 (duty to maintain class and comply by the Society’s dates), 4.3 (prompt reporting of any incident, condition or damage), and clause 5.1 (automatic termination on change, suspension, discontinuance, withdrawal or expiry of class, deferred until next port if at sea) - extracted verbatim"
+      ],
+      "authorisation_correction": "The consolidation listed \"unreported casualty\" among the triggers of class suspension. PR 1C does not carry it: the instrument is expressly confined to surveys and conditions of class going overdue, and lists no casualty-reporting ground. The verified duty to report promptly is an ITC-Hulls clause 4.3 obligation, so it was written as a reporting duty whose breach bites through the insurance conditions, NOT as a PR 1C suspension trigger.",
+      "claims_added": [
+        "PR 1C",
+        "Rev.7",
+        "1 January 2026",
+        "Special (Renewal) Survey",
+        "3 months",
+        "suspension procedure",
+        "6 months",
+        "is to be withdrawn",
+        "disclassed",
+        "implicitly invalidated",
+        "Institute Time Clauses",
+        "1/11/95",
+        "terminates automatically",
+        "promptly reported"
+      ],
+      "pre_edit_digest": "030ac46ca2ca6f18",
+      "post_edit_digest": "1658b73523719291",
+      "byte_delta": 3633,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A012",
+      "family_id": "GAP-0672",
+      "file": "QB1_E.html",
+      "anchor": "q1",
+      "priority": "E-P2",
+      "verification_scope": "CURRENT_REG_VERIFY_REQUIRED",
+      "retargeted": true,
+      "original_target": "QB10_B#q1",
+      "q_text": "SEQ (Safety Equipment) survey — documents required and how do you prepare for it?",
+      "missing_limb": "The SEQ card lists launching-appliance and release-gear preparation but never names MSC.402(96), the authorised service provider, or the certification and records the surveyor expects back. Tokens \"402(96)\", \"service provider\" and \"authoris/authoriz\" each occurred zero times on the card.",
+      "limb_sentence": "The current answer lacks the pre-release control on sending an LSA item ashore - who may lawfully do the work, what that authorisation rests on, and what evidence returns with the item.",
+      "changed_sections": [
+        "answer-body: new h4 'Sending an LSA Item Ashore - Authorised Service Provider Control' + lead paragraph + one 4-item list + closing note",
+        "reg-box: one new reg-item (IMO Res. MSC.402(96))"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "IMO Resolution MSC.402(96) (adopted 19 May 2016), taking effect 1 January 2020 with the SOLAS III/3 and III/20 amendments in MSC.404(96) - local True Source copy, text-extracted: 2.2.1 (authorized service provider = entity authorized by the Administration), 2.2.6 (Repair = any activity requiring disassembly or outside the on-board maintenance/emergency-repair instructions), 4.3 (five-year thorough examination, overhaul and repair by certified personnel of the manufacturer or an authorized service provider), 5.1 (reports signed by the person who did the work and countersigned by the Company representative or master), 5.2 (records filed on board for the service life of the equipment), 7.1 (certified personnel per make and type, specialised tools, parts access, manufacturer instructions for on-load release gear and davit winches, certified quality system), 7.2 (Administration makes provider information available)"
+      ],
+      "claims_added": [
+        "MSC.402(96)",
+        "SOLAS III/20",
+        "1 January 2020",
+        "disassembly",
+        "authorised by the Administration",
+        "manufacturer",
+        "five-yearly thorough examination",
+        "countersigned",
+        "service life of the equipment"
+      ],
+      "pre_edit_digest": "8adc66d771dd5582",
+      "post_edit_digest": "4f2e837a3b186593",
+      "byte_delta": 2437,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A013",
+      "family_id": "GAP-0075",
+      "file": "QB1_F.html",
+      "anchor": "q8",
+      "priority": "E-P2",
+      "verification_scope": "CLASS_RULE_VERIFY_REQUIRED",
+      "q_text": "Hull survey",
+      "missing_limb": "The Hull survey card covers survey types, close-up scope and UTM but never names or grades a deformation defect, and never states what turns one into a Condition of Class.",
+      "limb_sentence": "The current answer lacks the deformation vocabulary a surveyor actually uses, how it is assessed, and what makes a deformation a Condition of Class.",
+      "changed_sections": [
+        "answer-body: new h4 '4. Reading a Hull Deformation - the Vocabulary a Surveyor Uses' + lead paragraph + one 5-item list + assessment paragraph",
+        "reg-box: one new reg-item (IACS Rec. No. 84 Rev.1)"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "IACS Recommendation No. 84, \"Container Ships - Guidelines for Surveys, Assessment and Repair of Hull Structures\", Rev.1 Nov 2017, downloaded from the IACS public store and text-extracted: 3.3.4 (deformation from in-plane/out-of-plane/combined loads; local vs global; buckling defined as a small in-plane load increase producing large deformation; permanent vs elastic buckling and how elastic buckling is detected; buckling in webs of web frames and floors; impact/contact and inadvertent overloading; slamming forward and pooping aft), 5.x.2.2 (plate buckling between stiffeners; cross-deck strips; cargo-handling and green-seas deformation), 3.4.2 (any damage considered to affect classification is to be repaired), 3.4.4 (crop and renew at permissible minimum thickness; doubler plates must not compensate wasted plate), 3.4.5 (net scantling approach, UR S11A and S21A, renewal thickness)"
+      ],
+      "authorisation_correction": "The consolidation named the vocabulary as \"buckling, set-in/dishing of plating, tripping of stiffeners and permanent set\". Only buckling is IACS vocabulary here: the strings \"tripping\", \"set-in\", \"dishing\" and \"permanent set\" each occur ZERO times in IACS Rec. No. 84, the governing guideline for this ship type. The limb was therefore implemented with the taxonomy IACS actually uses (local vs global deformation; buckling; permanent vs elastic buckling) and the four unverified terms were dropped rather than presented to a candidate as class vocabulary.",
+      "claims_added": [
+        "IACS Recommendation No. 84",
+        "local",
+        "global",
+        "buckling",
+        "permanent",
+        "elastic",
+        "coating damage",
+        "web frames",
+        "doubler plates must not be used",
+        "UR S11A",
+        "UR S21A"
+      ],
+      "pre_edit_digest": "f60339c62f2afa7a",
+      "post_edit_digest": "510f75c55c7e32e8",
+      "byte_delta": 3146,
+      "status": "IMPLEMENTED_REDUCED_SCOPE"
+    },
+    {
+      "action_id": "ENRICH-A014",
+      "family_id": "GAP-0574",
+      "file": "QB3_A.html",
+      "anchor": "q6",
+      "priority": "E-P2",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "q_text": "Explain the Enhanced Survey Programme (ESP) — what does it cover and what does the ESP file contain?",
+      "missing_limb": "The answer body opens \"a mandatory survey regime under SOLAS\" without naming the chapter, and the term \"ESP Code\" occurs zero times anywhere on the card - the Code is never named as an instrument, only its adopting resolution number appears.",
+      "limb_sentence": "The current answer lacks the chapter in the defining prose and the Code by name - it cites A.1049(27) but never says \"SOLAS XI-1/2\" in the body or \"2011 ESP Code\" at all.",
+      "changed_sections": [
+        "answer-body: one new paragraph 'The citation, stated precisely' inside the existing 'What ESP Is' section",
+        "reg-box: one new reg-item (SOLAS XI-1/2)"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "SOLAS consolidated edition 2024, chapter XI-1 regulation 2 (Enhanced surveys), quoted from the local official-sources copy: bulk carriers as defined in regulation IX/1.6 and oil tankers as defined in regulation II-1/2.22 shall be subject to an enhanced programme of inspections in accordance with the International Code on the Enhanced Programme of Inspections during Surveys of Bulk Carriers and Oil Tankers, 2011 (2011 ESP Code), adopted by the Assembly by resolution A.1049(27); and regulation XI-1/2-1 for cargo ships not subject to the ESP Code",
+        "IMO Assembly resolution A.1049(27) - local True Source copy of the 2011 ESP Code held and text-extractable"
+      ],
+      "authorisation_correction": "The consolidation asserted that the regulatory citation \"is the one part of this four-part ask the card does not answer\". That is not accurate about the live card: SOLAS XI-1/2 and A.1049(27) already appear in the reg-box, the 60-second block and the Numbers block. What is genuinely absent is the chapter in the defining prose sentence and the Code by name - \"ESP Code\" occurs zero times. The action was therefore implemented as that narrower prose completion, not as a missing citation.",
+      "claims_added": [
+        "SOLAS chapter XI-1, regulation 2",
+        "IX/1.6",
+        "II-1/2.22",
+        "2011 ESP Code",
+        "A.1049(27)",
+        "XI-1/2-1"
+      ],
+      "pre_edit_digest": "28a45a847bc2946d",
+      "post_edit_digest": "f755ffd23664a95f",
+      "byte_delta": 1067,
+      "status": "IMPLEMENTED_REDUCED_SCOPE"
+    },
+    {
+      "action_id": "ENRICH-A015",
+      "family_id": "GAP-0668",
+      "file": "QB1_B.html",
+      "anchor": "q7",
+      "priority": "E-P2",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "q_text": "What criteria must an organisation meet to become a Recognised Organisation (RO) under IMO/Flag State delegation?",
+      "missing_limb": "The card states the criteria for becoming an RO and distinguishes class from RO at a high level in the CE tip, but never states that RO authority is flag-specific and bounded certificate by certificate. \"flag by flag\", \"withhold\" and \"statutory certification\" each occurred zero times.",
+      "limb_sentence": "The current answer lacks the boundary of RO authority - that classification needs no delegation, while statutory certification runs only as far as a particular flag has delegated it in writing.",
+      "changed_sections": [
+        "answer-body: new h4 'Class Work Against RO Work - Why the Answer Is Flag-Specific' + lead paragraph + one 3-item list + closing paragraph",
+        "reg-box: one new reg-item (RO Code, Part 2, s.8)"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "IMO Code for Recognized Organizations (RO Code), resolution MSC.349(92) adopted 21 June 2013, fetched from the IMO CDN and text-extracted: 1.3 (statutory certification and services defined as certificates issued on the authority of laws, rules and regulations of a sovereign State), Part 2 s.8.1 (authorisation under SOLAS I/6 and XI-1/1, LL article 13, MARPOL Annex I reg 6 and Annex II reg 8 only for ships entitled to fly that flag), 8.2 (legal basis - the formal written agreement with the RO), 8.3 (the flag State shall specify the scope of authorization: ship types and sizes; conventions and national legislation; approval of drawings; approval of materials and equipment; surveys, audits, inspections; issuance, endorsement and/or renewal of certificates; corrective actions; withdrawal or cancellation of certificates; reporting requirements), 8.5 (flag standards may go beyond convention requirements), 8.6.1 (specific instructions)"
+      ],
+      "source_note": "The consolidation warned that the True Source RO Code holding is an image-only scan. Confirmed: BOTH local copies (true-source and official-sources) extract to 61 bytes of text, i.e. no text layer. The primary fetch from the IMO CDN was therefore necessary and was carried out.",
+      "claims_added": [
+        "RO Code",
+        "SOLAS I/6",
+        "XI-1/1",
+        "Load Lines article 13",
+        "MARPOL Annex I regulation 6",
+        "Annex II regulation 8",
+        "entitled to fly its flag",
+        "scope of authorisation",
+        "ship type and size",
+        "withdrawal or cancellation of certificates"
+      ],
+      "pre_edit_digest": "117a0ea79344d6b8",
+      "post_edit_digest": "4767f7aa0c0cd901",
+      "byte_delta": 2446,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A016",
+      "family_id": "GAP-0108",
+      "file": "QB1_H.html",
+      "anchor": "q5",
+      "priority": "E-P2",
+      "verification_scope": "EXISTING_VERIFIED_MIWCORPUS_SUFFICIENT",
+      "q_text": "Explain the IMO Goal-Based Standards (GBS) framework — the five-tier hierarchy and its scope of application.",
+      "missing_limb": "The card explains the five tiers, the scope and the SCF precisely but the answer body never states an objective or rationale. A one-line rationale exists only inside the deep-dive Casualty Link, which is not the answer the candidate gives.",
+      "limb_sentence": "The current answer lacks the objectives half of the ask - why GBS was needed at all, and why Tier III audit replaces IMO rule-writing.",
+      "changed_sections": [
+        "answer-body: new leading h4 'Objectives - Why GBS Was Needed' + paragraph + one 3-item list, placed before the existing Five-Tier Hierarchy",
+        "reg-box: one new reg-item (IMO Res. MSC.454(100))"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "IMO's own Goal-Based Standards page: the Maritime Safety Committee, going back to the 1990s, recognized that the prescriptive-based regulations were unable to cope with the new ship design challenges; Member Governments approaching safety from a goal and performance oriented perspective in lieu of the traditional prescriptive-based approach; class construction rules verified by international GBS Audit Teams established by IMO's Secretary-General under the Revised guidelines for verification of conformity (resolution MSC.454(100)); GBS Standards adopted by MSC.287(87), SOLAS II-1/3-10 by MSC.290(87)"
+      ],
+      "claims_added": [
+        "1990s",
+        "prescriptive",
+        "goal- and performance-oriented",
+        "GBS Audit Teams",
+        "Secretary-General",
+        "MSC.454(100)"
+      ],
+      "pre_edit_digest": "7d8199bc3e7e938b",
+      "post_edit_digest": "3c3a340c1b915774",
+      "byte_delta": 1692,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A017",
+      "family_id": "GAP-0384",
+      "file": "QB2_A.html",
+      "anchor": "q15",
+      "priority": "E-P2",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "q_text": "ICOF — full name, who issues, contents, validity, and survey cycle.",
+      "missing_limb": "The card describes the permitted product list and already names the ship type and tank-by-tank loading restrictions, but never describes the certificate as the Code’s model form defines it - the three-column entry, the two signed attachments, and the chapter 18 Category Z products.",
+      "limb_sentence": "The current answer lacks the anatomy of the certificate and its attachments - what the entry columns are, and that the tank references only mean anything against a signed and dated tank plan.",
+      "changed_sections": [
+        "answer-body: new h4 'What the Attachments Actually Look Like' + lead paragraph + one 6-item list",
+        "reg-box: one new reg-item (IBC Code, model form of Certificate)"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "IBC Code as amended by IMO resolution MSC.176(79) (adopted 10 December 2004) - local True Source copy, text-extracted: Model Form of International Certificate of Fitness for the Carriage of Dangerous Chemicals in Bulk - Particulars of ship including \"Ship type (Code paragraph 2.1.2)\"; item 4 listing Product / Conditions of carriage (tank numbers etc.) / Pollution Category; \"Continued on attachment 1, additional signed and dated sheets\"; \"Tank numbers referred to in this list are identified on attachment 2, signed and dated tank plan\"; item 3 (Manual per Appendix 4 of MARPOL Annex II as called for by regulation 14); items 5 and 6 (modifications and how the ship must be loaded); Note 2 (an entry \"Type 2\" means Type 2 in all respects prescribed by the Code); Note 3 (chapter 17 products or products evaluated under 1.1.6); Note 4 (Category Z substances not covered by the Code, identified as \"chapter 18 Category Z\")"
+      ],
+      "authorisation_correction": "The consolidation described the missing content as \"the ship type assignment, the tank-by-tank record of the containment and handling equipment fitted, and the carriage conditions each listed cargo depends on\". Two of those three are already on the live card - it states the Type 1/2/3 assignment explicitly and already says the product list carries \"specific tank-by-tank loading restrictions\". The certificate also does not enumerate handling equipment tank by tank; it keys carriage conditions to tank numbers resolved by the attached tank plan. The action was implemented as the genuinely absent part - the model form’s anatomy - rather than restating what the card already had.",
+      "claims_added": [
+        "Conditions of carriage",
+        "Pollution Category",
+        "attachment 1",
+        "attachment 2",
+        "signed and dated tank plan",
+        "chapter 18 Category Z",
+        "Type 2"
+      ],
+      "pre_edit_digest": "1993891e522e2f05",
+      "post_edit_digest": "41c1cca01d2c71fb",
+      "byte_delta": 2141,
+      "status": "IMPLEMENTED_REDUCED_SCOPE"
+    },
+    {
+      "action_id": "ENRICH-A018",
+      "family_id": "GAP-0690",
+      "file": "QB3_H.html",
+      "anchor": "q6",
+      "priority": "E-P2",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "q_text": "MARPOL Annex II — contents and certificates required?",
+      "missing_limb": "The card explains the X/Y/Z/OS categorisation, the NLS Certificate, the P&A Manual and the Cargo Record Book, but never identifies the document that says which cargoes THIS ship may carry, and gives no Annex I counterpart.",
+      "limb_sentence": "The current answer lacks the pointer to an actual document - the signed product list attached to the Certificate of Fitness, read with the P&A Manual, and the Annex I equivalent.",
+      "changed_sections": [
+        "answer-body: new h4 'Where the Ship's Permitted Cargo List Actually Lives' + lead paragraph + one 3-item list"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "MARPOL Annex II regulation 7 (Survey and certification of chemical tankers) - local official-sources copy, text-extracted: a chemical tanker surveyed and certified under the IBC or BCH Code is deemed to comply, and the certificate issued under that Code \"shall have the same force and receive the same recognition as the certificate issued under regulation 9\"",
+        "MARPOL Annex II regulation 14 (Procedures and Arrangements Manual) verbatim: every ship certified to carry Category X, Y or Z substances shall have on board a Manual approved by the Administration in the standard format of appendix 4, whose main purpose is to identify for the ship’s officers the physical arrangements and all operational procedures for cargo handling, tank cleaning, slops handling and cargo tank ballasting and deballasting",
+        "IBC Code model form of Certificate of Fitness (MSC.176(79)) for the attached, signed and dated product list and tank plan",
+        "MARPOL Annex I - Supplement to the IOPP Certificate, Record of Construction and Equipment: Form A for ships other than oil tankers, Form B for oil tankers, permanently attached to the Certificate"
+      ],
+      "followup_overlap": "GAP-0385 (\"In IBC certificate survey what all will u chk in intermediate and annual survey differences\") is colocated on this target. It is a DIFFERENT limb - survey scope differences - and was deliberately NOT implemented here.",
+      "target_defect": "This card also carries a pre-existing \"Ship Recycling Sequence\" block (IHM Parts I-III, Ship Recycling Plan) inside a MARPOL Annex II card, recorded in the consolidation as DEBT-E2. Not repaired here: it is outside the authorised limb. The E2 insertion was placed in the certificates section and does not touch it.",
+      "claims_added": [
+        "regulation 7",
+        "same force",
+        "regulation 14",
+        "appendix 4",
+        "Form A",
+        "Form B",
+        "Record of Construction and Equipment"
+      ],
+      "pre_edit_digest": "933851a5ba64d664",
+      "post_edit_digest": "9bc8d13e5e4be03d",
+      "byte_delta": 1842,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A019",
+      "family_id": "GAP-0490",
+      "file": "QB3_A.html",
+      "anchor": "q8",
+      "priority": "E-P1",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "q_text": "What is a Loadicator, and what are the latest regulatory requirements/amendments concerning it?",
+      "missing_limb": "The card cites SOLAS XII Reg 11 and MSC.1/Circ.1229 but treats Chapter XII as a single carriage requirement and never lists the chapter, and it names damage stability as a loadicator output without ever stating the criteria that output must satisfy.",
+      "limb_sentence": "The current answer lacks the scope of SOLAS Chapter XII beyond regulation 11, and the damage stability criteria the loadicator is checking against.",
+      "changed_sections": [
+        "answer-body: new h4 'Chapter XII Is a Whole Regime, Not One Regulation' + regulation list paragraph",
+        "answer-body: new h4 'The Damage Stability Criteria the Loadicator Is Checking Against' + lead paragraph + one 4-item list",
+        "reg-box: one new reg-item (SOLAS Ch XII, Reg 4)"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "SOLAS consolidated edition 2024, chapter XII contents - regulations 1 to 14 with their titles, taken from the local official-sources copy",
+        "SOLAS chapter XII regulation 4 (Damage stability requirements applicable to bulk carriers) verbatim: 4.1 (single-side skin, 150 m and upwards, density 1,000 kg/m3 and above, built on or after 1 July 1999, any one cargo hold), 4.2 (double-side skin with longitudinal bulkhead within B/5 or 11.5 m whichever is less, built on or after 1 July 2006), 4.3 (single-side skin built before 1 July 1999, density 1,780 kg/m3 and above, foremost cargo hold, per the regulation 3 implementation schedule), 4.4 (equilibrium per the annex to resolution A.320(IX), the regulation equivalent to Load Line regulation 27, as amended by resolution A.514(13); permeability 0.9 loaded hold and 0.95 empty hold)"
+      ],
+      "scope_note_honoured": "The family record’s bloat_caution excluded the ask’s ballasting-versus-stress limb because the card already covers bending moment and shear force. Honoured - nothing was added on ballasting or hull girder stress.",
+      "claims_added": [
+        "fourteen regulations",
+        "Regulation 4",
+        "150 m",
+        "1,000 kg/m3",
+        "1 July 1999",
+        "1 July 2006",
+        "B/5 or 11.5 m",
+        "1,780 kg/m3",
+        "foremost cargo hold",
+        "A.320(IX)",
+        "A.514(13)",
+        "0.9",
+        "0.95"
+      ],
+      "pre_edit_digest": "70b73412e0a4af8b",
+      "post_edit_digest": "2a206339e0bbd3c7",
+      "byte_delta": 3057,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A020",
+      "family_id": "GAP-0646",
+      "file": "QB1_supplementary.html",
+      "anchor": "q3",
+      "priority": "E-P3",
+      "verification_scope": "TECHNICAL_REASONING_ONLY",
+      "q_text": "State the Damage Stability Criteria for cargo ships under SOLAS 2009 amendments. What is A ≥ R?",
+      "missing_limb": "The card states the margin line position (76 mm below the bulkhead deck at side), that the damaged waterline could not submerge it, and that the 2009 amendments deleted it - but never why it sat there.",
+      "limb_sentence": "The current answer lacks the reason the margin line sat 76 mm below the bulkhead deck at side, so the candidate can explain the principle rather than only report the deletion.",
+      "changed_sections": [
+        "answer-body: one new paragraph 'Why it sat where it did' inside the existing Margin Line section"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "Technical reasoning only, as the family record specifies. Verified against the local SOLAS consolidated edition 2024: the string \"margin line\" occurs ZERO times in the current consolidated text, confirming the card’s existing statement that the 2009 amendments removed the concept. The rationale given is the standard subdivision principle - the bulkhead deck is the deck to which transverse watertight bulkheads are carried, so immersion at side permits flow over the bulkhead tops (progressive flooding) and loss of the horizontal escape route - with 76 mm being the original three-inch imperial reserve."
+      ],
+      "scope_note_honoured": "The family record’s bloat_caution required one or two sentences inside the existing Margin Line section rather than a new section, because this is the largest target in the set. Honoured - a single paragraph was added in place, and no new section was created.",
+      "claims_added": [
+        "bulkhead deck",
+        "progressive flooding",
+        "76 mm",
+        "three inches",
+        "reserve"
+      ],
+      "pre_edit_digest": "a5674e270eefd716",
+      "post_edit_digest": "5e7d33a0428daedf",
+      "byte_delta": 868,
+      "status": "IMPLEMENTED"
+    }
+  ]
+}
