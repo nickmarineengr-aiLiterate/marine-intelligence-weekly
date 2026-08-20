@@ -242,10 +242,30 @@ def main():
            not [x for x in changed if "CARD ADDED" in x or "CARD REMOVED" in x],
            "%s" % ([x for x in changed if "CARD" in x] or "-"))
 
+    # A card that a SIBLING batch manifest authorises is legitimate here too.
+    # Without this the check forbids every future authorised edit anywhere in
+    # the corpus and expires the moment the next enrichment batch lands - which
+    # is exactly what E3 triggered. This is the same delegation contract E4
+    # completed for the A-D digest pins; it was never carried to this check,
+    # one level up, so the incomplete loop survived in the validator that
+    # diagnosed it. Exempt cards are reported BY NAME, never silently dropped.
+    #
+    # Not a weakening: the exemption is keyed on a plain "file#anchor" and the
+    # CARD ADDED / CARD REMOVED entries carry a suffix, so they can never match
+    # it; an edit to a card no manifest owns still fails (mutation C).
+    authorised_elsewhere = set()
+    for sib in sorted(MANIFEST.parent.glob("batch_*_manifest.json")):
+        if sib == MANIFEST:
+            continue
+        for sc in json.loads(sib.read_text(encoding="utf-8")).get("cards", []):
+            authorised_elsewhere.add("%s#%s" % (sc["file"], sc["anchor"]))
+
     authorised = {"%s#%s" % (c["file"], c["anchor"]) for c in cards}
-    unauthorised = sorted(set(changed) - authorised)
+    unauthorised = sorted(set(changed) - authorised - authorised_elsewhere)
+    exempt = sorted((set(changed) - authorised) & authorised_elsewhere)
     report("only_authorised_cards_changed", not unauthorised,
-           "unauthorised=%s" % (unauthorised or "-"))
+           "unauthorised=%s authorised-elsewhere=%s"
+           % (unauthorised or "-", exempt or "-"))
 
     not_changed = sorted(authorised - set(changed))
     report("every_authorised_card_changed", not not_changed,
