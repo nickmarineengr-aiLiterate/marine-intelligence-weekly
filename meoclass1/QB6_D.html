@@ -499,6 +499,19 @@ document.addEventListener('selectstart', function(e){e.preventDefault();});
 <p>A massive slewing bearing connects the pod assembly to the ship's hull. Hydraulic pumps rotate the unit via pinion drives engaging this gear ring.</p>
 <p>``` [Prime Mover] │ (Horizontal Input) ┌─────▼─────┐ (Upper Bevel Gear) │  Z-Drive  │ └─────┬─────┘ │ (Vertical Shaft passing through Hull) ┌─────▼─────┐ (Lower Bevel Gear inside Pod) ◄───┤ Propeller │ (360° Vector Thrust) └───────────┘</p>
 <p>```</p>
+<h4>The Drive Train Behind the Pod — Diesel-Electric</h4>
+<p>On L-drive and fully podded arrangements the propeller motor is electric, so &#8220;where does the power actually come from&#8221; is a chain the examiner expects you to walk, not a one-word answer:</p>
+<ol><li><strong>Diesel generator sets</strong> — typically three to five medium-speed engines, each driving an alternator.</li>
+<li><strong>Main HV switchboard</strong> — all sets paralleled onto a common bus (commonly 6.6 kV or 11 kV on larger installations); the ship&#8217;s service load is taken from the same bus.</li>
+<li><strong>Propulsion transformer</strong> — steps the bus down to converter voltage and, just as importantly, gives galvanic separation and phase shift to keep converter harmonics off the ship&#8217;s service network.</li>
+<li><strong>Frequency converter (variable-frequency drive)</strong> — rectifies to DC and inverts back to AC at whatever frequency the demanded propeller speed requires. This, not a gearbox, is the speed control.</li>
+<li><strong>Propulsion motor</strong> — synchronous or induction, mounted either inside the pod itself or vertically above it driving down through the L-drive.</li>
+<li><strong>Pod</strong> — carrying the propeller, with <strong>slip rings</strong> passing power and signals across the rotating boundary so the unit can turn continuously.</li></ol>
+<h4>Why Diesel-Electric Is Chosen for This Arrangement</h4>
+<ul><li><strong>It is what makes 360° possible at all.</strong> A mechanical shaft line cannot rotate with the pod; cables through slip rings can. This is the enabling reason, not a side benefit.</li>
+<li><strong>Engine speed is decoupled from propeller speed.</strong> The converter sets propeller RPM, so the generators run at their own efficient speed regardless of manoeuvring demand.</li>
+<li><strong>Load-optimised generation.</strong> Sets are started and stopped to keep those running near best specific fuel consumption, instead of one large engine sitting at poor part load — which is exactly the duty profile of a tug, DP or offshore vessel that spends its life at variable load.</li>
+<li><strong>Redundancy and layout freedom.</strong> Losing one set degrades available power rather than removing propulsion, and the gensets can be sited anywhere in the ship — no long shaft line dictating where the machinery space has to be.</li></ul>
 <h4>Engineering &amp; Maintenance Realities</h4>
 <p>System reliability focuses primarily on <strong>Seawater Intrusion Prevention</strong> and <strong>Lubricating Oil Containment</strong>. The dynamic seal between the rotating pod leg and the stationary hull relies on pressurized lip seals, which require precise header tank pressure differentials to counteract changing hydrostatic head pressures at varying drafts.</p>
 <h4>Examiner Angle — Simon</h4>
