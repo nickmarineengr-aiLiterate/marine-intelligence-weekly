@@ -219,7 +219,7 @@ def main():
 
     # ---- appending Batch C must not have disturbed any neighbouring card ----
     pinned = manifest.get("baseline_card_digests") or {}
-    drifted, unpinned = [], []
+    drifted, unpinned, exempt = [], [], []
     for fname in sorted(by_file):
         live = card_digests((QB_DIR / fname).read_text(encoding="utf-8", newline=""))
         want = pinned.get(fname)
@@ -227,10 +227,17 @@ def main():
             unpinned.append(fname)
             continue
         for anchor, dig in want.items():
+            # A later batch that authorises this very card is legitimate here too --
+            # the same rule already applied to allowed_here above. Without this the
+            # pin forbids every future authorised edit and expires on the next batch.
+            if anchor in authorised_elsewhere.get(fname, set()):
+                exempt.append("%s#%s" % (fname, anchor))
+                continue
             if live.get(anchor) != dig:
                 drifted.append("%s#%s" % (fname, anchor))
     report("pre_existing_cards_unchanged", not drifted and not unpinned,
-           "drifted=%s unpinned=%s" % (drifted or "-", unpinned or "-"))
+           "drifted=%s unpinned=%s authorised-elsewhere=%s"
+           % (drifted or "-", unpinned or "-", exempt or "-"))
 
     # ---- derived index agrees with the live pages ----
     idx = json.loads(CONTENT_INDEX.read_text(encoding="utf-8"))

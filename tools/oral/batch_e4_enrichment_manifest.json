@@ -1,0 +1,155 @@
+{
+  "batch_id": "E4",
+  "title": "Machinery, fuels and emissions - existing-answer enrichment",
+  "kind": "ENRICHMENT",
+  "note": "Enrichment batch: every action edits an EXISTING canonical card. No card is created, removed, renamed or re-anchored. Canonical total is unchanged at 721.",
+  "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/FINAL_ORAL_ENRICHMENT_CONSOLIDATION.json",
+  "authorisation_batch_key": "batches.E4",
+  "authorisation_commit": "eb586ed",
+  "baseline_commit": "4272ad6",
+  "expected_canonical_questions": 721,
+  "expected_examiner_relationships": 960,
+  "expected_examiners": 7,
+  "creates_new_cards": false,
+  "followup_overlap": "none - no E4 target appears in the consolidation's 9 followup_colocation records",
+  "cards": [
+    {
+      "action_id": "ENRICH-A027",
+      "family_id": "GAP-0029",
+      "file": "QB6.html",
+      "anchor": "q6",
+      "priority": "E-P1",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "q_text": "What is the carbon conversion factor for HFO and methanol? Calculate CO2 emitted for one day's fuel consumption.",
+      "missing_limb": "The card states MGO/MDO Cf = 3.206 and twice calls it counterintuitive, but never explains WHY the cleaner distillate carries the higher Cf.",
+      "limb_sentence": "The current answer lacks the mechanism behind the counter-intuitive MGO-over-HFO carbon factor.",
+      "changed_sections": ["answer-body: new h4 'Why the cleaner distillate carries the higher Cf' + 3 paragraphs"],
+      "timed_blocks_changed": false,
+      "authority": [
+        "IMO Res. MEPC.364(79), 2022 EEDI Guidelines, Table 1 - carbon content 0.8744 (ISO 8217 DMX-DMB) vs 0.8493 (RME-RMK); Cf defined as 'based on carbon content'"
+      ],
+      "claims_added": ["0.8744", "0.8493", "44/12", "3.206", "3.114"],
+      "pre_edit_digest": "5d877fbb2b42133f",
+      "post_edit_digest": "aeb00f5a1983ac38",
+      "byte_delta": 1600,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A028",
+      "family_id": "GAP-0363",
+      "file": "QB3_J.html",
+      "anchor": "q2",
+      "priority": "E-P2",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "q_text": "What is carbon footprint, and how do you check the carbon footprint of your ship?",
+      "missing_limb": "No GHG Protocol Scope 1/2/3 decomposition, and no statement that Scope 1/2/3 is corporate accounting whereas tank-to-wake vs well-to-wake is regulatory accounting.",
+      "limb_sentence": "The current answer lacks the corporate (Scope 1/2/3) carbon boundary and its relation to the regulatory TtW/WtW boundary it already draws.",
+      "changed_sections": [
+        "answer-body: new h4 'The Other Boundary - Scope 1, 2 and 3' + list + reconciliation paragraph",
+        "reg-box: one new reg-item (GHG Protocol Corporate Standard)"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "GHG Protocol Corporate Accounting and Reporting Standard - Scope 1/2/3 definitions",
+        "GHG Protocol Scope 3 Technical Guidance - Category 3 (fuel- and energy-related activities) carries well-to-tank"
+      ],
+      "claims_added": ["Scope 1", "Scope 2", "Scope 3", "Scope 3 Category 3"],
+      "pre_edit_digest": "44aafbb1adbb244b",
+      "post_edit_digest": "c25aef59b58f0491",
+      "byte_delta": 1817,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A029",
+      "family_id": "GAP-0300",
+      "file": "QB6.html",
+      "anchor": "q10",
+      "priority": "E-P2",
+      "verification_scope": "OEM_VERIFY_REQUIRED",
+      "q_text": "What is a dual fuel engine and a tri-fuel engine? Alarms, monitoring vs conventional engine? LPG bunkering procedures?",
+      "missing_limb": "The card covers only the automatic 40% LEL gas trip. It never describes the operator-initiated changeover in either direction, nor the purge/ramp sequence or the before/after confirmations.",
+      "limb_sentence": "The current answer lacks the planned, operator-commanded fuel-mode changeover in both directions.",
+      "changed_sections": ["answer-body: new h4 'Changing fuel mode on purpose - the two directions' + 2-item list + contrast paragraph"],
+      "timed_blocks_changed": false,
+      "authority": [
+        "Wartsila dual-fuel engine documentation - automatic transfer to gas operation permitted at maximum 80% load; gas-to-diesel transfer available at any load",
+        "Wartsila Gas Valve Unit - gas line inerted with nitrogen; on gas trip the gas pipe is vented and purged with inert gas"
+      ],
+      "claims_added": ["80% of rated load", "N2 inerting before gas admission", "N2 purge after gas-to-diesel"],
+      "pre_edit_digest": "6023f9a36c4c5488",
+      "post_edit_digest": "98dba2e1817aab4f",
+      "byte_delta": 2376,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A030",
+      "family_id": "GAP-0123",
+      "file": "QB7_I.html",
+      "anchor": "q3",
+      "priority": "E-P2",
+      "verification_scope": "OEM_VERIFY_REQUIRED",
+      "q_text": "Compare methane slip control between the MAN ME-GA (Otto-cycle, two-stroke) engine and low-pressure Otto-cycle 4-stroke dual-fuel engines.",
+      "missing_limb": "ME-GI appears only once, inside a trap answer. It is absent from the comparison proper, as is the account of how combustion actually proceeds in each cycle - which is what makes the slip behaviour differ.",
+      "limb_sentence": "The current answer lacks ME-GI as a member of the comparison and the combustion mechanism that separates Diesel-cycle from Otto-cycle slip.",
+      "changed_sections": ["answer-body: new h4 'The Missing Member - ME-GI, and Why Cycle Beats Stroke Count' + list + 3 paragraphs"],
+      "timed_blocks_changed": false,
+      "authority": [
+        "MAN Energy Solutions, 'Managing methane slip' - ME-GI runs the Diesel combustion process; gas injected into compressed charge air around TDC slightly after the pilot has ignited; gas enters only after the exhaust valve has closed so no escape during scavenging and virtually none trapped in crevice volumes; slip quantified and guaranteed at 0.20-0.28 g/kWh over the load range; Otto-cycle DF engines have inherently higher slip; ME-GI needs EGR or SCR for Tier III; Otto engines knock-limited, want methane number around 70",
+        "MAN B&W ME-GI fuel gas supply system - gas delivered at approximately 300 bar"
+      ],
+      "claims_added": ["300 bar", "15-16 bar", "0.20-0.28 g/kWh", "methane number around 70", "Tier III via EGR or SCR"],
+      "pre_edit_digest": "91b83fc93d0c42a9",
+      "post_edit_digest": "bdfbd96afe2dc962",
+      "byte_delta": 2606,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A031",
+      "family_id": "GAP-0542",
+      "file": "QB6_D.html",
+      "anchor": "q2",
+      "priority": "E-P2",
+      "verification_scope": "TECHNICAL_REASONING_ONLY",
+      "q_text": "Azimuth propeller - working principle.",
+      "missing_limb": "The card names an electric motor and mentions diesel-electric pod designs, but never gives the drive train the pod hangs off, nor why diesel-electric is chosen for this arrangement.",
+      "limb_sentence": "The current answer lacks the diesel-electric drive train feeding the pod and the reasoning for choosing it.",
+      "changed_sections": [
+        "answer-body: new h4 'The Drive Train Behind the Pod - Diesel-Electric' + 6-step chain",
+        "answer-body: new h4 'Why Diesel-Electric Is Chosen for This Arrangement' + 4-item list"
+      ],
+      "timed_blocks_changed": false,
+      "authority": ["technical reasoning only per consolidation verification_scope; no external claim asserted beyond standard diesel-electric architecture"],
+      "claims_added": ["6.6 kV / 11 kV (qualified as 'commonly')"],
+      "pre_edit_digest": "f8d9d930072fef6a",
+      "post_edit_digest": "86f162ec2bbe47b2",
+      "byte_delta": 2389,
+      "status": "IMPLEMENTED",
+      "guard_note": "This card is digest-pinned by batch_b_manifest.json baseline_card_digests. The pin has no exemption path for later authorised batches, so validate_batch_b.py reports it as drift. See E4 handoff."
+    },
+    {
+      "action_id": "ENRICH-A032",
+      "family_id": "GAP-0265",
+      "file": "QB1_supplementary.html",
+      "anchor": "q7",
+      "priority": "E-P2",
+      "verification_scope": "OEM_VERIFY_REQUIRED",
+      "q_text": "NOx Technical File - what is it, what does it contain, and what does the surveyor check?",
+      "missing_limb": "The card lists an approved components list and says the surveyor checks approved components, but never says where the component identification is physically found, who issues it, or how the part-to-file match is actually made.",
+      "limb_sentence": "The current answer lacks where the approved-component number physically lives, who allocates it, and how the surveyor matches part to file.",
+      "changed_sections": ["answer-body: new h4 'Matching the Part to the File - Where the Number Actually Is' + 3 paragraphs"],
+      "timed_blocks_changed": false,
+      "authority": [
+        "NOx Technical Code 2008 (MEPC.177(58)) s1.3.3 - components are interchangeable parts influencing NOx performance, identified by their design/parts number",
+        "NTC 2008 s2.4.1.1/.2 - Technical File shall contain identification of components and the full range of allowable alternatives",
+        "NTC 2008 s6.2.3.1 - documentation inspection plus actual inspection of components as necessary",
+        "NTC 2008 s6.2.3.2 - surveyor may check one or all identified components and that only components of the approved specification are used",
+        "NTC 2008 s6.2.2.7.1 - Record Book of Engine Parameters records all changes including like-for-like replacements"
+      ],
+      "claims_added": ["s1.3.3", "s6.2.3.1", "s6.2.3.2", "s6.2.2.7.1", "design/parts number", "like-for-like replacements"],
+      "pre_edit_digest": "4b6b5492e9db5a6f",
+      "post_edit_digest": "1036ebabc61410a8",
+      "byte_delta": 1717,
+      "status": "IMPLEMENTED"
+    }
+  ]
+}
