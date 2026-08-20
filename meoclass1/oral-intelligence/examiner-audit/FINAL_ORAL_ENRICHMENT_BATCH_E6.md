@@ -521,3 +521,30 @@ every run; `qb_health_check` output order is hash-seed dependent.
 - Enrichment workload: **6 → 0. ENRICHMENT IS CLOSED.**
 - Follow-up workload: **35 groups**, unchanged.
 - Master XLSX: **deferred**.
+
+## 18. Post-push verification — the health check that means something
+
+Published at `4800837` (`1b6c6c0..4800837`, fast-forward). Vercel deployment
+`dpl_HKUuCAsGoptF1MbcGo4zjGysRi22` is **READY**, target production, on commit SHA
+`480083728369f141c57f33678d689d8648fd34a8` — the exact pushed SHA.
+
+Public invariants verified on the live site: **"Oral QB + Notes — ₹1,499 for one year.
+721 solved oral Q&As, the examiner index and 200 pages of notes."** Count and pricing both
+unchanged.
+
+**The real health comparison.** With remote `main` now carrying E6, `qb_health_check`
+returns **369 findings / 202 distinct** — against the pre-push baseline of **369 / 202**.
+**0 new, 0 gone.** This is the first form of that comparison capable of detecting anything
+at all (§14), and E6 introduces no new health finding.
+
+Eight findings name an E6 destination file; all eight are in the pre-push multiset and are
+therefore pre-existing. The one that reads alarmingly — *"SQ copy size differs from
+meoclass1/QB1_A.html by >15% — likely diverged/stale duplicate"* — is expected: `SQ/QB1_A.html`
+is the free-sample teaser, 164 KB against the paid page's 299 KB, and its `q18` is a locked
+`qb-lock` card with no answer body. A047's limb lands only on the paid card, and no SQ
+change was required or made.
+
+**Recommended for the next tooling session:** give `qb_health_check.py` an opt-in local
+mode (or a `--ref` argument) so the pre-merge comparison stops being vacuous. Until then,
+the honest statement is that a health baseline taken before push proves nothing, and only
+the post-push run is evidence.
