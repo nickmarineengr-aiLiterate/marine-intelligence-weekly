@@ -1,0 +1,348 @@
+{
+ "batch_id": "E1",
+ "title": "Marine insurance, liability and commercial - existing-answer enrichment",
+ "kind": "ENRICHMENT",
+ "note": "Enrichment batch: every action edits an EXISTING canonical card. No card is created, removed, renamed or re-anchored. Canonical total is unchanged at 721 across 86 question-bearing files. Every edit is purely additive - proven by character-level diff opcodes carrying insert operations only, zero delete and zero replace, against LF-normalised text. Ten actions land on NINE cards: ENRICH-A007 and ENRICH-A008 share QB9_H.html#q9.",
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/FINAL_ORAL_ENRICHMENT_CONSOLIDATION.json",
+ "authorisation_batch_key": "batches.E1",
+ "authorisation_commit": "eb586ed",
+ "baseline_commit": "ac96d5d",
+ "expected_canonical_questions": 721,
+ "expected_examiner_relationships": 960,
+ "expected_examiners": 7,
+ "creates_new_cards": false,
+ "distinct_target_cards": 9,
+ "followup_overlap": "three of ten actions sit on targets that appear in the consolidation's 9 followup_colocation records: ENRICH-A001 / QB1_A.html#q12 (GAP-0603), ENRICH-A003 / QB1_A.html#q9 (GAP-0620) and ENRICH-A006 / QB1_G.html#q29 (GAP-0602). In each case the follow-up ask is a DIFFERENT limb from the authorised enrichment, so none was implemented here; all three remain open follow-up work and the count of 35 groups is unchanged.",
+ "sibling_pin_delegation": [
+  "No earlier manifest pins any of the nine E1 target cards - checked programmatically against batch_a/b/c/d, batch_e_gap0609, batch_e2, batch_e3 and batch_e4 manifests. E1 therefore needs no digest-pin exemption of its own.",
+  "The reverse direction does apply: every earlier guard discovers sibling manifests by the glob 'batch_*_manifest.json', so THIS FILE MUST EXIST BEFORE those guards are run. In the window before it is written, A-D, GAP-0609, E2, E3 and E4 would all report genuine-looking drift on nine cards that were legitimately edited."
+ ],
+ "line_ending_note": "QB5_J.html is CRLF in the working tree while every other destination file is LF; .gitattributes pins *.html to eol=lf so the object store is LF either way. All digests in this manifest are computed on LF-NORMALISED card text, matching the validator's cards_of(). A raw-byte comparison of QB5_J against the blob manufactures one phantom insert opcode per line and must not be used as the additivity proof.",
+ "cards": [
+  {
+   "action_id": "ENRICH-A001",
+   "family_id": "GAP-0616",
+   "file": "QB1_A.html",
+   "anchor": "q12",
+   "priority": "E-P1",
+   "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+   "q_text": "ITC (Institute Time Clauses) — What are the clauses in it?",
+   "missing_limb": "The baseline card states the ¾/¼ fraction and that Clause 8 responds to liability to the other vessel, but never explains HOW the clause operates: the cross-liabilities basis of settlement, the ¾-of-insured-value ceiling, and the five heads Clause 8 expressly excludes.",
+   "limb_sentence": "The current answer lacks the operating mechanism of the 3/4ths Running Down Clause — cross-liabilities settlement (Cl. 8.2.1), the ¾-of-insured-value ceiling per one collision (Cl. 8.2.2), and the Cl. 8.4.1–8.4.5 exclusions (wreck/obstruction removal, property other than other vessels, cargo and engagements of the insured Vessel, personal injury, pollution) which is what actually falls to P&I.",
+   "changed_sections": [
+    "answer-body: new h4 'How the ¾ Collision Liability (RDC) Actually Works' + lead paragraph + one 2-item list + one exclusions paragraph"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "Institute Time Clauses (Hulls) 1/10/83, Clause 8 — extracted verbatim from the published clause text: 8.1 (indemnity for three-fourths of damages for loss/damage to any OTHER vessel or property thereon), 8.2.1 (principle of cross-liabilities where both to blame and neither limited by law), 8.2.2 (Underwriters' total liability under 8.1 and 8.2 not to exceed their proportionate part of three-fourths of the insured value in respect of any one collision), and the EXCLUSIONS 8.4.1 removal or disposal of obstructions/wrecks/cargoes, 8.4.2 any real or personal property except other vessels and property on other vessels, 8.4.3 the cargo or other property on, or the engagements of, the insured Vessel, 8.4.4 loss of life/personal injury/illness, 8.4.5 pollution or contamination except of the other vessel in collision"
+   ],
+   "authorisation_correction": "The consolidation asked for four elements. One was already on the live card — that Clause 8 responds to collision liability to the OTHER vessel is stated in the baseline Clause 8 bullet — so the action was REDUCED to the three genuinely absent elements. The consolidation also described the P&I share as 'the residual quarter plus any excess over the insured value'; the clause is more precise than that, capping Underwriters at three-fourths of the insured value in respect of ANY ONE COLLISION (8.2.2), and that is how it was written.",
+   "claims_added": [
+    "Cl. 8.2.1",
+    "cross-liabilities",
+    "Cl. 8.2.2",
+    "¾ of the insured value",
+    "any one collision",
+    "8.4.1",
+    "8.4.2",
+    "8.4.3",
+    "8.4.4",
+    "8.4.5"
+   ],
+   "status": "IMPLEMENTED_REDUCED_SCOPE",
+   "followup_overlap": "GAP-0603 ('P&I insurance. Which all pollutions does P&I cover?') is colocated on this target. It is a different and broader limb — the scope of P&I pollution cover — and was NOT implemented here.",
+   "pre_edit_digest": "c94992a82f63c9a4",
+   "post_edit_digest": "236dc7415c72f071",
+   "byte_delta": 2088
+  },
+  {
+   "action_id": "ENRICH-A002",
+   "family_id": "GAP-0011",
+   "file": "QB1_F.html",
+   "anchor": "q1",
+   "priority": "E-P1",
+   "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+   "q_text": "Any incident on your ship",
+   "missing_limb": "The card performs a full RCA and names a 'Primary Cause', but the string 'proximate cause' occurs ZERO times and the insurance dimension is entirely absent.",
+   "limb_sentence": "The current answer lacks the distinction between root cause (the engineering end-point of the RCA the card already performs) and proximate cause (the insurance and legal test of the dominant, effective cause), and the fact that it is proximate cause which decides which policy responds.",
+   "changed_sections": [
+    "answer-body: new h4 'Root Cause vs Proximate Cause — the Distinction the Insurer Applies' + two paragraphs + one closing one-liner"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "Marine Insurance Act 1906, s.55(1) ('Included and excluded losses') — the insurer is liable for any loss proximately caused by a peril insured against, and is not liable for any loss which is not so caused",
+    "ISM Code Section 9 — reports and analysis of non-conformities, accidents and hazardous occurrences (already cited on the baseline card; retained as the root-cause side of the distinction)"
+   ],
+   "authorisation_correction": "None. The consolidation's description of this limb matched the live card exactly — the only E1 action for which that was true without qualification.",
+   "claims_added": [
+    "s.55(1)",
+    "proximate cause",
+    "dominant, effective cause"
+   ],
+   "status": "IMPLEMENTED",
+   "followup_overlap": "none",
+   "pre_edit_digest": "d7086e8c41994932",
+   "post_edit_digest": "e6d43dcdd5afb9ee",
+   "byte_delta": 1391
+  },
+  {
+   "action_id": "ENRICH-A003",
+   "family_id": "GAP-0237",
+   "file": "QB1_A.html",
+   "anchor": "q9",
+   "priority": "E-P2",
+   "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+   "q_text": "General Average — Explain including act and procedure followed.",
+   "missing_limb": "The procedure list names the Average Adjuster and the card's own CE Oral Tip poses the question 'who appoints the Average Adjuster?' — and the card never answers it. Nothing on the card states who appoints, what qualifies, or why independence matters.",
+   "limb_sentence": "The current answer lacks who the average adjuster is and what qualifies them — appointed by the shipowner, in practice a Fellow of the Association of Average Adjusters — and why that independence matters to the parties whose contributions they assess.",
+   "changed_sections": [
+    "answer-body: new h4 'Who the Average Adjuster Is — and Why Independence Matters' + two paragraphs"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "CMI Guidelines relating to General Average (2nd ed., 2022), §3.1 'Appointment of adjusters' — it is usually the responsibility of the shipowner to appoint an average adjuster to prepare a general average adjustment, and in the majority of jurisdictions the adjuster's findings are not legally binding unlike an arbitration award; §3.2 'Best practice of average adjusters' — irrespective of the identity of the instructing party the adjuster is expected to act in an impartial and independent manner",
+    "The Association of Average Adjusters (London, established 1869) — Fellowship by written and practical examination, under a code of professional conduct"
+   ],
+   "authorisation_correction": "The consolidation said 'in practice a Fellow of the Association of Average Adjusters'. Verified and kept. The verified CMI text adds a point the consolidation did not carry and which is the stronger exam answer — that the adjustment is NOT legally binding in most jurisdictions and is accepted on the strength of the adjuster's professional standing — so that was included. The baseline card's phrase 'Lloyd's Average Adjuster or equivalent' was left untouched rather than corrected, because correcting it would be a delete/replace and is outside the authorised limb.",
+   "claims_added": [
+    "shipowner appoints",
+    "Association of Average Adjusters",
+    "1869",
+    "impartial and independent",
+    "not legally binding"
+   ],
+   "status": "IMPLEMENTED",
+   "followup_overlap": "GAP-0620 ('Explain how GA was applicable for ship ever given stuck in suez') is colocated on this target. Different limb — a worked casualty application — and NOT implemented here. The baseline card already carries an Ever Given casualty anchor.",
+   "pre_edit_digest": "53049b26f41cc283",
+   "post_edit_digest": "a1deaf3445bc1c88",
+   "byte_delta": 1242
+  },
+  {
+   "action_id": "ENRICH-A004",
+   "family_id": "GAP-0234",
+   "file": "QB1_B.html",
+   "anchor": "q1",
+   "priority": "E-P2",
+   "verification_scope": "CURRENT_REG_VERIFY_REQUIRED",
+   "q_text": "Explain the HNS Convention — to whom does it apply, when does it enter into force, and until then what is the liability/compensation fallback (LLMC limits)?",
+   "missing_limb": "The card quotes every limit in SDR (100 / 115 / 250 million) and expands the abbreviation once, but nowhere explains what an SDR is, how it is valued, or why the national-currency value of a convention limit moves.",
+   "limb_sentence": "The current answer lacks an explanation of what the SDR actually is and why the figure moves — an IMF basket unit (USD, EUR, CNY, JPY, GBP), valued daily, with basket composition and weights reviewed on a fixed five-year cycle — so a convention limit fixed in SDR is not fixed in any national currency.",
+   "changed_sections": [
+    "answer-body: new h4 'What an SDR Actually Is — and Why the Limit Moves' + two paragraphs"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "International Monetary Fund — SDR valuation: basket of five currencies (US dollar, euro, Chinese renminbi, Japanese yen, pound sterling); SDR value calculated daily from market exchange rates; the SDR valuation basket is reviewed every five years, or earlier if warranted"
+   ],
+   "authorisation_correction": "The consolidation described the mechanism as 'basket composition and weights reviewed on a fixed multi-year cycle'. That is true but incomplete, and the incomplete version would leave a candidate unable to answer why the figure moves BETWEEN reviews. The verified IMF position is that the fixed currency AMOUNTS are held constant across the five-year period while the WEIGHTS float with exchange rates — so the limit moves daily as well as at each review. Written with both mechanisms. No specific basket weights or a next-review date were published, because neither could be verified to a current primary source within this session.",
+   "claims_added": [
+    "five currencies",
+    "US dollar, euro, Chinese renminbi, Japanese yen, pound sterling",
+    "daily",
+    "every five years"
+   ],
+   "status": "IMPLEMENTED",
+   "followup_overlap": "none",
+   "pre_edit_digest": "3bc4beacef9927f4",
+   "post_edit_digest": "6ad6ec0ff8a4c002",
+   "byte_delta": 1148
+  },
+  {
+   "action_id": "ENRICH-A005",
+   "family_id": "GAP-0239",
+   "file": "QB1_B.html",
+   "anchor": "q19",
+   "priority": "E-P2",
+   "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+   "q_text": "What does 'clear ground' mean in the context of marine insurance/claims?",
+   "missing_limb": "The card turns on warranties (implied warranty of seaworthiness; its own Examiner Chain reads 'Marine Insurance basics -> Warranties -> Denial of claims') but the word 'guarantee' occurs ZERO times on the card, and 'Insurance Act 2015' occurs ZERO times anywhere in the corpus.",
+   "limb_sentence": "The current answer lacks the distinction between a marine-insurance warranty and a guarantee — exact compliance under MIA 1906 s.33(3), breach now SUSPENDING rather than discharging the insurer's liability under Insurance Act 2015 s.10, against a guarantee as a third party's separate promise to answer for performance or defect.",
+   "changed_sections": [
+    "answer-body: new h4 'Warranty Is Not Guarantee — the Distinction Behind These Cases' + two paragraphs"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "Marine Insurance Act 1906, s.33 ('Nature of warranty'), s.33(3) first sentence — a warranty is a condition which must be exactly complied with, whether it be material to the risk or not; this sentence SURVIVES",
+    "Insurance Act 2015, s.10 ('Breach of warranty') — abolishes the rule that breach discharges the insurer's liability; the insurer has no liability for loss occurring after breach and before it is remedied. s.10(7) omits the SECOND sentence of MIA 1906 s.33(3) and omits s.34 entirely. In force 12 August 2016."
+   ],
+   "authorisation_correction": "The consolidation said s.33 was 'reformed by the Insurance Act 2015, which replaced automatic discharge with suspension'. Verified and correct, but imprecise in a way that matters to an examiner: the 2015 Act did NOT touch the exact-compliance rule. Only the SECOND sentence of s.33(3) and the whole of s.34 were repealed, so 'must be exactly complied with, whether it be material to the risk or not' is still law. Written that way rather than as a blanket 'section 33 was reformed'.",
+   "claims_added": [
+    "s.33(3)",
+    "exactly complied with",
+    "Insurance Act 2015, s.10",
+    "12 August 2016",
+    "second sentence",
+    "s.34",
+    "suspends"
+   ],
+   "status": "IMPLEMENTED",
+   "followup_overlap": "none",
+   "pre_edit_digest": "80f8c1d1b13ff7cf",
+   "post_edit_digest": "455828b8f930ac59",
+   "byte_delta": 1367
+  },
+  {
+   "action_id": "ENRICH-A006",
+   "family_id": "GAP-0610",
+   "file": "QB1_G.html",
+   "anchor": "q29",
+   "priority": "E-P2",
+   "verification_scope": "CURRENT_REG_VERIFY_REQUIRED",
+   "q_text": "⁠LATEST AMENDMENT IN IMOLEGAL COMMITTEE",
+   "missing_limb": "The card covers abandonment, fraudulent registries and MASS and says nothing about maritime security incidents or which IMO organ answers them. What it lacks is ONLY the institutional/instrument limb: the insurance limb and the flag-State/shipboard limb are already owned, and owned better, by dedicated cards elsewhere in the corpus.",
+   "limb_sentence": "The current answer lacks the institutional response to maritime security incidents — that security of navigation is not the Legal Committee's remit, that IMO answers through SOLAS Ch XI-2/the ISPS Code and the SUA Convention 1988 with its 2005 Protocols under the Maritime Safety Committee, and that what LEG contributes is the liability side.",
+   "changed_sections": [
+    "answer-body: new h4 '3. Maritime Security Incidents — Which IMO Organ Actually Responds' + lead paragraph + one 2-item list + closing attribution paragraph"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "SOLAS Chapter XI-2 and the International Ship and Port Facility Security (ISPS) Code — entered into force 1 July 2004; the mandatory maritime security regime, maintained by the Maritime Safety Committee",
+    "Convention for the Suppression of Unlawful Acts against the Safety of Maritime Navigation (SUA), adopted 10 March 1988, entered into force 1 March 1992; the 2005 Protocols adopted 14 October 2005, entered into force 28 July 2010 — broadened the offences to include using a ship itself to cause death or serious injury or damage and transporting weapons-of-mass-destruction material, and added boarding provisions"
+   ],
+   "authorisation_correction": "SUBSTANTIALLY REDUCED on current-live evidence. The consolidation authorised three sub-limbs: the IMO's position and instruments, the flag State's role and advice to its ships, and the insurance consequence (war-risk listed areas, additional premium, notice to underwriters, crew war-zone entitlements). Checked corpus-wide, TWO of the three are already covered, and covered better, by dedicated cards: QB9_E#q3 'War Time Marine Insurance & Extra Premiums' already carries the Joint War Committee (LMA/IUA), Listed Areas, advance notice to underwriters, the Breach/Additional Premium and the charterparty allocation of who pays it; and QB9_A#q9 'Actions and precautions when your ship goes to a war risk area' already carries flag-State notification, BMP5, SSAS and MSC.1/Circ.1606. Publishing those limbs onto an IMO Legal Committee card would have duplicated two dedicated homes — the corpus-debt pattern the batch brief forbids. Only the institutional/instrument limb, which is genuinely absent and genuinely belongs on this card, was implemented; the other two are cross-referred in prose rather than rebuilt.",
+   "claims_added": [
+    "SOLAS Chapter XI-2",
+    "ISPS Code",
+    "1 July 2004",
+    "SUA Convention 1988",
+    "10 March 1988",
+    "1 March 1992",
+    "2005 Protocols",
+    "28 July 2010",
+    "Maritime Safety Committee"
+   ],
+   "status": "IMPLEMENTED_REDUCED_SCOPE",
+   "followup_overlap": "GAP-0602 ('How will deal with disputes to cargo damage..?') is colocated on this target. Wholly different limb — cargo-damage dispute handling — and NOT implemented here.",
+   "pre_edit_digest": "d87e4ee14bfb963f",
+   "post_edit_digest": "53c2d365fa3c7c5e",
+   "byte_delta": 1843
+  },
+  {
+   "action_id": "ENRICH-A007",
+   "family_id": "GAP-0157",
+   "file": "QB9_H.html",
+   "anchor": "q9",
+   "priority": "E-P2",
+   "verification_scope": "TECHNICAL_REASONING_ONLY",
+   "q_text": "What is a Contract of Affreightment?",
+   "missing_limb": "The 60-second block says a CoA 'trades schedule security and volume for rate stability', which gestures at the point but never allocates the market risk directionally and never names the hedging function.",
+   "limb_sentence": "The current answer lacks who carries freight-market risk under a CoA and in which direction — the owner exposed if the market rises, the shipper exposed if it falls — and that this makes a CoA a hedging instrument as much as a carriage contract.",
+   "changed_sections": [
+    "answer-body: new h4 'Who Carries the Freight-Market Risk in a CoA' + two paragraphs"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "TECHNICAL_REASONING_ONLY — no external authority is asserted. The reasoning is derived from the card's own established anatomy (quantity and period fixed at an agreed rate, tonnage nominated per shipment, freight escalation machinery in the framework), which the baseline card already states."
+   ],
+   "authorisation_correction": "REDUCED. The consolidation treated the whole risk-allocation point as absent. Partly present: 'rate stability' is already on the card. The action was reduced to the directional allocation and the hedging characterisation, which are the genuinely absent elements.",
+   "claims_added": [
+    "owner exposed if the market rises",
+    "shipper exposed if it falls",
+    "hedging instrument"
+   ],
+   "status": "IMPLEMENTED_REDUCED_SCOPE",
+   "followup_overlap": "none",
+   "pre_edit_digest": "1e23ad83999a337d",
+   "post_edit_digest": "8d4350bc8e14f8bb",
+   "byte_delta": 2849,
+   "shared_target_note": "ENRICH-A007 and ENRICH-A008 both target QB9_H.html#q9. The recorded byte_delta is the CARD total for both limbs combined, not this action alone."
+  },
+  {
+   "action_id": "ENRICH-A008",
+   "family_id": "GAP-0626",
+   "file": "QB9_H.html",
+   "anchor": "q9",
+   "priority": "E-P2",
+   "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+   "q_text": "What is a Contract of Affreightment?",
+   "missing_limb": "The spectrum lists 'bareboat' once and describes it only as transferring possession and crewing. The string 'charter-cum-demise' occurs ZERO times on this card, and no card in the corpus explains what BBCD is (two cards assert only that the MS Act 2025 permits BBCD registration).",
+   "limb_sentence": "The current answer lacks the distinction between a plain bareboat/demise charter and a bareboat charter-cum-demise — the ownership-transfer obligation, the capital repayment element inside the periodic payment rather than pure hire, and the clause that effects the transfer.",
+   "changed_sections": [
+    "answer-body: new h4 'Bareboat Charter vs Bareboat Charter-Cum-Demise' + lead paragraph + one 2-item list + one edition-discipline paragraph"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "BIMCO BARECON 2001, optional Part IV (Hire/Purchase Agreement) — where the parties elect it, title in the vessel transfers to the charterer upon the final payment of charter hire",
+    "BIMCO BARECON 2017, optional Part IV — the previous hire/purchase arrangement was REPLACED with a purchase option on behalf of the charterer, giving the charterer options to purchase the vessel during the charter term at a pre-agreed purchase price. Confirmed by two independent practitioner analyses of the 2017 revision."
+   ],
+   "authorisation_correction": "The consolidation asked to 'identify the clause that effects the transfer' as though there were one current answer. There is not, and this is exactly the contract-edition trap: the automatic transfer on final hire payment is a BARECON 2001 Part IV mechanism, and BARECON 2017 replaced it with a purchase option exercisable DURING the term. Both editions were stated, with an explicit warning not to quote the 2001 mechanism as current BARECON wording. No Indian statutory section number was cited, because the MS Act 2025 provision could not be verified to primary text in this session; the Indian angle is stated only as the recognised registration form, which two corpus cards already assert independently.",
+   "claims_added": [
+    "BARECON 2001 Part IV Hire/Purchase Agreement",
+    "final instalment of hire",
+    "BARECON 2017 Part IV purchase option",
+    "capital repayment element"
+   ],
+   "status": "IMPLEMENTED",
+   "followup_overlap": "none",
+   "pre_edit_digest": "1e23ad83999a337d",
+   "post_edit_digest": "8d4350bc8e14f8bb",
+   "byte_delta": 2849,
+   "shared_target_note": "ENRICH-A007 and ENRICH-A008 both target QB9_H.html#q9. The recorded byte_delta is the CARD total for both limbs combined, not this action alone."
+  },
+  {
+   "action_id": "ENRICH-A009",
+   "family_id": "GAP-0595",
+   "file": "QB2_B.html",
+   "anchor": "q7",
+   "priority": "E-P2",
+   "verification_scope": "TECHNICAL_REASONING_ONLY",
+   "q_text": "Explain the container shipping operational model: what is the difference between Liner, NVOCC, and VOCC, and what are the advantages/disadvantages of each?",
+   "missing_limb": "One baseline line contrasts tramp shipping ('move on-demand based on individual charter party spot contracts'), so the no-fixed-schedule and charterparty elements are partly present. Absent: the published tariff contrast, the liner B/L vs charterparty document contrast, and the whole port/cargo-handling/delay risk allocation — 'laytime', 'demurrage', 'FIOST' and 'liner terms' all occur ZERO times on the card.",
+   "limb_sentence": "The current answer lacks the tramp side of the contrast beyond one line — no published tariff, employment fixture by fixture on a charterparty rather than a liner bill of lading, freight negotiated per voyage against a market rate, and the different allocation of port, cargo-handling and delay risk that follows.",
+   "changed_sections": [
+    "answer-body: new h4 'Liner vs Tramp — the Full Commercial Contrast' + lead paragraph + one 4-item list"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "TECHNICAL_REASONING_ONLY — standard chartering practice. Named forms and terms of art only (GENCON as the voyage-charter form; FIOST as the cargo-handling allocation; laytime/demurrage/despatch as the time allocation); no clause number is asserted."
+   ],
+   "authorisation_correction": "REDUCED. The consolidation treated all four elements as absent. The schedule and charterparty elements are partly present in the baseline 'Contrasted with Tramp Shipping' bullet, so the action was reduced to the three genuinely absent elements: published tariff, contract document, and the port/cargo-handling/delay risk allocation.",
+   "claims_added": [
+    "published tariff",
+    "liner bill of lading vs charterparty",
+    "liner terms",
+    "FIOST",
+    "laytime",
+    "demurrage",
+    "despatch"
+   ],
+   "status": "IMPLEMENTED_REDUCED_SCOPE",
+   "followup_overlap": "none",
+   "pre_edit_digest": "4b3710052c415989",
+   "post_edit_digest": "ad5e4fb31fa38923",
+   "byte_delta": 1680
+  },
+  {
+   "action_id": "ENRICH-A010",
+   "family_id": "GAP-0447",
+   "file": "QB5_J.html",
+   "anchor": "q1",
+   "priority": "E-P2",
+   "verification_scope": "TECHNICAL_REASONING_ONLY",
+   "q_text": "What is Lower Calorific Value? Why is engine performance always quoted against LCV and not the higher value?",
+   "missing_limb": "The card already carries the mass-basis caveat for LNG and notes that a low-energy stem burns more mass for the same energy. Absent is the owner-level commercial frame the limb asks for: cost per unit energy rather than per tonne, the tank-capacity consequence, and the compliance metric being written per megajoule.",
+   "limb_sentence": "The current answer lacks the owner's case for an alternative fuel expressed through the card's own quantity — because LCV sets the mass burned per unit of work, a low-carbon fuel's benefit must be stated per unit of ENERGY not per tonne, and that is what decides bunker cost, tank capacity and compliance value.",
+   "changed_sections": [
+    "answer-body: new h4 'Why the Owner Argues an Alternative Fuel Per Megajoule, Not Per Tonne' + lead paragraph + one 3-item list"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "Regulation (EU) 2023/1805 (FuelEU Maritime), applying from 1 January 2025 — limits the annual average greenhouse-gas intensity of the energy used on board a ship, expressed in gCO2e/MJ, stepping down from a reference value of 91.16 gCO2eq/MJ",
+    "The card's own ISO 8217 / ISO 3046-1 net specific energy basis, already cited on the baseline card, supplies the energy denominator"
+   ],
+   "authorisation_correction": "REDUCED, and deliberately scoped away from a currentness risk. The consolidation asked for 'compliance value to the owner'. The IMO Net-Zero Framework would be the obvious anchor but its adoption vote stands reconvened and it is NOT in force, so it was NOT cited. FuelEU Maritime was used instead: it is in force, applies from 1 January 2025, and expresses its limit in exactly the per-energy unit the limb turns on. The mass-basis LNG caveat already on the card was not restated, only extended to the volumetric consequence.",
+   "claims_added": [
+    "cost per gigajoule",
+    "Regulation (EU) 2023/1805",
+    "1 January 2025",
+    "gCO2e/MJ",
+    "91.16 gCO2eq/MJ"
+   ],
+   "status": "IMPLEMENTED_REDUCED_SCOPE",
+   "followup_overlap": "none",
+   "pre_edit_digest": "7c93ff865a31a220",
+   "post_edit_digest": "1d965a2030ec9eae",
+   "byte_delta": 1658
+  }
+ ]
+}
