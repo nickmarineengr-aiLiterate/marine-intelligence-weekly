@@ -101,6 +101,32 @@ def target_of(d):
     return d.get("new_target") or d["orig_target"]
 
 
+def colocation(auth, actions):
+    """Cards that will receive BOTH an enrichment and a follow-up insertion.
+
+    The 35 authorised follow-up groups are not processed here, but a card that
+    takes an enrichment and a follow-up must be visited once, not twice - and
+    the two must not restate the same limb.
+    """
+    asks = {f["family_id"]: f["ask"] for f in auth["families"]}
+    fu = {}
+    for a in auth["production_actions"]:
+        if a["kind"] == "FOLLOWUP_INSERTION":
+            fu.setdefault(a["target"], []).extend(a["family_ids"])
+    out = []
+    for a in actions:
+        if a["target"] not in fu:
+            continue
+        out.append({
+            "target": a["target"],
+            "enrichment_action_id": a["action_id"],
+            "enrichment_family_ids": list(a["family_ids"]),
+            "followup_family_ids": sorted(fu[a["target"]]),
+            "followup_asks": [asks[f] for f in sorted(fu[a["target"]])],
+        })
+    return sorted(out, key=lambda r: (r["target"], r["enrichment_action_id"]))
+
+
 def build(adj, auth, man, live):
     fams = {d["family_id"]: d for d in adj["family_decisions"]}
     order = [fid for _, _, _, ids in BATCHES for fid in ids]
@@ -184,6 +210,7 @@ def build(adj, auth, man, live):
         "verification_classes": dict(sorted(
             (k, sum(1 for a in actions if a["verification_scope"] == k))
             for k in {a["verification_scope"] for a in actions})),
+        "followup_colocation": colocation(auth, actions),
         "corpus_debt_observed": adj.get("corpus_debt_observed", []),
         "family_decisions": sorted(adj["family_decisions"], key=lambda d: d["family_id"]),
         "family_to_action": dict(sorted(index.items())),
@@ -251,6 +278,19 @@ def render_md(doc):
             flag = " *(retargeted)*" if a["retargeted"] else ""
             w(f"| `{a['action_id']}` | `{a['target']}`{flag} | {a['priority']} | "
               f"{a['verification_scope']} | {limb} |")
+        w("")
+
+    if doc["followup_colocation"]:
+        w("## Overlap with the 35 authorised follow-up groups\n")
+        w(f"{len(doc['followup_colocation'])} cards will receive both an enrichment and a "
+          "follow-up insertion. No pair restates the same limb, so nothing is dropped — but each "
+          "of these cards should be visited once, not twice, and QB4_C#q6 takes three edits.\n")
+        w("| Target | Enrichment | Follow-up families | Follow-up ask |")
+        w("| --- | --- | --- | --- |")
+        for r in doc["followup_colocation"]:
+            w(f"| `{r['target']}` | `{r['enrichment_action_id']}` "
+              f"({', '.join(r['enrichment_family_ids'])}) | "
+              f"{', '.join(r['followup_family_ids'])} | {' / '.join(r['followup_asks'])} |")
         w("")
 
     if doc["corpus_debt_observed"]:

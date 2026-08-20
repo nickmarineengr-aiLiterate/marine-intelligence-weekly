@@ -139,6 +139,22 @@ Instrument-hierarchy, audit-regime and pollution-response limbs.
 | `ENRICH-A049` | `QB9_B#q2` | E-P3 | TECHNICAL_REASONING_ONLY | Place the drill on the strategic/tactical axis the examiner used: the SOPEP and the company response policy are the strategic layer, the drill is the tactical layer that rehearses and tests it - and say what each layer is meant to prove. |
 | `ENRICH-A050` | `QB6_F#q4` *(retargeted)* | E-P3 | PRIMARY_AUTHORITY_REQUIRED | Name the ITU as the United Nations specialised agency for telecommunications and state its role behind the number the card already explains - allocation of the Maritime Identification Digits and call signs, and the Radio Regulations underpinning GMDSS. |
 
+## Overlap with the 35 authorised follow-up groups
+
+9 cards will receive both an enrichment and a follow-up insertion. No pair restates the same limb, so nothing is dropped — but each of these cards should be visited once, not twice, and QB4_C#q6 takes three edits.
+
+| Target | Enrichment | Follow-up families | Follow-up ask |
+| --- | --- | --- | --- |
+| `QB1_A#q12` | `ENRICH-A001` (GAP-0616) | GAP-0603 | P&I insurance. Which all pollutions does P&I cover? |
+| `QB1_A#q9` | `ENRICH-A003` (GAP-0237) | GAP-0620 | Explain how GA was applicable for ship ever given stuck in suez. |
+| `QB1_E#q1` | `ENRICH-A012` (GAP-0672) | GAP-0172, GAP-0282 | FSS CODE, FUNCTIONAL REQUIREMENT, objective / List of statutory certificates in ur last ship, whats the validity of certificates |
+| `QB1_F#q12` | `ENRICH-A038` (GAP-0530) | GAP-0523 | Sturucture of MS act, preamble |
+| `QB1_G#q29` | `ENRICH-A006` (GAP-0610) | GAP-0602 | How will deal with disputes to cargo damage..? |
+| `QB3_H#q6` | `ENRICH-A018` (GAP-0690) | GAP-0385 | In IBC certificate survey what all will u chk in intermediate and annual survey differences |
+| `QB4_C#q6` | `ENRICH-A036` (GAP-0112) | GAP-0511 | Complaint redressal mechanism |
+| `QB4_C#q6` | `ENRICH-A037` (GAP-0703) | GAP-0511 | Complaint redressal mechanism |
+| `QB9_G#q3` | `ENRICH-A046` (GAP-0165) | GAP-0481 | FAL- Maritime single window in detail... came into force, Sagar Sethu |
+
 ## Pre-existing corpus debt surfaced by this review
 
 Found while reading the authorised target cards. None of it is repaired here — this session touches no live product — but DEBT-E3 and DEBT-E5 sit on cards this plan will edit, so they should be closed in the same visit.
