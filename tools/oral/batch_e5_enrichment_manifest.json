@@ -1,0 +1,378 @@
+{
+ "batch_id": "E5",
+ "title": "STCW, MLC, crew welfare and shipboard management - existing-answer enrichment",
+ "kind": "ENRICHMENT",
+ "note": "Enrichment batch: every action edits an EXISTING canonical card. No card is created, removed, renamed or re-anchored. Corpus total is unchanged.",
+ "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/FINAL_ORAL_ENRICHMENT_CONSOLIDATION.json",
+ "authorisation_batch_key": "batches.E5",
+ "authorisation_commit": "eb586ed",
+ "baseline_commit": "e47c7e6",
+ "expected_canonical_questions": 721,
+ "expected_question_bearing_files": 86,
+ "expected_examiner_relationships": 960,
+ "expected_examiners": 7,
+ "creates_new_cards": false,
+ "distinct_target_cards": 11,
+ "shared_target": "QB4_C.html#q6",
+ "shared_target_actions": [
+  "ENRICH-A036",
+  "ENRICH-A037"
+ ],
+ "shared_target_note": "ENRICH-A036 (MLC Title 3 accommodation minima as quotable figures) and ENRICH-A037 (the shipowner as a distinct duty-holder, and Part V of the Merchant Shipping Act, 2025) both land on QB4_C.html#q6. They are TWO authorised actions with genuinely distinct limbs, satisfied by ONE target-card visit and therefore ONE insert. Both carry the same pre_edit_digest and the same post_edit_digest, and the recorded byte_delta for that card is the card total for BOTH limbs combined, not either alone. Dropping either limb must fail even though the arithmetic 12-actions/11-cards still holds.",
+ "line_ending_note": "All nine destination files are LF on disk and .gitattributes pins *.html to eol=lf, so disk and object store agree. Digests and diffs are nonetheless LF-normalised before hashing, so a future CRLF checkout of any of these pages cannot manufacture phantom opcodes.",
+ "followup_overlap": "Three of twelve actions sit on targets that appear in the consolidation's followup_colocation records: ENRICH-A038 (GAP-0523, 'Sturucture of MS act, preamble'), and ENRICH-A036 and ENRICH-A037, which share target QB4_C#q6 and therefore share follow-up GAP-0511 ('Complaint redressal mechanism'). All three are distinct limbs from the enrichment and none was implemented. Follow-up workload is unchanged at 35 groups. Note that GAP-0511 asks about complaint redressal on QB4_C#q6 while ENRICH-A039 adds the Indian grievance ladder to QB9_H#q4 - a different card and a different ask, so the two do not collide.",
+ "cards": [
+  {
+   "action_id": "ENRICH-A033",
+   "family_ids": [
+    "GAP-0207"
+   ],
+   "file": "QB4_A.html",
+   "anchor": "q22",
+   "priority": "E-P3",
+   "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+   "q_text": "Moving from Second Engineer to Chief Engineer — what training and certificates does STCW require, and which requirements are national rather than STCW?",
+   "retargeted": false,
+   "original_target": "QB4_A#q22",
+   "missing_limb": "Add the rung below the one the card starts at: the STCW Regulation III/1 entry requirements for an engineer officer of the watch - the qualifying supervised watchkeeping sea service and the 750 kW propulsion-power threshold - so the ladder up to the III/2 3,000 kW certificate the card already explains is complete.",
+   "limb_sentence": "The current answer lacks the rung below the one it starts at - the STCW Regulation III/1 entry requirements for an engineer officer of the watch, namely the 750 kW propulsion-power threshold, the qualifying combined workshop and seagoing service, and the six months of supervised engine-room watchkeeping - so the ladder up to the III/2 3,000 kW certificate is complete.",
+   "changed_sections": [
+    "answer body: new h4 'The rung below - where the engineer ladder actually starts' + lead paragraph + 3-item list"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "STCW Regulation III/1 - mandatory minimum requirements for certification of officers in charge of an engineering watch in a manned engine-room or designated duty engineers in a periodically unmanned engine-room, on ships powered by main propulsion machinery of 750 kW propulsion power or more; not less than 18 years of age; either not less than 12 months combined workshop skills training and approved seagoing service as part of an approved training programme including onboard training meeting Code section A-III/1 and documented in an approved training record book, or not less than 36 months combined of which not less than 30 months is seagoing service in the engine department; and engine-room watchkeeping duties performed under the supervision of the chief engineer officer or a qualified engineer officer for not less than six months",
+    "STCW Code section A-III/1 - standard of competence"
+   ],
+   "status": "IMPLEMENTED",
+   "pre_edit_digest": "8533550c374055d1",
+   "post_edit_digest": "dfd8dd665e99ea8a",
+   "byte_delta": 1745,
+   "followup_overlap": null
+  },
+  {
+   "action_id": "ENRICH-A034",
+   "family_ids": [
+    "GAP-0206"
+   ],
+   "file": "QB5_A.html",
+   "anchor": "q16",
+   "priority": "E-P2",
+   "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+   "q_text": "TEAP — What is It and Why is It Required?",
+   "retargeted": false,
+   "original_target": "QB5_A#q16",
+   "missing_limb": "Add the qualifying sea service TEAP requires for an engineer officer to sit for and obtain each level of CoC - the national sea-service rule the card's own framework exists to set out.",
+   "limb_sentence": "The current answer lacks the qualifying sea service the national framework it describes actually prescribes for each level of engineer Certificate of Competency - the card sets out TEAP's structure and hierarchy but never states a single sea-service figure.",
+   "changed_sections": [
+    "answer body: new h4 'What TEAP Actually Sets Out - Engineer Sea Service' + lead paragraph + 3-row data-table + closing distinction paragraph"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "TEAP Part A (Consolidated Rev. 1, 1 May 2015), Chapter III, restating the approved sea-going service required by Rules 35, 36 and 37 of the M.S. (STCW) Rules",
+    "Rule 35 (MEO Class IV, OIC EW on ships of 750 kW or more) - approved education, training and sea service depend on the stream of entry, of which there are ten, per TEAP Flow Diagrams III/1 and III/2; onboard training recorded in the approved Training and Assessment Record book published by IME(I) in the format approved by the Directorate",
+    "Rule 36 (MEO Class II, Second Engineer on ships of 3,000 kW or more) - not less than twelve months as Assistant Engineer Officer or Officer in Charge of an Engineering Watch on ships of 750 kW propulsion power or more, after obtaining the MEO Class IV Certificate of Competency; approved 4-month competency course; Part A and Part B examination",
+    "Rule 37 (MEO Class I, Chief Engineer Officer on ships of 3,000 kW or more) - not less than 36 months on ships of 750 kW or more, including not less than 12 months as Officer in Charge of an Engineering Watch after obtaining MEO Class II on ships of 3,000 kW propulsion power or more; reduced to 30 months if twelve months of that service was as Second Engineer Officer on a sea-going ship of 3,000 kW or more, or pro rata; 2-month Engineering Management Course; approved Machinery Space Simulator Training"
+   ],
+   "status": "IMPLEMENTED",
+   "pre_edit_digest": "7d0dee9316ec82f9",
+   "post_edit_digest": "80e0f29911ddf8d1",
+   "byte_delta": 2528,
+   "followup_overlap": null
+  },
+  {
+   "action_id": "ENRICH-A035",
+   "family_ids": [
+    "GAP-0196"
+   ],
+   "file": "QB4_H.html",
+   "anchor": "q7",
+   "priority": "E-P2",
+   "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+   "q_text": "Differentiate between a Certificate of Competency (CoC) and a Certificate of Proficiency (CoP).",
+   "retargeted": false,
+   "original_target": "QB4_H#q7",
+   "missing_limb": "Add how a CoP is actually obtained, as against what it is: the approved training and assessment route, who may issue or endorse it, the evidence the Administration requires, and which CoPs carry a refresher obligation.",
+   "limb_sentence": "The current answer lacks how a CoP is actually obtained as against what it is - the approved training and assessment route, that only the Administration issues or endorses it, the evidence the Administration requires, and which proficiencies carry a five-yearly refresher and which do not.",
+   "changed_sections": [
+    "answer body: new h4 'How a CoP Is Actually Obtained' + lead paragraph + 4-item list + closing category paragraph"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "STCW Regulation I/1 - definitions: a certificate of proficiency is a certificate other than a certificate of competency; documentary evidence is documentation other than a CoC or CoP used to establish that a Convention requirement has been met",
+    "STCW Regulation I/2 - certificates and endorsements issued only by the Administration, and since the 2010 Manila amendments only on full verification of the authenticity and validity of the underlying certificates and evidence",
+    "STCW Regulations I/6 and I/8 - training and assessment, and quality standards, under the Administration's approval and monitoring",
+    "STCW Regulations VI/1, VI/2 and VI/3 with STCW Code sections A-VI/1 paragraph 3, A-VI/2 paragraphs 5 and 11, and A-VI/3 paragraph 5 - evidence of maintained competence every five years; Code sections A-VI/4 and A-VI/6 carry no fixed five-year STCW refresher"
+   ],
+   "status": "IMPLEMENTED",
+   "pre_edit_digest": "e4e852c448f2b634",
+   "post_edit_digest": "e0e6855eaa082462",
+   "byte_delta": 2158,
+   "followup_overlap": null
+  },
+  {
+   "action_id": "ENRICH-A036",
+   "family_ids": [
+    "GAP-0112"
+   ],
+   "file": "QB4_C.html",
+   "anchor": "q6",
+   "priority": "E-P2",
+   "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+   "q_text": "MLC 2006 — 5 Titles and flag/port state duties?",
+   "retargeted": true,
+   "original_target": "QB4_E#q3",
+   "missing_limb": "Put figures behind the promise the card already makes: MLC Title 3 accommodation minima - berth internal dimensions, headroom, floor area per seafarer and door sill/coaming heights - as numbers a candidate can quote.",
+   "limb_sentence": "The current answer lacks any figure behind its own Title 3 promise - it says Title 3 'specifies structural dimensions for cabins' and states no dimension at all.",
+   "changed_sections": [
+    "answer body: new h4 'Title 3 Accommodation - the Numbers to Quote' + lead paragraph + 5-item list + closing qualifier paragraph (shared card - one insert carries both A036 and A037)"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "MLC 2006 Standard A3.1 paragraph 6(a) - minimum permitted headroom in all seafarer accommodation where full and free movement is necessary not less than 203 centimetres",
+    "MLC 2006 Standard A3.1 paragraphs 9(d) and 9(e) - a separate berth for each seafarer in all circumstances; minimum inside dimensions of a berth at least 198 centimetres by 80 centimetres",
+    "MLC 2006 Standard A3.1 paragraph 9(f) - single berth sleeping room floor area not less than 4.5 square metres under 3,000 gross tonnage, 5.5 square metres from 3,000 to under 10,000 gross tonnage, 7 square metres at 10,000 gross tonnage and over",
+    "MLC 2006 Standard A3.1 paragraphs 9(k) and 9(l) - officers with no private sitting room or day room, 7.5 / 8.5 / 10 square metres per person on the same tonnage bands; junior officers are operational level and senior officers management level",
+    "MLC 2006 Standard A3.1 paragraph 9(m) - master, chief engineer and chief navigating officer to have, in addition to their sleeping rooms, an adjoining sitting room, day room or equivalent additional space",
+    "MLC 2006 Regulation 3.1 paragraph 2 - the Code requirements relating to ship construction and equipment apply only to ships constructed on or after the date the Convention comes into force for the Member concerned; earlier ships continue under Conventions No. 92 and No. 133 to the extent previously applicable",
+    "MLC 2006 2022 amendments, in force 23 December 2024 - amended Regulation 3.1 at paragraph 17 to add social connectivity among required recreational facilities; no accommodation dimension was altered"
+   ],
+   "status": "IMPLEMENTED_REDUCED_SCOPE",
+   "pre_edit_digest": "8a653272f7f62df2",
+   "post_edit_digest": "9546bf92ec8f1efc",
+   "byte_delta": 3506,
+   "followup_overlap": "GAP-0511 (Complaint redressal mechanism) is colocated on this target. It is a different limb and was NOT implemented.",
+   "authorisation_correction": "The consolidation asked for four classes of figure, one of which is not in the instrument. 'Door sill/coaming heights' appear NOWHERE in Standard A3.1 - the string 'door' does not occur in the Standard at all. Sill and coaming heights are Load Line Convention requirements governing weathertight integrity, not MLC accommodation minima. That sub-limb was therefore REJECTED rather than written, and the card now names the confusion explicitly as an examiner trap. Two qualifiers the consolidation did not ask for were added because a bare figure is wrong without them: the Regulation 3.1(2) construction-date limitation, and the fact that the 2022 amendments left the dimensions untouched."
+  },
+  {
+   "action_id": "ENRICH-A037",
+   "family_ids": [
+    "GAP-0703"
+   ],
+   "file": "QB4_C.html",
+   "anchor": "q6",
+   "priority": "E-P2",
+   "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+   "q_text": "MLC 2006 — 5 Titles and flag/port state duties?",
+   "retargeted": true,
+   "original_target": "QB5_D#q3",
+   "missing_limb": "Name the shipowner as a distinct duty-holder and say where those duties are stated: MLC Titles 1 to 4 impose them on the shipowner, given effect in India through Part V of the MS Act 2025 - as against the flag and port State duties the card already separates.",
+   "limb_sentence": "The current answer lacks the shipowner as a distinct duty-holder - it separates flag State from port State and never says who actually owes the obligations, so a candidate cannot say where the duties in Titles 1 to 4 land or where Indian law gives them effect.",
+   "changed_sections": [
+    "answer body: new h4 'The Third Duty-Holder - the Shipowner' + 2 paragraphs (shared card - one insert carries both A036 and A037)"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "MLC 2006 Titles 1 to 4 - minimum requirements, conditions of employment, accommodation and catering, and health protection, medical care, welfare and social security are imposed on the shipowner; Title 5 is the compliance and enforcement layer under which the flag State inspects and certifies and the port State verifies",
+    "MLC 2006 Regulation 5.1.3 / Standard A5.1.3 - DMLC Part I drawn up by the competent authority stating national requirements; DMLC Part II drawn up by the shipowner stating the measures adopted to ensure ongoing compliance",
+    "Merchant Shipping Act, 2025 (Act No. 24 of 2025), Part V - Seafarers, in force 15 March 2026, giving effect to the employment agreement, wages, welfare and abandonment obligations in place of the corresponding Part of the repealed 1958 Act"
+   ],
+   "status": "IMPLEMENTED",
+   "pre_edit_digest": "8a653272f7f62df2",
+   "post_edit_digest": "9546bf92ec8f1efc",
+   "byte_delta": 3506,
+   "followup_overlap": "GAP-0511 (Complaint redressal mechanism) is colocated on this target. It is a different limb and was NOT implemented."
+  },
+  {
+   "action_id": "ENRICH-A038",
+   "family_ids": [
+    "GAP-0530"
+   ],
+   "file": "QB1_F.html",
+   "anchor": "q12",
+   "priority": "E-P2",
+   "verification_scope": "CURRENT_REG_VERIFY_REQUIRED",
+   "q_text": "seafarer ms act welfare requirement",
+   "retargeted": false,
+   "original_target": "QB1_F#q12",
+   "missing_limb": "Add the Indian seafarer welfare funding institutions the card omits - the Seamen's Provident Fund and the seafarers' welfare fund/board machinery, who contributes and what they pay for - and the COVID-era relief measures taken for stranded and repatriated seafarers.",
+   "limb_sentence": "The current answer lacks the contributory social-security institution - it names the Seafarer's Welfare Board and its grant-funded activities but never names the Seamen's Provident Fund, who contributes to it, or what it pays for.",
+   "changed_sections": [
+    "answer body: new h4 'The Funding Institution - Seamen's Provident Fund' + 2 paragraphs"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "Seamen's Provident Fund Act, 1966 - constitutes the Fund; the Seamen's Provident Fund Organisation is a statutory body under the Ministry of Ports, Shipping and Waterways administering it, with automatic membership for seafarers employed in the Indian merchant navy, matched employer contributions, and retirement, death, assistance and partial-withdrawal benefits"
+   ],
+   "status": "IMPLEMENTED_REDUCED_SCOPE",
+   "pre_edit_digest": "ab2e5b4bc816da03",
+   "post_edit_digest": "7c728948ea0a1dcd",
+   "byte_delta": 1197,
+   "followup_overlap": "GAP-0523 (Sturucture of MS act, preamble) is colocated on this target. It is a different limb and was NOT implemented.",
+   "authorisation_correction": "Three sub-limbs were authorised; one was written, two were not. (1) The 'seafarers' welfare fund/board machinery' is ALREADY on the live card - Part II Chapter I Seafarer's Welfare Board, its grants and welfare funds, hostels and clubs, welfare officers and repatriation of distressed seamen are all present - so restating it would be duplication inside one card. Only the Seamen's Provident Fund, which is absent, was added, and the card now draws the distinction between contributory social security and grant-funded welfare. (2) The COVID-era relief measures were OMITTED on currentness grounds: the durable, codified legacy of that period is the seafarers' 'key worker' status for unhindered movement, shore leave and medical access, which the live 60-second block ALREADY carries; adding 2020-21 relief measures to a card whose whole frame is the Merchant Shipping Act, 2025 would drag a current-law answer backwards. (3) No contribution PERCENTAGE is stated. Sources disagree - one gives an employer rate rising 6 to 8 to 10 to 12 per cent, another gives 10 per cent from each party - and the DGS primary host was unreachable this session, so the rate is described as matched and raised in stages rather than pinned to a figure that could not be verified."
+  },
+  {
+   "action_id": "ENRICH-A039",
+   "family_ids": [
+    "GAP-0701"
+   ],
+   "file": "QB9_H.html",
+   "anchor": "q4",
+   "priority": "E-P2",
+   "verification_scope": "CURRENT_REG_VERIFY_REQUIRED",
+   "q_text": "If you don't receive salary or sign-off, how do you approach it via a grievance letter — and what if there's no resolution?",
+   "retargeted": false,
+   "original_target": "QB9_H#q4",
+   "missing_limb": "Name the Designated Grievance Redressal Officer in the Indian regime - who holds the post, what grievances go to them, and where they sit in the ladder between the onboard complaint procedure and DGMA - which is the one rung the card's escalation ladder leaves unnamed.",
+   "limb_sentence": "The current answer lacks the named Indian rung between the on-board complaint procedure and the Directorate - it reaches for 'the Indian Shipping Master/DGMA machinery' without naming the Designated Grievance Redressal Officer, who holds the post, what reaches them, the time limits, or the appellate ladder above them.",
+   "changed_sections": [
+    "answer body: new h4 'The Indian rung the ladder usually leaves unnamed' + lead paragraph + 4-item list + closing preservation paragraph"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "MS Notice No. 03 of 2013 (Grievance Redressal Mechanism for Indian seafarers), as reproduced in the Directorate's Crew Manual - Designated Grievance Redressal Officers are the Surveyors-in-Charge at the smaller Mercantile Marine Departments, specially designated officers in the offices of the Principal Officers MMD at Chennai, Kandla, Kochi, Kolkata and Mumbai, and the Shipping Masters at Chennai, Kolkata and Mumbai; grievance submitted in the prescribed form only after being taken up with the recruitment and placement service provider, employer or shipowner; registration and acknowledgement within three working days; transfer of an out-of-jurisdiction grievance within three days; disposal by speaking order within thirty working days; First Appellate Authority is the jurisdictional Principal Officer MMD, appeal within thirty days, disposal within thirty days extendable to sixty; Second Appellate Authority is a designated officer at the Directorate's headquarters in Mumbai, appeal within thirty days, decision final and binding",
+    "MS Notice No. 04 of 2013 - the right to complain directly to the Master, the recruitment and placement service provider or the shipowner is preserved, as is the right of a seafarer on a ship calling at a foreign port to report an alleged MLC breach to that port's authorised officer under the onshore complaint-handling procedure"
+   ],
+   "status": "IMPLEMENTED",
+   "pre_edit_digest": "a7d7b45e1b218624",
+   "post_edit_digest": "1d4ea7d5216d503e",
+   "byte_delta": 2356,
+   "followup_overlap": null
+  },
+  {
+   "action_id": "ENRICH-A040",
+   "family_ids": [
+    "GAP-0093"
+   ],
+   "file": "QB4_H.html",
+   "anchor": "q9",
+   "priority": "E-P2",
+   "verification_scope": "CURRENT_REG_VERIFY_REQUIRED",
+   "q_text": "What ship certificates and documents relate to WHO (World Health Organization) requirements?",
+   "retargeted": false,
+   "original_target": "QB4_H#q9",
+   "missing_limb": "Bring the Seafarer Medical Fitness Certificate section up to date: state the current medical examination standard and certificate validity position, and the most recent change to it beyond the gender-marker change the examiner set aside.",
+   "limb_sentence": "The current answer lacks the medical certificate's actual standard and validity - section 4 names the ILO/WHO guidelines and stops, giving no validity period, no colour-vision period, no at-sea expiry rule, and no statement of the most recent change to the regime.",
+   "changed_sections": [
+    "answer body: 2 new paragraphs appended to the Seafarer Medical Fitness Certificate section"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "ILO/IMO Guidelines on the medical examinations of seafarers (2013) - the joint examination standard applied directly or as the basis for national standards",
+    "STCW Regulation I/9 and MLC 2006 Standard A1.2 - medical certificate valid for a maximum of two years, or one year where the seafarer is under 18; certification of colour vision valid for a maximum of six years",
+    "MLC 2006 Standard A1.2 paragraph 9 - a certificate expiring in the course of a voyage continues in force until the next port of call where a duly qualified medical practitioner is available, and in no case for more than three months",
+    "MLC 2006 2022 amendments, in force 23 December 2024 - Regulation 4.1 gained a duty to ensure prompt disembarkation of seafarers in need of immediate medical care and access to shore-based facilities, and provision for repatriation of the body or ashes of a seafarer who dies; the medical certificate's validity periods were NOT altered",
+    "ILO Special Tripartite Committee amendments, April 2025 - adopted, NOT yet in force"
+   ],
+   "status": "IMPLEMENTED",
+   "pre_edit_digest": "cac320d531777cc6",
+   "post_edit_digest": "064784e52645da49",
+   "byte_delta": 1642,
+   "followup_overlap": null
+  },
+  {
+   "action_id": "ENRICH-A041",
+   "family_ids": [
+    "GAP-0466"
+   ],
+   "file": "QB4_B.html",
+   "anchor": "q2",
+   "priority": "E-P2",
+   "verification_scope": "TECHNICAL_REASONING_ONLY",
+   "q_text": "What are your responsibilities and what do you check when taking over as Chief Engineer on a new vessel?",
+   "retargeted": false,
+   "original_target": "QB4_B#q2",
+   "missing_limb": "Add what changes when the handover is a change of MANAGEMENT rather than a change of chief engineer, scoped to a single intended voyage: no outgoing chief to hand over from, an unverified PMS and defect history, the DOC and SMS transition and interim certification, and how you triage what must be proved before that one voyage as against what can follow.",
+   "limb_sentence": "The current answer lacks the change-of-management case - it describes a Chief-to-Chief handover only, and says nothing about there being no outgoing Chief, an unverified maintenance and defect history, the DOC and SMS transition and interim certification, or how to triage what must be proved before a single intended voyage.",
+   "changed_sections": [
+    "answer body: new h4 'When It Is a Change of Management, Not a Change of Chief' + lead paragraph + 3-item list + closing reservation paragraph"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "ISM Code 14.1 - an Interim Document of Compliance may be issued where a Company is newly established or new ship types are added, for a period not exceeding 12 months",
+    "ISM Code 14.2.2 - an Interim Safety Management Certificate may be issued when a Company takes on responsibility for the operation of a ship which is new to the Company, for a period not exceeding 6 months",
+    "ISM Code 14.3 - the validity of an Interim Safety Management Certificate may be extended in special cases by a further period not exceeding 6 months",
+    "ISM Code 14.4.1 to 14.4.6 - the verification conditions for issue: the DOC or Interim DOC is relevant to the ship; the safety management system includes key elements of the Code; the internal audit of the ship is planned within three months; the master and officers are familiar with the system and the planned arrangements for its implementation; instructions identified as essential are provided prior to sailing; and relevant information is given in a working language understood by the ship's personnel"
+   ],
+   "status": "IMPLEMENTED",
+   "pre_edit_digest": "4e1af29021823296",
+   "post_edit_digest": "6c1eba19739ea972",
+   "byte_delta": 2712,
+   "followup_overlap": null,
+   "authorisation_correction": "The consolidation classed this TECHNICAL_REASONING_ONLY. It is not: ISM Code section 14 answers the limb directly and by name. 14.2.2 is the change-of-management case in the Code's own words, and 14.4 supplies the triage the limb asks for - essential instructions before sailing, internal audit planned within three months. The action was therefore written against primary text rather than reasoned, which strengthens it beyond the declared verification class."
+  },
+  {
+   "action_id": "ENRICH-A042",
+   "family_ids": [
+    "GAP-0560"
+   ],
+   "file": "QB4_B.html",
+   "anchor": "q3",
+   "priority": "E-P2",
+   "verification_scope": "TECHNICAL_REASONING_ONLY",
+   "q_text": "As per the Safety Management System, how is planned maintenance carried out onboard? What does the SMS require?",
+   "retargeted": false,
+   "original_target": "QB4_B#q3",
+   "missing_limb": "Add the maintenance-type taxonomy the card never names - planned/preventive, corrective/breakdown, condition-based and predictive, and where risk-based maintenance of critical equipment sits - so the candidate can answer 'type of maintenance' rather than describe only the PMS workflow.",
+   "limb_sentence": "The current answer lacks the maintenance-type taxonomy - it describes the PMS workflow in full but never names planned/preventive, corrective/breakdown, condition-based, predictive or risk-based maintenance, so a candidate asked for the 'type of maintenance' can only describe the process again.",
+   "changed_sections": [
+    "answer body: new h4 'Naming the Types of Maintenance' + lead paragraph + 5-item list + closing management paragraph"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "ISM Code Section 10.2 - maintenance records; ISM Code Section 10.3 - identification of equipment and technical systems the sudden operational failure of which may result in hazardous situations, which is where risk-based maintenance of critical equipment sits",
+    "TECHNICAL_REASONING_ONLY for the taxonomy itself - planned/preventive, corrective/breakdown, condition-based, predictive and risk-based are named as terms of art; no clause number is asserted for the taxonomy, and the class-approved planned maintenance scheme is described as requiring Class or Administration approval without citing a specific rule"
+   ],
+   "status": "IMPLEMENTED",
+   "pre_edit_digest": "35d55a11651a2cac",
+   "post_edit_digest": "fd6d9e10ddda32cc",
+   "byte_delta": 1949,
+   "followup_overlap": null
+  },
+  {
+   "action_id": "ENRICH-A043",
+   "family_ids": [
+    "GAP-0377"
+   ],
+   "file": "QB5_D.html",
+   "anchor": "q3",
+   "priority": "E-P2",
+   "verification_scope": "TECHNICAL_REASONING_ONLY",
+   "q_text": "How does the CE resolve on-board conflict involving bullying, harassment or discriminatory behaviour towards a junior — what does the SMS provide, and what are the latest amendments?",
+   "retargeted": false,
+   "original_target": "QB5_D#q3",
+   "missing_limb": "Add the human-element escalation ladder as a graded sequence - counselling and informal correction, formal warning and disciplinary action under the company procedure, and targeted retraining - and state what determines which rung is right.",
+   "limb_sentence": "The current answer lacks the graded corrective and disciplinary response - it takes the complaint through to close-out and notes that an investigation ending with no visible consequence teaches the department not to report, but never says what the consequences are or what selects between them.",
+   "changed_sections": [
+    "answer body: new h4 'The graded response - what happens after, not instead' + lead paragraph + 4-item ordered list + closing selection paragraph"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "TECHNICAL_REASONING_ONLY - the rungs are company disciplinary practice under the SEA/CBA and the SMS, not an instrument's provisions; no clause number is asserted for the ladder itself"
+   ],
+   "status": "IMPLEMENTED",
+   "pre_edit_digest": "18513922256ac533",
+   "post_edit_digest": "a6ec90078ca52ba2",
+   "byte_delta": 2210,
+   "followup_overlap": null,
+   "authorisation_correction": "The limb as written could have contradicted the card. The card's whole thesis is that harassment must NOT be informally mediated and that compromise is the wrong outcome; a ladder beginning at 'counselling and informal correction' reads, unqualified, as a licence to do exactly that. The addition is therefore scoped explicitly to the DISCIPLINARY RESPONSE AFTER the facts are established, and states in terms that the complaint-handling process itself is never graded, that the ladder is entered only after the complaint has been recorded and investigated, and that it applies to the perpetrator and is never a menu for settling the matter between the two seafarers. Without that scoping the authorised limb would have degraded the answer."
+  },
+  {
+   "action_id": "ENRICH-A044",
+   "family_ids": [
+    "GAP-0325"
+   ],
+   "file": "QB5_C_A.html",
+   "anchor": "q7",
+   "priority": "E-P3",
+   "verification_scope": "TECHNICAL_REASONING_ONLY",
+   "q_text": "On-board training — how do you design and deliver it step by step?",
+   "retargeted": true,
+   "original_target": "QB4_J#q8",
+   "missing_limb": "Add Bloom's taxonomy as the framework for setting onboard training objectives at rising cognitive levels - remember, understand, apply, analyse, evaluate, create - and show how the level chosen dictates both the delivery method and the assessment used.",
+   "limb_sentence": "The current answer lacks any framework for the LEVEL a training objective is set at - it gives a four-step process and the Show-Do-Check method but never says how to choose the cognitive level, so delivery method and assessment are unconnected to any objective.",
+   "changed_sections": [
+    "answer body: new h4 'Setting the Objective - Bloom's Taxonomy' + lead paragraph + 5-item list + closing assessment-matching paragraph"
+   ],
+   "timed_blocks_changed": false,
+   "authority": [
+    "TECHNICAL_REASONING_ONLY - Bloom's revised taxonomy (remember, understand, apply, analyse, evaluate, create) is named as an educational framework, not a maritime instrument; no convention or code provision is asserted for it, and it is tied back to the card's own Show-Do-Check sequence and training-record sign-off"
+   ],
+   "status": "IMPLEMENTED",
+   "pre_edit_digest": "0aa2781a578da9b4",
+   "post_edit_digest": "696854986ffc9d31",
+   "byte_delta": 1851,
+   "followup_overlap": null
+  }
+ ]
+}
