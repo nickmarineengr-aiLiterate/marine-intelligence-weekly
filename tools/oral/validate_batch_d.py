@@ -321,10 +321,14 @@ def main():
     # ---- the published count must reconcile with what was actually built ----
     n = manifest["actual_new_card_count"]
     base = manifest["baseline_canonical_questions"]
+    # The corpus keeps growing after this batch, so pinning the live total to
+    # baseline + n expires the moment the next authorised card lands. What
+    # Batch D can legitimately assert is that its own nine are still all there
+    # - the same reasoning already applied to canonical_total_not_regressed.
     report("count_reconciles",
            n == len(cards)
            and base + n == manifest["expected_canonical_questions"]
-           and isinstance(total, int) and total - base == n,
+           and isinstance(total, int) and total - base >= n,
            "actual %s, cards %d, baseline %s, expected %s, live %s"
            % (n, len(cards), base, manifest["expected_canonical_questions"], total))
 

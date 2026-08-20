@@ -1,0 +1,220 @@
+{
+  "note": "Bounded exception review of the one family the final enrichment consolidation could not dispose of. GAP-0609 was left as NEW_CARD_REVIEW_REQUIRED because its authorised enrichment target did not own the topic. This record closes it.",
+  "review_date": "2026-08-20",
+  "baseline": {
+    "canonical_questions_before": 720,
+    "canonical_files_before": 86,
+    "canonical_questions_after": 721,
+    "canonical_files_after": 86,
+    "derivation": "tools/oral/build_qb_content_index.py over the live QB HTML; unique file#anchor, not raw .q-card class counting"
+  },
+  "family": {
+    "family_id": "GAP-0609",
+    "source_family_id": "ASF-0609",
+    "source_occurrence_ids": [
+      "ASC-0645"
+    ],
+    "occurrence_count": 1,
+    "examiners": [
+      "Nair"
+    ],
+    "source_pages": [
+      49
+    ],
+    "ask": "Collision happened between your ship and another vessel. He wants to know wat all will u check? like water tight integrity and how reporting will be done? wat all documents n records will u submit? told VDR. he wanted to know more, couldnt say. Asked about who pays for the Insurance for ship. Told him about 3 by 4 clause, he asked who pays 3/4th and who pays the remaining 1/4th.",
+    "limbs": [
+      "immediate Chief Engineer response after collision",
+      "watertight integrity / damage containment",
+      "reporting / command chain",
+      "VDR / evidence preservation and the record set submitted",
+      "collision liability insurance split (3/4 vs 1/4)"
+    ]
+  },
+  "prior_decisions": [
+    {
+      "stage": "gap adjudication",
+      "verdict": "GENUINE_GAP",
+      "production_action": "P0_NEW_ANSWER",
+      "nearest_coverage": 0.0,
+      "notes_support": "NO_NOTES_SUPPORT"
+    },
+    {
+      "stage": "final production authorisation",
+      "adjudicated_decision": "ENRICH_EXISTING_QB",
+      "laptop_decision": "ENRICH_EXISTING_QB",
+      "laptop_review_status": "LAPTOP_CONFIRMED",
+      "laptop_review_reason": "The collision card exists; the watertight-integrity survey, the reporting chain and the document set are missing limbs.",
+      "target": "QB5_B#q9",
+      "production_action_id": "ENR-049"
+    },
+    {
+      "stage": "enrichment consolidation",
+      "disposition": "NEW_CARD_REVIEW_REQUIRED",
+      "action": "ENR-049",
+      "escalation": "New-card production is closed, so this stops here per rule 12."
+    }
+  ],
+  "independent_verification": {
+    "authorised_target_check": {
+      "target": "QB5_B#q9",
+      "actual_subject": "CBDR - Constant Bearing, Decreasing Range, collision AVOIDANCE under COLREGS Rule 7",
+      "verdict": "TARGET_WRONG",
+      "detail": "The laptop reason 'the collision card exists' is not supported. QB5_B#q9 is collision avoidance theory. Its only post-collision text is a passing clause naming post-collision RCA and the Master's protest; it owns none of the ask."
+    },
+    "corpus_sweep": {
+      "method": "canonical q-text sweep over all 720 questions, keyword sweep over answer bodies and examiner chains, and semantic read of every plausible home; keyword counts were not treated as coverage",
+      "cards_read_in_full": [
+        "QB5_B.html#q9 - CBDR, collision avoidance - not response",
+        "QB4_G.html#q7 - hull damage or oil pollution, CE step by step - strongest absorber; owns soundings, watertight doors, bilge and ballast, emergency bilge suction, damage control kit, POLREP, log and VDR line",
+        "QB4_G.html#q6 - casualty investigation, who investigates and report contents",
+        "QB9_H.html#q2 - ship casualty step by step, flag State process, notification chain, evidence preservation",
+        "QB9_H.html#q3 - who compensates for casualty delay - liability and off-hire",
+        "QB1_supplementary.html#q18 - collision bulkhead, SOLAS II-1 Reg. 12 - structural design only",
+        "QB1_supplementary.html#q16 - damage control plan contents, SOLAS II-1 Reg. 19",
+        "QB5_I.html#q3 - major accident, who to contact, MRCC against class emergency response service",
+        "QB5_C_A.html#q8 - Dali incident, blackout causation and CE liability - not post-collision response",
+        "QB5_C_B.html#q5 - war zone fatality investigation - carries a full evidence preservation procedure under a non-collision stem",
+        "QB1_F.html#q1 - any incident on your ship - personal narrative, electrical fire"
+      ],
+      "insurance_limb": {
+        "status": "ALREADY_COVERED",
+        "homes": [
+          "QB9_A.html",
+          "QB9_B.html",
+          "QB9_C.html",
+          "QB9_D.html",
+          "QB1_A.html",
+          "QB1_B.html"
+        ],
+        "disposition": "cross-linked, deliberately not restated, per the consolidation overlap note against ENR-003/GAP-0616"
+      },
+      "notes_check": {
+        "recorded_in_gap_file": "NO_NOTES_SUPPORT",
+        "actual": "FALSE",
+        "evidence": "meoclass1/oralnotes/miw-notes-mgmt-p15.html Oral Q&A Q1 asks the Chief Engineer's data-preservation duty after a collision in Indian waters and who must be notified, on a page carrying a Nair CE Oral Tip - the same examiner as the source occurrence.",
+        "consequence": "The gap record scored the ask against the question bank only, so the examiner-organised Notes were invisible to it. The Notes support the ask rather than dissolving it, and a promotion of that unit creates a card rather than enriching one."
+      },
+      "candidate_failure_test": {
+        "question": "Studying the current 720-question QB plus the Oral Notes, can a candidate give a coherent CE response to 'your ship has collided, what do you do now'?",
+        "verdict": "MATERIALLY_NO",
+        "reason": "The constituent material exists but is distributed across a hull-damage-and-pollution card, a generic flag-State casualty card, a war-zone fatality investigation card, an emergency-contacts card and two Notes pages. Nothing in the corpus routes the word collision to any of them; searching collision returns collision avoidance, the collision bulkhead and the liability clauses. No card assembles the sequence, and the ask is a single flowing examiner chain."
+      },
+      "bulkhead_versus_response": "A SOLAS II-1 Reg. 12 collision bulkhead answer is a design requirement - position from the forward perpendicular, height to the bulkhead deck, permitted openings. It was not treated as casualty-response coverage, and no genuine emergency-response card was found to already own the post-collision scenario."
+    }
+  },
+  "last_resort_test": {
+    "A_materially_answered_by_one_card": "NO",
+    "B_absorbable_as_bounded_enrichment": "NO",
+    "B_reason": "The nearest card, QB4_G#q7, is stemmed to hull damage or oil pollution and is built as a two-branch structure. Absorbing this ask would add collision-specific immediate action, the statutory casualty reporting chain and the full submitted record set - four substantive limbs, not one - and would leave the stem inaccurate and the topic undiscoverable from the word collision.",
+    "C_followup_only": "NO",
+    "D_notes_support_existing_card_promotion": "NO",
+    "E_ask_too_broad_or_ambiguous": "NO",
+    "conclusion": "NEW_CANONICAL_QA"
+  },
+  "final_disposition": "NEW_CANONICAL_QA",
+  "target": "QB4_G.html#q13",
+  "target_selection_reason": "QB4_G already holds the CE operational casualty neighbourhood - Q7 the hull damage and pollution response, Q6 the casualty investigation and report contents, Q10 informing authorities after a rescue. A candidate looking for post-collision action looks where the CE emergency procedures live, and placing the card beside Q7 and Q6 makes the cross-links adjacent rather than remote. QB9_H was rejected as the home because it is the legal, conventions and liability file; the ask is an operational sequence with a reporting tail, and QB9_H#q2 is cross-linked from the new card instead.",
+  "new_card": {
+    "file": "meoclass1/QB4_G.html",
+    "anchor": "q13",
+    "file_anchor": "QB4_G.html#q13",
+    "question_text": "Your ship has been in a collision with another vessel - as CE what will you check, how is the reporting done, and what documents and records must be preserved and submitted?",
+    "data_tags": "ism management",
+    "timed_blocks": {
+      "fifteen_second_words": 60,
+      "sixty_second_words": 125
+    },
+    "cross_links": [
+      "QB4_G.html#q7",
+      "QB4_G.html#q6",
+      "QB9_H.html#q2",
+      "QB1_supplementary.html#q16",
+      "QB9_A.html#q3"
+    ]
+  },
+  "authority_scope": [
+    {
+      "instrument": "Casualty Investigation Code, Res. MSC.255(84), mandatory via SOLAS XI-1/6",
+      "basis": "already carried and verified in the corpus at QB9_H#q2"
+    },
+    {
+      "instrument": "SOLAS Ch. V, Reg. 20",
+      "basis": "VDR carriage requirement"
+    },
+    {
+      "instrument": "IMO Res. MSC.333(90)",
+      "basis": "verified against the IMO resolution text - fixed and float-free capsules at least 48 hours, long-term recording medium at least 30 days, for VDRs installed on or after 1 July 2014"
+    },
+    {
+      "instrument": "MSC/Circ.1024",
+      "basis": "verified - guidelines on VDR ownership and recovery; the owner owns the VDR and its information and is responsible for timely preservation and collection after a casualty"
+    },
+    {
+      "instrument": "ISM Code, Sections 8 and 9",
+      "basis": "emergency preparedness, and reports and analysis of accidents"
+    },
+    {
+      "instrument": "SOLAS Ch. II-1, Reg. 19",
+      "basis": "damage control information; already carried and verified at QB1_supplementary#q16"
+    },
+    {
+      "instrument": "Collision Convention 1910, Art. 8",
+      "basis": "verified - duty to render assistance to the other vessel and to exchange the ship's name, port of registry and ports of departure and destination"
+    }
+  ],
+  "numeric_discipline": {
+    "numbers_introduced": [
+      "48 hours",
+      "30 days",
+      "1 July 2014",
+      "3/4",
+      "1/4"
+    ],
+    "all_verified": true,
+    "numbers_deliberately_omitted": [
+      "Note of Protest noting deadline - stated as after arrival rather than with an hour figure, because the period is jurisdiction and practice dependent",
+      "VDR retention under the superseded A.861(20) standard - not introduced, to avoid presenting two conflicting figures to a candidate"
+    ]
+  },
+  "corpus_debt_observed": [
+    {
+      "file": "meoclass1/oralnotes/simon-notes-p5.html",
+      "issue": "A Simon tip instructs the candidate to answer VDR retention as 48 hours primary loop, 12 hours protected capsule, 30 days long-term medium. Under Res. MSC.333(90) the protected fixed and float-free capsules retain at least 48 hours; the 12-hour figure belongs to the superseded A.861(20) standard. The stated mapping would be marked wrong.",
+      "status": "REPORTED_NOT_FIXED",
+      "reason": "out of scope for this bounded exception session"
+    }
+  ],
+  "examiner_relationship_delta": {
+    "delta": 0,
+    "relationships": 960,
+    "examiners": 7,
+    "reason": "The source evidence proves the ask but the exception review carries no explicit examiner relationship authorisation, so no relation was released. The examiner snapshot was regenerated only because its canonical_questions metadata moved from 720 to 721."
+  },
+  "publication_status": "PUBLISHED",
+  "surfaces_updated": [
+    "meoclass1/QB4_G.html",
+    "meoclass1/qb_content_index.json",
+    "meoclass1/index.html",
+    "meoclass1/oral-intelligence/examiner-audit/EXAMINER_INDEX_SNAPSHOT.json",
+    "SQ/index.html",
+    "tools/oral/qb_content_index_governed.json"
+  ],
+  "pre_existing_card_digests": {
+    "note": "sha256 of each pre-existing q-card in the destination file, taken by balanced div extraction before the new card was inserted and re-verified after. EOL normalised to LF for comparison. Any drift means the insertion damaged a card that was already published.",
+    "file": "meoclass1/QB4_G.html",
+    "digests": {
+      "q1": "68040caee9430b99eee054b14ab17d0180fe16fcf7994a0aa0c36297d3866d83",
+      "q2": "8d2a11e3e0531e0a4032a5cec0a470c0fadff3a6af99d80775f1f5bebdac5425",
+      "q3": "e937e5a51e2158c86e277d299f89ecafb191510e745bb33b8ede546af498cb83",
+      "q4": "1167f899173e414b8143ca256d219745c005fe278d50d3e4173fef015d9f56e7",
+      "q5": "dad536095a37a574d062cee4441430cee9597d2d1f44b2abe30d35044b50afe0",
+      "q6": "db4395ffa645bf3d07896fcf50d419f456a55a1101c73c0d8e1f1637047fd006",
+      "q7": "003996c1d0a7a10e1515a4c39fff37dfee41f2414c282b880291c8d5984eb40d",
+      "q8": "f83557f3779130d5c24e6c545a45497e7b4be4c42df848d90ea6c590d8d02529",
+      "q9": "b55c65f91e52c1de3bb20794cb76149944dbf63c6d820625ff784a098fe90568",
+      "q10": "5a0fa728fae2795474787883548c570c49c2a84fb818b81cfa502c7384ef9b47",
+      "q11": "eb3db1778b3b768561935abd53d53e5f65251783cbe1ea7b7850bd08cdb9454c",
+      "q12": "403ab883c29ac032af99c91ea390be111fb1690a2469f4ef191739c5909fd5aa"
+    }
+  }
+}
