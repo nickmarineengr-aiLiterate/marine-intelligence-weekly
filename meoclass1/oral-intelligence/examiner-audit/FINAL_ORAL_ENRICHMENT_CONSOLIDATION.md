@@ -255,10 +255,11 @@ Found while reading the authorised target cards. None of it is repaired here —
 
 - Reason: The ask is the two-word probe 'Surveys attended' - a personal-experience opener, not a content gap. The card already carries a 'Coinciding Surveys' section listing what falls due in a dock window, so no substantive limb is missing and a full answer edit would add nothing a candidate needs.
 
-### GAP-0609 — NEW_CARD_REVIEW_REQUIRED
+### GAP-0609 — RESOLVED_NEW_CANONICAL_QA (was NEW_CARD_REVIEW_REQUIRED)
 
 - Reason: The authorised target QB5_B#q9 is CBDR - collision AVOIDANCE theory under COLREGS Rule 7. A corpus-wide search finds no post-collision response card at all: the only other collision hit is QB1_supplementary#q18, the collision BULKHEAD structural card. This ask cannot be an enrichment because no card owns the topic, and it is too large to be a limb.
 - Escalation: New-card production is closed, so this stops here per rule 12. It means the final authorisation missed a genuine new-card need.
+- **Resolved 2026-08-20** by the bounded exception review at `GAP0609_EXCEPTION_REVIEW.md`. The reasoning above was verified against the live corpus and holds: QB5_B#q9 is collision avoidance, eleven plausible homes were read in full, and no card owned post-collision response. One correction - this family was recorded as having no Notes support, which is false; `oralnotes/miw-notes-mgmt-p15.html` asks the Chief Engineer's data-preservation duty after a collision in Indian waters, from the same examiner, and supplied verified material for the card. Outcome: one new canonical card at `QB4_G#q13`, corpus 720 -> 721. The insurance limb stays with the existing Running Down Clause cards and is cross-linked, not restated. This does not change the 50 unique enrichment edit actions - ENR-049 was never among them.
 
 ### GAP-0684 — ALREADY_COVERED_EXISTING_CARD
 
