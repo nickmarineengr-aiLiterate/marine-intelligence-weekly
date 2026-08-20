@@ -1,0 +1,233 @@
+{
+  "batch_id": "E3",
+  "title": "Cargo, codes and safety systems - existing-answer enrichment",
+  "kind": "ENRICHMENT",
+  "note": "Enrichment batch: every action edits an EXISTING canonical card. No card is created, removed, renamed or re-anchored. Canonical total is unchanged at 721. Every edit is purely additive - proven by character-level diff opcodes carrying insert operations only, zero delete and zero replace.",
+  "authorisation_source": "meoclass1/oral-intelligence/examiner-audit/FINAL_ORAL_ENRICHMENT_CONSOLIDATION.json",
+  "authorisation_batch_key": "batches.E3",
+  "authorisation_commit": "eb586ed",
+  "baseline_commit": "be339f7",
+  "expected_canonical_questions": 721,
+  "expected_examiner_relationships": 960,
+  "expected_examiners": 7,
+  "creates_new_cards": false,
+  "followup_overlap": "none - no E3 target appears in the consolidation's 9 followup_colocation records",
+  "sibling_pin_delegation": [
+    "QB2_H.html#q1 is pinned by batch_b_manifest.json",
+    "QB2_I.html#q4 is pinned by batch_d_manifest.json",
+    "Both are legitimately edited here. The batch guards' authorised_elsewhere delegation - completed during E4 - exempts a pinned anchor that a sibling manifest authorises, and reports it by name rather than dropping it silently. E3 is the first batch to exercise that repair against a real later edit."
+  ],
+  "cards": [
+    {
+      "action_id": "ENRICH-A021",
+      "family_id": "GAP-0448",
+      "file": "QB8_G.html",
+      "anchor": "q2",
+      "priority": "E-P2",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "q_text": "IGC Code - explain Type A, B, and C tanks and membrane tanks: shape of each, which is self-supporting, and which has more carrying capacity.",
+      "missing_limb": "The card covers only tank types A/B/C and membrane. The IGF Code is never mentioned, so the code-boundary question the examiner led with has no answer on the card.",
+      "limb_sentence": "The current answer lacks the IGC/IGF boundary and the rule that decides which Code governs a gas-fuelled conversion.",
+      "changed_sections": [
+        "answer-body: new h4 'IGC or IGF - which Code governs a gas-fuelled conversion' + 3 paragraphs",
+        "reg-box: two new reg-items (IGF Code MSC.391(95); SOLAS II-1/56, 57)"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "IMO Res. MSC.392(95) (adopted 11 June 2015), new SOLAS chapter II-1 Part G - regulation 56 (Application) and regulation 57, extracted verbatim from the IMO resolution PDF",
+        "IGF Code adopted by Res. MSC.391(95); Part G in force 1 January 2017"
+      ],
+      "authorisation_correction": "The consolidation's stated limb asserted that 'a fossil-to-methane main engine retrofit on an LPG carrier is an IGF Code matter even though the ship is an IGC ship'. SOLAS II-1/56.4 makes that conditional, not absolute: 56.4.2 disapplies Part G to a gas carrier using OTHER low-flashpoint gaseous fuels provided the fuel storage and distribution system design and arrangements comply with the IGC Code's requirements for gas as a cargo. The card was written to the instrument, not to the authorisation record. Second consecutive batch in which the consolidation's stated technical content did not survive primary verification (E4: the asphaltene mechanism on A027).",
+      "scope_note_honoured": "The ask's retrofit advantages/disadvantages and owner-persuasion limbs were excluded per the consolidation's own scope_note - commercial content, not an IGC tank-type limb.",
+      "claims_added": [
+        "MSC.391(95)",
+        "SOLAS II-1 Part G",
+        "1 January 2017",
+        "56.2",
+        "56.3",
+        "56.4",
+        "regulation 57"
+      ],
+      "pre_edit_digest": "2fb3fb57e6d70312",
+      "post_edit_digest": "f3018b8cdfb669cd",
+      "byte_delta": 2115,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A022",
+      "family_id": "GAP-0270",
+      "file": "QB2_B.html",
+      "anchor": "q2",
+      "priority": "E-P2",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "q_text": "What are the requirements for a container securing arrangement, and what is a Safe Access Plan on a container ship?",
+      "missing_limb": "The card covers the CSM, CSAP and lashing certification but gives no tier-height limit and no derivation of one.",
+      "limb_sentence": "The current answer lacks what actually caps on-deck tier height, and the derivation that makes the bay plan an output rather than a rule.",
+      "changed_sections": [
+        "answer-body: new h4 'What Actually Caps the Tier Height' + lead paragraph + one 4-item list",
+        "reg-box: three new reg-items (MSC.1/Circ.1353/Rev.2 s.4.2.1; SOLAS V/22.1.1; 2008 IS Code Part A 2.3)"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "MSC.1/Circ.1353/Rev.2 (7 December 2020), Revised Guidelines for the Preparation of the Cargo Securing Manual, section 4.2.1 - the CSM stowage plan must give maximum stack masses, permissible vertical sequences of masses in stacks, and maximum stack heights with respect to approved sight lines",
+        "SOLAS chapter V regulation 22.1.1 - view of the sea surface from the conning position not obscured by more than two ship lengths or 500 m, whichever is the less, under all conditions of draught, trim and deck cargo; blind sector forward of the beam not exceeding 10 degrees",
+        "2008 IS Code Part A, 2.3 - severe wind and rolling criterion (weather criterion)"
+      ],
+      "claims_added": [
+        "MSC.1/Circ.1353/Rev.2",
+        "section 4.2.1",
+        "maximum stack masses",
+        "maximum stack heights with respect to approved sight lines",
+        "SOLAS V/22.1.1",
+        "two ship lengths",
+        "500 m",
+        "Part A, 2.3"
+      ],
+      "pre_edit_digest": "7d9d997daa623551",
+      "post_edit_digest": "40e4879536d0bfac",
+      "byte_delta": 2625,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A023",
+      "family_id": "GAP-0232",
+      "file": "QB2_G.html",
+      "anchor": "q1",
+      "priority": "E-P2",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "q_text": "Can you carry timber/log deck cargo on your vessel, and what precautions are taken?",
+      "missing_limb": "The card gives GM0, GZ area and Timber Load Line assignment but carries none of the Load Line geometric stow criteria.",
+      "limb_sentence": "The current answer lacks the Load Line numeric stow criteria - the permitted extent and height of the timber deck stow.",
+      "changed_sections": [
+        "answer-body: new h4 'Load Line stow criteria - the figures' + lead paragraph + one 2-item list + applicability paragraph",
+        "reg-box: two new reg-items (ICLL Annex I Ch.III Reg 41; Reg 44)"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "International Convention on Load Lines 1966, Annex I, Chapter III, Regulation 44(2) and 44(3), and Regulation 41 (application) - full Convention text extracted from the Estonian State Gazette official reproduction (90pp, 143,186 characters)"
+      ],
+      "scope_reduction": "The consolidation's limb named three elements: permitted extent, permitted height, and 'the reckoning point used in the timber freeboard assignment'. Extent (Reg 44(2)) and height (Reg 44(3)) substantiate verbatim and were implemented. The third does NOT exist: the string 'reckon' appears ZERO times in the entire Load Line Convention, Chapter III included. The family record's own evidence_caution anticipated exactly this - it directed that unsubstantiated candidate figures reduce the limb to the stow-extent criteria - so this is a pre-authorised partial implementation, not an unauthorised narrowing. The candidate's garbled '500M OR 2SHIP LENGTH' is in fact the SOLAS V/22.1.1 line-of-sight criterion, which is real but belongs to ENRICH-A022's authorised limb, not to the timber freeboard assignment; it was NOT imported here.",
+      "claims_added": [
+        "Reg 44(2)",
+        "Reg 44(3)",
+        "entire available length",
+        "after end of the aftermost hatchway",
+        "standard height of the superstructure",
+        "one-third of the extreme breadth",
+        "seasonal winter zone in winter",
+        "Regulation 41"
+      ],
+      "pre_edit_digest": "cb273fe5fe7b83ef",
+      "post_edit_digest": "ceab76dcb733abf0",
+      "byte_delta": 1769,
+      "status": "IMPLEMENTED_REDUCED_SCOPE"
+    },
+    {
+      "action_id": "ENRICH-A024",
+      "family_id": "GAP-0089",
+      "file": "QB2_H.html",
+      "anchor": "q1",
+      "priority": "E-P2",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "q_text": "What do the FSS Code and FTP Code contain?",
+      "missing_limb": "The card holds A-60 as a figure and gives the 140/180 degree C test criteria, but never defines an A-class division itself nor explains what the suffix measures.",
+      "limb_sentence": "The current answer lacks the definition of an A-class division and the consequence that A-0 is still a full A division carrying no insulation requirement.",
+      "changed_sections": [
+        "answer-body: new h4 'What the \"A\" and the Number Each Mean' + 4 paragraphs, inserted before the existing 'Relationship' section",
+        "reg-box: one new reg-item (SOLAS II-2/3.2)"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "SOLAS chapter II-2 regulation 3.2 - 'A' class divisions: constructed of steel or other equivalent material; suitably stiffened; insulated such that average unexposed-face rise not more than 140 degrees C and no single point including any joint more than 180 degrees C; A-60 60 min, A-30 30 min, A-15 15 min, A-0 0 min; capable of preventing the passage of smoke and flame to the end of the one-hour standard fire test; prototype tested per the FTP Code"
+      ],
+      "claims_added": [
+        "A-0 = 0 min",
+        "steel or other equivalent material",
+        "suitably stiffened",
+        "one-hour standard fire test",
+        "140",
+        "180",
+        "Regulation 3.2"
+      ],
+      "pre_edit_digest": "6b2f2a79603748d6",
+      "post_edit_digest": "819c9c003db5e9bd",
+      "byte_delta": 1762,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A025",
+      "family_id": "GAP-0222",
+      "file": "QB2_I.html",
+      "anchor": "q4",
+      "priority": "E-P1",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "q_text": "CO2 bottle pressure testing - what is the regime?",
+      "missing_limb": "The card is entirely the hydrostatic test interval regime under MSC.1/Circ.1318/Rev.1. It carries no weighing method, no tare weight, no stored pressure and no alarm arrangement - and it presents ultrasonic level gauging as the method without naming the one the Code actually specifies.",
+      "limb_sentence": "The current answer lacks the contents-verification method the Code names, the stored pressure expressed in pascals, and the low-pressure/leak alarm arrangement.",
+      "changed_sections": [
+        "answer-body: new h4 'Checking the contents - weighing versus level gauging' + paragraph + 3-item list",
+        "answer-body: new h4 'Stored pressure, and the alarm arrangement' + 2-item list + alarms paragraph",
+        "reg-box: three new reg-items (FSS Ch.5 2.1.1.3; 2.2.4.2-.3; 2.2.4.11)"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "FSS Code Chapter 5, 2.1.1.3 (Checking quantity of medium) - for carbon dioxide systems, hanging bars for a weighing device above each bottle row, or other means; containers need not be moved completely from their fixing position. Verbatim from the local FSS_CODE_CORPUS, chapter 5 flagged COMPLETE/verbatim",
+        "FSS Code Chapter 5, 2.2.4.2 - low-pressure CO2 stored under working pressure in the range 1.8 to 2.2 N/mm2; normal liquid charge not exceeding 95% of volumetric capacity",
+        "FSS Code Chapter 5, 2.2.4.3 - required fittings: pressure gauge; high pressure alarm not more than relief valve setting; low pressure alarm not less than 1.8 N/mm2; level indicator; two safety valves",
+        "FSS Code Chapter 5, 2.2.4.11 - audible and visual alarms at a central control station on low/high vessel pressure, failure of any one refrigerating unit, or lowest permissible liquid level",
+        "CO2 saturated vapour pressure 5.063 MPa at 15 C and 5.776 MPa at 20 C; critical point 31.0 C / 7.38 MPa (NIST-derived saturation data)"
+      ],
+      "note_on_units": "The examiner asked for stored pressure 'expressed in Pa'. The FSS Code states it in N/mm2, which IS a pascal unit (1 N/mm2 = 1 MPa = 10^6 Pa), so the Code's own figure answers the ask directly. The high-pressure cylinder figure is a saturation property rather than a setting and is presented as such; the card's existing and correct position that TEST pressure is a cylinder-marking value was left untouched.",
+      "claims_added": [
+        "2.1.1.3",
+        "hanging bars",
+        "tare",
+        "1.8 to 2.2 N/mm",
+        "95%",
+        "low-pressure alarm",
+        "2.2.4.11",
+        "5.1",
+        "5.8",
+        "31"
+      ],
+      "pre_edit_digest": "b1b7bef56abf011b",
+      "post_edit_digest": "dda365fb7bcef84e",
+      "byte_delta": 4414,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "ENRICH-A026",
+      "family_id": "GAP-0220",
+      "file": "QB2_A.html",
+      "anchor": "q7",
+      "priority": "E-P2",
+      "verification_scope": "OEM_VERIFY_REQUIRED",
+      "q_text": "Li-ion battery fire on a container vessel - thermal runaway mechanism and CE's actions.",
+      "missing_limb": "The card explains thermal runaway chemistry and boundary cooling but never mentions AVD, which the examiner named explicitly and asked for both materials and method.",
+      "limb_sentence": "The current answer lacks what AVD is, how it works, and how it is applied relative to the boundary cooling the card already prescribes.",
+      "changed_sections": [
+        "answer-body: new h4 'AVD - What It Is and How It Works' + lead paragraph + one 4-item list + placement paragraph"
+      ],
+      "timed_blocks_changed": false,
+      "authority": [
+        "LiCELL (AVD Safety) manufacturer documentation - chemical exfoliation of vermiculite produces microscopic individual platelets freely suspended in water; applied as a mist; platelets deposit and the high-aspect-ratio particles overlap and bind into a film; 'The vermiculite film is not electrically conductive'",
+        "AVD Fire Limited manufacturer documentation - vermiculite platelets coat each individual cell creating a thermal barrier that interrupts heat transfer between adjacent cells; action characterised as cooling and isolation; persistent barrier reducing re-ignition risk hours after the event",
+        "Regulatory anchor already cited on the card: MSC.1/Circ.1615, Guidelines for preventing and mitigating lithium battery fires"
+      ],
+      "authorisation_correction": "The consolidation's stated limb described AVD as leaving a 'non-conductive ceramic-like encapsulating layer'. The non-conductive claim IS OEM-supported (LiCELL states the vermiculite film is not electrically conductive) and was retained. 'Ceramic-like' is NOT supported by either manufacturer - both describe a dried FILM formed by overlapping platelets - and was dropped rather than reproduced. AVD Fire Limited's own page makes no electrical claim at all; the non-conductivity statement rests on LiCELL.",
+      "claims_added": [
+        "aqueous vermiculite dispersion",
+        "chemically exfoliated",
+        "platelets",
+        "mist",
+        "film",
+        "not electrically conductive",
+        "cooling and isolation"
+      ],
+      "pre_edit_digest": "effc83d1daaaa5ba",
+      "post_edit_digest": "e6e0b50b7ef83fe4",
+      "byte_delta": 2214,
+      "status": "IMPLEMENTED"
+    }
+  ]
+}
