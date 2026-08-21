@@ -43,6 +43,7 @@ import collections
 import datetime
 import hashlib
 import json
+import os
 import pathlib
 import re
 import shutil
@@ -116,13 +117,14 @@ def gate_tool_path(gate):
     return None
 
 
-def run_process(argv, timeout, cwd=None):
+def run_process(argv, timeout, cwd=None, env=None):
     """Run a gate. Decoding is explicit: Windows would otherwise use cp1252,
     which has already manufactured 450 false diffs in an oral gate."""
     started = time.monotonic()
     try:
         proc = subprocess.run(
-            argv, cwd=str(cwd or REPO), capture_output=True, timeout=timeout)
+            argv, cwd=str(cwd or REPO), capture_output=True, timeout=timeout,
+            env=env)
     except subprocess.TimeoutExpired:
         return 124, "", "TIMEOUT after %ss" % timeout, time.monotonic() - started
     out = proc.stdout.decode("utf-8", errors="replace")
@@ -202,7 +204,17 @@ def classify_validator(out, err, rc):
     lead, lead_kind, fails, _fail_kind = matches[-1]
     detail = {"failures": int(fails), "exit": rc,
               ("passes" if lead_kind.upper() == "PASS" else "checks"): int(lead)}
+    # WHICH checks failed, not just how many. A baseline comparison on counts
+    # alone would call a swapped-out failure "the same failure".
+    failing = validator_failing(text)
+    if failing:
+        detail["failing"] = sorted(failing)
     return (PASS if int(fails) == 0 and rc == 0 else FAIL), detail
+
+
+def validator_failing(text):
+    """The check names a batch-dialect validator reported as FAIL."""
+    return set(re.findall(r"^FAIL\s+(\S+)", text, re.M))
 
 
 def classify_mutation(out, err, rc):
@@ -385,6 +397,30 @@ def run_health(gate, log):
     return status, detail, out_c + out_b, secs_c + secs_b
 
 
+def worktree_env(work):
+    """Environment for a process running inside a DERIVED worktree.
+
+    `F:` here is a filesystem that does not record ownership, so git refuses to
+    operate in any directory that is not on the `safe.directory` allowlist. The
+    main clone is on it; a freshly created temporary worktree never is.
+
+    The symptom is silent and expensive: every git call inside the derived tree
+    dies with "detected dubious ownership", so a validator that reads its
+    evidence through `git show` reports that evidence as *unavailable* -- and a
+    baseline derived from it describes the sandbox, not the baseline commit.
+    `validate_batch_e6` derived exactly one failing check that way,
+    `consolidation_available`, which is not how it fails on a real checkout.
+
+    The exception is scoped to this one worktree path, never `*`, and injected
+    through the environment so the CHILD validator's own git calls see it too.
+    """
+    env = dict(os.environ)
+    env["GIT_CONFIG_COUNT"] = "1"
+    env["GIT_CONFIG_KEY_0"] = "safe.directory"
+    env["GIT_CONFIG_VALUE_0"] = str(work).replace("\\", "/")
+    return env
+
+
 def derive_audit_baseline(log):
     """Run validate_audit on a clean detached worktree of the baseline ref.
 
@@ -402,8 +438,44 @@ def derive_audit_baseline(log):
                 % made.stderr.decode("utf-8", "replace").strip()[:160])
             return None
         rc, out, _err, _secs = run_process(
-            [sys.executable, "tools/oral/validate_audit.py"], 600, cwd=work)
+            [sys.executable, "tools/oral/validate_audit.py"], 600, cwd=work,
+            env=worktree_env(work))
         return _last_json_object(out)
+    finally:
+        subprocess.run(["git", "worktree", "remove", "--force", str(work)],
+                       cwd=str(REPO), capture_output=True)
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
+def derive_validator_baseline(gate, log):
+    """Re-run one validator on a clean worktree of the baseline ref.
+
+    Returns the set of check names failing there, or None when the baseline
+    cannot be derived (in which case the live failure stays a FAIL -- an
+    underivable baseline is never an excuse to pass).
+
+    Same worktree discipline as derive_audit_baseline: the real tree is never
+    checked out from under the runner.
+    """
+    script = gate_tool_path(gate)
+    if script is None:
+        return None
+    rel = script.relative_to(REPO).as_posix()
+
+    tmp = pathlib.Path(tempfile.mkdtemp(prefix="oral-gate-baseline-"))
+    work = tmp / "tree"
+    try:
+        made = subprocess.run(
+            ["git", "worktree", "add", "--detach", str(work), REG.BASELINE_REF],
+            cwd=str(REPO), capture_output=True)
+        if made.returncode != 0:
+            log("      baseline worktree unavailable: %s"
+                % made.stderr.decode("utf-8", "replace").strip()[:160])
+            return None
+        _rc, out, err, _secs = run_process(
+            [sys.executable, rel], gate["timeout"], cwd=work,
+            env=worktree_env(work))
+        return validator_failing(out + "\n" + err)
     finally:
         subprocess.run(["git", "worktree", "remove", "--force", str(work)],
                        cwd=str(REPO), capture_output=True)
@@ -422,10 +494,13 @@ CLASSIFIERS = {
 
 def select_gates(args):
     gates = list(REG.ALL_GATES)
-    if not args.determinism and not args.full:
-        gates = [g for g in gates if g["historical_39"]]
-    elif not args.determinism:
-        gates = [g for g in gates if g["historical_39"]]
+    # Held-back phases (determinism) run only when asked for. Selection keys off
+    # `separate_phase`, NOT off `historical_39`: the latter is provenance -- it
+    # records what E6's suite contained -- and using it to decide what runs today
+    # would silently exclude every gate added after E6, including the correction
+    # gates that keep post-release delegation honest.
+    if not args.determinism:
+        gates = [g for g in gates if not g["separate_phase"]]
     if args.gate:
         wanted = set(args.gate)
         unknown = wanted - set(REG.gate_ids())
@@ -521,6 +596,34 @@ def execute(gates, args, log):
                         detail = {"exit": rc}
                     else:
                         status, detail = fn(out, err, rc)
+                    # A gate carrying known, non-reproducible historical
+                    # evidence is compared against a DERIVED baseline before
+                    # its failure is called a regression. Nothing is ever
+                    # promoted to PASS: the status is its own, and the checks
+                    # are named in the log.
+                    if (status == FAIL and gate.get("baseline_derivable")
+                            and not args.no_audit_baseline):
+                        live = set(detail.get("failing") or [])
+                        log("      deriving %s baseline from %s ..."
+                            % (gid, REG.BASELINE_REF))
+                        base = derive_validator_baseline(gate, log)
+                        if base is None:
+                            detail["baseline"] = "not derived"
+                        else:
+                            detail["baseline_failing"] = sorted(base)
+                            # SUBSET, not equality. The question a release asks
+                            # is "is anything failing here that was not already
+                            # failing on the baseline?". Equality answers a
+                            # different question and gets it wrong in the one
+                            # direction that matters least: it reports an
+                            # IMPROVEMENT as a regression. When this correction
+                            # is on origin/main, live={line_endings} while the
+                            # pre-correction baseline failed that AND
+                            # only_authorised_cards_changed -- strictly fewer
+                            # failures, every one of them pre-existing.
+                            if live and live <= base:
+                                status = BASELINE
+                                detail["baseline_fixed"] = sorted(base - live)
         finally:
             owner = None
             restored = guard.restore() if gate["mutates_worktree"] else []

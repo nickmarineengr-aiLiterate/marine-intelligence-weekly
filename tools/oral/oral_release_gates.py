@@ -37,10 +37,24 @@ separate section, outside the gate count. It is registered here as a distinct
 phase so the runner can drive it, and flagged `historical_39 = False` so the
 historical count stays verifiable.
 
+TWO FLAGS, NOT ONE. `historical_39` records whether a gate was part of the suite
+E6 actually ran -- it is provenance, and it is what keeps the count of 39
+checkable forever. `separate_phase` records whether the runner holds a gate back
+until it is asked for explicitly. Determinism is both (not historical, held
+back). The correction gates are neither historical (they postdate E6) nor held
+back (a release must not ship an unverified correction), which is exactly why
+the two flags cannot stay conflated.
+
 MAINTENANCE
 -----------
 Adding a batch adds exactly two gates: `validate_batch_<id>` and
 `batch_<id>_mutate`. Nothing else in this file should need to change.
+
+Adding a CORRECTION adds no gates at all. `validate_corrections` and
+`corrections_mutate` iterate every `correction_*_manifest.json` on disk, so a
+new correction record is picked up without touching this registry or the
+runner. If you ever find yourself naming a specific correction in either file,
+the delegation model has been bypassed.
 
 This module is DATA ONLY. Orchestration lives in `run_oral_release.py`.
 """
@@ -67,6 +81,7 @@ CAT_EXAMINER = "examiner"
 CAT_CORPUS = "corpus"
 CAT_SECURITY = "security"
 CAT_HEALTH = "health"
+CAT_CORRECTION = "correction"
 CAT_DETERMINISM = "determinism"
 
 # Files that release gates are known to rewrite. The runner snapshots these by
@@ -94,7 +109,7 @@ _ORAL = "tools/oral"
 
 def _gate(gid, command, category, parser=PARSER_EXIT, mutates=False,
           timeout=900, always_run=True, depends_on=(), historical_39=True,
-          note=""):
+          separate_phase=False, baseline_derivable=False, note=""):
     return {
         "id": gid,
         "command": list(command),
@@ -105,11 +120,14 @@ def _gate(gid, command, category, parser=PARSER_EXIT, mutates=False,
         "always_run": always_run,
         "depends_on": list(depends_on),
         "historical_39": historical_39,
+        "separate_phase": separate_phase,
+        "baseline_derivable": baseline_derivable,
         "note": note,
     }
 
 
-def _batch_pair(key, validator, mutator, mut_timeout, note=""):
+def _batch_pair(key, validator, mutator, mut_timeout, note="",
+                baseline_derivable=False):
     """A batch contributes exactly two gates: its validator, then its mutator.
 
     The mutator depends on the validator because a mutation suite proves the
@@ -118,7 +136,8 @@ def _batch_pair(key, validator, mutator, mut_timeout, note=""):
     """
     return [
         _gate("validate_%s" % key, ["python", "%s/%s" % (_ORAL, validator)],
-              CAT_BATCH, PARSER_VALIDATOR, timeout=600, note=note),
+              CAT_BATCH, PARSER_VALIDATOR, timeout=600, note=note,
+              baseline_derivable=baseline_derivable),
         _gate("%s_mutate" % key, ["python", "%s/%s" % (_ORAL, mutator)],
               CAT_BATCH, PARSER_MUTATION, mutates=True, timeout=mut_timeout,
               depends_on=("validate_%s" % key,)),
@@ -164,7 +183,10 @@ GATES = (
     *_batch_pair("batch_e3", "validate_batch_e3.py", "mutate_batch_e3.py", 1800),
     *_batch_pair("batch_e4", "validate_batch_e4.py", "mutate_batch_e4.py", 1200),
     *_batch_pair("batch_e5", "validate_batch_e5.py", "mutate_batch_e5.py", 2400),
-    *_batch_pair("batch_e6", "validate_batch_e6.py", "mutate_batch_e6.py", 2400),
+    *_batch_pair("batch_e6", "validate_batch_e6.py", "mutate_batch_e6.py", 2400,
+                 baseline_derivable=True,
+                 note="carries the line_endings_homogeneous_per_file evidence "
+                      "debt; its baseline is DERIVED, never declared"),
 
     # ---- examiner index ----------------------------------------------------
     _gate("examiner_check",
@@ -207,6 +229,21 @@ GATES = (
           CAT_SECURITY, PARSER_NODE, timeout=900,
           note="glob expanded by the runner; NEVER pass a directory to Node 24"),
 
+    # ---- post-release corrections -----------------------------------------
+    # These postdate E6, so they are not part of the historical 39 -- but they
+    # are NOT held back either. A correction delegates authority away from every
+    # historical batch guard; the release that carries it must prove the
+    # delegation is still honoured, or the guards were simply switched off.
+    _gate("validate_corrections",
+          ["python", "%s/validate_corrections.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=900, historical_39=False,
+          note="pins the post-correction state the batch guards now delegate"),
+    _gate("corrections_mutate",
+          ["python", "%s/mutate_corrections.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=2400,
+          historical_39=False, depends_on=("validate_corrections",),
+          note="proves the delegation is an exemption, not a suppression"),
+
     # ---- health: candidate LOCAL vs clean ref ------------------------------
     _gate("qb_health_check",
           ["python", "meoclass1/qb_health_check.py", "--source", "local",
@@ -219,14 +256,35 @@ GATES = (
 DETERMINISM_GATE = _gate(
     "determinism", ["python", "%s/check_determinism.py" % _ORAL],
     CAT_DETERMINISM, PARSER_EXIT, mutates=True, timeout=3600,
-    historical_39=False,
+    historical_39=False, separate_phase=True,
     note="no argv parser; seeds 0/1/524287 are hardcoded in the tool. "
          "26 artefacts, 0 non-reproducible. Never probe it with --help.")
 
 ALL_GATES = GATES + (DETERMINISM_GATE,)
 
-# The baseline ref the health and audit comparisons are taken against.
+# The baseline ref the health, audit and validator-baseline comparisons are
+# taken against.
 BASELINE_REF = "origin/main"
+
+# DERIVED BASELINES, NEVER DECLARED ONES
+# --------------------------------------
+# `validate_batch_e6` fails `line_endings_homogeneous_per_file` on a clean
+# checkout of the very commit it certified: its manifest pinned a
+# pre-normalisation CRLF working copy while `.gitattributes` pins *.html to LF.
+# The product bytes are correct; the recorded evidence is not reproducible.
+#
+# That failure is real and must not be reported as PASS. It is also not a
+# regression, and blocking every future release on it would make the runner's
+# verdict useless.
+#
+# So a gate may be marked `baseline_derivable`. When such a gate FAILS, the
+# runner re-runs the SAME validator on a clean worktree of BASELINE_REF and
+# compares the failing check names. Identical set -> PRE_EXISTING_BASELINE,
+# reported as its own status with the checks named. Any difference -> FAIL.
+#
+# The baseline is derived, never hardcoded, for the reason `classify_audit`
+# already gives: a hardcoded baseline silently absorbs the next real
+# regression. A second failing check appearing in E6 tomorrow still fails.
 
 # Recorded, NOT applied. Runtime is not a reason to stop running a guard.
 PROPOSED_OPTIMISATIONS = """
