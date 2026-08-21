@@ -1,0 +1,3425 @@
+{
+  "register_version": "1.0",
+  "generated_by": "tools/oral/build_followup_register.py",
+  "record_class": "AUTHORISATION_REGISTER",
+  "note": "Authoritative register of the Oral examiner follow-up actions authorised for future production. This says WHAT is authorised. Each production batch writes its own batch_f*_manifest.json saying what was IMPLEMENTED. The two must never be collapsed.",
+  "provenance": {
+    "sources": {
+      "authorisation": {
+        "blob": "b3f3a972c14daef66b5809c243f5d98bde1e80a6",
+        "path": "meoclass1/oral-intelligence/examiner-audit/FINAL_ORAL_PRODUCTION_AUTHORIZATION.json",
+        "seen_on_refs": [
+          "origin/review/oral-final-gap-decision-laptop",
+          "origin/research/oral-final-enrichment-consolidation"
+        ],
+        "role": "follow-up families and the 35 grouped insertion actions"
+      },
+      "decisions": {
+        "blob": "5170fbe4c562b150ae4ba0cd5aa09712d83ae5d9",
+        "path": "meoclass1/oral-intelligence/examiner-audit/FINAL_REMAINING_ORAL_PRODUCTION_DECISIONS.json",
+        "seen_on_refs": [
+          "origin/review/oral-final-gap-decision-laptop"
+        ],
+        "role": "per-family evidence: occurrences, decision basis, coverage"
+      },
+      "enrichment": {
+        "blob": "d4571ac3071348d2ddfb04ee69957b2cb86788cd",
+        "path": "meoclass1/oral-intelligence/examiner-audit/FINAL_ORAL_ENRICHMENT_CONSOLIDATION.json",
+        "seen_on_refs": [
+          "origin/research/oral-final-enrichment-consolidation"
+        ],
+        "role": "follow-up / enrichment colocation on a shared parent card"
+      }
+    },
+    "derivation": "Families dispositioned FOLLOWUP_ONLY are grouped by parent canonical question id; identifiers are re-derived and compared against the committed ones.",
+    "content_authored_here": false
+  },
+  "vocabularies": {
+    "relationship_type": [
+      "CROSS_QUESTION",
+      "EXPECTED_DETAIL",
+      "FOLLOW_UP",
+      "PRIMARY_ASK",
+      "TOPIC_INFERENCE_ONLY",
+      "UNSPECIFIED"
+    ],
+    "verification_class": [
+      "CLASS_RULE_VERIFY_REQUIRED",
+      "CURRENT_REG_VERIFY_REQUIRED",
+      "EXISTING_VERIFIED_MIWCORPUS_SUFFICIENT",
+      "OEM_VERIFY_REQUIRED",
+      "PRIMARY_AUTHORITY_REQUIRED",
+      "TECHNICAL_REASONING_ONLY",
+      "UNCLASSIFIED_PENDING_BATCH_SCOPING"
+    ],
+    "target_confidence": [
+      "HIGH",
+      "LOW",
+      "MEDIUM"
+    ],
+    "target_review_status": [
+      "CONFIRMED",
+      "METADATA_ONLY_CANDIDATE",
+      "REQUIRES_LIVE_ADJUDICATION",
+      "RETARGET_REQUIRED"
+    ],
+    "status": [
+      "AUTHORISED_NOT_STARTED",
+      "IN_BATCH",
+      "PRODUCED",
+      "WITHDRAWN"
+    ],
+    "priority": [
+      "F-P1",
+      "F-P2",
+      "F-P3"
+    ],
+    "target_structural_check": [
+      "TARGET_DRIFTED",
+      "TARGET_MISSING",
+      "TARGET_RESOLVES",
+      "TARGET_REVIEW_REQUIRED"
+    ]
+  },
+  "confidence_model": {
+    "HIGH": "decision_basis is hand adjudication against current answer bodies - a person reasoned about this parent card",
+    "MEDIUM": "target chosen by coverage score, score still selects it, and best-answer coverage is at or above 0.60",
+    "LOW": "target chosen by coverage score and either the score no longer selects it, or coverage is below 0.60",
+    "caution": "A LAPTOP_CONFIRMED follow-up disposition confirms the DISPOSITION, not the target. All 39 families are LAPTOP_CONFIRMED; only 4 had their parent card chosen by hand."
+  },
+  "live_corpus_at_generation": {
+    "canonical_questions": 721,
+    "question_bearing_files": 86
+  },
+  "reconciliation": {
+    "raw_followup_designated_source_families": 39,
+    "grouping_rule": "one action per parent canonical question id; families sharing a parent card are one insertion",
+    "group_size_distribution": {
+      "1": 32,
+      "2": 2,
+      "3": 1
+    },
+    "multi_family_groups": [
+      {
+        "followup_id": "FUP-001",
+        "target": "QB10_B#q1",
+        "source_family_ids": [
+          "GAP-0491",
+          "GAP-0498",
+          "GAP-0648"
+        ]
+      },
+      {
+        "followup_id": "FUP-004",
+        "target": "QB1_A#q30",
+        "source_family_ids": [
+          "GAP-0405",
+          "GAP-0457"
+        ]
+      },
+      {
+        "followup_id": "FUP-008",
+        "target": "QB1_E#q1",
+        "source_family_ids": [
+          "GAP-0172",
+          "GAP-0282"
+        ]
+      }
+    ],
+    "final_followup_actions": 35,
+    "equation": "39 source families -> 35 parent cards -> 35 actions",
+    "id_assignment_rule": "FUP-NNN in ascending lexicographic order of the parent canonical question id",
+    "independently_regenerated": true,
+    "matches_committed_identifiers": true,
+    "representations_cross_checked": [
+      "authorisation.families[] where adjudicated_decision=FOLLOWUP_ONLY",
+      "authorisation.production_actions[] where kind=FOLLOWUP_INSERTION",
+      "decisions.families[] where decision=FOLLOWUP_ONLY",
+      "enrichment.followup_colocation[]"
+    ],
+    "source_headline_counts": {
+      "FOLLOWUP_SOURCE_FAMILIES": 39,
+      "AUTHORISED_FOLLOWUP_INSERTION_ACTIONS": 35,
+      "FOLLOWUP_INSERTIONS": 35
+    }
+  },
+  "summary": {
+    "total_actions": 35,
+    "by_priority": {
+      "F-P1": 4,
+      "F-P2": 12,
+      "F-P3": 19
+    },
+    "by_relationship_type": {
+      "EXPECTED_DETAIL": 2,
+      "FOLLOW_UP": 2,
+      "TOPIC_INFERENCE_ONLY": 31
+    },
+    "by_target_confidence": {
+      "HIGH": 4,
+      "LOW": 19,
+      "MEDIUM": 12
+    },
+    "by_target_review_status": {
+      "CONFIRMED": 3,
+      "METADATA_ONLY_CANDIDATE": 1,
+      "REQUIRES_LIVE_ADJUDICATION": 29,
+      "RETARGET_REQUIRED": 2
+    },
+    "by_target_structural_check": {
+      "TARGET_RESOLVES": 35
+    },
+    "by_status": {
+      "AUTHORISED_NOT_STARTED": 35
+    },
+    "parent_files": {
+      "QB10_B.html": 2,
+      "QB1_A.html": 4,
+      "QB1_C.html": 1,
+      "QB1_E.html": 1,
+      "QB1_F.html": 3,
+      "QB1_G.html": 2,
+      "QB2_A.html": 1,
+      "QB2_B.html": 1,
+      "QB3_A.html": 1,
+      "QB3_H.html": 1,
+      "QB3_I.html": 1,
+      "QB3_J.html": 1,
+      "QB4_A.html": 1,
+      "QB4_B.html": 2,
+      "QB4_C.html": 3,
+      "QB4_E.html": 1,
+      "QB4_G.html": 1,
+      "QB5_E.html": 1,
+      "QB6.html": 1,
+      "QB6_E.html": 1,
+      "QB7_B.html": 1,
+      "QB8_A.html": 1,
+      "QB9_C.html": 1,
+      "QB9_G.html": 2
+    },
+    "currentness_required": 4,
+    "creates_new_card": 0
+  },
+  "actions": [
+    {
+      "followup_id": "FUP-001",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0491",
+        "GAP-0498",
+        "GAP-0648"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0515",
+        "ASC-0522",
+        "ASC-0687"
+      ],
+      "examiners": [
+        "Nair",
+        "Paul"
+      ],
+      "original_asks": [
+        "SOLAS chapter 2/1 amendments coming in force on 2024",
+        "New amendments coming on 2024",
+        "Tell about annual survey, what are things surveyor will check?"
+      ],
+      "parent_canonical_id": "QB10_B#q1",
+      "parent_file": "QB10_B.html",
+      "parent_anchor": "q1",
+      "parent_qtext": "Give a consolidated overview of SOLAS and MARPOL amendments entering into force from 2024 through 2028.",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB10_B#q1",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-001",
+        "answer_home": "QB10_B#q1"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "SOLAS chapter 2/1 amendments coming in force on 2024",
+          "New amendments coming on 2024",
+          "Tell about annual survey, what are things surveyor will check?"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": true,
+      "currentness_triggers": [
+        "amendment",
+        "entry into force",
+        "explicit year",
+        "novelty word"
+      ],
+      "primary_authority_hint": [
+        "MARPOL",
+        "SOLAS"
+      ],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0491",
+          "upstream_source_family_id": "ASF-0491",
+          "source_occurrence_ids": [
+            "ASC-0515"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "SOLAS chapter 2/1 amendments coming in force on 2024",
+          "raw_ask_variants": [
+            "SOLAS chapter 2/1 amendments coming in force on 2024"
+          ],
+          "topics": [
+            "Conventions"
+          ],
+          "source_pages": [
+            41
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p17.html#topic-p17-1",
+            "miw-notes-mgmt-p21.html#topic-p21-1"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.58,
+          "current_best_answer_question_id": "QB10_B#q1",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        },
+        {
+          "source_family_id": "GAP-0498",
+          "upstream_source_family_id": "ASF-0498",
+          "source_occurrence_ids": [
+            "ASC-0522"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "New amendments coming on 2024",
+          "raw_ask_variants": [
+            "New amendments coming on 2024"
+          ],
+          "topics": [
+            "Conventions"
+          ],
+          "source_pages": [
+            41
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p1.html#topic-6"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.541,
+          "current_best_answer_question_id": "QB10_B#q1",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        },
+        {
+          "source_family_id": "GAP-0648",
+          "upstream_source_family_id": "ASF-0648",
+          "source_occurrence_ids": [
+            "ASC-0687"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Paul"
+          ],
+          "original_ask": "Tell about annual survey, what are things surveyor will check?",
+          "raw_ask_variants": [
+            "Tell about annual survey, what are things surveyor will check?"
+          ],
+          "topics": [
+            "Survey / Certification"
+          ],
+          "source_pages": [
+            55
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p11.html#topic-48",
+            "miw-notes-mgmt-p20.html#topic-p20-3"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.687,
+          "current_best_answer_question_id": "QB10_B#q1",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-002",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P2",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0358"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0363"
+      ],
+      "examiners": [
+        "Simon"
+      ],
+      "original_asks": [
+        "IMDG in brief, classes, under which class does chemical tanker cargo come under, new amendments"
+      ],
+      "parent_canonical_id": "QB10_B#q4",
+      "parent_file": "QB10_B.html",
+      "parent_anchor": "q4",
+      "parent_qtext": "Which of the recent/upcoming amendments apply specifically to container ships — and why does a boxship get singled out?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB10_B#q4",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-002",
+        "answer_home": "QB10_B#q4"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "IMDG in brief, classes, under which class does chemical tanker cargo come under, new amendments"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": true,
+      "currentness_triggers": [
+        "amendment",
+        "novelty word"
+      ],
+      "primary_authority_hint": [
+        "IMDG"
+      ],
+      "target_confidence": "MEDIUM",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0358",
+          "upstream_source_family_id": "ASF-0358",
+          "source_occurrence_ids": [
+            "ASC-0363"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "IMDG in brief, classes, under which class does chemical tanker cargo come under, new amendments",
+          "raw_ask_variants": [
+            "IMDG in brief, classes, under which class does chemical tanker cargo come under, new amendments"
+          ],
+          "topics": [
+            "Other / General Maritime Topics"
+          ],
+          "source_pages": [
+            30
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p4.html#topic-16",
+            "miw-notes-mgmt-p5.html#topic-21"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.666,
+          "current_best_answer_question_id": "QB10_B#q4",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-003",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0603"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0638"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "P&I insurance. Which all pollutions does P&I cover?"
+      ],
+      "parent_canonical_id": "QB1_A#q12",
+      "parent_file": "QB1_A.html",
+      "parent_anchor": "q12",
+      "parent_qtext": "ITC (Institute Time Clauses) — What are the clauses in it?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB1_A#q12",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-003",
+        "answer_home": "QB1_A#q12"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "P&I insurance. Which all pollutions does P&I cover?"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [
+        "ITC",
+        "P&I"
+      ],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [
+        "ENRICH-A001"
+      ],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication.",
+        "Parent card was already edited by shipped enrichment ENRICH-A001; read the live card before adding a limb."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0603",
+          "upstream_source_family_id": "ASF-0603",
+          "source_occurrence_ids": [
+            "ASC-0638"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "P&I insurance. Which all pollutions does P&I cover?",
+          "raw_ask_variants": [
+            "P&I insurance. Which all pollutions does P&I cover?"
+          ],
+          "topics": [
+            "Marine Insurance"
+          ],
+          "source_pages": [
+            49
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p12.html#topic-50",
+            "miw-notes-mgmt-p18.html#topic-p18-1"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.434,
+          "current_best_answer_question_id": "QB1_A#q12",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": [
+            "ENRICH-A001"
+          ]
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-004",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0405",
+        "GAP-0457"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0418",
+        "ASC-0474"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "CIC. Explain in detail? What is included in the MSI report?",
+        "How to confirm d2 standard onboard for uv type bwt plant."
+      ],
+      "parent_canonical_id": "QB1_A#q30",
+      "parent_file": "QB1_A.html",
+      "parent_anchor": "q30",
+      "parent_qtext": "MEPC 84 Outcomes — Explain with cross questions.",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB1_A#q30",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-004",
+        "answer_home": "QB1_A#q30"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "CIC. Explain in detail? What is included in the MSI report?",
+          "How to confirm d2 standard onboard for uv type bwt plant."
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [
+        "CIC",
+        "MEPC",
+        "MSI"
+      ],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0405",
+          "upstream_source_family_id": "ASF-0405",
+          "source_occurrence_ids": [
+            "ASC-0418"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "CIC. Explain in detail? What is included in the MSI report?",
+          "raw_ask_variants": [
+            "CIC. Explain in detail? What is included in the MSI report?"
+          ],
+          "topics": [
+            "PSC/FSI"
+          ],
+          "source_pages": [
+            35
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_TOPIC_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p6.html#topic-29",
+            "simon-notes-p4.html#n5"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.518,
+          "current_best_answer_question_id": "QB1_A#q30",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        },
+        {
+          "source_family_id": "GAP-0457",
+          "upstream_source_family_id": "ASF-0457",
+          "source_occurrence_ids": [
+            "ASC-0474"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "How to confirm d2 standard onboard for uv type bwt plant.",
+          "raw_ask_variants": [
+            "How to confirm d2 standard onboard for uv type bwt plant."
+          ],
+          "topics": [
+            "BWMS"
+          ],
+          "source_pages": [
+            39
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p12.html#topic-51",
+            "simon-notes-p2.html#n15"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.649,
+          "current_best_answer_question_id": "QB1_A#q30",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-005",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0552"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0583"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "International chamber of commerce?"
+      ],
+      "parent_canonical_id": "QB1_A#q7",
+      "parent_file": "QB1_A.html",
+      "parent_anchor": "q7",
+      "parent_qtext": "Admiralty Law — Explain. How is the Chief Engineer related to the Admiralty Act?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB1_A#q7",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-005",
+        "answer_home": "QB1_A#q7"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "International chamber of commerce?"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0552",
+          "upstream_source_family_id": "ASF-0552",
+          "source_occurrence_ids": [
+            "ASC-0583"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "International chamber of commerce?",
+          "raw_ask_variants": [
+            "International chamber of commerce?"
+          ],
+          "topics": [
+            "MISC"
+          ],
+          "source_pages": [
+            46
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "WA3-LIEN1.html#sec-1",
+            "miw-notes-mgmt-p19.html#topic-p19-4"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.562,
+          "current_best_answer_question_id": "QB1_A#q7",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-006",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P1",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0620"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0656"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "Explain how GA was applicable for ship ever given stuck in suez."
+      ],
+      "parent_canonical_id": "QB1_A#q9",
+      "parent_file": "QB1_A.html",
+      "parent_anchor": "q9",
+      "parent_qtext": "General Average — Explain including act and procedure followed.",
+      "relationship_type": "FOLLOW_UP",
+      "relationship_edge": {
+        "parent_question": "QB1_A#q9",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-006",
+        "answer_home": "QB1_A#q9"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Explain how GA was applicable for ship ever given stuck in suez."
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "HIGH",
+      "target_review_status": "CONFIRMED",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [
+        "ENRICH-A003"
+      ],
+      "caution": [
+        "Parent card was already edited by shipped enrichment ENRICH-A003; read the live card before adding a limb."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0620",
+          "upstream_source_family_id": "ASF-0620",
+          "source_occurrence_ids": [
+            "ASC-0656"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "Explain how GA was applicable for ship ever given stuck in suez.",
+          "raw_ask_variants": [
+            "Explain how GA was applicable for ship ever given stuck in suez."
+          ],
+          "topics": [
+            "Marine Insurance"
+          ],
+          "source_pages": [
+            49
+          ],
+          "governed_gap_kind": "GENUINE_GAP",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_TOPIC_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p18.html#topic-p18-4",
+            "miw-notes-mgmt-p19.html#topic-p19-1"
+          ],
+          "decision_basis": "hand adjudication against current answer bodies",
+          "decision_reason": "Ever Given as a worked general-average example belongs as an examiner-chain follow-up on the GA card.",
+          "best_answer_coverage": 0.688,
+          "current_best_answer_question_id": "QB1_A#q9",
+          "target_score_drifted": false,
+          "relationship_type": "FOLLOW_UP",
+          "colocated_enrichment_actions": [
+            "ENRICH-A003"
+          ]
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-007",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P2",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0726"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0782"
+      ],
+      "examiners": [
+        "Paul"
+      ],
+      "original_asks": [
+        "Information obtained from GZ curve"
+      ],
+      "parent_canonical_id": "QB1_C#q2",
+      "parent_file": "QB1_C.html",
+      "parent_anchor": "q2",
+      "parent_qtext": "Static vs dynamic stability?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB1_C#q2",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-007",
+        "answer_home": "QB1_C#q2"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Information obtained from GZ curve"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "MEDIUM",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0726",
+          "upstream_source_family_id": "ASF-0726",
+          "source_occurrence_ids": [
+            "ASC-0782"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Paul"
+          ],
+          "original_ask": "Information obtained from GZ curve",
+          "raw_ask_variants": [
+            "Information obtained from GZ curve"
+          ],
+          "topics": [
+            "Safety / Stability"
+          ],
+          "source_pages": [
+            62
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "simon-notes-p3.html#n4",
+            "simon-notes-p5.html#n2"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.672,
+          "current_best_answer_question_id": "QB1_C#q2",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-008",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0172",
+        "GAP-0282"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0136",
+        "ASC-0267"
+      ],
+      "examiners": [
+        "Simon"
+      ],
+      "original_asks": [
+        "FSS CODE, FUNCTIONAL REQUIREMENT, objective",
+        "List of statutory certificates in ur last ship, whats the validity of certificates"
+      ],
+      "parent_canonical_id": "QB1_E#q1",
+      "parent_file": "QB1_E.html",
+      "parent_anchor": "q1",
+      "parent_qtext": "SEQ (Safety Equipment) survey — documents required and how do you prepare for it?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB1_E#q1",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-008",
+        "answer_home": "QB1_E#q1"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "FSS CODE, FUNCTIONAL REQUIREMENT, objective",
+          "List of statutory certificates in ur last ship, whats the validity of certificates"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [
+        "FSS"
+      ],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [
+        "ENRICH-A012"
+      ],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication.",
+        "Parent card was already edited by shipped enrichment ENRICH-A012; read the live card before adding a limb."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0172",
+          "upstream_source_family_id": "ASF-0172",
+          "source_occurrence_ids": [
+            "ASC-0136"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "FSS CODE, FUNCTIONAL REQUIREMENT, objective",
+          "raw_ask_variants": [
+            "FSS CODE, FUNCTIONAL REQUIREMENT, objective"
+          ],
+          "topics": [
+            "IMO Conventions and Codes"
+          ],
+          "source_pages": [
+            13
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p4.html#topic-20"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.596,
+          "current_best_answer_question_id": "QB1_E#q1",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": [
+            "ENRICH-A012"
+          ]
+        },
+        {
+          "source_family_id": "GAP-0282",
+          "upstream_source_family_id": "ASF-0282",
+          "source_occurrence_ids": [
+            "ASC-0267"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "List of statutory certificates in ur last ship, whats the validity of certificates",
+          "raw_ask_variants": [
+            "List of statutory certificates in ur last ship, whats the validity of certificates"
+          ],
+          "topics": [
+            "Survey and Inspection"
+          ],
+          "source_pages": [
+            21
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p20.html#topic-p20-3",
+            "miw-notes-mgmt-p21.html#topic-p21-1"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.562,
+          "current_best_answer_question_id": "QB1_E#q1",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": [
+            "ENRICH-A012"
+          ]
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-009",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0523"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0551"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "Sturucture of MS act, preamble"
+      ],
+      "parent_canonical_id": "QB1_F#q12",
+      "parent_file": "QB1_F.html",
+      "parent_anchor": "q12",
+      "parent_qtext": "seafarer ms act welfare requirement",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB1_F#q12",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-009",
+        "answer_home": "QB1_F#q12"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Sturucture of MS act, preamble"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [
+        "MS Act"
+      ],
+      "target_confidence": "LOW",
+      "target_review_status": "RETARGET_REQUIRED",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [
+        "ENRICH-A038"
+      ],
+      "caution": [
+        "The coverage score that selected this parent no longer selects it; adjudicate the home against live answer bodies before authoring.",
+        "Target was chosen by a coverage score, not by hand adjudication.",
+        "Parent card was already edited by shipped enrichment ENRICH-A038; read the live card before adding a limb."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0523",
+          "upstream_source_family_id": "ASF-0523",
+          "source_occurrence_ids": [
+            "ASC-0551"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "Sturucture of MS act, preamble",
+          "raw_ask_variants": [
+            "Sturucture of MS act, preamble"
+          ],
+          "topics": [
+            "MS Act, DG"
+          ],
+          "source_pages": [
+            44
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "simon-notes-p3.html#n27",
+            "simon-notes-p6.html#n8"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.235,
+          "current_best_answer_question_id": "QB10_A#q3",
+          "target_score_drifted": true,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": [
+            "ENRICH-A038"
+          ]
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-010",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P2",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0456"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0473"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "Challenging ballast."
+      ],
+      "parent_canonical_id": "QB1_F#q19",
+      "parent_file": "QB1_F.html",
+      "parent_anchor": "q19",
+      "parent_qtext": "India government contribution in shipping",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB1_F#q19",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-010",
+        "answer_home": "QB1_F#q19"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Challenging ballast."
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "MEDIUM",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0456",
+          "upstream_source_family_id": "ASF-0456",
+          "source_occurrence_ids": [
+            "ASC-0473"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "Challenging ballast.",
+          "raw_ask_variants": [
+            "Challenging ballast."
+          ],
+          "topics": [
+            "BWMS"
+          ],
+          "source_pages": [
+            39
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_TOPIC_SUPPORT",
+          "notes_units": [
+            "simon-notes-p2.html#n16"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.7,
+          "current_best_answer_question_id": "QB1_F#q19",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-011",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0369"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0377"
+      ],
+      "examiners": [
+        "Simon"
+      ],
+      "original_asks": [
+        "DGCOMM CONTACT DETAILS"
+      ],
+      "parent_canonical_id": "QB1_F#q2",
+      "parent_file": "QB1_F.html",
+      "parent_anchor": "q2",
+      "parent_qtext": "All marpol related documents on your type of vessel",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB1_F#q2",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-011",
+        "answer_home": "QB1_F#q2"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "DGCOMM CONTACT DETAILS"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [
+        "MARPOL"
+      ],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0369",
+          "upstream_source_family_id": "ASF-0369",
+          "source_occurrence_ids": [
+            "ASC-0377"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "DGCOMM CONTACT DETAILS",
+          "raw_ask_variants": [
+            "DGCOMM CONTACT DETAILS"
+          ],
+          "topics": [
+            "Other / General Maritime Topics"
+          ],
+          "source_pages": [
+            30
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p15.html#topic-p15-4",
+            "miw-notes-mgmt-p17.html#topic-p17-1"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.425,
+          "current_best_answer_question_id": "QB1_F#q2",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-012",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0090"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0041"
+      ],
+      "examiners": [
+        "John"
+      ],
+      "original_asks": [
+        "Fictional requirements - gas concentrations"
+      ],
+      "parent_canonical_id": "QB1_G#q23",
+      "parent_file": "QB1_G.html",
+      "parent_anchor": "q23",
+      "parent_qtext": "ER ventillation requirement and where its mentioned ( its a cross question by above qstn)",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB1_G#q23",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-012",
+        "answer_home": "QB1_G#q23"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Fictional requirements - gas concentrations"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0090",
+          "upstream_source_family_id": "ASF-0090",
+          "source_occurrence_ids": [
+            "ASC-0041"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "John"
+          ],
+          "original_ask": "Fictional requirements - gas concentrations",
+          "raw_ask_variants": [
+            "Fictional requirements - gas concentrations"
+          ],
+          "topics": [
+            "SOLAS & Safety Regulations"
+          ],
+          "source_pages": [
+            4
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "WA1-HKC3.html#sec-10",
+            "miw-notes-mgmt-p22.html#topic-p22-2"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.49,
+          "current_best_answer_question_id": "QB1_G#q23",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-013",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P2",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0602"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0637"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "How will deal with disputes to cargo damage..?"
+      ],
+      "parent_canonical_id": "QB1_G#q29",
+      "parent_file": "QB1_G.html",
+      "parent_anchor": "q29",
+      "parent_qtext": "⁠LATEST AMENDMENT IN IMOLEGAL COMMITTEE",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB1_G#q29",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-013",
+        "answer_home": "QB1_G#q29"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "How will deal with disputes to cargo damage..?"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "MEDIUM",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [
+        "ENRICH-A006"
+      ],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication.",
+        "Parent card was already edited by shipped enrichment ENRICH-A006; read the live card before adding a limb."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0602",
+          "upstream_source_family_id": "ASF-0602",
+          "source_occurrence_ids": [
+            "ASC-0637"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "How will deal with disputes to cargo damage..?",
+          "raw_ask_variants": [
+            "How will deal with disputes to cargo damage..?"
+          ],
+          "topics": [
+            "Marine Insurance"
+          ],
+          "source_pages": [
+            49
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p19.html#topic-p19-3",
+            "miw-notes-mgmt-p20.html#topic-p20-2"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.658,
+          "current_best_answer_question_id": "QB1_G#q29",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": [
+            "ENRICH-A006"
+          ]
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-014",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0273"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0256"
+      ],
+      "examiners": [
+        "Simon"
+      ],
+      "original_asks": [
+        "Gross mass of 40ft container, how you will fix it"
+      ],
+      "parent_canonical_id": "QB2_A#q24",
+      "parent_file": "QB2_A.html",
+      "parent_anchor": "q24",
+      "parent_qtext": "Digital inclinometer — requirements, purpose, MEMS technology, and what makes it different from traditional inclinometers.",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB2_A#q24",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-014",
+        "answer_home": "QB2_A#q24"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Gross mass of 40ft container, how you will fix it"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0273",
+          "upstream_source_family_id": "ASF-0273",
+          "source_occurrence_ids": [
+            "ASC-0256"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "Gross mass of 40ft container, how you will fix it",
+          "raw_ask_variants": [
+            "Gross mass of 40ft container, how you will fix it"
+          ],
+          "topics": [
+            "Container Operations"
+          ],
+          "source_pages": [
+            20
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p19.html#topic-p19-2",
+            "miw-notes-mgmt-p20.html#topic-p20-2"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.546,
+          "current_best_answer_question_id": "QB2_A#q24",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-015",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P2",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0492"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0516"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "Solas chapter 11 part-1 what all covers"
+      ],
+      "parent_canonical_id": "QB2_B#q17",
+      "parent_file": "QB2_B.html",
+      "parent_anchor": "q17",
+      "parent_qtext": "What is the dry chemical powder (DCP) firefighting system fitted on the deck of a container ship, and what regulations govern it?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB2_B#q17",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-015",
+        "answer_home": "QB2_B#q17"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Solas chapter 11 part-1 what all covers"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [
+        "SOLAS"
+      ],
+      "target_confidence": "MEDIUM",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0492",
+          "upstream_source_family_id": "ASF-0492",
+          "source_occurrence_ids": [
+            "ASC-0516"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "Solas chapter 11 part-1 what all covers",
+          "raw_ask_variants": [
+            "Solas chapter 11 part-1 what all covers"
+          ],
+          "topics": [
+            "Conventions"
+          ],
+          "source_pages": [
+            41
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p16.html#topic-p16-2",
+            "miw-notes-mgmt-p20.html#topic-p20-2"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.62,
+          "current_best_answer_question_id": "QB2_B#q17",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-016",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0554"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0585"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "Class notation - wat does it mean"
+      ],
+      "parent_canonical_id": "QB3_A#q4",
+      "parent_file": "QB3_A.html",
+      "parent_anchor": "q4",
+      "parent_qtext": "Explain class notations using your last vessel as an example.",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB3_A#q4",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-016",
+        "answer_home": "QB3_A#q4"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Class notation - wat does it mean"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0554",
+          "upstream_source_family_id": "ASF-0554",
+          "source_occurrence_ids": [
+            "ASC-0585"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "Class notation - wat does it mean",
+          "raw_ask_variants": [
+            "Class notation - wat does it mean"
+          ],
+          "topics": [
+            "MISC"
+          ],
+          "source_pages": [
+            46
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_TOPIC_SUPPORT",
+          "notes_units": [
+            "current-topics-p1.html#q-7",
+            "miw-notes-mgmt-p8.html#topic-34"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.527,
+          "current_best_answer_question_id": "QB3_A#q4",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-017",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P2",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0385"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0396"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "In IBC certificate survey what all will u chk in intermediate and annual survey differences"
+      ],
+      "parent_canonical_id": "QB3_H#q6",
+      "parent_file": "QB3_H.html",
+      "parent_anchor": "q6",
+      "parent_qtext": "MARPOL Annex II — contents and certificates required?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB3_H#q6",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-017",
+        "answer_home": "QB3_H#q6"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "In IBC certificate survey what all will u chk in intermediate and annual survey differences"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [
+        "IBC",
+        "MARPOL"
+      ],
+      "target_confidence": "MEDIUM",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [
+        "ENRICH-A018"
+      ],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication.",
+        "Parent card was already edited by shipped enrichment ENRICH-A018; read the live card before adding a limb."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0385",
+          "upstream_source_family_id": "ASF-0385",
+          "source_occurrence_ids": [
+            "ASC-0396"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "In IBC certificate survey what all will u chk in intermediate and annual survey differences",
+          "raw_ask_variants": [
+            "In IBC certificate survey what all will u chk in intermediate and annual survey differences"
+          ],
+          "topics": [
+            "Annex 2, IBC Code, P&A Manual, Chemical Tanker"
+          ],
+          "source_pages": [
+            33
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p21.html#topic-p21-1",
+            "miw-notes-mgmt-p5.html#topic-21"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.612,
+          "current_best_answer_question_id": "QB3_H#q6",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": [
+            "ENRICH-A018"
+          ]
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-018",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P1",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0126"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0082"
+      ],
+      "examiners": [
+        "John"
+      ],
+      "original_asks": [
+        "Hydrogel - why barnacles not attaching?"
+      ],
+      "parent_canonical_id": "QB3_I#q4",
+      "parent_file": "QB3_I.html",
+      "parent_anchor": "q4",
+      "parent_qtext": "What is hydrogel antifouling technology and how does it work?",
+      "relationship_type": "EXPECTED_DETAIL",
+      "relationship_edge": {
+        "parent_question": "QB3_I#q4",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-018",
+        "answer_home": "QB3_I#q4"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Hydrogel - why barnacles not attaching?"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "HIGH",
+      "target_review_status": "CONFIRMED",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0126",
+          "upstream_source_family_id": "ASF-0126",
+          "source_occurrence_ids": [
+            "ASC-0082"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "John"
+          ],
+          "original_ask": "Hydrogel - why barnacles not attaching?",
+          "raw_ask_variants": [
+            "Hydrogel - why barnacles not attaching?"
+          ],
+          "topics": [
+            "Marine Engineering"
+          ],
+          "source_pages": [
+            8
+          ],
+          "governed_gap_kind": "GENUINE_GAP",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_TOPIC_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p10.html#topic-44"
+          ],
+          "decision_basis": "hand adjudication against current answer bodies",
+          "decision_reason": "Why barnacles cannot attach is the mechanism the hydrogel card already sets up - an expected-detail follow-up, not a card.",
+          "best_answer_coverage": 0.66,
+          "current_best_answer_question_id": "QB3_I#q4",
+          "target_score_drifted": false,
+          "relationship_type": "EXPECTED_DETAIL",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-019",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P2",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0263"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0244"
+      ],
+      "examiners": [
+        "Simon"
+      ],
+      "original_asks": [
+        "What is GHG, GWP, Examples, How methane is produced and released into atmosphere"
+      ],
+      "parent_canonical_id": "QB3_J#q1",
+      "parent_file": "QB3_J.html",
+      "parent_anchor": "q1",
+      "parent_qtext": "Effects of CO₂ and methane on the atmosphere.",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB3_J#q1",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-019",
+        "answer_home": "QB3_J#q1"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "What is GHG, GWP, Examples, How methane is produced and released into atmosphere"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "MEDIUM",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0263",
+          "upstream_source_family_id": "ASF-0263",
+          "source_occurrence_ids": [
+            "ASC-0244"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "What is GHG, GWP, Examples, How methane is produced and released into atmosphere",
+          "raw_ask_variants": [
+            "What is GHG, GWP, Examples, How methane is produced and released into atmosphere"
+          ],
+          "topics": [
+            "Environmental and Emissions"
+          ],
+          "source_pages": [
+            19
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "simon-notes-p2.html#n18",
+            "simon-notes-p4.html#n14"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.667,
+          "current_best_answer_question_id": "QB3_J#q1",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-020",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P2",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0698"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0746"
+      ],
+      "examiners": [
+        "Paul"
+      ],
+      "original_asks": [
+        "Your company has assigned you to prepare for an MLC audit: how will you check all items?"
+      ],
+      "parent_canonical_id": "QB4_A#q5",
+      "parent_file": "QB4_A.html",
+      "parent_anchor": "q5",
+      "parent_qtext": "Describe how a PSC inspection is conducted — how do officers board, what are the types and levels of inspection, and how are deficiency codes used?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB4_A#q5",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-020",
+        "answer_home": "QB4_A#q5"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Your company has assigned you to prepare for an MLC audit: how will you check all items?"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [
+        "MLC",
+        "PSC"
+      ],
+      "target_confidence": "MEDIUM",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0698",
+          "upstream_source_family_id": "ASF-0698",
+          "source_occurrence_ids": [
+            "ASC-0746"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Paul"
+          ],
+          "original_ask": "Your company has assigned you to prepare for an MLC audit: how will you check all items?",
+          "raw_ask_variants": [
+            "Your company has assigned you to prepare for an MLC audit: how will you check all items?"
+          ],
+          "topics": [
+            "Conventions / Codes"
+          ],
+          "source_pages": [
+            57
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p6.html#topic-27",
+            "miw-notes-mgmt-p6.html#topic-29"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.69,
+          "current_best_answer_question_id": "QB4_A#q5",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-021",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P2",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0194"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0163"
+      ],
+      "examiners": [
+        "Simon"
+      ],
+      "original_asks": [
+        "STCW levels, crew competency at supp level"
+      ],
+      "parent_canonical_id": "QB4_B#q13",
+      "parent_file": "QB4_B.html",
+      "parent_anchor": "q13",
+      "parent_qtext": "What are the STCW training requirements for Junior Engineers (ratings and junior officer level) onboard?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB4_B#q13",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-021",
+        "answer_home": "QB4_B#q13"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "STCW levels, crew competency at supp level"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [
+        "STCW"
+      ],
+      "target_confidence": "MEDIUM",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0194",
+          "upstream_source_family_id": "ASF-0194",
+          "source_occurrence_ids": [
+            "ASC-0163"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "STCW levels, crew competency at supp level",
+          "raw_ask_variants": [
+            "STCW levels, crew competency at supp level"
+          ],
+          "topics": [
+            "STCW and Certification"
+          ],
+          "source_pages": [
+            14
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "simon-notes-p1.html#n18",
+            "simon-notes-p1.html#n19"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.617,
+          "current_best_answer_question_id": "QB4_B#q13",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-022",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0582"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0615"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "How to carry out an Internal Audit onboard ship. He wanted the word to plan for the Audit before boarding the vessel."
+      ],
+      "parent_canonical_id": "QB4_B#q16",
+      "parent_file": "QB4_B.html",
+      "parent_anchor": "q16",
+      "parent_qtext": "What are the Best Management Practices (BMP5) for piracy prevention, and what are the Chief Engineer's responsibilities under BMP5?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB4_B#q16",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-022",
+        "answer_home": "QB4_B#q16"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "How to carry out an Internal Audit onboard ship. He wanted the word to plan for the Audit before boarding the vessel."
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0582",
+          "upstream_source_family_id": "ASF-0582",
+          "source_occurrence_ids": [
+            "ASC-0615"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "How to carry out an Internal Audit onboard ship. He wanted the word to plan for the Audit before boarding the vessel.",
+          "raw_ask_variants": [
+            "How to carry out an Internal Audit onboard ship. He wanted the word to plan for the Audit before boarding the vessel."
+          ],
+          "topics": [
+            "Survey, Audit, Certificates"
+          ],
+          "source_pages": [
+            47
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p14.html#topic-p14-1",
+            "miw-notes-mgmt-p6.html#topic-27"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.563,
+          "current_best_answer_question_id": "QB4_B#q16",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-023",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P2",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0125"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0081"
+      ],
+      "examiners": [
+        "John"
+      ],
+      "original_asks": [
+        "Propeller curve and margins? Safety margin? Significance to chief engineer"
+      ],
+      "parent_canonical_id": "QB4_C#q1",
+      "parent_file": "QB4_C.html",
+      "parent_anchor": "q1",
+      "parent_qtext": "Bunker shortage — CE step-by-step actions?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB4_C#q1",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-023",
+        "answer_home": "QB4_C#q1"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Propeller curve and margins? Safety margin? Significance to chief engineer"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "MEDIUM",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0125",
+          "upstream_source_family_id": "ASF-0125",
+          "source_occurrence_ids": [
+            "ASC-0081"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "John"
+          ],
+          "original_ask": "Propeller curve and margins? Safety margin? Significance to chief engineer",
+          "raw_ask_variants": [
+            "Propeller curve and margins? Safety margin? Significance to chief engineer"
+          ],
+          "topics": [
+            "Marine Engineering"
+          ],
+          "source_pages": [
+            8
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p19.html#topic-p19-4",
+            "miw-notes-mgmt-p8.html#topic-33"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.641,
+          "current_best_answer_question_id": "QB4_C#q1",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-024",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0326"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0328"
+      ],
+      "examiners": [
+        "Simon"
+      ],
+      "original_asks": [
+        "Requirements to fullfill calling port of refuge?"
+      ],
+      "parent_canonical_id": "QB4_C#q5",
+      "parent_file": "QB4_C.html",
+      "parent_anchor": "q5",
+      "parent_qtext": "Suspension vs withdrawal of class?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB4_C#q5",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-024",
+        "answer_home": "QB4_C#q5"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Requirements to fullfill calling port of refuge?"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0326",
+          "upstream_source_family_id": "ASF-0326",
+          "source_occurrence_ids": [
+            "ASC-0328"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "Requirements to fullfill calling port of refuge?",
+          "raw_ask_variants": [
+            "Requirements to fullfill calling port of refuge?"
+          ],
+          "topics": [
+            "Other / General Maritime Topics"
+          ],
+          "source_pages": [
+            30
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p12.html#topic-53",
+            "miw-notes-mgmt-p18.html#topic-p18-1"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.399,
+          "current_best_answer_question_id": "QB4_C#q5",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-025",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0511"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0538"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "Complaint redressal mechanism"
+      ],
+      "parent_canonical_id": "QB4_C#q6",
+      "parent_file": "QB4_C.html",
+      "parent_anchor": "q6",
+      "parent_qtext": "MLC 2006 — 5 Titles and flag/port state duties?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB4_C#q6",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-025",
+        "answer_home": "QB4_C#q6"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Complaint redressal mechanism"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [
+        "MLC"
+      ],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [
+        "ENRICH-A036",
+        "ENRICH-A037"
+      ],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication.",
+        "Parent card was already edited by shipped enrichment ENRICH-A036, ENRICH-A037; read the live card before adding a limb."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0511",
+          "upstream_source_family_id": "ASF-0511",
+          "source_occurrence_ids": [
+            "ASC-0538"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "Complaint redressal mechanism",
+          "raw_ask_variants": [
+            "Complaint redressal mechanism"
+          ],
+          "topics": [
+            "Code"
+          ],
+          "source_pages": [
+            42
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p6.html#topic-27"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.463,
+          "current_best_answer_question_id": "QB4_C#q6",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": [
+            "ENRICH-A036",
+            "ENRICH-A037"
+          ]
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-026",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0411"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0424"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "Trifuel -how it's benefits to shipowner."
+      ],
+      "parent_canonical_id": "QB4_E#q2",
+      "parent_file": "QB4_E.html",
+      "parent_anchor": "q2",
+      "parent_qtext": "MLC insurance covers — what is covered under MLC financial security requirements?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB4_E#q2",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-026",
+        "answer_home": "QB4_E#q2"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Trifuel -how it's benefits to shipowner."
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [
+        "MLC"
+      ],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0411",
+          "upstream_source_family_id": "ASF-0411",
+          "source_occurrence_ids": [
+            "ASC-0424"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "Trifuel -how it's benefits to shipowner.",
+          "raw_ask_variants": [
+            "Trifuel -how it's benefits to shipowner."
+          ],
+          "topics": [
+            "New Technology"
+          ],
+          "source_pages": [
+            36
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p18.html#topic-p18-2",
+            "simon-notes-p2.html#n18"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.484,
+          "current_best_answer_question_id": "QB4_E#q2",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-027",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0200"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0169"
+      ],
+      "examiners": [
+        "Simon"
+      ],
+      "original_asks": [
+        "Certificate for officers and watch keepers? COP and COC?"
+      ],
+      "parent_canonical_id": "QB4_G#q3",
+      "parent_file": "QB4_G.html",
+      "parent_anchor": "q3",
+      "parent_qtext": "STCW -As a chief engineer how will you decide on watchkeeping composition .(STCW CH-8)",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB4_G#q3",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-027",
+        "answer_home": "QB4_G#q3"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Certificate for officers and watch keepers? COP and COC?"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [
+        "STCW"
+      ],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0200",
+          "upstream_source_family_id": "ASF-0200",
+          "source_occurrence_ids": [
+            "ASC-0169"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "Certificate for officers and watch keepers? COP and COC?",
+          "raw_ask_variants": [
+            "Certificate for officers and watch keepers? COP and COC?"
+          ],
+          "topics": [
+            "STCW and Certification"
+          ],
+          "source_pages": [
+            14
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "simon-notes-p1.html#n13",
+            "simon-notes-p1.html#n14"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.466,
+          "current_best_answer_question_id": "QB4_G#q3",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-028",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P1",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0190"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0159"
+      ],
+      "examiners": [
+        "Simon"
+      ],
+      "original_asks": [
+        "IMO new SG- Arsenio Dominguez from Panama"
+      ],
+      "parent_canonical_id": "QB5_E#q5",
+      "parent_file": "QB5_E.html",
+      "parent_anchor": "q5",
+      "parent_qtext": "Day of the Seafarer — what is this year's theme and its relevance to your role?",
+      "relationship_type": "EXPECTED_DETAIL",
+      "relationship_edge": {
+        "parent_question": "QB5_E#q5",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-028",
+        "answer_home": "QB5_E#q5"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "IMO new SG- Arsenio Dominguez from Panama"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": true,
+      "currentness_triggers": [
+        "novelty word"
+      ],
+      "primary_authority_hint": [
+        "IMO"
+      ],
+      "target_confidence": "HIGH",
+      "target_review_status": "METADATA_ONLY_CANDIDATE",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Source states this is not an answer - it may belong as a trap or expected-detail marker rather than a Q&A limb."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0190",
+          "upstream_source_family_id": "ASF-0190",
+          "source_occurrence_ids": [
+            "ASC-0159"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "IMO new SG- Arsenio Dominguez from Panama",
+          "raw_ask_variants": [
+            "IMO new SG- Arsenio Dominguez from Panama"
+          ],
+          "topics": [
+            "IMO Conventions and Codes"
+          ],
+          "source_pages": [
+            13
+          ],
+          "governed_gap_kind": "GENUINE_GAP",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p1.html#topic-1"
+          ],
+          "decision_basis": "hand adjudication against current answer bodies",
+          "decision_reason": "The sitting Secretary-General is a currency detail, not an answer. Carry as a trap or expected detail.",
+          "best_answer_coverage": 0.562,
+          "current_best_answer_question_id": "QB5_E#q5",
+          "target_score_drifted": false,
+          "relationship_type": "EXPECTED_DETAIL",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-029",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P2",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0266"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0247"
+      ],
+      "examiners": [
+        "Simon"
+      ],
+      "original_asks": [
+        "UNFCCC purpose, COP28 and ship related pledge"
+      ],
+      "parent_canonical_id": "QB6#q7",
+      "parent_file": "QB6.html",
+      "parent_anchor": "q7",
+      "parent_qtext": "What is the UNFCCC and what is its role in IMO's GHG Strategy? What are the midterm measures?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB6#q7",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-029",
+        "answer_home": "QB6#q7"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "UNFCCC purpose, COP28 and ship related pledge"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [
+        "IMO"
+      ],
+      "target_confidence": "MEDIUM",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0266",
+          "upstream_source_family_id": "ASF-0266",
+          "source_occurrence_ids": [
+            "ASC-0247"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "UNFCCC purpose, COP28 and ship related pledge",
+          "raw_ask_variants": [
+            "UNFCCC purpose, COP28 and ship related pledge"
+          ],
+          "topics": [
+            "Environmental and Emissions"
+          ],
+          "source_pages": [
+            19
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "simon-notes-p3.html#n1",
+            "simon-notes-p3.html#n3"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.665,
+          "current_best_answer_question_id": "QB6#q7",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-030",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0261"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0242"
+      ],
+      "examiners": [
+        "Simon"
+      ],
+      "original_asks": [
+        "CO2 production in my ship, fuel consumed, why 3 times."
+      ],
+      "parent_canonical_id": "QB6_E#q2",
+      "parent_file": "QB6_E.html",
+      "parent_anchor": "q2",
+      "parent_qtext": "Greenhouse Gas Fuel Intensity (GFI) Calculation & Unit",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB6_E#q2",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-030",
+        "answer_home": "QB6_E#q2"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "CO2 production in my ship, fuel consumed, why 3 times."
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0261",
+          "upstream_source_family_id": "ASF-0261",
+          "source_occurrence_ids": [
+            "ASC-0242"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "CO2 production in my ship, fuel consumed, why 3 times.",
+          "raw_ask_variants": [
+            "CO2 production in my ship, fuel consumed, why 3 times."
+          ],
+          "topics": [
+            "Environmental and Emissions"
+          ],
+          "source_pages": [
+            19
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "WA2-GHG2.html#sec-5",
+            "miw-notes-mgmt-p22.html#topic-p22-3"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.592,
+          "current_best_answer_question_id": "QB6_E#q2",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-031",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0267"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0248"
+      ],
+      "examiners": [
+        "Simon"
+      ],
+      "original_asks": [
+        "How methane produced from paddy"
+      ],
+      "parent_canonical_id": "QB7_B#q1",
+      "parent_file": "QB7_B.html",
+      "parent_anchor": "q1",
+      "parent_qtext": "| E-marine fuels — what are they and their status in maritime decarbonisation?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB7_B#q1",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-031",
+        "answer_home": "QB7_B#q1"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "How methane produced from paddy"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "LOW",
+      "target_review_status": "RETARGET_REQUIRED",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "The coverage score that selected this parent no longer selects it; adjudicate the home against live answer bodies before authoring.",
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0267",
+          "upstream_source_family_id": "ASF-0267",
+          "source_occurrence_ids": [
+            "ASC-0248"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "How methane produced from paddy",
+          "raw_ask_variants": [
+            "How methane produced from paddy"
+          ],
+          "topics": [
+            "Environmental and Emissions"
+          ],
+          "source_pages": [
+            19
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p22.html#topic-p22-2",
+            "miw-notes-mgmt-p22.html#topic-p22-3"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.487,
+          "current_best_answer_question_id": "QB3_J#q6",
+          "target_score_drifted": true,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-032",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P2",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0327"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0329"
+      ],
+      "examiners": [
+        "Simon"
+      ],
+      "original_asks": [
+        "High density cargo carriage..how you can find out, precaution, bulk jupiter, IMSBC code classification"
+      ],
+      "parent_canonical_id": "QB8_A#q4",
+      "parent_file": "QB8_A.html",
+      "parent_anchor": "q4",
+      "parent_qtext": "IMSBC Code groups A/B/C/MHB?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB8_A#q4",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-032",
+        "answer_home": "QB8_A#q4"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "High density cargo carriage..how you can find out, precaution, bulk jupiter, IMSBC code classification"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "MEDIUM",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0327",
+          "upstream_source_family_id": "ASF-0327",
+          "source_occurrence_ids": [
+            "ASC-0329"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Simon"
+          ],
+          "original_ask": "High density cargo carriage..how you can find out, precaution, bulk jupiter, IMSBC code classification",
+          "raw_ask_variants": [
+            "High density cargo carriage..how you can find out, precaution, bulk jupiter, IMSBC code classification"
+          ],
+          "topics": [
+            "Other / General Maritime Topics"
+          ],
+          "source_pages": [
+            30
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p14.html#topic-p14-4",
+            "miw-notes-mgmt-p5.html#topic-21"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.665,
+          "current_best_answer_question_id": "QB8_A#q4",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-033",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P1",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0607"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0643"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "Diff.btwn marine insurance and car insurance"
+      ],
+      "parent_canonical_id": "QB9_C#q5",
+      "parent_file": "QB9_C.html",
+      "parent_anchor": "q5",
+      "parent_qtext": "Insurance principles — list all principles of marine insurance and explain each.",
+      "relationship_type": "FOLLOW_UP",
+      "relationship_edge": {
+        "parent_question": "QB9_C#q5",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-033",
+        "answer_home": "QB9_C#q5"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "Diff.btwn marine insurance and car insurance"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "HIGH",
+      "target_review_status": "CONFIRMED",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0607",
+          "upstream_source_family_id": "ASF-0607",
+          "source_occurrence_ids": [
+            "ASC-0643"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "Diff.btwn marine insurance and car insurance",
+          "raw_ask_variants": [
+            "Diff.btwn marine insurance and car insurance"
+          ],
+          "topics": [
+            "Marine Insurance"
+          ],
+          "source_pages": [
+            49
+          ],
+          "governed_gap_kind": "GENUINE_GAP",
+          "governed_priority": "P1",
+          "notes_support": "NOTES_TOPIC_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p19.html#topic-p19-3"
+          ],
+          "decision_basis": "hand adjudication against current answer bodies",
+          "decision_reason": "Marine against motor insurance is a framing contrast, best carried as an opening follow-up on the insurance-principles card.",
+          "best_answer_coverage": 0.27,
+          "current_best_answer_question_id": "QB10_B#q1",
+          "target_score_drifted": false,
+          "relationship_type": "FOLLOW_UP",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-034",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0481"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0502"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "FAL- Maritime single window in detail... came into force, Sagar Sethu"
+      ],
+      "parent_canonical_id": "QB9_G#q3",
+      "parent_file": "QB9_G.html",
+      "parent_anchor": "q3",
+      "parent_qtext": "How is an IMO convention formally adopted? Explain the conference process, protocol, amendments, tacit vs explicit acceptance, the role of committees/sub-committees, the FAL Committee's function, and the difference between ratification, acceptance, approval, and accession.",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB9_G#q3",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-034",
+        "answer_home": "QB9_G#q3"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "FAL- Maritime single window in detail... came into force, Sagar Sethu"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": true,
+      "currentness_triggers": [
+        "entry into force"
+      ],
+      "primary_authority_hint": [
+        "FAL",
+        "IMO"
+      ],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [
+        "ENRICH-A046"
+      ],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication.",
+        "Parent card was already edited by shipped enrichment ENRICH-A046; read the live card before adding a limb."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0481",
+          "upstream_source_family_id": "ASF-0481",
+          "source_occurrence_ids": [
+            "ASC-0502"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "FAL- Maritime single window in detail... came into force, Sagar Sethu",
+          "raw_ask_variants": [
+            "FAL- Maritime single window in detail... came into force, Sagar Sethu"
+          ],
+          "topics": [
+            "Conventions"
+          ],
+          "source_pages": [
+            41
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p1.html#topic-2",
+            "miw-notes-mgmt-p10.html#topic-45"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.581,
+          "current_best_answer_question_id": "QB9_G#q3",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": [
+            "ENRICH-A046"
+          ]
+        }
+      ]
+    },
+    {
+      "followup_id": "FUP-035",
+      "kind": "FOLLOWUP_INSERTION",
+      "status": "AUTHORISED_NOT_STARTED",
+      "priority": "F-P3",
+      "batch": null,
+      "source_family_ids": [
+        "GAP-0622"
+      ],
+      "source_occurrence_ids": [
+        "ASC-0658"
+      ],
+      "examiners": [
+        "Nair"
+      ],
+      "original_asks": [
+        "GA PA YA rule"
+      ],
+      "parent_canonical_id": "QB9_G#q7",
+      "parent_file": "QB9_G.html",
+      "parent_anchor": "q7",
+      "parent_qtext": "What is the difference between General Average and Particular Average?",
+      "relationship_type": "TOPIC_INFERENCE_ONLY",
+      "relationship_edge": {
+        "parent_question": "QB9_G#q7",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-035",
+        "answer_home": "QB9_G#q7"
+      },
+      "authorised_followup_limb": {
+        "note": "The authorised limb is the candidate-reported ask below, to be answered on the parent card. No answer text is authorised here; content is authored in the production batch.",
+        "asks": [
+          "GA PA YA rule"
+        ]
+      },
+      "verification_class": "UNCLASSIFIED_PENDING_BATCH_SCOPING",
+      "currentness_required": false,
+      "currentness_triggers": [],
+      "primary_authority_hint": [],
+      "target_confidence": "LOW",
+      "target_review_status": "REQUIRES_LIVE_ADJUDICATION",
+      "target_structural_check": "TARGET_RESOLVES",
+      "creates_new_card": false,
+      "colocated_enrichment_actions": [],
+      "caution": [
+        "Target was chosen by a coverage score, not by hand adjudication."
+      ],
+      "source_families": [
+        {
+          "source_family_id": "GAP-0622",
+          "upstream_source_family_id": "ASF-0622",
+          "source_occurrence_ids": [
+            "ASC-0658"
+          ],
+          "occurrence_count": 1,
+          "examiners": [
+            "Nair"
+          ],
+          "original_ask": "GA PA YA rule",
+          "raw_ask_variants": [
+            "GA PA YA rule"
+          ],
+          "topics": [
+            "Marine Insurance"
+          ],
+          "source_pages": [
+            49
+          ],
+          "governed_gap_kind": "MATERIAL_PARTIAL",
+          "governed_priority": "P2",
+          "notes_support": "NOTES_PARTIAL_SUPPORT",
+          "notes_units": [
+            "miw-notes-mgmt-p18.html#topic-p18-4",
+            "miw-notes-mgmt-p19.html#topic-p19-1"
+          ],
+          "decision_basis": "rule: material partial dispositioned by recurrence",
+          "decision_reason": "single occurrence against an answer that already covers the rest",
+          "best_answer_coverage": 0.51,
+          "current_best_answer_question_id": "QB9_G#q7",
+          "target_score_drifted": false,
+          "relationship_type": "TOPIC_INFERENCE_ONLY",
+          "colocated_enrichment_actions": []
+        }
+      ]
+    }
+  ]
+}
