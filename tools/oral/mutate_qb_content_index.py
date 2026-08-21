@@ -59,6 +59,18 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import build_qb_content_index as B      # noqa: E402
 import validate_qb_content_index as V   # noqa: E402
+import pathlib
+
+# Windows encodes a child process's stdout with the locale codec, so printing a
+# single non-cp1252 character -- U+26A0, which this toolchain reports and
+# deliberately injects -- kills the process. When that happens between applying
+# a mutation and restoring it, a mutated product page is left on disk. This tool
+# reaches no other shared module, so the contract is imported explicitly.
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from oral_bytes import enable_utf8_stdio      # noqa: E402
+
+enable_utf8_stdio()
+
 
 
 def load(work):

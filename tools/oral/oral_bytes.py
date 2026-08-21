@@ -29,6 +29,7 @@ Three lessons from production batches E1, E5 and E6 live here as code:
 from __future__ import annotations
 
 import pathlib
+import sys
 from typing import Iterable, NamedTuple
 
 # TAB, LF and CR are ordinary in source, JSON and prose.  Every other C0
@@ -52,6 +53,51 @@ class ControlByteHit(NamedTuple):
             "%s: 0x%02X at offset %d (line %d) -- %r"
             % (self.path, self.byte, self.offset, self.line, self.context)
         )
+
+
+def enable_utf8_stdio() -> bool:
+    """Force this process's stdout/stderr to UTF-8.  Idempotent.
+
+    Lesson 2 above governs FILE I/O and stopped there, which left the loudest
+    channel unguarded.  On Windows a child process writing to a pipe encodes
+    stdout with the locale codec, so any tool that prints a non-cp1252
+    character dies with UnicodeEncodeError -- and the corpus is full of them:
+    a single U+26A0 WARNING SIGN is what `validate_batch_a` reports when it
+    finds an editorial marker, and injecting that marker is exactly what
+    `mutate_batch_a`'s mutation F does on purpose.
+
+    The consequence was not a cosmetic traceback.  The harness died between
+    applying a mutation and restoring it, so a mutated product page was left on
+    disk -- real bytes, in `meoclass1/`, from a tool whose entire contract is to
+    leave the tree byte-identical.  Whether that happened at all depended on
+    which page the crashing mutation had picked, and PYTHONHASHSEED is unpinned,
+    so it was luck.
+
+    A guard that cannot print its own finding is a guard that cannot run.
+    `errors="backslashreplace"` rather than "strict" so that even an
+    unencodable byte degrades to visible text instead of killing the process.
+    """
+    changed = False
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is None:
+            continue
+        if (getattr(stream, "encoding", "") or "").lower().replace("-", "") == "utf8":
+            continue
+        try:
+            reconfigure(encoding="utf-8", errors="backslashreplace")
+            changed = True
+        except (ValueError, OSError):          # a stream that cannot be retuned
+            pass
+    return changed
+
+
+# Applied on import.  Every validator and every mutation harness in this
+# toolchain reaches this module -- directly or through oral_manifest -- so one
+# call here covers all of them, including any tool added later. The runner
+# additionally exports PYTHONIOENCODING to its children, which covers the
+# non-Python gates it drives.
+enable_utf8_stdio()
 
 
 def read_text(path) -> str:

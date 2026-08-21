@@ -26,6 +26,18 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+import pathlib
+
+# Windows encodes a child process's stdout with the locale codec, so printing a
+# single non-cp1252 character -- U+26A0, which this toolchain reports and
+# deliberately injects -- kills the process. When that happens between applying
+# a mutation and restoring it, a mutated product page is left on disk. This tool
+# reaches no other shared module, so the contract is imported explicitly.
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from oral_bytes import enable_utf8_stdio      # noqa: E402
+
+enable_utf8_stdio()
+
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]

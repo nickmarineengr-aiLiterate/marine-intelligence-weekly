@@ -99,6 +99,28 @@ GENERATED_ARTEFACTS = (
     "meoclass1/oral-intelligence/examiner-audit/ORAL_NOTES_IMPACT.md",
 )
 
+# Files a mutating gate is expected to leave BYTE-IDENTICAL. A mutation harness
+# injects corruption and puts it back; the tree it hands on is part of its
+# contract, not a side effect.
+#
+# Six harnesses restore only on the happy path -- mutate_batch_a/b/c/d,
+# mutate_ce_tip_review and mutate_qb_content_index have no `finally`. When
+# `mutate_batch_a` died between injecting an editorial marker and restoring it,
+# it left that marker in a real product page. Which page, and whether anything
+# was left at all, depended on which page the crashing mutation had picked, and
+# PYTHONHASHSEED is unpinned -- so it was luck.
+#
+# The runner therefore snapshots these too and puts back exactly the bytes it
+# read, by exact path, the same discipline ArtefactGuard already applies. Unlike
+# GENERATED_ARTEFACTS -- which mutating gates legitimately rewrite -- a
+# difference here is a DEFECT and the gate that caused it fails. A harness that
+# does not hand back the tree has not proved anything about the tree.
+PRODUCT_GUARDED_GLOBS = (
+    "meoclass1/QB*.html",
+    "meoclass1/SQ/*.html",
+    "tools/oral/*manifest*.json",
+)
+
 # Node 24 resolves `--test <dir>` as a MODULE to load and fails with
 # "Cannot find module". E5's runner did exactly that and the gate exited 1 in
 # 0.4s -- an invocation defect misread as a gate failure. Explicit files only.

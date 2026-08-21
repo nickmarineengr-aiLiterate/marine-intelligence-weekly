@@ -616,6 +616,57 @@ check("18. the runtime optimisation is recorded as a proposal only",
 
 
 # ===========================================================================
+# 19. A MUTATING GATE MUST HAND BACK THE TREE
+# ===========================================================================
+# mutate_batch_a died between injecting an editorial marker and restoring it and
+# left that marker in a real product page. Six harnesses restore only on the
+# happy path, so the runner guards the bytes itself -- the same discipline
+# ArtefactGuard already applies to the generated artefacts, but a STRICTER
+# class: a mutating gate legitimately rewrites those, and must leave these
+# byte-identical.
+
+check("the registry declares the product surface a mutating gate must not move",
+      bool(REG.PRODUCT_GUARDED_GLOBS)
+      and any("QB" in g for g in REG.PRODUCT_GUARDED_GLOBS),
+      str(REG.PRODUCT_GUARDED_GLOBS))
+
+_guard = R.ArtefactGuard().capture()
+check("the guard actually snapshots product bytes, not an empty set",
+      len(_guard.product_snapshot) > 80,
+      "%d file(s) snapshotted" % len(_guard.product_snapshot))
+check("the two classes are kept apart",
+      not (set(_guard.snapshot) & set(_guard.product_snapshot)),
+      "a generated artefact is restored quietly; a product page is a defect")
+
+# Non-vacuity, both directions: an untouched tree must report nothing, and a
+# changed byte must be seen AND put back exactly.
+check("an untouched tree reports no product drift", not _guard.product_dirtied())
+
+_victim = sorted(_guard.product_snapshot)[0]
+_original = _victim.read_bytes()
+try:
+    _victim.write_bytes(_original + b"<!-- probe -->")
+    check("a changed product byte is detected",
+          _guard.product_dirtied() == [_victim], _victim.name)
+    _moved = _guard.restore_product()
+    check("it is put back from the runner's OWN snapshot, by exact path",
+          _moved == [_victim] and _victim.read_bytes() == _original,
+          "never `git checkout -- .`, which destroys uncommitted work")
+finally:
+    _victim.write_bytes(_original)
+check("the probe left nothing behind", _victim.read_bytes() == _original)
+
+check("a gate that leaves product bytes dirty is FAILED, not merely tidied",
+      "product_left_dirty" in _runner_src
+      and "status = FAIL" in _runner_src.split("product_left_dirty")[1][:400],
+      "the harness gets fixed, not the symptom")
+
+check("every child process is given an explicit UTF-8 stdout",
+      'setdefault("PYTHONIOENCODING", "utf-8")' in _runner_src,
+      "covers the non-Python gates the runner drives too")
+
+
+# ===========================================================================
 print("\n%d checks, %d FAIL" % (CHECKS[0], len(FAILURES)))
 for f in FAILURES:
     print("  FAIL %s" % f)

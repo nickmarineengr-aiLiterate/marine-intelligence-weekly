@@ -665,6 +665,43 @@ if CORRECTIONS:
 
 
 # ===========================================================================
+# 12. STDOUT IS UTF-8, IN EVERY TOOL
+# ===========================================================================
+# Lesson 2 in oral_bytes governed FILE I/O and stopped there, leaving the
+# loudest channel unguarded. On Windows a child's piped stdout uses the locale
+# codec, so printing U+26A0 raises UnicodeEncodeError -- and this toolchain both
+# reports that character and deliberately injects it (mutate_batch_a mutation
+# F). The harness died between mutating a product page and restoring it, and
+# left the mutation on disk.
+
+check("oral_bytes exposes an idempotent UTF-8 stdio contract",
+      callable(getattr(B, "enable_utf8_stdio", None))
+      and B.enable_utf8_stdio() is False,
+      "already applied on import, so a second call changes nothing")
+
+check("stdout really is UTF-8 in this process",
+      (sys.stdout.encoding or "").lower().replace("-", "") == "utf8",
+      "encoding=%s" % sys.stdout.encoding)
+
+check("an unencodable character degrades to text, never to an exception",
+      "backslashreplace" in B.read_text(HERE / "oral_bytes.py"),
+      "strict would trade one crash class for another")
+
+# Non-vacuity: EVERY tool must reach the contract, whether by importing a
+# shared module or by importing it explicitly. A tool that reaches neither is
+# exactly mutate_batch_a before the fix.
+SHARED = ("oral_bytes", "oral_manifest", "oral_mutation", "oral_supersession",
+          "oral_lib", "oral_text", "oral_notes", "validate_batch_b")
+unreached = []
+for path in sorted(list(HERE.glob("validate_*.py")) + list(HERE.glob("mutate_*.py"))):
+    src = B.read_text(path)
+    if not any(name in src for name in SHARED):
+        unreached.append(path.name)
+check("every validator and mutation harness reaches the UTF-8 contract",
+      not unreached, "unreached=%s" % (unreached or "none"))
+
+
+# ===========================================================================
 print("\n%d checks, %d FAIL" % (CHECKS[0], len(FAILURES)))
 for f in FAILURES:
     print("  FAIL %s" % f)

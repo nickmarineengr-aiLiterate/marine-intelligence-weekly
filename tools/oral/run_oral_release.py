@@ -123,6 +123,14 @@ def run_process(argv, timeout, cwd=None, env=None):
     """Run a gate. Decoding is explicit: Windows would otherwise use cp1252,
     which has already manufactured 450 false diffs in an oral gate."""
     started = time.monotonic()
+    if env is None:
+        env = dict(os.environ)
+    # Windows encodes a child's piped stdout with the locale codec, so a tool
+    # printing U+26A0 dies with UnicodeEncodeError -- and `mutate_batch_a` DOES
+    # print it, because injecting an editorial marker is one of its mutations.
+    # That killed the harness between mutating a page and restoring it. Set for
+    # every gate, so the non-Python ones are covered too.
+    env.setdefault("PYTHONIOENCODING", "utf-8")
     try:
         proc = subprocess.run(
             argv, cwd=str(cwd or REPO), capture_output=True, timeout=timeout,
@@ -146,16 +154,38 @@ class ArtefactGuard:
     this repository. The runner may only put back bytes it personally read.
     """
 
-    def __init__(self, paths=REG.GENERATED_ARTEFACTS):
+    def __init__(self, paths=REG.GENERATED_ARTEFACTS,
+                 product_globs=REG.PRODUCT_GUARDED_GLOBS):
         self.paths = [REPO / p for p in paths]
+        # Product pages and manifests are guarded too, but they are a STRICTER
+        # class: a mutating gate legitimately rewrites the generated artefacts
+        # above, and must leave these byte-identical. Restoring one is therefore
+        # evidence of a defect, not routine cleanup -- see the registry note.
+        self.product = sorted({q for g in product_globs for q in REPO.glob(g)})
         self.snapshot = {}
+        self.product_snapshot = {}
 
     def capture(self):
         self.snapshot = {}
         for path in self.paths:
             if path.is_file():
                 self.snapshot[path] = path.read_bytes()
+        self.product_snapshot = {p: p.read_bytes() for p in self.product
+                                 if p.is_file()}
         return self
+
+    def product_dirtied(self):
+        return [p for p, blob in self.product_snapshot.items()
+                if not p.is_file() or p.read_bytes() != blob]
+
+    def restore_product(self):
+        """Put back exactly the product bytes captured. Returns what moved."""
+        moved = []
+        for path, blob in self.product_snapshot.items():
+            if not path.is_file() or path.read_bytes() != blob:
+                path.write_bytes(blob)
+                moved.append(path)
+        return moved
 
     def dirtied(self):
         return [p for p, blob in self.snapshot.items()
@@ -603,9 +633,25 @@ def execute(gates, args, log):
         finally:
             owner = None
             restored = guard.restore() if gate["mutates_worktree"] else []
+            product_restored = (guard.restore_product()
+                                if gate["mutates_worktree"] else [])
+
+        # A harness that does not hand the tree back has not proved anything
+        # about the tree, whatever its summary line said. This is never a
+        # downgrade of a real result: the bytes are already back, and the gate
+        # is named so the harness gets fixed rather than the symptom cleaned up.
+        if product_restored:
+            names = [p.relative_to(REPO).as_posix() for p in product_restored]
+            detail = dict(detail)
+            detail["product_left_dirty"] = names
+            status = FAIL
+            log("      PRODUCT BYTES LEFT DIRTY by %s -- restored from the "
+                "runner's own snapshot: %s" % (gid, ", ".join(names)))
 
         record = {
             "gate": gid, "status": status, "detail": detail,
+            "product_restored": [p.relative_to(REPO).as_posix()
+                                 for p in product_restored],
             "seconds": round(secs, 1), "mutates": gate["mutates_worktree"],
             "started": started.isoformat(),
             "restored": [p.relative_to(REPO).as_posix() for p in restored],
