@@ -51,6 +51,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from oral_manifest import authorisation_manifest_paths  # noqa: E402
 from validate_batch_a import Page, FORBIDDEN, QTEXT_FORBIDDEN  # noqa: E402
 from validate_batch_b import card_digests, CARD_OPEN, _balanced_end  # noqa: E402
 
@@ -123,7 +124,7 @@ def main():
     # Sibling batches may share these destination files; anything they
     # authorise is legitimate here too. Keeps this guard from expiring.
     authorised_elsewhere = {}
-    for sib in sorted(MANIFEST.parent.glob("batch_*_manifest.json")):
+    for sib in authorisation_manifest_paths(MANIFEST.parent):
         if sib == MANIFEST:
             continue
         for c in json.loads(sib.read_text(encoding="utf-8")).get("cards", []):

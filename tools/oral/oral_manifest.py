@@ -44,6 +44,16 @@ UNCLASSIFIED = "UNCLASSIFIED"
 
 REPO = pathlib.Path(__file__).resolve().parents[2]
 
+# The two record families that can authorise an edit to a card.
+#
+# A batch manifest authorises the cards its production/enrichment actions own.
+# A correction manifest authorises cards edited AFTER a batch shipped -- the
+# candidate-feedback repair path.  Both are read by every batch validator's
+# "authorised elsewhere" scan through authorisation_manifest_paths() below, so
+# a legitimate post-release correction stops reading as undeclared drift.
+BATCH_MANIFEST_GLOB = "batch_*_manifest.json"
+CORRECTION_MANIFEST_GLOB = "correction_*_manifest.json"
+
 # Refs that carry authorisation records not merged to main.  The enrichment
 # consolidation lives on a research branch by design -- it is an authoring
 # input, not a published product surface.
@@ -113,7 +123,7 @@ CARD_TARGET_FIELDS = ("file", "anchor")
 # names it "action_id".  One schema_version covering two key conventions is a
 # known corpus-wide pattern -- subparts[] does the same thing with ref/label --
 # so readers accept both rather than finding 1 of 11 manifests.
-ACTION_ID_KEYS = ("action_id", "production_action_id")
+ACTION_ID_KEYS = ("action_id", "production_action_id", "correction_action_id")
 
 
 def classify(field: str) -> str:
@@ -166,6 +176,241 @@ def resolve_authorisation_source(rel: str, commit: str | None = None) -> str | N
         if ref and _git_show(ref, rel) is not None:
             return ref
     return None
+
+
+# ---------------------------------------------------------------------------
+# POST-RELEASE CORRECTION RECORDS
+#
+# WHY A SECOND RECORD FAMILY EXISTS
+# ---------------------------------
+# A batch manifest answers "which cards did this production run create or
+# enrich?".  It cannot answer "which cards were repaired after that run
+# shipped?", because a batch closes the moment it publishes and its digests are
+# release evidence that must not be rebaselined.
+#
+# Candidate feedback arrives after publication by definition.  When the
+# fair-treatment repair landed as two ordinary commits, seven of eleven batch
+# validators went red -- correctly.  Every one of them asks the same question,
+# "is this card owned by some authorised record?", and the answer was no,
+# because no record existed that COULD own a post-release edit.
+#
+# So corrections get their own record family rather than being back-dated into
+# a batch they never belonged to.  Delegation is shared: batch and correction
+# manifests are unioned by authorisation_manifest_paths(), which every batch
+# validator's sibling scan reads.  Ownership is anchor-level, matching the
+# existing contract exactly.
+#
+# Anchor-level ownership ALONE would exempt a corrected card forever, so the
+# post-correction state is additionally pinned per card and checked against the
+# live pages by tools/oral/validate_corrections.py.  Delegation says "this card
+# was legitimately edited"; the pin says "and it is still exactly what was
+# authorised".  Neither check subsumes the other.
+# ---------------------------------------------------------------------------
+
+CORRECTION_KIND = "POST_RELEASE_CORRECTION"
+
+# Why a declared card changed.  A correction event may legitimately carry more
+# than one semantic correction -- the scope pass that follows a candidate report
+# is how sibling defects get found -- but each card must say which it was, so
+# "it shipped in the same commit" never stands in for "it is the same fix".
+CORRECTION_CLASSES = (
+    "PRIMARY_CORRECTION",          # the card the candidate actually reported
+    "DEPENDENCY_CORRECTION",       # changed because the primary card changed
+    "PROPAGATED_FACT_CORRECTION",  # same fact, wrong in another card too
+    "SCOPE_PASS_CORRECTION",       # independent defect found by the same sweep
+    "TEASER_SYNC",                 # free surface realigned to a correct gated copy
+    "INDEX_METADATA",              # derived index / metadata only
+)
+
+CORRECTION_STATUSES = ("AUTHORISED", "SUPERSEDED")
+
+CORRECTION_FIELD_CLASSES: dict[str, str] = {
+    # ---- identity and authorisation (all asserted) ----
+    "correction_id": LOAD_BEARING,
+    "kind": LOAD_BEARING,
+    "status": LOAD_BEARING,
+    "origin": LOAD_BEARING,
+    "governing_commits": LOAD_BEARING,
+    "baseline_commit": LOAD_BEARING,
+    "authorisation_source": LOAD_BEARING,
+    "cards": LOAD_BEARING,
+
+    # ---- informational ----
+    "title": INFORMATIONAL,
+    "date": INFORMATIONAL,
+    "rationale": INFORMATIONAL,
+    "note": INFORMATIONAL,
+    "known_traps_entries": INFORMATIONAL,
+    "content_index_effect": INFORMATIONAL,
+    # Files this correction touched that carry no q-card and that no release
+    # guard pins.  Recorded so the event's scope is complete; deliberately
+    # carrying NO digest, because a pin nothing reads is exactly the decoration
+    # this schema exists to forbid, and a pin on an unguarded file would expire
+    # on the next unrelated edit to it.
+    "artefacts": INFORMATIONAL,
+}
+
+CORRECTION_CARD_FIELDS = ("file", "path", "anchor",
+                          "pre_edit_digest", "post_edit_digest",
+                          "classification")
+
+_HEX64 = frozenset("0123456789abcdef")
+
+
+def classify_correction(field: str) -> str:
+    return CORRECTION_FIELD_CLASSES.get(field, UNCLASSIFIED)
+
+
+def is_correction_manifest(path) -> bool:
+    return pathlib.Path(path).name.startswith("correction_")
+
+
+def authorisation_manifest_paths(directory=None, exclude=None) -> tuple:
+    """Every record that may authorise an edit to a card: batch and correction.
+
+    This is the single definition of the "authorised elsewhere" surface.  It
+    exists as one function because ten batch validators each grew their own
+    copy of the sibling glob, and widening that surface in ten places is how
+    the two families drift apart again."""
+    directory = pathlib.Path(directory or pathlib.Path(__file__).resolve().parent)
+    exclude = pathlib.Path(exclude).resolve() if exclude else None
+    paths = []
+    for pattern in (BATCH_MANIFEST_GLOB, CORRECTION_MANIFEST_GLOB):
+        for path in directory.glob(pattern):
+            if exclude is not None and path.resolve() == exclude:
+                continue
+            paths.append(path)
+    return tuple(sorted(paths))
+
+
+def _commit_exists(sha: str) -> bool:
+    try:
+        out = subprocess.run(["git", "cat-file", "-t", sha],
+                             cwd=str(REPO), capture_output=True, check=False)
+    except OSError:
+        return False
+    return out.returncode == 0 and out.stdout.strip() == b"commit"
+
+
+def _is_digest(value) -> bool:
+    return (isinstance(value, str) and len(value) == 64
+            and all(c in _HEX64 for c in value))
+
+
+def audit_correction_manifest(path) -> list[Finding]:
+    """Every schema assertion for one post-release correction manifest."""
+    p = pathlib.Path(path)
+    name = p.name
+    findings: list[Finding] = []
+
+    def add(check: str, ok: bool, detail: str = "") -> None:
+        findings.append(Finding(name, check, ok, detail))
+
+    try:
+        manifest = json.loads(read_text(p))
+    except Exception as exc:
+        add("manifest_parses", False, "%s: %s" % (type(exc).__name__, exc))
+        return findings
+    add("manifest_parses", True, "%d top-level field(s)" % len(manifest))
+
+    unknown = sorted(k for k in manifest if classify_correction(k) == UNCLASSIFIED)
+    add("all_fields_classified", not unknown,
+        "unclassified=%s" % (unknown or "none"))
+
+    add("kind_is_correction", manifest.get("kind") == CORRECTION_KIND,
+        "kind=%s" % manifest.get("kind"))
+
+    cid = manifest.get("correction_id") or ""
+    add("correction_id_present", bool(cid), "correction_id=%s" % (cid or "-"))
+
+    # The filename must carry the identity.  A record whose id and filename
+    # disagree is two records as far as any human reader is concerned, and the
+    # sibling scan finds records by NAME.
+    slug = cid.lower().replace("-", "_")
+    expected = "correction_%s_manifest.json" % slug
+    add("correction_id_matches_filename", bool(cid) and name == expected,
+        "%s vs expected %s" % (name, expected if cid else "correction_<id>_manifest.json"))
+
+    add("status_known", manifest.get("status") in CORRECTION_STATUSES,
+        "status=%s" % manifest.get("status"))
+    add("origin_present", bool(manifest.get("origin")),
+        "origin=%s" % manifest.get("origin"))
+
+    commits = manifest.get("governing_commits") or []
+    add("governing_commits_present", bool(commits), "%d commit(s)" % len(commits))
+    dangling = [c for c in commits if not _commit_exists(c)]
+    add("governing_commits_resolve", not dangling,
+        "dangling=%s" % (dangling or "none"))
+
+    base = manifest.get("baseline_commit")
+    add("baseline_commit_resolves", bool(base) and _commit_exists(base),
+        "baseline_commit=%s" % (base or "-"))
+
+    src = manifest.get("authorisation_source")
+    if isinstance(src, str) and src.endswith((".md", ".json")):
+        where = resolve_authorisation_source(src)
+        add("authorisation_source_resolves", where is not None,
+            "%s -> %s" % (src, where or "UNRESOLVED"))
+    else:
+        add("authorisation_source_present", bool(src),
+            "authorisation_source=%s" % (src or "-"))
+
+    cards = manifest.get("cards") or []
+    add("cards_present", bool(cards), "%d card record(s)" % len(cards))
+
+    ids = [action_id_of(c) for c in cards]
+    add("action_ids_unique_and_present",
+        bool(ids) and all(ids) and len(set(ids)) == len(ids),
+        "%d id(s), %d distinct" % (len(ids), len(set(ids))))
+
+    incomplete = [action_id_of(c) or "?" for c in cards
+                  if not all(c.get(f) for f in CORRECTION_CARD_FIELDS)]
+    add("card_identity_complete", not incomplete,
+        "incomplete=%s" % (incomplete or "none"))
+
+    # `file` is the bare page name the batch validators key their
+    # authorised-elsewhere map on; `path` is repo-relative and is what the
+    # correction validator opens.  They must describe the same page.
+    mismatched = ["%s: %s vs %s" % (action_id_of(c), c.get("path"), c.get("file"))
+                  for c in cards
+                  if c.get("path") and c.get("file")
+                  and str(c["path"]).rsplit("/", 1)[-1] != c["file"]]
+    add("card_path_matches_file", not mismatched,
+        "mismatched=%s" % (mismatched or "none"))
+
+    bad_digest = [action_id_of(c) or "?" for c in cards
+                  if not (_is_digest(c.get("pre_edit_digest"))
+                          and _is_digest(c.get("post_edit_digest")))]
+    add("card_digests_well_formed", not bad_digest,
+        "malformed=%s" % (bad_digest or "none"))
+
+    # A correction that does not change the card is not a correction.
+    inert = [action_id_of(c) or "?" for c in cards
+             if c.get("pre_edit_digest") == c.get("post_edit_digest")]
+    add("card_digests_differ", not inert, "inert=%s" % (inert or "none"))
+
+    bad_class = ["%s=%s" % (action_id_of(c), c.get("classification"))
+                 for c in cards
+                 if c.get("classification") not in CORRECTION_CLASSES]
+    add("card_classifications_known", not bad_class,
+        "unknown=%s" % (bad_class or "none"))
+
+    # Exactly one card is the reported defect.  Zero means the record has lost
+    # its origin; more than one means two events were merged into one record.
+    primary = [action_id_of(c) for c in cards
+               if c.get("classification") == "PRIMARY_CORRECTION"]
+    add("exactly_one_primary_correction", len(primary) == 1,
+        "primary=%s" % (primary or "none"))
+
+    # Two copies of one card (gated + free) must agree on their post state.
+    targets: dict[tuple, set] = {}
+    for card in cards:
+        targets.setdefault((card.get("file"), card.get("anchor")), set()).add(
+            card.get("post_edit_digest"))
+    disagree = sorted("%s#%s" % t for t, d in targets.items() if len(d) > 1)
+    add("mirrored_cards_agree", not disagree, "disagree=%s" % (disagree or "none"))
+
+    return findings
 
 
 def audit_manifest(path) -> list[Finding]:
@@ -298,6 +543,8 @@ def audit_all(directory=None) -> list[Finding]:
     findings: list[Finding] = []
     for path in sorted(directory.glob("batch_*manifest.json")):
         findings.extend(audit_manifest(path))
+    for path in sorted(directory.glob(CORRECTION_MANIFEST_GLOB)):
+        findings.extend(audit_correction_manifest(path))
     return findings
 
 
@@ -311,7 +558,11 @@ def _cli(argv: list[str]) -> int:
     ap.add_argument("manifests", nargs="*", help="default: every batch manifest")
     args = ap.parse_args(argv)
 
-    findings = ([f for m in args.manifests for f in audit_manifest(m)]
+    def audit_one(m):
+        return (audit_correction_manifest(m) if is_correction_manifest(m)
+                else audit_manifest(m))
+
+    findings = ([f for m in args.manifests for f in audit_one(m)]
                 if args.manifests else audit_all())
     for finding in findings:
         if finding.ok and args.quiet:

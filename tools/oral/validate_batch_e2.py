@@ -66,6 +66,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from oral_manifest import authorisation_manifest_paths  # noqa: E402
+
 REPO = Path(__file__).resolve().parents[2]
 MANIFEST = Path(__file__).resolve().parent / "batch_e2_enrichment_manifest.json"
 QB_DIR = REPO / "meoclass1"
@@ -331,7 +334,7 @@ def main():
     # CARD ADDED / CARD REMOVED entries carry a suffix, so they can never match
     # it; an edit to a card no manifest owns still fails (mutation C).
     authorised_elsewhere = set()
-    for sib in sorted(MANIFEST.parent.glob("batch_*_manifest.json")):
+    for sib in authorisation_manifest_paths(MANIFEST.parent):
         if sib == MANIFEST:
             continue
         for sc in json.loads(sib.read_text(encoding="utf-8")).get("cards", []):

@@ -20,6 +20,9 @@ import sys
 from html.parser import HTMLParser
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from oral_manifest import authorisation_manifest_paths  # noqa: E402
+
 REPO = Path(__file__).resolve().parents[2]
 MANIFEST = Path(__file__).resolve().parent / "batch_a_manifest.json"
 QB_DIR = REPO / "meoclass1"
@@ -134,7 +137,7 @@ def main():
     # means "authorised by no batch manifest" - not "not in Batch A". Pinning
     # this guard to Batch A alone made it fail on every authorised later card.
     authorised_elsewhere = {}
-    for sib in sorted(MANIFEST.parent.glob("batch_*_manifest.json")):
+    for sib in authorisation_manifest_paths(MANIFEST.parent):
         if sib == MANIFEST:
             continue
         for c in json.loads(sib.read_text(encoding="utf-8")).get("cards", []):
