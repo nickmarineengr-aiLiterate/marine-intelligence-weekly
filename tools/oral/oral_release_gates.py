@@ -128,19 +128,26 @@ def _gate(gid, command, category, parser=PARSER_EXIT, mutates=False,
 
 
 def _batch_pair(key, validator, mutator, mut_timeout, note="",
-                baseline_derivable=False):
+                baseline_derivable=False, historical_39=True):
     """A batch contributes exactly two gates: its validator, then its mutator.
 
     The mutator depends on the validator because a mutation suite proves the
     VALIDATOR catches corruption -- running it against a validator that is
     already failing proves nothing.
+
+    ``historical_39`` defaults True because every batch that existed when the
+    count of 39 was fixed is in it.  A batch registered AFTER E6 must pass
+    False, or it silently inflates a number that exists to be checkable
+    forever.
     """
     return [
         _gate("validate_%s" % key, ["python", "%s/%s" % (_ORAL, validator)],
               CAT_BATCH, PARSER_VALIDATOR, timeout=600, note=note,
+              historical_39=historical_39,
               baseline_derivable=baseline_derivable),
         _gate("%s_mutate" % key, ["python", "%s/%s" % (_ORAL, mutator)],
               CAT_BATCH, PARSER_MUTATION, mutates=True, timeout=mut_timeout,
+              historical_39=historical_39,
               depends_on=("validate_%s" % key,)),
     ]
 
@@ -269,6 +276,20 @@ GATES = (
           historical_39=False, depends_on=("validate_followup_register",),
           note="each mutation must trip its OWN named check, not merely the "
                "byte-currency check that fires on every edit"),
+
+    # ---- follow-up production batches --------------------------------------
+    # F1 is the first batch derived from the follow-up register rather than the
+    # enrichment consolidation. It postdates E6, so historical_39 is False: the
+    # count of 39 records which gates E6 actually ran and must stay checkable.
+    #
+    # Its pair is registered here, AFTER validate_followup_register, because a
+    # follow-up batch is only meaningful if the register it was derived from is
+    # itself still valid against the live corpus.
+    *_batch_pair("batch_f1", "validate_batch_f1.py", "mutate_batch_f1.py", 1800,
+                 historical_39=False,
+                 note="follow-up batch: resolves each card's followup_id in the "
+                      "register and re-checks parent, anchor, q-text and "
+                      "relationship edge against it"),
 
     # ---- health: candidate LOCAL vs clean ref ------------------------------
     _gate("qb_health_check",

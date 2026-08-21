@@ -1,0 +1,147 @@
+{
+  "batch_id": "F1",
+  "title": "Oral examiner follow-up production - batch F1",
+  "kind": "FOLLOWUP",
+  "note": "First production batch derived from the committed follow-up authorisation register. Every action edits an EXISTING canonical card; no card is created, removed, renamed or re-anchored, and the canonical total is unchanged at 721. NOTE ON authorisation_batch_key: for the E1-E6 enrichment batches that key was a JSON path into the enrichment consolidation. The follow-up register is an AUTHORISATION_REGISTER, not a batch consolidation, and carries no batches[] node - a batch is defined by the SET OF followup_ids it implements. The key is therefore an identity label asserted against batch_id by oral_manifest.audit_manifest, while the real selector is the per-card followup_id, which validate_batch_f1.py resolves in the register and cross-checks field by field. F1 was authorised as a three-action batch (FUP-006, FUP-018, FUP-033); FUP-006 is HELD and is deliberately absent from cards[] - see followup_overlap.",
+  "authorisation_source": "tools/oral/oral_followup_register.json",
+  "authorisation_batch_key": "batches.F1",
+  "authorisation_commit": "67842dfcb4d80df9647a393948d869b91cd1518d",
+  "baseline_commit": "67842dfcb4d80df9647a393948d869b91cd1518d",
+  "expected_canonical_questions": 721,
+  "expected_question_bearing_files": 86,
+  "expected_examiner_relationships": 960,
+  "expected_examiners": 7,
+  "creates_new_cards": false,
+  "distinct_target_cards": 2,
+  "followup_overlap": "FUP-006 (GAP-0620, 'Explain how GA was applicable for ship ever given stuck in suez', parent QB1_A#q9) was authorised for F1 and is HELD, NOT withdrawn and NOT retargeted. Its target adjudication is sound and independently corroborated: the register records decision_basis 'hand adjudication against current answer bodies', and E1's own ENRICH-A003 record already names GAP-0620 on this target as 'Different limb - a worked casualty application - and NOT implemented here'. The blocker is governance, not content. QB1_A#q9 is the only F1 target pinned by an earlier manifest: batch_e1_enrichment_manifest.json pins its post_edit_digest a1deaf3445bc1c88 and validate_batch_e1.py compares that pin to the LIVE page. Anchor-level sibling delegation exempts the card from only_authorised_cards_changed but NOT from manifest_digests_match, which has no delegation path in any of the eleven batch validators. Proved empirically on a scratch insert: validate_batch_e1.py went to 25 checks / 1 FAIL, failing exactly manifest_digests_match ['QB1_A.html#q9 post'] and nothing else; the scratch edit was then restored byte-exactly. Implementing FUP-006 today would therefore either ship a red historical guard or require rebaselining E1's manifest, which is forbidden. Eight of the 35 register actions are colocated on enriched cards (FUP-003, 006, 008, 009, 013, 017, 025, 034), so this is a structural gap, not a one-off. See the F1 handoff for the recommended bounded fix.",
+  "held_actions": [
+    {
+      "followup_id": "FUP-006",
+      "status": "HELD_GOVERNANCE",
+      "target": "QB1_A.html#q9",
+      "register_status_unchanged": "AUTHORISED_NOT_STARTED",
+      "blocker": "batch_e1_enrichment_manifest.json pins this card's post_edit_digest a1deaf3445bc1c88, and validate_batch_e1.py compares that pin to the LIVE page. Anchor-level sibling delegation exempts the card from only_authorised_cards_changed but NOT from manifest_digests_match, which has no delegation path in any of the eleven batch validators. Producing FUP-006 would therefore require either shipping a red historical guard or rebaselining E1's manifest.",
+      "blocking_manifest": "batch_e1_enrichment_manifest.json",
+      "blocking_action": "ENRICH-A003",
+      "blocking_validator": "validate_batch_e1.py",
+      "blocking_check": "manifest_digests_match",
+      "empirical_proof": "A scratch insert into QB1_A#q9 took validate_batch_e1.py to 25 checks / 1 FAIL, failing exactly manifest_digests_match ['QB1_A.html#q9 post'] and nothing else; the other 24 checks, including edits_purely_additive and only_authorised_cards_changed, stayed green. The scratch edit was then restored byte-exactly to sha256 9aab34d4782b7d148f6460b0f7ee469d2f5e4eeccde7d3f22b04bf32c3c1bfe3.",
+      "not_this": "NOT REJECTED, NOT RETARGET_REQUIRED, NOT ALREADY_COVERED. The target is valid and hand-adjudicated, the placement is valid, the technical answer is supportable, and the current-live status is PARTIALLY_COVERED - the card carries an Ever Given casualty anchor but never works the YAR Rule A elements through the Ever Given facts.",
+      "resolution_owner": "a dedicated historical digest-supersession contract, designed once for every affected historical manifest. Explicitly NOT an F1-local exception, a FUP-006-specific bypass, a rebaselined E1 digest, or relaxed digest checking.",
+      "work_still_owed": true
+    }
+  ],
+  "sibling_pin_delegation": [
+    "Forward direction: neither F1 target is pinned by any earlier record. Checked programmatically over every batch_*_manifest.json and correction_*_manifest.json on disk - QB3_I.html#q4 and QB9_C.html#q5 appear in none of them. F1 therefore needs no digest-pin exemption of its own.",
+    "Reverse direction: every earlier guard discovers sibling records through oral_manifest.authorisation_manifest_paths(). THIS FILE MUST EXIST BEFORE those guards run, or batches A-D, GAP-0609 and E1-E6 will all report genuine-looking drift on two cards that were legitimately edited. The delegation is non-vacuous in exactly that sense and batch_f1_mutate mutation H proves it: with this manifest removed from the surface, an earlier validator fails.",
+    "F1 supersedes no earlier pin, because it edits no card an earlier record pinned. The one action that WOULD have required a supersession contract (FUP-006 on QB1_A#q9) is held for that reason rather than implemented without one."
+  ],
+  "cards": [
+    {
+      "action_id": "FUP-018",
+      "followup_id": "FUP-018",
+      "family_id": "GAP-0126",
+      "source_occurrence_ids": ["ASC-0082"],
+      "examiners": ["John"],
+      "file": "QB3_I.html",
+      "anchor": "q4",
+      "priority": "F-P1",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "verification_scope_basis": "The limb asserts a published experimental mechanism (two-phase cyprid adhesive; settlement suppression on hydrogels) attributed to named papers. That is an external claim, so it is not TECHNICAL_REASONING_ONLY, whose recorded meaning in this corpus is 'no external claim asserted beyond standard architecture'. It is not a rule, class requirement or OEM specification, so the remaining governed class is PRIMARY_AUTHORITY_REQUIRED, discharged against the primary literature rather than a regulator.",
+      "relationship_type": "EXPECTED_DETAIL",
+      "relationship_edge": {
+        "parent_question": "QB3_I#q4",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-018",
+        "answer_home": "QB3_I#q4"
+      },
+      "original_asks": ["Hydrogel - why barnacles not attaching?"],
+      "q_text": "What is hydrogel antifouling technology and how does it work?",
+      "missing_limb": "The card sets up the mechanism generically - 'marine organisms rely on biological adhesives requiring a solid substrate; the water layer masks the solid hull' - but never delivers the barnacle-specific step the examiner pushed for: that the cyprid must DEWATER its footprint before its cement can bond, and why a hydrogel's bound water defeats exactly that step.",
+      "limb_sentence": "The current answer lacks why barnacles in particular cannot attach - the two-phase cyprid adhesive, the lipid pre-treatment that must displace interfacial water, and the bound water of the polymer network that prevents it.",
+      "current_live_adjudication": "PARTIALLY_COVERED. Placed as a deeper limb of the parent answer rather than a related-question card, preserving the EXPECTED_DETAIL semantic. Complementary to QB3_I#q3, which mentions barnacles only for foul-release silicone (low surface energy, weak adhesion) - a different mechanism; the new limb draws that distinction explicitly and so reinforces the card's existing 'Common CE Failures' warning against confusing the two.",
+      "changed_sections": [
+        "answer-body: new h4 'Why Barnacles in Particular Cannot Attach' + 3 paragraphs, inserted between 'Mechanism of Action' and 'Relevance to the AFS Convention'"
+      ],
+      "timed_blocks_changed": false,
+      "currentness": {
+        "required_by_register": false,
+        "batch_decision": "NOT_REQUIRED",
+        "basis": "The limb asserts a settlement mechanism established in the peer-reviewed literature (2011 and 2014). It names no office-holder, limit, convention status, adoption or entry-into-force date, current guidance, institution name or contact detail. Independently re-inspected against the section 6 trigger list rather than accepting the register's conservative floor.",
+        "triggers_found": []
+      },
+      "authority": [
+        "Gohad N.V., Aldred N., Hartshorn C.M., Lee Y.J., Cicerone M.T., Orihuela B., Clare A.S., Rittschof D., Mount A.S., 'Synergistic roles for lipids and proteins in the permanent adhesive of barnacle larvae', Nature Communications 5:4414 (2014), DOI 10.1038/ncomms5414 - the cyprid adhesive is bi-phasic; lipids are secreted FIRST and displace water from the surface interface, creating the environment into which the phosphoproteins are then introduced.",
+        "Murosaki T., Ahmed N., Gong J.P., 'Antifouling properties of hydrogels', Science and Technology of Advanced Materials 12(6):064706 (2011) - hydrogels show antifouling activity against barnacles in both laboratory assay and the marine environment, and the extremely low settlement is attributed specifically to antifouling properties against the barnacle cypris."
+      ],
+      "authority_note": "The Nature Communications paper states that the lipids 'possibly displace water from the surface interface'. That hedge is preserved in the card as 'understood to displace water', rather than being hardened into a settled finding.",
+      "claims_added": [
+        "cyprid",
+        "two phases, not one",
+        "hydrophobic lipid",
+        "phosphoprotein",
+        "bound into the hydrophilic polymer network",
+        "Nature Communications 5:4414, 2014",
+        "Science and Technology of Advanced Materials 12(6):064706, 2011"
+      ],
+      "pre_edit_digest": "32c106ad864863f3",
+      "post_edit_digest": "c218d41abda781aa",
+      "byte_delta": 2034,
+      "status": "IMPLEMENTED"
+    },
+    {
+      "action_id": "FUP-033",
+      "followup_id": "FUP-033",
+      "family_id": "GAP-0607",
+      "source_occurrence_ids": ["ASC-0643"],
+      "examiners": ["Nair"],
+      "file": "QB9_C.html",
+      "anchor": "q5",
+      "priority": "F-P1",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "verification_scope_basis": "Every point in the contrast is anchored to a statutory provision (MIA 1906 ss.6 and 27(3); Motor Vehicles Act 1988 Chapter XI s.146; Marine Insurance Act 1963). Statute is asserted, so the governed class is PRIMARY_AUTHORITY_REQUIRED.",
+      "relationship_type": "FOLLOW_UP",
+      "relationship_edge": {
+        "parent_question": "QB9_C#q5",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-033",
+        "answer_home": "QB9_C#q5"
+      },
+      "original_asks": ["Diff.btwn marine insurance and car insurance"],
+      "q_text": "Insurance principles - list all principles of marine insurance and explain each.",
+      "missing_limb": "The card lists and explains the six principles but never contrasts marine insurance with the consumer motor insurance a candidate already understands, which is what the examiner actually pushed for.",
+      "limb_sentence": "The current answer lacks the marine-against-motor framing contrast: compulsory statutory third-party cover, interest at the time of loss, the valued policy, general average and salvage, and liability carried by a mutual rather than a policy.",
+      "current_live_adjudication": "MISSING. Grepped corpus-wide for 'car insurance', 'motor insurance', 'motor policy' and 'automobile insurance' across meoclass1/**.html: zero hits, so this is a genuine gap rather than a duplicate. The score-chosen rival target QB10_B#q1 was inspected and rejected on sight - it is 'Give a consolidated overview of SOLAS and MARPOL amendments entering into force from 2024 through 2028', topically unrelated at coverage 0.27; the register's hand adjudication to QB9_C#q5 is correct.",
+      "placement_note": "The register's decision_reason calls this 'an opening follow-up'. Read as a framing device WITHIN the limb, not as a re-ordering of the card: the contrast is placed as a closing section of the answer body, after the P&I section, because putting a comparison ahead of the six principles would displace the answer to the question actually asked. The card's structured relationship_type is FOLLOW_UP and the examiner-chain edge is appended, which is consistent.",
+      "changed_sections": [
+        "answer-body: new h4 'Marine Insurance Against Motor Insurance' + intro paragraph + 5 single-item ul blocks + India note, inserted after 'Which Principles Apply to P&I?' and before the reg-box",
+        "deep-dive 'Examiner Chain': the directed follow-up edge appended to Nair's existing chain"
+      ],
+      "timed_blocks_changed": false,
+      "currentness": {
+        "required_by_register": false,
+        "batch_decision": "VERIFIED_CURRENT",
+        "basis": "The register's floor said no exposure, but section 6 requires independent inspection and this limb DOES assert current statutory status - that motor third-party cover is compulsory in India today, and that the Indian governing statute is the 1963 Act. Both were checked rather than assumed. Deliberately excluded from the limb: the UK Insurance Act 2015 reform of the duty of fair presentation, which would interact with the card's existing statement that non-disclosure lets the underwriter void from inception. That statement is pre-existing canonical text, outside this authorised limb, and is recorded as debt rather than silently rewritten.",
+        "triggers_found": ["current statutory status of compulsory motor third-party insurance in India", "current governing Indian marine insurance statute"]
+      },
+      "authority": [
+        "Marine Insurance Act 1906 s.6 - the assured must be interested in the subject-matter insured at the time of the loss though he need not be interested when the insurance is effected; where insured 'lost or not lost' the assured may recover although interest was acquired after the loss, unless he was aware of the loss and the insurer was not.",
+        "Marine Insurance Act 1906 s.27(3) - subject to the provisions of the Act, and in the absence of fraud, the value fixed by the policy is, as between insurer and assured, conclusive of the insurable value, whether the loss be total or partial.",
+        "Motor Vehicles Act, 1988 (India), Chapter XI, s.146 - no person shall use, or allow to be used, a motor vehicle in a public place unless there is in force a policy of insurance complying with the requirements of that Chapter in respect of third-party risks.",
+        "Marine Insurance Act, 1963 (India) - reproduces the MIA 1906 scheme, including insurable interest at the time of loss and the conclusiveness of an agreed value in a valued policy."
+      ],
+      "claims_added": [
+        "Motor Vehicles Act, 1988, Chapter XI, Section 146",
+        "Section 6, MIA 1906",
+        "lost or not lost",
+        "Section 27(3), MIA 1906",
+        "Insured Declared Value",
+        "Marine Insurance Act, 1963"
+      ],
+      "pre_edit_digest": "d9a40dbbc1eab69f",
+      "post_edit_digest": "3f2b8beb9c5cba66",
+      "byte_delta": 2896,
+      "status": "IMPLEMENTED"
+    }
+  ]
+}

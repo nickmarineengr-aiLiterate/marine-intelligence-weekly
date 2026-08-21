@@ -91,6 +91,14 @@ FIELD_CLASSES: dict[str, str] = {
     "shared_target": LOAD_BEARING,
     "shared_target_actions": LOAD_BEARING,
     "sibling_pin_delegation": LOAD_BEARING,
+    # Actions a batch was authorised to produce and deliberately did NOT.
+    #
+    # A held action leaves no cards[] entry, so nothing else in the schema can
+    # see it: an authorised action that is quietly dropped and an authorised
+    # action that was never authorised look identical. Recording the hold as
+    # STRUCTURE rather than as prose in `note` is what makes it assertable --
+    # and it is asserted below, so it cannot become decoration.
+    "held_actions": LOAD_BEARING,
     "authorisation_count_key": LOAD_BEARING,
     "actual_new_card_count": LOAD_BEARING,
     "examiner_relationship_delta": LOAD_BEARING,
@@ -117,6 +125,18 @@ FIELD_CLASSES: dict[str, str] = {
 # through action_id_of(), because the two manifest generations spell it
 # differently and both remain valid release evidence.
 CARD_TARGET_FIELDS = ("file", "anchor")
+
+# Why an authorised action was NOT produced. Deliberately small, and
+# deliberately not overlapping the register's own dispositions: a hold says
+# "authorised, still authorised, blocked" and is NOT the same claim as
+# RETARGET_REQUIRED (the parent is wrong), ALREADY_COVERED (the limb is there)
+# or a withdrawal (it should never have been authorised). Recording a hold as
+# any of those would erase the fact that the work is still owed.
+HELD_STATUSES = (
+    "HELD_GOVERNANCE",   # blocked by the authorisation/guard contract itself
+    "HELD_AUTHORITY",    # blocked by unresolved primary authority
+    "HELD_TARGET",       # blocked by unresolved target adjudication
+)
 
 # Generation 1 (batches A-D, gap0609) creates new cards and names the action
 # "production_action_id".  Generation 2 (E1-E6) enriches existing cards and
@@ -520,6 +540,35 @@ def audit_manifest(path) -> list[Finding]:
                 disagree.append("%s#%s" % target)
         add("shared_target_digests_agree", not disagree,
             "disagree=%s" % (disagree or "none"))
+
+    # 5b. Held actions -- authorised, deliberately not produced.
+    #
+    # The failure mode this catches is a batch quietly narrowing its own scope.
+    # A held action has no cards[] entry, so without a structured record there
+    # is nothing to compare a later audit against, and "we were never asked to
+    # do it" becomes indistinguishable from "we decided not to and said so".
+    #
+    # A hold must therefore name itself, say WHY in a governed status, and
+    # carry a blocker a reader can act on. It must also NOT appear in cards[],
+    # because an action cannot be both held and produced.
+    held = manifest.get("held_actions")
+    if held is not None:
+        produced = {action_id_of(c) for c in cards}
+        bad_shape = [h.get("followup_id") or "?" for h in held
+                     if not (isinstance(h, dict) and h.get("followup_id")
+                             and h.get("target") and h.get("blocker"))]
+        add("held_actions_well_formed", not bad_shape,
+            "malformed=%s" % (bad_shape or "none"))
+
+        bad_status = ["%s=%s" % (h.get("followup_id"), h.get("status"))
+                      for h in held if h.get("status") not in HELD_STATUSES]
+        add("held_action_status_governed", not bad_status,
+            "unknown=%s" % (bad_status or "none"))
+
+        both = sorted(h.get("followup_id") for h in held
+                      if h.get("followup_id") in produced)
+        add("held_actions_are_not_also_produced", not both,
+            "both=%s" % (both or "none"))
 
     # 6. distinct_target_cards, when declared, must be true.
     if "distinct_target_cards" in manifest:
