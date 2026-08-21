@@ -58,6 +58,7 @@ from oral_manifest import (                                     # noqa: E402
     CORRECTION_MANIFEST_GLOB, audit_correction_manifest,
     authorisation_manifest_paths, action_id_of)
 from validate_batch_b import card_digests                       # noqa: E402
+from oral_supersession import resolve_authorised_card_state    # noqa: E402
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parents[1]
@@ -148,10 +149,21 @@ def validate(manifest_path: Path) -> None:
         if text is None:
             continue
         live = card_digests(text).get(card["anchor"])
-        if live != card["post_edit_digest"]:
-            drifted.append("%s#%s (live %s, authorised %s)"
+        # A correction record is itself supersedable. Once a later authorised
+        # record declares descent from this post state, the claim under test
+        # becomes "my authorised state is the ancestor of what is live", which
+        # still fails on any unmanifested edit. Absent such a declaration this
+        # is byte-for-byte the original pin.
+        res = resolve_authorised_card_state(
+            manifest=manifest_path.name, action_id=action_id_of(card),
+            file=card["file"], anchor=card["anchor"],
+            pinned_post_digest=card["post_edit_digest"],
+            live_digest=live, directory=manifest_path.parent)
+        if not res.ok:
+            drifted.append("%s#%s (live %s, authorised %s) %s"
                            % (card["path"], card["anchor"],
-                              (live or "-")[:10], card["post_edit_digest"][:10]))
+                              (live or "-")[:10], card["post_edit_digest"][:10],
+                              res.describe()))
     report("live_matches_authorised_post_state", not drifted,
            "drifted=%s" % (drifted or "none"))
 

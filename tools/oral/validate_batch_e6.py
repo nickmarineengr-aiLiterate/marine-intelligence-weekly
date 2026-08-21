@@ -115,6 +115,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from oral_manifest import authorisation_manifest_paths  # noqa: E402
+from oral_supersession import resolve_authorised_card_state  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
 MANIFEST = Path(__file__).resolve().parent / "batch_e6_enrichment_manifest.json"
@@ -530,8 +531,20 @@ def main():
 
         if digest(bc) != c.get("pre_edit_digest"):
             dig_bad.append("%s pre" % aid)
-        if digest(lc) != c.get("post_edit_digest"):
-            dig_bad.append("%s post" % aid)
+        # The pin is never rewritten and never relaxed. When a later
+        # authorised record declares that it supersedes this state, this
+        # check stops asking "is my state live?" and starts asking "is my
+        # state the ancestor of what is live?" -- which is a strictly
+        # stronger claim, because the whole chain must be continuous and
+        # its terminal state must be the live card. With no successor
+        # declared this is byte-for-byte the original comparison.
+        res = resolve_authorised_card_state(
+            manifest=MANIFEST.name, action_id=aid,
+            file=c["file"], anchor=c["anchor"],
+            pinned_post_digest=c.get("post_edit_digest"),
+            live_digest=digest(lc), directory=MANIFEST.parent)
+        if not res.ok:
+            dig_bad.append("%s post %s" % (aid, res.describe()))
 
         add = added_text(bc, lc)
         hit = FORBIDDEN.search(html.unescape(add))

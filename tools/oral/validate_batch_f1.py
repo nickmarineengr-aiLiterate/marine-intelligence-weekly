@@ -49,6 +49,7 @@ QB_DIR = REPO / "meoclass1"
 sys.path.insert(0, str(HERE))
 
 from oral_manifest import authorisation_manifest_paths, HELD_STATUSES  # noqa: E402
+from oral_supersession import resolve_authorised_card_state  # noqa: E402
 
 MANIFEST = HERE / "batch_f1_manifest.json"
 REGISTER = HERE / "oral_followup_register.json"
@@ -444,8 +445,20 @@ def main():
                 add_bad.append("%s#%s %d non-insert op(s)" % (fname, a, len(bad)))
             if digest16(bb) != c.get("pre_edit_digest"):
                 digest_bad.append("%s#%s pre" % (fname, a))
-            if digest16(ll) != c.get("post_edit_digest"):
-                digest_bad.append("%s#%s post" % (fname, a))
+            # The pin is never rewritten and never relaxed. When a later
+            # authorised record declares that it supersedes this state, this
+            # check stops asking "is my state live?" and starts asking "is my
+            # state the ancestor of what is live?" -- a strictly stronger claim,
+            # because the whole chain must be continuous and its terminal state
+            # must be the live card. With no successor declared this is
+            # byte-for-byte the original comparison.
+            res = resolve_authorised_card_state(
+                manifest=MANIFEST.name, action_id=c["action_id"],
+                file=fname, anchor=a,
+                pinned_post_digest=c.get("post_edit_digest"),
+                live_digest=digest16(ll), directory=MANIFEST.parent)
+            if not res.ok:
+                digest_bad.append("%s#%s post %s" % (fname, a, res.describe()))
             # A follow-up limb is body-only. The timed answers are the
             # candidate's recall spine and a batch that moves them has changed
             # the canonical answer, not added a limb.

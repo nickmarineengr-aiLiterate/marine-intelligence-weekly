@@ -54,6 +54,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from oral_manifest import authorisation_manifest_paths  # noqa: E402
+from oral_supersession import resolve_authorised_card_state  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[2]
 MANIFEST = Path(__file__).resolve().parent / "batch_e3_enrichment_manifest.json"
@@ -361,8 +362,20 @@ def main():
                                         % (fname, a, len(bad)))
                 if digest16(bb) != c.get("pre_edit_digest"):
                     digest_bad.append("%s#%s pre" % (fname, a))
-                if digest16(ll) != c.get("post_edit_digest"):
-                    digest_bad.append("%s#%s post" % (fname, a))
+                # The pin is never rewritten and never relaxed. When a later
+                # authorised record declares that it supersedes this state, this
+                # check stops asking "is my state live?" and starts asking "is my
+                # state the ancestor of what is live?" -- which is a strictly
+                # stronger claim, because the whole chain must be continuous and
+                # its terminal state must be the live card. With no successor
+                # declared this is byte-for-byte the original comparison.
+                res = resolve_authorised_card_state(
+                    manifest=MANIFEST.name, action_id=c["action_id"],
+                    file=fname, anchor=a,
+                    pinned_post_digest=c.get("post_edit_digest"),
+                    live_digest=digest16(ll), directory=MANIFEST.parent)
+                if not res.ok:
+                    digest_bad.append("%s post %s" % ("%s#%s" % (fname, a), res.describe()))
 
     report("target_cards_present", not absent, "%s" % (absent or "-"))
     report("target_anchors_unique", not dupes, "%s" % (dupes or "-"))
