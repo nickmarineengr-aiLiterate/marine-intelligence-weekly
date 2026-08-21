@@ -103,12 +103,15 @@ check("determinism is registered OUTSIDE the historical 39",
 # list rather than hardcoded, because a hardcoded total is a guard that expires
 # the next time a gate is registered.
 POST_E6_GATES = [
+    "batch_f1_mutate",
     "corrections_mutate",
     "followup_register_mutate",
+    "validate_batch_f1",
     "validate_corrections",
     "validate_followup_register",
 ]
-POST_E6_MUTATION_SUITES = ["corrections_mutate", "followup_register_mutate"]
+POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "corrections_mutate",
+                           "followup_register_mutate"]
 
 # E6 reported 266 mutations across 15 suites. That number is HISTORY and stays
 # pinned to the historical gates; post-E6 suites are counted separately rather
