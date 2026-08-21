@@ -667,6 +667,40 @@ check("every child process is given an explicit UTF-8 stdout",
 
 
 # ===========================================================================
+# 20. A KILLED GATE IS NOT A FAILED CHECK
+# ===========================================================================
+# batch_e5_mutate was killed at exactly 2400.1s and reported "no parseable
+# mutation summary" -- true, and completely misleading. It reads as a broken
+# harness when the harness was simply not given enough time, and it hides that
+# the kill landed INSIDE a mutation and left a product page dirty.
+
+_status, _detail = R.classify_mutation("", "TIMEOUT after 2400s", 124)
+check("a timed-out mutation suite is reported as a TIMEOUT",
+      _status == R.UNAVAILABLE and _detail.get("timeout") is True
+      and "TIMEOUT" in _detail["error"],
+      _detail["error"][:80])
+check("a genuinely unparseable summary still says so",
+      R.classify_mutation("nothing useful here", "", 1)[1].get("timeout") is None,
+      "the two diagnoses stay distinct")
+check("a healthy suite is unaffected by the timeout branch",
+      R.classify_mutation("12 mutations, 0 escape(s), 0 no-op(s), 0 crash(es)",
+                          "", 0)[0] == R.PASS)
+
+# A timeout is a resource bound, and one tuned to a stopwatch expires: every
+# validator gets slower as the authorisation surface grows, because every one of
+# them scans it. The registry must carry the ARITHMETIC, not just a number.
+_reg_src = (Path(REG.__file__)).read_text(encoding="utf-8")
+check("the registry records how to size a mutation timeout",
+      "mutations + 2" in _reg_src and "SIZING A MUTATION TIMEOUT" in _reg_src,
+      "(mutations + 2) x the validator's own runtime")
+check("the two suites that needed resizing carry their arithmetic",
+      REG.by_id("batch_e5_mutate")["timeout"] >= 5000
+      and REG.by_id("batch_e6_mutate")["timeout"] >= 4000,
+      "e5=%ds e6=%ds" % (REG.by_id("batch_e5_mutate")["timeout"],
+                         REG.by_id("batch_e6_mutate")["timeout"]))
+
+
+# ===========================================================================
 print("\n%d checks, %d FAIL" % (CHECKS[0], len(FAILURES)))
 for f in FAILURES:
     print("  FAIL %s" % f)

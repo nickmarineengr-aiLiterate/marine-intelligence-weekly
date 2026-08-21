@@ -149,6 +149,23 @@ def _gate(gid, command, category, parser=PARSER_EXIT, mutates=False,
     }
 
 
+# SIZING A MUTATION TIMEOUT
+# -------------------------
+# A mutation harness re-runs its whole validator once per mutation, plus a
+# control run before and a restore check after. So its wall time is very close
+# to
+#           (mutations + 2) x that validator's own runtime
+#
+# and a timeout set from a stopwatch on the day is a guess that expires. E5's
+# 2400s was comfortable when it was written and is not now: its validator takes
+# 103.7s and the suite has 25 mutations, so it needs ~2800s and was killed at
+# exactly 2400.1s. The suite had proved nothing, and the kill landed inside a
+# mutation, leaving a mutated product page behind.
+#
+# When adding or re-timing a pair, measure the VALIDATOR (`--gate validate_...`),
+# multiply by mutations + 2, and double it. Do not tune a timeout down to what
+# was observed once; the validators get slower as the authorisation surface
+# grows, because every one of them scans it.
 def _batch_pair(key, validator, mutator, mut_timeout, note="",
                 baseline_derivable=False, historical_39=True):
     """A batch contributes exactly two gates: its validator, then its mutator.
@@ -212,8 +229,12 @@ GATES = (
     *_batch_pair("batch_e2", "validate_batch_e2.py", "mutate_batch_e2.py", 1800),
     *_batch_pair("batch_e3", "validate_batch_e3.py", "mutate_batch_e3.py", 1800),
     *_batch_pair("batch_e4", "validate_batch_e4.py", "mutate_batch_e4.py", 1200),
-    *_batch_pair("batch_e5", "validate_batch_e5.py", "mutate_batch_e5.py", 2400),
-    *_batch_pair("batch_e6", "validate_batch_e6.py", "mutate_batch_e6.py", 2400,
+    # 25 mutations x a 103.7s validator = ~2800s needed. The old 2400s killed
+    # it at 2400.1s. Sized by the rule above, with headroom.
+    *_batch_pair("batch_e5", "validate_batch_e5.py", "mutate_batch_e5.py", 6000),
+    # 33 mutations, and its control additionally derives a baseline from a
+    # temporary worktree because of the evidence debt below.
+    *_batch_pair("batch_e6", "validate_batch_e6.py", "mutate_batch_e6.py", 4800,
                  baseline_derivable=True,
                  note="carries the line_endings_homogeneous_per_file evidence "
                       "debt; its baseline is DERIVED, never declared"),

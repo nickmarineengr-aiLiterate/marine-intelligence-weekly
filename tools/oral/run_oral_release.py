@@ -244,6 +244,21 @@ def classify_validator(out, err, rc):
     return (PASS if int(fails) == 0 and rc == 0 else FAIL), detail
 
 
+TIMEOUT_RC = 124
+
+
+def timed_out(rc, err):
+    """A killed gate is not a gate that failed a check.
+
+    `run_process` returns 124 with a TIMEOUT marker. Without this, a suite that
+    was killed mid-run reports "no parseable mutation summary" -- true, and
+    completely misleading: it reads as a broken harness when the harness was
+    simply not given enough time, and it hides that the kill may have landed
+    inside a mutation.
+    """
+    return rc == TIMEOUT_RC or "TIMEOUT after" in (err or "")
+
+
 def classify_mutation(out, err, rc):
     """Delegate entirely to the shared parser.
 
@@ -251,6 +266,11 @@ def classify_mutation(out, err, rc):
     full of the validator's own FAIL output -- that is the evidence a mutation
     was CAUGHT -- so only the harness's summary line carries the verdict.
     """
+    if timed_out(rc, err):
+        return UNAVAILABLE, {"error": "TIMEOUT -- the suite was killed before"
+                             " it finished; size the gate timeout from"
+                             " (mutations + 2) x the validator runtime",
+                             "timeout": True, "exit": rc}
     try:
         summary = parse_summary(out + "\n" + err)
     except ValueError as exc:
