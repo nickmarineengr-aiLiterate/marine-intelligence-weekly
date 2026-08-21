@@ -355,6 +355,78 @@ touched by E6's `A046`. Keep `FUP-034`/`FUP-035` out of the first batch.
 
 ---
 
+### 7.4 Registering a follow-up batch — what F1 had to change
+
+A follow-up batch is an ordinary batch on the release surface, but it is the
+first thing to be added *after* the historical 39 were fixed, so two counters
+had to stop being hardcoded:
+
+* `_batch_pair()` takes `historical_39` and a post-E6 batch **must** pass
+  `False`. Defaulting True is right for every batch that existed when the count
+  was fixed and wrong for every batch after it.
+* Its two gate ids go in `POST_E6_GATES` and, for the mutator,
+  `POST_E6_MUTATION_SUITES` in `test_oral_release_runner.py`. The totals derive
+  from those lists, so this is one reviewable line each.
+* `test_oral_release_infra.py` asserted `len(manifests) == 11`. **F1 turned that
+  red simply by existing** — guard-expiry inverted. It is now the enumerated
+  `EXPECTED_BATCH_MANIFESTS`, matched both ways.
+
+A batch may also HOLD an action it was authorised to produce. **Record the hold
+as structure, never as prose:** `held_actions` is `LOAD_BEARING` in
+`FIELD_CLASSES` and asserted by `audit_manifest`, and carries the id, a governed
+`HELD_STATUSES` value, the target, the blocker, the empirical proof and
+`work_still_owed`. A held action has no `cards[]` entry, so without that record
+"we were never asked to do it" is indistinguishable from "we held it and said
+so". `HELD_GOVERNANCE` is **not** `REJECTED`, `RETARGET_REQUIRED` or
+`ALREADY_COVERED` — those erase the fact that the work is still owed.
+
+**A held action must be as guarded as an implemented one.** Six mutations exist
+only for it: edit its parent card, drop its declaration, restate it as a
+rejection, mark the work no longer owed, strip its proof, point it at the wrong
+target — and one more edits the **register** to say the action was produced,
+because the register is an authorisation record, not a status board, and
+disguising a hold there would hide outstanding work from every future session.
+
+### 7.4a A non-green validator can make its mutator unrunnable
+
+`mutate_batch_e6.py` aborts with **exit 2** unless its control validator is
+green, which is correct — mutating against an already-failing validator proves
+nothing. But `validate_batch_e6` is permanently non-green from the line-ending
+evidence debt, so **the E6 mutator can never run**, the runner reports
+`UNAVAILABLE`, and `UNAVAILABLE` is release-critical: a default `--full` run
+stops at gate 28 of 46 and never reaches health, audit, determinism or any later
+batch.
+
+Two lessons. First, **classifying a validator as `PRE_EXISTING_BASELINE` does
+not neutralise its debt** — trace the dependents, because a mutator gated on
+that validator fails harder than the validator did. Second, a gate that has not
+run since the debt appeared is not evidence of anything; use `--keep-going` to
+get the remaining gates and report the blocker separately, rather than quietly
+treating a truncated run as a pass.
+
+### 7.5 The post-pin gap — why 8 follow-ups cannot be produced yet
+
+**Anchor-level delegation does not cover a digest pin.** Every generation-2
+validator pins its own cards with `digest16(live) == post_edit_digest`, and that
+check has **no delegation path in any of the eleven batch validators** — unlike
+`only_authorised_cards_changed` immediately above it, which does.
+
+So a follow-up landing on a card a shipped enrichment already edited turns that
+enrichment's validator red. Proved on `QB1_A#q9`: a scratch insert took
+`validate_batch_e1.py` to *25 checks, 1 FAIL*, failing exactly
+`manifest_digests_match ['QB1_A.html#q9 post']` and nothing else.
+
+This blocks the **8 colocated actions** — FUP-003, 006, 008, 009, 013, 017, 025,
+034. Do not schedule them until a **post-pin supersession contract** exists:
+a later manifest declares `supersedes_post_pins`, the earlier validator consults
+it, and it holds only when the superseding record's own pin matches live — so
+the live state stays pinned by exactly one record. Build it in
+`oral_manifest.py`, the single shared surface, and prove non-vacuity both ways.
+
+Until then a colocated follow-up has exactly two wrong options — ship a red
+historical guard, or rebaseline a historical manifest — so the governed answer
+is to **hold the action**, as F1 held FUP-006.
+
 ## 8. Sibling-manifest delegation
 
 A later authorised change must be accepted by an older batch's guard, through explicit
