@@ -666,6 +666,8 @@ both `meoclass1/QB1_A.html` and the public teaser `SQ/QB1_A.html` — the Entry 
 standing rule (SQ counterpart corrected in the same session) applied. Q25 v1.0 →
 v1.1; file v1.9 → v2.0.
 
+**Refinement, same day.** The first pass of this fix described the Guidelines as "adopted by the IMO Assembly, resolution A.987(24)". Checked against the resolution text itself: **A.987(24) (adopted 1 December 2005) does not contain the Guidelines**. It urges States to respect seafarers' human rights, to investigate expeditiously and to allow prompt repatriation or re-embarkation; it records that recommendatory guidelines are the appropriate means; and it *authorises* the Legal Committee and the ILO Governing Body to promulgate the Guidelines once the Joint IMO/ILO Ad Hoc Expert Working Group finalised them. The Guidelines text was adopted by **LEG.3(91) on 27 April 2006** and by the **ILO Governing Body, 296th session, 12 June 2006**, and promulgated **1 July 2006**. The Casualty Investigation Code's own Foreword uses the loose form ("adopted... through resolution A.987(24)"), which is how the error propagates — quote the chain, not the shorthand. Also added from the resolution's recitals: **UNCLOS Article 230** (pollution offences beyond the territorial sea attract monetary penalties only, with the recognized rights of the accused observed) alongside Article 292, and the **MARPOL Annex I Reg 11 / Annex II Reg 6** damage-exception, which is the CE's substantive defence after an accidental discharge. Q25 v1.1 → v1.2.
+
 GREP: Regulation 5.2.7
 GREP: Standard A5.2.7
 GREP: LEG 110 / LEG 111 outputs
@@ -675,6 +677,84 @@ inside the Examiner Trap block ("There is no MLC Regulation or Standard 5.2.7"),
 and retains "Part III" throughout while correctly explaining its recommended
 status. Both are negation-context hits per the pattern above — check the
 surrounding sentence before treating either as resurfaced.
+### 39. CII guidelines G1/G4 mis-numbered as MEPC.337(76)/MEPC.338(76) in the public teaser copies
+
+The gated `oralnotes/simon-notes-p1.html` and `oralnotes/simon-notes-p2.html` were
+corrected in an earlier session to the right resolution numbers and each carries an
+inline "(corrected from MEPC.337(76)...)" note. The public SQ teaser copies were not
+updated in the same pass and were still citing the wrong ones — the Entry 36 class of
+error again, on the free sample a prospective subscriber reads first.
+
+**Correct mapping** (verified against the primary text of MEPC.338(76) itself, whose
+paragraph 1.2 names G1 and G2 by resolution number, and corroborated by ClassNK, IRClass
+and BKI circulars):
+
+| Guideline | Resolution | Subject |
+|---|---|---|
+| G1 | **MEPC.336(76)** | Operational carbon intensity indicators and the calculation methods |
+| G2 | **MEPC.337(76)** | Reference lines for use with operational CII |
+| G3 | **MEPC.338(76)** | Operational CII reduction factors relative to reference lines |
+| G4 | **MEPC.339(76)** | Operational carbon intensity rating of ships (A–E boundaries) |
+
+**Why this one keeps recurring.** Pre-adoption briefs written immediately after MEPC 76
+(June 2021) circulated the set as **335/336/337/338** — one number low across the board.
+ABS's own MEPC 76 brief lists "G1 = MEPC.335(76), G2 = MEPC.336(76), G3 = MEPC.337(76),
+G4 = MEPC.338(76)". Any secondary source of that vintage is off by one, and drafting from
+it reproduces the error silently because the numbers look plausible. Always take this
+quartet from the adopted resolution text, never from a session brief.
+
+Fixed: `SQ/simon-notes-p1.html` (the C<sub>F</sub>/rating reg-item cited MEPC.338(76) for
+both the CF values and the A–E boundaries — neither is G3; split into MEPC.336(76) for the
+calculation method, with C<sub>F</sub> values themselves noted as tabulated in MARPOL
+Annex VI Appendix IX, and MEPC.339(76) for the rating boundaries) and
+`SQ/simon-notes-p2.html` (MEPC.337(76)/MEPC.338(76) cited as the indicator and rating
+guidelines; corrected to MEPC.336(76)/MEPC.339(76), with an explicit note that 337 is G2
+and 338 is G3 so the pair is not re-quoted for calculation or rating).
+
+GREP: SKIP — MEPC.337(76) and MEPC.338(76) are correct citations for G2 and G3 and appear
+legitimately (including inside the corrected sentences, which name them in order to
+exclude them). Manual verification-pass only: wherever a CII guideline is cited, check the
+G-number against the resolution number using the table above.
+
+### 40. Casualty Investigation Code described as "incorporating" the fair-treatment Guidelines, plus an unverifiable interrogation-conditions claim
+
+Found in `QB1_B.html` Q15 while scoping Entry 38 across the repo. Two problems in one
+paragraph.
+
+**(a) Framing.** The card read "The Code, incorporating the ILO/IMO Guidelines on the Fair
+Treatment of Seafarers, provides basic guardrails during state interrogations". The Code
+does not incorporate the Guidelines. It cites them in its preamble and in Foreword
+paragraph 6, and separately carries its own mandatory protections in Part II Chapter 12.
+The Guidelines remain recommendatory throughout — see Entry 38(d) for the standing
+phrasing rule.
+
+**(b) Fabricated condition.** The card asserted that "medical fitness and fatigue states
+must be assessed before prolonged interrogation occurs". No such requirement appears in
+Chapter 12, in Chapter 24, or in A.987(24). Removed rather than softened. The two
+surviving points were re-attributed correctly: language and consular access are not
+Chapter 12 obligations either — consular access rests on **VCCR 1963 Article 36** and
+**MLC Guideline B4.4.6(2)**, and the Chapter 12.2 entitlement is to be informed of the
+nature and basis of the investigation and to be given access to **legal advice** on
+self-incrimination and the right to silence. Paragraph rewritten around the actual
+Chapter 12.1/12.2 and Chapter 24 text, with a pointer to QB1_A Q25 for the full answer.
+Q15 v1.1 → v1.2.
+
+GREP: Medical fitness and fatigue states
+
+### 41. MLC Regulation 2.7 is Manning Levels, not Recreational Facilities
+
+`QB5_A.html` Q4 (Maslow's hierarchy mapped to MLC/ISM/STCW) cited "MLC Reg. 2.7
+(Recreational Facilities)" against the Social/Belonging level. Regulation 2.7 of the MLC
+is **Manning levels**. Accommodation and recreational facilities are **Regulation 3.1**.
+Corrected. The adjacent citation in the same cell, MLC Reg. 4.4 (shore-based welfare
+facilities), was already right and is unchanged. Q4 v1.0 → v1.1.
+
+Worth holding the Title 2 list straight, since it is a cheap examiner catch: 2.1 seafarers'
+employment agreements · 2.2 wages · 2.3 hours of work and rest · 2.4 entitlement to leave ·
+2.5 repatriation · 2.6 compensation for the ship's loss or foundering · 2.7 manning levels ·
+2.8 career and skill development.
+
+GREP: Reg. 2.7 (Recreational Facilities)
 ---
 
 ---
@@ -745,3 +825,6 @@ surrounding sentence before treating either as resurfaced.
 | 2026-08-19 | Entry 35: PSSA count stated as a hard "17" — stale, now ~19 following the NW Mediterranean (MEPC.380(80), 2023) and Nusa Penida / Gili Matra Lombok Strait (MEPC.396(82), 2024) designations, and rephrased as approximate because published counts vary 18–19; A.982(24) completed with its MEPC.267(68) amendment across 7 files (23 citations), closing the open scope from Entry 34. MEPC.1/Circ.778/Rev.5 checked and current. | Found during the Entry 34 correction pass |
 | 2026-08-19 | Entries 36–37: SQ teaser cited a non-existent MSC.1/Circ.1405/Rev.3 (correct is Rev.2, 25 May 2012; Rev.3 belongs to the companion flag-State circular MSC.1/Circ.1406) while the gated copy had already been corrected — teaser-drift class of error, now covered by a new citation-contradiction check in the health script; and the decorative file-header version badge, stale in all 5 files carrying it, removed in favour of the per-question q-version footer as sole version truth. | Found by a repo-wide teaser/gated citation comparison |
 | 2026-08-21 | Entry 38: QB1_A Q25 (Fair Treatment of Seafarers) — Casualty Investigation Code omitted entirely (correct placement: preamble + Foreword para 6, mandatory Part II Ch 12 via SOLAS XI-1/6, recommended Part III Ch 24 — not "Part III" as the candidate had it); fabricated MLC "Regulation 5.2.7/Standard A5.2.7" replaced with Guideline B4.4.6(2) and Regulation 5.1.6; fabricated "LEG 110/111 outputs" on VDR/automated data removed (real instrument is LEG.7(112), 28 Mar 2025); Hebei Spirit chronology inverted; A.987(24) restated as remaining recommendatory, with MSC.255(84) Part II Ch 12 as a separate mandatory instrument. Q25 v1.0→v1.1, file v1.9→v2.0; SQ teaser fixed in the same session. | Candidate correction via Nixon (WhatsApp screenshot) |
+| 2026-08-21 | Entry 38 refinement: A.987(24) does not itself contain the Guidelines — it is the Assembly resolution (1 Dec 2005) urging States and authorising promulgation; the Guidelines text was adopted by LEG.3(91) (27 Apr 2006) and the ILO Governing Body (296th session, 12 Jun 2006), promulgated 1 Jul 2006. UNCLOS Art. 230 and the MARPOL Annex I Reg 11 / Annex II Reg 6 damage-exception added from the resolution's recitals. Q25 v1.1→v1.2. | Verification against the A.987(24) resolution text |
+| 2026-08-21 | Entry 39: SQ teaser copies of simon-notes-p1 and p2 cited MEPC.337(76)/MEPC.338(76) as the CII calculation and rating guidelines; correct are MEPC.336(76) (G1) and MEPC.339(76) (G4), with 337 = G2 reference lines and 338 = G3 reduction factors. Gated copies were already correct — teaser drift, Entry 36 class. Root cause noted: post-MEPC 76 session briefs circulated the quartet one number low. | Repo-wide scope pass following Entry 38; verified against the MEPC.338(76) primary text |
+| 2026-08-21 | Entries 40–41: QB1_B Q15 said the Casualty Investigation Code "incorporates" the fair-treatment Guidelines (it cites them; its own mandatory protections are Part II Ch 12) and asserted an unverifiable requirement to assess medical fitness and fatigue before prolonged interrogation (removed); QB5_A Q4 cited MLC Reg. 2.7 as Recreational Facilities — 2.7 is Manning Levels, recreational facilities are Reg. 3.1. Q15 v1.1→v1.2, Q4 v1.0→v1.1. | Repo-wide scope pass following Entry 38 |
