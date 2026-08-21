@@ -66,39 +66,183 @@ SMTP_HOST = "smtp-relay.brevo.com"
 SMTP_PORT = 587
 
 
-# ---------- Fetch repo snapshot ----------
+# ---------- Repo snapshot sources ----------
+#
+# THE SOURCE IS EXPLICIT, AND THAT IS THE POINT.
+#
+# Until 21 August 2026 this checker had exactly one source: it downloaded a
+# tarball of remote `main` from codeload.github.com. It never read local disk.
+#
+# That made a whole class of release evidence structurally vacuous. Several
+# handoffs recorded "N findings on the branch and N on a clean origin/main —
+# 0 new, 0 gone" as PRE-MERGE proof that a batch introduced no regression.
+# Both runs were reading the same remote `main`; neither could see the change
+# under test. E6 proved it rather than inferring it: five `q-card` tags were
+# corrupted in a clean tree and the re-run produced a byte-identical finding
+# set. A local regression was invisible.
+#
+# The underlying releases are NOT thereby defective — the other gates
+# (validators, mutation suites, digests, determinism) did the real work. Only
+# that specific health-check comparison was non-load-bearing, and it should not
+# be cited as proof of local branch health in any earlier handoff.
+#
+# Every check in this file is a pure function of a {relative_path: bytes} dict,
+# so the fix is a second and third loader for that same dict — not a change to
+# any check.
+#
+# All loaders normalise CRLF to LF. A Windows working copy can hold CRLF while
+# the git blob holds LF; without normalisation, `--source local` and
+# `--source ref` would disagree on files that are identical in content, and the
+# comparison the caller is trying to make would be noise.
+
+
+class SourceInfo:
+    """What was actually scanned. Reported so a result cannot be misread."""
+
+    def __init__(self, source_type, location, commit=None, file_count=0):
+        self.source_type = source_type      # "remote-main" | "local" | "ref"
+        self.location = location            # URL, filesystem path, or git ref
+        self.commit = commit                # resolved SHA where knowable
+        self.file_count = file_count
+
+    def describe(self):
+        lines = [
+            f"source_type : {self.source_type}",
+            f"source      : {self.location}",
+            f"commit      : {self.commit or '(not resolved)'}",
+            f"files       : {self.file_count}",
+            f"eol         : normalised CRLF -> LF",
+        ]
+        return "\n".join(lines)
+
+
+def _keep(rel_path):
+    """Map a repo-relative path into the scan dict, or None to drop it.
+
+    meoclass1/ files lose their prefix; SQ/ files keep theirs, because SQ/ is a
+    sibling of meoclass1/ rather than nested inside it (the free-sample teaser
+    copies live there).
+    """
+    if rel_path.startswith(QB_FOLDER_PREFIX):
+        return rel_path[len(QB_FOLDER_PREFIX):]
+    if rel_path.startswith(SQ_FOLDER_PREFIX):
+        return rel_path
+    return None
+
+
+def _normalise(raw):
+    return raw.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+
+
+def _extract_tar(fileobj, mode, strip_leading_component):
+    """Shared tar walk for the remote tarball and for `git archive` output."""
+    files = {}
+    with tarfile.open(fileobj=fileobj, mode=mode) as tar:
+        for member in tar.getmembers():
+            if not member.isfile():
+                continue
+            name = member.name
+            if strip_leading_component:
+                parts = name.split("/", 1)
+                if len(parts) != 2:
+                    continue
+                name = parts[1]
+            key = _keep(name)
+            if key is None:
+                continue
+            handle = tar.extractfile(member)
+            if handle is None:
+                continue
+            files[key] = _normalise(handle.read())
+    return files
+
+
+def _repo_root():
+    """The repository root, derived from this file's location."""
+    return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def _git(args, binary=False):
+    import subprocess
+    out = subprocess.run(["git"] + args, cwd=_repo_root(),
+                         capture_output=True, check=False)
+    if out.returncode != 0:
+        err = out.stderr.decode("utf-8", errors="replace").strip()
+        raise RuntimeError(f"git {' '.join(args)} failed: {err}")
+    return out.stdout if binary else out.stdout.decode("utf-8").strip()
+
+
 def fetch_repo_tarball():
-    """Download the repo tarball via codeload.github.com and return a dict
-    of {relative_path: bytes} for everything under QB_FOLDER_PREFIX (with that
-    prefix stripped), PLUS everything under the top-level SQ/ folder (kept
-    with its 'SQ/' prefix intact, since SQ/ is a sibling of meoclass1/, not
-    nested inside it — the free-sample teaser copies live there)."""
+    """Remote `main` via codeload.github.com. The GitHub Actions default."""
     url = f"https://codeload.github.com/{GITHUB_REPO}/tar.gz/refs/heads/{GITHUB_BRANCH}"
     req = urllib.request.Request(url, headers={"User-Agent": "qb-health-check"})
     with urllib.request.urlopen(req, timeout=60) as resp:
         raw = resp.read()
+    files = _extract_tar(io.BytesIO(raw), "r:gz", strip_leading_component=True)
+    try:
+        commit = _git(["rev-parse", f"origin/{GITHUB_BRANCH}"])
+    except Exception:
+        commit = None
+    info = SourceInfo("remote-main", url, commit, len(files))
+    return files, info
 
+
+def fetch_local_tree():
+    """The CURRENT WORKING TREE on local disk — uncommitted edits included.
+
+    This is the mode a pre-merge release gate wants: it sees the change under
+    test, which remote-main mode cannot.
+    """
+    root = _repo_root()
     files = {}
-    with tarfile.open(fileobj=io.BytesIO(raw), mode="r:gz") as tar:
-        for member in tar.getmembers():
-            if not member.isfile():
-                continue
-            # strip the leading "<repo>-<branch>/" component
-            parts = member.name.split("/", 1)
-            if len(parts) != 2:
-                continue
-            rel_path = parts[1]
-            if rel_path.startswith(QB_FOLDER_PREFIX):
-                f = tar.extractfile(member)
-                if f is None:
+    for prefix in (QB_FOLDER_PREFIX, SQ_FOLDER_PREFIX):
+        base = os.path.join(root, prefix.rstrip("/"))
+        if not os.path.isdir(base):
+            continue
+        for dirpath, dirnames, filenames in os.walk(base):
+            dirnames[:] = [d for d in dirnames if d not in (".git", "__pycache__")]
+            for filename in filenames:
+                full = os.path.join(dirpath, filename)
+                rel = os.path.relpath(full, root).replace(os.sep, "/")
+                key = _keep(rel)
+                if key is None:
                     continue
-                files[rel_path[len(QB_FOLDER_PREFIX):]] = f.read()
-            elif rel_path.startswith(SQ_FOLDER_PREFIX):
-                f = tar.extractfile(member)
-                if f is None:
+                try:
+                    with open(full, "rb") as fh:
+                        files[key] = _normalise(fh.read())
+                except OSError:
                     continue
-                files[rel_path] = f.read()   # keep "SQ/..." prefix as-is
-    return files
+    try:
+        commit = _git(["rev-parse", "HEAD"])
+        dirty = bool(_git(["status", "--porcelain"]))
+    except Exception:
+        commit, dirty = None, False
+    label = f"{root} (working tree{', DIRTY' if dirty else ', clean'})"
+    return files, SourceInfo("local", label, commit, len(files))
+
+
+def fetch_ref_tree(ref):
+    """Any git ref or exported tree — e.g. a clean `origin/main` baseline."""
+    raw = _git(["archive", "--format=tar", ref], binary=True)
+    files = _extract_tar(io.BytesIO(raw), "r:", strip_leading_component=False)
+    try:
+        commit = _git(["rev-parse", ref])
+    except Exception:
+        commit = None
+    return files, SourceInfo("ref", ref, commit, len(files))
+
+
+def load_source(source="remote", ref=None):
+    """Dispatch to the requested loader. Never silently substitutes another."""
+    if source == "remote":
+        return fetch_repo_tarball()
+    if source == "local":
+        return fetch_local_tree()
+    if source == "ref":
+        if not ref:
+            raise ValueError("--source ref requires --ref REF")
+        return fetch_ref_tree(ref)
+    raise ValueError(f"unknown source: {source!r}")
 
 
 # ---------- Individual checks ----------
@@ -1103,14 +1247,49 @@ def send_email(subject, body):
     return True
 
 
-def main():
-    print("Fetching repo tarball...")
+def parse_args(argv=None):
+    import argparse
+
+    ap = argparse.ArgumentParser(
+        prog="qb_health_check",
+        description="QB + Notes health check. Scans remote main by default; "
+                    "use --source local for a pre-merge regression check.")
+    ap.add_argument("--source", choices=("remote", "local", "ref"), default="remote",
+                    help="what to scan: remote main (default, as CI runs it), "
+                         "the local working tree, or a git ref")
+    ap.add_argument("--ref", default=None,
+                    help="git ref for --source ref, e.g. origin/main")
+    ap.add_argument("--no-email", action="store_true",
+                    help="print the report; never send it")
+    ap.add_argument("--json", dest="json_out", default=None,
+                    help="also write a machine-readable result to this path")
+    ap.add_argument("--fail-on-findings", action="store_true",
+                    help="exit 1 when findings exist (off by default: the daily "
+                         "job would be red every day on standing findings)")
+    return ap.parse_args(argv)
+
+
+def main(argv=None):
+    args = parse_args(argv)
+
+    # A local or ref run is a developer/gate invocation, not the daily digest.
+    # It must not mail the team unless explicitly told to.
+    emailing = not args.no_email and (
+        args.source == "remote" or os.environ.get("QB_ALWAYS_EMAIL"))
+
+    print(f"Loading source: {args.source}"
+          + (f" ({args.ref})" if args.ref else "") + " ...")
     try:
-        files = fetch_repo_tarball()
+        files, source_info = load_source(args.source, args.ref)
     except Exception as e:
-        send_email("🔴 MIW QB Health Check — FETCH FAILED",
-                    f"Could not fetch the repo to run health checks.\n\nError: {e}")
+        message = f"Could not load the {args.source} source to run health checks.\n\nError: {e}"
+        if emailing:
+            send_email("🔴 MIW QB Health Check — FETCH FAILED", message)
+        else:
+            _safe_console_print(message)
         sys.exit(1)
+
+    print(source_info.describe())
 
     known_traps = parse_known_traps(files.get(KNOWN_TRAPS_PATH))
 
@@ -1168,10 +1347,40 @@ def main():
     subject = f"{status} MIW QB + Notes Health Check — {error_count} issue(s) found" if error_count \
         else "✅ MIW QB + Notes Health Check — all clear"
 
-    emailed = send_email(subject, report)
-    if emailed:
+    # Every run states what it scanned, so a finding count can never be
+    # mistaken for evidence about a tree it did not read.
+    banner = (
+        "=" * 62 + "\n"
+        + "HEALTH CHECK SOURCE\n"
+        + source_info.describe() + "\n"
+        + f"findings    : {error_count}\n"
+        + "=" * 62 + "\n"
+    )
+    report = banner + "\n" + report
+
+    if args.json_out:
+        with open(args.json_out, "w", encoding="utf-8") as fh:
+            json.dump({
+                "source_type": source_info.source_type,
+                "source": source_info.location,
+                "commit": source_info.commit,
+                "file_count": source_info.file_count,
+                "findings": error_count,
+            }, fh, indent=2, sort_keys=True)
+
+    emailed = send_email(subject, report) if emailing else False
+    if emailed or not emailing:
         _safe_console_print(report)
+
+    # EXIT CONTRACT — deliberately unchanged for the daily job.
+    #
+    # There are ~369 standing findings, so exiting non-zero on findings would
+    # turn the GitHub Action red every single day and train everyone to ignore
+    # it. A successful scan exits 0; only a load failure exits 1. Callers that
+    # genuinely want a hard gate opt in with --fail-on-findings, and a release
+    # gate should compare finding SETS against a baseline rather than counts.
+    return 1 if (error_count and args.fail_on_findings) else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
