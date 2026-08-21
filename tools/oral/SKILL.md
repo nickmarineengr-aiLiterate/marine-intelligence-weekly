@@ -39,11 +39,22 @@ cd /f/Marine-Intelligence-Weekly
 git status --porcelain && git fetch origin --prune
 git rev-parse HEAD origin/main                    # must match, tree must be clean
 
-python tools/oral/oral_manifest.py --quiet        # manifest schema contract
-python tools/oral/test_oral_release_infra.py      # shared-infrastructure controls
-python tools/oral/validate_batch_<id>.py          # the batch's own validator
-python tools/oral/mutate_batch_<id>.py            # preflight, then the suite
-python meoclass1/qb_health_check.py --source local --no-email     # PRE-merge
+python tools/oral/run_oral_release.py --plan      # the exact gate sequence
+python tools/oral/run_oral_release.py --full      # THE full release, one command
+```
+
+**Do not reconstruct the release suite.** It is committed. `--plan` prints the exact
+sequence without executing anything; `--full` runs it. Everything below explains what
+the runner does and why — it is not a script to retype.
+
+Narrower invocations while building a batch:
+
+```bash
+python tools/oral/oral_manifest.py --quiet                 # manifest schema contract
+python tools/oral/test_oral_release_infra.py               # shared-module controls
+python tools/oral/test_oral_release_runner.py              # runner/registry controls
+python tools/oral/run_oral_release.py --gate validate_batch_<id>
+python tools/oral/run_oral_release.py --category batch --read-only
 ```
 
 **Read the repository, not your memory of it.** Three separate batches were mis-planned
@@ -125,31 +136,54 @@ Record `intended_reason` and compare it to the actual failing check.
 
 ---
 
-## 4. Release gates
+## 4. Release gates — run through the committed runner
 
-Roughly 39 gates, each executed and recorded once. Points that are not obvious:
+**The gate list is no longer prose. `tools/oral/oral_release_gates.py` is the
+authoritative registry and `tools/oral/run_oral_release.py` executes it.** Do not rebuild
+a scratch runner; do not maintain a second copy of the gate list anywhere, including in
+this file.
 
-**Node tests — pass explicit files, never a directory.**
 ```bash
-node --test tools/security/*.test.mjs      # 18 files; a bare directory is wrong here
+python tools/oral/run_oral_release.py --plan     # inspect the sequence
+python tools/oral/run_oral_release.py --full     # 39 gates + determinism
 ```
 
-**`check_determinism.py` has no argv parser.** Unknown flags do not stop it — `--help`
-runs the whole chain. Read the source for the real invocation; never probe an unfamiliar
-tool with `--help`.
+**39 gates**, derived from repository evidence rather than memory. E1's handoff §17
+enumerates its 37 by name (Node counted as three records); E5 reports 37 with Node
+collapsed to one plus the two E5 gates; E6 reports 39 — E5 plus `validate_batch_e6` and
+`batch_e6_mutate`. Adding a batch adds exactly those two gates and nothing else.
+Determinism is registered separately because all three handoffs report it outside the
+gate count.
 
-**Serial ownership.** While a mutator or the determinism generator owns the worktree, no
-other repo-aware validation may run against that transient state.
+The runner owns these behaviours so no future session has to remember them:
 
-**Targeted restoration only.** Never `git checkout -- .`. Gates dirty
-`VALIDATION_RESULTS.json`, `PHASE2_VALIDATION_RESULTS.json` and `ORAL_NOTES_IMPACT.md`;
-revert each by exact path, attributed to the tool that wrote it, then re-verify every
-card digest. `git checkout <ref> -- <file>` destroys uncommitted branch edits.
+- **Node gets explicit files.** The glob is expanded in Python and never reaches a
+  shell. Node 24 resolves `--test <dir>` as a module and fails with `Cannot find module`
+  — E5's runner did exactly that and the gate exited 1 in 0.4s.
+- **`check_determinism.py` is invoked bare.** It has no argv parser, so `--help` would
+  *run the whole chain*. Seeds `0 / 1 / 524287` are hardcoded inside it.
+- **Serial ownership** is enforced structurally: one gate at a time, and the runner
+  raises if a mutating gate has not released the worktree.
+- **Restore is from the runner's own byte snapshot, by exact path.** It never runs
+  `git checkout -- .`, `git restore .`, or any blanket reset — and never restores from
+  git at all, because `git checkout <ref> -- <file>` destroys uncommitted branch edits.
+  It snapshots `VALIDATION_RESULTS.json`, `PHASE2_VALIDATION_RESULTS.json` and
+  `ORAL_NOTES_IMPACT.md`, restores them, and verifies the restore.
+- **Health compares LOCAL against a clean ref** — never remote main against itself —
+  as multisets, after normalising the transport.
+- **Audit is semantic.** `validate_audit.py` exits **0** while reporting
+  `passed 12 / failed 1`. The runner derives the baseline by running the same tool in a
+  temporary detached worktree of `origin/main` and classifies `PASS`,
+  `PRE_EXISTING_BASELINE`, `FAIL_CURRENT` or `UNAVAILABLE`. The baseline is never
+  hardcoded — a hardcoded baseline silently absorbs the next real regression.
+- **Validator summaries have five dialects** and in `107 PASS / 0 FAIL` the leading
+  number is *passes*, not a total. Only the second number is trusted.
+- **A `FAIL:` line inside a mutator log is caught-evidence, not a failure.** Only the
+  harness summary line carries the verdict, and it is read by the shared parser.
 
-**Audit baseline is semantic, not an exit code.** `validate_audit.py` exits **0** while
-reporting `passed 12 / failed 1`. Parse the counters and the failing identity, compare
-against a clean baseline, and classify: `PASS`, `PRE_EXISTING_BASELINE`, `FAIL_CURRENT`,
-`UNAVAILABLE`. `index_tier_literals_valid` is carried debt, not a regression.
+Every historical guard runs on every release. `PROPOSED_OPTIMISATIONS` in the registry
+records a runtime saving and the reason it has **not** been applied: guard expiry is a
+confirmed defect class here, and a historical mutator is exactly what detects it.
 
 ---
 
@@ -297,9 +331,23 @@ Do not persist a lesson that is specific to one batch's content.
    (43 invalid literals). Pre-existing baseline, carried since E1.
 4. **Stale counters** in `VALIDATION_RESULTS.json` / `PHASE2_VALIDATION_RESULTS.json`
    (`live_questions` 688 vs 721, `headings` 954 vs 960).
-5. **No committed release runner.** The 37/39-gate suites were driven from
-   session-scratch scripts, so the gate list itself is not version-controlled. Section 4
-   is currently the only durable record of it.
+5. **RELEASE-BLOCKING — the E1–E6 validators are red on `main` at `1922db1`.** The
+   candidate-correction commits `7135a7a` and `1922db1` changed `QB1_A#q24`,
+   `QB1_A#q25`, `QB1_B#q15` and `QB5_A#q4` **without a batch manifest**, so every
+   enrichment-generation validator fails `only_authorised_cards_changed`:
+   `validate_batch_e1` 1 failure, `validate_batch_e2` 1, `validate_batch_e6` 2 (the
+   second is item 1 above). `validate_batch_a` still passes — generation-1 validators
+   carry no corpus-wide authorisation check.
+
+   **This is the sibling-manifest contract working, not a tooling defect** (§8): an
+   authorised change that no manifest declares is exactly what these guards exist to
+   catch. It was invisible until now only because no committed runner existed. A full
+   release cannot go green until the correction is declared in a manifest that the
+   E1–E6 guards can delegate to, or the guards are deliberately reconciled. Product
+   content was deliberately NOT touched when this was found.
+
+6. ~~No committed release runner.~~ **Closed 21 August 2026** —
+   `tools/oral/run_oral_release.py` + `oral_release_gates.py`.
 
 ---
 
