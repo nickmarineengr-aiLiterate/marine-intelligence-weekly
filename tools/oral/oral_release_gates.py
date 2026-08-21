@@ -82,6 +82,7 @@ CAT_CORPUS = "corpus"
 CAT_SECURITY = "security"
 CAT_HEALTH = "health"
 CAT_CORRECTION = "correction"
+CAT_AUTHORISATION = "authorisation"
 CAT_DETERMINISM = "determinism"
 
 # Files that release gates are known to rewrite. The runner snapshots these by
@@ -243,6 +244,31 @@ GATES = (
           CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=2400,
           historical_39=False, depends_on=("validate_corrections",),
           note="proves the delegation is an exemption, not a suppression"),
+
+    # ---- follow-up authorisation register ---------------------------------
+    # Postdates E6, so outside the historical 39, and not held back either.
+    #
+    # This is NOT a product gate: the register authorises no shipped bytes and
+    # a red register never means the product is unsafe. It earns a place in the
+    # release because its validator reads the LIVE corpus. Every one of the 35
+    # actions pins a parent card's anchor and question text, so a release that
+    # moves or rewords one of those cards turns this gate red at the moment the
+    # drift is introduced -- not months later when a follow-up batch tries to
+    # author against a parent that no longer says what the register recorded.
+    #
+    # It is a standing detector for release-caused target drift, which is
+    # exactly the failure the register exists to prevent.
+    _gate("validate_followup_register",
+          ["python", "%s/validate_followup_register.py" % _ORAL],
+          CAT_AUTHORISATION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="re-derives the register from pinned blobs and re-checks all 35 "
+               "parent pins against the live corpus"),
+    _gate("followup_register_mutate",
+          ["python", "%s/mutate_followup_register.py" % _ORAL],
+          CAT_AUTHORISATION, PARSER_MUTATION, mutates=True, timeout=1200,
+          historical_39=False, depends_on=("validate_followup_register",),
+          note="each mutation must trip its OWN named check, not merely the "
+               "byte-currency check that fires on every edit"),
 
     # ---- health: candidate LOCAL vs clean ref ------------------------------
     _gate("qb_health_check",

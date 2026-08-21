@@ -95,7 +95,21 @@ check("the runner names no specific correction",
 check("determinism is registered OUTSIDE the historical 39",
       REG.DETERMINISM_GATE["historical_39"] is False
       and REG.DETERMINISM_GATE in REG.ALL_GATES,
-      "40 gates total, 39 historical")
+      "%d gates total, 39 historical" % len(REG.ALL_GATES))
+
+# EVERY gate added after E6, named. The list is enumerated rather than counted
+# so a new gate cannot appear in a release by accident: adding one means editing
+# this line, which is the review point. The totals below are derived FROM this
+# list rather than hardcoded, because a hardcoded total is a guard that expires
+# the next time a gate is registered.
+POST_E6_GATES = [
+    "corrections_mutate",
+    "followup_register_mutate",
+    "validate_corrections",
+    "validate_followup_register",
+]
+POST_E6_MUTATION_SUITES = ["corrections_mutate", "followup_register_mutate"]
+
 # E6 reported 266 mutations across 15 suites. That number is HISTORY and stays
 # pinned to the historical gates; post-E6 suites are counted separately rather
 # than by moving the historical figure, which would quietly erase the evidence
@@ -106,7 +120,7 @@ check("15 historical mutation suites, matching E6's reported 266 mutations / 15 
       len(_mut_hist) == 15, "%d historical" % len(_mut_hist))
 check("post-E6 mutation suites are additive, not substitutive",
       sorted(g["id"] for g in _mut_all if not g["historical_39"])
-      == ["corrections_mutate"],
+      == POST_E6_MUTATION_SUITES,
       "%d total suites" % len(_mut_all))
 check("by_id resolves and rejects", REG.by_id("validate_audit")["id"] == "validate_audit",
       "lookup works")
@@ -208,16 +222,18 @@ check("B. plan shows dependencies and conditional reasons",
 _default = R.select_gates(Args(full=False, gate=None))
 _post_e6 = sorted(g["id"] for g in _default if not g["historical_39"])
 check("plan of the release set is the historical 39 plus post-E6 gates",
-      len(_default) == 41 and sum(1 for g in _default if g["historical_39"]) == 39,
+      len(_default) == 39 + len(POST_E6_GATES)
+      and sum(1 for g in _default if g["historical_39"]) == 39,
       "%d gates, %d historical, post-E6=%s"
       % (len(_default), sum(1 for g in _default if g["historical_39"]), _post_e6))
-check("the post-E6 additions are the correction gates",
-      _post_e6 == ["corrections_mutate", "validate_corrections"], str(_post_e6))
+check("the post-E6 additions are the correction and authorisation gates",
+      _post_e6 == POST_E6_GATES, str(_post_e6))
 check("a default run never silently drops a post-E6 gate",
       all(not g["separate_phase"] for g in _default),
       "only held-back phases may be absent")
 check("--full adds the determinism phase",
-      len(full) == 42 and any(g["id"] == "determinism" for g in full),
+      len(full) == 39 + len(POST_E6_GATES) + 1
+      and any(g["id"] == "determinism" for g in full),
       "%d gates" % len(full))
 # --- derived baselines --------------------------------------------------
 # E6 fails `line_endings_homogeneous_per_file` on a clean checkout of the very

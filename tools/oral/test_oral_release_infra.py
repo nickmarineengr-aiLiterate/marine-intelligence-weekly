@@ -481,6 +481,35 @@ check("the delegation surface unions both record families",
          sum(1 for n in names if n.startswith("batch_")),
          sum(1 for n in names if n.startswith("correction_"))))
 
+# AUTHORISATION REGISTER vs BATCH PRODUCTION MANIFEST -- two different records.
+#
+# The register says what future follow-up production is AUTHORISED to do. A
+# batch manifest says what a production run actually IMPLEMENTED, and it is the
+# batch manifest alone that delegates authority over a card to a later record.
+#
+# Collapsing them would be a real hole: the register names 35 parent cards it
+# has never edited, so admitting it to the delegation surface would pre-emptively
+# exempt all 35 from every historical guard -- authorising edits that no batch
+# had made and no manifest had pinned.
+REGISTER = HERE / "oral_followup_register.json"
+check("the follow-up register exists", REGISTER.exists(), REGISTER.name)
+check("the follow-up register is NOT part of the delegation surface",
+      REGISTER not in surface and REGISTER.name not in names,
+      "an authorisation register delegates nothing")
+_reg = json.loads(B.read_text(REGISTER)) if REGISTER.exists() else {}
+check("the follow-up register declares itself an authorisation record",
+      _reg.get("record_class") == "AUTHORISATION_REGISTER",
+      str(_reg.get("record_class")))
+check("the follow-up register authorises no card edit of its own",
+      _reg.get("provenance", {}).get("content_authored_here") is False
+      and all(a.get("creates_new_card") is False
+              for a in _reg.get("actions", [])),
+      "%d actions, none create a card" % len(_reg.get("actions", [])))
+check("every register action still names a batch only when it has one",
+      all(a.get("batch") is None or isinstance(a.get("batch"), str)
+          for a in _reg.get("actions", [])),
+      "batch assignment is a production-time field")
+
 check("authorisation_manifest_paths honours exclude",
       CORRECTIONS[0] not in M.authorisation_manifest_paths(HERE, exclude=CORRECTIONS[0])
       if CORRECTIONS else False,
