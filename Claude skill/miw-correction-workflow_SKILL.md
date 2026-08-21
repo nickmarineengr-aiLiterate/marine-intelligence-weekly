@@ -19,6 +19,30 @@ description: >
 Full loop for taking a flagged factual/regulatory error from report to
 verified-live push, in a single session, using the local clone.
 
+## The loop, in order
+
+```
+candidate feedback
+  -> verify against a primary source        (2)
+  -> scope the conflation search            (3)
+  -> edit                                   (4)
+  -> known_traps.md entry                   (6)
+  -> correction manifest                    (7a)   <-- NEVER SKIP
+  -> historical delegation checks           (7b)
+  -> content / index sync                   (7c)
+  -> release validation                     (7d)
+  -> commit / push                          (8)
+  -> live verification                      (9)
+```
+
+**Step 7a is not optional and it is not paperwork.** Every Oral question card
+is owned by a release guard that pins its bytes. A correction that edits a card
+without declaring it reads to those guards as undeclared drift, and they go red
+— correctly. On 21 August 2026 the fair-treatment correction was pushed without
+a manifest and turned **7 of 11** batch validators red; the product edits were
+right, the authorisation record was simply missing. Do not discover this after
+the push.
+
 ## 0. Environment check (do this first, every session)
 
 Filesystem/GitHub access is **not guaranteed** to be present in every
@@ -146,13 +170,106 @@ correct position, which files were affected, who flagged it and when.
   manual verification-pass checklist rather than daily auto-scan.
 - Update the "Change log" table at the bottom with a new row.
 
-## 7. Manifest update
+## 7a. Correction manifest (Oral / QB card corrections)
 
-Insert a new object at the front of `recently_updated` in
-`qb_content_index.json`: `date`, a `summary` describing what was found and
-fixed (specific enough that a future correction pass can see this was
-already handled), and `files_touched`. Update the top-level `generated`
-and `generated_by` fields.
+**Required whenever the correction changed a `q-card` in `meoclass1/QB*.html`
+or its `SQ/` twin.** Skip only for a correction that touched no card at all.
+
+Write one record per correction *event* (one candidate report and the scope
+pass it triggers), at:
+
+```
+tools/oral/correction_<correction_id_lowercased>_manifest.json
+```
+
+e.g. `CORR-FAIR-TREATMENT-20260821` ->
+`correction_corr_fair_treatment_20260821_manifest.json`. The filename must
+match the id; `oral_manifest.py` asserts it.
+
+Load-bearing fields (asserted — see `oral_manifest.CORRECTION_FIELD_CLASSES`):
+
+| Field | Meaning |
+|---|---|
+| `correction_id` | identity; must match the filename |
+| `kind` | always `POST_RELEASE_CORRECTION` |
+| `status` | `AUTHORISED` or `SUPERSEDED` |
+| `origin` | e.g. `candidate_feedback` |
+| `baseline_commit` | the commit **before** the first correction commit |
+| `governing_commits` | the commits that made the edits, in order |
+| `authorisation_source` | normally `meoclass1/known_traps.md` |
+| `cards[]` | one entry per changed card |
+
+Each `cards[]` entry needs `correction_action_id`, `file` (bare page name),
+`path` (repo-relative), `anchor`, `classification`, `pre_edit_digest` and
+`post_edit_digest`. Derive the digests with the guards' own function — never by
+hand:
+
+```python
+import sys; sys.path.insert(0, "tools/oral")
+from validate_batch_b import card_digests
+card_digests(open(path, encoding="utf-8", newline="").read())["q25"]
+```
+
+**Classify every card honestly.** `PRIMARY_CORRECTION` (exactly one — the card
+actually reported), `DEPENDENCY_CORRECTION`, `PROPAGATED_FACT_CORRECTION`,
+`SCOPE_PASS_CORRECTION` (an independent defect the sweep happened to find),
+`TEASER_SYNC`, `INDEX_METADATA`. Sharing a commit is not the same as being the
+same fix, and the schema refuses to let the record blur the two.
+
+Files with no `q-card` that no guard pins (free-sample notes pages, `known_traps.md`,
+derived indexes) go in `artefacts[]` — recorded for scope, deliberately carrying no
+digest.
+
+## 7b. Historical delegation checks
+
+Prove the record works **in both directions** before committing:
+
+```bash
+python tools/oral/oral_manifest.py                 # schema contract
+python tools/oral/validate_corrections.py          # pins vs live pages
+python tools/oral/run_oral_release.py --category batch --read-only --keep-going
+```
+
+The sweep must be green apart from known standing debt. Then confirm the
+delegation is **non-vacuous**: temporarily move the manifest aside, re-run one
+historical validator, and check it goes red again. A delegation that passes
+with the record absent is not a delegation — it is a suppressed guard.
+`mutate_corrections.py` automates exactly this and more.
+
+## 7c. Content / index sync
+
+`meoclass1/qb_content_index.json` is **generated**. Never hand-edit it.
+
+Edit the governed source, `tools/oral/qb_content_index_governed.json`, then
+regenerate:
+
+```bash
+python tools/oral/build_qb_content_index.py
+python tools/oral/build_qb_content_index.py --check     # must report CURRENT
+python tools/oral/validate_qb_content_index.py
+```
+
+The correction-log entry (`recently_updated`) has **one** schema:
+
+```json
+{ "date": "YYYY-MM-DD", "note": "what changed", "files": ["QB1_A.html"] }
+```
+
+`summary` and `files_touched` are obsolete July-2026 keys; the generator
+**refuses** them (they left 21 of 33 entries blank on the live hub).
+
+`note` and `files` are rendered verbatim to paying candidates, so
+`CORRECTION_FORBIDDEN` bans internal detail — no person names, no chat sources,
+no commit SHAs, no `known_traps` or `Entry N` references, no AI tooling. Say
+*what* changed, never who reported it or where. Keep QB page names in the note:
+the health check's changelog-gap count scans note text for them.
+
+## 7d. Release validation
+
+```bash
+python tools/oral/run_oral_release.py --plan
+python tools/oral/run_oral_release.py --full
+```
 
 ## 8. Commit and push
 
@@ -168,6 +285,11 @@ git commit -m "Fix: <short description>"
 git push origin main
 ```
 
+Stage the **correction manifest** alongside the content files. A correction
+commit that ships the product edit without its authorisation record is the
+exact failure this workflow exists to prevent — and it will not be visible
+until the next release run.
+
 Stage files explicitly by name (not `git add .`) so scratch files that
 were missed by cleanup don't get committed.
 
@@ -180,6 +302,11 @@ Report back to Nixon with: files touched, commit hash, and live-verification
 confirmation — not just "pushed."
 
 ## Common failure modes to watch for
+
+- **Shipping a correction with no authorisation record.** The product edit is
+  correct, the tests you ran are green, and the release suite goes red days
+  later for reasons that look like tooling breakage. It is not tooling
+  breakage. See steps 7a–7b, and `tools/oral/SKILL.md` §8.2.
 
 - **Desktop Commander MCP going unresponsive mid-session** (4-minute
   timeout, no result). It usually recovers — retry with `get_config` to

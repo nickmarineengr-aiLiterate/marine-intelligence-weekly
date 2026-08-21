@@ -145,15 +145,23 @@ this file.
 
 ```bash
 python tools/oral/run_oral_release.py --plan     # inspect the sequence
-python tools/oral/run_oral_release.py --full     # 39 gates + determinism
+python tools/oral/run_oral_release.py --full     # 41 gates + determinism
 ```
 
-**39 gates**, derived from repository evidence rather than memory. E1's handoff §17
+**Two flags, not one.** `historical_39` is *provenance* — it records which gates were in
+the suite E6 actually ran, and it is what keeps the count of 39 checkable forever.
+`separate_phase` decides what the runner holds back until asked (determinism only).
+Selecting on `historical_39` would silently exclude every gate added after E6.
+
+**39 historical gates**, derived from repository evidence rather than memory. E1's handoff §17
 enumerates its 37 by name (Node counted as three records); E5 reports 37 with Node
 collapsed to one plus the two E5 gates; E6 reports 39 — E5 plus `validate_batch_e6` and
 `batch_e6_mutate`. Adding a batch adds exactly those two gates and nothing else.
 Determinism is registered separately because all three handoffs report it outside the
-gate count.
+gate count. Two **post-E6** gates — `validate_corrections` and `corrections_mutate` —
+bring a default run to 41; they are not part of the historical 39 and are not held back
+either, because a release must never ship an unverified correction. Adding a *correction*
+adds no gates at all: both iterate every `correction_*_manifest.json` on disk.
 
 The runner owns these behaviours so no future session has to remember them:
 
@@ -279,6 +287,47 @@ delegation to the later manifest. The delegation must be **non-vacuous**: withou
 later manifest the older guard fails; with it, it passes. Verify both directions when
 you add one — a delegation that passes when the manifest is absent is not a delegation.
 
+Every batch validator reads that surface through **one** function,
+`oral_manifest.authorisation_manifest_paths()`. Do not re-add a local glob: ten copies
+of the same glob is how the two record families drifted apart in the first place.
+
+### 8.1 Two record families
+
+| Family | Filename | Authorises |
+|---|---|---|
+| Batch | `batch_*_manifest.json` | cards a production or enrichment run created / enriched |
+| Correction | `correction_*_manifest.json` | cards repaired **after** a batch shipped |
+
+A batch closes when it publishes and its digests are release evidence — so a
+post-release repair is **never** back-dated into a batch it did not belong to.
+
+### 8.2 Post-release corrections carry a manifest — always
+
+**A product correction made outside a production batch is not finished until it has an
+authorised correction manifest.** Without one, every historical guard that owns the
+corrected card reads it as undeclared drift and goes red — correctly. This is not
+theoretical: the fair-treatment candidate correction turned **7 of 11** batch validators
+red until `CORR-FAIR-TREATMENT-20260821` was written.
+
+The full loop is owned by the correction workflow skill
+(`Claude skill/miw-correction-workflow_SKILL.md`, §7a). Do not duplicate it here.
+
+Delegation is **anchor-level**, which on its own would exempt a corrected card forever.
+So a correction also **pins** each card's post-correction digest, and
+`validate_corrections.py` compares those pins to the live pages:
+
+| Question | Answered by |
+|---|---|
+| "was this card legitimately edited?" | the batch validators, via delegation |
+| "and is it still exactly what was authorised?" | `validate_corrections.py`, via the pin |
+
+Neither subsumes the other. Run both:
+
+```bash
+python tools/oral/validate_corrections.py
+python tools/oral/mutate_corrections.py
+```
+
 ---
 
 ## 9. Shared targets
@@ -324,6 +373,25 @@ Do not persist a lesson that is specific to one batch's content.
    `validate_batch_e6.py`'s `line_endings_homogeneous_per_file` check now fails on a
    clean checkout of the very commit it certified. Product bytes are correct; the pin is
    the defect. Future manifests should not pin working-copy EOL.
+
+   **The runner now classifies this, and never as PASS.** `validate_batch_e6` is marked
+   `baseline_derivable`, so on failure the runner re-runs that same validator on a clean
+   worktree of `origin/main` and compares **failing check names**. Live failures that are
+   a subset of the baseline's report as **`PRE_EXISTING_BASELINE`** — its own status,
+   which does not block the release and is not green — with `baseline_fixed` naming any
+   check the run repaired. A *new* failing check is not a subset and still FAILs.
+
+   The baseline is derived, never declared, for the reason `classify_audit` already
+   gives: a hardcoded baseline silently absorbs the next real regression.
+
+   **Derived worktrees need a scoped `safe.directory`.** `F:` does not record filesystem
+   ownership, so git refuses to operate in a directory that is not on the allowlist. The
+   main clone is on it; a fresh temporary worktree never is. Without the exception every
+   git call inside the derived tree dies with *dubious ownership*, and a validator that
+   reads its evidence through `git show` reports that evidence as **unavailable** — so
+   the "baseline" describes the sandbox, not the commit. This silently affected
+   `derive_audit_baseline` too. `run_oral_release.worktree_env()` injects the exception
+   for exactly the one worktree path, and passes it to the child process.
 2. **`authorisation_source` is unread by every batch validator.** It duplicates a
    hardcoded constant. It is now asserted to *resolve* by `oral_manifest.py`, so it is no
    longer decoration, but no validator selects through it.
@@ -331,25 +399,11 @@ Do not persist a lesson that is specific to one batch's content.
    (43 invalid literals). Pre-existing baseline, carried since E1.
 4. **Stale counters** in `VALIDATION_RESULTS.json` / `PHASE2_VALIDATION_RESULTS.json`
    (`live_questions` 688 vs 721, `headings` 954 vs 960).
-5. **RELEASE-BLOCKING — 7 of the 11 batch validators are red on `main` at `1922db1`.**
-   The candidate-correction commits `7135a7a` and `1922db1` changed `QB1_A#q24`,
-   `QB1_A#q25`, `QB1_B#q15` and `QB5_A#q4` **without a batch manifest**. Verified by
-   `run_oral_release.py --category batch --read-only --keep-going`:
-
-   | Validator | Result | Failing check |
-   |---|---|---|
-   | `validate_batch_a` / `_c` / `_d` / `gap0609` | PASS | — |
-   | `validate_batch_b` | **FAIL 1** | `pre_existing_cards_unchanged`, drifted `QB5_A#q4` |
-   | `validate_batch_e1`…`e5` | **FAIL 1** each | `only_authorised_cards_changed` |
-   | `validate_batch_e6` | **FAIL 2** | the above, plus item 1 |
-
-   **This is the authorisation contract working, not a tooling defect** (§8): a change
-   that no manifest declares is exactly what these guards exist to catch, and `batch_b`
-   caught it through a digest pin rather than the corpus-wide check. It was invisible
-   until now only because no committed runner existed. A full release cannot go green
-   until the correction is declared in a manifest the older guards can delegate to, or
-   the guards are deliberately reconciled. Product content was deliberately NOT touched
-   when this was found.
+5. ~~RELEASE-BLOCKING — 7 of the 11 batch validators are red from an unmanifested
+   candidate correction.~~ **Closed 21 August 2026** — declared as
+   `CORR-FAIR-TREATMENT-20260821` (§8.2). The batch sweep went **4 PASS / 7 FAIL →
+   10 PASS / 1 FAIL**; no guard was weakened and no batch was rebaselined. The single
+   remaining failure is item 1, which is unrelated to the correction.
 
 6. ~~No committed release runner.~~ **Closed 21 August 2026** —
    `tools/oral/run_oral_release.py` + `oral_release_gates.py`.
