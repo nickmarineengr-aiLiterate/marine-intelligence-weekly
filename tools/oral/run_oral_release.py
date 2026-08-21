@@ -58,7 +58,9 @@ sys.path.insert(0, str(HERE))
 
 import oral_release_gates as REG          # noqa: E402
 from oral_bytes import read_text, write_text, normalise_eol   # noqa: E402
-from oral_mutation import parse_summary   # noqa: E402
+from oral_mutation import (                                  # noqa: E402
+    parse_summary, validator_failing, worktree_env,
+    derive_validator_baseline as _derive_baseline)
 
 PASS = "PASS"
 FAIL = "FAIL"
@@ -210,11 +212,6 @@ def classify_validator(out, err, rc):
     if failing:
         detail["failing"] = sorted(failing)
     return (PASS if int(fails) == 0 and rc == 0 else FAIL), detail
-
-
-def validator_failing(text):
-    """The check names a batch-dialect validator reported as FAIL."""
-    return set(re.findall(r"^FAIL\s+(\S+)", text, re.M))
 
 
 def classify_mutation(out, err, rc):
@@ -410,30 +407,6 @@ def run_health(gate, log):
     return status, detail, out_c + out_b, secs_c + secs_b
 
 
-def worktree_env(work):
-    """Environment for a process running inside a DERIVED worktree.
-
-    `F:` here is a filesystem that does not record ownership, so git refuses to
-    operate in any directory that is not on the `safe.directory` allowlist. The
-    main clone is on it; a freshly created temporary worktree never is.
-
-    The symptom is silent and expensive: every git call inside the derived tree
-    dies with "detected dubious ownership", so a validator that reads its
-    evidence through `git show` reports that evidence as *unavailable* -- and a
-    baseline derived from it describes the sandbox, not the baseline commit.
-    `validate_batch_e6` derived exactly one failing check that way,
-    `consolidation_available`, which is not how it fails on a real checkout.
-
-    The exception is scoped to this one worktree path, never `*`, and injected
-    through the environment so the CHILD validator's own git calls see it too.
-    """
-    env = dict(os.environ)
-    env["GIT_CONFIG_COUNT"] = "1"
-    env["GIT_CONFIG_KEY_0"] = "safe.directory"
-    env["GIT_CONFIG_VALUE_0"] = str(work).replace("\\", "/")
-    return env
-
-
 def derive_audit_baseline(log):
     """Run validate_audit on a clean detached worktree of the baseline ref.
 
@@ -467,32 +440,22 @@ def derive_validator_baseline(gate, log):
     cannot be derived (in which case the live failure stays a FAIL -- an
     underivable baseline is never an excuse to pass).
 
-    Same worktree discipline as derive_audit_baseline: the real tree is never
-    checked out from under the runner.
+    The worktree, its scoped `safe.directory` exception and the FAIL-line
+    parsing all come from `oral_mutation`, which is also what every mutation
+    harness's baseline-aware control precondition uses. One implementation:
+    a runner and a mutator that derived "the baseline" by two different routes
+    could disagree about what the baseline IS, which is precisely the ambiguity
+    a derived baseline exists to remove.
     """
     script = gate_tool_path(gate)
     if script is None:
         return None
     rel = script.relative_to(REPO).as_posix()
-
-    tmp = pathlib.Path(tempfile.mkdtemp(prefix="oral-gate-baseline-"))
-    work = tmp / "tree"
-    try:
-        made = subprocess.run(
-            ["git", "worktree", "add", "--detach", str(work), REG.BASELINE_REF],
-            cwd=str(REPO), capture_output=True)
-        if made.returncode != 0:
-            log("      baseline worktree unavailable: %s"
-                % made.stderr.decode("utf-8", "replace").strip()[:160])
-            return None
-        _rc, out, err, _secs = run_process(
-            [sys.executable, rel], gate["timeout"], cwd=work,
-            env=worktree_env(work))
-        return validator_failing(out + "\n" + err)
-    finally:
-        subprocess.run(["git", "worktree", "remove", "--force", str(work)],
-                       cwd=str(REPO), capture_output=True)
-        shutil.rmtree(tmp, ignore_errors=True)
+    base = _derive_baseline(rel, REPO, REG.BASELINE_REF, gate["timeout"])
+    if not base.available:
+        log("      baseline worktree unavailable: %s" % base.error[:160])
+        return None
+    return set(base.failures)
 
 
 # --------------------------------------------------------------- the runner

@@ -89,6 +89,12 @@ check("the correction mutator depends on its validator",
 # the delegation model had been bypassed.
 _runner_src = (Path(REG.__file__).parent / "run_oral_release.py").read_text(
     encoding="utf-8")
+# The worktree/baseline mechanism now lives in oral_mutation, shared by the
+# runner's gate baselines and by every mutation harness's control precondition.
+# Both sources are read here so "one implementation" is asserted, not assumed.
+_mut_src = (Path(REG.__file__).parent / "oral_mutation.py").read_text(
+    encoding="utf-8")
+_shared_src = _runner_src + chr(10) + _mut_src
 check("the runner names no specific correction",
       "FAIR_TREATMENT" not in _runner_src and "fair_treatment" not in _runner_src,
       "correction knowledge lives in the records, not the orchestrator")
@@ -268,15 +274,27 @@ check("a baseline comparison records what the run FIXED",
 # worktree never is. Without the exception, every git call inside a derived
 # tree dies and the "baseline" describes the sandbox rather than the ref.
 check("a derived worktree carries a scoped safe.directory exception",
-      "GIT_CONFIG_KEY_0" in _runner_src and "safe.directory" in _runner_src,
+      "GIT_CONFIG_KEY_0" in _mut_src and "safe.directory" in _mut_src,
       "otherwise git reports dubious ownership and the evidence reads as absent")
 check("the ownership exception is scoped to the worktree, never '*'",
-      'GIT_CONFIG_VALUE_0"] = str(work)' in _runner_src,
+      'GIT_CONFIG_VALUE_0"] = str(work)' in _mut_src,
       "one path, not a blanket allowlist")
-check("the exception reaches the CHILD validator too",
-      "env=worktree_env(work)" in _runner_src
-      and _runner_src.count("env=worktree_env(work)") == 2,
-      "both the audit and validator derivations pass it")
+# There must be exactly ONE definition of the mechanism. A runner and a mutation
+# harness that each derived "the baseline" their own way could disagree about
+# what the baseline IS, which is the ambiguity a derived baseline removes.
+check("worktree_env is defined once, in the shared module",
+      _mut_src.count("def worktree_env(") == 1
+      and "def worktree_env(" not in _runner_src,
+      "the runner imports it rather than keeping a second copy")
+check("validator_failing is defined once, in the shared module",
+      _mut_src.count("def validator_failing(") == 1
+      and "def validator_failing(" not in _runner_src,
+      "one definition of which checks are failing")
+check("every derived worktree run passes the exception to the CHILD process",
+      _shared_src.count("env=worktree_env(work)") == 2
+      and "worktree_env" in _runner_src,
+      "the audit derivation in the runner and the validator derivation in "
+      "oral_mutation each pass it")
 
 check("--read-only excludes every mutating gate",
       not any(g["mutates_worktree"] for g in R.select_gates(Args(read_only=True))),

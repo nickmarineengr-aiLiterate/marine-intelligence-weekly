@@ -35,6 +35,11 @@ REPO = Path(__file__).resolve().parents[2]
 TOOLS = Path(__file__).resolve().parent
 MANIFEST = TOOLS / "batch_e3_enrichment_manifest.json"
 VALIDATOR = TOOLS / "validate_batch_e3.py"
+
+sys.path.insert(0, str(TOOLS))
+from oral_mutation import (              # noqa: E402
+    require_control_baseline, mutation_verdict, validator_fail_details)
+from oral_release_gates import BASELINE_REF   # noqa: E402
 QB_DIR = REPO / "meoclass1"
 
 
@@ -47,7 +52,10 @@ def run_validator():
                        cwd=REPO, capture_output=True)
     out = r.stdout.decode("utf-8", "replace")
     failed = [l.split()[1] for l in out.splitlines() if l.startswith("FAIL ")]
-    return r.returncode, failed
+    # The DETAIL is returned as well as the name. A mutation aimed at a check
+    # that is already failing on the control can never make a new NAME appear,
+    # so its only available proof is that the check's reported content moved.
+    return r.returncode, failed, validator_fail_details(out)
 
 
 class Mutation:
@@ -167,10 +175,27 @@ def main():
     for p in sorted(set([MANIFEST] + list(QB_DIR.glob("QB*.html")))):
         before[p] = p.read_bytes()
 
-    code, failed = run_validator()
-    if code != 0:
-        print("PRE-RUN validator is not green (%s) - aborting" % failed)
+    # CONTROL STATE, NOT ABSOLUTE GREEN.
+    #
+    # A mutation suite proves the validator catches corruption, so the control
+    # must carry no failure the mutations did not cause. That is NOT the same as
+    # carrying no failure at all. `validate_batch_e6` fails
+    # `line_endings_homogeneous_per_file` on a clean checkout of the very commit
+    # it certified -- non-reproducible historical evidence that must not be
+    # repaired, rebaselined or silenced. Demanding absolute green made that
+    # suite unlaunchable, and a guard that cannot run has silently expired.
+    #
+    # The baseline is DERIVED from the ref on every run, never declared, and is
+    # derived at all only when the control is not already green. Identity is
+    # compared, never count: a same-sized but different failure is a regression,
+    # and strictly fewer failures is an improvement.
+    code, failed, control_details = run_validator()
+    control = require_control_baseline(failed, VALIDATOR.relative_to(REPO),
+                                       REPO, ref=BASELINE_REF)
+    if not control.runnable:
+        print("PRE-RUN %s - aborting" % control.reason)
         return 2
+    baseline = control.control_failures
 
     escapes = noops = crashes = 0
     results = []
@@ -184,15 +209,16 @@ def main():
                 noops += 1
                 results.append((mut.key, mut.desc, "NO-OP (not applied)"))
                 continue
-            code, failed = run_validator()
-            if code == 0:
+            code, failed, details = run_validator()
+            # `code == 0` cannot be the escape test once the control carries a
+            # pre-existing failure: the validator then never exits 0 and every
+            # mutation would read as caught. The question is whether a NEW
+            # failing check appeared, and whether it is the intended one. With
+            # an empty baseline this is exactly the original semantics.
+            outcome, verdict = mutation_verdict(
+                mut.expect, failed, baseline, details, control_details)
+            if outcome == "escape":
                 escapes += 1
-                verdict = "*** ESCAPE (validator stayed green) ***"
-            elif mut.expect in failed:
-                verdict = "caught (%s)" % mut.expect
-            else:
-                escapes += 1
-                verdict = "*** WRONG REASON: %s ***" % (failed or "-")
             results.append((mut.key, mut.desc, verdict))
         except Exception as e:                                  # noqa: BLE001
             crashes += 1
@@ -204,12 +230,18 @@ def main():
         print("  %-2s %-54s %s" % (k, d, v))
 
     intact = all(p.read_bytes() == b for p, b in before.items())
-    code, failed = run_validator()
-    print("\nrestored: validator exit=%d fails=%s; tree byte-identical: %s"
-          % (code, failed or "-", intact))
+    code, failed, _details = run_validator()
+    # The restored tree must return to the CONTROL state, not to absolute green.
+    # Anything the restore failed to put back shows up here as a failing check
+    # the control did not have.
+    residue = sorted(set(failed) - set(baseline))
+    print("\nrestored: validator exit=%d fails=%s; control baseline=%s; "
+          "new-vs-control=%s; tree byte-identical: %s"
+          % (code, failed or "-", sorted(baseline) or "-", residue or "-", intact))
     print("%d mutations, %d escape(s), %d no-op(s), %d crash(es)"
           % (len(results), escapes, noops, crashes))
-    ok = escapes == 0 and noops == 0 and crashes == 0 and intact and code == 0
+    ok = (escapes == 0 and noops == 0 and crashes == 0 and intact
+          and not residue)
     return 0 if ok else 1
 
 
