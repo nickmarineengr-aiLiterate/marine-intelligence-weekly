@@ -578,6 +578,103 @@ GREP: SKIP — a bare version string is far too generic to auto-scan. Manual rul
 when building a new QB file, the header badge is `<code>ID · Backlog</code>` or
 `<code>ID</code>` only; no version segment.
 
+### 38. Fair Treatment of Seafarers — fabricated MLC "Regulation 5.2.7", fabricated LEG 110/111 VDR guidance, and A.987(24) wrongly described as becoming mandatory
+
+Candidate correction via Nixon (WhatsApp, 21 August 2026) on **QB1_A Q25**
+("Fair Treatment of Seafarers — Where is it mentioned?", asked by Nair
+immediately after a casualty-investigation question). The candidate's point was
+that the answer omitted the Casualty Investigation Code, which was correct and
+was the principal defect. His own placement — "included in CIC Recommended
+Practices (Under Part III)" — is not right, and was corrected in the reply.
+
+**(a) The Code placement.** Verified against the full text of resolution
+MSC.255(84). There is no chapter in Part III titled or citing fair treatment.
+The express citation of the Guidelines sits in the **preamble** ("CONSIDERING
+ALSO the Guidelines on fair treatment of seafarers in the event of a maritime
+accident (resolution A.987(24))") and in the **Foreword, paragraph 6**, under
+the standing heading **"Treatment of Seafarers"**. The operative
+seafarer-protection obligations are **Part II, Chapter 12 — Obtaining evidence
+from seafarers**, which is mandatory under SOLAS XI-1/6.1 (12.1 evidence at the
+earliest practical opportunity, return to ship or repatriation at the earliest
+possible opportunity, "the seafarers human rights shall, at all times, be
+upheld"; 12.2 informed of the nature and basis, access to legal advice on
+self-incrimination and the right to remain silent). The nearest Part III
+provision is **Chapter 24 — Protection for witnesses and involved parties**
+(24.1 compelled self-incriminating evidence inadmissible so far as national law
+allows; 24.2 extends 12.2 to any person), supported by Ch 23 (confidentiality of
+marine safety records), Ch 25.4 (report inadmissibility) and Ch 21.2.5 (take
+account of IMO/ILO instruments). Answering "Part III" concedes non-mandatory
+status when the mandatory answer was available.
+
+**(b) MLC Regulation 5.2.7 / Standard A5.2.7 does not exist.** The live answer
+cited it four times as the port-State fair-treatment duty. MLC Title 5, Part 5.2
+runs only to **Regulation 5.2.1** (port State inspections) and **Regulation
+5.2.2** (onshore seafarer complaint-handling procedures). The correct hooks are
+**Guideline B4.4.6, paragraph 2** (seafarers detained in a foreign port dealt
+with promptly under due process of law and with appropriate consular protection)
+and **Regulation 5.1.6** (flag State official inquiry into any serious marine
+casualty causing injury or loss of life). Cite *Regulation* 5.1.6, not Standard
+A5.1.6: the 2025 amendments *add* new paragraphs 1 and 2 to A5.1.6, meaning it
+carries none until they are in force.
+
+**(c) Fabricated Legal Committee guidance.** The answer claimed "recent sessions
+of the IMO Legal Committee (LEG 110 / LEG 111 outputs) have updated these
+guidelines — extending protections to cover automated data, VDR recordings, and
+digital tracking records". No source supports this. **A.987(24) has never been
+amended.** LEG 110 (2023) adopted the seafarer-abandonment guidelines
+(**LEG.6(110)**); LEG 111 (April 2024) finalised the *draft* detained-seafarers
+guidelines. The real current instrument is the **ILO/IMO Guidelines on Fair
+Treatment of Seafarers Detained in Connection with Alleged Crimes**, adopted at
+JTWG-3 (Geneva, 26–28 November 2024) and by the Legal Committee as **resolution
+LEG.7(112) on 28 March 2025**. Removed entirely per the standing rule that
+fabricated content is deleted, not softened.
+
+**(d) A.987(24) status — standing phrasing rule.** Do not write that the
+Guidelines "become mandatory" through the Code. **A.987(24) remains
+recommendatory and was never elevated.** The Casualty Investigation Code is a
+separate instrument that contains its own mandatory seafarer-protection
+requirements through SOLAS XI-1/6. Two instruments, not one instrument changing
+status. (Nixon's precision instruction, 21 August 2026 — use this phrasing
+wherever the pair is described.)
+
+**(e) Hebei Spirit chronology inverted.** The answer called Hebei Spirit "a
+direct driver for strengthening fair treatment guidelines at IMO" and "the
+central case driving fair-treatment guideline reforms". The collision was
+**7 December 2007**; the Guidelines were adopted December 2005 and promulgated
+1 July 2006. The case cannot have driven them. It exposed that they were
+unenforceable, feeding **A.1056(27)** (30 November 2011, promotion of widest
+possible application) and ultimately LEG.7(112). Pre-2006 drivers were the
+detentions following Erika (1999), Prestige (2002) and Tasman Spirit (2003).
+
+**Time-sensitive material quarantined.** The **2025 amendments to the MLC Code**
+(STC-5, Geneva 7–11 April 2025; approved by the 113th International Labour
+Conference 6 June 2025; notified to Members 23 June 2025; formal-disagreement
+period ends 23 June 2027; **expected entry into force 23 December 2027**) amend
+Guideline B4.4.6(2) to require due account of the detained-seafarers Guidelines
+and add paragraphs 1 and 2 to Standard A5.1.6. Placed in a new `verify-note`
+box, not in the memorisation answer.
+
+**Cross-reference to Entry 32:** LEG.3(91) is the Legal Committee's own adoption
+of these same 2006 Guidelines (27 April 2006; ILO Governing Body 296th session,
+12 June 2006) — it is *this* instrument, not an LLMC one. Now stated explicitly
+on the card so the two never re-converge.
+
+Also fixed on the same card, same defect cluster: Q24's related-question strip
+labelled Q25 as "Wreck/Nairobi" and Q26 as "MLC" (Q25 is Fair Treatment, Q26 is
+the Wreck Convention), and the dependency-graph card repeated "MLC 5.2.7" in
+both `meoclass1/QB1_A.html` and the public teaser `SQ/QB1_A.html` — the Entry 36
+standing rule (SQ counterpart corrected in the same session) applied. Q25 v1.0 →
+v1.1; file v1.9 → v2.0.
+
+GREP: Regulation 5.2.7
+GREP: Standard A5.2.7
+GREP: LEG 110 / LEG 111 outputs
+
+Note: the corrected card intentionally retains the phrase "Standard 5.2.7" once,
+inside the Examiner Trap block ("There is no MLC Regulation or Standard 5.2.7"),
+and retains "Part III" throughout while correctly explaining its recommended
+status. Both are negation-context hits per the pattern above — check the
+surrounding sentence before treating either as resurfaced.
 ---
 
 ---
@@ -647,3 +744,4 @@ when building a new QB file, the header badge is `<code>ID · Backlog</code>` or
 | 2026-08-19 | Entry 34: QB3_H Q1 — "PSA" resolved to MPA (Marine Protected Area) and the MPA half of the answer written; UNCLOS Art. 194(5) / CBD Art. 8(a) / BBNJ Art. 1(9), in force 17 Jan 2026, legal basis stated; PSSA corrected from a MARPOL framing to IMO Assembly res. A.982(24) as amended by MEPC.267(68); MPA vs PSSA vs MARPOL Special Area three-way distinction added → v1.2. Six further files cite A.982(24) without the amendment — logged, not actioned. | Candidate report via Nixon (WhatsApp screenshot) |
 | 2026-08-19 | Entry 35: PSSA count stated as a hard "17" — stale, now ~19 following the NW Mediterranean (MEPC.380(80), 2023) and Nusa Penida / Gili Matra Lombok Strait (MEPC.396(82), 2024) designations, and rephrased as approximate because published counts vary 18–19; A.982(24) completed with its MEPC.267(68) amendment across 7 files (23 citations), closing the open scope from Entry 34. MEPC.1/Circ.778/Rev.5 checked and current. | Found during the Entry 34 correction pass |
 | 2026-08-19 | Entries 36–37: SQ teaser cited a non-existent MSC.1/Circ.1405/Rev.3 (correct is Rev.2, 25 May 2012; Rev.3 belongs to the companion flag-State circular MSC.1/Circ.1406) while the gated copy had already been corrected — teaser-drift class of error, now covered by a new citation-contradiction check in the health script; and the decorative file-header version badge, stale in all 5 files carrying it, removed in favour of the per-question q-version footer as sole version truth. | Found by a repo-wide teaser/gated citation comparison |
+| 2026-08-21 | Entry 38: QB1_A Q25 (Fair Treatment of Seafarers) — Casualty Investigation Code omitted entirely (correct placement: preamble + Foreword para 6, mandatory Part II Ch 12 via SOLAS XI-1/6, recommended Part III Ch 24 — not "Part III" as the candidate had it); fabricated MLC "Regulation 5.2.7/Standard A5.2.7" replaced with Guideline B4.4.6(2) and Regulation 5.1.6; fabricated "LEG 110/111 outputs" on VDR/automated data removed (real instrument is LEG.7(112), 28 Mar 2025); Hebei Spirit chronology inverted; A.987(24) restated as remaining recommendatory, with MSC.255(84) Part II Ch 12 as a separate mandatory instrument. Q25 v1.0→v1.1, file v1.9→v2.0; SQ teaser fixed in the same session. | Candidate correction via Nixon (WhatsApp screenshot) |
