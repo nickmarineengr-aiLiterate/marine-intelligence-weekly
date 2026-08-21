@@ -68,9 +68,11 @@ files. Grep before you claim.
 | Module | Owns |
 |---|---|
 | `tools/oral/oral_bytes.py` | control-byte scanning, explicit UTF-8 I/O, the EOL normalisation contract |
-| `tools/oral/oral_mutation.py` | mutation preflight (dry-run), the normalised result contract, the summary parser |
+| `tools/oral/oral_mutation.py` | mutation preflight (dry-run), the normalised result contract, the summary parser, the derived-worktree baseline and the baseline-aware control precondition (§7.4a) |
 | `tools/oral/oral_manifest.py` | manifest field classification and schema assertions |
-| `tools/oral/test_oral_release_infra.py` | controls for all three, plus health-check source non-vacuity |
+| `tools/oral/oral_supersession.py` | historical digest supersession — does a later authorised card state validly descend from an earlier pin? (§7.5) |
+| `tools/oral/test_oral_release_infra.py` | controls for the byte/mutation/manifest modules, plus health-check source non-vacuity |
+| `tools/oral/test_oral_supersession.py` | the chain algebra, then the same contract through the real E1 and F1 validators |
 
 Historical per-batch validators and mutators (`validate_batch_*.py`, `mutate_batch_*.py`)
 are **release evidence**. They stay runnable and are not rewritten for elegance. New
@@ -387,45 +389,132 @@ target — and one more edits the **register** to say the action was produced,
 because the register is an authorisation record, not a status board, and
 disguising a hold there would hide outstanding work from every future session.
 
-### 7.4a A non-green validator can make its mutator unrunnable
+### 7.4a Mutation controls compare against a BASELINE, not against zero
 
-`mutate_batch_e6.py` aborts with **exit 2** unless its control validator is
-green, which is correct — mutating against an already-failing validator proves
-nothing. But `validate_batch_e6` is permanently non-green from the line-ending
-evidence debt, so **the E6 mutator can never run**, the runner reports
-`UNAVAILABLE`, and `UNAVAILABLE` is release-critical: a default `--full` run
-stops at gate 28 of 46 and never reaches health, audit, determinism or any later
-batch.
+A mutation suite proves a **validator** catches corruption, so its control state
+must carry no failure the mutations did not cause. That is **not** the same as
+carrying no failure at all, and spelling it that way cost the E6 suite its
+ability to run.
 
-Two lessons. First, **classifying a validator as `PRE_EXISTING_BASELINE` does
-not neutralise its debt** — trace the dependents, because a mutator gated on
-that validator fails harder than the validator did. Second, a gate that has not
-run since the debt appeared is not evidence of anything; use `--keep-going` to
-get the remaining gates and report the blocker separately, rather than quietly
-treating a truncated run as a pass.
+`validate_batch_e6` is permanently non-green from the line-ending evidence debt
+(§11.1). Every E-series harness demanded an absolutely green control:
 
-### 7.5 The post-pin gap — why 8 follow-ups cannot be produced yet
+```python
+code, failed = run_validator()
+if code != 0:
+    return 2            # <- unrunnable forever, once any debt exists
+```
+
+so `batch_e6_mutate` exited 2, the runner reported `UNAVAILABLE`, and
+`UNAVAILABLE` is release-critical — a default `--full` run stopped at gate 28 of
+46 and never reached health, audit, determinism or any later batch. **A guard
+that cannot run has silently expired**, which is a confirmed defect class here.
+
+**The rule.** The precondition is *no NEW failures*, never *no failures*:
+
+```
+baseline = the validator's failing checks on BASELINE_REF, clean worktree
+control  = the validator's failing checks on the current worktree
+runnable iff  control ⊆ baseline
+```
+
+Four properties that are not optional:
+
+* **Identity, never count.** baseline `{A}` vs control `{B}` is the same size
+  and is a regression. baseline `{A,B}` vs control `{A}` is strictly fewer and
+  is an improvement. Counting gets the first case wrong.
+* **Derived, never declared.** A hardcoded list of "known failures" absorbs the
+  next real regression the moment someone forgets to prune it — the same reason
+  `classify_audit` derives its baseline.
+* **Derived only when needed.** A green control skips the derivation entirely,
+  so the eleven clean validators cost exactly what they always did.
+* **Fail closed.** An underivable baseline is *not* permission to run.
+
+Once a control legitimately carries a failure the validator never exits 0, so
+`code == 0` also stops working as the per-mutation escape test — every mutation
+would read as caught. `oral_mutation.mutation_verdict()` asks instead whether a
+**new** failing check appeared and whether it is the intended one. With an empty
+baseline that is byte-for-byte the original semantics.
+
+Shared implementation, used by every harness and by the runner's own gate
+baselines: `oral_mutation.require_control_baseline()`,
+`derive_validator_baseline()`, `mutation_verdict()`. Do not re-derive a baseline
+locally — a runner and a mutator that computed "the baseline" two different ways
+could disagree about what the baseline *is*, which is the ambiguity a derived
+baseline exists to remove.
+
+### 7.5 Historical digest supersession — a pin descends, it never expires
 
 **Anchor-level delegation does not cover a digest pin.** Every generation-2
-validator pins its own cards with `digest16(live) == post_edit_digest`, and that
-check has **no delegation path in any of the eleven batch validators** — unlike
-`only_authorised_cards_changed` immediately above it, which does.
+validator pins its cards with `digest16(live) == post_edit_digest`. That check
+had **no delegation path in any of the eleven batch validators** — unlike
+`only_authorised_cards_changed` immediately above it, which does — so a
+follow-up landing on an already-enriched card turned that enrichment's validator
+red. Proved on `QB1_A#q9`: a scratch insert took `validate_batch_e1.py` to
+*25 checks, 1 FAIL*, failing exactly `manifest_digests_match` and nothing else.
 
-So a follow-up landing on a card a shipped enrichment already edited turns that
-enrichment's validator red. Proved on `QB1_A#q9`: a scratch insert took
-`validate_batch_e1.py` to *25 checks, 1 FAIL*, failing exactly
-`manifest_digests_match ['QB1_A.html#q9 post']` and nothing else.
+That blocked **8 colocated actions** (FUP-003, 006, 008, 009, 013, 017, 025,
+034) behind two wrong options: ship a red historical guard, or rebaseline a
+historical manifest.
 
-This blocks the **8 colocated actions** — FUP-003, 006, 008, 009, 013, 017, 025,
-034. Do not schedule them until a **post-pin supersession contract** exists:
-a later manifest declares `supersedes_post_pins`, the earlier validator consults
-it, and it holds only when the superseding record's own pin matches live — so
-the live state stays pinned by exactly one record. Build it in
-`oral_manifest.py`, the single shared surface, and prove non-vacuity both ways.
+**The contract, in one line: do not make old evidence disappear — make new
+authorised states descend from it.**
 
-Until then a colocated follow-up has exactly two wrong options — ship a red
-historical guard, or rebaseline a historical manifest — so the governed answer
-is to **hold the action**, as F1 held FUP-006.
+The historical pin is never rewritten. The LATER record declares, per card,
+which earlier pinned state it descends from:
+
+```json
+"pre_edit_digest":  "a1deaf3445bc1c88",
+"post_edit_digest": "<new state>",
+"supersedes": {
+  "manifest": "batch_e1_enrichment_manifest.json",
+  "action_id": "ENRICH-A003",
+  "post_edit_digest": "a1deaf3445bc1c88"
+}
+```
+
+and the earlier validator's claim becomes strictly **stronger**: not "my state
+is live" but "my state is the ancestor of what is live". `H1 → H2 → H3` is
+provable to any depth; an unmanifested `Hx` still fails.
+
+`oral_supersession.resolve_authorised_card_state()` is the single
+implementation. Every validator that pins a live post-edit digest calls it, and
+folds the result into its existing digest check — **no validator gained a check,
+so no check count moved.**
+
+Rules a successor must obey, all enforced, all fail-closed:
+
+| Requirement | Failure status |
+|---|---|
+| the predecessor still pins what you say it pins | `PREDECESSOR_PIN_ALTERED` |
+| your `pre_edit_digest` == the predecessor's `post_edit_digest` | `CHAIN_BREAK` |
+| the terminal state is the live card | `TERMINAL_NOT_LIVE` |
+| the predecessor exists | `ORPHAN_SUCCESSOR` |
+| the predecessor owns the SAME card | `WRONG_CARD` |
+| one successor per predecessor | `CHAIN_FORK` |
+| no cycles, one root, one terminal | `CHAIN_CYCLE` / `AMBIGUOUS_*` |
+| same digest convention throughout the chain | `DIGEST_CONVENTION_MISMATCH` |
+
+Three things to know before you write one:
+
+* **Dormant by default.** A target with no `supersedes` anywhere resolves by the
+  original `pin == live` comparison and builds no chain. That is why adopting
+  this changed nothing for the ten manifests already on main.
+* **Conventions are not interchangeable.** Three coexist: `sha256(text)[:16]`
+  (E1–E5, F1), full `sha256(text)` (E6), and full `sha256` of a balanced-tag
+  block (corrections). A chain must stay in the ROOT's convention — if you
+  supersede an E1 pin you record that card the way E1 records it. Mixed widths
+  are reported as their own failure rather than compared as strings.
+* **This is NOT the `authorised elsewhere` mechanism, and does not replace it.**
+  `authorisation_manifest_paths()` answers *"is this later edit authorised?"*;
+  the chain answers *"does the later authorised state validly descend from my
+  pinned state?"*. Both are required. Ownership delegation alone would exempt a
+  card forever; the chain alone would not know the successor was allowed to
+  exist.
+
+Controls: `tools/oral/test_oral_supersession.py` — the algebra in memory, then
+the same contract driven through the real E1 and F1 validators against the live
+corpus, with every card restored byte-exactly.
 
 ## 8. Sibling-manifest delegation
 
@@ -537,8 +626,15 @@ Do not persist a lesson that is specific to one batch's content.
    git call inside the derived tree dies with *dubious ownership*, and a validator that
    reads its evidence through `git show` reports that evidence as **unavailable** — so
    the "baseline" describes the sandbox, not the commit. This silently affected
-   `derive_audit_baseline` too. `run_oral_release.worktree_env()` injects the exception
-   for exactly the one worktree path, and passes it to the child process.
+   `derive_audit_baseline` too. `oral_mutation.worktree_env()` injects the exception
+   for exactly the one worktree path, and passes it to the child process. It lives in
+   the shared module because the runner's gate baselines and every mutation harness's
+   control precondition (§7.4a) must derive *the same* baseline the same way.
+
+   **The mutator blocker this caused is closed.** `batch_e6_mutate` refused to launch
+   at all while this debt existed; it is now baseline-aware and runs. The EOL evidence
+   debt itself is untouched and still reports `PRE_EXISTING_BASELINE` — repairing it
+   would mean rewriting what E6 certified.
 2. **`authorisation_source` is unread by every batch validator.** It duplicates a
    hardcoded constant. It is now asserted to *resolve* by `oral_manifest.py`, so it is no
    longer decoration, but no validator selects through it.

@@ -149,6 +149,20 @@ This touches release evidence (`validate_batch_e*.py`) and changes the meaning
 of every historical digest pin in the repo, so it is deliberately a separate,
 reviewed change and not a side effect of a content batch.
 
+#### Update — the blocker infrastructure was built, FUP-006 was not
+
+A later bounded infrastructure session implemented the contract generically:
+`tools/oral/oral_supersession.py`, called by every validator that pins a live
+post-edit digest. A historical pin is now satisfied either by being live or by
+being the provable ancestor of what is live, to any chain depth. No historical
+manifest was rebaselined and no digest check was relaxed; see SKILL.md §7.5.
+
+**FUP-006 itself remains `HELD_GOVERNANCE` and unimplemented.** F1 shipped two
+actions, not three, and that is what this document records. The hold was raised
+against a *structural* blocker, and only the structural blocker is closed:
+releasing the hold means authoring and reviewing content, which is a production
+decision for a later batch. Nothing in F1's evidence changes.
+
 ---
 
 ## 3. Verification
