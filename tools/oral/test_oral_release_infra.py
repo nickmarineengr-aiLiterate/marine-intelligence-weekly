@@ -446,6 +446,123 @@ check("the real repository was not modified by the source test",
 
 
 # ===========================================================================
+# 6. POST-RELEASE CORRECTION RECORDS
+#
+# The defect this guards: on 21 August 2026 a candidate-feedback correction was
+# committed with no authorisation record. Seven of eleven batch validators went
+# red, correctly, because no record existed that COULD own a post-release edit.
+#
+# Declaring that correction turns those guards green again -- which is either an
+# authorisation or a very effective way of switching seven guards off. These
+# controls pin the difference.
+# ===========================================================================
+print("\n--- 6. post-release correction records ---")
+
+CORRECTIONS = sorted(HERE.glob(M.CORRECTION_MANIFEST_GLOB))
+check("at least one correction record exists", bool(CORRECTIONS),
+      "%d found" % len(CORRECTIONS))
+
+corr_findings = [f for c in CORRECTIONS for f in M.audit_correction_manifest(c)]
+corr_failed = [f for f in corr_findings if not f.ok]
+check("every correction record satisfies the correction schema contract",
+      not corr_failed,
+      "; ".join(f.describe() for f in corr_failed)
+      or "%d checks over %d record(s)" % (len(corr_findings), len(CORRECTIONS)))
+
+# The delegation surface must be the UNION. A helper that quietly returns only
+# batch manifests would make every correction unauthorised again.
+surface = M.authorisation_manifest_paths(HERE)
+names = {p.name for p in surface}
+check("the delegation surface unions both record families",
+      any(n.startswith("batch_") for n in names)
+      and any(n.startswith("correction_") for n in names),
+      "%d record(s): %d batch, %d correction"
+      % (len(names),
+         sum(1 for n in names if n.startswith("batch_")),
+         sum(1 for n in names if n.startswith("correction_"))))
+
+check("authorisation_manifest_paths honours exclude",
+      CORRECTIONS[0] not in M.authorisation_manifest_paths(HERE, exclude=CORRECTIONS[0])
+      if CORRECTIONS else False,
+      "a manifest never delegates to itself")
+
+# Every batch validator must read the shared surface. A local glob left behind
+# in even one validator is a correction that authorises nine guards out of ten.
+stale = []
+for path in sorted(HERE.glob("validate_batch_*.py")):
+    body = B.read_text(path)
+    if 'glob("batch_*_manifest.json")' in body:
+        stale.append(path.name)
+    elif "authorisation_elsewhere" in body or "authorised_elsewhere" in body:
+        if "authorisation_manifest_paths" not in body:
+            stale.append(path.name + " (delegates without the shared helper)")
+check("no batch validator keeps a private manifest glob", not stale,
+      "stale=%s" % (stale or "none"))
+
+check("correction identity fields are LOAD_BEARING",
+      all(M.classify_correction(f) == M.LOAD_BEARING for f in
+          ("correction_id", "kind", "status", "origin", "governing_commits",
+           "baseline_commit", "authorisation_source", "cards")),
+      "identity/authorisation is asserted, not decorative")
+
+check("artefacts are explicitly INFORMATIONAL",
+      M.classify_correction("artefacts") == M.INFORMATIONAL,
+      "recorded scope, deliberately unpinned -- a decision, not an accident")
+
+# NON-VACUITY. Each probe corrupts one thing in memory and requires the
+# correction audit to name it. A guard that cannot fail is not a guard.
+if CORRECTIONS:
+    with tempfile.TemporaryDirectory() as tmp:
+        src = json.loads(B.read_text(CORRECTIONS[0]))
+        stem = CORRECTIONS[0].name
+
+        def cprobe(mutate, name=stem):
+            d = json.loads(json.dumps(src))
+            mutate(d)
+            q = Path(tmp) / name
+            B.write_text(q, json.dumps(d))
+            return [f.check for f in M.audit_correction_manifest(q) if not f.ok]
+
+        bad = cprobe(lambda d: d.__setitem__("correction_id", "CORR-OTHER-1"))
+        check("a corrupted correction id is caught",
+              "correction_id_matches_filename" in bad, str(bad))
+
+        bad = cprobe(lambda d: d.__setitem__("kind", "BATCH"))
+        check("a record claiming to be a batch is caught",
+              "kind_is_correction" in bad, str(bad))
+
+        bad = cprobe(lambda d: d.__setitem__("governing_commits", ["deadbee"]))
+        check("a dangling governing commit is caught",
+              "governing_commits_resolve" in bad, str(bad))
+
+        bad = cprobe(lambda d: d["cards"][0].__setitem__("post_edit_digest", "nope"))
+        check("a malformed post-edit digest is caught",
+              "card_digests_well_formed" in bad, str(bad))
+
+        bad = cprobe(lambda d: d["cards"][0].__setitem__(
+            "pre_edit_digest", d["cards"][0]["post_edit_digest"]))
+        check("an inert card (pre == post) is caught",
+              "card_digests_differ" in bad, str(bad))
+
+        bad = cprobe(lambda d: d["cards"][0].__setitem__("classification", "MISC"))
+        check("an unknown correction classification is caught",
+              "card_classifications_known" in bad, str(bad))
+
+        bad = cprobe(lambda d: [c.__setitem__("classification", "PRIMARY_CORRECTION")
+                                for c in d["cards"]])
+        check("two events merged into one record are caught",
+              "exactly_one_primary_correction" in bad, str(bad))
+
+        bad = cprobe(lambda d: d["cards"][0].__setitem__("path", "elsewhere/Other.html"))
+        check("a card whose path and file disagree is caught",
+              "card_path_matches_file" in bad, str(bad))
+
+        bad = cprobe(lambda d: d.__setitem__("nonsense_authorisation", "yes"))
+        check("a new undeclared field cannot slip in",
+              "all_fields_classified" in bad, str(bad))
+
+
+# ===========================================================================
 print("\n%d checks, %d FAIL" % (CHECKS[0], len(FAILURES)))
 for f in FAILURES:
     print("  FAIL %s" % f)

@@ -14,6 +14,7 @@ import re
 import json
 import pathlib
 import sys
+from pathlib import Path
 import tempfile
 
 HERE = pathlib.Path(__file__).resolve().parent
@@ -60,13 +61,53 @@ check("K. duplicate gate ids would be detectable",
       "no empty or repeated ids")
 check("historical gate count is exactly 39", len(REG.historical_39()) == 39,
       "%d" % len(REG.historical_39()))
+
+# --- the two flags must stay separate ------------------------------------
+# Selection used to key off `historical_39`, which conflated "was in E6's
+# suite" with "runs today". Under that reading every gate added after E6 --
+# starting with the correction gates -- would silently never run.
+check("determinism is the only held-back phase",
+      [g["id"] for g in REG.ALL_GATES if g["separate_phase"]] == ["determinism"],
+      str([g["id"] for g in REG.ALL_GATES if g["separate_phase"]]))
+
+_correction = [g for g in REG.ALL_GATES if g["category"] == REG.CAT_CORRECTION]
+check("the correction gates are registered",
+      sorted(g["id"] for g in _correction)
+      == ["corrections_mutate", "validate_corrections"],
+      str(sorted(g["id"] for g in _correction)))
+check("correction gates are post-E6, so not part of the historical 39",
+      all(g["historical_39"] is False for g in _correction))
+check("correction gates are NOT held back from a default run",
+      all(g["separate_phase"] is False for g in _correction),
+      "a release must never ship an unverified correction")
+check("the correction mutator depends on its validator",
+      REG.by_id("corrections_mutate")["depends_on"] == ["validate_corrections"],
+      "a mutation suite against a failing validator proves nothing")
+
+# The runner must stay ignorant of any PARTICULAR correction. Both correction
+# tools iterate correction_*_manifest.json on disk; naming one here would mean
+# the delegation model had been bypassed.
+_runner_src = (Path(REG.__file__).parent / "run_oral_release.py").read_text(
+    encoding="utf-8")
+check("the runner names no specific correction",
+      "FAIR_TREATMENT" not in _runner_src and "fair_treatment" not in _runner_src,
+      "correction knowledge lives in the records, not the orchestrator")
 check("determinism is registered OUTSIDE the historical 39",
       REG.DETERMINISM_GATE["historical_39"] is False
       and REG.DETERMINISM_GATE in REG.ALL_GATES,
       "40 gates total, 39 historical")
-check("15 mutation suites, matching E6's reported 266 mutations / 15 suites",
-      sum(1 for g in REG.ALL_GATES if g["parser"] == REG.PARSER_MUTATION) == 15,
-      "%d" % sum(1 for g in REG.ALL_GATES if g["parser"] == REG.PARSER_MUTATION))
+# E6 reported 266 mutations across 15 suites. That number is HISTORY and stays
+# pinned to the historical gates; post-E6 suites are counted separately rather
+# than by moving the historical figure, which would quietly erase the evidence
+# it encodes.
+_mut_all = [g for g in REG.ALL_GATES if g["parser"] == REG.PARSER_MUTATION]
+_mut_hist = [g for g in _mut_all if g["historical_39"]]
+check("15 historical mutation suites, matching E6's reported 266 mutations / 15 suites",
+      len(_mut_hist) == 15, "%d historical" % len(_mut_hist))
+check("post-E6 mutation suites are additive, not substitutive",
+      sorted(g["id"] for g in _mut_all if not g["historical_39"])
+      == ["corrections_mutate"],
+      "%d total suites" % len(_mut_all))
 check("by_id resolves and rejects", REG.by_id("validate_audit")["id"] == "validate_audit",
       "lookup works")
 
@@ -160,12 +201,64 @@ check("B. plan shows sequence, mutation flag, parser and timeout",
       "columns present")
 check("B. plan shows dependencies and conditional reasons",
       "depends_on:" in first and "note:" in first)
-check("plan of the release set is 39 gates",
-      len(R.select_gates(Args(full=False, gate=None))) == 39,
-      "%d" % len(R.select_gates(Args())))
+# The default set is the historical 39 PLUS every post-E6 gate that is not a
+# held-back phase. Pinning it to a bare 39 would mean any gate added after E6
+# either never runs or silently breaks this control -- and the correction gates
+# are exactly such gates.
+_default = R.select_gates(Args(full=False, gate=None))
+_post_e6 = sorted(g["id"] for g in _default if not g["historical_39"])
+check("plan of the release set is the historical 39 plus post-E6 gates",
+      len(_default) == 41 and sum(1 for g in _default if g["historical_39"]) == 39,
+      "%d gates, %d historical, post-E6=%s"
+      % (len(_default), sum(1 for g in _default if g["historical_39"]), _post_e6))
+check("the post-E6 additions are the correction gates",
+      _post_e6 == ["corrections_mutate", "validate_corrections"], str(_post_e6))
+check("a default run never silently drops a post-E6 gate",
+      all(not g["separate_phase"] for g in _default),
+      "only held-back phases may be absent")
 check("--full adds the determinism phase",
-      len(full) == 40 and any(g["id"] == "determinism" for g in full),
+      len(full) == 42 and any(g["id"] == "determinism" for g in full),
       "%d gates" % len(full))
+# --- derived baselines --------------------------------------------------
+# E6 fails `line_endings_homogeneous_per_file` on a clean checkout of the very
+# commit it certified. That is evidence debt, not a regression -- but it must
+# never be reported as PASS, and it must never be hardcoded, because a
+# hardcoded baseline absorbs the next real failure silently.
+_derivable = [g["id"] for g in REG.ALL_GATES if g.get("baseline_derivable")]
+check("only gates with known evidence debt derive a baseline",
+      _derivable == ["validate_batch_e6"], str(_derivable))
+check("a derived baseline is compared by check NAME, not by count",
+      "baseline_failing" in _runner_src and "validator_failing" in _runner_src,
+      "a swapped-out failure must not read as the same failure")
+check("PRE_EXISTING_BASELINE is its own status, never PASS",
+      R.BASELINE != R.PASS and R.BASELINE not in R.RELEASE_BLOCKING,
+      "named in the summary, does not block, is not green")
+check("an underivable baseline leaves the failure a FAIL",
+      "not derived" in _runner_src,
+      "a missing baseline is never an excuse to pass")
+check("a derived baseline is compared by SUBSET, not equality",
+      "live <= base" in _runner_src,
+      "equality reports an improvement as a regression")
+check("a baseline comparison records what the run FIXED",
+      "baseline_fixed" in _runner_src,
+      "a shrinking failure set is evidence, not noise")
+
+# Derived worktrees and git's ownership allowlist.
+# F: does not record filesystem ownership, so git refuses to operate in any
+# directory absent from safe.directory. The main clone is listed; a temporary
+# worktree never is. Without the exception, every git call inside a derived
+# tree dies and the "baseline" describes the sandbox rather than the ref.
+check("a derived worktree carries a scoped safe.directory exception",
+      "GIT_CONFIG_KEY_0" in _runner_src and "safe.directory" in _runner_src,
+      "otherwise git reports dubious ownership and the evidence reads as absent")
+check("the ownership exception is scoped to the worktree, never '*'",
+      'GIT_CONFIG_VALUE_0"] = str(work)' in _runner_src,
+      "one path, not a blanket allowlist")
+check("the exception reaches the CHILD validator too",
+      "env=worktree_env(work)" in _runner_src
+      and _runner_src.count("env=worktree_env(work)") == 2,
+      "both the audit and validator derivations pass it")
+
 check("--read-only excludes every mutating gate",
       not any(g["mutates_worktree"] for g in R.select_gates(Args(read_only=True))),
       "%d read-only gates" % len(R.select_gates(Args(read_only=True))))
