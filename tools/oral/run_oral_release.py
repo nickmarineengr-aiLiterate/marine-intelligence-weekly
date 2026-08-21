@@ -331,8 +331,21 @@ def classify_node(out, err, rc):
 
 # ------------------------------------------------------------------- health
 
+# PROVENANCE IS NOT A FINDING.
+#
+# Every line here describes WHERE the report was taken from, not what it found.
+# The runner deliberately runs the two sides with different `--source` flags, so
+# each of these lines differs by construction on every single run -- and one of
+# them, `Loading source: ...`, was missed. It leaked into the finding multiset
+# and produced a permanent `NEW=1 GONE=1`, which made this gate impossible to
+# pass on ANY tree, clean or otherwise. It is not a regression detector if it is
+# always red.
+#
+# Guarded for non-vacuity in test_oral_release_infra.py section 6: provenance
+# must be stripped AND a genuine finding difference must still be reported.
 _HEALTH_NOISE = re.compile(
-    r"^(=+|HEALTH CHECK SOURCE|source_type|source|commit|files|eol|findings)\b"
+    r"^(=+|HEALTH CHECK SOURCE|Loading source|source_type|source|commit"
+    r"|files|eol|findings)\b"
     r"|MIW QB \+ Notes Health Check|^\s*$")
 
 

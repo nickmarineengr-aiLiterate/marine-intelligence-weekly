@@ -266,9 +266,35 @@ check("every batch manifest satisfies the shared schema contract", not failed,
       "%d checks over %d manifest(s)" % (len(findings),
                                          len(list(HERE.glob("batch_*manifest.json")))))
 
+# EVERY batch manifest, named. Enumerated rather than counted for the same
+# reason POST_E6_GATES is: this control used to read `len(manifests) == 11`,
+# and F1 -- the first follow-up production batch -- turned it red simply by
+# existing. A hardcoded total is a guard that expires the next time the thing
+# it counts is added to, which is a confirmed defect class in this corpus.
+# Adding a batch now means editing one reviewable line here.
+EXPECTED_BATCH_MANIFESTS = [
+    "batch_a_manifest.json",
+    "batch_b_manifest.json",
+    "batch_c_manifest.json",
+    "batch_d_manifest.json",
+    "batch_e1_enrichment_manifest.json",
+    "batch_e2_enrichment_manifest.json",
+    "batch_e3_enrichment_manifest.json",
+    "batch_e4_enrichment_manifest.json",
+    "batch_e5_enrichment_manifest.json",
+    "batch_e6_enrichment_manifest.json",
+    "batch_e_gap0609_manifest.json",
+    "batch_f1_manifest.json",
+]
 manifests = sorted(HERE.glob("batch_*manifest.json"))
-check("all eleven batch manifests are audited", len(manifests) == 11,
-      "%d found" % len(manifests))
+check("every batch manifest on disk is audited, and no other",
+      sorted(p.name for p in manifests) == sorted(EXPECTED_BATCH_MANIFESTS),
+      "on_disk=%d expected=%d unexpected=%s missing=%s"
+      % (len(manifests), len(EXPECTED_BATCH_MANIFESTS),
+         sorted(set(p.name for p in manifests) - set(EXPECTED_BATCH_MANIFESTS))
+         or "none",
+         sorted(set(EXPECTED_BATCH_MANIFESTS) - set(p.name for p in manifests))
+         or "none"))
 
 unclassified = set()
 for path in manifests:
@@ -382,6 +408,53 @@ check("ref mode without a ref is rejected",
       raises(lambda: H.load_source("ref", None), ValueError))
 check("an unknown source is rejected, never silently substituted",
       raises(lambda: H.load_source("prod", None), ValueError))
+
+# ---------------------------------------------------------------------------
+# The runner's health comparison must strip PROVENANCE and keep FINDINGS.
+#
+# The runner deliberately runs the two sides with different `--source` flags, so
+# every line describing where the report came from differs by construction. One
+# of them -- `Loading source: ...` -- was not in the noise filter, leaked into
+# the finding multiset, and produced a permanent NEW=1 / GONE=1. A gate that is
+# always red detects nothing.
+#
+# Both directions are asserted: provenance must vanish, and a REAL difference
+# must still survive, so this can never be "fixed" by filtering everything.
+# ---------------------------------------------------------------------------
+import run_oral_release as R  # noqa: E402
+
+_LOCAL_REPORT = (
+    "MIW QB + Notes Health Check\n"
+    "Loading source: local ...\n"
+    "source_type : local\n"
+    "source      : F:\\Marine-Intelligence-Weekly (working tree, DIRTY)\n"
+    "commit      : 67842df\n"
+    "files       : 951\n"
+    "findings    : 152\n"
+    "QB1_A.html: some genuine finding\n")
+_REF_REPORT = (
+    "MIW QB + Notes Health Check\n"
+    "Loading source: ref (origin/main) ...\n"
+    "source_type : ref\n"
+    "source      : origin/main\n"
+    "commit      : 67842df\n"
+    "files       : 837\n"
+    "findings    : 152\n"
+    "QB1_A.html: some genuine finding\n")
+
+_cand = R.health_findings(_LOCAL_REPORT)
+_base = R.health_findings(_REF_REPORT)
+check("provenance lines never count as health findings",
+      not (_cand - _base) and not (_base - _cand),
+      "new=%s gone=%s" % (sorted(_cand - _base), sorted(_base - _cand)))
+check("the source banner specifically is stripped",
+      not any("Loading source" in line for line in _cand),
+      "kept=%s" % sorted(_cand))
+
+_changed = R.health_findings(
+    _LOCAL_REPORT.replace("some genuine finding", "a DIFFERENT finding"))
+check("a real finding difference is still detected (filter is not vacuous)",
+      bool(_changed - _base), "new=%s" % sorted(_changed - _base))
 
 CLEAN = "<div class=\"q-card\" id=\"q1\"><p>clean</p></div>\n"
 DIRTY = "<div class=\"q-card\" id=\"q1\"><p>CORRUPTED-BY-TEST</p></div>\n"
