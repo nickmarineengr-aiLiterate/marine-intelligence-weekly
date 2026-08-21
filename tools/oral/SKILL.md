@@ -145,7 +145,7 @@ this file.
 
 ```bash
 python tools/oral/run_oral_release.py --plan     # inspect the sequence
-python tools/oral/run_oral_release.py --full     # 41 gates + determinism
+python tools/oral/run_oral_release.py --full     # 43 gates + determinism
 ```
 
 **Two flags, not one.** `historical_39` is *provenance* — it records which gates were in
@@ -158,10 +158,23 @@ enumerates its 37 by name (Node counted as three records); E5 reports 37 with No
 collapsed to one plus the two E5 gates; E6 reports 39 — E5 plus `validate_batch_e6` and
 `batch_e6_mutate`. Adding a batch adds exactly those two gates and nothing else.
 Determinism is registered separately because all three handoffs report it outside the
-gate count. Two **post-E6** gates — `validate_corrections` and `corrections_mutate` —
-bring a default run to 41; they are not part of the historical 39 and are not held back
-either, because a release must never ship an unverified correction. Adding a *correction*
-adds no gates at all: both iterate every `correction_*_manifest.json` on disk.
+gate count. **Four post-E6 gates** bring a default run to 43. None is part of the
+historical 39 and none is held back:
+
+* `validate_corrections` / `corrections_mutate` — a release must never ship an
+  unverified correction. Adding a *correction* adds no gates at all: both iterate every
+  `correction_*_manifest.json` on disk.
+* `validate_followup_register` / `followup_register_mutate` — the register pins the
+  anchor and question text of 35 parent cards, and its validator reads the **live**
+  corpus. So a release that moves or rewords one of those cards turns this gate red at
+  the moment the drift happens, instead of months later when a follow-up batch tries to
+  author against a parent that no longer says what was recorded. It guards no shipped
+  bytes; it is a standing target-drift detector.
+
+The post-E6 set is **enumerated by name** in `test_oral_release_runner.py`
+(`POST_E6_GATES`), and the expected totals are derived from that list. Registering a new
+gate therefore means editing one reviewable line — and a hardcoded total can never
+expire out from under the control.
 
 The runner owns these behaviours so no future session has to remember them:
 
@@ -251,18 +264,73 @@ uncommitted corruption, where local mode must see it and ref mode must not.
 
 ## 7. Follow-up production mode
 
-The next workload is **35 follow-up groups** — examiner follow-up questions attached to
-existing cards. The workflow is the enrichment workflow with two extra steps, and the
-tooling above is deliberately batch-kind agnostic:
+### 7.1 Production starts from the committed register — never from prose
+
+**`tools/oral/oral_followup_register.json` is the source of truth for all 35 follow-up
+actions `FUP-001`..`FUP-035`.** A new session must **not** reconstruct them from a
+handoff, a reconciliation record or chat memory. Read the register.
+
+```bash
+python tools/oral/build_followup_register.py --check   # is it current?
+python tools/oral/validate_followup_register.py        # 32 checks
+python tools/oral/mutate_followup_register.py          # 12 mutations
+```
+
+The register is **generated**, not hand-written. `build_followup_register.py` re-derives
+it from three sources pinned by **blob SHA** (branches move; blobs do not), regroups the
+39 follow-up source families by parent card, re-derives the `FUP-NNN` identifiers and
+refuses to write if they disagree with the committed ones. Never hand-edit the JSON —
+`register_is_byte_current_with_its_generator` fails immediately, and every mutation in
+the suite has to trip its *own* named check to count as caught, precisely so that
+byte-currency check cannot be the only thing holding the guard up.
+
+**Register ≠ batch manifest.** The register says what is **authorised**; a
+`batch_f*_manifest.json` says what a run **implemented**. Do not collapse them — the
+register names 35 parent cards it has never edited, so admitting it to
+`authorisation_manifest_paths()` would exempt all 35 from every historical guard.
+`test_oral_release_infra.py` pins that separation.
+
+### 7.2 A confirmed disposition is not a confirmed target
+
+All 39 source families are `LAPTOP_CONFIRMED`. That confirms the **disposition**
+(this is a follow-up, not a card), and nothing about the parent it points at.
+
+**Only 4 of 39 had their parent card chosen by hand.** The other 35 carry
+`decision_basis: "rule: material partial dispositioned by recurrence"`, and their
+`decision_target` is literally `current_best_answer_question_id` — an IDF coverage
+score. That is why several look like weak topical matches: the score picked the card,
+not a person. Two have since **drifted** — the score no longer selects the target it
+assigned.
+
+So every action carries `target_confidence` (HIGH / MEDIUM / LOW) and
+`target_review_status`:
+
+| status | meaning |
+|---|---|
+| `CONFIRMED` | hand-adjudicated parent; produce against it |
+| `REQUIRES_LIVE_ADJUDICATION` | score-chosen; read the live answer body first |
+| `RETARGET_REQUIRED` | the score no longer selects this parent; re-home it |
+| `METADATA_ONLY_CANDIDATE` | the source says it is *not an answer* — likely a trap |
+
+`currentness_required` is a **floor, not a ceiling**: it is derived by conservative
+pattern match over the candidate's ask, so a perishable fact with no date word in it
+will not be flagged. The batch confirms currentness; the register only pre-warns.
+
+`verification_class` is `UNCLASSIFIED_PENDING_BATCH_SCOPING` for all 35 — the source
+records carry an empty `technical_verification_scope` for every follow-up family, so
+assigning a governed class in the register would have been invention. The producing
+batch assigns the real class.
+
+### 7.3 The workflow
 
 ```
-follow-up group
-  -> resolve canonical home and relationship (which card owns the answer?)
-  -> current-live recheck (is it already answered on that card?)
-  -> primary verification where the answer is regulatory
+follow-up register  (committed, validated)
+  -> select a bounded batch          (by target_review_status, not by id order)
+  -> current-live target adjudication
+  -> authority / currentness review
   -> bounded product edit
-  -> relationship metadata      <-- new
-  -> manifest (oral_manifest.py)
+  -> relationship metadata
+  -> batch production manifest (oral_manifest.py)
   -> validator (fails closed)
   -> mutation preflight
   -> mutation suite (parse with the shared parser)
@@ -270,13 +338,20 @@ follow-up group
   -> handoff
 ```
 
-**Relationship metadata.** Record the follow-up as a directed edge:
-`question -> examiner follow-up -> next canonical question/answer`. Keep it clean enough
-that a later examiner simulator can walk it. Do **not** build a Study Engine now; just
-do not represent the relationship in a way that would need re-authoring to consume.
+**Relationship metadata.** The register already records the directed edge
+`parent_question -> EXAMINER_FOLLOW_UP -> answer_home`, so a later examiner simulator
+can walk it. Carry it into the batch manifest unchanged. Do **not** build a Study Engine
+now; just do not re-represent the relationship in a way that would need re-authoring.
 
 `creates_new_cards` may be **true** for a follow-up batch. Do not assume the
 enrichment-only invariant of "0 cards added"; assert whatever the manifest declares.
+Every action in the register is currently `creates_new_card: false`, and the validator
+enforces that against an explicitly empty exception list.
+
+**Colocation.** Nine follow-ups land on a card a shipped enrichment already edited
+(`colocated_enrichment_actions`). Read the live card before adding a limb — the
+enrichment may already have said it. `FUP-034` is the known case: `QB9_G#q3`, already
+touched by E6's `A046`. Keep `FUP-034`/`FUP-035` out of the first batch.
 
 ---
 
