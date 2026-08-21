@@ -331,20 +331,25 @@ Do not persist a lesson that is specific to one batch's content.
    (43 invalid literals). Pre-existing baseline, carried since E1.
 4. **Stale counters** in `VALIDATION_RESULTS.json` / `PHASE2_VALIDATION_RESULTS.json`
    (`live_questions` 688 vs 721, `headings` 954 vs 960).
-5. **RELEASE-BLOCKING — the E1–E6 validators are red on `main` at `1922db1`.** The
-   candidate-correction commits `7135a7a` and `1922db1` changed `QB1_A#q24`,
-   `QB1_A#q25`, `QB1_B#q15` and `QB5_A#q4` **without a batch manifest**, so every
-   enrichment-generation validator fails `only_authorised_cards_changed`:
-   `validate_batch_e1` 1 failure, `validate_batch_e2` 1, `validate_batch_e6` 2 (the
-   second is item 1 above). `validate_batch_a` still passes — generation-1 validators
-   carry no corpus-wide authorisation check.
+5. **RELEASE-BLOCKING — 7 of the 11 batch validators are red on `main` at `1922db1`.**
+   The candidate-correction commits `7135a7a` and `1922db1` changed `QB1_A#q24`,
+   `QB1_A#q25`, `QB1_B#q15` and `QB5_A#q4` **without a batch manifest**. Verified by
+   `run_oral_release.py --category batch --read-only --keep-going`:
 
-   **This is the sibling-manifest contract working, not a tooling defect** (§8): an
-   authorised change that no manifest declares is exactly what these guards exist to
-   catch. It was invisible until now only because no committed runner existed. A full
-   release cannot go green until the correction is declared in a manifest that the
-   E1–E6 guards can delegate to, or the guards are deliberately reconciled. Product
-   content was deliberately NOT touched when this was found.
+   | Validator | Result | Failing check |
+   |---|---|---|
+   | `validate_batch_a` / `_c` / `_d` / `gap0609` | PASS | — |
+   | `validate_batch_b` | **FAIL 1** | `pre_existing_cards_unchanged`, drifted `QB5_A#q4` |
+   | `validate_batch_e1`…`e5` | **FAIL 1** each | `only_authorised_cards_changed` |
+   | `validate_batch_e6` | **FAIL 2** | the above, plus item 1 |
+
+   **This is the authorisation contract working, not a tooling defect** (§8): a change
+   that no manifest declares is exactly what these guards exist to catch, and `batch_b`
+   caught it through a digest pin rather than the corpus-wide check. It was invisible
+   until now only because no committed runner existed. A full release cannot go green
+   until the correction is declared in a manifest the older guards can delegate to, or
+   the guards are deliberately reconciled. Product content was deliberately NOT touched
+   when this was found.
 
 6. ~~No committed release runner.~~ **Closed 21 August 2026** —
    `tools/oral/run_oral_release.py` + `oral_release_gates.py`.
