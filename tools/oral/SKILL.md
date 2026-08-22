@@ -259,7 +259,9 @@ uncommitted corruption, where local mode must see it and ref mode must not.
 | **Counting `.q-card` divs** | Gives 723 against a canonical 721. Use the canonical extractor. |
 | **Guards that expire** | A guard pinning "the corpus total is 721" or "batches A–D digests" passes vacuously on the next batch. This has happened at least four times. Pin identities, not totals. |
 | **Reading the wrong exit code** | `cmd \| tail; echo $?` reports `tail`'s status. Use `${PIPESTATUS[0]}`. |
-| **Fixtures harvested from live state** | A self-test that reads the live corpus stops testing anything the moment the corpus changes. Build the fixture. |
+| **Fixtures harvested from live state** | A self-test that reads the live corpus stops testing anything the moment the corpus changes. Build the fixture — or, where the point is to drive the shipped validator, DERIVE its inputs (§7.5b). |
+| **A killed mutating gate leaves product bytes** | `test_oral_supersession.py` and every `mutate_batch_*.py` restore in a `finally:`, which does **not** run when the process is killed by a timeout. Run them through `run_oral_release.py`, which owns a byte snapshot and an exact-path restore. Invoked bare and killed at 2 minutes, the supersession control left `QB1_A.html` mutated on disk and `validate_batch_e1.py` red — a "failure" that was purely the leftover. Check `git status` before believing a validator that suddenly went red. |
+| **Never run two gates concurrently** | The runner enforces serial ownership for a reason. A validator run while a mutating control was live in the background read a transiently-probed `QB3_I.html` and reported a card as changed that was byte-identical to `HEAD`. |
 | **`process.exit()` after a fetch** | Crashes libuv on Windows (0xC0000409). |
 
 ---
@@ -515,6 +517,78 @@ Three things to know before you write one:
 Controls: `tools/oral/test_oral_supersession.py` — the algebra in memory, then
 the same contract driven through the real E1 and F1 validators against the live
 corpus, with every card restored byte-exactly.
+
+### 7.5a Discharging a hold — `discharges_hold`
+
+**Batch F1b, 22 August 2026, is the first production chain on main:**
+`batch_e1_enrichment_manifest.json/ENRICH-A003` (`a1deaf3445bc1c88`) →
+`batch_f1b_manifest.json/FUP-006` (`46defd301a1f56a3`), which is live. E1 stayed
+at 25 checks / 0 FAIL throughout and was neither rebaselined nor relaxed.
+
+A hold is closed by the batch that does the work, **never** by editing the batch
+that declared it. `discharges_hold` is the mirror of `held_actions` and is
+`LOAD_BEARING`, asserted by `audit_manifest`:
+
+| Assertion | Prevents |
+|---|---|
+| `discharged_holds_well_formed` | a discharge with no id, holder or reason |
+| `discharged_holds_are_actually_produced` | claiming a discharge the batch never implemented |
+| `discharged_holds_name_a_real_hold` | pointing at a manifest that never held it — or whose hold has since been deleted |
+
+So F1's manifest still says FUP-006 was `HELD_GOVERNANCE` with
+`work_still_owed: true`, permanently and truthfully, because that is what F1
+did. "Is it still owed?" is answered by **searching for a discharge**, not by
+arithmetic over handoffs. `validate_batch_f1b.py` asserts both halves, and its
+mutations O, P, Q and R attack the history rather than the product — laundering
+a hold is invisible to every digest check in the toolchain.
+
+### 7.5b A guard expires in BOTH directions
+
+Guard expiry is a confirmed defect class here, and F1b hit it twice in one
+session — once in each direction. Both were caused by a *legitimate* change.
+
+* **Starts failing.** `validate_batch_f1.py`'s `held_action_target_untouched`
+  asserted the held card was byte-unchanged. Correct while held; wrong the
+  instant the hold was discharged.
+* **Keeps passing while meaning nothing.** `test_oral_supersession.py` asserted
+  *"no supersession is declared on main today"* — true on the day the mechanism
+  landed, and guaranteed to go stale the first time it was used. This is the
+  more dangerous shape: nothing goes red, the guard just stops describing the
+  repository.
+
+**The rule: make the check change SUBJECT, do not stand it down, and never
+special-case the action that exposed it.**
+
+```
+no discharge declared -> the held card must be UNCHANGED        (original semantics)
+discharge declared    -> the held card must be exactly the state
+                         the discharging record PINNED
+```
+
+Non-vacuous under both regimes, and an arbitrary edit fails it either way —
+proved by F1's mutation C, which still trips the same named check. Likewise the
+chain audit now asserts *every declared chain resolves* instead of *no chain
+exists*: silent when there are none, stronger when there are.
+
+**A live fixture must DERIVE its predecessor, never hardcode one.**
+`test_oral_supersession.py` pinned `ENRICH-A003 / a1deaf3445bc1c88` as the state
+its scratch successor descended from. F1b legitimately appended a state, so the
+scratch became a second successor to one predecessor — reported as `CHAIN_FORK`,
+which reads as a broken contract when the only stale thing was the fixture.
+`terminal_state_for()` now asks the resolver where the chain currently ends. The
+suite went **48 checks → 55**, because the FUP-006 case stopped returning early
+and now proves the contract at depth three.
+
+Two smaller traps from the same session, both worth knowing:
+
+* **A resolver failure changes shape once a chain exists.** The same probe that
+  reported `PIN_MISMATCH` reports `TERMINAL_NOT_LIVE` once a successor is
+  declared. A parser that reads only the first shape silently returns `None`.
+* **Registering a batch touches four files, not one:** the gate pair in
+  `oral_release_gates.py` (with `historical_39=False`), `POST_E6_GATES` and
+  `POST_E6_MUTATION_SUITES` in `test_oral_release_runner.py`, and
+  `EXPECTED_BATCH_MANIFESTS` in `test_oral_release_infra.py`. Miss the last and
+  the new manifest turns an unrelated control red simply by existing.
 
 ## 8. Sibling-manifest delegation
 
