@@ -113,6 +113,50 @@ def written_paper(paper_id):
     return _link(f'{WRITTEN_DIR}/{paper_id}.html', paper_id, paper_id)
 
 
+_PACK_INDEX = None
+
+
+def pack_index():
+    """topic_id -> pack filename, resolved from each pack's own H1.
+
+    The filename numbers a pack by STUDY ORDER (`TOPIC_02_` is the second topic
+    to study), and the study order is not the topic id -- Topic 02 is `D03`.
+    Deriving the map from the leading `TOPIC nn -- title (`Dnn`)` heading makes
+    the pack say which topic it is, instead of the filename being read as an id
+    it never was. A pack with no such marker falls back to the old positional
+    rule, so TOPIC_01_/D01 keeps resolving either way.
+    """
+    global _PACK_INDEX
+    if _PACK_INDEX is not None:
+        return _PACK_INDEX
+    idx = {}
+    d = os.path.join(ROOT, PACK_DIR)
+    if os.path.isdir(d):
+        for name in sorted(os.listdir(d)):
+            if not (name.startswith('TOPIC_') and name.endswith('.md')):
+                continue
+            head = ''
+            with open(os.path.join(d, name), encoding='utf-8',
+                      errors='replace') as fh:
+                for line in fh:
+                    if line.startswith('# '):
+                        head = line
+                        break
+            m = re.search(r'\(`(D\d{2})`\)', head)
+            if m:
+                idx.setdefault(m.group(1), name)
+            else:
+                m2 = re.match(r'TOPIC_(\d+)_', name)
+                if m2:
+                    idx.setdefault('D' + m2.group(1), name)
+    _PACK_INDEX = idx
+    return idx
+
+
+def pack_filename(topic_id):
+    return pack_index().get(topic_id)
+
+
 def topic_pack(topic_id):
     """Nixon's local study pack, as a Windows-safe file:/// URL.
 
@@ -123,15 +167,7 @@ def topic_pack(topic_id):
     internally, so a pack that will not open is an inconvenience, not a
     blocker.
     """
-    num = topic_id[1:] if topic_id.startswith('D') else topic_id
-    prefix = f'TOPIC_{num}_'
-    d = os.path.join(ROOT, PACK_DIR)
-    hit = None
-    if os.path.isdir(d):
-        for name in sorted(os.listdir(d)):
-            if name.startswith(prefix) and name.endswith('.md'):
-                hit = name
-                break
+    hit = pack_filename(topic_id)
     if not hit:
         return {'ok': False, 'reason': f'no topic pack for {topic_id}',
                 'url': None, 'repo_path': None, 'anchor': None,

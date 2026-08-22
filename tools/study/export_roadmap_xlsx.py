@@ -134,14 +134,26 @@ def load_sessions():
     plan at all.
     """
     doc = _load(SESSIONS)
-    src = doc['derived_from']
-    pack = os.path.join(ROOT, src['path'])
-    if not os.path.exists(pack):
-        doc['pack_status'] = 'PACK_MISSING'
-    else:
+    pins = doc['derived_from']
+    if isinstance(pins, dict):        # schema 1.0 held a single pin
+        pins = [dict(pins, topic_id=pins.get('topic_id') or 'D01')]
+        doc['derived_from'] = pins
+    statuses = {}
+    for pin in pins:
+        pack = os.path.join(ROOT, pin['path'])
+        if not os.path.exists(pack):
+            statuses[pin['topic_id']] = 'PACK_MISSING'
+            continue
         actual = hashlib.sha256(open(pack, 'rb').read()).hexdigest()
-        doc['pack_status'] = ('CURRENT' if actual == src['sha256']
-                              else 'STALE_PACK_CHANGED')
+        statuses[pin['topic_id']] = ('CURRENT' if actual == pin['sha256']
+                                     else 'STALE_PACK_CHANGED')
+    doc['pack_statuses'] = statuses
+    # One bad pin fails the lot. A workbook that renders four current plans and
+    # one stale one is more dangerous than one that refuses to render.
+    bad = sorted(k for k, v in statuses.items() if v != 'CURRENT')
+    doc['pack_status'] = ('CURRENT' if not bad else
+                          '; '.join('%s %s' % (k, statuses[k]) for k in bad))
+    doc['pack_paths'] = {pin['topic_id']: pin['path'] for pin in pins}
     return doc
 
 
@@ -400,21 +412,44 @@ def build_model():
 
     current_tasks = _tasks(pos['session'])
 
-    # The study queue is the current session's tasks followed by the rest of
-    # the topic's approved sessions, so "what comes next" is never a guess.
+    # The study queue is the current session's tasks, then the rest of this
+    # topic's approved sessions, then EVERY LATER TOPIC in study order that has
+    # approved sessions. Nixon must never have to wait for a future session of
+    # this tool to know what comes after the topic he is on: if the plan exists,
+    # it is already in the queue.
+    from_here = [t for t in topics
+                 if not pos['topic']
+                 or t['study_order'] >= pos['topic']['study_order']]
+    by_topic = {}
+    for t in from_here:
+        mine = sorted([x for x in sessions_doc['sessions']
+                       if x['topic_id'] == t['topic_id']],
+                      key=lambda x: x['session_number'])
+        if mine:
+            by_topic[t['topic_id']] = mine
+    queued_sessions = [s for group in by_topic.values() for s in group]
+
     queue, order_n = [], 0
-    for sess in pos['sessions_for_topic']:
-        if pos['session'] and sess['session_number'] < pos['session']['session_number']:
+    for sess in queued_sessions:
+        if (pos['topic'] and sess['topic_id'] == pos['topic']['topic_id']
+                and pos['session']
+                and sess['session_number'] < pos['session']['session_number']):
             continue
         for row in _tasks(sess):
             order_n += 1
             queue.append(dict(row, queue_order=order_n,
                               topic_id=sess['topic_id'],
+                              session_id=sess.get('session_id'),
                               session_number=sess['session_number'],
                               session_title=sess['title'],
                               session_note=sess.get('note') or '',
-                              is_current_session=(pos['session'] is not None
-                                  and sess['session_number'] == pos['session']['session_number'])))
+                              task_reason=row.get('reason') or '',
+                              is_current_session=(
+                                  pos['session'] is not None
+                                  and pos['topic'] is not None
+                                  and sess['topic_id'] == pos['topic']['topic_id']
+                                  and sess['session_number']
+                                      == pos['session']['session_number'])))
 
     # Every solved written question, carrying its topic and a checked link.
     # This is the honest answer to "written by topic": solvedQP/topics.html
@@ -452,7 +487,9 @@ def build_model():
         'current_tasks': current_tasks,
         'queue': queue,
         'written_by_topic': written_rows,
-        'skeleton': skeleton_branches(sessions_doc['derived_from']['path']),
+        'skeleton': skeleton_branches(
+            sessions_doc['pack_paths'].get(
+                (pos['topic'] or {}).get('topic_id'), '')),
         'progression': progress.get('progression') or [],
         'link_failures': LINKS.validate(all_links),
         'link_count': len(all_links),
@@ -707,9 +744,12 @@ def render_workbook(model, out_path):
     r = 2
     for q in model['queue']:
         vals = [q['queue_order'], q['topic_id'],
-                'S%d \u2014 %s' % (q['session_number'], q['session_title']),
+                '%s \u2014 %s' % (q.get('session_id')
+                                  or 'S%d' % q['session_number'],
+                                  q['session_title']),
                 q['type'], q['question_id'] or '\u2014', q['question'],
-                q['session_note'] or q['task'], q['examiners'], q['recurrence'],
+                q.get('task_reason') or q['session_note'] or q['task'],
+                q['examiners'], q['recurrence'],
                 q['currentness'],
                 'CURRENT' if q['is_current_session'] else 'QUEUED']
         for i, v in enumerate(vals, 1):
@@ -932,9 +972,17 @@ def render_workbook(model, out_path):
     ]
     for k, v in sorted(model['versions'].items()):
         about.append(['', f'{k}', str(v)])
+    about.append([''])
+    about.append(['Topic packs pinned'])
+    for pin in model['sessions_doc']['derived_from']:
+        about.append(['', pin['topic_id'], '%s  (%s)'
+                      % (pin['path'],
+                         model['sessions_doc']['pack_statuses'][pin['topic_id']])])
     about += [
         [''],
-        ['Study sessions', model['sessions_doc']['derived_from']['path']],
+        ['Study sessions', '%d session(s) across %d topic pack(s)'
+         % (len(model['sessions_doc']['sessions']),
+            len(model['sessions_doc']['derived_from']))],
         ['Sessions vs pack', model['sessions_doc']['pack_status']],
         ['Checked routes', '%d, of which %d could not be resolved'
          % (model['link_count'], len(model['link_failures']))],
