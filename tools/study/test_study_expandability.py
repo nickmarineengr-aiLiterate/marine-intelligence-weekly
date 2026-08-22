@@ -1,0 +1,327 @@
+#!/usr/bin/env python3
+"""Controls proving the study system can grow without being redesigned.
+
+The failure this suite exists to prevent is not a crash. It is the quieter
+one: a schema that works perfectly today and has to be rewritten the moment
+sixteen years of Written Question Intelligence arrive. So the tests assert
+expandability directly --
+
+  * a consumer must tolerate every historical-QI field being null;
+  * a PARTIAL recovery must be storable as exactly the range recovered;
+  * a fake "COMPLETE" claim must be REJECTED, not rounded up;
+  * public copy must be derived, so it cannot outrun the stored evidence;
+  * today's numbers must not move while all of the above is true.
+
+Fixtures are synthetic and in-memory. Nothing here writes a governed artefact,
+because a self-test that harvests live corpus state is a wasting asset -- it
+passes until the corpus grows and then silently measures nothing.
+
+Usage:  python tools/study/test_study_expandability.py
+"""
+import copy, io, json, os, re, sys
+
+if __name__ == '__main__':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.dirname(os.path.dirname(HERE))
+sys.path.insert(0, HERE)
+
+import evidence_model as EM
+import export_roadmap_xlsx as RX
+import build_topic_pages as BP
+
+D = os.path.join(ROOT, 'docs', 'study')
+PASS, FAIL = [], []
+
+
+def ok(name, cond, detail=''):
+    (PASS if cond else FAIL).append(name if cond else f'{name}: {detail}')
+
+
+def _load(n):
+    return json.load(open(os.path.join(D, n), encoding='utf-8'))
+
+
+# --------------------------------------------------------------------------- #
+# Backward compatibility -- today's numbers must not move
+# --------------------------------------------------------------------------- #
+def test_current_values_preserved():
+    spine, mappings = _load('study_spine.json'), _load('study_mappings.json')
+    official, cov = _load('official_syllabus.json'), _load('coverage_matrix.json')
+    ok('10 canonical topics preserved', len(spine['domains']) == 10,
+       str(len(spine['domains'])))
+    ok('topic ids are still D01..D10',
+       sorted(d['domain_id'] for d in spine['domains'])
+       == [f'D{i:02d}' for i in range(1, 11)])
+    ok('25 official nodes preserved', len(official['nodes']) == 25,
+       str(len(official['nodes'])))
+    ok('1081 mappings preserved', len(mappings['mappings']) == 1081,
+       str(len(mappings['mappings'])))
+    ok('every official node still scored for coverage',
+       len(cov['nodes']) == 25, str(len(cov['nodes'])))
+    ok('mapping summary still accounts for every record',
+       sum(mappings['summary']['by_status'].values()) == 1081)
+
+
+def test_stable_identity_fields_present():
+    """Stable ids are load-bearing; evidence growth must not migrate them."""
+    rec = next(iter(_load('study_mappings.json')['mappings'].values()))
+    for f in ('canonical_question_id', 'content_type', 'topic_id',
+              'syllabus_version', 'official_syllabus_version'):
+        ok(f'stable identity field {f} present', f in rec)
+    node = _load('official_syllabus.json')['nodes'][0]
+    for f in ('official_node_id', 'official_order', 'source_digest'):
+        ok(f'stable official field {f} present', f in node)
+
+
+# --------------------------------------------------------------------------- #
+# Expandability -- the historical QI socket
+# --------------------------------------------------------------------------- #
+def test_socket_is_declared_and_empty():
+    h = _load('written_evidence_horizon.json')['layers']['historical_written_qi']
+    ok('historical layer is declared', h['layer'] == 'HISTORICAL_WRITTEN_QI')
+    ok('historical layer is honestly NOT_STARTED', h['status'] == 'NOT_STARTED',
+       h['status'])
+    ok('socket publishes its dormancy vocabulary',
+       set(h['dormancy_classes']) == set(EM.DORMANCY_CLASSES))
+    ok('socket publishes its relevance vocabulary',
+       set(h['relevance_classes']) == set(EM.RELEVANCE))
+    ok('socket distinguishes long-term from recent recurrence',
+       'all_time' in h['recurrence_windows']
+       and 'last_5_years' in h['recurrence_windows']
+       and 'last_3_years' in h['recurrence_windows'],
+       str(h['recurrence_windows']))
+    ok('socket carries a stable family id namespace',
+       h['family_id_namespace'] == 'FAMILY-EM-', h['family_id_namespace'])
+    ok('the 2006-2020 gap is recorded rather than glossed',
+       any(g['from_year'] == 2006 and g['to_year'] == 2020
+           for g in h['known_gaps']), str(h['known_gaps']))
+
+
+def test_consumers_tolerate_a_null_socket():
+    """A renderer that breaks on an empty socket is not actually expandable."""
+    model = RX.build_model()
+    ok('roadmap model builds with the socket empty', len(model['topics']) == 10)
+    for t in model['topics']:
+        for f in RX.FUTURE_WRITTEN_FIELDS:
+            ok(f'{t["topic_id"]} carries reserved field {f}', f in t)
+    ok('reserved fields render as NOT YET INTEGRATED, never as a number',
+       all(t['historical_written_papers'] == RX.NOT_YET
+           for t in model['topics']))
+
+
+def test_partial_recovery_is_storable_exactly():
+    """If only 2018-2026 is recovered, store 2018-2026 -- not 2010-2026."""
+    partial = EM.empty_qi_socket(
+        'VALIDATED_RANGE',
+        papers_total=88, questions_total=792,
+        earliest_year=2018, latest_year=2026,
+        earliest_sitting='2018-01', latest_sitting='2026-08',
+        validated_ranges=[{'from_year': 2018, 'to_year': 2026}],
+        known_gaps=[{'from_year': 2010, 'to_year': 2017,
+                     'reason': 'not recovered'}])
+    ok('a partial range validates', EM.assert_honest(partial) == [],
+       str(EM.assert_honest(partial)))
+    ok('a partial range keeps its real earliest year',
+       partial['earliest_year'] == 2018)
+    ok('a partial range still records what is missing',
+       partial['known_gaps'][0]['from_year'] == 2010)
+
+
+def test_fake_completeness_is_rejected():
+    bad = EM.empty_qi_socket('VALIDATED_RANGE')          # no ranges, no counts
+    ok('VALIDATED_RANGE with no evidence is rejected', EM.assert_honest(bad) != [])
+
+    lying = EM.empty_qi_socket(
+        'COMPLETE', papers_total=10, questions_total=90,
+        earliest_year=2010, latest_year=2026,
+        validated_ranges=[{'from_year': 2010, 'to_year': 2026}],
+        known_gaps=[{'from_year': 2012, 'to_year': 2015, 'reason': 'missing'}])
+    ok('COMPLETE while gaps are recorded is rejected',
+       EM.assert_honest(lying) != [], 'accepted a contradictory completeness claim')
+
+    inverted = EM.empty_qi_socket(
+        'VALIDATED_RANGE', papers_total=5, questions_total=45,
+        earliest_year=2026, latest_year=2010,
+        validated_ranges=[{'from_year': 2010, 'to_year': 2026}])
+    ok('an inverted year range is rejected', EM.assert_honest(inverted) != [])
+
+    populated_but_unstarted = EM.empty_qi_socket('NOT_STARTED', papers_total=40)
+    ok('NOT_STARTED carrying counts is rejected',
+       EM.assert_honest(populated_but_unstarted) != [])
+
+    try:
+        EM.empty_qi_socket('MOSTLY_DONE')
+        ok('an unknown status is rejected', False, 'accepted MOSTLY_DONE')
+    except SystemExit:
+        ok('an unknown status is rejected', True)
+
+
+# --------------------------------------------------------------------------- #
+# Public claim policy
+# --------------------------------------------------------------------------- #
+def test_public_claim_cannot_outrun_the_evidence():
+    horizon = _load('written_evidence_horizon.json')
+    cur = horizon['layers']['current_solved_written']
+    hist = horizon['layers']['historical_written_qi']
+    claim = EM.public_evidence_claim(cur, hist)
+    ok('claim is the stored derived sentence',
+       claim == horizon['public_claim']['derived_sentence'])
+    for forbidden in ('2010', '16 years', 'since 2010'):
+        ok(f'claim does not assert {forbidden!r}', forbidden not in claim, claim)
+    ok('claim states the real current span',
+       cur['earliest_sitting'] in claim and cur['latest_sitting'] in claim)
+
+    # ...and it strengthens BY ITSELF once, and only once, evidence exists.
+    validated = EM.empty_qi_socket(
+        'VALIDATED_RANGE', papers_total=88, questions_total=792,
+        earliest_year=2015, latest_year=2026,
+        validated_ranges=[{'from_year': 2015, 'to_year': 2026}])
+    stronger = EM.public_evidence_claim(cur, validated)
+    ok('a validated layer strengthens the claim automatically',
+       '2015' in stronger and 'historical' in stronger.lower(), stronger)
+    ok('a NOT_STARTED layer never strengthens it',
+       EM.public_evidence_claim(cur, hist) == claim)
+
+
+def test_pages_make_no_unearned_claim():
+    for name in ('topics.html', 'study.html'):
+        page = open(os.path.join(ROOT, 'meoclass1', name),
+                    encoding='utf-8').read()
+        for forbidden in ('since 2010', '16 years', '2010-2026', '2010–2026'):
+            ok(f'{name} makes no {forbidden!r} claim', forbidden not in page)
+        ok(f'{name} states the adopted syllabus is not yet in force',
+           '2027-01-01' in page, 'effective date missing')
+
+
+# --------------------------------------------------------------------------- #
+# Leakage
+# --------------------------------------------------------------------------- #
+def test_no_review_queue_leakage():
+    """An unadjudicated mapping must not be presented as settled."""
+    queue = {i['canonical_question_id'] for i in _load('mapping_review_queue.json')['items']}
+    store = _load('study_mappings.json')['mappings']
+    ok('every queued item is genuinely unsettled',
+       all(store[q]['mapping_status'] != 'VALID_MAPPED'
+           or store[q].get('last_reviewed') for q in queue if q in store),
+       'a queued question is published as VALID_MAPPED without a review stamp')
+    page = open(os.path.join(ROOT, 'meoclass1', 'topics.html'),
+                encoding='utf-8').read()
+    ok('the topic page never labels a mapping "confirmed" or "verified"',
+       not re.search(r'\b(confirmed|verified) mapping\b', page, re.I))
+
+
+def test_no_paid_answer_leakage():
+    """The study pages carry question stems and links -- never answers."""
+    page = open(os.path.join(ROOT, 'meoclass1', 'topics.html'),
+                encoding='utf-8').read()
+    for marker in ('15-second answer', '60-second answer', 'model_answer',
+                   'CE Oral Tip', 'class="answer"', 'Exam Plan'):
+        ok(f'topic page carries no {marker!r}', marker not in page)
+    study = open(os.path.join(ROOT, 'meoclass1', 'study.html'),
+                 encoding='utf-8').read()
+    # The shared stylesheet defines .q-list, so the marker to look for is a
+    # rendered list, not the class name.
+    ok('study landing renders no question list at all',
+       '<ul class="q-list">' not in study)
+    ok('study landing links to no question anchor',
+       not re.search(r'href="QB[^"]*#q\d+"', study))
+    for name, text in (('topics.html', page), ('study.html', study)):
+        ok(f'{name} does not link into the other paid product',
+           '/solvedQP/' not in text,
+           'cross-product link would bounce a customer to login')
+
+
+# --------------------------------------------------------------------------- #
+# Renderers
+# --------------------------------------------------------------------------- #
+def test_workbook_and_pages_build():
+    wb_path = os.path.join(D, 'MIW_MEO_Class1_Study_Roadmap.xlsx')
+    ok('roadmap workbook exists', os.path.exists(wb_path))
+    if os.path.exists(wb_path):
+        from openpyxl import load_workbook
+        wb = load_workbook(wb_path)
+        ok('workbook has the six projections plus ABOUT',
+           wb.sheetnames == ['ROADMAP', 'TOPIC DETAIL', 'OFFICIAL SYLLABUS',
+                             'COVERAGE', 'WRITTEN QI', 'PROGRESS', 'ABOUT'],
+           str(wb.sheetnames))
+        ok('ROADMAP lists every topic', wb['ROADMAP'].max_row == 11,
+           str(wb['ROADMAP'].max_row))
+        ok('OFFICIAL SYLLABUS lists every official item',
+           wb['OFFICIAL SYLLABUS'].max_row == 26,
+           str(wb['OFFICIAL SYLLABUS'].max_row))
+        headers = [c.value for c in wb['ROADMAP'][1]]
+        ok('roadmap separates study order from priority rank',
+           'Study Order' in headers and 'Priority Rank' in headers, str(headers))
+
+
+def test_study_order_is_dependency_first():
+    """Score order would open the candidate on a topic gated behind D01."""
+    spine = _load('study_spine.json')
+    order = RX.study_order(spine['domains'])
+    by_id = {d['domain_id']: d for d in spine['domains']}
+    ok('D01 is first in study order', order['D01'] == 1, str(order))
+    for did, d in by_id.items():
+        for p in d['prerequisites']:
+            ok(f'{did} comes after its prerequisite {p}', order[p] < order[did])
+    top = min(by_id.values(), key=lambda d: d['priority_rank'])['domain_id']
+    ok('the top-ranked topic is NOT assumed to be first to study',
+       top != 'D01' and order[top] > 1,
+       'this control is vacuous if the two orders ever coincide')
+
+
+def test_progress_survives_regeneration():
+    progress = _load('study_progress.json')
+    ok('progress is hand-maintained, not generated',
+       'HAND-MAINTAINED' in progress['authority'])
+    ok('progress declares the full progression',
+       'NOT_STARTED' in progress['progression']
+       and 'MOCK_READY' in progress['progression'])
+    # A topic absent from the file must default, not explode.
+    stripped = copy.deepcopy(progress)
+    stripped['topics'] = {}
+    saved = RX._load
+    try:
+        RX._load = lambda p: stripped if p.endswith('study_progress.json') else saved(p)
+        model = RX.build_model()
+        ok('a topic missing from progress defaults to NOT_STARTED',
+           all(t['study_status'] == 'NOT_STARTED' for t in model['topics']))
+    finally:
+        RX._load = saved
+    # Progress must be an INPUT only. Assert no writer ever opens it.
+    for gen in ('export_roadmap_xlsx.py', 'build_topic_pages.py',
+                'build_study_spine.py', 'build_study_mappings.py'):
+        src = open(os.path.join(HERE, gen), encoding='utf-8').read()
+        ok(f'{gen} never opens the progress file for writing',
+           not re.search(r"open\(\s*PROGRESS\s*,\s*['\"]w", src)
+           and "study_progress.json'), 'w'" not in src)
+
+
+def main():
+    for fn in (test_current_values_preserved,
+               test_stable_identity_fields_present,
+               test_socket_is_declared_and_empty,
+               test_consumers_tolerate_a_null_socket,
+               test_partial_recovery_is_storable_exactly,
+               test_fake_completeness_is_rejected,
+               test_public_claim_cannot_outrun_the_evidence,
+               test_pages_make_no_unearned_claim,
+               test_no_review_queue_leakage,
+               test_no_paid_answer_leakage,
+               test_workbook_and_pages_build,
+               test_study_order_is_dependency_first,
+               test_progress_survives_regeneration):
+        fn()
+    print(f'study expandability -- {len(PASS) + len(FAIL)} assertions')
+    for f in FAIL:
+        print('  FAIL ' + f)
+    if FAIL:
+        print(f'\n{len(FAIL)} FAILED')
+        return 1
+    print(f'  all {len(PASS)} PASS')
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
