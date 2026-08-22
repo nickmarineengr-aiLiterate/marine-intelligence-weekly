@@ -81,6 +81,21 @@ def sha256_file(path):
     return h.hexdigest()
 
 
+def classify_digest(digest):
+    """'FINAL' | 'SUPERSEDED_DRAFT' | 'UNKNOWN'.
+
+    Split out from the ingester so the final-source guard can be tested
+    without either PDF on disk. Naming the draft case is the whole point: a
+    bare "digest mismatch" would not tell anyone that the system had just been
+    handed a syllabus with two subjects missing.
+    """
+    if digest == SOURCE_SHA256:
+        return 'FINAL'
+    if digest == DRAFT_SHA256:
+        return 'SUPERSEDED_DRAFT'
+    return 'UNKNOWN'
+
+
 def pages(pdf_path):
     """Return the PDF's pages as text, list position 0 = page 1.
 

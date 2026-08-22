@@ -233,9 +233,20 @@ QUESTION_CUES = [
 
 # Study-priority weights (§25). Transparent and additive -- no opaque score.
 PRIORITY_WEIGHTS = {
-    'oral_questions':      0.30,   # breadth of oral examination
-    'examiner_evidence':   0.25,   # confirmed examiner relationships
-    'written_questions':   0.20,   # written examination load
-    'written_recurrence':  0.15,   # repeat families -- what comes back
-    'foundation':          0.10,   # how many domains depend on this one
+    'oral_questions':      0.26,   # breadth of oral examination
+    'examiner_evidence':   0.22,   # confirmed examiner relationships
+    'written_questions':   0.17,   # written examination load
+    'written_recurrence':  0.13,   # repeat families -- what comes back
+    'foundation':          0.09,   # how many domains depend on this one
+    'official_scope':      0.13,   # PRIMARY Annexure III nodes this topic owns
 }
+# `official_scope` was added once the DGMA syllabus was ingested: how much of
+# the examinable syllabus a topic actually owns is a priority signal that
+# corpus counts alone cannot see. The five original weights were scaled down
+# proportionally rather than re-tuned, so the addition cannot be mistaken for
+# a re-ranking exercise. It did move the order: D01 rose above D02 (rank 3 ->
+# 2) because D01 owns six PRIMARY Annexure III nodes to D02's two, which is
+# exactly the signal the corpus counts were blind to. D03 remains rank 1.
+#
+# The model stays deliberately transparent: every component publishes its raw
+# input, its weight and its scaled contribution. There is no opaque score.

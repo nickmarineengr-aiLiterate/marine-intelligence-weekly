@@ -109,6 +109,31 @@ def main():
     check('R-AUTHORITY', 'not an official dgma syllabus' in spine['authority'].lower(),
           'spine does not disclaim official authority for its own headings')
 
+    # ---- R-COVER: every official node is accounted for by the matrix -------
+    cov_path = os.path.join(ROOT, 'docs', 'study', 'coverage_matrix.json')
+    check('R-COVER-EXISTS', os.path.exists(cov_path),
+          'docs/study/coverage_matrix.json is missing')
+    if os.path.exists(cov_path):
+        cov = json.load(open(cov_path, encoding='utf-8'))
+        scored = {r['official_node_id'] for r in cov['nodes']}
+        check('R-COVER-ACCOUNT', scored == known_nodes,
+              f'official nodes never scored for coverage: '
+              f'{sorted(known_nodes - scored)}')
+        check('R-COVER-DIGEST',
+              cov['official_source']['sha256'] == xwalk['official_source']['sha256'],
+              'coverage matrix was built against different source bytes')
+        for r in cov['nodes']:
+            check('R-COVER-BAND',
+                  r['coverage'] in ('STRONG', 'PARTIAL', 'WEAK', 'NONE'),
+                  f"{r['official_node_id']} coverage={r['coverage']!r}")
+            # Coverage must never claim more than the evidence: a node with no
+            # evidence at all may not be reported as covered.
+            if r['oral_evidence'] == 0 and r['written_evidence'] == 0:
+                check('R-COVER-HONEST', r['coverage'] == 'NONE',
+                      f"{r['official_node_id']} claims {r['coverage']} with no evidence")
+        check('R-COVER-DIAGNOSTIC', 'DIAGNOSTIC ONLY' in cov['authority'],
+              'coverage matrix does not disclaim being a mapping')
+
     # ---- R-CAT: every written primary_category claimed exactly once --------
     claimed = collections.Counter(c for d in domains for c in d['written_categories'])
     actual = {(q.get('primary_category') or '').strip()

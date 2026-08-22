@@ -223,6 +223,149 @@ def test_no_fixture_leak():
     ok('no fixture leak into production store', not synth, str(synth))
 
 
+# --------------------------------------------------------------------------- #
+# Official syllabus join -- DGMA Circular 49 of 2026, Annexure III
+# --------------------------------------------------------------------------- #
+def test_future_oral_reaches_the_official_syllabus():
+    """One brand-new oral question, all the way to Annexure III."""
+    m = ME.map_question(NEW_ORAL_CLEAR, 'ORAL', file_name=PURE_FILE)
+    ok('future oral: topic decided', m['topic_id'] == 'D03', m['topic_id'])
+    ok('future oral: official version stamped',
+       m['official_syllabus_version'] == ME.OFFICIAL_VERSION)
+    ok('future oral: crosswalk aligned',
+       m['official_alignment_status'] == 'CROSSWALK_ALIGNED',
+       m['official_alignment_status'])
+    ok('future oral: official candidates present',
+       len(m['official_syllabus_node_candidates']) > 0)
+    ok('future oral: candidates are real Annexure III nodes',
+       all(c.startswith('C49-A3-') for c in m['official_syllabus_node_candidates']))
+    ok('future oral: not falsely pinpointed',
+       m['official_syllabus_node_id'] is None
+       or len(m['official_syllabus_node_candidates']) == 1)
+    ok('future oral: record is valid', ME.validate_mapping(m) == [],
+       str(ME.validate_mapping(m)))
+
+
+def test_future_written_reaches_the_official_syllabus():
+    m = ME.map_question(NEW_WRITTEN, 'WRITTEN', paper_id='QP9901')
+    ok('future written: topic decided', m['topic_id'] == 'D01', m['topic_id'])
+    ok('future written: crosswalk aligned',
+       m['official_alignment_status'] == 'CROSSWALK_ALIGNED')
+    ok('future written: D01 owns several official nodes, so the set is used',
+       m['official_syllabus_node_id'] is None
+       and len(m['official_syllabus_node_candidates']) > 1,
+       str(m['official_syllabus_node_candidates']))
+    ok('future written: confidence band reports precision',
+       m['official_mapping_confidence'] == 'MEDIUM')
+    ok('future written: record is valid', ME.validate_mapping(m) == [])
+
+
+def test_official_reverse_lookup():
+    """Official node -> topic -> questions, the direction a study pack needs."""
+    nodes = ME.official_nodes_for_topic('D01')
+    ok('reverse: D01 owns Annexure III nodes', len(nodes) >= 1, str(nodes))
+    ok('reverse: node 3 (classification) belongs to D01',
+       'C49-A3-03' in nodes, str(nodes))
+    store = {'schema_version': ME.SCHEMA_VERSION,
+             'taxonomy_version': ME.taxonomy_version(), 'mappings': {}}
+    ME.incremental_update(store, [(NEW_WRITTEN, 'WRITTEN', {'paper_id': 'QP9901'})])
+    found = ME.get_topic_questions('D01', store)
+    ok('reverse: topic lookup finds the new question', len(found) == 1, str(found))
+
+
+def test_supporting_only_is_not_orphaned():
+    """D08 has an official home; D07 has none. They must not read alike."""
+    d08 = ME.attach_official({'topic_id': 'D08'})
+    d07 = ME.attach_official({'topic_id': 'D07'})
+    ok('D08 is SUPPORTING_ONLY, not orphaned',
+       d08['official_alignment_status'] == 'SUPPORTING_ONLY',
+       d08['official_alignment_status'])
+    ok('D08 still has an official candidate',
+       d08['official_syllabus_node_candidates'] == ['C49-A3-12'],
+       str(d08['official_syllabus_node_candidates']))
+    ok('D07 is genuinely orphaned in Annexure III',
+       d07['official_alignment_status'] == 'ORPHANED_IN_ADOPTED_SYLLABUS',
+       d07['official_alignment_status'])
+    ok('D07 has no official candidates',
+       d07['official_syllabus_node_candidates'] == [])
+
+
+def test_official_pinpoint_must_be_earned():
+    """A single official node may only be claimed when the set singles it out."""
+    m = ME.map_question(NEW_WRITTEN, 'WRITTEN', paper_id='QP9901')
+    bad = copy.deepcopy(m)
+    bad['official_syllabus_node_id'] = bad['official_syllabus_node_candidates'][0]
+    ok('validator rejects: pinpoint from an ambiguous candidate set',
+       ME.validate_mapping(bad) != [], 'accepted an unearned pinpoint')
+    bogus = copy.deepcopy(m)
+    bogus['official_syllabus_node_candidates'] = ['C49-A3-99']
+    ok('validator rejects: unknown official node',
+       ME.validate_mapping(bogus) != [], 'accepted a node not in the crosswalk')
+    lying = copy.deepcopy(m)
+    lying['official_alignment_status'] = 'ORPHANED_IN_ADOPTED_SYLLABUS'
+    ok('validator rejects: orphan claim with candidates present',
+       ME.validate_mapping(lying) != [], 'accepted a contradictory orphan claim')
+
+
+def test_two_syllabus_versions_stay_separate():
+    """Adopted is not in force. The 01-Jan-2027 migration depends on this."""
+    m = ME.map_question(NEW_ORAL_CLEAR, 'ORAL', file_name=PURE_FILE)
+    ok('operative version is the MIW-derived one',
+       m['syllabus_version'] == ME.SYLLABUS_VERSION, m['syllabus_version'])
+    ok('adopted version is recorded separately',
+       m['official_syllabus_version'] == ME.OFFICIAL_VERSION)
+    ok('the two versions are not the same value',
+       m['syllabus_version'] != m['official_syllabus_version'])
+    ok('adopted syllabus carries its own effective date',
+       m['official_effective_from'] == '2027-01-01', m['official_effective_from'])
+    ok('operative version defines no syllabus node ids',
+       m['syllabus_node_id'] is None)
+    fabricated = copy.deepcopy(m)
+    fabricated['syllabus_node_id'] = 'C49-A3-03'
+    ok('validator rejects: official node smuggled into the operative version',
+       ME.validate_mapping(fabricated) != [],
+       'accepted an adopted-syllabus node as an operative one')
+
+
+def test_final_source_guard():
+    """The system may not silently revert to the July draft."""
+    sys.path.insert(0, HERE)
+    import official_syllabus as OS_
+    ok('guard: final digest recognised',
+       OS_.classify_digest(OS_.SOURCE_SHA256) == 'FINAL')
+    ok('guard: the draft is named, not merely rejected',
+       OS_.classify_digest(OS_.DRAFT_SHA256) == 'SUPERSEDED_DRAFT')
+    ok('guard: anything else is unknown',
+       OS_.classify_digest('0' * 64) == 'UNKNOWN')
+    ok('guard: final and draft digests actually differ',
+       OS_.SOURCE_SHA256 != OS_.DRAFT_SHA256)
+    ok('guard: the draft carries fewer nodes than the final',
+       OS_.DRAFT_NODES < OS_.EXPECTED_NODES)
+    published = json.load(open(os.path.join(
+        ROOT, 'docs', 'study', 'official_syllabus.json'), encoding='utf-8'))
+    ok('guard: the committed extraction is pinned to the final circular',
+       published['source']['sha256'] == OS_.SOURCE_SHA256)
+    ok('guard: the committed extraction has all 25 official nodes',
+       len(published['nodes']) == OS_.EXPECTED_NODES, str(len(published['nodes'])))
+    ok('guard: every official node carries the source digest',
+       all(n['source_digest'] == OS_.SOURCE_SHA256 for n in published['nodes']))
+    ok('guard: the crosswalk is pinned to the same bytes',
+       ME.official_crosswalk()['official_source']['sha256'] == OS_.SOURCE_SHA256)
+
+
+def test_official_join_is_incremental():
+    """One new question must not re-derive the official layer for the corpus."""
+    store = {'schema_version': ME.SCHEMA_VERSION,
+             'taxonomy_version': ME.taxonomy_version(), 'mappings': {}}
+    ME.incremental_update(store, [(NEW_ORAL_CLEAR, 'ORAL', {'file_name': PURE_FILE})])
+    first = copy.deepcopy(store['mappings'])
+    ME.incremental_update(store, [(NEW_WRITTEN, 'WRITTEN', {'paper_id': 'QP9901'})])
+    ok('incremental: the existing record was not rewritten',
+       store['mappings'][NEW_ORAL_CLEAR['id']] == first[NEW_ORAL_CLEAR['id']])
+    ok('incremental: only the new question was added',
+       len(store['mappings']) == 2, str(len(store['mappings'])))
+
+
 def main():
     for fn in (test_oral_high, test_oral_medium_routes_to_review,
                test_oral_unresolved, test_written,
@@ -230,7 +373,16 @@ def main():
                test_incremental_adds_only_the_new,
                test_taxonomy_drift_is_visible,
                test_review_stamp_survives_rederivation,
-               test_topic_side_discoverability, test_no_fixture_leak):
+               test_topic_side_discoverability,
+               test_future_oral_reaches_the_official_syllabus,
+               test_future_written_reaches_the_official_syllabus,
+               test_official_reverse_lookup,
+               test_supporting_only_is_not_orphaned,
+               test_official_pinpoint_must_be_earned,
+               test_two_syllabus_versions_stay_separate,
+               test_final_source_guard,
+               test_official_join_is_incremental,
+               test_no_fixture_leak):
         fn()
     print(f'mapping engine acceptance -- {len(PASS) + len(FAIL)} assertions')
     for f in FAIL:

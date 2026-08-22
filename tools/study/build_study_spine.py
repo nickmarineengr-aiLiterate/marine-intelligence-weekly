@@ -182,6 +182,7 @@ def main():
         'written_questions':  [d['written']['questions'] for d in domains],
         'written_recurrence': [d['written_question_intelligence']['recurring_families'] for d in domains],
         'foundation':         [len(d['dependants']) for d in domains],
+        'official_scope':     [len(d['official_syllabus_nodes']) for d in domains],
     }
     scaled = {k: norm_of(k, v) for k, v in raw.items()}
     for i, d in enumerate(domains):

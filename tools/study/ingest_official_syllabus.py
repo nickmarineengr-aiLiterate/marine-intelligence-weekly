@@ -56,9 +56,10 @@ def resolve_pdf(path, download):
 def guard_digest(path):
     """The §40 final-source guard. Named failure, never a silent fallback."""
     got = OS_.sha256_file(path)
-    if got == OS_.SOURCE_SHA256:
+    verdict = OS_.classify_digest(got)
+    if verdict == 'FINAL':
         return got
-    if got == OS_.DRAFT_SHA256:
+    if verdict == 'SUPERSEDED_DRAFT':
         print('FAIL R-FINAL-SOURCE: this is the SUPERSEDED 28-Jul-2026 DRAFT, '
               'not the final circular.')
         print(f'  the draft carries {OS_.DRAFT_NODES} syllabus items; the final '
