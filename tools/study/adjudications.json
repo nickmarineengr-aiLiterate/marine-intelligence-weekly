@@ -1,20 +1,350 @@
 {
-  "note": "Human adjudications of MEDIUM/LOW-confidence mappings. This file is HAND-MAINTAINED and is an INPUT to build_study_mappings.py -- never edit docs/study/study_mappings.json directly. An entry promotes one mapping to VALID_MAPPED by supplying the review stamp the validator demands. topic_id must be restated so a taxonomy change that moves the question is caught rather than silently rubber-stamped.",
-  "schema_version": "1.0",
+  "note": "Human adjudications of MIW topic mappings. This file is HAND-MAINTAINED and is an INPUT to build_study_mappings.py -- never edit docs/study/study_mappings.json directly. Three decisions are available. AFFIRM (the default) promotes one mapping to VALID_MAPPED by supplying the review stamp the validator demands. REASSIGN moves a question the mapper placed wrongly, and must also carry mapper_topic_id. HOLD_REVIEW records that a human read the question and found the evidence did not settle it: the mapping is forced to REVIEW_PENDING with candidate_topic_ids, and is never published. In every case the mapper's own current topic must be RESTATED (mapper_topic_id, defaulting to topic_id) so a taxonomy change that moves the question is caught rather than silently rubber-stamped.",
+  "schema_version": "1.1",
   "adjudications": {
-    "QB3_B#q9": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority. Class survey system overview -- squarely D01."},
-    "QB3_B#q1": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority. Hull survey scope."},
-    "QB3_B#q11": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority. Survey cycle after renewal."},
-    "QB3_B#q5": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority. ESP Code."},
-    "QB3_B#q4": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority. Substantial corrosion is a survey criterion, not naval architecture."},
-    "QB3_B#q2": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority. Steel renewal criteria during hull survey."},
-    "QB3_B#q8": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority. Drydocking intervals and inspections."},
-    "QB1_supplementary#q4": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority. CMS credit boundary."},
-    "QB1_supplementary#q5": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority. Load Line survey preparation."},
-    "QB1_supplementary#q8": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority. SAFCON survey."},
-    "QB1_supplementary#q20": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority. Tail shaft survey."},
-    "QB1_H#q3": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority. IACS UR/PR/UI."},
-    "QB1_K#q2": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority. Condition of Class."},
-    "QB1_I#q5": {"topic_id": "D01", "last_reviewed": "2026-08-22", "reviewer": "laptop-review", "note": "Topic 01 A-priority integrating question. No examiner evidence -- included on syllabus centrality, recorded explicitly."}
+    "QB3_B#q9": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority. Class survey system overview -- squarely D01."
+    },
+    "QB3_B#q1": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority. Hull survey scope."
+    },
+    "QB3_B#q11": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority. Survey cycle after renewal."
+    },
+    "QB3_B#q5": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority. ESP Code."
+    },
+    "QB3_B#q4": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority. Substantial corrosion is a survey criterion, not naval architecture."
+    },
+    "QB3_B#q2": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority. Steel renewal criteria during hull survey."
+    },
+    "QB3_B#q8": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority. Drydocking intervals and inspections."
+    },
+    "QB1_supplementary#q4": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority. CMS credit boundary."
+    },
+    "QB1_supplementary#q5": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority. Load Line survey preparation."
+    },
+    "QB1_supplementary#q8": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority. SAFCON survey."
+    },
+    "QB1_supplementary#q20": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority. Tail shaft survey."
+    },
+    "QB1_H#q3": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority. IACS UR/PR/UI."
+    },
+    "QB1_K#q2": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority. Condition of Class."
+    },
+    "QB1_I#q5": {
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "note": "Topic 01 A-priority integrating question. No examiner evidence -- included on syllabus centrality, recorded explicitly."
+    },
+    "QB1_A#q13": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D04",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "London Convention/Protocol governs prevention of marine pollution by DUMPING of wastes at sea. It is a pollution-prevention instrument, not a liability or insurance one. The file title 'Conventions & Liability Law' captured it on the word 'Convention' alone."
+    },
+    "QB1_A#q14": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D04",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "OPRC 1990 is Oil Pollution Preparedness, Response and Co-operation -- pollution response, which D04's rationale names explicitly. No liability limb."
+    },
+    "QB1_A#q15": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D04",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "NOSDCP is the National Oil Spill Disaster Contingency Plan -- an oil-spill response plan, so D04. Considered D06 and rejected: it is an administrative contingency plan, not Indian maritime LEGISLATION."
+    },
+    "QB1_A#q16": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D04",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Basel Convention governs transboundary movement of hazardous waste and is examined here through ship recycling, PIC and ESM. D04's rationale names recycling. The engine flagged this one as contradicted, but cued D01 off the word 'Certificates' -- the cue was right that D02 is wrong and wrong about where it belongs, which is why a human decides."
+    },
+    "QB1_A#q19": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "UNCLOS EEZ/continental shelf and 'under which provision does your ship sail' is the flag/coastal State jurisdictional framework, which is D01's stated remit. The official crosswalk also files UNCLOS under D01 as a SUPPORTING edge on Annexure III item 1."
+    },
+    "QB1_A#q20": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Sovereign rights versus jurisdiction under UNCLOS is maritime-zone law -- the statutory framework, not commercial law."
+    },
+    "QB1_A#q21": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Innocent passage under UNCLOS is coastal/flag State jurisdiction. D01."
+    },
+    "QB1_A#q22": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Port State, Coastal State and Flag State duties by maritime zone is D01 verbatim -- its rationale names 'the flag/port State system'. The engine's new contradiction rule caught this one independently and cued D01."
+    },
+    "QB1_A#q23": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Hot pursuit is a coastal-State enforcement doctrine under UNCLOS Article 111. Statutory framework, not liability."
+    },
+    "QB1_A#q25": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D03",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Fair Treatment of Seafarers is seafarer welfare, carried through the IMO/ILO guidelines and the MLC. D03 owns MLC and the human element."
+    },
+    "QB1_A#q31": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D04",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Ballast Water Management Convention and the G7/G8/G9 guidelines. D04 names ballast water and BWM explicitly; the engine's contradiction rule caught this one and cued D04 correctly."
+    },
+    "QB1_A#q17": {
+      "decision": "HOLD_REVIEW",
+      "mapper_topic_id": "D02",
+      "topic_id": "D02",
+      "candidate_topic_ids": [
+        "D01",
+        "D03"
+      ],
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "SUA Convention is a maritime-SECURITY criminal-law instrument. It is certainly not marine insurance or carriage of goods, so D02 is wrong, but no MIW domain claims maritime security outright: D03 holds ISPS, D01 holds SOLAS XI-2 through the official crosswalk. Held rather than forced."
+    },
+    "QB1_A#q18": {
+      "decision": "HOLD_REVIEW",
+      "mapper_topic_id": "D02",
+      "topic_id": "D02",
+      "candidate_topic_ids": [
+        "D01",
+        "D03"
+      ],
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "FAL Convention is facilitation of maritime traffic -- port formalities, the single window and stowaway handling under FAL.20(50) -- asked here for its security effect. Same unclaimed-domain problem as SUA. Held."
+    },
+    "QB1_A#q24": {
+      "decision": "HOLD_REVIEW",
+      "mapper_topic_id": "D02",
+      "topic_id": "D02",
+      "candidate_topic_ids": [
+        "D01",
+        "D03"
+      ],
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Casualty Investigation Code MSC.255(84) is a flag-State statutory duty under SOLAS XI-1/6 (D01), but the question explicitly asks for the human elements (D03). The engine cued D03. Genuinely two-limbed; held rather than forced."
+    },
+    "QB1_A#q30": {
+      "decision": "HOLD_REVIEW",
+      "mapper_topic_id": "D02",
+      "topic_id": "D02",
+      "candidate_topic_ids": [
+        "D04",
+        "D05"
+      ],
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "'MEPC 84 outcomes' is a current-affairs sweep, not a liability question. Its content splits between pollution (BWM, machinery) and the net-zero framework (D05), and which limb an examiner pursues is not knowable from the stem. Held."
+    },
+    "QB1_B#q2": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D04",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "P&A Manual is the MARPOL Annex II Procedures and Arrangements Manual, approved by the Administration for NLS cargo handling. Pollution prevention, not commercial law."
+    },
+    "QB1_B#q6": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D04",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "PSSA is an IMO marine-environment designation carried through MARPOL special areas and associated protective measures. D04."
+    },
+    "QB1_B#q7": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Criteria for becoming a Recognised Organisation under flag-State delegation is the RO Code. D01 owns class, ROs and the flag-State system, and the official crosswalk files the RO Code under D01 as PRIMARY on Annexure III item 3."
+    },
+    "QB1_B#q16": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D01",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Duties and powers of Port State Control. D01's rationale names the flag/port State system, and PSC is a PRIMARY D01 node in the official crosswalk (Annexure III item 9)."
+    },
+    "QB1_B#q8": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D03",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "MLC 2006 and RPSL with respect to seafarer welfare and recruitment. D03 owns MLC and the human element outright."
+    },
+    "QB1_B#q21": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D03",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "IMO gender-equality initiatives are a human-element and industry workforce subject, not marine insurance."
+    },
+    "QB1_B#q9": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D03",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "MACN is the Maritime Anti-Corruption Network: resisting facilitation demands during port calls is shipboard and company management conduct. D03 is the management domain."
+    },
+    "QB9_H#q6": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D03",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Evaluating a company before joining and assuring MLC compliance is human-element and management, not commercial law."
+    },
+    "QB9_D#q6": {
+      "decision": "REASSIGN",
+      "mapper_topic_id": "D02",
+      "topic_id": "D06",
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "MS Act in detail, contrasted with RPSL. This is Indian maritime legislation, which is exactly what D06 exists for. Note this becomes D06's FIRST oral question -- D06 previously had oral evidence of zero, which was itself an artefact of this over-capture."
+    },
+    "QB9_B#q2": {
+      "decision": "HOLD_REVIEW",
+      "mapper_topic_id": "D02",
+      "topic_id": "D02",
+      "candidate_topic_ids": [
+        "D02",
+        "D04"
+      ],
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Genuinely two-limbed: OPRC and SOPEP/SMPEP plus high-seas incident reporting (D04) AND an explicit insurance limb. The limb-level multi-family precedent set on QP2608-Q4/Q8 applies. It cannot be settled from the corpus as it stands because the stored question text is TRUNCATED mid-sentence at 'Insurance-related aspects of' -- see the follow-up inventory. Held."
+    },
+    "QB9_A#q7": {
+      "decision": "HOLD_REVIEW",
+      "mapper_topic_id": "D02",
+      "topic_id": "D02",
+      "candidate_topic_ids": [
+        "D01",
+        "D03",
+        "D04"
+      ],
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Omnibus stem covering SUA, FAL, the London Convention and OPRC in one question. It spans security, facilitation and pollution and belongs to no single domain. Stored text is also TRUNCATED at 'OPR'. Held, consistent with the SUA/FAL holds on QB1_A#q17 and #q18."
+    },
+    "QB9_E#q6": {
+      "decision": "HOLD_REVIEW",
+      "mapper_topic_id": "D02",
+      "topic_id": "D02",
+      "candidate_topic_ids": [],
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Blue Economy. This is maritime industry POLICY. No MIW domain claims policy or current affairs -- QB10_A/QB10_B carry that subject and are deliberately mixed files. Held as a recorded TAXONOMY GAP rather than forced into a domain that does not want it."
+    },
+    "QB9_E#q10": {
+      "decision": "HOLD_REVIEW",
+      "mapper_topic_id": "D02",
+      "topic_id": "D02",
+      "candidate_topic_ids": [],
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Blue Economy, second occurrence. Same taxonomy gap as QB9_E#q6."
+    },
+    "QB9_E#q9": {
+      "decision": "HOLD_REVIEW",
+      "mapper_topic_id": "D02",
+      "topic_id": "D02",
+      "candidate_topic_ids": [],
+      "last_reviewed": "2026-08-23",
+      "reviewer": "laptop-review",
+      "note": "Marine Spatial Planning is coastal-State maritime policy. Same taxonomy gap: MIW has no policy domain."
+    }
   }
 }

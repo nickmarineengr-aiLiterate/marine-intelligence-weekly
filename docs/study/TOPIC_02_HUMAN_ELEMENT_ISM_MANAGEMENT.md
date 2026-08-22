@@ -2,8 +2,8 @@
 
 **Study pack for Nixon. Built 2026-08-22, from the same governed evidence as
 Topic 01 and against the same official syllabus.**
-Evidence: 210 mapped Oral questions, 69 Written questions across 38 of 40
-solved papers, 190 Oral questions carrying examiner evidence from all 6 named
+Evidence: 215 mapped Oral questions, 69 Written questions across 38 of 40
+solved papers, 195 Oral questions carrying examiner evidence from all 6 named
 examiners, 8 official Annexure III items owned as PRIMARY.
 
 > **This is Topic 02, not Topic 01, and the reason is dependency, not size.**
@@ -29,9 +29,9 @@ examiners, 8 official Annexure III items owned as PRIMARY.
 | Signal | D03 | Rank |
 |---|---|---|
 | **Composite priority score** | **0.805** | **1st** |
-| **Oral questions mapped** | **210 / 1081** | **1st** |
-| **Oral questions with examiner evidence** | **190** | **1st** |
-| **Examiner relationship occurrences** | **258** | **1st** |
+| **Oral questions mapped** | **215 / 1081** | **1st** |
+| **Oral questions with examiner evidence** | **195** | **1st** |
+| **Examiner relationship occurrences** | **263** | **1st** |
 | **Official Annexure III items owned (PRIMARY)** | **8 of 25** | **1st** |
 | Written questions | 69 / 360 | 3rd |
 | Written papers touched | 38 of 40 | 2nd |
@@ -39,7 +39,7 @@ examiners, 8 official Annexure III items owned as PRIMARY.
 | Prerequisites of its own | **D01** | — |
 | Domains that depend on it | none | — |
 
-Read that table honestly. D03 is where the **oral exam** lives: 190 of its 210
+Read that table honestly. D03 is where the **oral exam** lives: 195 of its 215
 questions carry examiner evidence, against 39 for D01. If the oral is the part
 you are least sure of, this is the topic that decides it.
 
@@ -118,7 +118,7 @@ Coverage bands are from `docs/study/coverage_matrix.json`, which is
 
 Twelve branches. This is the largest topic in the corpus and the skeleton is
 correspondingly wide — but branches 1–3 carry the examiner chain and branches
-4–9 carry the oral. Own those nine and 190 examiner-evidenced questions become
+4–9 carry the oral. Own those nine and 195 examiner-evidenced questions become
 constructible.
 
 1. **The ISM architecture** — objective and functional requirements, what an
@@ -185,11 +185,19 @@ Selected on **examiner breadth × chain position × official centrality** — no
 on occurrence count alone, which is flat in this corpus. Every one is
 `VALID_MAPPED` at HIGH confidence.
 
-> **Mapping state — and why it differs from D01.** 207 of D03's 210 oral
-> mappings are HIGH because the QB file *title names exactly one domain*
-> (`QB4_* = ISM Code, ISPS, MLC 2006 & STCW`, `QB5_* = Management, Leadership &
-> Human Element`). No per-question adjudication was needed and none was
-> invented. Only 3 are `REVIEW_PENDING`, from the mixed `QB1_G` file.
+> **Mapping state — and why it differs from D01.** **180 of D03's 215** oral
+> mappings are `VALID_MAPPED`, because the QB file *title names exactly one
+> domain* (`QB4_* = ISM Code, ISPS, MLC 2006 & STCW`, `QB5_* = Management,
+> Leadership & Human Element`) — 63 of those are additionally corroborated by
+> the question's own text, and 5 were moved into D03 by human adjudication on
+> 2026-08-23 when the D02 over-capture was corrected.
+>
+> **35 are `REVIEW_PENDING`**, and 32 of those are new. They are questions
+> whose file title says D03 but whose own text cues a different domain — the
+> mapper now demotes that combination instead of publishing it, so the
+> contradiction is visible rather than silent. They keep their D03 topic as a
+> placeholder and are safe to study; they are simply not settled. The other 3
+> come from the mixed `QB1_G` file.
 
 | # | ID | Question | Examiners | Why core |
 |---|---|---|---|---|
@@ -223,7 +231,7 @@ management), `QB5_A#q2` (Engine Room Resource Management), `QB5_C_A#q4`
 (Management of Change), `QB5_C_A#q6` (HAZID / HAZOP / JSA and the matrix),
 `QB4_J#q8` (types of leadership).
 
-**C-priority (~176)** — the remainder. It includes three genuine sub-clusters
+**C-priority (~181)** — the remainder. It includes three genuine sub-clusters
 worth naming so you can find them when you need them: the **security cluster**
 (`QB4_A#q11`–`#q13`, `QB4_B#q15`–`#q19`, `QB4_H#q2`–`#q8` — ISPS, SSP, SSAS,
 BMP5, AIS, jamming/spoofing), the **training-instrument cluster** (`QB5_A#q14`
@@ -318,9 +326,9 @@ the D01 boundary because the generator attributes a family to the domain of its
 
 Reported as **three separate signals**, never summed:
 
-- **190** unique canonical Oral questions in D03 carry examiner evidence
-  (of 210 mapped) — the largest examiner-evidenced set in the corpus
-- **258** examiner relationship occurrences across those questions
+- **195** unique canonical Oral questions in D03 carry examiner evidence
+  (of 215 mapped) — the largest examiner-evidenced set in the corpus
+- **263** examiner relationship occurrences across those questions
 - **6** distinct examiners: Nair, Paul, Rajappan, Senthil, Simon, Srivastava
 
 Unlike D01, the occurrence counts here are **not flat**: `QB4_C#q16` carries
@@ -517,7 +525,7 @@ clusters move.
 
 ## STUDY SESSIONS
 
-Five sessions, 45–90 minutes each, sized from the real 210 + 69 question load.
+Five sessions, 45–90 minutes each, sized from the real 215 + 69 question load.
 The machine-readable form of these sessions is `docs/study/study_sessions.json`
 (`D03-S01` … `D03-S05`) and it is pinned to this file by sha256 — if this pack
 is edited and the sessions are not re-derived, the workbook build **fails**.

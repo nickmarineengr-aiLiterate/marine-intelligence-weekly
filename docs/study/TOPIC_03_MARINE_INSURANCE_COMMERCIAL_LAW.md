@@ -2,13 +2,13 @@
 
 **Study pack for Nixon. Built 2026-08-22, from the same governed evidence as
 Topics 01 and 02, and against the same official syllabus.**
-Evidence: 134 mapped Oral questions, 70 Written questions across 38 of 40
-solved papers, 127 Oral questions carrying examiner evidence from all 6 named
+Evidence: 114 mapped Oral questions, 70 Written questions across 38 of 40
+solved papers, 108 Oral questions carrying examiner evidence from all 6 named
 examiners, 2 official Annexure III items owned as PRIMARY.
 
 > **Why third.** D02 is gated behind **D01** (you cannot argue about liability
 > until you can say what the ship's statutory and class status *is*), and it is
-> outscored by D03 (0.578 vs 0.805). But it is the **most self-contained topic
+> outscored by D03 (0.525 vs 0.805). But it is the **most self-contained topic
 > in the corpus**: it has one prerequisite, unlocks only D06, and its subject
 > matter barely leaks into any other domain. That is exactly what makes it a
 > good third topic — it can be learned as a closed body of law while D01 and
@@ -31,9 +31,9 @@ examiners, 2 official Annexure III items owned as PRIMARY.
 | **Written marks** | **1120** | 2nd |
 | Written papers touched | 38 of 40 | 2nd |
 | **Recurrence families (exact title)** | **12** | **1st** |
-| Oral questions mapped | 134 | 2nd |
-| Oral questions with examiner evidence | 127 | 2nd |
-| Composite priority score | 0.578 | 3rd |
+| Oral questions mapped | 114 | 2nd |
+| Oral questions with examiner evidence | 108 | 2nd |
+| Composite priority score | 0.525 | 3rd |
 | Official Annexure III items owned | 2 of 25 | joint 5th |
 | Prerequisites | **D01** | — |
 | Unlocks | D06 | — |
@@ -41,7 +41,7 @@ examiners, 2 official Annexure III items owned as PRIMARY.
 **Read the shape of this topic, because it is different from the other two.**
 
 - D01 is *written-heavy and foundational*. D03 is *oral-heavy and enormous*.
-  **D02 is the most balanced topic in the corpus** — 134 orals and 70 writtens,
+  **D02 is the most balanced topic in the corpus** — 114 orals and 70 writtens,
   both near the top — and the **most recurrent**: 12 exact-title families, more
   than any other domain.
 - Its official footprint is small (2 items of 25) while its corpus footprint is
@@ -150,12 +150,19 @@ examiner's follow-up is nearly always the boundary between them.
 Selected on **examiner breadth × branch centrality × written leverage**. Every
 one is `VALID_MAPPED` at HIGH confidence.
 
-> **Mapping state.** 133 of D02's 134 oral mappings are HIGH because the QB
-> file title names exactly one domain — `QB9_* = Commercial Law & Maritime
-> Liability`, `QB1_A = Conventions & Liability Law`, `QB1_B = Conventions,
-> Liability & Welfare`. One question (`QB1_F#q18`, Multimodal Act) is
-> `REVIEW_PENDING`. See the defect note at the end of this section before you
-> trust the topic boundary.
+> **Mapping state.** D02 now holds **114** oral mappings, down from 134: the
+> file-level over-capture recorded in the previous edition of this pack has
+> been **corrected in the governed mapping system**, not merely noted. **96**
+> are `VALID_MAPPED` and **18** are `REVIEW_PENDING`. The boundary is now
+> honest rather than perfect: everything still in D02 is either settled or
+> **visibly queued**, where before the wrong ones were silently settled. Nine
+> of those 18 are newly surfaced questions whose own text disputes the file
+> title (`QB1_B#q5` CSR, `QB9_C#q4` tanker liabilities, `QB9_F#q4` fraudulent
+> registration, `QB9_G#q1` other Indian shipping Acts, `QB9_H#q2` casualty
+> response, `QB9_H#q13` CE certificates, `QB9_A#q9` war risk, `QB9_B#q8`
+> medical evacuation, `QB1_A#q24` casualty investigation). They are safe to
+> study as D02 and are not yet settled. The note at the end of this section
+> records what was done.
 
 | # | ID | Question | Examiners | Why core |
 |---|---|---|---|---|
@@ -186,47 +193,70 @@ supplementary, overspill), `QB9_D#q2` (International Group and pooling),
 `QB9_E#q12` (Inchmaree clause), `QB9_G#q7` (GA vs particular average),
 `QB9_H#q8` (types of liability in shipping).
 
-**C-priority (~103)** — the remainder, including three clusters worth naming:
+**C-priority (~83)** — the remainder, including three clusters worth naming:
 the **Indian-law cluster** (`QB9_D#q4` Bharat Maritime Insurance Pool,
 `QB9_D#q5` GIFT City, `QB9_D#q9` Act vs rule, `QB9_E#q2`/`#q8` MS Act,
 `QB9_G#q1` other shipping Acts, `QB9_H#q1` ratification in India — most of this
-is D06 material reached from here); the **UNCLOS cluster** (`QB1_A#q19`–`#q23`,
-`QB9_A#q8`, `QB9_D#q10`); and the **war-risk cluster** (`QB9_A#q9`, `QB9_B#q5`,
+is D06 material reached from here); the **UNCLOS remnant** (`QB9_A#q8`,
+`QB9_D#q10` — `QB1_A#q19`–`#q23` were moved to D01 on 2026-08-23); and the
+**war-risk cluster** (`QB9_A#q9`, `QB9_B#q5`,
 `QB9_E#q3`, `QB9_E#q7`) which is currently live and pairs with `QP2603-Q3`.
 
-> ### Known mapping defect — record it, do not act on it
+> ### Mapping defect — FOUND, AND NOW CORRECTED
 >
-> **19 of D02's 134 orals are not commercial law or insurance at all.** They
-> are HIGH-confidence because their *file title* names one domain, but the
-> files `QB1_A` ("Conventions & Liability Law"), `QB1_B` ("Conventions,
-> Liability & Welfare") and parts of `QB9_*` are topically broad. The
-> misplaced questions are:
+> The previous edition of this pack recorded that **19 of D02's then-134
+> orals were not commercial law or insurance at all**, and filed it as debt on
+> the grounds that repairing it meant a taxonomy change. That reasoning was
+> wrong in a useful way: the repair did not need the file→domain map touched
+> at all. On **2026-08-23** it was carried out through the governed mapping
+> system, and this pack now reflects the corrected boundary.
 >
-> - **Pollution / MARPOL (D04):** `QB1_A#q13` (London Convention), `QB1_A#q14`
->   (OPRC), `QB1_A#q16` (Basel), `QB1_A#q30` (MEPC 84), `QB1_A#q31` (BWM
->   Convention), `QB1_B#q2` (P&A Manual), `QB1_B#q6` (PSSA), `QB9_B#q2`
->   (OPRC / SOPEP / SMPEP)
-> - **Statutory framework (D01):** `QB1_B#q7` (RO criteria), `QB1_B#q16` (PSC
->   duties and powers)
-> - **Human element / welfare (D03):** `QB1_B#q8` (MLC and RPSL), `QB1_B#q21`
->   (IMO gender equality), `QB1_B#q9` (MACN), `QB9_H#q6` (evaluating a company
->   for MLC compliance)
-> - **Indian legislation (D06):** `QB9_D#q6` (MS Act vs RPSL)
-> - **Policy / general (no clean home):** `QB9_E#q6`, `QB9_E#q10` (Blue
->   Economy), `QB9_E#q9` (Marine Spatial Planning), `QB9_A#q7` (SUA / FAL)
+> **What was actually wrong.** A QB file title is a reliable statement about
+> the *file* and an unreliable one about any particular *question* inside it.
+> `map_oral_question` returned on the file-title hit and never looked at the
+> question's own text, so a broad file such as `QB1_A` ("Conventions &
+> Liability Law") minted HIGH-confidence D02 mappings for pollution
+> conventions, UNCLOS jurisdiction and seafarer welfare — and because they
+> were HIGH, they never entered the review queue where they would have been
+> caught. **A high-confidence mapping was a claim about the file, not about
+> the question.**
 >
-> This is the **mirror image** of D01's problem. D01's mixed files produce
-> MEDIUM confidence and land in the review queue, where they get adjudicated.
-> A *single-domain file title* produces HIGH confidence and is never
-> questioned — even when the file is topically broad. **A high-confidence
-> mapping is a claim about the file, not about the question.**
+> **What changed.**
 >
-> Repairing it means editing the file→domain map in `tools/study/study_spine.py`,
-> which is a **taxonomy change**: the digest moves, all 1081 mappings are
-> re-derived, and D01's and D03's numbers move with them. That is out of scope
-> for a study-pack session and is recorded here as debt, not repaired.
-> **For study purposes: skip those 19. They are not D02.** The true D02 oral
-> load is ~115.
+> 1. **The engine** (`mapping_engine.py`) now reads the question's own cues
+>    even when the file title has already spoken. Agreement or silence keeps
+>    HIGH; **contradiction** is demoted to MEDIUM / `REVIEW_PENDING`, keeping
+>    the file's topic as a placeholder so no topic is emptied on a suspicion.
+>    Records carry a new `mapping_evidence` field (what was read) alongside
+>    `mapping_confidence` (what was decided) so a strong source can no longer
+>    masquerade as a settled decision.
+> 2. **Twenty questions were reassigned** by hand adjudication, because most
+>    of them carry no domain cue at all and no automatic rule could ever have
+>    seen them: `QB1_A#q13` (London Convention), `#q14` (OPRC), `#q15`
+>    (NOSDCP), `#q16` (Basel), `#q31` (BWM), `QB1_B#q2` (P&A Manual), `#q6`
+>    (PSSA) → **D04**; `QB1_A#q19`–`#q23` (the UNCLOS cluster), `QB1_B#q7`
+>    (RO criteria), `#q16` (PSC) → **D01**; `QB1_A#q25` (Fair Treatment of
+>    Seafarers), `QB1_B#q8` (MLC/RPSL), `#q9` (MACN), `#q21` (IMO gender
+>    equality), `QB9_H#q6` (company evaluation and MLC) → **D03**;
+>    `QB9_D#q6` (MS Act vs RPSL) → **D06**, which is D06's first oral
+>    question and shows that its previous oral count of zero was itself an
+>    artefact of this over-capture.
+> 3. **Nine were deliberately NOT reassigned** and are held at
+>    `REVIEW_PENDING` with candidate topics recorded, because forcing a topic
+>    to empty a queue is the same error in the opposite direction:
+>    `QB1_A#q17` (SUA), `#q18` (FAL), `QB9_A#q7` (SUA/FAL/London/OPRC omnibus)
+>    — no MIW domain claims maritime security outright; `QB1_A#q24` (Casualty
+>    Investigation Code) — genuinely two-limbed, statutory duty and human
+>    element; `QB1_A#q30` (MEPC 84 outcomes) — splits between D04 and D05;
+>    `QB9_B#q2` — has a real insurance limb alongside OPRC; and `QB9_E#q6`,
+>    `#q9`, `#q10` (Blue Economy, Marine Spatial Planning), which record a
+>    genuine **taxonomy gap**: MIW has no maritime-policy domain.
+>
+> **Effect on this pack.** D02's oral load fell 134 → **114** and its
+> examiner-evidenced load 127 → **108**; its composite priority score fell
+> 0.578 → **0.525**. It remains **rank 3**, and the study order
+> **D01 → D03 → D02 is unchanged**. No A-priority or B-priority question moved.
+> The old advice to "skip those 19" is withdrawn: they are no longer in D02.
 
 ---
 
@@ -308,8 +338,8 @@ governed records:
 
 Reported as **three separate signals**, never summed:
 
-- **127** unique canonical Oral questions in D02 carry examiner evidence
-  (of 134 mapped)
+- **108** unique canonical Oral questions in D02 carry examiner evidence
+  (of 114 mapped)
 - **162** examiner relationship occurrences across those questions
 - **6** distinct examiners: Nair, Paul, Rajappan, Senthil, Simon, Srivastava
 
@@ -511,7 +541,7 @@ which is another reason it is a safe third.
 
 ## STUDY SESSIONS
 
-Five sessions, 45–90 minutes each, sized from the real 134 + 70 question load
+Five sessions, 45–90 minutes each, sized from the real 114 + 70 question load
 (≈115 orals once the 19 misplaced questions are excluded). The machine-readable
 form is `docs/study/study_sessions.json` (`D02-S01` … `D02-S05`), pinned to this
 file by sha256 — edit this pack without re-deriving the sessions and the

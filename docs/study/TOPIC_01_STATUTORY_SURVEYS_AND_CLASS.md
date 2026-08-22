@@ -2,8 +2,8 @@
 
 **Study pack for Nixon. Built 2026-08-22, revised against the official
 syllabus the same day.**
-Evidence: 46 mapped Oral questions, 96 Written questions across 39 of 40
-solved papers, 39 Oral questions carrying examiner evidence from all 6 named
+Evidence: 53 mapped Oral questions, 96 Written questions across 39 of 40
+solved papers, 46 Oral questions carrying examiner evidence from all 6 named
 examiners, 16 recurring written families.
 
 > **Now grounded in the official syllabus.** DGMA EAC Branch Circular **No.49
@@ -39,8 +39,8 @@ Not because it "sounds foundational". Because the evidence converges:
 | Written marks | **1536** | **1st** |
 | Domains that depend on it | **8 of 9** | **1st** |
 | Prerequisites of its own | **none** | **1st** |
-| Oral questions (post-adjudication) | 46 | 3rd |
-| Oral questions with examiner evidence | 39 | 3rd |
+| Oral questions (post-adjudication) | 53 | 3rd |
+| Oral questions with examiner evidence | 46 | 3rd |
 | Composite priority score | 0.590 | 2nd |
 
 **The decision was recomputed against the final syllabus, not inherited:
@@ -162,12 +162,14 @@ mapped questions.
 Hand-adjudicated. Every one verified as genuinely D01, and each carries
 examiner evidence unless noted.
 
-> **Mapping state.** 45 of D01's 46 oral mappings are cue-derived (MEDIUM
-> confidence), because every QB1 file titled "Engine Construction, Stability
-> & Surveys" names three domains and is therefore adjudicated per question.
-> These 14 are recorded in `tools/study/adjudications.json` with a
-> `last_reviewed` stamp, which is what promotes them to `VALID_MAPPED`. The
-> remaining 32 stay `REVIEW_PENDING` and appear in
+> **Mapping state.** D01 holds **53** oral mappings. **45** are cue-derived
+> (MEDIUM confidence), because every QB1 file titled "Engine Construction,
+> Stability & Surveys" names three domains and is therefore adjudicated per
+> question. **7** were moved into D01 by human adjudication on 2026-08-23
+> (`HUMAN_ADJUDICATION` evidence) when the D02 file-level over-capture was
+> corrected — see the note in the Topic 03 pack. **1** comes from a
+> single-domain file title. **22** are `VALID_MAPPED`; the remaining **31**
+> stay `REVIEW_PENDING` and appear in
 > `docs/study/mapping_review_queue.json` — they are safe to study, but they
 > have not been individually reviewed and must not be published as settled.
 
@@ -194,7 +196,13 @@ survey), `QB1_F#q14`, `QB1_F#q15` (CSM credit limits), `QB1_F#q7`, `QB1_F#q8`,
 listing), `QB1_G#q40`, `QB1_D#q3`, `QB1_D#q4` (load line survey documents),
 `QB1_E#q1` (SEQ survey), `QB1_supplementary#q1` (ISM survey duties in the ER).
 
-**C-priority (20)** — the remainder of the 46, including `QB1_supplementary#q6`
+**C-priority (27)** — the remainder of the 53. It now includes the seven
+questions moved in from the D02 files on 2026-08-23 — the UNCLOS and
+jurisdiction cluster `QB1_A#q19` (EEZ and continental shelf), `#q20`
+(sovereign rights vs jurisdiction), `#q21` (innocent passage), `#q22` (port,
+coastal and flag State duties), `#q23` (hot pursuit), plus `QB1_B#q7` (RO
+criteria) and `QB1_B#q16` (PSC duties and powers). It also includes
+`QB1_supplementary#q6`
 (IOPP), `#q7` (NOx Technical File), `QB1_J#q1`/`#q2` (drydock inspections),
 `QB1_I#q1`/`#q4`/`#q6`, `QB1_K#q1`/`#q8`, `QB1_C#q6`, `QB1_F#q4`/`#q6`,
 `QB1_G#q30`/`#q34`, `QB3_D#q1`, `QB10_B#q8`, `QB1_D#q5`.
@@ -249,9 +257,9 @@ theme in the domain. Treat PSC as an A-priority written topic.
 
 Reported as **three separate signals**, never summed:
 
-- **39** unique canonical Oral questions in D01 carry examiner evidence
-  (of 46 mapped)
-- **53** examiner relationship occurrences across those questions
+- **46** unique canonical Oral questions in D01 carry examiner evidence
+  (of 53 mapped)
+- **63** examiner relationship occurrences across those questions
 - **6** distinct examiners: Nair, Paul, Rajappan, Senthil, Simon, Srivastava
 
 The occurrence counts inside D01 are flat (1–2 per question), so examiner
@@ -355,7 +363,7 @@ asked.
 
 ## STUDY SESSIONS
 
-Five sessions, 45–90 minutes each, sized from the real 46 + 96 question load.
+Five sessions, 45–90 minutes each, sized from the real 53 + 96 question load.
 
 ### ▶ BEGIN TOPIC 01 — SESSION 1 (60–75 minutes)
 
