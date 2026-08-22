@@ -242,10 +242,14 @@ def test_workbook_and_pages_build():
     if os.path.exists(wb_path):
         from openpyxl import load_workbook
         wb = load_workbook(wb_path)
-        ok('workbook has the six projections plus ABOUT',
-           wb.sheetnames == ['ROADMAP', 'TOPIC DETAIL', 'OFFICIAL SYLLABUS',
-                             'COVERAGE', 'WRITTEN QI', 'PROGRESS', 'ABOUT'],
+        ok('workbook leads with the operational cockpit, then the projections',
+           wb.sheetnames == ['START HERE', 'STUDY QUEUE', 'ROADMAP',
+                             'TOPIC DETAIL', 'WRITTEN BY TOPIC',
+                             'OFFICIAL SYLLABUS', 'COVERAGE', 'WRITTEN QI',
+                             'PROGRESS', 'ABOUT'],
            str(wb.sheetnames))
+        ok('START HERE is the first sheet a candidate sees',
+           wb.sheetnames[0] == 'START HERE', str(wb.sheetnames[:1]))
         ok('ROADMAP lists every topic', wb['ROADMAP'].max_row == 11,
            str(wb['ROADMAP'].max_row))
         ok('OFFICIAL SYLLABUS lists every official item',
