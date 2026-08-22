@@ -1,0 +1,497 @@
+{
+  "schema": "miw.study.historical_qi_asset_inventory.v1",
+  "status": "RESEARCH_INVENTORY",
+  "generated_by": "tools/study/build_historical_qi_inventory.py",
+  "authority": "A RECORD OF WHAT EXISTS, not evidence the study system consumes. Nothing here is governed: every asset below lives on an unmerged research ref and is classified RESEARCH_ONLY at source. The historical_written_qi socket in written_evidence_horizon.json is deliberately untouched by this file.",
+  "source_ref": "origin/research/question-intelligence-v2-phase3b",
+  "source_ref_sha": "6d1568e63e1b2f8f1229f9ff9905b31db037d729",
+  "current_as_of": {
+    "families": "2026-08-17",
+    "occurrences": "2026-08-17",
+    "source_inventory": "2026-08-18",
+    "official_bank": "2026-08-17",
+    "source_manifest": "2026-08-17"
+  },
+  "headline": {
+    "historical_occurrences_ingested": 0,
+    "verdict": "DISCOVERED_AND_PRESERVED_BUT_NOT_INGESTED. The 1999-2005 DGS archive is inventoried, hashed and re-obtainable, but not one of its questions has been turned into an occurrence record. Every occurrence and every family currently held begins in 2021-02 or later, so the QI-v2 layer does not yet extend the evidence horizon backwards at all.",
+    "earliest_occurrence_held": "2021",
+    "latest_occurrence_held": "2026",
+    "predates_current_solved_band": true,
+    "earliest_written_evidence_miw_holds": 2021,
+    "extends_horizon_backwards": false,
+    "extends_horizon_backwards_means": "an occurrence earlier than 2021, the earliest written evidence MIW holds in any band. Reaching into the 2021-2023 wording-only band is NOT extending the horizon."
+  },
+  "bands": [
+    {
+      "band": "RESEARCH_ARCHIVE_UNINGESTED",
+      "range": "1999-2005 (as printed; see date certainty)",
+      "papers": 81,
+      "questions_ingested": 0,
+      "class": "RESEARCH_ONLY",
+      "where": "origin/research/question-intelligence-v2-phase3b : meoclass1/pastpapers/intelligence/v2/PHASE3B_SOURCE_INVENTORY.json",
+      "note": "Metadata only in repo. The PDFs/DOCs are NOT committed (public repo); they are held in a git-ignored intake store on the authoring workstation, with archive URL + sha256 as the machine-independent re-fetch recipe."
+    },
+    {
+      "band": "ACCESSIBLE_GAP",
+      "range": "2006-2020",
+      "papers": 0,
+      "questions_ingested": 0,
+      "class": "NOT_FOUND_ON_ACCESSIBLE_STATE",
+      "where": null,
+      "note": "Structured search over every reachable ref found nothing. Not a claim that no such papers exist."
+    },
+    {
+      "band": "WORDING_ONLY",
+      "range": "2021-2023",
+      "papers": 30,
+      "questions_ingested": 270,
+      "class": "GOVERNED_CURRENT",
+      "where": "main : meoclass1/pastpapers/intelligence/historical_qp_intelligence.json",
+      "note": "Question wording only, INTELLIGENCE_ONLY, no model answers."
+    },
+    {
+      "band": "CURRENT_SOLVED",
+      "range": "2023-01 to 2026-08",
+      "papers": 40,
+      "questions_ingested": 360,
+      "class": "GOVERNED_CURRENT",
+      "where": "main : solvedQP/ + docs/study/",
+      "note": "The layer the roadmap actually consumes today."
+    }
+  ],
+  "assets": [
+    {
+      "asset_id": "QI2-FAMILIES",
+      "path": "meoclass1/pastpapers/intelligence/v2/QUESTION_FAMILIES.json",
+      "ref": "origin/research/question-intelligence-v2-phase3b",
+      "classification": "RESEARCH_ONLY",
+      "schema": "miw.pastpapers.qi_v2.families.v2",
+      "holds": "9 families",
+      "reaches_before_2021": false
+    },
+    {
+      "asset_id": "QI2-OCCURRENCES",
+      "path": "meoclass1/pastpapers/intelligence/v2/QUESTION_OCCURRENCES.jsonl",
+      "ref": "origin/research/question-intelligence-v2-phase3b",
+      "classification": "RESEARCH_ONLY",
+      "schema": "miw.pastpapers.qi_v2.occurrence.v2",
+      "holds": "25 occurrence records (+1 schema header line)",
+      "reaches_before_2021": false
+    },
+    {
+      "asset_id": "QI2-SOURCE-INVENTORY",
+      "path": "meoclass1/pastpapers/intelligence/v2/PHASE3B_SOURCE_INVENTORY.json",
+      "ref": "origin/research/question-intelligence-v2-phase3b",
+      "classification": "RESEARCH_ONLY",
+      "schema": "miw.pastpapers.qi_v2.phase3b_source_inventory.v1",
+      "holds": "98 archived DGS objects: 80 question papers, 17 result lists, 1 sample paper",
+      "reaches_before_2021": true
+    },
+    {
+      "asset_id": "QI2-OFFICIAL-BANK",
+      "path": "meoclass1/pastpapers/intelligence/v2/OFFICIAL_BANK_ITEMS.json",
+      "ref": "origin/research/question-intelligence-v2-phase3b",
+      "classification": "RESEARCH_ONLY",
+      "schema": "miw.pastpapers.qi_v2.official_bank_items.v1",
+      "holds": "185 items of the DGS Question Bank MEO CL-I",
+      "date_confidence": "NONE",
+      "reaches_before_2021": null
+    },
+    {
+      "asset_id": "QI2-SOURCE-MANIFEST",
+      "path": "meoclass1/pastpapers/intelligence/v2/SOURCE_MANIFEST.json",
+      "ref": "origin/research/question-intelligence-v2-phase3b",
+      "classification": "RESEARCH_ONLY",
+      "schema": "miw.pastpapers.qi_v2.source_manifest.v2",
+      "holds": "42 sources with access-compliance record",
+      "reaches_before_2021": true
+    },
+    {
+      "asset_id": "MIW-HISTORICAL-QP",
+      "path": "meoclass1/pastpapers/intelligence/historical_qp_intelligence.json",
+      "ref": "main",
+      "classification": "GOVERNED_CURRENT",
+      "holds": "2021-2023 question wording, INTELLIGENCE_ONLY",
+      "reaches_before_2021": false
+    },
+    {
+      "asset_id": "MIW-SIXYEAR-FAMILIES",
+      "path": "meoclass1/pastpapers/intelligence/derived/sixyear_families.json",
+      "ref": "main",
+      "classification": "GOVERNED_CURRENT",
+      "holds": "the CURRENT six-year recurrence layer (2021 onward)",
+      "reaches_before_2021": false
+    }
+  ],
+  "review_refs_unmerged": [
+    "review/question-intelligence-v2-phase2",
+    "review/question-intelligence-v2-phase3a",
+    "review/question-intelligence-v2-phase3a1",
+    "review/question-intelligence-v2-phase3a2",
+    "review/question-intelligence-v2-phase3a3"
+  ],
+  "historical_paper_identity": {
+    "model": "An archived object is identified by its DGS archive URL plus sha256, NOT by a sitting date. A sitting date is a separate, evidenced claim with its own certainty class, and most objects cannot support one.",
+    "certainty_classes": {
+      "MONTH_AND_YEAR_PRINTED": 5,
+      "NO_DATE_PRINTED": 17,
+      "YEAR_PRINTED_MONTH_UNKNOWN": 58,
+      "SAMPLE_PAPER_NOT_A_SITTING": 1
+    },
+    "content_status": {
+      "PARSED": 76,
+      "PARTIAL": 4,
+      "UNREADABLE": 1
+    },
+    "month_and_year_certain": {
+      "papers": 5,
+      "span": {
+        "earliest": "1999-6",
+        "latest": "1999-7"
+      }
+    },
+    "year_only": {
+      "papers": 59,
+      "span": {
+        "earliest_year": 2001,
+        "latest_year": 2005
+      }
+    },
+    "no_date_printed": {
+      "papers": 17
+    },
+    "rule": "No fabricated dates. A year-only paper contributes to year-granularity windows only, and an undated paper contributes to no window at all."
+  },
+  "limb_model": {
+    "source": "meoclass1/pastpapers/intelligence/v2/LIMB_MODEL.md (and the occurrence schema)",
+    "key": "families key on (question_id, limb_label)",
+    "limb_kinds": {
+      "SOURCE_LIMB_CONFIRMED": 4,
+      "WHOLE_QUESTION": 16,
+      "ANALYTICAL_SEGMENT": 3,
+      "SOURCE_LIMB_ASSERTED": 2
+    },
+    "enum": {
+      "SOURCE_LIMB_CONFIRMED": "label matches a printed subpart label in the paper's spec",
+      "SOURCE_LIMB_ASSERTED": "the source paper prints limbs but the spec's subparts array does not carry labels; the limb is read off the printed stem",
+      "ANALYTICAL_SEGMENT": "an unlabelled sentence or clause of a single-limb question, isolated by MIW for comparison only - the paper prints no such division",
+      "AUTHORING_SCAFFOLD": "an MIW authoring construct (framing/intro/main/closing/head N/dN). NEVER a recurrence key.",
+      "WHOLE_QUESTION": "no limb; the whole question is the unit"
+    },
+    "rule": "Recurrence is observed at LIMB level. Collapsing a multi-limb question into one event under-counts."
+  },
+  "source_provenance": {
+    "per_occurrence_fields": [
+      "date_confidence",
+      "limb_kind",
+      "normalized_stem",
+      "official_bank_ancestor",
+      "provenance_tier",
+      "raw_stem",
+      "source_confidence",
+      "source_ids",
+      "source_question_no",
+      "text_similarity_confidence"
+    ],
+    "confidence_axes": [
+      "text_similarity_confidence",
+      "date_confidence",
+      "source_confidence"
+    ],
+    "why_three_axes": "A family may correctly read HIGH / NONE / HIGH: the recurrence is certain, the historical date is unproven, the source is sound. One blended confidence field hid exactly that case and was removed in QI-v2 phase 2.",
+    "raw_wording_rule": "raw_stem preserves the source exactly and is never modernised.",
+    "research_to_governed": "Nothing crosses from RESEARCH_ONLY to governed without an explicit adoption step. This inventory is not that step."
+  },
+  "family_join": {
+    "method": "family -> its occurrence question_ids -> study_mappings.json topic_id. The QI-v2 topic string is recorded but never used to classify.",
+    "counts": {
+      "JOINED": 9
+    },
+    "questions_in_more_than_one_family": {
+      "QP2608-Q8": [
+        "FAMILY-EM-0003",
+        "FAMILY-EM-0005"
+      ],
+      "QP2608-Q4": [
+        "FAMILY-EM-0004",
+        "FAMILY-EM-0007"
+      ]
+    },
+    "families": [
+      {
+        "family_id": "FAMILY-EM-0001",
+        "qi_v2_topic": "Surveys and certification",
+        "join_status": "JOINED",
+        "topic_id": "D01",
+        "candidate_topic_ids": [
+          "D01"
+        ],
+        "joined_via": [
+          "QP2608-Q1"
+        ],
+        "questions_outside_study_mappings": [],
+        "frequency_known": 1,
+        "earliest_occurrence": "2026-08",
+        "latest_occurrence": "2026-08",
+        "dormancy_class": "INSUFFICIENT_HISTORY",
+        "date_confidence": "NONE",
+        "publication_status": "TEXT_VERIFIED",
+        "provenance_tier": "OFFICIAL_BANK_ANCESTOR"
+      },
+      {
+        "family_id": "FAMILY-EM-0002",
+        "qi_v2_topic": "Dry docking",
+        "join_status": "JOINED",
+        "topic_id": "D03",
+        "candidate_topic_ids": [
+          "D03"
+        ],
+        "joined_via": [
+          "QP2608-Q2"
+        ],
+        "questions_outside_study_mappings": [],
+        "frequency_known": 1,
+        "earliest_occurrence": "2026-08",
+        "latest_occurrence": "2026-08",
+        "dormancy_class": "INSUFFICIENT_HISTORY",
+        "date_confidence": "NONE",
+        "publication_status": "TEXT_VERIFIED",
+        "provenance_tier": "OFFICIAL_BANK_ANCESTOR"
+      },
+      {
+        "family_id": "FAMILY-EM-0003",
+        "qi_v2_topic": "Human factors",
+        "join_status": "JOINED",
+        "topic_id": "D03",
+        "candidate_topic_ids": [
+          "D03"
+        ],
+        "joined_via": [
+          "QP2512-Q4",
+          "QP2608-Q8"
+        ],
+        "questions_outside_study_mappings": [
+          "QP2103-Q7",
+          "QP2204-Q4"
+        ],
+        "frequency_known": 4,
+        "earliest_occurrence": "2021-03",
+        "latest_occurrence": "2026-08",
+        "dormancy_class": "ACTIVE_RECURRENCE",
+        "date_confidence": "HIGH",
+        "publication_status": "TEXT_VERIFIED",
+        "provenance_tier": "MIW_TEXT_VERIFIED_RECURRENCE"
+      },
+      {
+        "family_id": "FAMILY-EM-0004",
+        "qi_v2_topic": "Marine insurance",
+        "join_status": "JOINED",
+        "topic_id": "D02",
+        "candidate_topic_ids": [
+          "D02"
+        ],
+        "joined_via": [
+          "QP2312-Q3",
+          "QP2606-Q3",
+          "QP2608-Q4"
+        ],
+        "questions_outside_study_mappings": [
+          "QP2102-Q8",
+          "QP2202-Q8"
+        ],
+        "frequency_known": 5,
+        "earliest_occurrence": "2021-02",
+        "latest_occurrence": "2026-08",
+        "dormancy_class": "ACTIVE_RECURRENCE",
+        "date_confidence": "HIGH",
+        "publication_status": "TEXT_VERIFIED",
+        "provenance_tier": "MIW_TEXT_VERIFIED_RECURRENCE"
+      },
+      {
+        "family_id": "FAMILY-EM-0005",
+        "qi_v2_topic": "Human factors",
+        "join_status": "JOINED",
+        "topic_id": "D03",
+        "candidate_topic_ids": [
+          "D03"
+        ],
+        "joined_via": [
+          "QP2608-Q8"
+        ],
+        "questions_outside_study_mappings": [],
+        "frequency_known": 1,
+        "earliest_occurrence": "2026-08",
+        "latest_occurrence": "2026-08",
+        "dormancy_class": "INSUFFICIENT_HISTORY",
+        "date_confidence": "NONE",
+        "publication_status": "RESEARCH_HYPOTHESIS",
+        "provenance_tier": "OFFICIAL_BANK_ANCESTOR"
+      },
+      {
+        "family_id": "FAMILY-EM-0006",
+        "qi_v2_topic": "Marine environment protection",
+        "join_status": "JOINED",
+        "topic_id": "D05",
+        "candidate_topic_ids": [
+          "D05"
+        ],
+        "joined_via": [
+          "QP2309-Q3",
+          "QP2402-Q5"
+        ],
+        "questions_outside_study_mappings": [],
+        "frequency_known": 2,
+        "earliest_occurrence": "2023-09",
+        "latest_occurrence": "2024-02",
+        "dormancy_class": "ACTIVE_RECURRENCE",
+        "date_confidence": "HIGH",
+        "publication_status": "TEXT_VERIFIED",
+        "provenance_tier": "OFFICIAL_BANK_ANCESTOR"
+      },
+      {
+        "family_id": "FAMILY-EM-0007",
+        "qi_v2_topic": "Marine insurance",
+        "join_status": "JOINED",
+        "topic_id": "D02",
+        "candidate_topic_ids": [
+          "D02"
+        ],
+        "joined_via": [
+          "QP2608-Q4"
+        ],
+        "questions_outside_study_mappings": [],
+        "frequency_known": 1,
+        "earliest_occurrence": "2026-08",
+        "latest_occurrence": "2026-08",
+        "dormancy_class": "INSUFFICIENT_HISTORY",
+        "date_confidence": "NONE",
+        "publication_status": "TEXT_VERIFIED",
+        "provenance_tier": "OFFICIAL_BANK_ANCESTOR"
+      },
+      {
+        "family_id": "FAMILY-EM-0009",
+        "qi_v2_topic": "Indian maritime law",
+        "join_status": "JOINED",
+        "topic_id": "D06",
+        "candidate_topic_ids": [
+          "D06"
+        ],
+        "joined_via": [
+          "QP2304-Q4",
+          "QP2307-Q8",
+          "QP2402-Q8",
+          "QP2503-Q9",
+          "QP2507-Q9"
+        ],
+        "questions_outside_study_mappings": [],
+        "frequency_known": 5,
+        "earliest_occurrence": "2023-03",
+        "latest_occurrence": "2025-07",
+        "dormancy_class": "ACTIVE_RECURRENCE",
+        "date_confidence": "HIGH",
+        "publication_status": "DATE_VERIFIED",
+        "provenance_tier": "OFFICIAL_BANK_ANCESTOR"
+      },
+      {
+        "family_id": "FAMILY-EM-0008",
+        "qi_v2_topic": "Indian maritime law",
+        "join_status": "JOINED",
+        "topic_id": "D06",
+        "candidate_topic_ids": [
+          "D06"
+        ],
+        "joined_via": [
+          "QP2307-Q9",
+          "QP2410-Q1",
+          "QP2506-Q9",
+          "QP2508-Q5",
+          "QP2602-Q5"
+        ],
+        "questions_outside_study_mappings": [],
+        "frequency_known": 5,
+        "earliest_occurrence": "2023-07",
+        "latest_occurrence": "2026-02",
+        "dormancy_class": "ACTIVE_RECURRENCE",
+        "date_confidence": "HIGH",
+        "publication_status": "DATE_VERIFIED",
+        "provenance_tier": "OFFICIAL_BANK_ANCESTOR"
+      }
+    ]
+  },
+  "roadmap_impact_preview": {
+    "study_order_changed": false,
+    "weights_changed": false,
+    "why": "Nothing to weight. Zero historical occurrences are ingested, and every family held sits inside the band the roadmap already counts, so adopting them today would add no evidence the spine does not already have.",
+    "per_topic_if_adopted": {
+      "D01": {
+        "families": 1,
+        "occurrences": 1,
+        "earliest": "2026-08",
+        "latest": "2026-08"
+      },
+      "D02": {
+        "families": 2,
+        "occurrences": 6,
+        "earliest": "2021-02",
+        "latest": "2026-08"
+      },
+      "D03": {
+        "families": 3,
+        "occurrences": 6,
+        "earliest": "2021-03",
+        "latest": "2026-08"
+      },
+      "D05": {
+        "families": 1,
+        "occurrences": 2,
+        "earliest": "2023-09",
+        "latest": "2024-02"
+      },
+      "D06": {
+        "families": 2,
+        "occurrences": 10,
+        "earliest": "2023-03",
+        "latest": "2026-02"
+      }
+    },
+    "note": "per_topic_if_adopted is a PREVIEW of families only. It is not a proposal, and no study_priority component is added by this file."
+  },
+  "public_claim_effect": {
+    "socket_status_unchanged": "NOT_STARTED",
+    "derived_sentence_unchanged": "Based on MIW's currently mapped Oral corpus and 360 solved Written questions across 40 papers (2023-01 to 2026-08).",
+    "permitted_claims": [
+      "none beyond the current solved band"
+    ],
+    "forbidden_claims": [
+      "since 2010",
+      "2010-2026",
+      "16 years",
+      "all historical papers",
+      "complete archive"
+    ]
+  },
+  "corrections_to_recovery_brief": [
+    {
+      "brief_says": "intelligence/v2/<file>",
+      "truth": "meoclass1/pastpapers/intelligence/v2/<file>",
+      "why_it_matters": "the abbreviated path does not exist on any ref"
+    },
+    {
+      "brief_says": "80 archived DGS MEO Class I question papers, 1999-2005",
+      "truth": "80 question papers + 1 sample paper = 81 non-result objects. Only 5 print month AND year (all 1999); 59 are year-only; 17 print no date at all.",
+      "why_it_matters": "the band is not uniformly dateable, so \"1999-2005\" overstates what can be placed on a timeline"
+    },
+    {
+      "brief_says": "9 families (7 counted, 7 excluded)",
+      "truth": "9 families; 5 ACTIVE_RECURRENCE, 4 INSUFFICIENT_HISTORY",
+      "why_it_matters": "the counted/excluded phrasing does not match the artefact"
+    },
+    {
+      "brief_says": "the recovery will extend the horizon backwards",
+      "truth": "no occurrence held predates 2021",
+      "why_it_matters": "the archive is discovered, not ingested; that is the actual remaining work"
+    }
+  ],
+  "next_qi_action": "Ingest the 1999-2005 archive into occurrence records. It needs the raw objects, which are NOT on this laptop: re-fetch from the archive URLs in PHASE3B_SOURCE_INVENTORY.json and verify against the recorded sha256, or run on the workstation holding the intake store. Ingest date-certain papers first (5 papers, 1999), then year-only, and never assign a month that is not printed."
+}

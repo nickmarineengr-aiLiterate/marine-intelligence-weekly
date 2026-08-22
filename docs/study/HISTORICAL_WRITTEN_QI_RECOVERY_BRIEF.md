@@ -8,6 +8,56 @@ this in the session that wrote it.**
 > regeneration chain in §5 now has a fourth output — the public page — and one
 > extra fail-closed guard, both noted there.
 
+---
+
+> ## ⚠ CORRECTED 2026-08-22 — read this before §1 and §2
+>
+> The asset claims below were **verified against the refs themselves** and four
+> of them were wrong. The machine-readable record is now
+> **`docs/study/historical_qi_asset_inventory.json`** (regenerate with
+> `tools/study/build_historical_qi_inventory.py`); prefer it over the prose
+> here wherever the two differ.
+>
+> **1. The paths in §2 do not exist as written.** The real prefix is
+> `meoclass1/pastpapers/intelligence/v2/`, not `intelligence/v2/`.
+>
+> **2. The headline finding: the archive is DISCOVERED, not INGESTED.** Not one
+> historical question has become an occurrence record. Every one of the 25
+> occurrence records and all 9 families begin in **2021-02 or later** — inside
+> bands MIW already holds. The QI-v2 layer therefore does **not currently
+> extend the evidence horizon backwards at all**. That ingestion is the actual
+> remaining work, and it is not a small residue of the project; it is the
+> project.
+>
+> **3. "80 papers, 1999–2005" overstates what can be dated.** There are 80
+> question papers plus 1 sample paper. Of those, only **5 print month AND year
+> (all of them 1999)**; **59 are year-only** (58 of 2001, 1 of 2005); and **17
+> print no date at all**. Content status is 76 PARSED, 4 PARTIAL, 1 UNREADABLE. So "1999–2005" is a range of
+> *filing*, not a timeline that 81 papers can each be placed on.
+>
+> **4. The raw objects are not on this laptop.** The PDFs/DOCs are deliberately
+> not committed (public repo) and live in a git-ignored intake store on the
+> authoring workstation (a `D:\` path). What IS preserved is the
+> machine-independent recipe — archive URL + sha256 — so ingestion needs either
+> that workstation or a re-fetch from the Wayback URLs recorded in
+> `PHASE3B_SOURCE_INVENTORY.json`.
+>
+> **5. 2006–2020 is confirmed absent from accessible state.** A bounded search
+> over **125 distinct trees across 183 refs** found no gap-era paper id in any
+> filename and no gap-era `sitting_year` anywhere. Status stands at
+> `NOT_FOUND_ON_ACCESSIBLE_STATE` — which is not the same as "never existed".
+>
+> **6. The D01–D10 join is already proved and needs no new taxonomy.** All 9
+> families join to exactly one spine topic *through the questions they
+> contain* (occurrence `question_id` → `study_mappings.json`), never through
+> the QI-v2 topic string. Two questions sit in two families each
+> (`QP2608-Q4, QP2608-Q8`) and are flagged for adjudication rather than resolved silently.
+>
+> **7. Nothing was widened.** The socket is still `NOT_STARTED`, the study
+> order is unchanged, D01 is still Topic 01, and the public sentence is
+> untouched. `tools/study/test_historical_qi_inventory.py` sweeps the
+> reader-facing surfaces for the forbidden claims and proves the sweep fires.
+
 The study system now has a governed, empty socket for historical Written QI
 (`docs/study/written_evidence_horizon.json`, layer `HISTORICAL_WRITTEN_QI`,
 status `NOT_STARTED`). This brief is what the recovery session needs so it does
