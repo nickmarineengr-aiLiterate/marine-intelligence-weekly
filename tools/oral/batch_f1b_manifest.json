@@ -1,0 +1,103 @@
+{
+  "batch_id": "F1b",
+  "title": "Oral examiner follow-up production - batch F1b (FUP-006, the F1 governance hold discharged)",
+  "kind": "FOLLOWUP",
+  "note": "Single-action production batch. F1b implements FUP-006 and nothing else. F1 authorised FUP-006, FUP-018 and FUP-033, produced the latter two, and HELD FUP-006 as HELD_GOVERNANCE because its target QB1_A#q9 is pinned by batch_e1_enrichment_manifest.json through ENRICH-A003 and no digest pin had a delegation path. That contract now exists (tools/oral/oral_supersession.py), and F1b is its FIRST PRODUCTION USE: this manifest declares, per card, that its pre-edit state IS E1's pinned post-edit state, so E1's guard stops claiming 'my state is live' and starts claiming 'my state is the ancestor of what is live'. E1 is NOT rebaselined and batch_f1_manifest.json is NOT rewritten - F1's hold record remains historically true, because F1 did hold it. The register is likewise untouched: it is an authorisation record, not a status board. NOTE ON authorisation_batch_key: as for F1, the follow-up register carries no batches[] node, so the key is an identity label asserted against batch_id by oral_manifest.audit_manifest while the real selector is the per-card followup_id, which validate_batch_f1b.py resolves in the register and cross-checks field by field.",
+  "authorisation_source": "tools/oral/oral_followup_register.json",
+  "authorisation_batch_key": "batches.F1b",
+  "authorisation_commit": "67842dfcb4d80df9647a393948d869b91cd1518d",
+  "baseline_commit": "e8173b2d5288c98751964df5738e2c0ae3c17c60",
+  "expected_canonical_questions": 721,
+  "expected_question_bearing_files": 86,
+  "expected_examiner_relationships": 960,
+  "expected_examiners": 7,
+  "creates_new_cards": false,
+  "distinct_target_cards": 1,
+  "discharges_hold": [
+    {
+      "followup_id": "FUP-006",
+      "held_by_manifest": "batch_f1_manifest.json",
+      "held_status": "HELD_GOVERNANCE",
+      "held_blocker": "batch_e1_enrichment_manifest.json pins QB1_A#q9's post_edit_digest a1deaf3445bc1c88 and validate_batch_e1.py compares that pin to the LIVE page; manifest_digests_match had no delegation path in any batch validator.",
+      "discharged_by": "the generic historical digest supersession contract in tools/oral/oral_supersession.py, engaged here by the cards[].supersedes declaration below. No FUP-006-specific bypass, no E1 rebaseline, no relaxed digest checking, and no special case keyed on this action id or this card.",
+      "held_record_left_intact": "batch_f1_manifest.json still declares FUP-006 as HELD_GOVERNANCE with work_still_owed true. That is a truthful record of what F1 did and is deliberately not rewritten. Implementation history lives in THIS manifest; F1's record is not a status board any more than the register is.",
+      "register_status_unchanged": "AUTHORISED_NOT_STARTED"
+    }
+  ],
+  "followup_overlap": "FUP-006's target QB1_A#q9 is colocated with shipped enrichment ENRICH-A003 (batch E1), which added 'Who the Average Adjuster Is - and Why Independence Matters'. E1's own record already scoped the two limbs apart: it names GAP-0620 on this target as 'Different limb - a worked casualty application - and NOT implemented here. The baseline card already carries an Ever Given casualty anchor.' F1b implements exactly that different limb and duplicates neither E1's adjuster paragraphs nor the pre-existing casualty anchor sentence.",
+  "sibling_pin_delegation": [
+    "Forward direction: QB1_A#q9 IS pinned by an earlier record - batch_e1_enrichment_manifest.json / ENRICH-A003, post_edit_digest a1deaf3445bc1c88. It is the ONLY earlier record pinning this card; checked programmatically over every batch_*_manifest.json and correction_*_manifest.json on disk. F1b therefore declares a supersession claim rather than relying on anchor-level delegation alone, because anchor-level delegation exempts a card from only_authorised_cards_changed and says nothing about a digest pin.",
+    "Reverse direction: every earlier guard discovers sibling records through oral_manifest.authorisation_manifest_paths(). THIS FILE MUST EXIST BEFORE those guards run, or batches A-D, GAP-0609, E1-E6 and F1 will all report genuine-looking drift on QB1_A#q9. The delegation is non-vacuous in exactly that sense and batch_f1b_mutate mutation B proves it: with this manifest removed from the surface, validate_batch_e1.py fails manifest_digests_match.",
+    "Chain shape: E1/ENRICH-A003 (a1deaf3445bc1c88) -> F1b/FUP-006 (46defd301a1f56a3), which is live. One root, one terminal, no fork, and the whole chain stays in E1's sha256(card_text_lf)[:16] convention."
+  ],
+  "cards": [
+    {
+      "action_id": "FUP-006",
+      "followup_id": "FUP-006",
+      "family_id": "GAP-0620",
+      "source_occurrence_ids": ["ASC-0656"],
+      "examiners": ["Nair"],
+      "file": "QB1_A.html",
+      "anchor": "q9",
+      "priority": "F-P1",
+      "verification_scope": "PRIMARY_AUTHORITY_REQUIRED",
+      "verification_scope_basis": "The limb quotes the York-Antwerp Rules 2016 and turns on the operative wording of Rules VI(a), VI(d), C and D. That is external legal authority asserted on the page, so it is not TECHNICAL_REASONING_ONLY, whose recorded meaning in this corpus is 'no external claim asserted beyond standard architecture'. It is not a class rule or an OEM specification, and YAR is a contractual code rather than a regulation in force, so the governed class is PRIMARY_AUTHORITY_REQUIRED, discharged against the CMI text itself.",
+      "relationship_type": "FOLLOW_UP",
+      "relationship_edge": {
+        "parent_question": "QB1_A#q9",
+        "edge": "EXAMINER_FOLLOW_UP",
+        "followup": "FUP-006",
+        "answer_home": "QB1_A#q9"
+      },
+      "original_asks": ["Explain how GA was applicable for ship ever given stuck in suez."],
+      "q_text": "General Average — Explain including act and procedure followed.",
+      "missing_limb": "The card defines the general average act, lists the Rule A elements and sets out the procedure, and its Casualty Anchor names Ever Given in one sentence - 'grounding and refloating operations led to a GA declaration and cargo interests providing GA security before cargo release'. It never works the Rule A elements through the Ever Given facts, never says which expenditure was the general average act as against the grounding, and never says what the Rules exclude.",
+      "limb_sentence": "The current answer lacks the worked application the examiner asked for - which act was the general average act, how each Rule A element is argued on these facts, that salvage expenditure is allowed by Rule VI(a) subject to (b)-(d) while Rule C bars delay and loss of market outright, and that Rule D keeps contribution alive irrespective of fault.",
+      "current_live_adjudication": "PARTIALLY_COVERED. Independently re-adjudicated against the live card rather than accepted from the F1 hold record. The Casualty Anchor already names the casualty and the GA security point, so the anchor sentence is NOT repeated; the limb is placed as a worked application that consumes the card's own Rule A list and Procedure list. Complementary to ENRICH-A003 immediately above it, which answers who appoints the adjuster - a procedural limb, not a casualty one.",
+      "changed_sections": [
+        "answer-body: new h4 'Worked Application — Ever Given, Suez Canal (2021)' + intro paragraph + 5-item Rule A ul + 3 paragraphs, inserted after 'Who the Average Adjuster Is — and Why Independence Matters' and before 'CE Role — Evidence Preservation (Critical)'",
+        "ce-tip: the directed examiner follow-up edge appended to Nair and Simon's existing CE Oral Tip, which is the tier that already carries this card's examiner relationships"
+      ],
+      "timed_blocks_changed": false,
+      "currentness": {
+        "required_by_register": false,
+        "batch_decision": "VERIFIED_CURRENT",
+        "basis": "The register's conservative floor said no exposure. Independently re-inspected anyway, because currentness_required is a floor and not a ceiling. Two present-tense assertions were found and both were checked rather than assumed: that YAR 2016 is still the current edition of the York-Antwerp Rules (confirmed - the 2016 Rules were approved at the CMI Conference in New York in May 2016 and no later edition has been adopted), and that the Suez Canal Authority settlement terms remain undisclosed (confirmed - the vessel was released on 7 July 2021 under a settlement whose amount was never published). Deliberately excluded from the limb, as perishable or unsupportable: current litigation status, the final settlement figure, which party ultimately bore what proportion, the cause of the grounding, and any allocation of legal liability. Which YAR edition the Evergreen bills of lading actually incorporated is likewise not asserted; the limb is written so the Rule A analysis holds either way, Rule A being word-for-word identical in the 1994, 2004 and 2016 Rules.",
+        "triggers_found": [
+          "current edition of the York-Antwerp Rules",
+          "continuing non-disclosure of the Suez Canal Authority settlement terms"
+        ]
+      },
+      "authority": [
+        "York-Antwerp Rules 2016 (CMI), Rule A.1 - 'There is a general average act when, and only when, any extraordinary sacrifice or expenditure is intentionally and reasonably made or incurred for the common safety for the purpose of preserving from peril the property involved in a common maritime adventure.' Identical wording in the 1994 and 2004 Rules, per the CMI tabular comparison of the three editions.",
+        "York-Antwerp Rules 2016 (CMI), Rule VI(a) - 'Expenditure incurred by the parties to the common maritime adventure in the nature of salvage, whether under contract or otherwise, shall be allowed in general average provided that the salvage operations were carried out for the purpose of preserving from peril the property involved in the common maritime adventure and subject to the provisions of paragraphs (b), (c) and (d).'",
+        "York-Antwerp Rules 2016 (CMI), Rule VI(d) - special compensation payable to a salvor under Article 14 of the International Convention on Salvage, 1989 to the extent specified in paragraph 4 of that Article, or under any other provision similar in substance such as SCOPIC, 'shall not be allowed in general average'.",
+        "York-Antwerp Rules 2016 (CMI), Rule C.1 and C.3 - only losses, damages or expenses which are the direct consequence of the general average act shall be allowed; and 'Demurrage, loss of market, and any loss or damage sustained or expense incurred by reason of delay, whether on the voyage or subsequently, and any indirect loss whatsoever, shall not be allowed as general average.'",
+        "York-Antwerp Rules 2016 (CMI), Rule D - rights to contribution in general average shall not be affected though the event which gave rise to the sacrifice or expenditure may have been due to the fault of one of the parties to the adventure, without prejudice to any remedies or defences on account of such fault.",
+        "Casualty facts: the Ever Given (owner Shoei Kisen Kaisha, operator Evergreen Marine) grounded across the Suez Canal on 23 March 2021 and was refloated on 29 March 2021 after dredging and a tug and salvage operation; the owner declared General Average shortly afterwards and Richards Hogg Lindley were appointed average adjusters; cargo was released only against an average guarantee from cargo underwriters, or a signed average bond or cash deposit, backed by the shipowner's lien."
+      ],
+      "authority_note": "Sources disagree on the exact date of the general average declaration - reports place it between 1 and 5 April 2021 - so the limb says 'shortly afterwards' rather than fixing a date that the evidence does not settle. The Suez Canal Authority's claim figure is likewise not stated: the reported initial claim varies between sources and was successively reduced before an undisclosed settlement, so only the existence and separateness of the claim are asserted. Whether the adjuster ultimately admitted any part of the SCA claim into the adjustment is not asserted in either direction.",
+      "claims_added": [
+        "23 March 2021",
+        "29 March 2021",
+        "Shoei Kisen Kaisha",
+        "Richards Hogg Lindley",
+        "the grounding is not the general average act",
+        "YAR 2016 Rule VI(a)",
+        "Rule VI(d)",
+        "Rule C",
+        "Rule D"
+      ],
+      "pre_edit_digest": "a1deaf3445bc1c88",
+      "post_edit_digest": "46defd301a1f56a3",
+      "supersedes": {
+        "manifest": "batch_e1_enrichment_manifest.json",
+        "action_id": "ENRICH-A003",
+        "post_edit_digest": "a1deaf3445bc1c88",
+        "note": "H1 -> H2. E1's pinned post-edit state is F1b's pre-edit state, so E1's manifest_digests_match resolves as SUPERSEDED rather than being rewritten or relaxed."
+      },
+      "byte_delta": 4031,
+      "status": "IMPLEMENTED"
+    }
+  ]
+}

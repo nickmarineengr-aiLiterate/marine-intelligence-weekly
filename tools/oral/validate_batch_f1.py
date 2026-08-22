@@ -377,6 +377,7 @@ def main():
     # the start rather than left to expire. The CARD ADDED / CARD REMOVED
     # entries carry a suffix, so they can never match a plain "file#anchor".
     authorised_elsewhere = set()
+    discharge_pins = {}          # followup_id -> (manifest, target, post_digest)
     for sib in authorisation_manifest_paths(MANIFEST.parent):
         if sib == MANIFEST:
             continue
@@ -384,8 +385,24 @@ def main():
             sibling = json.loads(sib.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             return unavailable("sibling record unreadable: %s" % sib.name)
+        by_action = {}
         for sc in sibling.get("cards", []):
             authorised_elsewhere.add("%s#%s" % (sc.get("file"), sc.get("anchor")))
+            aid = sc.get("action_id") or sc.get("followup_id")
+            if aid:
+                by_action[aid] = sc
+        # A later batch may DISCHARGE a hold this batch declared. It records
+        # that in its own manifest rather than by rewriting this one, so the
+        # hold below stays permanently true of F1 while the outstanding work
+        # is still answerable from repository data.
+        for d in sibling.get("discharges_hold") or []:
+            fid = d.get("followup_id")
+            produced = by_action.get(fid)
+            if fid and produced is not None:
+                discharge_pins[fid] = (
+                    sib.name, "%s#%s" % (produced.get("file"),
+                                         produced.get("anchor")),
+                    produced.get("post_edit_digest"))
 
     authorised = {"%s#%s" % (c.get("file"), c.get("anchor")) for c in cards}
     unauthorised = sorted(set(changed) - authorised - authorised_elsewhere)
@@ -398,12 +415,52 @@ def main():
     report("every_authorised_card_changed", not not_changed,
            "unchanged=%s" % (not_changed or "-"))
 
-    # FUP-006's target must be untouched while the action is held. Editing it
-    # anyway is the specific accident this hold exists to prevent.
-    held_target = "QB1_A.html#q9"
-    report("held_action_target_untouched",
-           held_target not in set(changed),
-           "%s changed=%s" % (held_target, held_target in set(changed)))
+    # A held action's target must be untouched while the action is HELD --
+    # editing it anyway is the specific accident the hold exists to prevent.
+    #
+    # A hold is not permanent, though, and this check must not expire when it
+    # is legitimately discharged. Guard expiry is a confirmed defect class
+    # here, and it bites in BOTH directions: a guard that keeps passing after
+    # its subject moved is as dead as one that starts failing for a legitimate
+    # change. So the check changes SUBJECT rather than standing down:
+    #
+    #   no discharge declared -> the card must be unchanged (original semantics,
+    #                            byte-for-byte)
+    #   discharge declared    -> the card must be exactly the state the
+    #                            discharging record pinned
+    #
+    # It is therefore never vacuous. An arbitrary edit to the held target fails
+    # it under both regimes, and the discharge must come from a sibling record
+    # that actually produced the action -- oral_manifest.audit_manifest refuses
+    # a `discharges_hold` entry with no matching cards[] entry.
+    held_bad = []
+    for h in held:
+        fid, target = h.get("followup_id"), h.get("target")
+        discharge = discharge_pins.get(fid)
+        if discharge is None:
+            if target in set(changed):
+                held_bad.append("%s: %s changed while HELD" % (fid, target))
+            continue
+        sib_name, sib_target, sib_pin = discharge
+        if sib_target != target:
+            held_bad.append("%s: %s discharges it on %s, not %s"
+                            % (fid, sib_name, sib_target, target))
+            continue
+        fname, _, anchor = target.partition("#")
+        page = QB_DIR / fname
+        if not page.is_file():
+            held_bad.append("%s: %s absent" % (fid, fname))
+            continue
+        live = cards_of(page.read_text(encoding="utf-8", newline="")).get(anchor)
+        if live is None:
+            held_bad.append("%s: %s not present" % (fid, target))
+        elif digest16(live.replace("\r\n", "\n")) != sib_pin:
+            held_bad.append("%s: %s is not the state %s pinned (%s)"
+                            % (fid, target, sib_name, sib_pin))
+    report("held_action_target_untouched", not held_bad,
+           "%s discharged=%s"
+           % (held_bad or "-",
+              sorted(discharge_pins) if discharge_pins else "none"))
 
     # ---- 4. the limb is actually there, additively, with its authority ----
     absent, dupes, digest_bad, add_bad = [], [], [], []

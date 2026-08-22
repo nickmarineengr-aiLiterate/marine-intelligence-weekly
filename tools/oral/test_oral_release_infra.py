@@ -285,6 +285,7 @@ EXPECTED_BATCH_MANIFESTS = [
     "batch_e6_enrichment_manifest.json",
     "batch_e_gap0609_manifest.json",
     "batch_f1_manifest.json",
+    "batch_f1b_manifest.json",
 ]
 manifests = sorted(HERE.glob("batch_*manifest.json"))
 check("every batch manifest on disk is audited, and no other",

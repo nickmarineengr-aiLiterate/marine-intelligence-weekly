@@ -18,16 +18,19 @@ is correct and unreachable would pass every test in sections 1-3.
 
 WHY A LIVE MUTATION AND NOT A FIXTURE
 -------------------------------------
-The blocked action this contract exists for is FUP-006 on QB1_A#q9, pinned by
+The action this contract was built for is FUP-006 on QB1_A#q9, pinned by
 batch_e1_enrichment_manifest.json through ENRICH-A003. A fixture copy of that
 card would prove a fixture. The claim under test is about the shipped page and
 the shipped validator, so the shipped page and the shipped validator are what
 run here. Every edit is reverted from bytes read before the edit, and the
 restore is verified by digest before the section reports.
 
-NOTHING HERE IS RELEASE EVIDENCE FOR FUP-006. These runs prove the MECHANISM
-admits an authorised successor. FUP-006 itself stays HELD_GOVERNANCE and
-unimplemented; releasing that hold is a production decision, not a test.
+NOTHING HERE IS RELEASE EVIDENCE FOR ANY BATCH. These runs prove the MECHANISM
+admits an authorised successor; a batch's own validator and mutation suite are
+what certify that batch. Batch F1b has since implemented FUP-006 and is the
+first real chain on main, so the live sections now extend a PRODUCTION chain
+rather than starting one -- which is why the predecessor is derived from the
+card's current terminal state and never hardcoded. See ``terminal_state_for``.
 """
 
 import hashlib
@@ -294,13 +297,25 @@ print("=" * 100)
 
 live_records = load_card_records()
 declared = [r for r in live_records if r.supersedes is not None]
-check("no supersession is declared on main today",
-      not declared,
-      "%d card record(s) across the authorisation surface, %d declare descent"
-      % (len(live_records), len(declared)))
-check("the chain audit is therefore silent, not vacuous",
-      audit_supersession_chains() == [],
-      "a target with no declaration is not a chain and is not reported")
+rows = audit_supersession_chains()
+
+# These two checks used to assert that NO chain was declared anywhere. That was
+# true on the day the mechanism landed and was guaranteed to expire the moment
+# it was used in production -- which batch F1b did, on QB1_A#q9. Asserting the
+# audit's VERDICT instead of its emptiness is strictly stronger and cannot
+# expire: with no chains declared it says the audit is silent, and with chains
+# declared it says every one of them resolves.
+check("every supersession chain declared on main resolves",
+      all(ok for _, ok, _, _ in rows),
+      "%d card record(s) across the authorisation surface, %d declare descent, "
+      "%d chain(s), %d FAIL"
+      % (len(live_records), len(declared), len(rows),
+         sum(0 if ok else 1 for _, ok, _, _ in rows)))
+check("only declaring targets are reported as chains",
+      len(rows) == len({r.target for r in declared}),
+      "%d chain row(s) for %d distinct declaring target(s); a target with no "
+      "declaration is not a chain and is not reported"
+      % (len(rows), len({r.target for r in declared})))
 
 # Non-vacuity of the WIRING: every validator that pins a live post-edit digest
 # must resolve it through the shared helper. A resolver that is correct and
@@ -363,10 +378,53 @@ def insert_probe(path, anchor, marker):
 
 
 def live_digest_from(out, anchor_label):
-    """Read the live digest out of the resolver's own failure message."""
-    m = re.search(r"%s post PIN_MISMATCH: pinned \S+ but live is (\w+)"
-                  % re.escape(anchor_label), out)
-    return m.group(1) if m else None
+    """Read the live digest out of the resolver's own failure message.
+
+    TWO shapes, because which one a probe produces depends on whether the card
+    already carries an authorised chain. With no chain the resolver reports
+    PIN_MISMATCH; once a production successor exists -- F1b on QB1_A#q9 -- the
+    very same probe reports TERMINAL_NOT_LIVE instead. Parsing only the first
+    shape made this fixture expire the moment the mechanism was used for real:
+    the digest read as None and the whole case returned early, reporting a
+    failure that looked like a broken contract rather than a stale parser.
+    """
+    for pattern in (
+            r"%s post PIN_MISMATCH: pinned \S+ but live is (\w+)",
+            r"%s post TERMINAL_NOT_LIVE: chain ends at .*? but live is (\w+)"):
+        m = re.search(pattern % re.escape(anchor_label), out)
+        if m:
+            return m.group(1)
+    return None
+
+
+def terminal_state_for(page_name, anchor):
+    """The state a new successor must descend from -- DERIVED, never declared.
+
+    Hardcoding a predecessor turns this fixture into a snapshot of the corpus on
+    the day it was written. F1b legitimately appended a state to QB1_A#q9, and a
+    scratch successor still claiming ENRICH-A003 would then be a second
+    successor to one predecessor -- a CHAIN_FORK, reported as a contract failure
+    when the only stale thing was the fixture.
+
+    So the fixture asks the resolver where the chain currently ENDS, and the
+    scratch record extends it. That also makes the test stronger: on a card with
+    a production chain it now proves the contract at depth three.
+    """
+    records = load_card_records()
+    chain, problem = build_chain((page_name, anchor), records=records)
+    if problem is not None:
+        raise AssertionError("chain for %s#%s is already broken before the "
+                             "test: %s: %s" % (page_name, anchor, problem[0],
+                                               problem[1]))
+    if chain:
+        terminal = chain[-1]
+        return terminal.manifest, sorted(terminal.action_ids)[0], terminal.post
+    owning = [r for r in records if r.target == (page_name, anchor)]
+    if len(owning) != 1:
+        raise AssertionError("%s#%s is pinned by %d records and declares no "
+                             "chain; no unique predecessor to extend"
+                             % (page_name, anchor, len(owning)))
+    return owning[0].manifest, owning[0].action_id, owning[0].post_edit_digest
 
 
 SCRATCH = HERE / "batch_zzscratch_supersession_manifest.json"
@@ -379,10 +437,16 @@ def sha(b):
     return hashlib.sha256(b).hexdigest()
 
 
-def live_case(title, page, anchor, label, validator, pred_manifest, pred_action,
-              pred_post, successor_id):
-    """Drive one card through the whole contract and restore it byte-exactly."""
+def live_case(title, page, anchor, label, validator, successor_id):
+    """Drive one card through the whole contract and restore it byte-exactly.
+
+    The predecessor is derived from the card's CURRENT terminal state rather
+    than passed in -- see ``terminal_state_for``.
+    """
     original = page.read_bytes()
+    pred_manifest, pred_action, pred_post = terminal_state_for(page.name, anchor)
+    print("     predecessor derived: %s/%s pinning %s"
+          % (pred_manifest, pred_action, pred_post))
     try:
         out, failing = run_validator(validator)
         check("%s: control is green before the probe" % title,
@@ -474,8 +538,7 @@ def live_case(title, page, anchor, label, validator, pred_manifest, pred_action,
 
 
 live_case("FUP-006 / QB1_A#q9", QB1_A, "q9", "QB1_A.html#q9",
-          "validate_batch_e1.py", "batch_e1_enrichment_manifest.json",
-          "ENRICH-A003", "a1deaf3445bc1c88", "FUP-006-SCRATCH")
+          "validate_batch_e1.py", "FUP-006-SCRATCH")
 
 out, failing = run_validator("validate_batch_e1.py")
 check("E1 returns to its exact pre-test state",
@@ -491,8 +554,7 @@ print("=" * 100)
 # one-generation exception carved out for the E-series.
 
 live_case("F1 / QB3_I#q4", QB3_I, "q4", "QB3_I.html#q4",
-          "validate_batch_f1.py", "batch_f1_manifest.json",
-          "FUP-018", "c218d41abda781aa", "FUP-018-SUCCESSOR-SCRATCH")
+          "validate_batch_f1.py", "FUP-018-SUCCESSOR-SCRATCH")
 
 out, failing = run_validator("validate_batch_f1.py")
 check("F1 returns to its exact pre-test state",
