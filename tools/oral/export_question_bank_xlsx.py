@@ -343,15 +343,17 @@ def render_workbook(meta, rows, generated_at, internal=False):
            link_col=fields.index("url"))
 
     # --- Projections (same model, different grouping; cheap)
-    ws = wb.create_sheet("By Examiner")
-    proj = []
-    for r in rows:
-        for ex in r["examiners"]:
-            proj.append([ex, r["id"], r["question"], r["topic"], r["qb"], r["url"]])
-    # stable sort: examiner presentation order, model (document) order inside each examiner
-    proj.sort(key=lambda x: meta["examiner_names"].index(x[0]))
-    _table(ws, ["Examiner", "Canonical Question ID", "Question", "Topic / Category",
-                "Question Bank", "MIW Answer Link"], [14, 16, 80, 34, 14, 52], proj, st, link_col=5)
+    # one tab per examiner (presentation order), model (document) order inside each
+    ex_headers = ["No.", "Canonical Question ID", "Question", "Topic / Category",
+                  "Question Bank", "MIW Answer Link"]
+    for ex in meta["examiner_names"]:
+        sub = [r for r in rows if ex in r["examiners"]]
+        if not sub:
+            continue
+        ws = wb.create_sheet(ex)
+        _table(ws, ex_headers, [6, 16, 80, 34, 14, 52],
+               [[i, r["id"], r["question"], r["topic"], r["qb"], r["url"]]
+                for i, r in enumerate(sub, 1)], st, link_col=5)
 
     ws = wb.create_sheet("By Question Bank")
     qbs, seen_files = [], []
