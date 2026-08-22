@@ -774,3 +774,40 @@ Do not persist a lesson that is specific to one batch's content.
 | Price | **₹1,499, one year** |
 
 A batch that changes any of these without saying so in its manifest is a stop condition.
+
+---
+
+## 13. Candidate workbook export (XLSX) — fast lane, not a release
+
+Every interim/final question-bank spreadsheet comes from repo truth through one
+exporter. Never patch a previous workbook by hand; never treat an old workbook as
+question identity (the July/v26 files are presentation references only and live
+git-ignored under `docs/MIW-master-Question-bank/`, as does every generated one).
+
+```
+PYTHONIOENCODING=utf-8 python tools/oral/export_question_bank_xlsx.py --candidate-interim
+PYTHONIOENCODING=utf-8 python tools/oral/validate_question_bank_xlsx.py docs/MIW-master-Question-bank/MIW_August2026_QuestionBank_INTERIM.xlsx --interim
+PYTHONIOENCODING=utf-8 python tools/oral/test_question_bank_xlsx.py
+```
+
+Pipeline: `qb_content_index.json` (identity + text, proven fresh by
+`build_qb_content_index.py --check`) + `EXAMINER_INDEX_SNAPSHOT.json` (the same
+object the examiner page renders from) + live HTML (anchor proof only)
+→ `build_export_model()` → `render_workbook()`. The renderer infers nothing.
+The model reserves `official_syllabus_version / official_syllabus_node_id /
+miw_topic_id / miw_topic_name / objective_id` for the governed syllabus mapper;
+they are empty and unrendered until that mapper is production-authorised — the
+exporter must never populate them. "Topic / Category" is the current production
+QB page title. Examiner cells are names only (tier/evidence stay internal).
+
+Counting semantics (do not mix): 721 canonical questions; 86 question-bearing
+pages; 960 examiner relationships = distinct (examiner, question) pairs across
+7 examiners, covering 675 questions; the older 862/6 figure is the pre-Release-A
+`CURRENT_EXAMINER_RELATIONSHIPS.jsonl` before John and the 103 Release-A rows.
+
+Exporting changes no product content, so it does NOT trigger the full release
+runner. The protected names (`MEO_QB_master_v26.xlsx`,
+`MIW_July2026_QuestionBank_SHARE.xlsx`, `MEO_QB_master_v27.xlsx`,
+`MIW_August2026_QuestionBank_SHARE.xlsx`) are refused by the exporter; the final
+two are produced by this same exporter only after the final release sequence
+(follow-ups → corpus freeze → 788-occurrence audit → final validation).
