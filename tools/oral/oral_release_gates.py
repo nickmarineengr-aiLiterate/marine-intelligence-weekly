@@ -334,6 +334,17 @@ GATES = (
                       "register and re-checks parent, anchor, q-text and "
                       "relationship edge against it"),
 
+    # F1b implements the one action F1 held (FUP-006) and is the FIRST
+    # production use of historical digest supersession. Registered immediately
+    # after F1, because its whole reason for existing is to discharge a hold F1
+    # declared, and its validator asserts that F1's hold record is still there.
+    *_batch_pair("batch_f1b", "validate_batch_f1b.py", "mutate_batch_f1b.py",
+                 1800, historical_39=False,
+                 note="follow-up batch: discharges F1's HELD_GOVERNANCE action "
+                      "through a declared supersession chain, and asserts the "
+                      "historical predecessor pin is preserved rather than "
+                      "rebaselined"),
+
     # ---- health: candidate LOCAL vs clean ref ------------------------------
     _gate("qb_health_check",
           ["python", "meoclass1/qb_health_check.py", "--source", "local",
