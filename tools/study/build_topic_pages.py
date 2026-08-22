@@ -63,6 +63,7 @@ TOPICS_OUT = os.path.join(ROOT, 'meoclass1', 'topics.html')
 STUDY_OUT = os.path.join(ROOT, 'meoclass1', 'study.html')
 
 E = html.escape
+GA4 = 'G-0YEE2CBNP5'
 
 CSS = """
 :root{--navy:#0f2942;--teal:#0d9488;--teal-dark:#0f766e;--orange:#f97316;--ink:#1e293b;--grey-bg:#f8fafc;--grey-border:#e2e8f0;--grey-text:#64748b;}
@@ -151,12 +152,21 @@ def load_all():
 
 
 def head(title, description):
+    # GA4 is not optional decoration: tools/security/ga_coverage.test.mjs
+    # asserts that EVERY served page carries exactly one canonical
+    # installation, and these two shipped without it. The snippet must stay
+    # byte-identical to the house form -- the analyser matches the loader and
+    # the config separately and counts the id literally twice.
     return (f'<!DOCTYPE html>\n<html lang="en">\n<head>\n'
             f'<meta charset="UTF-8">\n'
             f'<meta name="viewport" content="width=device-width, initial-scale=1.0">\n'
             f'<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">\n'
             f'<meta name="description" content="{E(description)}">\n'
             f'<title>{E(title)}</title>\n'
+            f'<script async src="https://www.googletagmanager.com/gtag/js?id={GA4}"></script>\n'
+            f'<script>window.dataLayer=window.dataLayer||[];'
+            f'function gtag(){{dataLayer.push(arguments);}}'
+            f"gtag('js',new Date());gtag('config','{GA4}');</script>\n"
             f'<style>{CSS}</style>\n</head>\n<body>\n')
 
 
