@@ -319,6 +319,28 @@ def build_mutations():
          lambda: mark_card(unauth_rel, unauth_anchor),
          "f1b", "only_authorised_cards_changed"),
 
+        # ---- blast radius ---------------------------------------------------
+        # `exactly_one_card_changed_since_baseline` had no mutation at all until
+        # 22 August 2026, which is how it went unnoticed that it compared the
+        # raw changed set to F1b's authorised set and so asserted "nothing
+        # anywhere has moved since F1b" -- a claim that expires on the first
+        # authorised change after it. The subject is now F1b's own blast
+        # radius, and these two prove the corrected check in both directions.
+
+        ("N1", "quietly widen the one-card batch to two cards",
+         [MANIFEST],
+         lambda: edit_manifest(lambda d: d["cards"].append(
+             {"followup_id": "FUP-MUTATION", "action_id": "FUP-MUTATION",
+              "file": "QB2_F.html", "anchor": "q6", "status": "IMPLEMENTED"})),
+         "f1b", "exactly_one_card_changed_since_baseline"),
+
+        # The delegation subtraction must not have neutered the guard: a card
+        # NO record authorises still has to trip it, exactly as before.
+        ("N2", "edit an unowned card and require the blast radius to notice",
+         [REPO / unauth_rel],
+         lambda: mark_card(unauth_rel, unauth_anchor),
+         "f1b", "exactly_one_card_changed_since_baseline"),
+
         # ---- the history ---------------------------------------------------
         # F1 HELD this action. Laundering that -- by claiming F1 produced it, or
         # by deleting the hold -- destroys the only record that the work was

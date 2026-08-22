@@ -509,11 +509,39 @@ def main():
     report("every_authorised_card_changed", not not_changed,
            "unchanged=%s" % (not_changed or "-"))
 
-    # F1b is a one-card batch, so "exactly one card moved since the baseline"
-    # is assertable directly and is the tightest statement of its blast radius.
+    # F1b is a one-card batch, and this is the tightest statement of ITS blast
+    # radius. Subject corrected 22 August 2026 (SKILL 7.5b: change the subject,
+    # never stand the check down, never special-case the change that exposed
+    # it).
+    #
+    # As written it compared the raw changed set to F1b's authorised set, with
+    # no subtraction of `authorised_elsewhere` -- the very set the check two
+    # lines above computes and exempts. So it did not assert "F1b moved one
+    # card". It asserted "nothing anywhere has moved since F1b", which is a
+    # claim F1b has no standing to make and which expires on the first
+    # authorised change that follows it, whatever that change is. The
+    # post-release correction CORR-LSA-LIFEBOAT-VENTILATION-20260822 was simply
+    # the first one to arrive; any later batch or correction would have tripped
+    # it identically. Guard expiry, the same defect class F1b itself hit twice.
+    #
+    # The subject is now two propositions, both genuinely F1b's own:
+    #   - F1b authorises exactly one card, so a later edit cannot quietly widen
+    #     a batch documented as one-card;
+    #   - the cards that moved, once cards another record authorises are set
+    #     aside, are exactly the cards F1b authorised.
+    # The first is not implied by any neighbouring check, which is what keeps
+    # this one from collapsing into `only_authorised_cards_changed`.
+    # Subtract only what ANOTHER record authorises and F1b does not. A plain
+    # `changed - authorised_elsewhere` is wrong here and silently empties the
+    # set: F1b's own target QB1_A#q9 is declared by F1's manifest too, as the
+    # HELD_GOVERNANCE action F1b exists to discharge. Removing it would leave
+    # this check asserting nothing at all -- passing hardest exactly when the
+    # batch did nothing.
+    f1b_blast = sorted(set(changed) - (authorised_elsewhere - authorised))
     report("exactly_one_card_changed_since_baseline",
-           sorted(changed) == sorted(authorised),
-           "changed=%s" % (sorted(changed) or "-"))
+           len(authorised) == 1 and f1b_blast == sorted(authorised),
+           "f1b-authorised=%d changed(excluding authorised-elsewhere)=%s"
+           % (len(authorised), f1b_blast or "-"))
 
     # ---- 6. the limb is there, additively, with its authority -------------
     absent, dupes, digest_bad, add_bad = [], [], [], []
