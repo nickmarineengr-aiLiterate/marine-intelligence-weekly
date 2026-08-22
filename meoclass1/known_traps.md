@@ -757,7 +757,48 @@ employment agreements · 2.2 wages · 2.3 hours of work and rest · 2.4 entitlem
 GREP: Reg. 2.7 (Recreational Facilities)
 ---
 
+### 42. MSC.535(107) lifeboat ventilation described as new-build-only, using a "keel laid" test the resolution never uses
+
+`QB2_F.html` Q6 (ventilation of totally enclosed lifeboats) got the two dates right but
+the **application rule** wrong. Seven places on the card reduced *installed on or after
+1 January 2029* to a newbuilding test — "contracted/keel-laid", "building contract is
+dated (or keel laid, if no contract)", "new-build application only, not retrofit",
+"next-generation newbuild".
+
+MSC.535(107) paragraph 4 **defines the expression itself**, in two limbs:
+
+- **(a)** for ships for which the building contract is placed on or after 1 January 2029,
+  or in the absence of the contract **constructed** on or after that date — any
+  installation date on the ship; or
+- **(b)** for ships **other than** those in (a), a contractual delivery date for the
+  equipment or, in the absence of one, the actual delivery date of the equipment to the
+  ship, on or after 1 January 2029.
+
+Two errors follow. First, the resolution says **constructed**, not *keel laid* — a
+formulation imported from other IMO instruments and not used here. Second, and worse,
+dropping limb (b) made the card assert the **opposite** of the rule for the entire
+existing fleet: a replacement lifeboat contracted for or delivered to in-service tonnage
+on or after 1 January 2029 **is** caught. What the amendment does not do is force
+retrofit of lifeboats already installed — which is a narrower statement than
+"new-builds only".
+
+Everything else on the card was rechecked against the primary text and is correct:
+5 m³/h per person for the number of persons the lifeboat is permitted to accommodate,
+not less than 24 hours, operable from inside, no stratification or unventilated pockets,
+powered source not the radio batteries of 4.4.6.11, engine-driven ventilation fuelled per
+4.4.6.8, adoption 8 June 2023, entry into force 1 January 2026, the MSC.81(70) ventilation
+performance test with entrances and hatches closed, and MSC.559(108) adding "ventilation
+system, where fitted" to the MSC.402(96) annual thorough examination. The 15-second
+answer already said "installed on/after 1 Jan 2029" and was left alone.
+
+Scope pass: `index22.html`, `archive/issue22.html` ("installations on/after 1 January
+2029") and `QB2_I.html` (MSC.535 listed under the 1 Jan 2026 entry-into-force wave) were
+checked and are **correct** — not changed. Q6 v1.0 → v1.1.
+
+GREP: SKIP — the corrected text deliberately contains "keel laid" and "new-build" while
+saying they are wrong.
 ---
+
 
 ## Meta-corrections to `qb_health_check.py` itself (non-content fixes, logged here for continuity)
 
@@ -828,3 +869,4 @@ GREP: Reg. 2.7 (Recreational Facilities)
 | 2026-08-21 | Entry 38 refinement: A.987(24) does not itself contain the Guidelines — it is the Assembly resolution (1 Dec 2005) urging States and authorising promulgation; the Guidelines text was adopted by LEG.3(91) (27 Apr 2006) and the ILO Governing Body (296th session, 12 Jun 2006), promulgated 1 Jul 2006. UNCLOS Art. 230 and the MARPOL Annex I Reg 11 / Annex II Reg 6 damage-exception added from the resolution's recitals. Q25 v1.1→v1.2. | Verification against the A.987(24) resolution text |
 | 2026-08-21 | Entry 39: SQ teaser copies of simon-notes-p1 and p2 cited MEPC.337(76)/MEPC.338(76) as the CII calculation and rating guidelines; correct are MEPC.336(76) (G1) and MEPC.339(76) (G4), with 337 = G2 reference lines and 338 = G3 reduction factors. Gated copies were already correct — teaser drift, Entry 36 class. Root cause noted: post-MEPC 76 session briefs circulated the quartet one number low. | Repo-wide scope pass following Entry 38; verified against the MEPC.338(76) primary text |
 | 2026-08-21 | Entries 40–41: QB1_B Q15 said the Casualty Investigation Code "incorporates" the fair-treatment Guidelines (it cites them; its own mandatory protections are Part II Ch 12) and asserted an unverifiable requirement to assess medical fitness and fatigue before prolonged interrogation (removed); QB5_A Q4 cited MLC Reg. 2.7 as Recreational Facilities — 2.7 is Manning Levels, recreational facilities are Reg. 3.1. Q15 v1.1→v1.2, Q4 v1.0→v1.1. | Repo-wide scope pass following Entry 38 |
+| 2026-08-22 | Entry 42: MSC.535(107) lifeboat ventilation — application rule was new-build-only with a "keel laid" test; resolution defines "installed" in two limbs and limb (b) catches existing ships | Candidate (Vivek) screenshot correction on QB2_F |
