@@ -1,0 +1,143 @@
+# Study spine & syllabus mapping — integration contract
+
+The layer that joins every MIW question to one canonical topic, so that Oral,
+Written, study packs, question intelligence and any future audio/flashcard
+mode all resolve through the **same** identity chain:
+
+```
+canonical_question_id  ->  topic_id  ->  syllabus_node_id
+   QB1_A#q1 / QP2301-Q1     D01..D10     (null until an official DGMA
+                                          instrument is ingested)
+```
+
+**Read `docs/study/SYLLABUS_SOURCE_STATUS.md` first.** No official DGMA
+syllabus exists in this repository. This spine is MIW-DERIVED and must never
+be described to a candidate as "the DGMA syllabus".
+
+## Files
+
+| Path | Role |
+|---|---|
+| `tools/study/study_spine.py` | **Registry.** Domains, prerequisites, oral file→domain map, question cues, priority weights. Edit this to change the taxonomy. |
+| `tools/study/mapping_engine.py` | **Library.** One mapper, two adapters. Every consumer calls this — nobody parses mapping JSON directly. |
+| `tools/study/build_study_mappings.py` | **Only writer** of the mapping store. Incremental by default. |
+| `tools/study/build_study_spine.py` | Aggregates the store into per-domain intelligence. Reads the store; never re-derives mappings. |
+| `tools/study/validate_study_spine.py` | The gate. Fails closed. |
+| `tools/study/test_mapping_engine.py` | Acceptance tests, synthetic fixtures only. |
+| `docs/study/study_mappings.json` | Governed mapping records (generated). |
+| `docs/study/mapping_review_queue.json` | Ambiguous mappings awaiting adjudication (generated). |
+| `docs/study/study_spine.json` | Per-domain aggregation (generated). |
+
+All of these are under `tools/` and `docs/`, both **deploy-excluded** in
+`.vercelignore`. Changing them deploys nothing.
+
+## The library API
+
+```python
+import mapping_engine as ME
+
+ME.map_question(item, 'ORAL',    file_name='QB1_A.html')   # -> record
+ME.map_question(item, 'WRITTEN', paper_id='QP2301')        # -> record
+ME.resolve_topic('D01')                                    # -> domain record
+ME.validate_mapping(record)                                # -> [] if valid
+ME.get_question_topic(qid, store)                          # -> 'D01' | None
+ME.get_topic_questions('D01', store, content_type='ORAL')  # -> [ids]
+ME.review_queue(store)                                     # -> adjudication items
+ME.incremental_update(store, items, force=False)           # -> (store, stats)
+ME.classify_against_taxonomy(store)                        # -> drift report
+ME.taxonomy_version()                                      # -> digest
+```
+
+## Confidence and status — the rule that matters
+
+| Evidence | Confidence | Status | Published? |
+|---|---|---|---|
+| Written spec `primary_category` (governed field) | HIGH | `VALID_MAPPED` | yes |
+| Oral file title names exactly one domain | HIGH | `VALID_MAPPED` | yes |
+| Domain cue matched text inside a **mixed** file | MEDIUM | `REVIEW_PENDING` | **no** |
+| Nothing matched | UNRESOLVED | `ACCIDENTALLY_UNMAPPED` | **no — gate fails** |
+
+A MEDIUM/LOW mapping can only become `VALID_MAPPED` by acquiring a
+`last_reviewed` stamp from a human adjudication. The validator rejects the
+promotion otherwise. The engine **never** copies a "similar" question's
+mapping: the oral follow-up work already proved similarity scoring picks
+semantically wrong parents.
+
+## Routine commands
+
+```bash
+python tools/study/build_study_mappings.py            # incremental map
+python tools/study/build_study_mappings.py --status   # taxonomy drift report
+python tools/study/build_study_spine.py               # aggregate
+python tools/study/validate_study_spine.py            # gate
+python tools/study/test_mapping_engine.py             # acceptance
+```
+
+After editing `study_spine.py` (a taxonomy change) the digest moves, so run:
+
+```bash
+python tools/study/build_study_mappings.py --force
+```
+
+Every prior mapping is then reported `STALE` and re-derived. Human review
+stamps survive re-derivation; a mapping that lands on a different topic is
+marked with `previous_topic_id` and counted as `migrated`.
+
+## Integration points for future production
+
+### Oral QB production (`tools/oral/`)
+
+Today the oral toolchain does **not** call this layer. The intended contract,
+to be wired when the follow-up batches close:
+
+```
+new canonical oral question authored
+  -> build_qb_content_index.py regenerates meoclass1/qb_content_index.json
+  -> build_study_mappings.py            (picks up the new id incrementally)
+  -> validate_study_spine.py            (fails if the new question is unmapped
+                                         and not in the review queue)
+  -> build_study_spine.py               (refresh topic aggregation)
+```
+
+**TODO (bounded, not done in this session):** add the two `build_study_*`
+calls plus the validator to the oral release runner, so a new oral question
+cannot ship `ACCIDENTALLY_UNMAPPED`. Scope: runner wiring only — the mapping
+code already exists and is tested. Deliberately deferred here to avoid
+touching the release harness mid follow-up production.
+
+### Written QP production (`tools/pastpapers/`)
+
+```
+new paper spec authored (primary_category + subject_tags set)
+  -> build_study_mappings.py    (HIGH-confidence, no review needed)
+  -> validate_study_spine.py
+  -> build_study_spine.py
+```
+
+Written mapping is HIGH-confidence by construction because `primary_category`
+is an authored, governed field. **A new paper only needs its
+`primary_category` to be one of the registered categories** — if an author
+invents a new one, `R-CAT-CLAIMED` fails loudly rather than dropping the
+question.
+
+### Study packs / QI / future audio, flashcards, examiner simulation
+
+All must resolve through `get_topic_questions()` / `get_question_topic()`.
+One canonical question identity drives every mode. Do not build a second
+lookup.
+
+## Fresh-session test
+
+A new Claude Code session can, using only this file:
+
+1. read this contract and `SYLLABUS_SOURCE_STATUS.md`;
+2. ingest a new Oral or Written question into its corpus file;
+3. run one documented command (`build_study_mappings.py`);
+4. obtain the topic candidate and its confidence;
+5. see whether review is required — `mapping_review_queue.json`;
+6. commit the governed mapping (`study_mappings.json`);
+7. regenerate affected indexes (`build_study_spine.py`).
+
+**Answer: YES**, with one known gap — step 3 is not yet *automatically*
+invoked by the Oral release runner, so an oral author must run it explicitly
+until the TODO above is wired. Nothing else is missing.
