@@ -19,6 +19,7 @@ import io
 import json
 import os
 import re
+import subprocess
 import sys
 
 if __name__ == '__main__':
@@ -94,8 +95,55 @@ def main():
     ok('questions appearing in two families are reported',
        isinstance(fj['questions_in_more_than_one_family'], dict))
     shared = fj['questions_in_more_than_one_family']
+
+    # 2b. Every double membership is ADJUDICATED, not merely reported.
+    # A question in two families is not a defect by itself -- recurrence is
+    # observed at limb level -- but an UNEXPLAINED one is, so each must carry a
+    # verdict, and the verdict must be one of the declared ones.
+    adj_path = os.path.join(ROOT, 'tools', 'study',
+                            'qi_family_adjudications.json')
+    ok('the QI family adjudication input exists', os.path.exists(adj_path))
+    adj_doc = json.load(open(adj_path, encoding='utf-8'))
+    unadjudicated = [q for q, v in shared.items()
+                     if not isinstance(v, dict) or v.get('verdict') in
+                     (None, 'UNADJUDICATED')]
+    ok('every question in two families carries an adjudicated verdict',
+       not unadjudicated, str(unadjudicated))
+    bad_verdict = [q for q, v in shared.items()
+                   if isinstance(v, dict)
+                   and v.get('verdict') not in adj_doc['verdicts']]
+    ok('every verdict is one of the declared verdicts', not bad_verdict,
+       str(bad_verdict))
+    mismatched = [q for q, v in shared.items()
+                  if isinstance(v, dict)
+                  and sorted(adj_doc['adjudications'].get(q, {})
+                             .get('families', [])) != sorted(v['families'])]
+    ok('each adjudication names the family set the ref actually holds',
+       not mismatched, str(mismatched))
+    # A limb-level verdict must say WHICH limbs, or it has not actually
+    # resolved anything -- that was the whole defect being repaired.
+    vague = [q for q, v in shared.items()
+             if isinstance(v, dict)
+             and v.get('verdict') == 'LEGITIMATE_MULTI_FAMILY'
+             and not (v.get('membership_kind') and v.get('per_family'))]
+    ok('a LEGITIMATE_MULTI_FAMILY verdict states the limb distinction',
+       not vague, str(vague))
+    stale = [q for q in adj_doc['adjudications'] if q not in shared]
+    ok('no adjudication survives a question leaving the shared set',
+       not stale, str(stale))
     if shared:
-        print('    reported for review: %s' % ', '.join(sorted(shared)))
+        print('    adjudicated: %s' % ', '.join(
+            '%s=%s/%s' % (q, shared[q].get('verdict'),
+                          shared[q].get('membership_kind'))
+            for q in sorted(shared)))
+
+    # And the builder's gate must be capable of firing.
+    rc = subprocess.run([sys.executable, os.path.join(ROOT, 'tools', 'study',
+                                                      'build_historical_qi_inventory.py'),
+                         '--check'], cwd=ROOT,
+                        env=dict(os.environ, PYTHONIOENCODING='utf-8'),
+                        capture_output=True, text=True).returncode
+    ok('the inventory builder --check passes on the committed artefact', rc == 0)
 
     # 3. Nothing widened.
     h = json.load(open(HORIZON, encoding='utf-8'))

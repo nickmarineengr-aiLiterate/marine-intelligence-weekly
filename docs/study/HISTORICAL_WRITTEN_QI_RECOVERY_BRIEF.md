@@ -51,7 +51,9 @@ this in the session that wrote it.**
 > families join to exactly one spine topic *through the questions they
 > contain* (occurrence `question_id` → `study_mappings.json`), never through
 > the QI-v2 topic string. Two questions sit in two families each
-> (`QP2608-Q4, QP2608-Q8`) and are flagged for adjudication rather than resolved silently.
+> (`QP2608-Q4, QP2608-Q8`) were flagged for adjudication rather than resolved
+> silently, and were **adjudicated on 2026-08-22** — see §6a. Both are
+> `LEGITIMATE_MULTI_FAMILY`; no family id changed and the roadmap did not move.
 >
 > **7. Nothing was widened.** The socket is still `NOT_STARTED`, the study
 > order is unchanged, D01 is still Topic 01, and the public sentence is
@@ -213,6 +215,55 @@ id.
 
 ---
 
+## 6a. Multi-family membership is legal — the limb model says so
+
+**Adjudicated 2026-08-22.** `tools/study/qi_family_adjudications.json` is the
+hand-maintained input; `build_historical_qi_inventory.py` reads it and **fails
+closed** on any shared question that is unadjudicated, carries an unknown
+verdict, or names a family set the QI-v2 ref no longer holds.
+
+A question in more than one family is **not a defect by itself**. QI-v2 observes
+recurrence at LIMB level, so a multi-limb question can legitimately sit in one
+family per limb, or in a limb family *and* its whole-question family at once.
+The join builder could only see question ids, so it reported both cases
+identically. Two `membership_kind` values now separate them:
+
+| Kind | Meaning |
+|---|---|
+| `DISJOINT_LIMBS` | two families on two different limbs; neither limb evidences the other |
+| `LIMB_WITHIN_WHOLE_QUESTION` | one family tracks a limb across sittings, the other the whole question against its ancestor — nested, not duplicate |
+
+**The two decided cases:**
+
+- **`QP2608-Q4`** — `FAMILY-EM-0004` (limb (b) *Warranties*, 4 marks, **5
+  sittings**) and `FAMILY-EM-0007` (the whole four-limb question, 16 marks,
+  **1 sitting**, near-verbatim to `BANK-072`).
+  `LEGITIMATE_MULTI_FAMILY` / `LIMB_WITHIN_WHOLE_QUESTION`. Both stand.
+  Collapsing them would let the limb's five sittings appear to evidence the
+  whole question — which the family record itself warns against.
+- **`QP2608-Q8`** — `FAMILY-EM-0003` (limb (b) motivation, 6 marks, **4
+  sittings**, exact repeat of `BANK-054`) and `FAMILY-EM-0005` (limb (a)
+  information flow / multinational crew, 10 marks, **1 sitting**).
+  `LEGITIMATE_MULTI_FAMILY` / `DISJOINT_LIMBS`. Two different limbs sharing no
+  text.
+
+**Family ids changed: none. Occurrences changed: none. Roadmap order delta: 0.**
+
+**The candidate-facing consequence is the point of the whole exercise.** In both
+cases the *repeating* limb is the **smaller** one. A candidate told "Q4 is a
+five-time repeat" or "Q8 is a repeat" would over-prepare 4 and 6 marks
+respectively and under-prepare the 16- and 10-mark halves. Both study packs
+(Topic 02 for `QP2608-Q8`, Topic 03 for `QP2608-Q4`) carry the limb warning
+explicitly.
+
+**Implication for the ingestion session:** the 1999–2005 papers will produce
+more of these, not fewer — older papers are more multi-limb. Budget for
+limb-level adjudication as a normal step, not an exception, and add each verdict
+to the adjudication file as it is decided. The gate will stop the build
+otherwise.
+
+---
+
 ## 7. Priority model — do not pre-emptively re-weight
 
 Today's roadmap uses current verified evidence only. `study_priority` in
@@ -245,4 +296,44 @@ destabilise it on the expectation of future evidence.
 
 F2 · the 788 audit · the final v27 XLSX · the `QP2303-Q9` / `QP2406-Q9` /
 `QP2411-Q9` lubricating-oil `primary_category` defect (a written-production
-task) · Topic 01 gaps N6/N7/N8 · the D07 cargo scope decision.
+task) · Topic 01 gaps N6/N7/N8 · the D07 cargo scope decision · the D02 oral
+file-title over-capture recorded in `TOPIC_03_MARINE_INSURANCE_COMMERCIAL_LAW.md`
+(a taxonomy change, and it would move D01's and D03's numbers).
+
+---
+
+## 10. THE EXACT NEXT HISTORICAL JOB
+
+**INGEST THE 5 DATE-CERTAIN 1999 PAPERS.** Not the other 76.
+
+Only 5 of the 81 non-result objects print **month AND year**, and all 5 are
+1999. They are the only papers that can be placed on a timeline without a dating
+assumption, which makes them the correct first tranche: they test the whole
+ingestion path end to end while adding zero undated evidence.
+
+**Preconditions — this job cannot start on the laptop as it stands:**
+
+1. **The raw objects.** The PDFs/DOCs are deliberately not committed (public
+   repo) and live in a git-ignored intake store on the **authoring
+   workstation** (a `D:\` path). Either work on that machine, or re-fetch from
+   the Wayback URLs recorded in
+   `meoclass1/pastpapers/intelligence/v2/PHASE3B_SOURCE_INVENTORY.json`, whose
+   sha256 for each object is already pinned there.
+2. **The QI-v2 ref must be reachable.** Everything reads from
+   `origin/research/question-intelligence-v2-phase3b`; it is unmerged and must
+   stay that way until adoption.
+3. **Nothing else.** No new taxonomy, no new schema, no re-weighting — §§4–7
+   already fix the shape.
+
+**Bounded scope of that session:**
+
+- canonical ids + occurrence records for the 5 papers, sittings never collapsed
+- limb-level family attachment to **existing** family ids, with every new
+  multi-family membership adjudicated in `qi_family_adjudications.json` (§6a)
+- `written_evidence_horizon.json` `historical_written_qi` moved from
+  `NOT_STARTED` to a real status, passing `assert_honest()`
+- regenerate roadmap / workbook / topic pages; the public sentence is
+  recomputed **by the generator**, never edited
+
+**Do not start it while Nixon's next study topic is unbuilt.** As of 2026-08-22
+D01, D03 and D02 all have packs and session plans, so that condition is met.

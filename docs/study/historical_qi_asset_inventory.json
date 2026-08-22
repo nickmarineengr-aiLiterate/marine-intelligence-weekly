@@ -209,15 +209,84 @@
       "JOINED": 9
     },
     "questions_in_more_than_one_family": {
-      "QP2608-Q8": [
-        "FAMILY-EM-0003",
-        "FAMILY-EM-0005"
-      ],
-      "QP2608-Q4": [
-        "FAMILY-EM-0004",
-        "FAMILY-EM-0007"
-      ]
+      "QP2608-Q4": {
+        "families": [
+          "FAMILY-EM-0004",
+          "FAMILY-EM-0007"
+        ],
+        "verdict": "LEGITIMATE_MULTI_FAMILY",
+        "membership_kind": "LIMB_WITHIN_WHOLE_QUESTION",
+        "topic_id": "D02",
+        "topic_effect": "NONE -- both families join to D02 through their own occurrence question ids, so the join is unambiguous at topic level and always was.",
+        "roadmap_effect": "NONE -- no study_priority component reads family membership, and the historical socket is still NOT_STARTED.",
+        "last_reviewed": "2026-08-22",
+        "reviewer": "laptop-review",
+        "per_family": {
+          "FAMILY-EM-0004": {
+            "unit": "LIMB",
+            "limb": "(b) Warranties",
+            "marks": 4,
+            "occurrences": 5,
+            "reason": "Tracks the WARRANTIES limb across five sittings (2021-02, 2022-02, 2023-12, 2026-06, 2026-08). Its own limb stem is the single word 'Warranties', UNSCOREABLE_SHORT_STEM, and it inherits classification from the parent question."
+          },
+          "FAMILY-EM-0007": {
+            "unit": "WHOLE_QUESTION",
+            "limb": null,
+            "marks": 16,
+            "occurrences": 1,
+            "reason": "Tracks the whole four-limb question against official bank ancestor BANK-072 (containment 0.93 forward / 1.00 reverse). One proven sitting, no bank-level date."
+          }
+        },
+        "evidence": [
+          "QUESTION_FAMILIES.json FAMILY-EM-0007.relationship_to_family_em_0004 states the separation is deliberate and that collapsing them would let the limb's five sittings appear to evidence the whole question.",
+          "QUESTION_OCCURRENCES.jsonl holds OCC-2026-08-Q4 (limb_kind WHOLE_QUESTION, 16 marks) and OCC-2026-08-Q4B (limb_kind SOURCE_LIMB_CONFIRMED, limb (b), 4 marks) as two distinct records against the same question_id."
+        ],
+        "candidate_facing_rule": "Never tell a candidate 'Q4 is a five-time repeat'. Five sittings belong to limb (b) only -- 4 of 16 marks. Limbs (a), (c) and (d) have an official ancestor but ONE proven sitting.",
+        "families_after_adjudication": [
+          "FAMILY-EM-0004",
+          "FAMILY-EM-0007"
+        ]
+      },
+      "QP2608-Q8": {
+        "families": [
+          "FAMILY-EM-0003",
+          "FAMILY-EM-0005"
+        ],
+        "verdict": "LEGITIMATE_MULTI_FAMILY",
+        "membership_kind": "DISJOINT_LIMBS",
+        "topic_id": "D03",
+        "topic_effect": "NONE -- both families join to D03.",
+        "roadmap_effect": "NONE.",
+        "last_reviewed": "2026-08-22",
+        "reviewer": "laptop-review",
+        "per_family": {
+          "FAMILY-EM-0003": {
+            "unit": "LIMB",
+            "limb": "(b) motivation, attitude, competitiveness",
+            "marks": 6,
+            "occurrences": 4,
+            "reason": "Tracks limb (b) across 2021-03, 2022-04, 2025-12 and 2026-08. EXACT_REPEAT of official bank item BANK-054. Answer donor: QP2512-Q4."
+          },
+          "FAMILY-EM-0005": {
+            "unit": "LIMB",
+            "limb": "(a) information flow / multinational-crew communication",
+            "marks": 10,
+            "occurrences": 1,
+            "reason": "Tracks limb (a) only. Absorbs BANK-105 whole (reverse containment 0.96) and extends it with a PSC-failure scenario, so SAME_CORE_ASK, not a verbatim repeat. publication_status RESEARCH_HYPOTHESIS."
+          }
+        },
+        "evidence": [
+          "The two families attach to two different occurrence records with different limb_labels: OCC-2026-08-Q8B (limb (b), 6 marks) and OCC-2026-08-Q8A (limb (a), 10 marks). They share no text.",
+          "FAMILY-EM-0005.product_warning already states that Q8(a) and Q8(b) belong to DIFFERENT families with different strength and that any candidate-facing statement about 'Q8' must be limb-level."
+        ],
+        "candidate_facing_rule": "Never tell a candidate 'Q8 is a repeat'. The repeat is limb (b), 6 marks. Limb (a) is 10 marks, is the larger half, and has one sitting.",
+        "families_after_adjudication": [
+          "FAMILY-EM-0003",
+          "FAMILY-EM-0005"
+        ]
+      }
     },
+    "multi_family_rule": "A question in more than one family is not a defect by itself. Recurrence is observed at LIMB level, so a multi-limb question can legitimately sit in one family per limb, or in a limb family and its whole-question family at once. Every entry above is hand-adjudicated in tools/study/qi_family_adjudications.json and the build fails closed on an unadjudicated one.",
     "families": [
       {
         "family_id": "FAMILY-EM-0001",

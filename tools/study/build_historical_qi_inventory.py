@@ -53,6 +53,7 @@ sys.path.insert(0, HERE)
 OUT = os.path.join(ROOT, 'docs', 'study', 'historical_qi_asset_inventory.json')
 MAPPINGS = os.path.join(ROOT, 'docs', 'study', 'study_mappings.json')
 HORIZON = os.path.join(ROOT, 'docs', 'study', 'written_evidence_horizon.json')
+QI_ADJ = os.path.join(HERE, 'qi_family_adjudications.json')
 WORDING = os.path.join(ROOT, 'meoclass1', 'pastpapers', 'intelligence',
                        'historical_qp_intelligence.json')
 
@@ -179,12 +180,59 @@ def build():
             'provenance_tier': f.get('provenance_tier'),
         })
 
-    # A question that lands in two families is a real join defect, not noise.
+    # A question that lands in two families is NOT automatically a defect.
+    # QI-v2 observes recurrence at LIMB level, so one question legitimately
+    # belongs to two families when its limbs do. The join below can only see
+    # question ids, so it cannot tell a real double membership from a broken
+    # one -- qi_family_adjudications.json supplies the limb dimension, and this
+    # builder FAILS CLOSED on any shared question that has not been adjudicated
+    # or whose recorded family set no longer matches the ref.
     q_to_families = collections.defaultdict(list)
     for j in joins:
         for q in j['joined_via']:
             q_to_families[q].append(j['family_id'])
-    shared = {q: fs for q, fs in q_to_families.items() if len(fs) > 1}
+    shared_raw = {q: sorted(fs) for q, fs in q_to_families.items() if len(fs) > 1}
+
+    adj_doc = json.load(open(QI_ADJ, encoding='utf-8'))
+    adj = adj_doc['adjudications']
+    shared, adj_errors = {}, []
+    for q, fs in sorted(shared_raw.items()):
+        a = adj.get(q)
+        if a is None:
+            adj_errors.append('%s is in %s and has no adjudication in '
+                              'tools/study/qi_family_adjudications.json' % (q, fs))
+            shared[q] = {'families': fs, 'adjudication': None,
+                         'verdict': 'UNADJUDICATED'}
+            continue
+        if sorted(a['families']) != fs:
+            adj_errors.append('%s adjudication names %s but the ref holds %s'
+                              % (q, sorted(a['families']), fs))
+        if a.get('verdict') not in adj_doc['verdicts']:
+            adj_errors.append('%s carries unknown verdict %r'
+                              % (q, a.get('verdict')))
+        shared[q] = {
+            'families': fs,
+            'verdict': a['verdict'],
+            'membership_kind': a.get('membership_kind'),
+            'topic_id': a.get('topic_id'),
+            'topic_effect': a.get('topic_effect'),
+            'roadmap_effect': a.get('roadmap_effect'),
+            'last_reviewed': a.get('last_reviewed'),
+            'reviewer': a.get('reviewer'),
+            'per_family': a.get('per_family'),
+            'evidence': a.get('evidence'),
+            'candidate_facing_rule': a.get('candidate_facing_rule'),
+            'families_after_adjudication': a.get('families_after_adjudication'),
+        }
+    for q in sorted(adj):
+        if q not in shared_raw:
+            adj_errors.append('%s is adjudicated but is no longer in more than '
+                              'one family -- remove the stale entry' % q)
+    if adj_errors:
+        sys.stderr.write('QI FAMILY ADJUDICATION FAILURES' + chr(10))
+        for e in adj_errors:
+            sys.stderr.write('  FAIL %s' % e + chr(10))
+        raise SystemExit(2)
 
     # ---- occurrence span: does ANY of this reach before the current band? --
     occ_years = sorted({o['source_year'] for o in occ if o.get('source_year')})
@@ -385,6 +433,14 @@ def build():
                        'recorded but never used to classify.'),
             'counts': dict(join_counts),
             'questions_in_more_than_one_family': shared,
+            'multi_family_rule': (
+                'A question in more than one family is not a defect by itself. '
+                'Recurrence is observed at LIMB level, so a multi-limb question '
+                'can legitimately sit in one family per limb, or in a limb '
+                'family and its whole-question family at once. Every entry '
+                'above is hand-adjudicated in '
+                'tools/study/qi_family_adjudications.json and the build fails '
+                'closed on an unadjudicated one.'),
             'families': joins,
         },
         'roadmap_impact_preview': {

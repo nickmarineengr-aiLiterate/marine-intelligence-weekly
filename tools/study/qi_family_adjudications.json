@@ -1,0 +1,83 @@
+{
+  "note": "Human adjudications of QI-v2 questions that appear in more than one recurrence family. This file is HAND-MAINTAINED and is an INPUT to build_historical_qi_inventory.py -- never edit docs/study/historical_qi_asset_inventory.json directly. The builder FAILS CLOSED: a shared question with no entry here, or an entry whose `families` no longer matches what the QI-v2 ref actually holds, stops the build rather than shipping an unexplained double membership.",
+  "schema_version": "1.0",
+  "authority": "MIW study adjudication. It classifies an EXISTING relationship between existing families; it never renames, merges, splits or deletes a family. Family identity lives on the QI-v2 research ref and is read-only to this layer.",
+  "why_this_exists": "The QI-v2 limb model states that recurrence is observed at LIMB level. A question is therefore ALLOWED to belong to more than one family, because its limbs can. The join builder could only see question ids, so it reported every double membership as a suspected defect. This file supplies the limb dimension the join could not see.",
+  "verdicts": {
+    "LEGITIMATE_MULTI_FAMILY": "The memberships are real and must both stand. Separate limbs, or a limb and its parent whole question, genuinely belong to separate families.",
+    "ONE_FAMILY_PRIMARY_ONE_SUPPORTING": "Both memberships are real but one is subordinate; the supporting family must never be quoted as independent evidence.",
+    "DUPLICATE_FAMILY_DEFECT": "The same family was serialised twice. Resolve by the governed supersession pattern, never by deletion.",
+    "WRONG_OCCURRENCE_ASSIGNMENT": "An occurrence record names the wrong parent question. Repair the occurrence, not the family.",
+    "REQUIRES_MORE_SOURCE_EVIDENCE": "Cannot be settled from held sources. Stays flagged."
+  },
+  "membership_kinds": {
+    "DISJOINT_LIMBS": "The two families attach to two DIFFERENT limbs of the same question. Neither limb evidences the other.",
+    "LIMB_WITHIN_WHOLE_QUESTION": "One family tracks a single limb across sittings; the other tracks the whole question against its ancestor. Nested, not duplicate -- and the limb's sitting count must never be read as the whole question's."
+  },
+  "adjudications": {
+    "QP2608-Q4": {
+      "families": ["FAMILY-EM-0004", "FAMILY-EM-0007"],
+      "verdict": "LEGITIMATE_MULTI_FAMILY",
+      "membership_kind": "LIMB_WITHIN_WHOLE_QUESTION",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "topic_id": "D02",
+      "topic_effect": "NONE -- both families join to D02 through their own occurrence question ids, so the join is unambiguous at topic level and always was.",
+      "roadmap_effect": "NONE -- no study_priority component reads family membership, and the historical socket is still NOT_STARTED.",
+      "per_family": {
+        "FAMILY-EM-0004": {
+          "unit": "LIMB",
+          "limb": "(b) Warranties",
+          "marks": 4,
+          "occurrences": 5,
+          "reason": "Tracks the WARRANTIES limb across five sittings (2021-02, 2022-02, 2023-12, 2026-06, 2026-08). Its own limb stem is the single word 'Warranties', UNSCOREABLE_SHORT_STEM, and it inherits classification from the parent question."
+        },
+        "FAMILY-EM-0007": {
+          "unit": "WHOLE_QUESTION",
+          "limb": null,
+          "marks": 16,
+          "occurrences": 1,
+          "reason": "Tracks the whole four-limb question against official bank ancestor BANK-072 (containment 0.93 forward / 1.00 reverse). One proven sitting, no bank-level date."
+        }
+      },
+      "evidence": [
+        "QUESTION_FAMILIES.json FAMILY-EM-0007.relationship_to_family_em_0004 states the separation is deliberate and that collapsing them would let the limb's five sittings appear to evidence the whole question.",
+        "QUESTION_OCCURRENCES.jsonl holds OCC-2026-08-Q4 (limb_kind WHOLE_QUESTION, 16 marks) and OCC-2026-08-Q4B (limb_kind SOURCE_LIMB_CONFIRMED, limb (b), 4 marks) as two distinct records against the same question_id."
+      ],
+      "candidate_facing_rule": "Never tell a candidate 'Q4 is a five-time repeat'. Five sittings belong to limb (b) only -- 4 of 16 marks. Limbs (a), (c) and (d) have an official ancestor but ONE proven sitting.",
+      "families_after_adjudication": ["FAMILY-EM-0004", "FAMILY-EM-0007"]
+    },
+    "QP2608-Q8": {
+      "families": ["FAMILY-EM-0003", "FAMILY-EM-0005"],
+      "verdict": "LEGITIMATE_MULTI_FAMILY",
+      "membership_kind": "DISJOINT_LIMBS",
+      "last_reviewed": "2026-08-22",
+      "reviewer": "laptop-review",
+      "topic_id": "D03",
+      "topic_effect": "NONE -- both families join to D03.",
+      "roadmap_effect": "NONE.",
+      "per_family": {
+        "FAMILY-EM-0003": {
+          "unit": "LIMB",
+          "limb": "(b) motivation, attitude, competitiveness",
+          "marks": 6,
+          "occurrences": 4,
+          "reason": "Tracks limb (b) across 2021-03, 2022-04, 2025-12 and 2026-08. EXACT_REPEAT of official bank item BANK-054. Answer donor: QP2512-Q4."
+        },
+        "FAMILY-EM-0005": {
+          "unit": "LIMB",
+          "limb": "(a) information flow / multinational-crew communication",
+          "marks": 10,
+          "occurrences": 1,
+          "reason": "Tracks limb (a) only. Absorbs BANK-105 whole (reverse containment 0.96) and extends it with a PSC-failure scenario, so SAME_CORE_ASK, not a verbatim repeat. publication_status RESEARCH_HYPOTHESIS."
+        }
+      },
+      "evidence": [
+        "The two families attach to two different occurrence records with different limb_labels: OCC-2026-08-Q8B (limb (b), 6 marks) and OCC-2026-08-Q8A (limb (a), 10 marks). They share no text.",
+        "FAMILY-EM-0005.product_warning already states that Q8(a) and Q8(b) belong to DIFFERENT families with different strength and that any candidate-facing statement about 'Q8' must be limb-level."
+      ],
+      "candidate_facing_rule": "Never tell a candidate 'Q8 is a repeat'. The repeat is limb (b), 6 marks. Limb (a) is 10 marks, is the larger half, and has one sitting.",
+      "families_after_adjudication": ["FAMILY-EM-0003", "FAMILY-EM-0005"]
+    }
+  }
+}
