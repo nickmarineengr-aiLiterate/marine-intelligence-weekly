@@ -72,8 +72,12 @@ python tools/study/build_study_mappings.py            # incremental map
 python tools/study/reconcile_official_mappings.py     # attach official join
 python tools/study/build_study_spine.py               # aggregate
 python tools/study/build_coverage_matrix.py           # coverage per official node
+python tools/study/build_evidence_horizon.py          # what the numbers rest on
+python tools/study/export_roadmap_xlsx.py             # roadmap workbook
+python tools/study/build_topic_pages.py               # topics.html + study.html
 python tools/study/validate_study_spine.py            # gate
 python tools/study/test_mapping_engine.py             # acceptance
+python tools/study/test_study_expandability.py        # expandability controls
 ```
 
 Each builder also takes `--check`, which fails if its artefact is stale. The
@@ -160,6 +164,47 @@ defect. Render the status, not an empty cell.
 All must resolve through `get_topic_questions()` / `get_question_topic()`.
 One canonical question identity drives every mode. Do not build a second
 lookup.
+
+## The expandable evidence layer
+
+Stable identity and growing evidence are separated on purpose:
+
+| Stable (never migrated by evidence growth) | Expandable |
+|---|---|
+| `topic_id` D01–D10, `official_syllabus_node_id`, `canonical_question_id`, `paper_id`, `family_id`, examiner identity | oral/written question evidence, examiner relationships, Written QI, recurrence families, historical coverage, recency and trend, marks, resources, study status, future syllabus versions |
+
+`tools/study/evidence_model.py` owns the vocabulary; `written_evidence_horizon.json`
+records what every roadmap number actually rests on. Rules:
+
+1. **No corpus size is ever hardcoded.** Counts derive from the horizon, so a
+   new paper widens the numbers by itself.
+2. **Public copy is generated.** `public_evidence_claim()` computes the
+   strongest sentence the *stored* evidence supports. It cannot produce a
+   "since 2010" claim while the historical layer is `NOT_STARTED`.
+3. **Fake completeness fails closed.** `assert_honest()` rejects a
+   `COMPLETE` claim that carries known gaps, a `VALIDATED_RANGE` with no
+   evidence, an inverted span, or a `NOT_STARTED` layer carrying counts.
+4. **Historical frequency is not current relevance.** `dormancy` and
+   `relevance` are separate axes; a long-running family under a superseded
+   instrument must be able to say `SUPERSEDED`.
+5. **Progress is an input, never an output.** `study_progress.json` is
+   hand-maintained; no generator writes it, and a topic missing from it
+   defaults to `NOT_STARTED` rather than erroring.
+
+The historical Written QI socket is declared and deliberately empty. See
+`docs/study/HISTORICAL_WRITTEN_QI_RECOVERY_BRIEF.md`.
+
+## Candidate surfaces
+
+`meoclass1/topics.html` (Oral by Topic) and `meoclass1/study.html` (the study
+roadmap landing) are **generated** — never hand-edited. Both live under the
+`/meoclass1/:path*` middleware matcher, so they inherit the paywall by path.
+
+Cross-product links go to the **storefront** (`/SQ/`), never to
+`/solvedQP/…`. `render_common.delivery_links()` records why in the other
+direction: ORAL_QB_NOTES and SOLVED_QP are separate entitlements, so linking
+one paid surface from the other bounces a customer to login inside their own
+product.
 
 ## The official syllabus layer
 
