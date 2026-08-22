@@ -74,7 +74,8 @@ python tools/study/build_study_spine.py               # aggregate
 python tools/study/build_coverage_matrix.py           # coverage per official node
 python tools/study/build_evidence_horizon.py          # what the numbers rest on
 python tools/study/export_roadmap_xlsx.py             # roadmap workbook
-python tools/study/build_topic_pages.py               # topics.html + study.html
+python tools/study/build_topic_pages.py               # topics.html + study.html (GATED)
+python tools/study/build_public_study_roadmap.py      # SQ/study-roadmap.html (PUBLIC)
 python tools/study/validate_study_spine.py            # gate
 python tools/study/test_mapping_engine.py             # acceptance
 python tools/study/test_study_expandability.py        # expandability controls
@@ -196,15 +197,45 @@ The historical Written QI socket is declared and deliberately empty. See
 
 ## Candidate surfaces
 
-`meoclass1/topics.html` (Oral by Topic) and `meoclass1/study.html` (the study
-roadmap landing) are **generated** — never hand-edited. Both live under the
-`/meoclass1/:path*` middleware matcher, so they inherit the paywall by path.
+Three generated pages, two audiences, one model.
+
+| Page | Audience | Gate |
+|---|---|---|
+| `meoclass1/topics.html` | paid — Oral by Topic | `/meoclass1/:path*` matcher |
+| `meoclass1/study.html` | paid — study roadmap landing | `/meoclass1/:path*` matcher |
+| `SQ/study-roadmap.html` | **public** — discovery teaser | none: `/SQ/` is off the matcher |
+
+All three are **generated** — never hand-edited.
+
+Gating is by PATH, and the guarantee runs in the right direction: Edge
+Middleware is not invoked off its matcher, so `/SQ/` is public because the gate
+never runs, not because a rule inside the gate permits it.
 
 Cross-product links go to the **storefront** (`/SQ/`), never to
 `/solvedQP/…`. `render_common.delivery_links()` records why in the other
 direction: ORAL_QB_NOTES and SOLVED_QP are separate entitlements, so linking
 one paid surface from the other bounces a customer to login inside their own
 product.
+
+### The public page has a harder contract than the gated ones
+
+`build_public_study_roadmap.py` projects the same governed model through a
+**field whitelist** (`PUBLIC_TOPIC_FIELDS`), so study progress, priority
+scores, diagnostic coverage bands and hand-recorded topic gaps are dropped by
+default rather than excluded by name. `assert_public_safe()` then runs over the
+**rendered bytes** — a gated link, an answer marker, an internal governance
+token, an over-wide evidence claim or a sample-quota overrun fails the build,
+and `study_public_roadmap_check` runs it again at release time.
+
+Sample question stems are capped at `SAMPLES_PER_TOPIC` (3) and restricted to
+`VALID_MAPPED` records, so nothing still in adjudication is advertised. Written
+records carry no text, so no Written stem is ever published — the public
+Written signal is recurrence family names and counts.
+
+The public evidence sentence is recomputed by
+`evidence_model.public_evidence_claim()` and compared with the stored
+`derived_sentence`; a mismatch means the horizon artefact is stale and the
+build stops rather than publishing either wording.
 
 ## The official syllabus layer
 

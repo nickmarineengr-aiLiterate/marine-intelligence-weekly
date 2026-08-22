@@ -298,6 +298,179 @@ def test_progress_survives_regeneration():
            and "study_progress.json'), 'w'" not in src)
 
 
+def test_public_roadmap_is_derived_and_bounded():
+    """The PUBLIC projection: right shape, right numbers, nothing paid.
+
+    Structural checks alone would pass a generator whose guards had been
+    deleted, so every guard is also MUTATED here: the control is not "the page
+    is clean today" but "the thing that keeps it clean actually fires".
+    """
+    import build_public_study_roadmap as PR
+    spine = _load('study_spine.json')
+    p = PR.project()
+    doc = PR.render(p)
+    PR.assert_public_safe(doc, p)
+
+    # --- shape ----------------------------------------------------------
+    ids = [t['topic_id'] for t in p['topics']]
+    ok('public page shows 10 topics', len(ids) == 10, str(len(ids)))
+    ok('public topic ids are unique and are D01..D10',
+       sorted(ids) == [f'D{i:02d}' for i in range(1, 11)], str(sorted(ids)))
+
+    order = RX.study_order(spine['domains'])
+    ok('public study order is the governed study order',
+       all(t['study_order'] == order[t['topic_id']] for t in p['topics']),
+       str({t['topic_id']: t['study_order'] for t in p['topics']}))
+    ok('D01 leads the public roadmap', p['topics'][0]['topic_id'] == 'D01')
+
+    # --- counts are read, never typed -----------------------------------
+    by_id = {d['domain_id']: d for d in spine['domains']}
+    for t in p['topics']:
+        d = by_id[t['topic_id']]
+        ok(f'{t["topic_id"]} oral count matches the spine',
+           t['oral_questions'] == d['oral']['questions'])
+        ok(f'{t["topic_id"]} written count matches the spine',
+           t['current_written_questions'] == d['written']['questions'])
+        ok(f'{t["topic_id"]} examiner evidence matches the spine',
+           t['examiner_evidenced_oral']
+           == d['examiner_intelligence']['oral_questions_with_evidence'])
+        for num in (t['oral_questions'], t['current_written_questions'],
+                    t['official_syllabus_items']):
+            ok(f'{t["topic_id"]} renders its derived figure {num}',
+               f'>{num}</div>' in doc)
+
+    # --- the evidence horizon is stated, not exceeded --------------------
+    cur = _load('written_evidence_horizon.json')['layers']['current_solved_written']
+    ok('the public evidence sentence is the derived one',
+       p['evidence_sentence'] == EM.public_evidence_claim(
+           cur, _load('written_evidence_horizon.json')
+           ['layers']['historical_written_qi']))
+    ok('the current sitting range is stated on the page',
+       cur['earliest_sitting'] in doc and cur['latest_sitting'] in doc)
+    ok('historical QI is not claimed as integrated',
+       not p['historical_integrated'] and 'being expanded' in doc)
+
+    # --- routing --------------------------------------------------------
+    hrefs = set(re.findall(r'href="([^"]+)"', doc))
+    for route in (PR.ROUTE_ORAL_TRIAL, PR.ROUTE_WRITTEN_TRIAL, PR.ROUTE_STORE,
+                  PR.ROUTE_EXAMINER, PR.ROUTE_ORAL_SAMPLE, PR.ROUTE_WRITTEN_SAMPLE):
+        ok(f'public route present: {route}', route in hrefs)
+        target = route.split('?')[0].lstrip('/')
+        ok(f'route target exists on disk: {target}',
+           os.path.exists(os.path.join(ROOT, target)))
+    ok('no href reaches a gated product surface',
+       not any(h.startswith(('/meoclass1', '/solvedQP')) for h in hrefs),
+       str(sorted(hrefs)))
+
+    # --- discovery surface ----------------------------------------------
+    ok('GA4 is the canonical property, installed once',
+       doc.count(PR.GA4) == 2)
+    for name in ('study_roadmap_view', 'study_topic_preview', 'study_oral_cta',
+                 'study_written_cta'):
+        ok(f'GA4 event wired: {name}', name in doc)
+    ok('the public page is indexable', 'content="index, follow"' in doc)
+    ok('SEO metadata is present',
+       '<title>' in doc and 'name="description"' in doc
+       and 'rel="canonical"' in doc and 'og:title' in doc)
+
+    # --- MUTATION: every guard must actually fire -------------------------
+    def fires(label, mutate_doc=None, mutate_p=None):
+        d2 = mutate_doc(doc) if mutate_doc else doc
+        p2 = mutate_p(copy.deepcopy(p)) if mutate_p else p
+        try:
+            PR.assert_public_safe(d2, p2)
+        except PR.Unsafe:
+            ok(f'guard fires: {label}', True)
+        else:
+            ok(f'guard fires: {label}', False, 'mutation survived')
+
+    fires('a link into the gated Oral product',
+          lambda d: d + '<a href="/meoclass1/QB1_A.html">x</a>')
+    fires('a link into the gated Written product',
+          lambda d: d + '<a href="/solvedQP/index.html">x</a>')
+    fires('an unsupported 16-year corpus claim',
+          lambda d: d + '<p>Based on 16 years of papers.</p>')
+    fires('a 2010-2026 span claim', lambda d: d + '<p>2010-2026 analysis</p>')
+    fires('an answer-surface marker', lambda d: d + '<p>CE Oral Tip: open it.</p>')
+    fires('a cheatsheet reference', lambda d: d + '<a>CheatSheet</a>')
+    fires('an internal review token', lambda d: d + '<p>REVIEW_PENDING</p>')
+    fires("a leaked private field", mutate_p=lambda q: (
+        q['topics'][0].__setitem__('study_status', 'IN_PROGRESS') or q))
+    fires('a leaked priority score', mutate_p=lambda q: (
+        q['topics'][3].__setitem__('priority_score', 0.9) or q))
+    fires('a sample quota overrun', mutate_p=lambda q: (
+        q['topics'][0].__setitem__(
+            'samples', q['topics'][0]['samples'] + ['a', 'b']) or q))
+    fires('a missing topic', mutate_p=lambda q: (q['topics'].pop(), q)[1])
+    fires('a duplicated topic', mutate_p=lambda q: (
+        q['topics'].__setitem__(1, q['topics'][0]) or q))
+
+    # --- MUTATION: the page widens itself when the socket is filled -------
+    horizon = _load('written_evidence_horizon.json')
+    widened = copy.deepcopy(horizon)
+    widened['layers']['historical_written_qi'].update(
+        status='VALIDATED_RANGE', earliest_year=2011, latest_year=2020,
+        papers_total=70, questions_total=630)
+    # build_evidence_horizon.py rewrites the stored sentence whenever the
+    # socket changes, so the fixture does the same. Skipping this would test a
+    # state the real toolchain never produces -- and would instead exercise the
+    # drift guard, which has its own control below.
+    widened['public_claim']['derived_sentence'] = EM.public_evidence_claim(
+        widened['layers']['current_solved_written'],
+        widened['layers']['historical_written_qi'])
+    # BOTH loaders must be patched. The public sentence is not written by the
+    # public generator -- it is inherited from RX.build_model(), which reads
+    # the horizon through its OWN loader. Patching only PR._load would widen
+    # the socket the page reports while leaving the sentence it prints on the
+    # old evidence, which is precisely the drift this control exists to catch.
+    saved, saved_rx = PR._load, RX._load
+    try:
+        PR._load = (lambda n: widened
+                    if n == 'written_evidence_horizon.json' else saved(n))
+        RX._load = (lambda path: widened
+                    if path.endswith('written_evidence_horizon.json')
+                    else saved_rx(path))
+        p2 = PR.project()
+        doc2 = PR.render(p2)
+        ok('a validated historical range strengthens the public sentence',
+           '2011' in p2['evidence_sentence'] and '2020' in p2['evidence_sentence'],
+           p2['evidence_sentence'])
+        ok('the page stops saying the layer is being expanded',
+           'being expanded' not in doc2 and 'is integrated' in doc2)
+        ok('no marketing copy had to be rewritten for that transition',
+           doc2.count('MEO Class I <span>Study Roadmap</span>') == 1)
+        # And the drift guard itself: a socket widened WITHOUT regenerating the
+        # stored sentence must stop the build rather than publish either wording.
+        stale = copy.deepcopy(widened)
+        stale['public_claim']['derived_sentence'] = horizon['public_claim'][
+            'derived_sentence']
+        PR._load = (lambda n: stale
+                    if n == 'written_evidence_horizon.json' else saved(n))
+        RX._load = (lambda path: stale
+                    if path.endswith('written_evidence_horizon.json')
+                    else saved_rx(path))
+        try:
+            PR.project()
+            ok('a stale stored evidence sentence stops the build', False,
+               'drift was published')
+        except PR.Unsafe:
+            ok('a stale stored evidence sentence stops the build', True)
+    finally:
+        PR._load, RX._load = saved, saved_rx
+
+    # Samples must be real corpus text, never invented for the page.
+    mappings = _load('study_mappings.json')['mappings']
+    corpus = {(r.get('text') or '').strip() for r in mappings.values()}
+    for t in p['topics']:
+        for s in t['samples']:
+            ok(f'{t["topic_id"]} sample is verbatim corpus text', s in corpus,
+               s[:60])
+    total = sum(len(t['samples']) for t in p['topics'])
+    ok('sampled stems stay a small fraction of the oral corpus',
+       total <= PR.SAMPLES_PER_TOPIC * 10
+       and total < spine['totals']['oral_questions_total'] * 0.1, str(total))
+
+
 def main():
     for fn in (test_current_values_preserved,
                test_stable_identity_fields_present,
@@ -311,6 +484,7 @@ def main():
                test_no_paid_answer_leakage,
                test_workbook_and_pages_build,
                test_study_order_is_dependency_first,
+               test_public_roadmap_is_derived_and_bounded,
                test_progress_survives_regeneration):
         fn()
     print(f'study expandability -- {len(PASS) + len(FAIL)} assertions')

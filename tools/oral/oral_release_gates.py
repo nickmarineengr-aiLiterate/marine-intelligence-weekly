@@ -243,6 +243,27 @@ GATES = (
           depends_on=("study_mapping_check",),
           note="official syllabus, coverage and Topic 01 references must resolve"),
 
+    # ---- study surfaces must regenerate from the corpus that just changed --
+    # A new oral question reaches a topic (above) but would still be invisible
+    # if the rendered surfaces were left stale. Both gates are --check only:
+    # they compute the page and compare bytes, so a release fails rather than
+    # silently shipping a roadmap that disagrees with the corpus behind it.
+    #
+    # The public gate additionally re-runs assert_public_safe() over the
+    # rendered HTML, so a newly authored question that would drag a gated link,
+    # an answer marker or an over-wide evidence claim onto the PUBLIC page
+    # fails the release instead of being published.
+    _gate("study_pages_check",
+          ["python", "tools/study/build_topic_pages.py", "--check"],
+          CAT_INDEX, PARSER_CHECK, timeout=600, historical_39=False,
+          depends_on=("study_spine_validate",),
+          note="gated study surfaces must match the corpus they are built from"),
+    _gate("study_public_roadmap_check",
+          ["python", "tools/study/build_public_study_roadmap.py", "--check"],
+          CAT_INDEX, PARSER_CHECK, timeout=600, historical_39=False,
+          depends_on=("study_spine_validate",),
+          note="public roadmap must be current AND pass every public-safety guard"),
+
     # ---- corpus-wide unit controls ----------------------------------------
     _gate("qb_question_text", ["python", "%s/test_qb_question_text.py" % _ORAL],
           CAT_UNIT, PARSER_VALIDATOR, timeout=600),

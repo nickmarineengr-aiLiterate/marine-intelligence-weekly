@@ -117,6 +117,12 @@ POST_E6_GATES = [
     "followup_register_mutate",
     # The study-spine hook: a new oral question cannot ship unmapped.
     "study_mapping_check",
+    # ...and cannot ship mapped-but-invisible: both study surfaces must
+    # regenerate. study_public_roadmap_check also re-asserts the public-safety
+    # guards on the rendered PUBLIC page, so a release is the point at which a
+    # leak would be caught, not a later audit.
+    "study_pages_check",
+    "study_public_roadmap_check",
     "study_spine_validate",
     "validate_batch_f1",
     "validate_batch_f1b",

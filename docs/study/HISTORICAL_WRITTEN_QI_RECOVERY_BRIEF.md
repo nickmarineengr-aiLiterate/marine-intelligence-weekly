@@ -3,6 +3,11 @@
 **Prepared 2026-08-22 on `review/dgma-study-spine-final`. Do not execute any of
 this in the session that wrote it.**
 
+> **Re-validated 2026-08-22** against `main` after the public study roadmap
+> shipped. Everything below still holds; the only change is that the
+> regeneration chain in §5 now has a fourth output — the public page — and one
+> extra fail-closed guard, both noted there.
+
 The study system now has a governed, empty socket for historical Written QI
 (`docs/study/written_evidence_horizon.json`, layer `HISTORICAL_WRITTEN_QI`,
 status `NOT_STARTED`). This brief is what the recovery session needs so it does
@@ -115,6 +120,7 @@ recovered papers → canonical question identities → occurrences → families
 docs/study/written_evidence_horizon.json   (layers.historical_written_qi)
         ↓
 build_study_spine.py → export_roadmap_xlsx.py → build_topic_pages.py
+                                             → build_public_study_roadmap.py
 ```
 
 Concretely:
@@ -124,7 +130,14 @@ Concretely:
    completeness claim wider than the stored evidence, and that is deliberate.
 3. Regenerate: `build_evidence_horizon.py` → `build_study_spine.py` →
    `build_coverage_matrix.py` → `export_roadmap_xlsx.py` →
-   `build_topic_pages.py`.
+   `build_topic_pages.py` → `build_public_study_roadmap.py`.
+4. The last of those renders the PUBLIC page `SQ/study-roadmap.html`. It
+   recomputes the evidence sentence with `evidence_model.public_evidence_claim()`
+   and **fails closed if the stored `derived_sentence` disagrees**, so step 3
+   must be run in order — a widened socket with a stale horizon artefact stops
+   the build rather than publishing either wording. Its guards also refuse any
+   claim wider than the socket states, which is the last line of defence against
+   a partial recovery being marketed as a complete one.
 
 The workbook columns and the website copy then populate **by themselves**. The
 reserved fields already exist (`historical_written_papers`,
