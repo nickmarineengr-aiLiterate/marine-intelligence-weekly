@@ -102,9 +102,35 @@ def main():
     store = {k: store[k] for k in sorted(store) if k != 'mappings'} | {'mappings': store['mappings']}
 
     queue = ME.review_queue(store)
+    # The standing inventory of the file-level over-capture pattern: a QB file
+    # whose title names one domain, holding questions whose own text cues a
+    # different one. DERIVED, so it can never rot into a stale hand-list -- a
+    # file drops off this summary the moment its questions are adjudicated.
+    contra = {}
+    for i in queue:
+        rec = store['mappings'][i['canonical_question_id']]
+        if rec.get('mapping_evidence') != 'FILE_TITLE_CONTRADICTED':
+            continue
+        f = contra.setdefault(rec['source_file'],
+                              {'file_topic_id': rec['topic_id'],
+                               'unadjudicated': 0, 'questions': []})
+        f['unadjudicated'] += 1
+        f['questions'].append({
+            'canonical_question_id': i['canonical_question_id'],
+            'contradicting_topic_ids': rec.get('contradicting_topic_ids') or []})
     qbody = json.dumps({'generated_by': 'tools/study/build_study_mappings.py',
                         'taxonomy_version': ME.taxonomy_version(),
-                        'total': len(queue), 'items': queue},
+                        'total': len(queue),
+                        'file_title_contradictions': {
+                            'what': 'QB files whose title names one domain but '
+                                    'which hold questions whose own text cues '
+                                    'another. Follow-up inventory for the '
+                                    '2026-08-23 over-capture correction.',
+                            'files': len(contra),
+                            'unadjudicated':
+                                sum(f['unadjudicated'] for f in contra.values()),
+                            'by_file': dict(sorted(contra.items()))},
+                        'items': queue},
                        indent=2, ensure_ascii=False) + '\n'
 
     body = json.dumps(store, indent=2, ensure_ascii=False) + '\n'

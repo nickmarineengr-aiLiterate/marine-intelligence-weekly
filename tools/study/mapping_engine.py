@@ -23,10 +23,19 @@ evidence only:
 
   * WRITTEN -- the spec's governed `primary_category` field. Deterministic,
     authored, reviewable  ->  HIGH.
-  * ORAL, pure file -- the QB file's own title names exactly one domain  ->  HIGH.
+  * ORAL, pure file -- the QB file's own title names exactly one domain AND
+    the question's own text either agrees or says nothing  ->  HIGH.
+  * ORAL, pure file CONTRADICTED -- the title names one domain but the
+    question's own text cues only OTHER domains  ->  MEDIUM, REVIEW_PENDING.
   * ORAL, mixed file -- a domain cue matches the question text  ->  MEDIUM,
     which is REVIEW_PENDING and never silently published.
   * anything else -> UNRESOLVED / ACCIDENTALLY_UNMAPPED, which fails the gate.
+
+A STRONG SOURCE IS NOT A SETTLED DECISION. File-level evidence must never
+suppress obvious question-level contradictory evidence: a QB file title is a
+reliable statement about the FILE and an unreliable one about any particular
+question inside it. That is why `mapping_evidence` (what was read) and
+`mapping_confidence` (what was decided) are two fields and not one.
 
 Stable ids are load-bearing: `topic_id` (D01..) and `canonical_question_id`
 (`QB1_A#q1`, `QP2301-Q1`) must never change. Display names may.
@@ -38,7 +47,12 @@ ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 import study_spine as SP
 
-SCHEMA_VERSION = '1.0'
+SCHEMA_VERSION = '1.1'   # 1.1 adds `mapping_evidence` to every record.
+
+# The Oral decision RULES, versioned apart from the record schema so that
+# changing how a topic is decided moves the taxonomy digest -- and therefore
+# re-derives every stored mapping -- even when the record shape is untouched.
+ORAL_DECISION_RULES = 'file-cue-contradiction-v1'
 
 # No official DGMA instrument exists in this repository. When one is obtained,
 # bump this and populate `syllabus_node_id`; nothing else in the record moves.
@@ -50,6 +64,31 @@ STATUS = ('VALID_MAPPED', 'REVIEW_PENDING', 'INTENTIONALLY_UNMAPPED',
           'ACCIDENTALLY_UNMAPPED')
 ROLE = ('PRIMARY', 'SECONDARY', 'CROSS_TOPIC')
 CONTENT_TYPE = ('ORAL', 'WRITTEN')
+
+# --------------------------------------------------------------------------- #
+# TWO FIELDS, TWO QUESTIONS -- never collapse them into one number:
+#
+#   mapping_evidence    WHAT WAS READ.     How strong is the SOURCE signal?
+#   mapping_confidence  WHAT WAS DECIDED.  How sure are we that THIS question
+#                                          belongs to THIS topic?
+#
+# `mapping_confidence` is ALWAYS confidence in the mapping decision. It is
+# never confidence that the file title was read correctly -- that claim lives
+# in `mapping_evidence`, and the two can legitimately disagree.
+# --------------------------------------------------------------------------- #
+EVIDENCE = (
+    'GOVERNED_FIELD',            # written spec primary_category
+    'FILE_TITLE',                # oral file names one domain; question silent
+    'FILE_TITLE_CORROBORATED',   # ... and the question's own cue agrees
+    'FILE_TITLE_CONTRADICTED',   # ... but the question's own cue points away
+    'TEXT_CUE',                  # mixed file; only the question text spoke
+    'HUMAN_ADJUDICATION',        # a named reviewer decided, with a written note
+    'NONE',                      # nothing spoke
+)
+
+# The governing invariant in one line. Evidence of these kinds may never be
+# published as a settled mapping, however strong the source behind it is.
+EVIDENCE_NEVER_HIGH = ('FILE_TITLE_CONTRADICTED', 'TEXT_CUE', 'NONE')
 
 # Confidence -> the status a fresh mapping is allowed to carry (40D/40J).
 STATUS_FOR_CONFIDENCE = {
@@ -80,6 +119,7 @@ def taxonomy_version():
                                        'prerequisites')} for d in SP.DOMAINS],
         'file_domain': SP.ORAL_FILE_DOMAIN,
         'cues': SP.QUESTION_CUES,
+        'oral_rules': ORAL_DECISION_RULES,
     }, sort_keys=True, ensure_ascii=False)
     return hashlib.sha256(payload.encode('utf-8')).hexdigest()[:16]
 
@@ -197,7 +237,7 @@ def attach_official(rec):
 # --------------------------------------------------------------------------- #
 # Record construction
 # --------------------------------------------------------------------------- #
-def _record(qid, content_type, topic_id, confidence, basis, *,
+def _record(qid, content_type, topic_id, confidence, basis, *, evidence,
             role='PRIMARY', subtopic_id=None, last_reviewed=None,
             status=None, extra=None):
     rec = {
@@ -214,6 +254,7 @@ def _record(qid, content_type, topic_id, confidence, basis, *,
         'topic_id': topic_id,
         'subtopic_id': subtopic_id,
         'mapping_role': role,
+        'mapping_evidence': evidence,
         'mapping_confidence': confidence,
         'mapping_basis': basis,
         'mapping_status': status or STATUS_FOR_CONFIDENCE[confidence],
@@ -229,27 +270,58 @@ def _record(qid, content_type, topic_id, confidence, basis, *,
 # --------------------------------------------------------------------------- #
 # Adapters
 # --------------------------------------------------------------------------- #
+def cue_domains(text):
+    """EVERY domain whose cue fires on this text, in registry order.
+
+    Deliberately not first-match-wins: a caller checking for a CONTRADICTION
+    needs the whole set, and a question that cues two domains is evidence of
+    ambiguity rather than evidence for whichever cue happens to be listed
+    first.
+    """
+    return [d for d, rx in _CUES if rx.search(text or '')]
+
+
 def map_oral_question(question, file_name):
     """ORAL adapter. `question` is one entry from qb_content_index files[].questions."""
     qid = question['id']
+    text = question.get('text')
+    extra = {'source_file': file_name, 'anchor': question['anchor'],
+             'text': text}
     dom = SP.ORAL_FILE_DOMAIN.get(file_name)
+
     if dom:
-        return _record(qid, 'ORAL', dom, 'HIGH',
-                       'QB file title names exactly one domain',
-                       extra={'source_file': file_name,
-                              'anchor': question['anchor'],
-                              'text': question.get('text')})
-    hit = next((d for d, rx in _CUES if rx.search(question.get('text') or '')), None)
+        fires = cue_domains(text)
+        if not fires:
+            # Silence is not contradiction. The file title stands alone.
+            return _record(qid, 'ORAL', dom, 'HIGH',
+                           'QB file title names exactly one domain',
+                           evidence='FILE_TITLE', extra=extra)
+        if dom in fires:
+            return _record(qid, 'ORAL', dom, 'HIGH',
+                           'QB file title names exactly one domain and the '
+                           'question text cues that same domain',
+                           evidence='FILE_TITLE_CORROBORATED', extra=extra)
+        # CONTRADICTION. The file title remains the best available answer, so
+        # topic_id is kept -- emptying a topic on a suspicion would be a worse
+        # error than the one being fixed. What changes is the CLAIM: this is
+        # no longer a settled mapping but a queued one, publishable only once
+        # a human has adjudicated it.
+        extra['contradicting_topic_ids'] = fires
+        return _record(
+            qid, 'ORAL', dom, 'MEDIUM',
+            f'QB file title names {dom}, but the question text cues only '
+            f'{"/".join(fires)} -- file-level evidence does not settle it',
+            evidence='FILE_TITLE_CONTRADICTED', extra=extra)
+
+    # Mixed file: first cue wins, exactly as before.
+    hit = next(iter(cue_domains(text)), None)
     if hit:
         return _record(qid, 'ORAL', hit, 'MEDIUM',
                        'domain cue matched question text inside a mixed file',
-                       extra={'source_file': file_name,
-                              'anchor': question['anchor'],
-                              'text': question.get('text')})
+                       evidence='TEXT_CUE', extra=extra)
     return _record(qid, 'ORAL', None, 'UNRESOLVED',
                    'mixed file and no domain cue matched',
-                   extra={'source_file': file_name, 'anchor': question['anchor'],
-                          'text': question.get('text')})
+                   evidence='NONE', extra=extra)
 
 
 def map_written_question(question, paper_id):
@@ -260,12 +332,12 @@ def map_written_question(question, paper_id):
     if dom:
         return _record(qid, 'WRITTEN', dom, 'HIGH',
                        f'spec primary_category {cat!r} (governed field)',
-                       extra={'paper_id': paper_id, 'q_no': question['q_no'],
+                       evidence='GOVERNED_FIELD', extra={'paper_id': paper_id, 'q_no': question['q_no'],
                               'subparts': len(question.get('subparts') or []),
                               'marks': question.get('total_marks')})
     return _record(qid, 'WRITTEN', None, 'UNRESOLVED',
                    f'primary_category {cat!r} is claimed by no domain',
-                   extra={'paper_id': paper_id, 'q_no': question['q_no'],
+                   evidence='NONE', extra={'paper_id': paper_id, 'q_no': question['q_no'],
                           'marks': question.get('total_marks')})
 
 
@@ -286,8 +358,9 @@ def validate_mapping(rec):
     """Return a list of human-readable errors. Empty list == valid."""
     e = []
     for f in ('canonical_question_id', 'content_type', 'topic_id',
-              'mapping_role', 'mapping_confidence', 'mapping_basis',
-              'mapping_status', 'syllabus_version', 'schema_version'):
+              'mapping_role', 'mapping_evidence', 'mapping_confidence',
+              'mapping_basis', 'mapping_status', 'syllabus_version',
+              'schema_version'):
         if f not in rec:
             e.append(f'missing field {f}')
     if e:
@@ -296,6 +369,15 @@ def validate_mapping(rec):
         e.append(f"content_type {rec['content_type']!r} invalid")
     if rec['mapping_confidence'] not in CONFIDENCE:
         e.append(f"mapping_confidence {rec['mapping_confidence']!r} invalid")
+    if rec['mapping_evidence'] not in EVIDENCE:
+        e.append(f"mapping_evidence {rec['mapping_evidence']!r} invalid")
+    # THE GOVERNING INVARIANT. A source may be strong and the decision still
+    # unsettled, so evidence that the question's own text disputes -- or that
+    # the file never spoke to at all -- may never be published as HIGH.
+    if rec['mapping_evidence'] in EVIDENCE_NEVER_HIGH \
+            and rec['mapping_confidence'] == 'HIGH':
+        e.append(f"mapping_evidence {rec['mapping_evidence']} may never carry "
+                 f'HIGH mapping_confidence')
     if rec['mapping_status'] not in STATUS:
         e.append(f"mapping_status {rec['mapping_status']!r} invalid")
     if rec['mapping_role'] not in ROLE:
@@ -452,15 +534,38 @@ def incremental_update(store, items, force=False):
     return store, stats
 
 
-def apply_adjudications(store, adjudications):
-    """Apply human review stamps (40D). Returns (store, stats).
+DECISIONS = ('AFFIRM', 'REASSIGN', 'HOLD_REVIEW')
 
-    An adjudication may only promote a mapping whose topic_id it RESTATES
-    correctly. If the taxonomy has since moved the question elsewhere, the
-    stamp is refused rather than silently rubber-stamping a stale decision --
-    the whole point of recording topic_id in the adjudication file.
+
+def apply_adjudications(store, adjudications):
+    """Apply human review decisions (40D). Returns (store, stats, refusals).
+
+    THREE DECISIONS, ONE GUARD.
+
+      AFFIRM       the mapper is right. Stamp it VALID_MAPPED.
+      REASSIGN     the mapper is wrong. Move the question to `topic_id` and
+                   stamp it. This is the bounded overlay that lets a human
+                   correct a mapping the engine cannot see is wrong -- for
+                   instance a question whose own text carries no domain cue at
+                   all, so no contradiction can ever be detected for it.
+      HOLD_REVIEW  the evidence does not settle it. Keep the mapper's topic as
+                   a placeholder, force REVIEW_PENDING and record the
+                   candidate topics a later reviewer will need. Never
+                   published, and deliberately NOT forced into a topic merely
+                   to empty the queue.
+
+    The guard is the same for all three: the entry must RESTATE what the
+    mapper currently says, in `mapper_topic_id` (defaulting to `topic_id`).
+    If the taxonomy has since moved the question, the entry is refused rather
+    than silently rubber-stamping a stale decision.
+
+    Idempotency: a REASSIGN records `adjudicated_from_topic_id`, and the guard
+    compares against THAT on later runs. So re-applying an override to an
+    already-overridden store is a no-op, while a genuine taxonomy move -- which
+    produces a fresh record without that field -- is still caught.
     """
-    stats = {'applied': 0, 'refused_topic_moved': 0, 'refused_unknown_id': 0}
+    stats = {'applied': 0, 'reassigned': 0, 'held': 0,
+             'refused_topic_moved': 0, 'refused_unknown_id': 0}
     refusals = []
     for qid, a in adjudications.items():
         rec = store['mappings'].get(qid)
@@ -468,12 +573,61 @@ def apply_adjudications(store, adjudications):
             stats['refused_unknown_id'] += 1
             refusals.append(f'{qid}: no such question')
             continue
-        if rec['topic_id'] != a['topic_id']:
+        decision = a.get('decision', 'AFFIRM')
+        if decision not in DECISIONS:
+            stats['refused_unknown_id'] += 1
+            refusals.append(f'{qid}: unknown decision {decision!r}')
+            continue
+
+        expected = a.get('mapper_topic_id', a['topic_id'])
+        actual = rec.get('adjudicated_from_topic_id', rec['topic_id'])
+        if actual != expected:
             stats['refused_topic_moved'] += 1
             refusals.append(
-                f"{qid}: adjudicated {a['topic_id']}, mapper now says "
-                f"{rec['topic_id']} -- re-review required")
+                f'{qid}: adjudicated against mapper topic {expected}, mapper '
+                f'now says {actual} -- re-review required')
             continue
+
+        if decision == 'HOLD_REVIEW':
+            rec['mapping_confidence'] = 'MEDIUM'
+            rec['mapping_status'] = 'REVIEW_PENDING'
+            rec['review_hold'] = True
+            rec['adjudicated_candidate_topic_ids'] = \
+                a.get('candidate_topic_ids') or []
+            rec['reviewed_by'] = a.get('reviewer')
+            rec['review_note'] = a.get('note')
+            rec['mapping_basis'] = (
+                'human review found the evidence does not settle this '
+                f"question: {a.get('note') or 'no note'}")
+            stats['held'] += 1
+            continue
+
+        if decision == 'REASSIGN':
+            if rec['topic_id'] != a['topic_id']:
+                # Drop and re-add so the two provenance keys land in the same
+                # ORDER whether or not incremental_update already inserted
+                # `previous_topic_id` on this pass. Without this the store is
+                # byte-different on a cold build vs a refresh, and --check
+                # flips for a reason nobody can see in the data.
+                rec.pop('previous_topic_id', None)
+                rec['adjudicated_from_topic_id'] = actual
+                rec['previous_topic_id'] = actual
+                rec['topic_id'] = a['topic_id']
+                # The evidence for the NEW topic is the reviewer, not the file
+                # title that put the question in the wrong place. Leaving
+                # `mapping_evidence` as FILE_TITLE here would re-tell exactly
+                # the lie this whole change exists to stop.
+                rec['mapping_evidence'] = 'HUMAN_ADJUDICATION'
+                rec['mapping_confidence'] = 'HIGH'
+                # The official-syllabus join is a FUNCTION of the topic, so it
+                # must be recomputed here. Without this the record would carry
+                # the old topic's Annexure III nodes under the new topic.
+                attach_official(rec)
+            rec['mapping_basis'] = (
+                f'human adjudication moved this question from {actual} to '
+                f"{a['topic_id']}: {a.get('note') or 'no note'}")
+            stats['reassigned'] += 1
+
         rec['last_reviewed'] = a['last_reviewed']
         rec['reviewed_by'] = a.get('reviewer')
         rec['review_note'] = a.get('note')
@@ -495,15 +649,27 @@ def review_queue(store):
                 'source_file': r.get('source_file') or r.get('paper_id'),
                 'current_topic_id': r['topic_id'],
                 'candidate_topic_ids': cands,
+                'mapping_evidence': r.get('mapping_evidence'),
                 'mapping_confidence': r['mapping_confidence'],
                 'reason': r['mapping_basis'],
                 'recommended_topic_id': r['topic_id'] or (cands[0] if cands else None),
-                'review_status': 'AWAITING_ADJUDICATION',
+                # A human who has already looked and could not settle it is a
+                # different queue state from one nobody has read yet.
+                'review_status': ('HELD_PENDING_EVIDENCE' if r.get('review_hold')
+                                  else 'AWAITING_ADJUDICATION'),
             })
     return q
 
 
 def _candidates(rec):
-    """Every domain whose cue also fires -- the evidence a reviewer needs."""
+    """Every domain whose cue also fires -- the evidence a reviewer needs.
+
+    A human HOLD_REVIEW supplies its own candidate set, which outranks the
+    cues: the reviewer has already read the question, and the cue lexicon is
+    what failed to settle it.
+    """
+    held = rec.get('adjudicated_candidate_topic_ids')
+    if held:
+        return list(held)
     text = rec.get('text') or ''
     return [d for d, rx in _CUES if rx.search(text)] if text else []

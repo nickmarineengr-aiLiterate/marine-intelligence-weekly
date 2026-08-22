@@ -50,16 +50,56 @@ ME.taxonomy_version()                                      # -> digest
 
 ## Confidence and status — the rule that matters
 
-| Evidence | Confidence | Status | Published? |
-|---|---|---|---|
-| Written spec `primary_category` (governed field) | HIGH | `VALID_MAPPED` | yes |
-| Oral file title names exactly one domain | HIGH | `VALID_MAPPED` | yes |
-| Domain cue matched text inside a **mixed** file | MEDIUM | `REVIEW_PENDING` | **no** |
-| Nothing matched | UNRESOLVED | `ACCIDENTALLY_UNMAPPED` | **no — gate fails** |
+**Two fields, two questions.** `mapping_evidence` says *what was read*;
+`mapping_confidence` says *what was decided*. They are not the same question
+and the schema keeps them apart on purpose. A strong source does not imply a
+confident decision — that conflation is exactly what produced the D02
+over-capture corrected on 2026-08-23, where a QB file title minted
+HIGH-confidence mappings for questions that were not about that topic at all.
+`mapping_confidence` is **always** confidence in the mapping, never confidence
+that the file title was read correctly.
+
+| `mapping_evidence` | Meaning | Confidence | Status | Published? |
+|---|---|---|---|---|
+| `GOVERNED_FIELD` | Written spec `primary_category` | HIGH | `VALID_MAPPED` | yes |
+| `FILE_TITLE` | Oral file names one domain; question text silent | HIGH | `VALID_MAPPED` | yes |
+| `FILE_TITLE_CORROBORATED` | ...and the question's own cue agrees | HIGH | `VALID_MAPPED` | yes |
+| `FILE_TITLE_CONTRADICTED` | ...but the question's own cue points elsewhere | MEDIUM | `REVIEW_PENDING` | **no** |
+| `TEXT_CUE` | Domain cue matched text inside a **mixed** file | MEDIUM | `REVIEW_PENDING` | **no** |
+| `HUMAN_ADJUDICATION` | A named reviewer decided, with a written note | HIGH | `VALID_MAPPED` | yes |
+| `NONE` | Nothing matched | UNRESOLVED | `ACCIDENTALLY_UNMAPPED` | **no — gate fails** |
+
+`EVIDENCE_NEVER_HIGH` enforces the governing invariant: **file-level evidence
+must not suppress obvious question-level contradictory evidence.** A
+contradicted mapping keeps the file's topic as a placeholder — emptying a
+topic on a suspicion would be worse than the error being fixed — but it loses
+the *claim* to being settled, so it lands in the review queue instead of being
+published. That makes the demotion **count-neutral**: `build_study_spine.py`
+aggregates by `topic_id`, not by status, so only a human reassignment moves a
+topic count.
 
 A MEDIUM/LOW mapping can only become `VALID_MAPPED` by acquiring a
 `last_reviewed` stamp from a human adjudication. The validator rejects the
-promotion otherwise. The engine **never** copies a "similar" question's
+promotion otherwise.
+
+### `adjudications.json` — three decisions, one guard
+
+| `decision` | Does what |
+|---|---|
+| `AFFIRM` (default) | The mapper is right. Stamp it `VALID_MAPPED`. |
+| `REASSIGN` | The mapper is wrong. Move the question to `topic_id`, relabel evidence `HUMAN_ADJUDICATION`, and recompute the official-syllabus join. Requires `mapper_topic_id`. |
+| `HOLD_REVIEW` | The evidence does not settle it. Force `REVIEW_PENDING` and record `candidate_topic_ids`. Never published — **do not force a topic merely to empty the queue.** |
+
+The guard is the same for all three: the entry must restate what the mapper
+currently says (`mapper_topic_id`, defaulting to `topic_id`). If the taxonomy
+has since moved the question, the entry is **refused** rather than
+rubber-stamping a stale decision. `REASSIGN` records
+`adjudicated_from_topic_id` so re-application is idempotent while a genuine
+taxonomy move is still caught.
+
+`docs/study/mapping_review_queue.json` carries a derived
+`file_title_contradictions` block: the standing inventory of files still
+showing this pattern. It is regenerated every build, so it cannot rot. The engine **never** copies a "similar" question's
 mapping: the oral follow-up work already proved similarity scoring picks
 semantically wrong parents.
 

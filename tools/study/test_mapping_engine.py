@@ -54,6 +54,14 @@ NEW_WRITTEN_BAD = {'q_no': 'Q8', 'short_title': 'Synthetic uncategorised',
                    'primary_category': 'Astro-Navigation & Sorcery',
                    'subject_tags': [], 'total_marks': 16, 'subparts': []}
 
+# The over-capture fixtures. PURE_FILE's title says D03; these two questions
+# sit inside it and say something else, or nothing at all.
+NEW_ORAL_CONTRA = {'id': 'QB4_A#q996', 'anchor': 'q996', 'qnum': 996,
+                   'text': 'Explain the IMSBC Code and the precautions for '
+                           'loading a bulk cargo.'}          # cues D07 only
+NEW_ORAL_SILENT = {'id': 'QB4_A#q995', 'anchor': 'q995', 'qnum': 995,
+                   'text': 'Tell me about your last ship.'}  # cues nothing
+
 
 def test_oral_high():
     m = ME.map_question(NEW_ORAL_CLEAR, 'ORAL', file_name=PURE_FILE)
@@ -366,6 +374,145 @@ def test_official_join_is_incremental():
        len(store['mappings']) == 2, str(len(store['mappings'])))
 
 
+# --------------------------------------------------------------------------- #
+# The file-level over-capture defect (2026-08-23).
+#
+# A QB file title is a reliable statement about the FILE and an unreliable one
+# about any particular QUESTION inside it. These tests pin the three outcomes
+# apart, and pin the property the whole safety argument rests on: a demotion
+# keeps the topic, so it changes the CLAIM without changing any topic count.
+# --------------------------------------------------------------------------- #
+def test_file_title_corroborated_stays_high():
+    m = ME.map_question(NEW_ORAL_CLEAR, 'ORAL', file_name=PURE_FILE)
+    ok('over-capture/agreement -> FILE_TITLE_CORROBORATED',
+       m['mapping_evidence'] == 'FILE_TITLE_CORROBORATED', m['mapping_evidence'])
+    ok('over-capture/agreement stays HIGH', m['mapping_confidence'] == 'HIGH')
+    ok('over-capture/agreement is published',
+       m['mapping_status'] == 'VALID_MAPPED')
+
+
+def test_file_title_silence_stays_high():
+    m = ME.map_question(NEW_ORAL_SILENT, 'ORAL', file_name=PURE_FILE)
+    ok('over-capture/silence -> FILE_TITLE', m['mapping_evidence'] == 'FILE_TITLE',
+       m['mapping_evidence'])
+    ok('over-capture/silence is not contradiction',
+       m['mapping_confidence'] == 'HIGH' and m['mapping_status'] == 'VALID_MAPPED')
+
+
+def test_file_title_contradicted_is_demoted():
+    m = ME.map_question(NEW_ORAL_CONTRA, 'ORAL', file_name=PURE_FILE)
+    ok('over-capture/contradiction -> FILE_TITLE_CONTRADICTED',
+       m['mapping_evidence'] == 'FILE_TITLE_CONTRADICTED', m['mapping_evidence'])
+    ok('over-capture/contradiction is demoted to MEDIUM',
+       m['mapping_confidence'] == 'MEDIUM', m['mapping_confidence'])
+    ok('over-capture/contradiction is NOT published',
+       m['mapping_status'] == 'REVIEW_PENDING', m['mapping_status'])
+    # The safety property: the file's topic is retained as a placeholder, so a
+    # demotion never empties a topic on a suspicion and never moves a count.
+    ok('over-capture/contradiction keeps the file topic as placeholder',
+       m['topic_id'] == SP.ORAL_FILE_DOMAIN[PURE_FILE], str(m['topic_id']))
+    ok('over-capture/contradiction records what disputed it',
+       m.get('contradicting_topic_ids') == ['D07'],
+       str(m.get('contradicting_topic_ids')))
+    ok('over-capture/contradicted record reaches the review queue',
+       any(i['canonical_question_id'] == NEW_ORAL_CONTRA['id']
+           for i in ME.review_queue({'mappings': {NEW_ORAL_CONTRA['id']: m}})))
+
+
+def test_evidence_and_confidence_are_two_fields():
+    """A strong SOURCE may not be published as a settled DECISION."""
+    good = ME.map_question(NEW_ORAL_CLEAR, 'ORAL', file_name=PURE_FILE)
+    # Pin the MEMBERSHIP, not just the loop. Emptying the tuple would otherwise
+    # make every assertion below vacuous -- the loop would simply not run, and
+    # the suite would report a smaller PASS count that nobody reads.
+    ok('invariant/EVIDENCE_NEVER_HIGH covers the three unsettled kinds',
+       set(ME.EVIDENCE_NEVER_HIGH) ==
+       {'FILE_TITLE_CONTRADICTED', 'TEXT_CUE', 'NONE'},
+       str(ME.EVIDENCE_NEVER_HIGH))
+    for ev in ('FILE_TITLE_CONTRADICTED', 'TEXT_CUE', 'NONE'):
+        bad = {**good, 'mapping_evidence': ev, 'mapping_confidence': 'HIGH'}
+        ok(f'validator rejects HIGH on {ev}', ME.validate_mapping(bad) != [],
+           'a contradicted/cue-only mapping was accepted as HIGH')
+    ok('validator rejects an unknown evidence value',
+       ME.validate_mapping({**good, 'mapping_evidence': 'VIBES'}) != [])
+    ok('validator rejects a record with no evidence field at all',
+       ME.validate_mapping({k: v for k, v in good.items()
+                            if k != 'mapping_evidence'}) != [])
+
+
+def _contra_store():
+    store = {'schema_version': ME.SCHEMA_VERSION,
+             'taxonomy_version': ME.taxonomy_version(), 'mappings': {}}
+    store, _ = ME.incremental_update(
+        store, [(NEW_ORAL_CONTRA, 'ORAL', {'file_name': PURE_FILE})])
+    return store
+
+
+def test_reassign_moves_the_question_and_its_official_join():
+    qid = NEW_ORAL_CONTRA['id']
+    store = _contra_store()
+    adj = {qid: {'decision': 'REASSIGN', 'mapper_topic_id': 'D03',
+                 'topic_id': 'D07', 'last_reviewed': '2026-08-23',
+                 'reviewer': 'test', 'note': 'IMSBC is cargo'}}
+    store, stats, refusals = ME.apply_adjudications(store, adj)
+    r = store['mappings'][qid]
+    ok('reassign/applied', stats['reassigned'] == 1 and not refusals, str(refusals))
+    ok('reassign/topic moved', r['topic_id'] == 'D07', str(r['topic_id']))
+    ok('reassign/previous topic recorded', r['previous_topic_id'] == 'D03')
+    ok('reassign/evidence becomes the reviewer, not the file title',
+       r['mapping_evidence'] == 'HUMAN_ADJUDICATION', r['mapping_evidence'])
+    ok('reassign/published with a review stamp',
+       r['mapping_status'] == 'VALID_MAPPED' and r['last_reviewed'] == '2026-08-23')
+    # The official join is a function of the topic and must follow it.
+    ok('reassign/official join follows the new topic',
+       r['official_syllabus_node_candidates'] == ME.official_nodes_for_topic('D07'),
+       str(r['official_syllabus_node_candidates']))
+    ok('reassign/record still passes the validator',
+       ME.validate_mapping(r) == [], str(ME.validate_mapping(r)))
+    # Re-applying the same overlay to an already-overridden store is a no-op.
+    store, stats2, refusals2 = ME.apply_adjudications(store, adj)
+    ok('reassign/idempotent on re-application',
+       stats2['reassigned'] == 1 and not refusals2, str(refusals2))
+    ok('reassign/idempotent leaves the topic where it was',
+       store['mappings'][qid]['topic_id'] == 'D07')
+
+
+def test_reassign_is_refused_when_the_mapper_has_moved():
+    qid = NEW_ORAL_CONTRA['id']
+    store = _contra_store()
+    stale = {qid: {'decision': 'REASSIGN', 'mapper_topic_id': 'D09',
+                   'topic_id': 'D07', 'last_reviewed': '2026-08-23',
+                   'reviewer': 'test', 'note': 'written against a stale mapper'}}
+    store, stats, refusals = ME.apply_adjudications(store, stale)
+    ok('reassign/stale override refused',
+       stats['refused_topic_moved'] == 1 and len(refusals) == 1, str(refusals))
+    ok('reassign/refusal leaves the mapping untouched',
+       store['mappings'][qid]['topic_id'] == 'D03')
+
+
+def test_hold_review_is_never_published():
+    qid = NEW_ORAL_CONTRA['id']
+    store = _contra_store()
+    adj = {qid: {'decision': 'HOLD_REVIEW', 'mapper_topic_id': 'D03',
+                 'topic_id': 'D03', 'candidate_topic_ids': ['D07', 'D09'],
+                 'last_reviewed': '2026-08-23', 'reviewer': 'test',
+                 'note': 'genuinely two-limbed'}}
+    store, stats, refusals = ME.apply_adjudications(store, adj)
+    r = store['mappings'][qid]
+    ok('hold/applied', stats['held'] == 1 and not refusals, str(refusals))
+    ok('hold/stays REVIEW_PENDING', r['mapping_status'] == 'REVIEW_PENDING',
+       r['mapping_status'])
+    ok('hold/never acquires a promotion stamp', not r.get('last_reviewed'))
+    ok('hold/keeps the placeholder topic', r['topic_id'] == 'D03')
+    q = ME.review_queue(store)
+    ok('hold/queued as HELD_PENDING_EVIDENCE',
+       q and q[0]['review_status'] == 'HELD_PENDING_EVIDENCE', str(q))
+    ok("hold/reviewer's candidates outrank the cues",
+       q and q[0]['candidate_topic_ids'] == ['D07', 'D09'], str(q))
+    ok('hold/record passes the validator', ME.validate_mapping(r) == [],
+       str(ME.validate_mapping(r)))
+
+
 def main():
     for fn in (test_oral_high, test_oral_medium_routes_to_review,
                test_oral_unresolved, test_written,
@@ -382,6 +529,13 @@ def main():
                test_two_syllabus_versions_stay_separate,
                test_final_source_guard,
                test_official_join_is_incremental,
+               test_file_title_corroborated_stays_high,
+               test_file_title_silence_stays_high,
+               test_file_title_contradicted_is_demoted,
+               test_evidence_and_confidence_are_two_fields,
+               test_reassign_moves_the_question_and_its_official_join,
+               test_reassign_is_refused_when_the_mapper_has_moved,
+               test_hold_review_is_never_published,
                test_no_fixture_leak):
         fn()
     print(f'mapping engine acceptance -- {len(PASS) + len(FAIL)} assertions')
