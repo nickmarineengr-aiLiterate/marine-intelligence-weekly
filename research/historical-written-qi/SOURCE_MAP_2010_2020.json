@@ -1,0 +1,175 @@
+{
+ "schema": "miw.research.historical_written_qi.source_map.v1",
+ "status": "RESEARCH_ONLY",
+ "current_as_of": "2026-08-22",
+ "priority_window": "2010-2020 (2010-PRESENT is the primary longitudinal window; pre-2010 is ARCHIVE_CONTEXT)",
+ "routes": [
+  {
+   "route_id": "ROUTE-DGS-DIRECT",
+   "class": "OFFICIAL",
+   "description": "dgshipping.gov.in / betadgs host family, direct",
+   "status": "CLOSED_UNREACHABLE",
+   "evidence": "ECONNREFUSED on every host, verified Phase 2 (2026-08-17) and unchanged; see HISTORICAL_COVERAGE_MATRIX.md on origin/research/question-intelligence-v2-phase3b",
+   "yields_2010_2020_question_text": false
+  },
+  {
+   "route_id": "ROUTE-DGS-WAYBACK",
+   "class": "ARCHIVED_OFFICIAL",
+   "description": "Wayback CDX enumeration of dgshipping.gov.in (12,130 URLs, 830 MEO)",
+   "status": "WORKED_AND_CLOSED",
+   "evidence": "Phase 3B walked it to the end: 98 Class I objects; 80 question papers all 1999-2005 pre-Engineering-Management subjects; 2013-2015 Class I files are result lists with no question text. PHASE3B_SOURCE_INVENTORY.json",
+   "yields_2010_2020_question_text": false,
+   "yields_official_sitting_corroboration": "2013-08 to 2015-09 via 15 result lists"
+  },
+  {
+   "route_id": "ROUTE-DGS-QBANK",
+   "class": "OFFICIAL_QUESTION_BANK_REFERENCE",
+   "description": "Question Bank MEO CL-I, 185 items, undated",
+   "status": "HELD",
+   "evidence": "sha256 0E0D6BC7... verified again this session against a second official URL (writereaddata vs WriteReadData casing) - byte-identical. NOT exam occurrence evidence; dates nothing.",
+   "yields_2010_2020_question_text": false
+  },
+  {
+   "route_id": "ROUTE-DIESELSHIP-LIVE",
+   "class": "SECONDARY_REPOSITORY",
+   "description": "dieselship.com live set pages (metadata) and gated content",
+   "status": "METADATA_ONLY_AND_NOW_403",
+   "evidence": "33 set pages 2010-2012 preserved 2026-08-17 (public metadata: set identity + question counts). This session's 2013-2020 metadata fetch met HTTP 403 (bot filter) on all 83 pages and was not pressed. Answers are subscription-gated; never accessed.",
+   "yields_2010_2020_question_text": false
+  },
+  {
+   "route_id": "ROUTE-DIESELSHIP-WAYBACK-QCAT",
+   "class": "SECONDARY_REPOSITORY_VIA_ARCHIVE",
+   "description": "Wayback captures of dieselship.com /question-set/<slug>?qcat=class-1-exam-qa and /question-category/class-1-exam-qa/?qset=<slug>. The paywall gates ANSWERS only; question stems are publicly rendered by design and the Archive captured them en masse 2023-2026.",
+   "status": "OPEN_AND_ACQUIRED",
+   "evidence": "This session: 115 month-sets located via CDX (1,280 question-set URLs), 115 acquired and VERIFIED (set identity printed, Class 1 category printed, stated question count == extracted stems), sha256 per page. 0 fetch failures listed in GAP_REPORT.",
+   "yields_2010_2020_question_text": true,
+   "caveats": [
+    "candidate-recall compilation, not official papers; completeness per sitting unknown (8-10 stems/set)",
+    "sitting month is the source's claim: date_certainty = MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE",
+    "answers not recoverable (app/subscription only) - stems and cross-set links only"
+   ]
+  },
+  {
+   "route_id": "ROUTE-SECONDARY-SWEEP",
+   "class": "SECONDARY_LEADS",
+   "description": "marineengineeringonline, marinesite.info, marinegyaan, myseatime, sailorinsight, aumsworld, scribd, telegram previews, blogspots, paid portals",
+   "status": "SWEPT_NO_DATED_2010_2020_TEXT",
+   "evidence": "Two agent sweeps this session (22 pages examined + 10 Wayback samples). marineengineeringonline's Class 1 corpus is the known 1999-2005 EKG/EKS/ET/NA family; marinegyaan's dated 2013-2015 papers are deck-side Stability scans; scribd 479501138 (Jan 2018 claim) is subscription-gated; free blog text is undated. No route yielded dated Engineering Management text.",
+   "yields_2010_2020_question_text": false
+  }
+ ],
+ "years": {
+  "2010": {
+   "credible_source_found": true,
+   "source_class": "SECONDARY_REPOSITORY_VIA_ARCHIVE",
+   "papers_found": 10,
+   "papers_verified": 10,
+   "papers_failed_fetch": [],
+   "date_certainty": "MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE",
+   "official_corroboration": "NONE",
+   "example_archive_url": "https://web.archive.org/web/20240718005827id_/https://dieselship.com/question-category/class-1-exam-qa/?qset=2010-apr"
+  },
+  "2011": {
+   "credible_source_found": true,
+   "source_class": "SECONDARY_REPOSITORY_VIA_ARCHIVE",
+   "papers_found": 11,
+   "papers_verified": 11,
+   "papers_failed_fetch": [],
+   "date_certainty": "MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE",
+   "official_corroboration": "NONE",
+   "example_archive_url": "https://web.archive.org/web/20240718030256id_/https://dieselship.com/question-category/class-1-exam-qa/?qset=2011-apr"
+  },
+  "2012": {
+   "credible_source_found": true,
+   "source_class": "SECONDARY_REPOSITORY_VIA_ARCHIVE",
+   "papers_found": 11,
+   "papers_verified": 11,
+   "papers_failed_fetch": [],
+   "date_certainty": "MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE",
+   "official_corroboration": "NONE",
+   "example_archive_url": "https://web.archive.org/web/20240718024403id_/https://dieselship.com/question-category/class-1-exam-qa/?qset=2012-apr"
+  },
+  "2013": {
+   "credible_source_found": true,
+   "source_class": "SECONDARY_REPOSITORY_VIA_ARCHIVE",
+   "papers_found": 11,
+   "papers_verified": 11,
+   "papers_failed_fetch": [],
+   "date_certainty": "MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE",
+   "official_corroboration": "RESULT_LISTS_2013_08_TO_2015_09",
+   "example_archive_url": "https://web.archive.org/web/20240920211208id_/https://dieselship.com/question-set/2013-apr/?qcat=class-1-exam-qa"
+  },
+  "2014": {
+   "credible_source_found": true,
+   "source_class": "SECONDARY_REPOSITORY_VIA_ARCHIVE",
+   "papers_found": 11,
+   "papers_verified": 11,
+   "papers_failed_fetch": [],
+   "date_certainty": "MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE",
+   "official_corroboration": "RESULT_LISTS_2013_08_TO_2015_09",
+   "example_archive_url": "https://web.archive.org/web/20250118193010id_/https://dieselship.com/question-set/2014-apr/?qcat=class-1-exam-qa"
+  },
+  "2015": {
+   "credible_source_found": true,
+   "source_class": "SECONDARY_REPOSITORY_VIA_ARCHIVE",
+   "papers_found": 11,
+   "papers_verified": 11,
+   "papers_failed_fetch": [],
+   "date_certainty": "MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE",
+   "official_corroboration": "RESULT_LISTS_2013_08_TO_2015_09",
+   "example_archive_url": "https://web.archive.org/web/20250713234423id_/https://dieselship.com/question-set/2015-apr/?qcat=class-1-exam-qa"
+  },
+  "2016": {
+   "credible_source_found": true,
+   "source_class": "SECONDARY_REPOSITORY_VIA_ARCHIVE",
+   "papers_found": 11,
+   "papers_verified": 11,
+   "papers_failed_fetch": [],
+   "date_certainty": "MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE",
+   "official_corroboration": "NONE",
+   "example_archive_url": "https://web.archive.org/web/20240718013212id_/https://dieselship.com/question-category/class-1-exam-qa/?qset=2016-apr"
+  },
+  "2017": {
+   "credible_source_found": true,
+   "source_class": "SECONDARY_REPOSITORY_VIA_ARCHIVE",
+   "papers_found": 11,
+   "papers_verified": 11,
+   "papers_failed_fetch": [],
+   "date_certainty": "MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE",
+   "official_corroboration": "NONE",
+   "example_archive_url": "https://web.archive.org/web/20250614193051id_/https://dieselship.com/question-set/2017-apr/?qcat=class-1-exam-qa"
+  },
+  "2018": {
+   "credible_source_found": true,
+   "source_class": "SECONDARY_REPOSITORY_VIA_ARCHIVE",
+   "papers_found": 11,
+   "papers_verified": 11,
+   "papers_failed_fetch": [],
+   "date_certainty": "MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE",
+   "official_corroboration": "NONE",
+   "example_archive_url": "https://web.archive.org/web/20250516135816id_/https://dieselship.com/question-set/2018-apr/?qcat=class-1-exam-qa"
+  },
+  "2019": {
+   "credible_source_found": true,
+   "source_class": "SECONDARY_REPOSITORY_VIA_ARCHIVE",
+   "papers_found": 11,
+   "papers_verified": 11,
+   "papers_failed_fetch": [],
+   "date_certainty": "MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE",
+   "official_corroboration": "NONE",
+   "example_archive_url": "https://web.archive.org/web/20250513165342id_/https://dieselship.com/question-category/class-1-exam-qa/?qset=2019-apr"
+  },
+  "2020": {
+   "credible_source_found": true,
+   "source_class": "SECONDARY_REPOSITORY_VIA_ARCHIVE",
+   "papers_found": 6,
+   "papers_verified": 6,
+   "papers_failed_fetch": [],
+   "date_certainty": "MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE",
+   "official_corroboration": "NONE",
+   "example_archive_url": "https://web.archive.org/web/20240521131020id_/https://dieselship.com/question-set/2020-dec/?qcat=class-1-exam-qa"
+  }
+ },
+ "headline": "Exactly one route yields 2010-2020 MEO Class I Engineering Management question text: Wayback captures of DieselShip's public class-1 stem pages. Everything official is either unreachable, undated, or result lists."
+}
