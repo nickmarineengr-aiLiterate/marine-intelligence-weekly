@@ -28,6 +28,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 import mapping_engine as ME
+import reconcile_official_mappings as RO
 
 QB     = os.path.join(ROOT, 'meoclass1', 'qb_content_index.json')
 SPECS  = os.path.join(ROOT, 'meoclass1', 'pastpapers', 'specs', '*.json')
@@ -79,8 +80,20 @@ def main():
     for r in refusals:
         print('  REFUSED ADJUDICATION ' + r)
     store['generated_by'] = 'tools/study/build_study_mappings.py'
-    store['authority'] = ('MIW-DERIVED. Not an official DGMA syllabus. See '
+    store['authority'] = ('MIW-DERIVED topic structure, crosswalked to the '
+                          'official DGMA syllabus. The topic labels are not an '
+                          'official DGMA syllabus. See '
                           'docs/study/SYLLABUS_SOURCE_STATUS.md.')
+
+    # Attach the adopted-syllabus join through the SAME code the standalone
+    # reconciler uses. Two paths that both write this store would drift, and
+    # the drift would surface as a permanently STALE --check that everyone
+    # learns to ignore -- which is how a gate stops being a gate.
+    _, rec_errors = RO.reconcile(store)
+    if rec_errors:
+        for line in rec_errors[:10]:
+            print('  RECONCILE ERROR ' + line)
+        return 1
     counts = {}
     for r in store['mappings'].values():
         counts[r['mapping_status']] = counts.get(r['mapping_status'], 0) + 1

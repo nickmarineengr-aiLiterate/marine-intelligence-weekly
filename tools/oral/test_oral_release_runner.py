@@ -115,6 +115,9 @@ POST_E6_GATES = [
     "correction_lsavent_mutate",
     "corrections_mutate",
     "followup_register_mutate",
+    # The study-spine hook: a new oral question cannot ship unmapped.
+    "study_mapping_check",
+    "study_spine_validate",
     "validate_batch_f1",
     "validate_batch_f1b",
     "validate_correction_lsavent",
@@ -241,7 +244,7 @@ check("plan of the release set is the historical 39 plus post-E6 gates",
       and sum(1 for g in _default if g["historical_39"]) == 39,
       "%d gates, %d historical, post-E6=%s"
       % (len(_default), sum(1 for g in _default if g["historical_39"]), _post_e6))
-check("the post-E6 additions are the correction and authorisation gates",
+check("the post-E6 additions are the correction, authorisation and study gates",
       _post_e6 == POST_E6_GATES, str(_post_e6))
 check("a default run never silently drops a post-E6 gate",
       all(not g["separate_phase"] for g in _default),

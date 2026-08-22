@@ -222,6 +222,27 @@ GATES = (
           CAT_INDEX, PARSER_MUTATION, mutates=True, timeout=1800,
           depends_on=("content_index_validate",)),
 
+    # ---- study spine: a new oral question must reach a topic ---------------
+    # The integration point tools/study/SKILL.md described as a TODO. A newly
+    # authored oral question lands in qb_content_index.json, so the mapping
+    # store built from it goes stale; --check fails, and the author has to map
+    # the question (or route it to the review queue) before the release can
+    # pass. Without this an oral question could ship ACCIDENTALLY_UNMAPPED and
+    # simply never appear in any study surface.
+    #
+    # Neither gate touches oral product content: they read the index and write
+    # only under docs/study/, so they cannot mutate a QB page.
+    _gate("study_mapping_check",
+          ["python", "tools/study/build_study_mappings.py", "--check"],
+          CAT_INDEX, PARSER_CHECK, timeout=600, historical_39=False,
+          depends_on=("content_index_check",),
+          note="every canonical oral question must already carry a governed mapping"),
+    _gate("study_spine_validate",
+          ["python", "tools/study/validate_study_spine.py"],
+          CAT_INDEX, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          depends_on=("study_mapping_check",),
+          note="official syllabus, coverage and Topic 01 references must resolve"),
+
     # ---- corpus-wide unit controls ----------------------------------------
     _gate("qb_question_text", ["python", "%s/test_qb_question_text.py" % _ORAL],
           CAT_UNIT, PARSER_VALIDATOR, timeout=600),
