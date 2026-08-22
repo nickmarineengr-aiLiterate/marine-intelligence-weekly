@@ -304,6 +304,34 @@ file-title over-capture recorded in `TOPIC_03_MARINE_INSURANCE_COMMERCIAL_LAW.md
 
 ## 10. THE EXACT NEXT HISTORICAL JOB
 
+> ### ⚠ A parallel Desktop session has changed the picture. Read this first.
+>
+> While this section was being written, a Desktop session executed this brief
+> and pushed `research/historical-written-qi-2010-2020` (off `main` @ `836f447`,
+> tip `2b22cd4`). It reports **1,026 occurrence records / 256 distinct question
+> entities covering 115 of 132 months, 2010–2020** — the window this brief
+> recorded as `NOT_FOUND_ON_ACCESSIBLE_STATE`.
+>
+> It is **RESEARCH_ONLY, unmerged, and nothing here has adopted it.** Two things
+> about it matter before anyone treats it as the next job:
+>
+> - **Source class is `SECONDARY_REPOSITORY_VIA_ARCHIVE`** (a commercial
+>   candidate-recall site via the Internet Archive), not official papers.
+> - **Zero papers reach `MONTH_YEAR_CERTAIN`.** Every sitting date is
+>   `MONTH_YEAR_CLAIMED_BY_SECONDARY_SOURCE`.
+>
+> So the next historical session's **first** job is now an **adoption
+> adjudication**, not an ingestion: decide what provenance tier a secondary
+> repository earns, and whether a claimed-only date may widen a public evidence
+> claim. Rule 4 of the expandable evidence layer — historical frequency is not
+> current relevance — and `assert_honest()` both bear on that decision.
+>
+> The 1999 tranche below remains correct and remains **smaller, older and
+> date-certain**, which is exactly why it is still the better first ingestion:
+> it exercises the whole path with evidence that needs no provenance ruling.
+> Do it first, or rule on provenance first — but do not merge 1,026 undated
+> secondary occurrences into a governed layer as the opening move.
+
 **INGEST THE 5 DATE-CERTAIN 1999 PAPERS.** Not the other 76.
 
 Only 5 of the 81 non-result objects print **month AND year**, and all 5 are
