@@ -90,6 +90,111 @@ def resolve_topic(topic_id):
 
 
 # --------------------------------------------------------------------------- #
+# Official syllabus join (DGMA Circular 49 of 2026, Annexure III)
+# --------------------------------------------------------------------------- #
+# The official join is STRUCTURAL, like every other decision in this module:
+#
+#     question --(governed topic mapping)--> MIW topic
+#              --(hand-adjudicated crosswalk)--> official node(s)
+#
+# It composes two audited relations. It never scores question text against
+# official wording -- that would be the nearest-neighbour mistake this engine
+# exists to avoid, and regulatory prose is exactly the kind of text a crude
+# sweep invents false relationships in.
+#
+# Precision, not ambiguity, is what the official confidence band reports:
+#   HIGH   -- the topic has exactly one PRIMARY Annexure III node, so the
+#             question is pinpointed.
+#   MEDIUM -- the topic carries several PRIMARY nodes. The candidate set is
+#             complete and correct; the question is simply not pinpointed
+#             within it. Node-level refinement is future work, not a defect,
+#             so these do NOT flood the adjudication queue.
+# Only ORPHANED is a genuine finding requiring review.
+OFFICIAL_VERSION = 'DGMA-C49-2026-ANNEX3'
+OFFICIAL_STATUS = 'OFFICIAL_SOURCE_ADOPTED_NOT_YET_EFFECTIVE'
+OFFICIAL_EFFECTIVE_FROM = '2027-01-01'
+ALIGNMENT = ('CROSSWALK_ALIGNED', 'SUPPORTING_ONLY',
+             'ORPHANED_IN_ADOPTED_SYLLABUS', 'UNRESOLVED')
+
+_CROSSWALK_PATH = os.path.join(ROOT, 'docs', 'study', 'official_crosswalk.json')
+_official_cache = None
+
+
+def official_crosswalk():
+    """Load the governed crosswalk once. Fails closed if it is missing."""
+    global _official_cache
+    if _official_cache is None:
+        if not os.path.exists(_CROSSWALK_PATH):
+            raise SystemExit('FAIL R-OFFICIAL-XWALK: '
+                             'docs/study/official_crosswalk.json is missing')
+        _official_cache = json.load(open(_CROSSWALK_PATH, encoding='utf-8'))
+    return _official_cache
+
+
+def official_nodes_for_topic(topic_id, role='PRIMARY'):
+    """Ordered official node ids whose `role` edge lands on this topic."""
+    edges = [e for e in official_crosswalk()['edges']
+             if e['topic_id'] == topic_id and e['mapping_role'] == role]
+    edges.sort(key=lambda e: e['official_order'])
+    return [e['official_node_id'] for e in edges]
+
+
+def attach_official(rec):
+    """Add the adopted-syllabus join to a mapping record, in place."""
+    topic = rec.get('topic_id')
+    rec['official_syllabus_version'] = OFFICIAL_VERSION
+    rec['official_effective_from'] = OFFICIAL_EFFECTIVE_FROM
+
+    if topic is None:
+        rec['official_syllabus_node_id'] = None
+        rec['official_syllabus_node_candidates'] = []
+        rec['official_mapping_confidence'] = 'UNRESOLVED'
+        rec['official_mapping_basis'] = 'question has no MIW topic to cross from'
+        rec['official_alignment_status'] = 'UNRESOLVED'
+        return rec
+
+    primary = official_nodes_for_topic(topic)
+    supporting = official_nodes_for_topic(topic, 'SUPPORTING')
+    rec['official_supporting_nodes'] = supporting
+
+    # A topic with no PRIMARY node but a real SUPPORTING edge is NOT orphaned:
+    # it has an official home, just a secondary one. Collapsing the two would
+    # overstate the gap -- D08 (fire/LSA) sits under the emergency-response
+    # node, whereas D07 (cargo) has no Annexure III edge of any kind because
+    # cargo is a Class II subject.
+    if primary:
+        nodes, status = primary, 'CROSSWALK_ALIGNED'
+        role_note = 'Annexure III node'
+    elif supporting:
+        nodes, status = supporting, 'SUPPORTING_ONLY'
+        role_note = 'Annexure III node as a supporting subject'
+    else:
+        nodes, status = [], 'ORPHANED_IN_ADOPTED_SYLLABUS'
+        role_note = ''
+
+    rec['official_syllabus_node_candidates'] = nodes
+    rec['official_alignment_status'] = status
+
+    if not nodes:
+        rec['official_syllabus_node_id'] = None
+        rec['official_mapping_confidence'] = 'UNRESOLVED'
+        rec['official_mapping_basis'] = (
+            f'topic {topic} has no edge of any role into Annexure III')
+    elif len(nodes) == 1:
+        rec['official_syllabus_node_id'] = nodes[0]
+        rec['official_mapping_confidence'] = 'HIGH'
+        rec['official_mapping_basis'] = (
+            f'topic {topic} maps to exactly one {role_note}')
+    else:
+        rec['official_syllabus_node_id'] = None
+        rec['official_mapping_confidence'] = 'MEDIUM'
+        rec['official_mapping_basis'] = (
+            f'topic {topic} maps to {len(nodes)} Annexure III nodes; '
+            'aligned to the set, not pinpointed to one')
+    return rec
+
+
+# --------------------------------------------------------------------------- #
 # Record construction
 # --------------------------------------------------------------------------- #
 def _record(qid, content_type, topic_id, confidence, basis, *,
@@ -100,8 +205,12 @@ def _record(qid, content_type, topic_id, confidence, basis, *,
         'content_type': content_type,
         'schema_version': SCHEMA_VERSION,
         'syllabus_version': SYLLABUS_VERSION,
-        'syllabus_node_id': None,          # populated when an official source exists
-        'syllabus_status': NO_OFFICIAL_SOURCE,
+        # `syllabus_node_id` belongs to the CURRENTLY OPERATIVE version, which
+        # is MIW-derived and has no official node ids of its own. The adopted
+        # 2027 syllabus is joined separately by attach_official() below, so
+        # the two versions can never be read as one.
+        'syllabus_node_id': None,
+        'syllabus_status': OFFICIAL_STATUS,
         'topic_id': topic_id,
         'subtopic_id': subtopic_id,
         'mapping_role': role,
@@ -111,6 +220,7 @@ def _record(qid, content_type, topic_id, confidence, basis, *,
         'taxonomy_version': taxonomy_version(),
         'last_reviewed': last_reviewed,
     }
+    attach_official(rec)
     if extra:
         rec.update(extra)
     return rec
@@ -202,10 +312,51 @@ def validate_mapping(rec):
             and rec['mapping_status'] == 'VALID_MAPPED' \
             and not rec.get('last_reviewed'):
         e.append('MEDIUM/LOW promoted to VALID_MAPPED without last_reviewed')
-    # No unearned claim of official authority.
-    if rec.get('syllabus_node_id') is not None \
-            and rec.get('syllabus_status') == NO_OFFICIAL_SOURCE:
-        e.append('syllabus_node_id set while no official source is registered')
+    # No unearned claim of official authority. `syllabus_node_id` names a node
+    # of the CURRENTLY OPERATIVE syllabus version. MIW-DERIVED-1.0 defines no
+    # node ids at all, so any value there is fabricated -- and ingesting the
+    # official circular must not soften this, because the official nodes
+    # belong to the *adopted* version and are carried in the official_* fields.
+    if rec.get('syllabus_node_id') is not None:
+        if rec.get('syllabus_status') == NO_OFFICIAL_SOURCE:
+            e.append('syllabus_node_id set while no official source is registered')
+        elif rec.get('syllabus_version') == SYLLABUS_VERSION:
+            e.append(f'syllabus_node_id set, but the operative version '
+                     f'{SYLLABUS_VERSION} defines no syllabus nodes; official '
+                     f'nodes belong in official_syllabus_node_id')
+
+    # --- adopted-syllabus join -------------------------------------------- #
+    if 'official_alignment_status' in rec:
+        if rec['official_alignment_status'] not in ALIGNMENT:
+            e.append(f"official_alignment_status "
+                     f"{rec['official_alignment_status']!r} invalid")
+        if rec.get('official_mapping_confidence') not in CONFIDENCE:
+            e.append(f"official_mapping_confidence "
+                     f"{rec.get('official_mapping_confidence')!r} invalid")
+        if rec.get('official_syllabus_version') != OFFICIAL_VERSION:
+            e.append('official_syllabus_version does not match the ingested '
+                     'circular')
+        known = {n['official_node_id']
+                 for n in official_crosswalk()['edges']}
+        for nid in rec.get('official_syllabus_node_candidates') or []:
+            if nid not in known:
+                e.append(f'official node {nid!r} is not in the crosswalk')
+        single = rec.get('official_syllabus_node_id')
+        cands = rec.get('official_syllabus_node_candidates') or []
+        # A pinpointed node must be one of the candidates, and may only be
+        # claimed when the candidate set actually singles it out.
+        if single is not None and single not in cands:
+            e.append('official_syllabus_node_id is not among its candidates')
+        if single is not None and len(cands) != 1:
+            e.append('official_syllabus_node_id pinpointed from an ambiguous '
+                     'candidate set')
+        if rec['official_alignment_status'] in ('CROSSWALK_ALIGNED',
+                                                'SUPPORTING_ONLY') and not cands:
+            e.append(f"{rec['official_alignment_status']} with no official "
+                     'candidates')
+        if rec['official_alignment_status'] == 'ORPHANED_IN_ADOPTED_SYLLABUS' \
+                and cands:
+            e.append('ORPHANED_IN_ADOPTED_SYLLABUS but candidates exist')
     return e
 
 

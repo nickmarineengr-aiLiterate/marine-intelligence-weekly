@@ -136,8 +136,13 @@ def main():
         domains.append({
             'domain_id': did, 'name': d['name'], 'short': d['short'],
             'rationale': d['rationale'],
-            'official_syllabus_nodes': [],       # see SYLLABUS_SOURCE_STATUS.md
-            'syllabus_status': 'NO_OFFICIAL_SOURCE_IN_REPO',
+            # Official scope, from the governed crosswalk only -- never
+            # hand-listed here. See docs/study/SYLLABUS_SOURCE_STATUS.md.
+            'official_syllabus_nodes': ME.official_nodes_for_topic(did),
+            'official_supporting_nodes': ME.official_nodes_for_topic(did, 'SUPPORTING'),
+            'official_syllabus_version': ME.OFFICIAL_VERSION,
+            'official_effective_from': ME.OFFICIAL_EFFECTIVE_FROM,
+            'syllabus_status': ME.OFFICIAL_STATUS,
             'prerequisites': d['prerequisites'],
             'dependants': dependants,
             'written_categories': d['written_categories'],
@@ -196,8 +201,20 @@ def main():
         'spine_version': '1.0',
         'generated_by': 'tools/study/build_study_spine.py',
         'generated_from': max(s.get('updated', '') for s in specs),
-        'authority': 'MIW-DERIVED. Not an official DGMA syllabus. See '
+        'authority': 'MIW-DERIVED topic structure, crosswalked to the official '
+                     'DGMA syllabus. The topic headings are not an official '
+                     'DGMA syllabus; official scope lives in '
+                     'docs/study/official_syllabus.json. See '
                      'docs/study/SYLLABUS_SOURCE_STATUS.md.',
+        'official_syllabus': {
+            'circular': ME.official_crosswalk()['official_source']['circular'],
+            'annex': ME.official_crosswalk()['official_source']['annex'],
+            'syllabus_version': ME.OFFICIAL_VERSION,
+            'status': ME.OFFICIAL_STATUS,
+            'effective_from': ME.OFFICIAL_EFFECTIVE_FROM,
+            'currently_operative_version': ME.SYLLABUS_VERSION,
+            'source_sha256': ME.official_crosswalk()['official_source']['sha256'],
+        },
         'sources': {
             'written_specs': f'{len(specs)} papers',
             'oral_index': f"{idx['total_questions']} questions / {idx['total_files']} files",

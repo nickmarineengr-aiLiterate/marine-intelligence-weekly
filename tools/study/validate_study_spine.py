@@ -24,6 +24,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 sys.path.insert(0, HERE)
 import study_spine as SP
+import mapping_engine as ME
 
 SPINE  = os.path.join(ROOT, 'docs', 'study', 'study_spine.json')
 QB     = os.path.join(ROOT, 'meoclass1', 'qb_content_index.json')
@@ -57,16 +58,56 @@ def main():
     check('R-ID-REGISTRY', set(ids) == set(SP.DOMAIN_IDS),
           f'spine ids {sorted(set(ids))} != registry {sorted(set(SP.DOMAIN_IDS))}')
 
-    # ---- R-OFFICIAL: no unearned claim of DGMA authority -------------------
+    # ---- R-OFFICIAL: every claim of DGMA authority must be earned ----------
+    # An official source now exists, so this is stricter than before, not
+    # looser: a domain may claim exactly the nodes the governed crosswalk
+    # gives it -- no more (invented authority) and no fewer (silently dropped
+    # official scope).
+    xwalk = ME.official_crosswalk()
+    known_nodes = {e['official_node_id'] for e in xwalk['edges']}
     for d in domains:
-        check('R-OFFICIAL', d['official_syllabus_nodes'] == [],
-              f"{d['domain_id']} claims official syllabus nodes, but no official "
-              f'DGMA source exists in the repository')
+        did = d['domain_id']
+        check('R-OFFICIAL',
+              d['official_syllabus_nodes'] == ME.official_nodes_for_topic(did),
+              f'{did} official_syllabus_nodes disagree with the crosswalk')
+        check('R-OFFICIAL-SUPPORTING',
+              d.get('official_supporting_nodes')
+              == ME.official_nodes_for_topic(did, 'SUPPORTING'),
+              f'{did} official_supporting_nodes disagree with the crosswalk')
+        for nid in d['official_syllabus_nodes'] + (d.get('official_supporting_nodes') or []):
+            check('R-OFFICIAL-NODE', nid in known_nodes,
+                  f'{did} cites unknown official node {nid!r}')
         check('R-OFFICIAL-STATUS',
-              d['syllabus_status'] == 'NO_OFFICIAL_SOURCE_IN_REPO',
-              f"{d['domain_id']} syllabus_status={d['syllabus_status']!r}")
-    check('R-AUTHORITY', 'Not an official DGMA syllabus' in spine['authority'],
-          'spine does not disclaim official authority')
+              d['syllabus_status'] == ME.OFFICIAL_STATUS,
+              f"{did} syllabus_status={d['syllabus_status']!r}")
+        check('R-OFFICIAL-VERSION',
+              d.get('official_syllabus_version') == ME.OFFICIAL_VERSION,
+              f'{did} official_syllabus_version is not the ingested circular')
+
+    # Every official node must be accounted for by some domain -- an official
+    # subject may not vanish silently between the circular and the spine.
+    claimed = {n for d in domains
+               for n in d['official_syllabus_nodes']
+               + (d.get('official_supporting_nodes') or [])}
+    check('R-OFFICIAL-ACCOUNT', claimed == known_nodes,
+          f'official nodes unaccounted for in the spine: '
+          f'{sorted(known_nodes - claimed)}')
+
+    # ---- R-EFFECTIVE: adopted is not the same as in force ------------------
+    off = spine.get('official_syllabus') or {}
+    check('R-EFFECTIVE-STATUS', off.get('status') == ME.OFFICIAL_STATUS,
+          f"spine official status={off.get('status')!r}")
+    check('R-EFFECTIVE-FROM', off.get('effective_from') == ME.OFFICIAL_EFFECTIVE_FROM,
+          f"spine effective_from={off.get('effective_from')!r}")
+    check('R-EFFECTIVE-OPERATIVE',
+          off.get('currently_operative_version') == ME.SYLLABUS_VERSION,
+          'spine does not record which syllabus version is operative today')
+    check('R-EFFECTIVE-DIGEST',
+          off.get('source_sha256') == xwalk['official_source']['sha256'],
+          'spine official digest does not match the crosswalk source')
+
+    check('R-AUTHORITY', 'not an official dgma syllabus' in spine['authority'].lower(),
+          'spine does not disclaim official authority for its own headings')
 
     # ---- R-CAT: every written primary_category claimed exactly once --------
     claimed = collections.Counter(c for d in domains for c in d['written_categories'])
@@ -170,7 +211,6 @@ def main():
           'a domain claims more papers than exist')
 
     # ---- R-STORE: the governed mapping store (40B / 40D / 40J) -------------
-    import mapping_engine as ME
     store_path = os.path.join(ROOT, 'docs', 'study', 'study_mappings.json')
     check('R-STORE-EXISTS', os.path.exists(store_path),
           'docs/study/study_mappings.json is missing -- run build_study_mappings.py')
