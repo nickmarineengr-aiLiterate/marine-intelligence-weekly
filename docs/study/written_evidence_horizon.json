@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0",
+  "generated_by": "tools/study/build_evidence_horizon.py",
+  "generated_from": "2026-08-17",
+  "authority": "Derived. Every count is computed from the governed corpora; none is asserted.",
+  "versions": {
+    "evidence_model_version": "1.0",
+    "written_qi_schema_version": "1.0",
+    "official_syllabus_version": "DGMA-C49-2026-ANNEX3",
+    "operative_syllabus_version": "MIW-DERIVED-1.0"
+  },
+  "layers": {
+    "current_solved_written": {
+      "layer": "CURRENT_SOLVED_WRITTEN",
+      "papers_total": 40,
+      "questions_total": 360,
+      "earliest_year": 2023,
+      "earliest_sitting": "2023-01",
+      "latest_year": 2026,
+      "latest_sitting": "2026-08",
+      "years_spanned": 4,
+      "corpus_version": "1.0",
+      "completeness": "VALIDATED_RANGE",
+      "source_status": "SOLVED_AND_GOVERNED",
+      "papers": [
+        "QP2301",
+        "QP2302",
+        "QP2303",
+        "QP2304",
+        "QP2306",
+        "QP2307",
+        "QP2308",
+        "QP2309",
+        "QP2310",
+        "QP2311",
+        "QP2312",
+        "QP2401",
+        "QP2402",
+        "QP2403",
+        "QP2404",
+        "QP2406",
+        "QP2407",
+        "QP2408",
+        "QP2409",
+        "QP2410",
+        "QP2411",
+        "QP2412",
+        "QP2501",
+        "QP2502",
+        "QP2503",
+        "QP2504",
+        "QP2506",
+        "QP2507",
+        "QP2508",
+        "QP2509",
+        "QP2510",
+        "QP2511",
+        "QP2512",
+        "QP2601",
+        "QP2602",
+        "QP2603",
+        "QP2604",
+        "QP2606",
+        "QP2607",
+        "QP2608"
+      ]
+    },
+    "historical_written_qi": {
+      "layer": "HISTORICAL_WRITTEN_QI",
+      "schema_version": "1.0",
+      "status": "NOT_STARTED",
+      "papers_total": null,
+      "questions_total": null,
+      "earliest_year": null,
+      "earliest_sitting": null,
+      "latest_year": null,
+      "latest_sitting": null,
+      "years_spanned": null,
+      "validated_ranges": [],
+      "known_gaps": [
+        {
+          "from_year": 2006,
+          "to_year": 2020,
+          "reason": "no accessible source on this machine"
+        }
+      ],
+      "corpus_version": null,
+      "completeness": "NOT_STARTED",
+      "source_status": "NOT_INTEGRATED",
+      "family_id_namespace": "FAMILY-EM-",
+      "dormancy_classes": [
+        "ACTIVE_RECURRENCE",
+        "RECENT_RETURN",
+        "HISTORICAL_RETURN",
+        "LONG_GAP_RETURN",
+        "ONE_OFF_HISTORICAL",
+        "INSUFFICIENT_HISTORY"
+      ],
+      "relevance_classes": [
+        "CURRENT_RELEVANT",
+        "HISTORICAL_RELEVANT",
+        "SUPERSEDED",
+        "REQUIRES_CURRENTNESS_REVIEW"
+      ],
+      "recurrence_windows": [
+        "all_time",
+        "last_10_years",
+        "last_5_years",
+        "last_3_years",
+        "current_syllabus_era"
+      ],
+      "trend_classes": [
+        "INCREASING",
+        "DECREASING",
+        "PERSISTENT",
+        "DORMANT",
+        "RE_EMERGING",
+        "INSUFFICIENT_HISTORY"
+      ],
+      "integration_point": "tools/study/build_study_spine.py reads this socket; no renderer interprets QI itself"
+    }
+  },
+  "public_claim": {
+    "derived_sentence": "Based on MIW's currently mapped Oral corpus and 360 solved Written questions across 40 papers (2023-01 to 2026-08).",
+    "policy": "Public copy is GENERATED from this file. Until the historical layer reaches VALIDATED_RANGE, no surface may claim a span wider than the current layer states.",
+    "forbidden_until_validated": [
+      "based on 16 years of papers",
+      "2010-2026 analysis",
+      "appeared N times since 2010"
+    ]
+  },
+  "discovered_assets": [
+    {
+      "asset": "meoclass1/pastpapers/intelligence/historical_qp_intelligence.json",
+      "location": "main (committed)",
+      "classification": "FOUND_AND_CURRENT",
+      "schema": "miw.pastpapers.historical_qp_intelligence.v2",
+      "status": "INTELLIGENCE_ONLY",
+      "papers": 30,
+      "questions": 270,
+      "coverage": "2021-2023 sittings",
+      "note": "Printed question wording and rubric only -- no model answer, and none may be authored without a Founder decision. Already regenerable via tools/pastpapers/extract_historical_questions.py."
+    },
+    {
+      "asset": "meoclass1/pastpapers/intelligence/v2/QUESTION_FAMILIES.json",
+      "location": "origin/research/question-intelligence-v2-phase3b (UNMERGED)",
+      "classification": "FOUND_PARTIAL",
+      "schema": "miw.pastpapers.qi_v2.families.v2",
+      "status": "RESEARCH_ONLY",
+      "families": 9,
+      "families_counted": 7,
+      "excluded_from_families": 7,
+      "coverage": "2021-02 to 2026-08 (occurrence-verified)",
+      "note": "Carries the dormancy vocabulary this evidence model adopts. Families key on (question_id, limb_label) because recurrence is observed at LIMB level, not whole-question level."
+    },
+    {
+      "asset": "meoclass1/pastpapers/intelligence/v2/QUESTION_OCCURRENCES.jsonl",
+      "location": "origin/research/question-intelligence-v2-phase3b (UNMERGED)",
+      "classification": "FOUND_PARTIAL",
+      "schema": "miw.pastpapers.qi_v2.occurrence.v2",
+      "status": "RESEARCH_ONLY",
+      "occurrence_records": 25,
+      "coverage": "2021-2026",
+      "note": "raw_stem preserves historical wording exactly; normalized_stem is for fingerprinting only. Sittings are never collapsed into one another."
+    },
+    {
+      "asset": "meoclass1/pastpapers/intelligence/v2/PHASE3B_SOURCE_INVENTORY.json",
+      "location": "origin/research/question-intelligence-v2-phase3b (UNMERGED)",
+      "classification": "FOUND_PARTIAL",
+      "status": "RESEARCH_ONLY",
+      "objects": 98,
+      "question_papers": 80,
+      "coverage": "1999-2005 archived DG Shipping papers",
+      "note": "The single largest untapped source: 80 archived DGS MEO Class I question papers, 17 of them Engineering Management. But 58 print a YEAR ONLY (mostly 2001) and 17 print no date at all, so sitting-level dating is unresolved for most."
+    },
+    {
+      "asset": "meoclass1/pastpapers/intelligence/v2/OFFICIAL_BANK_ITEMS.json",
+      "location": "origin/research/question-intelligence-v2-phase3b (UNMERGED)",
+      "classification": "FOUND_PARTIAL",
+      "status": "RESEARCH_ONLY",
+      "items": 185,
+      "coverage": "undated",
+      "note": "The DG Shipping's own published 'Question Bank MEO CL-I'. Bank ancestry proves a question EXISTS officially; it dates nothing."
+    },
+    {
+      "asset": "MEO Class I written papers for sittings 2006-2020",
+      "location": "nowhere reachable from this machine",
+      "classification": "NOT_FOUND_ON_ACCESSIBLE_LAPTOP_STATE",
+      "status": "ABSENT",
+      "coverage": "none",
+      "note": "Searched every local and remote ref and the working tree. This is the gap that matters: the accessible evidence falls into two disjoint bands, 1999-2005 and 2021-2026, with roughly fifteen years missing between them. Absent here is not absent in the world -- it is not verifiable from this machine."
+    }
+  ]
+}
