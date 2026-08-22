@@ -638,6 +638,43 @@ python tools/oral/validate_corrections.py
 python tools/oral/mutate_corrections.py
 ```
 
+### 8.2a A digest pin cannot tell you the content is right
+
+Both gates above answer *"are these bytes the ones we authorised?"*. Neither
+answers *"is what we authorised actually correct?"* — a pin is perfectly happy
+with wrong text, because it pins whatever it is given.
+
+That gap is invisible until a correction turns on a **regulatory proposition** a
+later well-meaning edit could quietly drop. `CORR-LSA-LIFEBOAT-VENTILATION-20260822`
+is the first that did: MSC.535(107) defines *installed on or after 1 January 2029*
+in two limbs, and the card had kept only the newbuilding limb — which does not
+blur the rule, it **inverts** it for the whole in-service fleet. Restoring the
+missing limb and pinning the result would have left nothing asserting that the
+limb must stay.
+
+So a correction of that kind also gets **content gates**, named per correction,
+exactly as a production batch gets `validate_batch_<id>`:
+
+```bash
+python tools/oral/validate_correction_lsavent.py
+python tools/oral/mutate_correction_lsavent.py
+```
+
+Two rules learned building the first one:
+
+1. **Every mutation's required check must be a content check, never the digest
+   pin.** Any edit to the card trips the pin, so accepting it as the catch would
+   prove only that the pin works while the substantive checks rot as dead code.
+2. **A correction quotes the wording it rejects**, so a flat banned-phrase grep
+   fails on the very sentences carrying the fix — the same reason this entry is
+   `GREP: SKIP` in the trap register. Assert that each mention is *negated or
+   quoted*, not that it is absent. Run the negation window wide: the tightest
+   real case put the denial behind two full quoted phrases.
+
+Naming a correction in the **delegation** path is still bypassing the model.
+Naming one in a **content** gate is not — see the MAINTENANCE note in
+`oral_release_gates.py`.
+
 ---
 
 ## 9. Shared targets

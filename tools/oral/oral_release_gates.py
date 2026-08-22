@@ -50,11 +50,27 @@ MAINTENANCE
 Adding a batch adds exactly two gates: `validate_batch_<id>` and
 `batch_<id>_mutate`. Nothing else in this file should need to change.
 
-Adding a CORRECTION adds no gates at all. `validate_corrections` and
-`corrections_mutate` iterate every `correction_*_manifest.json` on disk, so a
-new correction record is picked up without touching this registry or the
-runner. If you ever find yourself naming a specific correction in either file,
-the delegation model has been bypassed.
+Adding a CORRECTION adds no AUTHORISATION gates at all. `validate_corrections`
+and `corrections_mutate` iterate every `correction_*_manifest.json` on disk, so
+a new correction record is picked up without touching this registry or the
+runner. If you ever find yourself naming a specific correction *in the
+delegation path*, the delegation model has been bypassed.
+
+A correction may still add its own CONTENT gates, and CORR-LSA-LIFEBOAT-
+VENTILATION-20260822 is the first that does. The two families answer different
+questions and neither subsumes the other:
+
+    validate_corrections          are these bytes the ones we authorised?
+    validate_correction_<id>      is what we authorised actually right?
+
+The generic gate pins a digest, and a digest pin is perfectly happy with wrong
+text -- it pins whatever it is given. Where a correction turns on a regulatory
+proposition that a later well-meaning edit could quietly drop (here: that
+MSC.535(107) defines "installed on or after 1 January 2029" in two limbs, and
+that the second limb reaches existing ships), that proposition needs a named
+check of its own, exactly as a production batch gets `validate_batch_<id>`.
+Content gates are per-correction by nature and naming one here is correct;
+naming one inside the delegation path still is not.
 
 This module is DATA ONLY. Orchestration lives in `run_oral_release.py`.
 """
@@ -294,6 +310,19 @@ GATES = (
           CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=2400,
           historical_39=False, depends_on=("validate_corrections",),
           note="proves the delegation is an exemption, not a suppression"),
+
+    # Content gates for CORR-LSA-LIFEBOAT-VENTILATION-20260822. See the
+    # MAINTENANCE note: these assert the regulatory substance the digest pin
+    # cannot, and are per-correction by nature.
+    _gate("validate_correction_lsavent",
+          ["python", "%s/validate_correction_lsavent.py" % _ORAL],
+          CAT_CORRECTION, PARSER_VALIDATOR, timeout=600, historical_39=False,
+          note="asserts the two-limb MSC.535(107) application rule the pin cannot"),
+    _gate("correction_lsavent_mutate",
+          ["python", "%s/mutate_correction_lsavent.py" % _ORAL],
+          CAT_CORRECTION, PARSER_MUTATION, mutates=True, timeout=1800,
+          historical_39=False, depends_on=("validate_correction_lsavent",),
+          note="each mutation must trip its OWN named check, never the digest pin"),
 
     # ---- follow-up authorisation register ---------------------------------
     # Postdates E6, so outside the historical 39, and not held back either.

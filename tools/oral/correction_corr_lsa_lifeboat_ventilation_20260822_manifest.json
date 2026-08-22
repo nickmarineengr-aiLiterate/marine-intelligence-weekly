@@ -1,0 +1,51 @@
+{
+  "correction_id": "CORR-LSA-LIFEBOAT-VENTILATION-20260822",
+  "kind": "POST_RELEASE_CORRECTION",
+  "status": "AUTHORISED",
+  "origin": "candidate_feedback",
+  "date": "2026-08-22",
+  "title": "MSC.535(107) totally enclosed lifeboat ventilation - application rule corrected from new-build-only to the resolution's own two-limb definition",
+  "baseline_commit": "906e8a4",
+  "governing_commits": ["01af5b9"],
+  "authorisation_source": "meoclass1/known_traps.md",
+  "known_traps_entries": [42],
+  "rationale": "A candidate reported that the QB2_F Q6 answer stated the wrong application rule for the LSA Code ventilation amendments. Verified against the primary text of IMO resolution MSC.535(107) (adopted 8 June 2023), read in full from the IMO Index of IMO Resolutions. The resolution's operative paragraph 4 defines the expression 'installed on or after 1 January 2029' in two limbs: (a) for ships for which the building contract is placed on or after 1 January 2029, or in the absence of the contract constructed on or after that date, any installation date on the ship; and (b) for ships other than those in (a), a contractual delivery date for the equipment or, in the absence of a contractual delivery date, the actual delivery date of the equipment to the ship, on or after 1 January 2029. The card carried only limb (a), expressed it as 'contracted/keel-laid' where the resolution says 'constructed', and drew from it the conclusion 'new-build application only, not retrofit'. Dropping limb (b) inverted the rule for the entire existing fleet, since a replacement lifeboat contracted for or delivered to in-service tonnage on or after 1 January 2029 is caught. Seven surfaces of the single card carried the defective formulation and all seven were corrected. The three dates (adoption 8 June 2023, entry into force 1 January 2026, application 1 January 2029) are now stated as three distinct things.",
+  "note": "The whole card was rechecked against the primary text rather than only the reported sentence. The ventilation rate of 5 m3/h per person for the number of persons the lifeboat is permitted to accommodate, the 24-hour duration, operability from inside, the no-stratification requirement, the prohibition on using the radio batteries of 4.4.6.11, the 4.4.6.8 fuel provision for engine-driven ventilation, the MSC.81(70) ventilation performance test with entrances and hatches closed, the MSC.559(108) amendment adding 'ventilation system, where fitted' to the MSC.402(96) annual thorough examination, and the MOL Comfort (2013) origin all verified correct and are unchanged. The 15-second answer already used the resolution's own phrase 'installed on/after 1 Jan 2029' and was deliberately left alone. A corpus-wide sweep for the same conflation found no propagated instance: index22.html and archive/issue22.html say 'installations on/after 1 January 2029' and are correct, and QB2_I.html lists MSC.535 under the 1 January 2026 entry-into-force wave, which is also correct. Neither was edited, so neither is declared as a card here.",
+  "content_index_effect": "tools/oral/qb_content_index_governed.json and its generated twin meoclass1/qb_content_index.json were regenerated. QB2_F.html governed version 1.1 -> 1.2; one corrections_applied row added and the stale trailing claim '(new-build only)' removed from the existing QB2_F build note, because that row describes what the card currently says; one recently_updated row added. Canonical totals unchanged at 721 questions across 86 files.",
+  "artefacts": [
+    {
+      "path": "meoclass1/known_traps.md",
+      "classification": "INDEX_METADATA",
+      "known_traps_entry": 42,
+      "rationale": "Entry 42 added; this file is the authorisation_source for the record.",
+      "guarded_by": "qb_health_check changelog scan"
+    },
+    {
+      "path": "tools/oral/qb_content_index_governed.json",
+      "classification": "INDEX_METADATA",
+      "known_traps_entry": 42,
+      "rationale": "Governed source of the content index: QB2_F version bump, new corrections_applied row, new recently_updated row, and removal of the stale '(new-build only)' clause from the existing QB2_F row.",
+      "guarded_by": "validate_qb_content_index.py"
+    },
+    {
+      "path": "meoclass1/qb_content_index.json",
+      "classification": "INDEX_METADATA",
+      "known_traps_entry": 42,
+      "rationale": "Generated from the governed source by build_qb_content_index.py; never hand-edited.",
+      "guarded_by": "build_qb_content_index.py --check"
+    }
+  ],
+  "cards": [
+    {
+      "correction_action_id": "CORR-LSAVENT-01",
+      "file": "QB2_F.html",
+      "path": "meoclass1/QB2_F.html",
+      "anchor": "q6",
+      "classification": "PRIMARY_CORRECTION",
+      "pre_edit_digest": "6a5e68545634256d7ac5ba0aa3f8862ba03ebebb58cbd6a91eec8b779e87f992",
+      "post_edit_digest": "320d59c7f86720c20bdac8dc4d03028de22b1e441420eeebb08ad2bdd71191dc",
+      "known_traps_entry": 42,
+      "rationale": "The card the candidate reported. Seven surfaces of this one card carried the defective application rule and were corrected together: the 60-second answer, the answer-body Scope and Timeline block, the Key Numbers box, the CE Oral Tip, the Deep Dive trap question, the Common CE Failures list and the On My Vessel block. The 60-second answer and the Scope and Timeline block now carry the resolution's two-limb definition explicitly; the trap question and the On My Vessel block now say there is no retrofit obligation for lifeboats already installed rather than that the amendment is new-build only. Question text, anchor and card position are unchanged. Version badge Q6 v1.0 -> v1.1."
+    }
+  ]
+}

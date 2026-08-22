@@ -73,7 +73,8 @@ check("determinism is the only held-back phase",
 _correction = [g for g in REG.ALL_GATES if g["category"] == REG.CAT_CORRECTION]
 check("the correction gates are registered",
       sorted(g["id"] for g in _correction)
-      == ["corrections_mutate", "validate_corrections"],
+      == ["correction_lsavent_mutate", "corrections_mutate",
+          "validate_correction_lsavent", "validate_corrections"],
       str(sorted(g["id"] for g in _correction)))
 check("correction gates are post-E6, so not part of the historical 39",
       all(g["historical_39"] is False for g in _correction))
@@ -111,15 +112,18 @@ check("determinism is registered OUTSIDE the historical 39",
 POST_E6_GATES = [
     "batch_f1_mutate",
     "batch_f1b_mutate",
+    "correction_lsavent_mutate",
     "corrections_mutate",
     "followup_register_mutate",
     "validate_batch_f1",
     "validate_batch_f1b",
+    "validate_correction_lsavent",
     "validate_corrections",
     "validate_followup_register",
 ]
 POST_E6_MUTATION_SUITES = ["batch_f1_mutate", "batch_f1b_mutate",
-                           "corrections_mutate", "followup_register_mutate"]
+                           "correction_lsavent_mutate", "corrections_mutate",
+                           "followup_register_mutate"]
 
 # E6 reported 266 mutations across 15 suites. That number is HISTORY and stays
 # pinned to the historical gates; post-E6 suites are counted separately rather
